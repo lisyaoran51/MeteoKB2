@@ -1,0 +1,761 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="來源檔案">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="標頭檔">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="資源檔">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="來源檔案\Base">
+      <UniqueIdentifier>{b47231be-71b5-47ad-a59b-1dad985cbb17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Base\Audio">
+      <UniqueIdentifier>{52e6cf0f-087f-4aa5-8d3c-b540e9d7e054}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Base\Config">
+      <UniqueIdentifier>{876c942e-eb77-4d2b-b607-d499188ce71d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Base\Graphic">
+      <UniqueIdentifier>{509f8f57-bd33-49c2-a694-3331c5ccd976}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Base\Graphic\Map">
+      <UniqueIdentifier>{66fed2c7-33b6-4b56-b9a9-566a16414da8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Base\Graphic\Map\Builder">
+      <UniqueIdentifier>{e0fac2ff-c77b-4473-8fd3-e678a2d8f630}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Base\Graphic\Renderer">
+      <UniqueIdentifier>{b9660b82-fee8-41ee-9798-a7ecfbfed1eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Base\Ruleset">
+      <UniqueIdentifier>{e98acdf5-b1ff-496d-b526-489a31d12475}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Base\Ruleset\Mod">
+      <UniqueIdentifier>{5f0c8bc0-c3bd-4c69-8369-17e84d315e27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Base\Sheetmusic">
+      <UniqueIdentifier>{b1e5452f-c54d-4b50-b125-a98dd28cd148}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Base\Sheetmusic\Format">
+      <UniqueIdentifier>{98f05cb6-2d93-4ef4-8e21-05c603177691}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Base\Sheetmusic\IO">
+      <UniqueIdentifier>{7a8c5739-55a5-4757-8220-08dbdf16fe21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Base">
+      <UniqueIdentifier>{2723fef1-aafa-45fb-bc73-3313e6550d94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Base\Audio">
+      <UniqueIdentifier>{43b88f58-650a-41b6-8101-05c5c81a3555}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Base\Config">
+      <UniqueIdentifier>{3a594a5c-f9c9-423b-b545-bbff5cbdf73e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Base\Graphic">
+      <UniqueIdentifier>{d9f3edba-2177-4212-8fa7-e7f7250f8455}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Base\Graphic\Map">
+      <UniqueIdentifier>{c226911d-0f33-4712-83a5-c634c2aa056c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Base\Graphic\Map\Builder">
+      <UniqueIdentifier>{d2e13dfb-0f6a-4270-9896-4163857c5a16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Base\Graphic\Renderer">
+      <UniqueIdentifier>{dd2cc401-e926-4c0f-8705-fb842c966ce0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Base\Ruleset">
+      <UniqueIdentifier>{84536ac4-1aeb-4147-9996-d843bc60286c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Base\Ruleset\Mod">
+      <UniqueIdentifier>{a9628056-7986-46e1-a9fb-f11c8409f00f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Base\Scheduler">
+      <UniqueIdentifier>{3fc45852-de71-42f6-a695-15fc7d33716f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Base\Sheetmusic">
+      <UniqueIdentifier>{11fd7402-738a-4c3b-82f2-b67055d74555}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Base\Sheetmusic\Format">
+      <UniqueIdentifier>{6cfab30d-a591-47d8-9dfe-3fdbeb79128e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Base\Sheetmusic\IO">
+      <UniqueIdentifier>{fbffc68a-9def-4f45-a18f-1cfd4c19744b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Util">
+      <UniqueIdentifier>{8dcdda0b-686c-44eb-8ea2-ba3507645485}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Base\Sheetmusic\ControlPoint">
+      <UniqueIdentifier>{7a92ee2b-4f53-4bd0-8fb2-22c08d48d392}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Base\play">
+      <UniqueIdentifier>{6e8bb58a-6b7d-413c-8830-74d6c0444286}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Util\Hierachal">
+      <UniqueIdentifier>{1e0527f3-4ccf-4628-a294-61ed2047cf6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Base\Sheetmusic\Format\EventParser">
+      <UniqueIdentifier>{311d5e29-ec8f-4ccd-a0f0-cf9ed6d9b21e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Base\Sheetmusic\Pattern">
+      <UniqueIdentifier>{5e4fb93a-ba6a-4be6-b91f-4f5aa8c64f8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Base\Play">
+      <UniqueIdentifier>{7637adda-0945-49e7-926a-23c375bfb868}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Util\Update">
+      <UniqueIdentifier>{d0e667ee-da3f-4813-b392-76c348becd3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Base\Graphic\Renderer\MapAlgorithm">
+      <UniqueIdentifier>{8a482063-0e98-4434-8c87-5b35ecb5e4f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Base\Graphic\Renderer\MapAlgorithm">
+      <UniqueIdentifier>{52c380ad-a60b-4359-95a1-9b11d00ed1d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Util">
+      <UniqueIdentifier>{27e2dd69-02ef-4b06-8854-6358d4c8958f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Util\Hierachal">
+      <UniqueIdentifier>{d7c0b1a1-1ec9-4215-9500-326597fd9de7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetMeteor">
+      <UniqueIdentifier>{afe83821-14fa-45cf-b6c8-d7752a4a4112}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\RulesetMeteor">
+      <UniqueIdentifier>{45147bc7-e819-4b4b-8cb6-cee22eb4299b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\RulesetMeteor\Ruleset">
+      <UniqueIdentifier>{5b783f4f-b50d-40cb-9711-577deec1478c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetMeteor\Ruleset">
+      <UniqueIdentifier>{a3a24d61-ff57-4a4a-8867-0c8c637260ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\RulesetMeteor\Play">
+      <UniqueIdentifier>{1ac5014b-2bee-4fb8-a841-7a275df8c23b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetMeteor\Play">
+      <UniqueIdentifier>{a9a7bac9-85b8-4b5f-96ff-05af15be0ba7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\RulesetMeteor\Sheetmusic">
+      <UniqueIdentifier>{17492fec-a0ab-4eec-b14c-ccd9267ff197}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetMeteor\Sheetmusic">
+      <UniqueIdentifier>{9491292b-d967-4c93-8fc0-bb8e2add9e50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Base\Scheduler\Events">
+      <UniqueIdentifier>{165c21fd-5e28-4d17-8324-47edb46bd3e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Base\Scheduler\Events\Effects">
+      <UniqueIdentifier>{df56837d-3ce4-4e7a-9643-c5e938e0ab42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Base\Scheduler\Events\Effects\Algorithms">
+      <UniqueIdentifier>{a05af13c-2f13-4af3-b664-cd0daf5e921a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Base\Scheduler\Events\ControlPoints">
+      <UniqueIdentifier>{efafd5e8-8a86-428f-ae6a-720246250a61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Base\Schedulers">
+      <UniqueIdentifier>{dc7542f1-f488-4525-b0f7-5ce192292d22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Base\Schedulers\Events">
+      <UniqueIdentifier>{19a8d4ba-2469-466c-9f2c-4c16b7ce90fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Base\Schedulers\Events\Effects">
+      <UniqueIdentifier>{14675e33-753d-424d-8515-ff8015873bf3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Base\Schedulers\Events\Effects\Algorithms">
+      <UniqueIdentifier>{339a705d-ac74-4ca6-bf20-a3042db46a07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\RulesetMeteor\Config">
+      <UniqueIdentifier>{15fc204a-8721-4697-9cd2-7042222a9c41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\RulesetMeteor\Schedulers">
+      <UniqueIdentifier>{2309dff3-6fe1-4fcb-afd1-c53879dee125}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\RulesetMeteor\Schedulers\Events">
+      <UniqueIdentifier>{54ad6131-8c59-4c6c-905c-5e05582faf69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\RulesetMeteor\Schedulers\Events\Effects">
+      <UniqueIdentifier>{826eb0a8-101a-41f6-ab07-f5ff9363cd66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\RulesetMeteor\Schedulers\Events\Effects\Algorithms">
+      <UniqueIdentifier>{493753c8-ce54-4188-b125-c0068b07f63d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Base\Schedulers\Events\ControlPoints">
+      <UniqueIdentifier>{dd1092bb-dd5c-4b59-9a90-811ad03bd182}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Util\Update">
+      <UniqueIdentifier>{ff2baf39-c204-479c-bcfb-7aef7c7c49bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Base\Sheetmusic\Pattern">
+      <UniqueIdentifier>{ca2a8f28-3a76-47e8-81dc-52abb4713d41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetMeteor\Config">
+      <UniqueIdentifier>{5e4ee21e-0171-4e8c-8315-e760c0ed3d5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\RulesetMeteor\Sheetmusic\Patterns">
+      <UniqueIdentifier>{39733abf-bbdd-4a58-aa21-abe96fecb50b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetMeteor\Sheetmusic\Patterns">
+      <UniqueIdentifier>{637f98ea-9b29-46c2-b82e-45e3a90472f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetMeteor\Schedulers">
+      <UniqueIdentifier>{c5e80c09-1379-41a5-9ae1-4849e399b4c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetMeteor\Schedulers\Events">
+      <UniqueIdentifier>{07ee67c6-39d3-4625-a44d-2197c9b02842}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetMeteor\Schedulers\Events\Effects">
+      <UniqueIdentifier>{037b5bb7-8957-4a45-a9ca-1d4edec9a8dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetMeteor\Schedulers\Events\Effects\MapAlgorithms">
+      <UniqueIdentifier>{5ca852d5-a4ab-4bfe-a4fe-1a145f4c6aaa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Devices">
+      <UniqueIdentifier>{8b0c3a2a-6175-4932-a764-822cf9902e34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Devices\Graphic">
+      <UniqueIdentifier>{47d0bc52-d70b-4dd4-8dc4-393ba6f0d0c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Devices\LedDrivers">
+      <UniqueIdentifier>{97a5b2f0-5cd4-4d20-9f46-eaa3d39eebbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Devices">
+      <UniqueIdentifier>{36ffe022-d5df-40f5-a2db-0e2217408aac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Devices\Graphic">
+      <UniqueIdentifier>{62fc6a94-5e45-426e-a228-196953f1ecef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Devices\LedDrivers">
+      <UniqueIdentifier>{24feaef1-d649-4f77-8af8-55c5244539d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Devices\Graphic\Renderers">
+      <UniqueIdentifier>{b9b9f7dd-1236-4a2a-90da-9fb4907518b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Devices\Graphic\Renderers">
+      <UniqueIdentifier>{dbc80f8f-8434-46e4-80b4-399e3d3848c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Base\Sheetmusic\Format\EventParser">
+      <UniqueIdentifier>{8b5fb90a-e9a6-41c2-be2e-d33ee248af3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Base\Schedulers\Events\GameEvents">
+      <UniqueIdentifier>{30491556-7adf-44de-b4e1-2c706da7ce0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Base\Scheduler\Events\GameEvents">
+      <UniqueIdentifier>{6ac02b92-1a59-41df-beae-f617520ef1c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Base\Schedulers\Events\SystemEvent">
+      <UniqueIdentifier>{fb86ced6-425f-4539-bc18-c838f73aba0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Base\Scheduler\Events\SystemEvents">
+      <UniqueIdentifier>{b600f2e3-2187-4a1a-b732-001854cf6a32}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Base\Config\ConfigManager.cpp">
+      <Filter>來源檔案\Base\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Graphic\Renderer\renderer.cpp">
+      <Filter>來源檔案\Base\Graphic\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Graphic\Map\Map.cpp">
+      <Filter>來源檔案\Base\Graphic\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Graphic\Map\Builder\MapBuilder.cpp">
+      <Filter>來源檔案\Base\Graphic\Map\Builder</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Ruleset\Mod\Mod.cpp">
+      <Filter>來源檔案\Base\Ruleset\Mod</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Scheduler\Scheduler.cpp">
+      <Filter>來源檔案\Base\Schedulers</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Scheduler\Event\Event.cpp">
+      <Filter>來源檔案\Base\Schedulers\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Scheduler\Event\EventProcessorMaster.cpp">
+      <Filter>來源檔案\Base\Schedulers\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Scheduler\Event\Effect\Effect.cpp">
+      <Filter>來源檔案\Base\Schedulers\Events\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Sheetmusic\SheetmusicConverter.cpp">
+      <Filter>來源檔案\Base\Sheetmusic</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Sheetmusic\IO\FileReader.cpp">
+      <Filter>來源檔案\Base\Sheetmusic\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Play\Playfield.cpp">
+      <Filter>來源檔案\Base\Play</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Graphic\Renderer\MapAlgorithm\HardwareMapAlgorithm.cpp">
+      <Filter>來源檔案\Base\Graphic\Renderer\MapAlgorithm</Filter>
+    </ClCompile>
+    <ClCompile Include="Util\Hierachal\Loadable.cpp">
+      <Filter>來源檔案\Util\Hierachal</Filter>
+    </ClCompile>
+    <ClCompile Include="Util\Hierachal\LoadStateHandler.cpp">
+      <Filter>來源檔案\Util\Hierachal</Filter>
+    </ClCompile>
+    <ClCompile Include="Util\Hierachal\ChildAddable.cpp">
+      <Filter>來源檔案\Util\Hierachal</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Play\Player.cpp">
+      <Filter>來源檔案\Base\Play</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\Ruleset\MeteorRuleset.cpp">
+      <Filter>來源檔案\RulesetMeteor\Ruleset</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\Ruleset\MeteorRulesetExecutor.cpp">
+      <Filter>來源檔案\RulesetMeteor\Ruleset</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\Play\MeteorPlayfield.cpp">
+      <Filter>來源檔案\RulesetMeteor\Play</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\Sheetmusic\MeteorSheetmusicConverter.cpp">
+      <Filter>來源檔案\RulesetMeteor\Sheetmusic</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Game.cpp">
+      <Filter>來源檔案\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\MeteorGame.cpp">
+      <Filter>來源檔案\RulesetMeteor</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Config\FrameworkConfigManager.cpp">
+      <Filter>來源檔案\Base\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Ruleset\Ruleset.cpp">
+      <Filter>來源檔案\Base\Ruleset</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Scheduler\Event\ControlPoints\NoteControlPoint.cpp">
+      <Filter>來源檔案\Base\Schedulers\Events\ControlPoints</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Ruleset\RulesetInfo.cpp">
+      <Filter>來源檔案\Base\Ruleset</Filter>
+    </ClCompile>
+    <ClCompile Include="Util\Update\Updater.cpp">
+      <Filter>來源檔案\Util\Update</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Sheetmusic\SheetmusicManager.cpp">
+      <Filter>來源檔案\Base\Sheetmusic</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Sheetmusic\Format\SmDecoder.cpp">
+      <Filter>來源檔案\Base\Sheetmusic\Format</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Sheetmusic\SheetmusicMetadata.cpp">
+      <Filter>來源檔案\Base\Sheetmusic</Filter>
+    </ClCompile>
+    <ClCompile Include="Util\FileSystem.c">
+      <Filter>來源檔案\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Sheetmusic\WorkingSheetmusic.cpp">
+      <Filter>來源檔案\Base\Sheetmusic</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Sheetmusic\Pattern\Pattern.cpp">
+      <Filter>來源檔案\Base\Sheetmusic\Pattern</Filter>
+    </ClCompile>
+    <ClCompile Include="Util\MtoObject.cpp">
+      <Filter>來源檔案\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Util\Hierachal\HasParent.cpp">
+      <Filter>來源檔案\Util\Hierachal</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Sheetmusic\Pattern\PatternGenerator.cpp">
+      <Filter>來源檔案\Base\Sheetmusic\Pattern</Filter>
+    </ClCompile>
+    <ClCompile Include="Util\Update\Updatable.cpp">
+      <Filter>來源檔案\Util\Update</Filter>
+    </ClCompile>
+    <ClCompile Include="Program.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\Config\MeteorConfigManager.cpp">
+      <Filter>來源檔案\RulesetMeteor\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\Sheetmusic\Pattern\MeteorPatternGenerator.cpp">
+      <Filter>來源檔案\RulesetMeteor\Sheetmusic\Patterns</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Sheetmusic\SheetmusicPostprocessor.cpp">
+      <Filter>來源檔案\Base\Sheetmusic</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\ExplodeEffect.cpp">
+      <Filter>來源檔案\RulesetMeteor\Schedulers\Events\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\FallEffect.cpp">
+      <Filter>來源檔案\RulesetMeteor\Schedulers\Events\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\GlowLineEffect.cpp">
+      <Filter>來源檔案\RulesetMeteor\Schedulers\Events\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\Algorithm\ExplodeMapAlgorithm.cpp">
+      <Filter>來源檔案\RulesetMeteor\Schedulers\Events\Effects\MapAlgorithms</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\Algorithm\FallMapAlgorithm.cpp">
+      <Filter>來源檔案\RulesetMeteor\Schedulers\Events\Effects\MapAlgorithms</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\Algorithm\GlowLineMapAlgorithm.cpp">
+      <Filter>來源檔案\RulesetMeteor\Schedulers\Events\Effects\MapAlgorithms</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\FallEffectMapper.cpp">
+      <Filter>來源檔案\RulesetMeteor\Schedulers\Events\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\ExplodeEffectMapper.cpp">
+      <Filter>來源檔案\RulesetMeteor\Schedulers\Events\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\GlowLineEffectMapper.cpp">
+      <Filter>來源檔案\RulesetMeteor\Schedulers\Events\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="Devices\Graphic\Renderers\WS2812v10Renderer.cpp">
+      <Filter>來源檔案\Devices\Graphic\Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="Devices\LedDriver\dma.c">
+      <Filter>來源檔案\Devices\LedDrivers</Filter>
+    </ClCompile>
+    <ClCompile Include="Devices\LedDriver\mailbox.c">
+      <Filter>來源檔案\Devices\LedDrivers</Filter>
+    </ClCompile>
+    <ClCompile Include="Devices\LedDriver\neomatrix.c">
+      <Filter>來源檔案\Devices\LedDrivers</Filter>
+    </ClCompile>
+    <ClCompile Include="Devices\LedDriver\pcm.c">
+      <Filter>來源檔案\Devices\LedDrivers</Filter>
+    </ClCompile>
+    <ClCompile Include="Devices\LedDriver\pwm.c">
+      <Filter>來源檔案\Devices\LedDrivers</Filter>
+    </ClCompile>
+    <ClCompile Include="Devices\LedDriver\rpihw.c">
+      <Filter>來源檔案\Devices\LedDrivers</Filter>
+    </ClCompile>
+    <ClCompile Include="Devices\LedDriver\ws2811.c">
+      <Filter>來源檔案\Devices\LedDrivers</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Sheetmusic\Format\SimpleSmDecoder.cpp">
+      <Filter>來源檔案\Base\Sheetmusic\Format</Filter>
+    </ClCompile>
+    <ClCompile Include="Util\ProgramInitializer.cpp">
+      <Filter>來源檔案\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Util\Hierachal\Cachable.cpp">
+      <Filter>來源檔案\Util\Hierachal</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Scheduler\Event\ControlPoints\ControlPoint.cpp">
+      <Filter>來源檔案\Base\Schedulers\Events\ControlPoints</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Play\Session.cpp">
+      <Filter>來源檔案\Base\Play</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\Sheetmusic\MeteorSheetmusicPostprocessor.cpp">
+      <Filter>來源檔案\RulesetMeteor\Sheetmusic</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Scheduler\Event\GameEvents\GameEvent.cpp">
+      <Filter>來源檔案\Base\Schedulers\Events\GameEvents</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Scheduler\Event\GameEvents\StartGameEvent.cpp">
+      <Filter>來源檔案\Base\Schedulers\Events\GameEvents</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\TargetLineEffect.cpp">
+      <Filter>來源檔案\RulesetMeteor\Schedulers\Events\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\TargetLineEffectMapper.cpp">
+      <Filter>來源檔案\RulesetMeteor\Schedulers\Events\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\Algorithm\TargetLineMapAlgorithm.cpp">
+      <Filter>來源檔案\RulesetMeteor\Schedulers\Events\Effects\MapAlgorithms</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Scheduler\Event\SystemEvents\SystemEventHandler.cpp">
+      <Filter>來源檔案\Base\Schedulers\Events\SystemEvent</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Scheduler\Event\SystemEvents\SystemEvent.cpp">
+      <Filter>來源檔案\Base\Schedulers\Events\SystemEvent</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Scheduler\Event\SystemEvents\StopSystemEvent.cpp">
+      <Filter>來源檔案\Base\Schedulers\Events\SystemEvent</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="DailyLog.txt">
+      <Filter>資源檔</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Base\Config\ConfigManager.h">
+      <Filter>標頭檔\Base\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Graphic\Map\Map.h">
+      <Filter>標頭檔\Base\Graphic\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Graphic\Renderer\renderer.h">
+      <Filter>標頭檔\Base\Graphic\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Graphic\Map\Builder\MapBuilder.h">
+      <Filter>標頭檔\Base\Graphic\Map\Builder</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Play\Player.h">
+      <Filter>標頭檔\Base\play</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Play\Playfield.h">
+      <Filter>標頭檔\Base\play</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Ruleset\Ruleset.h">
+      <Filter>標頭檔\Base\Ruleset</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Ruleset\RulesetExecutor.h">
+      <Filter>標頭檔\Base\Ruleset</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Ruleset\RulesetInfo.h">
+      <Filter>標頭檔\Base\Ruleset</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Ruleset\Mod\Mod.h">
+      <Filter>標頭檔\Base\Ruleset\Mod</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Scheduler\Scheduler.h">
+      <Filter>標頭檔\Base\Scheduler</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Scheduler\Event\Event.h">
+      <Filter>標頭檔\Base\Scheduler\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Scheduler\Event\EventProcessor.h">
+      <Filter>標頭檔\Base\Scheduler\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Scheduler\Event\EventProcessorMaster.h">
+      <Filter>標頭檔\Base\Scheduler\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Scheduler\Event\Effect\Effect.h">
+      <Filter>標頭檔\Base\Scheduler\Events\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Sheetmusic\Sheetmusic.h">
+      <Filter>標頭檔\Base\Sheetmusic</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Sheetmusic\SheetmusicConverter.h">
+      <Filter>標頭檔\Base\Sheetmusic</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Sheetmusic\SheetmusicDifficulty.h">
+      <Filter>標頭檔\Base\Sheetmusic</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Sheetmusic\SheetmusicInfo.h">
+      <Filter>標頭檔\Base\Sheetmusic</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Sheetmusic\SheetmusicManager.h">
+      <Filter>標頭檔\Base\Sheetmusic</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Sheetmusic\SheetmusicMetadata.h">
+      <Filter>標頭檔\Base\Sheetmusic</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Sheetmusic\WorkingSheetmusic.h">
+      <Filter>標頭檔\Base\Sheetmusic</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Sheetmusic\IO\FileReader.h">
+      <Filter>標頭檔\Base\Sheetmusic\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Sheetmusic\Format\Parser\EventParser.h">
+      <Filter>標頭檔\Base\Sheetmusic\Format\EventParser</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\InstanceCreator.h">
+      <Filter>標頭檔\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\MtoObject.h">
+      <Filter>標頭檔\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\MtoType.h">
+      <Filter>標頭檔\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\Singleton.h">
+      <Filter>標頭檔\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\TemplateConstraint.h">
+      <Filter>標頭檔\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\Hierachal\Cachable.h">
+      <Filter>標頭檔\Util\Hierachal</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\Hierachal\ChildAddable.h">
+      <Filter>標頭檔\Util\Hierachal</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\Hierachal\HasParent.h">
+      <Filter>標頭檔\Util\Hierachal</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\Hierachal\Loadable.h">
+      <Filter>標頭檔\Util\Hierachal</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\Update\Updatable.h">
+      <Filter>標頭檔\Util\Update</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\Update\Updater.h">
+      <Filter>標頭檔\Util\Update</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Scheduler\Event\Effect\EffectMapper.h">
+      <Filter>標頭檔\Base\Scheduler\Events\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Sheetmusic\Format\SmDecoder.h">
+      <Filter>標頭檔\Base\Sheetmusic\Format</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Graphic\Renderer\MapAlgorithm\HardwareMapAlgorithm.h">
+      <Filter>標頭檔\Base\Graphic\Renderer\MapAlgorithm</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Ruleset\MeteorRuleset.h">
+      <Filter>標頭檔\RulesetMeteor\Ruleset</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Ruleset\MeteorRulesetExecutor.h">
+      <Filter>標頭檔\RulesetMeteor\Ruleset</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Play\MeteorPlayfield.h">
+      <Filter>標頭檔\RulesetMeteor\Play</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Sheetmusic\MeteorSheetmusicConverter.h">
+      <Filter>標頭檔\RulesetMeteor\Sheetmusic</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Sheetmusic\Pattern\PatternGenerator.h">
+      <Filter>標頭檔\Base\Sheetmusic\Pattern</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Scheduler\Event\ControlPoints\ControlPoint.h">
+      <Filter>標頭檔\Base\Scheduler\Events\ControlPoints</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Scheduler\Event\ControlPoints\NoteControlPoint.h">
+      <Filter>標頭檔\Base\Scheduler\Events\ControlPoints</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Scheduler\Event\Effect\Algorithm\MapAlgorithm.h">
+      <Filter>標頭檔\Base\Scheduler\Events\Effects\Algorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Config\FrameworkConfigManager.h">
+      <Filter>標頭檔\Base\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Config\MeteorConfigManager.h">
+      <Filter>標頭檔\RulesetMeteor\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\FallEffect.h">
+      <Filter>標頭檔\RulesetMeteor\Schedulers\Events\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\GlowLineEffect.h">
+      <Filter>標頭檔\RulesetMeteor\Schedulers\Events\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\ExplodeEffect.h">
+      <Filter>標頭檔\RulesetMeteor\Schedulers\Events\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\ExplodeEffectMapper.h">
+      <Filter>標頭檔\RulesetMeteor\Schedulers\Events\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\FallEffectMapper.h">
+      <Filter>標頭檔\RulesetMeteor\Schedulers\Events\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\GlowLineEffectMapper.h">
+      <Filter>標頭檔\RulesetMeteor\Schedulers\Events\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\Algorithm\ExplodeMapAlgorithm.h">
+      <Filter>標頭檔\RulesetMeteor\Schedulers\Events\Effects\Algorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\Algorithm\FallMapAlgorithm.h">
+      <Filter>標頭檔\RulesetMeteor\Schedulers\Events\Effects\Algorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\Algorithm\GlowLineMapAlgorithm.h">
+      <Filter>標頭檔\RulesetMeteor\Schedulers\Events\Effects\Algorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Game.h">
+      <Filter>標頭檔\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\MeteorGame.h">
+      <Filter>標頭檔\RulesetMeteor</Filter>
+    </ClInclude>
+    <ClInclude Include="Program.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Play\Session.h">
+      <Filter>標頭檔\Base\play</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Scheduler\Event\Effect\Algorithm\MapGenerateAlgorithm.h">
+      <Filter>標頭檔\Base\Scheduler\Events\Effects\Algorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Scheduler\Event\Effect\Algorithm\MapShiftAlgorithm.h">
+      <Filter>標頭檔\Base\Scheduler\Events\Effects\Algorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Sheetmusic\SheetmusicSetInfo.h">
+      <Filter>標頭檔\Base\Sheetmusic</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\FileSystem.h">
+      <Filter>標頭檔\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Sheetmusic\Pattern\Pattern.h">
+      <Filter>標頭檔\Base\Sheetmusic\Pattern</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Sheetmusic\Pattern\MeteorPatternGenerator.h">
+      <Filter>標頭檔\RulesetMeteor\Sheetmusic\Patterns</Filter>
+    </ClInclude>
+    <ClInclude Include="Devices\HardwareInfo.h">
+      <Filter>標頭檔\Devices</Filter>
+    </ClInclude>
+    <ClInclude Include="Devices\Graphic\Renderers\WS2812v10Renderer.h">
+      <Filter>標頭檔\Devices\Graphic\Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="Devices\LedDriver\clk.h">
+      <Filter>標頭檔\Devices\LedDrivers</Filter>
+    </ClInclude>
+    <ClInclude Include="Devices\LedDriver\dma.h">
+      <Filter>標頭檔\Devices\LedDrivers</Filter>
+    </ClInclude>
+    <ClInclude Include="Devices\LedDriver\gpio.h">
+      <Filter>標頭檔\Devices\LedDrivers</Filter>
+    </ClInclude>
+    <ClInclude Include="Devices\LedDriver\mailbox.h">
+      <Filter>標頭檔\Devices\LedDrivers</Filter>
+    </ClInclude>
+    <ClInclude Include="Devices\LedDriver\pcm.h">
+      <Filter>標頭檔\Devices\LedDrivers</Filter>
+    </ClInclude>
+    <ClInclude Include="Devices\LedDriver\pwm.h">
+      <Filter>標頭檔\Devices\LedDrivers</Filter>
+    </ClInclude>
+    <ClInclude Include="Devices\LedDriver\rpihw.h">
+      <Filter>標頭檔\Devices\LedDrivers</Filter>
+    </ClInclude>
+    <ClInclude Include="Devices\LedDriver\ws2811.h">
+      <Filter>標頭檔\Devices\LedDrivers</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\Log.h">
+      <Filter>標頭檔\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Sheetmusic\Format\SimpleSmDecoder.h">
+      <Filter>標頭檔\Base\Sheetmusic\Format</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\ProgramInitializer.h">
+      <Filter>標頭檔\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Sheetmusic\SheetmusicPostprocessor.h">
+      <Filter>標頭檔\Base\Sheetmusic</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Sheetmusic\MeteorSheetmusicPostProcessor.h">
+      <Filter>標頭檔\RulesetMeteor\Sheetmusic</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Scheduler\Event\GameEvents\GameEvent.h">
+      <Filter>標頭檔\Base\Scheduler\Events\GameEvents</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Scheduler\Event\GameEvents\StartGameEvent.h">
+      <Filter>標頭檔\Base\Scheduler\Events\GameEvents</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\TargetLineEffect.h">
+      <Filter>標頭檔\RulesetMeteor\Schedulers\Events\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\TargetLineEffectMapper.h">
+      <Filter>標頭檔\RulesetMeteor\Schedulers\Events\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\Algorithm\TargetLineMapAlgorithm.h">
+      <Filter>標頭檔\RulesetMeteor\Schedulers\Events\Effects\Algorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Scheduler\Event\GameEvents\StopGameEvent.h">
+      <Filter>標頭檔\Base\Scheduler\Events\GameEvents</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Scheduler\Event\SystemEvents\StopSystemEvent.h">
+      <Filter>標頭檔\Base\Scheduler\Events\SystemEvents</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Scheduler\Event\SystemEvents\SystemEvent.h">
+      <Filter>標頭檔\Base\Scheduler\Events\SystemEvents</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Scheduler\Event\SystemEvents\SystemEventHandler.h">
+      <Filter>標頭檔\Base\Scheduler\Events\SystemEvents</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

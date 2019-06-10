@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Base\Config\ConfigManager.cpp" />
+    <ClCompile Include="Base\Config\FrameworkConfigManager.cpp" />
+    <ClCompile Include="Base\Game.cpp" />
+    <ClCompile Include="Base\Graphic\Map\Builder\MapBuilder.cpp" />
+    <ClCompile Include="Base\Graphic\Map\Map.cpp" />
+    <ClCompile Include="Base\Graphic\Renderer\MapAlgorithm\HardwareMapAlgorithm.cpp" />
+    <ClCompile Include="Base\Graphic\Renderer\renderer.cpp" />
+    <ClCompile Include="Base\Play\Player.cpp" />
+    <ClCompile Include="Base\Play\Playfield.cpp" />
+    <ClCompile Include="Base\Play\Session.cpp" />
+    <ClCompile Include="Base\Ruleset\Mod\Mod.cpp" />
+    <ClCompile Include="Base\Ruleset\Ruleset.cpp" />
+    <ClCompile Include="Base\Ruleset\RulesetInfo.cpp" />
+    <ClCompile Include="Base\Scheduler\Event\ControlPoints\ControlPoint.cpp" />
+    <ClCompile Include="Base\Scheduler\Event\ControlPoints\NoteControlPoint.cpp" />
+    <ClCompile Include="Base\Scheduler\Event\Effect\Effect.cpp" />
+    <ClCompile Include="Base\Scheduler\Event\Event.cpp" />
+    <ClCompile Include="Base\Scheduler\Event\EventProcessorMaster.cpp" />
+    <ClCompile Include="Base\Scheduler\Event\GameEvents\GameEvent.cpp" />
+    <ClCompile Include="Base\Scheduler\Event\GameEvents\StartGameEvent.cpp" />
+    <ClCompile Include="Base\Scheduler\Event\SystemEvents\StopSystemEvent.cpp" />
+    <ClCompile Include="Base\Scheduler\Event\SystemEvents\SystemEvent.cpp" />
+    <ClCompile Include="Base\Scheduler\Event\SystemEvents\SystemEventHandler.cpp" />
+    <ClCompile Include="Base\Scheduler\Scheduler.cpp" />
+    <ClCompile Include="Base\Sheetmusic\Format\SimpleSmDecoder.cpp" />
+    <ClCompile Include="Base\Sheetmusic\Format\SmDecoder.cpp" />
+    <ClCompile Include="Base\Sheetmusic\IO\FileReader.cpp" />
+    <ClCompile Include="Base\Sheetmusic\Pattern\Pattern.cpp" />
+    <ClCompile Include="Base\Sheetmusic\Pattern\PatternGenerator.cpp" />
+    <ClCompile Include="Base\Sheetmusic\SheetmusicConverter.cpp" />
+    <ClCompile Include="Base\Sheetmusic\SheetmusicManager.cpp" />
+    <ClCompile Include="Base\Sheetmusic\SheetmusicMetadata.cpp" />
+    <ClCompile Include="Base\Sheetmusic\SheetmusicPostprocessor.cpp" />
+    <ClCompile Include="Base\Sheetmusic\WorkingSheetmusic.cpp" />
+    <ClCompile Include="Devices\Graphic\Renderers\WS2812v10Renderer.cpp" />
+    <ClCompile Include="Devices\LedDriver\dma.c" />
+    <ClCompile Include="Devices\LedDriver\mailbox.c" />
+    <ClCompile Include="Devices\LedDriver\neomatrix.c" />
+    <ClCompile Include="Devices\LedDriver\pcm.c" />
+    <ClCompile Include="Devices\LedDriver\pwm.c" />
+    <ClCompile Include="Devices\LedDriver\rpihw.c" />
+    <ClCompile Include="Devices\LedDriver\ws2811.c" />
+    <ClCompile Include="Program.cpp" />
+    <ClCompile Include="RulesetMeteor\Config\MeteorConfigManager.cpp" />
+    <ClCompile Include="RulesetMeteor\MeteorGame.cpp" />
+    <ClCompile Include="RulesetMeteor\Play\MeteorPlayfield.cpp" />
+    <ClCompile Include="RulesetMeteor\Ruleset\MeteorRuleset.cpp" />
+    <ClCompile Include="RulesetMeteor\Ruleset\MeteorRulesetExecutor.cpp" />
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\Algorithm\ExplodeMapAlgorithm.cpp" />
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\Algorithm\FallMapAlgorithm.cpp" />
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\Algorithm\GlowLineMapAlgorithm.cpp" />
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\Algorithm\TargetLineMapAlgorithm.cpp" />
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\ExplodeEffect.cpp" />
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\ExplodeEffectMapper.cpp" />
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\FallEffect.cpp" />
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\FallEffectMapper.cpp" />
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\GlowLineEffect.cpp" />
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\GlowLineEffectMapper.cpp" />
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\TargetLineEffect.cpp" />
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\TargetLineEffectMapper.cpp" />
+    <ClCompile Include="RulesetMeteor\Sheetmusic\MeteorSheetmusicConverter.cpp" />
+    <ClCompile Include="RulesetMeteor\Sheetmusic\MeteorSheetmusicPostprocessor.cpp" />
+    <ClCompile Include="RulesetMeteor\Sheetmusic\Pattern\MeteorPatternGenerator.cpp" />
+    <ClCompile Include="Util\FileSystem.c" />
+    <ClCompile Include="Util\Hierachal\Cachable.cpp" />
+    <ClCompile Include="Util\Hierachal\ChildAddable.cpp" />
+    <ClCompile Include="Util\Hierachal\HasParent.cpp" />
+    <ClCompile Include="Util\Hierachal\Loadable.cpp" />
+    <ClCompile Include="Util\Hierachal\LoadStateHandler.cpp" />
+    <ClCompile Include="Util\MtoObject.cpp" />
+    <ClCompile Include="Util\ProgramInitializer.cpp" />
+    <ClCompile Include="Util\Update\Updatable.cpp" />
+    <ClCompile Include="Util\Update\Updater.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="DailyLog.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Base\Config\ConfigManager.h" />
+    <ClInclude Include="Base\Config\FrameworkConfigManager.h" />
+    <ClInclude Include="Base\Game.h" />
+    <ClInclude Include="Base\Graphic\Map\Builder\MapBuilder.h" />
+    <ClInclude Include="Base\Graphic\Map\Map.h" />
+    <ClInclude Include="Base\Graphic\Renderer\MapAlgorithm\HardwareMapAlgorithm.h" />
+    <ClInclude Include="Base\Graphic\Renderer\renderer.h" />
+    <ClInclude Include="Base\Play\Player.h" />
+    <ClInclude Include="Base\Play\Playfield.h" />
+    <ClInclude Include="Base\Play\Session.h" />
+    <ClInclude Include="Base\Ruleset\Mod\Mod.h" />
+    <ClInclude Include="Base\Ruleset\Ruleset.h" />
+    <ClInclude Include="Base\Ruleset\RulesetExecutor.h" />
+    <ClInclude Include="Base\Ruleset\RulesetInfo.h" />
+    <ClInclude Include="Base\Scheduler\Event\ControlPoints\ControlPoint.h" />
+    <ClInclude Include="Base\Scheduler\Event\ControlPoints\NoteControlPoint.h" />
+    <ClInclude Include="Base\Scheduler\Event\Effect\Algorithm\MapAlgorithm.h" />
+    <ClInclude Include="Base\Scheduler\Event\Effect\Algorithm\MapGenerateAlgorithm.h" />
+    <ClInclude Include="Base\Scheduler\Event\Effect\Algorithm\MapShiftAlgorithm.h" />
+    <ClInclude Include="Base\Scheduler\Event\Effect\Effect.h" />
+    <ClInclude Include="Base\Scheduler\Event\Effect\EffectMapper.h" />
+    <ClInclude Include="Base\Scheduler\Event\Event.h" />
+    <ClInclude Include="Base\Scheduler\Event\EventProcessor.h" />
+    <ClInclude Include="Base\Scheduler\Event\EventProcessorMaster.h" />
+    <ClInclude Include="Base\Scheduler\Event\GameEvents\GameEvent.h" />
+    <ClInclude Include="Base\Scheduler\Event\GameEvents\StartGameEvent.h" />
+    <ClInclude Include="Base\Scheduler\Event\GameEvents\StopGameEvent.h" />
+    <ClInclude Include="Base\Scheduler\Event\SystemEvents\StopSystemEvent.h" />
+    <ClInclude Include="Base\Scheduler\Event\SystemEvents\SystemEvent.h" />
+    <ClInclude Include="Base\Scheduler\Event\SystemEvents\SystemEventHandler.h" />
+    <ClInclude Include="Base\Scheduler\Scheduler.h" />
+    <ClInclude Include="Base\Sheetmusic\Format\Parser\EventParser.h" />
+    <ClInclude Include="Base\Sheetmusic\Format\SimpleSmDecoder.h" />
+    <ClInclude Include="Base\Sheetmusic\Format\SmDecoder.h" />
+    <ClInclude Include="Base\Sheetmusic\IO\FileReader.h" />
+    <ClInclude Include="Base\Sheetmusic\Pattern\Pattern.h" />
+    <ClInclude Include="Base\Sheetmusic\Pattern\PatternGenerator.h" />
+    <ClInclude Include="Base\Sheetmusic\Sheetmusic.h" />
+    <ClInclude Include="Base\Sheetmusic\SheetmusicConverter.h" />
+    <ClInclude Include="Base\Sheetmusic\SheetmusicDifficulty.h" />
+    <ClInclude Include="Base\Sheetmusic\SheetmusicInfo.h" />
+    <ClInclude Include="Base\Sheetmusic\SheetmusicManager.h" />
+    <ClInclude Include="Base\Sheetmusic\SheetmusicMetadata.h" />
+    <ClInclude Include="Base\Sheetmusic\SheetmusicPostprocessor.h" />
+    <ClInclude Include="Base\Sheetmusic\SheetmusicSetInfo.h" />
+    <ClInclude Include="Base\Sheetmusic\WorkingSheetmusic.h" />
+    <ClInclude Include="Devices\Graphic\Renderers\WS2812v10Renderer.h" />
+    <ClInclude Include="Devices\HardwareInfo.h" />
+    <ClInclude Include="Devices\LedDriver\clk.h" />
+    <ClInclude Include="Devices\LedDriver\dma.h" />
+    <ClInclude Include="Devices\LedDriver\gpio.h" />
+    <ClInclude Include="Devices\LedDriver\mailbox.h" />
+    <ClInclude Include="Devices\LedDriver\pcm.h" />
+    <ClInclude Include="Devices\LedDriver\pwm.h" />
+    <ClInclude Include="Devices\LedDriver\rpihw.h" />
+    <ClInclude Include="Devices\LedDriver\ws2811.h" />
+    <ClInclude Include="Program.h" />
+    <ClInclude Include="RulesetMeteor\Config\MeteorConfigManager.h" />
+    <ClInclude Include="RulesetMeteor\MeteorGame.h" />
+    <ClInclude Include="RulesetMeteor\Play\MeteorPlayfield.h" />
+    <ClInclude Include="RulesetMeteor\Ruleset\MeteorRuleset.h" />
+    <ClInclude Include="RulesetMeteor\Ruleset\MeteorRulesetExecutor.h" />
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\Algorithm\ExplodeMapAlgorithm.h" />
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\Algorithm\FallMapAlgorithm.h" />
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\Algorithm\GlowLineMapAlgorithm.h" />
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\Algorithm\TargetLineMapAlgorithm.h" />
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\ExplodeEffect.h" />
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\ExplodeEffectMapper.h" />
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\FallEffect.h" />
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\FallEffectMapper.h" />
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\GlowLineEffect.h" />
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\GlowLineEffectMapper.h" />
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\TargetLineEffect.h" />
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\TargetLineEffectMapper.h" />
+    <ClInclude Include="RulesetMeteor\Sheetmusic\MeteorSheetmusicConverter.h" />
+    <ClInclude Include="RulesetMeteor\Sheetmusic\MeteorSheetmusicPostProcessor.h" />
+    <ClInclude Include="RulesetMeteor\Sheetmusic\Pattern\MeteorPatternGenerator.h" />
+    <ClInclude Include="Util\FileSystem.h" />
+    <ClInclude Include="Util\Hierachal\Cachable.h" />
+    <ClInclude Include="Util\Hierachal\ChildAddable.h" />
+    <ClInclude Include="Util\Hierachal\HasParent.h" />
+    <ClInclude Include="Util\Hierachal\Loadable.h" />
+    <ClInclude Include="Util\InstanceCreator.h" />
+    <ClInclude Include="Util\Log.h" />
+    <ClInclude Include="Util\MtoObject.h" />
+    <ClInclude Include="Util\MtoType.h" />
+    <ClInclude Include="Util\ProgramInitializer.h" />
+    <ClInclude Include="Util\Singleton.h" />
+    <ClInclude Include="Util\TemplateConstraint.h" />
+    <ClInclude Include="Util\Update\Updatable.h" />
+    <ClInclude Include="Util\Update\Updater.h" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{FDA870E1-4239-480B-9134-DE72302F9CE3}</ProjectGuid>
+    <RootNamespace>NeoKBtry</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
