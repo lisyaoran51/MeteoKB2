@@ -256,6 +256,69 @@
     <Filter Include="標頭檔\Base\Scheduler\Events\SystemEvents">
       <UniqueIdentifier>{b600f2e3-2187-4a1a-b732-001854cf6a32}</UniqueIdentifier>
     </Filter>
+    <Filter Include="來源檔案\Framework">
+      <UniqueIdentifier>{215e4ca1-fc30-4f94-a28a-509b7b4f4323}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Framework">
+      <UniqueIdentifier>{a13f08d4-3bda-471e-a409-4a98a6401d8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Framework\Host">
+      <UniqueIdentifier>{562e1499-5dff-4568-8793-361e8f4a2952}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Framework\Host">
+      <UniqueIdentifier>{1cdf7e4b-e9b5-4c20-a1cb-d92d5329d7fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Framework\Timing">
+      <UniqueIdentifier>{cb705329-1439-4285-b82f-d308afee75f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Framework\Timing">
+      <UniqueIdentifier>{34909129-4c91-4299-bde0-3a81201362fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Framework\Threading">
+      <UniqueIdentifier>{8913a90a-006d-48ef-bf01-8815e11bbe9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Framework\Threading">
+      <UniqueIdentifier>{edc3b25a-1f3a-4ad7-89af-944bdfb2160e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Framework\Input">
+      <UniqueIdentifier>{4ab27517-c327-4fb7-b052-3b3683ef0743}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Framework\Input">
+      <UniqueIdentifier>{cb4533cc-4dc2-487f-b3ee-7e11e8131c18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Framework\Input\Handler">
+      <UniqueIdentifier>{a88b3939-0567-458b-8c86-82bbdec77feb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Framework\Allocation">
+      <UniqueIdentifier>{7f11d2e3-9c6f-4974-907a-caed822d811e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Framework\Allocation">
+      <UniqueIdentifier>{ba6c06f5-8315-4133-8d08-c8bf3052fb6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Framework\Allocation\Hierachal">
+      <UniqueIdentifier>{9ebf04ce-bb28-4721-827b-0888b8e9252c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Framework\Allocation\Hierachal">
+      <UniqueIdentifier>{4a9493e6-ecdc-4440-a94e-ea85747e5d9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Framework\Allocation\Update">
+      <UniqueIdentifier>{78fb8b5e-e874-4588-9ee9-fa760d9c45ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Framework\Allocation\Update">
+      <UniqueIdentifier>{77b69feb-f6b5-4c96-9172-8999bcea4b5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Framework\Log">
+      <UniqueIdentifier>{a145e4fc-e650-4f61-bfae-cd7c9010d31f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Framework\Log">
+      <UniqueIdentifier>{84cd3614-3885-47b8-83ae-6eab76ddb504}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Framework\Audio">
+      <UniqueIdentifier>{dc3763da-bb9c-47d6-827d-ced1b0344018}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Framework\Audio">
+      <UniqueIdentifier>{f261d74c-458b-45ae-9149-f9f167758dea}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\Config\ConfigManager.cpp">
@@ -476,6 +539,9 @@
     </ClCompile>
     <ClCompile Include="Base\Scheduler\Event\SystemEvents\StopSystemEvent.cpp">
       <Filter>來源檔案\Base\Schedulers\Events\SystemEvent</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Host\GameHost.cpp">
+      <Filter>來源檔案\Framework\Host</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -756,6 +822,36 @@
     </ClInclude>
     <ClInclude Include="Base\Scheduler\Event\SystemEvents\SystemEventHandler.h">
       <Filter>標頭檔\Base\Scheduler\Events\SystemEvents</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Host\GameHost.h">
+      <Filter>標頭檔\Framework\Host</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Input\InputManager.h">
+      <Filter>標頭檔\Framework\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Input\Handler\InputHandler.h">
+      <Filter>標頭檔\Framework\Input\Handler</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Input\InputState.h">
+      <Filter>標頭檔\Framework\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Threading\GameThread.h">
+      <Filter>標頭檔\Framework\Threading</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Audio\AudioManager.h">
+      <Filter>標頭檔\Framework\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Audio\AudioCollectionManager.h">
+      <Filter>標頭檔\Framework\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Audio\AdjustableAudioComponent.h">
+      <Filter>標頭檔\Framework\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Audio\AudioComponent.h">
+      <Filter>標頭檔\Framework\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Timing\AdjustableClock.h">
+      <Filter>標頭檔\Framework\Timing</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
