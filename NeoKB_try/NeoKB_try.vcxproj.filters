@@ -49,71 +49,20 @@
     <Filter Include="來源檔案\Base\Sheetmusic\IO">
       <UniqueIdentifier>{7a8c5739-55a5-4757-8220-08dbdf16fe21}</UniqueIdentifier>
     </Filter>
-    <Filter Include="標頭檔\Base">
-      <UniqueIdentifier>{2723fef1-aafa-45fb-bc73-3313e6550d94}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="標頭檔\Base\Audio">
-      <UniqueIdentifier>{43b88f58-650a-41b6-8101-05c5c81a3555}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="標頭檔\Base\Config">
-      <UniqueIdentifier>{3a594a5c-f9c9-423b-b545-bbff5cbdf73e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="標頭檔\Base\Graphic">
-      <UniqueIdentifier>{d9f3edba-2177-4212-8fa7-e7f7250f8455}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="標頭檔\Base\Graphic\Map">
-      <UniqueIdentifier>{c226911d-0f33-4712-83a5-c634c2aa056c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="標頭檔\Base\Graphic\Map\Builder">
-      <UniqueIdentifier>{d2e13dfb-0f6a-4270-9896-4163857c5a16}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="標頭檔\Base\Graphic\Renderer">
-      <UniqueIdentifier>{dd2cc401-e926-4c0f-8705-fb842c966ce0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="標頭檔\Base\Ruleset">
-      <UniqueIdentifier>{84536ac4-1aeb-4147-9996-d843bc60286c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="標頭檔\Base\Ruleset\Mod">
-      <UniqueIdentifier>{a9628056-7986-46e1-a9fb-f11c8409f00f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="標頭檔\Base\Scheduler">
-      <UniqueIdentifier>{3fc45852-de71-42f6-a695-15fc7d33716f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="標頭檔\Base\Sheetmusic">
-      <UniqueIdentifier>{11fd7402-738a-4c3b-82f2-b67055d74555}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="標頭檔\Base\Sheetmusic\Format">
-      <UniqueIdentifier>{6cfab30d-a591-47d8-9dfe-3fdbeb79128e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="標頭檔\Base\Sheetmusic\IO">
-      <UniqueIdentifier>{fbffc68a-9def-4f45-a18f-1cfd4c19744b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="標頭檔\Util">
       <UniqueIdentifier>{8dcdda0b-686c-44eb-8ea2-ba3507645485}</UniqueIdentifier>
     </Filter>
     <Filter Include="來源檔案\Base\Sheetmusic\ControlPoint">
       <UniqueIdentifier>{7a92ee2b-4f53-4bd0-8fb2-22c08d48d392}</UniqueIdentifier>
     </Filter>
-    <Filter Include="標頭檔\Base\play">
-      <UniqueIdentifier>{6e8bb58a-6b7d-413c-8830-74d6c0444286}</UniqueIdentifier>
-    </Filter>
     <Filter Include="標頭檔\Util\Hierachal">
       <UniqueIdentifier>{1e0527f3-4ccf-4628-a294-61ed2047cf6b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="標頭檔\Base\Sheetmusic\Format\EventParser">
-      <UniqueIdentifier>{311d5e29-ec8f-4ccd-a0f0-cf9ed6d9b21e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="標頭檔\Base\Sheetmusic\Pattern">
-      <UniqueIdentifier>{5e4fb93a-ba6a-4be6-b91f-4f5aa8c64f8d}</UniqueIdentifier>
     </Filter>
     <Filter Include="來源檔案\Base\Play">
       <UniqueIdentifier>{7637adda-0945-49e7-926a-23c375bfb868}</UniqueIdentifier>
     </Filter>
     <Filter Include="標頭檔\Util\Update">
       <UniqueIdentifier>{d0e667ee-da3f-4813-b392-76c348becd3b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="標頭檔\Base\Graphic\Renderer\MapAlgorithm">
-      <UniqueIdentifier>{8a482063-0e98-4434-8c87-5b35ecb5e4f4}</UniqueIdentifier>
     </Filter>
     <Filter Include="來源檔案\Base\Graphic\Renderer\MapAlgorithm">
       <UniqueIdentifier>{52c380ad-a60b-4359-95a1-9b11d00ed1d1}</UniqueIdentifier>
@@ -147,18 +96,6 @@
     </Filter>
     <Filter Include="來源檔案\RulesetMeteor\Sheetmusic">
       <UniqueIdentifier>{9491292b-d967-4c93-8fc0-bb8e2add9e50}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="標頭檔\Base\Scheduler\Events">
-      <UniqueIdentifier>{165c21fd-5e28-4d17-8324-47edb46bd3e3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="標頭檔\Base\Scheduler\Events\Effects">
-      <UniqueIdentifier>{df56837d-3ce4-4e7a-9643-c5e938e0ab42}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="標頭檔\Base\Scheduler\Events\Effects\Algorithms">
-      <UniqueIdentifier>{a05af13c-2f13-4af3-b664-cd0daf5e921a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="標頭檔\Base\Scheduler\Events\ControlPoints">
-      <UniqueIdentifier>{efafd5e8-8a86-428f-ae6a-720246250a61}</UniqueIdentifier>
     </Filter>
     <Filter Include="來源檔案\Base\Schedulers">
       <UniqueIdentifier>{dc7542f1-f488-4525-b0f7-5ce192292d22}</UniqueIdentifier>
@@ -247,14 +184,8 @@
     <Filter Include="來源檔案\Base\Schedulers\Events\GameEvents">
       <UniqueIdentifier>{30491556-7adf-44de-b4e1-2c706da7ce0c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="標頭檔\Base\Scheduler\Events\GameEvents">
-      <UniqueIdentifier>{6ac02b92-1a59-41df-beae-f617520ef1c7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="來源檔案\Base\Schedulers\Events\SystemEvent">
       <UniqueIdentifier>{fb86ced6-425f-4539-bc18-c838f73aba0e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="標頭檔\Base\Scheduler\Events\SystemEvents">
-      <UniqueIdentifier>{b600f2e3-2187-4a1a-b732-001854cf6a32}</UniqueIdentifier>
     </Filter>
     <Filter Include="來源檔案\Framework">
       <UniqueIdentifier>{215e4ca1-fc30-4f94-a28a-509b7b4f4323}</UniqueIdentifier>
@@ -318,6 +249,102 @@
     </Filter>
     <Filter Include="來源檔案\Framework\Audio">
       <UniqueIdentifier>{f261d74c-458b-45ae-9149-f9f167758dea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Game">
+      <UniqueIdentifier>{2723fef1-aafa-45fb-bc73-3313e6550d94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Game\Audio">
+      <UniqueIdentifier>{43b88f58-650a-41b6-8101-05c5c81a3555}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Game\Config">
+      <UniqueIdentifier>{3a594a5c-f9c9-423b-b545-bbff5cbdf73e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Game\Graphic">
+      <UniqueIdentifier>{d9f3edba-2177-4212-8fa7-e7f7250f8455}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Game\Graphic\Map">
+      <UniqueIdentifier>{c226911d-0f33-4712-83a5-c634c2aa056c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Game\Graphic\Map\Builder">
+      <UniqueIdentifier>{d2e13dfb-0f6a-4270-9896-4163857c5a16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Game\Graphic\Renderer">
+      <UniqueIdentifier>{dd2cc401-e926-4c0f-8705-fb842c966ce0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Game\Graphic\Renderer\MapAlgorithm">
+      <UniqueIdentifier>{8a482063-0e98-4434-8c87-5b35ecb5e4f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Game\Ruleset">
+      <UniqueIdentifier>{84536ac4-1aeb-4147-9996-d843bc60286c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Game\Ruleset\Mod">
+      <UniqueIdentifier>{a9628056-7986-46e1-a9fb-f11c8409f00f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Game\Scheduler">
+      <UniqueIdentifier>{3fc45852-de71-42f6-a695-15fc7d33716f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Game\Scheduler\Events">
+      <UniqueIdentifier>{165c21fd-5e28-4d17-8324-47edb46bd3e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Game\Scheduler\Events\Effects">
+      <UniqueIdentifier>{df56837d-3ce4-4e7a-9643-c5e938e0ab42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Game\Scheduler\Events\Effects\Algorithms">
+      <UniqueIdentifier>{a05af13c-2f13-4af3-b664-cd0daf5e921a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Game\Scheduler\Events\ControlPoints">
+      <UniqueIdentifier>{efafd5e8-8a86-428f-ae6a-720246250a61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Game\Scheduler\Events\GameEvents">
+      <UniqueIdentifier>{6ac02b92-1a59-41df-beae-f617520ef1c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Game\Scheduler\Events\SystemEvents">
+      <UniqueIdentifier>{b600f2e3-2187-4a1a-b732-001854cf6a32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Game\Sheetmusic">
+      <UniqueIdentifier>{11fd7402-738a-4c3b-82f2-b67055d74555}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Game\Sheetmusic\Format">
+      <UniqueIdentifier>{6cfab30d-a591-47d8-9dfe-3fdbeb79128e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Game\Sheetmusic\Format\EventParser">
+      <UniqueIdentifier>{311d5e29-ec8f-4ccd-a0f0-cf9ed6d9b21e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Game\Sheetmusic\IO">
+      <UniqueIdentifier>{fbffc68a-9def-4f45-a18f-1cfd4c19744b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Game\Sheetmusic\Pattern">
+      <UniqueIdentifier>{5e4fb93a-ba6a-4be6-b91f-4f5aa8c64f8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Game\Scene">
+      <UniqueIdentifier>{a445c660-ab7a-427f-a901-6b9363302257}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Game\Scene\play">
+      <UniqueIdentifier>{6e8bb58a-6b7d-413c-8830-74d6c0444286}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Framework\Configuration">
+      <UniqueIdentifier>{8363cd29-264e-4138-9167-50817f27cce3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Framework\Configuration">
+      <UniqueIdentifier>{32dac5ff-743d-4b18-a671-880a222691bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Framework\IO">
+      <UniqueIdentifier>{d91245ff-e1b1-4a4c-b89e-01759e818509}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Framework\IO\Stores">
+      <UniqueIdentifier>{a3059417-2e83-4b44-b00e-c0b019f40287}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Framework\IO">
+      <UniqueIdentifier>{e82197fd-4398-4c26-ae0c-d69360d68af6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Framework\IO\Stores">
+      <UniqueIdentifier>{4a8f56f4-d310-4e94-93fa-36656db076b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Util\DataStructure">
+      <UniqueIdentifier>{9938e854-49c3-4d2e-822d-2b1e688052eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Util\DataStructure">
+      <UniqueIdentifier>{6f216b18-e4b5-473b-be1c-aff8ca51c31c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -543,6 +570,9 @@
     <ClCompile Include="Framework\Host\GameHost.cpp">
       <Filter>來源檔案\Framework\Host</Filter>
     </ClCompile>
+    <ClCompile Include="Util\DataStructure\Action.cpp">
+      <Filter>來源檔案\Util\DataStructure</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="DailyLog.txt">
@@ -551,76 +581,76 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\Config\ConfigManager.h">
-      <Filter>標頭檔\Base\Config</Filter>
+      <Filter>標頭檔\Game\Config</Filter>
     </ClInclude>
     <ClInclude Include="Base\Graphic\Map\Map.h">
-      <Filter>標頭檔\Base\Graphic\Map</Filter>
+      <Filter>標頭檔\Game\Graphic\Map</Filter>
     </ClInclude>
     <ClInclude Include="Base\Graphic\Renderer\renderer.h">
-      <Filter>標頭檔\Base\Graphic\Renderer</Filter>
+      <Filter>標頭檔\Game\Graphic\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="Base\Graphic\Map\Builder\MapBuilder.h">
-      <Filter>標頭檔\Base\Graphic\Map\Builder</Filter>
+      <Filter>標頭檔\Game\Graphic\Map\Builder</Filter>
     </ClInclude>
     <ClInclude Include="Base\Play\Player.h">
-      <Filter>標頭檔\Base\play</Filter>
+      <Filter>標頭檔\Game\Scene\play</Filter>
     </ClInclude>
     <ClInclude Include="Base\Play\Playfield.h">
-      <Filter>標頭檔\Base\play</Filter>
+      <Filter>標頭檔\Game\Scene\play</Filter>
     </ClInclude>
     <ClInclude Include="Base\Ruleset\Ruleset.h">
-      <Filter>標頭檔\Base\Ruleset</Filter>
+      <Filter>標頭檔\Game\Ruleset</Filter>
     </ClInclude>
     <ClInclude Include="Base\Ruleset\RulesetExecutor.h">
-      <Filter>標頭檔\Base\Ruleset</Filter>
+      <Filter>標頭檔\Game\Ruleset</Filter>
     </ClInclude>
     <ClInclude Include="Base\Ruleset\RulesetInfo.h">
-      <Filter>標頭檔\Base\Ruleset</Filter>
+      <Filter>標頭檔\Game\Ruleset</Filter>
     </ClInclude>
     <ClInclude Include="Base\Ruleset\Mod\Mod.h">
-      <Filter>標頭檔\Base\Ruleset\Mod</Filter>
+      <Filter>標頭檔\Game\Ruleset\Mod</Filter>
     </ClInclude>
     <ClInclude Include="Base\Scheduler\Scheduler.h">
-      <Filter>標頭檔\Base\Scheduler</Filter>
+      <Filter>標頭檔\Game\Scheduler</Filter>
     </ClInclude>
     <ClInclude Include="Base\Scheduler\Event\Event.h">
-      <Filter>標頭檔\Base\Scheduler\Events</Filter>
+      <Filter>標頭檔\Game\Scheduler\Events</Filter>
     </ClInclude>
     <ClInclude Include="Base\Scheduler\Event\EventProcessor.h">
-      <Filter>標頭檔\Base\Scheduler\Events</Filter>
+      <Filter>標頭檔\Game\Scheduler\Events</Filter>
     </ClInclude>
     <ClInclude Include="Base\Scheduler\Event\EventProcessorMaster.h">
-      <Filter>標頭檔\Base\Scheduler\Events</Filter>
+      <Filter>標頭檔\Game\Scheduler\Events</Filter>
     </ClInclude>
     <ClInclude Include="Base\Scheduler\Event\Effect\Effect.h">
-      <Filter>標頭檔\Base\Scheduler\Events\Effects</Filter>
+      <Filter>標頭檔\Game\Scheduler\Events\Effects</Filter>
     </ClInclude>
     <ClInclude Include="Base\Sheetmusic\Sheetmusic.h">
-      <Filter>標頭檔\Base\Sheetmusic</Filter>
+      <Filter>標頭檔\Game\Sheetmusic</Filter>
     </ClInclude>
     <ClInclude Include="Base\Sheetmusic\SheetmusicConverter.h">
-      <Filter>標頭檔\Base\Sheetmusic</Filter>
+      <Filter>標頭檔\Game\Sheetmusic</Filter>
     </ClInclude>
     <ClInclude Include="Base\Sheetmusic\SheetmusicDifficulty.h">
-      <Filter>標頭檔\Base\Sheetmusic</Filter>
+      <Filter>標頭檔\Game\Sheetmusic</Filter>
     </ClInclude>
     <ClInclude Include="Base\Sheetmusic\SheetmusicInfo.h">
-      <Filter>標頭檔\Base\Sheetmusic</Filter>
+      <Filter>標頭檔\Game\Sheetmusic</Filter>
     </ClInclude>
     <ClInclude Include="Base\Sheetmusic\SheetmusicManager.h">
-      <Filter>標頭檔\Base\Sheetmusic</Filter>
+      <Filter>標頭檔\Game\Sheetmusic</Filter>
     </ClInclude>
     <ClInclude Include="Base\Sheetmusic\SheetmusicMetadata.h">
-      <Filter>標頭檔\Base\Sheetmusic</Filter>
+      <Filter>標頭檔\Game\Sheetmusic</Filter>
     </ClInclude>
     <ClInclude Include="Base\Sheetmusic\WorkingSheetmusic.h">
-      <Filter>標頭檔\Base\Sheetmusic</Filter>
+      <Filter>標頭檔\Game\Sheetmusic</Filter>
     </ClInclude>
     <ClInclude Include="Base\Sheetmusic\IO\FileReader.h">
-      <Filter>標頭檔\Base\Sheetmusic\IO</Filter>
+      <Filter>標頭檔\Game\Sheetmusic\IO</Filter>
     </ClInclude>
     <ClInclude Include="Base\Sheetmusic\Format\Parser\EventParser.h">
-      <Filter>標頭檔\Base\Sheetmusic\Format\EventParser</Filter>
+      <Filter>標頭檔\Game\Sheetmusic\Format\EventParser</Filter>
     </ClInclude>
     <ClInclude Include="Util\InstanceCreator.h">
       <Filter>標頭檔\Util</Filter>
@@ -656,13 +686,13 @@
       <Filter>標頭檔\Util\Update</Filter>
     </ClInclude>
     <ClInclude Include="Base\Scheduler\Event\Effect\EffectMapper.h">
-      <Filter>標頭檔\Base\Scheduler\Events\Effects</Filter>
+      <Filter>標頭檔\Game\Scheduler\Events\Effects</Filter>
     </ClInclude>
     <ClInclude Include="Base\Sheetmusic\Format\SmDecoder.h">
-      <Filter>標頭檔\Base\Sheetmusic\Format</Filter>
+      <Filter>標頭檔\Game\Sheetmusic\Format</Filter>
     </ClInclude>
     <ClInclude Include="Base\Graphic\Renderer\MapAlgorithm\HardwareMapAlgorithm.h">
-      <Filter>標頭檔\Base\Graphic\Renderer\MapAlgorithm</Filter>
+      <Filter>標頭檔\Game\Graphic\Renderer\MapAlgorithm</Filter>
     </ClInclude>
     <ClInclude Include="RulesetMeteor\Ruleset\MeteorRuleset.h">
       <Filter>標頭檔\RulesetMeteor\Ruleset</Filter>
@@ -677,19 +707,19 @@
       <Filter>標頭檔\RulesetMeteor\Sheetmusic</Filter>
     </ClInclude>
     <ClInclude Include="Base\Sheetmusic\Pattern\PatternGenerator.h">
-      <Filter>標頭檔\Base\Sheetmusic\Pattern</Filter>
+      <Filter>標頭檔\Game\Sheetmusic\Pattern</Filter>
     </ClInclude>
     <ClInclude Include="Base\Scheduler\Event\ControlPoints\ControlPoint.h">
-      <Filter>標頭檔\Base\Scheduler\Events\ControlPoints</Filter>
+      <Filter>標頭檔\Game\Scheduler\Events\ControlPoints</Filter>
     </ClInclude>
     <ClInclude Include="Base\Scheduler\Event\ControlPoints\NoteControlPoint.h">
-      <Filter>標頭檔\Base\Scheduler\Events\ControlPoints</Filter>
+      <Filter>標頭檔\Game\Scheduler\Events\ControlPoints</Filter>
     </ClInclude>
     <ClInclude Include="Base\Scheduler\Event\Effect\Algorithm\MapAlgorithm.h">
-      <Filter>標頭檔\Base\Scheduler\Events\Effects\Algorithms</Filter>
+      <Filter>標頭檔\Game\Scheduler\Events\Effects\Algorithms</Filter>
     </ClInclude>
     <ClInclude Include="Base\Config\FrameworkConfigManager.h">
-      <Filter>標頭檔\Base\Config</Filter>
+      <Filter>標頭檔\Game\Config</Filter>
     </ClInclude>
     <ClInclude Include="RulesetMeteor\Config\MeteorConfigManager.h">
       <Filter>標頭檔\RulesetMeteor\Config</Filter>
@@ -722,7 +752,7 @@
       <Filter>標頭檔\RulesetMeteor\Schedulers\Events\Effects\Algorithms</Filter>
     </ClInclude>
     <ClInclude Include="Base\Game.h">
-      <Filter>標頭檔\Base</Filter>
+      <Filter>標頭檔\Game</Filter>
     </ClInclude>
     <ClInclude Include="RulesetMeteor\MeteorGame.h">
       <Filter>標頭檔\RulesetMeteor</Filter>
@@ -731,22 +761,22 @@
       <Filter>標頭檔</Filter>
     </ClInclude>
     <ClInclude Include="Base\Play\Session.h">
-      <Filter>標頭檔\Base\play</Filter>
+      <Filter>標頭檔\Game\Scene\play</Filter>
     </ClInclude>
     <ClInclude Include="Base\Scheduler\Event\Effect\Algorithm\MapGenerateAlgorithm.h">
-      <Filter>標頭檔\Base\Scheduler\Events\Effects\Algorithms</Filter>
+      <Filter>標頭檔\Game\Scheduler\Events\Effects\Algorithms</Filter>
     </ClInclude>
     <ClInclude Include="Base\Scheduler\Event\Effect\Algorithm\MapShiftAlgorithm.h">
-      <Filter>標頭檔\Base\Scheduler\Events\Effects\Algorithms</Filter>
+      <Filter>標頭檔\Game\Scheduler\Events\Effects\Algorithms</Filter>
     </ClInclude>
     <ClInclude Include="Base\Sheetmusic\SheetmusicSetInfo.h">
-      <Filter>標頭檔\Base\Sheetmusic</Filter>
+      <Filter>標頭檔\Game\Sheetmusic</Filter>
     </ClInclude>
     <ClInclude Include="Util\FileSystem.h">
       <Filter>標頭檔\Util</Filter>
     </ClInclude>
     <ClInclude Include="Base\Sheetmusic\Pattern\Pattern.h">
-      <Filter>標頭檔\Base\Sheetmusic\Pattern</Filter>
+      <Filter>標頭檔\Game\Sheetmusic\Pattern</Filter>
     </ClInclude>
     <ClInclude Include="RulesetMeteor\Sheetmusic\Pattern\MeteorPatternGenerator.h">
       <Filter>標頭檔\RulesetMeteor\Sheetmusic\Patterns</Filter>
@@ -785,22 +815,22 @@
       <Filter>標頭檔\Util</Filter>
     </ClInclude>
     <ClInclude Include="Base\Sheetmusic\Format\SimpleSmDecoder.h">
-      <Filter>標頭檔\Base\Sheetmusic\Format</Filter>
+      <Filter>標頭檔\Game\Sheetmusic\Format</Filter>
     </ClInclude>
     <ClInclude Include="Util\ProgramInitializer.h">
       <Filter>標頭檔\Util</Filter>
     </ClInclude>
     <ClInclude Include="Base\Sheetmusic\SheetmusicPostprocessor.h">
-      <Filter>標頭檔\Base\Sheetmusic</Filter>
+      <Filter>標頭檔\Game\Sheetmusic</Filter>
     </ClInclude>
     <ClInclude Include="RulesetMeteor\Sheetmusic\MeteorSheetmusicPostProcessor.h">
       <Filter>標頭檔\RulesetMeteor\Sheetmusic</Filter>
     </ClInclude>
     <ClInclude Include="Base\Scheduler\Event\GameEvents\GameEvent.h">
-      <Filter>標頭檔\Base\Scheduler\Events\GameEvents</Filter>
+      <Filter>標頭檔\Game\Scheduler\Events\GameEvents</Filter>
     </ClInclude>
     <ClInclude Include="Base\Scheduler\Event\GameEvents\StartGameEvent.h">
-      <Filter>標頭檔\Base\Scheduler\Events\GameEvents</Filter>
+      <Filter>標頭檔\Game\Scheduler\Events\GameEvents</Filter>
     </ClInclude>
     <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\TargetLineEffect.h">
       <Filter>標頭檔\RulesetMeteor\Schedulers\Events\Effects</Filter>
@@ -812,16 +842,16 @@
       <Filter>標頭檔\RulesetMeteor\Schedulers\Events\Effects\Algorithms</Filter>
     </ClInclude>
     <ClInclude Include="Base\Scheduler\Event\GameEvents\StopGameEvent.h">
-      <Filter>標頭檔\Base\Scheduler\Events\GameEvents</Filter>
+      <Filter>標頭檔\Game\Scheduler\Events\GameEvents</Filter>
     </ClInclude>
     <ClInclude Include="Base\Scheduler\Event\SystemEvents\StopSystemEvent.h">
-      <Filter>標頭檔\Base\Scheduler\Events\SystemEvents</Filter>
+      <Filter>標頭檔\Game\Scheduler\Events\SystemEvents</Filter>
     </ClInclude>
     <ClInclude Include="Base\Scheduler\Event\SystemEvents\SystemEvent.h">
-      <Filter>標頭檔\Base\Scheduler\Events\SystemEvents</Filter>
+      <Filter>標頭檔\Game\Scheduler\Events\SystemEvents</Filter>
     </ClInclude>
     <ClInclude Include="Base\Scheduler\Event\SystemEvents\SystemEventHandler.h">
-      <Filter>標頭檔\Base\Scheduler\Events\SystemEvents</Filter>
+      <Filter>標頭檔\Game\Scheduler\Events\SystemEvents</Filter>
     </ClInclude>
     <ClInclude Include="Framework\Host\GameHost.h">
       <Filter>標頭檔\Framework\Host</Filter>
@@ -852,6 +882,15 @@
     </ClInclude>
     <ClInclude Include="Framework\Timing\AdjustableClock.h">
       <Filter>標頭檔\Framework\Timing</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Play\TimeController.h">
+      <Filter>標頭檔\Game\Scene\play</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\IO\Stores\ResourceStore.h">
+      <Filter>標頭檔\Framework\IO\Stores</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\DataStructure\Action.h">
+      <Filter>標頭檔\Util\DataStructure</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

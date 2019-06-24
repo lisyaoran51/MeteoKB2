@@ -1,0 +1,12 @@
+# FD.Delegate testDelegate Jamfile
+
+# (C) Copyright JaeWook Choi 2007
+# Distributed under the Boost Software License, Version 1.0. (See accompanying 
+# file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt.)
+
+project-root ;
+
+project boost : $(BOOST_ROOT) ; 
+
+exe testDelegate : main.cpp test1.cpp test2.cpp test3.cpp <lib>@boost/libs/signals/build/boost_signals ;
+
