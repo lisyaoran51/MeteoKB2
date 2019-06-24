@@ -346,6 +346,15 @@
     <Filter Include="來源檔案\Util\DataStructure">
       <UniqueIdentifier>{6f216b18-e4b5-473b-be1c-aff8ca51c31c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="標頭檔\Game\Scene\Interlude">
+      <UniqueIdentifier>{0c8980ba-d51d-49a7-b23c-a59069d1600e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Game\Scene\Select">
+      <UniqueIdentifier>{467add1c-1549-4de2-ae28-df237aad8f48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Framework\Scene">
+      <UniqueIdentifier>{e28c9219-82a2-4ba6-9a20-3ef48dc3204b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\Config\ConfigManager.cpp">
@@ -891,6 +900,39 @@
     </ClInclude>
     <ClInclude Include="Util\DataStructure\Action.h">
       <Filter>標頭檔\Util\DataStructure</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\DataStructure\Bindable.h">
+      <Filter>標頭檔\Util\DataStructure</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\IO\Stores\NamespacedResourceStore.h">
+      <Filter>標頭檔\Framework\IO\Stores</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Scene\Interlude\Intro.h">
+      <Filter>標頭檔\Game\Scene\Interlude</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Scene\Select\SongSelect.h">
+      <Filter>標頭檔\Game\Scene\Select</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Scene\Scene.h">
+      <Filter>標頭檔\Game\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Scene\Play\PlayerLoader.h">
+      <Filter>標頭檔\Game\Scene\play</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Scene\Play\PauseContainer.h">
+      <Filter>標頭檔\Game\Scene\play</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Timing\FramedClock.h">
+      <Filter>標頭檔\Framework\Timing</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Timing\Clock.h">
+      <Filter>標頭檔\Framework\Timing</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Timing\FrameTimeInfo.h">
+      <Filter>標頭檔\Framework\Timing</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Timing\FrameBasedClock.h">
+      <Filter>標頭檔\Framework\Timing</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

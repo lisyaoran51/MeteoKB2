@@ -114,6 +114,11 @@
     <ClInclude Include="Base\Ruleset\Ruleset.h" />
     <ClInclude Include="Base\Ruleset\RulesetExecutor.h" />
     <ClInclude Include="Base\Ruleset\RulesetInfo.h" />
+    <ClInclude Include="Base\Scene\Interlude\Intro.h" />
+    <ClInclude Include="Base\Scene\Play\PauseContainer.h" />
+    <ClInclude Include="Base\Scene\Play\PlayerLoader.h" />
+    <ClInclude Include="Base\Scene\Scene.h" />
+    <ClInclude Include="Base\Scene\Select\SongSelect.h" />
     <ClInclude Include="Base\Scheduler\Event\ControlPoints\ControlPoint.h" />
     <ClInclude Include="Base\Scheduler\Event\ControlPoints\NoteControlPoint.h" />
     <ClInclude Include="Base\Scheduler\Event\Effect\Algorithm\MapAlgorithm.h" />
@@ -164,9 +169,14 @@
     <ClInclude Include="Framework\Input\Handler\InputHandler.h" />
     <ClInclude Include="Framework\Input\InputManager.h" />
     <ClInclude Include="Framework\Input\InputState.h" />
+    <ClInclude Include="Framework\IO\Stores\NamespacedResourceStore.h" />
     <ClInclude Include="Framework\IO\Stores\ResourceStore.h" />
     <ClInclude Include="Framework\Threading\GameThread.h" />
     <ClInclude Include="Framework\Timing\AdjustableClock.h" />
+    <ClInclude Include="Framework\Timing\Clock.h" />
+    <ClInclude Include="Framework\Timing\FrameBasedClock.h" />
+    <ClInclude Include="Framework\Timing\FramedClock.h" />
+    <ClInclude Include="Framework\Timing\FrameTimeInfo.h" />
     <ClInclude Include="Program.h" />
     <ClInclude Include="RulesetMeteor\Config\MeteorConfigManager.h" />
     <ClInclude Include="RulesetMeteor\MeteorGame.h" />
@@ -189,6 +199,7 @@
     <ClInclude Include="RulesetMeteor\Sheetmusic\MeteorSheetmusicPostProcessor.h" />
     <ClInclude Include="RulesetMeteor\Sheetmusic\Pattern\MeteorPatternGenerator.h" />
     <ClInclude Include="Util\DataStructure\Action.h" />
+    <ClInclude Include="Util\DataStructure\Bindable.h" />
     <ClInclude Include="Util\FileSystem.h" />
     <ClInclude Include="Util\Hierachal\Cachable.h" />
     <ClInclude Include="Util\Hierachal\ChildAddable.h" />

@@ -1,12 +1,12 @@
 #ifndef ADJUSTABLE_CLOCK_H
 #define ADJUSTABLE_CLOCK_H
 
-
+#include "Clock.h"
 
 namespace Framework {
 namespace Timing {
 
-	class AdjustableClock {
+	class AdjustableClock : public Clock {
 
 	public:
 
