@@ -8,7 +8,9 @@
 using namespace Util;
 
 
-namespace Util {
+
+namespace Framework {
+namespace Allocation {
 namespace Hierachal {
 
 	/// <summary>
@@ -37,7 +39,7 @@ namespace Hierachal {
 
 }
 }
-
+}
 
 
 

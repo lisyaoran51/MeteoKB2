@@ -55,23 +55,14 @@
     <Filter Include="來源檔案\Base\Sheetmusic\ControlPoint">
       <UniqueIdentifier>{7a92ee2b-4f53-4bd0-8fb2-22c08d48d392}</UniqueIdentifier>
     </Filter>
-    <Filter Include="標頭檔\Util\Hierachal">
-      <UniqueIdentifier>{1e0527f3-4ccf-4628-a294-61ed2047cf6b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="來源檔案\Base\Play">
       <UniqueIdentifier>{7637adda-0945-49e7-926a-23c375bfb868}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="標頭檔\Util\Update">
-      <UniqueIdentifier>{d0e667ee-da3f-4813-b392-76c348becd3b}</UniqueIdentifier>
     </Filter>
     <Filter Include="來源檔案\Base\Graphic\Renderer\MapAlgorithm">
       <UniqueIdentifier>{52c380ad-a60b-4359-95a1-9b11d00ed1d1}</UniqueIdentifier>
     </Filter>
     <Filter Include="來源檔案\Util">
       <UniqueIdentifier>{27e2dd69-02ef-4b06-8854-6358d4c8958f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="來源檔案\Util\Hierachal">
-      <UniqueIdentifier>{d7c0b1a1-1ec9-4215-9500-326597fd9de7}</UniqueIdentifier>
     </Filter>
     <Filter Include="來源檔案\RulesetMeteor">
       <UniqueIdentifier>{afe83821-14fa-45cf-b6c8-d7752a4a4112}</UniqueIdentifier>
@@ -126,9 +117,6 @@
     </Filter>
     <Filter Include="來源檔案\Base\Schedulers\Events\ControlPoints">
       <UniqueIdentifier>{dd1092bb-dd5c-4b59-9a90-811ad03bd182}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="來源檔案\Util\Update">
-      <UniqueIdentifier>{ff2baf39-c204-479c-bcfb-7aef7c7c49bf}</UniqueIdentifier>
     </Filter>
     <Filter Include="來源檔案\Base\Sheetmusic\Pattern">
       <UniqueIdentifier>{ca2a8f28-3a76-47e8-81dc-52abb4713d41}</UniqueIdentifier>
@@ -396,15 +384,6 @@
     <ClCompile Include="Base\Graphic\Renderer\MapAlgorithm\HardwareMapAlgorithm.cpp">
       <Filter>來源檔案\Base\Graphic\Renderer\MapAlgorithm</Filter>
     </ClCompile>
-    <ClCompile Include="Util\Hierachal\Loadable.cpp">
-      <Filter>來源檔案\Util\Hierachal</Filter>
-    </ClCompile>
-    <ClCompile Include="Util\Hierachal\LoadStateHandler.cpp">
-      <Filter>來源檔案\Util\Hierachal</Filter>
-    </ClCompile>
-    <ClCompile Include="Util\Hierachal\ChildAddable.cpp">
-      <Filter>來源檔案\Util\Hierachal</Filter>
-    </ClCompile>
     <ClCompile Include="Base\Play\Player.cpp">
       <Filter>來源檔案\Base\Play</Filter>
     </ClCompile>
@@ -438,9 +417,6 @@
     <ClCompile Include="Base\Ruleset\RulesetInfo.cpp">
       <Filter>來源檔案\Base\Ruleset</Filter>
     </ClCompile>
-    <ClCompile Include="Util\Update\Updater.cpp">
-      <Filter>來源檔案\Util\Update</Filter>
-    </ClCompile>
     <ClCompile Include="Base\Sheetmusic\SheetmusicManager.cpp">
       <Filter>來源檔案\Base\Sheetmusic</Filter>
     </ClCompile>
@@ -462,14 +438,8 @@
     <ClCompile Include="Util\MtoObject.cpp">
       <Filter>來源檔案\Util</Filter>
     </ClCompile>
-    <ClCompile Include="Util\Hierachal\HasParent.cpp">
-      <Filter>來源檔案\Util\Hierachal</Filter>
-    </ClCompile>
     <ClCompile Include="Base\Sheetmusic\Pattern\PatternGenerator.cpp">
       <Filter>來源檔案\Base\Sheetmusic\Pattern</Filter>
-    </ClCompile>
-    <ClCompile Include="Util\Update\Updatable.cpp">
-      <Filter>來源檔案\Util\Update</Filter>
     </ClCompile>
     <ClCompile Include="Program.cpp">
       <Filter>來源檔案</Filter>
@@ -540,9 +510,6 @@
     <ClCompile Include="Util\ProgramInitializer.cpp">
       <Filter>來源檔案\Util</Filter>
     </ClCompile>
-    <ClCompile Include="Util\Hierachal\Cachable.cpp">
-      <Filter>來源檔案\Util\Hierachal</Filter>
-    </ClCompile>
     <ClCompile Include="Base\Scheduler\Event\ControlPoints\ControlPoint.cpp">
       <Filter>來源檔案\Base\Schedulers\Events\ControlPoints</Filter>
     </ClCompile>
@@ -581,6 +548,24 @@
     </ClCompile>
     <ClCompile Include="Util\DataStructure\Action.cpp">
       <Filter>來源檔案\Util\DataStructure</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Allocation\Hierachal\Cachable.cpp">
+      <Filter>來源檔案\Framework\Allocation\Hierachal</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Allocation\Hierachal\ChildAddable.cpp">
+      <Filter>來源檔案\Framework\Allocation\Hierachal</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Allocation\Hierachal\HasParent.cpp">
+      <Filter>來源檔案\Framework\Allocation\Hierachal</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Allocation\Hierachal\Loadable.cpp">
+      <Filter>來源檔案\Framework\Allocation\Hierachal</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Allocation\Hierachal\LoadStateHandler.cpp">
+      <Filter>來源檔案\Framework\Allocation\Hierachal</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Allocation\Hierachal\MtoObject.cpp">
+      <Filter>來源檔案\Framework\Allocation\Hierachal</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -664,9 +649,6 @@
     <ClInclude Include="Util\InstanceCreator.h">
       <Filter>標頭檔\Util</Filter>
     </ClInclude>
-    <ClInclude Include="Util\MtoObject.h">
-      <Filter>標頭檔\Util</Filter>
-    </ClInclude>
     <ClInclude Include="Util\MtoType.h">
       <Filter>標頭檔\Util</Filter>
     </ClInclude>
@@ -675,24 +657,6 @@
     </ClInclude>
     <ClInclude Include="Util\TemplateConstraint.h">
       <Filter>標頭檔\Util</Filter>
-    </ClInclude>
-    <ClInclude Include="Util\Hierachal\Cachable.h">
-      <Filter>標頭檔\Util\Hierachal</Filter>
-    </ClInclude>
-    <ClInclude Include="Util\Hierachal\ChildAddable.h">
-      <Filter>標頭檔\Util\Hierachal</Filter>
-    </ClInclude>
-    <ClInclude Include="Util\Hierachal\HasParent.h">
-      <Filter>標頭檔\Util\Hierachal</Filter>
-    </ClInclude>
-    <ClInclude Include="Util\Hierachal\Loadable.h">
-      <Filter>標頭檔\Util\Hierachal</Filter>
-    </ClInclude>
-    <ClInclude Include="Util\Update\Updatable.h">
-      <Filter>標頭檔\Util\Update</Filter>
-    </ClInclude>
-    <ClInclude Include="Util\Update\Updater.h">
-      <Filter>標頭檔\Util\Update</Filter>
     </ClInclude>
     <ClInclude Include="Base\Scheduler\Event\Effect\EffectMapper.h">
       <Filter>標頭檔\Game\Scheduler\Events\Effects</Filter>
@@ -932,6 +896,42 @@
       <Filter>標頭檔\Framework\Timing</Filter>
     </ClInclude>
     <ClInclude Include="Framework\Timing\FrameBasedClock.h">
+      <Filter>標頭檔\Framework\Timing</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Allocation\Hierachal\Updatable.h">
+      <Filter>標頭檔\Framework\Allocation\Hierachal</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Allocation\Hierachal\Cachable.h">
+      <Filter>標頭檔\Framework\Allocation\Hierachal</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Allocation\Hierachal\ChildAddable.h">
+      <Filter>標頭檔\Framework\Allocation\Hierachal</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Allocation\Hierachal\HasParent.h">
+      <Filter>標頭檔\Framework\Allocation\Hierachal</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Allocation\Hierachal\Loadable.h">
+      <Filter>標頭檔\Framework\Allocation\Hierachal</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Allocation\Hierachal\MtoObject.h">
+      <Filter>標頭檔\Framework\Allocation\Hierachal</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Input\InputEvent.h">
+      <Filter>標頭檔\Framework\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Allocation\Hierachal\Triggerable.h">
+      <Filter>標頭檔\Framework\Allocation\Hierachal</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Timing\InterpolatingFramedClock.h">
+      <Filter>標頭檔\Framework\Timing</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Timing\DecoupledInterpolatingFramedClock.h">
+      <Filter>標頭檔\Framework\Timing</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Timing\StopwatchClock.h">
+      <Filter>標頭檔\Framework\Timing</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Timing\OffsetFramedClock.h">
       <Filter>標頭檔\Framework\Timing</Filter>
     </ClInclude>
   </ItemGroup>

@@ -21,8 +21,12 @@ namespace Host {
 		
 		GameHost(String name = "");
 
-
 		int Run(Game game);
+
+		/// <summary>
+		/// 讓handler們去註冊，在input thread收到input時，會去用這個叫所有handler，讓每個handler去收自己要的state
+		/// </summary>
+		Action<int(InputEvent*)> OnInput;
 
 	protected:
 
@@ -43,6 +47,7 @@ namespace Host {
 
 		int UpdateFrame();
 
+
 		/// <summary>
 		/// 把input丟到main interface裡
 		/// </summary>
@@ -53,6 +58,9 @@ namespace Host {
 		int InputInitialize();
 
 		int InputFrame();
+
+
+		int ResetInputHandler();
 
 	private :
 
@@ -73,7 +81,9 @@ namespace Host {
 		/// </summary>
 		ChildAddable root;
 
-		vector<InputHandler*>* availableInputHandler;
+		vector<InputHandler*> availableInputHandler;
+
+		
 
 	};
 

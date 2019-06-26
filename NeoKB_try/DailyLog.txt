@@ -515,3 +515,664 @@
 	
 	試了 apt-get update upgrade 重安裝bluez都沒辦法解決host is down
 	
+
+3/28 
+	1. 研究uart2
+	http://blog.ittraining.com.tw/2015/05/raspberry-pi-2uart.html   PL2303 USB to UART
+	https://hackaday.com/2015/11/28/first-raspberry-pi-zero-hack-piggy-back-wifi/ pp22 pp23 = D+ D-
+	https://othermod.com/raspberry-pi-zero-external-usb-connector/
+	
+	2. 快速關機程序
+	1~2秒
+	
+	3. 差動旋鈕
+	
+	4. pi sd card
+	https://subscription.packtpub.com/book/hardware_and_creative/9781786463852/1/ch01lvl1sec9/understanding-the-standard-connectors-and-test-points
+	https://www.technigem.com/2017/01/raspberry-pi-points-de-test/
+	
+4/7
+	pwm clock divider 
+	https://www.iot-programmer.com/index.php/books/22-raspberry-pi-and-the-iot-in-c/chapters-raspberry-pi-and-the-iot-in-c/60-raspberry-pi-and-the-iot-in-c-pulse-width-modulation-servos-and-more?start=1
+	
+	inlude bcm2835.h in kernel mod
+	https://www.linuxquestions.org/questions/programming-9/lkm-trouble-with-compile-stdint-h-4175522738/
+	
+	kernel led pwm
+	https://android.googlesource.com/kernel/msm/+/android-msm-3.9-usb-and-mmc-hacks/drivers/leds/leds-pwm.c
+	
+	driver use bcm2835
+	https://github.com/ahmedius2/Simple-PL011-RTDM-driver/blob/master/bcm2835.h
+	
+	多個文件時不能用同名
+	https://blog.csdn.net/zengxianyang/article/details/50710695
+	
+	workqueue的delay時間不準
+	
+	要udelay(20)燈光才會穩定
+	無法嘗試mono audio
+	
+4/8
+	mono只要改config.txt就好
+	放pwm時會有尖銳噪音
+	
+4/10
+	單聲道 http://pi.eggum.net/2013/09/airplay-or-shairport-that-is.html
+	
+	alsa用pwm 13 func=4
+	pwm用channel1(bcm2835lib)(還有問題)
+	找到原因：bcm2835_pwm_set_clock(BCM2835_PWM_CLOCK_DIVIDER_16);會把整個PWM都改掉
+	
+	bcm2835_gpio_fsel(18,BCM2835_GPIO_FSEL_ALT5 ); 這個要開著，完成。
+	也不能bcm2835_pwm_set_range
+	
+	一顆亮20us，可以亮500顆(t=0.01s)，一秒可以刷100次(f=100)
+	
+	50W
+	
+4/17
+	http://reneeciou.blogspot.com/2013/08/linux-kernel-threads.html
+	kthread
+	
+4/18
+	
+	/etc/asound.conf
+	
+	pcm.card0 {
+		type hw
+		card 0
+	}
+	ctl.card0 {
+		type hw
+		card 0
+	}
+	pcm.monocard {
+		slave.pcm card0
+		slave.channels 2
+		# type plug
+		type route
+		ttable {
+			# Copy both input channels to output channel 0 (Left).
+			0.0 1
+			1.0 1
+			# Send nothing to output channel 1 (Right).
+			0.1 0
+			1.1 0
+		}
+	}
+	ctl.monocard {
+		type hw
+		card 0
+	}
+	pcm.!default monocard
+
+	https://raspberrypi.stackexchange.com/questions/61771/options-of-adding-additional-pwm-channel-to-pi-zero
+	
+	alsa bcm2835 source
+	https://www.raspberrypi.org/forums/viewtopic.php?t=4958
+	
+	alsa的sourcce code從linux/sound/arm/bcm2835-pcm.c到alsa的pcm.c
+	
+	改dts
+	https://www.raspberrypi.org/forums/viewtopic.php?t=190010
+	https://hackaday.io/project/9467-piboy-zero/log/35090-pi-zero-pwm-audio-device-tree-overlay
+	
+	不用lib
+	https://www.raspberrypi.org/forums/viewtopic.php?t=231994
+	
+	延就pwm，怎麼用reg開
+	http://www.scribd.com/doc/127599939/BCM2835-Audio-clocks
+	
+	
+	http://koreav6.co.kr/~suhopark/lxr9/http/source/include/
+	
+	努力把aplay的channel讀出來
+	
+	
+4/22
+	
+	struct _snd_pcm {
+	char *name;
+	snd_pcm_type_t type;
+	int stream;
+	int mode;
+	int poll_fd;
+	int setup;
+	unsigned int access;		/* access mode */
+	unsigned int format;		/* SND_PCM_FORMAT_* */
+	unsigned int subformat;		/* subformat */
+	unsigned int rate;		/* rate in Hz */
+	unsigned int channels;		/* channels */
+	size_t fragment_size;		/* fragment size */
+	unsigned int fragments;		/* fragments */
+	unsigned int start_mode;	/* start mode */
+	unsigned int ready_mode;	/* ready detection mode */
+	unsigned int xrun_mode;		/* xrun detection mode */
+	size_t avail_min;		/* min avail frames for wakeup */
+	size_t xfer_min;		/* xfer min size */
+	size_t xfer_align;		/* xfer size need to be a multiple */
+	unsigned int time: 1;		/* timestamp switch */
+	size_t boundary;		/* pointers wrap point */
+	unsigned int info;		/* Info for returned setup */
+	unsigned int msbits;		/* used most significant bits */
+	unsigned int rate_master;	/* Exact rate is rate_master / */
+	unsigned int rate_divisor;	/* rate_divisor */
+	size_t fifo_size;		/* chip FIFO size in frames */
+	size_t buffer_size;
+	size_t bits_per_sample;
+	size_t bits_per_frame;
+	size_t *appl_ptr;
+	volatile size_t *hw_ptr;
+	int mmap_rw;
+	snd_pcm_channel_info_t *mmap_channels;
+	snd_pcm_channel_area_t *running_areas;
+	snd_pcm_channel_area_t *stopped_areas;
+	void *stopped;
+	snd_pcm_ops_t *ops;
+	snd_pcm_fast_ops_t *fast_ops;
+	snd_pcm_t *op_arg;
+	snd_pcm_t *fast_op_arg;
+	void *private;
+};
+終於找到
+
+find . -name "*.c" -print0 | xargs -0 -I % sh -c 'echo %; cat %' | grep -e "\./" -e ""
+
+
+
+po的ffd是4 對象是pcmC0D0p
+
+4/23
+	目前卡再 pcm: snd_pcm_wait_nocheck的poll
+	
+	blocking io https://www.oreilly.com/library/view/linux-device-drivers/0596000081/ch05s02.html
+	https://stackoverflow.com/questions/53351944/how-does-the-scheduler-know-that-a-thread-is-blocked-waiting-for-input
+	
+	
+	
+	/sys/devices/platform/soc/soc:audio/bcm2835_alsa/sound/card0/
+	
+	可能再 snd_pcm_playback_poll pcm_native.c
+	
+	是snd_pcm_do_drain_init直接把runtime->status->state改draining
+	
+	是snd_pcm_action_single叫這個功能
+	就算是可以播的狀況，snd_pcm_do_drain_init還是會發生
+	
+	hw_ready的控制是在gpu裡處理的，處理完後GPU匯回傳VC_AUDIO_MSG_TYPE_COMPLETE，就可以拿出收回的buffer，把他減回hw_ready裡
+	
+	
+	TLC59116 1mhz_i2c 97khz with 256 step 
+PCA9745 spi       31.25khz with 256 step
+pca9634 1mhz_i2c 97khz with 256 step
+
+ltc6992
+
+4/25
+	改channels也沒用
+	
+	wait queue 延遲600us，hrtimer經準度2ms 還是會依直閃
+	
+	16排，ㄧ排90us的亮度ok
+	
+	
+5/2
+	openal 安裝
+	apt-get install m4 libalut-dev
+	
+	apt-get remove alsa-utils
+	apt-get install alsa-utils
+	
+5/6
+	core_cm0.h在C:\Users\TsaiJiaYu\AppData\Local\Arm\Packs\ARM\CMSIS\5.5.1\CMSIS\Core\Include
+	加到include path
+	https://blog.csdn.net/Richard4234/article/details/79892357
+	
+	gcc latency.c -o latency -lsoundio -I../src/ -I../build -lm
+	
+	找bass
+	
+5/7
+	gcc test1.c -o test1 -lbass
+	
+	
+	Also you can use the LD_LIBRARY_PATH environment variable to tell the linker where to look for this library as well.
+
+I like to leave /usr/lib alone for libraries controlled by a package. 
+My own compiled libraries will go in /usr/local/lib. 
+But if I want to bundle everything up in, say, /opt/myapp, 
+I'll make a wrapper script that sets the LD_LIBRARY_PATH and then keep my library with my executable. 
+This is what many programs like firefox, libreoffice, and virtualbox do.
+
+	
+	nm -D -C -g 列出so裡面的函試
+	http://www.alsprogrammingresource.com/sound_tutorial.html
+	
+	
+	g++ sound.cpp -o sound.o -lbass
+	g++ -c vector.cpp
+	
+	sound.o vector.o testmain.cpp -o testmain -lbass
+	
+	https://gist.github.com/dlivingstone/1333413
+	
+5/13
+	MCU PWM的code在PWM_try裡，是用反像的接PWM，duty越大亮度越小，0~3ch是PWMA，4~7ch是PWMB
+	不知道為什麼 還是會閃
+	
+5/16
+	game host: 裡面擺了很多thread去跑整個遊戲
+	
+	thread擺哪：
+	Program.main -> host = Host.GetSuitableHost(@"osu", true)
+	host.Run(new OsuGameDesktop(args)) -> GameHost.Run -> GameHost.bootstrapSceneGraph -> Game.SetHost(this)
+	
+	遊戲畫面從哪開始：
+	OsuGame.LoadComplete -> screenStack = new Loader() -> LoadComponentAsync(new Intro(), d => Push(d)); -> 
+	OsuGame.LoadComplete -> intro?.ChildScreen?.MakeCurrent(); -> Intro.OnEntering -> LoadComponentAsync(mainMenu = new MainMenu()) -> preloadSongSelect
+	
+	PlaySongSelect.preloadSongSelect ->  new PlayerLoader -> 載遊戲
+	mainMenu附則把聲音和背景弄出來
+	
+	-----------
+	(拿wifi位置)
+	"/sbin/ifconfig | /usr/bin/awk '/HWaddr/ {printf $5}' > %s" 
+	
+	刪掉
+	killall brcm_patchram_plus
+	killall bluetoothd
+	
+	建立連線
+	"/usr/sbin/brcm_patchram_plus  --enable_hci --baudrate 1500000 --use_baudrate_for_download --patchram /lib/firmware/broadcom/ap6212a/BCM43438A1.hcd --no2bytes --enable_lpm /dev/ttyS1 --bd_addr `/bin/cat /tmp/bluetooth/bt_mac.txt`"
+	
+	看藍芽有沒有建起來
+	cat /sys/class/bluetooth/hci0/address
+	
+	看有沒有獨到藍芽資訊
+	/usr/bin/hciconfig -a
+	
+	建立rfcomm
+	/sbin/modprobe rfcomm
+	
+	打開藍芽
+	hciconfig hci0 up
+	
+	開廣播
+	hciconfig hci0 leadv
+	
+	開一個thread不停丟bluez通知，當heart beat
+	pthread_create -> bt_gatt_server_send_notification
+	
+	開一個listen的thread
+	pthread_create -> init_listeningTask
+{
+	會拿到一個socket
+	device_handle = hci_open_dev(0)
+	
+	建立藍芽設定
+	le_set_advertising_parameters_cp adv_params_cp;
+	
+	建立藍芽request
+	struct hci_request rq;
+	
+	資料送出去
+	hci_send_req(device_handle, &rq, 1000);
+	
+	建立藍芽enable指令
+	le_set_advertise_enable_cp advertise_cp;
+	
+	把Request放入指令
+	rq.cparam = &advertise_cp;
+	
+	把enable丟出去
+	hci_send_req(device_handle, &rq, 1000);
+	
+	建立scan response指令，並把自定的uuid放入data_cp.data裡(uuid是指整個furbo的服務id，只有一個)
+	le_set_scan_response_data_cp data_cp;
+	
+	把指令放進request裡
+	rq.cparam = &data_cp;
+	
+	把data丟出去
+	hci_send_req(device_handle, &rq, 1000)
+	
+	設定廣播資料，把mac address擺進去、tx power、vendor specific設定、裝置名稱
+	le_set_advertising_data_cp adv_data_cp;
+	
+	放入request中
+	rq.cparam = &adv_data_cp;
+	
+	把資料丟出去
+	hci_send_req(device_handle, &rq, 1000);
+	
+	設裝置名稱成name和mac
+	"/usr/bin/hciconfig hci name '%s %s'"
+	
+	打開socket收資料
+	g_sockfd = socket(AF_BLUETOOTH, SOCK_SEQPACKET,BTPROTO_L2CAP)
+	
+	把loc_addr設定藍芽種類，擺入socket中
+	bind(g_sockfd,(struct sockaddr *)&loc_addr,sizeof(loc_addr))
+	
+	設定資安
+	setsockopt(g_sockfd, SOL_BLUETOOTH, BT_SECURITY, &btsec, sizeof(btsec))
+	
+	等待藍芽回傳
+	listen(g_sockfd,10)
+	
+	設定要等待的動作read和write
+	 FD_SET(g_sockfd,&readfd); FD_SET(g_sockfd,&writefd);
+	
+	開始等待藍芽裝置
+	select(max_fd + 1, &readfd, &writefd, NULL, &wait_time);
+	
+	檢查是否可讀取
+	 FD_ISSET(g_sockfd,&readfd)
+	 
+	接下這個socket
+	accept(g_sockfd,(struct sockaddr *)&rem_addr,&sin_size ))
+	
+	打開廳續習的loop
+	mainloop_init();
+	
+	跑聽訊息的loop
+	mainloop_run();
+}
+	
+	把server加入socket fd、queue
+	server = new0(struct server, 1);
+	server->gatt = bt_gatt_server_new(server->db, att, mtu);
+	
+	populate gap和gatt(把Callback放進去)
+	populate_gap_service
+	populate_gatt_service
+	populate_furbo_service
+	
+	跑loop(比btgatt_server.c少做一次mainloop_add_fd)
+	mainloop_run();
+	
+	離開
+	server_destroy
+	
+5/19
+	gatt
+	https://learn.adafruit.com/introduction-to-bluetooth-low-energy?view=all
+	https://yq.aliyun.com/articles/312023
+	
+5/20
+	http://dev.ti.com/tirex/content/simplelink_cc2640r2_sdk_1_40_00_45/docs/blestack/ble_user_guide/html/ble-stack-3.x/gatt.html
+	
+	安裝bluz
+	https://www.e-learn.cn/content/wangluowenzhang/1510657
+	
+	打開btgatt-server
+	
+	sudo tools/btmgmt -i hci0 power off
+sudo tools/btmgmt -i hci0 le on
+sudo tools/btmgmt -i hci0 connectable on
+sudo tools/btmgmt -i hci0 name "some friendly name"
+sudo tools/btmgmt -i hci0 advertising on
+sudo tools/btmgmt -i hci0 power on
+tools/btgatt-server -i hci0 -s low -t public -r -v
+
+	
+	attr handle: 0x0001, end grp handle: 0x0006 uuid: 00001800-0000-1000-8000-00805f9b34fb //generic access
+	attr handle: 0x0007, end grp handle: 0x000a uuid: 00001801-0000-1000-8000-00805f9b34fb //generic attribute
+	attr handle: 0x000b, end grp handle: 0x0012 uuid: 0000180d-0000-1000-8000-00805f9b34fb //heart rate
+	
+	handle: 0x0002, char properties: 0x02, char value handle: 0x0003, uuid: 00002a00-0000-1000-8000-00805f9b34fb //Device Name
+	handle: 0x0005, char properties: 0x02, char value handle: 0x0006, uuid: 00002a01-0000-1000-8000-00805f9b34fb //Appearance
+	handle: 0x0008, char properties: 0x22, char value handle: 0x0009, uuid: 00002a05-0000-1000-8000-00805f9b34fb //Service Changed
+	handle: 0x000c, char properties: 0x10, char value handle: 0x000d, uuid: 00002a37-0000-1000-8000-00805f9b34fb //heart rate measurement
+	handle: 0x000f, char properties: 0x02, char value handle: 0x0010, uuid: 00002a38-0000-1000-8000-00805f9b34fb //body sensor location
+	handle: 0x0011, char properties: 0x08, char value handle: 0x0012, uuid: 00002a39-0000-1000-8000-00805f9b34fb //heart rate control point
+	
+	>>char-desc
+	handle: 0x0001, uuid: 00002800-0000-1000-8000-00805f9b34fb
+	handle: 0x0002, uuid: 00002803-0000-1000-8000-00805f9b34fb
+	handle: 0x0003, uuid: 00002a00-0000-1000-8000-00805f9b34fb
+	handle: 0x0004, uuid: 00002900-0000-1000-8000-00805f9b34fb
+	handle: 0x0005, uuid: 00002803-0000-1000-8000-00805f9b34fb
+	handle: 0x0006, uuid: 00002a01-0000-1000-8000-00805f9b34fb
+	handle: 0x0007, uuid: 00002800-0000-1000-8000-00805f9b34fb
+	handle: 0x0008, uuid: 00002803-0000-1000-8000-00805f9b34fb
+	handle: 0x0009, uuid: 00002a05-0000-1000-8000-00805f9b34fb
+	handle: 0x000a, uuid: 00002902-0000-1000-8000-00805f9b34fb
+	handle: 0x000b, uuid: 00002800-0000-1000-8000-00805f9b34fb
+	handle: 0x000c, uuid: 00002803-0000-1000-8000-00805f9b34fb
+	handle: 0x000d, uuid: 00002a37-0000-1000-8000-00805f9b34fb
+	handle: 0x000e, uuid: 00002902-0000-1000-8000-00805f9b34fb //這個控制heart rate
+	handle: 0x000f, uuid: 00002803-0000-1000-8000-00805f9b34fb
+	handle: 0x0010, uuid: 00002a38-0000-1000-8000-00805f9b34fb
+	handle: 0x0011, uuid: 00002803-0000-1000-8000-00805f9b34fb
+	handle: 0x0012, uuid: 00002a39-0000-1000-8000-00805f9b34fb
+	
+	>>char-write-req 0x0e 0x0100
+	
+	
+	http://lihgong.blogspot.com/2014/10/blog-post.html
+	
+	在populate_hr_service裡面的add characteristic其中一個是write callback，當寫入發生後會定時執行
+	bt_gatt_server_send_notification，把心跳資料送出去。
+	
+	
+	obex
+	http://sgerwk.altervista.org/bluetooth/linux.html
+	
+	sdp
+	https://stackoverflow.com/questions/53069598/bluez-adding-services-attributes-and-profiles-without-sdptool-command
+	
+5/21
+	bind sdp to channel
+	http://blog.float.tw/2013/01/linux-connect-bluetooth-device-with-spp.html
+	
+	pi0w uart用法
+	
+	enable_uart=1
+	dtoverlay=pi3-disable-bt
+	sudo systemctl disable hciuart
+	core_freq=250
+	(部要改cmdline.txt)
+	
+	
+5/25
+	https://blog.csdn.net/onetwothreef/article/details/49835971
+	
+	https://github.com/nagimov/adxl345spi
+	gcc -Wall -pthread -o adxl345spi adxl345spi.c -lpigpio -lrt
+	
+6/3 
+	看起來燈光板只要一點點電流就會很亮
+	一顆亮，其他顆會被影響到，一起亮
+
+	打開bluetooth scan方法：
+	ctl = socket(AF_BLUETOOTH, SOCK_RAW, BTPROTO_HCI)
+	cmd_scan(ctl, di.dev_id, *argv)
+	
+	dr.dev_opt = SCAN_PAGE | SCAN_INQUIRY;
+	ioctl(ctl, HCISETSCAN, (unsigned long) &dr)
+	
+	https://www.cnblogs.com/chenbin7/archive/2012/10/16/2726515.html
+	
+	ew7811un要加上8192cu.conf 材不匯段電 再modprobe.d裡
+	# Disable power management
+	options 8192cu rtw_power_mgnt=0 rtw_enusbss=0
+
+	
+6/4
+	藍芽傳檔
+	http://www.postuni.si/postuni/clanki/articles/serialports/serialports.htm
+	
+	藍芽較材
+	http://people.csail.mit.edu/rudolph/Teaching/Articles/BTBook.pdf
+	
+6/5
+	usb藍芽開啟
+	
+6/11
+	重寫framework，
+	elapse改update，經過的時間記在block裡面。
+	用input manager當root，每次更新時把所有輸入送給所有子物件
+	再main interface收集所有輸入，類似openTK window，由input handler去抓這些輸入，然後回傳給input manager
+	
+	update是用root去抓所有子物件，呼叫他們的update
+	
+	要把hierachal那些移到framework/allocation裡
+	
+	程式應該設計為三個部分：1. 藍芽更新程式 2. 鋼琴程式 3. 遊戲程式
+	
+	input state主要是用來delegate給註冊的handle函式
+	
+	只用game thread 其他thread部件新class
+	
+	
+	drawable只要加入，就會去抓parent的clock
+	
+	但是整個root用的clock不是thread裡的Clock，是bootstrapSceneGraph()時設定的SceneGraphClock，SceneGraphClock就是update thread的clock
+	所以root的clock是要手動設定的
+	
+	drawthread應該用部到clock
+	
+	thread sleep會花54000ns，在game thread的run work的結尾睡。
+	
+	因為input是由遊戲主動抓，所以還是要用inputthread
+	
+	
+	暫停應該是讓遊戲暫停，但不影響鋼琴音
+	暫停時會把播訪的音樂的clock暫停
+	
+	為什麼player的clock能夠與外面的clock連杰？還是不行？
+	
+	player應該是用offset clock，擺一個child，把child的clock換成offset clock，然後把ruleset container擺到這個child的child
+	
+	osu本身沒有暫停鍵，暫停就要縮小視窗，所以沒有人會去控制pause container，而是pause container自己去詢問host是否active，如果
+	視窗縮小才會pause
+	
+	控制的方法應該是 再playfield load的時候，把Event processor的algorithm add child，讓這個algorithm有pause container的資料
+	然後在playfield add event processor的時候，再把algorithm擺入這些processor裡。
+	
+	不知道即時的event要怎麼add進playfield裡？
+	
+6/13
+	藍芽目前只要做到可以互連就好，不用下載檔案或升級成是
+	
+	遊戲一開始是先把intro去load game，再到main menu，按下solo後會到songselect
+	
+	目前我的寫法是在session裡面擺選好的遊戲規則和歌曲
+	
+	要看一下選擇時song select怎麼抓到歌曲和規則
+	
+	
+	遊戲規則是在player load的時候去抓game的Beatmap，然後把Beatmap的規則拿出來
+	
+	beatmap的修改是在song select的carouselSelectionChanged裡面，
+	
+	
+6/14
+	選擇歌曲時，會再xong select的carouselSelectionChanged裡面把整個osu screen內的Beatmap給換成選擇的那個beat map(在performLoad裡)
+	然後會再UpdateBeatmap裡面把目前PlaySongSelect裡的modSelect綁上這一個beatmap。
+	
+	最後遊戲要開始時，再把mod檢查一次，檢查完就開始遊戲，推入player
+	
+	
+	應該要建bindable和action list，resource store也要開始寫
+	(mod應該是一個beatmap檔都支援，同一個beatmap檔可以選擇很多種mod)
+	
+	resource store會把路靜下所有檔案，根據抓的附檔名，做成一個list
+	當需要一個檔案的時候，可以用get來把這個檔案的內容抓出來
+	
+	
+	寫trigger中
+	
+	
+6/24
+	https://stackoverflow.com/questions/18380820/how-to-combine-stdbind-variadic-templates-and-perfect-forwarding
+	把變動參數加入bind
+	
+	抓到function的argument數量
+	https://stackoverflow.com/questions/9044866/how-to-get-the-number-of-arguments-of-stdfunction
+	
+	action list 寫完了，就照functional test的寫法
+	呼叫的時候必須先bind好，然後把名字打進去
+	
+	bindable好了，resource store好了
+	
+	把intro -> songselect -> player loader都建好，繼承scene
+	
+	Scene應該擺在Framework裡
+	
+	把clock大概見好
+	
+6/25
+	
+	input manager裡面會有update不停更新狀態，裡面用handle new state -> updateKeyboardEvents -> handleKeyDown -> PropagateKeyDown
+	
+	放著案件資料的式 update裡面的pendingStates，由GetPendingStates獲得，用createDistinctInputStates整理，
+	
+	GetPendingStates去向所有input manager裡面的InputHandlers抓他們的資料，h.GetPendingStates();
+	
+	input handler是來自host的AvailableInputHandlers，這些handler是在遊戲開始前，在run或是setup config時把openTK的handler擺進去
+	
+	在handler裡面，會先把host.Window.KeyDown += handleState;，註冊好以後，根據handle state的做法，來抓取資料
+	
+	所以按下的來源不是來自主程式，而是來自window。
+	
+	window是怎麼呼叫key事件呢？ polling還是中斷？應該是在另一個thread做polling
+	
+	應該是向input thread拿資料，但是thread是每個frame結束後就不儲存任何資料，input thread只能再拿到資料的時候發通知給其他人
+	
+	簡單做法是用message queue，input thread把案件丟進去，input hanler在get state的時候再讀出來
+	
+	但是osu是每當案件進來，就值接呼叫input handler把案件收進去。最後get state時再把案件從pending state裡拿出來
+	
+	問題是input thread要怎麼呼叫handler？
+	
+	說不定input thread本來就有全線去叫handler的handle來處理，就可以把資料塞到pending state
+	
+	
+	再drawable的load裡，有把clock給從cache抓出來擺進去
+	再drawable的set parent裡，有把parent的clock丟進去
+	
+	再player加入pause container時，會把他的child的clock換成pause container用的framed clock，讓pause container可以控制下面的時間
+	最後把ruleset conatiner設成這個child的child
+	
+	
+	把updatable改好了
+	
+	讀取輸入的做法是，在host裡面嘉一個onInput，如果有新輸入在input thread抓到，就直接叫on input，把輸入全都丟出去
+	
+	
+6/26
+	
+	input manager會在每次handle new state時，用updateInputQueues把所有的child都擺入input queue裡
+	
+	因為是從parent掃到child，所以最後要把queue反過來，就會變成從child到parent
+	
+	在handle new state時，呼叫propagate key down，只會叫最底端的child，並對這個child做trigger key down
+	
+	drawable被trigger key down以後，就會呼叫on key down的所有工作
+	
+	有個問題是，這條tree只能單條，多條的話就會抓不到最下層的child
+	
+	另外，如果要讓鋼琴永遠都按下去會有聲音，就要寫一個queue獨立於input queue，專門給鋼琴用
+	
+	
+	發現有個scheduler，是再每個container裡面都有，會在update sub tree的時候，去執行udate檢查有沒有排定事項要執行
+	
+	
+	InterpolatingFramedClock是用stopwatch clock當源來做的
+	stopwatch clock是把系統的stopwatch拿來用，stopwatch是從Start開始計時的碼表，經過的時間擺在ElapsedTicks裡面，這個經過的時間會在乘上一個rate
+	表示時間經過的速度，最後才是整個current time。stopwatch clock的計時是從new的時候就開始計時
+	如果framed clock把stopwatch clock當源的話，就會用stopwatch的時間當時間
+	InterpolatingFramedClock是不用他的源來看時間，另外拿一個stopwatch來看時間，要抓時間的時候就從stopwatch去抓經過多久，再擺進來。功能是稍微減少frame和現在時間的時間差
+	
+	seek是重要的功能，可以把剛開始計時的Stopwatch直接設成現在時間
+	DecoupleableInterpolatingFramedClock是再他的source停了以後，還可以繼續跑的clock，可能是為了如果音樂是他的source，音樂播完以後遊戲就會停掉，所以要繼續跑
+	音樂的clock會在pause container裡面被停掉，但是這樣的話DecoupleableInterpolatingFramedClock就會繼續跑，這樣不隊
+	
+	DecoupleableInterpolatingFramedClock檢查source有沒有停，是看Source的is running，當音樂停止的時候，track會把is rinning改成false
+	DecoupleableInterpolatingFramedClock就會發現，然後去跑另一個decoupled clock
+	
+	看起來是pause container再pause時，會把FramedOffsetClock的process source clock關掉，所以他的source:"DecoupleableInterpolatingFramedClock"就不會跑
+	所以FramedOffsetClock再跑的時候，拿到的時間都是已經停住的時間，child們也就都拿不到新的時間。
+	

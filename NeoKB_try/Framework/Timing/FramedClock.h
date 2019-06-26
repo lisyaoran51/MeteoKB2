@@ -15,17 +15,27 @@ namespace Timing {
 
 	public:
 
-		double LastFrameTime;
+		FramedClock(Clock* s = NULL);
 
-		double SourceTime;
+		Clock* GetSource();
 
-		bool ProcessSourceClockFrames;
+		double GetCurrentTime();
 
 		int ProcessFrame();
 
-	private:
+	protected:
 
 		Clock* source;
+
+
+	private:
+
+
+		double lastFrameTime;
+
+		double sourceTime;
+
+		bool processSourceClockFrames;
 
 		double timeUntilNextCalculation;
 		double timeSinceLastCalculation;

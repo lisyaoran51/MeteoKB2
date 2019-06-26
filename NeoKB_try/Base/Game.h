@@ -33,6 +33,11 @@ namespace Base {
 
 		Updater* updater;
 
+		/// <summary>
+		/// 這些handler是在遊戲開始前，在run或是setup config時把openTK的handler擺進去
+		/// </summary>
+		vector<InputHandler*> availableInputHandlers;
+
 	public:
 
 		Game();

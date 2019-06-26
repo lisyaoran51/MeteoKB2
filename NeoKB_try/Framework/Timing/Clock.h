@@ -8,25 +8,24 @@ namespace Timing {
 
 	class Clock {
 
-	public:
-
 		/// <summary>
 		/// The current time of this clock, in milliseconds.
 		/// </summary>
-		double CurrentTime;
-
-		
+		double currentTime;
 
 		/// <summary>
 		/// The rate this clock is running at, relative to real-time.
 		/// </summary>
-		double Rate;
-
+		double rate;
 
 		/// <summary>
 		/// Whether this clock is currently running or not.
 		/// </summary>
-		bool IsRunning;
+		bool isRunning;
+
+	public:
+
+		double GetCurrentTime();
 
 	};
 

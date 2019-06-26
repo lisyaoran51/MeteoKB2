@@ -36,8 +36,8 @@ using namespace std;
  */
 
 
-
-namespace Util {
+namespace Framework {
+namespace Allocation {
 namespace Hierachal{
 
 	enum class LoadState;
@@ -179,7 +179,7 @@ namespace Hierachal{
 
 
 
-}}
+}}}
 
 
 

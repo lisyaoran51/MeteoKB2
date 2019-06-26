@@ -21,6 +21,9 @@ namespace Input {
 
 		GameHost Host;
 
+		/// <summary>
+		/// 如果有state，會先update input queue，然後再找最底端的child來trigger
+		/// </summary>
 		int HandleNewState(InputState* state);
 
 		vector<InputState*>* GetPendingState();
@@ -35,9 +38,14 @@ namespace Input {
 		int Update();
 
 
+
 		vector<InputState*>* createDistinctInputStates(vector<InputState*>* states);
 
 		virtual int TransformState(InputState* inputState);
+		
+		vector<Triggerable*> gameInputQueue;
+
+		vector<Triggerable*> pianoInputQueue;
 
 		int updateInputQueue(InputState* inputState);
 
@@ -47,7 +55,11 @@ namespace Input {
 
 		int handleKeyDown(InputState* state, Key key);
 
+		int propagateKeyDown(InputState* state, Key key);
+
 		int handleKeyUp(InputState* state, Key key);
+
+		int propagateKeyUp(InputState* state, Key key);
 
 	};
 

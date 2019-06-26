@@ -61,6 +61,12 @@
     <ClCompile Include="Devices\LedDriver\pwm.c" />
     <ClCompile Include="Devices\LedDriver\rpihw.c" />
     <ClCompile Include="Devices\LedDriver\ws2811.c" />
+    <ClCompile Include="Framework\Allocation\Hierachal\Cachable.cpp" />
+    <ClCompile Include="Framework\Allocation\Hierachal\ChildAddable.cpp" />
+    <ClCompile Include="Framework\Allocation\Hierachal\HasParent.cpp" />
+    <ClCompile Include="Framework\Allocation\Hierachal\Loadable.cpp" />
+    <ClCompile Include="Framework\Allocation\Hierachal\LoadStateHandler.cpp" />
+    <ClCompile Include="Framework\Allocation\Hierachal\MtoObject.cpp" />
     <ClCompile Include="Framework\Host\GameHost.cpp" />
     <ClCompile Include="Program.cpp" />
     <ClCompile Include="RulesetMeteor\Config\MeteorConfigManager.cpp" />
@@ -85,15 +91,8 @@
     <ClCompile Include="RulesetMeteor\Sheetmusic\Pattern\MeteorPatternGenerator.cpp" />
     <ClCompile Include="Util\DataStructure\Action.cpp" />
     <ClCompile Include="Util\FileSystem.c" />
-    <ClCompile Include="Util\Hierachal\Cachable.cpp" />
-    <ClCompile Include="Util\Hierachal\ChildAddable.cpp" />
-    <ClCompile Include="Util\Hierachal\HasParent.cpp" />
-    <ClCompile Include="Util\Hierachal\Loadable.cpp" />
-    <ClCompile Include="Util\Hierachal\LoadStateHandler.cpp" />
     <ClCompile Include="Util\MtoObject.cpp" />
     <ClCompile Include="Util\ProgramInitializer.cpp" />
-    <ClCompile Include="Util\Update\Updatable.cpp" />
-    <ClCompile Include="Util\Update\Updater.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="DailyLog.txt" />
@@ -161,12 +160,20 @@
     <ClInclude Include="Devices\LedDriver\pwm.h" />
     <ClInclude Include="Devices\LedDriver\rpihw.h" />
     <ClInclude Include="Devices\LedDriver\ws2811.h" />
+    <ClInclude Include="Framework\Allocation\Hierachal\Cachable.h" />
+    <ClInclude Include="Framework\Allocation\Hierachal\ChildAddable.h" />
+    <ClInclude Include="Framework\Allocation\Hierachal\HasParent.h" />
+    <ClInclude Include="Framework\Allocation\Hierachal\Loadable.h" />
+    <ClInclude Include="Framework\Allocation\Hierachal\MtoObject.h" />
+    <ClInclude Include="Framework\Allocation\Hierachal\Triggerable.h" />
+    <ClInclude Include="Framework\Allocation\Hierachal\Updatable.h" />
     <ClInclude Include="Framework\Audio\AdjustableAudioComponent.h" />
     <ClInclude Include="Framework\Audio\AudioCollectionManager.h" />
     <ClInclude Include="Framework\Audio\AudioComponent.h" />
     <ClInclude Include="Framework\Audio\AudioManager.h" />
     <ClInclude Include="Framework\Host\GameHost.h" />
     <ClInclude Include="Framework\Input\Handler\InputHandler.h" />
+    <ClInclude Include="Framework\Input\InputEvent.h" />
     <ClInclude Include="Framework\Input\InputManager.h" />
     <ClInclude Include="Framework\Input\InputState.h" />
     <ClInclude Include="Framework\IO\Stores\NamespacedResourceStore.h" />
@@ -174,9 +181,13 @@
     <ClInclude Include="Framework\Threading\GameThread.h" />
     <ClInclude Include="Framework\Timing\AdjustableClock.h" />
     <ClInclude Include="Framework\Timing\Clock.h" />
+    <ClInclude Include="Framework\Timing\DecoupledInterpolatingFramedClock.h" />
     <ClInclude Include="Framework\Timing\FrameBasedClock.h" />
     <ClInclude Include="Framework\Timing\FramedClock.h" />
     <ClInclude Include="Framework\Timing\FrameTimeInfo.h" />
+    <ClInclude Include="Framework\Timing\InterpolatingFramedClock.h" />
+    <ClInclude Include="Framework\Timing\OffsetFramedClock.h" />
+    <ClInclude Include="Framework\Timing\StopwatchClock.h" />
     <ClInclude Include="Program.h" />
     <ClInclude Include="RulesetMeteor\Config\MeteorConfigManager.h" />
     <ClInclude Include="RulesetMeteor\MeteorGame.h" />
@@ -201,19 +212,12 @@
     <ClInclude Include="Util\DataStructure\Action.h" />
     <ClInclude Include="Util\DataStructure\Bindable.h" />
     <ClInclude Include="Util\FileSystem.h" />
-    <ClInclude Include="Util\Hierachal\Cachable.h" />
-    <ClInclude Include="Util\Hierachal\ChildAddable.h" />
-    <ClInclude Include="Util\Hierachal\HasParent.h" />
-    <ClInclude Include="Util\Hierachal\Loadable.h" />
     <ClInclude Include="Util\InstanceCreator.h" />
     <ClInclude Include="Util\Log.h" />
-    <ClInclude Include="Util\MtoObject.h" />
     <ClInclude Include="Util\MtoType.h" />
     <ClInclude Include="Util\ProgramInitializer.h" />
     <ClInclude Include="Util\Singleton.h" />
     <ClInclude Include="Util\TemplateConstraint.h" />
-    <ClInclude Include="Util\Update\Updatable.h" />
-    <ClInclude Include="Util\Update\Updater.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

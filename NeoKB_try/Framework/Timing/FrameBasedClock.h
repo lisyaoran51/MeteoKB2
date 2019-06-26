@@ -14,8 +14,8 @@ namespace Timing {
 	/// </summary>
 	class FrameBasedClock : public Clock {
 
-	public:
 
+	protected:
 		/// <summary>
 		/// Elapsed time since last frame in milliseconds.
 		/// </summary>
@@ -25,6 +25,18 @@ namespace Timing {
 		double FramesPerSecond;
 
 		FrameTimeInfo* TimeInfo;
+
+	public:
+
+		double GetCurrentTime();
+
+		double GetElapsedFrameTime();
+
+		double GetAverageFrameTime();
+
+		double GetFramesPerSecond();
+
+		FrameTimeInfo* GetFrameTimeInfo();
 
 		/// <summary>
 		/// Processes one frame. Generally should be run once per update loop.
