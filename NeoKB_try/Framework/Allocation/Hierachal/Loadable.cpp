@@ -1,8 +1,8 @@
 #include "Loadable.h"
 
-#include "../Log.h"
+#include "../../../Util/MtoType.h"
 
-using namespace Util::Hierachal;
+using namespace Framework::Allocation::Hierachal;
 using namespace std;
 using namespace Util;
 

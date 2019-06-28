@@ -4,6 +4,7 @@
 #include "FrameBasedClock.h"
 #include "FrameTimeInfo.h"
 #include "FramedClock.h"
+#include "OffsetClock.h"
 
 namespace Framework {
 namespace Timing {
@@ -11,14 +12,18 @@ namespace Timing {
 	/// <summary>
 	/// 多家一個字定的offset
 	/// </summary>
-	class OffsetFramedClock : public FramedClock {
+	class OffsetFramedClock : virtual public FramedClock, virtual public OffsetClock {
 
 	public:
 
+		OffsetFramedClock(Clock* s);
+
+		virtual double GetCurrentTime();
+
+		int SetOffset(double o);
+		double GetOffset();
+
 	protected:
-
-		Clock* source;
-
 
 	private:
 

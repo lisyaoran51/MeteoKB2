@@ -2,11 +2,11 @@
 #define SCENE_H
 
 
-#include "../../Util/Hierachal/ChildAddable.h"
+#include "../../Framework/Allocation/Hierachal/Triggerable.h"
 
 
 
-using namespace Util::Hierachal;
+using namespace Framework::Allocation::Hierachal;
 
 
 
@@ -14,7 +14,7 @@ namespace Base {
 namespace Scene {
 
 
-	class Scene : public ChildAddable {
+	class Scene : public Triggerable {
 
 	public:
 

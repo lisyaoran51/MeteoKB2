@@ -4,6 +4,8 @@
 #include "FrameBasedClock.h"
 #include "FrameTimeInfo.h"
 #include "InterpolatingFramedClock.h"
+#include "AdjustableClock.h"
+#include "StopwatchClock.h"
 
 namespace Framework {
 namespace Timing {
@@ -15,34 +17,53 @@ namespace Timing {
 	///
 	/// This clock type removes the requirement of having a source set.
 	/// </summary>
-	class DecoupledInterpolatingFramedClock : public InterpolatingFramedClock {
+	class DecoupledInterpolatingFramedClock : public InterpolatingFramedClock, public AdjustableClock {
 
 	public:
 
-		DecoupledInterpolatingFramedClock(Clock* s = NULL);
+		DecoupledInterpolatingFramedClock();
 
-		double GetCurrentTime();
+		// Clock
+		virtual double GetCurrentTime();
+		virtual int SetRate(double r);
+		virtual double GetRate();
+		virtual bool GetIsRunning();
 
-		Clock* GetSource();
+		// FrameBasedClock
+		virtual int ChangeSource(Clock* s);
+		virtual double GetElapsedFrameTime();
+		virtual int ProcessFrame();
 
-		int ProcessFrame();
+		// AdjustableClock
+		virtual int Reset();
+		virtual int Start();
+		virtual int Stop();
+		virtual bool Seek(double position);
+		virtual int ResetAdjustments();
 
-		int ChangeSource(Clock* s);
+
+		// this
+		int SetIsCoupled(bool value);
+		bool GetIsCoupled();
+
 
 	protected:
-
-		Clock* source;
 
 
 	private:
 
+		bool isCoupled;
+
+		AdjustableClock* adjustableSource;
 
 		/// <summary>
 		/// 要擺另一個clock，當source停住時就切換
 		/// </summary>
 		FramedClock* decoupledClock;
 
-		
+		StopwatchClock* decoupledStopwatchClock;
+
+		bool getIsUseDecoupledClock();
 
 	};
 

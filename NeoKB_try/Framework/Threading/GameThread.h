@@ -21,6 +21,8 @@ namespace Threading {
 
 		int Start();
 
+		ThrottledFrameClock* GetClock();
+
 	protected:
 
 

@@ -12,36 +12,35 @@ namespace Timing {
 	/// A clock which will only update its current time when a frame proces is triggered.
 	/// Useful for keeping a consistent time state across an individual update.
 	/// </summary>
-	class FrameBasedClock : public Clock {
+	class FrameBasedClock : virtual public Clock {
+
 
 
 	protected:
-		/// <summary>
-		/// Elapsed time since last frame in milliseconds.
-		/// </summary>
-		double ElapsedFrameTime;
 
-		double AverageFrameTime;
-		double FramesPerSecond;
-
-		FrameTimeInfo* TimeInfo;
+		//double averageFrameTime;
+		//double framesPerSecond;
 
 	public:
 
-		double GetCurrentTime();
+		/// <summary>
+		/// Elapsed time since last frame in milliseconds.
+		/// </summary>
+		virtual double GetElapsedFrameTime() = 0;
 
-		double GetElapsedFrameTime();
+		virtual double GetAverageFrameTime() = 0;
 
-		double GetAverageFrameTime();
+		virtual double GetFramesPerSecond() = 0;
 
-		double GetFramesPerSecond();
-
-		FrameTimeInfo* GetFrameTimeInfo();
+		/// <summary>
+		/// new一個timeinfo給你，用完要記得回收
+		/// </summary>
+		virtual FrameTimeInfo* GetFrameTimeInfo() = 0;
 
 		/// <summary>
 		/// Processes one frame. Generally should be run once per update loop.
 		/// </summary>
-		int ProcessFrame();
+		virtual int ProcessFrame() = 0;
 
 
 		

@@ -2,10 +2,10 @@
 #define CACHABLE_H
 
 //#include"Loadable.h"
-#include<map>
-#include"HasParent.h"
+#include <map>
+#include "HasParent.h"
 #include <iostream>
-#include "../Log.h"
+#include "../../../Util/Log.h"
 
 using namespace std;
 using namespace Util;
@@ -18,7 +18,8 @@ using namespace Util;
 
 
 
-namespace Util {
+namespace Framework {
+namespace Allocation {
 namespace Hierachal{
 
 	//class Loadable;
@@ -48,7 +49,7 @@ namespace Hierachal{
 
 				HasParent* h = GetParent();
 				if (!h)
-					return NULL;
+					return nullptr;
 
 				Cachable* c = Cast<Cachable>(h);
 				//cout << "cast to cachable" << endl;
@@ -89,7 +90,7 @@ namespace Hierachal{
 
 	};
 
-}}
+}}}
 
 
 

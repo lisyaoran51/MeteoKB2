@@ -7,7 +7,8 @@
 #define MTO_FUNC_POINTER function<int(void)>
 #define MTO_INFINITE 99999
 
-
+#define RETURN_AVAILABLE 0
+#define DONE 0
 
 
 enum class Pitch {

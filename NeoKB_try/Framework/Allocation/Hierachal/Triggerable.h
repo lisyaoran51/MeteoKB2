@@ -4,9 +4,11 @@
 
 
 #include <vector>
+#include "Updatable.h"
+#include "../../Input/InputState.h"
 
 using namespace std;
-
+using namespace Framework::Input;
 
 namespace Framework {
 namespace Allocation {
@@ -17,17 +19,15 @@ namespace Hierachal {
 	/// </summary>
 	class Triggerable : public Updatable {
 
-		Clock* clock;
-
 	public:
 
-		int TriggerOnKeyDown(InputState* inputState);
+		Triggerable();
 
-		
+		virtual int TriggerOnKeyDown(InputState* inputState);
 
 	protected:
 
-		int onKeyDown(InputState* inputState);
+		virtual int onKeyDown(InputState* inputState);
 
 	};
 

@@ -8,24 +8,30 @@ namespace Timing {
 
 	class Clock {
 
+	protected:
+
 		/// <summary>
 		/// The current time of this clock, in milliseconds.
 		/// </summary>
-		double currentTime;
+		//double currentTime;
 
 		/// <summary>
 		/// The rate this clock is running at, relative to real-time.
 		/// </summary>
-		double rate;
+		//double rate;
 
 		/// <summary>
 		/// Whether this clock is currently running or not.
 		/// </summary>
-		bool isRunning;
+		//bool isRunning;
 
 	public:
 
-		double GetCurrentTime();
+		virtual double GetCurrentTime() = 0;
+		virtual int SetRate(double r) = 0;
+		virtual double GetRate() = 0;
+		virtual int SetIsRunning(bool value) = 0;
+		virtual bool GetIsRunning() = 0;
 
 	};
 

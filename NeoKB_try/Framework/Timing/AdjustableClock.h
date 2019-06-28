@@ -32,11 +32,6 @@ namespace Timing {
 		virtual bool Seek(double position) = 0;
 
 		/// <summary>
-		/// The rate this clock is running at, relative to real-time.
-		/// </summary>
-		double Rate;
-
-		/// <summary>
 		/// Reset the rate to a stable value.
 		/// </summary>
 		virtual int ResetSpeedAdjustments() = 0;

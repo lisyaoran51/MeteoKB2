@@ -16,7 +16,7 @@ using namespace std;
 ///	</summary>
 template<typename _Fty, typename ..._Types>
 template<class _Type>
-inline int Action<function<_Fty(_Types...)>>::Add(_Type * callableObject, function<_Fty(_Types...)> callback, string callbackName)
+int Action<_Fty, _Types...>::Add(_Type * callableObject, function<_Fty(_Types...)> callback, string callbackName)
 {
 	callbackMap[make_pair((uintptr_t)callableObject, callbackName)] = callback;
 	return 0;
@@ -24,7 +24,7 @@ inline int Action<function<_Fty(_Types...)>>::Add(_Type * callableObject, functi
 
 template<typename _Fty, typename ..._Types>
 template<class _Type>
-int Action<function<_Fty(_Types...)>>::Delete(_Type * callableObject, string callbackName)
+int Action<_Fty, _Types...>::Delete(_Type * callableObject, string callbackName)
 {
 	map<uintptr_t, string, function<T(Args...)>>::iterator iter;
 	iter = callbackMap.find(make_pair((uintptr_t)t, func_name));
@@ -33,11 +33,20 @@ int Action<function<_Fty(_Types...)>>::Delete(_Type * callableObject, string cal
 		return 0;
 	}
 	else {
-		// throw error
 		return -1;
 	}
 }
 
+template<typename _Fty, typename ..._Types>
+int Action<_Fty, _Types...>::Trigger(_Types ..._Args)
+{
+	map<pair<uintptr_t, string>, function<T(Args...)>>::iterator iter;
+	for (iter = callbackMap.begin(); iter != callbackMap.end(); iter++)
+		(*(iter->second))(_Args...);
+	return 0;
+}
+
+/*
 template<typename _Fty, typename ..._Types>
 int Action<function<_Fty(_Types...)>>::Trigger(_Types ..._Args)
 {
@@ -46,6 +55,4 @@ int Action<function<_Fty(_Types...)>>::Trigger(_Types ..._Args)
 		(*(iter->second))(_Args...);
 	return 0;
 }
-
-
-
+*/

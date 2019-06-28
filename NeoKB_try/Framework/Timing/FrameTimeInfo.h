@@ -6,7 +6,7 @@
 namespace Framework {
 namespace Timing {
 
-	class FrameTimeInfo {
+	struct FrameTimeInfo {
 
 	public:
 

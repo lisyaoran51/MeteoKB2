@@ -3,7 +3,7 @@
 
 
 
-using namespace Util::Hierachal;
+using namespace Framework::Allocation::Hierachal;
 
 
 Cachable::Cachable(): RegisterType("Cachable")
@@ -19,7 +19,7 @@ MtoObject* Cachable::getCache(string type)
 		MtoObject* c = cache[type];
 		return c;
 	}
-	return NULL;
+	return nullptr;
 }
 
 

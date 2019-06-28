@@ -2,7 +2,7 @@
 #define LOADABLE_H
 
 #include "Cachable.h"
-#include "../MtoType.h"
+#include "../../../Util/MtoType.h"
 #include<vector>
 #include<string>
 #include<functional>
@@ -73,7 +73,7 @@ namespace Hierachal{
 		/// <summary>
 		/// override HasParent的函式，在裡面加上handler
 		/// </summary>
-		int SetParent(HasParent* p);
+		virtual int SetParent(HasParent* p);
 
 	protected:
 

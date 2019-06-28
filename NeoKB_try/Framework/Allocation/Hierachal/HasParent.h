@@ -2,10 +2,9 @@
 #define HAS_PARENT_H
 
 
-#include "../MtoObject.h"
+#include "MtoObject.h"
 
 
-using namespace Util;
 
 
 
@@ -18,7 +17,7 @@ namespace Hierachal {
 	/// </summary>
 	class HasParent: virtual public MtoObject {
 
-		HasParent* parent = NULL;
+		HasParent* parent = nullptr;
 
 	public:
 
@@ -30,7 +29,7 @@ namespace Hierachal {
 
 		HasParent* GetParent();
 
-		int SetParent(HasParent* p);
+		virtual int SetParent(HasParent* p);
 
 	};
 

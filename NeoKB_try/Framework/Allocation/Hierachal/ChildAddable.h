@@ -1,15 +1,14 @@
 #ifndef CHILD_ADDABLE_H
 #define CHILD_ADDABLE_H
 
-#include"Loadable.h"
-#include<vector>
+#include "Loadable.h"
+#include <vector>
 
 using namespace std;
 
-
-
-namespace Util {
-namespace Hierachal {
+namespace Framework {
+namespace Allocation {
+namespace Hierachal{
 
 	/// <summary>
 	/// able to add to a parent object
@@ -20,6 +19,8 @@ namespace Hierachal {
 		/// this vector is applied every time you call add_child()
 		/// </summary>
 		vector<MTO_FUNC_POINTER> onAdd;
+
+		vector<ChildAddable*> childs;
 
 	public:
 
@@ -32,7 +33,12 @@ namespace Hierachal {
 		/// </summary>
 		int AddChild(ChildAddable* child);
 
+		int DeleteChild(ChildAddable* child);
+
 		int RegisterOnAdd(MTO_FUNC_POINTER func);
+
+		vector<ChildAddable*>* GetChilds();
+
 
 
 	};
@@ -40,8 +46,7 @@ namespace Hierachal {
 
 
 
-}
-}
+}}}
 
 
 

@@ -16,7 +16,7 @@ namespace Util {
 namespace DataStructure {
 
 	template<typename _Fty, typename ..._Types>
-	class Action<function<_Fty(_Types...)>> {
+	class Action/*<function<_Fty(_Types...)>>*/ {
 
 		
 

@@ -343,6 +343,12 @@
     <Filter Include="標頭檔\Framework\Scene">
       <UniqueIdentifier>{e28c9219-82a2-4ba6-9a20-3ef48dc3204b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="標頭檔\Framework\Audio\Track">
+      <UniqueIdentifier>{86f43362-477c-4b87-ba2f-57c9555c65a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Framework\Audio\Track">
+      <UniqueIdentifier>{0a878fd1-fbca-4e6b-82de-d7bd86928367}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\Config\ConfigManager.cpp">
@@ -566,6 +572,36 @@
     </ClCompile>
     <ClCompile Include="Framework\Allocation\Hierachal\MtoObject.cpp">
       <Filter>來源檔案\Framework\Allocation\Hierachal</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Timing\FramedClock.cpp">
+      <Filter>來源檔案\Framework\Timing</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Audio\AudioComponent.cpp">
+      <Filter>來源檔案\Framework\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Audio\AdjustableAudioComponent.cpp">
+      <Filter>來源檔案\Framework\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Audio\Track\Track.cpp">
+      <Filter>來源檔案\Framework\Audio\Track</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Allocation\Hierachal\Updatable.cpp">
+      <Filter>來源檔案\Framework\Allocation\Hierachal</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Allocation\Hierachal\Triggerable.cpp">
+      <Filter>來源檔案\Framework\Allocation\Hierachal</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Timing\DecoupledInterpolatingFramedClock.cpp">
+      <Filter>來源檔案\Framework\Timing</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Timing\InterpolatingFramedClock.cpp">
+      <Filter>來源檔案\Framework\Timing</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Timing\OffsetFramedClock.cpp">
+      <Filter>來源檔案\Framework\Timing</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Timing\StopwatchClock.cpp">
+      <Filter>來源檔案\Framework\Timing</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -933,6 +969,15 @@
     </ClInclude>
     <ClInclude Include="Framework\Timing\OffsetFramedClock.h">
       <Filter>標頭檔\Framework\Timing</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Timing\OffsetClock.h">
+      <Filter>標頭檔\Framework\Timing</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Audio\Track\Track.h">
+      <Filter>標頭檔\Framework\Audio\Track</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Input\MainInterface.h">
+      <Filter>標頭檔\Framework\Input</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

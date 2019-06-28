@@ -4,7 +4,11 @@
 
 #include <vector>
 
+#include "../../Framework/Allocation/Hierachal/Triggerable.h"
+
+
 using namespace std;
+using namespace Framework::Allocation::Hierachal;
 
 
 namespace Framework {
@@ -13,13 +17,15 @@ namespace Input {
 	/// <summary>
 	/// 抓取input，並且發送到所有子物件
 	/// </summary>
-	class InputManager : ChildAddable {
+	class InputManager : public Triggerable {
 
 	public:
 
+		InputManager();
+
 	protected:
 
-		GameHost Host;
+		GameHost* host;
 
 		/// <summary>
 		/// 如果有state，會先update input queue，然後再找最底端的child來trigger

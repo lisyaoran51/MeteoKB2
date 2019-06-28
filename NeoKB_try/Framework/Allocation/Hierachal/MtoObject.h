@@ -10,7 +10,9 @@
 
 using namespace std;
 
-namespace Util {
+namespace Framework {
+namespace Allocation {
+namespace Hierachal {
 
 	class RegisterType {
 
@@ -49,7 +51,7 @@ namespace Util {
 			}
 			else if (T* t = dynamic_cast< T* >(o))
 				return dynamic_cast< T* >(o);
-			return NULL;
+			return nullptr;
 		}
 
 		/// <summary>
@@ -59,7 +61,7 @@ namespace Util {
 		static T* Cast(U* o) {
 			if (T* t = dynamic_cast< T* >(o))
 				return dynamic_cast< T* >(o);
-			return NULL;
+			return nullptr;
 		}
 
 		template<typename T>
@@ -69,7 +71,7 @@ namespace Util {
 			}
 			else if (T* t = dynamic_cast< T* >(this))
 				return dynamic_cast< T* >(this);
-			return NULL;
+			return nullptr;
 		}
 
 		/// <summary>
@@ -86,7 +88,7 @@ namespace Util {
 		}
 
 	};
-}
+}}}
 
 
 

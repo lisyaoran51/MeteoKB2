@@ -1,9 +1,9 @@
 ﻿#include "Loadable.h"
 
 #include <stdexcept>
-#include "../Log.h"
+#include "../../../Util/Log.h"
 
-using namespace Util::Hierachal;
+using namespace Framework::Allocation::Hierachal;
 using namespace Util;
 
 /*
