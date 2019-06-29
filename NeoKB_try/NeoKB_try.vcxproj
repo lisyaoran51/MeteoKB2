@@ -124,7 +124,6 @@
     <ClInclude Include="Base\Ruleset\RulesetExecutor.h" />
     <ClInclude Include="Base\Ruleset\RulesetInfo.h" />
     <ClInclude Include="Base\Scene\Interlude\Intro.h" />
-    <ClInclude Include="Base\Scene\Play\PauseContainer.h" />
     <ClInclude Include="Base\Scene\Play\PlayerLoader.h" />
     <ClInclude Include="Base\Scene\Scene.h" />
     <ClInclude Include="Base\Scene\Select\SongSelect.h" />
@@ -182,6 +181,7 @@
     <ClInclude Include="Framework\Audio\AudioComponent.h" />
     <ClInclude Include="Framework\Audio\AudioManager.h" />
     <ClInclude Include="Framework\Audio\Track\Track.h" />
+    <ClInclude Include="Framework\Graphic\Drawable.h" />
     <ClInclude Include="Framework\Host\GameHost.h" />
     <ClInclude Include="Framework\Input\Handler\InputHandler.h" />
     <ClInclude Include="Framework\Input\InputEvent.h" />

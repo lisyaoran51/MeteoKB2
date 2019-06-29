@@ -21,6 +21,18 @@ GameHost::GameHost(string name = "")
 	sceneGraphClock = updateThread->GetClock();
 }
 
+int GameHost::drawInitialize()
+{
+	return 0;
+}
+
+int GameHost::drawFrame()
+{
+	// TODO: 搜尋所有的child，看看是不是Drawable，是的話再根據depth，一層一層畫到Map上，然後call drawer
+
+	return 0;
+}
+
 int GameHost::updateInitialize()
 {
 	return 0;

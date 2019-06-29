@@ -34,7 +34,7 @@ namespace Events {
 	/// <summary>
 	/// a processor center to process every Event including effects, 
 	/// </summary>
-	class EventProcessorMaster : public Updatable, public ChildAddable
+	class EventProcessorMaster : public Triggerable, public Drawable
 	{
 		// for thread
 		int tid;
@@ -79,6 +79,8 @@ namespace Events {
 		int cleanEndedEvent();
 
 		int Elapse(MTO_FLOAT elapsedTime);
+
+		int update();
 
 		/* 改成擺在rulset executor裡
 		/// <summary>

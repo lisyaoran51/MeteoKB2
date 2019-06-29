@@ -349,6 +349,9 @@
     <Filter Include="來源檔案\Framework\Audio\Track">
       <UniqueIdentifier>{0a878fd1-fbca-4e6b-82de-d7bd86928367}</UniqueIdentifier>
     </Filter>
+    <Filter Include="標頭檔\Framework\Graphic">
+      <UniqueIdentifier>{1d5ead00-8207-4e1e-9a16-6616ce22bbb9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\Config\ConfigManager.cpp">
@@ -919,9 +922,6 @@
     <ClInclude Include="Base\Scene\Play\PlayerLoader.h">
       <Filter>標頭檔\Game\Scene\play</Filter>
     </ClInclude>
-    <ClInclude Include="Base\Scene\Play\PauseContainer.h">
-      <Filter>標頭檔\Game\Scene\play</Filter>
-    </ClInclude>
     <ClInclude Include="Framework\Timing\FramedClock.h">
       <Filter>標頭檔\Framework\Timing</Filter>
     </ClInclude>
@@ -978,6 +978,9 @@
     </ClInclude>
     <ClInclude Include="Framework\Input\MainInterface.h">
       <Filter>標頭檔\Framework\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Graphic\Drawable.h">
+      <Filter>標頭檔\Framework\Graphic</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
