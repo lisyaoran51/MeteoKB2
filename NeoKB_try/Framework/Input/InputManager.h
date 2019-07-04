@@ -67,6 +67,12 @@ namespace Input {
 
 		int propagateKeyUp(InputState* state, Key key);
 
+		int handleKnobCounterClockwise(InputState* state, Knob knob);
+
+		int propagateKnobCounterClockwise(InputState* state, Knob knob);
+
+
+
 	};
 
 

@@ -10,16 +10,20 @@
 #include "../../../Util/Update/Updatable.h"
 #include "Event.h"
 #include "EventProcessor.h"
-#include "../../Graphic/Map/Map.h"
-#include "../../../Util/Update/Updater.h"
-#include "../../../Util/Hierachal/ChildAddable.h"
+#include "../../../Framework/Graphic/Drawable.h"
+#include "../../../Util/DataStructure/PeriodMap.h"
+#include "../../../Framework/Allocation/Hierachal/Triggerable.h"
 
 
 using namespace std;
-using namespace Util;
+using namespace Util::DataStructure;
 using namespace Base::Graphic::Maps;
 using namespace Util::Update;
 using namespace Util::Hierachal;
+using namespace Framework::Graphic::Maps;
+using namespace Framework::Graphic;
+using namespace Framework::Allocation::Hierachal;
+
 
 /*
 * instantiate a class with its name in string
@@ -43,6 +47,8 @@ namespace Events {
 
 		int load(Updater* u);
 
+		float visibleTimeRange = 1.0f;
+
 	public:
 
 		EventProcessorMaster();
@@ -65,6 +71,8 @@ namespace Events {
 
 		int RegisterMap(Map* m);
 
+		Map* GetGraph();
+
 		/// <summary>
 		/// clean the Event processors
 		/// </summary>
@@ -72,7 +80,14 @@ namespace Events {
 
 	protected:
 
-		vector<EventProcessor<Event>*>* eventProcessors = new vector<EventProcessor<Event>*>();
+		vector<EventProcessor<Event>*> staticEventProcessors;
+
+		vector<EventProcessor<Event>*> dynamicEventProcessors;
+
+		/// <summary>
+		/// 大於等於a，小於B的時段內，的所有event
+		/// </summary>
+		PeriodMap<EventProcessor<Event>*>* eventProcessorPeriods;
 
 		int processEvent(MTO_FLOAT elapsedTime);
 
@@ -80,7 +95,9 @@ namespace Events {
 
 		int Elapse(MTO_FLOAT elapsedTime);
 
-		int update();
+		
+
+		virtual int update();
 
 		/* 改成擺在rulset executor裡
 		/// <summary>

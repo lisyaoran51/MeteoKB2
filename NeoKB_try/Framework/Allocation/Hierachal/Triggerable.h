@@ -25,6 +25,14 @@ namespace Hierachal {
 
 		virtual int TriggerOnKeyDown(InputState* inputState);
 
+		virtual int TriggerOnKnobCounterClockwise(InputState* inputState);
+
+		virtual int TriggerOnKnobClockwise(InputState* inputState);
+
+		virtual int TriggerOnButtonDown(InputState* inputState);
+
+		virtual int TriggerOnButtonUp(InputState* inputState);
+
 	protected:
 
 		virtual int onKeyDown(InputState* inputState);

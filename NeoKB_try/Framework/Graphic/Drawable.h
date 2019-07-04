@@ -2,8 +2,10 @@
 #define DRAWABLE_H
 
 #include <string>
+#include "Map\Map.h"
 
 using namespace std;
+using namespace Framework::Graphic::Maps;
 
 namespace Framework {
 namespace Graphic {
@@ -12,6 +14,7 @@ namespace Graphic {
 	class Drawable {
 
 		string name;
+		bool isInitialized;
 
 		int positionX, positionY;
 		float rotation;
@@ -26,8 +29,11 @@ namespace Graphic {
 		Map* graph;
 
 	public:
+		Drawable();
 		Drawable(int w, int h);
 		
+		int Initialize(int w, int h);
+
 		int SetPositionX(int x);
 		int SetPositionY(int y);
 		int GetPositionX();
@@ -55,7 +61,7 @@ namespace Graphic {
 		int SetDepth(int d);
 		int GetDepth();
 
-		Map* GetGraph();
+		virtual Map* GetGraph();
 	};
 
 	enum class Anchor {

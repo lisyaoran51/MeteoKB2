@@ -38,7 +38,8 @@ namespace Effects {
 		virtual int GetX() = 0;
 		virtual int GetY() = 0;
 		virtual MTO_FLOAT GetSpeed() = 0;
-
+		virtual int Draw() = 0;
+		virtual int Draw(Map* m) = 0;
 
 	};
 
@@ -75,8 +76,19 @@ namespace Effects {
 			/* current time從effect開始播放時，從0開始計算，直到current time超過life time時，特效結束 */
 			currentTime += elapsedTime;
 
-			mapAlgo->Draw(lightMap, this);
+			//把畫圖給移到別的地方，這邊只更新時間
+			//mapAlgo->Draw(lightMap, this);
 
+			return 0;
+		}
+
+		virtual int Draw() {
+			mapAlgo->Draw(lightMap, this);
+			return 0;
+		}
+
+		virtual int Draw(Map* m) {
+			mapAlgo->Draw(m, this);
 			return 0;
 		}
 

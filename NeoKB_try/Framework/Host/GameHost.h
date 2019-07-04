@@ -10,6 +10,7 @@
 #include "../../Base/Game.h"
 #include "../Input/MainInterface.h"
 #include "../Input/Handler/InputHandler.h"
+#include "../Graphic/Drawable.h"
 
 
 using namespace std;
@@ -17,6 +18,7 @@ using namespace Framework::Threading;
 using namespace Util::DataStructure;
 using namespace Framework::Input;
 using namespace Base;
+using namespace Framework::Graphic;
 
 
 namespace Framework {
@@ -72,7 +74,6 @@ namespace Host {
 
 		int inputFrame();
 
-
 		int resetInputHandler();
 
 	private :
@@ -91,6 +92,10 @@ namespace Host {
 		/// input manager會成為root，附則把輸入傳給下面的物件
 		/// </summary>
 		Triggerable* root;
+
+		int iterateSearchDrawable(ChildAddable* r, vector<Drawable*>* drawables);
+
+		Map* canvas;
 
 		vector<InputHandler*> availableInputHandler;
 

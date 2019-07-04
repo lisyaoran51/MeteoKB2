@@ -6,7 +6,7 @@
 #define BRIGHTNESS_MAX 256
 
 
-namespace Base {
+namespace Framework {
 namespace Graphic {
 namespace Maps {
 
@@ -40,7 +40,17 @@ namespace Maps {
 		/// <summary>
 		/// 將m上面x,y位置長寬xLen,yLen的圖案貼到這個map上，用疊加
 		/// </summary>
+		int PasteAdd(Map* m, int toX, int toY);
+
+		/// <summary>
+		/// 將m上面x,y位置長寬xLen,yLen的圖案貼到這個map上，用疊加
+		/// </summary>
 		int PasteAdd(Map* m, int x, int y, int toX, int toY, int xLen, int yLen);
+
+		/// <summary>
+		/// 將m上面x,y位置長寬xLen,yLen的圖案貼到這個map上，用重社
+		/// </summary>
+		int PasteSet(Map* m, int toX, int toY);
 
 		/// <summary>
 		/// 將m上面x,y位置長寬xLen,yLen的圖案貼到這個map上，用重社

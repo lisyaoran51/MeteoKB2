@@ -10,11 +10,11 @@ using namespace Framework::Allocation::Hierachal;
 
 
 
-namespace Base {
+namespace Game {
 namespace Scene {
 
 
-	class Scene : public Triggerable {
+	class Scene : public Triggerable, public Drawable {
 
 	public:
 

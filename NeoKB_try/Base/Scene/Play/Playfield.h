@@ -31,7 +31,7 @@ namespace Play {
 	/// So that these objects could be updated on each frame.
 	/// should they be connected in this class????
 	/// </summary>
-	class Playfield: public Updatable, public ChildAddable {
+	class Playfield: public Scene {
 
 		int load();
 
@@ -45,37 +45,31 @@ namespace Play {
 		//virtual int OnJudgement(Event* judge_event, Judgement* j);
 
 		/// <summary>
-		/// add events to scheuler
+		/// add events to EventProcessorMaster
 		/// </summary>
 		virtual int Add(EventProcessor<Event>* ep);
 
-		int GetWidth();
-
-		int GetHeight();
-
 	protected:
-
-		int width, height;
 
 		///<summary>
 		/// 在這邊存了會用到的algo，在getEventProcessor時可以到這邊選擇要用的algo
 		///</summary>
 		map<string, MapAlgorithmInterface*> mapAlgorithms;
 
-		Scheduler* scheduler;
+		//Scheduler* scheduler;
 
 		EventProcessorMaster* eventProcessorMaster;
 
-		Renderer* renderer;
+		//Renderer* renderer;
 
-		Updater* updater;
+		//Updater* updater;
 
-		Map* lightMap;
+		Map* compositeGraph;
 
 		///<summary>
 		/// 佔存剛建完的影像，還沒位移到正確位置上
 		///</summary>
-		Map* bufferMap;
+		Map* singleGraph;
 	};
 
 

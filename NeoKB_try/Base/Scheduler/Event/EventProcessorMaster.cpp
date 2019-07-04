@@ -95,3 +95,34 @@ int EventProcessorMaster::Elapse(MTO_FLOAT elapsedTime)
 	return 0;
 }
 
+Map * EventProcessorMaster::GetGraph()
+{
+	Map* graph = Drawable::GetGraph();
+	graph->Reset();
+
+	double currentTime = GetClock()->GetCurrentTime();
+
+	vector<EventProcessor<Event>*> eventProcessors;
+
+	eventProcessorPeriods->GetItemsContainPeriods(make_pair<float, float>(currentTime - visibleTimeRange, currentTime + visibleTimeRange), &eventProcessors);
+
+	for (int i = 0; i < eventProcessors.size(); i++) {
+		EffectMapperInterface* effectMapper = dynamic_cast<EffectMapperInterface*>(eventProcessors[i]);
+		if (effectMapper) {
+			effectMapper->Draw(lightMap);
+		}
+	}
+
+	graph->PasteAdd(lightMap, 0, 0);
+	return nullptr;
+}
+
+int EventProcessorMaster::update()
+{
+
+	processEvent(GetClock()->GetElapsedFrameTime());
+	//cleanEndedEvent();
+
+	return 0;
+}
+
