@@ -59,6 +59,17 @@ int GameHost::updateFrame()
 	return root->UpdateSubTree();
 }
 
+int GameHost::inputInitialize()
+{
+	return 0;
+}
+
+int GameHost::inputFrame()
+{
+
+	return 0;
+}
+
 int GameHost::resetInputHandler()
 {
 

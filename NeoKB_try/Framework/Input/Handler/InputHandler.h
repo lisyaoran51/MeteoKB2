@@ -3,9 +3,10 @@
 
 
 #include <vector>
+#include "../../Host/GameHost.h"
 
 using namespace std;
-
+using namespace Framework::Host;
 
 namespace Framework {
 namespace Input {
@@ -18,16 +19,18 @@ namespace Handler {
 
 	public:
 
-		virtual int Initialize(GameHost host) = 0;
+		virtual int Initialize(GameHost* host) = 0;
 
-		virtual vector<InputState*>* GetPendingStates();
+		virtual vector<InputState*>* GetPendingStates(vector<InputState*>* pStates);
+
+		virtual int HandleState(InputState* inputEvent) = 0;
 
 	protected:
 		
 		/// <summary>
 		/// TODO: 應該要用concurrency
 		/// </summary>
-		vector<InputState*>* PendingStates;
+		vector<InputState*> pendingStates;
 
 	private:
 

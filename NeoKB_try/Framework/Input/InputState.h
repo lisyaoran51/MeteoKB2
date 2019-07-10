@@ -3,6 +3,9 @@
 
 
 #include <vector>
+#include "BluetoothState.h"
+#include "KeyboardState.h"
+#include "PanelState.h"
 
 using namespace std;
 
@@ -17,16 +20,37 @@ namespace Input {
 
 	public:
 
+
 		InputState* Clone();
+
+		InputState* SetLastState(InputState* lState);
+
+		InputState* GetLastState();
+
+		InputState* SetKeyboardState(KeyboardState* kState);
+
+		KeyboardState* GetKeyboardState();
+
+		InputState* SetPanelState(PanelState* pState);
+
+		PanelState* GetPanelState();
+
+		InputState* SetBluetoothState(BluetoothState* bState);
+
+		BluetoothState* GetBluetoothState();
 
 	protected:
 
 
 	private:
 
+		InputState* lastState;
+
 		KeyboardState* keyboardState;
 
 		PanelState* panelState;
+
+		BluetoothState* bluetoothState;
 
 	};
 

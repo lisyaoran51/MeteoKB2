@@ -358,6 +358,12 @@
     <Filter Include="來源檔案\Framework\Timing\SpeedAdjusters">
       <UniqueIdentifier>{a6ca91eb-6272-44fb-8663-5d25db1b3c78}</UniqueIdentifier>
     </Filter>
+    <Filter Include="來源檔案\Framework\Input\Handler">
+      <UniqueIdentifier>{3e95f96f-4a46-49c5-bc1c-1fcd2800b682}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Framework\Devices">
+      <UniqueIdentifier>{ede39218-da43-45bc-b5b9-57176e3a8577}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\Config\ConfigManager.cpp">
@@ -620,6 +626,33 @@
     </ClCompile>
     <ClCompile Include="Framework\Timing\SpeedAdjusters\SpeedAdjuster.cpp">
       <Filter>來源檔案\Framework\Timing\SpeedAdjusters</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Input\InputManager.cpp">
+      <Filter>來源檔案\Framework\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Input\Handler\KeyboardInputHandler.cpp">
+      <Filter>來源檔案\Framework\Input\Handler</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Input\Handler\PanelInputHandler.cpp">
+      <Filter>來源檔案\Framework\Input\Handler</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Input\Handler\BluetoothInputHandler.cpp">
+      <Filter>來源檔案\Framework\Input\Handler</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\IO\Keyboard.cpp">
+      <Filter>來源檔案\Framework\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\IO\Panel.cpp">
+      <Filter>來源檔案\Framework\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\IO\MainInterface.cpp">
+      <Filter>來源檔案\Framework\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\IO\Display.cpp">
+      <Filter>來源檔案\Framework\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\IO\BluetoothPhone.cpp">
+      <Filter>來源檔案\Framework\IO</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1002,6 +1035,48 @@
     </ClInclude>
     <ClInclude Include="Framework\Timing\SpeedAdjusters\SpeedAdjuster.h">
       <Filter>標頭檔\Framework\Timing\SpeedAdjusters</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Input\KeyboardState.h">
+      <Filter>標頭檔\Framework\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Input\PanelState.h">
+      <Filter>標頭檔\Framework\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Input\BluetoothState.h">
+      <Filter>標頭檔\Framework\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Input\PeripheralState.h">
+      <Filter>標頭檔\Framework\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Input\Handler\KeyboardInputHandler.h">
+      <Filter>標頭檔\Framework\Input\Handler</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\IO\Peripheral.h">
+      <Filter>標頭檔\Framework\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\IO\Keyboard.h">
+      <Filter>標頭檔\Framework\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Input\Handler\PanelInputHandler.h">
+      <Filter>標頭檔\Framework\Input\Handler</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Input\Handler\BluetoothInputHandler.h">
+      <Filter>標頭檔\Framework\Input\Handler</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\IO\Panel.h">
+      <Filter>標頭檔\Framework\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\IO\BluetoothPhone.h">
+      <Filter>標頭檔\Framework\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Devices\Device.h">
+      <Filter>來源檔案\Framework\Devices</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Devices\InputDevice.h">
+      <Filter>來源檔案\Framework\Devices</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Devices\OutputDevice.h">
+      <Filter>來源檔案\Framework\Devices</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

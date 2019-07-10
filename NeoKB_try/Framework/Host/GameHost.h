@@ -8,7 +8,7 @@
 #include "../../Util/DataStructure/Action.h"
 #include "../Input/InputEvent.h"
 #include "../../Base/Game.h"
-#include "../Input/MainInterface.h"
+#include "../IO/MainInterface.h"
 #include "../Input/Handler/InputHandler.h"
 #include "../Graphic/Drawable.h"
 
@@ -17,6 +17,7 @@ using namespace std;
 using namespace Framework::Threading;
 using namespace Util::DataStructure;
 using namespace Framework::Input;
+using namespace Framework::IO;
 using namespace Base;
 using namespace Framework::Graphic;
 
@@ -40,6 +41,8 @@ namespace Host {
 		/// 讓handler們去註冊，在input thread收到input時，會去用這個叫所有handler，讓每個handler去收自己要的state
 		/// </summary>
 		Action<int, InputEvent*> OnInput;
+
+		MainInterface* GetMainInterface();
 
 	protected:
 

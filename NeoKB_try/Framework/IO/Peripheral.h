@@ -1,5 +1,7 @@
-#ifndef DISPLAY_H
-#define DISPLAY_H
+#ifndef PERIPHERAL_H
+#define PERIPHERAL_H
+
+
 
 #include <vector>
 
@@ -12,15 +14,10 @@ namespace IO {
 	/// <summary>
 	/// 抓取輸入的地方，書出的地方
 	/// </summary>
-	class Display : public Peripheral {
+	class Peripheral {
 
-		
 
 	public:
-
-		Display();
-		
-		int Show(Map* m);
 
 	protected:
 
@@ -34,6 +31,13 @@ namespace IO {
 
 
 }}
+
+
+
+
+
+
+
 
 
 #endif

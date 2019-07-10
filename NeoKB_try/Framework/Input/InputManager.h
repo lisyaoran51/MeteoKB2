@@ -5,11 +5,12 @@
 #include <vector>
 
 #include "../../Framework/Allocation/Hierachal/Triggerable.h"
+#include "Handler\InputHandler.h"
 
 
 using namespace std;
 using namespace Framework::Allocation::Hierachal;
-
+using namespace Framework::Input::Handler;
 
 namespace Framework {
 namespace Input {
@@ -23,41 +24,48 @@ namespace Input {
 
 		InputManager();
 
+		int ChangeFocus(Triggerable* fTriggerable);
+
+		int AddStaticTriggerable(Triggerable* sTriggerable);
+
+		int DeleteStaticTriggerable(Triggerable* sTriggerable);
+
+		int ClearStaticTriggerable();
+
 	protected:
 
 		GameHost* host;
 
+		vector<Triggerable*> triggerQueue;
+
+		vector<Triggerable*> staticTriggerQueue;
+
+		virtual int update();
+
+
+		InputState* currentState;
+
 		/// <summary>
 		/// 如果有state，會先update input queue，然後再找最底端的child來trigger
 		/// </summary>
-		int HandleNewState(InputState* state);
+		int handleNewState(InputState* state);
 
-		vector<InputState*>* GetPendingState();
+		vector<InputState*>* getPendingState(vector<InputState*>* pendingStates);
 
-	private:
+		virtual int updateInputQueue(InputState* inputState);
 
 		/// <summary>
-		/// 擺入gamehost
+		/// 不太確定功能，暫時先不用
 		/// </summary>
-		int load();
-
-		int Update();
-
-
-
 		vector<InputState*>* createDistinctInputStates(vector<InputState*>* states);
 
-		virtual int TransformState(InputState* inputState);
-		
-		vector<Triggerable*> gameInputQueue;
-
-		vector<Triggerable*> pianoInputQueue;
-
-		int updateInputQueue(InputState* inputState);
+		int TransformState(InputState* inputState);
 
 		int updateKeyboardEvents(InputState* inputState);
 
 		int updatePanelEvents(InputState* inputState);
+
+		int updateBluetoothEvents(InputState* inputState);
 
 		int handleKeyDown(InputState* state, Key key);
 
@@ -67,9 +75,20 @@ namespace Input {
 
 		int propagateKeyUp(InputState* state, Key key);
 
-		int handleKnobCounterClockwise(InputState* state, Knob knob);
+		int handleKnobTurn(InputState* state, Knob knob);
 
-		int propagateKnobCounterClockwise(InputState* state, Knob knob);
+		int propagateKnobTurn(InputState* state, Knob knob);
+
+	private:
+
+		/// <summary>
+		/// 擺入gamehost
+		/// </summary>
+		int load();
+
+		vector<InputHandler*> inputHandlers;
+
+		int iterateGetDeepestChild(Triggerable* deepestChild, int* deepestDepth, int tempDepth);
 
 
 
