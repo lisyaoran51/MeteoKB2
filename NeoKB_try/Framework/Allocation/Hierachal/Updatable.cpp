@@ -24,6 +24,9 @@ int Updatable::SetParent(HasParent * p)
 	if (p != nullptr) {
 		clock = parent->GetClock();
 	}
+	else {
+		throw invalid_argument("Updatable::SetParent: parent has to be updatable.");
+	}
 	
 	return Loadable::SetParent(p);
 }

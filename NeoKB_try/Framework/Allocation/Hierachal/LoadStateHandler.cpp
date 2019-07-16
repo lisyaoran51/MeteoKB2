@@ -46,7 +46,7 @@ int Loadable::NoParentHandler::Async()
 
 int Loadable::NoParentHandler::SetParent(HasParent * p)
 {
-	loadable.HasParent::SetParent(p);
+	loadable.setParent(p);
 	loadable.loadStateHandler = &loadable.notLoadedHandler;
 	return 0;
 }
@@ -81,7 +81,7 @@ int Loadable::NotLoadedHandler::Async()
 
 int Loadable::NotLoadedHandler::SetParent(HasParent * p)
 {
-	loadable.HasParent::SetParent(p);
+	loadable.setParent(p);
 	return 0;
 }
 

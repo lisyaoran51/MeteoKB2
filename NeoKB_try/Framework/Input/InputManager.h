@@ -32,6 +32,8 @@ namespace Input {
 
 		int ClearStaticTriggerable();
 
+		Triggerable* GetDeepestChild();
+
 	protected:
 
 		GameHost* host;
@@ -61,23 +63,35 @@ namespace Input {
 
 		int TransformState(InputState* inputState);
 
-		int updateKeyboardEvents(InputState* inputState);
+		virtual int updateKeyboardEvents(InputState* inputState);
 
-		int updatePanelEvents(InputState* inputState);
+		virtual int updatePanelEvents(InputState* inputState);
 
-		int updateBluetoothEvents(InputState* inputState);
+		virtual int updateBluetoothEvents(InputState* inputState);
 
-		int handleKeyDown(InputState* state, Key key);
+		virtual int handleKeyDown(InputState* state, Key key);
 
-		int propagateKeyDown(InputState* state, Key key);
+		virtual int propagateKeyDown(vector<Triggerable*>* queue, InputState* state, Key key);
 
-		int handleKeyUp(InputState* state, Key key);
+		virtual int handleKeyUp(InputState* state, Key key);
 
-		int propagateKeyUp(InputState* state, Key key);
+		virtual int propagateKeyUp(vector<Triggerable*>* queue, InputState* state, Key key);
 
-		int handleKnobTurn(InputState* state, Knob knob);
+		virtual int handleButtonDown(InputState* state, Button button);
 
-		int propagateKnobTurn(InputState* state, Knob knob);
+		virtual int propagateButtonDown(vector<Triggerable*>* queue, InputState* state, Button button);
+
+		virtual int handleButtonUp(InputState* state, Button button);
+
+		virtual int propagateButtonUp(vector<Triggerable*>* queue, InputState* state, Button button);
+
+		virtual int handleKnobTurn(InputState* state, Knob knob);
+
+		virtual int propagateKnobTurn(vector<Triggerable*>* queue, InputState* state, Knob knob);
+
+		virtual int handleSlide(InputState* state, Slider slider);
+
+		virtual int propagateSlide(vector<Triggerable*>* queue, InputState* state, Slider slider);
 
 	private:
 
@@ -88,7 +102,7 @@ namespace Input {
 
 		vector<InputHandler*> inputHandlers;
 
-		int iterateGetDeepestChild(Triggerable* deepestChild, int* deepestDepth, int tempDepth);
+		Triggerable* iterateGetDeepestChild(Triggerable* deepestChild, int* deepestDepth, int tempDepth);
 
 
 

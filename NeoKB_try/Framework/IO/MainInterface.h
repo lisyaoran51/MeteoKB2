@@ -34,6 +34,8 @@ namespace IO {
 
 		MainInterface();
 
+		int Initialize();
+
 		int ScanInput();
 
 		int ProcessOutput();

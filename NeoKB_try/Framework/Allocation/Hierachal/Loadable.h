@@ -91,6 +91,11 @@ namespace Hierachal{
 
 	private:
 
+		/// <summary>
+		/// 實際執行setParent，由LoadStateHandler決定是否要執行這個動作
+		/// </summary>
+		int setParent(HasParent* p);
+
 
 		class LoadStateHandler {
 		public:

@@ -10,17 +10,36 @@ Cachable::Cachable(): RegisterType("Cachable")
 {
 }
 
-MtoObject* Cachable::getCache(string type)
+int Cachable::SetParent(HasParent * p)
 {
-	
-	if (cache.find(type) != cache.end()) {
-		// 找到
-
-		MtoObject* c = cache[type];
-		return c;
+	Cachable* parent = Cast<Cachable>(p);
+	if (p != nullptr) {
+		dependencies = CreateLocalDependencies(parent->GetDependencies());
 	}
-	return nullptr;
+	else {
+		throw invalid_argument("Cachable::SetParent: parent has to be Cachable.");
+	}
+	
+	return HasParent::SetParent(p);
 }
+
+int Cachable::SetDependencies(DependencyContainer * d)
+{
+	dependencies = d;
+	return 0;
+}
+
+DependencyContainer * Cachable::GetDependencies()
+{
+	return dependencies;
+}
+
+DependencyContainer * Cachable::CreateLocalDependencies(DependencyContainer * parentDependencies)
+{
+	// 直接拿parent的dependencies來用
+	return parentDependencies;
+}
+
 
 
 

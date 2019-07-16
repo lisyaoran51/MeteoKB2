@@ -179,6 +179,7 @@
     <ClInclude Include="Devices\LedDriver\pwm.h" />
     <ClInclude Include="Devices\LedDriver\rpihw.h" />
     <ClInclude Include="Devices\LedDriver\ws2811.h" />
+    <ClInclude Include="Framework\Allocation\DependencyContainer.h" />
     <ClInclude Include="Framework\Allocation\Hierachal\Cachable.h" />
     <ClInclude Include="Framework\Allocation\Hierachal\ChildAddable.h" />
     <ClInclude Include="Framework\Allocation\Hierachal\HasParent.h" />

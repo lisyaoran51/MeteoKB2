@@ -33,17 +33,17 @@ namespace Input {
 
 	};
 
-	enum class PanelButton {
+	enum class Button {
 
 
 	};
 
-	enum class PanelKnob {
+	enum class Knob {
 
 
 	};
 
-	enum class PanelSlider {
+	enum class Slider {
 
 
 	};

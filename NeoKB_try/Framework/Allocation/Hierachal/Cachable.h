@@ -6,9 +6,11 @@
 #include "HasParent.h"
 #include <iostream>
 #include "../../../Util/Log.h"
+#include "../DependencyContainer.h"
 
 using namespace std;
 using namespace Util;
+using namespace Framework::Allocation;
 
 /*
 * mutual including two classes:
@@ -29,7 +31,8 @@ namespace Hierachal{
 	/// </summary>
 	class Cachable: public HasParent {
 
-		map<string, MtoObject*> cache;
+		DependencyContainer* dependencies;
+
 
 	public:
 
@@ -37,36 +40,24 @@ namespace Hierachal{
 
 		virtual ~Cachable() = default;
 
+		virtual int SetParent(HasParent* p);
+
+		int SetDependencies(DependencyContainer* d);
+
+		DependencyContainer* GetDependencies();
+
 		template<typename T>
 		T* GetCache(string type) {
 
-			LOG(LogLevel::Finest) << "T* GetCache(string) : getting cache [" << type << "] from hierachy object [" << GetTypeName() << "].";
+			// TODO: 有可能沒有denpendency?
 
-			MtoObject* o = getCache(type);
+			return dependencies->GetCache<T>(type);
 
-			if (!o) {
-				// 沒找到
-
-				HasParent* h = GetParent();
-				if (!h)
-					return nullptr;
-
-				Cachable* c = Cast<Cachable>(h);
-				//cout << "cast to cachable" << endl;
-				return c->GetCache<T>(type);
-			}
-
-			T* to = Cast<T>(o);
-
-			if (!to)
-				throw invalid_argument("Cachable::GetCache<T>(string): cast to wrong class type.");
-
-			return to;
 		}
 
 		template<typename T>
 		int Cache(T* o) {
-			cache[o->GetTypeName()] = o;
+			dependencies->Cache<T>(o);
 
 			return 0;
 		}
@@ -76,17 +67,14 @@ namespace Hierachal{
 		/// </summary>
 		template<typename T>
 		int Cache(T* o, string typeName) {
-			cache[typeName] = o;
+			dependencies->Cache<T>(o, typeName);
 
 			return 0;
 		}
 
 	protected:
 
-		/// <summary>
-		/// get the cache of a certain type in the whole hierachy
-		/// </summary>
-		MtoObject* getCache(string type);
+		virtual DependencyContainer* CreateLocalDependencies(DependencyContainer* parentDependencies);
 
 	};
 

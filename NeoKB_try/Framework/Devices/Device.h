@@ -14,6 +14,10 @@ namespace Devices {
 
 		virtual int Register(MainInterface* mainInterface) = 0;
 
+		virtual bool Match(Peripheral* peripheral) = 0;
+
+		virtual int HandlePeripheralRegister(Peripheral* peripheral) = 0;
+
 
 	};
 

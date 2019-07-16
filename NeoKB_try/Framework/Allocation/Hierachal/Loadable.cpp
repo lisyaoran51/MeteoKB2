@@ -60,4 +60,9 @@ int Loadable::Load()
 	return 0;
 }
 
+int Loadable::setParent(HasParent * p)
+{
+	return Cachable::SetParent(p);
+}
+
 

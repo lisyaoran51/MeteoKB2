@@ -9,6 +9,8 @@ using namespace Framework::Input;
 
 GameHost::GameHost(string name = "")
 {
+	dependencies = new DependencyContainer();
+
 	drawThread = new GameThread(bind(&GameHost::drawFrame, this), "DrawThread");
 	drawInitialize();
 
@@ -19,6 +21,19 @@ GameHost::GameHost(string name = "")
 	inputInitialize();
 
 	sceneGraphClock = updateThread->GetClock();
+
+}
+
+int GameHost::Run(Game game)
+{
+
+
+	return 0;
+}
+
+MainInterface * GameHost::GetMainInterface()
+{
+	return mainInterface;
 }
 
 int GameHost::drawInitialize()
@@ -61,12 +76,14 @@ int GameHost::updateFrame()
 
 int GameHost::inputInitialize()
 {
+	
 	return 0;
 }
 
 int GameHost::inputFrame()
 {
 
+	mainInterface.ScanInput();
 	return 0;
 }
 
@@ -86,6 +103,9 @@ int GameHost::bootstrapSceneGraph(Game game)
 	root = new InputManager();
 
 	root->SetClock(sceneGraphClock);
+	root->SetDependencies(dependencies);
+	// root 要async，不然會變成沒有loaded
+	root->Async();
 
 	game->SetHost(this);
 

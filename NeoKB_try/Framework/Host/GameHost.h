@@ -11,6 +11,8 @@
 #include "../IO/MainInterface.h"
 #include "../Input/Handler/InputHandler.h"
 #include "../Graphic/Drawable.h"
+#include "../Allocation/DependencyContainer.h"
+#include "../IO/MainInterface.h"
 
 
 using namespace std;
@@ -20,6 +22,7 @@ using namespace Framework::Input;
 using namespace Framework::IO;
 using namespace Base;
 using namespace Framework::Graphic;
+using namespace Framework::Allocation;
 
 
 namespace Framework {
@@ -47,6 +50,8 @@ namespace Host {
 	protected:
 
 		FrameBasedClock* sceneGraphClock;
+
+		DependencyContainer* dependencies;
 
 		GameThread* drawThread;
 
@@ -87,9 +92,7 @@ namespace Host {
 
 		int bootstrapSceneGraph(Game game);
 
-		MainInterface mainInterface;
-
-		ChildAddable dependencies;
+		MainInterface* mainInterface;
 
 		/// <summary>
 		/// input manager會成為root，附則把輸入傳給下面的物件

@@ -10,6 +10,12 @@ InputManager::InputManager()
 	currentState = new InputState();
 }
 
+Triggerable * InputManager::GetDeepestChild()
+{
+	int deepestDepth = 0;
+	return iterateGetDeepestChild(this, &deepestDepth, 1);
+}
+
 int InputManager::update()
 {
 	vector<InputState*> pendingStates;
@@ -80,10 +86,11 @@ int InputManager::updateInputQueue(InputState * inputState)
 	triggerQueue.clear();
 
 	// input manager要在加ㄧ個piano input，才會彈琴有聲音
+	/*	這一段放到handle key down裡面，不是每個輸入都要給piano處理
 	if (staticTriggerQueue.size() > 0) {
 		triggerQueue.reserve(staticTriggerQueue.size());
 		triggerQueue.insert(triggerQueue.end(), staticTriggerQueue.begin(), staticTriggerQueue.end());
-	}
+	}*/
 
 	if (focusTriggerable != nullptr)
 		triggerQueue.push_back(focusTriggerable);
@@ -116,13 +123,13 @@ int InputManager::updateKeyboardEvents(InputState * inputState)
 
 	for (int i = 0; i < lastKeyboardState->GetPresses()->size(); i++) {
 		if (!keyboardState->Contain(lastKeyboardState->GetPresses()->at(i).key)) {
-			HandleKeyUp(inputState, lastKeyboardState->GetPresses()->at(i));
+			handleKeyUp(inputState, lastKeyboardState->GetPresses()->at(i));
 		}
 	}
 
 	for (int i = 0; i < keyboardState->GetPresses()->size(); i++) {
 		if (!lastKeyboardState->Contain(keyboardState->GetPresses()->at(i).key)) {
-			HandleKeyDown(inputState, keyboardState->GetPresses()->at(i));
+			handleKeyDown(inputState, keyboardState->GetPresses()->at(i));
 		}
 	}
 
@@ -140,13 +147,13 @@ int InputManager::updatePanelEvents(InputState * inputState)
 	/* Button */
 	for (int i = 0; i < lastPanelState->GetButtons()->size(); i++) {
 		if (!panelState->ContainButton(lastPanelState->GetButtons()->at(i))) {
-			HandleButtonUp(inputState, lastPanelState->GetButtons()->at(i));
+			handleButtonUp(inputState, lastPanelState->GetButtons()->at(i));
 		}
 	}
 
 	for (int i = 0; i < panelState->GetButtons()->size(); i++) {
 		if (!lastPanelState->ContainButton(panelState->GetButtons()->at(i))) {
-			HandleKeyDown(inputState, panelState->GetButtons()->at(i));
+			handleButtonDown(inputState, panelState->GetButtons()->at(i));
 		}
 	}
 
@@ -178,7 +185,119 @@ int InputManager::updateBluetoothEvents(InputState * inputState)
 	return 0;
 }
 
-int InputManager::iterateGetDeepestChild(Triggerable * temp, int* deepestDepth, int tempDepth)
+int InputManager::handleKeyDown(InputState * state, Key key)
+{
+	vector<Triggerable*> queue;
+	queue.assign(triggerQueue.begin(), triggerQueue.end());
+	queue.reserve(triggerQueue.size() + staticTriggerQueue.size());
+	queue.insert(queue.end(), staticTriggerQueue.begin(), staticTriggerQueue.end());
+	
+
+	return propagateKeyDown(&queue, state, key);
+}
+
+int InputManager::propagateKeyDown(vector<Triggerable*>* queue, InputState * state, Key key)
+{
+	for (int i = 0; i < queue->size(); i++) {
+		queue->at(i)->TriggerOnKeyDown(state, key);
+	}
+	return 0;
+}
+
+int InputManager::handleKeyUp(InputState * state, Key key)
+{
+	vector<Triggerable*> queue;
+	queue.assign(triggerQueue.begin(), triggerQueue.end());
+	queue.reserve(triggerQueue.size() + staticTriggerQueue.size());
+	queue.insert(queue.end(), staticTriggerQueue.begin(), staticTriggerQueue.end());
+
+
+	return propagateKeyUp(&queue, state, key);;
+}
+
+int InputManager::propagateKeyUp(vector<Triggerable*>* queue, InputState * state, Key key)
+{
+	for (int i = 0; i < queue->size(); i++) {
+		queue->at(i)->TriggerOnKeyUp(state, key);
+	}
+	return ;
+}
+
+int InputManager::handleButtonDown(InputState * state, Button button)
+{
+	vector<Triggerable*> queue;
+	queue.assign(triggerQueue.begin(), triggerQueue.end());
+	queue.reserve(triggerQueue.size() + staticTriggerQueue.size());
+	queue.insert(queue.end(), staticTriggerQueue.begin(), staticTriggerQueue.end());
+
+	return propagateButtonDown(&queue, state, button);
+}
+
+int InputManager::propagateButtonDown(vector<Triggerable*>* queue, InputState * state, Button button)
+{
+	for (int i = 0; i < queue->size(); i++) {
+		queue->at(i)->TriggerOnButtonDown(state, button);
+	}
+	return 0;
+}
+
+int InputManager::handleButtonUp(InputState * state, Button button)
+{
+	vector<Triggerable*> queue;
+	queue.assign(triggerQueue.begin(), triggerQueue.end());
+	queue.reserve(triggerQueue.size() + staticTriggerQueue.size());
+	queue.insert(queue.end(), staticTriggerQueue.begin(), staticTriggerQueue.end());
+
+	return propagateButtonUp(&queue, state, button);
+}
+
+int InputManager::propagateButtonUp(vector<Triggerable*>* queue, InputState * state, Button button)
+{
+	for (int i = 0; i < queue->size(); i++) {
+		queue->at(i)->TriggerOnButtonUp(state, button);
+	}
+
+	return 0;
+}
+
+int InputManager::handleKnobTurn(InputState * state, Knob knob)
+{
+	vector<Triggerable*> queue;
+	queue.assign(triggerQueue.begin(), triggerQueue.end());
+	queue.reserve(triggerQueue.size() + staticTriggerQueue.size());
+	queue.insert(queue.end(), staticTriggerQueue.begin(), staticTriggerQueue.end());
+
+	return propagateKnobTurn(&queue, state, knob);;
+}
+
+int InputManager::propagateKnobTurn(vector<Triggerable*>* queue, InputState * state, Knob knob)
+{
+	for (int i = 0; i < queue->size(); i++) {
+		queue->at(i)->TriggerOnButtonUp(state, knob);
+	}
+
+	return 0;
+}
+
+int InputManager::handleSlide(InputState * state, Slider slider)
+{
+	vector<Triggerable*> queue;
+	queue.assign(triggerQueue.begin(), triggerQueue.end());
+	queue.reserve(triggerQueue.size() + staticTriggerQueue.size());
+	queue.insert(queue.end(), staticTriggerQueue.begin(), staticTriggerQueue.end());
+
+	return propagateSlide(&queue, state, slider);
+}
+
+int InputManager::propagateSlide(vector<Triggerable*>* queue, InputState * state, Slider slider)
+{
+	for (int i = 0; i < queue->size(); i++) {
+		queue->at(i)->TriggerOnSlide(state, slider);
+	}
+	return 0;
+}
+
+Triggerable* InputManager::iterateGetDeepestChild(Triggerable * temp, int* deepestDepth, int tempDepth)
 {
 
 	Triggerable* tempDeeperChild = nullptr;
@@ -189,7 +308,7 @@ int InputManager::iterateGetDeepestChild(Triggerable * temp, int* deepestDepth, 
 	}
 
 	for (int i = 0; i < temp->GetChilds()->size(); i++) {
-		Triggerable* tempChild = iterateGetDeepestChild(temp->GetChilds()->at(i), deepestDepth, tempDepth + 1);
+		Triggerable* tempChild = iterateGetDeepestChild(temp->GetChilds()->at(i)->Cast<Triggerable>(), deepestDepth, tempDepth + 1);
 		if (tempChild != nullptr)
 			tempDeeperChild = tempChild;
 	}

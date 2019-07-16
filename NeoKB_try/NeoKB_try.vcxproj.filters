@@ -364,6 +364,9 @@
     <Filter Include="來源檔案\Framework\Devices">
       <UniqueIdentifier>{ede39218-da43-45bc-b5b9-57176e3a8577}</UniqueIdentifier>
     </Filter>
+    <Filter Include="標頭檔\Framework\Devices">
+      <UniqueIdentifier>{e260de10-737f-461c-80ff-97fcfac9915c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\Config\ConfigManager.cpp">
@@ -1070,13 +1073,16 @@
       <Filter>標頭檔\Framework\IO</Filter>
     </ClInclude>
     <ClInclude Include="Framework\Devices\Device.h">
-      <Filter>來源檔案\Framework\Devices</Filter>
+      <Filter>標頭檔\Framework\Devices</Filter>
     </ClInclude>
     <ClInclude Include="Framework\Devices\InputDevice.h">
-      <Filter>來源檔案\Framework\Devices</Filter>
+      <Filter>標頭檔\Framework\Devices</Filter>
     </ClInclude>
     <ClInclude Include="Framework\Devices\OutputDevice.h">
-      <Filter>來源檔案\Framework\Devices</Filter>
+      <Filter>標頭檔\Framework\Devices</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Allocation\DependencyContainer.h">
+      <Filter>標頭檔\Framework\Allocation</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
