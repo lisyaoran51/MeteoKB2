@@ -32,6 +32,9 @@ namespace Track {
 		virtual bool GetIsRunning();
 
 		// AdjustableClock
+		virtual int Start();
+		virtual int Stop();
+		virtual bool Seek(double position);
 		virtual int Reset();
 		virtual int ResetSpeedAdjustments();
 

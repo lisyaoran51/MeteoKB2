@@ -10,7 +10,7 @@ using namespace Util::Update;
 using namespace Util::Hierachal;
 using namespace Util;
 
-
+/* deprecated
 int Game::load()
 {
 	LOG(LogLevel::Info) << "Game::load : start loading the game and building updater";
@@ -44,3 +44,5 @@ int Game::Run()
 
 	return 0;
 }
+
+*/

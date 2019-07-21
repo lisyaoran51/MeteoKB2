@@ -6,8 +6,11 @@
 #include <vector>
 #include <thread>
 #include <functional>
+#include "AdjustableAudioComponent.h"
+#include "../../Util/TemplateConstraint.h"
 
 using namespace std;
+using namespace Util;
 
 
 namespace Framework {
@@ -17,8 +20,8 @@ namespace Audio {
 	/// 裡面可以加入資源T
 	/// TODO: 記成adjust aduio component，必須要是updatable才能update
 	/// </summary>
-	template<T>
-	class AudioCollectionManager : private TConstraint<T, AdjustableAudioComponent>, AdjustableAudioComponent {
+	template<class T>
+	class AudioCollectionManager : private TConstraint<T, AdjustableAudioComponent>, public AdjustableAudioComponent {
 
 	public:
 
@@ -32,6 +35,9 @@ namespace Audio {
 
 		int UnregisterItem(T* item);
 
+		/// <summary>
+		/// 這個會把他下面的其他manager更新，然後audio manager會把這個update放到thread裡面跑
+		/// </summary>
 		int Update();
 
 	protected:

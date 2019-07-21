@@ -5,8 +5,6 @@
 
 #include <vector>
 #include <thread>
-#include <functional>
-#include "../Allocation/Hierachal/Updatable.h"
 
 
 using namespace Framework::Allocation::Hierachal;
@@ -19,7 +17,7 @@ namespace Audio {
 	/// <summary>
 	/// 裡面有work queue，每次update就把工作做掉
 	/// </summary>
-	class AudioComponent : public Updatable {
+	class AudioComponent {
 
 	public:
 

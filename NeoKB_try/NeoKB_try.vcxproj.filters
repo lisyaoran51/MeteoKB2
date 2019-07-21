@@ -367,6 +367,12 @@
     <Filter Include="標頭檔\Framework\Devices">
       <UniqueIdentifier>{e260de10-737f-461c-80ff-97fcfac9915c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="標頭檔\Framework\Audio\Sample">
+      <UniqueIdentifier>{8e1f1052-0ae7-4ff4-9027-5da9efadc6dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Framework\Audio\Sample">
+      <UniqueIdentifier>{66e58af0-0df2-4db4-8ddf-fb49abeb92d5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\Config\ConfigManager.cpp">
@@ -656,6 +662,15 @@
     </ClCompile>
     <ClCompile Include="Framework\IO\BluetoothPhone.cpp">
       <Filter>來源檔案\Framework\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Audio\AudioManager.cpp">
+      <Filter>來源檔案\Framework\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Audio\Track\TrackManager.cpp">
+      <Filter>來源檔案\Framework\Audio\Track</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Audio\Sample\SampleManager.cpp">
+      <Filter>來源檔案\Framework\Audio\Sample</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1083,6 +1098,21 @@
     </ClInclude>
     <ClInclude Include="Framework\Allocation\DependencyContainer.h">
       <Filter>標頭檔\Framework\Allocation</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Game.h">
+      <Filter>標頭檔\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Audio\Sample\SampleManager.h">
+      <Filter>標頭檔\Framework\Audio\Sample</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Audio\Track\TrackManager.h">
+      <Filter>標頭檔\Framework\Audio\Track</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Audio\Sample\SampleChannel.h">
+      <Filter>標頭檔\Framework\Audio\Sample</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Audio\Sample\Sample.h">
+      <Filter>標頭檔\Framework\Audio\Sample</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -26,6 +26,13 @@ GameHost::GameHost(string name = "")
 
 int GameHost::Run(Game game)
 {
+	setupConfig();
+
+	resetInputHandlers();
+
+	drawThread->Start();
+	updateThread->Start();
+	bootstrapSceneGraph(game);
 
 
 	return 0;
@@ -59,7 +66,7 @@ int GameHost::drawFrame()
 			drawables[i]->GetPositionY());
 	}
 
-	mainInterface.Display->Display(canvas);
+	mainInterface->Display->Display(canvas);
 
 	return 0;
 }
@@ -83,7 +90,7 @@ int GameHost::inputInitialize()
 int GameHost::inputFrame()
 {
 
-	mainInterface.ScanInput();
+	mainInterface->ScanInput();
 	return 0;
 }
 
