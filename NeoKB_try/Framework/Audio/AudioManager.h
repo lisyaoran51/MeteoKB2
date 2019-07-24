@@ -10,12 +10,14 @@
 #include "Sample\SampleManager.h"
 #include "Track\TrackManager.h"
 #include "../IO/Stores/ResourceStore.h"
+#include "../Allocation/Hierachal/MtoObject.h"
 
 
 using namespace std;
 using namespace Framework::Audio::Sample;
 using namespace Framework::Audio::Track;
 using namespace Framework::IO::Stores;
+using namespace Framework::Allocation::Hierachal;
 
 
 
@@ -27,15 +29,15 @@ namespace Audio {
 	/// 內涵thread和音效資源
 	/// TODO: 記成collection manager，記成adjust aduio component
 	/// </summary>
-	class AudioManager : public AudioCollectionManager<AdjustableAudioComponent> {
+	class AudioManager : public AudioCollectionManager<AdjustableAudioComponent>, public MtoObject {
 
 	public:
 
-		AudioManager(ResourceStore<char*>* trackStore, ResourceStore<char*>* sampleStore);
+		AudioManager(ResourceStore<string>* trackStore, ResourceStore<string>* sampleStore);
 
-		SampleManager* GetSampleManager(ResourceStore<char*>* sampleStore = nullptr);
+		SampleManager* GetSampleManager(ResourceStore<string>* sampleStore = nullptr);
 
-		TrackManager* GetTrackManager(ResourceStore<char*>* trackStore = nullptr);
+		TrackManager* GetTrackManager(ResourceStore<string>* trackStore = nullptr);
 
 		GameThread* GetAudioThread();
 

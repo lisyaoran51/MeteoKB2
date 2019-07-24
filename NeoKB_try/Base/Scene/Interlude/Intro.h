@@ -1,7 +1,9 @@
 #ifndef INTRO_H
 #define INTRO_H
 
-#include "../Scene.h"
+#include "../../../Framework/Scenes/Scene.h"
+
+using namespace Framework::Scene;
 
 namespace Base {
 namespace Scene {

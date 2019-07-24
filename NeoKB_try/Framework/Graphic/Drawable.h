@@ -15,6 +15,7 @@ namespace Graphic {
 
 		string name;
 		bool isInitialized;
+		bool isDrawable;
 
 		int positionX, positionY;
 		float rotation;
@@ -33,6 +34,7 @@ namespace Graphic {
 		Drawable(int w, int h);
 		
 		int Initialize(int w, int h);
+		int Deactivate();
 
 		int SetPositionX(int x);
 		int SetPositionY(int y);

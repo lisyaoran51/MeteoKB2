@@ -21,6 +21,7 @@ namespace Audio {
 
 	public:
 
+		bool GetIsCompleted();
 
 	protected:
 
@@ -31,7 +32,7 @@ namespace Audio {
 		/// </summary>
 		// protected ConcurrentQueue<Action> PendingActions = new ConcurrentQueue<Action>();
 
-		bool hasCompleted;
+		bool isCompleted = false;
 
 	private:
 

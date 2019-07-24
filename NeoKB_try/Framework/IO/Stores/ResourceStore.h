@@ -23,29 +23,50 @@ namespace Stores {
 
 	public:
 
-		ResourceStore(ResourceStore* store);
+		ResourceStore(ResourceStore<T>* store = nullptr);
 
-		ResourceStore(vector<ResourceStore*>* ss);
+		ResourceStore(vector<ResourceStore<T>*>* ss);
 
-		T Get(string name);
+		virtual T Get(string name);
 
-		ifstream* GetStream(string name);
+		virtual ifstream* GetStream(string name);
 
 		int AddExtension(string extension);
 
+		int AddStore(ResourceStore<T>* store);
+
 	protected:
 
-		vector<string>* getFileNames();
+		vector<string>* getFileNames(string name);
+
+		/// <summary>
+		/// 用來檢索整個資料夾下有哪些檔案
+		/// </summary>
+		static FileSystemInterface fileSystemInterface = nullptr;
+
+		/// <summary>
+		/// 用來檢索整個資料夾下有哪些檔案
+		/// </summary>
+		virtual int initializeFileSystemInterface();
 
 	private:
 
-		vector<ResourceStore*> stores;
+		vector<ResourceStore<T>*> stores;
 
 		vector<string> extensions;
 
+		
+
 	};
 
+	struct FileNotFoundException : public runtime_error {
 
+		FileNotFoundException(char* message): runtime_error(message) {}
+
+		const char * what() const throw () {
+			return runtime_error::what();
+		}
+	};
 
 
 }}}

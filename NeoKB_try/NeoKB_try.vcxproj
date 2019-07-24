@@ -21,12 +21,12 @@
   <ItemGroup>
     <ClCompile Include="Base\Config\ConfigManager.cpp" />
     <ClCompile Include="Base\Config\FrameworkConfigManager.cpp" />
-    <ClCompile Include="Base\Game.cpp" />
     <ClCompile Include="Base\Graphic\Renderer\MapAlgorithm\HardwareMapAlgorithm.cpp" />
     <ClCompile Include="Base\Graphic\Renderer\renderer.cpp" />
     <ClCompile Include="Base\Ruleset\Mod\Mod.cpp" />
     <ClCompile Include="Base\Ruleset\Ruleset.cpp" />
     <ClCompile Include="Base\Ruleset\RulesetInfo.cpp" />
+    <ClCompile Include="Base\Scene\Interlude\Intro.cpp" />
     <ClCompile Include="Base\Scene\Play\Player.cpp" />
     <ClCompile Include="Base\Scene\Play\Playfield.cpp" />
     <ClCompile Include="Base\Scene\Play\Session.cpp" />
@@ -62,18 +62,22 @@
     <ClCompile Include="Devices\LedDriver\ws2811.c" />
     <ClCompile Include="Framework\Allocation\Hierachal\Cachable.cpp" />
     <ClCompile Include="Framework\Allocation\Hierachal\ChildAddable.cpp" />
+    <ClCompile Include="Framework\Allocation\Hierachal\Container.cpp" />
     <ClCompile Include="Framework\Allocation\Hierachal\HasParent.cpp" />
     <ClCompile Include="Framework\Allocation\Hierachal\Loadable.cpp" />
     <ClCompile Include="Framework\Allocation\Hierachal\LoadStateHandler.cpp" />
     <ClCompile Include="Framework\Allocation\Hierachal\MtoObject.cpp" />
+    <ClCompile Include="Framework\Allocation\Hierachal\Schedulable.cpp" />
     <ClCompile Include="Framework\Allocation\Hierachal\Triggerable.cpp" />
     <ClCompile Include="Framework\Allocation\Hierachal\Updatable.cpp" />
     <ClCompile Include="Framework\Audio\AdjustableAudioComponent.cpp" />
+    <ClCompile Include="Framework\Audio\AudioCollectionManager.cpp" />
     <ClCompile Include="Framework\Audio\AudioComponent.cpp" />
     <ClCompile Include="Framework\Audio\AudioManager.cpp" />
     <ClCompile Include="Framework\Audio\Sample\SampleManager.cpp" />
     <ClCompile Include="Framework\Audio\Track\Track.cpp" />
     <ClCompile Include="Framework\Audio\Track\TrackManager.cpp" />
+    <ClCompile Include="Framework\Game.cpp" />
     <ClCompile Include="Framework\Graphic\Drawable.cpp" />
     <ClCompile Include="Framework\Graphic\Map\Map.cpp" />
     <ClCompile Include="Framework\Host\GameHost.cpp" />
@@ -86,6 +90,9 @@
     <ClCompile Include="Framework\IO\Keyboard.cpp" />
     <ClCompile Include="Framework\IO\MainInterface.cpp" />
     <ClCompile Include="Framework\IO\Panel.cpp" />
+    <ClCompile Include="Framework\IO\Stores\DynamicPathResourceStore.cpp" />
+    <ClCompile Include="Framework\IO\Stores\ResourceStore.cpp" />
+    <ClCompile Include="Framework\Scenes\Scene.cpp" />
     <ClCompile Include="Framework\Timing\DecoupledInterpolatingFramedClock.cpp" />
     <ClCompile Include="Framework\Timing\FramedClock.cpp" />
     <ClCompile Include="Framework\Timing\InterpolatingFramedClock.cpp" />
@@ -125,7 +132,6 @@
   <ItemGroup>
     <ClInclude Include="Base\Config\ConfigManager.h" />
     <ClInclude Include="Base\Config\FrameworkConfigManager.h" />
-    <ClInclude Include="Base\Game.h" />
     <ClInclude Include="Base\Graphic\Renderer\MapAlgorithm\HardwareMapAlgorithm.h" />
     <ClInclude Include="Base\Graphic\Renderer\renderer.h" />
     <ClInclude Include="Base\Ruleset\Mod\Mod.h" />
@@ -138,7 +144,7 @@
     <ClInclude Include="Base\Scene\Play\Playfield.h" />
     <ClInclude Include="Base\Scene\Play\Session.h" />
     <ClInclude Include="Base\Scene\Play\TimeController.h" />
-    <ClInclude Include="Base\Scene\Scene.h" />
+    <ClInclude Include="Base\Scene\Select\MainMenu.h" />
     <ClInclude Include="Base\Scene\Select\SongSelect.h" />
     <ClInclude Include="Base\Scheduler\Event\ControlPoints\ControlPoint.h" />
     <ClInclude Include="Base\Scheduler\Event\ControlPoints\NoteControlPoint.h" />
@@ -185,9 +191,12 @@
     <ClInclude Include="Framework\Allocation\DependencyContainer.h" />
     <ClInclude Include="Framework\Allocation\Hierachal\Cachable.h" />
     <ClInclude Include="Framework\Allocation\Hierachal\ChildAddable.h" />
+    <ClInclude Include="Framework\Allocation\Hierachal\Container.h" />
     <ClInclude Include="Framework\Allocation\Hierachal\HasParent.h" />
     <ClInclude Include="Framework\Allocation\Hierachal\Loadable.h" />
     <ClInclude Include="Framework\Allocation\Hierachal\MtoObject.h" />
+    <ClInclude Include="Framework\Allocation\Hierachal\Scehduler.h" />
+    <ClInclude Include="Framework\Allocation\Hierachal\Schedulable.h" />
     <ClInclude Include="Framework\Allocation\Hierachal\Triggerable.h" />
     <ClInclude Include="Framework\Allocation\Hierachal\Updatable.h" />
     <ClInclude Include="Framework\Audio\AdjustableAudioComponent.h" />
@@ -202,6 +211,7 @@
     <ClInclude Include="Framework\Devices\Device.h" />
     <ClInclude Include="Framework\Devices\InputDevice.h" />
     <ClInclude Include="Framework\Devices\OutputDevice.h" />
+    <ClInclude Include="Framework\Exceptions\FrameworkException.h" />
     <ClInclude Include="Framework\Game.h" />
     <ClInclude Include="Framework\Graphic\Drawable.h" />
     <ClInclude Include="Framework\Graphic\Map\Map.h" />
@@ -223,8 +233,10 @@
     <ClInclude Include="Framework\IO\MainInterface.h" />
     <ClInclude Include="Framework\IO\Panel.h" />
     <ClInclude Include="Framework\IO\Peripheral.h" />
+    <ClInclude Include="Framework\IO\Stores\DynamicPathResourceStore.h" />
     <ClInclude Include="Framework\IO\Stores\NamespacedResourceStore.h" />
     <ClInclude Include="Framework\IO\Stores\ResourceStore.h" />
+    <ClInclude Include="Framework\Scenes\Scene.h" />
     <ClInclude Include="Framework\Threading\GameThread.h" />
     <ClInclude Include="Framework\Timing\AdjustableClock.h" />
     <ClInclude Include="Framework\Timing\Clock.h" />

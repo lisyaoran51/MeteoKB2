@@ -41,10 +41,16 @@ int Updatable::UpdateSubTree()
 		if(child != nullptr)
 			Cast<Updatable>(*iter)->UpdateSubTree();
 	}
+
 	return 0;
 }
 
 int Updatable::update()
+{
+	return 0;
+}
+
+int Updatable::onUpdateSubTree()
 {
 	return 0;
 }

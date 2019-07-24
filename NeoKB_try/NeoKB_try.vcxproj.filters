@@ -373,6 +373,15 @@
     <Filter Include="來源檔案\Framework\Audio\Sample">
       <UniqueIdentifier>{66e58af0-0df2-4db4-8ddf-fb49abeb92d5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="來源檔案\Framework\Scenes">
+      <UniqueIdentifier>{8dff8c0e-ea75-4d77-89a8-ef48eed0b0a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Framework\Exception">
+      <UniqueIdentifier>{44bf7139-9605-4434-a582-9254630dafed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Game\Scene\Interlude">
+      <UniqueIdentifier>{fef00a90-ee50-48af-b7f6-91aa4e689ab4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\Config\ConfigManager.cpp">
@@ -416,9 +425,6 @@
     </ClCompile>
     <ClCompile Include="RulesetMeteor\Sheetmusic\MeteorSheetmusicConverter.cpp">
       <Filter>來源檔案\RulesetMeteor\Sheetmusic</Filter>
-    </ClCompile>
-    <ClCompile Include="Base\Game.cpp">
-      <Filter>來源檔案\Game</Filter>
     </ClCompile>
     <ClCompile Include="RulesetMeteor\MeteorGame.cpp">
       <Filter>來源檔案\RulesetMeteor</Filter>
@@ -672,6 +678,30 @@
     <ClCompile Include="Framework\Audio\Sample\SampleManager.cpp">
       <Filter>來源檔案\Framework\Audio\Sample</Filter>
     </ClCompile>
+    <ClCompile Include="Framework\Audio\AudioCollectionManager.cpp">
+      <Filter>來源檔案\Framework\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Game.cpp">
+      <Filter>來源檔案\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\IO\Stores\ResourceStore.cpp">
+      <Filter>來源檔案\Framework\IO\Stores</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\IO\Stores\DynamicPathResourceStore.cpp">
+      <Filter>來源檔案\Framework\IO\Stores</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Allocation\Hierachal\Container.cpp">
+      <Filter>來源檔案\Framework\Allocation\Hierachal</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Scenes\Scene.cpp">
+      <Filter>來源檔案\Framework\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Scene\Interlude\Intro.cpp">
+      <Filter>來源檔案\Game\Scene\Interlude</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Allocation\Hierachal\Schedulable.cpp">
+      <Filter>來源檔案\Framework\Allocation\Hierachal</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="DailyLog.txt">
@@ -817,9 +847,6 @@
     <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\Algorithm\GlowLineMapAlgorithm.h">
       <Filter>標頭檔\RulesetMeteor\Schedulers\Events\Effects\Algorithms</Filter>
     </ClInclude>
-    <ClInclude Include="Base\Game.h">
-      <Filter>標頭檔\Game</Filter>
-    </ClInclude>
     <ClInclude Include="RulesetMeteor\MeteorGame.h">
       <Filter>標頭檔\RulesetMeteor</Filter>
     </ClInclude>
@@ -963,9 +990,6 @@
     </ClInclude>
     <ClInclude Include="Base\Scene\Select\SongSelect.h">
       <Filter>標頭檔\Game\Scene\Select</Filter>
-    </ClInclude>
-    <ClInclude Include="Base\Scene\Scene.h">
-      <Filter>標頭檔\Game\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Base\Scene\Play\PlayerLoader.h">
       <Filter>標頭檔\Game\Scene\play</Filter>
@@ -1113,6 +1137,27 @@
     </ClInclude>
     <ClInclude Include="Framework\Audio\Sample\Sample.h">
       <Filter>標頭檔\Framework\Audio\Sample</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\IO\Stores\DynamicPathResourceStore.h">
+      <Filter>標頭檔\Framework\IO\Stores</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Allocation\Hierachal\Container.h">
+      <Filter>標頭檔\Framework\Allocation\Hierachal</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Scenes\Scene.h">
+      <Filter>標頭檔\Framework\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Exceptions\FrameworkException.h">
+      <Filter>標頭檔\Framework\Exception</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Scene\Select\MainMenu.h">
+      <Filter>標頭檔\Game\Scene\Select</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Allocation\Hierachal\Schedulable.h">
+      <Filter>標頭檔\Framework\Allocation\Hierachal</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Allocation\Hierachal\Scehduler.h">
+      <Filter>標頭檔\Framework\Allocation\Hierachal</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

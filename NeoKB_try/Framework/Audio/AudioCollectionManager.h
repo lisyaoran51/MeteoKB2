@@ -25,28 +25,34 @@ namespace Audio {
 
 	public:
 
-		AudioCollectionManager();
-
 		int AddItem(T* item);
 
 		int AddItemToList(T* item);
 
+		/// <summary>
+		/// 懶得寫action，所以還沒有用
+		/// </summary>
 		int RegisterItem(T* item);
 
 		int UnregisterItem(T* item);
 
-		/// <summary>
-		/// 這個會把他下面的其他manager更新，然後audio manager會把這個update放到thread裡面跑
-		/// </summary>
-		int Update();
+		
 
 	protected:
 
-		vector<T*>* items;
+		vector<T*> items;
+
+		virtual int deleteItem(T* item);
+
+		/// <summary>
+		/// 這個會把他下面的其他manager更新，然後audio manager會把這個update放到thread裡面跑
+		/// </summary>
+		virtual int update();
 
 	private:
 
 	};
+
 
 }}
 

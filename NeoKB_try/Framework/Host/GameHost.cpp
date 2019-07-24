@@ -114,6 +114,7 @@ int GameHost::bootstrapSceneGraph(Game game)
 	// root 要async，不然會變成沒有loaded
 	root->Async();
 
+	root->AddChild(game);
 	game->SetHost(this);
 
 

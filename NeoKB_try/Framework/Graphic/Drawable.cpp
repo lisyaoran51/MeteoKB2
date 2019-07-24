@@ -20,6 +20,7 @@ Drawable::Drawable(int w, int h)
 	isMasked = false;
 	depth = 0;
 	isInitialized = true;
+	isDrawable = true;
 }
 
 int Drawable::Initialize(int w, int h)
@@ -34,6 +35,13 @@ int Drawable::Initialize(int w, int h)
 	isMasked = false;
 	depth = 0;
 	isInitialized = true;
+	isDrawable = true;
+	return 0;
+}
+
+int Drawable::Deactivate()
+{
+	isDrawable = false;
 	return 0;
 }
 

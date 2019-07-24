@@ -17,10 +17,12 @@ namespace Stores {
 	/// <summary>
 	/// 只儲存路徑，不提供檔案讀取，要讀取的話要add進這個Store
 	/// </summary>
-	class NamespacedResourceStore : public ResourceStore<char*> {
+	template<typename T>
+	class NamespacedResourceStore : public ResourceStore<T> {
 
 	public:
 
+		NamespacedResourceStore(ResourceStore<T>* store, string name);
 
 		/// <summary>
 		/// read all bytes方法：
