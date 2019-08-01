@@ -43,6 +43,10 @@ namespace Sheetmusics {
 
 		Sm<Event>* GetSm();
 
+		bool IsTheSameSm(SmInfo* s);
+
+		Bindable<vector<Modifier*>*>* GetModifiers();
+
 	protected:
 
 		virtual Sm<Event>* createSm();

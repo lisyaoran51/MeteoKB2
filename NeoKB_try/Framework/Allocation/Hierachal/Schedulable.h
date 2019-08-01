@@ -5,7 +5,7 @@
 #include <vector>
 #include "Updatable.h"
 #include "../../Timing/FrameBasedClock.h"
-#include "Scehduler.h"
+#include "Scheduler.h"
 
 using namespace std;
 using namespace Framework::Timing;

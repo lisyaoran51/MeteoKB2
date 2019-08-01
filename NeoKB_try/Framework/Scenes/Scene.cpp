@@ -17,6 +17,7 @@ int Scene::Push(Scene * scene)
 	if (childScene != nullptr)
 		throw FrameworkError("Scene::Push(): There Should be no child scene when pushing.");
 
+
 	scene->SetParentScene(this);
 
 	AddChild(scene);

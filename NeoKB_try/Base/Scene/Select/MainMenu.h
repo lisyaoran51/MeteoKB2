@@ -2,12 +2,13 @@
 #define MAIN_MENU_H
 
 
-#include "../Scene.h"
+#include "../../../Framework/Scenes/Scene.h"
 #include "../../Sheetmusic/SheetmusicInfo.h"
 #include "../../Sheetmusic/WorkingSheetmusic.h"
 
 
 using namespace Base::Sheetmusics;
+using namespace Framework::Scene;
 
 
 namespace Base {
@@ -26,6 +27,7 @@ namespace Select {
 
 	protected:
 
+		virtual int onEntering(Scene* lastScene);
 
 	private:
 

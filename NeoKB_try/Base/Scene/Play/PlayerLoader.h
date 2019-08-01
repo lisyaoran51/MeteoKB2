@@ -2,10 +2,10 @@
 #define PLAYER_LOADER_H
 
 
-#include "../Scene.h"
+#include "../../../Framework/Scenes/Scene.h"
 
-using namespace Base::Scene;
-
+using namespace Framework::Scene;
+using namespace Framework::Allocation::Hierachal;
 
 namespace Base {
 namespace Play {

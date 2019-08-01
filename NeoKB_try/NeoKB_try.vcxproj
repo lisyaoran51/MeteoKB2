@@ -28,9 +28,13 @@
     <ClCompile Include="Base\Ruleset\RulesetInfo.cpp" />
     <ClCompile Include="Base\Scene\Interlude\Intro.cpp" />
     <ClCompile Include="Base\Scene\Play\Player.cpp" />
+    <ClCompile Include="Base\Scene\Play\PlayerLoader.cpp" />
     <ClCompile Include="Base\Scene\Play\Playfield.cpp" />
     <ClCompile Include="Base\Scene\Play\Session.cpp" />
     <ClCompile Include="Base\Scene\Play\TimeController.cpp" />
+    <ClCompile Include="Base\Scene\Select\MainMenu.cpp" />
+    <ClCompile Include="Base\Scene\Select\PlaySongSelect.cpp" />
+    <ClCompile Include="Base\Scene\Select\SongSelect.cpp" />
     <ClCompile Include="Base\Scheduler\Event\ControlPoints\ControlPoint.cpp" />
     <ClCompile Include="Base\Scheduler\Event\ControlPoints\NoteControlPoint.cpp" />
     <ClCompile Include="Base\Scheduler\Event\Effect\Effect.cpp" />
@@ -41,7 +45,6 @@
     <ClCompile Include="Base\Scheduler\Event\SystemEvents\StopSystemEvent.cpp" />
     <ClCompile Include="Base\Scheduler\Event\SystemEvents\SystemEvent.cpp" />
     <ClCompile Include="Base\Scheduler\Event\SystemEvents\SystemEventHandler.cpp" />
-    <ClCompile Include="Base\Scheduler\Scheduler.cpp" />
     <ClCompile Include="Base\Sheetmusic\Format\SimpleSmDecoder.cpp" />
     <ClCompile Include="Base\Sheetmusic\Format\SmDecoder.cpp" />
     <ClCompile Include="Base\Sheetmusic\IO\FileReader.cpp" />
@@ -68,6 +71,7 @@
     <ClCompile Include="Framework\Allocation\Hierachal\LoadStateHandler.cpp" />
     <ClCompile Include="Framework\Allocation\Hierachal\MtoObject.cpp" />
     <ClCompile Include="Framework\Allocation\Hierachal\Schedulable.cpp" />
+    <ClCompile Include="Framework\Allocation\Hierachal\Scheduler.cpp" />
     <ClCompile Include="Framework\Allocation\Hierachal\Triggerable.cpp" />
     <ClCompile Include="Framework\Allocation\Hierachal\Updatable.cpp" />
     <ClCompile Include="Framework\Audio\AdjustableAudioComponent.cpp" />
@@ -145,6 +149,7 @@
     <ClInclude Include="Base\Scene\Play\Session.h" />
     <ClInclude Include="Base\Scene\Play\TimeController.h" />
     <ClInclude Include="Base\Scene\Select\MainMenu.h" />
+    <ClInclude Include="Base\Scene\Select\PlaySongSelect.h" />
     <ClInclude Include="Base\Scene\Select\SongSelect.h" />
     <ClInclude Include="Base\Scheduler\Event\ControlPoints\ControlPoint.h" />
     <ClInclude Include="Base\Scheduler\Event\ControlPoints\NoteControlPoint.h" />
@@ -162,7 +167,6 @@
     <ClInclude Include="Base\Scheduler\Event\SystemEvents\StopSystemEvent.h" />
     <ClInclude Include="Base\Scheduler\Event\SystemEvents\SystemEvent.h" />
     <ClInclude Include="Base\Scheduler\Event\SystemEvents\SystemEventHandler.h" />
-    <ClInclude Include="Base\Scheduler\Scheduler.h" />
     <ClInclude Include="Base\Sheetmusic\Format\Parser\EventParser.h" />
     <ClInclude Include="Base\Sheetmusic\Format\SimpleSmDecoder.h" />
     <ClInclude Include="Base\Sheetmusic\Format\SmDecoder.h" />
@@ -195,7 +199,7 @@
     <ClInclude Include="Framework\Allocation\Hierachal\HasParent.h" />
     <ClInclude Include="Framework\Allocation\Hierachal\Loadable.h" />
     <ClInclude Include="Framework\Allocation\Hierachal\MtoObject.h" />
-    <ClInclude Include="Framework\Allocation\Hierachal\Scehduler.h" />
+    <ClInclude Include="Framework\Allocation\Hierachal\Scheduler.h" />
     <ClInclude Include="Framework\Allocation\Hierachal\Schedulable.h" />
     <ClInclude Include="Framework\Allocation\Hierachal\Triggerable.h" />
     <ClInclude Include="Framework\Allocation\Hierachal\Updatable.h" />

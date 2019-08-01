@@ -382,6 +382,9 @@
     <Filter Include="來源檔案\Game\Scene\Interlude">
       <UniqueIdentifier>{fef00a90-ee50-48af-b7f6-91aa4e689ab4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="來源檔案\Game\Scene\Select">
+      <UniqueIdentifier>{69bc6652-71b6-4ee3-b877-50c8bb572a13}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\Config\ConfigManager.cpp">
@@ -392,9 +395,6 @@
     </ClCompile>
     <ClCompile Include="Base\Ruleset\Mod\Mod.cpp">
       <Filter>來源檔案\Game\Ruleset\Mod</Filter>
-    </ClCompile>
-    <ClCompile Include="Base\Scheduler\Scheduler.cpp">
-      <Filter>來源檔案\Game\Schedulers</Filter>
     </ClCompile>
     <ClCompile Include="Base\Scheduler\Event\Event.cpp">
       <Filter>來源檔案\Game\Schedulers\Events</Filter>
@@ -702,6 +702,21 @@
     <ClCompile Include="Framework\Allocation\Hierachal\Schedulable.cpp">
       <Filter>來源檔案\Framework\Allocation\Hierachal</Filter>
     </ClCompile>
+    <ClCompile Include="Framework\Allocation\Hierachal\Scheduler.cpp">
+      <Filter>來源檔案\Framework\Allocation\Hierachal</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Scene\Select\MainMenu.cpp">
+      <Filter>來源檔案\Game\Scene\Select</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Scene\Select\SongSelect.cpp">
+      <Filter>來源檔案\Game\Scene\Select</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Scene\Select\PlaySongSelect.cpp">
+      <Filter>來源檔案\Game\Scene\Select</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Scene\Play\PlayerLoader.cpp">
+      <Filter>來源檔案\Game\Scene\Play</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="DailyLog.txt">
@@ -726,9 +741,6 @@
     </ClInclude>
     <ClInclude Include="Base\Ruleset\Mod\Mod.h">
       <Filter>標頭檔\Game\Ruleset\Mod</Filter>
-    </ClInclude>
-    <ClInclude Include="Base\Scheduler\Scheduler.h">
-      <Filter>標頭檔\Game\Scheduler</Filter>
     </ClInclude>
     <ClInclude Include="Base\Scheduler\Event\Event.h">
       <Filter>標頭檔\Game\Scheduler\Events</Filter>
@@ -1156,8 +1168,11 @@
     <ClInclude Include="Framework\Allocation\Hierachal\Schedulable.h">
       <Filter>標頭檔\Framework\Allocation\Hierachal</Filter>
     </ClInclude>
-    <ClInclude Include="Framework\Allocation\Hierachal\Scehduler.h">
+    <ClInclude Include="Framework\Allocation\Hierachal\Scheduler.h">
       <Filter>標頭檔\Framework\Allocation\Hierachal</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Scene\Select\PlaySongSelect.h">
+      <Filter>標頭檔\Game\Scene\Select</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

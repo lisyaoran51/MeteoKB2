@@ -16,7 +16,10 @@ namespace DataStructure {
 
 	public:
 
-		int SetValue(T v);
+		/// <summary>
+		/// 要判斷這個視布試pointer，試的話才能delete
+		/// </summary>
+		int SetValue(T v, bool deleteLast = false);
 		
 		T GetValue();
 

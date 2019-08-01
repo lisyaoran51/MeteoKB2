@@ -18,8 +18,11 @@ namespace Interlude {
 
 	protected:
 
+		virtual int onEntering(Scene* lastScene);
 
 	private:
+
+		MainMenu* mainMenu = nullptr;
 
 		/// <summary>
 		/// Åª¨ú

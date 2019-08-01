@@ -1,6 +1,7 @@
 #include "Scheduler.h"
 
 #include "../../Util/Log.h"
+#include "..\..\Framework\Allocation\Hierachal\Scheduler.h"
 
 
 using namespace Base::Schedulers;
