@@ -28,7 +28,11 @@ namespace DataStructure {
 		template<class _Type>
 		int Delete(_Type* callableObject, string callbackName);
 
+		int Clear();
+
 		int Trigger(_Types... _Args);
+
+		int TriggerThenClear(_Types... _Args);
 
 	protected:
 

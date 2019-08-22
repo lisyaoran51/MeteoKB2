@@ -78,6 +78,10 @@
     <ClCompile Include="Framework\Audio\AudioCollectionManager.cpp" />
     <ClCompile Include="Framework\Audio\AudioComponent.cpp" />
     <ClCompile Include="Framework\Audio\AudioManager.cpp" />
+    <ClCompile Include="Framework\Audio\Sample\BassSample.cpp" />
+    <ClCompile Include="Framework\Audio\Sample\BassSampleChannel.cpp" />
+    <ClCompile Include="Framework\Audio\Sample\Sample.cpp" />
+    <ClCompile Include="Framework\Audio\Sample\SampleChannel.cpp" />
     <ClCompile Include="Framework\Audio\Sample\SampleManager.cpp" />
     <ClCompile Include="Framework\Audio\Track\Track.cpp" />
     <ClCompile Include="Framework\Audio\Track\TrackManager.cpp" />
@@ -85,10 +89,14 @@
     <ClCompile Include="Framework\Graphic\Drawable.cpp" />
     <ClCompile Include="Framework\Graphic\Map\Map.cpp" />
     <ClCompile Include="Framework\Host\GameHost.cpp" />
+    <ClCompile Include="Framework\Input\BluetoothState.cpp" />
     <ClCompile Include="Framework\Input\Handler\BluetoothInputHandler.cpp" />
     <ClCompile Include="Framework\Input\Handler\KeyboardInputHandler.cpp" />
     <ClCompile Include="Framework\Input\Handler\PanelInputHandler.cpp" />
     <ClCompile Include="Framework\Input\InputManager.cpp" />
+    <ClCompile Include="Framework\Input\InputState.cpp" />
+    <ClCompile Include="Framework\Input\KeyboardState.cpp" />
+    <ClCompile Include="Framework\Input\PanelState.cpp" />
     <ClCompile Include="Framework\IO\BluetoothPhone.cpp" />
     <ClCompile Include="Framework\IO\Display.cpp" />
     <ClCompile Include="Framework\IO\Keyboard.cpp" />
@@ -207,9 +215,12 @@
     <ClInclude Include="Framework\Audio\AudioCollectionManager.h" />
     <ClInclude Include="Framework\Audio\AudioComponent.h" />
     <ClInclude Include="Framework\Audio\AudioManager.h" />
+    <ClInclude Include="Framework\Audio\Sample\BassSampleChannel.h" />
+    <ClInclude Include="Framework\Audio\Sample\BassSample.h" />
     <ClInclude Include="Framework\Audio\Sample\Sample.h" />
     <ClInclude Include="Framework\Audio\Sample\SampleChannel.h" />
     <ClInclude Include="Framework\Audio\Sample\SampleManager.h" />
+    <ClInclude Include="Framework\Audio\Track\BassTrack.h" />
     <ClInclude Include="Framework\Audio\Track\Track.h" />
     <ClInclude Include="Framework\Audio\Track\TrackManager.h" />
     <ClInclude Include="Framework\Devices\Device.h" />
@@ -274,6 +285,7 @@
     <ClInclude Include="RulesetMeteor\Sheetmusic\MeteorSheetmusicConverter.h" />
     <ClInclude Include="RulesetMeteor\Sheetmusic\MeteorSheetmusicPostProcessor.h" />
     <ClInclude Include="RulesetMeteor\Sheetmusic\Pattern\MeteorPatternGenerator.h" />
+    <ClInclude Include="ThirdParty\Bass\bass.h" />
     <ClInclude Include="Util\DataStructure\Action.h" />
     <ClInclude Include="Util\DataStructure\Bindable.h" />
     <ClInclude Include="Util\DataStructure\PeriodMap.h" />

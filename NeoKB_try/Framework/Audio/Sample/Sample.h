@@ -14,7 +14,11 @@ namespace Sample {
 
 	public:
 
+		virtual bool GetIsLoaded();
+
 	protected:
+
+		bool isLoaded;
 
 	};
 

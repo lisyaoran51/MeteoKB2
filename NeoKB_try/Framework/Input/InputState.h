@@ -21,23 +21,25 @@ namespace Input {
 	public:
 
 
-		InputState* Clone();
+		virtual InputState* Clone();
 
-		InputState* SetLastState(InputState* lState);
+		int SetLastState(InputState* lState);
 
 		InputState* GetLastState();
 
-		InputState* SetKeyboardState(KeyboardState* kState);
+		int SetKeyboardState(KeyboardState* kState);
 
 		KeyboardState* GetKeyboardState();
 
-		InputState* SetPanelState(PanelState* pState);
+		int SetPanelState(PanelState* pState);
 
 		PanelState* GetPanelState();
 
-		InputState* SetBluetoothState(BluetoothState* bState);
+		int SetBluetoothState(BluetoothState* bState);
 
 		BluetoothState* GetBluetoothState();
+
+		int SetIsLastState();
 
 	protected:
 
@@ -51,6 +53,8 @@ namespace Input {
 		PanelState* panelState;
 
 		BluetoothState* bluetoothState;
+
+		bool isLastState = false;
 
 	};
 

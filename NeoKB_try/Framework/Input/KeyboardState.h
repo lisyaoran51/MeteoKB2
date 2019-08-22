@@ -2,6 +2,9 @@
 #define KEYBOARD_STATE_H
 
 #include "PeripheralState.h"
+#include <vector>
+
+using namespace std;
 
 namespace Framework {
 namespace Input {

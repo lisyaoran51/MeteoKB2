@@ -10,7 +10,7 @@ namespace Input {
 
 	public:
 
-		virtual PeripheralState* Clone() = 0;
+		virtual T* Clone() = 0;
 
 		int SetIsLastState() {
 			isLastState = true;

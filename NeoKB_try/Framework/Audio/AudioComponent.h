@@ -5,10 +5,12 @@
 
 #include <vector>
 #include <thread>
+#include "../../Util/DataStructure/Action.h"
 
 
 using namespace Framework::Allocation::Hierachal;
 using namespace std;
+using namespace Util::DataStructure;
 
 
 namespace Framework {
@@ -32,7 +34,11 @@ namespace Audio {
 		/// </summary>
 		// protected ConcurrentQueue<Action> PendingActions = new ConcurrentQueue<Action>();
 
+		virtual int Dispose();
+
 		bool isCompleted = false;
+
+		Action<int> pendingActions;
 
 	private:
 

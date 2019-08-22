@@ -385,6 +385,12 @@
     <Filter Include="來源檔案\Game\Scene\Select">
       <UniqueIdentifier>{69bc6652-71b6-4ee3-b877-50c8bb572a13}</UniqueIdentifier>
     </Filter>
+    <Filter Include="標頭檔\ThirdParty">
+      <UniqueIdentifier>{4e00f751-480c-4c68-8769-61188d2c1b17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\ThirdParty\Bass">
+      <UniqueIdentifier>{131b7eae-1d9c-4a60-98b9-4a601ad382d6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\Config\ConfigManager.cpp">
@@ -717,6 +723,30 @@
     <ClCompile Include="Base\Scene\Play\PlayerLoader.cpp">
       <Filter>來源檔案\Game\Scene\Play</Filter>
     </ClCompile>
+    <ClCompile Include="Framework\Input\InputState.cpp">
+      <Filter>來源檔案\Framework\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Input\KeyboardState.cpp">
+      <Filter>來源檔案\Framework\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Input\PanelState.cpp">
+      <Filter>來源檔案\Framework\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Input\BluetoothState.cpp">
+      <Filter>來源檔案\Framework\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Audio\Sample\BassSample.cpp">
+      <Filter>來源檔案\Framework\Audio\Sample</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Audio\Sample\SampleChannel.cpp">
+      <Filter>來源檔案\Framework\Audio\Sample</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Audio\Sample\BassSampleChannel.cpp">
+      <Filter>來源檔案\Framework\Audio\Sample</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Audio\Sample\Sample.cpp">
+      <Filter>來源檔案\Framework\Audio\Sample</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="DailyLog.txt">
@@ -970,9 +1000,6 @@
     <ClInclude Include="Framework\Threading\GameThread.h">
       <Filter>標頭檔\Framework\Threading</Filter>
     </ClInclude>
-    <ClInclude Include="Framework\Audio\AudioManager.h">
-      <Filter>標頭檔\Framework\Audio</Filter>
-    </ClInclude>
     <ClInclude Include="Framework\Audio\AudioCollectionManager.h">
       <Filter>標頭檔\Framework\Audio</Filter>
     </ClInclude>
@@ -1173,6 +1200,21 @@
     </ClInclude>
     <ClInclude Include="Base\Scene\Select\PlaySongSelect.h">
       <Filter>標頭檔\Game\Scene\Select</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Audio\Sample\BassSample.h">
+      <Filter>標頭檔\Framework\Audio\Sample</Filter>
+    </ClInclude>
+    <ClInclude Include="ThirdParty\Bass\bass.h">
+      <Filter>標頭檔\ThirdParty\Bass</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Audio\Sample\BassSampleChannel.h">
+      <Filter>標頭檔\Framework\Audio\Sample</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Audio\AudioManager.h">
+      <Filter>標頭檔\Framework\Devices</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Audio\Track\BassTrack.h">
+      <Filter>標頭檔\Framework\Audio\Track</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

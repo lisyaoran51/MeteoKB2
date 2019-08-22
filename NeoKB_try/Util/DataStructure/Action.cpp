@@ -38,11 +38,29 @@ int Action<_Fty, _Types...>::Delete(_Type * callableObject, string callbackName)
 }
 
 template<typename _Fty, typename ..._Types>
+int Action<_Fty, ..._Types>::Clear()
+{
+	callbackMap.clear();
+
+	return 0;
+}
+
+template<typename _Fty, typename ..._Types>
 int Action<_Fty, _Types...>::Trigger(_Types ..._Args)
 {
 	map<pair<uintptr_t, string>, function<T(Args...)>>::iterator iter;
 	for (iter = callbackMap.begin(); iter != callbackMap.end(); iter++)
 		(*(iter->second))(_Args...);
+	return 0;
+}
+
+template<typename _Fty, typename ..._Types>
+int Action<_Fty, ..._Types>::TriggerThenClear(_Types ..._Args)
+{
+	// TODO : ­n®athread safe
+	Trigger(_Args);
+	Clear();
+
 	return 0;
 }
 

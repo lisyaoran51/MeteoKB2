@@ -10,5 +10,11 @@ bool AudioComponent::GetIsCompleted()
 
 int AudioComponent::update()
 {
+	pendingActions.TriggerThenClear();
+	return 0;
+}
+
+int AudioComponent::Dispose()
+{
 	return 0;
 }

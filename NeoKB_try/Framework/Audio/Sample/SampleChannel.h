@@ -2,7 +2,7 @@
 #define SAMPLE_CHANNEL_H
 
 #include "../AudioCollectionManager.h"
-
+#include "Sample.h"
 
 
 namespace Framework {
@@ -21,6 +21,8 @@ namespace Sample {
 		int Stop();
 
 	protected:
+
+		SampleChannel(Sample* s);
 
 		Sample* sample;
 
