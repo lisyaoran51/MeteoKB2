@@ -24,13 +24,13 @@ namespace IO {
 	public:
 
 		template<class _Type>
-		int AddOnButtonDown(_Type* callableObject, function<int(InputState*)> callback, string name = "HandleButtonDown");
+		int AddOnButtonDown(_Type* callableObject, function<int(InputState*)> callback, string name);
 
 		template<class _Type>
-		int AddOnKnobTurn(_Type* callableObject, function<int(InputState*)> callback, string name = "HandleKnobTurn");
+		int AddOnKnobTurn(_Type* callableObject, function<int(InputState*)> callback, string name);
 
 		template<class _Type>
-		int AddOnSliderMove(_Type* callableObject, function<int(InputState*)> callback, string name = "HandleSliderMove");
+		int AddOnSliderMove(_Type* callableObject, function<int(InputState*)> callback, string name);
 
 	protected:
 

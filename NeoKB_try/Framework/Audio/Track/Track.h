@@ -34,14 +34,22 @@ namespace Track {
 		// AdjustableClock
 		virtual int Start();
 		virtual int Stop();
-		virtual bool Seek(double position);
 		virtual int Reset();
 		virtual int ResetSpeedAdjustments();
 
 
 	protected:
 
+		double length;
+		bool isPlayed = false;
+		bool isRunning = false;
+
+		double currentTime;
+		double rate;
+
+
 		virtual int update();
+
 
 		/// <summary>
 		/// Audio operations will be run on a separate dedicated thread, so we need to schedule any audio API calls using this queue.
@@ -50,9 +58,12 @@ namespace Track {
 
 	private:
 
+
 		bool isLoop;
 
 		Bindable<double> tempo;
+
+
 
 	};
 

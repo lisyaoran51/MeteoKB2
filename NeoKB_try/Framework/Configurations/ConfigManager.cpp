@@ -1,7 +1,7 @@
 #include "ConfigManager.h"
 
 
-using namespace Base::Config;
+using namespace Framework::Configurations;
 using namespace std;
 
 
@@ -43,7 +43,7 @@ int ConfigManager<T>::Set(T lookup, bool value)
 }
 
 template<typename T>
-int Base::Config::ConfigManager<T>::Set(T lookup, string value)
+int ConfigManager<T>::Set(T lookup, string value)
 {
 	configStoreString[lookup] = value;
 	return 0;

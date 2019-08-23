@@ -80,6 +80,7 @@ namespace Hierachal{
 		/// </summary>
 		virtual int SetParent(HasParent* p);
 
+
 	protected:
 
 		/// <summary>
@@ -93,6 +94,16 @@ namespace Hierachal{
 		/// 這個式給childaddable用的
 		/// </summary>
 		int Load();
+
+		/// <summary>
+		/// 在load結束的時候，本癌狀態是Ready，會在第一個update時執行，然後把狀態轉換到loaded
+		/// </summary>
+		virtual int LoadComplete() final;
+
+		/// <summary>
+		/// 在load結束的時候，時記要執行的工作
+		/// </summary>
+		virtual int LoadOnCompleted();
 
 	private:
 
@@ -109,6 +120,7 @@ namespace Hierachal{
 			virtual int HandleLoad() = 0;
 			virtual int Async() = 0;
 			virtual int SetParent(HasParent* p) = 0;
+			virtual int HandleLoadComplete() = 0;
 		protected:
 			Loadable& loadable;
 		};
@@ -120,6 +132,7 @@ namespace Hierachal{
 			virtual int HandleLoad();
 			virtual int Async();
 			virtual int SetParent(HasParent* p);
+			virtual int HandleLoadComplete();
 		};
 
 		class NotLoadedHandler : public LoadStateHandler {
@@ -129,6 +142,7 @@ namespace Hierachal{
 			virtual int HandleLoad();
 			virtual int Async();
 			virtual int SetParent(HasParent* p);
+			virtual int HandleLoadComplete();
 		};
 
 		class LoadingHandler : public LoadStateHandler {
@@ -138,6 +152,7 @@ namespace Hierachal{
 			virtual int HandleLoad();
 			virtual int Async();
 			virtual int SetParent(HasParent* p);
+			virtual int HandleLoadComplete();
 		};
 
 		class ReadyHandler : public LoadStateHandler {
@@ -147,6 +162,17 @@ namespace Hierachal{
 			virtual int HandleLoad();
 			virtual int Async();
 			virtual int SetParent(HasParent* p);
+			virtual int HandleLoadComplete();
+		};
+
+		class LoadedHandler : public LoadStateHandler {
+		public:
+			LoadedHandler(Loadable& l);
+			virtual LoadState GetLoadState();
+			virtual int HandleLoad();
+			virtual int Async();
+			virtual int SetParent(HasParent* p);
+			virtual int HandleLoadComplete();
 		};
 
 		LoadStateHandler* loadStateHandler;
@@ -154,6 +180,7 @@ namespace Hierachal{
 		NotLoadedHandler notLoadedHandler;
 		LoadingHandler loadingHandler;
 		ReadyHandler readyHandler;
+		LoadedHandler loadedHandler;
 
 	};
 
@@ -180,11 +207,11 @@ namespace Hierachal{
 		/// (<see cref="Drawable.LoadComplete"/> has not been called yet, which
 		/// always runs on the update thread and requires <see cref="Drawable.IsAlive"/>).
 		/// </summary>
-		Ready
+		Ready,
 		/// <summary>
 		/// Loading is fully completed and the Drawable is now part of the scene graph.
 		/// </summary>
-		// LoadStateLoaded
+		Loaded
 	};
 
 

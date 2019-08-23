@@ -1,11 +1,11 @@
 #ifndef METEOR_CONFIG_MANAGER_H
 #define METEOR_CONFIG_MANAGER_H
 
-#include"../../Base/Config/ConfigManager.h"
+#include "../../Framework/Configurations/FrameworkConfigManager.h"
 
 using namespace Util;
 using namespace std;
-using namespace Base::Config;
+using namespace Framework::Configurations;
 
 
 namespace Meteor {

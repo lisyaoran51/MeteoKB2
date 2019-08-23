@@ -9,16 +9,13 @@
 #include "SheetmusicInfo.h"
 #include "Sheetmusic.h"
 #include "../Scheduler/Event/Event.h"
-#include "../../Util/MtoObject.h"
 #include "Pattern/PatternGenerator.h"
-#include "../../Util/Hierachal/ChildAddable.h"
 
 
 
 
 using namespace std;
 using namespace Util;
-using namespace Util::Hierachal;
 using namespace Base::Schedulers::Events;
 using namespace Base::Sheetmusics::Patterns;
 

@@ -3,6 +3,8 @@
 using namespace Framework::Allocation::Hierachal;
 
 
+
+
 Updatable::Updatable() : ChildAddable(), RegisterType("Updatable")
 {
 }
@@ -31,8 +33,15 @@ int Updatable::SetParent(HasParent * p)
 	return Loadable::SetParent(p);
 }
 
-int Updatable::UpdateSubTree()
+bool Updatable::UpdateSubTree()
 {
+
+	if (GetLoadState() < LoadState::Ready)
+		return false;
+
+	if (GetLoadState() == LoadState::Ready)
+		LoadComplete();
+
 	update();
 
 	vector<ChildAddable*>* childs = GetChilds();
@@ -42,7 +51,9 @@ int Updatable::UpdateSubTree()
 			Cast<Updatable>(*iter)->UpdateSubTree();
 	}
 
-	return 0;
+	
+
+	return true;
 }
 
 int Updatable::update()
@@ -50,7 +61,5 @@ int Updatable::update()
 	return 0;
 }
 
-int Updatable::onUpdateSubTree()
-{
-	return 0;
-}
+
+

@@ -25,7 +25,7 @@ int Loadable::load()
 	return 0;
 }
 
-Loadable::Loadable(): RegisterType("Loadable"), Cachable(), noParentHandler(*this), notLoadedHandler(*this), loadingHandler(*this), readyHandler(*this)
+Loadable::Loadable(): RegisterType("Loadable"), Cachable(), noParentHandler(*this), notLoadedHandler(*this), loadingHandler(*this), readyHandler(*this), loadedHandler(*this)
 {
 	loadStateHandler = &noParentHandler;
 }
@@ -57,6 +57,17 @@ int Loadable::registerLoad(function<int(void)> l) {
 int Loadable::Load()
 {
 	loadStateHandler->HandleLoad();
+	return 0;
+}
+
+int Loadable::LoadComplete()
+{
+	loadStateHandler->HandleLoadComplete();
+	return 0;
+}
+
+int Loadable::LoadOnCompleted()
+{
 	return 0;
 }
 

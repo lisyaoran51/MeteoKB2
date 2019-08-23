@@ -6,28 +6,47 @@ using namespace Framework::Audio::Track;
 
 double Track::GetCurrentTime()
 {
-	return 0.0;
+	return currentTime;
 }
 
 int Track::SetRate(double r)
 {
+	rate = r;
 	return 0;
 }
 
 double Track::GetRate()
 {
-	return 0.0;
+	return rate;
 }
 
 int Track::SetIsRunning(bool value)
 {
+	isRunning = value;
 	return 0;
 }
 
 bool Track::GetIsRunning()
 {
-	return false;
+	return isRunning;
 }
+
+int Track::Start()
+{
+	if (isDisposed)
+		throw new runtime_error("Track::Start(): It's already disposed. Unable to start.");
+
+	return 0;
+}
+
+int Track::Stop()
+{
+	if (isDisposed)
+		throw new runtime_error("Track::Stop(): It's already disposed. Unable to stop.");
+
+	return 0;
+}
+
 
 int Track::Reset()
 {
@@ -46,11 +65,13 @@ int Track::ResetSpeedAdjustments()
 int Track::update()
 {
 
-	if (isLoop && hasCompleted)
+	if (isLoop && isCompleted)
 	{
 		Reset();
 		Start();
 	}
+
+	AudioComponent::update();
 
 	return 0;
 }

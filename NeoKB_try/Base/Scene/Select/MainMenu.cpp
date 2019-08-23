@@ -1,5 +1,7 @@
 #include "MainMenu.h"
 
+#include "PlaySongSelect.h"
+
 using namespace Base::Scene::Select;
 
 int MainMenu::onEntering(Scene * lastScene)
@@ -7,7 +9,7 @@ int MainMenu::onEntering(Scene * lastScene)
 
 	songSelect = new PlaySongSelect();
 
-	GetScheduler()->AddDelayedTask([]() { Push(songSelect); return 0; }, 500);
+	GetScheduler()->AddDelayedTask([=]() { Push(songSelect); return 0; }, 500);
 
 	return 0;
 }

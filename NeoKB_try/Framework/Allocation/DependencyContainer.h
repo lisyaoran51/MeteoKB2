@@ -26,26 +26,19 @@ namespace Allocation {
 		template<typename T>
 		T* GetCache(string type) {
 
-			LOG(LogLevel::Finest) << "T* GetCache(string) : getting cache [" << type << "] from hierachy object [" << GetTypeName() << "].";
+			LOG(LogLevel::Finest) << "T* DependencyContainer::GetCache(string) : getting cache [" << type << "] from DependencyContainer.";
 
 			MtoObject* o = getCache(type);
 
 			if (!o) {
 				// ¨S§ä¨ì
-
-				HasParent* h = GetParent();
-				if (!h)
-					return nullptr;
-
-				Cachable* c = Cast<Cachable>(h);
-				//cout << "cast to cachable" << endl;
-				return c->GetCache<T>(type);
+				return nullptr;
 			}
 
-			T* to = Cast<T>(o);
+			T* to = dynamic_cast<T*>(o);
 
 			if (!to)
-				throw invalid_argument("Cachable::GetCache<T>(string): cast to wrong class type.");
+				throw invalid_argument("DependencyContainer::GetCache<T>(string): cast to wrong class type.");
 
 			return to;
 		}

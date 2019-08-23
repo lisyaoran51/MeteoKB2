@@ -7,7 +7,7 @@ using namespace Framework::Audio;
 
 
 
-AudioManager::AudioManager(ResourceStore<string>* trackStore, ResourceStore<string>* sampleStore): RegisterType("AudioManager")
+AudioManager::AudioManager(ResourceStore<char*>* trackStore, ResourceStore<char*>* sampleStore): RegisterType("AudioManager"), MtoObject()
 {
 
 	trackStore->AddExtension("mp3");
@@ -22,7 +22,7 @@ AudioManager::AudioManager(ResourceStore<string>* trackStore, ResourceStore<stri
 
 }
 
-SampleManager * AudioManager::GetSampleManager(ResourceStore<string>* sampleStore)
+SampleManager * AudioManager::GetSampleManager(ResourceStore<char*>* sampleStore)
 {
 	if (sampleStore == nullptr)
 		return sampleManager;
@@ -34,7 +34,7 @@ SampleManager * AudioManager::GetSampleManager(ResourceStore<string>* sampleStor
 	return sManager;
 }
 
-TrackManager * AudioManager::GetTrackManager(ResourceStore<string>* trackStore)
+TrackManager * AudioManager::GetTrackManager(ResourceStore<char*>* trackStore)
 {
 	if (trackStore == nullptr)
 		return trackManager;

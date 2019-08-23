@@ -1,17 +1,17 @@
 #ifndef MAP_ALGORITHM_H
 #define MAP_ALGORITHM_H
 
-#include"../../../../Graphic/Map/Map.h"
-#include "../../../../../Util/Hierachal/ChildAddable.h"
+#include "../../../../../Framework/Graphic/Map/Map.h"
+#include "../../../../../Framework/Allocation/Hierachal/Container.h"
 #include "MapGenerateAlgorithm.h"
 #include "MapShiftAlgorithm.h"
 #include "../../../../Config/FrameworkConfigManager.h"
 
 
-using namespace Base::Graphic::Maps;
+using namespace Framework::Graphic::Maps;
 using namespace Util;
-using namespace Util::Hierachal;
 using namespace Base::Config;
+using namespace Framework::Allocation::Hierachal;
 
 
 
@@ -35,11 +35,11 @@ namespace Effects {
 namespace Algorithms{
 	
 
-	class MapAlgorithmInterface: public ChildAddable {
+	class MapAlgorithmInterface: public Container {
 
 	public:
 
-		MapAlgorithmInterface(): ChildAddable(), RegisterType("MapAlgorithmInterface"){}
+		MapAlgorithmInterface(): Container(), RegisterType("MapAlgorithmInterface"){}
 
 		virtual int RegisterBufferMap(Map* b) = 0;
 

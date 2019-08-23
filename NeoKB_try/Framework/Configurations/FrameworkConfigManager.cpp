@@ -1,6 +1,6 @@
 #include "FrameworkConfigManager.h"
 
-using namespace Base::Config;
+using namespace Framework::Configurations;
 
 
 FrameworkConfigManager::FrameworkConfigManager(): ConfigManager(), RegisterType("FrameworkConfigManager")

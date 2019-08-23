@@ -5,7 +5,7 @@ using namespace Framework::Input;
 
 
 
-InputManager::InputManager()
+InputManager::InputManager(): RegisterType("InputManager"), Container()
 {
 	currentState = new InputState();
 }
@@ -60,10 +60,12 @@ vector<InputState*>* InputManager::getPendingState(vector<InputState*>* pendingS
 {
 	for (int i = 0; i < inputHandlers.size(); i++) {
 
-		vector<InputState*> inputHandlerPendingState;
-		inputHandlers[i]->GetPendingStates(&inputHandlerPendingState);
-		pendingState->reserve(inputHandlerPendingState.size());
-		pendingState->insert(pendingState->end(), inputHandlerPendingState.begin(), inputHandlerPendingState.end());
+		vector<InputState*>* inputHandlerPendingState;
+		inputHandlerPendingState = inputHandlers[i]->GetPendingStates();
+		pendingStates->reserve(inputHandlerPendingState->size());
+		pendingStates->insert(pendingStates->end(), inputHandlerPendingState->begin(), inputHandlerPendingState->end());
+		
+		delete inputHandlerPendingState;
 	}
 
 	return pendingStates;
@@ -122,14 +124,14 @@ int InputManager::updateKeyboardEvents(InputState * inputState)
 
 
 	for (int i = 0; i < lastKeyboardState->GetPresses()->size(); i++) {
-		if (!keyboardState->Contain(lastKeyboardState->GetPresses()->at(i).key)) {
-			handleKeyUp(inputState, lastKeyboardState->GetPresses()->at(i));
+		if (!keyboardState->Contain(lastKeyboardState->GetPresses()->at(i).first)) {
+			handleKeyUp(inputState, lastKeyboardState->GetPresses()->at(i).first);
 		}
 	}
 
 	for (int i = 0; i < keyboardState->GetPresses()->size(); i++) {
-		if (!lastKeyboardState->Contain(keyboardState->GetPresses()->at(i).key)) {
-			handleKeyDown(inputState, keyboardState->GetPresses()->at(i));
+		if (!lastKeyboardState->Contain(keyboardState->GetPresses()->at(i).first)) {
+			handleKeyDown(inputState, keyboardState->GetPresses()->at(i).first);
 		}
 	}
 
@@ -158,16 +160,16 @@ int InputManager::updatePanelEvents(InputState * inputState)
 	}
 
 	/* Knob */
-	for (int i = 0; i < panelState->GetKnobs()->Size(); i++) {
-		if (panelState->GetKnobs()->at(i)->GetDelta() != 0) {
-			handleKnobTurn(inputState, panelState->GetKnobs()->at(i));
+	for (int i = 0; i < panelState->GetKnobs()->size(); i++) {
+		if (panelState->GetKnobs()->at(i).second != 0) {
+			handleKnobTurn(inputState, panelState->GetKnobs()->at(i).first);
 		}
 	}
 
 	/* Slider */
-	for (int i = 0; i < panelState->GetSliders()->Size(); i++) {
-		if (panelState->GetSliders()->at(i)->GetLevel() != lastPanelState->GetSliders()->at(i)->GetLevel()) {
-			handleSlide(inputState, panelState->GetSliders()->at(i));
+	for (int i = 0; i < panelState->GetSliders()->size(); i++) {
+		if (panelState->GetSliders()->at(i).second != lastPanelState->GetSliders()->at(i).second) {
+			handleSlide(inputState, panelState->GetSliders()->at(i).first);
 		}
 	}
 
@@ -223,7 +225,7 @@ int InputManager::propagateKeyUp(vector<Triggerable*>* queue, InputState * state
 	return ;
 }
 
-int InputManager::handleButtonDown(InputState * state, Button button)
+int InputManager::handleButtonDown(InputState * state, PanelButton button)
 {
 	vector<Triggerable*> queue;
 	queue.assign(triggerQueue.begin(), triggerQueue.end());
@@ -233,7 +235,7 @@ int InputManager::handleButtonDown(InputState * state, Button button)
 	return propagateButtonDown(&queue, state, button);
 }
 
-int InputManager::propagateButtonDown(vector<Triggerable*>* queue, InputState * state, Button button)
+int InputManager::propagateButtonDown(vector<Triggerable*>* queue, InputState * state, PanelButton button)
 {
 	for (int i = 0; i < queue->size(); i++) {
 		queue->at(i)->TriggerOnButtonDown(state, button);
@@ -241,7 +243,7 @@ int InputManager::propagateButtonDown(vector<Triggerable*>* queue, InputState * 
 	return 0;
 }
 
-int InputManager::handleButtonUp(InputState * state, Button button)
+int InputManager::handleButtonUp(InputState * state, PanelButton button)
 {
 	vector<Triggerable*> queue;
 	queue.assign(triggerQueue.begin(), triggerQueue.end());
@@ -251,7 +253,7 @@ int InputManager::handleButtonUp(InputState * state, Button button)
 	return propagateButtonUp(&queue, state, button);
 }
 
-int InputManager::propagateButtonUp(vector<Triggerable*>* queue, InputState * state, Button button)
+int InputManager::propagateButtonUp(vector<Triggerable*>* queue, InputState * state, PanelButton button)
 {
 	for (int i = 0; i < queue->size(); i++) {
 		queue->at(i)->TriggerOnButtonUp(state, button);
@@ -260,7 +262,7 @@ int InputManager::propagateButtonUp(vector<Triggerable*>* queue, InputState * st
 	return 0;
 }
 
-int InputManager::handleKnobTurn(InputState * state, Knob knob)
+int InputManager::handleKnobTurn(InputState * state, PanelKnob knob)
 {
 	vector<Triggerable*> queue;
 	queue.assign(triggerQueue.begin(), triggerQueue.end());
@@ -270,7 +272,7 @@ int InputManager::handleKnobTurn(InputState * state, Knob knob)
 	return propagateKnobTurn(&queue, state, knob);;
 }
 
-int InputManager::propagateKnobTurn(vector<Triggerable*>* queue, InputState * state, Knob knob)
+int InputManager::propagateKnobTurn(vector<Triggerable*>* queue, InputState * state, PanelKnob knob)
 {
 	for (int i = 0; i < queue->size(); i++) {
 		queue->at(i)->TriggerOnButtonUp(state, knob);
@@ -279,7 +281,7 @@ int InputManager::propagateKnobTurn(vector<Triggerable*>* queue, InputState * st
 	return 0;
 }
 
-int InputManager::handleSlide(InputState * state, Slider slider)
+int InputManager::handleSlide(InputState * state, PanelSlider slider)
 {
 	vector<Triggerable*> queue;
 	queue.assign(triggerQueue.begin(), triggerQueue.end());
@@ -289,7 +291,7 @@ int InputManager::handleSlide(InputState * state, Slider slider)
 	return propagateSlide(&queue, state, slider);
 }
 
-int InputManager::propagateSlide(vector<Triggerable*>* queue, InputState * state, Slider slider)
+int InputManager::propagateSlide(vector<Triggerable*>* queue, InputState * state, PanelSlider slider)
 {
 	for (int i = 0; i < queue->size(); i++) {
 		queue->at(i)->TriggerOnSlide(state, slider);

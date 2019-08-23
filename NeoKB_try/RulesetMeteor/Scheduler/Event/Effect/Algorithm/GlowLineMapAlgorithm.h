@@ -1,14 +1,15 @@
 #ifndef GLOWLINE_MAP_ALGORITHM_H
 #define GLOWLINE_MAP_ALGORITHM_H
 
-#include "../../../../../Base/Graphic/Map/Map.h"
+
+#include "../../../../../Framework/Graphic/Map/Map.h"
 #include "../../../../../Base/Scheduler/Event/Effect/Algorithm/MapGenerateAlgorithm.h"
 #include "../../../../../Base/Scheduler/Event/Effect/Algorithm/MapAlgorithm.h"
 #include "../GlowLineEffect.h"
 #include "../GlowLineEffectMapper.h"
 
 
-using namespace Base::Graphic::Maps;
+using namespace Framework::Graphic::Maps;
 using namespace Base::Schedulers::Events::Effects::Algorithms;
 using namespace Base::Schedulers::Events;
 using namespace Base::Schedulers::Events::Effects;

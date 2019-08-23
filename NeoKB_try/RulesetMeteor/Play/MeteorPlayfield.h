@@ -1,12 +1,12 @@
 #ifndef METEOR_PLAYFIELD_H
 #define METEOR_PLAYFIELD_H
 
-#include "../../Base/Play/Playfield.h"
+#include "../../Base/Scene/Play/Playfield.h"
 #include "../../Util/MtoType.h"
 #include "../Config/MeteorConfigManager.h"
 
 using namespace Util;
-using namespace Base::Play;
+using namespace Base::Scenes::Play;
 using namespace Base::Schedulers::Events;
 using namespace Meteor::Config;
 

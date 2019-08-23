@@ -4,9 +4,11 @@
 
 #include <vector>
 #include <iostream>
-
+#include "../FileSystemInterface.h"
 
 using namespace std;
+using namespace Framework::IO;
+
 
 
 namespace Framework {
@@ -42,7 +44,7 @@ namespace Stores {
 		/// <summary>
 		/// 用來檢索整個資料夾下有哪些檔案
 		/// </summary>
-		static FileSystemInterface fileSystemInterface = nullptr;
+		static FileSystemInterface* fileSystemInterface;
 
 		/// <summary>
 		/// 用來檢索整個資料夾下有哪些檔案

@@ -7,12 +7,15 @@
 #include "../Threading/GameThread.h"
 #include "../../Util/DataStructure/Action.h"
 #include "../Input/InputEvent.h"
-#include "../../Base/Game.h"
+#include "../Game.h"
 #include "../IO/MainInterface.h"
 #include "../Input/Handler/InputHandler.h"
 #include "../Graphic/Drawable.h"
 #include "../Allocation/DependencyContainer.h"
 #include "../IO/MainInterface.h"
+#include "../Configurations/FrameworkConfigManager.h"
+#include "../Allocation/Hierachal/Triggerable.h"
+#include "../Graphic/Map/Map.h"
 
 
 using namespace std;
@@ -20,9 +23,11 @@ using namespace Framework::Threading;
 using namespace Util::DataStructure;
 using namespace Framework::Input;
 using namespace Framework::IO;
-using namespace Base;
+using namespace Framework;
 using namespace Framework::Graphic;
+using namespace Framework::Graphic::Maps;
 using namespace Framework::Allocation;
+using namespace Framework::Configurations;
 
 
 namespace Framework {
@@ -32,13 +37,13 @@ namespace Host {
 	/// 遊戲運行的主機
 	/// TODO: 繼承IIPCHOST
 	/// </summary>
-	class GameHost{
+	class GameHost {
 	
 	public:
 		
 		GameHost(string name = "");
 
-		int Run(Game game);
+		int Run(Game* game);
 
 		/// <summary>
 		/// 讓handler們去註冊，在input thread收到input時，會去用這個叫所有handler，讓每個handler去收自己要的state
@@ -82,15 +87,15 @@ namespace Host {
 
 		int inputFrame();
 
-		int resetInputHandler();
+		int resetInputHandlers();
 
 	private :
 
-		FrameworkConfigManager frameworkConfigManager;
+		FrameworkConfigManager* frameworkConfigManager;
 
 		int setupConfig();
 
-		int bootstrapSceneGraph(Game game);
+		int bootstrapSceneGraph(Game* game);
 
 		MainInterface* mainInterface;
 

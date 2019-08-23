@@ -3,6 +3,9 @@
 
 
 #include <vector>
+#include "InputState.h"
+#include "KeyboardState.h"
+
 
 using namespace std;
 

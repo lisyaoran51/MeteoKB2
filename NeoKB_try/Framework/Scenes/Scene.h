@@ -4,16 +4,18 @@
 
 #include "../../Framework/Allocation/Hierachal/Container.h"
 #include "../Graphic/Drawable.h"
+#include "../Game.h"
 
 
 
 using namespace Framework::Allocation::Hierachal;
 using namespace Framework::Graphic;
+using namespace Framework;
 
 
 
 namespace Framework {
-namespace Scene {
+namespace Scenes {
 
 
 	class Scene : public Container, public Drawable {

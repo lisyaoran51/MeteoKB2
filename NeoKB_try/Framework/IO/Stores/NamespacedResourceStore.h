@@ -28,7 +28,7 @@ namespace Stores {
 		/// read all bytes¤èªk¡G
 		/// http://www.codecodex.com/wiki/Read_a_file_into_a_byte_array
 		/// </summary>
-		char* Get(string name);
+		T Get(string name);
 
 
 	protected:

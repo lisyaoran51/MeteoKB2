@@ -27,13 +27,13 @@ namespace Hierachal {
 
 		int TriggerOnKeyUp(InputState* inputState, Key key);
 
-		int TriggerOnKnobTurn(InputState* inputState, Knob knob);
+		int TriggerOnKnobTurn(InputState* inputState, PanelKnob knob);
 
-		int TriggerOnButtonDown(InputState* inputState, Button button);
+		int TriggerOnButtonDown(InputState* inputState, PanelButton button);
 
-		int TriggerOnButtonUp(InputState* inputState, Button button);
+		int TriggerOnButtonUp(InputState* inputState, PanelButton button);
 
-		int TriggerOnSlide(InputState* inputState, Slider slider);
+		int TriggerOnSlide(InputState* inputState, PanelSlider slider);
 
 	protected:
 
@@ -41,13 +41,13 @@ namespace Hierachal {
 
 		virtual int onKeyUp(InputState* inputState, Key key);
 
-		virtual int onKnobTurn(InputState* inputState, Knob knob);
+		virtual int onKnobTurn(InputState* inputState, PanelKnob knob);
 
-		virtual int onButtonDown(InputState* inputState, Button button);
+		virtual int onButtonDown(InputState* inputState, PanelButton button);
 
-		virtual int onButtonUp(InputState* inputState, Button button);
+		virtual int onButtonUp(InputState* inputState, PanelButton button);
 
-		virtual int onSlide(InputState* inputState, Slider slider);
+		virtual int onSlide(InputState* inputState, PanelSlider slider);
 
 	};
 

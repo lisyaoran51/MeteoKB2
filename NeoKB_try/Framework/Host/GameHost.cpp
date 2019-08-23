@@ -24,7 +24,7 @@ GameHost::GameHost(string name = "")
 
 }
 
-int GameHost::Run(Game game)
+int GameHost::Run(Game* game)
 {
 	setupConfig();
 
@@ -94,7 +94,7 @@ int GameHost::inputFrame()
 	return 0;
 }
 
-int GameHost::resetInputHandler()
+int GameHost::resetInputHandlers()
 {
 
 	availableInputHandler.push_back(pianoKeyInputHandler);
@@ -105,7 +105,7 @@ int GameHost::resetInputHandler()
 	return 0;
 }
 
-int GameHost::bootstrapSceneGraph(Game game)
+int GameHost::bootstrapSceneGraph(Game* game)
 {
 	root = new InputManager();
 

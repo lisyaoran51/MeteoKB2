@@ -7,8 +7,8 @@ using namespace Util;
 using namespace std;
 
 
-namespace Base {
-namespace Config{
+namespace Framework {
+namespace Configurations {
 
 	enum class FrameworkSetting;
 

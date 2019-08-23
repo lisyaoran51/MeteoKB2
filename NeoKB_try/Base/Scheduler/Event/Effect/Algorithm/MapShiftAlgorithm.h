@@ -1,11 +1,11 @@
 #ifndef MAP_SHIFT_ALGORITHM_H
 #define MAP_SHIFT_ALGORITHM_H
 
-#include"../../../../Graphic/Map/Map.h"
+#include "../../../../../Framework/Graphic/Map/Map.h"
 #include "../../Event.h"
 #include "../../EventProcessor.h"
 
-using namespace Base::Graphic::Maps;
+using namespace Framework::Graphic::Maps;
 
 namespace Base {
 namespace Schedulers {

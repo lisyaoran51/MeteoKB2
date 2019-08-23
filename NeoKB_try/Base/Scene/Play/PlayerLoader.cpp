@@ -1,8 +1,13 @@
 #include "PlayerLoader.h"
 
 
-using namespace Base::Play;
+using namespace Base::Scene::Play;
 
+
+PlayerLoader::PlayerLoader(Player * p) : RegisterType("PlayerLoader")
+{
+	registerLoad(bind((int(PlayerLoader::*)())&PlayerLoader::load, this));
+}
 
 int PlayerLoader::load()
 {

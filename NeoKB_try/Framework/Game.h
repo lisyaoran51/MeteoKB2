@@ -2,7 +2,7 @@
 #define GAME_H
 
 
-#include "Allocation/Hierachal/Triggerable.h"
+#include "Allocation/Hierachal/Container.h"
 #include "IO\Stores\ResourceStore.h"
 #include "Audio/AudioManager.h"
 #include "Host\GameHost.h"
@@ -17,7 +17,7 @@ using namespace Framework::Host;
 namespace Framework {
 
 	
-	class Game : public Triggerable {
+	class Game : public Container {
 
 		AudioManager* audioManager;
 
@@ -29,13 +29,15 @@ namespace Framework {
 
 	public:
 
+		
+
 		virtual int SetHost(GameHost* host);
 
 		virtual string GetResourcePath();
 
 	protected:
 
-		
+		Game();
 
 	};
 

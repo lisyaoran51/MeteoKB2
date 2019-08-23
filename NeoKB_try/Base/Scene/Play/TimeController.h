@@ -1,17 +1,17 @@
 #ifndef TIME_CONTROLLER_H
 #define TIME_CONTROLLER_H
 
-#include "../Scene.h"
+#include "../../../Framework/Scenes/Scene.h"
 #include "../../../Framework/Timing/SpeedAdjusters/SpeedAdjuster.h"
 #include "../../../Framework/Timing/DecoupledInterpolatingFramedClock.h"
 
-using namespace Game::Scene;
+using namespace Base::Scenes;
 using namespace Framework::Timing::SpeedAdjusters;
 using namespace Framework::Timing;
 
 
-namespace Game {
-namespace Scene {
+namespace Base {
+namespace Scenes {
 namespace Play {
 
 	/// <summary>

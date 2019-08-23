@@ -10,19 +10,18 @@
 #include "../../../Util/TemplateConstraint.h"
 #include "../../Scheduler/Event/Event.h"
 #include "Pattern.h"
-#include "../../../Util/MtoObject.h"
-#include "../../Config/FrameworkConfigManager.h"
-#include "../../../Util/Hierachal/ChildAddable.h"
+#include "../../../Framework/Configurations/FrameworkConfigManager.h"
+#include "../../../Framework/Allocation/Hierachal/Container.h"
 
 
 
 
 using namespace std;
 using namespace Util;
-using namespace Util::Hierachal;
 using namespace Base::Schedulers::Events;
 using namespace Base::Sheetmusics;
-using namespace Base::Config;
+using namespace Framework::Configurations;
+using namespace Framework::Allocation::Hierachal;
 
 
 namespace Base {
@@ -32,7 +31,7 @@ namespace Patterns {
 	/// <summary>
 	/// to generate special pattern from original events
 	///	</summary>
-	class PatternGenerator: public ChildAddable
+	class PatternGenerator: public Container
 	{
 
 		int load();

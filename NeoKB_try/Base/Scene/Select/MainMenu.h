@@ -5,14 +5,15 @@
 #include "../../../Framework/Scenes/Scene.h"
 #include "../../Sheetmusic/SheetmusicInfo.h"
 #include "../../Sheetmusic/WorkingSheetmusic.h"
+#include "SongSelect.h"
 
 
 using namespace Base::Sheetmusics;
-using namespace Framework::Scene;
+using namespace Framework::Scenes;
 
 
 namespace Base {
-namespace Scene {
+namespace Scenes {
 namespace Select {
 
 	/// <summary>
@@ -26,6 +27,8 @@ namespace Select {
 
 
 	protected:
+
+		SongSelect* songSelect;
 
 		virtual int onEntering(Scene* lastScene);
 

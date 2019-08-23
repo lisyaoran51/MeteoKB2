@@ -38,7 +38,7 @@ int Action<_Fty, _Types...>::Delete(_Type * callableObject, string callbackName)
 }
 
 template<typename _Fty, typename ..._Types>
-int Action<_Fty, ..._Types>::Clear()
+int Action<_Fty, _Types...>::Clear()
 {
 	callbackMap.clear();
 
@@ -55,7 +55,7 @@ int Action<_Fty, _Types...>::Trigger(_Types ..._Args)
 }
 
 template<typename _Fty, typename ..._Types>
-int Action<_Fty, ..._Types>::TriggerThenClear(_Types ..._Args)
+int Action<_Fty, _Types...>::TriggerThenClear(_Types ..._Args)
 {
 	// TODO : ­n®athread safe
 	Trigger(_Args);

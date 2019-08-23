@@ -6,8 +6,12 @@
 #include <vector>
 #include <thread>
 #include <functional>
+#include "../Timing/ThrottledFramedClock.h"
+#include "../Allocation/Hierachal/Scheduler.h"
 
 using namespace std;
+using namespace Framework::Timing;
+using namespace Framework::Allocation;
 
 
 namespace Framework {
@@ -21,7 +25,7 @@ namespace Threading {
 
 		int Start();
 
-		ThrottledFrameClock* GetClock();
+		ThrottledFramedClock* GetClock();
 
 	protected:
 
@@ -30,7 +34,7 @@ namespace Threading {
 
 		thread* thread;
 
-		ThrottledFrameClock* clock;
+		ThrottledFramedClock* clock;
 
 		Scheduler scheduler;
 

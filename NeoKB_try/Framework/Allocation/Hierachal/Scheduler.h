@@ -15,6 +15,9 @@ namespace Framework {
 namespace Allocation {
 namespace Hierachal {
 
+	class ScheduledTask;
+
+
 	/// <summary>
 	/// 
 	/// </summary>

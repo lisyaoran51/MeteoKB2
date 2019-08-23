@@ -36,7 +36,7 @@ namespace Hierachal {
 		/// <summary>
 		/// 這邊會先更新完自己，然後再呼叫child的updateSubTree。呼叫前要先確定child是不是updatable
 		/// </summary>
-		virtual int UpdateSubTree();
+		virtual bool UpdateSubTree();
 
 	protected:
 

@@ -51,6 +51,11 @@ int Loadable::NoParentHandler::SetParent(HasParent * p)
 	return 0;
 }
 
+int Framework::Allocation::Hierachal::Loadable::NoParentHandler::HandleLoadComplete()
+{
+	return 0;
+}
+
 // --------------------------
 
 Loadable::NotLoadedHandler::NotLoadedHandler(Loadable & l) : LoadStateHandler(l)
@@ -85,6 +90,11 @@ int Loadable::NotLoadedHandler::SetParent(HasParent * p)
 	return 0;
 }
 
+int Loadable::NotLoadedHandler::HandleLoadComplete()
+{
+	return -1;
+}
+
 // --------------------------
 
 Loadable::LoadingHandler::LoadingHandler(Loadable & l) : LoadStateHandler(l)
@@ -111,6 +121,11 @@ int Loadable::LoadingHandler::Async()
 int Loadable::LoadingHandler::SetParent(HasParent * p)
 {
 	// 已讀取中
+	return -1;
+}
+
+int Loadable::LoadingHandler::HandleLoadComplete()
+{
 	return -1;
 }
 
@@ -141,5 +156,48 @@ int Loadable::ReadyHandler::SetParent(HasParent * p)
 {
 	// TODO: 要寫重複利用的方法
 	return -1;
+}
+
+int Loadable::ReadyHandler::HandleLoadComplete()
+{
+	loadable.loadStateHandler = &loadable.loadedHandler;
+	
+	loadable.LoadOnCompleted();
+
+	return 0;
+}
+
+// --------------------------
+
+Loadable::LoadedHandler::LoadedHandler(Loadable & l) : LoadStateHandler(l)
+{
+}
+
+LoadState Loadable::LoadedHandler::GetLoadState()
+{
+	return LoadState::Loaded;
+}
+
+int Loadable::LoadedHandler::HandleLoad()
+{
+	// TODO: 要寫重複利用的方法
+	return -1;
+}
+
+int Loadable::LoadedHandler::Async()
+{
+	// TODO: 要寫重複利用的方法
+	return -1;
+}
+
+int Loadable::LoadedHandler::SetParent(HasParent * p)
+{
+	// TODO: 要寫重複利用的方法
+	return -1;
+}
+
+int Loadable::LoadedHandler::HandleLoadComplete()
+{
+	return 0;
 }
 

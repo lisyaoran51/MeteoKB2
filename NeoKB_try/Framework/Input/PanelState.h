@@ -11,6 +11,9 @@ using namespace std;
 namespace Framework {
 namespace Input {
 
+	enum class PanelButton;
+	enum class PanelKnob;
+	enum class PanelSlider;
 	
 
 	class PanelState : public PeripheralState<PanelState> {
@@ -22,8 +25,6 @@ namespace Input {
 		vector<pair<PanelSlider, int>> sliders;
 
 
-
-
 	public:
 
 		int AddButton(PanelButton button);
@@ -32,7 +33,7 @@ namespace Input {
 
 		int AddKnob(pair<PanelKnob, int> knob);
 
-		vector<pair<PanelKnob, int>>* Getknobs();
+		vector<pair<PanelKnob, int>>* GetKnobs();
 
 		int AddSlider(pair<PanelSlider, int> slider);
 
@@ -40,6 +41,12 @@ namespace Input {
 
 		virtual PanelState* Clone();
 
+
+		bool ContainButton(PanelButton button);
+
+		bool ContainSlider(PanelKnob knob);
+
+		bool ContainerSlider(PanelSlider slider);
 
 
 

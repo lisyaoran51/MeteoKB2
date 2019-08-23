@@ -8,7 +8,6 @@
 #include "../../Util/DataStructure/Action.h"
 
 
-using namespace Framework::Allocation::Hierachal;
 using namespace std;
 using namespace Util::DataStructure;
 
@@ -35,6 +34,8 @@ namespace Audio {
 		// protected ConcurrentQueue<Action> PendingActions = new ConcurrentQueue<Action>();
 
 		virtual int Dispose();
+
+		bool isDisposed = false;
 
 		bool isCompleted = false;
 

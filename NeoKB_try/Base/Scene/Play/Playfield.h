@@ -2,28 +2,23 @@
 #define PLAYFIELD_H
 
 
-#include"../../Util/Update/Updatable.h"
-#include"../Scheduler/Event/Event.h"
-#include"../Scheduler/Event/EventProcessor.h"
-#include"../Scheduler/Event/EventProcessorMaster.h"
-#include"../Scheduler/Scheduler.h"
-#include "../../Util/Hierachal/ChildAddable.h"
-#include "../Graphic/Renderer/renderer.h"
-#include "../Scheduler/Event/Effect/Algorithm/MapAlgorithm.h"
-#include"../../Util/Update/Updater.h"
+#include "../../../Framework/Scenes/Scene.h"
+#include "../../Scheduler/Event/EventProcessorMaster.h"
+#include "../../Scheduler/Event/Effect/Algorithm/MapAlgorithm.h"
+#include "../../../Framework/Configurations/FrameworkConfigManager.h"
 
 
 
-using namespace Util::Hierachal;
-using namespace Util::Update;
+using namespace Framework::Scenes;
 using namespace Base::Schedulers::Events;
 using namespace Base::Schedulers;
-using namespace Base::Graphic::Renderers;
 using namespace Base::Schedulers::Events::Effects::Algorithms;
+using namespace Framework::Configurations;
 
 
 
 namespace Base {
+namespace Scenes {
 namespace Play {
 
 	/// <summary>
@@ -36,7 +31,7 @@ namespace Play {
 		int load();
 
 		// 繼承playfield的class，在load的時候一定要寫讀取map algo的工作
-		int load(FrameworkConfigManager* f, Updater* u);
+		int load(FrameworkConfigManager* f);
 
 	public:
 
@@ -73,7 +68,7 @@ namespace Play {
 	};
 
 
-}}
+}}}
 
 
 

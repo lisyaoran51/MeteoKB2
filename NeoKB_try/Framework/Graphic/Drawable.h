@@ -10,6 +10,7 @@ using namespace Framework::Graphic::Maps;
 namespace Framework {
 namespace Graphic {
 
+	enum class Anchor;
 
 	class Drawable {
 

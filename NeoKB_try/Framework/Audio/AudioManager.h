@@ -11,6 +11,7 @@
 #include "Track\TrackManager.h"
 #include "../IO/Stores/ResourceStore.h"
 #include "../Allocation/Hierachal/MtoObject.h"
+#include "../Threading/GameThread.h"
 
 
 using namespace std;
@@ -18,6 +19,7 @@ using namespace Framework::Audio::Sample;
 using namespace Framework::Audio::Track;
 using namespace Framework::IO::Stores;
 using namespace Framework::Allocation::Hierachal;
+using namespace Framework::Threading;
 
 
 
@@ -33,11 +35,11 @@ namespace Audio {
 
 	public:
 
-		AudioManager(ResourceStore<string>* trackStore, ResourceStore<string>* sampleStore);
+		AudioManager(ResourceStore<char*>* trackStore, ResourceStore<char*>* sampleStore);
 
-		SampleManager* GetSampleManager(ResourceStore<string>* sampleStore = nullptr);
+		SampleManager* GetSampleManager(ResourceStore<char*>* sampleStore = nullptr);
 
-		TrackManager* GetTrackManager(ResourceStore<string>* trackStore = nullptr);
+		TrackManager* GetTrackManager(ResourceStore<char*>* trackStore = nullptr);
 
 		GameThread* GetAudioThread();
 

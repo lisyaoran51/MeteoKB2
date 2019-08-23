@@ -8,15 +8,17 @@
 #include "../../../Util/DataStructure/Bindable.h"
 #include "../../Sheetmusic/SheetmusicManager.h"
 #include "SongSelect.h"
+#include "../../Ruleset/Modifiers/Modifier.h"
 
 
 using namespace Base::Sheetmusics;
-using namespace Framework::Scene;
+using namespace Framework::Scenes;
 using namespace Util::DataStructure;
+using namespace Base::Rulesets::Modifiers;
 
 
 namespace Base {
-namespace Scene {
+namespace Scenes {
 namespace Select {
 
 	/// <summary>
@@ -31,7 +33,7 @@ namespace Select {
 
 	public:
 
-
+		PlaySongSelect();
 
 	protected:
 

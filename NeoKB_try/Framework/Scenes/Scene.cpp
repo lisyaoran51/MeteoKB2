@@ -1,8 +1,10 @@
 #include "Scene.h"
 
+#include "../Exceptions/FrameworkException.h"
 
-using namespace Framework::Scene;
+using namespace Framework::Scenes;
 using namespace Framework::Allocation::Hierachal;
+using namespace Framework::Exceptions;
 
 
 

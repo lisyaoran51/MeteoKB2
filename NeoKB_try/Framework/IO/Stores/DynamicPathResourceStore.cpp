@@ -20,7 +20,7 @@ string DynamicPathResourceStore::Get(string name)
 
 	if (!ifs) {
 		string message = string("DynamicPathResourceStore cannot found \"") + name + string("\"");
-		throw FileNotFoundException(message);
+		throw FileNotFoundException((char*)message.c_str());
 	}
 
 	// 這一段是往路找到的

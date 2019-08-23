@@ -19,8 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Base\Config\ConfigManager.cpp" />
-    <ClCompile Include="Base\Config\FrameworkConfigManager.cpp" />
+    <ClCompile Include="Base\MtoGame.cpp" />
     <ClCompile Include="Base\Graphic\Renderer\MapAlgorithm\HardwareMapAlgorithm.cpp" />
     <ClCompile Include="Base\Graphic\Renderer\renderer.cpp" />
     <ClCompile Include="Base\Ruleset\Mod\Mod.cpp" />
@@ -32,6 +31,7 @@
     <ClCompile Include="Base\Scene\Play\Playfield.cpp" />
     <ClCompile Include="Base\Scene\Play\Session.cpp" />
     <ClCompile Include="Base\Scene\Play\TimeController.cpp" />
+    <ClCompile Include="Base\Scene\Loader.cpp" />
     <ClCompile Include="Base\Scene\Select\MainMenu.cpp" />
     <ClCompile Include="Base\Scene\Select\PlaySongSelect.cpp" />
     <ClCompile Include="Base\Scene\Select\SongSelect.cpp" />
@@ -83,8 +83,11 @@
     <ClCompile Include="Framework\Audio\Sample\Sample.cpp" />
     <ClCompile Include="Framework\Audio\Sample\SampleChannel.cpp" />
     <ClCompile Include="Framework\Audio\Sample\SampleManager.cpp" />
+    <ClCompile Include="Framework\Audio\Track\BassTrack.cpp" />
     <ClCompile Include="Framework\Audio\Track\Track.cpp" />
     <ClCompile Include="Framework\Audio\Track\TrackManager.cpp" />
+    <ClCompile Include="Framework\Configurations\ConfigManager.cpp" />
+    <ClCompile Include="Framework\Configurations\FrameworkConfigManager.cpp" />
     <ClCompile Include="Framework\Game.cpp" />
     <ClCompile Include="Framework\Graphic\Drawable.cpp" />
     <ClCompile Include="Framework\Graphic\Map\Map.cpp" />
@@ -142,15 +145,15 @@
     <Text Include="DailyLog.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Base\Config\ConfigManager.h" />
-    <ClInclude Include="Base\Config\FrameworkConfigManager.h" />
     <ClInclude Include="Base\Graphic\Renderer\MapAlgorithm\HardwareMapAlgorithm.h" />
-    <ClInclude Include="Base\Graphic\Renderer\renderer.h" />
-    <ClInclude Include="Base\Ruleset\Mod\Mod.h" />
+    <ClInclude Include="Base\MtoGame.h" />
+    <ClInclude Include="Base\MtoGameBase.h" />
+    <ClInclude Include="Base\Ruleset\Modifiers\Modifier.h" />
     <ClInclude Include="Base\Ruleset\Ruleset.h" />
     <ClInclude Include="Base\Ruleset\RulesetExecutor.h" />
     <ClInclude Include="Base\Ruleset\RulesetInfo.h" />
     <ClInclude Include="Base\Scene\Interlude\Intro.h" />
+    <ClInclude Include="Base\Scene\Loader.h" />
     <ClInclude Include="Base\Scene\Play\Player.h" />
     <ClInclude Include="Base\Scene\Play\PlayerLoader.h" />
     <ClInclude Include="Base\Scene\Play\Playfield.h" />
@@ -211,6 +214,7 @@
     <ClInclude Include="Framework\Allocation\Hierachal\Schedulable.h" />
     <ClInclude Include="Framework\Allocation\Hierachal\Triggerable.h" />
     <ClInclude Include="Framework\Allocation\Hierachal\Updatable.h" />
+    <ClInclude Include="Framework\Allocation\Update\IUpdatable.h" />
     <ClInclude Include="Framework\Audio\AdjustableAudioComponent.h" />
     <ClInclude Include="Framework\Audio\AudioCollectionManager.h" />
     <ClInclude Include="Framework\Audio\AudioComponent.h" />
@@ -223,6 +227,8 @@
     <ClInclude Include="Framework\Audio\Track\BassTrack.h" />
     <ClInclude Include="Framework\Audio\Track\Track.h" />
     <ClInclude Include="Framework\Audio\Track\TrackManager.h" />
+    <ClInclude Include="Framework\Configurations\ConfigManager.h" />
+    <ClInclude Include="Framework\Configurations\FrameworkConfigManager.h" />
     <ClInclude Include="Framework\Devices\Device.h" />
     <ClInclude Include="Framework\Devices\InputDevice.h" />
     <ClInclude Include="Framework\Devices\OutputDevice.h" />
@@ -244,6 +250,7 @@
     <ClInclude Include="Framework\Input\PeripheralState.h" />
     <ClInclude Include="Framework\IO\BluetoothPhone.h" />
     <ClInclude Include="Framework\IO\Display.h" />
+    <ClInclude Include="Framework\IO\FileSystemInterface.h" />
     <ClInclude Include="Framework\IO\Keyboard.h" />
     <ClInclude Include="Framework\IO\MainInterface.h" />
     <ClInclude Include="Framework\IO\Panel.h" />
@@ -264,6 +271,7 @@
     <ClInclude Include="Framework\Timing\OffsetFramedClock.h" />
     <ClInclude Include="Framework\Timing\SpeedAdjusters\SpeedAdjuster.h" />
     <ClInclude Include="Framework\Timing\StopwatchClock.h" />
+    <ClInclude Include="Framework\Timing\ThrottledFramedClock.h" />
     <ClInclude Include="Program.h" />
     <ClInclude Include="RulesetMeteor\Config\MeteorConfigManager.h" />
     <ClInclude Include="RulesetMeteor\MeteorGame.h" />

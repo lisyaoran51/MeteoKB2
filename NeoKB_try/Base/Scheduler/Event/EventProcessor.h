@@ -6,13 +6,11 @@
 #include <vector>
 #include "../../../Util/TemplateConstraint.h"
 #include "../../../Util/MtoType.h"
-#include "../../../Util/Update/Updatable.h"
 #include "Event.h"
 
 
 using namespace std;
 using namespace Util;
-using namespace Util::Update;
 
 
 namespace Base {
@@ -23,7 +21,7 @@ namespace Events {
 	/// a processor to process one Event including effects, 
 	/// </summary>
 	template<class T>
-	class EventProcessor : public Updatable, private TConstraint<T, Event>
+	class EventProcessor : private TConstraint<T, Event>
 	{
 
 

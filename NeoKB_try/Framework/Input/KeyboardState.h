@@ -9,6 +9,8 @@ using namespace std;
 namespace Framework {
 namespace Input {
 
+	enum class Key;
+
 	class KeyboardState : public PeripheralState<KeyboardState> {
 
 		vector<pair<Key, int>> presses;
@@ -21,6 +23,7 @@ namespace Input {
 
 		virtual KeyboardState* Clone();
 
+		virtual bool Contain(Key key);
 
 	};
 

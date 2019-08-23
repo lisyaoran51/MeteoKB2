@@ -4,6 +4,10 @@
 using namespace Base::Scene::Select;
 
 
+SongSelect::SongSelect(): RegisterType("SongSelect")
+{
+}
+
 int SongSelect::TriggerOnSelected()
 {
 	return onSelected();

@@ -172,9 +172,6 @@
     <Filter Include="標頭檔\Game\Audio">
       <UniqueIdentifier>{43b88f58-650a-41b6-8101-05c5c81a3555}</UniqueIdentifier>
     </Filter>
-    <Filter Include="標頭檔\Game\Config">
-      <UniqueIdentifier>{3a594a5c-f9c9-423b-b545-bbff5cbdf73e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="標頭檔\Game\Graphic">
       <UniqueIdentifier>{d9f3edba-2177-4212-8fa7-e7f7250f8455}</UniqueIdentifier>
     </Filter>
@@ -186,9 +183,6 @@
     </Filter>
     <Filter Include="標頭檔\Game\Ruleset">
       <UniqueIdentifier>{84536ac4-1aeb-4147-9996-d843bc60286c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="標頭檔\Game\Ruleset\Mod">
-      <UniqueIdentifier>{a9628056-7986-46e1-a9fb-f11c8409f00f}</UniqueIdentifier>
     </Filter>
     <Filter Include="標頭檔\Game\Scheduler">
       <UniqueIdentifier>{3fc45852-de71-42f6-a695-15fc7d33716f}</UniqueIdentifier>
@@ -231,12 +225,6 @@
     </Filter>
     <Filter Include="標頭檔\Game\Scene\play">
       <UniqueIdentifier>{6e8bb58a-6b7d-413c-8830-74d6c0444286}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="來源檔案\Framework\Configuration">
-      <UniqueIdentifier>{8363cd29-264e-4138-9167-50817f27cce3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="標頭檔\Framework\Configuration">
-      <UniqueIdentifier>{32dac5ff-743d-4b18-a671-880a222691bb}</UniqueIdentifier>
     </Filter>
     <Filter Include="標頭檔\Framework\IO">
       <UniqueIdentifier>{d91245ff-e1b1-4a4c-b89e-01759e818509}</UniqueIdentifier>
@@ -288,9 +276,6 @@
     </Filter>
     <Filter Include="來源檔案\Game\Audio">
       <UniqueIdentifier>{52e6cf0f-087f-4aa5-8d3c-b540e9d7e054}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="來源檔案\Game\Config">
-      <UniqueIdentifier>{876c942e-eb77-4d2b-b607-d499188ce71d}</UniqueIdentifier>
     </Filter>
     <Filter Include="來源檔案\Game\Graphic">
       <UniqueIdentifier>{509f8f57-bd33-49c2-a694-3331c5ccd976}</UniqueIdentifier>
@@ -391,11 +376,17 @@
     <Filter Include="標頭檔\ThirdParty\Bass">
       <UniqueIdentifier>{131b7eae-1d9c-4a60-98b9-4a601ad382d6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="標頭檔\Game\Ruleset\Modifiers">
+      <UniqueIdentifier>{2628a86c-0da7-43fb-8ab3-dffea1ab1931}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Framework\Configurations">
+      <UniqueIdentifier>{32dac5ff-743d-4b18-a671-880a222691bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Framework\Configurations">
+      <UniqueIdentifier>{8363cd29-264e-4138-9167-50817f27cce3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Base\Config\ConfigManager.cpp">
-      <Filter>來源檔案\Game\Config</Filter>
-    </ClCompile>
     <ClCompile Include="Base\Graphic\Renderer\renderer.cpp">
       <Filter>來源檔案\Game\Graphic\Renderer</Filter>
     </ClCompile>
@@ -434,9 +425,6 @@
     </ClCompile>
     <ClCompile Include="RulesetMeteor\MeteorGame.cpp">
       <Filter>來源檔案\RulesetMeteor</Filter>
-    </ClCompile>
-    <ClCompile Include="Base\Config\FrameworkConfigManager.cpp">
-      <Filter>來源檔案\Game\Config</Filter>
     </ClCompile>
     <ClCompile Include="Base\Ruleset\Ruleset.cpp">
       <Filter>來源檔案\Game\Ruleset</Filter>
@@ -747,6 +735,21 @@
     <ClCompile Include="Framework\Audio\Sample\Sample.cpp">
       <Filter>來源檔案\Framework\Audio\Sample</Filter>
     </ClCompile>
+    <ClCompile Include="Framework\Audio\Track\BassTrack.cpp">
+      <Filter>來源檔案\Framework\Audio\Track</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Scene\Loader.cpp">
+      <Filter>來源檔案\Game\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\MtoGame.cpp">
+      <Filter>來源檔案\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Configurations\ConfigManager.cpp">
+      <Filter>來源檔案\Framework\Configurations</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Configurations\FrameworkConfigManager.cpp">
+      <Filter>來源檔案\Framework\Configurations</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="DailyLog.txt">
@@ -754,12 +757,6 @@
     </Text>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Base\Config\ConfigManager.h">
-      <Filter>標頭檔\Game\Config</Filter>
-    </ClInclude>
-    <ClInclude Include="Base\Graphic\Renderer\renderer.h">
-      <Filter>標頭檔\Game\Graphic\Renderer</Filter>
-    </ClInclude>
     <ClInclude Include="Base\Ruleset\Ruleset.h">
       <Filter>標頭檔\Game\Ruleset</Filter>
     </ClInclude>
@@ -768,9 +765,6 @@
     </ClInclude>
     <ClInclude Include="Base\Ruleset\RulesetInfo.h">
       <Filter>標頭檔\Game\Ruleset</Filter>
-    </ClInclude>
-    <ClInclude Include="Base\Ruleset\Mod\Mod.h">
-      <Filter>標頭檔\Game\Ruleset\Mod</Filter>
     </ClInclude>
     <ClInclude Include="Base\Scheduler\Event\Event.h">
       <Filter>標頭檔\Game\Scheduler\Events</Filter>
@@ -855,9 +849,6 @@
     </ClInclude>
     <ClInclude Include="Base\Scheduler\Event\Effect\Algorithm\MapAlgorithm.h">
       <Filter>標頭檔\Game\Scheduler\Events\Effects\Algorithms</Filter>
-    </ClInclude>
-    <ClInclude Include="Base\Config\FrameworkConfigManager.h">
-      <Filter>標頭檔\Game\Config</Filter>
     </ClInclude>
     <ClInclude Include="RulesetMeteor\Config\MeteorConfigManager.h">
       <Filter>標頭檔\RulesetMeteor\Config</Filter>
@@ -1215,6 +1206,33 @@
     </ClInclude>
     <ClInclude Include="Framework\Audio\Track\BassTrack.h">
       <Filter>標頭檔\Framework\Audio\Track</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Ruleset\Modifiers\Modifier.h">
+      <Filter>標頭檔\Game\Ruleset\Modifiers</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Scene\Loader.h">
+      <Filter>標頭檔\Game\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\MtoGame.h">
+      <Filter>標頭檔\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\MtoGameBase.h">
+      <Filter>標頭檔\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\IO\FileSystemInterface.h">
+      <Filter>標頭檔\Framework\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Configurations\ConfigManager.h">
+      <Filter>標頭檔\Framework\Configurations</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Configurations\FrameworkConfigManager.h">
+      <Filter>標頭檔\Framework\Configurations</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Timing\ThrottledFramedClock.h">
+      <Filter>標頭檔\Framework\Timing</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Allocation\Update\IUpdatable.h">
+      <Filter>標頭檔\Framework\Allocation\Update</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

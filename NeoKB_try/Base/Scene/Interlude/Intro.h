@@ -3,10 +3,10 @@
 
 #include "../../../Framework/Scenes/Scene.h"
 
-using namespace Framework::Scene;
+using namespace Framework::Scenes;
 
 namespace Base {
-namespace Scene {
+namespace Scenes {
 namespace Interlude {
 
 

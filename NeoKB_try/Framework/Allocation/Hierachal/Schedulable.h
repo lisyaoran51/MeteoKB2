@@ -30,7 +30,7 @@ namespace Hierachal {
 
 		Scheduler* GetScheduler();
 
-		virtual int UpdateSubTree();
+		virtual bool UpdateSubTree();
 
 
 	protected:

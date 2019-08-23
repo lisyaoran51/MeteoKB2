@@ -1,24 +1,25 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "../../Util/Update/Updatable.h"
-#include "../../Util/Hierachal/ChildAddable.h"
-#include "../Ruleset/RulesetExecutor.h"
-#include "../Sheetmusic/SheetmusicManager.h"
-#include "../Sheetmusic/WorkingSheetmusic.h"
-#include "../Config/FrameworkConfigManager.h"
+#include "../../Ruleset/RulesetExecutor.h"
+#include "../../Sheetmusic/SheetmusicManager.h"
+#include "../../Sheetmusic/WorkingSheetmusic.h"
+#include "../../../Framework/Configurations/FrameworkConfigManager.h"
+#include "../../../Framework/Scenes/Scene.h"
 
 
 
-using namespace Util::Hierachal;
 using namespace Base::Rulesets;
 using namespace Base::Sheetmusics;
-using namespace Base::Config;
+using namespace Framework::Configurations;
+using namespace Framework::Scenes;
+
 
 namespace Base {
+namespace Scenes {
 namespace Play {
 
-	class Player: public ChildAddable {
+	class Player: public Scene {
 
 		SmManager* smManager;
 
@@ -46,7 +47,7 @@ namespace Play {
 	};
 
 }
-}
+}}
 
 
 

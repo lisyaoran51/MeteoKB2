@@ -7,6 +7,7 @@
 #include <thread>
 #include <functional>
 #include "Track.h"
+#include "../../../ThirdParty/Bass/bass.h"
 
 
 // https://stackoverflow.com/questions/7180920/bass-play-a-stream
@@ -23,6 +24,8 @@ namespace Track {
 	/// 裡面有work queue，每次update就把工作做掉
 	/// </summary>
 	class BassTrack : public Track {
+
+		HSTREAM stream;
 
 	public:
 

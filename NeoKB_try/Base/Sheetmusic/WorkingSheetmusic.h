@@ -8,12 +8,16 @@
 #include "Sheetmusic.h"
 #include "SheetmusicInfo.h"
 #include "Format/SmDecoder.h"
+#include "../Ruleset/Modifiers/Modifier.h"
+#include "../../Util/DataStructure/Bindable.h"
 
 
 
 using namespace std;
-using namespace Util;
+using namespace Util::DataStructure;
 using namespace Base::Schedulers::Events;
+using namespace Base::Rulesets::Modifiers;
+
 
 namespace Base {
 namespace Sheetmusics {

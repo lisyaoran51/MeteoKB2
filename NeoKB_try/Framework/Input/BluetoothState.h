@@ -9,6 +9,8 @@ using namespace std;
 namespace Framework {
 namespace Input {
 
+	struct BluetoothCommand;
+
 	class BluetoothState : public PeripheralState<BluetoothState> {
 
 		vector<BluetoothCommand*> commands;

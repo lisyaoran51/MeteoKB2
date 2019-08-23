@@ -16,7 +16,7 @@ namespace Timing {
 
 	public:
 
-		InterpolatingFramedClock(Clock* s = nullptr);
+		InterpolatingFramedClock(Clock* s);
 
 		virtual int ProcessFrame();
 

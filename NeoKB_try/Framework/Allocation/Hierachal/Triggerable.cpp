@@ -18,22 +18,22 @@ int Triggerable::TriggerOnKeyUp(InputState * inputState, Key key)
 	return onKeyUp(inputState, key);
 }
 
-int Triggerable::TriggerOnKnobTurn(InputState * inputState, Knob knob)
+int Triggerable::TriggerOnKnobTurn(InputState * inputState, PanelKnob knob)
 {
 	return onKnobTurn(inputState, knob);
 }
 
-int Triggerable::TriggerOnButtonDown(InputState * inputState, Button button)
+int Triggerable::TriggerOnButtonDown(InputState * inputState, PanelButton button)
 {
 	return onButtonDown(inputState, button);
 }
 
-int Triggerable::TriggerOnButtonUp(InputState * inputState, Button button)
+int Triggerable::TriggerOnButtonUp(InputState * inputState, PanelButton button)
 {
 	return onButtonUp(inputState, button);
 }
 
-int Triggerable::TriggerOnSlide(InputState * inputState, Slider slider)
+int Triggerable::TriggerOnSlide(InputState * inputState, PanelSlider slider)
 {
 	return onSlide(inputState, slider);
 }
@@ -48,22 +48,22 @@ int Triggerable::onKeyUp(InputState * inputState, Key key)
 	return 0;
 }
 
-int Triggerable::onKnobTurn(InputState * inputState, Knob knob)
+int Triggerable::onKnobTurn(InputState * inputState, PanelKnob knob)
 {
 	return 0;
 }
 
-int Triggerable::onButtonDown(InputState * inputState, Button button)
+int Triggerable::onButtonDown(InputState * inputState, PanelButton button)
 {
 	return 0;
 }
 
-int Triggerable::onButtonUp(InputState * inputState, Button button)
+int Triggerable::onButtonUp(InputState * inputState, PanelButton button)
 {
 	return 0;
 }
 
-int Triggerable::onSlide(InputState * inputState, Slider slider)
+int Triggerable::onSlide(InputState * inputState, PanelSlider slider)
 {
 	return 0;
 }

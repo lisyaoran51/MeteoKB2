@@ -16,12 +16,12 @@ Scheduler * Schedulable::GetScheduler()
 		return scheduler = new Scheduler(GetClock());
 }
 
-int Schedulable::UpdateSubTree()
+bool Schedulable::UpdateSubTree()
 {
 	Updatable::UpdateSubTree();
 
 	if (scheduler != nullptr)
 		scheduler->Update();
 
-	return 0;
+	return true;
 }

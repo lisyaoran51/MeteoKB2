@@ -1,10 +1,10 @@
 #include "Playfield.h"
-#include "../Scheduler/Event/Effect/EffectMapper.h"
+#include "../../Scheduler/Event/Effect/EffectMapper.h"
 #include "../../Util/Log.h"
 #include <functional>
 
 
-using namespace Base::Play;
+using namespace Base::Scenes::Play;
 using namespace Base::Schedulers::Events;
 using namespace Base::Schedulers;
 using namespace Base::Schedulers::Events::Effects;
@@ -39,15 +39,10 @@ int Playfield::load()
 	if (!f)
 		throw runtime_error("int Playfield::load() : FrameworkConfigManager not found in cache.");
 
-	LOG(LogLevel::Finer) << "Playfield::load() : getting Updater";
-	Updater* u = GetCache<Updater>("Updater");
-	if (!u)
-		throw runtime_error("int Playfield::load() : Updater not found in cache.");
-
-	return load(f, u);
+	return load(f);
 }
 
-int Playfield::load(FrameworkConfigManager* f, Updater* u) {
+int Playfield::load(FrameworkConfigManager* f) {
 
 	
 

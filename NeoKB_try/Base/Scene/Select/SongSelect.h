@@ -10,12 +10,12 @@
 
 
 using namespace Base::Sheetmusics;
-using namespace Framework::Scene;
+using namespace Framework::Scenes;
 using namespace Util::DataStructure;
 
 
 namespace Base {
-namespace Scene {
+namespace Scenes {
 namespace Select {
 
 	/// <summary>
@@ -26,6 +26,8 @@ namespace Select {
 
 
 	public:
+
+		SongSelect();
 
 		/// <summary>
 		/// 選擇完成，進入下個場景

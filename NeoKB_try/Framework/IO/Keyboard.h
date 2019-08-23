@@ -24,7 +24,7 @@ namespace IO {
 	public:
 
 		template<class _Type>
-		int AddOnKeyDown(_Type* callableObject, function<int(InputState*)> callback, string name = "HandleKeyDown");
+		int AddOnKeyDown(_Type* callableObject, function<int(InputState*)> callback, string name);
 
 	protected:
 

@@ -13,6 +13,7 @@ using namespace Base::Sheetmusics;
 
 
 namespace Base {
+namespace Scenes {
 namespace Play {
 
 	class Session : public ChildAddable {
@@ -43,7 +44,7 @@ namespace Play {
 
 	};
 
-}}
+}}}
 
 
 

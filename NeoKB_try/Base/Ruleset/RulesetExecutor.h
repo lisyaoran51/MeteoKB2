@@ -6,15 +6,14 @@
 #include "../../Util/TemplateConstraint.h"
 #include "../Scheduler/Event/Event.h"
 #include "../Scheduler/Event/EventProcessor.h"
-#include "../../Util/Update/Updatable.h"
+#include "../../Framework/Allocation/Hierachal/Container.h"
 #include "../Sheetmusic/SheetmusicConverter.h"
 #include "../Sheetmusic/SheetmusicPostprocessor.h"
-#include "../Play/Playfield.h"
+#include "../Scene/Play/Playfield.h"
 #include "../Sheetmusic/Pattern/PatternGenerator.h"
 #include "../Config/FrameworkConfigManager.h"
 #include "../Scheduler/Event/Effect/Algorithm/MapAlgorithm.h"
 #include "../Sheetmusic/WorkingSheetmusic.h"
-#include "../../Util/MtoObject.h"
 
 
 
@@ -28,13 +27,13 @@
 using namespace std;
 using namespace Util;
 using namespace Base::Schedulers::Events;
-using namespace Util::Hierachal;
-using namespace Base::Play;
 using namespace Base::Sheetmusics;
 using namespace Base::Sheetmusics::Patterns;
 using namespace Base::Config;
 using namespace Base::Schedulers::Events::Effects::Algorithms;
 using namespace Base::Rulesets;
+using namespace Framework::Allocation::Hierachal;
+using namespace Base::Scenes::Play;
 
 
 namespace Base {
@@ -44,7 +43,7 @@ namespace Rulesets {
 	/// a game rule that designs how the game plays
 	///	</summary>
 	template<class T>
-	class RulesetExecutor: private TConstraint<T, Event>, public Updatable, public ChildAddable
+	class RulesetExecutor: private TConstraint<T, Event>, public Container
 	{
 
 		/// <summary>

@@ -4,7 +4,7 @@
 
 #include <vector>
 
-#include "../../Framework/Allocation/Hierachal/Triggerable.h"
+#include "../../Framework/Allocation/Hierachal/Container.h"
 #include "Handler\InputHandler.h"
 
 
@@ -18,7 +18,7 @@ namespace Input {
 	/// <summary>
 	/// 抓取input，並且發送到所有子物件
 	/// </summary>
-	class InputManager : public Triggerable {
+	class InputManager : public Container {
 
 	public:
 
@@ -77,21 +77,21 @@ namespace Input {
 
 		virtual int propagateKeyUp(vector<Triggerable*>* queue, InputState* state, Key key);
 
-		virtual int handleButtonDown(InputState* state, Button button);
+		virtual int handleButtonDown(InputState* state, PanelButton button);
 
-		virtual int propagateButtonDown(vector<Triggerable*>* queue, InputState* state, Button button);
+		virtual int propagateButtonDown(vector<Triggerable*>* queue, InputState* state, PanelButton button);
 
-		virtual int handleButtonUp(InputState* state, Button button);
+		virtual int handleButtonUp(InputState* state, PanelButton button);
 
-		virtual int propagateButtonUp(vector<Triggerable*>* queue, InputState* state, Button button);
+		virtual int propagateButtonUp(vector<Triggerable*>* queue, InputState* state, PanelButton button);
 
-		virtual int handleKnobTurn(InputState* state, Knob knob);
+		virtual int handleKnobTurn(InputState* state, PanelKnob knob);
 
-		virtual int propagateKnobTurn(vector<Triggerable*>* queue, InputState* state, Knob knob);
+		virtual int propagateKnobTurn(vector<Triggerable*>* queue, InputState* state, PanelKnob knob);
 
-		virtual int handleSlide(InputState* state, Slider slider);
+		virtual int handleSlide(InputState* state, PanelSlider slider);
 
-		virtual int propagateSlide(vector<Triggerable*>* queue, InputState* state, Slider slider);
+		virtual int propagateSlide(vector<Triggerable*>* queue, InputState* state, PanelSlider slider);
 
 	private:
 

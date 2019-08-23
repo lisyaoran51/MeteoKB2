@@ -1,9 +1,12 @@
 #include"MeteorGame.h"
+
 #include "Config/MeteorConfigManager.h"
+#include "../Framework/Configurations/FrameworkConfigManager.h"
+
 
 using namespace Meteor;
-using namespace Util::Hierachal;
 using namespace Meteor::Config;
+using namespace Framework::Configurations;
 
 
 int MeteorGame::load()
@@ -29,7 +32,7 @@ int MeteorGame::load()
 	return 0;
 }
 
-MeteorGame::MeteorGame(): RegisterType("MeteorGame"), Game()
+MeteorGame::MeteorGame(): RegisterType("MeteorGame")
 {
 	registerLoad(bind((int(MeteorGame::*)())&MeteorGame::load, this));
 }

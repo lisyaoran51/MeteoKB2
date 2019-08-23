@@ -16,6 +16,8 @@ using namespace Util::DataStructure;
 namespace Framework {
 namespace Audio {
 
+	enum class AdjustableProperty;
+
 	/// <summary>
 	/// 裡面可以加入資源T
 	/// TODO: 記成adjust aduio component，必須要是updatable才能update
@@ -38,7 +40,7 @@ namespace Audio {
 
 	};
 
-	enum AdjustableProperty
+	enum class AdjustableProperty
 	{
 		Volume,
 		Balance,

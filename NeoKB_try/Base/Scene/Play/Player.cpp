@@ -5,7 +5,7 @@
 #include "../Sheetmusic/Sheetmusic.h"
 
 using namespace std;
-using namespace Base::Play;
+using namespace Base::Scene::Play;
 using namespace Util::Hierachal;
 using namespace Base::Rulesets;
 using namespace Base::Sheetmusics;
@@ -55,12 +55,12 @@ int Player::load(FrameworkConfigManager* f)
 	return 0;
 }
 
-Player::Player(): RegisterType("Player"), ChildAddable()
+Player::Player(): RegisterType("Player"), Container()
 {
 	registerLoad(bind((int(Player::*)())&Player::load, this));
 }
 
-Base::Play::Player::~Player()
+Player::~Player()
 {
 	delete ruleset;
 	delete rulesetExecutor;
