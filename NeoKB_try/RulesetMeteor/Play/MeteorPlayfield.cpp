@@ -55,7 +55,7 @@ int MeteorPlayfield::load(FrameworkConfigManager* f, MeteorConfigManager * m)
 	LOG(LogLevel::Finer) << "MeteorPlayfield::load() : FallMapAlgorithm [" << mapAlgorithms["FallEffect"]->GetTypeName() << "] loaded.";
 
 	AddChild(mapAlgorithms["FallEffect"]);
-	mapAlgorithms["FallEffect"]->RegisterBufferMap(bufferMap);
+	//mapAlgorithms["FallEffect"]->RegisterBufferMap(bufferMap);
 
 	/* --------------------- ExplodeEffect map algo --------------------- */
 	if (m->Get(MeteorSetting::ExplodeMapAlgorithm, &mapAlgoName)) {
@@ -69,7 +69,7 @@ int MeteorPlayfield::load(FrameworkConfigManager* f, MeteorConfigManager * m)
 	LOG(LogLevel::Finer) << "MeteorPlayfield::load() : ExplodeMapAlgorithm [" << mapAlgorithms["ExplodeEffect"]->GetTypeName() << "] loaded.";
 
 	AddChild(mapAlgorithms["ExplodeEffect"]);
-	mapAlgorithms["ExplodeEffect"]->RegisterBufferMap(bufferMap);
+	//mapAlgorithms["ExplodeEffect"]->RegisterBufferMap(bufferMap);
 
 	/* --------------------- GlowLineEffect map algo --------------------- */
 	if (m->Get(MeteorSetting::GlowLineMapAlgorithm, &mapAlgoName)) {
@@ -83,7 +83,7 @@ int MeteorPlayfield::load(FrameworkConfigManager* f, MeteorConfigManager * m)
 	LOG(LogLevel::Finer) << "MeteorPlayfield::load() : GlowLineMapAlgorithm [" << mapAlgorithms["GlowLineEffect"]->GetTypeName() << "] loaded.";
 
 	AddChild(mapAlgorithms["GlowLineEffect"]);
-	mapAlgorithms["GlowLineEffect"]->RegisterBufferMap(bufferMap);
+	//mapAlgorithms["GlowLineEffect"]->RegisterBufferMap(bufferMap);
 
 	/* --------------------- TargetLineEffect map algo --------------------- */
 	if (m->Get(MeteorSetting::TargetLineMapAlgorithm, &mapAlgoName)) {
@@ -97,7 +97,7 @@ int MeteorPlayfield::load(FrameworkConfigManager* f, MeteorConfigManager * m)
 	LOG(LogLevel::Finer) << "MeteorPlayfield::load() : TargetLineMapAlgorithm [" << mapAlgorithms["TargetLineEffect"]->GetTypeName() << "] loaded.";
 
 	AddChild(mapAlgorithms["TargetLineEffect"]);
-	mapAlgorithms["TargetLineEffect"]->RegisterBufferMap(bufferMap);
+	//mapAlgorithms["TargetLineEffect"]->RegisterBufferMap(bufferMap);
 
 	return 0;
 }

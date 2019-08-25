@@ -2,7 +2,7 @@
 
 #include "PlaySongSelect.h"
 
-using namespace Base::Scene::Select;
+using namespace Base::Scenes::Select;
 
 int MainMenu::onEntering(Scene * lastScene)
 {

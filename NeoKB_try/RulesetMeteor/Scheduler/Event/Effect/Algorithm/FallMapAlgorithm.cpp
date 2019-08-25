@@ -47,9 +47,9 @@ FallMapGenerateAlgorithm::FallMapGenerateAlgorithm(MeteorConfigManager* m)
 int FallMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper<FallEffect>* em)
 {
 
-	LOG(LogLevel::Depricated) << "FallMapGenerateAlgorithm::ImplementGenerate() : Generate Effect [" << em->GetStartTime() << "] on [" << em->GetCurrentTime() << "].";
+	//LOG(LogLevel::Depricated) << "FallMapGenerateAlgorithm::ImplementGenerate() : Generate Effect [" << em->GetStartTime() << "] on [" << em->GetCurrentTime() << "].";
 
-	MTO_FLOAT currentTime = em->GetCurrentTime();
+	MTO_FLOAT currentTime = 0;// em->GetCurrentTime();
 	// MTO_FLOAT lifeTime = em->GetLifeTime();
 	MTO_FLOAT speed = em->GetSpeed();
 

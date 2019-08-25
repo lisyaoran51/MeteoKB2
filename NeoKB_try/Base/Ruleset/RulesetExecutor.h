@@ -11,7 +11,7 @@
 #include "../Sheetmusic/SheetmusicPostprocessor.h"
 #include "../Scene/Play/Playfield.h"
 #include "../Sheetmusic/Pattern/PatternGenerator.h"
-#include "../Config/FrameworkConfigManager.h"
+#include "../../Framework/Configurations/FrameworkConfigManager.h"
 #include "../Scheduler/Event/Effect/Algorithm/MapAlgorithm.h"
 #include "../Sheetmusic/WorkingSheetmusic.h"
 
@@ -29,7 +29,7 @@ using namespace Util;
 using namespace Base::Schedulers::Events;
 using namespace Base::Sheetmusics;
 using namespace Base::Sheetmusics::Patterns;
-using namespace Base::Config;
+using namespace Framework::Configurations;
 using namespace Base::Schedulers::Events::Effects::Algorithms;
 using namespace Base::Rulesets;
 using namespace Framework::Allocation::Hierachal;

@@ -6,7 +6,7 @@
 
 
 
-using namespace Base::Scene::Select;
+using namespace Base::Scenes::Select;
 
 
 PlaySongSelect::PlaySongSelect() :RegisterType("PlaySongSelect")
@@ -18,7 +18,8 @@ int PlaySongSelect::updateSheetmusic(WorkingSm * workingSm)
 {
 	SongSelect::updateSheetmusic(workingSm);
 
-	workingSm->GetModifier()->Set(selectedModifiers);
+	for (int i = 0; i < selectedModifiers.size(); i++)
+		workingSm->GetModifiers()->GetValue()->push_back(selectedModifiers[i]);
 
 	return 0;
 }

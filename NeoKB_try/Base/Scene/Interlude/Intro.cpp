@@ -2,8 +2,8 @@
 
 #include "../../../Base/Scene/Select/MainMenu.h"
 
-using namespace Base::Scene::Interlude;
-using namespace Base::Scene::Select;
+using namespace Base::Scenes::Interlude;
+using namespace Base::Scenes::Select;
 
 
 

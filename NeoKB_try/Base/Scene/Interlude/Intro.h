@@ -2,8 +2,10 @@
 #define INTRO_H
 
 #include "../../../Framework/Scenes/Scene.h"
+#include "../Select/MainMenu.h"
 
 using namespace Framework::Scenes;
+using namespace Base::Scenes::Select;
 
 namespace Base {
 namespace Scenes {

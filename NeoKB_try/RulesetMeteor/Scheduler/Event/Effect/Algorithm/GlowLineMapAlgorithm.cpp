@@ -20,7 +20,7 @@ GlowLineMapAlgorithm::GlowLineMapAlgorithm(): RegisterType("GlowLineMapAlgorithm
 int GlowLineMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper<GlowLineEffect>* em)
 {
 
-	LOG(LogLevel::Finest) << "GlowLineMapGenerateAlgorithm::ImplementGenerate() : Generate Effect [" << em->GetStartTime() << "] on [" << em->GetCurrentTime() << "].";
+	//LOG(LogLevel::Finest) << "GlowLineMapGenerateAlgorithm::ImplementGenerate() : Generate Effect [" << em->GetStartTime() << "] on [" << em->GetCurrentTime() << "].";
 
 	// TODO: Ãi±o¼g ¤U¦¸¼g
 	return 0;

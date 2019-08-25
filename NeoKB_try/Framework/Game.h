@@ -3,9 +3,9 @@
 
 
 #include "Allocation/Hierachal/Container.h"
-#include "IO\Stores\ResourceStore.h"
+#include "IO/Stores/ResourceStore.h"
 #include "Audio/AudioManager.h"
-#include "Host\GameHost.h"
+#include "Host/GameHost.h"
 
 
 using namespace Framework::Allocation;

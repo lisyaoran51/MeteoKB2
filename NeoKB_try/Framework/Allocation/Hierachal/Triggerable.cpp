@@ -4,7 +4,7 @@
 using namespace Framework::Allocation::Hierachal;
 
 
-Triggerable::Triggerable(): Updatable(), RegisterType("Triggerable")
+Triggerable::Triggerable(): Schedulable(), RegisterType("Triggerable")
 {
 }
 

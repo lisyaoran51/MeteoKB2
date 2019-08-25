@@ -1,7 +1,7 @@
 #include "Loader.h"
 
-using namespace Base::Scene;
-
+using namespace Framework::Scenes;
+using namespace Base::Scenes;
 
 
 

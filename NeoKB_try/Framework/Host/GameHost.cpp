@@ -3,9 +3,13 @@
 
 #include "../Input/InputManager.h"
 
+
+
 using namespace std;
 using namespace Framework::Host;
 using namespace Framework::Input;
+
+
 
 GameHost::GameHost(string name = "")
 {
@@ -66,7 +70,7 @@ int GameHost::drawFrame()
 			drawables[i]->GetPositionY());
 	}
 
-	mainInterface->Display->Display(canvas);
+	mainInterface->GetDisplay()->Display(canvas);
 
 	return 0;
 }
@@ -102,6 +106,11 @@ int GameHost::resetInputHandlers()
 	// 在initialize裡面，會把自己的on input註冊到host.OnInput裡
 	pianoKeyInputHandler->Intialize();
 
+	return 0;
+}
+
+int GameHost::setupConfig()
+{
 	return 0;
 }
 

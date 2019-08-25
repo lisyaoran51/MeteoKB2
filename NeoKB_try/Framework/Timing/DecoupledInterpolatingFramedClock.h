@@ -45,6 +45,7 @@ namespace Timing {
 		// this
 		int SetIsCoupled(bool value);
 		bool GetIsCoupled();
+		int SetIsProcessSourceClockFrames(bool value);
 
 
 	protected:

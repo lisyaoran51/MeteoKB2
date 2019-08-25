@@ -8,26 +8,27 @@
 #include "../../Util/DataStructure/Action.h"
 #include "../Input/InputEvent.h"
 #include "../Game.h"
-#include "../IO/MainInterface.h"
 #include "../Input/Handler/InputHandler.h"
 #include "../Graphic/Drawable.h"
 #include "../Allocation/DependencyContainer.h"
 #include "../IO/MainInterface.h"
 #include "../Configurations/FrameworkConfigManager.h"
-#include "../Allocation/Hierachal/Triggerable.h"
+#include "../Allocation/Hierachal/Container.h"
 #include "../Graphic/Map/Map.h"
+#include "../Timing/FrameBasedClock.h"
 
 
 using namespace std;
 using namespace Framework::Threading;
 using namespace Util::DataStructure;
-using namespace Framework::Input;
+using namespace Framework::Input::Handler;
 using namespace Framework::IO;
 using namespace Framework;
 using namespace Framework::Graphic;
 using namespace Framework::Graphic::Maps;
-using namespace Framework::Allocation;
+using namespace Framework::Allocation::Hierachal;
 using namespace Framework::Configurations;
+using namespace Framework::Timing;
 
 
 namespace Framework {
@@ -41,7 +42,7 @@ namespace Host {
 	
 	public:
 		
-		GameHost(string name = "");
+		GameHost(string name);
 
 		int Run(Game* game);
 
@@ -102,7 +103,7 @@ namespace Host {
 		/// <summary>
 		/// input manager會成為root，附則把輸入傳給下面的物件
 		/// </summary>
-		Triggerable* root;
+		Container* root;
 
 		int iterateSearchDrawable(ChildAddable* r, vector<Drawable*>* drawables);
 

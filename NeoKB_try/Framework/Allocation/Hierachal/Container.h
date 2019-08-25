@@ -2,7 +2,7 @@
 #define CONTAINER_H
 
 
-#include "Schedulable.h"
+#include "Triggerable.h"
 
 
 
@@ -10,7 +10,7 @@ namespace Framework {
 namespace Allocation {
 namespace Hierachal {
 
-	class Container : public Schedulable {
+	class Container : public Triggerable {
 	public:
 
 		Container();

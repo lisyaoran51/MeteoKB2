@@ -20,7 +20,8 @@ int KeyboardInputHandler::HandleState(InputState * inputState)
 {
 	auto keyboardState = inputState->GetKeyboardState()->Clone();
 
-	InputState* pendingState = new InputState()->SetKeyboardState(keyboardState);
+	InputState* pendingState = new InputState();
+	pendingState->SetKeyboardState(keyboardState);
 
 	pendingStates.push_back(pendingState);
 

@@ -1,11 +1,11 @@
 #include "RulesetInfo.h"
 #include "../../Util/InstanceCreator.h"
-#include "../../Util/MtoObject.h"
+#include "../../Framework/Allocation/Hierachal/MtoObject.h"
 #include "Ruleset.h"
 
 
 using namespace Base::Rulesets;
-using namespace Util;
+using namespace Framework::Allocation::Hierachal;
 
 
 RulesetInfo::RulesetInfo(string n)

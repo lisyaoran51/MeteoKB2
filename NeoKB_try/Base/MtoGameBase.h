@@ -6,8 +6,8 @@
 
 
 using namespace Framework;
-using namespace Framework::Scene;
-using namespace Base::Scene::Interlude;
+using namespace Framework::Scenes;
+using namespace Base::Scenes::Interlude;
 
 namespace Base {
 

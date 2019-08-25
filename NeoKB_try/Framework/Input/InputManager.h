@@ -102,6 +102,8 @@ namespace Input {
 
 		vector<InputHandler*> inputHandlers;
 
+		Triggerable* focusTriggerable;
+
 		Triggerable* iterateGetDeepestChild(Triggerable* deepestChild, int* deepestDepth, int tempDepth);
 
 

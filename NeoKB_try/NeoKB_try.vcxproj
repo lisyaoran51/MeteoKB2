@@ -20,8 +20,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\MtoGame.cpp" />
-    <ClCompile Include="Base\Graphic\Renderer\MapAlgorithm\HardwareMapAlgorithm.cpp" />
-    <ClCompile Include="Base\Graphic\Renderer\renderer.cpp" />
+    <ClCompile Include="Base\Graphic\Renderer\MapAlgorithm\HardwareMapAlgorithm.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Base\Graphic\Renderer\renderer.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Base\Ruleset\Mod\Mod.cpp" />
     <ClCompile Include="Base\Ruleset\Ruleset.cpp" />
     <ClCompile Include="Base\Ruleset\RulesetInfo.cpp" />
@@ -86,7 +90,9 @@
     <ClCompile Include="Framework\Audio\Track\BassTrack.cpp" />
     <ClCompile Include="Framework\Audio\Track\Track.cpp" />
     <ClCompile Include="Framework\Audio\Track\TrackManager.cpp" />
-    <ClCompile Include="Framework\Configurations\ConfigManager.cpp" />
+    <ClCompile Include="Framework\Configurations\ConfigManager.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Framework\Configurations\FrameworkConfigManager.cpp" />
     <ClCompile Include="Framework\Game.cpp" />
     <ClCompile Include="Framework\Graphic\Drawable.cpp" />
@@ -114,7 +120,9 @@
     <ClCompile Include="Framework\Timing\OffsetFramedClock.cpp" />
     <ClCompile Include="Framework\Timing\SpeedAdjusters\SpeedAdjuster.cpp" />
     <ClCompile Include="Framework\Timing\StopwatchClock.cpp" />
-    <ClCompile Include="Program.cpp" />
+    <ClCompile Include="Program.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="RulesetMeteor\Config\MeteorConfigManager.cpp" />
     <ClCompile Include="RulesetMeteor\MeteorGame.cpp" />
     <ClCompile Include="RulesetMeteor\Play\MeteorPlayfield.cpp" />
@@ -138,14 +146,20 @@
     <ClCompile Include="Util\DataStructure\Action.cpp" />
     <ClCompile Include="Util\DataStructure\PeriodMap.cpp" />
     <ClCompile Include="Util\FileSystem.c" />
-    <ClCompile Include="Util\MtoObject.cpp" />
-    <ClCompile Include="Util\ProgramInitializer.cpp" />
+    <ClCompile Include="Util\MtoObject.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Util\ProgramInitializer.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="DailyLog.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Base\Graphic\Renderer\MapAlgorithm\HardwareMapAlgorithm.h" />
+    <ClInclude Include="Base\Graphic\Renderer\MapAlgorithm\HardwareMapAlgorithm.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Base\MtoGame.h" />
     <ClInclude Include="Base\MtoGameBase.h" />
     <ClInclude Include="Base\Ruleset\Modifiers\Modifier.h" />
@@ -157,7 +171,9 @@
     <ClInclude Include="Base\Scene\Play\Player.h" />
     <ClInclude Include="Base\Scene\Play\PlayerLoader.h" />
     <ClInclude Include="Base\Scene\Play\Playfield.h" />
-    <ClInclude Include="Base\Scene\Play\Session.h" />
+    <ClInclude Include="Base\Scene\Play\Session.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Base\Scene\Play\TimeController.h" />
     <ClInclude Include="Base\Scene\Select\MainMenu.h" />
     <ClInclude Include="Base\Scene\Select\PlaySongSelect.h" />
@@ -272,7 +288,9 @@
     <ClInclude Include="Framework\Timing\SpeedAdjusters\SpeedAdjuster.h" />
     <ClInclude Include="Framework\Timing\StopwatchClock.h" />
     <ClInclude Include="Framework\Timing\ThrottledFramedClock.h" />
-    <ClInclude Include="Program.h" />
+    <ClInclude Include="Program.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="RulesetMeteor\Config\MeteorConfigManager.h" />
     <ClInclude Include="RulesetMeteor\MeteorGame.h" />
     <ClInclude Include="RulesetMeteor\Play\MeteorPlayfield.h" />
@@ -301,7 +319,9 @@
     <ClInclude Include="Util\InstanceCreator.h" />
     <ClInclude Include="Util\Log.h" />
     <ClInclude Include="Util\MtoType.h" />
-    <ClInclude Include="Util\ProgramInitializer.h" />
+    <ClInclude Include="Util\ProgramInitializer.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Util\Singleton.h" />
     <ClInclude Include="Util\TemplateConstraint.h" />
   </ItemGroup>

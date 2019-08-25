@@ -3,7 +3,7 @@
 #include "Scene\Loader.h"
 
 using namespace Base;
-using namespace Base::Scene;
+using namespace Base::Scenes;
 
 
 int MtoGame::load()

@@ -25,7 +25,8 @@ int PanelInputHandler::HandleState(InputState * inputState)
 {
 	auto panelState = inputState->GetPanelState()->Clone();
 
-	InputState* pendingState = new InputState()->SetPanelState(panelState);
+	InputState* pendingState = new InputState();
+	pendingState->SetPanelState(panelState);
 
 	pendingStates.push_back(pendingState);
 

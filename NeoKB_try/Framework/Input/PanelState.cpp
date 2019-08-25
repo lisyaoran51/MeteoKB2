@@ -21,7 +21,7 @@ int PanelState::AddKnob(pair<PanelKnob, int> knob)
 	return 0;
 }
 
-vector<pair<PanelKnob, int>>* PanelState::Getknobs()
+vector<pair<PanelKnob, int>>* PanelState::GetKnobs()
 {
 	return &knobs;
 }
@@ -44,7 +44,7 @@ PanelState * PanelState::Clone()
 	cloned->SetLastState(lastState);
 
 	cloned->GetButtons()->assign(buttons.begin(), buttons.end());
-	cloned->Getknobs()->assign(knobs.begin(), knobs.end());
+	cloned->GetKnobs()->assign(knobs.begin(), knobs.end());
 	cloned->GetSliders()->assign(sliders.begin(), sliders.end());
 
 	return cloned;

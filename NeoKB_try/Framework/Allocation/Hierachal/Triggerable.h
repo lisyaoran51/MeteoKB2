@@ -4,7 +4,7 @@
 
 
 #include <vector>
-#include "Updatable.h"
+#include "Schedulable.h"
 #include "../../Input/InputState.h"
 
 using namespace std;
@@ -17,7 +17,7 @@ namespace Hierachal {
 	/// <summary>
 	/// every class inherit form this has a function to update. 每個update都匯被parent呼叫，最後由update thread來叫root
 	/// </summary>
-	class Triggerable : public Updatable {
+	class Triggerable : public Schedulable {
 
 	public:
 

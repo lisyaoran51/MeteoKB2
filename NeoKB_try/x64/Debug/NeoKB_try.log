@@ -1,136 +1,224 @@
-﻿d:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(937,5): warning MSB8027: 兩個或多個名稱為 'MtoObject.cpp' 的檔案會產生輸出到相同位置。這可能導致錯誤的組建結果。涉及的檔案是 Framework\Allocation\Hierachal\MtoObject.cpp, Util\MtoObject.cpp。
-  ProgramInitializer.cpp
-d:\school\新創\程式\meteokb2\neokb_try\util\programinitializer.h(9): fatal error C1083: 無法開啟包含檔案: '../Base/Game.h': No such file or directory
-  MtoObject.cpp
-c1xx : fatal error C1083: 無法開啟來源檔案: 'Util\MtoObject.cpp': No such file or directory
-  MeteorPatternGenerator.cpp
+﻿  TargetLineEffectMapper.cpp
 d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
-  MeteorSheetmusicPostprocessor.cpp
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
-  MeteorSheetmusicConverter.cpp
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
-  TargetLineEffectMapper.cpp
-d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\effect\algorithm\mapshiftalgorithm.h(4): fatal error C1083: 無法開啟包含檔案: '../../../../Graphic/Map/Map.h': No such file or directory
+d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\eventprocessor.h(53): error C2065: 'currentTime': 未宣告的識別項
+  d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\eventprocessor.h(48): note: 編譯 類別 樣板 成員函式 'float Base::Schedulers::Events::EventProcessor<Base::Schedulers::Events::Event>::GetTimeLeft(void)' 時
+  d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\effect\effectmapper.h(68): note: 請參閱所要編譯的函式 樣板 具現化 'float Base::Schedulers::Events::EventProcessor<Base::Schedulers::Events::Event>::GetTimeLeft(void)' 之參考
+  d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\effect\effectmapper.h(21): note: 查看要編譯的 類別 樣板 具現化 'Base::Schedulers::Events::EventProcessor<Base::Schedulers::Events::Event>' 參考
+d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\eventprocessor.h(55): error C2065: 'currentTime': 未宣告的識別項
   GlowLineEffectMapper.cpp
-d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\effect\algorithm\mapshiftalgorithm.h(4): fatal error C1083: 無法開啟包含檔案: '../../../../Graphic/Map/Map.h': No such file or directory
+d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\eventprocessor.h(53): error C2065: 'currentTime': 未宣告的識別項
+  d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\eventprocessor.h(48): note: 編譯 類別 樣板 成員函式 'float Base::Schedulers::Events::EventProcessor<Base::Schedulers::Events::Event>::GetTimeLeft(void)' 時
+  d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\effect\effectmapper.h(68): note: 請參閱所要編譯的函式 樣板 具現化 'float Base::Schedulers::Events::EventProcessor<Base::Schedulers::Events::Event>::GetTimeLeft(void)' 之參考
+  d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\effect\effectmapper.h(21): note: 查看要編譯的 類別 樣板 具現化 'Base::Schedulers::Events::EventProcessor<Base::Schedulers::Events::Event>' 參考
+d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\eventprocessor.h(55): error C2065: 'currentTime': 未宣告的識別項
   FallEffectMapper.cpp
-d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\effect\algorithm\mapshiftalgorithm.h(4): fatal error C1083: 無法開啟包含檔案: '../../../../Graphic/Map/Map.h': No such file or directory
+d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\eventprocessor.h(53): error C2065: 'currentTime': 未宣告的識別項
+  d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\eventprocessor.h(48): note: 編譯 類別 樣板 成員函式 'float Base::Schedulers::Events::EventProcessor<Base::Schedulers::Events::Event>::GetTimeLeft(void)' 時
+  d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\effect\effectmapper.h(68): note: 請參閱所要編譯的函式 樣板 具現化 'float Base::Schedulers::Events::EventProcessor<Base::Schedulers::Events::Event>::GetTimeLeft(void)' 之參考
+  d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\effect\effectmapper.h(21): note: 查看要編譯的 類別 樣板 具現化 'Base::Schedulers::Events::EventProcessor<Base::Schedulers::Events::Event>' 參考
+d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\eventprocessor.h(55): error C2065: 'currentTime': 未宣告的識別項
   ExplodeEffectMapper.cpp
-d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\effect\algorithm\mapshiftalgorithm.h(4): fatal error C1083: 無法開啟包含檔案: '../../../../Graphic/Map/Map.h': No such file or directory
+d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\eventprocessor.h(53): error C2065: 'currentTime': 未宣告的識別項
+  d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\eventprocessor.h(48): note: 編譯 類別 樣板 成員函式 'float Base::Schedulers::Events::EventProcessor<Base::Schedulers::Events::Event>::GetTimeLeft(void)' 時
+  d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\effect\effectmapper.h(68): note: 請參閱所要編譯的函式 樣板 具現化 'float Base::Schedulers::Events::EventProcessor<Base::Schedulers::Events::Event>::GetTimeLeft(void)' 之參考
+  d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\effect\effectmapper.h(21): note: 查看要編譯的 類別 樣板 具現化 'Base::Schedulers::Events::EventProcessor<Base::Schedulers::Events::Event>' 參考
+d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\eventprocessor.h(55): error C2065: 'currentTime': 未宣告的識別項
   TargetLineMapAlgorithm.cpp
-d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\effect\algorithm\mapshiftalgorithm.h(4): fatal error C1083: 無法開啟包含檔案: '../../../../Graphic/Map/Map.h': No such file or directory
+d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\rulesetmeteor\scheduler\event\effect\algorithm\targetlinemapalgorithm.cpp(129): warning C4244: '正在初始化': 將 'float' 轉換為 'int'，由於類型不同，可能導致資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\effect\algorithm\mapshiftalgorithm.h(76): warning C4244: '正在初始化': 將 'int' 轉換為 'float'，由於類型不同，可能導致資料遺失
+  d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\effect\algorithm\mapshiftalgorithm.h(74): note: 編譯 類別 樣板 成員函式 'int Base::Schedulers::Events::Effects::Algorithms::MapShiftAlgorithm<T>::ImplementShift(Framework::Graphic::Maps::Map *,Framework::Graphic::Maps::Map *,Base::Schedulers::Events::Effects::EffectMapper<T> *)' 時
+          with
+          [
+              T=Meteor::Schedulers::Events::Effects::TargetLineEffect
+          ]
+  d:\school\新創\程式\meteokb2\neokb_try\rulesetmeteor\scheduler\event\effect\algorithm\targetlinemapalgorithm.cpp(21): note: 查看要編譯的 類別 樣板 具現化 'Base::Schedulers::Events::Effects::Algorithms::MapShiftAlgorithm<T>' 參考
+          with
+          [
+              T=Meteor::Schedulers::Events::Effects::TargetLineEffect
+          ]
+d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\effect\algorithm\mapshiftalgorithm.h(77): warning C4244: '正在初始化': 將 'int' 轉換為 'float'，由於類型不同，可能導致資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\effect\algorithm\mapshiftalgorithm.h(81): warning C4244: '正在初始化': 將 'int' 轉換為 'float'，由於類型不同，可能導致資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\effect\algorithm\mapshiftalgorithm.h(82): warning C4244: '正在初始化': 將 'int' 轉換為 'float'，由於類型不同，可能導致資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\effect\algorithm\mapshiftalgorithm.h(86): warning C4244: '正在初始化': 將 'float' 轉換為 'int'，由於類型不同，可能導致資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\effect\algorithm\mapshiftalgorithm.h(87): warning C4244: '正在初始化': 將 'float' 轉換為 'int'，由於類型不同，可能導致資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\eventprocessor.h(53): error C2065: 'currentTime': 未宣告的識別項
+  d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\eventprocessor.h(48): note: 編譯 類別 樣板 成員函式 'float Base::Schedulers::Events::EventProcessor<Base::Schedulers::Events::Event>::GetTimeLeft(void)' 時
+  d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\effect\effectmapper.h(68): note: 請參閱所要編譯的函式 樣板 具現化 'float Base::Schedulers::Events::EventProcessor<Base::Schedulers::Events::Event>::GetTimeLeft(void)' 之參考
+  d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\effect\effectmapper.h(21): note: 查看要編譯的 類別 樣板 具現化 'Base::Schedulers::Events::EventProcessor<Base::Schedulers::Events::Event>' 參考
+d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\eventprocessor.h(55): error C2065: 'currentTime': 未宣告的識別項
   GlowLineMapAlgorithm.cpp
-d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\effect\algorithm\mapshiftalgorithm.h(4): fatal error C1083: 無法開啟包含檔案: '../../../../Graphic/Map/Map.h': No such file or directory
+d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\effect\algorithm\mapshiftalgorithm.h(76): warning C4244: '正在初始化': 將 'int' 轉換為 'float'，由於類型不同，可能導致資料遺失
+  d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\effect\algorithm\mapshiftalgorithm.h(74): note: 編譯 類別 樣板 成員函式 'int Base::Schedulers::Events::Effects::Algorithms::MapShiftAlgorithm<T>::ImplementShift(Framework::Graphic::Maps::Map *,Framework::Graphic::Maps::Map *,Base::Schedulers::Events::Effects::EffectMapper<T> *)' 時
+          with
+          [
+              T=Meteor::Schedulers::Events::Effects::GlowLineEffect
+          ]
+  d:\school\新創\程式\meteokb2\neokb_try\rulesetmeteor\scheduler\event\effect\algorithm\glowlinemapalgorithm.cpp(11): note: 查看要編譯的 類別 樣板 具現化 'Base::Schedulers::Events::Effects::Algorithms::MapShiftAlgorithm<T>' 參考
+          with
+          [
+              T=Meteor::Schedulers::Events::Effects::GlowLineEffect
+          ]
+d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\effect\algorithm\mapshiftalgorithm.h(77): warning C4244: '正在初始化': 將 'int' 轉換為 'float'，由於類型不同，可能導致資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\effect\algorithm\mapshiftalgorithm.h(81): warning C4244: '正在初始化': 將 'int' 轉換為 'float'，由於類型不同，可能導致資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\effect\algorithm\mapshiftalgorithm.h(82): warning C4244: '正在初始化': 將 'int' 轉換為 'float'，由於類型不同，可能導致資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\effect\algorithm\mapshiftalgorithm.h(86): warning C4244: '正在初始化': 將 'float' 轉換為 'int'，由於類型不同，可能導致資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\effect\algorithm\mapshiftalgorithm.h(87): warning C4244: '正在初始化': 將 'float' 轉換為 'int'，由於類型不同，可能導致資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\eventprocessor.h(53): error C2065: 'currentTime': 未宣告的識別項
+  d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\eventprocessor.h(48): note: 編譯 類別 樣板 成員函式 'float Base::Schedulers::Events::EventProcessor<Base::Schedulers::Events::Event>::GetTimeLeft(void)' 時
+  d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\effect\effectmapper.h(68): note: 請參閱所要編譯的函式 樣板 具現化 'float Base::Schedulers::Events::EventProcessor<Base::Schedulers::Events::Event>::GetTimeLeft(void)' 之參考
+  d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\effect\effectmapper.h(21): note: 查看要編譯的 類別 樣板 具現化 'Base::Schedulers::Events::EventProcessor<Base::Schedulers::Events::Event>' 參考
+d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\eventprocessor.h(55): error C2065: 'currentTime': 未宣告的識別項
   FallMapAlgorithm.cpp
-d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\effect\algorithm\mapshiftalgorithm.h(4): fatal error C1083: 無法開啟包含檔案: '../../../../Graphic/Map/Map.h': No such file or directory
+d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\rulesetmeteor\scheduler\event\effect\algorithm\fallmapalgorithm.cpp(82): warning C4244: '正在初始化': 將 'float' 轉換為 'int'，由於類型不同，可能導致資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\effect\algorithm\mapshiftalgorithm.h(76): warning C4244: '正在初始化': 將 'int' 轉換為 'float'，由於類型不同，可能導致資料遺失
+  d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\effect\algorithm\mapshiftalgorithm.h(74): note: 編譯 類別 樣板 成員函式 'int Base::Schedulers::Events::Effects::Algorithms::MapShiftAlgorithm<T>::ImplementShift(Framework::Graphic::Maps::Map *,Framework::Graphic::Maps::Map *,Base::Schedulers::Events::Effects::EffectMapper<T> *)' 時
+          with
+          [
+              T=Meteor::Schedulers::Events::Effects::FallEffect
+          ]
+  d:\school\新創\程式\meteokb2\neokb_try\rulesetmeteor\scheduler\event\effect\algorithm\fallmapalgorithm.cpp(16): note: 查看要編譯的 類別 樣板 具現化 'Base::Schedulers::Events::Effects::Algorithms::MapShiftAlgorithm<T>' 參考
+          with
+          [
+              T=Meteor::Schedulers::Events::Effects::FallEffect
+          ]
+d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\effect\algorithm\mapshiftalgorithm.h(77): warning C4244: '正在初始化': 將 'int' 轉換為 'float'，由於類型不同，可能導致資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\effect\algorithm\mapshiftalgorithm.h(81): warning C4244: '正在初始化': 將 'int' 轉換為 'float'，由於類型不同，可能導致資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\effect\algorithm\mapshiftalgorithm.h(82): warning C4244: '正在初始化': 將 'int' 轉換為 'float'，由於類型不同，可能導致資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\effect\algorithm\mapshiftalgorithm.h(86): warning C4244: '正在初始化': 將 'float' 轉換為 'int'，由於類型不同，可能導致資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\effect\algorithm\mapshiftalgorithm.h(87): warning C4244: '正在初始化': 將 'float' 轉換為 'int'，由於類型不同，可能導致資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\eventprocessor.h(53): error C2065: 'currentTime': 未宣告的識別項
+  d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\eventprocessor.h(48): note: 編譯 類別 樣板 成員函式 'float Base::Schedulers::Events::EventProcessor<Base::Schedulers::Events::Event>::GetTimeLeft(void)' 時
+  d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\effect\effectmapper.h(68): note: 請參閱所要編譯的函式 樣板 具現化 'float Base::Schedulers::Events::EventProcessor<Base::Schedulers::Events::Event>::GetTimeLeft(void)' 之參考
+  d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\effect\effectmapper.h(21): note: 查看要編譯的 類別 樣板 具現化 'Base::Schedulers::Events::EventProcessor<Base::Schedulers::Events::Event>' 參考
+d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\eventprocessor.h(55): error C2065: 'currentTime': 未宣告的識別項
   ExplodeMapAlgorithm.cpp
-d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\effect\algorithm\mapshiftalgorithm.h(4): fatal error C1083: 無法開啟包含檔案: '../../../../Graphic/Map/Map.h': No such file or directory
+d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\effect\algorithm\mapshiftalgorithm.h(76): warning C4244: '正在初始化': 將 'int' 轉換為 'float'，由於類型不同，可能導致資料遺失
+  d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\effect\algorithm\mapshiftalgorithm.h(74): note: 編譯 類別 樣板 成員函式 'int Base::Schedulers::Events::Effects::Algorithms::MapShiftAlgorithm<T>::ImplementShift(Framework::Graphic::Maps::Map *,Framework::Graphic::Maps::Map *,Base::Schedulers::Events::Effects::EffectMapper<T> *)' 時
+          with
+          [
+              T=Meteor::Schedulers::Events::Effects::ExplodeEffect
+          ]
+  d:\school\新創\程式\meteokb2\neokb_try\rulesetmeteor\scheduler\event\effect\algorithm\explodemapalgorithm.cpp(10): note: 查看要編譯的 類別 樣板 具現化 'Base::Schedulers::Events::Effects::Algorithms::MapShiftAlgorithm<T>' 參考
+          with
+          [
+              T=Meteor::Schedulers::Events::Effects::ExplodeEffect
+          ]
+d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\effect\algorithm\mapshiftalgorithm.h(77): warning C4244: '正在初始化': 將 'int' 轉換為 'float'，由於類型不同，可能導致資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\effect\algorithm\mapshiftalgorithm.h(81): warning C4244: '正在初始化': 將 'int' 轉換為 'float'，由於類型不同，可能導致資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\effect\algorithm\mapshiftalgorithm.h(82): warning C4244: '正在初始化': 將 'int' 轉換為 'float'，由於類型不同，可能導致資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\effect\algorithm\mapshiftalgorithm.h(86): warning C4244: '正在初始化': 將 'float' 轉換為 'int'，由於類型不同，可能導致資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\effect\algorithm\mapshiftalgorithm.h(87): warning C4244: '正在初始化': 將 'float' 轉換為 'int'，由於類型不同，可能導致資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\eventprocessor.h(53): error C2065: 'currentTime': 未宣告的識別項
+  d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\eventprocessor.h(48): note: 編譯 類別 樣板 成員函式 'float Base::Schedulers::Events::EventProcessor<Base::Schedulers::Events::Event>::GetTimeLeft(void)' 時
+  d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\effect\effectmapper.h(68): note: 請參閱所要編譯的函式 樣板 具現化 'float Base::Schedulers::Events::EventProcessor<Base::Schedulers::Events::Event>::GetTimeLeft(void)' 之參考
+  d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\effect\effectmapper.h(21): note: 查看要編譯的 類別 樣板 具現化 'Base::Schedulers::Events::EventProcessor<Base::Schedulers::Events::Event>' 參考
+d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\eventprocessor.h(55): error C2065: 'currentTime': 未宣告的識別項
   MeteorRulesetExecutor.cpp
 d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2039: 'Hosts': 不是 'Framework' 的成員
+  d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputevent.h(32): note: 請參閱 'Framework' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2871: 'Hosts': 此名稱的命名空間不存在
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(22): error C2061: 語法錯誤: 識別項 'GameHost'
 d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\action.h(26): error C2091: 函式傳回函式
   d:\school\新創\程式\meteokb2\neokb_try\framework\io\keyboard.h(34): note: 查看要編譯的 類別 樣板 具現化 'Util::DataStructure::Action<int (Framework::Input::InputState *)>' 參考
 d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\action.h(43): error C2091: 函式傳回函式
 d:\school\新創\程式\meteokb2\neokb_try\framework\devices\device.h(15): error C2061: 語法錯誤: 識別項 'MainInterface'
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2039: 'Host': 不是 'Framework' 的成員
-  d:\school\新創\程式\meteokb2\neokb_try\framework\io\maininterface.h(16): note: 請參閱 'Framework' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2871: 'Host': 此名稱的命名空間不存在
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(22): error C2061: 語法錯誤: 識別項 'GameHost'
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(46): error C2061: 語法錯誤: 識別項 'Game'
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(98): error C2061: 語法錯誤: 識別項 'Game'
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2065: 'InputHandler': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2059: 語法錯誤: '>'
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2976: 'std::vector': 樣板 引數太少
-  d:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.11.25503\include\vector(659): note: 請參閱 'std::vector' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\eventprocessormaster.h(10): fatal error C1083: 無法開啟包含檔案: '../../../Util/Update/Updatable.h': No such file or directory
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(47): error C2061: 語法錯誤: 識別項 'Game'
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(99): error C2061: 語法錯誤: 識別項 'Game'
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(14): error C2039: 'Host': 不是 'Framework' 的成員
+  d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(34): note: 請參閱 'Framework' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(14): error C2871: 'Host': 此名稱的命名空間不存在
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C2143: 語法錯誤: 遺漏 ';' (在 '*' 之前)
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C4430: 遺漏類型規範 - 假設為 int。注意: C++ 不支援 default-int
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C2238: 在 ';' 之前有未預期的語彙基元
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(34): error C2061: 語法錯誤: 識別項 'GameHost'
+d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\systemevents\systemeventhandler.h(9): fatal error C1083: 無法開啟包含檔案: 'unistd.h': No such file or directory
   MeteorRuleset.cpp
 d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2039: 'Hosts': 不是 'Framework' 的成員
+  d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputevent.h(32): note: 請參閱 'Framework' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2871: 'Hosts': 此名稱的命名空間不存在
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(22): error C2061: 語法錯誤: 識別項 'GameHost'
 d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\action.h(26): error C2091: 函式傳回函式
   d:\school\新創\程式\meteokb2\neokb_try\framework\io\keyboard.h(34): note: 查看要編譯的 類別 樣板 具現化 'Util::DataStructure::Action<int (Framework::Input::InputState *)>' 參考
 d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\action.h(43): error C2091: 函式傳回函式
 d:\school\新創\程式\meteokb2\neokb_try\framework\devices\device.h(15): error C2061: 語法錯誤: 識別項 'MainInterface'
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2039: 'Host': 不是 'Framework' 的成員
-  d:\school\新創\程式\meteokb2\neokb_try\framework\io\maininterface.h(16): note: 請參閱 'Framework' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2871: 'Host': 此名稱的命名空間不存在
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(22): error C2061: 語法錯誤: 識別項 'GameHost'
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(46): error C2061: 語法錯誤: 識別項 'Game'
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(98): error C2061: 語法錯誤: 識別項 'Game'
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2065: 'InputHandler': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2059: 語法錯誤: '>'
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2976: 'std::vector': 樣板 引數太少
-  d:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.11.25503\include\vector(659): note: 請參閱 'std::vector' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\eventprocessormaster.h(10): fatal error C1083: 無法開啟包含檔案: '../../../Util/Update/Updatable.h': No such file or directory
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(47): error C2061: 語法錯誤: 識別項 'Game'
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(99): error C2061: 語法錯誤: 識別項 'Game'
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(14): error C2039: 'Host': 不是 'Framework' 的成員
+  d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(34): note: 請參閱 'Framework' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(14): error C2871: 'Host': 此名稱的命名空間不存在
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C2143: 語法錯誤: 遺漏 ';' (在 '*' 之前)
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C4430: 遺漏類型規範 - 假設為 int。注意: C++ 不支援 default-int
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C2238: 在 ';' 之前有未預期的語彙基元
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(34): error C2061: 語法錯誤: 識別項 'GameHost'
   MeteorPlayfield.cpp
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2039: 'Hosts': 不是 'Framework' 的成員
+  d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputevent.h(32): note: 請參閱 'Framework' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2871: 'Hosts': 此名稱的命名空間不存在
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(22): error C2061: 語法錯誤: 識別項 'GameHost'
 d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\action.h(26): error C2091: 函式傳回函式
   d:\school\新創\程式\meteokb2\neokb_try\framework\io\keyboard.h(34): note: 查看要編譯的 類別 樣板 具現化 'Util::DataStructure::Action<int (Framework::Input::InputState *)>' 參考
 d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\action.h(43): error C2091: 函式傳回函式
 d:\school\新創\程式\meteokb2\neokb_try\framework\devices\device.h(15): error C2061: 語法錯誤: 識別項 'MainInterface'
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2039: 'Host': 不是 'Framework' 的成員
-  d:\school\新創\程式\meteokb2\neokb_try\framework\io\maininterface.h(16): note: 請參閱 'Framework' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2871: 'Host': 此名稱的命名空間不存在
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(22): error C2061: 語法錯誤: 識別項 'GameHost'
 d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(46): error C2061: 語法錯誤: 識別項 'Game'
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(98): error C2061: 語法錯誤: 識別項 'Game'
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2065: 'InputHandler': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2059: 語法錯誤: '>'
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2976: 'std::vector': 樣板 引數太少
-  d:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.11.25503\include\vector(659): note: 請參閱 'std::vector' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\eventprocessormaster.h(10): fatal error C1083: 無法開啟包含檔案: '../../../Util/Update/Updatable.h': No such file or directory
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(47): error C2061: 語法錯誤: 識別項 'Game'
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(99): error C2061: 語法錯誤: 識別項 'Game'
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(14): error C2039: 'Host': 不是 'Framework' 的成員
+  d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(34): note: 請參閱 'Framework' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(14): error C2871: 'Host': 此名稱的命名空間不存在
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C2143: 語法錯誤: 遺漏 ';' (在 '*' 之前)
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C4430: 遺漏類型規範 - 假設為 int。注意: C++ 不支援 default-int
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C2238: 在 ';' 之前有未預期的語彙基元
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(34): error C2061: 語法錯誤: 識別項 'GameHost'
   MeteorGame.cpp
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2039: 'Hosts': 不是 'Framework' 的成員
+  d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputevent.h(32): note: 請參閱 'Framework' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2871: 'Hosts': 此名稱的命名空間不存在
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(22): error C2061: 語法錯誤: 識別項 'GameHost'
 d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\action.h(26): error C2091: 函式傳回函式
   d:\school\新創\程式\meteokb2\neokb_try\framework\io\keyboard.h(34): note: 查看要編譯的 類別 樣板 具現化 'Util::DataStructure::Action<int (Framework::Input::InputState *)>' 參考
 d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\action.h(43): error C2091: 函式傳回函式
 d:\school\新創\程式\meteokb2\neokb_try\framework\devices\device.h(15): error C2061: 語法錯誤: 識別項 'MainInterface'
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2039: 'Host': 不是 'Framework' 的成員
-  d:\school\新創\程式\meteokb2\neokb_try\framework\io\maininterface.h(16): note: 請參閱 'Framework' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2871: 'Host': 此名稱的命名空間不存在
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(22): error C2061: 語法錯誤: 識別項 'GameHost'
 d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(46): error C2061: 語法錯誤: 識別項 'Game'
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(98): error C2061: 語法錯誤: 識別項 'Game'
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2065: 'InputHandler': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2059: 語法錯誤: '>'
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2976: 'std::vector': 樣板 引數太少
-  d:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.11.25503\include\vector(659): note: 請參閱 'std::vector' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\interlude\intro.h(25): error C2143: 語法錯誤: 遺漏 ';' (在 '*' 之前)
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\interlude\intro.h(25): error C4430: 遺漏類型規範 - 假設為 int。注意: C++ 不支援 default-int
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\interlude\intro.h(25): error C2238: 在 ';' 之前有未預期的語彙基元
-d:\school\新創\程式\meteokb2\neokb_try\base\mtogamebase.h(9): error C2039: 'Scene': 不是 'Framework' 的成員
-  d:\school\新創\程式\meteokb2\neokb_try\framework\scenes\scene.h(17): note: 請參閱 'Framework' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\base\mtogamebase.h(9): error C2871: 'Scene': 此名稱的命名空間不存在
-d:\school\新創\程式\meteokb2\neokb_try\base\mtogamebase.h(10): error C2039: 'Scene': 不是 'Base' 的成員
-  d:\school\新創\程式\meteokb2\neokb_try\base\scene\interlude\intro.h(8): note: 請參閱 'Base' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\base\mtogamebase.h(10): error C3083: 'Scene': '::' 左邊的符號必須是類型
-d:\school\新創\程式\meteokb2\neokb_try\base\mtogamebase.h(10): error C2039: 'Interlude': 不是 'Base' 的成員
-  d:\school\新創\程式\meteokb2\neokb_try\base\scene\interlude\intro.h(8): note: 請參閱 'Base' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\base\mtogamebase.h(10): error C2871: 'Interlude': 此名稱的命名空間不存在
-  MeteorConfigManager.cpp
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
-d:\school\新創\程式\meteokb2\neokb_try\rulesetmeteor\config\meteorconfigmanager.cpp(5): error C2653: 'Base': 不是類別或命名空間名稱
-d:\school\新創\程式\meteokb2\neokb_try\rulesetmeteor\config\meteorconfigmanager.cpp(5): error C2871: 'Config': 此名稱的命名空間不存在
-  Program.cpp
-d:\school\新創\程式\meteokb2\neokb_try\program.h(1): fatal error C1083: 無法開啟包含檔案: 'Base/Game.h': No such file or directory
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(47): error C2061: 語法錯誤: 識別項 'Game'
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(99): error C2061: 語法錯誤: 識別項 'Game'
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(14): error C2039: 'Host': 不是 'Framework' 的成員
+  d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(34): note: 請參閱 'Framework' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(14): error C2871: 'Host': 此名稱的命名空間不存在
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C2143: 語法錯誤: 遺漏 ';' (在 '*' 之前)
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C4430: 遺漏類型規範 - 假設為 int。注意: C++ 不支援 default-int
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C2238: 在 ';' 之前有未預期的語彙基元
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(34): error C2061: 語法錯誤: 識別項 'GameHost'
   FramedClock.cpp
 d:\school\新創\程式\meteokb2\neokb_try\framework\timing\framedclock.cpp(7): error C2572: 'Framework::Timing::FramedClock::FramedClock': 預設引數重複定義: 參數 1
   d:\school\新創\程式\meteokb2\neokb_try\framework\timing\framedclock.h(18): note: 請參閱 'Framework::Timing::FramedClock::FramedClock' 的宣告
-  正在產生程式碼...
-  正在編譯...
   Scene.cpp
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2039: 'Hosts': 不是 'Framework' 的成員
+  d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputevent.h(32): note: 請參閱 'Framework' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2871: 'Hosts': 此名稱的命名空間不存在
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(22): error C2061: 語法錯誤: 識別項 'GameHost'
 d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\action.h(26): error C2091: 函式傳回函式
   d:\school\新創\程式\meteokb2\neokb_try\framework\io\keyboard.h(34): note: 查看要編譯的 類別 樣板 具現化 'Util::DataStructure::Action<int (Framework::Input::InputState *)>' 參考
 d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\action.h(43): error C2091: 函式傳回函式
 d:\school\新創\程式\meteokb2\neokb_try\framework\devices\device.h(15): error C2061: 語法錯誤: 識別項 'MainInterface'
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2039: 'Host': 不是 'Framework' 的成員
-  d:\school\新創\程式\meteokb2\neokb_try\framework\io\maininterface.h(16): note: 請參閱 'Framework' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2871: 'Host': 此名稱的命名空間不存在
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(22): error C2061: 語法錯誤: 識別項 'GameHost'
 d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(46): error C2061: 語法錯誤: 識別項 'Game'
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(98): error C2061: 語法錯誤: 識別項 'Game'
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2065: 'InputHandler': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2059: 語法錯誤: '>'
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2976: 'std::vector': 樣板 引數太少
-  d:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.11.25503\include\vector(659): note: 請參閱 'std::vector' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(47): error C2061: 語法錯誤: 識別項 'Game'
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(99): error C2061: 語法錯誤: 識別項 'Game'
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(14): error C2039: 'Host': 不是 'Framework' 的成員
+  d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(34): note: 請參閱 'Framework' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(14): error C2871: 'Host': 此名稱的命名空間不存在
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C2143: 語法錯誤: 遺漏 ';' (在 '*' 之前)
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C4430: 遺漏類型規範 - 假設為 int。注意: C++ 不支援 default-int
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C2238: 在 ';' 之前有未預期的語彙基元
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(34): error C2061: 語法錯誤: 識別項 'GameHost'
   InputManager.cpp
 d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(14): error C2039: 'Host': 不是 'Framework' 的成員
   d:\school\新創\程式\meteokb2\neokb_try\framework\audio\audiomanager.h(27): note: 請參閱 'Framework' 的宣告
@@ -144,92 +232,13 @@ d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\action.h(26): erro
 d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\action.h(43): error C2091: 函式傳回函式
 d:\school\新創\程式\meteokb2\neokb_try\framework\devices\device.h(15): error C2061: 語法錯誤: 識別項 'MainInterface'
 d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2065: 'InputHandler': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2059: 語法錯誤: '>'
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2976: 'std::vector': 樣板 引數太少
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(24): error C2039: 'Handler': 不是 'Framework::Input' 的成員
+  d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputevent.h(33): note: 請參閱 'Framework::Input' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(24): error C2871: 'Handler': 此名稱的命名空間不存在
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(112): error C2065: 'InputHandler': 未宣告的識別項
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(112): error C2059: 語法錯誤: '>'
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(112): error C2976: 'std::vector': 樣板 引數太少
   d:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.11.25503\include\vector(659): note: 請參閱 'std::vector' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.h(80): error C2061: 語法錯誤: 識別項 'Button'
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.h(82): error C2061: 語法錯誤: 識別項 'Button'
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.h(84): error C2061: 語法錯誤: 識別項 'Button'
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.h(86): error C2061: 語法錯誤: 識別項 'Button'
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.h(88): error C2061: 語法錯誤: 識別項 'Knob'
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.h(90): error C2061: 語法錯誤: 識別項 'Knob'
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.h(92): error C2061: 語法錯誤: 識別項 'Slider'
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.h(94): error C2061: 語法錯誤: 識別項 'Slider'
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.cpp(9): error C2512: 'Framework::Allocation::Hierachal::RegisterType::RegisterType': 沒有適當的預設建構函式
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.cpp(64): error C2660: 'Framework::Input::Handler::InputHandler::GetPendingStates': 函式不使用 1 引數
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.cpp(65): error C2065: 'pendingState': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.cpp(65): error C2227: '->reserve' 的左邊必須指向類別/結構/等位/泛型類型
-  d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.cpp(65): note: 類型為 'unknown-type'
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.cpp(66): error C2065: 'pendingState': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.cpp(66): error C2227: '->insert' 的左邊必須指向類別/結構/等位/泛型類型
-  d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.cpp(66): note: 類型為 'unknown-type'
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.cpp(66): error C2227: '->end' 的左邊必須指向類別/結構/等位/泛型類型
-  d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.cpp(66): note: 類型為 'unknown-type'
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.cpp(95): error C2065: 'focusTriggerable': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.cpp(96): error C2065: 'focusTriggerable': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.cpp(125): error C2039: 'Contain': 不是 'Framework::Input::KeyboardState' 的成員
-  d:\school\新創\程式\meteokb2\neokb_try\framework\input\keyboardstate.h(14): note: 請參閱 'Framework::Input::KeyboardState' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.cpp(125): error C2039: 'key': 不是 'std::pair<Framework::Input::Key,int>' 的成員
-  d:\school\新創\程式\meteokb2\neokb_try\framework\input\keyboardstate.h(16): note: 請參閱 'std::pair<Framework::Input::Key,int>' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.cpp(126): error C2664: 'int Framework::Input::InputManager::handleKeyUp(Framework::Input::InputState *,Framework::Input::Key)': 無法將引數 2 從 'std::pair<Framework::Input::Key,int>' 轉換為 'Framework::Input::Key'
-  d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.cpp(126): note: 沒有可以執行此轉換的使用者定義轉換運算子或無法呼叫運算子
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.cpp(131): error C2039: 'Contain': 不是 'Framework::Input::KeyboardState' 的成員
-  d:\school\新創\程式\meteokb2\neokb_try\framework\input\keyboardstate.h(14): note: 請參閱 'Framework::Input::KeyboardState' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.cpp(131): error C2039: 'key': 不是 'std::pair<Framework::Input::Key,int>' 的成員
-  d:\school\新創\程式\meteokb2\neokb_try\framework\input\keyboardstate.h(16): note: 請參閱 'std::pair<Framework::Input::Key,int>' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.cpp(132): error C2664: 'int Framework::Input::InputManager::handleKeyDown(Framework::Input::InputState *,Framework::Input::Key)': 無法將引數 2 從 'std::pair<Framework::Input::Key,int>' 轉換為 'Framework::Input::Key'
-  d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.cpp(132): note: 沒有可以執行此轉換的使用者定義轉換運算子或無法呼叫運算子
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.cpp(149): error C2039: 'ContainButton': 不是 'Framework::Input::PanelState' 的成員
-  d:\school\新創\程式\meteokb2\neokb_try\framework\input\panelstate.h(19): note: 請參閱 'Framework::Input::PanelState' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.cpp(150): error C2660: 'Framework::Input::InputManager::handleButtonUp': 函式不使用 2 引數
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.cpp(155): error C2039: 'ContainButton': 不是 'Framework::Input::PanelState' 的成員
-  d:\school\新創\程式\meteokb2\neokb_try\framework\input\panelstate.h(19): note: 請參閱 'Framework::Input::PanelState' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.cpp(156): error C2660: 'Framework::Input::InputManager::handleButtonDown': 函式不使用 2 引數
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.cpp(161): error C2039: 'GetKnobs': 不是 'Framework::Input::PanelState' 的成員
-  d:\school\新創\程式\meteokb2\neokb_try\framework\input\panelstate.h(19): note: 請參閱 'Framework::Input::PanelState' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.cpp(161): error C2227: '->Size' 的左邊必須指向類別/結構/等位/泛型類型
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.cpp(162): error C2039: 'GetKnobs': 不是 'Framework::Input::PanelState' 的成員
-  d:\school\新創\程式\meteokb2\neokb_try\framework\input\panelstate.h(19): note: 請參閱 'Framework::Input::PanelState' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.cpp(162): error C2227: '->at' 的左邊必須指向類別/結構/等位/泛型類型
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.cpp(162): error C2227: '->GetDelta' 的左邊必須指向類別/結構/等位/泛型類型
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.cpp(163): error C2039: 'GetKnobs': 不是 'Framework::Input::PanelState' 的成員
-  d:\school\新創\程式\meteokb2\neokb_try\framework\input\panelstate.h(19): note: 請參閱 'Framework::Input::PanelState' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.cpp(163): error C2227: '->at' 的左邊必須指向類別/結構/等位/泛型類型
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.cpp(168): error C2039: 'Size': 不是 'std::vector<std::pair<Framework::Input::PanelSlider,int>,std::allocator<_Ty>>' 的成員
-          with
-          [
-              _Ty=std::pair<Framework::Input::PanelSlider,int>
-          ]
-  d:\school\新創\程式\meteokb2\neokb_try\framework\input\panelstate.h(25): note: 請參閱 'std::vector<std::pair<Framework::Input::PanelSlider,int>,std::allocator<_Ty>>' 的宣告
-          with
-          [
-              _Ty=std::pair<Framework::Input::PanelSlider,int>
-          ]
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.cpp(169): error C2819: 類型 'std::pair<Framework::Input::PanelSlider,int>' 沒有多載成員 'operator ->'
-  d:\school\新創\程式\meteokb2\neokb_try\framework\input\panelstate.h(25): note: 請參閱 'std::pair<Framework::Input::PanelSlider,int>' 的宣告
-  d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.cpp(169): note: 您是否想要改用 '.'?
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.cpp(169): error C2039: 'GetLevel': 不是 'std::pair<Framework::Input::PanelSlider,int>' 的成員
-  d:\school\新創\程式\meteokb2\neokb_try\framework\input\panelstate.h(25): note: 請參閱 'std::pair<Framework::Input::PanelSlider,int>' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.cpp(170): error C2660: 'Framework::Input::InputManager::handleSlide': 函式不使用 2 引數
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.cpp(223): error C2561: 'Framework::Input::InputManager::propagateKeyUp': 函式必須傳回值
-  d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.cpp(218): note: 請參閱 'Framework::Input::InputManager::propagateKeyUp' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.cpp(226): error C2061: 語法錯誤: 識別項 'Button'
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.cpp(233): error C2065: 'button': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.cpp(236): error C2061: 語法錯誤: 識別項 'Button'
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.cpp(239): error C2065: 'button': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.cpp(244): error C2061: 語法錯誤: 識別項 'Button'
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.cpp(251): error C2065: 'button': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.cpp(254): error C2061: 語法錯誤: 識別項 'Button'
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.cpp(257): error C2065: 'button': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.cpp(263): error C2061: 語法錯誤: 識別項 'Knob'
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.cpp(270): error C2065: 'knob': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.cpp(273): error C2061: 語法錯誤: 識別項 'Knob'
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.cpp(276): error C2065: 'knob': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.cpp(282): error C2061: 語法錯誤: 識別項 'Slider'
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.cpp(289): error C2065: 'slider': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.cpp(292): error C2061: 語法錯誤: 識別項 'Slider'
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.cpp(295): error C2065: 'slider': 未宣告的識別項
   PanelInputHandler.cpp
 d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(14): error C2039: 'Host': 不是 'Framework' 的成員
   d:\school\新創\程式\meteokb2\neokb_try\framework\audio\audiomanager.h(27): note: 請參閱 'Framework' 的宣告
@@ -243,12 +252,13 @@ d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\action.h(26): erro
 d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\action.h(43): error C2091: 函式傳回函式
 d:\school\新創\程式\meteokb2\neokb_try\framework\devices\device.h(15): error C2061: 語法錯誤: 識別項 'MainInterface'
 d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2065: 'InputHandler': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2059: 語法錯誤: '>'
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2976: 'std::vector': 樣板 引數太少
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(24): error C2039: 'Handler': 不是 'Framework::Input' 的成員
+  d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputevent.h(33): note: 請參閱 'Framework::Input' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(24): error C2871: 'Handler': 此名稱的命名空間不存在
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(112): error C2065: 'InputHandler': 未宣告的識別項
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(112): error C2059: 語法錯誤: '>'
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(112): error C2976: 'std::vector': 樣板 引數太少
   d:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.11.25503\include\vector(659): note: 請參閱 'std::vector' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\panelinputhandler.cpp(28): error C2143: 語法錯誤: 遺漏 ';' (在 '->' 之前)
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\panelinputhandler.cpp(28): error C2059: 語法錯誤: '->'
   KeyboardInputHandler.cpp
 d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(14): error C2039: 'Host': 不是 'Framework' 的成員
   d:\school\新創\程式\meteokb2\neokb_try\framework\audio\audiomanager.h(27): note: 請參閱 'Framework' 的宣告
@@ -262,12 +272,16 @@ d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\action.h(26): erro
 d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\action.h(43): error C2091: 函式傳回函式
 d:\school\新創\程式\meteokb2\neokb_try\framework\devices\device.h(15): error C2061: 語法錯誤: 識別項 'MainInterface'
 d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2065: 'InputHandler': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2059: 語法錯誤: '>'
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2976: 'std::vector': 樣板 引數太少
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(24): error C2039: 'Handler': 不是 'Framework::Input' 的成員
+  d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputevent.h(33): note: 請參閱 'Framework::Input' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(24): error C2871: 'Handler': 此名稱的命名空間不存在
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(112): error C2065: 'InputHandler': 未宣告的識別項
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(112): error C2059: 語法錯誤: '>'
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(112): error C2976: 'std::vector': 樣板 引數太少
   d:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.11.25503\include\vector(659): note: 請參閱 'std::vector' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\keyboardinputhandler.cpp(23): error C2143: 語法錯誤: 遺漏 ';' (在 '->' 之前)
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\keyboardinputhandler.cpp(23): error C2059: 語法錯誤: '->'
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\keyboardinputhandler.cpp(5): error C2039: 'Host': 不是 'Framework' 的成員
+  d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\keyboardinputhandler.h(11): note: 請參閱 'Framework' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\keyboardinputhandler.cpp(5): error C2871: 'Host': 此名稱的命名空間不存在
   BluetoothInputHandler.cpp
 d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(14): error C2039: 'Host': 不是 'Framework' 的成員
   d:\school\新創\程式\meteokb2\neokb_try\framework\audio\audiomanager.h(27): note: 請參閱 'Framework' 的宣告
@@ -281,12 +295,13 @@ d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\action.h(26): erro
 d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\action.h(43): error C2091: 函式傳回函式
 d:\school\新創\程式\meteokb2\neokb_try\framework\devices\device.h(15): error C2061: 語法錯誤: 識別項 'MainInterface'
 d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2065: 'InputHandler': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2059: 語法錯誤: '>'
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2976: 'std::vector': 樣板 引數太少
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(24): error C2039: 'Handler': 不是 'Framework::Input' 的成員
+  d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputevent.h(33): note: 請參閱 'Framework::Input' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(24): error C2871: 'Handler': 此名稱的命名空間不存在
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(112): error C2065: 'InputHandler': 未宣告的識別項
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(112): error C2059: 語法錯誤: '>'
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(112): error C2976: 'std::vector': 樣板 引數太少
   d:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.11.25503\include\vector(659): note: 請參閱 'std::vector' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\bluetoothinputhandler.cpp(20): error C2143: 語法錯誤: 遺漏 ';' (在 '->' 之前)
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\bluetoothinputhandler.cpp(20): error C2059: 語法錯誤: '->'
   Panel.cpp
 d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\action.h(26): error C2091: 函式傳回函式
   d:\school\新創\程式\meteokb2\neokb_try\framework\io\panel.h(40): note: 查看要編譯的 類別 樣板 具現化 'Util::DataStructure::Action<int (Framework::Input::InputState *)>' 參考
@@ -298,12 +313,12 @@ d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\action.h(43): erro
 d:\school\新創\程式\meteokb2\neokb_try\framework\devices\device.h(15): error C2061: 語法錯誤: 識別項 'MainInterface'
 d:\school\新創\程式\meteokb2\neokb_try\framework\io\maininterface.cpp(26): error C2660: 'Framework::Devices::Device::Register': 函式不使用 1 引數
 d:\school\新創\程式\meteokb2\neokb_try\framework\io\maininterface.cpp(34): error C2660: 'Framework::Devices::Device::Register': 函式不使用 1 引數
+  正在產生程式碼...
+  正在編譯...
   Keyboard.cpp
 d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\action.h(26): error C2091: 函式傳回函式
   d:\school\新創\程式\meteokb2\neokb_try\framework\io\keyboard.h(34): note: 查看要編譯的 類別 樣板 具現化 'Util::DataStructure::Action<int (Framework::Input::InputState *)>' 參考
 d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\action.h(43): error C2091: 函式傳回函式
-d:\school\新創\程式\meteokb2\neokb_try\framework\io\keyboard.cpp(8): error C2572: 'Framework::IO::Keyboard::AddOnKeyDown': 預設引數重複定義: 參數 1
-  d:\school\新創\程式\meteokb2\neokb_try\framework\io\keyboard.h(27): note: 請參閱 'Framework::IO::Keyboard::AddOnKeyDown' 的宣告
   BluetoothPhone.cpp
 d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\action.h(26): error C2091: 函式傳回函式
   d:\school\新創\程式\meteokb2\neokb_try\framework\io\bluetoothphone.h(34): note: 查看要編譯的 類別 樣板 具現化 'Util::DataStructure::Action<int (Framework::Input::InputState *)>' 參考
@@ -316,457 +331,432 @@ d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C2143: �
 d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C4430: 遺漏類型規範 - 假設為 int。注意: C++ 不支援 default-int
 d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C2238: 在 ';' 之前有未預期的語彙基元
 d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(34): error C2061: 語法錯誤: 識別項 'GameHost'
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2039: 'Hosts': 不是 'Framework' 的成員
+  d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(17): note: 請參閱 'Framework' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2871: 'Hosts': 此名稱的命名空間不存在
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(22): error C2061: 語法錯誤: 識別項 'GameHost'
 d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\action.h(26): error C2091: 函式傳回函式
   d:\school\新創\程式\meteokb2\neokb_try\framework\io\keyboard.h(34): note: 查看要編譯的 類別 樣板 具現化 'Util::DataStructure::Action<int (Framework::Input::InputState *)>' 參考
 d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\action.h(43): error C2091: 函式傳回函式
 d:\school\新創\程式\meteokb2\neokb_try\framework\devices\device.h(15): error C2061: 語法錯誤: 識別項 'MainInterface'
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2039: 'Host': 不是 'Framework' 的成員
-  d:\school\新創\程式\meteokb2\neokb_try\framework\io\maininterface.h(16): note: 請參閱 'Framework' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2871: 'Host': 此名稱的命名空間不存在
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(22): error C2061: 語法錯誤: 識別項 'GameHost'
 d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2065: 'InputHandler': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2059: 語法錯誤: '>'
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2976: 'std::vector': 樣板 引數太少
-  d:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.11.25503\include\vector(659): note: 請參閱 'std::vector' 的宣告
 d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.h(39): error C2143: 語法錯誤: 遺漏 ';' (在 '*' 之前)
 d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.h(39): error C4430: 遺漏類型規範 - 假設為 int。注意: C++ 不支援 default-int
 d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.h(39): error C2238: 在 ';' 之前有未預期的語彙基元
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.h(80): error C2061: 語法錯誤: 識別項 'Button'
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.h(82): error C2061: 語法錯誤: 識別項 'Button'
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.h(84): error C2061: 語法錯誤: 識別項 'Button'
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.h(86): error C2061: 語法錯誤: 識別項 'Button'
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.h(88): error C2061: 語法錯誤: 識別項 'Knob'
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.h(90): error C2061: 語法錯誤: 識別項 'Knob'
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.h(92): error C2061: 語法錯誤: 識別項 'Slider'
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.h(94): error C2061: 語法錯誤: 識別項 'Slider'
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(10): error C2572: 'Framework::Host::GameHost::GameHost': 預設引數重複定義: 參數 1
-  d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(44): note: 請參閱 'Framework::Host::GameHost::GameHost' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(11): error C2512: 'std::vector': 沒有適當的預設建構函式
-  d:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.11.25503\include\vector(659): note: 請參閱 'std::vector' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(7): error C2039: 'Host': 不是 'Framework' 的成員
+  d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.h(15): note: 請參閱 'Framework' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(7): error C2871: 'Host': 此名稱的命名空間不存在
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(10): error C2653: 'GameHost': 不是類別或命名空間名稱
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(11): error C4430: 遺漏類型規範 - 假設為 int。注意: C++ 不支援 default-int
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(12): error C2065: 'dependencies': 未宣告的識別項
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(14): error C2065: 'drawThread': 未宣告的識別項
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(14): error C2653: 'GameHost': 不是類別或命名空間名稱
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(14): error C2065: 'drawFrame': 未宣告的識別項
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(14): error C2355: 'this': 只能在非靜態成員函式或非靜態資料成員初始設定式內部參考
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(14): error C2664: 'Framework::Threading::GameThread::GameThread(Framework::Threading::GameThread &&)': 無法將引數 1 從 'const char [11]' 轉換為 'const Framework::Threading::GameThread &'
+  d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(14): note: 原因: 無法從 'const char [11]'轉換為 'const Framework::Threading::GameThread'
+  d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(14): note: 沒有可以取得來源類型的建構函式，或建構函式多載解析模稜兩可
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(15): error C3861: 'drawInitialize': 找不到識別項
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(17): error C2065: 'updateThread': 未宣告的識別項
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(17): error C2653: 'GameHost': 不是類別或命名空間名稱
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(17): error C2065: 'updateFrame': 未宣告的識別項
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(17): error C2355: 'this': 只能在非靜態成員函式或非靜態資料成員初始設定式內部參考
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(17): error C2664: 'Framework::Threading::GameThread::GameThread(Framework::Threading::GameThread &&)': 無法將引數 1 從 'const char [13]' 轉換為 'const Framework::Threading::GameThread &'
+  d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(17): note: 原因: 無法從 'const char [13]'轉換為 'const Framework::Threading::GameThread'
+  d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(17): note: 沒有可以取得來源類型的建構函式，或建構函式多載解析模稜兩可
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(18): error C3861: 'updateInitialize': 找不到識別項
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(20): error C2065: 'inputThread': 未宣告的識別項
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(20): error C2653: 'GameHost': 不是類別或命名空間名稱
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(20): error C2065: 'inputFrame': 未宣告的識別項
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(20): error C2355: 'this': 只能在非靜態成員函式或非靜態資料成員初始設定式內部參考
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(20): error C2664: 'Framework::Threading::GameThread::GameThread(Framework::Threading::GameThread &&)': 無法將引數 1 從 'const char [12]' 轉換為 'const Framework::Threading::GameThread &'
+  d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(20): note: 原因: 無法從 'const char [12]'轉換為 'const Framework::Threading::GameThread'
+  d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(20): note: 沒有可以取得來源類型的建構函式，或建構函式多載解析模稜兩可
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(21): error C3861: 'inputInitialize': 找不到識別項
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(23): error C2065: 'sceneGraphClock': 未宣告的識別項
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(23): error C2065: 'updateThread': 未宣告的識別項
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(23): error C2227: '->GetClock' 的左邊必須指向類別/結構/等位/泛型類型
+  d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(23): note: 類型為 'unknown-type'
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(25): warning C4508: 'GameHost': 函式應傳回值; 假定 'void' 傳回類型
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(27): error C2653: 'GameHost': 不是類別或命名空間名稱
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(29): error C3861: 'setupConfig': 找不到識別項
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(31): error C3861: 'resetInputHandlers': 找不到識別項
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(33): error C2065: 'drawThread': 未宣告的識別項
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(33): error C2227: '->Start' 的左邊必須指向類別/結構/等位/泛型類型
+  d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(33): note: 類型為 'unknown-type'
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(34): error C2065: 'updateThread': 未宣告的識別項
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(34): error C2227: '->Start' 的左邊必須指向類別/結構/等位/泛型類型
+  d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(34): note: 類型為 'unknown-type'
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(35): error C3861: 'bootstrapSceneGraph': 找不到識別項
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(41): error C2653: 'GameHost': 不是類別或命名空間名稱
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(43): error C2065: 'mainInterface': 未宣告的識別項
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(46): error C2653: 'GameHost': 不是類別或命名空間名稱
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(49): error C2065: 'canvas': 未宣告的識別項
 d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(49): error C2065: 'width': 未宣告的識別項
 d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(49): error C2065: 'height': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(69): error C2039: 'Display': 不是 'Framework::IO::MainInterface' 的成員
-  d:\school\新創\程式\meteokb2\neokb_try\framework\io\maininterface.h(22): note: 請參閱 'Framework::IO::MainInterface' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(53): error C2653: 'GameHost': 不是類別或命名空間名稱
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(55): error C2065: 'canvas': 未宣告的識別項
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(55): error C2227: '->Reset' 的左邊必須指向類別/結構/等位/泛型類型
+  d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(55): note: 類型為 'unknown-type'
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(59): error C2065: 'root': 未宣告的識別項
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(59): error C3861: 'iterateSearchDrawable': 找不到識別項
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(64): error C2065: 'canvas': 未宣告的識別項
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(64): error C2227: '->PasteAdd' 的左邊必須指向類別/結構/等位/泛型類型
+  d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(64): note: 類型為 'unknown-type'
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(69): error C2065: 'mainInterface': 未宣告的識別項
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(69): error C2227: '->GetDisplay' 的左邊必須指向類別/結構/等位/泛型類型
+  d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(69): note: 類型為 'unknown-type'
 d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(69): error C2227: '->Display' 的左邊必須指向類別/結構/等位/泛型類型
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(69): error C2065: 'canvas': 未宣告的識別項
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(74): error C2653: 'GameHost': 不是類別或命名空間名稱
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(79): error C2653: 'GameHost': 不是類別或命名空間名稱
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(81): error C2065: 'root': 未宣告的識別項
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(81): error C2227: '->UpdateSubTree' 的左邊必須指向類別/結構/等位/泛型類型
+  d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(81): note: 類型為 'unknown-type'
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(84): error C2653: 'GameHost': 不是類別或命名空間名稱
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(90): error C2653: 'GameHost': 不是類別或命名空間名稱
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(93): error C2065: 'mainInterface': 未宣告的識別項
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(93): error C2227: '->ScanInput' 的左邊必須指向類別/結構/等位/泛型類型
+  d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(93): note: 類型為 'unknown-type'
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(97): error C2653: 'GameHost': 不是類別或命名空間名稱
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(100): error C2065: 'availableInputHandler': 未宣告的識別項
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(100): error C2228: '.push_back' 的左邊必須有類別/結構/等位
+  d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(100): note: 類型為 'unknown-type'
 d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(100): error C2065: 'pianoKeyInputHandler': 未宣告的識別項
 d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(103): error C2065: 'pianoKeyInputHandler': 未宣告的識別項
 d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(103): error C2227: '->Intialize' 的左邊必須指向類別/結構/等位/泛型類型
   d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(103): note: 類型為 'unknown-type'
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(118): error C2660: 'Framework::Game::SetHost': 函式不使用 1 引數
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(108): error C2039: 'Host': 不是 'Framework' 的成員
+  d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.h(15): note: 請參閱 'Framework' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(108): error C2039: 'GameHost': 不是 'Framework' 的成員
+  d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.h(15): note: 請參閱 'Framework' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(108): error C3083: 'Host': '::' 左邊的符號必須是類型
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(108): error C3083: 'GameHost': '::' 左邊的符號必須是類型
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(108): error C2039: 'setupConfig': 不是 'Framework' 的成員
+  d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.h(15): note: 請參閱 'Framework' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(113): error C2653: 'GameHost': 不是類別或命名空間名稱
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(115): error C2065: 'root': 未宣告的識別項
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(117): error C2065: 'root': 未宣告的識別項
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(117): error C2227: '->SetClock' 的左邊必須指向類別/結構/等位/泛型類型
+  d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(117): note: 類型為 'unknown-type'
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(117): error C2065: 'sceneGraphClock': 未宣告的識別項
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(118): error C2065: 'root': 未宣告的識別項
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(118): error C2227: '->SetDependencies' 的左邊必須指向類別/結構/等位/泛型類型
+  d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(118): note: 類型為 'unknown-type'
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(118): error C2065: 'dependencies': 未宣告的識別項
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(120): error C2065: 'root': 未宣告的識別項
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(120): error C2227: '->Async' 的左邊必須指向類別/結構/等位/泛型類型
+  d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(120): note: 類型為 'unknown-type'
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(122): error C2065: 'root': 未宣告的識別項
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(122): error C2227: '->AddChild' 的左邊必須指向類別/結構/等位/泛型類型
+  d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(122): note: 類型為 'unknown-type'
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(123): error C2355: 'this': 只能在非靜態成員函式或非靜態資料成員初始設定式內部參考
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(123): error C2660: 'Framework::Game::SetHost': 函式不使用 1 引數
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.cpp(130): error C2653: 'GameHost': 不是類別或命名空間名稱
   Game.cpp
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2039: 'Hosts': 不是 'Framework' 的成員
+  d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputevent.h(32): note: 請參閱 'Framework' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2871: 'Hosts': 此名稱的命名空間不存在
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(22): error C2061: 語法錯誤: 識別項 'GameHost'
 d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\action.h(26): error C2091: 函式傳回函式
   d:\school\新創\程式\meteokb2\neokb_try\framework\io\keyboard.h(34): note: 查看要編譯的 類別 樣板 具現化 'Util::DataStructure::Action<int (Framework::Input::InputState *)>' 參考
 d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\action.h(43): error C2091: 函式傳回函式
 d:\school\新創\程式\meteokb2\neokb_try\framework\devices\device.h(15): error C2061: 語法錯誤: 識別項 'MainInterface'
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2039: 'Host': 不是 'Framework' 的成員
-  d:\school\新創\程式\meteokb2\neokb_try\framework\io\maininterface.h(16): note: 請參閱 'Framework' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2871: 'Host': 此名稱的命名空間不存在
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(22): error C2061: 語法錯誤: 識別項 'GameHost'
 d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(46): error C2061: 語法錯誤: 識別項 'Game'
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(98): error C2061: 語法錯誤: 識別項 'Game'
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2065: 'InputHandler': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2059: 語法錯誤: '>'
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2976: 'std::vector': 樣板 引數太少
-  d:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.11.25503\include\vector(659): note: 請參閱 'std::vector' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\framework\io\stores\namespacedresourcestore.h(31): error C2555: 'Framework::IO::Stores::NamespacedResourceStore<std::string>::Get': 覆寫虛擬函式傳回類型不同而且不是來自 'Framework::IO::Stores::ResourceStore<std::string>::Get' 的 Covariant
-  d:\school\新創\程式\meteokb2\neokb_try\framework\io\stores\resourcestore.h(32): note: 請參閱 'Framework::IO::Stores::ResourceStore<std::string>::Get' 的宣告
-  d:\school\新創\程式\meteokb2\neokb_try\framework\game.cpp(15): note: 查看要編譯的 類別 樣板 具現化 'Framework::IO::Stores::NamespacedResourceStore<std::string>' 參考
-  FrameworkConfigManager.cpp
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.cpp(3): error C2653: 'Base': 不是類別或命名空間名稱
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.cpp(3): error C2871: 'Config': 此名稱的命名空間不存在
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.cpp(6): error C2653: 'FrameworkConfigManager': 不是類別或命名空間名稱
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.cpp(6): error C4430: 遺漏類型規範 - 假設為 int。注意: C++ 不支援 default-int
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.cpp(7): error C2550: 'FrameworkConfigManager': 建構函式初始設定式清單只允許在建構函式定義上
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.cpp(8): warning C4508: 'FrameworkConfigManager': 函式應傳回值; 假定 'void' 傳回類型
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.cpp(10): error C2653: 'FrameworkConfigManager': 不是類別或命名空間名稱
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.cpp(13): error C2653: 'FrameworkSetting': 不是類別或命名空間名稱
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.cpp(13): error C2065: 'FrameRate': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.cpp(13): error C3861: 'Set': 找不到識別項
-  ConfigManager.cpp
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\configmanager.cpp(4): error C2653: 'Base': 不是類別或命名空間名稱
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\configmanager.cpp(4): error C2871: 'Config': 此名稱的命名空間不存在
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\configmanager.cpp(9): error C2988: 無法辨認的樣板宣告/定義
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\configmanager.cpp(9): error C2143: 語法錯誤: 遺漏 ';' (在 '<' 之前)
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\configmanager.cpp(9): error C2059: 語法錯誤: '<'
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\configmanager.cpp(9): error C2039: 'ConfigManager': 不是 '`global namespace'' 的成員
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\configmanager.cpp(9): error C2059: 語法錯誤: '字串'
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\configmanager.cpp(10): error C2143: 語法錯誤: 遺漏 ';' (在 '{' 之前)
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\configmanager.cpp(10): error C2447: '{': 遺漏函式標頭 (舊樣式型式清單?)
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\configmanager.cpp(17): error C2988: 無法辨認的樣板宣告/定義
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\configmanager.cpp(17): error C2143: 語法錯誤: 遺漏 ';' (在 '<' 之前)
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\configmanager.cpp(17): error C2059: 語法錯誤: '<'
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\configmanager.cpp(17): error C2039: 'Load': 不是 '`global namespace'' 的成員
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\configmanager.cpp(18): error C2143: 語法錯誤: 遺漏 ';' (在 '{' 之前)
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\configmanager.cpp(18): error C2447: '{': 遺漏函式標頭 (舊樣式型式清單?)
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\configmanager.cpp(25): error C2988: 無法辨認的樣板宣告/定義
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\configmanager.cpp(25): error C2143: 語法錯誤: 遺漏 ';' (在 '<' 之前)
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\configmanager.cpp(25): error C2374: 'ConfigManager': 重複定義; 多個初始設定
-  d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\configmanager.cpp(17): note: 請參閱 'ConfigManager' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\configmanager.cpp(25): error C2059: 語法錯誤: '<'
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\configmanager.cpp(25): error C2039: 'Set': 不是 '`global namespace'' 的成員
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\configmanager.cpp(26): error C2143: 語法錯誤: 遺漏 ';' (在 '{' 之前)
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\configmanager.cpp(26): error C2447: '{': 遺漏函式標頭 (舊樣式型式清單?)
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\configmanager.cpp(32): error C2988: 無法辨認的樣板宣告/定義
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\configmanager.cpp(32): error C2143: 語法錯誤: 遺漏 ';' (在 '<' 之前)
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\configmanager.cpp(32): error C2374: 'ConfigManager': 重複定義; 多個初始設定
-  d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\configmanager.cpp(17): note: 請參閱 'ConfigManager' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\configmanager.cpp(32): error C2059: 語法錯誤: '<'
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\configmanager.cpp(32): error C2039: 'Set': 不是 '`global namespace'' 的成員
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\configmanager.cpp(33): error C2143: 語法錯誤: 遺漏 ';' (在 '{' 之前)
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\configmanager.cpp(33): error C2447: '{': 遺漏函式標頭 (舊樣式型式清單?)
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\configmanager.cpp(39): error C2988: 無法辨認的樣板宣告/定義
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\configmanager.cpp(39): error C2143: 語法錯誤: 遺漏 ';' (在 '<' 之前)
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\configmanager.cpp(39): error C2374: 'ConfigManager': 重複定義; 多個初始設定
-  d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\configmanager.cpp(17): note: 請參閱 'ConfigManager' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\configmanager.cpp(39): error C2059: 語法錯誤: '<'
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\configmanager.cpp(39): error C2039: 'Set': 不是 '`global namespace'' 的成員
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\configmanager.cpp(40): error C2143: 語法錯誤: 遺漏 ';' (在 '{' 之前)
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\configmanager.cpp(40): error C2447: '{': 遺漏函式標頭 (舊樣式型式清單?)
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\configmanager.cpp(46): error C2653: 'Base': 不是類別或命名空間名稱
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\configmanager.cpp(46): error C2988: 無法辨認的樣板宣告/定義
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\configmanager.cpp(46): error C2143: 語法錯誤: 遺漏 ';' (在 '<' 之前)
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\configmanager.cpp(46): error C2374: 'ConfigManager': 重複定義; 多個初始設定
-  d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\configmanager.cpp(17): note: 請參閱 'ConfigManager' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\configmanager.cpp(46): error C2059: 語法錯誤: '<'
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\configmanager.cpp(46): error C2039: 'Set': 不是 '`global namespace'' 的成員
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\configmanager.cpp(47): error C2143: 語法錯誤: 遺漏 ';' (在 '{' 之前)
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\configmanager.cpp(47): error C2447: '{': 遺漏函式標頭 (舊樣式型式清單?)
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\configmanager.cpp(77): error C2988: 無法辨認的樣板宣告/定義
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\configmanager.cpp(77): error C2143: 語法錯誤: 遺漏 ';' (在 '<' 之前)
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\configmanager.cpp(77): error C2371: 'ConfigManager': 重複定義; 基本類型不相同
-  d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\configmanager.cpp(17): note: 請參閱 'ConfigManager' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\configmanager.cpp(77): error C2059: 語法錯誤: '<'
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\configmanager.cpp(77): error C2039: 'Get': 不是 '`global namespace'' 的成員
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\configmanager.cpp(78): error C2143: 語法錯誤: 遺漏 ';' (在 '{' 之前)
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\configmanager.cpp(78): error C2447: '{': 遺漏函式標頭 (舊樣式型式清單?)
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(47): error C2061: 語法錯誤: 識別項 'Game'
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(99): error C2061: 語法錯誤: 識別項 'Game'
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(14): error C2039: 'Host': 不是 'Framework' 的成員
+  d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(34): note: 請參閱 'Framework' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(14): error C2871: 'Host': 此名稱的命名空間不存在
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C2143: 語法錯誤: 遺漏 ';' (在 '*' 之前)
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C4430: 遺漏類型規範 - 假設為 int。注意: C++ 不支援 default-int
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C2238: 在 ';' 之前有未預期的語彙基元
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(34): error C2061: 語法錯誤: 識別項 'GameHost'
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.cpp(18): error C2664: 'Framework::Audio::AudioManager::AudioManager(Framework::Audio::AudioManager &&)': 無法將引數 1 從 'Framework::IO::Stores::NamespacedResourceStore<std::string> *' 轉換為 'Framework::IO::Stores::ResourceStore<char *> *'
+  d:\school\新創\程式\meteokb2\neokb_try\framework\game.cpp(18): note: 指向的類型沒有相關; 轉換必須有 reinterpret_cast、C-Style 轉換或函式樣式轉換
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.cpp(26): error C2065: 'GameHost': 未宣告的識別項
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.cpp(26): error C2065: 'host': 未宣告的識別項
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.cpp(26): error C2761: 'int Framework::Game::SetHost(void)': 不允許重新宣告成員
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.cpp(27): error C2448: 'Framework::Game::SetHost': 函式樣式初始設定式似乎是函式定義
   TrackManager.cpp
-d:\school\新創\程式\meteokb2\neokb_try\framework\audio\audiocomponent.h(11): error C2653: 'Framework': 不是類別或命名空間名稱
-d:\school\新創\程式\meteokb2\neokb_try\framework\audio\audiocomponent.h(11): error C2871: 'Hierachal': 此名稱的命名空間不存在
 d:\school\新創\程式\meteokb2\neokb_try\framework\audio\track\trackmanager.cpp(14): error C2061: 語法錯誤: 識別項 'BassTrack'
-  Track.cpp
-d:\school\新創\程式\meteokb2\neokb_try\framework\audio\audiocomponent.h(11): error C2653: 'Framework': 不是類別或命名空間名稱
-d:\school\新創\程式\meteokb2\neokb_try\framework\audio\audiocomponent.h(11): error C2871: 'Hierachal': 此名稱的命名空間不存在
-  BassTrack.cpp
-d:\school\新創\程式\meteokb2\neokb_try\framework\audio\audiocomponent.h(11): error C2653: 'Framework': 不是類別或命名空間名稱
-d:\school\新創\程式\meteokb2\neokb_try\framework\audio\audiocomponent.h(11): error C2871: 'Hierachal': 此名稱的命名空間不存在
   SampleManager.cpp
-d:\school\新創\程式\meteokb2\neokb_try\framework\audio\audiocomponent.h(11): error C2653: 'Framework': 不是類別或命名空間名稱
-d:\school\新創\程式\meteokb2\neokb_try\framework\audio\audiocomponent.h(11): error C2871: 'Hierachal': 此名稱的命名空間不存在
-d:\school\新創\程式\meteokb2\neokb_try\framework\audio\sample\samplemanager.cpp(25): error C2061: 語法錯誤: 識別項 'BassSample'
-d:\school\新創\程式\meteokb2\neokb_try\framework\audio\sample\samplemanager.cpp(33): error C2061: 語法錯誤: 識別項 'BassSampleChannel'
-  SampleChannel.cpp
-d:\school\新創\程式\meteokb2\neokb_try\framework\audio\audiocomponent.h(11): error C2653: 'Framework': 不是類別或命名空間名稱
-d:\school\新創\程式\meteokb2\neokb_try\framework\audio\audiocomponent.h(11): error C2871: 'Hierachal': 此名稱的命名空間不存在
-  Sample.cpp
-d:\school\新創\程式\meteokb2\neokb_try\framework\audio\audiocomponent.h(11): error C2653: 'Framework': 不是類別或命名空間名稱
-d:\school\新創\程式\meteokb2\neokb_try\framework\audio\audiocomponent.h(11): error C2871: 'Hierachal': 此名稱的命名空間不存在
-  BassSampleChannel.cpp
-d:\school\新創\程式\meteokb2\neokb_try\framework\audio\audiocomponent.h(11): error C2653: 'Framework': 不是類別或命名空間名稱
-d:\school\新創\程式\meteokb2\neokb_try\framework\audio\audiocomponent.h(11): error C2871: 'Hierachal': 此名稱的命名空間不存在
-  正在產生程式碼...
-  正在編譯...
-  BassSample.cpp
-d:\school\新創\程式\meteokb2\neokb_try\framework\audio\audiocomponent.h(11): error C2653: 'Framework': 不是類別或命名空間名稱
-d:\school\新創\程式\meteokb2\neokb_try\framework\audio\audiocomponent.h(11): error C2871: 'Hierachal': 此名稱的命名空間不存在
-  AudioManager.cpp
-d:\school\新創\程式\meteokb2\neokb_try\framework\audio\audiocomponent.h(11): error C2653: 'Framework': 不是類別或命名空間名稱
-d:\school\新創\程式\meteokb2\neokb_try\framework\audio\audiocomponent.h(11): error C2871: 'Hierachal': 此名稱的命名空間不存在
-d:\school\新創\程式\meteokb2\neokb_try\framework\audio\audiomanager.cpp(30): error C2664: 'Framework::Audio::Sample::SampleManager::SampleManager(Framework::Audio::Sample::SampleManager &&)': 無法將引數 1 從 'Framework::IO::Stores::ResourceStore<std::string> *' 轉換為 'Framework::IO::Stores::ResourceStore<char *> *'
-  d:\school\新創\程式\meteokb2\neokb_try\framework\audio\audiomanager.cpp(30): note: 指向的類型沒有相關; 轉換必須有 reinterpret_cast、C-Style 轉換或函式樣式轉換
-d:\school\新創\程式\meteokb2\neokb_try\framework\audio\audiomanager.cpp(42): error C2664: 'Framework::Audio::Track::TrackManager::TrackManager(Framework::Audio::Track::TrackManager &&)': 無法將引數 1 從 'Framework::IO::Stores::ResourceStore<std::string> *' 轉換為 'Framework::IO::Stores::ResourceStore<char *> *'
-  d:\school\新創\程式\meteokb2\neokb_try\framework\audio\audiomanager.cpp(42): note: 指向的類型沒有相關; 轉換必須有 reinterpret_cast、C-Style 轉換或函式樣式轉換
-  AudioComponent.cpp
-d:\school\新創\程式\meteokb2\neokb_try\framework\audio\audiocomponent.h(11): error C2653: 'Framework': 不是類別或命名空間名稱
-d:\school\新創\程式\meteokb2\neokb_try\framework\audio\audiocomponent.h(11): error C2871: 'Hierachal': 此名稱的命名空間不存在
-  AudioCollectionManager.cpp
-d:\school\新創\程式\meteokb2\neokb_try\framework\audio\audiocomponent.h(11): error C2653: 'Framework': 不是類別或命名空間名稱
-d:\school\新創\程式\meteokb2\neokb_try\framework\audio\audiocomponent.h(11): error C2871: 'Hierachal': 此名稱的命名空間不存在
-  AdjustableAudioComponent.cpp
-d:\school\新創\程式\meteokb2\neokb_try\framework\audio\audiocomponent.h(11): error C2653: 'Framework': 不是類別或命名空間名稱
-d:\school\新創\程式\meteokb2\neokb_try\framework\audio\audiocomponent.h(11): error C2871: 'Hierachal': 此名稱的命名空間不存在
-  Triggerable.cpp
-  Scheduler.cpp
-d:\school\新創\程式\meteokb2\neokb_try\framework\allocation\hierachal\scheduler.cpp(24): error C3867: 'Framework::Allocation::Hierachal::ScheduledTask::GetExecutionTime': 非標準語法; 請使用 '&' 建立成員的指標
-d:\school\新創\程式\meteokb2\neokb_try\framework\allocation\hierachal\scheduler.cpp(24): error C2446: '<': 沒有從 'double' 至 'double (__cdecl Framework::Allocation::Hierachal::ScheduledTask::* )(void)' 的轉換
-  d:\school\新創\程式\meteokb2\neokb_try\framework\allocation\hierachal\scheduler.cpp(24): note: 沒有可以進行此轉換的內容
-d:\school\新創\程式\meteokb2\neokb_try\framework\allocation\hierachal\scheduler.cpp(87): error C2572: 'Framework::Allocation::Hierachal::Scheduler::AddDelayedTask': 預設引數重複定義: 參數 1
-  d:\school\新創\程式\meteokb2\neokb_try\framework\allocation\hierachal\scheduler.h(52): note: 請參閱 'Framework::Allocation::Hierachal::Scheduler::AddDelayedTask' 的宣告
-  MtoObject.cpp
-d:\school\新創\程式\meteokb2\neokb_try\framework\allocation\hierachal\mtoobject.cpp(6): error C2871: 'Util': 此名稱的命名空間不存在
-d:\school\新創\程式\meteokb2\neokb_try\framework\allocation\hierachal\mtoobject.cpp(11): error C2653: 'MtoObject': 不是類別或命名空間名稱
-d:\school\新創\程式\meteokb2\neokb_try\framework\allocation\hierachal\mtoobject.cpp(11): error C4430: 遺漏類型規範 - 假設為 int。注意: C++ 不支援 default-int
-d:\school\新創\程式\meteokb2\neokb_try\framework\allocation\hierachal\mtoobject.cpp(12): error C2550: 'MtoObject': 建構函式初始設定式清單只允許在建構函式定義上
-d:\school\新創\程式\meteokb2\neokb_try\framework\allocation\hierachal\mtoobject.cpp(13): warning C4508: 'MtoObject': 函式應傳回值; 假定 'void' 傳回類型
+d:\school\新創\程式\meteokb2\neokb_try\util\templateconstraint.h(41): error C2512: 'Framework::Audio::Sample::SampleChannel': 沒有適當的預設建構函式
+  d:\school\新創\程式\meteokb2\neokb_try\util\templateconstraint.h(38): note: 編譯 類別 樣板 成員函式 'void Util::TConstraint<T,Framework::Audio::AdjustableAudioComponent>::constraint_check_derived_from(void)' 時
+          with
+          [
+              T=Framework::Audio::Sample::SampleChannel
+          ]
+  d:\school\新創\程式\meteokb2\neokb_try\util\templateconstraint.h(54): note: 請參閱所要編譯的函式 樣板 具現化 'void Util::TConstraint<T,Framework::Audio::AdjustableAudioComponent>::constraint_check_derived_from(void)' 之參考
+          with
+          [
+              T=Framework::Audio::Sample::SampleChannel
+          ]
+  d:\school\新創\程式\meteokb2\neokb_try\framework\audio\audiocollectionmanager.h(24): note: 查看要編譯的 類別 樣板 具現化 'Util::TConstraint<T,Framework::Audio::AdjustableAudioComponent>' 參考
+          with
+          [
+              T=Framework::Audio::Sample::SampleChannel
+          ]
+  d:\school\新創\程式\meteokb2\neokb_try\framework\audio\sample\samplemanager.h(16): note: 查看要編譯的 類別 樣板 具現化 'Framework::Audio::AudioCollectionManager<Framework::Audio::Sample::SampleChannel>' 參考
   WS2812v10Renderer.cpp
 d:\school\新創\程式\meteokb2\neokb_try\base\graphic\renderer\renderer.h(6): fatal error C1083: 無法開啟包含檔案: '../Map/Map.h': No such file or directory
-  WorkingSheetmusic.cpp
   SheetmusicManager.cpp
 d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2039: 'Hosts': 不是 'Framework' 的成員
+  d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputevent.h(32): note: 請參閱 'Framework' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2871: 'Hosts': 此名稱的命名空間不存在
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(22): error C2061: 語法錯誤: 識別項 'GameHost'
 d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\action.h(26): error C2091: 函式傳回函式
   d:\school\新創\程式\meteokb2\neokb_try\framework\io\keyboard.h(34): note: 查看要編譯的 類別 樣板 具現化 'Util::DataStructure::Action<int (Framework::Input::InputState *)>' 參考
 d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\action.h(43): error C2091: 函式傳回函式
 d:\school\新創\程式\meteokb2\neokb_try\framework\devices\device.h(15): error C2061: 語法錯誤: 識別項 'MainInterface'
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2039: 'Host': 不是 'Framework' 的成員
-  d:\school\新創\程式\meteokb2\neokb_try\framework\io\maininterface.h(16): note: 請參閱 'Framework' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2871: 'Host': 此名稱的命名空間不存在
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(22): error C2061: 語法錯誤: 識別項 'GameHost'
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(46): error C2061: 語法錯誤: 識別項 'Game'
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(98): error C2061: 語法錯誤: 識別項 'Game'
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2065: 'InputHandler': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2059: 語法錯誤: '>'
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2976: 'std::vector': 樣板 引數太少
-  d:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.11.25503\include\vector(659): note: 請參閱 'std::vector' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\eventprocessormaster.h(10): fatal error C1083: 無法開啟包含檔案: '../../../Util/Update/Updatable.h': No such file or directory
-  SheetmusicConverter.cpp
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
-  PatternGenerator.cpp
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
-d:\school\新創\程式\meteokb2\neokb_try\base\sheetmusic\pattern\patterngenerator.cpp(18): warning C4390: ';': 找到空白的控制陳述式，是正確的嗎?
-d:\school\新創\程式\meteokb2\neokb_try\base\sheetmusic\pattern\patterngenerator.cpp(19): warning C4390: ';': 找到空白的控制陳述式，是正確的嗎?
-d:\school\新創\程式\meteokb2\neokb_try\base\sheetmusic\pattern\patterngenerator.cpp(20): warning C4390: ';': 找到空白的控制陳述式，是正確的嗎?
-d:\school\新創\程式\meteokb2\neokb_try\base\sheetmusic\pattern\patterngenerator.cpp(21): warning C4390: ';': 找到空白的控制陳述式，是正確的嗎?
-d:\school\新創\程式\meteokb2\neokb_try\base\sheetmusic\pattern\patterngenerator.cpp(22): warning C4390: ';': 找到空白的控制陳述式，是正確的嗎?
-d:\school\新創\程式\meteokb2\neokb_try\base\sheetmusic\pattern\patterngenerator.cpp(23): warning C4390: ';': 找到空白的控制陳述式，是正確的嗎?
-d:\school\新創\程式\meteokb2\neokb_try\base\sheetmusic\pattern\patterngenerator.cpp(28): error C2614: 'Base::Sheetmusics::Patterns::PatternGenerator': 成員初始化不合法: 'ChildAddable' 不是基底或成員類別
-  SmDecoder.cpp
-  SimpleSmDecoder.cpp
-d:\school\新創\程式\meteokb2\neokb_try\base\sheetmusic\format\simplesmdecoder.cpp(232): warning C4267: '正在初始化': 將 'size_t' 轉換為 'int'，資料可能遺失
-d:\school\新創\程式\meteokb2\neokb_try\base\sheetmusic\format\simplesmdecoder.cpp(241): warning C4267: '=': 將 'size_t' 轉換為 'int'，資料可能遺失
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(47): error C2061: 語法錯誤: 識別項 'Game'
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(99): error C2061: 語法錯誤: 識別項 'Game'
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(14): error C2039: 'Host': 不是 'Framework' 的成員
+  d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(34): note: 請參閱 'Framework' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(14): error C2871: 'Host': 此名稱的命名空間不存在
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C2143: 語法錯誤: 遺漏 ';' (在 '*' 之前)
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C4430: 遺漏類型規範 - 假設為 int。注意: C++ 不支援 default-int
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C2238: 在 ';' 之前有未預期的語彙基元
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(34): error C2061: 語法錯誤: 識別項 'GameHost'
   SystemEventHandler.cpp
-d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\eventprocessormaster.h(10): fatal error C1083: 無法開啟包含檔案: '../../../Util/Update/Updatable.h': No such file or directory
-  EventProcessorMaster.cpp
-d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\eventprocessormaster.h(10): fatal error C1083: 無法開啟包含檔案: '../../../Util/Update/Updatable.h': No such file or directory
+d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\systemevents\systemeventhandler.h(9): fatal error C1083: 無法開啟包含檔案: 'unistd.h': No such file or directory
   SongSelect.cpp
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2039: 'Hosts': 不是 'Framework' 的成員
+  d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputevent.h(32): note: 請參閱 'Framework' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2871: 'Hosts': 此名稱的命名空間不存在
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(22): error C2061: 語法錯誤: 識別項 'GameHost'
 d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\action.h(26): error C2091: 函式傳回函式
   d:\school\新創\程式\meteokb2\neokb_try\framework\io\keyboard.h(34): note: 查看要編譯的 類別 樣板 具現化 'Util::DataStructure::Action<int (Framework::Input::InputState *)>' 參考
 d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\action.h(43): error C2091: 函式傳回函式
 d:\school\新創\程式\meteokb2\neokb_try\framework\devices\device.h(15): error C2061: 語法錯誤: 識別項 'MainInterface'
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2039: 'Host': 不是 'Framework' 的成員
-  d:\school\新創\程式\meteokb2\neokb_try\framework\io\maininterface.h(16): note: 請參閱 'Framework' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2871: 'Host': 此名稱的命名空間不存在
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(22): error C2061: 語法錯誤: 識別項 'GameHost'
 d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(46): error C2061: 語法錯誤: 識別項 'Game'
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(98): error C2061: 語法錯誤: 識別項 'Game'
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2065: 'InputHandler': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2059: 語法錯誤: '>'
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2976: 'std::vector': 樣板 引數太少
-  d:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.11.25503\include\vector(659): note: 請參閱 'std::vector' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\eventprocessormaster.h(10): fatal error C1083: 無法開啟包含檔案: '../../../Util/Update/Updatable.h': No such file or directory
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(47): error C2061: 語法錯誤: 識別項 'Game'
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(99): error C2061: 語法錯誤: 識別項 'Game'
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(14): error C2039: 'Host': 不是 'Framework' 的成員
+  d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(34): note: 請參閱 'Framework' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(14): error C2871: 'Host': 此名稱的命名空間不存在
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C2143: 語法錯誤: 遺漏 ';' (在 '*' 之前)
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C4430: 遺漏類型規範 - 假設為 int。注意: C++ 不支援 default-int
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C2238: 在 ';' 之前有未預期的語彙基元
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(34): error C2061: 語法錯誤: 識別項 'GameHost'
   PlaySongSelect.cpp
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2039: 'Hosts': 不是 'Framework' 的成員
+  d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputevent.h(32): note: 請參閱 'Framework' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2871: 'Hosts': 此名稱的命名空間不存在
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(22): error C2061: 語法錯誤: 識別項 'GameHost'
 d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\action.h(26): error C2091: 函式傳回函式
   d:\school\新創\程式\meteokb2\neokb_try\framework\io\keyboard.h(34): note: 查看要編譯的 類別 樣板 具現化 'Util::DataStructure::Action<int (Framework::Input::InputState *)>' 參考
 d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\action.h(43): error C2091: 函式傳回函式
 d:\school\新創\程式\meteokb2\neokb_try\framework\devices\device.h(15): error C2061: 語法錯誤: 識別項 'MainInterface'
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2039: 'Host': 不是 'Framework' 的成員
-  d:\school\新創\程式\meteokb2\neokb_try\framework\io\maininterface.h(16): note: 請參閱 'Framework' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2871: 'Host': 此名稱的命名空間不存在
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(22): error C2061: 語法錯誤: 識別項 'GameHost'
 d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(46): error C2061: 語法錯誤: 識別項 'Game'
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(98): error C2061: 語法錯誤: 識別項 'Game'
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2065: 'InputHandler': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2059: 語法錯誤: '>'
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2976: 'std::vector': 樣板 引數太少
-  d:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.11.25503\include\vector(659): note: 請參閱 'std::vector' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\eventprocessormaster.h(10): fatal error C1083: 無法開啟包含檔案: '../../../Util/Update/Updatable.h': No such file or directory
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(47): error C2061: 語法錯誤: 識別項 'Game'
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(99): error C2061: 語法錯誤: 識別項 'Game'
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(14): error C2039: 'Host': 不是 'Framework' 的成員
+  d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(34): note: 請參閱 'Framework' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(14): error C2871: 'Host': 此名稱的命名空間不存在
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C2143: 語法錯誤: 遺漏 ';' (在 '*' 之前)
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C4430: 遺漏類型規範 - 假設為 int。注意: C++ 不支援 default-int
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C2238: 在 ';' 之前有未預期的語彙基元
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(34): error C2061: 語法錯誤: 識別項 'GameHost'
   MainMenu.cpp
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2039: 'Hosts': 不是 'Framework' 的成員
+  d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputevent.h(32): note: 請參閱 'Framework' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2871: 'Hosts': 此名稱的命名空間不存在
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(22): error C2061: 語法錯誤: 識別項 'GameHost'
 d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\action.h(26): error C2091: 函式傳回函式
   d:\school\新創\程式\meteokb2\neokb_try\framework\io\keyboard.h(34): note: 查看要編譯的 類別 樣板 具現化 'Util::DataStructure::Action<int (Framework::Input::InputState *)>' 參考
 d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\action.h(43): error C2091: 函式傳回函式
 d:\school\新創\程式\meteokb2\neokb_try\framework\devices\device.h(15): error C2061: 語法錯誤: 識別項 'MainInterface'
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2039: 'Host': 不是 'Framework' 的成員
-  d:\school\新創\程式\meteokb2\neokb_try\framework\io\maininterface.h(16): note: 請參閱 'Framework' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2871: 'Host': 此名稱的命名空間不存在
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(22): error C2061: 語法錯誤: 識別項 'GameHost'
 d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(46): error C2061: 語法錯誤: 識別項 'Game'
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(98): error C2061: 語法錯誤: 識別項 'Game'
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2065: 'InputHandler': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2059: 語法錯誤: '>'
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2976: 'std::vector': 樣板 引數太少
-  d:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.11.25503\include\vector(659): note: 請參閱 'std::vector' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\eventprocessormaster.h(10): fatal error C1083: 無法開啟包含檔案: '../../../Util/Update/Updatable.h': No such file or directory
-  正在產生程式碼...
-  正在編譯...
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(47): error C2061: 語法錯誤: 識別項 'Game'
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(99): error C2061: 語法錯誤: 識別項 'Game'
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(14): error C2039: 'Host': 不是 'Framework' 的成員
+  d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(34): note: 請參閱 'Framework' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(14): error C2871: 'Host': 此名稱的命名空間不存在
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C2143: 語法錯誤: 遺漏 ';' (在 '*' 之前)
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C4430: 遺漏類型規範 - 假設為 int。注意: C++ 不支援 default-int
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C2238: 在 ';' 之前有未預期的語彙基元
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(34): error C2061: 語法錯誤: 識別項 'GameHost'
   TimeController.cpp
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2039: 'Hosts': 不是 'Framework' 的成員
+  d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputevent.h(32): note: 請參閱 'Framework' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2871: 'Hosts': 此名稱的命名空間不存在
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(22): error C2061: 語法錯誤: 識別項 'GameHost'
 d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\action.h(26): error C2091: 函式傳回函式
   d:\school\新創\程式\meteokb2\neokb_try\framework\io\keyboard.h(34): note: 查看要編譯的 類別 樣板 具現化 'Util::DataStructure::Action<int (Framework::Input::InputState *)>' 參考
 d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\action.h(43): error C2091: 函式傳回函式
 d:\school\新創\程式\meteokb2\neokb_try\framework\devices\device.h(15): error C2061: 語法錯誤: 識別項 'MainInterface'
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2039: 'Host': 不是 'Framework' 的成員
-  d:\school\新創\程式\meteokb2\neokb_try\framework\io\maininterface.h(16): note: 請參閱 'Framework' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2871: 'Host': 此名稱的命名空間不存在
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(22): error C2061: 語法錯誤: 識別項 'GameHost'
 d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(46): error C2061: 語法錯誤: 識別項 'Game'
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(98): error C2061: 語法錯誤: 識別項 'Game'
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2065: 'InputHandler': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2059: 語法錯誤: '>'
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2976: 'std::vector': 樣板 引數太少
-  d:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.11.25503\include\vector(659): note: 請參閱 'std::vector' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.h(8): error C2653: 'Base': 不是類別或命名空間名稱
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(3): error C3083: 'Scene': '::' 左邊的符號必須是類型
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(3): error C2039: 'Play': 不是 'Framework::Game' 的成員
-  d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(20): note: 請參閱 'Framework::Game' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(3): error C2871: 'Play': 此名稱的命名空間不存在
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(7): error C2653: 'TimeController': 不是類別或命名空間名稱
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(12): error C2653: 'TimeController': 不是類別或命名空間名稱
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(14): error C2065: 'isPaused': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(17): error C2065: 'isTriggeredPause': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(18): error C3861: 'Pause': 找不到識別項
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(19): error C2065: 'isTriggeredPause': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(22): error C2065: 'isTriggeredResume': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(23): error C3861: 'Resume': 找不到識別項
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(24): error C2065: 'isTriggeredResume': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(27): error C2065: 'isTriggeredSeekingTime': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(28): error C2065: 'targetSeekTime': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(28): error C2065: 'speedAdjuster': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(28): error C3861: 'JumpTo': 找不到識別項
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(29): error C2065: 'isTriggeredSeekingTime': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(32): error C2065: 'isSeekingTime': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(33): error C2065: 'targetSeekTime': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(33): error C2065: 'speedAdjuster': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(33): error C3861: 'JumpTo': 找不到識別項
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(42): error C2653: 'TimeController': 不是類別或命名空間名稱
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(44): error C2065: 'controllableClock': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(48): error C2653: 'TimeController': 不是類別或命名空間名稱
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(50): error C2065: 'audioClock': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(54): error C2653: 'TimeController': 不是類別或命名空間名稱
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(57): error C2065: 'speedAdjuster': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(57): error C2541: 'delete': 無法刪除不是指標的物件
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(58): error C2065: 'speedAdjuster': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(62): error C2653: 'TimeController': 不是類別或命名空間名稱
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(64): error C2065: 'audioClock': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(64): error C2227: '->Seek' 的左邊必須指向類別/結構/等位/泛型類型
-  d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(64): note: 類型為 'unknown-type'
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(65): error C2065: 'controllableClock': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(65): error C2227: '->Seek' 的左邊必須指向類別/結構/等位/泛型類型
-  d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(65): note: 類型為 'unknown-type'
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(69): error C2653: 'TimeController': 不是類別或命名空間名稱
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(71): error C2065: 'speedAdjuster': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(71): error C2227: '->GenerateTime' 的左邊必須指向類別/結構/等位/泛型類型
-  d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(71): note: 類型為 'unknown-type'
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(71): error C3861: 'GetClock': 找不到識別項
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(71): error C2227: '->GetElapsedFrameTime' 的左邊必須指向類別/結構/等位/泛型類型
-  d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(71): note: 類型為 'unknown-type'
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(71): error C2143: 語法錯誤: 遺漏 ')' (在 ';' 之前)
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(75): error C2653: 'TimeController': 不是類別或命名空間名稱
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(77): error C2065: 'audioClock': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(77): error C2227: '->Stop' 的左邊必須指向類別/結構/等位/泛型類型
-  d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(77): note: 類型為 'unknown-type'
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(79): error C2065: 'controllableClock': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(79): error C2227: '->SetIsProcessSourceClockFrames' 的左邊必須指向類別/結構/等位/泛型類型
-  d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(79): note: 類型為 'unknown-type'
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(81): error C2065: 'isPaused': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(86): error C2653: 'TimeController': 不是類別或命名空間名稱
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(88): error C2065: 'rate': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(89): error C2065: 'audioClock': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(89): error C2227: '->Seek' 的左邊必須指向類別/結構/等位/泛型類型
-  d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(89): note: 類型為 'unknown-type'
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(89): error C2065: 'controllableClock': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(89): error C2227: '->GetCurrentTime' 的左邊必須指向類別/結構/等位/泛型類型
-  d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(89): note: 類型為 'unknown-type'
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(90): error C2065: 'audioClock': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(90): error C2227: '->Start' 的左邊必須指向類別/結構/等位/泛型類型
-  d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(90): note: 類型為 'unknown-type'
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(92): error C2065: 'controllableClock': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(92): error C2227: '->SetIsProcessSourceClockFrames' 的左邊必須指向類別/結構/等位/泛型類型
-  d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(92): note: 類型為 'unknown-type'
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(93): error C2065: 'isPaused': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(97): error C2653: 'TimeController': 不是類別或命名空間名稱
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(102): error C2065: 'audioClock': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(102): error C2227: '->Stop' 的左邊必須指向類別/結構/等位/泛型類型
-  d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(102): note: 類型為 'unknown-type'
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(103): error C2065: 'rate': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(104): error C2065: 'audioClock': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(104): error C2227: '->SetRate' 的左邊必須指向類別/結構/等位/泛型類型
-  d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(104): note: 類型為 'unknown-type'
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(105): error C2065: 'controllableClock': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(105): error C2227: '->SetRate' 的左邊必須指向類別/結構/等位/泛型類型
-  d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(105): note: 類型為 'unknown-type'
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(109): error C2653: 'TimeController': 不是類別或命名空間名稱
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(111): error C2065: 'rate': 未宣告的識別項
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(47): error C2061: 語法錯誤: 識別項 'Game'
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(99): error C2061: 語法錯誤: 識別項 'Game'
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(14): error C2039: 'Host': 不是 'Framework' 的成員
+  d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(34): note: 請參閱 'Framework' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(14): error C2871: 'Host': 此名稱的命名空間不存在
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C2143: 語法錯誤: 遺漏 ';' (在 '*' 之前)
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C4430: 遺漏類型規範 - 假設為 int。注意: C++ 不支援 default-int
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C2238: 在 ';' 之前有未預期的語彙基元
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(34): error C2061: 語法錯誤: 識別項 'GameHost'
+d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\timecontroller.cpp(111): warning C4244: 'return': 將 'double' 轉換為 'int'，由於類型不同，可能導致資料遺失
   Session.cpp
 d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\session.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
 d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\session.h(5): fatal error C1083: 無法開啟包含檔案: '../../Util/Hierachal/ChildAddable.h': No such file or directory
   Playfield.cpp
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2039: 'Hosts': 不是 'Framework' 的成員
+  d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputevent.h(32): note: 請參閱 'Framework' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2871: 'Hosts': 此名稱的命名空間不存在
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(22): error C2061: 語法錯誤: 識別項 'GameHost'
 d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\action.h(26): error C2091: 函式傳回函式
   d:\school\新創\程式\meteokb2\neokb_try\framework\io\keyboard.h(34): note: 查看要編譯的 類別 樣板 具現化 'Util::DataStructure::Action<int (Framework::Input::InputState *)>' 參考
 d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\action.h(43): error C2091: 函式傳回函式
 d:\school\新創\程式\meteokb2\neokb_try\framework\devices\device.h(15): error C2061: 語法錯誤: 識別項 'MainInterface'
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2039: 'Host': 不是 'Framework' 的成員
-  d:\school\新創\程式\meteokb2\neokb_try\framework\io\maininterface.h(16): note: 請參閱 'Framework' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2871: 'Host': 此名稱的命名空間不存在
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(22): error C2061: 語法錯誤: 識別項 'GameHost'
 d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(46): error C2061: 語法錯誤: 識別項 'Game'
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(98): error C2061: 語法錯誤: 識別項 'Game'
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2065: 'InputHandler': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2059: 語法錯誤: '>'
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2976: 'std::vector': 樣板 引數太少
-  d:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.11.25503\include\vector(659): note: 請參閱 'std::vector' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\eventprocessormaster.h(10): fatal error C1083: 無法開啟包含檔案: '../../../Util/Update/Updatable.h': No such file or directory
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(47): error C2061: 語法錯誤: 識別項 'Game'
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(99): error C2061: 語法錯誤: 識別項 'Game'
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(14): error C2039: 'Host': 不是 'Framework' 的成員
+  d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(34): note: 請參閱 'Framework' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(14): error C2871: 'Host': 此名稱的命名空間不存在
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C2143: 語法錯誤: 遺漏 ';' (在 '*' 之前)
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C4430: 遺漏類型規範 - 假設為 int。注意: C++ 不支援 default-int
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C2238: 在 ';' 之前有未預期的語彙基元
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(34): error C2061: 語法錯誤: 識別項 'GameHost'
   PlayerLoader.cpp
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2039: 'Hosts': 不是 'Framework' 的成員
+  d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputevent.h(32): note: 請參閱 'Framework' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2871: 'Hosts': 此名稱的命名空間不存在
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(22): error C2061: 語法錯誤: 識別項 'GameHost'
 d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\action.h(26): error C2091: 函式傳回函式
   d:\school\新創\程式\meteokb2\neokb_try\framework\io\keyboard.h(34): note: 查看要編譯的 類別 樣板 具現化 'Util::DataStructure::Action<int (Framework::Input::InputState *)>' 參考
 d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\action.h(43): error C2091: 函式傳回函式
 d:\school\新創\程式\meteokb2\neokb_try\framework\devices\device.h(15): error C2061: 語法錯誤: 識別項 'MainInterface'
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2039: 'Host': 不是 'Framework' 的成員
-  d:\school\新創\程式\meteokb2\neokb_try\framework\io\maininterface.h(16): note: 請參閱 'Framework' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2871: 'Host': 此名稱的命名空間不存在
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(22): error C2061: 語法錯誤: 識別項 'GameHost'
 d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(46): error C2061: 語法錯誤: 識別項 'Game'
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(98): error C2061: 語法錯誤: 識別項 'Game'
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2065: 'InputHandler': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2059: 語法錯誤: '>'
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2976: 'std::vector': 樣板 引數太少
-  d:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.11.25503\include\vector(659): note: 請參閱 'std::vector' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\eventprocessormaster.h(10): fatal error C1083: 無法開啟包含檔案: '../../../Util/Update/Updatable.h': No such file or directory
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(47): error C2061: 語法錯誤: 識別項 'Game'
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(99): error C2061: 語法錯誤: 識別項 'Game'
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(14): error C2039: 'Host': 不是 'Framework' 的成員
+  d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(34): note: 請參閱 'Framework' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(14): error C2871: 'Host': 此名稱的命名空間不存在
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C2143: 語法錯誤: 遺漏 ';' (在 '*' 之前)
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C4430: 遺漏類型規範 - 假設為 int。注意: C++ 不支援 default-int
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C2238: 在 ';' 之前有未預期的語彙基元
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(34): error C2061: 語法錯誤: 識別項 'GameHost'
   Player.cpp
 d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2039: 'Hosts': 不是 'Framework' 的成員
+  d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputevent.h(32): note: 請參閱 'Framework' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2871: 'Hosts': 此名稱的命名空間不存在
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(22): error C2061: 語法錯誤: 識別項 'GameHost'
 d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\action.h(26): error C2091: 函式傳回函式
   d:\school\新創\程式\meteokb2\neokb_try\framework\io\keyboard.h(34): note: 查看要編譯的 類別 樣板 具現化 'Util::DataStructure::Action<int (Framework::Input::InputState *)>' 參考
 d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\action.h(43): error C2091: 函式傳回函式
 d:\school\新創\程式\meteokb2\neokb_try\framework\devices\device.h(15): error C2061: 語法錯誤: 識別項 'MainInterface'
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2039: 'Host': 不是 'Framework' 的成員
-  d:\school\新創\程式\meteokb2\neokb_try\framework\io\maininterface.h(16): note: 請參閱 'Framework' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2871: 'Host': 此名稱的命名空間不存在
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(22): error C2061: 語法錯誤: 識別項 'GameHost'
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(46): error C2061: 語法錯誤: 識別項 'Game'
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(98): error C2061: 語法錯誤: 識別項 'Game'
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2065: 'InputHandler': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2059: 語法錯誤: '>'
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2976: 'std::vector': 樣板 引數太少
-  d:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.11.25503\include\vector(659): note: 請參閱 'std::vector' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\base\scheduler\event\eventprocessormaster.h(10): fatal error C1083: 無法開啟包含檔案: '../../../Util/Update/Updatable.h': No such file or directory
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(47): error C2061: 語法錯誤: 識別項 'Game'
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(99): error C2061: 語法錯誤: 識別項 'Game'
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(14): error C2039: 'Host': 不是 'Framework' 的成員
+  d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(34): note: 請參閱 'Framework' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(14): error C2871: 'Host': 此名稱的命名空間不存在
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C2143: 語法錯誤: 遺漏 ';' (在 '*' 之前)
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C4430: 遺漏類型規範 - 假設為 int。注意: C++ 不支援 default-int
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C2238: 在 ';' 之前有未預期的語彙基元
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(34): error C2061: 語法錯誤: 識別項 'GameHost'
+d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\session.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\base\scene\play\session.h(5): fatal error C1083: 無法開啟包含檔案: '../../Util/Hierachal/ChildAddable.h': No such file or directory
   Loader.cpp
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2039: 'Hosts': 不是 'Framework' 的成員
+  d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputevent.h(32): note: 請參閱 'Framework' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2871: 'Hosts': 此名稱的命名空間不存在
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(22): error C2061: 語法錯誤: 識別項 'GameHost'
 d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\action.h(26): error C2091: 函式傳回函式
   d:\school\新創\程式\meteokb2\neokb_try\framework\io\keyboard.h(34): note: 查看要編譯的 類別 樣板 具現化 'Util::DataStructure::Action<int (Framework::Input::InputState *)>' 參考
 d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\action.h(43): error C2091: 函式傳回函式
 d:\school\新創\程式\meteokb2\neokb_try\framework\devices\device.h(15): error C2061: 語法錯誤: 識別項 'MainInterface'
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2039: 'Host': 不是 'Framework' 的成員
-  d:\school\新創\程式\meteokb2\neokb_try\framework\io\maininterface.h(16): note: 請參閱 'Framework' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2871: 'Host': 此名稱的命名空間不存在
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(22): error C2061: 語法錯誤: 識別項 'GameHost'
 d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(46): error C2061: 語法錯誤: 識別項 'Game'
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(98): error C2061: 語法錯誤: 識別項 'Game'
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2065: 'InputHandler': 未宣告的識別項
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2059: 語法錯誤: '>'
-d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(111): error C2976: 'std::vector': 樣板 引數太少
-  d:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.11.25503\include\vector(659): note: 請參閱 'std::vector' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\loader.h(7): error C2039: 'Scene': 不是 'Framework' 的成員
-  d:\school\新創\程式\meteokb2\neokb_try\framework\scenes\scene.h(17): note: 請參閱 'Framework' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\loader.h(7): error C2871: 'Scene': 此名稱的命名空間不存在
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\loader.h(13): error C2504: 'Scene': 基底類別未定義
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\loader.cpp(14): error C2614: 'Base::Scene::Loader': 成員初始化不合法: 'RegisterType' 不是基底或成員類別
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\loader.cpp(14): error C2614: 'Base::Scene::Loader': 成員初始化不合法: 'Scene' 不是基底或成員類別
-d:\school\新創\程式\meteokb2\neokb_try\base\scene\loader.cpp(14): fatal error C1903: 無法從先前的錯誤復原; 正在停止編譯
-  在 'd:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\VC\Tools\MSVC\14.11.25503\bin\HostX86\x64\CL.exe'發生編譯器內部錯誤
-      如需詳細資訊，請選擇 Visual C++ [說明] 功能表上的 [技術支援] 命令
-  ，或開啟技術支援說明檔
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(47): error C2061: 語法錯誤: 識別項 'Game'
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(99): error C2061: 語法錯誤: 識別項 'Game'
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(14): error C2039: 'Host': 不是 'Framework' 的成員
+  d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(34): note: 請參閱 'Framework' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(14): error C2871: 'Host': 此名稱的命名空間不存在
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C2143: 語法錯誤: 遺漏 ';' (在 '*' 之前)
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C4430: 遺漏類型規範 - 假設為 int。注意: C++ 不支援 default-int
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C2238: 在 ';' 之前有未預期的語彙基元
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(34): error C2061: 語法錯誤: 識別項 'GameHost'
+  Intro.cpp
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2039: 'Hosts': 不是 'Framework' 的成員
+  d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputevent.h(32): note: 請參閱 'Framework' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2871: 'Hosts': 此名稱的命名空間不存在
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(22): error C2061: 語法錯誤: 識別項 'GameHost'
+d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\action.h(26): error C2091: 函式傳回函式
+  d:\school\新創\程式\meteokb2\neokb_try\framework\io\keyboard.h(34): note: 查看要編譯的 類別 樣板 具現化 'Util::DataStructure::Action<int (Framework::Input::InputState *)>' 參考
+d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\action.h(43): error C2091: 函式傳回函式
+d:\school\新創\程式\meteokb2\neokb_try\framework\devices\device.h(15): error C2061: 語法錯誤: 識別項 'MainInterface'
+d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(47): error C2061: 語法錯誤: 識別項 'Game'
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(99): error C2061: 語法錯誤: 識別項 'Game'
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(14): error C2039: 'Host': 不是 'Framework' 的成員
+  d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(34): note: 請參閱 'Framework' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(14): error C2871: 'Host': 此名稱的命名空間不存在
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C2143: 語法錯誤: 遺漏 ';' (在 '*' 之前)
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C4430: 遺漏類型規範 - 假設為 int。注意: C++ 不支援 default-int
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C2238: 在 ';' 之前有未預期的語彙基元
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(34): error C2061: 語法錯誤: 識別項 'GameHost'
+  RulesetInfo.cpp
+d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2039: 'Hosts': 不是 'Framework' 的成員
+  d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputevent.h(32): note: 請參閱 'Framework' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2871: 'Hosts': 此名稱的命名空間不存在
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(22): error C2061: 語法錯誤: 識別項 'GameHost'
+d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\action.h(26): error C2091: 函式傳回函式
+  d:\school\新創\程式\meteokb2\neokb_try\framework\io\keyboard.h(34): note: 查看要編譯的 類別 樣板 具現化 'Util::DataStructure::Action<int (Framework::Input::InputState *)>' 參考
+d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\action.h(43): error C2091: 函式傳回函式
+d:\school\新創\程式\meteokb2\neokb_try\framework\devices\device.h(15): error C2061: 語法錯誤: 識別項 'MainInterface'
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(47): error C2061: 語法錯誤: 識別項 'Game'
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(99): error C2061: 語法錯誤: 識別項 'Game'
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(14): error C2039: 'Host': 不是 'Framework' 的成員
+  d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(34): note: 請參閱 'Framework' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(14): error C2871: 'Host': 此名稱的命名空間不存在
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C2143: 語法錯誤: 遺漏 ';' (在 '*' 之前)
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C4430: 遺漏類型規範 - 假設為 int。注意: C++ 不支援 default-int
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C2238: 在 ';' 之前有未預期的語彙基元
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(34): error C2061: 語法錯誤: 識別項 'GameHost'
+  正在產生程式碼...
+  正在編譯...
+  Ruleset.cpp
+d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2039: 'Hosts': 不是 'Framework' 的成員
+  d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputevent.h(32): note: 請參閱 'Framework' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2871: 'Hosts': 此名稱的命名空間不存在
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(22): error C2061: 語法錯誤: 識別項 'GameHost'
+d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\action.h(26): error C2091: 函式傳回函式
+  d:\school\新創\程式\meteokb2\neokb_try\framework\io\keyboard.h(34): note: 查看要編譯的 類別 樣板 具現化 'Util::DataStructure::Action<int (Framework::Input::InputState *)>' 參考
+d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\action.h(43): error C2091: 函式傳回函式
+d:\school\新創\程式\meteokb2\neokb_try\framework\devices\device.h(15): error C2061: 語法錯誤: 識別項 'MainInterface'
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(47): error C2061: 語法錯誤: 識別項 'Game'
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(99): error C2061: 語法錯誤: 識別項 'Game'
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(14): error C2039: 'Host': 不是 'Framework' 的成員
+  d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(34): note: 請參閱 'Framework' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(14): error C2871: 'Host': 此名稱的命名空間不存在
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C2143: 語法錯誤: 遺漏 ';' (在 '*' 之前)
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C4430: 遺漏類型規範 - 假設為 int。注意: C++ 不支援 default-int
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C2238: 在 ';' 之前有未預期的語彙基元
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(34): error C2061: 語法錯誤: 識別項 'GameHost'
+  Mod.cpp
+c1xx : fatal error C1083: 無法開啟來源檔案: 'Base\Ruleset\Mod\Mod.cpp': No such file or directory
+  MtoGame.cpp
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2039: 'Hosts': 不是 'Framework' 的成員
+  d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputevent.h(32): note: 請參閱 'Framework' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(9): error C2871: 'Hosts': 此名稱的命名空間不存在
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\inputhandler.h(22): error C2061: 語法錯誤: 識別項 'GameHost'
+d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\action.h(26): error C2091: 函式傳回函式
+  d:\school\新創\程式\meteokb2\neokb_try\framework\io\keyboard.h(34): note: 查看要編譯的 類別 樣板 具現化 'Util::DataStructure::Action<int (Framework::Input::InputState *)>' 參考
+d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\action.h(43): error C2091: 函式傳回函式
+d:\school\新創\程式\meteokb2\neokb_try\framework\devices\device.h(15): error C2061: 語法錯誤: 識別項 'MainInterface'
+d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(47): error C2061: 語法錯誤: 識別項 'Game'
+d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(99): error C2061: 語法錯誤: 識別項 'Game'
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(14): error C2039: 'Host': 不是 'Framework' 的成員
+  d:\school\新創\程式\meteokb2\neokb_try\framework\host\gamehost.h(34): note: 請參閱 'Framework' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(14): error C2871: 'Host': 此名稱的命名空間不存在
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C2143: 語法錯誤: 遺漏 ';' (在 '*' 之前)
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C4430: 遺漏類型規範 - 假設為 int。注意: C++ 不支援 default-int
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(26): error C2238: 在 ';' 之前有未預期的語彙基元
+d:\school\新創\程式\meteokb2\neokb_try\framework\game.h(34): error C2061: 語法錯誤: 識別項 'GameHost'
+  正在產生程式碼...

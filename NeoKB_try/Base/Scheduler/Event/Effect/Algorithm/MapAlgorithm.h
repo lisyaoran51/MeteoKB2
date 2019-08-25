@@ -5,12 +5,12 @@
 #include "../../../../../Framework/Allocation/Hierachal/Container.h"
 #include "MapGenerateAlgorithm.h"
 #include "MapShiftAlgorithm.h"
-#include "../../../../Config/FrameworkConfigManager.h"
+#include "../../../../../Framework/Configurations/FrameworkConfigManager.h"
 
 
 using namespace Framework::Graphic::Maps;
 using namespace Util;
-using namespace Base::Config;
+using namespace Framework::Configurations;
 using namespace Framework::Allocation::Hierachal;
 
 

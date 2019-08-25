@@ -2,7 +2,7 @@
 
 
 using namespace Meteor::Config;
-using namespace Base::Config;
+using namespace Framework::Configurations;
 
 
 MeteorConfigManager::MeteorConfigManager(): ConfigManager(), RegisterType("MeteorConfigManager")

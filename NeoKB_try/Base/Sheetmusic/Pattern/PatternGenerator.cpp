@@ -24,7 +24,7 @@ int PatternGenerator::load(FrameworkConfigManager * fConfigManager)
 	return 0;
 }
 
-PatternGenerator::PatternGenerator(): ChildAddable(), RegisterType("PatternGenerator")
+PatternGenerator::PatternGenerator(): Container(), RegisterType("PatternGenerator")
 {
 	registerLoad(bind(static_cast<int(PatternGenerator::*)(void)>(&PatternGenerator::load), this));
 }

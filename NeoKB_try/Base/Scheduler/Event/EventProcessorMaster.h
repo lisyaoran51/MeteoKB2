@@ -7,7 +7,7 @@
 #include "../../../Util/TemplateConstraint.h"
 #include "../../../Util/MtoType.h"
 #include "../../../Util/InstanceCreator.h"
-#include "../../../Util/Update/Updatable.h"
+#include "../../../Framework/Allocation/Hierachal/Container.h"
 #include "Event.h"
 #include "EventProcessor.h"
 #include "../../../Framework/Graphic/Drawable.h"
@@ -17,9 +17,7 @@
 
 using namespace std;
 using namespace Util::DataStructure;
-using namespace Base::Graphic::Maps;
-using namespace Util::Update;
-using namespace Util::Hierachal;
+using namespace Framework::Graphic::Maps;
 using namespace Framework::Graphic::Maps;
 using namespace Framework::Graphic;
 using namespace Framework::Allocation::Hierachal;
@@ -38,14 +36,12 @@ namespace Events {
 	/// <summary>
 	/// a processor center to process every Event including effects, 
 	/// </summary>
-	class EventProcessorMaster : public Triggerable, public Drawable
+	class EventProcessorMaster : public Container, public Drawable
 	{
 		// for thread
 		int tid;
 
 		int load();
-
-		int load(Updater* u);
 
 		float visibleTimeRange = 1.0f;
 

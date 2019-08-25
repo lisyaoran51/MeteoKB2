@@ -1,6 +1,6 @@
 #include "TimeController.h"
 
-using namespace Game::Scene::Play;
+using namespace Base::Scenes::Play;
 using namespace Framework::Timing::SpeedAdjusters;
 using namespace Framework::Timing;
 
@@ -25,12 +25,12 @@ int TimeController::update()
 	}
 	
 	if (isTriggeredSeekingTime) {
-		JumpTo(targetSeekTime, speedAdjuster);
+		JumpTo(targetSeekTime);
 		isTriggeredSeekingTime = false;
 	}
 
 	if (isSeekingTime) {
-		JumpTo(targetSeekTime, speedAdjuster);
+		JumpTo(targetSeekTime);
 	}
 
 
@@ -68,7 +68,7 @@ int TimeController::JumpTo(double seekTime)
 
 int TimeController::JumpToWithSpeedAdjust(double seekTime)
 {
-	JumpTo(speedAdjuster->GenerateTime(GetClock()->GetElapsedFrameTime());
+	JumpTo(speedAdjuster->GenerateTime(GetClock()->GetElapsedFrameTime()));
 	return 0;
 }
 

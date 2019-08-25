@@ -1,7 +1,7 @@
 #include "PlayerLoader.h"
 
 
-using namespace Base::Scene::Play;
+using namespace Base::Scenes::Play;
 
 
 PlayerLoader::PlayerLoader(Player * p) : RegisterType("PlayerLoader")

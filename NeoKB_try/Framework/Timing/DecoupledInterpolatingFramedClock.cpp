@@ -5,7 +5,7 @@
 
 using namespace Framework::Timing;
 
-DecoupledInterpolatingFramedClock::DecoupledInterpolatingFramedClock()
+DecoupledInterpolatingFramedClock::DecoupledInterpolatingFramedClock(): InterpolatingFramedClock()
 {
 	decoupledClock = new FramedClock(decoupledStopwatchClock = new StopwatchClock());
 	isCoupled = true;

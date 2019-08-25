@@ -5,7 +5,6 @@
 #include "../../../Scheduler/Event/EventProcessor.h"
 #include "../../../Scheduler/Event/EventProcessorMaster.h"
 #include "SystemEvent.h"
-#include "../../Scheduler.h"
 #include <stdexcept>
  #include <unistd.h>
  
@@ -30,10 +29,6 @@ namespace SystemEvents {
 		{
 		}
 
-		/// <summary>
-		/// §âupdater°±±¼
-		/// </summary>
-		virtual int RegisterUpdater (Updater* u) = 0;
 
 
 	};
@@ -70,18 +65,12 @@ namespace SystemEvents {
 			return 0;
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		virtual int RegisterUpdater(Updater* u) {
-			updater = u;
-		}
+		
 
 		T* GetSystemEvent() { return dynamic_cast<T*>(event); }
 
 	protected:
 
-		Updater* updater;
 
 	};
 

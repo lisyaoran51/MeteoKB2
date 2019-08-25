@@ -5,7 +5,7 @@
 #include "../../../Framework/Timing/SpeedAdjusters/SpeedAdjuster.h"
 #include "../../../Framework/Timing/DecoupledInterpolatingFramedClock.h"
 
-using namespace Base::Scenes;
+using namespace Framework::Scenes;
 using namespace Framework::Timing::SpeedAdjusters;
 using namespace Framework::Timing;
 

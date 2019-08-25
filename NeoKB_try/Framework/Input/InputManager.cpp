@@ -222,7 +222,7 @@ int InputManager::propagateKeyUp(vector<Triggerable*>* queue, InputState * state
 	for (int i = 0; i < queue->size(); i++) {
 		queue->at(i)->TriggerOnKeyUp(state, key);
 	}
-	return ;
+	return 0;
 }
 
 int InputManager::handleButtonDown(InputState * state, PanelButton button)
@@ -275,7 +275,7 @@ int InputManager::handleKnobTurn(InputState * state, PanelKnob knob)
 int InputManager::propagateKnobTurn(vector<Triggerable*>* queue, InputState * state, PanelKnob knob)
 {
 	for (int i = 0; i < queue->size(); i++) {
-		queue->at(i)->TriggerOnButtonUp(state, knob);
+		queue->at(i)->TriggerOnKnobTurn(state, knob);
 	}
 
 	return 0;

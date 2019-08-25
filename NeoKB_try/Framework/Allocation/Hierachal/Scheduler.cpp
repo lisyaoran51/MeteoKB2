@@ -21,7 +21,7 @@ int Scheduler::Update()
 
 	for (int i = 0; i < timedTasks.size(); i++) {
 
-		if (timedTasks[i]->GetExecutionTime < localCurrentTime) {
+		if (timedTasks[i]->GetExecutionTime() < localCurrentTime) {
 			
 
 			if (timedTasks[i]->GetIsCancelled())
@@ -84,7 +84,7 @@ int Scheduler::AddScheduledTask(ScheduledTask * task)
 	return 0;
 }
 
-int Scheduler::AddDelayedTask(function<int(void)> task, double timeUntilRun, bool repeat = false)
+int Scheduler::AddDelayedTask(function<int(void)> task, double timeUntilRun, bool repeat)
 {
 	ScheduledTask* scheduledTask = nullptr;
 

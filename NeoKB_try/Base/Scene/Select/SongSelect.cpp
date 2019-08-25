@@ -1,7 +1,7 @@
 #include "SongSelect.h"
 
 
-using namespace Base::Scene::Select;
+using namespace Base::Scenes::Select;
 
 
 SongSelect::SongSelect(): RegisterType("SongSelect")

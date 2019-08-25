@@ -17,7 +17,8 @@ int BluetoothInputHandler::HandleState(InputState * inputState)
 {
 	auto bluetoothState = inputState->GetBluetoothState()->Clone();
 
-	InputState* pendingState = new InputState()->SetBluetoothState(bluetoothState);
+	InputState* pendingState = new InputState();
+	pendingState->SetBluetoothState(bluetoothState);
 
 	pendingStates.push_back(pendingState);
 
