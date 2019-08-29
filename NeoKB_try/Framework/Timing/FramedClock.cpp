@@ -4,7 +4,7 @@
 
 using namespace Framework::Timing;
 
-FramedClock::FramedClock(Clock * s = nullptr)
+FramedClock::FramedClock(Clock * s)
 {
 	currentTime = s->GetCurrentTime();
 	if (s != nullptr) {

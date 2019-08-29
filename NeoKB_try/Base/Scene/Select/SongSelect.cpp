@@ -20,6 +20,27 @@ int SongSelect::updateSheetmusic(WorkingSm * workingSm)
 	return 0;
 }
 
+int SongSelect::load()
+{
+	SmManager* sManager = GetCache<SmManager>("SmManager");
+	if (!sManager)
+		throw runtime_error("int SongSelect::load() : SmManager not found in cache.");
+
+	MeteoGame* game = GetCache<MeteoGame>("MeteoGame");
+	if (!game)
+		throw runtime_error("int SongSelect::load() : MeteoGame not found in cache.");
+
+	return load(sManager, game);
+}
+
+int SongSelect::load(SmManager * sManager, MeteoGame * game)
+{
+	smManager = sManager;
+
+	// ruleset info 可能需要重新bind一次，本來meteo scene裡面有bind過
+	return 0;
+}
+
 int SongSelect::selectionChanged(SmInfo * sheetmusicInfo)
 {
 

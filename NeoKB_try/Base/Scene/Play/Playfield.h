@@ -6,6 +6,7 @@
 #include "../../Scheduler/Event/EventProcessorMaster.h"
 #include "../../Scheduler/Event/Effect/Algorithm/MapAlgorithm.h"
 #include "../../../Framework/Configurations/FrameworkConfigManager.h"
+#include "../MeteoScene.h"
 
 
 
@@ -14,6 +15,7 @@ using namespace Base::Schedulers::Events;
 using namespace Base::Schedulers;
 using namespace Base::Schedulers::Events::Effects::Algorithms;
 using namespace Framework::Configurations;
+using namespace Base::Scenes;
 
 
 
@@ -26,7 +28,7 @@ namespace Play {
 	/// So that these objects could be updated on each frame.
 	/// should they be connected in this class????
 	/// </summary>
-	class Playfield: public Scene {
+	class Playfield: public MeteoScene {
 
 		int load();
 

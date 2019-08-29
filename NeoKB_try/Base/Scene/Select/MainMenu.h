@@ -6,6 +6,7 @@
 #include "../../Sheetmusic/SheetmusicInfo.h"
 #include "../../Sheetmusic/WorkingSheetmusic.h"
 #include "SongSelect.h"
+#include "../MeteoScene.h"
 
 
 using namespace Base::Sheetmusics;
@@ -20,7 +21,7 @@ namespace Select {
 	/// 用update檢查歌曲有沒有被選取，如果被選取的話，就呼叫carouselSelectionChanged，
 	/// 選擇完畢後，會將player loader 讀取進去，並且push player
 	/// </summary>
-	class MainMenu : public Scene {
+	class MainMenu : public MeteoScene {
 
 	public:
 

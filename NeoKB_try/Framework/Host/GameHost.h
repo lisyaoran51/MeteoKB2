@@ -5,10 +5,10 @@
 
 #include <vector>
 #include "../Threading/GameThread.h"
-#include "../../Util/DataStructure/Action.h"
+#include "../../Util/DataStructure/ActionList.h"
 #include "../Input/InputEvent.h"
 #include "../Game.h"
-#include "../Input/Handler/InputHandler.h"
+//#include "../Input/Handler/InputHandler.h"
 #include "../Graphic/Drawable.h"
 #include "../Allocation/DependencyContainer.h"
 #include "../IO/MainInterface.h"
@@ -21,12 +21,14 @@
 using namespace std;
 using namespace Framework::Threading;
 using namespace Util::DataStructure;
-using namespace Framework::Input::Handler;
+using namespace Framework::Input;
+//using namespace Framework::Input::Handler;
 using namespace Framework::IO;
 using namespace Framework;
 using namespace Framework::Graphic;
 using namespace Framework::Graphic::Maps;
 using namespace Framework::Allocation::Hierachal;
+using namespace Framework::Allocation;
 using namespace Framework::Configurations;
 using namespace Framework::Timing;
 
@@ -44,7 +46,9 @@ namespace Host {
 		
 		GameHost(string name);
 
-		int Run(Game* game);
+		//int Run(Game* game);
+
+		
 
 		/// <summary>
 		/// 讓handler們去註冊，在input thread收到input時，會去用這個叫所有handler，讓每個handler去收自己要的state
@@ -96,7 +100,7 @@ namespace Host {
 
 		int setupConfig();
 
-		int bootstrapSceneGraph(Game* game);
+		//int bootstrapSceneGraph(Game* game);
 
 		MainInterface* mainInterface;
 

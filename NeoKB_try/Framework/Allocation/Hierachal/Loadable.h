@@ -199,7 +199,7 @@ namespace Hierachal{
 		NotLoaded,
 		/// <summary>
 		/// Currently loading (possibly and usually on a background
-		/// thread via <see cref="Drawable.LoadAsync(Game, Drawable, Action)"/>).
+		/// thread via <see cref="Drawable.LoadAsync(Game, Drawable, ActionList)"/>).
 		/// </summary>
 		Loading,
 		/// <summary>

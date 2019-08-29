@@ -3,16 +3,18 @@
 
 #include "../../../Framework/Scenes/Scene.h"
 #include "../Select/MainMenu.h"
+#include "../MeteoScene.h"
 
 using namespace Framework::Scenes;
 using namespace Base::Scenes::Select;
+using namespace Base::Scenes;
 
 namespace Base {
 namespace Scenes {
 namespace Interlude {
 
 
-	class Intro : public Scene {
+	class Intro : public MeteoScene {
 
 	public:
 

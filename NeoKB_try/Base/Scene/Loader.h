@@ -3,6 +3,7 @@
 
 
 #include "../../Framework/Scenes/Scene.h"
+#include "MeteoScene.h"
 
 using namespace Framework::Scenes;
 
@@ -10,7 +11,7 @@ using namespace Framework::Scenes;
 namespace Base {
 namespace Scenes {
 
-	class Loader : public Scene {
+	class Loader : public MeteoScene {
 
 		int load();
 

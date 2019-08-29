@@ -18,27 +18,27 @@ namespace Framework {
 
 	
 	class Game : public Container {
-
+		
 		AudioManager* audioManager;
-
+		
 		ResourceStore<string>* resources;
-
+		
 		GameHost* gameHost;
-
+		
 		int load();
 
 	public:
 
 		
-
+		
 		virtual int SetHost(GameHost* host);
-
+		
 		virtual string GetResourcePath();
-
+		
 	protected:
-
+		
 		Game();
-
+		
 	};
 
 }

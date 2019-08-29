@@ -5,7 +5,7 @@
 #include "../../Sheetmusic/SheetmusicManager.h"
 #include "../../Sheetmusic/WorkingSheetmusic.h"
 #include "../../../Framework/Configurations/FrameworkConfigManager.h"
-#include "../../../Framework/Scenes/Scene.h"
+#include "../MeteoScene.h"
 
 
 
@@ -13,21 +13,20 @@ using namespace Base::Rulesets;
 using namespace Base::Sheetmusics;
 using namespace Framework::Configurations;
 using namespace Framework::Scenes;
+using namespace Base::Scenes;
 
 
 namespace Base {
 namespace Scenes {
 namespace Play {
 
-	class Player: public Scene {
+	class Player: public MeteoScene {
 
 		SmManager* smManager;
 
-		WorkingSm* workingSm;
 
 		Ruleset* ruleset;
 
-		RulesetInfo* rulesetInfo;
 
 		RulesetExecutor<Event>* rulesetExecutor;
 		

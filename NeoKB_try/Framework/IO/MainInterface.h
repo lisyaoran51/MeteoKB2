@@ -64,8 +64,8 @@ namespace IO {
 
 	protected:
 
-		Action<int, Peripheral*> onPeripheralRegister;
-		//Action<int(Device*)> onDeviceRegister;
+		ActionList<int, Peripheral*> onPeripheralRegister;
+		//ActionList<int(Device*)> onDeviceRegister;
 
 	private:
 

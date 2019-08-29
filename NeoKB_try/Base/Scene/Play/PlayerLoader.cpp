@@ -4,7 +4,7 @@
 using namespace Base::Scenes::Play;
 
 
-PlayerLoader::PlayerLoader(Player * p) : RegisterType("PlayerLoader")
+PlayerLoader::PlayerLoader(Player * p) : RegisterType("PlayerLoader"), MeteoScene()
 {
 	registerLoad(bind((int(PlayerLoader::*)())&PlayerLoader::load, this));
 }

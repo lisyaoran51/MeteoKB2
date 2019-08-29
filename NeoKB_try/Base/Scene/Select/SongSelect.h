@@ -7,11 +7,13 @@
 #include "../../Sheetmusic/WorkingSheetmusic.h"
 #include "../../../Util/DataStructure/Bindable.h"
 #include "../../Sheetmusic/SheetmusicManager.h"
+#include "../MeteoScene.h"
 
 
 using namespace Base::Sheetmusics;
 using namespace Framework::Scenes;
 using namespace Util::DataStructure;
+using namespace Base::Scenes;
 
 
 namespace Base {
@@ -22,7 +24,7 @@ namespace Select {
 	/// 用update檢查歌曲有沒有被選取，如果被選取的話，就呼叫carouselSelectionChanged，
 	/// 選擇完畢後，會將player loader 讀取進去，並且push player
 	/// </summary>
-	class SongSelect : public Scene {
+	class SongSelect : public MeteoScene {
 
 
 	public:
@@ -35,8 +37,6 @@ namespace Select {
 		virtual int TriggerOnSelected();
 
 	protected:
-
-		Bindable<WorkingSm*> workingSm;
 
 		SmManager* smManager;
 
@@ -58,10 +58,11 @@ namespace Select {
 		int load();
 
 
+
 		/// <summary>
 		/// 讀取
 		/// </summary>
-		//int load();
+		int load(SmManager* sManager, MeteoGame* game);
 
 		/// <summary>
 		/// 選擇歌曲後執行的程式

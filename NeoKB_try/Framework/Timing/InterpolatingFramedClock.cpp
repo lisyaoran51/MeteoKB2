@@ -5,7 +5,7 @@
 using namespace Framework::Timing;
 
 
-InterpolatingFramedClock::InterpolatingFramedClock(Clock * s = nullptr)
+InterpolatingFramedClock::InterpolatingFramedClock(Clock * s)
 {
 	interpolateClock = new FramedClock(new StopwatchClock());
 	ChangeSource(s);

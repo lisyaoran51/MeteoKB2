@@ -37,6 +37,8 @@ namespace DataStructure {
 		// 這個式一方加另一方，bindto式雙方互加
 		int AddBindings(Bindable<T>* other);
 
+		int Unbind();
+
 	protected:
 
 		/// <summary>
@@ -52,7 +54,7 @@ namespace DataStructure {
 		T defaultValue;
 		bool disabled;
 
-		// Action<int(int)> ValueChanged;
+		// ActionList<int(int)> ValueChanged;
 
 		vector<Bindable<T>*> bindings;
 		

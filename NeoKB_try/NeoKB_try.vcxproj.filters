@@ -390,9 +390,6 @@
     <ClCompile Include="Base\Graphic\Renderer\renderer.cpp">
       <Filter>來源檔案\Game\Graphic\Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="Base\Ruleset\Mod\Mod.cpp">
-      <Filter>來源檔案\Game\Ruleset\Mod</Filter>
-    </ClCompile>
     <ClCompile Include="Base\Scheduler\Event\Event.cpp">
       <Filter>來源檔案\Game\Schedulers\Events</Filter>
     </ClCompile>
@@ -458,9 +455,6 @@
     </ClCompile>
     <ClCompile Include="Base\Sheetmusic\Pattern\PatternGenerator.cpp">
       <Filter>來源檔案\Game\Sheetmusic\Pattern</Filter>
-    </ClCompile>
-    <ClCompile Include="Program.cpp">
-      <Filter>來源檔案</Filter>
     </ClCompile>
     <ClCompile Include="RulesetMeteor\Config\MeteorConfigManager.cpp">
       <Filter>來源檔案\RulesetMeteor\Config</Filter>
@@ -557,12 +551,6 @@
     </ClCompile>
     <ClCompile Include="Base\Scheduler\Event\SystemEvents\StopSystemEvent.cpp">
       <Filter>來源檔案\Game\Schedulers\Events\SystemEvent</Filter>
-    </ClCompile>
-    <ClCompile Include="Framework\Host\GameHost.cpp">
-      <Filter>來源檔案\Framework\Host</Filter>
-    </ClCompile>
-    <ClCompile Include="Util\DataStructure\Action.cpp">
-      <Filter>來源檔案\Util\DataStructure</Filter>
     </ClCompile>
     <ClCompile Include="Framework\Allocation\Hierachal\Cachable.cpp">
       <Filter>來源檔案\Framework\Allocation\Hierachal</Filter>
@@ -675,9 +663,6 @@
     <ClCompile Include="Framework\Audio\AudioCollectionManager.cpp">
       <Filter>來源檔案\Framework\Audio</Filter>
     </ClCompile>
-    <ClCompile Include="Framework\Game.cpp">
-      <Filter>來源檔案\Framework</Filter>
-    </ClCompile>
     <ClCompile Include="Framework\IO\Stores\ResourceStore.cpp">
       <Filter>來源檔案\Framework\IO\Stores</Filter>
     </ClCompile>
@@ -741,14 +726,17 @@
     <ClCompile Include="Base\Scene\Loader.cpp">
       <Filter>來源檔案\Game\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Base\MtoGame.cpp">
-      <Filter>來源檔案\Game</Filter>
-    </ClCompile>
     <ClCompile Include="Framework\Configurations\ConfigManager.cpp">
       <Filter>來源檔案\Framework\Configurations</Filter>
     </ClCompile>
     <ClCompile Include="Framework\Configurations\FrameworkConfigManager.cpp">
       <Filter>來源檔案\Framework\Configurations</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Scene\MeteoScene.cpp">
+      <Filter>來源檔案\Game\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\MeteoGame.cpp">
+      <Filter>來源檔案\Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -883,9 +871,6 @@
     <ClInclude Include="RulesetMeteor\MeteorGame.h">
       <Filter>標頭檔\RulesetMeteor</Filter>
     </ClInclude>
-    <ClInclude Include="Program.h">
-      <Filter>標頭檔</Filter>
-    </ClInclude>
     <ClInclude Include="Base\Scheduler\Event\Effect\Algorithm\MapGenerateAlgorithm.h">
       <Filter>標頭檔\Game\Scheduler\Events\Effects\Algorithms</Filter>
     </ClInclude>
@@ -976,9 +961,6 @@
     <ClInclude Include="Base\Scheduler\Event\SystemEvents\SystemEventHandler.h">
       <Filter>標頭檔\Game\Scheduler\Events\SystemEvents</Filter>
     </ClInclude>
-    <ClInclude Include="Framework\Host\GameHost.h">
-      <Filter>標頭檔\Framework\Host</Filter>
-    </ClInclude>
     <ClInclude Include="Framework\Input\InputManager.h">
       <Filter>標頭檔\Framework\Input</Filter>
     </ClInclude>
@@ -1005,9 +987,6 @@
     </ClInclude>
     <ClInclude Include="Framework\IO\Stores\ResourceStore.h">
       <Filter>標頭檔\Framework\IO\Stores</Filter>
-    </ClInclude>
-    <ClInclude Include="Util\DataStructure\Action.h">
-      <Filter>標頭檔\Util\DataStructure</Filter>
     </ClInclude>
     <ClInclude Include="Util\DataStructure\Bindable.h">
       <Filter>標頭檔\Util\DataStructure</Filter>
@@ -1099,9 +1078,6 @@
     <ClInclude Include="Base\Scene\Play\Playfield.h">
       <Filter>標頭檔\Game\Scene\play</Filter>
     </ClInclude>
-    <ClInclude Include="Base\Scene\Play\Session.h">
-      <Filter>標頭檔\Game\Scene\play</Filter>
-    </ClInclude>
     <ClInclude Include="Base\Scene\Play\TimeController.h">
       <Filter>標頭檔\Game\Scene\play</Filter>
     </ClInclude>
@@ -1152,9 +1128,6 @@
     </ClInclude>
     <ClInclude Include="Framework\Allocation\DependencyContainer.h">
       <Filter>標頭檔\Framework\Allocation</Filter>
-    </ClInclude>
-    <ClInclude Include="Framework\Game.h">
-      <Filter>標頭檔\Framework</Filter>
     </ClInclude>
     <ClInclude Include="Framework\Audio\Sample\SampleManager.h">
       <Filter>標頭檔\Framework\Audio\Sample</Filter>
@@ -1213,12 +1186,6 @@
     <ClInclude Include="Base\Scene\Loader.h">
       <Filter>標頭檔\Game\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Base\MtoGame.h">
-      <Filter>標頭檔\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Base\MtoGameBase.h">
-      <Filter>標頭檔\Game</Filter>
-    </ClInclude>
     <ClInclude Include="Framework\IO\FileSystemInterface.h">
       <Filter>標頭檔\Framework\IO</Filter>
     </ClInclude>
@@ -1233,6 +1200,21 @@
     </ClInclude>
     <ClInclude Include="Framework\Allocation\Update\IUpdatable.h">
       <Filter>標頭檔\Framework\Allocation\Update</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\DataStructure\ActionMap.h">
+      <Filter>標頭檔\Util\DataStructure</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\DataStructure\ActionList.h">
+      <Filter>標頭檔\Util\DataStructure</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Scene\MeteoScene.h">
+      <Filter>標頭檔\Game\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\MeteoGameBase.h">
+      <Filter>標頭檔\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\MeteoGame.h">
+      <Filter>標頭檔\Game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

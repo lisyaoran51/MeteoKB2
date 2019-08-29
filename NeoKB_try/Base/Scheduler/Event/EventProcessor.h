@@ -21,7 +21,7 @@ namespace Events {
 	/// a processor to process one Event including effects, 
 	/// </summary>
 	template<class T>
-	class EventProcessor : private TConstraint<T, Event>
+	class EventProcessor : public Clock, private TConstraint<T, Event>
 	{
 
 

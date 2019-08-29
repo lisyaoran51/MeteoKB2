@@ -5,7 +5,7 @@
 
 #include <vector>
 #include "Peripheral.h"
-#include "../../Util/DataStructure/Action.h"
+#include "../../Util/DataStructure/ActionList.h"
 #include "../Input/InputState.h"
 
 using namespace std;
@@ -31,7 +31,7 @@ namespace IO {
 
 	private:
 
-		Action<int(InputState*)> OnCommand;
+		ActionList<int(InputState*)> OnCommand;
 
 
 	};

@@ -4,6 +4,7 @@
 #include "../../../Framework/Scenes/Scene.h"
 #include "../../../Framework/Timing/SpeedAdjusters/SpeedAdjuster.h"
 #include "../../../Framework/Timing/DecoupledInterpolatingFramedClock.h"
+#include "../MeteoScene.h"
 
 using namespace Framework::Scenes;
 using namespace Framework::Timing::SpeedAdjusters;
@@ -26,7 +27,8 @@ namespace Play {
 	///
 	/// pause container的時鐘是在player裡面指派的，不是pause container自己的
 	/// </summary>
-	class TimeController : public Scene {
+	class TimeController : public MeteoScene {
+
 	public:
 
 		/// <summary>

@@ -5,7 +5,7 @@
 
 #include <vector>
 #include "Peripheral.h"
-#include "../../Util/DataStructure/Action.h"
+#include "../../Util/DataStructure/ActionList.h"
 #include "../Input/InputState.h"
 
 using namespace std;
@@ -37,11 +37,11 @@ namespace IO {
 
 	private:
 
-		Action<int(InputState*)> OnButtonDown;
+		ActionList<int(InputState*)> OnButtonDown;
 
-		Action<int(InputState*)> OnKnobTurn;
+		ActionList<int(InputState*)> OnKnobTurn;
 
-		Action<int(InputState*)> OnSliderMove;
+		ActionList<int(InputState*)> OnSliderMove;
 
 
 	};

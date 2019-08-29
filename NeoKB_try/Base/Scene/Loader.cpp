@@ -10,7 +10,7 @@ int Loader::load()
 	return 0;
 }
 
-Loader::Loader(): RegisterType("Loader"), Scene()
+Loader::Loader(): RegisterType("Loader")
 {
 	registerLoad(bind((int(Loader::*)())&Loader::load, this));
 	isValidForResume = false;
