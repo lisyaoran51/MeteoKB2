@@ -97,6 +97,7 @@ Playfield::Playfield():RegisterType("Playfield")
 int Playfield::Add(EventProcessor<Event> * ep)
 {
 	//scheduler->Add(ep);
+	eventProcessorMaster->Add(ep);
 
 	// 這邊要把Map Algo加進去
 	if (ep->CanCast<EffectMapperInterface>()) {

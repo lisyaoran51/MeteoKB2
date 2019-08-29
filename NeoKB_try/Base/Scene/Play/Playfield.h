@@ -2,11 +2,10 @@
 #define PLAYFIELD_H
 
 
-#include "../../../Framework/Scenes/Scene.h"
 #include "../../Scheduler/Event/EventProcessorMaster.h"
 #include "../../Scheduler/Event/Effect/Algorithm/MapAlgorithm.h"
 #include "../../../Framework/Configurations/FrameworkConfigManager.h"
-#include "../MeteoScene.h"
+#include "../../../Framework/Allocation/Hierachal/Container.h"
 
 
 
@@ -16,6 +15,7 @@ using namespace Base::Schedulers;
 using namespace Base::Schedulers::Events::Effects::Algorithms;
 using namespace Framework::Configurations;
 using namespace Base::Scenes;
+using namespace Framework::Allocation::Hierachal;
 
 
 
@@ -28,7 +28,7 @@ namespace Play {
 	/// So that these objects could be updated on each frame.
 	/// should they be connected in this class????
 	/// </summary>
-	class Playfield: public MeteoScene {
+	class Playfield: public Container {
 
 		int load();
 

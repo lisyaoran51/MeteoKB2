@@ -10,6 +10,7 @@
 #include "Format/SmDecoder.h"
 #include "../Ruleset/Modifiers/Modifier.h"
 #include "../../Util/DataStructure/Bindable.h"
+#include "../../Framework/Audio/Track/Track.h"
 
 
 
@@ -17,6 +18,7 @@ using namespace std;
 using namespace Util::DataStructure;
 using namespace Base::Schedulers::Events;
 using namespace Base::Rulesets::Modifiers;
+using namespace Framework::Audio::Tracks;
 
 
 namespace Base {
@@ -50,6 +52,8 @@ namespace Sheetmusics {
 		bool IsTheSameSm(SmInfo* s);
 
 		Bindable<vector<Modifier*>*>* GetModifiers();
+
+		Track* GetTrack();
 
 	protected:
 

@@ -6,6 +6,9 @@
 #include "../../Sheetmusic/WorkingSheetmusic.h"
 #include "../../../Framework/Configurations/FrameworkConfigManager.h"
 #include "../MeteoScene.h"
+#include "../../../Framework/Timing/DecoupledInterpolatingFramedClock.h"
+#include "../../../Framework/Timing/OffsetFramedClock.h"
+#include "TimeController.h"
 
 
 
@@ -14,6 +17,7 @@ using namespace Base::Sheetmusics;
 using namespace Framework::Configurations;
 using namespace Framework::Scenes;
 using namespace Base::Scenes;
+using namespace Framework::Timing;
 
 
 namespace Base {
@@ -21,6 +25,14 @@ namespace Scenes {
 namespace Play {
 
 	class Player: public MeteoScene {
+
+		AdjustableClock* adjustableClock;
+
+		DecoupledInterpolatingFramedClock* decoupledClock;
+
+		OffsetFramedClock* offsetClock;
+
+		TimeController* timeController;
 
 		SmManager* smManager;
 

@@ -64,6 +64,7 @@ namespace Rulesets {
 			for (int i = 0; i < sm->GetEvents()->size(); i++) {
 
 				EventProcessor<Event>* ep = getEventProcessor(sm->GetEvents()->at(i));
+				
 				playfield->Add(ep);
 			}
 

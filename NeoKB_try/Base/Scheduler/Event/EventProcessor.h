@@ -24,6 +24,9 @@ namespace Events {
 	class EventProcessor : public Clock, private TConstraint<T, Event>
 	{
 
+		Clock* clock;
+
+		bool isAttached = false;
 
 	public:
 
@@ -34,6 +37,14 @@ namespace Events {
 		virtual EventProcessor<T>* RegisterEvent(T* e) {
 			event = e;
 			return this;
+		}
+
+		/// <summary>
+		/// 將這個processor加入master，並且拿到master的clock
+		/// </summary>
+		int Attach(EventProcessorMaster* master) {
+			clock = master->GetClock();
+			isAttached = true;
 		}
 
 		/// <summary>
@@ -50,9 +61,9 @@ namespace Events {
 			if (event->GetLifeType() == EventLifeType::Infinite)
 				return MTO_INFINITE;
 			else if (event->GetLifeType() == EventLifeType::Immediate)
-				return event->GetLifeTime() - currentTime;
+				return event->GetLifeTime() - clock->GetCurrentTime();
 			else
-				return event->GetLifeTime() - currentTime; 
+				return event->GetLifeTime() - clock->GetCurrentTime();
 
 		}
 

@@ -45,6 +45,11 @@ int Drawable::Deactivate()
 	return 0;
 }
 
+bool Drawable::GetIsDrawable()
+{
+	return isDrawable;
+}
+
 int Drawable::SetPositionX(int x)
 {
 	positionX = x;
@@ -160,4 +165,10 @@ Map * Drawable::GetGraph()
 
 
 	return graph;
+}
+
+int Drawable::SetIsDrawable(bool value)
+{
+	isDrawable = value;
+	return 0;
 }

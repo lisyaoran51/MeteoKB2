@@ -109,7 +109,7 @@ bool DecoupledInterpolatingFramedClock::Seek(double position)
 	return decoupledStopwatchClock->Seek(position);
 }
 
-int DecoupledInterpolatingFramedClock::ResetAdjustments()
+int DecoupledInterpolatingFramedClock::ResetSpeedAdjustments()
 {
 	SetRate(1);
 	return 0;

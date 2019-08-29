@@ -16,8 +16,9 @@ namespace Timing {
 	/// On failure to seek, we take over with an internal clock until control can be returned to the actual source.
 	///
 	/// This clock type removes the requirement of having a source set.
+	/// 歌曲結束以後還可以繼續跑的clock，或是可以在歌曲開始前提早開始跑 ex歌曲剛開始就有一個音，就可以從-1秒開始跑
 	/// </summary>
-	class DecoupledInterpolatingFramedClock : public InterpolatingFramedClock, public AdjustableClock {
+	class DecoupledInterpolatingFramedClock : virtual public InterpolatingFramedClock, virtual public AdjustableClock {
 
 	public:
 
@@ -27,6 +28,7 @@ namespace Timing {
 		virtual double GetCurrentTime();
 		virtual int SetRate(double r);
 		virtual double GetRate();
+		virtual int SetIsRunning(bool value);
 		virtual bool GetIsRunning();
 
 		// FrameBasedClock
@@ -39,7 +41,8 @@ namespace Timing {
 		virtual int Start();
 		virtual int Stop();
 		virtual bool Seek(double position);
-		virtual int ResetAdjustments();
+		virtual int ResetSpeedAdjustments();
+		
 
 
 		// this

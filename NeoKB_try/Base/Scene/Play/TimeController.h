@@ -1,14 +1,15 @@
 #ifndef TIME_CONTROLLER_H
 #define TIME_CONTROLLER_H
 
-#include "../../../Framework/Scenes/Scene.h"
+#include "../../../Framework/Allocation/Hierachal/Container.h"
 #include "../../../Framework/Timing/SpeedAdjusters/SpeedAdjuster.h"
 #include "../../../Framework/Timing/DecoupledInterpolatingFramedClock.h"
 #include "../MeteoScene.h"
 
-using namespace Framework::Scenes;
+
 using namespace Framework::Timing::SpeedAdjusters;
 using namespace Framework::Timing;
+using namespace Framework::Allocation::Hierachal;
 
 
 namespace Base {
@@ -27,16 +28,48 @@ namespace Play {
 	///
 	/// pause container的時鐘是在player裡面指派的，不是pause container自己的
 	/// </summary>
-	class TimeController : public MeteoScene {
+	class TimeController : public Container {
+
+
+		int load();
+
+
+		/// <summary>
+		/// 可以跳到歌曲的任何斷落的clock，就是歌曲中的clock，外面包一個額外的時鐘
+		/// </summary>
+		AdjustableClock* audioClock;
+
+		/// <summary>
+		/// 一個與parent獨立的時終，下面接的式遊戲的物件，遊戲根據這個時鐘運行
+		/// </summary>
+		FramedClock* framedClock;
+
+		SpeedAdjuster* speedAdjuster;
+
+		double rate;
+
+		bool isTriggeredSeekingTime;
+		bool isSeekingTime;
+		double targetSeekTime;
+
+		bool isTriggeredPause;
+		bool isPaused;
+
+		bool isTriggeredResume;
+
+		bool isControllable;
+
+		bool isPausable;
+
 
 	public:
 
 		/// <summary>
 		/// pause container的時鐘是在player裡面指派的，不是pause container自己的
 		/// </summary>
-		int SetDecoupledInterpolatingFramedClock(DecoupledInterpolatingFramedClock* dInterpolatingFramedClock);
+		int SetAudioClock(AdjustableClock* dInterpolatingFramedClock);
 
-		int SetAdjustableClock(AdjustableClock* aClock);
+		int SetFramedClock(FramedClock* fClock);
 
 		int SetSpeedAdjuster(SpeedAdjuster* sAdjuster);
 
@@ -63,32 +96,6 @@ namespace Play {
 
 	private:
 
-		int load();
-
-
-		/// <summary>
-		/// 一個與parent獨立的時終，下面接的式遊戲的物件，遊戲根據這個時鐘運行
-		/// </summary>
-		DecoupledInterpolatingFramedClock* controllableClock;
-
-		AdjustableClock* audioClock;
-
-		SpeedAdjuster* speedAdjuster;
-
-		double rate;
-
-		bool isTriggeredSeekingTime;
-		bool isSeekingTime;
-		double targetSeekTime;
-
-		bool isTriggeredPause;
-		bool isPaused;
-
-		bool isTriggeredResume;
-
-		bool isControllable;
-
-		bool isPausable;
 	};
 
 

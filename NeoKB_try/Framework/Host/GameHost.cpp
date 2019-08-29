@@ -134,9 +134,10 @@ int GameHost::bootstrapSceneGraph(Game* game)
 int GameHost::iterateSearchDrawable(ChildAddable * r, vector<Drawable*>* drawables)
 {
 
-	if (dynamic_cast<Drawable*>(r)) {
-		drawables->push_back(dynamic_cast<Drawable*>(r));
-	}
+	if (dynamic_cast<Drawable*>(r)) 
+		if(r->GetIsDrawable())
+			drawables->push_back(dynamic_cast<Drawable*>(r));
+	
 	
 	for (int i = 0; i < r->GetChilds()->size(); i++) {
 		iterateSearchDrawable(r->GetChilds()->at(i), drawables);

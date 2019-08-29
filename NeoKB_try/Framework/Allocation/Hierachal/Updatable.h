@@ -19,6 +19,7 @@ namespace Hierachal {
 	class Updatable : public ChildAddable {
 
 		FrameBasedClock* clock;
+		FrameBasedClock* customClock;
 
 	public:
 

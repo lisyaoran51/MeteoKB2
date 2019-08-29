@@ -2,7 +2,7 @@
 
 #include "BassTrack.h"
 
-using namespace Framework::Audio::Track;
+using namespace Framework::Audio::Tracks;
 
 
 TrackManager::TrackManager(ResourceStore<char*>* rStore)

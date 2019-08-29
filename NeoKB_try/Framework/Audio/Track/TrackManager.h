@@ -11,7 +11,7 @@ using namespace Framework::IO::Stores;
 
 namespace Framework {
 namespace Audio {
-namespace Track {
+namespace Tracks {
 
 	class TrackManager : public AudioCollectionManager<Track> {
 

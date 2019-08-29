@@ -39,15 +39,16 @@ int TimeController::update()
 
 
 
-int TimeController::SetDecoupledInterpolatingFramedClock(DecoupledInterpolatingFramedClock * dInterpolatingFramedClock)
+int TimeController::SetAudioClock(AdjustableClock * dInterpolatingFramedClock)
 {
-	controllableClock = dInterpolatingFramedClock;
+	
+	audioClock = dInterpolatingFramedClock;
 	return 0;
 }
 
-int TimeController::SetAdjustableClock(AdjustableClock * aClock)
+int TimeController::SetFramedClock(FramedClock * fClock)
 {
-	audioClock = aClock;
+	framedClock = fClock;
 	return 0;
 }
 

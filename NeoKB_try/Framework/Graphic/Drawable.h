@@ -37,6 +37,8 @@ namespace Graphic {
 		int Initialize(int w, int h);
 		int Deactivate();
 
+		bool GetIsDrawable();
+
 		int SetPositionX(int x);
 		int SetPositionY(int y);
 		int GetPositionX();
@@ -65,6 +67,11 @@ namespace Graphic {
 		int GetDepth();
 
 		virtual Map* GetGraph();
+
+	protected:
+
+		int SetIsDrawable(bool value);
+
 	};
 
 	enum class Anchor {

@@ -13,6 +13,7 @@
 #include "../../../Framework/Graphic/Drawable.h"
 #include "../../../Util/DataStructure/PeriodMap.h"
 #include "../../../Framework/Allocation/Hierachal/Triggerable.h"
+#include "../../../Framework/Timing/FramedClock.h"
 
 
 using namespace std;
@@ -21,6 +22,7 @@ using namespace Framework::Graphic::Maps;
 using namespace Framework::Graphic::Maps;
 using namespace Framework::Graphic;
 using namespace Framework::Allocation::Hierachal;
+using namespace Framework::Timing;
 
 
 /*
@@ -51,10 +53,9 @@ namespace Events {
 
 		~EventProcessorMaster();
 
-		/// <summary>
-		/// 在遊戲進行中來負責接收集將執行的事件， 
-		/// </summary>
-		int ReceiveEventProcessor(EventProcessor<Event>* ep);
+		int AddStaticEventProcessor(EventProcessor<Event>* sEventProcessor);
+
+		int AddDynamicEventProcessor(EventProcessor<Event>* dEventProcessor);
 
 		/* 改成擺在rulset executor裡
 		/// <summary>
@@ -74,6 +75,8 @@ namespace Events {
 		/// </summary>
 		int Clean();
 
+		
+
 	protected:
 
 		vector<EventProcessor<Event>*> staticEventProcessors;
@@ -86,10 +89,6 @@ namespace Events {
 		PeriodMap<EventProcessor<Event>*>* eventProcessorPeriods;
 
 		int processEvent(MTO_FLOAT elapsedTime);
-
-		int cleanEndedEvent();
-
-		int Elapse(MTO_FLOAT elapsedTime);
 
 		
 
