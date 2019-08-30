@@ -15,8 +15,8 @@
 
 
 using namespace std;
-using namespace Framework::Audio::Sample;
-using namespace Framework::Audio::Track;
+using namespace Framework::Audio::Samples;
+using namespace Framework::Audio::Tracks;
 using namespace Framework::IO::Stores;
 using namespace Framework::Allocation::Hierachal;
 using namespace Framework::Threading;

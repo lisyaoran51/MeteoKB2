@@ -7,10 +7,10 @@ using namespace Util::DataStructure;
 
 
 template<typename T>
-PeriodMap<T>::PeriodMap(float iPoint, float i, function<pair<float, float>(T)> gTimePoint)
+PeriodMap<T>::PeriodMap(float iPoint, float pLength, function<pair<float, float>(T)> gTimePoint)
 {
 	insertionPoint = iPoint;
-	periodLength = i;
+	periodLength = pLength;
 	getTimePoint = gTimePoint;
 }
 

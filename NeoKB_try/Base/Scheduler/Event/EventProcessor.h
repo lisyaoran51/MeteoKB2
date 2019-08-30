@@ -7,15 +7,22 @@
 #include "../../../Util/TemplateConstraint.h"
 #include "../../../Util/MtoType.h"
 #include "Event.h"
+#include "EventProcessorMaster.h"
+#include "../../../Framework/Timing/Clock.h"
 
 
 using namespace std;
 using namespace Util;
+using namespace Framework::Timing;
 
 
 namespace Base {
 namespace Schedulers {
 namespace Events {
+
+	class EventProcessorMaster;
+
+	enum class EventProcessorLifeType;
 
 	/// <summary>
 	/// a processor to process one Event including effects, 
@@ -47,6 +54,29 @@ namespace Events {
 			isAttached = true;
 		}
 
+		/* clock */
+
+		virtual double GetCurrentTime() {
+			return clock->GetCurrentTime();
+		}
+
+		virtual int SetRate(double r) {
+			throw logic_error("int EventProcessor::SetRate(double) : no permission to set rate.");
+			return 0;
+		}
+		virtual double GetRate() {
+			return clock->GetRate();
+		}
+		virtual int SetIsRunning(bool value) {
+			throw logic_error("int EventProcessor::SetRate(double) : no permission to set IsRunning.");
+			return 0;
+		}
+		virtual bool GetIsRunning() {
+			return clock->GetIsRunning();
+		}
+
+		/* clock */
+
 		/// <summary>
 		/// the work to do with this Event, such as stop the game, slow down...
 		/// 結果應該是用elapse來跑，不試用process??
@@ -60,11 +90,38 @@ namespace Events {
 
 			if (event->GetLifeType() == EventLifeType::Infinite)
 				return MTO_INFINITE;
-			else if (event->GetLifeType() == EventLifeType::Immediate)
+			else if (event->GetLifeType() == EventLifeType::Timed)
 				return event->GetLifeTime() - clock->GetCurrentTime();
 			else
 				return event->GetLifeTime() - clock->GetCurrentTime();
 
+		}
+
+		EventProcessorLifeType GetProcessorLifeType() {
+			return lifeType;
+		}
+
+		bool GetIsProcessed() {
+			return isProcessed;
+		}
+
+		/// <summary>
+		/// 決定這個proccessor是否要刪掉。不同的processor應該要有不同的刪除時間，有的效果時間長，有的效果時間短。
+		/// 暫時先用延長5秒當作刪除時間，不過每個rpocessor都要自訂一個山除時間才對
+		/// </summary>
+		virtual MTO_FLOAT GetProcessorTimeLeft() {
+
+			if (lifeType == EventProcessorLifeType::Infinite)
+				return MTO_INFINITE;
+			else if (lifeType == EventProcessorLifeType::Timed)
+				return event->GetLifeTime() - clock->GetCurrentTime() + 5.0;
+			else
+				return event->GetLifeTime() - clock->GetCurrentTime() + 5.0;
+
+		}
+
+		Event* GetEvent() {
+			return event;
 		}
 
 		// 一定要每次都override!!
@@ -110,9 +167,20 @@ namespace Events {
 
 		T* event;
 
+		EventProcessorLifeType lifeType;
+
+		/// <summary>
+		/// 在EventProcessorLifeType :: immediate事件才會使用
+		/// </summary>
+		bool isProcessed = false;
+
 	};
 
-
+	enum class EventProcessorLifeType {
+		Timed,
+		Immediate,
+		Infinite
+	};
 
 }}}
 

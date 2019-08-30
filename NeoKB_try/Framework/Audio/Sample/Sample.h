@@ -7,7 +7,7 @@
 
 namespace Framework {
 namespace Audio {
-namespace Sample {
+namespace Samples {
 
 	class Sample : public AudioComponent {
 

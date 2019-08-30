@@ -49,7 +49,7 @@ int FallMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper<FallEffect
 
 	//LOG(LogLevel::Depricated) << "FallMapGenerateAlgorithm::ImplementGenerate() : Generate Effect [" << em->GetStartTime() << "] on [" << em->GetCurrentTime() << "].";
 
-	MTO_FLOAT currentTime = 0;// em->GetCurrentTime();
+	MTO_FLOAT currentTime = em->GetCurrentTime();// em->GetCurrentTime();
 	// MTO_FLOAT lifeTime = em->GetLifeTime();
 	MTO_FLOAT speed = em->GetSpeed();
 

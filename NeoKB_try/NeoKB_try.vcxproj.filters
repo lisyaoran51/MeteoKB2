@@ -738,6 +738,12 @@
     <ClCompile Include="Base\MeteoGame.cpp">
       <Filter>來源檔案\Game</Filter>
     </ClCompile>
+    <ClCompile Include="Framework\Host\GameHost.cpp">
+      <Filter>來源檔案\Framework\Host</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Game.cpp">
+      <Filter>來源檔案\Framework</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="DailyLog.txt">
@@ -1174,9 +1180,6 @@
     <ClInclude Include="Framework\Audio\Sample\BassSampleChannel.h">
       <Filter>標頭檔\Framework\Audio\Sample</Filter>
     </ClInclude>
-    <ClInclude Include="Framework\Audio\AudioManager.h">
-      <Filter>標頭檔\Framework\Devices</Filter>
-    </ClInclude>
     <ClInclude Include="Framework\Audio\Track\BassTrack.h">
       <Filter>標頭檔\Framework\Audio\Track</Filter>
     </ClInclude>
@@ -1215,6 +1218,15 @@
     </ClInclude>
     <ClInclude Include="Base\MeteoGame.h">
       <Filter>標頭檔\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Audio\AudioManager.h">
+      <Filter>標頭檔\Framework\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Host\GameHost.h">
+      <Filter>標頭檔\Framework\Host</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Game.h">
+      <Filter>標頭檔\Framework</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

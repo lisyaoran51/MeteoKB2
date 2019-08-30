@@ -11,7 +11,7 @@ using namespace Framework::IO::Stores;
 
 namespace Framework {
 namespace Audio {
-namespace Sample {
+namespace Samples {
 
 	class SampleManager : public AudioCollectionManager<SampleChannel> {
 

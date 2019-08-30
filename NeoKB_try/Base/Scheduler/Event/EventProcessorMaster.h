@@ -4,6 +4,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include <mutex>
 #include "../../../Util/TemplateConstraint.h"
 #include "../../../Util/MtoType.h"
 #include "../../../Util/InstanceCreator.h"
@@ -25,6 +26,7 @@ using namespace Framework::Allocation::Hierachal;
 using namespace Framework::Timing;
 
 
+
 /*
 * instantiate a class with its name in string
 * https://stackoverflow.com/questions/582331/is-there-a-way-to-instantiate-objects-from-a-string-holding-their-class-name
@@ -34,6 +36,9 @@ using namespace Framework::Timing;
 namespace Base {
 namespace Schedulers {
 namespace Events {
+
+	template<class T>
+	class EventProcessor;
 
 	/// <summary>
 	/// a processor center to process every Event including effects, 
@@ -46,6 +51,8 @@ namespace Events {
 		int load();
 
 		float visibleTimeRange = 1.0f;
+
+		mutex processorsMutex;
 
 	public:
 

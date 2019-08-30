@@ -8,6 +8,7 @@ using namespace Framework::IO;
 namespace Framework {
 namespace Devices {
 
+
 	class Device {
 
 	public:
@@ -18,6 +19,9 @@ namespace Devices {
 
 		virtual int HandlePeripheralRegister(Peripheral* peripheral) = 0;
 
+	protected:
+
+		Peripheral* matchedPeripheral;
 
 	};
 

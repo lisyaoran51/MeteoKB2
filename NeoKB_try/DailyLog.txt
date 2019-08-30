@@ -1,520 +1,34 @@
+=================代辦事項===================
+給同樂規格
+給法律顧問社細節
+寫新創補助
+找影片團隊
+給derek規格
+打樣燈條
+列印琴鍵
+給twsdy手機架的圖
+做市調
+============================================
+
+https://e-mailky.github.io/2016-10-13-linux_irq
+https://github.com/s-matyukevich/raspberry-pi-os/blob/master/docs/lesson03/linux/timer.md
+https://www.cnblogs.com/arnoldlu/p/7078223.html
+https://victoryuembeddedlinux.blogspot.com/2012/03/
+https://blog.csdn.net/yinjian1013/article/details/78476072
+
+dt
+https://github.com/raspberrypi/linux/issues/1473
+
+
+fpc 7.5元/條 燈條要過UL認證
+燈泡0.25元/顆，20顆5元
+端子0.5元/條
+smt2元/條
+
+燈條ㄧ條15元 60條900元
+
+燈板200元，共1100元
 
-
-
-5/16
-	把資料夾整理好，寫了file reader和 decoder
-
-5/17
-	在template上加constraint
-	http://www.stroustrup.com/bs_faq2.html#constraints
-
-	vector
-	http://mropengate.blogspot.tw/2015/07/cc-vector-stl.htm
-	
-	寫了Event effect，現在要寫Scheduler
-
-	寫了Scheduler、Event、Event processor，現在要寫lightMap
-
-5/19
-	cachable -> loadable -> child_addable
-	找到mutual ref的解決方法
-	http://squall.cs.ntou.edu.tw/cpp/1042/labtest/test2/MutualReferences.html
-
-5/20
-	找步道方法把不同input的load()串成一串vector
-	https://stackoverflow.com/questions/16262338/get-Base-class-for-a-type-in-class-hierarchy
-	找到了，但不知道怎麼取父類別的類別出來
-	卡在registerPrivateLoader那
-
-5/23 
-	自動註冊類別
-	https://stackoverflow.com/questions/10332725/how-to-automatically-register-a-class-on-creation
-	最後loadable決定手動註冊每一個privateLoad()，c++就是麻煩
-
-	寫完一堆Hierachal，望計原本寫到哪
-
-	把所有基本的class都建好了，接下來可以開始寫讀譜到顯示的pipeline，寫完以後可以再開始寫鍵力遊戲場景的物鍵階層
-
-5/24
-	https://stackoverflow.com/questions/9477581/force-all-classes-to-implement-override-a-pure-virtual-method-in-multi-level
-	強制每個繼承的class附寫
-
-	回去研究舊板程式從decode到建立Note的過程，首先會在decode時用hit object parser去讀sm每一行hit object的內容，
-	然後建成Note或Hold note回傳進去list<hit object>裡，等到遊戲開始時，Ruleset container會呼叫Sheetmusic converter，
-	去把hit object轉換成他原本的形態，轉換的方法是呼叫一個pattern generator，pattern generator去根據hit object內有哪些功能
-	來建立新的note 或 holdnote。
-
-	每個Ruleset都有一個Sheetmusic converter，但是底下又會有一群pattern generator，是因為不同的樂譜會需要不同的pattern generator
-	例如是osu的樂譜，放到mania舊需要使用一套不同的pattern generator
-
-5/25
-	virutal private的好處，可以讓子類去修改父類，但又不能值接call父類
-	https://stackoverflow.com/questions/2170688/private-virtual-method-in-c
-
-	註冊privateLoad的方法
-	registerPrivateLoader("Loadable", privateLoad);
-	從今開始都打中文註解
-
-	在osu裡get visual representation是在Ruleset container裡面，這邊我擺在process master裡，遊戲進行中才會去建立visual representation
-	這樣好像比較不好，應該先在Ruleset executor建好擺在Scheduler裡？
-
-	寫到Ruleset executor等set playfield。
-
-	待辦：
-	1. 把所有命名方法改成C#風格
-	2. 繼續寫完Ruleset executor，然後延pipeline寫下去
-
-	幾乎寫完event proc master了，下次打開之前先把所有檔案改名
-
-5/26
-	Ruleset executor會註冊Updater的執行順序，應該是：
-	1. lightMap reset
-	2. scheduler 
-	3. event master
-	4. renderer
-
-	再effect mapper裡面擺了兩個algo，用策略來把功能放進去。
-	lightMap 和 effect mapper寫完，可以寫renderer
-
-	renderer很難寫，因為太容易變換，每換一次硬體就換要一個renderer，要想辦法用最簡單的方法抽換
-	應該要拿decoder的方法
-
-5/27
-	寫了很多util，剩下的東西不多了，可以去實作現在的Ruleset了(硬體相關的東西應該要找地方寫)
-
-5/29
-	旺季之前要在哪裏get visual representation，其實擺在loadEventToPlayfield裡，的getEventProcessor，會把event轉成processor
-	開始寫meteor ruleset相關的程式
-
-5/30
-	要不要在meteor ruleset executor的get processor把map algo加進去?
-	map algo應該由誰負責製造? (config中的一部分?)
-	應該是meteor ruleset executor先抓出來所有需要的map algo，丟在一個table裡面
-	什麼時候會知道哪個effect式對哪個algo?
-	###
-	最一開始要知道所有的effect要對哪個algo，先在meteor ruleset executor的playfield load時，把會用到的algo建好，
-	然後cache起來(6/1想到不能cache吧！)，然後在meteor playfield，每個processor加進來時就把algo放進去processor裡。
-	###
-	應該寫在base裡
-
-6/1
-	把metero setting寫好，以後playfield就直接讀setting，就可以拿到每個map algo。
-	不對，應該是ruleset executor會把需要的algo建好，然後在playfield load的時候跟著event一起load進去playfield裡 
-
-	map algo的問題解決了，現在要來重新順一變整個遊戲的流程：
-
-	1. session裡面先cache一些遊戲設定
-
-	2. Main裡面new一個player，player把session資料load進來(樂譜)
-
-	3. player會把session裡的樂譜和規則拿出來，用規則和樂譜去建立一個ruleset executor，
-
-
-
-
-
-
-	functional的punction pointer方法
-	* https://kheresy.wordpress.com/2010/11/12/function_object_tr1/
-
-6/7
-	今天決定重投把code補完，現在補到map
-	
-	functional裡面的bind不能對overloading問題
-	https://stackoverflow.com/questions/4159487/stdbind-overload-resolution
-
-	從上到下一個一個寫完，現在寫到event processor master
-	要把has name拉出來
-
-6/10
-	把event processor轉換成effect mapper，這個動再擺在playfield 的add裡面，然後把map加進去
-
-6/11	
-	到efect mapper
-	
-	寫sort的方法：
-	https://stackoverflow.com/questions/2758080/how-to-sort-an-stl-vector
-
-	寫到sheet music manager
-
-6/12
-	寫到sm manager的import to storage
-
-6/13
-	拿到資料夾下所有檔案的方法
-	https://stackoverflow.com/questions/306533/how-do-i-get-a-list-of-files-in-a-directory-in-c
-	看linux那段
-	https://stackoverflow.com/questions/612097/how-can-i-get-the-list-of-files-in-a-directory-using-c-or-c
-	寫到file reader要找資料夾下所有檔案，要用c來寫，先去pi上測試看看
-
-	以經在neoKB.cpp裡改好，應該直接傳到pi上compile就知道
-
-6/14
-	側出來的確可以用
-
-	查是否為子類別
-	https://stackoverflow.com/questions/12963294/check-if-the-type-of-an-object-is-inherited-from-a-specific-class
-
-	
-	取得差距時間
-	http://zh.cppreference.com/w/cpp/chrono/system_clock/now
-
-	寫完base 現在開始從player看遊戲怎麼開啟，然後把meteor那邊補起來，補到meteor ruleset executor
-
-6/15
-	寫到meteor的create sm converter那
-	要沿著ruleset executor的load那寫下去
-
-6/19
-	寫到meteor pattern generator的generate
-
-6/19
-	寫完meteor pattern generator的generate，要從ruleset executor繼續寫下去
-
-6/20
-	overload function pointer設定有兩種方法
-	1. 
-	dddd.registerload(bind(static_cast<int(derived::*)(void)>(&derived::aaa), &dddd));
-	2.
-	dddd.registerload(bind((int(derived::*)())&derived::aaa, dddd));
-	兩個都可以
-
-	謝到meteor playfield 的load，遇到get的時候回傳值無法判斷有沒有這個map的問題
-
-6/21
-	把ruleset executor的load順完
-	現在要寫把scheduler...加入Updater裡，這些寫在playfield裡
-	要寫他們的load
-
-6/22
-	寫buffermap的東西(render)
-
-6/23
-	開始寫lightMap algo
-	要改speed在effect裡
-
-6/24
-	int最大直2147483647
-	2147483647 / 8 = 268435456
-
-	check overflow
-	https://stackoverflow.com/questions/199333/how-to-detect-integer-overflow?page=1&tab=votes#tab-top
-	
-	MeteorPatternGenerator 的47行
-
-6/28
-	解不完的circular dependency
-
-6/30
-	childaddable的建構子和registerload都要檢查一次
-	meteor ruleset executor的get processor那邊要寫
-	effect mapper裡面都還沒寫
-
-7/8
-	WS2812裡 陣列第一個再din，陣列最後一個再dout
-
-	   |
-	   |
-	 ^ |
-	 | |
-	   |
-	   Ｌ_____________
-
-	         -->
-
-	  Dout	Dout
-	   o	 o
-	   o	 o
-	   o	 o
-	   o	Din
-	   o	
-	   o
-	  Din
-
-
-	debug level:
-	https://stackoverflow.com/questions/6168107/how-to-implement-a-good-debug-logging-feature-in-a-project
-
-	現在再想辦法把/working sm擺進去遊戲裡讓ruleset executor讀，應該是player再load的時候去讀已經cache的東西裡面的working sm
-	應該是sm manager?
-
-7/9
-	working sm是一開始就存在session裡
-
-	用成員的函數擺進function裡
-	https://zh.cppreference.com/w/cpp/utility/functional/function
-
-	先學會make file ，之後再把剩下的程式補完，巷是instance creator
-	https://blog.jaycetyle.com/2015/01/linux-gcc-makefile-2/
-
-7/10
-	 * 切字串的方法
-	 * https://blog.csdn.net/Vincentlmeng/article/details/73201188
-	 * https://www.cnblogs.com/MikeZhang/archive/2012/03/24/MySplitFunCPP.html
-
-	 再寫decoder
-
-7/11
-	要寫initializer，但是卡在instance creator沒辦法註冊，要找正確寫法，很難查
-	int RegisterType(string typeName) {
-		creators[typeName] = bind(static_cast<base(InstanceCreator::*)()>(&InstanceCreator::create<T>), this);
-
-		return 0;
-	}
-
-	解決，結果不要Static cast就好
-	creators[typeName] = bind(&InstanceCreator::create<T>, this);
-
-7/12
-	make file 多個資料夾問題
-	https://blog.csdn.net/luckywang1103/article/details/42061971
-
-7/13
-	makefile基本技巧
-	http://hsian-studio.blogspot.com/2008/09/makefile_08.html
-
-	include多個路競
-	https://stackoverflow.com/questions/4134764/how-to-define-several-include-path-in-makefile
-
-	make 到一半 meteor ruleset.o跑不出來
-
-7/15
-	最後link不出來，好像是因為template不可以放在cpp?
-	http://www.cplusplus.com/forum/beginner/143965/
-
-	config那邊不可以寫判斷型態再回，compile不會過
-
-7/17
-	互相參考的解法
-	http://www.cplusplus.com/forum/general/19494/
-
-	無法cast到child class的問題
-	https://stackoverflow.com/questions/15114093/getting-source-type-is-not-polymorphic-when-trying-to-use-dynamic-cast
-
-	downcast到virtual class的方法
-	https://stackoverflow.com/questions/3747066/c-cannot-convert-from-base-a-to-derived-type-b-via-virtual-base-a
-
-7/21
-	不知道為什麼event processor life time從-1開始
-	
-	動態配置二微陣列
-	http://mropengate.blogspot.com/2015/12/cc-dynamic-2d-arrays-in-c.html
-
-	zero audio
-	https://learn.adafruit.com/introducing-the-raspberry-pi-zero/audio-outputs
-	https://www.youtube.com/watch?v=3pXB90IDNoY
-	http://shallowsky.com/blog/hardware/pi-zero-audio.html
-	
-	最後用的方法
-	https://www.raspberrypi.org/blog/tinkernut-diy-pi-zero-audio/
-	
-7/30
-	pulse audio 多個音源
-	https://superuser.com/questions/461405/why-cant-i-play-audio-from-two-or-more-sources
-
-8/8
-	多音源 正解
-	https://stackoverflow.com/questions/14398573/alsa-api-how-to-play-two-wave-files-simultaneously
-	
-8/11
-	弄出鋼琴
-	
-8/13
-	alsa流程
-	https://wenku.baidu.com/view/29edc08a680203d8ce2f2408.html
-	
-8/14
-	wav格式
-	https://blog.csdn.net/XiaoXiaoPengBo/article/details/51900776
-	wav讀取
-	https://github.com/olleolleolle/wav2c/blob/master/wavdata.c
-	
-	lock
-	https://kheresy.wordpress.com/2012/07/11/multi-thread-programming-in-c-thread-p2/
-	http://www.bogotobogo.com/cplusplus/C11/7_C11_Thread_Sharing_Memory.php
-	
-	wav header讀取
-	https://stackoverflow.com/questions/27791694/alsa-application-to-read-and-play-a-wav-file-on-raspberry-pi
-	
-8/19
-	沒辦法傳Spi實，要開/boot/cmdline.txt	加spidev.bufsiz=32768
-	
-8/29
-	asound斷續播會突然聲音不鍵
-	
-	wav data
-	https://stackoverflow.com/questions/13039846/what-do-the-bytes-in-a-wav-file-represent
-	
-	大小排
-	http://www.prudentman.idv.tw/2007/11/big-endianlittle-endian.html
-	
-	overflow
-	https://msdn.microsoft.com/zh-tw/library/296az74e.aspx
-	
-	把播放佣thread會斷掉，回傳-77 frame，
-	
-9/1
-	pulseaudio損壞
-	https://blog.csdn.net/sy373466062/article/details/53991413
-	
-	開paplay之前要先用 pulseaudio -D --system 打開四幅
-	
-	無法播放時要去改system.pa
-	https://github.com/openwrt/packages/issues/1116
-	加入 load-module module-native-protocol-unix auth-group=pulse-access
-	和 load-module module-alsa-sink device=hw:0
-	
-9/2
-	安裝bcm2835.h
-	https://gist.github.com/annem/3183536
-	---
-	wget http://www.airspayce.com/mikem/bcm2835/bcm2835-1.50.tar.gz;
-	tar xvfz bcm2835-1.50.tar.gz;
-	cd bcm2835-1.50;
-	./configure;
-	make;
-	sudo make install
-	---
-	
-	root無法播放pulse audio，要設定root在群組中
-	https://unix.stackexchange.com/questions/338687/pulseaudio-as-system-wide-systemd-service
-	load-module module-native-protocol-unix auth-anonymous=1
-	
-	pulseaudio程式
-	https://gavv.github.io/blog/pulseaudio-under-the-hood/
-	
-	要先安裝lib pulse
-	sudo apt install libpulse-dev
-	
-	paplay
-	http://maemo.org/api_refs/5.0/5.0-final/pulseaudio/paplay_8c-example.html
-	
-9/3
-	卡再compile paplay_8c，GETTEXT_PACKAGE未定義
-	
-9/4
-	一些define的東西，這些東西要看configure之後出來的config.h
-	沒有的話可以自己寫再code裡
-	
-	看mainloop能不能快一點
-	
-9/5
-	再pa_mainloop_iterate進行的時候，不能夠用pipe，會segment fault
-	
-9/6
-	不能用thread，用share memory
-	(為什麼不能用thread?)
-	https://blog.csdn.net/u012349696/article/details/51525910
-	http://fecbob.pixnet.net/blog/post/42774184-linux-ipc%E2%80%94%E2%80%94shared-memory
-	
-9/12
-	pwm音效的設定
-	dtoverlay=pwm-2chan,pin=18,func=2,pin2=13,func2=4
-
-9/13
-	為了把target line加入，鍵力一個新Event叫game event，pattern generator再把game start event轉出target line
-
-	卡再register effect to mapper的地方，target line不行
-
-9/14
-	再 Scheduler::Elapse裡面先暫時寫一段把比0小的事件刪掉的扣
-	
-	74hc595會一直抓到錯的輸入，可以的狀況是：
-	
-																bcm2835_gpio_write(CE_PIN, LOW);
-																for(int i = 7; i >= 0; i--){
-																	if(i == registerNumber){
-																		for( int j = 7; j >= 0; j--){
-																			bcm2835_gpio_write(DI_PIN, j == highBit ? HIGH : LOW);
-																			bcm2835_gpio_write(CL_PIN, LOW);
-																			bcm2835_gpio_write(CL_PIN, HIGH);
-																		}
-																	}
-																	else{
-																		for( int j = 0; j < 8; j++){
-																			bcm2835_gpio_write(DI_PIN, LOW);
-																			bcm2835_gpio_write(CL_PIN, LOW);
-																			bcm2835_gpio_write(CL_PIN, HIGH);
-																		}
-																	}
-																}
-																bcm2835_gpio_write(CE_PIN, HIGH);
-																usleep(100);
-																if(bcm2835_gpio_lev(INPUT_PIN) == HIGH)
-																	return true;
-	
-	如果在播放的thread裡印出字串，就會抓到錯的輸入，例如
-	printf("Catch! flag: %d, key: %d\n", flag, pitch-24);
-	
-9/15
-	https://www.alsa-project.org/alsa-doc/alsa-lib/_2test_2pcm_8c-example.html
-	
-9/16
-	underrun 解決
-	https://www.linuxquestions.org/questions/linux-software-2/alsa-buffer-underrun-error-548045/
-	寫出來了但還是有delay
-	
-9/17
-	psm_wait
-	http://equalarea.com/paul/alsa-audio.html
-
-	pause
-	https://bbs.csdn.net/topics/340188576
-	
-	test return
-	https://github.com/FredYeye/FRES/blob/1b2346357f646c40447d6ca977906a4e8f7b13f1/src/alsa.cpp
-	
-	busybox
-	http://descent-incoming.blogspot.com/2015/12/raspberry-pi-2-linux.html
-
-9/28
-	sheetmusic convertet沒有辦法載入設定，而他的建立者smconverter又還沒有讀完所有設定，就會先建立初sm converter。
-	
-	解決方法：把smconverter的所有工做分割成幾個子工作，各設計一個像pattern generator的東西去跑他，然後擺進去sm converter裡面。
-
-	暫時解法：先把讀到的資料塞到pattern generator裡面，先叫pattern generator來做
-
-10/3
-	計易遊戲模式
-	
-	
-	
-1/31
-	看osu
-	引琴有host game root三個角色，host下有game和root
-	
-	opengl流程 https://jackraken.github.io/2014/10/15/9-openGLtutorial1-drawingTriangle/
-	
-	大概看完framework，階下來要看音效和藍芽
-	
-	
-2/11 
-	supertuxlib加入D:\school\新創\程式\supertux\external\SDL_ttf
-	VS不認中文目錄
-	https://blog.csdn.net/W_SX12553/article/details/8504668
-	
-	
-2/12
-	把SDL_ttf\lib\SDL2_ttf.lib從supertux2的linker input裡面拿出來
-	把D:\Users\TsaiJiaYu\documents\supertux\build\SDL_ttf\include\SDL2從c/c++ 的include拿出來
-	
-	重新用win64建所有專案
-	把裡面的external library全部卸載，用自己build的library來放，最後build成宮，再把dll放進去
-	
-	supertux是用openal，適合遊戲
-	其他的音效系統有mini al、libsoundio、bass都可以用
-	
-2/13
-	練習 http://people.csail.mit.edu/albert/bluez-intro/ 的程式
-	要裝 libbluetooth         apt-get install libbluetooth-dev
-	
-	gcc -o simplescan simplescan.c -lbluetooth
-	g++ -o rfcomm-server rfcomm-server.c -lbluetooth -fpermissive
-	
-	hciconfig 查自己藍芽位置
-	
-	試了 apt-get update upgrade 重安裝bluez都沒辦法解決host is down
-	
 
 3/28 
 	1. 研究uart2
@@ -1175,4 +689,178 @@ tools/btgatt-server -i hci0 -s low -t public -r -v
 	
 	看起來是pause container再pause時，會把FramedOffsetClock的process source clock關掉，所以他的source:"DecoupleableInterpolatingFramedClock"就不會跑
 	所以FramedOffsetClock再跑的時候，拿到的時間都是已經停住的時間，child們也就都拿不到新的時間。
+	
+6/28
+	之後clock計得要寫解構子
+	
+	change source時會把多的source clock給memory leak
+	
+	clock寫完了 hierachal寫完了
+	
+	intro轉場要寫，要找出來osu是怎麼push轉場的，是draw frame找draw root來一個一個畫，draw root是由children轉換成draw node再串起來擺入buffer
+	我們的畫面不用那麼多塗層，應該就不用時做這個功能了
+	另外要不要重寫一個dependency container取代cachable'
+	
+6/29
+	看不懂，轉廠自己映寫，不要看osu
+	
+	在有圖片的東西裡面，計成drawable，用draw thread去每個child抓drawable，拿map來複製
+	
+7/2
+	要把playfield改成用drawable來畫圖，然後scheduler要看看要步要重寫
+	scheduler應該步需要再用了，因為要改成可以調整歌曲進度，鎖以event要直接丟到master裡面，步用給scheduler排順序
+	
+	drawframe寫了，步太知道要寫什麼
+	playfield裡面要改很多，scheduler拿掉，event process master要分interval組別，effect mapper應該是在draw frame才畫圖，步是在update frame畫圖
+	
+	準備寫main interface，已經改好mapper那些了
+	
+7/4
+	寫好time controller了，但是decoupled clock裡面應該還有問題，還沒去改
+	
+	下次應該要來把input那段寫完
+	
+7/5
+	寫到input manager一半，接下來要寫藍芽input
+	
+7/8 
+	藍芽沒什麼好寫的，來寫input thread，要先把main interface寫完
+	
+7/10
+	main interface插一些沒寫完
+	不改dependenct container的話，架構一直背影響，現在main interface就沒辦法去拿裝置
+	
+7/14
+	在host的bootstrapSceneGraph裡面有root.Load(SceneGraphClock, Dependencies);，會把在host裡面的Dependencies擺進去
+	把cachable改成用Dependencies了，遊戲開始的時候要自己把clock和dependencies擺進去，然後async來讀取內容
+	
+	問題是到時候要刪掉child實，要怎麼把cache拿出來
+	osu在remove的時候會把child拿掉，但是不會去動dependencies
+	不對，他是完全不會自動去cache東西，只有主動去呼叫cache實才會把資源放進去，child只是用來抓parent的dependencies，parent和child通通不會出現在cache裡
+	
+7/15
+	不知道還要寫什麼，先來寫handle key down，寫到一半
+	
+	
+7/16
+	on key down基本寫好，上面的要在自己寫反應
+	
+7/17
+	現在要寫game，要搞清楚game試用來幹嘛的
+	看起癌game只是用來擺音樂和資源的，像是字體、shader、圖片
+	game裡面的audio manager和resource要補完
+	
+7/21
+	繼續看audio manager
+	如果audio component不用update的話，其實也沒有用
+	
+	track可以seek sample不能seek
+	
+7/22
+	game的load是在game host的bootstrapSceneGraph時，會把game加到root的child，嘉進去的時候就會load
+	load的時候才會去抓dependency，是drawable負責抓，鎖已到game的時候就已經抓到game host的dependency了
+	
+7/23
+	他所有resource store都加入Resources進去，是因為在resources裡面加了一個DllResourceStore(MainResourceFile)，這個store負責把程式路徑抓出來，讓所有resource store都可以抓到程式路靜下的東西
+	
+	看intro要怎麼開始
+	他好像是直接load loader的clock和dependencies，但是不會變成他的child
+	
+	從intro到menu到songselect到playerloader到player，通通沒有add child，是用load component，player之後才有child
+	
+	錯了，是每個screen都有一個child叫座childModeContainer，在push的時候會把childModeContainer給add child，所以會變成childModeContainer的child
+	
+	我應該設計成 push時就把screen給變成child
+	play song select時會直接把player給push到child，跳過player loader
+	感覺可以直接跳過player loader，因為那個試過場而已
+	
+7/24
+	寫scene發現要座delay scheduler比較好寫
+	寫scheduler到一半
+	
+7/25
+	scheduler寫完，回去寫intro
+	
+7/26
+	test.c還沒compile好
+	
+7/29
+	g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../tlc5940-raspberry/wiringPi.o -I../tlc5940-raspberry -Ipthread -o test
+
+g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../tlc5940-raspberry/wiringPi.o ../tlc5940-raspberry/softPwm.o ../tlc5940-raspberry/softTone.o -I../tlc5940-raspberry -Ipthread -o test
+
+g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../tlc5940-raspberry/wiringPi.o ../tlc5940-raspberry/softPwm.o ../tlc5940-raspberry/softTone.o ../tlc5940-raspberry/piHiPri.o -I../tlc5940-raspberry -pthread -o test
+
+ g++ main.cpp -c -I../
+
+ https://web.archive.org/web/20150824204120if_/https://tlc5940arduino.googlecode.com/svn/wiki/images/breadboard-arduino-tlc5940.png
+ https://playground.arduino.cc/Learning/TLC5940/
+ 這樣接會動
+ 
+7/30
+	vprg要high，步然資料會被洗掉
+	
+7/31
+	gpclk用法
+	https://github.com/Guzunty/Pi/blob/master/src/gzlib/src/gz_clk.c
+	http://abyz.me.uk/rpi/pigpio/examples.html#Misc_code
+	gpclk無法操控，改天再實驗
+	
+8/1
+	從intro到player寫好了
+	之後可以來寫藍芽那段，還不知道怎麼寫
+	
+8/9
+	debounce
+	https://www.allaboutcircuits.com/technical-articles/switch-bounce-how-to-deal-with-it/
+	
+8/21
+	回來把播放音樂寫完
+	
+8/22
+	寫到bass sample channel
+	
+	Action應該改成map和vector兩種
+	
+	把host到intro串起來了，接下來剩一大堆之前懶得寫完的細節，但是架構應該都好了
+	
+8/23
+	把錯誤解一解，audio manager的樣板要改
+	
+8/24
+	EventProcessorMaster好像也要大改
+	
+8/25
+	現在不用renderer，而是由drawthread去抓每一個物件，然後畫到圖上，所以所有map algo和playfield都要改
+	
+	時間改存在clock裡，所以所有Event都要改
+	
+8/28
+	template必須寫在header裡，不能寫在cpp裡，所以action改成只有.h
+	
+	原本規則都是擺在session裡，以後要改成從別的地方拿，向player等
+	
+
+8/29
+	規則和譜改由meteo scene每次都從cache裡面抓game的規則和譜，然後bind起來
+	
+	應該是每一個schedulable全部都有clock，clock匯在load的時候從cache裡面抓到，也可以在其他時間用Set Clock來更改他的clock成custom clock
+	整個遊戲最原始的clock是update thread的clock，匯在host裡面把root給load進去這個clock，下面所有child就都會拿到這個clock
+	
+	我們的clock擺在updateable裡
+	
+	寫到要怎麼把event processor擺到period map裡面
+	
+8/30
+	把processor master的update寫好，會把dynamic event自動刪除
+	
+	只有player是scene，下面都是container
+	
+	ruleset executor:load -> ruleset executor:playfield load -> playfield:add -> event processor master:add
+	在event processor master:add的時候，就會把event processor加入period map裡
+	
+	畫圖是統一由host的draw去event processor master那get graph
+	
+	
+	audio manager和resource store怎麼去處理音樂，還要寫
 	

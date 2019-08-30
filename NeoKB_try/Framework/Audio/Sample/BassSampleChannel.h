@@ -8,7 +8,7 @@
 
 namespace Framework {
 namespace Audio {
-namespace Sample {
+namespace Samples {
 
 	class BassSampleChannel : public SampleChannel {
 

@@ -1,7 +1,7 @@
 #ifndef METEOR_GAME_H
 #define METEOR_GAME_H
 
-#include"../Base/MtoGame.h"
+#include"../Base/MeteoGame.h"
 
 using namespace Base;
 
@@ -9,7 +9,7 @@ namespace Meteor {
 
 
 
-	class MeteorGame : public MtoGame {
+	class MeteorGame : public MeteoGame {
 
 		/// <summary>
 		/// 這邊把整個遊戲

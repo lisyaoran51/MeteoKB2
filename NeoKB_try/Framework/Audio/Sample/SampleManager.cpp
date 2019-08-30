@@ -5,7 +5,7 @@
 #include "BassSampleChannel.h"
 
 
-using namespace Framework::Audio::Sample;
+using namespace Framework::Audio::Samples;
 using namespace std;
 
 SampleManager::SampleManager(ResourceStore<char*>* rStore)

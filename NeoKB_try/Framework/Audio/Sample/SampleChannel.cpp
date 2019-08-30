@@ -1,6 +1,6 @@
 #include "SampleChannel.h"
 
-using namespace Framework::Audio::Sample;
+using namespace Framework::Audio::Samples;
 
 
 SampleChannel * SampleChannel::GetSampleChannel(string name)

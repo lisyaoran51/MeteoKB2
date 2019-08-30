@@ -111,7 +111,7 @@ bool DecoupledInterpolatingFramedClock::Seek(double position)
 
 int DecoupledInterpolatingFramedClock::ResetSpeedAdjustments()
 {
-	SetRate(1);
+	InterpolatingFramedClock::SetRate(1);
 	return 0;
 }
 

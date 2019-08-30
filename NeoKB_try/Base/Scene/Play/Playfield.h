@@ -9,7 +9,6 @@
 
 
 
-using namespace Framework::Scenes;
 using namespace Base::Schedulers::Events;
 using namespace Base::Schedulers;
 using namespace Base::Schedulers::Events::Effects::Algorithms;

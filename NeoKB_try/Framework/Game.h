@@ -16,7 +16,8 @@ using namespace Framework::Host;
 
 namespace Framework {
 
-	
+	class GmeHost;
+
 	class Game : public Container {
 		
 		AudioManager* audioManager;

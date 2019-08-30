@@ -1,6 +1,6 @@
 #include "Sample.h"
 
-using namespace Framework::Audio::Sample;
+using namespace Framework::Audio::Samples;
 
 
 bool Sample::GetIsLoaded()

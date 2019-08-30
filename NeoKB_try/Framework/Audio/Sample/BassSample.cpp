@@ -1,7 +1,7 @@
 #include "BassSample.h"
 
 
-using namespace Framework::Audio::Sample;
+using namespace Framework::Audio::Samples;
 
 
 

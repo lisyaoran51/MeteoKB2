@@ -71,20 +71,14 @@ int Playfield::load(FrameworkConfigManager* f) {
 	//else
 	//	throw runtime_error("int Playfield::load() : Width and Height not found in Setting.");
 	
-	LOG(LogLevel::Fine) << "Playfield::load() : Registering map ...";
+	//LOG(LogLevel::Fine) << "Playfield::load() : Registering map ...";
 	//eventProcessorMaster->RegisterMap(lightMap);
 	//renderer->RegisterMap(lightMap);
 
-	LOG(LogLevel::Fine) << "Playfield::load() : Registering event process master to scheduler ...";
-	//scheduler->RegisterHandler(bind(&EventProcessorMaster::ReceiveEventProcessor, eventProcessorMaster, placeholders::_1));
-
 	// 這一步是讓他們去抓updater
-	LOG(LogLevel::Fine) << "Playfield::load() : Adding scheduler, event proessor master and ernderer ...";
-	//AddChild(scheduler);
-	//AddChild(eventProcessorMaster);
-	//AddChild(renderer);
+	LOG(LogLevel::Fine) << "Playfield::load() : Adding event proessor master ...";
+	AddChild(eventProcessorMaster);
 
-	// 最後也要把playfield加進updater裡，但是應該不能寫在這，要寫在繼承的class上
 }
 
 Playfield::Playfield():RegisterType("Playfield")
@@ -97,7 +91,7 @@ Playfield::Playfield():RegisterType("Playfield")
 int Playfield::Add(EventProcessor<Event> * ep)
 {
 	//scheduler->Add(ep);
-	eventProcessorMaster->Add(ep);
+	eventProcessorMaster->AddStaticEventProcessor(ep);
 
 	// 這邊要把Map Algo加進去
 	if (ep->CanCast<EffectMapperInterface>()) {

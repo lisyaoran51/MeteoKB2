@@ -19,7 +19,7 @@ namespace IO {
 
 	public:
 
-		
+		virtual int TriggerOnInput() = 0;
 
 	protected:
 

@@ -21,13 +21,14 @@ namespace IO {
 	/// </summary>
 	class MainInterface {
 
+		/* 這些是軟體端的device，不用考量硬體部分 */
 		Display* display;
 		Keyboard* keyboard;
 		Panel* panel;
 		BluetoothPhone* phone;
 
+		/* 這些是硬體端，他們在作用時會自己去取得main interface裡面的裝置 */
 		vector<InputDevice*> inputDevices;
-
 		vector<OutputDevice*> outputDevices;
 
 	public:

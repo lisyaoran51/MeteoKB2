@@ -94,8 +94,10 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Framework\Configurations\FrameworkConfigManager.cpp" />
+    <ClCompile Include="Framework\Game.cpp" />
     <ClCompile Include="Framework\Graphic\Drawable.cpp" />
     <ClCompile Include="Framework\Graphic\Map\Map.cpp" />
+    <ClCompile Include="Framework\Host\GameHost.cpp" />
     <ClCompile Include="Framework\Input\BluetoothState.cpp" />
     <ClCompile Include="Framework\Input\Handler\BluetoothInputHandler.cpp" />
     <ClCompile Include="Framework\Input\Handler\KeyboardInputHandler.cpp" />
@@ -241,8 +243,10 @@
     <ClInclude Include="Framework\Devices\InputDevice.h" />
     <ClInclude Include="Framework\Devices\OutputDevice.h" />
     <ClInclude Include="Framework\Exceptions\FrameworkException.h" />
+    <ClInclude Include="Framework\Game.h" />
     <ClInclude Include="Framework\Graphic\Drawable.h" />
     <ClInclude Include="Framework\Graphic\Map\Map.h" />
+    <ClInclude Include="Framework\Host\GameHost.h" />
     <ClInclude Include="Framework\Input\BluetoothState.h" />
     <ClInclude Include="Framework\Input\Handler\BluetoothInputHandler.h" />
     <ClInclude Include="Framework\Input\Handler\InputHandler.h" />
