@@ -8,6 +8,36 @@ Triggerable::Triggerable(): Schedulable(), RegisterType("Triggerable")
 {
 }
 
+int Triggerable::AddChild(ChildAddable * child)
+{
+	isValidForTrigger = true;
+
+	return ChildAddable::AddChild(child);
+}
+
+int Triggerable::DeleteChild(ChildAddable * child)
+{
+	isValidForTrigger = false;
+
+	return ChildAddable::DeleteChild(child);
+}
+
+int Triggerable::SetIsValidForTrigger(bool value)
+{
+	isValidForTrigger = value;
+	return 0;
+}
+
+bool Triggerable::GetIsValidForTrigger()
+{
+	return isValidForTrigger;
+}
+
+bool Triggerable::GetIsInputable()
+{
+	return isInputable;
+}
+
 int Triggerable::TriggerOnKeyDown(InputState * inputState, Key key)
 {
 	return onKeyDown(inputState, key);

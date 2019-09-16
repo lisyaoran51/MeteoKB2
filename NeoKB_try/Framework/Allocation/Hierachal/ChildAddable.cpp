@@ -24,6 +24,8 @@ int ChildAddable::AddChild(ChildAddable * child)
 		else
 			childs.push_back(child);
 
+		isAlive = true;
+
 		return DONE;
 	}
 	
@@ -36,7 +38,8 @@ int ChildAddable::DeleteChild(ChildAddable * child)
 {
 	vector<ChildAddable*>::iterator it = find(childs.begin(), childs.end(), child);
 
-	if (it != childs.end()) 
+	if (it != childs.end())
+		(*it)->SetIsAlive(false);
 		childs.erase(it);
 	else {
 		// TODO: ¨Ò¥~³B²z
@@ -56,4 +59,15 @@ int ChildAddable::RegisterOnAdd(MTO_FUNC_POINTER func)
 vector<ChildAddable*>* ChildAddable::GetChilds()
 {
 	return &childs;
+}
+
+bool ChildAddable::GetIsAlive()
+{
+	return isAlive;
+}
+
+int ChildAddable::SetIsAlive(bool value)
+{
+	isAlive = value;
+	return 0;
 }

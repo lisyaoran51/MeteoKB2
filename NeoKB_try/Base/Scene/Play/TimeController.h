@@ -40,6 +40,11 @@ namespace Play {
 		AdjustableClock* audioClock;
 
 		/// <summary>
+		/// framedClock的source，是可以用來調整時間的
+		/// </summary>
+		DecoupledInterpolatingFramedClock* controllableClock;
+
+		/// <summary>
 		/// 一個與parent獨立的時終，下面接的式遊戲的物件，遊戲根據這個時鐘運行
 		/// </summary>
 		FramedClock* framedClock;
@@ -68,6 +73,8 @@ namespace Play {
 		/// pause container的時鐘是在player裡面指派的，不是pause container自己的
 		/// </summary>
 		int SetAudioClock(AdjustableClock* dInterpolatingFramedClock);
+
+		int SetControllableClock(DecoupledInterpolatingFramedClock* cClock);
 
 		int SetFramedClock(FramedClock* fClock);
 

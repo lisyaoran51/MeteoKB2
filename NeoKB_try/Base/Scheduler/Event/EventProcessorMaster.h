@@ -86,6 +86,8 @@ namespace Events {
 
 	protected:
 
+		Map* lightMap;
+
 		vector<EventProcessor<Event>*> staticEventProcessors;
 
 		vector<EventProcessor<Event>*> dynamicEventProcessors;
@@ -108,7 +110,7 @@ namespace Events {
 		InstanceCreator<EventProcessor<Event>> event_processor_creator;
 		*/
 
-		Map* lightMap;
+		virtual int onKeyDown(InputState* inputState, Key key);
 
 	};
 

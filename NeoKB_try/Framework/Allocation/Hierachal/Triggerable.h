@@ -19,9 +19,28 @@ namespace Hierachal {
 	/// </summary>
 	class Triggerable : public Schedulable {
 
+		bool isValidForTrigger = false;
+
+
 	public:
 
 		Triggerable();
+
+		/// <summary>
+		/// 覆寫child addable，然後加入isValidForTrigger
+		/// </summary>
+		virtual int AddChild(ChildAddable* child);
+
+		/// <summary>
+		/// 覆寫child addable，然後加入isValidForTrigger
+		/// </summary>
+		virtual int DeleteChild(ChildAddable* child);
+
+		int SetIsValidForTrigger(bool value);
+
+		bool GetIsValidForTrigger();
+
+		bool GetIsInputable();
 
 		int TriggerOnKeyDown(InputState* inputState, Key key);
 
@@ -36,6 +55,11 @@ namespace Hierachal {
 		int TriggerOnSlide(InputState* inputState, PanelSlider slider);
 
 	protected:
+
+		/// <summary>
+		/// 代表這個物件本身可不可以輸入，在生成的時候就必須決定
+		/// </summary>
+		bool isInputable = false;
 
 		virtual int onKeyDown(InputState* inputState, Key key);
 

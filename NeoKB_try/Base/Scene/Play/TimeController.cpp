@@ -46,6 +46,12 @@ int TimeController::SetAudioClock(AdjustableClock * dInterpolatingFramedClock)
 	return 0;
 }
 
+int TimeController::SetControllableClock(DecoupledInterpolatingFramedClock * cClock)
+{
+	controllableClock = cClock;
+	return 0;
+}
+
 int TimeController::SetFramedClock(FramedClock * fClock)
 {
 	framedClock = fClock;

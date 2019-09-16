@@ -11,7 +11,13 @@ namespace Devices {
 
 	public:
 
-		virtual int ScanInput() = 0;
+		virtual int ScanInput();
+
+	protected:
+
+		virtual int readFromDevice() = 0;
+
+		virtual int passToPeripheral(Peripheral* peripheral) = 0;
 
 	};
 

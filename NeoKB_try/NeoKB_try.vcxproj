@@ -33,7 +33,6 @@
     <ClCompile Include="Base\Scene\Play\Player.cpp" />
     <ClCompile Include="Base\Scene\Play\PlayerLoader.cpp" />
     <ClCompile Include="Base\Scene\Play\Playfield.cpp" />
-    <ClCompile Include="Base\Scene\Play\Session.cpp" />
     <ClCompile Include="Base\Scene\Play\TimeController.cpp" />
     <ClCompile Include="Base\Scene\Loader.cpp" />
     <ClCompile Include="Base\Scene\Select\MainMenu.cpp" />
@@ -94,6 +93,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Framework\Configurations\FrameworkConfigManager.cpp" />
+    <ClCompile Include="Framework\Devices\InputDevice.cpp" />
     <ClCompile Include="Framework\Game.cpp" />
     <ClCompile Include="Framework\Graphic\Drawable.cpp" />
     <ClCompile Include="Framework\Graphic\Map\Map.cpp" />
@@ -241,6 +241,7 @@
     <ClInclude Include="Framework\Configurations\FrameworkConfigManager.h" />
     <ClInclude Include="Framework\Devices\Device.h" />
     <ClInclude Include="Framework\Devices\InputDevice.h" />
+    <ClInclude Include="Framework\Devices\KeyboardDevice.h" />
     <ClInclude Include="Framework\Devices\OutputDevice.h" />
     <ClInclude Include="Framework\Exceptions\FrameworkException.h" />
     <ClInclude Include="Framework\Game.h" />
@@ -255,6 +256,7 @@
     <ClInclude Include="Framework\Input\InputEvent.h" />
     <ClInclude Include="Framework\Input\InputManager.h" />
     <ClInclude Include="Framework\Input\InputState.h" />
+    <ClInclude Include="Framework\Input\KeyBindings\KeyBindingInputManager.h" />
     <ClInclude Include="Framework\Input\KeyboardState.h" />
     <ClInclude Include="Framework\Input\PanelState.h" />
     <ClInclude Include="Framework\Input\PeripheralState.h" />

@@ -5,7 +5,7 @@
 using namespace Framework::Scenes;
 using namespace Framework::Allocation::Hierachal;
 using namespace Framework::Exceptions;
-
+using namespace Framework;
 
 
 

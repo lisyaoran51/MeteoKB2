@@ -22,7 +22,7 @@ int EventProcessorMaster::load()
 		float endTime = ep->GetStartTime() + ep->GetLifeTime() + visibleTimeRange;
 
 		return make_pair<float, float>(startTime, endTime);
-	})
+	});
 
 
 	return 0;
@@ -31,6 +31,7 @@ int EventProcessorMaster::load()
 
 EventProcessorMaster::EventProcessorMaster(): RegisterType("EventProcessorMaster"), Container()
 {
+	isInputable = true;
 	registerLoad(bind((int(EventProcessorMaster::*)())&EventProcessorMaster::load, this));
 }
 
@@ -164,6 +165,26 @@ int EventProcessorMaster::update()
 
 
 	// TODO: 自動清除dynamic event，當調整時間或速度時，也把dynamic event清掉
+	return 0;
+}
+
+int EventProcessorMaster::onKeyDown(InputState * inputState, Key key)
+{
+	double currentTime = GetClock()->GetCurrentTime();
+
+	vector<EventProcessor<Event>*> eventProcessors;
+
+	eventProcessorPeriods->GetItemsContainPeriods(make_pair<float, float>(currentTime - visibleTimeRange, currentTime + visibleTimeRange), &eventProcessors);
+
+	EventProcessor<Event>* receivedProcessor = nullptr;
+
+	for (int i = 0; i < eventProcessors.size(); i++) {
+		
+		
+
+	}
+
+
 	return 0;
 }
 

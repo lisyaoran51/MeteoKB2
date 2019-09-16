@@ -10,17 +10,13 @@ InputManager::InputManager(): RegisterType("InputManager"), Container()
 	currentState = new InputState();
 }
 
-Triggerable * InputManager::GetDeepestChild()
-{
-	int deepestDepth = 0;
-	return iterateGetDeepestChild(this, &deepestDepth, 1);
-}
-
 int InputManager::update()
 {
 	vector<InputState*> pendingStates;
 	getPendingState(&pendingStates);
 
+	/* 這邊本來要做create distinct states，這樣可以確保舊的輸入沒被更動，但是現在懶得做 */
+	
 	for (int i = 0; i < pendingStates.size(); i++) {
 		handleNewState(pendingStates[i]);
 	}
@@ -75,7 +71,7 @@ vector<InputState*>* InputManager::createDistinctInputStates(vector<InputState*>
 {
 	InputState* last = currentState;
 
-
+	// 這個是用來確保舊的輸入沒被更動，太麻煩懶得寫
 
 
 
@@ -97,15 +93,12 @@ int InputManager::updateInputQueue(InputState * inputState)
 	if (focusTriggerable != nullptr)
 		triggerQueue.push_back(focusTriggerable);
 	else {
-		Triggerable* deepestChild = this;
-		int deepestDepth = 0;
 
 		for (int i = 0; i < GetChilds()->size(); i++) {
-			Triggerable* tempChild = iterateGetDeepestChild(deepestChild, &deepestDepth, 1);
-			if (tempChild != nullptr)
-				deepestChild = tempChild;
+			Triggerable* temp = GetChilds()->at(i)->Cast<Triggerable>();
+			if(temp->GetIsInputable())
+				iterateGetChild(temp, &triggerQueue);
 		}
-		triggerQueue.push_back(deepestChild);
 	}
 
 	
@@ -299,21 +292,17 @@ int InputManager::propagateSlide(vector<Triggerable*>* queue, InputState * state
 	return 0;
 }
 
-Triggerable* InputManager::iterateGetDeepestChild(Triggerable * temp, int* deepestDepth, int tempDepth)
+int InputManager::iterateGetChild(Triggerable * temp, vector<Triggerable*>* tQueue)
 {
-
-	Triggerable* tempDeeperChild = nullptr;
-
-	if (tempDepth > *deepestDepth) {
-		tempDeeperChild = temp;
-		*deepestDepth = tempDepth;
-	}
+	int size = tQueue->size();
 
 	for (int i = 0; i < temp->GetChilds()->size(); i++) {
-		Triggerable* tempChild = iterateGetDeepestChild(temp->GetChilds()->at(i)->Cast<Triggerable>(), deepestDepth, tempDepth + 1);
-		if (tempChild != nullptr)
-			tempDeeperChild = tempChild;
+
+		Triggerable* tempChild = GetChilds()->at(i)->Cast<Triggerable>();
+
+		if (tempChild->GetIsInputable())
+			iterateGetChild(tempChild, tQueue);
 	}
 
-	return tempDeeperChild;
+	return size == tQueue->size() ? 0 : -1;
 }

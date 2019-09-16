@@ -32,8 +32,6 @@ namespace Input {
 
 		int ClearStaticTriggerable();
 
-		Triggerable* GetDeepestChild();
-
 	protected:
 
 		GameHost* host;
@@ -104,7 +102,7 @@ namespace Input {
 
 		Triggerable* focusTriggerable;
 
-		Triggerable* iterateGetDeepestChild(Triggerable* deepestChild, int* deepestDepth, int tempDepth);
+		int iterateGetChild(Triggerable* p, vector<Triggerable*>* tQueue);
 
 
 

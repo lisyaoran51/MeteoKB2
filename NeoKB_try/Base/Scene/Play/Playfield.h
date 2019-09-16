@@ -13,7 +13,6 @@ using namespace Base::Schedulers::Events;
 using namespace Base::Schedulers;
 using namespace Base::Schedulers::Events::Effects::Algorithms;
 using namespace Framework::Configurations;
-using namespace Base::Scenes;
 using namespace Framework::Allocation::Hierachal;
 
 

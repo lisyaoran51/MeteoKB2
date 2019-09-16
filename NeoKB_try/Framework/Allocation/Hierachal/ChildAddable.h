@@ -22,6 +22,8 @@ namespace Hierachal{
 
 		vector<ChildAddable*> childs;
 
+		bool isAlive = false;
+
 	public:
 
 		ChildAddable();
@@ -31,16 +33,21 @@ namespace Hierachal{
 		/// <summary>
 		/// when add child, automatically call every privateLoad() to load in parent's configuration
 		/// </summary>
-		int AddChild(ChildAddable* child);
+		virtual int AddChild(ChildAddable* child);
 
-		int DeleteChild(ChildAddable* child);
+		virtual int DeleteChild(ChildAddable* child);
 
 		int RegisterOnAdd(MTO_FUNC_POINTER func);
 
 		vector<ChildAddable*>* GetChilds();
 
+		bool GetIsAlive();
 
-
+		/// <summary>
+		/// 讓他死掉
+		/// TODO: 這個應該要擺在OnDelete裡面去更改他的alive，不能這樣映改，然後再delete child時觸發
+		/// </summary>
+		int SetIsAlive(bool value);
 	};
 
 

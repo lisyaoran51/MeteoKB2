@@ -62,6 +62,7 @@ int Player::load(FrameworkConfigManager* f)
 
 	timeController = new TimeController();
 	timeController->SetFramedClock(offsetClock);
+	timeController->SetControllableClock(decoupledClock);
 	timeController->SetAudioClock(decoupledClock);
 
 	AddChild(timeController);

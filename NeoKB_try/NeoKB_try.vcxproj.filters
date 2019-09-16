@@ -385,6 +385,9 @@
     <Filter Include="標頭檔\Game\Scheduler\Events\Sheetmusic\Pattern">
       <UniqueIdentifier>{5e4fb93a-ba6a-4be6-b91f-4f5aa8c64f8d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="標頭檔\Framework\Input\KeyBindings">
+      <UniqueIdentifier>{4b676208-2c9e-4f1c-9e26-12db68688ac6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\Graphic\Renderer\renderer.cpp">
@@ -618,9 +621,6 @@
     <ClCompile Include="Base\Scene\Play\Playfield.cpp">
       <Filter>來源檔案\Game\Scene\Play</Filter>
     </ClCompile>
-    <ClCompile Include="Base\Scene\Play\Session.cpp">
-      <Filter>來源檔案\Game\Scene\Play</Filter>
-    </ClCompile>
     <ClCompile Include="Framework\Timing\SpeedAdjusters\SpeedAdjuster.cpp">
       <Filter>來源檔案\Framework\Timing\SpeedAdjusters</Filter>
     </ClCompile>
@@ -743,6 +743,9 @@
     </ClCompile>
     <ClCompile Include="Framework\Game.cpp">
       <Filter>來源檔案\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Devices\InputDevice.cpp">
+      <Filter>來源檔案\Framework\Devices</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1227,6 +1230,12 @@
     </ClInclude>
     <ClInclude Include="Framework\Game.h">
       <Filter>標頭檔\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Devices\KeyboardDevice.h">
+      <Filter>標頭檔\Framework\Devices</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Input\KeyBindings\KeyBindingInputManager.h">
+      <Filter>標頭檔\Framework\Input\KeyBindings</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
