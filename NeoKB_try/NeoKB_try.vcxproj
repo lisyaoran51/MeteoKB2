@@ -256,10 +256,13 @@
     <ClInclude Include="Framework\Input\InputEvent.h" />
     <ClInclude Include="Framework\Input\InputManager.h" />
     <ClInclude Include="Framework\Input\InputState.h" />
+    <ClInclude Include="Framework\Input\KeyBindings\InputKey.h" />
+    <ClInclude Include="Framework\Input\KeyBindings\KeyBinding.h" />
     <ClInclude Include="Framework\Input\KeyBindings\KeyBindingInputManager.h" />
     <ClInclude Include="Framework\Input\KeyboardState.h" />
     <ClInclude Include="Framework\Input\PanelState.h" />
     <ClInclude Include="Framework\Input\PeripheralState.h" />
+    <ClInclude Include="Framework\Input\UserInputManager.h" />
     <ClInclude Include="Framework\IO\BluetoothPhone.h" />
     <ClInclude Include="Framework\IO\Display.h" />
     <ClInclude Include="Framework\IO\FileSystemInterface.h" />

@@ -388,6 +388,9 @@
     <Filter Include="標頭檔\Framework\Input\KeyBindings">
       <UniqueIdentifier>{4b676208-2c9e-4f1c-9e26-12db68688ac6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="來源檔案\Framework\Input\KeyBindings">
+      <UniqueIdentifier>{49597353-70c1-4020-a6e7-19f4a4c938c7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\Graphic\Renderer\renderer.cpp">
@@ -1236,6 +1239,15 @@
     </ClInclude>
     <ClInclude Include="Framework\Input\KeyBindings\KeyBindingInputManager.h">
       <Filter>標頭檔\Framework\Input\KeyBindings</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Input\KeyBindings\KeyBinding.h">
+      <Filter>標頭檔\Framework\Input\KeyBindings</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Input\KeyBindings\InputKey.h">
+      <Filter>標頭檔\Framework\Input\KeyBindings</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Input\UserInputManager.h">
+      <Filter>標頭檔\Framework\Input</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

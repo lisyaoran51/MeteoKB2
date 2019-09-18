@@ -42,6 +42,8 @@ namespace Input {
 
 		virtual int update();
 
+		virtual vector<InputHandler*>* GetInputHandlers() = 0;
+
 
 		InputState* currentState;
 
@@ -98,7 +100,7 @@ namespace Input {
 		/// </summary>
 		int load();
 
-		vector<InputHandler*> inputHandlers;
+		//vector<InputHandler*> inputHandlers;
 
 		Triggerable* focusTriggerable;
 
