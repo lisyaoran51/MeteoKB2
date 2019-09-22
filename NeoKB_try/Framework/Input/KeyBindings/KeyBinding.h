@@ -13,15 +13,17 @@ namespace KeyBindings {
 
 	struct KeyBinding {
 
-		int Key;
+		InputKey Key;
+		int action;
 
-		KeyBinding(int k) {
+		KeyBinding(InputKey k, int a) {
 			Key = k;
+			action = a;
 		}
 
 		template<typename T>
-		T GetKey() {
-			return dynamic_cast<T>(Key);
+		T GetAction() {
+			return dynamic_cast<T>(action);
 		}
 
 		string ToString() {

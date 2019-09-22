@@ -106,6 +106,8 @@
     <ClCompile Include="Framework\Input\InputState.cpp" />
     <ClCompile Include="Framework\Input\KeyboardState.cpp" />
     <ClCompile Include="Framework\Input\PanelState.cpp" />
+    <ClCompile Include="Framework\Input\PassThroughInputManager.cpp" />
+    <ClCompile Include="Framework\Input\UserInputManager.cpp" />
     <ClCompile Include="Framework\IO\BluetoothPhone.cpp" />
     <ClCompile Include="Framework\IO\Display.cpp" />
     <ClCompile Include="Framework\IO\Keyboard.cpp" />
@@ -156,6 +158,7 @@
     <ClInclude Include="Base\Graphic\Renderer\MapAlgorithm\HardwareMapAlgorithm.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="Base\Input\RulesetInputManager.h" />
     <ClInclude Include="Base\MeteoGame.h" />
     <ClInclude Include="Base\MeteoGameBase.h" />
     <ClInclude Include="Base\Ruleset\Modifiers\Modifier.h" />
@@ -261,6 +264,7 @@
     <ClInclude Include="Framework\Input\KeyBindings\KeyBindingInputManager.h" />
     <ClInclude Include="Framework\Input\KeyboardState.h" />
     <ClInclude Include="Framework\Input\PanelState.h" />
+    <ClInclude Include="Framework\Input\PassThroughInputManager.h" />
     <ClInclude Include="Framework\Input\PeripheralState.h" />
     <ClInclude Include="Framework\Input\UserInputManager.h" />
     <ClInclude Include="Framework\IO\BluetoothPhone.h" />
@@ -288,6 +292,7 @@
     <ClInclude Include="Framework\Timing\StopwatchClock.h" />
     <ClInclude Include="Framework\Timing\ThrottledFramedClock.h" />
     <ClInclude Include="RulesetMeteor\Config\MeteorConfigManager.h" />
+    <ClInclude Include="RulesetMeteor\Input\MeteorInputManager.h" />
     <ClInclude Include="RulesetMeteor\MeteorGame.h" />
     <ClInclude Include="RulesetMeteor\Play\MeteorPlayfield.h" />
     <ClInclude Include="RulesetMeteor\Ruleset\MeteorRuleset.h" />

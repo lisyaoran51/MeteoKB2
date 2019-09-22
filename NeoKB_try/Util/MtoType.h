@@ -8,7 +8,8 @@
 #define MTO_INFINITE 99999
 
 #define RETURN_AVAILABLE 0
-#define DONE 0
+#define RETURN_DONE 0
+#define RETURN_FAILED -1
 
 
 enum class Pitch {

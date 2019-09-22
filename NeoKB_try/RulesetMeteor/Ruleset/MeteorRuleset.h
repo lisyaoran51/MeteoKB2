@@ -22,6 +22,8 @@ namespace Rulesets{
 
 		RulesetExecutor<Event>* CreateRulesetExecutor(WorkingSm* sm);
 
+		virtual vector<KeyBinding*>* GetDefaultkeyBindings(int variant = 0);
+
 	};
 
 }

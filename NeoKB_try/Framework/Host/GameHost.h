@@ -8,7 +8,7 @@
 #include "../../Util/DataStructure/ActionList.h"
 #include "../Input/InputEvent.h"
 #include "../Game.h"
-//#include "../Input/Handler/InputHandler.h"
+#include "../Input/Handler/InputHandler.h"
 #include "../Graphic/Drawable.h"
 #include "../Allocation/DependencyContainer.h"
 #include "../IO/MainInterface.h"
@@ -22,7 +22,7 @@ using namespace std;
 using namespace Framework::Threading;
 using namespace Util::DataStructure;
 using namespace Framework::Input;
-//using namespace Framework::Input::Handler;
+using namespace Framework::Input::Handler;
 using namespace Framework::IO;
 using namespace Framework;
 using namespace Framework::Graphic;
@@ -56,6 +56,8 @@ namespace Host {
 		Action<int, InputEvent*> OnInput;
 
 		MainInterface* GetMainInterface();
+
+		vector<InputHandler*>* GetAvailableInputHandlers();
 
 	protected:
 

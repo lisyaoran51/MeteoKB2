@@ -1,12 +1,30 @@
-#ifndef INPUT_KEY_H
-#define INPUT_KEY_H
-
-namespace Framework {
-namespace Input {
-namespace KeyBindings {
+#ifndef METEOR_INPUT_MANAGER_H
+#define METEOR_INPUT_MANAGER_H
 
 
-	enum class InputKey {
+#include "../../Base/Input/RulesetInputManager.h"
+
+
+using namespace Base::Input;
+
+
+namespace Meteor {
+namespace Input{
+
+
+	enum class MeteorAction;
+
+	class MeteorInputManager : public RulesetInputManager<MeteorAction> {
+
+	public:
+
+		MeteorInputManager(RulesetInfo* rInfo);
+
+	};
+
+
+
+	enum class MeteorAction {
 
 		None = 0,
 
@@ -15,7 +33,7 @@ namespace KeyBindings {
 		VK27_A1 = 100,
 		VK27_bB1,
 		VK27_B1,
-		  
+
 		VK27_C2,
 		VK27_bD2,
 		VK27_D2,
@@ -28,7 +46,7 @@ namespace KeyBindings {
 		VK27_A2,
 		VK27_bB2,
 		VK27_B2,
-		  
+
 		VK27_C3,
 		VK27_bD3,
 		VK27_D3,
@@ -93,7 +111,7 @@ namespace KeyBindings {
 		VK24_R_A1,
 		VK24_R_bB1,
 		VK24_R_B1,
-			 
+
 		VK24_R_C2,
 		VK24_R_bD2,
 		VK24_R_D2,
@@ -119,7 +137,7 @@ namespace KeyBindings {
 		VK37_A1,
 		VK37_bB1,
 		VK37_B1,
-		  
+
 		VK37_C2,
 		VK37_bD2,
 		VK37_D2,
@@ -160,25 +178,16 @@ namespace KeyBindings {
 		Pause		= 1002,
 
 		/* Knob */
-		SectionKnob	= 1003,
+		SectionKnob = 1003,
 		SpeedKnob	= 1004,
 
 		/* Bluetooth */
 		Bluetooth	= 1005,
 
-		/* Slider */
-		PianoVolume	= 1006,
-		MusicVolume = 1007,
-
-		/* General Button */
-		Power		= 1008,
-		Sustain		= 1009,
-		Sensitivity	= 1010,
-
 	};
 
+}}
 
-}}}
 
 
 #endif

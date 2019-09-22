@@ -6,11 +6,13 @@
 
 #include "../../Framework/Allocation/Hierachal/Container.h"
 #include "Handler\InputHandler.h"
+#include "KeyBindings\InputKey.h"
 
 
 using namespace std;
 using namespace Framework::Allocation::Hierachal;
 using namespace Framework::Input::Handler;
+using namespace Framework::Input::KeyBindings;
 
 namespace Framework {
 namespace Input {
@@ -42,7 +44,7 @@ namespace Input {
 
 		virtual int update();
 
-		virtual vector<InputHandler*>* GetInputHandlers() = 0;
+		virtual vector<InputHandler*>* getInputHandlers() = 0;
 
 
 		InputState* currentState;
@@ -52,7 +54,7 @@ namespace Input {
 		/// </summary>
 		int handleNewState(InputState* state);
 
-		vector<InputState*>* getPendingState(vector<InputState*>* pendingStates);
+		virtual vector<InputState*>* getPendingState(vector<InputState*>* pendingStates);
 
 		virtual int updateInputQueue(InputState* inputState);
 
@@ -69,29 +71,29 @@ namespace Input {
 
 		virtual int updateBluetoothEvents(InputState* inputState);
 
-		virtual int handleKeyDown(InputState* state, Key key);
+		virtual int handleKeyDown(InputState* state, InputKey key);
 
-		virtual int propagateKeyDown(vector<Triggerable*>* queue, InputState* state, Key key);
+		virtual int propagateKeyDown(vector<Triggerable*>* queue, InputState* state, InputKey key);
 
-		virtual int handleKeyUp(InputState* state, Key key);
+		virtual int handleKeyUp(InputState* state, InputKey key);
 
-		virtual int propagateKeyUp(vector<Triggerable*>* queue, InputState* state, Key key);
+		virtual int propagateKeyUp(vector<Triggerable*>* queue, InputState* state, InputKey key);
 
-		virtual int handleButtonDown(InputState* state, PanelButton button);
+		virtual int handleButtonDown(InputState* state, InputKey button);
 
-		virtual int propagateButtonDown(vector<Triggerable*>* queue, InputState* state, PanelButton button);
+		virtual int propagateButtonDown(vector<Triggerable*>* queue, InputState* state, InputKey button);
 
-		virtual int handleButtonUp(InputState* state, PanelButton button);
+		virtual int handleButtonUp(InputState* state, InputKey button);
 
-		virtual int propagateButtonUp(vector<Triggerable*>* queue, InputState* state, PanelButton button);
+		virtual int propagateButtonUp(vector<Triggerable*>* queue, InputState* state, InputKey button);
 
-		virtual int handleKnobTurn(InputState* state, PanelKnob knob);
+		virtual int handleKnobTurn(InputState* state, InputKey knob);
 
-		virtual int propagateKnobTurn(vector<Triggerable*>* queue, InputState* state, PanelKnob knob);
+		virtual int propagateKnobTurn(vector<Triggerable*>* queue, InputState* state, InputKey knob);
 
-		virtual int handleSlide(InputState* state, PanelSlider slider);
+		virtual int handleSlide(InputState* state, InputKey slider);
 
-		virtual int propagateSlide(vector<Triggerable*>* queue, InputState* state, PanelSlider slider);
+		virtual int propagateSlide(vector<Triggerable*>* queue, InputState* state, InputKey slider);
 
 	private:
 

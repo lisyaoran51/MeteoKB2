@@ -4,13 +4,13 @@ using namespace std;
 using namespace Framework::Input;
 
 
-int KeyboardState::AddPress(pair<Key, int> press)
+int KeyboardState::AddPress(pair<InputKey, int> press)
 {
 	presses.push_back(press);
 	return 0;
 }
 
-vector<pair<Key, int>>* KeyboardState::GetPresses()
+vector<pair<InputKey, int>>* KeyboardState::GetPresses()
 {
 	return &presses;
 }

@@ -3,50 +3,49 @@
 
 #include "PeripheralState.h"
 #include <vector>
-
+#include "KeyBindings\InputKey.h"
 
 using namespace std;
+using namespace Framework::Input::KeyBindings;
+
 
 
 namespace Framework {
 namespace Input {
 
-	enum class PanelButton;
-	enum class PanelKnob;
-	enum class PanelSlider;
 	
 
 	class PanelState : public PeripheralState<PanelState> {
 
-		vector<PanelButton> buttons;
+		vector<InputKey> buttons;
 
-		vector<pair<PanelKnob,int>> knobs;
+		vector<pair<InputKey,int>> knobs;
 
-		vector<pair<PanelSlider, int>> sliders;
+		vector<pair<InputKey, int>> sliders;
 
 
 	public:
 
-		int AddButton(PanelButton button);
+		int AddButton(InputKey button);
 
-		vector<PanelButton>* GetButtons();
+		vector<InputKey>* GetButtons();
 
-		int AddKnob(pair<PanelKnob, int> knob);
+		int AddKnob(pair<InputKey, int> knob);
 
-		vector<pair<PanelKnob, int>>* GetKnobs();
+		vector<pair<InputKey, int>>* GetKnobs();
 
-		int AddSlider(pair<PanelSlider, int> slider);
+		int AddSlider(pair<InputKey, int> slider);
 
-		vector<pair<PanelSlider, int>>* GetSliders();
+		vector<pair<InputKey, int>>* GetSliders();
 
 		virtual PanelState* Clone();
 
 
-		bool ContainButton(PanelButton button);
+		bool ContainButton(InputKey button);
 
-		bool ContainSlider(PanelKnob knob);
+		bool ContainSlider(InputKey knob);
 
-		bool ContainerSlider(PanelSlider slider);
+		bool ContainerSlider(InputKey slider);
 
 
 

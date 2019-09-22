@@ -6,9 +6,12 @@
 #include <vector>
 #include "Schedulable.h"
 #include "../../Input/InputState.h"
+#include "../../Input/KeyBindings/InputKey.h"
 
 using namespace std;
 using namespace Framework::Input;
+using namespace Framework::Input::KeyBindings;
+
 
 namespace Framework {
 namespace Allocation {
@@ -42,17 +45,17 @@ namespace Hierachal {
 
 		bool GetIsInputable();
 
-		int TriggerOnKeyDown(InputState* inputState, Key key);
-
-		int TriggerOnKeyUp(InputState* inputState, Key key);
-
-		int TriggerOnKnobTurn(InputState* inputState, PanelKnob knob);
-
-		int TriggerOnButtonDown(InputState* inputState, PanelButton button);
-
-		int TriggerOnButtonUp(InputState* inputState, PanelButton button);
-
-		int TriggerOnSlide(InputState* inputState, PanelSlider slider);
+		virtual int TriggerOnKeyDown(InputState* inputState, InputKey key) final;
+		
+		virtual int TriggerOnKeyUp(InputState* inputState, InputKey key) final;
+		
+		virtual int TriggerOnKnobTurn(InputState* inputState, InputKey knob) final;
+		
+		virtual int TriggerOnButtonDown(InputState* inputState, InputKey button) final;
+		
+		virtual int TriggerOnButtonUp(InputState* inputState, InputKey button) final;
+		
+		virtual int TriggerOnSlide(InputState* inputState, InputKey slider) final;
 
 	protected:
 
@@ -61,17 +64,17 @@ namespace Hierachal {
 		/// </summary>
 		bool isInputable = false;
 
-		virtual int onKeyDown(InputState* inputState, Key key);
+		virtual int onKeyDown(InputState* inputState, InputKey key);
 
-		virtual int onKeyUp(InputState* inputState, Key key);
+		virtual int onKeyUp(InputState* inputState, InputKey key);
 
-		virtual int onKnobTurn(InputState* inputState, PanelKnob knob);
+		virtual int onKnobTurn(InputState* inputState, InputKey knob);
 
-		virtual int onButtonDown(InputState* inputState, PanelButton button);
+		virtual int onButtonDown(InputState* inputState, InputKey button);
 
-		virtual int onButtonUp(InputState* inputState, PanelButton button);
+		virtual int onButtonUp(InputState* inputState, InputKey button);
 
-		virtual int onSlide(InputState* inputState, PanelSlider slider);
+		virtual int onSlide(InputState* inputState, InputKey slider);
 
 	};
 

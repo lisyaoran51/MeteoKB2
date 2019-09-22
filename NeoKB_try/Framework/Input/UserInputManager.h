@@ -13,7 +13,7 @@ namespace Input {
 
 	protected:
 
-		virtual vector<InputHandler*>* GetInputHandlers();
+		virtual vector<InputHandler*>* getInputHandlers();
 
 
 

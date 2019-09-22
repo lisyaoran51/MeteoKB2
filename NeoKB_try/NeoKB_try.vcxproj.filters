@@ -391,6 +391,12 @@
     <Filter Include="來源檔案\Framework\Input\KeyBindings">
       <UniqueIdentifier>{49597353-70c1-4020-a6e7-19f4a4c938c7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="標頭檔\Game\Input">
+      <UniqueIdentifier>{3d5b34c1-7280-4c79-9ce8-89cabc6d27f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\RulesetMeteor\Input">
+      <UniqueIdentifier>{82a75984-917f-4e36-b9fc-0baf47363400}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\Graphic\Renderer\renderer.cpp">
@@ -749,6 +755,12 @@
     </ClCompile>
     <ClCompile Include="Framework\Devices\InputDevice.cpp">
       <Filter>來源檔案\Framework\Devices</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Input\UserInputManager.cpp">
+      <Filter>來源檔案\Framework\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Input\PassThroughInputManager.cpp">
+      <Filter>來源檔案\Framework\Input</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1248,6 +1260,15 @@
     </ClInclude>
     <ClInclude Include="Framework\Input\UserInputManager.h">
       <Filter>標頭檔\Framework\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Input\PassThroughInputManager.h">
+      <Filter>標頭檔\Framework\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Input\RulesetInputManager.h">
+      <Filter>標頭檔\Game\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Input\MeteorInputManager.h">
+      <Filter>標頭檔\RulesetMeteor\Input</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

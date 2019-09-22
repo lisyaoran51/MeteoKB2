@@ -3,27 +3,30 @@
 
 #include "PeripheralState.h"
 #include <vector>
+#include "KeyBindings\InputKey.h"
 
 using namespace std;
+using namespace Framework::Input::KeyBindings;
+
 
 namespace Framework {
 namespace Input {
 
-	enum class Key;
+	
 
 	class KeyboardState : public PeripheralState<KeyboardState> {
 
-		vector<pair<Key, int>> presses;
+		vector<pair<InputKey, int>> presses;
 
 	public:
 
-		int AddPress(pair<Key, int> press);
+		int AddPress(pair<InputKey, int> press);
 
-		vector<pair<Key, int>>* GetPresses();
+		vector<pair<InputKey, int>>* GetPresses();
 
 		virtual KeyboardState* Clone();
 
-		virtual bool Contain(Key key);
+		virtual bool Contain(InputKey key);
 
 	};
 

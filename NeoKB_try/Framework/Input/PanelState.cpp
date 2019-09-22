@@ -4,35 +4,35 @@ using namespace Framework::Input;
 
 
 
-int PanelState::AddButton(PanelButton button)
+int PanelState::AddButton(InputKey button)
 {
 	buttons.push_back(button);
 	return 0;
 }
 
-vector<PanelButton>* PanelState::GetButtons()
+vector<InputKey>* PanelState::GetButtons()
 {
 	return &buttons;
 }
 
-int PanelState::AddKnob(pair<PanelKnob, int> knob)
+int PanelState::AddKnob(pair<InputKey, int> knob)
 {
 	knobs.push_back(knob);
 	return 0;
 }
 
-vector<pair<PanelKnob, int>>* PanelState::GetKnobs()
+vector<pair<InputKey, int>>* PanelState::GetKnobs()
 {
 	return &knobs;
 }
 
-int PanelState::AddSlider(pair<PanelSlider, int> slider)
+int PanelState::AddSlider(pair<InputKey, int> slider)
 {
 	sliders.push_back(slider);
 	return 0;
 }
 
-vector<pair<PanelSlider, int>>* PanelState::GetSliders()
+vector<pair<InputKey, int>>* PanelState::GetSliders()
 {
 	return &sliders;
 }
