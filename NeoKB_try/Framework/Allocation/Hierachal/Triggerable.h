@@ -22,7 +22,10 @@ namespace Hierachal {
 	/// </summary>
 	class Triggerable : public Schedulable {
 
-		bool isValidForTrigger = false;
+		/// <summary>
+		/// 代表目前是否要讓他接受trigger，是可以隨時開起關閉的
+		/// </summary>
+		bool isValidForTrigger = true;
 
 
 	public:
@@ -30,14 +33,14 @@ namespace Hierachal {
 		Triggerable();
 
 		/// <summary>
-		/// 覆寫child addable，然後加入isValidForTrigger
+		/// 覆寫child addable，然後加入isValidForTrigger，好像沒這個必要，刪掉
 		/// </summary>
-		virtual int AddChild(ChildAddable* child);
+		//virtual int AddChild(ChildAddable* child);
 
 		/// <summary>
-		/// 覆寫child addable，然後加入isValidForTrigger
+		/// 覆寫child addable，然後加入isValidForTrigger，好像沒這個必要，刪掉
 		/// </summary>
-		virtual int DeleteChild(ChildAddable* child);
+		//virtual int DeleteChild(ChildAddable* child);
 
 		int SetIsValidForTrigger(bool value);
 

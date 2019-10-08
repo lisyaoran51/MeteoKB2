@@ -5,6 +5,7 @@
 #include "KeyBinding.h"
 #include "InputKey.h"
 #include <utility>
+#include "KeyBindingHandler.h"
 
 
 using namespace Framework::Input;
@@ -19,6 +20,10 @@ namespace KeyBindings {
 	class KeyBindingInputManager : public PassThroughInputManager {
 
 	public:
+
+		KeyBindingInputManager() : PassThroughInputManager(), RegisterType("KeyBindingInputManager"){
+
+		}
 
 		virtual vector<KeyBinding*>* GetDefaultkeyBindings() = 0;
 
@@ -55,7 +60,7 @@ namespace KeyBindings {
 					action = state->GetKeyboardState()->GetPresses()->at(i);
 			}
 
-			return InputManager::propagateKeyDown(queue, state, key) + handleNewKeyDown(queue, action);
+			return /*InputManager::propagateKeyDown(queue, state, key) +*/ handleNewKeyDown(queue, action);
 		}
 
 		/// <summary>
@@ -63,44 +68,214 @@ namespace KeyBindings {
 		/// 好處是只需要抓key，不用看input state，比較簡單操作
 		/// </summary>
 		virtual int propagateKeyDown(vector<Triggerable*>* queue, pair<T, int> key) {
+			
+			for (int i = 0; i < queue->size(); i++) {
+				KeyBindingHandler<T>* keyBindingHandler = dynamic_cast<KeyBindingHandler<T>*>(queue->at[i]);
+				if (keyBindingHandler != nullptr) {
+					keyBindingHandler->OnKeyDown(key);
+				}
+			}
+
+			return 0;
+		}
+
+		virtual int propagateKeyUp(vector<Triggerable*>* queue, InputState* state, InputKey key) {
+			return handleNewKeyUp(queue, key);
+		}
+
+		virtual int propagateKeyUp(vector<Triggerable*>* queue, T key) {
+
+			for (int i = 0; i < queue->size(); i++) {
+				KeyBindingHandler<T>* keyBindingHandler = dynamic_cast<KeyBindingHandler<T>*>(queue->at[i]);
+				if (keyBindingHandler != nullptr) {
+					keyBindingHandler->OnKeyUp(key);
+				}
+			}
+
+			return 0;
+		}
+
+		virtual int propagateButtonDown(vector<Triggerable*>* queue, InputState* state, InputKey button) {
+			return handleNewButtonDown(queue, button);
+		}
+
+		virtual int propagateButtonDown(vector<Triggerable*>* queue, T button) {
+
+			for (int i = 0; i < queue->size(); i++) {
+				KeyBindingHandler<T>* keyBindingHandler = dynamic_cast<KeyBindingHandler<T>*>(queue->at[i]);
+				if (keyBindingHandler != nullptr) {
+					keyBindingHandler->OnButtonDown(button);
+				}
+			}
+
+			return 0;
+		}
+
+		virtual int propagateButtonUp(vector<Triggerable*>* queue, InputState* state, InputKey button) {
+			return handleNewButtonUp(queue, button);
+		}
+
+		virtual int propagateButtonUp(vector<Triggerable*>* queue, T button) {
+
+			for (int i = 0; i < queue->size(); i++) {
+				KeyBindingHandler<T>* keyBindingHandler = dynamic_cast<KeyBindingHandler<T>*>(queue->at[i]);
+				if (keyBindingHandler != nullptr) {
+					keyBindingHandler->OnButtonUp(button);
+				}
+			}
+
+			return 0;
+		}
+
+		virtual int propagateKnobTurn(vector<Triggerable*>* queue, InputState* state, InputKey knob) {
+
+			pair<InputKey, int> action = make_pair<InputKey, int>(InputKey::None, 0);
+			for (int i = 0; i < state->GetPanelState()->GetPresses()->size(); i++) {
+				if (state->GetPanelState()->GetPresses()->at(i).first == knob)
+					action = state->GetPanelState()->GetPresses()->at(i);
+			}
+
+			return handleNewKnobTurn(queue, action);
+		}
+
+		virtual int propagateKnobTurn(vector<Triggerable*>* queue, pair<T, int> knob) {
+
+			for (int i = 0; i < queue->size(); i++) {
+				KeyBindingHandler<T>* keyBindingHandler = dynamic_cast<KeyBindingHandler<T>*>(queue->at[i]);
+				if (keyBindingHandler != nullptr) {
+					keyBindingHandler->OnKnobTurn(knob);
+				}
+			}
+
+			return 0;
 
 		}
 
-		virtual int propagateKeyUp(vector<Triggerable*>* queue, InputState* state, InputKey key);
+		virtual int propagateSlide(vector<Triggerable*>* queue, InputState* state, InputKey slider) {
 
-		virtual int propagateKeyUp(vector<Triggerable*>* queue, pair<T, int> key);
+			pair<InputKey, int> action = make_pair<InputKey, int>(InputKey::None, 0);
+			for (int i = 0; i < state->GetPanelState()->GetPresses()->size(); i++) {
+				if (state->GetPanelState()->GetPresses()->at(i).first == slider)
+					action = state->GetPanelState()->GetPresses()->at(i);
+			}
 
-		virtual int propagateButtonDown(vector<Triggerable*>* queue, InputState* state, InputKey button);
+			return handleNewSlide(queue, action);
 
-		virtual int propagateButtonDown(vector<Triggerable*>* queue, T key);
+		}
 
-		virtual int propagateButtonUp(vector<Triggerable*>* queue, InputState* state, InputKey button);
+		virtual int propagateSlide(vector<Triggerable*>* queue, pair<T, int> Slider) {
 
-		virtual int propagateButtonUp(vector<Triggerable*>* queue, T key);
+			for (int i = 0; i < queue->size(); i++) {
+				KeyBindingHandler<T>* keyBindingHandler = dynamic_cast<KeyBindingHandler<T>*>(queue->at[i]);
+				if (keyBindingHandler != nullptr) {
+					keyBindingHandler->OnSlide(Slider);
+				}
+			}
 
-		virtual int propagateKnobTurn(vector<Triggerable*>* queue, InputState* state, InputKey knob);
+			return 0;
 
-		virtual int propagateKnobTurn(vector<Triggerable*>* queue, pair<T, int> key);
-
-		virtual int propagateSlide(vector<Triggerable*>* queue, InputState* state, InputKey slider);
-
-		virtual int propagateSlide(vector<Triggerable*>* queue, pair<T, int> key);
+		}
 
 	private:
 
 		int handleNewKeyDown(InputState* state, pair<InputKey, int> newKey) {
 
+			vector<KeyBinding*>::iterator it = find(keyBindings.begin(), keyBindings.end(), newKey.first);
+			
+			if (it != keyBindings.end()) {
+				propagateKeyDown(triggerQueue, make_pair<T, int>(it->GetAction<T>(), newKey.second));
+				delete queue;
+				return 0;
+			}
+			else {
+				delete queue;
+				return -1;
+			}
+
+			return 0;
 		}
 
-		int handleNewKeyUp(InputState* state, pair<InputKey, int> newKey);
+		int handleNewKeyUp(InputState* state, InputKey newKey) {
 
-		int handleNewButtonDown(InputState* state, InputKey newKey);
+			vector<KeyBinding*>::iterator it = find(keyBindings.begin(), keyBindings.end(), newKey);
 
-		int handleNewButtonUp(InputState* state, InputKey newKey);
+			if (it != keyBindings.end()) {
+				propagateKeyUp(triggerQueue, it->GetAction<T>(newKey));
+				delete queue;
+				return 0;
+			}
+			else {
+				delete queue;
+				return -1;
+			}
 
-		int handleNewKnobTurn(InputState* state, pair<InputKey, int> newKey);
+		}
 
-		int handleNewSlide(InputState* state, pair<InputKey, int> newKey);
+		int handleNewButtonDown(InputState* state, InputKey newButton) {
+
+			vector<KeyBinding*>::iterator it = find(keyBindings.begin(), keyBindings.end(), newButton);
+
+			if (it != keyBindings.end()) {
+				propagateButtonDown(triggerQueue, it->GetAction<T>(newButton));
+				delete queue;
+				return 0;
+			}
+			else {
+				delete queue;
+				return -1;
+			}
+
+		}
+
+		int handleNewButtonUp(InputState* state, InputKey newButton) {
+
+			vector<KeyBinding*>::iterator it = find(keyBindings.begin(), keyBindings.end(), newButton);
+
+			if (it != keyBindings.end()) {
+				propagateButtonUp(triggerQueue, it->GetAction<T>(newButton));
+				delete queue;
+				return 0;
+			}
+			else {
+				delete queue;
+				return -1;
+			}
+
+		}
+
+		int handleNewKnobTurn(InputState* state, pair<InputKey, int> newKnob) {
+
+			vector<KeyBinding*>::iterator it = find(keyBindings.begin(), keyBindings.end(), newKnob);
+
+			if (it != keyBindings.end()) {
+				propagateKnobTurn(triggerQueue, it->GetAction<T>(newKnob));
+				delete queue;
+				return 0;
+			}
+			else {
+				delete queue;
+				return -1;
+			}
+
+		}
+
+		int handleNewSlide(InputState* state, pair<InputKey, int> newSlider) {
+
+			vector<KeyBinding*>::iterator it = find(keyBindings.begin(), keyBindings.end(), newSlider.first);
+
+			if (it != keyBindings.end()) {
+				propagateSlide(triggerQueue, make_pair<T, int>(it->GetAction<T>(), newSlider.second));
+				delete queue;
+				return 0;
+			}
+			else {
+				delete queue;
+				return -1;
+			}
+
+			return 0;
+
+		}
 
 
 	};

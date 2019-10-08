@@ -11,6 +11,10 @@ int PassThroughInputManager::acceptState(InputState * inputState)
 	return RETURN_FAILED;
 }
 
+PassThroughInputManager::PassThroughInputManager() : InputManager(), RegisterType("PassThroughInputManager")
+{
+}
+
 vector<InputState*>* PassThroughInputManager::getPendingState(vector<InputState*>* pendingStates)
 {
 	/* 先把handlers裡面的pending states全都清出來 */

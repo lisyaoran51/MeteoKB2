@@ -27,7 +27,7 @@ namespace KeyBindings {
 		}
 
 		string ToString() {
-			return to_string(Key);
+			return to_string((int)Key);
 		}
 
 

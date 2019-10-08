@@ -25,8 +25,7 @@ Bindable<RulesetInfo*>* MeteoGame::GetRuleset()
 
 int MeteoGame::LoadOnComplete()
 {
-
-	LoadAsync(screenStack = new Loader());
+	AddChild(screenStack = new Loader());
 
 	return 0;
 }

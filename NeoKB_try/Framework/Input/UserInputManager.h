@@ -10,6 +10,11 @@ namespace Input {
 
 	class UserInputManager : public KeyBindingInputManager<FrameworkAction> {
 
+	public:
+
+		UserInputManager();
+
+		virtual vector<KeyBinding*>* GetDefaultkeyBindings();
 
 	protected:
 

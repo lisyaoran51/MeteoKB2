@@ -69,9 +69,9 @@ namespace Hierachal{
 		int Async();
 
 		/// <summary>
-		/// 把component的clock和parent設成自己，並且轉為loaded狀態
+		/// 把component同步背景進行loading，我們不需要這個功能，所以拿掉
 		/// </summary>
-		int LoadAsync(Loadable* component);
+		//int LoadAsync(Loadable* component);
 
 		LoadState GetLoadState();
 

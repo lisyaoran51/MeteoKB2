@@ -261,6 +261,7 @@
     <ClInclude Include="Framework\Input\InputState.h" />
     <ClInclude Include="Framework\Input\KeyBindings\InputKey.h" />
     <ClInclude Include="Framework\Input\KeyBindings\KeyBinding.h" />
+    <ClInclude Include="Framework\Input\KeyBindings\KeyBindingHandler.h" />
     <ClInclude Include="Framework\Input\KeyBindings\KeyBindingInputManager.h" />
     <ClInclude Include="Framework\Input\KeyboardState.h" />
     <ClInclude Include="Framework\Input\PanelState.h" />

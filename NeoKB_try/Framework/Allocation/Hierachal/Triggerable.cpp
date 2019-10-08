@@ -8,20 +8,6 @@ Triggerable::Triggerable(): Schedulable(), RegisterType("Triggerable")
 {
 }
 
-int Triggerable::AddChild(ChildAddable * child)
-{
-	isValidForTrigger = true;
-
-	return ChildAddable::AddChild(child);
-}
-
-int Triggerable::DeleteChild(ChildAddable * child)
-{
-	isValidForTrigger = false;
-
-	return ChildAddable::DeleteChild(child);
-}
-
 int Triggerable::SetIsValidForTrigger(bool value)
 {
 	isValidForTrigger = value;

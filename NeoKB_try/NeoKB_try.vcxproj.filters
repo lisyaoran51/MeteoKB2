@@ -1270,5 +1270,8 @@
     <ClInclude Include="RulesetMeteor\Input\MeteorInputManager.h">
       <Filter>標頭檔\RulesetMeteor\Input</Filter>
     </ClInclude>
+    <ClInclude Include="Framework\Input\KeyBindings\KeyBindingHandler.h">
+      <Filter>標頭檔\Framework\Input\KeyBindings</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -46,7 +46,7 @@ namespace Host {
 		
 		GameHost(string name);
 
-		//int Run(Game* game);
+		int Run(Game* game);
 
 		
 
@@ -102,7 +102,7 @@ namespace Host {
 
 		int setupConfig();
 
-		//int bootstrapSceneGraph(Game* game);
+		int bootstrapSceneGraph(Game* game);
 
 		MainInterface* mainInterface;
 

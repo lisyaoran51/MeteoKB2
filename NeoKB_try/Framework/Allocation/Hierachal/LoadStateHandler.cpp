@@ -38,6 +38,12 @@ int Loadable::NoParentHandler::HandleLoad()
 int Loadable::NoParentHandler::Async()
 {
 	LOG(LogLevel::Finer) << "int Loadable::NoParentHandler::Async() : [" << loadable.GetTypeName() << "] is asyncing.";
+	
+	if (GetDependencies == nullptr) {
+		LOG(LogLevel::Error) << "int Loadable::NoParentHandler::Async() : There's no dependency in this object. Unable to async";
+		throw runtime_error("int Loadable::NoParentHandler::Async() : There's no dependency in this object. Unable to async.");
+	}
+
 	loadable.loadStateHandler = &loadable.loadingHandler;
 	loadable.load();
 	loadable.loadStateHandler = &loadable.readyHandler;
@@ -51,7 +57,7 @@ int Loadable::NoParentHandler::SetParent(HasParent * p)
 	return 0;
 }
 
-int Framework::Allocation::Hierachal::Loadable::NoParentHandler::HandleLoadComplete()
+int Loadable::NoParentHandler::HandleLoadComplete()
 {
 	return 0;
 }

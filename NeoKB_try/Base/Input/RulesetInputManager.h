@@ -28,6 +28,8 @@ namespace Input {
 		RulesetInputManager(RulesetInfo* rInfo, int v = 0) : RegisterType("RulesetInputManager") {
 			rulesetInfo = rInfo;
 			variant = v;
+
+			isInputable = true;
 		}
 
 		virtual vector<KeyBinding*>* GetDefaultkeyBindings() {
@@ -58,6 +60,11 @@ namespace Input {
 
 			return 0;
 		}
+
+		/// <summary>
+		/// 如果以後要用replay的話，要在這邊覆寫handle new state，材不會讓遊戲畫面被干擾
+		/// </summary>
+		//virtual int handleNewState(InputState* state);
 	};
 
 

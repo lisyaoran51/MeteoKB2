@@ -14,10 +14,6 @@ namespace Input {
 	class PassThroughInputManager : public InputManager {
 
 
-		/// <summary>
-		/// 打開狀態時會接收parent丟下來的state，關掉的話就只能靠input handler丟State近來
-		/// </summary>
-		bool useParentState = true;
 
 		vector<InputState*> pendingParentStates;
 
@@ -25,9 +21,14 @@ namespace Input {
 
 	public:
 
-
+		PassThroughInputManager();
 
 	protected:
+
+		/// <summary>
+		/// 打開狀態時會接收parent丟下來的state，關掉的話就只能靠input handler丟State近來
+		/// </summary>
+		bool useParentState = true;
 
 		virtual vector<InputState*>* getPendingState(vector<InputState*>* pendingStates);
 

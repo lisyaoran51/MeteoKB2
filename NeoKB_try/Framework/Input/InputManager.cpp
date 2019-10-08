@@ -96,7 +96,7 @@ int InputManager::updateInputQueue(InputState * inputState)
 
 		for (int i = 0; i < GetChilds()->size(); i++) {
 			Triggerable* temp = GetChilds()->at(i)->Cast<Triggerable>();
-			if (temp->GetIsInputable())
+			if (temp->GetIsInputable() && temp->GetIsValidForTrigger())
 				triggerQueue.push_back(temp);
 			iterateGetChild(temp, &triggerQueue);
 		}
@@ -290,6 +290,11 @@ int InputManager::propagateSlide(vector<Triggerable*>* queue, InputState * state
 	for (int i = 0; i < queue->size(); i++) {
 		queue->at(i)->TriggerOnSlide(state, slider);
 	}
+	return 0;
+}
+
+int InputManager::load()
+{
 	return 0;
 }
 

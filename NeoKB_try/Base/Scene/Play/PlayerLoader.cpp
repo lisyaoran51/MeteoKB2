@@ -11,7 +11,9 @@ PlayerLoader::PlayerLoader(Player * p) : RegisterType("PlayerLoader"), MeteoScen
 
 int PlayerLoader::load()
 {
-	LoadAsync(player);
+	// 這裡原本是用load async，他可以在背景執行add child，不過我們不想增加thread，所以就拿掉了，直接用add child
+	// 不過這樣push when loaded就沒用了
+	AddChild(player);
 
 	pushWhenLoaded();
 

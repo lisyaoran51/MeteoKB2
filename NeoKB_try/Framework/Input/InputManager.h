@@ -44,6 +44,9 @@ namespace Input {
 
 		virtual int update();
 
+		/// <summary>
+		/// 在get pending state時出來提供input handler，來抓input state
+		/// </summary>
 		virtual vector<InputHandler*>* getInputHandlers() = 0;
 
 
@@ -52,7 +55,7 @@ namespace Input {
 		/// <summary>
 		/// 如果有state，會先update input queue，然後再找最底端的child來trigger
 		/// </summary>
-		int handleNewState(InputState* state);
+		virtual int handleNewState(InputState* state);
 
 		virtual vector<InputState*>* getPendingState(vector<InputState*>* pendingStates);
 

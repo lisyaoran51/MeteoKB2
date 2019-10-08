@@ -1,7 +1,7 @@
 #include "GameHost.h"
 
 
-#include "../Input/InputManager.h"
+#include "../Input/UserInputManager.h"
 
 
 
@@ -116,7 +116,7 @@ int GameHost::setupConfig()
 
 int GameHost::bootstrapSceneGraph(Game* game)
 {
-	root = new InputManager();
+	root = new UserInputManager();
 
 	root->SetClock(sceneGraphClock);
 	root->SetDependencies(dependencies);
