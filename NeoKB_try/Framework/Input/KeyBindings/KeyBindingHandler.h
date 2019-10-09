@@ -15,17 +15,17 @@ namespace KeyBindings {
 
 	public:
 
-		virtual OnKeyDown(pair<T, int> action) = 0;
+		virtual int OnKeyDown(pair<T, int> action) = 0;
 
-		virtual OnKeyUp(T action) = 0;
+		virtual int OnKeyUp(T action) = 0;
 
-		virtual OnButtonDown(T action) = 0;
+		virtual int OnButtonDown(T action) = 0;
 
-		virtual OnButtonUp(T action) = 0;
+		virtual int OnButtonUp(T action) = 0;
 
-		virtual OnKnobTurn(pair<T, int> action) = 0;
+		virtual int OnKnobTurn(pair<T, int> action) = 0;
 
-		virtual OnSlide(pair<T, int> action) = 0;
+		virtual int OnSlide(pair<T, int> action) = 0;
 
 
 	};

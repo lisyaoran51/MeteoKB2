@@ -58,5 +58,10 @@ vector<KeyBinding*>* MeteorRuleset::GetDefaultkeyBindings(int variant)
 		bindings->push_back(new KeyBinding((InputKey)i, i));
 	}
 
+	/* Plugin */
+	for (int i = (int)InputKey::BluetoothPlugin; i <= (int)InputKey::ExpressionPedalPlugin; i++) {
+		bindings->push_back(new KeyBinding((InputKey)i, i));
+	}
+
 	return bindings;
 }

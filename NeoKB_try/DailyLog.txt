@@ -1,14 +1,3 @@
-=================代辦事項===================
-給同樂規格
-給法律顧問社細節
-寫新創補助
-找影片團隊
-給derek規格
-打樣燈條
-列印琴鍵
-給twsdy手機架的圖
-做市調
-============================================
 
 https://e-mailky.github.io/2016-10-13-linux_irq
 https://github.com/s-matyukevich/raspberry-pi-os/blob/master/docs/lesson03/linux/timer.md
@@ -864,3 +853,117 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	
 	audio manager和resource store怎麼去處理音樂，還要寫
 	
+	input的處理有兩條線，一條是update thread，一條是input thread
+	
+	update thread的程序是：
+	host:update -> input manager:get pending state(跟input handler拿) -> input manager:handle new state -> input manager:update trigger queue(更新一下目前是哪個畫面來接收輸入)
+	-> input manager:update Events(叫queue裡面每個container出來抓輸入) -> container:On Key Down(container收到輸入的反應)
+	
+	input thread的程序是:
+	host:input frame -> device:scan input -> peripheral:Trigger On Input -> Panel:On button down -> Panel Input Handler:Handle State -> 將state存入pending states中
+	
+	還需要把device在register的時候跟peripheral配對，trigger on input那段也還沒寫
+	
+	update trigger queue還要改寫成只抓到需要輸入的畫面
+	
+	
+9/1
+	哪個畫面用來輸入，這個要去看osu的code在決定
+	
+	input handler是什麼時候initialize? 在host的resetInputHandlers裡面
+	
+	
+9/15
+	想不起來之前寫到哪，timecontroller可能需要仔細看
+	
+	另外要把每一個device寫好，要確定哪一個scene抓到輸入，再看看osu怎麼寫，或是直接用make current解決
+	
+9/16
+	public bool IsCurrentScreen => !hasExited && ChildScreen == null; 這個只是scene用來判斷用的，步是輸入用來判斷用的
+	
+	mouseDownInputQueue.Where(target => target.IsAlive && target.IsPresent)
+	
+	IsPresent -> 全透明或被縮到最小，舊部是present
+	
+	所以他是全部child通通都trigger，除了步alive和步是present
+	
+	現在變成每一個物件只要是Triggerable，舊要在建立時設定自己為isTriggerable，然後調整他可步可用的方式是isValidForTrigger
+	
+	update queue時會檢查他是步是isTriggerable，輸入時會檢查他是步是valid for trigger
+	
+	要找一下osu是在哪裡收到按鍵輸入，然後擊破object
+	
+	DrawableNote.OnPressed -> DrawableHitObject.UpdateJudgement -> DrawableNote.CheckForJudgements -> DrawableHitObject.AddJudgement
+	-> DrawableHitObject.OnJudgement.Invoke -> ManiaPlayfield.OnJudgement -> column.OnJudgement -> explosionContainer.Add(new HitExplosion)
+																		|--> ScoreProcessor.AddJudgement -> ScoreProcessor.OnNewJudgement
+	-> ManiaPlayfield.judgements.Add(new DrawableManiaJudgement)
+	
+	
+	CheckForJudgements會檢查是否超出miss時間，媒超出的話舊建立ManiaJudgement，把得分輸入盡去檢查是perfect還是good，最後在AddJudgement
+	在AddJudgement裡面會檢查他的時間差多少，建立judgement時只會檢查他是perfect還是good，這個時候才會真的輸入時間差
+	
+	ScoreProcessor在OnNewJudgement的時候會去計算分數，計算方式有點複雜
+	
+	最後才會在ManiaPlayfield用DrawableManiaJudgement來顯示得到miss函是good
+	
+	在playfield裡面有個child是HitObjectContainer，rulesetContainer.loadObjects會把DrawableHitObject加到這個container裡面當child，
+	所以在input的時候每一個object的onpressed才會被呼叫，檢查的時候會把所有idle狀態的object都檢查一次，感覺比較耗效能。
+	不知道他怎麼知道這一個和上一個object哪個先被judge，下一個就不用judge
+	
+	userTriggered是用來判斷有沒有漏接，每次update都會judge一次
+	
+	我們應該可以直接在processor master裡面針對目前進行的object檢查舊好，步用全都檢查
+	
+	
+	DrawableNote的OnPressed是定義在IKeyBindingHandler裡面，由KeyBindingInputManager來觸發，觸發時會跟具樣板T來給予輸入，例如這邊的輸入是ManiaAction，
+	室特別給mania定義的
+	
+	keyBinding在切換不同遊戲模式時很好用，但是目前我們只有一種輸入模式，效果步大，但是在提高八度/降低八度時用的到，所以還是要用
+	
+	
+	準備把keybinding input manager和 ruleset input manager放盡去，最後再用meteor input manager繼承舊可以了
+	
+9/18
+	root本身試一個input manager，但是因為每個遊戲規則都有配合的input manager，所以在ruleset下面還會有一個ruleset input manageR，在他下面才是playfield
+	
+	每個遊戲規則的input manger在遊戲時沒有座用，只有在重播的時候才會動。平常還是靠主要的input manager
+	
+	寫到userinputmanager
+	
+9/19
+	還是要用ruleset input manager才能控制ruleset meteor的物鍵，因為key binding input manager會把不屬於這個規則的物件擋掉，不讓他拿到輸入
+	想要拿到輸入的物件，就必須要記成key binding handler<T>，然後把這個規則下的輸入表擺入T，key binding input manager材匯去抓這個物件
+	然後把輸入丟給他
+	
+	寫到PassThroughInputManager::getPendingState
+	
+9/22
+	input key 對硬到 key binding是在rulset的GetDefaultKeyBindings做的，把每個鍵一個一個對過去
+	
+9/30
+	74595，因為github帳密改了，要用
+	git -c diff.mnemonicprefix=false -c core.quotepath=false push -v --tags origin master:master
+	來push，
+	
+10/3
+	先重新看懂input manager是怎麼跑的，看完再全部檢查完，再去寫其他東西。看完可以去寫device的東西
+	
+10/7
+	load async只是用來同步的add child，他的功能跟addchild沒兩樣，只是在背景值形而已，所以把load async刪掉了
+	把static trigger queue拿掉
+	把keybinding input manager補完
+	
+10/8
+	ruleset input manager在ruleset container和playfield中間
+	
+	把can receive input拆成三個因素: inputable , available, is present，所以要精確控制每個東西的這三個要素，input mannager才能運作
+	
+	osu的做法是把下面每個child都去trigger key down一遍，所有都執行完以後檢查一下有沒有trigger成工
+	
+	再ruleset container以上的才能接收on key down，如果再ruleset container以下的物件可以接收on key down，就會重覆接收兩次，因為ruleset input manager會再重複丟一次trigger
+	所以在ruleset input manager以下只能用on key down(action)
+	
+	正在寫piano的key binding和sound binding
+	
+10/9
+	把piano大概寫一寫，電腦控制踏板、踏板切掉聲音，全都大概寫一下

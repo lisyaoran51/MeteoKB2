@@ -23,6 +23,9 @@ namespace IO {
 
 	public:
 
+		/// <summary>
+		/// 這些是給handler住測用的，住測完handler就會自動收到這個panel丟出來的input
+		/// </summary>
 		template<class _Type>
 		int AddOnButtonDown(_Type* callableObject, function<int(InputState*)> callback, string name);
 
@@ -31,6 +34,8 @@ namespace IO {
 
 		template<class _Type>
 		int AddOnSliderMove(_Type* callableObject, function<int(InputState*)> callback, string name);
+
+		virtual int ChangeState(int state, bool value) = 0;
 
 	protected:
 

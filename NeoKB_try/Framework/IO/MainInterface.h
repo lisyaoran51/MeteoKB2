@@ -6,12 +6,14 @@
 #include "Keyboard.h"
 #include "Panel.h"
 #include "BluetoothPhone.h"
+#include "../Allocation/Hierachal/Container.h"
 
 #include "../Devices/InputDevice.h"
 #include "../Devices/OutputDevice.h"
 
 using namespace std;
 using namespace Framework::Devices;
+using namespace Framework::Allocation::Hierachal;
 
 namespace Framework {
 namespace IO {
@@ -19,7 +21,7 @@ namespace IO {
 	/// <summary>
 	/// 抓取輸入的地方，書出的地方
 	/// </summary>
-	class MainInterface {
+	class MainInterface : public Container {
 
 		/* 這些是軟體端的device，不用考量硬體部分 */
 		Display* display;

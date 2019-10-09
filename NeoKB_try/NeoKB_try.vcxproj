@@ -123,7 +123,9 @@
     <ClCompile Include="Framework\Timing\OffsetFramedClock.cpp" />
     <ClCompile Include="Framework\Timing\SpeedAdjusters\SpeedAdjuster.cpp" />
     <ClCompile Include="Framework\Timing\StopwatchClock.cpp" />
+    <ClCompile Include="Instruments\Input\PianoInputManager.cpp" />
     <ClCompile Include="Instruments\Instrument.cpp" />
+    <ClCompile Include="Instruments\MeteoPiano.cpp" />
     <ClCompile Include="Instruments\Piano.cpp" />
     <ClCompile Include="RulesetMeteor\Config\MeteorConfigManager.cpp" />
     <ClCompile Include="RulesetMeteor\MeteorGame.cpp" />
@@ -298,9 +300,11 @@
     <ClInclude Include="Framework\Timing\ThrottledFramedClock.h" />
     <ClInclude Include="Instruments\Audio\SoundBinding.h" />
     <ClInclude Include="Instruments\Input\PianoAction.h" />
-    <ClInclude Include="Instruments\Input\PianoInputManager.h" />
+    <ClInclude Include="Instruments\Input\InstrumentInputManager.h" />
     <ClInclude Include="Instruments\Instrument.h" />
+    <ClInclude Include="Instruments\MeteoPiano.h" />
     <ClInclude Include="Instruments\Piano.h" />
+    <ClInclude Include="Instruments\Pitch.h" />
     <ClInclude Include="RulesetMeteor\Config\MeteorConfigManager.h" />
     <ClInclude Include="RulesetMeteor\Input\MeteorInputManager.h" />
     <ClInclude Include="RulesetMeteor\MeteorGame.h" />

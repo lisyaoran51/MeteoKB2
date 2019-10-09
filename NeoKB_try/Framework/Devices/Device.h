@@ -11,6 +11,8 @@ namespace Devices {
 
 	class Device {
 
+		string peripheralType;
+
 	public:
 
 		virtual int Register(MainInterface* mainInterface) = 0;

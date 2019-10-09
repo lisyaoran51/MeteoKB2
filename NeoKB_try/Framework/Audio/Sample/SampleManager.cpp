@@ -20,7 +20,7 @@ SampleChannel * SampleManager::GetSampleChannel(string name)
 	SampleChannel* sampleChannel = nullptr;
 
 	map<string, Sample*>::iterator it = sampleCache.find(name);
-	if (it != sampleCache.end()) {
+	if (it == sampleCache.end()) {
 
 		// TODO: 這裡會出錯，沒有家路靜，不過之後再來改
 		//ifstream* stream = resourceStore->GetStream(name);

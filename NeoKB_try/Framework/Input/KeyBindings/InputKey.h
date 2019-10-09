@@ -175,6 +175,12 @@ namespace KeyBindings {
 		Sustain		= 1009,
 		Sensitivity	= 1010,
 
+		/* Plugin */
+		BluetoothPlugin = 1500,
+		EarphonePlugin,
+		SustainPedalPlugin,
+		ExpressionPedalPlugin,
+
 	};
 
 
