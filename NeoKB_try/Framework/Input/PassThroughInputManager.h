@@ -2,7 +2,7 @@
 #define PASS_THROUGH_INPUT_MANAGER_H
 
 
-#include "InputManager.h"
+#include "CustomInputManager.h"
 
 
 namespace Framework {
@@ -11,7 +11,7 @@ namespace Input {
 	/// <summary>
 	/// 他會接到他的parent丟下來的new state，然後當成自己的pending state
 	/// </summary>
-	class PassThroughInputManager : public InputManager {
+	class PassThroughInputManager : public CustomInputManager {
 
 
 

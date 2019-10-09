@@ -60,7 +60,7 @@ namespace KeyBindings {
 					action = state->GetKeyboardState()->GetPresses()->at(i);
 			}
 
-			return /*InputManager::propagateKeyDown(queue, state, key) +*/ handleNewKeyDown(queue, action);
+			return InputManager::propagateKeyDown(queue, state, key) + handleNewKeyDown(queue, action);
 		}
 
 		/// <summary>
@@ -80,7 +80,7 @@ namespace KeyBindings {
 		}
 
 		virtual int propagateKeyUp(vector<Triggerable*>* queue, InputState* state, InputKey key) {
-			return handleNewKeyUp(queue, key);
+			return InputManager::propagateKeyUp(queue, state, key) + handleNewKeyUp(queue, key);
 		}
 
 		virtual int propagateKeyUp(vector<Triggerable*>* queue, T key) {
@@ -96,7 +96,7 @@ namespace KeyBindings {
 		}
 
 		virtual int propagateButtonDown(vector<Triggerable*>* queue, InputState* state, InputKey button) {
-			return handleNewButtonDown(queue, button);
+			return InputManager::propagateButtonDown(queue, state, button) + handleNewButtonDown(queue, button);
 		}
 
 		virtual int propagateButtonDown(vector<Triggerable*>* queue, T button) {
@@ -112,7 +112,7 @@ namespace KeyBindings {
 		}
 
 		virtual int propagateButtonUp(vector<Triggerable*>* queue, InputState* state, InputKey button) {
-			return handleNewButtonUp(queue, button);
+			return InputManager::propagateButtonDown(queue, state, button) + handleNewButtonUp(queue, button);
 		}
 
 		virtual int propagateButtonUp(vector<Triggerable*>* queue, T button) {
@@ -135,7 +135,7 @@ namespace KeyBindings {
 					action = state->GetPanelState()->GetPresses()->at(i);
 			}
 
-			return handleNewKnobTurn(queue, action);
+			return InputManager::propagateKnobTurn(queue, state, knob) + handleNewKnobTurn(queue, action);
 		}
 
 		virtual int propagateKnobTurn(vector<Triggerable*>* queue, pair<T, int> knob) {
@@ -159,7 +159,7 @@ namespace KeyBindings {
 					action = state->GetPanelState()->GetPresses()->at(i);
 			}
 
-			return handleNewSlide(queue, action);
+			return InputManager::propagateSlide(queue, state, slider) + handleNewSlide(queue, action);
 
 		}
 

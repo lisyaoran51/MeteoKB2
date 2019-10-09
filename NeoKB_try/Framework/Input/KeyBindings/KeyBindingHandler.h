@@ -17,7 +17,7 @@ namespace KeyBindings {
 
 		virtual OnKeyDown(pair<T, int> action) = 0;
 
-		virtual OnKeyUp(T> action) = 0;
+		virtual OnKeyUp(T action) = 0;
 
 		virtual OnButtonDown(T action) = 0;
 

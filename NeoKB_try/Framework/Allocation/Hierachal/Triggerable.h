@@ -25,8 +25,9 @@ namespace Hierachal {
 		/// <summary>
 		/// 代表目前是否要讓他接受trigger，是可以隨時開起關閉的
 		/// </summary>
-		bool isValidForTrigger = true;
+		bool isAvailableForTrigger = true;
 
+		
 
 	public:
 
@@ -42,11 +43,15 @@ namespace Hierachal {
 		/// </summary>
 		//virtual int DeleteChild(ChildAddable* child);
 
-		int SetIsValidForTrigger(bool value);
+		int SetIsAvailabledForTrigger(bool value);
 
-		bool GetIsValidForTrigger();
+		bool GetIsAvailableForTrigger();
 
 		bool GetIsInputable();
+
+		bool GetIsPresent();
+
+		bool GetIsInputReceivable();
 
 		virtual int TriggerOnKeyDown(InputState* inputState, InputKey key) final;
 		
@@ -66,6 +71,11 @@ namespace Hierachal {
 		/// 代表這個物件本身可不可以輸入，在生成的時候就必須決定
 		/// </summary>
 		bool isInputable = false;
+
+		/// <summary>
+		/// 代表這個物件是否現在仍在使用，無法控制，跳夜跳場景時自動改變
+		/// </summary>
+		bool isPresent = false;
 
 		virtual int onKeyDown(InputState* inputState, InputKey key);
 

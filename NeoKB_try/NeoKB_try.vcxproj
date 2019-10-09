@@ -99,6 +99,7 @@
     <ClCompile Include="Framework\Graphic\Map\Map.cpp" />
     <ClCompile Include="Framework\Host\GameHost.cpp" />
     <ClCompile Include="Framework\Input\BluetoothState.cpp" />
+    <ClCompile Include="Framework\Input\CustomInputManager.cpp" />
     <ClCompile Include="Framework\Input\Handler\BluetoothInputHandler.cpp" />
     <ClCompile Include="Framework\Input\Handler\KeyboardInputHandler.cpp" />
     <ClCompile Include="Framework\Input\Handler\PanelInputHandler.cpp" />
@@ -122,6 +123,8 @@
     <ClCompile Include="Framework\Timing\OffsetFramedClock.cpp" />
     <ClCompile Include="Framework\Timing\SpeedAdjusters\SpeedAdjuster.cpp" />
     <ClCompile Include="Framework\Timing\StopwatchClock.cpp" />
+    <ClCompile Include="Instruments\Instrument.cpp" />
+    <ClCompile Include="Instruments\Piano.cpp" />
     <ClCompile Include="RulesetMeteor\Config\MeteorConfigManager.cpp" />
     <ClCompile Include="RulesetMeteor\MeteorGame.cpp" />
     <ClCompile Include="RulesetMeteor\Play\MeteorPlayfield.cpp" />
@@ -252,6 +255,7 @@
     <ClInclude Include="Framework\Graphic\Map\Map.h" />
     <ClInclude Include="Framework\Host\GameHost.h" />
     <ClInclude Include="Framework\Input\BluetoothState.h" />
+    <ClInclude Include="Framework\Input\CustomInputManager.h" />
     <ClInclude Include="Framework\Input\Handler\BluetoothInputHandler.h" />
     <ClInclude Include="Framework\Input\Handler\InputHandler.h" />
     <ClInclude Include="Framework\Input\Handler\KeyboardInputHandler.h" />
@@ -292,6 +296,11 @@
     <ClInclude Include="Framework\Timing\SpeedAdjusters\SpeedAdjuster.h" />
     <ClInclude Include="Framework\Timing\StopwatchClock.h" />
     <ClInclude Include="Framework\Timing\ThrottledFramedClock.h" />
+    <ClInclude Include="Instruments\Audio\SoundBinding.h" />
+    <ClInclude Include="Instruments\Input\PianoAction.h" />
+    <ClInclude Include="Instruments\Input\PianoInputManager.h" />
+    <ClInclude Include="Instruments\Instrument.h" />
+    <ClInclude Include="Instruments\Piano.h" />
     <ClInclude Include="RulesetMeteor\Config\MeteorConfigManager.h" />
     <ClInclude Include="RulesetMeteor\Input\MeteorInputManager.h" />
     <ClInclude Include="RulesetMeteor\MeteorGame.h" />

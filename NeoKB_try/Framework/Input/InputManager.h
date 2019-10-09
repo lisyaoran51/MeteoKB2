@@ -66,7 +66,7 @@ namespace Input {
 		/// </summary>
 		vector<InputState*>* createDistinctInputStates(vector<InputState*>* states);
 
-		int TransformState(InputState* inputState);
+		virtual int TransformState(InputState* inputState);
 
 		virtual int updateKeyboardEvents(InputState* inputState);
 
@@ -105,11 +105,13 @@ namespace Input {
 		/// </summary>
 		int load();
 
+		int load(GameHost* h);
+
 		//vector<InputHandler*> inputHandlers;
 
 		Triggerable* focusTriggerable;
 
-		int iterateGetChild(Triggerable* p, vector<Triggerable*>* tQueue);
+		int iterateUpdateInputQueue(Triggerable* p, vector<Triggerable*>* tQueue);
 
 
 

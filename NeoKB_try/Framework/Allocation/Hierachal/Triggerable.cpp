@@ -8,20 +8,30 @@ Triggerable::Triggerable(): Schedulable(), RegisterType("Triggerable")
 {
 }
 
-int Triggerable::SetIsValidForTrigger(bool value)
+int Triggerable::SetIsAvailabledForTrigger(bool value)
 {
-	isValidForTrigger = value;
+	isAvailableForTrigger = value;
 	return 0;
 }
 
-bool Triggerable::GetIsValidForTrigger()
+bool Triggerable::GetIsAvailableForTrigger()
 {
-	return isValidForTrigger;
+	return isAvailableForTrigger;
 }
 
 bool Triggerable::GetIsInputable()
 {
 	return isInputable;
+}
+
+bool Triggerable::GetIsPresent()
+{
+	return isPresent;
+}
+
+bool Triggerable::GetIsInputReceivable()
+{
+	return GetIsInputable && GetIsAvailableForTrigger && isPresent;
 }
 
 int Triggerable::TriggerOnKeyDown(InputState * inputState, InputKey key)
@@ -56,32 +66,32 @@ int Triggerable::TriggerOnSlide(InputState * inputState, InputKey slider)
 
 int Triggerable::onKeyDown(InputState * inputState, InputKey key)
 {
-	return 0;
+	return -1;
 }
 
 int Triggerable::onKeyUp(InputState * inputState, InputKey key)
 {
-	return 0;
+	return -1;
 }
 
 int Triggerable::onKnobTurn(InputState * inputState, InputKey knob)
 {
-	return 0;
+	return -1;
 }
 
 int Triggerable::onButtonDown(InputState * inputState, InputKey button)
 {
-	return 0;
+	return -1;
 }
 
 int Triggerable::onButtonUp(InputState * inputState, InputKey button)
 {
-	return 0;
+	return -1;
 }
 
 int Triggerable::onSlide(InputState * inputState, InputKey slider)
 {
-	return 0;
+	return -1;
 }
 
 

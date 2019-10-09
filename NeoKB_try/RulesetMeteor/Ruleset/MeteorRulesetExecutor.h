@@ -2,10 +2,13 @@
 #define METEOR_RULESET_EXCUTOR_H
 
 #include "../../Base/Ruleset/Ruleset.h"
+#include "../../Framework/Input/PassThroughInputManager.h"
 
 
 using namespace Base::Rulesets;
 using namespace Base::Schedulers::Events;
+using namespace Framework::Input;
+
 
 namespace Meteor {
 namespace Rulesets {
@@ -38,6 +41,8 @@ namespace Rulesets {
 		virtual ~MeteorRulesetExecutor() = default;
 
 		virtual int LazyConstruct(WorkingSm* w);
+
+		virtual PassThroughInputManager* CreateInputManager();
 
 		virtual int Elapse(MTO_FLOAT elapsedTime);
 

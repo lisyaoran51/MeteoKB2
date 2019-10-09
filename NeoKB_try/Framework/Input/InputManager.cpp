@@ -5,9 +5,11 @@ using namespace Framework::Input;
 
 
 
-InputManager::InputManager(): RegisterType("InputManager"), Container()
+InputManager::InputManager(): RegisterType("InputManager")
 {
+	registerLoad(bind(static_cast<int(InputManager::*)(void)>(&InputManager::load), this));
 	currentState = new InputState();
+
 }
 
 int InputManager::update()
@@ -78,6 +80,12 @@ vector<InputState*>* InputManager::createDistinctInputStates(vector<InputState*>
 	return nullptr;
 }
 
+int InputManager::TransformState(InputState * inputState)
+{
+	// 還不知道這個要幹嘛 先不要寫
+	return 0;
+}
+
 int InputManager::updateInputQueue(InputState * inputState)
 {
 
@@ -96,9 +104,9 @@ int InputManager::updateInputQueue(InputState * inputState)
 
 		for (int i = 0; i < GetChilds()->size(); i++) {
 			Triggerable* temp = GetChilds()->at(i)->Cast<Triggerable>();
-			if (temp->GetIsInputable() && temp->GetIsValidForTrigger())
+			if (temp->GetIsInputReceivable())
 				triggerQueue.push_back(temp);
-			iterateGetChild(temp, &triggerQueue);
+			iterateUpdateInputQueue(temp, &triggerQueue);
 		}
 	}
 
@@ -183,13 +191,9 @@ int InputManager::updateBluetoothEvents(InputState * inputState)
 
 int InputManager::handleKeyDown(InputState * state, InputKey key)
 {
-	vector<Triggerable*> queue;
-	queue.assign(triggerQueue.begin(), triggerQueue.end());
-	queue.reserve(triggerQueue.size() + staticTriggerQueue.size());
-	queue.insert(queue.end(), staticTriggerQueue.begin(), staticTriggerQueue.end());
 	
 
-	return propagateKeyDown(&queue, state, key);
+	return propagateKeyDown(&triggerQueue, state, key);
 }
 
 int InputManager::propagateKeyDown(vector<Triggerable*>* queue, InputState * state, InputKey key)
@@ -202,13 +206,7 @@ int InputManager::propagateKeyDown(vector<Triggerable*>* queue, InputState * sta
 
 int InputManager::handleKeyUp(InputState * state, InputKey key)
 {
-	vector<Triggerable*> queue;
-	queue.assign(triggerQueue.begin(), triggerQueue.end());
-	queue.reserve(triggerQueue.size() + staticTriggerQueue.size());
-	queue.insert(queue.end(), staticTriggerQueue.begin(), staticTriggerQueue.end());
-
-
-	return propagateKeyUp(&queue, state, key);;
+	return propagateKeyUp(&triggerQueue, state, key);;
 }
 
 int InputManager::propagateKeyUp(vector<Triggerable*>* queue, InputState * state, InputKey key)
@@ -221,12 +219,7 @@ int InputManager::propagateKeyUp(vector<Triggerable*>* queue, InputState * state
 
 int InputManager::handleButtonDown(InputState * state, InputKey button)
 {
-	vector<Triggerable*> queue;
-	queue.assign(triggerQueue.begin(), triggerQueue.end());
-	queue.reserve(triggerQueue.size() + staticTriggerQueue.size());
-	queue.insert(queue.end(), staticTriggerQueue.begin(), staticTriggerQueue.end());
-
-	return propagateButtonDown(&queue, state, button);
+	return propagateButtonDown(&triggerQueue, state, button);
 }
 
 int InputManager::propagateButtonDown(vector<Triggerable*>* queue, InputState * state, InputKey button)
@@ -239,12 +232,7 @@ int InputManager::propagateButtonDown(vector<Triggerable*>* queue, InputState * 
 
 int InputManager::handleButtonUp(InputState * state, InputKey button)
 {
-	vector<Triggerable*> queue;
-	queue.assign(triggerQueue.begin(), triggerQueue.end());
-	queue.reserve(triggerQueue.size() + staticTriggerQueue.size());
-	queue.insert(queue.end(), staticTriggerQueue.begin(), staticTriggerQueue.end());
-
-	return propagateButtonUp(&queue, state, button);
+	return propagateButtonUp(&triggerQueue, state, button);
 }
 
 int InputManager::propagateButtonUp(vector<Triggerable*>* queue, InputState * state, InputKey button)
@@ -258,12 +246,7 @@ int InputManager::propagateButtonUp(vector<Triggerable*>* queue, InputState * st
 
 int InputManager::handleKnobTurn(InputState * state, InputKey knob)
 {
-	vector<Triggerable*> queue;
-	queue.assign(triggerQueue.begin(), triggerQueue.end());
-	queue.reserve(triggerQueue.size() + staticTriggerQueue.size());
-	queue.insert(queue.end(), staticTriggerQueue.begin(), staticTriggerQueue.end());
-
-	return propagateKnobTurn(&queue, state, knob);;
+	return propagateKnobTurn(&triggerQueue, state, knob);;
 }
 
 int InputManager::propagateKnobTurn(vector<Triggerable*>* queue, InputState * state, InputKey knob)
@@ -277,12 +260,7 @@ int InputManager::propagateKnobTurn(vector<Triggerable*>* queue, InputState * st
 
 int InputManager::handleSlide(InputState * state, InputKey slider)
 {
-	vector<Triggerable*> queue;
-	queue.assign(triggerQueue.begin(), triggerQueue.end());
-	queue.reserve(triggerQueue.size() + staticTriggerQueue.size());
-	queue.insert(queue.end(), staticTriggerQueue.begin(), staticTriggerQueue.end());
-
-	return propagateSlide(&queue, state, slider);
+	return propagateSlide(&triggerQueue, state, slider);
 }
 
 int InputManager::propagateSlide(vector<Triggerable*>* queue, InputState * state, InputKey slider)
@@ -295,10 +273,22 @@ int InputManager::propagateSlide(vector<Triggerable*>* queue, InputState * state
 
 int InputManager::load()
 {
+	LOG(LogLevel::Info) << "InputManager::load : get host.";
+
+	GameHost * h = GetCache<GameHost>("GameHost");
+	if (!h)
+		throw runtime_error("int InputManager::load() : GameHost not found in cache.");
+
+	return load(h);
+}
+
+int InputManager::load(GameHost * h)
+{
+	host = h;
 	return 0;
 }
 
-int InputManager::iterateGetChild(Triggerable * temp, vector<Triggerable*>* tQueue)
+int InputManager::iterateUpdateInputQueue(Triggerable * temp, vector<Triggerable*>* tQueue)
 {
 	int size = tQueue->size();
 
@@ -307,7 +297,7 @@ int InputManager::iterateGetChild(Triggerable * temp, vector<Triggerable*>* tQue
 		Triggerable* tempChild = GetChilds()->at(i)->Cast<Triggerable>();
 
 		if (tempChild->GetIsInputable())
-			iterateGetChild(tempChild, tQueue);
+			iterateUpdateInputQueue(tempChild, tQueue);
 	}
 
 	return size == tQueue->size() ? 0 : -1;

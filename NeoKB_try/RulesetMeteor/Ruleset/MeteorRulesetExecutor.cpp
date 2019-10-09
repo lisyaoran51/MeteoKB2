@@ -12,6 +12,7 @@
 #include "../Scheduler/Event/Effect/TargetLineEffectMapper.h"
 #include "../../Base/Scheduler/Event/SystemEvents/SystemEventHandler.h"
 #include "../../Base/Scheduler/Event/SystemEvents/StopSystemEvent.h"
+#include "../Input/MeteorInputManager.h"
 
 
 using namespace Meteor::Rulesets;
@@ -22,7 +23,7 @@ using namespace Meteor::Sheetmusics;
 using namespace Meteor::Play;
 using namespace Base::Schedulers::Events::Effects;
 using namespace Meteor::Schedulers::Events::Effects;
-
+using namespace Meteor::Input;
 
 
 SmConverter * MeteorRulesetExecutor::createSmConverter(PatternGenerator * pg)
@@ -60,6 +61,11 @@ int MeteorRulesetExecutor::LazyConstruct(WorkingSm * w)
 	RulesetExecutor::LazyConstruct(w);
 	constructed = true;
 	return 0;
+}
+
+PassThroughInputManager * MeteorRulesetExecutor::CreateInputManager()
+{
+	return new MeteorInputManager();
 }
 
 int MeteorRulesetExecutor::Elapse(MTO_FLOAT elapsedTime)

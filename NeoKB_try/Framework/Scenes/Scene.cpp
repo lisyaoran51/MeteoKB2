@@ -12,6 +12,7 @@ using namespace Framework;
 
 Scene::Scene() : RegisterType("Scene")
 {
+	isInputable = true;
 }
 
 int Scene::Push(Scene * scene)
@@ -28,6 +29,7 @@ int Scene::Push(Scene * scene)
 	Expire();
 
 	isCurrentScene = false;
+	isPresent = false;
 	scene->Enter(this);
 
 
@@ -48,6 +50,7 @@ int Scene::MakeCurrent()
 	s->Exit();
 
 	isCurrentScene = true;
+	isPresent = true;
 
 	return 0;
 }
@@ -78,6 +81,7 @@ int Scene::Expire()
 int Scene::Enter(Scene * lastScene)
 {
 	isCurrentScene = true;
+	isPresent = true;
 	return onEntering(lastScene);
 }
 

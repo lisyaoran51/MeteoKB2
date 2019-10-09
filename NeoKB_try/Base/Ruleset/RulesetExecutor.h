@@ -14,6 +14,7 @@
 #include "../../Framework/Configurations/FrameworkConfigManager.h"
 #include "../Scheduler/Event/Effect/Algorithm/MapAlgorithm.h"
 #include "../Sheetmusic/WorkingSheetmusic.h"
+#include "../../Framework/Input/PassThroughInputManager.h"
 
 
 
@@ -34,6 +35,8 @@ using namespace Base::Schedulers::Events::Effects::Algorithms;
 using namespace Base::Rulesets;
 using namespace Framework::Allocation::Hierachal;
 using namespace Base::Scenes::Play;
+using namespace Framework::Input;
+
 
 
 namespace Base {
@@ -50,6 +53,8 @@ namespace Rulesets {
 		/// 判斷這個物建有沒有被建構，建構後才可使用
 		///	</summary>
 		bool constructed;
+
+		PassThroughInputManager* rulesetInputManager;
 
 		/// <summary>
 		/// jobs:
@@ -127,8 +132,11 @@ namespace Rulesets {
 			LOG(LogLevel::Info) << "RulesetExecutor::load : creating playfield ...";
 			playfield = createPlayfield();
 
+			// 建立一個接收上面的input，轉換成這個ruleset的input的inputmanager
+			AddChild(rulesetInputManager);
+
 			// 這邊會把map algo讀進去playfield裡面，這件事要記得寫
-			AddChild(playfield);
+			rulesetInputManager->AddChild(playfield);
 
 			// 把Event轉成Event processor擺進去playfield裡
 			LOG(LogLevel::Info) << "RulesetExecutor::load : loading events into playfield ...";
@@ -167,8 +175,12 @@ namespace Rulesets {
 
 			constructed = true;
 
+			rulesetInputManager = CreateInputManager();
+
 			return 0;
 		}
+
+		virtual PassThroughInputManager* CreateInputManager() = 0;
 
 
 	protected:
