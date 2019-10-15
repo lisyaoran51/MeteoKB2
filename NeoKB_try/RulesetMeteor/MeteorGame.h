@@ -1,9 +1,9 @@
 #ifndef METEOR_GAME_H
 #define METEOR_GAME_H
 
-#include"../Base/MeteoGame.h"
+#include"../Games/MeteoGame.h"
 
-using namespace Base;
+using namespace Games;
 
 namespace Meteor {
 

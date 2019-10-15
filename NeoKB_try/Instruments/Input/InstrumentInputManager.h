@@ -18,7 +18,7 @@ namespace Input{
 
 	public:
 
-		InstrumentInputManager(Instrument* i) : RegisterType("InstrumentInputManager") {
+		InstrumentInputManager(Instrument<T>* i) : RegisterType("InstrumentInputManager") {
 			instrument = i;
 		}
 
@@ -30,7 +30,7 @@ namespace Input{
 
 	protected:
 
-		Instrument* instrument;
+		Instrument<T>* instrument;
 
 	};
 

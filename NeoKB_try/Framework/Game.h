@@ -16,7 +16,11 @@ using namespace Framework::Host;
 
 namespace Framework {
 
-	class GmeHost;
+	namespace Host {
+
+		//class GameHost;
+
+	}
 
 	class Game : public Container {
 		

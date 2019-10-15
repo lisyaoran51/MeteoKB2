@@ -4,9 +4,10 @@
 
 
 #include <vector>
+#include "../Devices/Device.h"
 
 using namespace std;
-
+using namespace Framework::Devices;
 
 namespace Framework {
 namespace IO {
@@ -21,8 +22,18 @@ namespace IO {
 
 		virtual int TriggerOnInput() = 0;
 
+		virtual int SetDevice(Device* device);
+
+		/// <summary>
+		/// 給device用的，他拿到輸入以後就push給這邊，這邊才能再去叫input handler
+		/// </summary>
+		int PushInputState(InputState* inputState);
+
 	protected:
 
+		Device* matchedDevice;
+
+		vector<InputState*> inputStates;
 
 	private:
 

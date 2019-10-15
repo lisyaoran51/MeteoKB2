@@ -1,11 +1,11 @@
 #ifndef EXPLODE_EFFECT_MAPPER_H
 #define EXPLODE_EFFECT_MAPPER_H
 
-#include "../../../../Base/Scheduler/Event/Effect/EffectMapper.h"
+#include "../../../../Games/Scheduler/Event/Effect/EffectMapper.h"
 #include "ExplodeEffect.h"
 
 
-using namespace Base::Schedulers::Events::Effects;
+using namespace Games::Schedulers::Events::Effects;
 
 
 namespace Meteor {

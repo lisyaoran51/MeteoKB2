@@ -16,6 +16,7 @@
 #include "../Allocation/Hierachal/Container.h"
 #include "../Graphic/Map/Map.h"
 #include "../Timing/FrameBasedClock.h"
+#include "../../Instruments/Instrument.h"
 
 
 using namespace std;
@@ -31,6 +32,8 @@ using namespace Framework::Allocation::Hierachal;
 using namespace Framework::Allocation;
 using namespace Framework::Configurations;
 using namespace Framework::Timing;
+using namespace Instruments;
+
 
 
 namespace Framework {
@@ -44,16 +47,16 @@ namespace Host {
 	
 	public:
 		
-		GameHost(string name);
+		GameHost(string name = "");
 
-		int Run(Game* game);
+		int Run(Game* game, Instrument* instrument);
 
 		
 
 		/// <summary>
 		/// 讓handler們去註冊，在input thread收到input時，會去用這個叫所有handler，讓每個handler去收自己要的state
 		/// </summary>
-		Action<int, InputEvent*> OnInput;
+		ActionList<int, InputEvent*> OnInput;
 
 		MainInterface* GetMainInterface();
 
@@ -61,10 +64,19 @@ namespace Host {
 
 	protected:
 
+		/* IO用 */
+		MainInterface* mainInterface;
+
+		virtual int setupMainInterface() = 0;
+
+
+		/* 建scene graph用 */
 		FrameBasedClock* sceneGraphClock;
 
 		DependencyContainer* dependencies;
 
+
+		/* draw thread */
 		GameThread* drawThread;
 
 		double maximunDrawHz;
@@ -74,6 +86,7 @@ namespace Host {
 		int drawFrame();
 
 
+		/* update thread */
 		GameThread* updateThread;
 
 		double maximunUpdateHz;
@@ -83,6 +96,7 @@ namespace Host {
 		int updateFrame();
 
 
+		/* IO thread */
 		/// <summary>
 		/// 把input丟到main interface裡
 		/// </summary>
@@ -96,15 +110,15 @@ namespace Host {
 
 		int resetInputHandlers();
 
+		virtual vector<InputHandler*>* createAvailableInputHandlers() = 0;
+
 	private :
 
 		FrameworkConfigManager* frameworkConfigManager;
 
 		int setupConfig();
 
-		int bootstrapSceneGraph(Game* game);
-
-		MainInterface* mainInterface;
+		int bootstrapSceneGraph(Game* game, Instrument* instrument);
 
 		/// <summary>
 		/// input manager會成為root，附則把輸入傳給下面的物件
@@ -115,7 +129,7 @@ namespace Host {
 
 		Map* canvas;
 
-		vector<InputHandler*> availableInputHandler;
+		vector<InputHandler*>* availableInputHandlers;
 
 		
 

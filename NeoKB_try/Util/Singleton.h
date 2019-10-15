@@ -20,7 +20,7 @@ namespace Util {
 
 		Singleton& operator=(const Singleton&) = delete;
 
-		virtual ~Singleton() = default; // to silence Base class Singleton<T> has a
+		virtual ~Singleton() = default; // to silence Games class Singleton<T> has a
 										// non-virtual destructor [-Weffc++]
 
 	public:

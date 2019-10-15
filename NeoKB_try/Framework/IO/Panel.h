@@ -7,10 +7,12 @@
 #include "Peripheral.h"
 #include "../../Util/DataStructure/ActionList.h"
 #include "../Input/InputState.h"
+#include "../Devices/PanelDevice.h"
 
 using namespace std;
 using namespace Util::DataStructure;
 using namespace Framework::Input;
+using namespace Framework::Devices;
 
 namespace Framework {
 namespace IO {
@@ -23,30 +25,25 @@ namespace IO {
 
 	public:
 
+		virtual int SetDevice(Device* device);
+
+		virtual int TriggerOnInput();
+
 		/// <summary>
 		/// 這些是給handler住測用的，住測完handler就會自動收到這個panel丟出來的input
 		/// </summary>
 		template<class _Type>
-		int AddOnButtonDown(_Type* callableObject, function<int(InputState*)> callback, string name);
-
-		template<class _Type>
-		int AddOnKnobTurn(_Type* callableObject, function<int(InputState*)> callback, string name);
-
-		template<class _Type>
-		int AddOnSliderMove(_Type* callableObject, function<int(InputState*)> callback, string name);
+		int AddOnPanelEvent(_Type* callableObject, function<int(InputState*)> callback, string name);
 
 		virtual int ChangeState(int state, bool value) = 0;
 
 	protected:
 
+		PanelDevice* matchedPanelDevice;
 
 	private:
 
-		ActionList<int(InputState*)> OnButtonDown;
-
-		ActionList<int(InputState*)> OnKnobTurn;
-
-		ActionList<int(InputState*)> OnSliderMove;
+		ActionList<int(InputState*)> OnPanelEvent;
 
 
 	};

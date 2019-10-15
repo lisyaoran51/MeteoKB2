@@ -2,10 +2,10 @@
 #define METEOR_INPUT_MANAGER_H
 
 
-#include "../../Base/Input/RulesetInputManager.h"
+#include "../../Games/Input/RulesetInputManager.h"
 
 
-using namespace Base::Input;
+using namespace Games::Input;
 
 
 namespace Meteor {

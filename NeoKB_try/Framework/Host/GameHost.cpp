@@ -11,9 +11,11 @@ using namespace Framework::Input;
 
 
 
-GameHost::GameHost(string name = "")
+GameHost::GameHost(string name)
 {
 	dependencies = new DependencyContainer();
+
+	setupMainInterface();
 
 	drawThread = new GameThread(bind(&GameHost::drawFrame, this), "DrawThread");
 	drawInitialize();
@@ -28,15 +30,17 @@ GameHost::GameHost(string name = "")
 
 }
 
-int GameHost::Run(Game* game)
+int GameHost::Run(Game* game, Instrument* instrument)
 {
 	setupConfig();
 
 	resetInputHandlers();
 
+
+	inputThread->Start();
 	drawThread->Start();
 	updateThread->Start();
-	bootstrapSceneGraph(game);
+	bootstrapSceneGraph(game, instrument);
 
 
 	return 0;
@@ -45,6 +49,11 @@ int GameHost::Run(Game* game)
 MainInterface * GameHost::GetMainInterface()
 {
 	return mainInterface;
+}
+
+vector<InputHandler*>* GameHost::GetAvailableInputHandlers()
+{
+	return availableInputHandlers;
 }
 
 int GameHost::drawInitialize()
@@ -70,7 +79,7 @@ int GameHost::drawFrame()
 			drawables[i]->GetPositionY());
 	}
 
-	mainInterface->GetDisplay()->Display(canvas);
+	mainInterface->GetDisplay()->Show(canvas);
 
 	return 0;
 }
@@ -87,7 +96,7 @@ int GameHost::updateFrame()
 
 int GameHost::inputInitialize()
 {
-	
+	/* 初始化input handlers */
 	return 0;
 }
 
@@ -95,16 +104,20 @@ int GameHost::inputFrame()
 {
 
 	mainInterface->ScanInput();
+	/* 這邊只輸出panel上的uotput，不輸出琴鍵燈光 */
+	mainInterface->ProcessOutput();
 	return 0;
 }
 
 int GameHost::resetInputHandlers()
 {
+	availableInputHandlers = createAvailableInputHandlers();
 
-	availableInputHandler.push_back(pianoKeyInputHandler);
+
+	//availableInputHandlers.push_back(pianoKeyInputHandler);
 
 	// 在initialize裡面，會把自己的on input註冊到host.OnInput裡
-	pianoKeyInputHandler->Intialize();
+	// pianoKeyInputHandler->Intialize();
 
 	return 0;
 }
@@ -114,9 +127,13 @@ int GameHost::setupConfig()
 	return 0;
 }
 
-int GameHost::bootstrapSceneGraph(Game* game)
+int GameHost::bootstrapSceneGraph(Game* game, Instrument* instrument)
 {
 	root = new UserInputManager();
+
+	dependencies->Cache(root);
+	dependencies->Cache(game);
+	dependencies->Cache(instrument);
 
 	root->SetClock(sceneGraphClock);
 	root->SetDependencies(dependencies);
@@ -126,6 +143,10 @@ int GameHost::bootstrapSceneGraph(Game* game)
 	root->AddChild(game);
 	game->SetHost(this);
 
+	InputManager* instrumentInputManager = instrument->CreateInputManager();
+	root->AddChild(instrumentInputManager);
+	instrumentInputManager->AddChild(instrument);
+	instrument->SetHost(this);
 
 
 	return 0;

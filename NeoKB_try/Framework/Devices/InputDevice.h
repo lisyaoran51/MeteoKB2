@@ -2,6 +2,11 @@
 #define INPUT_DEVICE_H
 
 #include "Device.h"
+#include <vector>
+#include "../Input/InputState.h"
+
+using namespace Framework::Input;
+using namespace std;
 
 namespace Framework {
 namespace Devices {

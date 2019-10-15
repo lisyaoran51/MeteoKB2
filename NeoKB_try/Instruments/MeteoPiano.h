@@ -3,18 +3,19 @@
 
 #include "Piano.h"
 
+
 using namespace Framework::Input::KeyBindings;
 
 
 namespace Instruments {
 
-	enum class PianoPitchState;
+	enum class MeteoPianoPitchState;
 
 	class MeteoPiano : public Piano {
 
 		bool isGameControllingPitchState = false;
 
-		PianoPitchState state;
+		MeteoPianoPitchState state;
 
 		map<PianoAction, SampleChannel*> raisedSamples;
 
@@ -22,7 +23,7 @@ namespace Instruments {
 
 	public:
 
-		int ChangePitchState(PianoPitchState s);
+		int ChangePitchState(MeteoPianoPitchState s);
 
 		virtual int OnKnobTurn(pair<PianoAction, int> action);
 
@@ -39,7 +40,7 @@ namespace Instruments {
 
 	};
 
-	enum class PianoPitchState {
+	enum class MeteoPianoPitchState {
 		None,
 		Raised,
 		Lowered

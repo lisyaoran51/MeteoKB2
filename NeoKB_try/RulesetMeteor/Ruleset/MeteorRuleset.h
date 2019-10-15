@@ -1,9 +1,9 @@
 #ifndef METEOR_RULESET_H
 #define METEOR_RULESET_H
 
-#include "../../Base/Ruleset/Ruleset.h"
+#include "../../Games/Ruleset/Ruleset.h"
 
-using namespace Base::Rulesets;
+using namespace Games::Rulesets;
 
 namespace Meteor {
 namespace Rulesets{

@@ -2,7 +2,24 @@
 
 using namespace Instruments;
 
+
+
+
+
+
+
 template<typename T>
+TInstrument<T>::TInstrument() : RegisterType("TInstrument")
+{
+}
+
+template<typename T>
+map<int, SampleChannel*>* TInstrument::getSamples()
+{
+	return &samples;
+}
+
+
 int Instrument::load()
 {
 	AudioManager * a = GetCache<AudioManager>("AudioManager");
@@ -12,20 +29,23 @@ int Instrument::load()
 	return load(a);
 }
 
-template<typename T>
 int Instrument::load(AudioManager * a)
 {
 	audioManager = a;
 	return 0;
 }
 
-template<typename T>
-Instrument::Instrument()
+Instrument::Instrument() : RegisterType("Instrument")
 {
-	registerLoad(bind(static_cast<int(Instrument<T>::*)(void)>(&Instrument<T>::load), this));
+	registerLoad(bind(static_cast<int(Instrument::*)(void)>(&Instrument::load), this));
 }
 
-template<typename T>
+int Instrument::SetHost(GameHost * h)
+{
+	host = h;
+	return 0;
+}
+
 int Instrument::LoadOnCompleted()
 {
 	// §âsound binding¥á¶i¥h
@@ -41,13 +61,6 @@ int Instrument::LoadOnCompleted()
 	return 0;
 }
 
-template<typename T>
-map<int, SampleChannel*>* Instrument::getSamples()
-{
-	return &samples;
-}
-
-template<typename T>
 string Instrument::getSoundBinding(int action)
 {
 	for (int i = 0; i < soundBindings.size(); i++) {

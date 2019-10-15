@@ -7,10 +7,12 @@
 #include "Peripheral.h"
 #include "../../Util/DataStructure/ActionList.h"
 #include "../Input/InputState.h"
+#include "../Devices/KeyboardDevice.h"
 
 using namespace std;
 using namespace Util::DataStructure;
 using namespace Framework::Input;
+using namespace Framework::Devices;
 
 namespace Framework {
 namespace IO {
@@ -23,16 +25,20 @@ namespace IO {
 
 	public:
 
+		virtual int SetDevice(Device* device);
+
+		virtual int TriggerOnInput();
+
 		template<class _Type>
-		int AddOnKeyDown(_Type* callableObject, function<int(InputState*)> callback, string name);
+		int AddOnKeyEvent(_Type* callableObject, function<int(InputState*)> callback, string name);
 
 	protected:
 
+		KeyboardDevice* matchedKeyboardDevice;
 
 	private:
 
-		ActionList<int(InputState*)> OnKeyDown;
-
+		ActionList<int(InputState*)> OnKeyEvent;
 
 	};
 

@@ -4,9 +4,11 @@
 #include <vector>
 #include "Peripheral.h"
 #include "../Graphic/Map/Map.h"
+#include "../Devices/DisplayDevice.h"
 
 using namespace std;
 using namespace Framework::Graphic::Maps;
+using namespace Framework::Devices;
 
 
 namespace Framework {
@@ -22,11 +24,16 @@ namespace IO {
 	public:
 
 		Display();
+
+		virtual int SetDevice(Device* device);
 		
+		virtual int TriggerOnInput();
+
 		int Show(Map* m);
 
 	protected:
 
+		DisplayDevice* matchedDisplayDevice;
 
 	private:
 

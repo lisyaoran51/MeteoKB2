@@ -1,23 +1,23 @@
 #include "MeteorPatternGenerator.h"
 
 #include "../../../Util/MtoType.h"
-#include "../../../Base/Scheduler/Event/ControlPoints/NoteControlPoint.h"
+#include "../../../Games/Scheduler/Event/ControlPoints/NoteControlPoint.h"
 #include "../../Scheduler/Event/Effect/FallEffect.h"
 #include "../../Scheduler/Event/Effect/GlowLineEffect.h"
 #include "../../Scheduler/Event/Effect/TargetLineEffect.h"
-#include "../../../Base/Scheduler/Event/GameEvents/StartGameEvent.h"
-#include "../../../Base/Scheduler/Event/SystemEvents/SystemEvent.h"
-#include "../../../Base/Scheduler/Event/SystemEvents/StopSystemEvent.h"
+#include "../../../Games/Scheduler/Event/GameEvents/StartGameEvent.h"
+#include "../../../Games/Scheduler/Event/SystemEvents/SystemEvent.h"
+#include "../../../Games/Scheduler/Event/SystemEvents/StopSystemEvent.h"
 
 
 
 using namespace Meteor::Sheetmusics::Patterns;
 using namespace Meteor::Config;
-using namespace Base::Schedulers::Events;
-using namespace Base::Schedulers::Events::ControlPoints;
+using namespace Games::Schedulers::Events;
+using namespace Games::Schedulers::Events::ControlPoints;
 using namespace Meteor::Schedulers::Events::Effects;
-using namespace Base::Schedulers::Events::GameEvents;
-using namespace Base::Schedulers::Events::SystemEvents;
+using namespace Games::Schedulers::Events::GameEvents;
+using namespace Games::Schedulers::Events::SystemEvents;
 
 
 

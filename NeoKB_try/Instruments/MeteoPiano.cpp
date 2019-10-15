@@ -10,6 +10,12 @@ using namespace Instruments::Input;
 
 
 
+int MeteoPiano::ChangePitchState(MeteoPianoPitchState s)
+{
+	state = s;
+	return 0;
+}
+
 int MeteoPiano::OnKnobTurn(pair<PianoAction, int> action)
 {
 	return 0;
@@ -24,15 +30,15 @@ map<PianoAction, SampleChannel*>* MeteoPiano::getSamples()
 {
 	switch (state) {
 	
-	case PianoPitchState::None:
+	case MeteoPianoPitchState::None:
 		return Instrument::getSamples();
 		break;
 	
-	case PianoPitchState::Lowered:
+	case MeteoPianoPitchState::Lowered:
 		return &loweredSamples;
 		break;
 
-	case PianoPitchState::Raised:
+	case MeteoPianoPitchState::Raised:
 		return &raisedSamples;
 		break;
 	}

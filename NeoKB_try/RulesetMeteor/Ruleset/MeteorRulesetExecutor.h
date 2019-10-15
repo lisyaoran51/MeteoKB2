@@ -1,12 +1,12 @@
 #ifndef METEOR_RULESET_EXCUTOR_H
 #define METEOR_RULESET_EXCUTOR_H
 
-#include "../../Base/Ruleset/Ruleset.h"
+#include "../../Games/Ruleset/Ruleset.h"
 #include "../../Framework/Input/PassThroughInputManager.h"
 
 
-using namespace Base::Rulesets;
-using namespace Base::Schedulers::Events;
+using namespace Games::Rulesets;
+using namespace Games::Schedulers::Events;
 using namespace Framework::Input;
 
 

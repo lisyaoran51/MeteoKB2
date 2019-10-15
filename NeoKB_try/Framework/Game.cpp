@@ -34,6 +34,6 @@ string Game::GetResourcePath()
 	return string("Resources");
 }
 
-Framework::Game::Game() : RegisterType("Game")
+Game::Game() : RegisterType("Game")
 {
 }

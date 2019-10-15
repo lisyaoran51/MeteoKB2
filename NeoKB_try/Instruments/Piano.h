@@ -3,15 +3,17 @@
 
 #include "Instrument.h"
 #include "../Framework/Input/KeyBindings/KeyBinding.h"
+#include "Input\PianoAction.h"
 
 using namespace Framework::Input::KeyBindings;
+using namespace Instruments::Input;
 
 
 namespace Instruments {
 
 	enum class SustainType;
 
-	class Piano : public Instrument<PianoAction> {
+	class Piano : public TInstrument<PianoAction> {
 
 		int load();
 

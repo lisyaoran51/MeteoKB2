@@ -1,6 +1,6 @@
 #include "MeteorPlayfield.h"
 
-#include "../../Base/Scheduler/Event/Effect/Algorithm/MapAlgorithm.h"
+#include "../../Games/Scheduler/Event/Effect/Algorithm/MapAlgorithm.h"
 #include "../../RulesetMeteor/Scheduler/Event/Effect/Algorithm/ExplodeMapAlgorithm.h"
 #include "../../RulesetMeteor/Scheduler/Event/Effect/Algorithm/FallMapAlgorithm.h"
 #include "../../RulesetMeteor/Scheduler/Event/Effect/Algorithm/GlowLineMapAlgorithm.h"
@@ -11,7 +11,7 @@
 
 using namespace Meteor::Play;
 using namespace Meteor::Config;
-using namespace Base::Schedulers::Events::Effects::Algorithms;
+using namespace Games::Schedulers::Events::Effects::Algorithms;
 using namespace Meteor::Schedulers::Events::Effects::Algorithms;
 using namespace Util;
 

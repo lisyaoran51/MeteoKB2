@@ -1,9 +1,9 @@
 #ifndef METEOR_SHEETMUSIC_CONVERTER_H
 #define METEOR_SHEETMUSIC_CONVERTER_H
 
-#include "../../Base/Sheetmusic/SheetmusicConverter.h"
+#include "../../Games/Sheetmusic/SheetmusicConverter.h"
 
-using namespace Base::Sheetmusics;
+using namespace Games::Sheetmusics;
 
 
 namespace Meteor {

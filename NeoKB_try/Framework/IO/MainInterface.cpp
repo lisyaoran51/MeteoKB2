@@ -3,6 +3,26 @@
 using namespace Framework::IO;
 
 
+MainInterface::MainInterface() : RegisterType("MainInterface")
+{
+
+}
+
+int MainInterface::Initialize()
+{
+	display = new Display();
+	keyboard = new Keyboard();
+	panel = new Panel();
+	phone = new BluetoothPhone();
+
+	peripherals.push_back(display);
+	peripherals.push_back(keyboard);
+	peripherals.push_back(panel);
+	peripherals.push_back(phone);
+
+	return 0;
+}
+
 int MainInterface::ScanInput()
 {
 	for (int i = 0; i < inputDevices.size(); i++) {
@@ -21,11 +41,16 @@ int MainInterface::ProcessOutput()
 	return 0;
 }
 
+vector<Peripheral*>* MainInterface::GetPeripherals()
+{
+	return &peripherals;
+}
+
 int MainInterface::RegisterInputDevice(InputDevice * inputDevice)
 {
 	inputDevice->Register(this);
 	inputDevices.push_back(inputDevice);
-
+	devices.push_back(inputDevice);
 	return 0;
 }
 
@@ -33,6 +58,7 @@ int MainInterface::RegisterOutputDevice(OutputDevice * outputDevice)
 {
 	outputDevice->Register(this);
 	outputDevices.push_back(outputDevice);
+	devices.push_back(outputDevice);
 
 	return 0;
 }

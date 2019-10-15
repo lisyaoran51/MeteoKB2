@@ -17,6 +17,10 @@ namespace Devices {
 		/// </summary>
 		virtual int ProcessOutput() = 0;
 
+	protected:
+
+		
+
 	};
 
 }}

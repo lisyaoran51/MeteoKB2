@@ -24,6 +24,8 @@ namespace IO {
 	class MainInterface : public Container {
 
 		/* 這些是軟體端的device，不用考量硬體部分 */
+		vector<Peripheral*> peripherals;
+
 		Display* display;
 		Keyboard* keyboard;
 		Panel* panel;
@@ -32,6 +34,7 @@ namespace IO {
 		/* 這些是硬體端，他們在作用時會自己去取得main interface裡面的裝置 */
 		vector<InputDevice*> inputDevices;
 		vector<OutputDevice*> outputDevices;
+		vector<Device*> devices;
 
 	public:
 
@@ -42,6 +45,8 @@ namespace IO {
 		int ScanInput();
 
 		int ProcessOutput();
+
+		vector<Peripheral*>* GetPeripherals();
 
 		int RegisterInputDevice(InputDevice* inputDevice);
 		int RegisterOutputDevice(OutputDevice* outputDevice);

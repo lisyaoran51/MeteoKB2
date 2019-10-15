@@ -7,10 +7,12 @@
 #include "Peripheral.h"
 #include "../../Util/DataStructure/ActionList.h"
 #include "../Input/InputState.h"
+#include "../Devices/BluetoothDevice.h"
 
 using namespace std;
 using namespace Util::DataStructure;
 using namespace Framework::Input;
+using namespace Framework::Devices;
 
 namespace Framework {
 namespace IO {
@@ -23,11 +25,16 @@ namespace IO {
 
 	public:
 
+		virtual int SetDevice(Device* device);
+
+		virtual int TriggerOnInput();
+
 		template<class _Type>
 		int AddOnCommand(_Type* callableObject, function<int(InputState*)> callback, string name = "HandleCommand");
 
 	protected:
 
+		BluetoothDevice* matchedBluetoothDevice;
 
 	private:
 
@@ -37,7 +44,10 @@ namespace IO {
 	};
 
 
-}}
+	
+
+}
+}
 
 
 

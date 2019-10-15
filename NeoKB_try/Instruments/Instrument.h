@@ -8,6 +8,10 @@
 #include "../Framework/Input/KeyBindings/KeyBinding.h"
 #include "../Framework/Audio/AudioManager.h"
 #include "../Framework/Input/KeyBindings/KeyBindingHandler.h"
+#include "../Framework/Audio/Sample/SampleChannel.h"
+#include "../Framework/Input/PassThroughInputManager.h"
+#include "../Framework/Host/GameHost.h"
+
 
 using namespace Framework::Allocation::Hierachal;
 using namespace Instruments::Audio;
@@ -15,11 +19,40 @@ using namespace std;
 using namespace Framework::Audio::Samples;
 using namespace Framework::Input::KeyBindings;
 using namespace Framework::Audio;
+using namespace Framework::Audio::Samples;
+using namespace Framework::Input;
+using namespace Framework::Host;
+
+
+namespace Framework {
+namespace Host {
+
+	//class GameHost;
+
+}}
+
 
 namespace Instruments {
 
+	class Instrument;
+
 	template<typename T>
-	class Instrument : public Container, public KeyBindingHandler<T> {
+	class TInstrument : public Instrument, public KeyBindingHandler<T> {
+
+
+	public:
+
+		TInstrument();
+
+	protected:
+
+		map<T, SampleChannel*> samples;
+
+		virtual map<T, SampleChannel*>* getSamples();
+
+	};
+
+	class Instrument : public Container {
 
 		int load();
 
@@ -27,30 +60,29 @@ namespace Instruments {
 
 	public:
 
-		Instrument();
+		virtual PassThroughInputManager* CreateInputManager() = 0;
 
 		virtual vector<SoundBinding*>* GetDefaultSoundBindings(int variant = 0) = 0;
 
 		virtual vector<KeyBinding*>* GetDefaultkeyBindings(int variant = 0) = 0;
 
+		int SetHost(GameHost* h);
+
 	protected:
+
+		GameHost* host;
 
 		AudioManager* audioManager;
 
 		vector<SoundBinding*> soundBindings;
 
-		map<T, SampleChannel*> samples;
-
 		virtual int LoadOnCompleted();
 
 		virtual int loadAndMapSamples() = 0;
 
-		virtual map<T, SampleChannel*>* getSamples();
-
 		string getSoundBinding(int action);
 
 	};
-
 
 
 }

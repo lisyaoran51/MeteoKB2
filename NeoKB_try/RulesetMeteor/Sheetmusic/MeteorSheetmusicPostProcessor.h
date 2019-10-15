@@ -2,7 +2,7 @@
 #define METEOR_SHEETMUSIC_POSTPROCESSOR_H
 
 
-#include "../../Base/Sheetmusic/SheetmusicPostprocessor.h"
+#include "../../Games/Sheetmusic/SheetmusicPostprocessor.h"
 #include "../Config/MeteorConfigManager.h"
 
 using namespace Meteor::Config;

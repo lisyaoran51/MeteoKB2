@@ -6,23 +6,23 @@
 #include <string>
 #include <fstream>
 #include <vector>
-#include "../../../Base/Sheetmusic/Pattern/Pattern.h"
-#include "../../../Base/Sheetmusic/Pattern/PatternGenerator.h"
+#include "../../../Games/Sheetmusic/Pattern/Pattern.h"
+#include "../../../Games/Sheetmusic/Pattern/PatternGenerator.h"
 #include "../../Config/MeteorConfigManager.h"
-#include "../../../Base/Scheduler/Event/GameEvents/StartGameEvent.h"
-#include "../../../Base/Scheduler/Event/ControlPoints/NoteControlPoint.h"
+#include "../../../Games/Scheduler/Event/GameEvents/StartGameEvent.h"
+#include "../../../Games/Scheduler/Event/ControlPoints/NoteControlPoint.h"
 
 
 
 
 using namespace std;
 using namespace Util;
-using namespace Base::Schedulers::Events;
-using namespace Base::Sheetmusics;
+using namespace Games::Schedulers::Events;
+using namespace Games::Sheetmusics;
 using namespace Meteor::Config;
-using namespace Base::Sheetmusics::Patterns;
-using namespace Base::Schedulers::Events::GameEvents;
-using namespace Base::Schedulers::Events::ControlPoints;
+using namespace Games::Sheetmusics::Patterns;
+using namespace Games::Schedulers::Events::GameEvents;
+using namespace Games::Schedulers::Events::ControlPoints;
 
 
 

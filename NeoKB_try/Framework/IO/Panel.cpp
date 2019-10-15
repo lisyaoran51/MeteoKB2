@@ -2,23 +2,26 @@
 
 using namespace  Framework::IO;
 
-template<class _Type>
-int Panel::AddOnButtonDown(_Type * callableObject, function<int(InputState*)> callback, string name = "HandleButtonDown")
+int Panel::SetDevice(Device * device)
 {
-	OnButtonDown.Add(callableObject, callback, name);
+	Peripheral::SetDevice(device);
+	matchedPanelDevice = dynamic_cast<PanelDevice*>(device);
 	return 0;
 }
 
-template<class _Type>
-int Panel::AddOnKnobTurn(_Type * callableObject, function<int(InputState*)> callback, string name = "HandleKnobTurn")
+int Panel::TriggerOnInput()
 {
-	OnKnobTurn.Add(callableObject, callback, name);
+	for (int i = 0; i < inputStates.size(); i++) {
+		OnPanelEvent.Trigger(inputStates[i]);
+	}
+	inputStates.clear();
 	return 0;
 }
 
+
 template<class _Type>
-int Panel::AddOnSliderMove(_Type * callableObject, function<int(InputState*)> callback, string name = "HandleSliderMove")
+int Panel::AddOnPanelEvent(_Type * callableObject, function<int(InputState*)> callback, string name = "HandlePanelEvent")
 {
-	OnSliderMove(callableObject, callback, name);
+	OnPanelEvent.Add(callableObject, callback, name);
 	return 0;
 }

@@ -5,12 +5,12 @@
 #include <string>
 #include <fstream>
 #include <vector>
-#include "../../../../Base/Scheduler/Event/Effect/Effect.h"
+#include "../../../../Games/Scheduler/Event/Effect/Effect.h"
 
 
 using namespace std;
 using namespace Util;
-using namespace Base::Schedulers::Events::Effects;
+using namespace Games::Schedulers::Events::Effects;
 
 
 namespace Meteor {

@@ -11,16 +11,16 @@ using namespace Instruments::Input;
 
 int Piano::load()
 {
-	for (int i = PianoAction::VK27_A1; i <= PianoAction::VK37_C4; i++) {
-		isPressingMap.insert(i, false);
+	for (int i = (int)PianoAction::VK27_A1; i <= (int)PianoAction::VK37_C4; i++) {
+		isPressingMap.insert((PianoAction)i, false);
 	}
 
-	for (int i = PianoAction::SustainPedal; i <= PianoAction::ExpressionPedal; i++) {
-		isPressingMap.insert(i, false);
+	for (int i = (int)PianoAction::SustainPedal; i <= (int)PianoAction::ExpressionPedal; i++) {
+		isPressingMap.insert((PianoAction)i, false);
 	}
 
-	for (int i = PianoAction::BluetoothPlugin; i <= PianoAction::ExpressionPedalPlugin; i++) {
-		isPressingMap.insert(i, false);
+	for (int i = (int)PianoAction::BluetoothPlugin; i <= (int)PianoAction::ExpressionPedalPlugin; i++) {
+		isPressingMap.insert((PianoAction)i, false);
 	}
 	return 0;
 }
@@ -177,7 +177,7 @@ int Piano::ChangeSustainType(SustainType sType)
 int Piano::ControlSustainPedal(bool down)
 {
 	if (sustainType == SustainType::GameControllingSustain) {
-		isPressingMap.insert(action, down);
+		isPressingMap.insert(PianoAction::SustainPedal, down);
 		if (down){
 
 		}
@@ -209,7 +209,7 @@ int Piano::OnKeyDown(pair<PianoAction, int> action)
 int Piano::OnKeyUp(PianoAction action)
 {
 	// 沒踏踏板、有插踏板、沒開啟自動延音
-	if(!isPressingMap.at(PianoAction::SustainPedal) && isUseSustainPedal && !isAutoSustain && )
+	if(!isPressingMap.at(PianoAction::SustainPedal) && !isAutoSustain )
 		getSamples()->at(action.first)->Stop();
 	isPressingMap.insert(action, false);
 	return 0;
@@ -225,6 +225,7 @@ int Piano::OnButtonDown(PianoAction action)
 	if (action == PianoAction::SustainPedalPlugin) {
 		// mainInterface->GetPanel()->ChangeState(PianoAction::SustainButton, false);
 	}
+
 	return 0;
 }
 

@@ -5,31 +5,31 @@
 
 // ===============================================
 
-// Base
-#include "../Base/Game.h"
-using namespace Base;
+// Games
+#include "../Games/Game.h"
+using namespace Games;
 
-// Base/Config
-#include "../Base/Config/FrameworkConfigManager.h"
-using namespace Base::Config;
+// Games/Config
+#include "../Games/Config/FrameworkConfigManager.h"
+using namespace Games::Config;
 
-// Base/Play
-#include "../Base/Play/Player.h"
-#include "../Base/Play/Playfield.h"
-#include "../Base/Play/Session.h"
-using namespace Base::Play;
+// Games/Play
+#include "../Games/Play/Player.h"
+#include "../Games/Play/Playfield.h"
+#include "../Games/Play/Session.h"
+using namespace Games::Play;
 
-// Base/Scheduler
-#include "../Base/Scheduler/Scheduler.h"
-using namespace Base::Schedulers;
+// Games/Scheduler
+#include "../Games/Scheduler/Scheduler.h"
+using namespace Games::Schedulers;
 
-// Base/Scheduler/Events
-#include "../Base/Scheduler/Event/EventProcessorMaster.h"
-using namespace Base::Schedulers::Events;
+// Games/Scheduler/Events
+#include "../Games/Scheduler/Event/EventProcessorMaster.h"
+using namespace Games::Schedulers::Events;
 
-// Base/Sheetmusics/Format
-#include "../Base/Sheetmusic/Format/SimpleSmDecoder.h"
-using namespace Base::Sheetmusics::Format;
+// Games/Sheetmusics/Format
+#include "../Games/Sheetmusic/Format/SimpleSmDecoder.h"
+using namespace Games::Sheetmusics::Format;
 
 // ===============================================
 

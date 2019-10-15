@@ -2,7 +2,7 @@
 
 #include "../Sheetmusic/MeteorSheetmusicConverter.h"
 #include "../Play/MeteorPlayfield.h"
-#include "../../Base/Scheduler/Event/Effect/EffectMapper.h"
+#include "../../Games/Scheduler/Event/Effect/EffectMapper.h"
 #include "../Scheduler/Event/Effect/FallEffect.h"
 #include "../Scheduler/Event/Effect/ExplodeEffect.h"
 #include "../Scheduler/Event/Effect/GlowLineEffect.h"
@@ -10,18 +10,18 @@
 #include "../Scheduler/Event/Effect/ExplodeEffectMapper.h"
 #include "../Scheduler/Event/Effect/GlowLineEffectMapper.h"
 #include "../Scheduler/Event/Effect/TargetLineEffectMapper.h"
-#include "../../Base/Scheduler/Event/SystemEvents/SystemEventHandler.h"
-#include "../../Base/Scheduler/Event/SystemEvents/StopSystemEvent.h"
+#include "../../Games/Scheduler/Event/SystemEvents/SystemEventHandler.h"
+#include "../../Games/Scheduler/Event/SystemEvents/StopSystemEvent.h"
 #include "../Input/MeteorInputManager.h"
 
 
 using namespace Meteor::Rulesets;
-using namespace Base::Schedulers::Events;
-using namespace Base::Schedulers::Events::SystemEvents;
-using namespace Base::Sheetmusics;
+using namespace Games::Schedulers::Events;
+using namespace Games::Schedulers::Events::SystemEvents;
+using namespace Games::Sheetmusics;
 using namespace Meteor::Sheetmusics;
 using namespace Meteor::Play;
-using namespace Base::Schedulers::Events::Effects;
+using namespace Games::Schedulers::Events::Effects;
 using namespace Meteor::Schedulers::Events::Effects;
 using namespace Meteor::Input;
 

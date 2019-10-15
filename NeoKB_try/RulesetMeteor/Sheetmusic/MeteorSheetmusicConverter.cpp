@@ -1,14 +1,14 @@
 #include"MeteorSheetmusicConverter.h"
 
-#include "../../Base/Scheduler/Event/Effect/Effect.h"
-#include "../../Base/Scheduler/Event/ControlPoints/NoteControlPoint.h"
-#include "../../Base/Scheduler/Event/GameEvents/StartGameEvent.h"
+#include "../../Games/Scheduler/Event/Effect/Effect.h"
+#include "../../Games/Scheduler/Event/ControlPoints/NoteControlPoint.h"
+#include "../../Games/Scheduler/Event/GameEvents/StartGameEvent.h"
 
 using namespace Meteor::Sheetmusics;
-using namespace Base::Schedulers::Events;
-using namespace Base::Schedulers::Events::Effects;
-using namespace Base::Schedulers::Events::ControlPoints;
-using namespace Base::Schedulers::Events::GameEvents;
+using namespace Games::Schedulers::Events;
+using namespace Games::Schedulers::Events::Effects;
+using namespace Games::Schedulers::Events::ControlPoints;
+using namespace Games::Schedulers::Events::GameEvents;
 
 
 
