@@ -21,28 +21,31 @@ namespace Threading {
 
 	public:
 
-		GameThread(function<int()> onNewFrame, string threadName);
+		GameThread(function<int()> oNewFrame, string tName);
 
 		int Start();
 
 		ThrottledFramedClock* GetClock();
 
+		int SetSleepTime(int sTime); // 懶得弄hz，先暫實用這個，之後再刪掉
+
 	protected:
 
+		string threadName;
 
 	private:
 
-		thread* thread;
+		thread* runThread;
 
 		ThrottledFramedClock* clock;
 
-		Scheduler scheduler;
+		Scheduler* scheduler;
 
 		double activeHz;
 
 		double inactiveHz;
 
-		bool exitRequested;
+		bool exitRequested = false;
 
 		function<int()> onNewFrame;
 
@@ -50,6 +53,7 @@ namespace Threading {
 
 		int processFrame();
 
+		int sleepTime;
 
 	};
 

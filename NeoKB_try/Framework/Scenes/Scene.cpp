@@ -145,6 +145,7 @@ int Scene::onResuming(Scene * lastScene)
 
 int Scene::load()
 {
+
 	return 0;
 }
 

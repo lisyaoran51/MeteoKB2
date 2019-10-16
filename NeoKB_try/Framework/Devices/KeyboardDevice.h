@@ -22,12 +22,12 @@ namespace Devices {
 	protected:
 
 
+		Keyboard* matchedKeyboard;
 
 		virtual bool match(Peripheral* peripheral);
 
 		virtual int handlePeripheralRegister(Peripheral* peripheral);
 
-		Keyboard* matchedKeyboard;
 
 	};
 

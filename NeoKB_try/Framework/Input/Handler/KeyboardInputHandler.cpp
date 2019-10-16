@@ -11,7 +11,7 @@ int KeyboardInputHandler::Initialize(GameHost * host)
 {
 	// 當mian interface讀到輸入時，就會call handle key down來處理
 	host->GetMainInterface()->GetKeyboard()->
-		AddOnKeyDown<KeyboardInputHandler>(this, bind((int(KeyboardInputHandler::*)(InputState*))&KeyboardInputHandler::HandleState, this, placeholders::_1), "KeyboardInputHandler::HandleState");
+		AddOnKeyEvent<KeyboardInputHandler>(this, bind((int(KeyboardInputHandler::*)(InputState*))&KeyboardInputHandler::HandleState, this, placeholders::_1), "KeyboardInputHandler::HandleState");
 
 	return 0;
 }

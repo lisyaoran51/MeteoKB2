@@ -4,9 +4,15 @@
 #include "../Devices/DisplayDevice.h"
 #include "../Devices/KeyboardDevice.h"
 #include "../Devices/PanelDevice.h"
+#include "../Input/Handler/BluetoothInputHandler.h"
+#include "../Input/Handler/KeyboardInputHandler.h"
+#include "../Input/Handler/PanelInputHandler.h"
+
+
 
 using namespace Framework::Platforms;
 using namespace Framework::Devices;
+using namespace Framework::Input::Handler;
 
 
 MeteoGameHost::MeteoGameHost()
@@ -31,4 +37,14 @@ int MeteoGameHost::setupMainInterface()
 
 
 	return 0;
+}
+
+vector<InputHandler*>* MeteoGameHost::createAvailableInputHandlers()
+{
+	vector<InputHandler*>* handlers = new vector<InputHandler*>();
+	handlers->push_back(new KeyboardInputHandler());
+	handlers->push_back(new PanelInputHandler());
+	handlers->push_back(new BluetoothInputHandler());
+
+	return handlers;
 }

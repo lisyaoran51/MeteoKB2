@@ -20,7 +20,7 @@ namespace Platforms {
 
 		virtual int setupMainInterface();
 
-
+		virtual vector<InputHandler*>* createAvailableInputHandlers();
 	};
 
 

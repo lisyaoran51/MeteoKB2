@@ -414,25 +414,25 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Base\Graphic\Renderer\renderer.cpp">
+    <ClCompile Include="Games\Graphic\Renderer\renderer.cpp">
       <Filter>來源檔案\Games\Graphic\Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="Base\Scheduler\Event\Event.cpp">
+    <ClCompile Include="Games\Scheduler\Event\Event.cpp">
       <Filter>來源檔案\Games\Schedulers\Events</Filter>
     </ClCompile>
-    <ClCompile Include="Base\Scheduler\Event\EventProcessorMaster.cpp">
+    <ClCompile Include="Games\Scheduler\Event\EventProcessorMaster.cpp">
       <Filter>來源檔案\Games\Schedulers\Events</Filter>
     </ClCompile>
-    <ClCompile Include="Base\Scheduler\Event\Effect\Effect.cpp">
+    <ClCompile Include="Games\Scheduler\Event\Effect\Effect.cpp">
       <Filter>來源檔案\Games\Schedulers\Events\Effects</Filter>
     </ClCompile>
-    <ClCompile Include="Base\Sheetmusic\SheetmusicConverter.cpp">
+    <ClCompile Include="Games\Sheetmusic\SheetmusicConverter.cpp">
       <Filter>來源檔案\Games\Sheetmusic</Filter>
     </ClCompile>
-    <ClCompile Include="Base\Sheetmusic\IO\FileReader.cpp">
+    <ClCompile Include="Games\Sheetmusic\IO\FileReader.cpp">
       <Filter>來源檔案\Games\Sheetmusic\IO</Filter>
     </ClCompile>
-    <ClCompile Include="Base\Graphic\Renderer\MapAlgorithm\HardwareMapAlgorithm.cpp">
+    <ClCompile Include="Games\Graphic\Renderer\MapAlgorithm\HardwareMapAlgorithm.cpp">
       <Filter>來源檔案\Games\Graphic\Renderer\MapAlgorithm</Filter>
     </ClCompile>
     <ClCompile Include="RulesetMeteor\Ruleset\MeteorRuleset.cpp">
@@ -450,37 +450,37 @@
     <ClCompile Include="RulesetMeteor\MeteorGame.cpp">
       <Filter>來源檔案\RulesetMeteor</Filter>
     </ClCompile>
-    <ClCompile Include="Base\Ruleset\Ruleset.cpp">
+    <ClCompile Include="Games\Ruleset\Ruleset.cpp">
       <Filter>來源檔案\Games\Ruleset</Filter>
     </ClCompile>
-    <ClCompile Include="Base\Scheduler\Event\ControlPoints\NoteControlPoint.cpp">
+    <ClCompile Include="Games\Scheduler\Event\ControlPoints\NoteControlPoint.cpp">
       <Filter>來源檔案\Games\Schedulers\Events\ControlPoints</Filter>
     </ClCompile>
-    <ClCompile Include="Base\Ruleset\RulesetInfo.cpp">
+    <ClCompile Include="Games\Ruleset\RulesetInfo.cpp">
       <Filter>來源檔案\Games\Ruleset</Filter>
     </ClCompile>
-    <ClCompile Include="Base\Sheetmusic\SheetmusicManager.cpp">
+    <ClCompile Include="Games\Sheetmusic\SheetmusicManager.cpp">
       <Filter>來源檔案\Games\Sheetmusic</Filter>
     </ClCompile>
-    <ClCompile Include="Base\Sheetmusic\Format\SmDecoder.cpp">
+    <ClCompile Include="Games\Sheetmusic\Format\SmDecoder.cpp">
       <Filter>來源檔案\Games\Sheetmusic\Format</Filter>
     </ClCompile>
-    <ClCompile Include="Base\Sheetmusic\SheetmusicMetadata.cpp">
+    <ClCompile Include="Games\Sheetmusic\SheetmusicMetadata.cpp">
       <Filter>來源檔案\Games\Sheetmusic</Filter>
     </ClCompile>
     <ClCompile Include="Util\FileSystem.c">
       <Filter>來源檔案\Util</Filter>
     </ClCompile>
-    <ClCompile Include="Base\Sheetmusic\WorkingSheetmusic.cpp">
+    <ClCompile Include="Games\Sheetmusic\WorkingSheetmusic.cpp">
       <Filter>來源檔案\Games\Sheetmusic</Filter>
     </ClCompile>
-    <ClCompile Include="Base\Sheetmusic\Pattern\Pattern.cpp">
+    <ClCompile Include="Games\Sheetmusic\Pattern\Pattern.cpp">
       <Filter>來源檔案\Games\Sheetmusic\Pattern</Filter>
     </ClCompile>
     <ClCompile Include="Util\MtoObject.cpp">
       <Filter>來源檔案\Util</Filter>
     </ClCompile>
-    <ClCompile Include="Base\Sheetmusic\Pattern\PatternGenerator.cpp">
+    <ClCompile Include="Games\Sheetmusic\Pattern\PatternGenerator.cpp">
       <Filter>來源檔案\Games\Sheetmusic\Pattern</Filter>
     </ClCompile>
     <ClCompile Include="RulesetMeteor\Config\MeteorConfigManager.cpp">
@@ -489,7 +489,7 @@
     <ClCompile Include="RulesetMeteor\Sheetmusic\Pattern\MeteorPatternGenerator.cpp">
       <Filter>來源檔案\RulesetMeteor\Sheetmusic\Patterns</Filter>
     </ClCompile>
-    <ClCompile Include="Base\Sheetmusic\SheetmusicPostprocessor.cpp">
+    <ClCompile Include="Games\Sheetmusic\SheetmusicPostprocessor.cpp">
       <Filter>來源檔案\Games\Sheetmusic</Filter>
     </ClCompile>
     <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\ExplodeEffect.cpp">
@@ -522,22 +522,22 @@
     <ClCompile Include="Devices\Graphic\Renderers\WS2812v10Renderer.cpp">
       <Filter>來源檔案\Devices\Graphic\Renderers</Filter>
     </ClCompile>
-    <ClCompile Include="Base\Sheetmusic\Format\SimpleSmDecoder.cpp">
+    <ClCompile Include="Games\Sheetmusic\Format\SimpleSmDecoder.cpp">
       <Filter>來源檔案\Games\Sheetmusic\Format</Filter>
     </ClCompile>
     <ClCompile Include="Util\ProgramInitializer.cpp">
       <Filter>來源檔案\Util</Filter>
     </ClCompile>
-    <ClCompile Include="Base\Scheduler\Event\ControlPoints\ControlPoint.cpp">
+    <ClCompile Include="Games\Scheduler\Event\ControlPoints\ControlPoint.cpp">
       <Filter>來源檔案\Games\Schedulers\Events\ControlPoints</Filter>
     </ClCompile>
     <ClCompile Include="RulesetMeteor\Sheetmusic\MeteorSheetmusicPostprocessor.cpp">
       <Filter>來源檔案\RulesetMeteor\Sheetmusic</Filter>
     </ClCompile>
-    <ClCompile Include="Base\Scheduler\Event\GameEvents\GameEvent.cpp">
+    <ClCompile Include="Games\Scheduler\Event\GameEvents\GameEvent.cpp">
       <Filter>來源檔案\Games\Schedulers\Events\GameEvents</Filter>
     </ClCompile>
-    <ClCompile Include="Base\Scheduler\Event\GameEvents\StartGameEvent.cpp">
+    <ClCompile Include="Games\Scheduler\Event\GameEvents\StartGameEvent.cpp">
       <Filter>來源檔案\Games\Schedulers\Events\GameEvents</Filter>
     </ClCompile>
     <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\TargetLineEffect.cpp">
@@ -549,13 +549,13 @@
     <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\Algorithm\TargetLineMapAlgorithm.cpp">
       <Filter>來源檔案\RulesetMeteor\Schedulers\Events\Effects\MapAlgorithms</Filter>
     </ClCompile>
-    <ClCompile Include="Base\Scheduler\Event\SystemEvents\SystemEventHandler.cpp">
+    <ClCompile Include="Games\Scheduler\Event\SystemEvents\SystemEventHandler.cpp">
       <Filter>來源檔案\Games\Schedulers\Events\SystemEvent</Filter>
     </ClCompile>
-    <ClCompile Include="Base\Scheduler\Event\SystemEvents\SystemEvent.cpp">
+    <ClCompile Include="Games\Scheduler\Event\SystemEvents\SystemEvent.cpp">
       <Filter>來源檔案\Games\Schedulers\Events\SystemEvent</Filter>
     </ClCompile>
-    <ClCompile Include="Base\Scheduler\Event\SystemEvents\StopSystemEvent.cpp">
+    <ClCompile Include="Games\Scheduler\Event\SystemEvents\StopSystemEvent.cpp">
       <Filter>來源檔案\Games\Schedulers\Events\SystemEvent</Filter>
     </ClCompile>
     <ClCompile Include="Framework\Allocation\Hierachal\Cachable.cpp">
@@ -615,13 +615,13 @@
     <ClCompile Include="Util\DataStructure\PeriodMap.cpp">
       <Filter>來源檔案\Util\DataStructure</Filter>
     </ClCompile>
-    <ClCompile Include="Base\Scene\Play\TimeController.cpp">
+    <ClCompile Include="Games\Scene\Play\TimeController.cpp">
       <Filter>來源檔案\Games\Scene\Play</Filter>
     </ClCompile>
-    <ClCompile Include="Base\Scene\Play\Player.cpp">
+    <ClCompile Include="Games\Scene\Play\Player.cpp">
       <Filter>來源檔案\Games\Scene\Play</Filter>
     </ClCompile>
-    <ClCompile Include="Base\Scene\Play\Playfield.cpp">
+    <ClCompile Include="Games\Scene\Play\Playfield.cpp">
       <Filter>來源檔案\Games\Scene\Play</Filter>
     </ClCompile>
     <ClCompile Include="Framework\Timing\SpeedAdjusters\SpeedAdjuster.cpp">
@@ -678,7 +678,7 @@
     <ClCompile Include="Framework\Scenes\Scene.cpp">
       <Filter>來源檔案\Framework\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="Base\Scene\Interlude\Intro.cpp">
+    <ClCompile Include="Games\Scene\Interlude\Intro.cpp">
       <Filter>來源檔案\Games\Scene\Interlude</Filter>
     </ClCompile>
     <ClCompile Include="Framework\Allocation\Hierachal\Schedulable.cpp">
@@ -687,16 +687,16 @@
     <ClCompile Include="Framework\Allocation\Hierachal\Scheduler.cpp">
       <Filter>來源檔案\Framework\Allocation\Hierachal</Filter>
     </ClCompile>
-    <ClCompile Include="Base\Scene\Select\MainMenu.cpp">
+    <ClCompile Include="Games\Scene\Select\MainMenu.cpp">
       <Filter>來源檔案\Games\Scene\Select</Filter>
     </ClCompile>
-    <ClCompile Include="Base\Scene\Select\SongSelect.cpp">
+    <ClCompile Include="Games\Scene\Select\SongSelect.cpp">
       <Filter>來源檔案\Games\Scene\Select</Filter>
     </ClCompile>
-    <ClCompile Include="Base\Scene\Select\PlaySongSelect.cpp">
+    <ClCompile Include="Games\Scene\Select\PlaySongSelect.cpp">
       <Filter>來源檔案\Games\Scene\Select</Filter>
     </ClCompile>
-    <ClCompile Include="Base\Scene\Play\PlayerLoader.cpp">
+    <ClCompile Include="Games\Scene\Play\PlayerLoader.cpp">
       <Filter>來源檔案\Games\Scene\Play</Filter>
     </ClCompile>
     <ClCompile Include="Framework\Input\InputState.cpp">
@@ -726,7 +726,7 @@
     <ClCompile Include="Framework\Audio\Track\BassTrack.cpp">
       <Filter>來源檔案\Framework\Audio\Track</Filter>
     </ClCompile>
-    <ClCompile Include="Base\Scene\Loader.cpp">
+    <ClCompile Include="Games\Scene\Loader.cpp">
       <Filter>來源檔案\Games\Scene</Filter>
     </ClCompile>
     <ClCompile Include="Framework\Configurations\ConfigManager.cpp">
@@ -735,10 +735,10 @@
     <ClCompile Include="Framework\Configurations\FrameworkConfigManager.cpp">
       <Filter>來源檔案\Framework\Configurations</Filter>
     </ClCompile>
-    <ClCompile Include="Base\Scene\MeteoScene.cpp">
+    <ClCompile Include="Games\Scene\MeteoScene.cpp">
       <Filter>來源檔案\Games\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Base\MeteoGame.cpp">
+    <ClCompile Include="Games\MeteoGame.cpp">
       <Filter>來源檔案\Games</Filter>
     </ClCompile>
     <ClCompile Include="Framework\Host\GameHost.cpp">
@@ -795,6 +795,9 @@
     <ClCompile Include="Framework\Platforms\MeteoGameHost.cpp">
       <Filter>來源檔案\Framework\Platforms</Filter>
     </ClCompile>
+    <ClCompile Include="Framework\Threading\GameThread.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="DailyLog.txt">
@@ -802,52 +805,52 @@
     </Text>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Base\Ruleset\Ruleset.h">
+    <ClInclude Include="Games\Ruleset\Ruleset.h">
       <Filter>標頭檔\Games\Ruleset</Filter>
     </ClInclude>
-    <ClInclude Include="Base\Ruleset\RulesetExecutor.h">
+    <ClInclude Include="Games\Ruleset\RulesetExecutor.h">
       <Filter>標頭檔\Games\Ruleset</Filter>
     </ClInclude>
-    <ClInclude Include="Base\Ruleset\RulesetInfo.h">
+    <ClInclude Include="Games\Ruleset\RulesetInfo.h">
       <Filter>標頭檔\Games\Ruleset</Filter>
     </ClInclude>
-    <ClInclude Include="Base\Scheduler\Event\Event.h">
+    <ClInclude Include="Games\Scheduler\Event\Event.h">
       <Filter>標頭檔\Games\Scheduler\Events</Filter>
     </ClInclude>
-    <ClInclude Include="Base\Scheduler\Event\EventProcessor.h">
+    <ClInclude Include="Games\Scheduler\Event\EventProcessor.h">
       <Filter>標頭檔\Games\Scheduler\Events</Filter>
     </ClInclude>
-    <ClInclude Include="Base\Scheduler\Event\EventProcessorMaster.h">
+    <ClInclude Include="Games\Scheduler\Event\EventProcessorMaster.h">
       <Filter>標頭檔\Games\Scheduler\Events</Filter>
     </ClInclude>
-    <ClInclude Include="Base\Scheduler\Event\Effect\Effect.h">
+    <ClInclude Include="Games\Scheduler\Event\Effect\Effect.h">
       <Filter>標頭檔\Games\Scheduler\Events\Effects</Filter>
     </ClInclude>
-    <ClInclude Include="Base\Sheetmusic\Sheetmusic.h">
+    <ClInclude Include="Games\Sheetmusic\Sheetmusic.h">
       <Filter>標頭檔\Games\Scheduler\Events\Sheetmusic</Filter>
     </ClInclude>
-    <ClInclude Include="Base\Sheetmusic\SheetmusicConverter.h">
+    <ClInclude Include="Games\Sheetmusic\SheetmusicConverter.h">
       <Filter>標頭檔\Games\Scheduler\Events\Sheetmusic</Filter>
     </ClInclude>
-    <ClInclude Include="Base\Sheetmusic\SheetmusicDifficulty.h">
+    <ClInclude Include="Games\Sheetmusic\SheetmusicDifficulty.h">
       <Filter>標頭檔\Games\Scheduler\Events\Sheetmusic</Filter>
     </ClInclude>
-    <ClInclude Include="Base\Sheetmusic\SheetmusicInfo.h">
+    <ClInclude Include="Games\Sheetmusic\SheetmusicInfo.h">
       <Filter>標頭檔\Games\Scheduler\Events\Sheetmusic</Filter>
     </ClInclude>
-    <ClInclude Include="Base\Sheetmusic\SheetmusicManager.h">
+    <ClInclude Include="Games\Sheetmusic\SheetmusicManager.h">
       <Filter>標頭檔\Games\Scheduler\Events\Sheetmusic</Filter>
     </ClInclude>
-    <ClInclude Include="Base\Sheetmusic\SheetmusicMetadata.h">
+    <ClInclude Include="Games\Sheetmusic\SheetmusicMetadata.h">
       <Filter>標頭檔\Games\Scheduler\Events\Sheetmusic</Filter>
     </ClInclude>
-    <ClInclude Include="Base\Sheetmusic\WorkingSheetmusic.h">
+    <ClInclude Include="Games\Sheetmusic\WorkingSheetmusic.h">
       <Filter>標頭檔\Games\Scheduler\Events\Sheetmusic</Filter>
     </ClInclude>
-    <ClInclude Include="Base\Sheetmusic\IO\FileReader.h">
+    <ClInclude Include="Games\Sheetmusic\IO\FileReader.h">
       <Filter>標頭檔\Games\Scheduler\Events\Sheetmusic\IO</Filter>
     </ClInclude>
-    <ClInclude Include="Base\Sheetmusic\Format\Parser\EventParser.h">
+    <ClInclude Include="Games\Sheetmusic\Format\Parser\EventParser.h">
       <Filter>標頭檔\Games\Scheduler\Events\Sheetmusic\Format\EventParser</Filter>
     </ClInclude>
     <ClInclude Include="Util\InstanceCreator.h">
@@ -862,13 +865,13 @@
     <ClInclude Include="Util\TemplateConstraint.h">
       <Filter>標頭檔\Util</Filter>
     </ClInclude>
-    <ClInclude Include="Base\Scheduler\Event\Effect\EffectMapper.h">
+    <ClInclude Include="Games\Scheduler\Event\Effect\EffectMapper.h">
       <Filter>標頭檔\Games\Scheduler\Events\Effects</Filter>
     </ClInclude>
-    <ClInclude Include="Base\Sheetmusic\Format\SmDecoder.h">
+    <ClInclude Include="Games\Sheetmusic\Format\SmDecoder.h">
       <Filter>標頭檔\Games\Scheduler\Events\Sheetmusic\Format</Filter>
     </ClInclude>
-    <ClInclude Include="Base\Graphic\Renderer\MapAlgorithm\HardwareMapAlgorithm.h">
+    <ClInclude Include="Games\Graphic\Renderer\MapAlgorithm\HardwareMapAlgorithm.h">
       <Filter>標頭檔\Games\Graphic\Renderer\MapAlgorithm</Filter>
     </ClInclude>
     <ClInclude Include="RulesetMeteor\Ruleset\MeteorRuleset.h">
@@ -883,16 +886,16 @@
     <ClInclude Include="RulesetMeteor\Sheetmusic\MeteorSheetmusicConverter.h">
       <Filter>標頭檔\RulesetMeteor\Sheetmusic</Filter>
     </ClInclude>
-    <ClInclude Include="Base\Sheetmusic\Pattern\PatternGenerator.h">
+    <ClInclude Include="Games\Sheetmusic\Pattern\PatternGenerator.h">
       <Filter>標頭檔\Games\Scheduler\Events\Sheetmusic\Pattern</Filter>
     </ClInclude>
-    <ClInclude Include="Base\Scheduler\Event\ControlPoints\ControlPoint.h">
+    <ClInclude Include="Games\Scheduler\Event\ControlPoints\ControlPoint.h">
       <Filter>標頭檔\Games\Scheduler\Events\ControlPoints</Filter>
     </ClInclude>
-    <ClInclude Include="Base\Scheduler\Event\ControlPoints\NoteControlPoint.h">
+    <ClInclude Include="Games\Scheduler\Event\ControlPoints\NoteControlPoint.h">
       <Filter>標頭檔\Games\Scheduler\Events\ControlPoints</Filter>
     </ClInclude>
-    <ClInclude Include="Base\Scheduler\Event\Effect\Algorithm\MapAlgorithm.h">
+    <ClInclude Include="Games\Scheduler\Event\Effect\Algorithm\MapAlgorithm.h">
       <Filter>標頭檔\Games\Scheduler\Events\Effects\Algorithms</Filter>
     </ClInclude>
     <ClInclude Include="RulesetMeteor\Config\MeteorConfigManager.h">
@@ -928,19 +931,19 @@
     <ClInclude Include="RulesetMeteor\MeteorGame.h">
       <Filter>標頭檔\RulesetMeteor</Filter>
     </ClInclude>
-    <ClInclude Include="Base\Scheduler\Event\Effect\Algorithm\MapGenerateAlgorithm.h">
+    <ClInclude Include="Games\Scheduler\Event\Effect\Algorithm\MapGenerateAlgorithm.h">
       <Filter>標頭檔\Games\Scheduler\Events\Effects\Algorithms</Filter>
     </ClInclude>
-    <ClInclude Include="Base\Scheduler\Event\Effect\Algorithm\MapShiftAlgorithm.h">
+    <ClInclude Include="Games\Scheduler\Event\Effect\Algorithm\MapShiftAlgorithm.h">
       <Filter>標頭檔\Games\Scheduler\Events\Effects\Algorithms</Filter>
     </ClInclude>
-    <ClInclude Include="Base\Sheetmusic\SheetmusicSetInfo.h">
+    <ClInclude Include="Games\Sheetmusic\SheetmusicSetInfo.h">
       <Filter>標頭檔\Games\Scheduler\Events\Sheetmusic</Filter>
     </ClInclude>
     <ClInclude Include="Util\FileSystem.h">
       <Filter>標頭檔\Util</Filter>
     </ClInclude>
-    <ClInclude Include="Base\Sheetmusic\Pattern\Pattern.h">
+    <ClInclude Include="Games\Sheetmusic\Pattern\Pattern.h">
       <Filter>標頭檔\Games\Scheduler\Events\Sheetmusic\Pattern</Filter>
     </ClInclude>
     <ClInclude Include="RulesetMeteor\Sheetmusic\Pattern\MeteorPatternGenerator.h">
@@ -955,22 +958,22 @@
     <ClInclude Include="Util\Log.h">
       <Filter>標頭檔\Util</Filter>
     </ClInclude>
-    <ClInclude Include="Base\Sheetmusic\Format\SimpleSmDecoder.h">
+    <ClInclude Include="Games\Sheetmusic\Format\SimpleSmDecoder.h">
       <Filter>標頭檔\Games\Scheduler\Events\Sheetmusic\Format</Filter>
     </ClInclude>
     <ClInclude Include="Util\ProgramInitializer.h">
       <Filter>標頭檔\Util</Filter>
     </ClInclude>
-    <ClInclude Include="Base\Sheetmusic\SheetmusicPostprocessor.h">
+    <ClInclude Include="Games\Sheetmusic\SheetmusicPostprocessor.h">
       <Filter>標頭檔\Games\Scheduler\Events\Sheetmusic</Filter>
     </ClInclude>
     <ClInclude Include="RulesetMeteor\Sheetmusic\MeteorSheetmusicPostProcessor.h">
       <Filter>標頭檔\RulesetMeteor\Sheetmusic</Filter>
     </ClInclude>
-    <ClInclude Include="Base\Scheduler\Event\GameEvents\GameEvent.h">
+    <ClInclude Include="Games\Scheduler\Event\GameEvents\GameEvent.h">
       <Filter>標頭檔\Games\Scheduler\Events\GameEvents</Filter>
     </ClInclude>
-    <ClInclude Include="Base\Scheduler\Event\GameEvents\StartGameEvent.h">
+    <ClInclude Include="Games\Scheduler\Event\GameEvents\StartGameEvent.h">
       <Filter>標頭檔\Games\Scheduler\Events\GameEvents</Filter>
     </ClInclude>
     <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\TargetLineEffect.h">
@@ -982,16 +985,16 @@
     <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\Algorithm\TargetLineMapAlgorithm.h">
       <Filter>標頭檔\RulesetMeteor\Schedulers\Events\Effects\Algorithms</Filter>
     </ClInclude>
-    <ClInclude Include="Base\Scheduler\Event\GameEvents\StopGameEvent.h">
+    <ClInclude Include="Games\Scheduler\Event\GameEvents\StopGameEvent.h">
       <Filter>標頭檔\Games\Scheduler\Events\GameEvents</Filter>
     </ClInclude>
-    <ClInclude Include="Base\Scheduler\Event\SystemEvents\StopSystemEvent.h">
+    <ClInclude Include="Games\Scheduler\Event\SystemEvents\StopSystemEvent.h">
       <Filter>標頭檔\Games\Scheduler\Events\SystemEvents</Filter>
     </ClInclude>
-    <ClInclude Include="Base\Scheduler\Event\SystemEvents\SystemEvent.h">
+    <ClInclude Include="Games\Scheduler\Event\SystemEvents\SystemEvent.h">
       <Filter>標頭檔\Games\Scheduler\Events\SystemEvents</Filter>
     </ClInclude>
-    <ClInclude Include="Base\Scheduler\Event\SystemEvents\SystemEventHandler.h">
+    <ClInclude Include="Games\Scheduler\Event\SystemEvents\SystemEventHandler.h">
       <Filter>標頭檔\Games\Scheduler\Events\SystemEvents</Filter>
     </ClInclude>
     <ClInclude Include="Framework\Input\InputManager.h">
@@ -1027,13 +1030,13 @@
     <ClInclude Include="Framework\IO\Stores\NamespacedResourceStore.h">
       <Filter>標頭檔\Framework\IO\Stores</Filter>
     </ClInclude>
-    <ClInclude Include="Base\Scene\Interlude\Intro.h">
+    <ClInclude Include="Games\Scene\Interlude\Intro.h">
       <Filter>標頭檔\Games\Scene\Interlude</Filter>
     </ClInclude>
-    <ClInclude Include="Base\Scene\Select\SongSelect.h">
+    <ClInclude Include="Games\Scene\Select\SongSelect.h">
       <Filter>標頭檔\Games\Scene\Select</Filter>
     </ClInclude>
-    <ClInclude Include="Base\Scene\Play\PlayerLoader.h">
+    <ClInclude Include="Games\Scene\Play\PlayerLoader.h">
       <Filter>標頭檔\Games\Scene\play</Filter>
     </ClInclude>
     <ClInclude Include="Framework\Timing\FramedClock.h">
@@ -1105,13 +1108,13 @@
     <ClInclude Include="Framework\IO\Display.h">
       <Filter>標頭檔\Framework\IO</Filter>
     </ClInclude>
-    <ClInclude Include="Base\Scene\Play\Player.h">
+    <ClInclude Include="Games\Scene\Play\Player.h">
       <Filter>標頭檔\Games\Scene\play</Filter>
     </ClInclude>
-    <ClInclude Include="Base\Scene\Play\Playfield.h">
+    <ClInclude Include="Games\Scene\Play\Playfield.h">
       <Filter>標頭檔\Games\Scene\play</Filter>
     </ClInclude>
-    <ClInclude Include="Base\Scene\Play\TimeController.h">
+    <ClInclude Include="Games\Scene\Play\TimeController.h">
       <Filter>標頭檔\Games\Scene\play</Filter>
     </ClInclude>
     <ClInclude Include="Framework\Timing\SpeedAdjusters\SpeedAdjuster.h">
@@ -1186,7 +1189,7 @@
     <ClInclude Include="Framework\Exceptions\FrameworkException.h">
       <Filter>標頭檔\Framework\Exception</Filter>
     </ClInclude>
-    <ClInclude Include="Base\Scene\Select\MainMenu.h">
+    <ClInclude Include="Games\Scene\Select\MainMenu.h">
       <Filter>標頭檔\Games\Scene\Select</Filter>
     </ClInclude>
     <ClInclude Include="Framework\Allocation\Hierachal\Schedulable.h">
@@ -1195,7 +1198,7 @@
     <ClInclude Include="Framework\Allocation\Hierachal\Scheduler.h">
       <Filter>標頭檔\Framework\Allocation\Hierachal</Filter>
     </ClInclude>
-    <ClInclude Include="Base\Scene\Select\PlaySongSelect.h">
+    <ClInclude Include="Games\Scene\Select\PlaySongSelect.h">
       <Filter>標頭檔\Games\Scene\Select</Filter>
     </ClInclude>
     <ClInclude Include="Framework\Audio\Sample\BassSample.h">
@@ -1210,10 +1213,10 @@
     <ClInclude Include="Framework\Audio\Track\BassTrack.h">
       <Filter>標頭檔\Framework\Audio\Track</Filter>
     </ClInclude>
-    <ClInclude Include="Base\Ruleset\Modifiers\Modifier.h">
+    <ClInclude Include="Games\Ruleset\Modifiers\Modifier.h">
       <Filter>標頭檔\Games\Ruleset\Modifiers</Filter>
     </ClInclude>
-    <ClInclude Include="Base\Scene\Loader.h">
+    <ClInclude Include="Games\Scene\Loader.h">
       <Filter>標頭檔\Games\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Framework\IO\FileSystemInterface.h">
@@ -1237,13 +1240,13 @@
     <ClInclude Include="Util\DataStructure\ActionList.h">
       <Filter>標頭檔\Util\DataStructure</Filter>
     </ClInclude>
-    <ClInclude Include="Base\Scene\MeteoScene.h">
+    <ClInclude Include="Games\Scene\MeteoScene.h">
       <Filter>標頭檔\Games\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Base\MeteoGameBase.h">
+    <ClInclude Include="Games\MeteoGameBase.h">
       <Filter>標頭檔\Games</Filter>
     </ClInclude>
-    <ClInclude Include="Base\MeteoGame.h">
+    <ClInclude Include="Games\MeteoGame.h">
       <Filter>標頭檔\Games</Filter>
     </ClInclude>
     <ClInclude Include="Framework\Audio\AudioManager.h">
@@ -1273,7 +1276,7 @@
     <ClInclude Include="Framework\Input\PassThroughInputManager.h">
       <Filter>標頭檔\Framework\Input</Filter>
     </ClInclude>
-    <ClInclude Include="Base\Input\RulesetInputManager.h">
+    <ClInclude Include="Games\Input\RulesetInputManager.h">
       <Filter>標頭檔\Games\Input</Filter>
     </ClInclude>
     <ClInclude Include="RulesetMeteor\Input\MeteorInputManager.h">

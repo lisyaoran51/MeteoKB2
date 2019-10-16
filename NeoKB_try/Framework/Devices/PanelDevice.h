@@ -19,11 +19,12 @@ namespace Devices{
 
 	protected:
 
+		Panel* matchedPanel;
+
 		virtual bool match(Peripheral* peripheral);
 
 		virtual int handlePeripheralRegister(Peripheral* peripheral);
 
-		Panel* matchedPanel;
 
 
 

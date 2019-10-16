@@ -18,13 +18,13 @@ GameHost::GameHost(string name)
 	setupMainInterface();
 
 	drawThread = new GameThread(bind(&GameHost::drawFrame, this), "DrawThread");
-	drawInitialize();
+	
 
 	updateThread = new GameThread(bind(&GameHost::updateFrame, this), "UpdateThread");
-	updateInitialize();
+	
 
 	inputThread = new GameThread(bind(&GameHost::inputFrame, this), "InputThread");
-	inputInitialize();
+	
 
 	sceneGraphClock = updateThread->GetClock();
 
@@ -36,10 +36,15 @@ int GameHost::Run(Game* game, Instrument* instrument)
 
 	resetInputHandlers();
 
-
+	inputInitialize();
 	inputThread->Start();
+
+	drawInitialize();
 	drawThread->Start();
+
+	updateInitialize();
 	updateThread->Start();
+
 	bootstrapSceneGraph(game, instrument);
 
 
@@ -58,8 +63,14 @@ vector<InputHandler*>* GameHost::GetAvailableInputHandlers()
 
 int GameHost::drawInitialize()
 {
+	int width, height;
+	frameworkConfigManager->Get(FrameworkSetting::Width, &width);
+	frameworkConfigManager->Get(FrameworkSetting::Height, &height);
+
 	// 這個應該擺在main裡才對，這邊沒有存螢幕大小
 	canvas = new Map(width, height);
+
+	drawThread->SetSleepTime(10000);
 	return 0;
 }
 
@@ -86,6 +97,7 @@ int GameHost::drawFrame()
 
 int GameHost::updateInitialize()
 {
+	updateThread->SetSleepTime(10);
 	return 0;
 }
 
@@ -96,7 +108,8 @@ int GameHost::updateFrame()
 
 int GameHost::inputInitialize()
 {
-	/* 初始化input handlers */
+	
+	inputThread->SetSleepTime(1000);
 	return 0;
 }
 
@@ -113,6 +126,8 @@ int GameHost::resetInputHandlers()
 {
 	availableInputHandlers = createAvailableInputHandlers();
 
+	for (int i = 0; i < availableInputHandlers->size(); i++)
+		availableInputHandlers->at(i)->Initialize(this);
 
 	//availableInputHandlers.push_back(pianoKeyInputHandler);
 
@@ -124,6 +139,21 @@ int GameHost::resetInputHandlers()
 
 int GameHost::setupConfig()
 {
+	frameworkConfigManager = new FrameworkConfigManager();
+	//fConfigManager->Set(FrameworkSetting::SongTitle, string(argv[1]));  // 這行之後要刪掉
+	frameworkConfigManager->Set(FrameworkSetting::PatternGenerator, string("MeteorPatternGenerator"));
+	frameworkConfigManager->Set(FrameworkSetting::HardwareVersion, 10);
+	frameworkConfigManager->Set(FrameworkSetting::Width, 48); //要改
+	frameworkConfigManager->Set(FrameworkSetting::Height, 16);
+	frameworkConfigManager->Set(FrameworkSetting::BlackKeyHeight, 16);
+	frameworkConfigManager->Set(FrameworkSetting::TargetHeight, 15);	// 低20	// 高15
+	frameworkConfigManager->Set(FrameworkSetting::BlackKeyTargetHeight, 10);	// 14
+	frameworkConfigManager->Set(FrameworkSetting::StartPitch, 24);
+	frameworkConfigManager->Set(FrameworkSetting::FrameRate, 30);
+	dependencies->Cache<FrameworkConfigManager>(frameworkConfigManager);
+
+
+
 	return 0;
 }
 
@@ -132,8 +162,8 @@ int GameHost::bootstrapSceneGraph(Game* game, Instrument* instrument)
 	root = new UserInputManager();
 
 	dependencies->Cache(root);
-	dependencies->Cache(game);
-	dependencies->Cache(instrument);
+	dependencies->Cache(game, "Game");
+	dependencies->Cache(instrument, "Instrument");
 
 	root->SetClock(sceneGraphClock);
 	root->SetDependencies(dependencies);
@@ -156,7 +186,7 @@ int GameHost::iterateSearchDrawable(ChildAddable * r, vector<Drawable*>* drawabl
 {
 
 	if (dynamic_cast<Drawable*>(r)) 
-		if(r->GetIsDrawable())
+		if(dynamic_cast<Drawable*>(r)->GetIsDrawable())
 			drawables->push_back(dynamic_cast<Drawable*>(r));
 	
 	

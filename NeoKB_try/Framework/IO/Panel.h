@@ -35,7 +35,8 @@ namespace IO {
 		template<class _Type>
 		int AddOnPanelEvent(_Type* callableObject, function<int(InputState*)> callback, string name);
 
-		virtual int ChangeState(int state, bool value) = 0;
+		// 忘記這個要幹嘛了
+		//virtual int ChangeState(int state, bool value) = 0;
 
 	protected:
 
