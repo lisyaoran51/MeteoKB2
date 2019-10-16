@@ -12,6 +12,7 @@ using namespace Games::Schedulers::Events::Effects;
 
 int EventProcessorMaster::load()
 {
+	isPresent = true;
 	// TODO: 去framework config manager拿period map要切成多寬一段 ex:每5秒一段
 	// 目前先暫訂5秒一段
 

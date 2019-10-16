@@ -26,7 +26,7 @@ namespace Framework {
 		
 		AudioManager* audioManager;
 		
-		ResourceStore<string>* resources;
+		//ResourceStore<string>* resources;
 		
 		GameHost* gameHost;
 		
@@ -38,7 +38,7 @@ namespace Framework {
 		
 		virtual int SetHost(GameHost* host);
 		
-		virtual string GetResourcePath();
+		//virtual string GetResourcePath();
 		
 	protected:
 		

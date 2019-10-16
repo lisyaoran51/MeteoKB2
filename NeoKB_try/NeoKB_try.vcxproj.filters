@@ -412,6 +412,9 @@
     <Filter Include="來源檔案\Framework\Platforms">
       <UniqueIdentifier>{b0759b87-2e6e-4bcc-895a-c78cba1039fe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="來源檔案\RulesetMeteor\Input">
+      <UniqueIdentifier>{c3d547c1-60df-460b-8508-b5fe884e0acf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Games\Graphic\Renderer\renderer.cpp">
@@ -446,9 +449,6 @@
     </ClCompile>
     <ClCompile Include="RulesetMeteor\Sheetmusic\MeteorSheetmusicConverter.cpp">
       <Filter>來源檔案\RulesetMeteor\Sheetmusic</Filter>
-    </ClCompile>
-    <ClCompile Include="RulesetMeteor\MeteorGame.cpp">
-      <Filter>來源檔案\RulesetMeteor</Filter>
     </ClCompile>
     <ClCompile Include="Games\Ruleset\Ruleset.cpp">
       <Filter>來源檔案\Games\Ruleset</Filter>
@@ -797,6 +797,12 @@
     </ClCompile>
     <ClCompile Include="Framework\Threading\GameThread.cpp">
       <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\Input\MeteorInputManager.cpp">
+      <Filter>來源檔案\RulesetMeteor\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\MeteorGame.cpp">
+      <Filter>來源檔案\Framework\Threading</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

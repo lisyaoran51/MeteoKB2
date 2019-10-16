@@ -8,6 +8,7 @@ using namespace Games::Scenes;
 
 int MeteoGame::load()
 {
+	GetDependencies()->Cache<MeteoGame>(this, "MeteoGame");
 	return 0;
 }
 

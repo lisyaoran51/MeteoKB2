@@ -182,6 +182,8 @@ namespace Rulesets {
 
 		virtual PassThroughInputManager* CreateInputManager() = 0;
 
+		virtual TimeController* CreateTimeController() = 0;
+
 
 	protected:
 

@@ -5,16 +5,82 @@
 #include "../../../Framework/Timing/SpeedAdjusters/SpeedAdjuster.h"
 #include "../../../Framework/Timing/DecoupledInterpolatingFramedClock.h"
 #include "../MeteoScene.h"
+#include "../../../Framework/Input/KeyBindings/KeyBindingHandler.h"
 
 
 using namespace Framework::Timing::SpeedAdjusters;
 using namespace Framework::Timing;
 using namespace Framework::Allocation::Hierachal;
+using namespace Framework::Input::KeyBindings;
 
 
 namespace Games {
 namespace Scenes {
 namespace Play {
+
+	template<typename T>
+	class TTimeController : public TimeController, public KeyBindingHandler<T> {
+
+		int load() {
+
+			// 需要跟input key做binding一下，才知道哪個是pause
+
+			return 0;
+		}
+
+	public:
+
+		TTimeController() {
+
+			registerLoad(bind(static_cast<int(TTimeController<T>::*)(void)>(&TTimeController<T>::load), this));
+
+		}
+
+		virtual int OnKeyDown(pair<T, int> action) {
+			return 0;
+		}
+
+		virtual int OnKeyUp(T action) {
+			return 0;
+		}
+
+		virtual int OnButtonDown(T action) {
+			if (action == pause) {
+				if (!isPaused) {
+					Pause();
+					SetAllChildsIsAvailableForTrigger(false);
+				}
+				else {
+					// TODO: 應該要等跑完圈再resume，不過先不寫
+					Resume();
+					RecoverAllChildsIsAvailableForTrigger();
+				}
+			}
+		}
+
+		virtual int OnButtonUp(T action) {
+			return 0;
+		}
+
+		virtual int OnKnobTurn(pair<T, int> action) {
+			if (action == speed) {
+				SetRate(GetRate() + action.second);
+
+
+			}
+			if (action == section) {
+
+				JumpTo(sectionStartTime[getTempSection() + action.second]);
+
+			}
+		}
+
+		virtual int OnSlide(pair<T, int> action) {
+			return 0;
+		}
+
+
+	};
 
 	/// <summary>
 	/// 擺在player下面，用來控制遊戲速度和暫停、跳小節
@@ -69,6 +135,8 @@ namespace Play {
 
 	public:
 
+		TimeController();
+
 		/// <summary>
 		/// pause container的時鐘是在player裡面指派的，不是pause container自己的
 		/// </summary>
@@ -90,7 +158,10 @@ namespace Play {
 
 		int SetRate(double rate);
 
-		int GetRate();
+		double GetRate();
+
+
+		int ImportWorkingSm(WorkingSm* workingSm);
 
 
 	protected:
@@ -101,6 +172,16 @@ namespace Play {
 		/// </summary>
 		virtual int update();
 
+		WorkingSm* workingSm;
+
+		int getTempSection();
+
+		int getTempPart();
+
+		vector<float> sectionStartTime;
+
+		vector<float> partStartTime;
+
 	private:
 
 	};
@@ -108,7 +189,8 @@ namespace Play {
 
 
 
-}}}
+}
+}}
 
 
 

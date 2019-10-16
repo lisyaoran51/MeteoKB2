@@ -1,7 +1,11 @@
 #ifndef NOTE_CONTROL_POINT_H
 #define NOTE_CONTROL_POINT_H
 
-#include"ControlPoint.h"
+#include "ControlPoint.h"
+#include "../../../../Instruments/Pitch.h"
+
+using namespace Instruments;
+
 
 namespace Games {
 namespace Schedulers {
@@ -17,6 +21,7 @@ namespace ControlPoints {
 		MTO_FLOAT volume;
 		
 		int sectionIndex;
+		int partIndex;
 		
 		HandType handType;
 
@@ -36,6 +41,9 @@ namespace ControlPoints {
 		
 		int GetSectionIndex();
 		int SetSectionIndex(int sI);
+
+		int GetPartIndex();
+		int SetPartTndex(int pIndex);
 		
 		HandType GetHandType();
 		int SetHandType(HandType h);

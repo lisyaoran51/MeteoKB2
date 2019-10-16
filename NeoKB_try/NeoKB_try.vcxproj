@@ -130,6 +130,7 @@
     <ClCompile Include="Instruments\MeteoPiano.cpp" />
     <ClCompile Include="Instruments\Piano.cpp" />
     <ClCompile Include="RulesetMeteor\Config\MeteorConfigManager.cpp" />
+    <ClCompile Include="RulesetMeteor\Input\MeteorInputManager.cpp" />
     <ClCompile Include="RulesetMeteor\MeteorGame.cpp" />
     <ClCompile Include="RulesetMeteor\Play\MeteorPlayfield.cpp" />
     <ClCompile Include="RulesetMeteor\Ruleset\MeteorRuleset.cpp" />

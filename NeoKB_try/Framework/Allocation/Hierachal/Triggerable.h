@@ -27,7 +27,7 @@ namespace Hierachal {
 		/// </summary>
 		bool isAvailableForTrigger = true;
 
-		
+		bool previousIsAvailableForTrigger = isAvailableForTrigger;
 
 	public:
 
@@ -44,6 +44,10 @@ namespace Hierachal {
 		//virtual int DeleteChild(ChildAddable* child);
 
 		int SetIsAvailabledForTrigger(bool value);
+
+		int SetAllChildsIsAvailableForTrigger(bool value);
+
+		int RecoverAllChildsIsAvailableForTrigger();
 
 		bool GetIsAvailableForTrigger();
 
@@ -76,6 +80,9 @@ namespace Hierachal {
 		/// 代表這個物件是否現在仍在使用，無法控制，跳夜跳場景時自動改變
 		/// </summary>
 		bool isPresent = false;
+
+		int recoverLastState();
+
 
 		virtual int onKeyDown(InputState* inputState, InputKey key);
 

@@ -1,8 +1,16 @@
 #include "TimeController.h"
 
+#include "../../Scheduler/Event/ControlPoints/NoteControlPoint.h"
+
+
+
+
 using namespace Games::Scenes::Play;
 using namespace Framework::Timing::SpeedAdjusters;
 using namespace Framework::Timing;
+using namespace Games::Schedulers::Events::ControlPoints;
+
+
 
 int TimeController::load()
 {
@@ -37,7 +45,35 @@ int TimeController::update()
 	return 0;
 }
 
+int TimeController::getTempSection()
+{
+	for (int i = 0; i < sectionStartTime.size(); i++) {
+		if (sectionStartTime[i] > framedClock->GetCurrentTime())
+			return i - 1;
+	}
 
+	return sectionStartTime.size() - 1;
+}
+
+int TimeController::getTempPart()
+{
+	for (int i = 0; i < partStartTime.size(); i++) {
+		if (partStartTime[i] > framedClock->GetCurrentTime())
+			return i - 1;
+	}
+
+	return partStartTime.size() - 1;
+}
+
+
+
+TimeController::TimeController() : RegisterType("TimeController")
+{
+	registerLoad(bind(static_cast<int(TimeController::*)(void)>(&TimeController::load), this));
+
+	isInputable = true;
+	isPresent = true;
+}
 
 int TimeController::SetAudioClock(AdjustableClock * dInterpolatingFramedClock)
 {
@@ -113,7 +149,33 @@ int TimeController::SetRate(double r)
 	return 0;
 }
 
-int TimeController::GetRate()
+double TimeController::GetRate()
 {
 	return rate;
+}
+
+int TimeController::ImportWorkingSm(WorkingSm * workingSm)
+{
+	// TODO: 這邊要去分析整個sm，然後把每個小節的位置抓出來，每個段落的位置的抓出來，然後放進vector裡
+	vector<Event*>* events = workingSm->GetSm()->GetEvents();
+
+	int tempSection = 0;
+	int tempPart = 0;
+	sectionStartTime.push_back(0);
+	partStartTime.push_back(0);
+
+	for (int i = 0; i < events->size(); i++) {
+		if (dynamic_cast<NoteControlPoint*>(events->at(i))->GetSectionIndex() > tempSection) {
+			tempSection++;
+			sectionStartTime.push_back(events->at(i)->GetStartTime());
+		}
+		if (dynamic_cast<NoteControlPoint*>(events->at(i))->GetPartIndex() > tempPart) {
+			tempPart++;
+			partStartTime.push_back(events->at(i)->GetStartTime());
+		}
+
+	}
+
+
+	return 0;
 }

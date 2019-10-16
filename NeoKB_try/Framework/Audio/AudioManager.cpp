@@ -7,7 +7,7 @@ using namespace Framework::Audio;
 
 
 
-AudioManager::AudioManager(ResourceStore<char*>* trackStore, ResourceStore<char*>* sampleStore): RegisterType("AudioManager"), MtoObject()
+AudioManager::AudioManager(ResourceStore<char*>* trackStore, ResourceStore<char*>* sampleStore): RegisterType("AudioManager")
 {
 
 	trackStore->AddExtension("mp3");

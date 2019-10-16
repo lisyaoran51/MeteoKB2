@@ -10,7 +10,7 @@ DynamicPathResourceStore::DynamicPathResourceStore(string p)
 	path = p;
 }
 
-string DynamicPathResourceStore::Get(string name)
+char* DynamicPathResourceStore::Get(string name)
 {
 	string filePath = path + "/" + name;
 
@@ -28,8 +28,9 @@ string DynamicPathResourceStore::Get(string name)
 
 	string content((istreambuf_iterator<char>(ifs)),
 		(istreambuf_iterator<char>()));
+	char* contentInChar = (char*)content.c_str();
 
-	return content;
+	return contentInChar;
 }
 
 ifstream * DynamicPathResourceStore::GetStream(string name)

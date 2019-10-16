@@ -60,7 +60,8 @@ int Player::load(FrameworkConfigManager* f)
 		return 0;
 	});
 
-	timeController = new TimeController();
+	timeController = rulesetExecutor->CreateTimeController();
+	timeController->ImportWorkingSm(workingSmValue);
 	timeController->SetFramedClock(offsetClock);
 	timeController->SetControllableClock(decoupledClock);
 	timeController->SetAudioClock(decoupledClock);

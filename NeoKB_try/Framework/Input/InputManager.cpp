@@ -9,7 +9,7 @@ InputManager::InputManager(): RegisterType("InputManager")
 {
 	registerLoad(bind(static_cast<int(InputManager::*)(void)>(&InputManager::load), this));
 	currentState = new InputState();
-
+	
 }
 
 int InputManager::update()

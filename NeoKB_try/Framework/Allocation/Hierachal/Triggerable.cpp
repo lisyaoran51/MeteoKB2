@@ -10,7 +10,28 @@ Triggerable::Triggerable(): Schedulable(), RegisterType("Triggerable")
 
 int Triggerable::SetIsAvailabledForTrigger(bool value)
 {
+	previousIsAvailableForTrigger = isAvailableForTrigger;
 	isAvailableForTrigger = value;
+	return 0;
+}
+
+int Triggerable::SetAllChildsIsAvailableForTrigger(bool value)
+{
+	for (int i = 0; i < GetChilds()->size(); i++) {
+		dynamic_cast<Triggerable*>(GetChilds()->at(i))->SetIsAvailabledForTrigger(value);
+		dynamic_cast<Triggerable*>(GetChilds()->at(i))->SetAllChildsIsAvailableForTrigger(value);
+	}
+
+	return 0;
+}
+
+int Triggerable::RecoverAllChildsIsAvailableForTrigger()
+{
+	for (int i = 0; i < GetChilds()->size(); i++) {
+		dynamic_cast<Triggerable*>(GetChilds()->at(i))->recoverLastState();
+		dynamic_cast<Triggerable*>(GetChilds()->at(i))->RecoverAllChildsIsAvailableForTrigger();
+	}
+
 	return 0;
 }
 
@@ -62,6 +83,12 @@ int Triggerable::TriggerOnButtonUp(InputState * inputState, InputKey button)
 int Triggerable::TriggerOnSlide(InputState * inputState, InputKey slider)
 {
 	return onSlide(inputState, slider);
+}
+
+int Triggerable::recoverLastState()
+{
+	isAvailableForTrigger = previousIsAvailableForTrigger;
+	return 0;
 }
 
 int Triggerable::onKeyDown(InputState * inputState, InputKey key)

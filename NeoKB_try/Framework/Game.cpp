@@ -8,16 +8,9 @@ using namespace Framework::IO::Stores;
 
 int Game::load()
 {
-	resources = new ResourceStore<string>();
-	resources->AddStore(new DynamicPathResourceStore(GetResourcePath()));
+	
 
-
-	auto tracks = new NamespacedResourceStore<string>(resources, "Tracks");
-	auto samples = new NamespacedResourceStore<string>(resources, "Samples");
-
-	audioManager = new AudioManager(tracks, samples);
-
-	Cache<AudioManager>(audioManager);
+	audioManager = GetDependencies()->GetCache<AudioManager>("AudioManager");
 
 
 	return 0;

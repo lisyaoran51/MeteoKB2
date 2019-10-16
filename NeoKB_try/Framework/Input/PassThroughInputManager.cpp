@@ -11,8 +11,10 @@ int PassThroughInputManager::acceptState(InputState * inputState)
 	return RETURN_FAILED;
 }
 
-PassThroughInputManager::PassThroughInputManager() : InputManager(), RegisterType("PassThroughInputManager")
+PassThroughInputManager::PassThroughInputManager() : RegisterType("PassThroughInputManager")
 {
+	isInputable = true;
+	isPresent = true;
 }
 
 vector<InputState*>* PassThroughInputManager::getPendingState(vector<InputState*>* pendingStates)
