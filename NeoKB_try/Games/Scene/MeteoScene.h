@@ -5,9 +5,13 @@
 #include "../../Util/DataStructure/Bindable.h"
 #include "../Sheetmusic/WorkingSheetmusic.h"
 #include "../Ruleset/RulesetInfo.h"
-#include "../MeteoGame.h"
-#include "../MeteoGameBase.h"
 
+
+
+namespace Games {
+	class MeteoGame;
+	class MeteoGameBase;
+}
 
 using namespace Framework::Scenes;
 using namespace Util::DataStructure;

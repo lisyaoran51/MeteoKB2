@@ -10,7 +10,7 @@ ChildAddable::ChildAddable(): Loadable(), RegisterType("ChildAddable")
 
 int ChildAddable::AddChild(ChildAddable * child)
 {
-	if (child->SetParent(this) == DONE) {
+	if (child->SetParent(this) == 0) {
 		child->Load();
 
 		for (int i = 0; i < onAdd.size(); i++)
@@ -26,7 +26,7 @@ int ChildAddable::AddChild(ChildAddable * child)
 
 		isAlive = true;
 
-		return DONE;
+		return 0;
 	}
 	
 
@@ -38,14 +38,13 @@ int ChildAddable::DeleteChild(ChildAddable * child)
 {
 	vector<ChildAddable*>::iterator it = find(childs.begin(), childs.end(), child);
 
-	if (it != childs.end())
+	if (it != childs.end()) {
 		(*it)->SetIsAlive(false);
 		childs.erase(it);
+	}
 	else {
 		// TODO: ¨Ò¥~³B²z
 	}
-
-
 	return 0;
 }
 

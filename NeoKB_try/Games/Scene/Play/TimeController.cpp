@@ -154,6 +154,11 @@ double TimeController::GetRate()
 	return rate;
 }
 
+bool TimeController::GetIsPaused()
+{
+	return isPaused;
+}
+
 int TimeController::ImportWorkingSm(WorkingSm * workingSm)
 {
 	// TODO: 這邊要去分析整個sm，然後把每個小節的位置抓出來，每個段落的位置的抓出來，然後放進vector裡

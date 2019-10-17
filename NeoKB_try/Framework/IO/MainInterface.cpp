@@ -1,6 +1,17 @@
 #include "MainInterface.h"
 
+#include "Display.h"
+#include "Keyboard.h"
+#include "Panel.h"
+#include "BluetoothPhone.h"
+
+#include "../Devices/InputDevice.h"
+#include "../Devices/OutputDevice.h"
+
+
 using namespace Framework::IO;
+using namespace Framework::Devices;
+
 
 
 MainInterface::MainInterface() : RegisterType("MainInterface")

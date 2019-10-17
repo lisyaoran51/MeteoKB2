@@ -1,8 +1,12 @@
 #ifndef BLUETOOTH_DEVICE_H
 #define BLUETOOTH_DEVICE_H
 
-#include "Device.h"
+#include "InputDevice.h"
+#include "OutputDevice.h"
+#include "../IO/BluetoothPhone.h"
 
+
+using namespace Framework::IO;
 
 
 

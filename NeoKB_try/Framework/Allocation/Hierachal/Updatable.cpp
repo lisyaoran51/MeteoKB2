@@ -12,7 +12,7 @@ Updatable::Updatable() : ChildAddable(), RegisterType("Updatable")
 int Updatable::SetClock(FrameBasedClock* c)
 {
 	clock = c;
-	return DONE;
+	return 0;
 }
 
 FrameBasedClock * Updatable::GetClock()

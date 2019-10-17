@@ -251,3 +251,18 @@ int Piano::OnButtonUp(PianoAction action)
 
 	return 0;
 }
+
+int Piano::OnKnobTurn(pair<PianoAction, int> action)
+{
+	// 不需做任何動作
+	return 0;
+}
+
+int Piano::OnSlide(pair<PianoAction, int> action)
+{
+	if (action.first == PianoAction::PianoVolumeSlider) {
+		// 調整音量
+	}
+
+	return 0;
+}

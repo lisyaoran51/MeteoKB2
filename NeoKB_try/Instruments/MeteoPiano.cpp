@@ -10,18 +10,54 @@ using namespace Instruments::Input;
 
 
 
+MeteoPiano::MeteoPiano() : RegisterType("MeteoPiano")
+{
+}
+
+int MeteoPiano::SetGameControllingPitchState(bool value)
+{
+	isGameControllingPitchState = value;
+	return 0;
+}
+
 int MeteoPiano::ChangePitchState(MeteoPianoPitchState s)
 {
 	state = s;
 	return 0;
 }
 
-int MeteoPiano::OnKnobTurn(pair<PianoAction, int> action)
+int MeteoPiano::OnButtonDown(PianoAction action)
 {
-	return 0;
+	if (!isGameControllingPitchState) {
+		if (action == PianoAction::LowerOctave) {
+			switch (state) {
+			case MeteoPianoPitchState::Lowered:
+				break;
+			case MeteoPianoPitchState::None:
+				state = MeteoPianoPitchState::Lowered;
+				break;
+			case MeteoPianoPitchState::Raised:
+				state = MeteoPianoPitchState::None;
+				break;
+			}
+		}
+		else if (action == PianoAction::RaiseOctave) {
+			switch (state) {
+			case MeteoPianoPitchState::Lowered:
+				state = MeteoPianoPitchState::None;
+				break;
+			case MeteoPianoPitchState::None:
+				state = MeteoPianoPitchState::Raised;
+				break;
+			case MeteoPianoPitchState::Raised:
+				break;
+			}
+		}
+	}
+	return Piano::OnButtonDown(action);
 }
 
-int MeteoPiano::OnSlide(pair<PianoAction, int> action)
+int MeteoPiano::OnKnobTurn(pair<PianoAction, int> action)
 {
 	return 0;
 }

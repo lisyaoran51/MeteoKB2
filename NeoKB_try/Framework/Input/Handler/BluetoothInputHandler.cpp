@@ -1,6 +1,11 @@
 #include "BluetoothInputHandler.h"
 
+#include "../../IO/BluetoothPhone.h"
+
+
 using namespace Framework::Input::Handler;
+using namespace Framework::IO;
+
 
 
 int BluetoothInputHandler::Initialize(GameHost * host)

@@ -11,7 +11,31 @@ using namespace Instruments::Input;
 
 namespace Instruments {
 
-	enum class SustainType;
+
+	enum class SustainType {
+
+		/// <summary>
+		/// ⊿Τsustain
+		///	</summary>
+		None,
+
+		/// <summary>
+		/// ノ今狾
+		///	</summary>
+		SustainPedal,
+
+		/// <summary>
+		/// 笆┑
+		///	</summary>
+		AutoSustain,
+
+		/// <summary>
+		/// 筿福北┑
+		///	</summary>
+		GameControllingSustain,
+
+	};
+
 
 	class Piano : public TInstrument<PianoAction> {
 
@@ -60,31 +84,12 @@ namespace Instruments {
 
 		virtual int OnButtonUp(PianoAction action);
 
+		virtual int OnKnobTurn(pair<PianoAction, int> action);
+
+		virtual int OnSlide(pair<PianoAction, int> action);
 	};
 
-	enum class SustainType {
-
-		/// <summary>
-		/// ⊿Τsustain
-		///	</summary>
-		None,
-
-		/// <summary>
-		/// ノ今狾
-		///	</summary>
-		SustainPedal,
-
-		/// <summary>
-		/// 笆┑
-		///	</summary>
-		AutoSustain,
-
-		/// <summary>
-		/// 筿福北┑
-		///	</summary>
-		GameControllingSustain,
-
-	};
+	
 
 
 }

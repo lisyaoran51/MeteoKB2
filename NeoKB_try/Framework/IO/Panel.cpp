@@ -1,6 +1,11 @@
 #include "Panel.h"
 
-using namespace  Framework::IO;
+#include "../Devices/PanelDevice.h"
+
+
+using namespace Framework::IO;
+using namespace Framework::Devices;
+
 
 int Panel::SetDevice(Device * device)
 {

@@ -672,9 +672,6 @@
     <ClCompile Include="Framework\Audio\AudioCollectionManager.cpp">
       <Filter>來源檔案\Framework\Audio</Filter>
     </ClCompile>
-    <ClCompile Include="Framework\IO\Stores\ResourceStore.cpp">
-      <Filter>來源檔案\Framework\IO\Stores</Filter>
-    </ClCompile>
     <ClCompile Include="Framework\IO\Stores\DynamicPathResourceStore.cpp">
       <Filter>來源檔案\Framework\IO\Stores</Filter>
     </ClCompile>

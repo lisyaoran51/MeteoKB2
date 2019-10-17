@@ -1,7 +1,10 @@
 #include "Display.h"
 
+#include "../Devices/DisplayDevice.h"
+
 
 using namespace Framework::IO;
+using namespace Framework::Devices;
 
 
 Display::Display()

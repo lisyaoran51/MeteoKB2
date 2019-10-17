@@ -25,7 +25,7 @@ namespace Select {
 
 	public:
 
-
+		MainMenu();
 
 	protected:
 

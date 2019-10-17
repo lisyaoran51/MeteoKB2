@@ -12,6 +12,10 @@ namespace Input {
 
 		vector<InputHandler*> inputHandlers;
 
+	public:
+
+		CustomInputManager();
+
 	protected:
 
 		/// <summary>

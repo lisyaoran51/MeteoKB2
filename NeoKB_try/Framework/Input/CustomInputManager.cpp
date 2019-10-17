@@ -6,6 +6,10 @@ using namespace Framework::Input;
 
 
 
+CustomInputManager::CustomInputManager() : RegisterType("CustomInputManager")
+{
+}
+
 vector<InputHandler*>* CustomInputManager::getInputHandlers()
 {
 	return &inputHandlers;

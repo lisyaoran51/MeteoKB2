@@ -52,7 +52,7 @@ bool Triggerable::GetIsPresent()
 
 bool Triggerable::GetIsInputReceivable()
 {
-	return GetIsInputable && GetIsAvailableForTrigger && isPresent;
+	return isInputable && isAvailableForTrigger && isPresent;
 }
 
 int Triggerable::TriggerOnKeyDown(InputState * inputState, InputKey key)

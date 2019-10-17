@@ -26,7 +26,7 @@ namespace Audio {
 	template<typename T>
 	struct TSoundBinding : public SoundBinding {
 
-		TSoundBinding(string fName, T a) {
+		TSoundBinding(string fName, T a) : SoundBinding(fName, (int)a){
 			fileName = fName;
 
 			action = (int)a;

@@ -51,7 +51,7 @@ namespace Play {
 
 		virtual int OnButtonDown(T action) {
 			if (keyBindings[action] == InputKey::Pause) {
-				if (!isPaused) {
+				if (!GetIsPaused()) {
 					Pause();
 					SetAllChildsIsAvailableForTrigger(false);
 				}
@@ -61,6 +61,7 @@ namespace Play {
 					RecoverAllChildsIsAvailableForTrigger();
 				}
 			}
+			return 0;
 		}
 
 		virtual int OnButtonUp(T action) {
@@ -78,6 +79,7 @@ namespace Play {
 				JumpTo(sectionStartTime[getTempSection() + action.second]);
 
 			}
+			return 0;
 		}
 
 		virtual int OnSlide(pair<T, int> action) {
@@ -184,6 +186,8 @@ namespace Play {
 		int SetRate(double rate);
 
 		double GetRate();
+
+		bool GetIsPaused();
 
 
 		int ImportWorkingSm(WorkingSm* workingSm);

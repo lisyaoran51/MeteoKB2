@@ -2,6 +2,9 @@
 
 
 #include "../Input/UserInputManager.h"
+#include "../IO/Display.h"
+#include "../Game.h"
+#include "../../Instruments/Instrument.h"
 
 
 
@@ -9,6 +12,9 @@ using namespace std;
 using namespace Framework::Host;
 using namespace Framework::Input;
 using namespace Framework::IO;
+using namespace Framework;
+using namespace Instruments;
+
 
 
 

@@ -53,10 +53,28 @@ vector<KeyBinding*>* MeteorRuleset::GetDefaultkeyBindings(int variant)
 		bindings->push_back(new KeyBinding((InputKey)i, i));
 	}
 
-	/* Panel */
-	for (int i = (int)InputKey::RaiseOctave; i <= (int)InputKey::Bluetooth; i++) {
+	/* General Button */
+	for (int i = (int)InputKey::Power; i <= (int)InputKey::Sensitivity; i++) {
 		bindings->push_back(new KeyBinding((InputKey)i, i));
 	}
+
+	/* SpecialButton */
+	for (int i = (int)InputKey::RaiseOctave; i <= (int)InputKey::Pause; i++) {
+		bindings->push_back(new KeyBinding((InputKey)i, i));
+	}
+
+	/* Knob */
+	for (int i = (int)InputKey::SectionKnob; i <= (int)InputKey::SpeedKnob; i++) {
+		bindings->push_back(new KeyBinding((InputKey)i, i));
+	}
+
+	/* Slider */
+	for (int i = (int)InputKey::PianoVolumeSlider; i <= (int)InputKey::MusicVolumeSlider; i++) {
+		bindings->push_back(new KeyBinding((InputKey)i, i));
+	}
+
+	/* Bluetooth */
+	bindings->push_back(new KeyBinding(InputKey::Bluetooth, (int)InputKey::Bluetooth));
 
 	/* Plugin */
 	for (int i = (int)InputKey::BluetoothPlugin; i <= (int)InputKey::ExpressionPedalPlugin; i++) {

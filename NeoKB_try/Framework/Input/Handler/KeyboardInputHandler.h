@@ -4,8 +4,10 @@
 
 #include <vector>
 #include "InputHandler.h"
+#include "../../Host/GameHost.h"
 
 using namespace std;
+using namespace Framework::Host;
 
 
 namespace Framework {

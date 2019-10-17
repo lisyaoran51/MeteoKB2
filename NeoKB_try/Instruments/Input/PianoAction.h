@@ -138,21 +138,29 @@ namespace Input {
 		SustainPedal = 500,
 		ExpressionPedal,
 
+		/* General Button */
+		Power		= 1000,
+		Sustain		= 1001,
+		Sensitivity	= 1002,
 
-		/* Button */
-		RaiseOctave = 1000,
-		LowerOctave = 1001,
+		/* SpecialButton */
+		RaiseOctave = 1010,
+		LowerOctave = 1011,
 
-		Pause = 1002,
+		Pause = 1012,
 
 		/* Knob */
-		SectionKnob = 1003,
-		SpeedKnob = 1004,
+		SectionKnob = 1020,
+		SpeedKnob = 1021,
+
+		/* Slider */
+		PianoVolumeSlider = 1030,
+		MusicVolumeSlider = 1031,
 
 		/* Bluetooth */
-		Bluetooth = 1005,
+		Bluetooth = 1040,
 
-		/*Plugin*/
+		/* Plugin */
 		BluetoothPlugin = 1500,
 		EarphonePlugin,
 		SustainPedalPlugin,

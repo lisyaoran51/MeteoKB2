@@ -34,23 +34,6 @@ namespace Host {
 
 namespace Instruments {
 
-	class Instrument;
-
-	template<typename T>
-	class TInstrument : public Instrument, public KeyBindingHandler<T> {
-
-
-	public:
-
-		TInstrument();
-
-	protected:
-
-		map<T, SampleChannel*> samples;
-
-		virtual map<T, SampleChannel*>* getSamples();
-
-	};
 
 	class Instrument : public Container {
 
@@ -59,6 +42,8 @@ namespace Instruments {
 		int load(AudioManager* audioManager);
 
 	public:
+
+		Instrument();
 
 		virtual PassThroughInputManager* CreateInputManager() = 0;
 
@@ -81,6 +66,27 @@ namespace Instruments {
 		virtual int loadAndMapSamples() = 0;
 
 		string getSoundBinding(int action);
+
+	};
+
+	template<typename T>
+	class TInstrument : public Instrument, public KeyBindingHandler<T> {
+
+
+	public:
+
+		TInstrument() : RegisterType("TInstrument")
+		{
+			isInputable = true;
+		}
+
+	protected:
+
+		map<T, SampleChannel*> samples;
+
+		virtual map<T, SampleChannel*>* getSamples() {
+			return &samples;
+		}
 
 	};
 

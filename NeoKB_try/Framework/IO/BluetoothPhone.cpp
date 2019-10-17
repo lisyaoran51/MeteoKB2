@@ -1,5 +1,15 @@
 #include "BluetoothPhone.h"
 
+#include "../Devices/BluetoothDevice.h"
+
+
+
+using namespace Framework::IO;
+using namespace Framework::Devices;
+
+
+
+
 int BluetoothPhone::SetDevice(Device * device)
 {
 	Peripheral::SetDevice(device);

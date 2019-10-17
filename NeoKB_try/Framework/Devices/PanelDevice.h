@@ -14,7 +14,6 @@ namespace Devices{
 
 	class PanelDevice : public InputDevice, public OutputDevice {
 
-
 	public:
 
 	protected:

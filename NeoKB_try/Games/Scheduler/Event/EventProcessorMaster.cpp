@@ -17,12 +17,12 @@ int EventProcessorMaster::load()
 	// 目前先暫訂5秒一段
 
 	// TODO: visible time length也應該要去framework config manager拿
-	eventProcessorPeriods = new PeriodMap<EventProcessor<Event>*>(0, 5, [=](EventProcessor<Event>* ep) {
+	eventProcessorPeriods = new PeriodMap<EventProcessor<Event>*>(0, 5, [=](EventProcessor<Event>* ep)->pair<float, float> {
 
 		float startTime = ep->GetStartTime() - visibleTimeRange;
 		float endTime = ep->GetStartTime() + ep->GetLifeTime() + visibleTimeRange;
 
-		return make_pair<float, float>(startTime, endTime);
+		return make_pair(startTime, endTime);
 	});
 
 

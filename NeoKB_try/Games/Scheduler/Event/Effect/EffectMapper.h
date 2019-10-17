@@ -97,9 +97,9 @@ namespace Effects {
 
 		virtual int GetWidth() { return width; }
 		virtual int GetHeight() { return height; }
-		virtual int GetX(){ return GetEffect()->GetX(); }
-		virtual int GetY(){ return GetEffect()->GetY(); }
-		virtual MTO_FLOAT GetSpeed(){ return GetEffect()->GetSpeed(); }
+		virtual int GetX(){ return dynamic_cast<Effect*>(GetEffect())->GetX(); }
+		virtual int GetY(){ return dynamic_cast<Effect*>(GetEffect())->GetY(); }
+		virtual MTO_FLOAT GetSpeed(){ return dynamic_cast<Effect*>(GetEffect())->GetSpeed(); }
 
 	protected:
 

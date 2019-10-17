@@ -1,18 +1,22 @@
 #include "MeteoScene.h"
 
+#include "../MeteoGame.h"
+#include "../MeteoGameBase.h"
+
 
 using namespace Games::Scenes;
+using namespace Games;
 
 
 
 int MeteoScene::load()
 {
 	MeteoGame * game = GetCache<MeteoGame>("MeteoGame");
-	if (!f)
+	if (!game)
 		throw runtime_error("int  MeteoScene<T>::load() : MeteoGame not found in cache.");
 
 	MeteoGameBase * gameBase = GetCache<MeteoGameBase>("MeteoGameBase");
-	if (!f)
+	if (!gameBase)
 		throw runtime_error("int  MeteoScene<T>::load() : MeteoGameBase not found in cache.");
 
 

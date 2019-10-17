@@ -1,7 +1,10 @@
 #include "PanelInputHandler.h"
 
-using namespace Framework::Input::Handler;
+#include "../../IO/Panel.h"
 
+
+using namespace Framework::Input::Handler;
+using namespace Framework::IO;
 
 
 

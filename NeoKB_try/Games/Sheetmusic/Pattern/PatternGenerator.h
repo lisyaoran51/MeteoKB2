@@ -12,6 +12,7 @@
 #include "Pattern.h"
 #include "../../../Framework/Configurations/FrameworkConfigManager.h"
 #include "../../../Framework/Allocation/Hierachal/Container.h"
+#include "../../../Instruments/Pitch.h"
 
 
 
@@ -22,6 +23,8 @@ using namespace Games::Schedulers::Events;
 using namespace Games::Sheetmusics;
 using namespace Framework::Configurations;
 using namespace Framework::Allocation::Hierachal;
+using namespace Instruments;
+
 
 
 namespace Games {

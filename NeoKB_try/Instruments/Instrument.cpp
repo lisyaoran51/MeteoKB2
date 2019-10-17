@@ -8,17 +8,6 @@ using namespace Instruments;
 
 
 
-template<typename T>
-TInstrument<T>::TInstrument() : RegisterType("TInstrument")
-{
-}
-
-template<typename T>
-map<int, SampleChannel*>* TInstrument::getSamples()
-{
-	return &samples;
-}
-
 
 int Instrument::load()
 {
@@ -31,6 +20,8 @@ int Instrument::load()
 
 int Instrument::load(AudioManager * a)
 {
+	isPresent = true;
+
 	audioManager = a;
 	return 0;
 }

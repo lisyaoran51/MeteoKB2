@@ -7,7 +7,8 @@
 #include "Peripheral.h"
 #include "../../Util/DataStructure/ActionList.h"
 #include "../Input/InputState.h"
-#include "../Devices/BluetoothDevice.h"
+
+
 
 namespace Framework {
 namespace Devices{
@@ -15,10 +16,14 @@ namespace Devices{
 	class BluetoothDevice;
 }}
 
+
+
 using namespace std;
 using namespace Util::DataStructure;
 using namespace Framework::Input;
 using namespace Framework::Devices;
+
+
 
 namespace Framework {
 namespace IO {

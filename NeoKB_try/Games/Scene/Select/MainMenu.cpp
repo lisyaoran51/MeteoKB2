@@ -4,6 +4,10 @@
 
 using namespace Games::Scenes::Select;
 
+MainMenu::MainMenu(): RegisterType("MainMenu")
+{
+}
+
 int MainMenu::onEntering(Scene * lastScene)
 {
 

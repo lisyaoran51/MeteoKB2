@@ -1,9 +1,16 @@
 #ifndef DEVICE_H
 #define DEVICE_H
 
+
+
 #include "../IO/Peripheral.h"
+#include "../IO/MainInterface.h"
+
+
 
 using namespace Framework::IO;
+
+
 
 namespace Framework {
 namespace Devices {

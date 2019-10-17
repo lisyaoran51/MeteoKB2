@@ -39,7 +39,7 @@ int Loadable::NoParentHandler::Async()
 {
 	LOG(LogLevel::Finer) << "int Loadable::NoParentHandler::Async() : [" << loadable.GetTypeName() << "] is asyncing.";
 	
-	if (GetDependencies == nullptr) {
+	if (loadable.GetDependencies() == nullptr) {
 		LOG(LogLevel::Error) << "int Loadable::NoParentHandler::Async() : There's no dependency in this object. Unable to async";
 		throw runtime_error("int Loadable::NoParentHandler::Async() : There's no dependency in this object. Unable to async.");
 	}

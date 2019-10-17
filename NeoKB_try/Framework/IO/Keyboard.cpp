@@ -1,6 +1,10 @@
 #include "Keyboard.h"
 
+#include "../Devices/KeyboardDevice.h"
+
+
 using namespace Framework::IO;
+using namespace Framework::Devices;
 
 
 template<class _Type>

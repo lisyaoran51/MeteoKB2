@@ -23,11 +23,15 @@ namespace Instruments {
 
 	public:
 
+		MeteoPiano();
+
+		int SetGameControllingPitchState(bool value);
+
 		int ChangePitchState(MeteoPianoPitchState s);
 
-		virtual int OnKnobTurn(pair<PianoAction, int> action);
+		virtual int OnButtonDown(PianoAction action);
 
-		virtual int OnSlide(pair<PianoAction, int> action);
+		virtual int OnKnobTurn(pair<PianoAction, int> action);
 
 
 	protected:

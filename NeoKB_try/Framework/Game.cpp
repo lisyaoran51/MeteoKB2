@@ -22,11 +22,6 @@ int Game::SetHost(GameHost * host)
 	return 0;
 }
 
-string Game::GetResourcePath()
-{
-	return string("Resources");
-}
-
 Game::Game() : RegisterType("Game")
 {
 }
