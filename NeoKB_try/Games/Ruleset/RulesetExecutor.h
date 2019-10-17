@@ -15,6 +15,7 @@
 #include "../Scheduler/Event/Effect/Algorithm/MapAlgorithm.h"
 #include "../Sheetmusic/WorkingSheetmusic.h"
 #include "../../Framework/Input/PassThroughInputManager.h"
+#include "../Scene/Play/TimeController.h"
 
 
 
@@ -167,10 +168,11 @@ namespace Rulesets {
 
 		virtual ~RulesetExecutor() = default;
 
-		virtual int LazyConstruct(WorkingSm* w) {
+		virtual int LazyConstruct(WorkingSm* w, Ruleset* r) {
 
 			workingSm = w;
 
+			ruleset = r;
 			//mods = w->get_mods();
 
 			constructed = true;
@@ -187,13 +189,15 @@ namespace Rulesets {
 
 	protected:
 
-		Sm<T>* sm = NULL;
+		Ruleset* ruleset;
 
-		WorkingSm* workingSm = NULL;
+		Sm<T>* sm = nullptr;
+
+		WorkingSm* workingSm = nullptr;
 
 		//vector<mod_t*> mods;
 
-		Playfield* playfield = NULL;
+		Playfield* playfield = nullptr;
 
 		vector<void*> on_judgement;
 

@@ -26,3 +26,8 @@ Ruleset::~Ruleset()
 {
 }
 
+RulesetInfo * Ruleset::GetRulesetInfo()
+{
+	return rulesetInfo;
+}
+

@@ -2,21 +2,31 @@
 #define MAIN_INTERFACE_H
 
 #include <vector>
-#include "Display.h"
-#include "Keyboard.h"
-#include "Panel.h"
-#include "BluetoothPhone.h"
 #include "../Allocation/Hierachal/Container.h"
 
-#include "../Devices/InputDevice.h"
-#include "../Devices/OutputDevice.h"
+
+namespace Framework {
+namespace Devices{
+	class Device;
+	class InputDevice;
+	class OutputDevice;
+}}
+
 
 using namespace std;
 using namespace Framework::Devices;
 using namespace Framework::Allocation::Hierachal;
 
+
+
 namespace Framework {
 namespace IO {
+
+	class Peripheral;
+	class Display;
+	class Panel;
+	class BluetoothPhone;
+	class Keyboard;
 
 	/// <summary>
 	/// 抓取輸入的地方，書出的地方

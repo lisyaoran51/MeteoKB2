@@ -150,6 +150,7 @@
     <ClCompile Include="RulesetMeteor\Sheetmusic\MeteorSheetmusicConverter.cpp" />
     <ClCompile Include="RulesetMeteor\Sheetmusic\MeteorSheetmusicPostprocessor.cpp" />
     <ClCompile Include="RulesetMeteor\Sheetmusic\Pattern\MeteorPatternGenerator.cpp" />
+    <ClCompile Include="RulesetMeteor\Timing\MeteorTimeController.cpp" />
     <ClCompile Include="Util\DataStructure\PeriodMap.cpp" />
     <ClCompile Include="Util\FileSystem.c" />
     <ClCompile Include="Util\MtoObject.cpp">
@@ -327,6 +328,7 @@
     <ClInclude Include="RulesetMeteor\Sheetmusic\MeteorSheetmusicConverter.h" />
     <ClInclude Include="RulesetMeteor\Sheetmusic\MeteorSheetmusicPostProcessor.h" />
     <ClInclude Include="RulesetMeteor\Sheetmusic\Pattern\MeteorPatternGenerator.h" />
+    <ClInclude Include="RulesetMeteor\Timing\MeteorTimeController.h" />
     <ClInclude Include="ThirdParty\Bass\bass.h" />
     <ClInclude Include="Util\DataStructure\ActionList.h" />
     <ClInclude Include="Util\DataStructure\ActionMap.h" />

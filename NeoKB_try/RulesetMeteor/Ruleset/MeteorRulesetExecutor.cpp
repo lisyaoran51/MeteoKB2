@@ -13,6 +13,7 @@
 #include "../../Games/Scheduler/Event/SystemEvents/SystemEventHandler.h"
 #include "../../Games/Scheduler/Event/SystemEvents/StopSystemEvent.h"
 #include "../Input/MeteorInputManager.h"
+#include "../Timing/MeteorTimeController.h"
 
 
 using namespace Meteor::Rulesets;
@@ -24,6 +25,7 @@ using namespace Meteor::Play;
 using namespace Games::Schedulers::Events::Effects;
 using namespace Meteor::Schedulers::Events::Effects;
 using namespace Meteor::Input;
+using namespace Meteor::Timing;
 
 
 SmConverter * MeteorRulesetExecutor::createSmConverter(PatternGenerator * pg)
@@ -65,7 +67,12 @@ int MeteorRulesetExecutor::LazyConstruct(WorkingSm * w)
 
 PassThroughInputManager * MeteorRulesetExecutor::CreateInputManager()
 {
-	return new MeteorInputManager();
+	return new MeteorInputManager(ruleset->GetRulesetInfo());
+}
+
+TimeController * MeteorRulesetExecutor::CreateTimeController()
+{
+	return new MeteorTimeController();
 }
 
 int MeteorRulesetExecutor::Elapse(MTO_FLOAT elapsedTime)

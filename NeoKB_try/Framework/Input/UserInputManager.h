@@ -8,6 +8,8 @@ using namespace Framework::Input::KeyBindings;
 namespace Framework {
 namespace Input {
 
+	enum class FrameworkAction;
+
 	class UserInputManager : public KeyBindingInputManager<FrameworkAction> {
 
 	public:

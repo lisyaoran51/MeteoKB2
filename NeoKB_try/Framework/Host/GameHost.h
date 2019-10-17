@@ -7,8 +7,6 @@
 #include "../Threading/GameThread.h"
 #include "../../Util/DataStructure/ActionList.h"
 #include "../Input/InputEvent.h"
-#include "../Game.h"
-#include "../Input/Handler/InputHandler.h"
 #include "../Graphic/Drawable.h"
 #include "../Allocation/DependencyContainer.h"
 #include "../IO/MainInterface.h"
@@ -16,14 +14,26 @@
 #include "../Allocation/Hierachal/Container.h"
 #include "../Graphic/Map/Map.h"
 #include "../Timing/FrameBasedClock.h"
-#include "../../Instruments/Instrument.h"
+#include "../IO/MainInterface.h"
+
+namespace Instruments {
+	class Instrument;
+}
+namespace Framework {
+	class Game;
+}
+
+namespace Framework {
+namespace Input {
+namespace Handler{
+	class InputHandler;
+}}}
 
 
 using namespace std;
 using namespace Framework::Threading;
 using namespace Util::DataStructure;
 using namespace Framework::Input;
-using namespace Framework::Input::Handler;
 using namespace Framework::IO;
 using namespace Framework;
 using namespace Framework::Graphic;
@@ -33,6 +43,8 @@ using namespace Framework::Allocation;
 using namespace Framework::Configurations;
 using namespace Framework::Timing;
 using namespace Instruments;
+using namespace Framework::Input::Handler;
+
 
 
 

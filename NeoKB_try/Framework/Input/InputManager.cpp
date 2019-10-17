@@ -12,6 +12,13 @@ InputManager::InputManager(): RegisterType("InputManager")
 	
 }
 
+int InputManager::ChangeFocus(Triggerable * fTriggerable)
+{
+	// TODO: ¤§«á¦A¼g
+	return 0;
+}
+
+
 int InputManager::update()
 {
 	vector<InputState*> pendingStates;

@@ -4,11 +4,17 @@
 #include <vector>
 #include "Peripheral.h"
 #include "../Graphic/Map/Map.h"
-#include "../Devices/DisplayDevice.h"
+
+namespace Framework {
+namespace Devices {
+	class Device;
+	class DisplayDevice;
+}}
 
 using namespace std;
 using namespace Framework::Graphic::Maps;
 using namespace Framework::Devices;
+
 
 
 namespace Framework {

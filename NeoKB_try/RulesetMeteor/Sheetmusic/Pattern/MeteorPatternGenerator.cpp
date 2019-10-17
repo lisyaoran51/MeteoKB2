@@ -8,6 +8,7 @@
 #include "../../../Games/Scheduler/Event/GameEvents/StartGameEvent.h"
 #include "../../../Games/Scheduler/Event/SystemEvents/SystemEvent.h"
 #include "../../../Games/Scheduler/Event/SystemEvents/StopSystemEvent.h"
+#include "../../../Instruments/Pitch.h"
 
 
 
@@ -18,7 +19,7 @@ using namespace Games::Schedulers::Events::ControlPoints;
 using namespace Meteor::Schedulers::Events::Effects;
 using namespace Games::Schedulers::Events::GameEvents;
 using namespace Games::Schedulers::Events::SystemEvents;
-
+using namespace Instruments;
 
 
 int MeteorPatternGenerator::load()

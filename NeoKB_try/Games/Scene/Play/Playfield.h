@@ -25,6 +25,7 @@ namespace Play {
 	/// when playfield start, it should connect Scheduler, master, renderer with Updater.
 	/// So that these objects could be updated on each frame.
 	/// should they be connected in this class????
+	/// 其實這個不是scene，應該要移到UI去	
 	/// </summary>
 	class Playfield: public Container {
 

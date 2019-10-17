@@ -415,6 +415,12 @@
     <Filter Include="來源檔案\RulesetMeteor\Input">
       <UniqueIdentifier>{c3d547c1-60df-460b-8508-b5fe884e0acf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="標頭檔\RulesetMeteor\Timing">
+      <UniqueIdentifier>{c9283745-5fa2-40e0-83e7-a2d5c12d8095}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetMeteor\Timing">
+      <UniqueIdentifier>{2604009d-33f9-4f95-adb4-6a774cfb68a6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Games\Graphic\Renderer\renderer.cpp">
@@ -803,6 +809,9 @@
     </ClCompile>
     <ClCompile Include="RulesetMeteor\MeteorGame.cpp">
       <Filter>來源檔案\Framework\Threading</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\Timing\MeteorTimeController.cpp">
+      <Filter>來源檔案\RulesetMeteor\Timing</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1332,6 +1341,9 @@
     </ClInclude>
     <ClInclude Include="Framework\Platforms\MeteoGameHost.h">
       <Filter>標頭檔\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Timing\MeteorTimeController.h">
+      <Filter>標頭檔\RulesetMeteor\Timing</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

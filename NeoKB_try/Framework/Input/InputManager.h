@@ -28,11 +28,11 @@ namespace Input {
 
 		int ChangeFocus(Triggerable* fTriggerable);
 
-		int AddStaticTriggerable(Triggerable* sTriggerable);
+		//int AddStaticTriggerable(Triggerable* sTriggerable);
 
-		int DeleteStaticTriggerable(Triggerable* sTriggerable);
+		//int DeleteStaticTriggerable(Triggerable* sTriggerable);
 
-		int ClearStaticTriggerable();
+		//int ClearStaticTriggerable();
 
 	protected:
 

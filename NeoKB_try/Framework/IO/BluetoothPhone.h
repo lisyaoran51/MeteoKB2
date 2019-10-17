@@ -9,6 +9,12 @@
 #include "../Input/InputState.h"
 #include "../Devices/BluetoothDevice.h"
 
+namespace Framework {
+namespace Devices{
+	class Device;
+	class BluetoothDevice;
+}}
+
 using namespace std;
 using namespace Util::DataStructure;
 using namespace Framework::Input;

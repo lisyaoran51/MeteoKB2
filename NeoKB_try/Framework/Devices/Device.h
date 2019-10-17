@@ -1,7 +1,7 @@
 #ifndef DEVICE_H
 #define DEVICE_H
 
-#include "../IO/MainInterface.h"
+#include "../IO/Peripheral.h"
 
 using namespace Framework::IO;
 

@@ -44,6 +44,8 @@ namespace Rulesets {
 
 		virtual PassThroughInputManager* CreateInputManager();
 
+		virtual TimeController* CreateTimeController();
+
 		virtual int Elapse(MTO_FLOAT elapsedTime);
 
 	protected:

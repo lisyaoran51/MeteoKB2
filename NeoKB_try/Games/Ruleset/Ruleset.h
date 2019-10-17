@@ -2,8 +2,8 @@
 #define RULESET_H
 
 
-#include"RulesetInfo.h"
-#include"RulesetExecutor.h"
+#include "RulesetInfo.h"
+#include "RulesetExecutor.h"
 #include "../Sheetmusic/WorkingSheetmusic.h"
 #include "../../Framework/Input/KeyBindings/KeyBinding.h"
 
@@ -39,6 +39,8 @@ namespace Rulesets {
 		virtual RulesetExecutor<Event>* CreateRulesetExecutor(WorkingSm* sm) = 0;
 
 		virtual vector<KeyBinding*>* GetDefaultkeyBindings(int variant = 0) = 0;
+
+		RulesetInfo* GetRulesetInfo();
 
 	protected:
 

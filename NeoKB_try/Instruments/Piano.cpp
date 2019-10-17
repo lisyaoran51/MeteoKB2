@@ -12,15 +12,15 @@ using namespace Instruments::Input;
 int Piano::load()
 {
 	for (int i = (int)PianoAction::VK27_A1; i <= (int)PianoAction::VK37_C4; i++) {
-		isPressingMap.insert((PianoAction)i, false);
+		isPressingMap[(PianoAction)i] = false;
 	}
 
 	for (int i = (int)PianoAction::SustainPedal; i <= (int)PianoAction::ExpressionPedal; i++) {
-		isPressingMap.insert((PianoAction)i, false);
+		isPressingMap[(PianoAction)i] = false;
 	}
 
 	for (int i = (int)PianoAction::BluetoothPlugin; i <= (int)PianoAction::ExpressionPedalPlugin; i++) {
-		isPressingMap.insert((PianoAction)i, false);
+		isPressingMap[(PianoAction)i] = false;
 	}
 	return 0;
 }
@@ -177,9 +177,9 @@ int Piano::ChangeSustainType(SustainType sType)
 int Piano::ControlSustainPedal(bool down)
 {
 	if (sustainType == SustainType::GameControllingSustain) {
-		isPressingMap.insert(PianoAction::SustainPedal, down);
+		isPressingMap[PianoAction::SustainPedal] = down;
 		if (down){
-
+			// 不用幹嘛
 		}
 		else {
 			map<PianoAction, bool>::iterator it;
@@ -202,7 +202,7 @@ int Piano::ControlSustainPedal(bool down)
 int Piano::OnKeyDown(pair<PianoAction, int> action)
 {
 	getSamples()->at(action.first)->Play();
-	isPressingMap.insert(action.first, true);
+	isPressingMap[action.first] = true;
 	return 0;
 }
 
@@ -210,8 +210,9 @@ int Piano::OnKeyUp(PianoAction action)
 {
 	// 沒踏踏板、有插踏板、沒開啟自動延音
 	if(!isPressingMap.at(PianoAction::SustainPedal) && !isAutoSustain )
-		getSamples()->at(action.first)->Stop();
-	isPressingMap.insert(action, false);
+		getSamples()->at(action)->Stop();
+
+	isPressingMap[action] = false;
 	return 0;
 }
 
@@ -221,7 +222,7 @@ int Piano::OnButtonDown(PianoAction action)
 	if (sustainType == SustainType::GameControllingSustain && action == PianoAction::SustainPedal)
 		return 0;
 
-	isPressingMap.insert(action, true);
+	isPressingMap[action] = true;
 	if (action == PianoAction::SustainPedalPlugin) {
 		// mainInterface->GetPanel()->ChangeState(PianoAction::SustainButton, false);
 	}
@@ -235,7 +236,7 @@ int Piano::OnButtonUp(PianoAction action)
 	if (sustainType == SustainType::GameControllingSustain && action == PianoAction::SustainPedal)
 		return 0;
 
-	isPressingMap.insert(action, false);
+	isPressingMap[action] = false;
 	if (action == PianoAction::SustainPedal && sustainType == SustainType::SustainPedal) {
 		map<PianoAction, bool>::iterator it;
 		for (it = isPressingMap.begin(); it != isPressingMap.end(); it++) {

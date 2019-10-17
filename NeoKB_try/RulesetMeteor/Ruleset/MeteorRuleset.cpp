@@ -32,7 +32,7 @@ RulesetExecutor<Event>* MeteorRuleset::CreateRulesetExecutor(WorkingSm * sm)
 
 	// instance creator⊿快猭ミ碞р把计メ秈? 
 	// ⊿快猭秨﹍メ┮碞ぇㄓlazy construct 硂妓ゑ耕
-	rulesetExecutor->LazyConstruct(sm);
+	rulesetExecutor->LazyConstruct(sm, this);
 
 	return rulesetExecutor;
 }

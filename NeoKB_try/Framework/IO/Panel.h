@@ -7,7 +7,12 @@
 #include "Peripheral.h"
 #include "../../Util/DataStructure/ActionList.h"
 #include "../Input/InputState.h"
-#include "../Devices/PanelDevice.h"
+
+namespace Framework {
+namespace Devices{
+	class Device;
+	class PanelDevice;
+}}
 
 using namespace std;
 using namespace Util::DataStructure;

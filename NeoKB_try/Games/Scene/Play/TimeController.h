@@ -18,6 +18,9 @@ namespace Games {
 namespace Scenes {
 namespace Play {
 
+	/// <summary>
+	/// 其實這個不是scene，應該移到timing去
+	/// </summary>
 	template<typename T>
 	class TTimeController : public TimeController, public KeyBindingHandler<T> {
 
@@ -36,6 +39,8 @@ namespace Play {
 
 		}
 
+		virtual map<T, InputKey>* GetDefaultkeyBindings() = 0;
+
 		virtual int OnKeyDown(pair<T, int> action) {
 			return 0;
 		}
@@ -45,7 +50,7 @@ namespace Play {
 		}
 
 		virtual int OnButtonDown(T action) {
-			if (action == pause) {
+			if (keyBindings[action] == InputKey::Pause) {
 				if (!isPaused) {
 					Pause();
 					SetAllChildsIsAvailableForTrigger(false);
@@ -63,12 +68,12 @@ namespace Play {
 		}
 
 		virtual int OnKnobTurn(pair<T, int> action) {
-			if (action == speed) {
+			if (keyBindings[action.first] == InputKey::SpeedKnob) {
 				SetRate(GetRate() + action.second);
 
 
 			}
-			if (action == section) {
+			if (keyBindings[action.first] == InputKey::SectionKnob) {
 
 				JumpTo(sectionStartTime[getTempSection() + action.second]);
 
@@ -78,6 +83,25 @@ namespace Play {
 		virtual int OnSlide(pair<T, int> action) {
 			return 0;
 		}
+
+	protected:
+
+		map<T, InputKey> keyBindings;
+
+		/// <summary>
+		/// 在load結束的時候，時記要執行的工作
+		/// </summary>
+		virtual int LoadOnCompleted() {
+
+			reloadMappings();
+
+			return 0;
+		}
+
+		/// <summary>
+		/// 把input key和新的輸入結合一下
+		/// </summary>
+		virtual int reloadMappings() = 0;
 
 
 	};
@@ -93,6 +117,7 @@ namespace Play {
 	/// 然後在playfield add event processor的時候，再把algorithm擺入這些processor裡。
 	///
 	/// pause container的時鐘是在player裡面指派的，不是pause container自己的
+	/// 其實這個不是scene，應該移到timing去
 	/// </summary>
 	class TimeController : public Container {
 

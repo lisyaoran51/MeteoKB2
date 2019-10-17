@@ -4,10 +4,19 @@
 
 
 #include <vector>
-#include "../Devices/Device.h"
+#include "../Input/InputState.h"
+
+namespace Framework {
+namespace Devices{
+	class Device;
+}}
 
 using namespace std;
 using namespace Framework::Devices;
+using namespace Framework::Input;
+
+
+
 
 namespace Framework {
 namespace IO {

@@ -4,11 +4,13 @@
 #include "../../Games/Scene/Play/Playfield.h"
 #include "../../Util/MtoType.h"
 #include "../Config/MeteorConfigManager.h"
+#include "../../Instruments/Pitch.h"
 
 using namespace Util;
 using namespace Games::Scenes::Play;
 using namespace Games::Schedulers::Events;
 using namespace Meteor::Config;
+using namespace Instruments;
 
 
 
