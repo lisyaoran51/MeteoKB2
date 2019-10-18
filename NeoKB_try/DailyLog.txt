@@ -967,3 +967,53 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	
 10/9
 	把piano大概寫一寫，電腦控制踏板、踏板切掉聲音，全都大概寫一下
+	
+10/15
+	把instrument的樣板分開寫
+	
+	來寫main interface
+	
+	再osu是由一個openTK window的一個thread不停的抓輸入，input handler只要住測上去，就會自動收到輸入了
+	
+	但是我們沒有，我們相對於openTK window的，應該是keyboard device、bluetooth device、display device
+	host要拿到這三個device的方法，就是去main interface找已經註冊上去的device，然後在input thread(應該改名叫IO thread)更新的時候去不停的抓資料
+	另外input handler也是註冊到peripheral上，更新的時候device會去叫peripheral，再傳送到input handler上
+	
+	把mian interface搞得差不多，目前需要把host裡面每一個thread的實際跑法寫完
+	input handler也要寫，然後要接上去main interface
+	MeteoDevice系列要擺到device去，等到確定device怎麼寫以後再寫
+	
+	game thread還沒寫
+	
+	還要寫有哪些scene可以接input，哪些scene不行
+	哪些scene可以Draw，哪些scene不行
+	
+	inputable: scene, PassThroughInputManager, event processor master, 
+	
+	score processor完全沒寫，直接放棄(11越來不及)
+	
+10/17
+	mutex也要寫
+	
+	寫is present
+	
+	暫停以後，time controller下面應該全都不能接input
+	time controller需要跟input key做binding一下，才知道哪個是pause
+	time controller的on button全部都要再修過，現在先寫個大概
+	
+	timr controller的鍵立和key binding寫好了，但是裡面的時鐘還沒有搞很清楚，應該要把整個遊戲的時鐘通通順一遍
+	
+	要寫畫面移動
+	
+	linux file system還沒寫(ResourceStore::initializeFileSystemInterface)
+	
+10/18
+	stopwatch ok
+	ThrottledFramedClock ok
+	framedClock ok
+	
+	
+	DecoupledInterpolatingFramedClock 的process frame還沒寫，這個看懂要花時間
+	
+	 #include <stdexcept>
+	 throw runtime_error("int FramedClock::setCurrentTime() : error. source clock is not adjustable.");

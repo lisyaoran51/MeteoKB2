@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Framework\Timing\ThrottledFramedClock.cpp" />
     <ClCompile Include="Games\MeteoGame.cpp" />
     <ClCompile Include="Games\Graphic\Renderer\MapAlgorithm\HardwareMapAlgorithm.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>

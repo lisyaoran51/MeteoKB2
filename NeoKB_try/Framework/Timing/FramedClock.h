@@ -22,7 +22,6 @@ namespace Timing {
 		virtual Clock* GetSource();
 		virtual int SetRate(double r);
 		virtual double GetRate();
-		// protected SetCurrentTime();
 		virtual double GetCurrentTime();
 		virtual int SetIsRunning(bool value);
 		virtual bool GetIsRunning();
@@ -40,11 +39,14 @@ namespace Timing {
 
 		virtual int setCurrentTime(double cTime);
 
+		virtual int start();
+
 	private:
 
 		double currentTime;
 		double rate;
-		bool isRunning;
+		bool isStarted = false;
+		bool isRunning = false;
 
 		double averageFrameTime;
 		double framesPerSecond;

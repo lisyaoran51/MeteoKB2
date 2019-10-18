@@ -1,8 +1,12 @@
 #include "FramedClock.h"
 
 #include "StopwatchClock.h"
+#include <stdexcept>
+
 
 using namespace Framework::Timing;
+using namespace std;
+
 
 FramedClock::FramedClock(Clock * s)
 {
@@ -27,6 +31,10 @@ int FramedClock::ProcessFrame()
 
 	// TODO: 計算averageFrameTime和framesPerSecond
 
+	if (!isStarted) 
+		start();
+	
+
 	lastFrameTime = currentTime;
 	currentTime = source->GetCurrentTime();
 
@@ -41,7 +49,7 @@ Clock * FramedClock::GetSource()
 int FramedClock::SetRate(double r)
 {
 	rate = r;
-	return 0;
+	return source->SetRate(r);
 }
 
 double FramedClock::GetRate()
@@ -57,12 +65,12 @@ double FramedClock::GetCurrentTime()
 int FramedClock::SetIsRunning(bool value)
 {
 	isRunning = value;
-	return 0;
+	return source->SetIsRunning(value);
 }
 
 bool FramedClock::GetIsRunning()
 {
-	return isRunning;
+	return source->GetIsRunning();
 }
 
 double FramedClock::GetElapsedFrameTime()
@@ -72,11 +80,13 @@ double FramedClock::GetElapsedFrameTime()
 
 double FramedClock::GetAverageFrameTime()
 {
+	// TODO: 先不寫
 	return averageFrameTime;
 }
 
 double FramedClock::GetFramesPerSecond()
 {
+	// TODO: 先不寫
 	return framesPerSecond;
 }
 
@@ -101,6 +111,22 @@ bool FramedClock::GetIsProcessSourceClockFrames()
 
 int FramedClock::setCurrentTime(double cTime)
 {
+	
+	AdjustableClock* adjustableClock = dynamic_cast<AdjustableClock*>(source);
+	if (adjustableClock != nullptr)
+		adjustableClock->Seek(cTime);
+	else {
+
+		throw runtime_error("int FramedClock::setCurrentTime() : error. source clock is not adjustable.");
+	}
+	lastFrameTime = currentTime;
 	currentTime = cTime;
+	return 0;
+}
+
+int FramedClock::start()
+{
+	currentTime = source->GetCurrentTime();
+	isStarted = true;
 	return 0;
 }

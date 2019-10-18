@@ -810,6 +810,9 @@
     <ClCompile Include="RulesetMeteor\Timing\MeteorTimeController.cpp">
       <Filter>來源檔案\RulesetMeteor\Timing</Filter>
     </ClCompile>
+    <ClCompile Include="Framework\Timing\ThrottledFramedClock.cpp">
+      <Filter>來源檔案\Framework\Timing</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="DailyLog.txt">

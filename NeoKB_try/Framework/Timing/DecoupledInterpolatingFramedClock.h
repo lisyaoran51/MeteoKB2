@@ -17,6 +17,10 @@ namespace Timing {
 	///
 	/// This clock type removes the requirement of having a source set.
 	/// 歌曲結束以後還可以繼續跑的clock，或是可以在歌曲開始前提早開始跑 ex歌曲剛開始就有一個音，就可以從-1秒開始跑
+	///
+	/// 這個裡面有5個clock，有InterpolatingFramedClock的source(可能會停掉)、framedSource(source的frame版)、interpolated clock(內插用)
+	/// 還有自己的decoupled clock(分離的clock)、decoupled stopwatch(分離的clock的時鐘源)
+	/// 這邊只要看自己的就好，先不用看InterpolatingFramedClock
 	/// </summary>
 	class DecoupledInterpolatingFramedClock : virtual public InterpolatingFramedClock, virtual public AdjustableClock {
 
@@ -56,9 +60,9 @@ namespace Timing {
 
 	private:
 
-		bool isCoupled;
+		bool isCoupled = true;
 
-		AdjustableClock* adjustableSource;
+		AdjustableClock* getAdjustableSource();
 
 		/// <summary>
 		/// 要擺另一個clock，當source停住時就切換

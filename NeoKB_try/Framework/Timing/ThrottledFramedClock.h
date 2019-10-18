@@ -13,11 +13,29 @@ namespace Timing {
 	/// </summary>
 	class ThrottledFramedClock : virtual public FramedClock {
 
+		double maxUpdateHz = 1000;
+
+		/// <summary>
+		/// 累積誤差，以ms為單位
+		/// </summary>
+		double accumulatedSleepError = 0;
+
+		/// <summary>
+		/// 如果跑太快，就讓tjread稅一下
+		/// </summary>
 		int throttle();
 
 	public:
 
 		ThrottledFramedClock(Clock* s = nullptr);
+
+		ThrottledFramedClock(double mUpdateHz, Clock* s = nullptr);
+
+		virtual int ProcessFrame();
+
+		int SetMaxUpdateHz(double hz);
+
+		double GetMaxUpdateHz();
 
 	protected:
 

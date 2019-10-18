@@ -27,7 +27,12 @@ namespace Threading {
 
 		ThrottledFramedClock* GetClock();
 
-		int SetSleepTime(int sTime); // 懶得弄hz，先暫實用這個，之後再刪掉
+		int SetMaxUpdateHz(double mUpdateHz);
+
+		double GetMaxUpdateHz();
+
+		int SetIsActive(bool value);
+
 
 	protected:
 
@@ -41,9 +46,11 @@ namespace Threading {
 
 		Scheduler* scheduler;
 
+		bool isActive = true;
+
 		double activeHz;
 
-		double inactiveHz;
+		double inactiveHz = 10;
 
 		bool exitRequested = false;
 
@@ -52,8 +59,6 @@ namespace Threading {
 		int runWork();
 
 		int processFrame();
-
-		int sleepTime;
 
 	};
 

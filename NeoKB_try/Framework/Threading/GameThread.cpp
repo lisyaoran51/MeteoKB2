@@ -11,6 +11,7 @@ GameThread::GameThread(function<int()> oNewFrame, string tName)
 	onNewFrame = oNewFrame;
 	threadName = tName;
 
+	clock = new ThrottledFramedClock();
 
 	runThread = new thread(&GameThread::runWork, this);
 
@@ -27,9 +28,28 @@ ThrottledFramedClock * GameThread::GetClock()
 	return clock;
 }
 
-int GameThread::SetSleepTime(int sTime)
+int GameThread::SetMaxUpdateHz(double mUpdateHz)
 {
-	sleepTime = sTime;
+	activeHz = mUpdateHz;
+	if(isActive)
+		clock->SetMaxUpdateHz(mUpdateHz);
+	return 0;
+}
+
+double GameThread::GetMaxUpdateHz()
+{
+	return clock->GetMaxUpdateHz();
+}
+
+int GameThread::SetIsActive(bool value)
+{
+	if (value) {
+		SetMaxUpdateHz(activeHz);
+	}
+	else {
+		SetMaxUpdateHz(inactiveHz);
+	}
+	isActive = value;
 	return 0;
 }
 
@@ -43,6 +63,7 @@ int GameThread::runWork()
 int GameThread::processFrame()
 {
 	onNewFrame();
+	clock->ProcessFrame();
 
 	return 0;
 }

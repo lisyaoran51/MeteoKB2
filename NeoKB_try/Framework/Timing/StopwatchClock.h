@@ -67,13 +67,6 @@ namespace Timing {
 		/// </summary>
 		virtual int ResetSpeedAdjustments();
 
-		/// <summary>
-		/// 取得目前執行個體所測量的已耗用時間總和。
-		/// </summary>
-		long long GetElapsedMilliseconds();
-
-		double GetElapsedSeconds();
-
 	protected:
 
 		/// <summary>
@@ -105,6 +98,15 @@ namespace Timing {
 		double rateChangeAccumulatedTime;
 
 		double seekOffset;
+
+		/// <summary>
+		/// 取得目前執行個體所測量的已耗用時間總和。
+		/// </summary>
+		long long getElapsedMilliseconds();
+
+		double getElapsedSeconds();
+
+
 
 	};
 

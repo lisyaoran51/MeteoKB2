@@ -134,6 +134,7 @@ namespace Play {
 
 		/// <summary>
 		/// framedClock的source，是可以用來調整時間的
+		/// 這個是當track停止以後，還可以繼續跑的鍾
 		/// </summary>
 		DecoupledInterpolatingFramedClock* controllableClock;
 
@@ -169,6 +170,9 @@ namespace Play {
 		/// </summary>
 		int SetAudioClock(AdjustableClock* dInterpolatingFramedClock);
 
+		/// <summary>
+		/// 這個是當track停止以後，還可以繼續跑的鍾
+		/// </summary>
 		int SetControllableClock(DecoupledInterpolatingFramedClock* cClock);
 
 		int SetFramedClock(FramedClock* fClock);
