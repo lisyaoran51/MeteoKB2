@@ -1,8 +1,12 @@
 #include "InterpolatingFramedClock.h"
 
 #include "StopwatchClock.h"
+#include <stdexcept>
+
 
 using namespace Framework::Timing;
+using namespace std;
+
 
 
 InterpolatingFramedClock::InterpolatingFramedClock(Clock * s)
@@ -10,7 +14,7 @@ InterpolatingFramedClock::InterpolatingFramedClock(Clock * s)
 	interpolateClock = new FramedClock(new StopwatchClock());
 	ChangeSource(s);
 
-	allowableErrorMilliseconds = 1000.0 / 60 * 2;
+	allowableErrorInSeconds = 1.0 / 60 * 2;
 }
 
 int InterpolatingFramedClock::ProcessFrame()
@@ -18,19 +22,23 @@ int InterpolatingFramedClock::ProcessFrame()
 	if (framedSource == nullptr)
 		return 0;
 
+	/* 更新速度 */
+	interpolateClock->SetRate(rate = source->GetRate());
+
+	/* 跑一禎 */
 	interpolateClock->ProcessFrame();
 	framedSource->ProcessFrame();
-
-	SetIsRunning(sourceIsRunning = framedSource->GetIsRunning());
+	
+	sourceIsRunning = framedSource->GetIsRunning();
 
 	lastInterpolatedTime = GetCurrentTime();
 
 	if (!framedSource->GetIsRunning())
 		return 0;
 
-	currentInterpolatedTime += interpolateClock->GetElapsedFrameTime() * GetRate();
+	currentInterpolatedTime += interpolateClock->GetElapsedFrameTime();
 
-	if (fabs(framedSource->GetCurrentTime() - currentInterpolatedTime) > allowableErrorMilliseconds)
+	if (fabs(framedSource->GetCurrentTime() - currentInterpolatedTime) > allowableErrorInSeconds)
 	{
 		//if we've exceeded the allowable error, we should use the source clock's time value.
 		currentInterpolatedTime = framedSource->GetCurrentTime();
@@ -50,6 +58,7 @@ int InterpolatingFramedClock::ChangeSource(Clock * s)
 	{
 		source = s;
 		framedSource = dynamic_cast<FrameBasedClock*>(s) != nullptr ? dynamic_cast<FrameBasedClock*>(s) : new FramedClock(s);
+		s->SetRate(rate);
 	}
 
 	lastInterpolatedTime = 0;
@@ -64,18 +73,28 @@ double InterpolatingFramedClock::GetCurrentTime()
 
 int InterpolatingFramedClock::SetRate(double r)
 {
+	// TODO: log也打一下error
+	// throw logic_error("int InterpolatingFramedClock::SetRate() : error. interpolated clock is not able to set rate.");
+	interpolateClock->SetRate(r);
 	rate = r;
+
+	if (source == nullptr)
+		return -1;
+
+	framedSource->SetRate(r);
 	return 0;
 }
 
 double InterpolatingFramedClock::GetRate()
 {
-	return framedSource->GetRate();
+	return rate;
 }
 
 int InterpolatingFramedClock::SetIsRunning(bool value)
 {
 	framedSource->SetIsRunning(value);
+	interpolateClock->SetIsRunning(value);
+	sourceIsRunning = value;
 	return 0;
 }
 

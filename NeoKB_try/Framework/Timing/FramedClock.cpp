@@ -10,7 +10,6 @@ using namespace std;
 
 FramedClock::FramedClock(Clock * s)
 {
-	currentTime = s->GetCurrentTime();
 	if (s != nullptr) {
 		source = s;
 	}
@@ -59,6 +58,8 @@ double FramedClock::GetRate()
 
 double FramedClock::GetCurrentTime()
 {
+	if(!isStarted)
+		throw logic_error("int FramedClock::GetCurrentTime() : error. The clock is not Started.");
 	return currentTime;
 }
 

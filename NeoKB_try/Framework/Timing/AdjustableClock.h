@@ -6,7 +6,7 @@
 namespace Framework {
 namespace Timing {
 
-	class AdjustableClock : public Clock {
+	class AdjustableClock : virtual public Clock {
 
 	public:
 

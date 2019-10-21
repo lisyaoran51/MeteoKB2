@@ -44,27 +44,31 @@ namespace Timing {
 
 		Clock* source;
 
+		double rate = 1.0;
+
+		/// <summary>
+		/// 把source外面包一層frame
+		/// </summary>
 		FrameBasedClock* framedSource;
 
 
 
 	private:
 
-		double rate;
-		bool isRunning;
 
 		/// <summary>
 		/// 要擺一個stopwatch當他的source
+		/// 用來把目前的source再內切一下，避免source跟實際時間落差太大，會有lag
 		/// </summary>
 		FramedClock* interpolateClock;
 
 		bool sourceIsRunning;
 
-		double lastInterpolatedTime;
+		double lastInterpolatedTime = 0;
 
-		double currentInterpolatedTime;
+		double currentInterpolatedTime = 0;
 
-		double allowableErrorMilliseconds;
+		double allowableErrorInSeconds;
 
 	};
 

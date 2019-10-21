@@ -22,7 +22,7 @@ namespace Timing {
 	/// 還有自己的decoupled clock(分離的clock)、decoupled stopwatch(分離的clock的時鐘源)
 	/// 這邊只要看自己的就好，先不用看InterpolatingFramedClock
 	/// </summary>
-	class DecoupledInterpolatingFramedClock : virtual public InterpolatingFramedClock, virtual public AdjustableClock {
+	class DecoupledInterpolatingFramedClock : public InterpolatingFramedClock, public AdjustableClock {
 
 	public:
 
@@ -31,7 +31,6 @@ namespace Timing {
 		// Clock
 		virtual double GetCurrentTime();
 		virtual int SetRate(double r);
-		virtual double GetRate();
 		virtual int SetIsRunning(bool value);
 		virtual bool GetIsRunning();
 
@@ -52,7 +51,6 @@ namespace Timing {
 		// this
 		int SetIsCoupled(bool value);
 		bool GetIsCoupled();
-		int SetIsProcessSourceClockFrames(bool value);
 
 
 	protected:
@@ -71,6 +69,9 @@ namespace Timing {
 
 		StopwatchClock* decoupledStopwatchClock;
 
+		/// <summary>
+		/// 當分離時鐘和源實中沒有綁起來，且原時鐘也沒有在跑，才可以回true
+		/// </summary>
 		bool getIsUseDecoupledClock();
 
 	};

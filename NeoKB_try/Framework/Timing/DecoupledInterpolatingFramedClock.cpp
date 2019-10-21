@@ -18,16 +18,21 @@ double DecoupledInterpolatingFramedClock::GetCurrentTime()
 
 int DecoupledInterpolatingFramedClock::SetRate(double r)
 {
-	if (source != nullptr)
-		return source->SetRate(r);
-	return -1;
+	decoupledClock->SetRate(r);
+	InterpolatingFramedClock::SetRate(r);
+	
+	return 0;
 }
 
-double DecoupledInterpolatingFramedClock::GetRate()
+int DecoupledInterpolatingFramedClock::SetIsRunning(bool value)
 {
-	if (source != nullptr)
-		return source->GetRate();
-	return 1;
+	decoupledClock->SetIsRunning(value);
+	if (framedSource != nullptr)
+	if (getAdjustableSource()->Seek(GetCurrentTime()) == RETURN_AVAILABLE) {
+		InterpolatingFramedClock::SetIsRunning(value);
+	}
+
+	return 0;
 }
 
 bool DecoupledInterpolatingFramedClock::GetIsRunning()
@@ -57,16 +62,17 @@ int DecoupledInterpolatingFramedClock::ProcessFrame()
 {
 	InterpolatingFramedClock::ProcessFrame();
 
-	decoupledStopwatchClock->SetRate(getAdjustableSource()->GetRate());
+	decoupledStopwatchClock->SetRate(InterpolatingFramedClock::GetRate());
 	decoupledClock->ProcessFrame();
 
 
-	bool sourceRunning = false;
-	if (source != nullptr)
-		sourceRunning = source->GetIsRunning();
+	bool sourceRunning = InterpolatingFramedClock::GetIsRunning();
 
-	/* 讓分離的時鐘一直跟著現在的時間 */
-	if (isCoupled || sourceRunning) {
+	// ***讓分離的時鐘一直跟著現在的時間***
+	// 只要原時鐘有在跑，分離時鐘就一定要跟著原時鐘的時間。但如果原時鐘沒在跑的話， 就要看有沒有couple，
+	// 有couple的狀況，分離時鐘就必須停下來保持跟原時鐘一樣的時間。
+	// 沒有couple的狀況，分離時鐘就擺脫原時鐘，繼續跑下去
+	if (isCoupled || sourceRunning) { // 有綁在一起，或者是原時鐘正在跑，都一定要跟著
 		if (sourceRunning)
 			decoupledStopwatchClock->Start();
 		else
@@ -139,7 +145,7 @@ bool DecoupledInterpolatingFramedClock::Seek(double position)
 
 int DecoupledInterpolatingFramedClock::ResetSpeedAdjustments()
 {
-	InterpolatingFramedClock::SetRate(1);
+	InterpolatingFramedClock::SetRate(1.0);
 	return 0;
 }
 
@@ -163,5 +169,8 @@ AdjustableClock * DecoupledInterpolatingFramedClock::getAdjustableSource()
 
 bool DecoupledInterpolatingFramedClock::getIsUseDecoupledClock()
 {
-	return (framedSource == nullptr || !isCoupled) && !framedSource->GetIsRunning();
+	if (framedSource == nullptr)
+		return !isCoupled;
+	else
+		return !isCoupled && !framedSource->GetIsRunning();
 }
