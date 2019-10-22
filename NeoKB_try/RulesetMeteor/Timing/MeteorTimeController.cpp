@@ -9,13 +9,13 @@ MeteorTimeController::MeteorTimeController() : RegisterType("MeteorTimeControlle
 {
 }
 
-map<PianoAction, InputKey>* MeteorTimeController::GetDefaultkeyBindings()
+map<MeteorAction, InputKey>* MeteorTimeController::GetDefaultkeyBindings()
 {
-	map<PianoAction, InputKey>* tempMap = new map<PianoAction, InputKey>();
-	(*tempMap)[PianoAction::Pause] = InputKey::Pause;
-	(*tempMap)[PianoAction::SectionKnob] = InputKey::SectionKnob;
-	(*tempMap)[PianoAction::SpeedKnob] = InputKey::SpeedKnob;
-	(*tempMap)[PianoAction::Bluetooth] = InputKey::Bluetooth;
+	map<MeteorAction, InputKey>* tempMap = new map<MeteorAction, InputKey>();
+	(*tempMap)[MeteorAction::Pause] = InputKey::Pause;
+	(*tempMap)[MeteorAction::SectionKnob] = InputKey::SectionKnob;
+	(*tempMap)[MeteorAction::SpeedKnob] = InputKey::SpeedKnob;
+	(*tempMap)[MeteorAction::Bluetooth] = InputKey::Bluetooth;
 
 
 	return tempMap;
@@ -23,7 +23,8 @@ map<PianoAction, InputKey>* MeteorTimeController::GetDefaultkeyBindings()
 
 int MeteorTimeController::reloadMappings()
 {
-	map<PianoAction, InputKey>* tempMap = GetDefaultkeyBindings();
+
+	map<MeteorAction, InputKey>* tempMap = GetDefaultkeyBindings();
 	keyBindings = *tempMap;
 	delete tempMap;
 	return 0;

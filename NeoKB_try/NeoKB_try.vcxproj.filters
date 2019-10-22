@@ -621,9 +621,6 @@
     <ClCompile Include="Util\DataStructure\PeriodMap.cpp">
       <Filter>來源檔案\Util\DataStructure</Filter>
     </ClCompile>
-    <ClCompile Include="Games\Scene\Play\TimeController.cpp">
-      <Filter>來源檔案\Games\Scene\Play</Filter>
-    </ClCompile>
     <ClCompile Include="Games\Scene\Play\Player.cpp">
       <Filter>來源檔案\Games\Scene\Play</Filter>
     </ClCompile>
@@ -812,6 +809,12 @@
     </ClCompile>
     <ClCompile Include="Framework\Timing\ThrottledFramedClock.cpp">
       <Filter>來源檔案\Framework\Timing</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Timing\TimeController.cpp">
+      <Filter>來源檔案\Framework\Timing</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Timing\SpeedAdjusters\LinearSpeedAdjuster.cpp">
+      <Filter>來源檔案\Framework\Timing\SpeedAdjusters</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1129,9 +1132,6 @@
     <ClInclude Include="Games\Scene\Play\Playfield.h">
       <Filter>標頭檔\Games\Scene\play</Filter>
     </ClInclude>
-    <ClInclude Include="Games\Scene\Play\TimeController.h">
-      <Filter>標頭檔\Games\Scene\play</Filter>
-    </ClInclude>
     <ClInclude Include="Framework\Timing\SpeedAdjusters\SpeedAdjuster.h">
       <Filter>標頭檔\Framework\Timing\SpeedAdjusters</Filter>
     </ClInclude>
@@ -1344,6 +1344,12 @@
     </ClInclude>
     <ClInclude Include="RulesetMeteor\Timing\MeteorTimeController.h">
       <Filter>標頭檔\RulesetMeteor\Timing</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Timing\TimeController.h">
+      <Filter>標頭檔\Framework\Timing</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Timing\SpeedAdjusters\LinearSpeedAdjuster.h">
+      <Filter>標頭檔\Framework\Timing\SpeedAdjusters</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

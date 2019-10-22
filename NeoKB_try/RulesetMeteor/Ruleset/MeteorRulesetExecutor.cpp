@@ -14,6 +14,9 @@
 #include "../../Games/Scheduler/Event/SystemEvents/StopSystemEvent.h"
 #include "../Input/MeteorInputManager.h"
 #include "../Timing/MeteorTimeController.h"
+#include "../../Framework/Timing/SpeedAdjusters/LinearSpeedAdjuster.h"
+
+
 
 
 using namespace Meteor::Rulesets;
@@ -26,6 +29,7 @@ using namespace Games::Schedulers::Events::Effects;
 using namespace Meteor::Schedulers::Events::Effects;
 using namespace Meteor::Input;
 using namespace Meteor::Timing;
+using namespace Framework::Timing::SpeedAdjusters;
 
 
 SmConverter * MeteorRulesetExecutor::createSmConverter(PatternGenerator * pg)
@@ -40,6 +44,8 @@ SmPostprocessor * MeteorRulesetExecutor::createSmPostprocessor()
 
 int MeteorRulesetExecutor::load()
 {
+
+
 	// Ūconfig
 	return 0;
 }
@@ -58,9 +64,9 @@ MeteorRulesetExecutor::MeteorRulesetExecutor(): RegisterType("MeteorRulesetExecu
 	constructed = false;
 }
 
-int MeteorRulesetExecutor::LazyConstruct(WorkingSm * w)
+int MeteorRulesetExecutor::LazyConstruct(WorkingSm * w, Ruleset* r)
 {
-	RulesetExecutor::LazyConstruct(w);
+	RulesetExecutor::LazyConstruct(w, r);
 	constructed = true;
 	return 0;
 }
@@ -73,6 +79,11 @@ PassThroughInputManager * MeteorRulesetExecutor::CreateInputManager()
 TimeController * MeteorRulesetExecutor::CreateTimeController()
 {
 	return new MeteorTimeController();
+}
+
+SpeedAdjuster * MeteorRulesetExecutor::CreateSpeedAdjuster()
+{
+	return new LinearSpeedAdjuster();
 }
 
 int MeteorRulesetExecutor::Elapse(MTO_FLOAT elapsedTime)

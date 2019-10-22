@@ -61,9 +61,9 @@ int Player::load(FrameworkConfigManager* f)
 	});
 
 	timeController = rulesetExecutor->CreateTimeController();
-	timeController->ImportWorkingSm(workingSmValue);
-	timeController->SetGameClock(offsetClock);
-	timeController->SetAudioClock(adjustableClock);
+	//timeController->ImportWorkingSm(workingSmValue);
+	timeController->SetControllableClock(decoupledClock);
+	timeController->SetSpeedAdjuster(rulesetExecutor->CreateSpeedAdjuster());
 
 	AddChild(timeController);
 

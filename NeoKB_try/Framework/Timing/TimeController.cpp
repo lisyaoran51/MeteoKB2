@@ -1,14 +1,13 @@
 #include "TimeController.h"
 
-#include "../../Scheduler/Event/ControlPoints/NoteControlPoint.h"
+//#include "../../Scheduler/Event/ControlPoints/NoteControlPoint.h"
 
 
 
 
-using namespace Games::Scenes::Play;
-using namespace Framework::Timing::SpeedAdjusters;
 using namespace Framework::Timing;
-using namespace Games::Schedulers::Events::ControlPoints;
+using namespace Framework::Timing::SpeedAdjusters;
+//using namespace Games::Schedulers::Events::ControlPoints;  // 還沒有要寫這個
 
 
 
@@ -19,7 +18,11 @@ int TimeController::load()
 
 int TimeController::update()
 {
+	if (controllableClock == nullptr || speedAdjuster == nullptr)
+		return 0;
+
 	speedAdjuster->ProcessFrame(GetClock()->GetElapsedFrameTime());
+
 	if (speedAdjuster->GetIsAdjustingTime()) {
 		double timeToAdjust = speedAdjuster->GetAdjustedTime();
 		controllableClock->Seek(controllableClock->GetCurrentTime() + timeToAdjust * controllableClock->GetRate());

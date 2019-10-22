@@ -1,0 +1,122 @@
+#include "LinearSpeedAdjuster.h"
+
+#include <stdexcept>
+
+using namespace std;
+using namespace Framework::Timing::SpeedAdjusters;
+
+
+LinearSpeedAdjuster::LinearSpeedAdjuster() : RegisterType("LinearSpeedAdjuster")
+{
+}
+
+int LinearSpeedAdjuster::ProcessFrame(double elapsedTime)
+{
+	if (seekTimeLeft != 0) {
+		isAdjustingTime = true;
+
+		/* 往後跑，時間往上加 */
+		if (seekTimeLeft > 0) {
+
+			adjustFrameTime = elapsedTime * adjustSpeed;
+
+			seekTimeLeft -= adjustFrameTime;
+
+			/* 跑過頭的話就歸零 */
+			if (seekTimeLeft < 0) {
+				adjustFrameTime += seekTimeLeft;
+				seekTimeLeft = 0;
+				seekTime = 0;
+				isAdjustingTime = false;
+			}
+		}
+		/* 往回跑，時間往下減 */
+		else if (seekTimeLeft < 0) {
+
+			adjustFrameTime = -elapsedTime * adjustSpeed;
+
+			seekTimeLeft -= adjustFrameTime;
+
+			/* 跑過頭的話就歸零 */
+			if (seekTimeLeft > 0) {
+				adjustFrameTime += seekTimeLeft;
+				seekTimeLeft = 0;
+				seekTime = 0;
+				isAdjustingTime = false;
+			}
+		}
+	}
+	else if (isFreezingTime) {
+		freezeTimeLeft -= elapsedTime;
+		if (freezeTimeLeft < 0) {
+			// 這邊會有一點點誤差，但是沒有辦法修正回來，除非把time controller去調整當前時間
+			freezeTimeLeft = 0;
+			isFreezingTime = false;
+		}
+	}
+
+	return 0;
+}
+
+int LinearSpeedAdjuster::Reset()
+{
+	seekTimeLeft = 0;
+	freezeTimeLeft = 0;
+	isAdjustingTime = false;
+	isFreezingTime = false;
+	return 0;
+}
+
+int LinearSpeedAdjuster::SetSeekTime(double sTime)
+{
+	seekTimeLeft += sTime;
+	isAdjustingTime = true;
+	return 0;
+}
+
+double LinearSpeedAdjuster::GetSeekTime()
+{
+	return seekTimeLeft;
+}
+
+double LinearSpeedAdjuster::GetAdjustFrameTime()
+{
+	return adjustFrameTime;
+}
+
+int LinearSpeedAdjuster::SetFreezeTime(double fTime)
+{
+	if(fTime < 0)
+		throw invalid_argument("int LinearSpeedAdjuster::SetFreezeTime() : error. Freeze time cannot < 0.");
+
+	/* 同時只能freeze一次時間，不能疊加，要額外freeze就要等這次結束後再freeze一次 */
+	if (!isAdjustingTime && !isFreezingTime) {
+		freezeTimeLeft = fTime;
+		isFreezingTime = true;
+	}
+
+	return 0;
+}
+
+double LinearSpeedAdjuster::GetFreezeTimeLeft()
+{
+	return freezeTimeLeft;
+}
+
+bool LinearSpeedAdjuster::GetIsAdjustingTime()
+{
+	return isAdjustingTime;
+}
+
+bool LinearSpeedAdjuster::GetIsFreezingTime()
+{
+	return isFreezingTime;
+}
+
+int LinearSpeedAdjuster::SetAdjustSpeed(double aSpeed)
+{
+	if(aSpeed == 0)
+		throw invalid_argument("int LinearSpeedAdjuster::SetAdjustSpeed() : error. adjust speed cannot be 0.");
+	adjustSpeed = aSpeed;
+	return 0;
+}

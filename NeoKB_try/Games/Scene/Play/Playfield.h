@@ -29,10 +29,14 @@ namespace Play {
 	/// </summary>
 	class Playfield: public Container {
 
+
+		int width, height;
+
 		int load();
 
 		// 繼承playfield的class，在load的時候一定要寫讀取map algo的工作
 		int load(FrameworkConfigManager* f);
+
 
 	public:
 
@@ -44,6 +48,10 @@ namespace Play {
 		/// add events to EventProcessorMaster
 		/// </summary>
 		virtual int Add(EventProcessor<Event>* ep);
+
+		int GetWidth();
+
+		int GetHeight();
 
 	protected:
 

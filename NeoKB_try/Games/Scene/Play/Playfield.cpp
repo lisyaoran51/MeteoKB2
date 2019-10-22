@@ -59,6 +59,11 @@ int Playfield::load(FrameworkConfigManager* f) {
 	else
 		throw runtime_error("int Playfield::load() : HardwareVersion not found in Setting.");
 	
+	if (f->Get(FrameworkSetting::Width, &width) &&
+		f->Get(FrameworkSetting::Height, &height))
+		LOG(LogLevel::Fine) << "Playfield::load() : Save size [" << width << "] * [" << height << "].";
+	else
+		throw runtime_error("int Playfield::load() : Width and Height not found in Setting.");
 
 	// 根據遊戲大小，建一個map
 	//if (f->Get(FrameworkSetting::Width, &width) &&
@@ -116,12 +121,12 @@ int Playfield::Add(EventProcessor<Event> * ep)
 	return 0;
 }
 
-//int Playfield::GetWidth()
-//{
-//	return width;
-//}
-//
-//int Playfield::GetHeight()
-//{
-//	return height;
-//}
+int Playfield::GetWidth()
+{
+	return width;
+}
+
+int Playfield::GetHeight()
+{
+	return height;
+}

@@ -20,6 +20,17 @@ namespace Scenes {
 
 	class Scene : public Container, public Drawable {
 
+
+		/// <summary>
+		/// 讀取game
+		/// </summary>
+		int load();
+
+		/// <summary>
+		/// 讀取game
+		/// </summary>
+		int load(Game* g, FrameworkConfigManager* f);
+
 	public:
 
 		Scene();
@@ -85,15 +96,6 @@ namespace Scenes {
 
 	private:
 
-		/// <summary>
-		/// 讀取game
-		/// </summary>
-		int load();
-
-		/// <summary>
-		/// 讀取game
-		/// </summary>
-		int load(Game* g);
 
 	};
 

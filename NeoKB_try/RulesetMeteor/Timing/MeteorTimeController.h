@@ -1,18 +1,19 @@
 #ifndef METEOR_TIME_CONTROLLER_H
 #define METEOR_TIME_CONTROLLER_H
 
-#include "../../Games/Scene/Play/TimeController.h"
-#include "../../Instruments/Input/PianoAction.h"
+#include "../../Framework/Timing/TimeController.h"
+#include "../Input/MeteorInputManager.h"
 
 
 using namespace Games::Scenes::Play;
-using namespace Instruments::Input;
+using namespace Meteor::Input;
+using namespace Framework::Timing;
 
 
 namespace Meteor {
 namespace Timing {
 
-	class MeteorTimeController : public TTimeController<PianoAction> {
+	class MeteorTimeController : public TTimeController<MeteorAction> {
 
 
 	public:
@@ -25,7 +26,7 @@ namespace Timing {
 		/// 再裡面存ruleset info，才能直接從time controller裡面找出ruleset的keybinding
 		/// 現在懶得改，先擺在自己裡面就好。以後要修改action和input的mapping都要記得進來這邊修
 		/// </summary>
-		virtual map<PianoAction, InputKey>* GetDefaultkeyBindings();
+		virtual map<MeteorAction, InputKey>* GetDefaultkeyBindings();
 
 
 	protected:

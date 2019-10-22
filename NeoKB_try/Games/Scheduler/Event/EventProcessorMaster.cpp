@@ -12,6 +12,17 @@ using namespace Games::Schedulers::Events::Effects;
 
 int EventProcessorMaster::load()
 {
+	LOG(LogLevel::Finer) << "EventProcessorMaster::load() : getting FrameworkConfigManager";
+	FrameworkConfigManager* f = GetCache<FrameworkConfigManager>("FrameworkConfigManager");
+	if (!f)
+		throw runtime_error("int EventProcessorMaster::load() : FrameworkConfigManager not found in cache.");
+
+
+	return load(f);
+}
+
+int EventProcessorMaster::load(FrameworkConfigManager * f)
+{
 	isPresent = true;
 	// TODO: 去framework config manager拿period map要切成多寬一段 ex:每5秒一段
 	// 目前先暫訂5秒一段
@@ -24,6 +35,17 @@ int EventProcessorMaster::load()
 
 		return make_pair(startTime, endTime);
 	});
+
+	int width, height;
+
+	if (f->Get(FrameworkSetting::Width, &width) &&
+		f->Get(FrameworkSetting::Height, &height)) {
+		LOG(LogLevel::Fine) << "EventProcessorMaster::load() : intialize drawable size [" << width << "] * [" << height << "].";
+		Initialize(width, height);
+	}
+	else
+		throw runtime_error("int EventProcessorMaster::load() : Width and Height not found in Setting.");
+
 
 
 	return 0;
@@ -65,12 +87,6 @@ int EventProcessorMaster::AddDynamicEventProcessor(EventProcessor<Event>* dEvent
 	return 0;
 }
 
-int EventProcessorMaster::RegisterMap(Map * m)
-{
-	lightMap = m;
-	return 0;
-}
-
 int EventProcessorMaster::Clean()
 {
 	//eventProcessors->clear();
@@ -93,6 +109,7 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 Map * EventProcessorMaster::GetGraph()
 {
 	Map* graph = Drawable::GetGraph();
+
 	graph->Reset();
 
 	double currentTime = GetClock()->GetCurrentTime();
@@ -104,7 +121,7 @@ Map * EventProcessorMaster::GetGraph()
 	for (int i = 0; i < eventProcessors.size(); i++) {
 		EffectMapperInterface* effectMapper = dynamic_cast<EffectMapperInterface*>(eventProcessors[i]);
 		if (effectMapper) {
-			effectMapper->Draw(lightMap);
+			effectMapper->Draw(graph);
 		}
 	}
 
@@ -114,11 +131,11 @@ Map * EventProcessorMaster::GetGraph()
 	for (int i = 0; i < dynamicEventProcessors.size(); i++) {
 		EffectMapperInterface* effectMapper = dynamic_cast<EffectMapperInterface*>(dynamicEventProcessors[i]);
 		if (effectMapper) {
-			effectMapper->Draw(lightMap);
+			effectMapper->Draw(graph);
 		}
 	}
 	
-	graph->PasteAdd(lightMap, 0, 0);
+	//graph->PasteAdd(lightMap, 0, 0);
 	return graph;
 }
 

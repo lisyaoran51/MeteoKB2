@@ -3,11 +3,15 @@
 
 #include "../../Games/Ruleset/Ruleset.h"
 #include "../../Framework/Input/PassThroughInputManager.h"
+#include "../../Framework/Timing/TimeController.h"
 
 
 using namespace Games::Rulesets;
 using namespace Games::Schedulers::Events;
 using namespace Framework::Input;
+using namespace Framework::Timing;
+
+
 
 
 namespace Meteor {
@@ -40,11 +44,13 @@ namespace Rulesets {
 
 		virtual ~MeteorRulesetExecutor() = default;
 
-		virtual int LazyConstruct(WorkingSm* w);
+		virtual int LazyConstruct(WorkingSm* w, Ruleset* r);
 
 		virtual PassThroughInputManager* CreateInputManager();
 
 		virtual TimeController* CreateTimeController();
+		
+		virtual SpeedAdjuster* CreateSpeedAdjuster();
 
 		virtual int Elapse(MTO_FLOAT elapsedTime);
 

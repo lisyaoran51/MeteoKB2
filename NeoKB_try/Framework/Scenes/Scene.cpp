@@ -13,6 +13,8 @@ using namespace Framework;
 Scene::Scene() : RegisterType("Scene")
 {
 	isInputable = true;
+
+	registerLoad(bind(static_cast<int(Scene::*)(void)>(&Scene::load), this));
 }
 
 int Scene::Push(Scene * scene)
@@ -146,11 +148,30 @@ int Scene::onResuming(Scene * lastScene)
 int Scene::load()
 {
 
-	return 0;
+	Game * g = GetCache<Game>("Game");
+	if (!g)
+		throw runtime_error("int Scene::load() : Game not found in cache.");
+
+	FrameworkConfigManager * f = GetCache<FrameworkConfigManager>("FrameworkConfigManager");
+	if (!f)
+		throw runtime_error("int Scene::load() : FrameworkConfigManager not found in cache.");
+
+	return load(g, f);
 }
 
-int Scene::load(Game * g)
+int Scene::load(Game * g, FrameworkConfigManager* f)
 {
 	game = g;
+
+	int width, height;
+
+	if (f->Get(FrameworkSetting::Width, &width) &&
+		f->Get(FrameworkSetting::Height, &height)) {
+		Initialize(width, height);
+	}
+	else
+		throw runtime_error("int Scene::load(Game*, FrameworkConfigManager*) : Width and Height not found in Setting.");
+
+
 	return 0;
 }

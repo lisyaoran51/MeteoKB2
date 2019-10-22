@@ -19,7 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Framework\Timing\SpeedAdjusters\LinearSpeedAdjuster.cpp" />
     <ClCompile Include="Framework\Timing\ThrottledFramedClock.cpp" />
+    <ClCompile Include="Framework\Timing\TimeController.cpp" />
     <ClCompile Include="Games\MeteoGame.cpp" />
     <ClCompile Include="Games\Graphic\Renderer\MapAlgorithm\HardwareMapAlgorithm.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
@@ -34,7 +36,6 @@
     <ClCompile Include="Games\Scene\Play\Player.cpp" />
     <ClCompile Include="Games\Scene\Play\PlayerLoader.cpp" />
     <ClCompile Include="Games\Scene\Play\Playfield.cpp" />
-    <ClCompile Include="Games\Scene\Play\TimeController.cpp" />
     <ClCompile Include="Games\Scene\Loader.cpp" />
     <ClCompile Include="Games\Scene\Select\MainMenu.cpp" />
     <ClCompile Include="Games\Scene\Select\PlaySongSelect.cpp" />
@@ -164,6 +165,8 @@
     <Text Include="DailyLog.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Framework\Timing\SpeedAdjusters\LinearSpeedAdjuster.h" />
+    <ClInclude Include="Framework\Timing\TimeController.h" />
     <ClInclude Include="Games\Graphic\Renderer\MapAlgorithm\HardwareMapAlgorithm.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClInclude>
@@ -180,7 +183,6 @@
     <ClInclude Include="Games\Scene\Play\Player.h" />
     <ClInclude Include="Games\Scene\Play\PlayerLoader.h" />
     <ClInclude Include="Games\Scene\Play\Playfield.h" />
-    <ClInclude Include="Games\Scene\Play\TimeController.h" />
     <ClInclude Include="Games\Scene\Select\MainMenu.h" />
     <ClInclude Include="Games\Scene\Select\PlaySongSelect.h" />
     <ClInclude Include="Games\Scene\Select\SongSelect.h" />

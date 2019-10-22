@@ -162,7 +162,8 @@ int Drawable::GetDepth()
 
 Map * Drawable::GetGraph()
 {
-
+	if(!isInitialized)
+		throw logic_error("Map* Drawable::GetGraph() : the drawable hasn't been initialized.");
 
 	return graph;
 }

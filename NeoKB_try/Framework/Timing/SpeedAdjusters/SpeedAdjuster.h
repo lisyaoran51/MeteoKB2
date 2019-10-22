@@ -1,13 +1,17 @@
 #ifndef SPEED_ADJUSTER_H
 #define SPEED_ADJUSTER_H
 
+#include "../../Allocation/Hierachal/Container.h"
+
 namespace Framework {
 namespace Timing {
 namespace SpeedAdjusters {
 
-	class SpeedAdjuster {
+	class SpeedAdjuster : public Container{
 
 	public:
+
+		SpeedAdjuster();
 		
 		virtual int ProcessFrame(double elapsedTime) = 0;
 
@@ -17,7 +21,10 @@ namespace SpeedAdjusters {
 
 		virtual double GetSeekTime() = 0;
 
-		virtual double GetAdjustedTime() = 0;
+		/// <summary>
+		/// 本次調整的時間，每次process frame就會更新一次，用來讓time controller得知這次需要調整多少時間
+		///	</summary>
+		virtual double GetAdjustFrameTime() = 0;
 
 		virtual int SetFreezeTime(double fTime) = 0;
 

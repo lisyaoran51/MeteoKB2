@@ -1,11 +1,10 @@
 #ifndef TIME_CONTROLLER_H
 #define TIME_CONTROLLER_H
 
-#include "../../../Framework/Allocation/Hierachal/Container.h"
-#include "../../../Framework/Timing/SpeedAdjusters/SpeedAdjuster.h"
-#include "../../../Framework/Timing/DecoupledInterpolatingFramedClock.h"
-#include "../MeteoScene.h"
-#include "../../../Framework/Input/KeyBindings/KeyBindingHandler.h"
+#include "../Allocation/Hierachal/Container.h"
+#include "SpeedAdjusters\SpeedAdjuster.h"
+#include "DecoupledInterpolatingFramedClock.h"
+#include "../Input/KeyBindings/KeyBindingHandler.h"
 
 
 using namespace Framework::Timing::SpeedAdjusters;
@@ -14,9 +13,8 @@ using namespace Framework::Allocation::Hierachal;
 using namespace Framework::Input::KeyBindings;
 
 
-namespace Games {
-namespace Scenes {
-namespace Play {
+namespace Framework {
+namespace Timing {
 
 	/// <summary>
 	/// 其實這個不是scene，應該移到timing去
@@ -27,7 +25,7 @@ namespace Play {
 		int load() {
 
 			// 需要跟input key做binding一下，才知道哪個是pause
-
+			// 應該是不用bind，input manager都bind好了，我們直接用就好
 
 
 			return 0;
@@ -41,7 +39,7 @@ namespace Play {
 
 		}
 
-		virtual map<T, InputKey>* GetDefaultkeyBindings() = 0;
+		//virtual map<T, InputKey>* GetDefaultkeyBindings() = 0;
 
 		virtual int OnKeyDown(pair<T, int> action) {
 			return 0;
@@ -100,6 +98,7 @@ namespace Play {
 
 	protected:
 
+
 		map<T, InputKey> keyBindings;
 
 		/// <summary>
@@ -135,12 +134,7 @@ namespace Play {
 	/// </summary>
 	class TimeController : public Container {
 
-
 		int load();
-
-
-		
-
 
 	public:
 
@@ -195,7 +189,7 @@ namespace Play {
 		/// <summary>
 		/// 一個與parent獨立的時終，下面接的式遊戲的物件，遊戲根據這個時鐘運行
 		/// </summary>
-		FramedClock* gameClock;
+		//FramedClock* gameClock;
 
 
 		double rate;
@@ -236,7 +230,7 @@ namespace Play {
 
 
 
-}
+
 }}
 
 

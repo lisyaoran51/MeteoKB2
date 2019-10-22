@@ -10,7 +10,6 @@
 #include "../../../Util/InstanceCreator.h"
 #include "../../../Framework/Allocation/Hierachal/Container.h"
 #include "Event.h"
-#include "EventProcessor.h"
 #include "../../../Framework/Graphic/Drawable.h"
 #include "../../../Util/DataStructure/PeriodMap.h"
 #include "../../../Framework/Allocation/Hierachal/Triggerable.h"
@@ -50,6 +49,8 @@ namespace Events {
 
 		int load();
 
+		int load(FrameworkConfigManager* f);
+
 		float visibleTimeRange = 1.0f;
 
 		mutex processorsMutex;
@@ -73,8 +74,6 @@ namespace Events {
 		int register_event_processor();
 		*/
 
-		int RegisterMap(Map* m);
-
 		Map* GetGraph();
 
 		/// <summary>
@@ -86,7 +85,7 @@ namespace Events {
 
 	protected:
 
-		Map* lightMap;
+		//Map* lightMap;
 
 		vector<EventProcessor<Event>*> staticEventProcessors;
 

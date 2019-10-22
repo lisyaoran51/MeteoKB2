@@ -186,6 +186,8 @@ namespace Rulesets {
 
 		virtual TimeController* CreateTimeController() = 0;
 
+		virtual SpeedAdjuster* CreateSpeedAdjuster() = 0;
+
 
 	protected:
 

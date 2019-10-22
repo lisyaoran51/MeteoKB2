@@ -92,6 +92,7 @@ int GameHost::drawFrame()
 	// TODO: 這邊應該要把蒐到的drawable跟具Depth來排序，但是現在懶得寫
 
 	for (int i = 0; i < drawables.size(); i++) {
+		
 		canvas->PasteAdd(drawables[i]->GetGraph(),
 			drawables[i]->GetPositionX(), 
 			drawables[i]->GetPositionY());
