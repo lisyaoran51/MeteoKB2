@@ -69,9 +69,9 @@ namespace Hierachal{
 		int Async();
 
 		/// <summary>
-		/// 把component同步背景進行loading，我們不需要這個功能，所以拿掉
+		/// 把component的cache設好，然後async
 		/// </summary>
-		//int LoadAsync(Loadable* component);
+		virtual int LoadAsync(DependencyContainer* dContainer);
 
 		LoadState GetLoadState();
 

@@ -19,32 +19,19 @@ int TimeController::load()
 
 int TimeController::update()
 {
-	if (isPaused)
-		return 0;
-
-	if (isTriggeredPause) {
+	speedAdjuster->ProcessFrame(GetClock()->GetElapsedFrameTime());
+	if (speedAdjuster->GetIsAdjustingTime()) {
+		double timeToAdjust = speedAdjuster->GetAdjustedTime();
+		controllableClock->Seek(controllableClock->GetCurrentTime() + timeToAdjust * controllableClock->GetRate());
+	}
+	else if (speedAdjuster->GetIsFreezingTime()) {
 		Pause();
-		isTriggeredPause = false;
 	}
-
-	if (isTriggeredResume) {
-		Resume();
-		isTriggeredResume = false;
-	}
-	
-	if (isTriggeredSeekingTime) {
-		JumpTo(targetSeekTime);
-		isTriggeredSeekingTime = false;
-	}
-
-	if (isSeekingTime) {
-		JumpTo(targetSeekTime);
-	}
-
 
 	return 0;
 }
 
+/* 暫時不寫這段，以後響到要怎麼寫再回來改
 int TimeController::getTempSection()
 {
 	for (int i = 0; i < sectionStartTime.size(); i++) {
@@ -64,8 +51,7 @@ int TimeController::getTempPart()
 
 	return partStartTime.size() - 1;
 }
-
-
+*/
 
 TimeController::TimeController() : RegisterType("TimeController")
 {
@@ -75,52 +61,48 @@ TimeController::TimeController() : RegisterType("TimeController")
 	isPresent = true;
 }
 
-int TimeController::SetAudioClock(AdjustableClock * dInterpolatingFramedClock)
-{
-	
-	audioClock = dInterpolatingFramedClock;
-	return 0;
-}
-
-int TimeController::SetControllableClock(DecoupledInterpolatingFramedClock * cClock)
+int TimeController::SetControllableClock(AdjustableClock * cClock)
 {
 	controllableClock = cClock;
-	return 0;
-}
-
-int TimeController::SetFramedClock(FramedClock * fClock)
-{
-	framedClock = fClock;
 	return 0;
 }
 
 int TimeController::SetSpeedAdjuster(SpeedAdjuster * sAdjuster)
 {
 	// TODO: 做一個thread safe lock再刪
-	delete speedAdjuster;
+	if(speedAdjuster != nullptr)
+		delete speedAdjuster;
 	speedAdjuster = sAdjuster;
+	
+
+	speedAdjuster->AddOnAdjustFreeze(this, bind(static_cast<int(TimeController::*)()>(&TimeController::SetAllChildsIsMaskedForTrigger),
+		"TimeController::SetAllChildsIsMaskedForTrigger");
+
+
+	speedAdjuster->AddOnAdjustFreezeEnd(this, bind(static_cast<int(TimeController::*)()>(&TimeController::RecoverAllChildsIsMaskedForTrigger),
+		"TimeController::RecoverAllChildsIsMaskedForTrigger");
+
+	speedAdjuster->AddOnAdjustFreezeEnd(this, bind(static_cast<int(TimeController::*)()>(&TimeController::Resume),
+		"TimeController::Resume");
+
 	return 0;
 }
 
 int TimeController::JumpTo(double seekTime)
 {
-	audioClock->Seek(seekTime);
 	controllableClock->Seek(seekTime);
 	return 0;
 }
 
 int TimeController::JumpToWithSpeedAdjust(double seekTime)
 {
-	JumpTo(speedAdjuster->GenerateTime(GetClock()->GetElapsedFrameTime()));
+	speedAdjuster->SetSeekTime(seekTime);
 	return 0;
 }
 
 int TimeController::Pause()
 {
-	audioClock->Stop();
-
-	controllableClock->SetIsProcessSourceClockFrames(false);
-
+	controllableClock->Stop();
 	isPaused = true;
 
 	return 0;
@@ -128,12 +110,11 @@ int TimeController::Pause()
 
 int TimeController::Resume()
 {
-	if (rate == 1) {
-		audioClock->Seek(controllableClock->GetCurrentTime());
-		audioClock->Start();
-	}
-	controllableClock->SetIsProcessSourceClockFrames(true);
+	if (isAdjustAfterPause)
+		return 0;
+	controllableClock->Start();
 	isPaused = false;
+	isWaitingFreeze = false;
 	return 0;
 }
 
@@ -141,17 +122,15 @@ int TimeController::SetRate(double r)
 {
 	if (r == 0)
 		throw invalid_argument("TimeController::SetRate() : 0 is not available for rate.");
-	if (r != 1)
-		audioClock->Stop();
 	rate = r;
-	audioClock->SetRate(r);
 	controllableClock->SetRate(r);
 	return 0;
 }
 
 double TimeController::GetRate()
 {
-	return rate;
+	
+	return rate = controllableClock->GetRate();
 }
 
 bool TimeController::GetIsPaused()
@@ -159,6 +138,7 @@ bool TimeController::GetIsPaused()
 	return isPaused;
 }
 
+/* 暫時不寫這段，以後響到要怎麼寫再回來改
 int TimeController::ImportWorkingSm(WorkingSm * workingSm)
 {
 	// TODO: 這邊要去分析整個sm，然後把每個小節的位置抓出來，每個段落的位置的抓出來，然後放進vector裡
@@ -184,3 +164,4 @@ int TimeController::ImportWorkingSm(WorkingSm * workingSm)
 
 	return 0;
 }
+*/

@@ -24,7 +24,7 @@ namespace Timing {
 	public:
 
 		/// <summary>
-		/// Elapsed time since last frame in milliseconds.
+		/// Elapsed time since last frame in seconds.
 		/// </summary>
 		virtual double GetElapsedFrameTime() = 0;
 

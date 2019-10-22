@@ -27,6 +27,8 @@ namespace Hierachal {
 		/// </summary>
 		bool isAvailableForTrigger = true;
 
+		bool isMaskingTrigger = false;
+
 		bool previousIsAvailableForTrigger = isAvailableForTrigger;
 
 	public:
@@ -43,11 +45,19 @@ namespace Hierachal {
 		/// </summary>
 		//virtual int DeleteChild(ChildAddable* child);
 
+		
 		int SetIsAvailabledForTrigger(bool value);
 
-		int SetAllChildsIsAvailableForTrigger(bool value);
+		int MaskTrigger();
 
-		int RecoverAllChildsIsAvailableForTrigger();
+		int UnmaskTrigger();
+
+		/// <summary>
+		/// TODO: 應該要改成用stack來存上一個狀態，不然多次set以後就沒辦法recover
+		/// </summary>
+		int SetAllChildsIsMaskedForTrigger();
+
+		int RecoverAllChildsIsMaskedForTrigger();
 
 		bool GetIsAvailableForTrigger();
 
@@ -80,8 +90,6 @@ namespace Hierachal {
 		/// 代表這個物件是否現在仍在使用，無法控制，跳夜跳場景時自動改變
 		/// </summary>
 		bool isPresent = false;
-
-		int recoverLastState();
 
 
 		virtual int onKeyDown(InputState* inputState, InputKey key);

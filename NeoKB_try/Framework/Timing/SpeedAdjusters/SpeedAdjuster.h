@@ -7,20 +7,48 @@ namespace SpeedAdjusters {
 
 	class SpeedAdjuster {
 
-		double seekTime;
-
-		double accumulatedElapsedTime;
-
 	public:
-		SpeedAdjuster();
 		
-		virtual double GenerateTime(double elapsedTime) = 0;
+		virtual int ProcessFrame(double elapsedTime) = 0;
 
-		virtual int Reset();
+		virtual int Reset() = 0;
 
-		virtual int SetSeekTime(double sTime);
+		virtual int SetSeekTime(double sTime) = 0;
 
-		virtual double GetSeekTime();
+		virtual double GetSeekTime() = 0;
+
+		virtual double GetAdjustedTime() = 0;
+
+		virtual int SetFreezeTime(double fTime) = 0;
+
+		virtual double GetFreezeTimeLeft() = 0;
+
+		virtual bool GetIsAdjustingTime() = 0;
+
+		virtual bool GetIsFreezingTime() = 0;
+
+		template<class _Type>
+		int AddOnAdjustFreeze(_Type* callableObject, function<int()> callback, string name = "TriggerOnAdjust") {
+			onAdjustFreeze.Add(callableObject, callback, name);
+			return 0;
+		}
+
+		
+		template<class _Type>
+		int AddOnAdjustFreezeEnd(_Type* callableObject, function<int()> callback, string name = "TriggerOnAdjustEnd") {
+			onAdjustFreezeEnd.Add(callableObject, callback, name);
+			return 0;
+		}
+
+	protected:
+
+		ActionList<int> onAdjustFreeze;
+
+		/// <summary>
+		/// 再adjust或freeze結束時發動，如果先pause再adjust，則他呼叫resume會沒有效果，直到再按一次pause才行resume
+		/// </summary>
+		ActionList<int> onAdjustFreezeEnd;
+
 	};
 
 

@@ -37,6 +37,8 @@ namespace Timing {
 
 		Clock* source;
 
+		double lastFrameTime;
+
 		virtual int setCurrentTime(double cTime);
 
 		virtual int start();
@@ -54,7 +56,6 @@ namespace Timing {
 		double timeSinceLastCalculation;
 		int framesSinceLastCalculation;
 
-		double lastFrameTime;
 
 		double sourceTime;
 

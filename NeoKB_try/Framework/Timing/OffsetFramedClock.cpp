@@ -17,11 +17,12 @@ double OffsetFramedClock::GetCurrentTime()
 
 int OffsetFramedClock::SetOffset(double o)
 {
+	lastFrameTime += o - offset;
 	offset = o;
 	return 0;
 }
 
 double OffsetFramedClock::GetOffset()
 {
-	return 0.0;
+	return offset;
 }

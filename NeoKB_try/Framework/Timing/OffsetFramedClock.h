@@ -12,7 +12,7 @@ namespace Timing {
 	/// <summary>
 	/// 多家一個字定的offset
 	/// </summary>
-	class OffsetFramedClock : virtual public FramedClock, virtual public OffsetClock {
+	class OffsetFramedClock : public FramedClock, public OffsetClock {
 
 	public:
 

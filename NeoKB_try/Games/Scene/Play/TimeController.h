@@ -28,6 +28,8 @@ namespace Play {
 
 			// 需要跟input key做binding一下，才知道哪個是pause
 
+
+
 			return 0;
 		}
 
@@ -51,14 +53,17 @@ namespace Play {
 
 		virtual int OnButtonDown(T action) {
 			if (keyBindings[action] == InputKey::Pause) {
+
+				if (speedAdjuster->GetIsAdjustingTime())
+					return -1;
+
 				if (!GetIsPaused()) {
 					Pause();
-					SetAllChildsIsAvailableForTrigger(false);
+					SetAllChildsIsMaskedForTrigger(false);
 				}
-				else {
-					// TODO: 應該要等跑完圈再resume，不過先不寫
-					Resume();
-					RecoverAllChildsIsAvailableForTrigger();
+				else if(!isWaitingFreeze){
+					speedAdjuster->SetFreezeTime(defaultFreezeTime);
+					isWaitingFreeze = true;
 				}
 			}
 			return 0;
@@ -76,7 +81,14 @@ namespace Play {
 			}
 			if (keyBindings[action.first] == InputKey::SectionKnob) {
 
-				JumpTo(sectionStartTime[getTempSection() + action.second]);
+				if (isWaitingFreeze)
+					return 0;
+
+				//JumpTo(sectionStartTime[getTempSection() + action.second]);
+				if (isPaused)
+					isAdjustAfterPause = true;
+				speedAdjuster->SetAdjustTime(action.second * defaultAdjustTime);
+
 
 			}
 			return 0;
@@ -127,38 +139,7 @@ namespace Play {
 		int load();
 
 
-		/// <summary>
-		/// 可以跳到歌曲的任何斷落的clock，就是歌曲中的clock，外面包一個額外的時鐘
-		/// </summary>
-		AdjustableClock* audioClock;
-
-		/// <summary>
-		/// framedClock的source，是可以用來調整時間的
-		/// 這個是當track停止以後，還可以繼續跑的鍾
-		/// </summary>
-		DecoupledInterpolatingFramedClock* controllableClock;
-
-		/// <summary>
-		/// 一個與parent獨立的時終，下面接的式遊戲的物件，遊戲根據這個時鐘運行
-		/// </summary>
-		FramedClock* framedClock;
-
-		SpeedAdjuster* speedAdjuster;
-
-		double rate;
-
-		bool isTriggeredSeekingTime;
-		bool isSeekingTime;
-		double targetSeekTime;
-
-		bool isTriggeredPause;
-		bool isPaused;
-
-		bool isTriggeredResume;
-
-		bool isControllable;
-
-		bool isPausable;
+		
 
 
 	public:
@@ -166,16 +147,9 @@ namespace Play {
 		TimeController();
 
 		/// <summary>
-		/// pause container的時鐘是在player裡面指派的，不是pause container自己的
+		/// 這個時鐘的時鐘源就是audio clock，不過他可以跳到audio範圍以外的時間
 		/// </summary>
-		int SetAudioClock(AdjustableClock* dInterpolatingFramedClock);
-
-		/// <summary>
-		/// 這個是當track停止以後，還可以繼續跑的鍾
-		/// </summary>
-		int SetControllableClock(DecoupledInterpolatingFramedClock* cClock);
-
-		int SetFramedClock(FramedClock* fClock);
+		int SetControllableClock(AdjustableClock* aClock);
 
 		int SetSpeedAdjuster(SpeedAdjuster* sAdjuster);
 
@@ -185,6 +159,9 @@ namespace Play {
 
 		int Pause();
 
+		/// <summary>
+		/// 這邊要判斷如果是在adjust之前就已經pause了，那resume就會失敗。會等到pause結束才會成公
+		/// </summary>
 		int Resume();
 
 		int SetRate(double rate);
@@ -193,9 +170,9 @@ namespace Play {
 
 		bool GetIsPaused();
 
-
+		/* 暫時不寫這段，以後響到要怎麼寫再回來改
 		int ImportWorkingSm(WorkingSm* workingSm);
-
+		*/
 
 	protected:
 
@@ -204,6 +181,42 @@ namespace Play {
 		/// 在update時檢查有沒有被暫停，有的話就把自己時鐘停掉
 		/// </summary>
 		virtual int update();
+
+		/// <summary>
+		/// 在調整時間的時候，用來做初速度效果的東西
+		/// </summary>
+		SpeedAdjuster* speedAdjuster;
+
+		/// <summary>
+		/// 可以跳到歌曲的任何斷落的clock，就是歌曲中的clock，外面包一個額外的時鐘
+		/// </summary>
+		AdjustableClock* controllableClock;
+
+		/// <summary>
+		/// 一個與parent獨立的時終，下面接的式遊戲的物件，遊戲根據這個時鐘運行
+		/// </summary>
+		FramedClock* gameClock;
+
+
+		double rate;
+
+		double targetSeekTime;
+
+		double defaultFreezeTime = 1.0;
+		double defaultAdjustTime = 5.0;
+
+		bool isPaused = false;
+		bool isAdjustAfterPause = false;
+
+		/// <summary>
+		/// 當暫停結束，要繼續遊戲時，有個倒數時間，這時isWaitingFreeze就會是true
+		/// </summary>
+		bool isWaitingFreeze = false;
+
+
+
+
+		/* 暫時不寫這段，以後響到要怎麼寫再回來改
 
 		WorkingSm* workingSm;
 
@@ -215,6 +228,7 @@ namespace Play {
 
 		vector<float> partStartTime;
 
+		*/
 	private:
 
 	};

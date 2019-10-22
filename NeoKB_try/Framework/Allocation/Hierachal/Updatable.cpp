@@ -11,7 +11,7 @@ Updatable::Updatable() : ChildAddable(), RegisterType("Updatable")
 
 int Updatable::SetClock(FrameBasedClock* c)
 {
-	clock = c;
+	customClock = c;
 	return 0;
 }
 
@@ -20,11 +20,16 @@ FrameBasedClock * Updatable::GetClock()
 	return clock;
 }
 
+FrameBasedClock * Updatable::GetCustomClock()
+{
+	return customClock;
+}
+
 int Updatable::SetParent(HasParent * p)
 {
 	Updatable* parent = Cast<Updatable>(p);
 	if (p != nullptr) {
-		clock = parent->GetClock();
+		clock = parent->GetCustomClock() != nullptr ? parent->GetCustomClock() : parent->GetClock();
 	}
 	else {
 		throw invalid_argument("Updatable::SetParent: parent has to be updatable.");
@@ -42,6 +47,9 @@ bool Updatable::UpdateSubTree()
 	if (GetLoadState() == LoadState::Ready)
 		LoadComplete();
 
+	if (GetParent() != nullptr && customClock != nullptr)
+		customClock->ProcessFrame();
+
 	update();
 
 	vector<ChildAddable*>* childs = GetChilds();
@@ -54,6 +62,13 @@ bool Updatable::UpdateSubTree()
 	
 
 	return true;
+}
+
+int Updatable::LoadAsync(Clock * c, DependencyContainer * dContainer)
+{
+	LOG(LogLevel::Fine) << "int Updatable::LoadAsync() : A [" << GetTypeName() << "] object is asyncing with clock and cache.";
+	clock = c;
+	return LoadAsync(dContainer);
 }
 
 int Updatable::update()

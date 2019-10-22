@@ -19,7 +19,7 @@ namespace Hierachal {
 	class Updatable : public ChildAddable {
 
 		FrameBasedClock* clock;
-		FrameBasedClock* customClock;
+		FrameBasedClock* customClock = nullptr;
 
 	public:
 
@@ -28,6 +28,8 @@ namespace Hierachal {
 		int SetClock(FrameBasedClock* c);
 
 		FrameBasedClock* GetClock();
+
+		FrameBasedClock* GetCustomClock();
 
 		/// <summary>
 		/// 這邊會override元本的set parent，然後把clock設成parent的clock
@@ -38,6 +40,11 @@ namespace Hierachal {
 		/// 這邊會先更新完自己，然後再呼叫child的updateSubTree。呼叫前要先確定child是不是updatable
 		/// </summary>
 		virtual bool UpdateSubTree();
+
+		/// <summary>
+		/// 把component的clock和cache設好，然後async
+		/// </summary>
+		virtual int LoadAsync(Clock* c, DependencyContainer* dContainer);
 
 	protected:
 

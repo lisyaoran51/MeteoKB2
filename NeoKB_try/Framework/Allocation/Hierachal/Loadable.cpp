@@ -36,6 +36,12 @@ int Loadable::Async()
 	return loadStateHandler -> Async();
 }
 
+int Loadable::LoadAsync(DependencyContainer * dContainer)
+{
+	SetDependencies(dContainer);
+	return loadStateHandler->Async();
+}
+
 LoadState Loadable::GetLoadState()
 {
 	return loadStateHandler->GetLoadState();

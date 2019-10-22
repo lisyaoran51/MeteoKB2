@@ -10,26 +10,47 @@ Triggerable::Triggerable(): Schedulable(), RegisterType("Triggerable")
 
 int Triggerable::SetIsAvailabledForTrigger(bool value)
 {
-	previousIsAvailableForTrigger = isAvailableForTrigger;
-	isAvailableForTrigger = value;
+	if (isMaskingTrigger)
+		previousIsAvailableForTrigger = value;
+	else
+		isAvailableForTrigger = value;
 	return 0;
 }
 
-int Triggerable::SetAllChildsIsAvailableForTrigger(bool value)
+int Triggerable::MaskTrigger()
+{
+	if (!isMaskingTrigger) {
+		previousIsAvailableForTrigger = isAvailableForTrigger;
+		isMaskingTrigger = true;
+	}
+	isAvailableForTrigger = false;
+	return 0;
+}
+
+int Triggerable::UnmaskTrigger()
+{
+	if (isMaskingTrigger) {
+		isAvailableForTrigger = previousIsAvailableForTrigger;
+		isMaskingTrigger = false;
+	}
+	return 0;
+}
+
+int Triggerable::SetAllChildsIsMaskedForTrigger()
 {
 	for (int i = 0; i < GetChilds()->size(); i++) {
-		dynamic_cast<Triggerable*>(GetChilds()->at(i))->SetIsAvailabledForTrigger(value);
-		dynamic_cast<Triggerable*>(GetChilds()->at(i))->SetAllChildsIsAvailableForTrigger(value);
+		dynamic_cast<Triggerable*>(GetChilds()->at(i))->MaskTrigger();
+		dynamic_cast<Triggerable*>(GetChilds()->at(i))->SetAllChildsIsMaskedForTrigger();
 	}
 
 	return 0;
 }
 
-int Triggerable::RecoverAllChildsIsAvailableForTrigger()
+int Triggerable::RecoverAllChildsIsMaskedForTrigger()
 {
 	for (int i = 0; i < GetChilds()->size(); i++) {
-		dynamic_cast<Triggerable*>(GetChilds()->at(i))->recoverLastState();
-		dynamic_cast<Triggerable*>(GetChilds()->at(i))->RecoverAllChildsIsAvailableForTrigger();
+		dynamic_cast<Triggerable*>(GetChilds()->at(i))->UnmaskTrigger();
+		dynamic_cast<Triggerable*>(GetChilds()->at(i))->RecoverAllChildsIsMaskedForTrigger();
 	}
 
 	return 0;
@@ -83,12 +104,6 @@ int Triggerable::TriggerOnButtonUp(InputState * inputState, InputKey button)
 int Triggerable::TriggerOnSlide(InputState * inputState, InputKey slider)
 {
 	return onSlide(inputState, slider);
-}
-
-int Triggerable::recoverLastState()
-{
-	isAvailableForTrigger = previousIsAvailableForTrigger;
-	return 0;
 }
 
 int Triggerable::onKeyDown(InputState * inputState, InputKey key)

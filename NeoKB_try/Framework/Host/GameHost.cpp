@@ -173,10 +173,8 @@ int GameHost::bootstrapSceneGraph(Game* game, Instrument* instrument)
 	dependencies->Cache(game, "Game");
 	dependencies->Cache(instrument, "Instrument");
 
-	root->SetClock(sceneGraphClock);
-	root->SetDependencies(dependencies);
 	// root 要async，不然會變成沒有loaded
-	root->Async();
+	root->LoadAsync(sceneGraphClock, dependencies);
 
 	root->AddChild(game);
 	game->SetHost(this);
