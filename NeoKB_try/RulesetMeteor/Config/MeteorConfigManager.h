@@ -36,6 +36,8 @@ namespace Config{
 		GlowLineMapAlgorithm,
 		TargetLineMapAlgorithm,
 
+		MapPitchShifter,
+
 		WhiteKeyTargetHeight,
 		BlackKeyTargetHeight,
 

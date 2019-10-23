@@ -51,6 +51,8 @@ namespace Algorithms{
 		/// 把evnet的狀態轉成圖案，然後移到他的位置上
 		///	</summary>
 		virtual int Draw(Map* m, EventProcessor<Event>* em) = 0;
+
+		virtual int SetStartX(int x) = 0;
 	};
 
 
@@ -72,9 +74,14 @@ namespace Algorithms{
 
 		int load(FrameworkConfigManager* f) {
 
-			if (f->Get(FrameworkSetting::StartPitch, &startX)) {}
-			if (f->Get(FrameworkSetting::Width, &width)) {}
-			if (f->Get(FrameworkSetting::Height, &height)) {}
+			if (!f->Get(FrameworkSetting::StartPitch, &startX))
+				throw runtime_error("int MapAlgorithm::load() : start pitch not found in FrameworkConfigManager.");
+
+			if (!f->Get(FrameworkSetting::Width, &width))
+				throw runtime_error("int MapAlgorithm::load() : width not found in FrameworkConfigManager.");
+
+			if (!f->Get(FrameworkSetting::Height, &height))
+				throw runtime_error("int MapAlgorithm::load() : hieght not found in FrameworkConfigManager.");
 
 			return 0;
 		}
@@ -133,6 +140,10 @@ namespace Algorithms{
 			return ImplementDraw(m, Cast<EffectMapper<T>>(em));
 			// throw error
 			// return -1;
+		}
+
+		virtual int SetStartX(int x) {
+			startX = x;
 		}
 
 	protected:

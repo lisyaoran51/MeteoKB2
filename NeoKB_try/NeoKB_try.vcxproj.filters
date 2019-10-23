@@ -483,9 +483,6 @@
     <ClCompile Include="Games\Sheetmusic\Pattern\Pattern.cpp">
       <Filter>來源檔案\Games\Sheetmusic\Pattern</Filter>
     </ClCompile>
-    <ClCompile Include="Util\MtoObject.cpp">
-      <Filter>來源檔案\Util</Filter>
-    </ClCompile>
     <ClCompile Include="Games\Sheetmusic\Pattern\PatternGenerator.cpp">
       <Filter>來源檔案\Games\Sheetmusic\Pattern</Filter>
     </ClCompile>
@@ -815,6 +812,12 @@
     </ClCompile>
     <ClCompile Include="Framework\Timing\SpeedAdjusters\LinearSpeedAdjuster.cpp">
       <Filter>來源檔案\Framework\Timing\SpeedAdjusters</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\Scheduler\Event\Effect\Algorithm\MapPitchShifter.cpp">
+      <Filter>來源檔案\Games\Schedulers\Events\Effects\Algorithms</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\Scheduler\Event\Effect\Algorithm\LinearMapPitchShifter.cpp">
+      <Filter>來源檔案\Games\Schedulers\Events\Effects\Algorithms</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1350,6 +1353,12 @@
     </ClInclude>
     <ClInclude Include="Framework\Timing\SpeedAdjusters\LinearSpeedAdjuster.h">
       <Filter>標頭檔\Framework\Timing\SpeedAdjusters</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Scheduler\Event\Effect\Algorithm\MapPitchShifter.h">
+      <Filter>標頭檔\Games\Scheduler\Events\Effects\Algorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Scheduler\Event\Effect\Algorithm\LinearMapPitchShifter.h">
+      <Filter>標頭檔\Games\Scheduler\Events\Effects\Algorithms</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

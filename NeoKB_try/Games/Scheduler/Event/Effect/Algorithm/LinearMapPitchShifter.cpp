@@ -1,0 +1,102 @@
+#include "LinearMapPitchShifter.h"
+
+
+#include <Math.h>
+
+
+using namespace Games::Schedulers::Events::Effects::Algorithms;
+using namespace std;
+
+
+int LinearMapPitchShifter::load()
+{
+
+	LOG(LogLevel::Info) << "LinearMapPitchShifter::load() : Start loading map pitch shifter.";
+
+	tempPitch = defaultStartPitch;
+	tempPitchSpecificPosition = (double)tempPitch;
+
+	return 0;
+}
+
+LinearMapPitchShifter::LinearMapPitchShifter() : RegisterType("LinearMapPitchShifter")
+{
+
+	registerLoad(bind((int(LinearMapPitchShifter::*)())&LinearMapPitchShifter::load, this));
+
+}
+
+int LinearMapPitchShifter::SetSeekPitch(Pitch p)
+{
+	if (tempPitch == p)
+		return 0;
+
+	pitchShiftingTo = p;
+	isShifting = true;
+
+	return 0;
+}
+
+bool LinearMapPitchShifter::GetIsShifting()
+{
+	return isShifting;
+}
+
+int LinearMapPitchShifter::SetMovePerFrame(double mPerFrame)
+{
+	movePerFrame = fabs(mPerFrame);
+	return 0;
+}
+
+Pitch LinearMapPitchShifter::GetTempPitch()
+{
+	return tempPitch;
+}
+
+int LinearMapPitchShifter::shift()
+{
+	if (isShifting) {
+		if (tempPitch > pitchShiftingTo) {
+
+			tempPitchSpecificPosition -= movePerFrame;
+
+			/* 如果pitch改了，就回傳0 */
+			if (tempPitch != floor(tempPitchSpecificPosition)) {
+				tempPitch = floor(tempPitchSpecificPosition);
+
+				/* 如果移動超過了，就調回來 */
+				if (tempPitch <= pitchShiftingTo) {
+					tempPitchSpecificPosition = tempPitch = pitchShiftingTo;
+					isShifting = false;
+				}
+				return 0;
+			}
+		}
+		else if (tempPitch < pitchShiftingTo) {
+
+			tempPitchSpecificPosition += movePerFrame;
+
+			/* 如果pitch改了，就回傳0 */
+			if (tempPitch != floor(tempPitchSpecificPosition)) {
+				tempPitch = floor(tempPitchSpecificPosition);
+
+				/* 如果移動超過了，就調回來 */
+				if (tempPitch >= pitchShiftingTo) {
+					tempPitchSpecificPosition = tempPitch = pitchShiftingTo;
+					isShifting = false;
+				}
+				return 0;
+			}
+		}
+		else {
+
+			// TODO: 應該要throw logic_error
+			tempPitchSpecificPosition = tempPitch = pitchShiftingTo;
+			isShifting = false;
+
+		}
+	}
+	return -1;
+
+
+}

@@ -42,6 +42,8 @@
     <ClCompile Include="Games\Scene\Select\SongSelect.cpp" />
     <ClCompile Include="Games\Scheduler\Event\ControlPoints\ControlPoint.cpp" />
     <ClCompile Include="Games\Scheduler\Event\ControlPoints\NoteControlPoint.cpp" />
+    <ClCompile Include="Games\Scheduler\Event\Effect\Algorithm\LinearMapPitchShifter.cpp" />
+    <ClCompile Include="Games\Scheduler\Event\Effect\Algorithm\MapPitchShifter.cpp" />
     <ClCompile Include="Games\Scheduler\Event\Effect\Effect.cpp" />
     <ClCompile Include="Games\Scheduler\Event\Event.cpp" />
     <ClCompile Include="Games\Scheduler\Event\EventProcessorMaster.cpp" />
@@ -154,11 +156,8 @@
     <ClCompile Include="RulesetMeteor\Timing\MeteorTimeController.cpp" />
     <ClCompile Include="Util\DataStructure\PeriodMap.cpp" />
     <ClCompile Include="Util\FileSystem.c" />
-    <ClCompile Include="Util\MtoObject.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="Util\ProgramInitializer.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -188,8 +187,10 @@
     <ClInclude Include="Games\Scene\Select\SongSelect.h" />
     <ClInclude Include="Games\Scheduler\Event\ControlPoints\ControlPoint.h" />
     <ClInclude Include="Games\Scheduler\Event\ControlPoints\NoteControlPoint.h" />
+    <ClInclude Include="Games\Scheduler\Event\Effect\Algorithm\LinearMapPitchShifter.h" />
     <ClInclude Include="Games\Scheduler\Event\Effect\Algorithm\MapAlgorithm.h" />
     <ClInclude Include="Games\Scheduler\Event\Effect\Algorithm\MapGenerateAlgorithm.h" />
+    <ClInclude Include="Games\Scheduler\Event\Effect\Algorithm\MapPitchShifter.h" />
     <ClInclude Include="Games\Scheduler\Event\Effect\Algorithm\MapShiftAlgorithm.h" />
     <ClInclude Include="Games\Scheduler\Event\Effect\Effect.h" />
     <ClInclude Include="Games\Scheduler\Event\Effect\EffectMapper.h" />
@@ -341,7 +342,7 @@
     <ClInclude Include="Util\Log.h" />
     <ClInclude Include="Util\MtoType.h" />
     <ClInclude Include="Util\ProgramInitializer.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Util\Singleton.h" />
     <ClInclude Include="Util\TemplateConstraint.h" />

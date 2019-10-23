@@ -60,8 +60,10 @@ int Playfield::load(FrameworkConfigManager* f) {
 		throw runtime_error("int Playfield::load() : HardwareVersion not found in Setting.");
 	
 	if (f->Get(FrameworkSetting::Width, &width) &&
-		f->Get(FrameworkSetting::Height, &height))
-		LOG(LogLevel::Fine) << "Playfield::load() : Save size [" << width << "] * [" << height << "].";
+		f->Get(FrameworkSetting::Height, &height)) {
+		bufferMap = new Map(width * 2, height * 2);
+		LOG(LogLevel::Fine) << "Playfield::load() : build buffer map [" << width << "*2] * [" << height << "*2].";
+	}
 	else
 		throw runtime_error("int Playfield::load() : Width and Height not found in Setting.");
 
@@ -115,7 +117,7 @@ int Playfield::Add(EventProcessor<Event> * ep)
 
 		// 這邊要把map加進去
 		EffectMapperInterface* em = ep->Cast<EffectMapperInterface>();
-		//em->RegisterMap(lightMap);
+		//em->RegisterMap(lightMap); //改用draw(map, effect)，所以不用內存一個map
 	}
 
 	return 0;

@@ -6,6 +6,7 @@
 #include "../../RulesetMeteor/Scheduler/Event/Effect/Algorithm/GlowLineMapAlgorithm.h"
 #include "../../RulesetMeteor/Scheduler/Event/Effect/Algorithm/TargetLineMapAlgorithm.h"
 #include "../../Util/Log.h"
+#include "../../Games/Scheduler/Event/Effect/Algorithm/LinearMapPitchShifter.h"
 
 
 
@@ -14,6 +15,7 @@ using namespace Meteor::Config;
 using namespace Games::Schedulers::Events::Effects::Algorithms;
 using namespace Meteor::Schedulers::Events::Effects::Algorithms;
 using namespace Util;
+
 
 
 int MeteorPlayfield::load()
@@ -55,7 +57,7 @@ int MeteorPlayfield::load(FrameworkConfigManager* f, MeteorConfigManager * m)
 	LOG(LogLevel::Finer) << "MeteorPlayfield::load() : FallMapAlgorithm [" << mapAlgorithms["FallEffect"]->GetTypeName() << "] loaded.";
 
 	AddChild(mapAlgorithms["FallEffect"]);
-	//mapAlgorithms["FallEffect"]->RegisterBufferMap(bufferMap);
+	mapAlgorithms["FallEffect"]->RegisterBufferMap(bufferMap);
 
 	/* --------------------- ExplodeEffect map algo --------------------- */
 	if (m->Get(MeteorSetting::ExplodeMapAlgorithm, &mapAlgoName)) {
@@ -69,7 +71,7 @@ int MeteorPlayfield::load(FrameworkConfigManager* f, MeteorConfigManager * m)
 	LOG(LogLevel::Finer) << "MeteorPlayfield::load() : ExplodeMapAlgorithm [" << mapAlgorithms["ExplodeEffect"]->GetTypeName() << "] loaded.";
 
 	AddChild(mapAlgorithms["ExplodeEffect"]);
-	//mapAlgorithms["ExplodeEffect"]->RegisterBufferMap(bufferMap);
+	mapAlgorithms["ExplodeEffect"]->RegisterBufferMap(bufferMap);
 
 	/* --------------------- GlowLineEffect map algo --------------------- */
 	if (m->Get(MeteorSetting::GlowLineMapAlgorithm, &mapAlgoName)) {
@@ -83,7 +85,7 @@ int MeteorPlayfield::load(FrameworkConfigManager* f, MeteorConfigManager * m)
 	LOG(LogLevel::Finer) << "MeteorPlayfield::load() : GlowLineMapAlgorithm [" << mapAlgorithms["GlowLineEffect"]->GetTypeName() << "] loaded.";
 
 	AddChild(mapAlgorithms["GlowLineEffect"]);
-	//mapAlgorithms["GlowLineEffect"]->RegisterBufferMap(bufferMap);
+	mapAlgorithms["GlowLineEffect"]->RegisterBufferMap(bufferMap);
 
 	/* --------------------- TargetLineEffect map algo --------------------- */
 	if (m->Get(MeteorSetting::TargetLineMapAlgorithm, &mapAlgoName)) {
@@ -97,7 +99,19 @@ int MeteorPlayfield::load(FrameworkConfigManager* f, MeteorConfigManager * m)
 	LOG(LogLevel::Finer) << "MeteorPlayfield::load() : TargetLineMapAlgorithm [" << mapAlgorithms["TargetLineEffect"]->GetTypeName() << "] loaded.";
 
 	AddChild(mapAlgorithms["TargetLineEffect"]);
-	//mapAlgorithms["TargetLineEffect"]->RegisterBufferMap(bufferMap);
+	mapAlgorithms["TargetLineEffect"]->RegisterBufferMap(bufferMap);
+
+
+	/* map pitch shifter */
+	string MapPitchShifterName;
+	if (m->Get(MeteorSetting::MapPitchShifter, &MapPitchShifterName)) {
+		mapPitchShifter = iCreator.CreateInstanceWithT<MapPitchShifter>(MapPitchShifterName);
+	}
+	else
+		mapPitchShifter = new LinearMapPitchShifter();
+
+	mapPitchShifter->LazyConstruct(&mapAlgorithms);
+	AddChild(mapPitchShifter);
 
 	return 0;
 }
@@ -109,11 +123,86 @@ MeteorPlayfield::MeteorPlayfield(): Playfield(), RegisterType("MeteorPlayfield")
 	registerLoad(bind((int(MeteorPlayfield::*)())&MeteorPlayfield::load, this));
 }
 
-int MeteorPlayfield::Elapse(MTO_FLOAT elapsedTime)
+int MeteorPlayfield::SetIsGameControllingPitchState(bool value)
 {
-	// ???
-	// playfield幹嘛要更新?
-	// 應該是要抓輸入，然後去刪effect和建explode
+	isGameControllingPitchState = value;
+	return 0;
+}
+
+int MeteorPlayfield::ChangePitchState(MeteoPianoPitchState s)
+{
+	if (s == MeteoPianoPitchState::Lowered) {
+		pitchState = MeteoPianoPitchState::Lowered;
+		mapPitchShifter->SetSeekPitch(Pitch::C1);
+	}
+	else if (s == MeteoPianoPitchState::None) {
+		pitchState = MeteoPianoPitchState::None;
+		mapPitchShifter->SetSeekPitch(Pitch::C);
+	}
+	else if (s == MeteoPianoPitchState::Raised) {
+		pitchState = MeteoPianoPitchState::Raised;
+		mapPitchShifter->SetSeekPitch(Pitch::c);
+	}
+	return 0;
+}
+
+int MeteorPlayfield::OnKeyDown(pair<MeteorAction, int> action)
+{
+	return 0;
+}
+
+int MeteorPlayfield::OnKeyUp(MeteorAction action)
+{
+	return 0;
+}
+
+int MeteorPlayfield::OnButtonDown(MeteorAction action)
+{
+	if (!isGameControllingPitchState) {
+		if (action == MeteorAction::LowerOctave) {
+			switch (pitchState) {
+			case MeteoPianoPitchState::Lowered:
+				break;
+			case MeteoPianoPitchState::None:
+				pitchState = MeteoPianoPitchState::Lowered;
+				mapPitchShifter->ShiftTo(Pitch::C1);
+				break;
+			case MeteoPianoPitchState::Raised:
+				pitchState = MeteoPianoPitchState::None;
+				mapPitchShifter->ShiftTo(Pitch::C);
+				break;
+			}
+		}
+		else if (action == MeteorAction::RaiseOctave) {
+			switch (pitchState) {
+			case MeteoPianoPitchState::Lowered:
+				pitchState = MeteoPianoPitchState::None;
+				mapPitchShifter->ShiftTo(Pitch::C);
+				break;
+			case MeteoPianoPitchState::None:
+				pitchState = MeteoPianoPitchState::Raised;
+				mapPitchShifter->ShiftTo(Pitch::c);
+				break;
+			case MeteoPianoPitchState::Raised:
+				break;
+			}
+		}
+	}
+	return 0;
+}
+
+int MeteorPlayfield::OnButtonUp(MeteorAction action)
+{
+	return 0;
+}
+
+int MeteorPlayfield::OnKnobTurn(pair<MeteorAction, int> action)
+{
+	return 0;
+}
+
+int MeteorPlayfield::OnSlide(pair<MeteorAction, int> action)
+{
 	return 0;
 }
 

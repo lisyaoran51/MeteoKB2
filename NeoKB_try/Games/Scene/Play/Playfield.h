@@ -68,12 +68,12 @@ namespace Play {
 
 		//Updater* updater;
 
-		Map* compositeGraph;
+		//Map* compositeGraph;
 
 		///<summary>
 		/// 佔存剛建完的影像，還沒位移到正確位置上
 		///</summary>
-		Map* singleGraph;
+		Map* bufferMap;
 	};
 
 
