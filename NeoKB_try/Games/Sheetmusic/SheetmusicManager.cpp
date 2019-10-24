@@ -50,11 +50,6 @@ WorkingSm * SmManager::GetWorkingSm(SmInfo * s)
 
 vector<SmInfo*>* SmManager::import(FileReader & fileReader)
 {
-	return importToStorage(fileReader);
-}
-
-vector<SmInfo*>* SmManager::importToStorage(FileReader & fileReader)
-{
 	vector<string>* smNames;
 
 	smNames = fileReader.WhereEndWith(".sm");

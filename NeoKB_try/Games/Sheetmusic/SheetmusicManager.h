@@ -43,6 +43,11 @@ namespace Sheetmusics {
 
 		int Import(vector<string>* paths);
 
+		/// <summary>
+		/// 從系統預設的路徑去抓檔案
+		/// </summary>
+		int ImportFromStable();
+
 		vector<SmInfo*>* GetSmInfos();
 
 		WorkingSm* GetWorkingSm(SmInfo* s);
@@ -53,6 +58,8 @@ namespace Sheetmusics {
 
 		vector<SmInfo*>* smInfos;
 
+		
+
 		/// <summary>
 		/// 會把這些路競裡面的檔案全都讀出來，並且用sm set做成一組一組樂譜，然後佔存到某個地方(資料庫或是?)
 		/// 但是目前沒有做到這個部分，只把樂譜資料先丟進去一個list裡，詳建osu的作法
@@ -62,7 +69,7 @@ namespace Sheetmusics {
 		/// <summary>
 		/// 這個的功能指示把sm裡面的投檔資料讀出來，裡面的event還不需要，裡面的event要等到遊戲開始時再讀
 		/// </summary>
-		vector<SmInfo*>* importToStorage(FileReader& fileReader);
+		//vector<SmInfo*>* importToStorage(FileReader& fileReader); //目前沒有在存回storage所以不用
 
 		// WorkingSm(sm_info_t* s);
 

@@ -421,6 +421,21 @@
     <Filter Include="來源檔案\RulesetMeteor\Timing">
       <UniqueIdentifier>{2604009d-33f9-4f95-adb4-6a774cfb68a6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="標頭檔\Games\Sheetmusics">
+      <UniqueIdentifier>{ef55d41a-fd13-40c4-b64b-a3a3ae222153}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Games\Sheetmusics\Format">
+      <UniqueIdentifier>{0cff3a27-f9d1-4987-bc43-41ba81d4a3c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Games\Sheetmusics\Format\EventParsers">
+      <UniqueIdentifier>{8f992b54-6418-4d8d-adea-acfa5b35aa23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Games\Sheetmusics\Format\Patterns">
+      <UniqueIdentifier>{cb4dfdc1-57fb-49d4-94e7-d53b7b1c5cef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Games\Sheetmusics\Format\IO">
+      <UniqueIdentifier>{3919019a-c35b-4db0-8f50-def38082cb4e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Games\Graphic\Renderer\renderer.cpp">
@@ -819,6 +834,12 @@
     <ClCompile Include="Games\Scheduler\Event\Effect\Algorithm\LinearMapPitchShifter.cpp">
       <Filter>來源檔案\Games\Schedulers\Events\Effects\Algorithms</Filter>
     </ClCompile>
+    <ClCompile Include="Framework\IO\Storage.cpp">
+      <Filter>來源檔案\Framework\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\IO\PlatformStorage.cpp">
+      <Filter>來源檔案\Framework\IO</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="DailyLog.txt">
@@ -847,32 +868,23 @@
     <ClInclude Include="Games\Scheduler\Event\Effect\Effect.h">
       <Filter>標頭檔\Games\Scheduler\Events\Effects</Filter>
     </ClInclude>
-    <ClInclude Include="Games\Sheetmusic\Sheetmusic.h">
-      <Filter>標頭檔\Games\Scheduler\Events\Sheetmusic</Filter>
-    </ClInclude>
     <ClInclude Include="Games\Sheetmusic\SheetmusicConverter.h">
-      <Filter>標頭檔\Games\Scheduler\Events\Sheetmusic</Filter>
+      <Filter>標頭檔\Games\Sheetmusics</Filter>
     </ClInclude>
     <ClInclude Include="Games\Sheetmusic\SheetmusicDifficulty.h">
-      <Filter>標頭檔\Games\Scheduler\Events\Sheetmusic</Filter>
+      <Filter>標頭檔\Games\Sheetmusics</Filter>
     </ClInclude>
     <ClInclude Include="Games\Sheetmusic\SheetmusicInfo.h">
-      <Filter>標頭檔\Games\Scheduler\Events\Sheetmusic</Filter>
+      <Filter>標頭檔\Games\Sheetmusics</Filter>
     </ClInclude>
     <ClInclude Include="Games\Sheetmusic\SheetmusicManager.h">
-      <Filter>標頭檔\Games\Scheduler\Events\Sheetmusic</Filter>
+      <Filter>標頭檔\Games\Sheetmusics</Filter>
     </ClInclude>
     <ClInclude Include="Games\Sheetmusic\SheetmusicMetadata.h">
-      <Filter>標頭檔\Games\Scheduler\Events\Sheetmusic</Filter>
+      <Filter>標頭檔\Games\Sheetmusics</Filter>
     </ClInclude>
     <ClInclude Include="Games\Sheetmusic\WorkingSheetmusic.h">
-      <Filter>標頭檔\Games\Scheduler\Events\Sheetmusic</Filter>
-    </ClInclude>
-    <ClInclude Include="Games\Sheetmusic\IO\FileReader.h">
-      <Filter>標頭檔\Games\Scheduler\Events\Sheetmusic\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="Games\Sheetmusic\Format\Parser\EventParser.h">
-      <Filter>標頭檔\Games\Scheduler\Events\Sheetmusic\Format\EventParser</Filter>
+      <Filter>標頭檔\Games\Sheetmusics</Filter>
     </ClInclude>
     <ClInclude Include="Util\InstanceCreator.h">
       <Filter>標頭檔\Util</Filter>
@@ -889,9 +901,6 @@
     <ClInclude Include="Games\Scheduler\Event\Effect\EffectMapper.h">
       <Filter>標頭檔\Games\Scheduler\Events\Effects</Filter>
     </ClInclude>
-    <ClInclude Include="Games\Sheetmusic\Format\SmDecoder.h">
-      <Filter>標頭檔\Games\Scheduler\Events\Sheetmusic\Format</Filter>
-    </ClInclude>
     <ClInclude Include="Games\Graphic\Renderer\MapAlgorithm\HardwareMapAlgorithm.h">
       <Filter>標頭檔\Games\Graphic\Renderer\MapAlgorithm</Filter>
     </ClInclude>
@@ -906,9 +915,6 @@
     </ClInclude>
     <ClInclude Include="RulesetMeteor\Sheetmusic\MeteorSheetmusicConverter.h">
       <Filter>標頭檔\RulesetMeteor\Sheetmusic</Filter>
-    </ClInclude>
-    <ClInclude Include="Games\Sheetmusic\Pattern\PatternGenerator.h">
-      <Filter>標頭檔\Games\Scheduler\Events\Sheetmusic\Pattern</Filter>
     </ClInclude>
     <ClInclude Include="Games\Scheduler\Event\ControlPoints\ControlPoint.h">
       <Filter>標頭檔\Games\Scheduler\Events\ControlPoints</Filter>
@@ -959,13 +965,10 @@
       <Filter>標頭檔\Games\Scheduler\Events\Effects\Algorithms</Filter>
     </ClInclude>
     <ClInclude Include="Games\Sheetmusic\SheetmusicSetInfo.h">
-      <Filter>標頭檔\Games\Scheduler\Events\Sheetmusic</Filter>
+      <Filter>標頭檔\Games\Sheetmusics</Filter>
     </ClInclude>
     <ClInclude Include="Util\FileSystem.h">
       <Filter>標頭檔\Util</Filter>
-    </ClInclude>
-    <ClInclude Include="Games\Sheetmusic\Pattern\Pattern.h">
-      <Filter>標頭檔\Games\Scheduler\Events\Sheetmusic\Pattern</Filter>
     </ClInclude>
     <ClInclude Include="RulesetMeteor\Sheetmusic\Pattern\MeteorPatternGenerator.h">
       <Filter>標頭檔\RulesetMeteor\Sheetmusic\Patterns</Filter>
@@ -979,14 +982,11 @@
     <ClInclude Include="Util\Log.h">
       <Filter>標頭檔\Util</Filter>
     </ClInclude>
-    <ClInclude Include="Games\Sheetmusic\Format\SimpleSmDecoder.h">
-      <Filter>標頭檔\Games\Scheduler\Events\Sheetmusic\Format</Filter>
-    </ClInclude>
     <ClInclude Include="Util\ProgramInitializer.h">
       <Filter>標頭檔\Util</Filter>
     </ClInclude>
     <ClInclude Include="Games\Sheetmusic\SheetmusicPostprocessor.h">
-      <Filter>標頭檔\Games\Scheduler\Events\Sheetmusic</Filter>
+      <Filter>標頭檔\Games\Sheetmusics</Filter>
     </ClInclude>
     <ClInclude Include="RulesetMeteor\Sheetmusic\MeteorSheetmusicPostProcessor.h">
       <Filter>標頭檔\RulesetMeteor\Sheetmusic</Filter>
@@ -1359,6 +1359,33 @@
     </ClInclude>
     <ClInclude Include="Games\Scheduler\Event\Effect\Algorithm\LinearMapPitchShifter.h">
       <Filter>標頭檔\Games\Scheduler\Events\Effects\Algorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Sheetmusic\Sheetmusic.h">
+      <Filter>標頭檔\Games\Sheetmusics</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Sheetmusic\Format\Parser\EventParser.h">
+      <Filter>標頭檔\Games\Sheetmusics\Format\EventParsers</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Sheetmusic\Format\SmDecoder.h">
+      <Filter>標頭檔\Games\Sheetmusics\Format</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Sheetmusic\Pattern\Pattern.h">
+      <Filter>標頭檔\Games\Sheetmusics\Format\Patterns</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Sheetmusic\Pattern\PatternGenerator.h">
+      <Filter>標頭檔\Games\Sheetmusics\Format\Patterns</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Sheetmusic\IO\FileReader.h">
+      <Filter>標頭檔\Games\Sheetmusics\Format\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Sheetmusic\Format\SimpleSmDecoder.h">
+      <Filter>標頭檔\Games\Sheetmusics\Format</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\IO\Storage.h">
+      <Filter>標頭檔\Framework\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\IO\PlatformStorage.h">
+      <Filter>標頭檔\Framework\IO</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

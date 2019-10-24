@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Framework\IO\PlatformStorage.cpp" />
+    <ClCompile Include="Framework\IO\Storage.cpp" />
     <ClCompile Include="Framework\Timing\SpeedAdjusters\LinearSpeedAdjuster.cpp" />
     <ClCompile Include="Framework\Timing\ThrottledFramedClock.cpp" />
     <ClCompile Include="Framework\Timing\TimeController.cpp" />
@@ -164,6 +166,8 @@
     <Text Include="DailyLog.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Framework\IO\PlatformStorage.h" />
+    <ClInclude Include="Framework\IO\Storage.h" />
     <ClInclude Include="Framework\Timing\SpeedAdjusters\LinearSpeedAdjuster.h" />
     <ClInclude Include="Framework\Timing\TimeController.h" />
     <ClInclude Include="Games\Graphic\Renderer\MapAlgorithm\HardwareMapAlgorithm.h">
