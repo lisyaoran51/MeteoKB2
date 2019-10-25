@@ -8,12 +8,14 @@
 #include "../../../Util/DataStructure/Bindable.h"
 #include "../../Sheetmusic/SheetmusicManager.h"
 #include "../MeteoScene.h"
+#include "../../../Games/UI/SheetmusicSelectPanel.h"
 
 
 using namespace Games::Sheetmusics;
 using namespace Framework::Scenes;
 using namespace Util::DataStructure;
 using namespace Games::Scenes;
+using namespace Games::UI;
 
 
 namespace Games {
@@ -26,6 +28,7 @@ namespace Select {
 	/// </summary>
 	class SongSelect : public MeteoScene {
 
+		SheetmusicSelectPanel* smSelectPanel;
 
 	public:
 

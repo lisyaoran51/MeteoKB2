@@ -61,12 +61,13 @@ int LinearMapPitchShifter::shift()
 			tempPitchSpecificPosition -= movePerFrame;
 
 			/* 如果pitch改了，就回傳0 */
-			if (tempPitch != floor(tempPitchSpecificPosition)) {
-				tempPitch = floor(tempPitchSpecificPosition);
+			if (tempPitch != (Pitch)(int)floor(tempPitchSpecificPosition)) {
+				tempPitch = (Pitch)(int)floor(tempPitchSpecificPosition);
 
 				/* 如果移動超過了，就調回來 */
 				if (tempPitch <= pitchShiftingTo) {
-					tempPitchSpecificPosition = tempPitch = pitchShiftingTo;
+					tempPitch = pitchShiftingTo;
+					tempPitchSpecificPosition = (double)tempPitch;
 					isShifting = false;
 				}
 				return 0;
@@ -75,14 +76,14 @@ int LinearMapPitchShifter::shift()
 		else if (tempPitch < pitchShiftingTo) {
 
 			tempPitchSpecificPosition += movePerFrame;
-
 			/* 如果pitch改了，就回傳0 */
-			if (tempPitch != floor(tempPitchSpecificPosition)) {
-				tempPitch = floor(tempPitchSpecificPosition);
+			if (tempPitch != (Pitch)(int)floor(tempPitchSpecificPosition)) {
+				tempPitch = (Pitch)(int)floor(tempPitchSpecificPosition);
 
 				/* 如果移動超過了，就調回來 */
 				if (tempPitch >= pitchShiftingTo) {
-					tempPitchSpecificPosition = tempPitch = pitchShiftingTo;
+					tempPitch = pitchShiftingTo;
+					tempPitchSpecificPosition = (double)tempPitch;
 					isShifting = false;
 				}
 				return 0;
@@ -91,7 +92,8 @@ int LinearMapPitchShifter::shift()
 		else {
 
 			// TODO: 應該要throw logic_error
-			tempPitchSpecificPosition = tempPitch = pitchShiftingTo;
+			tempPitch = pitchShiftingTo;
+			tempPitchSpecificPosition = (double)tempPitch;
 			isShifting = false;
 
 		}

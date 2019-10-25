@@ -26,7 +26,6 @@ int LinearSpeedAdjuster::ProcessFrame(double elapsedTime)
 			if (seekTimeLeft < 0) {
 				adjustFrameTime += seekTimeLeft;
 				seekTimeLeft = 0;
-				seekTime = 0;
 				isAdjustingTime = false;
 			}
 		}
@@ -41,7 +40,6 @@ int LinearSpeedAdjuster::ProcessFrame(double elapsedTime)
 			if (seekTimeLeft > 0) {
 				adjustFrameTime += seekTimeLeft;
 				seekTimeLeft = 0;
-				seekTime = 0;
 				isAdjustingTime = false;
 			}
 		}

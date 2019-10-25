@@ -21,6 +21,12 @@ int SampleChannel::Stop()
 	return 0;
 }
 
+SampleChannel::SampleChannel()
+{
+	// throw error:這個式檢查用，不會真的執行
+	throw runtime_error("SampleChannel::SampleChannel() : ...");
+}
+
 SampleChannel::SampleChannel(Sample * s)
 {
 	if (s == nullptr)

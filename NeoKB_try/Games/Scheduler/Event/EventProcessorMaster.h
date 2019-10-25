@@ -14,6 +14,7 @@
 #include "../../../Util/DataStructure/PeriodMap.h"
 #include "../../../Framework/Allocation/Hierachal/Triggerable.h"
 #include "../../../Framework/Timing/FramedClock.h"
+#include "../../../Framework/Configurations/FrameworkConfigManager.h"
 
 
 using namespace std;
@@ -23,6 +24,7 @@ using namespace Framework::Graphic::Maps;
 using namespace Framework::Graphic;
 using namespace Framework::Allocation::Hierachal;
 using namespace Framework::Timing;
+using namespace Framework::Configurations;
 
 
 

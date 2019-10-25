@@ -52,6 +52,7 @@ namespace Events {
 		int Attach(EventProcessorMaster* master) {
 			clock = master->GetClock();
 			isAttached = true;
+			return 0;
 		}
 
 		/* clock */

@@ -14,6 +14,8 @@ namespace Samples {
 
 	public:
 
+		
+
 		SampleChannel* GetSampleChannel(string name);
 
 		int Play();
@@ -21,6 +23,8 @@ namespace Samples {
 		int Stop();
 
 	protected:
+
+		SampleChannel();
 
 		SampleChannel(Sample* s);
 

@@ -109,7 +109,6 @@ string PlatformStorage::locateBasePath()
 
 Storage * PlatformStorage::clone(string newSubDirectory)
 {
-	string newSubDirectory;
 	if (subDirectory == "") {
 		if (newSubDirectory == "")
 			return new PlatformStorage(baseName);

@@ -44,7 +44,7 @@ namespace Hierachal {
 		/// <summary>
 		/// 把component的clock和cache設好，然後async
 		/// </summary>
-		virtual int LoadAsync(Clock* c, DependencyContainer* dContainer);
+		virtual int LoadAsync(FrameBasedClock* c, DependencyContainer* dContainer);
 
 	protected:
 

@@ -5,7 +5,6 @@
 #include "../Input/MeteorInputManager.h"
 
 
-using namespace Games::Scenes::Play;
 using namespace Meteor::Input;
 using namespace Framework::Timing;
 

@@ -13,6 +13,7 @@ using namespace Framework::Allocation::Hierachal;
 using namespace Framework::Input::KeyBindings;
 
 
+
 namespace Framework {
 namespace Timing {
 
@@ -57,7 +58,7 @@ namespace Timing {
 
 				if (!GetIsPaused()) {
 					Pause();
-					SetAllChildsIsMaskedForTrigger(false);
+					SetAllChildsIsMaskedForTrigger();
 				}
 				else if(!isWaitingFreeze){
 					speedAdjuster->SetFreezeTime(defaultFreezeTime);
@@ -85,7 +86,7 @@ namespace Timing {
 				//JumpTo(sectionStartTime[getTempSection() + action.second]);
 				if (isPaused)
 					isAdjustAfterPause = true;
-				speedAdjuster->SetAdjustTime(action.second * defaultAdjustTime);
+				speedAdjuster->SetSeekTime(action.second * defaultAdjustTime);
 
 
 			}

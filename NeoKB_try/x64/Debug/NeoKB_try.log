@@ -1,10 +1,23 @@
 ﻿  MeteorTimeController.cpp
+d:\school\新創\程式\meteokb2\neokb_try\framework\timing\decoupledinterpolatingframedclock.h(77): warning C4250: 'Framework::Timing::DecoupledInterpolatingFramedClock': 經由支配繼承 'Framework::Timing::InterpolatingFramedClock::Framework::Timing::InterpolatingFramedClock::GetRate'
+  d:\school\新創\程式\meteokb2\neokb_try\framework\timing\interpolatingframedclock.h(28): note: 請參閱 'Framework::Timing::InterpolatingFramedClock::GetRate' 的宣告
 d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\framework\timing\timecontroller.h(61): error C2660: 'Framework::Allocation::Hierachal::Triggerable::SetAllChildsIsMaskedForTrigger': 函式不使用 1 引數
+  d:\school\新創\程式\meteokb2\neokb_try\framework\timing\timecontroller.h(53): note: 編譯 類別 樣板 成員函式 'int Framework::Timing::TTimeController<Meteor::Input::MeteorAction>::OnButtonDown(T)' 時
+          with
+          [
+              T=Meteor::Input::MeteorAction
+          ]
+  d:\school\新創\程式\meteokb2\neokb_try\rulesetmeteor\timing\meteortimecontroller.h(15): note: 查看要編譯的 類別 樣板 具現化 'Framework::Timing::TTimeController<Meteor::Input::MeteorAction>' 參考
   MeteorRulesetExecutor.cpp
 d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\framework\timing\decoupledinterpolatingframedclock.h(77): warning C4250: 'Framework::Timing::DecoupledInterpolatingFramedClock': 經由支配繼承 'Framework::Timing::InterpolatingFramedClock::Framework::Timing::InterpolatingFramedClock::GetRate'
+  d:\school\新創\程式\meteokb2\neokb_try\framework\timing\interpolatingframedclock.h(28): note: 請參閱 'Framework::Timing::InterpolatingFramedClock::GetRate' 的宣告
 d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\systemevents\systemeventhandler.h(9): fatal error C1083: 無法開啟包含檔案: 'unistd.h': No such file or directory
   MeteorRuleset.cpp
 d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\framework\timing\decoupledinterpolatingframedclock.h(77): warning C4250: 'Framework::Timing::DecoupledInterpolatingFramedClock': 經由支配繼承 'Framework::Timing::InterpolatingFramedClock::Framework::Timing::InterpolatingFramedClock::GetRate'
+  d:\school\新創\程式\meteokb2\neokb_try\framework\timing\interpolatingframedclock.h(28): note: 請參閱 'Framework::Timing::InterpolatingFramedClock::GetRate' 的宣告
 d:\school\新創\程式\meteokb2\neokb_try\framework\input\keybindings\keybindinginputmanager.h(169): error C3867: 'std::vector<Framework::Allocation::Hierachal::Triggerable *,std::allocator<_Ty>>::at': 非標準語法; 請使用 '&' 建立成員的指標
           with
           [
@@ -25,28 +38,24 @@ d:\school\新創\程式\meteokb2\neokb_try\framework\input\keybindings\keybindin
 d:\school\新創\程式\meteokb2\neokb_try\framework\input\keybindings\keybindinginputmanager.h(169): error C2109: 註標必須使用在陣列或指標類型上
   MeteorPlayfield.cpp
 d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
-d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\eventprocessor.h(117): warning C4244: 'return': 將 'double' 轉換為 'float'，由於類型不同，可能導致資料遺失
-  d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\eventprocessor.h(112): note: 編譯 類別 樣板 成員函式 'float Games::Schedulers::Events::EventProcessor<Games::Schedulers::Events::Event>::GetProcessorTimeLeft(void)' 時
-  d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\effect\effectmapper.h(21): note: 查看要編譯的 類別 樣板 具現化 'Games::Schedulers::Events::EventProcessor<Games::Schedulers::Events::Event>' 參考
-d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\eventprocessor.h(119): warning C4244: 'return': 將 'double' 轉換為 'float'，由於類型不同，可能導致資料遺失
-d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\effect\effectmapper.h(101): error C2039: 'GetY': 不是 'Games::Schedulers::Events::Event' 的成員
-  d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\event.h(24): note: 請參閱 'Games::Schedulers::Events::Event' 的宣告
-  d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\effect\effectmapper.h(101): note: 編譯 類別 樣板 成員函式 'int Games::Schedulers::Events::Effects::EffectMapper<T>::GetY(void)' 時
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\keybindings\keybindinginputmanager.h(169): error C3867: 'std::vector<Framework::Allocation::Hierachal::Triggerable *,std::allocator<_Ty>>::at': 非標準語法; 請使用 '&' 建立成員的指標
           with
           [
-              T=Games::Schedulers::Events::Event
+              _Ty=Framework::Allocation::Hierachal::Triggerable *
           ]
-  d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\effect\algorithm\mapalgorithm.h(183): note: 查看要編譯的 類別 樣板 具現化 'Games::Schedulers::Events::Effects::EffectMapper<T>' 參考
+  d:\school\新創\程式\meteokb2\neokb_try\framework\input\keybindings\keybindinginputmanager.h(166): note: 編譯 類別 樣板 成員函式 'int Framework::Input::KeyBindings::KeyBindingInputManager<T>::propagateSlide(std::vector<Framework::Allocation::Hierachal::Triggerable *,std::allocator<_Ty>> *,std::pair<T,int>)' 時
           with
           [
-              T=Games::Schedulers::Events::Event
+              T=Meteor::Input::MeteorAction,
+              _Ty=Framework::Allocation::Hierachal::Triggerable *
           ]
-  d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\effect\algorithm\mapalgorithm.h(178): note: 編譯 類別 樣板 成員函式 'int Games::Schedulers::Events::Effects::Algorithms::MapAlgorithm<Games::Schedulers::Events::Event>::ImplementDraw(Framework::Graphic::Maps::Map *,Games::Schedulers::Events::Effects::EffectMapper<T> *)' 時
+  d:\school\新創\程式\meteokb2\neokb_try\games\input\rulesetinputmanager.h(20): note: 查看要編譯的 類別 樣板 具現化 'Framework::Input::KeyBindings::KeyBindingInputManager<T>' 參考
           with
           [
-              T=Games::Schedulers::Events::Event
+              T=Meteor::Input::MeteorAction
           ]
-  d:\school\新創\程式\meteokb2\neokb_try\rulesetmeteor\play\meteorplayfield.cpp(50): note: 查看要編譯的 類別 樣板 具現化 'Games::Schedulers::Events::Effects::Algorithms::MapAlgorithm<Games::Schedulers::Events::Event>' 參考
+  d:\school\新創\程式\meteokb2\neokb_try\rulesetmeteor\input\meteorinputmanager.h(17): note: 查看要編譯的 類別 樣板 具現化 'Games::Input::RulesetInputManager<Meteor::Input::MeteorAction>' 參考
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\keybindings\keybindinginputmanager.h(169): error C2109: 註標必須使用在陣列或指標類型上
   MeteorInputManager.cpp
 d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
 d:\school\新創\程式\meteokb2\neokb_try\framework\input\keybindings\keybindinginputmanager.h(169): error C3867: 'std::vector<Framework::Allocation::Hierachal::Triggerable *,std::allocator<_Ty>>::at': 非標準語法; 請使用 '&' 建立成員的指標
@@ -67,25 +76,6 @@ d:\school\新創\程式\meteokb2\neokb_try\framework\input\keybindings\keybindin
           ]
   d:\school\新創\程式\meteokb2\neokb_try\rulesetmeteor\input\meteorinputmanager.h(17): note: 查看要編譯的 類別 樣板 具現化 'Games::Input::RulesetInputManager<Meteor::Input::MeteorAction>' 參考
 d:\school\新創\程式\meteokb2\neokb_try\framework\input\keybindings\keybindinginputmanager.h(169): error C2109: 註標必須使用在陣列或指標類型上
-  Piano.cpp
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
-d:\school\新創\程式\meteokb2\neokb_try\instruments\audio\soundbinding.h(29): error C2512: 'Instruments::Audio::SoundBinding': 沒有適當的預設建構函式
-  d:\school\新創\程式\meteokb2\neokb_try\instruments\audio\soundbinding.h(11): note: 請參閱 'Instruments::Audio::SoundBinding' 的宣告
-  d:\school\新創\程式\meteokb2\neokb_try\instruments\audio\soundbinding.h(29): note: 編譯 類別 樣板 成員函式 'Instruments::Audio::TSoundBinding<Instruments::Pitch>::TSoundBinding(std::string,T)' 時
-          with
-          [
-              T=Instruments::Pitch
-          ]
-  d:\school\新創\程式\meteokb2\neokb_try\instruments\piano.cpp(39): note: 請參閱所要編譯的函式 樣板 具現化 'Instruments::Audio::TSoundBinding<Instruments::Pitch>::TSoundBinding(std::string,T)' 之參考
-          with
-          [
-              T=Instruments::Pitch
-          ]
-  d:\school\新創\程式\meteokb2\neokb_try\instruments\piano.cpp(39): note: 查看要編譯的 類別 樣板 具現化 'Instruments::Audio::TSoundBinding<Instruments::Pitch>' 參考
-  MeteoPiano.cpp
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
-  Instrument.cpp
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
   PianoInputManager.cpp
 d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
 d:\school\新創\程式\meteokb2\neokb_try\framework\input\keybindings\keybindinginputmanager.h(169): error C3867: 'std::vector<Framework::Allocation::Hierachal::Triggerable *,std::allocator<_Ty>>::at': 非標準語法; 請使用 '&' 建立成員的指標
@@ -106,37 +96,29 @@ d:\school\新創\程式\meteokb2\neokb_try\framework\input\keybindings\keybindin
           ]
   d:\school\新創\程式\meteokb2\neokb_try\instruments\input\pianoinputmanager.h(16): note: 查看要編譯的 類別 樣板 具現化 'Instruments::Input::InstrumentInputManager<Instruments::Input::PianoAction>' 參考
 d:\school\新創\程式\meteokb2\neokb_try\framework\input\keybindings\keybindinginputmanager.h(169): error C2109: 註標必須使用在陣列或指標類型上
+  SheetmusicSelectPanel.cpp
+d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\framework\timing\decoupledinterpolatingframedclock.h(77): warning C4250: 'Framework::Timing::DecoupledInterpolatingFramedClock': 經由支配繼承 'Framework::Timing::InterpolatingFramedClock::Framework::Timing::InterpolatingFramedClock::GetRate'
+  d:\school\新創\程式\meteokb2\neokb_try\framework\timing\interpolatingframedclock.h(28): note: 請參閱 'Framework::Timing::InterpolatingFramedClock::GetRate' 的宣告
   SystemEventHandler.cpp
+d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
 d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\systemevents\systemeventhandler.h(9): fatal error C1083: 無法開啟包含檔案: 'unistd.h': No such file or directory
   EventProcessorMaster.cpp
 d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
-d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\eventprocessormaster.cpp(102): warning C4244: '引數': 將 'double' 轉換為 'float'，由於類型不同，可能導致資料遺失
-d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\eventprocessormaster.cpp(128): warning C4244: '引數': 將 'double' 轉換為 'float'，由於類型不同，可能導致資料遺失
-d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\eventprocessormaster.cpp(138): error C3867: 'Games::Schedulers::Events::EventProcessor<Games::Schedulers::Events::Event>::GetProcessorLifeType': 非標準語法; 請使用 '&' 建立成員的指標
-d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\eventprocessormaster.cpp(138): error C2678: 二元運算子 '==': 找不到使用左方運算元類型 'overloaded-function' 的運算子 (或是沒有可接受的轉換)
-  d:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.11.25503\include\thread(207): note: 可能是 'bool std::operator ==(std::thread::id,std::thread::id) noexcept'
-  d:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.11.25503\include\system_error(372): note: 或       'bool std::operator ==(const std::error_condition &,const std::error_condition &) noexcept'
-  d:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.11.25503\include\system_error(366): note: 或       'bool std::operator ==(const std::error_condition &,const std::error_code &) noexcept'
-  d:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.11.25503\include\system_error(360): note: 或       'bool std::operator ==(const std::error_code &,const std::error_condition &) noexcept'
-  d:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.11.25503\include\system_error(354): note: 或       'bool std::operator ==(const std::error_code &,const std::error_code &) noexcept'
-  d:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.11.25503\include\exception(342): note: 或       'bool std::operator ==(const std::exception_ptr &,std::nullptr_t) throw()'
-  d:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.11.25503\include\exception(337): note: 或       'bool std::operator ==(std::nullptr_t,const std::exception_ptr &) throw()'
-  d:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.11.25503\include\exception(332): note: 或       'bool std::operator ==(const std::exception_ptr &,const std::exception_ptr &) throw()'
-  d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\eventprocessormaster.cpp(138): note: 當嘗試符合引數清單 '(overloaded-function, Games::Schedulers::Events::EventProcessorLifeType)' 時
-d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\eventprocessormaster.cpp(143): error C3867: 'Games::Schedulers::Events::EventProcessor<Games::Schedulers::Events::Event>::GetProcessorLifeType': 非標準語法; 請使用 '&' 建立成員的指標
-d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\eventprocessormaster.cpp(143): error C2678: 二元運算子 '==': 找不到使用左方運算元類型 'overloaded-function' 的運算子 (或是沒有可接受的轉換)
-  d:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.11.25503\include\thread(207): note: 可能是 'bool std::operator ==(std::thread::id,std::thread::id) noexcept'
-  d:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.11.25503\include\system_error(372): note: 或       'bool std::operator ==(const std::error_condition &,const std::error_condition &) noexcept'
-  d:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.11.25503\include\system_error(366): note: 或       'bool std::operator ==(const std::error_condition &,const std::error_code &) noexcept'
-  d:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.11.25503\include\system_error(360): note: 或       'bool std::operator ==(const std::error_code &,const std::error_condition &) noexcept'
-  d:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.11.25503\include\system_error(354): note: 或       'bool std::operator ==(const std::error_code &,const std::error_code &) noexcept'
-  d:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.11.25503\include\exception(342): note: 或       'bool std::operator ==(const std::exception_ptr &,std::nullptr_t) throw()'
-  d:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.11.25503\include\exception(337): note: 或       'bool std::operator ==(std::nullptr_t,const std::exception_ptr &) throw()'
-  d:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.11.25503\include\exception(332): note: 或       'bool std::operator ==(const std::exception_ptr &,const std::exception_ptr &) throw()'
-  d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\eventprocessormaster.cpp(143): note: 當嘗試符合引數清單 '(overloaded-function, Games::Schedulers::Events::EventProcessorLifeType)' 時
-d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\eventprocessormaster.cpp(178): warning C4244: '引數': 將 'double' 轉換為 'float'，由於類型不同，可能導致資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\eventprocessormaster.cpp(119): warning C4244: '引數': 將 'double' 轉換為 'float'，由於類型不同，可能導致資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\eventprocessormaster.cpp(145): warning C4244: '引數': 將 'double' 轉換為 'float'，由於類型不同，可能導致資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\eventprocessormaster.cpp(195): warning C4244: '引數': 將 'double' 轉換為 'float'，由於類型不同，可能導致資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\eventprocessor.h(117): warning C4244: 'return': 將 'double' 轉換為 'float'，由於類型不同，可能導致資料遺失
+  d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\eventprocessor.h(112): note: 編譯 類別 樣板 成員函式 'float Games::Schedulers::Events::EventProcessor<Games::Schedulers::Events::Event>::GetProcessorTimeLeft(void)' 時
+  d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\eventprocessormaster.cpp(155): note: 請參閱所要編譯的函式 樣板 具現化 'float Games::Schedulers::Events::EventProcessor<Games::Schedulers::Events::Event>::GetProcessorTimeLeft(void)' 之參考
+  d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\effect\effectmapper.h(21): note: 查看要編譯的 類別 樣板 具現化 'Games::Schedulers::Events::EventProcessor<Games::Schedulers::Events::Event>' 參考
+d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\eventprocessor.h(119): warning C4244: 'return': 將 'double' 轉換為 'float'，由於類型不同，可能導致資料遺失
+  LinearMapPitchShifter.cpp
+d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
   SongSelect.cpp
 d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\framework\timing\decoupledinterpolatingframedclock.h(77): warning C4250: 'Framework::Timing::DecoupledInterpolatingFramedClock': 經由支配繼承 'Framework::Timing::InterpolatingFramedClock::Framework::Timing::InterpolatingFramedClock::GetRate'
+  d:\school\新創\程式\meteokb2\neokb_try\framework\timing\interpolatingframedclock.h(28): note: 請參閱 'Framework::Timing::InterpolatingFramedClock::GetRate' 的宣告
 d:\school\新創\程式\meteokb2\neokb_try\framework\allocation\dependencycontainer.h(38): error C2680: 'Games::MeteoGame *': dynamic_cast 的目標類型無效
   d:\school\新創\程式\meteokb2\neokb_try\framework\allocation\dependencycontainer.h(38): note: 'Games::MeteoGame': 類別必須定義之後，才能使用於 dynamic_cast 中
   d:\school\新創\程式\meteokb2\neokb_try\framework\allocation\hierachal\cachable.h(54): note: 請參閱所要編譯的函式 樣板 具現化 'T *Framework::Allocation::DependencyContainer::GetCache<T>(std::string)' 之參考
@@ -144,22 +126,13 @@ d:\school\新創\程式\meteokb2\neokb_try\framework\allocation\dependencycontai
           [
               T=Games::MeteoGame
           ]
-  d:\school\新創\程式\meteokb2\neokb_try\games\scene\select\songselect.cpp(29): note: 請參閱所要編譯的函式 樣板 具現化 'T *Framework::Allocation::Hierachal::Cachable::GetCache<Games::MeteoGame>(std::string)' 之參考
+  d:\school\新創\程式\meteokb2\neokb_try\games\scene\select\songselect.cpp(31): note: 請參閱所要編譯的函式 樣板 具現化 'T *Framework::Allocation::Hierachal::Cachable::GetCache<Games::MeteoGame>(std::string)' 之參考
           with
           [
               T=Games::MeteoGame
           ]
-  Player.cpp
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
-d:\school\新創\程式\meteokb2\neokb_try\framework\timing\offsetframedclock.h(34): warning C4250: 'Framework::Timing::OffsetFramedClock': 經由支配繼承 'Framework::Timing::FramedClock::Framework::Timing::FramedClock::SetRate'
-  d:\school\新創\程式\meteokb2\neokb_try\framework\timing\framedclock.h(23): note: 請參閱 'Framework::Timing::FramedClock::SetRate' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\framework\timing\offsetframedclock.h(34): warning C4250: 'Framework::Timing::OffsetFramedClock': 經由支配繼承 'Framework::Timing::FramedClock::Framework::Timing::FramedClock::GetRate'
-  d:\school\新創\程式\meteokb2\neokb_try\framework\timing\framedclock.h(24): note: 請參閱 'Framework::Timing::FramedClock::GetRate' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\framework\timing\offsetframedclock.h(34): warning C4250: 'Framework::Timing::OffsetFramedClock': 經由支配繼承 'Framework::Timing::FramedClock::Framework::Timing::FramedClock::SetIsRunning'
-  d:\school\新創\程式\meteokb2\neokb_try\framework\timing\framedclock.h(27): note: 請參閱 'Framework::Timing::FramedClock::SetIsRunning' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\framework\timing\offsetframedclock.h(34): warning C4250: 'Framework::Timing::OffsetFramedClock': 經由支配繼承 'Framework::Timing::FramedClock::Framework::Timing::FramedClock::GetIsRunning'
-  d:\school\新創\程式\meteokb2\neokb_try\framework\timing\framedclock.h(28): note: 請參閱 'Framework::Timing::FramedClock::GetIsRunning' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\games\scene\play\player.cpp(47): error C2594: '引數': 從 'Framework::Timing::DecoupledInterpolatingFramedClock *' 至 'Framework::Timing::Clock *' 的轉換模稜兩可
+  ThrottledFramedClock.cpp
+d:\school\新創\程式\meteokb2\neokb_try\framework\timing\throttledframedclock.cpp(4): fatal error C1083: 無法開啟包含檔案: 'unistd.h': No such file or directory
   MeteoGameHost.cpp
 d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
 d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\actionlist.h(27): error C2091: 函式傳回函式
@@ -184,33 +157,25 @@ d:\school\新創\程式\meteokb2\neokb_try\framework\input\keybindings\keybindin
           ]
   d:\school\新創\程式\meteokb2\neokb_try\framework\input\userinputmanager.h(13): note: 查看要編譯的 類別 樣板 具現化 'Framework::Input::KeyBindings::KeyBindingInputManager<Framework::Input::FrameworkAction>' 參考
 d:\school\新創\程式\meteokb2\neokb_try\framework\input\keybindings\keybindinginputmanager.h(169): error C2109: 註標必須使用在陣列或指標類型上
-  PassThroughInputManager.cpp
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\passthroughinputmanager.cpp(15): error C2280: 'Framework::Input::CustomInputManager::CustomInputManager(void)': 嘗試參考被刪除的函式
-  d:\school\新創\程式\meteokb2\neokb_try\framework\input\custominputmanager.h(26): note: 編譯器在此處產生了 'Framework::Input::CustomInputManager::CustomInputManager'
-  d:\school\新創\程式\meteokb2\neokb_try\framework\input\custominputmanager.h(26): note: 'Framework::Input::CustomInputManager::CustomInputManager(void)': 基底類別 'Framework::Allocation::Hierachal::RegisterType' 不具適當的 預設建構函式 或多載解析模稜兩可，意味著函式已刪除
-  d:\school\新創\程式\meteokb2\neokb_try\framework\allocation\hierachal\mtoobject.h(17): note: 請參閱 'Framework::Allocation::Hierachal::RegisterType' 的宣告
   PanelInputHandler.cpp
 d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\panelinputhandler.cpp(14): error C2027: 使用未定義類型 'Framework::IO::Panel'
-  d:\school\新創\程式\meteokb2\neokb_try\framework\io\maininterface.h(27): note: 請參閱 'Framework::IO::Panel' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\panelinputhandler.cpp(15): error C2227: '->AddOnPanelEvent' 的左邊必須指向類別/結構/等位/泛型類型
+d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\actionlist.h(27): error C2091: 函式傳回函式
+  d:\school\新創\程式\meteokb2\neokb_try\framework\io\panel.h(52): note: 查看要編譯的 類別 樣板 具現化 'Util::DataStructure::ActionList<int (Framework::Input::InputState *)>' 參考
+d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\actionlist.h(32): error C2091: 函式傳回函式
   KeyboardInputHandler.cpp
 d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\keyboardinputhandler.cpp(13): error C2027: 使用未定義類型 'Framework::IO::Keyboard'
-  d:\school\新創\程式\meteokb2\neokb_try\framework\io\maininterface.h(29): note: 請參閱 'Framework::IO::Keyboard' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\keyboardinputhandler.cpp(14): error C2227: '->AddOnKeyEvent' 的左邊必須指向類別/結構/等位/泛型類型
+d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\actionlist.h(27): error C2091: 函式傳回函式
+  d:\school\新創\程式\meteokb2\neokb_try\framework\io\keyboard.h(47): note: 查看要編譯的 類別 樣板 具現化 'Util::DataStructure::ActionList<int (Framework::Input::InputState *)>' 參考
+d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\actionlist.h(32): error C2091: 函式傳回函式
   BluetoothInputHandler.cpp
 d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\bluetoothinputhandler.cpp(8): error C2027: 使用未定義類型 'Framework::IO::BluetoothPhone'
-  d:\school\新創\程式\meteokb2\neokb_try\framework\io\maininterface.h(28): note: 請參閱 'Framework::IO::BluetoothPhone' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\framework\input\handler\bluetoothinputhandler.cpp(9): error C2227: '->AddOnCommand' 的左邊必須指向類別/結構/等位/泛型類型
+d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\actionlist.h(27): error C2091: 函式傳回函式
+  d:\school\新創\程式\meteokb2\neokb_try\framework\io\bluetoothphone.h(52): note: 查看要編譯的 類別 樣板 具現化 'Util::DataStructure::ActionList<int (Framework::Input::InputState *)>' 參考
+d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\actionlist.h(32): error C2091: 函式傳回函式
   DynamicPathResourceStore.cpp
-d:\school\新創\程式\meteokb2\neokb_try\framework\io\stores\resourcestore.h(128): error C2061: 語法錯誤: 識別項 'LinuxFileSystem'
-  d:\school\新創\程式\meteokb2\neokb_try\framework\io\stores\resourcestore.h(125): note: 編譯 類別 樣板 成員函式 'int Framework::IO::Stores::ResourceStore<char *>::initializeFileSystemInterface(void)' 時
+d:\school\新創\程式\meteokb2\neokb_try\framework\io\stores\resourcestore.h(129): error C2061: 語法錯誤: 識別項 'LinuxFileSystem'
+  d:\school\新創\程式\meteokb2\neokb_try\framework\io\stores\resourcestore.h(126): note: 編譯 類別 樣板 成員函式 'int Framework::IO::Stores::ResourceStore<char *>::initializeFileSystemInterface(void)' 時
   d:\school\新創\程式\meteokb2\neokb_try\framework\io\stores\dynamicpathresourcestore.h(23): note: 查看要編譯的 類別 樣板 具現化 'Framework::IO::Stores::ResourceStore<char *>' 參考
-  正在產生程式碼...
-  正在編譯...
   Panel.cpp
 d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\actionlist.h(27): error C2091: 函式傳回函式
   d:\school\新創\程式\meteokb2\neokb_try\framework\io\panel.h(52): note: 查看要編譯的 類別 樣板 具現化 'Util::DataStructure::ActionList<int (Framework::Input::InputState *)>' 參考
@@ -220,6 +185,10 @@ d:\school\新創\程式\meteokb2\neokb_try\framework\io\panel.cpp(20): error C26
 d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\actionlist.h(27): error C2091: 函式傳回函式
   d:\school\新創\程式\meteokb2\neokb_try\framework\io\keyboard.h(47): note: 查看要編譯的 類別 樣板 具現化 'Util::DataStructure::ActionList<int (Framework::Input::InputState *)>' 參考
 d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\actionlist.h(32): error C2091: 函式傳回函式
+  正在產生程式碼...
+d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\eventprocessor.h(55): error C4716: 'Games::Schedulers::Events::EventProcessor<Games::Schedulers::Events::Event>::Attach': 必須傳回值
+d:\school\新創\程式\meteokb2\neokb_try\games\ui\sheetmusicselectpanel.cpp(61): error C4700: 使用了未初始化的區域變數 'smInfo'
+  正在編譯...
   Keyboard.cpp
 d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\actionlist.h(27): error C2091: 函式傳回函式
   d:\school\新創\程式\meteokb2\neokb_try\framework\io\keyboard.h(47): note: 查看要編譯的 類別 樣板 具現化 'Util::DataStructure::ActionList<int (Framework::Input::InputState *)>' 參考
@@ -247,8 +216,8 @@ d:\school\新創\程式\meteokb2\neokb_try\framework\input\keybindings\keybindin
 d:\school\新創\程式\meteokb2\neokb_try\framework\input\keybindings\keybindinginputmanager.h(169): error C2109: 註標必須使用在陣列或指標類型上
   Game.cpp
 d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
-d:\school\新創\程式\meteokb2\neokb_try\framework\io\stores\resourcestore.h(128): error C2061: 語法錯誤: 識別項 'LinuxFileSystem'
-  d:\school\新創\程式\meteokb2\neokb_try\framework\io\stores\resourcestore.h(125): note: 編譯 類別 樣板 成員函式 'int Framework::IO::Stores::ResourceStore<char *>::initializeFileSystemInterface(void)' 時
+d:\school\新創\程式\meteokb2\neokb_try\framework\io\stores\resourcestore.h(129): error C2061: 語法錯誤: 識別項 'LinuxFileSystem'
+  d:\school\新創\程式\meteokb2\neokb_try\framework\io\stores\resourcestore.h(126): note: 編譯 類別 樣板 成員函式 'int Framework::IO::Stores::ResourceStore<char *>::initializeFileSystemInterface(void)' 時
   d:\school\新創\程式\meteokb2\neokb_try\framework\io\stores\dynamicpathresourcestore.h(23): note: 查看要編譯的 類別 樣板 具現化 'Framework::IO::Stores::ResourceStore<char *>' 參考
   PanelDevice.cpp
 d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\actionlist.h(27): error C2091: 函式傳回函式
@@ -264,8 +233,8 @@ d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\actionlist.h(27): 
 d:\school\新創\程式\meteokb2\neokb_try\util\datastructure\actionlist.h(32): error C2091: 函式傳回函式
   Base.cpp
 d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
-d:\school\新創\程式\meteokb2\neokb_try\framework\io\stores\resourcestore.h(128): error C2061: 語法錯誤: 識別項 'LinuxFileSystem'
-  d:\school\新創\程式\meteokb2\neokb_try\framework\io\stores\resourcestore.h(125): note: 編譯 類別 樣板 成員函式 'int Framework::IO::Stores::ResourceStore<char *>::initializeFileSystemInterface(void)' 時
+d:\school\新創\程式\meteokb2\neokb_try\framework\io\stores\resourcestore.h(129): error C2061: 語法錯誤: 識別項 'LinuxFileSystem'
+  d:\school\新創\程式\meteokb2\neokb_try\framework\io\stores\resourcestore.h(126): note: 編譯 類別 樣板 成員函式 'int Framework::IO::Stores::ResourceStore<char *>::initializeFileSystemInterface(void)' 時
   d:\school\新創\程式\meteokb2\neokb_try\framework\io\stores\dynamicpathresourcestore.h(23): note: 查看要編譯的 類別 樣板 具現化 'Framework::IO::Stores::ResourceStore<char *>' 參考
   TrackManager.cpp
 d:\school\新創\程式\meteokb2\neokb_try\util\templateconstraint.h(41): error C2259: 'Framework::Audio::Tracks::Track': 無法產生抽象類別
@@ -307,65 +276,16 @@ d:\school\新創\程式\meteokb2\neokb_try\util\templateconstraint.h(41): error 
           ]
   d:\school\新創\程式\meteokb2\neokb_try\framework\audio\sample\samplemanager.h(16): note: 查看要編譯的 類別 樣板 具現化 'Framework::Audio::AudioCollectionManager<Framework::Audio::Samples::SampleChannel>' 參考
   AudioManager.cpp
-d:\school\新創\程式\meteokb2\neokb_try\framework\io\stores\resourcestore.h(128): error C2061: 語法錯誤: 識別項 'LinuxFileSystem'
-  d:\school\新創\程式\meteokb2\neokb_try\framework\io\stores\resourcestore.h(125): note: 編譯 類別 樣板 成員函式 'int Framework::IO::Stores::ResourceStore<char *>::initializeFileSystemInterface(void)' 時
+d:\school\新創\程式\meteokb2\neokb_try\framework\io\stores\resourcestore.h(129): error C2061: 語法錯誤: 識別項 'LinuxFileSystem'
+  d:\school\新創\程式\meteokb2\neokb_try\framework\io\stores\resourcestore.h(126): note: 編譯 類別 樣板 成員函式 'int Framework::IO::Stores::ResourceStore<char *>::initializeFileSystemInterface(void)' 時
   d:\school\新創\程式\meteokb2\neokb_try\framework\audio\audiomanager.cpp(13): note: 查看要編譯的 類別 樣板 具現化 'Framework::IO::Stores::ResourceStore<char *>' 參考
-  LoadStateHandler.cpp
+  Updatable.cpp
   WS2812v10Renderer.cpp
 c1xx : fatal error C1083: 無法開啟來源檔案: 'Devices\Graphic\Renderers\WS2812v10Renderer.cpp': No such file or directory
   正在產生程式碼...
   正在編譯...
-  MeteorGame.cpp
+  MeteorPatternGenerator.cpp
 d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
-  SheetmusicManager.cpp
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
-  PlaySongSelect.cpp
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
-d:\school\新創\程式\meteokb2\neokb_try\framework\timing\offsetframedclock.h(34): warning C4250: 'Framework::Timing::OffsetFramedClock': 經由支配繼承 'Framework::Timing::FramedClock::Framework::Timing::FramedClock::SetRate'
-  d:\school\新創\程式\meteokb2\neokb_try\framework\timing\framedclock.h(23): note: 請參閱 'Framework::Timing::FramedClock::SetRate' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\framework\timing\offsetframedclock.h(34): warning C4250: 'Framework::Timing::OffsetFramedClock': 經由支配繼承 'Framework::Timing::FramedClock::Framework::Timing::FramedClock::GetRate'
-  d:\school\新創\程式\meteokb2\neokb_try\framework\timing\framedclock.h(24): note: 請參閱 'Framework::Timing::FramedClock::GetRate' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\framework\timing\offsetframedclock.h(34): warning C4250: 'Framework::Timing::OffsetFramedClock': 經由支配繼承 'Framework::Timing::FramedClock::Framework::Timing::FramedClock::SetIsRunning'
-  d:\school\新創\程式\meteokb2\neokb_try\framework\timing\framedclock.h(27): note: 請參閱 'Framework::Timing::FramedClock::SetIsRunning' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\framework\timing\offsetframedclock.h(34): warning C4250: 'Framework::Timing::OffsetFramedClock': 經由支配繼承 'Framework::Timing::FramedClock::Framework::Timing::FramedClock::GetIsRunning'
-  d:\school\新創\程式\meteokb2\neokb_try\framework\timing\framedclock.h(28): note: 請參閱 'Framework::Timing::FramedClock::GetIsRunning' 的宣告
-  MainMenu.cpp
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
-  TimeController.cpp
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
-d:\school\新創\程式\meteokb2\neokb_try\games\scene\play\timecontroller.cpp(55): warning C4267: 'return': 將 'size_t' 轉換為 'int'，資料可能遺失
-d:\school\新創\程式\meteokb2\neokb_try\games\scene\play\timecontroller.cpp(65): warning C4267: 'return': 將 'size_t' 轉換為 'int'，資料可能遺失
-  PlayerLoader.cpp
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
-d:\school\新創\程式\meteokb2\neokb_try\framework\timing\offsetframedclock.h(34): warning C4250: 'Framework::Timing::OffsetFramedClock': 經由支配繼承 'Framework::Timing::FramedClock::Framework::Timing::FramedClock::SetRate'
-  d:\school\新創\程式\meteokb2\neokb_try\framework\timing\framedclock.h(23): note: 請參閱 'Framework::Timing::FramedClock::SetRate' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\framework\timing\offsetframedclock.h(34): warning C4250: 'Framework::Timing::OffsetFramedClock': 經由支配繼承 'Framework::Timing::FramedClock::Framework::Timing::FramedClock::GetRate'
-  d:\school\新創\程式\meteokb2\neokb_try\framework\timing\framedclock.h(24): note: 請參閱 'Framework::Timing::FramedClock::GetRate' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\framework\timing\offsetframedclock.h(34): warning C4250: 'Framework::Timing::OffsetFramedClock': 經由支配繼承 'Framework::Timing::FramedClock::Framework::Timing::FramedClock::SetIsRunning'
-  d:\school\新創\程式\meteokb2\neokb_try\framework\timing\framedclock.h(27): note: 請參閱 'Framework::Timing::FramedClock::SetIsRunning' 的宣告
-d:\school\新創\程式\meteokb2\neokb_try\framework\timing\offsetframedclock.h(34): warning C4250: 'Framework::Timing::OffsetFramedClock': 經由支配繼承 'Framework::Timing::FramedClock::Framework::Timing::FramedClock::GetIsRunning'
-  d:\school\新創\程式\meteokb2\neokb_try\framework\timing\framedclock.h(28): note: 請參閱 'Framework::Timing::FramedClock::GetIsRunning' 的宣告
-  MeteoScene.cpp
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
-  Intro.cpp
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
-  RulesetInfo.cpp
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
-  Ruleset.cpp
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
-  MeteoGame.cpp
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
-  正在產生程式碼...
-  正在編譯...
-  Playfield.cpp
-d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
-d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\eventprocessor.h(117): warning C4244: 'return': 將 'double' 轉換為 'float'，由於類型不同，可能導致資料遺失
-  d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\eventprocessor.h(112): note: 編譯 類別 樣板 成員函式 'float Games::Schedulers::Events::EventProcessor<Games::Schedulers::Events::Event>::GetProcessorTimeLeft(void)' 時
-  d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\effect\effectmapper.h(21): note: 查看要編譯的 類別 樣板 具現化 'Games::Schedulers::Events::EventProcessor<Games::Schedulers::Events::Event>' 參考
-d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\eventprocessor.h(119): warning C4244: 'return': 將 'double' 轉換為 'float'，由於類型不同，可能導致資料遺失
-  正在產生程式碼...
-d:\school\新創\程式\meteokb2\neokb_try\games\scene\play\playfield.cpp(82): warning C4715: 'Games::Scenes::Play::Playfield::load': 不是所有控制路徑都傳回值
-  正在編譯...
   TargetLineEffectMapper.cpp
 d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
 d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\eventprocessor.h(117): warning C4244: 'return': 將 'double' 轉換為 'float'，由於類型不同，可能導致資料遺失
@@ -378,12 +298,12 @@ d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\effect\algorith
           [
               T=Meteor::Schedulers::Events::Effects::TargetLineEffect
           ]
-  d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\effect\algorithm\mapalgorithm.h(185): note: 查看要編譯的 類別 樣板 具現化 'Games::Schedulers::Events::Effects::Algorithms::MapShiftAlgorithm<T>' 參考
+  d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\effect\algorithm\mapalgorithm.h(197): note: 查看要編譯的 類別 樣板 具現化 'Games::Schedulers::Events::Effects::Algorithms::MapShiftAlgorithm<T>' 參考
           with
           [
               T=Meteor::Schedulers::Events::Effects::TargetLineEffect
           ]
-  d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\effect\algorithm\mapalgorithm.h(178): note: 編譯 類別 樣板 成員函式 'int Games::Schedulers::Events::Effects::Algorithms::MapAlgorithm<T>::ImplementDraw(Framework::Graphic::Maps::Map *,Games::Schedulers::Events::Effects::EffectMapper<T> *)' 時
+  d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\effect\algorithm\mapalgorithm.h(190): note: 編譯 類別 樣板 成員函式 'int Games::Schedulers::Events::Effects::Algorithms::MapAlgorithm<T>::ImplementDraw(Framework::Graphic::Maps::Map *,Games::Schedulers::Events::Effects::EffectMapper<T> *)' 時
           with
           [
               T=Meteor::Schedulers::Events::Effects::TargetLineEffect
@@ -412,12 +332,12 @@ d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\effect\algorith
           [
               T=Meteor::Schedulers::Events::Effects::GlowLineEffect
           ]
-  d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\effect\algorithm\mapalgorithm.h(185): note: 查看要編譯的 類別 樣板 具現化 'Games::Schedulers::Events::Effects::Algorithms::MapShiftAlgorithm<T>' 參考
+  d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\effect\algorithm\mapalgorithm.h(197): note: 查看要編譯的 類別 樣板 具現化 'Games::Schedulers::Events::Effects::Algorithms::MapShiftAlgorithm<T>' 參考
           with
           [
               T=Meteor::Schedulers::Events::Effects::GlowLineEffect
           ]
-  d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\effect\algorithm\mapalgorithm.h(178): note: 編譯 類別 樣板 成員函式 'int Games::Schedulers::Events::Effects::Algorithms::MapAlgorithm<T>::ImplementDraw(Framework::Graphic::Maps::Map *,Games::Schedulers::Events::Effects::EffectMapper<T> *)' 時
+  d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\effect\algorithm\mapalgorithm.h(190): note: 編譯 類別 樣板 成員函式 'int Games::Schedulers::Events::Effects::Algorithms::MapAlgorithm<T>::ImplementDraw(Framework::Graphic::Maps::Map *,Games::Schedulers::Events::Effects::EffectMapper<T> *)' 時
           with
           [
               T=Meteor::Schedulers::Events::Effects::GlowLineEffect
@@ -446,12 +366,12 @@ d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\effect\algorith
           [
               T=Meteor::Schedulers::Events::Effects::FallEffect
           ]
-  d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\effect\algorithm\mapalgorithm.h(185): note: 查看要編譯的 類別 樣板 具現化 'Games::Schedulers::Events::Effects::Algorithms::MapShiftAlgorithm<T>' 參考
+  d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\effect\algorithm\mapalgorithm.h(197): note: 查看要編譯的 類別 樣板 具現化 'Games::Schedulers::Events::Effects::Algorithms::MapShiftAlgorithm<T>' 參考
           with
           [
               T=Meteor::Schedulers::Events::Effects::FallEffect
           ]
-  d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\effect\algorithm\mapalgorithm.h(178): note: 編譯 類別 樣板 成員函式 'int Games::Schedulers::Events::Effects::Algorithms::MapAlgorithm<T>::ImplementDraw(Framework::Graphic::Maps::Map *,Games::Schedulers::Events::Effects::EffectMapper<T> *)' 時
+  d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\effect\algorithm\mapalgorithm.h(190): note: 編譯 類別 樣板 成員函式 'int Games::Schedulers::Events::Effects::Algorithms::MapAlgorithm<T>::ImplementDraw(Framework::Graphic::Maps::Map *,Games::Schedulers::Events::Effects::EffectMapper<T> *)' 時
           with
           [
               T=Meteor::Schedulers::Events::Effects::FallEffect
@@ -480,12 +400,12 @@ d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\effect\algorith
           [
               T=Meteor::Schedulers::Events::Effects::ExplodeEffect
           ]
-  d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\effect\algorithm\mapalgorithm.h(185): note: 查看要編譯的 類別 樣板 具現化 'Games::Schedulers::Events::Effects::Algorithms::MapShiftAlgorithm<T>' 參考
+  d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\effect\algorithm\mapalgorithm.h(197): note: 查看要編譯的 類別 樣板 具現化 'Games::Schedulers::Events::Effects::Algorithms::MapShiftAlgorithm<T>' 參考
           with
           [
               T=Meteor::Schedulers::Events::Effects::ExplodeEffect
           ]
-  d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\effect\algorithm\mapalgorithm.h(178): note: 編譯 類別 樣板 成員函式 'int Games::Schedulers::Events::Effects::Algorithms::MapAlgorithm<T>::ImplementDraw(Framework::Graphic::Maps::Map *,Games::Schedulers::Events::Effects::EffectMapper<T> *)' 時
+  d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\effect\algorithm\mapalgorithm.h(190): note: 編譯 類別 樣板 成員函式 'int Games::Schedulers::Events::Effects::Algorithms::MapAlgorithm<T>::ImplementDraw(Framework::Graphic::Maps::Map *,Games::Schedulers::Events::Effects::EffectMapper<T> *)' 時
           with
           [
               T=Meteor::Schedulers::Events::Effects::ExplodeEffect
@@ -593,14 +513,139 @@ d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\eventprocessor.
   d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\eventprocessor.h(112): note: 編譯 類別 樣板 成員函式 'float Games::Schedulers::Events::EventProcessor<Games::Schedulers::Events::Event>::GetProcessorTimeLeft(void)' 時
   d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\effect\effectmapper.h(21): note: 查看要編譯的 類別 樣板 具現化 'Games::Schedulers::Events::EventProcessor<Games::Schedulers::Events::Event>' 參考
 d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\eventprocessor.h(119): warning C4244: 'return': 將 'double' 轉換為 'float'，由於類型不同，可能導致資料遺失
+  MeteorGame.cpp
+d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\framework\timing\decoupledinterpolatingframedclock.h(77): warning C4250: 'Framework::Timing::DecoupledInterpolatingFramedClock': 經由支配繼承 'Framework::Timing::InterpolatingFramedClock::Framework::Timing::InterpolatingFramedClock::GetRate'
+  d:\school\新創\程式\meteokb2\neokb_try\framework\timing\interpolatingframedclock.h(28): note: 請參閱 'Framework::Timing::InterpolatingFramedClock::GetRate' 的宣告
+  MeteorConfigManager.cpp
+d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
+  Piano.cpp
+d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
+  MeteoPiano.cpp
+d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
+  Instrument.cpp
+d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
+  SheetmusicManager.cpp
+d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\framework\timing\decoupledinterpolatingframedclock.h(77): warning C4250: 'Framework::Timing::DecoupledInterpolatingFramedClock': 經由支配繼承 'Framework::Timing::InterpolatingFramedClock::Framework::Timing::InterpolatingFramedClock::GetRate'
+  d:\school\新創\程式\meteokb2\neokb_try\framework\timing\interpolatingframedclock.h(28): note: 請參閱 'Framework::Timing::InterpolatingFramedClock::GetRate' 的宣告
+  PatternGenerator.cpp
+d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\games\sheetmusic\pattern\patterngenerator.cpp(18): warning C4390: ';': 找到空白的控制陳述式，是正確的嗎?
+d:\school\新創\程式\meteokb2\neokb_try\games\sheetmusic\pattern\patterngenerator.cpp(19): warning C4390: ';': 找到空白的控制陳述式，是正確的嗎?
+d:\school\新創\程式\meteokb2\neokb_try\games\sheetmusic\pattern\patterngenerator.cpp(20): warning C4390: ';': 找到空白的控制陳述式，是正確的嗎?
+d:\school\新創\程式\meteokb2\neokb_try\games\sheetmusic\pattern\patterngenerator.cpp(21): warning C4390: ';': 找到空白的控制陳述式，是正確的嗎?
+d:\school\新創\程式\meteokb2\neokb_try\games\sheetmusic\pattern\patterngenerator.cpp(22): warning C4390: ';': 找到空白的控制陳述式，是正確的嗎?
+d:\school\新創\程式\meteokb2\neokb_try\games\sheetmusic\pattern\patterngenerator.cpp(23): warning C4390: ';': 找到空白的控制陳述式，是正確的嗎?
+  MapPitchShifter.cpp
+d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
+  PlaySongSelect.cpp
+d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\framework\timing\decoupledinterpolatingframedclock.h(77): warning C4250: 'Framework::Timing::DecoupledInterpolatingFramedClock': 經由支配繼承 'Framework::Timing::InterpolatingFramedClock::Framework::Timing::InterpolatingFramedClock::GetRate'
+  d:\school\新創\程式\meteokb2\neokb_try\framework\timing\interpolatingframedclock.h(28): note: 請參閱 'Framework::Timing::InterpolatingFramedClock::GetRate' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\timing\offsetframedclock.h(34): warning C4250: 'Framework::Timing::OffsetFramedClock': 經由支配繼承 'Framework::Timing::FramedClock::Framework::Timing::FramedClock::SetRate'
+  d:\school\新創\程式\meteokb2\neokb_try\framework\timing\framedclock.h(23): note: 請參閱 'Framework::Timing::FramedClock::SetRate' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\timing\offsetframedclock.h(34): warning C4250: 'Framework::Timing::OffsetFramedClock': 經由支配繼承 'Framework::Timing::FramedClock::Framework::Timing::FramedClock::GetRate'
+  d:\school\新創\程式\meteokb2\neokb_try\framework\timing\framedclock.h(24): note: 請參閱 'Framework::Timing::FramedClock::GetRate' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\timing\offsetframedclock.h(34): warning C4250: 'Framework::Timing::OffsetFramedClock': 經由支配繼承 'Framework::Timing::FramedClock::Framework::Timing::FramedClock::SetIsRunning'
+  d:\school\新創\程式\meteokb2\neokb_try\framework\timing\framedclock.h(26): note: 請參閱 'Framework::Timing::FramedClock::SetIsRunning' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\timing\offsetframedclock.h(34): warning C4250: 'Framework::Timing::OffsetFramedClock': 經由支配繼承 'Framework::Timing::FramedClock::Framework::Timing::FramedClock::GetIsRunning'
+  d:\school\新創\程式\meteokb2\neokb_try\framework\timing\framedclock.h(27): note: 請參閱 'Framework::Timing::FramedClock::GetIsRunning' 的宣告
+  MainMenu.cpp
+d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\framework\timing\decoupledinterpolatingframedclock.h(77): warning C4250: 'Framework::Timing::DecoupledInterpolatingFramedClock': 經由支配繼承 'Framework::Timing::InterpolatingFramedClock::Framework::Timing::InterpolatingFramedClock::GetRate'
+  d:\school\新創\程式\meteokb2\neokb_try\framework\timing\interpolatingframedclock.h(28): note: 請參閱 'Framework::Timing::InterpolatingFramedClock::GetRate' 的宣告
+  Playfield.cpp
+d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\eventprocessor.h(117): warning C4244: 'return': 將 'double' 轉換為 'float'，由於類型不同，可能導致資料遺失
+  d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\eventprocessor.h(112): note: 編譯 類別 樣板 成員函式 'float Games::Schedulers::Events::EventProcessor<Games::Schedulers::Events::Event>::GetProcessorTimeLeft(void)' 時
+  d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\effect\effectmapper.h(21): note: 查看要編譯的 類別 樣板 具現化 'Games::Schedulers::Events::EventProcessor<Games::Schedulers::Events::Event>' 參考
+d:\school\新創\程式\meteokb2\neokb_try\games\scheduler\event\eventprocessor.h(119): warning C4244: 'return': 將 'double' 轉換為 'float'，由於類型不同，可能導致資料遺失
+  正在產生程式碼...
+d:\school\新創\程式\meteokb2\neokb_try\games\scene\play\playfield.cpp(89): warning C4715: 'Games::Scenes::Play::Playfield::load': 不是所有控制路徑都傳回值
+  正在編譯...
+  PlayerLoader.cpp
+d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\framework\timing\decoupledinterpolatingframedclock.h(77): warning C4250: 'Framework::Timing::DecoupledInterpolatingFramedClock': 經由支配繼承 'Framework::Timing::InterpolatingFramedClock::Framework::Timing::InterpolatingFramedClock::GetRate'
+  d:\school\新創\程式\meteokb2\neokb_try\framework\timing\interpolatingframedclock.h(28): note: 請參閱 'Framework::Timing::InterpolatingFramedClock::GetRate' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\timing\offsetframedclock.h(34): warning C4250: 'Framework::Timing::OffsetFramedClock': 經由支配繼承 'Framework::Timing::FramedClock::Framework::Timing::FramedClock::SetRate'
+  d:\school\新創\程式\meteokb2\neokb_try\framework\timing\framedclock.h(23): note: 請參閱 'Framework::Timing::FramedClock::SetRate' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\timing\offsetframedclock.h(34): warning C4250: 'Framework::Timing::OffsetFramedClock': 經由支配繼承 'Framework::Timing::FramedClock::Framework::Timing::FramedClock::GetRate'
+  d:\school\新創\程式\meteokb2\neokb_try\framework\timing\framedclock.h(24): note: 請參閱 'Framework::Timing::FramedClock::GetRate' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\timing\offsetframedclock.h(34): warning C4250: 'Framework::Timing::OffsetFramedClock': 經由支配繼承 'Framework::Timing::FramedClock::Framework::Timing::FramedClock::SetIsRunning'
+  d:\school\新創\程式\meteokb2\neokb_try\framework\timing\framedclock.h(26): note: 請參閱 'Framework::Timing::FramedClock::SetIsRunning' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\timing\offsetframedclock.h(34): warning C4250: 'Framework::Timing::OffsetFramedClock': 經由支配繼承 'Framework::Timing::FramedClock::Framework::Timing::FramedClock::GetIsRunning'
+  d:\school\新創\程式\meteokb2\neokb_try\framework\timing\framedclock.h(27): note: 請參閱 'Framework::Timing::FramedClock::GetIsRunning' 的宣告
+  Player.cpp
+d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\framework\timing\decoupledinterpolatingframedclock.h(77): warning C4250: 'Framework::Timing::DecoupledInterpolatingFramedClock': 經由支配繼承 'Framework::Timing::InterpolatingFramedClock::Framework::Timing::InterpolatingFramedClock::GetRate'
+  d:\school\新創\程式\meteokb2\neokb_try\framework\timing\interpolatingframedclock.h(28): note: 請參閱 'Framework::Timing::InterpolatingFramedClock::GetRate' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\timing\offsetframedclock.h(34): warning C4250: 'Framework::Timing::OffsetFramedClock': 經由支配繼承 'Framework::Timing::FramedClock::Framework::Timing::FramedClock::SetRate'
+  d:\school\新創\程式\meteokb2\neokb_try\framework\timing\framedclock.h(23): note: 請參閱 'Framework::Timing::FramedClock::SetRate' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\timing\offsetframedclock.h(34): warning C4250: 'Framework::Timing::OffsetFramedClock': 經由支配繼承 'Framework::Timing::FramedClock::Framework::Timing::FramedClock::GetRate'
+  d:\school\新創\程式\meteokb2\neokb_try\framework\timing\framedclock.h(24): note: 請參閱 'Framework::Timing::FramedClock::GetRate' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\timing\offsetframedclock.h(34): warning C4250: 'Framework::Timing::OffsetFramedClock': 經由支配繼承 'Framework::Timing::FramedClock::Framework::Timing::FramedClock::SetIsRunning'
+  d:\school\新創\程式\meteokb2\neokb_try\framework\timing\framedclock.h(26): note: 請參閱 'Framework::Timing::FramedClock::SetIsRunning' 的宣告
+d:\school\新創\程式\meteokb2\neokb_try\framework\timing\offsetframedclock.h(34): warning C4250: 'Framework::Timing::OffsetFramedClock': 經由支配繼承 'Framework::Timing::FramedClock::Framework::Timing::FramedClock::GetIsRunning'
+  d:\school\新創\程式\meteokb2\neokb_try\framework\timing\framedclock.h(27): note: 請參閱 'Framework::Timing::FramedClock::GetIsRunning' 的宣告
+  MeteoScene.cpp
+d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\framework\timing\decoupledinterpolatingframedclock.h(77): warning C4250: 'Framework::Timing::DecoupledInterpolatingFramedClock': 經由支配繼承 'Framework::Timing::InterpolatingFramedClock::Framework::Timing::InterpolatingFramedClock::GetRate'
+  d:\school\新創\程式\meteokb2\neokb_try\framework\timing\interpolatingframedclock.h(28): note: 請參閱 'Framework::Timing::InterpolatingFramedClock::GetRate' 的宣告
+  Loader.cpp
+d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
+  Intro.cpp
+d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\framework\timing\decoupledinterpolatingframedclock.h(77): warning C4250: 'Framework::Timing::DecoupledInterpolatingFramedClock': 經由支配繼承 'Framework::Timing::InterpolatingFramedClock::Framework::Timing::InterpolatingFramedClock::GetRate'
+  d:\school\新創\程式\meteokb2\neokb_try\framework\timing\interpolatingframedclock.h(28): note: 請參閱 'Framework::Timing::InterpolatingFramedClock::GetRate' 的宣告
+  RulesetInfo.cpp
+d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\framework\timing\decoupledinterpolatingframedclock.h(77): warning C4250: 'Framework::Timing::DecoupledInterpolatingFramedClock': 經由支配繼承 'Framework::Timing::InterpolatingFramedClock::Framework::Timing::InterpolatingFramedClock::GetRate'
+  d:\school\新創\程式\meteokb2\neokb_try\framework\timing\interpolatingframedclock.h(28): note: 請參閱 'Framework::Timing::InterpolatingFramedClock::GetRate' 的宣告
+  Ruleset.cpp
+d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\framework\timing\decoupledinterpolatingframedclock.h(77): warning C4250: 'Framework::Timing::DecoupledInterpolatingFramedClock': 經由支配繼承 'Framework::Timing::InterpolatingFramedClock::Framework::Timing::InterpolatingFramedClock::GetRate'
+  d:\school\新創\程式\meteokb2\neokb_try\framework\timing\interpolatingframedclock.h(28): note: 請參閱 'Framework::Timing::InterpolatingFramedClock::GetRate' 的宣告
+  MeteoGame.cpp
+d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\framework\timing\decoupledinterpolatingframedclock.h(77): warning C4250: 'Framework::Timing::DecoupledInterpolatingFramedClock': 經由支配繼承 'Framework::Timing::InterpolatingFramedClock::Framework::Timing::InterpolatingFramedClock::GetRate'
+  d:\school\新創\程式\meteokb2\neokb_try\framework\timing\interpolatingframedclock.h(28): note: 請參閱 'Framework::Timing::InterpolatingFramedClock::GetRate' 的宣告
+  TimeController.cpp
+d:\school\新創\程式\meteokb2\neokb_try\framework\timing\decoupledinterpolatingframedclock.h(77): warning C4250: 'Framework::Timing::DecoupledInterpolatingFramedClock': 經由支配繼承 'Framework::Timing::InterpolatingFramedClock::Framework::Timing::InterpolatingFramedClock::GetRate'
+  d:\school\新創\程式\meteokb2\neokb_try\framework\timing\interpolatingframedclock.h(28): note: 請參閱 'Framework::Timing::InterpolatingFramedClock::GetRate' 的宣告
+  SpeedAdjuster.cpp
+  LinearSpeedAdjuster.cpp
+  Scene.cpp
+d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
+  PassThroughInputManager.cpp
+d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
+  InputManager.cpp
+d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\framework\input\inputmanager.cpp(300): warning C4267: '正在初始化': 將 'size_t' 轉換為 'int'，資料可能遺失
+  CustomInputManager.cpp
+d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
+  FrameworkConfigManager.cpp
+d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
+  Triggerable.cpp
+  Schedulable.cpp
+  Container.cpp
+  MeteoGameDesktop.cpp
+d:\school\新創\程式\meteokb2\neokb_try\framework\configurations\frameworkconfigmanager.h : warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
+d:\school\新創\程式\meteokb2\neokb_try\framework\timing\decoupledinterpolatingframedclock.h(77): warning C4250: 'Framework::Timing::DecoupledInterpolatingFramedClock': 經由支配繼承 'Framework::Timing::InterpolatingFramedClock::Framework::Timing::InterpolatingFramedClock::GetRate'
+  d:\school\新創\程式\meteokb2\neokb_try\framework\timing\interpolatingframedclock.h(28): note: 請參閱 'Framework::Timing::InterpolatingFramedClock::GetRate' 的宣告
+  正在產生程式碼...
+  正在編譯...
+  BassSampleChannel.cpp
   正在產生程式碼...
   正在略過... (未偵測到相關變更)
-  Loader.cpp
-  Scene.cpp
-  InputManager.cpp
-  CustomInputManager.cpp
   Peripheral.cpp
+  MeteorSheetmusicPostprocessor.cpp
+  MeteorSheetmusicConverter.cpp
+  SheetmusicConverter.cpp
+  GameThread.cpp
   Display.cpp
   InputDevice.cpp
   DisplayDevice.cpp
   Device.cpp
+  Scheduler.cpp
+  SampleChannel.cpp

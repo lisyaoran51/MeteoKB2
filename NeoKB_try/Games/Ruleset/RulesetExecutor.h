@@ -15,7 +15,7 @@
 #include "../Scheduler/Event/Effect/Algorithm/MapAlgorithm.h"
 #include "../Sheetmusic/WorkingSheetmusic.h"
 #include "../../Framework/Input/PassThroughInputManager.h"
-#include "../Scene/Play/TimeController.h"
+#include "../../Framework/Timing/TimeController.h"
 
 
 
@@ -37,6 +37,8 @@ using namespace Games::Rulesets;
 using namespace Framework::Allocation::Hierachal;
 using namespace Games::Scenes::Play;
 using namespace Framework::Input;
+using namespace Framework::Timing;
+
 
 
 

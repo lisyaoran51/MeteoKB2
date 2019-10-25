@@ -64,11 +64,11 @@ bool Updatable::UpdateSubTree()
 	return true;
 }
 
-int Updatable::LoadAsync(Clock * c, DependencyContainer * dContainer)
+int Updatable::LoadAsync(FrameBasedClock * c, DependencyContainer * dContainer)
 {
 	LOG(LogLevel::Fine) << "int Updatable::LoadAsync() : A [" << GetTypeName() << "] object is asyncing with clock and cache.";
 	clock = c;
-	return LoadAsync(dContainer);
+	return Loadable::LoadAsync(dContainer);
 }
 
 int Updatable::update()

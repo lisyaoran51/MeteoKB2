@@ -6,6 +6,8 @@ using namespace Games::Scenes::Select;
 
 SongSelect::SongSelect(): RegisterType("SongSelect")
 {
+
+	registerLoad(bind(static_cast<int(SongSelect::*)(void)>(&SongSelect::load), this));
 }
 
 int SongSelect::TriggerOnSelected()
@@ -38,6 +40,19 @@ int SongSelect::load(SmManager * sManager, MeteoGame * game)
 	smManager = sManager;
 
 	// ruleset info 可能需要重新bind一次，本來meteo scene裡面有bind過
+
+	// 把選則歌曲的method註冊進去select panel裡面，select panel選好歌就會直接呼叫回來
+	smSelectPanel = new SheetmusicSelectPanel();
+
+
+	// 這邊會出問題，有沒有可能bind上去的是base function 不是override?
+	// 經過實驗，不管有沒有Static_cast，bind上去的都會是override，不會是base
+	// 如果一定要用base，可以用lambda式，例如
+	// function<int(void)> func = [pointer]() {return pointer->base::VirtualFunction(); };
+	smSelectPanel->StartRequest = bind(&SongSelect::onSelected, this);
+	smSelectPanel->SelectionChanged = bind(&SongSelect::selectionChanged, this, placeholders::_1);
+
+	AddChild(smSelectPanel);
 	return 0;
 }
 

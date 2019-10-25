@@ -144,6 +144,7 @@ namespace Algorithms{
 
 		virtual int SetStartX(int x) {
 			startX = x;
+			return 0;
 		}
 
 	protected:

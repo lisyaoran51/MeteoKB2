@@ -152,12 +152,12 @@ int EventProcessorMaster::update()
 
 		bool thisOneNeedDelete = false;
 
-		if ((*iter)->GetProcessorLifeType == EventProcessorLifeType::Timed &&
+		if ((*iter)->GetProcessorLifeType() == EventProcessorLifeType::Timed &&
 			(*iter)->GetProcessorTimeLeft() <= 0) {
 
 			thisOneNeedDelete = true;
 		}
-		else if ((*iter)->GetProcessorLifeType == EventProcessorLifeType::Immediate &&
+		else if ((*iter)->GetProcessorLifeType() == EventProcessorLifeType::Immediate &&
 				 (*iter)->GetIsProcessed()) {
 
 			thisOneNeedDelete = true;

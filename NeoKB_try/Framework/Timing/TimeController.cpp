@@ -24,8 +24,10 @@ int TimeController::update()
 	speedAdjuster->ProcessFrame(GetClock()->GetElapsedFrameTime());
 
 	if (speedAdjuster->GetIsAdjustingTime()) {
-		double timeToAdjust = speedAdjuster->GetAdjustedTime();
-		controllableClock->Seek(controllableClock->GetCurrentTime() + timeToAdjust * controllableClock->GetRate());
+		double timeToAdjust = speedAdjuster->GetAdjustFrameTime();
+		
+		// 這邊應該是，不管目前速度多快，調整時間的速度都是固定的，不會速度快的時候就調的快
+		controllableClock->Seek(controllableClock->GetCurrentTime() + timeToAdjust/* * controllableClock->GetRate()*/);
 	}
 	else if (speedAdjuster->GetIsFreezingTime()) {
 		Pause();
@@ -78,14 +80,13 @@ int TimeController::SetSpeedAdjuster(SpeedAdjuster * sAdjuster)
 	speedAdjuster = sAdjuster;
 	
 
-	speedAdjuster->AddOnAdjustFreeze(this, bind(static_cast<int(TimeController::*)()>(&TimeController::SetAllChildsIsMaskedForTrigger),
+	speedAdjuster->AddOnAdjustFreeze(this, bind(&TimeController::SetAllChildsIsMaskedForTrigger, this),
 		"TimeController::SetAllChildsIsMaskedForTrigger");
 
-
-	speedAdjuster->AddOnAdjustFreezeEnd(this, bind(static_cast<int(TimeController::*)()>(&TimeController::RecoverAllChildsIsMaskedForTrigger),
+	speedAdjuster->AddOnAdjustFreezeEnd(this, bind(&TimeController::RecoverAllChildsIsMaskedForTrigger, this),
 		"TimeController::RecoverAllChildsIsMaskedForTrigger");
 
-	speedAdjuster->AddOnAdjustFreezeEnd(this, bind(static_cast<int(TimeController::*)()>(&TimeController::Resume),
+	speedAdjuster->AddOnAdjustFreezeEnd(this, bind(&TimeController::Resume, this),
 		"TimeController::Resume");
 
 	return 0;

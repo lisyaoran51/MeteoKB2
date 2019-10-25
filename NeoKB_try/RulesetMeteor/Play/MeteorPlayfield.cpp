@@ -165,11 +165,11 @@ int MeteorPlayfield::OnButtonDown(MeteorAction action)
 				break;
 			case MeteoPianoPitchState::None:
 				pitchState = MeteoPianoPitchState::Lowered;
-				mapPitchShifter->ShiftTo(Pitch::C1);
+				mapPitchShifter->SetSeekPitch(Pitch::C1);
 				break;
 			case MeteoPianoPitchState::Raised:
 				pitchState = MeteoPianoPitchState::None;
-				mapPitchShifter->ShiftTo(Pitch::C);
+				mapPitchShifter->SetSeekPitch(Pitch::C);
 				break;
 			}
 		}
@@ -177,11 +177,11 @@ int MeteorPlayfield::OnButtonDown(MeteorAction action)
 			switch (pitchState) {
 			case MeteoPianoPitchState::Lowered:
 				pitchState = MeteoPianoPitchState::None;
-				mapPitchShifter->ShiftTo(Pitch::C);
+				mapPitchShifter->SetSeekPitch(Pitch::C);
 				break;
 			case MeteoPianoPitchState::None:
 				pitchState = MeteoPianoPitchState::Raised;
-				mapPitchShifter->ShiftTo(Pitch::c);
+				mapPitchShifter->SetSeekPitch(Pitch::c);
 				break;
 			case MeteoPianoPitchState::Raised:
 				break;
