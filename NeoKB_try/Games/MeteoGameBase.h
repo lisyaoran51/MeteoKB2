@@ -25,6 +25,8 @@ namespace Games {
 
 	protected:
 
+		SmManager* smManager;
+
 		Bindable<WorkingSm*> workingSm;
 
 		virtual int LoadOnComplete();

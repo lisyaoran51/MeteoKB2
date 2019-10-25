@@ -106,6 +106,11 @@ int Triggerable::TriggerOnSlide(InputState * inputState, InputKey slider)
 	return onSlide(inputState, slider);
 }
 
+int Triggerable::TriggerOnCommand(InputState * inputState, InputKey command)
+{
+	return onCommand(inputState, command);
+}
+
 int Triggerable::onKeyDown(InputState * inputState, InputKey key)
 {
 	return -1;
@@ -132,6 +137,11 @@ int Triggerable::onButtonUp(InputState * inputState, InputKey button)
 }
 
 int Triggerable::onSlide(InputState * inputState, InputKey slider)
+{
+	return -1;
+}
+
+int Triggerable::onCommand(InputState * inputState, InputKey command)
 {
 	return -1;
 }

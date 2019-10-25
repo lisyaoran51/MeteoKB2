@@ -12,7 +12,11 @@ using namespace std::experimental::filesystem;
 
 string Storage::GetUsableDirectoryPathFor(string directoryPath, bool createIfNotExist)
 {
-	string resolvedPath = basePath + "/"s + baseName;
+	string resolvedPath = basePath;
+
+	if(baseName != "")
+		basePath += "/"s + baseName;
+
 	if (subDirectory != "")
 		resolvedPath += "/"s + subDirectory;
 	resolvedPath += "/"s + directoryPath;
@@ -34,13 +38,19 @@ string Storage::GetUsableDirectoryPathFor(string directoryPath, bool createIfNot
 
 string Storage::GetUsableFilePathFor(string filePath, bool createIfNotExist)
 {
-	string resolvedPath = basePath + "/"s + baseName;
+	string resolvedPath = basePath;
+
+	if (baseName != "")
+		basePath += "/"s + baseName;
+
 	if (subDirectory != "")
 		resolvedPath += "/"s + subDirectory;
 	resolvedPath += "/"s + filePath;
 
 	path resolved = resolvedPath;
 
+	// C++建立檔案的方法
+	// https://stackoverflow.com/questions/675039/how-can-i-create-directory-tree-in-c-linux
 	if (createIfNotExist && exists(resolved) == 0) {
 		create_directories(resolved.parent_path());
 		ofstream ofs(resolved);

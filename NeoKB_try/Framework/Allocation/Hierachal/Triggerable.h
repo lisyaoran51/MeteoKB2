@@ -79,6 +79,8 @@ namespace Hierachal {
 		
 		virtual int TriggerOnSlide(InputState* inputState, InputKey slider) final;
 
+		virtual int TriggerOnCommand(InputState* inputState, InputKey command) final;
+
 	protected:
 
 		/// <summary>
@@ -103,6 +105,8 @@ namespace Hierachal {
 		virtual int onButtonUp(InputState* inputState, InputKey button);
 
 		virtual int onSlide(InputState* inputState, InputKey slider);
+
+		virtual int onCommand(InputState* inputState, InputKey command);
 
 	};
 

@@ -18,7 +18,7 @@ namespace IO{
 
 	public:
 
-		PlatformStorage(string bName);
+		PlatformStorage(string bName, string sDirectory = "");
 
 		/// <summary>
 		/// 查看有沒有這個檔案
@@ -41,17 +41,17 @@ namespace IO{
 		virtual int DeleteDirectory(string directoryPath);
 
 		/// <summary>
-		/// 找出所有資料夾
+		/// 找出所有資料夾，用完要把vector回收
 		/// </summary>
 		virtual vector<string>* GetDirectories(string directoryPath);
 
-		virtual ifstream GetStream(string filePath);
+		virtual ifstream* GetStream(string filePath);
 
 	protected:
 
 		virtual string locateBasePath();
 
-		virtual Storage* clone(string subDirectory);
+		virtual Storage* clone(string newSubDirectory = "");
 
 
 	};

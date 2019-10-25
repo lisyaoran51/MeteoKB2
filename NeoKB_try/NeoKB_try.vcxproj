@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Desktop\MeteoGameDesktop.cpp" />
     <ClCompile Include="Framework\IO\PlatformStorage.cpp" />
     <ClCompile Include="Framework\IO\Storage.cpp" />
     <ClCompile Include="Framework\Timing\SpeedAdjusters\LinearSpeedAdjuster.cpp" />
@@ -130,6 +131,7 @@
     <ClCompile Include="Framework\Timing\OffsetFramedClock.cpp" />
     <ClCompile Include="Framework\Timing\SpeedAdjusters\SpeedAdjuster.cpp" />
     <ClCompile Include="Framework\Timing\StopwatchClock.cpp" />
+    <ClCompile Include="Games\UI\SheetmusicSelectPanel.cpp" />
     <ClCompile Include="Instruments\Input\PianoInputManager.cpp" />
     <ClCompile Include="Instruments\Instrument.cpp" />
     <ClCompile Include="Instruments\MeteoPiano.cpp" />
@@ -166,6 +168,7 @@
     <Text Include="DailyLog.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Desktop\MeteoGameDesktop.h" />
     <ClInclude Include="Framework\IO\PlatformStorage.h" />
     <ClInclude Include="Framework\IO\Storage.h" />
     <ClInclude Include="Framework\Timing\SpeedAdjusters\LinearSpeedAdjuster.h" />
@@ -306,6 +309,7 @@
     <ClInclude Include="Framework\Timing\SpeedAdjusters\SpeedAdjuster.h" />
     <ClInclude Include="Framework\Timing\StopwatchClock.h" />
     <ClInclude Include="Framework\Timing\ThrottledFramedClock.h" />
+    <ClInclude Include="Games\UI\SheetmusicSelectPanel.h" />
     <ClInclude Include="Instruments\Audio\SoundBinding.h" />
     <ClInclude Include="Instruments\Input\PianoAction.h" />
     <ClInclude Include="Instruments\Input\InstrumentInputManager.h" />

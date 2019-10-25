@@ -292,9 +292,6 @@
     <Filter Include="來源檔案\Games\Sheetmusic\Format\EventParser">
       <UniqueIdentifier>{8b5fb90a-e9a6-41c2-be2e-d33ee248af3c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="來源檔案\Games\Sheetmusic\IO">
-      <UniqueIdentifier>{7a8c5739-55a5-4757-8220-08dbdf16fe21}</UniqueIdentifier>
-    </Filter>
     <Filter Include="來源檔案\Games\Sheetmusic\ControlPoint">
       <UniqueIdentifier>{7a92ee2b-4f53-4bd0-8fb2-22c08d48d392}</UniqueIdentifier>
     </Filter>
@@ -430,11 +427,26 @@
     <Filter Include="標頭檔\Games\Sheetmusics\Format\EventParsers">
       <UniqueIdentifier>{8f992b54-6418-4d8d-adea-acfa5b35aa23}</UniqueIdentifier>
     </Filter>
-    <Filter Include="標頭檔\Games\Sheetmusics\Format\Patterns">
+    <Filter Include="標頭檔\Desktop">
+      <UniqueIdentifier>{fb4d10d4-fe5b-4774-b944-0c81f9d59fe1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Desktop">
+      <UniqueIdentifier>{7366aced-524e-4077-bd89-9384a1b4709f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Games\Sheetmusics\IO">
+      <UniqueIdentifier>{3919019a-c35b-4db0-8f50-def38082cb4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Games\Sheetmusics\Patterns">
       <UniqueIdentifier>{cb4dfdc1-57fb-49d4-94e7-d53b7b1c5cef}</UniqueIdentifier>
     </Filter>
-    <Filter Include="標頭檔\Games\Sheetmusics\Format\IO">
-      <UniqueIdentifier>{3919019a-c35b-4db0-8f50-def38082cb4e}</UniqueIdentifier>
+    <Filter Include="來源檔案\Games\Sheetmusic\IO">
+      <UniqueIdentifier>{7a8c5739-55a5-4757-8220-08dbdf16fe21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Games\UI">
+      <UniqueIdentifier>{ad1b8295-7e94-4030-a5a9-707bce81fbcd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Games\UI">
+      <UniqueIdentifier>{761f80be-3937-49f6-b378-7079fe5884ef}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -807,9 +819,6 @@
     <ClCompile Include="Framework\Platforms\MeteoGameHost.cpp">
       <Filter>來源檔案\Framework\Platforms</Filter>
     </ClCompile>
-    <ClCompile Include="Framework\Threading\GameThread.cpp">
-      <Filter>來源檔案</Filter>
-    </ClCompile>
     <ClCompile Include="RulesetMeteor\Input\MeteorInputManager.cpp">
       <Filter>來源檔案\RulesetMeteor\Input</Filter>
     </ClCompile>
@@ -839,6 +848,15 @@
     </ClCompile>
     <ClCompile Include="Framework\IO\PlatformStorage.cpp">
       <Filter>來源檔案\Framework\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Threading\GameThread.cpp">
+      <Filter>來源檔案\Framework\Threading</Filter>
+    </ClCompile>
+    <ClCompile Include="Desktop\MeteoGameDesktop.cpp">
+      <Filter>來源檔案\Desktop</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\UI\SheetmusicSelectPanel.cpp">
+      <Filter>來源檔案\Games\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1370,13 +1388,13 @@
       <Filter>標頭檔\Games\Sheetmusics\Format</Filter>
     </ClInclude>
     <ClInclude Include="Games\Sheetmusic\Pattern\Pattern.h">
-      <Filter>標頭檔\Games\Sheetmusics\Format\Patterns</Filter>
+      <Filter>標頭檔\Games\Sheetmusics\Patterns</Filter>
     </ClInclude>
     <ClInclude Include="Games\Sheetmusic\Pattern\PatternGenerator.h">
-      <Filter>標頭檔\Games\Sheetmusics\Format\Patterns</Filter>
+      <Filter>標頭檔\Games\Sheetmusics\Patterns</Filter>
     </ClInclude>
     <ClInclude Include="Games\Sheetmusic\IO\FileReader.h">
-      <Filter>標頭檔\Games\Sheetmusics\Format\IO</Filter>
+      <Filter>標頭檔\Games\Sheetmusics\IO</Filter>
     </ClInclude>
     <ClInclude Include="Games\Sheetmusic\Format\SimpleSmDecoder.h">
       <Filter>標頭檔\Games\Sheetmusics\Format</Filter>
@@ -1386,6 +1404,12 @@
     </ClInclude>
     <ClInclude Include="Framework\IO\PlatformStorage.h">
       <Filter>標頭檔\Framework\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="Desktop\MeteoGameDesktop.h">
+      <Filter>標頭檔\Desktop</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\UI\SheetmusicSelectPanel.h">
+      <Filter>標頭檔\Games\UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

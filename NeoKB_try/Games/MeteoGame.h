@@ -3,10 +3,14 @@
 
 #include "MeteoGameBase.h"
 #include "Scene\Interlude\Intro.h"
+#include "../Framework/IO/Storage.h"
 
 
 using namespace Framework;
 using namespace Games::Scenes::Interlude;
+using namespace Framework::IO;
+
+
 
 namespace Games {
 
@@ -24,6 +28,8 @@ namespace Games {
 		MeteoGame();
 
 		Bindable<RulesetInfo*>* GetRuleset();
+
+		virtual Storage* GetStableStorage();
 
 	protected:
 

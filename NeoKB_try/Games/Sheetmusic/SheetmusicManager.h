@@ -12,6 +12,7 @@
 #include "Format/SmDecoder.h"
 #include "../Ruleset/Ruleset.h"
 #include "../Ruleset/RulesetInfo.h"
+#include "../../Framework/IO/Storage.h"
 
 
 
@@ -20,6 +21,8 @@ using namespace Util;
 using namespace Games::Sheetmusics::IO;
 using namespace Games::Sheetmusics::Format;
 using namespace Games::Rulesets;
+using namespace Framework::IO;
+
 
 
 
@@ -51,6 +54,11 @@ namespace Sheetmusics {
 		vector<SmInfo*>* GetSmInfos();
 
 		WorkingSm* GetWorkingSm(SmInfo* s);
+
+		/// <summary>
+		/// 從系統預設的路徑抓到所有儲存內容
+		/// </summary>
+		function<Storage*(void)> GetStableStorage;
 
 	protected:
 

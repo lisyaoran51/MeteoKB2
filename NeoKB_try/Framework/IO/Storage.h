@@ -59,7 +59,10 @@ namespace IO{
 
 		Storage* GetStorageForDirectory(string directoryPath);
 
-		virtual ifstream GetStream(string filePath) = 0;
+		/// <summary>
+		/// 使用前要先check exist，不然會出錯
+		/// </summary>
+		virtual ifstream* GetStream(string filePath) = 0;
 
 	protected:
 
@@ -83,7 +86,10 @@ namespace IO{
 
 		virtual string locateBasePath() = 0;
 
-		virtual Storage* clone(string subDirectory) = 0;
+		/// <summary>
+		/// 前後都不能有斜線，會現在有的subdirectory下面再嘉一個subDirectory
+		/// </summary>
+		virtual Storage* clone(string newSubDirectory = "") = 0;
 
 
 	};
