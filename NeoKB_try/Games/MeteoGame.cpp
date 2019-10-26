@@ -35,6 +35,7 @@ int MeteoGame::LoadOnComplete()
 	// smManager->GetStableStorage = bind(static_cast<Storage*(MeteoGame::*)(void)>(&MeteoGame::GetStableStorage), this);
 	// 應該是不用這樣，virtual function會自動bind上去override，不用特別寫成lambda式
 	// https://stackoverflow.com/questions/14408105/how-do-i-use-stdbind-to-call-the-base-classs-version-of-a-virtual-function/14408253
+	// 確實不用寫lambda式，值接bind base::function，也會bind override function上去
 	smManager->GetStableStorage = [=]() {return GetStableStorage(); };
 
 	AddChild(screenStack = new Loader());

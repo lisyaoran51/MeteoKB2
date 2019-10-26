@@ -49,7 +49,7 @@ namespace IO {
 
 	private:
 
-		ActionList<int(InputState*)> OnCommand;
+		ActionList<int, InputState*> OnCommand;
 
 
 	};

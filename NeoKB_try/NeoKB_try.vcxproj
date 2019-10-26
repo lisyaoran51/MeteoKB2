@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Desktop\MeteoGameDesktop.cpp" />
+    <ClCompile Include="Framework\Host\MeteoGameHost.cpp" />
     <ClCompile Include="Framework\IO\PlatformStorage.cpp" />
     <ClCompile Include="Framework\IO\Storage.cpp" />
     <ClCompile Include="Framework\Timing\SpeedAdjusters\LinearSpeedAdjuster.cpp" />
@@ -122,7 +123,6 @@
     <ClCompile Include="Framework\IO\Panel.cpp" />
     <ClCompile Include="Framework\IO\Peripheral.cpp" />
     <ClCompile Include="Framework\IO\Stores\DynamicPathResourceStore.cpp" />
-    <ClCompile Include="Framework\Platforms\MeteoGameHost.cpp" />
     <ClCompile Include="Framework\Scenes\Scene.cpp" />
     <ClCompile Include="Framework\Threading\GameThread.cpp" />
     <ClCompile Include="Framework\Timing\DecoupledInterpolatingFramedClock.cpp" />
@@ -169,8 +169,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Desktop\MeteoGameDesktop.h" />
+    <ClInclude Include="Framework\Database\DatabaseStore.h" />
+    <ClInclude Include="Framework\Host\MeteoGameHost.h" />
+    <ClInclude Include="Framework\IO\FileNotFoundException.h" />
     <ClInclude Include="Framework\IO\PlatformStorage.h" />
     <ClInclude Include="Framework\IO\Storage.h" />
+    <ClInclude Include="Framework\IO\Stores\CompositeResourceStore.h" />
+    <ClInclude Include="Framework\IO\Stores\EmbeddedResourceStore.h" />
+    <ClInclude Include="Framework\IO\Stores\FakeEmbeddedResourceStore.h" />
     <ClInclude Include="Framework\Timing\SpeedAdjusters\LinearSpeedAdjuster.h" />
     <ClInclude Include="Framework\Timing\TimeController.h" />
     <ClInclude Include="Games\Graphic\Renderer\MapAlgorithm\HardwareMapAlgorithm.h">
@@ -294,7 +300,6 @@
     <ClInclude Include="Framework\IO\Stores\DynamicPathResourceStore.h" />
     <ClInclude Include="Framework\IO\Stores\NamespacedResourceStore.h" />
     <ClInclude Include="Framework\IO\Stores\ResourceStore.h" />
-    <ClInclude Include="Framework\Platforms\MeteoGameHost.h" />
     <ClInclude Include="Framework\Scenes\Scene.h" />
     <ClInclude Include="Framework\Threading\GameThread.h" />
     <ClInclude Include="Framework\Timing\AdjustableClock.h" />

@@ -49,7 +49,7 @@ namespace IO {
 
 	private:
 
-		ActionList<int(InputState*)> OnPanelEvent;
+		ActionList<int, InputState*> OnPanelEvent;
 
 
 	};

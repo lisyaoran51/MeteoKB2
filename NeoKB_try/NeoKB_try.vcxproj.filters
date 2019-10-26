@@ -406,9 +406,6 @@
     <Filter Include="標頭檔\Devices\IO">
       <UniqueIdentifier>{83e8370a-5314-48c9-82af-675b0245be34}</UniqueIdentifier>
     </Filter>
-    <Filter Include="來源檔案\Framework\Platforms">
-      <UniqueIdentifier>{b0759b87-2e6e-4bcc-895a-c78cba1039fe}</UniqueIdentifier>
-    </Filter>
     <Filter Include="來源檔案\RulesetMeteor\Input">
       <UniqueIdentifier>{c3d547c1-60df-460b-8508-b5fe884e0acf}</UniqueIdentifier>
     </Filter>
@@ -447,6 +444,9 @@
     </Filter>
     <Filter Include="來源檔案\Games\UI">
       <UniqueIdentifier>{761f80be-3937-49f6-b378-7079fe5884ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Framework\Database">
+      <UniqueIdentifier>{938851d6-dbf5-46b4-a5fe-8de5ff0fdd46}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -816,9 +816,6 @@
     <ClCompile Include="Framework\Devices\PanelDevice.cpp">
       <Filter>來源檔案\Framework\Devices</Filter>
     </ClCompile>
-    <ClCompile Include="Framework\Platforms\MeteoGameHost.cpp">
-      <Filter>來源檔案\Framework\Platforms</Filter>
-    </ClCompile>
     <ClCompile Include="RulesetMeteor\Input\MeteorInputManager.cpp">
       <Filter>來源檔案\RulesetMeteor\Input</Filter>
     </ClCompile>
@@ -857,6 +854,9 @@
     </ClCompile>
     <ClCompile Include="Games\UI\SheetmusicSelectPanel.cpp">
       <Filter>來源檔案\Games\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Host\MeteoGameHost.cpp">
+      <Filter>來源檔案\Framework\Host</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1360,9 +1360,6 @@
     <ClInclude Include="Framework\Devices\PanelDevice.h">
       <Filter>標頭檔\Framework\Devices</Filter>
     </ClInclude>
-    <ClInclude Include="Framework\Platforms\MeteoGameHost.h">
-      <Filter>標頭檔\Framework</Filter>
-    </ClInclude>
     <ClInclude Include="RulesetMeteor\Timing\MeteorTimeController.h">
       <Filter>標頭檔\RulesetMeteor\Timing</Filter>
     </ClInclude>
@@ -1410,6 +1407,24 @@
     </ClInclude>
     <ClInclude Include="Games\UI\SheetmusicSelectPanel.h">
       <Filter>標頭檔\Games\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Host\MeteoGameHost.h">
+      <Filter>標頭檔\Framework\Host</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\IO\Stores\EmbeddedResourceStore.h">
+      <Filter>標頭檔\Framework\IO\Stores</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\IO\Stores\FakeEmbeddedResourceStore.h">
+      <Filter>標頭檔\Framework\IO\Stores</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\IO\Stores\CompositeResourceStore.h">
+      <Filter>標頭檔\Framework\IO\Stores</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\IO\FileNotFoundException.h">
+      <Filter>標頭檔\Framework\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Database\DatabaseStore.h">
+      <Filter>來源檔案\Framework\Database</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

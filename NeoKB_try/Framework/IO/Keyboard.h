@@ -44,7 +44,7 @@ namespace IO {
 
 	private:
 
-		ActionList<int(InputState*)> OnKeyEvent;
+		ActionList<int, InputState*> OnKeyEvent;
 
 	};
 

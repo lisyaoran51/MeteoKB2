@@ -19,8 +19,8 @@ int BluetoothPhone::SetDevice(Device * device)
 
 int BluetoothPhone::TriggerOnInput()
 {
-
-	OnCommand.Trigger(inputStates);
+	for(int i = 0; i < inputStates.size(); i++)
+		OnCommand.Trigger(inputStates[i]);
 
 	inputStates.clear();
 	return 0;
