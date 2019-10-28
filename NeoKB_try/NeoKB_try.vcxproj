@@ -20,6 +20,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Desktop\MeteoGameDesktop.cpp" />
+    <ClCompile Include="Framework\Database\DatabaseContext.cpp" />
+    <ClCompile Include="Framework\Database\MeteoDatabaseContext.cpp" />
     <ClCompile Include="Framework\Host\MeteoGameHost.cpp" />
     <ClCompile Include="Framework\IO\PlatformStorage.cpp" />
     <ClCompile Include="Framework\IO\Storage.cpp" />
@@ -169,7 +171,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Desktop\MeteoGameDesktop.h" />
+    <ClInclude Include="Framework\Database\DatabaseContext.h" />
+    <ClInclude Include="Framework\Database\DatabaseSet.h" />
     <ClInclude Include="Framework\Database\DatabaseStore.h" />
+    <ClInclude Include="Framework\Database\MeteoDatabaseContext.h" />
     <ClInclude Include="Framework\Host\MeteoGameHost.h" />
     <ClInclude Include="Framework\IO\FileNotFoundException.h" />
     <ClInclude Include="Framework\IO\PlatformStorage.h" />

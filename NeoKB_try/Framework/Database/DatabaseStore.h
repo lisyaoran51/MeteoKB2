@@ -3,15 +3,19 @@
 
 
 #include "../Allocation/Hierachal/MtoObject.h"
+#include "../IO/Storage.h"
+#include <functional>
+#include "DatabaseContext.h"
 
 
 using namespace Framework::Allocation::Hierachal;
-
+using namespace Framework::IO;
+using namespace std;
 
 
 
 namespace Framework {
-namespace Database{
+namespace Database {
 
 
 	/// <summary>
@@ -19,6 +23,9 @@ namespace Database{
 	/// </summary>
 	class DatabaseStore : public MtoObject {
 
+		DatabaseStore(function<DatabaseContext*(void)> getContext, Storage* s = nullptr);
+
+	public:
 
 
 
