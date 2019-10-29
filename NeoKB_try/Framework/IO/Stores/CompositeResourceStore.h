@@ -76,7 +76,7 @@ namespace Stores {
 			for (int i = 0; i < stores.size(); i++) {
 				for (int j = 0; j < names->size(); j++) {
 
-					tempStream = stores[i]->Get(names->at(j));
+					tempStream = stores[i]->GetStream(names->at(j));
 
 					if (tempStream != nullptr) {
 						delete names;
@@ -105,7 +105,7 @@ namespace Stores {
 
 		virtual vector<string>* getFileNames(string name) {
 			vector<string>* names = nullptr;
-			if (name.find("." != name.npos))
+			if (name.find(".") != name.npos)
 				return new vector<string>{ name };
 
 			names = new vector<string>{ name };
