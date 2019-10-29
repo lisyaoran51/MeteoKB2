@@ -50,7 +50,7 @@ namespace Stores {
 			for (int i = 0; i < stores.size(); i++) {
 				for (int j = 0; j < names->size(); j++) {
 					try {
-						T temp = stores[i].Get(names->at(j));
+						T temp = stores[i]->Get(names->at(j));
 						delete names;
 						return temp;
 					}
@@ -63,7 +63,7 @@ namespace Stores {
 
 			delete names;
 
-			throw FileNotFoundException(message.c_str());
+			throw FileNotFoundException((char*)message.c_str());
 
 			return T();
 		}
@@ -76,7 +76,7 @@ namespace Stores {
 			for (int i = 0; i < stores.size(); i++) {
 				for (int j = 0; j < names->size(); j++) {
 
-					tempStream = stores[i].Get(names->at(j));
+					tempStream = stores[i]->Get(names->at(j));
 
 					if (tempStream != nullptr) {
 						delete names;
@@ -106,9 +106,9 @@ namespace Stores {
 		virtual vector<string>* getFileNames(string name) {
 			vector<string>* names = nullptr;
 			if (name.find("." != name.npos))
-				return new vector<string>(name);
+				return new vector<string>{ name };
 
-			names = new vector<string>(name);
+			names = new vector<string>{ name };
 			for (int i = 0; i < extensions.size(); i++) {
 				names->push_back(name + string(".") + extensions[i]);
 			}

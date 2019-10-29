@@ -15,7 +15,7 @@ using namespace Framework::IO::Stores;
 
 int Base::load()
 {
-	resources = new ResourceStore<char*>();
+	resources = new CompositeResourceStore<char*>();
 	resources->AddStore(new DynamicPathResourceStore(GetResourcePath()));
 
 

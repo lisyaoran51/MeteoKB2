@@ -4,11 +4,13 @@
 
 #include <map>
 #include "Hierachal/MtoObject.h"
+#include "../../Util/Log.h"
 
 
 
 using namespace std;
 using namespace Framework::Allocation::Hierachal;
+using namespace Util;
 
 
 namespace Framework {

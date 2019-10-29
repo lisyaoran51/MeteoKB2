@@ -20,7 +20,7 @@ namespace Framework {
 
 		AudioManager* audioManager;
 
-		ResourceStore<char*>* resources;
+		CompositeResourceStore<char*>* resources;
 
 		GameHost* gameHost;
 

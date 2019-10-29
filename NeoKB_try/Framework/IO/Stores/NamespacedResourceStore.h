@@ -34,7 +34,7 @@ namespace Stores {
 
 			string temp = nameSpace + "/"s + name;
 			
-			return CompositeResourceStore::getFileNames(temp);
+			return CompositeResourceStore<T>::getFileNames(temp);
 		}
 
 	private:
