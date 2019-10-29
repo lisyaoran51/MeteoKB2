@@ -82,6 +82,7 @@ int DecoupledInterpolatingFramedClock::ProcessFrame()
 	else {
 		if (decoupledClock->GetIsRunning()) {
 			//if we're running but our source isn't, we should try a seek to see if it's capable to switch to it for the current value.
+			// 這邊是打開遊戲音樂的地方
 			Start();
 		}
 	}

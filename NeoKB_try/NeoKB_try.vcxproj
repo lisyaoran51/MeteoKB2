@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Desktop\MeteoGameDesktop.cpp" />
+    <ClCompile Include="Desktop\Program.cpp" />
     <ClCompile Include="Framework\Database\DatabaseContext.cpp" />
     <ClCompile Include="Framework\Database\MeteoDatabaseContext.cpp" />
     <ClCompile Include="Framework\Host\MeteoGameHost.cpp" />
@@ -138,6 +139,7 @@
     <ClCompile Include="Instruments\Instrument.cpp" />
     <ClCompile Include="Instruments\MeteoPiano.cpp" />
     <ClCompile Include="Instruments\Piano.cpp" />
+    <ClCompile Include="Main.cpp" />
     <ClCompile Include="RulesetMeteor\Config\MeteorConfigManager.cpp" />
     <ClCompile Include="RulesetMeteor\Input\MeteorInputManager.cpp" />
     <ClCompile Include="RulesetMeteor\MeteorGame.cpp" />
@@ -171,6 +173,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Desktop\MeteoGameDesktop.h" />
+    <ClInclude Include="Desktop\Program.h" />
     <ClInclude Include="Framework\Database\DatabaseContext.h" />
     <ClInclude Include="Framework\Database\DatabaseSet.h" />
     <ClInclude Include="Framework\Database\DatabaseStore.h" />

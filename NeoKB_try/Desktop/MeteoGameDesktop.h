@@ -16,6 +16,7 @@ namespace Desktop {
 
 	public:
 
+		MeteoGameDesktop(vector<string>& args);
 
 		virtual Storage* GetStableStorage();
 

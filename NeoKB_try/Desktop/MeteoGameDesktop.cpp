@@ -6,6 +6,10 @@ using namespace Desktop;
 
 
 
+MeteoGameDesktop::MeteoGameDesktop(vector<string>& args): RegisterType("MeteoGameDesktop")
+{
+}
+
 Storage * MeteoGameDesktop::GetStableStorage()
 {
 	return new StableStorage();

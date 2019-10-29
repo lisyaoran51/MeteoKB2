@@ -10,7 +10,7 @@ using namespace Instruments::Input;
 
 
 
-MeteoPiano::MeteoPiano() : RegisterType("MeteoPiano")
+MeteoPiano::MeteoPiano(vector<string>& args) : RegisterType("MeteoPiano")
 {
 }
 

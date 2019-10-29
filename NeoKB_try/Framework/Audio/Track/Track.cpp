@@ -34,7 +34,7 @@ bool Track::GetIsRunning()
 int Track::Start()
 {
 	if (isDisposed)
-		throw new runtime_error("Track::Start(): It's already disposed. Unable to start.");
+		throw runtime_error("Track::Start(): It's already disposed. Unable to start.");
 
 	return 0;
 }
@@ -42,7 +42,7 @@ int Track::Start()
 int Track::Stop()
 {
 	if (isDisposed)
-		throw new runtime_error("Track::Stop(): It's already disposed. Unable to stop.");
+		throw runtime_error("Track::Stop(): It's already disposed. Unable to stop.");
 
 	return 0;
 }

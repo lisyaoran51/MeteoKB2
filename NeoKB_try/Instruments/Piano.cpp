@@ -1,7 +1,8 @@
 #include "Piano.h"
 
-#include "Input\PianoAction.h"
+#include "Input/PianoAction.h"
 #include "Pitch.h"
+#include "Input/PianoInputManager.h"
 
 
 using namespace Instruments;
@@ -28,6 +29,11 @@ int Piano::load()
 Piano::Piano() : RegisterType("Piano")
 {
 	registerLoad(bind(static_cast<int(Piano::*)(void)>(&Piano::load), this));
+}
+
+PassThroughInputManager * Piano::CreateInputManager()
+{
+	return new PianoInputManager(this);
 }
 
 vector<SoundBinding*>* Piano::GetDefaultSoundBindings(int variant)

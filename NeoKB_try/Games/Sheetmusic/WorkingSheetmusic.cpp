@@ -1,8 +1,12 @@
 #include "WorkingSheetmusic.h"
 
+#include "../../Framework/Audio/Track/BassTrack.h"
+
 
 using namespace Games::Sheetmusics;
 using namespace Games::Sheetmusics::Format;
+using namespace Framework::Audio::Tracks;
+
 
 
 WorkingSm::WorkingSm(SmInfo * s)
@@ -37,6 +41,14 @@ Sm<Event>* WorkingSm::GetSm()
 	sm->SetSmInfo(smInfo);
 
 	return sm;
+}
+
+Track * WorkingSm::GetTrack()
+{
+	//ifstream* stream = new ifstream(getPathForFile(smInfo->metadata->AudioFile));
+	char* temp = (char*)getPathForFile(smInfo->metadata->AudioFile).c_str();
+
+	return new BassTrack(temp);
 }
 
 Sm<Event>* WorkingSm::createSm()

@@ -45,6 +45,8 @@ namespace Instruments {
 
 		Piano();
 
+		virtual PassThroughInputManager* CreateInputManager();
+
 		/// <summary>
 		/// 把音效名稱和音高綁在一起
 		///	</summary>

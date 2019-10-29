@@ -867,6 +867,12 @@
     <ClCompile Include="Framework\Database\MeteoDatabaseContext.cpp">
       <Filter>來源檔案\Framework\Database</Filter>
     </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="Desktop\Program.cpp">
+      <Filter>來源檔案\Desktop</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="DailyLog.txt">
@@ -1443,6 +1449,9 @@
     </ClInclude>
     <ClInclude Include="Framework\Database\MeteoDatabaseContext.h">
       <Filter>標頭檔\Framework\Database</Filter>
+    </ClInclude>
+    <ClInclude Include="Desktop\Program.h">
+      <Filter>標頭檔\Desktop</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

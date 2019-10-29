@@ -15,6 +15,8 @@ namespace Input{
 
 	class PianoInputManager : public InstrumentInputManager<PianoAction> {
 
+	public:
+
 		PianoInputManager(Piano* p);
 
 	};

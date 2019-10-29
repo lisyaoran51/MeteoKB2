@@ -14,7 +14,7 @@ BassTrack::BassTrack(char * fileName)
 		stream = BASS_StreamCreateFile(false, fileName, 0, 0, 0);
 
 		//Length = Bass.ChannelBytes2Seconds(activeStream, Bass.ChannelGetLength(activeStream)) * 1000;
-		length = BASS_ChannelBytes2Seconds(stream, BASS_ChannelGetLength(stream, BASS_POS_BYTE)) * 1000;
+		length = BASS_ChannelBytes2Seconds(stream, BASS_ChannelGetLength(stream, BASS_POS_BYTE));
 
 		return 0;
 	}, "Lambda_BassTrack::CreateStream");
@@ -67,7 +67,7 @@ bool BassTrack::Seek(double position)
 
 		if (clampedPosition != GetCurrentTime()) {
 
-			QWORD pos = BASS_ChannelSeconds2Bytes(stream, clampedPosition / (double)1000);
+			QWORD pos = BASS_ChannelSeconds2Bytes(stream, clampedPosition);
 			BASS_ChannelSetPosition(stream, pos, BASS_POS_BYTE);
 
 		}
@@ -93,7 +93,7 @@ int BassTrack::update()
 {
 	isRunning = BASS_ChannelIsActive(stream) == BASS_ACTIVE_PLAYING;
 
-	double currentTimeLocal = BASS_ChannelBytes2Seconds(stream, BASS_ChannelGetPosition(stream, BASS_POS_BYTE)) * 1000;
+	double currentTimeLocal = BASS_ChannelBytes2Seconds(stream, BASS_ChannelGetPosition(stream, BASS_POS_BYTE));
 
 	// TODO: 要讓current time不被中斷thread safe
 	currentTime = currentTimeLocal;

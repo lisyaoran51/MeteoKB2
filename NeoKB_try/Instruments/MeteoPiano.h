@@ -23,7 +23,7 @@ namespace Instruments {
 
 	public:
 
-		MeteoPiano();
+		MeteoPiano(vector<string>& args);
 
 		int SetGameControllingPitchState(bool value);
 

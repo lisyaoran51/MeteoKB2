@@ -80,6 +80,9 @@ int SimpleSmDecoder::handleMetadata(Sm<Event>* sm, string & line)
 	else if (pair.at(0) == "ArtistUnicode") {
 		//metadata->AudioFile = pair.at(1);
 	}
+	else if (pair.at(0) == "AudioFile") {
+		metadata->AudioFile = pair.at(1);
+	}
 	else if (pair.at(0) == "Creator") {
 		metadata->Author = pair.at(1);
 	}
