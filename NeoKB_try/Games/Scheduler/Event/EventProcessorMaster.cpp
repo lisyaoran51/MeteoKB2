@@ -1,7 +1,7 @@
 #include "EventProcessorMaster.h"
 
 #include "../../../Util/Log.h"
-#include "Effect\EffectMapper.h"
+#include "Effect/EffectMapper.h"
 
 
 using namespace Games::Schedulers::Events;

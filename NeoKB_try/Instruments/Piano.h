@@ -3,7 +3,7 @@
 
 #include "Instrument.h"
 #include "../Framework/Input/KeyBindings/KeyBinding.h"
-#include "Input\PianoAction.h"
+#include "Input/PianoAction.h"
 
 using namespace Framework::Input::KeyBindings;
 using namespace Instruments::Input;

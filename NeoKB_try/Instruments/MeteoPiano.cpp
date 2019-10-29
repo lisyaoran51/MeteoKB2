@@ -1,6 +1,6 @@
 #include "MeteoPiano.h"
 
-#include "Input\PianoAction.h"
+#include "Input/PianoAction.h"
 #include "Pitch.h"
 
 

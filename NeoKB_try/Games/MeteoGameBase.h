@@ -2,7 +2,7 @@
 #define METEO_GAME_BASE_H
 
 #include "../Framework/Game.h"
-#include "Scene\Interlude\Intro.h"
+#include "Scene/Interlude/Intro.h"
 
 
 using namespace Framework;

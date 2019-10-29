@@ -2,7 +2,7 @@
 #define INSTRUMENT_H
 
 #include "../Framework/Allocation/Hierachal/Container.h"
-#include "Audio\SoundBinding.h"
+#include "Audio/SoundBinding.h"
 #include <map>
 #include "../Framework/Audio/Sample/SampleChannel.h"
 #include "../Framework/Input/KeyBindings/KeyBinding.h"

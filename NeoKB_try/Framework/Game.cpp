@@ -1,7 +1,7 @@
 #include "Game.h"
 
-#include "IO\Stores\NamespacedResourceStore.h"
-#include "IO\Stores\DynamicPathResourceStore.h"
+#include "IO/Stores/NamespacedResourceStore.h"
+#include "IO/Stores/DynamicPathResourceStore.h"
 
 using namespace Framework;
 using namespace Framework::IO::Stores;

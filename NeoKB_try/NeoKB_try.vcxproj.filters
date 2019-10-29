@@ -822,9 +822,6 @@
     <ClCompile Include="RulesetMeteor\Input\MeteorInputManager.cpp">
       <Filter>來源檔案\RulesetMeteor\Input</Filter>
     </ClCompile>
-    <ClCompile Include="RulesetMeteor\MeteorGame.cpp">
-      <Filter>來源檔案\Framework\Threading</Filter>
-    </ClCompile>
     <ClCompile Include="RulesetMeteor\Timing\MeteorTimeController.cpp">
       <Filter>來源檔案\RulesetMeteor\Timing</Filter>
     </ClCompile>
@@ -867,11 +864,14 @@
     <ClCompile Include="Framework\Database\MeteoDatabaseContext.cpp">
       <Filter>來源檔案\Framework\Database</Filter>
     </ClCompile>
+    <ClCompile Include="Desktop\Program.cpp">
+      <Filter>來源檔案\Desktop</Filter>
+    </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
-    <ClCompile Include="Desktop\Program.cpp">
-      <Filter>來源檔案\Desktop</Filter>
+    <ClCompile Include="RulesetMeteor\MeteorGame.cpp">
+      <Filter>來源檔案\RulesetMeteor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

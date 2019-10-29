@@ -3,7 +3,7 @@
 
 #include "PeripheralState.h"
 #include <vector>
-#include "KeyBindings\InputKey.h"
+#include "KeyBindings/InputKey.h"
 
 using namespace std;
 using namespace Framework::Input::KeyBindings;

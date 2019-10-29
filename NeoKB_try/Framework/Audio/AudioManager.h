@@ -7,8 +7,8 @@
 #include <thread>
 #include <functional>
 #include "AudioCollectionManager.h"
-#include "Sample\SampleManager.h"
-#include "Track\TrackManager.h"
+#include "Sample/SampleManager.h"
+#include "Track/TrackManager.h"
 #include "../IO/Stores/ResourceStore.h"
 #include "../Allocation/Hierachal/MtoObject.h"
 #include "../Threading/GameThread.h"
