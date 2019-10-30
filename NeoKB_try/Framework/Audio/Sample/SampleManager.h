@@ -3,7 +3,7 @@
 
 #include "../AudioCollectionManager.h"
 #include "SampleChannel.h"
-#include "../../IO/Stores/ResourceStore.h"
+#include "../../IO/Stores/CompositeResourceStore.h"
 #include <map>
 
 using namespace std;
@@ -17,13 +17,13 @@ namespace Samples {
 
 	public:
 
-		SampleManager(ResourceStore<char*>* rStore);
+		SampleManager(CompositeResourceStore<char*>* rStore);
 
 		SampleChannel* GetSampleChannel(string name);
 
 	private:
 
-		ResourceStore<char*>* resourceStore;
+		CompositeResourceStore<char*>* resourceStore;
 
 		map<string, Sample*> sampleCache;
 

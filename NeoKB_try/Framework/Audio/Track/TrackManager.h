@@ -4,7 +4,7 @@
 
 #include "../AudioCollectionManager.h"
 #include "Track.h"
-#include "../../IO/Stores/ResourceStore.h"
+#include "../../IO/Stores/CompositeResourceStore.h"
 
 
 using namespace Framework::IO::Stores;
@@ -17,13 +17,13 @@ namespace Tracks {
 
 	public:
 
-		TrackManager(ResourceStore<char*>* rStore);
+		TrackManager(CompositeResourceStore<char*>* rStore);
 
 		Track* GetTrack(string name);
 
 	private:
 
-		ResourceStore<char*>* resourceStore;
+		CompositeResourceStore<char*>* resourceStore;
 
 	};
 

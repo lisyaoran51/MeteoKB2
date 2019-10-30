@@ -9,7 +9,7 @@
 #include "AudioCollectionManager.h"
 #include "Sample/SampleManager.h"
 #include "Track/TrackManager.h"
-#include "../IO/Stores/ResourceStore.h"
+#include "../IO/Stores/CompositeResourceStore.h"
 #include "../Allocation/Hierachal/MtoObject.h"
 #include "../Threading/GameThread.h"
 
@@ -35,11 +35,11 @@ namespace Audio {
 
 	public:
 
-		AudioManager(ResourceStore<char*>* trackStore, ResourceStore<char*>* sampleStore);
+		AudioManager(CompositeResourceStore<char*>* trackStore, CompositeResourceStore<char*>* sampleStore);
 
-		SampleManager* GetSampleManager(ResourceStore<char*>* sampleStore = nullptr);
+		SampleManager* GetSampleManager(CompositeResourceStore<char*>* sampleStore = nullptr);
 
-		TrackManager* GetTrackManager(ResourceStore<char*>* trackStore = nullptr);
+		TrackManager* GetTrackManager(CompositeResourceStore<char*>* trackStore = nullptr);
 
 		GameThread* GetAudioThread();
 

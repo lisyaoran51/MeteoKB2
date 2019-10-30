@@ -5,7 +5,7 @@
 using namespace Framework::Audio::Tracks;
 
 
-TrackManager::TrackManager(ResourceStore<char*>* rStore)
+TrackManager::TrackManager(CompositeResourceStore<char*>* rStore)
 {
 	resourceStore = rStore;
 

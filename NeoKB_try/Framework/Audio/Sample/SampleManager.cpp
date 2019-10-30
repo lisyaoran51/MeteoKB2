@@ -8,7 +8,7 @@
 using namespace Framework::Audio::Samples;
 using namespace std;
 
-SampleManager::SampleManager(ResourceStore<char*>* rStore)
+SampleManager::SampleManager(CompositeResourceStore<char*>* rStore)
 {
 	resourceStore = rStore;
 
