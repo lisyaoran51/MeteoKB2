@@ -190,7 +190,7 @@ namespace KeyBindings {
 
 
 			if (it != keyBindings.end()) {
-				propagateKeyDown(queue, make_pair<T, int>((T)(*it)->GetAction<T>(), newKey.second));
+				propagateKeyDown(queue, pair<T, int>((*it)->GetAction<T>(), newKey.second));
 				return 0;
 			}
 			else {
@@ -272,7 +272,7 @@ namespace KeyBindings {
 			});
 
 			if (it != keyBindings.end()) {
-				propagateSlide(queue, make_pair<T, int>((T)(*it)->GetAction<T>(), newSlider.second));
+				propagateSlide(queue, pair<T, int>((T)(*it)->GetAction<T>(), newSlider.second));
 				return 0;
 			}
 			else {
