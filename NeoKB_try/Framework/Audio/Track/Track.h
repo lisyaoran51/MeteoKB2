@@ -24,6 +24,8 @@ namespace Tracks {
 
 	public:
 
+		Track();
+
 		// Clock
 		virtual double GetCurrentTime();
 		virtual int SetRate(double r);
