@@ -184,8 +184,8 @@ namespace KeyBindings {
 
 		int handleNewKeyDown(vector<Triggerable*>* queue, pair<InputKey, int> newKey) {
 
-			vector<KeyBinding*>::iterator it = find_if(keyBindings.begin(), keyBindings.end(), [&newKey](const (KeyBinding*)& k)->bool {
-				return k.Key == newKey.first;
+			vector<KeyBinding*>::iterator it = find_if(keyBindings.begin(), keyBindings.end(), [&newKey](KeyBinding* k)->bool {
+				return k->Key == newKey.first;
 			});
 
 
@@ -202,8 +202,8 @@ namespace KeyBindings {
 
 		int handleNewKeyUp(vector<Triggerable*>* queue, InputKey newKey) {
 
-			vector<KeyBinding*>::iterator it = find_if(keyBindings.begin(), keyBindings.end(), [&newKey](const (KeyBinding*)& k)->bool {
-				return k.Key == newKey;
+			vector<KeyBinding*>::iterator it = find_if(keyBindings.begin(), keyBindings.end(), [&newKey](KeyBinding* k)->bool {
+				return k->Key == newKey;
 			});
 
 			if (it != keyBindings.end()) {
@@ -218,8 +218,8 @@ namespace KeyBindings {
 
 		int handleNewButtonDown(vector<Triggerable*>* queue, InputKey newButton) {
 
-			vector<KeyBinding*>::iterator it = find_if(keyBindings.begin(), keyBindings.end(), [&newButton](const (KeyBinding*)& k)->bool {
-				return k.Key == newButton;
+			vector<KeyBinding*>::iterator it = find_if(keyBindings.begin(), keyBindings.end(), [&newButton](KeyBinding* k)->bool {
+				return k->Key == newButton;
 			});
 
 			if (it != keyBindings.end()) {
@@ -234,8 +234,8 @@ namespace KeyBindings {
 
 		int handleNewButtonUp(vector<Triggerable*>* queue, InputKey newButton) {
 
-			vector<KeyBinding*>::iterator it = find_if(keyBindings.begin(), keyBindings.end(), [&newButton](const (KeyBinding*)& k)->bool {
-				return k.Key == newButton;
+			vector<KeyBinding*>::iterator it = find_if(keyBindings.begin(), keyBindings.end(), [&newButton](KeyBinding* k)->bool {
+				return k->Key == newButton;
 			});
 
 			if (it != keyBindings.end()) {
@@ -250,8 +250,8 @@ namespace KeyBindings {
 
 		int handleNewKnobTurn(vector<Triggerable*>* queue, pair<InputKey, int> newKnob) {
 
-			vector<KeyBinding*>::iterator it = find_if(keyBindings.begin(), keyBindings.end(), [&newKnob](const (KeyBinding*)& k)->bool {
-				return k.Key == newKnob.first;
+			vector<KeyBinding*>::iterator it = find_if(keyBindings.begin(), keyBindings.end(), [&newKnob](KeyBinding* k)->bool {
+				return k->Key == newKnob.first;
 			});
 
 			if (it != keyBindings.end()) {
@@ -266,8 +266,8 @@ namespace KeyBindings {
 
 		int handleNewSlide(vector<Triggerable*>* queue, pair<InputKey, int> newSlider) {
 
-			vector<KeyBinding*>::iterator it = find_if(keyBindings.begin(), keyBindings.end(), [&newSlider](const (KeyBinding*)& k)->bool {
-				return k.Key == newSlider.first;
+			vector<KeyBinding*>::iterator it = find_if(keyBindings.begin(), keyBindings.end(), [&newSlider](KeyBinding* k)->bool {
+				return k->Key == newSlider.first;
 			});
 
 			if (it != keyBindings.end()) {
