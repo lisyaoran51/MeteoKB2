@@ -24,7 +24,7 @@ namespace KeyBindings {
 
 		template<typename T>
 		T GetAction() {
-			return dynamic_cast<T>(action);
+			return (T)action;// dynamic_cast<T>(action);
 		}
 
 		string ToString() {

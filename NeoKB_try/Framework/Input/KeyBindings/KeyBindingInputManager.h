@@ -235,6 +235,7 @@ namespace KeyBindings {
 		int handleNewButtonUp(vector<Triggerable*>* queue, InputKey newButton) {
 
 			vector<KeyBinding*>::iterator it = find_if(keyBindings.begin(), keyBindings.end(), [=](const KeyBinding& k) {
+				
 				return k.Key == newButton;
 			});
 
