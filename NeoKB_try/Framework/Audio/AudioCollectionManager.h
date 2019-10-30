@@ -21,7 +21,7 @@ namespace Audio {
 	/// TODO: 記成adjust aduio component，必須要是updatable才能update
 	/// </summary>
 	template<class T>
-	class AudioCollectionManager : private TConstraint<T, AdjustableAudioComponent>, public AdjustableAudioComponent {
+	class AudioCollectionManager : public AdjustableAudioComponent {
 
 	public:
 
