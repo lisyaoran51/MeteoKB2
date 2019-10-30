@@ -179,6 +179,7 @@
     <ClInclude Include="Framework\Database\DatabaseStore.h" />
     <ClInclude Include="Framework\Database\MeteoDatabaseContext.h" />
     <ClInclude Include="Framework\Host\MeteoGameHost.h" />
+    <ClInclude Include="Framework\IO\FileInfo.h" />
     <ClInclude Include="Framework\IO\FileNotFoundException.h" />
     <ClInclude Include="Framework\IO\PlatformStorage.h" />
     <ClInclude Include="Framework\IO\Storage.h" />

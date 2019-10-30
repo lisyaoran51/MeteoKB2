@@ -42,7 +42,7 @@ namespace Database {
 
 		int AddEntity(Entity<TObject>* entity) {
 			entitiesExtracted.push_back(entity);
-			entities.push_back(entity->Object);
+			objects.push_back(entity->Object);
 			return 0;
 		}
 
@@ -51,7 +51,7 @@ namespace Database {
 		/// </summary>
 		vector<TObject*>* GetEntities() {
 			vector<TObject*>* cloneObjects = new vector<TObject*>();
-			cloneEntities->assign(objects.begin(), objects.end());
+			cloneObjects->assign(objects.begin(), objects.end());
 			return cloneEntities;
 		}
 
@@ -77,7 +77,7 @@ namespace Database {
 			if (typeid(TAttribute).name() == typeid(bool).name())
 				return GetEntitiesOfPropertiyBool(attribute, dynamic_cast<bool>(value));
 
-			throw invalid_argument("vector<TObject*>* GetEntitiesOfPropertiy(): the template type is wrong.")
+			throw invalid_argument("vector<TObject*>* GetEntitiesOfPropertiy(): the template type is wrong.");
 
 			return nullptr;
 		}

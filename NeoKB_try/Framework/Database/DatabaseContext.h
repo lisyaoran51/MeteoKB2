@@ -2,12 +2,19 @@
 #define DATABASE_CONTEXT_H
 
 #include "DatabaseSet.h"
+#include "../Input/KeyBindings/KeyBinding.h"
+#include "../../Games/Ruleset/RulesetInfo.h"
+#include "../IO/FileInfo.h"
 
 // ¥Îªk:
 // GetDbSet<RulesetInfo>()->GetEntitiesOfPropertiy("name")
 // GetDbSet<RulesetInfo>()->GetEntitiesOfPropertiy("name")->at(0)->RetrieveInt("ID"); 
 // RetrieveInt(GetDbSet<RulesetInfo>()->GetEntitiesOfPropertiy("name")->at(0), "ID")
 
+
+using namespace Framework::Input::KeyBindings;
+using namespace Games::Rulesets;
+using namespace Framework::IO;
 
 
 namespace Framework {
@@ -18,6 +25,7 @@ namespace Database{
 	/// </summary>
 	class DatabaseContext {
 
+
 	public:
 
 		
@@ -26,54 +34,22 @@ namespace Database{
 		}
 
 		template<typename TObject>
-		int AddDbSetEntity(TObject* object) {
-
-			DatabaseSet<TObject>* dbSet = GetDbSet<TObject>();
-
-			Entity<TObject>* entity = querier.at(typeid(TObject).name())->BuildEntity<TObject>(object);
-
-			dbSet->AddEntity(entity);
-
-		}
+		int AddDbSetEntity(TObject* object);
 
 		template<typename TEntity>
-		DatabaseSet<TEntity>* GetDbSet() {
-
-			if(typeid(TEntity).name() == typeid(KeyBinding).name())
-				return dynamic_cast<DatabaseSet<TEntity>*>(*databasedKeyBinding);
-			
-			if (typeid(TEntity).name() == typeid(FileInfo).name())
-				return dynamic_cast<DatabaseSet<TEntity>*>(*fileInfo);
-
-			if (typeid(TEntity).name() == typeid(RulesetInfo).name())
-				return dynamic_cast<DatabaseSet<TEntity>*>(*rulesetInfo);
-				break;
-			
-				throw invalid_argument("DatabaseSet<TEntity>* GetDbSet(): wrong template.")
-
-			return nullptr;
-
-		}
+		DatabaseSet<TEntity>* GetDbSet();
 
 		template<typename TEntity>
-		int RetrieveInt(TEntity* entity, string attribute) {
-			return querier.at(typeid(TEntity).name())->RetrieveInt(entity, attribute);
-		}
+		int RetrieveInt(TEntity* entity, string attribute);
 		
 		template<typename TEntity>
-		string RetrieveString(TEntity* entity, string attribute) {
-			return querier.at(typeid(TEntity).name())->RetrieveString(entity, attribute);
-		}
+		string RetrieveString(TEntity* entity, string attribute);
 		
 		template<typename TEntity>
-		double RetrieveDouble(TEntity* entity, string attribute) {
-			return querier.at(typeid(TEntity).name())->RetrieveDouble(entity, attribute);
-		}
+		double RetrieveDouble(TEntity* entity, string attribute);
 		
 		template<typename TEntity>
-		bool RetrieveBool(TEntity* entity, string attribute) {
-			return querier.at(typeid(TEntity).name())->RetrieveBool(entity, attribute);
-		}
+		bool RetrieveBool(TEntity* entity, string attribute);
 
 
 
@@ -88,9 +64,11 @@ namespace Database{
 		DatabaseSet<FileInfo> fileInfo;
 		DatabaseSet<RulesetInfo> rulesetInfo;
 
+
 		class EntityModel {
 
 		public:
+
 			template<typename TAttribute>
 			TAttribute Retrieve(void* entity, string attribute) {
 
@@ -118,12 +96,12 @@ namespace Database{
 
 				entity->ThisEntity = e;
 
-				for (auto const& p : onQueryInt) 
+				for (auto const& p : onQueryInt)
 					entity->PropertiesInt.insert(pair<string, int>(p.first, p.second(e)));
 
 				for (auto const& p : onQueryString)
 					entity->PropertiesString.insert(pair<string, string>(p.first, p.second(e)));
-				
+
 				for (auto const& p : onQueryDouble)
 					entity->PropertiesDouble.insert(pair<string, double>(p.first, p.second(e)));
 
@@ -159,6 +137,62 @@ namespace Database{
 		virtual int createModel();
 
 	};
+
+	template<typename TObject>
+	int DatabaseContext::AddDbSetEntity(TObject * object)
+	{
+
+		DatabaseSet<TObject>* dbSet = GetDbSet<TObject>();
+
+		Entity<TObject>* entity = querier.at((char*)typeid(TObject).name())->BuildEntity<TObject>(object);
+
+		dbSet->AddEntity(entity);
+
+	}
+
+	template<typename TEntity>
+	DatabaseSet<TEntity>* DatabaseContext::GetDbSet()
+	{
+
+		if (typeid(TEntity).name() == typeid(KeyBinding).name())
+			return dynamic_cast<DatabaseSet<TEntity>*>(*databasedKeyBinding);
+
+		if (typeid(TEntity).name() == typeid(FileInfo).name())
+			return dynamic_cast<DatabaseSet<TEntity>*>(*fileInfo);
+
+		if (typeid(TEntity).name() == typeid(RulesetInfo).name())
+			return dynamic_cast<DatabaseSet<TEntity>*>(*rulesetInfo);
+		break;
+
+		throw invalid_argument("DatabaseSet<TEntity>* GetDbSet(): wrong template.");
+
+		return nullptr;
+
+	}
+
+	template<typename TEntity>
+	int DatabaseContext::RetrieveInt(TEntity * entity, string attribute)
+	{
+		return querier.at((char*)typeid(TEntity).name())->RetrieveInt(entity, attribute);
+	}
+
+	template<typename TEntity>
+	string DatabaseContext::RetrieveString(TEntity * entity, string attribute)
+	{
+		return querier.at((char*)typeid(TEntity).name())->RetrieveString(entity, attribute);
+	}
+
+	template<typename TEntity>
+	double DatabaseContext::RetrieveDouble(TEntity * entity, string attribute)
+	{
+		return querier.at((char*)typeid(TEntity).name())->RetrieveDouble(entity, attribute);
+	}
+
+	template<typename TEntity>
+	bool DatabaseContext::RetrieveBool(TEntity * entity, string attribute)
+	{
+		return querier.at((char*)typeid(TEntity).name())->RetrieveBool(entity, attribute);
+	}
 
 
 }}

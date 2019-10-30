@@ -1453,5 +1453,8 @@
     <ClInclude Include="Desktop\Program.h">
       <Filter>標頭檔\Desktop</Filter>
     </ClInclude>
+    <ClInclude Include="Framework\IO\FileInfo.h">
+      <Filter>標頭檔\Framework\IO</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

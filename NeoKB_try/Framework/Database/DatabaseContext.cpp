@@ -10,28 +10,28 @@ int DatabaseContext::EntityModel::RetrieveInt(void * entity, string attribute)
 {
 	if(onQueryInt.at(attribute) != nullptr)
 		return onQueryInt.at(attribute)(entity);
-	else throw invalid_argument("DatabaseContext::EntityModel::RetrieveInt(): no such attribute in this entity")
+	else throw invalid_argument("DatabaseContext::EntityModel::RetrieveInt(): no such attribute in this entity");
 }
 
 string DatabaseContext::EntityModel::RetrieveString(void * entity, string attribute)
 {
 	if (onQueryString.at(attribute) != nullptr)
 		return onQueryString.at(attribute)(entity);
-	else throw invalid_argument("DatabaseContext::EntityModel::RetrieveString(): no such attribute in this entity")
+	else throw invalid_argument("DatabaseContext::EntityModel::RetrieveString(): no such attribute in this entity");
 }
 
 double DatabaseContext::EntityModel::RetrieveDouble(void * entity, string attribute)
 {
 	if (onQueryDouble.at(attribute) != nullptr)
 		return onQueryDouble.at(attribute)(entity);
-	else throw invalid_argument("DatabaseContext::EntityModel::RetrieveDouble(): no such attribute in this entity")
+	else throw invalid_argument("DatabaseContext::EntityModel::RetrieveDouble(): no such attribute in this entity");
 }
 
 bool DatabaseContext::EntityModel::RetrieveBool(void * entity, string attribute)
 {
 	if (onQueryBool.at(attribute) != nullptr)
 		return onQueryBool.at(attribute)(entity);
-	else throw invalid_argument("DatabaseContext::EntityModel::RetrieveBool(): no such attribute in this entity")
+	else throw invalid_argument("DatabaseContext::EntityModel::RetrieveBool(): no such attribute in this entity");
 }
 
 int DatabaseContext::EntityModel::AddOnQueryInt(function<int(void* entity)> queryFunction, string attribute)
