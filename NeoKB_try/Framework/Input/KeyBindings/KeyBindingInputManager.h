@@ -6,6 +6,7 @@
 #include "InputKey.h"
 #include <utility>
 #include "KeyBindingHandler.h"
+#include <algorithm>
 
 
 using namespace Framework::Input;
@@ -18,107 +19,6 @@ namespace KeyBindings {
 
 	template<typename T>
 	class KeyBindingInputManager : public PassThroughInputManager {
-
-
-		int handleNewKeyDown(InputState* state, pair<InputKey, int> newKey) {
-
-			vector<KeyBinding*>::iterator it = find(keyBindings.begin(), keyBindings.end(), [=](const KeyBinding& k) {
-				return k.Key == newKey.first;
-			});
-
-
-			if (it != keyBindings.end()) {
-				propagateKeyDown(triggerQueue, make_pair<T, int>((*it)->GetAction<T>(), newKey.second));
-				return 0;
-			}
-			else {
-				return -1;
-			}
-
-			return 0;
-		}
-
-		int handleNewKeyUp(InputState* state, InputKey newKey) {
-
-			vector<KeyBinding*>::iterator it = find(keyBindings.begin(), keyBindings.end(), [=](const KeyBinding& k) {
-				return k.Key == newKey;
-			});
-
-			if (it != keyBindings.end()) {
-				propagateKeyUp(triggerQueue, (*it)->GetAction<T>(newKey));
-				return 0;
-			}
-			else {
-				return -1;
-			}
-
-		}
-
-		int handleNewButtonDown(InputState* state, InputKey newButton) {
-
-			vector<KeyBinding*>::iterator it = find(keyBindings.begin(), keyBindings.end(), [=](const KeyBinding& k) {
-				return k.Key == newButton;
-			});
-
-			if (it != keyBindings.end()) {
-				propagateButtonDown(triggerQueue, (*it)->GetAction<T>(newButton));
-				return 0;
-			}
-			else {
-				return -1;
-			}
-
-		}
-
-		int handleNewButtonUp(InputState* state, InputKey newButton) {
-
-			vector<KeyBinding*>::iterator it = find(keyBindings.begin(), keyBindings.end(), [=](const KeyBinding& k) {
-				return k.Key == newButton;
-			});
-
-			if (it != keyBindings.end()) {
-				propagateButtonUp(triggerQueue, (*it)->GetAction<T>(newButton));
-				return 0;
-			}
-			else {
-				return -1;
-			}
-
-		}
-
-		int handleNewKnobTurn(InputState* state, pair<InputKey, int> newKnob) {
-
-			vector<KeyBinding*>::iterator it = find(keyBindings.begin(), keyBindings.end(), [=](const KeyBinding& k) {
-				return k.Key == newKnob.first;
-			});
-
-			if (it != keyBindings.end()) {
-				propagateKnobTurn(triggerQueue, (*it)->GetAction<T>(newKnob));
-				return 0;
-			}
-			else {
-				return -1;
-			}
-
-		}
-
-		int handleNewSlide(InputState* state, pair<InputKey, int> newSlider) {
-
-			vector<KeyBinding*>::iterator it = find(keyBindings.begin(), keyBindings.end(), [=](const KeyBinding& k) {
-				return k.Key == newSlider.first;
-			});
-
-			if (it != keyBindings.end()) {
-				propagateSlide(triggerQueue, make_pair<T, int>((*it)->GetAction<T>(), newSlider.second));
-				return 0;
-			}
-			else {
-				return -1;
-			}
-
-			return 0;
-
-		}
 
 
 	public:
@@ -280,7 +180,108 @@ namespace KeyBindings {
 
 	private:
 
-		
+
+
+		int handleNewKeyDown(vector<Triggerable*>* queue, pair<InputKey, int> newKey) {
+
+			vector<KeyBinding*>::iterator it = find_if(keyBindings.begin(), keyBindings.end(), [=](const KeyBinding& k) {
+				return k.Key == newKey.first;
+			});
+
+
+			if (it != keyBindings.end()) {
+				propagateKeyDown(queue, make_pair<T, int>((*it)->GetAction<T>(), newKey.second));
+				return 0;
+			}
+			else {
+				return -1;
+			}
+
+			return 0;
+		}
+
+		int handleNewKeyUp(vector<Triggerable*>* queue, InputKey newKey) {
+
+			vector<KeyBinding*>::iterator it = find_if(keyBindings.begin(), keyBindings.end(), [=](const KeyBinding& k) {
+				return k.Key == newKey;
+			});
+
+			if (it != keyBindings.end()) {
+				propagateKeyUp(queue, (*it)->GetAction<T>());
+				return 0;
+			}
+			else {
+				return -1;
+			}
+
+		}
+
+		int handleNewButtonDown(vector<Triggerable*>* queue, InputKey newButton) {
+
+			vector<KeyBinding*>::iterator it = find_if(keyBindings.begin(), keyBindings.end(), [=](const KeyBinding& k) {
+				return k.Key == newButton;
+			});
+
+			if (it != keyBindings.end()) {
+				propagateButtonDown(queue, (*it)->GetAction<T>());
+				return 0;
+			}
+			else {
+				return -1;
+			}
+
+		}
+
+		int handleNewButtonUp(vector<Triggerable*>* queue, InputKey newButton) {
+
+			vector<KeyBinding*>::iterator it = find_if(keyBindings.begin(), keyBindings.end(), [=](const KeyBinding& k) {
+				return k.Key == newButton;
+			});
+
+			if (it != keyBindings.end()) {
+				propagateButtonUp(queue, (*it)->GetAction<T>());
+				return 0;
+			}
+			else {
+				return -1;
+			}
+
+		}
+
+		int handleNewKnobTurn(vector<Triggerable*>* queue, pair<InputKey, int> newKnob) {
+
+			vector<KeyBinding*>::iterator it = find_if(keyBindings.begin(), keyBindings.end(), [=](const KeyBinding& k) {
+				return k.Key == newKnob.first;
+			});
+
+			if (it != keyBindings.end()) {
+				propagateKnobTurn(queue, (*it)->GetAction<T>());
+				return 0;
+			}
+			else {
+				return -1;
+			}
+
+		}
+
+		int handleNewSlide(vector<Triggerable*>* queue, pair<InputKey, int> newSlider) {
+
+			vector<KeyBinding*>::iterator it = find_if(keyBindings.begin(), keyBindings.end(), [=](const KeyBinding& k) {
+				return k.Key == newSlider.first;
+			});
+
+			if (it != keyBindings.end()) {
+				propagateSlide(queue, make_pair<T, int>((*it)->GetAction<T>(), newSlider.second));
+				return 0;
+			}
+			else {
+				return -1;
+			}
+
+			return 0;
+
+		}
+
 
 
 	};
