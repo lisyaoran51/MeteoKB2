@@ -2,6 +2,7 @@
 
 #include "StopwatchClock.h"
 #include <stdexcept>
+#include <cmath>
 
 
 using namespace Framework::Timing;
