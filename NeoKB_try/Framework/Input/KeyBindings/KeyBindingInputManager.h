@@ -190,7 +190,7 @@ namespace KeyBindings {
 
 
 			if (it != keyBindings.end()) {
-				propagateKeyDown(queue, make_pair<T, int>((*it)->GetAction<T>(), newKey.second));
+				propagateKeyDown(queue, make_pair<T, int>((T)(*it)->GetAction<T>(), newKey.second));
 				return 0;
 			}
 			else {
@@ -207,7 +207,7 @@ namespace KeyBindings {
 			});
 
 			if (it != keyBindings.end()) {
-				propagateKeyUp(queue, (*it)->GetAction<T>());
+				propagateKeyUp(queue, (T)(*it)->GetAction<T>());
 				return 0;
 			}
 			else {
@@ -223,7 +223,7 @@ namespace KeyBindings {
 			});
 
 			if (it != keyBindings.end()) {
-				propagateButtonDown(queue, (*it)->GetAction<T>());
+				propagateButtonDown(queue, (T)(*it)->GetAction<T>());
 				return 0;
 			}
 			else {
@@ -240,7 +240,7 @@ namespace KeyBindings {
 			});
 
 			if (it != keyBindings.end()) {
-				propagateButtonUp(queue, (*it)->GetAction<T>());
+				propagateButtonUp(queue, (T)(*it)->GetAction<T>());
 				return 0;
 			}
 			else {
@@ -256,7 +256,7 @@ namespace KeyBindings {
 			});
 
 			if (it != keyBindings.end()) {
-				propagateKnobTurn(queue, (*it)->GetAction<T>());
+				propagateKnobTurn(queue, (T)(*it)->GetAction<T>());
 				return 0;
 			}
 			else {
@@ -272,7 +272,7 @@ namespace KeyBindings {
 			});
 
 			if (it != keyBindings.end()) {
-				propagateSlide(queue, make_pair<T, int>((*it)->GetAction<T>(), newSlider.second));
+				propagateSlide(queue, make_pair<T, int>((T)(*it)->GetAction<T>(), newSlider.second));
 				return 0;
 			}
 			else {
