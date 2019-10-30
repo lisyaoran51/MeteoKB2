@@ -1,7 +1,7 @@
 #include "LinearMapPitchShifter.h"
 
 
-#include <Math.h>
+#include <cmath>
 
 
 using namespace Games::Schedulers::Events::Effects::Algorithms;
