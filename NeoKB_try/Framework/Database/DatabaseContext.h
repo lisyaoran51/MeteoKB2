@@ -148,6 +148,7 @@ namespace Database{
 
 		dbSet->AddEntity(entity);
 
+		return 0;
 	}
 
 	template<typename TEntity>
@@ -162,7 +163,6 @@ namespace Database{
 
 		if (typeid(TEntity).name() == typeid(RulesetInfo).name())
 			return dynamic_cast<DatabaseSet<TEntity>*>(&rulesetInfo);
-		break;
 
 		throw invalid_argument("DatabaseSet<TEntity>* GetDbSet(): wrong template.");
 
