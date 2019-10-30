@@ -24,7 +24,7 @@ int SampleChannel::Stop()
 SampleChannel::SampleChannel()
 {
 	// throw error:這個式檢查用，不會真的執行
-	throw runtime_error("SampleChannel::SampleChannel() : ...");
+	throw runtime_error("SampleChannel::SampleChannel() : this is for template constraint. unable to launch");
 }
 
 SampleChannel::SampleChannel(Sample * s)

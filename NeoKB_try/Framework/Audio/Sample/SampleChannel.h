@@ -14,7 +14,7 @@ namespace Samples {
 
 	public:
 
-		
+		SampleChannel();
 
 		SampleChannel* GetSampleChannel(string name);
 
@@ -24,7 +24,7 @@ namespace Samples {
 
 	protected:
 
-		SampleChannel();
+		
 
 		SampleChannel(Sample* s);
 
