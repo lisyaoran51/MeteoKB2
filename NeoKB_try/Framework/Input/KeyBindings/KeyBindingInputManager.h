@@ -70,7 +70,7 @@ namespace KeyBindings {
 		virtual int propagateKeyDown(vector<Triggerable*>* queue, pair<T, int> key) {
 			
 			for (int i = 0; i < queue->size(); i++) {
-				KeyBindingHandler<T>* keyBindingHandler = dynamic_cast<KeyBindingHandler<T>*>(queue->at[i]);
+				KeyBindingHandler<T>* keyBindingHandler = dynamic_cast<KeyBindingHandler<T>*>(queue->at(i));
 				if (keyBindingHandler != nullptr) {
 					keyBindingHandler->OnKeyDown(key);
 				}
@@ -86,7 +86,7 @@ namespace KeyBindings {
 		virtual int propagateKeyUp(vector<Triggerable*>* queue, T key) {
 
 			for (int i = 0; i < queue->size(); i++) {
-				KeyBindingHandler<T>* keyBindingHandler = dynamic_cast<KeyBindingHandler<T>*>(queue->at[i]);
+				KeyBindingHandler<T>* keyBindingHandler = dynamic_cast<KeyBindingHandler<T>*>(queue->at(i));
 				if (keyBindingHandler != nullptr) {
 					keyBindingHandler->OnKeyUp(key);
 				}
@@ -102,7 +102,7 @@ namespace KeyBindings {
 		virtual int propagateButtonDown(vector<Triggerable*>* queue, T button) {
 
 			for (int i = 0; i < queue->size(); i++) {
-				KeyBindingHandler<T>* keyBindingHandler = dynamic_cast<KeyBindingHandler<T>*>(queue->at[i]);
+				KeyBindingHandler<T>* keyBindingHandler = dynamic_cast<KeyBindingHandler<T>*>(queue->at(i));
 				if (keyBindingHandler != nullptr) {
 					keyBindingHandler->OnButtonDown(button);
 				}
@@ -118,7 +118,7 @@ namespace KeyBindings {
 		virtual int propagateButtonUp(vector<Triggerable*>* queue, T button) {
 
 			for (int i = 0; i < queue->size(); i++) {
-				KeyBindingHandler<T>* keyBindingHandler = dynamic_cast<KeyBindingHandler<T>*>(queue->at[i]);
+				KeyBindingHandler<T>* keyBindingHandler = dynamic_cast<KeyBindingHandler<T>*>(queue->at(i));
 				if (keyBindingHandler != nullptr) {
 					keyBindingHandler->OnButtonUp(button);
 				}
@@ -130,9 +130,9 @@ namespace KeyBindings {
 		virtual int propagateKnobTurn(vector<Triggerable*>* queue, InputState* state, InputKey knob) {
 
 			pair<InputKey, int> action = make_pair<InputKey, int>(InputKey::None, 0);
-			for (int i = 0; i < state->GetPanelState()->GetPresses()->size(); i++) {
-				if (state->GetPanelState()->GetPresses()->at(i).first == knob)
-					action = state->GetPanelState()->GetPresses()->at(i);
+			for (int i = 0; i < state->GetPanelState()->GetKnobs()->size(); i++) {
+				if (state->GetPanelState()->GetKnobs()->at(i).first == knob)
+					action = state->GetPanelState()->GetKnobs()->at(i);
 			}
 
 			return InputManager::propagateKnobTurn(queue, state, knob) + handleNewKnobTurn(queue, action);
@@ -141,7 +141,7 @@ namespace KeyBindings {
 		virtual int propagateKnobTurn(vector<Triggerable*>* queue, pair<T, int> knob) {
 
 			for (int i = 0; i < queue->size(); i++) {
-				KeyBindingHandler<T>* keyBindingHandler = dynamic_cast<KeyBindingHandler<T>*>(queue->at[i]);
+				KeyBindingHandler<T>* keyBindingHandler = dynamic_cast<KeyBindingHandler<T>*>(queue->at(i));
 				if (keyBindingHandler != nullptr) {
 					keyBindingHandler->OnKnobTurn(knob);
 				}
@@ -154,9 +154,9 @@ namespace KeyBindings {
 		virtual int propagateSlide(vector<Triggerable*>* queue, InputState* state, InputKey slider) {
 
 			pair<InputKey, int> action = make_pair<InputKey, int>(InputKey::None, 0);
-			for (int i = 0; i < state->GetPanelState()->GetPresses()->size(); i++) {
-				if (state->GetPanelState()->GetPresses()->at(i).first == slider)
-					action = state->GetPanelState()->GetPresses()->at(i);
+			for (int i = 0; i < state->GetPanelState()->GetSliders()->size(); i++) {
+				if (state->GetPanelState()->GetSliders()->at(i).first == slider)
+					action = state->GetPanelState()->GetSliders()->at(i);
 			}
 
 			return InputManager::propagateSlide(queue, state, slider) + handleNewSlide(queue, action);
@@ -166,7 +166,7 @@ namespace KeyBindings {
 		virtual int propagateSlide(vector<Triggerable*>* queue, pair<T, int> Slider) {
 
 			for (int i = 0; i < queue->size(); i++) {
-				KeyBindingHandler<T>* keyBindingHandler = dynamic_cast<KeyBindingHandler<T>*>(queue->at[i]);
+				KeyBindingHandler<T>* keyBindingHandler = dynamic_cast<KeyBindingHandler<T>*>(queue->at(i));
 				if (keyBindingHandler != nullptr) {
 					keyBindingHandler->OnSlide(Slider);
 				}
