@@ -4,7 +4,7 @@
 using namespace Framework::Configurations;
 using namespace std;
 
-
+/*
 template<typename T>
 ConfigManager<T>::ConfigManager(): RegisterType("ConfigManager")
 {
@@ -12,6 +12,7 @@ ConfigManager<T>::ConfigManager(): RegisterType("ConfigManager")
 	// 這個問題要找別的方法解決
 	InitializeDefault();
 }
+
 
 template<typename T>
 int ConfigManager<T>::Load()
@@ -49,7 +50,7 @@ int ConfigManager<T>::Set(T lookup, string value)
 	return 0;
 }
 
-/*
+
 template<typename T>
 template<typename U>
 U ConfigManager<T>::Get(T lookup)
@@ -70,7 +71,7 @@ U ConfigManager<T>::Get(T lookup)
 	if (typeid(U) == typeid(string))
 		return configStoreString[lookup];
 	return NULL;
-}*/
+}
 
 template<typename T>
 template<typename U>
@@ -118,3 +119,4 @@ bool ConfigManager<T>::Get(T lookup, U * out)
 
 	return false;
 }
+*/
