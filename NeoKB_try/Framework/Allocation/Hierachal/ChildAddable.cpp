@@ -1,7 +1,10 @@
 #include "ChildAddable.h"
 
+#include <algorithm>
+
 
 using namespace Framework::Allocation::Hierachal;
+using namespace std;
 
 
 ChildAddable::ChildAddable(): Loadable(), RegisterType("ChildAddable")
