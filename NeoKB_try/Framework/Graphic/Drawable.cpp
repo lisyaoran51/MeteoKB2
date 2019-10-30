@@ -1,6 +1,9 @@
 #include "Drawable.h"
 
+#include <stdexcept>
+
 using namespace Framework::Graphic;
+using namespace std;
 
 
 Drawable::Drawable()
