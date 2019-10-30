@@ -180,7 +180,10 @@ namespace KeyBindings {
 
 		int handleNewKeyDown(InputState* state, pair<InputKey, int> newKey) {
 
-			vector<KeyBinding*>::iterator it = find(keyBindings.begin(), keyBindings.end(), newKey.first);
+			vector<KeyBinding*>::iterator it = find(keyBindings.begin(), keyBindings.end(), [=](const KeyBinding& k) {
+				return k.Key == newKey.first;
+			});
+				
 			
 			if (it != keyBindings.end()) {
 				propagateKeyDown(triggerQueue, make_pair<T, int>((*it)->GetAction<T>(), newKey.second));
@@ -195,7 +198,9 @@ namespace KeyBindings {
 
 		int handleNewKeyUp(InputState* state, InputKey newKey) {
 
-			vector<KeyBinding*>::iterator it = find(keyBindings.begin(), keyBindings.end(), newKey);
+			vector<KeyBinding*>::iterator it = find(keyBindings.begin(), keyBindings.end(), [=](const KeyBinding& k) {
+				return k.Key == newKey;
+			});
 
 			if (it != keyBindings.end()) {
 				propagateKeyUp(triggerQueue, (*it)->GetAction<T>(newKey));
@@ -209,7 +214,9 @@ namespace KeyBindings {
 
 		int handleNewButtonDown(InputState* state, InputKey newButton) {
 
-			vector<KeyBinding*>::iterator it = find(keyBindings.begin(), keyBindings.end(), newButton);
+			vector<KeyBinding*>::iterator it = find(keyBindings.begin(), keyBindings.end(), [=](const KeyBinding& k) {
+				return k.Key == newButton;
+			});
 
 			if (it != keyBindings.end()) {
 				propagateButtonDown(triggerQueue, (*it)->GetAction<T>(newButton));
@@ -223,7 +230,9 @@ namespace KeyBindings {
 
 		int handleNewButtonUp(InputState* state, InputKey newButton) {
 
-			vector<KeyBinding*>::iterator it = find(keyBindings.begin(), keyBindings.end(), newButton);
+			vector<KeyBinding*>::iterator it = find(keyBindings.begin(), keyBindings.end(), [=](const KeyBinding& k) {
+				return k.Key == newButton;
+			});
 
 			if (it != keyBindings.end()) {
 				propagateButtonUp(triggerQueue, (*it)->GetAction<T>(newButton));
@@ -237,7 +246,9 @@ namespace KeyBindings {
 
 		int handleNewKnobTurn(InputState* state, pair<InputKey, int> newKnob) {
 
-			vector<KeyBinding*>::iterator it = find(keyBindings.begin(), keyBindings.end(), newKnob);
+			vector<KeyBinding*>::iterator it = find(keyBindings.begin(), keyBindings.end(), [=](const KeyBinding& k) {
+				return k.Key == newKnob.first;
+			});
 
 			if (it != keyBindings.end()) {
 				propagateKnobTurn(triggerQueue, (*it)->GetAction<T>(newKnob));
@@ -251,7 +262,9 @@ namespace KeyBindings {
 
 		int handleNewSlide(InputState* state, pair<InputKey, int> newSlider) {
 
-			vector<KeyBinding*>::iterator it = find(keyBindings.begin(), keyBindings.end(), newSlider.first);
+			vector<KeyBinding*>::iterator it = find(keyBindings.begin(), keyBindings.end(), [=](const KeyBinding& k) {
+				return k.Key == newSlider.first;
+			});
 
 			if (it != keyBindings.end()) {
 				propagateSlide(triggerQueue, make_pair<T, int>((*it)->GetAction<T>(), newSlider.second));
