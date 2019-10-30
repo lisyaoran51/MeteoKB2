@@ -1,7 +1,10 @@
 #include "SongSelect.h"
 
+#include "../../MeteoGame.h"
+
 
 using namespace Games::Scenes::Select;
+using namespace Games;
 
 
 SongSelect::SongSelect(): RegisterType("SongSelect")

@@ -9,7 +9,7 @@
 #include "../../Sheetmusic/SheetmusicManager.h"
 #include "../MeteoScene.h"
 #include "../../../Games/UI/SheetmusicSelectPanel.h"
-#include "../../MeteoGame.h"
+//#include "../../MeteoGame.h" // ¤£¥i¥Hinclude ¶×recursive
 
 
 using namespace Games::Sheetmusics;
