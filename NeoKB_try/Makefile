@@ -26,7 +26,7 @@ Util:Util/DataStructure:\
 \
 ThirdParty/Bass:\
 \
-Desktop:\
+Desktop:Desktop/Devices:\
 \
 RulesetMeteor:RulesetMeteor/Config:RulesetMeteor/Input:RulesetMeteor/Play:\
 RulesetMeteor/Scheduler/Event/Effect:RulesetMeteor/Scheduler/Event/Effect/Algorithm:\
@@ -64,7 +64,7 @@ INCLUDE = -IFramwork -IFramework/Allocation -IFramework/Allocation/Hierachal -IF
 \
 -IThirdParty/Bass \
 \
--IDesktop \
+-IDesktop -IDesktop/Devices \
 \
 -IRulesetMeteor -IRulesetMeteor/Config -IRulesetMeteor/Input -IRulesetMeteor/Play \
 -IRulesetMeteor/Scheduler/Event/Effect -IRulesetMeteor/Scheduler/Event/Effect/Algorithm \

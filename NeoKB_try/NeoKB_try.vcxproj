@@ -172,6 +172,10 @@
     <Text Include="DailyLog.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Desktop\Devices\MeteoBluetoothDevice.h" />
+    <ClInclude Include="Desktop\Devices\MeteoDisplayDevice.h" />
+    <ClInclude Include="Desktop\Devices\MeteoKeyboardDevice.h" />
+    <ClInclude Include="Desktop\Devices\MeteoPanelDevice.h" />
     <ClInclude Include="Desktop\MeteoGameDesktop.h" />
     <ClInclude Include="Desktop\Program.h" />
     <ClInclude Include="Framework\Database\DatabaseContext.h" />

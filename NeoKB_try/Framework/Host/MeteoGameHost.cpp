@@ -1,9 +1,9 @@
 #include "MeteoGameHost.h"
 
-#include "../Devices/BluetoothDevice.h"
-#include "../Devices/DisplayDevice.h"
-#include "../Devices/KeyboardDevice.h"
-#include "../Devices/PanelDevice.h"
+#include "../../Desktop/Devices/MeteoBluetoothDevice.h"
+#include "../../Desktop/Devices/MeteoDisplayDevice.h"
+#include "../../Desktop/Devices/MeteoKeyboardDevice.h"
+#include "../../Desktop/Devices/MeteoPanelDevice.h"
 #include "../Input/Handler/BluetoothInputHandler.h"
 #include "../Input/Handler/KeyboardInputHandler.h"
 #include "../Input/Handler/PanelInputHandler.h"
@@ -13,6 +13,8 @@
 using namespace Framework::Host;
 using namespace Framework::Devices;
 using namespace Framework::Input::Handler;
+using namespace Desktop::Devices;
+
 
 
 MeteoGameHost::MeteoGameHost()
@@ -27,7 +29,7 @@ int MeteoGameHost::setupMainInterface()
 	DisplayDevice* displayDevice = new MeteoDisplayDevice();
 	BluetoothDevice* bluetoothDevice = new MeteoBluetoothDevice();
 	KeyboardDevice* keyboardDevice = new MeteoKeyboardDevice();
-	PanelDevice* panelDevice = new MeteoKeyboardDevice();
+	PanelDevice* panelDevice = new MeteoPanelDevice();
 
 	// bt和panel都同時有input和output特性，先暫時把他們都擺input
 	mainInterface->RegisterInputDevice(bluetoothDevice);
