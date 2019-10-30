@@ -53,13 +53,13 @@ namespace DataStructure {
 			pair<uintptr_t, string> toDelete = make_pair((uintptr_t)callableObject, callbackName);
 
 			vector<pair<uintptr_t, string>>::iterator iterKey;
-			vector<function<_Fty(_Types...)>>::iterator iter;
+			typename vector<function<_Fty(_Types...)>>::iterator iter;
 
 			for (iterKey = callbackKeys.begin(), iter = callbacks.begin();
 				iterKey != callbackKeys.end(), iter != callbacks.end();
 				++iterKey, ++iter) {
 
-				if (iterKey == toDelete) {
+				if (*iterKey == toDelete) {
 					callbackKeys.erase(iterKey);
 					callbacks.erase(iter);
 					return 0;
@@ -81,7 +81,7 @@ namespace DataStructure {
 			//map<pair<uintptr_t, string>, function<_Fty(_Types...)>>::iterator iter;
 			//for (iter = callbackMap.begin(); iter != callbackMap.end(); iter++)
 			//	(*(iter->second))(_Args...);
-			vector<function<_Fty(_Types...)>>::iterator iter;
+			typename vector<function<_Fty(_Types...)>>::iterator iter;
 
 			for (iter = callbacks.begin(); iter != callbacks.end(); ++iter) 
 				(*iter)(_Args...);
