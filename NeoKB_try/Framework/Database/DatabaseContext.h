@@ -155,13 +155,13 @@ namespace Database{
 	{
 
 		if (typeid(TEntity).name() == typeid(KeyBinding).name())
-			return dynamic_cast<DatabaseSet<TEntity>*>(*databasedKeyBinding);
+			return dynamic_cast<DatabaseSet<TEntity>*>(&databasedKeyBinding);
 
 		if (typeid(TEntity).name() == typeid(FileInfo).name())
-			return dynamic_cast<DatabaseSet<TEntity>*>(*fileInfo);
+			return dynamic_cast<DatabaseSet<TEntity>*>(&fileInfo);
 
 		if (typeid(TEntity).name() == typeid(RulesetInfo).name())
-			return dynamic_cast<DatabaseSet<TEntity>*>(*rulesetInfo);
+			return dynamic_cast<DatabaseSet<TEntity>*>(&rulesetInfo);
 		break;
 
 		throw invalid_argument("DatabaseSet<TEntity>* GetDbSet(): wrong template.");

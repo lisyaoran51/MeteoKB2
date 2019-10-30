@@ -2,6 +2,7 @@
 #define KEY_BINDING_H
 
 #include <string>
+#include "InputKey.h"
 
 
 using namespace std;

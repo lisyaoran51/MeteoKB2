@@ -52,7 +52,7 @@ namespace Database {
 		vector<TObject*>* GetEntities() {
 			vector<TObject*>* cloneObjects = new vector<TObject*>();
 			cloneObjects->assign(objects.begin(), objects.end());
-			return cloneEntities;
+			return cloneObjects;
 		}
 
 		/// <summary>
