@@ -9,6 +9,7 @@
 #include "../../Sheetmusic/SheetmusicManager.h"
 #include "../MeteoScene.h"
 #include "../../../Games/UI/SheetmusicSelectPanel.h"
+#include "../../MeteoGame.h"
 
 
 using namespace Games::Sheetmusics;
@@ -16,6 +17,7 @@ using namespace Framework::Scenes;
 using namespace Util::DataStructure;
 using namespace Games::Scenes;
 using namespace Games::UI;
+using namespace Games;
 
 
 namespace Games {
