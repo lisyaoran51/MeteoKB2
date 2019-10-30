@@ -8,7 +8,7 @@ using namespace Framework::Devices;
 
 
 template<class _Type>
-int Keyboard::AddOnKeyEvent(_Type * callableObject, function<int(InputState*)> callback, string name = "HandleKeyEvent")
+int Keyboard::AddOnKeyEvent(_Type * callableObject, function<int(InputState*)> callback, string name)
 {
 	OnKeyEvent.Add(callableObject, callback, name);
 
