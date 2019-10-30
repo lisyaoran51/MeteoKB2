@@ -5,7 +5,7 @@ using namespace Framework::IO::Stores;
 using namespace std;
 
 
-DynamicPathResourceStore::DynamicPathResourceStore(string p)
+DynamicPathResourceStore::DynamicPathResourceStore(string p): RegisterType("DynamicPathResourceStore")
 {
 	path = p;
 }
