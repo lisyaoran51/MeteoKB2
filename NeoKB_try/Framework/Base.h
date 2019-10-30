@@ -3,7 +3,7 @@
 
 
 #include "Allocation/Hierachal/Container.h"
-#include "IO/Stores/ResourceStore.h"
+#include "IO/Stores/CompositeResourceStore.h"
 #include "Audio/AudioManager.h"
 #include "Host/GameHost.h"
 

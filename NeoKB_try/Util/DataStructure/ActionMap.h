@@ -31,7 +31,7 @@ namespace DataStructure {
 
 		template<class _Type>
 		int Delete(_Type* callableObject, string callbackName) {
-			map<uintptr_t, string, function<_Fty(_Types...)>>::iterator iter;
+			typename map<uintptr_t, string, function<_Fty(_Types...)>>::iterator iter;
 			iter = callbackMap.find(make_pair((uintptr_t)t, func_name));
 			if (iter != callbackMap.end()) {
 				callbackMap.erase(iter);
@@ -49,7 +49,7 @@ namespace DataStructure {
 		}
 
 		int Trigger(_Types... _Args) {
-			map<pair<uintptr_t, string>, function<_Fty(_Types...)>>::iterator iter;
+			typename map<pair<uintptr_t, string>, function<_Fty(_Types...)>>::iterator iter;
 			for (iter = callbackMap.begin(); iter != callbackMap.end(); iter++)
 				(*(iter->second))(_Args...);
 			return 0;
