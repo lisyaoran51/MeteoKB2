@@ -3,6 +3,7 @@
 
 #include "../../Framework/Input/KeyBindings/KeyBindingInputManager.h"
 #include "../Ruleset/RulesetInfo.h"
+#include "../Ruleset//Ruleset.h"
 
 using namespace Framework::Input::KeyBindings;
 using namespace Games::Rulesets;
