@@ -183,12 +183,10 @@ namespace KeyBindings {
 			vector<KeyBinding*>::iterator it = find(keyBindings.begin(), keyBindings.end(), newKey.first);
 			
 			if (it != keyBindings.end()) {
-				propagateKeyDown(triggerQueue, make_pair<T, int>(it->GetAction<T>(), newKey.second));
-				delete queue;
+				propagateKeyDown(triggerQueue, make_pair<T, int>((*it)->GetAction<T>(), newKey.second));
 				return 0;
 			}
 			else {
-				delete queue;
 				return -1;
 			}
 
@@ -200,12 +198,10 @@ namespace KeyBindings {
 			vector<KeyBinding*>::iterator it = find(keyBindings.begin(), keyBindings.end(), newKey);
 
 			if (it != keyBindings.end()) {
-				propagateKeyUp(triggerQueue, it->GetAction<T>(newKey));
-				delete queue;
+				propagateKeyUp(triggerQueue, (*it)->GetAction<T>(newKey));
 				return 0;
 			}
 			else {
-				delete queue;
 				return -1;
 			}
 
@@ -216,12 +212,10 @@ namespace KeyBindings {
 			vector<KeyBinding*>::iterator it = find(keyBindings.begin(), keyBindings.end(), newButton);
 
 			if (it != keyBindings.end()) {
-				propagateButtonDown(triggerQueue, it->GetAction<T>(newButton));
-				delete queue;
+				propagateButtonDown(triggerQueue, (*it)->GetAction<T>(newButton));
 				return 0;
 			}
 			else {
-				delete queue;
 				return -1;
 			}
 
@@ -232,12 +226,10 @@ namespace KeyBindings {
 			vector<KeyBinding*>::iterator it = find(keyBindings.begin(), keyBindings.end(), newButton);
 
 			if (it != keyBindings.end()) {
-				propagateButtonUp(triggerQueue, it->GetAction<T>(newButton));
-				delete queue;
+				propagateButtonUp(triggerQueue, (*it)->GetAction<T>(newButton));
 				return 0;
 			}
 			else {
-				delete queue;
 				return -1;
 			}
 
@@ -248,12 +240,10 @@ namespace KeyBindings {
 			vector<KeyBinding*>::iterator it = find(keyBindings.begin(), keyBindings.end(), newKnob);
 
 			if (it != keyBindings.end()) {
-				propagateKnobTurn(triggerQueue, it->GetAction<T>(newKnob));
-				delete queue;
+				propagateKnobTurn(triggerQueue, (*it)->GetAction<T>(newKnob));
 				return 0;
 			}
 			else {
-				delete queue;
 				return -1;
 			}
 
@@ -264,12 +254,10 @@ namespace KeyBindings {
 			vector<KeyBinding*>::iterator it = find(keyBindings.begin(), keyBindings.end(), newSlider.first);
 
 			if (it != keyBindings.end()) {
-				propagateSlide(triggerQueue, make_pair<T, int>(it->GetAction<T>(), newSlider.second));
-				delete queue;
+				propagateSlide(triggerQueue, make_pair<T, int>((*it)->GetAction<T>(), newSlider.second));
 				return 0;
 			}
 			else {
-				delete queue;
 				return -1;
 			}
 
