@@ -18,109 +18,6 @@ namespace Framework {
 namespace Timing {
 
 	/// <summary>
-	/// 其實這個不是scene，應該移到timing去
-	/// </summary>
-	template<typename T>
-	class TTimeController : public TimeController, public KeyBindingHandler<T> {
-
-		int load() {
-
-			// 需要跟input key做binding一下，才知道哪個是pause
-			// 應該是不用bind，input manager都bind好了，我們直接用就好
-
-
-			return 0;
-		}
-
-	public:
-
-		TTimeController() {
-
-			registerLoad(bind(static_cast<int(TTimeController<T>::*)(void)>(&TTimeController<T>::load), this));
-
-		}
-
-		//virtual map<T, InputKey>* GetDefaultkeyBindings() = 0;
-
-		virtual int OnKeyDown(pair<T, int> action) {
-			return 0;
-		}
-
-		virtual int OnKeyUp(T action) {
-			return 0;
-		}
-
-		virtual int OnButtonDown(T action) {
-			if (keyBindings[action] == InputKey::Pause) {
-
-				if (speedAdjuster->GetIsAdjustingTime())
-					return -1;
-
-				if (!GetIsPaused()) {
-					Pause();
-					SetAllChildsIsMaskedForTrigger();
-				}
-				else if(!isWaitingFreeze){
-					speedAdjuster->SetFreezeTime(defaultFreezeTime);
-					isWaitingFreeze = true;
-				}
-			}
-			return 0;
-		}
-
-		virtual int OnButtonUp(T action) {
-			return 0;
-		}
-
-		virtual int OnKnobTurn(pair<T, int> action) {
-			if (keyBindings[action.first] == InputKey::SpeedKnob) {
-				SetRate(GetRate() + action.second);
-
-
-			}
-			if (keyBindings[action.first] == InputKey::SectionKnob) {
-
-				if (isWaitingFreeze)
-					return 0;
-
-				//JumpTo(sectionStartTime[getTempSection() + action.second]);
-				if (isPaused)
-					isAdjustAfterPause = true;
-				speedAdjuster->SetSeekTime(action.second * defaultAdjustTime);
-
-
-			}
-			return 0;
-		}
-
-		virtual int OnSlide(pair<T, int> action) {
-			return 0;
-		}
-
-	protected:
-
-
-		map<T, InputKey> keyBindings;
-
-		/// <summary>
-		/// 在load結束的時候，時記要執行的工作
-		/// </summary>
-		virtual int LoadOnCompleted() {
-
-			reloadMappings();
-
-			return 0;
-		}
-
-		/// <summary>
-		/// 把input key和新的輸入結合一下
-		/// </summary>
-		virtual int reloadMappings() = 0;
-
-
-	};
-
-	/// <summary>
 	/// 擺在player下面，用來控制遊戲速度和暫停、跳小節
 	///	</summary>
 	/// <summary>
@@ -227,6 +124,111 @@ namespace Timing {
 	private:
 
 	};
+
+	/// <summary>
+	/// 其實這個不是scene，應該移到timing去
+	/// </summary>
+	template<typename T>
+	class TTimeController : public TimeController, public KeyBindingHandler<T> {
+
+		int load() {
+
+			// 需要跟input key做binding一下，才知道哪個是pause
+			// 應該是不用bind，input manager都bind好了，我們直接用就好
+
+
+			return 0;
+		}
+
+	public:
+
+		TTimeController() {
+
+			registerLoad(bind(static_cast<int(TTimeController<T>::*)(void)>(&TTimeController<T>::load), this));
+
+		}
+
+		//virtual map<T, InputKey>* GetDefaultkeyBindings() = 0;
+
+		virtual int OnKeyDown(pair<T, int> action) {
+			return 0;
+		}
+
+		virtual int OnKeyUp(T action) {
+			return 0;
+		}
+
+		virtual int OnButtonDown(T action) {
+			if (keyBindings[action] == InputKey::Pause) {
+
+				if (speedAdjuster->GetIsAdjustingTime())
+					return -1;
+
+				if (!GetIsPaused()) {
+					Pause();
+					SetAllChildsIsMaskedForTrigger();
+				}
+				else if(!isWaitingFreeze){
+					speedAdjuster->SetFreezeTime(defaultFreezeTime);
+					isWaitingFreeze = true;
+				}
+			}
+			return 0;
+		}
+
+		virtual int OnButtonUp(T action) {
+			return 0;
+		}
+
+		virtual int OnKnobTurn(pair<T, int> action) {
+			if (keyBindings[action.first] == InputKey::SpeedKnob) {
+				SetRate(GetRate() + action.second);
+
+
+			}
+			if (keyBindings[action.first] == InputKey::SectionKnob) {
+
+				if (isWaitingFreeze)
+					return 0;
+
+				//JumpTo(sectionStartTime[getTempSection() + action.second]);
+				if (isPaused)
+					isAdjustAfterPause = true;
+				speedAdjuster->SetSeekTime(action.second * defaultAdjustTime);
+
+
+			}
+			return 0;
+		}
+
+		virtual int OnSlide(pair<T, int> action) {
+			return 0;
+		}
+
+	protected:
+
+
+		map<T, InputKey> keyBindings;
+
+		/// <summary>
+		/// 在load結束的時候，時記要執行的工作
+		/// </summary>
+		virtual int LoadOnCompleted() {
+
+			reloadMappings();
+
+			return 0;
+		}
+
+		/// <summary>
+		/// 把input key和新的輸入結合一下
+		/// </summary>
+		virtual int reloadMappings() = 0;
+
+
+	};
+
+	
 
 
 
