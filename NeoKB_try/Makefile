@@ -126,7 +126,7 @@ SheetmusicSelectPanel.o \
 \
 Instrument.o MeteoPiano.o Piano.o PianoInputManager.o \
 \
-FileSystem.o ProgramInitializer.o PeriodMap.o \
+FileSystem.o PeriodMap.o \
 \
 MeteoGameDesktop.o Program.o \
 \
