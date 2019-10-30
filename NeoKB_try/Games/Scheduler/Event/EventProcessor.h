@@ -22,7 +22,11 @@ namespace Events {
 
 	class EventProcessorMaster;
 
-	enum class EventProcessorLifeType;
+	enum class EventProcessorLifeType {
+		Timed,
+		Immediate,
+		Infinite
+	};
 
 	/// <summary>
 	/// a processor to process one Event including effects, 
@@ -177,11 +181,7 @@ namespace Events {
 
 	};
 
-	enum class EventProcessorLifeType {
-		Timed,
-		Immediate,
-		Infinite
-	};
+	
 
 }}}
 
