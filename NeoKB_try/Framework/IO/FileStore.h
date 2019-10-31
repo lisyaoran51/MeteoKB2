@@ -15,6 +15,9 @@ namespace IO{
 
 	public:
 		FileStore(function<DatabaseContext*(void)> getContext, Storage* s = nullptr);
+
+		Storage* GetStorage();
+
 	};
 
 }}

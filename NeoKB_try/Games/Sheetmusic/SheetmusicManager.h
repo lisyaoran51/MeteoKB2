@@ -16,6 +16,9 @@
 #include "../../Framework/IO/Storage.h"
 #include "../Ruleset/RulesetStore.h"
 #include "../../Framework/Database/DatabaseContext.h"
+#include "../../Framework/Allocation/Hierachal/MtoObject.h"
+#include "SheetmusicStore.h"
+#include "../../Framework/IO/FileStore.h"
 
 
 namespace Framework {
@@ -30,6 +33,7 @@ using namespace Games::Sheetmusics::IO;
 using namespace Games::Sheetmusics::Format;
 using namespace Games::Rulesets;
 using namespace Framework::IO;
+using namespace Framework::Allocation::Hierachal;
 
 
 
@@ -39,10 +43,22 @@ namespace Sheetmusics {
 
 	/// where T : effect_group
 	/// 
-	class SmManager
+	class SmManager :public MtoObject
 	{
 		// ??不確定是否需要
 		//static int copyTo(ifstream* from, ifstream* to);
+
+		function<DatabaseContext*()> getContext;
+
+		SheetmusicStore* smStore;
+
+		FileStore* fileStore;
+
+		Storage* storage;
+
+		RulesetStore* rulesetStore;
+
+		SheetmusicStore* createSmStore(function<DatabaseContext*()> gContext);
 
 	public:
 

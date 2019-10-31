@@ -1492,5 +1492,8 @@
     <ClInclude Include="Games\Configurations\MeteoConfigManager.h">
       <Filter>標頭檔\Games\Configurations</Filter>
     </ClInclude>
+    <ClInclude Include="Games\Sheetmusic\SheetmusicStore.h">
+      <Filter>標頭檔\Games\Sheetmusics</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

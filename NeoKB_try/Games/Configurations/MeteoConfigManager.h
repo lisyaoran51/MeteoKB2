@@ -25,11 +25,10 @@ namespace Configurations{
 
 	};
 
-	enum class MeteoSettings {
+	enum class MeteoSetting {
 
 		Ruleset,
 		Username,
-
 
 	};
 

@@ -1,14 +1,14 @@
 #include "MeteoConfigManager.h"
 
 
-using namespace Games::Configurations
+using namespace Games::Configurations;
 
 
 
 int MeteoConfigManager::InitializeDefault()
 {
 
-	Set(MeteoSetting::FrameRate, Ruleset);
+	Set(MeteoSetting::Ruleset, 0);
 
 	return 0;
 }

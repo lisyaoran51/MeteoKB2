@@ -9,11 +9,27 @@ using namespace Framework::Host;
 
 
 
-SmManager::SmManager()
+SmManager::SmManager(): RegisterType("SmManager")
 {
 	smInfos = new vector<SmInfo*>();
 	rulesetInfos = new vector<RulesetInfo*>();
 	// TODO: 從資料庫中加入每個ruleset info? 應該在sm manager外面手動加
+}
+
+SmManager::SmManager(Storage * s, function<DatabaseContext*()> gContext, RulesetStore * rStore, GameHost * gHost): RegisterType("SmManager")
+{
+	getContext = gContext;
+
+	smStore = createSmStore(getContext);
+
+	fileStore = new FileStore(gContext, s);
+
+	storage = fileStore->GetStorage();
+
+	rulesetStore = rStore;
+
+	//ipc = new BeatmapIPCChannel(importHost, this); 
+
 }
 
 SmManager::~SmManager()

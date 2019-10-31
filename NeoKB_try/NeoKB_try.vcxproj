@@ -248,6 +248,7 @@
     <ClInclude Include="Games\Sheetmusic\SheetmusicMetadata.h" />
     <ClInclude Include="Games\Sheetmusic\SheetmusicPostprocessor.h" />
     <ClInclude Include="Games\Sheetmusic\SheetmusicSetInfo.h" />
+    <ClInclude Include="Games\Sheetmusic\SheetmusicStore.h" />
     <ClInclude Include="Games\Sheetmusic\WorkingSheetmusic.h" />
     <ClInclude Include="Devices\Graphic\Renderers\WS2812v10Renderer.h" />
     <ClInclude Include="Devices\HardwareInfo.h" />
