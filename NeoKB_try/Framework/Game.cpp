@@ -2,9 +2,11 @@
 
 #include "IO/Stores/NamespacedResourceStore.h"
 #include "IO/Stores/DynamicPathResourceStore.h"
+#include "../Util/Log.h"
 
 using namespace Framework;
 using namespace Framework::IO::Stores;
+using namespace Util;
 
 int Game::load()
 {
