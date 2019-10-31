@@ -12,18 +12,6 @@ namespace Meteor {
 namespace Input{
 
 
-	enum class MeteorAction;
-
-	class MeteorInputManager : public RulesetInputManager<MeteorAction> {
-
-	public:
-
-		MeteorInputManager(RulesetInfo* rInfo);
-
-	};
-
-
-
 	enum class MeteorAction {
 
 		None = 0,
@@ -171,9 +159,9 @@ namespace Input{
 		ExpressionPedal,
 
 		/* General Button */
-		Power		= 1000,
-		Sustain		= 1001,
-		Sensitivity	= 1002,
+		Power = 1000,
+		Sustain = 1001,
+		Sensitivity = 1002,
 
 		/* SpecialButton */
 		RaiseOctave = 1010,
@@ -199,6 +187,18 @@ namespace Input{
 		ExpressionPedalPlugin,
 
 	};
+
+	class MeteorInputManager : public RulesetInputManager<MeteorAction> {
+
+	public:
+
+		MeteorInputManager(RulesetInfo* rInfo);
+
+	};
+
+
+
+	
 
 }}
 

@@ -31,6 +31,9 @@ namespace Input {
 			variant = v;
 
 			isInputable = true;
+
+			test1();
+			test2();
 		}
 
 		virtual vector<KeyBinding*>* GetDefaultkeyBindings() {
