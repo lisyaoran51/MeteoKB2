@@ -30,10 +30,8 @@ namespace Input {
 			rulesetInfo = rInfo;
 			variant = v;
 
-			isInputable = true;
+			KeyBindingInputManager<T>::isInputable = true;
 
-			test1();
-			test2();
 		}
 
 		virtual vector<KeyBinding*>* GetDefaultkeyBindings() {
@@ -58,8 +56,8 @@ namespace Input {
 			vector<KeyBinding*>* bindings = ruleset->GetDefaultkeyBindings(variant);
 			delete ruleset;
 
-			keyBindings.reserve(bindings->size());
-			keyBindings.insert(keyBindings.end(), bindings->begin(), bindings->end());
+			KeyBindingInputManager<T>::keyBindings.reserve(bindings->size());
+			KeyBindingInputManager<T>::keyBindings.insert(keyBindings.end(), bindings->begin(), bindings->end());
 			delete bindings;
 
 			return 0;

@@ -32,12 +32,6 @@ namespace KeyBindings {
 
 	protected:
 
-		int test1() {
-			return 0;
-		}
-
-		int test2();
-
 
 		vector<KeyBinding*> keyBindings;
 		
@@ -293,13 +287,6 @@ namespace KeyBindings {
 
 
 	};
-
-
-	template<typename T>
-	int KeyBindingInputManager<T>::test2()
-	{
-		return 0;
-	}
 
 }
 
