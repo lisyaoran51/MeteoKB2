@@ -29,6 +29,11 @@ namespace Handler{
 	class InputHandler;
 }}}
 
+namespace Framework {
+namespace IO{
+	class Storage;
+}}
+
 
 using namespace std;
 using namespace Framework::Threading;
@@ -74,12 +79,18 @@ namespace Host {
 
 		vector<InputHandler*>* GetAvailableInputHandlers();
 
+		Storage* GetStorage();
+
 	protected:
 
 		/* IO¥Î */
 		MainInterface* mainInterface;
 
 		virtual int setupMainInterface() = 0;
+		
+		Storage* storage;
+
+		virtual Storage* getStorage(string sName) = 0;
 
 
 		/* «Øscene graph¥Î */

@@ -4,6 +4,7 @@
 #include <string>
 #include <fstream>
 #include <vector>
+#include <functional>
 #include "WorkingSheetmusic.h"
 #include "../../Util/TemplateConstraint.h"
 #include "SheetmusicInfo.h"
@@ -13,7 +14,14 @@
 #include "../Ruleset/Ruleset.h"
 #include "../Ruleset/RulesetInfo.h"
 #include "../../Framework/IO/Storage.h"
+#include "../Ruleset/RulesetStore.h"
+#include "../../Framework/Database/DatabaseContext.h"
 
+
+namespace Framework {
+namespace Host{
+	class GameHost;
+}}
 
 
 using namespace std;
@@ -39,6 +47,8 @@ namespace Sheetmusics {
 	public:
 
 		SmManager();
+
+		SmManager(Storage* s, function<DatabaseContext*()> gContext, RulesetStore* rStore, GameHost* gHost);
 
 		~SmManager();
 

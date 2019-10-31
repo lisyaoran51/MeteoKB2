@@ -5,6 +5,7 @@
 #include "../IO/Display.h"
 #include "../Game.h"
 #include "../../Instruments/Instrument.h"
+#include "../IO/Storage.h"
 
 
 
@@ -21,6 +22,8 @@ using namespace Instruments;
 GameHost::GameHost(string name)
 {
 	dependencies = new DependencyContainer();
+
+	dependencies->Cache<Storage>(storage = getStorage(name), "Storage");
 
 	setupMainInterface();
 
@@ -66,6 +69,11 @@ MainInterface * GameHost::GetMainInterface()
 vector<InputHandler*>* GameHost::GetAvailableInputHandlers()
 {
 	return availableInputHandlers;
+}
+
+Storage * GameHost::GetStorage()
+{
+	return storage;
 }
 
 int GameHost::drawInitialize()

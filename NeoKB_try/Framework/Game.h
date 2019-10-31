@@ -24,12 +24,6 @@ namespace Framework {
 
 	class Game : public Container {
 		
-		AudioManager* audioManager;
-		
-		//ResourceStore<string>* resources;
-		
-		GameHost* gameHost;
-		
 		int load();
 
 	public:
@@ -43,6 +37,12 @@ namespace Framework {
 	protected:
 		
 		Game();
+
+		AudioManager* audioManager;
+
+		//ResourceStore<string>* resources;
+
+		GameHost* gameHost;
 		
 	};
 

@@ -29,6 +29,7 @@
     <ClCompile Include="Framework\Timing\SpeedAdjusters\LinearSpeedAdjuster.cpp" />
     <ClCompile Include="Framework\Timing\ThrottledFramedClock.cpp" />
     <ClCompile Include="Framework\Timing\TimeController.cpp" />
+    <ClCompile Include="Games\Configurations\MeteoConfigManager.cpp" />
     <ClCompile Include="Games\MeteoGame.cpp" />
     <ClCompile Include="Games\Graphic\Renderer\MapAlgorithm\HardwareMapAlgorithm.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
@@ -36,6 +37,7 @@
     <ClCompile Include="Games\Graphic\Renderer\renderer.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Games\MeteoGameBase.cpp" />
     <ClCompile Include="Games\Ruleset\Ruleset.cpp" />
     <ClCompile Include="Games\Ruleset\RulesetInfo.cpp" />
     <ClCompile Include="Games\Scene\Interlude\Intro.cpp" />
@@ -177,12 +179,15 @@
     <ClInclude Include="Desktop\MeteoGameDesktop.h" />
     <ClInclude Include="Desktop\Program.h" />
     <ClInclude Include="Framework\Database\DatabaseContext.h" />
+    <ClInclude Include="Framework\Database\DatabaseContextFactory.h" />
     <ClInclude Include="Framework\Database\DatabaseSet.h" />
     <ClInclude Include="Framework\Database\DatabaseStore.h" />
     <ClInclude Include="Framework\Database\MeteoDatabaseContext.h" />
     <ClInclude Include="Framework\Host\MeteoGameHost.h" />
+    <ClInclude Include="Framework\Input\KeyBindings\KeyBindingStore.h" />
     <ClInclude Include="Framework\IO\FileInfo.h" />
     <ClInclude Include="Framework\IO\FileNotFoundException.h" />
+    <ClInclude Include="Framework\IO\FileStore.h" />
     <ClInclude Include="Framework\IO\PlatformStorage.h" />
     <ClInclude Include="Framework\IO\Storage.h" />
     <ClInclude Include="Framework\IO\Stores\CompositeResourceStore.h" />
@@ -190,6 +195,7 @@
     <ClInclude Include="Framework\IO\Stores\FakeEmbeddedResourceStore.h" />
     <ClInclude Include="Framework\Timing\SpeedAdjusters\LinearSpeedAdjuster.h" />
     <ClInclude Include="Framework\Timing\TimeController.h" />
+    <ClInclude Include="Games\Configurations\MeteoConfigManager.h" />
     <ClInclude Include="Games\Graphic\Renderer\MapAlgorithm\HardwareMapAlgorithm.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClInclude>
@@ -200,6 +206,7 @@
     <ClInclude Include="Games\Ruleset\Ruleset.h" />
     <ClInclude Include="Games\Ruleset\RulesetExecutor.h" />
     <ClInclude Include="Games\Ruleset\RulesetInfo.h" />
+    <ClInclude Include="Games\Ruleset\RulesetStore.h" />
     <ClInclude Include="Games\Scene\Interlude\Intro.h" />
     <ClInclude Include="Games\Scene\Loader.h" />
     <ClInclude Include="Games\Scene\MeteoScene.h" />

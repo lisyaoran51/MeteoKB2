@@ -1,8 +1,13 @@
 #include "SheetmusicManager.h"
 
+#include "../../Framework/Host/GameHost.h"
+
 
 using namespace Games::Sheetmusics;
 using namespace std;
+using namespace Framework::Host;
+
+
 
 SmManager::SmManager()
 {
