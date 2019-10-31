@@ -93,7 +93,7 @@ TARGET  = MeteoKB
 #compiler 
 CC = g++
 #cflags 
-CFLAGS = -Wall -ansi -s -std=c++14 -pthread
+CFLAGS = -Wall -ansi -s -std=c++14 -pthread -lbass
 #object 
 OBJS = Main.o \
 \
