@@ -4,6 +4,7 @@
 #include "PeripheralState.h"
 #include <vector>
 #include <string>
+#include <stdexcept>
 
 using namespace std;
 

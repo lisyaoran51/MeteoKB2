@@ -1,6 +1,7 @@
 #ifndef PERIPHERAL_STATE_H
 #define PERIPHERAL_STATE_H
 
+#include <stdexcept>
 
 namespace Framework {
 namespace Input {
