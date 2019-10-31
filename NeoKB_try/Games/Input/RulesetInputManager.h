@@ -57,7 +57,7 @@ namespace Input {
 			delete ruleset;
 
 			KeyBindingInputManager<T>::keyBindings.reserve(bindings->size());
-			KeyBindingInputManager<T>::keyBindings.insert(keyBindings.end(), bindings->begin(), bindings->end());
+			KeyBindingInputManager<T>::keyBindings.insert(KeyBindingInputManager<T>::keyBindings.end(), bindings->begin(), bindings->end());
 			delete bindings;
 
 			return 0;
