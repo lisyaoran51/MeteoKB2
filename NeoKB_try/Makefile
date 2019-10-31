@@ -99,7 +99,7 @@ OBJS = Main.o \
 \
 Base.o Game.o \
 Cachable.o ChildAddable.o Container.o HasParent.o Loadable.o LoadStateHandler.o MtoObject.o Schedulable.o Scheduler.o Triggerable.o Updatable.o \
-AdjustableAudioComponent.o AudioCollectionManager.o AudioComponent.o AudioManager.o \
+AdjustableAudioComponent.o AudioComponent.o AudioManager.o \
 BassSample.o BassSampleChannel.o Sample.o SampleChannel.o SampleManager.o \
 BassTrack.o Track.o TrackManager.o \
 ConfigManager.o FrameworkConfigManager.o \
@@ -126,7 +126,7 @@ SheetmusicSelectPanel.o \
 \
 Instrument.o MeteoPiano.o Piano.o PianoInputManager.o \
 \
-FileSystem.o PeriodMap.o \
+FileSystem.o \
 \
 MeteoGameDesktop.o Program.o \
 \

@@ -82,7 +82,6 @@
     <ClCompile Include="Framework\Allocation\Hierachal\Triggerable.cpp" />
     <ClCompile Include="Framework\Allocation\Hierachal\Updatable.cpp" />
     <ClCompile Include="Framework\Audio\AdjustableAudioComponent.cpp" />
-    <ClCompile Include="Framework\Audio\AudioCollectionManager.cpp" />
     <ClCompile Include="Framework\Audio\AudioComponent.cpp" />
     <ClCompile Include="Framework\Audio\AudioManager.cpp" />
     <ClCompile Include="Framework\Audio\Sample\BassSample.cpp" />
@@ -162,7 +161,6 @@
     <ClCompile Include="RulesetMeteor\Sheetmusic\MeteorSheetmusicPostprocessor.cpp" />
     <ClCompile Include="RulesetMeteor\Sheetmusic\Pattern\MeteorPatternGenerator.cpp" />
     <ClCompile Include="RulesetMeteor\Timing\MeteorTimeController.cpp" />
-    <ClCompile Include="Util\DataStructure\PeriodMap.cpp" />
     <ClCompile Include="Util\FileSystem.c" />
     <ClCompile Include="Util\ProgramInitializer.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>

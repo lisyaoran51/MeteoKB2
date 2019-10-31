@@ -648,9 +648,6 @@
     <ClCompile Include="Framework\Graphic\Map\Map.cpp">
       <Filter>來源檔案\Framework\Graphic\Map</Filter>
     </ClCompile>
-    <ClCompile Include="Util\DataStructure\PeriodMap.cpp">
-      <Filter>來源檔案\Util\DataStructure</Filter>
-    </ClCompile>
     <ClCompile Include="Games\Scene\Play\Player.cpp">
       <Filter>來源檔案\Games\Scene\Play</Filter>
     </ClCompile>
@@ -695,9 +692,6 @@
     </ClCompile>
     <ClCompile Include="Framework\Audio\Sample\SampleManager.cpp">
       <Filter>來源檔案\Framework\Audio\Sample</Filter>
-    </ClCompile>
-    <ClCompile Include="Framework\Audio\AudioCollectionManager.cpp">
-      <Filter>來源檔案\Framework\Audio</Filter>
     </ClCompile>
     <ClCompile Include="Framework\IO\Stores\DynamicPathResourceStore.cpp">
       <Filter>來源檔案\Framework\IO\Stores</Filter>
