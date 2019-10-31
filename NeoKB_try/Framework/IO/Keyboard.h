@@ -36,7 +36,11 @@ namespace IO {
 		virtual int TriggerOnInput();
 
 		template<class _Type>
-		int AddOnKeyEvent(_Type* callableObject, function<int(InputState*)> callback, string name = "HandleKeyEvent");
+		int AddOnKeyEvent(_Type* callableObject, function<int(InputState*)> callback, string name = "HandleKeyEvent") {
+			OnKeyEvent.Add(callableObject, callback, name);
+
+			return 0;
+		}
 
 	protected:
 

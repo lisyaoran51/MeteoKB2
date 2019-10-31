@@ -25,3 +25,9 @@ KeyboardState * KeyboardState::Clone()
 
 	return nullptr;
 }
+
+bool KeyboardState::Contain(InputKey key)
+{
+	throw logic_error("KeyboardState::Contain(): not implemented");
+	return false;
+}

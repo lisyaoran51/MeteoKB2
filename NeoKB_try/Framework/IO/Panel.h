@@ -38,7 +38,10 @@ namespace IO {
 		/// 這些是給handler住測用的，住測完handler就會自動收到這個panel丟出來的input
 		/// </summary>
 		template<class _Type>
-		int AddOnPanelEvent(_Type* callableObject, function<int(InputState*)> callback, string name = "HandlePanelEvent");
+		int AddOnPanelEvent(_Type* callableObject, function<int(InputState*)> callback, string name = "HandlePanelEvent") {
+			OnPanelEvent.Add(callableObject, callback, name);
+			return 0;
+		}
 
 		// 忘記這個要幹嘛了
 		//virtual int ChangeState(int state, bool value) = 0;

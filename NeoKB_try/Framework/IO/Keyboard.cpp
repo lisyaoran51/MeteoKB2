@@ -7,13 +7,6 @@ using namespace Framework::IO;
 using namespace Framework::Devices;
 
 
-template<class _Type>
-int Keyboard::AddOnKeyEvent(_Type * callableObject, function<int(InputState*)> callback, string name)
-{
-	OnKeyEvent.Add(callableObject, callback, name);
-
-	return 0;
-}
 
 int Keyboard::SetDevice(Device * device)
 {

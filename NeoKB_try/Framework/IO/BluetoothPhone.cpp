@@ -25,10 +25,3 @@ int BluetoothPhone::TriggerOnInput()
 	inputStates.clear();
 	return 0;
 }
-
-template<class _Type>
-int BluetoothPhone::AddOnCommand(_Type * callableObject, function<int(InputState*)> callback, string name)
-{
-	OnCommand.Add(callableObject, callback, name);
-	return 0;
-}

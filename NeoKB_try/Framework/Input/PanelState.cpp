@@ -49,3 +49,21 @@ PanelState * PanelState::Clone()
 
 	return cloned;
 }
+
+bool PanelState::ContainButton(InputKey button)
+{
+	throw logic_error("PanelState::ContainButton(): not implemented");
+	return false;
+}
+
+bool PanelState::ContainKnob(InputKey knob)
+{
+	throw logic_error("PanelState::ContainKnob(): not implemented");
+	return false;
+}
+
+bool PanelState::ContainSlider(InputKey slider)
+{
+	throw logic_error("PanelState::ContainerSlider(): not implemented");
+	return false;
+}

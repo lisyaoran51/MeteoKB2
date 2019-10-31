@@ -43,9 +43,9 @@ namespace Input {
 
 		bool ContainButton(InputKey button);
 
-		bool ContainSlider(InputKey knob);
+		bool ContainKnob(InputKey knob);
 
-		bool ContainerSlider(InputKey slider);
+		bool ContainSlider(InputKey slider);
 
 
 

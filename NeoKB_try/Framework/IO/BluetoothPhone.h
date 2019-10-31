@@ -41,7 +41,10 @@ namespace IO {
 		virtual int TriggerOnInput();
 
 		template<class _Type>
-		int AddOnCommand(_Type* callableObject, function<int(InputState*)> callback, string name = "HandleCommand");
+		int AddOnCommand(_Type* callableObject, function<int(InputState*)> callback, string name = "HandleCommand") {
+			OnCommand.Add(callableObject, callback, name);
+			return 0;
+		}
 
 	protected:
 

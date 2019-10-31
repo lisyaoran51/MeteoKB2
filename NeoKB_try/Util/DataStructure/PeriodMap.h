@@ -4,6 +4,7 @@
 #include <vector>
 #include <map>
 #include <functional>
+#include <cmath>
 
 
 using namespace std;
@@ -32,30 +33,122 @@ namespace DataStructure {
 		function<pair<float, float>(T)> getTimeOfPeriod;
 
 	public:
-		PeriodMap(float iPoint, float pLength, function<pair<float, float>(T)> gTimeOfPeriod);
+		PeriodMap(float iPoint, float pLength, function<pair<float, float>(T)> gTimeOfPeriod) {
+			insertionPoint = iPoint;
+			periodLength = pLength;
+			getTimeOfPeriod = gTimePoint;
+		}
 
 
 
-		int InsertItem(T item);
+		int InsertItem(T item) {
+			pair<float, float> insertTimeSpan = getTimeOfPeriod(item);
 
-		int InsertItems(vector<T>* items);
+			// 例如 起始點3 區監5 物件時間7~13 => start=0, end=2
+			int startSection = floor((insertTimeSpan.first - insertionPoint) / periodLength);
+			int endSection = floor((insertTimeSpan.second - insertionPoint) / periodLength);
 
-		int DeleteItem(T item);
+			for (int i = startSection; i <= endSection; i++) {
+				// <3,8> <8,13> <13,18>
+				periods.insert(make_pair<float, float>(insertionPoint + periodLength *  (float)i, insertionPoint + periodLength *  (float)(i + 1)), item);
+			}
 
-		int DeleteItem(pair<float, float> timeOfPeriod);
+			return 0;
+		}
+
+		int InsertItems(vector<T>* items) {
+			for (int i = 0; i < items->size(); i++) {
+				InsertItem(items->at(i));
+			}
+			return 0;
+		}
+
+		int DeleteItem(T item) {
+			typename multimap<pair<float, float>, T>::iterator it;
+			for (it = periods.begin(); it != periods.end(); it++) {
+				if (it->second == item) {
+					periods.erase(it);
+					it--;
+				}
+			}
+			return 0;
+		}
+
+		int DeleteItem(pair<float, float> timeOfPeriod) {
+			int startSection = floor((timeOfPeriod.first - insertionPoint) / periodLength);
+			int endSection = floor((timeOfPeriod.second - insertionPoint) / periodLength);
+
+			for (int i = startSection; i <= endSection; i++) {
+
+				typename multimap<pair<float, float>, T>::iterator it = periods.find(make_pair<float, float>(insertionPoint + periodLength *  (float)i, insertionPoint + periodLength *  (float)(i + 1)));
+				int count = periods.count(make_pair<float, float>(insertionPoint + periodLength *  (float)i, insertionPoint + periodLength *  (float)(i + 1)));
+
+				for (int j = 0; j < count; j++, it++) {
+					pair<float, float> timeSpan = getTimeOfPeriod(it->second);
+					if (it->first.first <= timeSpan.first && it->first.second > timeSpan.second) {
+						periods.erase(it);
+						it--;
+					}
+				}
+			}
+
+
+			return 0;
+		}
 
 		/// <summary>
 		/// 把所有區間和這個區間相比，有整段都在區間內就家進result裡
 		/// </summary>
-		int GetItemsInsidePeriods(pair<float, float> timeOfPeriod, vector<T>* results);
+		int GetItemsInsidePeriods(pair<float, float> timeOfPeriod, vector<T>* results) {
+			int startSection = floor((timeOfPeriod.first - insertionPoint) / periodLength);
+			int endSection = floor((timeOfPeriod.second - insertionPoint) / periodLength);
+
+			for (int i = startSection; i <= endSection; i++) {
+
+				typename multimap<pair<float, float>, T>::iterator it = periods.find(make_pair<float, float>(insertionPoint + periodLength *  (float)i, insertionPoint + periodLength *  (float)(i + 1)));
+				int count = periods.count(make_pair<float, float>(insertionPoint + periodLength *  (float)i, insertionPoint + periodLength *  (float)(i + 1)));
+
+				for (int j = 0; j < count; j++, it++) {
+					pair<float, float> timeSpan = getTimeOfPeriod(it->second);
+					if (it->first.first <= timeSpan.first && it->first.second > timeSpan.second) {
+						results->push_back(it->second);
+					}
+				}
+			}
+
+			return 0;
+		}
 
 		/// <summary>
 		/// 把所有區間和這個區間相比，有重疊到的話就家進去result裡
 		/// </summary>
-		int GetItemsContainPeriods(pair<float, float> timeOfPeriod, vector<T>* results);
+		int GetItemsContainPeriods(pair<float, float> timeOfPeriod, vector<T>* results) {
+			int startSection = floor((timeOfPeriod.first - insertionPoint) / periodLength);
+			int endSection = floor((timeOfPeriod.second - insertionPoint) / periodLength);
+
+			for (int i = startSection; i <= endSection; i++) {
+
+				typename multimap<pair<float, float>, T>::iterator it = periods.find(make_pair<float, float>(insertionPoint + periodLength *  (float)i, insertionPoint + periodLength *  (float)(i + 1)));
+				int count = periods.count(make_pair<float, float>(insertionPoint + periodLength *  (float)i, insertionPoint + periodLength *  (float)(i + 1)));
+
+				for (int j = 0; j < count; j++, it++) {
+					pair<float, float> timeSpan = getTimeOfPeriod(it->second);
+					if (it->first.first <= timeSpan.first || it->first.second > timeSpan.second) {
+						results->push_back(it->second);
+					}
+				}
+			}
+			return 0;
+		}
 
 
-		pair<float, float> GetPeriod(float timePoint);
+		pair<float, float> GetPeriod(float timePoint) {
+			int startSection = floor((timePoint - insertionPoint) / periodLength);
+			return make_pair<float, float>(
+				insertionPoint + periodLength * (float)startSection,
+				insertionPoint + periodLength * (float)(startSection + 1));
+		}
+
 
 
 	};

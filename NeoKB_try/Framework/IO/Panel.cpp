@@ -23,10 +23,3 @@ int Panel::TriggerOnInput()
 	return 0;
 }
 
-
-template<class _Type>
-int Panel::AddOnPanelEvent(_Type * callableObject, function<int(InputState*)> callback, string name)
-{
-	OnPanelEvent.Add(callableObject, callback, name);
-	return 0;
-}
