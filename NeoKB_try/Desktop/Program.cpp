@@ -18,7 +18,7 @@ Program::Program(){}
 
 int Program::Main(vector<string>& args)
 {
-	Util::logLevel = LogLevel::Info;
+	
 
 	GameHost* host = new MeteoGameHost();
 

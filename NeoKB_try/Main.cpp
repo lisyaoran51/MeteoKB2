@@ -1,4 +1,5 @@
 #include "Desktop/Program.h"
+#include "Util\Log.h"
 
 #include <vector>
 #include <string>
@@ -7,10 +8,12 @@
 
 using namespace std;
 using namespace Desktop;
-
+using namespace Util;
 
 
 int main(int argc, char *argv[]) {
+
+	Util::logLevel = LogLevel::Info;
 
 	vector<string> args;
 
