@@ -36,7 +36,7 @@ namespace DataStructure {
 		PeriodMap(float iPoint, float pLength, function<pair<float, float>(T)> gTimeOfPeriod) {
 			insertionPoint = iPoint;
 			periodLength = pLength;
-			getTimeOfPeriod = gTimePoint;
+			getTimeOfPeriod = gTimeOfPeriod;
 		}
 
 
