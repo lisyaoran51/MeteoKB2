@@ -66,7 +66,7 @@ INCLUDE = -IFramwork -IFramework/Allocation -IFramework/Allocation/Hierachal -IF
 \
 -IDesktop -IDesktop/Devices \
 \
--IRulesetMeteor -IRulesetMeteor/Config -IRulesetMeteor/Input -IRulesetMeteor/Play \
+-IRulesetMeteor -IRulesetMeteor/Config -IRulesetMeteor/Input -IRulesetMeteor/Play -IRulesetMeteor/Ruleset \
 -IRulesetMeteor/Scheduler/Event/Effect -IRulesetMeteor/Scheduler/Event/Effect/Algorithm \
 -IRulesetMeteor/Sheetmusic -IRulesetMeteor/Sheetmusic/Pattern \
 -IRulesetMeteor/Timing 
