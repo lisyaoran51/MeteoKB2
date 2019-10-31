@@ -142,7 +142,7 @@ namespace Timing {
 
 	public:
 
-		TTimeController() {
+		TTimeController(): RegisterType("TTimeController") {
 
 			registerLoad(bind(static_cast<int(TTimeController<T>::*)(void)>(&TTimeController<T>::load), this));
 
