@@ -72,7 +72,7 @@ using namespace Meteor::Sheetmusics::Patterns;
 
 using namespace Util;
 
-LogLevel Util::logLevel = LogLevel::Info;
+
 
 int ProgramInitializer::Initialize()
 {

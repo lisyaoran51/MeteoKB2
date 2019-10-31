@@ -10,6 +10,7 @@ using namespace std;
 using namespace Desktop;
 using namespace Util;
 
+LogLevel Util::logLevel = LogLevel::Info;
 
 int main(int argc, char *argv[]) {
 
