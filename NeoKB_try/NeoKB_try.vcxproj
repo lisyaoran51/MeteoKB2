@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -22,10 +22,15 @@
     <ClCompile Include="Desktop\MeteoGameDesktop.cpp" />
     <ClCompile Include="Desktop\Program.cpp" />
     <ClCompile Include="Framework\Database\DatabaseContext.cpp" />
+    <ClCompile Include="Framework\Database\DatabaseContextFactory.cpp" />
+    <ClCompile Include="Framework\Database\DatabaseStore.cpp" />
     <ClCompile Include="Framework\Database\MeteoDatabaseContext.cpp" />
     <ClCompile Include="Framework\Host\MeteoGameHost.cpp" />
+    <ClCompile Include="Framework\Input\KeyBindings\KeyBindingStore.cpp" />
+    <ClCompile Include="Framework\IO\FileStore.cpp" />
     <ClCompile Include="Framework\IO\PlatformStorage.cpp" />
     <ClCompile Include="Framework\IO\Storage.cpp" />
+    <ClCompile Include="Framework\IO\Stores\StorageResourceStore.cpp" />
     <ClCompile Include="Framework\Timing\SpeedAdjusters\LinearSpeedAdjuster.cpp" />
     <ClCompile Include="Framework\Timing\ThrottledFramedClock.cpp" />
     <ClCompile Include="Framework\Timing\TimeController.cpp" />
@@ -40,6 +45,7 @@
     <ClCompile Include="Games\MeteoGameBase.cpp" />
     <ClCompile Include="Games\Ruleset\Ruleset.cpp" />
     <ClCompile Include="Games\Ruleset\RulesetInfo.cpp" />
+    <ClCompile Include="Games\Ruleset\RulesetStore.cpp" />
     <ClCompile Include="Games\Scene\Interlude\Intro.cpp" />
     <ClCompile Include="Games\Scene\MeteoScene.cpp" />
     <ClCompile Include="Games\Scene\Play\Player.cpp" />
@@ -66,10 +72,12 @@
     <ClCompile Include="Games\Sheetmusic\IO\FileReader.cpp" />
     <ClCompile Include="Games\Sheetmusic\Pattern\Pattern.cpp" />
     <ClCompile Include="Games\Sheetmusic\Pattern\PatternGenerator.cpp" />
+    <ClCompile Include="Games\Sheetmusic\ResourceStoreWorkingSm.cpp" />
     <ClCompile Include="Games\Sheetmusic\SheetmusicConverter.cpp" />
     <ClCompile Include="Games\Sheetmusic\SheetmusicManager.cpp" />
     <ClCompile Include="Games\Sheetmusic\SheetmusicMetadata.cpp" />
     <ClCompile Include="Games\Sheetmusic\SheetmusicPostprocessor.cpp" />
+    <ClCompile Include="Games\Sheetmusic\SheetmusicStore.cpp" />
     <ClCompile Include="Games\Sheetmusic\WorkingSheetmusic.cpp" />
     <ClCompile Include="Devices\Graphic\Renderers\WS2812v10Renderer.cpp" />
     <ClCompile Include="Framework\Allocation\Hierachal\Cachable.cpp" />
@@ -193,6 +201,7 @@
     <ClInclude Include="Framework\IO\Stores\CompositeResourceStore.h" />
     <ClInclude Include="Framework\IO\Stores\EmbeddedResourceStore.h" />
     <ClInclude Include="Framework\IO\Stores\FakeEmbeddedResourceStore.h" />
+    <ClInclude Include="Framework\IO\Stores\StorageResourceStore.h" />
     <ClInclude Include="Framework\Timing\SpeedAdjusters\LinearSpeedAdjuster.h" />
     <ClInclude Include="Framework\Timing\TimeController.h" />
     <ClInclude Include="Games\Configurations\MeteoConfigManager.h" />
@@ -240,6 +249,7 @@
     <ClInclude Include="Games\Sheetmusic\IO\FileReader.h" />
     <ClInclude Include="Games\Sheetmusic\Pattern\Pattern.h" />
     <ClInclude Include="Games\Sheetmusic\Pattern\PatternGenerator.h" />
+    <ClInclude Include="Games\Sheetmusic\ResourceStoreWorkingSm.h" />
     <ClInclude Include="Games\Sheetmusic\Sheetmusic.h" />
     <ClInclude Include="Games\Sheetmusic\SheetmusicConverter.h" />
     <ClInclude Include="Games\Sheetmusic\SheetmusicDifficulty.h" />

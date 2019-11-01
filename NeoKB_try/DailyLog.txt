@@ -1152,3 +1152,5 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	smmanager要寫建構子
 	ruleset store...還沒寫
 
+11/1
+	database context的ruleset 現在是每次開遊戲時重新仔入，然後寫入DB，應該要改成依率從DB讀

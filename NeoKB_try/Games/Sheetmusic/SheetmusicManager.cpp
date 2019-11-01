@@ -1,6 +1,7 @@
 #include "SheetmusicManager.h"
 
 #include "../../Framework/Host/GameHost.h"
+#include "ResourceStoreWorkingSm.h"
 
 
 using namespace Games::Sheetmusics;
@@ -8,6 +9,11 @@ using namespace std;
 using namespace Framework::Host;
 
 
+
+SheetmusicStore * SmManager::createSmStore(function<DatabaseContext*()> gContext)
+{
+	return new SheetmusicStore(gContext);
+}
 
 SmManager::SmManager(): RegisterType("SmManager")
 {
@@ -18,12 +24,16 @@ SmManager::SmManager(): RegisterType("SmManager")
 
 SmManager::SmManager(Storage * s, function<DatabaseContext*()> gContext, RulesetStore * rStore, GameHost * gHost): RegisterType("SmManager")
 {
+	smInfos = new vector<SmInfo*>();
+	rulesetInfos = new vector<RulesetInfo*>();
+
 	getContext = gContext;
 
 	smStore = createSmStore(getContext);
 
 	fileStore = new FileStore(gContext, s);
 
+	// 這邊拿到的Storage會是在Files資料夾下，因為加入file store的時候會幫他加一層資料夾Files
 	storage = fileStore->GetStorage();
 
 	rulesetStore = rStore;
@@ -80,7 +90,8 @@ vector<SmInfo*>* SmManager::GetSmInfos()
 
 WorkingSm * SmManager::GetWorkingSm(SmInfo * s)
 {
-	return new WorkingSm(s);
+	//return new WorkingSm(s);
+	return new ResourceStoreWorkingSm(fileStore->GetStore(), s);
 }
 
 vector<SmInfo*>* SmManager::import(FileReader & fileReader)

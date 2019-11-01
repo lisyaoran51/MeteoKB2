@@ -6,7 +6,7 @@ using namespace Framework::Database;
 
 
 
-MeteoDatabaseContext::MeteoDatabaseContext(Storage * s)
+MeteoDatabaseContext::MeteoDatabaseContext(Storage * s): DatabaseContext(s)
 {
 }
 

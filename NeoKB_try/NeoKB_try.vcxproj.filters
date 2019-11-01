@@ -882,6 +882,24 @@
     <ClCompile Include="Games\Configurations\MeteoConfigManager.cpp">
       <Filter>來源檔案\Games\Configurations</Filter>
     </ClCompile>
+    <ClCompile Include="Framework\Database\DatabaseContextFactory.cpp">
+      <Filter>來源檔案\Framework\Database</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\Ruleset\RulesetStore.cpp">
+      <Filter>來源檔案\Games\Ruleset</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Database\DatabaseStore.cpp">
+      <Filter>來源檔案\Framework\Database</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\Sheetmusic\SheetmusicStore.cpp">
+      <Filter>來源檔案\Games\Sheetmusic</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Input\KeyBindings\KeyBindingStore.cpp">
+      <Filter>來源檔案\Framework\Input\KeyBindings</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\IO\FileStore.cpp">
+      <Filter>來源檔案\Framework\IO</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="DailyLog.txt">

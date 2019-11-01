@@ -5,6 +5,7 @@
 #include "../Input/KeyBindings/KeyBinding.h"
 #include "../../Games/Ruleset/RulesetInfo.h"
 #include "../IO/FileInfo.h"
+#include "../../Games/Sheetmusic/SheetmusicInfo.h"
 
 // 用法:
 // GetDbSet<RulesetInfo>()->GetEntitiesOfPropertiy("name")
@@ -15,6 +16,7 @@
 using namespace Framework::Input::KeyBindings;
 using namespace Games::Rulesets;
 using namespace Framework::IO;
+using namespace Games::Sheetmusics;
 
 
 namespace Framework {
@@ -28,8 +30,7 @@ namespace Database{
 
 	public:
 
-		
-		DatabaseContext() {
+		DatabaseContext(Storage* s) {
 			createModel();
 		}
 
@@ -38,6 +39,20 @@ namespace Database{
 
 		template<typename TEntity>
 		DatabaseSet<TEntity>* GetDbSet();
+
+		/// <summary>
+		/// 沒用
+		/// </summary>
+		DatabaseSet<KeyBinding>* GetKeyBindings();
+
+		/// <summary>
+		/// 沒用
+		/// </summary>
+		DatabaseSet<FileInfo>* GetFileInfos();
+
+		DatabaseSet<RulesetInfo>* GetRulesetInfos();
+
+		DatabaseSet<SmInfo>* GetSmInfos();
 
 		template<typename TEntity>
 		int RetrieveInt(TEntity* entity, string attribute);
@@ -56,13 +71,15 @@ namespace Database{
 		
 	protected:
 
-		//DatabaseSet<SmInfo>* BeatmapInfo;
+		
 		//DatabaseSet<SmDifficulty>* BeatmapDifficulty;
 		//DatabaseSet<SmMetadata>* BeatmapMetadata;
 		//DatabaseSet<SmSetInfo>* BeatmapSetInfo;
 		DatabaseSet<KeyBinding> databasedKeyBinding;
 		DatabaseSet<FileInfo> fileInfo;
 		DatabaseSet<RulesetInfo> rulesetInfo;
+		DatabaseSet<SmInfo> smInfo;
+
 
 
 		class EntityModel {

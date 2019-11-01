@@ -28,18 +28,6 @@ namespace Sheetmusics {
 	/// 
 	class WorkingSm
 	{
-		// 這個直接拿sm info裡的舊好
-		//SmSetInfo* smSetInfo = NULL;
-
-		SmInfo* smInfo = NULL;
-
-		SmMetadata* smMetadata = NULL;
-
-		//vector<ctrl_point>* effects;
-
-		//vector<Mod*> mods;
-
-		Sm<Event>* sm = NULL;
 
 	public:
 
@@ -47,19 +35,33 @@ namespace Sheetmusics {
 
 		~WorkingSm();
 
-		Sm<Event>* GetSm();
+		virtual Sm<Event>* GetSm();
 
 		bool IsTheSameSm(SmInfo* s);
 
 		Bindable<vector<Modifier*>*>* GetModifiers();
 
-		Track* GetTrack();
+		virtual Track* GetTrack();
 
 	protected:
 
+
+		// 這個直接拿sm info裡的舊好
+		//SmSetInfo* smSetInfo = NULL;
+
+		SmInfo* smInfo = nullptr;
+
+		SmMetadata* smMetadata = nullptr;
+
+		//vector<ctrl_point>* effects;
+
+		//vector<Mod*> mods;
+
+		Sm<Event>* sm = nullptr;
+
 		virtual Sm<Event>* createSm();
 
-		string getPathForFile(string fileName);
+		virtual string getPathForFile(string fileName);
 
 	};
 

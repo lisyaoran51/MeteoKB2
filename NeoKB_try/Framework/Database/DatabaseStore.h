@@ -23,11 +23,16 @@ namespace Database {
 	/// </summary>
 	class DatabaseStore : public MtoObject {
 
-		DatabaseStore(function<DatabaseContext*(void)> getContext, Storage* s = nullptr);
 
 	public:
 
+		DatabaseStore(function<DatabaseContext*(void)> gContext, Storage* s = nullptr);
 
+	protected:
+
+		function<DatabaseContext*(void)> getContext;
+
+		Storage* storage;
 
 	};
 

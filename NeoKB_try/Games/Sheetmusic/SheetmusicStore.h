@@ -23,6 +23,9 @@ namespace Sheetmusics{
 
 		int Delete(SmInfo* smInfo);
 
+		/// <summary>
+		/// 用完記得要刪掉，不然會memory leak
+		/// </summary>
 		vector<SmInfo*>* GetSheetmusics();
 
 

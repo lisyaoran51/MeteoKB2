@@ -25,7 +25,7 @@ namespace IO {
 	/// 抓取輸入的地方，書出的地方
 	/// </summary>
 	class Peripheral {
-
+		int aa;
 
 	public:
 

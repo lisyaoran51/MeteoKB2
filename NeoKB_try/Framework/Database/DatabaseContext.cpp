@@ -58,6 +58,26 @@ int DatabaseContext::EntityModel::AddOnQueryBool(function<bool(void* entity)> qu
 	return 0;
 }
 
+DatabaseSet<KeyBinding>* DatabaseContext::GetKeyBindings()
+{
+	return &databasedKeyBinding;
+}
+
+DatabaseSet<FileInfo>* DatabaseContext::GetFileInfos()
+{
+	return &fileInfo;
+}
+
+DatabaseSet<RulesetInfo>* DatabaseContext::GetRulesetInfos()
+{
+	return &rulesetInfo;
+}
+
+DatabaseSet<SmInfo>* DatabaseContext::GetSmInfos()
+{
+	return &smInfo;
+}
+
 int DatabaseContext::createModel()
 {
 	// need to be override

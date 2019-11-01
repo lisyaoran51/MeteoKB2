@@ -4,6 +4,7 @@
 
 #include "DatabaseContext.h"
 
+
 namespace Framework {
 namespace Host{
 	class GameHost;
@@ -17,6 +18,10 @@ namespace Framework {
 namespace Database{
 
 	class DatabaseContextFactory {
+
+		GameHost* host;
+
+		DatabaseContext* dbContext;
 
 	public:
 

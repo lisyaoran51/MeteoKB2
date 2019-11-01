@@ -7,6 +7,7 @@
 #include "../Framework/IO/FileStore.h"
 #include "../Framework/Input/KeyBindings/KeyBindingStore.h"
 #include "../Framework/Database/DatabaseContextFactory.h"
+#include "Configurations/MeteoConfigManager.h"
 
 
 using namespace Framework;
@@ -15,6 +16,7 @@ using namespace Games::Scenes::Interlude;
 using namespace Framework::Input::KeyBindings;
 using namespace Framework::IO;
 using namespace Framework::Database;
+using namespace Games::Configurations;
 
 
 namespace Games {

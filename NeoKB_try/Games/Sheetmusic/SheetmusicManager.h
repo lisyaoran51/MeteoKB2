@@ -92,8 +92,6 @@ namespace Sheetmusics {
 
 		vector<SmInfo*>* smInfos;
 
-		
-
 		/// <summary>
 		/// 會把這些路競裡面的檔案全都讀出來，並且用sm set做成一組一組樂譜，然後佔存到某個地方(資料庫或是?)
 		/// 但是目前沒有做到這個部分，只把樂譜資料先丟進去一個list裡，詳建osu的作法
