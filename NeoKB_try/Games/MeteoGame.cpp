@@ -9,11 +9,29 @@ using namespace Games::Scenes;
 int MeteoGame::load()
 {
 	GetDependencies()->Cache<MeteoGame>(this, "MeteoGame");
+
+
 	return 0;
+}
+
+Intro * Games::MeteoGame::getIntro()
+{
+	
+	for (Scene* s = screenStack; s != nullptr; s = s->GetChildScene()) {
+		if (dynamic_cast<Intro*>(s) != nullptr) {
+			intro = dynamic_cast<Intro*>(s);
+			return dynamic_cast<Intro*>(s);
+
+		}
+		
+	}
+
+	return nullptr;
 }
 
 MeteoGame::MeteoGame() : RegisterType("MeteoGame"), MeteoGameBase()
 {
+	
 
 	registerLoad(bind((int(MeteoGame::*)())&MeteoGame::load, this));
 

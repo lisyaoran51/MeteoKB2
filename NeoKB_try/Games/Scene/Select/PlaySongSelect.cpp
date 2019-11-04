@@ -33,5 +33,7 @@ int PlaySongSelect::onSelected()
 
 int PlaySongSelect::load()
 {
+
+
 	return 0;
 }

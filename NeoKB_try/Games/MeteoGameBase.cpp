@@ -23,7 +23,8 @@ int MeteoGameBase::load()
 
 	GetDependencies()->Cache<SmManager>(smManager = new SmManager(gameHost->GetStorage(), bind(&DatabaseContextFactory::GetContext, dbContextFactory), rulesetStore, gameHost);
 
-	workingSm = new Bindable<WorkingSm*>();
+	// 原本要給Working sm做default value，但是現在不用了，所以就直接改成object而不適指標
+	//workingSm = new Bindable<WorkingSm*>();
 
 	return 0;
 }
@@ -34,5 +35,5 @@ MeteoGameBase::MeteoGameBase(): RegisterType("MeteoGameBase")
 
 Bindable<WorkingSm*>* MeteoGameBase::GetWorkingSm()
 {
-	return workingSm;
+	return &workingSm;
 }

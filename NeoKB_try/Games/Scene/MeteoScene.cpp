@@ -40,7 +40,7 @@ MeteoScene::MeteoScene() : RegisterType("MeteoScene"), Scene()
 
 MeteoScene::~MeteoScene()
 {
-	rulesetInfo.Unbind();
-	workingSm.Unbind();
+	rulesetInfo.UnbindAll();
+	workingSm.UnbindAll();
 
 }

@@ -1154,3 +1154,15 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 
 11/1
 	database context的ruleset 現在是每次開遊戲時重新仔入，然後寫入DB，應該要改成依率從DB讀
+	
+	之後要把整個讀sm的流程全都順完
+	
+11/4 
+	把讀音樂和規則寫死的地方在 player::load和SheetmusicSelectPanel::load
+	
+	sminfo有用到的東西只有sm decoder version、smname、sm set info的path
+	真正執行的時候有用到的只有filename
+	
+	開始研究linux spi driver
+	用file ops來控制spi
+	https://www.itread01.com/content/1549810669.html

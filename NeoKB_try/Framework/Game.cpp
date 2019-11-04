@@ -12,7 +12,7 @@ int Game::load()
 {
 	
 
-	audioManager = GetDependencies()->GetCache<AudioManager>("AudioManager");
+	//audioManager = GetDependencies()->GetCache<AudioManager>("AudioManager");
 
 
 	return 0;

@@ -25,6 +25,9 @@ int Player::load(FrameworkConfigManager* f)
 
 	WorkingSm* workingSmValue = workingSm.GetValue();
 
+	// 這個是先寫死ruleset ，之後要改成從檔案讀
+	rulesetInfo.SetValue(new RulesetInfo("MeteorRuleset"));
+
 	ruleset = rulesetInfo.GetValue()->CreateRuleset();
 
 	rulesetExecutor = ruleset->CreateRulesetExecutor(workingSm.GetValue());
@@ -35,6 +38,7 @@ int Player::load(FrameworkConfigManager* f)
 	if (!rulesetInfo)
 		rulesetInfo = sm->GetRulesetInfo();
 	***/
+
 	if (workingSmValue->GetTrack() == nullptr)
 		adjustableClock = new StopwatchClock();
 	else
@@ -80,6 +84,8 @@ int Player::load(FrameworkConfigManager* f)
 Player::Player(): RegisterType("Player"), MeteoScene()
 {
 	registerLoad(bind((int(Player::*)())&Player::load, this));
+
+
 }
 
 Player::~Player()

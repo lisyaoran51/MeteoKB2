@@ -85,7 +85,10 @@ int SmManager::ImportFromStable()
 
 vector<SmInfo*>* SmManager::GetSmInfos()
 {
-	return smInfos;
+	return smStore->GetSheetmusics();
+
+	// 這個是舊的
+	// return smInfos;
 }
 
 WorkingSm * SmManager::GetWorkingSm(SmInfo * s)

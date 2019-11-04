@@ -17,11 +17,13 @@ namespace Games {
 
 	class MeteoGame : public MeteoGameBase {
 
-		Intro* intro;
+		Intro* intro = nullptr;
 
 		Scene* screenStack;
 
 		int load();
+
+		Intro* getIntro();
 
 	public:
 
@@ -30,6 +32,8 @@ namespace Games {
 		Bindable<RulesetInfo*>* GetRuleset();
 
 		virtual Storage* GetStableStorage();
+
+		
 
 	protected:
 

@@ -26,6 +26,29 @@ int SheetmusicSelectPanel::load(FrameworkConfigManager * f, SmManager * s)
 
 	smManager = s;
 
+
+
+	// 暫時先這樣 之後再改
+	string songTitle;
+	if (!f->Get(FrameworkSetting::SongTitle, &songTitle))
+		songTitle = "casual";
+
+	vector<SmInfo*>* smInfos = smManager->GetSmInfos();
+	for (int i = 0; i < smInfos->size(); i++) {
+
+		if (smInfos->at(i)->metadata->Title == songTitle)
+			GetScheduler()->AddDelayedTask([=]() { 
+		
+			SelectionChanged(smInfos->at(i)); 
+			delete smInfos; 
+			StartRequest(); 
+			return 0;
+
+		}, 0.5);
+
+	}
+	
+
 	return 0;
 }
 

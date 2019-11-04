@@ -6,6 +6,7 @@
 #include "../../Games/Ruleset/RulesetInfo.h"
 #include "../IO/FileInfo.h"
 #include "../../Games/Sheetmusic/SheetmusicInfo.h"
+#include "../IO/Storage.h"
 
 // ¥Îªk:
 // GetDbSet<RulesetInfo>()->GetEntitiesOfPropertiy("name")
@@ -17,6 +18,7 @@ using namespace Framework::Input::KeyBindings;
 using namespace Games::Rulesets;
 using namespace Framework::IO;
 using namespace Games::Sheetmusics;
+using namespace Framework::IO;
 
 
 namespace Framework {
@@ -30,9 +32,7 @@ namespace Database{
 
 	public:
 
-		DatabaseContext(Storage* s) {
-			createModel();
-		}
+		DatabaseContext(Storage* s);
 
 		template<typename TObject>
 		int AddDbSetEntity(TObject* object);
@@ -71,7 +71,10 @@ namespace Database{
 		
 	protected:
 
-		
+		virtual int prepare();
+
+		Storage* storage;
+
 		//DatabaseSet<SmDifficulty>* BeatmapDifficulty;
 		//DatabaseSet<SmMetadata>* BeatmapMetadata;
 		//DatabaseSet<SmSetInfo>* BeatmapSetInfo;
@@ -133,10 +136,10 @@ namespace Database{
 			double RetrieveDouble(void* entity, string attribute);
 			bool RetrieveBool(void* entity, string attribute);
 
-			int AddOnQueryInt(function<int(void* entity)> queryFunction, string attribute);
-			int AddOnQueryString(function<string(void* entity)> queryFunction, string attribute);
-			int AddOnQueryDouble(function<double(void* entity)> queryFunction, string attribute);
-			int AddOnQueryBool(function<bool(void* entity)> queryFunction, string attribute);
+			int AddOnQueryInt(function<int(void*)> queryFunction, string attribute);
+			int AddOnQueryString(function<string(void*)> queryFunction, string attribute);
+			int AddOnQueryDouble(function<double(void*)> queryFunction, string attribute);
+			int AddOnQueryBool(function<bool(void*)> queryFunction, string attribute);
 		protected:
 
 			map<string, function<int(void* entity)>> onQueryInt;

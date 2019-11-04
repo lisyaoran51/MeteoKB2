@@ -44,7 +44,7 @@ namespace Games {
 
 		SmManager* smManager;
 
-		Bindable<WorkingSm*>* workingSm;
+		Bindable<WorkingSm*> workingSm;
 
 		MeteoConfigManager* localConfig;
 

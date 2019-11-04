@@ -11,7 +11,7 @@ int Intro::onEntering(Scene * lastScene)
 {
 	mainMenu = new MainMenu();
 
-	GetScheduler()->AddDelayedTask([=]() { Push(mainMenu); return 0; }, 500);
+	GetScheduler()->AddDelayedTask([=]() { Push(mainMenu); return 0; }, 0.5);
 
 	return 0;
 }

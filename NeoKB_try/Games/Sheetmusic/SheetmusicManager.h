@@ -77,6 +77,9 @@ namespace Sheetmusics {
 		/// </summary>
 		int ImportFromStable();
 
+		/// <summary>
+		/// ¥Î§¹­n§R±¼
+		/// </summary>
 		vector<SmInfo*>* GetSmInfos();
 
 		WorkingSm* GetWorkingSm(SmInfo* s);

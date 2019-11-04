@@ -34,28 +34,35 @@ bool DatabaseContext::EntityModel::RetrieveBool(void * entity, string attribute)
 	else throw invalid_argument("DatabaseContext::EntityModel::RetrieveBool(): no such attribute in this entity");
 }
 
-int DatabaseContext::EntityModel::AddOnQueryInt(function<int(void* entity)> queryFunction, string attribute)
+int DatabaseContext::EntityModel::AddOnQueryInt(function<int(void*)> queryFunction, string attribute)
 {
 	onQueryInt[attribute] = queryFunction;
 	return 0;
 }
 
-int DatabaseContext::EntityModel::AddOnQueryString(function<string(void* entity)> queryFunction, string attribute)
+int DatabaseContext::EntityModel::AddOnQueryString(function<string(void*)> queryFunction, string attribute)
 {
 	onQueryString[attribute] = queryFunction;
 	return 0;
 }
 
-int DatabaseContext::EntityModel::AddOnQueryDouble(function<double(void* entity)> queryFunction, string attribute)
+int DatabaseContext::EntityModel::AddOnQueryDouble(function<double(void*)> queryFunction, string attribute)
 {
 	onQueryDouble[attribute] = queryFunction;
 	return 0;
 }
 
-int DatabaseContext::EntityModel::AddOnQueryBool(function<bool(void* entity)> queryFunction, string attribute)
+int DatabaseContext::EntityModel::AddOnQueryBool(function<bool(void*)> queryFunction, string attribute)
 {
 	onQueryBool[attribute] = queryFunction;
 	return 0;
+}
+
+DatabaseContext::DatabaseContext(Storage * s)
+{
+	storage = s;
+	createModel();
+	prepare();
 }
 
 DatabaseSet<KeyBinding>* DatabaseContext::GetKeyBindings()
@@ -76,6 +83,12 @@ DatabaseSet<RulesetInfo>* DatabaseContext::GetRulesetInfos()
 DatabaseSet<SmInfo>* DatabaseContext::GetSmInfos()
 {
 	return &smInfo;
+}
+
+int DatabaseContext::prepare()
+{
+	// TODO: 與資料庫連結
+	return 0;
 }
 
 int DatabaseContext::createModel()

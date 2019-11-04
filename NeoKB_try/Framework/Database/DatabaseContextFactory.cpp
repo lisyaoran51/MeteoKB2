@@ -9,10 +9,16 @@ using namespace Framework::Database;
 DatabaseContextFactory::DatabaseContextFactory(GameHost * h)
 {
 	host = h;
-	dbContext = new DatabaseContext(host->GetStorage());
+	createDatabaseContext();
 }
 
 DatabaseContext * DatabaseContextFactory::GetContext()
 {
 	return dbContext;
+}
+
+int DatabaseContextFactory::createDatabaseContext()
+{
+	dbContext = new DatabaseContext(host->GetStorage());
+	return 0;
 }

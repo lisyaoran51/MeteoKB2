@@ -19,15 +19,19 @@ namespace Database{
 
 	class DatabaseContextFactory {
 
-		GameHost* host;
-
-		DatabaseContext* dbContext;
-
 	public:
 
 		DatabaseContextFactory(GameHost* h);
 
 		DatabaseContext* GetContext();
+
+	protected:
+
+		GameHost* host;
+
+		DatabaseContext* dbContext;
+
+		virtual int createDatabaseContext();
 
 	};
 

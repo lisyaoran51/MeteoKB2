@@ -11,6 +11,8 @@ namespace Database{
 
 	class MeteoDatabaseContext : public DatabaseContext {
 
+		string smInfoFilenameQueryFunction(void* object);
+
 	public:
 
 		MeteoDatabaseContext(Storage* s);

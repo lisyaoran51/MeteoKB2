@@ -900,6 +900,18 @@
     <ClCompile Include="Framework\IO\FileStore.cpp">
       <Filter>來源檔案\Framework\IO</Filter>
     </ClCompile>
+    <ClCompile Include="Games\Sheetmusic\ResourceStoreWorkingSm.cpp">
+      <Filter>來源檔案\Games\Sheetmusic</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\IO\Stores\StorageResourceStore.cpp">
+      <Filter>來源檔案\Framework\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Database\FakeMeteoDatabaseContext.cpp">
+      <Filter>來源檔案\Framework\Database</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Database\FakeDatabaseContextFactory.cpp">
+      <Filter>來源檔案\Framework\Database</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="DailyLog.txt">
@@ -1512,6 +1524,18 @@
     </ClInclude>
     <ClInclude Include="Games\Sheetmusic\SheetmusicStore.h">
       <Filter>標頭檔\Games\Sheetmusics</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\IO\Stores\StorageResourceStore.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Sheetmusic\ResourceStoreWorkingSm.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Database\FakeMeteoDatabaseContext.h">
+      <Filter>標頭檔\Framework\Database</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Database\FakeDatabaseContextFactory.h">
+      <Filter>標頭檔\Framework\Database</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

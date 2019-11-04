@@ -61,13 +61,16 @@ int SongSelect::load(SmManager * sManager, MeteoGame * game)
 
 int SongSelect::selectionChanged(SmInfo * sheetmusicInfo)
 {
+	if (workingSm.GetValue() != nullptr) {
+		if (!workingSm.GetValue()->IsTheSameSm(sheetmusicInfo)) {
 
-	if (!workingSm.GetValue()->IsTheSameSm(sheetmusicInfo)) {
 
+			workingSm.SetValue(smManager->GetWorkingSm(sheetmusicInfo), true);
 
-		workingSm.SetValue(smManager->GetWorkingSm(sheetmusicInfo), true);
-
+		}
 	}
+	else
+		workingSm.SetValue(smManager->GetWorkingSm(sheetmusicInfo), true);
 
 	updateSheetmusic(workingSm.GetValue());
 

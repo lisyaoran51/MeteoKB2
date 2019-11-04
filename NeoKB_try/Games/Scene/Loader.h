@@ -15,6 +15,8 @@ namespace Scenes {
 
 		int load();
 
+		int load(MeteoGame* mg);
+
 	public:
 
 		Loader();
