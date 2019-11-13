@@ -50,7 +50,7 @@ namespace DataStructure {
 
 			for (int i = startSection; i <= endSection; i++) {
 				// <3,8> <8,13> <13,18>
-				periods.insert(make_pair<float, float>(insertionPoint + periodLength *  (float)i, insertionPoint + periodLength *  (float)(i + 1)), item);
+				periods.insert(pair<float, float>(insertionPoint + periodLength *  (float)i, insertionPoint + periodLength *  (float)(i + 1)), item);
 			}
 
 			return 0;
