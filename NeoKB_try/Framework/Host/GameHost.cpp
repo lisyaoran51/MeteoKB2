@@ -23,6 +23,7 @@ GameHost::GameHost(string name)
 {
 	dependencies = new DependencyContainer();
 
+	// name是資料夾名稱
 	dependencies->Cache<Storage>(storage = getStorage(name), "Storage");
 
 	setupMainInterface();

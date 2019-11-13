@@ -5,17 +5,18 @@
 #include <string>
 #include <vector>
 #include <fstream>
+#include "../Allocation/Hierachal/MtoObject.h"
 
 
 using namespace std;
-
+using namespace Framework::Allocation::Hierachal;
 
 
 namespace Framework {
 namespace IO{
 
 
-	class Storage {
+	class Storage: public MtoObject {
 
 
 	public:

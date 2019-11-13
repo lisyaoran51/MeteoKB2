@@ -7,6 +7,7 @@
 #include "../Input/Handler/BluetoothInputHandler.h"
 #include "../Input/Handler/KeyboardInputHandler.h"
 #include "../Input/Handler/PanelInputHandler.h"
+#include "../IO/PlatformStorage.h"
 
 
 
@@ -14,7 +15,7 @@ using namespace Framework::Host;
 using namespace Framework::Devices;
 using namespace Framework::Input::Handler;
 using namespace Desktop::Devices;
-
+using namespace Framework::IO;
 
 
 MeteoGameHost::MeteoGameHost()
@@ -26,7 +27,7 @@ int MeteoGameHost::setupMainInterface()
 {
 	mainInterface = new MainInterface();
 
-	DisplayDevice* displayDevice = new MeteoDisplayDevice();
+	DisplayDevice* displayDevice = new MeteoDisplayDevice(48, 16);// 之後再改
 	BluetoothDevice* bluetoothDevice = new MeteoBluetoothDevice();
 	KeyboardDevice* keyboardDevice = new MeteoKeyboardDevice();
 	PanelDevice* panelDevice = new MeteoPanelDevice();
@@ -49,4 +50,11 @@ vector<InputHandler*>* MeteoGameHost::createAvailableInputHandlers()
 	handlers->push_back(new BluetoothInputHandler());
 
 	return handlers;
+}
+
+Storage* MeteoGameHost::getStorage(string sName) 
+{
+
+	return new PlatformStorage(sName);
+
 }

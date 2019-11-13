@@ -21,6 +21,8 @@ namespace Host {
 		virtual int setupMainInterface();
 
 		virtual vector<InputHandler*>* createAvailableInputHandlers();
+
+		virtual Storage* getStorage(string sName);
 	};
 
 

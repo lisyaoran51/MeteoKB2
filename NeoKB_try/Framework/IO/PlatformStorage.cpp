@@ -19,7 +19,7 @@ using namespace std::experimental::filesystem;
 
 
 
-PlatformStorage::PlatformStorage(string bName, string sDirectory): Storage(bName, sDirectory)
+PlatformStorage::PlatformStorage(string bName, string sDirectory): Storage(bName, sDirectory), RegisterType("PlatformStorage")
 {
 	
 

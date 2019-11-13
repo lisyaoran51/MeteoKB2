@@ -81,7 +81,7 @@ Storage * Storage::GetStorageForDirectory(string directoryPath)
 	return nullptr;
 }
 
-Storage::Storage(string bName, string sDirectory)
+Storage::Storage(string bName, string sDirectory): RegisterType("Storage")
 {
 	baseName = bName;
 	basePath = locateBasePath();
