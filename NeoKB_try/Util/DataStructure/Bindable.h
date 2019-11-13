@@ -55,6 +55,11 @@ namespace DataStructure {
 			return value;
 		}
 
+		T GetDefaultValue() {
+			// TODO: 檢查有沒有default value
+			return defaultValue;
+		}
+
 		int SetDisabled(bool d) {
 			disabled = d;
 			triggerDisabledChange();
