@@ -66,7 +66,7 @@ namespace Audio {
 			AdjustableAudioComponent::update();
 
 			for (int i = 0; i < items.size(); i++) {
-				AdjustableAudioComponent* item = dynamic_cast<AdjustableAudioComponent*>(items[i]);
+				T* item = dynamic_cast<T*>(items[i]);
 
 				if (item == nullptr)
 					throw runtime_error("AudioCollectionManager<T>::update: this component's type is wrong.");
