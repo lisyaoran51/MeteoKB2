@@ -24,8 +24,12 @@ int Scheduler::Update()
 		if (timedTasks[i]->GetExecutionTime() < localCurrentTime) {
 			
 
-			if (timedTasks[i]->GetIsCancelled())
+			if (timedTasks[i]->GetIsCancelled()) {
+				delete timedTasks[i];
+				timedTasks.erase(timedTasks.begin() + i);
+				i--;
 				continue;
+			}
 
 			taskQueue.push_back(timedTasks[i]->GetTask());
 
@@ -74,12 +78,7 @@ int Scheduler::AddTask(function<int(void)> task)
 
 int Scheduler::AddScheduledTask(ScheduledTask * task)
 {
-	for (int i = 0; i < timedTasks.size(); i++)
-		delete timedTasks[i];
-
-	timedTasks.clear();
-
-
+	tasksToSchedule.push_back(task);
 
 	return 0;
 }
@@ -91,9 +90,9 @@ int Scheduler::AddDelayedTask(function<int(void)> task, double timeUntilRun, boo
 	if (repeat)
 		scheduledTask = new ScheduledTask(task, clock->GetCurrentTime() + timeUntilRun, timeUntilRun);
 	else
-		scheduledTask = new ScheduledTask(task, clock->GetCurrentTime() + timeUntilRun, -1);
+		scheduledTask = new ScheduledTask(task, clock->GetCurrentTime() + timeUntilRun);
 
-	tasksToSchedule.push_back(scheduledTask);
+	AddScheduledTask(scheduledTask);
 
 	return 0;
 }
@@ -110,6 +109,8 @@ int Scheduler::Cancel()
 {
 	CancelDelayedTasks();
 	taskQueue.clear();
+	perUpdateTasks.clear();
+
 	isCancelled = true;
 	return 0;
 }
@@ -118,6 +119,7 @@ ScheduledTask::ScheduledTask(function<int(void)> t, double eTime, double rInterv
 {
 	task = t;
 	executionTime = eTime;
+	// 如果repeatInterval是-1代表他不repeat，預設值是-1
 	repeatInterval = rInterval;
 }
 

@@ -19,6 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Desktop\Devices\bcm2835.c" />
+    <ClCompile Include="Desktop\Devices\MeteoBluetoothDevice.cpp" />
+    <ClCompile Include="Desktop\Devices\MeteoDisplayDevice.cpp" />
+    <ClCompile Include="Desktop\Devices\MeteoKeyboardDevice.cpp" />
+    <ClCompile Include="Desktop\Devices\MeteoLightBoardV1.cpp" />
+    <ClCompile Include="Desktop\Devices\MeteoPanelDevice.cpp" />
     <ClCompile Include="Desktop\MeteoGameDesktop.cpp" />
     <ClCompile Include="Desktop\Program.cpp" />
     <ClCompile Include="Framework\Database\DatabaseContext.cpp" />
@@ -182,9 +188,11 @@
     <Text Include="DailyLog.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Desktop\Devices\bcm2835.h" />
     <ClInclude Include="Desktop\Devices\MeteoBluetoothDevice.h" />
     <ClInclude Include="Desktop\Devices\MeteoDisplayDevice.h" />
     <ClInclude Include="Desktop\Devices\MeteoKeyboardDevice.h" />
+    <ClInclude Include="Desktop\Devices\MeteoLightBoardV1.h" />
     <ClInclude Include="Desktop\Devices\MeteoPanelDevice.h" />
     <ClInclude Include="Desktop\MeteoGameDesktop.h" />
     <ClInclude Include="Desktop\Program.h" />

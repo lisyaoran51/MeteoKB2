@@ -45,6 +45,9 @@ namespace Hierachal {
 
 		int Update();
 
+		/// <summary>
+		/// 立刻執行的task，要小心concurrency競爭
+		/// </summary>
 		int AddTask(function<int(void)> task);
 
 		int AddScheduledTask(ScheduledTask* task);
@@ -53,6 +56,9 @@ namespace Hierachal {
 
 		int CancelDelayedTasks();
 
+		/// <summary>
+		/// 這個寒士沒有真的把task刪掉，只把vector清空，所以會memory leak
+		/// </summary>
 		int Cancel();
 
 	protected:

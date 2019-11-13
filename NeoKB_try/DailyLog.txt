@@ -1166,3 +1166,46 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	開始研究linux spi driver
 	用file ops來控制spi
 	https://www.itread01.com/content/1549810669.html
+	https://forum.rocketboards.org/t/implement-a-custom-spi-device-driver/576  這個人寫不出來
+	
+	簡單的範例 https://stackoverflow.com/questions/22632713/how-to-write-a-simple-linux-device-driver
+	
+11/5
+	mcp300x compile和overlay
+	http://simple-is-beauty.blogspot.com/2018/11/device-tree-overlayindustrial-io.html
+	
+	範例少做一個sudo chmod 666 /dev/ex3，難怪都讀不到檔
+	sudo chmod 666 /dev/ex3
+
+	hrtimer範例 https://blog.xuite.net/yang44/dd/113338802-linux+timer%E6%A9%9F%E5%88%B6
+	
+11/8
+	改device tree spi mode
+	https://www.at91.com/viewtopic.php?t=21613
+	spi-cpha=<1>;
+	spi-cpol=<1>;
+	
+	dtc -O dtb -o xxx.dtb xxx.dts
+	 dtc -I fs /proc/device-tree
+	
+11/11
+	register_chrdev出來會出現在/PROC/devices裡
+	class_create會在/sys/class裡面出現你命名的資料夾
+	
+	自己insmod的話會預設權限是root，特別的改權限方法是devnode
+	https://stackoverflow.com/questions/11846594/how-can-i-programmatically-set-permissions-on-my-char-device
+	
+	
+	dmesg -wH
+	
+	hrtimer速度低於10ms又用spi的話就會當掉
+	一次spi大約花60us
+	結論是spi太慢了，不如用bitbang
+	http://ruten-proteus.blogspot.com/2012/11/io-74hc595-ic.html
+	
+11/12
+	BCM2835裡的<stdint.h>要改<linux/types.h>，<stdlib>改<linux/string.h>
+	
+	driver link lib的方法 https://stackoverflow.com/questions/25856984/linking-custom-library-to-linux-kernel-module-in-the-makefile
+	
+	用bcm2835來做bitbang，每8bit只要4us，比Spi快很多

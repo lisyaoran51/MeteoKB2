@@ -4,9 +4,11 @@
 
 
 #include "../../Framework/Devices/DisplayDevice.h"
+#include "../../Devices/MeteoLightBoardV1.h"
+
 
 using namespace Framework::Devices;
-
+using namespace Devices;
 
 
 namespace Desktop {
@@ -14,7 +16,18 @@ namespace Devices {
 
 	class MeteoDisplayDevice : public DisplayDevice {
 
+		int width;
+		int height;
+
+		MeteoLightBoardV1* meteoLightBoard;
+
+		uint8_t** lightMatrix;
+
 	public:
+
+		MeteoDisplayDevice(int w, int h);
+
+
 
 		int Show(Map* m);
 
