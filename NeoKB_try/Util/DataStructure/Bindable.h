@@ -155,7 +155,7 @@ namespace DataStructure {
 				return 0;
 
 			for (int i = 0; i < bindings->size(); i++) {
-				bindings->at(i)->SetDisabledWithoutTrigger(disable);
+				bindings->at(i)->SetDisabledWithoutTrigger(disabled);
 			}
 
 			return 0;
