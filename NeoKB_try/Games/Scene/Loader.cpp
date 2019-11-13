@@ -1,10 +1,12 @@
 #include "Loader.h"
 
 #include "Interlude/Intro.h" 
+#include "../MeteoGame.h"
 
 using namespace Framework::Scenes;
 using namespace Games::Scenes;
 using namespace Games::Scenes::Interlude;
+using namespace Games;
 
 
 int Loader::load()
