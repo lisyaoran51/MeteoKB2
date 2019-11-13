@@ -67,6 +67,7 @@ int SongSelect::selectionChanged(SmInfo * sheetmusicInfo)
 
 			workingSm.SetValue(smManager->GetWorkingSm(sheetmusicInfo), true);
 
+			// ??需要delete舊的workingSm嗎?
 		}
 	}
 	else

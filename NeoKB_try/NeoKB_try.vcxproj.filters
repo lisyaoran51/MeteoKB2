@@ -1565,4 +1565,9 @@
       <Filter>標頭檔\Desktop\Devices</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Makefile">
+      <Filter>資源檔</Filter>
+    </None>
+  </ItemGroup>
 </Project>
