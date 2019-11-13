@@ -4,11 +4,10 @@
 
 
 #include "../../Framework/Devices/DisplayDevice.h"
-#include "../../Devices/MeteoLightBoardV1.h"
+#include "MeteoLightBoardV1.h"
 
 
 using namespace Framework::Devices;
-using namespace Devices;
 
 
 namespace Desktop {
