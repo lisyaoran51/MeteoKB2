@@ -18,7 +18,7 @@ namespace Interlude {
 
 	public:
 
-
+		Intro();
 
 	protected:
 

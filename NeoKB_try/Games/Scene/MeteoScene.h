@@ -32,8 +32,6 @@ namespace Scenes {
 
 	public:
 
-
-
 	protected:
 
 		MeteoScene();

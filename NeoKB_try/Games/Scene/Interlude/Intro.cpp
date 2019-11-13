@@ -7,6 +7,11 @@ using namespace Games::Scenes::Select;
 
 
 
+Intro::Intro(): RegisterType("Intro")
+{
+	registerLoad(bind((int(Intro::*)())&Intro::load, this));
+}
+
 int Intro::onEntering(Scene * lastScene)
 {
 	mainMenu = new MainMenu();
