@@ -15,7 +15,7 @@ Storage * MeteoGameDesktop::GetStableStorage()
 	return new StableStorage();
 }
 
-MeteoGameDesktop::StableStorage::StableStorage(): PlatformStorage("")
+MeteoGameDesktop::StableStorage::StableStorage(): PlatformStorage(""), RegisterType("StableStorage")
 {
 }
 
