@@ -1209,3 +1209,8 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	driver link lib的方法 https://stackoverflow.com/questions/25856984/linking-custom-library-to-linux-kernel-module-in-the-makefile
 	
 	用bcm2835來做bitbang，每8bit只要4us，比Spi快很多
+	
+	暫時放棄寫driver，直接用user space driver
+	來看一下scheduler
+	
+	繼續Compile
