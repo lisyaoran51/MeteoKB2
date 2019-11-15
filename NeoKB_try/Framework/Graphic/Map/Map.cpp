@@ -94,6 +94,11 @@ uint8_t Map::Get(int x, int y)
 	return matrix[x][y];
 }
 
+int Map::PasteAdd(Map * m, int toX, int toY)
+{
+	return PasteAdd(m, 0, 0, toX, toY, m->GetWidth(), m->GetHeight());
+}
+
 int Map::PasteAdd(Map * m, int x, int y, int toX, int toY, int xLen, int yLen)
 {
 	uint8_t** fromMatrix = m->GetMatrix();
@@ -111,6 +116,11 @@ int Map::PasteAdd(Map * m, int x, int y, int toX, int toY, int xLen, int yLen)
 	}
 	clear = false;
 	return 0;
+}
+
+int Map::PasteSet(Map * m, int toX, int toY)
+{
+	return PasteSet(m, 0, 0, toX, toY, m->GetWidth(), m->GetHeight());
 }
 
 int Map::PasteSet(Map * m, int x, int y, int toX, int toY, int xLen, int yLen)
