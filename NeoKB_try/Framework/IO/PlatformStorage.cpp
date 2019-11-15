@@ -27,6 +27,9 @@ PlatformStorage::PlatformStorage(string bName, string sDirectory): Storage(bName
 
 bool PlatformStorage::Exist(string filePath)
 {
+	if(!initialized)
+		throw runtime_error("int PlatformStorage::Exist() : Not initialized.");
+
 	string usablePath = GetUsableFilePathFor(filePath);
 	path p = usablePath;
 
@@ -43,6 +46,9 @@ bool PlatformStorage::ExistDirectory(string directoryPath)
 
 int PlatformStorage::Delete(string filePath)
 {
+	if (!initialized)
+		throw runtime_error("int PlatformStorage::Delete() : Not initialized.");
+
 	if (Exist(filePath)) {
 		if (remove(GetUsableFilePathFor(filePath))) {
 			return 0;
@@ -57,6 +63,9 @@ int PlatformStorage::Delete(string filePath)
 
 int PlatformStorage::DeleteDirectory(string directoryPath)
 {
+	if (!initialized)
+		throw runtime_error("int PlatformStorage::DeleteDirectory() : Not initialized.");
+
 	if (ExistDirectory(directoryPath)) {
 		if (remove_all(GetUsableDirectoryPathFor(directoryPath))) {
 			return 0;
@@ -71,6 +80,9 @@ int PlatformStorage::DeleteDirectory(string directoryPath)
 
 vector<string>* PlatformStorage::GetDirectories(string directoryPath)
 {
+	if (!initialized)
+		throw runtime_error("int PlatformStorage::GetDirectories() : Not initialized.");
+
 	vector<string>* directoryPaths = new vector<string>();
 
 	path usablePath = GetUsableDirectoryPathFor(directoryPath);
@@ -97,6 +109,10 @@ vector<string>* PlatformStorage::GetDirectories(string directoryPath)
 
 ifstream* PlatformStorage::GetStream(string filePath)
 {
+	if (!initialized)
+		throw runtime_error("int PlatformStorage::GetStream() : Not initialized.");
+
+
 	// 如果沒先check exist會有error
 	return new ifstream(GetUsableFilePathFor(filePath));
 }
@@ -109,6 +125,9 @@ string PlatformStorage::locateBasePath()
 
 Storage * PlatformStorage::clone(string newSubDirectory)
 {
+	if (!initialized)
+		throw runtime_error("int PlatformStorage::clone() : Not initialized.");
+
 	if (subDirectory == "") {
 		if (newSubDirectory == "")
 			return new PlatformStorage(baseName);

@@ -26,4 +26,5 @@ int Game::SetHost(GameHost * host)
 
 Game::Game() : RegisterType("Game")
 {
+	registerLoad(bind((int(Game::*)())&Game::load, this));
 }

@@ -64,7 +64,9 @@ namespace Host {
 	
 	public:
 		
-		GameHost(string name = "");
+		GameHost();
+
+		int Initialize(string name = "");
 
 		int Run(Game* game, Instrument* instrument);
 
@@ -82,6 +84,8 @@ namespace Host {
 		Storage* GetStorage();
 
 	protected:
+
+		bool initialized = false;
 
 		/* IO¥Î */
 		MainInterface* mainInterface;

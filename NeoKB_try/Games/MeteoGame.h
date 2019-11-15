@@ -33,8 +33,6 @@ namespace Games {
 
 		virtual Storage* GetStableStorage();
 
-		
-
 	protected:
 
 		Bindable<RulesetInfo*> ruleset;

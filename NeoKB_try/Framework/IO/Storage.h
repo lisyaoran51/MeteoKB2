@@ -20,6 +20,8 @@ namespace IO{
 
 
 	public:
+
+		int Initialize();
 		
 		/// <summary>
 		/// 把輸入路徑和strorage的路徑串在一起回傳，只能輸入輸入資料夾路徑
@@ -67,6 +69,7 @@ namespace IO{
 
 	protected:
 
+		bool initialized = false;
 
 		/// <summary>
 		/// 從系統預設的路徑上面再指定一個資料夾 前後都不能有斜線

@@ -10,6 +10,13 @@ using namespace std::experimental::filesystem;
 
 
 
+int Storage::Initialize()
+{
+	basePath = locateBasePath();
+	initialized = true;
+	return 0;
+}
+
 string Storage::GetUsableDirectoryPathFor(string directoryPath, bool createIfNotExist)
 {
 	string resolvedPath = basePath;
@@ -84,6 +91,5 @@ Storage * Storage::GetStorageForDirectory(string directoryPath)
 Storage::Storage(string bName, string sDirectory): RegisterType("Storage")
 {
 	baseName = bName;
-	basePath = locateBasePath();
 	subDirectory = sDirectory;
 }

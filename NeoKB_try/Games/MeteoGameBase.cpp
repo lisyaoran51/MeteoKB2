@@ -31,6 +31,7 @@ int MeteoGameBase::load()
 
 MeteoGameBase::MeteoGameBase(): RegisterType("MeteoGameBase")
 {
+	registerLoad(bind((int(MeteoGameBase::*)())&MeteoGameBase::load, this));
 }
 
 Bindable<WorkingSm*>* MeteoGameBase::GetWorkingSm()

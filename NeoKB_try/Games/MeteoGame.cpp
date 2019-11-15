@@ -29,7 +29,7 @@ Intro * Games::MeteoGame::getIntro()
 	return nullptr;
 }
 
-MeteoGame::MeteoGame() : RegisterType("MeteoGame"), MeteoGameBase()
+MeteoGame::MeteoGame() : RegisterType("MeteoGame")
 {
 	
 

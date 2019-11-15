@@ -19,8 +19,14 @@ using namespace Instruments;
 
 
 
-GameHost::GameHost(string name)
+GameHost::GameHost()
 {
+
+}
+
+int GameHost::Initialize(string name)
+{
+
 	dependencies = new DependencyContainer();
 
 	// name是資料夾名稱
@@ -29,20 +35,26 @@ GameHost::GameHost(string name)
 	setupMainInterface();
 
 	drawThread = new GameThread(bind(&GameHost::drawFrame, this), "DrawThread");
-	
+
 
 	updateThread = new GameThread(bind(&GameHost::updateFrame, this), "UpdateThread");
-	
+
 
 	inputThread = new GameThread(bind(&GameHost::inputFrame, this), "InputThread");
-	
+
 
 	sceneGraphClock = updateThread->GetClock();
 
+	initialized = true;
+
+	return 0;
 }
 
 int GameHost::Run(Game* game, Instrument* instrument)
 {
+	if(!initialized)
+		throw runtime_error("int GameHost::Run() : Not initialized.");
+
 	setupConfig();
 
 	resetInputHandlers();
@@ -64,16 +76,25 @@ int GameHost::Run(Game* game, Instrument* instrument)
 
 MainInterface * GameHost::GetMainInterface()
 {
+	if (!initialized)
+		throw runtime_error("int GameHost::GetMainInterface() : Not initialized.");
+
 	return mainInterface;
 }
 
 vector<InputHandler*>* GameHost::GetAvailableInputHandlers()
 {
+	if (!initialized)
+		throw runtime_error("int GameHost::GetAvailableInputHandlers() : Not initialized.");
+
 	return availableInputHandlers;
 }
 
 Storage * GameHost::GetStorage()
 {
+	if (!initialized)
+		throw runtime_error("int GameHost::GetStorage() : Not initialized.");
+
 	return storage;
 }
 
