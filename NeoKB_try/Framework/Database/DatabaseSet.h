@@ -40,6 +40,8 @@ namespace Database {
 
 	public:
 
+		virtual ~DatabaseSet() { }
+
 		int AddEntity(Entity<TObject>* entity) {
 			entitiesExtracted.push_back(entity);
 			objects.push_back(entity->Object);
