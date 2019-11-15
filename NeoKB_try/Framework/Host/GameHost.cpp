@@ -55,6 +55,8 @@ int GameHost::Initialize(string name)
 
 int GameHost::Run(Game* game, Instrument* instrument)
 {
+	LOG(LogLevel::Info) << "GameHost::Run() : Start host.";
+
 	if(!initialized)
 		throw runtime_error("int GameHost::Run() : Not initialized.");
 
@@ -103,6 +105,8 @@ Storage * GameHost::GetStorage()
 
 int GameHost::drawInitialize()
 {
+	LOG(LogLevel::Info) << "GameHost::drawInitialize() : Setting draw thread.";
+
 	int width, height;
 	frameworkConfigManager->Get(FrameworkSetting::Width, &width);
 	frameworkConfigManager->Get(FrameworkSetting::Height, &height);
@@ -138,6 +142,7 @@ int GameHost::drawFrame()
 
 int GameHost::updateInitialize()
 {
+	LOG(LogLevel::Info) << "GameHost::updateInitialize() : Setting update thread.";
 	// 預設是1000
 	updateThread->SetMaxUpdateHz(500);
 	return 0;
@@ -150,6 +155,7 @@ int GameHost::updateFrame()
 
 int GameHost::inputInitialize()
 {
+	LOG(LogLevel::Info) << "GameHost::inputInitialize() : Setting input thread.";
 	// 預設是1000了
 	inputThread->SetMaxUpdateHz(500);;
 	return 0;
@@ -157,6 +163,7 @@ int GameHost::inputInitialize()
 
 int GameHost::inputFrame()
 {
+
 
 	mainInterface->ScanInput();
 	/* 這邊只輸出panel上的uotput，不輸出琴鍵燈光 */
@@ -166,6 +173,8 @@ int GameHost::inputFrame()
 
 int GameHost::resetInputHandlers()
 {
+	LOG(LogLevel::Info) << "GameHost::resetInputHandlers() : create input handlers.";
+
 	availableInputHandlers = createAvailableInputHandlers();
 
 	for (int i = 0; i < availableInputHandlers->size(); i++)
@@ -181,6 +190,8 @@ int GameHost::resetInputHandlers()
 
 int GameHost::setupConfig()
 {
+	LOG(LogLevel::Info) << "GameHost::setupConfig() : loading default config.";
+
 	frameworkConfigManager = new FrameworkConfigManager();
 	//fConfigManager->Set(FrameworkSetting::SongTitle, string(argv[1]));  // 這行之後要刪掉
 	frameworkConfigManager->Set(FrameworkSetting::PatternGenerator, string("MeteorPatternGenerator"));

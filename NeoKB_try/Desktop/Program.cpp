@@ -18,7 +18,7 @@ Program::Program(){}
 
 int Program::Main(vector<string>& args)
 {
-	
+	LOG(LogLevel::Info) << "Program::Main() : Start program.";
 
 	GameHost* host = new MeteoGameHost();
 	host->Initialize();
