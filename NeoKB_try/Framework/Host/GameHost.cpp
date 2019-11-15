@@ -105,11 +105,12 @@ Storage * GameHost::GetStorage()
 
 int GameHost::drawInitialize()
 {
-	LOG(LogLevel::Info) << "GameHost::drawInitialize() : Setting draw thread.";
 
 	int width, height;
 	frameworkConfigManager->Get(FrameworkSetting::Width, &width);
 	frameworkConfigManager->Get(FrameworkSetting::Height, &height);
+
+	LOG(LogLevel::Info) << "GameHost::drawInitialize() : Setting map(" << width << "," << height << ").";
 
 	// 這個應該擺在main裡才對，這邊沒有存螢幕大小
 	canvas = new Map(width, height);
