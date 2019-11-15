@@ -128,18 +128,22 @@ Storage * PlatformStorage::clone(string newSubDirectory)
 	if (!initialized)
 		throw runtime_error("int PlatformStorage::clone() : Not initialized.");
 
+	PlatformStorage* cloned = nullptr;
+
 	if (subDirectory == "") {
 		if (newSubDirectory == "")
-			return new PlatformStorage(baseName);
+			cloned = new PlatformStorage(baseName);
 		else
-			return new PlatformStorage(baseName, newSubDirectory);
+			cloned = new PlatformStorage(baseName, newSubDirectory);
 	}
 	else {
 		if (newSubDirectory == "")
-			return new PlatformStorage(baseName, subDirectory);
+			cloned = new PlatformStorage(baseName, subDirectory);
 		else
-			return new PlatformStorage(baseName, subDirectory + "/"s + newSubDirectory);
+			cloned = new PlatformStorage(baseName, subDirectory + "/"s + newSubDirectory);
 	}
 
-	return nullptr;
+	cloned->Initialize();
+
+	return cloned;
 }

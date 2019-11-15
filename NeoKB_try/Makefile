@@ -109,18 +109,18 @@ Drawable.o Map.o \
 GameHost.o MeteoGameHost.o \
 BluetoothState.o CustomInputManager.o InputManager.o InputState.o KeyboardState.o PanelState.o PassThroughInputManager.o UserInputManager.o \
 BluetoothInputHandler.o KeyboardInputHandler.o PanelInputHandler.o \
-BluetoothPhone.o Display.o Keyboard.o MainInterface.o Panel.o Peripheral.o PlatformStorage.o Storage.o DynamicPathResourceStore.o \
+BluetoothPhone.o Display.o FileStore.o Keyboard.o MainInterface.o Panel.o Peripheral.o PlatformStorage.o Storage.o StorageResourceStore.o DynamicPathResourceStore.o \
 Scene.o \
 GameThread.o \
 DecoupledInterpolatingFramedClock.o FramedClock.o InterpolatingFramedClock.o OffsetFramedClock.o StopwatchClock.o ThrottledFramedClock.o TimeController.o \
 LinearSpeedAdjuster.o SpeedAdjuster.o \
 \
-MeteoGame.o \
+MeteoGame.o MeteoGameBase.o\
 Ruleset.o RulesetInfo.o \
 Loader.o MeteoScene.o Intro.o Player.o PlayerLoader.o Playfield.o MainMenu.o PlaySongSelect.o SongSelect.o \
 Event.o EventProcessorMaster.o ControlPoint.o NoteControlPoint.o Effect.o LinearMapPitchShifter.o MapPitchShifter.o \
 GameEvent.o StartGameEvent.o StopSystemEvent.o SystemEvent.o SystemEventHandler.o \
-SheetmusicConverter.o SheetmusicManager.o SheetmusicMetadata.o SheetmusicPostprocessor.o WorkingSheetmusic.o \
+SheetmusicConverter.o SheetmusicManager.o SheetmusicMetadata.o SheetmusicPostprocessor.o SheetmusicStore.o WorkingSheetmusic.o \
 SimpleSmDecoder.o SmDecoder.o FileReader.o Pattern.o PatternGenerator.o \
 SheetmusicSelectPanel.o \
 \

@@ -54,7 +54,8 @@ vector<InputHandler*>* MeteoGameHost::createAvailableInputHandlers()
 
 Storage* MeteoGameHost::getStorage(string sName) 
 {
-
-	return new PlatformStorage(sName);
+	Storage* s = new PlatformStorage(sName);
+	s->Initialize();
+	return s;
 
 }

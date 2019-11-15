@@ -12,7 +12,9 @@ MeteoGameDesktop::MeteoGameDesktop(vector<string>& args): RegisterType("MeteoGam
 
 Storage * MeteoGameDesktop::GetStableStorage()
 {
-	return new StableStorage();
+	Storage* s = new StableStorage();
+	s->Initialize();
+	return s;
 }
 
 MeteoGameDesktop::StableStorage::StableStorage(): PlatformStorage(""), RegisterType("StableStorage")
