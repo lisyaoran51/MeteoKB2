@@ -67,13 +67,13 @@ int GameHost::Run(Game* game, Instrument* instrument)
 	resetInputHandlers();
 
 	inputInitialize();
-	inputThread->Start();
+	//inputThread->Start();
 
 	drawInitialize();
 	//drawThread->Start();
 
 	updateInitialize();
-	updateThread->Start();
+	//updateThread->Start();
 
 	bootstrapSceneGraph(game, instrument);
 
