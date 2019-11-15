@@ -108,7 +108,7 @@ BluetoothDevice.o Device.o DisplayDevice.o InputDevice.o KeyboardDevice.o PanelD
 Drawable.o Map.o \
 GameHost.o MeteoGameHost.o \
 BluetoothState.o CustomInputManager.o InputManager.o InputState.o KeyboardState.o PanelState.o PassThroughInputManager.o UserInputManager.o \
-BluetoothInputHandler.o KeyboardInputHandler.o PanelInputHandler.o \
+BluetoothInputHandler.o KeyboardInputHandler.o PanelInputHandler.o KeyBindingStore.o \
 BluetoothPhone.o Display.o FileStore.o Keyboard.o MainInterface.o Panel.o Peripheral.o PlatformStorage.o Storage.o StorageResourceStore.o DynamicPathResourceStore.o \
 Scene.o \
 GameThread.o \
