@@ -16,6 +16,10 @@ int main(int argc, char *argv[]) {
 
 	Util::logLevel = LogLevel::Info;
 
+	if(argc > 0)
+		Util::logLevel = (LogLevel)atoi(argv[1]);
+
+
 	vector<string> args;
 
 	for (int i = 0; i < argc; i++) {
