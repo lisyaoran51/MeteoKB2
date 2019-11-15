@@ -16,7 +16,7 @@ int main(int argc, char *argv[]) {
 
 	Util::logLevel = LogLevel::Info;
 
-	if(argc > 0)
+	if(argc > 1)
 		Util::logLevel = (LogLevel)atoi(argv[1]);
 
 

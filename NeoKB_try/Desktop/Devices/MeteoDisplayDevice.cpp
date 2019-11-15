@@ -29,6 +29,7 @@ MeteoDisplayDevice::MeteoDisplayDevice(int w, int h)
 	thread t(&MeteoLightBoardV1::Draw, meteoLightBoard);
 	t.detach();
 
+	LOG(LogLevel::Finest) << "MeteoDisplayDevice::MeteoDisplayDevice() : end.";
 }
 
 int MeteoDisplayDevice::Show(Map * m)
