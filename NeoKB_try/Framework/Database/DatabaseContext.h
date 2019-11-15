@@ -114,7 +114,7 @@ namespace Database{
 			Entity<TEntity>* BuildEntity(TEntity* e) {
 				Entity<TEntity>* entity = new Entity<TEntity>();
 
-				entity->ThisEntity = e;
+				entity->Object = e;
 
 				for (auto const& p : onQueryInt)
 					entity->PropertiesInt.insert(pair<string, int>(p.first, p.second(e)));
