@@ -43,6 +43,18 @@ Sm<Event>* WorkingSm::GetSm()
 	return sm;
 }
 
+bool WorkingSm::IsTheSameSm(SmInfo * s)
+{
+	// TODO: not implemented
+	return false;
+}
+
+Bindable<vector<Modifier*>*>* WorkingSm::GetModifiers()
+{
+	// TODO: not implemented
+	return nullptr;
+}
+
 Track * WorkingSm::GetTrack()
 {
 	//ifstream* stream = new ifstream(getPathForFile(smInfo->metadata->AudioFile));
