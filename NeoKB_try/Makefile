@@ -103,7 +103,7 @@ AdjustableAudioComponent.o AudioComponent.o AudioManager.o \
 BassSample.o BassSampleChannel.o Sample.o SampleChannel.o SampleManager.o \
 BassTrack.o Track.o TrackManager.o \
 ConfigManager.o FrameworkConfigManager.o \
-DatabaseContext.o MeteoDatabaseContext.o \
+DatabaseContext.o DatabaseContextFactory.o DatabaseStore.o FakeDatabaseContextFactory.o FakeMeteoDatabaseContext.o MeteoDatabaseContext.o \
 BluetoothDevice.o Device.o DisplayDevice.o InputDevice.o KeyboardDevice.o PanelDevice.o \
 Drawable.o Map.o \
 GameHost.o MeteoGameHost.o \

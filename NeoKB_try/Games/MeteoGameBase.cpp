@@ -12,6 +12,7 @@ int MeteoGameBase::load()
 {
 
 	dbContextFactory = new DatabaseContextFactory(gameHost);
+	dbContextFactory->Initialize();
 
 	GetDependencies()->Cache<MeteoGameBase>(this, "MeteoGameBase");
 

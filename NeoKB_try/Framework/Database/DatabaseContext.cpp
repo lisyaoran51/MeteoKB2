@@ -61,27 +61,44 @@ int DatabaseContext::EntityModel::AddOnQueryBool(function<bool(void*)> queryFunc
 DatabaseContext::DatabaseContext(Storage * s)
 {
 	storage = s;
+}
+
+int DatabaseContext::Initialize() {
+
 	createModel();
 	prepare();
+	initialized = true;
 }
 
 DatabaseSet<KeyBinding>* DatabaseContext::GetKeyBindings()
 {
+	if (!initialized)
+		throw runtime_error("DatabaseContext::GetKeyBindings(): not initialized.");
+
 	return &databasedKeyBinding;
 }
 
 DatabaseSet<FileInfo>* DatabaseContext::GetFileInfos()
 {
+	if (!initialized)
+		throw runtime_error("DatabaseContext::GetFileInfos(): not initialized.");
+
 	return &fileInfo;
 }
 
 DatabaseSet<RulesetInfo>* DatabaseContext::GetRulesetInfos()
 {
+	if (!initialized)
+		throw runtime_error("DatabaseContext::GetRulesetInfos(): not initialized.");
+
 	return &rulesetInfo;
 }
 
 DatabaseSet<SmInfo>* DatabaseContext::GetSmInfos()
 {
+	if (!initialized)
+		throw runtime_error("DatabaseContext::GetSmInfos(): not initialized.");
+
 	return &smInfo;
 }
 

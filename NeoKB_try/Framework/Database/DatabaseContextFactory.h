@@ -23,9 +23,13 @@ namespace Database{
 
 		DatabaseContextFactory(GameHost* h);
 
+		int Initialize();
+
 		DatabaseContext* GetContext();
 
 	protected:
+
+		bool initialized = false;
 
 		GameHost* host;
 

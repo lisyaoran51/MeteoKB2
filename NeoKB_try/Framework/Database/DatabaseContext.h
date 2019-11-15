@@ -34,6 +34,8 @@ namespace Database{
 
 		DatabaseContext(Storage* s);
 
+		int Initialize();
+
 		template<typename TObject>
 		int AddDbSetEntity(TObject* object);
 
@@ -70,6 +72,8 @@ namespace Database{
 
 		
 	protected:
+
+		bool initialized = false;
 
 		virtual int prepare();
 
@@ -161,6 +165,8 @@ namespace Database{
 	template<typename TObject>
 	int DatabaseContext::AddDbSetEntity(TObject * object)
 	{
+		if (!initialized)
+			throw runtime_error("DatabaseContext::AddDbSetEntity(): not initialized.");
 
 		DatabaseSet<TObject>* dbSet = GetDbSet<TObject>();
 
@@ -174,6 +180,8 @@ namespace Database{
 	template<typename TEntity>
 	DatabaseSet<TEntity>* DatabaseContext::GetDbSet()
 	{
+		if (!initialized)
+			throw runtime_error("DatabaseContext::GetDbSet(): not initialized.");
 
 		if (typeid(TEntity).name() == typeid(KeyBinding).name())
 			return dynamic_cast<DatabaseSet<TEntity>*>(&databasedKeyBinding);
@@ -193,24 +201,36 @@ namespace Database{
 	template<typename TEntity>
 	int DatabaseContext::RetrieveInt(TEntity * entity, string attribute)
 	{
+		if (!initialized)
+			throw runtime_error("DatabaseContext::RetrieveInt(): not initialized.");
+
 		return querier.at((char*)typeid(TEntity).name())->RetrieveInt(entity, attribute);
 	}
 
 	template<typename TEntity>
 	string DatabaseContext::RetrieveString(TEntity * entity, string attribute)
 	{
+		if (!initialized)
+			throw runtime_error("DatabaseContext::RetrieveString(): not initialized.");
+
 		return querier.at((char*)typeid(TEntity).name())->RetrieveString(entity, attribute);
 	}
 
 	template<typename TEntity>
 	double DatabaseContext::RetrieveDouble(TEntity * entity, string attribute)
 	{
+		if (!initialized)
+			throw runtime_error("DatabaseContext::RetrieveDouble(): not initialized.");
+
 		return querier.at((char*)typeid(TEntity).name())->RetrieveDouble(entity, attribute);
 	}
 
 	template<typename TEntity>
 	bool DatabaseContext::RetrieveBool(TEntity * entity, string attribute)
 	{
+		if (!initialized)
+			throw runtime_error("DatabaseContext::RetrieveBool(): not initialized.");
+
 		return querier.at((char*)typeid(TEntity).name())->RetrieveBool(entity, attribute);
 	}
 

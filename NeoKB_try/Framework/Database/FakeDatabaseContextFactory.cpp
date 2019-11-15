@@ -13,5 +13,6 @@ FakeDatabaseContextFactory::FakeDatabaseContextFactory(GameHost * gHost): Databa
 int FakeDatabaseContextFactory::createDatabaseContext()
 {
 	dbContext = new FakeMeteoDatabaseContext(host->GetStorage());
+	dbContext->Initialize();
 	return 0;
 }
