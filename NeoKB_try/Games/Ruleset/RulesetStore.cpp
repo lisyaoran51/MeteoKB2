@@ -27,7 +27,7 @@ RulesetInfo * RulesetStore::GetRulesetInfo(int id)
 	DatabaseContext* context = getContext();
 
 	vector<RulesetInfo*>* infos = context->GetRulesetInfos()->GetEntitiesOfPropertiyInt("Id", id);
-	if (infos->size > 0) {
+	if (infos->size() > 0) {
 		RulesetInfo* info = infos->at(0);
 		delete infos;
 		return info;
