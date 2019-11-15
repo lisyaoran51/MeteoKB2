@@ -25,6 +25,8 @@ MeteoGameHost::MeteoGameHost()
 
 int MeteoGameHost::setupMainInterface()
 {
+	LOG(LogLevel::Info) << "MeteoGameHost::setupMainInterface() : Creating devices.";
+
 	mainInterface = new MainInterface();
 
 	DisplayDevice* displayDevice = new MeteoDisplayDevice(48, 16);// 之後再改

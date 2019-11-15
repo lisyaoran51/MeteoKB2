@@ -26,6 +26,7 @@ GameHost::GameHost()
 
 int GameHost::Initialize(string name)
 {
+	LOG(LogLevel::Info) << "GameHost::Initialize() : Creating dependencies, storage and threads.";
 
 	dependencies = new DependencyContainer();
 
@@ -46,6 +47,8 @@ int GameHost::Initialize(string name)
 	sceneGraphClock = updateThread->GetClock();
 
 	initialized = true;
+
+	LOG(LogLevel::Finest) << "GameHost::Initialize() : end.";
 
 	return 0;
 }
