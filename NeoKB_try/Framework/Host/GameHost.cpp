@@ -120,6 +120,8 @@ int GameHost::drawInitialize()
 
 int GameHost::drawFrame()
 {
+	LOG(LogLevel::Finest) << "GameHost::drawFrame() : start drawing a frame.";
+
 	canvas->Reset();
 
 	// TODO: 搜尋所有的child，看看是不是Drawable，是的話再根據depth，一層一層畫到Map上，然後call drawer

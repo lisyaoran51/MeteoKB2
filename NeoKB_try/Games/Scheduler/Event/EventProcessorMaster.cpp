@@ -108,6 +108,8 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 
 Map * EventProcessorMaster::GetGraph()
 {
+	LOG(LogLevel::Finest) << "EventProcessorMaster::GetGraph() : get graph from a processor.";
+
 	Map* graph = Drawable::GetGraph();
 
 	graph->Reset();

@@ -1214,3 +1214,15 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	來看一下scheduler
 	
 	繼續Compile
+	
+11/15
+	找到為什麼constructor呼叫pure virtual function會undefined reference的原因了，
+	https://www.artima.com/cppsource/nevercall.html
+	c++不支援constructor呼叫pure virtual function(virtual function也不行)
+	
+	只能用Lazy Construct了，跟lazy construct做區別，這種稱為Initialize
+	
+	找步道libbass的方法
+	https://forum.openframeworks.cc/t/use-a-dynamic-library-with-of/26031/2
+	
+	好像是新版的os不能用bass，舊的os就可以
