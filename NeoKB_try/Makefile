@@ -161,7 +161,7 @@ MeteorTimeController.o
 all:$(TARGET)
 
 $(TARGET): $(OBJS) 
-	$(CC) $(OBJS) -o $@ -pthread -lstdc++fs -L/usr/local/lib/ -lbass 
+	$(CC) $(OBJS) -o $@ -pthread -lstdc++fs -lbass -L.
 	
 .c.o:
 	$(CC) $(INCLUDE) $(CFLAGS) -c -o $@ $< 	
