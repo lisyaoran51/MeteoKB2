@@ -60,15 +60,17 @@ int GameHost::Run(Game* game, Instrument* instrument)
 	if(!initialized)
 		throw runtime_error("int GameHost::Run() : Not initialized.");
 
+	LOG(LogLevel::Finest) << "GameHost::Run() : Setup confing.";
 	setupConfig();
 
+	LOG(LogLevel::Finest) << "GameHost::Run() : reset input handler.";
 	resetInputHandlers();
 
 	inputInitialize();
 	inputThread->Start();
 
 	drawInitialize();
-	drawThread->Start();
+	//drawThread->Start();
 
 	updateInitialize();
 	updateThread->Start();
