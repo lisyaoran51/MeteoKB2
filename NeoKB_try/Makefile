@@ -89,6 +89,8 @@ INCLUDE = -IFramwork -IFramework/Allocation -IFramework/Allocation/Hierachal -IF
 #-I./Util -I./Util/Hierachal -I./Util/Update
 
 
+
+
 TARGET  = MeteoKB
 #compiler 
 CC = g++
@@ -159,7 +161,7 @@ MeteorTimeController.o
 all:$(TARGET)
 
 $(TARGET): $(OBJS) 
-	$(CC) $(OBJS) -o $@ -pthread -lbass -lstdc++fs
+	$(CC) $(OBJS) -o $@ -pthread -lbass -lstdc++fs -L/usr/local/lib/ -libbass
 	
 .c.o:
 	$(CC) $(INCLUDE) $(CFLAGS) -c -o $@ $< 	
