@@ -15,12 +15,15 @@ GameThread::GameThread(function<int()> oNewFrame, string tName)
 
 	clock = new ThrottledFramedClock();
 
-	runThread = new thread(&GameThread::runWork, this);
+	
 
 }
 
 int GameThread::Start()
 {
+	LOG(LogLevel::Info) << "GameThread::Start() : start thread " << threadName << ".";
+
+	runThread = new thread(&GameThread::runWork, this);
 	runThread->detach();
 	return 0;
 }
