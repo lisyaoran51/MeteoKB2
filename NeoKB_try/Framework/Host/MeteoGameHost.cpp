@@ -29,7 +29,7 @@ int MeteoGameHost::setupMainInterface()
 
 	mainInterface = new MainInterface();
 
-	DisplayDevice* displayDevice = new MeteoDisplayDevice(48, 16);// 之後再改
+	//DisplayDevice* displayDevice = new MeteoDisplayDevice(48, 16);// 之後再改
 	BluetoothDevice* bluetoothDevice = new MeteoBluetoothDevice();
 	KeyboardDevice* keyboardDevice = new MeteoKeyboardDevice();
 	PanelDevice* panelDevice = new MeteoPanelDevice();
@@ -38,7 +38,7 @@ int MeteoGameHost::setupMainInterface()
 	mainInterface->RegisterInputDevice(bluetoothDevice);
 	mainInterface->RegisterInputDevice(keyboardDevice);
 	mainInterface->RegisterInputDevice(panelDevice);
-	mainInterface->RegisterOutputDevice(displayDevice);
+	//mainInterface->RegisterOutputDevice(displayDevice);
 
 
 	return 0;
