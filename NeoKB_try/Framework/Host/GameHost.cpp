@@ -35,7 +35,7 @@ int GameHost::Initialize(string name)
 
 	setupMainInterface();
 
-	drawThread = new GameThread(bind(&GameHost::drawFrame, this), "DrawThread");
+	//drawThread = new GameThread(bind(&GameHost::drawFrame, this), "DrawThread");
 
 
 	updateThread = new GameThread(bind(&GameHost::updateFrame, this), "UpdateThread");
