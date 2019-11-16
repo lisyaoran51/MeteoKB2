@@ -217,6 +217,8 @@ int GameHost::setupConfig()
 
 int GameHost::bootstrapSceneGraph(Game* game, Instrument* instrument)
 {
+	LOG(LogLevel::Info) << "GameHost::bootstrapSceneGraph() : build scenegraph tree.";
+
 	root = new UserInputManager();
 
 	dependencies->Cache(root);

@@ -47,6 +47,9 @@ namespace Allocation {
 
 		template<typename T>
 		int Cache(T* o) {
+
+			LOG(LogLevel::Fine) << "DependencyContainer::Cache() : cache " << o->GetTypeName() << "into dependency container.";
+
 			cache[o->GetTypeName()] = o;
 
 			return 0;
