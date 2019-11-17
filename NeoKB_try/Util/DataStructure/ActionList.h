@@ -42,6 +42,7 @@ namespace DataStructure {
 
 			LOG(LogLevel::Finest) << "ActionList::Add() : key = " << key.first << ", name = " << key.second;
 
+			LOG(LogLevel::Finest) << "ActionList::Add() : key list address:" << &callbackKeys;
 			LOG(LogLevel::Finest) << "ActionList::Add() : key list size:" << callbackKeys.size();
 
 			callbackKeys.push_back(key);
