@@ -23,8 +23,8 @@ int Program::Main(vector<string>& args)
 	GameHost* host = new MeteoGameHost();
 	host->Initialize();
 
-	while (1);
-	//host->Run(new MeteoGameDesktop(args), new MeteoPiano(args));
+	
+	host->Run(new MeteoGameDesktop(args), new MeteoPiano(args));
 
 	return 0;
 }

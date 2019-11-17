@@ -26,8 +26,8 @@ MeteoDisplayDevice::MeteoDisplayDevice(int w, int h)
 
 	LOG(LogLevel::Fine) << "MeteoDisplayDevice::MeteoDisplayDevice() : start led driver thread.";
 
-	thread t(&MeteoLightBoardV1::Draw, meteoLightBoard);
-	t.detach();
+	//thread t(&MeteoLightBoardV1::Draw, meteoLightBoard);
+	//t.detach();
 }
 
 int MeteoDisplayDevice::Show(Map * m)
