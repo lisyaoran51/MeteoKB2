@@ -42,7 +42,7 @@ namespace DataStructure {
 
 			LOG(LogLevel::Finest) << "ActionList::Add() : key = " << key.first << ", name = " << key.second;
 
-			callbackKeys.push_back(make_pair((uintptr_t)callableObject, callbackName));
+			callbackKeys.push_back(key);
 			callbacks.push_back(callback);
 
 
