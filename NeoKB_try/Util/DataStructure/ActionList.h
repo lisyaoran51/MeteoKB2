@@ -41,7 +41,7 @@ namespace DataStructure {
 			pair<uintptr_t, string> key = make_pair((uintptr_t)callableObject, callbackName);
 
 			LOG(LogLevel::Finest) << "ActionList::Add() : key = " << key.first << ", name = " << key.second;
-
+			callbackKeys.clear();
 			LOG(LogLevel::Finest) << "ActionList::Add() : key list address:" << &callbackKeys;
 			LOG(LogLevel::Finest) << "ActionList::Add() : key list size:" << callbackKeys.size();
 
