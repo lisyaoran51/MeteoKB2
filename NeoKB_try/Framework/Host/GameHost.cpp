@@ -64,7 +64,7 @@ int GameHost::Run(Game* game, Instrument* instrument)
 	setupConfig();
 
 	LOG(LogLevel::Finest) << "GameHost::Run() : reset input handler.";
-	//resetInputHandlers();
+	resetInputHandlers();
 
 	//inputInitialize();
 	//inputThread->Start();
