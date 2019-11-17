@@ -11,6 +11,8 @@ using namespace Framework::IO;
 
 int PanelInputHandler::Initialize(GameHost * host)
 {
+	LOG(LogLevel::Info) << "PanelInputHandler::Initialize() : adding handler.";
+
 	// 當mian interface讀到輸入時，就會call handle key down來處理
 	host->GetMainInterface()->GetPanel()->
 		AddOnPanelEvent<PanelInputHandler>(this, bind((int(PanelInputHandler::*)(InputState*))&PanelInputHandler::HandleState, this, placeholders::_1), "PanelInputHandler::HandleState");

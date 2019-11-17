@@ -10,6 +10,8 @@ using namespace Framework::IO;
 
 int BluetoothInputHandler::Initialize(GameHost * host)
 {
+	LOG(LogLevel::Info) << "BluetoothInputHandler::Initialize() : adding handler.";
+
 	host->GetMainInterface()->GetBluetoothPhone()->
 		AddOnCommand<BluetoothInputHandler>(this, bind((int(BluetoothInputHandler::*)(InputState*))&BluetoothInputHandler::HandleState, this, placeholders::_1), "BluetoothInputHandler::HandleState");
 

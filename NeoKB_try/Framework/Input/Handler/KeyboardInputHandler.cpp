@@ -13,6 +13,8 @@ using namespace Framework::IO;
 
 int KeyboardInputHandler::Initialize(GameHost * host)
 {
+	LOG(LogLevel::Info) << "KeyboardInputHandler::Initialize() : adding handler.";
+
 	// 當mian interface讀到輸入時，就會call handle key down來處理
 	host->GetMainInterface()->GetKeyboard()->
 		AddOnKeyEvent<KeyboardInputHandler>(this, bind((int(KeyboardInputHandler::*)(InputState*))&KeyboardInputHandler::HandleState, this, placeholders::_1), "KeyboardInputHandler::HandleState");
