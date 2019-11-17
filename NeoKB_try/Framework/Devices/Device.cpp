@@ -2,6 +2,8 @@
 
 int Device::Register(MainInterface * mainInterface)
 {
+	LOG(LogLevel::Info) << "Device::Register() : Register peripheral to interface.";
+
 	vector<Peripheral*>* peripherals = mainInterface->GetPeripherals();
 
 	for (int i = 0; i < peripherals->size(); i++) {
