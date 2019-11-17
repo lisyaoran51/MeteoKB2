@@ -60,7 +60,7 @@ namespace Host {
 	/// 遊戲運行的主機
 	/// TODO: 繼承IIPCHOST
 	/// </summary>
-	class GameHost {
+	class GameHost: public MtoObject {
 	
 	public:
 		

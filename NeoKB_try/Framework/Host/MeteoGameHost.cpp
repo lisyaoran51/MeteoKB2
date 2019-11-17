@@ -18,7 +18,7 @@ using namespace Desktop::Devices;
 using namespace Framework::IO;
 
 
-MeteoGameHost::MeteoGameHost()
+MeteoGameHost::MeteoGameHost(): RegisterType("MeteoGameHost")
 {
 	
 }

@@ -19,7 +19,7 @@ using namespace Instruments;
 
 
 
-GameHost::GameHost()
+GameHost::GameHost(): RegisterType("GameHost")
 {
 
 }
@@ -29,6 +29,8 @@ int GameHost::Initialize(string name)
 	LOG(LogLevel::Info) << "GameHost::Initialize() : Creating dependencies, storage and threads.";
 
 	dependencies = new DependencyContainer();
+
+	dependencies->Cache<GameHost>(this, "GameHost");
 
 	// name是資料夾名稱
 	dependencies->Cache<Storage>(storage = getStorage(name), "Storage");
