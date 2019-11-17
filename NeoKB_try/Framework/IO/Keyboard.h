@@ -7,6 +7,7 @@
 #include "Peripheral.h"
 #include "../../Util/DataStructure/ActionList.h"
 #include "../Input/InputState.h"
+#include "../../Util/Log.h"
 
 namespace Framework {
 namespace Devices{
@@ -19,6 +20,8 @@ using namespace std;
 using namespace Util::DataStructure;
 using namespace Framework::Input;
 using namespace Framework::Devices;
+using namespace Util;
+
 
 namespace Framework {
 namespace IO {
@@ -37,6 +40,9 @@ namespace IO {
 
 		template<class _Type>
 		int AddOnKeyEvent(_Type* callableObject, function<int(InputState*)> callback, string name = "HandleKeyEvent") {
+
+			LOG(LogLevel::Fine) << "Keyboard::AddOnKeyEvent() : register handler into list.";
+
 			OnKeyEvent.Add(callableObject, callback, name);
 
 			return 0;
