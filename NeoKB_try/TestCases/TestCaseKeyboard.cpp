@@ -33,6 +33,8 @@ int main() {
 
 	MainInterface m;
 
+	m.Initialize();
+
 	vector<pair<uintptr_t, string>>* callbackKeys2 = m.GetKeyboard()->_DebugGetActionList()->_DebugGetCallbackKeys();
 
 	LOG(LogLevel::Fine) << "TestCaseKeyboard : callback2 keys size = " << callbackKeys2->size();
