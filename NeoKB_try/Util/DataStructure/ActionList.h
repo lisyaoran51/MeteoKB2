@@ -33,6 +33,7 @@ namespace DataStructure {
 
 		template<class _Type>
 		int Add(_Type* callableObject, function<_Fty(_Types...)> callback, string callbackName) {
+
 			LOG(LogLevel::Fine) << "ActionList::Add() : register callback into list.";
 
 			//callbackMap[make_pair((uintptr_t)callableObject, callbackName)] = callback;
