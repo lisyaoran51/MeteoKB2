@@ -182,6 +182,7 @@ int GameHost::resetInputHandlers()
 
 	availableInputHandlers = createAvailableInputHandlers();
 
+	LOG(LogLevel::Info) << "GameHost::resetInputHandlers() : input handlers initializing.";
 	for (int i = 0; i < availableInputHandlers->size(); i++)
 		availableInputHandlers->at(i)->Initialize(this);
 
