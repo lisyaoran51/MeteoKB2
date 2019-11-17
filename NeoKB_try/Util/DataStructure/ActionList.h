@@ -38,8 +38,10 @@ namespace DataStructure {
 
 			//callbackMap[make_pair((uintptr_t)callableObject, callbackName)] = callback;
 
-			callbackKeys.push_back(make_pair<uintptr_t, string>((uintptr_t)callableObject, callbackName));
+			callbackKeys.push_back(make_pair((uintptr_t)callableObject, callbackName));
 			callbacks.push_back(callback);
+
+			LOG(LogLevel::Finest) << "ActionList::Add() : end.";
 
 			return 0;
 		}
