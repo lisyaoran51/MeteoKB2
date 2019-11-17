@@ -64,18 +64,18 @@ int GameHost::Run(Game* game, Instrument* instrument)
 	setupConfig();
 
 	LOG(LogLevel::Finest) << "GameHost::Run() : reset input handler.";
-	resetInputHandlers();
+	//resetInputHandlers();
 
-	inputInitialize();
+	//inputInitialize();
 	//inputThread->Start();
 
-	drawInitialize();
+	//drawInitialize();
 	//drawThread->Start();
 
-	updateInitialize();
+	//updateInitialize();
 	//updateThread->Start();
 
-	bootstrapSceneGraph(game, instrument);
+	//bootstrapSceneGraph(game, instrument);
 
 
 	return 0;
