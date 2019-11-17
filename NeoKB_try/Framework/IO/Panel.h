@@ -39,6 +39,8 @@ namespace IO {
 		/// </summary>
 		template<class _Type>
 		int AddOnPanelEvent(_Type* callableObject, function<int(InputState*)> callback, string name = "HandlePanelEvent") {
+			LOG(LogLevel::Fine) << "Panel::AddOnPanelEvent() : adding handler.";
+
 			OnPanelEvent.Add(callableObject, callback, name);
 			return 0;
 		}

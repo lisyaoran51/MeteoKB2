@@ -8,9 +8,12 @@
 #include <string>
 #include <utility>
 #include <cstdint>
+#include "../Log.h"
 
 
 using namespace std;
+using namespace Util;
+
 
 
 namespace Util {
@@ -30,6 +33,8 @@ namespace DataStructure {
 
 		template<class _Type>
 		int Add(_Type* callableObject, function<_Fty(_Types...)> callback, string callbackName) {
+			LOG(LogLevel::Fine) << "ActionList::Add() : register callback into list.";
+
 			//callbackMap[make_pair((uintptr_t)callableObject, callbackName)] = callback;
 
 			callbackKeys.push_back(make_pair((uintptr_t)callableObject, callbackName));
