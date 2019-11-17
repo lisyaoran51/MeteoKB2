@@ -181,6 +181,7 @@
     <ClCompile Include="RulesetMeteor\Sheetmusic\Pattern\MeteorPatternGenerator.cpp" />
     <ClCompile Include="RulesetMeteor\Timing\MeteorTimeController.cpp" />
     <ClCompile Include="TestCases\TestCaseKeyboard.cpp" />
+    <ClCompile Include="TestCases\TestCaseMeteoGameHost.cpp" />
     <ClCompile Include="Util\DataStructure\ActionListTestcase.cpp" />
     <ClCompile Include="Util\FileSystem.c" />
     <ClCompile Include="Util\ProgramInitializer.cpp">

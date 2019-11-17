@@ -948,6 +948,9 @@
     <ClCompile Include="TestCases\TestCaseKeyboard.cpp">
       <Filter>來源檔案\TestCases</Filter>
     </ClCompile>
+    <ClCompile Include="TestCases\TestCaseMeteoGameHost.cpp">
+      <Filter>來源檔案\TestCases</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="DailyLog.txt">

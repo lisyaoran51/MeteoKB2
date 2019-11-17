@@ -28,6 +28,7 @@ int MeteoGameHost::setupMainInterface()
 	LOG(LogLevel::Info) << "MeteoGameHost::setupMainInterface() : Creating devices.";
 
 	mainInterface = new MainInterface();
+	mainInterface->Initialize();
 
 	DisplayDevice* displayDevice = new MeteoDisplayDevice(48, 16);// 之後再改
 	BluetoothDevice* bluetoothDevice = new MeteoBluetoothDevice();
