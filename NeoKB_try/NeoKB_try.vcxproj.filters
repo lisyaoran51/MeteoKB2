@@ -463,6 +463,12 @@
     <Filter Include="來源檔案\Desktop\Devices">
       <UniqueIdentifier>{87d592d6-f4f5-45b8-b4c0-3f09d31627f0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="來源檔案\TestCases">
+      <UniqueIdentifier>{ef89ea94-fc15-4769-b695-2215b5d33a84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="資源檔\TestCases">
+      <UniqueIdentifier>{83de6e51-dd0a-40af-a208-7bd52ecc2575}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Games\Graphic\Renderer\renderer.cpp">
@@ -932,6 +938,15 @@
     </ClCompile>
     <ClCompile Include="Desktop\Devices\MeteoPanelDevice.cpp">
       <Filter>來源檔案\Desktop\Devices</Filter>
+    </ClCompile>
+    <ClCompile Include="Util\DataStructure\ActionListTestcase.cpp">
+      <Filter>標頭檔\Util\DataStructure</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Input\Handler\TestCaseKeyboardInputHandler.cpp">
+      <Filter>來源檔案\Framework\Input\Handler</Filter>
+    </ClCompile>
+    <ClCompile Include="TestCases\TestCaseKeyboard.cpp">
+      <Filter>來源檔案\TestCases</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1568,6 +1583,9 @@
   <ItemGroup>
     <None Include="Makefile">
       <Filter>資源檔</Filter>
+    </None>
+    <None Include="TestCases\Makefile">
+      <Filter>資源檔\TestCases</Filter>
     </None>
   </ItemGroup>
 </Project>

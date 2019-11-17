@@ -48,6 +48,8 @@ namespace IO {
 			return 0;
 		}
 
+		ActionList<int, InputState*>* _DebugGetActionList();
+
 	protected:
 
 		KeyboardDevice* matchedKeyboardDevice;

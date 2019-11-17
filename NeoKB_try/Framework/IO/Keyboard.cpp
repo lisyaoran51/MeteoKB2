@@ -23,3 +23,7 @@ int Keyboard::TriggerOnInput()
 	inputStates.clear();
 	return 0;
 }
+
+ActionList<int, InputState*>* Keyboard::_DebugGetActionList() {
+	return &OnKeyEvent;
+}

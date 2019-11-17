@@ -112,6 +112,10 @@ namespace DataStructure {
 			return 0;
 		}
 
+		vector<pair<uintptr_t, string>>* _DebugGetCallbackKeys() {
+			return &callbackKeys;
+		}
+
 	protected:
 
 
