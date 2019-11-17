@@ -67,16 +67,16 @@ int GameHost::Run(Game* game, Instrument* instrument)
 	resetInputHandlers();
 
 	LOG(LogLevel::Finest) << "Initialize Threads.";
-	//inputInitialize();
-	//inputThread->Start();
+	inputInitialize();
+	inputThread->Start();
 
-	//drawInitialize();
-	//drawThread->Start();
+	drawInitialize();
+	drawThread->Start();
 
-	//updateInitialize();
-	//updateThread->Start();
+	updateInitialize();
+	updateThread->Start();
 
-	//bootstrapSceneGraph(game, instrument);
+	bootstrapSceneGraph(game, instrument);
 
 
 	return 0;
