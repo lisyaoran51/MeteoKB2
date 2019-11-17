@@ -41,7 +41,7 @@ namespace IO {
 		template<class _Type>
 		int AddOnKeyEvent(_Type* callableObject, function<int(InputState*)> callback, string name = "HandleKeyEvent") {
 
-			LOG(LogLevel::Fine) << "Keyboard::AddOnKeyEvent() : register handler into list." << &OnKeyEvent;
+			LOG(LogLevel::Fine) << "Keyboard::AddOnKeyEvent() : register handler into list.";
 
 			OnKeyEvent.Add(callableObject, callback, name);
 
