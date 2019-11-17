@@ -1,7 +1,11 @@
 #include "../Framework/IO/Keyboard.h"
+#include "../Framework/IO/MainInterface.h"
+
 
 
 using namespace Framework::IO;
+
+
 
 class handler {
 
@@ -26,6 +30,12 @@ int main() {
 	handler h;
 
 	k.AddOnKeyEvent(&h, bind((int(handler::*)(InputState*))&handler::handle, &h, placeholders::_1), "handler::handle");
+
+	MainInterface m;
+
+	vector<pair<uintptr_t, string>>* callbackKeys2 = m.GetKeyboard()->_DebugGetActionList()->_DebugGetCallbackKeys();
+
+	LOG(LogLevel::Fine) << "TestCaseKeyboard : callback2 keys size = " << callbackKeys->size();
 
 	return 0;
 
