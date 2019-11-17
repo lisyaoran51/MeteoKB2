@@ -7,6 +7,7 @@
 #include "Peripheral.h"
 #include "../../Util/DataStructure/ActionList.h"
 #include "../Input/InputState.h"
+#include "../../Util/Log.h"
 
 
 
@@ -22,7 +23,7 @@ using namespace std;
 using namespace Util::DataStructure;
 using namespace Framework::Input;
 using namespace Framework::Devices;
-
+using namespace Util;
 
 
 namespace Framework {
