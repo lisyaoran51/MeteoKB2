@@ -46,6 +46,8 @@ int MeteoGameHost::setupMainInterface()
 
 vector<InputHandler*>* MeteoGameHost::createAvailableInputHandlers()
 {
+	LOG(LogLevel::Info) << "MeteoGameHost::createAvailableInputHandlers() : create available input handlers.";
+
 	vector<InputHandler*>* handlers = new vector<InputHandler*>();
 	handlers->push_back(new KeyboardInputHandler());
 	handlers->push_back(new PanelInputHandler());
