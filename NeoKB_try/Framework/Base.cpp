@@ -38,6 +38,8 @@ Base::Base() : RegisterType("Base")
 
 int Base::SetHost(GameHost * host)
 {
+	LOG(LogLevel::Debug) << "Base::SetHost() : host address = " << host;
+
 	gameHost = host;
 	return 0;
 }
