@@ -1,8 +1,12 @@
 #include "StopwatchClock.h"
 
+#include "../../Util/Log.h"
+
+
 
 using namespace std::chrono;
 using namespace Framework::Timing;
+using namespace Util;
 
 
 StopwatchClock::StopwatchClock()
@@ -69,12 +73,12 @@ int StopwatchClock::Restart()
 
 int StopwatchClock::Start()
 {
-	
+	LOG(LogLevel::Finest) << "StopwatchClock::Start() : start the stopwatch.";
 	if (!isStarted || !isRunning) {
 		if (!isStarted && isRunning)
 			return -1; // TODO: throw error因為是異常狀況
-		systemCurrentTime = system_clock::now();
 		systemStartTime = system_clock::now();
+		systemCurrentTime = system_clock::now();
 		isRunning = true;
 		isStarted = true;
 	}

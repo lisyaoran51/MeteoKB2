@@ -35,8 +35,10 @@ int FramedClock::ProcessFrame()
 
 	// TODO: ­pºâaverageFrameTime©MframesPerSecond
 
-	if (!isStarted) 
+	if (!isStarted) {
 		start();
+
+	}
 	
 
 	lastFrameTime = currentTime;
@@ -143,6 +145,8 @@ int FramedClock::setInnerCurrentTime(double cTime)
 
 int FramedClock::start()
 {
+	LOG(LogLevel::Finest) << "FramedClock::start() : start the clock.";
+
 	currentTime = source->GetCurrentTime();
 	isStarted = true;
 	return 0;
