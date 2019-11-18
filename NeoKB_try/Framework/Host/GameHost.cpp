@@ -243,19 +243,21 @@ int GameHost::bootstrapSceneGraph(Game* game, Instrument* instrument)
 	root = new UserInputManager();
 
 	dependencies->Cache(root);
+	
 	dependencies->Cache(game, "Game");
+	game->SetHost(this);
+
 	dependencies->Cache(instrument, "Instrument");
+	instrument->SetHost(this);
 
 	LOG(LogLevel::Debug) << "Part8" << dependencies->_DebugPrintCache();
 
 	// root 要async，不然會變成沒有loaded
 	root->LoadAsync(sceneGraphClock, dependencies);
 
-	game->SetHost(this);
 	root->AddChild(game);
 
 	InputManager* instrumentInputManager = instrument->CreateInputManager();
-	instrument->SetHost(this);
 	root->AddChild(instrumentInputManager);
 	instrumentInputManager->AddChild(instrument);
 
