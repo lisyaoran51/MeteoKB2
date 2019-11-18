@@ -15,6 +15,8 @@ int Display::SetDevice(Device * device)
 {
 	Peripheral::SetDevice(device);
 	matchedDisplayDevice = dynamic_cast<DisplayDevice*>(device);
+	LOG(LogLevel::Info) << "Display::SetDevice() : Device = " << device << ", matched display device = " << matchedDisplayDevice;
+
 	return 0;
 }
 
