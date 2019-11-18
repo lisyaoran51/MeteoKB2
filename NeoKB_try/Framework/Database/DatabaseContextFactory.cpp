@@ -31,6 +31,8 @@ DatabaseContext * DatabaseContextFactory::GetContext()
 int DatabaseContextFactory::createDatabaseContext()
 {
 	LOG(LogLevel::Fine) << "DatabaseContextFactory::createDatabaseContext() : put storage into context.";
+	LOG(LogLevel::Debug) << "DatabaseContextFactory::createDatabaseContext() : host address = " << host;
+
 
 	dbContext = new DatabaseContext(host->GetStorage());
 	dbContext->Initialize();

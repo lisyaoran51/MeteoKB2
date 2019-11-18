@@ -227,6 +227,7 @@ int GameHost::setupConfig()
 int GameHost::bootstrapSceneGraph(Game* game, Instrument* instrument)
 {
 	LOG(LogLevel::Info) << "GameHost::bootstrapSceneGraph() : build scenegraph tree.";
+	LOG(LogLevel::Debug) << "GameHost::bootstrapSceneGraph() : host address = " << this;
 
 	root = new UserInputManager();
 
