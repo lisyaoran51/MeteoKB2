@@ -1,5 +1,9 @@
 #include "GameThread.h"
 
+#include <iomanip>
+
+
+
 using namespace Framework::Threading;
 
 
@@ -67,7 +71,7 @@ int GameThread::runWork()
 
 int GameThread::processFrame()
 {
-	LOG(LogLevel::Finest) << "GameThread::processFrame() : thread [" << threadName << "] process time = " << clock->GetElapsedFrameTime();
+	LOG(LogLevel::Finest) << "GameThread::processFrame() : thread [" << threadName << "] process time = " << setprecision(5) << clock->GetElapsedFrameTime();
 
 	onNewFrame();
 	clock->ProcessFrame();

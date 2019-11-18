@@ -125,6 +125,12 @@ int FramedClock::setCurrentTime(double cTime)
 	return 0;
 }
 
+int FramedClock::setInnerCurrentTime(double cTime)
+{
+	currentTime = cTime;
+	return 0;
+}
+
 int FramedClock::start()
 {
 	currentTime = source->GetCurrentTime();

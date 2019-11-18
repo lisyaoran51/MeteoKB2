@@ -41,6 +41,12 @@ namespace Timing {
 
 		virtual int setCurrentTime(double cTime);
 
+		/// <summary>
+		/// 因為set current time會把last frame time更新，而且會去seek他的source的時間，是用來給外面程式調整時間用，不適內部設定用
+		/// 這個是單純設定內部的current time
+		/// </summary>
+		virtual int setInnerCurrentTime(double cTime);
+
 		virtual int start();
 
 	private:

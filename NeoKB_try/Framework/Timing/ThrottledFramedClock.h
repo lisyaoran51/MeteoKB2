@@ -39,7 +39,7 @@ namespace Timing {
 
 	protected:
 
-
+		double getThrottledElapsedFrameTime();
 
 
 	};

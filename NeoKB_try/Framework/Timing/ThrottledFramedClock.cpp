@@ -76,3 +76,9 @@ double ThrottledFramedClock::GetMaxUpdateHz()
 {
 	return maxUpdateHz;
 }
+
+double ThrottledFramedClock::getThrottledElapsedFrameTime()
+{
+	setInnerCurrentTime(GetSource()->GetCurrentTime());
+	return GetCurrentTime() - lastFrameTime;
+}
