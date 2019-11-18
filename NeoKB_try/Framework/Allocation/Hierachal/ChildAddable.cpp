@@ -73,3 +73,17 @@ int ChildAddable::SetIsAlive(bool value)
 	isAlive = value;
 	return 0;
 }
+
+int ChildAddable::_DebugPrintTree(string space)
+{
+	LOG(LogLevel::Debug) << space << GetTypeName();
+
+	for (int i = 0; i < childs.size(); i++) {
+
+		childs[i]->_DebugPrintTree(space + string("-"));
+
+	}
+
+
+	return 0;
+}

@@ -184,6 +184,13 @@ int GameHost::updateFrame()
 {
 	LOG(LogLevel::Finest) << "GameHost::updateFrame() : update scenegraph tree.";
 
+	LOG(LogLevel::Finest) << "GameHost::updateFrame() : print tree " << [=]() {
+
+		root->_DebugPrintTree("|");
+
+		return 0;
+	};
+
 	return root->UpdateSubTree();
 }
 

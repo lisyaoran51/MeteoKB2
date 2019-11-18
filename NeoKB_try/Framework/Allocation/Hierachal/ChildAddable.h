@@ -48,6 +48,8 @@ namespace Hierachal{
 		/// TODO: 這個應該要擺在OnDelete裡面去更改他的alive，不能這樣映改，然後再delete child時觸發
 		/// </summary>
 		int SetIsAlive(bool value);
+
+		int _DebugPrintTree(string space);
 	};
 
 
