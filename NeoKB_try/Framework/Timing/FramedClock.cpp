@@ -2,10 +2,13 @@
 
 #include "StopwatchClock.h"
 #include <stdexcept>
+#include "../../Util/Log.h"
+#include <iomanip>
 
 
 using namespace Framework::Timing;
 using namespace std;
+using namespace Util;
 
 
 FramedClock::FramedClock(Clock * s)
@@ -22,6 +25,8 @@ FramedClock::FramedClock(Clock * s)
 
 int FramedClock::ProcessFrame()
 {
+	LOG(LogLevel::Finest) << "FramedClock::ProcessFrame() : current time [" << fixed << setprecision(5) << currentTime << "].";
+
 	if (isProcessSourceClockFrames) {
 		FrameBasedClock* sourceAsFrameBased = dynamic_cast<FrameBasedClock*>(source);
 		if (sourceAsFrameBased)
