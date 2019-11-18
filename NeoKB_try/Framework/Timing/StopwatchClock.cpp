@@ -16,6 +16,7 @@ StopwatchClock::StopwatchClock()
 	systemCurrentTime = system_clock::from_time_t(0);
 	systemStartTime = system_clock::from_time_t(0);
 	rateChangeAccumulatedTime = 0;
+	seekOffset = 0;
 }
 
 double StopwatchClock::GetCurrentTime()
