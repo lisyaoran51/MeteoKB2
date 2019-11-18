@@ -67,6 +67,8 @@ int GameThread::runWork()
 
 int GameThread::processFrame()
 {
+	LOG(LogLevel::Finest) << "GameThread::processFrame() : thread [" << threadName << "] process time = " << clock->GetElapsedFrameTime();
+
 	onNewFrame();
 	clock->ProcessFrame();
 

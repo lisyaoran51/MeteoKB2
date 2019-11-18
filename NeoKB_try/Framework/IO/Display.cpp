@@ -28,7 +28,5 @@ int Display::TriggerOnInput()
 
 int Display::Show(Map * m)
 {
-	
-
 	return matchedDisplayDevice->Show(m);
 }
