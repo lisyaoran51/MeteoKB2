@@ -71,6 +71,7 @@ namespace Allocation {
 			{
 				LOG(LogLevel::Debug) << "---Name = " << x.first << ", Address = " << x.second;
 			}
+			return 0;
 		}
 
 	protected:

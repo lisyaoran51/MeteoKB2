@@ -53,7 +53,7 @@ int GameHost::Initialize(string name)
 
 	LOG(LogLevel::Finest) << "GameHost::Initialize() : end.";
 
-	LOG(LogLevel::Debug) << [=]() {dependencies->_DebugPrintCache; return string(""); };
+	LOG(LogLevel::Debug) << dependencies->_DebugPrintCache();
 
 	return 0;
 }
