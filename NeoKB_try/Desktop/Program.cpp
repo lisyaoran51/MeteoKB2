@@ -24,6 +24,7 @@ int Program::Main(vector<string>& args)
 	host->Initialize();
 
 	
+	
 	host->Run(new MeteoGameDesktop(args), new MeteoPiano(args));
 
 	return 0;

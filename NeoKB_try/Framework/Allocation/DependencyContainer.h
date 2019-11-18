@@ -65,6 +65,14 @@ namespace Allocation {
 			return 0;
 		}
 
+		int _DebugPrintCache() {
+			LOG(LogLevel::Debug) << "DependencyContainer::_DebugPrintCache():";
+			for (auto const& x : cache)
+			{
+				LOG(LogLevel::Debug) << "---Name = " << x.first << ", Address = " << x.second;
+			}
+		}
+
 	protected:
 
 		/// <summary>

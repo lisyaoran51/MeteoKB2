@@ -31,6 +31,7 @@ int GameHost::Initialize(string name)
 	dependencies = new DependencyContainer();
 
 	dependencies->Cache<GameHost>(this, "GameHost");
+	LOG(LogLevel::Debug) << "GameHost::Initialize() : host address = " << this;
 
 	// name是資料夾名稱
 	dependencies->Cache<Storage>(storage = getStorage(name), "Storage");
@@ -51,6 +52,8 @@ int GameHost::Initialize(string name)
 	initialized = true;
 
 	LOG(LogLevel::Finest) << "GameHost::Initialize() : end.";
+
+	LOG(LogLevel::Debug) << [=]() {dependencies->_DebugPrintCache; return ""; };
 
 	return 0;
 }
