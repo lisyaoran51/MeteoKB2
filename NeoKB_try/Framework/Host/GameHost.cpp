@@ -6,6 +6,7 @@
 #include "../Game.h"
 #include "../../Instruments/Instrument.h"
 #include "../IO/Storage.h"
+#include <chrono>         // std::chrono::seconds
 
 
 
@@ -90,6 +91,9 @@ int GameHost::Run(Game* game, Instrument* instrument)
 	
 	LOG(LogLevel::Debug) << "GameHost::Run(): listing cache" << dependencies->_DebugPrintCache();
 
+	
+	runLoop();
+
 	return 0;
 }
 
@@ -115,6 +119,15 @@ Storage * GameHost::GetStorage()
 		throw runtime_error("int GameHost::GetStorage() : Not initialized.");
 
 	return storage;
+}
+
+int GameHost::runLoop()
+{
+	// TODO: 更改睡眠時間、中斷跳出
+	while(!exitRequested)
+		this_thread::sleep_for(chrono::milliseconds(10));
+
+	return 0;
 }
 
 int GameHost::drawInitialize()

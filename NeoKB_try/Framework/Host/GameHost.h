@@ -139,6 +139,10 @@ namespace Host {
 
 		virtual vector<InputHandler*>* createAvailableInputHandlers() = 0;
 
+		bool exitRequested = false;
+
+		int runLoop();
+
 	private :
 
 		FrameworkConfigManager* frameworkConfigManager;
