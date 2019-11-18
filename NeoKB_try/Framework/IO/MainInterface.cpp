@@ -40,6 +40,8 @@ int MainInterface::Initialize()
 
 int MainInterface::ScanInput()
 {
+	LOG(LogLevel::Finest) << "MainInterface::ScanInput() : scan " << inputDevices.size() << " devices.";
+
 	for (int i = 0; i < inputDevices.size(); i++) {
 		inputDevices[i]->ScanInput();
 	}
