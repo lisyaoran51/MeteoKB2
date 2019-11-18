@@ -32,6 +32,8 @@ MeteoDisplayDevice::MeteoDisplayDevice(int w, int h)
 
 int MeteoDisplayDevice::Show(Map * m)
 {
+	LOG(LogLevel::Finest) << "MeteoDisplayDevice::Show() : copying map.";
+
 	uint8_t** matrix = m->GetMatrix();
 
 	for (int i = 0; i < width; i++) {
