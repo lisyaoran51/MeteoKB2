@@ -27,6 +27,7 @@ int GameThread::Start()
 {
 	LOG(LogLevel::Info) << "GameThread::Start() : start thread " << threadName << ".";
 	clock->ProcessFrame();
+	LOG(LogLevel::Info) << "GameThread::Start() : start thread 2" << threadName << ".";
 	runThread = new thread(&GameThread::runWork, this);
 	runThread->detach();
 	return 0;
@@ -76,9 +77,9 @@ int GameThread::processFrame()
 	LOG(LogLevel::Finest) << "GameThread::processFrame() [" << threadName << "]";
 
 
-	//if(clock->GetIsRunning())
-	//	LOG(LogLevel::Finest) << "GameThread::processFrame() : current time = " << fixed << setprecision(5) << clock->GetCurrentTime() << ", last frame time = "
-	//		<< clock->GetLastFrameTime() << ", process time = " << clock->GetElapsedFrameTime();
+	if(clock->GetIsRunning())
+		LOG(LogLevel::Finest) << "GameThread::processFrame() : current time = " << fixed << setprecision(5) << clock->GetCurrentTime() << ", last frame time = "
+			<< clock->GetLastFrameTime() << ", process time = " << clock->GetElapsedFrameTime();
 
 	onNewFrame();
 	clock->ProcessFrame();
