@@ -29,10 +29,11 @@ int FramedClock::ProcessFrame()
 
 	if (isProcessSourceClockFrames) {
 		FrameBasedClock* sourceAsFrameBased = dynamic_cast<FrameBasedClock*>(source);
+		LOG(LogLevel::Finest) << "FramedClock::ProcessFrame() : 2222";
 		if (sourceAsFrameBased)
 			sourceAsFrameBased->ProcessFrame();
 	}
-
+	LOG(LogLevel::Finest) << "FramedClock::ProcessFrame() : 1111";
 	// TODO: ­pºâaverageFrameTime©MframesPerSecond
 
 	if (!isStarted) {
