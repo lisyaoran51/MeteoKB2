@@ -201,6 +201,8 @@ int GameHost::inputFrame()
 
 	mainInterface->ScanInput();
 	/* 這邊只輸出panel上的uotput，不輸出琴鍵燈光 */
+
+	LOG(LogLevel::Finest) << "GameHost::inputFrame() : process output.";
 	mainInterface->ProcessOutput();
 	return 0;
 }
