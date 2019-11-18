@@ -11,6 +11,8 @@ using namespace std;
 int MeteoGameBase::load()
 {
 
+	LOG(LogLevel::Info) << "MeteoGameBase::load() : caching Resources.";
+
 	dbContextFactory = new DatabaseContextFactory(gameHost);
 	dbContextFactory->Initialize();
 
