@@ -15,6 +15,8 @@ using namespace Framework::IO::Stores;
 
 int Base::load()
 {
+	LOG(LogLevel::Info) << "Base::load() : caching audio manager and main resource.";
+
 	resources = new CompositeResourceStore<char*>();
 	resources->AddStore(new DynamicPathResourceStore(GetResourcePath()));
 
@@ -31,6 +33,7 @@ int Base::load()
 
 Base::Base() : RegisterType("Base")
 {
+	registerLoad(bind((int(Base::*)())&Base::load, this));
 }
 
 int Base::SetHost(GameHost * host)
