@@ -2,12 +2,14 @@
 
 #include <stdexcept>
 #include <unistd.h>
+#include "../../Util/Log.h"
+#include <iomanip>
 
 
 
 using namespace Framework::Timing;
 using namespace std;
-
+using namespace Util;
 
 
 int ThrottledFramedClock::throttle()
@@ -30,6 +32,8 @@ int ThrottledFramedClock::throttle()
 			accumulatedSleepError -= accumulatedSleepErrorFloored;
 			timeToSleepInMilli += accumulatedSleepErrorFloored;
 		}
+
+		LOG(LogLevel::Finest) << "ThrottledFramedClock::throttle() : time to sleep in milli [" << fixed << setprecision(5) << timeToSleepInMilli << "].";
 
 		if (timeToSleepInMilli > 0) {
 			usleep(timeToSleepInMilli * 1000);

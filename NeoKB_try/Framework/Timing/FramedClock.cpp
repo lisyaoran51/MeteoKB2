@@ -35,15 +35,11 @@ int FramedClock::ProcessFrame()
 	// TODO: ­pºâaverageFrameTime©MframesPerSecond
 
 	if (!isStarted) {
-		LOG(LogLevel::Finest) << "FramedClock::ProcessFrame() : aaaa";
 		start();
-
 	}
 	
-	LOG(LogLevel::Finest) << "FramedClock::ProcessFrame() : bbbb";
 	lastFrameTime = currentTime;
 	currentTime = source->GetCurrentTime();
-	LOG(LogLevel::Finest) << "FramedClock::ProcessFrame() : cccc";
 
 	return 0;
 }
