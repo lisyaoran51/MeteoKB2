@@ -78,7 +78,7 @@ int GameHost::Run(Game* game, Instrument* instrument)
 	inputThread->Start();
 
 	drawInitialize();
-	//drawThread->Start();
+	drawThread->Start();
 
 	updateInitialize();
 	updateThread->Start();
@@ -164,6 +164,8 @@ int GameHost::drawFrame()
 			drawables[i]->GetPositionX(), 
 			drawables[i]->GetPositionY());
 	}
+
+	LOG(LogLevel::Finest) << "GameHost::drawFrame() : pass to display.";
 
 	mainInterface->GetDisplay()->Show(canvas);
 
