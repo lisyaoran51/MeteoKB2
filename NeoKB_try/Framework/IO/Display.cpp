@@ -26,5 +26,7 @@ int Display::TriggerOnInput()
 
 int Display::Show(Map * m)
 {
+	LOG(LogLevel::Debug) << "Display::Show() : matched display device = " << matchedDisplayDevice;
+
 	return matchedDisplayDevice->Show(m);
 }
