@@ -86,7 +86,8 @@ namespace Timing {
 
 	private:
 
-		double rate;
+		double rate = 1.0;
+
 		bool isRunning;
 
 		bool isStarted;
