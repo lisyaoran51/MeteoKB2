@@ -20,10 +20,6 @@ namespace Framework {
 
 		AudioManager* audioManager;
 
-		CompositeResourceStore<char*>* resources;
-
-		GameHost* gameHost;
-
 		int load();
 
 	public:
@@ -33,6 +29,12 @@ namespace Framework {
 		virtual int SetHost(GameHost* host);
 
 		virtual string GetResourcePath();
+
+	protected:
+
+		GameHost* gameHost;
+
+		CompositeResourceStore<char*>* resources;
 
 	};
 
