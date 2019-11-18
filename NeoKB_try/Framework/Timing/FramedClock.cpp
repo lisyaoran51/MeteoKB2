@@ -146,9 +146,10 @@ int FramedClock::setInnerCurrentTime(double cTime)
 
 int FramedClock::start()
 {
-	LOG(LogLevel::Finest) << "FramedClock::start() : start the clock.";
+	
 
 	currentTime = source->GetCurrentTime();
+	LOG(LogLevel::Finest) << "FramedClock::start() : start the clock. current time = " << currentTime;
 	isStarted = true;
 	return 0;
 }
