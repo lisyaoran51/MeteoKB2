@@ -74,6 +74,11 @@ bool FramedClock::GetIsRunning()
 	return source->GetIsRunning();
 }
 
+double FramedClock::GetLastFrameTime()
+{
+	return lastFrameTime;
+}
+
 double FramedClock::GetElapsedFrameTime()
 {
 	return currentTime - lastFrameTime;

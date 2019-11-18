@@ -26,6 +26,7 @@ namespace Timing {
 		virtual int SetIsRunning(bool value);
 		virtual bool GetIsRunning();
 
+		virtual double GetLastFrameTime();
 		virtual double GetElapsedFrameTime();
 		virtual double GetAverageFrameTime();
 		virtual double GetFramesPerSecond();
