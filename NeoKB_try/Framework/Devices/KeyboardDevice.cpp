@@ -15,5 +15,6 @@ int KeyboardDevice::handlePeripheralRegister(Peripheral * peripheral)
 {
 	matchedPeripheral = peripheral;
 	matchedKeyboard = dynamic_cast<Keyboard*>(peripheral);
+	peripheral->SetDevice(this);
 	return 0;
 }

@@ -17,5 +17,6 @@ int BluetoothDevice::handlePeripheralRegister(Peripheral * peripheral)
 {
 	matchedPeripheral = peripheral;
 	matchedBluetoothPhone = dynamic_cast<BluetoothPhone*>(peripheral);
+	peripheral->SetDevice(this);
 	return 0;
 }

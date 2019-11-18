@@ -16,5 +16,6 @@ int PanelDevice::handlePeripheralRegister(Peripheral * peripheral)
 {
 	matchedPeripheral = peripheral;
 	matchedPanel = dynamic_cast<Panel*>(peripheral);
+	peripheral->SetDevice(this);
 	return 0;
 }

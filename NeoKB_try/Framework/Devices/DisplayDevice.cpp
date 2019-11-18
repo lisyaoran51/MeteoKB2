@@ -16,6 +16,6 @@ int DisplayDevice::handlePeripheralRegister(Peripheral * peripheral)
 {
 	matchedPeripheral = peripheral;
 	matchedDisplay = dynamic_cast<Display*>(peripheral);
-
+	peripheral->SetDevice(this);
 	return 0;
 }
