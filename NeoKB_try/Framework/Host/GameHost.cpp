@@ -78,6 +78,9 @@ int GameHost::Run(Game* game, Instrument* instrument)
 	updateInitialize();
 	//updateThread->Start();
 
+	if(!initialized)
+		LOG(LogLevel::Finest) << "host not initialized yet.";
+
 	bootstrapSceneGraph(game, instrument);
 
 

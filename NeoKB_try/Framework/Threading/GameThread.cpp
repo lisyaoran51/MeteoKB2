@@ -8,7 +8,7 @@ using namespace Framework::Threading;
 
 GameThread::GameThread(function<int()> oNewFrame, string tName)
 {
-	LOG(LogLevel::Info) << "GameThread::GameThread() : create clock and thread.";
+	LOG(LogLevel::Info) << "GameThread::GameThread() : " << tName << " create clock and thread.";
 
 	onNewFrame = oNewFrame;
 	threadName = tName;
