@@ -148,7 +148,7 @@ int GameHost::drawInitialize()
 
 int GameHost::drawFrame()
 {
-	LOG(LogLevel::Finest) << "GameHost::drawFrame() : start drawing a frame.";
+	LOG(LogLevel::Finest) << "GameHost::drawFrame() : drawing a frame.";
 
 	canvas->Reset();
 
@@ -182,6 +182,8 @@ int GameHost::updateInitialize()
 
 int GameHost::updateFrame()
 {
+	LOG(LogLevel::Finest) << "GameHost::updateFrame() : update scenegraph tree.";
+
 	return root->UpdateSubTree();
 }
 
@@ -195,7 +197,7 @@ int GameHost::inputInitialize()
 
 int GameHost::inputFrame()
 {
-
+	LOG(LogLevel::Finest) << "GameHost::inputFrame() : scan input.";
 
 	mainInterface->ScanInput();
 	/* 這邊只輸出panel上的uotput，不輸出琴鍵燈光 */
