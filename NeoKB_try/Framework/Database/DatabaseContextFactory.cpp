@@ -11,7 +11,10 @@ DatabaseContextFactory::DatabaseContextFactory(GameHost * h)
 	host = h;
 }
 
-int DatabaseContextFactory::Initialize() {
+int DatabaseContextFactory::Initialize() 
+{
+
+	LOG(LogLevel::Info) << "DatabaseContextFactory::Initialize() : creating db context.";
 
 	createDatabaseContext();
 	initialized = true;
@@ -27,6 +30,8 @@ DatabaseContext * DatabaseContextFactory::GetContext()
 
 int DatabaseContextFactory::createDatabaseContext()
 {
+	LOG(LogLevel::Fine) << "DatabaseContextFactory::createDatabaseContext() : put storage into context.";
+
 	dbContext = new DatabaseContext(host->GetStorage());
 	dbContext->Initialize();
 	return 0;

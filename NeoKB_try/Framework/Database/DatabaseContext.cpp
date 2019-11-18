@@ -65,6 +65,8 @@ DatabaseContext::DatabaseContext(Storage * s)
 
 int DatabaseContext::Initialize() {
 
+	LOG(LogLevel::Fine) << "DatabaseContext::Initialize() : build db model.";
+
 	createModel();
 	prepare();
 	initialized = true;
