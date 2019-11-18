@@ -204,6 +204,8 @@ int GameHost::inputFrame()
 
 	LOG(LogLevel::Finest) << "GameHost::inputFrame() : process output.";
 	mainInterface->ProcessOutput();
+
+
 	return 0;
 }
 
