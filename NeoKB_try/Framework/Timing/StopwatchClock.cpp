@@ -22,7 +22,7 @@ double StopwatchClock::GetCurrentTime()
 {
 	if (!isStarted)
 		Start();
-	return (double(getElapsedMilliseconds()) / 1000.0) * rate + rateChangeAccumulatedTime + seekOffset;
+	return getElapsedSeconds() * rate + rateChangeAccumulatedTime + seekOffset;
 }
 
 int StopwatchClock::SetRate(double r)
@@ -106,15 +106,15 @@ int StopwatchClock::ResetSpeedAdjustments()
 	return SetRate(1);
 }
 
-long long StopwatchClock::getElapsedMilliseconds()
+long long StopwatchClock::getElapsedMicroseconds()
 {
 	if(isRunning)
 		systemCurrentTime = system_clock::now();
-	return duration_cast<milliseconds>(systemCurrentTime - systemStartTime).count();
+	return duration_cast<microseconds>(systemCurrentTime - systemStartTime).count();
 }
 
 double StopwatchClock::getElapsedSeconds()
 {
-	return double(getElapsedMilliseconds()) / 1000.0;
+	return double(getElapsedMicroseconds()) / 1000000.0;
 }
 

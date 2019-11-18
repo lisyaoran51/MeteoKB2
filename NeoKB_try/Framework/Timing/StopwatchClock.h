@@ -103,7 +103,7 @@ namespace Timing {
 		/// <summary>
 		/// 取得目前執行個體所測量的已耗用時間總和。
 		/// </summary>
-		long long getElapsedMilliseconds();
+		long long getElapsedMicroseconds();
 
 		double getElapsedSeconds();
 

@@ -91,13 +91,13 @@ INCLUDE = -I../Framwork -I../Framework/Allocation -I../Framework/Allocation/Hier
 
 
 
-TARGET  = TestCaseKeyboard
+TARGET  = TestCaseStopwatch
 #compiler 
 CC = g++
 #cflags 
 CFLAGS = -Wall -ansi -s -std=c++14 -pthread -lbass -lstdc++fs
 #object 
-OBJS = TestCaseKeyboard.o \
+OBJS = TestCaseStopwatch.o \
 \
 Base.o Game.o \
 Cachable.o ChildAddable.o Container.o HasParent.o Loadable.o LoadStateHandler.o MtoObject.o Schedulable.o Scheduler.o Triggerable.o Updatable.o \
