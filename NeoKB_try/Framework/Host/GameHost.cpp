@@ -53,7 +53,7 @@ int GameHost::Initialize(string name)
 
 	LOG(LogLevel::Finest) << "GameHost::Initialize() : end.";
 
-	LOG(LogLevel::Debug) << dependencies->_DebugPrintCache();
+	LOG(LogLevel::Debug) << "Part1" << dependencies->_DebugPrintCache();
 
 	return 0;
 }
@@ -62,27 +62,35 @@ int GameHost::Run(Game* game, Instrument* instrument)
 {
 	LOG(LogLevel::Info) << "GameHost::Run() : Start host.";
 
+	LOG(LogLevel::Debug) << "Part2" << dependencies->_DebugPrintCache();
 	if(!initialized)
 		throw runtime_error("int GameHost::Run() : Not initialized.");
 
 	LOG(LogLevel::Finest) << "GameHost::Run() : Setup confing.";
 	setupConfig();
 
+	LOG(LogLevel::Debug) << "Part3" << dependencies->_DebugPrintCache();
+
 	LOG(LogLevel::Finest) << "GameHost::Run() : reset input handler.";
 	resetInputHandlers();
+	LOG(LogLevel::Debug) << "Part4" << dependencies->_DebugPrintCache();
 
 	LOG(LogLevel::Finest) << "Initialize Threads.";
 	inputInitialize();
 	//inputThread->Start();
+	LOG(LogLevel::Debug) << "Part5" << dependencies->_DebugPrintCache();
 
 	drawInitialize();
 	//drawThread->Start();
+	LOG(LogLevel::Debug) << "Part6" << dependencies->_DebugPrintCache();
 
 	updateInitialize();
 	//updateThread->Start();
 
 	if(!initialized)
 		LOG(LogLevel::Finest) << "host not initialized yet.";
+
+	LOG(LogLevel::Debug) << "Part7" << dependencies->_DebugPrintCache();
 
 	bootstrapSceneGraph(game, instrument);
 
@@ -237,6 +245,8 @@ int GameHost::bootstrapSceneGraph(Game* game, Instrument* instrument)
 	dependencies->Cache(root);
 	dependencies->Cache(game, "Game");
 	dependencies->Cache(instrument, "Instrument");
+
+	LOG(LogLevel::Debug) << "Part8" << dependencies->_DebugPrintCache();
 
 	// root 要async，不然會變成沒有loaded
 	root->LoadAsync(sceneGraphClock, dependencies);
