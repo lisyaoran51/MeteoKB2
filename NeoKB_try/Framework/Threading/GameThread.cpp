@@ -26,7 +26,7 @@ GameThread::GameThread(function<int()> oNewFrame, string tName)
 int GameThread::Start()
 {
 	LOG(LogLevel::Info) << "GameThread::Start() : start thread " << threadName << ".";
-
+	clock->ProcessFrame();
 	runThread = new thread(&GameThread::runWork, this);
 	runThread->detach();
 	return 0;
