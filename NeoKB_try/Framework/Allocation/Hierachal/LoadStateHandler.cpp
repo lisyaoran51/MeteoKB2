@@ -168,7 +168,7 @@ int Loadable::ReadyHandler::HandleLoadComplete()
 {
 	LOG(LogLevel::Debug) << "Loadable::ReadyHandler::HandleLoadComplete() : [" << loadable.GetTypeName() << "] load on clomplete.";
 
-	loadable.LoadOnCompleted();
+	loadable.LoadOnComplete();
 
 	loadable.loadStateHandler = &loadable.loadedHandler;
 	

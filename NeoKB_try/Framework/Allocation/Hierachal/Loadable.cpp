@@ -72,7 +72,7 @@ int Loadable::LoadComplete()
 	return 0;
 }
 
-int Loadable::LoadOnCompleted()
+int Loadable::LoadOnComplete()
 {
 	return 0;
 }

@@ -37,7 +37,7 @@ int Instrument::SetHost(GameHost * h)
 	return 0;
 }
 
-int Instrument::LoadOnCompleted()
+int Instrument::LoadOnComplete()
 {
 	// 把sound binding丟進去
 	// TODO: variant應該要從setting拿

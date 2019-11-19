@@ -38,7 +38,7 @@ namespace KeyBindings {
 		/// <summary>
 		/// 在load結束的時候，時記要執行的工作
 		/// </summary>
-		virtual int LoadOnCompleted() {
+		virtual int LoadOnComplete() {
 
 			reloadMappings();
 			

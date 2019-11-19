@@ -61,7 +61,7 @@ namespace Instruments {
 
 		vector<SoundBinding*> soundBindings;
 
-		virtual int LoadOnCompleted();
+		virtual int LoadOnComplete();
 
 		virtual int loadAndMapSamples() = 0;
 
