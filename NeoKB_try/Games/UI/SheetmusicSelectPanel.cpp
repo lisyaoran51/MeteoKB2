@@ -44,15 +44,20 @@ int SheetmusicSelectPanel::load(FrameworkConfigManager * f, SmManager * s)
 
 		if (smInfos->at(i)->metadata->Title == songTitle) {
 
+			SelectionChanged(smInfos->at(i));
+			delete smInfos;
+			StartRequest();
+			return 0;
+
 			LOG(LogLevel::Debug) << "int SheetmusicSelectPanel::load() : song [" << songTitle << "] found.";
-			GetScheduler()->AddDelayedTask([=]() {
-
-				SelectionChanged(smInfos->at(i));
-				delete smInfos;
-				StartRequest();
-				return 0;
-
-			}, 0.5);
+			//GetScheduler()->AddDelayedTask([=]() {
+			//
+			//	SelectionChanged(smInfos->at(i));
+			//	delete smInfos;
+			//	StartRequest();
+			//	return 0;
+			//
+			//}, 0.5);
 		}
 	}
 	

@@ -13,7 +13,8 @@ int MainMenu::onEntering(Scene * lastScene)
 
 	songSelect = new PlaySongSelect();
 
-	GetScheduler()->AddDelayedTask([=]() { Push(songSelect); return 0; }, 0.5);
+	Push(songSelect);
+	//GetScheduler()->AddDelayedTask([=]() { Push(songSelect); return 0; }, 0.5);
 
 	return 0;
 }
