@@ -166,6 +166,8 @@ int Loadable::ReadyHandler::SetParent(HasParent * p)
 
 int Loadable::ReadyHandler::HandleLoadComplete()
 {
+	LOG(LogLevel::Debug) << "Loadable::ReadyHandler::HandleLoadComplete() : [" << loadable.GetTypeName() << "] load on clomplete.";
+
 	loadable.loadStateHandler = &loadable.loadedHandler;
 	
 	loadable.LoadOnCompleted();
