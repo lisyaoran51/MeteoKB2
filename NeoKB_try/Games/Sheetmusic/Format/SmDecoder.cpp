@@ -36,6 +36,8 @@ int SmDecoder::RegisterDecoder(string version, string typeName)
 
 SmDecoder* SmDecoder::GetDecoder(ifstream * stream)
 {
+	if (!initialized)
+		Initialize();
 	
 	string line;
 
