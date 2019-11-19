@@ -27,7 +27,7 @@ namespace Rulesets {
 
 	public:
 
-		RulesetInfo(string n);
+		RulesetInfo(string n, int i);
 
 		Ruleset* CreateRuleset();
 

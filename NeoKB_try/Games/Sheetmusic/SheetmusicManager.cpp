@@ -26,6 +26,8 @@ SmManager::SmManager(Storage * s, function<DatabaseContext*()> gContext, Ruleset
 {
 	smInfos = new vector<SmInfo*>();
 	rulesetInfos = new vector<RulesetInfo*>();
+	// !!!這一段是鮮血死的，以後要改成從檔案讀ruleset資料
+	rulesetInfos->push_back(new RulesetInfo("MeteorRuleset", 1));
 
 	getContext = gContext;
 
@@ -95,10 +97,11 @@ int SmManager::ImportFromStable()
 
 vector<SmInfo*>* SmManager::GetSmInfos()
 {
-	return smStore->GetSheetmusics();
+	// 這個是新的，以後要把sm存到store李
+	//return smStore->GetSheetmusics();
 
 	// 這個是舊的
-	// return smInfos;
+	return smInfos;
 }
 
 WorkingSm * SmManager::GetWorkingSm(SmInfo * s)
@@ -133,8 +136,10 @@ vector<SmInfo*>* SmManager::import(FileReader & fileReader)
 		sm->GetSmInfo()->smSetInfo = fileReader.GetSmSetInfo();
 
 		// 寫到這邊 不知道怎麼建ruleset---> 在建立sm  manager時手動把ruleset info加入
-		RulesetInfo* rulesetInfo = NULL;
+		RulesetInfo* rulesetInfo = nullptr;
 
+		// 這邊鮮血死，decoder解出來的ruleset id自動設為1，然後sm manager的ruleset自動加入MeteorRuleset的id是1
+		// 之後要改成去檔案讀
 		for (int i = 0; i < rulesetInfos->size(); i++){
 			if (rulesetInfos->at(i)->GetId() == sm->GetSmInfo()->rulesetId) {
 				rulesetInfo = rulesetInfos->at(i);

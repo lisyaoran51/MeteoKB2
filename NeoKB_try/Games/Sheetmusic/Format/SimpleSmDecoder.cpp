@@ -355,5 +355,8 @@ int SimpleSmDecoder::parseFile(ifstream * stream, Sm<Event>* sm)
     //foreach (var hitObject in sheetmusic.HitObjects)
     //    hitObject.ApplyDefaults(sheetmusic.ControlPointInfo, sheetmusic.SheetmusicInfo.BaseDifficulty);
 
+	// TODO: 先亂寫，1就是MeteorRuleset
+	sm->GetSmInfo()->rulesetId = 1;
+
 	return 0;
 }

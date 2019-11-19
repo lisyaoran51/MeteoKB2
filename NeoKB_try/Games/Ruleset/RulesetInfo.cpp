@@ -8,9 +8,10 @@ using namespace Games::Rulesets;
 using namespace Framework::Allocation::Hierachal;
 
 
-RulesetInfo::RulesetInfo(string n)
+RulesetInfo::RulesetInfo(string n, int i)
 {
 	name = n;
+	id = i;
 }
 
 Ruleset* RulesetInfo::CreateRuleset()
