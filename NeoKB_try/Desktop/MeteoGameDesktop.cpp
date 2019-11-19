@@ -23,5 +23,5 @@ MeteoGameDesktop::StableStorage::StableStorage(): PlatformStorage(""), RegisterT
 
 string MeteoGameDesktop::StableStorage::locateBasePath()
 {
-	return string("/home/pi/Meteo");
+	return string("./");
 }

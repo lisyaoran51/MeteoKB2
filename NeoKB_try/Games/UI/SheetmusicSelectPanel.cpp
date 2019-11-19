@@ -38,6 +38,8 @@ int SheetmusicSelectPanel::load(FrameworkConfigManager * f, SmManager * s)
 	vector<SmInfo*>* smInfos = smManager->GetSmInfos();
 	for (int i = 0; i < smInfos->size(); i++) {
 
+
+
 		if (smInfos->at(i)->metadata->Title == songTitle) {
 
 			LOG(LogLevel::Debug) << "int SheetmusicSelectPanel::load() : song [" << songTitle << "] found.";

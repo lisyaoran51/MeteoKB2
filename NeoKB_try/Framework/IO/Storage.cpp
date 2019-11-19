@@ -33,12 +33,10 @@ string Storage::GetUsableDirectoryPathFor(string directoryPath, bool createIfNot
 	if (temp != "/"s)
 		resolvedPath += "/"s;
 	
-
 	path resolved = resolvedPath;
 
 	if (createIfNotExist && is_directory(resolved) == 0)
 		create_directories(resolved);
-
 
 	return resolvedPath;
 }

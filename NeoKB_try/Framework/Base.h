@@ -28,7 +28,6 @@ namespace Framework {
 
 		virtual int SetHost(GameHost* host);
 
-
 		virtual string GetResourcePath();
 
 	protected:
@@ -40,10 +39,6 @@ namespace Framework {
 	};
 
 }
-
-
-
-
 
 
 #endif

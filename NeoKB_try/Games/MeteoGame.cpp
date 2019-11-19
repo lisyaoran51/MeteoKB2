@@ -34,7 +34,6 @@ Intro * Games::MeteoGame::getIntro()
 MeteoGame::MeteoGame() : RegisterType("MeteoGame")
 {
 	
-
 	registerLoad(bind((int(MeteoGame::*)())&MeteoGame::load, this));
 
 }
@@ -59,6 +58,11 @@ int MeteoGame::LoadOnComplete()
 	// https://stackoverflow.com/questions/14408105/how-do-i-use-stdbind-to-call-the-base-classs-version-of-a-virtual-function/14408253
 	// 確實不用寫lambda式，值接bind base::function，也會bind override function上去
 	smManager->GetStableStorage = [=]() {return GetStableStorage(); };
+	
+	// storage的位置目前設為"./"，import from stable會去"./Songs"下面抓檔案
+
+	smManager->ImportFromStable();
+	// 這邊應該要import from args，以後再寫
 
 	AddChild(screenStack = new Loader());
 

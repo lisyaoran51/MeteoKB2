@@ -73,9 +73,19 @@ int SmManager::ImportFromStable()
 {
 	Storage* stable = GetStableStorage();
 
-	vector<string>* paths;
+	vector<string>* paths = stable->GetDirectories("Songs");
+	paths->push_back(stable->GetUsableDirectoryPathFor("Songs"));
 
-	Import(paths = stable->GetDirectories("Songs"));
+	LOG(LogLevel::Info) << "SmManager::ImportFromStable() : import paths ^^^" << [](vector<string>* p) {
+
+		for (int i = 0; i < p->size(); i++) {
+			LOG(LogLevel::Info) << "---------------------------- " << p->at(i);
+		}
+
+		return 0;
+	}(paths);
+
+	Import(paths);
 
 	delete stable;
 	delete paths;
