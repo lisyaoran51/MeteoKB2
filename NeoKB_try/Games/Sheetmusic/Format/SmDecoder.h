@@ -30,9 +30,13 @@ namespace Format {
 		// sm decoder ¤£¬Osingleton
 		// friend class Singleton<SmDecoder>;
 
+		static bool initialized;
+
 		static map<string, string> decoders;
 
 	public:
+
+		static int Initialize();
 
 		static int RegisterDecoder(string version, string typeName);
 		static SmDecoder* GetDecoder(ifstream* stream);
@@ -46,6 +50,7 @@ namespace Format {
 		virtual int parseFile(ifstream* stream, Sm<Event>* sm) = 0;
 	};
 
+	bool SmDecoder::initialized = false;
 
 	template<typename T>
 	class SmDecoderWithSection : public SmDecoder {

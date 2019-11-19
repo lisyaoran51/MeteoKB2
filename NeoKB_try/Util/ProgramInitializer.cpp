@@ -2,31 +2,35 @@
 
 #include "Log.h"
 #include "InstanceCreator.h"
-#include "MtoObject.h"
+//#include "MtoObject.h"
 
 // ===============================================
 
 // Games
-#include "../Games/Game.h"
-using namespace Games;
+//#include "../Games/Game.h"
+//using namespace Games;
 
 // Games/Config
-#include "../Games/Config/FrameworkConfigManager.h"
-using namespace Games::Config;
+//#include "../Games/Config/FrameworkConfigManager.h"
+//using namespace Games::Config;
 
 // Games/Play
-#include "../Games/Play/Player.h"
-#include "../Games/Play/Playfield.h"
-#include "../Games/Play/Session.h"
-using namespace Games::Play;
+//#include "../Games/Play/Player.h"
+//#include "../Games/Play/Playfield.h"
+//#include "../Games/Play/Session.h"
+//using namespace Games::Play;
 
 // Games/Scheduler
-#include "../Games/Scheduler/Scheduler.h"
-using namespace Games::Schedulers;
+//#include "../Games/Scheduler/Scheduler.h"
+//using namespace Games::Schedulers;
 
 // Games/Scheduler/Events
 #include "../Games/Scheduler/Event/EventProcessorMaster.h"
 using namespace Games::Schedulers::Events;
+
+#include "../Games/Scheduler/Event/Effect/Algorithm/MapPitchShifter.h"
+#include "../Games/Scheduler/Event/Effect/Algorithm/LinearMapPitchShifter.h"
+using namespace Games::Schedulers::Events::Effects::Algorithms;
 
 // Games/Sheetmusics/Format
 #include "../Games/Sheetmusic/Format/SimpleSmDecoder.h"
@@ -35,8 +39,8 @@ using namespace Games::Sheetmusics::Format;
 // ===============================================
 
 // Devices/Graphic/Renderers
-#include "../Devices/Graphic/Renderers/WS2812v10Renderer.h"
-using namespace Devices::Graphics::Renderers;
+//#include "../Devices/Graphic/Renderers/WS2812v10Renderer.h"
+//using namespace Devices::Graphics::Renderers;
 
 // ===============================================
 
@@ -95,7 +99,7 @@ int ProgramInitializer::Initialize()
 	iCreator.RegisterType<FrameworkConfigManager>("FrameworkConfigManager");
 
 	// Games/Play
-	iCreator.RegisterType<Player>("Player");
+	//iCreator.RegisterType<Player>("Player");
 
 	// Games/Scheduler
 	iCreator.RegisterType<Scheduler>("Scheduler");
@@ -103,13 +107,17 @@ int ProgramInitializer::Initialize()
 	// Games/Scheduler/Events
 	iCreator.RegisterType<EventProcessorMaster>("EventProcessorMaster");
 
+	// Games/Scheduler/Events/Effects/Algorithms
+	iCreator.RegisterType<MapPitchShifter>("MapPitchShifter");
+	iCreator.RegisterType<LinearMapPitchShifter>("LinearMapPitchShifter");
+
 	// Games/Sheetmusics/Format
 	iCreator.RegisterType<SimpleSmDecoder>("SimpleSmDecoder");
 
 	// ===============================================
 
 	// Devices/Graphic/Renderers
-	iCreator.RegisterType<WS2812v10Renderer>("WS2812v10Renderer");
+	//iCreator.RegisterType<WS2812v10Renderer>("WS2812v10Renderer");
 
 	// ===============================================
 
@@ -144,7 +152,7 @@ int ProgramInitializer::Initialize()
 	// 2.建decoder
 	// TODO: 應該要從文件讀取要註冊哪些decoder
 
-	SmDecoder::RegisterDecoder("simple file format v0", "SimpleSmDecoder");
+	//SmDecoder::RegisterDecoder("simple file format v0", "SimpleSmDecoder");
 
 	return 0;
 }

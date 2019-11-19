@@ -4,6 +4,7 @@
 #include "MeteoGameDesktop.h"
 #include "../Instruments/MeteoPiano.h"
 #include "../Util/Log.h"
+#include "../Util/ProgramInitializer.h"
 
 
 
@@ -19,6 +20,8 @@ Program::Program(){}
 int Program::Main(vector<string>& args)
 {
 	LOG(LogLevel::Info) << "Program::Main() : Start program.";
+
+	ProgramInitializer::Initialize();
 
 	GameHost* host = new MeteoGameHost();
 	host->Initialize();

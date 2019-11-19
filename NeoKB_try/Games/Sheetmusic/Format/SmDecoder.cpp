@@ -19,6 +19,12 @@ SmDecoder::SmDecoder(): RegisterType("SmDecoder")
 {
 }
 
+int SmDecoder::Initialize()
+{
+	SmDecoder::RegisterDecoder("simple file format v0", "SimpleSmDecoder");
+	return 0;
+}
+
 int SmDecoder::RegisterDecoder(string version, string typeName)
 {
 	LOG(LogLevel::Fine) << "int SmDecoder::RegisterDecoder(string,string) : Registering Sm decoder: [" << typeName << "] to version [" << version << "].";
