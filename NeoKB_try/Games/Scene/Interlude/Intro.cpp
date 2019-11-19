@@ -14,6 +14,8 @@ Intro::Intro(): RegisterType("Intro")
 
 int Intro::onEntering(Scene * lastScene)
 {
+	LOG(LogLevel::Info) << "Intro::onEntering() : pushing main menu.";
+
 	mainMenu = new MainMenu();
 
 	GetScheduler()->AddDelayedTask([=]() { Push(mainMenu); return 0; }, 0.5);

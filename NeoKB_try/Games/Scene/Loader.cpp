@@ -11,6 +11,8 @@ using namespace Games;
 
 int Loader::load()
 {
+	LOG(LogLevel::Info) << "Loader::load() : pushing intro scene.";
+
 	MeteoGame* mg = GetDependencies()->GetCache<MeteoGame>("MeteoGame");
 
 	return load(mg);
