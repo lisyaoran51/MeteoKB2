@@ -23,6 +23,7 @@ SmDecoder::SmDecoder(): RegisterType("SmDecoder")
 int SmDecoder::Initialize()
 {
 	SmDecoder::RegisterDecoder("simple file format v0", "SimpleSmDecoder");
+	initialized = true;
 	return 0;
 }
 
