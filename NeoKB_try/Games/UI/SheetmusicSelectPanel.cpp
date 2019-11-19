@@ -22,6 +22,8 @@ int SheetmusicSelectPanel::load()
 
 int SheetmusicSelectPanel::load(FrameworkConfigManager * f, SmManager * s)
 {
+	LOG(LogLevel::Info) << "int SheetmusicSelectPanel::load() : insert sheetmusic manager.";
+
 	isPresent = true;
 
 	smManager = s;
@@ -36,16 +38,18 @@ int SheetmusicSelectPanel::load(FrameworkConfigManager * f, SmManager * s)
 	vector<SmInfo*>* smInfos = smManager->GetSmInfos();
 	for (int i = 0; i < smInfos->size(); i++) {
 
-		if (smInfos->at(i)->metadata->Title == songTitle)
-			GetScheduler()->AddDelayedTask([=]() { 
-		
-			SelectionChanged(smInfos->at(i)); 
-			delete smInfos; 
-			StartRequest(); 
-			return 0;
+		if (smInfos->at(i)->metadata->Title == songTitle) {
 
-		}, 0.5);
+			LOG(LogLevel::Debug) << "int SheetmusicSelectPanel::load() : song [" << songTitle << "] found.";
+			GetScheduler()->AddDelayedTask([=]() {
 
+				SelectionChanged(smInfos->at(i));
+				delete smInfos;
+				StartRequest();
+				return 0;
+
+			}, 0.5);
+		}
 	}
 	
 
