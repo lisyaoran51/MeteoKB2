@@ -61,6 +61,8 @@ int SongSelect::load(SmManager * sManager, MeteoGame * game)
 
 int SongSelect::selectionChanged(SmInfo * sheetmusicInfo)
 {
+	LOG(LogLevel::Info) << "SongSelect::selectionChanged() : select [" << sheetmusicInfo->metadata->Title << "].";
+
 	if (workingSm.GetValue() != nullptr) {
 		if (!workingSm.GetValue()->IsTheSameSm(sheetmusicInfo)) {
 

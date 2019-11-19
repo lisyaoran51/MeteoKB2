@@ -26,6 +26,7 @@ int PlaySongSelect::updateSheetmusic(WorkingSm * workingSm)
 
 int PlaySongSelect::onSelected()
 {
+	LOG(LogLevel::Info) << "PlaySongSelect::onSelected() : pushing to play scene.";
 
 	Push(player = new PlayerLoader(new Player()));
 	return 0;
