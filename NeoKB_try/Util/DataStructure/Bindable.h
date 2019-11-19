@@ -36,6 +36,9 @@ namespace DataStructure {
 		/// 要判斷這個視布試pointer，試的話才能delete
 		/// </summary>
 		int SetValue(T v, bool deleteLast = false) {
+
+			LOG(LogLevel::Debug) << "Bindable::SetValue() : ... ";
+
 			if (disabled)
 				throw invalid_argument("Bindable<T>::SetValue(): change value is disabled.");
 			value = v;
