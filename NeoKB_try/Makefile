@@ -128,7 +128,7 @@ SheetmusicSelectPanel.o \
 \
 Instrument.o MeteoPiano.o Piano.o PianoInputManager.o \
 \
-FileSystem.o \
+FileSystem.o ProgramInitializer \
 \
 MeteoGameDesktop.o Program.o MeteoLightBoardV1.o bcm2835.o MeteoBluetoothDevice.o MeteoDisplayDevice.o MeteoKeyboardDevice.o MeteoPanelDevice.o\
 \
