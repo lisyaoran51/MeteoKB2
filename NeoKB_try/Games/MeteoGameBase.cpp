@@ -12,6 +12,9 @@ int MeteoGameBase::load()
 {
 
 	LOG(LogLevel::Info) << "MeteoGameBase::load() : caching Resources.";
+
+	workingSm.SetValue(nullptr);
+
 	LOG(LogLevel::Debug) << "MeteoGameBase::load() : host address = " << gameHost;
 	dbContextFactory = new DatabaseContextFactory(gameHost);
 	dbContextFactory->Initialize();

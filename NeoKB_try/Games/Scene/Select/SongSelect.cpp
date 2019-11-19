@@ -64,6 +64,9 @@ int SongSelect::selectionChanged(SmInfo * sheetmusicInfo)
 	LOG(LogLevel::Info) << "SongSelect::selectionChanged() : select [" << sheetmusicInfo->metadata->Title << "].";
 
 	if (workingSm.GetValue() != nullptr) {
+
+		LOG(LogLevel::Debug) << "SongSelect::selectionChanged() : working sm value = " << workingSm.GetValue();
+
 		if (!workingSm.GetValue()->IsTheSameSm(sheetmusicInfo)) {
 
 

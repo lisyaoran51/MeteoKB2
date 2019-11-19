@@ -11,6 +11,8 @@ int MeteoGame::load()
 
 	LOG(LogLevel::Info) << "MeteoGame::load() : caching itself.";
 
+	ruleset.SetValue(nullptr);
+
 	GetDependencies()->Cache<MeteoGame>(this, "MeteoGame");
 
 	return 0;
