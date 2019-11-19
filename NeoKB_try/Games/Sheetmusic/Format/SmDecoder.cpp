@@ -14,6 +14,7 @@ using namespace Util;
 
 
 map<string, string> SmDecoder::decoders;
+bool SmDecoder::initialized = false;
 
 SmDecoder::SmDecoder(): RegisterType("SmDecoder")
 {

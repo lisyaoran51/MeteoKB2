@@ -50,7 +50,7 @@ namespace Format {
 		virtual int parseFile(ifstream* stream, Sm<Event>* sm) = 0;
 	};
 
-	bool SmDecoder::initialized = false;
+	
 
 	template<typename T>
 	class SmDecoderWithSection : public SmDecoder {
