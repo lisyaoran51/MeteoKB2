@@ -26,7 +26,8 @@ int Player::load(FrameworkConfigManager* f)
 	WorkingSm* workingSmValue = workingSm.GetValue();
 
 	// 這個是先寫死ruleset ，之後要改成從檔案讀
-	rulesetInfo.SetValue(new RulesetInfo("MeteorRuleset"));
+	//rulesetInfo.SetValue(new RulesetInfo("MeteorRuleset", 1));
+	rulesetInfo.SetValue(workingSm.GetValue()->GetSm()->GetSmInfo()->rulesetInfo);
 
 	ruleset = rulesetInfo.GetValue()->CreateRuleset();
 
