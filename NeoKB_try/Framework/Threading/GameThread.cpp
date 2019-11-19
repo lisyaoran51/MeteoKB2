@@ -64,7 +64,7 @@ int GameThread::SetIsActive(bool value)
 
 int GameThread::runWork()
 {
-	while (!exitRequested)
+	//while (!exitRequested)
 		processFrame();
 	return 0;
 }
