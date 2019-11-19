@@ -146,6 +146,8 @@ namespace DataStructure {
 		/// 更新所有連接的bindings的值
 		/// </summary>
 		int triggerValueChange() {
+			LOG(LogLevel::Fine) << "Bindable::triggerValueChange() : bindings = " << bindings;
+
 			if (bindings = nullptr)
 				return 0;
 
