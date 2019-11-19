@@ -80,8 +80,6 @@ using namespace Util;
 
 int ProgramInitializer::Initialize()
 {
-	// TODO: 讀取文件決定要用什麼level
-	Util::logLevel = LogLevel::Info;
 
 	LOG(LogLevel::Fine) << "int ProgramInitializer::Initialize() : Start initializing program...";
 
