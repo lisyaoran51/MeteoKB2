@@ -93,16 +93,16 @@ int ProgramInitializer::Initialize()
 	// ===============================================
 
 	// Games
-	iCreator.RegisterType<Game>("Game");
+	//iCreator.RegisterType<Game>("Game");
 
 	// Games/Config
-	iCreator.RegisterType<FrameworkConfigManager>("FrameworkConfigManager");
+	//iCreator.RegisterType<FrameworkConfigManager>("FrameworkConfigManager");
 
 	// Games/Play
 	//iCreator.RegisterType<Player>("Player");
 
 	// Games/Scheduler
-	iCreator.RegisterType<Scheduler>("Scheduler");
+	//iCreator.RegisterType<Scheduler>("Scheduler");
 
 	// Games/Scheduler/Events
 	iCreator.RegisterType<EventProcessorMaster>("EventProcessorMaster");
