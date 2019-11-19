@@ -6,22 +6,22 @@
 // ===============================================
 
 // Games
-#include "../Games/Game.h"
-using namespace Games;
+//#include "../Games/Game.h"
+//using namespace Games;
 
 // Games/Config
-#include "../Games/Config/FrameworkConfigManager.h"
-using namespace Games::Config;
+//#include "../Games/Config/FrameworkConfigManager.h"
+//using namespace Games::Config;
 
 // Games/Play
-#include "../Games/Play/Player.h"
-#include "../Games/Play/Playfield.h"
-#include "../Games/Play/Session.h"
-using namespace Games::Play;
+//#include "../Games/Play/Player.h"
+//#include "../Games/Play/Playfield.h"
+//#include "../Games/Play/Session.h"
+//using namespace Games::Play;
 
 // Games/Scheduler
-#include "../Games/Scheduler/Scheduler.h"
-using namespace Games::Schedulers;
+//#include "../Games/Scheduler/Scheduler.h"
+//using namespace Games::Schedulers;
 
 // Games/Scheduler/Events
 #include "../Games/Scheduler/Event/EventProcessorMaster.h"
@@ -34,8 +34,8 @@ using namespace Games::Sheetmusics::Format;
 // ===============================================
 
 // Devices/Graphic/Renderers
-#include "../Devices/Graphic/Renderers/WS2812v10Renderer.h"
-using namespace Devices::Graphics::Renderers;
+//#include "../Devices/Graphic/Renderers/WS2812v10Renderer.h"
+//using namespace Devices::Graphics::Renderers;
 
 // ===============================================
 
