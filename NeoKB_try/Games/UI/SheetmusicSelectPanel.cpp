@@ -28,7 +28,7 @@ int SheetmusicSelectPanel::load(FrameworkConfigManager * f, SmManager * s)
 
 	smManager = s;
 
-
+	
 
 	// 暫時先這樣 之後再改
 	string songTitle;
@@ -36,9 +36,11 @@ int SheetmusicSelectPanel::load(FrameworkConfigManager * f, SmManager * s)
 		songTitle = "casual";
 
 	vector<SmInfo*>* smInfos = smManager->GetSmInfos();
+	LOG(LogLevel::Debug) << "int SheetmusicSelectPanel::load() : there's [" << smInfos->size() << "] songs in sm manager.";
+
 	for (int i = 0; i < smInfos->size(); i++) {
 
-
+		LOG(LogLevel::Fine) << "--------------------------------- " << smInfos->at(i)->metadata->Title;
 
 		if (smInfos->at(i)->metadata->Title == songTitle) {
 
