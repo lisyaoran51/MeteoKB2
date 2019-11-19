@@ -28,7 +28,7 @@ int SheetmusicSelectPanel::load(FrameworkConfigManager * f, SmManager * s)
 
 	smManager = s;
 
-	
+	LOG(LogLevel::Debug) << "int SheetmusicSelectPanel::load() : f " << f;
 
 	// 暫時先這樣 之後再改
 	string songTitle;

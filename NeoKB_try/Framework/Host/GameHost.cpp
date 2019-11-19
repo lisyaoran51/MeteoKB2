@@ -239,6 +239,8 @@ int GameHost::setupConfig()
 	LOG(LogLevel::Info) << "GameHost::setupConfig() : loading default config.";
 
 	frameworkConfigManager = new FrameworkConfigManager();
+	frameworkConfigManager->Initialize();
+
 	LOG(LogLevel::Finest) << "GameHost::setupConfig() : setting.";
 	//fConfigManager->Set(FrameworkSetting::SongTitle, string(argv[1]));  // 這行之後要刪掉
 	frameworkConfigManager->Set(FrameworkSetting::PatternGenerator, string("MeteorPatternGenerator"));
@@ -252,7 +254,7 @@ int GameHost::setupConfig()
 	frameworkConfigManager->Set(FrameworkSetting::FrameRate, 30);
 	LOG(LogLevel::Finest) << "GameHost::setupConfig() : caching.";
 	dependencies->Cache<FrameworkConfigManager>(frameworkConfigManager);
-
+	
 
 
 	return 0;
