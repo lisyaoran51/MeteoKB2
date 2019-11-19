@@ -108,7 +108,6 @@ int ProgramInitializer::Initialize()
 	iCreator.RegisterType<EventProcessorMaster>("EventProcessorMaster");
 
 	// Games/Scheduler/Events/Effects/Algorithms
-	iCreator.RegisterType<MapPitchShifter>("MapPitchShifter");
 	iCreator.RegisterType<LinearMapPitchShifter>("LinearMapPitchShifter");
 
 	// Games/Sheetmusics/Format
