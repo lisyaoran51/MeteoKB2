@@ -1,7 +1,7 @@
 #include "GameThread.h"
 
 #include <iomanip>
-
+#include <chrono>         // std::chrono::seconds
 
 
 using namespace Framework::Threading;
@@ -64,7 +64,9 @@ int GameThread::SetIsActive(bool value)
 
 int GameThread::runWork()
 {
-	//while (!exitRequested)
+	this_thread::sleep_for(chrono::milliseconds(1000));
+
+	while (!exitRequested)
 		processFrame();
 	return 0;
 }
