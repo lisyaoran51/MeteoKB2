@@ -1,3 +1,7 @@
+#ifndef BINDABLE_POINTER_H
+#define BINDABLE_POINTER_H
+
+
 #include "Bindable.h"
 #include <type_traits>
 
@@ -83,3 +87,6 @@ namespace DataStructure {
 	};
 
 }}
+
+
+#endif
