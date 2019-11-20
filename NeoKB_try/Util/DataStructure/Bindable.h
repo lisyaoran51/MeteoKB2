@@ -151,7 +151,7 @@ namespace DataStructure {
 		int triggerValueChange() {
 			LOG(LogLevel::Fine) << "Bindable::triggerValueChange() : bindings = " << bindings;
 
-			if (bindings = nullptr)
+			if (bindings = nullptr || bindings == 0)
 				return 0;
 			LOG(LogLevel::Finer) << "Bindable::triggerValueChange() : start triggering ";
 
