@@ -44,24 +44,7 @@ SmPostprocessor * MeteorRulesetExecutor::createSmPostprocessor()
 
 int MeteorRulesetExecutor::load()
 {
-	LOG(LogLevel::Info) << "MeteorRulesetExecutor::load() : loading default meteor config.";
-
-	MeteorConfigManager* meteorConfigManager = new MeteorConfigManager();
-	meteorConfigManager->Initialize();
-
-	meteorConfigManager->Set(MeteorSetting::WhiteKeyTargetHeight, 9);	// 低4	  高9
-	meteorConfigManager->Set(MeteorSetting::BlackKeyTargetHeight, 8);
-	meteorConfigManager->Set(MeteorSetting::FallSpeed, MTO_FLOAT(8.f));	//正常16.f	慢12.f
-	meteorConfigManager->Set(MeteorSetting::FallBrightness, MTO_FLOAT(0.6f));
-	meteorConfigManager->Set(MeteorSetting::FallLength, 1);
-	meteorConfigManager->Set(MeteorSetting::ExplodeSpeed, MTO_FLOAT(0.6f));
-	meteorConfigManager->Set(MeteorSetting::ExplodeBrightness, MTO_FLOAT(0.6f));
-	meteorConfigManager->Set(MeteorSetting::GlowLineSpeed, MTO_FLOAT(0.6f));
-	meteorConfigManager->Set(MeteorSetting::GlowLineDuration, MTO_FLOAT(0.6f));
-	meteorConfigManager->Set(MeteorSetting::GlowLineBrightness, MTO_FLOAT(0.6f));
-	meteorConfigManager->Set(MeteorSetting::TargetLineBlinkSpeed, MTO_FLOAT(0.75f));
-	meteorConfigManager->Set(MeteorSetting::TargetLineBrightness, MTO_FLOAT(0.05f));
-	Cache<MeteorConfigManager>(meteorConfigManager);
+	
 
 	// 讀config
 	return 0;

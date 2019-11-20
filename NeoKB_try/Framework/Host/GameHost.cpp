@@ -7,6 +7,7 @@
 #include "../../Instruments/Instrument.h"
 #include "../IO/Storage.h"
 #include <chrono>         // std::chrono::seconds
+#include "../../RulesetMeteor/Config/MeteorConfigManager.h"
 
 
 
@@ -16,6 +17,7 @@ using namespace Framework::Input;
 using namespace Framework::IO;
 using namespace Framework;
 using namespace Instruments;
+using namespace Meteor::Config;
 
 
 
@@ -241,7 +243,6 @@ int GameHost::setupConfig()
 	frameworkConfigManager = new FrameworkConfigManager();
 	frameworkConfigManager->Initialize();
 
-	LOG(LogLevel::Finest) << "GameHost::setupConfig() : setting.";
 	//fConfigManager->Set(FrameworkSetting::SongTitle, string(argv[1]));  // 這行之後要刪掉
 	frameworkConfigManager->Set(FrameworkSetting::PatternGenerator, string("MeteorPatternGenerator"));
 	frameworkConfigManager->Set(FrameworkSetting::HardwareVersion, 10);
@@ -253,10 +254,25 @@ int GameHost::setupConfig()
 	frameworkConfigManager->Set(FrameworkSetting::StartPitch, 24);
 	frameworkConfigManager->Set(FrameworkSetting::FrameRate, 30);
 
-	LOG(LogLevel::Finest) << "GameHost::setupConfig() : caching.";
 	dependencies->Cache<FrameworkConfigManager>(frameworkConfigManager);
 	
 
+	MeteorConfigManager* meteorConfigManager = new MeteorConfigManager();
+	meteorConfigManager->Initialize();
+
+	meteorConfigManager->Set(MeteorSetting::WhiteKeyTargetHeight, 9);	// 低4	  高9
+	meteorConfigManager->Set(MeteorSetting::BlackKeyTargetHeight, 8);
+	meteorConfigManager->Set(MeteorSetting::FallSpeed, MTO_FLOAT(8.f));	//正常16.f	慢12.f
+	meteorConfigManager->Set(MeteorSetting::FallBrightness, MTO_FLOAT(0.6f));
+	meteorConfigManager->Set(MeteorSetting::FallLength, 1);
+	meteorConfigManager->Set(MeteorSetting::ExplodeSpeed, MTO_FLOAT(0.6f));
+	meteorConfigManager->Set(MeteorSetting::ExplodeBrightness, MTO_FLOAT(0.6f));
+	meteorConfigManager->Set(MeteorSetting::GlowLineSpeed, MTO_FLOAT(0.6f));
+	meteorConfigManager->Set(MeteorSetting::GlowLineDuration, MTO_FLOAT(0.6f));
+	meteorConfigManager->Set(MeteorSetting::GlowLineBrightness, MTO_FLOAT(0.6f));
+	meteorConfigManager->Set(MeteorSetting::TargetLineBlinkSpeed, MTO_FLOAT(0.75f));
+	meteorConfigManager->Set(MeteorSetting::TargetLineBrightness, MTO_FLOAT(0.05f));
+	dependencies->Cache<MeteorConfigManager>(meteorConfigManager);
 
 	return 0;
 }
