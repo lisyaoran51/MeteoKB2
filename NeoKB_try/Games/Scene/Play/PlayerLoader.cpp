@@ -6,11 +6,14 @@ using namespace Games::Scenes::Play;
 
 PlayerLoader::PlayerLoader(Player * p) : RegisterType("PlayerLoader"), MeteoScene()
 {
+	player = p;
 	registerLoad(bind((int(PlayerLoader::*)())&PlayerLoader::load, this));
 }
 
 int PlayerLoader::load()
 {
+	LOG(LogLevel::Info) << "PlayerLoader::load() : push player " << player;
+
 	// 這裡原本是用load async，他可以在背景執行add child，不過我們不想增加thread，所以就拿掉了，直接用add child
 	// 不過這樣push when loaded就沒用了
 	AddChild(player);
