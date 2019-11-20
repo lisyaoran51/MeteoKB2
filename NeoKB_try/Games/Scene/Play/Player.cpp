@@ -21,16 +21,16 @@ int Player::load()
 
 int Player::load(FrameworkConfigManager* f)
 {
-	LOG(LogLevel::Info) << "Player::load : start loading the player and reading the sm and ruleset from session.";
+	LOG(LogLevel::Info) << "Player::load : start loading the player and reading the sm and ruleset from working sm.";
 
 	WorkingSm* workingSmValue = workingSm.GetValue();
-
+	LOG(LogLevel::Fine) << 1;
 	// 這個是先寫死ruleset ，之後要改成從檔案讀
 	//rulesetInfo.SetValue(new RulesetInfo("MeteorRuleset", 1));
 	rulesetInfo.SetValue(workingSm.GetValue()->GetSm()->GetSmInfo()->rulesetInfo);
-
+	LOG(LogLevel::Fine) << 2;
 	ruleset = rulesetInfo.GetValue()->CreateRuleset();
-
+	LOG(LogLevel::Fine) << 3;
 	LOG(LogLevel::Fine) << "Player::load : create ruleset executor.";
 	rulesetExecutor = ruleset->CreateRulesetExecutor(workingSm.GetValue());
 
