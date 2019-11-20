@@ -70,6 +70,9 @@ Sm<Event>* WorkingSm::createSm()
 
 	// get path for file是在這個sm set裡面找他們全部的path，然後把path和檔名家在一起，回傳
 	//ifstream* stream = new ifstream(getPathForFile(smInfo->fileName));
+
+	LOG(LogLevel::Finer) << "WorkingSm::createSm() : decoding [" << getPathForFile(smInfo->fileName) << "].";
+	
 	ifstream* stream = new ifstream(getPathForFile(smInfo->fileName)); // 暫時先這樣寫
 
 
