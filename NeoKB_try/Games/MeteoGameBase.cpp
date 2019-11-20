@@ -40,7 +40,7 @@ MeteoGameBase::MeteoGameBase(): RegisterType("MeteoGameBase")
 	registerLoad(bind((int(MeteoGameBase::*)())&MeteoGameBase::load, this));
 }
 
-Bindable<WorkingSm*>* MeteoGameBase::GetWorkingSm()
+BindablePointer<WorkingSm*>* MeteoGameBase::GetWorkingSm()
 {
 	return &workingSm;
 }

@@ -49,7 +49,7 @@ bool WorkingSm::IsTheSameSm(SmInfo * s)
 	return false;
 }
 
-Bindable<vector<Modifier*>*>* WorkingSm::GetModifiers()
+BindablePointer<vector<Modifier*>*>* WorkingSm::GetModifiers()
 {
 	// TODO: not implemented
 	return nullptr;
