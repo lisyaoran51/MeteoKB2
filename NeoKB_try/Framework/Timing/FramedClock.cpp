@@ -36,11 +36,14 @@ int FramedClock::ProcessFrame()
 
 	if (!isStarted) {
 		start();
+		LOG(LogLevel::Finest) << "FramedClock::ProcessFrame() : current time [" << fixed << setprecision(5) << currentTime << "] after start";
 	}
 	
+
 	lastFrameTime = currentTime;
 	currentTime = source->GetCurrentTime();
 
+	LOG(LogLevel::Finest) << "FramedClock::ProcessFrame() : current time [" << fixed << setprecision(5) << currentTime << "] after process";
 	return 0;
 }
 
