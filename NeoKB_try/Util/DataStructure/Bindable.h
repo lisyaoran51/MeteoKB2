@@ -153,6 +153,7 @@ namespace DataStructure {
 
 			if (bindings = nullptr)
 				return 0;
+			LOG(LogLevel::Finer) << "Bindable::triggerValueChange() : start triggering ";
 
 			for (int i = 0; i < bindings->size(); i++) {
 				bindings->at(i)->SetValueWithoutTrigger(value);
