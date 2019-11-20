@@ -1226,3 +1226,30 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	https://forum.openframeworks.cc/t/use-a-dynamic-library-with-of/26031/2
 	
 	好像是新版的os不能用bass，舊的os就可以
+	
+	MeteoDisplayDevice裡面建thread會當掉，先拿掉，不知道原因
+	應該是出在host 的draw frame，map會當掉
+	
+	把host裡面好幾行都拿掉，結果還是會卡在 draw frame那邊
+	
+11/17
+	spi thread沒有問題
+	
+	callbackKeys.push_back(make_pair((uintptr_t)callableObject, callbackName)); 這行壞了
+	
+11/18
+	draw thread會出問題
+	
+	matchedDisplayDevice不見了
+	
+	clock->ProcessFrame();有問題
+	
+11/19
+	select panel找不到歌
+	
+11/20
+	player::load出錯
+	
+	
+	
+	
