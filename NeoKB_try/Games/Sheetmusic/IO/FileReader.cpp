@@ -14,6 +14,9 @@ using namespace std::literals::string_literals;
 
 FileReader::FileReader(string p)
 {
+	if(p.substr(p.length() - 1, 1) == "/"s)
+		p = p.substr(0, p.length() - 1);
+
 	path = p;
 }
 
