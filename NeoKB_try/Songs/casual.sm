@@ -1,6 +1,6 @@
 simple file format v0
 [General]
-AudioFilename:casual.mp3
+AudioFile:casual.mp3
 [Metadata]
 Title:casual
 [Difficulty]

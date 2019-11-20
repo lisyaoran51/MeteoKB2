@@ -134,6 +134,11 @@ vector<SmInfo*>* SmManager::import(FileReader & fileReader)
 
 		// TODO: 把這段佔實的code改好，正確做法應該不是從filereader拿sm set info，要去trace osu的寫法
 		sm->GetSmInfo()->smSetInfo = fileReader.GetSmSetInfo();
+		sm->GetSmInfo()->fileInfo = new FileInfo{
+			0,
+			fileReader.GetPath(),
+			0
+		};
 
 		// 寫到這邊 不知道怎麼建ruleset---> 在建立sm  manager時手動把ruleset info加入
 		RulesetInfo* rulesetInfo = nullptr;

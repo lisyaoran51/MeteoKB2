@@ -6,6 +6,7 @@
 using namespace Games::Sheetmusics;
 using namespace Games::Sheetmusics::Format;
 using namespace Framework::Audio::Tracks;
+using namespace std::literals::string_literals;
 
 
 
@@ -68,7 +69,9 @@ Sm<Event>* WorkingSm::createSm()
 	Sm<Event>* s;
 
 	// get path for file是在這個sm set裡面找他們全部的path，然後把path和檔名家在一起，回傳
-	ifstream* stream = new ifstream(getPathForFile(smInfo->fileName));
+	//ifstream* stream = new ifstream(getPathForFile(smInfo->fileName));
+	ifstream* stream = new ifstream(getPathForFile(smInfo->fileName)); // 暫時先這樣寫
+
 
 	SmDecoder* smDecoder = SmDecoder::GetDecoder(stream);
 	s = smDecoder->Decode(stream);
@@ -78,7 +81,7 @@ Sm<Event>* WorkingSm::createSm()
 
 string WorkingSm::getPathForFile(string fileName)
 {
-	string s = smInfo->smSetInfo->path + "/" + fileName;
+	string s = smInfo->fileInfo->Path + "/"s + fileName;
 	LOG(LogLevel::Finer) << "string WorkingSm::getPathForFile(string) : creating Sm from path [" << s << "] ...";
 	return s;
 }

@@ -9,6 +9,7 @@
 using namespace Games::Sheetmusics::IO;
 using namespace Util;
 using namespace std;
+using namespace std::literals::string_literals;
 
 
 FileReader::FileReader(string p)
@@ -19,6 +20,16 @@ FileReader::FileReader(string p)
 ifstream * FileReader::GetStream(string name)
 {
 	return new ifstream(path + "/" + name);
+}
+
+string FileReader::GetPath()
+{
+	return path;
+}
+
+string FileReader::GetPath(string name)
+{
+	return path + "/"s + name;
 }
 
 SmSetInfo * FileReader::GetSmSetInfo()

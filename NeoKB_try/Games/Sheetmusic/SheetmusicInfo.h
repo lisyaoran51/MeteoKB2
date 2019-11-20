@@ -9,11 +9,13 @@
 #include "SheetmusicDifficulty.h"
 #include "SheetmusicSetInfo.h"
 #include "../Ruleset/RulesetInfo.h"
+#include "../../Framework/IO/FileInfo.h"
 
 
 
 using namespace std;
 using namespace Util;
+using namespace Framework::IO;
 
 
 namespace Games {
@@ -54,6 +56,8 @@ namespace Sheetmusics {
 		RulesetInfo* rulesetInfo;
 
 		SmSetInfo* smSetInfo;
+
+		FileInfo* fileInfo;
 
 	};
 

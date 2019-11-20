@@ -23,6 +23,10 @@ namespace IO {
 
 		ifstream* GetStream(string name);
 
+		string GetPath();
+
+		string GetPath(string name);
+
 		/// <summary>
 		/// 製造一份新的，之後這個在sminfo裡面銷毀
 		/// </summary>
