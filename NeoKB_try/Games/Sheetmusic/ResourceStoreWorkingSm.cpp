@@ -13,6 +13,11 @@ ResourceStoreWorkingSm::ResourceStoreWorkingSm(ResourceStore<char*>* rStore, SmI
 
 Sm<Event>* ResourceStoreWorkingSm::GetSm()
 {
+	// resource store還沒寫好，先用舊的方法讀sm
+
+	return WorkingSm::GetSm();
+
+	// 新的方法以後再用
 	ifstream* stream = resourceStore->GetStream(getPathForFile(smInfo->fileName));
 
 	SmDecoder* smDecoder = SmDecoder::GetDecoder(stream);
@@ -29,6 +34,10 @@ Sm<Event>* ResourceStoreWorkingSm::GetSm()
 
 string ResourceStoreWorkingSm::getPathForFile(string fileName)
 {
+	// resource store還沒寫好，先用舊的方法讀sm
+
+	return WorkingSm::getPathForFile(fileName);
+
 	// 這邊應該要去storage茶有沒有？
 	return fileName;
 }
