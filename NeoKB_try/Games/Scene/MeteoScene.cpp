@@ -25,6 +25,7 @@ int MeteoScene::load()
 
 int MeteoScene::load(MeteoGame * game, MeteoGameBase * gameBase)
 {
+	LOG(LogLevel::Info) << "MeteoScene::load() : binding rulesets and working sm to game.";
 
 	rulesetInfo.BindTo(game->GetRuleset());
 	workingSm.BindTo(gameBase->GetWorkingSm());
