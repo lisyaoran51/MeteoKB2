@@ -32,7 +32,7 @@ namespace Games {
 
 		MeteoGameBase();
 
-		Bindable<WorkingSm*>* GetWorkingSm();
+		BindablePointer<WorkingSm*>* GetWorkingSm();
 
 	protected:
 
@@ -44,7 +44,7 @@ namespace Games {
 
 		SmManager* smManager;
 
-		Bindable<WorkingSm*> workingSm;
+		BindablePointer<WorkingSm*> workingSm;
 
 		MeteoConfigManager* localConfig;
 

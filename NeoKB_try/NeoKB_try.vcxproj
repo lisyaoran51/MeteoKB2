@@ -184,7 +184,6 @@
     <ClCompile Include="TestCases\TestCaseMeteoGameHost.cpp" />
     <ClCompile Include="TestCases\TestCaseStopwatch.cpp" />
     <ClCompile Include="Util\DataStructure\ActionListTestcase.cpp" />
-    <ClCompile Include="Util\DataStructure\BindablePointer.cpp" />
     <ClCompile Include="Util\FileSystem.c" />
     <ClCompile Include="Util\ProgramInitializer.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>

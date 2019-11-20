@@ -29,13 +29,13 @@ namespace Games {
 
 		MeteoGame();
 
-		Bindable<RulesetInfo*>* GetRuleset();
+		BindablePointer<RulesetInfo*>* GetRuleset();
 
 		virtual Storage* GetStableStorage();
 
 	protected:
 
-		Bindable<RulesetInfo*> ruleset;
+		BindablePointer<RulesetInfo*> ruleset;
 
 		virtual int LoadOnComplete();
 

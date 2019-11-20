@@ -39,7 +39,7 @@ MeteoGame::MeteoGame() : RegisterType("MeteoGame")
 
 }
 
-Bindable<RulesetInfo*>* MeteoGame::GetRuleset()
+BindablePointer<RulesetInfo*>* MeteoGame::GetRuleset()
 {
 	return &ruleset;
 }
