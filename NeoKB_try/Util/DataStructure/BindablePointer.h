@@ -14,13 +14,13 @@ namespace DataStructure {
 	public:
 
 		BindablePointer() {
-			if (!is_pointer(T))
+			if (!is_pointer<T>::value))
 				throw logic_error("BindablePointer::BindablePointer(): template is not a pointer.");
 			value = nullptr;
 		}
 
 		BindablePointer(T p): Bindable<void*>(p) {
-			if (!is_pointer(T))
+			if (!is_pointer<T>::value)
 				throw logic_error("BindablePointer::BindablePointer(): template is not a pointer.");
 		}
 
@@ -29,11 +29,11 @@ namespace DataStructure {
 		}
 
 		T GetValue() {
-			return Bindable<void*>::GetValue();
+			return static_cast<T>(Bindable<void*>::GetValue());
 		}
 
 		T GetDefaultValue() {
-			return Bindable<void*>::GetDefaultValue();
+			return static_cast<T>(Bindable<void*>::GetDefaultValue());
 		}
 
 		int SetDisabled(bool d) {
