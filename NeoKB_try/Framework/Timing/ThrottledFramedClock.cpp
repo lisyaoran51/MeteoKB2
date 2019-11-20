@@ -44,6 +44,8 @@ int ThrottledFramedClock::throttle()
 
 	}
 
+	LOG(LogLevel::Finest) << "ThrottledFramedClock::throttle() : current time [" << fixed << setprecision(5) << source->GetCurrentTime() << "] after throttle";
+
 	return 0;
 }
 
