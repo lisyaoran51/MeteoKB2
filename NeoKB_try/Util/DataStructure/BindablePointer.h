@@ -18,7 +18,7 @@ namespace DataStructure {
 	public:
 
 		BindablePointer() {
-			if (!is_pointer<T>::value))
+			if (!is_pointer<T>::value)
 				throw logic_error("BindablePointer::BindablePointer(): template is not a pointer.");
 			value = nullptr;
 		}
