@@ -31,6 +31,7 @@ int Player::load(FrameworkConfigManager* f)
 
 	ruleset = rulesetInfo.GetValue()->CreateRuleset();
 
+	LOG(LogLevel::Fine) << "Player::load : create ruleset executor.";
 	rulesetExecutor = ruleset->CreateRulesetExecutor(workingSm.GetValue());
 
 	/***
@@ -40,6 +41,7 @@ int Player::load(FrameworkConfigManager* f)
 		rulesetInfo = sm->GetRulesetInfo();
 	***/
 
+	LOG(LogLevel::Fine) << "Player::load : create clocks.";
 	if (workingSmValue->GetTrack() == nullptr)
 		adjustableClock = new StopwatchClock();
 	else
