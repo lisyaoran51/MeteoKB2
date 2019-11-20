@@ -7,8 +7,8 @@
 #include <thread>
 #include <functional>
 #include "AudioComponent.h"
-#include "Scene/Loader.h"
-#include "../Util/DataStructure/Bindable.h"
+#include "../../Framework/Scenes/Scene.h"
+#include "../../Util/DataStructure/Bindable.h"
 
 
 using namespace std;
