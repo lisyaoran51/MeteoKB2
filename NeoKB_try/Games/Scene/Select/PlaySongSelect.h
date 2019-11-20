@@ -5,7 +5,6 @@
 #include "../../../Framework/Scenes/Scene.h"
 #include "../../Sheetmusic/SheetmusicInfo.h"
 #include "../../Sheetmusic/WorkingSheetmusic.h"
-#include "../../../Util/DataStructure/Bindable.h"
 #include "../../Sheetmusic/SheetmusicManager.h"
 #include "SongSelect.h"
 #include "../../Ruleset/Modifiers/Modifier.h"

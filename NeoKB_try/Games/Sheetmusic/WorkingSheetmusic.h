@@ -9,7 +9,7 @@
 #include "SheetmusicInfo.h"
 #include "Format/SmDecoder.h"
 #include "../Ruleset/Modifiers/Modifier.h"
-#include "../../Util/DataStructure/Bindable.h"
+#include "../../Util/DataStructure/BindablePointer.h"
 #include "../../Framework/Audio/Track/Track.h"
 
 
@@ -39,7 +39,7 @@ namespace Sheetmusics {
 
 		bool IsTheSameSm(SmInfo* s);
 
-		Bindable<vector<Modifier*>*>* GetModifiers();
+		BindablePointer<vector<Modifier*>*>* GetModifiers();
 
 		virtual Track* GetTrack();
 

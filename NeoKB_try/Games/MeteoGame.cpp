@@ -1,6 +1,5 @@
 #include "MeteoGame.h" 
 
-#include "Scene/Loader.h"
 
 using namespace Games;
 using namespace Games::Scenes;

@@ -171,11 +171,10 @@ namespace DataStructure {
 			return 0;
 		}
 
-	private:
 
 		T value;
 		T defaultValue;
-		bool disabled;
+		bool disabled = false;
 		bool hasDefaultValue = false;
 		// ActionList<int(int)> ValueChanged;
 

@@ -954,6 +954,9 @@
     <ClCompile Include="TestCases\TestCaseStopwatch.cpp">
       <Filter>來源檔案\TestCases</Filter>
     </ClCompile>
+    <ClCompile Include="Util\DataStructure\BindablePointer.cpp">
+      <Filter>來源檔案\Util\DataStructure</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="DailyLog.txt">
@@ -1584,6 +1587,9 @@
     </ClInclude>
     <ClInclude Include="Desktop\Devices\MeteoLightBoardV1.h">
       <Filter>標頭檔\Desktop\Devices</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\DataStructure\BindablePointer.h">
+      <Filter>標頭檔\Util\DataStructure</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

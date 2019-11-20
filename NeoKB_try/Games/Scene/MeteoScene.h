@@ -2,7 +2,7 @@
 #define METEO_SCENE_H
 
 #include "../../Framework/Scenes/Scene.h"
-#include "../../Util/DataStructure/Bindable.h"
+#include "../../Util/DataStructure/BindablePointer.h"
 #include "../Sheetmusic/WorkingSheetmusic.h"
 #include "../Ruleset/RulesetInfo.h"
 
@@ -38,9 +38,9 @@ namespace Scenes {
 
 		~MeteoScene();
 
-		Bindable<WorkingSm*> workingSm;
+		BindablePointer<WorkingSm*> workingSm;
 
-		Bindable<RulesetInfo*> rulesetInfo;
+		BindablePointer<RulesetInfo*> rulesetInfo;
 
 
 	};
