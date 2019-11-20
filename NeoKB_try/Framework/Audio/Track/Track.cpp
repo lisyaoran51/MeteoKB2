@@ -7,7 +7,7 @@ using namespace Framework::Audio::Tracks;
 Track::Track()
 {
 	// throw error:這個式檢查用，不會真的執行
-	throw logic_error("Track::Track() : this is for template constraint. unable to launch");
+	//throw logic_error("Track::Track() : this is for template constraint. unable to launch");
 }
 
 double Track::GetCurrentTime()

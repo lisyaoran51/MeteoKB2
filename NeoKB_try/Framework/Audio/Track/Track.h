@@ -24,8 +24,6 @@ namespace Tracks {
 
 	public:
 
-		Track();
-
 		// Clock
 		virtual double GetCurrentTime();
 		virtual int SetRate(double r);
@@ -41,6 +39,8 @@ namespace Tracks {
 
 
 	protected:
+
+		Track();
 
 		double length;
 		bool isPlayed = false;
