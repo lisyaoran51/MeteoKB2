@@ -18,6 +18,8 @@ int ThrottledFramedClock::throttle()
 
 	double frameTime = 1.0 / maxUpdateHz;
 
+	LOG(LogLevel::Finest) << "ThrottledFramedClock::throttle(): elapsed frame time is [" << fixed << setprecision(5) << GetElapsedFrameTime() << "].";
+
 	if (GetElapsedFrameTime() < frameTime) {
 		double timeToSleepInMilli = (frameTime - GetElapsedFrameTime()) * 1000.0;
 
