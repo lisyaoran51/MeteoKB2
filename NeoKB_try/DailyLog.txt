@@ -1250,6 +1250,9 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 11/20
 	player::load出錯
 	
+	ResourceStoreWorkingSm的功能先暫時不用，因為resource store還沒開始用，storage和database都還沒寫，所以先不用
 	
+	讀完以後current time會出錯
 	
+	不知為何，runcwork一圈以後Clock會變成not started
 	
