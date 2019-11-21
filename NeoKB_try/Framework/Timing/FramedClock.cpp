@@ -26,9 +26,9 @@ FramedClock::FramedClock(Clock * s)
 int FramedClock::ProcessFrame()
 {
 	if (!isStarted)
-		LOG(LogLevel::Finest) << "FramedClock::ProcessFrame() : not start yet -> address = [" << this << "].";
+		LOG(LogLevel::Debug) << "FramedClock::ProcessFrame() : not start yet -> address = [" << this << "].";
 	else
-		LOG(LogLevel::Finest) << "FramedClock::ProcessFrame() : current time [" << fixed << setprecision(5) << currentTime << "].";
+		LOG(LogLevel::Debug) << "FramedClock::ProcessFrame() : current time [" << fixed << setprecision(5) << currentTime << "].";
 
 	if (isProcessSourceClockFrames) {
 		FrameBasedClock* sourceAsFrameBased = dynamic_cast<FrameBasedClock*>(source);
