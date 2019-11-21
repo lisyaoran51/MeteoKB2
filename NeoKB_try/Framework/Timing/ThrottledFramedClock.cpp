@@ -65,6 +65,8 @@ ThrottledFramedClock::ThrottledFramedClock(double mUpdateHz, Clock * s): FramedC
 
 int ThrottledFramedClock::ProcessFrame()
 {
+	LOG(LogLevel::Debug) << "ThrottledFramedClock::ProcessFrame(): this address is [" << this << "].";
+
 	FramedClock::ProcessFrame();
 
 	throttle();
