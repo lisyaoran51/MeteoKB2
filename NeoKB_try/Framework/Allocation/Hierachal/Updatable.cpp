@@ -47,8 +47,10 @@ bool Updatable::UpdateSubTree()
 	if (GetLoadState() == LoadState::Ready)
 		LoadComplete();
 
-	if (GetParent() != nullptr && customClock != nullptr)
+	if (GetParent() != nullptr && customClock != nullptr) {
+		LOG(LogLevel::Finest) << "Updatable::UpdateSubTree() : process custom clock [" << customClock << "].";
 		customClock->ProcessFrame();
+	}
 
 	update();
 
