@@ -4,6 +4,8 @@
 #include <stdexcept>
 #include "../../Util/Log.h"
 #include <iomanip>
+#include <typeinfo>
+
 
 
 using namespace Framework::Timing;
