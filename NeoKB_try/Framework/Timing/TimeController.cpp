@@ -23,7 +23,7 @@ int TimeController::update()
 	if (controllableClock == nullptr || speedAdjuster == nullptr)
 		return 0;
 
-	LOG(LogLevel::Finest) << "TimeController::update() : speed adjuster processing, clock = [" << GetClock() << "].";
+	LOG(LogLevel::Finest) << "TimeController::update() : speed adjuster processing, clock time = [" << GetClock()->GetElapsedFrameTime() << "].";
 	speedAdjuster->ProcessFrame(GetClock()->GetElapsedFrameTime());
 	LOG(LogLevel::Finest) << "TimeController::update() : speed adjuster processed.";
 
