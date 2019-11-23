@@ -12,6 +12,7 @@ LinearSpeedAdjuster::LinearSpeedAdjuster() : RegisterType("LinearSpeedAdjuster")
 
 int LinearSpeedAdjuster::ProcessFrame(double elapsedTime)
 {
+	LOG(LogLevel::Finest) << "LinearSpeedAdjuster::ProcessFrame() : process time.";
 	if (seekTimeLeft != 0) {
 		isAdjustingTime = true;
 

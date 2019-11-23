@@ -25,6 +25,7 @@ int TimeController::update()
 
 	LOG(LogLevel::Finest) << "TimeController::update() : speed adjuster processing.";
 	speedAdjuster->ProcessFrame(GetClock()->GetElapsedFrameTime());
+	LOG(LogLevel::Finest) << "TimeController::update() : speed adjuster processed.";
 
 	if (speedAdjuster->GetIsAdjustingTime()) {
 		LOG(LogLevel::Finest) << "TimeController::update() : speed adjuster is adjusting time";
