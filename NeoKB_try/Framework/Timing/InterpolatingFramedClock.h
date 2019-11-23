@@ -12,7 +12,7 @@ namespace Timing {
 	/// A clock which uses an internal stopwatch to interpolate (smooth out) a source.
 	/// Note that this will NOT function unless a source has been set.
 	/// </summary>
-	class InterpolatingFramedClock : virtual public FrameBasedClock {
+	class InterpolatingFramedClock : public FrameBasedClock {
 
 	public:
 

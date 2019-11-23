@@ -23,7 +23,7 @@ map<MeteorAction, InputKey>* MeteorTimeController::GetDefaultkeyBindings()
 
 int MeteorTimeController::reloadMappings()
 {
-
+	LOG(LogLevel::Info) << "MeteorTimeController::reloadMappings() : mapping key bindings.";
 	map<MeteorAction, InputKey>* tempMap = GetDefaultkeyBindings();
 	keyBindings = *tempMap;
 	delete tempMap;
