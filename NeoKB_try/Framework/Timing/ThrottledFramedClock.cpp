@@ -14,6 +14,7 @@ using namespace Util;
 
 int ThrottledFramedClock::throttle()
 {
+
 	int timeToSleepFlooredInMilli;
 
 	double frameTime = 1.0 / maxUpdateHz;
@@ -53,6 +54,8 @@ int ThrottledFramedClock::throttle()
 
 ThrottledFramedClock::ThrottledFramedClock(Clock * s): FramedClock(s)
 {
+	LOG(LogLevel::Debug) << "ThrottledFramedClock::ThrottledFramedClock() : address = [" << this << "].";
+
 	if(s)
 	if(dynamic_cast<FrameBasedClock*>(s))
 		throw runtime_error("ThrottledFramedClock::ThrottledFramedClock() : error. the source clock cannot be frame based.");

@@ -3,15 +3,18 @@
 #include "StopwatchClock.h"
 #include <stdexcept>
 #include <cmath>
+#include "../../Util/Log.h"
 
 
 using namespace Framework::Timing;
 using namespace std;
+using namespace Util;
 
 
 
 InterpolatingFramedClock::InterpolatingFramedClock(Clock * s)
 {
+	LOG(LogLevel::Debug) << "InterpolatingFramedClock::InterpolatingFramedClock() : address = [" << this << "].";
 	interpolateClock = new FramedClock(new StopwatchClock());
 	ChangeSource(s);
 

@@ -11,7 +11,7 @@ namespace Timing {
 	/// Takes a clock source and separates time reading on a per-frame level.
 	/// The CurrentTime value will only change on initial construction and whenever ProcessFrame is run.
 	/// </summary>
-	class ThrottledFramedClock : virtual public FramedClock {
+	class ThrottledFramedClock : public FramedClock {
 
 		double maxUpdateHz = 1000;
 
