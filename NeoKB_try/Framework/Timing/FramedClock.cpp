@@ -26,7 +26,7 @@ FramedClock::FramedClock(Clock * s)
 int FramedClock::ProcessFrame()
 {
 	if (!isStarted)
-		LOG(LogLevel::Debug) << "FramedClock::ProcessFrame() : not start yet -> address = [" << this << "].";
+		LOG(LogLevel::Debug) << "FramedClock::ProcessFrame() : not start yet -> address = [" << this << "], type = [" << typeid(this).name() << "].";
 	else
 		LOG(LogLevel::Debug) << "FramedClock::ProcessFrame() : current time [" << fixed << setprecision(5) << currentTime << "].";
 
