@@ -65,6 +65,7 @@ int Player::load(FrameworkConfigManager* f)
 		return 0;
 	});
 
+	LOG(LogLevel::Fine) << "Player::load : create time controller.";
 	timeController = rulesetExecutor->CreateTimeController();
 	//timeController->ImportWorkingSm(workingSmValue);
 	timeController->SetControllableClock(decoupledClock);
