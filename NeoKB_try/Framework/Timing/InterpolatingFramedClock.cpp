@@ -29,6 +29,7 @@ int InterpolatingFramedClock::ProcessFrame()
 
 	/* 更新速度 */
 	interpolateClock->SetRate(rate = source->GetRate());
+	LOG(LogLevel::Finest) << "InterpolatingFramedClock::ProcessFrame() : source->GetRate done.";
 
 	/* 跑一禎 */
 	interpolateClock->ProcessFrame();
