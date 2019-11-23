@@ -42,7 +42,7 @@ namespace Timing {
 
 	protected:
 
-		Clock* source;
+		Clock* source = nullptr;
 
 		double rate = 1.0;
 

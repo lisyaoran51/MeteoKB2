@@ -23,7 +23,7 @@ InterpolatingFramedClock::InterpolatingFramedClock(Clock * s)
 
 int InterpolatingFramedClock::ProcessFrame()
 {
-	LOG(LogLevel::Finest) << "InterpolatingFramedClock::ProcessFrame() : process interpolate clock [" << interpolateClock << "] and source clock[" << framedSource << "].";
+	LOG(LogLevel::Finest) << "InterpolatingFramedClock::ProcessFrame() : process interpolate clock [" << interpolateClock << "] and source clock[" << framedSource << "], source = [" << source << "].";
 	if (framedSource == nullptr)
 		return 0;
 
