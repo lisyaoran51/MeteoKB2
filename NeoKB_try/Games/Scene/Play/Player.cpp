@@ -70,7 +70,7 @@ int Player::load(FrameworkConfigManager* f)
 	timeController->SetSpeedAdjuster(rulesetExecutor->CreateSpeedAdjuster());
 
 
-	LOG(LogLevel::Fine) << "Player::load : adding time controller, ruleset executor.";
+	LOG(LogLevel::Fine) << "Player::load : adding time controller, ruleset executor. clock = [" << GetClock() << "].";
 	AddChild(timeController);
 	// 把time controller下面所有東西的clock都改成由time controller控制的clock
 	Container* container = new Container();
