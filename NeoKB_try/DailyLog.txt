@@ -1256,3 +1256,6 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	
 	不知為何，runcwork一圈以後Clock會變成not started
 	
+11/22
+	出錯的不是thread的clock，是time controoler的
+	

@@ -1,9 +1,12 @@
 #include "DecoupledInterpolatingFramedClock.h"
 
 #include "../../Util/MtoType.h"
+#include "../../Util/Log.h"
 
 
 using namespace Framework::Timing;
+using namespace Util;
+
 
 DecoupledInterpolatingFramedClock::DecoupledInterpolatingFramedClock(): InterpolatingFramedClock()
 {
@@ -60,6 +63,7 @@ double DecoupledInterpolatingFramedClock::GetElapsedFrameTime()
 
 int DecoupledInterpolatingFramedClock::ProcessFrame()
 {
+	LOG(LogLevel::Debug) << "DecoupledInterpolatingFramedClock::ProcessFrame() : " << this;
 	InterpolatingFramedClock::ProcessFrame();
 
 	decoupledStopwatchClock->SetRate(InterpolatingFramedClock::GetRate());
