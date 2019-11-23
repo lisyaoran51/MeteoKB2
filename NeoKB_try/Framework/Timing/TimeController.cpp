@@ -18,14 +18,16 @@ int TimeController::load()
 
 int TimeController::update()
 {
-	LOG(LogLevel::Finest) << "TimeController::update() : speed adjuster = [" << speedAdjuster << "], controllable clock = [" << controllableClock << "].";
+	
 
 	if (controllableClock == nullptr || speedAdjuster == nullptr)
 		return 0;
 
+	LOG(LogLevel::Finest) << "TimeController::update() : speed adjuster processing.";
 	speedAdjuster->ProcessFrame(GetClock()->GetElapsedFrameTime());
 
 	if (speedAdjuster->GetIsAdjustingTime()) {
+		LOG(LogLevel::Finest) << "TimeController::update() : speed adjuster is adjusting time";
 		double timeToAdjust = speedAdjuster->GetAdjustFrameTime();
 		
 		// 這邊應該是，不管目前速度多快，調整時間的速度都是固定的，不會速度快的時候就調的快
@@ -34,6 +36,8 @@ int TimeController::update()
 	else if (speedAdjuster->GetIsFreezingTime()) {
 		Pause();
 	}
+
+	LOG(LogLevel::Finest) << "TimeController::update() : end.";
 
 	return 0;
 }
