@@ -217,8 +217,6 @@ namespace Timing {
 
 			reloadMappings();
 
-			LOG(LogLevel::Finest) << "TTimeController::LoadOnComplete() : end.";
-
 			return 0;
 		}
 

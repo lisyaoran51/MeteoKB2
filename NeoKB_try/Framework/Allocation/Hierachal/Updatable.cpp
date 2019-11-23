@@ -48,10 +48,9 @@ bool Updatable::UpdateSubTree()
 		LoadComplete();
 
 	if (GetParent() != nullptr && customClock != nullptr) {
-		LOG(LogLevel::Finest) << "Updatable::UpdateSubTree() : process custom clock [" << customClock << "].";
 		customClock->ProcessFrame();
 	}
-	LOG(LogLevel::Finest) << "Updatable::UpdateSubTree() : update myself.";
+	
 	update();
 
 	vector<ChildAddable*>* childs = GetChilds();

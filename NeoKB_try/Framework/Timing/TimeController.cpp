@@ -18,6 +18,8 @@ int TimeController::load()
 
 int TimeController::update()
 {
+	LOG(LogLevel::Finest) << "TimeController::update() : speed adjuster = [" << speedAdjuster << "], controllable clock = [" << controllableClock << "].";
+
 	if (controllableClock == nullptr || speedAdjuster == nullptr)
 		return 0;
 
