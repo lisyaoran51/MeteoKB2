@@ -32,11 +32,14 @@ int InterpolatingFramedClock::ProcessFrame()
 
 	/* ¶]¤@ºÕ */
 	interpolateClock->ProcessFrame();
+	LOG(LogLevel::Finest) << "InterpolatingFramedClock::ProcessFrame() : interpolateClock done.";
 	framedSource->ProcessFrame();
+	LOG(LogLevel::Finest) << "InterpolatingFramedClock::ProcessFrame() : framedSource done.";
 	
 	sourceIsRunning = framedSource->GetIsRunning();
 
 	lastInterpolatedTime = GetCurrentTime();
+	LOG(LogLevel::Finest) << "InterpolatingFramedClock::ProcessFrame() : get current time.";
 
 	if (!framedSource->GetIsRunning())
 		return 0;
