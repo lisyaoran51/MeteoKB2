@@ -34,6 +34,7 @@ int Track::SetIsRunning(bool value)
 
 bool Track::GetIsRunning()
 {
+	LOG(LogLevel::Debug) << "Track::GetIsRunning() : if the track is running = [" << isRunning << "].";
 	return isRunning;
 }
 

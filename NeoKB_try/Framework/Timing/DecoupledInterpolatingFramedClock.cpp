@@ -76,7 +76,7 @@ int DecoupledInterpolatingFramedClock::ProcessFrame()
 
 
 	bool sourceRunning = InterpolatingFramedClock::GetIsRunning();
-	LOG(LogLevel::Debug) << "DecoupledInterpolatingFramedClock::ProcessFrame() : determine if decoupled clock start. coupled = ["<< isCoupled << ", source running = [" << (sourceRunning ? 1 : 0) << "]";
+	LOG(LogLevel::Debug) << "DecoupledInterpolatingFramedClock::ProcessFrame() : determine if decoupled clock start. coupled = ["<< isCoupled << "], source running = [" << (sourceRunning ? 1 : 0) << "]";
 	// ***讓分離的時鐘一直跟著現在的時間***
 	// 只要原時鐘有在跑，分離時鐘就一定要跟著原時鐘的時間。但如果原時鐘沒在跑的話， 就要看有沒有couple，
 	// 有couple的狀況，分離時鐘就必須停下來保持跟原時鐘一樣的時間。

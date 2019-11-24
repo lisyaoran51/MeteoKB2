@@ -62,7 +62,7 @@ namespace Timing {
 		/// </summary>
 		FramedClock* interpolateClock;
 
-		bool sourceIsRunning;
+		bool sourceIsRunning = false;
 
 		double lastInterpolatedTime = 0;
 
