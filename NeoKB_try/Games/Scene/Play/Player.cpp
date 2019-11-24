@@ -58,7 +58,7 @@ int Player::load(FrameworkConfigManager* f)
 	GetScheduler()->AddTask([=]() {
 
 		LOG(LogLevel::Info) << "Player::load : scheduled task to change source to track.";
-		decoupledClock->Reset();
+		adjustableClock->Reset();
 
 		// TODO: 把mod加入adjustableClock裡
 		// foreach (var mod in working.Mods.Value.OfType<IApplicableToClock>())
