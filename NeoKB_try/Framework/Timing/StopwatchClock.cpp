@@ -80,6 +80,7 @@ int StopwatchClock::Start()
 			return -1; // TODO: throw error因為是異常狀況
 		systemStartTime = system_clock::now();
 		systemCurrentTime = system_clock::now();
+		LOG(LogLevel::Finest) << "StopwatchClock::Start() : current elapsed time = [" << duration_cast<microseconds>(systemCurrentTime - systemStartTime).count() << "].";
 		isRunning = true;
 		isStarted = true;
 	}
@@ -112,6 +113,8 @@ long long StopwatchClock::getElapsedMicroseconds()
 {
 	if(isRunning)
 		systemCurrentTime = system_clock::now();
+
+	LOG(LogLevel::Finest) << "StopwatchClock::getElapsedMicroseconds() : current elapsed time = [" << duration_cast<microseconds>(systemCurrentTime - systemStartTime).count() << "].";
 	return duration_cast<microseconds>(systemCurrentTime - systemStartTime).count();
 }
 
