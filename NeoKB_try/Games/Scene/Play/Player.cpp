@@ -71,8 +71,10 @@ int Player::load(FrameworkConfigManager* f)
 
 	LOG(LogLevel::Fine) << "Player::load : create time controller.";
 	timeController = rulesetExecutor->CreateTimeController();
+	LOG(LogLevel::Fine) << "Player::load : set controllable clock.";
 	//timeController->ImportWorkingSm(workingSmValue);
 	timeController->SetControllableClock(decoupledClock);
+	LOG(LogLevel::Fine) << "Player::load : set speed adjuster.";
 	timeController->SetSpeedAdjuster(rulesetExecutor->CreateSpeedAdjuster());
 
 
