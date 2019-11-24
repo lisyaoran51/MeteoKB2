@@ -77,7 +77,7 @@ namespace Timing {
 		/// <summary>
 		/// 在調整時間的時候，用來做初速度效果的東西
 		/// </summary>
-		SpeedAdjuster* speedAdjuster;
+		SpeedAdjuster* speedAdjuster = nullptr;
 
 		/// <summary>
 		/// 可以跳到歌曲的任何斷落的clock，就是歌曲中的clock，外面包一個額外的時鐘
