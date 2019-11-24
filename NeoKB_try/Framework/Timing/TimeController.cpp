@@ -1,10 +1,11 @@
 #include "TimeController.h"
 
+#include <iomanip>
 //#include "../../Scheduler/Event/ControlPoints/NoteControlPoint.h"
 
 
 
-
+using namespace std;
 using namespace Framework::Timing;
 using namespace Framework::Timing::SpeedAdjusters;
 //using namespace Games::Schedulers::Events::ControlPoints;  // 還沒有要寫這個
@@ -23,16 +24,17 @@ int TimeController::update()
 	if (controllableClock == nullptr || speedAdjuster == nullptr)
 		return 0;
 
-	LOG(LogLevel::Finest) << "TimeController::update() : speed adjuster processing.";
+	LOG(LogLevel::Finest) << "TimeController::update() : speed adjuster sync to source clock time [" << fixed << setprecision(5) << GetClock()->GetElapsedFrameTime() << "].";
 	speedAdjuster->ProcessFrame(GetClock()->GetElapsedFrameTime());
-	LOG(LogLevel::Finest) << "TimeController::update() : speed adjuster processed.";
 
 	if (speedAdjuster->GetIsAdjustingTime()) {
-		LOG(LogLevel::Finest) << "TimeController::update() : speed adjuster is adjusting time";
+		LOG(LogLevel::Finest) << "TimeController::update() : speed adjuster is adjusting time to [" << fixed << setprecision(5) << speedAdjuster->GetAdjustFrameTime() << "].";
 		double timeToAdjust = speedAdjuster->GetAdjustFrameTime();
 		
+		LOG(LogLevel::Finest) << "TimeController::update() :controllable clock before adjust [" << fixed << setprecision(5) << controllableClock->GetCurrentTime() << "].";
 		// 這邊應該是，不管目前速度多快，調整時間的速度都是固定的，不會速度快的時候就調的快
 		controllableClock->Seek(controllableClock->GetCurrentTime() + timeToAdjust/* * controllableClock->GetRate()*/);
+		LOG(LogLevel::Finest) << "TimeController::update() :controllable clock after adjust [" << fixed << setprecision(5) << controllableClock->GetCurrentTime() << "].";
 	}
 	else if (speedAdjuster->GetIsFreezingTime()) {
 		Pause();
