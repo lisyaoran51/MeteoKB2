@@ -12,8 +12,8 @@ LinearSpeedAdjuster::LinearSpeedAdjuster() : RegisterType("LinearSpeedAdjuster")
 
 int LinearSpeedAdjuster::ProcessFrame(double elapsedTime)
 {
-	LOG(LogLevel::Finest) << "LinearSpeedAdjuster::ProcessFrame() : process time.";
 	if (seekTimeLeft != 0) {
+		LOG(LogLevel::Finest) << "LinearSpeedAdjuster::ProcessFrame() : seeking time.";
 		isAdjustingTime = true;
 
 		/* 往後跑，時間往上加 */
@@ -46,6 +46,7 @@ int LinearSpeedAdjuster::ProcessFrame(double elapsedTime)
 		}
 	}
 	else if (isFreezingTime) {
+		LOG(LogLevel::Finest) << "LinearSpeedAdjuster::ProcessFrame() : freezing time.";
 		freezeTimeLeft -= elapsedTime;
 		if (freezeTimeLeft < 0) {
 			// 這邊會有一點點誤差，但是沒有辦法修正回來，除非把time controller去調整當前時間
