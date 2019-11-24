@@ -49,7 +49,7 @@ namespace Timing {
 		/// <summary>
 		/// 把source外面包一層frame
 		/// </summary>
-		FrameBasedClock* framedSource;
+		FrameBasedClock* framedSource = nullptr;
 
 
 
