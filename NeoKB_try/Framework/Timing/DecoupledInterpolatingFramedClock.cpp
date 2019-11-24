@@ -49,6 +49,8 @@ int DecoupledInterpolatingFramedClock::ChangeSource(Clock * s)
 	if (s == nullptr)
 		return 0;
 
+	LOG(LogLevel::Debug) << "DecoupledInterpolatingFramedClock::ChangeSource : changing.";
+
 	if (dynamic_cast<AdjustableClock*>(s))
 		dynamic_cast<AdjustableClock*>(s)->Seek(GetCurrentTime());
 
