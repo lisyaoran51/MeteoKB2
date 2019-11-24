@@ -79,7 +79,7 @@ int InterpolatingFramedClock::ChangeSource(Clock * s)
 
 double InterpolatingFramedClock::GetCurrentTime()
 {
-	LOG(LogLevel::Debug) << "InterpolatingFramedClock::GetCurrentTime() : get interpolated time? [" << sourceIsRunning << "].";
+	LOG(LogLevel::Debug) << "InterpolatingFramedClock::GetCurrentTime() : get interpolated time? [" << sourceIsRunning << "], framed source = [" << framedSource << "].";
 	return sourceIsRunning ? currentInterpolatedTime : framedSource->GetCurrentTime();
 }
 
