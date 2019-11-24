@@ -98,6 +98,7 @@ int StopwatchClock::Stop()
 
 bool StopwatchClock::Seek(double position)
 {
+	LOG(LogLevel::Debug) << "StopwatchClock::Seek : go to position.";
 	seekOffset = position - GetCurrentTime();
 	return true;
 }
