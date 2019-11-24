@@ -53,7 +53,11 @@ int Player::load(FrameworkConfigManager* f)
 
 	// TODO: 把config裡面的offset和offset clock的offset bind在一起，讓config可以調整offset
 
+	LOG(LogLevel::Fine) << "Player::load : scheduler = [" << GetScheduler() << "].";
+
 	GetScheduler()->AddTask([=]() {
+
+		LOG(LogLevel::Info) << "Player::load : scheduled task to change source to track.";
 		decoupledClock->Reset();
 
 		// TODO: 把mod加入adjustableClock裡
