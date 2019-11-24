@@ -37,7 +37,7 @@ namespace Hierachal {
 
 		vector<ScheduledTask*> tasksToRemove;
 
-		bool isCancelled;
+		bool isCancelled = false;
 
 	public:
 
