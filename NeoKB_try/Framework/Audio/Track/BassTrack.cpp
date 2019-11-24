@@ -24,14 +24,17 @@ BassTrack::BassTrack(char * fileName)
 int BassTrack::Start()
 {
 	Track::Start();
-
+	LOG(LogLevel::Info) << "BassTrack::Start() : start track.";
 	pendingActions.Add(this, [=]() {
 
 		if (BASS_ChannelPlay(stream, false)) {
 			isPlayed = true;
+			LOG(LogLevel::Debug) << "BassTrack::Start() : play bass channel.";
 		}
 		else {
 			isRunning = false;
+			LOG(LogLevel::Debug) << "BassTrack::Start() : play bass channel failed.";
+
 		}
 
 		return 0;
@@ -61,6 +64,7 @@ bool BassTrack::Seek(double position)
 	LOG(LogLevel::Debug) << "BassTrack::Seek : get framed source (" << isPlayed << ").";
 	// TODO: 如果在還沒有start時就seek會出現錯誤，正確做法是還是要讓他seek，正確做法在osu裡面
 
+
 	pendingActions.Add(this, [=]() {
 
 		double clampedPosition = position > length ? length : position;
@@ -76,7 +80,7 @@ bool BassTrack::Seek(double position)
 	}, "Lambda_BassTrack::Seek");
 
 	
-	return false;
+	return position <= length && position >= 0;
 }
 
 int BassTrack::Reset()

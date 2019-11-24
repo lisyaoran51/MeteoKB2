@@ -92,6 +92,7 @@ int DecoupledInterpolatingFramedClock::ProcessFrame()
 		if (decoupledClock->GetIsRunning()) {
 			//if we're running but our source isn't, we should try a seek to see if it's capable to switch to it for the current value.
 			// 這邊是打開遊戲音樂的地方
+			LOG(LogLevel::Info) << "DecoupledInterpolatingFramedClock::ProcessFrame() : music start";
 			Start();
 		}
 	}
@@ -116,6 +117,7 @@ int DecoupledInterpolatingFramedClock::Start()
 {
 	if(getAdjustableSource() != nullptr)
 	if(!getAdjustableSource()->GetIsRunning()){
+		LOG(LogLevel::Info) << "DecoupledInterpolatingFramedClock::Start() : check if coupled [" << isCoupled << "] and seek time [" << GetCurrentTime() << "].";
 		if (isCoupled || getAdjustableSource()->Seek(GetCurrentTime()) == RETURN_AVAILABLE)
 			//only start the source clock if our time values match.
 			//this handles the case where we seeked to an unsupported value and the source clock is out of sync.
