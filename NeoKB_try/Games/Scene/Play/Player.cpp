@@ -65,8 +65,8 @@ int Player::load(FrameworkConfigManager* f)
 		//     mod.ApplyToClock(adjustableSourceClock);
 
 		decoupledClock->ChangeSource(adjustableClock);
-
-		LOG(LogLevel::Fine) << "Player::load : scheduled task end.";
+		
+		LOG(LogLevel::Debug) << "Player::load : scheduled task end.";
 
 		return 0;
 	});
