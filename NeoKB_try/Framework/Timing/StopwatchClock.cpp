@@ -74,7 +74,7 @@ int StopwatchClock::Restart()
 
 int StopwatchClock::Start()
 {
-	LOG(LogLevel::Finest) << "StopwatchClock::Start() : start the stopwatch.";
+	LOG(LogLevel::Finest) << "StopwatchClock::Start() : start the stopwatch, started = [" << isStarted << "], running = [" << isRunning  << "].";
 	if (!isStarted || !isRunning) {
 		if (!isStarted && isRunning)
 			return -1; // TODO: throw error因為是異常狀況
