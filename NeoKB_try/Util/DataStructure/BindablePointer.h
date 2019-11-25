@@ -64,7 +64,7 @@ namespace DataStructure {
 			return Bindable<void*>::BindTo(other);
 		}
 
-		vector<Bindable<T>*>* GetBindings() {
+		vector<Bindable<void*>*>* GetBindings() {
 			return Bindable<void*>::GetBindings();
 		}
 
