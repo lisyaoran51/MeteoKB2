@@ -72,7 +72,7 @@ namespace DataStructure {
 			return Bindable<void*>::AddBindings(other);
 		}
 
-		int AddOnValueChenged(function<int(T)> oValueChanged, string name) {
+		int AddOnValueChenged(function<int(void*)> oValueChanged, string name) {
 			
 			return Bindable<void*>::AddOnValueChenged(oValueChanged, name);;
 		}
