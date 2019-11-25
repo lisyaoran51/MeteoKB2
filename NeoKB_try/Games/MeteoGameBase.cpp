@@ -11,7 +11,7 @@ using namespace std;
 int MeteoGameBase::load()
 {
 
-	LOG(LogLevel::Info) << "MeteoGameBase::load() : caching Resources.";
+	LOG(LogLevel::Info) << "MeteoGameBase::load() : caching Resources. working sm = [" << &workingSm << "].";
 
 	workingSm.SetValue(nullptr);
 	//workingSm.AddOnValueChanged(this, bind(&MeteoGameBase::onWorkingSmValueChanged, this, placeholders::_1), "MeteoGameBase::onWorkingSmValueChanged");
