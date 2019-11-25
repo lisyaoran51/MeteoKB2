@@ -38,7 +38,7 @@ int Player::load(FrameworkConfigManager* f)
 		rulesetInfo = sm->GetRulesetInfo();
 	***/
 
-	LOG(LogLevel::Fine) << "Player::load : create clocks.";
+	LOG(LogLevel::Fine) << "Player::load : create clocks. track = [" << workingSmValue->GetTrack() << "].";
 	if (workingSmValue->GetTrack() == nullptr)
 		adjustableClock = new StopwatchClock();
 	else
