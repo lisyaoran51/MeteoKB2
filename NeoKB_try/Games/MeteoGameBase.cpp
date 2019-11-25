@@ -14,7 +14,7 @@ int MeteoGameBase::load()
 	LOG(LogLevel::Info) << "MeteoGameBase::load() : caching Resources.";
 
 	workingSm.SetValue(nullptr);
-	workingSm.AddOnValueChanged(bind(&MeteoGameBase::onWorkingSmValueChanged, this, placeholders::_1), "MeteoGameBase::onWorkingSmValueChanged");
+	workingSm.AddOnValueChanged(this, bind(&MeteoGameBase::onWorkingSmValueChanged, this, placeholders::_1), "MeteoGameBase::onWorkingSmValueChanged");
 	/* 不知道為什麼lambda式就是不會過
 	workingSm.AddOnValueChenged([=](void* wSm){
 		

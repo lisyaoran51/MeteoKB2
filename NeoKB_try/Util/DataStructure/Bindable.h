@@ -135,8 +135,9 @@ namespace DataStructure {
 			return 0;
 		}
 
-		int AddOnValueChanged(function<int(void*)> oValueChanged, string name) {
-			onValueChanged.Add(oValueChanged, name);
+		template<typename TCallableObject>
+		int AddOnValueChanged(TCallableObject object, function<int(void*)> oValueChanged, string name) {
+			onValueChanged.Add(object, oValueChanged, name);
 			return 0;
 		}
 

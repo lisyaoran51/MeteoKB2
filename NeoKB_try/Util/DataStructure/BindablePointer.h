@@ -72,12 +72,12 @@ namespace DataStructure {
 			return Bindable<void*>::AddBindings(other);
 		}
 
-		/* ぃノ锣bindable把计篈⊿Τ跑
-		int AddOnValueChenged(function<int(void*)> oValueChanged, string name) {
+		// ぃノ锣bindable把计篈⊿Τ跑
+		template<typename TCallableObject>
+		int AddOnValueChanged(TCallableObject object, function<int(void*)> oValueChanged, string name) {
 			
-			return Bindable<void*>::AddOnValueChenged(oValueChanged, name);;
+			return Bindable<void*>::AddOnValueChanged(object, oValueChanged, name);;
 		}
-		*/
 
 		int UnbindAll() {
 			throw runtime_error("Bindable::UnbindAll(): not implemented.");
