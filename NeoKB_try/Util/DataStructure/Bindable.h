@@ -135,7 +135,7 @@ namespace DataStructure {
 			return 0;
 		}
 
-		int AddOnValueChenged(function<int(T)> oValueChanged, string name) {
+		int AddOnValueChenged(function<int(void*)> oValueChanged, string name) {
 			onValueChanged.Add(oValueChanged, name);
 			return 0;
 		}
