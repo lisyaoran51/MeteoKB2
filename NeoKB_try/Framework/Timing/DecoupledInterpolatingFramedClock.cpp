@@ -118,7 +118,7 @@ int DecoupledInterpolatingFramedClock::Start()
 	if(getAdjustableSource() != nullptr)
 	if(!getAdjustableSource()->GetIsRunning()){
 		LOG(LogLevel::Info) << "DecoupledInterpolatingFramedClock::Start() : check if coupled [" << isCoupled << "] and seek time [" << GetCurrentTime() << "].";
-		if (isCoupled || getAdjustableSource()->Seek(GetCurrentTime()) == RETURN_AVAILABLE)
+		if (isCoupled || getAdjustableSource()->Seek(GetCurrentTime()))
 			//only start the source clock if our time values match.
 			//this handles the case where we seeked to an unsupported value and the source clock is out of sync.
 			getAdjustableSource()->Start();
