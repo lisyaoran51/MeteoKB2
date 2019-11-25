@@ -14,9 +14,10 @@ int MeteoGameBase::load()
 	LOG(LogLevel::Info) << "MeteoGameBase::load() : caching Resources.";
 
 	workingSm.SetValue(nullptr);
-	workingSm.AddOnValueChenged([=](WorkingSm* wSm){
+	workingSm.AddOnValueChenged([=](void* wSm){
 		
-		audioManager->GetTrackManager()->AddItem(wSm->GetTrack());
+		WorkingSm* w = static_cast<WorkingSm*>(wSm);
+		audioManager->GetTrackManager()->AddItem(w->GetTrack());
 
 		return 0;
 	}, "WorkingSm::OnValueChanged");
