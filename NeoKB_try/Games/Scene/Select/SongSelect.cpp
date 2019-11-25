@@ -75,8 +75,16 @@ int SongSelect::selectionChanged(SmInfo * sheetmusicInfo)
 			// ??需要delete舊的workingSm嗎?
 		}
 	}
-	else
+	else {
+		LOG(LogLevel::Debug) << [](BindablePointer<WorkingSm*>* wSm) {
+			for (int i = 0; i < wSm->GetBindings()->size(); i++) {
+				LOG(LogLevel::Debug) << "SongSelect::selectionChanged : working sm bindings [" << i << "] = [" << wSm->GetBindings()->at(i) << "].";
+			}
+			return 0;
+		}(&workingSm);
+
 		workingSm.SetValue(smManager->GetWorkingSm(sheetmusicInfo), true);
+	}
 
 	updateSheetmusic(workingSm.GetValue());
 
