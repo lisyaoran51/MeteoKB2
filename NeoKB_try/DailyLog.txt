@@ -1265,3 +1265,20 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	還沒解決，又在更之前的create decoupled clocks出錯，是因為沒有重新compile就出錯
 	
 	找到問題了，decoupled clock的Source是null
+	
+	問題是出在，Player::load -> DecoupledInterpolatingFramedClock::ChangeSource -> DecoupledInterpolatingFramedClock::GetCurrentTime -> InterpolatingFramedClock::GetCurrentTime
+	-> framedSource->GetCurrentTime，這邊的framed source是nullptr
+	把null狀態直接回傳0就解決了
+	
+	offsetClock的source的時間是錯的，這個source就是decoupled clock
+	
+	出錯的地方是 InterpolatingFramedClock::ProcessFrame() -> framedSource->ProcessFrame() -> FramedClock::ProcessFrame() -> Track::GetCurrentTime()
+	
+	track沒有Start，start的位置是InterpolatingFramedClock::ProcessFrame的最下面
+	
+	determine if decoupled clock start. coupled = [1], source running = [0] 這邊coupled不可能是1
+	
+	找到問題，一開始要reset track寫錯寫成reset decoupled clock，音樂可以播放了，但是還是有clock時間不對
+	
+11/24
+	在gamebase的設定beatmap change的function是add to audio manager

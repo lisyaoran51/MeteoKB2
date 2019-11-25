@@ -72,6 +72,11 @@ namespace DataStructure {
 			return Bindable<void*>::AddBindings(other);
 		}
 
+		int AddOnValueChenged(function<int(T)> oValueChanged, string name) {
+			
+			return Bindable<void*>::AddOnValueChenged(oValueChanged, name);;
+		}
+
 		int UnbindAll() {
 			throw runtime_error("Bindable::UnbindAll(): not implemented.");
 			return 0;

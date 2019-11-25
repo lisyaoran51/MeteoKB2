@@ -69,7 +69,7 @@ int Track::ResetSpeedAdjustments()
 	return 0;
 }
 
-int Track::update()
+int Track::Update()
 {
 
 	if (isLoop && isCompleted)
@@ -78,7 +78,7 @@ int Track::update()
 		Start();
 	}
 
-	AudioComponent::update();
+	AudioComponent::Update();
 
 	return 0;
 }

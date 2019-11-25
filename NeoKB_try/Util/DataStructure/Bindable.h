@@ -42,6 +42,7 @@ namespace DataStructure {
 			if (disabled)
 				throw invalid_argument("Bindable<T>::SetValue(): change value is disabled.");
 			value = v;
+			onValueChanged.Trigger(v);
 
 			triggerValueChange();
 			return 0;
@@ -51,6 +52,7 @@ namespace DataStructure {
 			if (disabled)
 				throw invalid_argument("Bindable<T>::SetValue(): change value is disabled.");
 			value = v;
+			onValueChanged.Trigger(v);
 			return 0;
 		}
 		
@@ -133,6 +135,11 @@ namespace DataStructure {
 			return 0;
 		}
 
+		int AddOnValueChenged(function<int(T)> oValueChanged, string name) {
+			onValueChanged.Add(oValueChanged, name);
+			return 0;
+		}
+
 		int UnbindAll() {
 			throw runtime_error("Bindable::UnbindAll(): not implemented.");
 			return 0;
@@ -177,7 +184,7 @@ namespace DataStructure {
 		T defaultValue;
 		bool disabled = false;
 		bool hasDefaultValue = false;
-		// ActionList<int(int)> ValueChanged;
+		ActionList<int, T> onValueChanged;
 
 		vector<Bindable<T>*>* bindings = nullptr;
 		

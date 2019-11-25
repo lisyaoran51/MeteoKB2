@@ -49,21 +49,11 @@ namespace Audio {
 			return 0;
 		}
 
-		
-
-	protected:
-
-		vector<T*> items;
-
-		virtual int deleteItem(T* item) {
-			return 0;
-		}
-
 		/// <summary>
 		/// 這個會把他下面的其他manager更新，然後audio manager會把這個update放到thread裡面跑
 		/// </summary>
-		virtual int update() {
-			AdjustableAudioComponent::update();
+		virtual int Update() {
+			AudioComponent::Update();
 
 			for (int i = 0; i < items.size(); i++) {
 				T* item = dynamic_cast<T*>(items[i]);
@@ -75,12 +65,24 @@ namespace Audio {
 					items.erase(items.begin() + i);
 					i--;
 					deleteItem(item);
+					continue;
 					// smaple不用delete，但是track要delete
 				}
+				item->Update();
 			}
 
 			return 0;
 		}
+
+	protected:
+
+		vector<T*> items;
+
+		virtual int deleteItem(T* item) {
+			return 0;
+		}
+
+		
 
 	private:
 

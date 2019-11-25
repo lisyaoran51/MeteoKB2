@@ -18,7 +18,6 @@ namespace Framework {
 
 	class Base : public Container {
 
-		AudioManager* audioManager;
 
 		int load();
 
@@ -31,6 +30,8 @@ namespace Framework {
 		virtual string GetResourcePath();
 
 	protected:
+
+		AudioManager* audioManager;
 
 		GameHost* gameHost;
 

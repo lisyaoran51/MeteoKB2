@@ -93,7 +93,7 @@ int BassTrack::Dispose()
 	return 0;
 }
 
-int BassTrack::update()
+int BassTrack::Update()
 {
 	isRunning = BASS_ChannelIsActive(stream) == BASS_ACTIVE_PLAYING;
 
@@ -102,9 +102,9 @@ int BassTrack::update()
 	// TODO: 要讓current time不被中斷thread safe
 	currentTime = currentTimeLocal;
 
-	LOG(LogLevel::Finest) << "BassTrack::update() : get music time = [" << currentTimeLocal <<"].";
+	LOG(LogLevel::Finest) << "BassTrack::Update() : get music time = [" << currentTimeLocal <<"].";
 
-	Track::update();
+	Track::Update();
 
 	return 0;
 }

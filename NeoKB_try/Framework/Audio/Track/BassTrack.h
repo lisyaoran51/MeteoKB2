@@ -41,9 +41,9 @@ namespace Tracks {
 
 		virtual int Dispose();
 
-	protected:
+		virtual int Update();
 
-		virtual int update();
+	protected:
 
 
 	private:

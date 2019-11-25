@@ -8,7 +8,7 @@ bool AudioComponent::GetIsCompleted()
 	return isCompleted;
 }
 
-int AudioComponent::update()
+int AudioComponent::Update()
 {
 	pendingActions.TriggerThenClear();
 	return 0;

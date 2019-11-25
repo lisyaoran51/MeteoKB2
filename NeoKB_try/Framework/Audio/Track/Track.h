@@ -23,6 +23,9 @@ namespace Tracks {
 	class Track : public AdjustableAudioComponent, public AdjustableClock {
 
 	public:
+		
+		// AdjustableAudioComponent
+		virtual int Update();
 
 		// Clock
 		virtual double GetCurrentTime();
@@ -50,7 +53,6 @@ namespace Tracks {
 		double rate;
 
 
-		virtual int update();
 
 
 		/// <summary>

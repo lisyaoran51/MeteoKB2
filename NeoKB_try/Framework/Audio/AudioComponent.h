@@ -24,9 +24,9 @@ namespace Audio {
 
 		bool GetIsCompleted();
 
-	protected:
+		virtual int Update();
 
-		virtual int update();
+	protected:
 
 		/// <summary>
 		/// Audio operations will be run on a separate dedicated thread, so we need to schedule any audio API calls using this queue.

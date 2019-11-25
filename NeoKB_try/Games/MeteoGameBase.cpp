@@ -14,6 +14,12 @@ int MeteoGameBase::load()
 	LOG(LogLevel::Info) << "MeteoGameBase::load() : caching Resources.";
 
 	workingSm.SetValue(nullptr);
+	workingSm.AddOnValueChenged([=](WorkingSm* wSm){
+		
+		audioManager->GetTrackManager()->AddItem(wSm->GetTrack());
+
+		return 0;
+	}, "WorkingSm::OnValueChanged");
 
 	LOG(LogLevel::Debug) << "MeteoGameBase::load() : host address = " << gameHost;
 	dbContextFactory = new DatabaseContextFactory(gameHost);
@@ -31,6 +37,8 @@ int MeteoGameBase::load()
 
 	// 原本要給Working sm做default value，但是現在不用了，所以就直接改成object而不適指標
 	//workingSm = new Bindable<WorkingSm*>();
+
+
 
 	return 0;
 }
