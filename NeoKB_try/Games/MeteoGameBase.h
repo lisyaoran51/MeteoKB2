@@ -8,6 +8,7 @@
 #include "../Framework/Input/KeyBindings/KeyBindingStore.h"
 #include "../Framework/Database/DatabaseContextFactory.h"
 #include "Configurations/MeteoConfigManager.h"
+#include "../Util/DataStructure/BindablePointer.h"
 
 
 using namespace Framework;
@@ -17,6 +18,7 @@ using namespace Framework::Input::KeyBindings;
 using namespace Framework::IO;
 using namespace Framework::Database;
 using namespace Games::Configurations;
+using namespace Util::DataStructure;
 
 
 namespace Games {

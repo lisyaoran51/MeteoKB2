@@ -135,7 +135,7 @@ namespace DataStructure {
 			return 0;
 		}
 
-		int AddOnValueChenged(function<int(void*)> oValueChanged, string name) {
+		int AddOnValueChanged(function<int(void*)> oValueChanged, string name) {
 			onValueChanged.Add(oValueChanged, name);
 			return 0;
 		}
@@ -184,7 +184,7 @@ namespace DataStructure {
 		T defaultValue;
 		bool disabled = false;
 		bool hasDefaultValue = false;
-		ActionList<int, T> onValueChanged;
+		ActionList<int, void*> onValueChanged;
 
 		vector<Bindable<T>*>* bindings = nullptr;
 		
