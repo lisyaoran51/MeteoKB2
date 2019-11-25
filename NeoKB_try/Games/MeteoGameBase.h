@@ -48,7 +48,9 @@ namespace Games {
 
 		MeteoConfigManager* localConfig;
 
+	private:
 
+		int onWorkingSmValueChanged(void* wSm);
 	};
 
 

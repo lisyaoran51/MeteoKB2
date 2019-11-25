@@ -14,6 +14,8 @@ int MeteoGameBase::load()
 	LOG(LogLevel::Info) << "MeteoGameBase::load() : caching Resources.";
 
 	workingSm.SetValue(nullptr);
+	workingSm.AddOnValueChenged(bind(&MeteoGameBase::onWorkingSmValueChanged, this, placeholders::_1), "MeteoGameBase::onWorkingSmValueChanged");
+	/* 不知道為什麼lambda式就是不會過
 	workingSm.AddOnValueChenged([=](void* wSm){
 		
 		WorkingSm* w = static_cast<WorkingSm*>(wSm);
@@ -21,6 +23,7 @@ int MeteoGameBase::load()
 
 		return 0;
 	}, "WorkingSm::OnValueChanged");
+	*/
 
 	LOG(LogLevel::Debug) << "MeteoGameBase::load() : host address = " << gameHost;
 	dbContextFactory = new DatabaseContextFactory(gameHost);
@@ -52,4 +55,12 @@ MeteoGameBase::MeteoGameBase(): RegisterType("MeteoGameBase")
 BindablePointer<WorkingSm*>* MeteoGameBase::GetWorkingSm()
 {
 	return &workingSm;
+}
+
+int MeteoGameBase::onWorkingSmValueChanged(void * wSm)
+{
+	WorkingSm* w = static_cast<WorkingSm*>(wSm);
+	audioManager->GetTrackManager()->AddItem(w->GetTrack());
+
+	return 0;
 }
