@@ -19,7 +19,7 @@ AudioManager::AudioManager(CompositeResourceStore<char*>* trackStore, CompositeR
 	sampleManager = GetSampleManager(sampleStore);
 
 	audioThread = new GameThread(bind(&AudioManager::Update, this), "AudioThread");
-
+	audioThread->Start();
 }
 
 SampleManager * AudioManager::GetSampleManager(CompositeResourceStore<char*>* sampleStore)
