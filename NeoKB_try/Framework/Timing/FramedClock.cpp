@@ -31,7 +31,7 @@ int FramedClock::ProcessFrame()
 	if (!isStarted)
 		LOG(LogLevel::Debug) << "FramedClock::ProcessFrame() : not start yet -> address = [" << this << "], type = [" << typeid(this).name() << "].";
 	else
-		LOG(LogLevel::Debug) << "FramedClock::ProcessFrame() : current time [" << fixed << setprecision(5) << currentTime << "].";
+		LOG(LogLevel::Finest) << "FramedClock::ProcessFrame() : current time [" << fixed << setprecision(5) << currentTime << "].";
 
 	if (isProcessSourceClockFrames) {
 		FrameBasedClock* sourceAsFrameBased = dynamic_cast<FrameBasedClock*>(source);
@@ -42,7 +42,7 @@ int FramedClock::ProcessFrame()
 
 	if (!isStarted) {
 		start();
-		LOG(LogLevel::Finest) << "FramedClock::ProcessFrame() : current time [" << fixed << setprecision(5) << currentTime << "] after start";
+		LOG(LogLevel::Debug) << "FramedClock::ProcessFrame() : current time [" << fixed << setprecision(5) << currentTime << "] after start";
 	}
 	
 
