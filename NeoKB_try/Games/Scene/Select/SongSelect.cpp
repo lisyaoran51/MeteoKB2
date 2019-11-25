@@ -76,12 +76,16 @@ int SongSelect::selectionChanged(SmInfo * sheetmusicInfo)
 		}
 	}
 	else {
-		LOG(LogLevel::Debug) << [](BindablePointer<WorkingSm*>* wSm) {
+		LOG(LogLevel::Debug) << [](BindablePointer<WorkingSm*>* wSm, MeteoScene* scene) {
 			for (int i = 0; i < wSm->GetBindings()->size(); i++) {
 				LOG(LogLevel::Debug) << "SongSelect::selectionChanged : working sm bindings [" << i << "] = [" << wSm->GetBindings()->at(i) << "].";
 			}
+
+			for (MeteoScene* s = scene; s != nullptr; s = dynamic_cast<MeteoScene*>(s->GetParentScene())) {
+				LOG(LogLevel::Debug) << "SongSelect::selectionChanged : scene [" << s->GetTypeName() << "]'s working sm is [" << s->GetWorkingSm() << "].";
+			}
 			return 0;
-		}(&workingSm);
+		}(&workingSm, this);
 
 		workingSm.SetValue(smManager->GetWorkingSm(sheetmusicInfo), true);
 	}

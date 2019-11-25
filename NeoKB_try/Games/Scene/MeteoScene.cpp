@@ -34,6 +34,11 @@ int MeteoScene::load(MeteoGame * game, MeteoGameBase * gameBase)
 	return 0;
 }
 
+BindablePointer<WorkingSm*>* MeteoScene::GetWorkingSm()
+{
+	return &workingSm;
+}
+
 MeteoScene::MeteoScene() : RegisterType("MeteoScene"), Scene()
 {
 	registerLoad(bind((int(MeteoScene::*)())&MeteoScene::load, this));

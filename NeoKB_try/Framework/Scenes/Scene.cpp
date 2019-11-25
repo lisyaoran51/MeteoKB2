@@ -68,6 +68,11 @@ Scene * Scene::GetChildScene()
 	return childScene;
 }
 
+Scene * Scene::GetParentScene()
+{
+	return parentScene;
+}
+
 int Scene::SetIsValidForResume(bool value)
 {
 	isValidForResume = value;

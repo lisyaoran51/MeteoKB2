@@ -30,7 +30,10 @@ namespace Scenes {
 
 		int load(MeteoGame* game, MeteoGameBase* gameBase);
 
+
 	public:
+
+		BindablePointer<WorkingSm*>* GetWorkingSm();
 
 	protected:
 

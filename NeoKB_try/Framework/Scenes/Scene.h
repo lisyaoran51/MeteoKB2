@@ -49,6 +49,8 @@ namespace Scenes {
 
 		Scene* GetChildScene();
 
+		Scene* GetParentScene();
+
 		int SetIsValidForResume(bool value);
 
 
@@ -74,9 +76,9 @@ namespace Scenes {
 
 	protected:
 
-		Scene* parentScene;
+		Scene* parentScene = nullptr;
 
-		Scene* childScene;
+		Scene* childScene = nullptr;
 
 		Game* game;
 
