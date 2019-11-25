@@ -162,9 +162,10 @@ namespace DataStructure {
 
 			if (bindings == nullptr)
 				return 0;
-			LOG(LogLevel::Finer) << "Bindable::triggerValueChange() : start triggering ";
+			LOG(LogLevel::Finer) << "Bindable::triggerValueChange() : start triggering [" << bindings->size() << "] bindings.";
 
 			for (int i = 0; i < bindings->size(); i++) {
+				LOG(LogLevel::Finer) << "Bindable::triggerValueChange() : trigger [" << bindings->at(i) << "] binding.";
 				bindings->at(i)->SetValueWithoutTrigger(value);
 			}
 			return 0;
