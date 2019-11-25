@@ -117,15 +117,20 @@ namespace DataStructure {
 		int AddBindings(Bindable<T>* other) {
 			if (other->GetBindings() == nullptr) {
 
-				if (bindings == nullptr) 
+				LOG(LogLevel::Debug) << "Bindable::AddBindings() : other [" << other << "]'s binding is null. this = [" << this << "].";
+
+				if (bindings == nullptr) {
+					LOG(LogLevel::Debug) << "Bindable::AddBindings() : this [" << this << "] binding is null, so create bindings.";
 					bindings = new vector<Bindable<T>*>();
+					bindings->push_back(this);
+				}
 					
 				other->AddBindings(this);
-				bindings->push_back(this);
 			}
 			else {
 
 				if (bindings == nullptr) {
+					LOG(LogLevel::Debug) << "Bindable::AddBindings() : other [" << other << "]'s binding is [" << other->GetBindings() << "]. this = [" << this << "].";
 					bindings = other->GetBindings();
 					bindings->push_back(this);
 				}
