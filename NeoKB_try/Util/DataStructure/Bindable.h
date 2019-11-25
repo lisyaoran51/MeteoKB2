@@ -93,6 +93,8 @@ namespace DataStructure {
 		/// <param name="other">The foreign bindable. This should always be the most permanent end of the bind (ie. a ConfigManager)</param>
 		int BindTo(Bindable<T>* other) {
 
+			LOG(LogLevel::Fine) << "Bindable::BindTo() : type = [" << typeid(other).name() << "] binding.";
+
 			value = other->GetValue();
 			disabled = other->GetDisabled();
 			hasDefaultValue = other->GetHasDefaultValue();
