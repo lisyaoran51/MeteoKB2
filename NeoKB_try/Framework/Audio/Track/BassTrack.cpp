@@ -102,6 +102,8 @@ int BassTrack::update()
 	// TODO: 要讓current time不被中斷thread safe
 	currentTime = currentTimeLocal;
 
+	LOG(LogLevel::Finest) << "BassTrack::update() : get music time = [" << currentTimeLocal <<"].";
+
 	Track::update();
 
 	return 0;
