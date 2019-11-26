@@ -10,7 +10,7 @@ using namespace Util;
 
 DecoupledInterpolatingFramedClock::DecoupledInterpolatingFramedClock(): InterpolatingFramedClock()
 {
-	LOG(LogLevel::Debug) << "DecoupledInterpolatingFramedClock::DecoupledInterpolatingFramedClock() : address = [" << this << "].";
+	LOG(LogLevel::Debug) << "DecoupledInterpolatingFramedClock::DecoupledInterpolatingFramedClock() : rate = [" << GetRate() << "].";
 	decoupledClock = new FramedClock(decoupledStopwatchClock = new StopwatchClock());
 }
 
