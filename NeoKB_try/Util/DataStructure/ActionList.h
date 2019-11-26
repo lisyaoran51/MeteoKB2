@@ -116,6 +116,10 @@ namespace DataStructure {
 			return &callbackKeys;
 		}
 
+		int GetSize() {
+			return callbacks.size();
+		}
+
 	protected:
 
 
