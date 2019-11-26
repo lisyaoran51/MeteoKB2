@@ -30,7 +30,7 @@ int StopwatchClock::SetRate(double r)
 {
 
 	rateChangeAccumulatedTime += getElapsedSeconds() * rate;
-	LOG(LogLevel::Finest) << "StopwatchClock::SetRate() : accumulated time = [" << rateChangeAccumulatedTime << "], acccumulated in this setting = [" << getElapsedSeconds() * rate << "].";
+	LOG(LogLevel::Finest) << "StopwatchClock::SetRate() : accumulated time = [" << rateChangeAccumulatedTime << "], acccumulated in this setting = [" << getElapsedSeconds() * rate << "], rate = [" << rate << "].";
 	systemStartTime = systemCurrentTime;
 	rate = r;
 	return 0;
