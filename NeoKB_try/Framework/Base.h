@@ -31,7 +31,7 @@ namespace Framework {
 
 	protected:
 
-		AudioManager* audioManager;
+		AudioManager* audioManager = nullptr;
 
 		GameHost* gameHost;
 

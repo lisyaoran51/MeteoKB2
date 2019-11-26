@@ -36,7 +36,6 @@ namespace Framework {
 		
 		Game();
 
-		AudioManager* audioManager;
 
 		//ResourceStore<string>* resources;
 		
