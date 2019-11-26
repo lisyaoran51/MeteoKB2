@@ -54,6 +54,8 @@ namespace Audio {
 		/// 這個會把他下面的其他manager更新，然後audio manager會把這個update放到thread裡面跑
 		/// </summary>
 		virtual int Update() {
+			LOG(LogLevel::Finest) << "AudioCollectionManager::Update() : this = [" << this << "], item size = [" << items.size() << "].";
+
 			AudioComponent::Update();
 
 			for (int i = 0; i < items.size(); i++) {
