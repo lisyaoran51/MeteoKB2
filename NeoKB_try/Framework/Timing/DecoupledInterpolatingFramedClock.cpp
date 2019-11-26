@@ -68,9 +68,9 @@ double DecoupledInterpolatingFramedClock::GetElapsedFrameTime()
 
 int DecoupledInterpolatingFramedClock::ProcessFrame()
 {
-	LOG(LogLevel::Depricated) << "DecoupledInterpolatingFramedClock::ProcessFrame() : " << this;
+	LOG(LogLevel::Finest) << "DecoupledInterpolatingFramedClock::ProcessFrame() : " << this;
 	InterpolatingFramedClock::ProcessFrame();
-	LOG(LogLevel::Depricated) << "DecoupledInterpolatingFramedClock::ProcessFrame() : process decoupled clock";
+	LOG(LogLevel::Finest) << "DecoupledInterpolatingFramedClock::ProcessFrame() : process decoupled clock";
 	decoupledStopwatchClock->SetRate(InterpolatingFramedClock::GetRate());
 	decoupledClock->ProcessFrame();
 

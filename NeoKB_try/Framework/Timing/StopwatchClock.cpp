@@ -74,8 +74,9 @@ int StopwatchClock::Restart()
 
 int StopwatchClock::Start()
 {
-	LOG(LogLevel::Finest) << "StopwatchClock::Start() : start the stopwatch, started = [" << isStarted << "], running = [" << isRunning  << "].";
+	
 	if (!isStarted || !isRunning) {
+		LOG(LogLevel::Finest) << "StopwatchClock::Start() : start the stopwatch, started = [" << isStarted << "], running = [" << isRunning << "].";
 		if (!isStarted && isRunning)
 			return -1; // TODO: throw error因為是異常狀況
 		systemStartTime = system_clock::now();
