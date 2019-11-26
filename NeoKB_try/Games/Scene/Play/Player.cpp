@@ -63,10 +63,10 @@ int Player::load(FrameworkConfigManager* f)
 		// TODO: 把mod加入adjustableClock裡
 		// foreach (var mod in working.Mods.Value.OfType<IApplicableToClock>())
 		//     mod.ApplyToClock(adjustableSourceClock);
-		LOG(LogLevel::Depricated) << "Player::load : reseted.";
+		LOG(LogLevel::Debug) << "Player::load : reseted.";
 		decoupledClock->ChangeSource(adjustableClock);
 		
-		LOG(LogLevel::Depricated) << "Player::load : scheduled task end.";
+		LOG(LogLevel::Debug) << "Player::load : scheduled task end.";
 
 		return 0;
 	});
