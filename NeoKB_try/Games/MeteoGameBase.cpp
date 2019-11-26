@@ -63,7 +63,7 @@ BindablePointer<WorkingSm*>* MeteoGameBase::GetWorkingSm()
 
 int MeteoGameBase::update()
 {
-	LOG(LogLevel::Finest) << "MeteoGameBase::update() : print audio components." << [](AudioManager* a) {
+	LOG(LogLevel::Depricated) << "MeteoGameBase::update() : print audio components." << [](AudioManager* a) {
 		a->_DebugPrintComponents("|");
 		return 0;
 	}(audioManager);
