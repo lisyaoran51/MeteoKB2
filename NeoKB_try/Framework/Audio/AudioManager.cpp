@@ -40,6 +40,7 @@ TrackManager * AudioManager::GetTrackManager(CompositeResourceStore<char*>* trac
 		return trackManager;
 
 	TrackManager* tManager = new TrackManager(trackStore);
+	AddItem(tManager);
 	// TODO: ¥[¤Wadjistment
 
 	return tManager;
