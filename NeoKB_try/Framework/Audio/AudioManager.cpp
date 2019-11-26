@@ -1,5 +1,7 @@
 #include "AudioManager.h"
 
+#include "../../ThirdParty/Bass/bass.h"
+
 
 using namespace Framework::Audio;
 
@@ -17,6 +19,9 @@ AudioManager::AudioManager(CompositeResourceStore<char*>* trackStore, CompositeR
 
 	trackManager = GetTrackManager(trackStore);
 	sampleManager = GetSampleManager(sampleStore);
+
+	if (!BASS_Init(-1, 44100, 0, 0, NULL))
+		throw runtime_error("AudioManager::AudioManager() :cannot initialize bass.");
 
 	audioThread = new GameThread(bind(&AudioManager::Update, this), "AudioThread");
 	audioThread->SetMaxUpdateHz(10);
