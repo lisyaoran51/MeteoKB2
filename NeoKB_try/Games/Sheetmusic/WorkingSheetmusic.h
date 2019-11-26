@@ -63,6 +63,8 @@ namespace Sheetmusics {
 
 		virtual string getPathForFile(string fileName);
 
+		Track* track = nullptr;
+
 	};
 
 

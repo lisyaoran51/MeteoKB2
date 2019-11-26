@@ -58,11 +58,14 @@ BindablePointer<vector<Modifier*>*>* WorkingSm::GetModifiers()
 
 Track * WorkingSm::GetTrack()
 {
+	if (track != nullptr)
+		return track;
+
 	LOG(LogLevel::Finer) << "WorkingSm::GetTrack() : finding track name [" << smInfo->metadata->AudioFile << "].";
 	//ifstream* stream = new ifstream(getPathForFile(smInfo->metadata->AudioFile));
 	char* temp = (char*)getPathForFile(smInfo->metadata->AudioFile).c_str();
 
-	return new BassTrack(temp);
+	return track = new BassTrack(temp);
 }
 
 Sm<Event>* WorkingSm::createSm()
