@@ -26,6 +26,8 @@ namespace Audio {
 
 		virtual int Update();
 
+		virtual int _DebugPrintComponents(string spaces);
+
 	protected:
 
 		/// <summary>

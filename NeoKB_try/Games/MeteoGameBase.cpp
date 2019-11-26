@@ -60,6 +60,16 @@ BindablePointer<WorkingSm*>* MeteoGameBase::GetWorkingSm()
 	return &workingSm;
 }
 
+int MeteoGameBase::update()
+{
+	LOG(LogLevel::Finest) << "MeteoGameBase::update() : print audio components." << [](AudioManager* a) {
+		a->_DebugPrintComponents("|");
+		return 0;
+	}(audioManager);
+
+	return 0;
+}
+
 int MeteoGameBase::onWorkingSmValueChanged(void * wSm)
 {
 	WorkingSm* w = static_cast<WorkingSm*>(wSm);

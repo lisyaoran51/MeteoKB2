@@ -11,6 +11,7 @@
 
 using namespace std;
 using namespace Util;
+using namespace std::literals::string_literals;
 
 
 namespace Framework {
@@ -71,6 +72,15 @@ namespace Audio {
 				item->Update();
 			}
 
+			return 0;
+		}
+
+		int _DebugPrintComponents(string spaces) {
+
+			AudioComponent::_DebugPrintComponents(spaces);
+			for (int i = 0; i < items.size(); i++) {
+				items[i]->_DebugPrintComponents(spaces + "--"s);
+			}
 			return 0;
 		}
 

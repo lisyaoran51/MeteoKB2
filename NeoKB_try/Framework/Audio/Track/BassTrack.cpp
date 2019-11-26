@@ -24,7 +24,7 @@ BassTrack::BassTrack(char * fileName)
 int BassTrack::Start()
 {
 	Track::Start();
-	LOG(LogLevel::Info) << "BassTrack::Start() : start track. panding actions = [" << pendingActions.GetSize() << "].";
+	LOG(LogLevel::Info) << "BassTrack::Start() : start track[" << this << "]. panding actions = [" << pendingActions.GetSize() << "].";
 	pendingActions.Add(this, [=]() {
 
 		if (BASS_ChannelPlay(stream, false)) {

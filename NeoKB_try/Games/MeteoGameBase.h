@@ -36,6 +36,8 @@ namespace Games {
 
 		BindablePointer<WorkingSm*>* GetWorkingSm();
 
+		
+
 	protected:
 
 		RulesetStore* rulesetStore;
@@ -49,6 +51,8 @@ namespace Games {
 		BindablePointer<WorkingSm*> workingSm;
 
 		MeteoConfigManager* localConfig;
+
+		virtual int update();
 
 	private:
 

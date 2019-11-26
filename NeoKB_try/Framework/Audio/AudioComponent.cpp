@@ -14,6 +14,12 @@ int AudioComponent::Update()
 	return 0;
 }
 
+int AudioComponent::_DebugPrintComponents(string spaces)
+{
+	LOG(LogLevel::Debug) << spaces << "[" << this << "]";
+	return 0;
+}
+
 int AudioComponent::Dispose()
 {
 	return 0;
