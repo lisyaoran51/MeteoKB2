@@ -18,7 +18,10 @@ int MeteoGameBase::load()
 	// /*不知道為什麼lambda式就是不會過
 	workingSm.AddOnValueChanged(this, [=](void* wSm){
 		
+		LOG(LogLevel::Debug) << "MeteoGameBase::load() : getting new sm's track";
+
 		WorkingSm* w = static_cast<WorkingSm*>(wSm);
+		LOG(LogLevel::Debug) << "MeteoGameBase::load() : track manager is [" << audioManager->GetTrackManager() << "].";
 		audioManager->GetTrackManager()->AddItem(w->GetTrack());
 
 		return 0;

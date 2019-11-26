@@ -51,9 +51,9 @@ namespace Audio {
 		/// <summary>
 		/// 在加入這些manager時，會再add item，把manager擺到list裡
 		/// </summary>
-		SampleManager* sampleManager;
+		SampleManager* sampleManager = nullptr;
 
-		TrackManager* trackManager;
+		TrackManager* trackManager = nullptr;
 
 		/// <summary>
 		/// 獨力跑的thread，在audio manager的建構子裡new
