@@ -11,10 +11,12 @@ BassTrack::BassTrack(char * fileName)
 {
 	pendingActions.Add(this, [=]() {
 
+
 		stream = BASS_StreamCreateFile(false, fileName, 0, 0, 0);
 
 		//Length = Bass.ChannelBytes2Seconds(activeStream, Bass.ChannelGetLength(activeStream)) * 1000;
 		length = BASS_ChannelBytes2Seconds(stream, BASS_ChannelGetLength(stream, BASS_POS_BYTE));
+		LOG(LogLevel::Info) << "BassTrack::BassTrack() : create stream [" << stream << "]. length = [" << length << "].";
 
 		return 0;
 	}, "Lambda_BassTrack::CreateStream");
