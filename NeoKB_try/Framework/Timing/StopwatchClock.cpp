@@ -122,6 +122,8 @@ long long StopwatchClock::getElapsedMicroseconds()
 
 double StopwatchClock::getElapsedSeconds()
 {
-	return double(getElapsedMicroseconds() / 1000000) + double(getElapsedMicroseconds() % 1000000) * 0.000001;
+	long long eMicroSeconds = getElapsedMicroseconds();
+	LOG(LogLevel::Finest) << "StopwatchClock::getElapsedSeconds() : elapsed seconds = [" << double(eMicroSeconds / 1000000) + double(eMicroSeconds % 1000000) * 0.000001 << "]";
+	return double(eMicroSeconds / 1000000) + double(eMicroSeconds % 1000000) * 0.000001;
 }
 
