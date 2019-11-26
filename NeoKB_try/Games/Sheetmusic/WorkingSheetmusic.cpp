@@ -1,6 +1,7 @@
 #include "WorkingSheetmusic.h"
 
 #include "../../Framework/Audio/Track/BassTrack.h"
+#include <cstdio>
 
 
 using namespace Games::Sheetmusics;
@@ -65,7 +66,7 @@ Track * WorkingSm::GetTrack()
 	//ifstream* stream = new ifstream(getPathForFile(smInfo->metadata->AudioFile));
 	string path = getPathForFile(smInfo->metadata->AudioFile);
 	char * temp = new char[path.length()];
-	std::strcpy(temp, path.c_str());
+	strcpy(temp, path.c_str());
 	LOG(LogLevel::Finer) << "WorkingSm::GetTrack() : get file path = [" << temp << "].";
 	track = new BassTrack(temp);
 	return track;
