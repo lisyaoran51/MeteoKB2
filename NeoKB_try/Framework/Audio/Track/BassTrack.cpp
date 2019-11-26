@@ -16,7 +16,7 @@ BassTrack::BassTrack(char * fileName)
 
 		//Length = Bass.ChannelBytes2Seconds(activeStream, Bass.ChannelGetLength(activeStream)) * 1000;
 		length = BASS_ChannelBytes2Seconds(stream, BASS_ChannelGetLength(stream, BASS_POS_BYTE));
-		LOG(LogLevel::Info) << "BassTrack::BassTrack() : create stream [" << (stream != 0 ? 1 : 0) << "] in path [" << fileName << "]. length = [" << length << "].";
+		LOG(LogLevel::Info) << "BassTrack::BassTrack() : create stream [" << (stream != 0 ? 0 : BASS_ErrorGetCode()) << "] in path [" << fileName << "]. length = [" << length << "].";
 
 		return 0;
 	}, "Lambda_BassTrack::CreateStream");
