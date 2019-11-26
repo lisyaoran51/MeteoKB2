@@ -57,7 +57,7 @@ int Player::load(FrameworkConfigManager* f)
 
 	GetScheduler()->AddTask([=]() {
 
-		LOG(LogLevel::Info) << "Player::load : scheduled task to change source to track.";
+		LOG(LogLevel::Info) << "Player::load : scheduled task to change source to track [" << adjustableClock << "].";
 		adjustableClock->Reset();
 
 		// TODO: 把mod加入adjustableClock裡
