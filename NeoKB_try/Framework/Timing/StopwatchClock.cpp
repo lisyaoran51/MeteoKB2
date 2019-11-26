@@ -122,6 +122,6 @@ long long StopwatchClock::getElapsedMicroseconds()
 
 double StopwatchClock::getElapsedSeconds()
 {
-	return double(getElapsedMicroseconds() / 1000000);
+	return double(getElapsedMicroseconds() / 1000000) + double(getElapsedMicroseconds() % 1000000) * 0.000001;
 }
 
