@@ -1,7 +1,7 @@
 #include "WorkingSheetmusic.h"
 
 #include "../../Framework/Audio/Track/BassTrack.h"
-#include <cstdio>
+#include <string.h>
 
 
 using namespace Games::Sheetmusics;
