@@ -63,8 +63,10 @@ Track * WorkingSm::GetTrack()
 
 	LOG(LogLevel::Finer) << "WorkingSm::GetTrack() : finding track name [" << smInfo->metadata->AudioFile << "].";
 	//ifstream* stream = new ifstream(getPathForFile(smInfo->metadata->AudioFile));
-	char* temp = (char*)getPathForFile(smInfo->metadata->AudioFile).c_str();
-	LOG(LogLevel::Finer) << "WorkingSm::GetTrack() : get file path = [" << string(temp) << "].";
+	string path = getPathForFile(smInfo->metadata->AudioFile);
+	char * temp = new char[path.length()];
+	std::strcpy(temp, path.c_str());
+	LOG(LogLevel::Finer) << "WorkingSm::GetTrack() : get file path = [" << temp << "].";
 	track = new BassTrack(temp);
 	return track;
 }
