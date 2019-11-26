@@ -24,7 +24,7 @@ AudioManager::AudioManager(CompositeResourceStore<char*>* trackStore, CompositeR
 		throw runtime_error("AudioManager::AudioManager() :cannot initialize bass.");
 
 	audioThread = new GameThread(bind(&AudioManager::Update, this), "AudioThread");
-	audioThread->SetMaxUpdateHz(10);
+	audioThread->SetMaxUpdateHz(1);
 	audioThread->Start();
 }
 
