@@ -21,8 +21,9 @@ int MeteoGameBase::load()
 		LOG(LogLevel::Debug) << "MeteoGameBase::load() : getting new sm's track from audio manager [" << audioManager << "].";
 
 		WorkingSm* w = static_cast<WorkingSm*>(wSm);
-		LOG(LogLevel::Debug) << "MeteoGameBase::load() : track manager is [" << audioManager->GetTrackManager() << "].";
-		audioManager->GetTrackManager()->AddItem(w->GetTrack());
+		Track* t = w->GetTrack();
+		LOG(LogLevel::Debug) << "MeteoGameBase::load() : track manager is [" << audioManager->GetTrackManager() << "], track is [" << t << "].";
+		audioManager->GetTrackManager()->AddItem(t);
 
 		return 0;
 	}, "WorkingSm::OnValueChanged");
