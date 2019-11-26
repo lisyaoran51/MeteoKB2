@@ -8,6 +8,8 @@ using namespace Games::Sheetmusics;
 using namespace Games::Sheetmusics::Format;
 using namespace Framework::Audio::Tracks;
 using namespace std::literals::string_literals;
+using namespace std;
+
 
 
 
