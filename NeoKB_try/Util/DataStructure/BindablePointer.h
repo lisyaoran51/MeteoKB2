@@ -13,7 +13,7 @@ namespace Util {
 namespace DataStructure {
 
 	template<typename T>
-	class BindablePointer : protected Bindable<void*> {
+	class BindablePointer : public Bindable<void*> {
 
 	public:
 
