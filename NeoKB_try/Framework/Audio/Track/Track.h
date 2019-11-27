@@ -50,7 +50,7 @@ namespace Tracks {
 		bool isRunning = false;
 
 		double currentTime;
-		double rate;
+		double rate = 1.0;
 
 
 
