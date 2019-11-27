@@ -108,7 +108,6 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 
 Map * EventProcessorMaster::GetGraph()
 {
-	LOG(LogLevel::Finest) << "EventProcessorMaster::GetGraph() : get graph from a processor.";
 
 	Map* graph = Drawable::GetGraph();
 
@@ -120,6 +119,9 @@ Map * EventProcessorMaster::GetGraph()
 
 	eventProcessorPeriods->GetItemsContainPeriods(make_pair<float, float>(currentTime - visibleTimeRange, currentTime + visibleTimeRange), &eventProcessors);
 	
+
+	LOG(LogLevel::Finest) << "EventProcessorMaster::GetGraph() : get graph from [" << eventProcessors.size() << "] processors in (" << currentTime - visibleTimeRange  << "," << currentTime + visibleTimeRange << ") seconds.";
+
 	for (int i = 0; i < eventProcessors.size(); i++) {
 		EffectMapperInterface* effectMapper = dynamic_cast<EffectMapperInterface*>(eventProcessors[i]);
 		if (effectMapper) {
