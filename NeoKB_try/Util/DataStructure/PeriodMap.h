@@ -126,6 +126,8 @@ namespace DataStructure {
 			int startSection = floor((timeOfPeriod.first - insertionPoint) / periodLength);
 			int endSection = floor((timeOfPeriod.second - insertionPoint) / periodLength);
 
+			LOG(LogLevel::Finest) << "PeriodMap::GetItemsContainPeriods() : period from [" << startSection << "] to [" << endSection << " section.";
+
 			for (int i = startSection; i <= endSection; i++) {
 
 				typename multimap<pair<float, float>, T>::iterator it = periods.find(make_pair<float, float>(insertionPoint + periodLength *  (float)i, insertionPoint + periodLength *  (float)(i + 1)));
