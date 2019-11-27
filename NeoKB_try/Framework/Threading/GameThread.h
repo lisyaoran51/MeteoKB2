@@ -19,6 +19,10 @@ namespace Threading {
 
 	class GameThread {
 
+		int statisticFrameRate = 0;
+
+		int currentSecond = 0;
+
 	public:
 
 		GameThread(function<int()> oNewFrame, string tName);
