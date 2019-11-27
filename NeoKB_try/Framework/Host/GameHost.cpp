@@ -80,7 +80,7 @@ int GameHost::Run(Game* game, Instrument* instrument)
 	//inputThread->Start();
 
 	drawInitialize();
-	//drawThread->Start();
+	drawThread->Start();
 
 	updateInitialize();
 	updateThread->Start();
