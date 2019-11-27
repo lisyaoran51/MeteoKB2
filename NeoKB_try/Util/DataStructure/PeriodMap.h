@@ -152,7 +152,7 @@ namespace DataStructure {
 		}
 
 		multimap<pair<float, float>, T>* GetPeriods() {
-			return periods;
+			return &periods;
 		}
 
 	};
