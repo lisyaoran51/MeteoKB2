@@ -70,8 +70,9 @@ int DecoupledInterpolatingFramedClock::ProcessFrame()
 {
 	LOG(LogLevel::Finest) << "DecoupledInterpolatingFramedClock::ProcessFrame() : " << this << ", rate = " << InterpolatingFramedClock::GetRate();
 	InterpolatingFramedClock::ProcessFrame();
-	LOG(LogLevel::Finest) << "DecoupledInterpolatingFramedClock::ProcessFrame() : process decoupled clock" << ", rate = " << InterpolatingFramedClock::GetRate();
+	LOG(LogLevel::Finest) << "DecoupledInterpolatingFramedClock::ProcessFrame() : set decoupled clock rate = " << InterpolatingFramedClock::GetRate();
 	decoupledStopwatchClock->SetRate(InterpolatingFramedClock::GetRate());
+	LOG(LogLevel::Finest) << "DecoupledInterpolatingFramedClock::ProcessFrame() : process decoupled clock";
 	decoupledClock->ProcessFrame();
 
 

@@ -158,6 +158,8 @@ int GameHost::drawFrame()
 	vector<Drawable*> drawables;
 	iterateSearchDrawable(root, &drawables);
 
+	LOG(LogLevel::Finest) << "GameHost::drawFrame() : drawables size = [" << drawables.size() << "].";
+
 	// TODO: 這邊應該要把蒐到的drawable跟具Depth來排序，但是現在懶得寫
 
 	for (int i = 0; i < drawables.size(); i++) {
