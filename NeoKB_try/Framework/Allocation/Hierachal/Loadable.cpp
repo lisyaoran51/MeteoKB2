@@ -33,23 +33,30 @@ Loadable::Loadable(): RegisterType("Loadable"), Cachable(), noParentHandler(*thi
 int Loadable::Async()
 {
 	LOG(LogLevel::Fine) << "int Loadable::Async() : A [" << GetTypeName() << "] object is asyncing.";
-	return loadStateHandler -> Async();
+	
+
+	return loadStateHandler-> Async();
 }
 
 int Loadable::LoadAsync(DependencyContainer * dContainer)
 {
 	SetDependencies(dContainer);
+
+
 	return loadStateHandler->Async();
 }
 
 LoadState Loadable::GetLoadState()
 {
+
 	return loadStateHandler->GetLoadState();
 }
 
 int Loadable::SetParent(HasParent * p)
 {
+	
 	loadStateHandler->SetParent(p);
+
 	return 0;
 }
 

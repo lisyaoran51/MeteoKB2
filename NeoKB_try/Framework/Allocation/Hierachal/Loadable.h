@@ -7,6 +7,7 @@
 #include<string>
 #include<functional>
 #include "HasParent.h"
+#include <mutex>
 
 using namespace std;
 
@@ -53,6 +54,8 @@ namespace Hierachal{
 		/// 真正進行load的地方
 		/// </summary>
 		int load();
+
+		mutable mutex stateHandlerMutex;
 
 	public:
 

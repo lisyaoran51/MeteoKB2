@@ -43,9 +43,12 @@ int Loadable::NoParentHandler::Async()
 		LOG(LogLevel::Error) << "int Loadable::NoParentHandler::Async() : There's no dependency in this object. Unable to async";
 		throw runtime_error("int Loadable::NoParentHandler::Async() : There's no dependency in this object. Unable to async.");
 	}
-
+	unique_lock<mutex> uLock(loadable.stateHandlerMutex);
 	loadable.loadStateHandler = &loadable.loadingHandler;
+	uLock.unlock();
 	loadable.load();
+
+	uLock.lock();
 	loadable.loadStateHandler = &loadable.readyHandler;
 	return 0;
 }
@@ -53,6 +56,7 @@ int Loadable::NoParentHandler::Async()
 int Loadable::NoParentHandler::SetParent(HasParent * p)
 {
 	loadable.setParent(p);
+	unique_lock<mutex> uLock(loadable.stateHandlerMutex);
 	loadable.loadStateHandler = &loadable.notLoadedHandler;
 	return 0;
 }
@@ -75,8 +79,11 @@ LoadState Loadable::NotLoadedHandler::GetLoadState()
 
 int Loadable::NotLoadedHandler::HandleLoad()
 {
+	unique_lock<mutex> uLock(loadable.stateHandlerMutex);
 	loadable.loadStateHandler = &loadable.loadingHandler;
+	uLock.unlock();
 	loadable.load();
+	uLock.lock();
 	loadable.loadStateHandler = &loadable.readyHandler;
 	return 0;
 }
@@ -84,8 +91,11 @@ int Loadable::NotLoadedHandler::HandleLoad()
 int Loadable::NotLoadedHandler::Async()
 {
 	LOG(LogLevel::Finer) << "int Loadable::NotLoadedHandler::Async() : [" << loadable.GetTypeName() << "] is asyncing.";
+	unique_lock<mutex> uLock(loadable.stateHandlerMutex);
 	loadable.loadStateHandler = &loadable.loadingHandler;
+	uLock.unlock();
 	loadable.load();
+	uLock.lock();
 	loadable.loadStateHandler = &loadable.readyHandler;
 	return 0;
 }
@@ -169,7 +179,10 @@ int Loadable::ReadyHandler::HandleLoadComplete()
 	LOG(LogLevel::Debug) << "Loadable::ReadyHandler::HandleLoadComplete() : [" << loadable.GetTypeName() << "] load on clomplete.";
 
 	loadable.LoadOnComplete();
+	
+	LOG(LogLevel::Fine) << "Loadable::ReadyHandler::HandleLoadComplete() : changing to loaded handler.";
 
+	unique_lock<mutex> uLock(loadable.stateHandlerMutex);
 	loadable.loadStateHandler = &loadable.loadedHandler;
 	
 	return 0;
