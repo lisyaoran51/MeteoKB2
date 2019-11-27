@@ -53,7 +53,7 @@ namespace Tracks {
 		double currentTime;
 		double rate = 1.0;
 
-		mutex currentTimeMutex;
+		mutable mutex currentTimeMutex;
 
 
 		/// <summary>
