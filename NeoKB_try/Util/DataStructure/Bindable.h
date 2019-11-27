@@ -110,7 +110,6 @@ namespace DataStructure {
 		}
 
 		vector<Bindable<T>*>* GetBindings() {
-			unique_lock<mutex> uLock(bindingMutex);
 			return bindings;
 		}
 
@@ -119,12 +118,13 @@ namespace DataStructure {
 		/// </summary>
 		int AddBindings(Bindable<T>* other) {
 
-			unique_lock<mutex> uLock(bindingMutex);
+			
 			if (other->GetBindings() == nullptr) {
 
 				LOG(LogLevel::Debug) << "Bindable::AddBindings() : other [" << other << "]'s binding is null. this = [" << this << "].";
 
 				if (bindings == nullptr) {
+					unique_lock<mutex> uLock(bindingMutex);
 					LOG(LogLevel::Debug) << "Bindable::AddBindings() : this [" << this << "] binding is null, so create bindings.";
 					bindings = new vector<Bindable<T>*>();
 					bindings->push_back(this);
@@ -135,6 +135,7 @@ namespace DataStructure {
 			else {
 
 				if (bindings == nullptr) {
+					unique_lock<mutex> uLock(bindingMutex);
 					LOG(LogLevel::Debug) << "Bindable::AddBindings() : other [" << other << "]'s binding is [" << other->GetBindings() << "]. this = [" << this << "].";
 					bindings = other->GetBindings();
 					bindings->push_back(this);
