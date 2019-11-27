@@ -125,7 +125,14 @@ Map * EventProcessorMaster::GetGraph()
 	eventProcessorPeriods->GetItemsContainPeriods(make_pair<float, float>(currentTime - visibleTimeRange, currentTime + visibleTimeRange), &eventProcessors);
 	
 
-	LOG(LogLevel::Finest) << "EventProcessorMaster::GetGraph() : get graph from [" << eventProcessors.size() << "] processors in (" << currentTime - visibleTimeRange  << "," << currentTime + visibleTimeRange << ") seconds.";
+	LOG(LogLevel::Finest) << "EventProcessorMaster::GetGraph() : get graph from [" << eventProcessors.size() << "] processors in (" << currentTime - visibleTimeRange  << "," << currentTime + visibleTimeRange << ") seconds."
+		<< [](vector<EventProcessor<Event>*>& eProcessors) {
+
+		for (int i = 0; i < eProcessors.size(); i++)
+			LOG(LogLevel::Finest) << "---processor " << i << " time = [" << eProcessors[i]->GetStartTime() << "].";
+		return 0;
+	
+	}(eventProcessors);
 
 	for (int i = 0; i < eventProcessors.size(); i++) {
 		EffectMapperInterface* effectMapper = dynamic_cast<EffectMapperInterface*>(eventProcessors[i]);
