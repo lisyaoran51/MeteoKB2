@@ -12,7 +12,7 @@ namespace Allocation {
 namespace Hierachal{
 
 
-	mutex ChildMutex;
+	extern mutex ChildMutex;
 
 	/// <summary>
 	/// able to add to a parent object
