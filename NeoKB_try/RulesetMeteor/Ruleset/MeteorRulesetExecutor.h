@@ -62,6 +62,8 @@ namespace Rulesets {
 
 		string GetProcessorType(string eventType);
 
+		virtual int playfieldLoad();
+
 	};
 
 }

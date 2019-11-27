@@ -156,3 +156,25 @@ string MeteorRulesetExecutor::GetProcessorType(string eventType)
 	return string("");
 }
 
+int MeteorRulesetExecutor::playfieldLoad()
+{
+	RulesetExecutor<Event>::playfieldLoad();
+
+	PeriodMap<EventProcessor<Event>*>* processors = playfield->GetEventProcessorMaster()->GetEventProcessorPeriods();
+
+	LOG(LogLevel::Debug) << "MeteorRulesetExecutor::playfieldLoad() : " << [](PeriodMap<EventProcessor<Event>*>* ps) {
+
+		multimap<pair<float, float>, EventProcessor<Event>*>* periods = ps->GetPeriods();
+		typename multimap<pair<float, float>, EventProcessor<Event>*>::iterator it;
+
+		for (it = periods->begin(); it != periods->end(); it++) {
+			LOG(LogLevel::Debug) << "---timespan [" << it->first.first << "," << it->first.second << "] -> processor [" << it->second->GetStartTime() << "].";
+		}
+
+
+		return 0;
+	}(processors);
+
+	return 0;
+}
+

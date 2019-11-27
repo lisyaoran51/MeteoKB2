@@ -132,3 +132,8 @@ int Playfield::GetHeight()
 {
 	return height;
 }
+
+EventProcessorMaster * Playfield::GetEventProcessorMaster()
+{
+	return eventProcessorMaster;
+}

@@ -53,6 +53,8 @@ namespace Play {
 
 		int GetHeight();
 
+		EventProcessorMaster* GetEventProcessorMaster();
+
 	protected:
 
 		///<summary>

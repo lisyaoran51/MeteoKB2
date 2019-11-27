@@ -93,6 +93,11 @@ int EventProcessorMaster::Clean()
 	return 0;
 }
 
+PeriodMap<EventProcessor<Event>*>* EventProcessorMaster::GetEventProcessorPeriods()
+{
+	return eventProcessorPeriods;;
+}
+
 
 int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 {

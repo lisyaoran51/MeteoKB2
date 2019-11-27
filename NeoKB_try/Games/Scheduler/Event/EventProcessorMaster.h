@@ -83,7 +83,7 @@ namespace Events {
 		/// </summary>
 		int Clean();
 
-		
+		PeriodMap<EventProcessor<Event>*>* GetEventProcessorPeriods();
 
 	protected:
 

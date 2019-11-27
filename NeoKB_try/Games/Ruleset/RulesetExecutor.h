@@ -59,25 +59,7 @@ namespace Rulesets {
 
 		PassThroughInputManager* rulesetInputManager;
 
-		/// <summary>
-		/// jobs:
-		/// 1. find the objects in sm?
-		/// 2. add them to playfield?
-		/// </summary>
-		int playfieldLoad() {
-
-			LOG(LogLevel::Fine) << "RulesetExecutor::playfieldLoad : loading [" << sm->GetEvents()->size() << "] events into playfield ... ";
-
-			// 把Event轉成Event processor擺進去playfield裡
-			for (int i = 0; i < sm->GetEvents()->size(); i++) {
-
-				EventProcessor<Event>* ep = getEventProcessor(sm->GetEvents()->at(i));
-				
-				playfield->Add(ep);
-			}
-
-			return 0;
-		}
+		
 
 		/// <summary>
 		/// jobs:
@@ -213,6 +195,29 @@ namespace Rulesets {
 		/// 2. 如果processor是effect mapper，就把map algo加進去
 		/// </summary>
 		virtual EventProcessor<T>* getEventProcessor(T* e) = 0;
+
+		/// <summary>
+		/// jobs:
+		/// 1. find the objects in sm?
+		/// 2. add them to playfield?
+		/// </summary>
+		virtual int playfieldLoad() {
+
+			LOG(LogLevel::Fine) << "RulesetExecutor::playfieldLoad : loading [" << sm->GetEvents()->size() << "] events into playfield ... ";
+
+			// 把Event轉成Event processor擺進去playfield裡
+			for (int i = 0; i < sm->GetEvents()->size(); i++) {
+
+				EventProcessor<Event>* ep = getEventProcessor(sm->GetEvents()->at(i));
+
+				playfield->Add(ep);
+			}
+
+
+
+			return 0;
+		}
+
 	};
 
 
