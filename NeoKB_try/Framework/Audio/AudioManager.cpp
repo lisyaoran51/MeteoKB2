@@ -25,7 +25,7 @@ AudioManager::AudioManager(CompositeResourceStore<char*>* trackStore, CompositeR
 
 	audioThread = new GameThread(bind(&AudioManager::Update, this), "AudioThread");
 	audioThread->SetMaxUpdateHz(1);
-	//audioThread->Start();
+	audioThread->Start();
 }
 
 SampleManager * AudioManager::GetSampleManager(CompositeResourceStore<char*>* sampleStore)

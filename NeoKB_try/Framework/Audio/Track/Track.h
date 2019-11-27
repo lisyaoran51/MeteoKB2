@@ -8,6 +8,7 @@
 #include <functional>
 #include "../AdjustableAudioComponent.h"
 #include "../../Timing/AdjustableClock.h"
+#include <mutex>
 
 
 using namespace std;
@@ -52,7 +53,7 @@ namespace Tracks {
 		double currentTime;
 		double rate = 1.0;
 
-
+		mutex currentTimeMutex;
 
 
 		/// <summary>

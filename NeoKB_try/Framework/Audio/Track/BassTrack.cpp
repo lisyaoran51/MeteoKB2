@@ -102,7 +102,10 @@ int BassTrack::Update()
 	double currentTimeLocal = BASS_ChannelBytes2Seconds(stream, BASS_ChannelGetPosition(stream, BASS_POS_BYTE));
 
 	// TODO: 要讓current time不被中斷thread safe
+
+	unique_lock<mutex> uLock(currentTimeMutex);
 	currentTime = currentTimeLocal;
+	uLock.unlock();
 
 	LOG(LogLevel::Finest) << "BassTrack::Update() : get music time = [" << currentTimeLocal <<"].";
 

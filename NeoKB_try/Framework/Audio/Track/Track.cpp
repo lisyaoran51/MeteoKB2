@@ -12,6 +12,7 @@ Track::Track()
 
 double Track::GetCurrentTime()
 {
+	unique_lock<mutex> uLock(currentTimeMutex);
 	return currentTime;
 }
 
