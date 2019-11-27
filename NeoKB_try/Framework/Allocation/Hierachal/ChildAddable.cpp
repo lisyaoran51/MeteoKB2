@@ -24,8 +24,10 @@ int ChildAddable::AddChild(ChildAddable * child)
 		if (it != childs.end()) {
 			// TODO: throw error
 		}
-		else
+		else {
+			unique_lock<mutex> uLock(ChildMutex);
 			childs.push_back(child);
+		}
 
 		isAlive = true;
 
@@ -39,6 +41,7 @@ int ChildAddable::AddChild(ChildAddable * child)
 
 int ChildAddable::DeleteChild(ChildAddable * child)
 {
+	unique_lock<mutex> uLock(ChildMutex);
 	vector<ChildAddable*>::iterator it = find(childs.begin(), childs.end(), child);
 
 	if (it != childs.end()) {

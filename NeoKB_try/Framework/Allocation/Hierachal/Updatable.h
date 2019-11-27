@@ -21,6 +21,8 @@ namespace Hierachal {
 		FrameBasedClock* clock;
 		FrameBasedClock* customClock = nullptr;
 
+		vector<ChildAddable*> cacheChilds;
+
 	public:
 
 		Updatable();

@@ -28,10 +28,13 @@ double StopwatchClock::GetCurrentTime()
 
 int StopwatchClock::SetRate(double r)
 {
+	if (isStarted) {
+		rateChangeAccumulatedTime += getElapsedSeconds() * rate;
+		LOG(LogLevel::Depricated) << "StopwatchClock::SetRate() : accumulated time = [" << rateChangeAccumulatedTime << "], acccumulated in this setting = [" << getElapsedSeconds() * rate << "], rate = [" << rate << "], input rate = [" << r << "].";
 
-	rateChangeAccumulatedTime += getElapsedSeconds() * rate;
-	LOG(LogLevel::Finest) << "StopwatchClock::SetRate() : accumulated time = [" << rateChangeAccumulatedTime << "], acccumulated in this setting = [" << getElapsedSeconds() * rate << "], rate = [" << rate << "], input rate = [" << r << "].";
-	systemStartTime = systemCurrentTime;
+		unique_lock<mutex> uLock(currentTimeMutex);
+		systemStartTime = systemCurrentTime;
+	}
 	rate = r;
 	return 0;
 }
@@ -77,7 +80,7 @@ int StopwatchClock::Start()
 {
 	
 	if (!isStarted || !isRunning) {
-		LOG(LogLevel::Finest) << "StopwatchClock::Start() : start the stopwatch, started = [" << isStarted << "], running = [" << isRunning << "].";
+		LOG(LogLevel::Debug) << "StopwatchClock::Start() : start the stopwatch, started = [" << isStarted << "], running = [" << isRunning << "].";
 		if (!isStarted && isRunning)
 			return -1; // TODO: throw error因為是異常狀況
 		systemStartTime = system_clock::now();
@@ -113,10 +116,14 @@ int StopwatchClock::ResetSpeedAdjustments()
 
 long long StopwatchClock::getElapsedMicroseconds()
 {
-	if(isRunning)
+	if (isRunning) {
+		unique_lock<mutex> uLock(currentTimeMutex);
 		systemCurrentTime = system_clock::now();
+	}
 
 	LOG(LogLevel::Finest) << "StopwatchClock::getElapsedMicroseconds() : current elapsed time = [" << duration_cast<microseconds>(systemCurrentTime - systemStartTime).count() << "].";
+
+	unique_lock<mutex> uLock(currentTimeMutex);
 	return duration_cast<microseconds>(systemCurrentTime - systemStartTime).count();
 }
 

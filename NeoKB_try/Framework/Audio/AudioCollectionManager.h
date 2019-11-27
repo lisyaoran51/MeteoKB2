@@ -24,6 +24,8 @@ namespace Audio {
 	template<class T>
 	class AudioCollectionManager : public AdjustableAudioComponent {
 
+		mutable mutex itemMutex;
+
 	public:
 
 		int AddItem(T* item) {
@@ -33,6 +35,8 @@ namespace Audio {
 		}
 
 		int AddItemToList(T* item) {
+
+			unique_lock<mutex> uLock(itemMutex);
 			items.push_back(item);
 			return 0;
 		}
@@ -54,18 +58,30 @@ namespace Audio {
 		/// 這個會把他下面的其他manager更新，然後audio manager會把這個update放到thread裡面跑
 		/// </summary>
 		virtual int Update() {
-			LOG(LogLevel::Finest) << "AudioCollectionManager::Update() : this = [" << this << "], item size = [" << items.size() << "].";
 
 			AudioComponent::Update();
 
-			for (int i = 0; i < items.size(); i++) {
+			unique_lock<mutex> uLock(itemMutex);
+			int itemsSize = items.size();
+			uLock.unlock();
+
+			LOG(LogLevel::Finest) << "AudioCollectionManager::Update() : this = [" << this << "], item size = [" << itemsSize << "].";
+
+			for (int i = 0; i < itemsSize; i++) {
+
+				uLock.lock();
 				T* item = dynamic_cast<T*>(items[i]);
+				uLock.unlock();
 
 				if (item == nullptr)
 					throw runtime_error("AudioCollectionManager<T>::update: this component's type is wrong.");
 
 				if (item->GetIsCompleted()) {
+
+					uLock.lock();
 					items.erase(items.begin() + i);
+					uLock.unlock();
+
 					i--;
 					deleteItem(item);
 					continue;
@@ -80,6 +96,7 @@ namespace Audio {
 		int _DebugPrintComponents(string spaces) {
 
 			AudioComponent::_DebugPrintComponents(spaces);
+			unique_lock<mutex> uLock(itemMutex);
 			for (int i = 0; i < items.size(); i++) {
 				items[i]->_DebugPrintComponents(spaces + "--"s);
 			}

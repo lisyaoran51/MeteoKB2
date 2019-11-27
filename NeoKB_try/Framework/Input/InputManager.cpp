@@ -108,9 +108,14 @@ int InputManager::updateInputQueue(InputState * inputState)
 	if (focusTriggerable != nullptr)
 		triggerQueue.push_back(focusTriggerable);
 	else {
+		vector<ChildAddable*> childs;
 
-		for (int i = 0; i < GetChilds()->size(); i++) {
-			Triggerable* temp = GetChilds()->at(i)->Cast<Triggerable>();
+		unique_lock<mutex> uLock(ChildMutex);
+		childs.assign(GetChilds()->begin(), GetChilds()->end());
+		uLock.unlock();
+
+		for (int i = 0; i < childs.size(); i++) {
+			Triggerable* temp = childs[i]->Cast<Triggerable>();
 			if (temp->GetIsInputReceivable())
 				triggerQueue.push_back(temp);
 			iterateUpdateInputQueue(temp, &triggerQueue);
@@ -299,9 +304,15 @@ int InputManager::iterateUpdateInputQueue(Triggerable * temp, vector<Triggerable
 {
 	int size = tQueue->size();
 
-	for (int i = 0; i < temp->GetChilds()->size(); i++) {
+	vector<ChildAddable*> childs;
 
-		Triggerable* tempChild = GetChilds()->at(i)->Cast<Triggerable>();
+	unique_lock<mutex> uLock(ChildMutex);
+	childs.assign(temp->GetChilds()->begin(), temp->GetChilds()->end());
+	uLock.unlock();
+
+	for (int i = 0; i < childs.size(); i++) {
+
+		Triggerable* tempChild = childs[i]->Cast<Triggerable>();
 
 		if (tempChild->GetIsInputable())
 			iterateUpdateInputQueue(tempChild, tQueue);

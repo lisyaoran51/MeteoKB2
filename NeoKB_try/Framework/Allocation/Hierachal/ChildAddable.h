@@ -3,12 +3,16 @@
 
 #include "Loadable.h"
 #include <vector>
+#include <mutex>
 
 using namespace std;
 
 namespace Framework {
 namespace Allocation {
 namespace Hierachal{
+
+
+	mutex ChildMutex;
 
 	/// <summary>
 	/// able to add to a parent object
@@ -23,6 +27,7 @@ namespace Hierachal{
 		vector<ChildAddable*> childs;
 
 		bool isAlive = false;
+
 
 	public:
 
@@ -39,6 +44,9 @@ namespace Hierachal{
 
 		int RegisterOnAdd(MTO_FUNC_POINTER func);
 
+		/// <summary>
+		/// 使用時記得要用lock child mutex
+		/// </summary>
 		vector<ChildAddable*>* GetChilds();
 
 		bool GetIsAlive();

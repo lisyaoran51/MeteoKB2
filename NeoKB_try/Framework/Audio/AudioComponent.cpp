@@ -11,6 +11,7 @@ bool AudioComponent::GetIsCompleted()
 int AudioComponent::Update()
 {
 	LOG(LogLevel::Depricated) << "AudioComponent::Update : this = [" << this << "] pending actions size = [" << pendingActions.GetSize() << "]";
+
 	pendingActions.TriggerThenClear();
 	return 0;
 }

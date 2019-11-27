@@ -21,6 +21,8 @@ namespace DataStructure {
 	template<typename T>
 	class Bindable {
 
+		mutable mutex bindingMutex;
+
 	public:
 
 		Bindable() {
@@ -108,6 +110,7 @@ namespace DataStructure {
 		}
 
 		vector<Bindable<T>*>* GetBindings() {
+			unique_lock<mutex> uLock(bindingMutex);
 			return bindings;
 		}
 
@@ -115,6 +118,8 @@ namespace DataStructure {
 		/// 只能夠有bind和媒bind的相加，或是兩個都沒bind過的相加
 		/// </summary>
 		int AddBindings(Bindable<T>* other) {
+
+			unique_lock<mutex> uLock(bindingMutex);
 			if (other->GetBindings() == nullptr) {
 
 				LOG(LogLevel::Debug) << "Bindable::AddBindings() : other [" << other << "]'s binding is null. this = [" << this << "].";
@@ -171,6 +176,7 @@ namespace DataStructure {
 				return 0;
 			LOG(LogLevel::Finer) << "Bindable::triggerValueChange() : start triggering [" << bindings->size() << "] bindings.";
 
+			unique_lock<mutex> uLock(bindingMutex);
 			for (int i = 0; i < bindings->size(); i++) {
 				LOG(LogLevel::Finer) << "Bindable::triggerValueChange() : trigger [" << bindings->at(i) << "] binding.";
 				bindings->at(i)->SetValueWithoutTrigger(value);
@@ -182,6 +188,7 @@ namespace DataStructure {
 			if (bindings = nullptr)
 				return 0;
 
+			unique_lock<mutex> uLock(bindingMutex);
 			for (int i = 0; i < bindings->size(); i++) {
 				bindings->at(i)->SetDisabledWithoutTrigger(disabled);
 			}

@@ -38,6 +38,7 @@ int Triggerable::UnmaskTrigger()
 
 int Triggerable::SetAllChildsIsMaskedForTrigger()
 {
+	unique_lock<mutex> uLock(ChildMutex);
 	for (int i = 0; i < GetChilds()->size(); i++) {
 		dynamic_cast<Triggerable*>(GetChilds()->at(i))->MaskTrigger();
 		dynamic_cast<Triggerable*>(GetChilds()->at(i))->SetAllChildsIsMaskedForTrigger();
@@ -48,6 +49,7 @@ int Triggerable::SetAllChildsIsMaskedForTrigger()
 
 int Triggerable::RecoverAllChildsIsMaskedForTrigger()
 {
+	unique_lock<mutex> uLock(ChildMutex);
 	for (int i = 0; i < GetChilds()->size(); i++) {
 		dynamic_cast<Triggerable*>(GetChilds()->at(i))->UnmaskTrigger();
 		dynamic_cast<Triggerable*>(GetChilds()->at(i))->RecoverAllChildsIsMaskedForTrigger();

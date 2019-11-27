@@ -9,6 +9,7 @@
 #include <utility>
 #include <cstdint>
 #include "../Log.h"
+#include <mutex>
 
 
 using namespace std;
@@ -29,22 +30,26 @@ namespace DataStructure {
 
 		vector<function<_Fty(_Types...)>> callbacks;
 
+		mutable mutex callbackMutex;
+
+
 	public:
 
 		template<class _Type>
 		int Add(_Type* callableObject, function<_Fty(_Types...)> callback, string callbackName) {
 
-			LOG(LogLevel::Fine) << "ActionList::Add() : register callback into list.";
+			//LOG(LogLevel::Fine) << "ActionList::Add() : register callback into list.";
 
 			//callbackMap[make_pair((uintptr_t)callableObject, callbackName)] = callback;
 
 			pair<uintptr_t, string> key = make_pair((uintptr_t)callableObject, callbackName);
 
 			LOG(LogLevel::Finest) << "ActionList::Add() : key = " << key.first << ", name = " << key.second;
-			callbackKeys.clear();
-			LOG(LogLevel::Finest) << "ActionList::Add() : key list address:" << &callbackKeys;
-			LOG(LogLevel::Finest) << "ActionList::Add() : key list size:" << callbackKeys.size();
 
+			//LOG(LogLevel::Finest) << "ActionList::Add() : key list address:" << &callbackKeys;
+			//LOG(LogLevel::Finest) << "ActionList::Add() : key list size:" << callbackKeys.size();
+
+			unique_lock<mutex> uLock(callbackMutex);
 			callbackKeys.push_back(key);
 
 			callbacks.push_back(callback);
@@ -70,6 +75,7 @@ namespace DataStructure {
 			vector<pair<uintptr_t, string>>::iterator iterKey;
 			typename vector<function<_Fty(_Types...)>>::iterator iter;
 
+			unique_lock<mutex> uLock(callbackMutex);
 			for (iterKey = callbackKeys.begin(), iter = callbacks.begin();
 				iterKey != callbackKeys.end(), iter != callbacks.end();
 				++iterKey, ++iter) {
@@ -86,6 +92,7 @@ namespace DataStructure {
 		}
 
 		int Clear() {
+			unique_lock<mutex> uLock(callbackMutex);
 			callbackKeys.clear();
 			callbacks.clear();
 
@@ -98,6 +105,7 @@ namespace DataStructure {
 			//	(*(iter->second))(_Args...);
 			typename vector<function<_Fty(_Types...)>>::iterator iter;
 
+			unique_lock<mutex> uLock(callbackMutex);
 			for (iter = callbacks.begin(); iter != callbacks.end(); ++iter) 
 				(*iter)(_Args...);
 
@@ -117,6 +125,7 @@ namespace DataStructure {
 		}
 
 		int GetSize() {
+			unique_lock<mutex> uLock(callbackMutex);
 			return callbacks.size();
 		}
 

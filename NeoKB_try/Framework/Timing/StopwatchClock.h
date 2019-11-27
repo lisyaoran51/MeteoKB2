@@ -6,10 +6,12 @@
 #include "FramedClock.h"
 #include "AdjustableClock.h"
 #include <chrono>
+#include <mutex>
 
 
 
 using namespace std::chrono;
+using namespace std;
 
 
 namespace Framework {
@@ -19,6 +21,8 @@ namespace Timing {
 	/// 裡面有一個碼表當做source，可以開關
 	/// </summary>
 	class StopwatchClock : virtual public AdjustableClock {
+
+		mutable mutex currentTimeMutex;
 
 	public:
 

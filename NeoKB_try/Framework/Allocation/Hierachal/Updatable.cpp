@@ -53,8 +53,13 @@ bool Updatable::UpdateSubTree()
 	
 	update();
 
-	vector<ChildAddable*>* childs = GetChilds();
-	for (vector<ChildAddable*>::iterator iter = childs->begin(); iter != childs->end(); iter++) {
+	cacheChilds.clear();
+	unique_lock<mutex> uLock(ChildMutex);
+	cacheChilds.assign(GetChilds()->begin(), GetChilds()->end());
+	uLock.unlock();
+
+
+	for (vector<ChildAddable*>::iterator iter = cacheChilds.begin(); iter != cacheChilds.end(); iter++) {
 		Updatable* child = Cast<Updatable>(*iter);
 		if(child != nullptr)
 			Cast<Updatable>(*iter)->UpdateSubTree();
