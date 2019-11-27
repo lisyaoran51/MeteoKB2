@@ -85,7 +85,7 @@ int FallMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper<FallEffect
 				m->Add(width, height + i, brightness);
 		}
 	}
-	LOG(LogLevel::Finest) << [](int width, int height, Map* m) {
+	LOG(LogLevel::Depricated) << [](int width, int height, Map* m) {
 		LOG(LogLevel::Finest) << "FallMapGenerateAlgorithm::ImplementGenerate : light map - after";
 		// 因為只看畫面中央，所以不看其他排
 		for (int i = 0; i < width*2; i++) {
