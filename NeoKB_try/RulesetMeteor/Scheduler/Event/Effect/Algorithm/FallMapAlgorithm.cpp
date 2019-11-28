@@ -86,7 +86,7 @@ int FallMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper<FallEffect
 
 			int brightness = (-BRIGHTNESS_MAX * (MTO_FLOAT(i) - meteorPos) / MTO_FLOAT(fallLength) + BRIGHTNESS_MAX) * fallBrightness;
 			if (brightness > 0) {
-				LOG(LogLevel::Finest) << "FallMapGenerateAlgorithm::ImplementGenerate : bright_max: " << BRIGHTNESS_MAX << ", MtoPos: " << meteorPos << ", i: " << i << ", bright: " << brightness;
+				LOG(LogLevel::Finer) << "FallMapGenerateAlgorithm::ImplementGenerate : bright_max: " << BRIGHTNESS_MAX << ", MtoPos: " << meteorPos << ", i: " << i << ", bright: " << brightness;
 				m->Add(width, height + i, brightness);
 				isAdded = true;
 			}
@@ -95,7 +95,7 @@ int FallMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper<FallEffect
 
 	if(isAdded)
 	LOG(LogLevel::Finer) << "FallMapGenerateAlgorithm::ImplementGenerate : current time = " << currentTime << ", start time = " << em->GetStartTime() << [](int width, int height, Map* m) {
-		LOG(LogLevel::Finer) << "FallMapGenerateAlgorithm::ImplementGenerate : light map - after";
+		LOG(LogLevel::Depricated) << "FallMapGenerateAlgorithm::ImplementGenerate : light map - after";
 		// 因為只看畫面中央，所以不看其他排
 		for (int i = 0; i < width*2; i++) {
 			string s;
@@ -103,7 +103,7 @@ int FallMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper<FallEffect
 				s += to_string(m->Get(i, j));
 				s += " ";
 			}
-			LOG(LogLevel::Finer) << "| " << s << "|";
+			LOG(LogLevel::Depricated) << "| " << s << "|";
 		}
 		return 0;
 	}(width, height, m);
