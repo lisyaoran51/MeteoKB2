@@ -129,7 +129,7 @@ Map * EventProcessorMaster::GetGraph()
 		<< [](vector<EventProcessor<Event>*>& eProcessors) {
 
 		for (int i = 0; i < eProcessors.size(); i++)
-			LOG(LogLevel::Finest) << "---processor " << i << " time = [" << eProcessors[i]->GetStartTime() << "].";
+			LOG(LogLevel::Depricated) << "---processor " << i << " time = [" << eProcessors[i]->GetStartTime() << "].";
 		return 0;
 	
 	}(eventProcessors);
