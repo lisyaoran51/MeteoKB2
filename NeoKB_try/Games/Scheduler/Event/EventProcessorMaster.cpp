@@ -26,9 +26,12 @@ int EventProcessorMaster::load(FrameworkConfigManager * f)
 	isPresent = true;
 	// TODO: 去framework config manager拿period map要切成多寬一段 ex:每5秒一段
 	// 目前先暫訂5秒一段
+	int periodMapInterval = 3;
+	if (!f->Get(FrameworkSetting::PeriodMapInterval, &periodMapInterval))
+		periodMapInterval = 3;
 
 	// TODO: visible time length也應該要去framework config manager拿
-	eventProcessorPeriods = new PeriodMap<EventProcessor<Event>*>(0, 5, [=](EventProcessor<Event>* ep)->pair<float, float> {
+	eventProcessorPeriods = new PeriodMap<EventProcessor<Event>*>(0, periodMapInterval, [=](EventProcessor<Event>* ep)->pair<float, float> {
 
 		float startTime = ep->GetStartTime() - visibleTimeRange;
 		float endTime = ep->GetStartTime() + ep->GetLifeTime() + visibleTimeRange;

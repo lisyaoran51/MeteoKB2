@@ -53,7 +53,8 @@ namespace Configurations {
 		//Renderer,//?
 		//HardwareMapAlgorithm,//?
 		LedDriver,
-		HardwareVersion
+		HardwareVersion,
+		PeriodMapInterval
 
 	};
 

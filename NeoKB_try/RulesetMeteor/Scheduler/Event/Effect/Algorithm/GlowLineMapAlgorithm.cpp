@@ -23,5 +23,5 @@ int GlowLineMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper<GlowLi
 	//LOG(LogLevel::Finest) << "GlowLineMapGenerateAlgorithm::ImplementGenerate() : Generate Effect [" << em->GetStartTime() << "] on [" << em->GetCurrentTime() << "].";
 
 	// TODO: Ãi±o¼g ¤U¦¸¼g
-	return 0;
+	return -1;
 }

@@ -11,5 +11,6 @@ int FrameworkConfigManager::InitializeDefault()
 {
 
 	Set(FrameworkSetting::FrameRate, 15);
+	Set(FrameworkSetting::PeriodMapInterval, 3);
 	return 0;
 }
