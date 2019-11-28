@@ -82,9 +82,10 @@ int FallMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper<FallEffect
 		if (i > meteorPos && i < meteorPos + MTO_FLOAT(fallLength)) {
 
 			int brightness = (-BRIGHTNESS_MAX * (MTO_FLOAT(i) - meteorPos) / MTO_FLOAT(fallLength) + BRIGHTNESS_MAX) * fallBrightness;
-			LOG(LogLevel::Finest) << "FallMapGenerateAlgorithm::ImplementGenerate : bright_max: " << BRIGHTNESS_MAX << ", MtoPos: " << meteorPos << ", i: " << i << ", bright: " << brightness;
-			if (brightness > 0)
+			if (brightness > 0) {
+				LOG(LogLevel::Finest) << "FallMapGenerateAlgorithm::ImplementGenerate : bright_max: " << BRIGHTNESS_MAX << ", MtoPos: " << meteorPos << ", i: " << i << ", bright: " << brightness;
 				m->Add(width, height + i, brightness);
+			}
 		}
 	}
 	LOG(LogLevel::Finest) << [](int width, int height, Map* m) {
