@@ -141,7 +141,7 @@ Map * EventProcessorMaster::GetGraph()
 		}
 	}
 
-	LOG(LogLevel::Finest) << [](int width, int height, Map* m) {
+	LOG(LogLevel::Finest) << "EventProcessorMaster::GetGraph : check if map writed." << [](int width, int height, Map* m) {
 		bool isChanged = false;
 		for (int i = 0; i < width; i++)
 		for (int j = 0; j < height; j++)
