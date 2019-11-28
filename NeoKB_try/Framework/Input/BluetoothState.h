@@ -19,6 +19,8 @@ namespace Input {
 
 	public:
 
+		~BluetoothState();
+
 		int AddCommand(BluetoothCommand* command);
 
 		vector<BluetoothCommand*>* GetCommands();

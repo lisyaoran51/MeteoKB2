@@ -4,6 +4,16 @@
 
 using namespace  Framework::Input;
 
+InputState::~InputState()
+{
+	if (bluetoothState != nullptr)
+		delete bluetoothState;
+	if (keyboardState != nullptr)
+		delete keyboardState;
+	if (panelState != nullptr)
+		delete panelState;
+}
+
 InputState * InputState::Clone()
 {
 	InputState * cloned = new InputState();
@@ -23,6 +33,7 @@ InputState * InputState::Clone()
 int InputState::SetLastState(InputState * lState)
 {
 	lastState = lState;
+	lState->SetIsLastState();
 
 	return 0;
 }

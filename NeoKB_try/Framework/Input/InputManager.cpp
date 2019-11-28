@@ -25,10 +25,14 @@ int InputManager::update()
 	getPendingState(&pendingStates);
 
 	/* 這邊本來要做create distinct states，這樣可以確保舊的輸入沒被更動，但是現在懶得做 */
+	vector<InputState*>* distinctInputStates = createDistinctInputStates(&pendingStates);
+
 	
-	for (int i = 0; i < pendingStates.size(); i++) {
-		handleNewState(pendingStates[i]);
+	for (int i = 0; i < distinctInputStates->size(); i++) {
+		handleNewState(distinctInputStates->at(i));
 	}
+
+	delete distinctInputStates;
 
 	return 0;
 }
@@ -40,11 +44,10 @@ int InputManager::handleNewState(InputState * state)
 	bool hasNewBluetoothState = state->GetBluetoothState() != nullptr;
 
 	InputState* last = currentState;
-	if (last->GetLastState() != nullptr)
-		delete last->GetLastState();
 
 	currentState = state;
 	currentState->SetLastState(last);
+	
 
 	updateInputQueue(currentState);
 
@@ -78,13 +81,120 @@ vector<InputState*>* InputManager::getPendingState(vector<InputState*>* pendingS
 
 vector<InputState*>* InputManager::createDistinctInputStates(vector<InputState*>* states)
 {
-	InputState* last = currentState;
+	// 這個是用來確保舊的輸入沒被更動，並且把所有的input state擺進一個distinct state裡
+	vector<InputState*>* returnValue = new vector<InputState*>();
+	InputState* distinctState = new InputState();
+	returnValue->push_back(distinctState);
 
-	// 這個是用來確保舊的輸入沒被更動，太麻煩懶得寫
+	for (int i = 0; i < states->size(); i++) {
 
+		InputState* state = states->at(i);
 
+		bool hasNewKeyboardState = state->GetKeyboardState() != nullptr;
+		bool hasNewPanelState = state->GetPanelState() != nullptr;
+		bool hasNewBluetoothState = state->GetBluetoothState() != nullptr;
 
-	return nullptr;
+		/* Keyboard State */
+		if (hasNewKeyboardState) {
+			if (distinctState->GetKeyboardState() == nullptr)
+				distinctState->SetKeyboardState(new KeyboardState());
+			KeyboardState* newKeyboardState = distinctState->GetKeyboardState();
+
+			/* press */
+			for (int i = 0; i < state->GetKeyboardState()->GetPresses()->size(); i++) {
+				pair<InputKey, int> press = state->GetKeyboardState()->GetPresses()->at(i);
+				//檢查有沒有重複
+				for (int j = 0; j < newKeyboardState->GetPresses()->size(); j++) {
+					if (newKeyboardState->GetPresses()->at(j).first == press.first) {
+						// 把重複的刪掉，只留最新的
+						newKeyboardState->GetPresses()->erase(newKeyboardState->GetPresses()->begin() + j);
+						j--;
+					}
+				}
+				newKeyboardState->GetPresses()->push_back(press);
+			}
+
+			/* up */
+			for (int i = 0; i < state->GetKeyboardState()->GetUps()->size(); i++) {
+				InputKey up = state->GetKeyboardState()->GetUps()->at(i);
+				//檢查有沒有重複
+				for (int j = 0; j < newKeyboardState->GetUps()->size(); j++) {
+					if (newKeyboardState->GetUps()->at(j) == up) {
+						// 把重複的刪掉，只留最新的
+						newKeyboardState->GetUps()->erase(newKeyboardState->GetUps()->begin() + j);
+						j--;
+					}
+				}
+				newKeyboardState->GetUps()->push_back(up);
+			}
+		}
+
+		/* Panel State */
+		if (hasNewPanelState) {
+			if (distinctState->GetPanelState() == nullptr)
+				distinctState->SetPanelState(new PanelState());
+			PanelState* newPanelState = distinctState->GetPanelState();
+
+			/* button */
+			for (int i = 0; i < state->GetPanelState()->GetButtons()->size(); i++) {
+				InputKey button = state->GetPanelState()->GetButtons()->at(i);
+				//檢查有沒有重複
+				bool duplicated = false;
+				for (int j = 0; j < newPanelState->GetButtons()->size(); j++) {
+					if (newPanelState->GetButtons()->at(j) == button) {
+						// 有重複就直接跳過
+						duplicated = true;
+						break;
+					}
+				}
+				if(!duplicated)
+					newPanelState->GetButtons()->push_back(button);
+			}
+
+			/* knob */
+			for (int i = 0; i < state->GetPanelState()->GetKnobs()->size(); i++) {
+				pair<InputKey, int> knob = state->GetPanelState()->GetKnobs()->at(i);
+				//檢查有沒有重複
+				for (int j = 0; j < newPanelState->GetKnobs()->size(); j++) {
+					if (newPanelState->GetKnobs()->at(j).first == knob.first) {
+						// 把重複的刪掉，只留最新的
+						newPanelState->GetKnobs()->erase(newPanelState->GetKnobs()->begin() + j);
+						j--;
+					}
+				}
+				newPanelState->GetKnobs()->push_back(knob);
+			}
+
+			/* slider */
+			for (int i = 0; i < state->GetPanelState()->GetSliders()->size(); i++) {
+				pair<InputKey, int> slider = state->GetPanelState()->GetSliders()->at(i);
+				//檢查有沒有重複
+				for (int j = 0; j < newPanelState->GetSliders()->size(); j++) {
+					if (newPanelState->GetSliders()->at(j).first == slider.first) {
+						// 把重複的刪掉，只留最新的
+						newPanelState->GetSliders()->erase(newPanelState->GetSliders()->begin() + j);
+						j--;
+					}
+				}
+				newPanelState->GetSliders()->push_back(slider);
+			}
+		}
+
+		/* Bluetooth State */
+		if (hasNewBluetoothState) {
+			if (distinctState->GetBluetoothState() == nullptr)
+				distinctState->SetBluetoothState(new BluetoothState());
+			BluetoothState* newBluetoothState = distinctState->GetBluetoothState();
+
+			/* button */
+			for (int i = 0; i < state->GetPanelState()->GetButtons()->size(); i++) {
+				BluetoothCommand* bluetoothCommand = state->GetBluetoothState()->GetCommands()->at(i);
+				newBluetoothState->GetCommands()->push_back(bluetoothCommand);
+			}
+		}
+	}
+
+	return returnValue;
 }
 
 int InputManager::TransformState(InputState * inputState)
@@ -138,15 +248,11 @@ int InputManager::updateKeyboardEvents(InputState * inputState)
 
 
 	for (int i = 0; i < lastKeyboardState->GetPresses()->size(); i++) {
-		if (!keyboardState->Contain(lastKeyboardState->GetPresses()->at(i).first)) {
-			handleKeyUp(inputState, lastKeyboardState->GetPresses()->at(i).first);
-		}
+		handleKeyDown(inputState, keyboardState->GetPresses()->at(i).first);
 	}
 
-	for (int i = 0; i < keyboardState->GetPresses()->size(); i++) {
-		if (!lastKeyboardState->Contain(keyboardState->GetPresses()->at(i).first)) {
-			handleKeyDown(inputState, keyboardState->GetPresses()->at(i).first);
-		}
+	for (int i = 0; i < keyboardState->GetUps()->size(); i++) {
+		handleKeyUp(inputState, keyboardState->GetUps()->at(i));
 	}
 
 	return 0;
@@ -195,6 +301,10 @@ int InputManager::updateBluetoothEvents(InputState * inputState)
 	BluetoothState* bluetoothState = inputState->GetBluetoothState();
 	BluetoothState* lastBluetoothState = inputState->GetLastState()->GetBluetoothState();
 
+
+	for (int i = 0; i < bluetoothState->GetCommands()->size(); i++) {
+		handleBluetoothCommand(inputState, bluetoothState->GetCommands()->at(i));
+	}
 
 	// 還沒想到有什麼互動
 
@@ -279,6 +389,20 @@ int InputManager::propagateSlide(vector<Triggerable*>* queue, InputState * state
 {
 	for (int i = 0; i < queue->size(); i++) {
 		queue->at(i)->TriggerOnSlide(state, slider);
+	}
+	return 0;
+}
+
+int InputManager::handleBluetoothCommand(InputState * state, BluetoothCommand * command)
+{
+
+	return propagateBluetoothCommand(&triggerQueue, state, command);
+}
+
+int InputManager::propagateBluetoothCommand(vector<Triggerable*>* queue, InputState * state, BluetoothCommand* command)
+{
+	for (int i = 0; i < queue->size(); i++) {
+		queue->at(i)->TriggerOnCommand(state, command);
 	}
 	return 0;
 }

@@ -12,8 +12,3 @@ int MeteoBluetoothDevice::readFromDevice()
 {
 	return 0;
 }
-
-int MeteoBluetoothDevice::passToPeripheral(Peripheral * peripheral)
-{
-	return 0;
-}

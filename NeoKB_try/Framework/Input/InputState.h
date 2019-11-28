@@ -20,6 +20,7 @@ namespace Input {
 
 	public:
 
+		~InputState();
 
 		virtual InputState* Clone();
 
@@ -46,13 +47,13 @@ namespace Input {
 
 	private:
 
-		InputState* lastState;
+		InputState* lastState = nullptr;
 
-		KeyboardState* keyboardState;
+		KeyboardState* keyboardState = nullptr;
 
-		PanelState* panelState;
+		PanelState* panelState = nullptr;
 
-		BluetoothState* bluetoothState;
+		BluetoothState* bluetoothState = nullptr;
 
 		bool isLastState = false;
 

@@ -23,9 +23,15 @@ namespace Devices {
 
 	protected:
 
+		vector<InputState*> inputStates;
+
 		virtual int readFromDevice() = 0;
 
-		virtual int passToPeripheral(Peripheral* peripheral) = 0;
+		/// <summary>
+		/// ³o­Ó¦binput thread
+		/// PanelDevice.ScanInput => PanelDevice.PassToPeripheral => Panel.TriggerOnInput => PanelInputHandler.HandleState =>PanelInputHandler.Pushback(states)
+		/// </summary>
+		virtual int passToPeripheral(Peripheral* peripheral);
 
 	};
 

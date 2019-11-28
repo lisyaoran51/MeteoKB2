@@ -32,7 +32,7 @@ namespace Input {
 
 	protected:
 
-		T* lastState;
+		T* lastState = nullptr;
 
 		bool isLastState = false;
 

@@ -15,6 +15,11 @@ vector<pair<InputKey, int>>* KeyboardState::GetPresses()
 	return &presses;
 }
 
+vector<InputKey>* KeyboardState::GetUps()
+{
+	return &ups;
+}
+
 KeyboardState * KeyboardState::Clone()
 {
 	KeyboardState * cloned = new KeyboardState();

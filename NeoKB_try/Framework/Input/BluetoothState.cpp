@@ -5,6 +5,12 @@ using namespace Framework::Input;
 using namespace std;
 
 
+BluetoothState::~BluetoothState()
+{
+	for (int i = 0; i < commands.size(); i++)
+		delete commands[i];
+}
+
 int BluetoothState::AddCommand(BluetoothCommand * command)
 {
 	commands.push_back(command);

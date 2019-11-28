@@ -23,8 +23,6 @@ namespace Devices {
 
 		virtual int readFromDevice();
 
-		virtual int passToPeripheral(Peripheral* peripheral);
-
 	};
 
 }}

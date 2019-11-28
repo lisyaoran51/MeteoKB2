@@ -18,11 +18,15 @@ namespace Input {
 
 		vector<pair<InputKey, int>> presses;
 
+		vector<InputKey> ups;
+
 	public:
 
 		int AddPress(pair<InputKey, int> press);
 
 		vector<pair<InputKey, int>>* GetPresses();
+
+		vector<InputKey>* GetUps();
 
 		virtual KeyboardState* Clone();
 

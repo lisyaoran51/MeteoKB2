@@ -98,6 +98,10 @@ namespace Input {
 
 		virtual int propagateSlide(vector<Triggerable*>* queue, InputState* state, InputKey slider);
 
+		virtual int handleBluetoothCommand(InputState* state, BluetoothCommand* command);
+
+		virtual int propagateBluetoothCommand(vector<Triggerable*>* queue, InputState* state, BluetoothCommand* command);
+
 	private:
 
 		/// <summary>
