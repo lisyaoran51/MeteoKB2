@@ -6,7 +6,7 @@
 using namespace Framework::Allocation::Hierachal;
 using namespace std;
 
-mutex ChildMutex;
+mutex Framework::Allocation::Hierachal::ChildMutex;
 
 ChildAddable::ChildAddable(): Loadable(), RegisterType("ChildAddable")
 {
