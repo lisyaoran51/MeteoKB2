@@ -34,6 +34,9 @@ int InputManager::update()
 
 	delete distinctInputStates;
 
+	for (int i = 0; i < pendingStates.size(); i++)		// 從input handler創建，到這邊delete掉
+		delete pendingStates[i];						//
+
 	return 0;
 }
 
@@ -189,7 +192,7 @@ vector<InputState*>* InputManager::createDistinctInputStates(vector<InputState*>
 			/* button */
 			for (int i = 0; i < state->GetPanelState()->GetButtons()->size(); i++) {
 				BluetoothCommand* bluetoothCommand = state->GetBluetoothState()->GetCommands()->at(i);
-				newBluetoothState->GetCommands()->push_back(bluetoothCommand);
+				newBluetoothState->GetCommands()->push_back(new BluetoothCommand(bluetoothCommand));
 			}
 		}
 	}

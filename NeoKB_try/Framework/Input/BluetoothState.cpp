@@ -30,3 +30,8 @@ BluetoothState * BluetoothState::Clone()
 
 	return cloned;
 }
+
+BluetoothCommand::BluetoothCommand(BluetoothCommand * copied)
+{
+	CommandType = copied->CommandType;
+}

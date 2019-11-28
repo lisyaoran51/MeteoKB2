@@ -12,6 +12,8 @@ namespace Devices {
 
 	class MeteoPanelDevice : public PanelDevice {
 
+		int _debugCount = 0;
+
 	public:
 
 		/// <summary>

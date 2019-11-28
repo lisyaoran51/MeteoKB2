@@ -160,7 +160,7 @@ namespace Timing {
 
 		virtual int OnButtonDown(T action) {
 			if (keyBindings[action] == InputKey::Pause) {
-
+				LOG(LogLevel::Debug) << "TTimeController::OnButtonDown() : get pause button input and pause.";
 				if (speedAdjuster->GetIsAdjustingTime())
 					return -1;
 

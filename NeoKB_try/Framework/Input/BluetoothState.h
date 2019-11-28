@@ -31,6 +31,8 @@ namespace Input {
 
 	struct BluetoothCommand {
 
+		BluetoothCommand(BluetoothCommand* copied);
+
 		string CommandType;
 
 	};
