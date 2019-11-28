@@ -22,6 +22,8 @@ int PanelInputHandler::Initialize(GameHost * host)
 
 int PanelInputHandler::HandleState(InputState * inputState)
 {
+
+	LOG(LogLevel::Debug) << "PanelInputHandler::HandleState() : get new state.";
 	auto panelState = inputState->GetPanelState()->Clone();
 
 	InputState* pendingState = new InputState();

@@ -23,6 +23,7 @@ int InputDevice::ScanInput()
 
 int InputDevice::passToPeripheral(Peripheral * peripheral)
 {
+	LOG(LogLevel::Debug) << "InputDevice::passToPeripheral() : pass to panel [" << inputStates.size() << "] states.";
 	for (int i = 0; i < inputStates.size(); i++) {
 		peripheral->PushInputState(inputStates[i]);
 	}

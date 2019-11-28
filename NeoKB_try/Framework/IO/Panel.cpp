@@ -16,6 +16,9 @@ int Panel::SetDevice(Device * device)
 
 int Panel::TriggerOnInput()
 {
+
+	LOG(LogLevel::Debug) << "Panel::TriggerOnInput() : trigger on panel event.";
+
 	for (int i = 0; i < inputStates.size(); i++) {
 		OnPanelEvent.Trigger(inputStates[i]);
 	}
