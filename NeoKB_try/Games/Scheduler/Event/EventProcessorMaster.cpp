@@ -141,14 +141,14 @@ Map * EventProcessorMaster::GetGraph()
 		}
 	}
 
-	LOG(LogLevel::Finest) << "EventProcessorMaster::GetGraph : check if map writed." << [](int width, int height, Map* m) {
+	LOG(LogLevel::Finer) << "EventProcessorMaster::GetGraph : check if map writed." << [](int width, int height, Map* m) {
 		bool isChanged = false;
 		for (int i = 0; i < width; i++)
 		for (int j = 0; j < height; j++)
 			if(m->Get(i, j) != 0)
 				isChanged = true;
 		if (isChanged) {
-			LOG(LogLevel::Finest) << "EventProcessorMaster::GetGraph : light map - after";
+			LOG(LogLevel::Finer) << "EventProcessorMaster::GetGraph : light map - after";
 			// 因為只看畫面中央，所以不看其他排
 			for (int i = 0; i < width; i++) {
 				string s;
@@ -156,7 +156,7 @@ Map * EventProcessorMaster::GetGraph()
 					s += to_string(m->Get(i, j));
 					s += " ";
 				}
-				LOG(LogLevel::Finest) << "| " << s << "|";
+				LOG(LogLevel::Finer) << "| " << s << "|";
 			}
 		}
 		return 0;
