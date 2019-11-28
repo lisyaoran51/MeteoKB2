@@ -85,6 +85,7 @@ int FallMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper<FallEffect
 			if (brightness > 0) {
 				LOG(LogLevel::Finest) << "FallMapGenerateAlgorithm::ImplementGenerate : bright_max: " << BRIGHTNESS_MAX << ", MtoPos: " << meteorPos << ", i: " << i << ", bright: " << brightness;
 				m->Add(width, height + i, brightness);
+				m->GetMatrix()[width][height + i] = brightness;
 			}
 		}
 	}
