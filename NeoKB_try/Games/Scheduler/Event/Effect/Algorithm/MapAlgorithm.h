@@ -192,7 +192,10 @@ namespace Algorithms{
 			if (!bufferMap->IsClear())
 				bufferMap->Reset();
 
-			genAlgo->Generate(bufferMap, em);
+			int returnValue = genAlgo->Generate(bufferMap, em);
+
+			if (returnValue == -1)
+				return 0;
 
 			shiftAlgo->Shift(bufferMap, m, em);
 

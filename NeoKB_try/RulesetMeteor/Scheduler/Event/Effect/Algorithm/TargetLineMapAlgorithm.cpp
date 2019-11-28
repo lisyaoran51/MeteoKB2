@@ -93,7 +93,8 @@ TargetLineMapGenerateAlgorithm::TargetLineMapGenerateAlgorithm(MeteorConfigManag
 
 int TargetLineMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper<TargetLineEffect>* em)
 {
-
+	// 因為現在不用打擊線了，所以不需要
+	return -1;
 	//LOG(LogLevel::Depricated) << "TargetLineMapGenerateAlgorithm::ImplementGenerate() : Generate Effect [" << em->GetStartTime() << "] on [" << em->GetCurrentTime() << "].";
 
 	MTO_FLOAT currentTime = 0;//em->GetCurrentTime();
