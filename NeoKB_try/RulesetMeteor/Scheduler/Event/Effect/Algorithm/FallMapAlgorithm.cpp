@@ -50,6 +50,7 @@ int FallMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper<FallEffect
 	//LOG(LogLevel::Depricated) << "FallMapGenerateAlgorithm::ImplementGenerate() : Generate Effect [" << em->GetStartTime() << "] on [" << em->GetCurrentTime() << "].";
 
 	MTO_FLOAT currentTime = em->GetCurrentTime();// em->GetCurrentTime();
+	MTO_FLOAT startTime = em->GetStartTime();
 	// MTO_FLOAT lifeTime = em->GetLifeTime();
 	MTO_FLOAT speed = em->GetSpeed();
 
@@ -74,7 +75,7 @@ int FallMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper<FallEffect
 	}(width, height, m);
 
 	// 目前流星位置：height - speed * currentTime 
-	MTO_FLOAT meteorPos = height - speed * currentTime;
+	MTO_FLOAT meteorPos = height - speed * (currentTime - startTime);
 	
 	LOG(LogLevel::Finest) << "FallMapGenerateAlgorithm::ImplementGenerate : meteorPos = " << meteorPos << ", current time = " << currentTime << ", speed = " << speed;
 	// 公式: -256*y + 256 
