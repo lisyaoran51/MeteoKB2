@@ -141,6 +141,27 @@ Map * EventProcessorMaster::GetGraph()
 		}
 	}
 
+	LOG(LogLevel::Finest) << [](int width, int height, Map* m) {
+		bool isChanged = false;
+		for (int i = 0; i < width; i++)
+		for (int j = 0; j < height; j++)
+			if(m->Get(i, j) != 0)
+				isChanged = true;
+		if (isChanged) {
+			LOG(LogLevel::Finest) << "EventProcessorMaster::GetGraph : light map - after";
+			// 因為只看畫面中央，所以不看其他排
+			for (int i = 0; i < width; i++) {
+				string s;
+				for (int j = 0; j < height; j++) {
+					s += to_string(m->Get(i, j));
+					s += " ";
+				}
+				LOG(LogLevel::Finest) << "| " << s << "|";
+			}
+		}
+		return 0;
+	}(graph->GetWidth(), graph->GetHeight(), graph);
+
 	/* 每次要用dynamic processors時，就要鎖起來 */
 	lock_guard<mutex> guard(processorsMutex);
 
