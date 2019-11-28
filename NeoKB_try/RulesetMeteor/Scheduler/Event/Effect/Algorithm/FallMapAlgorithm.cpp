@@ -111,7 +111,7 @@ int FallMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper<FallEffect
 	}(width, height, m);
 
 	if (width != 48 || height != 16)
-		LOG(LogLevel::Debug) << "FallMapGenerateAlgorithm::ImplementGenerate : strange width " << width << ", height " << height << " after generate."
+		LOG(LogLevel::Debug) << "FallMapGenerateAlgorithm::ImplementGenerate : strange width " << width << ", height " << height << " after generate.";
 
 
 	return 0;
