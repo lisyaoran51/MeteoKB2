@@ -67,12 +67,12 @@ int Playfield::load(FrameworkConfigManager* f) {
 	else
 		throw runtime_error("int Playfield::load() : Width and Height not found in Setting.");
 
-	bufferMap->Add(width, height, 30);
-	bufferMap->Add(0, 0, 60);
-	bufferMap->Add(5, 5, 90);
-	bufferMap->Add(width+5, height+5, 120);
 
-	LOG(LogLevel::Finest) << [](int width, int height, Map* m) {
+	LOG(LogLevel::Depricated) << [](int width, int height, Map* m) {
+		m->Add(width, height, 30);
+		m->Add(0, 0, 60);
+		m->Add(5, 5, 90);
+		m->Add(width + 5, height + 5, 120);
 		LOG(LogLevel::Finest) << "Playfield::load() : testing map add.";
 		// 因為只看畫面中央，所以不看其他排
 		for (int i = 0; i < width * 2; i++) {

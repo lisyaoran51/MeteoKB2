@@ -56,7 +56,7 @@ int FallMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper<FallEffect
 	int width = em->GetWidth();
 	int height = em->GetHeight();
 
-	LOG(LogLevel::Finest) << [](int width, int height, Map* m) {
+	LOG(LogLevel::Depricated) << [](int width, int height, Map* m) {
 		LOG(LogLevel::Finest) << "FallMapGenerateAlgorithm::ImplementGenerate : light map - before";
 		// 因為只看畫面中央，所以不看其他排
 		for (int i = 0; i < width * 2; i++) {
@@ -85,7 +85,7 @@ int FallMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper<FallEffect
 			if (brightness > 0) {
 				LOG(LogLevel::Finest) << "FallMapGenerateAlgorithm::ImplementGenerate : bright_max: " << BRIGHTNESS_MAX << ", MtoPos: " << meteorPos << ", i: " << i << ", bright: " << brightness;
 				m->Add(width, height + i, brightness);
-				m->GetMatrix()[width][height + i] = brightness;
+				//m->GetMatrix()[width][height + i] = brightness;
 			}
 		}
 	}
