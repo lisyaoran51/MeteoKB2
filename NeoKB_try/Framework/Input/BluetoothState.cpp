@@ -25,7 +25,9 @@ vector<BluetoothCommand*>* BluetoothState::GetCommands()
 BluetoothState * BluetoothState::Clone()
 {
 	BluetoothState* cloned = new BluetoothState();
-	cloned->SetLastState(lastState);
+
+	if(lastState != nullptr)
+		cloned->SetLastState(lastState);
 	cloned->GetCommands()->assign(commands.begin(), commands.end());
 
 	return cloned;

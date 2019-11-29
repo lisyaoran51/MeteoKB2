@@ -41,7 +41,8 @@ PanelState * PanelState::Clone()
 {
 	PanelState* cloned = new PanelState();
 	
-	cloned->SetLastState(lastState);
+	if(lastState!= nullptr)
+		cloned->SetLastState(lastState);
 
 	cloned->GetButtons()->assign(buttons.begin(), buttons.end());
 	cloned->GetKnobs()->assign(knobs.begin(), knobs.end());

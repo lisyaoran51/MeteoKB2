@@ -15,14 +15,16 @@ namespace Input {
 
 		int SetIsLastState() {
 			isLastState = true;
-			delete lastState;
+			if(lastState!= nullptr)
+				delete lastState;
 			lastState = nullptr;
 			return 0;
 		}
 
 		virtual int SetLastState(T* state) {
 			lastState = state;
-			state->SetIsLastState();
+			if(state != nullptr)
+				state->SetIsLastState();
 			return 0;
 		}
 

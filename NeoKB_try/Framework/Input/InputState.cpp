@@ -18,7 +18,9 @@ InputState * InputState::Clone()
 {
 	InputState * cloned = new InputState();
 
-	cloned->SetLastState(lastState);
+	if(lastState != nullptr)
+		cloned->SetLastState(lastState);
+
 	if (bluetoothState != nullptr)
 		cloned->SetBluetoothState(bluetoothState->Clone());
 	if (keyboardState != nullptr)

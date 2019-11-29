@@ -24,11 +24,13 @@ KeyboardState * KeyboardState::Clone()
 {
 	KeyboardState * cloned = new KeyboardState();
 
-	cloned->SetLastState(lastState);
+	if(lastState != nullptr)
+		cloned->SetLastState(lastState);
 	cloned->GetPresses()->assign(presses.begin(), presses.end());
+	cloned->GetUps()->assign(ups.begin(), ups.end());
 
 
-	return nullptr;
+	return cloned;
 }
 
 bool KeyboardState::Contain(InputKey key)
