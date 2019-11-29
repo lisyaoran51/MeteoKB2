@@ -59,6 +59,7 @@ int InputManager::handleNewState(InputState * state)
 
 	if (hasNewPanelState)
 		updatePanelEvents(currentState);
+	
 
 	if (hasNewBluetoothState)
 		updateBluetoothEvents(currentState);
@@ -76,6 +77,9 @@ vector<InputState*>* InputManager::getPendingState(vector<InputState*>* pendingS
 		pendingStates->reserve(inputHandlerPendingState->size());
 		pendingStates->insert(pendingStates->end(), inputHandlerPendingState->begin(), inputHandlerPendingState->end());
 		
+		if(inputHandlerPendingState->size() > 0)
+			LOG(LogLevel::Debug) << "InputManager::getPendingState() : get fake input.";
+
 		delete inputHandlerPendingState;
 	}
 
@@ -197,6 +201,14 @@ vector<InputState*>* InputManager::createDistinctInputStates(vector<InputState*>
 		}
 	}
 
+	/* 如果沒有State的話，要擺一個空的，這樣才能比較上一次和這一次輸入差多少 */
+	if (distinctState->GetKeyboardState() == nullptr)
+		distinctState->SetKeyboardState(new KeyboardState());
+	if (distinctState->GetPanelState() == nullptr)
+		distinctState->SetPanelState(new PanelState());
+	if (distinctState->GetBluetoothState() == nullptr)
+		distinctState->SetBluetoothState(new BluetoothState());
+
 	return returnValue;
 }
 
@@ -263,6 +275,8 @@ int InputManager::updateKeyboardEvents(InputState * inputState)
 
 int InputManager::updatePanelEvents(InputState * inputState)
 {
+	LOG(LogLevel::Debug) << "InputManager::updatePanelEvents() : updateing fake input.";
+
 	PanelState* panelState = inputState->GetPanelState();
 	PanelState* lastPanelState = inputState->GetLastState()->GetPanelState();
 
