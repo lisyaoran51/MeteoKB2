@@ -25,9 +25,10 @@ int PanelInputHandler::HandleState(InputState * inputState)
 
 	LOG(LogLevel::Debug) << "PanelInputHandler::HandleState() : get new state.";
 	auto panelState = inputState->GetPanelState()->Clone();
-
+	LOG(LogLevel::Debug) << "PanelInputHandler::HandleState() : cloned.";
 	InputState* pendingState = new InputState();
 	pendingState->SetPanelState(panelState);
+	LOG(LogLevel::Debug) << "PanelInputHandler::HandleState() : set state.";
 
 	pendingStates.push_back(pendingState);
 
