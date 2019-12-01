@@ -50,8 +50,10 @@ namespace KeyBindings {
 
 			vector<KeyBinding*>* defaultKeyBindings = GetDefaultkeyBindings();
 			LOG(LogLevel::Debug) << "KeyBindingInputManager::reloadMappings() : putting [" << defaultKeyBindings->size() << "] key bindings into keybings." ;
-			keyBindings.reserve(defaultKeyBindings->size());
-			keyBindings.insert(keyBindings.end(), defaultKeyBindings->begin(), defaultKeyBindings->end());
+			if (defaultKeyBindings->size() > 0) {
+				keyBindings.reserve(defaultKeyBindings->size());
+				keyBindings.insert(keyBindings.end(), defaultKeyBindings->begin(), defaultKeyBindings->end());
+			}
 
 			delete defaultKeyBindings;
 
