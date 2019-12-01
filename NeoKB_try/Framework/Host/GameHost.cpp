@@ -77,10 +77,10 @@ int GameHost::Run(Game* game, Instrument* instrument)
 
 	LOG(LogLevel::Finest) << "Initialize Threads.";
 	inputInitialize();
-	//inputThread->Start();
+	inputThread->Start();
 
 	drawInitialize();
-	//drawThread->Start();
+	drawThread->Start();
 
 	updateInitialize();
 	updateThread->Start();
