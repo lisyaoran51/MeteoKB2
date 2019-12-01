@@ -28,7 +28,7 @@ int InputManager::update()
 	vector<InputState*>* distinctInputStates = createDistinctInputStates(&pendingStates);
 
 
-	LOG(LogLevel::Debug) << "InputManager::update() : distinct input states size = [" << distinctInputStates->size() << "].";
+	//LOG(LogLevel::Debug) << "InputManager::update() : distinct input states size = [" << distinctInputStates->size() << "].";
 	for (int i = 0; i < distinctInputStates->size(); i++) {
 		handleNewState(distinctInputStates->at(i));
 	}
@@ -81,7 +81,7 @@ vector<InputState*>* InputManager::getPendingState(vector<InputState*>* pendingS
 		pendingStates->reserve(inputHandlerPendingState->size());
 		pendingStates->insert(pendingStates->end(), inputHandlerPendingState->begin(), inputHandlerPendingState->end());
 		
-		if(inputHandlerPendingState->size() > 0)
+		if(inputHandlerPendingState->at(0)->GetPanelState())
 			LOG(LogLevel::Debug) << "InputManager::getPendingState() : get fake input.";
 
 		delete inputHandlerPendingState;
