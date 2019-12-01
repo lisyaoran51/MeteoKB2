@@ -32,6 +32,8 @@ namespace Input {
 			return lastState;
 		}
 
+		virtual bool CheckIsEmpty() = 0;
+
 	protected:
 
 		T* lastState = nullptr;

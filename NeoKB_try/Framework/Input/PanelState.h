@@ -47,7 +47,7 @@ namespace Input {
 
 		bool ContainSlider(InputKey slider);
 
-
+		virtual bool CheckIsEmpty();
 
 	};
 

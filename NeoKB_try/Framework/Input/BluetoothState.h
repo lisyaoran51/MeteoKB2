@@ -26,6 +26,8 @@ namespace Input {
 		vector<BluetoothCommand*>* GetCommands();
 
 		virtual BluetoothState* Clone();
+
+		virtual bool CheckIsEmpty();
 	};
 
 

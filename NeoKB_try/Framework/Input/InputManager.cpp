@@ -24,7 +24,7 @@ int InputManager::update()
 	vector<InputState*> pendingStates;
 	getPendingState(&pendingStates);
 
-	/* 這邊本來要做create distinct states，這樣可以確保舊的輸入沒被更動，但是現在懶得做 */
+	/* 這邊本來要做create distinct states，這樣可以確保舊的輸入沒被更動，經過這個以後panel.keyboard.bt都部會是null，但裡面會是沒有東西的 */
 	vector<InputState*>* distinctInputStates = createDistinctInputStates(&pendingStates);
 
 
@@ -44,9 +44,9 @@ int InputManager::update()
 
 int InputManager::handleNewState(InputState * state)
 {
-	bool hasNewKeyboardState = state->GetKeyboardState() != nullptr;
-	bool hasNewPanelState = state->GetPanelState() != nullptr;
-	bool hasNewBluetoothState = state->GetBluetoothState() != nullptr;
+	bool hasNewKeyboardState = !state->GetKeyboardState()->CheckIsEmpty();
+	bool hasNewPanelState = !state->GetPanelState()->CheckIsEmpty();
+	bool hasNewBluetoothState = !state->GetBluetoothState()->CheckIsEmpty();
 
 
 

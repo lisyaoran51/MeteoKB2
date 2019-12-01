@@ -62,7 +62,7 @@ namespace Input {
 		virtual int updateInputQueue(InputState* inputState);
 
 		/// <summary>
-		/// 不太確定功能，暫時先不用
+		/// 會把所有輸入都擺近來，然後複製一個新的input state，如果kb,panel,bt是null的畫會new一個空的擺進去
 		/// </summary>
 		vector<InputState*>* createDistinctInputStates(vector<InputState*>* states);
 

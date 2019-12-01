@@ -32,6 +32,8 @@ namespace Input {
 
 		virtual bool Contain(InputKey key);
 
+		virtual bool CheckIsEmpty();
+
 	};
 
 

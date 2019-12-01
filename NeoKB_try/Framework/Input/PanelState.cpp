@@ -68,3 +68,8 @@ bool PanelState::ContainSlider(InputKey slider)
 	throw logic_error("PanelState::ContainerSlider(): not implemented");
 	return false;
 }
+
+bool PanelState::CheckIsEmpty()
+{
+	return buttons.size() == 0 && knobs.size() == 0 && sliders.size() == 0;
+}
