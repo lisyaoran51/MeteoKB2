@@ -35,7 +35,7 @@ BluetoothState * BluetoothState::Clone()
 
 bool BluetoothState::CheckIsEmpty()
 {
-	return commands.size == 0;
+	return commands.size() == 0;
 }
 
 BluetoothCommand::BluetoothCommand(BluetoothCommand * copied)
