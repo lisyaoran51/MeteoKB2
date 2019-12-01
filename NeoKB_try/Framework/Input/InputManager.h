@@ -50,7 +50,7 @@ namespace Input {
 		virtual vector<InputHandler*>* getInputHandlers() = 0;
 
 
-		InputState* currentState;
+		InputState* currentState = nullptr;
 
 		/// <summary>
 		/// 如果有state，會先update input queue，然後再找最底端的child來trigger

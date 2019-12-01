@@ -35,7 +35,8 @@ InputState * InputState::Clone()
 int InputState::SetLastState(InputState * lState)
 {
 	lastState = lState;
-	lState->SetIsLastState();
+	if(lState != nullptr)
+		lState->SetIsLastState();
 
 	return 0;
 }
@@ -81,7 +82,8 @@ BluetoothState * InputState::GetBluetoothState()
 int InputState::SetIsLastState()
 {
 	isLastState = true;
-	delete lastState;
+	if(lastState != nullptr)
+		delete lastState;
 	lastState = nullptr;
 	return 0;
 }

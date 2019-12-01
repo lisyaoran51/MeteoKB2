@@ -21,11 +21,9 @@ int InputManager::ChangeFocus(Triggerable * fTriggerable)
 
 int InputManager::update()
 {
-	LOG(LogLevel::Debug) << "InputManager::update() : get pending states from input handlers.";
 	vector<InputState*> pendingStates;
 	getPendingState(&pendingStates);
 
-	LOG(LogLevel::Debug) << "InputManager::update() : create distinct input states.";
 	/* 這邊本來要做create distinct states，這樣可以確保舊的輸入沒被更動，但是現在懶得做 */
 	vector<InputState*>* distinctInputStates = createDistinctInputStates(&pendingStates);
 
@@ -40,6 +38,7 @@ int InputManager::update()
 	for (int i = 0; i < pendingStates.size(); i++)		// 從input handler創建，到這邊delete掉
 		delete pendingStates[i];						//
 
+
 	return 0;
 }
 
@@ -48,6 +47,8 @@ int InputManager::handleNewState(InputState * state)
 	bool hasNewKeyboardState = state->GetKeyboardState() != nullptr;
 	bool hasNewPanelState = state->GetPanelState() != nullptr;
 	bool hasNewBluetoothState = state->GetBluetoothState() != nullptr;
+
+
 
 	InputState* last = currentState;
 
@@ -259,18 +260,24 @@ int InputManager::updateInputQueue(InputState * inputState)
 int InputManager::updateKeyboardEvents(InputState * inputState)
 {
 	KeyboardState* keyboardState= inputState->GetKeyboardState();
-	KeyboardState* lastKeyboardState = inputState->GetLastState()->GetKeyboardState();
+	KeyboardState* lastKeyboardState = inputState->GetLastState() ? inputState->GetLastState()->GetKeyboardState() : nullptr;
 
 	// 我們不考慮repeat，鎖以不用寫得很複雜
 	// 暫時也不寫組合鍵，以後再寫
 
+	if (lastKeyboardState) {
+		for (int i = 0; i < lastKeyboardState->GetPresses()->size(); i++) {
+			handleKeyDown(inputState, keyboardState->GetPresses()->at(i).first);
+		}
 
-	for (int i = 0; i < lastKeyboardState->GetPresses()->size(); i++) {
-		handleKeyDown(inputState, keyboardState->GetPresses()->at(i).first);
+		for (int i = 0; i < keyboardState->GetUps()->size(); i++) {
+			handleKeyUp(inputState, keyboardState->GetUps()->at(i));
+		}
 	}
-
-	for (int i = 0; i < keyboardState->GetUps()->size(); i++) {
-		handleKeyUp(inputState, keyboardState->GetUps()->at(i));
+	else {
+		for (int i = 0; i < keyboardState->GetPresses()->size(); i++) {
+			handleKeyDown(inputState, keyboardState->GetPresses()->at(i).first);
+		}
 	}
 
 	return 0;
@@ -281,21 +288,28 @@ int InputManager::updatePanelEvents(InputState * inputState)
 	LOG(LogLevel::Debug) << "InputManager::updatePanelEvents() : updateing fake input.";
 
 	PanelState* panelState = inputState->GetPanelState();
-	PanelState* lastPanelState = inputState->GetLastState()->GetPanelState();
+	PanelState* lastPanelState = inputState->GetLastState() ? inputState->GetLastState()->GetPanelState() : nullptr;
 
 	// 我們不考慮repeat，鎖以不用寫得很複雜
 	// 暫時也不寫組合鍵，以後再寫
 
-	/* Button */
-	for (int i = 0; i < lastPanelState->GetButtons()->size(); i++) {
-		if (!panelState->ContainButton(lastPanelState->GetButtons()->at(i))) {
-			handleButtonUp(inputState, lastPanelState->GetButtons()->at(i));
+	if (lastPanelState) {
+		/* Button */
+		for (int i = 0; i < lastPanelState->GetButtons()->size(); i++) {
+			if (!panelState->ContainButton(lastPanelState->GetButtons()->at(i))) {
+				handleButtonUp(inputState, lastPanelState->GetButtons()->at(i));
+			}
+		}
+
+		for (int i = 0; i < panelState->GetButtons()->size(); i++) {
+			if (!lastPanelState->ContainButton(panelState->GetButtons()->at(i))) {
+				handleButtonDown(inputState, panelState->GetButtons()->at(i));
+			}
 		}
 	}
-
-	for (int i = 0; i < panelState->GetButtons()->size(); i++) {
-		if (!lastPanelState->ContainButton(panelState->GetButtons()->at(i))) {
-			handleButtonDown(inputState, panelState->GetButtons()->at(i));
+	else {
+		for (int i = 0; i < panelState->GetButtons()->size(); i++) {
+			handleButtonDown(inputState, lastPanelState->GetButtons()->at(i));
 		}
 	}
 
@@ -319,7 +333,7 @@ int InputManager::updatePanelEvents(InputState * inputState)
 int InputManager::updateBluetoothEvents(InputState * inputState)
 {
 	BluetoothState* bluetoothState = inputState->GetBluetoothState();
-	BluetoothState* lastBluetoothState = inputState->GetLastState()->GetBluetoothState();
+	BluetoothState* lastBluetoothState = inputState->GetLastState() ? inputState->GetLastState()->GetBluetoothState() : nullptr;
 
 
 	for (int i = 0; i < bluetoothState->GetCommands()->size(); i++) {
