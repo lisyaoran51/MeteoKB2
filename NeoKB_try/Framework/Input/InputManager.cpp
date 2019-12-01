@@ -81,6 +81,7 @@ vector<InputState*>* InputManager::getPendingState(vector<InputState*>* pendingS
 		pendingStates->reserve(inputHandlerPendingState->size());
 		pendingStates->insert(pendingStates->end(), inputHandlerPendingState->begin(), inputHandlerPendingState->end());
 		
+		if (inputHandlerPendingState->size() > 0)
 		if(inputHandlerPendingState->at(0)->GetPanelState())
 			LOG(LogLevel::Debug) << "InputManager::getPendingState() : get fake input.";
 
