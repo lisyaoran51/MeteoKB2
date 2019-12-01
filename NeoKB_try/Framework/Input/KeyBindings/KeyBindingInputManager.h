@@ -40,6 +40,7 @@ namespace KeyBindings {
 		/// </summary>
 		virtual int LoadOnComplete() {
 
+			LOG(LogLevel::Debug) << "KeyBindingInputManager::LoadOnComplete() : load key binding mapping.";
 			reloadMappings();
 			
 			return 0;
@@ -48,6 +49,7 @@ namespace KeyBindings {
 		virtual int reloadMappings() {
 
 			vector<KeyBinding*>* defaultKeyBindings = GetDefaultkeyBindings();
+			LOG(LogLevel::Debug) << "KeyBindingInputManager::reloadMappings() : putting [" << defaultKeyBindings->size() << "] key bindings into keybings." ;
 			keyBindings.reserve(defaultKeyBindings->size());
 			keyBindings.insert(keyBindings.end(), defaultKeyBindings->begin(), defaultKeyBindings->end());
 
