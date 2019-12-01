@@ -1287,3 +1287,36 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	找到問題了，basstrack的pendingActions一直沒有削掉
 	
 	還在研究為什麼rate會變成奇怪的值，還有decoupled clock會new兩次
+	
+11/28
+	跑起來了，現在來看input thread。
+	
+	main thread: gamehost.run => gamehost.ResetInputHandlers => panel.Add InputHandler to OnPanelEvent
+	
+	input thread: PanelDevice.ScanInput => PanelDevice.PassToPeripheral => Panel.TriggerOnInput => PanelInputHandler.HandleState => PanelInputHandler.Pushback(states)
+	
+	update thread: InputManager.Update => InputManager.GetPendingState => InputManager.GetPanelInputHandler(from host) => PanelInputHandler.GetPendingStates => InputManager.Pushback(penddingStates) => InputManager.HandleNewState
+					=> InputManager.UpdatePanelEvent =>
+	
+	中間會有memory leak，因為每次input state都是用複製的傳給對方
+	
+	key binding input manager那邊bluetooth的handle new state先不寫，還不知道要怎麼map過去
+	
+	PanelInputHandler::HandleState這個寒士會把從device來的state給clone一遍，所以device就可以把State刪掉
+	
+11/29 
+	unput thread沒有問題，應該是update thread的問題
+	改完以後一開就當機
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
