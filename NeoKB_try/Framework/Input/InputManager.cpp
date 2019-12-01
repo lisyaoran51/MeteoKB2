@@ -21,13 +21,16 @@ int InputManager::ChangeFocus(Triggerable * fTriggerable)
 
 int InputManager::update()
 {
+	LOG(LogLevel::Debug) << "InputManager::update() : get pending states from input handlers.";
 	vector<InputState*> pendingStates;
 	getPendingState(&pendingStates);
 
+	LOG(LogLevel::Debug) << "InputManager::update() : create distinct input states.";
 	/* 這邊本來要做create distinct states，這樣可以確保舊的輸入沒被更動，但是現在懶得做 */
 	vector<InputState*>* distinctInputStates = createDistinctInputStates(&pendingStates);
 
-	
+
+	LOG(LogLevel::Debug) << "InputManager::update() : distinct input states size = [" << distinctInputStates->size() << "].";
 	for (int i = 0; i < distinctInputStates->size(); i++) {
 		handleNewState(distinctInputStates->at(i));
 	}
