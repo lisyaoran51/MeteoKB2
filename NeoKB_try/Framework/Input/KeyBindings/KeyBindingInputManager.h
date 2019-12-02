@@ -223,16 +223,20 @@ namespace KeyBindings {
 		}
 
 		int handleNewButtonDown(vector<Triggerable*>* queue, InputKey newButton) {
+			LOG(LogLevel::Debug) << "KeyBindingInputManager::handleNewButtonDown() : handleing button down.";
 
 			vector<KeyBinding*>::iterator it = find_if(keyBindings.begin(), keyBindings.end(), [&newButton](KeyBinding* k)->bool {
 				return k->Key == newButton;
 			});
 
+
 			if (it != keyBindings.end()) {
+				LOG(LogLevel::Debug) << "KeyBindingInputManager::handleNewButtonDown() : found button [" << (*it)->Key "].";
 				propagateButtonDown(queue, (T)(*it)->GetAction<T>());
 				return 0;
 			}
 			else {
+				LOG(LogLevel::Debug) << "KeyBindingInputManager::handleNewButtonDown() : not found button [" << newButton "].";
 				return -1;
 			}
 
