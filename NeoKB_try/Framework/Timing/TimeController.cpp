@@ -115,6 +115,7 @@ int TimeController::JumpToWithSpeedAdjust(double seekTime)
 
 int TimeController::Pause()
 {
+	LOG(LogLevel::Debug) << "TimeController::Pause() : stop controllable clock.";
 	controllableClock->Stop();
 	isPaused = true;
 
