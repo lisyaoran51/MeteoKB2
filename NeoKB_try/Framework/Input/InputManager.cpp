@@ -322,7 +322,6 @@ int InputManager::updatePanelEvents(InputState * inputState)
 		}
 	}
 
-	LOG(LogLevel::Debug) << "InputManager::updatePanelEvents() : updateing knobs and sliders.";
 
 	/* Knob */
 	for (int i = 0; i < panelState->GetKnobs()->size(); i++) {
@@ -338,7 +337,6 @@ int InputManager::updatePanelEvents(InputState * inputState)
 		}
 	}
 
-	LOG(LogLevel::Debug) << "InputManager::updatePanelEvents() : updateing end.";
 	return 0;
 }
 
@@ -494,7 +492,8 @@ int InputManager::iterateUpdateInputQueue(Triggerable * temp, vector<Triggerable
 		Triggerable* tempChild = childs[i]->Cast<Triggerable>();
 
 		if (tempChild->GetIsInputable())
-			iterateUpdateInputQueue(tempChild, tQueue);
+			tQueue->push_back(tempChild);
+		iterateUpdateInputQueue(tempChild, tQueue);
 	}
 
 	return size == tQueue->size() ? 0 : -1;
