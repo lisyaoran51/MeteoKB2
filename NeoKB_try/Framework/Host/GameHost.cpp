@@ -325,6 +325,7 @@ int GameHost::bootstrapSceneGraph(Game* game, Instrument* instrument)
 
 int GameHost::iterateSearchDrawable(ChildAddable * r, vector<Drawable*>* drawables)
 {
+	LOG(LogLevel::Finest) << "GameHost::iterateSearchDrawable() : check is drawable [" << r << "].";
 
 	if (dynamic_cast<Drawable*>(r)) 
 		if(dynamic_cast<Drawable*>(r)->GetIsDrawable())
