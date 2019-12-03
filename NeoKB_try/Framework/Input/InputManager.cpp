@@ -35,9 +35,10 @@ int InputManager::update()
 
 	delete distinctInputStates;
 
-	for (int i = 0; i < pendingStates.size(); i++)		// 從input handler創建，到這邊delete掉
+	for (int i = 0; i < pendingStates.size(); i++) {	// 從input handler創建，到這邊delete掉
+		LOG(LogLevel::Debug) << "InputManager::update() : delete pending state after handled.";
 		delete pendingStates[i];						//
-
+	}
 
 	return 0;
 }
@@ -314,6 +315,8 @@ int InputManager::updatePanelEvents(InputState * inputState)
 		}
 	}
 
+	LOG(LogLevel::Debug) << "InputManager::updatePanelEvents() : updateing knobs and sliders.";
+
 	/* Knob */
 	for (int i = 0; i < panelState->GetKnobs()->size(); i++) {
 		if (panelState->GetKnobs()->at(i).second != 0) {
@@ -328,6 +331,7 @@ int InputManager::updatePanelEvents(InputState * inputState)
 		}
 	}
 
+	LOG(LogLevel::Debug) << "InputManager::updatePanelEvents() : updateing end.";
 	return 0;
 }
 

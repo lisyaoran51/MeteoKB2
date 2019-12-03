@@ -159,6 +159,10 @@ namespace Timing {
 		}
 
 		virtual int OnButtonDown(T action) {
+			typename map<T, InputKey>::iterator it;
+			it = keyBindings.find(action);
+
+			LOG(LogLevel::Debug) << "TTimeController::OnButtonDown(): check bindings " << (keyBindings.find(action) == keyBindings.end() ? "not found" : "found");
 			if (keyBindings[action] == InputKey::Pause) {
 				LOG(LogLevel::Debug) << "TTimeController::OnButtonDown() : get pause button input and pause.";
 				if (speedAdjuster->GetIsAdjustingTime())
