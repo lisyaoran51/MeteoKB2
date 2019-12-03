@@ -35,10 +35,14 @@ int InputManager::update()
 
 	delete distinctInputStates;
 
+	bool _debugHasPendingState = false;
 	for (int i = 0; i < pendingStates.size(); i++) {	// 從input handler創建，到這邊delete掉
 		LOG(LogLevel::Debug) << "InputManager::update() : delete pending state after handled.";
+		_debugHasPendingState = true;
 		delete pendingStates[i];						//
 	}
+	if(_debugHasPendingState)
+		LOG(LogLevel::Debug) << "InputManager::update() : delete pending state after handled.";
 
 	return 0;
 }
