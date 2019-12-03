@@ -88,10 +88,10 @@ vector<InputState*>* InputManager::getPendingState(vector<InputState*>* pendingS
 
 		vector<InputState*>* inputHandlerPendingState;
 		inputHandlerPendingState = getInputHandlers()->at(i)->GetPendingStates();
-		pendingStates->reserve(inputHandlerPendingState->size());
-		pendingStates->insert(pendingStates->end(), inputHandlerPendingState->begin(), inputHandlerPendingState->end());
-		
 		if (inputHandlerPendingState->size() > 0) {
+			pendingStates->reserve(inputHandlerPendingState->size());
+			pendingStates->insert(pendingStates->end(), inputHandlerPendingState->begin(), inputHandlerPendingState->end());
+		
 			LOG(LogLevel::Debug) << "InputManager::getPendingState() : get input from input handler. has kb [" << inputHandlerPendingState->at(0)->GetKeyboardState() << "], has bt [" << inputHandlerPendingState->at(0)->GetBluetoothState() << "].";
 			if (inputHandlerPendingState->at(0)->GetPanelState())
 				LOG(LogLevel::Debug) << "InputManager::getPendingState() : get fake input.";
