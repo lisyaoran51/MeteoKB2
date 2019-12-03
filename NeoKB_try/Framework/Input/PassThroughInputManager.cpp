@@ -1,5 +1,6 @@
 #include "PassThroughInputManager.h"
 
+#include <algorithm>
 
 using namespace Framework::Input;
 
@@ -28,7 +29,9 @@ vector<InputState*>* PassThroughInputManager::getPendingState(vector<InputState*
 	pendingStates->clear();
 
 	for (int i = 0; i < pendingParentStates.size(); i++) {
-		pendingStates->push_back(pendingParentStates[i]->Clone());
+		// 很有可能都是重複的同一個input state，所以先確定一下
+		if (find(pendingStates->begin(), pendingStates->end(), pendingParentStates[i]) == pendingStates->end()) 
+			pendingStates->push_back(pendingParentStates[i]);
 	}
 
 	pendingParentStates.clear();
