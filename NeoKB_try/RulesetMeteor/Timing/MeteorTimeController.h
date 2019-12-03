@@ -12,7 +12,7 @@ using namespace Framework::Timing;
 namespace Meteor {
 namespace Timing {
 
-	class MeteorTimeController : public TTimeController<MeteorAction> {
+	class MeteorTimeController : public TimeController {
 
 
 	public:
@@ -25,7 +25,7 @@ namespace Timing {
 		/// 再裡面存ruleset info，才能直接從time controller裡面找出ruleset的keybinding
 		/// 現在懶得改，先擺在自己裡面就好。以後要修改action和input的mapping都要記得進來這邊修
 		/// </summary>
-		virtual map<MeteorAction, InputKey>* GetDefaultkeyBindings();
+		//virtual map<MeteorAction, InputKey>* GetDefaultkeyBindings(); // 改成不繼承meteo action
 
 
 	protected:
@@ -34,7 +34,9 @@ namespace Timing {
 		/// <summary>
 		/// 把input key和新的輸入結合一下
 		/// </summary>
-		virtual int reloadMappings();
+		//virtual int reloadMappings(); // 改成不繼承meteo action
+
+		virtual int onButtonDown(InputState* inputState, InputKey button);
 
 	};
 
