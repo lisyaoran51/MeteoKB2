@@ -12,7 +12,7 @@ int MeteoPanelDevice::readFromDevice()
 {
 	_debugCount++;
 
-	if (_debugCount == 2000) {
+	if (_debugCount == 8000) {
 		InputState* newState = new InputState();
 		newState->SetPanelState(new PanelState());
 
