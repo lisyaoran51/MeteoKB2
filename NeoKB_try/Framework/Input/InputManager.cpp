@@ -22,7 +22,6 @@ int InputManager::ChangeFocus(Triggerable * fTriggerable)
 int InputManager::update()
 {
 	vector<InputState*> pendingStates;
-	LOG(LogLevel::Debug) << "InputManager::update(): start update." << pendingStates.size();
 	getPendingState(&pendingStates);
 	if(pendingStates.size() > 0)
 		LOG(LogLevel::Debug) << "InputManager::update(): get [" << pendingStates[0] << "] states by " << GetTypeName() << ".";
@@ -39,15 +38,10 @@ int InputManager::update()
 
 	delete distinctInputStates;
 
-	bool _debugHasPendingState = false;
 	for (int i = 0; i < pendingStates.size(); i++) {	// 從input handler創建，到這邊delete掉
-		LOG(LogLevel::Debug) << "InputManager::update() : delete pending state after handled.";
-		_debugHasPendingState = true;
 		delete pendingStates[i];						//
 	}
 	pendingStates.clear();
-	if(_debugHasPendingState)
-		LOG(LogLevel::Debug) << "InputManager::update() : pending state clear after handled.";
 
 	return 0;
 }
@@ -93,14 +87,12 @@ vector<InputState*>* InputManager::getPendingState(vector<InputState*>* pendingS
 			pendingStates->reserve(inputHandlerPendingState->size());
 			pendingStates->insert(pendingStates->end(), inputHandlerPendingState->begin(), inputHandlerPendingState->end());
 		
-			LOG(LogLevel::Debug) << "InputManager::getPendingState() : get input from input handler. has kb [" << inputHandlerPendingState->at(0)->GetKeyboardState() << "], has bt [" << inputHandlerPendingState->at(0)->GetBluetoothState() << "].";
 			if (inputHandlerPendingState->at(0)->GetPanelState())
 				LOG(LogLevel::Debug) << "InputManager::getPendingState() : get fake input.";
 		}
 
 		delete inputHandlerPendingState;
 	}
-	LOG(LogLevel::Debug) << "InputManager::getPendingState() : after get pending state, size = [" << pendingStates->size() << "] by " << GetTypeName() << ".";
 	return pendingStates;
 }
 
@@ -112,6 +104,8 @@ vector<InputState*>* InputManager::createDistinctInputStates(vector<InputState*>
 	returnValue->push_back(distinctState);
 
 	for (int i = 0; i < states->size(); i++) {
+
+		LOG(LogLevel::Debug) << "InputManager::createDistinctInputStates() : start create kb.";
 
 		InputState* state = states->at(i);
 
@@ -153,6 +147,8 @@ vector<InputState*>* InputManager::createDistinctInputStates(vector<InputState*>
 				newKeyboardState->GetUps()->push_back(up);
 			}
 		}
+
+		LOG(LogLevel::Debug) << "InputManager::createDistinctInputStates() : start create panel.";
 
 		/* Panel State */
 		if (hasNewPanelState) {
@@ -205,6 +201,8 @@ vector<InputState*>* InputManager::createDistinctInputStates(vector<InputState*>
 			}
 		}
 
+		LOG(LogLevel::Debug) << "InputManager::createDistinctInputStates() : start create bt.";
+
 		/* Bluetooth State */
 		if (hasNewBluetoothState) {
 			if (distinctState->GetBluetoothState() == nullptr)
@@ -218,6 +216,7 @@ vector<InputState*>* InputManager::createDistinctInputStates(vector<InputState*>
 			}
 		}
 	}
+	LOG(LogLevel::Debug) << "InputManager::createDistinctInputStates() : put empty state into.";
 
 	/* 如果沒有State的話，要擺一個空的，這樣才能比較上一次和這一次輸入差多少 */
 	if (distinctState->GetKeyboardState() == nullptr)
