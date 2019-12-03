@@ -223,7 +223,7 @@ namespace KeyBindings {
 		}
 
 		int handleNewButtonDown(vector<Triggerable*>* queue, InputKey newButton) {
-			LOG(LogLevel::Debug) << "KeyBindingInputManager::handleNewButtonDown() : handleing button down.";
+			LOG(LogLevel::Debug) << "KeyBindingInputManager::handleNewButtonDown() : handling button down by [" << GetTypeName() << "].";
 
 			vector<KeyBinding*>::iterator it = find_if(keyBindings.begin(), keyBindings.end(), [&newButton](KeyBinding* k)->bool {
 				return k->Key == newButton;
