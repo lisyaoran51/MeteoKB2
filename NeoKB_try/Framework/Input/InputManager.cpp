@@ -25,8 +25,6 @@ int InputManager::update()
 	vector<InputState*> pendingStates;
 	getPendingState(&pendingStates);
 	LOG(LogLevel::Debug) << "InputManager::handleNewState(): get [" << pendingStates.size() << "] states.";
-	if (pendingStates.size() > 0)
-		LOG(LogLevel::Debug) << "InputManager::handleNewState(): pending state 1 = [" << pendingStates[0] << "].";
 
 	/* 這邊本來要做create distinct states，這樣可以確保舊的輸入沒被更動，經過這個以後panel.keyboard.bt都部會是null，但裡面會是沒有東西的 */
 	vector<InputState*>* distinctInputStates = createDistinctInputStates(&pendingStates);
@@ -93,9 +91,11 @@ vector<InputState*>* InputManager::getPendingState(vector<InputState*>* pendingS
 		pendingStates->reserve(inputHandlerPendingState->size());
 		pendingStates->insert(pendingStates->end(), inputHandlerPendingState->begin(), inputHandlerPendingState->end());
 		
-		if (inputHandlerPendingState->size() > 0)
-		if(inputHandlerPendingState->at(0)->GetPanelState())
-			LOG(LogLevel::Debug) << "InputManager::getPendingState() : get fake input.";
+		if (inputHandlerPendingState->size() > 0) {
+			LOG(LogLevel::Debug) << "InputManager::getPendingState() : get input from input handler. has kb [" << inputHandlerPendingState->at(0)->GetKeyboardState() << "], has bt [" << inputHandlerPendingState->at(0)->GetBluetoothState() << "].";
+			if (inputHandlerPendingState->at(0)->GetPanelState())
+				LOG(LogLevel::Debug) << "InputManager::getPendingState() : get fake input.";
+		}
 
 		delete inputHandlerPendingState;
 	}
