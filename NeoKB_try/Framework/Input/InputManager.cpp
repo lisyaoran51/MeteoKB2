@@ -24,12 +24,12 @@ int InputManager::update()
 	vector<InputState*> pendingStates;
 	getPendingState(&pendingStates);
 	if(pendingStates.size() > 0)
-		LOG(LogLevel::Debug) << "InputManager::update(): get [" << pendingStates[0] << "] states by " << GetTypeName() << ".";
+		LOG(LogLevel::Depricated) << "InputManager::update(): get [" << pendingStates[0] << "] states by " << GetTypeName() << ".";
 
 	/* 這邊本來要做create distinct states，這樣可以確保舊的輸入沒被更動，經過這個以後panel.keyboard.bt都部會是null，但裡面會是沒有東西的 */
 	vector<InputState*>* distinctInputStates = createDistinctInputStates(&pendingStates);
 
-	LOG(LogLevel::Debug) << "InputManager::update():create distinct input state [" << distinctInputStates->at(0) << "].";
+	LOG(LogLevel::Depricated) << "InputManager::update():create distinct input state [" << distinctInputStates->at(0) << "].";
 
 	//LOG(LogLevel::Debug) << "InputManager::update() : distinct input states size = [" << distinctInputStates->size() << "].";
 	for (int i = 0; i < distinctInputStates->size(); i++) {
@@ -105,7 +105,6 @@ vector<InputState*>* InputManager::createDistinctInputStates(vector<InputState*>
 
 	for (int i = 0; i < states->size(); i++) {
 
-		LOG(LogLevel::Debug) << "InputManager::createDistinctInputStates() : start create kb.";
 
 		InputState* state = states->at(i);
 
@@ -148,7 +147,6 @@ vector<InputState*>* InputManager::createDistinctInputStates(vector<InputState*>
 			}
 		}
 
-		LOG(LogLevel::Debug) << "InputManager::createDistinctInputStates() : start create panel.";
 
 		/* Panel State */
 		if (hasNewPanelState) {
@@ -201,7 +199,6 @@ vector<InputState*>* InputManager::createDistinctInputStates(vector<InputState*>
 			}
 		}
 
-		LOG(LogLevel::Debug) << "InputManager::createDistinctInputStates() : start create bt.";
 
 		/* Bluetooth State */
 		if (hasNewBluetoothState) {
@@ -209,14 +206,13 @@ vector<InputState*>* InputManager::createDistinctInputStates(vector<InputState*>
 				distinctState->SetBluetoothState(new BluetoothState());
 			BluetoothState* newBluetoothState = distinctState->GetBluetoothState();
 
-			/* button */
-			for (int i = 0; i < state->GetPanelState()->GetButtons()->size(); i++) {
+			/* bt */
+			for (int i = 0; i < state->GetBluetoothState()->GetCommands()->size(); i++) {
 				BluetoothCommand* bluetoothCommand = state->GetBluetoothState()->GetCommands()->at(i);
 				newBluetoothState->GetCommands()->push_back(new BluetoothCommand(bluetoothCommand));
 			}
 		}
 	}
-	LOG(LogLevel::Debug) << "InputManager::createDistinctInputStates() : put empty state into.";
 
 	/* 如果沒有State的話，要擺一個空的，這樣才能比較上一次和這一次輸入差多少 */
 	if (distinctState->GetKeyboardState() == nullptr)
