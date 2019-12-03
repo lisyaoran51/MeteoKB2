@@ -21,12 +21,14 @@ int InputManager::ChangeFocus(Triggerable * fTriggerable)
 
 int InputManager::update()
 {
+	LOG(LogLevel::Debug) << "InputManager::handleNewState(): start update.";
 	vector<InputState*> pendingStates;
 	getPendingState(&pendingStates);
-
+	LOG(LogLevel::Debug) << "InputManager::handleNewState(): get [" << pendingStates.size() << "] states.";
 	/* 這邊本來要做create distinct states，這樣可以確保舊的輸入沒被更動，經過這個以後panel.keyboard.bt都部會是null，但裡面會是沒有東西的 */
 	vector<InputState*>* distinctInputStates = createDistinctInputStates(&pendingStates);
 
+	LOG(LogLevel::Debug) << "InputManager::handleNewState():create distinct input states.";
 
 	//LOG(LogLevel::Debug) << "InputManager::update() : distinct input states size = [" << distinctInputStates->size() << "].";
 	for (int i = 0; i < distinctInputStates->size(); i++) {
@@ -43,13 +45,14 @@ int InputManager::update()
 	}
 	pendingStates.clear();
 	if(_debugHasPendingState)
-		LOG(LogLevel::Debug) << "InputManager::update() : delete pending state after handled.";
+		LOG(LogLevel::Debug) << "InputManager::update() : pending state clear after handled.";
 
 	return 0;
 }
 
 int InputManager::handleNewState(InputState * state)
 {
+
 	bool hasNewKeyboardState = !state->GetKeyboardState()->CheckIsEmpty();
 	bool hasNewPanelState = !state->GetPanelState()->CheckIsEmpty();
 	bool hasNewBluetoothState = !state->GetBluetoothState()->CheckIsEmpty();
