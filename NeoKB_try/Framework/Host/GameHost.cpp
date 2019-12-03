@@ -77,13 +77,13 @@ int GameHost::Run(Game* game, Instrument* instrument)
 
 	LOG(LogLevel::Finest) << "Initialize Threads.";
 	inputInitialize();
-	inputThread->Start();
+	//inputThread->Start();
 
 	drawInitialize();
 	drawThread->Start();
 
 	updateInitialize();
-	updateThread->Start();
+	//updateThread->Start();
 
 	if(!initialized)
 		LOG(LogLevel::Finest) << "host not initialized yet.";
