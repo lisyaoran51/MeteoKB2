@@ -144,7 +144,7 @@ int GameHost::drawInitialize()
 	// 這個應該擺在main裡才對，這邊沒有存螢幕大小
 	canvas = new Map(width, height);
 
-	drawThread->SetMaxUpdateHz(30);
+	drawThread->SetMaxUpdateHz(1);
 	return 0;
 }
 
@@ -196,7 +196,7 @@ int GameHost::updateInitialize()
 {
 	LOG(LogLevel::Info) << "GameHost::updateInitialize() : Setting update thread.";
 	// 預設是1000
-	updateThread->SetMaxUpdateHz(10);
+	updateThread->SetMaxUpdateHz(1);
 	return 0;
 }
 
@@ -218,7 +218,7 @@ int GameHost::inputInitialize()
 {
 	LOG(LogLevel::Info) << "GameHost::inputInitialize() : Setting input thread.";
 	// 預設是1000了
-	inputThread->SetMaxUpdateHz(100);;
+	inputThread->SetMaxUpdateHz(1);;
 	return 0;
 }
 
