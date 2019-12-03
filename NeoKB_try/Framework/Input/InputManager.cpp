@@ -376,6 +376,15 @@ int InputManager::propagateKeyUp(vector<Triggerable*>* queue, InputState * state
 
 int InputManager::handleButtonDown(InputState * state, InputKey button)
 {
+	LOG(LogLevel::Debug) << "InputManager::handleButtonDown() : trigger queue-";
+	LOG(LogLevel::Debug) << [](vector<Triggerable*>& triggerables) {
+
+		for(int i = 0; i < triggerables.size(); i++)
+			LOG(LogLevel::Debug) << "|---------[" << triggerables[i]->GetTypeName() << "]";
+
+		return 0;
+	}(triggerQueue);
+
 	return propagateButtonDown(&triggerQueue, state, button);
 }
 
