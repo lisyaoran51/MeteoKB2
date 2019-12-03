@@ -21,8 +21,8 @@ int InputManager::ChangeFocus(Triggerable * fTriggerable)
 
 int InputManager::update()
 {
-	LOG(LogLevel::Debug) << "InputManager::handleNewState(): start update.";
 	vector<InputState*> pendingStates;
+	LOG(LogLevel::Debug) << "InputManager::handleNewState(): start update." << pendingStates.size();
 	getPendingState(&pendingStates);
 	LOG(LogLevel::Debug) << "InputManager::handleNewState(): get [" << pendingStates.size() << "] states.";
 
