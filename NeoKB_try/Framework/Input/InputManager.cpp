@@ -41,6 +41,7 @@ int InputManager::update()
 		_debugHasPendingState = true;
 		delete pendingStates[i];						//
 	}
+	pendingStates.clear();
 	if(_debugHasPendingState)
 		LOG(LogLevel::Debug) << "InputManager::update() : delete pending state after handled.";
 
