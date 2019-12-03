@@ -99,7 +99,7 @@ vector<InputState*>* InputManager::getPendingState(vector<InputState*>* pendingS
 
 		delete inputHandlerPendingState;
 	}
-
+	LOG(LogLevel::Debug) << "InputManager::getPendingState() : after get pending state, size = [" << pendingStates->size() << "].";
 	return pendingStates;
 }
 
