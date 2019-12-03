@@ -231,12 +231,12 @@ namespace KeyBindings {
 
 
 			if (it != keyBindings.end()) {
-				LOG(LogLevel::Debug) << "KeyBindingInputManager::handleNewButtonDown() : found button [" << (*it)->Key "].";
+				LOG(LogLevel::Debug) << "KeyBindingInputManager::handleNewButtonDown() : found button [" << (*it)->Key << "].";
 				propagateButtonDown(queue, (T)(*it)->GetAction<T>());
 				return 0;
 			}
 			else {
-				LOG(LogLevel::Debug) << "KeyBindingInputManager::handleNewButtonDown() : not found button [" << newButton "].";
+				LOG(LogLevel::Debug) << "KeyBindingInputManager::handleNewButtonDown() : not found button [" << newButton << "].";
 				return -1;
 			}
 
