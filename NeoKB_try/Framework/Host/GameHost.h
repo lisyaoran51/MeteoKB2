@@ -154,7 +154,7 @@ namespace Host {
 		/// <summary>
 		/// input manager會成為root，附則把輸入傳給下面的物件
 		/// </summary>
-		Container* root;
+		Container* root = nullptr;
 
 		int iterateSearchDrawable(ChildAddable* r, vector<Drawable*>* drawables);
 
