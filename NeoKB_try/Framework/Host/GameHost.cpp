@@ -332,6 +332,7 @@ int GameHost::iterateSearchDrawable(ChildAddable * r, vector<Drawable*>* drawabl
 	
 	
 	for (int i = 0; i < r->GetChilds()->size(); i++) {
+		LOG(LogLevel::Finest) << "GameHost::iterateSearchDrawable() : iterate search child [" << r->GetChilds()->at(i) << "].";
 		iterateSearchDrawable(r->GetChilds()->at(i), drawables);
 	}
 
