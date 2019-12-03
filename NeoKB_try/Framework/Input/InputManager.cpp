@@ -25,6 +25,9 @@ int InputManager::update()
 	vector<InputState*> pendingStates;
 	getPendingState(&pendingStates);
 	LOG(LogLevel::Debug) << "InputManager::handleNewState(): get [" << pendingStates.size() << "] states.";
+	if (pendingStates.size() > 0)
+		LOG(LogLevel::Debug) << "InputManager::handleNewState(): pending state 1 = [" << pendingStates[0] << "].";
+
 	/* 這邊本來要做create distinct states，這樣可以確保舊的輸入沒被更動，經過這個以後panel.keyboard.bt都部會是null，但裡面會是沒有東西的 */
 	vector<InputState*>* distinctInputStates = createDistinctInputStates(&pendingStates);
 
