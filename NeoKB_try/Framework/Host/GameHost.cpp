@@ -150,6 +150,9 @@ int GameHost::drawInitialize()
 
 int GameHost::drawFrame()
 {
+	if (root == nullptr)
+		return 0;
+
 	LOG(LogLevel::Finest) << "GameHost::drawFrame() : drawing a frame.";
 
 	canvas->Reset();
@@ -202,6 +205,9 @@ int GameHost::updateInitialize()
 
 int GameHost::updateFrame()
 {
+	if (root == nullptr)
+		return 0;
+
 	LOG(LogLevel::Finest) << "GameHost::updateFrame() : update scenegraph tree.";
 
 	LOG(LogLevel::Finest) << "GameHost::updateFrame() : print tree " << [](Container* r) {
