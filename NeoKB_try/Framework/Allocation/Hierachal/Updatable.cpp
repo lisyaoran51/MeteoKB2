@@ -46,12 +46,12 @@ bool Updatable::UpdateSubTree()
 
 	if (GetLoadState() == LoadState::Ready)
 		LoadComplete();
+	LOG(LogLevel::Debug) << "Updatable::UpdateSubTree() : update [" << GetTypeName() << "].";
 
 	if (GetParent() != nullptr && customClock != nullptr) {
 		customClock->ProcessFrame();
 	}
 	
-	LOG(LogLevel::Debug) << "Updatable::UpdateSubTree() : update [" << GetTypeName() << "].";
 	update();
 
 	cacheChilds.clear();
