@@ -56,6 +56,7 @@ namespace KeyBindings {
 			}
 
 			delete defaultKeyBindings;
+			LOG(LogLevel::Debug) << "KeyBindingInputManager::reloadMappings() : keybinding loaded.";
 
 			return 0;
 
@@ -105,7 +106,7 @@ namespace KeyBindings {
 
 		virtual int propagateButtonDown(vector<Triggerable*>* queue, InputState* state, InputKey button) {
 
-			LOG(LogLevel::Debug) << "KeyBindingInputManager::propagateButtonDown() : keybinding input manager propogate process.";
+			LOG(LogLevel::Depricated) << "KeyBindingInputManager::propagateButtonDown() : keybinding input manager propogate process.";
 			return InputManager::propagateButtonDown(queue, state, button) + handleNewButtonDown(queue, button);
 		}
 
