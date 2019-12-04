@@ -12,21 +12,21 @@ MeteorTimeController::MeteorTimeController() : RegisterType("MeteorTimeControlle
 int MeteorTimeController::onButtonDown(InputState * inputState, InputKey button)
 {
 	if (button == InputKey::Pause) {
-		LOG(LogLevel::Debug) << "TimeController::OnButtonDown() : get pause button input and pause.";
+		LOG(LogLevel::Debug) << "MeteorTimeController::OnButtonDown() : get pause button input and pause.";
 		if (speedAdjuster->GetIsAdjustingTime())
 			return -1;
 
 		if (!GetIsPaused()) {
 			Pause();
+			LOG(LogLevel::Debug) << "MeteorTimeController::OnButtonDown() : after pause.";
 			SetAllChildsIsMaskedForTrigger();
+			LOG(LogLevel::Debug) << "MeteorTimeController::OnButtonDown() : after mask.";
 		}
 		else if (!isWaitingFreeze) {
 			speedAdjuster->SetFreezeTime(defaultFreezeTime);
 			isWaitingFreeze = true;
 		}
 	}
-	return 0;
-
 	return 0;
 }
 
