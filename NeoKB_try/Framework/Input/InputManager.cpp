@@ -75,15 +75,8 @@ int InputManager::handleNewState(InputState * state)
 	if (hasNewKeyboardState)
 		updateKeyboardEvents(currentState);
 
-	if (GetTypeName() == "UserInputManager")
-		LOG(LogLevel::Debug) << "InputManager::handleNewState(): try to update panel events.";
-
 	if (hasNewPanelState)
 		updatePanelEvents(currentState);
-
-	if (GetTypeName() == "UserInputManager")
-		LOG(LogLevel::Debug) << "InputManager::handleNewState(): try to update bt events.";
-	
 
 	if (hasNewBluetoothState)
 		updateBluetoothEvents(currentState);
@@ -337,6 +330,7 @@ int InputManager::updatePanelEvents(InputState * inputState)
 		}
 	}
 
+	LOG(LogLevel::Debug) << "InputManager::updatePanelEvents() : after button handled.";
 
 	/* Knob */
 	for (int i = 0; i < panelState->GetKnobs()->size(); i++) {
@@ -344,6 +338,7 @@ int InputManager::updatePanelEvents(InputState * inputState)
 			handleKnobTurn(inputState, panelState->GetKnobs()->at(i).first);
 		}
 	}
+	LOG(LogLevel::Debug) << "InputManager::updatePanelEvents() : after knob handled.";
 
 	/* Slider */
 	for (int i = 0; i < panelState->GetSliders()->size(); i++) {
@@ -351,6 +346,7 @@ int InputManager::updatePanelEvents(InputState * inputState)
 			handleSlide(inputState, panelState->GetSliders()->at(i).first);
 		}
 	}
+	LOG(LogLevel::Debug) << "InputManager::updatePanelEvents() : after slider handled.";
 
 	return 0;
 }
