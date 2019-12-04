@@ -10,7 +10,7 @@ using namespace Util;
 
 OffsetFramedClock::OffsetFramedClock(Clock * s) : FramedClock(s)
 {
-	LOG(LogLevel::Debug) << "OffsetFramedClock::OffsetFramedClock() : address = [" << this << "].";
+	LOG(LogLevel::Depricated) << "OffsetFramedClock::OffsetFramedClock() : address = [" << this << "].";
 	offset = 0;
 }
 
