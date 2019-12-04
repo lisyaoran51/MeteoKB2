@@ -12,8 +12,8 @@ using namespace Framework::Timing;
 using namespace std;
 using namespace Util;
 
-//debug
-#include "OffsetFramedClock.h"
+
+
 
 
 FramedClock::FramedClock(Clock * s)
@@ -38,8 +38,6 @@ int FramedClock::ProcessFrame()
 
 	if (isProcessSourceClockFrames) {
 		FrameBasedClock* sourceAsFrameBased = dynamic_cast<FrameBasedClock*>(source);
-		if(dynamic_cast<OffsetFramedClock*>(this))
-			LOG(LogLevel::Debug) << "FramedClock::ProcessFrame() : try to process source decoupled clock [" << sourceAsFrameBased << "].";
 		if (sourceAsFrameBased)
 			sourceAsFrameBased->ProcessFrame();
 	}
