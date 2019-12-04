@@ -36,11 +36,22 @@ int InputManager::update()
 		handleNewState(distinctInputStates->at(i));
 	}
 
+	if(GetTypeName() == "UserInputManager")
+		LOG(LogLevel::Debug) << "InputManager::update(): state handled.";
+
 	delete distinctInputStates;
+
+
+	if (GetTypeName() == "UserInputManager")
+		LOG(LogLevel::Debug) << "InputManager::update(): state list deleted.";
 
 	for (int i = 0; i < pendingStates.size(); i++) {	// 從input handler創建，到這邊delete掉
 		delete pendingStates[i];						//
 	}
+
+	if (GetTypeName() == "UserInputManager")
+		LOG(LogLevel::Debug) << "InputManager::update(): pending state deleted.";
+
 	pendingStates.clear();
 
 	return 0;
