@@ -52,13 +52,13 @@ bool Updatable::UpdateSubTree()
 	}
 	
 	update();
+	LOG(LogLevel::Debug) << "Updatable::UpdateSubTree() : update [" << GetTypeName() << "].";
 
 	cacheChilds.clear();
 	unique_lock<mutex> uLock(ChildMutex);
 	cacheChilds.assign(GetChilds()->begin(), GetChilds()->end());
 	uLock.unlock();
 
-	LOG(LogLevel::Debug) << "Updatable::UpdateSubTree() : update [" << GetTypeName() << "].";
 
 	for (vector<ChildAddable*>::iterator iter = cacheChilds.begin(); iter != cacheChilds.end(); iter++) {
 		Updatable* child = Cast<Updatable>(*iter);
