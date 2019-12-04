@@ -33,17 +33,15 @@ int InputManager::update()
 
 	//LOG(LogLevel::Debug) << "InputManager::update() : distinct input states size = [" << distinctInputStates->size() << "].";
 	for (int i = 0; i < distinctInputStates->size(); i++) {
+		if (GetTypeName() == "UserInputManager")
+			LOG(LogLevel::Debug) << "InputManager::update(): handling state [" << i << "] in [" << distinctInputStates->size() << "] states.";
 		handleNewState(distinctInputStates->at(i));
 	}
 
-	if(GetTypeName() == "UserInputManager")
-		LOG(LogLevel::Debug) << "InputManager::update(): state handled.";
 
 	delete distinctInputStates;
 
 
-	if (GetTypeName() == "UserInputManager")
-		LOG(LogLevel::Debug) << "InputManager::update(): state list deleted.";
 
 	for (int i = 0; i < pendingStates.size(); i++) {	// 從input handler創建，到這邊delete掉
 		delete pendingStates[i];						//
@@ -77,8 +75,14 @@ int InputManager::handleNewState(InputState * state)
 	if (hasNewKeyboardState)
 		updateKeyboardEvents(currentState);
 
+	if (GetTypeName() == "UserInputManager")
+		LOG(LogLevel::Debug) << "InputManager::handleNewState(): try to update panel events.";
+
 	if (hasNewPanelState)
 		updatePanelEvents(currentState);
+
+	if (GetTypeName() == "UserInputManager")
+		LOG(LogLevel::Debug) << "InputManager::handleNewState(): try to update bt events.";
 	
 
 	if (hasNewBluetoothState)
