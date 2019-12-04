@@ -2,6 +2,7 @@
 
 #include <iomanip>
 #include <chrono>         // std::chrono::seconds
+#include <sys/syscall.h>
 
 
 using namespace Framework::Threading;
@@ -66,6 +67,8 @@ int GameThread::SetIsActive(bool value)
 int GameThread::runWork()
 {
 	this_thread::sleep_for(chrono::milliseconds(1000));
+
+	threadId = syscall(SYS_gettid);
 
 	while (!exitRequested)
 		processFrame();
