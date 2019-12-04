@@ -96,9 +96,6 @@ int GameThread::processFrame()
 
 	clock->ProcessFrame();
 
-	if (threadName == "UpdateThread")
-		LOG(LogLevel::Debug) << "GameThread::processFrame() : [" << threadName << "] after process frame.";
-
 	statisticFrameRate++;
 	return 0;
 }

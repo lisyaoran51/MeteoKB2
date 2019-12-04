@@ -51,6 +51,7 @@ bool Updatable::UpdateSubTree()
 		customClock->ProcessFrame();
 	}
 	
+	LOG(LogLevel::Debug) << "Updatable::UpdateSubTree() : update [" << GetTypeName() << "].";
 	update();
 
 	cacheChilds.clear();
