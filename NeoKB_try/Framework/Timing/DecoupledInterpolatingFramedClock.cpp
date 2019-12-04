@@ -85,8 +85,9 @@ int DecoupledInterpolatingFramedClock::ProcessFrame()
 	if (isCoupled || sourceRunning) { // 有綁在一起，或者是原時鐘正在跑，都一定要跟著
 		if (sourceRunning)
 			decoupledStopwatchClock->Start();
-		else
+		else {
 			decoupledStopwatchClock->Stop();
+		}
 		decoupledStopwatchClock->Seek(GetCurrentTime());
 		
 	}
@@ -134,9 +135,11 @@ int DecoupledInterpolatingFramedClock::Start()
 
 int DecoupledInterpolatingFramedClock::Stop()
 {
+
 	if (getAdjustableSource() != nullptr)
 		getAdjustableSource()->Stop();
 	decoupledStopwatchClock->Stop();
+	LOG(LogLevel::Debug) << "DecoupledInterpolatingFramedClock::Stop() : after stop, the decoupled clock running is [" << decoupledClock->GetIsRunning() << "].";
 	return 0;
 }
 

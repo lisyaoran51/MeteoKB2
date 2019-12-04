@@ -18,9 +18,7 @@ int MeteorTimeController::onButtonDown(InputState * inputState, InputKey button)
 
 		if (!GetIsPaused()) {
 			Pause();
-			LOG(LogLevel::Debug) << "MeteorTimeController::OnButtonDown() : after pause.";
 			SetAllChildsIsMaskedForTrigger();
-			LOG(LogLevel::Debug) << "MeteorTimeController::OnButtonDown() : after mask.";
 		}
 		else if (!isWaitingFreeze) {
 			speedAdjuster->SetFreezeTime(defaultFreezeTime);
