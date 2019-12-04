@@ -92,7 +92,7 @@ int DecoupledInterpolatingFramedClock::ProcessFrame()
 		
 	}
 	else {
-		LOG(LogLevel::Debug) << "DecoupledInterpolatingFramedClock::ProcessFrame() : when the source is not running, the decoupled clock running is [" << decoupledClock->GetIsRunning() << "].";
+		LOG(LogLevel::Debug) << "DecoupledInterpolatingFramedClock::ProcessFrame() : when the source is not running, the decoupled clock running is [" << decoupledClock->GetIsRunning() << "] by [" << this << "].";
 		LOG(LogLevel::Depricated) << "DecoupledInterpolatingFramedClock::ProcessFrame() : current time is [" << fixed << setprecision(5) << GetCurrentTime() << "].";
 		if (decoupledClock->GetIsRunning()) {
 			//if we're running but our source isn't, we should try a seek to see if it's capable to switch to it for the current value.
@@ -140,7 +140,7 @@ int DecoupledInterpolatingFramedClock::Stop()
 	if (getAdjustableSource() != nullptr)
 		getAdjustableSource()->Stop();
 	decoupledStopwatchClock->Stop();
-	LOG(LogLevel::Debug) << "DecoupledInterpolatingFramedClock::Stop() : after stop, the decoupled clock running is [" << decoupledClock->GetIsRunning() << "].";
+	LOG(LogLevel::Debug) << "DecoupledInterpolatingFramedClock::Stop() : after stop, the decoupled clock running is [" << decoupledClock->GetIsRunning() << "] by [" << this << "].";
 	return 0;
 }
 
