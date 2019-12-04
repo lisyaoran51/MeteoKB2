@@ -46,7 +46,6 @@ bool Updatable::UpdateSubTree()
 
 	if (GetLoadState() == LoadState::Ready)
 		LoadComplete();
-	LOG(LogLevel::Debug) << "Updatable::UpdateSubTree() : update [" << GetTypeName() << "].";
 
 	if (GetParent() != nullptr && customClock != nullptr) {
 		customClock->ProcessFrame();
@@ -59,6 +58,7 @@ bool Updatable::UpdateSubTree()
 	cacheChilds.assign(GetChilds()->begin(), GetChilds()->end());
 	uLock.unlock();
 
+	LOG(LogLevel::Debug) << "Updatable::UpdateSubTree() : update [" << GetTypeName() << "].";
 
 	for (vector<ChildAddable*>::iterator iter = cacheChilds.begin(); iter != cacheChilds.end(); iter++) {
 		Updatable* child = Cast<Updatable>(*iter);
