@@ -31,6 +31,8 @@ namespace Hierachal {
 
 		bool previousIsAvailableForTrigger = isAvailableForTrigger;
 
+		vector<ChildAddable*> cacheChilds;
+
 	public:
 
 		Triggerable();

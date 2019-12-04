@@ -34,7 +34,7 @@ int InputManager::update()
 	//LOG(LogLevel::Debug) << "InputManager::update() : distinct input states size = [" << distinctInputStates->size() << "].";
 	for (int i = 0; i < distinctInputStates->size(); i++) {
 		if (GetTypeName() == "UserInputManager")
-			LOG(LogLevel::Debug) << "InputManager::update(): handling state [" << i << "] in [" << distinctInputStates->size() << "] states.";
+			LOG(LogLevel::Depricated) << "InputManager::update(): handling state [" << i << "] in [" << distinctInputStates->size() << "] states.";
 		handleNewState(distinctInputStates->at(i));
 	}
 
@@ -48,7 +48,7 @@ int InputManager::update()
 	}
 
 	if (GetTypeName() == "UserInputManager")
-		LOG(LogLevel::Debug) << "InputManager::update(): pending state deleted.";
+		LOG(LogLevel::Depricated) << "InputManager::update(): pending state deleted.";
 
 	pendingStates.clear();
 
@@ -344,7 +344,6 @@ int InputManager::updatePanelEvents(InputState * inputState)
 			handleSlide(inputState, panelState->GetSliders()->at(i).first);
 		}
 	}
-	LOG(LogLevel::Debug) << "InputManager::updatePanelEvents() : after slider handled.";
 
 	return 0;
 }
@@ -408,10 +407,10 @@ int InputManager::handleButtonDown(InputState * state, InputKey button)
 
 int InputManager::propagateButtonDown(vector<Triggerable*>* queue, InputState * state, InputKey button)
 {
-	LOG(LogLevel::Debug) << "InputManager::propagateButtonDown() : original propogate process.";
+	LOG(LogLevel::Depricated) << "InputManager::propagateButtonDown() : original propogate process.";
 
 	for (int i = 0; i < queue->size(); i++) {
-		LOG(LogLevel::Debug) << "InputManager::propagateButtonDown() : original propogate process trigger [" << i << "] in [" << queue->size() << "] triggerables.";
+		LOG(LogLevel::Depricated) << "InputManager::propagateButtonDown() : original propogate process trigger [" << i << "] in [" << queue->size() << "] triggerables.";
 		queue->at(i)->TriggerOnButtonDown(state, button);
 	}
 
