@@ -330,7 +330,6 @@ int InputManager::updatePanelEvents(InputState * inputState)
 		}
 	}
 
-	LOG(LogLevel::Debug) << "InputManager::updatePanelEvents() : after button handled.";
 
 	/* Knob */
 	for (int i = 0; i < panelState->GetKnobs()->size(); i++) {
@@ -338,7 +337,6 @@ int InputManager::updatePanelEvents(InputState * inputState)
 			handleKnobTurn(inputState, panelState->GetKnobs()->at(i).first);
 		}
 	}
-	LOG(LogLevel::Debug) << "InputManager::updatePanelEvents() : after knob handled.";
 
 	/* Slider */
 	for (int i = 0; i < panelState->GetSliders()->size(); i++) {
@@ -410,6 +408,8 @@ int InputManager::handleButtonDown(InputState * state, InputKey button)
 
 int InputManager::propagateButtonDown(vector<Triggerable*>* queue, InputState * state, InputKey button)
 {
+	LOG(LogLevel::Debug) << "InputManager::propagateButtonDown() : original propogate process.";
+
 	for (int i = 0; i < queue->size(); i++) {
 		queue->at(i)->TriggerOnButtonDown(state, button);
 	}

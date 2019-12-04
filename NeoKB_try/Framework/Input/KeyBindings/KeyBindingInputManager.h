@@ -104,6 +104,8 @@ namespace KeyBindings {
 		}
 
 		virtual int propagateButtonDown(vector<Triggerable*>* queue, InputState* state, InputKey button) {
+
+			LOG(LogLevel::Debug) << "KeyBindingInputManager::propagateButtonDown() : keybinding input manager propogate process.";
 			return InputManager::propagateButtonDown(queue, state, button) + handleNewButtonDown(queue, button);
 		}
 
