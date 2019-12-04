@@ -51,6 +51,8 @@ int BassTrack::Stop()
 
 	pendingActions.Add(this, [=]() {
 
+		LOG(LogLevel::Debug) << "BassTrack::Stop() : stop.";
+
 		BASS_ChannelPause(stream);
 		isPlayed = false;
 

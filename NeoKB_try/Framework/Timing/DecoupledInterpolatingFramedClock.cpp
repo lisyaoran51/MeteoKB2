@@ -2,10 +2,12 @@
 
 #include "../../Util/MtoType.h"
 #include "../../Util/Log.h"
+#include <iomanip>
 
 
 using namespace Framework::Timing;
 using namespace Util;
+using namespace std;
 
 
 DecoupledInterpolatingFramedClock::DecoupledInterpolatingFramedClock(): InterpolatingFramedClock()
@@ -68,9 +70,7 @@ double DecoupledInterpolatingFramedClock::GetElapsedFrameTime()
 
 int DecoupledInterpolatingFramedClock::ProcessFrame()
 {
-	LOG(LogLevel::Finest) << "DecoupledInterpolatingFramedClock::ProcessFrame() : " << this << ", rate = " << InterpolatingFramedClock::GetRate();
 	InterpolatingFramedClock::ProcessFrame();
-	LOG(LogLevel::Finest) << "DecoupledInterpolatingFramedClock::ProcessFrame() : set decoupled clock rate = " << InterpolatingFramedClock::GetRate();
 	decoupledStopwatchClock->SetRate(InterpolatingFramedClock::GetRate());
 	LOG(LogLevel::Finest) << "DecoupledInterpolatingFramedClock::ProcessFrame() : process decoupled clock";
 	decoupledClock->ProcessFrame();
@@ -88,6 +88,7 @@ int DecoupledInterpolatingFramedClock::ProcessFrame()
 		else
 			decoupledStopwatchClock->Stop();
 		decoupledStopwatchClock->Seek(GetCurrentTime());
+		LOG(LogLevel::Debug) << "DecoupledInterpolatingFramedClock::ProcessFrame() : current time is [" << fixed << setprecision(5) << GetCurrentTime() << "].";
 	}
 	else {
 		if (decoupledClock->GetIsRunning()) {
