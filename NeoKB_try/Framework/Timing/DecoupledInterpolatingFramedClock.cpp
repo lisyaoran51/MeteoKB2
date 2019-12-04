@@ -70,10 +70,14 @@ double DecoupledInterpolatingFramedClock::GetElapsedFrameTime()
 
 int DecoupledInterpolatingFramedClock::ProcessFrame()
 {
+	LOG(LogLevel::Debug) << "DecoupledInterpolatingFramedClock::ProcessFrame() : 1 before process interpolating clock, " << decoupledClock->GetIsRunning();
 	InterpolatingFramedClock::ProcessFrame();
 	decoupledStopwatchClock->SetRate(InterpolatingFramedClock::GetRate());
+
+	LOG(LogLevel::Debug) << "DecoupledInterpolatingFramedClock::ProcessFrame() : 2 after process interpolating clock, " << decoupledClock->GetIsRunning();
 	LOG(LogLevel::Finest) << "DecoupledInterpolatingFramedClock::ProcessFrame() : process decoupled clock";
 	decoupledClock->ProcessFrame();
+	LOG(LogLevel::Debug) << "DecoupledInterpolatingFramedClock::ProcessFrame() : 3 after process dcoupled clock, " << decoupledClock->GetIsRunning();
 
 
 	bool sourceRunning = InterpolatingFramedClock::GetIsRunning();
