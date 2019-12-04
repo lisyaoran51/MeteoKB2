@@ -70,6 +70,7 @@ int GameThread::runWork()
 	this_thread::sleep_for(chrono::milliseconds(1000));
 
 	threadId = syscall(SYS_gettid);
+	LOG(LogLevel::Info) << "GameThread::runWork() : thread " << threadName << "'s ID is [" << threadId << "].";
 
 	while (!exitRequested)
 		processFrame();
