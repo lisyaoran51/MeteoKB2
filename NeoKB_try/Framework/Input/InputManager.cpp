@@ -411,9 +411,9 @@ int InputManager::propagateButtonDown(vector<Triggerable*>* queue, InputState * 
 	LOG(LogLevel::Debug) << "InputManager::propagateButtonDown() : original propogate process.";
 
 	for (int i = 0; i < queue->size(); i++) {
+		LOG(LogLevel::Debug) << "InputManager::propagateButtonDown() : original propogate process trigger [" << i << "] in [" << queue->size() << "] triggerables.";
 		queue->at(i)->TriggerOnButtonDown(state, button);
 	}
-	LOG(LogLevel::Debug) << "InputManager::propagateButtonDown() : original propogate process end.";
 
 	return 0;
 }
