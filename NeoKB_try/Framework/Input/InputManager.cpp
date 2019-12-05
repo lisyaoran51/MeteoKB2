@@ -60,14 +60,14 @@ int InputManager::handleNewState(InputState * state)
 	bool hasNewBluetoothState = !state->GetBluetoothState()->CheckIsEmpty();
 
 
-	LOG(LogLevel::Finest) << "InputManager::handleNewState(): has kb: " << hasNewKeyboardState << ", has panel: " << hasNewPanelState << ", has bt: " << hasNewBluetoothState << ".";
+	LOG(LogLevel::Debug) << "InputManager::handleNewState(): has kb: " << hasNewKeyboardState << ", has panel: " << hasNewPanelState << ", has bt: " << hasNewBluetoothState << " by [" << GetTypeName() << "].";
 
 	InputState* last = currentState;
 
 	currentState = state;
 	currentState->SetLastState(last);
 
-	LOG(LogLevel::Finest) << "InputManager::handleNewState(): setting last state.";
+	LOG(LogLevel::Debug) << "InputManager::handleNewState(): setting last state.";
 
 	updateInputQueue(currentState);
 
