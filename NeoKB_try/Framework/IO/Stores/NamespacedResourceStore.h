@@ -32,7 +32,7 @@ namespace Stores {
 
 		virtual vector<string>* getFileNames(string name) {
 
-			string temp = nameSpace + "/"s + name;
+			string temp = nameSpace + literals::string_literals::"/"s + name;
 			
 			return CompositeResourceStore<T>::getFileNames(temp);
 		}
