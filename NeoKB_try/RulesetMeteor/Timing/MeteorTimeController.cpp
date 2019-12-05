@@ -25,6 +25,7 @@ int MeteorTimeController::onButtonDown(InputState * inputState, InputKey button)
 
 			speedAdjuster->SetFreezeTime(defaultFreezeTime);
 			isWaitingFreeze = true;
+			isAdjustAfterPause = false;
 		}
 	}
 	return 0;
@@ -33,6 +34,10 @@ int MeteorTimeController::onButtonDown(InputState * inputState, InputKey button)
 int MeteorTimeController::onKnobTurn(InputState * inputState, InputKey knob)
 {
 	if (knob == InputKey::SectionKnob) {
+		// 倒數繼續遊戲的時候不准任何其他動作
+		if (isWaitingFreeze)
+			return 0;
+
 		int turnValue = 0;
 		for (int i = 0; i < inputState->GetPanelState()->GetKnobs()->size(); i++)
 			if (inputState->GetPanelState()->GetKnobs()->at(i).first == InputKey::SectionKnob)
@@ -45,6 +50,10 @@ int MeteorTimeController::onKnobTurn(InputState * inputState, InputKey knob)
 			isAdjustAfterPause = true;
 
 		speedAdjuster->SetSeekTime(turnValue * defaultAdjustTime);
+
+		// 這邊是避免剛好set seek time以後seek time剛好等於0，會造成意外狀況，所以刻意不讓他最後變成0，就隨便加一個數字上去
+		if(speedAdjuster->GetSeekTime() == 0)
+			speedAdjuster->SetSeekTime(turnValue);
 
 	}
 
