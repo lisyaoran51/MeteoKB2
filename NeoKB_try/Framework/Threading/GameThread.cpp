@@ -96,8 +96,6 @@ int GameThread::processFrame()
 
 	onNewFrame();
 
-	if (threadName == "UpdateThread")
-		LOG(LogLevel::Debug) << "GameThread::processFrame() : [" << threadName << "] after on new frame.";
 
 	clock->ProcessFrame();
 

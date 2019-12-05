@@ -10,12 +10,15 @@ using namespace Util;
 
 InputState::~InputState()
 {
+
+	LOG(LogLevel::Debug) << "InputState::SetIsLastState(): deleting [" << this << "].";
 	if (bluetoothState != nullptr)
 		delete bluetoothState;
 	if (keyboardState != nullptr)
 		delete keyboardState;
 	if (panelState != nullptr)
 		delete panelState;
+	LOG(LogLevel::Debug) << "InputState::SetIsLastState(): deleted.";
 }
 
 InputState * InputState::Clone()
