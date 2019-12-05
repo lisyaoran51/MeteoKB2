@@ -253,6 +253,9 @@ int InputManager::updateInputQueue(InputState * inputState)
 		childs.assign(GetChilds()->begin(), GetChilds()->end());
 		uLock.unlock();
 
+		if (GetTypeName() == "PianoInputManager") {
+			LOG(LogLevel::Debug) << "InputManager::updateInputQueue() : child = [" << childs[0] << "]- by " << GetTypeName();
+
 		for (int i = 0; i < childs.size(); i++) {
 			Triggerable* temp = childs[i]->Cast<Triggerable>();
 			if (temp->GetIsInputReceivable())
@@ -262,7 +265,7 @@ int InputManager::updateInputQueue(InputState * inputState)
 	}
 
 	if (GetTypeName() == "PianoInputManager") {
-		LOG(LogLevel::Debug) << "InputManager::updateInputQueue() : child = [" << GetChilds()->at(0) << "]- by " << GetTypeName();
+		//LOG(LogLevel::Debug) << "InputManager::updateInputQueue() : child = [" << GetChilds()->at(0) << "]- by " << GetTypeName();
 		LOG(LogLevel::Debug) << [](vector<Triggerable*>& triggerables) {
 
 			for (int i = 0; i < triggerables.size(); i++) {
