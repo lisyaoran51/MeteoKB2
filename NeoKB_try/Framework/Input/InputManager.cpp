@@ -33,11 +33,10 @@ int InputManager::update()
 
 	//LOG(LogLevel::Debug) << "InputManager::update() : distinct input states size = [" << distinctInputStates->size() << "].";
 	for (int i = 0; i < distinctInputStates->size(); i++) {
-		if (GetTypeName() == "PianoInputManager")
-			LOG(LogLevel::Finest) << "InputManager::update(): handling state [" << i << "] in [" << distinctInputStates->size() << "] states.";
 		handleNewState(distinctInputStates->at(i));
 	}
 
+	LOG(LogLevel::Finest) << "InputManager::update(): after handling states.";
 
 	delete distinctInputStates;
 
@@ -47,8 +46,6 @@ int InputManager::update()
 		delete pendingStates[i];						//
 	}
 
-	if (GetTypeName() == "PianoInputManager")
-		LOG(LogLevel::Finest) << "InputManager::update(): pending state deleted.";
 
 	pendingStates.clear();
 
@@ -68,7 +65,8 @@ int InputManager::handleNewState(InputState * state)
 
 	currentState = state;
 	currentState->SetLastState(last);
-	
+
+	LOG(LogLevel::Finest) << "InputManager::handleNewState(): setting last state.";
 
 	updateInputQueue(currentState);
 
