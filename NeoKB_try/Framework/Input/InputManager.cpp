@@ -68,7 +68,7 @@ int InputManager::handleNewState(InputState * state)
 	currentState = state;
 
 	if (GetTypeName() == "UserInputManager")
-		LOG(LogLevel::Debug) << "InputManager::handleNewState(): delete last state is [" << last->GetLastState() << "] by [" << GetTypeName() << "].";
+		LOG(LogLevel::Debug) << "InputManager::handleNewState(): delete last state is [" << last->GetLastState() << "], state->bt is [" << last->GetBluetoothState() << "], by [" << GetTypeName() << "].";
 	currentState->SetLastState(last);
 
 	LOG(LogLevel::Depricated) << "InputManager::handleNewState(): setting last state.";
@@ -84,8 +84,6 @@ int InputManager::handleNewState(InputState * state)
 	if (hasNewBluetoothState)
 		updateBluetoothEvents(currentState);
 
-	if (GetTypeName() == "UserInputManager")
-		LOG(LogLevel::Debug) << "InputManager::handleNewState(): check last state is [" << currentState->GetLastState() << "] by [" << GetTypeName() << "].";
 	return 0;
 }
 
