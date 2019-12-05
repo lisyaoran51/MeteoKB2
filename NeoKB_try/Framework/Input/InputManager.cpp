@@ -253,7 +253,7 @@ int InputManager::updateInputQueue(InputState * inputState)
 		childs.assign(GetChilds()->begin(), GetChilds()->end());
 		uLock.unlock();
 
-		if (GetTypeName() == "PianoInputManager") {
+		if (GetTypeName() == "PianoInputManager") 
 			LOG(LogLevel::Debug) << "InputManager::updateInputQueue() : child = [" << childs[0] << "]- by " << GetTypeName();
 
 		for (int i = 0; i < childs.size(); i++) {
