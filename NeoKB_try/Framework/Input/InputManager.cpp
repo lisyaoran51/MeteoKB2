@@ -67,7 +67,7 @@ int InputManager::handleNewState(InputState * state)
 	currentState = state;
 	currentState->SetLastState(last);
 
-	LOG(LogLevel::Debug) << "InputManager::handleNewState(): setting last state.";
+	LOG(LogLevel::Depricated) << "InputManager::handleNewState(): setting last state.";
 
 	updateInputQueue(currentState);
 

@@ -1,8 +1,12 @@
 #include "InputState.h"
 
+#include "../../Util/Log.h"
 
 
-using namespace  Framework::Input;
+using namespace Framework::Input;
+using namespace Util;
+
+
 
 InputState::~InputState()
 {
@@ -81,6 +85,7 @@ BluetoothState * InputState::GetBluetoothState()
 
 int InputState::SetIsLastState()
 {
+	LOG(LogLevel::Debug) << "InputState::SetIsLastState(): delete last state [" << lastState << "].";
 	isLastState = true;
 	if(lastState != nullptr)
 		delete lastState;
