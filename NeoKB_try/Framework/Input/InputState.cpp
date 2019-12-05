@@ -22,8 +22,9 @@ InputState * InputState::Clone()
 {
 	InputState * cloned = new InputState();
 
-	if(lastState != nullptr)
-		cloned->SetLastState(lastState);
+	// 感覺應該會出錯
+	//if(lastState != nullptr)
+	//	cloned->SetLastState(lastState);
 
 	if (bluetoothState != nullptr)
 		cloned->SetBluetoothState(bluetoothState->Clone());
