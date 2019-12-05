@@ -265,8 +265,10 @@ int InputManager::updateInputQueue(InputState * inputState)
 		LOG(LogLevel::Debug) << "InputManager::updateInputQueue() : trigger queue length = [" << triggerQueue.size() << "]- by " << GetTypeName();
 		LOG(LogLevel::Debug) << [](vector<Triggerable*>& triggerables) {
 
-			for (int i = 0; i < triggerables.size(); i++)
+			for (int i = 0; i < triggerables.size(); i++) {
+				LOG(LogLevel::Debug) << "|---------address [" << triggerables[i] << "]";
 				LOG(LogLevel::Debug) << "|---------[" << triggerables[i]->GetTypeName() << "]";
+			}
 
 			return 0;
 		}(triggerQueue);
