@@ -146,14 +146,14 @@ int Map::PasteSet(Map * m, int x, int y, int toX, int toY, int xLen, int yLen)
 int Map::Reset()
 {
 
-	LOG(LogLevel::Finest) << "Map::Reset() : Reset map";
+	LOG(LogLevel::Depricated) << "Map::Reset() : Reset map";
 	for (int i = 0; i < width; i++) {
 		for (int j = 0; j < height; j++) {
 			matrix[i][j] = defaultMatrix[i][j];
 		}
 	}
 
-	LOG(LogLevel::Finest) << "Map::Reset() : Map clear";
+	LOG(LogLevel::Depricated) << "Map::Reset() : Map clear";
 	/*
 	memcpy(
 		matrix[0],

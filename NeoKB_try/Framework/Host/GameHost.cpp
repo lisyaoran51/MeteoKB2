@@ -330,7 +330,7 @@ int GameHost::bootstrapSceneGraph(Game* game, Instrument* instrument)
 
 int GameHost::iterateSearchDrawable(ChildAddable * r, vector<Drawable*>* drawables)
 {
-	LOG(LogLevel::Finest) << "GameHost::iterateSearchDrawable() : check is drawable [" << r << "].";
+	LOG(LogLevel::Depricated) << "GameHost::iterateSearchDrawable() : check is drawable [" << r << "].";
 
 	if (dynamic_cast<Drawable*>(r)) 
 		if(dynamic_cast<Drawable*>(r)->GetIsDrawable())
@@ -338,7 +338,7 @@ int GameHost::iterateSearchDrawable(ChildAddable * r, vector<Drawable*>* drawabl
 	
 	
 	for (int i = 0; i < r->GetChilds()->size(); i++) {
-		LOG(LogLevel::Finest) << "GameHost::iterateSearchDrawable() : iterate search child [" << r->GetChilds()->at(i) << "].";
+		LOG(LogLevel::Depricated) << "GameHost::iterateSearchDrawable() : iterate search child [" << r->GetChilds()->at(i) << "].";
 		iterateSearchDrawable(r->GetChilds()->at(i), drawables);
 	}
 
