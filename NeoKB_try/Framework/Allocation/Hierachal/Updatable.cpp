@@ -51,9 +51,9 @@ bool Updatable::UpdateSubTree()
 		customClock->ProcessFrame();
 	}
 
-	LOG(LogLevel::Finest) << "Updatable::UpdateSubTree() : before update [" << GetTypeName() << "].";
+	LOG(LogLevel::Depricated) << "Updatable::UpdateSubTree() : before update [" << GetTypeName() << "].";
 	update();
-	LOG(LogLevel::Finest) << "Updatable::UpdateSubTree() : after update [" << GetTypeName() << "].";
+	LOG(LogLevel::Depricated) << "Updatable::UpdateSubTree() : after update [" << GetTypeName() << "].";
 
 	cacheChilds.clear();
 	unique_lock<mutex> uLock(ChildMutex);

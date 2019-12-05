@@ -128,7 +128,7 @@ Map * EventProcessorMaster::GetGraph()
 	eventProcessorPeriods->GetItemsContainPeriods(make_pair<float, float>(currentTime - visibleTimeRange, currentTime + visibleTimeRange), &eventProcessors);
 	
 
-	LOG(LogLevel::Finest) << "EventProcessorMaster::GetGraph() : get graph from [" << eventProcessors.size() << "] processors in (" << currentTime - visibleTimeRange  << "," << currentTime + visibleTimeRange << ") seconds."
+	LOG(LogLevel::Depricated) << "EventProcessorMaster::GetGraph() : get graph from [" << eventProcessors.size() << "] processors in (" << currentTime - visibleTimeRange  << "," << currentTime + visibleTimeRange << ") seconds."
 		<< [](vector<EventProcessor<Event>*>& eProcessors) {
 
 		for (int i = 0; i < eProcessors.size(); i++)
@@ -144,7 +144,7 @@ Map * EventProcessorMaster::GetGraph()
 		}
 	}
 
-	LOG(LogLevel::Finer) << "EventProcessorMaster::GetGraph : check if map writed." << [](int width, int height, Map* m) {
+	LOG(LogLevel::Depricated) << "EventProcessorMaster::GetGraph : check if map writed." << [](int width, int height, Map* m) {
 		bool isChanged = false;
 		for (int i = 0; i < width; i++)
 		for (int j = 0; j < height; j++)
