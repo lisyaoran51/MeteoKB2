@@ -27,6 +27,9 @@ int MeteorTimeController::onButtonDown(InputState * inputState, InputKey button)
 			isWaitingFreeze = true;
 			isAdjustAfterPause = false;
 		}
+		else
+			return -1;
+
 	}
 	return 0;
 }
