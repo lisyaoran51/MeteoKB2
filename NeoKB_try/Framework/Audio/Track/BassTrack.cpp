@@ -101,6 +101,8 @@ int BassTrack::Dispose()
 
 int BassTrack::Update()
 {
+	Track::Update();
+
 	isRunning = BASS_ChannelIsActive(stream) == BASS_ACTIVE_PLAYING;
 
 	double currentTimeLocal = BASS_ChannelBytes2Seconds(stream, BASS_ChannelGetPosition(stream, BASS_POS_BYTE));
@@ -113,7 +115,6 @@ int BassTrack::Update()
 
 	LOG(LogLevel::Finest) << "BassTrack::Update() : get music time = [" << currentTimeLocal <<"].";
 
-	Track::Update();
 
 	return 0;
 }
