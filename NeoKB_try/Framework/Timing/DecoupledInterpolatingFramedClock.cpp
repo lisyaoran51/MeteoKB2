@@ -74,7 +74,6 @@ int DecoupledInterpolatingFramedClock::ProcessFrame()
 	InterpolatingFramedClock::ProcessFrame();
 	decoupledStopwatchClock->SetRate(InterpolatingFramedClock::GetRate());
 
-	LOG(LogLevel::Debug) << "DecoupledInterpolatingFramedClock::ProcessFrame() : 2 after process interpolating clock, " << decoupledClock->GetIsRunning();
 	LOG(LogLevel::Finest) << "DecoupledInterpolatingFramedClock::ProcessFrame() : process decoupled clock";
 	decoupledClock->ProcessFrame();
 
@@ -106,8 +105,6 @@ int DecoupledInterpolatingFramedClock::ProcessFrame()
 		}
 	}
 
-
-	LOG(LogLevel::Debug) << "DecoupledInterpolatingFramedClock::ProcessFrame() : 4 after done dcoupled clock, " << decoupledClock->GetIsRunning();
 
 	// ¡Ÿ®Sºg
 	return 0;
