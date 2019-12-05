@@ -81,7 +81,8 @@ int InputManager::handleNewState(InputState * state)
 	if (hasNewBluetoothState)
 		updateBluetoothEvents(currentState);
 
-
+	if (GetTypeName() == "UserInputManager")
+		LOG(LogLevel::Debug) << "InputManager::handleNewState(): check last state is [" << currentState->GetLastState() << "] by [" << GetTypeName() << "].";
 	return 0;
 }
 
