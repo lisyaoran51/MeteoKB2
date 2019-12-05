@@ -50,9 +50,10 @@ bool Updatable::UpdateSubTree()
 	if (GetParent() != nullptr && customClock != nullptr) {
 		customClock->ProcessFrame();
 	}
-	
+
+	LOG(LogLevel::Finest) << "Updatable::UpdateSubTree() : before update [" << GetTypeName() << "].";
 	update();
-	LOG(LogLevel::Finest) << "Updatable::UpdateSubTree() : update [" << GetTypeName() << "].";
+	LOG(LogLevel::Finest) << "Updatable::UpdateSubTree() : after update [" << GetTypeName() << "].";
 
 	cacheChilds.clear();
 	unique_lock<mutex> uLock(ChildMutex);
