@@ -122,7 +122,7 @@ long long StopwatchClock::getElapsedMicroseconds()
 		systemCurrentTime = system_clock::now();
 	}
 
-	LOG(LogLevel::Finest) << "StopwatchClock::getElapsedMicroseconds() : current elapsed time = [" << duration_cast<microseconds>(systemCurrentTime - systemStartTime).count() << "].";
+	LOG(LogLevel::Depricated) << "StopwatchClock::getElapsedMicroseconds() : current elapsed time = [" << duration_cast<microseconds>(systemCurrentTime - systemStartTime).count() << "].";
 
 	unique_lock<mutex> uLock(currentTimeMutex);
 	return duration_cast<microseconds>(systemCurrentTime - systemStartTime).count();
@@ -131,7 +131,7 @@ long long StopwatchClock::getElapsedMicroseconds()
 double StopwatchClock::getElapsedSeconds()
 {
 	long long eMicroSeconds = getElapsedMicroseconds();
-	LOG(LogLevel::Finest) << "StopwatchClock::getElapsedSeconds() : elapsed seconds = [" << double(eMicroSeconds / 1000000) + double(eMicroSeconds % 1000000) * 0.000001 << "]";
+	LOG(LogLevel::Depricated) << "StopwatchClock::getElapsedSeconds() : elapsed seconds = [" << double(eMicroSeconds / 1000000) + double(eMicroSeconds % 1000000) * 0.000001 << "]";
 	return double(eMicroSeconds / 1000000) + double(eMicroSeconds % 1000000) * 0.000001;
 }
 

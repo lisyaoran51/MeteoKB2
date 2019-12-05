@@ -60,6 +60,8 @@ int BassTrack::Stop()
 		return 0;
 	}, "Lambda_BassTrack::Stop");
 
+	isRunning = false;
+
 	return 0;
 }
 

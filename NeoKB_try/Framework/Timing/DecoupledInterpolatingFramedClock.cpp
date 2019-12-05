@@ -12,7 +12,7 @@ using namespace std;
 
 DecoupledInterpolatingFramedClock::DecoupledInterpolatingFramedClock(): InterpolatingFramedClock()
 {
-	LOG(LogLevel::Debug) << "DecoupledInterpolatingFramedClock::DecoupledInterpolatingFramedClock() : rate = [" << GetRate() << "].";
+	LOG(LogLevel::Depricated) << "DecoupledInterpolatingFramedClock::DecoupledInterpolatingFramedClock() : rate = [" << GetRate() << "].";
 	decoupledClock = new FramedClock(decoupledStopwatchClock = new StopwatchClock());
 }
 
@@ -52,12 +52,12 @@ int DecoupledInterpolatingFramedClock::ChangeSource(Clock * s)
 	if (s == nullptr)
 		return 0;
 
-	LOG(LogLevel::Debug) << "DecoupledInterpolatingFramedClock::ChangeSource : changing.";
+	LOG(LogLevel::Depricated) << "DecoupledInterpolatingFramedClock::ChangeSource : changing.";
 
 	if (dynamic_cast<AdjustableClock*>(s))
 		dynamic_cast<AdjustableClock*>(s)->Seek(GetCurrentTime());
 
-	LOG(LogLevel::Debug) << "DecoupledInterpolatingFramedClock::ChangeSource : get framed source.";
+	LOG(LogLevel::Depricated) << "DecoupledInterpolatingFramedClock::ChangeSource : get framed source.";
 	source = s;
 	framedSource = dynamic_cast<FramedClock*>(s) != nullptr ? dynamic_cast<FrameBasedClock*>(s) : new FramedClock(s);
 	return 0;
@@ -70,17 +70,14 @@ double DecoupledInterpolatingFramedClock::GetElapsedFrameTime()
 
 int DecoupledInterpolatingFramedClock::ProcessFrame()
 {
-	LOG(LogLevel::Debug) << "DecoupledInterpolatingFramedClock::ProcessFrame() : 1 before process interpolating clock, " << decoupledClock->GetIsRunning();
 	InterpolatingFramedClock::ProcessFrame();
 	decoupledStopwatchClock->SetRate(InterpolatingFramedClock::GetRate());
 
-	LOG(LogLevel::Finest) << "DecoupledInterpolatingFramedClock::ProcessFrame() : process decoupled clock";
 	decoupledClock->ProcessFrame();
 
 
 	bool sourceRunning = InterpolatingFramedClock::GetIsRunning();
-	LOG(LogLevel::Debug) << "DecoupledInterpolatingFramedClock::ProcessFrame() : 3 after get source is running = " << sourceRunning << ", " << decoupledClock->GetIsRunning();
-	LOG(LogLevel::Finest) << "DecoupledInterpolatingFramedClock::ProcessFrame() : determine if decoupled clock start. coupled = ["<< isCoupled << "], source running = [" << (sourceRunning ? 1 : 0) << "]" << ", rate = " << InterpolatingFramedClock::GetRate();
+	LOG(LogLevel::Depricated) << "DecoupledInterpolatingFramedClock::ProcessFrame() : determine if decoupled clock start. coupled = ["<< isCoupled << "], source running = [" << (sourceRunning ? 1 : 0) << "]" << ", rate = " << InterpolatingFramedClock::GetRate();
 	// ***讓分離的時鐘一直跟著現在的時間***
 	// 只要原時鐘有在跑，分離時鐘就一定要跟著原時鐘的時間。但如果原時鐘沒在跑的話， 就要看有沒有couple，
 	// 有couple的狀況，分離時鐘就必須停下來保持跟原時鐘一樣的時間。
@@ -95,7 +92,6 @@ int DecoupledInterpolatingFramedClock::ProcessFrame()
 		
 	}
 	else {
-		LOG(LogLevel::Debug) << "DecoupledInterpolatingFramedClock::ProcessFrame() : when the source is not running, the decoupled clock running is [" << decoupledClock->GetIsRunning() << "] by [" << this << "].";
 		LOG(LogLevel::Depricated) << "DecoupledInterpolatingFramedClock::ProcessFrame() : current time is [" << fixed << setprecision(5) << GetCurrentTime() << "].";
 		if (decoupledClock->GetIsRunning()) {
 			//if we're running but our source isn't, we should try a seek to see if it's capable to switch to it for the current value.
@@ -142,7 +138,6 @@ int DecoupledInterpolatingFramedClock::Stop()
 	if (getAdjustableSource() != nullptr)
 		getAdjustableSource()->Stop();
 	decoupledStopwatchClock->Stop();
-	LOG(LogLevel::Debug) << "DecoupledInterpolatingFramedClock::Stop() : after stop, the decoupled clock running is [" << decoupledClock->GetIsRunning() << "] by [" << this << "].";
 	return 0;
 }
 

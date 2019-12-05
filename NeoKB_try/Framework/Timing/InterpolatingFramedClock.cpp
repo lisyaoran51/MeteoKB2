@@ -23,7 +23,7 @@ InterpolatingFramedClock::InterpolatingFramedClock(Clock * s)
 
 int InterpolatingFramedClock::ProcessFrame()
 {
-	LOG(LogLevel::Finest) << "InterpolatingFramedClock::ProcessFrame() : process interpolate clock [" << interpolateClock << "] and source clock[" << framedSource << "], source = [" << source << "].";
+	LOG(LogLevel::Depricated) << "InterpolatingFramedClock::ProcessFrame() : process interpolate clock [" << interpolateClock << "] and source clock[" << framedSource << "], source = [" << source << "].";
 	if (framedSource == nullptr)
 		return 0;
 
@@ -34,23 +34,17 @@ int InterpolatingFramedClock::ProcessFrame()
 
 	/* ¶]¤@ºÕ */
 	interpolateClock->ProcessFrame();
-	LOG(LogLevel::Finest) << "InterpolatingFramedClock::ProcessFrame() : interpolateClock done.";
 	framedSource->ProcessFrame();
-	LOG(LogLevel::Finest) << "InterpolatingFramedClock::ProcessFrame() : framedSource done.";
 
-	LOG(LogLevel::Debug) << "InterpolatingFramedClock::ProcessFrame() : before get is running " << sourceIsRunning << ".";
 	sourceIsRunning = framedSource->GetIsRunning();
-	LOG(LogLevel::Debug) << "InterpolatingFramedClock::ProcessFrame() : after get is running " << sourceIsRunning << ".";
 
 	lastInterpolatedTime = GetCurrentTime();
-	LOG(LogLevel::Finest) << "InterpolatingFramedClock::ProcessFrame() : get current time.";
 
 	if (!framedSource->GetIsRunning())
 		return 0;
 
 	currentInterpolatedTime += interpolateClock->GetElapsedFrameTime();
 
-	LOG(LogLevel::Finest) << "InterpolatingFramedClock::ProcessFrame() : interpolate time.";
 
 	if (fabs(framedSource->GetCurrentTime() - currentInterpolatedTime) > allowableErrorInSeconds)
 	{
