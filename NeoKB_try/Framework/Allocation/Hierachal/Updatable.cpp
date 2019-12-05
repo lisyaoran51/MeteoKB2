@@ -52,7 +52,7 @@ bool Updatable::UpdateSubTree()
 	}
 	
 	update();
-	LOG(LogLevel::Depricated) << "Updatable::UpdateSubTree() : update [" << GetTypeName() << "].";
+	LOG(LogLevel::Finest) << "Updatable::UpdateSubTree() : update [" << GetTypeName() << "].";
 
 	cacheChilds.clear();
 	unique_lock<mutex> uLock(ChildMutex);

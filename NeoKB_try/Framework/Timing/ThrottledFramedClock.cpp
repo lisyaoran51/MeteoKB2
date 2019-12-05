@@ -19,7 +19,7 @@ int ThrottledFramedClock::throttle()
 
 	double frameTime = 1.0 / maxUpdateHz;
 
-	LOG(LogLevel::Finest) << "ThrottledFramedClock::throttle(): elapsed frame time is [" << fixed << setprecision(5) << GetElapsedFrameTime() << "].";
+	LOG(LogLevel::Depricated) << "ThrottledFramedClock::throttle(): elapsed frame time is [" << fixed << setprecision(5) << GetElapsedFrameTime() << "].";
 
 	if (GetElapsedFrameTime() < frameTime) {
 		double timeToSleepInMilli = (frameTime - GetElapsedFrameTime()) * 1000.0;
@@ -36,7 +36,7 @@ int ThrottledFramedClock::throttle()
 			timeToSleepInMilli += accumulatedSleepErrorFloored;
 		}
 
-		LOG(LogLevel::Finest) << "ThrottledFramedClock::throttle() : time to sleep [" << fixed << setprecision(5) << timeToSleepInMilli / 1000.0 << "].";
+		LOG(LogLevel::Depricated) << "ThrottledFramedClock::throttle() : time to sleep [" << fixed << setprecision(5) << timeToSleepInMilli / 1000.0 << "].";
 
 		if (timeToSleepInMilli > 0) {
 			usleep(timeToSleepInMilli * 1000);
