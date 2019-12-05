@@ -162,7 +162,7 @@ int GameHost::drawFrame()
 	iterateSearchDrawable(root, &drawables);
 	uLock.unlock();
 
-	LOG(LogLevel::Finer) << "GameHost::drawFrame() : drawables size = [" << drawables.size() << "].";
+	LOG(LogLevel::Depricated) << "GameHost::drawFrame() : drawables size = [" << drawables.size() << "].";
 
 	// TODO: 這邊應該要把蒐到的drawable跟具Depth來排序，但是現在懶得寫
 
@@ -173,7 +173,7 @@ int GameHost::drawFrame()
 			drawables[i]->GetPositionY());
 	}
 
-	LOG(LogLevel::Depricated) << [](int width, int height, Map* m) {
+	LOG(LogLevel::Finest) << [](int width, int height, Map* m) {
 		LOG(LogLevel::Finest) << "GameHost::drawFrame : light map";
 		// 因為只看畫面中央，所以不看其他排
 		for (int i = 0; i < width; i++) {
