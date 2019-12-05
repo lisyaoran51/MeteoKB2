@@ -29,8 +29,7 @@ int InputManager::update()
 	/* 這邊本來要做create distinct states，這樣可以確保舊的輸入沒被更動，經過這個以後panel.keyboard.bt都部會是null，但裡面會是沒有東西的 */
 	vector<InputState*>* distinctInputStates = createDistinctInputStates(&pendingStates);
 	
-	if(GetTypeName() == "UserInputManager")
-		LOG(LogLevel::Debug) << "InputManager::update():create distinct input state [" << distinctInputStates->at(0) << "] by " << GetTypeName() << ".";
+	LOG(LogLevel::Depricated) << "InputManager::update():create distinct input state [" << distinctInputStates->at(0) << "] by " << GetTypeName() << ".";
 
 	//LOG(LogLevel::Debug) << "InputManager::update() : distinct input states size = [" << distinctInputStates->size() << "].";
 	for (int i = 0; i < distinctInputStates->size(); i++) {
@@ -51,15 +50,13 @@ int InputManager::handleNewState(InputState * state)
 	bool hasNewPanelState = !state->GetPanelState()->CheckIsEmpty();
 	bool hasNewBluetoothState = !state->GetBluetoothState()->CheckIsEmpty();
 
-	if(GetTypeName() == "UserInputManager")
-		LOG(LogLevel::Debug) << "InputManager::handleNewState(): set last state is [" << currentState << "] by [" << GetTypeName() << "].";
+	LOG(LogLevel::Depricated) << "InputManager::handleNewState(): set last state is [" << currentState << "] by [" << GetTypeName() << "].";
 
 	InputState* last = currentState;
 
 	currentState = state;
 
-	if (GetTypeName() == "UserInputManager")
-		LOG(LogLevel::Debug) << "InputManager::handleNewState(): delete last state is [" << last->GetLastState() << "], state->bt is [" << last->GetBluetoothState() << "], by [" << GetTypeName() << "].";
+	LOG(LogLevel::Depricated) << "InputManager::handleNewState(): delete last state is [" << last->GetLastState() << "], state->bt is [" << last->GetBluetoothState() << "], by [" << GetTypeName() << "].";
 	currentState->SetLastState(last);
 
 	LOG(LogLevel::Depricated) << "InputManager::handleNewState(): setting last state.";
