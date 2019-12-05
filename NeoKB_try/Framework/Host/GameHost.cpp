@@ -80,7 +80,7 @@ int GameHost::Run(Game* game, Instrument* instrument)
 	inputThread->Start();
 
 	drawInitialize();
-	//drawThread->Start();
+	drawThread->Start();
 
 	updateInitialize();
 	updateThread->Start();
@@ -229,12 +229,12 @@ int GameHost::inputInitialize()
 
 int GameHost::inputFrame()
 {
-	LOG(LogLevel::Finest) << "GameHost::inputFrame() : scan input.";
+	LOG(LogLevel::Depricated) << "GameHost::inputFrame() : scan input.";
 
 	mainInterface->ScanInput();
 	/* 這邊只輸出panel上的uotput，不輸出琴鍵燈光 */
 
-	LOG(LogLevel::Finest) << "GameHost::inputFrame() : process output.";
+	LOG(LogLevel::Depricated) << "GameHost::inputFrame() : process output.";
 	mainInterface->ProcessOutput();
 
 

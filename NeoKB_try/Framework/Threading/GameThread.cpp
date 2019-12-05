@@ -85,7 +85,7 @@ int GameThread::processFrame()
 		statisticFrameRate = 0;
 	}
 
-	LOG(LogLevel::Finest) << "GameThread::processFrame() [" << threadName << "]";
+	LOG(LogLevel::Depricated) << "GameThread::processFrame() [" << threadName << "]";
 
 
 	if(clock->GetIsRunning())
