@@ -262,7 +262,7 @@ int InputManager::updateInputQueue(InputState * inputState)
 	}
 
 	if (GetTypeName() == "PianoInputManager") {
-		LOG(LogLevel::Debug) << "InputManager::updateInputQueue() : trigger queue length = [" << triggerQueue.size() << "]- by " << GetTypeName();
+		LOG(LogLevel::Debug) << "InputManager::updateInputQueue() : child = [" << GetChilds()->at(0) << "]- by " << GetTypeName();
 		LOG(LogLevel::Debug) << [](vector<Triggerable*>& triggerables) {
 
 			for (int i = 0; i < triggerables.size(); i++) {

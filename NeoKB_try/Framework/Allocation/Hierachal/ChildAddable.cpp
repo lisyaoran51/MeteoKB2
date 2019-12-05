@@ -14,8 +14,6 @@ ChildAddable::ChildAddable(): Loadable(), RegisterType("ChildAddable")
 
 int ChildAddable::AddChild(ChildAddable * child)
 {
-	if(GetTypeName() == "PianoInputManager")
-		LOG(LogLevel::Debug) << "ChildAddable::AddChild : child address =  [" << child << "], childs size = " << childs.size() << ".";
 
 	if (child->SetParent(this) == 0) {
 		child->Load();
@@ -34,8 +32,6 @@ int ChildAddable::AddChild(ChildAddable * child)
 		}
 
 		isAlive = true;
-		if (GetTypeName() == "PianoInputManager")
-			LOG(LogLevel::Debug) << "ChildAddable::AddChild : added child is =  [" << childs[0] << "].";
 
 		return 0;
 	}
