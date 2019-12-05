@@ -89,10 +89,10 @@ int GameThread::processFrame()
 
 
 	if(clock->GetIsRunning())
-		LOG(LogLevel::Finest) << "GameThread::processFrame() : process time = " << clock->GetElapsedFrameTime();
+		LOG(LogLevel::Finest) << "GameThread::processFrame() : current time = [" << fixed << setprecision(5) << clock->GetCurrentTime() << "] by [" << threadName << "].";
 
-	if(threadName == "UpdateThread")
-		LOG(LogLevel::Debug) << "GameThread::processFrame() : [" << threadName << "] processing.";
+	//if(threadName == "UpdateThread")
+		LOG(LogLevel::Depricated) << "GameThread::processFrame() : [" << threadName << "] processing.";
 
 	onNewFrame();
 
