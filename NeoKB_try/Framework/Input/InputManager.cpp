@@ -66,6 +66,9 @@ int InputManager::handleNewState(InputState * state)
 	InputState* last = currentState;
 
 	currentState = state;
+
+	if (GetTypeName() == "UserInputManager")
+		LOG(LogLevel::Debug) << "InputManager::handleNewState(): delete last state is [" << last->GetLastState() << "] by [" << GetTypeName() << "].";
 	currentState->SetLastState(last);
 
 	LOG(LogLevel::Depricated) << "InputManager::handleNewState(): setting last state.";
