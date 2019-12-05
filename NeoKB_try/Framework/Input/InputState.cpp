@@ -92,7 +92,7 @@ int InputState::SetIsLastState()
 	LOG(LogLevel::Depricated) << "InputState::SetIsLastState(): delete last state [" << lastState << "].";
 	isLastState = true;
 	if (lastState != nullptr) {
-		LOG(LogLevel::Debug) << "InputState::SetIsLastState(): before delete.";
+		LOG(LogLevel::Debug) << "InputState::SetIsLastState(): before delete " << lastState << " .";
 		delete lastState;
 	}
 	LOG(LogLevel::Depricated) << "InputState::SetIsLastState(): after delete.";
