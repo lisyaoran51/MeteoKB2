@@ -37,6 +37,8 @@ int ChildAddable::AddChild(ChildAddable * child)
 
 		return 0;
 	}
+	if (GetTypeName() == "PianoInputManager")
+		LOG(LogLevel::Debug) << "ChildAddable::AddChild : added child is =  [" << childs[0] << "].";
 	
 
 	// TODO: ¨Ò¥~³B²z
