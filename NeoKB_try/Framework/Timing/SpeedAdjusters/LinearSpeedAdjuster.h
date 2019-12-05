@@ -35,8 +35,11 @@ namespace SpeedAdjusters {
 
 		virtual bool GetIsAdjustingTime();
 
+		virtual bool GetIsLastAdjustingTime();
+
 		virtual bool GetIsFreezingTime();
 
+		virtual bool GetIsLastFreezingTime();
 
 		/* this */
 

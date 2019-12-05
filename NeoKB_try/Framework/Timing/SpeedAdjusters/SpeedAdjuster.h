@@ -17,6 +17,10 @@ namespace SpeedAdjusters {
 
 		virtual int Reset() = 0;
 
+		virtual int Pause();
+
+		virtual int Resume();
+
 		virtual int SetSeekTime(double sTime) = 0;
 
 		virtual double GetSeekTime() = 0;
@@ -32,7 +36,17 @@ namespace SpeedAdjusters {
 
 		virtual bool GetIsAdjustingTime() = 0;
 
+		/// <summary>
+		/// 最後一次adjust time以後，會有一個time to adjust，然後seek time left匯市0，這個情況就是last adjusting time。下一次process frame以後這個狀況就會解除
+		///	</summary>
+		virtual bool GetIsLastAdjustingTime() = 0;
+
 		virtual bool GetIsFreezingTime() = 0;
+
+		/// <summary>
+		/// 最後一次freeze time以後，然後freeze time left匯市0，這個情況就是last freezing time。下一次process frame以後這個狀況就會解除
+		///	</summary>
+		virtual bool GetIsLastFreezingTime() = 0;
 
 		template<class _Type>
 		int AddOnAdjustFreeze(_Type* callableObject, function<int()> callback, string name = "TriggerOnAdjust") {

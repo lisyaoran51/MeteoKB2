@@ -35,10 +35,23 @@ int TimeController::update()
 		// 這邊應該是，不管目前速度多快，調整時間的速度都是固定的，不會速度快的時候就調的快
 		controllableClock->Seek(controllableClock->GetCurrentTime() + timeToAdjust/* * controllableClock->GetRate()*/);
 		LOG(LogLevel::Finest) << "TimeController::update() :controllable clock after adjust [" << fixed << setprecision(5) << controllableClock->GetCurrentTime() << "].";
+
+		// 檢查是不是已經adjust完畢了
+		if (speedAdjuster->GetIsLastAdjustingTime()) {
+
+			Resume();
+
+		}
+
 	}
 	else if (speedAdjuster->GetIsFreezingTime()) {
 		Pause();
 	}
+	else if (speedAdjuster->GetIsLastFreezingTime()) {
+
+		Resume();
+	}
+
 
 	LOG(LogLevel::Finest) << "TimeController::update() : end.";
 
@@ -88,15 +101,18 @@ int TimeController::SetSpeedAdjuster(SpeedAdjuster * sAdjuster)
 		delete speedAdjuster;
 	speedAdjuster = sAdjuster;
 	
-
+	
 	speedAdjuster->AddOnAdjustFreeze(this, bind(&TimeController::SetAllChildsIsMaskedForTrigger, this),
 		"TimeController::SetAllChildsIsMaskedForTrigger");
 
+	speedAdjuster->AddOnAdjustFreeze(controllableClock, bind(&AdjustableClock::Stop, controllableClock),
+		"AdjustableClock::Stop");
+
 	speedAdjuster->AddOnAdjustFreezeEnd(this, bind(&TimeController::RecoverAllChildsIsMaskedForTrigger, this),
 		"TimeController::RecoverAllChildsIsMaskedForTrigger");
-
-	speedAdjuster->AddOnAdjustFreezeEnd(this, bind(&TimeController::Resume, this),
-		"TimeController::Resume");
+	
+	speedAdjuster->AddOnAdjustFreezeEnd(controllableClock, bind(&AdjustableClock::Start, controllableClock),
+		"AdjustableClock::Start");
 
 	return 0;
 }
@@ -115,8 +131,11 @@ int TimeController::JumpToWithSpeedAdjust(double seekTime)
 
 int TimeController::Pause()
 {
+	if (isPaused)
+		return 0;
 	LOG(LogLevel::Debug) << "TimeController::Pause() : stop controllable clock.";
-	controllableClock->Stop();
+	//controllableClock->Stop(); 這行在speed adjuster 的on pause裡面
+	speedAdjuster->Pause();
 	isPaused = true;
 
 	return 0;
@@ -126,7 +145,8 @@ int TimeController::Resume()
 {
 	if (isAdjustAfterPause)
 		return 0;
-	controllableClock->Start();
+	speedAdjuster->Resume();
+	//controllableClock->Start(); 擺在speed adjuster的on freeze end裡面
 	isPaused = false;
 	isWaitingFreeze = false;
 	return 0;

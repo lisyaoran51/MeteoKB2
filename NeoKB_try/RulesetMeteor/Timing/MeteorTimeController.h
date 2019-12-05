@@ -38,6 +38,8 @@ namespace Timing {
 
 		virtual int onButtonDown(InputState* inputState, InputKey button);
 
+		virtual int onKnobTurn(InputState* inputState, InputKey knob);
+
 	};
 
 

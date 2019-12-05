@@ -186,7 +186,7 @@ Map * EventProcessorMaster::GetGraph()
 int EventProcessorMaster::update()
 {
 
-	LOG(LogLevel::Debug) << "EventProcessorMaster::update() : current time is" << fixed << setprecision(5) << GetClock()->GetCurrentTime() << " .";
+	LOG(LogLevel::Debug) << "EventProcessorMaster::update() : current time is " << fixed << setprecision(5) << GetClock()->GetCurrentTime() << " .";
 
 	processEvent(GetClock()->GetElapsedFrameTime()); // 這個是舊的程式，以後可能用不到了
 

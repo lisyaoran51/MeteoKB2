@@ -27,7 +27,7 @@ int LinearSpeedAdjuster::ProcessFrame(double elapsedTime)
 			if (seekTimeLeft < 0) {
 				adjustFrameTime += seekTimeLeft;
 				seekTimeLeft = 0;
-				isAdjustingTime = false;
+				// 這邊就進入last adjusting time
 			}
 		}
 		/* 往回跑，時間往下減 */
@@ -41,19 +41,28 @@ int LinearSpeedAdjuster::ProcessFrame(double elapsedTime)
 			if (seekTimeLeft > 0) {
 				adjustFrameTime += seekTimeLeft;
 				seekTimeLeft = 0;
-				isAdjustingTime = false;
+				// 這邊就進入last adjusting time
 			}
 		}
 	}
-	else if (isFreezingTime) {
-		LOG(LogLevel::Finest) << "LinearSpeedAdjuster::ProcessFrame() : freezing time.";
-		freezeTimeLeft -= elapsedTime;
-		LOG(LogLevel::Debug) << "LinearSpeedAdjuster::ProcessFrame() : freezing time left [" << freezeTimeLeft << "].";
-		if (freezeTimeLeft < 0) {
-			// 這邊會有一點點誤差，但是沒有辦法修正回來，除非把time controller去調整當前時間
-			freezeTimeLeft = 0;
+	else {
+		isAdjustingTime = false;
+		adjustFrameTime = 0;
+
+		if (freezeTimeLeft > 0) {
+			isFreezingTime = true;
+			LOG(LogLevel::Finest) << "LinearSpeedAdjuster::ProcessFrame() : freezing time.";
+			freezeTimeLeft -= elapsedTime;
+			LOG(LogLevel::Debug) << "LinearSpeedAdjuster::ProcessFrame() : freezing time left [" << freezeTimeLeft << "].";
+			if (freezeTimeLeft < 0) {
+				// 這邊會有一點點誤差，但是沒有辦法修正回來，除非把time controller去調整當前時間
+				freezeTimeLeft = 0;
+				// 這邊就進入last freezing time
+			}
+		}
+		else {
 			isFreezingTime = false;
-			onAdjustFreezeEnd.Trigger();
+			freezeTimeLeft = 0;
 		}
 	}
 
@@ -107,12 +116,22 @@ double LinearSpeedAdjuster::GetFreezeTimeLeft()
 
 bool LinearSpeedAdjuster::GetIsAdjustingTime()
 {
-	return isAdjustingTime;
+	return seekTimeLeft == 0 && adjustFrameTime == 0 ? false : true;
+}
+
+bool LinearSpeedAdjuster::GetIsLastAdjustingTime()
+{
+	return seekTimeLeft == 0 && isAdjustingTime ? true : false;
 }
 
 bool LinearSpeedAdjuster::GetIsFreezingTime()
 {
-	return isFreezingTime;
+	return freezeTimeLeft == 0 ? false : true;
+}
+
+bool LinearSpeedAdjuster::GetIsLastFreezingTime()
+{
+	return freezeTimeLeft == 0 && isFreezingTime ? true : false;
 }
 
 int LinearSpeedAdjuster::SetAdjustSpeed(double aSpeed)
