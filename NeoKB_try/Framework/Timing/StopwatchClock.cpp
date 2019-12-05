@@ -95,7 +95,7 @@ int StopwatchClock::Start()
 
 int StopwatchClock::Stop()
 {
-	LOG(LogLevel::Debug) << "StopwatchClock::Stop() : stop this.";
+	LOG(LogLevel::Debug) << "StopwatchClock::Stop() : stop this. by [" << this << "]";
 	if (!isStarted || !isRunning)
 		return -1;
 	rateChangeAccumulatedTime += getElapsedSeconds() * rate;

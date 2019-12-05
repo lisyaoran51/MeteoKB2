@@ -87,6 +87,7 @@ int FramedClock::SetIsRunning(bool value)
 
 bool FramedClock::GetIsRunning()
 {
+	LOG(LogLevel::Debug) << "FramedClock::GetIsRunning() : get source [" << source << "] is rinning [" << source->GetIsRunning() << "].";
 	return source->GetIsRunning();
 }
 
