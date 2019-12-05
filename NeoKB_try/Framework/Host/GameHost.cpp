@@ -323,6 +323,7 @@ int GameHost::bootstrapSceneGraph(Game* game, Instrument* instrument)
 
 	InputManager* instrumentInputManager = instrument->CreateInputManager();
 	root->AddChild(instrumentInputManager);
+	LOG(LogLevel::Debug) << "GameHost::bootstrapSceneGraph() : instrument address = [" << instrument << "].";
 	instrumentInputManager->AddChild(instrument);
 
 
