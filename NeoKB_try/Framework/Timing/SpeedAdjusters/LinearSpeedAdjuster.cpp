@@ -53,6 +53,7 @@ int LinearSpeedAdjuster::ProcessFrame(double elapsedTime)
 			// 這邊會有一點點誤差，但是沒有辦法修正回來，除非把time controller去調整當前時間
 			freezeTimeLeft = 0;
 			isFreezingTime = false;
+			onAdjustFreezeEnd.Trigger();
 		}
 	}
 

@@ -2,11 +2,15 @@
 
 #include "../../../Util/Log.h"
 #include "Effect/EffectMapper.h"
+#include <iomanip>
+
 
 
 using namespace Games::Schedulers::Events;
 using namespace Util;
 using namespace Games::Schedulers::Events::Effects;
+using namespace std;
+
 
 
 
@@ -181,6 +185,8 @@ Map * EventProcessorMaster::GetGraph()
 
 int EventProcessorMaster::update()
 {
+
+	LOG(LogLevel::Debug) << "EventProcessorMaster::update() : current time is" << fixed << setprecision(5) << GetClock()->GetCurrentTime() << " .";
 
 	processEvent(GetClock()->GetElapsedFrameTime()); // 這個是舊的程式，以後可能用不到了
 
