@@ -115,7 +115,7 @@ namespace Input {
 
 		//vector<InputHandler*> inputHandlers;
 
-		Triggerable* focusTriggerable;
+		Triggerable* focusTriggerable = nullptr;
 
 		int iterateUpdateInputQueue(Triggerable* p, vector<Triggerable*>* tQueue);
 

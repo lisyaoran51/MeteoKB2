@@ -88,7 +88,6 @@ int GameHost::Run(Game* game, Instrument* instrument)
 	if(!initialized)
 		LOG(LogLevel::Finest) << "host not initialized yet.";
 
-	LOG(LogLevel::Debug) << "GameHost::Run(): instrument address = " << instrument;
 	bootstrapSceneGraph(game, instrument);
 	
 	LOG(LogLevel::Debug) << "GameHost::Run(): listing cache" << dependencies->_DebugPrintCache();
@@ -323,7 +322,6 @@ int GameHost::bootstrapSceneGraph(Game* game, Instrument* instrument)
 
 	InputManager* instrumentInputManager = instrument->CreateInputManager();
 	root->AddChild(instrumentInputManager);
-	LOG(LogLevel::Debug) << "GameHost::bootstrapSceneGraph() : instrument address = [" << instrument << "].";
 	instrumentInputManager->AddChild(instrument);
 
 
