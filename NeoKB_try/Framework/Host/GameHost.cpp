@@ -88,7 +88,7 @@ int GameHost::Run(Game* game, Instrument* instrument)
 	if(!initialized)
 		LOG(LogLevel::Finest) << "host not initialized yet.";
 
-
+	LOG(LogLevel::Debug) << "GameHost::Run(): instrument address = " << instrument;
 	bootstrapSceneGraph(game, instrument);
 	
 	LOG(LogLevel::Debug) << "GameHost::Run(): listing cache" << dependencies->_DebugPrintCache();
