@@ -9,6 +9,7 @@ using namespace std;
 
 BassTrack::BassTrack(char * fileName)
 {
+	unique_lock<mutex> uLock(pendingActionMutex);
 	pendingActions.Add(this, [=]() {
 
 
@@ -27,6 +28,8 @@ int BassTrack::Start()
 {
 	Track::Start();
 	LOG(LogLevel::Info) << "BassTrack::Start() : start track[" << this << "]. panding actions = [" << pendingActions.GetSize() << "].";
+
+	unique_lock<mutex> uLock(pendingActionMutex);
 	pendingActions.Add(this, [=]() {
 
 		if (BASS_ChannelPlay(stream, false)) {
@@ -48,7 +51,9 @@ int BassTrack::Start()
 int BassTrack::Stop()
 {
 	Track::Stop();
+	isRunning = false;
 
+	unique_lock<mutex> uLock(pendingActionMutex);
 	pendingActions.Add(this, [=]() {
 
 		LOG(LogLevel::Debug) << "BassTrack::Stop() : stop.";
@@ -60,7 +65,6 @@ int BassTrack::Stop()
 		return 0;
 	}, "Lambda_BassTrack::Stop");
 
-	isRunning = false;
 
 	return 0;
 }
@@ -71,6 +75,7 @@ bool BassTrack::Seek(double position)
 	// TODO: 如果在還沒有start時就seek會出現錯誤，正確做法是還是要讓他seek，正確做法在osu裡面
 
 
+	unique_lock<mutex> uLock(pendingActionMutex);
 	pendingActions.Add(this, [=]() {
 
 		double clampedPosition = position > length ? length : position;
@@ -84,7 +89,7 @@ bool BassTrack::Seek(double position)
 
 		return 0;
 	}, "Lambda_BassTrack::Seek");
-
+	uLock.unlock();
 	
 	return position <= length && position >= 0;
 }

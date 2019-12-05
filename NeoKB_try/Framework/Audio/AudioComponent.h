@@ -43,6 +43,8 @@ namespace Audio {
 
 		ActionList<int> pendingActions;
 
+		mutable mutex pendingActionMutex;
+
 	private:
 
 	};
