@@ -22,5 +22,15 @@ int MeteoPanelDevice::readFromDevice()
 		LOG(LogLevel::Debug) << "MeteoPanelDevice::readFromDevice() : Create fake pause input.";
 	}
 
+	if (_debugCount == 12000) {
+		InputState* newState = new InputState();
+		newState->SetPanelState(new PanelState());
+
+		newState->GetPanelState()->AddButton(InputKey::Pause);
+		inputStates.push_back(newState);
+
+		LOG(LogLevel::Debug) << "MeteoPanelDevice::readFromDevice() : Create fake pause input.";
+	}
+
 	return 0;
 }

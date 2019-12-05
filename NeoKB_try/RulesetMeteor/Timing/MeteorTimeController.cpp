@@ -21,6 +21,8 @@ int MeteorTimeController::onButtonDown(InputState * inputState, InputKey button)
 			SetAllChildsIsMaskedForTrigger();
 		}
 		else if (!isWaitingFreeze) {
+			LOG(LogLevel::Debug) << "MeteorTimeController::OnButtonDown() : restart and freeze 1 sec.";
+
 			speedAdjuster->SetFreezeTime(defaultFreezeTime);
 			isWaitingFreeze = true;
 		}
