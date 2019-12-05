@@ -18,25 +18,38 @@ PassThroughInputManager::PassThroughInputManager() : RegisterType("PassThroughIn
 	isPresent = true;
 }
 
-vector<InputState*>* PassThroughInputManager::getPendingState(vector<InputState*>* pendingStates)
+int PassThroughInputManager::update()
+{
+	InputManager::update();
+
+	if(!useParentState)
+		for (int i = 0; i < pendingStates.size(); i++) {	// 從input handler創建，到這邊delete掉
+			delete pendingStates[i];						//
+		}
+
+	pendingStates.clear();
+	return 0;
+}
+
+vector<InputState*>* PassThroughInputManager::getPendingState(vector<InputState*>* pStates)
 {
 	/* 先把handlers裡面的pending states全都清出來 */
-	InputManager::getPendingState(pendingStates);
+	InputManager::getPendingState(pStates);
 
 	if (!useParentState)
-		return pendingStates;
+		return pStates;
 
-	pendingStates->clear();
+	pStates->clear();
 
 	for (int i = 0; i < pendingParentStates.size(); i++) {
 		// 很有可能都是重複的同一個input state，所以先確定一下
-		if (find(pendingStates->begin(), pendingStates->end(), pendingParentStates[i]) == pendingStates->end()) 
-			pendingStates->push_back(pendingParentStates[i]);
+		if (find(pStates->begin(), pStates->end(), pendingParentStates[i]) == pStates->end())
+			pStates->push_back(pendingParentStates[i]);
 	}
 
 	pendingParentStates.clear();
 
-	return pendingStates;
+	return pStates;
 }
 
 int PassThroughInputManager::onKeyDown(InputState * inputState, InputKey key)

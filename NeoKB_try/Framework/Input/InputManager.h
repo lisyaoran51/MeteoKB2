@@ -42,6 +42,8 @@ namespace Input {
 
 		vector<Triggerable*> staticTriggerQueue;
 
+		vector<InputState*> pendingStates;
+
 		virtual int update();
 
 		/// <summary>

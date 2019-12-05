@@ -30,6 +30,8 @@ namespace Input {
 		/// </summary>
 		bool useParentState = true;
 
+		virtual int update();
+
 		virtual vector<InputState*>* getPendingState(vector<InputState*>* pendingStates);
 
 		virtual int onKeyDown(InputState* inputState, InputKey key) override;

@@ -21,7 +21,7 @@ int InputManager::ChangeFocus(Triggerable * fTriggerable)
 
 int InputManager::update()
 {
-	vector<InputState*> pendingStates;
+	
 	getPendingState(&pendingStates);
 	if(pendingStates.size() > 0)
 		LOG(LogLevel::Finest) << "InputManager::update(): get [" << pendingStates[0] << "] states by " << GetTypeName() << ".";
@@ -40,15 +40,6 @@ int InputManager::update()
 	LOG(LogLevel::Finest) << "InputManager::update(): after handling states.";
 
 	delete distinctInputStates;
-
-
-
-	for (int i = 0; i < pendingStates.size(); i++) {	// 從input handler創建，到這邊delete掉
-		delete pendingStates[i];						//
-	}
-
-
-	pendingStates.clear();
 
 	return 0;
 }
@@ -87,15 +78,15 @@ int InputManager::handleNewState(InputState * state)
 	return 0;
 }
 
-vector<InputState*>* InputManager::getPendingState(vector<InputState*>* pendingStates)
+vector<InputState*>* InputManager::getPendingState(vector<InputState*>* pStates)
 {
 	for (int i = 0; i < getInputHandlers()->size(); i++) {
 
 		vector<InputState*>* inputHandlerPendingState;
 		inputHandlerPendingState = getInputHandlers()->at(i)->GetPendingStates();
 		if (inputHandlerPendingState->size() > 0) {
-			pendingStates->reserve(inputHandlerPendingState->size());
-			pendingStates->insert(pendingStates->end(), inputHandlerPendingState->begin(), inputHandlerPendingState->end());
+			pStates->reserve(inputHandlerPendingState->size());
+			pStates->insert(pStates->end(), inputHandlerPendingState->begin(), inputHandlerPendingState->end());
 		
 			if (inputHandlerPendingState->at(0)->GetPanelState())
 				LOG(LogLevel::Debug) << "InputManager::getPendingState() : get fake input.";
@@ -103,7 +94,7 @@ vector<InputState*>* InputManager::getPendingState(vector<InputState*>* pendingS
 
 		delete inputHandlerPendingState;
 	}
-	return pendingStates;
+	return pStates;
 }
 
 vector<InputState*>* InputManager::createDistinctInputStates(vector<InputState*>* states)
