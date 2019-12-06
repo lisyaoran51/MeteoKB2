@@ -7,6 +7,9 @@
 
 using namespace Framework::Audio::Samples;
 using namespace std;
+using namespace std::literals::string_literals;
+
+
 
 SampleManager::SampleManager(CompositeResourceStore<char*>* rStore)
 {
@@ -27,7 +30,7 @@ SampleChannel * SampleManager::GetSampleChannel(string name)
 		if (path != "")
 			sample = sampleCache[name] = new BassSample((char*)path.c_str());
 		else
-			throw runtime_error("SampleManager::GetSampleChannel(): file not found.");
+			throw runtime_error("SampleManager::GetSampleChannel(): file not found : "s + path);
 
 
 		LOG(LogLevel::Debug) << "SampleManager::GetSampleChannel() : file path found [" << path << "].";
