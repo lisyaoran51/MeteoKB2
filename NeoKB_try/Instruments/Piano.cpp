@@ -305,7 +305,7 @@ int Piano::ControlSustainPedal(bool down)
 
 int Piano::OnKeyDown(pair<PianoAction, int> action)
 {
-	LOG(LogLevel::Debug) << "Piano::OnKeyDown() : get fake input.";
+	LOG(LogLevel::Debug) << "Piano::OnKeyDown() : get fake input." << int(action.first);
 	
 	getSamples()->at(action.first)->Play();
 
