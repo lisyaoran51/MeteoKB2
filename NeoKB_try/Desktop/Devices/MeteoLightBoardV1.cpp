@@ -27,7 +27,7 @@ MeteoLightBoardV1::MeteoLightBoardV1(int w, int h)
 	height = h;
 
 
-	unique_lock<mutex> uLock(matrixMutex);
+	//unique_lock<mutex> uLock(matrixMutex);
 
 	LOG(LogLevel::Fine) << "MeteoLightBoardV1::MeteoLightBoardV1(w,h) : setting matrix.";
 
@@ -42,7 +42,7 @@ MeteoLightBoardV1::MeteoLightBoardV1(int w, int h)
 		}
 	}
 
-	uLock.unlock();
+	//uLock.unlock();
 
 	LOG(LogLevel::Fine) << "MeteoLightBoardV1::MeteoLightBoardV1(w,h) : Open spi device.";
 
