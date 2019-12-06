@@ -34,7 +34,7 @@ int TimeController::update()
 		LOG(LogLevel::Finest) << "TimeController::update() :controllable clock before adjust [" << fixed << setprecision(5) << controllableClock->GetCurrentTime() << "].";
 		// 這邊應該是，不管目前速度多快，調整時間的速度都是固定的，不會速度快的時候就調的快
 		controllableClock->Seek(controllableClock->GetCurrentTime() + timeToAdjust/* * controllableClock->GetRate()*/);
-		LOG(LogLevel::Finest) << "TimeController::update() :controllable clock after adjust [" << fixed << setprecision(5) << controllableClock->GetCurrentTime() << "].";
+		LOG(LogLevel::Debug) << "TimeController::update() :controllable clock after adjust [" << fixed << setprecision(5) << controllableClock->GetCurrentTime() << "].";
 
 		// 檢查是不是已經adjust完畢了
 		if (speedAdjuster->GetIsLastAdjustingTime()) {
