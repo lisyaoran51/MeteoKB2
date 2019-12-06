@@ -71,7 +71,7 @@ int BassTrack::Stop()
 
 bool BassTrack::Seek(double position)
 {
-	LOG(LogLevel::Debug) << "BassTrack::Seek : get framed source playing = [" << isPlayed << "], length = [" << length << "].";
+	LOG(LogLevel::Depricated) << "BassTrack::Seek : get framed source playing = [" << isPlayed << "], length = [" << length << "].";
 	// TODO: 如果在還沒有start時就seek會出現錯誤，正確做法是還是要讓他seek，正確做法在osu裡面
 
 
@@ -84,7 +84,7 @@ bool BassTrack::Seek(double position)
 
 			QWORD pos = BASS_ChannelSeconds2Bytes(stream, clampedPosition);
 			bool result = BASS_ChannelSetPosition(stream, pos, BASS_POS_BYTE);
-			LOG(LogLevel::Debug) << "BassTrack::Seek : pending state seek time to [" << clampedPosition << "] success? " << result << ".";
+			LOG(LogLevel::Depricated) << "BassTrack::Seek : pending state seek time to [" << clampedPosition << "] success? " << result << ".";
 		}
 
 		return 0;

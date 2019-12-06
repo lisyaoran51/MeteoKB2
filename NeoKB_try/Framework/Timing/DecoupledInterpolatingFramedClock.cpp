@@ -74,7 +74,7 @@ int DecoupledInterpolatingFramedClock::ProcessFrame()
 	decoupledStopwatchClock->SetRate(InterpolatingFramedClock::GetRate());
 
 	decoupledClock->ProcessFrame();
-	LOG(LogLevel::Debug) << "DecoupledInterpolatingFramedClock::ProcessFrame() : after decoupled clock process frame, decoupled clock time is " << fixed << setprecision(5) << GetCurrentTime();
+	LOG(LogLevel::Depricated) << "DecoupledInterpolatingFramedClock::ProcessFrame() : after decoupled clock process frame, decoupled clock time is " << fixed << setprecision(5) << GetCurrentTime();
 
 	bool sourceRunning = InterpolatingFramedClock::GetIsRunning();
 	LOG(LogLevel::Depricated) << "DecoupledInterpolatingFramedClock::ProcessFrame() : determine if decoupled clock start. coupled = ["<< isCoupled << "], source running = [" << (sourceRunning ? 1 : 0) << "]" << ", rate = " << InterpolatingFramedClock::GetRate();
