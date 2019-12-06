@@ -305,6 +305,7 @@ int Piano::ControlSustainPedal(bool down)
 
 int Piano::OnKeyDown(pair<PianoAction, int> action)
 {
+	LOG(LogLevel::Debug) << "Piano::OnKeyDown() : get fake input.";
 	getSamples()->at(action.first)->Play();
 	isPressingMap[action.first] = true;
 	return 0;

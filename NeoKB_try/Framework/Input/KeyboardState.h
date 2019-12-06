@@ -24,6 +24,8 @@ namespace Input {
 
 		int AddPress(pair<InputKey, int> press);
 
+		int AddUp(InputKey up);
+
 		vector<pair<InputKey, int>>* GetPresses();
 
 		vector<InputKey>* GetUps();

@@ -13,7 +13,7 @@ namespace Devices {
 
 	class MeteoKeyboardDevice : public KeyboardDevice {
 
-
+		int _debugCount = 0;
 	protected:
 
 		virtual int readFromDevice();

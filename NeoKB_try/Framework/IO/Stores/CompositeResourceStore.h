@@ -99,7 +99,7 @@ namespace Stores {
 				for (int j = 0; j < names->size(); j++) {
 
 
-					LOG(LogLevel::Debug) << "CompositeResourceStore::GetFilePath() : finding path [" << names->at(j) << "].";
+					LOG(LogLevel::Depricated) << "CompositeResourceStore::GetFilePath() : finding path [" << names->at(j) << "].";
 
 					try {
 						returnValue = stores[i]->GetFilePath(names->at(j));

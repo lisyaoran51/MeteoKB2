@@ -10,6 +10,12 @@ int KeyboardState::AddPress(pair<InputKey, int> press)
 	return 0;
 }
 
+int KeyboardState::AddUp(InputKey up)
+{
+	ups.push_back(up);
+	return 0;
+}
+
 vector<pair<InputKey, int>>* KeyboardState::GetPresses()
 {
 	return &presses;
