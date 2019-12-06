@@ -271,19 +271,17 @@ int InputManager::updateKeyboardEvents(InputState * inputState)
 	// 我們不考慮repeat，鎖以不用寫得很複雜
 	// 暫時也不寫組合鍵，以後再寫
 
-	if (lastKeyboardState) {
-		for (int i = 0; i < lastKeyboardState->GetPresses()->size(); i++) {
-			handleKeyDown(inputState, keyboardState->GetPresses()->at(i).first);
-		}
+	for (int i = 0; i < keyboardState->GetPresses()->size(); i++) {
+		handleKeyDown(inputState, keyboardState->GetPresses()->at(i).first);
+	}
 
-		for (int i = 0; i < keyboardState->GetUps()->size(); i++) {
-			handleKeyUp(inputState, keyboardState->GetUps()->at(i));
-		}
+	for (int i = 0; i < keyboardState->GetUps()->size(); i++) {
+		handleKeyUp(inputState, keyboardState->GetUps()->at(i));
+	}
+
+	if (lastKeyboardState) {
 	}
 	else {
-		for (int i = 0; i < keyboardState->GetPresses()->size(); i++) {
-			handleKeyDown(inputState, keyboardState->GetPresses()->at(i).first);
-		}
 	}
 
 	return 0;
