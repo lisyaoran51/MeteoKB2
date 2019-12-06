@@ -7,7 +7,7 @@ int MeteoKeyboardDevice::readFromDevice()
 {
 
 	_debugCount++;
-	LOG(LogLevel::Debug) << "MeteoKeyboardDevice::readFromDevice() : debug count " << _debugCount;
+
 
 	if (_debugCount == 3000) {
 
