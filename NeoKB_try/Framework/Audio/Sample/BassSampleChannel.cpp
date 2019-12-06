@@ -12,7 +12,11 @@ BassSampleChannel::BassSampleChannel(Sample * s): SampleChannel(s)
 
 int BassSampleChannel::Play()
 {
+	LOG(LogLevel::Debug) << "BassSampleChannel::Play() : add play action.";
+
 	pendingActions.Add(this, [=]() {
+
+		LOG(LogLevel::Debug) << "BassSampleChannel::Play() : create channel.";
 
 		if (!GetIsLoaded()) {
 			channelID = 0;
@@ -27,8 +31,11 @@ int BassSampleChannel::Play()
 	}, "Lambda_BassSampleChannel::CreateChannel");
 
 	pendingActions.Add(this, [=]() {
-		
+
+		LOG(LogLevel::Debug) << "BassSampleChannel::Play() : play channel.";
+
 		BASS_ChannelPlay(channelID, false);
+
 		return 0;
 	}, "Lambda_BassSampleChannel::Play");
 	return 0;
