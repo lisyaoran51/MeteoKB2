@@ -98,6 +98,9 @@ namespace Stores {
 			for (int i = 0; i < stores.size(); i++) {
 				for (int j = 0; j < names->size(); j++) {
 
+
+					LOG(LogLevel::Debug) << "CompositeResourceStore::GetFilePath() : finding path [" << names->at(j) << "].";
+
 					try {
 						returnValue = stores[i]->GetFilePath(names->at(j));
 						delete names;
@@ -107,6 +110,7 @@ namespace Stores {
 				}
 			}
 			delete names;
+			throw runtime_error("CompositeResourceStore::GetFilePath(): file not found : "s + name);
 			return returnValue;
 		}
 

@@ -30,8 +30,7 @@ SampleChannel * SampleManager::GetSampleChannel(string name)
 		if (path != "")
 			sample = sampleCache[name] = new BassSample((char*)path.c_str());
 		else {
-			string errorMessage = "SampleManager::GetSampleChannel(): file not found : "s + path;
-			throw runtime_error(errorMessage);
+			throw runtime_error("SampleManager::GetSampleChannel(): file not found : "s + name);
 
 		}
 
