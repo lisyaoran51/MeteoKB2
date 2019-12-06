@@ -18,7 +18,7 @@ DecoupledInterpolatingFramedClock::DecoupledInterpolatingFramedClock(): Interpol
 
 double DecoupledInterpolatingFramedClock::GetCurrentTime()
 {
-	LOG(LogLevel::Debug) << "DecoupledInterpolatingFramedClock::GetCurrentTime() : get decoupled clock? [" << getIsUseDecoupledClock() << "].";
+	LOG(LogLevel::Depricated) << "DecoupledInterpolatingFramedClock::GetCurrentTime() : get decoupled clock? [" << getIsUseDecoupledClock() << "].";
 	// 用分離時鐘嗎? 拿分離時鐘時間 : 拿原始時鐘的時間(可能會停掉)
 	return getIsUseDecoupledClock() ? decoupledClock->GetCurrentTime() : InterpolatingFramedClock::GetCurrentTime();
 }
@@ -74,7 +74,7 @@ int DecoupledInterpolatingFramedClock::ProcessFrame()
 	decoupledStopwatchClock->SetRate(InterpolatingFramedClock::GetRate());
 
 	decoupledClock->ProcessFrame();
-
+	LOG(LogLevel::Debug) << "DecoupledInterpolatingFramedClock::ProcessFrame() : after decoupled clock process frame, decoupled clock time is " << fixed << setprecision(5) << GetCurrentTime();
 
 	bool sourceRunning = InterpolatingFramedClock::GetIsRunning();
 	LOG(LogLevel::Depricated) << "DecoupledInterpolatingFramedClock::ProcessFrame() : determine if decoupled clock start. coupled = ["<< isCoupled << "], source running = [" << (sourceRunning ? 1 : 0) << "]" << ", rate = " << InterpolatingFramedClock::GetRate();
