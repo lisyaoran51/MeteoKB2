@@ -17,7 +17,7 @@ int KeyboardInputHandler::Initialize(GameHost * host)
 
 	vector<pair<uintptr_t, string>>* callbackKeys = host->GetMainInterface()->GetKeyboard()->_DebugGetActionList()->_DebugGetCallbackKeys();
 
-	LOG(LogLevel::Finest) << "TestCaseKeyboard : callback keys size = " << callbackKeys->size();
+	LOG(LogLevel::Depricated) << "TestCaseKeyboard : callback keys size = " << callbackKeys->size();
 
 	// 當mian interface讀到輸入時，就會call handle key down來處理
 	host->GetMainInterface()->GetKeyboard()->
@@ -28,6 +28,7 @@ int KeyboardInputHandler::Initialize(GameHost * host)
 
 int KeyboardInputHandler::HandleState(InputState * inputState)
 {
+	LOG(LogLevel::Debug) << "KeyboardInputHandler::HandleState() : get new state.";
 	auto keyboardState = inputState->GetKeyboardState()->Clone();
 
 	InputState* pendingState = new InputState();

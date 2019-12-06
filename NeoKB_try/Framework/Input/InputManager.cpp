@@ -263,6 +263,8 @@ int InputManager::updateInputQueue(InputState * inputState)
 
 int InputManager::updateKeyboardEvents(InputState * inputState)
 {
+	LOG(LogLevel::Debug) << "InputManager::updateKeyboardEvents() : updateing fake input.";
+
 	KeyboardState* keyboardState= inputState->GetKeyboardState();
 	KeyboardState* lastKeyboardState = inputState->GetLastState() ? inputState->GetLastState()->GetKeyboardState() : nullptr;
 
@@ -352,7 +354,14 @@ int InputManager::updateBluetoothEvents(InputState * inputState)
 
 int InputManager::handleKeyDown(InputState * state, InputKey key)
 {
-	
+	LOG(LogLevel::Debug) << "InputManager::handleKeyDown() : trigger queue- by " << GetTypeName();
+	LOG(LogLevel::Debug) << [](vector<Triggerable*>& triggerables) {
+
+		for (int i = 0; i < triggerables.size(); i++)
+			LOG(LogLevel::Debug) << "|---------[" << triggerables[i]->GetTypeName() << "]";
+
+		return 0;
+	}(triggerQueue);
 
 	return propagateKeyDown(&triggerQueue, state, key);
 }
