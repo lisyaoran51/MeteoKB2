@@ -103,9 +103,11 @@ namespace Stores {
 						delete names;
 						return returnValue;
 					}
+					catch{}
 				}
 			}
-
+			delete names;
+			return returnValue;
 		}
 
 		int AddExtension(string extension) {
