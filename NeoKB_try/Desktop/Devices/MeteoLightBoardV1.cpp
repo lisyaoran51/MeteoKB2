@@ -392,9 +392,17 @@ int MeteoLightBoardV1::Display(uint8_t ** m)
 	}
 	for (int i = 0; i < width; i++) {
 		for (int j = 0; j < height; j++) {
-			if (m[i][j] > 0) {
-				LOG(LogLevel::Finest) << "MeteoLightBoardV1::Display() : output (" << i << "," << j << ")";
-				matrix[height - 1 - j][(width - i - 1) / 8] ^= 1 << (i % 8);
+			if (LOW_ACTIVE_74595) {
+				if (m[i][j] == 0) {
+					LOG(LogLevel::Finest) << "MeteoLightBoardV1::Display() : output (" << i << "," << j << ")";
+					matrix[height - 1 - j][(width - i - 1) / 8] ^= 1 << (i % 8);
+				}
+			}
+			else {
+				if (m[i][j] > 0) {
+					LOG(LogLevel::Finest) << "MeteoLightBoardV1::Display() : output (" << i << "," << j << ")";
+					matrix[height - 1 - j][(width - i - 1) / 8] ^= 1 << (i % 8);
+				}
 			}
 		}
 	}

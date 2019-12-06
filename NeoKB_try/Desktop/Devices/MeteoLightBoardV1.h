@@ -16,6 +16,9 @@
 #define NA_PIN RPI_BPLUS_GPIO_J8_15
 #define NB_PIN RPI_BPLUS_GPIO_J8_16
 
+#define LOW_ACTIVE_74595 1
+#define OE_74595 RPI_BPLUS_GPIO_J8_22
+
 
 namespace Desktop {
 namespace Devices {
