@@ -29,8 +29,11 @@ SampleChannel * SampleManager::GetSampleChannel(string name)
 		string path = resourceStore->GetFilePath(name);
 		if (path != "")
 			sample = sampleCache[name] = new BassSample((char*)path.c_str());
-		else
-			throw runtime_error("SampleManager::GetSampleChannel(): file not found : "s + path);
+		else {
+			string errorMessage = "SampleManager::GetSampleChannel(): file not found : "s + path;
+			throw runtime_error(errorMessage);
+
+		}
 
 
 		LOG(LogLevel::Debug) << "SampleManager::GetSampleChannel() : file path found [" << path << "].";
