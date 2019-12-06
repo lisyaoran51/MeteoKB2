@@ -18,9 +18,9 @@ namespace Samples {
 
 		BassSampleChannel(Sample* s);
 
-		int Play();
+		virtual int Play();
 
-		int Stop();
+		virtual int Stop();
 
 		virtual bool GetIsLoaded();
 

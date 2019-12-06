@@ -18,9 +18,9 @@ namespace Samples {
 
 		SampleChannel* GetSampleChannel(string name);
 
-		int Play();
+		virtual int Play();
 
-		int Stop();
+		virtual int Stop();
 
 	protected:
 
