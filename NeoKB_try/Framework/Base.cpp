@@ -46,5 +46,5 @@ int Base::SetHost(GameHost * host)
 
 string Base::GetResourcePath()
 {
-	return string("Resources");
+	return string("./Resources");
 }

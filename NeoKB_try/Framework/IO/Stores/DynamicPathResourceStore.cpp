@@ -1,8 +1,11 @@
 #include "DynamicPathResourceStore.h"
 
+#include <experimental/filesystem>
+
 
 using namespace Framework::IO::Stores;
 using namespace std;
+using namespace std::experimental::filesystem;
 
 
 DynamicPathResourceStore::DynamicPathResourceStore(string p): RegisterType("DynamicPathResourceStore")
@@ -48,4 +51,17 @@ ifstream * DynamicPathResourceStore::GetStream(string name)
 	}
 
 	return ifs;
+}
+
+string DynamicPathResourceStore::GetFilePath(string name)
+{
+	string filePath = path + "/" + name;
+
+	if (exists(filePath)) {
+
+		return filePath;
+	}
+	else
+		throw runtime_error("DynamicPathResourceStore::GetFilePath(): file not found.");
+	return string();
 }

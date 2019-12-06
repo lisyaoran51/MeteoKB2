@@ -1308,8 +1308,18 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	unput thread沒有問題，應該是update thread的問題
 	改完以後一開就當機
 	
+12/4
+	pause以後update thread會整個停掉
 	
+	做額外的partition 
+	https://mike632t.wordpress.com/2014/02/10/resizing-partitions/
 	
+	安裝gcc 6.3
+	https://blog.gtwang.org/programming/raspberry-pi-raspbian-compile-and-install-gcc-6/
+	
+12/6
+	在bass上安裝
+	https://github.com/cpicanco/stimulus_control/wiki/How-to-install-the-bass-library-on-linux%3F
 	
 	
 	

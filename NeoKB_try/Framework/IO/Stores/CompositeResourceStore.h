@@ -90,6 +90,24 @@ namespace Stores {
 			return nullptr;
 		}
 
+		virtual string GetFilePath(string name) {
+			vector<string>* names = getFileNames(name);
+
+			string returnValue = "";
+
+			for (int i = 0; i < stores.size(); i++) {
+				for (int j = 0; j < names->size(); j++) {
+
+					try {
+						returnValue = stores[i]->GetFilePath(names->at(j));
+						delete names;
+						return returnValue;
+					}
+				}
+			}
+
+		}
+
 		int AddExtension(string extension) {
 			extensions.push_back(extension);
 			return 0;

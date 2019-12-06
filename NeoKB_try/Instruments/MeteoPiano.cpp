@@ -83,6 +83,7 @@ map<PianoAction, SampleChannel*>* MeteoPiano::getSamples()
 
 int MeteoPiano::loadAndMapSamples()
 {
+
 	/* ¥¼¤É­° */
 #pragma region NonePitchState
 

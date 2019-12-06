@@ -19,14 +19,19 @@ SampleChannel * SampleManager::GetSampleChannel(string name)
 	Sample* sample = nullptr;
 	SampleChannel* sampleChannel = nullptr;
 
+
 	map<string, Sample*>::iterator it = sampleCache.find(name);
 	if (it == sampleCache.end()) {
 
-		// TODO: 這裡會出錯，沒有家路靜，不過之後再來改
-		//ifstream* stream = resourceStore->GetStream(name);
-		//if (stream != nullptr) {
-			sample = sampleCache[name] = new BassSample((char*)name.c_str());
-		//}
+		string path = resourceStore->GetFilePath(name);
+		if (path != "")
+			sample = sampleCache[name] = new BassSample((char*)path.c_str());
+		else
+			throw runtime_error("SampleManager::GetSampleChannel(): file not found.");
+
+
+		LOG(LogLevel::Debug) << "SampleManager::GetSampleChannel() : file path found [" << path << "].";
+		
 	}
 	else {
 		sample = sampleCache[name];
