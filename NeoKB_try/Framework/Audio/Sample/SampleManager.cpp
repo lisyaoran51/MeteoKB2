@@ -27,11 +27,13 @@ SampleChannel * SampleManager::GetSampleChannel(string name)
 	if (it == sampleCache.end()) {
 
 		string path = resourceStore->GetFilePath(name);
-		if (path != "")
+		if (path != "") {
 			sample = sampleCache[name] = new BassSample((char*)path.c_str());
+			sampleChannel = sampleChannelCache[name] = new BassSampleChannel(sample);
+			AddItem(sampleChannel);
+		}
 		else {
 			throw runtime_error("SampleManager::GetSampleChannel(): file not found : "s + name);
-
 		}
 
 
@@ -39,13 +41,9 @@ SampleChannel * SampleManager::GetSampleChannel(string name)
 		
 	}
 	else {
-		sample = sampleCache[name];
+		sampleChannel = sampleChannelCache[name];
 	}
 
-	if (sample != nullptr) {
-		sampleChannel = new BassSampleChannel(sample);
-		AddItem(sampleChannel);
-	}
 
 	return sampleChannel;
 }

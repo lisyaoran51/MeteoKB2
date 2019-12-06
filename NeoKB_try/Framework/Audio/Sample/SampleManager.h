@@ -27,6 +27,8 @@ namespace Samples {
 
 		map<string, Sample*> sampleCache;
 
+		map<string, SampleChannel*> sampleChannelCache;
+
 	};
 
 
