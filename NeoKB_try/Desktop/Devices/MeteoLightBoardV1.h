@@ -10,6 +10,8 @@
 #include <fcntl.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <mutex>
+
 
 #define PA_PIN RPI_BPLUS_GPIO_J8_11
 #define PB_PIN RPI_BPLUS_GPIO_J8_13
@@ -18,6 +20,11 @@
 
 #define LOW_ACTIVE_74595 1
 #define OE_74595 RPI_BPLUS_GPIO_J8_22
+
+
+
+using namespace std;
+
 
 
 namespace Desktop {
@@ -30,6 +37,8 @@ namespace Devices {
 		uint8_t** matrix;
 
 		int spi_fd;
+
+		mutable mutex matrixMutex;
 
 		bool threadLock;
 

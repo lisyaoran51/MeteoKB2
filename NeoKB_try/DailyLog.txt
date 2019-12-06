@@ -1321,7 +1321,7 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	在bass上安裝
 	https://github.com/cpicanco/stimulus_control/wiki/How-to-install-the-bass-library-on-linux%3F
 	
-	
+	結果bass藥用hardfp才能夠跑
 	
 	
 	

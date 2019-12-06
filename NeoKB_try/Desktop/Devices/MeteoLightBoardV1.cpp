@@ -26,7 +26,8 @@ MeteoLightBoardV1::MeteoLightBoardV1(int w, int h)
 	width = w;
 	height = h;
 
-	threadLock = true;
+
+	unique_lock<mutex> uLock(matrixMutex);
 
 	LOG(LogLevel::Fine) << "MeteoLightBoardV1::MeteoLightBoardV1(w,h) : setting matrix.";
 
@@ -41,7 +42,7 @@ MeteoLightBoardV1::MeteoLightBoardV1(int w, int h)
 		}
 	}
 
-	threadLock = false;
+	uLock.unlock();
 
 	LOG(LogLevel::Fine) << "MeteoLightBoardV1::MeteoLightBoardV1(w,h) : Open spi device.";
 
@@ -349,8 +350,7 @@ int MeteoLightBoardV1::Draw()
 
 		for (int i = 0; i < height; i++) {
 
-			while (threadLock);
-			threadLock = true;
+			unique_lock<mutex> uLock(matrixMutex);
 
 			tr.tx_buf = (unsigned long)matrix[i];
 			tr.len = width / 8;
@@ -358,9 +358,12 @@ int MeteoLightBoardV1::Draw()
 			if (ioctl(spi_fd, SPI_IOC_MESSAGE(1), &tr) < 0) {
 				LOG(LogLevel::Error) << "MeteoLightBoardV1::Draw() : cannot send spi message.";
 			}
+			
+			uLock.unlock();
+			
 			switchRowSequencely(i);
 
-			threadLock = false;
+
 
 
 			//int count = 0;
@@ -370,7 +373,7 @@ int MeteoLightBoardV1::Draw()
 			//	count++;
 			//} while (duration_cast<microseconds>(temp - startTime).count() < 10);
 			//LOG(LogLevel::Finest) << "MeteoLightBoardV1::Draw() : count = " << count;
-			usleep(100);
+			usleep(1000);
 		}
 	}
 
@@ -383,8 +386,9 @@ int MeteoLightBoardV1::Display(uint8_t ** m)
 
 	LOG(LogLevel::Finest) << "MeteoLightBoardV1::Display() : Displaying light matrix...";
 
-	while (threadLock);
-	threadLock = true;
+
+	unique_lock<mutex> uLock(matrixMutex);
+
 	for (int i = 0; i < width / 8; i++) {
 		for (int j = 0; j < height; j++) {
 			matrix[j][i] = 0xFF;
@@ -406,6 +410,8 @@ int MeteoLightBoardV1::Display(uint8_t ** m)
 			}
 		}
 	}
-	threadLock = false;
+	
+	uLock.unlock();
+
 	return 0;
 }
