@@ -954,6 +954,12 @@
     <ClCompile Include="TestCases\TestCaseStopwatch.cpp">
       <Filter>來源檔案\TestCases</Filter>
     </ClCompile>
+    <ClCompile Include="Desktop\Devices\MeteoPanelBoardV1.cpp">
+      <Filter>來源檔案\Desktop\Devices</Filter>
+    </ClCompile>
+    <ClCompile Include="Desktop\Devices\Pi2c.cpp">
+      <Filter>來源檔案\Desktop\Devices</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="DailyLog.txt">
@@ -1587,6 +1593,12 @@
     </ClInclude>
     <ClInclude Include="Util\DataStructure\BindablePointer.h">
       <Filter>標頭檔\Util\DataStructure</Filter>
+    </ClInclude>
+    <ClInclude Include="Desktop\Devices\MeteoPanelBoardV1.h">
+      <Filter>標頭檔\Desktop\Devices</Filter>
+    </ClInclude>
+    <ClInclude Include="Desktop\Devices\Pi2c.h">
+      <Filter>標頭檔\Desktop\Devices</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

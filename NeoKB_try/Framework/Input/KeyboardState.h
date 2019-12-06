@@ -32,7 +32,9 @@ namespace Input {
 
 		virtual KeyboardState* Clone();
 
-		virtual bool Contain(InputKey key);
+		virtual bool ContainPress(InputKey key);
+
+		virtual bool ContainUp(InputKey key);
 
 		virtual bool CheckIsEmpty();
 

@@ -3,8 +3,18 @@
 using namespace Desktop::Devices;
 
 
+MeteoKeyboardDevice::MeteoKeyboardDevice(MeteoPanelBoardV1 * panelBoard)
+{
+	meteoPanelBoard = panelBoard;
+}
+
 int MeteoKeyboardDevice::readFromDevice()
 {
+
+	InputState* newState = meteoPanelBoard->GetKeyboardState();
+	if(newState != nullptr)
+		inputStates.push_back(newState);
+
 
 	_debugCount++;
 

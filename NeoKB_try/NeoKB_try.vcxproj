@@ -24,7 +24,9 @@
     <ClCompile Include="Desktop\Devices\MeteoDisplayDevice.cpp" />
     <ClCompile Include="Desktop\Devices\MeteoKeyboardDevice.cpp" />
     <ClCompile Include="Desktop\Devices\MeteoLightBoardV1.cpp" />
+    <ClCompile Include="Desktop\Devices\MeteoPanelBoardV1.cpp" />
     <ClCompile Include="Desktop\Devices\MeteoPanelDevice.cpp" />
+    <ClCompile Include="Desktop\Devices\Pi2c.cpp" />
     <ClCompile Include="Desktop\MeteoGameDesktop.cpp" />
     <ClCompile Include="Desktop\Program.cpp" />
     <ClCompile Include="Framework\Database\DatabaseContext.cpp" />
@@ -198,7 +200,9 @@
     <ClInclude Include="Desktop\Devices\MeteoDisplayDevice.h" />
     <ClInclude Include="Desktop\Devices\MeteoKeyboardDevice.h" />
     <ClInclude Include="Desktop\Devices\MeteoLightBoardV1.h" />
+    <ClInclude Include="Desktop\Devices\MeteoPanelBoardV1.h" />
     <ClInclude Include="Desktop\Devices\MeteoPanelDevice.h" />
+    <ClInclude Include="Desktop\Devices\Pi2c.h" />
     <ClInclude Include="Desktop\MeteoGameDesktop.h" />
     <ClInclude Include="Desktop\Program.h" />
     <ClInclude Include="Framework\Database\DatabaseContext.h" />

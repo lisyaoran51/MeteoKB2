@@ -32,8 +32,10 @@ int MeteoGameHost::setupMainInterface()
 
 	DisplayDevice* displayDevice = new MeteoDisplayDevice(48, 16);// 之後再改
 	BluetoothDevice* bluetoothDevice = new MeteoBluetoothDevice();
-	KeyboardDevice* keyboardDevice = new MeteoKeyboardDevice();
-	PanelDevice* panelDevice = new MeteoPanelDevice();
+
+	MeteoPanelBoardV1* meteoPanelBoard = new MeteoPanelBoardV1(7); // i2c address設為7
+	KeyboardDevice* keyboardDevice = new MeteoKeyboardDevice(meteoPanelBoard);
+	PanelDevice* panelDevice = new MeteoPanelDevice(meteoPanelBoard);
 
 	// bt和panel都同時有input和output特性，先暫時把他們都擺input
 	mainInterface->RegisterInputDevice(bluetoothDevice);

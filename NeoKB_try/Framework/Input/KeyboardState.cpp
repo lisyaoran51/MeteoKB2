@@ -39,9 +39,20 @@ KeyboardState * KeyboardState::Clone()
 	return cloned;
 }
 
-bool KeyboardState::Contain(InputKey key)
+bool KeyboardState::ContainPress(InputKey key)
 {
-	throw logic_error("KeyboardState::Contain(): not implemented");
+	for (int i = 0; i < GetPresses()->size(); i++)
+		if (GetPresses()->at(i).first == key)
+			return true;
+
+	return false;
+}
+
+bool KeyboardState::ContainUp(InputKey key)
+{
+	for (int i = 0; i < GetUps()->size(); i++)
+		if (GetUps()->at(i) == key)
+			return true;
 	return false;
 }
 
