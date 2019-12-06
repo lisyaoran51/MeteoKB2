@@ -17,7 +17,7 @@ MeteoLightBoardV1::MeteoLightBoardV1(int w, int h)
 		LOG(LogLevel::Error) << "MeteoLightBoardV1::MeteoLightBoardV1(w,h) : Failed to initialize bcm2835.";
 	}
 
-
+	LOG(LogLevel::Fine) << "MeteoLightBoardV1::MeteoLightBoardV1(w,h) : bcm2835 inited.";
 	bcm2835_gpio_fsel(PA_PIN, BCM2835_GPIO_FSEL_OUTP);
 	bcm2835_gpio_fsel(PB_PIN, BCM2835_GPIO_FSEL_OUTP);
 	bcm2835_gpio_fsel(NA_PIN, BCM2835_GPIO_FSEL_OUTP);

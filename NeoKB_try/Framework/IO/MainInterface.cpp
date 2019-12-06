@@ -26,9 +26,6 @@ int MainInterface::Initialize()
 	panel = new Panel();
 	phone = new BluetoothPhone();
 
-	vector<pair<uintptr_t, string>>* callbackKeys2 = keyboard->_DebugGetActionList()->_DebugGetCallbackKeys();
-
-	LOG(LogLevel::Fine) << "TestCaseKeyboard : callback2 keys size = " << callbackKeys2->size();
 
 	peripherals.push_back(display);
 	peripherals.push_back(keyboard);
