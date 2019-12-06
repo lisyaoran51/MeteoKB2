@@ -18,7 +18,7 @@ DecoupledInterpolatingFramedClock::DecoupledInterpolatingFramedClock(): Interpol
 
 double DecoupledInterpolatingFramedClock::GetCurrentTime()
 {
-	LOG(LogLevel::Depricated) << "DecoupledInterpolatingFramedClock::GetCurrentTime() : get decoupled clock? [" << getIsUseDecoupledClock() << "].";
+	LOG(LogLevel::Debug) << "DecoupledInterpolatingFramedClock::GetCurrentTime() : get decoupled clock? [" << getIsUseDecoupledClock() << "].";
 	// 用分離時鐘嗎? 拿分離時鐘時間 : 拿原始時鐘的時間(可能會停掉)
 	return getIsUseDecoupledClock() ? decoupledClock->GetCurrentTime() : InterpolatingFramedClock::GetCurrentTime();
 }
