@@ -103,7 +103,7 @@ namespace Stores {
 						delete names;
 						return returnValue;
 					}
-					catch(){}
+					catch(exception& e){}
 				}
 			}
 			delete names;
