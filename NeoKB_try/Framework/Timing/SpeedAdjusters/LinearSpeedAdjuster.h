@@ -60,7 +60,7 @@ namespace SpeedAdjusters {
 		/// <summary>
 		/// 20秒的調整會在1秒完成，1:20
 		///	</summary>
-		double adjustSpeed = 20.0;
+		double adjustSpeed = 5.0;
 
 	};
 

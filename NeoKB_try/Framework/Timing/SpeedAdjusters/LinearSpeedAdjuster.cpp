@@ -8,6 +8,7 @@ using namespace Framework::Timing::SpeedAdjusters;
 
 LinearSpeedAdjuster::LinearSpeedAdjuster() : RegisterType("LinearSpeedAdjuster")
 {
+	adjustSpeed = 5.0;
 }
 
 int LinearSpeedAdjuster::ProcessFrame(double elapsedTime)
