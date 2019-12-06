@@ -130,7 +130,7 @@ Instrument.o MeteoPiano.o Piano.o PianoInputManager.o \
 \
 FileSystem.o ProgramInitializer.o \
 \
-MeteoGameDesktop.o Program.o MeteoLightBoardV1.o bcm2835.o MeteoBluetoothDevice.o MeteoDisplayDevice.o MeteoKeyboardDevice.o MeteoPanelDevice.o\
+MeteoGameDesktop.o Program.o MeteoLightBoardV1.o bcm2835.o MeteoBluetoothDevice.o MeteoDisplayDevice.o MeteoKeyboardDevice.o MeteoPanelDevice.o MeteoPanelBoardV1.o Pi2c.o\
 \
 MeteorGame.o MeteorConfigManager.o MeteorInputManager.o MeteorPlayfield.o MeteorRuleset.o MeteorRulesetExecutor.o \
 ExplodeEffect.o ExplodeEffectMapper.o FallEffect.o FallEffectMapper.o GlowLineEffect.o GlowLineEffectMapper.o TargetLineEffect.o TargetLineEffectMapper.o \
