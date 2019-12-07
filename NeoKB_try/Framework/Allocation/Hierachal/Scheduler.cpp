@@ -87,10 +87,12 @@ int Scheduler::AddDelayedTask(function<int(void)> task, double timeUntilRun, boo
 {
 	ScheduledTask* scheduledTask = nullptr;
 
+	
 	if (repeat)
 		scheduledTask = new ScheduledTask(task, clock->GetCurrentTime() + timeUntilRun, timeUntilRun);
 	else
 		scheduledTask = new ScheduledTask(task, clock->GetCurrentTime() + timeUntilRun);
+	
 
 	AddScheduledTask(scheduledTask);
 

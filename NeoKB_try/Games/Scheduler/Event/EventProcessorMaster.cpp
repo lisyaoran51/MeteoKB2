@@ -125,7 +125,14 @@ Map * EventProcessorMaster::GetGraph()
 
 	graph->Reset();
 
-	double currentTime = GetClock()->GetCurrentTime();
+	double currentTime;
+	try {
+		currentTime = GetClock()->GetCurrentTime();
+	}
+	catch (exception& e) {
+		LOG(LogLevel::Error) << "EventProcessorMaster::GetGraph : clock is not started [" << e.what() << "].";
+		exit(EXIT_SUCCESS);
+	}
 
 	vector<EventProcessor<Event>*> eventProcessors;
 
