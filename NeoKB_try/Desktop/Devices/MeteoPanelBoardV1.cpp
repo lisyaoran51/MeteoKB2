@@ -54,7 +54,7 @@ MeteoPanelBoardV1::MeteoPanelBoardV1(int address)
 	keyboardState = new InputState();
 	keyboardState->SetKeyboardState(new KeyboardState());
 
-	thread t(&work);
+	thread t(&MeteoPanelBoardV1::work, this);
 	t.detach();
 
 }
