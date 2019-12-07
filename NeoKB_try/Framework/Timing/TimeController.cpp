@@ -45,6 +45,7 @@ int TimeController::update()
 
 	}
 	else if (speedAdjuster->GetIsFreezingTime()) {
+		LOG(LogLevel::Debug) << "TimeController::update() : elapsed time is " << GetClock()->GetElapsedFrameTime();
 		Pause();
 	}
 	else if (speedAdjuster->GetIsLastFreezingTime()) {
