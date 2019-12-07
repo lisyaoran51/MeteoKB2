@@ -89,6 +89,8 @@ MeteoLightBoardV1::MeteoLightBoardV1(int w, int h)
 		LOG(LogLevel::Error) << "MeteoLightBoardV1::MeteoLightBoardV1 : Fail to set spi speed.";
 	}
 
+	startTime = system_clock::now();
+
 }
 
 
@@ -332,6 +334,8 @@ int MeteoLightBoardV1::switchRowSequencely(int row)
 
 int MeteoLightBoardV1::Draw()
 {
+	system_clock::time_point nowTime;
+
 	LOG(LogLevel::Fine) << "MeteoLightBoardV1::Draw() : Start drawing.";
 
 	struct spi_ioc_transfer tr;
@@ -345,6 +349,13 @@ int MeteoLightBoardV1::Draw()
 	//microseconds difference;
 
 	while (1) {
+		frameCount++;
+		nowTime = system_clock::now();
+		if (duration_cast<milliseconds>(nowTime - startTime).count() / 1000 > nowSecond) {
+			nowSecond++;
+			LOG(LogLevel::Debug) << "MeteoLightBoardV1::Draw() : frame rate = [" << frameCount << "].";
+			frameCount = 0;
+		}
 
 		LOG(LogLevel::Finest) << "MeteoLightBoardV1::Draw() : Draw a new frame.";
 

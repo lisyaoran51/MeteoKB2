@@ -46,6 +46,12 @@ namespace Devices {
 
 		int switchRowSequencely(int row);
 
+		system_clock::time_point startTime;
+
+		int frameCount = 0;
+
+		int nowSecond = 0;
+
 	public:
 
 		MeteoLightBoardV1(int w, int h);
