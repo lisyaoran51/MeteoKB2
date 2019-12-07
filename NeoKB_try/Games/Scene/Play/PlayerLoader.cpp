@@ -31,6 +31,10 @@ int PlayerLoader::pushWhenLoaded()
 		}
 		catch (exception& e) {
 			LOG(LogLevel::Error) << "PlayerLoader::pushWhenLoaded() : add delay task failed [" << e.what() << "].";
+			LOG(LogLevel::Error) << "PlayerLoader::pushWhenLoaded() : add delay task failed [" << e.what() << "].";
+			LOG(LogLevel::Error) << "PlayerLoader::pushWhenLoaded() : add delay task failed [" << e.what() << "].";
+			LOG(LogLevel::Error) << "PlayerLoader::pushWhenLoaded() : add delay task failed [" << e.what() << "].";
+			LOG(LogLevel::Error) << "PlayerLoader::pushWhenLoaded() : add delay task failed [" << e.what() << "].";
 			exit(EXIT_SUCCESS);
 		}
 

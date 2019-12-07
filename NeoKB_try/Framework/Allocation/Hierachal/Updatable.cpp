@@ -58,6 +58,10 @@ bool Updatable::UpdateSubTree()
 	}
 	catch (exception& e) {
 		LOG(LogLevel::Error) << "Updatable::UpdateSubTree() : error [" << e.what() << "] by [" << GetTypeName() << "].";
+		LOG(LogLevel::Error) << "Updatable::UpdateSubTree() : error [" << e.what() << "] by [" << GetTypeName() << "].";
+		LOG(LogLevel::Error) << "Updatable::UpdateSubTree() : error [" << e.what() << "] by [" << GetTypeName() << "].";
+		LOG(LogLevel::Error) << "Updatable::UpdateSubTree() : error [" << e.what() << "] by [" << GetTypeName() << "].";
+		LOG(LogLevel::Error) << "Updatable::UpdateSubTree() : error [" << e.what() << "] by [" << GetTypeName() << "].";
 		exit(EXIT_SUCCESS);
 	}
 

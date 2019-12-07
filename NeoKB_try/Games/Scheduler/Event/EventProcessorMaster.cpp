@@ -131,6 +131,10 @@ Map * EventProcessorMaster::GetGraph()
 	}
 	catch (exception& e) {
 		LOG(LogLevel::Error) << "EventProcessorMaster::GetGraph : clock is not started [" << e.what() << "].";
+		LOG(LogLevel::Error) << "EventProcessorMaster::GetGraph : clock is not started [" << e.what() << "].";
+		LOG(LogLevel::Error) << "EventProcessorMaster::GetGraph : clock is not started [" << e.what() << "].";
+		LOG(LogLevel::Error) << "EventProcessorMaster::GetGraph : clock is not started [" << e.what() << "].";
+		LOG(LogLevel::Error) << "EventProcessorMaster::GetGraph : clock is not started [" << e.what() << "].";
 		exit(EXIT_SUCCESS);
 	}
 
