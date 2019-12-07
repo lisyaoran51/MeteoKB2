@@ -16,7 +16,7 @@ int MeteoKeyboardDevice::readFromDevice()
 		inputStates.push_back(newState);
 
 
-	_debugCount++;
+	_debugCount;
 
 
 	if (_debugCount == 3000) {

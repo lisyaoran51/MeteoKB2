@@ -1573,12 +1573,6 @@
     <ClInclude Include="Games\Sheetmusic\SheetmusicStore.h">
       <Filter>標頭檔\Games\Sheetmusics</Filter>
     </ClInclude>
-    <ClInclude Include="Framework\IO\Stores\StorageResourceStore.h">
-      <Filter>標頭檔</Filter>
-    </ClInclude>
-    <ClInclude Include="Games\Sheetmusic\ResourceStoreWorkingSm.h">
-      <Filter>標頭檔</Filter>
-    </ClInclude>
     <ClInclude Include="Framework\Database\FakeMeteoDatabaseContext.h">
       <Filter>標頭檔\Framework\Database</Filter>
     </ClInclude>
@@ -1599,6 +1593,12 @@
     </ClInclude>
     <ClInclude Include="Desktop\Devices\Pi2c.h">
       <Filter>標頭檔\Desktop\Devices</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Sheetmusic\ResourceStoreWorkingSm.h">
+      <Filter>標頭檔\Games\Sheetmusics</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\IO\Stores\StorageResourceStore.h">
+      <Filter>標頭檔\Framework\IO\Stores</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

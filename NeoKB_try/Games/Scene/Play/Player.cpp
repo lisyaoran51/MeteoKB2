@@ -95,8 +95,6 @@ int Player::load(FrameworkConfigManager* f)
 Player::Player(): RegisterType("Player"), MeteoScene()
 {
 	registerLoad(bind((int(Player::*)())&Player::load, this));
-
-
 }
 
 Player::~Player()

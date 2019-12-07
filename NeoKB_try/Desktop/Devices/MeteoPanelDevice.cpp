@@ -20,7 +20,7 @@ int MeteoPanelDevice::readFromDevice()
 	if (newState != nullptr)
 		inputStates.push_back(newState);
 
-	_debugCount++;
+	_debugCount;
 
 	if (_debugCount == 4000) {
 		InputState* newState = new InputState();
