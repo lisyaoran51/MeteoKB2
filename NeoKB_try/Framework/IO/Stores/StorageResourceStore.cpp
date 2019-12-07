@@ -20,3 +20,11 @@ ifstream * StorageResourceStore::GetStream(string name)
 {
 	return storage->GetStream(name);
 }
+
+string StorageResourceStore::GetFilePath(string name)
+{
+	if (storage->Exist(name))
+		return storage->GetUsableFilePathFor(name);
+	else
+		return string();
+}

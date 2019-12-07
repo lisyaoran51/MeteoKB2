@@ -26,6 +26,8 @@ namespace Stores {
 
 		virtual ifstream* GetStream(string name);
 
+		virtual string GetFilePath(string name);
+
 	};
 
 }}}
