@@ -384,7 +384,7 @@ int MeteoLightBoardV1::Draw()
 			//	count++;
 			//} while (duration_cast<microseconds>(temp - startTime).count() < 10);
 			//LOG(LogLevel::Finest) << "MeteoLightBoardV1::Draw() : count = " << count;
-			usleep(1000);
+			usleep(300);
 		}
 	}
 
