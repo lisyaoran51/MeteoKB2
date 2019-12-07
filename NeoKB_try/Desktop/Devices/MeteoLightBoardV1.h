@@ -11,6 +11,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <mutex>
+#include <chrono>
 
 
 #define PA_PIN RPI_BPLUS_GPIO_J8_11
@@ -24,7 +25,7 @@
 
 
 using namespace std;
-
+using namespace std::chrono;
 
 
 namespace Desktop {
