@@ -5,7 +5,7 @@
 #include <vector>
 #include "../../Framework/Input/InputState.h"
 #include <mutex>
-#include "Pi2c.h"
+#include "pi2c.h"
 
 
 using namespace Framework::Input;
