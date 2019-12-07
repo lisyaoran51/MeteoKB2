@@ -128,7 +128,7 @@ long long StopwatchClock::getElapsedMicroseconds()
 	LOG(LogLevel::Depricated) << "StopwatchClock::getElapsedMicroseconds() : current elapsed time = [" << duration_cast<microseconds>(systemCurrentTime - systemStartTime).count() << "].";
 
 	unique_lock<mutex> uLock(currentTimeMutex);
-	return duration_cast<milliseconds>(systemCurrentTime - systemStartTime).count();
+	return duration_cast<microseconds>(systemCurrentTime - systemStartTime).count();
 }
 
 double StopwatchClock::getElapsedSeconds()
