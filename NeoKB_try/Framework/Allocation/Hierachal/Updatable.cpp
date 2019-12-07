@@ -47,13 +47,20 @@ bool Updatable::UpdateSubTree()
 	if (GetLoadState() == LoadState::Ready)
 		LoadComplete();
 
-	if (GetParent() != nullptr && customClock != nullptr) {
-		customClock->ProcessFrame();
+	try {
+		if (GetParent() != nullptr && customClock != nullptr) {
+			customClock->ProcessFrame();
+		}
+
+		LOG(LogLevel::Depricated) << "Updatable::UpdateSubTree() : before update [" << GetTypeName() << "].";
+		update();
+		LOG(LogLevel::Depricated) << "Updatable::UpdateSubTree() : after update [" << GetTypeName() << "].";
+	}
+	catch (exception& e) {
+		LOG(LogLevel::Error) << "Updatable::UpdateSubTree() : error [" << e.what() << "] by [" << GetTypeName() << "].";
+		exit(EXIT_SUCCESS);
 	}
 
-	LOG(LogLevel::Depricated) << "Updatable::UpdateSubTree() : before update [" << GetTypeName() << "].";
-	update();
-	LOG(LogLevel::Depricated) << "Updatable::UpdateSubTree() : after update [" << GetTypeName() << "].";
 
 	cacheChilds.clear();
 	unique_lock<mutex> uLock(ChildMutex);
