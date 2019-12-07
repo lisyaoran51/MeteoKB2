@@ -49,7 +49,7 @@ int MeteorTimeController::onKnobTurn(InputState * inputState, InputKey knob)
 		if (!GetIsPaused()) {
 			Pause();
 		}
-		else
+		else if(!speedAdjuster->GetIsAdjustingTime())
 			isAdjustAfterPause = true;
 
 		speedAdjuster->SetSeekTime(turnValue * defaultAdjustTime);
