@@ -1,6 +1,6 @@
 ﻿#include "MeteoPanelBoardV1.h"
 
-
+#include <thread>
 
 
 using namespace Desktop::Devices;
