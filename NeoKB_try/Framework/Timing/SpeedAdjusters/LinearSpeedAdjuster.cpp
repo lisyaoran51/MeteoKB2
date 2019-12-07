@@ -101,6 +101,8 @@ int LinearSpeedAdjuster::SetFreezeTime(double fTime)
 	if(fTime < 0)
 		throw invalid_argument("int LinearSpeedAdjuster::SetFreezeTime() : error. Freeze time cannot < 0.");
 
+	LOG(LogLevel::Debug) << "LinearSpeedAdjuster::SetFreezeTime() : freezing time for [" << fTime << "].";
+
 	/* 同時只能freeze一次時間，不能疊加，要額外freeze就要等這次結束後再freeze一次 */
 	if (!isAdjustingTime && !isFreezingTime) {
 		freezeTimeLeft = fTime;
