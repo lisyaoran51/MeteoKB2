@@ -140,8 +140,15 @@ int MeteoPanelBoardV1::readPanel()
 			LOG(LogLevel::Debug) << "MeteoPanelDevice::readFromDevice() : Get input from arduino [" << i2cMessage << "].";
 
 			vector<string> splitMessage = split(i2cMessage, ",");
+			InputKey key = InputKey::None;
 
-			InputKey key = (InputKey)stoi(splitMessage[0]);
+			try {
+				key = (InputKey)stoi(splitMessage[0]);
+			}
+			catch (exception& e) {
+				LOG(LogLevel::Error) << "MeteoPanelDevice::readFromDevice() : Get unknown input [" << i2cMessage << "].";
+				continue;
+			}
 
 			if (int(key) < 500) { // pedal
 				pushKeyboardState(key, stoi(splitMessage[1]));
