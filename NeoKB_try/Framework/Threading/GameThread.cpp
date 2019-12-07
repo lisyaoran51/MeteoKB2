@@ -81,7 +81,7 @@ int GameThread::processFrame()
 {
 	if (int(clock->GetCurrentTime()) > currentSecond) {
 		currentSecond = int(clock->GetCurrentTime());
-		LOG(LogLevel::Fine) << "GameThread::processFrame() : [" << threadName << "] frame rate = " << statisticFrameRate;
+		LOG(LogLevel::Debug) << "GameThread::processFrame() : [" << threadName << "] frame rate = " << statisticFrameRate;
 		statisticFrameRate = 0;
 	}
 
