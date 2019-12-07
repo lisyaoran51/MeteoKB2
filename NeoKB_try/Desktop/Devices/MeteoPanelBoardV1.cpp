@@ -1,10 +1,12 @@
 ﻿#include "MeteoPanelBoardV1.h"
 
 #include <thread>
+#include "../../Util/Log.h"
 
 
 using namespace Desktop::Devices;
 using namespace std;
+using namespace Util;
 
 
 
@@ -134,6 +136,9 @@ int MeteoPanelBoardV1::readPanel()
 		if (i2cMessage.length() == 0)
 			hasMessage = false;
 		else {
+
+			LOG(LogLevel::Debug) << "MeteoPanelDevice::readFromDevice() : Get input from arduino.";
+
 			vector<string> splitMessage = split(i2cMessage, ",");
 
 			InputKey key = (InputKey)stoi(splitMessage[0]);
