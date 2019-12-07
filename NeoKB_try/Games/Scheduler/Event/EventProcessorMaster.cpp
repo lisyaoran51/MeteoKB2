@@ -131,7 +131,8 @@ Map * EventProcessorMaster::GetGraph()
 	}
 	catch (exception& e) {
 		LOG(LogLevel::Warning) << "EventProcessorMaster::GetGraph : clock is not started [" << e.what() << "].";
-		abort();
+		return graph;
+		//abort();
 	}
 
 	vector<EventProcessor<Event>*> eventProcessors;
