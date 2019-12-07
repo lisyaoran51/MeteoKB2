@@ -144,6 +144,7 @@ int MeteoPanelBoardV1::readPanel()
 
 			try {
 				key = (InputKey)stoi(splitMessage[0]);
+				stoi(splitMessage[1]);
 			}
 			catch (exception& e) {
 				LOG(LogLevel::Error) << "MeteoPanelDevice::readFromDevice() : Get unknown input [" << i2cMessage << "].";

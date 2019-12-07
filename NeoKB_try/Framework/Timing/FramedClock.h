@@ -34,6 +34,8 @@ namespace Timing {
 		virtual int SetIsProcessSourceClockFrames(bool value);
 		virtual bool GetIsProcessSourceClockFrames();
 
+		virtual bool GetIsStarted();
+
 	protected:
 
 		Clock* source;

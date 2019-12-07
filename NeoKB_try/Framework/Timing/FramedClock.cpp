@@ -131,6 +131,11 @@ bool FramedClock::GetIsProcessSourceClockFrames()
 	return isProcessSourceClockFrames;
 }
 
+bool FramedClock::GetIsStarted()
+{
+	return isStarted;
+}
+
 int FramedClock::setCurrentTime(double cTime)
 {
 	
