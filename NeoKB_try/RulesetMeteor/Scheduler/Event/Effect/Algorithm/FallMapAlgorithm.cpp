@@ -86,7 +86,7 @@ int FallMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper<FallEffect
 	for (int i = 0; i < height; i++) {
 
 		// TODO: 應該把流星長度變成參數
-		if (i > meteorPos && i < meteorPos + MTO_FLOAT(fallLength)) {
+		if (i > meteorPos - 0.5 && i < meteorPos + MTO_FLOAT(fallLength)) {
 
 			int brightness = (-BRIGHTNESS_MAX * (MTO_FLOAT(i) - meteorPos) / MTO_FLOAT(fallLength) + BRIGHTNESS_MAX) * fallBrightness;
 			if (brightness > 0) {
