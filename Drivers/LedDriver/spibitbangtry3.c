@@ -271,18 +271,18 @@ int init_module(void)
 
 	/* hrtimer test */
 
-	ktime_t kt;
-
-	enHRTimer = HRTIMER_RESTART;
-
-	printk("setup hr timer \n");
+	//ktime_t kt;
+	//
+	//enHRTimer = HRTIMER_RESTART;
+	//
+	//printk("setup hr timer \n");
 
 
 	//HRT init  
-	kt = ktime_set(0, i64TimeInNsec * 1000L); // 等spidev初始化
-	hrtimer_init(&spi_led->hr_timer, CLOCK_REALTIME, HRTIMER_MODE_ABS);
-	hrtimer_set_expires(&spi_led->hr_timer, kt);
-	spi_led->hr_timer.function = &my_hrtimer_callback;
+	//kt = ktime_set(0, i64TimeInNsec * 1000L); // 等spidev初始化
+	//hrtimer_init(&spi_led->hr_timer, CLOCK_REALTIME, HRTIMER_MODE_ABS);
+	//hrtimer_set_expires(&spi_led->hr_timer, kt);
+	//spi_led->hr_timer.function = &my_hrtimer_callback;
 
 
 	//hrtimer_start(&spi_led->hr_timer, kt, HRTIMER_MODE_ABS);
