@@ -313,7 +313,7 @@ int init_module(void)
 	my_timer.data = 0;
 
 	// -- TIMER START 
-	add_timer(&my_timer);
+	//add_timer(&my_timer);
 
 	/* timer list test */
 
