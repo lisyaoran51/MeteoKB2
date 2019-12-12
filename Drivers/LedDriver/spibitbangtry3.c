@@ -100,9 +100,12 @@ struct timer_list my_timer;
 struct bitbang_spi_led my_led;
 
 static void timer_function(unsigned long data) {
-	printk("timer_function! %d\n", HZ);
+
+	struct bitbang_spi_led* spi_led = (struct bitbang_spi_led*)data;
+
 	// modify the timer for next time
 	mod_timer(&my_timer, jiffies + HZ / 10);
+	printk("timer_function! %d\n", HZ);
 }
 
 /* test timer list */
@@ -310,7 +313,7 @@ int init_module(void)
 	init_timer(&my_timer);
 	my_timer.expires = jiffies + HZ;
 	my_timer.function = timer_function;
-	my_timer.data = 0;
+	my_timer.data = spi_led;
 
 	// -- TIMER START 
 	add_timer(&my_timer);
