@@ -147,11 +147,10 @@ static ssize_t
 my_write(struct file *filp, const char __user *buf,
 	size_t count, loff_t *f_pos) {
 
+	int len;
 
-
-	short count;
 	memset(*user_map, 0, sizeof(unsigned char) * 16 * 48);
-	count = copy_from_user(user_map, buff, len);
+	len = copy_from_user(user_map, buf, count);
 	changed = true;
 
 	return len;
