@@ -222,6 +222,7 @@ int init_module(void)
 	/* Allocate timer data */
 	spi_led = kzalloc(sizeof(struct bitbang_spi_led*), GFP_KERNEL);
 
+	printk("setup user map \n");
 
 	user_map = (unsigned char **)kmalloc(sizeof(unsigned char*) * 16, GFP_KERNEL);
 	unsigned char * p_data = (unsigned char *)kmalloc(sizeof(unsigned char) * 48, GFP_KERNEL);
@@ -238,6 +239,8 @@ int init_module(void)
 
 	if (user_map != NULL)
 		printk("malloc allocator address: 0x%p\n", user_map);
+
+	printk("setup spi map \n");
 
 	spi_led->map = (bool **)kmalloc(sizeof(bool*) * 16, GFP_KERNEL);
 	bool * p_data2 = (bool *)kmalloc(sizeof(bool) * 48, GFP_KERNEL);
@@ -257,7 +260,8 @@ int init_module(void)
 	ktime_t kt;
 
 	enHRTimer = HRTIMER_RESTART;
-	
+
+	printk("setup hr timer \n");
 
 
 	//HRT init  
