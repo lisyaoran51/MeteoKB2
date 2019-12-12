@@ -22,9 +22,6 @@
 static struct hrtimer hr_timer2;
 
 
-static inline ssize_t
-spidev_sync_write(struct spidev_data *spidev, size_t len);
-
 
 enum hrtimer_restart enHRTimer=HRTIMER_NORESTART;
 s64 i64TimeInNsec = 1000000 * NSEC_PER_USEC;
@@ -49,15 +46,29 @@ struct  timeval hrtimer_call_time[100];
 
 //data DS 
 //#define DI_PIN RPI_GPIO_P1_18 
-#define DI_PIN RPI_BPLUS_GPIO_J8_37 
+//#define DI_PIN RPI_BPLUS_GPIO_J8_37 
+#define DI_PIN 10 
 
 //clock SH_CP
 //#define CL_PIN RPI_GPIO_P1_16
-#define CL_PIN RPI_BPLUS_GPIO_J8_33 
+//#define CL_PIN RPI_BPLUS_GPIO_J8_33 
+#define CL_PIN 11
 
 //latch ST_CP
 //#define CE_PIN RPI_GPIO_P1_22
-#define CE_PIN RPI_BPLUS_GPIO_J8_35
+//#define CE_PIN RPI_BPLUS_GPIO_J8_35
+#define CE_PIN 8
+
+static int     my_open(struct inode *, struct file *);
+static ssize_t my_write(struct file *, const  char *, size_t, loff_t *);
+static int     my_close(struct inode *, struct file *);
+
+struct file_operations my_fops = {
+		write : my_write,
+		open : my_open,
+		release : my_close,
+		owner : THIS_MODULE
+};
 
 struct cdev my_cdev;
 static char   *msg = NULL;
@@ -67,7 +78,9 @@ static unsigned char   user_map2[16][48];
 static int col = 0;
 
 
-struct birbang_spi_led {
+
+
+struct bitbang_spi_led {
 	struct hrtimer hr_timer;
 	spinlock_t		map_lock;
 	bool map[16][48];
@@ -77,7 +90,7 @@ struct birbang_spi_led {
 
 enum hrtimer_restart my_hrtimer_callback(struct hrtimer *hr_timer)
 {
-	struct birbang_spi_led *spi_led = container_of(hr_timer, struct birbang_spi_led, hr_timer);
+	struct bitbang_spi_led *spi_led = container_of(hr_timer, struct bitbang_spi_led, hr_timer);
 	bool** map = spi_led->map;
 	//switchRowSequencely(col);
 
@@ -197,16 +210,21 @@ int init_module(void)
 	my_cdev.owner = THIS_MODULE;
 	err = cdev_add(&my_cdev, devno, count);
 
+	struct bitbang_spi_led 	*spi_led;
+	/* Allocate timer data */
+	spi_led = kzalloc(sizeof(*bitbang_spi_led), GFP_KERNEL);
+
+
 	user_map = (unsigned char **)kmalloc(sizeof(unsigned char*) * 16, GFP_KERNEL);
 	unsigned char * p_data = (unsigned char *)kmalloc(sizeof(unsigned char) * 48, GFP_KERNEL);
 	int i;
-	for (i = 0; i < 16; i++, pData += 48)
-		matrix[i] = pData;
+	for (i = 0; i < 16; i++, p_data += 48)
+		user_map[i] = p_data;
 
 	for (i = 0; i < 16; i++) {
 		int j;
 		for (j = 0; j < 48; j++) {
-			matrix[i][j] = 0x00;
+			user_map[i][j] = 0x00;
 		}
 	}
 
@@ -218,20 +236,17 @@ int init_module(void)
 	ktime_t kt;
 
 	enHRTimer = HRTIMER_RESTART;
-	struct spi_timer 	*timer;
-	/* Allocate timer data */
-	timer = kzalloc(sizeof(*timer), GFP_KERNEL);
-	timer->spi = spidev;
+	
 
 
 	//HRT init  
 	kt = ktime_set(0, i64TimeInNsec * 1000L); // 等spidev初始化
-	hrtimer_init(&timer->hr_timer, CLOCK_REALTIME, HRTIMER_MODE_ABS);
-	hrtimer_set_expires(&timer->hr_timer, kt);
-	timer->hr_timer.function = &my_hrtimer_callback;
+	hrtimer_init(&spi_led->hr_timer, CLOCK_REALTIME, HRTIMER_MODE_ABS);
+	hrtimer_set_expires(&spi_led->hr_timer, kt);
+	spi_led->hr_timer.function = &my_hrtimer_callback;
 
 
-	hrtimer_start(&timer->hr_timer, kt, HRTIMER_MODE_ABS);
+	hrtimer_start(&spi_led->hr_timer, kt, HRTIMER_MODE_ABS);
 	/* hrtimer test */
 
 
@@ -263,9 +278,9 @@ int init_module(void)
 void cleanup_module(void)
 {
 	dev_t devno;
-	gpio_free(DI_PI);
-	gpio_free(CL_PI);
-	gpio_free(CE_PI);
+	gpio_free(DI_PIN);
+	gpio_free(CL_PIN);
+	gpio_free(CE_PIN);
 
 
 	devno = MKDEV(MY_MAJOR, MY_MINOR);
