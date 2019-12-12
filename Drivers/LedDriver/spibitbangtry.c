@@ -5,6 +5,7 @@
 #include <linux/sched.h>
 #include <linux/gpio.h>
 #include <linux/version.h>
+#include <linux/mutex.h>
 
 /* test hrtimer */
 
@@ -83,7 +84,7 @@ static int col = 0;
 struct bitbang_spi_led {
 	struct hrtimer hr_timer;
 	spinlock_t		map_lock;
-	bool map[16][48];
+	bool** map;//[16][48];
 	int column;
 
 };
