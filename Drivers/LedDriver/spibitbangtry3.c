@@ -26,19 +26,21 @@ MODULE_LICENSE("GPL");
 MODULE_AUTHOR("ITtraining.com.tw");
 MODULE_DESCRIPTION("A Simple Blocking IO device RaspPi");
 
+/* test timer list */
+
+#include <linux/timer.h>
+
+struct timer_list my_timer;
+
+/* test timer list */
+
+/* test hrtimer */
 
 static struct hrtimer hr_timer2;
-
-
-
 enum hrtimer_restart enHRTimer=HRTIMER_NORESTART;
 s64 i64TimeInNsec = 1000 * NSEC_PER_USEC;
 static int hrtimer_count = 0;
 struct  timeval hrtimer_call_time[100];
-
-
-
-
 
 
 /* test hrtimer */
@@ -98,7 +100,7 @@ struct bitbang_spi_led {
 
 enum hrtimer_restart my_hrtimer_callback(struct hrtimer *hr_timer)
 {
-	//printk("my_hrtimer_callback!\n"); 
+	printk("my_hrtimer_callback!\n"); 
 	struct bitbang_spi_led *spi_led = container_of(hr_timer, struct bitbang_spi_led, hr_timer);
 	bool** map = spi_led->map;
 	//switchRowSequencely(col);
