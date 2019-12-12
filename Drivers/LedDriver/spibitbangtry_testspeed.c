@@ -32,7 +32,7 @@ static struct hrtimer hr_timer2;
 
 
 enum hrtimer_restart enHRTimer=HRTIMER_NORESTART;
-s64 i64TimeInNsec = 100000 * NSEC_PER_USEC;
+s64 i64TimeInNsec = 1000 * NSEC_PER_USEC;
 static int hrtimer_count = 0;
 struct  timeval hrtimer_call_time[100];
 
@@ -98,6 +98,11 @@ struct bitbang_spi_led {
 
 enum hrtimer_restart my_hrtimer_callback(struct hrtimer *hr_timer)
 {
+	hrtimer_forward(hr_timer, hrtimer_cb_get_time(hr_timer), ktime_set(0, i64TimeInNsec));
+
+	return enHRTimer;
+
+
 	ktime_t calltime, delta, rettime;
 	calltime = ktime_get();
 
