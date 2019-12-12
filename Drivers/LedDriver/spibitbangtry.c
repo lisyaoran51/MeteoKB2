@@ -1,4 +1,5 @@
 #include <asm/uaccess.h>
+#include <linux/uaccess.h>
 #include <linux/fs.h>      
 #include <linux/init.h>
 #include <linux/cdev.h>
@@ -233,7 +234,7 @@ int init_module(void)
 
 	spi_led->map = (bool **)kmalloc(sizeof(bool*) * 16, GFP_KERNEL);
 	bool * p_data2 = (bool *)kmalloc(sizeof(bool) * 48, GFP_KERNEL);
-	int i;
+	
 	for (i = 0; i < 16; i++, p_data2 += 48)
 		spi_led->map[i] = p_data2;
 
