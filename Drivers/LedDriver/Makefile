@@ -1,5 +1,5 @@
 
-obj-m	+= led_blinking.o
+obj-m	+= spibitbangtry.o
 
 all drivers:
 	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
