@@ -255,7 +255,6 @@ int init_module(void)
 		}
 	}
 
-	return 0;
 
 	/* hrtimer test */
 
