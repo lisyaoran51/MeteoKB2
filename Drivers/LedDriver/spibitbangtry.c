@@ -225,7 +225,7 @@ int init_module(void)
 	printk("setup user map \n");
 
 	user_map = (unsigned char **)kmalloc(sizeof(unsigned char*) * 16, GFP_KERNEL);
-	unsigned char * p_data = (unsigned char *)kmalloc(sizeof(unsigned char) * 48, GFP_KERNEL);
+	unsigned char * p_data = (unsigned char *)kmalloc(sizeof(unsigned char) * 16 * 48, GFP_KERNEL);
 	int i;
 	for (i = 0; i < 16; i++, p_data += 48)
 		user_map[i] = p_data;
@@ -243,7 +243,7 @@ int init_module(void)
 	printk("setup spi map \n");
 
 	spi_led->map = (bool **)kmalloc(sizeof(bool*) * 16, GFP_KERNEL);
-	bool * p_data2 = (bool *)kmalloc(sizeof(bool) * 48, GFP_KERNEL);
+	bool * p_data2 = (bool *)kmalloc(sizeof(bool) * 16 * 48, GFP_KERNEL);
 	
 	for (i = 0; i < 16; i++, p_data2 += 48)
 		spi_led->map[i] = p_data2;
