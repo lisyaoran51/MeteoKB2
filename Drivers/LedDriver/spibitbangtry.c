@@ -21,6 +21,12 @@
 
 //#include "bcm2835.h"
 
+
+MODULE_LICENSE("GPL");
+MODULE_AUTHOR("ITtraining.com.tw");
+MODULE_DESCRIPTION("A Simple Blocking IO device RaspPi");
+
+
 static struct hrtimer hr_timer2;
 
 
