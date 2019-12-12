@@ -17,7 +17,7 @@
 #include <linux/ktime.h>
 #include <linux/time.h>
 
-#include "bcm2835.h"
+//#include "bcm2835.h"
 
 static struct hrtimer hr_timer2;
 
@@ -78,25 +78,29 @@ struct birbang_spi_led {
 enum hrtimer_restart my_hrtimer_callback(struct hrtimer *hr_timer)
 {
 
-	switchRowSequencely(col);
+	//switchRowSequencely(col);
 
-	bcm2835_gpio_write(CE_PIN, LOW);
+	gpio_set_value(CE_PIN, 0);
+	//bcm2835_gpio_write(CE_PIN, LOW);
 
 	int row;
 
 	for (row = 0; row < 48; row++) {
-		bcm2835_gpio_write(CL_PIN, LOW);
+		gpio_set_value(CL_PIN, 0);
+		//bcm2835_gpio_write(CL_PIN, LOW);
 		if (map[col][row])
-			bcm2835_gpio_write(DI_PIN, LOW);
+			gpio_set_value(DI_PIN, 0);
+			//bcm2835_gpio_write(DI_PIN, LOW);
 		else
-			bcm2835_gpio_write(DI_PIN, HIGH);
+			gpio_set_value(DI_PIN, 1);
+			//bcm2835_gpio_write(DI_PIN, HIGH);
 
 
-		//bcm2835_gpio_write(DI_PIN, LOW);
-		bcm2835_gpio_write(CL_PIN, HIGH);
-		//usleep(interval);
+		gpio_set_value(CL_PIN, 1);
+		//bcm2835_gpio_write(CL_PIN, HIGH);
 	}
-	bcm2835_gpio_write(CE_PIN, HIGH);
+	gpio_set_value(CE_PIN, 1);
+	//bcm2835_gpio_write(CE_PIN, HIGH);
 
 	hrtimer_forward(hr_timer, hrtimer_cb_get_time(hr_timer), ktime_set(0, i64TimeInNsec));
 
@@ -258,8 +262,10 @@ int init_module(void)
 void cleanup_module(void)
 {
 	dev_t devno;
-	gpio_free(BUTTON1);
-	free_irq(my_button_irq_no, MY_DEV_NAME);
+	gpio_free(DI_PI);
+	gpio_free(CL_PI);
+	gpio_free(CE_PI);
+
 
 	devno = MKDEV(MY_MAJOR, MY_MINOR);
 	unregister_chrdev_region(devno, MY_DEV_COUNT);
