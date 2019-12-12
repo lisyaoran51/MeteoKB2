@@ -98,7 +98,7 @@ struct bitbang_spi_led {
 
 enum hrtimer_restart my_hrtimer_callback(struct hrtimer *hr_timer)
 {
-	printk("my_hrtimer_callback!\n");
+	printk("my_hrtimer_callback!\n"); 
 	struct bitbang_spi_led *spi_led = container_of(hr_timer, struct bitbang_spi_led, hr_timer);
 	bool** map = spi_led->map;
 	//switchRowSequencely(col);
