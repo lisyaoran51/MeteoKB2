@@ -23,7 +23,7 @@
 #define MY_DEV_NAME "it_device"
 
 #define MY_INTERRUPT_IN 3
-#define MY_OUTPUT 5
+#define MY_OUTPUT 2
 
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("ITtraining.com.tw");
@@ -31,7 +31,10 @@ MODULE_DESCRIPTION("A Simple GPIO Device Driver module for RaspPi");
 
 static short int button_irq = 0;
 static unsigned long flags = 0;
-static int led_trigger = 0;
+static int led_trigger = 1;
+
+#include<linux/ktime.h>
+ktime_t calltime, delta, rettime;
 
 
 struct timer_list my_timer;
@@ -39,15 +42,25 @@ static void timer_function(unsigned long data) {
 
 	
 	// modify the timer for next time
-	//mod_timer(&my_timer, jiffies + HZ / 10);
+	mod_timer(&my_timer, jiffies + HZ);
 	printk("timer_function! %d\n", HZ);
-	gpio_set_value(MY_OUTPUT, 1);
+	gpio_set_value(MY_OUTPUT, led_trigger);
+	led_trigger = led_trigger == 0 ? 1 : 0;
+	calltime = ktime_get();
 }
 
 static short int test_irq = 0;
 
 static irqreturn_t my_test_isr(int irq, void *data)
 {
+	rettime = ktime_get();
+	delta = ktime_sub(rettime, calltime);
+
+	s64 actual_time = ktime_to_ns(ktime_sub(rettime, calltime));
+	printk("%lld\n", (long long)actual_time);
+	//unsigned long long duration = (unsigned long long) ktime_to_ns(delta) >> 10;
+	//printk("%s after %lld usecs\n", __FUNCTION__, duration);
+
 	int val = 0;
 	local_irq_save(flags);
 	printk("test_isr !!!!\n");
@@ -79,9 +92,9 @@ int init_module(void)
 	
 	//  -- initialize the timer 
 	init_timer(&my_timer);
-	my_timer.expires = jiffies + HZ;
+	my_timer.expires = jiffies + HZ*3;
 	my_timer.function = timer_function;
-	my_timer.data = spi_led;
+	my_timer.data = 0;
 
 	// -- TIMER START 
 	add_timer(&my_timer);
