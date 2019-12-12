@@ -26,13 +26,7 @@ MODULE_LICENSE("GPL");
 MODULE_AUTHOR("ITtraining.com.tw");
 MODULE_DESCRIPTION("A Simple Blocking IO device RaspPi");
 
-/* test timer list */
 
-#include <linux/timer.h>
-
-struct timer_list my_timer;
-
-/* test timer list */
 
 /* test hrtimer */
 
@@ -95,8 +89,23 @@ struct bitbang_spi_led {
 	spinlock_t		map_lock;
 	bool** map;// [16][48];
 	int column;
-
+	struct timer_list my_timer;
 };
+
+/* test timer list */
+
+#include <linux/timer.h>
+
+struct timer_list my_timer;
+struct bitbang_spi_led my_led;
+
+static void timer_function(unsigned long data) {
+	printk("timer_function! %d\n", HZ);
+	// modify the timer for next time
+	mod_timer(&my_timer, jiffies + HZ / 10);
+}
+
+/* test timer list */
 
 enum hrtimer_restart my_hrtimer_callback(struct hrtimer *hr_timer)
 {
@@ -258,6 +267,8 @@ int init_module(void)
 	}
 
 
+
+
 	/* hrtimer test */
 
 	ktime_t kt;
@@ -274,8 +285,37 @@ int init_module(void)
 	spi_led->hr_timer.function = &my_hrtimer_callback;
 
 
-	hrtimer_start(&spi_led->hr_timer, kt, HRTIMER_MODE_ABS);
+	//hrtimer_start(&spi_led->hr_timer, kt, HRTIMER_MODE_ABS);
 	/* hrtimer test */
+
+
+	/* timer list test */
+
+	my_led.map = (bool **)kmalloc(sizeof(bool*) * 16, GFP_KERNEL);
+	bool * p_data3 = (bool *)kmalloc(sizeof(bool) * 16 * 48, GFP_KERNEL);
+
+	for (i = 0; i < 16; i++, p_data3 += 48)
+		my_led.map[i] = p_data3;
+
+	for (i = 0; i < 16; i++) {
+		int j;
+		for (j = 0; j < 48; j++) {
+			my_led.map[i][j] = false;
+		}
+	}
+
+
+
+	//  -- initialize the timer 
+	init_timer(&my_timer);
+	my_timer.expires = jiffies + HZ;
+	my_timer.function = timer_function;
+	my_timer.data = 0;
+
+	// -- TIMER START 
+	add_timer(&my_timer);
+
+	/* timer list test */
 
 
 	/*
@@ -305,6 +345,8 @@ int init_module(void)
 // -- MODULE END
 void cleanup_module(void)
 {
+	del_timer(&my_timer);
+
 	dev_t devno;
 	gpio_free(DI_PIN);
 	gpio_free(CL_PIN);
