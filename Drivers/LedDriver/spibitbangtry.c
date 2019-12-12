@@ -151,7 +151,7 @@ my_write(struct file *filp, const char __user *buf,
 	int len;
 
 	memset(*user_map, 0, sizeof(unsigned char) * 16 * 48);
-	len = copy_from_user((char*)user_map, buf, count);
+	len = copy_from_user((char*)*user_map, buf, count);
 	changed = true;
 
 	return len;
@@ -230,6 +230,19 @@ int init_module(void)
 
 	if (user_map != NULL)
 		printk("malloc allocator address: 0x%p\n", user_map);
+
+	spi_led->map = (bool **)kmalloc(sizeof(bool*) * 16, GFP_KERNEL);
+	bool * p_data2 = (bool *)kmalloc(sizeof(bool) * 48, GFP_KERNEL);
+	int i;
+	for (i = 0; i < 16; i++, p_data2 += 48)
+		spi_led->map[i] = p_data2;
+
+	for (i = 0; i < 16; i++) {
+		int j;
+		for (j = 0; j < 48; j++) {
+			spi_led->map[i][j] = false;
+		}
+	}
 
 	/* hrtimer test */
 
