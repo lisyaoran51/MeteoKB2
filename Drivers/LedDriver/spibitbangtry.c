@@ -84,7 +84,7 @@ static int col = 0;
 struct bitbang_spi_led {
 	struct hrtimer hr_timer;
 	spinlock_t		map_lock;
-	bool map[16][48];
+	bool** map;// [16][48];
 	int column;
 
 };
@@ -212,7 +212,7 @@ int init_module(void)
 
 	struct bitbang_spi_led 	*spi_led;
 	/* Allocate timer data */
-	spi_led = kzalloc(sizeof(bitbang_spi_led*), GFP_KERNEL);
+	spi_led = kzalloc(sizeof(struct bitbang_spi_led*), GFP_KERNEL);
 
 
 	user_map = (unsigned char **)kmalloc(sizeof(unsigned char*) * 16, GFP_KERNEL);
