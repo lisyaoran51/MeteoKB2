@@ -77,7 +77,8 @@ struct birbang_spi_led {
 
 enum hrtimer_restart my_hrtimer_callback(struct hrtimer *hr_timer)
 {
-
+	struct birbang_spi_led *spi_led = container_of(hr_timer, struct birbang_spi_led, hr_timer);
+	bool** map = spi_led->map;
 	//switchRowSequencely(col);
 
 	gpio_set_value(CE_PIN, 0);
