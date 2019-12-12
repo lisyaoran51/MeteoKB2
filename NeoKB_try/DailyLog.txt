@@ -1323,7 +1323,9 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	
 	結果bass藥用hardfp才能夠跑
 	
+	要去raspi-config開i2c，才能用pi2c
 	
+	程式差不多寫完了，接下來要把map shifter從playfield移到player去
 	
 	
 	

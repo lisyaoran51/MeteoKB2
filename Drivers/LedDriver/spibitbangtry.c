@@ -1,0 +1,271 @@
+#include <asm/uaccess.h>
+#include <linux/fs.h>      
+#include <linux/init.h>
+#include <linux/cdev.h>
+#include <linux/sched.h>
+#include <linux/gpio.h>
+#include <linux/version.h>
+
+/* test hrtimer */
+
+#include <linux/slab.h>
+#include <linux/time.h>
+#include <asm/string.h>
+#include <linux/kernel.h>
+#include <linux/module.h>
+#include <linux/hrtimer.h>
+#include <linux/ktime.h>
+#include <linux/time.h>
+
+#include "bcm2835.h"
+
+static struct hrtimer hr_timer2;
+
+
+static inline ssize_t
+spidev_sync_write(struct spidev_data *spidev, size_t len);
+
+
+enum hrtimer_restart enHRTimer=HRTIMER_NORESTART;
+s64 i64TimeInNsec = 1000000 * NSEC_PER_USEC;
+static int hrtimer_count = 0;
+struct  timeval hrtimer_call_time[100];
+
+
+
+
+
+
+/* test hrtimer */
+
+/*-------------------------------------------------------------------------*/
+
+#define MY_MAJOR 201
+#define MY_MINOR 0
+#define MY_DEV_COUNT 1
+
+#define MY_DEV_NAME "my_blocking_io_dev"
+#define MY_INT_NAME "my_blocking_io_int"
+
+//data DS 
+//#define DI_PIN RPI_GPIO_P1_18 
+#define DI_PIN RPI_BPLUS_GPIO_J8_37 
+
+//clock SH_CP
+//#define CL_PIN RPI_GPIO_P1_16
+#define CL_PIN RPI_BPLUS_GPIO_J8_33 
+
+//latch ST_CP
+//#define CE_PIN RPI_GPIO_P1_22
+#define CE_PIN RPI_BPLUS_GPIO_J8_35
+
+struct cdev my_cdev;
+static char   *msg = NULL;
+static unsigned char   **user_map = NULL;
+static bool changed = false;
+static unsigned char   user_map2[16][48];
+static int col = 0;
+
+
+struct birbang_spi_led {
+	struct hrtimer hr_timer;
+	spinlock_t		map_lock;
+	bool map[16][48];
+	int column;
+
+};
+
+enum hrtimer_restart my_hrtimer_callback(struct hrtimer *hr_timer)
+{
+
+	switchRowSequencely(col);
+
+	bcm2835_gpio_write(CE_PIN, LOW);
+
+	int row;
+
+	for (row = 0; row < 48; row++) {
+		bcm2835_gpio_write(CL_PIN, LOW);
+		if (map[col][row])
+			bcm2835_gpio_write(DI_PIN, LOW);
+		else
+			bcm2835_gpio_write(DI_PIN, HIGH);
+
+
+		//bcm2835_gpio_write(DI_PIN, LOW);
+		bcm2835_gpio_write(CL_PIN, HIGH);
+		//usleep(interval);
+	}
+	bcm2835_gpio_write(CE_PIN, HIGH);
+
+	hrtimer_forward(hr_timer, hrtimer_cb_get_time(hr_timer), ktime_set(0, i64TimeInNsec));
+
+	col++;
+
+	if (col == 16) {
+
+		col = 0;
+		if (changed) {
+			int i;
+			for (i = 0; i < 16; i++) {
+				int j;
+				for (j = 0; j < 48; j++) {
+					if (user_map[i][j] > 0)
+						map[i][j] = true;
+					else
+						map[i][j] = false;
+				}
+			}
+
+		}
+
+	}
+
+
+	return enHRTimer;
+}
+
+static ssize_t
+my_write(struct file *filp, const char __user *buf,
+	size_t count, loff_t *f_pos) {
+
+
+
+	short count;
+	memset(*user_map, 0, sizeof(unsigned char) * 16 * 48);
+	count = copy_from_user(user_map, buff, len);
+	changed = true;
+
+	return len;
+}
+
+static int my_open(struct inode *inod, struct file *filp)
+{
+	int major;
+	int minor;
+
+	major = imajor(inod);
+	minor = iminor(inod);
+	printk("\n*****Some body is opening me at major %d  minor %d*****\n", major, minor);
+
+	return 0;
+}
+
+static int my_close(struct inode *inod, struct file *filp)
+{
+	int major, minor;
+
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,19,0)
+	major = MAJOR(filp->f_inode->i_rdev);
+	minor = MINOR(filp->f_inode->i_rdev);
+#else
+	major = MAJOR(filp->f_dentry->d_inode->i_rdev);
+	minor = MINOR(filp->f_dentry->d_inode->i_rdev);
+#endif
+	printk("*****Some body is closing me at major %d*****\n", minor);
+
+	return 0;
+}
+
+int init_module(void)
+{
+
+	printk("*****LED GPIO Init ******************\n");
+	if (gpio_request(DI_PIN, "DI_PIN")) return -1;
+	if (gpio_request(CL_PIN, "CL_PIN")) return -1;
+	if (gpio_request(CE_PIN, "CE_PIN")) return -1;
+
+	gpio_direction_output(DI_PIN, 0);
+	gpio_direction_output(CL_PIN, 0);
+	gpio_direction_output(CE_PIN, 0);
+
+	int err;
+	dev_t devno;
+	unsigned int count = MY_DEV_COUNT;
+
+	printk("setup char device \n");
+	// -- register device number  
+	devno = MKDEV(MY_MAJOR, MY_MINOR);
+	register_chrdev_region(devno, MY_DEV_COUNT, MY_DEV_NAME);
+
+	cdev_init(&my_cdev, &my_fops);
+	my_cdev.owner = THIS_MODULE;
+	err = cdev_add(&my_cdev, devno, count);
+
+	user_map = (unsigned char **)kmalloc(sizeof(unsigned char*) * 16, GFP_KERNEL);
+	unsigned char * p_data = (unsigned char *)kmalloc(sizeof(unsigned char) * 48, GFP_KERNEL);
+	int i;
+	for (i = 0; i < 16; i++, pData += 48)
+		matrix[i] = pData;
+
+	for (i = 0; i < 16; i++) {
+		int j;
+		for (j = 0; j < 48; j++) {
+			matrix[i][j] = 0x00;
+		}
+	}
+
+	if (user_map != NULL)
+		printk("malloc allocator address: 0x%p\n", user_map);
+
+	/* hrtimer test */
+
+	ktime_t kt;
+
+	enHRTimer = HRTIMER_RESTART;
+	struct spi_timer 	*timer;
+	/* Allocate timer data */
+	timer = kzalloc(sizeof(*timer), GFP_KERNEL);
+	timer->spi = spidev;
+
+
+	//HRT init  
+	kt = ktime_set(0, i64TimeInNsec * 1000L); // 等spidev初始化
+	hrtimer_init(&timer->hr_timer, CLOCK_REALTIME, HRTIMER_MODE_ABS);
+	hrtimer_set_expires(&timer->hr_timer, kt);
+	timer->hr_timer.function = &my_hrtimer_callback;
+
+
+	hrtimer_start(&timer->hr_timer, kt, HRTIMER_MODE_ABS);
+	/* hrtimer test */
+
+
+	/*
+	// -- setup GPIO for button
+	msg = (char *)kmalloc(32, GFP_KERNEL);
+	if (msg != NULL)
+		printk("malloc allocator address: 0x%p\n", msg);
+
+	// -- initialize the WAIT QUEUE head
+	init_waitqueue_head(&my_wait_queue);
+
+	// -- setup the INTERRUPT
+	my_interrupt_config();
+	*/
+
+	// -- other handle
+	if (err < 0)
+	{
+		printk("Device Add Error\n");
+		return -1;
+	}
+
+	printk("'mknod /dev/myBR_file c %d 0'.\n", MY_MAJOR);
+	return 0;
+}
+
+// -- MODULE END
+void cleanup_module(void)
+{
+	dev_t devno;
+	gpio_free(BUTTON1);
+	free_irq(my_button_irq_no, MY_DEV_NAME);
+
+	devno = MKDEV(MY_MAJOR, MY_MINOR);
+	unregister_chrdev_region(devno, MY_DEV_COUNT);
+	cdev_del(&my_cdev);
+}
+
+
+
+
