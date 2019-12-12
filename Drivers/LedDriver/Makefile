@@ -1,5 +1,5 @@
 
-obj-m	+= spibitbangtry.o
+obj-m	+= spibitbangtry3.o
 
 all drivers:
 	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
