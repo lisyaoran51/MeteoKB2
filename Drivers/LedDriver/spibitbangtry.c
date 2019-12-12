@@ -32,7 +32,7 @@ static struct hrtimer hr_timer2;
 
 
 enum hrtimer_restart enHRTimer=HRTIMER_NORESTART;
-s64 i64TimeInNsec = 1000000 * NSEC_PER_USEC;
+s64 i64TimeInNsec = 1000 * NSEC_PER_USEC;
 static int hrtimer_count = 0;
 struct  timeval hrtimer_call_time[100];
 
