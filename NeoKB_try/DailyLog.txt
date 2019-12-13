@@ -1327,7 +1327,15 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	
 	程式差不多寫完了，接下來要把map shifter從playfield移到player去
 	
+12/12
+	找os version的方法
+	cat /etc/rpi-issue
+	https://raspberrypi.stackexchange.com/questions/6974/how-can-i-determine-which-os-image-i-am-running
 	
+	實驗發現timer list延遲很嚴重，大概4ms，hrtimer在每秒100次以上就會當機，interrupt的話延遲大約7~13us 
+	gpio做一輪48個shift要70us~100us
+	
+	driver差不多寫好了
 	
 	
 	

@@ -1,5 +1,5 @@
 
-obj-m	+= btn_led.o
+obj-m	+= btn_led_autoclock.o
 
 all drivers:
 	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
