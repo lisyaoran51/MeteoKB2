@@ -96,9 +96,9 @@ static irqreturn_t my_test_isr(int irq, void *data)
 	spi_led.column++;
 	if (spi_led.column == 16) {
 
-		//	rettime = ktime_get();
-		//	s64 actual_time = ktime_to_ns(ktime_sub(rettime, calltime));
-		//	printk("%lld\n", (long long)actual_time);
+		rettime = ktime_get();
+		s64 actual_time = ktime_to_ns(ktime_sub(rettime, calltime));
+		printk("%lld\n", (long long)actual_time);
 		spi_led.column = 0;
 	}
 
