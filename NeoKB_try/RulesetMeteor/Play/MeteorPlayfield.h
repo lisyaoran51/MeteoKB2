@@ -37,6 +37,8 @@ namespace Play{
 
 		MeteorPlayfield();
 
+		virtual int OnJudgement(HitObject * hitObject, Judgement * judgement);
+
 		//virtual int Elapse(MTO_FLOAT elapsedTime);
 
 		int SetIsGameControllingPitchState(bool value);

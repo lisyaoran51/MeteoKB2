@@ -3,9 +3,12 @@
 
 #include "../../../../Games/Scheduler/Event/Effect/EffectMapper.h"
 #include "ExplodeEffect.h"
+#include "../../../../Games/Scheduler/Event/HitObject.h"
 
 
 using namespace Games::Schedulers::Events::Effects;
+using namespace Games::Schedulers::Events;
+
 
 
 namespace Meteor {
@@ -14,6 +17,12 @@ namespace Events {
 namespace Effects {
 
 	class ExplodeEffectMapper :public EffectMapper<ExplodeEffect> {
+
+		double explodeStartTime = 0;
+
+		HitObject* hitObject;
+
+		double lifeTime = 1.0;
 
 	public:
 
@@ -24,7 +33,15 @@ namespace Effects {
 			throw logic_error("ExplodeEffectMapper() : This constructor is only for compile-time assurance. Not available to execute.");
 		}
 
-		ExplodeEffectMapper(int w, int h);
+		ExplodeEffectMapper(int w, int h, HitObject* hObject);
+
+		virtual MTO_FLOAT GetStartTime();
+
+		virtual double GetCurrentTime();
+
+		int SetLifeTime(double lTime);
+
+		virtual MTO_FLOAT GetTimeLeft();
 
 	};
 

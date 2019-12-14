@@ -6,6 +6,30 @@ using namespace Meteor::Schedulers::Events::Effects;
 using namespace std;
 
 
-ExplodeEffectMapper::ExplodeEffectMapper(int w, int h) : EffectMapper<ExplodeEffect>(w, h)
+ExplodeEffectMapper::ExplodeEffectMapper(int w, int h, HitObject* hObject) : EffectMapper<ExplodeEffect>(w, h)
 {
+	hitObject = hObject;
+	explodeStartTime = hObject->GetCurrentTime();
+	lifeType = EventProcessorLifeType::Timed;
+}
+
+MTO_FLOAT ExplodeEffectMapper::GetStartTime()
+{
+	return explodeStartTime;
+}
+
+double ExplodeEffectMapper::GetCurrentTime()
+{
+	return hitObject->GetCurrentTime();
+}
+
+int ExplodeEffectMapper::SetLifeTime(double lTime)
+{
+	lifeTime = lTime;
+	return 0;
+}
+
+MTO_FLOAT ExplodeEffectMapper::GetTimeLeft()
+{
+	return lifeTime - (GetCurrentTime() - GetStartTime());
 }

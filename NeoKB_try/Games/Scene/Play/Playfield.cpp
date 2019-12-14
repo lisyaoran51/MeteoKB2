@@ -114,6 +114,11 @@ Playfield::Playfield():RegisterType("Playfield")
 	registerLoad(bind((int(Playfield::*)())&Playfield::load, this));
 }
 
+int Playfield::OnJudgement(HitObject * hitObject, Judgement * judgement)
+{
+	return 0;
+}
+
 int Playfield::Add(EventProcessor<Event> * ep)
 {
 	//scheduler->Add(ep);

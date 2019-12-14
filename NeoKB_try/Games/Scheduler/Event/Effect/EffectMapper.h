@@ -18,7 +18,7 @@ namespace Schedulers {
 namespace Events {
 namespace Effects {
 
-	class EffectMapperInterface : public EventProcessor<Event>{
+	class EffectMapperInterface : virtual public EventProcessor<Event>{
 
 	public:
 

@@ -123,6 +123,18 @@ MeteorPlayfield::MeteorPlayfield(): Playfield(), RegisterType("MeteorPlayfield")
 	registerLoad(bind((int(MeteorPlayfield::*)())&MeteorPlayfield::load, this));
 }
 
+int MeteorPlayfield::OnJudgement(HitObject * hitObject, Judgement * judgement)
+{
+	if (!judgement->GetIsHit())
+		return -1;
+
+	// add explostion
+	eventProcessorMaster->AddDynamicEventProcessor(new ExplodeEffectMapper(GetWidth(), GetHeight(), hitObject));
+
+	// ¶Ç°e¤À¼Æ?
+	return 0;
+}
+
 int MeteorPlayfield::SetIsGameControllingPitchState(bool value)
 {
 	isGameControllingPitchState = value;

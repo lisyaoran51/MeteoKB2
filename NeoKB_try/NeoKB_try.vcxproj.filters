@@ -469,6 +469,12 @@
     <Filter Include="資源檔\TestCases">
       <UniqueIdentifier>{83de6e51-dd0a-40af-a208-7bd52ecc2575}</UniqueIdentifier>
     </Filter>
+    <Filter Include="標頭檔\Games\Ruleset\Judgements">
+      <UniqueIdentifier>{deaa5ed4-90f2-4f4a-802b-9a2d2a62c8ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Games\Ruleset\Judgements">
+      <UniqueIdentifier>{5d6bd834-e631-48af-93e3-39ad197ca56b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Games\Graphic\Renderer\renderer.cpp">
@@ -959,6 +965,12 @@
     </ClCompile>
     <ClCompile Include="Desktop\Devices\Pi2c.cpp">
       <Filter>來源檔案\Desktop\Devices</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\Scheduler\Event\HitObject.cpp">
+      <Filter>來源檔案\Games\Schedulers\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\Ruleset\Judgements\HasHitWindow.cpp">
+      <Filter>來源檔案\Games\Ruleset\Judgements</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1599,6 +1611,24 @@
     </ClInclude>
     <ClInclude Include="Framework\IO\Stores\StorageResourceStore.h">
       <Filter>標頭檔\Framework\IO\Stores</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Scheduler\Event\HitObject.h">
+      <Filter>標頭檔\Games\Scheduler\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Ruleset\Judgements\Judgement.h">
+      <Filter>標頭檔\Games\Ruleset\Judgements</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Ruleset\Judgements\HitWindow.h">
+      <Filter>標頭檔\Games\Ruleset\Judgements</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Ruleset\Judgements\HitResult.h">
+      <Filter>標頭檔\Games\Ruleset\Judgements</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Ruleset\Judgements\HasHitWindow.h">
+      <Filter>標頭檔\Games\Ruleset\Judgements</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Scheduler\Event\ArmedState.h">
+      <Filter>標頭檔\Games\Scheduler\Events</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

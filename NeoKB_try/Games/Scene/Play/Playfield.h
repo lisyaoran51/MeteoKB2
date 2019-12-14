@@ -6,6 +6,7 @@
 #include "../../Scheduler/Event/Effect/Algorithm/MapAlgorithm.h"
 #include "../../../Framework/Configurations/FrameworkConfigManager.h"
 #include "../../../Framework/Allocation/Hierachal/Container.h"
+#include "../../Scheduler/Event/HitObject.h"
 
 
 
@@ -14,6 +15,7 @@ using namespace Games::Schedulers;
 using namespace Games::Schedulers::Events::Effects::Algorithms;
 using namespace Framework::Configurations;
 using namespace Framework::Allocation::Hierachal;
+
 
 
 
@@ -42,7 +44,7 @@ namespace Play {
 
 		Playfield();
 
-		//virtual int OnJudgement(Event* judge_event, Judgement* j);
+		virtual int OnJudgement(HitObject* hitObject, Judgement* judgement);
 
 		/// <summary>
 		/// add events to EventProcessorMaster

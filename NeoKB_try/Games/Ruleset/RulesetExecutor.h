@@ -173,6 +173,16 @@ namespace Rulesets {
 		virtual SpeedAdjuster* CreateSpeedAdjuster() = 0;
 
 
+		template<class _Type>
+		int AddOnJudgement(_Type* callableObject, function<int(Judgement*)> callback, string name = "HandleJudgement") {
+
+
+			onJudgement.Add(callableObject, callback, name);
+
+			return 0;
+		}
+
+
 	protected:
 
 		Ruleset* ruleset;
@@ -185,7 +195,7 @@ namespace Rulesets {
 
 		Playfield* playfield = nullptr;
 
-		vector<void*> on_judgement;
+		ActionList<int, Judgement*> onJudgement;
 
 		virtual Playfield* createPlayfield() = 0;
 
@@ -210,10 +220,18 @@ namespace Rulesets {
 
 				EventProcessor<Event>* ep = getEventProcessor(sm->GetEvents()->at(i));
 
+				if (dynamic_cast<HitObject*>(ep)) {
+					dynamic_cast<HitObject*>(ep)->AddOnJudgement(ep, [=](HitObject* h, Judgement* j) {
+
+						playfield->OnJudgement(h, j);
+						onJudgement.Trigger(j); // score processor -> on judgement
+
+						return 0;
+					}, "RulesetExecutor::HandleJudgement");
+				}
+
 				playfield->Add(ep);
 			}
-
-
 
 			return 0;
 		}

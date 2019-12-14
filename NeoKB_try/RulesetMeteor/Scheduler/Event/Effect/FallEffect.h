@@ -6,10 +6,14 @@
 #include <vector>
 #include "../../../../Games/Scheduler/Event/Effect/Effect.h"
 
+#include "../../../../Games/Ruleset/Judgements/HasHitWindow.h"
+
 
 using namespace std;
 using namespace Util;
 using namespace Games::Schedulers::Events::Effects;
+using namespace Games::Rulesets::Judgements;
+
 
 
 namespace Meteor {
@@ -18,7 +22,7 @@ namespace Events {
 namespace Effects {
 	
 
-	class FallEffect: public Effect
+	class FallEffect: public Effect, public HasHitWindow
 	{
 
 	public:

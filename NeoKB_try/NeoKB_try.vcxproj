@@ -54,6 +54,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Games\MeteoGameBase.cpp" />
+    <ClCompile Include="Games\Ruleset\Judgements\HasHitWindow.cpp" />
     <ClCompile Include="Games\Ruleset\Ruleset.cpp" />
     <ClCompile Include="Games\Ruleset\RulesetInfo.cpp" />
     <ClCompile Include="Games\Ruleset\RulesetStore.cpp" />
@@ -75,6 +76,7 @@
     <ClCompile Include="Games\Scheduler\Event\EventProcessorMaster.cpp" />
     <ClCompile Include="Games\Scheduler\Event\GameEvents\GameEvent.cpp" />
     <ClCompile Include="Games\Scheduler\Event\GameEvents\StartGameEvent.cpp" />
+    <ClCompile Include="Games\Scheduler\Event\HitObject.cpp" />
     <ClCompile Include="Games\Scheduler\Event\SystemEvents\StopSystemEvent.cpp" />
     <ClCompile Include="Games\Scheduler\Event\SystemEvents\SystemEvent.cpp" />
     <ClCompile Include="Games\Scheduler\Event\SystemEvents\SystemEventHandler.cpp" />
@@ -232,6 +234,10 @@
     <ClInclude Include="Games\Input\RulesetInputManager.h" />
     <ClInclude Include="Games\MeteoGame.h" />
     <ClInclude Include="Games\MeteoGameBase.h" />
+    <ClInclude Include="Games\Ruleset\Judgements\HitResult.h" />
+    <ClInclude Include="Games\Ruleset\Judgements\HitWindow.h" />
+    <ClInclude Include="Games\Ruleset\Judgements\HasHitWindow.h" />
+    <ClInclude Include="Games\Ruleset\Judgements\Judgement.h" />
     <ClInclude Include="Games\Ruleset\Modifiers\Modifier.h" />
     <ClInclude Include="Games\Ruleset\Ruleset.h" />
     <ClInclude Include="Games\Ruleset\RulesetExecutor.h" />
@@ -246,6 +252,7 @@
     <ClInclude Include="Games\Scene\Select\MainMenu.h" />
     <ClInclude Include="Games\Scene\Select\PlaySongSelect.h" />
     <ClInclude Include="Games\Scene\Select\SongSelect.h" />
+    <ClInclude Include="Games\Scheduler\Event\ArmedState.h" />
     <ClInclude Include="Games\Scheduler\Event\ControlPoints\ControlPoint.h" />
     <ClInclude Include="Games\Scheduler\Event\ControlPoints\NoteControlPoint.h" />
     <ClInclude Include="Games\Scheduler\Event\Effect\Algorithm\LinearMapPitchShifter.h" />
@@ -261,6 +268,7 @@
     <ClInclude Include="Games\Scheduler\Event\GameEvents\GameEvent.h" />
     <ClInclude Include="Games\Scheduler\Event\GameEvents\StartGameEvent.h" />
     <ClInclude Include="Games\Scheduler\Event\GameEvents\StopGameEvent.h" />
+    <ClInclude Include="Games\Scheduler\Event\HitObject.h" />
     <ClInclude Include="Games\Scheduler\Event\SystemEvents\StopSystemEvent.h" />
     <ClInclude Include="Games\Scheduler\Event\SystemEvents\SystemEvent.h" />
     <ClInclude Include="Games\Scheduler\Event\SystemEvents\SystemEventHandler.h" />

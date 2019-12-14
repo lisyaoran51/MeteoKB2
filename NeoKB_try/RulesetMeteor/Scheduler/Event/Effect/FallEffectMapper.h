@@ -3,9 +3,13 @@
 
 #include "../../../../Games/Scheduler/Event/Effect/EffectMapper.h"
 #include "FallEffect.h"
+#include "../../../../Games/Scheduler/Event/HitObject.h"
+
 
 
 using namespace Games::Schedulers::Events::Effects;
+using namespace Games::Schedulers::Events;
+
 
 
 namespace Meteor {
@@ -13,7 +17,7 @@ namespace Schedulers {
 namespace Events {
 namespace Effects {
 
-	class FallEffectMapper :public EffectMapper<FallEffect> {
+	class FallEffectMapper : public EffectMapper<FallEffect>, public HitObject {
 
 	public:
 
@@ -25,6 +29,11 @@ namespace Effects {
 		}
 
 		FallEffectMapper(int w, int h);
+
+	protected:
+
+		virtual int CheckForJudgement(bool isUserTriggered, double timeOffset);
+
 
 	};
 

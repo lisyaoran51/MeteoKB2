@@ -88,17 +88,17 @@ namespace Events {
 		/// </summary>
 		// virtual int Process() = 0;
 
-		MTO_FLOAT GetStartTime(){ return event->GetStartTime(); }
-		MTO_FLOAT GetLifeTime(){ return event->GetLifeTime(); }
+		virtual MTO_FLOAT GetStartTime(){ return event->GetStartTime(); }
+		virtual MTO_FLOAT GetLifeTime(){ return event->GetLifeTime(); }
 
-		MTO_FLOAT GetTimeLeft(){ 
+		virtual MTO_FLOAT GetTimeLeft(){ 
 
 			if (event->GetLifeType() == EventLifeType::Infinite)
 				return MTO_INFINITE;
 			else if (event->GetLifeType() == EventLifeType::Timed)
-				return event->GetLifeTime() - clock->GetCurrentTime();
+				return event->GetLifeTime() - (event->GetStartTime() - clock->GetCurrentTime());
 			else
-				return event->GetLifeTime() - clock->GetCurrentTime();
+				return event->GetLifeTime() - (event->GetStartTime() - clock->GetCurrentTime());
 
 		}
 
@@ -170,7 +170,7 @@ namespace Events {
 		/// </summary>
 		int eid;
 
-		T* event;
+		T* event = nullptr;
 
 		EventProcessorLifeType lifeType;
 

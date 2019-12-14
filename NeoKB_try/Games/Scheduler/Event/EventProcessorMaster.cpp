@@ -221,8 +221,8 @@ int EventProcessorMaster::update()
 			if (!isDeleting) {
 				/* 每次要用dynamic processors時，就要鎖起來 */
 				isDeleting = true;
-				lock_guard<mutex> guard(processorsMutex);
 			}
+			lock_guard<mutex> guard(processorsMutex);
 
 			EventProcessor<Event>* ep = *iter;
 			dynamicEventProcessors.erase(iter);
@@ -231,7 +231,8 @@ int EventProcessorMaster::update()
 			// TODO: 這邊會有thread safe的問題，要lock
 			Event* e = ep->GetEvent();
 			delete ep;
-			delete e;
+			if(e)
+				delete e;
 		}
 	}
 
