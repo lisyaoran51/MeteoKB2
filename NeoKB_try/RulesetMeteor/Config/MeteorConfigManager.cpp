@@ -22,9 +22,12 @@ int MeteorConfigManager::InitializeDefault()
 	Set(MeteorSetting::FallLength, 8);
 	Set(MeteorSetting::ExplodeSpeed, MTO_FLOAT(16.f));
 	Set(MeteorSetting::ExplodeBrightness, MTO_FLOAT(1.f));
+	Set(MeteorSetting::ExplosionLifeTime, MTO_FLOAT(0.2f));
 	Set(MeteorSetting::GlowLineSpeed, MTO_FLOAT(1.f));
 	Set(MeteorSetting::GlowLineBrightness, MTO_FLOAT(1.f));
 	Set(MeteorSetting::GlowLineDuration, MTO_FLOAT(1.f));
+
+	Set(MeteorSetting::TargetLineBrightness, MTO_FLOAT(1.f));
 
 	Set(MeteorSetting::RestartSection, 0);
 	return 0;
