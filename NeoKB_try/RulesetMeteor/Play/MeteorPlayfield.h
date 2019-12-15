@@ -66,7 +66,7 @@ namespace Play{
 
 		int pitchCount;
 
-
+		MTO_FLOAT explosionLifeTime = 0.2f;
 
 		bool isGameControllingPitchState = true;
 

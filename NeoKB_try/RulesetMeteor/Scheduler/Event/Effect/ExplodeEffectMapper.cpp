@@ -23,7 +23,7 @@ double ExplodeEffectMapper::GetCurrentTime()
 	return hitObject->GetCurrentTime();
 }
 
-int ExplodeEffectMapper::SetLifeTime(double lTime)
+int ExplodeEffectMapper::SetLifeTime(MTO_FLOAT lTime)
 {
 	lifeTime = lTime;
 	return 0;
@@ -32,4 +32,9 @@ int ExplodeEffectMapper::SetLifeTime(double lTime)
 MTO_FLOAT ExplodeEffectMapper::GetTimeLeft()
 {
 	return lifeTime - (GetCurrentTime() - GetStartTime());
+}
+
+MTO_FLOAT ExplodeEffectMapper::GetLifeTime()
+{
+	return lifeTime;
 }

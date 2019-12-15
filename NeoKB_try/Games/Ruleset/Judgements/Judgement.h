@@ -23,6 +23,8 @@ namespace Judgements{
 
 		int SetTimeOffset(double offset);
 
+		bool GetIsHit();
+
 	protected:
 
 		double timeOffset = 0.0;

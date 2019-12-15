@@ -112,6 +112,12 @@ int MeteorPlayfield::load(FrameworkConfigManager* f, MeteorConfigManager * m)
 	else
 		mapPitchShifter = new LinearMapPitchShifter();
 
+
+	if (!m->Get(MeteorSetting::ExplosionLifeTime, &explosionLifeTime)) {
+		explosionLifeTime = 0.2f;
+	}
+
+
 	mapPitchShifter->LazyConstruct(&mapAlgorithms);
 	AddChild(mapPitchShifter);
 
@@ -130,8 +136,11 @@ int MeteorPlayfield::OnJudgement(HitObject * hitObject, Judgement * judgement)
 	if (!judgement->GetIsHit())
 		return -1;
 
+	ExplodeEffectMapper* explosion = new ExplodeEffectMapper(GetWidth(), GetHeight(), hitObject);
+	explosion->SetLifeTime(explosionLifeTime);
+
 	// add explostion
-	eventProcessorMaster->AddDynamicEventProcessor(new ExplodeEffectMapper(GetWidth(), GetHeight(), hitObject));
+	eventProcessorMaster->AddDynamicEventProcessor(explosion);
 
 	// ¶Ç°e¤À¼Æ?
 	return 0;

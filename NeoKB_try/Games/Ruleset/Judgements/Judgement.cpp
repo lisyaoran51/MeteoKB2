@@ -29,3 +29,8 @@ int Judgement::SetTimeOffset(double offset)
 	timeOffset = offset;
 	return 0;
 }
+
+bool Judgement::GetIsHit()
+{
+	return hitResult > HitResult::Miss;
+}

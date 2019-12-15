@@ -22,7 +22,7 @@ namespace Effects {
 
 		HitObject* hitObject;
 
-		double lifeTime = 1.0;
+		MTO_FLOAT lifeTime = 0.2f;
 
 	public:
 
@@ -39,9 +39,11 @@ namespace Effects {
 
 		virtual double GetCurrentTime();
 
-		int SetLifeTime(double lTime);
+		int SetLifeTime(MTO_FLOAT lTime);
 
 		virtual MTO_FLOAT GetTimeLeft();
+
+		virtual MTO_FLOAT GetLifeTime();
 
 	};
 
