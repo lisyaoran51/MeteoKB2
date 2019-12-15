@@ -118,7 +118,7 @@ DecoupledInterpolatingFramedClock.o FramedClock.o InterpolatingFramedClock.o Off
 LinearSpeedAdjuster.o SpeedAdjuster.o \
 \
 MeteoGame.o MeteoGameBase.o\
-Ruleset.o RulesetInfo.o RulesetStore.o Judgement.o \
+Ruleset.o RulesetInfo.o RulesetStore.o Judgement.o HasHitWindow.o \
 Loader.o MeteoScene.o Intro.o Player.o PlayerLoader.o Playfield.o MainMenu.o PlaySongSelect.o SongSelect.o \
 Event.o EventProcessorMaster.o ControlPoint.o NoteControlPoint.o Effect.o LinearMapPitchShifter.o MapPitchShifter.o \
 GameEvent.o StartGameEvent.o StopSystemEvent.o SystemEvent.o SystemEventHandler.o \
