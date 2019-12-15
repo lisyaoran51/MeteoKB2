@@ -19,7 +19,7 @@ int MeteoKeyboardDevice::readFromDevice()
 	_debugCount++;
 #endif
 
-	if (_debugCount % 1000 == 0) {
+	if (_debugCount % 1000 == 1) {
 
 		InputState* newState = new InputState();
 		newState->SetKeyboardState(new KeyboardState());
