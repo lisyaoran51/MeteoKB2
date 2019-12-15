@@ -1,11 +1,13 @@
 #include "FallEffectMapper.h"
 
 #include <math.h>
+#include "../../../Ruleset/Judgements/MeteorJudgement.h"
 
 
 
 using namespace Meteor::Schedulers::Events::Effects;
 using namespace std;
+using namespace Meteor::Rulesets::Judgements;
 
 
 FallEffectMapper::FallEffectMapper(int w, int h) : EffectMapper<FallEffect>(w, h)
