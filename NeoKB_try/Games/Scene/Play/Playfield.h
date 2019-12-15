@@ -78,6 +78,9 @@ namespace Play {
 		/// 佔存剛建完的影像，還沒位移到正確位置上
 		///</summary>
 		Map* bufferMap;
+
+		virtual EventProcessorMaster* createEventProcessorMaster() = 0;
+
 	};
 
 

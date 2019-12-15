@@ -7,7 +7,7 @@ namespace Instruments {
 
 	enum class Pitch {
         // major2
-        C2 ,             // 0
+        C2  = 0,        // 0
         D2b,            //
         D2 ,             //
         E2b,            //
@@ -111,7 +111,9 @@ namespace Instruments {
         b4b,            //
         b4 ,             //
         // minor5
-        c5              // 96
+        c5 ,            // 96
+		None = -1,
+
 	};
 
 }

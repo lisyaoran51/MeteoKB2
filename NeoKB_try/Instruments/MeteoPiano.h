@@ -15,7 +15,7 @@ namespace Instruments {
 
 		bool isGameControllingPitchState = false;
 
-		MeteoPianoPitchState state;
+		MeteoPianoPitchState state = MeteoPianoPitchState::None;;
 
 		map<PianoAction, SampleChannel*> raisedSamples;
 

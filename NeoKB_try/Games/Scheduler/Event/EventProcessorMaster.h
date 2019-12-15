@@ -15,6 +15,8 @@
 #include "../../../Framework/Allocation/Hierachal/Triggerable.h"
 #include "../../../Framework/Timing/FramedClock.h"
 #include "../../../Framework/Configurations/FrameworkConfigManager.h"
+#include "../../../Framework/Input/KeyBindings/KeyBindingHandler.h"
+
 
 
 using namespace std;
@@ -25,7 +27,7 @@ using namespace Framework::Graphic;
 using namespace Framework::Allocation::Hierachal;
 using namespace Framework::Timing;
 using namespace Framework::Configurations;
-
+using namespace Framework::Input::KeyBindings;
 
 
 /*
@@ -53,9 +55,6 @@ namespace Events {
 
 		int load(FrameworkConfigManager* f);
 
-		float visibleTimeRange = 1.0f;
-
-		mutex processorsMutex;
 
 	public:
 
@@ -87,6 +86,10 @@ namespace Events {
 
 	protected:
 
+		float visibleTimeRange = 1.0f;
+
+		mutex processorsMutex;
+
 		//Map* lightMap;
 
 		vector<EventProcessor<Event>*> staticEventProcessors;
@@ -111,12 +114,17 @@ namespace Events {
 		InstanceCreator<EventProcessor<Event>> event_processor_creator;
 		*/
 
+		// 移到meteor event processor master裡面了
 		virtual int onKeyDown(InputState* inputState, Key key);
 
 	};
 
-
-
+	/// <summary>
+	/// Event prossor master加上key binding handler
+	/// </summary>
+	template<typename T>
+	class TEventProcessorMaster : public EventProcessorMaster, public KeyBindingHandler<T> {
+	};
 
 }}}
 

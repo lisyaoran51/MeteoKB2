@@ -15,6 +15,11 @@ int HitObject::setState(ArmedState s)
 	return 0;
 }
 
+bool HitObject::GetHasJudgementResult()
+{
+	return hasJudgementResult;
+}
+
 bool HitObject::UpdateJudgement(bool isUserTriggered)
 {
 

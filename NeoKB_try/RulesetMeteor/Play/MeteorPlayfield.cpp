@@ -7,6 +7,7 @@
 #include "../../RulesetMeteor/Scheduler/Event/Effect/Algorithm/TargetLineMapAlgorithm.h"
 #include "../../Util/Log.h"
 #include "../../Games/Scheduler/Event/Effect/Algorithm/LinearMapPitchShifter.h"
+#include "../../RulesetMeteor/Scheduler/Event/MeteorEventProcessorMaster.h"
 
 
 
@@ -15,6 +16,7 @@ using namespace Meteor::Config;
 using namespace Games::Schedulers::Events::Effects::Algorithms;
 using namespace Meteor::Schedulers::Events::Effects::Algorithms;
 using namespace Util;
+using namespace Meteor::Schedulers::Events;
 
 
 
@@ -216,6 +218,11 @@ int MeteorPlayfield::OnKnobTurn(pair<MeteorAction, int> action)
 int MeteorPlayfield::OnSlide(pair<MeteorAction, int> action)
 {
 	return 0;
+}
+
+EventProcessorMaster * MeteorPlayfield::createEventProcessorMaster()
+{
+	return new MeteorEventProcessorMaster();
 }
 
 

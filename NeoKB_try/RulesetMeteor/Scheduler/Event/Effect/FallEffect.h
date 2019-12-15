@@ -5,6 +5,7 @@
 #include <fstream>
 #include <vector>
 #include "../../../../Games/Scheduler/Event/Effect/Effect.h"
+#include "../../../../Instruments/Pitch.h"
 
 #include "../../../../Games/Ruleset/Judgements/HasHitWindow.h"
 
@@ -13,6 +14,7 @@ using namespace std;
 using namespace Util;
 using namespace Games::Schedulers::Events::Effects;
 using namespace Games::Rulesets::Judgements;
+using namespace Instruments;
 
 
 
@@ -25,6 +27,8 @@ namespace Effects {
 	class FallEffect: public Effect, public HasHitWindow
 	{
 
+		Pitch pitch = Pitch::None;
+
 	public:
 
 		/// <summary>
@@ -36,7 +40,7 @@ namespace Effects {
 		/// construct an immediate effect
 		///	</summary>
 		FallEffect(
-			int xPos,
+			Pitch p,
 			int yPos,
 			MTO_FLOAT sTime,
 			MTO_FLOAT l,
@@ -45,6 +49,8 @@ namespace Effects {
 
 		// 一定要每次都override!!
 		virtual string GetTypeName();
+
+		Pitch GetPitch();
 
 	protected:
 	};

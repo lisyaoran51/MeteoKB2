@@ -30,10 +30,17 @@ namespace Effects {
 
 		FallEffectMapper(int w, int h);
 
+		/// <summary>
+		/// 看是不是最後一個範圍內的hit object，只有最後一個hit object需要judgement
+		/// 越接近0越好，但是等於0就是超過
+		/// </summary>
+		virtual double TryJudgement();
+
+		Pitch GetPitch();
+
 	protected:
 
 		virtual int CheckForJudgement(bool isUserTriggered, double timeOffset);
-
 
 	};
 

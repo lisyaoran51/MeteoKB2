@@ -123,11 +123,11 @@ EventProcessor<Event>* MeteorRulesetExecutor::getEventProcessor(Event * e)
 		int height = playfield->GetHeight();
 		return (new GlowLineEffectMapper(width, height))->RegisterEvent(e);
 	}
-	else if (processorType == "ExplodeEffectMapper") {
-		int width = playfield->GetWidth();
-		int height = playfield->GetHeight();
-		return (new ExplodeEffectMapper(width, height))->RegisterEvent(e);
-	}
+	//else if (processorType == "ExplodeEffectMapper") {
+	//	int width = playfield->GetWidth();
+	//	int height = playfield->GetHeight();
+	//	return (new ExplodeEffectMapper(width, height))->RegisterEvent(e);
+	//}
 	else if (processorType == "TargetLineEffectMapper") {
 		int width = playfield->GetWidth();
 		int height = playfield->GetHeight();

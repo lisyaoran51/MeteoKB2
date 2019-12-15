@@ -77,6 +77,8 @@ namespace Play{
 		/// </summary>
 		MapPitchShifter* mapPitchShifter;
 
+		virtual EventProcessorMaster* createEventProcessorMaster();
+
 	};
 
 }

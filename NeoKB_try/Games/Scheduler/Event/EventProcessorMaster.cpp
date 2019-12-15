@@ -3,7 +3,7 @@
 #include "../../../Util/Log.h"
 #include "Effect/EffectMapper.h"
 #include <iomanip>
-
+#include "HitObject.h"
 
 
 using namespace Games::Schedulers::Events;
@@ -196,6 +196,9 @@ int EventProcessorMaster::update()
 
 	LOG(LogLevel::Finest) << "EventProcessorMaster::update() : current time is " << fixed << setprecision(5) << GetClock()->GetCurrentTime() << " .";
 
+
+	// 這邊要檢查hit object有沒有miss的
+
 	processEvent(GetClock()->GetElapsedFrameTime()); // 這個是舊的程式，以後可能用不到了
 
 	bool isDeleting = false;
@@ -243,21 +246,42 @@ int EventProcessorMaster::update()
 
 int EventProcessorMaster::onKeyDown(InputState * inputState, Key key)
 {
+	/* 移到Meteor Event Processor Master裡面了
+
 	double currentTime = GetClock()->GetCurrentTime();
 
 	vector<EventProcessor<Event>*> eventProcessors;
 
 	eventProcessorPeriods->GetItemsContainPeriods(make_pair<float, float>(currentTime - visibleTimeRange, currentTime + visibleTimeRange), &eventProcessors);
 
-	EventProcessor<Event>* receivedProcessor = nullptr;
+	HitObject* receivedHitObject = nullptr;
 
 	for (int i = 0; i < eventProcessors.size(); i++) {
 		
-		
+		HitObject* hObject = dynamic_cast<HitObject*>(eventProcessors[i]);
 
+		if (hObject == nullptr)
+			continue;
+
+		if (hObject->GetHasJudgementResult())
+			continue;
+
+		if ();
+
+		if (hObject->TryJudgement() > 0) {
+			if (receivedHitObject != nullptr) {
+
+				// 最晚的最先被打中，早的hit object就直接跳過
+				if (hObject->TryJudgement() > receivedHitObject->TryJudgement())
+					continue;
+			}
+			receivedHitObject = hObject;
+		}
 	}
 
-
+	if (receivedHitObject)
+		receivedHitObject->UpdateJudgement(true);
+	*/
 	return 0;
 }
 

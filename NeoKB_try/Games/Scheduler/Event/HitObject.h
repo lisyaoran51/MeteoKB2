@@ -15,6 +15,7 @@ using namespace Games::Rulesets::Judgements;
 using namespace std;
 
 
+
 namespace Games {
 namespace Schedulers{
 namespace Events{
@@ -46,11 +47,21 @@ namespace Events{
 			return 0;
 		}
 
-	protected:
+		bool GetHasJudgementResult();
+
+		/// <summary>
+		/// 看是不是最後一個範圍內的hit object，只有最後一個hit object需要judgement
+		/// 越接近0越好，但是等於0就是超過
+		/// </summary>
+		virtual double TryJudgement() = 0;
 
 		bool UpdateJudgement(bool isUserTriggered);
 
+	protected:
+
+
 		virtual int CheckForJudgement(bool isUserTriggered, double offset) = 0;
+
 
 		int AddJudgement(Judgement* judgement);
 

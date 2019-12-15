@@ -170,7 +170,7 @@ Pattern * MeteorPatternGenerator::generateNoteControlPoint(vector<Event*>* es, N
 	) / glowLineSpeed;
 
 	LOG(LogLevel::Finest) << "int MeteorSmConverter::Generate(vector<Event*>*, Event*) : Fall speed is [" << fallSpeed << "], GlowLine speed is [" << glowLineSpeed << "].";
-
+	/*
 	LOG(LogLevel::Finer) << "int MeteorSmConverter::Generate(vector<Event*>*, Event*) : Generate GlowLine at [" << (int)pitch << "], start time [" << note->GetStartTime() - glowLineTime << "], life time [" << fallTime + glowLineDuration << "].";
 
 	GlowLineEffect* glow = new GlowLineEffect(
@@ -179,11 +179,11 @@ Pattern * MeteorPatternGenerator::generateNoteControlPoint(vector<Event*>* es, N
 		note->GetStartTime() - glowLineTime,
 		fallTime + glowLineDuration,
 		glowLineSpeed);
-
+	*/
 	LOG(LogLevel::Finer) << "int MeteorSmConverter::Generate(vector<Event*>*, Event*) : Generate Fall at [" << (int)pitch << "], start time [" << note->GetStartTime() - fallTime << "], life time [" << fallLifeTime << "].";
 
 	FallEffect* fall = new FallEffect(
-		(int)pitch,
+		pitch,
 		0,
 		note->GetStartTime() - fallTime,
 		fallLifeTime,
@@ -191,12 +191,12 @@ Pattern * MeteorPatternGenerator::generateNoteControlPoint(vector<Event*>* es, N
 
 	note->SetLifeTime(noteLifeTime);
 
-	pattern->Add(glow);
+	//pattern->Add(glow);
 	pattern->Add(fall);
 	//pattern->Add(note);
 
 	// 把pattern裡面的event一個一個加進去es裡
-	es->push_back(glow);
+	//es->push_back(glow);
 	es->push_back(fall);
 	//es->push_back(note);
 
