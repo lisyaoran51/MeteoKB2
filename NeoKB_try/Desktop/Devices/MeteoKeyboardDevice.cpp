@@ -15,7 +15,7 @@ int MeteoKeyboardDevice::readFromDevice()
 	if(newState != nullptr)
 		inputStates.push_back(newState);
 
-#if 1
+#if 0
 	_debugCount++;
 #endif
 
