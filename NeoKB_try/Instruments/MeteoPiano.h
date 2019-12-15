@@ -9,7 +9,11 @@ using namespace Framework::Input::KeyBindings;
 
 namespace Instruments {
 
-	enum class MeteoPianoPitchState;
+	enum class MeteoPianoPitchState {
+		None,
+		Raised,
+		Lowered
+	};
 
 	class MeteoPiano : public Piano {
 
@@ -44,11 +48,7 @@ namespace Instruments {
 
 	};
 
-	enum class MeteoPianoPitchState {
-		None,
-		Raised,
-		Lowered
-	};
+
 
 }
 
