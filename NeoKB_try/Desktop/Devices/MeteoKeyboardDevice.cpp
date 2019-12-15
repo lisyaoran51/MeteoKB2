@@ -10,12 +10,12 @@ MeteoKeyboardDevice::MeteoKeyboardDevice(MeteoPanelBoardV1 * panelBoard)
 
 int MeteoKeyboardDevice::readFromDevice()
 {
-
+#if 0
 	InputState* newState = meteoPanelBoard->GetKeyboardState();
 	if(newState != nullptr)
 		inputStates.push_back(newState);
 
-#if 0
+#else
 	_debugCount++;
 #endif
 
