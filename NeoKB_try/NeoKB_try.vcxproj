@@ -168,6 +168,7 @@
     <ClCompile Include="RulesetMeteor\Input\MeteorInputManager.cpp" />
     <ClCompile Include="RulesetMeteor\MeteorGame.cpp" />
     <ClCompile Include="RulesetMeteor\Play\MeteorPlayfield.cpp" />
+    <ClCompile Include="RulesetMeteor\Ruleset\Judgements\MeteorHitWindow.cpp" />
     <ClCompile Include="RulesetMeteor\Ruleset\Judgements\MeteorJudgement.cpp" />
     <ClCompile Include="RulesetMeteor\Ruleset\MeteorRuleset.cpp" />
     <ClCompile Include="RulesetMeteor\Ruleset\MeteorRulesetExecutor.cpp" />
@@ -390,6 +391,7 @@
     <ClInclude Include="RulesetMeteor\Input\MeteorInputManager.h" />
     <ClInclude Include="RulesetMeteor\MeteorGame.h" />
     <ClInclude Include="RulesetMeteor\Play\MeteorPlayfield.h" />
+    <ClInclude Include="RulesetMeteor\Ruleset\Judgements\MeteorHitWindow.h" />
     <ClInclude Include="RulesetMeteor\Ruleset\Judgements\MeteorJudgement.h" />
     <ClInclude Include="RulesetMeteor\Ruleset\MeteorRuleset.h" />
     <ClInclude Include="RulesetMeteor\Ruleset\MeteorRulesetExecutor.h" />

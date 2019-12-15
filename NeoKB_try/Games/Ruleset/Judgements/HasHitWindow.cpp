@@ -4,14 +4,12 @@
 
 using namespace Games::Rulesets::Judgements;
 
-
-
 HitResult HasHitWindow::GetResultFor(double offset)
 {
-	return HitResult();
+	return hitWindow->GetResultFor(offset);
 }
 
 double HasHitWindow::GetHitWindow(HitResult window)
 {
-	return 0.0;
+	return hitWindow->GetHitWindow(window);
 }

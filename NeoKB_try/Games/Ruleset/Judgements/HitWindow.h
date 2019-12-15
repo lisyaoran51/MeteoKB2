@@ -18,6 +18,7 @@ namespace Judgements{
 
 		virtual HitResult GetResultFor(double hitOffset) = 0;
 
+		virtual double GetHitWindow(HitResult hResult) = 0;
 	};
 
 }}}

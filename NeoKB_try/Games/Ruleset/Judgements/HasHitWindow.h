@@ -13,9 +13,6 @@ namespace Judgements{
 
 	class HasHitWindow {
 
-
-
-
 	public:
 
 		/// <summary>

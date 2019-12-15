@@ -52,6 +52,7 @@ namespace Effects {
 
 		Pitch GetPitch();
 
+
 	protected:
 	};
 

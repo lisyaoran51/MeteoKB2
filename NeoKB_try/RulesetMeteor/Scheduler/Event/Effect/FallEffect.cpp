@@ -1,7 +1,13 @@
 #include "FallEffect.h"
 
+#include "../../../Ruleset/Judgements/MeteorHitWindow.h"
+
+
 using namespace Meteor::Schedulers::Events::Effects;
 using namespace std;
+using namespace Meteor::Rulesets::Judgements;
+
+
 
 FallEffect::FallEffect(): Effect()
 {
@@ -10,6 +16,7 @@ FallEffect::FallEffect(): Effect()
 
 FallEffect::FallEffect(Pitch p, int yPos, MTO_FLOAT sTime, MTO_FLOAT l, MTO_FLOAT sp): Effect(int(p), yPos, sTime, l)
 {
+	hitWindow = new MeteorHitWindow();
 	pitch = p;
 	SetSpeed(sp);
 }
