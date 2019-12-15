@@ -59,6 +59,7 @@
     <ClCompile Include="Games\Ruleset\Ruleset.cpp" />
     <ClCompile Include="Games\Ruleset\RulesetInfo.cpp" />
     <ClCompile Include="Games\Ruleset\RulesetStore.cpp" />
+    <ClCompile Include="Games\Ruleset\Scoring\ScoreProcessor.cpp" />
     <ClCompile Include="Games\Scene\Interlude\Intro.cpp" />
     <ClCompile Include="Games\Scene\MeteoScene.cpp" />
     <ClCompile Include="Games\Scene\Play\Player.cpp" />
@@ -246,6 +247,7 @@
     <ClInclude Include="Games\Ruleset\RulesetExecutor.h" />
     <ClInclude Include="Games\Ruleset\RulesetInfo.h" />
     <ClInclude Include="Games\Ruleset\RulesetStore.h" />
+    <ClInclude Include="Games\Ruleset\Scoring\ScoreProcessor.h" />
     <ClInclude Include="Games\Scene\Interlude\Intro.h" />
     <ClInclude Include="Games\Scene\Loader.h" />
     <ClInclude Include="Games\Scene\MeteoScene.h" />
@@ -391,6 +393,7 @@
     <ClInclude Include="RulesetMeteor\Ruleset\Judgements\MeteorJudgement.h" />
     <ClInclude Include="RulesetMeteor\Ruleset\MeteorRuleset.h" />
     <ClInclude Include="RulesetMeteor\Ruleset\MeteorRulesetExecutor.h" />
+    <ClInclude Include="RulesetMeteor\Ruleset\Scoring\MeteorScoreProcessor.h" />
     <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\Algorithm\ExplodeMapAlgorithm.h" />
     <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\Algorithm\FallMapAlgorithm.h" />
     <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\Algorithm\GlowLineMapAlgorithm.h" />

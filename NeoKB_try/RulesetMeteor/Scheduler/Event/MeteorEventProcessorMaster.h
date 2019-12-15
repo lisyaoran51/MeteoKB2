@@ -38,6 +38,8 @@ namespace Events{
 
 	protected:
 
+		virtual int update();
+
 		virtual int LoadOnComplete();
 
 		MeteoPianoPitchState pitchState = MeteoPianoPitchState::None;

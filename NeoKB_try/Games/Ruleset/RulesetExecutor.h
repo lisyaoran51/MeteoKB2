@@ -16,6 +16,7 @@
 #include "../Sheetmusic/WorkingSheetmusic.h"
 #include "../../Framework/Input/PassThroughInputManager.h"
 #include "../../Framework/Timing/TimeController.h"
+#include "Scoring/ScoreProcessor.h"
 
 
 
@@ -38,6 +39,8 @@ using namespace Framework::Allocation::Hierachal;
 using namespace Games::Scenes::Play;
 using namespace Framework::Input;
 using namespace Framework::Timing;
+using namespace Games::Rulesets::Scoring;
+
 
 
 
@@ -171,6 +174,8 @@ namespace Rulesets {
 		virtual TimeController* CreateTimeController() = 0;
 
 		virtual SpeedAdjuster* CreateSpeedAdjuster() = 0;
+
+		virtual ScoreProcessor* CreateScoreProcessor() = 0;
 
 
 		template<class _Type>

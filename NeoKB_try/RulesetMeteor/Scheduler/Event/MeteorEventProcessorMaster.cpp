@@ -1,10 +1,14 @@
 #include "MeteorEventProcessorMaster.h"
 
 #include "Effect/FallEffectMapper.h"
+#include <utility>
 
 
 using namespace Meteor::Schedulers::Events;
 using namespace Meteor::Schedulers::Events::Effects;
+using namespace std;
+
+
 
 
 MeteorEventProcessorMaster::MeteorEventProcessorMaster() : RegisterType("MeteorEventProcessorMaster")
@@ -73,6 +77,43 @@ int MeteorEventProcessorMaster::OnKnobTurn(pair<MeteorAction, int> action)
 
 int MeteorEventProcessorMaster::OnSlide(pair<MeteorAction, int> action)
 {
+	return 0;
+}
+
+int MeteorEventProcessorMaster::update()
+{
+	EventProcessorMaster::update();
+
+	double currentTime = 0;
+	/* 這邊要檢查已經過去的fall effect有沒有miss */
+	try {
+		currentTime = GetClock()->GetCurrentTime();
+	}
+	catch (exception& e) {
+		LOG(LogLevel::Warning) << "EventProcessorMaster::GetGraph : clock is not started [" << e.what() << "].";
+		return 0;
+		//abort();
+	}
+
+	vector<EventProcessor<Event>*> eventProcessors;
+
+	// 拿已經結束的event
+	eventProcessorPeriods->GetItemsContainPeriods(make_pair<float, float>(currentTime - visibleTimeRange, (float)currentTime), &eventProcessors);
+
+	for (int i = 0; i < eventProcessors.size(); i++) {
+		HitObject* hObject = dynamic_cast<HitObject*>(eventProcessors[i]);
+
+		if (hObject == nullptr)
+			continue;
+
+		if (hObject->GetHasJudgementResult())
+			continue;
+
+		if (hObject->TryJudgement() == -2) {
+			hObject->UpdateJudgement(false);
+		}
+	}
+
 	return 0;
 }
 

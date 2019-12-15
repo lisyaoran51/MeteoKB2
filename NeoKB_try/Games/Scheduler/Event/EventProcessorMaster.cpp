@@ -201,6 +201,8 @@ int EventProcessorMaster::update()
 
 	processEvent(GetClock()->GetElapsedFrameTime()); // 這個是舊的程式，以後可能用不到了
 
+
+
 	bool isDeleting = false;
 
 	/* 是件結束了就刪掉 */

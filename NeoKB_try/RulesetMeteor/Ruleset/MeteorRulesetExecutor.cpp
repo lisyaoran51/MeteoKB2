@@ -15,6 +15,7 @@
 #include "../Input/MeteorInputManager.h"
 #include "../Timing/MeteorTimeController.h"
 #include "../../Framework/Timing/SpeedAdjusters/LinearSpeedAdjuster.h"
+#include "Scoring/MeteorScoreProcessor.h"
 
 
 
@@ -30,6 +31,9 @@ using namespace Meteor::Schedulers::Events::Effects;
 using namespace Meteor::Input;
 using namespace Meteor::Timing;
 using namespace Framework::Timing::SpeedAdjusters;
+using namespace Meteor::Rulesets::Scoring;
+
+
 
 
 SmConverter * MeteorRulesetExecutor::createSmConverter(PatternGenerator * pg)
@@ -84,6 +88,11 @@ TimeController * MeteorRulesetExecutor::CreateTimeController()
 SpeedAdjuster * MeteorRulesetExecutor::CreateSpeedAdjuster()
 {
 	return new LinearSpeedAdjuster();
+}
+
+ScoreProcessor * MeteorRulesetExecutor::CreateScoreProcessor()
+{
+	return new MeteorScoreProcessor();
 }
 
 int MeteorRulesetExecutor::Elapse(MTO_FLOAT elapsedTime)

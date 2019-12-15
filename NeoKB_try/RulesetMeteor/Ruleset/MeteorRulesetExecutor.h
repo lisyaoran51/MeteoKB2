@@ -4,12 +4,14 @@
 #include "../../Games/Ruleset/Ruleset.h"
 #include "../../Framework/Input/PassThroughInputManager.h"
 #include "../../Framework/Timing/TimeController.h"
+#include "../../Games/Ruleset/Scoring/ScoreProcessor.h"
 
 
 using namespace Games::Rulesets;
 using namespace Games::Schedulers::Events;
 using namespace Framework::Input;
 using namespace Framework::Timing;
+using namespace Games::Rulesets::Scoring;
 
 
 
@@ -51,6 +53,8 @@ namespace Rulesets {
 		virtual TimeController* CreateTimeController();
 		
 		virtual SpeedAdjuster* CreateSpeedAdjuster();
+
+		virtual ScoreProcessor* CreateScoreProcessor();
 
 		virtual int Elapse(MTO_FLOAT elapsedTime);
 

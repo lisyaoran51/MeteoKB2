@@ -89,6 +89,11 @@ int Player::load(FrameworkConfigManager* f)
 	container->AddChild(rulesetExecutor);
 
 
+	scoreProcessor = rulesetExecutor->CreateScoreProcessor();
+
+	//scoreProcessor.AllJudged += onCompletion;
+	//scoreProcessor.Failed += onFail;
+
 	return 0;
 }
 

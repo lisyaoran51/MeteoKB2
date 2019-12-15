@@ -27,21 +27,23 @@ namespace Play {
 
 	class Player: public MeteoScene {
 
-		AdjustableClock* adjustableClock;
+		AdjustableClock* adjustableClock = nullptr;
 
-		DecoupledInterpolatingFramedClock* decoupledClock;
+		DecoupledInterpolatingFramedClock* decoupledClock = nullptr;
 
-		OffsetFramedClock* offsetClock;
+		OffsetFramedClock* offsetClock = nullptr;
 
-		TimeController* timeController;
+		TimeController* timeController = nullptr;
 
-		SmManager* smManager;
-
-
-		Ruleset* ruleset;
+		SmManager* smManager = nullptr;
 
 
-		RulesetExecutor<Event>* rulesetExecutor;
+		Ruleset* ruleset = nullptr;
+
+
+		RulesetExecutor<Event>* rulesetExecutor = nullptr;
+
+		ScoreProcessor* scoreProcessor = nullptr;
 		
 		/// <summary>
 		/// load in things like sm, Ruleset info. then create Ruleset executor
