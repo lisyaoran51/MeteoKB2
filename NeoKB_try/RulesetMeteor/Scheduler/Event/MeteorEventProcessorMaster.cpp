@@ -7,6 +7,10 @@ using namespace Meteor::Schedulers::Events;
 using namespace Meteor::Schedulers::Events::Effects;
 
 
+MeteorEventProcessorMaster::MeteorEventProcessorMaster() : RegisterType("MeteorEventProcessorMaster")
+{
+}
+
 int MeteorEventProcessorMaster::OnKeyDown(pair<MeteorAction, int> action)
 {
 	double currentTime = GetClock()->GetCurrentTime();

@@ -22,6 +22,8 @@ namespace Events{
 
 	public:
 
+		MeteorEventProcessorMaster();
+
 		virtual int OnKeyDown(pair<MeteorAction, int> action);
 
 		virtual int OnKeyUp(MeteorAction action);

@@ -124,6 +124,10 @@ namespace Events {
 	/// </summary>
 	template<typename T>
 	class TEventProcessorMaster : public EventProcessorMaster, public KeyBindingHandler<T> {
+
+	public:
+
+		TEventProcessorMaster(): RegisterType("TEventProcessorMaster"){}
 	};
 
 }}}
