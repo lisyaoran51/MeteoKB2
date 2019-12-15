@@ -13,7 +13,13 @@ namespace Judgements{
 
 	class MeteorJudgement : public Judgement {
 
+	public:
+
 		MeteorJudgement(HitResult r);
+
+	protected:
+
+		virtual double getResultNumber(HitResult hResult);
 
 	};
 

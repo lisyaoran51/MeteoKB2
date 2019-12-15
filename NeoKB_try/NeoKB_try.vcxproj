@@ -167,6 +167,7 @@
     <ClCompile Include="RulesetMeteor\Input\MeteorInputManager.cpp" />
     <ClCompile Include="RulesetMeteor\MeteorGame.cpp" />
     <ClCompile Include="RulesetMeteor\Play\MeteorPlayfield.cpp" />
+    <ClCompile Include="RulesetMeteor\Ruleset\Judgements\MeteorJudgement.cpp" />
     <ClCompile Include="RulesetMeteor\Ruleset\MeteorRuleset.cpp" />
     <ClCompile Include="RulesetMeteor\Ruleset\MeteorRulesetExecutor.cpp" />
     <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\Algorithm\ExplodeMapAlgorithm.cpp" />

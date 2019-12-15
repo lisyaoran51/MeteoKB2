@@ -478,6 +478,9 @@
     <Filter Include="標頭檔\RulesetMeteor\Ruleset\Judgements">
       <UniqueIdentifier>{86fb702e-ca02-408b-aadd-fd639d69ac38}</UniqueIdentifier>
     </Filter>
+    <Filter Include="來源檔案\RulesetMeteor\Ruleset\Judgements">
+      <UniqueIdentifier>{11889e69-540e-40d9-bfc7-7ac3f48f32a1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Games\Graphic\Renderer\renderer.cpp">
@@ -980,6 +983,9 @@
     </ClCompile>
     <ClCompile Include="RulesetMeteor\Scheduler\Event\MeteorEventProcessorMaster.cpp">
       <Filter>來源檔案\RulesetMeteor\Schedulers\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\Ruleset\Judgements\MeteorJudgement.cpp">
+      <Filter>來源檔案\RulesetMeteor\Ruleset\Judgements</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
