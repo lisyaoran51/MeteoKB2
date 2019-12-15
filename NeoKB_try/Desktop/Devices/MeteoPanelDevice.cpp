@@ -19,10 +19,11 @@ int MeteoPanelDevice::readFromDevice()
 	InputState* newState = meteoPanelBoard->GetPanelState();
 	if (newState != nullptr)
 		inputStates.push_back(newState);
+#if 0
+	_debugCount++;
+#endif
 
-	_debugCount;
-
-	if (_debugCount == 4000) {
+	if (_debugCount == -1) {
 		InputState* newState = new InputState();
 		newState->SetPanelState(new PanelState());
 
@@ -32,7 +33,7 @@ int MeteoPanelDevice::readFromDevice()
 		LOG(LogLevel::Debug) << "MeteoPanelDevice::readFromDevice() : Create fake pause input.";
 	}
 
-	if (_debugCount == 5000) {
+	if (_debugCount == -1) {
 		InputState* newState = new InputState();
 		newState->SetPanelState(new PanelState());
 
@@ -42,7 +43,7 @@ int MeteoPanelDevice::readFromDevice()
 		LOG(LogLevel::Debug) << "MeteoPanelDevice::readFromDevice() : Create fake pause input.";
 	}
 
-	if (_debugCount == 8000) {
+	if (_debugCount == -1) {
 		InputState* newState = new InputState();
 		newState->SetPanelState(new PanelState());
 
@@ -51,6 +52,7 @@ int MeteoPanelDevice::readFromDevice()
 
 		LOG(LogLevel::Debug) << "MeteoPanelDevice::readFromDevice() : Create fake knob input.";
 	}
+
 
 
 

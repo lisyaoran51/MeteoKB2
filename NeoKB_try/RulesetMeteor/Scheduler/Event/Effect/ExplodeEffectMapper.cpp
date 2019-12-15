@@ -29,7 +29,7 @@ int ExplodeEffectMapper::SetLifeTime(MTO_FLOAT lTime)
 	return 0;
 }
 
-MTO_FLOAT ExplodeEffectMapper::GetTimeLeft()
+MTO_FLOAT ExplodeEffectMapper::GetProcessorTimeLeft()
 {
 	return lifeTime - (GetCurrentTime() - GetStartTime());
 }

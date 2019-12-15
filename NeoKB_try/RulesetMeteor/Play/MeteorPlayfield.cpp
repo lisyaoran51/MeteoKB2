@@ -139,6 +139,8 @@ int MeteorPlayfield::OnJudgement(HitObject * hitObject, Judgement * judgement)
 	ExplodeEffectMapper* explosion = new ExplodeEffectMapper(GetWidth(), GetHeight(), hitObject);
 	explosion->SetLifeTime(explosionLifeTime);
 
+	LOG(LogLevel::Debug) << "MeteorPlayfield::OnJudgement() : create explosion.";
+
 	// add explostion
 	eventProcessorMaster->AddDynamicEventProcessor(explosion);
 

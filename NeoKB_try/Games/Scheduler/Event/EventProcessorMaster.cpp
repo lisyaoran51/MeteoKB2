@@ -222,7 +222,7 @@ int EventProcessorMaster::update()
 
 		if (thisOneNeedDelete) {
 			if (!isDeleting) {
-				/* 每次要用dynamic processors時，就要鎖起來 */
+				/* 每次要用dynamic processors時，就要鎖起來 (用mutex就好，可以刪掉)*/
 				isDeleting = true;
 			}
 			lock_guard<mutex> guard(processorsMutex);

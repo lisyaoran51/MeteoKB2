@@ -41,7 +41,7 @@ namespace Effects {
 
 		int SetLifeTime(MTO_FLOAT lTime);
 
-		virtual MTO_FLOAT GetTimeLeft();
+		virtual MTO_FLOAT GetProcessorTimeLeft();
 
 		virtual MTO_FLOAT GetLifeTime();
 

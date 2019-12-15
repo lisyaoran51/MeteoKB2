@@ -26,7 +26,7 @@ int ExplodeMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper<Explode
 
 	bool isAdded = false;
 
-	if (em->GetTimeLeft() > 0 && em->GetTimeLeft() < em->GetLifeTime()) {
+	if (em->GetProcessorTimeLeft() > 0 && em->GetProcessorTimeLeft() < em->GetLifeTime()) {
 		isAdded = true;
 		for (int i = 0; i < height; i++) {
 
