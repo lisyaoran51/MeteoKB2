@@ -13,7 +13,7 @@ Framework/Threading:\
 Framework/Timing:Framework/Timing/SpeedAdjusters:\
 \
 Games:Games/Input:\
-Games/Ruleset:Games/Ruleset/Modifiers:\
+Games/Ruleset:Games/Ruleset/Modifiers:Games/Ruleset/Judgements:\
 Games/Scene:Games/Scene/Interlude:Games/Scene/Play:Games/Scene/Select:\
 Games/Scheduler/Event:Games/Scheduler/Event/ControlPoints:Games/Scheduler/Event/Effect:\
 Games/Scheduler/Event/Effect/Algorithm:Games/Scheduler/Event/GameEvents:Games/Scheduler/Event/SystemEvents:\
@@ -28,7 +28,7 @@ ThirdParty/Bass:\
 \
 Desktop:Desktop/Devices:\
 \
-RulesetMeteor:RulesetMeteor/Config:RulesetMeteor/Input:RulesetMeteor/Play:RulesetMeteor/Ruleset:\
+RulesetMeteor:RulesetMeteor/Config:RulesetMeteor/Input:RulesetMeteor/Play:RulesetMeteor/Ruleset:RulesetMeteor/Ruleset/Judgements:\
 RulesetMeteor/Scheduler/Event/Effect:RulesetMeteor/Scheduler/Event/Effect/Algorithm:\
 RulesetMeteor/Sheetmusic:RulesetMeteor/Sheetmusic/Pattern:\
 RulesetMeteor/Timing:\
@@ -51,7 +51,7 @@ INCLUDE = -IFramwork -IFramework/Allocation -IFramework/Allocation/Hierachal -IF
 -IFramework/Timing -IFramework/Timing/SpeedAdjusters \
 \
 -IGames -IGames/Input \
--IGames/Ruleset -IGames/Ruleset/Modifiers \
+-IGames/Ruleset -IGames/Ruleset/Modifiers -IGames/Ruleset/Judgements \
 -IGames/Scene -IGames/Scene/Interlude -IGames/Scene/Play -IGames/Scene/Select \
 -IGames/Scheduler/Event -IGames/Scheduler/Event/ControlPoints -IGames/Scheduler/Event/Effect \
 -IGames/Scheduler/Event/Effect/Algorithm -IGames/Scheduler/Event/GameEvents -IGames/Scheduler/Event/SystemEvents \
@@ -66,7 +66,7 @@ INCLUDE = -IFramwork -IFramework/Allocation -IFramework/Allocation/Hierachal -IF
 \
 -IDesktop -IDesktop/Devices \
 \
--IRulesetMeteor -IRulesetMeteor/Config -IRulesetMeteor/Input -IRulesetMeteor/Play -IRulesetMeteor/Ruleset \
+-IRulesetMeteor -IRulesetMeteor/Config -IRulesetMeteor/Input -IRulesetMeteor/Play -IRulesetMeteor/Ruleset -IRulesetMeteor/Ruleset/Judgements \
 -IRulesetMeteor/Scheduler/Event/Effect -IRulesetMeteor/Scheduler/Event/Effect/Algorithm \
 -IRulesetMeteor/Sheetmusic -IRulesetMeteor/Sheetmusic/Pattern \
 -IRulesetMeteor/Timing 
@@ -118,7 +118,7 @@ DecoupledInterpolatingFramedClock.o FramedClock.o InterpolatingFramedClock.o Off
 LinearSpeedAdjuster.o SpeedAdjuster.o \
 \
 MeteoGame.o MeteoGameBase.o\
-Ruleset.o RulesetInfo.o RulesetStore.o \
+Ruleset.o RulesetInfo.o RulesetStore.o Judgement.o \
 Loader.o MeteoScene.o Intro.o Player.o PlayerLoader.o Playfield.o MainMenu.o PlaySongSelect.o SongSelect.o \
 Event.o EventProcessorMaster.o ControlPoint.o NoteControlPoint.o Effect.o LinearMapPitchShifter.o MapPitchShifter.o \
 GameEvent.o StartGameEvent.o StopSystemEvent.o SystemEvent.o SystemEventHandler.o \
@@ -132,7 +132,7 @@ FileSystem.o ProgramInitializer.o \
 \
 MeteoGameDesktop.o Program.o MeteoLightBoardV1.o bcm2835.o MeteoBluetoothDevice.o MeteoDisplayDevice.o MeteoKeyboardDevice.o MeteoPanelDevice.o MeteoPanelBoardV1.o pi2c.o\
 \
-MeteorGame.o MeteorConfigManager.o MeteorInputManager.o MeteorPlayfield.o MeteorRuleset.o MeteorRulesetExecutor.o \
+MeteorGame.o MeteorConfigManager.o MeteorInputManager.o MeteorPlayfield.o MeteorRuleset.o MeteorRulesetExecutor.o MeteorJudgement.o \
 ExplodeEffect.o ExplodeEffectMapper.o FallEffect.o FallEffectMapper.o GlowLineEffect.o GlowLineEffectMapper.o TargetLineEffect.o TargetLineEffectMapper.o \
 ExplodeMapAlgorithm.o FallMapAlgorithm.o GlowLineMapAlgorithm.o TargetLineMapAlgorithm.o \
 MeteorSheetmusicConverter.o MeteorSheetmusicPostprocessor.o MeteorPatternGenerator.o \
