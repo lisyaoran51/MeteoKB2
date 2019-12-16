@@ -36,13 +36,13 @@ int MeteorEventProcessorMaster::OnKeyDown(pair<MeteorAction, int> action)
 		if (!matchPitch(hObject, action.first))
 			continue;
 
-		LOG(LogLevel::Debug) << "MeteorEventProcessorMaster::OnKeyDown() : matched input! " << int(action.first);
+		LOG(LogLevel::Depricated) << "MeteorEventProcessorMaster::OnKeyDown() : matched input! " << int(action.first);
 
 
 		if (hObject->GetHasJudgementResult())
 			continue;
 
-		LOG(LogLevel::Debug) << "MeteorEventProcessorMaster::OnKeyDown() : not judged! " << int(action.first);
+		LOG(LogLevel::Depricated) << "MeteorEventProcessorMaster::OnKeyDown() : not judged! " << int(action.first);
 		
 		if (hObject->TryJudgement() > 0) {
 			if (receivedHitObject != nullptr) {

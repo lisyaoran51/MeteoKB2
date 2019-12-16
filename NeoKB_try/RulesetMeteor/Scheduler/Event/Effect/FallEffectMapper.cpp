@@ -64,7 +64,7 @@ int FallEffectMapper::CheckForJudgement(bool isUserTriggered, double timeOffset)
 			
 	}
 
-	if (offset > fallEffect->GetHitWindow(HitResult::Miss))
+	if (offset > fallEffect->GetHitWindow(HitResult::Meh))
 		return -1;
 
 	AddJudgement(new MeteorJudgement(fallEffect->GetResultFor(offset)));

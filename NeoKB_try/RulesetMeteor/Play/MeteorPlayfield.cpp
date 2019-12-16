@@ -133,7 +133,7 @@ MeteorPlayfield::MeteorPlayfield(): Playfield(), RegisterType("MeteorPlayfield")
 
 int MeteorPlayfield::OnJudgement(HitObject * hitObject, Judgement * judgement)
 {
-	LOG(LogLevel::Debug) << "MeteorPlayfield::OnJudgement() : add judgement and try to create explosion.";
+	LOG(LogLevel::Depricated) << "MeteorPlayfield::OnJudgement() : add judgement and try to create explosion." << judgement->GetIsHit();
 	if (!judgement->GetIsHit())
 		return -1;
 
