@@ -6,7 +6,7 @@ using namespace Games::Schedulers::Events::ControlPoints;
 
 
 
-NoteControlPointHitObject::NoteControlPointHitObject(HitWindow * hWindow)
+NoteControlPointHitObject::NoteControlPointHitObject(HitWindow * hWindow): HasPitch(Pitch::None)
 {
 }
 
@@ -37,6 +37,11 @@ double NoteControlPointHitObject::TryJudgement()
 NoteControlPoint * NoteControlPointHitObject::GetNoteControlPoint()
 {
 	return dynamic_cast<NoteControlPoint*>(GetEvent());
+}
+
+Pitch NoteControlPointHitObject::GetPitch()
+{
+	return dynamic_cast<HasPitch*>(event)->GetPitch();
 }
 
 int NoteControlPointHitObject::CheckForJudgement(bool isUserTriggered, double timeOffset)

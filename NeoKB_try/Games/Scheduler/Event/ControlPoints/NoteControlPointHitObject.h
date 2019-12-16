@@ -15,7 +15,7 @@ namespace Schedulers{
 namespace Events{
 namespace ControlPoints{
 
-	class NoteControlPointHitObject : virtual public EventProcessor<Event>, public HitObject {
+	class NoteControlPointHitObject : virtual public EventProcessor<Event>, public HitObject, public HasPitch {
 
 	public:
 
@@ -26,6 +26,8 @@ namespace ControlPoints{
 		virtual double TryJudgement();
 
 		virtual NoteControlPoint* GetNoteControlPoint();
+
+		virtual Pitch GetPitch();
 
 	protected:
 
