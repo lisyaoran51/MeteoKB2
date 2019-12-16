@@ -126,7 +126,7 @@ ResourceStoreWorkingSm.o SheetmusicConverter.o SheetmusicManager.o SheetmusicMet
 SimpleSmDecoder.o SmDecoder.o FileReader.o Pattern.o PatternGenerator.o \
 SheetmusicSelectPanel.o \
 \
-Instrument.o MeteoPiano.o Piano.o PianoInputManager.o \
+Instrument.o HasPitch.o MeteoPiano.o Piano.o PianoInputManager.o \
 \
 FileSystem.o ProgramInitializer.o \
 \
