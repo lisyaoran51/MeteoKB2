@@ -12,7 +12,7 @@ double MeteorJudgement::getResultNumber(HitResult hResult)
 
 	switch (hResult)
 	{
-	case HitResult::Meh:
+	case HitResult::Bad:
 		return 50;
 	case HitResult::Ok:
 		return 100;

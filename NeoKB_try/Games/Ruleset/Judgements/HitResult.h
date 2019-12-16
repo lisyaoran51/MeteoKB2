@@ -13,7 +13,7 @@ namespace Judgements{
 
 		Miss, 
 
-		Meh,
+		Bad,
 
 		Ok, // ¥i¤£¥Î
 

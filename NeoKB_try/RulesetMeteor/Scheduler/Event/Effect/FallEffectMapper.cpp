@@ -30,7 +30,7 @@ double FallEffectMapper::TryJudgement()
 
 	LOG(LogLevel::Debug) << "FallEffectMapper::TryJudgement() : offset = " << offset;
 
-	if (absOffset > fallEffect->GetHitWindow(HitResult::Miss)) {
+	if (absOffset > fallEffect->GetHitWindow(HitResult::Bad)) {
 		if (offset > 0)
 			return -1; // 代表還沒到
 		else
@@ -38,7 +38,7 @@ double FallEffectMapper::TryJudgement()
 
 	}
 
-	return offset + fallEffect->GetHitWindow(HitResult::Miss);
+	return offset + fallEffect->GetHitWindow(HitResult::Bad);
 }
 
 Pitch FallEffectMapper::GetPitch()
@@ -64,7 +64,7 @@ int FallEffectMapper::CheckForJudgement(bool isUserTriggered, double timeOffset)
 			
 	}
 
-	if (offset > fallEffect->GetHitWindow(HitResult::Meh))
+	if (offset > fallEffect->GetHitWindow(HitResult::Bad))
 		return -1;
 
 	AddJudgement(new MeteorJudgement(fallEffect->GetResultFor(offset)));
