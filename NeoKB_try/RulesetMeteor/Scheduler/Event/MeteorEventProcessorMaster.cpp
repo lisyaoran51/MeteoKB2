@@ -20,7 +20,7 @@ MeteorEventProcessorMaster::MeteorEventProcessorMaster() : RegisterType("MeteorE
 
 int MeteorEventProcessorMaster::OnKeyDown(pair<MeteorAction, int> action)
 {
-	LOG(LogLevel::Depricated) << "MeteorEventProcessorMaster::OnKeyDown() : get input." << int(action.first);
+	LOG(LogLevel::Debug) << "MeteorEventProcessorMaster::OnKeyDown() : get input." << int(action.first);
 	double currentTime = GetClock()->GetCurrentTime();
 
 	vector<EventProcessor<Event>*> eventProcessors;
@@ -39,13 +39,13 @@ int MeteorEventProcessorMaster::OnKeyDown(pair<MeteorAction, int> action)
 		if (!matchPitch(noteControlPointHitObject, action.first))
 			continue;
 
-		LOG(LogLevel::Depricated) << "MeteorEventProcessorMaster::OnKeyDown() : matched input! " << int(action.first);
+		LOG(LogLevel::Debug) << "MeteorEventProcessorMaster::OnKeyDown() : matched input! " << int(action.first);
 
 
 		if (noteControlPointHitObject->GetHasJudgementResult())
 			continue;
 
-		LOG(LogLevel::Depricated) << "MeteorEventProcessorMaster::OnKeyDown() : not judged! " << int(action.first);
+		LOG(LogLevel::Debug) << "MeteorEventProcessorMaster::OnKeyDown() : not judged! " << int(action.first);
 
 		if (noteControlPointHitObject->TryJudgement() > 0) {
 			if (receivedHitObject != nullptr) {
