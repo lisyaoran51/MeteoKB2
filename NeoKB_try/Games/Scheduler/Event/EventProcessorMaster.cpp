@@ -187,7 +187,7 @@ Map * EventProcessorMaster::GetGraph()
 	for (int i = 0; i < dynamicEventProcessors.size(); i++) {
 		EffectMapperInterface* effectMapper = dynamic_cast<EffectMapperInterface*>(dynamicEventProcessors[i]);
 		if (effectMapper) {
-			LOG(LogLevel::Depricated) << "EventProcessorMaster::GetGraph : draw dynamic effect [" << effectMapper << "].";
+			LOG(LogLevel::Debug) << "EventProcessorMaster::GetGraph : draw dynamic effect [" << effectMapper << "].";
 			effectMapper->Draw(graph);
 		}
 	}
@@ -221,7 +221,7 @@ int EventProcessorMaster::update()
 		LOG(LogLevel::Depricated) << "EventProcessorMaster::update : step 1 get timed";
 
 		if ((*iter)->GetProcessorLifeType() == EventProcessorLifeType::Timed &&
-			(*iter)->GetProcessorTimeLeft() <= 0) {
+			(*iter)->GetTimeLeft() <= 0) {
 
 			thisOneNeedDelete = true;
 		}
