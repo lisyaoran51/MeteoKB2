@@ -24,6 +24,7 @@ int MeteoKeyboardDevice::readFromDevice()
 		InputState* newState = new InputState();
 		newState->SetKeyboardState(new KeyboardState());
 
+		newState->GetKeyboardState()->AddPress(make_pair(InputKey::VK24_L_G1, 100));
 		newState->GetKeyboardState()->AddPress(make_pair(InputKey::VK24_L_E1, 100));
 		newState->GetKeyboardState()->AddPress(make_pair(InputKey::VK24_L_C1, 100));
 		inputStates.push_back(newState);
