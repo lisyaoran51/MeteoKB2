@@ -14,6 +14,7 @@ int BassSampleChannel::Play()
 {
 	LOG(LogLevel::Debug) << "BassSampleChannel::Play() : add play action.";
 
+	unique_lock<mutex> uLock(pendingActionMutex);
 	pendingActions.Add(this, [=]() {
 
 		LOG(LogLevel::Debug) << "BassSampleChannel::Play() : create channel.";
@@ -43,6 +44,7 @@ int BassSampleChannel::Play()
 
 int BassSampleChannel::Stop()
 {
+	unique_lock<mutex> uLock(pendingActionMutex);
 	pendingActions.Add(this, [=]() {
 
 		BASS_ChannelStop(channelID);
