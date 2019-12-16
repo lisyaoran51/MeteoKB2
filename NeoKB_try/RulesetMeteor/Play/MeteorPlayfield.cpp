@@ -114,7 +114,7 @@ int MeteorPlayfield::load(FrameworkConfigManager* f, MeteorConfigManager * m)
 
 
 	if (!m->Get(MeteorSetting::ExplosionLifeTime, &explosionLifeTime)) {
-		explosionLifeTime = 0.2f;
+		explosionLifeTime = 0.1f;
 	}
 
 
