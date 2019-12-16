@@ -245,7 +245,7 @@ int EventProcessorMaster::update()
 			// TODO: 這邊會有thread safe的問題，要lock
 			Event* e = ep->GetEvent();
 			LOG(LogLevel::Debug) << "EventProcessorMaster::update : step 3.1";
-			delete ep;
+			//delete ep;
 			LOG(LogLevel::Debug) << "EventProcessorMaster::update : step 3.2 " << e;
 			if(e != nullptr)
 				delete e;
