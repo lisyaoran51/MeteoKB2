@@ -1002,6 +1002,9 @@
     <ClCompile Include="RulesetMeteor\Ruleset\Judgements\MeteorHitWindow.cpp">
       <Filter>來源檔案\RulesetMeteor\Ruleset\Judgements</Filter>
     </ClCompile>
+    <ClCompile Include="Instruments\HasPitch.cpp">
+      <Filter>來源檔案\Instruments</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="DailyLog.txt">
@@ -1674,6 +1677,9 @@
     </ClInclude>
     <ClInclude Include="RulesetMeteor\Ruleset\Judgements\MeteorHitWindow.h">
       <Filter>標頭檔\RulesetMeteor\Ruleset\Judgements</Filter>
+    </ClInclude>
+    <ClInclude Include="Instruments\HasPitch.h">
+      <Filter>標頭檔\Instruments</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

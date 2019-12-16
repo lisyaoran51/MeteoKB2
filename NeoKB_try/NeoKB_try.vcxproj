@@ -159,6 +159,7 @@
     <ClCompile Include="Framework\Timing\SpeedAdjusters\SpeedAdjuster.cpp" />
     <ClCompile Include="Framework\Timing\StopwatchClock.cpp" />
     <ClCompile Include="Games\UI\SheetmusicSelectPanel.cpp" />
+    <ClCompile Include="Instruments\HasPitch.cpp" />
     <ClCompile Include="Instruments\Input\PianoInputManager.cpp" />
     <ClCompile Include="Instruments\Instrument.cpp" />
     <ClCompile Include="Instruments\MeteoPiano.cpp" />
@@ -380,6 +381,7 @@
     <ClInclude Include="Framework\Timing\ThrottledFramedClock.h" />
     <ClInclude Include="Games\UI\SheetmusicSelectPanel.h" />
     <ClInclude Include="Instruments\Audio\SoundBinding.h" />
+    <ClInclude Include="Instruments\HasPitch.h" />
     <ClInclude Include="Instruments\Input\PianoAction.h" />
     <ClInclude Include="Instruments\Input\InstrumentInputManager.h" />
     <ClInclude Include="Instruments\Input\PianoInputManager.h" />

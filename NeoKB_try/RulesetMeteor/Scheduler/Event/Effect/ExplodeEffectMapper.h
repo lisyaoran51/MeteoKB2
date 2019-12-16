@@ -35,17 +35,17 @@ namespace Effects {
 
 		ExplodeEffectMapper(int w, int h, HitObject* hObject);
 
-		virtual string GetEventTypeName();
+		//virtual string GetEventTypeName();
 
-		virtual MTO_FLOAT GetStartTime();
+		//virtual MTO_FLOAT GetStartTime();
 
-		virtual double GetCurrentTime();
+		//virtual double GetCurrentTime();
 
-		int SetLifeTime(MTO_FLOAT lTime);
+		//int SetLifeTime(MTO_FLOAT lTime);
 
-		virtual MTO_FLOAT GetProcessorTimeLeft();
+		//virtual MTO_FLOAT GetProcessorTimeLeft();
 
-		virtual MTO_FLOAT GetLifeTime();
+		//virtual MTO_FLOAT GetLifeTime();
 
 	};
 

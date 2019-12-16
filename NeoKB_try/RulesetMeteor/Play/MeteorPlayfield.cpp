@@ -136,7 +136,14 @@ int MeteorPlayfield::OnJudgement(HitObject * hitObject, Judgement * judgement)
 	if (!judgement->GetIsHit())
 		return -1;
 
+
+
+	ExplodeEffect* effect = new ExplodeEffect(dynamic_cast<HasPitch*>(hitObject)->GetPitch(), 
+											  dynamic_cast<EffectMapperInterface*>(hitObject)->GetY(),
+											  GetClock()->GetCurrentTime(),
+											  explosionLifeTime);
 	ExplodeEffectMapper* explosion = new ExplodeEffectMapper(GetWidth(), GetHeight(), hitObject);
+	explosion->RegisterEvent(effect);
 	//explosion->SetLifeTime(explosionLifeTime); // 這個應該要設定在map algo裡面，不該擺在這邊
 	AddDynamic(explosion);
 

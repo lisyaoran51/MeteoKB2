@@ -6,7 +6,7 @@
 #include <vector>
 #include "../../../../Games/Scheduler/Event/Effect/Effect.h"
 #include "../../../../Instruments/Pitch.h"
-
+#include "../../../../Instruments/HasPitch.h"
 #include "../../../../Games/Ruleset/Judgements/HasHitWindow.h"
 
 
@@ -24,10 +24,8 @@ namespace Events {
 namespace Effects {
 	
 
-	class FallEffect: public Effect, public HasHitWindow
+	class FallEffect: public Effect, public HasHitWindow, public HasPitch
 	{
-
-		Pitch pitch = Pitch::None;
 
 	public:
 

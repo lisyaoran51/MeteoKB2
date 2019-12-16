@@ -10,7 +10,12 @@ using namespace std;
 using namespace Meteor::Rulesets::Judgements;
 
 
-FallEffectMapper::FallEffectMapper(int w, int h) : EffectMapper<FallEffect>(w, h)
+FallEffectMapper::FallEffectMapper(): HasPitch(Pitch::None)
+{
+	throw logic_error("FallEffectMapper() : This constructor is only for compile-time assurance. Not available to execute.");
+}
+
+FallEffectMapper::FallEffectMapper(int w, int h) : EffectMapper<FallEffect>(w, h), HasPitch(Pitch::None)
 {
 
 }

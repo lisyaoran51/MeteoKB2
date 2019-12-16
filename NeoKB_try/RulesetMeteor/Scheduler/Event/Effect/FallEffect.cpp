@@ -9,15 +9,14 @@ using namespace Meteor::Rulesets::Judgements;
 
 
 
-FallEffect::FallEffect(): Effect()
+FallEffect::FallEffect(): Effect(), HasPitch(Pitch::None)
 {
 	throw logic_error("FallEffect::FallEffect() : This constructor is only for compile-time assurance. Not available to execute.");
 }
 
-FallEffect::FallEffect(Pitch p, int yPos, MTO_FLOAT sTime, MTO_FLOAT l, MTO_FLOAT sp): Effect(int(p), yPos, sTime, l)
+FallEffect::FallEffect(Pitch p, int yPos, MTO_FLOAT sTime, MTO_FLOAT l, MTO_FLOAT sp): Effect(int(p), yPos, sTime, l), HasPitch(p)
 {
 	hitWindow = new MeteorHitWindow();
-	pitch = p;
 	SetSpeed(sp);
 }
 
