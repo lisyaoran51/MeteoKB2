@@ -186,6 +186,7 @@ Map * EventProcessorMaster::GetGraph()
 	for (int i = 0; i < dynamicEventProcessors.size(); i++) {
 		EffectMapperInterface* effectMapper = dynamic_cast<EffectMapperInterface*>(dynamicEventProcessors[i]);
 		if (effectMapper) {
+			LOG(LogLevel::Debug) << "EventProcessorMaster::GetGraph : draw dynamic effect [" << effectMapper << "].";
 			effectMapper->Draw(graph);
 		}
 	}
