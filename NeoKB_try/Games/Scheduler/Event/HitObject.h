@@ -28,7 +28,7 @@ namespace Events{
 
 		ActionList<int, HitObject*, Judgement*> onJudgement;
 
-		HitWindow* hitWindow;
+		HitWindow* hitWindow = nulptr;
 
 		ArmedState state = ArmedState::Idle;
 
@@ -37,6 +37,8 @@ namespace Events{
 		int setState(ArmedState s);
 
 	public:
+
+		HitObject(HitWindow* hWindow);
 
 		template<class _Type>
 		int AddOnJudgement(_Type* callableObject, function<int(HitObject*, Judgement*)> callback, string name = "HandleJudgement") {

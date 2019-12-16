@@ -15,6 +15,11 @@ int HitObject::setState(ArmedState s)
 	return 0;
 }
 
+HitObject::HitObject(HitWindow * hWindow)
+{
+	hitWindow = hWindow;
+}
+
 bool HitObject::GetHasJudgementResult()
 {
 	return hasJudgementResult;

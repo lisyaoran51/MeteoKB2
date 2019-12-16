@@ -6,8 +6,9 @@ using namespace Games::Schedulers::Events::ControlPoints;
 
 
 
-NoteControlPointHitObject::NoteControlPointHitObject(HitWindow * hWindow): HasPitch(Pitch::None)
+NoteControlPointHitObject::NoteControlPointHitObject(HitWindow * hWindow): HasPitch(Pitch::None), HitObject(hWindow)
 {
+	
 }
 
 string NoteControlPointHitObject::GetTypeName()
@@ -23,7 +24,7 @@ double NoteControlPointHitObject::TryJudgement()
 	double offset = GetStartTime() - GetCurrentTime();
 	double absOffset = fabs(offset);
 
-	LOG(LogLevel::Debug) << "NoteControlPointHitObject::TryJudgement() : offset: " << offset << ", hit window: " << getHitWindow();
+	LOG(LogLevel::Depricated) << "NoteControlPointHitObject::TryJudgement() : offset: " << offset << ", hit window: " << getHitWindow();
 
 	if (absOffset > getHitWindow()->GetHitWindow(HitResult::Bad)) {
 		if (offset > 0)
