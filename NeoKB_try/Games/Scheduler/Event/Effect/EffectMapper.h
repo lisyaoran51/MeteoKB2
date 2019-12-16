@@ -64,11 +64,17 @@ namespace Effects {
 		}
 
 		virtual int Draw() {
+			if (mapAlgo == nullptr) {
+				LOG(LogLevel::Error) << "EffectMapper::Draw() : no map algorithm.";
+			}
+
+
 			mapAlgo->Draw(lightMap, this);
 			return 0;
 		}
 
 		virtual int Draw(Map* m) {
+			if(mapAlgo)
 			mapAlgo->Draw(m, this);
 			return 0;
 		}
@@ -105,7 +111,7 @@ namespace Effects {
 
 		Map* lightMap;
 
-		MapAlgorithm<T>* mapAlgo;
+		MapAlgorithm<T>* mapAlgo = nullptr;
 
 		int width, height;
 

@@ -51,6 +51,11 @@ namespace Play {
 		/// </summary>
 		virtual int Add(EventProcessor<Event>* ep);
 
+		/// <summary>
+		/// add dynamic events to EventProcessorMaster
+		/// </summary>
+		virtual int AddDynamic(EventProcessor<Event>* ep);
+
 		int GetWidth();
 
 		int GetHeight();

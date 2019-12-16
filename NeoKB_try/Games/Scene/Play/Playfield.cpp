@@ -140,12 +140,42 @@ int Playfield::Add(EventProcessor<Event> * ep)
 		}
 
 		// 這邊要把map加進去
-		EffectMapperInterface* em = ep->Cast<EffectMapperInterface>();
+		//EffectMapperInterface* em = ep->Cast<EffectMapperInterface>();
 		//em->RegisterMap(lightMap); //改用draw(map, effect)，所以不用內存一個map
 	}
 
 	return 0;
 }
+
+int Playfield::AddDynamic(EventProcessor<Event>* ep) {
+
+	eventProcessorMaster->AddDynamicEventProcessor(ep);
+
+	// 這邊要把Map Algo加進去
+	if (ep->CanCast<EffectMapperInterface>()) {
+
+		// 為什麼不用event自己來create? 因為要去搭配不同的mapper，所以要動態調配
+		string processorType = ep->GetEventTypeName();
+		map<string, MapAlgorithmInterface*>::iterator iter = mapAlgorithms.find(processorType);
+
+		if (iter != mapAlgorithms.end())
+		{
+			MapAlgorithmInterface* mapAlgo = mapAlgorithms[processorType];
+			ep->Cast<EffectMapperInterface>()->RegisterMapAlgorithm(mapAlgo);
+
+			LOG(LogLevel::Finer) << "Playfield::AddDynamic() : Register [" << mapAlgorithms[processorType]->GetTypeName() << "] to mapper [" << processorType << "] on [" << ep->GetStartTime() << "].";
+		}
+		else
+			throw runtime_error("Playfield::AddDynamic() : effect map algo not found");
+
+		// 這邊要把map加進去
+		//EffectMapperInterface* em = ep->Cast<EffectMapperInterface>();
+		//em->RegisterMap(lightMap); //改用draw(map, effect)，所以不用內存一個map
+	}
+
+	return 0;
+}
+
 
 int Playfield::GetWidth()
 {

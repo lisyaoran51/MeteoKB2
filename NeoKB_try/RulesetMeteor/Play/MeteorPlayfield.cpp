@@ -137,12 +137,11 @@ int MeteorPlayfield::OnJudgement(HitObject * hitObject, Judgement * judgement)
 		return -1;
 
 	ExplodeEffectMapper* explosion = new ExplodeEffectMapper(GetWidth(), GetHeight(), hitObject);
-	explosion->SetLifeTime(explosionLifeTime);
+	//explosion->SetLifeTime(explosionLifeTime); // 這個應該要設定在map algo裡面，不該擺在這邊
+	AddDynamic(explosion);
+
 
 	LOG(LogLevel::Debug) << "MeteorPlayfield::OnJudgement() : create explosion.";
-
-	// add explostion
-	eventProcessorMaster->AddDynamicEventProcessor(explosion);
 
 	// 傳送分數?
 	return 0;
