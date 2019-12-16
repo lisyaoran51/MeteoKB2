@@ -142,7 +142,7 @@ int MeteorPlayfield::OnJudgement(HitObject * hitObject, Judgement * judgement)
 	LOG(LogLevel::Debug) << "MeteorPlayfield::OnJudgement() : create explosion.";
 
 	// add explostion
-	eventProcessorMaster->AddDynamicEventProcessor(explosion);
+	//eventProcessorMaster->AddDynamicEventProcessor(explosion);
 
 	// ¶Ç°e¤À¼Æ?
 	return 0;

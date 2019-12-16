@@ -229,7 +229,7 @@ int EventProcessorMaster::update()
 		}
 		
 		if (thisOneNeedDelete) {
-			LOG(LogLevel::Depricated) << "EventProcessorMaster::update : step 2 erase.";
+			LOG(LogLevel::Debug) << "EventProcessorMaster::update : step 2 erase.";
 			if (!isDeleting) {
 				/* 每次要用dynamic processors時，就要鎖起來 (用mutex就好，可以刪掉)*/
 				isDeleting = true;

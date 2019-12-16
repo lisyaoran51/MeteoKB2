@@ -13,7 +13,6 @@ BassSampleChannel::BassSampleChannel(Sample * s): SampleChannel(s)
 int BassSampleChannel::Play()
 {
 
-	return 0;
 	LOG(LogLevel::Debug) << "BassSampleChannel::Play() : add play action.";
 
 	unique_lock<mutex> uLock(pendingActionMutex);
