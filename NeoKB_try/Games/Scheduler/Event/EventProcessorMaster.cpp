@@ -245,7 +245,7 @@ int EventProcessorMaster::update()
 			// TODO: 這邊會有thread safe的問題，要lock
 			Event* e = ep->GetEvent();
 			delete ep;
-			if(e)
+			if(e != nullptr)
 				delete e;
 		}
 	}
