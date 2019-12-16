@@ -7,19 +7,19 @@ using namespace Meteor::Rulesets::Judgements;
 
 HitResult MeteorHitWindow::GetResultFor(double hitOffset)
 {
-	if (hitOffset < 0.04)
+	if (hitOffset < 0.08)
 		return HitResult::Perfect;
 
-	if (hitOffset < 0.1)
+	if (hitOffset < 0.2)
 		return HitResult::Great;
 
-	if (hitOffset < 0.15)
+	if (hitOffset < 0.3)
 		return HitResult::Good;
 
-	if (hitOffset < 0.22)
+	if (hitOffset < 0.44)
 		return HitResult::Ok;
 
-	if (hitOffset < 0.27)
+	if (hitOffset < 0.54)
 		return HitResult::Meh;
 
 	return HitResult::Miss;;
@@ -31,17 +31,17 @@ double MeteorHitWindow::GetHitWindow(HitResult hResult)
 	case HitResult::None:
 		return 100;
 	case HitResult::Miss:
-		return 0.35;
+		return 0.7;
 	case HitResult::Meh:
-		return 0.27;
+		return 0.54;
 	case HitResult::Ok:
-		return 0.22;
+		return 0.44;
 	case HitResult::Good:
-		return 0.15;
+		return 0.3;
 	case HitResult::Great:
-		return 0.1;
+		return 0.2;
 	case HitResult::Perfect:
-		return 0.04;
+		return 0.08;
 
 	}
 	return 100;
