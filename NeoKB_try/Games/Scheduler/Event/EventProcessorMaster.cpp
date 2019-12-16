@@ -206,7 +206,7 @@ int EventProcessorMaster::update()
 
 	bool isDeleting = false;
 	if(dynamicEventProcessors.size() > 0)
-		LOG(LogLevel::Debug) << "EventProcessorMaster::update : [" << dynamicEventProcessors.size() << "] dynamic processors.";
+		LOG(LogLevel::Depricated) << "EventProcessorMaster::update : [" << dynamicEventProcessors.size() << "] dynamic processors.";
 
 	/* 是件結束了就刪掉 */
 	vector<EventProcessor<Event>*>::iterator iter;
@@ -214,9 +214,9 @@ int EventProcessorMaster::update()
 
 		bool thisOneNeedDelete = false;
 
-		LOG(LogLevel::Debug) << "EventProcessorMaster::update : step 1 get timed";
+		LOG(LogLevel::Depricated) << "EventProcessorMaster::update : step 1 get timed";
 
-		LOG(LogLevel::Debug) << "EventProcessorMaster::update : step 1 no problem " << int((*iter)->GetProcessorLifeType()) << ", " << (*iter)->GetProcessorTimeLeft() << ", " << (*iter)->GetIsProcessed();
+		LOG(LogLevel::Depricated) << "EventProcessorMaster::update : step 1 no problem " << int((*iter)->GetProcessorLifeType()) << ", " << (*iter)->GetProcessorTimeLeft() << ", " << (*iter)->GetIsProcessed();
 		if ((*iter)->GetProcessorLifeType() == EventProcessorLifeType::Timed &&
 			(*iter)->GetProcessorTimeLeft() <= 0) {
 
@@ -229,7 +229,7 @@ int EventProcessorMaster::update()
 		}
 		
 		if (thisOneNeedDelete) {
-			LOG(LogLevel::Debug) << "EventProcessorMaster::update : step 2 erase.";
+			LOG(LogLevel::Depricated) << "EventProcessorMaster::update : step 2 erase.";
 			if (!isDeleting) {
 				/* 每次要用dynamic processors時，就要鎖起來 (用mutex就好，可以刪掉)*/
 				isDeleting = true;
@@ -240,7 +240,7 @@ int EventProcessorMaster::update()
 			dynamicEventProcessors.erase(iter);
 			iter--;
 
-			LOG(LogLevel::Debug) << "EventProcessorMaster::update : step 3 delete.";
+			LOG(LogLevel::Depricated) << "EventProcessorMaster::update : step 3 delete.";
 			// TODO: 這邊會有thread safe的問題，要lock
 			Event* e = ep->GetEvent();
 			delete ep;
@@ -249,7 +249,7 @@ int EventProcessorMaster::update()
 		}
 	}
 
-	LOG(LogLevel::Debug) << "EventProcessorMaster::update : end.";
+	LOG(LogLevel::Depricated) << "EventProcessorMaster::update : end.";
 	// TODO: 自動清除dynamic event，當調整時間或速度時，也把dynamic event清掉
 	return 0;
 }
