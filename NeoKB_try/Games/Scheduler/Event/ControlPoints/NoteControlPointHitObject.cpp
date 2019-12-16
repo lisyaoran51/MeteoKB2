@@ -23,6 +23,8 @@ double NoteControlPointHitObject::TryJudgement()
 	double offset = GetStartTime() - GetCurrentTime();
 	double absOffset = fabs(offset);
 
+	LOG(LogLevel::Debug) << "NoteControlPointHitObject::TryJudgement() : offset: " << offset << ", hit window: " << getHitWindow();
+
 	if (absOffset > getHitWindow()->GetHitWindow(HitResult::Bad)) {
 		if (offset > 0)
 			return -1; // 代表還沒到
