@@ -216,7 +216,7 @@ int EventProcessorMaster::update()
 
 		LOG(LogLevel::Debug) << "EventProcessorMaster::update : step 1 get timed";
 
-		LOG(LogLevel::Debug) << "EventProcessorMaster::update : step 1 no problem" << int((*iter)->GetProcessorLifeType()) << ", " << (*iter)->GetProcessorTimeLeft() << ", " << (*iter)->GetIsProcessed();
+		LOG(LogLevel::Debug) << "EventProcessorMaster::update : step 1 no problem " << int((*iter)->GetProcessorLifeType()) << ", " << (*iter)->GetProcessorTimeLeft() << ", " << (*iter)->GetIsProcessed();
 		if ((*iter)->GetProcessorLifeType() == EventProcessorLifeType::Timed &&
 			(*iter)->GetProcessorTimeLeft() <= 0) {
 
@@ -249,7 +249,7 @@ int EventProcessorMaster::update()
 		}
 	}
 
-
+	LOG(LogLevel::Debug) << "EventProcessorMaster::update : end.";
 	// TODO: 自動清除dynamic event，當調整時間或速度時，也把dynamic event清掉
 	return 0;
 }
