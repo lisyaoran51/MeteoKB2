@@ -28,6 +28,8 @@ double FallEffectMapper::TryJudgement()
 
 	FallEffect* fallEffect = dynamic_cast<FallEffect*>(GetEvent());
 
+	LOG(LogLevel::Debug) << "FallEffectMapper::TryJudgement() : offset = " << offset;
+
 	if (absOffset > fallEffect->GetHitWindow(HitResult::Miss)) {
 		if (offset > 0)
 			return -1; // 代表還沒到
