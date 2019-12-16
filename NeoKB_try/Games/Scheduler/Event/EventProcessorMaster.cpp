@@ -85,11 +85,13 @@ int EventProcessorMaster::AddStaticEventProcessor(EventProcessor<Event>* sEventP
 
 int EventProcessorMaster::AddDynamicEventProcessor(EventProcessor<Event>* dEventProcessor)
 {
+	LOG(LogLevel::Debug) << "EventProcessorMaster::AddDynamicEventProcessor : add explosion [" << dEventProcessor << "].";
 	dEventProcessor->Attach(this);
 
 	/* 每次要用dynamic processors時，就要鎖起來 */
 	lock_guard<mutex> guard(processorsMutex);
 
+	LOG(LogLevel::Debug) << "EventProcessorMaster::AddDynamicEventProcessor : push back explosion [" << dEventProcessor << "].";
 	dynamicEventProcessors.push_back(dEventProcessor);
 	return 0;
 }
