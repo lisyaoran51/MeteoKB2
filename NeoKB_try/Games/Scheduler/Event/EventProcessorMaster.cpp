@@ -178,6 +178,7 @@ Map * EventProcessorMaster::GetGraph()
 		return 0;
 	}(graph->GetWidth(), graph->GetHeight(), graph);
 
+	return graph;
 
 	/* 每次要用dynamic processors時，就要鎖起來 */
 	lock_guard<mutex> guard(processorsMutex);
@@ -203,7 +204,6 @@ int EventProcessorMaster::update()
 
 	processEvent(GetClock()->GetElapsedFrameTime()); // 這個是舊的程式，以後可能用不到了
 
-	return 0;
 
 	bool isDeleting = false;
 	if(dynamicEventProcessors.size() > 0)
