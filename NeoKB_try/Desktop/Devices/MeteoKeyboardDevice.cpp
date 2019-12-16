@@ -19,7 +19,7 @@ int MeteoKeyboardDevice::readFromDevice()
 	_debugCount++;
 #endif
 
-	if (_debugCount % 100 == 99) {
+	if (_debugCount % 100 == 89) {
 
 		InputState* newState = new InputState();
 		newState->SetKeyboardState(new KeyboardState());
@@ -27,6 +27,19 @@ int MeteoKeyboardDevice::readFromDevice()
 		newState->GetKeyboardState()->AddPress(make_pair(InputKey::VK24_L_G1, 100));
 		newState->GetKeyboardState()->AddPress(make_pair(InputKey::VK24_L_E1, 100));
 		newState->GetKeyboardState()->AddPress(make_pair(InputKey::VK24_L_C1, 100));
+		inputStates.push_back(newState);
+
+		LOG(LogLevel::Debug) << "MeteoKeyboardDevice::readFromDevice() : Create fake kb input.";
+	}
+
+	if (_debugCount % 100 == 99) {
+
+		InputState* newState = new InputState();
+		newState->SetKeyboardState(new KeyboardState());
+
+		newState->GetKeyboardState()->AddUp(InputKey::VK24_L_G1);
+		newState->GetKeyboardState()->AddUp(InputKey::VK24_L_E1);
+		newState->GetKeyboardState()->AddUp(InputKey::VK24_L_C1);
 		inputStates.push_back(newState);
 
 		LOG(LogLevel::Debug) << "MeteoKeyboardDevice::readFromDevice() : Create fake kb input.";
