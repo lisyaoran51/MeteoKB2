@@ -29,7 +29,8 @@ int ExplodeMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper<Explode
 
 	//LOG(LogLevel::Debug) << "ExplodeMapGenerateAlgorithm::ImplementGenerate() : GetProcessorTimeLeft " << em->GetProcessorTimeLeft() << ", GetLifeTime " << em->GetLifeTime();
 
-	if (em->GetProcessorTimeLeft() > 0 && em->GetProcessorTimeLeft() < em->GetLifeTime()) {
+	if (em->GetTimeLeft() > 0 && em->GetTimeLeft() < em->GetLifeTime()) {
+		LOG(LogLevel::Debug) << "ExplodeMapGenerateAlgorithm::ImplementGenerate() : draw explosion.";
 		isAdded = true;
 		for (int i = 0; i < height; i++) {
 
