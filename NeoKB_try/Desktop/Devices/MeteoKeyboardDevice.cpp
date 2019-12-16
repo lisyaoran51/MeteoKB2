@@ -19,12 +19,13 @@ int MeteoKeyboardDevice::readFromDevice()
 	_debugCount++;
 #endif
 
-	if (_debugCount % 200 == 199) {
+	if (_debugCount % 100 == 99) {
 
 		InputState* newState = new InputState();
 		newState->SetKeyboardState(new KeyboardState());
 
 		newState->GetKeyboardState()->AddPress(make_pair(InputKey::VK24_L_E1, 100));
+		newState->GetKeyboardState()->AddPress(make_pair(InputKey::VK24_L_C1, 100));
 		inputStates.push_back(newState);
 
 		LOG(LogLevel::Debug) << "MeteoKeyboardDevice::readFromDevice() : Create fake kb input.";
