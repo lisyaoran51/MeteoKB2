@@ -13,6 +13,10 @@ ExplodeEffectMapper::ExplodeEffectMapper(int w, int h, HitObject* hObject) : Eff
 	lifeType = EventProcessorLifeType::Timed;
 }
 
+string ExplodeEffectMapper::GetEventTypeName() {
+	return "ExplodeEffect";
+}
+
 MTO_FLOAT ExplodeEffectMapper::GetStartTime()
 {
 	return explodeStartTime;

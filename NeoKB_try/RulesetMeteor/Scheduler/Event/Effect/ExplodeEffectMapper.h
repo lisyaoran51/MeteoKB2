@@ -35,6 +35,8 @@ namespace Effects {
 
 		ExplodeEffectMapper(int w, int h, HitObject* hObject);
 
+		virtual string GetEventTypeName();
+
 		virtual MTO_FLOAT GetStartTime();
 
 		virtual double GetCurrentTime();
