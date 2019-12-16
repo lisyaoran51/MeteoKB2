@@ -98,9 +98,9 @@ namespace Events {
 			if (event->GetLifeType() == EventLifeType::Infinite)
 				return MTO_INFINITE;
 			else if (event->GetLifeType() == EventLifeType::Timed)
-				return event->GetLifeTime() - (event->GetStartTime() - clock->GetCurrentTime());
+				return event->GetLifeTime() - (clock->GetCurrentTime() - event->GetStartTime());
 			else
-				return event->GetLifeTime() - (event->GetStartTime() - clock->GetCurrentTime());
+				return event->GetLifeTime() - (clock->GetCurrentTime() - event->GetStartTime());
 
 		}
 
@@ -121,9 +121,9 @@ namespace Events {
 			if (lifeType == EventProcessorLifeType::Infinite)
 				return MTO_INFINITE;
 			else if (lifeType == EventProcessorLifeType::Timed)
-				return event->GetLifeTime() - clock->GetCurrentTime() + 5.0;
+				return event->GetLifeTime() + event->GetStartTime() - clock->GetCurrentTime();
 			else
-				return event->GetLifeTime() - clock->GetCurrentTime() + 5.0;
+				return event->GetLifeTime() + event->GetStartTime() - clock->GetCurrentTime() + 5.0; //?? 這個要怎麼寫
 
 		}
 
