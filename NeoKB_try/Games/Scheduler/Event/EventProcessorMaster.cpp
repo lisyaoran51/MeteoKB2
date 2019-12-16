@@ -178,7 +178,6 @@ Map * EventProcessorMaster::GetGraph()
 		return 0;
 	}(graph->GetWidth(), graph->GetHeight(), graph);
 
-	return graph;
 
 	/* 每次要用dynamic processors時，就要鎖起來 */
 	lock_guard<mutex> guard(processorsMutex);
@@ -214,6 +213,7 @@ int EventProcessorMaster::update()
 
 		bool thisOneNeedDelete = false;
 
+		LOG(LogLevel::Debug) << "EventProcessorMaster::update : step 1 get timed";
 		if ((*iter)->GetProcessorLifeType() == EventProcessorLifeType::Timed &&
 			(*iter)->GetProcessorTimeLeft() <= 0) {
 
@@ -224,8 +224,9 @@ int EventProcessorMaster::update()
 
 			thisOneNeedDelete = true;
 		}
-
+		
 		if (thisOneNeedDelete) {
+			LOG(LogLevel::Debug) << "EventProcessorMaster::update : step 2 erase.";
 			if (!isDeleting) {
 				/* 每次要用dynamic processors時，就要鎖起來 (用mutex就好，可以刪掉)*/
 				isDeleting = true;
@@ -236,6 +237,7 @@ int EventProcessorMaster::update()
 			dynamicEventProcessors.erase(iter);
 			iter--;
 
+			LOG(LogLevel::Debug) << "EventProcessorMaster::update : step 3 delete.";
 			// TODO: 這邊會有thread safe的問題，要lock
 			Event* e = ep->GetEvent();
 			delete ep;
