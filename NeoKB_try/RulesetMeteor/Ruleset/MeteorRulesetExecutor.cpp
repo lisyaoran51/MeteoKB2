@@ -16,7 +16,7 @@
 #include "../Timing/MeteorTimeController.h"
 #include "../../Framework/Timing/SpeedAdjusters/LinearSpeedAdjuster.h"
 #include "Scoring/MeteorScoreProcessor.h"
-#include "../../Games/Scheduler/Event/ControlPoints/NoteControlPointHitObject.h"
+#include "../Scheduler/Event/ControlPoints/MeteorNoteControlPointHitObject.h"
 
 
 
@@ -33,7 +33,7 @@ using namespace Meteor::Input;
 using namespace Meteor::Timing;
 using namespace Framework::Timing::SpeedAdjusters;
 using namespace Meteor::Rulesets::Scoring;
-using namespace Games::Schedulers::Events::ControlPoints;
+using namespace Meteor::Schedulers::Events::ControlPoints;
 
 
 
@@ -149,7 +149,7 @@ EventProcessor<Event>* MeteorRulesetExecutor::getEventProcessor(Event * e)
 		return (new SystemEventHandler<StopSystemEvent>())->RegisterEvent(e);
 	}
 	else if (processorType == "NoteControlPoint") {
-		return (new NoteControlPointHitObject())->RegisterEvent(e);
+		return (new MeteorNoteControlPointHitObject())->RegisterEvent(e);
 	}
 
 	throw runtime_error("MeteorRulesetExecutor::getEventProcessor(Event*) : No matched processor type.");
