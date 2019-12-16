@@ -91,7 +91,6 @@ int EventProcessorMaster::AddDynamicEventProcessor(EventProcessor<Event>* dEvent
 	/* 每次要用dynamic processors時，就要鎖起來 */
 	lock_guard<mutex> guard(processorsMutex);
 
-	LOG(LogLevel::Debug) << "EventProcessorMaster::AddDynamicEventProcessor : push back explosion [" << dEventProcessor << "].";
 	dynamicEventProcessors.push_back(dEventProcessor);
 	return 0;
 }
@@ -178,6 +177,8 @@ Map * EventProcessorMaster::GetGraph()
 		}
 		return 0;
 	}(graph->GetWidth(), graph->GetHeight(), graph);
+
+	return graph;
 
 	/* 每次要用dynamic processors時，就要鎖起來 */
 	lock_guard<mutex> guard(processorsMutex);

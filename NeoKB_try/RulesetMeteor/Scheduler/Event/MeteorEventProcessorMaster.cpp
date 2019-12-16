@@ -17,7 +17,6 @@ MeteorEventProcessorMaster::MeteorEventProcessorMaster() : RegisterType("MeteorE
 
 int MeteorEventProcessorMaster::OnKeyDown(pair<MeteorAction, int> action)
 {
-	LOG(LogLevel::Debug) << "MeteorEventProcessorMaster::OnKeyDown() : key [" << int(action.first) << "] pressed.";
 	double currentTime = GetClock()->GetCurrentTime();
 
 	vector<EventProcessor<Event>*> eventProcessors;
