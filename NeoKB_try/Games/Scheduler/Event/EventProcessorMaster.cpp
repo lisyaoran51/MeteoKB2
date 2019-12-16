@@ -203,7 +203,6 @@ int EventProcessorMaster::update()
 
 	processEvent(GetClock()->GetElapsedFrameTime()); // 這個是舊的程式，以後可能用不到了
 
-	return 0;
 
 	bool isDeleting = false;
 
