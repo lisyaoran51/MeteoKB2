@@ -261,42 +261,8 @@ int EventProcessorMaster::update()
 
 int EventProcessorMaster::onKeyDown(InputState * inputState, Key key)
 {
-	/* 移到Meteor Event Processor Master裡面了
+	/* 移到Meteor Event Processor Master裡面了 */
 
-	double currentTime = GetClock()->GetCurrentTime();
-
-	vector<EventProcessor<Event>*> eventProcessors;
-
-	eventProcessorPeriods->GetItemsContainPeriods(make_pair<float, float>(currentTime - visibleTimeRange, currentTime + visibleTimeRange), &eventProcessors);
-
-	HitObject* receivedHitObject = nullptr;
-
-	for (int i = 0; i < eventProcessors.size(); i++) {
-		
-		HitObject* hObject = dynamic_cast<HitObject*>(eventProcessors[i]);
-
-		if (hObject == nullptr)
-			continue;
-
-		if (hObject->GetHasJudgementResult())
-			continue;
-
-		if ();
-
-		if (hObject->TryJudgement() > 0) {
-			if (receivedHitObject != nullptr) {
-
-				// 最晚的最先被打中，早的hit object就直接跳過
-				if (hObject->TryJudgement() > receivedHitObject->TryJudgement())
-					continue;
-			}
-			receivedHitObject = hObject;
-		}
-	}
-
-	if (receivedHitObject)
-		receivedHitObject->UpdateJudgement(true);
-	*/
 	return 0;
 }
 
