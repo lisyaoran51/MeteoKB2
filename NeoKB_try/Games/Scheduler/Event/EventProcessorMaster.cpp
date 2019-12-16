@@ -254,8 +254,10 @@ int EventProcessorMaster::update()
 		}
 	}
 
-	if(isDeleting)
+	if (isDeleting) {
 		LOG(LogLevel::Debug) << "EventProcessorMaster::update : end.";
+		abort();
+	}
 	// TODO: 自動清除dynamic event，當調整時間或速度時，也把dynamic event清掉
 	return 0;
 }
