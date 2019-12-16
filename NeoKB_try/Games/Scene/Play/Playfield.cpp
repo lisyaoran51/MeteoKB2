@@ -149,8 +149,6 @@ int Playfield::Add(EventProcessor<Event> * ep)
 
 int Playfield::AddDynamic(EventProcessor<Event>* ep) {
 
-	eventProcessorMaster->AddDynamicEventProcessor(ep);
-
 	// 這邊要把Map Algo加進去
 	if (ep->CanCast<EffectMapperInterface>()) {
 
@@ -172,6 +170,8 @@ int Playfield::AddDynamic(EventProcessor<Event>* ep) {
 		//EffectMapperInterface* em = ep->Cast<EffectMapperInterface>();
 		//em->RegisterMap(lightMap); //改用draw(map, effect)，所以不用內存一個map
 	}
+
+	eventProcessorMaster->AddDynamicEventProcessor(ep);
 
 	return 0;
 }
