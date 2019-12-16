@@ -85,7 +85,7 @@ int EventProcessorMaster::AddStaticEventProcessor(EventProcessor<Event>* sEventP
 
 int EventProcessorMaster::AddDynamicEventProcessor(EventProcessor<Event>* dEventProcessor)
 {
-	LOG(LogLevel::Debug) << "EventProcessorMaster::AddDynamicEventProcessor : add explosion [" << dEventProcessor << "].";
+	LOG(LogLevel::Debug) << "EventProcessorMaster::AddDynamicEventProcessor : add explosion [" << dEventProcessor << "], dynamic size = [" << dynamicEventProcessors.size() << "].";
 	dEventProcessor->Attach(this);
 
 	/* 每次要用dynamic processors時，就要鎖起來 */
