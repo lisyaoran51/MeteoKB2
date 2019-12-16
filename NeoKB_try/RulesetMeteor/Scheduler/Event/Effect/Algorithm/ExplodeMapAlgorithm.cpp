@@ -18,13 +18,15 @@ ExplodeMapAlgorithm::ExplodeMapAlgorithm(): RegisterType("ExplodeMapAlgorithm"),
 
 int ExplodeMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper<ExplodeEffect>* em)
 {
-	LOG(LogLevel::Debug) << "ExplodeMapGenerateAlgorithm::ImplementGenerate() : generate map";
+	
 	//LOG(LogLevel::Finest) << "ExplodeMapGenerateAlgorithm::ImplementGenerate() : Generate Effect [" << em->GetStartTime() << "] on [" << em->GetCurrentTime() << "].";
 
 	int width = em->GetWidth();
 	int height = em->GetHeight();
-
+	LOG(LogLevel::Debug) << "ExplodeMapGenerateAlgorithm::ImplementGenerate() : generate map";
 	bool isAdded = false;
+
+	LOG(LogLevel::Debug) << "ExplodeMapGenerateAlgorithm::ImplementGenerate() : GetProcessorTimeLeft " << em->GetProcessorTimeLeft() << ", GetLifeTime " << em->GetLifeTime();
 
 	if (em->GetProcessorTimeLeft() > 0 && em->GetProcessorTimeLeft() < em->GetLifeTime()) {
 		isAdded = true;
