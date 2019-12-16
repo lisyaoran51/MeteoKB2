@@ -41,6 +41,7 @@ namespace Events {
 
 	public:
 
+		virtual ~EventProcessor() {}
 		
 		/// <summary>
 		/// register the Event to be processed.
@@ -49,6 +50,7 @@ namespace Events {
 			event = e;
 			return this;
 		}
+
 
 		/// <summary>
 		/// 將這個processor加入master，並且拿到master的clock
