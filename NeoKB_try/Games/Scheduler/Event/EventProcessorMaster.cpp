@@ -85,13 +85,14 @@ int EventProcessorMaster::AddStaticEventProcessor(EventProcessor<Event>* sEventP
 
 int EventProcessorMaster::AddDynamicEventProcessor(EventProcessor<Event>* dEventProcessor)
 {
-	LOG(LogLevel::Debug) << "EventProcessorMaster::AddDynamicEventProcessor : add explosion [" << dEventProcessor << "], dynamic size = [" << dynamicEventProcessors.size() << "].";
+	
 	dEventProcessor->Attach(this);
 
 	/* 每次要用dynamic processors時，就要鎖起來 */
 	lock_guard<mutex> guard(processorsMutex);
 
 	dynamicEventProcessors.push_back(dEventProcessor);
+	LOG(LogLevel::Debug) << "EventProcessorMaster::AddDynamicEventProcessor : add explosion [" << dEventProcessor << "], dynamic size = [" << dynamicEventProcessors.size() << "].";
 	return 0;
 }
 
@@ -207,6 +208,7 @@ int EventProcessorMaster::update()
 
 	processEvent(GetClock()->GetElapsedFrameTime()); // 這個是舊的程式，以後可能用不到了
 
+	return 0;
 
 	bool isDeleting = false;
 	if(dynamicEventProcessors.size() > 0)

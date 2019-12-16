@@ -149,6 +149,7 @@ int Playfield::Add(EventProcessor<Event> * ep)
 
 int Playfield::AddDynamic(EventProcessor<Event>* ep) {
 
+
 	// 這邊要把Map Algo加進去
 	if (ep->CanCast<EffectMapperInterface>()) {
 
