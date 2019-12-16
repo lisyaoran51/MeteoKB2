@@ -490,6 +490,12 @@
     <Filter Include="標頭檔\RulesetMeteor\Ruleset\Scoring">
       <UniqueIdentifier>{fe923cae-de06-4fde-a247-5e0adaf84a7c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="標頭檔\RulesetMeteor\Schedulers\Events\ControlPoints">
+      <UniqueIdentifier>{0bfd6bfa-e648-43c7-9c66-575bc5764ef1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetMeteor\Schedulers\Events\ControlPoints">
+      <UniqueIdentifier>{2c236cef-9825-4a64-9dde-247e597e4d2c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Games\Graphic\Renderer\renderer.cpp">
@@ -1004,6 +1010,12 @@
     </ClCompile>
     <ClCompile Include="Instruments\HasPitch.cpp">
       <Filter>來源檔案\Instruments</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\Scheduler\Event\ControlPoints\NoteControlPointHitObject.cpp">
+      <Filter>來源檔案\Games\Schedulers\Events\ControlPoints</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\ControlPoints\MeteorNoteControlPointHitObject.cpp">
+      <Filter>來源檔案\RulesetMeteor\Schedulers\Events\ControlPoints</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1680,6 +1692,12 @@
     </ClInclude>
     <ClInclude Include="Instruments\HasPitch.h">
       <Filter>標頭檔\Instruments</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Scheduler\Event\ControlPoints\NoteControlPointHitObject.h">
+      <Filter>標頭檔\Games\Scheduler\Events\ControlPoints</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\ControlPoints\MeteorNoteControlPointHitObject.h">
+      <Filter>標頭檔\RulesetMeteor\Schedulers\Events\ControlPoints</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

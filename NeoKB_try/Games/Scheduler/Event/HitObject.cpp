@@ -28,6 +28,11 @@ bool HitObject::UpdateJudgement(bool isUserTriggered)
 	return false;
 }
 
+HitWindow * HitObject::getHitWindow()
+{
+	return hitWindow;
+}
+
 int HitObject::AddJudgement(Judgement* judgement)
 {
 	LOG(LogLevel::Debug) << "HitObject::AddJudgement() : add hit judgement.";

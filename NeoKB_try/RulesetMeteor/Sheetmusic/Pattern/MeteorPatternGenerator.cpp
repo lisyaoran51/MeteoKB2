@@ -80,9 +80,9 @@ Pattern* MeteorPatternGenerator::Generate(vector<Event*>* es, Event * e)
 	
 	/* 所有的event都要複製一個新的來用，才不會動到原本讀好的譜 */
 	/* 為什麼沒有delete?? 是不是之後要拿來當判斷點?? */
-	Event* eventClone = e->Clone();
-	NoteControlPoint* note = eventClone->Cast<NoteControlPoint>();
-	StartGameEvent* start = eventClone->Cast<StartGameEvent>();
+	//Event* eventClone = e->Clone();
+	NoteControlPoint* note = e->Cast<NoteControlPoint>(); //eventClone->Cast<NoteControlPoint>();
+	StartGameEvent* start = e->Cast<StartGameEvent>(); //eventClone->Cast<StartGameEvent>();
 
 	/* 鍵力音符的特效 */
 	if (note)
@@ -189,16 +189,17 @@ Pattern * MeteorPatternGenerator::generateNoteControlPoint(vector<Event*>* es, N
 		fallLifeTime,
 		fallSpeed);
 
-	note->SetLifeTime(noteLifeTime);
+
+	//note->SetLifeTime(noteLifeTime);
 
 	//pattern->Add(glow);
 	pattern->Add(fall);
-	//pattern->Add(note);
+	pattern->Add(noteControlPointHitObject);
 
 	// 把pattern裡面的event一個一個加進去es裡
 	//es->push_back(glow);
 	es->push_back(fall);
-	//es->push_back(note);
+	es->push_back(note);
 
 	return pattern;
 

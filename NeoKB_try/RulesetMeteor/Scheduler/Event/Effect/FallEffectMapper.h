@@ -19,7 +19,7 @@ namespace Schedulers {
 namespace Events {
 namespace Effects {
 
-	class FallEffectMapper : public EffectMapper<FallEffect>, public HitObject, public HasPitch {
+	class FallEffectMapper : public EffectMapper<FallEffect> {
 
 	public:
 
@@ -29,18 +29,6 @@ namespace Effects {
 		FallEffectMapper();
 
 		FallEffectMapper(int w, int h);
-
-		/// <summary>
-		/// 看是不是最後一個範圍內的hit object，只有最後一個hit object需要judgement
-		/// 越接近0越好，但是等於0就是超過
-		/// </summary>
-		virtual double TryJudgement();
-
-		virtual Pitch GetPitch();
-
-	protected:
-
-		virtual int CheckForJudgement(bool isUserTriggered, double timeOffset);
 
 	};
 

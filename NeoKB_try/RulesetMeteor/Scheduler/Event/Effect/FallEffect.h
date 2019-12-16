@@ -24,7 +24,7 @@ namespace Events {
 namespace Effects {
 	
 
-	class FallEffect: public Effect, public HasHitWindow, public HasPitch
+	class FallEffect: public Effect
 	{
 
 	public:
@@ -38,7 +38,7 @@ namespace Effects {
 		/// construct an immediate effect
 		///	</summary>
 		FallEffect(
-			Pitch p,
+			int xPos,
 			int yPos,
 			MTO_FLOAT sTime,
 			MTO_FLOAT l,
@@ -47,8 +47,6 @@ namespace Effects {
 
 		// 一定要每次都override!!
 		virtual string GetTypeName();
-
-		Pitch GetPitch();
 
 
 	protected:

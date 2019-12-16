@@ -23,6 +23,7 @@ namespace Events {
 	class EventProcessorMaster;
 
 	enum class EventProcessorLifeType {
+		None,
 		Timed,
 		Immediate,
 		Infinite
@@ -174,7 +175,7 @@ namespace Events {
 
 		T* event = nullptr;
 
-		EventProcessorLifeType lifeType;
+		EventProcessorLifeType lifeType = EventProcessorLifeType::None;
 
 		/// <summary>
 		/// 在EventProcessorLifeType :: immediate事件才會使用

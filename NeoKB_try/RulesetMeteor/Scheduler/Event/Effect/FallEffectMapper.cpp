@@ -10,16 +10,18 @@ using namespace std;
 using namespace Meteor::Rulesets::Judgements;
 
 
-FallEffectMapper::FallEffectMapper(): HasPitch(Pitch::None)
+FallEffectMapper::FallEffectMapper()
 {
 	throw logic_error("FallEffectMapper() : This constructor is only for compile-time assurance. Not available to execute.");
 }
 
-FallEffectMapper::FallEffectMapper(int w, int h) : EffectMapper<FallEffect>(w, h), HasPitch(Pitch::None)
+FallEffectMapper::FallEffectMapper(int w, int h) : EffectMapper<FallEffect>(w, h)
 {
 
 }
 
+
+/* 移到MeteorNoteControlPointHitObject了
 double FallEffectMapper::TryJudgement()
 {
 	// 正的代表還沒到底，負的代表已經超過，錯過了
@@ -71,3 +73,4 @@ int FallEffectMapper::CheckForJudgement(bool isUserTriggered, double timeOffset)
 
 	return 0;
 }
+*/

@@ -3,7 +3,7 @@
 using namespace Games::Schedulers::Events::ControlPoints;
 
 
-NoteControlPoint::NoteControlPoint(Pitch p, MTO_FLOAT s, MTO_FLOAT l): ControlPoint(s,l)
+NoteControlPoint::NoteControlPoint(Pitch p, MTO_FLOAT s, MTO_FLOAT l): ControlPoint(s,l), HasPitch(p)
 {
 	pitch = p;
 }
@@ -16,11 +16,6 @@ ControlPointType NoteControlPoint::GetControlPointType()
 string NoteControlPoint::GetTypeName()
 {
 	return "NoteControlPoint";
-}
-
-Pitch NoteControlPoint::GetPitch()
-{
-	return pitch;
 }
 
 MTO_FLOAT NoteControlPoint::GetVolume(){

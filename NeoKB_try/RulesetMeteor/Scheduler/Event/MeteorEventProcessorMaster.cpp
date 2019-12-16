@@ -2,11 +2,14 @@
 
 #include "Effect/FallEffectMapper.h"
 #include <utility>
+#include "../../../Games/Scheduler/Event/ControlPoints/NoteControlPointHitObject.h"
+
 
 
 using namespace Meteor::Schedulers::Events;
 using namespace Meteor::Schedulers::Events::Effects;
 using namespace std;
+using namespace Games::Schedulers::Events::ControlPoints;
 
 
 
@@ -24,6 +27,45 @@ int MeteorEventProcessorMaster::OnKeyDown(pair<MeteorAction, int> action)
 
 	eventProcessorPeriods->GetItemsContainPeriods(make_pair<float, float>(currentTime - visibleTimeRange, currentTime + visibleTimeRange), &eventProcessors);
 
+	NoteControlPointHitObject* receivedHitObject = nullptr;
+
+	for (int i = 0; i < eventProcessors.size(); i++) {
+
+		NoteControlPointHitObject* noteControlPointHitObject = dynamic_cast<NoteControlPointHitObject*>(eventProcessors[i]);
+
+		if (noteControlPointHitObject == nullptr)
+			continue;
+
+		if (!matchPitch(noteControlPointHitObject, action.first))
+			continue;
+
+		LOG(LogLevel::Depricated) << "MeteorEventProcessorMaster::OnKeyDown() : matched input! " << int(action.first);
+
+
+		if (noteControlPointHitObject->GetHasJudgementResult())
+			continue;
+
+		LOG(LogLevel::Depricated) << "MeteorEventProcessorMaster::OnKeyDown() : not judged! " << int(action.first);
+
+		if (noteControlPointHitObject->TryJudgement() > 0) {
+			if (receivedHitObject != nullptr) {
+
+				// 最晚的最先被打中，早的hit object就直接跳過
+				if (noteControlPointHitObject->TryJudgement() > receivedHitObject->TryJudgement())
+					continue;
+			}
+			receivedHitObject = noteControlPointHitObject;
+		}
+	}
+
+	if (receivedHitObject) {
+
+		LOG(LogLevel::Debug) << "MeteorEventProcessorMaster::OnKeyDown() : find a hit object [" << receivedHitObject << "].";
+		receivedHitObject->UpdateJudgement(true);
+
+	}
+
+	/*
 	HitObject* receivedHitObject = nullptr;
 
 	for (int i = 0; i < eventProcessors.size(); i++) {
@@ -61,7 +103,7 @@ int MeteorEventProcessorMaster::OnKeyDown(pair<MeteorAction, int> action)
 		receivedHitObject->UpdateJudgement(true);
 
 	}
-
+	*/
 	return 0;
 }
 
@@ -316,29 +358,29 @@ int MeteorEventProcessorMaster::loadAndMapPitches()
 
 bool MeteorEventProcessorMaster::matchPitch(HitObject * hObject, MeteorAction meteorAction)
 {
-	FallEffectMapper* effect = dynamic_cast<FallEffectMapper*>(hObject);
-	if (effect == nullptr)
+	HasPitch* hasPitch = dynamic_cast<HasPitch*>(hObject);
+	if (hasPitch == nullptr)
 		return false;
 
 	switch (pitchState) {
 
 	case MeteoPianoPitchState::None:
-		if (pitchBindings.find(effect->GetPitch()) != pitchBindings.end()) {
-			if (pitchBindings[effect->GetPitch()] == meteorAction)
+		if (pitchBindings.find(hasPitch->GetPitch()) != pitchBindings.end()) {
+			if (pitchBindings[hasPitch->GetPitch()] == meteorAction)
 				return true;
 		}
 		break;
 
 	case MeteoPianoPitchState::Lowered:
-		if (loweredPitchBindings.find(effect->GetPitch()) != loweredPitchBindings.end()) {
-			if (loweredPitchBindings[effect->GetPitch()] == meteorAction)
+		if (loweredPitchBindings.find(hasPitch->GetPitch()) != loweredPitchBindings.end()) {
+			if (loweredPitchBindings[hasPitch->GetPitch()] == meteorAction)
 				return true;
 		}
 		break;
 
 	case MeteoPianoPitchState::Raised:
-		if (raisedPitchBindings.find(effect->GetPitch()) != raisedPitchBindings.end()) {
-			if (raisedPitchBindings[effect->GetPitch()] == meteorAction)
+		if (raisedPitchBindings.find(hasPitch->GetPitch()) != raisedPitchBindings.end()) {
+			if (raisedPitchBindings[hasPitch->GetPitch()] == meteorAction)
 				return true;
 		}
 		break;

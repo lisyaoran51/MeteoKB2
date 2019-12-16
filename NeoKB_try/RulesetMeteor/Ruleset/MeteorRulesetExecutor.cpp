@@ -16,6 +16,7 @@
 #include "../Timing/MeteorTimeController.h"
 #include "../../Framework/Timing/SpeedAdjusters/LinearSpeedAdjuster.h"
 #include "Scoring/MeteorScoreProcessor.h"
+#include "../../Games/Scheduler/Event/ControlPoints/NoteControlPointHitObject.h"
 
 
 
@@ -32,6 +33,7 @@ using namespace Meteor::Input;
 using namespace Meteor::Timing;
 using namespace Framework::Timing::SpeedAdjusters;
 using namespace Meteor::Rulesets::Scoring;
+using namespace Games::Schedulers::Events::ControlPoints;
 
 
 
@@ -145,6 +147,9 @@ EventProcessor<Event>* MeteorRulesetExecutor::getEventProcessor(Event * e)
 	else if (processorType == "SystemEventHandler") {
 		// TODO: 在這邊把歌曲名稱擺進去
 		return (new SystemEventHandler<StopSystemEvent>())->RegisterEvent(e);
+	}
+	else if (processorType == "NoteControlPoint") {
+		return (new NoteControlPointHitObject())->RegisterEvent(e);
 	}
 
 	throw runtime_error("MeteorRulesetExecutor::getEventProcessor(Event*) : No matched processor type.");

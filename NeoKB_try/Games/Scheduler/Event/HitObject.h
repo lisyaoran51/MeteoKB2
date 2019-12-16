@@ -59,11 +59,14 @@ namespace Events{
 
 	protected:
 
+		HitWindow* getHitWindow();
 
 		virtual int CheckForJudgement(bool isUserTriggered, double offset) = 0;
 
 
 		int AddJudgement(Judgement* judgement);
+
+		virtual Judgement* createJudgement(HitResult hResult) = 0;
 
 	};
 

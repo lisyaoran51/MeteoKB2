@@ -3,8 +3,11 @@
 
 #include "ControlPoint.h"
 #include "../../../../Instruments/Pitch.h"
+#include "../../../../Instruments/HasPitch.h"
+
 
 using namespace Instruments;
+using namespace Games::Schedulers::Events;
 
 
 namespace Games {
@@ -14,9 +17,9 @@ namespace ControlPoints {
 
 	enum class HandType;
 
-	class NoteControlPoint : public ControlPoint {
+	class NoteControlPoint : public ControlPoint, public HasPitch {
 
-		Pitch pitch;
+		//Pitch pitch;
 		
 		MTO_FLOAT volume;
 		
@@ -34,7 +37,7 @@ namespace ControlPoints {
 		// 一定要每次都override!!
 		virtual string GetTypeName();
 
-		Pitch GetPitch();
+		//Pitch GetPitch();
 		
 		MTO_FLOAT GetVolume();
 		int SetVolume(MTO_FLOAT v);
