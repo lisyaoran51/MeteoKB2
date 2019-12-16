@@ -61,6 +61,10 @@ using namespace Meteor::Play;
 #include "../RulesetMeteor/Ruleset/MeteorRulesetExecutor.h"
 using namespace Meteor::Rulesets;
 
+// Meteor/Schedulers/Events/ControlPoints
+#include "../RulesetMeteor/Scheduler/Event/ControlPoints/MeteorNoteControlPointHitObject.h"
+using namespace Meteor::Schedulers::Events::ControlPoints;
+
 // Meteor/Schedulers/Events/Effects/Algorithms
 #include "../RulesetMeteor/Scheduler/Event/Effect/Algorithm/ExplodeMapAlgorithm.h"
 #include "../RulesetMeteor/Scheduler/Event/Effect/Algorithm/FallMapAlgorithm.h"

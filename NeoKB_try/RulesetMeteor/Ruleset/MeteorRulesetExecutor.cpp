@@ -64,6 +64,7 @@ MeteorRulesetExecutor::MeteorRulesetExecutor(): RegisterType("MeteorRulesetExecu
 	eventProcessorTable["GlowLineEffect"	] = "GlowLineEffectMapper";
 	eventProcessorTable["TargetLineEffect"	] = "TargetLineEffectMapper";
 	eventProcessorTable["StopSystemEvent"	] = "SystemEventHandler";
+	eventProcessorTable["NoteControlPoint"	] = "MeteorNoteControlPointHitObject";
 
 	// 註冊private load (c++才需要)
 	registerLoad(bind(static_cast<int(MeteorRulesetExecutor::*)(void)>(&MeteorRulesetExecutor::load), this));
@@ -148,7 +149,7 @@ EventProcessor<Event>* MeteorRulesetExecutor::getEventProcessor(Event * e)
 		// TODO: 在這邊把歌曲名稱擺進去
 		return (new SystemEventHandler<StopSystemEvent>())->RegisterEvent(e);
 	}
-	else if (processorType == "NoteControlPoint") {
+	else if (processorType == "MeteorNoteControlPointHitObject") {
 		return (new MeteorNoteControlPointHitObject())->RegisterEvent(e);
 	}
 
