@@ -183,7 +183,7 @@ Pattern * MeteorPatternGenerator::generateNoteControlPoint(vector<Event*>* es, N
 	LOG(LogLevel::Finer) << "int MeteorSmConverter::Generate(vector<Event*>*, Event*) : Generate Fall at [" << (int)pitch << "], start time [" << note->GetStartTime() - fallTime << "], life time [" << fallLifeTime << "].";
 
 	FallEffect* fall = new FallEffect(
-		pitch,
+		int(pitch),
 		0,
 		note->GetStartTime() - fallTime,
 		fallLifeTime,
@@ -194,12 +194,12 @@ Pattern * MeteorPatternGenerator::generateNoteControlPoint(vector<Event*>* es, N
 
 	//pattern->Add(glow);
 	pattern->Add(fall);
-	pattern->Add(noteControlPointHitObject);
+	//pattern->Add(note);
 
 	// 把pattern裡面的event一個一個加進去es裡
 	//es->push_back(glow);
 	es->push_back(fall);
-	es->push_back(note);
+	//es->push_back(note);
 
 	return pattern;
 
