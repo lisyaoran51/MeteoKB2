@@ -41,6 +41,9 @@ Pitch FallEffectMapper::GetPitch()
 
 int FallEffectMapper::CheckForJudgement(bool isUserTriggered, double timeOffset)
 {
+
+	LOG(LogLevel::Debug) << "FallEffectMapper::CheckForJudgement() : checking if judgement is hit.";
+
 	double offset = fabs(timeOffset);
 
 	FallEffect* fallEffect = dynamic_cast<FallEffect*>(GetEvent());
