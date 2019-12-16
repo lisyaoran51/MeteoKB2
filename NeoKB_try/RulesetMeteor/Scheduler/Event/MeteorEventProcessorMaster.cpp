@@ -17,6 +17,7 @@ MeteorEventProcessorMaster::MeteorEventProcessorMaster() : RegisterType("MeteorE
 
 int MeteorEventProcessorMaster::OnKeyDown(pair<MeteorAction, int> action)
 {
+	LOG(LogLevel::Depricated) << "MeteorEventProcessorMaster::OnKeyDown() : get input." << int(action.first);
 	double currentTime = GetClock()->GetCurrentTime();
 
 	vector<EventProcessor<Event>*> eventProcessors;

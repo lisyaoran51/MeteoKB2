@@ -263,7 +263,7 @@ int InputManager::updateInputQueue(InputState * inputState)
 
 int InputManager::updateKeyboardEvents(InputState * inputState)
 {
-	LOG(LogLevel::Debug) << "InputManager::updateKeyboardEvents() : updateing fake input.";
+	LOG(LogLevel::Depricated) << "InputManager::updateKeyboardEvents() : updateing fake input.";
 
 	KeyboardState* keyboardState= inputState->GetKeyboardState();
 	KeyboardState* lastKeyboardState = inputState->GetLastState() ? inputState->GetLastState()->GetKeyboardState() : nullptr;

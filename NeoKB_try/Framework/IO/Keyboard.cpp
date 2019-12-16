@@ -18,7 +18,7 @@ int Keyboard::SetDevice(Device * device)
 int Keyboard::TriggerOnInput()
 {
 	if (inputStates.size() > 0)
-		LOG(LogLevel::Debug) << "Keyboard::TriggerOnInput() : trigger on kb event.";
+		LOG(LogLevel::Depricated) << "Keyboard::TriggerOnInput() : trigger on kb event.";
 
 	for (int i = 0; i < inputStates.size(); i++) {
 		OnKeyEvent.Trigger(inputStates[i]);

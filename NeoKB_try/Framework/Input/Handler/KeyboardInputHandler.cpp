@@ -28,7 +28,7 @@ int KeyboardInputHandler::Initialize(GameHost * host)
 
 int KeyboardInputHandler::HandleState(InputState * inputState)
 {
-	LOG(LogLevel::Debug) << "KeyboardInputHandler::HandleState() : get new state.";
+	LOG(LogLevel::Depricated) << "KeyboardInputHandler::HandleState() : get new state.";
 	auto keyboardState = inputState->GetKeyboardState()->Clone();
 
 	InputState* pendingState = new InputState();
