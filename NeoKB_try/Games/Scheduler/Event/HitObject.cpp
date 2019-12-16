@@ -30,7 +30,7 @@ bool HitObject::UpdateJudgement(bool isUserTriggered)
 
 int HitObject::AddJudgement(Judgement* judgement)
 {
-	LOG(LogLevel::Depricated) << "HitObject::AddJudgement() : add hit judgement.";
+	LOG(LogLevel::Debug) << "HitObject::AddJudgement() : add hit judgement.";
 
 	hasJudgementResult = judgement->GetResult() >= HitResult::Miss;
 
