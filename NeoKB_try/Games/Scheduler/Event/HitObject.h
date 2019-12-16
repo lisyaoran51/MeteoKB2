@@ -28,7 +28,7 @@ namespace Events{
 
 		ActionList<int, HitObject*, Judgement*> onJudgement;
 
-		HitWindow* hitWindow = nulptr;
+		HitWindow* hitWindow = nullptr;
 
 		ArmedState state = ArmedState::Idle;
 
