@@ -43,7 +43,7 @@ int MeteorEventProcessorMaster::OnKeyDown(pair<MeteorAction, int> action)
 			continue;
 
 		LOG(LogLevel::Debug) << "MeteorEventProcessorMaster::OnKeyDown() : not judged! " << int(action.first);
-
+		/*
 		if (hObject->TryJudgement() > 0) {
 			if (receivedHitObject != nullptr) {
 
@@ -52,7 +52,7 @@ int MeteorEventProcessorMaster::OnKeyDown(pair<MeteorAction, int> action)
 					continue;
 			}
 			receivedHitObject = hObject;
-		}
+		}*/
 	}
 
 	if (receivedHitObject) {
