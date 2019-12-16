@@ -206,7 +206,7 @@ int EventProcessorMaster::update()
 
 	bool isDeleting = false;
 	if(dynamicEventProcessors.size() > 0)
-	LOG(LogLevel::Debug) << "EventProcessorMaster::update : [" << dynamicEventProcessors.size() << "] dynamic processors.";
+		LOG(LogLevel::Debug) << "EventProcessorMaster::update : [" << dynamicEventProcessors.size() << "] dynamic processors.";
 
 	/* 是件結束了就刪掉 */
 	vector<EventProcessor<Event>*>::iterator iter;
@@ -215,6 +215,8 @@ int EventProcessorMaster::update()
 		bool thisOneNeedDelete = false;
 
 		LOG(LogLevel::Debug) << "EventProcessorMaster::update : step 1 get timed";
+
+		LOG(LogLevel::Debug) << "EventProcessorMaster::update : step 1 no problem" << int((*iter)->GetProcessorLifeType()) << ", " << (*iter)->GetProcessorTimeLeft() << ", " << (*iter)->GetIsProcessed();
 		if ((*iter)->GetProcessorLifeType() == EventProcessorLifeType::Timed &&
 			(*iter)->GetProcessorTimeLeft() <= 0) {
 
