@@ -152,7 +152,7 @@ EventProcessor<Event>* MeteorRulesetExecutor::getEventProcessor(Event * e)
 		return (new MeteorNoteControlPointHitObject())->RegisterEvent(e);
 	}
 
-	LOG(LogLevel::Finer) << "MeteorRulesetExecutor::getEventProcessor() : [" << processorType << "] not found match.";
+	LOG(LogLevel::Error) << "MeteorRulesetExecutor::getEventProcessor() : [" << processorType << "] not found match.";
 	throw runtime_error("MeteorRulesetExecutor::getEventProcessor(Event*) : No matched processor type.");
 	// TODO:¦R¿ù»~°T®§
 	return NULL;
