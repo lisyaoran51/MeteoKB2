@@ -6,6 +6,7 @@ using namespace Meteor::Schedulers::Events::Effects::Algorithms;
 
 int ExplodeMapAlgorithm::load()
 {
+	// 如果要改Explosion設定，要從這邊改
 	genAlgo = new ExplodeMapGenerateAlgorithm();
 	shiftAlgo = new MapShiftAlgorithm<ExplodeEffect>(startX);
 	return 0;
@@ -23,10 +24,10 @@ int ExplodeMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper<Explode
 
 	int width = em->GetWidth();
 	int height = em->GetHeight();
-	LOG(LogLevel::Debug) << "ExplodeMapGenerateAlgorithm::ImplementGenerate() : generate map " << m;
+	//LOG(LogLevel::Debug) << "ExplodeMapGenerateAlgorithm::ImplementGenerate() : generate map " << m;
 	bool isAdded = false;
 
-	LOG(LogLevel::Debug) << "ExplodeMapGenerateAlgorithm::ImplementGenerate() : GetProcessorTimeLeft " << em->GetProcessorTimeLeft() << ", GetLifeTime " << em->GetLifeTime();
+	//LOG(LogLevel::Debug) << "ExplodeMapGenerateAlgorithm::ImplementGenerate() : GetProcessorTimeLeft " << em->GetProcessorTimeLeft() << ", GetLifeTime " << em->GetLifeTime();
 
 	if (em->GetProcessorTimeLeft() > 0 && em->GetProcessorTimeLeft() < em->GetLifeTime()) {
 		isAdded = true;
@@ -38,7 +39,7 @@ int ExplodeMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper<Explode
 		}
 	}
 
-	LOG(LogLevel::Debug) << "ExplodeMapGenerateAlgorithm::ImplementGenerate() : generate map end.";
+	//LOG(LogLevel::Debug) << "ExplodeMapGenerateAlgorithm::ImplementGenerate() : generate map end.";
 
 	return isAdded ? 0 : -1;
 }
