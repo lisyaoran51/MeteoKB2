@@ -189,6 +189,8 @@ Map * EventProcessorMaster::GetGraph()
 			LOG(LogLevel::Debug) << "EventProcessorMaster::GetGraph : draw dynamic effect [" << effectMapper << "].";
 			effectMapper->Draw(graph);
 		}
+		else
+			LOG(LogLevel::Debug) << "EventProcessorMaster::GetGraph : ERROR [" << effectMapper << "].";
 	}
 	
 	//graph->PasteAdd(lightMap, 0, 0);
