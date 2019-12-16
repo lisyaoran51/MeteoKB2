@@ -46,7 +46,7 @@ namespace Config{
 		FallLength,
 		ExplodeSpeed,
 		ExplodeBrightness,
-		ExplosionLifeTime,
+		ExplodeLifeTime,
 		GlowLineSpeed,
 		GlowLineDuration,
 		GlowLineBrightness,

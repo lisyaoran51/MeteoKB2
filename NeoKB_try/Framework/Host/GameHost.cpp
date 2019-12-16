@@ -290,6 +290,7 @@ int GameHost::setupConfig()
 	meteorConfigManager->Set(MeteorSetting::FallLength, 1);
 	meteorConfigManager->Set(MeteorSetting::ExplodeSpeed, MTO_FLOAT(0.6f));
 	meteorConfigManager->Set(MeteorSetting::ExplodeBrightness, MTO_FLOAT(0.6f));
+	meteorConfigManager->Set(MeteorSetting::ExplodeLifeTime, MTO_FLOAT(0.3f));
 	meteorConfigManager->Set(MeteorSetting::GlowLineSpeed, MTO_FLOAT(0.6f));
 	meteorConfigManager->Set(MeteorSetting::GlowLineDuration, MTO_FLOAT(0.6f));
 	meteorConfigManager->Set(MeteorSetting::GlowLineBrightness, MTO_FLOAT(0.6f));

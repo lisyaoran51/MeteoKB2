@@ -113,7 +113,7 @@ int MeteorPlayfield::load(FrameworkConfigManager* f, MeteorConfigManager * m)
 		mapPitchShifter = new LinearMapPitchShifter();
 
 
-	if (!m->Get(MeteorSetting::ExplosionLifeTime, &explosionLifeTime)) {
+	if (!m->Get(MeteorSetting::ExplodeLifeTime, &explosionLifeTime)) {
 		explosionLifeTime = 0.1f;
 	}
 
