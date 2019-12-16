@@ -19,7 +19,7 @@ HitResult MeteorHitWindow::GetResultFor(double hitOffset)
 	if (hitOffset < 0.44)
 		return HitResult::Ok;
 
-	if (hitOffset < 1)
+	if (hitOffset < 0.54)
 		return HitResult::Meh;
 
 	return HitResult::Miss;;
@@ -31,7 +31,7 @@ double MeteorHitWindow::GetHitWindow(HitResult hResult)
 	case HitResult::None:
 		return 100;
 	case HitResult::Miss:
-		return 1;
+		return 0.7;
 	case HitResult::Meh:
 		return 0.54;
 	case HitResult::Ok:
