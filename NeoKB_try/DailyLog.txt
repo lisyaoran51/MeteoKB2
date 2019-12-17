@@ -1337,6 +1337,26 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	
 	driver差不多寫好了
 	
+12/14
+	osu的擊中判定：
+	DrawableNote.OnPressed =>
+		DrawableHitObject.UpdateJudgement =>
+			DrawableNote.CheckForJudgement => (這邊決定有沒有擊中)
+				DrawableHitObject.AddJudgement =>
+					DrawableHitObject.OnJudgement =>
+						Playfield.OnJudgement =>
+							new Explosion #
+						ScorePorcessor.AddJudgement
 	
+	家explosion在meteor playfield裡面的on judgement裡
+	
+12/15
+	在城市一開始就輸入的話，就會當機，可以用keyboard模擬
+	
+	刪除dynamic的時候會出錯
+	
+12/16
+	寫萬explosion，但是效果不好
+	要寫放開的時候逐漸Fadeout
 	
 	

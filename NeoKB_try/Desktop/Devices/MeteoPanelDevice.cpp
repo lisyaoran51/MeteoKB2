@@ -15,11 +15,11 @@ int MeteoPanelDevice::ProcessOutput()
 
 int MeteoPanelDevice::readFromDevice()
 {
-
+#if 0
 	InputState* newState = meteoPanelBoard->GetPanelState();
 	if (newState != nullptr)
 		inputStates.push_back(newState);
-#if 0
+#else
 	_debugCount++;
 #endif
 
@@ -33,14 +33,24 @@ int MeteoPanelDevice::readFromDevice()
 		LOG(LogLevel::Debug) << "MeteoPanelDevice::readFromDevice() : Create fake pause input.";
 	}
 
-	if (_debugCount == -1) {
+	if (_debugCount % 1000 == 400) {
 		InputState* newState = new InputState();
 		newState->SetPanelState(new PanelState());
 
-		newState->GetPanelState()->AddButton(InputKey::Pause);
+		newState->GetPanelState()->AddButton(InputKey::RaiseOctave);
 		inputStates.push_back(newState);
 
-		LOG(LogLevel::Debug) << "MeteoPanelDevice::readFromDevice() : Create fake pause input.";
+		LOG(LogLevel::Debug) << "MeteoPanelDevice::readFromDevice() : Create fake pause input [RaiseOctave].";
+	}
+
+	if (_debugCount % 1000 == 900) {
+		InputState* newState = new InputState();
+		newState->SetPanelState(new PanelState());
+
+		newState->GetPanelState()->AddButton(InputKey::LowerOctave);
+		inputStates.push_back(newState);
+
+		LOG(LogLevel::Debug) << "MeteoPanelDevice::readFromDevice() : Create fake pause input [LowerOctave].";
 	}
 
 	if (_debugCount == -1) {

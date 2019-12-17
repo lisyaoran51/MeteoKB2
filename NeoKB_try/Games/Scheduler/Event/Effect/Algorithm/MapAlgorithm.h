@@ -144,6 +144,8 @@ namespace Algorithms{
 
 		virtual int SetStartX(int x) {
 			startX = x;
+			if (shiftAlgo != nullptr)
+				shiftAlgo->SetStartX(startX);
 			return 0;
 		}
 
@@ -161,12 +163,12 @@ namespace Algorithms{
 		/// <summary>
 		/// to transform the effect to the map with every parameter relevant.
 		/// </summary>
-		MapGenerateAlgorithm<T>* genAlgo;
+		MapGenerateAlgorithm<T>* genAlgo = nullptr;
 
 		/// <summary>
 		/// 把生好的effect移到他該擺的位置上
 		/// </summary>
-		MapShiftAlgorithm<T>* shiftAlgo;
+		MapShiftAlgorithm<T>* shiftAlgo = nullptr;
 
 		int ImplementRegisterGenerator(MapGenerateAlgorithm<T>* g) {
 			genAlgo = g;
