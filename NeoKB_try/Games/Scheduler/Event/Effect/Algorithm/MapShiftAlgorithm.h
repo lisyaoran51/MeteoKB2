@@ -96,8 +96,9 @@ protected:
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
 				// ¶W¥Xmap½d³ò´N¸õ¹L
-				//if (i - x < 0 || j - y < 0)
-				//	continue;
+				if (i - x < 0 || j - y < 0)
+					continue;
+
 				if (bufferMap->Get(i + offsetX, j + offsetY) == 0)
 					continue;
 
