@@ -28,6 +28,7 @@ LinearMapPitchShifter::LinearMapPitchShifter() : RegisterType("LinearMapPitchShi
 
 int LinearMapPitchShifter::SetSeekPitch(Pitch p)
 {
+	LOG(LogLevel::Debug) << "LinearMapPitchShifter::SetSeekPitch() : shift from " << (int)tempPitch << " to " << (int)pitchShiftingTo;
 	if (tempPitch == p)
 		return 0;
 
@@ -56,6 +57,8 @@ Pitch LinearMapPitchShifter::GetTempPitch()
 int LinearMapPitchShifter::shift()
 {
 	if (isShifting) {
+
+		LOG(LogLevel::Debug) << "LinearMapPitchShifter::shift() : shift from " << (int)tempPitch << " to " << (int)pitchShiftingTo;
 		if (tempPitch > pitchShiftingTo) {
 
 			tempPitchSpecificPosition -= movePerFrame;
