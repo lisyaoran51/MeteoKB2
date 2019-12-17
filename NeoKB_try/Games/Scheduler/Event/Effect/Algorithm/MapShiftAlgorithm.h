@@ -98,6 +98,8 @@ protected:
 				// ¶W¥Xmap½d³ò´N¸õ¹L
 				//if (i - x < 0 || j - y < 0)
 				//	continue;
+				if (bufferMap->Get(i + offsetX, j + offsetY) == 0)
+					continue;
 
 				lightMap->Add(
 					i,
@@ -109,7 +111,7 @@ protected:
 		return 0;
 	}
 
-	int startX;
+	int startX = 24;
 
 };
 	

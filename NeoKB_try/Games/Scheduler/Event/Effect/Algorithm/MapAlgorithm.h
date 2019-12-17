@@ -144,8 +144,10 @@ namespace Algorithms{
 
 		virtual int SetStartX(int x) {
 			startX = x;
-			if (shiftAlgo != nullptr)
+			if (shiftAlgo != nullptr) {
+				unique_lock<mutex> uLock(shiftAlgoMutex);
 				shiftAlgo->SetStartX(startX);
+			}
 			return 0;
 		}
 
@@ -169,6 +171,8 @@ namespace Algorithms{
 		/// 把生好的effect移到他該擺的位置上
 		/// </summary>
 		MapShiftAlgorithm<T>* shiftAlgo = nullptr;
+
+		mutable mutex shiftAlgoMutex;
 
 		int ImplementRegisterGenerator(MapGenerateAlgorithm<T>* g) {
 			genAlgo = g;
@@ -199,7 +203,9 @@ namespace Algorithms{
 			if (returnValue == -1)
 				return 0;
 
+			unique_lock<mutex> uLock(shiftAlgoMutex);
 			shiftAlgo->Shift(bufferMap, m, em);
+			uLock.unlock();
 
 			bufferMap->Reset();
 
