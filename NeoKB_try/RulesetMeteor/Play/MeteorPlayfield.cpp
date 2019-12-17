@@ -39,6 +39,9 @@ int MeteorPlayfield::load()
 
 int MeteorPlayfield::load(FrameworkConfigManager* f, MeteorConfigManager * m)
 {
+	isGameControllingPitchState = false; // 暫時先這樣，Debug用
+
+
 	if(f->Get(FrameworkSetting::StartPitch, (int*)&startPitch)){}
 	if(f->Get(FrameworkSetting::Width, &pitchCount)){}
 
