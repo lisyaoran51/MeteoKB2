@@ -73,6 +73,7 @@ int LinearMapPitchShifter::shift()
 					tempPitchSpecificPosition = (double)tempPitch;
 					isShifting = false;
 				}
+				LOG(LogLevel::Debug) << "LinearMapPitchShifter::shift() : shift end ";
 				return 0;
 			}
 		}
@@ -89,11 +90,11 @@ int LinearMapPitchShifter::shift()
 					tempPitchSpecificPosition = (double)tempPitch;
 					isShifting = false;
 				}
+				LOG(LogLevel::Debug) << "LinearMapPitchShifter::shift() : shift end ";
 				return 0;
 			}
 		}
 		else {
-
 			// TODO: À³¸Ó­nthrow logic_error
 			tempPitch = pitchShiftingTo;
 			tempPitchSpecificPosition = (double)tempPitch;
@@ -101,6 +102,7 @@ int LinearMapPitchShifter::shift()
 
 		}
 	}
+
 	return -1;
 
 
