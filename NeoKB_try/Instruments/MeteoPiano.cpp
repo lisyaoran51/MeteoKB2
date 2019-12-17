@@ -28,6 +28,7 @@ int MeteoPiano::ChangePitchState(MeteoPianoPitchState s)
 
 int MeteoPiano::OnButtonDown(PianoAction action)
 {
+	LOG(LogLevel::Debug) << "MeteoPiano::OnButtonDown() : get button " << (int)action << ".";
 	if (!isGameControllingPitchState) {
 		if (action == PianoAction::LowerOctave) {
 			switch (state) {
