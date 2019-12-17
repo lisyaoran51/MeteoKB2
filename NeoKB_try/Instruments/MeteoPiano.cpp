@@ -207,57 +207,57 @@ int MeteoPiano::loadAndMapSamples()
 	/* ¤É¤K«× */
 #pragma region RaisedPitchState
 
-	raisedSamples[PianoAction::VK24_L_C1]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::C));
-	raisedSamples[PianoAction::VK24_L_bD1]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::Db));
-	raisedSamples[PianoAction::VK24_L_D1]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::D));
-	raisedSamples[PianoAction::VK24_L_bE1]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::Eb));
-	raisedSamples[PianoAction::VK24_L_E1]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::E));
-	raisedSamples[PianoAction::VK24_L_F1]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::F));
-	raisedSamples[PianoAction::VK24_L_bG1]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::Gb));
-	raisedSamples[PianoAction::VK24_L_G1]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::G));
-	raisedSamples[PianoAction::VK24_L_bA1]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::Ab));
-	raisedSamples[PianoAction::VK24_L_A1]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::A));
-	raisedSamples[PianoAction::VK24_L_bB1]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::Bb));
-	raisedSamples[PianoAction::VK24_L_B1]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::B));
+	raisedSamples[PianoAction::VK24_L_C1]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::c ));
+	raisedSamples[PianoAction::VK24_L_bD1]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::db));
+	raisedSamples[PianoAction::VK24_L_D1]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::d ));
+	raisedSamples[PianoAction::VK24_L_bE1]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::eb));
+	raisedSamples[PianoAction::VK24_L_E1]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::e ));
+	raisedSamples[PianoAction::VK24_L_F1]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::f ));
+	raisedSamples[PianoAction::VK24_L_bG1]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::gb));
+	raisedSamples[PianoAction::VK24_L_G1]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::g ));
+	raisedSamples[PianoAction::VK24_L_bA1]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::ab));
+	raisedSamples[PianoAction::VK24_L_A1]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::a ));
+	raisedSamples[PianoAction::VK24_L_bB1]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::bb));
+	raisedSamples[PianoAction::VK24_L_B1]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::b ));
 		  
-	raisedSamples[PianoAction::VK24_L_C2]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::c));
-	raisedSamples[PianoAction::VK24_L_bD2]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::db));
-	raisedSamples[PianoAction::VK24_L_D2]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::d));
-	raisedSamples[PianoAction::VK24_L_bE2]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::eb));
-	raisedSamples[PianoAction::VK24_L_E2]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::e));
-	raisedSamples[PianoAction::VK24_L_F2]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::f));
-	raisedSamples[PianoAction::VK24_L_bG2]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::gb));
-	raisedSamples[PianoAction::VK24_L_G2]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::g));
-	raisedSamples[PianoAction::VK24_L_bA2]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::ab));
-	raisedSamples[PianoAction::VK24_L_A2]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::a));
-	raisedSamples[PianoAction::VK24_L_bB2]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::bb));
-	raisedSamples[PianoAction::VK24_L_B2]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::b));
+	raisedSamples[PianoAction::VK24_L_C2]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::c1 ));
+	raisedSamples[PianoAction::VK24_L_bD2]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::d1b));
+	raisedSamples[PianoAction::VK24_L_D2]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::d1 ));
+	raisedSamples[PianoAction::VK24_L_bE2]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::e1b));
+	raisedSamples[PianoAction::VK24_L_E2]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::e1 ));
+	raisedSamples[PianoAction::VK24_L_F2]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::f1 ));
+	raisedSamples[PianoAction::VK24_L_bG2]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::g1b));
+	raisedSamples[PianoAction::VK24_L_G2]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::g1 ));
+	raisedSamples[PianoAction::VK24_L_bA2]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::a1b));
+	raisedSamples[PianoAction::VK24_L_A2]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::a1 ));
+	raisedSamples[PianoAction::VK24_L_bB2]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::b1b));
+	raisedSamples[PianoAction::VK24_L_B2]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::b1 ));
 		  
-	raisedSamples[PianoAction::VK24_R_C1]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::c1));
-	raisedSamples[PianoAction::VK24_R_bD1]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::d1b));
-	raisedSamples[PianoAction::VK24_R_D1]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::d1));
-	raisedSamples[PianoAction::VK24_R_bE1]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::e1b));
-	raisedSamples[PianoAction::VK24_R_E1]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::e1));
-	raisedSamples[PianoAction::VK24_R_F1]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::f1));
-	raisedSamples[PianoAction::VK24_R_bG1]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::g1b));
-	raisedSamples[PianoAction::VK24_R_G1]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::g1));
-	raisedSamples[PianoAction::VK24_R_bA1]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::a1b));
-	raisedSamples[PianoAction::VK24_R_A1]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::a1));
-	raisedSamples[PianoAction::VK24_R_bB1]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::b1b));
-	raisedSamples[PianoAction::VK24_R_B1]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::b1));
+	raisedSamples[PianoAction::VK24_R_C1]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::c2 ));
+	raisedSamples[PianoAction::VK24_R_bD1]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::d2b));
+	raisedSamples[PianoAction::VK24_R_D1]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::d2 ));
+	raisedSamples[PianoAction::VK24_R_bE1]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::e2b));
+	raisedSamples[PianoAction::VK24_R_E1]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::e2 ));
+	raisedSamples[PianoAction::VK24_R_F1]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::f2 ));
+	raisedSamples[PianoAction::VK24_R_bG1]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::g2b));
+	raisedSamples[PianoAction::VK24_R_G1]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::g2 ));
+	raisedSamples[PianoAction::VK24_R_bA1]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::a2b));
+	raisedSamples[PianoAction::VK24_R_A1]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::a2 ));
+	raisedSamples[PianoAction::VK24_R_bB1]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::b2b));
+	raisedSamples[PianoAction::VK24_R_B1]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::b2 ));
 		  
-	raisedSamples[PianoAction::VK24_R_C2]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::c2));
-	raisedSamples[PianoAction::VK24_R_bD2]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::d2b));
-	raisedSamples[PianoAction::VK24_R_D2]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::d2));
-	raisedSamples[PianoAction::VK24_R_bE2]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::e2b));
-	raisedSamples[PianoAction::VK24_R_E2]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::e2));
-	raisedSamples[PianoAction::VK24_R_F2]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::f2));
-	raisedSamples[PianoAction::VK24_R_bG2]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::g2b));
-	raisedSamples[PianoAction::VK24_R_G2]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::g2));
-	raisedSamples[PianoAction::VK24_R_bA2]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::a2b));
-	raisedSamples[PianoAction::VK24_R_A2]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::a2));
-	raisedSamples[PianoAction::VK24_R_bB2]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::b2b));
-	raisedSamples[PianoAction::VK24_R_B2  ] = audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::b2 ));
+	raisedSamples[PianoAction::VK24_R_C2]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::c3 ));
+	raisedSamples[PianoAction::VK24_R_bD2]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::d3b));
+	raisedSamples[PianoAction::VK24_R_D2]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::d3 ));
+	raisedSamples[PianoAction::VK24_R_bE2]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::e3b));
+	raisedSamples[PianoAction::VK24_R_E2]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::e3 ));
+	raisedSamples[PianoAction::VK24_R_F2]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::f3 ));
+	raisedSamples[PianoAction::VK24_R_bG2]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::g3b));
+	raisedSamples[PianoAction::VK24_R_G2]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::g3 ));
+	raisedSamples[PianoAction::VK24_R_bA2]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::a3b));
+	raisedSamples[PianoAction::VK24_R_A2]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::a3 ));
+	raisedSamples[PianoAction::VK24_R_bB2]	= audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::b3b));
+	raisedSamples[PianoAction::VK24_R_B2  ] = audioManager->GetSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::b3 ));
 
 #pragma endregion
 
