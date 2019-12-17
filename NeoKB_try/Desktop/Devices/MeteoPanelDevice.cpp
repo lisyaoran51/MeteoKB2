@@ -43,7 +43,7 @@ int MeteoPanelDevice::readFromDevice()
 
 	}
 
-	if (_debugCount % 1000 == -1) {
+	if (_debugCount % 1000 == 900) {
 		LOG(LogLevel::Debug) << "MeteoPanelDevice::readFromDevice() : Create fake pause input [LowerOctave].";
 		InputState* newState = new InputState();
 		newState->SetPanelState(new PanelState());
