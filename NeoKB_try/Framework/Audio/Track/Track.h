@@ -23,6 +23,7 @@ namespace Tracks {
 	/// </summary>
 	class Track : public AdjustableAudioComponent, public AdjustableClock {
 
+
 	public:
 		
 		// AdjustableAudioComponent

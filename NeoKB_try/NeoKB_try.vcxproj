@@ -29,6 +29,7 @@
     <ClCompile Include="Desktop\Devices\Pi2c.cpp" />
     <ClCompile Include="Desktop\MeteoGameDesktop.cpp" />
     <ClCompile Include="Desktop\Program.cpp" />
+    <ClCompile Include="Framework\Audio\Track\RateSettableBassTrack.cpp" />
     <ClCompile Include="Framework\Database\DatabaseContext.cpp" />
     <ClCompile Include="Framework\Database\DatabaseContextFactory.cpp" />
     <ClCompile Include="Framework\Database\DatabaseStore.cpp" />
@@ -215,6 +216,7 @@
     <ClInclude Include="Desktop\Devices\Pi2c.h" />
     <ClInclude Include="Desktop\MeteoGameDesktop.h" />
     <ClInclude Include="Desktop\Program.h" />
+    <ClInclude Include="Framework\Audio\Track\RateSettableBassTrack.h" />
     <ClInclude Include="Framework\Database\DatabaseContext.h" />
     <ClInclude Include="Framework\Database\DatabaseContextFactory.h" />
     <ClInclude Include="Framework\Database\DatabaseSet.h" />
@@ -420,6 +422,7 @@
     <ClInclude Include="RulesetMeteor\Sheetmusic\Pattern\MeteorPatternGenerator.h" />
     <ClInclude Include="RulesetMeteor\Timing\MeteorTimeController.h" />
     <ClInclude Include="ThirdParty\Bass\bass.h" />
+    <ClInclude Include="ThirdParty\Bass\bass_fx.h" />
     <ClInclude Include="Util\DataStructure\ActionList.h" />
     <ClInclude Include="Util\DataStructure\ActionMap.h" />
     <ClInclude Include="Util\DataStructure\Bindable.h" />

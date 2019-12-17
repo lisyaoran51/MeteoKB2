@@ -25,7 +25,6 @@ namespace Tracks {
 	/// </summary>
 	class BassTrack : public Track {
 
-		HSTREAM stream;
 
 	public:
 
@@ -45,6 +44,7 @@ namespace Tracks {
 
 	protected:
 
+		HSTREAM stream;
 
 
 	private:

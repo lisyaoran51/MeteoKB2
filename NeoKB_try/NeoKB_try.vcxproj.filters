@@ -1017,6 +1017,9 @@
     <ClCompile Include="RulesetMeteor\Scheduler\Event\ControlPoints\MeteorNoteControlPointHitObject.cpp">
       <Filter>來源檔案\RulesetMeteor\Schedulers\Events\ControlPoints</Filter>
     </ClCompile>
+    <ClCompile Include="Framework\Audio\Track\RateSettableBassTrack.cpp">
+      <Filter>來源檔案\Framework\Audio\Track</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="DailyLog.txt">
@@ -1698,6 +1701,12 @@
     </ClInclude>
     <ClInclude Include="RulesetMeteor\Scheduler\Event\ControlPoints\MeteorNoteControlPointHitObject.h">
       <Filter>標頭檔\RulesetMeteor\Schedulers\Events\ControlPoints</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Audio\Track\RateSettableBassTrack.h">
+      <Filter>標頭檔\Framework\Audio\Track</Filter>
+    </ClInclude>
+    <ClInclude Include="ThirdParty\Bass\bass_fx.h">
+      <Filter>標頭檔\ThirdParty\Bass</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
