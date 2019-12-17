@@ -61,7 +61,7 @@ int MapPitchShifter::update()
 		for (iter = mapAlgos->begin(); iter != mapAlgos->end(); iter++) {
 			iter->second->SetStartX((int)GetTempPitch());
 		}
-		LOG(LogLevel::Debug) << "MapPitchShifter::update() : shift algos ";
+		LOG(LogLevel::Depricated) << "MapPitchShifter::update() : shift algos ";
 	}
 	return 0;
 }

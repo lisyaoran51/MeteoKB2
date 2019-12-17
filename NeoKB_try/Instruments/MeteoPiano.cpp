@@ -68,14 +68,17 @@ map<PianoAction, SampleChannel*>* MeteoPiano::getSamples()
 	switch (state) {
 	
 	case MeteoPianoPitchState::None:
+		LOG(LogLevel::Debug) << "MeteoPiano::getSamples() : get sample of none. ";
 		return TInstrument<PianoAction>::getSamples();
 		break;
 	
 	case MeteoPianoPitchState::Lowered:
+		LOG(LogLevel::Debug) << "MeteoPiano::getSamples() : get sample of lowered. ";
 		return &loweredSamples;
 		break;
 
 	case MeteoPianoPitchState::Raised:
+		LOG(LogLevel::Debug) << "MeteoPiano::getSamples() : get sample of raised. ";
 		return &raisedSamples;
 		break;
 	}

@@ -58,7 +58,7 @@ int LinearMapPitchShifter::shift()
 {
 	if (isShifting) {
 
-		LOG(LogLevel::Debug) << "LinearMapPitchShifter::shift() : shift from " << (int)tempPitch << " to " << (int)pitchShiftingTo;
+		LOG(LogLevel::Depricated) << "LinearMapPitchShifter::shift() : shift from " << (int)tempPitch << " to " << (int)pitchShiftingTo;
 		if (tempPitch > pitchShiftingTo) {
 
 			tempPitchSpecificPosition -= movePerFrame;
