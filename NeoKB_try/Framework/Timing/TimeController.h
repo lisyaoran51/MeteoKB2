@@ -90,7 +90,7 @@ namespace Timing {
 		//FramedClock* gameClock;
 
 
-		double rate;
+		double rate = 1.0;
 
 		double targetSeekTime;
 

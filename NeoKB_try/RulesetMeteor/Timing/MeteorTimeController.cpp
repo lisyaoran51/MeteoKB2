@@ -60,6 +60,24 @@ int MeteorTimeController::onKnobTurn(InputState * inputState, InputKey knob)
 
 	}
 
+	if (knob == InputKey::SpeedKnob) {
+
+		int turnValue = 0;
+		for (int i = 0; i < inputState->GetPanelState()->GetKnobs()->size(); i++)
+			if (inputState->GetPanelState()->GetKnobs()->at(i).first == InputKey::SpeedKnob)
+				turnValue = inputState->GetPanelState()->GetKnobs()->at(i).second;
+		if (turnValue < 0) {
+			if (GetRate() > 0.6)
+				SetRate(GetRate() - 0.5);
+		}
+		else {
+			if (GetRate() < 1.4)
+				SetRate(GetRate() + 0.5);
+		}
+
+
+	}
+
 
 	return 0;
 }

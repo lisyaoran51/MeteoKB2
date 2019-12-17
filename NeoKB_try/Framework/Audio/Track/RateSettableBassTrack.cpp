@@ -36,5 +36,7 @@ int RateSettableBassTrack::SetRate(double r)
 	BASS_ChannelGetAttribute(BASS_FX_TempoGetSource(stream), BASS_ATTRIB_TEMPO_PITCH, &pitch);
 	pitch = pitch - log(rate / r) / logFrequencyToPitch; // / log(1.0594630943592953098f);
 	BASS_ChannelSetAttribute(stream, BASS_ATTRIB_TEMPO_PITCH, pitch);
+
+	rate = r;
 	return 0;
 }
