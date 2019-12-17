@@ -71,7 +71,7 @@ namespace Algorithms {
 
 		virtual int SetStartX(int x) {
 			startX = x;
-			retrun 0;
+			return 0;
 		}
 
 protected:
