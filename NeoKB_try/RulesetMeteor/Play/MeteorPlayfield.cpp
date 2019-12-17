@@ -188,6 +188,8 @@ int MeteorPlayfield::OnKeyUp(MeteorAction action)
 
 int MeteorPlayfield::OnButtonDown(MeteorAction action)
 {
+	LOG(LogLevel::Debug) << "MeteorPlayfield::OnButtonDown() : button = " << int(action) << ".";
+
 	if (!isGameControllingPitchState) {
 		if (action == MeteorAction::LowerOctave) {
 			switch (pitchState) {
