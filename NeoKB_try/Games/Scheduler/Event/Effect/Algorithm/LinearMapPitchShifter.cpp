@@ -28,7 +28,7 @@ LinearMapPitchShifter::LinearMapPitchShifter() : RegisterType("LinearMapPitchShi
 
 int LinearMapPitchShifter::SetSeekPitch(Pitch p)
 {
-	LOG(LogLevel::Debug) << "LinearMapPitchShifter::SetSeekPitch() : shift from " << (int)tempPitch << " to " << (int)pitchShiftingTo;
+	LOG(LogLevel::Debug) << "LinearMapPitchShifter::SetSeekPitch() : shift from " << (int)tempPitch << " to " << (int)p;
 	if (tempPitch == p)
 		return 0;
 
@@ -72,8 +72,8 @@ int LinearMapPitchShifter::shift()
 					tempPitch = pitchShiftingTo;
 					tempPitchSpecificPosition = (double)tempPitch;
 					isShifting = false;
+					LOG(LogLevel::Debug) << "LinearMapPitchShifter::shift() : shift end with pitch " << (int)tempPitch;
 				}
-				LOG(LogLevel::Debug) << "LinearMapPitchShifter::shift() : shift end ";
 				return 0;
 			}
 		}
@@ -89,8 +89,8 @@ int LinearMapPitchShifter::shift()
 					tempPitch = pitchShiftingTo;
 					tempPitchSpecificPosition = (double)tempPitch;
 					isShifting = false;
+					LOG(LogLevel::Debug) << "LinearMapPitchShifter::shift() : shift end with pitch " << (int)tempPitch;
 				}
-				LOG(LogLevel::Debug) << "LinearMapPitchShifter::shift() : shift end ";
 				return 0;
 			}
 		}
