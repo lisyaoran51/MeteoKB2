@@ -99,6 +99,9 @@ protected:
 				if (i - x < 0 || j - y < 0)
 					continue;
 
+				if (i + offsetX > width * 2 || j + offsetY > height * 2)
+					continue;
+
 				if (bufferMap->Get(i + offsetX, j + offsetY) == 0)
 					continue;
 
