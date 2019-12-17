@@ -15,7 +15,7 @@ int MeteoPanelDevice::ProcessOutput()
 
 int MeteoPanelDevice::readFromDevice()
 {
-#if 0
+#if 1
 	InputState* newState = meteoPanelBoard->GetPanelState();
 	if (newState != nullptr)
 		inputStates.push_back(newState);

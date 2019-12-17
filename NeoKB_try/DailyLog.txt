@@ -1359,4 +1359,7 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	寫萬explosion，但是效果不好
 	要寫放開的時候逐漸Fadeout
 	
+12/17
+	shift寫好了，接下來應該要寫踏板和fadeout
+	
 	
