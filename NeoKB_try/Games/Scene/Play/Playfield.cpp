@@ -44,7 +44,7 @@ int Playfield::load()
 
 int Playfield::load(FrameworkConfigManager* f) {
 
-	
+	isPresent = true;
 
 	//scheduler = new Scheduler();
 	eventProcessorMaster = createEventProcessorMaster();
