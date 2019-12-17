@@ -109,6 +109,7 @@ int Playfield::load(FrameworkConfigManager* f) {
 
 Playfield::Playfield():RegisterType("Playfield")
 {
+	isInputable = true;
 	// functional裡面的bind不能對overloading問題
 	// https://stackoverflow.com/questions/4159487/stdbind-overload-resolution
 	registerLoad(bind((int(Playfield::*)())&Playfield::load, this));
