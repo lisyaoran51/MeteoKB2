@@ -36,12 +36,12 @@ int RateSettableBassTrack::SetRate(double r)
 		LOG(LogLevel::Debug) << "RateSettableBassTrack::SetRate() : set rate to " << r << ".";
 		float frequency = 44100;
 		BASS_ChannelGetAttribute(BASS_FX_TempoGetSource(stream), BASS_ATTRIB_FREQ, &frequency);
-		frequency = frequency * rate / r;
+		frequency = frequency * r;//rate / r;
 		BASS_ChannelSetAttribute(stream, BASS_ATTRIB_TEMPO_FREQ, frequency);
 
 		// 不能直接調整，每次數值都要重設，bass拿不到目前的pitch
 		//BASS_ChannelGetAttribute(BASS_FX_TempoGetSource(stream), BASS_ATTRIB_TEMPO_PITCH, &pitch);
-		pitch -= log(rate / r) / logFrequencyToPitch; // / log(1.0594630943592953098f);
+		pitch -= log(/*rate /*/ r) / logFrequencyToPitch; // / log(1.0594630943592953098f);
 		BASS_ChannelSetAttribute(stream, BASS_ATTRIB_TEMPO_PITCH, pitch);
 
 		rate = r;
