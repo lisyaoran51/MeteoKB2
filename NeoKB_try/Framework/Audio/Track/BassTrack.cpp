@@ -88,7 +88,7 @@ bool BassTrack::Seek(double position)
 
 			QWORD pos = BASS_ChannelSeconds2Bytes(stream, clampedPosition);
 			bool result = BASS_ChannelSetPosition(stream, pos, BASS_POS_BYTE);
-			LOG(LogLevel::Depricated) << "BassTrack::Seek : pending state seek time to [" << clampedPosition << "] success? " << result << ".";
+			LOG(LogLevel::Debug) << "BassTrack::Seek : pending state seek time to [" << clampedPosition << "] success? " << result << ".";
 		}
 
 		return 0;
