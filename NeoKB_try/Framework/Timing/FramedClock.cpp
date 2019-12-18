@@ -63,6 +63,7 @@ Clock * FramedClock::GetSource()
 
 int FramedClock::SetRate(double r)
 {
+	LOG(LogLevel::Debug) << "FramedClock::SetRate() : set rate to [" << r << "].";
 	rate = r;
 	return source->SetRate(r);
 }
