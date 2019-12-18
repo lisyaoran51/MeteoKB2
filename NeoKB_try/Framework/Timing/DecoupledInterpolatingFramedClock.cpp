@@ -60,7 +60,7 @@ int DecoupledInterpolatingFramedClock::ChangeSource(Clock * s)
 	if (dynamic_cast<AdjustableClock*>(s))
 		dynamic_cast<AdjustableClock*>(s)->Seek(GetCurrentTime());
 
-	LOG(LogLevel::Depricated) << "DecoupledInterpolatingFramedClock::ChangeSource : get framed source." << dynamic_cast<RateSettableBassTrack*>(s);
+	LOG(LogLevel::Debug) << "DecoupledInterpolatingFramedClock::ChangeSource : get framed source." << dynamic_cast<RateSettableBassTrack*>(s);
 	source = s;
 	framedSource = dynamic_cast<FramedClock*>(s) != nullptr ? dynamic_cast<FrameBasedClock*>(s) : new FramedClock(s);
 	return 0;
