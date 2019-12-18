@@ -44,6 +44,8 @@ int Player::load(FrameworkConfigManager* f)
 	else
 		adjustableClock = workingSmValue->GetTrack();
 
+	LOG(LogLevel::Debug) << "Player::load : " << typeid(adjustableClock).name();
+
 	LOG(LogLevel::Fine) << "Player::load : create decoupled clocks.";
 	// 這個是當track停止以後，還可以繼續跑的鍾
 	decoupledClock = new DecoupledInterpolatingFramedClock();
