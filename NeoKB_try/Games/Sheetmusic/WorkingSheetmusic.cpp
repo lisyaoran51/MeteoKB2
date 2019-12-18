@@ -1,6 +1,6 @@
 #include "WorkingSheetmusic.h"
 
-#include "../../Framework/Audio/Track/BassTrack.h"
+#include "../../Framework/Audio/Track/RateSettableBassTrack.h"
 #include <string.h>
 
 
@@ -70,7 +70,7 @@ Track * WorkingSm::GetTrack()
 	char * temp = new char[path.length()];
 	strcpy(temp, path.c_str());
 	LOG(LogLevel::Finer) << "WorkingSm::GetTrack() : get file path = [" << temp << "].";
-	track = new BassTrack(temp);
+	track = new RateSettableBassTrack(temp);
 	return track;
 }
 
