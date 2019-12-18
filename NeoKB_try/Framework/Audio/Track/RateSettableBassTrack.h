@@ -23,8 +23,6 @@ namespace Tracks {
 	/// </summary>
 	class RateSettableBassTrack : public BassTrack {
 
-
-
 		const double frequencyToPitch = 1.0594630943592953098;
 
 		const double logFrequencyToPitch = 0.0577622650466621534448563579645;
