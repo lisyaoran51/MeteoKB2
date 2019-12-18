@@ -75,7 +75,7 @@ int BassTrack::Stop()
 
 bool BassTrack::Seek(double position)
 {
-	LOG(LogLevel::Depricated) << "BassTrack::Seek : get framed source playing = [" << isPlayed << "], length = [" << length << "].";
+	LOG(LogLevel::Debug) << "BassTrack::Seek : get framed source playing = [" << isPlayed << "], length = [" << length << "].";
 	// TODO: 如果在還沒有start時就seek會出現錯誤，正確做法是還是要讓他seek，正確做法在osu裡面
 
 
