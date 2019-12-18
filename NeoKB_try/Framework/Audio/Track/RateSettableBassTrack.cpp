@@ -1,9 +1,12 @@
 #include "RateSettableBassTrack.h"
 
 #include "../../../ThirdParty/Bass/bass_fx.h"
+#include <cmath>
 
 
 using namespace Framework::Audio::Tracks;
+using namespace std;
+
 
 
 RateSettableBassTrack::RateSettableBassTrack(char * fileName): BassTrack()
