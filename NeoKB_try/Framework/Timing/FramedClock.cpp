@@ -61,11 +61,9 @@ Clock * FramedClock::GetSource()
 	return source;
 }
 
-#include "../Audio/Track/RateSettableBassTrack.h"
-using namespace Framework::Audio::Tracks;
+
 int FramedClock::SetRate(double r)
 {
-	LOG(LogLevel::Debug) << "FramedClock::SetRate() : set rate to [" << r << "]." << dynamic_cast<RateSettableBassTrack*>(source);
 	rate = r;
 	return source->SetRate(r);
 }

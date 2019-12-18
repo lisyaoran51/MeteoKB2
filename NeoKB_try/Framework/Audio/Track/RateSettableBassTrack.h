@@ -27,6 +27,8 @@ namespace Tracks {
 
 		const double logFrequencyToPitch = 0.0577622650466621534448563579645;
 
+		float pitch = 0.f;
+
 		HSTREAM sourceStream;
 
 	public:
