@@ -18,7 +18,7 @@ using namespace Util;
 
 FramedClock::FramedClock(Clock * s)
 {
-	LOG(LogLevel::Debug) << "FramedClock::FramedClock() : address = [" << this << "].";
+	LOG(LogLevel::Depricated) << "FramedClock::FramedClock() : address = [" << this << "].";
 	if (s != nullptr) {
 		source = s;
 	}
