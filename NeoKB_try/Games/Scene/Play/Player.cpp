@@ -2,14 +2,14 @@
 
 #include <string>
 #include "../../Sheetmusic/Sheetmusic.h"
-#include "../../../Framework/Audio/Track/RateSettableBassTrack.h"
+//#include "../../../Framework/Audio/Track/RateSettableBassTrack.h"
 
 using namespace std;
 using namespace Games::Scenes::Play;
 using namespace Games::Rulesets;
 using namespace Games::Sheetmusics;
 using namespace Framework::Configurations;
-using namespace Framework::Audio::Tracks;
+//using namespace Framework::Audio::Tracks;
 
 
 int Player::load()
@@ -46,7 +46,7 @@ int Player::load(FrameworkConfigManager* f)
 	else
 		adjustableClock = workingSmValue->GetTrack();
 
-	LOG(LogLevel::Debug) << "Player::load : audio type is" << dynamic_cast<RateSettableBassTrack*>(adjustableClock);
+	//LOG(LogLevel::Debug) << "Player::load : audio type is" << dynamic_cast<RateSettableBassTrack*>(adjustableClock);
 
 	LOG(LogLevel::Fine) << "Player::load : create decoupled clocks.";
 	// 這個是當track停止以後，還可以繼續跑的鍾
