@@ -29,7 +29,7 @@ RateSettableBassTrack::RateSettableBassTrack(char * fileName): BassTrack()
 
 int RateSettableBassTrack::SetRate(double r)
 {
-
+	LOG(LogLevel::Debug) << "RateSettableBassTrack::SetRate() : set rate to " << r << ".";
 	float frequency = 44100;
 	BASS_ChannelGetAttribute(BASS_FX_TempoGetSource(stream), BASS_ATTRIB_FREQ, &frequency);
 	frequency = frequency * rate / r;
