@@ -24,6 +24,10 @@ BassTrack::BassTrack(char * fileName)
 
 }
 
+BassTrack::BassTrack() {
+
+}
+
 int BassTrack::Start()
 {
 	Track::Start();

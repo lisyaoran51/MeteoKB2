@@ -6,7 +6,7 @@
 using namespace Framework::Audio::Tracks;
 
 
-RateSettableBassTrack::RateSettableBassTrack(char * fileName): BassTrack(fileName)
+RateSettableBassTrack::RateSettableBassTrack(char * fileName): BassTrack()
 {
 	unique_lock<mutex> uLock(pendingActionMutex);
 	pendingActions.Add(this, [=]() {

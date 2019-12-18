@@ -46,6 +46,7 @@ namespace Tracks {
 
 		HSTREAM stream;
 
+		BassTrack();
 
 	private:
 
