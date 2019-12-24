@@ -151,9 +151,6 @@
     <Filter Include="來源檔案\Framework\Log">
       <UniqueIdentifier>{a145e4fc-e650-4f61-bfae-cd7c9010d31f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="標頭檔\Framework\Log">
-      <UniqueIdentifier>{84cd3614-3885-47b8-83ae-6eab76ddb504}</UniqueIdentifier>
-    </Filter>
     <Filter Include="標頭檔\Framework\Audio">
       <UniqueIdentifier>{dc3763da-bb9c-47d6-827d-ced1b0344018}</UniqueIdentifier>
     </Filter>
@@ -495,6 +492,15 @@
     </Filter>
     <Filter Include="來源檔案\RulesetMeteor\Schedulers\Events\ControlPoints">
       <UniqueIdentifier>{2c236cef-9825-4a64-9dde-247e597e4d2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Framework\Output">
+      <UniqueIdentifier>{0adf7121-71f8-4e33-b121-ab97a2b58927}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Framework\Output\Panels">
+      <UniqueIdentifier>{80404ecb-fee8-4b1a-b814-91016067ba65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Framework\Output\Bluetooths">
+      <UniqueIdentifier>{2aa05fb2-7a59-43bf-977d-3bc0f5ff8405}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1707,6 +1713,30 @@
     </ClInclude>
     <ClInclude Include="ThirdParty\Bass\bass_fx.h">
       <Filter>標頭檔\ThirdParty\Bass</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Output\OutputComponent.h">
+      <Filter>標頭檔\Framework\Output</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Output\OutputCollectionManager.h">
+      <Filter>標頭檔\Framework\Output</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Output\OutputManager.h">
+      <Filter>標頭檔\Framework\Output</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Output\OutputMessage.h">
+      <Filter>標頭檔\Framework\Output</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Output\Panels\PanelManager.h">
+      <Filter>標頭檔\Framework\Output\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Output\Bluetooths\BluetoothManager.h">
+      <Filter>標頭檔\Framework\Output\Bluetooths</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Output\Bluetooths\BluetoothMessage.h">
+      <Filter>標頭檔\Framework\Output\Bluetooths</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Output\Panels\PanelMessage.h">
+      <Filter>標頭檔\Framework\Output\Panels</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

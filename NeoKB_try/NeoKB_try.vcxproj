@@ -235,6 +235,14 @@
     <ClInclude Include="Framework\IO\Stores\EmbeddedResourceStore.h" />
     <ClInclude Include="Framework\IO\Stores\FakeEmbeddedResourceStore.h" />
     <ClInclude Include="Framework\IO\Stores\StorageResourceStore.h" />
+    <ClInclude Include="Framework\Output\Bluetooths\BluetoothManager.h" />
+    <ClInclude Include="Framework\Output\Bluetooths\BluetoothMessage.h" />
+    <ClInclude Include="Framework\Output\OutputCollectionManager.h" />
+    <ClInclude Include="Framework\Output\OutputComponent.h" />
+    <ClInclude Include="Framework\Output\OutputManager.h" />
+    <ClInclude Include="Framework\Output\OutputMessage.h" />
+    <ClInclude Include="Framework\Output\Panels\PanelManager.h" />
+    <ClInclude Include="Framework\Output\Panels\PanelMessage.h" />
     <ClInclude Include="Framework\Timing\SpeedAdjusters\LinearSpeedAdjuster.h" />
     <ClInclude Include="Framework\Timing\TimeController.h" />
     <ClInclude Include="Games\Configurations\MeteoConfigManager.h" />

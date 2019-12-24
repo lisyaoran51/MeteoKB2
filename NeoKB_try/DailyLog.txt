@@ -1360,6 +1360,36 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	要寫放開的時候逐漸Fadeout
 	
 12/17
-	shift寫好了，接下來應該要寫踏板和fadeout
+	shift寫好了，接下來應該要寫踏板和fadeout，計分，調整速度，上傳，自動彈出鋼琴音
+	
+	sm會亂讀檔
+	
+	更改速度
+	http://bass.radio42.com/help/html/90d034c4-b426-7f7c-4f32-28210a5e6bfb.htm
+	http://www.un4seen.com/forum/?topic=2181.0
+	
+	速度的公式是，如果速度變一半，音高就會降8度，八度的BASS_ATTRIB_TEMPO_PITCH要加12.f
+	每升一個半音，頻綠增加1.0594630943593 (1.0594630943592953098) (1.05946309435929530984310531494)
+	用1.0594630943592953098就好，精度更高電腦算出來結果也依樣
+	降音是0.943874312681693417026451697893，就是1/1.0594630943592953098
+	
+	1 : 1.0594630943592953098
+	
+	換算公式：更改速度p => 更改音高ln(p)/ln(1.059)
+	
+	速度寫完，接下來來寫fade out
+	
+	還有繞圈要寫
+	
+	
+12/19
+	改的方向：先把main interface家道decpendency cache裡面，然後在base裡面去new一個output manager，百在audio manager旁邊，然後在load的時候再去把output manger和main interface接起來。
+	
+	output manager用法基本跟audio manager依樣?可能要設計一套output handler機制，例如panel、bt來跟output manager註冊add on event，
+	output manager收到event就會叫panel、bt的function pointer，就變成panel、bt把這個事情收去做，例如再panel裡面加一個handle output，然後註冊到output manager上(用add on event...)
+	panel拿到Event以後，再dynamic cast看看這個event是不是panel event，是的話再處理，不是就跳過
+	
+	之後只要一丟output給output manager，就會直接call到panel的handle output，變成panel處理
+	
 	
 	
