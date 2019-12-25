@@ -493,6 +493,24 @@
     <Filter Include="標頭檔\Games\Scheduler\Events\IoEvents\IoCommunicators">
       <UniqueIdentifier>{fe1e2a4a-b6df-4be2-af75-e255c43ec25f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="標頭檔\RulesetMeteor\Schedulers\Events\IoEvents">
+      <UniqueIdentifier>{0784a6f9-47df-41d0-b37c-0a47962654f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\RulesetMeteor\Schedulers\Events\IoEvents\IoCommunicators">
+      <UniqueIdentifier>{dbd99add-3464-4c27-b584-00e6a0987a38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetMeteor\Schedulers\Events\IoEvents">
+      <UniqueIdentifier>{53ceaba7-7711-4cc5-b278-c68b9b341ec5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Games\Schedulers\Events\IoEvents">
+      <UniqueIdentifier>{4fe274e5-b78a-4047-802c-f84437b6c2e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetMeteor\Schedulers\Events\IoEvents\IoCommunicators">
+      <UniqueIdentifier>{0c03eafe-a963-4b35-9b64-f58b3f361714}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Games\Schedulers\Events\IoEvents\IoCommunicators">
+      <UniqueIdentifier>{cf840866-f0f0-4d0f-8d11-5ba5dbdb5a29}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Games\Graphic\Renderer\renderer.cpp">
@@ -1028,6 +1046,18 @@
     </ClCompile>
     <ClCompile Include="Games\Scheduler\Event\ControlPoints\InputKeyControlPointHitObject.cpp">
       <Filter>來源檔案\Games\Schedulers\Events\ControlPoints</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\IoEvents\SustainPedalIoEvent.cpp">
+      <Filter>來源檔案\RulesetMeteor\Schedulers\Events\IoEvents</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\Scheduler\Event\IoEvents\IoEvent.cpp">
+      <Filter>來源檔案\Games\Schedulers\Events\IoEvents</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\Scheduler\Event\IoEvents\PanelEvent.cpp">
+      <Filter>來源檔案\Games\Schedulers\Events\IoEvents</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\Scheduler\Event\IoEvents\IoCommunicator\IoCommunicator.cpp">
+      <Filter>來源檔案\Games\Schedulers\Events\IoEvents\IoCommunicators</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1767,6 +1797,15 @@
     </ClInclude>
     <ClInclude Include="Games\Scheduler\Event\IoEvents\IoEventProcessor.h">
       <Filter>標頭檔\Games\Scheduler\Events\IoEvents</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\IoEvents\SustainPedalIoEvent.h">
+      <Filter>標頭檔\RulesetMeteor\Schedulers\Events\IoEvents</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\IoEvents\SustainPedalLightRing.h">
+      <Filter>標頭檔\RulesetMeteor\Schedulers\Events\IoEvents</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\IoEvents\IoCommunicators\SustainPedalLightRingIoCommunicator.h">
+      <Filter>標頭檔\RulesetMeteor\Schedulers\Events\IoEvents\IoCommunicators</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

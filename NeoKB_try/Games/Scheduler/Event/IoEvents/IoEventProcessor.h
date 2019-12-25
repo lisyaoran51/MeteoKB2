@@ -41,6 +41,17 @@ namespace IoEvents {
 			return -1;
 		}
 
+		virtual int ProcessIo() {
+			if (ioCommunicator)
+				ioCommunicator->ProcessIO(this);
+			return 0;
+		}
+
+		T* GetIoEvent() { return dynamic_cast<T*>(event); }
+
+	protected:
+
+		IoCommunicator<T>* ioCommunicator = nullptr;
 
 	};
 

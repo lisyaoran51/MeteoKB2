@@ -24,6 +24,8 @@ namespace IoCommunicators {
 
 	public:
 
+		IoCommunicatorInterface();
+
 		virtual int RegisterIoDevice(OutputDevice* oDevice) = 0;
 
 		virtual int ProcessIO(EventProcessor<Event>* eProcessor) = 0;
@@ -67,7 +69,22 @@ namespace IoCommunicators {
 			registerLoad(bind((int(IoCommunicator<T>::*)())&IoCommunicator<T>::load, this));
 		}
 
+		virtual int RegisterIoDevice(OutputDevice* oDevice) {
+			outputDevice = oDevice;
+			return 0;
+		}
 
+		virtual int ProcessIO(EventProcessor<Event>* eProcessor) {
+
+			return implementProcessIO(Cast<IoEventProcessor<T>>(eProcessor));
+
+		}
+
+	protected:
+
+		OutputDevice* outputDevice = nullptr;
+
+		virtual int implementProcessIO(IoEventProcessor<T>* eProcessor) = 0;
 
 	};
 

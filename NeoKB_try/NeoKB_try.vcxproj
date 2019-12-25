@@ -85,6 +85,9 @@
     <ClCompile Include="Games\Scheduler\Event\GameEvents\GameEvent.cpp" />
     <ClCompile Include="Games\Scheduler\Event\GameEvents\StartGameEvent.cpp" />
     <ClCompile Include="Games\Scheduler\Event\HitObject.cpp" />
+    <ClCompile Include="Games\Scheduler\Event\IoEvents\IoCommunicator\IoCommunicator.cpp" />
+    <ClCompile Include="Games\Scheduler\Event\IoEvents\IoEvent.cpp" />
+    <ClCompile Include="Games\Scheduler\Event\IoEvents\PanelEvent.cpp" />
     <ClCompile Include="Games\Scheduler\Event\SystemEvents\StopSystemEvent.cpp" />
     <ClCompile Include="Games\Scheduler\Event\SystemEvents\SystemEvent.cpp" />
     <ClCompile Include="Games\Scheduler\Event\SystemEvents\SystemEventHandler.cpp" />
@@ -192,6 +195,7 @@
     <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\GlowLineEffectMapper.cpp" />
     <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\TargetLineEffect.cpp" />
     <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\TargetLineEffectMapper.cpp" />
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\IoEvents\SustainPedalIoEvent.cpp" />
     <ClCompile Include="RulesetMeteor\Scheduler\Event\MeteorEventProcessorMaster.cpp" />
     <ClCompile Include="RulesetMeteor\Sheetmusic\MeteorSheetmusicConverter.cpp" />
     <ClCompile Include="RulesetMeteor\Sheetmusic\MeteorSheetmusicPostprocessor.cpp" />
@@ -437,6 +441,9 @@
     <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\GlowLineEffectMapper.h" />
     <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\TargetLineEffect.h" />
     <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\TargetLineEffectMapper.h" />
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\IoEvents\IoCommunicators\SustainPedalLightRingIoCommunicator.h" />
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\IoEvents\SustainPedalIoEvent.h" />
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\IoEvents\SustainPedalLightRing.h" />
     <ClInclude Include="RulesetMeteor\Scheduler\Event\MeteorEventProcessorMaster.h" />
     <ClInclude Include="RulesetMeteor\Sheetmusic\MeteorSheetmusicConverter.h" />
     <ClInclude Include="RulesetMeteor\Sheetmusic\MeteorSheetmusicPostProcessor.h" />
