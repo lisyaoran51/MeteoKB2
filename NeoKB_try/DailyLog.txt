@@ -1391,5 +1391,7 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	
 	之後只要一丟output給output manager，就會直接call到panel的handle output，變成panel處理
 	
-	
+12/26
+
+	正在寫sustain pedal ring的東西
 	

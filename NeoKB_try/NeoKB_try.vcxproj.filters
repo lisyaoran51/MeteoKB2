@@ -1086,6 +1086,12 @@
     <ClCompile Include="Framework\Output\OutputManager.cpp">
       <Filter>來源檔案\Framework\Output</Filter>
     </ClCompile>
+    <ClCompile Include="RulesetMeteor\Output\Panels\SustainPedalLightRingPanelMessage.cpp">
+      <Filter>來源檔案\RulesetMeteor\Output\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\IoEvents\SustainPedalLightRing.cpp">
+      <Filter>來源檔案\RulesetMeteor\Schedulers\Events\IoEvents</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="DailyLog.txt">

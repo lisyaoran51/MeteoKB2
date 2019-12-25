@@ -4,9 +4,11 @@
 
 #include "SustainPedalLightRingPanelMessage.h"
 #include "../../../Framework/Output/Panels/PanelOutputer.h"
+#include "../../../Framework/IO/Panel.h"
 
 
 using namespace Framework::Output::Panels;
+using namespace Framework::IO;
 
 
 namespace Meteor {

@@ -18,7 +18,10 @@ namespace IoEvents {
 
 	public:
 
-
+		MTO_FLOAT GetTargetStartTime();
+		MTO_FLOAT GetTargetLifeTime();
+		MTO_FLOAT GetRingLifeTime();
+		MTO_FLOAT GetNextTargetStartTime();
 
 	};
 

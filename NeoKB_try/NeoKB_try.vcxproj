@@ -180,6 +180,7 @@
     <ClCompile Include="RulesetMeteor\Input\MeteorInputManager.cpp" />
     <ClCompile Include="RulesetMeteor\MeteorGame.cpp" />
     <ClCompile Include="RulesetMeteor\Output\Panels\SustainPedalLightRingOutputer.cpp" />
+    <ClCompile Include="RulesetMeteor\Output\Panels\SustainPedalLightRingPanelMessage.cpp" />
     <ClCompile Include="RulesetMeteor\Play\MeteorPlayfield.cpp" />
     <ClCompile Include="RulesetMeteor\Ruleset\Judgements\MeteorHitWindow.cpp" />
     <ClCompile Include="RulesetMeteor\Ruleset\Judgements\MeteorJudgement.cpp" />
@@ -200,6 +201,7 @@
     <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\TargetLineEffectMapper.cpp" />
     <ClCompile Include="RulesetMeteor\Scheduler\Event\IoEvents\IoCommunicators\SustainPedalLightRingIoCommunicator.cpp" />
     <ClCompile Include="RulesetMeteor\Scheduler\Event\IoEvents\SustainPedalIoEvent.cpp" />
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\IoEvents\SustainPedalLightRing.cpp" />
     <ClCompile Include="RulesetMeteor\Scheduler\Event\MeteorEventProcessorMaster.cpp" />
     <ClCompile Include="RulesetMeteor\Sheetmusic\MeteorSheetmusicConverter.cpp" />
     <ClCompile Include="RulesetMeteor\Sheetmusic\MeteorSheetmusicPostprocessor.cpp" />

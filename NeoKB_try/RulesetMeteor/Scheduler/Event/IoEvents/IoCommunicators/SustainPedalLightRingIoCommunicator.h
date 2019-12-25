@@ -25,14 +25,10 @@ namespace IoCommunicators {
 
 		int load();
 
-		int load(MainInterface* m);
-
 
 	public:
 
 		SustainPedalLightRingIoCommunicator();
-
-		virtual int RegisterIoPeripheral(Peripheral* ioPeripheral);
 
 	protected:
 
