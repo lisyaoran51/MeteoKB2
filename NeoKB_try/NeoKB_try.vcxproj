@@ -36,6 +36,7 @@
     <ClCompile Include="Framework\Database\FakeDatabaseContextFactory.cpp" />
     <ClCompile Include="Framework\Database\FakeMeteoDatabaseContext.cpp" />
     <ClCompile Include="Framework\Database\MeteoDatabaseContext.cpp" />
+    <ClCompile Include="Framework\Devices\OutputDevice.cpp" />
     <ClCompile Include="Framework\Host\MeteoGameHost.cpp" />
     <ClCompile Include="Framework\Input\Handler\TestCaseKeyboardInputHandler.cpp" />
     <ClCompile Include="Framework\Input\KeyBindings\HasInputKey.cpp" />
@@ -44,6 +45,7 @@
     <ClCompile Include="Framework\IO\PlatformStorage.cpp" />
     <ClCompile Include="Framework\IO\Storage.cpp" />
     <ClCompile Include="Framework\IO\Stores\StorageResourceStore.cpp" />
+    <ClCompile Include="Framework\Output\OutputManager.cpp" />
     <ClCompile Include="Framework\Timing\SpeedAdjusters\LinearSpeedAdjuster.cpp" />
     <ClCompile Include="Framework\Timing\ThrottledFramedClock.cpp" />
     <ClCompile Include="Framework\Timing\TimeController.cpp" />
@@ -177,6 +179,7 @@
     <ClCompile Include="RulesetMeteor\Config\MeteorConfigManager.cpp" />
     <ClCompile Include="RulesetMeteor\Input\MeteorInputManager.cpp" />
     <ClCompile Include="RulesetMeteor\MeteorGame.cpp" />
+    <ClCompile Include="RulesetMeteor\Output\Panels\SustainPedalLightRingOutputer.cpp" />
     <ClCompile Include="RulesetMeteor\Play\MeteorPlayfield.cpp" />
     <ClCompile Include="RulesetMeteor\Ruleset\Judgements\MeteorHitWindow.cpp" />
     <ClCompile Include="RulesetMeteor\Ruleset\Judgements\MeteorJudgement.cpp" />
@@ -195,6 +198,7 @@
     <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\GlowLineEffectMapper.cpp" />
     <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\TargetLineEffect.cpp" />
     <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\TargetLineEffectMapper.cpp" />
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\IoEvents\IoCommunicators\SustainPedalLightRingIoCommunicator.cpp" />
     <ClCompile Include="RulesetMeteor\Scheduler\Event\IoEvents\SustainPedalIoEvent.cpp" />
     <ClCompile Include="RulesetMeteor\Scheduler\Event\MeteorEventProcessorMaster.cpp" />
     <ClCompile Include="RulesetMeteor\Sheetmusic\MeteorSheetmusicConverter.cpp" />
@@ -246,12 +250,14 @@
     <ClInclude Include="Framework\IO\Stores\StorageResourceStore.h" />
     <ClInclude Include="Framework\Output\Bluetooths\BluetoothManager.h" />
     <ClInclude Include="Framework\Output\Bluetooths\BluetoothMessage.h" />
+    <ClInclude Include="Framework\Output\Bluetooths\BluetoothOutputer.h" />
     <ClInclude Include="Framework\Output\OutputCollectionManager.h" />
     <ClInclude Include="Framework\Output\OutputComponent.h" />
     <ClInclude Include="Framework\Output\OutputManager.h" />
     <ClInclude Include="Framework\Output\OutputMessage.h" />
     <ClInclude Include="Framework\Output\Panels\PanelManager.h" />
     <ClInclude Include="Framework\Output\Panels\PanelMessage.h" />
+    <ClInclude Include="Framework\Output\Panels\PanelOutputer.h" />
     <ClInclude Include="Framework\Timing\SpeedAdjusters\LinearSpeedAdjuster.h" />
     <ClInclude Include="Framework\Timing\TimeController.h" />
     <ClInclude Include="Games\Configurations\MeteoConfigManager.h" />
@@ -422,6 +428,8 @@
     <ClInclude Include="RulesetMeteor\Config\MeteorConfigManager.h" />
     <ClInclude Include="RulesetMeteor\Input\MeteorInputManager.h" />
     <ClInclude Include="RulesetMeteor\MeteorGame.h" />
+    <ClInclude Include="RulesetMeteor\Output\Panels\SustainPedalLightRingOutputer.h" />
+    <ClInclude Include="RulesetMeteor\Output\Panels\SustainPedalLightRingPanelMessage.h" />
     <ClInclude Include="RulesetMeteor\Play\MeteorPlayfield.h" />
     <ClInclude Include="RulesetMeteor\Ruleset\Judgements\MeteorHitWindow.h" />
     <ClInclude Include="RulesetMeteor\Ruleset\Judgements\MeteorJudgement.h" />

@@ -28,6 +28,12 @@ int Base::load()
 
 	Cache<AudioManager>(audioManager);
 
+	outputManager = new OutputManager(gameHost->GetMainInterface());
+
+	setupOutputManager();
+
+	Cache<OutputManager>(outputManager);
+
 	return 0;
 }
 
@@ -48,3 +54,4 @@ string Base::GetResourcePath()
 {
 	return string("./Resources");
 }
+

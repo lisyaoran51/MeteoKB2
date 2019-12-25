@@ -4,10 +4,13 @@
 
 #include "../../../../../Games/Scheduler/Event/IoEvents/IoCommunicator/IoCommunicator.h"
 #include "../SustainPedalIoEvent.h"
+#include "../SustainPedalLightRing.h"
+#include "../../../../../Framework/IO/Panel.h"
 
 
 using namespace Games::Schedulers::Events::IoEvents::IoCommunicators;
 using namespace Meteor::Schedulers::Events::IoEvents;
+using namespace Framework::IO;
 
 
 namespace Meteor {
@@ -16,12 +19,28 @@ namespace Events {
 namespace IoEvents {
 namespace IoCommunicators {
 
+
+
 	class SustainPedalLightRingIoCommunicator : public IoCommunicator<SustainPedalIoEvent> {
+
+		int load();
+
+		int load(MainInterface* m);
+
 
 	public:
 
 		SustainPedalLightRingIoCommunicator();
 
+		virtual int RegisterIoPeripheral(Peripheral* ioPeripheral);
+
+	protected:
+
+		Panel* panel = nullptr;
+
+		virtual int implementProcessIO(SustainPedalLightRing* sPedalLightRing);
+
+		
 
 	};
 

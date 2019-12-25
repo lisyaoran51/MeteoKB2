@@ -14,3 +14,17 @@ int Peripheral::PushInputState(InputState * inputState)
 	return 0;
 }
 
+int Peripheral::PushOutputMessage(OutputMessage * outputMessage)
+{
+	//¦n¹³­nthread safe
+	outputMessages.push_back(outputMessage);
+	return 0;
+}
+
+int Peripheral::PourOutOutputMessages(vector<OutputMessage*>* pourOutTo)
+{
+	pourOutTo->insert(pourOutTo->end(), outputMessages.begin(), outputMessages.end());
+	outputMessages.clear();
+	return 0;
+}
+

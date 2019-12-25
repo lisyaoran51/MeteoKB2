@@ -6,12 +6,14 @@
 #include "IO/Stores/CompositeResourceStore.h"
 #include "Audio/AudioManager.h"
 #include "Host/GameHost.h"
+#include "Output/OutputManager.h"
 
 
 using namespace Framework::Allocation;
 using namespace Framework::IO;
 using namespace Framework::Audio;
 using namespace Framework::Host;
+using namespace Framework::Output;
 
 
 namespace Framework {
@@ -33,9 +35,13 @@ namespace Framework {
 
 		AudioManager* audioManager = nullptr;
 
+		OutputManager* outputManager = nullptr;
+
 		GameHost* gameHost;
 
 		CompositeResourceStore<char*>* resources;
+
+		virtual int setupOutputManager() = 0;;
 
 	};
 

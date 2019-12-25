@@ -5,15 +5,19 @@
 
 #include <vector>
 #include "../Input/InputState.h"
+#include "../Output//OutputMessage.h"
+
 
 namespace Framework {
 namespace Devices{
 	class Device;
 }}
 
+
 using namespace std;
 using namespace Framework::Devices;
 using namespace Framework::Input;
+using namespace Framework::Output;
 
 
 
@@ -25,7 +29,6 @@ namespace IO {
 	/// 抓取輸入的地方，書出的地方
 	/// </summary>
 	class Peripheral {
-		int aa;
 
 	public:
 
@@ -38,11 +41,23 @@ namespace IO {
 		/// </summary>
 		int PushInputState(InputState* inputState);
 
+		/// <summary>
+		/// 拿去註冊在io communicator裡，或是其他要接收output的地方
+		/// </summary>
+		int PushOutputMessage(OutputMessage* outputMessage);
+
+		/// <summary>
+		/// 把output全部倒進device裡
+		/// </summary>
+		int PourOutOutputMessages(vector<OutputMessage*>* pourOutTo);
+
 	protected:
 
 		Device* matchedDevice;
 
 		vector<InputState*> inputStates;
+
+		vector<OutputMessage*> outputMessages;
 
 	private:
 

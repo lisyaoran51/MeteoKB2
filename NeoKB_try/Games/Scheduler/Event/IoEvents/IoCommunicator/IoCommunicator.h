@@ -26,7 +26,7 @@ namespace IoCommunicators {
 
 		IoCommunicatorInterface();
 
-		virtual int RegisterIoDevice(OutputDevice* oDevice) = 0;
+		virtual int RegisterIoPeripheral(Peripheral* oDevice) = 0;
 
 		virtual int ProcessIO(EventProcessor<Event>* eProcessor) = 0;
 
@@ -69,8 +69,8 @@ namespace IoCommunicators {
 			registerLoad(bind((int(IoCommunicator<T>::*)())&IoCommunicator<T>::load, this));
 		}
 
-		virtual int RegisterIoDevice(OutputDevice* oDevice) {
-			outputDevice = oDevice;
+		virtual int RegisterIoPeripheral(Peripheral* oDevice) {
+			ioPeripheral = oDevice;
 			return 0;
 		}
 
@@ -82,7 +82,7 @@ namespace IoCommunicators {
 
 	protected:
 
-		OutputDevice* outputDevice = nullptr;
+		Peripheral* ioPeripheral = nullptr;
 
 		virtual int implementProcessIO(IoEventProcessor<T>* eProcessor) = 0;
 

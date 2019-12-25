@@ -15,11 +15,15 @@ namespace Devices {
 		/// <summary>
 		/// 再input thread每一輪值形一次，不同device自己去定這一輪他要做什麼書出
 		/// </summary>
-		virtual int ProcessOutput() = 0;
+		virtual int ProcessOutput();
 
 	protected:
 
-		
+		vector<OutputMessage*> outputMessages;
+
+		virtual int readFromPeripheral();
+
+		virtual int passToDevice() = 0;
 
 	};
 
