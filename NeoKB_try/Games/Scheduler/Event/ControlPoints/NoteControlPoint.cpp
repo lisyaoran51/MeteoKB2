@@ -3,14 +3,14 @@
 using namespace Games::Schedulers::Events::ControlPoints;
 
 
-NoteControlPoint::NoteControlPoint(Pitch p, MTO_FLOAT s, MTO_FLOAT l): ControlPoint(s,l), HasPitch(p)
+NoteControlPoint::NoteControlPoint(Pitch p, MTO_FLOAT s, MTO_FLOAT l): PlayableControlPoint(s,l), HasPitch(p)
 {
 	pitch = p;
 }
 
 ControlPointType NoteControlPoint::GetControlPointType()
 {
-	return ControlPointType::ControlPointTypeNote;
+	return ControlPointType::Note;
 }
 
 string NoteControlPoint::GetTypeName()
@@ -18,32 +18,6 @@ string NoteControlPoint::GetTypeName()
 	return "NoteControlPoint";
 }
 
-MTO_FLOAT NoteControlPoint::GetVolume(){
-	return volume;
-}
-
-int NoteControlPoint::SetVolume(MTO_FLOAT v){
-	volume = v;
-	return 0;
-}
-
-int NoteControlPoint::GetSectionIndex(){
-	return sectionIndex;
-}
-
-int NoteControlPoint::SetSectionIndex(int sI){
-	sectionIndex = sI;
-	return 0;
-}
-
-HandType NoteControlPoint::GetHandType(){
-	return handType;
-}
-
-int NoteControlPoint::SetHandType(HandType h){
-	handType = h;
-	return 0;
-}
 
 bool NoteControlPoint::IsWhiteKey()
 {
@@ -72,5 +46,6 @@ Event* NoteControlPoint::Clone()
 	newNoteControlPoint->SetVolume(volume);
 	newNoteControlPoint->SetSectionIndex(sectionIndex);
 	newNoteControlPoint->SetHandType(handType);
+	newNoteControlPoint->SetPartIndex(partIndex);
 	return newNoteControlPoint;
 }

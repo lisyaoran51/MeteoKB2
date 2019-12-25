@@ -2,7 +2,11 @@
 
 #include "../../Games/Scheduler/Event/Effect/Effect.h"
 #include "../../Games/Scheduler/Event/ControlPoints/NoteControlPoint.h"
+#include "../../Games/Scheduler/Event/ControlPoints/InputKeyControlPoint.h"
 #include "../../Games/Scheduler/Event/GameEvents/StartGameEvent.h"
+
+
+
 
 using namespace Meteor::Sheetmusics;
 using namespace Games::Schedulers::Events;
@@ -58,6 +62,16 @@ int MeteorSmConverter::convertEvent(vector<Event*>* es, Event* e)
 
 	if (e->CanCast<NoteControlPoint>()) {
 		// 對本來單純的樂譜，生成各種特效，如提示光、落下、其他特效。
+
+		Pattern* newPattern = patternGenerator->Generate(es, e);
+		newPattern->SetOriginalEvent(e);
+
+		patternGenerator->Add(newPattern);
+
+	}
+
+	if (e->CanCast<InputKeyControlPoint>()) {
+		// 踏板特效。
 
 		Pattern* newPattern = patternGenerator->Generate(es, e);
 		newPattern->SetOriginalEvent(e);

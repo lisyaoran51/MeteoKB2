@@ -370,21 +370,6 @@
     <Filter Include="標頭檔\Games\Scheduler\Events\SystemEvents">
       <UniqueIdentifier>{b600f2e3-2187-4a1a-b732-001854cf6a32}</UniqueIdentifier>
     </Filter>
-    <Filter Include="標頭檔\Games\Scheduler\Events\Sheetmusic">
-      <UniqueIdentifier>{11fd7402-738a-4c3b-82f2-b67055d74555}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="標頭檔\Games\Scheduler\Events\Sheetmusic\Format">
-      <UniqueIdentifier>{6cfab30d-a591-47d8-9dfe-3fdbeb79128e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="標頭檔\Games\Scheduler\Events\Sheetmusic\Format\EventParser">
-      <UniqueIdentifier>{311d5e29-ec8f-4ccd-a0f0-cf9ed6d9b21e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="標頭檔\Games\Scheduler\Events\Sheetmusic\IO">
-      <UniqueIdentifier>{fbffc68a-9def-4f45-a18f-1cfd4c19744b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="標頭檔\Games\Scheduler\Events\Sheetmusic\Pattern">
-      <UniqueIdentifier>{5e4fb93a-ba6a-4be6-b91f-4f5aa8c64f8d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="標頭檔\Games\Scene">
       <UniqueIdentifier>{a445c660-ab7a-427f-a901-6b9363302257}</UniqueIdentifier>
     </Filter>
@@ -501,6 +486,12 @@
     </Filter>
     <Filter Include="標頭檔\Framework\Output\Bluetooths">
       <UniqueIdentifier>{2aa05fb2-7a59-43bf-977d-3bc0f5ff8405}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Games\Scheduler\Events\IoEvents">
+      <UniqueIdentifier>{c3a6e98d-f198-4099-b35a-462c514e4153}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Games\Scheduler\Events\IoEvents\IoCommunicators">
+      <UniqueIdentifier>{fe1e2a4a-b6df-4be2-af75-e255c43ec25f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1025,6 +1016,18 @@
     </ClCompile>
     <ClCompile Include="Framework\Audio\Track\RateSettableBassTrack.cpp">
       <Filter>來源檔案\Framework\Audio\Track</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Input\KeyBindings\HasInputKey.cpp">
+      <Filter>來源檔案\Framework\Input\KeyBindings</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\Scheduler\Event\ControlPoints\InputKeyControlPoint.cpp">
+      <Filter>來源檔案\Games\Schedulers\Events\ControlPoints</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\Scheduler\Event\ControlPoints\PlayableControlPoint.cpp">
+      <Filter>來源檔案\Games\Schedulers\Events\ControlPoints</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\Scheduler\Event\ControlPoints\InputKeyControlPointHitObject.cpp">
+      <Filter>來源檔案\Games\Schedulers\Events\ControlPoints</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1737,6 +1740,33 @@
     </ClInclude>
     <ClInclude Include="Framework\Output\Panels\PanelMessage.h">
       <Filter>標頭檔\Framework\Output\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Scheduler\Event\ControlPoints\InputKeyControlPoint.h">
+      <Filter>標頭檔\Games\Scheduler\Events\ControlPoints</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Input\KeyBindings\HasInputKey.h">
+      <Filter>標頭檔\Framework\Input\KeyBindings</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Scheduler\Event\ControlPoints\PlayableControlPoint.h">
+      <Filter>標頭檔\Games\Scheduler\Events\ControlPoints</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Scheduler\Event\ControlPoints\InputKeyControlPointHitObject.h">
+      <Filter>標頭檔\Games\Scheduler\Events\ControlPoints</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Scheduler\Event\IoEvents\IoEvent.h">
+      <Filter>標頭檔\Games\Scheduler\Events\IoEvents</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Scheduler\Event\IoEvents\BluetoothEvent.h">
+      <Filter>標頭檔\Games\Scheduler\Events\IoEvents</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Scheduler\Event\IoEvents\PanelEvent.h">
+      <Filter>標頭檔\Games\Scheduler\Events\IoEvents</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Scheduler\Event\IoEvents\IoCommunicator\IoCommunicator.h">
+      <Filter>標頭檔\Games\Scheduler\Events\IoEvents\IoCommunicators</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Scheduler\Event\IoEvents\IoEventProcessor.h">
+      <Filter>標頭檔\Games\Scheduler\Events\IoEvents</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

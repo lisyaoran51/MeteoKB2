@@ -1,6 +1,7 @@
 ﻿#include "SimpleSmDecoder.h"
 
 #include "../../Scheduler/Event/ControlPoints/NoteControlPoint.h"
+#include "../../Scheduler/Event/ControlPoints/InputKeyControlPoint.h"
 
 
 using namespace Games::Sheetmusics::Format;
@@ -140,13 +141,15 @@ int SimpleSmDecoder::handleNoteControlPoints(Sm<Event>* sm, string & line)
 	// 音 時間 長度 加速 三分/四分 音量 時間改變
 	vector<string> splitLine = split(line, ",");
 
-	Pitch pitch = static_cast<Pitch>(atoi(splitLine.at(0).c_str()));
+	int pitchInt = atoi(splitLine.at(0).c_str());
+
 	MTO_FLOAT time = stof(splitLine.at(1).c_str());
 	MTO_FLOAT noteLength = stof(splitLine.at(2).c_str());
 	
-	MTO_FLOAT volume 	= splitLine.size() > 3 ? stof(splitLine.at(3).c_str()) : 0;
-	int sectionIndex 	= splitLine.size() > 4 ? atoi(splitLine.at(4).c_str()) : 0;
-	int hand 			= splitLine.size() > 5 ? atoi(splitLine.at(5).c_str()) : 0 ;
+	MTO_FLOAT volume 	= splitLine.size() > 3 ? stof(splitLine.at(3).c_str()) : -1;
+	int sectionIndex 	= splitLine.size() > 4 ? atoi(splitLine.at(4).c_str()) : -1;
+	int hand 			= splitLine.size() > 5 ? atoi(splitLine.at(5).c_str()) : 0;
+	int partIndex		= splitLine.size() > 6 ? atoi(splitLine.at(6).c_str()) : -1;
 	
 	//MTO_FLOAT speedMultiplier = noteLength < 0 ? 100f / -noteLength : 1;
 	//
@@ -187,18 +190,34 @@ int SimpleSmDecoder::handleNoteControlPoints(Sm<Event>* sm, string & line)
 	//EffectControlPoint effectPoint = beatmap.ControlPointInfo.EffectPointAt(time);
 
 	if (timingChange) {
+		PlayableControlPoint* newPlayableControlPoint = nullptr;
 
-		NoteControlPoint* newNoteControlPoint = new NoteControlPoint(
-			pitch,
-			time,
-			noteLength
-		);
-		
-		newNoteControlPoint->SetVolume(volume);
-		newNoteControlPoint->SetSectionIndex(sectionIndex);
-		newNoteControlPoint->SetHandType(static_cast<HandType>(hand));
-		
-		sm->GetEvents()->push_back(newNoteControlPoint);
+		if (pitchInt >= 0) {
+			Pitch pitch = static_cast<Pitch>(pitchInt);
+
+			newPlayableControlPoint = new NoteControlPoint(
+				pitch,
+				time,
+				noteLength
+			);
+		}
+		else {
+			InputKey inputKey = InputKey::None;
+			int inputValue = 0;
+			switch (pitchInt)
+			{
+			case -1:
+				inputKey = InputKey::SustainPedal;
+			}
+			newPlayableControlPoint = new InputKeyControlPoint(inputKey, inputValue, time, noteLength);
+		}
+
+		newPlayableControlPoint->SetVolume(volume);
+		newPlayableControlPoint->SetSectionIndex(sectionIndex);
+		newPlayableControlPoint->SetHandType(static_cast<HandType>(hand));
+		newPlayableControlPoint->SetPartIndex(partIndex);
+
+		sm->GetEvents()->push_back(newPlayableControlPoint);
 	}
 
 	//if (speedMultiplier != difficultyPoint.SpeedMultiplier) {

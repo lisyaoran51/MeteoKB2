@@ -38,6 +38,7 @@
     <ClCompile Include="Framework\Database\MeteoDatabaseContext.cpp" />
     <ClCompile Include="Framework\Host\MeteoGameHost.cpp" />
     <ClCompile Include="Framework\Input\Handler\TestCaseKeyboardInputHandler.cpp" />
+    <ClCompile Include="Framework\Input\KeyBindings\HasInputKey.cpp" />
     <ClCompile Include="Framework\Input\KeyBindings\KeyBindingStore.cpp" />
     <ClCompile Include="Framework\IO\FileStore.cpp" />
     <ClCompile Include="Framework\IO\PlatformStorage.cpp" />
@@ -71,8 +72,11 @@
     <ClCompile Include="Games\Scene\Select\PlaySongSelect.cpp" />
     <ClCompile Include="Games\Scene\Select\SongSelect.cpp" />
     <ClCompile Include="Games\Scheduler\Event\ControlPoints\ControlPoint.cpp" />
+    <ClCompile Include="Games\Scheduler\Event\ControlPoints\InputKeyControlPoint.cpp" />
+    <ClCompile Include="Games\Scheduler\Event\ControlPoints\InputKeyControlPointHitObject.cpp" />
     <ClCompile Include="Games\Scheduler\Event\ControlPoints\NoteControlPoint.cpp" />
     <ClCompile Include="Games\Scheduler\Event\ControlPoints\NoteControlPointHitObject.cpp" />
+    <ClCompile Include="Games\Scheduler\Event\ControlPoints\PlayableControlPoint.cpp" />
     <ClCompile Include="Games\Scheduler\Event\Effect\Algorithm\LinearMapPitchShifter.cpp" />
     <ClCompile Include="Games\Scheduler\Event\Effect\Algorithm\MapPitchShifter.cpp" />
     <ClCompile Include="Games\Scheduler\Event\Effect\Effect.cpp" />
@@ -225,6 +229,7 @@
     <ClInclude Include="Framework\Database\FakeMeteoDatabaseContext.h" />
     <ClInclude Include="Framework\Database\MeteoDatabaseContext.h" />
     <ClInclude Include="Framework\Host\MeteoGameHost.h" />
+    <ClInclude Include="Framework\Input\KeyBindings\HasInputKey.h" />
     <ClInclude Include="Framework\Input\KeyBindings\KeyBindingStore.h" />
     <ClInclude Include="Framework\IO\FileInfo.h" />
     <ClInclude Include="Framework\IO\FileNotFoundException.h" />
@@ -273,8 +278,11 @@
     <ClInclude Include="Games\Scene\Select\SongSelect.h" />
     <ClInclude Include="Games\Scheduler\Event\ArmedState.h" />
     <ClInclude Include="Games\Scheduler\Event\ControlPoints\ControlPoint.h" />
+    <ClInclude Include="Games\Scheduler\Event\ControlPoints\InputKeyControlPoint.h" />
+    <ClInclude Include="Games\Scheduler\Event\ControlPoints\InputKeyControlPointHitObject.h" />
     <ClInclude Include="Games\Scheduler\Event\ControlPoints\NoteControlPoint.h" />
     <ClInclude Include="Games\Scheduler\Event\ControlPoints\NoteControlPointHitObject.h" />
+    <ClInclude Include="Games\Scheduler\Event\ControlPoints\PlayableControlPoint.h" />
     <ClInclude Include="Games\Scheduler\Event\Effect\Algorithm\LinearMapPitchShifter.h" />
     <ClInclude Include="Games\Scheduler\Event\Effect\Algorithm\MapAlgorithm.h" />
     <ClInclude Include="Games\Scheduler\Event\Effect\Algorithm\MapGenerateAlgorithm.h" />
@@ -289,6 +297,11 @@
     <ClInclude Include="Games\Scheduler\Event\GameEvents\StartGameEvent.h" />
     <ClInclude Include="Games\Scheduler\Event\GameEvents\StopGameEvent.h" />
     <ClInclude Include="Games\Scheduler\Event\HitObject.h" />
+    <ClInclude Include="Games\Scheduler\Event\IoEvents\BluetoothEvent.h" />
+    <ClInclude Include="Games\Scheduler\Event\IoEvents\IoCommunicator\IoCommunicator.h" />
+    <ClInclude Include="Games\Scheduler\Event\IoEvents\IoEvent.h" />
+    <ClInclude Include="Games\Scheduler\Event\IoEvents\IoEventProcessor.h" />
+    <ClInclude Include="Games\Scheduler\Event\IoEvents\PanelEvent.h" />
     <ClInclude Include="Games\Scheduler\Event\SystemEvents\StopSystemEvent.h" />
     <ClInclude Include="Games\Scheduler\Event\SystemEvents\SystemEvent.h" />
     <ClInclude Include="Games\Scheduler\Event\SystemEvents\SystemEventHandler.h" />

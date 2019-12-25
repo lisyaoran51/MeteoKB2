@@ -2,6 +2,7 @@
 
 #include "../../../Util/MtoType.h"
 #include "../../../Games/Scheduler/Event/ControlPoints/NoteControlPoint.h"
+#include "../../../Games/Scheduler/Event/ControlPoints/InputKeyControlPoint.h"
 #include "../../Scheduler/Event/Effect/FallEffect.h"
 #include "../../Scheduler/Event/Effect/GlowLineEffect.h"
 #include "../../Scheduler/Event/Effect/TargetLineEffect.h"
@@ -83,6 +84,7 @@ Pattern* MeteorPatternGenerator::Generate(vector<Event*>* es, Event * e)
 	//Event* eventClone = e->Clone();
 	NoteControlPoint* note = e->Cast<NoteControlPoint>(); //eventClone->Cast<NoteControlPoint>();
 	StartGameEvent* start = e->Cast<StartGameEvent>(); //eventClone->Cast<StartGameEvent>();
+	InputKeyControlPoint* inputKey = e->Cast<InputKeyControlPoint>();
 
 	/* 鍵力音符的特效 */
 	if (note)
@@ -92,12 +94,16 @@ Pattern* MeteorPatternGenerator::Generate(vector<Event*>* es, Event * e)
 	if (start)
 		return generateStartGameEvent(es, start);
 
+	/* 鍵力踏板的特效 */
+	if (inputKey)
+		return generateInputKeyControlPoint(es, inputKey);
 
-	if (!note && !start)
+
+	if (!note && !start && !inputKey)
 		throw runtime_error("Pattern* MeteorPatternGenerator::Generate(vector<Event*>*, Event*) : event cannot cast to NoteControlPoint or StartGameEvent.");
 
 
-	return NULL;
+	return nullptr;
 
 }
 
@@ -228,6 +234,78 @@ Pattern * MeteorPatternGenerator::generateStartGameEvent(vector<Event*>* es, Sta
 
 	/* 把pattern裡面的event一個一個加進去es裡 */
 	es->push_back(targetLine);
+
+	return pattern;
+}
+
+Pattern * MeteorPatternGenerator::generateInputKeyControlPoint(vector<Event*>* es, InputKeyControlPoint * inputKeyControlPoint)
+{
+	/* 在pattern generator消滅實消滅，或是converter跑完消滅 */
+	Pattern* pattern = new Pattern(inputKeyControlPoint);
+
+	LOG(LogLevel::Finer) << "int MeteorSmConverter::generateNoteControlPoint(vector<Event*>*, Event*) : Start converting [" << inputKeyControlPoint->GetInputKey() << "," << inputKeyControlPoint->GetStartTime() << "] to pattern...";
+
+	/* 如果這個音的狀態是隱藏，就直接返回 */
+	if (inputKeyControlPoint->GetHandType() > HandType::Foot)
+		return pattern;
+
+	InputKey inputKey = inputKeyControlPoint->GetInputKey();
+
+	if (inputKey != InputKey::SustainPedal) {
+		LOG(LogLevel::Warning) << "int MeteorSmConverter::generateInputKeyControlPoint(vector<Event*>*, Event*) : Input Key [" << static_cast<int>(inputKey) << " is not available.";
+		return pattern;
+	}
+
+
+	// 公式： (鍵盤高度-打擊點高度) / 速度
+	MTO_FLOAT fallTime = MTO_FLOAT(
+		note->IsWhiteKey() ?
+		targetHeight : blackKeyTargetHeight
+	) / fallSpeed;
+
+	MTO_FLOAT fallLifeTime = MTO_FLOAT(
+		(note->IsWhiteKey() ?
+			height : blackKeyHeight) + fallLength
+	) / fallSpeed;
+
+	MTO_FLOAT glowLineTime = fallTime + MTO_FLOAT(1) / glowLineSpeed + glowLineDuration;
+
+	MTO_FLOAT noteLifeTime = MTO_FLOAT(
+		note->IsWhiteKey() ?
+		(targetHeight) : (blackKeyTargetHeight)
+	) / glowLineSpeed;
+
+	LOG(LogLevel::Finest) << "int MeteorSmConverter::Generate(vector<Event*>*, Event*) : Fall speed is [" << fallSpeed << "], GlowLine speed is [" << glowLineSpeed << "].";
+	/*
+	LOG(LogLevel::Finer) << "int MeteorSmConverter::Generate(vector<Event*>*, Event*) : Generate GlowLine at [" << (int)pitch << "], start time [" << note->GetStartTime() - glowLineTime << "], life time [" << fallTime + glowLineDuration << "].";
+
+	GlowLineEffect* glow = new GlowLineEffect(
+		(int)pitch,
+		0,
+		note->GetStartTime() - glowLineTime,
+		fallTime + glowLineDuration,
+		glowLineSpeed);
+	*/
+	LOG(LogLevel::Finer) << "int MeteorSmConverter::Generate(vector<Event*>*, Event*) : Generate Fall at [" << (int)pitch << "], start time [" << note->GetStartTime() - fallTime << "], life time [" << fallLifeTime << "].";
+
+	FallEffect* fall = new FallEffect(
+		int(pitch),
+		0,
+		note->GetStartTime() - fallTime,
+		fallLifeTime,
+		fallSpeed);
+
+
+	//note->SetLifeTime(noteLifeTime);
+
+	//pattern->Add(glow);
+	pattern->Add(fall);
+	//pattern->Add(note);
+
+	// 把pattern裡面的event一個一個加進去es裡
+	//es->push_back(glow);
+	es->push_back(fall);
+	//es->push_back(note);
 
 	return pattern;
 }

@@ -1,7 +1,7 @@
 #ifndef NOTE_CONTROL_POINT_H
 #define NOTE_CONTROL_POINT_H
 
-#include "ControlPoint.h"
+#include "PlayableControlPoint.h"
 #include "../../../../Instruments/Pitch.h"
 #include "../../../../Instruments/HasPitch.h"
 
@@ -15,18 +15,8 @@ namespace Schedulers {
 namespace Events {
 namespace ControlPoints {
 
-	enum class HandType;
+	class NoteControlPoint : public PlayableControlPoint, public HasPitch {
 
-	class NoteControlPoint : public ControlPoint, public HasPitch {
-
-		//Pitch pitch;
-		
-		MTO_FLOAT volume;
-		
-		int sectionIndex;
-		int partIndex;
-		
-		HandType handType;
 
 	public:
 
@@ -37,20 +27,6 @@ namespace ControlPoints {
 		// 一定要每次都override!!
 		virtual string GetTypeName();
 
-		//Pitch GetPitch();
-		
-		MTO_FLOAT GetVolume();
-		int SetVolume(MTO_FLOAT v);
-		
-		int GetSectionIndex();
-		int SetSectionIndex(int sI);
-
-		int GetPartIndex();
-		int SetPartTndex(int pIndex);
-		
-		HandType GetHandType();
-		int SetHandType(HandType h);
-
 		bool IsWhiteKey();
 
 		virtual Event* Clone();
@@ -58,14 +34,7 @@ namespace ControlPoints {
 	};
 
 	
-	enum class HandType{
-		None,
-		Left,
-		Right,
-		HiddenNone,
-		HiddenLeft,
-		HiddenRight
-	};
+	
 	
 }}}}
 

@@ -26,9 +26,10 @@ namespace ControlPoints {
 	};
 
 	enum class ControlPointType {
-		ControlPointTypeNote,
-		ControlPointTypeSound,
-		ControlPointTypeEffect
+		Note,
+		Input,
+		Sound,
+		Effect
 	};
 
 }}}}

@@ -11,6 +11,7 @@
 #include "../../Config/MeteorConfigManager.h"
 #include "../../../Games/Scheduler/Event/GameEvents/StartGameEvent.h"
 #include "../../../Games/Scheduler/Event/ControlPoints/NoteControlPoint.h"
+#include "../../../Games/Scheduler/Event/ControlPoints/InputKeyControlPoint.h"
 
 
 
@@ -66,6 +67,7 @@ namespace Patterns {
 
 		Pattern* generateNoteControlPoint(vector<Event*>* es, NoteControlPoint* note);
 		Pattern* generateStartGameEvent(vector<Event*>* es, StartGameEvent* start);
+		Pattern* generateInputKeyControlPoint(vector<Event*>* es, InputKeyControlPoint* inputKey);
 
 	};
 
