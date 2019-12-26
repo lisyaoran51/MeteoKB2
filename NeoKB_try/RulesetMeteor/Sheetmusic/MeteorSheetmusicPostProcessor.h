@@ -27,6 +27,10 @@ namespace Sheetmusics {
 		virtual Sm<Event>* postprocess(Sm<Event>* s);
 
 	protected:
+
+		MTO_FLOAT pedalInterval = 0.2f;
+		MTO_FLOAT defaultNextPedalTargetStartTime = 1.f;
+
 	};
 
 

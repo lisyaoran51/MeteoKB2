@@ -64,6 +64,8 @@ Sm<Event>* SmConverter::Convert(Sm<Event>* s)
 
 	tempEvents->clear();
 
+	patternGenerator->PostProcess();
+
 	LOG(LogLevel::Finer) << "Sm<Event>* SmConverter::Convert(Sm<Event>*) : Clean patterns ...";
 	patternGenerator->CleanPatterns();
 

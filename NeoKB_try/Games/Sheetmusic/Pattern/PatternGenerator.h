@@ -58,6 +58,8 @@ namespace Patterns {
 		/// </summary>
 		virtual int CreateOtherEvent(vector<Event*>* es);
 
+		virtual int PostProcess() = 0;
+
 	protected:
 
 		int width;

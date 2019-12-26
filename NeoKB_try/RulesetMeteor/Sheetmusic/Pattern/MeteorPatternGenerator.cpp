@@ -10,6 +10,7 @@
 #include "../../../Games/Scheduler/Event/SystemEvents/SystemEvent.h"
 #include "../../../Games/Scheduler/Event/SystemEvents/StopSystemEvent.h"
 #include "../../../Instruments/Pitch.h"
+#include "../../Scheduler/Event/IoEvents/SustainPedalIoEvent.h"
 
 
 
@@ -21,6 +22,7 @@ using namespace Meteor::Schedulers::Events::Effects;
 using namespace Games::Schedulers::Events::GameEvents;
 using namespace Games::Schedulers::Events::SystemEvents;
 using namespace Instruments;
+using namespace Meteor::Schedulers::Events::IoEvents;
 
 
 int MeteorPatternGenerator::load()
@@ -133,6 +135,19 @@ int MeteorPatternGenerator::CreateOtherEvent(vector<Event*>* es)
 	SystemEvent* systemEvent = new StopSystemEvent(sectionStartTime, -1);
 
 	es->push_back(systemEvent);
+
+	return 0;
+}
+
+int MeteorPatternGenerator::PostProcess()
+{
+	for (int i = 0; i < patterns.size(); i++) {
+
+
+
+	}
+
+
 
 	return 0;
 }
@@ -256,56 +271,11 @@ Pattern * MeteorPatternGenerator::generateInputKeyControlPoint(vector<Event*>* e
 		return pattern;
 	}
 
-
-	// 公式： (鍵盤高度-打擊點高度) / 速度
-	MTO_FLOAT fallTime = MTO_FLOAT(
-		note->IsWhiteKey() ?
-		targetHeight : blackKeyTargetHeight
-	) / fallSpeed;
-
-	MTO_FLOAT fallLifeTime = MTO_FLOAT(
-		(note->IsWhiteKey() ?
-			height : blackKeyHeight) + fallLength
-	) / fallSpeed;
-
-	MTO_FLOAT glowLineTime = fallTime + MTO_FLOAT(1) / glowLineSpeed + glowLineDuration;
-
-	MTO_FLOAT noteLifeTime = MTO_FLOAT(
-		note->IsWhiteKey() ?
-		(targetHeight) : (blackKeyTargetHeight)
-	) / glowLineSpeed;
-
-	LOG(LogLevel::Finest) << "int MeteorSmConverter::Generate(vector<Event*>*, Event*) : Fall speed is [" << fallSpeed << "], GlowLine speed is [" << glowLineSpeed << "].";
-	/*
-	LOG(LogLevel::Finer) << "int MeteorSmConverter::Generate(vector<Event*>*, Event*) : Generate GlowLine at [" << (int)pitch << "], start time [" << note->GetStartTime() - glowLineTime << "], life time [" << fallTime + glowLineDuration << "].";
-
-	GlowLineEffect* glow = new GlowLineEffect(
-		(int)pitch,
-		0,
-		note->GetStartTime() - glowLineTime,
-		fallTime + glowLineDuration,
-		glowLineSpeed);
-	*/
-	LOG(LogLevel::Finer) << "int MeteorSmConverter::Generate(vector<Event*>*, Event*) : Generate Fall at [" << (int)pitch << "], start time [" << note->GetStartTime() - fallTime << "], life time [" << fallLifeTime << "].";
-
-	FallEffect* fall = new FallEffect(
-		int(pitch),
-		0,
-		note->GetStartTime() - fallTime,
-		fallLifeTime,
-		fallSpeed);
+	SustainPedalIoEvent* sustainPedalIoEvent = new SustainPedalIoEvent(inputKey, inputKeyControlPoint->GetStartTime(), inputKeyControlPoint->GetLifeTime());
 
 
-	//note->SetLifeTime(noteLifeTime);
-
-	//pattern->Add(glow);
-	pattern->Add(fall);
-	//pattern->Add(note);
-
-	// 把pattern裡面的event一個一個加進去es裡
-	//es->push_back(glow);
-	es->push_back(fall);
-	//es->push_back(note);
+	pattern->Add(sustainPedalIoEvent);
+	es->push_back(sustainPedalIoEvent);
 
 	return pattern;
 }

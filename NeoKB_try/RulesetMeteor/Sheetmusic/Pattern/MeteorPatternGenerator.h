@@ -52,6 +52,8 @@ namespace Patterns {
 		/// </summary>
 		virtual int CreateOtherEvent(vector<Event*>* es);
 
+		virtual int PostProcess();
+
 	protected:
 
 		MTO_FLOAT fallSpeed = 0;
@@ -64,6 +66,9 @@ namespace Patterns {
 		MTO_FLOAT glowLineBrightness = 0;
 		MTO_FLOAT targetLineBlinkSpeed = 0;
 		int restartSection = 0;
+
+		MTO_FLOAT pedalInterval = 0.2f;
+		MTO_FLOAT defaultNextPedalTargetStartTime = 1.f;
 
 		Pattern* generateNoteControlPoint(vector<Event*>* es, NoteControlPoint* note);
 		Pattern* generateStartGameEvent(vector<Event*>* es, StartGameEvent* start);

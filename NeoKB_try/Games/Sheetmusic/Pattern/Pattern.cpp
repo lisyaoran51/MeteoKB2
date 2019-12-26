@@ -14,6 +14,7 @@ Pattern::Pattern(Event * oEvent) : originalEvent(oEvent)
 
 int Pattern::Add(Event * e)
 {
+	events.push_back(e);
 	return 0;
 }
 

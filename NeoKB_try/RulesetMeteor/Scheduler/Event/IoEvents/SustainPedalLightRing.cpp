@@ -5,6 +5,21 @@ using namespace Meteor::Schedulers::Events::IoEvents;
 
 
 
+SustainPedalLightRing::SustainPedalLightRing()
+{
+	ioTransferType = IoTransferType::Once;
+}
+
+MTO_FLOAT SustainPedalLightRing::GetStartTime()
+{
+	return GetIoEvent()->GetTargetStartTime();
+}
+
+string SustainPedalLightRing::GetEventTypeName()
+{
+	return "SustainPedalLightRing";
+}
+
 MTO_FLOAT SustainPedalLightRing::GetTargetStartTime()
 {
 	return GetIoEvent()->GetTargetStartTime();
@@ -15,12 +30,12 @@ MTO_FLOAT SustainPedalLightRing::GetTargetLifeTime()
 	return GetIoEvent()->GetTargetLifeTime();
 }
 
-MTO_FLOAT SustainPedalLightRing::GetRingLifeTime()
+MTO_FLOAT SustainPedalLightRing::GetPedalDownLifeTime()
 {
-	return MTO_FLOAT();
+	return GetIoEvent()->GetPedalDownLifeTime();
 }
 
-MTO_FLOAT SustainPedalLightRing::GetNextTargetStartTime()
+MTO_FLOAT SustainPedalLightRing::GetRingLifeTime()
 {
-	return GetIoEvent()->GetNextTargetStartTime();
+	return GetIoEvent()->GetRingLifeTime();
 }

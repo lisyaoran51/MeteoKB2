@@ -34,13 +34,13 @@ string SustainPedalLightRingPanelMessage::roundAndToString(float number, int dig
 	return toString;
 }
 
-SustainPedalLightRingPanelMessage::SustainPedalLightRingPanelMessage(float tLifeTime, float rLifeTime, float nTargetStartTime):
-	targetLifeTime(tLifeTime), ringLifeTime(rLifeTime), nextTargetStartTime(nTargetStartTime)
+SustainPedalLightRingPanelMessage::SustainPedalLightRingPanelMessage(float tLifeTime, float pDownLifeTime, float rLifeTime):
+	targetLifeTime(tLifeTime), pedalDownLifeTime(pDownLifeTime), ringLifeTime(rLifeTime)
 {
 
 }
 
 string SustainPedalLightRingPanelMessage::ToString()
 {
-	return "SP,"s + roundAndToString(targetLifeTime, 3) + ","s + roundAndToString(ringLifeTime, 3) + ","s + roundAndToString(nextTargetStartTime, 3);
+	return "SP,"s + roundAndToString(targetLifeTime, 3) + ","s + roundAndToString(pedalDownLifeTime, 3) + ","s + roundAndToString(ringLifeTime, 3);
 }

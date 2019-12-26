@@ -25,7 +25,6 @@ namespace IoCommunicators {
 
 		int load();
 
-
 	public:
 
 		SustainPedalLightRingIoCommunicator();

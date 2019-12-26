@@ -24,7 +24,7 @@ namespace Panels{
 		/// 時間：targetLifeTime -> ringLifeTime(可能提早結束)
 		///						 -> nextTargetStartTime
 		/// </summary>
-		SustainPedalLightRingPanelMessage(float tLifeTime, float rLifeTime, float nTargetStartTime);
+		SustainPedalLightRingPanelMessage(float tLifeTime, float pDownLifeTime, float rLifeTime);
 
 		virtual string ToString();
 
@@ -33,9 +33,9 @@ namespace Panels{
 
 		float targetLifeTime = 0;
 
-		float ringLifeTime = 0;
+		float pedalDownLifeTime = 0;
 
-		float nextTargetStartTime = 0;
+		float ringLifeTime = 0;
 
 
 	};

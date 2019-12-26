@@ -1,6 +1,7 @@
 #include "MeteorRulesetExecutor.h"
 
 #include "../Sheetmusic/MeteorSheetmusicConverter.h"
+#include "../Sheetmusic/MeteorSheetmusicPostProcessor.h"
 #include "../Play/MeteorPlayfield.h"
 #include "../../Games/Scheduler/Event/Effect/EffectMapper.h"
 #include "../Scheduler/Event/Effect/FallEffect.h"
@@ -45,7 +46,7 @@ SmConverter * MeteorRulesetExecutor::createSmConverter(PatternGenerator * pg)
 
 SmPostprocessor * MeteorRulesetExecutor::createSmPostprocessor()
 {
-	return new SmPostprocessor();
+	return new MeteorSmPostprocessor();
 }
 
 int MeteorRulesetExecutor::load()

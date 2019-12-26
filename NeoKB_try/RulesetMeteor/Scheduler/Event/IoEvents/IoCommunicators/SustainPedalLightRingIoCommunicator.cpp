@@ -25,11 +25,16 @@ int SustainPedalLightRingIoCommunicator::implementProcessIO(SustainPedalLightRin
 	if (!outputManager)
 		return -1;
 
+	if (!sPedalLightRing->GetIsTransferable())
+		return -1;
+
 	SustainPedalLightRingPanelMessage* message = new SustainPedalLightRingPanelMessage(
 		sPedalLightRing->GetTargetLifeTime(),
-		sPedalLightRing->GetRingLifeTime(),
-		sPedalLightRing->GetNextTargetStartTime()
+		sPedalLightRing->GetPedalDownLifeTime(),
+		sPedalLightRing->GetRingLifeTime()
 	);
+
+	sPedalLightRing->SetIsTransfered();
 
 	outputManager->PushMessage(message);
 
