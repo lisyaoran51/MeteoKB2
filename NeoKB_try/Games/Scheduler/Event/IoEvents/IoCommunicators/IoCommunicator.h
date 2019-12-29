@@ -6,10 +6,12 @@
 #include "../../../../../Framework/Devices/OutputDevice.h"
 #include "../../../../Scheduler/Event/EventProcessor.h"
 #include "../../../../../Framework/Output/OutputManager.h"
+#include "../IoEventProcessor.h"
 
 
 
 using namespace Games::Schedulers::Events;
+using namespace Games::Schedulers::Events::IoEvents;
 using namespace Framework::Allocation::Hierachal;
 using namespace Framework::Devices;
 using namespace Framework::Output;
