@@ -40,6 +40,8 @@ namespace Output{
 
 		virtual int PushMessage(OutputMessage* outputMessage) {
 
+			unique_lock<mutex> uLock(itemMutex);
+
 			for (int i = 0; i < items.size(); i++) {
 				items[i]->PushMessage(outputMessage);
 			}
@@ -47,6 +49,9 @@ namespace Output{
 		}
 
 	protected:
+
+		mutable mutex itemMutex;
+
 
 		vector<T*> items;
 

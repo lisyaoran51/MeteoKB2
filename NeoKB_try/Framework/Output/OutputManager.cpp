@@ -28,6 +28,7 @@ int OutputManager::SetupPeripheral(MainInterface * mainInterface)
 
 int OutputManager::PushMessage(OutputMessage * outputMessage)
 {
+	unique_lock<mutex> uLock(itemMutex);
 	for (int i = 0; i < items.size(); i++) {
 		items[i]->PushMessage(outputMessage);
 	}

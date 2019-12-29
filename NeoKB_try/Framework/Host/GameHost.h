@@ -45,6 +45,7 @@ using namespace Framework::Threading;
 using namespace Util::DataStructure;
 using namespace Framework::Input;
 using namespace Framework::IO;
+using namespace Framework::Output;
 using namespace Framework;
 using namespace Framework::Graphic;
 using namespace Framework::Graphic::Maps;
