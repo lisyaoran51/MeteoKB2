@@ -58,7 +58,7 @@ string Base::GetResourcePath()
 int Base::setupOutputManager()
 {
 	if (gameHost)
-		gameHost->setupOutputManager(outputManager);
+		gameHost->SetupOutputManager(outputManager);
 	else
 		throw runtime_error("Base::setupOutputManager() : no host.");
 
