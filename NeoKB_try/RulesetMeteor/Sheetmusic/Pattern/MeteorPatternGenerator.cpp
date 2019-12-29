@@ -231,6 +231,8 @@ Pattern * MeteorPatternGenerator::generateStartGameEvent(vector<Event*>* es, Sta
 	/* 在pattern generator消滅實消滅，或是converter跑完消滅 */
 	Pattern* pattern = new Pattern();
 
+	return pattern;
+
 	LOG(LogLevel::Finer) << "int MeteorSmConverter::generateStartGameEvent(vector<Event*>*, StartGameEvent*) : Start converting [ StartGameEvent ," << start->GetStartTime() << "] to pattern...";
 
 
