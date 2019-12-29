@@ -117,7 +117,7 @@ DatabaseContext.o DatabaseContextFactory.o DatabaseStore.o FakeDatabaseContextFa
 BluetoothDevice.o Device.o DisplayDevice.o InputDevice.o OutputDevice.o KeyboardDevice.o PanelDevice.o \
 Drawable.o Map.o \
 GameHost.o MeteoGameHost.o \
-BluetoothState.o CustomInputManager.o InputManager.o InputState.o KeyboardState.o PanelState.o PassThroughInputManager.o UserInputManager.o \
+BluetoothState.o CustomInputManager.o InputManager.o InputState.o KeyboardState.o PanelState.o PassThroughInputManager.o UserInputManager.o HasInputKey.o \
 BluetoothInputHandler.o KeyboardInputHandler.o PanelInputHandler.o KeyBindingStore.o \
 BluetoothPhone.o Display.o FileStore.o Keyboard.o MainInterface.o Panel.o Peripheral.o PlatformStorage.o Storage.o StorageResourceStore.o DynamicPathResourceStore.o \
 OutputManager.o \
@@ -129,7 +129,9 @@ LinearSpeedAdjuster.o SpeedAdjuster.o \
 MeteoGame.o MeteoGameBase.o\
 Ruleset.o RulesetInfo.o RulesetStore.o Judgement.o HasHitWindow.o \
 Loader.o MeteoScene.o Intro.o Player.o PlayerLoader.o Playfield.o MainMenu.o PlaySongSelect.o SongSelect.o \
-Event.o EventProcessorMaster.o HitObject.o ControlPoint.o NoteControlPoint.o NoteControlPointHitObject.o Effect.o LinearMapPitchShifter.o MapPitchShifter.o \
+Event.o EventProcessorMaster.o HitObject.o \
+ControlPoint.o NoteControlPoint.o NoteControlPointHitObject.o PlayableControlPoint.o InputKeyControlPoint.o InputKeyControlPointHitObject.o \
+Effect.o LinearMapPitchShifter.o MapPitchShifter.o \
 IoEvent.o PanelEvent.o IoCommunicator.o \
 GameEvent.o StartGameEvent.o StopSystemEvent.o SystemEvent.o SystemEventHandler.o \
 ResourceStoreWorkingSm.o SheetmusicConverter.o SheetmusicManager.o SheetmusicMetadata.o SheetmusicPostprocessor.o SheetmusicStore.o WorkingSheetmusic.o \
