@@ -5,7 +5,7 @@
 
 #include <vector>
 #include "../Input/InputState.h"
-#include "../Output//OutputMessage.h"
+#include "../Output/OutputMessage.h"
 #include <mutex>
 
 
