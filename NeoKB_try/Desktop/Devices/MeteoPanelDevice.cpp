@@ -8,11 +8,6 @@ MeteoPanelDevice::MeteoPanelDevice(MeteoPanelBoardV1 * panelBoard)
 	meteoPanelBoard = panelBoard;
 }
 
-int MeteoPanelDevice::ProcessOutput()
-{
-	return 0;
-}
-
 int MeteoPanelDevice::readFromDevice()
 {
 #if 0
@@ -81,6 +76,19 @@ int MeteoPanelDevice::readFromDevice()
 		newState->GetPanelState()->AddKnob(make_pair(InputKey::SpeedKnob, -5));
 		inputStates.push_back(newState);
 
+	}
+
+	return 0;
+}
+
+int MeteoPanelDevice::passToDevice()
+{
+	vector<OutputMessage*> messages;
+	matchedPeripheral->PourOutOutputMessages(&messages);
+
+	for (int i = 0; i < messages.size(); i++) {
+		meteoPanelBoard->PushI2cMessage(messages[i]->ToString());
+		delete messages[i];
 	}
 
 	return 0;

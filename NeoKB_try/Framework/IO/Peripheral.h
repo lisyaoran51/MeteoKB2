@@ -6,6 +6,7 @@
 #include <vector>
 #include "../Input/InputState.h"
 #include "../Output//OutputMessage.h"
+#include <mutex>
 
 
 namespace Framework {
@@ -52,6 +53,8 @@ namespace IO {
 		int PourOutOutputMessages(vector<OutputMessage*>* pourOutTo);
 
 	protected:
+
+		mutable mutex outputMessageMutex;
 
 		Device* matchedDevice;
 

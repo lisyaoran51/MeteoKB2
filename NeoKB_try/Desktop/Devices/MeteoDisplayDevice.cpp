@@ -46,7 +46,7 @@ int MeteoDisplayDevice::Show(Map * m)
 	return 0;
 }
 
-int MeteoDisplayDevice::ProcessOutput()
+int MeteoDisplayDevice::passToDevice()
 {
 	return 0;
 }

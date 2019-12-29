@@ -17,12 +17,15 @@ int Peripheral::PushInputState(InputState * inputState)
 int Peripheral::PushOutputMessage(OutputMessage * outputMessage)
 {
 	//¦n¹³­nthread safe
+	unique_lock<mutex> uLock(outputMessageMutex);
 	outputMessages.push_back(outputMessage);
 	return 0;
 }
 
 int Peripheral::PourOutOutputMessages(vector<OutputMessage*>* pourOutTo)
 {
+
+	unique_lock<mutex> uLock(outputMessageMutex);
 	pourOutTo->insert(pourOutTo->end(), outputMessages.begin(), outputMessages.end());
 	outputMessages.clear();
 	return 0;

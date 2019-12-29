@@ -106,6 +106,13 @@ int MeteoPanelBoardV1::SwitchLight(int button, bool isTurnOn)
 	return 0;
 }
 
+int MeteoPanelBoardV1::PushI2cMessage(string iMessage)
+{
+	unique_lock<mutex> uLock(i2cMessageMutex);
+	i2cMessages.push_back(iMessage);
+	return 0;
+}
+
 int MeteoPanelBoardV1::work()
 {
 	while (!exitRequested) {
@@ -151,10 +158,10 @@ int MeteoPanelBoardV1::readPanel()
 				continue;
 			}
 
-			if (int(key) < 500) { // pedal
+			if (int(key) < 500) { 
 				pushKeyboardState(key, stoi(splitMessage[1]));
 			}
-			else {
+			else { // pedal
 				pushPanelState(key, stoi(splitMessage[1]));
 			}
 
@@ -168,6 +175,21 @@ int MeteoPanelBoardV1::readPanel()
 
 int MeteoPanelBoardV1::writePanel()
 {
+	if (i2cMessages.size() == 0)
+		return -1;
+
+	unique_lock<mutex> uLock(i2cMessageMutex);
+
+	for (int i = 0; i < i2cMessages.size(); i++) {
+		char *cstr = new char[i2cMessages[i].length() + 1];
+		strcpy(cstr, i2cMessages[i].c_str());
+
+		i2cInterface->i2cWrite(cstr, sizeof(cstr - 1));
+
+		delete[] cstr;
+	}
+	i2cMessages.clear();
+
 	return 0;
 }
 

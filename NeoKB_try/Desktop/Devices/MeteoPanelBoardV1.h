@@ -27,8 +27,9 @@ namespace Devices {
 
 		Pi2c* i2cInterface;
 
-		mutable mutex panelStateMutex, keyboardStateMutex;
+		mutable mutex panelStateMutex, keyboardStateMutex, i2cMessageMutex;
 
+		/* read */
 		InputState* panelState;
 
 		InputState* keyboardState;
@@ -39,10 +40,14 @@ namespace Devices {
 
 		string trim(string s);
 
+		/* write */
+		vector<string> i2cMessages;
+
 	public:
 
 		MeteoPanelBoardV1(int address);
 
+		/* read */
 		InputState* GetPanelState();
 
 		InputState* GetKeyboardState();
@@ -61,6 +66,12 @@ namespace Devices {
 		/// 點亮哪個按鍵的燈
 		/// </summary>
 		int SwitchLight(int button, bool isTurnOn);
+
+		/* write */
+		/// <summary>
+		/// 把要傳過去panel的i2c訊息轉成文字
+		/// </summary>
+		int PushI2cMessage(string iMessage);
 
 	protected:
 

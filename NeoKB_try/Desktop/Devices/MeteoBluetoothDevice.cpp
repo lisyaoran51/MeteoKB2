@@ -3,12 +3,12 @@
 using namespace Desktop::Devices;
 
 
-int MeteoBluetoothDevice::ProcessOutput()
+int MeteoBluetoothDevice::readFromDevice()
 {
 	return 0;
 }
 
-int MeteoBluetoothDevice::readFromDevice()
+int MeteoBluetoothDevice::passToDevice()
 {
 	return 0;
 }
