@@ -147,7 +147,7 @@ SustainPedalLightRingOutputer.o SustainPedalLightRingPanelMessage.o \
 MeteorEventProcessorMaster.o MeteorNoteControlPointHitObject.o \
 ExplodeEffect.o ExplodeEffectMapper.o FallEffect.o FallEffectMapper.o GlowLineEffect.o GlowLineEffectMapper.o TargetLineEffect.o TargetLineEffectMapper.o \
 ExplodeMapAlgorithm.o FallMapAlgorithm.o GlowLineMapAlgorithm.o TargetLineMapAlgorithm.o \
-SustainPedalIoEvent.o SustainPedalLightRing.o SustainPedalLightRingIoCommunicator.o
+SustainPedalIoEvent.o SustainPedalLightRing.o SustainPedalLightRingIoCommunicator.o \
 MeteorSheetmusicConverter.o MeteorSheetmusicPostprocessor.o MeteorPatternGenerator.o \
 MeteorTimeController.o 
 
