@@ -53,11 +53,7 @@ namespace IoEvents {
 
 		virtual int RegisterIoCommunicator(IoCommunicatorInterface* iCommunicator);
 
-		virtual int ProcessIo() {
-			if (ioCommunicator)
-				ioCommunicator->ProcessIO(this);
-			return 0;
-		}
+		virtual int ProcessIo();
 
 		T* GetIoEvent() { return dynamic_cast<T*>(event); }
 
@@ -89,16 +85,24 @@ namespace IoEvents {
 
 #include "IoCommunicators/IoCommunicator.h"
 
-	//template<typename T>
-	//int IoEventProcessor<T>::RegisterIoCommunicator(IoCommunicatorInterface* iCommunicator)
-	//{
-	//	if (MtoObject::CanCast<IoCommunicator<T>>(iCommunicator)) {
-	//		ioCommunicator = MtoObject::Cast<IoCommunicator<T>>(iCommunicator);
-	//		return 0;
-	//	}
-	//	// TODO: ¼Q¿ù»~
-	//	return -1;
-	//}
+	template<typename T>
+	int IoEventProcessor<T>::RegisterIoCommunicator(IoCommunicatorInterface* iCommunicator)
+	{
+		if (MtoObject::CanCast<IoCommunicator<T>>(iCommunicator)) {
+			ioCommunicator = MtoObject::Cast<IoCommunicator<T>>(iCommunicator);
+			return 0;
+		}
+		// TODO: ¼Q¿ù»~
+		return -1;
+	}
+
+	template<typename T>
+	int IoEventProcessor<T>::ProcessIo() {
+		if (ioCommunicator)
+			ioCommunicator->ProcessIO(this);
+		return 0;
+	}
+
 
 }}}}
 

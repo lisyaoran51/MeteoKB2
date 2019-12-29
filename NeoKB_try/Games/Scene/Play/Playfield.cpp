@@ -1,6 +1,8 @@
 #include "Playfield.h"
+
 #include "../../Scheduler/Event/Effect/EffectMapper.h"
-#include "../../Util/Log.h"
+#include "../../../Util/Log.h"
+#include "../../Scheduler/Event/IoEvents/IoEventProcessor.h"
 #include <functional>
 
 
@@ -8,6 +10,7 @@ using namespace Games::Scenes::Play;
 using namespace Games::Schedulers::Events;
 using namespace Games::Schedulers;
 using namespace Games::Schedulers::Events::Effects;
+using namespace Games::Schedulers::Events::IoEvents;
 using namespace Util;
 using namespace std;
 
@@ -143,6 +146,18 @@ int Playfield::Add(EventProcessor<Event> * ep)
 		// 這邊要把map加進去
 		//EffectMapperInterface* em = ep->Cast<EffectMapperInterface>();
 		//em->RegisterMap(lightMap); //改用draw(map, effect)，所以不用內存一個map
+	}
+	else if (ep->CanCast<IoEventProcessorInterface>()) {
+		string processorType = ep->GetEventTypeName();
+		map<string, IoCommunicatorInterface*>::iterator iter = ioCommunicators.find(processorType);
+
+		if (iter != ioCommunicators.end())
+		{
+			IoCommunicatorInterface* ioCommunicator = ioCommunicators[processorType];
+			ep->Cast<IoEventProcessorInterface>()->RegisterIoCommunicator(ioCommunicator);
+
+			LOG(LogLevel::Finer) << "Playfield::Add(EventProcessor<Event>*) : Register [" << ioCommunicators[processorType]->GetTypeName() << "] to processor [" << processorType << "] on [" << ep->GetStartTime() << "].";
+		}
 	}
 
 	return 0;
