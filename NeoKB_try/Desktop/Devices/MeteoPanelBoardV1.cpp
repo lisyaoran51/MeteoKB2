@@ -2,6 +2,7 @@
 
 #include <thread>
 #include "../../Util/Log.h"
+#include <cstring>
 
 
 using namespace Desktop::Devices;
