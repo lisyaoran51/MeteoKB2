@@ -87,7 +87,7 @@
     <ClCompile Include="Games\Scheduler\Event\GameEvents\GameEvent.cpp" />
     <ClCompile Include="Games\Scheduler\Event\GameEvents\StartGameEvent.cpp" />
     <ClCompile Include="Games\Scheduler\Event\HitObject.cpp" />
-    <ClCompile Include="Games\Scheduler\Event\IoEvents\IoCommunicator\IoCommunicator.cpp" />
+    <ClCompile Include="Games\Scheduler\Event\IoEvents\IoCommunicators\IoCommunicator.cpp" />
     <ClCompile Include="Games\Scheduler\Event\IoEvents\IoEvent.cpp" />
     <ClCompile Include="Games\Scheduler\Event\IoEvents\PanelEvent.cpp" />
     <ClCompile Include="Games\Scheduler\Event\SystemEvents\StopSystemEvent.cpp" />
@@ -310,7 +310,7 @@
     <ClInclude Include="Games\Scheduler\Event\GameEvents\StopGameEvent.h" />
     <ClInclude Include="Games\Scheduler\Event\HitObject.h" />
     <ClInclude Include="Games\Scheduler\Event\IoEvents\BluetoothEvent.h" />
-    <ClInclude Include="Games\Scheduler\Event\IoEvents\IoCommunicator\IoCommunicator.h" />
+    <ClInclude Include="Games\Scheduler\Event\IoEvents\IoCommunicators\IoCommunicator.h" />
     <ClInclude Include="Games\Scheduler\Event\IoEvents\IoEvent.h" />
     <ClInclude Include="Games\Scheduler\Event\IoEvents\IoEventProcessor.h" />
     <ClInclude Include="Games\Scheduler\Event\IoEvents\PanelEvent.h" />
