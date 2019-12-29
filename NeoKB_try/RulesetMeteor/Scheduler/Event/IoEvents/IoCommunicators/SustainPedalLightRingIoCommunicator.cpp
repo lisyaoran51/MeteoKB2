@@ -22,18 +22,19 @@ SustainPedalLightRingIoCommunicator::SustainPedalLightRingIoCommunicator():Regis
 	registerLoad(bind((int(SustainPedalLightRingIoCommunicator::*)())&SustainPedalLightRingIoCommunicator::load, this));
 }
 
-int SustainPedalLightRingIoCommunicator::implementProcessIO(IoEventProcessor<SustainPedalIoEvent>* sPedalLightRing)
+int SustainPedalLightRingIoCommunicator::implementProcessIO(EventProcessor<Event>* sPedalLightRing)
 {
 	if (!outputManager)
-		return -1;
-
-	if (!sPedalLightRing->GetIsTransferable())
 		return -1;
 
 	if (!dynamic_cast<SustainPedalLightRing*>(sPedalLightRing))
 		return -1;
 
 	SustainPedalLightRing* sustainPedalLightRing = dynamic_cast<SustainPedalLightRing*>(sPedalLightRing);
+
+	if (!sustainPedalLightRing->GetIsTransferable())
+		return -1;
+
 
 	SustainPedalLightRingPanelMessage* message = new SustainPedalLightRingPanelMessage(
 		sustainPedalLightRing->GetTargetLifeTime(),

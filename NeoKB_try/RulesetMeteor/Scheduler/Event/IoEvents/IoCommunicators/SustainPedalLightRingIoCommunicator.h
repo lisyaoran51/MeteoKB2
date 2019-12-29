@@ -32,7 +32,7 @@ namespace IoCommunicators {
 
 		Panel* panel = nullptr;
 
-		virtual int implementProcessIO(IoEventProcessor<SustainPedalIoEvent>* eProcessor);
+		virtual int implementProcessIO(EventProcessor<Event>* eProcessor);
 
 	};
 

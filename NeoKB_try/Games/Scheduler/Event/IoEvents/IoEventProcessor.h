@@ -4,22 +4,24 @@
 
 
 #include "../../../Scheduler/Event/EventProcessor.h"
+#include "IoCommunicators/IoCommunicator.h"
 
 
 using namespace Games::Schedulers::Events;
+using namespace Games::Schedulers::Events::IoEvents::IoCommunicators;
 
-
+/*
 namespace Games {
 namespace Schedulers {
 namespace Events {
 namespace IoEvents {
-namespace IoCommunicators{
+namespace IoCommunicators {
 	class IoCommunicatorInterface;
 	template<typename T>
 	class IoCommunicator;
 }}}}}
 using namespace Games::Schedulers::Events::IoEvents::IoCommunicators;
-
+*/
 
 namespace Games {
 namespace Schedulers {
@@ -51,9 +53,20 @@ namespace IoEvents {
 
 	public:
 
-		virtual int RegisterIoCommunicator(IoCommunicatorInterface* iCommunicator);
+		virtual int RegisterIoCommunicator(IoCommunicatorInterface* iCommunicator) {
+			if (MtoObject::CanCast<IoCommunicator<T>>(iCommunicator)) {
+				ioCommunicator = MtoObject::Cast<IoCommunicator<T>>(iCommunicator);
+				return 0;
+			}
+			// TODO: ¼Q¿ù»~
+			return -1;
+		}
 
-		virtual int ProcessIo();
+		virtual int ProcessIo() {
+			if (ioCommunicator)
+				ioCommunicator->ProcessIO(this);
+			return 0;
+		}
 
 		T* GetIoEvent() { return dynamic_cast<T*>(event); }
 
@@ -83,29 +96,28 @@ namespace IoEvents {
 
 	};
 
-#include "IoCommunicators/IoCommunicator.h"
-
-	template<typename T>
-	int IoEventProcessor<T>::RegisterIoCommunicator(IoCommunicatorInterface* iCommunicator)
-	{
-		if (MtoObject::CanCast<IoCommunicator<T>>(iCommunicator)) {
-			ioCommunicator = MtoObject::Cast<IoCommunicator<T>>(iCommunicator);
-			return 0;
-		}
-		// TODO: ¼Q¿ù»~
-		return -1;
-	}
-
-	template<typename T>
-	int IoEventProcessor<T>::ProcessIo() {
-		if (ioCommunicator)
-			ioCommunicator->ProcessIO(this);
-		return 0;
-	}
-
 
 }}}}
+/*
+#include "IoCommunicators/IoCommunicator.h"
+using namespace Games::Schedulers::Events::IoEvents;
 
+template<typename T>
+int IoEventProcessor<T>::RegisterIoCommunicator(IoCommunicatorInterface* iCommunicator)
+{
+	if (MtoObject::CanCast<IoCommunicator<T>>(iCommunicator)) {
+		ioCommunicator = MtoObject::Cast<IoCommunicator<T>>(iCommunicator);
+		return 0;
+	}
+	// TODO: ¼Q¿ù»~
+	return -1;
+}
 
-
+template<typename T>
+int IoEventProcessor<T>::ProcessIo() {
+	if (ioCommunicator)
+		ioCommunicator->ProcessIO(this);
+	return 0;
+}
+*/
 #endif

@@ -6,12 +6,10 @@
 #include "../../../../../Framework/Devices/OutputDevice.h"
 #include "../../../../Scheduler/Event/EventProcessor.h"
 #include "../../../../../Framework/Output/OutputManager.h"
-#include "../IoEventProcessor.h"
 
 
 
 using namespace Games::Schedulers::Events;
-using namespace Games::Schedulers::Events::IoEvents;
 using namespace Framework::Allocation::Hierachal;
 using namespace Framework::Devices;
 using namespace Framework::Output;
@@ -68,7 +66,7 @@ namespace IoCommunicators {
 
 		virtual int ProcessIO(EventProcessor<Event>* eProcessor) {
 
-			return implementProcessIO(Cast<IoEventProcessor<T>>(eProcessor));
+			return implementProcessIO(eProcessor);
 
 		}
 
@@ -76,7 +74,7 @@ namespace IoCommunicators {
 
 		OutputManager* outputManager = nullptr;
 
-		virtual int implementProcessIO(IoEventProcessor<T>* eProcessor) = 0;
+		virtual int implementProcessIO(EventProcessor<Event>* eProcessor) = 0;
 
 	};
 
