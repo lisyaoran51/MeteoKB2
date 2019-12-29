@@ -8,7 +8,7 @@
 #include "../../Util/Log.h"
 #include "../../Games/Scheduler/Event/Effect/Algorithm/LinearMapPitchShifter.h"
 #include "../../RulesetMeteor/Scheduler/Event/MeteorEventProcessorMaster.h"
-#include "../../Games/Scheduler/Event/IoEvents/IoCommunicator/IoCommunicator.h"
+#include "../../Games/Scheduler/Event/IoEvents/IoCommunicators/IoCommunicator.h"
 #include "../Scheduler/Event/IoEvents/IoCommunicators/SustainPedalLightRingIoCommunicator.h"
 
 

@@ -4,7 +4,7 @@
 
 
 #include "../../../Scheduler/Event/EventProcessor.h"
-#include "IoCommunicator/IoCommunicator.h"
+#include "IoCommunicators/IoCommunicator.h"
 
 
 using namespace Games::Schedulers::Events;

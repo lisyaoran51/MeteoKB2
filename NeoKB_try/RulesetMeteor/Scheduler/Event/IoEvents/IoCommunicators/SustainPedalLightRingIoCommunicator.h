@@ -2,7 +2,7 @@
 #define SUSTAIN_PEDAL_LIGHT_RING_IO_COMMUNICATOR_H
 
 
-#include "../../../../../Games/Scheduler/Event/IoEvents/IoCommunicator/IoCommunicator.h"
+#include "../../../../../Games/Scheduler/Event/IoEvents/IoCommunicators/IoCommunicator.h"
 #include "../SustainPedalIoEvent.h"
 #include "../../../../../Framework/IO/Panel.h"
 
