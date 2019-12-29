@@ -141,6 +141,9 @@ int ProgramInitializer::Initialize()
 	iCreator.RegisterType<GlowLineMapAlgorithm>("GlowLineMapAlgorithm");
 	iCreator.RegisterType<TargetLineMapAlgorithm>("TargetLineMapAlgorithm");
 
+	// Meteor/Schedulers/Events/IoEvents/IoCommunicators
+	iCreator.RegisterType<SustainPedalLightRingIoCommunicator>("SustainPedalLightRingIoCommunicator");
+
 	// Meteor/Sheetmusics/Patterns
 	iCreator.RegisterType<MeteorPatternGenerator>("MeteorPatternGenerator");
 

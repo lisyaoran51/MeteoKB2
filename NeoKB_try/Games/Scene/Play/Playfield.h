@@ -7,6 +7,7 @@
 #include "../../../Framework/Configurations/FrameworkConfigManager.h"
 #include "../../../Framework/Allocation/Hierachal/Container.h"
 #include "../../Scheduler/Event/HitObject.h"
+#include "../../Scheduler/Event/IoEvents/IoCommunicator/IoCommunicator.h"
 
 
 
@@ -15,6 +16,7 @@ using namespace Games::Schedulers;
 using namespace Games::Schedulers::Events::Effects::Algorithms;
 using namespace Framework::Configurations;
 using namespace Framework::Allocation::Hierachal;
+using namespace Games::Schedulers::Events::IoEvents::IoCommunicators;
 
 
 
@@ -68,6 +70,12 @@ namespace Play {
 		/// 在這邊存了會用到的algo，在getEventProcessor時可以到這邊選擇要用的algo
 		///</summary>
 		map<string, MapAlgorithmInterface*> mapAlgorithms;
+
+
+		///<summary>
+		/// 在這邊存了會用到的io communicator，在getEventProcessor時可以到這邊選擇要用的communicator
+		///</summary>
+		map<string, IoCommunicatorInterface*> ioCommunicators;
 
 		//Scheduler* scheduler;
 

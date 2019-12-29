@@ -41,7 +41,7 @@ namespace Framework {
 
 		CompositeResourceStore<char*>* resources;
 
-		virtual int setupOutputManager() = 0;;
+		virtual int setupOutputManager();
 
 	};
 

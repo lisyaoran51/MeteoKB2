@@ -8,6 +8,8 @@
 #include "../Input/Handler/KeyboardInputHandler.h"
 #include "../Input/Handler/PanelInputHandler.h"
 #include "../IO/PlatformStorage.h"
+#include "../Output/OutputManager.h"
+#include "../../RulesetMeteor/Output/Panels/SustainPedalLightRingOutputer.h"
 
 
 
@@ -16,6 +18,9 @@ using namespace Framework::Devices;
 using namespace Framework::Input::Handler;
 using namespace Desktop::Devices;
 using namespace Framework::IO;
+using namespace Framework::Output;
+using namespace Meteor::Output::Panels;
+
 
 
 MeteoGameHost::MeteoGameHost(): RegisterType("MeteoGameHost")
@@ -43,6 +48,15 @@ int MeteoGameHost::setupMainInterface()
 	mainInterface->RegisterInputDevice(panelDevice);
 	mainInterface->RegisterOutputDevice(displayDevice);
 
+
+	return 0;
+}
+
+int MeteoGameHost::SetupOutputManager(OutputManager * oManager)
+{
+	OutputComponent* panelOutputer = new SustainPedalLightRingOutputer();
+	panelOutputer->SetupPeripheral(mainInterface);
+	oManager->AddItem(panelOutputer);
 
 	return 0;
 }

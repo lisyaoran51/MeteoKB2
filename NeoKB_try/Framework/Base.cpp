@@ -55,3 +55,13 @@ string Base::GetResourcePath()
 	return string("./Resources");
 }
 
+int Base::setupOutputManager()
+{
+	if (gameHost)
+		gameHost->setupOutputManager(outputManager);
+	else
+		throw runtime_error("Base::setupOutputManager() : no host.");
+
+	return 0;
+}
+

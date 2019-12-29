@@ -1,10 +1,12 @@
 #include "SustainPedalLightRingIoCommunicator.h"
 
 #include "../../../../Output/Panels/SustainPedalLightRingPanelMessage.h"
+#include "../SustainPedalLightRing.h"
 
 
 using namespace Meteor::Schedulers::Events::IoEvents::IoCommunicators;
 using namespace Meteor::Output::Panels;
+using namespace Meteor::Schedulers::Events::IoEvents;
 
 
 
@@ -20,7 +22,7 @@ SustainPedalLightRingIoCommunicator::SustainPedalLightRingIoCommunicator():Regis
 	registerLoad(bind((int(SustainPedalLightRingIoCommunicator::*)())&SustainPedalLightRingIoCommunicator::load, this));
 }
 
-int SustainPedalLightRingIoCommunicator::implementProcessIO(SustainPedalLightRing * sPedalLightRing)
+int SustainPedalLightRingIoCommunicator::implementProcessIO(IoEventProcessor<SustainPedalIoEvent>* sPedalLightRing)
 {
 	if (!outputManager)
 		return -1;
@@ -28,13 +30,18 @@ int SustainPedalLightRingIoCommunicator::implementProcessIO(SustainPedalLightRin
 	if (!sPedalLightRing->GetIsTransferable())
 		return -1;
 
+	if (!dynamic_cast<SustainPedalLightRing*>(sPedalLightRing))
+		return -1;
+
+	SustainPedalLightRing* sustainPedalLightRing = dynamic_cast<SustainPedalLightRing*>(sPedalLightRing);
+
 	SustainPedalLightRingPanelMessage* message = new SustainPedalLightRingPanelMessage(
-		sPedalLightRing->GetTargetLifeTime(),
-		sPedalLightRing->GetPedalDownLifeTime(),
-		sPedalLightRing->GetRingLifeTime()
+		sustainPedalLightRing->GetTargetLifeTime(),
+		sustainPedalLightRing->GetPedalDownLifeTime(),
+		sustainPedalLightRing->GetRingLifeTime()
 	);
 
-	sPedalLightRing->SetIsTransfered();
+	sustainPedalLightRing->SetIsTransfered();
 
 	outputManager->PushMessage(message);
 

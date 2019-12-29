@@ -63,6 +63,9 @@ using namespace Meteor::Rulesets;
 #include "../RulesetMeteor/Scheduler/Event/Effect/Algorithm/TargetLineMapAlgorithm.h"
 using namespace Meteor::Schedulers::Events::Effects::Algorithms;
 
+#include "../RulesetMeteor/Scheduler/Event/IoEvents/IoCommunicators/SustainPedalLightRingIoCommunicator.h"
+using namespace Meteor::Schedulers::Events::IoEvents::IoCommunicators;
+
 // Meteor/Sheetmusics/Patterns
 #include "../RulesetMeteor/Sheetmusic/Pattern/MeteorPatternGenerator.h"
 using namespace Meteor::Sheetmusics::Patterns;

@@ -30,7 +30,7 @@ namespace IoCommunicators {
 
 		virtual int ProcessIO(EventProcessor<Event>* eProcessor) = 0;
 
-
+	protected:
 	};
 
 	template<typename T>

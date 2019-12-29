@@ -11,7 +11,7 @@ using namespace Framework::Output::Panels;
 
 
 
-OutputManager::OutputManager(MainInterface * mInterface)
+OutputManager::OutputManager(MainInterface * mInterface): RegisterType("OutputManager")
 {
 	mainInterface = mInterface;
 	bluetoothManager = new BluetoothManager();
@@ -19,7 +19,11 @@ OutputManager::OutputManager(MainInterface * mInterface)
 	AddItemToList(bluetoothManager);
 	AddItemToList(panelManager);
 
+}
 
+int OutputManager::SetupPeripheral(MainInterface * mainInterface)
+{
+	return 0;
 }
 
 int OutputManager::PushMessage(OutputMessage * outputMessage)

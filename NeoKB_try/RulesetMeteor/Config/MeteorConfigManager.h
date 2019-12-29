@@ -35,6 +35,7 @@ namespace Config{
 		ExplodeMapAlgorithm,
 		GlowLineMapAlgorithm,
 		TargetLineMapAlgorithm,
+		SustainPedalLightRingIoCommunicator,
 
 		MapPitchShifter,
 

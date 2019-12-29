@@ -18,6 +18,7 @@
 #include "../../Framework/Timing/SpeedAdjusters/LinearSpeedAdjuster.h"
 #include "Scoring/MeteorScoreProcessor.h"
 #include "../Scheduler/Event/ControlPoints/MeteorNoteControlPointHitObject.h"
+#include "../Scheduler/Event/IoEvents/SustainPedalLightRing.h"
 
 
 
@@ -35,6 +36,8 @@ using namespace Meteor::Timing;
 using namespace Framework::Timing::SpeedAdjusters;
 using namespace Meteor::Rulesets::Scoring;
 using namespace Meteor::Schedulers::Events::ControlPoints;
+using namespace Meteor::Schedulers::Events::IoEvents;
+
 
 
 
@@ -66,6 +69,8 @@ MeteorRulesetExecutor::MeteorRulesetExecutor(): RegisterType("MeteorRulesetExecu
 	eventProcessorTable["TargetLineEffect"	] = "TargetLineEffectMapper";
 	eventProcessorTable["StopSystemEvent"	] = "SystemEventHandler";
 	eventProcessorTable["NoteControlPoint"	] = "MeteorNoteControlPointHitObject";
+	eventProcessorTable["SustainPedalIoEvent"] = "SustainPedalLightRing";
+
 
 	// 註冊private load (c++才需要)
 	registerLoad(bind(static_cast<int(MeteorRulesetExecutor::*)(void)>(&MeteorRulesetExecutor::load), this));
@@ -131,27 +136,30 @@ EventProcessor<Event>* MeteorRulesetExecutor::getEventProcessor(Event * e)
 		int height = playfield->GetHeight();
 		return (new FallEffectMapper(width, height))->RegisterEvent(e);
 	}
-	else if (processorType == "GlowLineEffectMapper") {
-		int width = playfield->GetWidth();
-		int height = playfield->GetHeight();
-		return (new GlowLineEffectMapper(width, height))->RegisterEvent(e);
-	}
+	//else if (processorType == "GlowLineEffectMapper") {
+	//	int width = playfield->GetWidth();
+	//	int height = playfield->GetHeight();
+	//	return (new GlowLineEffectMapper(width, height))->RegisterEvent(e);
+	//}
 	//else if (processorType == "ExplodeEffectMapper") {
 	//	int width = playfield->GetWidth();
 	//	int height = playfield->GetHeight();
 	//	return (new ExplodeEffectMapper(width, height))->RegisterEvent(e);
 	//}
-	else if (processorType == "TargetLineEffectMapper") {
-		int width = playfield->GetWidth();
-		int height = playfield->GetHeight();
-		return (new TargetLineEffectMapper(width, height))->RegisterEvent(e);
-	}
+	//else if (processorType == "TargetLineEffectMapper") {
+	//	int width = playfield->GetWidth();
+	//	int height = playfield->GetHeight();
+	//	return (new TargetLineEffectMapper(width, height))->RegisterEvent(e);
+	//}
 	else if (processorType == "SystemEventHandler") {
 		// TODO: 在這邊把歌曲名稱擺進去
 		return (new SystemEventHandler<StopSystemEvent>())->RegisterEvent(e);
 	}
 	else if (processorType == "MeteorNoteControlPointHitObject") {
 		return (new MeteorNoteControlPointHitObject())->RegisterEvent(e);
+	}
+	else if (processorType == "SustainPedalLightRing") {
+		return (new SustainPedalLightRing())->RegisterEvent(e);
 	}
 
 	LOG(LogLevel::Error) << "MeteorRulesetExecutor::getEventProcessor() : [" << processorType << "] not found match.";

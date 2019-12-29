@@ -30,6 +30,11 @@ namespace Output{
 
 		//PanelManager* GetPanelManager();
 
+		/// <summary>
+		/// 必須在Add item時執行，不然會沒有功能
+		/// </summary>
+		virtual int SetupPeripheral(MainInterface* mainInterface);
+
 		virtual int PushMessage(OutputMessage* outputMessage);
 
 		virtual int AddItem(OutputComponent* item);

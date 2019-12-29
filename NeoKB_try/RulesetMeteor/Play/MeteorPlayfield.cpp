@@ -8,6 +8,8 @@
 #include "../../Util/Log.h"
 #include "../../Games/Scheduler/Event/Effect/Algorithm/LinearMapPitchShifter.h"
 #include "../../RulesetMeteor/Scheduler/Event/MeteorEventProcessorMaster.h"
+#include "../../Games/Scheduler/Event/IoEvents/IoCommunicator/IoCommunicator.h"
+#include "../Scheduler/Event/IoEvents/IoCommunicators/SustainPedalLightRingIoCommunicator.h"
 
 
 
@@ -17,6 +19,8 @@ using namespace Games::Schedulers::Events::Effects::Algorithms;
 using namespace Meteor::Schedulers::Events::Effects::Algorithms;
 using namespace Util;
 using namespace Meteor::Schedulers::Events;
+using namespace Games::Schedulers::Events::IoEvents::IoCommunicators;
+using namespace Meteor::Schedulers::Events::IoEvents::IoCommunicators;
 
 
 
@@ -45,10 +49,15 @@ int MeteorPlayfield::load(FrameworkConfigManager* f, MeteorConfigManager * m)
 	if(f->Get(FrameworkSetting::StartPitch, (int*)&startPitch)){}
 	if(f->Get(FrameworkSetting::Width, &pitchCount)){}
 
+	if (!m->Get(MeteorSetting::ExplodeLifeTime, &explosionLifeTime)) {
+		explosionLifeTime = 0.1f;
+	}
+
 
 	/* 利用map algo的名字建立map algo */
 	InstanceCreator<MtoObject> &iCreator = InstanceCreator<MtoObject>::GetInstance();
 	string mapAlgoName;
+	string ioCommunicatorName;
 
 	/* --------------------- FallEffect map algo --------------------- */
 	if (m->Get(MeteorSetting::FallMapAlgorithm, &mapAlgoName)) {
@@ -101,13 +110,24 @@ int MeteorPlayfield::load(FrameworkConfigManager* f, MeteorConfigManager * m)
 	else
 		mapAlgorithms["TargetLineEffect"] = new TargetLineMapAlgorithm();
 
-	LOG(LogLevel::Finer) << "MeteorPlayfield::load() : TargetLineMapAlgorithm [" << mapAlgorithms["TargetLineEffect"]->GetTypeName() << "] loaded.";
-
 	AddChild(mapAlgorithms["TargetLineEffect"]);
 	mapAlgorithms["TargetLineEffect"]->RegisterBufferMap(bufferMap);
 
+	/* --------------------- Pedal event io communicator --------------------- */
+	if (m->Get(MeteorSetting::SustainPedalLightRingIoCommunicator, &ioCommunicatorName)) {
+		IoCommunicatorInterface* ioCommunicator = iCreator.CreateInstanceWithT<IoCommunicatorInterface>(ioCommunicatorName);
 
-	/* map pitch shifter */
+		ioCommunicators["SustainPedalIoEvent"] = ioCommunicator;
+	}
+	else
+		ioCommunicators["SustainPedalIoEvent"] = new SustainPedalLightRingIoCommunicator();
+
+	LOG(LogLevel::Finer) << "MeteorPlayfield::load() : SustainPedalLightRingIoCommunicator [" << ioCommunicators["SustainPedalLightRingIoCommunicator"]->GetTypeName() << "] loaded.";
+
+	AddChild(ioCommunicators["SustainPedalIoEvent"]);
+
+
+	/*--------------------- map pitch shifter ---------------------*/
 	string MapPitchShifterName;
 	if (m->Get(MeteorSetting::MapPitchShifter, &MapPitchShifterName)) {
 		mapPitchShifter = iCreator.CreateInstanceWithT<MapPitchShifter>(MapPitchShifterName);
@@ -115,14 +135,12 @@ int MeteorPlayfield::load(FrameworkConfigManager* f, MeteorConfigManager * m)
 	else
 		mapPitchShifter = new LinearMapPitchShifter();
 
-
-	if (!m->Get(MeteorSetting::ExplodeLifeTime, &explosionLifeTime)) {
-		explosionLifeTime = 0.1f;
-	}
-
-
 	mapPitchShifter->LazyConstruct(&mapAlgorithms);
 	AddChild(mapPitchShifter);
+
+	
+
+
 
 	return 0;
 }

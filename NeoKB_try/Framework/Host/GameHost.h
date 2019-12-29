@@ -34,6 +34,11 @@ namespace IO{
 	class Storage;
 }}
 
+namespace Framework {
+namespace Output{
+	class OutputManager;
+}}
+
 
 using namespace std;
 using namespace Framework::Threading;
@@ -82,6 +87,8 @@ namespace Host {
 		vector<InputHandler*>* GetAvailableInputHandlers();
 
 		Storage* GetStorage();
+
+		virtual int SetupOutputManager(OutputManager* oManager) = 0;
 
 	protected:
 

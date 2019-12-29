@@ -4,7 +4,6 @@
 
 #include "../../../../../Games/Scheduler/Event/IoEvents/IoCommunicator/IoCommunicator.h"
 #include "../SustainPedalIoEvent.h"
-#include "../SustainPedalLightRing.h"
 #include "../../../../../Framework/IO/Panel.h"
 
 
@@ -33,9 +32,7 @@ namespace IoCommunicators {
 
 		Panel* panel = nullptr;
 
-		virtual int implementProcessIO(SustainPedalLightRing* sPedalLightRing);
-
-		
+		virtual int implementProcessIO(IoEventProcessor<SustainPedalIoEvent>* eProcessor);
 
 	};
 
