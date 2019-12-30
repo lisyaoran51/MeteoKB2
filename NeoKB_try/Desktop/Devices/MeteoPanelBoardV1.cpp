@@ -186,7 +186,7 @@ int MeteoPanelBoardV1::writePanel()
 		char *cstr = new char[i2cMessages[i].length() + 1];
 		strcpy(cstr, i2cMessages[i].c_str());
 
-		LOG(LogLevel::Debug) << "MeteoPanelBoardV1::writePanel() : write [" << cstr << "] to i2c.";
+		LOG(LogLevel::Debug) << "MeteoPanelBoardV1::writePanel() : write [" << cstr << "](" << i2cMessages[i].c_str() << ") to i2c.";
 
 		i2cInterface->i2cWrite(cstr, sizeof(cstr));
 

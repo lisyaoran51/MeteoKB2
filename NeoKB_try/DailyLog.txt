@@ -1397,3 +1397,9 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	
 	接下來要寫註冊到io communicator的方法，還有event對應到processor的方法
 	
+12/29
+	還要寫pedal hit object，先不要寫好了
+	
+12/31
+	每次都要先 sudo modprobe i2c-dev
+	
