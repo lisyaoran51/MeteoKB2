@@ -26,7 +26,7 @@ namespace Devices {
 
 	protected:
 
-		Peripheral* matchedPeripheral;
+		Peripheral* matchedPeripheral = nullptr;
 
 		virtual bool match(Peripheral* peripheral) = 0;
 

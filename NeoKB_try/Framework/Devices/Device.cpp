@@ -2,6 +2,9 @@
 
 int Device::Register(MainInterface * mainInterface)
 {
+	if (matchedPeripheral)
+		return -1;
+
 	LOG(LogLevel::Info) << "Device::Register() : Register peripheral to interface.";
 
 	vector<Peripheral*>* peripherals = mainInterface->GetPeripherals();
