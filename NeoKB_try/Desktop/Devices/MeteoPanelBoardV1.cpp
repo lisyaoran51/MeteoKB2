@@ -188,7 +188,7 @@ int MeteoPanelBoardV1::writePanel()
 
 		LOG(LogLevel::Debug) << "MeteoPanelBoardV1::writePanel() : write [" << cstr << "] to i2c.";
 
-		i2cInterface->i2cWrite(cstr, sizeof(cstr - 1));
+		i2cInterface->i2cWrite(cstr, sizeof(cstr));
 
 		delete[] cstr;
 	}
