@@ -39,3 +39,8 @@ MTO_FLOAT SustainPedalIoEvent::GetRingLifeTime()
 {
 	return ringLifeTime;
 }
+
+string SustainPedalIoEvent::GetTypeName()
+{
+	return string("SustainPedalIoEvent");
+}

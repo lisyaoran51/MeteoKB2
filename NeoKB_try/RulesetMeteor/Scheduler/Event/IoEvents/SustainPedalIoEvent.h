@@ -26,6 +26,8 @@ namespace IoEvents {
 		MTO_FLOAT GetPedalDownLifeTime();
 		MTO_FLOAT GetRingLifeTime();
 
+		// 一定要每次都override!!
+		virtual string GetTypeName();
 
 	protected:
 
