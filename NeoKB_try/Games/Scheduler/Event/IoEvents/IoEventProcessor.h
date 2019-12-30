@@ -63,8 +63,12 @@ namespace IoEvents {
 		}
 
 		virtual int ProcessIo() {
-			if (ioCommunicator)
+
+			if (ioCommunicator && GetIsTransferable()) {
+				SetIsTransfered();
 				ioCommunicator->ProcessIO(this);
+
+			}
 			return 0;
 		}
 

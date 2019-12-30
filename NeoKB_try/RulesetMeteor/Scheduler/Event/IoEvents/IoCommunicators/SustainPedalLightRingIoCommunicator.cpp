@@ -24,6 +24,8 @@ SustainPedalLightRingIoCommunicator::SustainPedalLightRingIoCommunicator():Regis
 
 int SustainPedalLightRingIoCommunicator::implementProcessIO(EventProcessor<Event>* sPedalLightRing)
 {
+	LOG(LogLevel::Debug) << "SustainPedalLightRingIoCommunicator::implementProcessIO : start send i2c.";
+
 	if (!outputManager)
 		return -1;
 
@@ -32,8 +34,8 @@ int SustainPedalLightRingIoCommunicator::implementProcessIO(EventProcessor<Event
 
 	SustainPedalLightRing* sustainPedalLightRing = dynamic_cast<SustainPedalLightRing*>(sPedalLightRing);
 
-	if (!sustainPedalLightRing->GetIsTransferable())
-		return -1;
+	//if (!sustainPedalLightRing->GetIsTransferable())
+	//	return -1;
 
 
 	SustainPedalLightRingPanelMessage* message = new SustainPedalLightRingPanelMessage(
@@ -42,7 +44,10 @@ int SustainPedalLightRingIoCommunicator::implementProcessIO(EventProcessor<Event
 		sustainPedalLightRing->GetRingLifeTime()
 	);
 
-	sustainPedalLightRing->SetIsTransfered();
+	LOG(LogLevel::Debug) << "SustainPedalLightRingIoCommunicator::implementProcessIO : send i2c [" << message->ToString() << "].";
+
+
+	//sustainPedalLightRing->SetIsTransfered();
 
 	outputManager->PushMessage(message);
 

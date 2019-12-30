@@ -4,11 +4,13 @@
 #include "Effect/EffectMapper.h"
 #include <iomanip>
 #include "HitObject.h"
+#include "IoEvents/IoEventProcessor.h"
 
 
 using namespace Games::Schedulers::Events;
 using namespace Util;
 using namespace Games::Schedulers::Events::Effects;
+using namespace Games::Schedulers::Events::IoEvents;
 using namespace std;
 
 
@@ -110,6 +112,29 @@ PeriodMap<EventProcessor<Event>*>* EventProcessorMaster::GetEventProcessorPeriod
 
 int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 {
+	vector<EventProcessor<Event>*> eventProcessors;
+
+	double currentTime = 0;
+	try {
+		currentTime = GetClock()->GetCurrentTime();
+	}
+	catch (exception& e) {
+		LOG(LogLevel::Warning) << "EventProcessorMaster::GetGraph : clock is not started [" << e.what() << "].";
+		return -1;
+		//abort();
+	}
+
+	eventProcessorPeriods->GetItemsContainPeriods(make_pair<float, float>(currentTime - visibleTimeRange, currentTime + visibleTimeRange), &eventProcessors);
+
+	for (int i = 0; i < eventProcessors.size(); i++) {
+		IoEventProcessorInterface* ioEventProcessors = dynamic_cast<IoEventProcessorInterface*>(eventProcessors[i]);
+		if (ioEventProcessors) {
+			if (ioEventProcessors->GetStartTime() > currentTime) {
+				ioEventProcessors->ProcessIo();
+			}
+		}
+	}
+
 	// 這邊本來是用來更新event processor的時間，但是這樣太浪費效能，改成所有processor直接拿master的clock去讀就好
 
 	//for (int i = 0; i < eventProcessors->size(); i++) {
@@ -204,7 +229,7 @@ int EventProcessorMaster::update()
 
 	// 這邊要檢查hit object有沒有miss的
 
-	processEvent(GetClock()->GetElapsedFrameTime()); // 這個是舊的程式，以後可能用不到了
+	processEvent(GetClock()->GetElapsedFrameTime()); // 在這裡面處理io event
 
 	//return 0;
 
