@@ -63,8 +63,12 @@ namespace IoEvents {
 		}
 
 		virtual int ProcessIo() {
+			if(!ioCommunicator)
 
+				LOG(LogLevel::Error) << "IoEventProcessor::ProcessIo : no io communicator.";
+				
 			if (ioCommunicator && GetIsTransferable()) {
+
 				SetIsTransfered();
 				ioCommunicator->ProcessIO(this);
 

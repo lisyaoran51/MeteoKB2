@@ -131,7 +131,7 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 
 		if (ioEventProcessors) {
 			if (ioEventProcessors->GetStartTime() > currentTime) {
-				LOG(LogLevel::Debug) << "EventProcessorMaster::processEvent : found io event processor [" << ioEventProcessors->GetStartTime() << "].";
+				LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent : found io event processor [" << ioEventProcessors->GetStartTime() << "].";
 				ioEventProcessors->ProcessIo();
 			}
 		}
