@@ -6,9 +6,12 @@ using namespace Meteor::Schedulers::Events::Effects::Algorithms;
 
 int ExplodeMapAlgorithm::load()
 {
+	LOG(LogLevel::Info) << "ExplodeMapAlgorithm::load() : creating algos.. ";
+
 	// 如果要改Explosion設定，要從這邊改
 	genAlgo = new ExplodeMapGenerateAlgorithm();
 	shiftAlgo = new MapShiftAlgorithm<ExplodeEffect>(startX);
+	LOG(LogLevel::Debug) << "ExplodeMapAlgorithm::load() : creating algos.. end";
 	return 0;
 }
 
