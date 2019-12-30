@@ -26,7 +26,7 @@ Sm<Event>* MeteorSmPostprocessor::postprocess(Sm<Event>* s)
 			SustainPedalIoEvent* sustainPedalIoEvent = dynamic_cast<SustainPedalIoEvent*>(s->GetEvents()->at(i));
 			SustainPedalIoEvent* nextSustainPedalIoEvent = nullptr;
 
-			for (int j = i; j < s->GetEvents()->size(); j++) {
+			for (int j = i + 1; j < s->GetEvents()->size(); j++) {
 				if (dynamic_cast<SustainPedalIoEvent*>(s->GetEvents()->at(j))) {
 					nextSustainPedalIoEvent = dynamic_cast<SustainPedalIoEvent*>(s->GetEvents()->at(j));
 					break;
