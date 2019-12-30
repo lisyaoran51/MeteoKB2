@@ -39,8 +39,10 @@ int Player::load(FrameworkConfigManager* f)
 	***/
 
 	LOG(LogLevel::Fine) << "Player::load : create clocks. track = [" << workingSmValue->GetTrack() << "].";
-	if (workingSmValue->GetTrack() == nullptr)
+	if (workingSmValue->GetTrack() == nullptr) {
 		adjustableClock = new StopwatchClock();
+		LOG(LogLevel::Warning) << "Player::load : no music found. track = [" << workingSmValue->GetTrack() << "].";
+	}
 	else
 		adjustableClock = workingSmValue->GetTrack();
 

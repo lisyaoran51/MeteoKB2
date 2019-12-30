@@ -64,7 +64,7 @@ Track * WorkingSm::GetTrack()
 	if (track != nullptr)
 		return track;
 
-	LOG(LogLevel::Finer) << "WorkingSm::GetTrack() : finding track name [" << smInfo->metadata->AudioFile << "].";
+	LOG(LogLevel::Debug) << "WorkingSm::GetTrack() : finding track name [" << smInfo->metadata->AudioFile << "].";
 	//ifstream* stream = new ifstream(getPathForFile(smInfo->metadata->AudioFile));
 	string path = getPathForFile(smInfo->metadata->AudioFile);
 	char * temp = new char[path.length()];
