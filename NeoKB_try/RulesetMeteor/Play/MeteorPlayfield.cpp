@@ -120,11 +120,10 @@ int MeteorPlayfield::load(FrameworkConfigManager* f, MeteorConfigManager * m)
 		ioCommunicators["SustainPedalIoEvent"] = ioCommunicator;
 	}
 	else {
-		LOG(LogLevel::Finer) << "MeteorPlayfield::load() : check";
 		ioCommunicators["SustainPedalIoEvent"] = new SustainPedalLightRingIoCommunicator();
 	}
 
-	LOG(LogLevel::Finer) << "MeteorPlayfield::load() : SustainPedalLightRingIoCommunicator [" << ioCommunicators["SustainPedalLightRingIoCommunicator"]->GetTypeName() << "] loaded.";
+	LOG(LogLevel::Finer) << "MeteorPlayfield::load() : SustainPedalLightRingIoCommunicator [" << ioCommunicators["SustainPedalIoEvent"]->GetTypeName() << "] loaded.";
 
 	AddChild(ioCommunicators["SustainPedalIoEvent"]);
 
