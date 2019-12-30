@@ -176,7 +176,6 @@ int MeteoPanelBoardV1::readPanel()
 
 int MeteoPanelBoardV1::writePanel()
 {
-	LOG(LogLevel::Debug) << "MeteoPanelBoardV1::writePanel() : .";
 
 	if (i2cMessages.size() == 0)
 		return -1;
