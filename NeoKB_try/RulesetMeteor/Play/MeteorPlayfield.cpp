@@ -88,30 +88,30 @@ int MeteorPlayfield::load(FrameworkConfigManager* f, MeteorConfigManager * m)
 	mapAlgorithms["ExplodeEffect"]->RegisterBufferMap(bufferMap);
 
 	/* --------------------- GlowLineEffect map algo --------------------- */
-	if (m->Get(MeteorSetting::GlowLineMapAlgorithm, &mapAlgoName)) {
-		MapAlgorithm<Event>* mapAlgo = iCreator.CreateInstanceWithT<MapAlgorithm<Event>>(mapAlgoName);
-
-		mapAlgorithms["GlowLineEffect"] = mapAlgo;
-	}
-	else
-		mapAlgorithms["GlowLineEffect"] = new GlowLineMapAlgorithm();
-
-	LOG(LogLevel::Finer) << "MeteorPlayfield::load() : GlowLineMapAlgorithm [" << mapAlgorithms["GlowLineEffect"]->GetTypeName() << "] loaded.";
-
-	AddChild(mapAlgorithms["GlowLineEffect"]);
-	mapAlgorithms["GlowLineEffect"]->RegisterBufferMap(bufferMap);
+	//if (m->Get(MeteorSetting::GlowLineMapAlgorithm, &mapAlgoName)) {
+	//	MapAlgorithm<Event>* mapAlgo = iCreator.CreateInstanceWithT<MapAlgorithm<Event>>(mapAlgoName);
+	//
+	//	mapAlgorithms["GlowLineEffect"] = mapAlgo;
+	//}
+	//else
+	//	mapAlgorithms["GlowLineEffect"] = new GlowLineMapAlgorithm();
+	//
+	//LOG(LogLevel::Finer) << "MeteorPlayfield::load() : GlowLineMapAlgorithm [" << mapAlgorithms["GlowLineEffect"]->GetTypeName() << "] loaded.";
+	//
+	//AddChild(mapAlgorithms["GlowLineEffect"]);
+	//mapAlgorithms["GlowLineEffect"]->RegisterBufferMap(bufferMap);
 
 	/* --------------------- TargetLineEffect map algo --------------------- */
-	if (m->Get(MeteorSetting::TargetLineMapAlgorithm, &mapAlgoName)) {
-		MapAlgorithm<Event>* mapAlgo = iCreator.CreateInstanceWithT<MapAlgorithm<Event>>(mapAlgoName);
-
-		mapAlgorithms["TargetLineEffect"] = mapAlgo;
-	}
-	else
-		mapAlgorithms["TargetLineEffect"] = new TargetLineMapAlgorithm();
-
-	AddChild(mapAlgorithms["TargetLineEffect"]);
-	mapAlgorithms["TargetLineEffect"]->RegisterBufferMap(bufferMap);
+	//if (m->Get(MeteorSetting::TargetLineMapAlgorithm, &mapAlgoName)) {
+	//	MapAlgorithm<Event>* mapAlgo = iCreator.CreateInstanceWithT<MapAlgorithm<Event>>(mapAlgoName);
+	//
+	//	mapAlgorithms["TargetLineEffect"] = mapAlgo;
+	//}
+	//else
+	//	mapAlgorithms["TargetLineEffect"] = new TargetLineMapAlgorithm();
+	//
+	//AddChild(mapAlgorithms["TargetLineEffect"]);
+	//mapAlgorithms["TargetLineEffect"]->RegisterBufferMap(bufferMap);
 
 	/* --------------------- Pedal event io communicator --------------------- */
 	if (m->Get(MeteorSetting::SustainPedalLightRingIoCommunicator, &ioCommunicatorName)) {
