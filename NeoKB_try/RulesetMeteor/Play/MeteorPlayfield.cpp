@@ -116,7 +116,7 @@ int MeteorPlayfield::load(FrameworkConfigManager* f, MeteorConfigManager * m)
 	/* --------------------- Pedal event io communicator --------------------- */
 	if (m->Get(MeteorSetting::SustainPedalLightRingIoCommunicator, &ioCommunicatorName)) {
 		IoCommunicatorInterface* ioCommunicator = iCreator.CreateInstanceWithT<IoCommunicatorInterface>(ioCommunicatorName);
-
+		LOG(LogLevel::Finer) << "MeteorPlayfield::load() : check";
 		ioCommunicators["SustainPedalIoEvent"] = ioCommunicator;
 	}
 	else
