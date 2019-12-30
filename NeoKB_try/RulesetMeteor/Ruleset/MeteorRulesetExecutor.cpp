@@ -19,6 +19,7 @@
 #include "Scoring/MeteorScoreProcessor.h"
 #include "../Scheduler/Event/ControlPoints/MeteorNoteControlPointHitObject.h"
 #include "../Scheduler/Event/IoEvents/SustainPedalLightRing.h"
+#include "../Scheduler/Event/ControlPoints/MeteorInputKeyControlPointHitObject.h"
 
 
 
@@ -26,6 +27,7 @@
 using namespace Meteor::Rulesets;
 using namespace Games::Schedulers::Events;
 using namespace Games::Schedulers::Events::SystemEvents;
+using namespace Games::Schedulers::Events::ControlPoints;
 using namespace Games::Sheetmusics;
 using namespace Meteor::Sheetmusics;
 using namespace Meteor::Play;
@@ -69,6 +71,7 @@ MeteorRulesetExecutor::MeteorRulesetExecutor(): RegisterType("MeteorRulesetExecu
 	eventProcessorTable["TargetLineEffect"	] = "TargetLineEffectMapper";
 	eventProcessorTable["StopSystemEvent"	] = "SystemEventHandler";
 	eventProcessorTable["NoteControlPoint"	] = "MeteorNoteControlPointHitObject";
+	eventProcessorTable["InputKeyControlPoint"] = "MeteorInputKeyControlPointHitObject";
 	eventProcessorTable["SustainPedalIoEvent"] = "SustainPedalLightRing";
 
 
@@ -161,6 +164,10 @@ EventProcessor<Event>* MeteorRulesetExecutor::getEventProcessor(Event * e)
 	else if (processorType == "SustainPedalLightRing") {
 		return (new SustainPedalLightRing())->RegisterEvent(e);
 	}
+	else if (processorType == "MeteorInputKeyControlPointHitObject") {
+		return (new MeteorInputKeyControlPointHitObject())->RegisterEvent(e);
+	}
+
 
 	LOG(LogLevel::Error) << "MeteorRulesetExecutor::getEventProcessor() : [" << processorType << "] not found match.";
 	throw runtime_error("MeteorRulesetExecutor::getEventProcessor(Event*) : No matched processor type.");

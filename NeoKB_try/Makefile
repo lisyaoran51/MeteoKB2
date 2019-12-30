@@ -146,7 +146,7 @@ MeteoGameDesktop.o Program.o MeteoLightBoardV1.o bcm2835.o MeteoBluetoothDevice.
 \
 MeteorGame.o MeteorConfigManager.o MeteorInputManager.o MeteorPlayfield.o MeteorRuleset.o MeteorRulesetExecutor.o MeteorJudgement.o MeteorHitWindow.o \
 SustainPedalLightRingOutputer.o SustainPedalLightRingPanelMessage.o \
-MeteorEventProcessorMaster.o MeteorNoteControlPointHitObject.o \
+MeteorEventProcessorMaster.o MeteorNoteControlPointHitObject.o MeteorInputKeyControlPointHitObject.o \
 ExplodeEffect.o ExplodeEffectMapper.o FallEffect.o FallEffectMapper.o GlowLineEffect.o GlowLineEffectMapper.o TargetLineEffect.o TargetLineEffectMapper.o \
 ExplodeMapAlgorithm.o FallMapAlgorithm.o GlowLineMapAlgorithm.o TargetLineMapAlgorithm.o \
 SustainPedalIoEvent.o SustainPedalLightRing.o SustainPedalLightRingIoCommunicator.o \

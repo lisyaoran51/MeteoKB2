@@ -1092,6 +1092,9 @@
     <ClCompile Include="Games\Scheduler\Event\IoEvents\IoCommunicators\IoCommunicator.cpp">
       <Filter>來源檔案\Games\Schedulers\Events\IoEvents\IoCommunicators</Filter>
     </ClCompile>
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\ControlPoints\MeteorInputKeyControlPointHitObject.cpp">
+      <Filter>來源檔案\RulesetMeteor\Schedulers\Events\ControlPoints</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="DailyLog.txt">
@@ -1851,6 +1854,9 @@
     </ClInclude>
     <ClInclude Include="Games\Scheduler\Event\IoEvents\IoCommunicators\IoCommunicator.h">
       <Filter>標頭檔\Games\Scheduler\Events\IoEvents\IoCommunicators</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\ControlPoints\MeteorInputKeyControlPointHitObject.h">
+      <Filter>標頭檔\RulesetMeteor\Schedulers\Events\ControlPoints</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
