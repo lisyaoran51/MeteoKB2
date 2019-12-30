@@ -87,6 +87,7 @@ int MeteoPanelDevice::passToDevice()
 	matchedPeripheral->PourOutOutputMessages(&messages);
 
 	for (int i = 0; i < messages.size(); i++) {
+		LOG(LogLevel::Debug) << "MeteoPanelDevice::passToDevice() : pass message to board.";
 		meteoPanelBoard->PushI2cMessage(messages[i]->ToString());
 		delete messages[i];
 	}
