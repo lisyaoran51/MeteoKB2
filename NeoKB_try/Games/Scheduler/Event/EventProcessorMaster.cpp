@@ -119,7 +119,7 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 		currentTime = GetClock()->GetCurrentTime();
 	}
 	catch (exception& e) {
-		LOG(LogLevel::Warning) << "EventProcessorMaster::GetGraph : clock is not started [" << e.what() << "].";
+		LOG(LogLevel::Warning) << "EventProcessorMaster::processEvent : clock is not started [" << e.what() << "].";
 		return -1;
 		//abort();
 	}
@@ -128,8 +128,10 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 
 	for (int i = 0; i < eventProcessors.size(); i++) {
 		IoEventProcessorInterface* ioEventProcessors = dynamic_cast<IoEventProcessorInterface*>(eventProcessors[i]);
+
 		if (ioEventProcessors) {
 			if (ioEventProcessors->GetStartTime() > currentTime) {
+				LOG(LogLevel::Debug) << "EventProcessorMaster::processEvent : found io event processor [" << ioEventProcessors->GetStartTime() << "].";
 				ioEventProcessors->ProcessIo();
 			}
 		}
