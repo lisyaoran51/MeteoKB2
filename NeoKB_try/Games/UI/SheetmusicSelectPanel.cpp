@@ -40,6 +40,8 @@ int SheetmusicSelectPanel::load(FrameworkConfigManager * f, SmManager * s)
 
 		LOG(LogLevel::Fine) << "--------------------------------- " << smInfos->at(i)->metadata->Title;
 
+		LOG(LogLevel::Debug) << "int SheetmusicSelectPanel::load() : song [" << songTitle << "] is [" << smInfos->at(i)->metadata->Title << "]?";
+
 		//if (smInfos->at(i)->metadata->Title == songTitle) {
 		if (smInfos->at(i)->metadata->Title == songTitle) { // 應該要寫一個metedata，不過這邊方便，先暫時用filename就好
 
