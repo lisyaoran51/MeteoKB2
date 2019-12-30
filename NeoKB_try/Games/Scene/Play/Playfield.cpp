@@ -158,6 +158,11 @@ int Playfield::Add(EventProcessor<Event> * ep)
 
 			LOG(LogLevel::Finer) << "Playfield::Add(EventProcessor<Event>*) : Register [" << ioCommunicators[processorType]->GetTypeName() << "] to processor [" << processorType << "] on [" << ep->GetStartTime() << "].";
 		}
+		else {
+			LOG(LogLevel::Error) << "Playfield::Add(EventProcessor<Event>*) : Register processor [" << processorType << "] failed." << ioCommunicators.size();
+			throw runtime_error("Playfield::Add(EventProcessor<Event>*) : Register processor failed.");
+		}
+
 	}
 
 	return 0;
