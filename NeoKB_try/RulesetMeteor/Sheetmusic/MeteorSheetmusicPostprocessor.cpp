@@ -51,6 +51,8 @@ Sm<Event>* MeteorSmPostprocessor::postprocess(Sm<Event>* s)
 					ringLifeTime
 				);
 
+				
+
 			}
 			/* ²Ä2~n­Ópedal */
 			else {
@@ -63,6 +65,8 @@ Sm<Event>* MeteorSmPostprocessor::postprocess(Sm<Event>* s)
 					targetLifeTime = defaultNextPedalTargetStartTime;
 				}
 
+
+
 				sustainPedalIoEvent->SetTargetTime(
 					targetStartTime,
 					targetLifeTime,
@@ -71,7 +75,8 @@ Sm<Event>* MeteorSmPostprocessor::postprocess(Sm<Event>* s)
 				);
 
 			}
-
+			LOG(LogLevel::Debug) << "MeteorSmPostprocessor::postprocess() : sustainPedalIoEvent: [" << sustainPedalIoEvent->GetTargetStartTime() << "," << sustainPedalIoEvent->GetTargetLifeTime()
+				<< "," << sustainPedalIoEvent->GetPedalDownLifeTime() << "," << sustainPedalIoEvent->GetRingLifeTime() << "]";
 		}
 
 	}
