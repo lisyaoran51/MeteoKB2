@@ -5,7 +5,6 @@ using namespace Framework::Devices;
 
 int OutputDevice::ProcessOutput()
 {
-	LOG(LogLevel::Debug) << "OutputDevice::ProcessOutput() : test.";
 
 	readFromPeripheral();
 	passToDevice();
@@ -15,6 +14,7 @@ int OutputDevice::ProcessOutput()
 
 int OutputDevice::readFromPeripheral()
 {
+	LOG(LogLevel::Debug) << "OutputDevice::readFromPeripheral() : read from peripheral.";
 	matchedPeripheral->PourOutOutputMessages(&outputMessages);
 	return 0;
 }
