@@ -89,6 +89,7 @@ int MeteoPanelDevice::passToDevice()
 		meteoPanelBoard->PushI2cMessage(outputMessages[i]->ToString());
 		delete outputMessages[i];
 	}
+	outputMessages.clear();
 
 	return 0;
 }
