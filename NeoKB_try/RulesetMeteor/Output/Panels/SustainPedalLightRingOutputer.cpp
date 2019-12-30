@@ -19,6 +19,7 @@ int SustainPedalLightRingOutputer::pushMessage(SustainPedalLightRingPanelMessage
 	if(panel)
 		panel->PushOutputMessage(outputMessage);
 	else {
+		LOG(LogLevel::Error) << "SustainPedalLightRingOutputer::pushMessage : no panel device registered.";
 		// throw error
 	}
 
