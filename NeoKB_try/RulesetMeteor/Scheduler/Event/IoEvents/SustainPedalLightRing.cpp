@@ -15,11 +15,6 @@ MTO_FLOAT SustainPedalLightRing::GetStartTime()
 	return GetIoEvent()->GetTargetStartTime();
 }
 
-string SustainPedalLightRing::GetEventTypeName()
-{
-	return "SustainPedalLightRing";
-}
-
 MTO_FLOAT SustainPedalLightRing::GetTargetStartTime()
 {
 	return GetIoEvent()->GetTargetStartTime();

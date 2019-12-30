@@ -25,8 +25,6 @@ namespace IoEvents {
 		/// </summary>
 		virtual MTO_FLOAT GetStartTime();
 
-		// 一定要每次都override!!
-		virtual string GetEventTypeName();
 
 		MTO_FLOAT GetTargetStartTime();
 		MTO_FLOAT GetTargetLifeTime();
