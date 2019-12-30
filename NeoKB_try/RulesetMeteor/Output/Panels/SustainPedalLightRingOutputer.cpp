@@ -14,7 +14,7 @@ int SustainPedalLightRingOutputer::SetupPeripheral(MainInterface * mainInterface
 
 int SustainPedalLightRingOutputer::pushMessage(SustainPedalLightRingPanelMessage * outputMessage)
 {
-	LOG(LogLevel::Debug) << "SustainPedalLightRingOutputer::pushMessage : get message.";
+	LOG(LogLevel::Depricated) << "SustainPedalLightRingOutputer::pushMessage : get message.";
 
 	if(panel)
 		panel->PushOutputMessage(outputMessage);
