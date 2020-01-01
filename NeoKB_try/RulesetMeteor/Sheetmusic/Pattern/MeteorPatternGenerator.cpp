@@ -160,7 +160,7 @@ Pattern * MeteorPatternGenerator::generateNoteControlPoint(vector<Event*>* es, N
 	LOG(LogLevel::Finer) << "int MeteorSmConverter::generateNoteControlPoint(vector<Event*>*, Event*) : Start converting [" << static_cast<int>(note->GetPitch()) << "," << note->GetStartTime() << "] to pattern...";
 
 	/* 如果這個音的狀態是隱藏，就直接返回 */
-	if(static_cast<int>(note->GetHandType()) > 1)
+	if(static_cast<int>(note->GetHandType()) < 0)
 		return pattern;
 	
 	Pitch pitch = note->GetPitch();
