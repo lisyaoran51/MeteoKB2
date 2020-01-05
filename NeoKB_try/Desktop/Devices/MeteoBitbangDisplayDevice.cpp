@@ -26,7 +26,7 @@ MeteoBitbangDisplayDevice::MeteoBitbangDisplayDevice(int w, int h)
 		}
 	}
 
-	int lightBoardFileDescriptor = open("/dev/meteo_lightboard_v1", O_WRONLY);
+	lightBoardFileDescriptor = open("/dev/meteo_lightboard_v1", O_WRONLY);
 	if (lightBoardFileDescriptor < 0) {
 
 		LOG(LogLevel::Error) << "MeteoBitbangDisplayDevice::MeteoBitbangDisplayDevice() : open driver failed.";
