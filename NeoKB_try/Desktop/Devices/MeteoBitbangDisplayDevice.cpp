@@ -48,7 +48,7 @@ int MeteoBitbangDisplayDevice::Show(Map * m)
 	for (int i = 0; i < width; i++) {
 		for (int j = 0; j < height; j++) {
 
-			if (matrix[i][j] > 0)
+			if (matrix[i][height - 1 - j] > 0)
 				lightMatrixMessage[j * 6 + i / 8] |= (0x01 << (i % 8));
 
 		}

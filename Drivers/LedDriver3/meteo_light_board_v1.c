@@ -98,7 +98,7 @@ static irqreturn_t row_print_isr(int irq, void *data)
 	int col = spi_led.column;
 	for (row = 0; row < 48; row++) {
 		gpio_set_value(CL_PIN, 0);
-		if (map[col][row])
+		if (map[col][47 - row])
 			gpio_set_value(DI_PIN, 1);
 		else
 			gpio_set_value(DI_PIN, 0);
