@@ -978,9 +978,6 @@
     <ClCompile Include="Framework\Database\FakeDatabaseContextFactory.cpp">
       <Filter>來源檔案\Framework\Database</Filter>
     </ClCompile>
-    <ClCompile Include="Desktop\Devices\MeteoDisplayDevice.cpp">
-      <Filter>來源檔案\Desktop\Devices</Filter>
-    </ClCompile>
     <ClCompile Include="Desktop\Devices\MeteoLightBoardV1.cpp">
       <Filter>來源檔案\Desktop\Devices</Filter>
     </ClCompile>
@@ -1094,6 +1091,12 @@
     </ClCompile>
     <ClCompile Include="RulesetMeteor\Scheduler\Event\ControlPoints\MeteorInputKeyControlPointHitObject.cpp">
       <Filter>來源檔案\RulesetMeteor\Schedulers\Events\ControlPoints</Filter>
+    </ClCompile>
+    <ClCompile Include="Desktop\Devices\MeteoSpidevDisplayDevice.cpp">
+      <Filter>來源檔案\Desktop\Devices</Filter>
+    </ClCompile>
+    <ClCompile Include="Desktop\Devices\MeteoBitbangDisplayDevice.cpp">
+      <Filter>來源檔案\Desktop\Devices</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1678,9 +1681,6 @@
     <ClInclude Include="Framework\IO\FileInfo.h">
       <Filter>標頭檔\Framework\IO</Filter>
     </ClInclude>
-    <ClInclude Include="Desktop\Devices\MeteoDisplayDevice.h">
-      <Filter>標頭檔\Desktop\Devices</Filter>
-    </ClInclude>
     <ClInclude Include="Desktop\Devices\MeteoKeyboardDevice.h">
       <Filter>標頭檔\Desktop\Devices</Filter>
     </ClInclude>
@@ -1857,6 +1857,12 @@
     </ClInclude>
     <ClInclude Include="RulesetMeteor\Scheduler\Event\ControlPoints\MeteorInputKeyControlPointHitObject.h">
       <Filter>標頭檔\RulesetMeteor\Schedulers\Events\ControlPoints</Filter>
+    </ClInclude>
+    <ClInclude Include="Desktop\Devices\MeteoSpidevDisplayDevice.h">
+      <Filter>標頭檔\Desktop\Devices</Filter>
+    </ClInclude>
+    <ClInclude Include="Desktop\Devices\MeteoBitbangDisplayDevice.h">
+      <Filter>標頭檔\Desktop\Devices</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

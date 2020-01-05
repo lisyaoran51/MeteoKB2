@@ -1,4 +1,4 @@
-#include "MeteoDisplayDevice.h"
+#include "MeteoSpidevDisplayDevice.h"
 
 #include <thread>
 
@@ -7,7 +7,7 @@ using namespace std;
 
 
 
-MeteoDisplayDevice::MeteoDisplayDevice(int w, int h)
+MeteoSpidevDisplayDevice::MeteoSpidevDisplayDevice(int w, int h)
 {
 	meteoLightBoard = new MeteoLightBoardV1(w, h);
 	width = w;
@@ -24,15 +24,15 @@ MeteoDisplayDevice::MeteoDisplayDevice(int w, int h)
 		}
 	}
 
-	LOG(LogLevel::Fine) << "MeteoDisplayDevice::MeteoDisplayDevice() : start led driver thread.";
+	LOG(LogLevel::Fine) << "MeteoSpidevDisplayDevice::MeteoSpidevDisplayDevice() : start led driver thread.";
 
 	thread t(&MeteoLightBoardV1::Draw, meteoLightBoard);
 	t.detach();
 }
 
-int MeteoDisplayDevice::Show(Map * m)
+int MeteoSpidevDisplayDevice::Show(Map * m)
 {
-	LOG(LogLevel::Finest) << "MeteoDisplayDevice::Show() : copying map.";
+	LOG(LogLevel::Finest) << "MeteoSpidevDisplayDevice::Show() : copying map.";
 
 	uint8_t** matrix = m->GetMatrix();
 
@@ -46,7 +46,7 @@ int MeteoDisplayDevice::Show(Map * m)
 	return 0;
 }
 
-int MeteoDisplayDevice::passToDevice()
+int MeteoSpidevDisplayDevice::passToDevice()
 {
 	return 0;
 }

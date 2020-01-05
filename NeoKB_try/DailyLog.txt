@@ -1405,3 +1405,31 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	
 1/4 
 	踏板和fadeout，計分，調整速度，上傳，自動彈出鋼琴音，arduino讀琴鍵，修改光圈跑法
+	
+1/5
+	firmware
+	https://stackoverflow.com/questions/28398689/is-there-a-way-to-find-out-the-exact-source-tree-for-specific-raspberry-pi-kerne
+	
+	https://www.raspberrypi.org/forums/viewtopic.php?t=57401
+	
+	FIRMWARE_HASH=$(zgrep "* firmware as of" /usr/share/doc/raspberrypi-bootloader/changelog.Debian.gz | head -1 | awk '{ print $5 }')
+
+	# get git hash for this kernel
+	KERNEL_HASH=$(wget https://raw.github.com/raspberrypi/firmware/$FIRMWARE_HASH/extra/git_hash -O -)
+
+	# Then replace the git checkout command by this one:
+	git checkout $KERNEL_HASH
+	
+	https://www.raspberrypi.org/documentation/linux/kernel/building.md
+	make oldconfig(用這個應該就不會有板子相容問題?)
+	make -j4 zImage modules dtbs
+	sudo make modules_install
+	
+	ln
+	https://www.raspberrypi.org/forums/viewtopic.php?t=180743
+	
+	sudo dmesg -c
+	sudo insmod btn_led_autoclock.ko
+	sudo mknod /dev/meteo_lightboard_v1 c 201 0
+	sudo chmod 666 /dev/meteo_lightboard_v1
+	

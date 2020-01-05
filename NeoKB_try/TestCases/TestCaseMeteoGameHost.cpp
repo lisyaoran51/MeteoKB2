@@ -1,7 +1,7 @@
 #include "../Framework/Host/MeteoGameHost.h"
 
 #include "../Framework/../Desktop/Devices/MeteoBluetoothDevice.h"
-#include "../Framework/../Desktop/Devices/MeteoDisplayDevice.h"
+#include "../Framework/../Desktop/Devices/MeteoSpidevDisplayDevice.h"
 #include "../Framework/../Desktop/Devices/MeteoKeyboardDevice.h"
 #include "../Framework/../Desktop/Devices/MeteoPanelDevice.h"
 #include "../Framework/Input/Handler/BluetoothInputHandler.h"

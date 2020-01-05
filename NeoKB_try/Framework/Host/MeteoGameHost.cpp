@@ -1,7 +1,7 @@
 #include "MeteoGameHost.h"
 
 #include "../../Desktop/Devices/MeteoBluetoothDevice.h"
-#include "../../Desktop/Devices/MeteoDisplayDevice.h"
+#include "../../Desktop/Devices/MeteoBitbangDisplayDevice.h"
 #include "../../Desktop/Devices/MeteoKeyboardDevice.h"
 #include "../../Desktop/Devices/MeteoPanelDevice.h"
 #include "../Input/Handler/BluetoothInputHandler.h"
@@ -35,7 +35,7 @@ int MeteoGameHost::setupMainInterface()
 	mainInterface = new MainInterface();
 	mainInterface->Initialize();
 
-	DisplayDevice* displayDevice = new MeteoDisplayDevice(48, 16);// 之後再改
+	DisplayDevice* displayDevice = new MeteoBitbangDisplayDevice(48, 16);// 之後再改
 	BluetoothDevice* bluetoothDevice = new MeteoBluetoothDevice();
 
 	MeteoPanelBoardV1* meteoPanelBoard = new MeteoPanelBoardV1(7); // i2c address設為7

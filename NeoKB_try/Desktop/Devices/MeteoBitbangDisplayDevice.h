@@ -1,32 +1,30 @@
-#ifndef METEO_DISPLAY_DEVICE_H
-#define METEO_DISPLAY_DEVICE_H
-
+#ifndef METEO_BITBANG_DISPLAY_DEVICE_H
+#define METEO_BITBANG_DISPLAY_DEVICE_H
 
 
 #include "../../Framework/Devices/DisplayDevice.h"
-#include "MeteoLightBoardV1.h"
 
 
 using namespace Framework::Devices;
 
 
 namespace Desktop {
-namespace Devices {
+namespace Devices{
 
-	class MeteoDisplayDevice : public DisplayDevice {
+	class MeteoBitbangDisplayDevice : public DisplayDevice {
 
 		int width;
 		int height;
 
-		MeteoLightBoardV1* meteoLightBoard;
+		int lightBoardFileDescriptor = -1;
+
+		char lightMatrixMessage[96];
 
 		uint8_t** lightMatrix;
 
 	public:
 
-		MeteoDisplayDevice(int w, int h);
-
-
+		MeteoBitbangDisplayDevice(int w, int h);
 
 		int Show(Map* m);
 
