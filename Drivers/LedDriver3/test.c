@@ -29,9 +29,9 @@ int main(int argc,char *argv[]){
 	printf("==========================\n");
 	printf("START to write FILE\n");
 	// non-blocking io read:
-	int fd = open("/dev/myBR_file", O_WRONLY /*| O_NONBLOCK */);
+	int fd = open("/dev/meteo_lightboard_v1", O_WRONLY /*| O_NONBLOCK */);
 	if(fd < 0){
-		printf("can't open file myBR_file.\n");
+		printf("can't open file meteo_lightboard_v1.\n");
 	}else{
 		res = write(fd,buff,96);
 		if(res < 0){
