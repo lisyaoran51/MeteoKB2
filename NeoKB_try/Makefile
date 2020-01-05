@@ -142,7 +142,8 @@ Instrument.o HasPitch.o MeteoPiano.o Piano.o PianoInputManager.o \
 \
 FileSystem.o ProgramInitializer.o \
 \
-MeteoGameDesktop.o Program.o MeteoLightBoardV1.o bcm2835.o MeteoBluetoothDevice.o MeteoSpidevDisplayDevice.o MeteoKeyboardDevice.o MeteoPanelDevice.o MeteoPanelBoardV1.o pi2c.o\
+MeteoGameDesktop.o Program.o \
+MeteoLightBoardV1.o bcm2835.o MeteoBluetoothDevice.o MeteoBitbangDisplayDevice.o MeteoSpidevDisplayDevice.o MeteoKeyboardDevice.o MeteoPanelDevice.o MeteoPanelBoardV1.o pi2c.o\
 \
 MeteorGame.o MeteorConfigManager.o MeteorInputManager.o MeteorPlayfield.o MeteorRuleset.o MeteorRulesetExecutor.o MeteorJudgement.o MeteorHitWindow.o \
 SustainPedalLightRingOutputer.o SustainPedalLightRingPanelMessage.o \
