@@ -66,6 +66,7 @@ static char *msg=NULL;
 #define DI_PIN 10 
 #define CL_PIN 11
 #define CE_PIN 8
+#define OE_PIN 7
 
 #define PA_PIN 17
 #define PB_PIN 27
@@ -105,8 +106,12 @@ static irqreturn_t row_print_isr(int irq, void *data)
 
 		gpio_set_value(CL_PIN, 1);
 	}
-	gpio_set_value(CE_PIN, 1);
+	
+	gpio_set_value(OE_PIN, 1);
 	switch_row_sequencely(spi_led.column);
+	gpio_set_value(OE_PIN, 0);
+	
+	gpio_set_value(CE_PIN, 1);
 
 	spi_led.column++;
 	if (spi_led.column == 16) {
@@ -187,6 +192,7 @@ int init_module(void)
 	if (gpio_request(DI_PIN, "DI_PIN")) return -1;
 	if (gpio_request(CL_PIN, "CL_PIN")) return -1;
 	if (gpio_request(CE_PIN, "CE_PIN")) return -1;
+	if (gpio_request(OE_PIN, "OE_PIN")) return -1;
 
 	if (gpio_request(PA_PIN, "PA_PIN")) return -1;
 	if (gpio_request(PB_PIN, "PB_PIN")) return -1;
@@ -196,6 +202,7 @@ int init_module(void)
 	gpio_direction_output(DI_PIN, 0);
 	gpio_direction_output(CL_PIN, 0);
 	gpio_direction_output(CE_PIN, 0);
+	gpio_direction_output(OE_PIN, 0);
 
 	gpio_direction_output(PA_PIN, 0);
 	gpio_direction_output(PB_PIN, 0);
