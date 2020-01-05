@@ -87,7 +87,7 @@ void switch_row_sequencely(int row);
 static short int test_irq = 0;
 static unsigned long flags = 0;
 
-static irqreturn_t my_test_isr(int irq, void *data)
+static irqreturn_t row_print_isr(int irq, void *data)
 {
 	local_irq_save(flags);
 
@@ -98,7 +98,7 @@ static irqreturn_t my_test_isr(int irq, void *data)
 	int col = spi_led.column;
 	for (row = 0; row < 48; row++) {
 		gpio_set_value(CL_PIN, 0);
-		if (map[col][47 - row])
+		if (map[col][row])
 			gpio_set_value(DI_PIN, 1);
 		else
 			gpio_set_value(DI_PIN, 0);
@@ -223,7 +223,7 @@ int init_module(void)
 	if (!gpio_is_valid(MY_INTERRUPT_IN)) return -1;
 	if (gpio_request(MY_INTERRUPT_IN, "MY_INTERRUPT_IN")) return -1;
 	if ((test_irq = gpio_to_irq(MY_INTERRUPT_IN)) < 0)  return -1;
-	if (request_irq(test_irq, my_test_isr, IRQF_TRIGGER_RISING, MY_GPIO_INT_NAME, MY_DEV_NAME)) return -1;
+	if (request_irq(test_irq, row_print_isr, IRQF_TRIGGER_RISING, MY_GPIO_INT_NAME, MY_DEV_NAME)) return -1;
 
 
 	printk("module: set auto output.\n");
