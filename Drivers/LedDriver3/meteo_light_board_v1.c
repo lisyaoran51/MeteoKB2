@@ -95,8 +95,19 @@ static irqreturn_t row_print_isr(int irq, void *data)
 	bool** map = spi_led.map; 
 
 	gpio_set_value(CE_PIN, 0);
+	gpio_set_value(DI_PIN, 1);
 	int row; 
+	for (row = 0; row < 48; row++){
+		gpio_set_value(CL_PIN, 0);
+		gpio_set_value(CL_PIN, 1);
+	}
+	gpio_set_value(CE_PIN, 1);
+	switch_row_sequencely(spi_led.column);
+
+
+	gpio_set_value(CE_PIN, 0);
 	int col = spi_led.column;
+	
 	for (row = 0; row < 48; row++) {
 		gpio_set_value(CL_PIN, 0);
 		if (map[col][47 - row])
@@ -107,9 +118,6 @@ static irqreturn_t row_print_isr(int irq, void *data)
 		gpio_set_value(CL_PIN, 1);
 	}
 	
-	gpio_set_value(OE_PIN, 1);
-	switch_row_sequencely(spi_led.column);
-	gpio_set_value(OE_PIN, 0);
 	
 	gpio_set_value(CE_PIN, 1);
 
