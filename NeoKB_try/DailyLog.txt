@@ -1403,3 +1403,5 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 12/31
 	每次都要先 sudo modprobe i2c-dev
 	
+1/4 
+	踏板和fadeout，計分，調整速度，上傳，自動彈出鋼琴音，arduino讀琴鍵，修改光圈跑法

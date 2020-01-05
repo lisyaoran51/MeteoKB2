@@ -19,11 +19,16 @@
 #include <linux/time.h>
 //#include "../include/it_shield.h"
 
-#define MY_GPIO_INT_NAME "my_button_int"
-#define MY_DEV_NAME "it_device"
+#define MY_MAJOR 201
+#define MY_MINOR 0
+#define MY_DEV_COUNT 1
 
-#define MY_INTERRUPT_IN 3
-#define MY_OUTPUT 2
+#define MY_DEV_NAME "light_board_dev"
+
+#define MY_GPIO_INT_NAME "autoclock_int"
+
+#define MY_INTERRUPT_IN 21
+#define MY_OUTPUT 20
 
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("ITtraining.com.tw");
@@ -33,19 +38,29 @@ MODULE_DESCRIPTION("A Simple GPIO Device Driver module for RaspPi");
 #include<linux/ktime.h>
 ktime_t calltime, delta, rettime;
 
+/*--------------------------------character device--------------------------------*/
 
-struct timer_list my_timer;
-static void timer_function(unsigned long data) {
 
-	
-	// modify the timer for next time
-	mod_timer(&my_timer, jiffies + HZ);
-	printk("timer_function! %d\n", HZ);
-	gpio_set_value(MY_OUTPUT, 0);//led_trigger);
-	//led_trigger = led_trigger == 0 ? 1 : 0;
-	calltime = ktime_get();
-}
+#include <linux/cdev.h>
+#include <linux/fs.h>    
+#include <linux/uaccess.h>
+#include <linux/version.h>
 
+static int     light_board_open( struct inode *, struct file * );
+static ssize_t light_board_write(struct file * , const  char *  , size_t, loff_t *);
+static int     light_board_close(struct inode *, struct file * );
+
+struct file_operations my_fops = {
+        write   :       light_board_write,
+        open    :       light_board_open,
+        release :       light_board_close,
+        owner   :       THIS_MODULE
+};
+
+struct cdev light_board_cdev;
+static char *msg=NULL;
+
+/*--------------------------------character device--------------------------------*/
 /*--------------------------------SPI--------------------------------*/
 #include <linux/slab.h> // kmalloc
 #define DI_PIN 10 
@@ -98,7 +113,7 @@ static irqreturn_t my_test_isr(int irq, void *data)
 
 		rettime = ktime_get();
 		s64 actual_time = ktime_to_ns(ktime_sub(rettime, calltime));
-		printk("%lld\n", (long long)actual_time);
+		//printk("%lld\n", (long long)actual_time);
 		spi_led.column = 0;
 	}
 
@@ -110,7 +125,7 @@ static irqreturn_t my_test_isr(int irq, void *data)
 /*--------------------------------------hrtimer--------------------------------------*/
 
 
-#define MY_AUTO_OUTPUT 14
+#define MY_AUTO_OUTPUT 20
 
 #include <linux/hrtimer.h>
 enum hrtimer_restart enHRTimer = HRTIMER_NORESTART;
@@ -139,6 +154,34 @@ void makemap(void);
 
 int init_module(void)
 {
+	int err;
+	dev_t devno;
+	unsigned int count = MY_DEV_COUNT;
+
+	printk("setup char device \n");
+	// -- register device number  
+	devno = MKDEV(MY_MAJOR, MY_MINOR);
+	register_chrdev_region(devno, MY_DEV_COUNT , MY_DEV_NAME);
+
+    cdev_init(&light_board_cdev, &my_fops);
+	light_board_cdev.owner = THIS_MODULE;
+	err = cdev_add(&light_board_cdev, devno, count);
+	
+	// -- setup GPIO for button
+	msg = (char *)kmalloc(96, GFP_KERNEL);
+	if (msg !=NULL)
+		printk("malloc allocator address: 0x%p\n", msg);
+	
+	// -- other handle
+	if (err < 0)
+	{
+		printk("Device Add Error\n");
+		return -1;
+	}
+
+	printk("'mknod /dev/myBR_file c %d 0'.\n", MY_MAJOR);
+	
+	
 	/*bitbang*/
 	printk("*****LED GPIO Init ******************\n");
 	if (gpio_request(DI_PIN, "DI_PIN")) return -1;
@@ -176,29 +219,11 @@ int init_module(void)
 
 	/*bitbang end*/
 
-	printk("module: my interrupt test.\n");
-
-	printk("module: set output.\n");
-	if (!gpio_is_valid(MY_OUTPUT)) return -1;
-	if (gpio_request(MY_OUTPUT, "MY_OUTPUT")) return -1;
-	gpio_direction_output(MY_OUTPUT, 0);
-	gpio_set_value(MY_OUTPUT, 0);
-
-
 	printk("module: setting my irq.\n");
 	if (!gpio_is_valid(MY_INTERRUPT_IN)) return -1;
 	if (gpio_request(MY_INTERRUPT_IN, "MY_INTERRUPT_IN")) return -1;
 	if ((test_irq = gpio_to_irq(MY_INTERRUPT_IN)) < 0)  return -1;
 	if (request_irq(test_irq, my_test_isr, IRQF_TRIGGER_RISING, MY_GPIO_INT_NAME, MY_DEV_NAME)) return -1;
-	
-	//  -- initialize the timer 
-	init_timer(&my_timer);
-	my_timer.expires = jiffies + HZ*3;
-	my_timer.function = timer_function;
-	my_timer.data = 0;
-
-	// -- TIMER START 
-	//add_timer(&my_timer);
 
 
 	printk("module: set auto output.\n");
@@ -229,13 +254,7 @@ int init_module(void)
 
 void cleanup_module(void)
 {
-	del_timer(&my_timer);
-	//gpio_set_value(BUZZER, 0);
-	//gpio_free(BUZZER);
-	//free_irq(button_irq, MY_DEV_NAME);
 	free_irq(test_irq, MY_DEV_NAME);
-	//gpio_free(BUTTON1);
-	gpio_free(MY_OUTPUT);
 	gpio_free(MY_INTERRUPT_IN);
 
 	gpio_free(MY_AUTO_OUTPUT);
@@ -339,3 +358,76 @@ void switch_row_sequencely(int row)
 	}
 	return 0;
 }
+
+/*--------------------------------character device--------------------------------*/
+
+static int light_board_open(struct inode *inod, struct file *filp)
+{
+	int major;
+	int minor;
+
+	major = imajor(inod);
+	minor = iminor(inod);
+	printk("\n*****Some body is opening me at major %d  minor %d*****\n",major, minor);
+
+	return 0;
+}
+
+
+static int light_board_close(struct inode *inod, struct file *filp)
+{
+	int major, minor;
+
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,19,0)
+	major = MAJOR(filp->f_inode->i_rdev);
+	minor = MINOR(filp->f_inode->i_rdev);
+#else
+	major = MAJOR(filp->f_dentry->d_inode->i_rdev);
+	minor = MINOR(filp->f_dentry->d_inode->i_rdev);
+#endif
+	printk("*****Some body is closing me at major %d*****\n",minor);
+
+
+	return 0;
+}
+
+static ssize_t light_board_write(struct file *filp, const char *buff, size_t len, loff_t *off)
+{
+	short count;
+	memset(msg, 0, 96);
+	printk("%d", len);
+	count = copy_from_user( msg, buff, len );
+	
+	printk("copy");
+	
+	int i;
+	for(i = 0; i < 96; i+=8)
+		printk("%d %d %d %d %d %d %d %d \n", 
+			msg[i], msg[i+1], msg[i+2], msg[i+3], msg[i+4], msg[i+5], msg[i+6], msg[i+7]);
+	
+	printk("ok");
+	for (i = 0; i < 16; i++) {
+		int j;
+		for (j = 0; j < 48; j++) {
+			spi_led.map[i][j] = false;
+		}
+	}
+	
+	printk("map");
+	for(i = 0; i < 16; i++){
+		int j;
+		for(j = 0; j < 6;j++){
+			int j2;
+			for(j2 = 0; j2 < 8; j2++){
+				if(msg[j + i * 6] >> j2 & 0x1 == 0x1)
+					spi_led.map[i][j2 + j * 8] = true;
+				printk("%d %d %d \n", i, j, j2);
+			}
+		}
+	}
+		
+	
+	
+	return len;
+}
+
