@@ -55,6 +55,10 @@ int MeteoBitbangDisplayDevice::Show(Map * m)
 	}
 
 	int result = write(lightBoardFileDescriptor, lightMatrixMessage, 96);
+
+	if(result < 96)
+		LOG(LogLevel::Error) << "MeteoBitbangDisplayDevice::MeteoBitbangDisplayDevice() : write return " << result;
+
 	LOG(LogLevel::Finest) << "MeteoBitbangDisplayDevice::MeteoBitbangDisplayDevice() : write return " << result;
 
 	return 0;
