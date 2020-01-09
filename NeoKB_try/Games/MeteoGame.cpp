@@ -66,6 +66,8 @@ int MeteoGame::LoadOnComplete()
 	smManager->ImportFromStable();
 	// 這邊應該要import from args，以後再寫
 
+	AddChild(volumeController = new VolumeController());
+
 	AddChild(screenStack = new Loader());
 
 	return 0;

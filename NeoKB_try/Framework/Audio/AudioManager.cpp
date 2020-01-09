@@ -35,6 +35,7 @@ SampleManager * AudioManager::GetSampleManager(CompositeResourceStore<char*>* sa
 
 	SampleManager* sManager = new SampleManager(sampleStore);
 	AddItem(sManager);
+	sManager->AddAdjustment(AdjustableProperty::Volume, sampleVolume);
 	// TODO: 加上adjistment 
 
 	return sManager;
@@ -47,6 +48,7 @@ TrackManager * AudioManager::GetTrackManager(CompositeResourceStore<char*>* trac
 
 	TrackManager* tManager = new TrackManager(trackStore);
 	AddItem(tManager);
+	tManager->AddAdjustment(AdjustableProperty::Volume, trackVolume);
 	// TODO: 加上adjistment
 
 	return tManager;

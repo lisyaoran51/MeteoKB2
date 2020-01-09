@@ -20,11 +20,13 @@ namespace Samples {
 
 		virtual int Play();
 
+		virtual int Play(double volume);
+
 		virtual int Stop();
 
 	protected:
 
-		
+		double initialVolume = 0;
 
 		SampleChannel(Sample* s);
 
@@ -35,7 +37,6 @@ namespace Samples {
 		bool isStarted;
 
 		bool isCompleted;
-
 
 	};
 

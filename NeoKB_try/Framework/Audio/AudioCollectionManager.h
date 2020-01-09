@@ -45,7 +45,13 @@ namespace Audio {
 		/// 懶得寫action，所以還沒有用
 		/// </summary>
 		int RegisterItem(T* item) {
-			// 懶得寫
+
+			pendingActions.Add(this, [=]() {
+
+				item->AddAdjustmentDependency(this);
+
+			}, "AudioCollectionManager::RegisterItemAdjustments");
+
 			return 0;
 		}
 

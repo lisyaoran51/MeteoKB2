@@ -4,11 +4,13 @@
 #include "MeteoGameBase.h"
 #include "Scene/Interlude/Intro.h"
 #include "../Framework/IO/Storage.h"
+#include "UI/VolumeController.h"
 
 
 using namespace Framework;
 using namespace Games::Scenes::Interlude;
 using namespace Framework::IO;
+using namespace Games::UI;
 
 
 
@@ -24,6 +26,8 @@ namespace Games {
 		int load();
 
 		Intro* getIntro();
+
+		VolumeController* volumeController = nullptr;
 
 	public:
 

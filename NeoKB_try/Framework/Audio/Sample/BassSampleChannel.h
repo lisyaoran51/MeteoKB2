@@ -24,6 +24,8 @@ namespace Samples {
 
 		virtual bool GetIsLoaded();
 
+		virtual int OnStateChange();
+
 	protected:
 
 		

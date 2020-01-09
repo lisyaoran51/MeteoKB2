@@ -59,3 +59,17 @@ bool BassSampleChannel::GetIsLoaded()
 {
 	return sample->GetIsLoaded();
 }
+
+int BassSampleChannel::OnStateChange()
+{
+	AdjustableAudioComponent::OnStateChange();
+
+	if (channelID != 0) {
+
+		if(!BASS_ChannelIsSliding(channelID, BASS_ATTRIB_VOL))
+			BASS_ChannelSetAttribute(channelID, BASS_ATTRIB_VOL, initialVolume * volumeCalculated->GetValue());
+
+	}
+
+	return 0;
+}

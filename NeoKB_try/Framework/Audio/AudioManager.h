@@ -43,8 +43,15 @@ namespace Audio {
 
 		GameThread* GetAudioThread();
 
+		Bindable<double>* GetTrackVolume();
+
+		Bindable<double>* GetSampleVolume();
+
+
 	protected:
 
+		Bindable<double>* trackVolume = new Bindable<double>(1.0);
+		Bindable<double>* sampleVolume = new Bindable<double>(1.0);
 
 	private:
 

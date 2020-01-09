@@ -6,6 +6,11 @@
 #include <unistd.h>
 
 
+/*
+ * 要去Drivers/LedDriver3去sg driver.sh，才能用
+ * 不能開spi，會衝突
+ */
+
 using namespace Desktop::Devices;
 
 
