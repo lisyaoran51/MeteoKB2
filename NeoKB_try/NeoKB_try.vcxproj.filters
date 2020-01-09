@@ -1098,6 +1098,9 @@
     <ClCompile Include="Desktop\Devices\MeteoBitbangDisplayDevice.cpp">
       <Filter>來源檔案\Desktop\Devices</Filter>
     </ClCompile>
+    <ClCompile Include="Games\UI\VolumeController.cpp">
+      <Filter>來源檔案\Games\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="DailyLog.txt">
@@ -1863,6 +1866,15 @@
     </ClInclude>
     <ClInclude Include="Desktop\Devices\MeteoBitbangDisplayDevice.h">
       <Filter>標頭檔\Desktop\Devices</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\UI\VolumeController.h">
+      <Filter>標頭檔\Games\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Audio\Sample\MultiPlaybackBassSampleChannel.h">
+      <Filter>標頭檔\Framework\Audio\Sample</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Audio\Sample\MultiSourceBassSampleChannel.h">
+      <Filter>標頭檔\Framework\Audio\Sample</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

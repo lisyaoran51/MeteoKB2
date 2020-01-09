@@ -1436,5 +1436,34 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 1/6
 	正在修播放音樂時設定音量功能
 	
+1/9
+	音量衰減公式: http://163.13.111.54/general_physics/week-03_day-1__oscillations_SHO_damping_n_resonance.html
+	
+	公式: 音量=Xm*e(-bt/2m)，Xm是初始振福，b是阻尼常數，m是重量常數，t是時間，簡化後:音量=e(-at)，a為常數，t為時間
+	比較後發現a設為1時誤差最小
+	
+	本來是考慮去比較同一個鍵上一個琴音和這一個琴音的大小，然後作替換，但是發現琴音重複彈奏的時候應該會疊加
+
+	
+	bass的sample load會直接把整個音檔都讀進去，如果100個音檔一個1M，這樣就直接吃掉記憶體100M(全都會轉wav)
+	如果即時的load sample的話，會有6ms延遲，聽起來會很明顯
+	如果改用streaming的話，延遲是4ms，還是太大
+	應該要有一個sample pool
+	
+	結果只要一個sample，放很多個channel就好。
+	BASS_SAMPLE_OVER根本就沒有用，到底是擺來幹嘛的？
+	
+	要寫一個裡面有circular list擺一串sample channel的MultiPlaybackBassSampleChannel，用來處理重複按同一個鍵的狀況
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	

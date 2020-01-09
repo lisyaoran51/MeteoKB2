@@ -20,7 +20,7 @@ namespace Samples {
 
 		virtual int Play();
 
-		virtual int Play(double volume);
+		virtual int Play(double v);
 
 		virtual int Stop();
 

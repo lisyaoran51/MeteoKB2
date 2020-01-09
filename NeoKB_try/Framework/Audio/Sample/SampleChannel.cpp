@@ -15,6 +15,12 @@ int SampleChannel::Play()
 	return 0;
 }
 
+int SampleChannel::Play(double v)
+{
+	volume->SetValue(v);
+	return 0;
+}
+
 int SampleChannel::Stop()
 {
 	isPlaying = false;

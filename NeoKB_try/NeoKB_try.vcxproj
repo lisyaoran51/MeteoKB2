@@ -171,6 +171,7 @@
     <ClCompile Include="Framework\Timing\SpeedAdjusters\SpeedAdjuster.cpp" />
     <ClCompile Include="Framework\Timing\StopwatchClock.cpp" />
     <ClCompile Include="Games\UI\SheetmusicSelectPanel.cpp" />
+    <ClCompile Include="Games\UI\VolumeController.cpp" />
     <ClCompile Include="Instruments\HasPitch.cpp" />
     <ClCompile Include="Instruments\Input\PianoInputManager.cpp" />
     <ClCompile Include="Instruments\Instrument.cpp" />
@@ -233,6 +234,8 @@
     <ClInclude Include="Desktop\Devices\Pi2c.h" />
     <ClInclude Include="Desktop\MeteoGameDesktop.h" />
     <ClInclude Include="Desktop\Program.h" />
+    <ClInclude Include="Framework\Audio\Sample\MultiPlaybackBassSampleChannel.h" />
+    <ClInclude Include="Framework\Audio\Sample\MultiSourceBassSampleChannel.h" />
     <ClInclude Include="Framework\Audio\Track\RateSettableBassTrack.h" />
     <ClInclude Include="Framework\Database\DatabaseContext.h" />
     <ClInclude Include="Framework\Database\DatabaseContextFactory.h" />
@@ -421,6 +424,7 @@
     <ClInclude Include="Framework\Timing\StopwatchClock.h" />
     <ClInclude Include="Framework\Timing\ThrottledFramedClock.h" />
     <ClInclude Include="Games\UI\SheetmusicSelectPanel.h" />
+    <ClInclude Include="Games\UI\VolumeController.h" />
     <ClInclude Include="Instruments\Audio\SoundBinding.h" />
     <ClInclude Include="Instruments\HasPitch.h" />
     <ClInclude Include="Instruments\Input\PianoAction.h" />
