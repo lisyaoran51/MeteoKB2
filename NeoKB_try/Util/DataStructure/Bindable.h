@@ -40,7 +40,7 @@ namespace DataStructure {
 		/// </summary>
 		int SetValue(T v, bool deleteLast = false) {
 
-			LOG(LogLevel::Debug) << "Bindable::SetValue() : ... ";
+			LOG(LogLevel::Depricated) << "Bindable::SetValue() : ... ";
 
 			if (disabled)
 				throw invalid_argument("Bindable<T>::SetValue(): change value is disabled.");
