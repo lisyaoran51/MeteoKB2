@@ -74,7 +74,7 @@ namespace DataStructure {
 
 		// 不用轉乘bindable，參數型態沒有變
 		template<typename TCallableObject>
-		int AddOnValueChanged(TCallableObject object, function<int(void*)> oValueChanged, string name) {
+		int AddOnValueChanged(TCallableObject object, function<int(void)> oValueChanged, string name) {
 			
 			return Bindable<void*>::AddOnValueChanged(object, oValueChanged, name);;
 		}
