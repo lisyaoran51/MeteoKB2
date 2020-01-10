@@ -14,7 +14,7 @@ namespace Samples {
 
 	public:
 
-		SampleChannel();
+		//SampleChannel();
 
 		SampleChannel* GetSampleChannel(string name);
 

@@ -33,11 +33,13 @@ int SampleChannel::SetFadeOutTime(float fOutTime)
 	return 0;
 }
 
+/*
 SampleChannel::SampleChannel()
 {
 	// throw error:這個式檢查用，不會真的執行
 	throw logic_error("SampleChannel::SampleChannel() : this is for template constraint. unable to launch");
 }
+*/
 
 SampleChannel::SampleChannel(Sample * s)
 {
