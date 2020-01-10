@@ -27,7 +27,7 @@ int BassSampleChannel::Play()
 
 		channelID = dynamic_cast<BassSample*>(sample)->CreateChannel();
 		BASS_ChannelSetAttribute(channelID, BASS_ATTRIB_PAN, 0);
-		BASS_ChannelSetAttribute(channelID, BASS_ATTRIB_VOL, 1);
+		BASS_ChannelSetAttribute(channelID, BASS_ATTRIB_VOL, volumeCalculated->GetValue());
 
 		return 0;
 	}, "Lambda_BassSampleChannel::CreateChannel");
@@ -43,6 +43,13 @@ int BassSampleChannel::Play()
 	return 0;
 }
 
+int BassSampleChannel::Play(double v)
+{
+	volume->SetValue(v);
+
+	return Play();
+}
+
 int BassSampleChannel::Stop()
 {
 	unique_lock<mutex> uLock(pendingActionMutex);
@@ -51,6 +58,24 @@ int BassSampleChannel::Stop()
 		BASS_ChannelStop(channelID);
 		return 0;
 	}, "Lambda_BassSampleChannel::Stop");
+
+	return 0;
+}
+
+int BassSampleChannel::FadeOut()
+{
+	BASS_ChannelSlideAttribute(channelID, BASS_ATTRIB_VOL, 0, (DWORD)(fadeOutTime * 1000));
+
+	return 0;
+}
+
+int BassSampleChannel::StopFadeOut()
+{
+	float v = 0;
+	if (!BASS_ChannelGetAttribute(channelID, BASS_ATTRIB_VOL, &v)) {
+		LOG(LogLevel::Error) << "BassSampleChannel::StopFadeOut() : get channel attribute failed. error code: [" << BASS_ErrorGetCode() << "].";
+	}
+	BASS_ChannelSlideAttribute(channelID, BASS_ATTRIB_VOL, v, 0);
 
 	return 0;
 }

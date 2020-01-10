@@ -27,6 +27,12 @@ int SampleChannel::Stop()
 	return 0;
 }
 
+int SampleChannel::SetFadeOutTime(float fOutTime)
+{
+	fadeOutTime = fOutTime;
+	return 0;
+}
+
 SampleChannel::SampleChannel()
 {
 	// throw error:這個式檢查用，不會真的執行

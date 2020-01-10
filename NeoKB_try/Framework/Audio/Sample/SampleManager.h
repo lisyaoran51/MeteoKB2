@@ -21,6 +21,14 @@ namespace Samples {
 
 		SampleChannel* GetSampleChannel(string name);
 
+		SampleChannel* GetMultiPlaybackSampleChannel(string name);
+
+		int SetPlaybackAmount(int pAmount);
+
+	protected:
+
+		int playbackAmount = 10;
+
 	private:
 
 		CompositeResourceStore<char*>* resourceStore;

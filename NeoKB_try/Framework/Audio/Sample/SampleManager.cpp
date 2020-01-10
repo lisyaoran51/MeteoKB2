@@ -3,6 +3,7 @@
 #include "Sample.h"
 #include "BassSample.h"
 #include "BassSampleChannel.h"
+#include "MultiPlaybackBassSampleChannel.h"
 
 
 using namespace Framework::Audio::Samples;
@@ -46,4 +47,41 @@ SampleChannel * SampleManager::GetSampleChannel(string name)
 
 
 	return sampleChannel;
+}
+
+SampleChannel * SampleManager::GetMultiPlaybackSampleChannel(string name)
+{
+	Sample* sample = nullptr;
+	SampleChannel* sampleChannel = nullptr;
+
+
+	map<string, Sample*>::iterator it = sampleCache.find(name);
+	if (it == sampleCache.end()) {
+
+		string path = resourceStore->GetFilePath(name);
+		if (path != "") {
+			sample = sampleCache[name] = new BassSample((char*)path.c_str());
+			sampleChannel = sampleChannelCache[name] = new MultiPlaybackBassSampleChannel(sample, playbackAmount, OverrideType::MinimunVolume);
+			AddItem(sampleChannel);
+		}
+		else {
+			throw runtime_error("SampleManager::GetMultiPlaybackSampleChannel(): file not found : "s + name);
+		}
+
+
+		LOG(LogLevel::Debug) << "SampleManager::GetMultiPlaybackSampleChannel() : file path found [" << path << "].";
+
+	}
+	else {
+		sampleChannel = sampleChannelCache[name];
+	}
+
+
+	return sampleChannel;
+}
+
+int SampleManager::SetPlaybackAmount(int pAmount)
+{
+	playbackAmount = pAmount;
+	return 0;
 }

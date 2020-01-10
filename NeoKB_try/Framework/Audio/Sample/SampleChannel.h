@@ -24,19 +24,33 @@ namespace Samples {
 
 		virtual int Stop();
 
+		virtual int FadeOut() = 0;
+
+		virtual int StopFadeOut() = 0;
+
+		/// <summary>
+		/// fadeout多久，單位是秒
+		/// </summary>
+		int SetFadeOutTime(float fOutTime);
+
 	protected:
 
 		double initialVolume = 0;
 
+		/// <summary>
+		/// fadeout多久，單位是秒
+		/// </summary>
+		float fadeOutTime = 0.2f;
+
 		SampleChannel(Sample* s);
 
-		Sample* sample;
+		Sample* sample = nullptr;
 
-		bool isPlaying;
+		bool isPlaying = false;
 
-		bool isStarted;
+		bool isStarted = false;
 
-		bool isCompleted;
+		bool isCompleted = false;
 
 	};
 

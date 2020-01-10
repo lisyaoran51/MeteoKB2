@@ -20,7 +20,13 @@ namespace Samples {
 
 		virtual int Play();
 
+		virtual int Play(double v);
+
 		virtual int Stop();
+
+		virtual int FadeOut();
+
+		virtual int StopFadeOut();
 
 		virtual bool GetIsLoaded();
 

@@ -11,7 +11,7 @@ namespace Samples {
 
 	class BassSample : public Sample {
 
-		int sampleID;
+		int sampleID = -1;
 
 	public:
 

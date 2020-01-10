@@ -30,6 +30,8 @@
     <ClCompile Include="Desktop\Devices\Pi2c.cpp" />
     <ClCompile Include="Desktop\MeteoGameDesktop.cpp" />
     <ClCompile Include="Desktop\Program.cpp" />
+    <ClCompile Include="Framework\Audio\Sample\MultiPlaybackBassSampleChannel.cpp" />
+    <ClCompile Include="Framework\Audio\Sample\MultiPlaybackSampleChannel.cpp" />
     <ClCompile Include="Framework\Audio\Track\RateSettableBassTrack.cpp" />
     <ClCompile Include="Framework\Database\DatabaseContext.cpp" />
     <ClCompile Include="Framework\Database\DatabaseContextFactory.cpp" />
@@ -235,6 +237,7 @@
     <ClInclude Include="Desktop\MeteoGameDesktop.h" />
     <ClInclude Include="Desktop\Program.h" />
     <ClInclude Include="Framework\Audio\Sample\MultiPlaybackBassSampleChannel.h" />
+    <ClInclude Include="Framework\Audio\Sample\MultiPlaybackSampleChannel.h" />
     <ClInclude Include="Framework\Audio\Sample\MultiSourceBassSampleChannel.h" />
     <ClInclude Include="Framework\Audio\Track\RateSettableBassTrack.h" />
     <ClInclude Include="Framework\Database\DatabaseContext.h" />
