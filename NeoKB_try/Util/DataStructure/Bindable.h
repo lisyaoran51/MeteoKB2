@@ -45,7 +45,7 @@ namespace DataStructure {
 			if (disabled)
 				throw invalid_argument("Bindable<T>::SetValue(): change value is disabled.");
 			value = v;
-			onValueChanged.Trigger();
+			onValueChanged.Trigger(&v);
 
 			triggerValueChange();
 			return 0;
@@ -55,7 +55,7 @@ namespace DataStructure {
 			if (disabled)
 				throw invalid_argument("Bindable<T>::SetValue(): change value is disabled.");
 			value = v;
-			onValueChanged.Trigger();
+			onValueChanged.Trigger(&v);
 			return 0;
 		}
 		
