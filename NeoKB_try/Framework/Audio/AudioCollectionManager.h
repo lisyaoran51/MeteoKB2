@@ -50,6 +50,7 @@ namespace Audio {
 
 				item->AddAdjustmentDependency(this);
 
+				return 0;
 			}, "AudioCollectionManager::RegisterItemAdjustments");
 
 			return 0;
