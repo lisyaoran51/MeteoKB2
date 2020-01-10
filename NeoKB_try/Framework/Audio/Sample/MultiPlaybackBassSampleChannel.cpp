@@ -9,7 +9,7 @@ using namespace Framework::Audio::Samples;
 
 
 
-MultiPlaybackBassSampleChannel::MultiPlaybackBassSampleChannel(Sample * s, int pAmount, OverrideType oType): MultiPlaybackSampleChannel(s, pAmount)
+MultiPlaybackBassSampleChannel::MultiPlaybackBassSampleChannel(Sample * s, int pAmount, OverrideType oType): MultiPlaybackSampleChannel(s, pAmount), SampleChannel(s)
 {
 	overrideType = oType;
 }
