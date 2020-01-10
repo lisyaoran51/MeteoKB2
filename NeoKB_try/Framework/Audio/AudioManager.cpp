@@ -58,3 +58,11 @@ GameThread * AudioManager::GetAudioThread()
 {
 	return audioThread;
 }
+
+Bindable<double>* AudioManager::GetTrackVolume() {
+	return trackVolume;
+}
+
+Bindable<double>* AudioManager::GetSampleVolume() {
+	return sampleVolume;
+}
