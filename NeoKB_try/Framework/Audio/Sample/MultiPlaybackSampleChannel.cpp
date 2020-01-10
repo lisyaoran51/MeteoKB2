@@ -11,10 +11,18 @@ MultiPlaybackSampleChannel::MultiPlaybackSampleChannel(Sample * s, int pAmount):
 
 	channelIds = new int[pAmount];
 
-	for (int i = 0; i < pAmount; i++) {
+	unique_lock<mutex> uLock(pendingActionMutex);
+	pendingActions.Add(this, [=]() {
 
-		channelIds[i] = createSampleChannel();
+		for (int i = 0; i < pAmount; i++) {
 
-	}
+			channelIds[i] = createSampleChannel();
+
+		}
+
+		return 0;
+	}, "Lambda_MultiPlaybackSampleChannel::CreateSampleChannels");
+
+	
 
 }

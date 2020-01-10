@@ -136,7 +136,7 @@ IoEvent.o PanelEvent.o IoCommunicator.o \
 GameEvent.o StartGameEvent.o StopSystemEvent.o SystemEvent.o SystemEventHandler.o \
 ResourceStoreWorkingSm.o SheetmusicConverter.o SheetmusicManager.o SheetmusicMetadata.o SheetmusicPostprocessor.o SheetmusicStore.o WorkingSheetmusic.o \
 SimpleSmDecoder.o SmDecoder.o FileReader.o Pattern.o PatternGenerator.o \
-SheetmusicSelectPanel.o \
+SheetmusicSelectPanel.o VolumeController.o \
 \
 Instrument.o HasPitch.o MeteoPiano.o Piano.o PianoInputManager.o \
 \
