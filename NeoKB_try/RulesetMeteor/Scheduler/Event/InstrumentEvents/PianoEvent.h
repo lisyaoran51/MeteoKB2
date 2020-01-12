@@ -23,6 +23,9 @@ namespace InstrumentEvents{
 
 		pair<InputKey, int> GetInput();
 
+		// 一定要每次都override!!
+		virtual string GetTypeName();
+
 	protected:
 
 		pair<InputKey, int> command = pair<InputKey, int>();

@@ -21,6 +21,9 @@ namespace InstrumentEvents{
 
 		InstrumentEvent(MTO_FLOAT s, MTO_FLOAT l);
 
+		// 一定要每次都override!!
+		virtual string GetTypeName();
+
 	};
 
 }}}}

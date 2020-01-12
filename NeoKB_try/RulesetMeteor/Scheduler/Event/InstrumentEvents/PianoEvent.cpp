@@ -13,3 +13,7 @@ pair<InputKey, int> PianoEvent::GetInput()
 {
 	return command;
 }
+
+string PianoEvent::GetTypeName() {
+	return "PianoEvent";
+}
