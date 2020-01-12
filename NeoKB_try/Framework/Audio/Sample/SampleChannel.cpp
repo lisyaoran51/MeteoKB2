@@ -3,6 +3,13 @@
 using namespace Framework::Audio::Samples;
 
 
+int SampleChannel::Update()
+{
+	AudioComponent::Update();
+	isPlaying = GetIsPlaying();
+	return 0;
+}
+
 SampleChannel * SampleChannel::GetSampleChannel(string name)
 {
 	return nullptr;

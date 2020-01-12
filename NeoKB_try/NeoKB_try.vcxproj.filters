@@ -451,9 +451,6 @@
     <Filter Include="資源檔\TestCases">
       <UniqueIdentifier>{83de6e51-dd0a-40af-a208-7bd52ecc2575}</UniqueIdentifier>
     </Filter>
-    <Filter Include="標頭檔\Games\Ruleset\Judgements">
-      <UniqueIdentifier>{deaa5ed4-90f2-4f4a-802b-9a2d2a62c8ce}</UniqueIdentifier>
-    </Filter>
     <Filter Include="來源檔案\Games\Ruleset\Judgements">
       <UniqueIdentifier>{5d6bd834-e631-48af-93e3-39ad197ca56b}</UniqueIdentifier>
     </Filter>
@@ -525,6 +522,39 @@
     </Filter>
     <Filter Include="來源檔案\Framework\Output">
       <UniqueIdentifier>{bb741f2b-502e-4bfa-a118-cbc03fc7ffa2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\RulesetMeteor\Schedulers\Events\InstrumentEvents">
+      <UniqueIdentifier>{517b72c9-adec-4202-82a4-e5ca11823bfe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Games\Scheduler\Events\InstrumentEvents">
+      <UniqueIdentifier>{b8c57dfc-1276-4ca8-8839-27487eb2d204}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Games\Scheduler\Events\InstrumentEvents\InstrumentControllers">
+      <UniqueIdentifier>{489d9d2f-31e3-41d3-b933-9f034140bfff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Games\Schedulers\Events\InstrumentEvents">
+      <UniqueIdentifier>{76f785b3-fb03-434e-a895-f22cdc982189}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Games\Schedulers\Events\InstrumentEvents\InstrumentControllers">
+      <UniqueIdentifier>{0900797f-b2cd-49ae-a581-3177c8beb301}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\RulesetMeteor\Schedulers\Events\InstrumentEvents\InstrumentControllers">
+      <UniqueIdentifier>{4204826c-0436-4129-8691-5f7d0e6f0524}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetMeteor\Schedulers\Events\InstrumentEvents">
+      <UniqueIdentifier>{ef52aafc-f6ca-4f09-9a80-3166c050ae4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetMeteor\Schedulers\Events\InstrumentEvents\InstrumentControllers">
+      <UniqueIdentifier>{b3564498-02c0-43fb-8915-3b47e917ffd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Games\Ruleset\Judgements">
+      <UniqueIdentifier>{deaa5ed4-90f2-4f4a-802b-9a2d2a62c8ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\RulesetMeteor\Ruleset\Modifiers">
+      <UniqueIdentifier>{1fa1caf3-25ec-4f84-9ea5-78a6bab8d8c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetMeteor\Ruleset\Modifiers">
+      <UniqueIdentifier>{a17a37fd-5d35-4eef-8899-a6dcbe56a055}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1106,6 +1136,27 @@
     </ClCompile>
     <ClCompile Include="Framework\Audio\Sample\MultiPlaybackBassSampleChannel.cpp">
       <Filter>來源檔案\Framework\Audio\Sample</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\Scheduler\Event\InstrumentEvents\InstrumentEvent.cpp">
+      <Filter>來源檔案\Games\Schedulers\Events\InstrumentEvents</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\Scheduler\Event\InstrumentEvents\InstrumentControllers\InstrumentController.cpp">
+      <Filter>來源檔案\Games\Schedulers\Events\InstrumentEvents\InstrumentControllers</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\InstrumentEvents\PianoEvent.cpp">
+      <Filter>來源檔案\RulesetMeteor\Schedulers\Events\InstrumentEvents</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\InstrumentEvents\PianoEventProcessor.cpp">
+      <Filter>來源檔案\RulesetMeteor\Schedulers\Events\InstrumentEvents</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\InstrumentEvents\InstrumentControllers\PianoController.cpp">
+      <Filter>來源檔案\RulesetMeteor\Schedulers\Events\InstrumentEvents\InstrumentControllers</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\Ruleset\Modifiers\Modifier.cpp">
+      <Filter>來源檔案\Games\Ruleset\Mod</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\Ruleset\Modifiers\AutoPedalModifier.cpp">
+      <Filter>來源檔案\RulesetMeteor\Ruleset\Modifiers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1884,6 +1935,36 @@
     </ClInclude>
     <ClInclude Include="Framework\Audio\Sample\MultiPlaybackSampleChannel.h">
       <Filter>標頭檔\Framework\Audio\Sample</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Scheduler\Event\InstrumentEvents\InstrumentEvent.h">
+      <Filter>標頭檔\Games\Scheduler\Events\InstrumentEvents</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Scheduler\Event\InstrumentEvents\InstrumentControllers\InstrumentController.h">
+      <Filter>標頭檔\Games\Scheduler\Events\InstrumentEvents\InstrumentControllers</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Scheduler\Event\InstrumentEvents\InstrumentEventProcessor.h">
+      <Filter>標頭檔\Games\Scheduler\Events\InstrumentEvents</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\InstrumentEvents\PianoEvent.h">
+      <Filter>標頭檔\RulesetMeteor\Schedulers\Events\InstrumentEvents</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\InstrumentEvents\PianoEventProcessor.h">
+      <Filter>標頭檔\RulesetMeteor\Schedulers\Events\InstrumentEvents</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\InstrumentEvents\InstrumentControllers\PianoController.h">
+      <Filter>標頭檔\RulesetMeteor\Schedulers\Events\InstrumentEvents\InstrumentControllers</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Ruleset\Modifiers\IApplicableToRulesetExecutor.h">
+      <Filter>標頭檔\Games\Ruleset\Modifiers</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Ruleset\Modifiers\IApplicableToClock.h">
+      <Filter>標頭檔\Games\Ruleset\Modifiers</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Ruleset\Modifiers\IApplicableToDifficulty.h">
+      <Filter>標頭檔\Games\Ruleset\Modifiers</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Ruleset\Modifiers\AutoPedalModifier.h">
+      <Filter>標頭檔\RulesetMeteor\Ruleset\Modifiers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

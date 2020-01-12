@@ -78,6 +78,8 @@ namespace Instruments {
 		///	</summary>
 		map<PianoAction, bool> isPressingMap;
 
+		virtual int update();
+
 		virtual int OnKeyDown(pair<PianoAction, int> action);
 
 		virtual int OnKeyUp(PianoAction action);

@@ -63,6 +63,7 @@
     <ClCompile Include="Games\MeteoGameBase.cpp" />
     <ClCompile Include="Games\Ruleset\Judgements\HasHitWindow.cpp" />
     <ClCompile Include="Games\Ruleset\Judgements\Judgement.cpp" />
+    <ClCompile Include="Games\Ruleset\Modifiers\Modifier.cpp" />
     <ClCompile Include="Games\Ruleset\Ruleset.cpp" />
     <ClCompile Include="Games\Ruleset\RulesetInfo.cpp" />
     <ClCompile Include="Games\Ruleset\RulesetStore.cpp" />
@@ -90,6 +91,8 @@
     <ClCompile Include="Games\Scheduler\Event\GameEvents\GameEvent.cpp" />
     <ClCompile Include="Games\Scheduler\Event\GameEvents\StartGameEvent.cpp" />
     <ClCompile Include="Games\Scheduler\Event\HitObject.cpp" />
+    <ClCompile Include="Games\Scheduler\Event\InstrumentEvents\InstrumentControllers\InstrumentController.cpp" />
+    <ClCompile Include="Games\Scheduler\Event\InstrumentEvents\InstrumentEvent.cpp" />
     <ClCompile Include="Games\Scheduler\Event\IoEvents\IoCommunicators\IoCommunicator.cpp" />
     <ClCompile Include="Games\Scheduler\Event\IoEvents\IoEvent.cpp" />
     <ClCompile Include="Games\Scheduler\Event\IoEvents\PanelEvent.cpp" />
@@ -190,6 +193,7 @@
     <ClCompile Include="RulesetMeteor\Ruleset\Judgements\MeteorJudgement.cpp" />
     <ClCompile Include="RulesetMeteor\Ruleset\MeteorRuleset.cpp" />
     <ClCompile Include="RulesetMeteor\Ruleset\MeteorRulesetExecutor.cpp" />
+    <ClCompile Include="RulesetMeteor\Ruleset\Modifiers\AutoPedalModifier.cpp" />
     <ClCompile Include="RulesetMeteor\Scheduler\Event\ControlPoints\MeteorInputKeyControlPointHitObject.cpp" />
     <ClCompile Include="RulesetMeteor\Scheduler\Event\ControlPoints\MeteorNoteControlPointHitObject.cpp" />
     <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\Algorithm\ExplodeMapAlgorithm.cpp" />
@@ -204,6 +208,9 @@
     <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\GlowLineEffectMapper.cpp" />
     <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\TargetLineEffect.cpp" />
     <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\TargetLineEffectMapper.cpp" />
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\InstrumentEvents\InstrumentControllers\PianoController.cpp" />
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\InstrumentEvents\PianoEvent.cpp" />
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\InstrumentEvents\PianoEventProcessor.cpp" />
     <ClCompile Include="RulesetMeteor\Scheduler\Event\IoEvents\IoCommunicators\SustainPedalLightRingIoCommunicator.cpp" />
     <ClCompile Include="RulesetMeteor\Scheduler\Event\IoEvents\SustainPedalIoEvent.cpp" />
     <ClCompile Include="RulesetMeteor\Scheduler\Event\IoEvents\SustainPedalLightRing.cpp" />
@@ -282,6 +289,9 @@
     <ClInclude Include="Games\Ruleset\Judgements\HitWindow.h" />
     <ClInclude Include="Games\Ruleset\Judgements\HasHitWindow.h" />
     <ClInclude Include="Games\Ruleset\Judgements\Judgement.h" />
+    <ClInclude Include="Games\Ruleset\Modifiers\IApplicableToClock.h" />
+    <ClInclude Include="Games\Ruleset\Modifiers\IApplicableToDifficulty.h" />
+    <ClInclude Include="Games\Ruleset\Modifiers\IApplicableToRulesetExecutor.h" />
     <ClInclude Include="Games\Ruleset\Modifiers\Modifier.h" />
     <ClInclude Include="Games\Ruleset\Ruleset.h" />
     <ClInclude Include="Games\Ruleset\RulesetExecutor.h" />
@@ -318,6 +328,9 @@
     <ClInclude Include="Games\Scheduler\Event\GameEvents\StartGameEvent.h" />
     <ClInclude Include="Games\Scheduler\Event\GameEvents\StopGameEvent.h" />
     <ClInclude Include="Games\Scheduler\Event\HitObject.h" />
+    <ClInclude Include="Games\Scheduler\Event\InstrumentEvents\InstrumentControllers\InstrumentController.h" />
+    <ClInclude Include="Games\Scheduler\Event\InstrumentEvents\InstrumentEvent.h" />
+    <ClInclude Include="Games\Scheduler\Event\InstrumentEvents\InstrumentEventProcessor.h" />
     <ClInclude Include="Games\Scheduler\Event\IoEvents\BluetoothEvent.h" />
     <ClInclude Include="Games\Scheduler\Event\IoEvents\IoCommunicators\IoCommunicator.h" />
     <ClInclude Include="Games\Scheduler\Event\IoEvents\IoEvent.h" />
@@ -447,6 +460,7 @@
     <ClInclude Include="RulesetMeteor\Ruleset\Judgements\MeteorJudgement.h" />
     <ClInclude Include="RulesetMeteor\Ruleset\MeteorRuleset.h" />
     <ClInclude Include="RulesetMeteor\Ruleset\MeteorRulesetExecutor.h" />
+    <ClInclude Include="RulesetMeteor\Ruleset\Modifiers\AutoPedalModifier.h" />
     <ClInclude Include="RulesetMeteor\Ruleset\Scoring\MeteorScoreProcessor.h" />
     <ClInclude Include="RulesetMeteor\Scheduler\Event\ControlPoints\MeteorInputKeyControlPointHitObject.h" />
     <ClInclude Include="RulesetMeteor\Scheduler\Event\ControlPoints\MeteorNoteControlPointHitObject.h" />
@@ -462,6 +476,9 @@
     <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\GlowLineEffectMapper.h" />
     <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\TargetLineEffect.h" />
     <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\TargetLineEffectMapper.h" />
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\InstrumentEvents\InstrumentControllers\PianoController.h" />
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\InstrumentEvents\PianoEvent.h" />
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\InstrumentEvents\PianoEventProcessor.h" />
     <ClInclude Include="RulesetMeteor\Scheduler\Event\IoEvents\IoCommunicators\SustainPedalLightRingIoCommunicator.h" />
     <ClInclude Include="RulesetMeteor\Scheduler\Event\IoEvents\SustainPedalIoEvent.h" />
     <ClInclude Include="RulesetMeteor\Scheduler\Event\IoEvents\SustainPedalLightRing.h" />

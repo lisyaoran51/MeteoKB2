@@ -111,9 +111,22 @@ int MultiPlaybackBassSampleChannel::StopFadeOut()
 	return 0;
 }
 
+bool MultiPlaybackBassSampleChannel::GetIsPlaying()
+{
+	bool iPlaying = false;
+
+	for (int i = 0; i < playbackAmount; i++) {
+		if (BASS_ChannelIsActive(channelIds[i]) == BASS_ACTIVE_PLAYING && !BASS_ChannelIsSliding(channelIds[i], BASS_ATTRIB_VOL)) {
+			iPlaying = true;
+		}
+	}
+
+	return iPlaying;
+}
+
 bool MultiPlaybackBassSampleChannel::GetIsLoaded()
 {
-	sample->GetIsLoaded();
+	return sample->GetIsLoaded();
 }
 
 int MultiPlaybackBassSampleChannel::OnStateChange()

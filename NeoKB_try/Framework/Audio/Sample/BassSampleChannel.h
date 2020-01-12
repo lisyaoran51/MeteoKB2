@@ -12,7 +12,7 @@ namespace Samples {
 
 	class BassSampleChannel : public SampleChannel {
 
-		int channelID;
+		int channelID = -1;
 
 	public:
 
@@ -27,6 +27,8 @@ namespace Samples {
 		virtual int FadeOut();
 
 		virtual int StopFadeOut();
+
+		virtual bool GetIsPlaying();
 
 		virtual bool GetIsLoaded();
 

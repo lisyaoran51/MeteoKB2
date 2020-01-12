@@ -21,7 +21,7 @@ int BassSampleChannel::Play()
 		LOG(LogLevel::Debug) << "BassSampleChannel::Play() : create channel.";
 
 		if (!GetIsLoaded()) {
-			channelID = 0;
+			channelID = -1;
 			return 0;
 		}
 
@@ -78,6 +78,11 @@ int BassSampleChannel::StopFadeOut()
 	BASS_ChannelSlideAttribute(channelID, BASS_ATTRIB_VOL, v, 0);
 
 	return 0;
+}
+
+bool BassSampleChannel::GetIsPlaying()
+{
+	return channelID != -1 && BASS_ChannelIsActive(channelID) == BASS_ACTIVE_PLAYING && !BASS_ChannelIsSliding(channelID, BASS_ATTRIB_VOL);
 }
 
 bool BassSampleChannel::GetIsLoaded()

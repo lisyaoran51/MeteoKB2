@@ -33,6 +33,8 @@ namespace Samples {
 
 		virtual int StopFadeOut();
 
+		virtual bool GetIsPlaying();
+
 		virtual bool GetIsLoaded();
 
 		virtual int OnStateChange();

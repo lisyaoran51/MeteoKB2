@@ -16,6 +16,8 @@ namespace Samples {
 
 		//SampleChannel();
 
+		virtual int Update();
+
 		SampleChannel* GetSampleChannel(string name);
 
 		virtual int Play();
@@ -27,6 +29,8 @@ namespace Samples {
 		virtual int FadeOut() = 0;
 
 		virtual int StopFadeOut() = 0;
+
+		virtual bool GetIsPlaying() = 0;
 
 		/// <summary>
 		/// fadeout多久，單位是秒

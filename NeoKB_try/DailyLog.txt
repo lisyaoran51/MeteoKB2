@@ -1454,6 +1454,14 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	BASS_SAMPLE_OVER根本就沒有用，到底是擺來幹嘛的？
 	
 	要寫一個裡面有circular list擺一串sample channel的MultiPlaybackBassSampleChannel，用來處理重複按同一個鍵的狀況
+	用channelStop就會把那個channel釋放掉，就不用怕memory leak了
+	
+	如果用Play會直接把這個channel重播，所以不用特別暫停。
+	
+1/10
+	音量的東西寫完了，之後可以把琴鍵和音量接起來
+	後面開發的東西可能比較不急
+	
 	
 	
 	

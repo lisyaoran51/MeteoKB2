@@ -291,23 +291,27 @@ int Piano::ControlSustainPedal(bool down)
 				if (!it->second) {
 					SampleChannel* sampleChannel = getSamples()->at(it->first);
 					if (sampleChannel)
-						sampleChannel->Stop();
+						sampleChannel->FadeOut();
 				}
 
 			}
 		}
-		
 	}
 	return 0;
 }
 
-
+int Piano::update()
+{
+	
+	return 0;
+}
 
 int Piano::OnKeyDown(pair<PianoAction, int> action)
 {
 	LOG(LogLevel::Depricated) << "Piano::OnKeyDown() : get fake input." << int(action.first);
 	
-	getSamples()->at(action.first)->Play();
+	//getSamples()->at(action.first)->Play();
+	getSamples()->at(action.first)->Play(double(action.second)/256.0);
 
 	isPressingMap[action.first] = true;
 	return 0;
@@ -317,7 +321,8 @@ int Piano::OnKeyUp(PianoAction action)
 {
 	// ⊿今今狾Τ础今狾⊿秨币笆┑
 	if(!isPressingMap.at(PianoAction::SustainPedal) && !isAutoSustain )
-		getSamples()->at(action)->Stop();
+		getSamples()->at(action)->FadeOut();
+		//getSamples()->at(action)->Stop();
 
 	isPressingMap[action] = false;
 	return 0;
@@ -327,6 +332,9 @@ int Piano::OnButtonDown(PianoAction action)
 {
 	// 狦ヘ玡琌筿福北今狾碞氨ゎ钡Μ今狾癡祋
 	if (sustainType == SustainType::GameControllingSustain && action == PianoAction::SustainPedal)
+		return 0;
+
+	if(isAutoSustain && action == PianoAction::SustainPedal)
 		return 0;
 
 	isPressingMap[action] = true;
