@@ -137,7 +137,7 @@ int MeteorPlayfield::load(FrameworkConfigManager* f, MeteorConfigManager * m)
 	}
 	else {
 		instrumentControllers["PianoEvent"] = new PianoController();
-
+	}
 
 	LOG(LogLevel::Finer) << "MeteorPlayfield::load() : PianoController [" << instrumentControllers["PianoEvent"]->GetTypeName() << "] loaded.";
 
