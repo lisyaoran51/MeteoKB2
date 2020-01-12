@@ -44,7 +44,7 @@ namespace InstrumentControllers{
 
 			Instrument* i = GetCache<Instrument>("Instrument");
 
-			return load(f, o);
+			return load(f, i);
 		}
 
 		int load(FrameworkConfigManager* f, Instrument* i) {
