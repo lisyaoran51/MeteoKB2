@@ -20,6 +20,7 @@
 #include "../Scheduler/Event/ControlPoints/MeteorNoteControlPointHitObject.h"
 #include "../Scheduler/Event/IoEvents/SustainPedalLightRing.h"
 #include "../Scheduler/Event/ControlPoints/MeteorInputKeyControlPointHitObject.h"
+#include "../Scheduler/Event/InstrumentEvents/PianoEventProcessor.h"
 
 
 
@@ -39,6 +40,8 @@ using namespace Framework::Timing::SpeedAdjusters;
 using namespace Meteor::Rulesets::Scoring;
 using namespace Meteor::Schedulers::Events::ControlPoints;
 using namespace Meteor::Schedulers::Events::IoEvents;
+using namespace Meteor::Schedulers::Events::InstrumentEvents;
+
 
 
 
@@ -71,8 +74,9 @@ MeteorRulesetExecutor::MeteorRulesetExecutor(): RegisterType("MeteorRulesetExecu
 	eventProcessorTable["TargetLineEffect"	] = "TargetLineEffectMapper";
 	eventProcessorTable["StopSystemEvent"	] = "SystemEventHandler";
 	eventProcessorTable["NoteControlPoint"	] = "MeteorNoteControlPointHitObject";
-	eventProcessorTable["InputKeyControlPoint"] = "MeteorInputKeyControlPointHitObject";
-	eventProcessorTable["SustainPedalIoEvent"] = "SustainPedalLightRing";
+	eventProcessorTable["InputKeyControlPoint"	] = "MeteorInputKeyControlPointHitObject";
+	eventProcessorTable["SustainPedalIoEvent"	] = "SustainPedalLightRing";
+	eventProcessorTable["PianoEvent"		] = "PianoEventProcessor";
 
 
 	// µù¥Uprivate load (c++¤~»Ý­n)
@@ -166,6 +170,9 @@ EventProcessor<Event>* MeteorRulesetExecutor::getEventProcessor(Event * e)
 	}
 	else if (processorType == "MeteorInputKeyControlPointHitObject") {
 		return (new MeteorInputKeyControlPointHitObject())->RegisterEvent(e);
+	}
+	else if (processorType == "PianoEventProcessor") {
+		return (new PianoEventProcessor())->RegisterEvent(e);
 	}
 
 

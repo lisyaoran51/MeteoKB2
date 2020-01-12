@@ -11,6 +11,7 @@
 #include "../../../Games/Scheduler/Event/SystemEvents/StopSystemEvent.h"
 #include "../../../Instruments/Pitch.h"
 #include "../../Scheduler/Event/IoEvents/SustainPedalIoEvent.h"
+#include "../../Scheduler/Event/InstrumentEvents/PianoEvent.h"
 
 
 
@@ -23,6 +24,7 @@ using namespace Games::Schedulers::Events::GameEvents;
 using namespace Games::Schedulers::Events::SystemEvents;
 using namespace Instruments;
 using namespace Meteor::Schedulers::Events::IoEvents;
+using namespace Meteor::Schedulers::Events::InstrumentEvents;
 
 
 int MeteorPatternGenerator::load()
@@ -275,9 +277,15 @@ Pattern * MeteorPatternGenerator::generateInputKeyControlPoint(vector<Event*>* e
 
 	SustainPedalIoEvent* sustainPedalIoEvent = new SustainPedalIoEvent(inputKey, inputKeyControlPoint->GetStartTime(), inputKeyControlPoint->GetLifeTime());
 
+	PianoEvent* pianoEventDown = new PianoEvent(pair<InputKey, int>(inputKey, 1), inputKeyControlPoint->GetStartTime(), 0);
+	PianoEvent* pianoEventUp = new PianoEvent(pair<InputKey, int>(inputKey, -1), inputKeyControlPoint->GetStartTime() + inputKeyControlPoint->GetLifeTime(), 0);
 
 	pattern->Add(sustainPedalIoEvent);
+	pattern->Add(pianoEventDown);
+	pattern->Add(pianoEventUp);
 	es->push_back(sustainPedalIoEvent);
+	es->push_back(pianoEventDown);
+	es->push_back(pianoEventUp);
 
 	return pattern;
 }
