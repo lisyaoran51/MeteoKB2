@@ -144,6 +144,9 @@ int ProgramInitializer::Initialize()
 	// Meteor/Schedulers/Events/IoEvents/IoCommunicators
 	iCreator.RegisterType<SustainPedalLightRingIoCommunicator>("SustainPedalLightRingIoCommunicator");
 
+	// Meteor/Schedulers/Events/InstrumentEvents/InstrumentControllers
+	iCreator.RegisterType<PianoController>("PianoController");
+
 	// Meteor/Sheetmusics/Patterns
 	iCreator.RegisterType<MeteorPatternGenerator>("MeteorPatternGenerator");
 

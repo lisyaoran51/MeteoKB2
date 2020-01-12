@@ -55,7 +55,7 @@ namespace Sheetmusics {
 
 		//vector<ctrl_point>* effects;
 
-		//vector<Mod*> mods;
+		BindablePointer<vector<Modifier*>*>* modifiers;
 
 		Sm<Event>* sm = nullptr;
 

@@ -21,6 +21,8 @@ WorkingSm::WorkingSm(SmInfo * s)
 		smMetadata = new SmMetadata(s->metadata);
 	else
 		smMetadata = new SmMetadata();
+
+	modifiers = new BindablePointer<vector<Modifier*>*>(new vector<Modifier*>());
 }
 
 WorkingSm::~WorkingSm()
@@ -55,8 +57,7 @@ bool WorkingSm::IsTheSameSm(SmInfo * s)
 
 BindablePointer<vector<Modifier*>*>* WorkingSm::GetModifiers()
 {
-	// TODO: not implemented
-	return nullptr;
+	return modifiers;
 }
 
 Track * WorkingSm::GetTrack()

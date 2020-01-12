@@ -10,6 +10,7 @@
 #include "../../RulesetMeteor/Scheduler/Event/MeteorEventProcessorMaster.h"
 #include "../../Games/Scheduler/Event/IoEvents/IoCommunicators/IoCommunicator.h"
 #include "../Scheduler/Event/IoEvents/IoCommunicators/SustainPedalLightRingIoCommunicator.h"
+#include "../Scheduler/Event/InstrumentEvents/InstrumentControllers/PianoController.h"
 
 
 
@@ -21,7 +22,7 @@ using namespace Util;
 using namespace Meteor::Schedulers::Events;
 using namespace Games::Schedulers::Events::IoEvents::IoCommunicators;
 using namespace Meteor::Schedulers::Events::IoEvents::IoCommunicators;
-
+using namespace Meteor::Schedulers::Events::InstrumentEvents::InstrumentControllers;
 
 
 int MeteorPlayfield::load()
@@ -58,6 +59,7 @@ int MeteorPlayfield::load(FrameworkConfigManager* f, MeteorConfigManager * m)
 	InstanceCreator<MtoObject> &iCreator = InstanceCreator<MtoObject>::GetInstance();
 	string mapAlgoName;
 	string ioCommunicatorName;
+	string instrumentControllerName;
 
 	/* --------------------- FallEffect map algo --------------------- */
 	if (m->Get(MeteorSetting::FallMapAlgorithm, &mapAlgoName)) {
@@ -126,6 +128,20 @@ int MeteorPlayfield::load(FrameworkConfigManager* f, MeteorConfigManager * m)
 	LOG(LogLevel::Finer) << "MeteorPlayfield::load() : SustainPedalLightRingIoCommunicator [" << ioCommunicators["SustainPedalIoEvent"]->GetTypeName() << "] loaded.";
 
 	AddChild(ioCommunicators["SustainPedalIoEvent"]);
+
+	/* --------------------- Piano Controller --------------------- */
+	if (m->Get(MeteorSetting::InstrumentController, &instrumentControllerName)) {
+		InstrumentControllerInterface* instrumentController = iCreator.CreateInstanceWithT<InstrumentControllerInterface>(instrumentControllerName);
+
+		instrumentControllers["PianoEvent"] = instrumentController;
+	}
+	else {
+		instrumentControllers["PianoEvent"] = new PianoController();
+
+
+	LOG(LogLevel::Finer) << "MeteorPlayfield::load() : PianoController [" << instrumentControllers["PianoEvent"]->GetTypeName() << "] loaded.";
+
+	AddChild(instrumentControllers["PianoEvent"]);
 
 
 	/*--------------------- map pitch shifter ---------------------*/

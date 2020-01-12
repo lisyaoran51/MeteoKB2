@@ -36,6 +36,7 @@ namespace Config{
 		GlowLineMapAlgorithm,
 		TargetLineMapAlgorithm,
 		SustainPedalLightRingIoCommunicator,
+		InstrumentController,
 
 		MapPitchShifter,
 

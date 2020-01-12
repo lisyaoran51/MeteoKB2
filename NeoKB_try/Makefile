@@ -19,6 +19,7 @@ Games/Scene:Games/Scene/Interlude:Games/Scene/Play:Games/Scene/Select:\
 Games/Scheduler/Event:Games/Scheduler/Event/ControlPoints:Games/Scheduler/Event/Effect:\
 Games/Scheduler/Event/Effect/Algorithm:Games/Scheduler/Event/GameEvents:Games/Scheduler/Event/SystemEvents:\
 Games/Scheduler/Event/IoEvents:Games/Scheduler/Event/IoEvents/IoCommunicators:\
+Games/Scheduler/Event/InstrumentEvents:Games/Scheduler/Event/InstrumentEvents/InstrumentControllers:\
 Games/Sheetmusic:Games/Sheetmusic/Format:Games/Sheetmusic/Format/Parser:Games/Sheetmusic/IO:Games/Sheetmusic/Pattern:\
 Games/UI:\
 \
@@ -30,10 +31,11 @@ ThirdParty/Bass:\
 \
 Desktop:Desktop/Devices:\
 \
-RulesetMeteor:RulesetMeteor/Config:RulesetMeteor/Input:RulesetMeteor/Play:RulesetMeteor/Ruleset:RulesetMeteor/Ruleset/Judgements:\
+RulesetMeteor:RulesetMeteor/Config:RulesetMeteor/Input:RulesetMeteor/Play:RulesetMeteor/Ruleset:RulesetMeteor/Ruleset/Modifiers:RulesetMeteor/Ruleset/Judgements:\
 RulesetMeteor/Output/Panels:\
 RulesetMeteor/Scheduler/Event:RulesetMeteor/Scheduler/Event/ControlPoints:RulesetMeteor/Scheduler/Event/Effect:RulesetMeteor/Scheduler/Event/Effect/Algorithm:\
 RulesetMeteor/Scheduler/Event/IoEvents:RulesetMeteor/Scheduler/Event/IoEvents/IoCommunicators:\
+RulesetMeteor/Scheduler/Event/InstrumentEvents:RulesetMeteor/Scheduler/Event/InstrumentEvents/InstrumentControllers:\
 RulesetMeteor/Sheetmusic:RulesetMeteor/Sheetmusic/Pattern:\
 RulesetMeteor/Timing:\
 
@@ -61,6 +63,7 @@ INCLUDE = -IFramwork -IFramework/Allocation -IFramework/Allocation/Hierachal -IF
 -IGames/Scheduler/Event -IGames/Scheduler/Event/ControlPoints -IGames/Scheduler/Event/Effect \
 -IGames/Scheduler/Event/Effect/Algorithm -IGames/Scheduler/Event/GameEvents -IGames/Scheduler/Event/SystemEvents \
 -IGames/Scheduler/Event/IoEvents -IGames/Scheduler/Event/IoEvents/IoCommunicators \
+-IGames/Scheduler/Event/InstrumentEvents -IGames/Scheduler/Event/InstrumentEvents/InstrumentControllers \
 -IGames/Sheetmusic -IGames/Sheetmusic/Format -IGames/Sheetmusic/Format/Parser -IGames/Sheetmusic/IO -IGames/Sheetmusic/Pattern \
 -IGames/UI \
 \
@@ -73,9 +76,10 @@ INCLUDE = -IFramwork -IFramework/Allocation -IFramework/Allocation/Hierachal -IF
 -IDesktop -IDesktop/Devices \
 \
 -IRulesetMeteor -IRulesetMeteor/Config -IRulesetMeteor/Input -IRulesetMeteor/Output -IRulesetMeteor/Output/Panels \
--IRulesetMeteor/Play -IRulesetMeteor/Ruleset -IRulesetMeteor/Ruleset/Judgements \
+-IRulesetMeteor/Play -IRulesetMeteor/Ruleset -IRulesetMeteor/Ruleset/Modifiers -IRulesetMeteor/Ruleset/Judgements \
 -IRulesetMeteor/Scheduler/Event -IRulesetMeteor/Scheduler/Event/ControlPoints -IRulesetMeteor/Scheduler/Event/Effect -IRulesetMeteor/Scheduler/Event/Effect/Algorithm \
 -IRulesetMeteor/Scheduler/Event/IoEvents -IRulesetMeteor/Scheduler/Event/IoEvents/IoCommunicators \
+-IRulesetMeteor/Scheduler/Event/InstrumentEvents -IRulesetMeteor/Scheduler/Event/InstrumentEvents/InstrumentControllers \
 -IRulesetMeteor/Sheetmusic -IRulesetMeteor/Sheetmusic/Pattern \
 -IRulesetMeteor/Timing 
 
@@ -127,12 +131,13 @@ DecoupledInterpolatingFramedClock.o FramedClock.o InterpolatingFramedClock.o Off
 LinearSpeedAdjuster.o SpeedAdjuster.o \
 \
 MeteoGame.o MeteoGameBase.o\
-Ruleset.o RulesetInfo.o RulesetStore.o Judgement.o HasHitWindow.o \
+Ruleset.o RulesetInfo.o RulesetStore.o Judgement.o HasHitWindow.o Modifier.o \
 Loader.o MeteoScene.o Intro.o Player.o PlayerLoader.o Playfield.o MainMenu.o PlaySongSelect.o SongSelect.o \
 Event.o EventProcessorMaster.o HitObject.o \
 ControlPoint.o NoteControlPoint.o NoteControlPointHitObject.o PlayableControlPoint.o InputKeyControlPoint.o InputKeyControlPointHitObject.o \
 Effect.o LinearMapPitchShifter.o MapPitchShifter.o \
 IoEvent.o PanelEvent.o IoCommunicator.o \
+InstrumentEvent.o InstrumentController.o \
 GameEvent.o StartGameEvent.o StopSystemEvent.o SystemEvent.o SystemEventHandler.o \
 ResourceStoreWorkingSm.o SheetmusicConverter.o SheetmusicManager.o SheetmusicMetadata.o SheetmusicPostprocessor.o SheetmusicStore.o WorkingSheetmusic.o \
 SimpleSmDecoder.o SmDecoder.o FileReader.o Pattern.o PatternGenerator.o \
@@ -151,6 +156,7 @@ MeteorEventProcessorMaster.o MeteorNoteControlPointHitObject.o MeteorInputKeyCon
 ExplodeEffect.o ExplodeEffectMapper.o FallEffect.o FallEffectMapper.o GlowLineEffect.o GlowLineEffectMapper.o TargetLineEffect.o TargetLineEffectMapper.o \
 ExplodeMapAlgorithm.o FallMapAlgorithm.o GlowLineMapAlgorithm.o TargetLineMapAlgorithm.o \
 SustainPedalIoEvent.o SustainPedalLightRing.o SustainPedalLightRingIoCommunicator.o \
+PianoEvent.o PianoEventProcessor.o PianoController.o \
 MeteorSheetmusicConverter.o MeteorSheetmusicPostprocessor.o MeteorPatternGenerator.o \
 MeteorTimeController.o 
 

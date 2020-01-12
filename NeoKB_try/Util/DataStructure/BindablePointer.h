@@ -26,6 +26,9 @@ namespace DataStructure {
 		BindablePointer(T p): Bindable<void*>(p) {
 			if (!is_pointer<T>::value)
 				throw logic_error("BindablePointer::BindablePointer(): template is not a pointer.");
+			value = p;
+			defaultValue = p;
+			hasDefaultValue = true;
 		}
 
 		int SetValue(T v, bool deleteLast = false) {

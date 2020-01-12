@@ -3,23 +3,24 @@
 
 
 #include "../../../Games/Ruleset/Modifiers/Modifier.h"
-#include "../../../Games/Ruleset/Modifiers/IApplicableToRulesetExecutor.h"
-#include "../../../Games/Scheduler/Event/Event.h"
-
+#include "../../../Instruments/Instrument.h"
+#include "../../../Games/Ruleset/Modifiers/InstrumentModifier.h"
 
 using namespace Games::Rulesets::Modifiers;
-using namespace Games::Schedulers::Events;
+using namespace Instruments;
 
 
 namespace Meteor {
 namespace Rulesets{
 namespace Modifiers{
 
-	class AutoPedalModifier : public Modifier, public IApplicableToRulesetExecutor<Event> {
+	class AutoPedalModifier : public InstrumentModifier {
 
 	public:
 
-		virtual int ApplyToRulesetContainer(RulesetExecutor<Event>* rulesetExecutor);
+		AutoPedalModifier();
+
+		virtual int ApplyToInstrument(Instrument* instrument);
 
 
 	};

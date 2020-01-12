@@ -63,8 +63,13 @@ using namespace Meteor::Rulesets;
 #include "../RulesetMeteor/Scheduler/Event/Effect/Algorithm/TargetLineMapAlgorithm.h"
 using namespace Meteor::Schedulers::Events::Effects::Algorithms;
 
+// Meteor/Schedulers/Events/IoEvents/IoCommunicators
 #include "../RulesetMeteor/Scheduler/Event/IoEvents/IoCommunicators/SustainPedalLightRingIoCommunicator.h"
 using namespace Meteor::Schedulers::Events::IoEvents::IoCommunicators;
+
+// Meteor/Schedulers/Events/InstrumentEvents/InstrumentControllers
+#include "../RulesetMeteor/Scheduler/Event/InstrumentEvents/InstrumentControllers/PianoController.h"
+using namespace Meteor::Schedulers::Events::InstrumentEvents::InstrumentControllers;
 
 // Meteor/Sheetmusics/Patterns
 #include "../RulesetMeteor/Sheetmusic/Pattern/MeteorPatternGenerator.h"

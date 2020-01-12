@@ -9,6 +9,7 @@
 #include "../../../Framework/Timing/DecoupledInterpolatingFramedClock.h"
 #include "../../../Framework/Timing/OffsetFramedClock.h"
 #include "../../../Framework/Timing/TimeController.h"
+#include "../../../Instruments/Instrument.h"
 
 
 
@@ -19,6 +20,8 @@ using namespace Framework::Configurations;
 using namespace Framework::Scenes;
 using namespace Games::Scenes;
 using namespace Framework::Timing;
+using namespace Instruments;
+
 
 
 namespace Games {
@@ -37,11 +40,15 @@ namespace Play {
 
 		SmManager* smManager = nullptr;
 
+		Instrument* instrument = nullptr;
+
 
 		Ruleset* ruleset = nullptr;
 
 
 		RulesetExecutor<Event>* rulesetExecutor = nullptr;
+
+		vector<Modifier*>* modifiers = nullptr;
 
 		ScoreProcessor* scoreProcessor = nullptr;
 		
@@ -50,7 +57,7 @@ namespace Play {
 		/// </summary>
 		int load();
 		
-		int load(FrameworkConfigManager* f);
+		int load(FrameworkConfigManager* f, Instrument* i);
 
 	public:
 

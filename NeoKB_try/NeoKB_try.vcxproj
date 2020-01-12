@@ -291,6 +291,7 @@
     <ClInclude Include="Games\Ruleset\Judgements\Judgement.h" />
     <ClInclude Include="Games\Ruleset\Modifiers\IApplicableToClock.h" />
     <ClInclude Include="Games\Ruleset\Modifiers\IApplicableToDifficulty.h" />
+    <ClInclude Include="Games\Ruleset\Modifiers\InstrumentModifier.h" />
     <ClInclude Include="Games\Ruleset\Modifiers\IApplicableToRulesetExecutor.h" />
     <ClInclude Include="Games\Ruleset\Modifiers\Modifier.h" />
     <ClInclude Include="Games\Ruleset\Ruleset.h" />

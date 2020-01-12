@@ -2,24 +2,33 @@
 
 #include <string>
 #include "../../Sheetmusic/Sheetmusic.h"
+#include "../../Ruleset/Modifiers/InstrumentModifier.h"
+
+
 
 using namespace std;
 using namespace Games::Scenes::Play;
 using namespace Games::Rulesets;
 using namespace Games::Sheetmusics;
 using namespace Framework::Configurations;
+using namespace Rulesets::Modifiers;
+using namespace std;
 
 
 int Player::load()
 {
 	FrameworkConfigManager * f = GetCache<FrameworkConfigManager>("FrameworkConfigManager");
 	if (!f)
-		throw runtime_error("int  RulesetExecutor<T>::load() : FrameworkConfigManager not found in cache.");
+		throw runtime_error("Player::load() : FrameworkConfigManager not found in cache.");
 
-	return load(f);
+	Instrument * i = GetCache<Instrument>("Instrument");
+	if (!f)
+		throw runtime_error("Player::load() : Instrument not found in cache.");
+
+	return load(f, i);
 }
 
-int Player::load(FrameworkConfigManager* f)
+int Player::load(FrameworkConfigManager* f, Instrument* instru)
 {
 	LOG(LogLevel::Info) << "Player::load : start loading the player and reading the sm and ruleset from working sm.";
 
@@ -90,6 +99,18 @@ int Player::load(FrameworkConfigManager* f)
 	timeController->AddChild(container);
 	container->SetClock(offsetClock);
 	container->AddChild(rulesetExecutor);
+
+
+	instrument = instru;
+	modifiers = workingSmValue->GetModifiers()->GetValue();
+	for (int i = 0; i < modifiers->size(); i++) {
+
+		if (dynamic_cast<InstrumentModifier*>(modifiers->at(i))) {
+			dynamic_cast<InstrumentModifier*>(modifiers->at(i))->ApplyToInstrument(instrument);
+		}
+
+	}
+	
 
 
 	scoreProcessor = rulesetExecutor->CreateScoreProcessor();

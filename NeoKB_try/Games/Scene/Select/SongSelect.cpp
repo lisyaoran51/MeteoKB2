@@ -1,10 +1,12 @@
 #include "SongSelect.h"
 
 #include "../../MeteoGame.h"
+#include "../../../RulesetMeteor/Ruleset/Modifiers/AutoPedalModifier.h"
 
 
 using namespace Games::Scenes::Select;
 using namespace Games;
+using namespace Meteor::Rulesets::Modifiers;
 
 
 SongSelect::SongSelect(): RegisterType("SongSelect")
@@ -88,6 +90,9 @@ int SongSelect::selectionChanged(SmInfo * sheetmusicInfo)
 		}(&workingSm, this);
 
 		workingSm.SetValue(smManager->GetWorkingSm(sheetmusicInfo), true);
+
+		// 這邊先加mod，之後要拿掉，擺在on select(on command)
+		workingSm.GetValue()->GetModifiers()->GetValue()->push_back(new AutoPedalModifier());
 	}
 
 	updateSheetmusic(workingSm.GetValue());

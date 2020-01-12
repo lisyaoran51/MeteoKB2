@@ -22,7 +22,7 @@ namespace Modifiers{
 
 	public:
 
-		string GetName();
+		virtual string GetName();
 
 	protected:
 
