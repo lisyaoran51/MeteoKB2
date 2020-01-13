@@ -28,7 +28,7 @@ namespace InstrumentEvents{
 	};
 
 	template<typename T>
-	class InstrumentEventProcessor : public EventProcessor<Event> {
+	class InstrumentEventProcessor : public InstrumentEventProcessorInterface {
 
 
 
