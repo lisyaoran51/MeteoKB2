@@ -2,12 +2,14 @@
 
 #include <math.h>
 #include <sstream>
+#include "../../../Util/Log.h"
 
 
 
 using namespace Meteor::Output::Panels;
 using namespace std;
 using namespace std::literals::string_literals;
+using namespace Util;
 
 
 string SustainPedalLightRingPanelMessage::roundAndToString(float number, int digit)
@@ -42,5 +44,6 @@ SustainPedalLightRingPanelMessage::SustainPedalLightRingPanelMessage(float tLife
 
 string SustainPedalLightRingPanelMessage::ToString()
 {
-	return "SP,"s + roundAndToString(targetLifeTime, 3) + ","s + roundAndToString(pedalDownLifeTime, 3) + ","s + roundAndToString(ringLifeTime, 3);
+	LOG(LogLevel::Debug) << "SustainPedalLightRingPanelMessage::ToString() : pass [" << ("SP,"s + roundAndToString(targetLifeTime, 2) + ","s + roundAndToString(pedalDownLifeTime, 2) + ","s + roundAndToString(ringLifeTime, 2)) << "] to board.";
+	return "SP,"s + roundAndToString(targetLifeTime, 2) + ","s + roundAndToString(pedalDownLifeTime, 2) + ","s + roundAndToString(ringLifeTime, 2);
 }
