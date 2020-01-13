@@ -410,17 +410,17 @@ static ssize_t light_board_write(struct file *filp, const char *buff, size_t len
 {
 	short count;
 	memset(msg, 0, 96);
-	printk("%d", len);
+	//printk("%d", len);
 	count = copy_from_user( msg, buff, len );
 	
-	printk("copy");
+	//printk("copy");
 	
 	int i;
 	//for(i = 0; i < 96; i+=8)
 	//	printk("%d %d %d %d %d %d %d %d \n", 
 	//		msg[i], msg[i+1], msg[i+2], msg[i+3], msg[i+4], msg[i+5], msg[i+6], msg[i+7]);
 	
-	printk("ok");
+	//printk("ok");
 	for (i = 0; i < 16; i++) {
 		int j;
 		for (j = 0; j < 48; j++) {
