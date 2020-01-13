@@ -130,6 +130,8 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 
 	for (int i = 0; i < eventProcessors.size(); i++) {
 
+		LOG(LogLevel::Debug) << "EventProcessorMaster::processEvent : this processor is for [" << eventProcessors[i]->GetEvent()->GetTypeName() << "].";
+
 		IoEventProcessorInterface* ioEventProcessors = dynamic_cast<IoEventProcessorInterface*>(eventProcessors[i]);
 		if (ioEventProcessors) {
 			if (ioEventProcessors->GetStartTime() > currentTime) {
