@@ -133,7 +133,7 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 		IoEventProcessorInterface* ioEventProcessors = dynamic_cast<IoEventProcessorInterface*>(eventProcessors[i]);
 		if (ioEventProcessors) {
 			if (ioEventProcessors->GetStartTime() > currentTime) {
-				LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent : found io event processor [" << ioEventProcessors->GetStartTime() << "].";
+				LOG(LogLevel::Debug) << "EventProcessorMaster::processEvent : found io event processor [" << ioEventProcessors->GetStartTime() << "].";
 				ioEventProcessors->ProcessIo();
 			}
 			continue;
