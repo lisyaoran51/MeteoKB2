@@ -133,7 +133,7 @@ EventProcessor<Event>* MeteorRulesetExecutor::getEventProcessor(Event * e)
 	// 為什麼不用event自己來create? 因為要去搭配不同的mapper，所以要動態調配
 	string processorType = GetProcessorType(e->GetTypeName()); // .c_str();
 
-	LOG(LogLevel::Finer) << "MeteorRulesetExecutor::getEventProcessor(Event*) : event [" << e->GetStartTime() << "] has processor type [" << processorType << "].";
+	LOG(LogLevel::Debug) << "MeteorRulesetExecutor::getEventProcessor(Event*) : event [" << e->GetStartTime() << "] has processor type [" << processorType << "] from ["<< e->GetTypeName() << "].";
 
 
 	//InstanceCreator<MtoObject>& iCreator = InstanceCreator<MtoObject>::GetInstance();
