@@ -5,6 +5,7 @@
 #include <iomanip>
 #include "HitObject.h"
 #include "IoEvents/IoEventProcessor.h"
+#include "InstrumentEvents/InstrumentEventProcessor.h"
 
 
 using namespace Games::Schedulers::Events;
@@ -12,6 +13,7 @@ using namespace Util;
 using namespace Games::Schedulers::Events::Effects;
 using namespace Games::Schedulers::Events::IoEvents;
 using namespace std;
+using namespace Games::Schedulers::Events::InstrumentEvents;
 
 
 
@@ -127,13 +129,23 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 	eventProcessorPeriods->GetItemsContainPeriods(make_pair<float, float>(currentTime - visibleTimeRange, currentTime + visibleTimeRange), &eventProcessors);
 
 	for (int i = 0; i < eventProcessors.size(); i++) {
-		IoEventProcessorInterface* ioEventProcessors = dynamic_cast<IoEventProcessorInterface*>(eventProcessors[i]);
 
+		IoEventProcessorInterface* ioEventProcessors = dynamic_cast<IoEventProcessorInterface*>(eventProcessors[i]);
 		if (ioEventProcessors) {
 			if (ioEventProcessors->GetStartTime() > currentTime) {
 				LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent : found io event processor [" << ioEventProcessors->GetStartTime() << "].";
 				ioEventProcessors->ProcessIo();
 			}
+			continue;
+		}
+
+		InstrumentEventProcessorInterface* instrumentEventProcessor = dynamic_cast<InstrumentEventProcessorInterface*>(eventProcessors[i]);
+		if (instrumentEventProcessor) {
+			if (instrumentEventProcessor->GetStartTime() > currentTime) {
+				LOG(LogLevel::Debug) << "EventProcessorMaster::processEvent : found instrument event processor [" << instrumentEventProcessor->GetStartTime() << "].";
+				instrumentEventProcessor->ControlInstrument();
+			}
+			continue;
 		}
 	}
 
