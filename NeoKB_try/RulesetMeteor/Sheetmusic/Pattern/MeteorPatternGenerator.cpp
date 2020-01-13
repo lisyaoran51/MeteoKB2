@@ -278,7 +278,7 @@ Pattern * MeteorPatternGenerator::generateInputKeyControlPoint(vector<Event*>* e
 	SustainPedalIoEvent* sustainPedalIoEvent = new SustainPedalIoEvent(inputKey, inputKeyControlPoint->GetStartTime(), inputKeyControlPoint->GetLifeTime());
 
 	PianoEvent* pianoEventDown = new PianoEvent(pair<InputKey, int>(inputKey, 1), inputKeyControlPoint->GetStartTime(), 0);
-	PianoEvent* pianoEventUp = new PianoEvent(pair<InputKey, int>(inputKey, -1), inputKeyControlPoint->GetStartTime() + inputKeyControlPoint->GetLifeTime(), 0);
+	PianoEvent* pianoEventUp = new PianoEvent(pair<InputKey, int>(inputKey, -1), inputKeyControlPoint->GetStartTime() + inputKeyControlPoint->GetLifeTime() - 0.2, 0);
 
 	pattern->Add(sustainPedalIoEvent);
 	pattern->Add(pianoEventDown);
