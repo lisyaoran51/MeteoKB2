@@ -35,7 +35,7 @@ MeteoBitbangDisplayDevice::MeteoBitbangDisplayDevice(int w, int h)
 	if (lightBoardFileDescriptor < 0) {
 
 		LOG(LogLevel::Error) << "MeteoBitbangDisplayDevice::MeteoBitbangDisplayDevice() : open driver failed.";
-		throw runtime_error("MeteoBitbangDisplayDevice::MeteoBitbangDisplayDevice() : open driver failed.");
+		//throw runtime_error("MeteoBitbangDisplayDevice::MeteoBitbangDisplayDevice() : open driver failed.");
 
 	}
 
@@ -44,6 +44,9 @@ MeteoBitbangDisplayDevice::MeteoBitbangDisplayDevice(int w, int h)
 
 int MeteoBitbangDisplayDevice::Show(Map * m)
 {
+	if (lightBoardFileDescriptor < 0)
+		return -1;
+
 	uint8_t** matrix = m->GetMatrix();
 
 	for (int i = 0; i < 96; i++) {
