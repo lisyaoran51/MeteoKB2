@@ -1462,10 +1462,18 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	音量的東西寫完了，之後可以把琴鍵和音量接起來
 	後面開發的東西可能比較不急
 	
+	pcm5102 
+	https://blog.himbeer.me/2018/12/27/how-to-connect-a-pcm5102-i2s-dac-to-your-raspberry-pi/
 	
+	每次都要先 sudo modprobe i2c-dev
 	
-	
-	
+1/14
+	要做的事：1. 琴鍵有聲音
+				2. ios app
+				3. 遊戲畫面
+				4. 紅外線控制arduino
+				5. 樂理遊戲畫面
+				6. 寫完光圈
 	
 	
 	

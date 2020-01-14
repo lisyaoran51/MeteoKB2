@@ -428,7 +428,7 @@ static ssize_t light_board_write(struct file *filp, const char *buff, size_t len
 		}
 	}
 	
-	printk("map");
+	//printk("map");
 	for(i = 0; i < 16; i++){
 		int j;
 		for(j = 0; j < 6;j++){
