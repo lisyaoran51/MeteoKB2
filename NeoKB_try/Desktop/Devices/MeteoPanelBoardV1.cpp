@@ -145,7 +145,7 @@ int MeteoPanelBoardV1::readPanel()
 			hasMessage = false;
 		else {
 
-			LOG(LogLevel::Debug) << "MeteoPanelDevice::readFromDevice() : Get input from arduino [" << i2cMessage << "].";
+			LOG(LogLevel::Debug) << "MeteoPanelBoardV1::readPanel() : Get input from arduino [" << i2cMessage << "].";
 
 			vector<string> splitMessage = split(i2cMessage, ",");
 			InputKey key = InputKey::None;

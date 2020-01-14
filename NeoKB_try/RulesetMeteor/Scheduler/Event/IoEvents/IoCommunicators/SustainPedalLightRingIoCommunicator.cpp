@@ -44,7 +44,7 @@ int SustainPedalLightRingIoCommunicator::implementProcessIO(EventProcessor<Event
 		sustainPedalLightRing->GetRingLifeTime()
 	);
 
-	LOG(LogLevel::Depricated) << "SustainPedalLightRingIoCommunicator::implementProcessIO : send i2c [" << message->ToString() << "] at [" << sustainPedalLightRing->GetTargetStartTime() << "].";
+	LOG(LogLevel::Debug) << "SustainPedalLightRingIoCommunicator::implementProcessIO : send i2c [" << message->ToString() << "] at [" << sustainPedalLightRing->GetTargetStartTime() << "].";
 
 
 	//sustainPedalLightRing->SetIsTransfered();
