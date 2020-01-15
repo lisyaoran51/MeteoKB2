@@ -43,6 +43,8 @@ namespace Devices {
 		/* write */
 		vector<string> i2cMessages;
 
+		bool checkI2cMessageValid(InputKey iKey, int v);
+
 	public:
 
 		MeteoPanelBoardV1(int address);

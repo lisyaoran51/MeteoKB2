@@ -46,6 +46,41 @@ string MeteoPanelBoardV1::trim(string s)
 }
 
 
+bool MeteoPanelBoardV1::checkI2cMessageValid(InputKey iKey, int v)
+{
+	if (iKey > InputKey::None && iKey < InputKey::VK27_A1)
+		return false;
+
+	if (iKey > InputKey::VK37_C4 && iKey < InputKey::SustainPedal)
+		return false;
+
+	if (iKey > InputKey::ExpressionPedal && iKey < InputKey::Power)
+		return false;
+
+	if (iKey > InputKey::Sensitivity && iKey < InputKey::RaiseOctave)
+		return false;
+
+	if (iKey > InputKey::Pause && iKey < InputKey::SectionKnob)
+		return false;
+
+	if (iKey > InputKey::SpeedKnob && iKey < InputKey::PianoVolumeSlider)
+		return false;
+
+	if (iKey > InputKey::MusicVolumeSlider && iKey < InputKey::Bluetooth)
+		return false;
+
+	if (iKey > InputKey::Bluetooth && iKey < InputKey::BluetoothPlugin)
+		return false;
+
+	if (iKey > InputKey::ExpressionPedalPlugin)
+		return false;
+
+	if (v > 256 || v < -1)
+		return false;
+
+	return true;
+}
+
 MeteoPanelBoardV1::MeteoPanelBoardV1(int address)
 {
 
@@ -152,7 +187,11 @@ int MeteoPanelBoardV1::readPanel()
 
 			try {
 				key = (InputKey)stoi(splitMessage[0]);
-				stoi(splitMessage[1]);
+				int value = stoi(splitMessage[1]);
+				if (!checkI2cMessageValid(key, value)) {
+					LOG(LogLevel::Error) << "MeteoPanelDevice::readFromDevice() : Get unknown input [" << i2cMessage << "].";
+					throw out_of_range("MeteoPanelDevice::readFromDevice() : Get unknown input.");
+				}
 			}
 			catch (exception& e) {
 				LOG(LogLevel::Error) << "MeteoPanelDevice::readFromDevice() : Get unknown input [" << i2cMessage << "].";
