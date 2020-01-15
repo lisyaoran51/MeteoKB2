@@ -69,7 +69,7 @@ SampleChannel * SampleManager::GetMultiPlaybackSampleChannel(string name)
 		}
 
 
-		LOG(LogLevel::Debug) << "SampleManager::GetMultiPlaybackSampleChannel() : file path found [" << path << "].";
+		LOG(LogLevel::Debug) << "SampleManager::GetMultiPlaybackSampleChannel() : file path found [" << path << "] for file name [" << name << "].";
 
 	}
 	else {
