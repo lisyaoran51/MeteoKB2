@@ -163,11 +163,12 @@ int MultiPlaybackBassSampleChannel::getChannelToPlay()
 	for (int i = 0; i < playbackAmount; i++) {
 		if (BASS_ChannelIsActive(channelIds[i]) != BASS_ACTIVE_PLAYING) {
 
+			LOG(LogLevel::Debug) << "MultiPlaybackBassSampleChannel::getChannelToPlay() : [" << channelIds[i] << "] channel status is [" << BASS_ChannelIsActive(channelIds[i]) << "].";
 			channelToPlay = channelIds[i];
 			break;
 
 		}
-		else {
+		else{
 			LOG(LogLevel::Debug) << "MultiPlaybackBassSampleChannel::getChannelToPlay() : [" << i << "] channel status is [" << BASS_ChannelIsActive(channelIds[i]) << "].";
 		}
 	}
