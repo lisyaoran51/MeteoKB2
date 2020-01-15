@@ -51,7 +51,7 @@ int SheetmusicSelectPanel::load(FrameworkConfigManager * f, SmManager * s)
 			//delete smInfos; //這個現在不能delete，因為現在改成寫死，之後改回來從檔案讀的時候才能delete
 
 
-			StartRequest();
+			//StartRequest();
 			return 0;
 
 			//GetScheduler()->AddDelayedTask([=]() {
