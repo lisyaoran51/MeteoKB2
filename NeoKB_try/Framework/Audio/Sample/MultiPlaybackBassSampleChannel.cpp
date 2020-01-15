@@ -150,7 +150,7 @@ int MultiPlaybackBassSampleChannel::createSampleChannel()
 {
 	int channelId = dynamic_cast<BassSample*>(sample)->CreateChannel();
 
-	LOG(LogLevel::Error) << "MultiPlaybackBassSampleChannel::createSampleChannel() : get channel id [" << channelId << "].";
+	LOG(LogLevel::Depricated) << "MultiPlaybackBassSampleChannel::createSampleChannel() : get channel id [" << channelId << "].";
 
 	return channelId;
 }
@@ -164,6 +164,9 @@ int MultiPlaybackBassSampleChannel::getChannelToPlay()
 			channelToPlay = channelIds[i];
 			break;
 
+		}
+		else {
+			LOG(LogLevel::Error) << "MultiPlaybackBassSampleChannel::getChannelToPlay() : [" << i << "] channel status is [" << BASS_ChannelIsActive(channelIds[i]) << "].";
 		}
 	}
 
