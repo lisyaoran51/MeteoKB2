@@ -150,6 +150,8 @@ int MultiPlaybackBassSampleChannel::createSampleChannel()
 {
 	int channelId = dynamic_cast<BassSample*>(sample)->CreateChannel();
 
+	LOG(LogLevel::Error) << "MultiPlaybackBassSampleChannel::createSampleChannel() : get channel id [" << channelId << "].";
+
 	return channelId;
 }
 
