@@ -157,24 +157,24 @@ int MultiPlaybackBassSampleChannel::createSampleChannel()
 
 int MultiPlaybackBassSampleChannel::getChannelToPlay()
 {
-	LOG(LogLevel::Debug) << "MultiPlaybackBassSampleChannel::getChannelToPlay() : getting available channel of sample.";
+	LOG(LogLevel::Depricated) << "MultiPlaybackBassSampleChannel::getChannelToPlay() : getting available channel of sample.";
 
 	int channelToPlay = -1;
 	for (int i = 0; i < playbackAmount; i++) {
 		if (BASS_ChannelIsActive(channelIds[i]) != BASS_ACTIVE_PLAYING) {
 
-			LOG(LogLevel::Debug) << "MultiPlaybackBassSampleChannel::getChannelToPlay() : [" << channelIds[i] << "] channel status is [" << BASS_ChannelIsActive(channelIds[i]) << "].";
+			LOG(LogLevel::Depricated) << "MultiPlaybackBassSampleChannel::getChannelToPlay() : [" << channelIds[i] << "] channel status is [" << BASS_ChannelIsActive(channelIds[i]) << "].";
 			channelToPlay = channelIds[i];
 			break;
 
 		}
 		else{
-			LOG(LogLevel::Debug) << "MultiPlaybackBassSampleChannel::getChannelToPlay() : [" << i << "] channel status is [" << BASS_ChannelIsActive(channelIds[i]) << "].";
+			LOG(LogLevel::Depricated) << "MultiPlaybackBassSampleChannel::getChannelToPlay() : [" << i << "] channel status is [" << BASS_ChannelIsActive(channelIds[i]) << "].";
 		}
 	}
 
 	// TODO: 這個是minVolume overrideType的抓法，有需要的話要再寫一個longest overrideType的抓法
-	if (channelToPlay = -1) {
+	if (channelToPlay == -1) {
 		float minVol = 1;
 		int minVolChannel = -1;
 
