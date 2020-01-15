@@ -4,11 +4,6 @@ using namespace Instruments;
 
 
 
-
-
-
-
-
 int Instrument::load()
 {
 	AudioManager * a = GetCache<AudioManager>("AudioManager");
@@ -48,6 +43,17 @@ int Instrument::LoadOnComplete()
 	delete defaultSoundBindings;
 
 	loadAndMapSamples();
+
+	//¼g¿ù¤F
+	/*
+	vector<PitchBinding*>* defaultPitchBindings = GetDefaultPitchBindings();
+	pitchBindings.reserve(defaultPitchBindings->size());
+	pitchBindings.insert(pitchBindings.end(), defaultPitchBindings->begin(), defaultPitchBindings->end());
+
+	delete defaultPitchBindings;
+
+	mapActionToPitch();
+	*/
 
 	return 0;
 }

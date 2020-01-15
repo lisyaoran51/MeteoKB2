@@ -447,6 +447,7 @@
     <ClInclude Include="Instruments\Input\PianoAction.h" />
     <ClInclude Include="Instruments\Input\InstrumentInputManager.h" />
     <ClInclude Include="Instruments\Input\PianoInputManager.h" />
+    <ClInclude Include="Instruments\Input\PitchBinding.h" />
     <ClInclude Include="Instruments\Instrument.h" />
     <ClInclude Include="Instruments\MeteoPiano.h" />
     <ClInclude Include="Instruments\Piano.h" />

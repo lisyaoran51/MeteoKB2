@@ -32,9 +32,11 @@ int MultiPlaybackBassSampleChannel::Play(double v)
 
 	int channelId = getChannelToPlay();
 
+	LOG(LogLevel::Debug) << "MultiPlaybackBassSampleChannel::Play() : get channel [" << channelId << "] to play.";
+
 	pendingActions.Add(this, [=]() {
 
-		LOG(LogLevel::Depricated) << "MultiPlaybackBassSampleChannel::Play() : set channel.";
+		LOG(LogLevel::Debug) << "MultiPlaybackBassSampleChannel::Play() : set channel with volume [" << v * volumeCalculated->GetValue() << "].";
 
 		BASS_ChannelSetAttribute(channelId, BASS_ATTRIB_PAN, 0);
 		BASS_ChannelSetAttribute(channelId, BASS_ATTRIB_VOL, v * volumeCalculated->GetValue());
@@ -44,7 +46,7 @@ int MultiPlaybackBassSampleChannel::Play(double v)
 
 	pendingActions.Add(this, [=]() {
 
-		LOG(LogLevel::Depricated) << "MultiPlaybackBassSampleChannel::Play() : play channel.";
+		LOG(LogLevel::Debug) << "MultiPlaybackBassSampleChannel::Play() : play channel.";
 
 		BASS_ChannelPlay(channelId, true);
 

@@ -1969,6 +1969,9 @@
     <ClInclude Include="Games\Ruleset\Modifiers\InstrumentModifier.h">
       <Filter>標頭檔\Games\Ruleset\Modifiers</Filter>
     </ClInclude>
+    <ClInclude Include="Instruments\Input\PitchBinding.h">
+      <Filter>標頭檔\Instruments\Input</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Makefile">

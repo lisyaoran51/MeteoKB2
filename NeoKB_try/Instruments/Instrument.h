@@ -11,6 +11,7 @@
 #include "../Framework/Audio/Sample/SampleChannel.h"
 #include "../Framework/Input/PassThroughInputManager.h"
 #include "../Framework/Host/GameHost.h"
+#include "Input/PitchBinding.h"
 
 
 using namespace Framework::Allocation::Hierachal;
@@ -22,6 +23,7 @@ using namespace Framework::Audio;
 using namespace Framework::Audio::Samples;
 using namespace Framework::Input;
 using namespace Framework::Host;
+using namespace Instruments::Input;
 
 
 namespace Framework {
@@ -47,9 +49,12 @@ namespace Instruments {
 
 		virtual PassThroughInputManager* CreateInputManager() = 0;
 
+		virtual vector<KeyBinding*>* GetDefaultkeyBindings(int variant = 0) = 0;
+
 		virtual vector<SoundBinding*>* GetDefaultSoundBindings(int variant = 0) = 0;
 
-		virtual vector<KeyBinding*>* GetDefaultkeyBindings(int variant = 0) = 0;
+		//¼g¿ù¤F
+		//virtual vector<PitchBinding*>* GetDefaultPitchBindings(int variant = 0) = 0;
 
 		int SetHost(GameHost* h);
 
@@ -61,9 +66,15 @@ namespace Instruments {
 
 		vector<SoundBinding*> soundBindings;
 
+		//¼g¿ù¤F
+		//vector<PitchBinding*> pitchBindings;
+
 		virtual int LoadOnComplete();
 
 		virtual int loadAndMapSamples() = 0;
+
+		//¼g¿ù¤F
+		//virtual int mapActionToPitch() = 0;
 
 		string getSoundBinding(int action);
 
@@ -84,7 +95,7 @@ namespace Instruments {
 
 		map<T, SampleChannel*> samples;
 
-		virtual map<T, SampleChannel*>* getSamples() {
+		virtual map<T, SampleChannel*>* getSamples(int variant = 0) {
 			return &samples;
 		}
 
