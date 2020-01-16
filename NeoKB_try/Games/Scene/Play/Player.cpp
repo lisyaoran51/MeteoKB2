@@ -103,6 +103,7 @@ int Player::load(FrameworkConfigManager* f, Instrument* instru)
 
 	instrument = instru;
 	modifiers = workingSmValue->GetModifiers()->GetValue();
+	LOG(LogLevel::Debug) << "Player::load : get [" << modifiers->size() << "] instrument modifier into [" << instrument << "].";
 	for (int i = 0; i < modifiers->size(); i++) {
 
 		if (dynamic_cast<InstrumentModifier*>(modifiers->at(i))) {

@@ -36,7 +36,7 @@ int MultiPlaybackBassSampleChannel::Play(double v)
 
 	pendingActions.Add(this, [=]() {
 
-		LOG(LogLevel::Depricated) << "MultiPlaybackBassSampleChannel::Play() : set channel with volume [" << v * volumeCalculated->GetValue() << "].";
+		LOG(LogLevel::Depricated) << "MultiPlaybackBassSampleChannel::Play() : set channel with volume [" << v * volumeCalculated->GetValue() * 2.0 << "].";
 
 		BASS_ChannelSetAttribute(channelId, BASS_ATTRIB_PAN, 0);
 		BASS_ChannelSetAttribute(channelId, BASS_ATTRIB_VOL, v * volumeCalculated->GetValue());
