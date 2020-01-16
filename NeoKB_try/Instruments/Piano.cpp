@@ -290,7 +290,7 @@ int Piano::ControlSustainPedal(bool down)
 		else {
 			map<PianoAction, bool>::iterator it;
 			for (it = isPressingMap.begin(); it != isPressingMap.end(); ++it) {
-				LOG(LogLevel::Debug) << "Piano::ControlSustainPedal() : pressing map has [" << (int)it->first << "]";
+				LOG(LogLevel::Depricated) << "Piano::ControlSustainPedal() : pressing map has [" << (int)it->first << "]";
 				if (!it->second) {
 					
 					if (getSamples()->find(it->first) != getSamples()->end()) {
