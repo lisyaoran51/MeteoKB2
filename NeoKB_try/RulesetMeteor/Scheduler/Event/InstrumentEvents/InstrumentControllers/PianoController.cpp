@@ -17,13 +17,15 @@ PianoController::PianoController(): InstrumentController<PianoEvent>(), Register
 
 int PianoController::implementControlInstrument(EventProcessor<Event>* e)
 {
+	LOG(LogLevel::Debug) << "PianoController::implementControlInstrument : make pedal [" << dynamic_cast<PianoEvent*>(e->GetEvent())->GetInput().second << "] on piano [" << piano << "].";
+
 	if (!piano)
 		return -1;
 
-	if (!dynamic_cast<PianoEvent*>(e))
+	if (!dynamic_cast<PianoEvent*>(e->GetEvent()))
 		return -1;
 
-	PianoEvent* pianoEvent = dynamic_cast<PianoEvent*>(e);
+	PianoEvent* pianoEvent = dynamic_cast<PianoEvent*>(e->GetEvent());
 
 	// TODO: 以後要寫輸入琴鍵
 
