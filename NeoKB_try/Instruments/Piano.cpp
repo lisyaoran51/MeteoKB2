@@ -292,10 +292,13 @@ int Piano::ControlSustainPedal(bool down)
 			for (it = isPressingMap.begin(); it != isPressingMap.end(); ++it) {
 				LOG(LogLevel::Debug) << "Piano::ControlSustainPedal() : pressing map has [" << (int)it->first << "]";
 				if (!it->second) {
-					LOG(LogLevel::Debug) << "Piano::ControlSustainPedal() : get sample channel of [" << (int)it->first << "] [" << getSamples()->at(it->first) << "]";
-					SampleChannel* sampleChannel = getSamples()->at(it->first);
-					if (sampleChannel)
-						sampleChannel->FadeOut();
+					
+					if (getSamples()->find(it->first) != getSamples()->end()) {
+
+						SampleChannel* sampleChannel = getSamples()->at(it->first);
+						if (sampleChannel)
+							sampleChannel->FadeOut();
+					}
 				}
 			}
 		}
