@@ -51,7 +51,7 @@ void setup() {
   digitalWrite(A2,LOW);
   digitalWrite(A3,LOW);
   for(int i = 0; i < 48; i++){
-    keyMap[i] = i + 127;
+    keyMap[i] = 174 - i;
     pressedMap[i] = false;
     pressedDownMap[i] = false;
     pressNoBounceCount[i] = 0;

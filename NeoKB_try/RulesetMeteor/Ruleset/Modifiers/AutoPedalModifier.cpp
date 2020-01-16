@@ -17,6 +17,8 @@ AutoPedalModifier::AutoPedalModifier()
 
 int AutoPedalModifier::ApplyToInstrument(Instrument* instrument)
 {
+	LOG(LogLevel::Debug) << "AutoPedalModifier::ApplyToInstrument() : make piano pedal controlled by game.";
+
 	if (dynamic_cast<Piano*>(instrument)) {
 
 		dynamic_cast<Piano*>(instrument)->ChangeSustainType(SustainType::GameControllingSustain);
