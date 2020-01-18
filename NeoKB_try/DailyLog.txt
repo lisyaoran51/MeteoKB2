@@ -1474,13 +1474,22 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 				4. 紅外線控制arduino
 				5. 樂理遊戲畫面
 				6. 寫完光圈
+				7. 裝pcm5102介面
 				
 	目前要計算壓琴鍵壓力，按琴鍵的速度是用壓下時間花多少ms來算，通常是1~100之間，我要用指數轉換成1~256，關係算式是x^256 = 100(最大音量100轉換到256) => x = 1.018151722
 	最後要用壓下時間轉換到音量要用log(1.018151722)(time) = ln(time) / ln(1.018151722) = ln(time) / 0.01798894632
 	
 	算錯，應該是1.057018041^壓下時間才是最後音量
 	
-	
+1/17
+	pcm5012
+	https://www.raspberrypi.org/forums/viewtopic.php?t=198708
+	1 = SCK = N.C.
+	2 = BCK = J8-12 = gpio18
+	3 = DIN = J8-35 = gpio19
+	4 = LCK = J8-40 = gpio21
+	5 = GND = for instance J8-06
+	6 = VIN = 5volt = for instance J8-02 or J8-04
 	
 	
 	
