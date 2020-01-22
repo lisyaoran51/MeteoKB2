@@ -302,6 +302,7 @@
     <ClInclude Include="Games\Scene\Interlude\Intro.h" />
     <ClInclude Include="Games\Scene\Loader.h" />
     <ClInclude Include="Games\Scene\MeteoScene.h" />
+    <ClInclude Include="Games\Scene\Play\Hud\HudDisplay.h" />
     <ClInclude Include="Games\Scene\Play\Player.h" />
     <ClInclude Include="Games\Scene\Play\PlayerLoader.h" />
     <ClInclude Include="Games\Scene\Play\Playfield.h" />

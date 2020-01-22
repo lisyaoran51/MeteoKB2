@@ -10,6 +10,7 @@
 #include "../../../Framework/Timing/OffsetFramedClock.h"
 #include "../../../Framework/Timing/TimeController.h"
 #include "../../../Instruments/Instrument.h"
+#include "Hud/HudDisplay.h"
 
 
 
@@ -21,6 +22,7 @@ using namespace Framework::Scenes;
 using namespace Games::Scenes;
 using namespace Framework::Timing;
 using namespace Instruments;
+using namespace Games::Scenes::Play::Hud;
 
 
 
@@ -52,6 +54,9 @@ namespace Play {
 
 		ScoreProcessor* scoreProcessor = nullptr;
 		
+
+		HudDisplay* hudDisplay = nullptr;
+
 		/// <summary>
 		/// load in things like sm, Ruleset info. then create Ruleset executor
 		/// </summary>

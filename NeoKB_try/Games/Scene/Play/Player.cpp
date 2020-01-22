@@ -113,8 +113,13 @@ int Player::load(FrameworkConfigManager* f, Instrument* instru)
 	}
 	
 
+	hudDisplay = new HudDisplay();
 
 	scoreProcessor = rulesetExecutor->CreateScoreProcessor();
+
+	hudDisplay->BindScoreProcessor(scoreProcessor);
+	hudDisplay->BindRulesetExecutor(rulesetExecutor);
+	hudDisplay->BindTimeController(timeController);
 
 	//scoreProcessor.AllJudged += onCompletion;
 	//scoreProcessor.Failed += onFail;

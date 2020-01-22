@@ -556,6 +556,9 @@
     <Filter Include="來源檔案\RulesetMeteor\Ruleset\Modifiers">
       <UniqueIdentifier>{a17a37fd-5d35-4eef-8899-a6dcbe56a055}</UniqueIdentifier>
     </Filter>
+    <Filter Include="標頭檔\Games\Scene\play\Hud">
+      <UniqueIdentifier>{3542d416-bd92-41d4-a927-ff501513da1e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Games\Graphic\Renderer\renderer.cpp">
@@ -1971,6 +1974,9 @@
     </ClInclude>
     <ClInclude Include="Instruments\Input\PitchBinding.h">
       <Filter>標頭檔\Instruments\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Scene\Play\Hud\HudDisplay.h">
+      <Filter>標頭檔\Games\Scene\play\Hud</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

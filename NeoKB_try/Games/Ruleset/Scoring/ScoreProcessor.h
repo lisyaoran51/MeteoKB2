@@ -3,9 +3,12 @@
 
 
 #include "../Judgements/Judgement.h"
+#include "../../../Util/DataStructure/ActionList.h"
 
 
 using namespace Games::Rulesets::Judgements;
+using namespace Util::DataStructure;
+
 
 
 namespace Games {
@@ -18,6 +21,21 @@ namespace Scoring{
 	public:
 
 		int AddJudgement(Judgement* judgement);
+
+		int NotifyNewJudgement(Judgement* judgement);
+
+	protected:
+
+		int hits = 0;
+
+		int maxHits = 9999;
+
+		ActionList<int, Judgement*> onNewJudgement;
+
+		ActionList<int> onCompletion;
+
+		bool getIsCompleted();
+
 
 	};
 
