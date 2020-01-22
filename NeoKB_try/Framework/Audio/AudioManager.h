@@ -50,7 +50,7 @@ namespace Audio {
 
 	protected:
 
-		Bindable<double>* trackVolume = new Bindable<double>(1.0);
+		Bindable<double>* trackVolume = new Bindable<double>(0.5);
 		Bindable<double>* sampleVolume = new Bindable<double>(1.0);
 
 	private:

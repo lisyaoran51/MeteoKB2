@@ -1468,13 +1468,13 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	每次都要先 sudo modprobe i2c-dev
 	
 1/14
-	要做的事：1. 琴鍵有聲音
+	要做的事：1. 琴鍵有聲音--------------
 				2. ios app
 				3. 遊戲畫面
-				4. 紅外線控制arduino
+				4. 紅外線控制arduino-----
 				5. 樂理遊戲畫面
 				6. 寫完光圈
-				7. 裝pcm5102介面
+				7. 裝pcm5102介面xxxxxxxxxx\
 				
 	目前要計算壓琴鍵壓力，按琴鍵的速度是用壓下時間花多少ms來算，通常是1~100之間，我要用指數轉換成1~256，關係算式是x^256 = 100(最大音量100轉換到256) => x = 1.018151722
 	最後要用壓下時間轉換到音量要用log(1.018151722)(time) = ln(time) / ln(1.018151722) = ln(time) / 0.01798894632
@@ -1492,9 +1492,18 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	6 = VIN = 5volt = for instance J8-02 or J8-04
 	
 	
+1/20
+	arudino的ir花費時間100us左右
 	
-	
-	
+	要做的事：1. 寫算分數(!)
+				2. 樂理遊戲畫面
+				3. ios app
+				4. 遊戲畫面(!)
+				5. 紅外線控制arduino
+				6. 做耳機、紅外線的外殼(ok)
+				7. 琴鍵聲音比音樂大
+				8. 寫完光圈
+				9. 找人寫拍照轉檔的app
 	
 	
 	
