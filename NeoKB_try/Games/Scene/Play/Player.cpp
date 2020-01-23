@@ -121,8 +121,7 @@ int Player::load(FrameworkConfigManager* f, Instrument* instru)
 	hudDisplay->BindRulesetExecutor(rulesetExecutor);
 	hudDisplay->BindTimeController(timeController);
 
-	//scoreProcessor.AllJudged += onCompletion;
-	//scoreProcessor.Failed += onFail;
+	scoreProcessor->AddOnAllJudged(this, bind(&Player::onCompletion, this), "Player::onCompletion"); // 顯示成績結算
 
 	return 0;
 }

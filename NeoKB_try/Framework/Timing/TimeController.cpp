@@ -95,6 +95,11 @@ int TimeController::SetControllableClock(AdjustableClock * cClock)
 	return 0;
 }
 
+AdjustableClock * TimeController::GetControllableClock()
+{
+	return controllableClock;
+}
+
 int TimeController::SetSpeedAdjuster(SpeedAdjuster * sAdjuster)
 {
 	// TODO: 做一個thread safe lock再刪
@@ -171,6 +176,17 @@ double TimeController::GetRate()
 bool TimeController::GetIsPaused()
 {
 	return isPaused;
+}
+
+int TimeController::SetIsAllowSeek(bool iAllowSeek)
+{
+	isAllowSeek = iAllowSeek;
+	return 0;
+}
+
+bool TimeController::GetIsAllowSeek()
+{
+	return isAllowSeek;
 }
 
 /* 暫時不寫這段，以後響到要怎麼寫再回來改

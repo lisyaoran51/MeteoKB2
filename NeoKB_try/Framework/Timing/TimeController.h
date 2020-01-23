@@ -43,6 +43,8 @@ namespace Timing {
 		/// </summary>
 		int SetControllableClock(AdjustableClock* aClock);
 
+		AdjustableClock* GetControllableClock();
+
 		int SetSpeedAdjuster(SpeedAdjuster* sAdjuster);
 
 		int JumpTo(double seekTime);
@@ -61,6 +63,10 @@ namespace Timing {
 		double GetRate();
 
 		bool GetIsPaused();
+
+		int SetIsAllowSeek(bool iAllowSeek);
+
+		bool GetIsAllowSeek();
 
 		/* 暫時不寫這段，以後響到要怎麼寫再回來改
 		int ImportWorkingSm(WorkingSm* workingSm);
@@ -89,6 +95,7 @@ namespace Timing {
 		/// </summary>
 		//FramedClock* gameClock;
 
+		bool isAllowSeek = true;
 
 		double rate = 1.0;
 

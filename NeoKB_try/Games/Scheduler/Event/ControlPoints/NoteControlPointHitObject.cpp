@@ -57,7 +57,8 @@ int NoteControlPointHitObject::CheckForJudgement(bool isUserTriggered, double ti
 		if (offset > getHitWindow()->GetHitWindow(HitResult::Bad)) {
 
 			AddJudgement(createJudgement(getHitWindow()->GetResultFor(offset)));
-
+			// ¤£return?
+			return 0;
 		}
 
 	}

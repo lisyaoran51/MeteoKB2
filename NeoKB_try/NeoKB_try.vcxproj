@@ -70,6 +70,9 @@
     <ClCompile Include="Games\Ruleset\Scoring\ScoreProcessor.cpp" />
     <ClCompile Include="Games\Scene\Interlude\Intro.cpp" />
     <ClCompile Include="Games\Scene\MeteoScene.cpp" />
+    <ClCompile Include="Games\Scene\Play\Hud\HudDisplay.cpp" />
+    <ClCompile Include="Games\Scene\Play\Hud\JudgementFlasher.cpp" />
+    <ClCompile Include="Games\Scene\Play\Hud\SongProgress.cpp" />
     <ClCompile Include="Games\Scene\Play\Player.cpp" />
     <ClCompile Include="Games\Scene\Play\PlayerLoader.cpp" />
     <ClCompile Include="Games\Scene\Play\Playfield.cpp" />
@@ -303,6 +306,9 @@
     <ClInclude Include="Games\Scene\Loader.h" />
     <ClInclude Include="Games\Scene\MeteoScene.h" />
     <ClInclude Include="Games\Scene\Play\Hud\HudDisplay.h" />
+    <ClInclude Include="Games\Scene\Play\Hud\JudgementFlasher.h" />
+    <ClInclude Include="Games\Scene\Play\Hud\RollingCounter.h" />
+    <ClInclude Include="Games\Scene\Play\Hud\SongProgress.h" />
     <ClInclude Include="Games\Scene\Play\Player.h" />
     <ClInclude Include="Games\Scene\Play\PlayerLoader.h" />
     <ClInclude Include="Games\Scene\Play\Playfield.h" />
@@ -497,6 +503,7 @@
     <ClInclude Include="Util\DataStructure\Bindable.h" />
     <ClInclude Include="Util\DataStructure\BindablePointer.h" />
     <ClInclude Include="Util\DataStructure\PeriodMap.h" />
+    <ClInclude Include="Util\Effects\Easing.h" />
     <ClInclude Include="Util\FileSystem.h" />
     <ClInclude Include="Util\InstanceCreator.h" />
     <ClInclude Include="Util\Log.h" />
