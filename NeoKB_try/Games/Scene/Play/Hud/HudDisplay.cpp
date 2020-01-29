@@ -46,7 +46,7 @@ int HudDisplay::BindTimeController(TimeController * tController)
 	
 	// 接下來這個，是song progress下面有一個progress bar，他可以接收調整時間，然後傳到song progress，再用song progress控制controllable clock
 	// 這個等到有手機連線的時候再寫就好
-	songProgress->AddOnSeek(songProgress->GetTimeSource(), bind(&songProgress->GetTimeSource()->Seek, songProgress->GetTimeSource(), placeholders::_1), "DecoupledInterpolatingFramedClock::Seek");
+	songProgress->AddOnSeek(songProgress->GetTimeSource(), bind(&AdjustableClock::Seek, songProgress->GetTimeSource(), placeholders::_1), "DecoupledInterpolatingFramedClock::Seek");
 
 	return 0;
 }
