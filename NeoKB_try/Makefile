@@ -133,7 +133,7 @@ LinearSpeedAdjuster.o SpeedAdjuster.o \
 MeteoGame.o MeteoGameBase.o\
 Ruleset.o RulesetInfo.o RulesetStore.o Judgement.o HasHitWindow.o Modifier.o \
 Loader.o MeteoScene.o Intro.o Player.o PlayerLoader.o Playfield.o \
-HudDisplay.o JudgementFlasher.o RollingCounter.o SongProgress.o \
+HudDisplay.o JudgementFlasher.o SongProgress.o \
 MainMenu.o PlaySongSelect.o SongSelect.o \
 Event.o EventProcessorMaster.o HitObject.o \
 ControlPoint.o NoteControlPoint.o NoteControlPointHitObject.o PlayableControlPoint.o InputKeyControlPoint.o InputKeyControlPointHitObject.o \
