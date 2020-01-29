@@ -25,7 +25,7 @@ Bindable<int>* ScoreProcessor::GetCombo()
 ScoreProcessor::ScoreProcessor(RulesetExecutor<Event>* rExecutor)
 {
 
-	eventProcessors = rExecutor->GetPlayField()->GetEventProcessors();
+	eventProcessors = rExecutor->GetPlayfield()->GetEventProcessors();
 
 	maxHits = 0;
 	maxScore = 0;
