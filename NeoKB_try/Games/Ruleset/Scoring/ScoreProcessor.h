@@ -21,7 +21,7 @@ namespace Rulesets {
 	class RulesetExecutor;
 
 }}
-
+using namespace Games::Rulesets;
 
 
 namespace Games {

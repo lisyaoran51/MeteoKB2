@@ -108,7 +108,7 @@ SpeedAdjuster * MeteorRulesetExecutor::CreateSpeedAdjuster()
 
 ScoreProcessor * MeteorRulesetExecutor::CreateScoreProcessor()
 {
-	return new MeteorScoreProcessor();
+	return new MeteorScoreProcessor(this);
 }
 
 int MeteorRulesetExecutor::Elapse(MTO_FLOAT elapsedTime)

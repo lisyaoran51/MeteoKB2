@@ -565,6 +565,9 @@
     <Filter Include="標頭檔\Util\Effects">
       <UniqueIdentifier>{2559d2a0-4c25-4725-be0e-48c0c3c67b5c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="來源檔案\RulesetMeteor\Ruleset\Scoring">
+      <UniqueIdentifier>{5dfb91c1-6eb4-45df-83ba-5d53eb92f32f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Games\Graphic\Renderer\renderer.cpp">
@@ -1175,6 +1178,9 @@
     </ClCompile>
     <ClCompile Include="Games\Scene\Play\Hud\JudgementFlasher.cpp">
       <Filter>來源檔案\Games\Scene\Play\Hud</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\Ruleset\Scoring\MeteorScoreProcessor.cpp">
+      <Filter>來源檔案\RulesetMeteor\Ruleset\Scoring</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -197,6 +197,7 @@
     <ClCompile Include="RulesetMeteor\Ruleset\MeteorRuleset.cpp" />
     <ClCompile Include="RulesetMeteor\Ruleset\MeteorRulesetExecutor.cpp" />
     <ClCompile Include="RulesetMeteor\Ruleset\Modifiers\AutoPedalModifier.cpp" />
+    <ClCompile Include="RulesetMeteor\Ruleset\Scoring\MeteorScoreProcessor.cpp" />
     <ClCompile Include="RulesetMeteor\Scheduler\Event\ControlPoints\MeteorInputKeyControlPointHitObject.cpp" />
     <ClCompile Include="RulesetMeteor\Scheduler\Event\ControlPoints\MeteorNoteControlPointHitObject.cpp" />
     <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\Algorithm\ExplodeMapAlgorithm.cpp" />

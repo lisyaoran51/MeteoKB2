@@ -14,6 +14,10 @@ namespace Scoring{
 
 	class MeteorScoreProcessor : public ScoreProcessor {
 
+	public:
+
+		MeteorScoreProcessor(RulesetExecutor<Event>* rExecutor);
+
 	};
 
 }}}

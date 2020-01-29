@@ -14,7 +14,7 @@ Framework/Threading:\
 Framework/Timing:Framework/Timing/SpeedAdjusters:\
 \
 Games:Games/Input:\
-Games/Ruleset:Games/Ruleset/Modifiers:Games/Ruleset/Judgements:\
+Games/Ruleset:Games/Ruleset/Modifiers:Games/Ruleset/Judgements:Games/Ruleset/Scoring:\
 Games/Scene:Games/Scene/Interlude:Games/Scene/Play:Games/Scene/Play/Hud:Games/Scene/Select:\
 Games/Scheduler/Event:Games/Scheduler/Event/ControlPoints:Games/Scheduler/Event/Effect:\
 Games/Scheduler/Event/Effect/Algorithm:Games/Scheduler/Event/GameEvents:Games/Scheduler/Event/SystemEvents:\
@@ -31,7 +31,8 @@ ThirdParty/Bass:\
 \
 Desktop:Desktop/Devices:\
 \
-RulesetMeteor:RulesetMeteor/Config:RulesetMeteor/Input:RulesetMeteor/Play:RulesetMeteor/Ruleset:RulesetMeteor/Ruleset/Modifiers:RulesetMeteor/Ruleset/Judgements:\
+RulesetMeteor:RulesetMeteor/Config:RulesetMeteor/Input:RulesetMeteor/Play:\
+RulesetMeteor/Ruleset:RulesetMeteor/Ruleset/Modifiers:RulesetMeteor/Ruleset/Judgements:RulesetMeteor/Ruleset/Scoring\
 RulesetMeteor/Output/Panels:\
 RulesetMeteor/Scheduler/Event:RulesetMeteor/Scheduler/Event/ControlPoints:RulesetMeteor/Scheduler/Event/Effect:RulesetMeteor/Scheduler/Event/Effect/Algorithm:\
 RulesetMeteor/Scheduler/Event/IoEvents:RulesetMeteor/Scheduler/Event/IoEvents/IoCommunicators:\
@@ -58,7 +59,7 @@ INCLUDE = -IFramwork -IFramework/Allocation -IFramework/Allocation/Hierachal -IF
 -IFramework/Timing -IFramework/Timing/SpeedAdjusters \
 \
 -IGames -IGames/Input \
--IGames/Ruleset -IGames/Ruleset/Modifiers -IGames/Ruleset/Judgements \
+-IGames/Ruleset -IGames/Ruleset/Modifiers -IGames/Ruleset/Judgements -IGames/Ruleset/Scoring \
 -IGames/Scene -IGames/Scene/Interlude -IGames/Scene/Play -IGames/Scene/Play/Hud -IGames/Scene/Select \
 -IGames/Scheduler/Event -IGames/Scheduler/Event/ControlPoints -IGames/Scheduler/Event/Effect \
 -IGames/Scheduler/Event/Effect/Algorithm -IGames/Scheduler/Event/GameEvents -IGames/Scheduler/Event/SystemEvents \
@@ -76,7 +77,7 @@ INCLUDE = -IFramwork -IFramework/Allocation -IFramework/Allocation/Hierachal -IF
 -IDesktop -IDesktop/Devices \
 \
 -IRulesetMeteor -IRulesetMeteor/Config -IRulesetMeteor/Input -IRulesetMeteor/Output -IRulesetMeteor/Output/Panels \
--IRulesetMeteor/Play -IRulesetMeteor/Ruleset -IRulesetMeteor/Ruleset/Modifiers -IRulesetMeteor/Ruleset/Judgements \
+-IRulesetMeteor/Play -IRulesetMeteor/Ruleset -IRulesetMeteor/Ruleset/Modifiers -IRulesetMeteor/Ruleset/Judgements -IRulesetMeteor/Ruleset/Scoring \
 -IRulesetMeteor/Scheduler/Event -IRulesetMeteor/Scheduler/Event/ControlPoints -IRulesetMeteor/Scheduler/Event/Effect -IRulesetMeteor/Scheduler/Event/Effect/Algorithm \
 -IRulesetMeteor/Scheduler/Event/IoEvents -IRulesetMeteor/Scheduler/Event/IoEvents/IoCommunicators \
 -IRulesetMeteor/Scheduler/Event/InstrumentEvents -IRulesetMeteor/Scheduler/Event/InstrumentEvents/InstrumentControllers \
@@ -131,7 +132,7 @@ DecoupledInterpolatingFramedClock.o FramedClock.o InterpolatingFramedClock.o Off
 LinearSpeedAdjuster.o SpeedAdjuster.o \
 \
 MeteoGame.o MeteoGameBase.o\
-Ruleset.o RulesetInfo.o RulesetStore.o Judgement.o HasHitWindow.o Modifier.o \
+Ruleset.o RulesetInfo.o RulesetStore.o Judgement.o HasHitWindow.o Modifier.o ScoreProcessor.o \
 Loader.o MeteoScene.o Intro.o Player.o PlayerLoader.o Playfield.o \
 HudDisplay.o JudgementFlasher.o SongProgress.o \
 MainMenu.o PlaySongSelect.o SongSelect.o \
@@ -152,7 +153,8 @@ FileSystem.o ProgramInitializer.o \
 MeteoGameDesktop.o Program.o \
 MeteoLightBoardV1.o bcm2835.o MeteoBluetoothDevice.o MeteoBitbangDisplayDevice.o MeteoSpidevDisplayDevice.o MeteoKeyboardDevice.o MeteoPanelDevice.o MeteoPanelBoardV1.o pi2c.o\
 \
-MeteorGame.o MeteorConfigManager.o MeteorInputManager.o MeteorPlayfield.o MeteorRuleset.o MeteorRulesetExecutor.o MeteorJudgement.o MeteorHitWindow.o AutoPedalModifier.o \
+MeteorGame.o MeteorConfigManager.o MeteorInputManager.o MeteorPlayfield.o \
+MeteorRuleset.o MeteorRulesetExecutor.o MeteorJudgement.o MeteorHitWindow.o AutoPedalModifier.o MeteorScoreProcessor.o \
 SustainPedalLightRingOutputer.o SustainPedalLightRingPanelMessage.o \
 MeteorEventProcessorMaster.o MeteorNoteControlPointHitObject.o MeteorInputKeyControlPointHitObject.o \
 ExplodeEffect.o ExplodeEffectMapper.o FallEffect.o FallEffectMapper.o GlowLineEffect.o GlowLineEffectMapper.o TargetLineEffect.o TargetLineEffectMapper.o \
