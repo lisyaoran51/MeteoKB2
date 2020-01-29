@@ -23,7 +23,7 @@ namespace Hud {
 
 	public:
 
-		RollingCounter(T cValue) {
+		RollingCounter(T cValue): RegisterType("RollingCounter") {
 			currentValue = new Bindable<T>(cValue);
 		}
 
