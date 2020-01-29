@@ -15,7 +15,7 @@ Framework/Timing:Framework/Timing/SpeedAdjusters:\
 \
 Games:Games/Input:\
 Games/Ruleset:Games/Ruleset/Modifiers:Games/Ruleset/Judgements:\
-Games/Scene:Games/Scene/Interlude:Games/Scene/Play:Games/Scene/Select:\
+Games/Scene:Games/Scene/Interlude:Games/Scene/Play:Games/Scene/Play/Hud:Games/Scene/Select:\
 Games/Scheduler/Event:Games/Scheduler/Event/ControlPoints:Games/Scheduler/Event/Effect:\
 Games/Scheduler/Event/Effect/Algorithm:Games/Scheduler/Event/GameEvents:Games/Scheduler/Event/SystemEvents:\
 Games/Scheduler/Event/IoEvents:Games/Scheduler/Event/IoEvents/IoCommunicators:\
@@ -59,7 +59,7 @@ INCLUDE = -IFramwork -IFramework/Allocation -IFramework/Allocation/Hierachal -IF
 \
 -IGames -IGames/Input \
 -IGames/Ruleset -IGames/Ruleset/Modifiers -IGames/Ruleset/Judgements \
--IGames/Scene -IGames/Scene/Interlude -IGames/Scene/Play -IGames/Scene/Select \
+-IGames/Scene -IGames/Scene/Interlude -IGames/Scene/Play -IGames/Scene/Play/Hud -IGames/Scene/Select \
 -IGames/Scheduler/Event -IGames/Scheduler/Event/ControlPoints -IGames/Scheduler/Event/Effect \
 -IGames/Scheduler/Event/Effect/Algorithm -IGames/Scheduler/Event/GameEvents -IGames/Scheduler/Event/SystemEvents \
 -IGames/Scheduler/Event/IoEvents -IGames/Scheduler/Event/IoEvents/IoCommunicators \
@@ -132,7 +132,9 @@ LinearSpeedAdjuster.o SpeedAdjuster.o \
 \
 MeteoGame.o MeteoGameBase.o\
 Ruleset.o RulesetInfo.o RulesetStore.o Judgement.o HasHitWindow.o Modifier.o \
-Loader.o MeteoScene.o Intro.o Player.o PlayerLoader.o Playfield.o MainMenu.o PlaySongSelect.o SongSelect.o \
+Loader.o MeteoScene.o Intro.o Player.o PlayerLoader.o Playfield.o \
+HudDisplay.o JudgementFlasher.o RollingCounter.o SongProgress.o \
+MainMenu.o PlaySongSelect.o SongSelect.o \
 Event.o EventProcessorMaster.o HitObject.o \
 ControlPoint.o NoteControlPoint.o NoteControlPointHitObject.o PlayableControlPoint.o InputKeyControlPoint.o InputKeyControlPointHitObject.o \
 Effect.o LinearMapPitchShifter.o MapPitchShifter.o \
