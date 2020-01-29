@@ -17,3 +17,8 @@ Judgement * MeteorNoteControlPointHitObject::createJudgement(HitResult hResult)
 {
 	return new MeteorJudgement(hResult);
 }
+
+Judgement * MeteorNoteControlPointHitObject::GetBestJudgement()
+{
+	return new MeteorJudgement(HitResult::Perfect);
+}

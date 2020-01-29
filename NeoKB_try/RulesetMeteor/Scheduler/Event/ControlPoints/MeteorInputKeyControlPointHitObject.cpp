@@ -17,3 +17,8 @@ Judgement * MeteorInputKeyControlPointHitObject::createJudgement(HitResult hResu
 {
 	return new MeteorJudgement(hResult);
 }
+
+Judgement * MeteorInputKeyControlPointHitObject::GetBestJudgement()
+{
+	return new MeteorJudgement(HitResult::Perfect);
+}

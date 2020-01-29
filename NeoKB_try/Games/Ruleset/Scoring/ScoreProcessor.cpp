@@ -7,8 +7,41 @@ using namespace Games::Rulesets::Scoring;
 using namespace Games::Rulesets;
 
 
-ScoreProcessor::ScoreProcessor(RulesetExecutor<Event*>* rExecutor)
+Bindable<double>* ScoreProcessor::GetTotalScore()
 {
+	return totalScore;
+}
+
+Bindable<double>* ScoreProcessor::GetAccuracy()
+{
+	return accuracy;
+}
+
+Bindable<int>* ScoreProcessor::GetCombo()
+{
+	return combo;
+}
+
+ScoreProcessor::ScoreProcessor(RulesetExecutor<Event>* rExecutor)
+{
+
+	eventProcessors = rExecutor->GetPlayField()->GetEventProcessors();
+
+	maxHits = 0;
+	maxScore = 0;
+
+	for (int i = 0; i < eventProcessors->size(); i++) {
+		if (dynamic_cast<HitObject*>(eventProcessors->at(i))) {
+
+			maxHits++;
+
+			Judgement* judgement = dynamic_cast<HitObject*>(eventProcessors->at(i))->GetBestJudgement();
+
+			maxScore += judgement->GetMaxResultScore();
+
+			delete judgement;
+		}
+	}
 
 	rExecutor->AddOnJudgement(this, bind(&ScoreProcessor::addJudgement, this, placeholders::_1), "ScoreProcessor::addJudgement");
 

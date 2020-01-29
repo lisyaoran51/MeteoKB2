@@ -5,6 +5,8 @@
 #include "../Judgements/Judgement.h"
 #include "../../../Util/DataStructure/ActionList.h"
 #include "../../Scheduler/Event/Event.h"
+#include "../../Scheduler/Event/EventProcessor.h"
+#include "../../../Util/DataStructure//Bindable.h"
 
 
 using namespace Games::Rulesets::Judgements;
@@ -50,7 +52,9 @@ namespace Scoring {
 
 	protected:
 
-		ScoreProcessor(RulesetExecutor<Event*>* rExecutor);
+		ScoreProcessor(RulesetExecutor<Event>* rExecutor);
+
+		vector<EventProcessor<Event>*>* eventProcessors = nullptr;
 
 		int hits = 0;
 
@@ -59,6 +63,8 @@ namespace Scoring {
 		double baseScore = 0;
 
 		double rollingMaxBaseScore = 0;
+
+		double maxScore = 1.0;
 
 		Bindable<double>* totalScore = new Bindable<double>(0);
 

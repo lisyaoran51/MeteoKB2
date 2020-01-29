@@ -187,6 +187,14 @@ namespace Rulesets {
 			return 0;
 		}
 
+		Playfield* GetPlayfield() {
+			return playfield;
+		}
+
+		vector<T*>* GetEvents() {
+			return sm->GetEvents();
+		}
+
 
 	protected:
 

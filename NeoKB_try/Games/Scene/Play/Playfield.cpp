@@ -127,7 +127,7 @@ int Playfield::OnJudgement(HitObject * hitObject, Judgement * judgement)
 
 int Playfield::Add(EventProcessor<Event> * ep)
 {
-	//scheduler->Add(ep);
+	eventProcessors.push_back(ep);
 	eventProcessorMaster->AddStaticEventProcessor(ep);
 
 	// 這邊要把Map Algo加進去
@@ -185,6 +185,11 @@ int Playfield::Add(EventProcessor<Event> * ep)
 	}
 
 	return 0;
+}
+
+vector<EventProcessor<Event>*>* Playfield::GetEventProcessors()
+{
+	return &eventProcessors;
 }
 
 int Playfield::AddDynamic(EventProcessor<Event>* ep) {

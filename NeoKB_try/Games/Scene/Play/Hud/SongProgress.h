@@ -27,6 +27,8 @@ namespace Hud {
 
 		int SetTimeSource(AdjustableClock* tSource);
 
+		AdjustableClock* GetTimeSource();
+
 		int SetIsAllowSeek(bool iAllowSeek);
 
 		template<class _Type>

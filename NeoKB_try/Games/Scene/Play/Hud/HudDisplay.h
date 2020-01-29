@@ -12,6 +12,7 @@
 #include "RollingCounter.h"
 
 
+
 using namespace Framework::Allocation::Hierachal;
 using namespace Games::Rulesets::Scoring;
 using namespace Games::Rulesets;
@@ -26,6 +27,7 @@ namespace Play {
 namespace Hud {
 
 	class HudDisplay : public Container {
+
 
 	public:
 

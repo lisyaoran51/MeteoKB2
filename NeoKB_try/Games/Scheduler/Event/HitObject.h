@@ -59,6 +59,8 @@ namespace Events{
 
 		bool UpdateJudgement(bool isUserTriggered);
 
+		virtual Judgement* GetBestJudgement() = 0;
+
 	protected:
 
 		HitWindow* getHitWindow();

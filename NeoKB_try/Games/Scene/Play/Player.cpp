@@ -136,3 +136,8 @@ Player::~Player()
 	delete ruleset;
 	delete rulesetExecutor;
 }
+
+int Player::onCompletion()
+{
+	return 0;
+}

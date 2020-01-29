@@ -70,6 +70,10 @@ namespace Play {
 
 		~Player();
 
+	protected:
+
+		int onCompletion();
+
 	};
 
 }

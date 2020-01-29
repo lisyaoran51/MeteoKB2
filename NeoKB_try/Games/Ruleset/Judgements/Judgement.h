@@ -3,6 +3,10 @@
 
 
 #include "HitResult.h"
+#include <string>
+
+
+using namespace std;
 
 
 namespace Games {
@@ -18,6 +22,8 @@ namespace Judgements{
 		HitResult GetResult();
 
 		double GetResultScore();
+
+		string GetResultString();
 
 		double GetMaxResultScore();
 

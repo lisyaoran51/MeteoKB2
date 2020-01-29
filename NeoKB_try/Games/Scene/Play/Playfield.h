@@ -55,6 +55,8 @@ namespace Play {
 		/// </summary>
 		virtual int Add(EventProcessor<Event>* ep);
 
+		vector<EventProcessor<Event>*>* GetEventProcessors();
+
 		/// <summary>
 		/// add dynamic events to EventProcessorMaster
 		/// </summary>
@@ -85,6 +87,8 @@ namespace Play {
 		map<string, InstrumentControllerInterface*> instrumentControllers;
 
 		//Scheduler* scheduler;
+
+		vector<EventProcessor<Event>*> eventProcessors;
 
 		EventProcessorMaster* eventProcessorMaster;
 
