@@ -11,6 +11,12 @@ int SongProgress::SetTimeSource(AdjustableClock * tSource)
 	return 0;
 }
 
+AdjustableClock* SongProgress::GetTimeSource(){
+
+	return timeSource;
+
+}
+
 int SongProgress::SetIsAllowSeek(bool iAllowSeek)
 {
 	return 0;
