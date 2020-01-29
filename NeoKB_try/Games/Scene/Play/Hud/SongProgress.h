@@ -42,7 +42,7 @@ namespace Hud {
 
 		AdjustableClock* timeSource = nullptr;
 
-		ActionList<int, double>* onSeek;
+		ActionList<int, double> onSeek;
 
 	};
 
