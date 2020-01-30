@@ -25,6 +25,8 @@ namespace Hud {
 
 	public:
 
+		SongProgress();
+
 		int SetTimeSource(AdjustableClock* tSource);
 
 		AdjustableClock* GetTimeSource();

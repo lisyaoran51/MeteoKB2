@@ -6,6 +6,10 @@ using namespace Games::Scenes::Play::Hud;
 
 
 
+SongProgress::SongProgress() : RegisterType("SongProgress"){
+
+}
+
 int SongProgress::SetTimeSource(AdjustableClock * tSource)
 {
 	timeSource = tSource;
