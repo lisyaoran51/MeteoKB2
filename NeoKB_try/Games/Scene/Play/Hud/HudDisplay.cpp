@@ -17,7 +17,7 @@ HudDisplay::HudDisplay(): RegisterType("HudDisplay")
 	scoreCounter = new RollingCounter<double>(0);
 	comboCounter = new RollingCounter<int>(0);
 	accuracyCounter = new RollingCounter<double>(1);
-
+	songProgress = new SongProgress();
 
 }
 
