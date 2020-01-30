@@ -48,7 +48,7 @@ int HudDisplay::BindTimeController(TimeController * tController)
 	songProgress->SetTimeSource(tController->GetControllableClock());
 	songProgress->SetIsAllowSeek(tController->GetIsAllowSeek()); // 允許搜尋時間
 
-	LOG(LogLevel::Debug) << "HudDisplay::BindTimeController : clock binded.";
+	LOG(LogLevel::Debug) << "HudDisplay::BindTimeController : clock binded." << songProgress->GetTimeSource();
 	// 接下來這個，是song progress下面有一個progress bar，他可以接收調整時間，然後傳到song progress，再用song progress控制controllable clock
 	// 這個等到有手機連線的時候再寫就好
 	songProgress->AddOnSeek(songProgress->GetTimeSource(), bind(&AdjustableClock::Seek, songProgress->GetTimeSource(), placeholders::_1), "DecoupledInterpolatingFramedClock::Seek");
