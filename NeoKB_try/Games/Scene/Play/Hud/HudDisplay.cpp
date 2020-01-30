@@ -1,10 +1,13 @@
 #include "HudDisplay.h"
 
 #include "JudgementFlasher.h"
+#include "../../../../Util/DataStructure/ActionList.h"
 
 
 
 using namespace Games::Scenes::Play::Hud;
+using namespace Util::DataStructure;
+
 
 
 
@@ -25,7 +28,7 @@ int HudDisplay::BindScoreProcessor(ScoreProcessor * sProcessor)
 	comboCounter->GetCurrentValue()->BindTo(sProcessor->GetCombo());
 
 	sProcessor->AddOnNewJudgement(judgementFlasher, bind(&JudgementFlasher::FlashJudgement, judgementFlasher, placeholders::_1), "JudgementFlasher::FlashJudgement");
-
+	LOG(LogLevel::Debug) << "HudDisplay::BindScoreProcessor : after bind judgement flasher ...";
 	return 0;
 }
 
