@@ -8,6 +8,7 @@ using namespace Games::Scenes::Play::Hud;
 
 int SongProgress::SetTimeSource(AdjustableClock * tSource)
 {
+	timeSource = tSource;
 	return 0;
 }
 
