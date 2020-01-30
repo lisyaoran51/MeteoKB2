@@ -86,7 +86,8 @@ int ScoreProcessor::addUpJudgementScore(Judgement * judgement)
 
 	hits++;
 	
-	LOG(LogLevel::Info) << "ScoreProcessor::addUpJudgementScore : add score [" << judgement->GetResultScore() << "], total score [" << baseScore << "]";
+	LOG(LogLevel::Info) << "ScoreProcessor::addUpJudgementScore : add score [" << judgement->GetResultScore() << "], total score [" 
+		<< baseScore << "], song max score [" << maxScore << "].";
 
 	if (rollingMaxBaseScore != 0)
 		accuracy->SetValue(baseScore / rollingMaxBaseScore);
