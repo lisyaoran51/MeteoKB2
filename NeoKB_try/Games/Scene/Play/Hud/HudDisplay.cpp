@@ -43,7 +43,7 @@ int HudDisplay::BindRulesetExecutor(RulesetExecutor<Event>* rExecutor)
 
 int HudDisplay::BindTimeController(TimeController * tController)
 {
-	LOG(LogLevel::Info) << "HudDisplay::BindTimeController : bind controllable clock to control.";
+	LOG(LogLevel::Info) << "HudDisplay::BindTimeController : bind controllable clock to control." << tController->GetControllableClock();
 
 	songProgress->SetTimeSource(tController->GetControllableClock());
 	songProgress->SetIsAllowSeek(tController->GetIsAllowSeek()); // ¤¹³\·j´M®É¶¡
