@@ -1,10 +1,12 @@
 #include "ScoreProcessor.h"
 
 #include "../RulesetExecutor.h"
+#include "../../../Util/Log.h"
 
 
 using namespace Games::Rulesets::Scoring;
 using namespace Games::Rulesets;
+using namespace Util;
 
 
 Bindable<double>* ScoreProcessor::GetTotalScore()
@@ -84,6 +86,7 @@ int ScoreProcessor::addUpJudgementScore(Judgement * judgement)
 
 	hits++;
 	
+	LOG(LogLevel::Info) << "ScoreProcessor::addUpJudgementScore : add score [" << judgement->GetResultScore() << "], total score [" << baseScore << "]";
 
 	if (rollingMaxBaseScore != 0)
 		accuracy->SetValue(baseScore / rollingMaxBaseScore);
