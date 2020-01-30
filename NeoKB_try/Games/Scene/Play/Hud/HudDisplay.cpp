@@ -28,7 +28,7 @@ int HudDisplay::BindScoreProcessor(ScoreProcessor * sProcessor)
 	comboCounter->GetCurrentValue()->BindTo(sProcessor->GetCombo());
 
 	sProcessor->AddOnNewJudgement(judgementFlasher, bind(&JudgementFlasher::FlashJudgement, judgementFlasher, placeholders::_1), "JudgementFlasher::FlashJudgement");
-	LOG(LogLevel::Debug) << "HudDisplay::BindScoreProcessor : after bind judgement flasher ...";
+	LOG(LogLevel::Depricated) << "HudDisplay::BindScoreProcessor : after bind judgement flasher ...";
 	return 0;
 }
 
@@ -43,6 +43,7 @@ int HudDisplay::BindRulesetExecutor(RulesetExecutor<Event>* rExecutor)
 
 int HudDisplay::BindTimeController(TimeController * tController)
 {
+	LOG(LogLevel::Info) << "HudDisplay::BindTimeController : bind controllable clock to control.";
 
 	songProgress->SetTimeSource(tController->GetControllableClock());
 	songProgress->SetIsAllowSeek(tController->GetIsAllowSeek()); // 允許搜尋時間
@@ -51,5 +52,6 @@ int HudDisplay::BindTimeController(TimeController * tController)
 	// 這個等到有手機連線的時候再寫就好
 	songProgress->AddOnSeek(songProgress->GetTimeSource(), bind(&AdjustableClock::Seek, songProgress->GetTimeSource(), placeholders::_1), "DecoupledInterpolatingFramedClock::Seek");
 
+	LOG(LogLevel::Debug) << "HudDisplay::BindTimeController : bind over.";
 	return 0;
 }
