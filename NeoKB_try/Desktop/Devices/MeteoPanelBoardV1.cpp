@@ -188,6 +188,9 @@ int MeteoPanelBoardV1::readPanel()
 			try {
 				splitMessage = split(i2cMessage, ",");
 
+				if (splitMessage[0].length() > 4)
+					throw runtime_error("MeteoPanelBoardV1::readPanel() : Get unknown input.");
+
 				key = (InputKey)stoi(splitMessage[0]);
 				int value = stoi(splitMessage[1]);
 				if (!checkI2cMessageValid(key, value)) {
