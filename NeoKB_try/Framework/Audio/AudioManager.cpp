@@ -35,6 +35,8 @@ SampleManager * AudioManager::GetSampleManager(CompositeResourceStore<char*>* sa
 
 	SampleManager* sManager = new SampleManager(sampleStore);
 	AddItem(sManager);
+
+	sampleVolume->SetValue(1.5);
 	sManager->AddAdjustment(AdjustableProperty::Volume, sampleVolume);
 	// TODO: ¥[¤Wadjistment 
 
