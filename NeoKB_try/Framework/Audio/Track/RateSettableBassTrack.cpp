@@ -23,8 +23,8 @@ RateSettableBassTrack::RateSettableBassTrack(char * fileName): BassTrack()
 		HFX fxHandle = BASS_ChannelSetFX(stream, BASS_FX_DX8_REVERB, 0);
 
 		BASS_DX8_REVERB* reverbParameter = new BASS_DX8_REVERB();
-		reverbParameter->fInGain = 0;
-		reverbParameter->fReverbMix = 0;
+		reverbParameter->fInGain = -96;
+		reverbParameter->fReverbMix = -96;
 		reverbParameter->fReverbTime = 1000;
 		reverbParameter->fHighFreqRTRatio = 0.001;
 		if (!BASS_FXSetParameters(fxHandle, reverbParameter)) {
