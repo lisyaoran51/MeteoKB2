@@ -36,7 +36,7 @@ int Instrument::LoadOnComplete()
 {
 	// 把sound binding丟進去
 	// TODO: variant應該要從setting拿
-	vector<SoundBinding*>* defaultSoundBindings = GetDefaultSoundBindings();
+	vector<SoundBinding*>* defaultSoundBindings = GetDefaultSoundBindings(1);
 	soundBindings.reserve(defaultSoundBindings->size());
 	soundBindings.insert(soundBindings.end(), defaultSoundBindings->begin(), defaultSoundBindings->end());
 
