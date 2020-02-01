@@ -20,17 +20,6 @@ RateSettableBassTrack::RateSettableBassTrack(char * fileName): BassTrack()
 		stream = BASS_FX_TempoCreate(sourceStream, BASS_FX_FREESOURCE);
 		
 		
-		HFX fxHandle = BASS_ChannelSetFX(stream, BASS_FX_DX8_REVERB, 0);
-
-		BASS_DX8_REVERB* reverbParameter = new BASS_DX8_REVERB();
-		reverbParameter->fInGain = -96;
-		reverbParameter->fReverbMix = -96;
-		reverbParameter->fReverbTime = 1000;
-		reverbParameter->fHighFreqRTRatio = 0.001;
-		if (!BASS_FXSetParameters(fxHandle, reverbParameter)) {
-			LOG(LogLevel::Error) << "Lambda_RateSettableBassTrack::RateSettableBassTrack() : create stream error [" << BASS_ErrorGetCode();
-			throw runtime_error("Lambda_RateSettableBassTrack::CreateStream() : failed to set reverb");
-		}
 			
 		//Length = Bass.ChannelBytes2Seconds(activeStream, Bass.ChannelGetLength(activeStream)) * 1000;
 		length = BASS_ChannelBytes2Seconds(stream, BASS_ChannelGetLength(stream, BASS_POS_BYTE));
