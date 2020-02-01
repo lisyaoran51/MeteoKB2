@@ -36,6 +36,8 @@ int BassTrack::Start()
 	unique_lock<mutex> uLock(pendingActionMutex);
 	pendingActions.Add(this, [=]() {
 
+		BASS_ChannelSetAttribute(stream, BASS_ATTRIB_VOL, volumeCalculated->GetValue());
+
 		if (BASS_ChannelPlay(stream, false)) {
 			isPlayed = true;
 			LOG(LogLevel::Debug) << "BassTrack::Start() : play bass channel.";
