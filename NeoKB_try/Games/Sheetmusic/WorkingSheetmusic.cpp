@@ -70,7 +70,7 @@ Track * WorkingSm::GetTrack()
 	string path = getPathForFile(smInfo->metadata->AudioFile);
 	char * temp = new char[path.length()];
 	strcpy(temp, path.c_str());
-	LOG(LogLevel::Finer) << "WorkingSm::GetTrack() : get file path = [" << temp << "].";
+	LOG(LogLevel::Fine) << "WorkingSm::GetTrack() : get file path = [" << temp << "].";
 	track = new RateSettableBassTrack(temp);
 	return track;
 }
