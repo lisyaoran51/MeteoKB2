@@ -286,7 +286,7 @@ int GameHost::setupConfig()
 
 	meteorConfigManager->Set(MeteorSetting::WhiteKeyTargetHeight, 9);	// 低4	  高9
 	meteorConfigManager->Set(MeteorSetting::BlackKeyTargetHeight, 8);
-	meteorConfigManager->Set(MeteorSetting::FallSpeed, MTO_FLOAT(60.f));	//正常16.f	慢12.f 目前24
+	meteorConfigManager->Set(MeteorSetting::FallSpeed, MTO_FLOAT(48.f));	//正常16.f	慢12.f 目前24
 	meteorConfigManager->Set(MeteorSetting::FallBrightness, MTO_FLOAT(0.6f));
 	meteorConfigManager->Set(MeteorSetting::FallLength, 1);
 	meteorConfigManager->Set(MeteorSetting::ExplodeSpeed, MTO_FLOAT(0.6f));
