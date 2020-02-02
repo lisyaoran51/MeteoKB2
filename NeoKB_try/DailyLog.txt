@@ -1513,3 +1513,19 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	
 1/29
 	每次都要先 sudo modprobe i2c-dev
+	
+2/1
+	找到不能只差i2s到主板的問題，地6pin gnd一定要插著他才會動
+	
+	要做的事：1. 寫算分數(!)
+				2. 樂理遊戲畫面
+				3. ios app
+				4. 遊戲畫面(!)(改成ipad解析度)
+				5. 紅外線控制arduino
+				6. 做耳機、紅外線的外殼(ok)
+				7. 琴鍵聲音比音樂大
+				8. 寫完光圈
+				9. 找人寫拍照轉檔的app
+				10.輸出高品質鋼琴音
+				
+				
