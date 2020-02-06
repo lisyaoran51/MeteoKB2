@@ -52,7 +52,7 @@ TrackManager * AudioManager::GetTrackManager(CompositeResourceStore<char*>* trac
 	AddItem(tManager);
 	tManager->AddAdjustment(AdjustableProperty::Volume, trackVolume);
 	
-	trackVolume->SetValue(0.1);
+	trackVolume->SetValue(1.0);
 	// TODO: ¥[¤Wadjistment
 
 	return tManager;
