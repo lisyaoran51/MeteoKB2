@@ -143,7 +143,7 @@ MainMenu.o PlaySongSelect.o SongSelect.o \
 Event.o EventProcessorMaster.o HitObject.o \
 ControlPoint.o NoteControlPoint.o NoteControlPointHitObject.o PlayableControlPoint.o InputKeyControlPoint.o InputKeyControlPointHitObject.o \
 Effect.o LinearMapPitchShifter.o MapPitchShifter.o \
-IoEvent.o PanelEvent.o IoCommunicator.o \
+IoEvent.o IoEventProcessor.o PanelEvent.o IoCommunicator.o \
 InstrumentEvent.o InstrumentController.o \
 PlayfieldEvent.o PlayfieldEventProcessor.o PlayfieldController.o \
 GameEvent.o StartGameEvent.o StopSystemEvent.o SystemEvent.o SystemEventHandler.o \
