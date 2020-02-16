@@ -56,6 +56,8 @@ namespace Patterns {
 
 	protected:
 
+		int extendWidth = 12;
+
 		MTO_FLOAT fallSpeed = 0;
 		MTO_FLOAT fallBrightness = 0;
 		int fallLength = 0;

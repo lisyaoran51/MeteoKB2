@@ -170,8 +170,8 @@ Pattern * MeteorPatternGenerator::generateNoteControlPoint(vector<Event*>* es, N
 	
 	Pitch pitch = note->GetPitch();
 
-	if (static_cast<int>(pitch) > static_cast<int>(startPitch) + width - 1 ||
-		static_cast<int>(pitch) < static_cast<int>(startPitch)) {
+	if (static_cast<int>(pitch) > static_cast<int>(startPitch) + width + extendWidth - 1 ||
+		static_cast<int>(pitch) < static_cast<int>(startPitch) - extendWidth) {
 		LOG(LogLevel::Warning) << "int MeteorSmConverter::generateNoteControlPoint(vector<Event*>*, Event*) : Note [" << static_cast<int>(note->GetPitch()) << " is out of light map boundary.";
 		return pattern;
 	}
