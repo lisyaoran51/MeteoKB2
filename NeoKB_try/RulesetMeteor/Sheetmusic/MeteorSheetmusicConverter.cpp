@@ -71,7 +71,7 @@ int MeteorSmConverter::convertEvent(vector<Event*>* es, Event* e)
 
 	}
 
-	if (e->CanCast<InputKeyControlPoint>() || e->CanCast<OctaveAutoControlPoint>()) {
+	if (e->CanCast<InputKeyControlPoint>()) {
 		// 踏板或移調特效。
 
 		Pattern* newPattern = patternGenerator->Generate(es, e);
