@@ -35,6 +35,10 @@ namespace Algorithms{
 
 		virtual int SetSeekPitch(Pitch p) = 0;
 
+		virtual int ResetSeekSpeed() = 0;
+
+		virtual int SetSeekSpeed(double sSpeed) = 0;
+
 		virtual bool GetIsShifting() = 0;
 
 		virtual Pitch GetTempPitch() = 0;
@@ -46,6 +50,10 @@ namespace Algorithms{
 		map<string, MapAlgorithmInterface*>* mapAlgos;
 
 		Pitch defaultStartPitch;
+
+		Pitch upperBound;
+
+		Pitch lowerBound;
 
 		int width;
 

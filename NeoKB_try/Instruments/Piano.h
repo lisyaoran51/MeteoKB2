@@ -61,6 +61,8 @@ namespace Instruments {
 
 		int ControlSustainPedal(bool down);
 
+		int ControlOctave(bool raise);
+
 	protected:
 
 		/// <summary>

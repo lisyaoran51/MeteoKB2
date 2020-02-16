@@ -37,6 +37,11 @@ int PianoController::implementControlInstrument(EventProcessor<Event>* e)
 			piano->ControlSustainPedal(false);
 		}
 	}
+	else if (pianoEvent->GetInput().first == InputKey::LowerOctave) {
+
+
+
+	}
 
 	return 0;
 }

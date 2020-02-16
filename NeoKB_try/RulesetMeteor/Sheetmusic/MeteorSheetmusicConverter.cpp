@@ -3,6 +3,7 @@
 #include "../../Games/Scheduler/Event/Effect/Effect.h"
 #include "../../Games/Scheduler/Event/ControlPoints/NoteControlPoint.h"
 #include "../../Games/Scheduler/Event/ControlPoints/InputKeyControlPoint.h"
+#include "../../Games/Scheduler/Event/ControlPoints/OctaveAutoControlPoint.h"
 #include "../../Games/Scheduler/Event/GameEvents/StartGameEvent.h"
 
 
@@ -70,8 +71,8 @@ int MeteorSmConverter::convertEvent(vector<Event*>* es, Event* e)
 
 	}
 
-	if (e->CanCast<InputKeyControlPoint>()) {
-		// 踏板特效。
+	if (e->CanCast<InputKeyControlPoint>() || e->CanCast<OctaveAutoControlPoint>()) {
+		// 踏板或移調特效。
 
 		Pattern* newPattern = patternGenerator->Generate(es, e);
 		newPattern->SetOriginalEvent(e);
@@ -79,6 +80,8 @@ int MeteorSmConverter::convertEvent(vector<Event*>* es, Event* e)
 		patternGenerator->Add(newPattern);
 
 	}
+
+
 
 	return 0;
 }

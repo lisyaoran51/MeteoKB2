@@ -2,6 +2,7 @@
 
 #include "../../Scheduler/Event/ControlPoints/NoteControlPoint.h"
 #include "../../Scheduler/Event/ControlPoints/InputKeyControlPoint.h"
+#include "../../Scheduler/Event/ControlPoints/OctaveAutoControlPoint.h"
 
 
 using namespace Games::Sheetmusics::Format;
@@ -190,6 +191,7 @@ int SimpleSmDecoder::handleNoteControlPoints(Sm<Event>* sm, string & line)
 	//EffectControlPoint effectPoint = beatmap.ControlPointInfo.EffectPointAt(time);
 
 	if (timingChange) {
+
 		PlayableControlPoint* newPlayableControlPoint = nullptr;
 
 		if (pitchInt >= 0) {
@@ -208,6 +210,13 @@ int SimpleSmDecoder::handleNoteControlPoints(Sm<Event>* sm, string & line)
 			{
 			case -1:
 				inputKey = InputKey::SustainPedal;
+				break;
+			case -2:
+				inputKey = InputKey::LowerOctave; // 這邊程式邏輯有問題，遊戲中升降8度是不能夠手動控制的，只能電腦自動控制
+				break;
+			case -3:
+				inputKey = InputKey::RaiseOctave; // 這邊程式邏輯有問題，遊戲中升降8度是不能夠手動控制的，只能電腦自動控制
+				break;
 			}
 			newPlayableControlPoint = new InputKeyControlPoint(inputKey, inputValue, time, noteLength);
 		}
@@ -216,6 +225,7 @@ int SimpleSmDecoder::handleNoteControlPoints(Sm<Event>* sm, string & line)
 		newPlayableControlPoint->SetSectionIndex(sectionIndex);
 		newPlayableControlPoint->SetHandType(static_cast<HandType>(hand));
 		newPlayableControlPoint->SetPartIndex(partIndex);
+		
 
 		sm->GetEvents()->push_back(newPlayableControlPoint);
 	}

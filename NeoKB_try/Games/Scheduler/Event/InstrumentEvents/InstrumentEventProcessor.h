@@ -19,6 +19,8 @@ namespace InstrumentEvents{
 
 		virtual int RegisterInstrumentController(InstrumentControllerInterface* iController) = 0;
 
+		virtual int Process();
+
 		virtual int ControlInstrument() = 0;
 
 		virtual int SetIsTransfered() = 0;

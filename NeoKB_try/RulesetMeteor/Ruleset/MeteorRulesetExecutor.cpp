@@ -21,6 +21,7 @@
 #include "../Scheduler/Event/IoEvents/SustainPedalLightRing.h"
 #include "../Scheduler/Event/ControlPoints/MeteorInputKeyControlPointHitObject.h"
 #include "../Scheduler/Event/InstrumentEvents/PianoEventProcessor.h"
+#include "../Scheduler/Event/PlayfieldEvents/OctaveShiftEventProcessor.h"
 
 
 
@@ -41,6 +42,7 @@ using namespace Meteor::Rulesets::Scoring;
 using namespace Meteor::Schedulers::Events::ControlPoints;
 using namespace Meteor::Schedulers::Events::IoEvents;
 using namespace Meteor::Schedulers::Events::InstrumentEvents;
+using namespace Meteor::Schedulers::Events::PlayfieldEvents;
 
 
 
@@ -77,7 +79,7 @@ MeteorRulesetExecutor::MeteorRulesetExecutor(): RegisterType("MeteorRulesetExecu
 	eventProcessorTable["InputKeyControlPoint"	] = "MeteorInputKeyControlPointHitObject";
 	eventProcessorTable["SustainPedalIoEvent"	] = "SustainPedalLightRing";
 	eventProcessorTable["PianoEvent"		] = "PianoEventProcessor";
-
+	eventProcessorTable["OctaveShiftEvent"	] = "OctaveShiftEventProcessor";
 
 	// µù¥Uprivate load (c++¤~»Ý­n)
 	registerLoad(bind(static_cast<int(MeteorRulesetExecutor::*)(void)>(&MeteorRulesetExecutor::load), this));
@@ -173,6 +175,9 @@ EventProcessor<Event>* MeteorRulesetExecutor::getEventProcessor(Event * e)
 	}
 	else if (processorType == "PianoEventProcessor") {
 		return (new PianoEventProcessor())->RegisterEvent(e);
+	}
+	else if (processorType == "OctaveShiftEventProcessor") {
+		return (new OctaveShiftEventProcessor())->RegisterEvent(e);
 	}
 
 

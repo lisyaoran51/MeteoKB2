@@ -1,5 +1,5 @@
-#ifndef PLAYABLE_CONTROL_POINT_H
-#define PLAYABLE_CONTROL_POINT_H
+#ifndef AUTO_CONTROL_POINT_H
+#define AUTO_CONTROL_POINT_H
 
 
 #include "HandType.h"
@@ -13,11 +13,11 @@ namespace Events{
 namespace ControlPoints{
 
 
-	class PlayableControlPoint : public ControlPoint {
+	class AutoControlPoint : public ControlPoint {
 
 	public:
 
-		PlayableControlPoint(MTO_FLOAT s, MTO_FLOAT l);
+		AutoControlPoint(MTO_FLOAT s, MTO_FLOAT l);
 
 		MTO_FLOAT GetVolume();
 		int SetVolume(MTO_FLOAT v);
@@ -39,7 +39,7 @@ namespace ControlPoints{
 		int sectionIndex = -1;
 		int partIndex = -1;
 
-		HandType handType = HandType::None;
+		HandType handType = HandType::Auto;
 
 	};
 

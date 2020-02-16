@@ -71,6 +71,10 @@ using namespace Meteor::Schedulers::Events::IoEvents::IoCommunicators;
 #include "../RulesetMeteor/Scheduler/Event/InstrumentEvents/InstrumentControllers/PianoController.h"
 using namespace Meteor::Schedulers::Events::InstrumentEvents::InstrumentControllers;
 
+// Meteor/Schedulers/Events/PlayfieldEvents/PlayfieldControllers
+#include "../RulesetMeteor/Scheduler/Event/PlayfieldEvents/PlayfieldControllers/OctaveShifter.h"
+using namespace Meteor::Schedulers::Events::PlayfieldEvents::PlayfieldControllers;
+
 // Meteor/Sheetmusics/Patterns
 #include "../RulesetMeteor/Sheetmusic/Pattern/MeteorPatternGenerator.h"
 using namespace Meteor::Sheetmusics::Patterns;

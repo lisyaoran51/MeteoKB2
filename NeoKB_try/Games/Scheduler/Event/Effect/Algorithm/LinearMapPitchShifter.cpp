@@ -16,6 +16,17 @@ int LinearMapPitchShifter::load()
 	tempPitch = defaultStartPitch;
 	tempPitchSpecificPosition = (double)tempPitch;
 
+	MeteorConfigManager* m = GetCache<MeteorConfigManager>("MeteorConfigManager");
+
+	return load(m);
+}
+
+int LinearMapPitchShifter::load(MeteorConfigManager * m)
+{
+
+	if (!m->Get(MeteorSetting::PitchShiftSpeed, &defaultMovePerFrame))
+		defaultMovePerFrame = 1.0f;
+
 	return 0;
 }
 
@@ -32,7 +43,15 @@ int LinearMapPitchShifter::SetSeekPitch(Pitch p)
 	if (tempPitch == p)
 		return 0;
 
-	pitchShiftingTo = p;
+	if ((int)p < (int)lowerBound && tempPitch != lowerBound) {
+		pitchShiftingTo = lowerBound;
+	}
+	else if ((int)p > (int)upperBound && tempPitch != upperBound) {
+		pitchShiftingTo = upperBound;
+	}
+	else
+		pitchShiftingTo = p;
+
 	isShifting = true;
 
 	return 0;
@@ -41,6 +60,27 @@ int LinearMapPitchShifter::SetSeekPitch(Pitch p)
 bool LinearMapPitchShifter::GetIsShifting()
 {
 	return isShifting;
+}
+
+int LinearMapPitchShifter::ResetSeekSpeed()
+{
+	movePerFrame = defaultMovePerFrame;
+	return 0;
+}
+
+int LinearMapPitchShifter::SetSeekSpeed(double sSpeed)
+{
+	double framePerSecond = GetClock()->GetFramesPerSecond();
+	if (framePerSecond != 0)
+		movePerFrame = sSpeed / framePerSecond;
+
+	// clamp
+	if (movePerFrame > 12)
+		movePerFrame = 12;
+	if (movePerFrame == 0)
+		movePerFrame = 0.1;
+
+	return 0;
 }
 
 int LinearMapPitchShifter::SetMovePerFrame(double mPerFrame)

@@ -40,6 +40,8 @@ namespace IoEvents {
 
 		virtual int RegisterIoCommunicator(IoCommunicatorInterface* iCommunicator) = 0;
 
+		virtual int Process();
+
 		virtual int ProcessIo() = 0;
 
 		virtual int SetIsTransfered() = 0;

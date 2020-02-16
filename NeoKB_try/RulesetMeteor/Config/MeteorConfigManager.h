@@ -39,6 +39,8 @@ namespace Config{
 		InstrumentController,
 
 		MapPitchShifter,
+		OctaveShifter,
+		PitchShiftSpeed,
 
 		WhiteKeyTargetHeight,
 		BlackKeyTargetHeight,

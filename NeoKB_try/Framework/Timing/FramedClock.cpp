@@ -109,8 +109,10 @@ double FramedClock::GetAverageFrameTime()
 
 double FramedClock::GetFramesPerSecond()
 {
-	// TODO: ¥ý¤£¼g
-	return framesPerSecond;
+	if (GetElapsedFrameTime() != 0)
+		return framesPerSecond = 1.0 / GetElapsedFrameTime();
+	else
+		return 1;
 }
 
 FrameTimeInfo * FramedClock::GetFrameTimeInfo()

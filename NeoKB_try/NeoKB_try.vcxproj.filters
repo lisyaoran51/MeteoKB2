@@ -568,6 +568,30 @@
     <Filter Include="來源檔案\RulesetMeteor\Ruleset\Scoring">
       <UniqueIdentifier>{5dfb91c1-6eb4-45df-83ba-5d53eb92f32f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="標頭檔\Games\Scheduler\Events\PlayfieldEvents">
+      <UniqueIdentifier>{63318879-7d27-423e-9be5-de7a06579f14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Games\Scheduler\Events\PlayfieldEvents\PlayfieldControllers">
+      <UniqueIdentifier>{99a70d83-4581-4f7a-88ba-d5b4987762dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Games\Schedulers\Events\PlayfieldEvents">
+      <UniqueIdentifier>{358ce675-e44e-4547-a53a-4b6518287969}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Games\Schedulers\Events\PlayfieldEvents\PlayfieldControllers">
+      <UniqueIdentifier>{3763b4a6-440f-4706-b4c8-5c2c0378c104}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\RulesetMeteor\Schedulers\Events\PlayfieldEvents">
+      <UniqueIdentifier>{f1a3a14d-e025-412c-9b4d-a35ae3cd1211}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\RulesetMeteor\Schedulers\Events\PlayfieldEvents\PlayfieldControllers">
+      <UniqueIdentifier>{67dab438-255b-49ce-8116-9fd9ccc50633}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetMeteor\Schedulers\Events\PlayfieldEvents">
+      <UniqueIdentifier>{60a249a1-ebf2-4f3f-9b91-916d9726c672}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetMeteor\Schedulers\Events\PlayfieldEvents\PlayfieldControllers">
+      <UniqueIdentifier>{31437661-7771-42ea-a3b6-0e21f7a30d8a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Games\Graphic\Renderer\renderer.cpp">
@@ -1181,6 +1205,36 @@
     </ClCompile>
     <ClCompile Include="RulesetMeteor\Ruleset\Scoring\MeteorScoreProcessor.cpp">
       <Filter>來源檔案\RulesetMeteor\Ruleset\Scoring</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\Scheduler\Event\PlayfieldEvents\PlayfieldControllers\PlayfieldController.cpp">
+      <Filter>來源檔案\Games\Schedulers\Events\PlayfieldEvents\PlayfieldControllers</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\Scheduler\Event\IoEvents\IoEventProcessor.cpp">
+      <Filter>來源檔案\Games\Schedulers\Events\IoEvents</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\Scheduler\Event\InstrumentEvents\InstrumentEventProcessor.cpp">
+      <Filter>來源檔案\Games\Schedulers\Events\InstrumentEvents</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\Scheduler\Event\PlayfieldEvents\PlayfieldEventProcessor.cpp">
+      <Filter>來源檔案\Games\Schedulers\Events\PlayfieldEvents</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\PlayfieldEvents\PlayfieldControllers\OctaveShifter.cpp">
+      <Filter>來源檔案\RulesetMeteor\Schedulers\Events\PlayfieldEvents\PlayfieldControllers</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\Scheduler\Event\PlayfieldEvents\PlayfieldEvent.cpp">
+      <Filter>來源檔案\Games\Schedulers\Events\PlayfieldEvents</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\PlayfieldEvents\OctaveShiftEvent.cpp">
+      <Filter>來源檔案\RulesetMeteor\Schedulers\Events\PlayfieldEvents</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\PlayfieldEvents\OctaveShiftEventProcessor.cpp">
+      <Filter>來源檔案\RulesetMeteor\Schedulers\Events\PlayfieldEvents</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\Scheduler\Event\ControlPoints\AutoControlPoint.cpp">
+      <Filter>來源檔案\Games\Schedulers\Events\ControlPoints</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\Scheduler\Event\ControlPoints\OctaveAutoControlPoint.cpp">
+      <Filter>來源檔案\Games\Schedulers\Events\ControlPoints</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2010,6 +2064,33 @@
     </ClInclude>
     <ClInclude Include="Util\Effects\Easing.h">
       <Filter>標頭檔\Util\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Scheduler\Event\PlayfieldEvents\PlayfieldEventProcessor.h">
+      <Filter>標頭檔\Games\Scheduler\Events\PlayfieldEvents</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Scheduler\Event\PlayfieldEvents\PlayfieldControllers\PlayfieldController.h">
+      <Filter>標頭檔\Games\Scheduler\Events\PlayfieldEvents\PlayfieldControllers</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\PlayfieldEvents\OctaveShiftEvent.h">
+      <Filter>標頭檔\RulesetMeteor\Schedulers\Events\PlayfieldEvents</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\PlayfieldEvents\OctaveShiftEventProcessor.h">
+      <Filter>標頭檔\RulesetMeteor\Schedulers\Events\PlayfieldEvents</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\PlayfieldEvents\PlayfieldControllers\OctaveShifter.h">
+      <Filter>標頭檔\RulesetMeteor\Schedulers\Events\PlayfieldEvents\PlayfieldControllers</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Scheduler\Event\PlayfieldEvents\PlayfieldEvent.h">
+      <Filter>標頭檔\Games\Scheduler\Events\PlayfieldEvents</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Scheduler\Event\ControlPoints\AutoControlPoint.h">
+      <Filter>標頭檔\Games\Scheduler\Events\ControlPoints</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Scheduler\Event\ControlPoints\HandType.h">
+      <Filter>標頭檔\Games\Scheduler\Events\ControlPoints</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Scheduler\Event\ControlPoints\OctaveAutoControlPoint.h">
+      <Filter>標頭檔\Games\Scheduler\Events\ControlPoints</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

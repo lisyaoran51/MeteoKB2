@@ -87,9 +87,9 @@ namespace Events {
 
 		/// <summary>
 		/// the work to do with this Event, such as stop the game, slow down...
-		/// 結果應該是用elapse來跑，不試用process??
+		/// 現在Process用來代表所有event processor執行的動作，下面override上來
 		/// </summary>
-		// virtual int Process() = 0;
+		virtual int Process() { return 0; }
 
 		virtual MTO_FLOAT GetStartTime(){ return event->GetStartTime(); }
 		virtual MTO_FLOAT GetLifeTime(){ return event->GetLifeTime(); }
@@ -130,6 +130,10 @@ namespace Events {
 
 		Event* GetEvent() {
 			return event;
+		}
+
+		Event* GetTEvent() {
+			return dynamic_cast<T*>(event);
 		}
 
 		// 一定要每次都override!!

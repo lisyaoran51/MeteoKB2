@@ -2,8 +2,10 @@
 #define LINEAR_MAP_PITCH_SHIFTER_H
 
 #include "MapPitchShifter.h"
+#include "../../../../../RulesetMeteor/Config/MeteorConfigManager.h"
 
 
+using namespace Meteor::Config;
 
 
 namespace Games {
@@ -19,6 +21,8 @@ namespace Algorithms{
 
 		int load();
 
+		int load(MeteorConfigManager* m);
+
 	public:
 
 		LinearMapPitchShifter();
@@ -26,6 +30,10 @@ namespace Algorithms{
 		virtual int SetSeekPitch(Pitch p);
 
 		virtual bool GetIsShifting();
+
+		virtual int ResetSeekSpeed();
+
+		virtual int SetSeekSpeed(double sSpeed);
 
 		int SetMovePerFrame(double mPerFrame);
 
@@ -39,14 +47,14 @@ namespace Algorithms{
 
 		Pitch pitchShiftingTo;
 
+		float defaultMovePerFrame = 1.0;
+
 		double movePerFrame = 1.0;
 
 		double tempPitchSpecificPosition;
 
 
 		virtual int shift();
-
-
 
 
 	};

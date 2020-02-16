@@ -12,6 +12,7 @@
 #include "../../../Instruments/Pitch.h"
 #include "../../Scheduler/Event/IoEvents/SustainPedalIoEvent.h"
 #include "../../Scheduler/Event/InstrumentEvents/PianoEvent.h"
+#include "../../Scheduler/Event/PlayfieldEvents/OctaveShiftEvent.h"
 
 
 
@@ -25,6 +26,8 @@ using namespace Games::Schedulers::Events::SystemEvents;
 using namespace Instruments;
 using namespace Meteor::Schedulers::Events::IoEvents;
 using namespace Meteor::Schedulers::Events::InstrumentEvents;
+using namespace Meteor::Schedulers::Events::PlayfieldEvents; 
+
 
 
 int MeteorPatternGenerator::load()
@@ -265,29 +268,50 @@ Pattern * MeteorPatternGenerator::generateInputKeyControlPoint(vector<Event*>* e
 	LOG(LogLevel::Finer) << "int MeteorSmConverter::generateNoteControlPoint(vector<Event*>*, Event*) : Start converting [" << static_cast<int>(inputKeyControlPoint->GetInputKey()) << "," << inputKeyControlPoint->GetStartTime() << "] to pattern...";
 
 	/* 如果這個音的狀態是隱藏，就直接返回 */
-	if (inputKeyControlPoint->GetHandType() > HandType::Foot)
+	if (inputKeyControlPoint->GetHandType() >= HandType::HiddenNone)
 		return pattern;
 
 	InputKey inputKey = inputKeyControlPoint->GetInputKey();
 
-	if (inputKey != InputKey::SustainPedal) {
+
+	if (inputKey == InputKey::SustainPedal) {
+
+		SustainPedalIoEvent* sustainPedalIoEvent = new SustainPedalIoEvent(inputKey, inputKeyControlPoint->GetStartTime(), inputKeyControlPoint->GetLifeTime());
+
+		PianoEvent* pianoEventDown = new PianoEvent(pair<InputKey, int>(inputKey, 1), inputKeyControlPoint->GetStartTime(), 0);
+		PianoEvent* pianoEventUp = new PianoEvent(pair<InputKey, int>(inputKey, -1), inputKeyControlPoint->GetStartTime() + inputKeyControlPoint->GetLifeTime() - 0.2, 0);
+
+		LOG(LogLevel::Depricated) << "MeteorSmConverter::generateInputKeyControlPoint() : Piano Event [" << inputKeyControlPoint->GetStartTime() << "].";
+
+		pattern->Add(sustainPedalIoEvent);
+		pattern->Add(pianoEventDown);
+		pattern->Add(pianoEventUp);
+		es->push_back(sustainPedalIoEvent);
+		es->push_back(pianoEventDown);
+		es->push_back(pianoEventUp);
+	}
+	else if (inputKey == InputKey::LowerOctave || inputKey == InputKey::RaiseOctave) {
+
+		OctaveShiftEvent* octaveShiftEvent = nullptr;
+
+		if (inputKey == InputKey::LowerOctave)
+			octaveShiftEvent = new OctaveShiftEvent(OctaveShiftType::Lower, inputKeyControlPoint->GetStartTime(), inputKeyControlPoint->GetLifeTime());
+		else
+			octaveShiftEvent = new OctaveShiftEvent(OctaveShiftType::Raise, inputKeyControlPoint->GetStartTime(), inputKeyControlPoint->GetLifeTime());
+
+		PianoEvent* pianoEventPress = new PianoEvent(pair<InputKey, int>(inputKey, 1), inputKeyControlPoint->GetStartTime(), 0);
+
+		pattern->Add(octaveShiftEvent);
+		pattern->Add(pianoEventPress);
+		es->push_back(octaveShiftEvent);
+		es->push_back(pianoEventPress);
+	}
+	else {
 		LOG(LogLevel::Warning) << "int MeteorSmConverter::generateInputKeyControlPoint(vector<Event*>*, Event*) : Input Key [" << static_cast<int>(inputKey) << " is not available.";
 		return pattern;
 	}
 
-	SustainPedalIoEvent* sustainPedalIoEvent = new SustainPedalIoEvent(inputKey, inputKeyControlPoint->GetStartTime(), inputKeyControlPoint->GetLifeTime());
-
-	PianoEvent* pianoEventDown = new PianoEvent(pair<InputKey, int>(inputKey, 1), inputKeyControlPoint->GetStartTime(), 0);
-	PianoEvent* pianoEventUp = new PianoEvent(pair<InputKey, int>(inputKey, -1), inputKeyControlPoint->GetStartTime() + inputKeyControlPoint->GetLifeTime() - 0.2, 0);
-
-	LOG(LogLevel::Depricated) << "MeteorSmConverter::generateInputKeyControlPoint() : Piano Event [" << inputKeyControlPoint->GetStartTime() << "].";
-
-	pattern->Add(sustainPedalIoEvent);
-	pattern->Add(pianoEventDown);
-	pattern->Add(pianoEventUp);
-	es->push_back(sustainPedalIoEvent);
-	es->push_back(pianoEventDown);
-	es->push_back(pianoEventUp);
 
 	return pattern;
 }
+

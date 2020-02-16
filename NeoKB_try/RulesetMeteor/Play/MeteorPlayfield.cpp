@@ -11,6 +11,7 @@
 #include "../../Games/Scheduler/Event/IoEvents/IoCommunicators/IoCommunicator.h"
 #include "../Scheduler/Event/IoEvents/IoCommunicators/SustainPedalLightRingIoCommunicator.h"
 #include "../Scheduler/Event/InstrumentEvents/InstrumentControllers/PianoController.h"
+#include "../Scheduler/Event/PlayfieldEvents/PlayfieldControllers/OctaveShifter.h"
 
 
 
@@ -23,6 +24,7 @@ using namespace Meteor::Schedulers::Events;
 using namespace Games::Schedulers::Events::IoEvents::IoCommunicators;
 using namespace Meteor::Schedulers::Events::IoEvents::IoCommunicators;
 using namespace Meteor::Schedulers::Events::InstrumentEvents::InstrumentControllers;
+using namespace Meteor::Schedulers::Events::PlayfieldEvents::PlayfieldControllers;
 
 
 int MeteorPlayfield::load()
@@ -45,7 +47,7 @@ int MeteorPlayfield::load()
 int MeteorPlayfield::load(FrameworkConfigManager* f, MeteorConfigManager * m)
 {
 	isGameControllingPitchState = false; // 暫時先這樣，Debug用
-
+	
 
 	if(f->Get(FrameworkSetting::StartPitch, (int*)&startPitch)){}
 	if(f->Get(FrameworkSetting::Width, &pitchCount)){}
@@ -155,8 +157,16 @@ int MeteorPlayfield::load(FrameworkConfigManager* f, MeteorConfigManager * m)
 	mapPitchShifter->LazyConstruct(&mapAlgorithms);
 	AddChild(mapPitchShifter);
 
-	
+	/*--------------------- Octave shifter ---------------------*/
+	string octaveShifterName;
+	if (m->Get(MeteorSetting::OctaveShifter, &octaveShifterName)) {
+		playfieldControllers["OctaveShiftEvent"] = iCreator.CreateInstanceWithT<OctaveShifter>(octaveShifterName);
+	}
+	else
+		playfieldControllers["OctaveShiftEvent"] = new OctaveShifter();
 
+	playfieldControllers["OctaveShiftEvent"]->LazyConstruct(this);
+	AddChild(playfieldControllers["OctaveShiftEvent"]);
 
 
 	return 0;
@@ -167,6 +177,11 @@ MeteorPlayfield::MeteorPlayfield(): Playfield(), RegisterType("MeteorPlayfield")
 	// functional裡面的bind不能對overloading問題
 	// https://stackoverflow.com/questions/4159487/stdbind-overload-resolution
 	registerLoad(bind((int(MeteorPlayfield::*)())&MeteorPlayfield::load, this));
+}
+
+MapPitchShifter * MeteorPlayfield::GetMapPitchShifter()
+{
+	return mapPitchShifter;
 }
 
 int MeteorPlayfield::OnJudgement(HitObject * hitObject, Judgement * judgement)
@@ -199,6 +214,9 @@ int MeteorPlayfield::SetIsGameControllingPitchState(bool value)
 
 int MeteorPlayfield::ChangePitchState(MeteoPianoPitchState s)
 {
+	//if (!isGameControllingPitchState)
+	//	return 0;
+
 	if (s == MeteoPianoPitchState::Lowered) {
 		pitchState = MeteoPianoPitchState::Lowered;
 		mapPitchShifter->SetSeekPitch(Pitch::C1);
@@ -212,6 +230,11 @@ int MeteorPlayfield::ChangePitchState(MeteoPianoPitchState s)
 		mapPitchShifter->SetSeekPitch(Pitch::c);
 	}
 	return 0;
+}
+
+MeteoPianoPitchState MeteorPlayfield::GetMeteoPianoPitchState()
+{
+	return pitchState;
 }
 
 int MeteorPlayfield::OnKeyDown(pair<MeteorAction, int> action)
@@ -273,6 +296,12 @@ int MeteorPlayfield::OnKnobTurn(pair<MeteorAction, int> action)
 
 int MeteorPlayfield::OnSlide(pair<MeteorAction, int> action)
 {
+	return 0;
+}
+
+int MeteorPlayfield::LoadOnComplete()
+{
+	ChangePitchState(MeteoPianoPitchState::None);
 	return 0;
 }
 

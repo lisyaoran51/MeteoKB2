@@ -132,8 +132,10 @@ double InterpolatingFramedClock::GetAverageFrameTime()
 
 double InterpolatingFramedClock::GetFramesPerSecond()
 {
-	// TODO: ¸É§¹
-	return 0.0;
+	if (GetElapsedFrameTime() != 0)
+		return 1.0 / GetElapsedFrameTime();
+	else
+		return 1;
 }
 
 FrameTimeInfo * InterpolatingFramedClock::GetFrameTimeInfo()

@@ -9,6 +9,7 @@
 #include "../Input/MeteorInputManager.h"
 #include "../../Instruments/MeteoPiano.h"
 #include "../../Games/Scheduler/Event/Effect/Algorithm/MapPitchShifter.h"
+#include "../Scheduler/Event/PlayfieldEvents/PlayfieldControllers/OctaveShifter.h"
 
 
 
@@ -21,6 +22,7 @@ using namespace Meteor::Input;
 using namespace Framework::Input::KeyBindings;
 using namespace Instruments;
 using namespace Games::Schedulers::Events::Effects::Algorithms;
+using namespace Meteor::Schedulers::Events::PlayfieldEvents::PlayfieldControllers;
 
 
 
@@ -37,6 +39,8 @@ namespace Play{
 
 		MeteorPlayfield();
 
+		MapPitchShifter* GetMapPitchShifter();
+
 		virtual int OnJudgement(HitObject * hitObject, Judgement * judgement);
 
 		//virtual int Elapse(MTO_FLOAT elapsedTime);
@@ -44,6 +48,8 @@ namespace Play{
 		int SetIsGameControllingPitchState(bool value);
 
 		int ChangePitchState(MeteoPianoPitchState s);
+
+		MeteoPianoPitchState GetMeteoPianoPitchState();
 
 
 		/* KeyBindingHandler<MeteorAction> */
@@ -75,7 +81,9 @@ namespace Play{
 		/// <summary>
 		/// 用來把map平移到想要的pitch的工具
 		/// </summary>
-		MapPitchShifter* mapPitchShifter;
+		MapPitchShifter* mapPitchShifter = nullptr;
+
+		virtual int LoadOnComplete();
 
 		virtual EventProcessorMaster* createEventProcessorMaster();
 

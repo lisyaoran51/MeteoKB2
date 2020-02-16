@@ -9,6 +9,7 @@
 #include "../../Scheduler/Event/HitObject.h"
 #include "../../Scheduler/Event/IoEvents/IoCommunicators/IoCommunicator.h"
 #include "../../Scheduler/Event/InstrumentEvents/InstrumentControllers/InstrumentController.h"
+#include "../../Scheduler/Event/PlayfieldEvents/PlayfieldControllers/PlayfieldController.h"
 
 
 
@@ -19,6 +20,7 @@ using namespace Framework::Configurations;
 using namespace Framework::Allocation::Hierachal;
 using namespace Games::Schedulers::Events::IoEvents::IoCommunicators;
 using namespace Games::Schedulers::Events::InstrumentEvents::InstrumentControllers;
+using namespace Games::Schedulers::Events::PlayfieldEvents::PlayfieldControllers;
 
 
 
@@ -85,6 +87,11 @@ namespace Play {
 		/// 在這邊存了會用到的instrument controller，在getEventProcessor時可以到這邊選擇要用的controller
 		///</summary>
 		map<string, InstrumentControllerInterface*> instrumentControllers;
+
+		///<summary>
+		/// 在這邊存了會用到的playfield controller，在getEventProcessor時可以到這邊選擇要用的controller
+		///</summary>
+		map<string, PlayfieldControllerInterface*> playfieldControllers;
 
 		//Scheduler* scheduler;
 

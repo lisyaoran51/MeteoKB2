@@ -24,6 +24,8 @@ int MapPitchShifter::load(FrameworkConfigManager * f)
 	if (!f->Get(FrameworkSetting::StartPitch, &startPitch))
 		throw runtime_error("int MapPitchShifter::load() : start pitch not found in FrameworkConfigManager.");
 	defaultStartPitch = (Pitch)startPitch;
+	upperBound = (Pitch)(startPitch + 12);
+	lowerBound = (Pitch)(startPitch - 12);
 
 	if (!f->Get(FrameworkSetting::Width, &width)) 
 		throw runtime_error("int MapPitchShifter::load() : width not found in FrameworkConfigManager.");
