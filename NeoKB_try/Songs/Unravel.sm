@@ -5,7 +5,7 @@ AudioFilename:Unravel.mp3
 Title:Unravel
 [Difficulty]
 [NoteControlPoints]
--3,0.2,0.55,-1,0,6,0
+-3,0.4,0.4,-1,0,6,0
 70,0.81,-1,-1,0,3,0
 72,1.02,-1,-1,1,3,0
 70,1.469485714,-1,-1,1,3,0
