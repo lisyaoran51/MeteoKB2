@@ -4,6 +4,7 @@
 #include "../../../Util/Log.h"
 #include "../../Scheduler/Event/IoEvents/IoEventProcessor.h"
 #include "../../Scheduler/Event/InstrumentEvents/InstrumentEventProcessor.h"
+#include "../../Scheduler/Event/PlayfieldEvents/PlayfieldEventProcessor.h"
 #include <functional>
 
 
@@ -15,6 +16,7 @@ using namespace Games::Schedulers::Events::IoEvents;
 using namespace Games::Schedulers::Events::InstrumentEvents;
 using namespace Util;
 using namespace std;
+using namespace Games::Schedulers::Events::PlayfieldEvents;
 
 
 /*
@@ -179,6 +181,23 @@ int Playfield::Add(EventProcessor<Event> * ep)
 		}
 		else {
 			LOG(LogLevel::Error) << "Playfield::Add(EventProcessor<Event>*) : Register processor [" << processorType << "] failed." << instrumentControllers.size();
+			throw runtime_error("Playfield::Add(EventProcessor<Event>*) : Register processor failed.");
+		}
+
+	}
+	else if (ep->CanCast<PlayfieldEventProcessorInterface>()) { // 這邊用來自動移調
+		string processorType = ep->GetEventTypeName();
+		map<string, PlayfieldControllerInterface*>::iterator iter = playfieldControllers.find(processorType);
+
+		if (iter != playfieldControllers.end())
+		{
+			PlayfieldControllerInterface* playfieldController = playfieldControllers[processorType];
+			ep->Cast<PlayfieldEventProcessorInterface>()->RegisterPlayfieldController(playfieldController);
+
+			LOG(LogLevel::Finer) << "Playfield::Add(EventProcessor<Event>*) : Register [" << playfieldControllers[processorType]->GetTypeName() << "] to processor [" << processorType << "] on [" << ep->GetStartTime() << "].";
+		}
+		else {
+			LOG(LogLevel::Error) << "Playfield::Add(EventProcessor<Event>*) : Register processor [" << processorType << "] failed." << playfieldControllers.size();
 			throw runtime_error("Playfield::Add(EventProcessor<Event>*) : Register processor failed.");
 		}
 
