@@ -6,6 +6,7 @@
 #include "HitObject.h"
 #include "IoEvents/IoEventProcessor.h"
 #include "InstrumentEvents/InstrumentEventProcessor.h"
+#include "PlayfieldEvents/PlayfieldEventProcessor.h"
 
 
 using namespace Games::Schedulers::Events;
@@ -14,6 +15,7 @@ using namespace Games::Schedulers::Events::Effects;
 using namespace Games::Schedulers::Events::IoEvents;
 using namespace std;
 using namespace Games::Schedulers::Events::InstrumentEvents;
+using namespace Games::Schedulers::Events::PlayfieldEvents;
 
 
 
@@ -132,6 +134,8 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 
 		LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent : this processor is for [" << eventProcessors[i]->GetEvent()->GetTypeName() << "].";
 
+		// TODO: 直接改成 eventProcessor.Process()就好，下面可以全部刪掉
+
 		IoEventProcessorInterface* ioEventProcessors = dynamic_cast<IoEventProcessorInterface*>(eventProcessors[i]);
 		if (ioEventProcessors) {
 			if (ioEventProcessors->GetStartTime() < currentTime) {
@@ -146,6 +150,15 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 			if (instrumentEventProcessor->GetStartTime() < currentTime) {
 				LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent : found instrument event processor [" << instrumentEventProcessor->GetStartTime() << "].";
 				instrumentEventProcessor->ControlInstrument();
+			}
+			continue;
+		}
+
+		PlayfieldEventProcessorInterface* playfieldEventProcessor = dynamic_cast<PlayfieldEventProcessorInterface*>(eventProcessors[i]);
+		if (playfieldEventProcessor) {
+			if (playfieldEventProcessor->GetStartTime() < currentTime) {
+				LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent : found playfield event processor [" << playfieldEventProcessor->GetStartTime() << "].";
+				playfieldEventProcessor->ControlPlayfield();
 			}
 			continue;
 		}
