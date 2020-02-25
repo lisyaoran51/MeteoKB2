@@ -175,7 +175,13 @@ void loop() {
                 struct KeyToOutput* keyToOutput = new struct KeyToOutput();
                 keyToOutput->Key = pressedDownKey;
                 keyToOutput->PressTimeSpan = pressTimeSpan;
-                keyToOutput->Velocity = pow(1.057018041, 102 - pressTimeSpan);// 1.057018041是256的100根，102是因為最小壓下時間只能到2
+                if(false){ // 輕重音不明顯
+                  keyToOutput->Velocity = pow(1.057018041, 102 - pressTimeSpan);// 1.057018041是256的100根，102是因為最小壓下時間只能到2
+                }else if(false){  // 輕重音加強
+                  keyToOutput->Velocity = pow(1.028113827, (102 - pressTimeSpan) * 2);// 1.028113827是256的200根，102是因為最小壓下時間只能到2
+                }else if(true){
+                  keyToOutput->Velocity = pow(1.01865581, (102 - pressTimeSpan) * 3);// 1.01865581是256的300根，102是因為最小壓下時間只能到2
+                }
                 
                 if(keyToOutput->Velocity > 0)
                   keysToOutput.add(keyToOutput);
@@ -225,6 +231,8 @@ void loop() {
   return;
   for(int i = 0; i < keysToOutput.size(); i++){
     Serial.print(keysToOutput.get(i)->Key);
+    Serial.print(":");
+    Serial.print(keysToOutput.get(i)->PressTimeSpan);
     Serial.print(":");
     Serial.println(keysToOutput.get(i)->Velocity);
     delete keysToOutput.get(i);
