@@ -36,6 +36,8 @@ int MeteorEventProcessorMaster::OnKeyDown(pair<MeteorAction, int> action)
 		if (noteControlPointHitObject == nullptr)
 			continue;
 
+		LOG(LogLevel::Debug) << "MeteorEventProcessorMaster::OnKeyDown() : checking hit object [" << (int)noteControlPointHitObject->GetPitch() << "] matching [" << int(action.first) << "].";
+
 		if (!matchPitch(noteControlPointHitObject, action.first))
 			continue;
 
@@ -45,7 +47,7 @@ int MeteorEventProcessorMaster::OnKeyDown(pair<MeteorAction, int> action)
 		if (noteControlPointHitObject->GetHasJudgementResult())
 			continue;
 
-		LOG(LogLevel::Debug) << "MeteorEventProcessorMaster::OnKeyDown() : not judged! " << int(action.first);
+		LOG(LogLevel::Depricated) << "MeteorEventProcessorMaster::OnKeyDown() : not judged! " << int(action.first);
 
 		if (noteControlPointHitObject->TryJudgement() > 0) {
 			if (receivedHitObject != nullptr) {
