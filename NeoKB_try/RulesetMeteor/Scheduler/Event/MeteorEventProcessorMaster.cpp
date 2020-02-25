@@ -36,7 +36,7 @@ int MeteorEventProcessorMaster::OnKeyDown(pair<MeteorAction, int> action)
 		if (noteControlPointHitObject == nullptr)
 			continue;
 
-		LOG(LogLevel::Debug) << "MeteorEventProcessorMaster::OnKeyDown() : checking hit object [" << (int)noteControlPointHitObject->GetPitch() << "] matching [" << int(action.first) << "].";
+		LOG(LogLevel::Debug) << "MeteorEventProcessorMaster::OnKeyDown() : checking hit object [" << (int)pitchBindings[noteControlPointHitObject->GetPitch()] << "] matching [" << int(action.first) << "].";
 
 		if (!matchPitch(noteControlPointHitObject, action.first))
 			continue;
