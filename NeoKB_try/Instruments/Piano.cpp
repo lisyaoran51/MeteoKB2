@@ -280,7 +280,7 @@ int Piano::ChangeSustainType(SustainType sType)
 
 int Piano::ControlSustainPedal(bool down)
 {
-	LOG(LogLevel::Debug) << "Piano::ControlSustainPedal() : make pedal [" << down << "].";
+	LOG(LogLevel::Depricated) << "Piano::ControlSustainPedal() : make pedal [" << down << "].";
 
 	if (sustainType == SustainType::GameControllingSustain) {
 		isPressingMap[PianoAction::SustainPedal] = down;
