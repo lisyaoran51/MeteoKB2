@@ -40,7 +40,7 @@ HitWindow * HitObject::getHitWindow()
 
 int HitObject::AddJudgement(Judgement* judgement)
 {
-	LOG(LogLevel::Debug) << "HitObject::AddJudgement() : add hit judgement.";
+	LOG(LogLevel::Depricated) << "HitObject::AddJudgement() : add hit judgement.";
 
 	hasJudgementResult = judgement->GetResult() >= HitResult::Miss;
 
