@@ -33,12 +33,12 @@ int ExplodeMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper<Explode
 	if (em->GetTimeLeft() > 0 && em->GetTimeLeft() < em->GetLifeTime()) {
 		LOG(LogLevel::Depricated) << "ExplodeMapGenerateAlgorithm::ImplementGenerate() : draw explosion.";
 		isAdded = true;
-		double lightPortion = 0.25;
+		//double lightPortion = 0.25;
 		for (int i = 0; i < height; i++) {
-			if ((double)i / (double)height < lightPortion) {
+			//if ((double)i / (double)height < lightPortion) {
 				// TODO: 要改成最後三顆燈亮就好
 				m->Add(width, height + i, 1);
-			}
+			//}
 
 		}
 	}

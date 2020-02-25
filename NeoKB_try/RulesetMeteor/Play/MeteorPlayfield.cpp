@@ -53,7 +53,7 @@ int MeteorPlayfield::load(FrameworkConfigManager* f, MeteorConfigManager * m)
 	if(f->Get(FrameworkSetting::Width, &pitchCount)){}
 
 	if (!m->Get(MeteorSetting::ExplodeLifeTime, &explosionLifeTime)) {
-		explosionLifeTime = 0.1f;
+		explosionLifeTime = 0.0f;
 	}
 
 
