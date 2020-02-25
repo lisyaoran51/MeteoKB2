@@ -190,6 +190,9 @@ int MeteorPlayfield::OnJudgement(HitObject * hitObject, Judgement * judgement)
 	if (!judgement->GetIsHit())
 		return -1;
 
+	// 因為爆破效果不好，所以不用了
+	return 0;
+
 	ExplodeEffect* effect = new ExplodeEffect(dynamic_cast<HasPitch*>(hitObject)->GetPitch(), 
 											  0,
 											  GetClock()->GetCurrentTime(),
