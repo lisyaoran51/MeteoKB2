@@ -75,7 +75,7 @@ Sm<Event>* MeteorSmPostprocessor::postprocess(Sm<Event>* s)
 				);
 
 			}
-			LOG(LogLevel::Debug) << "MeteorSmPostprocessor::postprocess() : sustainPedalIoEvent: [" << sustainPedalIoEvent->GetTargetStartTime() << "," << sustainPedalIoEvent->GetTargetLifeTime()
+			LOG(LogLevel::Depricated) << "MeteorSmPostprocessor::postprocess() : sustainPedalIoEvent: [" << sustainPedalIoEvent->GetTargetStartTime() << "," << sustainPedalIoEvent->GetTargetLifeTime()
 				<< "," << sustainPedalIoEvent->GetPedalDownLifeTime() << "," << sustainPedalIoEvent->GetRingLifeTime() << "]";
 			
 			lastSustainPedalIoEvent = sustainPedalIoEvent;
