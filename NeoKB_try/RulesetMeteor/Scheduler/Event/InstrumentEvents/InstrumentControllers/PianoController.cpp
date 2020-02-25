@@ -17,7 +17,7 @@ PianoController::PianoController(): InstrumentController<PianoEvent>(), Register
 
 int PianoController::implementControlInstrument(EventProcessor<Event>* e)
 {
-	LOG(LogLevel::Debug) << "PianoController::implementControlInstrument : make pedal [" << dynamic_cast<PianoEvent*>(e->GetEvent())->GetInput().second << "] on piano [" << piano << "].";
+	LOG(LogLevel::Depricated) << "PianoController::implementControlInstrument : make pedal [" << dynamic_cast<PianoEvent*>(e->GetEvent())->GetInput().second << "] on piano [" << piano << "].";
 
 	if (!piano)
 		return -1;
