@@ -200,7 +200,7 @@ int MeteorPlayfield::OnJudgement(HitObject * hitObject, Judgement * judgement)
 	AddDynamic(explosion);
 
 
-	LOG(LogLevel::Debug) << "MeteorPlayfield::OnJudgement() : create explosion.";
+	LOG(LogLevel::Debug) << "MeteorPlayfield::OnJudgement() : create explosion on [" << (int)dynamic_cast<HasPitch*>(hitObject)->GetPitch() << "].";
 
 	// ¶Ç°e¤À¼Æ?
 	return 0;

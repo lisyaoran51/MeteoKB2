@@ -60,7 +60,7 @@ int MeteorEventProcessorMaster::OnKeyDown(pair<MeteorAction, int> action)
 
 	if (receivedHitObject) {
 
-		LOG(LogLevel::Debug) << "MeteorEventProcessorMaster::OnKeyDown() : find a hit object [" << receivedHitObject << "].";
+		LOG(LogLevel::Debug) << "MeteorEventProcessorMaster::OnKeyDown() : find a hit object [" << receivedHitObject << "] on [" << int(action.first) << "].";
 		receivedHitObject->UpdateJudgement(true);
 
 	}
