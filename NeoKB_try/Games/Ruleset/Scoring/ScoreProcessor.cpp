@@ -75,9 +75,13 @@ int ScoreProcessor::addUpJudgementScore(Judgement * judgement)
 		break;
 	case HitResult::Miss:
 		combo->SetValue(0);
+		miss++;
 		break;
 	default:
 		combo->SetValue(combo->GetValue() + 1);
+		if (combo->GetValue() > highestCombo->GetValue()) {
+			highestCombo->SetValue(combo->GetValue());
+		}
 		break;
 	}
 
@@ -86,8 +90,12 @@ int ScoreProcessor::addUpJudgementScore(Judgement * judgement)
 
 	hits++;
 	
-	LOG(LogLevel::Info) << "ScoreProcessor::addUpJudgementScore : add score [" << judgement->GetResultScore() << "], total score [" 
+	LOG(LogLevel::Depricated) << "ScoreProcessor::addUpJudgementScore : add score [" << judgement->GetResultScore() << "], total score [" 
 		<< baseScore << "], song max score [" << maxScore << "].";
+
+	LOG(LogLevel::Info) << "ScoreProcessor::addUpJudgementScore : add score [" << judgement->GetResultScore() << "], score ["
+		<< baseScore << "/" << maxScore << "], hits [" << hits - miss << "/ " << maxHits << "], combo [" 
+		<< combo->GetValue() <<"/" << highestCombo->GetValue() << "]";
 
 	if (rollingMaxBaseScore != 0)
 		accuracy->SetValue(baseScore / rollingMaxBaseScore);
@@ -122,10 +130,12 @@ int ScoreProcessor::reset(bool storeResults)
 	totalScore->SetValue(0);
 	accuracy->SetValue(1);
 	combo->SetValue(0);
+	highestCombo->SetValue(0);
 	//Rank.Value = ScoreRank.X;
-	//HighestCombo.Value = 0;
+
 
 	hits = 0;
+	miss = 0;
 	baseScore = 0;
 	rollingMaxBaseScore = 0;
 

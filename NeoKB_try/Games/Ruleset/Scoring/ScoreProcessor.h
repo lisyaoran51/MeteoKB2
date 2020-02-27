@@ -58,6 +58,8 @@ namespace Scoring {
 
 		int hits = 0;
 
+		int miss = 0;
+
 		int maxHits = 9999;
 
 		double baseScore = 0;
@@ -71,6 +73,8 @@ namespace Scoring {
 		Bindable<double>* accuracy = new Bindable<double>(1);
 
 		Bindable<int>* combo = new Bindable<int>(0);
+
+		Bindable<int>* highestCombo = new Bindable<int>(0);
 
 		ActionList<int, Judgement*> onNewJudgement;
 
