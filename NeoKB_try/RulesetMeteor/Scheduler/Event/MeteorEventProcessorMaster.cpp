@@ -53,6 +53,7 @@ int MeteorEventProcessorMaster::OnKeyDown(pair<MeteorAction, int> action)
 			if (receivedHitObject != nullptr) {
 
 				// 最晚的最先被打中，早的hit object就直接跳過
+				// pedal事件先全部跳過，以後要檢查視不適game control pedal，是的話再跳過，game control pedal現在存在piano和meteo piano裡
 				if (noteControlPointHitObject->TryJudgement() > receivedHitObject->TryJudgement())
 					continue;
 			}

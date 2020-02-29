@@ -1535,3 +1535,10 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 2/26
 	琴鍵敏感度改成256開三百根，用按壓秒數乘3，再用底數去次方
 	爆破的效果太突兀，直接拿掉。
+	
+2/29
+	等錄完影要開始寫mode，簡單版、自動踏板...等
+	自動踏板要想辦法讓計分不會亂掉
+	
+	meteor score processor現在會把pedal和octave事件扣掉，是暫時的寫法
+	之後要先檢查是不是game control pedal，是的話再扣掉pedal hit object

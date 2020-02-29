@@ -39,7 +39,12 @@ int PianoController::implementControlInstrument(EventProcessor<Event>* e)
 	}
 	else if (pianoEvent->GetInput().first == InputKey::LowerOctave) {
 
+		piano->MoveOctave(PianoPitchMovement::Lower);
 
+	}
+	else if (pianoEvent->GetInput().first == InputKey::RaiseOctave) {
+
+		piano->MoveOctave(PianoPitchMovement::Raise);
 
 	}
 

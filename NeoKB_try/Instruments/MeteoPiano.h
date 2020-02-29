@@ -31,7 +31,14 @@ namespace Instruments {
 
 		int SetGameControllingPitchState(bool value);
 
+		/// <summary>
+		///	MeteoPianoPitchState用這個改，piano不知道有哪幾種State，只能控制現在要往上移還是往下移
+		/// </summary>
+		int MoveOctave(PianoPitchMovement s);
+
 		int ChangePitchState(MeteoPianoPitchState s);
+
+		
 
 		virtual int OnButtonDown(PianoAction action);
 

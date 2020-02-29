@@ -36,6 +36,12 @@ namespace Instruments {
 
 	};
 
+	enum class PianoPitchMovement {
+		None,
+		Raise,
+		Lower
+	};
+
 
 	class Piano : public TInstrument<PianoAction> {
 
@@ -61,7 +67,7 @@ namespace Instruments {
 
 		int ControlSustainPedal(bool down);
 
-		int ControlOctave(bool raise);
+		virtual int MoveOctave(PianoPitchMovement m) = 0;
 
 	protected:
 

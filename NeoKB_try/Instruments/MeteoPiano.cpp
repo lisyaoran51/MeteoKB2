@@ -20,6 +20,41 @@ int MeteoPiano::SetGameControllingPitchState(bool value)
 	return 0;
 }
 
+int MeteoPiano::MoveOctave(PianoPitchMovement m)
+{
+
+	switch (m) {
+	case PianoPitchMovement::None:
+		break;
+	case PianoPitchMovement::Lower:
+		switch (state) {
+		case MeteoPianoPitchState::Lowered:
+			break;
+		case MeteoPianoPitchState::None:
+			state = MeteoPianoPitchState::Lowered;
+			break;
+		case MeteoPianoPitchState::Raised:
+			state = MeteoPianoPitchState::None;
+			break;
+		}
+		break;
+	case PianoPitchMovement::Raise:
+		switch (state) {
+		case MeteoPianoPitchState::Lowered:
+			state = MeteoPianoPitchState::None;
+			break;
+		case MeteoPianoPitchState::None:
+			state = MeteoPianoPitchState::Raised;
+			break;
+		case MeteoPianoPitchState::Raised:
+			break;
+		}
+		break;
+	}
+
+	return 0;
+}
+
 int MeteoPiano::ChangePitchState(MeteoPianoPitchState s)
 {
 	state = s;
@@ -31,28 +66,10 @@ int MeteoPiano::OnButtonDown(PianoAction action)
 	LOG(LogLevel::Debug) << "MeteoPiano::OnButtonDown() : get button " << (int)action << ".";
 	if (!isGameControllingPitchState) {
 		if (action == PianoAction::LowerOctave) {
-			switch (state) {
-			case MeteoPianoPitchState::Lowered:
-				break;
-			case MeteoPianoPitchState::None:
-				state = MeteoPianoPitchState::Lowered;
-				break;
-			case MeteoPianoPitchState::Raised:
-				state = MeteoPianoPitchState::None;
-				break;
-			}
+			MoveOctave(PianoPitchMovement::Lower);
 		}
 		else if (action == PianoAction::RaiseOctave) {
-			switch (state) {
-			case MeteoPianoPitchState::Lowered:
-				state = MeteoPianoPitchState::None;
-				break;
-			case MeteoPianoPitchState::None:
-				state = MeteoPianoPitchState::Raised;
-				break;
-			case MeteoPianoPitchState::Raised:
-				break;
-			}
+			MoveOctave(PianoPitchMovement::Raise);
 		}
 	}
 	return Piano::OnButtonDown(action);
