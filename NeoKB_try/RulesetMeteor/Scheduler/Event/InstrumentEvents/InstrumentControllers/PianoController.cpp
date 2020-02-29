@@ -40,12 +40,14 @@ int PianoController::implementControlInstrument(EventProcessor<Event>* e)
 	else if (pianoEvent->GetInput().first == InputKey::LowerOctave) {
 
 		piano->MoveOctave(PianoPitchMovement::Lower);
+		LOG(LogLevel::Debug) << "PianoController::implementControlInstrument : lower octave.";
+
 
 	}
 	else if (pianoEvent->GetInput().first == InputKey::RaiseOctave) {
 
 		piano->MoveOctave(PianoPitchMovement::Raise);
-
+		LOG(LogLevel::Debug) << "PianoController::implementControlInstrument : raise octave.";
 	}
 
 	return 0;
