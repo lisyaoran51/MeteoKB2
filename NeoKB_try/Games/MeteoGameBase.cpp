@@ -66,6 +66,7 @@ BindablePointer<WorkingSm*>* MeteoGameBase::GetWorkingSm()
 int MeteoGameBase::SetHost(GameHost * host)
 {
 	localConfig = new MeteoConfigManager();
+	localConfig->Initialize();
 	return Base::SetHost(host);
 }
 
