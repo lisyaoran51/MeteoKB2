@@ -40,6 +40,8 @@ int EventProcessorMaster::load(FrameworkConfigManager * f)
 	if (!f->Get(FrameworkSetting::PeriodMapInterval, &periodMapInterval))
 		periodMapInterval = 3;
 
+	visibleTimeRange = periodMapInterval;
+
 	// TODO: visible time length也應該要去framework config manager拿
 	eventProcessorPeriods = new PeriodMap<EventProcessor<Event>*>(0, periodMapInterval, [=](EventProcessor<Event>* ep)->pair<float, float> {
 
