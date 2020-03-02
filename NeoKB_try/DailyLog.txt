@@ -1542,3 +1542,6 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	
 	meteor score processor現在會把pedal和octave事件扣掉，是暫時的寫法
 	之後要先檢查是不是game control pedal，是的話再扣掉pedal hit object
+	
+	MeteoPianoPitchState和PianoPitchState重複了，要再修
+	後來把PianoPitchState改成PianoPitchMovement，就滿合理
