@@ -14,7 +14,7 @@ int MeteoConfigManager::InitializeDefault()
 
 	Set(MeteoSetting::Ruleset, 0);
 
-	Set(MeteoSetting::AudioOffset, 0.4f);
+	Set(MeteoSetting::AudioOffset, 0.5f);
 
 	return 0;
 }
