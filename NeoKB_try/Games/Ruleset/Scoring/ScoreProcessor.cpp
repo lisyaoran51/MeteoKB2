@@ -2,11 +2,13 @@
 
 #include "../RulesetExecutor.h"
 #include "../../../Util/Log.h"
+#include <iomanip>
 
 
 using namespace Games::Rulesets::Scoring;
 using namespace Games::Rulesets;
 using namespace Util;
+using namespace std;
 
 
 Bindable<double>* ScoreProcessor::GetTotalScore()
@@ -95,7 +97,7 @@ int ScoreProcessor::addUpJudgementScore(Judgement * judgement)
 
 	LOG(LogLevel::Info) << "ScoreProcessor::addUpJudgementScore : add score [" << judgement->GetResultScore() << "], score ["
 		<< baseScore << "/" << maxScore << "], hits [" << hits - miss << "/ " << maxHits << "], combo [" 
-		<< combo->GetValue() <<"/" << highestCombo->GetValue() << "]";
+		<< combo->GetValue() <<"/" << highestCombo->GetValue() << "], [" << fixed << setprecision(1) << (float)baseScore / (float)maxScore * 100.f << "%]";
 
 	if (rollingMaxBaseScore != 0)
 		accuracy->SetValue(baseScore / rollingMaxBaseScore);
