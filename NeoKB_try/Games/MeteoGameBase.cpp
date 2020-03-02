@@ -35,6 +35,8 @@ int MeteoGameBase::load()
 
 	GetDependencies()->Cache<MeteoGameBase>(this, "MeteoGameBase");
 
+	GetDependencies()->Cache<MeteoConfigManager>(localConfig);
+
 	GetDependencies()->Cache<RulesetStore>(rulesetStore = new RulesetStore(bind(&DatabaseContextFactory::GetContext, dbContextFactory)));
 
 	GetDependencies()->Cache<FileStore>(fileStore = new FileStore(bind(&DatabaseContextFactory::GetContext, dbContextFactory), gameHost->GetStorage()));
@@ -59,6 +61,12 @@ MeteoGameBase::MeteoGameBase(): RegisterType("MeteoGameBase")
 BindablePointer<WorkingSm*>* MeteoGameBase::GetWorkingSm()
 {
 	return &workingSm;
+}
+
+int MeteoGameBase::SetHost(GameHost * host)
+{
+	localConfig = new MeteoConfigManager();
+	return Base::SetHost(host);
 }
 
 int MeteoGameBase::update()

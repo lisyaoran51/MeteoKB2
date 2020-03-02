@@ -11,6 +11,7 @@
 #include "../../../Framework/Timing/TimeController.h"
 #include "../../../Instruments/Instrument.h"
 #include "Hud/HudDisplay.h"
+#include "../../Configurations/MeteoConfigManager.h"
 
 
 
@@ -23,6 +24,7 @@ using namespace Games::Scenes;
 using namespace Framework::Timing;
 using namespace Instruments;
 using namespace Games::Scenes::Play::Hud;
+using namespace Games::Configurations;
 
 
 
@@ -62,7 +64,7 @@ namespace Play {
 		/// </summary>
 		int load();
 		
-		int load(FrameworkConfigManager* f, Instrument* i);
+		int load(MeteoConfigManager* m, Instrument* i);
 
 	public:
 
@@ -71,6 +73,8 @@ namespace Play {
 		~Player();
 
 	protected:
+
+		float audioOffset = 0;
 
 		int onCompletion();
 

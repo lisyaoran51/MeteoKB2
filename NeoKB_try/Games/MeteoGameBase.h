@@ -36,7 +36,7 @@ namespace Games {
 
 		BindablePointer<WorkingSm*>* GetWorkingSm();
 
-		
+		virtual int SetHost(GameHost* host);
 
 	protected:
 

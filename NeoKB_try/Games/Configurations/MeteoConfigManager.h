@@ -17,6 +17,10 @@ namespace Configurations{
 
 	class MeteoConfigManager : public ConfigManager<MeteoSetting> {
 
+	public:
+
+		MeteoConfigManager();
+
 	protected:
 
 		virtual int InitializeDefault();
@@ -29,6 +33,7 @@ namespace Configurations{
 
 		Ruleset,
 		Username,
+		AudioOffset,
 
 	};
 

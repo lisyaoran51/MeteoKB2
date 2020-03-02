@@ -17,18 +17,18 @@ using namespace std;
 
 int Player::load()
 {
-	FrameworkConfigManager * f = GetCache<FrameworkConfigManager>("FrameworkConfigManager");
-	if (!f)
-		throw runtime_error("Player::load() : FrameworkConfigManager not found in cache.");
+	MeteoConfigManager * m = GetCache<MeteoConfigManager>("MeteoConfigManager");
+	if (!m)
+		throw runtime_error("Player::load() : MeteoConfigManager not found in cache.");
 
 	Instrument * i = GetCache<Instrument>("Instrument");
-	if (!f)
+	if (!i)
 		throw runtime_error("Player::load() : Instrument not found in cache.");
 
-	return load(f, i);
+	return load(m, i);
 }
 
-int Player::load(FrameworkConfigManager* f, Instrument* instru)
+int Player::load(MeteoConfigManager* m, Instrument* instru)
 {
 	LOG(LogLevel::Info) << "Player::load : start loading the player and reading the sm and ruleset from working sm.";
 
@@ -62,6 +62,11 @@ int Player::load(FrameworkConfigManager* f, Instrument* instru)
 	decoupledClock->SetIsCoupled(false);
 
 	offsetClock = new OffsetFramedClock(decoupledClock);
+
+	if (m->Get(MeteoSetting::AudioOffset, &audioOffset)) {
+		offsetClock->SetOffset(audioOffset);
+	}
+
 
 	// TODO: 把config裡面的offset和offset clock的offset bind在一起，讓config可以調整offset
 
