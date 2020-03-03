@@ -1545,3 +1545,25 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	
 	MeteoPianoPitchState和PianoPitchState重複了，要再修
 	後來把PianoPitchState改成PianoPitchMovement，就滿合理
+	
+3/2
+	每次都要先 sudo modprobe i2c-dev
+	
+	visible time range應該是在meteor playfield裡面的東西，不應該擺在event processor master裡面
+	meteor event processor master應該要把period map重新建立一次，把原本的山掉，然後把visible time range加進去
+	
+	
+3/4
+	meteo game base裡面的workingSm.AddOnValueChanged 常常在遊戲開始的時候一要讀音樂就crash
+	是在working sm裡面的get track理，getPathForFile那一行會出問題
+	當機的地方是在 track = new RateSettableBassTrack(temp);
+	https://bbs.csdn.net/topics/390963902
+	
+	應該就是這行出錯
+	volume->AddOnValueChanged(this, bind(&AdjustableAudioComponent::OnStateChange, this), "AdjustableAudioComponent::OnStateChange");
+	
+	這個bug要解的話要去改bindable，整個要重compile，今天沒空先不弄
+	
+	耳機有噪音 要加audio_pwm_mode=2
+	https://raspberrypi.stackexchange.com/questions/64450/white-noise-through-audio-jack
+	問題還是沒解決
