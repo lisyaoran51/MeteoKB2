@@ -70,6 +70,13 @@ Track * WorkingSm::GetTrack()
 	string path = getPathForFile(smInfo->metadata->AudioFile);
 	char * temp = new char[path.length()];
 	LOG(LogLevel::Debug) << "WorkingSm::GetTrack() : new a char array.";
+	LOG(LogLevel::Debug) << "WorkingSm::GetTrack() : making delay for a bug...";
+	LOG(LogLevel::Debug) << "WorkingSm::GetTrack() : making delay for a bug...";
+	LOG(LogLevel::Debug) << "WorkingSm::GetTrack() : making delay for a bug...";
+	LOG(LogLevel::Debug) << "WorkingSm::GetTrack() : making delay for a bug...";
+	LOG(LogLevel::Debug) << "WorkingSm::GetTrack() : making delay for a bug...";
+	LOG(LogLevel::Debug) << "WorkingSm::GetTrack() : making delay for a bug...";
+	LOG(LogLevel::Debug) << "WorkingSm::GetTrack() : making delay for a bug...";
 	strcpy(temp, path.c_str());
 	LOG(LogLevel::Debug) << "WorkingSm::GetTrack() : get file path = [" << temp << "].";
 	track = new RateSettableBassTrack(temp);
