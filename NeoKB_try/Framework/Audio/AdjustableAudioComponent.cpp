@@ -6,6 +6,11 @@ using namespace Framework::Audio;
 AdjustableAudioComponent::AdjustableAudioComponent()
 {
 	LOG(LogLevel::Debug) << "AdjustableAudioComponent::AdjustableAudioComponent() : constructor start.";
+	LOG(LogLevel::Debug) << "AdjustableAudioComponent::AdjustableAudioComponent() : making delay for a bug...";
+	LOG(LogLevel::Debug) << "AdjustableAudioComponent::AdjustableAudioComponent() : making delay for a bug...";
+	LOG(LogLevel::Debug) << "AdjustableAudioComponent::AdjustableAudioComponent() : making delay for a bug...";
+	LOG(LogLevel::Debug) << "AdjustableAudioComponent::AdjustableAudioComponent() : making delay for a bug...";
+	LOG(LogLevel::Debug) << "AdjustableAudioComponent::AdjustableAudioComponent() : making delay for a bug...";
 	volume->AddOnValueChanged(this, bind(&AdjustableAudioComponent::OnStateChange, this), "AdjustableAudioComponent::OnStateChange");
 	LOG(LogLevel::Debug) << "AdjustableAudioComponent::AdjustableAudioComponent() : constructor done.";
 }
