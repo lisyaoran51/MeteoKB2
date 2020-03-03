@@ -6,6 +6,7 @@ using namespace Framework::Audio;
 AdjustableAudioComponent::AdjustableAudioComponent()
 {
 	volume->AddOnValueChanged(this, bind(&AdjustableAudioComponent::OnStateChange, this), "AdjustableAudioComponent::OnStateChange");
+	LOG(LogLevel::Debug) << "AdjustableAudioComponent::AdjustableAudioComponent() : constructor done.";
 }
 
 int AdjustableAudioComponent::AddAdjustmentDependency(AdjustableAudioComponent * adjustableAudioComponent)
