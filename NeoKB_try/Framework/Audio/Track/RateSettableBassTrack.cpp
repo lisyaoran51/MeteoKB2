@@ -27,6 +27,8 @@ RateSettableBassTrack::RateSettableBassTrack(char * fileName): BassTrack()
 
 		return 0;
 	}, "Lambda_RateSettableBassTrack::CreateStream");
+
+	LOG(LogLevel::Debug) << "RateSettableBassTrack::RateSettableBassTrack() : constructor done.";
 }
 
 int RateSettableBassTrack::SetRate(double r)
