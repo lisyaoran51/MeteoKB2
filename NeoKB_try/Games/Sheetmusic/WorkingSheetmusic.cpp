@@ -69,11 +69,11 @@ Track * WorkingSm::GetTrack()
 	//ifstream* stream = new ifstream(getPathForFile(smInfo->metadata->AudioFile));
 	string path = getPathForFile(smInfo->metadata->AudioFile);
 	char * temp = new char[path.length()];
-	LOG(LogLevel::Fine) << "WorkingSm::GetTrack() : new a char array.";
+	LOG(LogLevel::Debug) << "WorkingSm::GetTrack() : new a char array.";
 	strcpy(temp, path.c_str());
-	LOG(LogLevel::Fine) << "WorkingSm::GetTrack() : get file path = [" << temp << "].";
+	LOG(LogLevel::Debug) << "WorkingSm::GetTrack() : get file path = [" << temp << "].";
 	track = new RateSettableBassTrack(temp);
-	LOG(LogLevel::Fine) << "WorkingSm::GetTrack() : end].";
+	LOG(LogLevel::Debug) << "WorkingSm::GetTrack() : end].";
 	return track;
 }
 
@@ -98,7 +98,7 @@ Sm<Event>* WorkingSm::createSm()
 string WorkingSm::getPathForFile(string fileName)
 {
 	string s = smInfo->fileInfo->Path + "/"s + fileName;
-	LOG(LogLevel::Debug) << "string WorkingSm::getPathForFile(string) : creating Sm from path [" << s << "] ...";
+	LOG(LogLevel::Finer) << "string WorkingSm::getPathForFile(string) : creating Sm from path [" << s << "] ...";
 	return s;
 }
 
