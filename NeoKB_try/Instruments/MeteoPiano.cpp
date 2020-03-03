@@ -80,7 +80,7 @@ int MeteoPiano::OnKnobTurn(pair<PianoAction, int> action)
 	return 0;
 }
 
-map<PianoAction, SampleChannel*>* MeteoPiano::getSamples()
+map<PianoAction, SampleChannel*>* MeteoPiano::getSamples(int variant)
 {
 	switch (state) {
 	

@@ -47,7 +47,7 @@ namespace Instruments {
 
 	protected:
 
-		virtual map<PianoAction, SampleChannel*>* getSamples();
+		virtual map<PianoAction, SampleChannel*>* getSamples(int variant = 0);
 
 
 		virtual int loadAndMapSamples();
