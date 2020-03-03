@@ -11,6 +11,7 @@ using namespace std;
 
 RateSettableBassTrack::RateSettableBassTrack(char * fileName): BassTrack()
 {
+
 	unique_lock<mutex> uLock(pendingActionMutex);
 	pendingActions.Add(this, [=]() {
 
