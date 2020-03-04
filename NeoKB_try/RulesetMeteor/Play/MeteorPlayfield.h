@@ -10,6 +10,7 @@
 #include "../../Instruments/MeteoPiano.h"
 #include "../../Games/Scheduler/Event/Effect/Algorithm/MapPitchShifter.h"
 #include "../Scheduler/Event/PlayfieldEvents/PlayfieldControllers/OctaveShifter.h"
+#include "../../RulesetMeteor/Scheduler/Event/MeteorEventProcessorMaster.h"
 
 
 
@@ -23,6 +24,7 @@ using namespace Framework::Input::KeyBindings;
 using namespace Instruments;
 using namespace Games::Schedulers::Events::Effects::Algorithms;
 using namespace Meteor::Schedulers::Events::PlayfieldEvents::PlayfieldControllers;
+using namespace Meteor::Schedulers::Events;
 
 
 
