@@ -311,57 +311,57 @@ int MeteorEventProcessorMaster::loadAndMapPitches()
 	/* ¤É¤K«× */
 #pragma region RaisedPitchState
 	 
-	raisedPitchBindings[Pitch::C		] =	 MeteorAction::VK24_L_C1 ;
-	raisedPitchBindings[Pitch::Db		] =	 MeteorAction::VK24_L_bD1;
-	raisedPitchBindings[Pitch::D		] =	 MeteorAction::VK24_L_D1 ;
-	raisedPitchBindings[Pitch::Eb		] =	 MeteorAction::VK24_L_bE1;
-	raisedPitchBindings[Pitch::E		] =	 MeteorAction::VK24_L_E1 ;
-	raisedPitchBindings[Pitch::F		] =	 MeteorAction::VK24_L_F1 ;
-	raisedPitchBindings[Pitch::Gb		] =	 MeteorAction::VK24_L_bG1;
-	raisedPitchBindings[Pitch::G		] =	 MeteorAction::VK24_L_G1 ;
-	raisedPitchBindings[Pitch::Ab		] =	 MeteorAction::VK24_L_bA1;
-	raisedPitchBindings[Pitch::A		] =	 MeteorAction::VK24_L_A1 ;
-	raisedPitchBindings[Pitch::Bb		] =	 MeteorAction::VK24_L_bB1;
-	raisedPitchBindings[Pitch::B		] =	 MeteorAction::VK24_L_B1 ;
+	raisedPitchBindings[Pitch::c		] =	 MeteorAction::VK24_L_C1 ;
+	raisedPitchBindings[Pitch::db		] =	 MeteorAction::VK24_L_bD1;
+	raisedPitchBindings[Pitch::d		] =	 MeteorAction::VK24_L_D1 ;
+	raisedPitchBindings[Pitch::eb		] =	 MeteorAction::VK24_L_bE1;
+	raisedPitchBindings[Pitch::e		] =	 MeteorAction::VK24_L_E1 ;
+	raisedPitchBindings[Pitch::f		] =	 MeteorAction::VK24_L_F1 ;
+	raisedPitchBindings[Pitch::gb		] =	 MeteorAction::VK24_L_bG1;
+	raisedPitchBindings[Pitch::g		] =	 MeteorAction::VK24_L_G1 ;
+	raisedPitchBindings[Pitch::ab		] =	 MeteorAction::VK24_L_bA1;
+	raisedPitchBindings[Pitch::a		] =	 MeteorAction::VK24_L_A1 ;
+	raisedPitchBindings[Pitch::bb		] =	 MeteorAction::VK24_L_bB1;
+	raisedPitchBindings[Pitch::b		] =	 MeteorAction::VK24_L_B1 ;
 
-	raisedPitchBindings[Pitch::c		] =	 MeteorAction::VK24_L_C2 ;
-	raisedPitchBindings[Pitch::db		] =	 MeteorAction::VK24_L_bD2;
-	raisedPitchBindings[Pitch::d		] =	 MeteorAction::VK24_L_D2 ;
-	raisedPitchBindings[Pitch::eb		] =	 MeteorAction::VK24_L_bE2;
-	raisedPitchBindings[Pitch::e		] =	 MeteorAction::VK24_L_E2 ;
-	raisedPitchBindings[Pitch::f		] =	 MeteorAction::VK24_L_F2 ;
-	raisedPitchBindings[Pitch::gb		] =	 MeteorAction::VK24_L_bG2;
-	raisedPitchBindings[Pitch::g		] =	 MeteorAction::VK24_L_G2 ;
-	raisedPitchBindings[Pitch::ab		] =	 MeteorAction::VK24_L_bA2;
-	raisedPitchBindings[Pitch::a		] =	 MeteorAction::VK24_L_A2 ;
-	raisedPitchBindings[Pitch::bb		] =	 MeteorAction::VK24_L_bB2;
-	raisedPitchBindings[Pitch::b		] =	 MeteorAction::VK24_L_B2 ;
+	raisedPitchBindings[Pitch::c1		] =	 MeteorAction::VK24_L_C2 ;
+	raisedPitchBindings[Pitch::d1b		] =	 MeteorAction::VK24_L_bD2;
+	raisedPitchBindings[Pitch::d1		] =	 MeteorAction::VK24_L_D2 ;
+	raisedPitchBindings[Pitch::e1b		] =	 MeteorAction::VK24_L_bE2;
+	raisedPitchBindings[Pitch::e1		] =	 MeteorAction::VK24_L_E2 ;
+	raisedPitchBindings[Pitch::f1		] =	 MeteorAction::VK24_L_F2 ;
+	raisedPitchBindings[Pitch::g1b		] =	 MeteorAction::VK24_L_bG2;
+	raisedPitchBindings[Pitch::g1		] =	 MeteorAction::VK24_L_G2 ;
+	raisedPitchBindings[Pitch::a1b		] =	 MeteorAction::VK24_L_bA2;
+	raisedPitchBindings[Pitch::a1		] =	 MeteorAction::VK24_L_A2 ;
+	raisedPitchBindings[Pitch::b1b		] =	 MeteorAction::VK24_L_bB2;
+	raisedPitchBindings[Pitch::b1		] =	 MeteorAction::VK24_L_B2 ;
 
-	raisedPitchBindings[Pitch::c1		] =	 MeteorAction::VK24_R_C1 ;
-	raisedPitchBindings[Pitch::d1b		] =	 MeteorAction::VK24_R_bD1;
-	raisedPitchBindings[Pitch::d1		] =	 MeteorAction::VK24_R_D1 ;
-	raisedPitchBindings[Pitch::e1b		] =	 MeteorAction::VK24_R_bE1;
-	raisedPitchBindings[Pitch::e1		] =	 MeteorAction::VK24_R_E1 ;
-	raisedPitchBindings[Pitch::f1		] =	 MeteorAction::VK24_R_F1 ;
-	raisedPitchBindings[Pitch::g1b		] =	 MeteorAction::VK24_R_bG1;
-	raisedPitchBindings[Pitch::g1		] =	 MeteorAction::VK24_R_G1 ;
-	raisedPitchBindings[Pitch::a1b		] =	 MeteorAction::VK24_R_bA1;
-	raisedPitchBindings[Pitch::a1		] =	 MeteorAction::VK24_R_A1 ;
-	raisedPitchBindings[Pitch::b1b		] =	 MeteorAction::VK24_R_bB1;
-	raisedPitchBindings[Pitch::b1		] =	 MeteorAction::VK24_R_B1 ; 
+	raisedPitchBindings[Pitch::c2	    ] =	 MeteorAction::VK24_R_C1 ;
+	raisedPitchBindings[Pitch::d2b		] =	 MeteorAction::VK24_R_bD1;
+	raisedPitchBindings[Pitch::d2	    ] =	 MeteorAction::VK24_R_D1 ;
+	raisedPitchBindings[Pitch::e2b		] =	 MeteorAction::VK24_R_bE1;
+	raisedPitchBindings[Pitch::e2	    ] =	 MeteorAction::VK24_R_E1 ;
+	raisedPitchBindings[Pitch::f2	    ] =	 MeteorAction::VK24_R_F1 ;
+	raisedPitchBindings[Pitch::g2b		] =	 MeteorAction::VK24_R_bG1;
+	raisedPitchBindings[Pitch::g2	    ] =	 MeteorAction::VK24_R_G1 ;
+	raisedPitchBindings[Pitch::a2b		] =	 MeteorAction::VK24_R_bA1;
+	raisedPitchBindings[Pitch::a2	    ] =	 MeteorAction::VK24_R_A1 ;
+	raisedPitchBindings[Pitch::b2b		] =	 MeteorAction::VK24_R_bB1;
+	raisedPitchBindings[Pitch::b2	    ] =	 MeteorAction::VK24_R_B1 ; 
 
-	raisedPitchBindings[Pitch::c2	    ] = MeteorAction::VK24_R_C2 ;
-	raisedPitchBindings[Pitch::d2b		] = MeteorAction::VK24_R_bD2;
-	raisedPitchBindings[Pitch::d2	    ] = MeteorAction::VK24_R_D2 ;
-	raisedPitchBindings[Pitch::e2b		] = MeteorAction::VK24_R_bE2;
-	raisedPitchBindings[Pitch::e2	    ] = MeteorAction::VK24_R_E2 ;
-	raisedPitchBindings[Pitch::f2	    ] = MeteorAction::VK24_R_F2 ;
-	raisedPitchBindings[Pitch::g2b		] = MeteorAction::VK24_R_bG2;
-	raisedPitchBindings[Pitch::g2	    ] = MeteorAction::VK24_R_G2 ;
-	raisedPitchBindings[Pitch::a2b		] = MeteorAction::VK24_R_bA2;
-	raisedPitchBindings[Pitch::a2	    ] = MeteorAction::VK24_R_A2 ;
-	raisedPitchBindings[Pitch::b2b		] = MeteorAction::VK24_R_bB2;
-	raisedPitchBindings[Pitch::b2	    ] = MeteorAction::VK24_R_B2 ;
+	raisedPitchBindings[Pitch::c3	    ] = MeteorAction::VK24_R_C2 ;
+	raisedPitchBindings[Pitch::d3b		] = MeteorAction::VK24_R_bD2;
+	raisedPitchBindings[Pitch::d3	    ] = MeteorAction::VK24_R_D2 ;
+	raisedPitchBindings[Pitch::e3b		] = MeteorAction::VK24_R_bE2;
+	raisedPitchBindings[Pitch::e3	    ] = MeteorAction::VK24_R_E2 ;
+	raisedPitchBindings[Pitch::f3	    ] = MeteorAction::VK24_R_F2 ;
+	raisedPitchBindings[Pitch::g3b		] = MeteorAction::VK24_R_bG2;
+	raisedPitchBindings[Pitch::g3	    ] = MeteorAction::VK24_R_G2 ;
+	raisedPitchBindings[Pitch::a3b		] = MeteorAction::VK24_R_bA2;
+	raisedPitchBindings[Pitch::a3	    ] = MeteorAction::VK24_R_A2 ;
+	raisedPitchBindings[Pitch::b3b		] = MeteorAction::VK24_R_bB2;
+	raisedPitchBindings[Pitch::b3	    ] = MeteorAction::VK24_R_B2 ;
 
 #pragma endregion
 

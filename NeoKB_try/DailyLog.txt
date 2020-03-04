@@ -1571,3 +1571,5 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 3/5
 	在升降key的時候，score processor沒辦法正確判定，因為score processor是在event processor master裡面
 	Event processor master裡面的pitch state沒有人去控制，現在只有playfield的pitch state有人控制，playfield和event processor master是兩個不同的東西
+
+	錄音的時候gain在-8.27，shure麥克風用0db
