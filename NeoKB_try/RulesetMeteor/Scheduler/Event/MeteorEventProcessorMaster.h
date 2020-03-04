@@ -21,8 +21,10 @@ namespace Events{
 	class MeteorEventProcessorMaster : public TEventProcessorMaster<MeteorAction>{
 
 	public:
-
+		
 		MeteorEventProcessorMaster();
+
+		int ChangePitchState(MeteoPianoPitchState pState);
 
 		virtual int OnKeyDown(pair<MeteorAction, int> action);
 

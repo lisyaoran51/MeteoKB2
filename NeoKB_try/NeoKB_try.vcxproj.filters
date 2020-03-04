@@ -1900,9 +1900,6 @@
     <ClInclude Include="Games\Ruleset\Scoring\ScoreProcessor.h">
       <Filter>標頭檔\Games\Ruleset\Scoring</Filter>
     </ClInclude>
-    <ClInclude Include="RulesetMeteor\Ruleset\Scoring\MeteorScoreProcessor.h">
-      <Filter>標頭檔\RulesetMeteor\Ruleset\Scoring</Filter>
-    </ClInclude>
     <ClInclude Include="RulesetMeteor\Ruleset\Judgements\MeteorHitWindow.h">
       <Filter>標頭檔\RulesetMeteor\Ruleset\Judgements</Filter>
     </ClInclude>
@@ -2091,6 +2088,9 @@
     </ClInclude>
     <ClInclude Include="Games\Scheduler\Event\ControlPoints\OctaveAutoControlPoint.h">
       <Filter>標頭檔\Games\Scheduler\Events\ControlPoints</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Ruleset\Scoring\MeteorScoreProcessor.h">
+      <Filter>標頭檔\RulesetMeteor\Ruleset\Scoring</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

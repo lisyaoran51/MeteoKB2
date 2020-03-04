@@ -18,6 +18,12 @@ MeteorEventProcessorMaster::MeteorEventProcessorMaster() : RegisterType("MeteorE
 {
 }
 
+int MeteorEventProcessorMaster::ChangePitchState(MeteoPianoPitchState pState)
+{
+	pitchState = pState;
+	return 0;
+}
+
 int MeteorEventProcessorMaster::OnKeyDown(pair<MeteorAction, int> action)
 {
 	LOG(LogLevel::Depricated) << "MeteorEventProcessorMaster::OnKeyDown() : get input." << int(action.first);

@@ -68,6 +68,8 @@ namespace Play{
 
 	protected:
 
+		MeteorEventProcessorMaster* meteorEventProcessorMaster = nullptr;
+
 		Pitch startPitch;
 
 		int pitchCount;

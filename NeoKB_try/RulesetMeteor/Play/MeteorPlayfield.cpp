@@ -46,6 +46,12 @@ int MeteorPlayfield::load()
 
 int MeteorPlayfield::load(FrameworkConfigManager* f, MeteorConfigManager * m)
 {
+	meteorEventProcessorMaster = dynamic_cast<MeteorEventProcessorMaster*>(eventProcessorMaster);
+
+	if (meteorEventProcessorMaster == nullptr) {
+		throw runtime_error("MeteorPlayfield::load() : meteorEventProcessorMaster is null.");
+	}
+
 	isGameControllingPitchState = false; // 暫時先這樣，Debug用
 	
 
@@ -222,14 +228,17 @@ int MeteorPlayfield::ChangePitchState(MeteoPianoPitchState s)
 
 	if (s == MeteoPianoPitchState::Lowered) {
 		pitchState = MeteoPianoPitchState::Lowered;
+		meteorEventProcessorMaster->ChangePitchState(MeteoPianoPitchState::Lowered);
 		mapPitchShifter->SetSeekPitch(Pitch::C1);
 	}
 	else if (s == MeteoPianoPitchState::None) {
 		pitchState = MeteoPianoPitchState::None;
+		meteorEventProcessorMaster->ChangePitchState(MeteoPianoPitchState::None);
 		mapPitchShifter->SetSeekPitch(Pitch::C);
 	}
 	else if (s == MeteoPianoPitchState::Raised) {
 		pitchState = MeteoPianoPitchState::Raised;
+		meteorEventProcessorMaster->ChangePitchState(MeteoPianoPitchState::Raised);
 		mapPitchShifter->SetSeekPitch(Pitch::c);
 	}
 	return 0;
