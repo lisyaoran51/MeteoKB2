@@ -5,6 +5,7 @@ AudioFilename:WantSeeYou_ForShooting.mp3
 Title:WantSeeYou_Simple_ForShooting
 [Difficulty]
 [NoteControlPoints]
+-3,7.84,0.4,-1,0,6,0
 66,8.28,-1,-1,0,3,0
 68,8.74,-1,-1,0,3,0
 -1,9.21,3.69,-1,1,5,0
@@ -29,6 +30,7 @@ Title:WantSeeYou_Simple_ForShooting
 -1,20.29,3.69,-1,4,5,0
 78,20.29,3.69,-1,4,3,0
 44,20.29,3.69,-1,4,1,0
+-2,23.54,0.4,-1,5,6,1
 -1,23.98,3.69,-1,5,5,1
 30,23.98,-1,-1,5,1,1
 49,24.67,-1,-1,5,3,1
