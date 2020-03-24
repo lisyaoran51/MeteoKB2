@@ -276,7 +276,7 @@ int GameHost::setupConfig()
 	frameworkConfigManager->Set(FrameworkSetting::BlackKeyTargetHeight, 10);	// 14
 	frameworkConfigManager->Set(FrameworkSetting::StartPitch, 24);
 	frameworkConfigManager->Set(FrameworkSetting::FrameRate, 30);
-	frameworkConfigManager->Set(FrameworkSetting::SongTitle, string("SweetNight_Simple_ForShooting"));
+	frameworkConfigManager->Set(FrameworkSetting::SongTitle, string("WantSeeYou_Simple_ForShooting"));
 
 	dependencies->Cache<FrameworkConfigManager>(frameworkConfigManager);
 	
