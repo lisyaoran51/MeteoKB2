@@ -39,11 +39,23 @@ int OctaveShifter::implementControlPlayfield(EventProcessor<Event>* eProcessor)
 		mapPitchShifter->SetSeekSpeed(framesPerSecond);
 	}
 	else if (shiftTime == 0) {
+		mapPitchShifter->SetFloatSeekSpeed(12.0, 1.0);
+	}
+	else
+		mapPitchShifter->SetFloatSeekSpeed(12.0, shiftTime);
+
+#pragma region (Drepricated)改用浮動的平移速度，不然有bug
+	/* 改用浮動的平移速度，不然有bug
+	if (shiftTime == -1) {
+		mapPitchShifter->SetSeekSpeed(framesPerSecond);
+	}
+	else if (shiftTime == 0) {
 		mapPitchShifter->SetSeekSpeed(12.0 * framesPerSecond);
 	}
 	else
 		mapPitchShifter->SetSeekSpeed(12.0 / shiftTime);
-
+	*/
+#pragma endregion
 
 
 	if (octaveShiftEventProcessor->GetShiftType() == OctaveShiftType::Lower) {

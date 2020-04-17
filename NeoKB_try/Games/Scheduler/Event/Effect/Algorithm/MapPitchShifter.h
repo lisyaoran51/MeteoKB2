@@ -39,6 +39,12 @@ namespace Algorithms{
 
 		virtual int SetSeekSpeed(double sSpeed) = 0;
 
+		/// <summary>
+		/// 因為如果用frame time回推平移速度的話，有的時候剛好那個frame特別快或慢，推出來的速度就會出錯
+		/// 所以改成紀錄秒個Frame走了多遠，隨時重新計算速度，才會比較準
+		/// </summary>
+		virtual int SetFloatSeekSpeed(double sDistanceLeft, double sTimeLeft) = 0;
+
 		virtual bool GetIsShifting() = 0;
 
 		virtual Pitch GetTempPitch() = 0;
