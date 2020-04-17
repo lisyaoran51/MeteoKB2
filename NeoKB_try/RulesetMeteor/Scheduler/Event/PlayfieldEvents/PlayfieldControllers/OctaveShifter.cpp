@@ -39,7 +39,7 @@ int OctaveShifter::implementControlPlayfield(EventProcessor<Event>* eProcessor)
 		mapPitchShifter->SetSeekSpeed(framesPerSecond);
 	}
 	else if (shiftTime == 0) {
-		mapPitchShifter->SetFloatSeekSpeed(12.0, 1.0);
+		mapPitchShifter->SetFloatSeekSpeed(12.0, 0.1);
 	}
 	else
 		mapPitchShifter->SetFloatSeekSpeed(12.0, shiftTime);
