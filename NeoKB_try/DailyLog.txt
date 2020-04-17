@@ -1573,3 +1573,10 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	Event processor master裡面的pitch state沒有人去控制，現在只有playfield的pitch state有人控制，playfield和event processor master是兩個不同的東西
 
 	錄音的時候gain在-8.27，shure麥克風用0db
+	
+	有的時候左右平移會出錯的原因，應該是因為octave shifter會叫 clock->GetFramesPerSecond，當下那個frame剛好很慢，平移就會跟著變很慢
+	解決辦法是改叫average frame per second，比較不會有誤差
+	好像不是這個問題，通常shifter會拿平移秒數，不會拿fps
+	
+3/23
+	
