@@ -2,7 +2,7 @@ simple file format v0
 [General]
 AudioFilename:AnimalCrossing.mp3
 [Metadata]
-Title:AnimalCrossing
+Title:AnimalCrossing_Simple
 [Difficulty]
 [NoteControlPoints]
 -3,9.79,0.3,-1,0,6,0
