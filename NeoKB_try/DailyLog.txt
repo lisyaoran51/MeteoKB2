@@ -1579,4 +1579,35 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	好像不是這個問題，通常shifter會拿平移秒數，不會拿fps
 	
 3/23
+
+4/12
+	bluetooth sdp執行會出錯 segment fault
+	https://raspberrypi.stackexchange.com/questions/41776/failed-to-connect-to-sdp-server-on-ffffff000000-no-such-file-or-directory
+	要把bluetoothd改成compat
+	每次開機都要sudo chmod 777 /var/run/sdp
+	
+	然後要打開藍芽配對
+	sudo systemctl start hciuart
+	sudo bluetoothctl
+	discoverable on
+	pairable on
+	
+	這樣可以讓手機跟bluetoothctl配對，但是部會讓advertise程式跟手機配對
+	用automatic connect的話，要用
+	sudo systemctl start hciuart
+	sudo bluetoothctl
+	discoverable on
+	pairable on
+	exit
+	然後才能連線
+	
+	實驗發現只要開pairable就可以連，不用開discoverable
+	
+4/13
+	之前訊息傳不出去，是因為用藍芽的時候不能叫sleep()，會直接停掉
+	
+4/18
+	把平移的速度改成即時用fps反推，避免平移速度出錯
+	
+	
 	
