@@ -1,0 +1,137 @@
+4/2
+	下載unity 5.6.7 搭配破解黨
+	
+	https://blog.csdn.net/xietansheng/article/details/85092056
+	用android sdk commandline先安裝 sdkmanager "platform-tools" "build-tools;28.0.3" "platforms;android-28"
+	然後把sdk/platform-tools裡面內容刪掉 重開unity讓unity自動安裝對應的platform-tools版本
+	
+	https://stackoverflow.com/questions/46978301/unity-failed-to-build-apk-android
+	把java sdk下載8版，9版以上解碼功能不相容
+	
+4/3	
+	https://wakakastudio.wordpress.com/2018/01/25/bluetooth-diy-arduino-android-unity-page2/
+	
+4/5
+	unity bt library
+	https://techtweaking.github.io/docs/
+	
+	android用sdp連線方法
+	https://www.geek-share.com/detail/2712669196.html
+	其實就是自己設一個uuid，就可以用了，沒有想像中複雜
+	
+4/6
+	傳檔案可以先抄openobex
+	https://gitlab.com/openobex/mainline/-/blob/master/lib/api.c
+	
+	安卓藍芽實現obex
+	http://i-miss-erin.blogspot.com/2009/06/bluetooth-obex-file-sharing-in-android.html
+	
+	在看]obex 在connect_client那邊會繼續傳黨
+	obex_work執行傳黨，裡面會跑ops->accept，連到custom_accept去，把一團資料複製近來self裡，完成connect
+	
+	put_client才是真的傳黨
+	
+	nanosound改amp輸出的地方是GPIO.output(27, GPIO.HIGH) ，code在
+	https://github.com/nanomesher/Nanomesher_NanoSound/blob/90ee148e087ad3280466fe2338037b1e44b97a2c/nanosound_oled/nanodac_oled.py#L402
+	裡面的def toggleAmp(value):
+	
+	在put client傳黨時，會叫使用者自訂的obex_event來做事情，裡面叫到put_server，會先把檔案存起來safe_save_file
+	
+4/9
+	傳檔之前會進obex_msg_prepare準備
+	看看OBEX_HandleInput是不適用來傳檔的
+	
+	obex_deliver_event會去叫obex_t的eventcb來完成任務，eventcb是在OBEX_Init(OBEX_TRANS_BLUETOOTH, obex_event, flags);
+	的時候指定使用者自訂的動作去完成
+	
+	btobex_init傳輸
+	btobex_write應該在這
+	
+	看起來obex最底層也只是obex_transport_sock_send，把封包用成一段一段資料用rfcomm丟出去
+	我們可以先用rfcomm暫時做就好，之後看需求來改成obex
+	
+	要測試bass和bt能不能再buildroot跑
+	
+4/10
+	bcm2835要改1.44以上的版本，不然cross compiler會失敗
+	
+	如果cross compiler要加library，藥用arm-linux-gnueabihf-gcc -print-sysroot去查他的root在哪，再把library放進去
+	
+4/11
+	buildroot 要 mount boot很麻煩
+	要1. mkdir /boot  2. mount /dev/mmcblk0p1 /boot
+	
+	結果最新的buildroot的glibc還是2.3 不到bass的2.4
+	要放library到cross compiler的時候藥用arm-linux-gnueabihf-gcc -print-sysroot 來查lib要擺哪
+	
+	結果用最新版的buildroot就可以compile bass了
+	
+	成功了 buildroot可以跑起來的git commit是75021e0ceb841d743390a9fceff8d0ae4f513db2 [75021e0]
+	
+	之後還要調整的是看怎麼把遊戲烤進img檔裡，怎麼再config條好每個disk的大小，藍芽能不能用這些
+	
+4/15
+	https://blog.csdn.net/kv110/article/details/5741863
+	
+4/17
+	connect_client差sync_wait沒看
+	
+4/18
+	obex運作是:
+	建立一個obex_t，把要做的事情放到obex_object_t裡，要傳的資料放到obex_object_t.tx_nonhdr_data的data裡，串成一串buffer
+	buffer的資料結構有點類似list，不過他是一個data包住下一個data，下個data再包住下個data，依此類推...而不是用指針，這樣可以讓所有資料變成一串buffer，避免空間浪費
+	
+	像是connect時obex_object_t的data buffer裡就放了obex_version和linux兩個data。
+	
+	之後在資料都放進object裡以後，一次把object的資料加到obex_t.tx_msg的buffer裡，擺在原本的資料後面(原本的資料是opcode)
+	然後把object的data清空。最後在connect_client的時候把整個obex_t.tx_msg傳出去，傳完以後把obex_t.tx_msg.ops_data.data給清空成0
+	(connect_client是connect時會做的事，put或get會做其他動作，但是流程應該差不多)
+	
+4/21
+	compile obex_test的時候，要下的指令是
+	gcc *.c -DHAVE_BLUETOOTH=1 -DHAVE_BLUETOOTH_LINUX=1 -lopenobex -lbluetooth
+	
+	要先sudo apt-get install libbluetooth-dev才能編
+	
+	B8:27:EB:E3:6A:6A
+	
+	看syslog:
+	tail -F /var/log/syslog
+	
+4/22
+	不知道為什麼把debug.h全部註解調，printf就可以跑出來了
+	
+	不知道為什麼還是不能接，要看這個研究
+	https://people.csail.mit.edu/albert/bluez-intro/x502.html
+	
+	BTPROTO_RFCOMM?
+	
+4/23
+	sample code突然成功了，前面有做
+	sudo rfcomm bind 0 B8:27:EB:E3:6A:6A 1
+	綁對方mac位置?
+	但是rfcomm release之後還是可以
+	
+	sudo rfcomm bind 0 B8:27:EB:65:1B:47 1
+	
+	重開機以後又不行了 應該不是這個 可能是sdptool
+	是sudo hciconfig hci0 piscan
+	
+	抓到了 server端要先執行sudo hciconfig hci0 piscan 之後才會有反應
+	不過obex還是不能用 要再看看問題在哪
+	
+4/25
+	照理來說obex適用rfcomm.h，就應該用BTPROTO_RFCOMM，btobex好像有bug
+	
+4/28
+	server端執行完listen之後就會在accept那邊等
+	目前不知道為什麼obex收不到connect，直接用rfcomm就收的到
+	
+	連線成功了，是地址格是錯誤，改成用
+	char dest[18] = "B8:27:EB:E3:6A:6A";
+	str2ba( dest, &bdaddr );
+	就成功了
+	
+	sudo modprobe i2c-dev
+	
+	

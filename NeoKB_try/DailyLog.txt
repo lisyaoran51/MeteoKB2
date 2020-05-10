@@ -1609,5 +1609,16 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 4/18
 	把平移的速度改成即時用fps反推，避免平移速度出錯
 	
+5/6
+	sdp只是用uuid幫忙拿到channel號碼，後面的動作就是rfcomm
 	
+	obex server的執行方式是不停handle input，input有芬in和out，各自都有tx和rx狀態，感覺命名比較亂
+	http request比較清楚，就是request出去，回來一個status code，不過如果是下載檔案，或是回傳大量資訊的話，要再看一下是怎麼寫的
 	
+	找不到http下載的流程
+	
+5/7
+	api request的實作在web request裡面，api request管時間，負責備呼叫，還有開始結束失敗的callback。web request才是真正跟http丟資料的人
+	http格式比較大的話，可以考慮用mqtt
+	
+	web request在丟出http以後，會根據get或post，開始接response，從responseStream把資料讀出來，完成以後要拿資料的話就用ResponseData把資料拿出來
