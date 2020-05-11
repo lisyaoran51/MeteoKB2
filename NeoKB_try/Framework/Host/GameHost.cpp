@@ -276,7 +276,7 @@ int GameHost::setupConfig()
 	frameworkConfigManager->Set(FrameworkSetting::BlackKeyTargetHeight, 10);	// 14
 	frameworkConfigManager->Set(FrameworkSetting::StartPitch, 24);
 	frameworkConfigManager->Set(FrameworkSetting::FrameRate, 30);
-	frameworkConfigManager->Set(FrameworkSetting::SongTitle, string("WhatHappen"));
+	frameworkConfigManager->Set(FrameworkSetting::SongTitle, string("WhatHappen_Left"));
 
 	dependencies->Cache<FrameworkConfigManager>(frameworkConfigManager);
 	
