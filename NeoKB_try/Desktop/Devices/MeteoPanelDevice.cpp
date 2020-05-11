@@ -68,16 +68,16 @@ int MeteoPanelDevice::readFromDevice()
 
 	}
 
-	if (_debugCount == 200 || _debugCount == 300) {
+	if (_debugCount == 0 || _debugCount == -1) {
 		LOG(LogLevel::Debug) << "MeteoPanelDevice::readFromDevice() : Create fake pause input [SpeedKnob -].";
 		InputState* newState = new InputState();
 		newState->SetPanelState(new PanelState());
 
-		newState->GetPanelState()->AddKnob(make_pair(InputKey::SpeedKnob, -5));
+		newState->GetPanelState()->AddKnob(make_pair(InputKey::SpeedKnob, -10));
 		inputStates.push_back(newState);
 
 	}
-
+	_debugCount++;
 	return 0;
 }
 
