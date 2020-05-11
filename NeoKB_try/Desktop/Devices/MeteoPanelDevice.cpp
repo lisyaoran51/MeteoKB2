@@ -72,7 +72,7 @@ int MeteoPanelDevice::readFromDevice()
 
 	}
 
-	if (_debugCount % 100 == 1 || _debugCount == 800 || _debugCount == 400 || _debugCount == 500 || _debugCount == 600) {
+	if (_debugCount % 20 == 1) {
 		LOG(LogLevel::Debug) << "MeteoPanelDevice::readFromDevice() : Create fake pause input [SpeedKnob -].";
 		InputState* newState = new InputState();
 		newState->SetPanelState(new PanelState());
