@@ -18,7 +18,7 @@ int MeteoPanelDevice::readFromDevice()
 	_debugCount++;
 #endif
 
-#if 1
+#if 0
 	_debugCount++;
 #endif
 
