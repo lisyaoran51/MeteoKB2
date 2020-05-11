@@ -68,7 +68,7 @@ int MeteorTimeController::onKnobTurn(InputState * inputState, InputKey knob)
 			if (inputState->GetPanelState()->GetKnobs()->at(i).first == InputKey::SpeedKnob)
 				turnValue = inputState->GetPanelState()->GetKnobs()->at(i).second;
 		if (turnValue < 0) {
-			if (GetRate() > 0.5) {
+			if (GetRate() > 0.7) {
 				LOG(LogLevel::Debug) << "MeteorTimeController::onKnobTurn() : [SpeedKnob] action turn value = " << turnValue << ". rate = " << GetRate();
 				SetRate(GetRate() - 0.1);
 
