@@ -75,7 +75,9 @@ bool MeteoPanelBoardV1::checkI2cMessageValid(InputKey iKey, int v)
 	if (iKey > InputKey::ExpressionPedalPlugin)
 		return false;
 
-	if (v > 256 || v < -1)
+	//if (v > 256 || v < -1)
+	//	return false;
+	if (v > 286 || v < -1)
 		return false;
 
 	return true;
@@ -247,7 +249,7 @@ int MeteoPanelBoardV1::pushKeyboardState(InputKey key, int value)
 
 	if (value >= 0) {
 		if (!keyboardState->GetKeyboardState()->ContainPress(key))
-			keyboardState->GetKeyboardState()->AddPress(make_pair(key, value));
+			keyboardState->GetKeyboardState()->AddPress(make_pair(key, value > 255 ? 255 : value));
 	}
 	else {
 		if (!keyboardState->GetKeyboardState()->ContainUp(key))
