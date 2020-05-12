@@ -1622,3 +1622,8 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	http格式比較大的話，可以考慮用mqtt
 	
 	web request在丟出http以後，會根據get或post，開始接response，從responseStream把資料讀出來，完成以後要拿資料的話就用ResponseData把資料拿出來
+	
+5/11
+	每次都要先 sudo modprobe i2c-dev
+	
+	錄音要把bose先按到最大 在暗小20次 音量降4db
