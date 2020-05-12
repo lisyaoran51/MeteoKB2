@@ -1626,4 +1626,4 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 5/11
 	每次都要先 sudo modprobe i2c-dev
 	
-	錄音要把bose先按到最大 在暗小20次 音量降4db
+	錄音要把bose先按到最大 在暗小20次 音量降8db 麥克風屁股要禿初箱子一點
