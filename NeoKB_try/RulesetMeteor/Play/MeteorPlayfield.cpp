@@ -72,7 +72,7 @@ int MeteorPlayfield::load(FrameworkConfigManager* f, MeteorConfigManager * m)
 	/* --------------------- FallEffect map algo --------------------- */
 	if (m->Get(MeteorSetting::FallMapAlgorithm, &mapAlgoName)) {
 		LOG(LogLevel::Finer) << "MeteorPlayfield::load() : finding fall effect map algorithm";
-		MapAlgorithm<Effect>* mapAlgo = iCreator.CreateInstanceWithT<MapAlgorithm<Effect>>(mapAlgoName);
+		MapAlgorithmInterface* mapAlgo = iCreator.CreateInstanceWithT<MapAlgorithmInterface>(mapAlgoName);
 
 		LOG(LogLevel::Finer) << "MeteorPlayfield::load() : put into algorithms table";
 		mapAlgorithms["FallEffect"] = mapAlgo;
@@ -88,7 +88,7 @@ int MeteorPlayfield::load(FrameworkConfigManager* f, MeteorConfigManager * m)
 
 	/* --------------------- ExplodeEffect map algo --------------------- */
 	if (m->Get(MeteorSetting::ExplodeMapAlgorithm, &mapAlgoName)) {
-		MapAlgorithm<Effect>* mapAlgo = iCreator.CreateInstanceWithT<MapAlgorithm<Effect>>(mapAlgoName);
+		MapAlgorithmInterface* mapAlgo = iCreator.CreateInstanceWithT<MapAlgorithmInterface>(mapAlgoName);
 
 		mapAlgorithms["ExplodeEffect"] = mapAlgo;
 	}
@@ -102,7 +102,7 @@ int MeteorPlayfield::load(FrameworkConfigManager* f, MeteorConfigManager * m)
 
 	/* --------------------- GlowLineEffect map algo --------------------- */
 	//if (m->Get(MeteorSetting::GlowLineMapAlgorithm, &mapAlgoName)) {
-	//	MapAlgorithm<Effect>* mapAlgo = iCreator.CreateInstanceWithT<MapAlgorithm<Effect>>(mapAlgoName);
+	//	MapAlgorithmInterface* mapAlgo = iCreator.CreateInstanceWithT<MapAlgorithmInterface>(mapAlgoName);
 	//
 	//	mapAlgorithms["GlowLineEffect"] = mapAlgo;
 	//}
@@ -116,7 +116,7 @@ int MeteorPlayfield::load(FrameworkConfigManager* f, MeteorConfigManager * m)
 
 	/* --------------------- TargetLineEffect map algo --------------------- */
 	//if (m->Get(MeteorSetting::TargetLineMapAlgorithm, &mapAlgoName)) {
-	//	MapAlgorithm<Effect>* mapAlgo = iCreator.CreateInstanceWithT<MapAlgorithm<Effect>>(mapAlgoName);
+	//	MapAlgorithmInterface* mapAlgo = iCreator.CreateInstanceWithT<MapAlgorithmInterface>(mapAlgoName);
 	//
 	//	mapAlgorithms["TargetLineEffect"] = mapAlgo;
 	//}
