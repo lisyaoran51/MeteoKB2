@@ -1236,6 +1236,9 @@
     <ClCompile Include="Games\Scheduler\Event\ControlPoints\OctaveAutoControlPoint.cpp">
       <Filter>來源檔案\Games\Schedulers\Events\ControlPoints</Filter>
     </ClCompile>
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\Algorithm\EruptMapAlgorithm.cpp">
+      <Filter>來源檔案\RulesetMeteor\Schedulers\Events\Effects\MapAlgorithms</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="DailyLog.txt">
@@ -2091,6 +2094,9 @@
     </ClInclude>
     <ClInclude Include="RulesetMeteor\Ruleset\Scoring\MeteorScoreProcessor.h">
       <Filter>標頭檔\RulesetMeteor\Ruleset\Scoring</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\Algorithm\EruptMapAlgorithm.h">
+      <Filter>標頭檔\RulesetMeteor\Schedulers\Events\Effects\Algorithms</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

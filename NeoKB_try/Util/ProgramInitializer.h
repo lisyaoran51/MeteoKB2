@@ -61,6 +61,7 @@ using namespace Meteor::Rulesets;
 #include "../RulesetMeteor/Scheduler/Event/Effect/Algorithm/FallMapAlgorithm.h"
 #include "../RulesetMeteor/Scheduler/Event/Effect/Algorithm/GlowLineMapAlgorithm.h"
 #include "../RulesetMeteor/Scheduler/Event/Effect/Algorithm/TargetLineMapAlgorithm.h"
+#include "../RulesetMeteor/Scheduler/Event/Effect/Algorithm/EruptMapAlgorithm.h"
 using namespace Meteor::Schedulers::Events::Effects::Algorithms;
 
 // Meteor/Schedulers/Events/IoEvents/IoCommunicators
