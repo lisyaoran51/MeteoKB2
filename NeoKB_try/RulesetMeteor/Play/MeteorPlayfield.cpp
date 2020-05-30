@@ -79,6 +79,7 @@ int MeteorPlayfield::load(FrameworkConfigManager* f, MeteorConfigManager * m)
 	}
 	else
 		mapAlgorithms["FallEffect"] = new FallMapAlgorithm();
+	LOG(LogLevel::Finer) << "MeteorPlayfield::load() : FallMapAlgorithm chosed";
 
 	LOG(LogLevel::Finer) << "MeteorPlayfield::load() : FallMapAlgorithm [" << mapAlgorithms["FallEffect"]->GetTypeName() << "] loaded.";
 
