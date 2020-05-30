@@ -72,14 +72,14 @@ int MeteorPlayfield::load(FrameworkConfigManager* f, MeteorConfigManager * m)
 	/* --------------------- FallEffect map algo --------------------- */
 	if (m->Get(MeteorSetting::FallMapAlgorithm, &mapAlgoName)) {
 		LOG(LogLevel::Finer) << "MeteorPlayfield::load() : finding fall effect map algorithm";
-		MapAlgorithm<Event>* mapAlgo = iCreator.CreateInstanceWithT<MapAlgorithm<Event>>(mapAlgoName);
+		MapAlgorithm<Effect>* mapAlgo = iCreator.CreateInstanceWithT<MapAlgorithm<Effect>>(mapAlgoName);
 
 		LOG(LogLevel::Finer) << "MeteorPlayfield::load() : put into algorithms table";
 		mapAlgorithms["FallEffect"] = mapAlgo;
 	}
 	else
 		mapAlgorithms["FallEffect"] = new FallMapAlgorithm();
-	LOG(LogLevel::Finer) << "MeteorPlayfield::load() : FallMapAlgorithm chosed";
+	LOG(LogLevel::Finer) << "MeteorPlayfield::load() : FallMapAlgorithm chosed" << mapAlgorithms["FallEffect"];
 
 	LOG(LogLevel::Finer) << "MeteorPlayfield::load() : FallMapAlgorithm [" << mapAlgorithms["FallEffect"]->GetTypeName() << "] loaded.";
 
@@ -88,7 +88,7 @@ int MeteorPlayfield::load(FrameworkConfigManager* f, MeteorConfigManager * m)
 
 	/* --------------------- ExplodeEffect map algo --------------------- */
 	if (m->Get(MeteorSetting::ExplodeMapAlgorithm, &mapAlgoName)) {
-		MapAlgorithm<Event>* mapAlgo = iCreator.CreateInstanceWithT<MapAlgorithm<Event>>(mapAlgoName);
+		MapAlgorithm<Effect>* mapAlgo = iCreator.CreateInstanceWithT<MapAlgorithm<Effect>>(mapAlgoName);
 
 		mapAlgorithms["ExplodeEffect"] = mapAlgo;
 	}
@@ -102,7 +102,7 @@ int MeteorPlayfield::load(FrameworkConfigManager* f, MeteorConfigManager * m)
 
 	/* --------------------- GlowLineEffect map algo --------------------- */
 	//if (m->Get(MeteorSetting::GlowLineMapAlgorithm, &mapAlgoName)) {
-	//	MapAlgorithm<Event>* mapAlgo = iCreator.CreateInstanceWithT<MapAlgorithm<Event>>(mapAlgoName);
+	//	MapAlgorithm<Effect>* mapAlgo = iCreator.CreateInstanceWithT<MapAlgorithm<Effect>>(mapAlgoName);
 	//
 	//	mapAlgorithms["GlowLineEffect"] = mapAlgo;
 	//}
@@ -116,7 +116,7 @@ int MeteorPlayfield::load(FrameworkConfigManager* f, MeteorConfigManager * m)
 
 	/* --------------------- TargetLineEffect map algo --------------------- */
 	//if (m->Get(MeteorSetting::TargetLineMapAlgorithm, &mapAlgoName)) {
-	//	MapAlgorithm<Event>* mapAlgo = iCreator.CreateInstanceWithT<MapAlgorithm<Event>>(mapAlgoName);
+	//	MapAlgorithm<Effect>* mapAlgo = iCreator.CreateInstanceWithT<MapAlgorithm<Effect>>(mapAlgoName);
 	//
 	//	mapAlgorithms["TargetLineEffect"] = mapAlgo;
 	//}
