@@ -71,8 +71,10 @@ int MeteorPlayfield::load(FrameworkConfigManager* f, MeteorConfigManager * m)
 
 	/* --------------------- FallEffect map algo --------------------- */
 	if (m->Get(MeteorSetting::FallMapAlgorithm, &mapAlgoName)) {
+		LOG(LogLevel::Finer) << "MeteorPlayfield::load() : finding fall effect map algorithm";
 		MapAlgorithm<Event>* mapAlgo = iCreator.CreateInstanceWithT<MapAlgorithm<Event>>(mapAlgoName);
 
+		LOG(LogLevel::Finer) << "MeteorPlayfield::load() : put into algorithms table";
 		mapAlgorithms["FallEffect"] = mapAlgo;
 	}
 	else
