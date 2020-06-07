@@ -1627,3 +1627,29 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	每次都要先 sudo modprobe i2c-dev
 	
 	錄音要把bose先按到最大 在暗小20次 音量降8db 麥克風屁股要禿初箱子一點
+	
+5/30
+	在新電腦上，要用openobex要先apt-get install bluetooth、apt-get install libbluetooth-dev、apt-get install libopenobex-dev
+	compile以後，多試幾次 sudo ./test就可以成功。server要先下sudo hciconfig hci0 piscan指令
+	關掉wifi方法是config.txt裡dtoverlay=disable-wifi
+	
+	關wifi時傳1.63m的檔案要5:44，把log全關掉的狀態是1:10，也就是23kbps
+	
+	linux下控制網路連線的程式
+	https://stackoverflow.com/questions/8661474/which-c-c-library-can-be-used-for-handling-wifi-connections-for-linux
+	
+	https://cgit.freedesktop.org/NetworkManager/NetworkManager/tree/examples/C/glib/add-connection-libnm.c
+	
+6/1
+	midi to csv
+	https://www.fourmilab.ch/webtools/midicsv/
+	
+	時間轉換方法:
+	第一行的最後一個是pulse per quarter(每個四分音符幾個訊號)
+	0	0	 Header	1	17	480
+	然後tempo是每個四分音符多少microsecond
+	1	0	 Tempo	750000
+	看這兩行，把每個音的time code / 480(每個四分音符幾個訊號) * 750000(每個四分音符多少microsecond) / 1000000(以秒為單位)
+	就可以算出秒數
+
+	
