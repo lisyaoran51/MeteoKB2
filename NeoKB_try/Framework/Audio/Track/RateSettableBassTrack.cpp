@@ -18,6 +18,10 @@ RateSettableBassTrack::RateSettableBassTrack(char * fileName): BassTrack()
 
 		sourceStream = BASS_StreamCreateFile(false, fileName, 0, 0, BASS_STREAM_DECODE);
 
+		if (sourceStream == 0) {
+			LOG(LogLevel::Info) << "RateSettableBassTrack::RateSettableBassTrack() : unable to open stream error [" << (stream != 0 ? 0 : BASS_ErrorGetCode()) << "] in path [" << fileName << "].";
+		}
+
 		stream = BASS_FX_TempoCreate(sourceStream, BASS_FX_FREESOURCE);
 		
 		
