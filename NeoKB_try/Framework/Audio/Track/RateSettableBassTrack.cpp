@@ -19,7 +19,7 @@ RateSettableBassTrack::RateSettableBassTrack(char * fileName): BassTrack()
 		sourceStream = BASS_StreamCreateFile(false, fileName, 0, 0, BASS_STREAM_DECODE);
 
 		if (sourceStream == 0) {
-			LOG(LogLevel::Info) << "RateSettableBassTrack::RateSettableBassTrack() : unable to open stream error [" << (stream != 0 ? 0 : BASS_ErrorGetCode()) << "] in path [" << fileName << "].";
+			LOG(LogLevel::Error) << "RateSettableBassTrack::RateSettableBassTrack() : unable to open stream error [" << (sourceStream != 0 ? sourceStream : BASS_ErrorGetCode()) << "] in path [" << fileName << "].";
 		}
 
 		stream = BASS_FX_TempoCreate(sourceStream, BASS_FX_FREESOURCE);
@@ -28,7 +28,7 @@ RateSettableBassTrack::RateSettableBassTrack(char * fileName): BassTrack()
 			
 		//Length = Bass.ChannelBytes2Seconds(activeStream, Bass.ChannelGetLength(activeStream)) * 1000;
 		length = BASS_ChannelBytes2Seconds(stream, BASS_ChannelGetLength(stream, BASS_POS_BYTE));
-		LOG(LogLevel::Info) << "RateSettableBassTrack::RateSettableBassTrack() : create stream [" << (stream != 0 ? 0 : BASS_ErrorGetCode()) << "] in path [" << fileName << "]. length = [" << length << "].";
+		LOG(LogLevel::Info) << "RateSettableBassTrack::RateSettableBassTrack() : create stream [" << (stream != 0 ? stream : BASS_ErrorGetCode()) << "] in path [" << fileName << "]. length = [" << length << "].";
 
 		return 0;
 	}, "Lambda_RateSettableBassTrack::CreateStream");
