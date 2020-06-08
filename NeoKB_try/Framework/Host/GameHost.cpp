@@ -276,7 +276,7 @@ int GameHost::setupConfig()
 	frameworkConfigManager->Set(FrameworkSetting::BlackKeyTargetHeight, 10);	// 14
 	frameworkConfigManager->Set(FrameworkSetting::StartPitch, 24);
 	frameworkConfigManager->Set(FrameworkSetting::FrameRate, 30);
-	frameworkConfigManager->Set(FrameworkSetting::SongTitle, string("Unravel"));
+	frameworkConfigManager->Set(FrameworkSetting::SongTitle, string("Sun_Instrumental"));
 
 	dependencies->Cache<FrameworkConfigManager>(frameworkConfigManager);
 	
@@ -286,7 +286,7 @@ int GameHost::setupConfig()
 
 	meteorConfigManager->Set(MeteorSetting::WhiteKeyTargetHeight, 9);	// 低4	  高9
 	meteorConfigManager->Set(MeteorSetting::BlackKeyTargetHeight, 8);
-	meteorConfigManager->Set(MeteorSetting::FallSpeed, MTO_FLOAT(36.f));	//正常16.f	慢12.f 目前24 unravel36
+	meteorConfigManager->Set(MeteorSetting::FallSpeed, MTO_FLOAT(16.f));	//正常16.f	慢12.f 目前24 unravel36
 	meteorConfigManager->Set(MeteorSetting::FallBrightness, MTO_FLOAT(0.6f));
 	meteorConfigManager->Set(MeteorSetting::FallLength, 1);
 	meteorConfigManager->Set(MeteorSetting::ExplodeSpeed, MTO_FLOAT(0.6f));
