@@ -276,7 +276,7 @@ int GameHost::setupConfig()
 	frameworkConfigManager->Set(FrameworkSetting::BlackKeyTargetHeight, 10);	// 14
 	frameworkConfigManager->Set(FrameworkSetting::StartPitch, 24);
 	frameworkConfigManager->Set(FrameworkSetting::FrameRate, 30);
-	frameworkConfigManager->Set(FrameworkSetting::SongTitle, string("WantSeeYou_Instrumental_Right"));
+	frameworkConfigManager->Set(FrameworkSetting::SongTitle, string("WantSeeYou_Instrumental_Left"));
 
 	dependencies->Cache<FrameworkConfigManager>(frameworkConfigManager);
 	
