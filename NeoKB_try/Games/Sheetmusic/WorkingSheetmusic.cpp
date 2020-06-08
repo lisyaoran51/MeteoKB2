@@ -70,11 +70,11 @@ Track * WorkingSm::GetTrack()
 	//ifstream* stream = new ifstream(getPathForFile(smInfo->metadata->AudioFile));
 	string path = getPathForFile(smInfo->metadata->AudioFile);
 	char * temp = new char[path.length()];
-	LOG(LogLevel::Depricated) << "WorkingSm::GetTrack() : new a char array.";
+	LOG(LogLevel::Debug) << "WorkingSm::GetTrack() : new a char array.";
 	strcpy(temp, path.c_str());
-	LOG(LogLevel::Depricated) << "WorkingSm::GetTrack() : get file path = [" << temp << "].";
+	LOG(LogLevel::Debug) << "WorkingSm::GetTrack() : get file path = [" << temp << "].";
 	track = new RateSettableBassTrack(temp);
-	LOG(LogLevel::Depricated) << "WorkingSm::GetTrack() : end].";
+	LOG(LogLevel::Debug) << "WorkingSm::GetTrack() : end].";
 	return track;
 }
 
