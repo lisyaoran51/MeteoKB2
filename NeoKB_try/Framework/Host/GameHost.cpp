@@ -276,7 +276,7 @@ int GameHost::setupConfig()
 	frameworkConfigManager->Set(FrameworkSetting::BlackKeyTargetHeight, 10);	// 14
 	frameworkConfigManager->Set(FrameworkSetting::StartPitch, 24);
 	frameworkConfigManager->Set(FrameworkSetting::FrameRate, 30);
-	frameworkConfigManager->Set(FrameworkSetting::SongTitle, string("NameOfLife_Simple"));
+	frameworkConfigManager->Set(FrameworkSetting::SongTitle, string("ThousandSakura"));
 
 	dependencies->Cache<FrameworkConfigManager>(frameworkConfigManager);
 	
