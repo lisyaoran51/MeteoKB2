@@ -297,7 +297,7 @@ int GameHost::setupConfig()
 	meteorConfigManager->Set(MeteorSetting::GlowLineBrightness, MTO_FLOAT(0.6f));
 	meteorConfigManager->Set(MeteorSetting::TargetLineBlinkSpeed, MTO_FLOAT(0.75f));
 	meteorConfigManager->Set(MeteorSetting::TargetLineBrightness, MTO_FLOAT(0.05f));
-	//meteorConfigManager->Set(MeteorSetting::FallMapAlgorithm, string("EruptMapAlgorithm"));
+	meteorConfigManager->Set(MeteorSetting::FallMapAlgorithm, string("EruptMapAlgorithm"));
 	dependencies->Cache<MeteorConfigManager>(meteorConfigManager);
 
 	return 0;
