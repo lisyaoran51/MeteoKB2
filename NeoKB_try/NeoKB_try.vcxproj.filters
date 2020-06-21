@@ -1239,6 +1239,9 @@
     <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\Algorithm\EruptMapAlgorithm.cpp">
       <Filter>來源檔案\RulesetMeteor\Schedulers\Events\Effects\MapAlgorithms</Filter>
     </ClCompile>
+    <ClCompile Include="Framework\Audio\Sample\InstrumentBassSampleChannel.cpp">
+      <Filter>來源檔案\Framework\Audio\Sample</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="DailyLog.txt">
@@ -2097,6 +2100,9 @@
     </ClInclude>
     <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\Algorithm\EruptMapAlgorithm.h">
       <Filter>標頭檔\RulesetMeteor\Schedulers\Events\Effects\Algorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Audio\Sample\InstrumentBassSampleChannel.h">
+      <Filter>標頭檔\Framework\Audio\Sample</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -4,19 +4,33 @@
 using namespace Framework::Audio::Samples;
 
 
-MultiPlaybackSampleChannel::MultiPlaybackSampleChannel(Sample * s, int pAmount): SampleChannel(s)
+MultiPlaybackSampleChannel::MultiPlaybackSampleChannel(Sample * s, int pAmount, int tAmount, OverrideType oType): SampleChannel(s)
 {
 
 	playbackAmount = pAmount;
+	trackAmount = tAmount;
 
-	channelIds = new int[pAmount];
+	//channelIds = new int[pAmount][tAmount];
+	void **p;
+
+
+	channelIds = new int*[tAmount];
+	for (int i = 0; i < tAmount; i++)
+		channelIds[i] = new int[pAmount];
+
+	isTrackFadingOut = new bool[tAmount];
+	for (int i = 0; i < tAmount; i++)
+		isTrackFadingOut[i] = false;
 
 	unique_lock<mutex> uLock(pendingActionMutex);
 	pendingActions.Add(this, [=]() {
 
-		for (int i = 0; i < pAmount; i++) {
+		for (int i = 0; i < tAmount; i++) {
 
-			channelIds[i] = createSampleChannel();
+			for (int j = 0; j < pAmount; j++) {
+				channelIds[i][j] = createSampleChannel();
+			}
+			
 
 		}
 

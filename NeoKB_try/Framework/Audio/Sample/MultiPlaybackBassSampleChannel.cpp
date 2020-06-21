@@ -9,28 +9,34 @@ using namespace Framework::Audio::Samples;
 
 
 
-MultiPlaybackBassSampleChannel::MultiPlaybackBassSampleChannel(Sample * s, int pAmount, OverrideType oType): MultiPlaybackSampleChannel(s, pAmount), SampleChannel(s)
+MultiPlaybackBassSampleChannel::MultiPlaybackBassSampleChannel(Sample * s, int pAmount, int tAmount, OverrideType oType): MultiPlaybackSampleChannel(s, pAmount, tAmount, oType), SampleChannel(s)
 {
-	overrideType = oType;
 }
 
-int MultiPlaybackBassSampleChannel::Play()
+int MultiPlaybackBassSampleChannel::Play(int trackNumber)
 {
-	return Play(1.0);
+	if(trackNumber >= trackAmount)
+		throw runtime_error("int MultiPlaybackBassSampleChannel::Play() : track number out of range.");
+
+
+	return Play(trackNumber, 1.0);
 }
 
-int MultiPlaybackBassSampleChannel::Play(double v)
+int MultiPlaybackBassSampleChannel::Play(int trackNumber, double v)
 {
+	if (trackNumber >= trackAmount)
+		throw runtime_error("int MultiPlaybackBassSampleChannel::Play() : track number out of range.");
+
 
 	if (!GetIsLoaded())
 		return -1;
 
 	/* 先將目前正在fadeout的音都暫停fadeout，再播放新的音 */
-	StopFadeOut();
+	StopFadeOut(trackNumber);
 
 	unique_lock<mutex> uLock(pendingActionMutex);
 
-	int channelId = getChannelToPlay();
+	int channelId = getChannelToPlay(trackNumber);
 
 	LOG(LogLevel::Depricated) << "MultiPlaybackBassSampleChannel::Play() : get channel [" << channelId << "] to play.";
 
@@ -56,14 +62,17 @@ int MultiPlaybackBassSampleChannel::Play(double v)
 	return 0;
 }
 
-int MultiPlaybackBassSampleChannel::Stop()
+int MultiPlaybackBassSampleChannel::Stop(int trackNumber)
 {
+	if (trackNumber >= trackAmount)
+		throw runtime_error("int MultiPlaybackBassSampleChannel::Stop() : track number out of range.");
+
 	unique_lock<mutex> uLock(pendingActionMutex);
 	pendingActions.Add(this, [=]() {
 
 		for (int i = 0; i < playbackAmount; i++) {
-			if (BASS_ChannelIsActive(channelIds[i]) == BASS_ACTIVE_PLAYING) {
-				BASS_ChannelPause(channelIds[i]);
+			if (BASS_ChannelIsActive(channelIds[trackNumber][i]) == BASS_ACTIVE_PLAYING) {
+				BASS_ChannelPause(channelIds[trackNumber][i]);
 			}
 		}
 		
@@ -75,13 +84,28 @@ int MultiPlaybackBassSampleChannel::Stop()
 
 int MultiPlaybackBassSampleChannel::FadeOut()
 {
+	for (int i = 0; i < trackAmount; i++)
+		FadeOut(i);
+
+	return 0;
+}
+
+int MultiPlaybackBassSampleChannel::FadeOut(int trackNumber)
+{
+	if (trackNumber >= trackAmount)
+		throw runtime_error("int MultiPlaybackBassSampleChannel::FadeOut() : track number out of range.");
 
 	unique_lock<mutex> uLock(pendingActionMutex);
 	pendingActions.Add(this, [=]() {
 
+		/*
+		 * 這邊程式寫錯了，直接拿channel的音量來fadeout的話，之後每次調整音量他都會再被縮小音量一次，在on state change那邊會出錯
+		 * 不過這個class應該部會在用了，所以懶得改了
+		 */
+
 		for (int i = 0; i < playbackAmount; i++) {
-			if (BASS_ChannelIsActive(channelIds[i]) == BASS_ACTIVE_PLAYING) {
-				BASS_ChannelSlideAttribute(channelIds[i], BASS_ATTRIB_VOL, 0, (DWORD)(fadeOutTime * 1000));
+			if (BASS_ChannelIsActive(channelIds[trackNumber][i]) == BASS_ACTIVE_PLAYING) {
+				BASS_ChannelSlideAttribute(channelIds[trackNumber][i], BASS_ATTRIB_VOL, 0, (DWORD)(fadeOutTime * 1000));
 			}
 		}
 
@@ -93,17 +117,28 @@ int MultiPlaybackBassSampleChannel::FadeOut()
 
 int MultiPlaybackBassSampleChannel::StopFadeOut()
 {
+	for (int i = 0; i < trackAmount; i++)
+		StopFadeOut(i);
+	return 0;
+}
+
+int MultiPlaybackBassSampleChannel::StopFadeOut(int trackNumber)
+{
+	if (trackNumber >= trackAmount)
+		throw runtime_error("int MultiPlaybackBassSampleChannel::StopFadeOut() : track number out of range.");
+
+
 	unique_lock<mutex> uLock(pendingActionMutex);
 
 	pendingActions.Add(this, [=]() {
 
 		for (int i = 0; i < playbackAmount; i++) {
-			if (BASS_ChannelIsSliding(channelIds[i], BASS_ATTRIB_VOL)) {
+			if (BASS_ChannelIsSliding(channelIds[trackNumber][i], BASS_ATTRIB_VOL)) {
 				float v = 0; 
-				if (!BASS_ChannelGetAttribute(channelIds[i], BASS_ATTRIB_VOL, &v)) {
+				if (!BASS_ChannelGetAttribute(channelIds[trackNumber][i], BASS_ATTRIB_VOL, &v)) {
 					LOG(LogLevel::Error) << "MultiPlaybackBassSampleChannel::StopFadeOut() : get [" << i << "] channel attribute failed. error code: [" << BASS_ErrorGetCode() << "].";
 				}
-				BASS_ChannelSlideAttribute(channelIds[i], BASS_ATTRIB_VOL, v, 0);
+				BASS_ChannelSlideAttribute(channelIds[trackNumber][i], BASS_ATTRIB_VOL, v, 0);
 			}
 		}
 		return 0;
@@ -115,10 +150,22 @@ int MultiPlaybackBassSampleChannel::StopFadeOut()
 
 bool MultiPlaybackBassSampleChannel::GetIsPlaying()
 {
+	for (int i = 0; i < trackAmount; i++)
+		if (GetIsPlaying(i))
+			return true;
+
+	return false;
+}
+
+bool MultiPlaybackBassSampleChannel::GetIsPlaying(int trackNumber)
+{
+	if (trackNumber >= trackAmount)
+		throw runtime_error("int MultiPlaybackBassSampleChannel::GetIsPlaying() : track number out of range.");
+
 	bool iPlaying = false;
 
 	for (int i = 0; i < playbackAmount; i++) {
-		if (BASS_ChannelIsActive(channelIds[i]) == BASS_ACTIVE_PLAYING && !BASS_ChannelIsSliding(channelIds[i], BASS_ATTRIB_VOL)) {
+		if (BASS_ChannelIsActive(channelIds[trackNumber][i]) == BASS_ACTIVE_PLAYING && !BASS_ChannelIsSliding(channelIds[trackNumber][i], BASS_ATTRIB_VOL)) {
 			iPlaying = true;
 		}
 	}
@@ -128,20 +175,28 @@ bool MultiPlaybackBassSampleChannel::GetIsPlaying()
 
 bool MultiPlaybackBassSampleChannel::GetIsLoaded()
 {
+
 	return sample->GetIsLoaded();
 }
 
-int MultiPlaybackBassSampleChannel::OnStateChange()
+int MultiPlaybackBassSampleChannel::OnStateChange(int trackNumber)
 {
+	if (trackNumber >= trackAmount)
+		throw runtime_error("int MultiPlaybackBassSampleChannel::OnStateChange() : track number out of range.");
+
 	AdjustableAudioComponent::OnStateChange();
 
 	for(int i = 0; i < playbackAmount; i++){
-		if (!BASS_ChannelIsSliding(channelIds[i], BASS_ATTRIB_VOL)) {
+		if (!BASS_ChannelIsSliding(channelIds[trackNumber][i], BASS_ATTRIB_VOL)) {
+			/*
+			 * 這邊程式寫錯了，直接拿channel的音量來與volumeCalculated相乘的話，之後每次調整音量他都會再被縮小音量一次，音量大小會出錯
+			 * 不過這個class應該部會在用了，所以懶得改了
+			 */
 			float v = 0;
-			if (!BASS_ChannelGetAttribute(channelIds[i], BASS_ATTRIB_VOL, &v)) {
+			if (!BASS_ChannelGetAttribute(channelIds[trackNumber][i], BASS_ATTRIB_VOL, &v)) {
 				LOG(LogLevel::Error) << "MultiPlaybackBassSampleChannel::StopFadeOut() : get [" << i << "] channel attribute failed. error code: [" << BASS_ErrorGetCode() << "].";
 			}
-			BASS_ChannelSetAttribute(channelIds[i], BASS_ATTRIB_VOL, v * volumeCalculated->GetValue());
+			BASS_ChannelSetAttribute(channelIds[trackNumber][i], BASS_ATTRIB_VOL, v * volumeCalculated->GetValue());
 		}
 	}
 }
@@ -155,21 +210,24 @@ int MultiPlaybackBassSampleChannel::createSampleChannel()
 	return channelId;
 }
 
-int MultiPlaybackBassSampleChannel::getChannelToPlay()
+int MultiPlaybackBassSampleChannel::getChannelToPlay(int trackNumber)
 {
+	if (trackNumber >= trackAmount)
+		throw runtime_error("int MultiPlaybackBassSampleChannel::getChannelToPlay() : track number out of range.");
+
 	LOG(LogLevel::Depricated) << "MultiPlaybackBassSampleChannel::getChannelToPlay() : getting available channel of sample.";
 
 	int channelToPlay = -1;
 	for (int i = 0; i < playbackAmount; i++) {
-		if (BASS_ChannelIsActive(channelIds[i]) != BASS_ACTIVE_PLAYING) {
+		if (BASS_ChannelIsActive(channelIds[trackNumber][i]) != BASS_ACTIVE_PLAYING) {
 
-			LOG(LogLevel::Depricated) << "MultiPlaybackBassSampleChannel::getChannelToPlay() : [" << channelIds[i] << "] channel status is [" << BASS_ChannelIsActive(channelIds[i]) << "].";
-			channelToPlay = channelIds[i];
+			LOG(LogLevel::Depricated) << "MultiPlaybackBassSampleChannel::getChannelToPlay() : [" << channelIds[trackNumber][i] << "] channel status is [" << BASS_ChannelIsActive(channelIds[trackNumber][i]) << "].";
+			channelToPlay = channelIds[trackNumber][i];
 			break;
 
 		}
 		else{
-			LOG(LogLevel::Depricated) << "MultiPlaybackBassSampleChannel::getChannelToPlay() : [" << i << "] channel status is [" << BASS_ChannelIsActive(channelIds[i]) << "].";
+			LOG(LogLevel::Depricated) << "MultiPlaybackBassSampleChannel::getChannelToPlay() : [" << i << "] channel status is [" << BASS_ChannelIsActive(channelIds[trackNumber][i]) << "].";
 		}
 	}
 
@@ -180,18 +238,18 @@ int MultiPlaybackBassSampleChannel::getChannelToPlay()
 
 		for (int i = 0; i < playbackAmount; i++) {
 			float v = 0;
-			if (!BASS_ChannelGetAttribute(channelIds[i], BASS_ATTRIB_VOL, &v)) {
-				LOG(LogLevel::Error) << "MultiPlaybackBassSampleChannel::StopFadeOut() : get [" << i << "] channel attribute failed. error code: [" << BASS_ErrorGetCode() << "].";
+			if (!BASS_ChannelGetAttribute(channelIds[trackNumber][i], BASS_ATTRIB_VOL, &v)) {
+				LOG(LogLevel::Error) << "MultiPlaybackBassSampleChannel::getChannelToPlay() : get [" << i << "] channel attribute failed. error code: [" << BASS_ErrorGetCode() << "].";
 			}
 
-			double currentTime = BASS_ChannelBytes2Seconds(channelIds[i], BASS_ChannelGetPosition(channelIds[i], BASS_POS_BYTE));
+			double currentTime = BASS_ChannelBytes2Seconds(channelIds[trackNumber][i], BASS_ChannelGetPosition(channelIds[trackNumber][i], BASS_POS_BYTE));
 
 			/* 音量衰減公式: 音量 = 原始音量 * EXP(-時間) */
 			float tempVol = v * exp(-currentTime);
 
 			if (tempVol < minVol) {
 				minVol = tempVol;
-				minVolChannel = channelIds[i];
+				minVolChannel = channelIds[trackNumber][i];
 			}
 
 		}

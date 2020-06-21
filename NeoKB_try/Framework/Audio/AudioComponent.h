@@ -6,10 +6,12 @@
 #include <vector>
 #include <thread>
 #include "../../Util/DataStructure/ActionList.h"
+#include "../Timing/FramedClock.h"
 
 
 using namespace std;
 using namespace Util::DataStructure;
+using namespace Framework::Timing;
 
 
 namespace Framework {
@@ -26,6 +28,8 @@ namespace Audio {
 
 		virtual int Update();
 
+		int SetClock(FrameBasedClock* c);
+
 		virtual int _DebugPrintComponents(string spaces);
 
 	protected:
@@ -41,9 +45,15 @@ namespace Audio {
 
 		bool isCompleted = false;
 
+		FrameBasedClock* clock = nullptr;
+
 		ActionList<int> pendingActions;
 
+		ActionList<int> permanentActions;
+
 		mutable mutex pendingActionMutex;
+
+		mutable mutex permanentActionMutex;
 
 	private:
 

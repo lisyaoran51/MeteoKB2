@@ -41,6 +41,8 @@ namespace Samples {
 
 		double initialVolume = 0;
 
+		double nowVolume = 0;
+
 		/// <summary>
 		/// fadeout多久，單位是秒
 		/// </summary>
@@ -55,6 +57,8 @@ namespace Samples {
 		bool isStarted = false;
 
 		bool isCompleted = false;
+
+		bool isFadingOut = false;
 
 	};
 

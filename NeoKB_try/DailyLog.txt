@@ -1651,5 +1651,37 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	1	0	 Tempo	750000
 	看這兩行，把每個音的time code / 480(每個四分音符幾個訊號) * 750000(每個四分音符多少microsecond) / 1000000(以秒為單位)
 	就可以算出秒數
-
 	
+	另外踏板的代號是110
+
+6/15
+	可以把一個音分成AB段，前五秒是A段，5秒後fadeout，然後B段Fade IN，一直loop就可以一直維持那個音色
+	B段做一次這個音的波形就可以，中央C的波形是168個取樣點(44100)
+	B段要分幾次fade out，第一次fade out較快，第二次fade out較慢，會比較真。總延音時間超過20秒效果應該會剛好
+	
+	BASS_SetEAXParameters應該可以用來做出琴身的共鳴感
+	
+6/18
+	目前改玩了multiplayback有多個track的功能，正在寫鋼琴切成AB段的sample channel
+	卡在overlap的地方要怎麼fadeout，秒數部會算
+	
+6/19
+	連藍芽要用sdp的advertise才能跟手機的auto connection連線
+	然後依樣改 --compat
+	https://raspberrypi.stackexchange.com/questions/41776/failed-to-connect-to-sdp-server-on-ffffff000000-no-such-file-or-directory
+	sudo chmod 777 /var/run/sdp
+	sudo systemctl start hciuart
+	sudo bluetoothctl
+	discoverable on
+	pairable on
+	exit
+	
+	結束以後才能夠連線成功。如果用單純的rfcomm-server，手機會認為你的藍芽是off的狀態，一定要用sdp，在other裡面的advertise.c可以用
+	
+6/20
+	目前看起來bass的slide應該是10ms調整一次
+	要在所有audio clomponent裡面拿到audio thread的clock，這樣sample才能算時間
+	繼續寫instrument channel
+	之後要在meteopiano那邊去設定音的cut time、fade out time
+	
+	寫到instrument channel的update

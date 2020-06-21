@@ -9,43 +9,39 @@ namespace Framework {
 namespace Audio {
 namespace Samples {
 
-	/// <summary>
-	/// 當所有playback都正在play時，要播新的音效，選擇抓哪一個playback停掉來播新音效的方式
-	/// </summary>
-	enum class OverrideType {
-		MinimunVolume,
-		Longest,
-	};
-
 	class MultiPlaybackBassSampleChannel : public MultiPlaybackSampleChannel {
 
 	public:
 
-		MultiPlaybackBassSampleChannel(Sample* s, int pAmount, OverrideType oType);
+		MultiPlaybackBassSampleChannel(Sample* s, int pAmount, int tAmount, OverrideType oType);
 
-		virtual int Play();
+		virtual int Play(int trackNumber);
 
-		virtual int Play(double v);
+		virtual int Play(int trackNumber, double v);
 
-		virtual int Stop();
+		virtual int Stop(int trackNumber);
 
 		virtual int FadeOut();
 
+		virtual int FadeOut(int trackNumber);
+
 		virtual int StopFadeOut();
+
+		virtual int StopFadeOut(int trackNumber);
 
 		virtual bool GetIsPlaying();
 
+		virtual bool GetIsPlaying(int trackNumber);
+
 		virtual bool GetIsLoaded();
 
-		virtual int OnStateChange();
+		virtual int OnStateChange(int trackNumber);
 
 	protected:
 
-		OverrideType overrideType = OverrideType::MinimunVolume;
-
 		virtual int createSampleChannel();
 
-		virtual int getChannelToPlay();
+		virtual int getChannelToPlay(int trackNumber);
 
 	};
 

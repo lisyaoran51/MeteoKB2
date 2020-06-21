@@ -45,6 +45,7 @@ namespace Audio {
 		/// 懶得寫action，所以還沒有用
 		/// </summary>
 		int RegisterItem(T* item) {
+			item->SetClock(clock);
 
 			pendingActions.Add(this, [=]() {
 
