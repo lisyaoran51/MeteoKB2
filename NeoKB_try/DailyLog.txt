@@ -1678,6 +1678,10 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	
 	結束以後才能夠連線成功。如果用單純的rfcomm-server，手機會認為你的藍芽是off的狀態，一定要用sdp，在other裡面的advertise.c可以用
 	
+	其實只要兩個指令就夠了
+	sudo chmod 777 /var/run/sdp
+	sudo hciconfig hci0 piscan
+	
 6/20
 	目前看起來bass的slide應該是10ms調整一次
 	要在所有audio clomponent裡面拿到audio thread的clock，這樣sample才能算時間
@@ -1685,3 +1689,72 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	之後要在meteopiano那邊去設定音的cut time、fade out time
 	
 	寫到instrument channel的update
+	
+6/21
+	把切成AB段的sample寫完了，但是現在不確定unique lock能不能在同一個函式內連續使用。測試完發現可以
+	
+	接下來要寫modifier、反覆練彈、storage、樂理遊戲模式、藍芽裝置、藍芽handler
+	
+6/22
+	modifier修改遊戲的地方在ruleset container裡面修改難度，player裡面修改速度，在ruleset container的apply mods裡面修改ruleset container(例如增減column數、將落下方式由linear改為gravity)
+	
+	mod都是在載入的時候改一次設定，之後就不會再去call他
+	mod有:
+	1. 難度、左右手，去改control point
+	2. 速度，去改time controller
+	3. 反覆練彈，去改time controller和pattern generaotr或sm converter(換使用者彈的時候改為由下往上的特效)
+	4. 
+	
+	另外歌曲本身應該就要可以改:
+	1. 落下速度
+	2. 是否有原曲
+	3. 
+	
+	反覆練彈的部分，應該要把playfield裡面event processor master的get graph拿出來變成一個物件graph drawer，這個map drawer隨時讓time controller調整要顯示向上的燈光還是向下的燈光
+	總結，反覆練彈: sm converter同時生成向下和向上的effect -> 放入專用的timer controller -> 在event processor master放入專用的 graph drawer，隨時控制要畫向上還是向下的燈光
+	
+	pi藍芽讀一次資料要38~20us，寫一次資料要28~17us
+	
+	---藍芽規劃
+		
+	手機->裝置
+
+	寫入、讀取
+
+	須回傳收到
+
+
+	識別->手機版本、使用者身分、電子琴韌體版本、電子琴任體名稱、電子琴硬體資料、電子琴身分
+
+	系統->重新啟動主板、重新啟動子板、重新啟動aPP
+
+	心跳->心跳、斷線、重連
+
+	基本功能->音量調整、延音開關、力度開關
+
+	場景->選單、遊戲準備、遊戲、遊戲結束、重播、互動、錄製、擴充升級
+
+	log->讀取log、更改log等級、刪除log、儲存log、開啟即時傳遞、即時傳遞log
+
+	紀錄->讀取電子琴紀錄
+
+	設定->寫入設定、讀取設定
+
+	遊戲準備->調整遊戲設定、下載譜檔、開始載入遊戲、載入遊戲完成
+
+	遊戲-> 1.一般遊戲-對時、更改時間、更改速度、按下、放開、得分、暫停、繼續
+		   2.反覆練彈-更改狀態、練習次數、更改小節
+
+	遊戲結束->傳送總分、傳送重播譜檔
+
+	重播->下載譜檔、開始載入遊戲、載入遊戲完成
+
+	互動->互動開始、互動結束、按下、放開、顯示燈光、燈光事件、音效事件
+
+	錄製->開始錄製、按下、放開、結束錄製、傳送譜檔
+
+	擴充升級->下載音色、下載主程式
+	
+	
+5/23
+	藍芽rfcomm和l2cap的默認mtu是672bytes

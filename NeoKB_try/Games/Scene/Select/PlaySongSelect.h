@@ -26,6 +26,7 @@ namespace Select {
 	/// </summary>
 	class PlaySongSelect : public SongSelect {
 
+		// TODO: 這邊要改成bindable，這樣才能增減
 		vector<Modifier*> selectedModifiers;
 
 		Scene* player;
