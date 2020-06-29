@@ -1756,5 +1756,18 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	擴充升級->下載音色、下載主程式
 	
 	
-5/23
+6/23
 	藍芽rfcomm和l2cap的默認mtu是672bytes
+	
+6/29
+	beatmap difficulty目前看起來不太重要，他是定義osu的圓圈大小，縮緊速度，滑動時獲得多少分數。我們的設計裡面比較沒有這類東西，所以可以空著不用
+	所以modifier也不需要去修改難度
+	
+	反覆練彈應該適用把get event processor替換成專用的get event processor(策略模式)，裡面會把每一個fall effect都同時放一個erupt effect。
+	然後再把time controller替換成會自動倒退的time controller，並且去控制event processor master這一次要顯示fall effect還是erupt effect
+	score processor再看要怎麼改
+	
+	time controller應該不要動，改成sm converter自動在每個小節生成小節分隔，然後effect去抓這個分隔，轉出倒退event。
+	倒退event每次發生就在裡面+1，加到4就歸零並且跳到下一個小節。event processor master要控制當下只能播放該小節的Event，不然會播到其他小節的event
+	
+	另外Evnt processor master也要可以控制要播放左手/右手、簡單困難。
