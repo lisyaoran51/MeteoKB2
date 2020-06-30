@@ -10,6 +10,7 @@
 #include "../../../Util/InstanceCreator.h"
 #include "../../../Framework/Allocation/Hierachal/Container.h"
 #include "Event.h"
+#include "EventProcessorFilter.h"
 #include "../../../Framework/Graphic/Drawable.h"
 #include "../../../Util/DataStructure/PeriodMap.h"
 #include "../../../Framework/Allocation/Hierachal/Triggerable.h"
@@ -100,6 +101,8 @@ namespace Events {
 		/// 大於等於a，小於B的時段內，的所有event
 		/// </summary>
 		PeriodMap<EventProcessor<Event>*>* eventProcessorPeriods;
+
+		EventProcessorFilter* eventProcessorFilter = nullptr;
 
 		int processEvent(MTO_FLOAT elapsedTime);
 

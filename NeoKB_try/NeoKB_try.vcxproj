@@ -93,6 +93,7 @@
     <ClCompile Include="Games\Scheduler\Event\Effect\Algorithm\MapPitchShifter.cpp" />
     <ClCompile Include="Games\Scheduler\Event\Effect\Effect.cpp" />
     <ClCompile Include="Games\Scheduler\Event\Event.cpp" />
+    <ClCompile Include="Games\Scheduler\Event\EventProcessorFilter.cpp" />
     <ClCompile Include="Games\Scheduler\Event\EventProcessorMaster.cpp" />
     <ClCompile Include="Games\Scheduler\Event\GameEvents\GameEvent.cpp" />
     <ClCompile Include="Games\Scheduler\Event\GameEvents\StartGameEvent.cpp" />
@@ -348,6 +349,7 @@
     <ClInclude Include="Games\Scheduler\Event\Effect\EffectMapper.h" />
     <ClInclude Include="Games\Scheduler\Event\Event.h" />
     <ClInclude Include="Games\Scheduler\Event\EventProcessor.h" />
+    <ClInclude Include="Games\Scheduler\Event\EventProcessorFilter.h" />
     <ClInclude Include="Games\Scheduler\Event\EventProcessorMaster.h" />
     <ClInclude Include="Games\Scheduler\Event\GameEvents\GameEvent.h" />
     <ClInclude Include="Games\Scheduler\Event\GameEvents\StartGameEvent.h" />

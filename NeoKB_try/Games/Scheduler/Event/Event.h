@@ -37,6 +37,9 @@ namespace Events {
 		MTO_FLOAT GetStartTime() const;
 		MTO_FLOAT GetLifeTime() const;
 
+		int SetSourceEvent(Event* e);
+		Event* GetSourceEvent();
+
 		bool operator<(const Event &rhs) const;
 
 		// 一定要每次都override!!
@@ -64,6 +67,8 @@ namespace Events {
 	protected:
 
 		int eid;
+
+		Event* sourceEvent = nullptr;
 
 		EventStartType startType;
 		EventLifeType lifeType;

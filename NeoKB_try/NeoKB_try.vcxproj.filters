@@ -1242,6 +1242,9 @@
     <ClCompile Include="Framework\Audio\Sample\InstrumentBassSampleChannel.cpp">
       <Filter>來源檔案\Framework\Audio\Sample</Filter>
     </ClCompile>
+    <ClCompile Include="Games\Scheduler\Event\EventProcessorFilter.cpp">
+      <Filter>來源檔案\Games\Schedulers\Events</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="DailyLog.txt">
@@ -2103,6 +2106,9 @@
     </ClInclude>
     <ClInclude Include="Framework\Audio\Sample\InstrumentBassSampleChannel.h">
       <Filter>標頭檔\Framework\Audio\Sample</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Scheduler\Event\EventProcessorFilter.h">
+      <Filter>標頭檔\Games\Scheduler\Events</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -214,6 +214,7 @@ Pattern * MeteorPatternGenerator::generateNoteControlPoint(vector<Event*>* es, N
 		note->GetStartTime() - fallTime,
 		fallLifeTime,
 		fallSpeed);
+	fall->SetSourceEvent(note);
 
 
 	//note->SetLifeTime(noteLifeTime);
@@ -282,6 +283,10 @@ Pattern * MeteorPatternGenerator::generateInputKeyControlPoint(vector<Event*>* e
 		PianoEvent* pianoEventUp = new PianoEvent(pair<InputKey, int>(inputKey, -1), inputKeyControlPoint->GetStartTime() + inputKeyControlPoint->GetLifeTime() - 0.2, 0);
 
 		LOG(LogLevel::Depricated) << "MeteorSmConverter::generateInputKeyControlPoint() : Piano Event [" << inputKeyControlPoint->GetStartTime() << "].";
+		
+		sustainPedalIoEvent->SetSourceEvent(inputKeyControlPoint);
+		pianoEventDown->SetSourceEvent(inputKeyControlPoint);
+		pianoEventUp->SetSourceEvent(inputKeyControlPoint);
 
 		pattern->Add(sustainPedalIoEvent);
 		pattern->Add(pianoEventDown);
@@ -300,6 +305,9 @@ Pattern * MeteorPatternGenerator::generateInputKeyControlPoint(vector<Event*>* e
 			octaveShiftEvent = new OctaveShiftEvent(OctaveShiftType::Raise, inputKeyControlPoint->GetStartTime(), inputKeyControlPoint->GetLifeTime());
 
 		PianoEvent* pianoEventPress = new PianoEvent(pair<InputKey, int>(inputKey, 1), inputKeyControlPoint->GetStartTime(), 0);
+
+		octaveShiftEvent->SetSourceEvent(inputKeyControlPoint);
+		pianoEventPress->SetSourceEvent(inputKeyControlPoint);
 
 		pattern->Add(octaveShiftEvent);
 		pattern->Add(pianoEventPress);

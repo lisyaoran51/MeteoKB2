@@ -1771,3 +1771,14 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	倒退event每次發生就在裡面+1，加到4就歸零並且跳到下一個小節。event processor master要控制當下只能播放該小節的Event，不然會播到其他小節的event
 	
 	另外Evnt processor master也要可以控制要播放左手/右手、簡單困難。
+	
+	要在event processor master裡面的GetItemsContainPeriods，預先設定哪些effect會被它拿出來，哪些不用拿出來
+	所以要在裡面差一個判斷函式，要在period裡面放一個fliter，這個filter要去讓遊戲設定抓到，才能讓modifier能夠從filter去挑選出自己要用的event processor，去掉不要的
+	
+	instrument controller、playfield controller是在meteor playfield的load裡面載入的，event processor master是在playfield裡面載入的
+	應該是在ruleset executor裡面建立filter，然後modifier在ruleset executor load的時候加入filt函式，
+	
+	filter不該寫在period map裡面，要寫在外面，所以總共要寫在MeteorEventProcessorMaster::update、EventProcessorMaster::processEvent、EventProcessorMaster::GetGraph三個地方
+	而且get graph是draw thread，其他是update thread，所以要小心衝突
+	
+	filter寫好了，接下來應該要寫modifier怎麼套進去

@@ -98,6 +98,17 @@ MTO_FLOAT Event::GetLifeTime() const
 	return lifeTime;
 }
 
+int Event::SetSourceEvent(Event * e)
+{
+	sourceEvent = e;
+	return 0;
+}
+
+Event * Event::GetSourceEvent()
+{
+	return sourceEvent;
+}
+
 bool Event::operator<(const Event & rhs) const
 {
 	return startTime < rhs.GetStartTime();

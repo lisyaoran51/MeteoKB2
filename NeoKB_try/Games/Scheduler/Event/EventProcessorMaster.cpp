@@ -132,6 +132,8 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 
 	eventProcessorPeriods->GetItemsContainPeriods(make_pair<float, float>(currentTime - visibleTimeRange, currentTime + visibleTimeRange), &eventProcessors);
 
+	eventProcessorFilter->Filter(&eventProcessors);
+
 	for (int i = 0; i < eventProcessors.size(); i++) {
 
 		LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent : this processor is for [" << eventProcessors[i]->GetEvent()->GetTypeName() << "].";
@@ -197,6 +199,7 @@ Map * EventProcessorMaster::GetGraph()
 
 	eventProcessorPeriods->GetItemsContainPeriods(make_pair<float, float>(currentTime - visibleTimeRange, currentTime + visibleTimeRange), &eventProcessors);
 	
+	eventProcessorFilter->Filter(&eventProcessors);
 
 	LOG(LogLevel::Depricated) << "EventProcessorMaster::GetGraph() : get graph from [" << eventProcessors.size() << "] processors in (" << currentTime - visibleTimeRange  << "," << currentTime + visibleTimeRange << ") seconds."
 		<< [](vector<EventProcessor<Event>*>& eProcessors) {
