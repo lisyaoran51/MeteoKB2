@@ -17,6 +17,7 @@
 #include "../../Framework/Input/PassThroughInputManager.h"
 #include "../../Framework/Timing/TimeController.h"
 #include "Scoring/ScoreProcessor.h"
+#include "Modifiers/DifficultyModifier.h"
 
 
 
@@ -40,6 +41,7 @@ using namespace Games::Scenes::Play;
 using namespace Framework::Input;
 using namespace Framework::Timing;
 using namespace Games::Rulesets::Scoring;
+using namespace Games::Rulesets::Modifiers;
 
 
 
@@ -96,6 +98,15 @@ namespace Rulesets {
 			InstanceCreator<MtoObject> &iCreator = InstanceCreator<MtoObject>::GetInstance();
 			PatternGenerator* pg = iCreator.CreateInstanceWithT<PatternGenerator>(pgName);
 			AddChild(pg);
+
+
+			for (int i = 0; i < workingSm->GetModifiers()->GetValue()->size(); i++) {
+				if (dynamic_cast<DifficultyModifier*>(workingSmValue->GetModifiers()->GetValue()->at(i))) {
+					dynamic_cast<DifficultyModifier*>(workingSmValue->GetModifiers()->GetValue()->at(i))
+						->ApplyToDifficulty(workingSm->GetSm()->GetSmInfo()->difficuty);
+				}
+			}
+
 
 			// 要把converter和postprocessor擺到load()裡，因為pattern Generator是擺在cache裡的
 			LOG(LogLevel::Fine) << "RulesetExecutor::load : creating Sm Converter ...";

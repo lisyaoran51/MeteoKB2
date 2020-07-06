@@ -7,11 +7,10 @@ using namespace Instruments;
 
 
 
-AutoPedalModifier::AutoPedalModifier()
+AutoPedalModifier::AutoPedalModifier(): RegisterType("AutoPedalModifier")
 {
-	name = "AutoPedal";
 	description = "AutoPedal";
-	modifierType = ModifierType::Special;
+	//modifierType = ModifierType::Special;
 	ranked = true;
 }
 

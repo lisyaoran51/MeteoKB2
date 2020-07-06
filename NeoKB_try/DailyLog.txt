@@ -1782,3 +1782,30 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	而且get graph是draw thread，其他是update thread，所以要小心衝突
 	
 	filter寫好了，接下來應該要寫modifier怎麼套進去
+	
+7/3
+	meteor ruleset executor要在create time controller時，創一個可以收集每一小節位置的time controller，這樣轉小節旋鈕的時候才可以轉到正確位置
+	然後meteor ruleset executor要把讀出來的譜整個檢查一遍他的小節位置，再把小節位置丟給meteor time controller
+	之後反覆練彈就統一由meteor time controller來做反覆，所以反覆練彈的event processor controller要去抓time controller
+	
+	time controller的event processor controller要在playfield裡面加入
+	
+	目前改成meteor ruleset executor會再load的時候把每個小節秒數丟進meteor time controller裡，注意之後要記得回去把decoder出來的event重新排序一次，不然會出錯
+	
+	現在看起來應該是meteor time controller要去控制filter，然後repeat event去控制meteor time controller，event不用直接控制filter。
+	
+	
+	要再做一個repeat event，負責控制time controller
+	
+	現在不知道左右手、困難度那些要不要做enum。目前寫到meteor time controller
+	
+7/4
+	左右手、困難度用apply mod加到filter裡面就好，
+	
+	beatmap裡面本來就有設計difficulty功能，我們應該把困難度、左右手、落下速度什麼的擺在difficulty裡面，之後再用apply to difficulty去修改就好。
+	然後發現beatmap還有個欄位叫event，octave shift應該要擺在那個欄位才對
+	
+	發現我應該寫錯了，pattern generator不需要這麼早生成，是因為pattern generator只要讀beatmap裡面的各項設定，就能生成燈光
+	beatmap會記錄各種設定，紀錄方式是用applymod去把要改的東西放進去，所以其實只要把要改的東西丟進去beatmap就好，不用碰到pattern generator
+	先做好beatmap difficulty就好，pattern generator以後有空再修
+	

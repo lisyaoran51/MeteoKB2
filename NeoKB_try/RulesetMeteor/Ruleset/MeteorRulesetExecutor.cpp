@@ -62,8 +62,45 @@ SmPostprocessor * MeteorRulesetExecutor::createSmPostprocessor()
 int MeteorRulesetExecutor::load()
 {
 	
-
+	MeteorTimeController* t = GetCache<MeteorTimeController>("MeteorTimeController");
+	if (!t)
+		throw runtime_error("int MeteorRulesetExecutor::load() : MeteorTimeController not found in cache.");
 	// 讀config
+	return 0;
+}
+
+int MeteorRulesetExecutor::load(MeteorTimeController * t)
+{
+	vector<Event*>* originalEvents = workingSm->GetSm()->GetEvents();
+	vector<float> sectionTime;
+
+	int section = -1;
+
+	for (int i = 0; i < originalEvents->size(); i++) {
+		if (dynamic_cast<PlayableControlPoint*>(originalEvents->at(i))) {
+
+			PlayableControlPoint* playableControlPoint = dynamic_cast<PlayableControlPoint*>(originalEvents->at(i));
+
+			if (playableControlPoint->GetSectionIndex() == -1) {
+				if(sectionTime.size() != 0)
+					throw runtime_error("int MeteorRulesetExecutor::load() : working sm section index error.");
+				break;
+			}
+				
+			/*
+			 * TODO: 重要!! 這邊要先將events用時間排序，不然就是decoder要先排序一次，不然會出錯
+			 */
+			if (playableControlPoint->GetSectionIndex() > section) {
+				for (int j = 0; i < playableControlPoint->GetSectionIndex() - section; j++) {
+					sectionTime.push_back(playableControlPoint->GetStartTime());
+				}
+				section = playableControlPoint->GetSectionIndex();
+			}
+		}
+	}
+	
+	t->SetSectionTime(&sectionTime);
+
 	return 0;
 }
 

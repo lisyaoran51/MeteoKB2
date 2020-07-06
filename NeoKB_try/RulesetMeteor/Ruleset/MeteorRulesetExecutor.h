@@ -40,6 +40,8 @@ namespace Rulesets {
 
 		int load();
 
+		int load(MeteorTimeController* t);
+
 	public:
 
 		MeteorRulesetExecutor();

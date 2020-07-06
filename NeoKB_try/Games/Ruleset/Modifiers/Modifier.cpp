@@ -4,7 +4,11 @@
 using namespace Games::Rulesets::Modifiers;
 
 
-string Modifier::GetName()
+Modifier::Modifier() :RegisterType("Modifier")
 {
-	return string();
+}
+
+string Modifier::GetDescription()
+{
+	return description;
 }

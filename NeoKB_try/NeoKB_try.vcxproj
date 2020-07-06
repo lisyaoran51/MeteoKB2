@@ -206,6 +206,11 @@
     <ClCompile Include="RulesetMeteor\Ruleset\MeteorRuleset.cpp" />
     <ClCompile Include="RulesetMeteor\Ruleset\MeteorRulesetExecutor.cpp" />
     <ClCompile Include="RulesetMeteor\Ruleset\Modifiers\AutoPedalModifier.cpp" />
+    <ClCompile Include="RulesetMeteor\Ruleset\Modifiers\ClockRateModifier.cpp" />
+    <ClCompile Include="RulesetMeteor\Ruleset\Modifiers\MeteorDifficultyModifier.cpp" />
+    <ClCompile Include="RulesetMeteor\Ruleset\Modifiers\FallSpeedModifier.cpp" />
+    <ClCompile Include="RulesetMeteor\Ruleset\Modifiers\HandModifier.cpp" />
+    <ClCompile Include="RulesetMeteor\Ruleset\Modifiers\RepeatPracticeModifier.cpp" />
     <ClCompile Include="RulesetMeteor\Ruleset\Scoring\MeteorScoreProcessor.cpp" />
     <ClCompile Include="RulesetMeteor\Scheduler\Event\ControlPoints\MeteorInputKeyControlPointHitObject.cpp" />
     <ClCompile Include="RulesetMeteor\Scheduler\Event\ControlPoints\MeteorNoteControlPointHitObject.cpp" />
@@ -307,10 +312,11 @@
     <ClInclude Include="Games\Ruleset\Judgements\HitWindow.h" />
     <ClInclude Include="Games\Ruleset\Judgements\HasHitWindow.h" />
     <ClInclude Include="Games\Ruleset\Judgements\Judgement.h" />
-    <ClInclude Include="Games\Ruleset\Modifiers\IApplicableToClock.h" />
-    <ClInclude Include="Games\Ruleset\Modifiers\IApplicableToDifficulty.h" />
+    <ClInclude Include="Games\Ruleset\Modifiers\TimeControllerModifier.h" />
+    <ClInclude Include="Games\Ruleset\Modifiers\EventProcessorFilterModifier.h" />
+    <ClInclude Include="Games\Ruleset\Modifiers\DifficultyModifier.h" />
     <ClInclude Include="Games\Ruleset\Modifiers\InstrumentModifier.h" />
-    <ClInclude Include="Games\Ruleset\Modifiers\IApplicableToRulesetExecutor.h" />
+    <ClInclude Include="Games\Ruleset\Modifiers\RulesetExecutorModifier.h" />
     <ClInclude Include="Games\Ruleset\Modifiers\Modifier.h" />
     <ClInclude Include="Games\Ruleset\Ruleset.h" />
     <ClInclude Include="Games\Ruleset\RulesetExecutor.h" />
@@ -369,6 +375,7 @@
     <ClInclude Include="Games\Scheduler\Event\SystemEvents\StopSystemEvent.h" />
     <ClInclude Include="Games\Scheduler\Event\SystemEvents\SystemEvent.h" />
     <ClInclude Include="Games\Scheduler\Event\SystemEvents\SystemEventHandler.h" />
+    <ClInclude Include="Games\Scheduler\Event\TimeEvents\TimeControllerConrtollers\TimeConrtollerController.h" />
     <ClInclude Include="Games\Sheetmusic\Format\Parser\EventParser.h" />
     <ClInclude Include="Games\Sheetmusic\Format\SimpleSmDecoder.h" />
     <ClInclude Include="Games\Sheetmusic\Format\SmDecoder.h" />
@@ -492,6 +499,11 @@
     <ClInclude Include="RulesetMeteor\Ruleset\MeteorRuleset.h" />
     <ClInclude Include="RulesetMeteor\Ruleset\MeteorRulesetExecutor.h" />
     <ClInclude Include="RulesetMeteor\Ruleset\Modifiers\AutoPedalModifier.h" />
+    <ClInclude Include="RulesetMeteor\Ruleset\Modifiers\ClockRateModifier.h" />
+    <ClInclude Include="RulesetMeteor\Ruleset\Modifiers\MeteorDifficultyModifier.h" />
+    <ClInclude Include="RulesetMeteor\Ruleset\Modifiers\FallSpeedModifier.h" />
+    <ClInclude Include="RulesetMeteor\Ruleset\Modifiers\HandModifier.h" />
+    <ClInclude Include="RulesetMeteor\Ruleset\Modifiers\RepeatPracticeModifier.h" />
     <ClInclude Include="RulesetMeteor\Ruleset\Scoring\MeteorScoreProcessor.h" />
     <ClInclude Include="RulesetMeteor\Scheduler\Event\ControlPoints\MeteorInputKeyControlPointHitObject.h" />
     <ClInclude Include="RulesetMeteor\Scheduler\Event\ControlPoints\MeteorNoteControlPointHitObject.h" />

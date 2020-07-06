@@ -592,6 +592,12 @@
     <Filter Include="來源檔案\RulesetMeteor\Schedulers\Events\PlayfieldEvents\PlayfieldControllers">
       <UniqueIdentifier>{31437661-7771-42ea-a3b6-0e21f7a30d8a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="標頭檔\RulesetMeteor\Schedulers\Events\TimeEvents">
+      <UniqueIdentifier>{1e62612b-edb4-4bf8-ac6f-40f883e31dbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\RulesetMeteor\Schedulers\Events\TimeEvents\TimeControllerControllers">
+      <UniqueIdentifier>{a32f9410-bdaf-4559-b0ee-3ba4bfb83ca9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Games\Graphic\Renderer\renderer.cpp">
@@ -1244,6 +1250,21 @@
     </ClCompile>
     <ClCompile Include="Games\Scheduler\Event\EventProcessorFilter.cpp">
       <Filter>來源檔案\Games\Schedulers\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\Ruleset\Modifiers\HandModifier.cpp">
+      <Filter>來源檔案\RulesetMeteor\Ruleset\Modifiers</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\Ruleset\Modifiers\FallSpeedModifier.cpp">
+      <Filter>來源檔案\RulesetMeteor\Ruleset\Modifiers</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\Ruleset\Modifiers\ClockRateModifier.cpp">
+      <Filter>來源檔案\RulesetMeteor\Ruleset\Modifiers</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\Ruleset\Modifiers\RepeatPracticeModifier.cpp">
+      <Filter>來源檔案\RulesetMeteor\Ruleset\Modifiers</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\Ruleset\Modifiers\MeteorDifficultyModifier.cpp">
+      <Filter>來源檔案\RulesetMeteor\Ruleset\Modifiers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2038,15 +2059,6 @@
     <ClInclude Include="RulesetMeteor\Scheduler\Event\InstrumentEvents\InstrumentControllers\PianoController.h">
       <Filter>標頭檔\RulesetMeteor\Schedulers\Events\InstrumentEvents\InstrumentControllers</Filter>
     </ClInclude>
-    <ClInclude Include="Games\Ruleset\Modifiers\IApplicableToRulesetExecutor.h">
-      <Filter>標頭檔\Games\Ruleset\Modifiers</Filter>
-    </ClInclude>
-    <ClInclude Include="Games\Ruleset\Modifiers\IApplicableToClock.h">
-      <Filter>標頭檔\Games\Ruleset\Modifiers</Filter>
-    </ClInclude>
-    <ClInclude Include="Games\Ruleset\Modifiers\IApplicableToDifficulty.h">
-      <Filter>標頭檔\Games\Ruleset\Modifiers</Filter>
-    </ClInclude>
     <ClInclude Include="RulesetMeteor\Ruleset\Modifiers\AutoPedalModifier.h">
       <Filter>標頭檔\RulesetMeteor\Ruleset\Modifiers</Filter>
     </ClInclude>
@@ -2109,6 +2121,36 @@
     </ClInclude>
     <ClInclude Include="Games\Scheduler\Event\EventProcessorFilter.h">
       <Filter>標頭檔\Games\Scheduler\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Ruleset\Modifiers\HandModifier.h">
+      <Filter>標頭檔\RulesetMeteor\Ruleset\Modifiers</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Ruleset\Modifiers\RepeatPracticeModifier.h">
+      <Filter>標頭檔\RulesetMeteor\Ruleset\Modifiers</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Ruleset\Modifiers\FallSpeedModifier.h">
+      <Filter>標頭檔\RulesetMeteor\Ruleset\Modifiers</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Ruleset\Modifiers\ClockRateModifier.h">
+      <Filter>標頭檔\RulesetMeteor\Ruleset\Modifiers</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Ruleset\Modifiers\RulesetExecutorModifier.h">
+      <Filter>標頭檔\Games\Ruleset\Modifiers</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Ruleset\Modifiers\DifficultyModifier.h">
+      <Filter>標頭檔\Games\Ruleset\Modifiers</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Ruleset\Modifiers\TimeControllerModifier.h">
+      <Filter>標頭檔\Games\Ruleset\Modifiers</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Ruleset\Modifiers\EventProcessorFilterModifier.h">
+      <Filter>標頭檔\Games\Ruleset\Modifiers</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Ruleset\Modifiers\MeteorDifficultyModifier.h">
+      <Filter>標頭檔\RulesetMeteor\Ruleset\Modifiers</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Scheduler\Event\TimeEvents\TimeControllerConrtollers\TimeConrtollerController.h">
+      <Filter>標頭檔\RulesetMeteor\Schedulers\Events\TimeEvents\TimeControllerControllers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

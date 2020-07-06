@@ -5,8 +5,56 @@ using namespace Meteor::Timing;
 
 
 
+
+int MeteorTimeController::load()
+{
+
+	EventProcessorFilter * e = GetCache<EventProcessorFilter>("EventProcessorFilter");
+	if (!e)
+		throw runtime_error("MeteorTimeController::load() : EventProcessorFilter not found in cache.");
+
+	return load(e);
+}
+
+int MeteorTimeController::load(EventProcessorFilter * eProcessorFilter)
+{
+	eventProcessorFilter = eProcessorFilter;
+	return 0;
+}
+
 MeteorTimeController::MeteorTimeController() : RegisterType("MeteorTimeController")
 {
+	registerLoad(bind(static_cast<int(MeteorTimeController::*)(void)>(&MeteorTimeController::load), this));
+}
+
+int MeteorTimeController::SetSectionTime(vector<float>* sTime)
+{
+	for (int i = 0; i < sTime->size(); i++) {
+		sectionTime.push_back(sTime->at(i));
+	}
+	return 0;
+}
+
+int MeteorTimeController::SetTimeControllerMode(MeteorTimeControllerMode tControllerMode)
+{
+
+	timeControllerMode = tControllerMode;
+
+	return 0;
+}
+
+int MeteorTimeController::SetRepeatSections(int rSections)
+{
+	repeatSections = rSections;
+
+	return 0;
+}
+
+int MeteorTimeController::SetHasSection(bool hSection)
+{
+
+	hasSection = hSection;
+	return 0;
 }
 
 int MeteorTimeController::onButtonDown(InputState * inputState, InputKey button)

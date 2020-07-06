@@ -66,6 +66,8 @@ namespace Events {
 		/// </summary>
 		int SwitchVariant(int v);
 
+		int GetVariant();
+
 		int ClearFilterCallback();
 
 		int ClearVariantFilterCallback(int v);

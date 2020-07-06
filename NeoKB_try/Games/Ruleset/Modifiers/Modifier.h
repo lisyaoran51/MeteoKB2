@@ -4,34 +4,28 @@
 
 #include <set>
 #include <string>
+#include "../../../Framework/Allocation/Hierachal/MtoObject.h"
+
 
 using namespace std;
+using namespace Framework::Allocation::Hierachal;
 
 
 namespace Games {
 namespace Rulesets{
 namespace Modifiers{
 
-	enum class ModifierType {
-		Difficulty,
-		Hand,
-		Special
-	};
-
-
-	class Modifier {
+	class Modifier : virtual public RegisterType{
 
 	public:
 
-		virtual string GetName();
+		Modifier();
+
+		virtual string GetDescription();
 
 	protected:
 
-		string name = "";
-
 		string description = "";
-
-		ModifierType modifierType = ModifierType::Special;
 
 		set<string> incompitableMods;
 

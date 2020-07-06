@@ -4,6 +4,8 @@
 #include "../../Sheetmusic/Sheetmusic.h"
 #include "../../Ruleset/Modifiers/InstrumentModifier.h"
 
+#include "../../Ruleset/Modifiers/TimeControllerModifier.h"
+
 
 
 using namespace std;
@@ -68,6 +70,15 @@ int Player::load(MeteoConfigManager* m, Instrument* instru)
 	}
 
 
+
+	LOG(LogLevel::Fine) << "Player::load : create time controller.";
+	timeController = rulesetExecutor->CreateTimeController();
+	LOG(LogLevel::Fine) << "Player::load : set controllable clock.";
+	//timeController->ImportWorkingSm(workingSmValue);
+	timeController->SetControllableClock(decoupledClock);
+	LOG(LogLevel::Fine) << "Player::load : set speed adjuster.";
+	timeController->SetSpeedAdjuster(rulesetExecutor->CreateSpeedAdjuster());
+
 	// TODO: 把config裡面的offset和offset clock的offset bind在一起，讓config可以調整offset
 
 	LOG(LogLevel::Fine) << "Player::load : scheduler = [" << GetScheduler() << "].";
@@ -77,24 +88,21 @@ int Player::load(MeteoConfigManager* m, Instrument* instru)
 		LOG(LogLevel::Info) << "Player::load : scheduled task to change source to track [" << adjustableClock << "].";
 		adjustableClock->Reset();
 
-		// TODO: 把mod加入adjustableClock裡
-		// foreach (var mod in working.Mods.Value.OfType<IApplicableToClock>())
-		//     mod.ApplyToClock(adjustableSourceClock);
+
 		LOG(LogLevel::Debug) << "Player::load : reseted.";
 		decoupledClock->ChangeSource(adjustableClock);
+
+		for (int i = 0; i < workingSmValue->GetModifiers()->GetValue()->size(); i++) {
+			if (dynamic_cast<TimeControllerModifier*>(workingSmValue->GetModifiers()->GetValue()->at(i))) {
+				dynamic_cast<TimeControllerModifier*>(workingSmValue->GetModifiers()->GetValue()->at(i))->ApplyToTimeController(timeController);
+			}
+
+		}
 		
 		LOG(LogLevel::Debug) << "Player::load : scheduled task end.";
 
 		return 0;
 	});
-
-	LOG(LogLevel::Fine) << "Player::load : create time controller.";
-	timeController = rulesetExecutor->CreateTimeController();
-	LOG(LogLevel::Fine) << "Player::load : set controllable clock.";
-	//timeController->ImportWorkingSm(workingSmValue);
-	timeController->SetControllableClock(decoupledClock);
-	LOG(LogLevel::Fine) << "Player::load : set speed adjuster.";
-	timeController->SetSpeedAdjuster(rulesetExecutor->CreateSpeedAdjuster());
 
 
 	LOG(LogLevel::Fine) << "Player::load : adding time controller, ruleset executor. clock = [" << GetClock() << "].";

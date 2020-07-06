@@ -59,6 +59,8 @@ namespace Sheetmusics {
 
 		FileInfo* fileInfo;
 
+		bool hasSection = false;
+
 	};
 
 
