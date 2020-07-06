@@ -1809,3 +1809,7 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	beatmap會記錄各種設定，紀錄方式是用applymod去把要改的東西放進去，所以其實只要把要改的東西丟進去beatmap就好，不用碰到pattern generator
 	先做好beatmap difficulty就好，pattern generator以後有空再修
 	
+	
+7/6
+	寫道要把repeat practice controller家道meteor playfield李
+	

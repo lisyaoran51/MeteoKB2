@@ -8,9 +8,10 @@ using namespace Meteor::Timing;
 
 
 
-RepeatPracticeModifier::RepeatPracticeModifier(int rSection) : RegisterType("RepeatPracticeModifier")
+RepeatPracticeModifier::RepeatPracticeModifier(int rSection, int rTimes) : RegisterType("RepeatPracticeModifier")
 {
 	repeatSections = rSection;
+	repeatTimes = rTimes;
 }
 
 int RepeatPracticeModifier::ApplyToTimeController(TimeController * timeController)
@@ -24,6 +25,7 @@ int RepeatPracticeModifier::ApplyToTimeController(TimeController * timeControlle
 
 	meteorTimeController->SetRepeatSections(repeatSections);
 
+	meteorTimeController->SetRepeatTimes(repeatTimes);
 
 	return 0;
 }

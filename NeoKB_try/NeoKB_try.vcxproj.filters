@@ -592,11 +592,29 @@
     <Filter Include="來源檔案\RulesetMeteor\Schedulers\Events\PlayfieldEvents\PlayfieldControllers">
       <UniqueIdentifier>{31437661-7771-42ea-a3b6-0e21f7a30d8a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="標頭檔\RulesetMeteor\Schedulers\Events\TimeEvents">
+    <Filter Include="來源檔案\Games\Schedulers\Events\TimeEvents">
+      <UniqueIdentifier>{d7e1a82f-d50b-4c06-aa60-85e2a13c566c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Games\Schedulers\Events\TimeEvents\TimeControllerControllers">
+      <UniqueIdentifier>{5ccbbfa3-4252-4202-b4b8-edb57b553865}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Games\Scheduler\Events\TimeEvents">
       <UniqueIdentifier>{1e62612b-edb4-4bf8-ac6f-40f883e31dbb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="標頭檔\RulesetMeteor\Schedulers\Events\TimeEvents\TimeControllerControllers">
+    <Filter Include="標頭檔\Games\Scheduler\Events\TimeEvents\TimeControllerControllers">
       <UniqueIdentifier>{a32f9410-bdaf-4559-b0ee-3ba4bfb83ca9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\RulesetMeteor\Schedulers\Events\TimeEvents">
+      <UniqueIdentifier>{387402cd-7472-4e20-859e-343a63b080f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\RulesetMeteor\Schedulers\Events\TimeEvents\TimeControllerControllers">
+      <UniqueIdentifier>{8a82c49b-a966-4d50-9dcc-8b7af08be842}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetMeteor\Schedulers\Events\TimeEvents">
+      <UniqueIdentifier>{d2a2174d-489f-462f-9e5b-72b51b0d6281}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetMeteor\Schedulers\Events\TimeEvents\TimeControllerControllers">
+      <UniqueIdentifier>{5cf9ecba-238f-4cde-9aea-0ea3c984091f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1265,6 +1283,24 @@
     </ClCompile>
     <ClCompile Include="RulesetMeteor\Ruleset\Modifiers\MeteorDifficultyModifier.cpp">
       <Filter>來源檔案\RulesetMeteor\Ruleset\Modifiers</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\Scheduler\Event\TimeEvents\TimeControllerConrtollers\TimeControllerController.cpp">
+      <Filter>來源檔案\Games\Schedulers\Events\TimeEvents\TimeControllerControllers</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\Scheduler\Event\TimeEvents\TimeEvent.cpp">
+      <Filter>來源檔案\Games\Schedulers\Events\TimeEvents</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\Scheduler\Event\TimeEvents\TimeEventProcessor.cpp">
+      <Filter>來源檔案\Games\Schedulers\Events\TimeEvents</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\TimeEvents\RepeatPracticeEventProcessor.cpp">
+      <Filter>來源檔案\RulesetMeteor\Schedulers\Events\TimeEvents</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\TimeEvents\RepeatPracticeEvent.cpp">
+      <Filter>來源檔案\RulesetMeteor\Schedulers\Events\TimeEvents</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\TimeEvents\TimeControllerControllers\RepeatPracticeController.cpp">
+      <Filter>來源檔案\RulesetMeteor\Schedulers\Events\TimeEvents\TimeControllerControllers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2149,7 +2185,22 @@
     <ClInclude Include="RulesetMeteor\Ruleset\Modifiers\MeteorDifficultyModifier.h">
       <Filter>標頭檔\RulesetMeteor\Ruleset\Modifiers</Filter>
     </ClInclude>
-    <ClInclude Include="Games\Scheduler\Event\TimeEvents\TimeControllerConrtollers\TimeConrtollerController.h">
+    <ClInclude Include="Games\Scheduler\Event\TimeEvents\TimeControllerConrtollers\TimeControllerController.h">
+      <Filter>標頭檔\Games\Scheduler\Events\TimeEvents\TimeControllerControllers</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Scheduler\Event\TimeEvents\TimeEvent.h">
+      <Filter>標頭檔\Games\Scheduler\Events\TimeEvents</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Scheduler\Event\TimeEvents\TimeEventProcessor.h">
+      <Filter>標頭檔\Games\Scheduler\Events\TimeEvents</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\TimeEvents\RepeatPracticeEvent.h">
+      <Filter>標頭檔\RulesetMeteor\Schedulers\Events\TimeEvents</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\TimeEvents\RepeatPracticeEventProcessor.h">
+      <Filter>標頭檔\RulesetMeteor\Schedulers\Events\TimeEvents</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\TimeEvents\TimeControllerControllers\RepeatPracticeController.h">
       <Filter>標頭檔\RulesetMeteor\Schedulers\Events\TimeEvents\TimeControllerControllers</Filter>
     </ClInclude>
   </ItemGroup>

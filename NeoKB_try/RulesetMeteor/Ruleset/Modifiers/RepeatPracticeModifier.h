@@ -20,13 +20,15 @@ namespace Modifiers{
 
 	public:
 
-		RepeatPracticeModifier(int rSection);
+		RepeatPracticeModifier(int rSection, int rTimes);
 
 		int ApplyToTimeController(TimeController* timeController);
 
 	protected:
 
 		int repeatSections = 1;
+
+		int repeatTimes = 4;
 
 	};
 

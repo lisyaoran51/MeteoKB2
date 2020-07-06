@@ -1,5 +1,5 @@
-#ifndef TIME_CONRTOLLER_CONRTOLLER_H
-#define TIME_CONRTOLLER_CONRTOLLER_H
+#ifndef TIME_CONTROLLER_CONTROLLER_H
+#define TIME_CONTROLLER_CONTROLLER_H
 
 
 #include "../../../../../Framework/Allocation/Hierachal/Container.h"
@@ -16,18 +16,18 @@ namespace Games {
 namespace Schedulers {
 namespace Events {
 namespace TimeEvents {
-namespace TimeConrtollerControllers {
+namespace TimeControllerControllers {
 
 
-	class TimeControllerConrtollerInterface : public Container {
+	class TimeControllerControllerInterface : public Container {
 
 	public:
 
-		TimeControllerConrtollerInterface();
+		TimeControllerControllerInterface();
 
 		virtual int LazyConstruct(TimeController* t) = 0;
 
-		virtual int ControlTimeConrtoller(EventProcessor<Event>* eProcessor) = 0;
+		virtual int ControlTimeController(EventProcessor<Event>* eProcessor) = 0;
 
 	protected:
 
@@ -35,7 +35,7 @@ namespace TimeConrtollerControllers {
 	};
 
 	template<typename T>
-	class TimeControllerConrtoller : public TimeControllerConrtollerInterface {
+	class TimeControllerController : public TimeControllerConrtollerInterface {
 
 		int load() {
 
@@ -57,8 +57,8 @@ namespace TimeConrtollerControllers {
 
 	public:
 
-		TimeControllerConrtoller() : RegisterType("TimeControllerConrtoller") {
-			registerLoad(bind((int(TimeControllerConrtoller<T>::*)())&TimeControllerConrtoller<T>::load, this));
+		TimeControllerController() : RegisterType("TimeControllerController") {
+			registerLoad(bind((int(TimeControllerController<T>::*)())&TimeControllerController<T>::load, this));
 		}
 
 		virtual int LazyConstruct(TimeController* t) {
@@ -66,15 +66,15 @@ namespace TimeConrtollerControllers {
 			return 0;
 		}
 
-		virtual int ControlTimeConrtoller(EventProcessor<Event>* eProcessor) {
+		virtual int ControlTimeController(EventProcessor<Event>* eProcessor) {
 
-			return implementControlTimeConrtoller(eProcessor);
+			return implementControlTimeController(eProcessor);
 
 		}
 
 	protected:
 
-		virtual int implementControlTimeConrtoller(EventProcessor<Event>* eProcessor) = 0;
+		virtual int implementControlTimeController(EventProcessor<Event>* eProcessor) = 0;
 
 		TimeController* timeController = nullptr;
 

@@ -111,6 +111,9 @@
     <ClCompile Include="Games\Scheduler\Event\SystemEvents\StopSystemEvent.cpp" />
     <ClCompile Include="Games\Scheduler\Event\SystemEvents\SystemEvent.cpp" />
     <ClCompile Include="Games\Scheduler\Event\SystemEvents\SystemEventHandler.cpp" />
+    <ClCompile Include="Games\Scheduler\Event\TimeEvents\TimeControllerConrtollers\TimeControllerController.cpp" />
+    <ClCompile Include="Games\Scheduler\Event\TimeEvents\TimeEvent.cpp" />
+    <ClCompile Include="Games\Scheduler\Event\TimeEvents\TimeEventProcessor.cpp" />
     <ClCompile Include="Games\Sheetmusic\Format\SimpleSmDecoder.cpp" />
     <ClCompile Include="Games\Sheetmusic\Format\SmDecoder.cpp" />
     <ClCompile Include="Games\Sheetmusic\IO\FileReader.cpp" />
@@ -237,6 +240,9 @@
     <ClCompile Include="RulesetMeteor\Scheduler\Event\PlayfieldEvents\OctaveShiftEvent.cpp" />
     <ClCompile Include="RulesetMeteor\Scheduler\Event\PlayfieldEvents\OctaveShiftEventProcessor.cpp" />
     <ClCompile Include="RulesetMeteor\Scheduler\Event\PlayfieldEvents\PlayfieldControllers\OctaveShifter.cpp" />
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\TimeEvents\RepeatPracticeEvent.cpp" />
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\TimeEvents\RepeatPracticeEventProcessor.cpp" />
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\TimeEvents\TimeControllerControllers\RepeatPracticeController.cpp" />
     <ClCompile Include="RulesetMeteor\Sheetmusic\MeteorSheetmusicConverter.cpp" />
     <ClCompile Include="RulesetMeteor\Sheetmusic\MeteorSheetmusicPostprocessor.cpp" />
     <ClCompile Include="RulesetMeteor\Sheetmusic\Pattern\MeteorPatternGenerator.cpp" />
@@ -375,7 +381,9 @@
     <ClInclude Include="Games\Scheduler\Event\SystemEvents\StopSystemEvent.h" />
     <ClInclude Include="Games\Scheduler\Event\SystemEvents\SystemEvent.h" />
     <ClInclude Include="Games\Scheduler\Event\SystemEvents\SystemEventHandler.h" />
-    <ClInclude Include="Games\Scheduler\Event\TimeEvents\TimeControllerConrtollers\TimeConrtollerController.h" />
+    <ClInclude Include="Games\Scheduler\Event\TimeEvents\TimeControllerConrtollers\TimeControllerController.h" />
+    <ClInclude Include="Games\Scheduler\Event\TimeEvents\TimeEvent.h" />
+    <ClInclude Include="Games\Scheduler\Event\TimeEvents\TimeEventProcessor.h" />
     <ClInclude Include="Games\Sheetmusic\Format\Parser\EventParser.h" />
     <ClInclude Include="Games\Sheetmusic\Format\SimpleSmDecoder.h" />
     <ClInclude Include="Games\Sheetmusic\Format\SmDecoder.h" />
@@ -530,6 +538,9 @@
     <ClInclude Include="RulesetMeteor\Scheduler\Event\PlayfieldEvents\OctaveShiftEvent.h" />
     <ClInclude Include="RulesetMeteor\Scheduler\Event\PlayfieldEvents\OctaveShiftEventProcessor.h" />
     <ClInclude Include="RulesetMeteor\Scheduler\Event\PlayfieldEvents\PlayfieldControllers\OctaveShifter.h" />
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\TimeEvents\RepeatPracticeEvent.h" />
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\TimeEvents\RepeatPracticeEventProcessor.h" />
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\TimeEvents\TimeControllerControllers\RepeatPracticeController.h" />
     <ClInclude Include="RulesetMeteor\Sheetmusic\MeteorSheetmusicConverter.h" />
     <ClInclude Include="RulesetMeteor\Sheetmusic\MeteorSheetmusicPostProcessor.h" />
     <ClInclude Include="RulesetMeteor\Sheetmusic\Pattern\MeteorPatternGenerator.h" />

@@ -41,6 +41,8 @@ namespace Timing {
 
 		int SetRepeatSections(int rSections);
 
+		int SetRepeatTimes(int rTimes);
+
 		int SetHasSection(bool hSection);
 
 		/// <summary>
@@ -59,6 +61,8 @@ namespace Timing {
 		bool hasSection = false;
 
 		int repeatSections = -1;
+
+		int repeatTimes = 4;
 
 		vector<float> sectionTime;
 

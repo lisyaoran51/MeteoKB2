@@ -50,6 +50,12 @@ int MeteorTimeController::SetRepeatSections(int rSections)
 	return 0;
 }
 
+int MeteorTimeController::SetRepeatTimes(int rTimes)
+{
+	repeatTimes = rTimes;
+	return 0;
+}
+
 int MeteorTimeController::SetHasSection(bool hSection)
 {
 
