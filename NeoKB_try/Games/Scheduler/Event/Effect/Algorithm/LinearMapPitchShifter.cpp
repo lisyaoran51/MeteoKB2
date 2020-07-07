@@ -37,6 +37,13 @@ LinearMapPitchShifter::LinearMapPitchShifter() : RegisterType("LinearMapPitchShi
 
 }
 
+int LinearMapPitchShifter::JumpToPitch(Pitch p)
+{
+	tempPitch = p;
+	pitchJumped = true;
+	return 0;
+}
+
 int LinearMapPitchShifter::SetSeekPitch(Pitch p)
 {
 	LOG(LogLevel::Debug) << "LinearMapPitchShifter::SetSeekPitch() : shift from " << (int)tempPitch << " to " << (int)p;

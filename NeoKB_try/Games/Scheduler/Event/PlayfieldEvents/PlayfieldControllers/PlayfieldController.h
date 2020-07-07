@@ -36,6 +36,8 @@ namespace PlayfieldControllers{
 
 		virtual int ControlPlayfield(EventProcessor<Event>* eProcessor) = 0;
 
+		virtual int UndoControlPlayfield(EventProcessor<Event>* eProcessor) = 0;
+
 	protected:
 	};
 
@@ -78,9 +80,17 @@ namespace PlayfieldControllers{
 
 		}
 
+		virtual int UndoControlPlayfield(EventProcessor<Event>* eProcessor) {
+
+			return implementUndoControlPlayfield(eProcessor);
+
+		}
+
 	protected:
 
 		virtual int implementControlPlayfield(EventProcessor<Event>* eProcessor) = 0;
+
+		virtual int implementUndoControlPlayfield(EventProcessor<Event>* eProcessor) = 0;
 
 		Playfield* playfield = nullptr;
 

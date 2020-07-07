@@ -33,6 +33,8 @@ namespace Algorithms{
 
 		virtual bool GetIsConstructed();
 
+		virtual int JumpToPitch(Pitch p) = 0;
+
 		virtual int SetSeekPitch(Pitch p) = 0;
 
 		virtual int ResetSeekSpeed() = 0;
@@ -64,6 +66,8 @@ namespace Algorithms{
 		int width;
 
 		int height;
+
+		bool pitchJumped = false;
 
 		virtual int update();
 

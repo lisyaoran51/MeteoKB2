@@ -31,9 +31,11 @@ namespace PlayfieldEvents {
 			
 		virtual int ControlPlayfield() = 0;
 
+		virtual int UndoControlPlayfield() = 0;
+
 		virtual bool GetIsControllable() = 0;
 
-		virtual int SetIsControlled() = 0;
+		virtual int SetIsControlled(bool value) = 0;
 
 	};
 
@@ -57,8 +59,21 @@ namespace PlayfieldEvents {
 				
 			if (playfieldController && GetIsControllable()) {
 
-				SetIsControlled();
+				SetIsControlled(true);
 				playfieldController->ControlPlayfield(this);
+
+			}
+			return 0;
+		}
+
+		virtual int UndoControlPlayfield() {
+			if (!playfieldController)
+				LOG(LogLevel::Error) << "PlayfieldEventProcessor::UndoControlPlayfield : no playfield controller.";
+
+			if (playfieldController) {
+
+				SetIsControlled(false);
+				playfieldController->UndoControlPlayfield(this);
 
 			}
 			return 0;
@@ -66,13 +81,25 @@ namespace PlayfieldEvents {
 
 		T* GetPlayfieldEvent() { return dynamic_cast<T*>(event); }
 
-		virtual int SetIsControlled() {
-			if (playfieldControlType == PlayfieldControlType::Once)
-				isControllable = false;
-			else if (playfieldControlType == PlayfieldControlType::Timed) {
-				controlTime--;
-				if (controlTime == 0)
+		virtual int SetIsControlled(bool value) {
+			if (value == true) {
+				if (playfieldControlType == PlayfieldControlType::Once)
 					isControllable = false;
+				else if (playfieldControlType == PlayfieldControlType::Timed) {
+					controlTime--;
+					if (controlTime == 0)
+						isControllable = false;
+				}
+			}
+			else {
+				if (playfieldControlType == PlayfieldControlType::Once)
+					isControllable = true;
+				else if (playfieldControlType == PlayfieldControlType::Timed) {
+					if (controlTime == 0)
+						isControllable = true;
+					controlTime++;
+					
+				}
 			}
 		}
 

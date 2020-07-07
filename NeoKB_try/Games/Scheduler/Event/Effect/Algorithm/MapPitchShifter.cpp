@@ -57,13 +57,15 @@ bool MapPitchShifter::GetIsConstructed()
 
 int MapPitchShifter::update()
 {
-	if (shift() == RETURN_AVAILABLE) {
+	if (shift() == RETURN_AVAILABLE || pitchJumped) {
 
 		map<string, MapAlgorithmInterface*>::iterator iter;
 		for (iter = mapAlgos->begin(); iter != mapAlgos->end(); iter++) {
 			iter->second->SetStartX((int)GetTempPitch());
 		}
 		LOG(LogLevel::Depricated) << "MapPitchShifter::update() : shift algos ";
+
+		pitchJumped = false;
 	}
 	return 0;
 }

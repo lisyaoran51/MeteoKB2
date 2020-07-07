@@ -25,8 +25,6 @@ namespace TimeControllerControllers {
 
 		TimeControllerControllerInterface();
 
-		virtual int LazyConstruct(TimeController* t) = 0;
-
 		virtual int ControlTimeController(EventProcessor<Event>* eProcessor) = 0;
 
 	protected:
@@ -35,7 +33,7 @@ namespace TimeControllerControllers {
 	};
 
 	template<typename T>
-	class TimeControllerController : public TimeControllerConrtollerInterface {
+	class TimeControllerController : public TimeControllerControllerInterface {
 
 		int load() {
 
@@ -46,10 +44,15 @@ namespace TimeControllerControllers {
 			if (!f)
 				throw runtime_error("int PlayfieldController::load() : FrameworkConfigManager not found in cache.");
 
-			return load(f);
+			TimeController* t = GetCache<TimeController>("TimeController");
+
+
+			return load(f, t);
 		}
 
-		int load(FrameworkConfigManager* f) {
+		int load(FrameworkConfigManager* f, TimeController* t) {
+
+			timeController = t;
 
 			return 0;
 		}
@@ -59,11 +62,6 @@ namespace TimeControllerControllers {
 
 		TimeControllerController() : RegisterType("TimeControllerController") {
 			registerLoad(bind((int(TimeControllerController<T>::*)())&TimeControllerController<T>::load, this));
-		}
-
-		virtual int LazyConstruct(TimeController* t) {
-			timeController = t;
-			return 0;
 		}
 
 		virtual int ControlTimeController(EventProcessor<Event>* eProcessor) {

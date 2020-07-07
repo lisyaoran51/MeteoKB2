@@ -12,6 +12,7 @@
 #include "../Scheduler/Event/IoEvents/IoCommunicators/SustainPedalLightRingIoCommunicator.h"
 #include "../Scheduler/Event/InstrumentEvents/InstrumentControllers/PianoController.h"
 #include "../Scheduler/Event/PlayfieldEvents/PlayfieldControllers/OctaveShifter.h"
+#include "../Scheduler/Event/TimeEvents/TimeControllerControllers/RepeatPracticeController.h"
 
 
 
@@ -25,6 +26,7 @@ using namespace Games::Schedulers::Events::IoEvents::IoCommunicators;
 using namespace Meteor::Schedulers::Events::IoEvents::IoCommunicators;
 using namespace Meteor::Schedulers::Events::InstrumentEvents::InstrumentControllers;
 using namespace Meteor::Schedulers::Events::PlayfieldEvents::PlayfieldControllers;
+using namespace Meteor::Schedulers::Events::TimeEvents::TimeControllerControllers;
 
 
 int MeteorPlayfield::load()
@@ -66,8 +68,6 @@ int MeteorPlayfield::load(FrameworkConfigManager* f, MeteorConfigManager * m)
 	/* 利用map algo的名字建立map algo */
 	InstanceCreator<MtoObject> &iCreator = InstanceCreator<MtoObject>::GetInstance();
 	string mapAlgoName;
-	string ioCommunicatorName;
-	string instrumentControllerName;
 
 	/* --------------------- FallEffect map algo --------------------- */
 	if (m->Get(MeteorSetting::FallMapAlgorithm, &mapAlgoName)) {
@@ -127,6 +127,7 @@ int MeteorPlayfield::load(FrameworkConfigManager* f, MeteorConfigManager * m)
 	//mapAlgorithms["TargetLineEffect"]->RegisterBufferMap(bufferMap);
 
 	/* --------------------- Pedal event io communicator --------------------- */
+	string ioCommunicatorName;
 	if (m->Get(MeteorSetting::SustainPedalLightRingIoCommunicator, &ioCommunicatorName)) {
 		IoCommunicatorInterface* ioCommunicator = iCreator.CreateInstanceWithT<IoCommunicatorInterface>(ioCommunicatorName);
 
@@ -141,6 +142,7 @@ int MeteorPlayfield::load(FrameworkConfigManager* f, MeteorConfigManager * m)
 	AddChild(ioCommunicators["SustainPedalIoEvent"]);
 
 	/* --------------------- Piano Controller --------------------- */
+	string instrumentControllerName;
 	if (m->Get(MeteorSetting::InstrumentController, &instrumentControllerName)) {
 		InstrumentControllerInterface* instrumentController = iCreator.CreateInstanceWithT<InstrumentControllerInterface>(instrumentControllerName);
 
@@ -177,6 +179,15 @@ int MeteorPlayfield::load(FrameworkConfigManager* f, MeteorConfigManager * m)
 	playfieldControllers["OctaveShiftEvent"]->LazyConstruct(this);
 	AddChild(playfieldControllers["OctaveShiftEvent"]);
 
+
+	/*--------------------- repeat practice controller ---------------------*/
+	string repeatPracticeControllerName;
+	if (m->Get(MeteorSetting::RepeatPracticeController, &repeatPracticeControllerName)) {
+		timeControllerControllers["RepeatPracticeEvent"] = iCreator.CreateInstanceWithT<TimeControllerControllerInterface>(repeatPracticeControllerName);
+	}
+	else
+		timeControllerControllers["RepeatPracticeEvent"] = new RepeatPracticeController();
+	AddChild(timeControllerControllers["RepeatPracticeEvent"]);
 
 	return 0;
 }
@@ -232,17 +243,14 @@ int MeteorPlayfield::ChangePitchState(MeteoPianoPitchState s)
 	if (s == MeteoPianoPitchState::Lowered) {
 		pitchState = MeteoPianoPitchState::Lowered;
 		meteorEventProcessorMaster->ChangePitchState(MeteoPianoPitchState::Lowered);
-		mapPitchShifter->SetSeekPitch(Pitch::C1);
 	}
 	else if (s == MeteoPianoPitchState::None) {
 		pitchState = MeteoPianoPitchState::None;
 		meteorEventProcessorMaster->ChangePitchState(MeteoPianoPitchState::None);
-		mapPitchShifter->SetSeekPitch(Pitch::C);
 	}
 	else if (s == MeteoPianoPitchState::Raised) {
 		pitchState = MeteoPianoPitchState::Raised;
 		meteorEventProcessorMaster->ChangePitchState(MeteoPianoPitchState::Raised);
-		mapPitchShifter->SetSeekPitch(Pitch::c);
 	}
 	return 0;
 }

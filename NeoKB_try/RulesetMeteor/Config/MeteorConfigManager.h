@@ -37,6 +37,7 @@ namespace Config{
 		TargetLineMapAlgorithm,
 		SustainPedalLightRingIoCommunicator,
 		InstrumentController,
+		RepeatPracticeController,
 
 		MapPitchShifter,
 		OctaveShifter,

@@ -222,6 +222,8 @@
     <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\Algorithm\FallMapAlgorithm.cpp" />
     <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\Algorithm\GlowLineMapAlgorithm.cpp" />
     <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\Algorithm\TargetLineMapAlgorithm.cpp" />
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\EruptEffect.cpp" />
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\EruptEffectMapper.cpp" />
     <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\ExplodeEffect.cpp" />
     <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\ExplodeEffectMapper.cpp" />
     <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\FallEffect.cpp" />
@@ -520,6 +522,8 @@
     <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\Algorithm\FallMapAlgorithm.h" />
     <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\Algorithm\GlowLineMapAlgorithm.h" />
     <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\Algorithm\TargetLineMapAlgorithm.h" />
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\EruptEffect.h" />
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\EruptEffectMapper.h" />
     <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\ExplodeEffect.h" />
     <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\ExplodeEffectMapper.h" />
     <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\FallEffect.h" />

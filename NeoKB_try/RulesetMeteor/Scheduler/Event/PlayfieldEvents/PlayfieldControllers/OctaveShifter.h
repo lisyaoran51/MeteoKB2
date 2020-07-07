@@ -45,6 +45,8 @@ namespace PlayfieldControllers{
 
 		virtual int implementControlPlayfield(EventProcessor<Event>* eProcessor);
 
+		virtual int implementUndoControlPlayfield(EventProcessor<Event>* eProcessor);
+
 
 
 	};

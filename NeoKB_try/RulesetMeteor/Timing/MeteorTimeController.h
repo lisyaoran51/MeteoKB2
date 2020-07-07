@@ -21,16 +21,29 @@ namespace Timing {
 		RepeatPractice
 	};
 
+	enum class RepeatPracticeMode {
+		None,
+		Demonstrate,
+		Practice
+	};
+
 	class MeteorTimeController : public TimeController {
 
 		int load();
 
 		int load(EventProcessorFilter* eProcessorFilter);
 
+		int filterEventBySection(vector<EventProcessor<Event>*>* eventProcessors);
+
+		int filterEruptEffect(vector<EventProcessor<Event>*>* eventProcessors);
+
+		int filterFallEffect(vector<EventProcessor<Event>*>* eventProcessors);
+
 	public:
 
 		MeteorTimeController();
 
+		/*---------反覆練彈專用---------*/
 		/// <summary>
 		/// 要拿到每個小節的秒數，之後再轉小節旋鈕時才能轉到對的位置。如果沒有給小節秒數的話，小節旋鈕就統一跳3秒
 		/// 會再meteor ruleset executor裡面設定
@@ -46,25 +59,56 @@ namespace Timing {
 		int SetHasSection(bool hSection);
 
 		/// <summary>
-		/// TODO:
-		/// 拿到action和input的map，這個應該要擺在Meteor Ruleset才對，之後要移過去，然後中間家一層Ruleset Time Controller
-		/// 再裡面存ruleset info，才能直接從time controller裡面找出ruleset的keybinding
-		/// 現在懶得改，先擺在自己裡面就好。以後要修改action和input的mapping都要記得進來這邊修
+		/// 反覆練彈的反覆功能
 		/// </summary>
-		//virtual map<MeteorAction, InputKey>* GetDefaultkeyBindings(); // 改成不繼承meteo action
+		int RepeatSection(int section);
+		/*---------反覆練彈專用---------*/
 
 
 	protected:
 
 		MeteorTimeControllerMode timeControllerMode = MeteorTimeControllerMode::MusicGame;
 
+		/*---------反覆練彈專用---------*/
 		bool hasSection = false;
 
-		int repeatSections = -1;
+		/// <summary>
+		/// 反覆練彈的開始小節
+		/// </summary>
+		int tempStartSection = 0;
 
+		/// <summary>
+		/// 反覆練彈依次幾小節
+		/// </summary>
+		int repeatSections = 1;
+
+		/// <summary>
+		/// 目前彈到幾小節
+		/// </summary>
+		int tempSection = 0;
+
+		/// <summary>
+		/// 反覆練彈幾次
+		/// </summary>
 		int repeatTimes = 4;
 
+		/// <summary>
+		/// 目前反覆談了幾次
+		/// </summary>
+		int tempRepeatTimes = 0;
+
+		/// <summary>
+		/// 目前是在一次中的示範還是練習
+		/// </summary>
+		RepeatPracticeMode repeatPracticeMode = RepeatPracticeMode::None;
+
+		/// <summary>
+		/// 所有小節開始秒數
+		/// </summary>
 		vector<float> sectionTime;
+
+		float repeatBufferTime = 0.5;
+		/*---------反覆練彈專用---------*/
 
 		EventProcessorFilter* eventProcessorFilter = nullptr;
 

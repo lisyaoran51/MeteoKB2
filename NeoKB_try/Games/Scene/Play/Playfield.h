@@ -10,6 +10,7 @@
 #include "../../Scheduler/Event/IoEvents/IoCommunicators/IoCommunicator.h"
 #include "../../Scheduler/Event/InstrumentEvents/InstrumentControllers/InstrumentController.h"
 #include "../../Scheduler/Event/PlayfieldEvents/PlayfieldControllers/PlayfieldController.h"
+#include "../../Scheduler/Event/TimeEvents/TimeControllerConrtollers/TimeControllerController.h"
 
 
 
@@ -21,6 +22,7 @@ using namespace Framework::Allocation::Hierachal;
 using namespace Games::Schedulers::Events::IoEvents::IoCommunicators;
 using namespace Games::Schedulers::Events::InstrumentEvents::InstrumentControllers;
 using namespace Games::Schedulers::Events::PlayfieldEvents::PlayfieldControllers;
+using namespace Games::Schedulers::Events::TimeEvents::TimeControllerControllers;
 
 
 
@@ -93,17 +95,14 @@ namespace Play {
 		///</summary>
 		map<string, PlayfieldControllerInterface*> playfieldControllers;
 
-		//Scheduler* scheduler;
+		///<summary>
+		/// 在這邊存了會用到的time controller controller，在getEventProcessor時可以到這邊選擇要用的controller
+		///</summary>
+		map<string, TimeControllerControllerInterface*> timeControllerControllers;
 
 		vector<EventProcessor<Event>*> eventProcessors;
 
 		EventProcessorMaster* eventProcessorMaster;
-
-		//Renderer* renderer;
-
-		//Updater* updater;
-
-		//Map* compositeGraph;
 
 		///<summary>
 		/// 佔存剛建完的影像，還沒位移到正確位置上

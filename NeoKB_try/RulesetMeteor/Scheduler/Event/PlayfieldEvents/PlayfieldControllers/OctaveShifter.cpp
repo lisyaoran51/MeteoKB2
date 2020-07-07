@@ -64,9 +64,11 @@ int OctaveShifter::implementControlPlayfield(EventProcessor<Event>* eProcessor)
 			break;
 		case MeteoPianoPitchState::None:
 			meteorPlayfield->ChangePitchState(MeteoPianoPitchState::Lowered);
+			mapPitchShifter->SetSeekPitch(Pitch::C1);
 			break;
 		case MeteoPianoPitchState::Raised:
 			meteorPlayfield->ChangePitchState(MeteoPianoPitchState::None);
+			mapPitchShifter->SetSeekPitch(Pitch::C);
 			break;
 		}
 	}
@@ -74,14 +76,60 @@ int OctaveShifter::implementControlPlayfield(EventProcessor<Event>* eProcessor)
 		switch (meteorPlayfield->GetMeteoPianoPitchState()) {
 		case MeteoPianoPitchState::Lowered:
 			meteorPlayfield->ChangePitchState(MeteoPianoPitchState::None);
+			mapPitchShifter->SetSeekPitch(Pitch::C);
 			break;
 		case MeteoPianoPitchState::None:
 			meteorPlayfield->ChangePitchState(MeteoPianoPitchState::Raised);
+			mapPitchShifter->SetSeekPitch(Pitch::c);
 			break;
 		case MeteoPianoPitchState::Raised:
 			break;
 		}
 	}
+
+
+	return 0;
+}
+
+int OctaveShifter::implementUndoControlPlayfield(EventProcessor<Event>* eProcessor)
+{
+
+	mapPitchShifter = dynamic_cast<MeteorPlayfield*>(playfield)->GetMapPitchShifter();
+	if (mapPitchShifter == nullptr)
+		return 0;
+
+
+	OctaveShiftEventProcessor* octaveShiftEventProcessor = dynamic_cast<OctaveShiftEventProcessor*>(eProcessor);
+
+	if (octaveShiftEventProcessor->GetShiftType() == OctaveShiftType::Lower) {
+		switch (meteorPlayfield->GetMeteoPianoPitchState()) {
+		case MeteoPianoPitchState::Lowered:
+			meteorPlayfield->ChangePitchState(MeteoPianoPitchState::None);
+			mapPitchShifter->JumpToPitch(Pitch::C);
+			break;
+		case MeteoPianoPitchState::None:
+			meteorPlayfield->ChangePitchState(MeteoPianoPitchState::Raised);
+			mapPitchShifter->JumpToPitch(Pitch::c);
+			break;
+		case MeteoPianoPitchState::Raised:
+			break;
+		}
+	}
+	else if (octaveShiftEventProcessor->GetShiftType() == OctaveShiftType::Raise) {
+		switch (meteorPlayfield->GetMeteoPianoPitchState()) {
+		case MeteoPianoPitchState::Lowered:
+			break;
+		case MeteoPianoPitchState::None:
+			meteorPlayfield->ChangePitchState(MeteoPianoPitchState::Lowered);
+			mapPitchShifter->JumpToPitch(Pitch::C1);
+			break;
+		case MeteoPianoPitchState::Raised:
+			meteorPlayfield->ChangePitchState(MeteoPianoPitchState::None);
+			mapPitchShifter->JumpToPitch(Pitch::C);
+			break;
+		}
+	}
+
 
 
 	return 0;

@@ -1302,6 +1302,12 @@
     <ClCompile Include="RulesetMeteor\Scheduler\Event\TimeEvents\TimeControllerControllers\RepeatPracticeController.cpp">
       <Filter>來源檔案\RulesetMeteor\Schedulers\Events\TimeEvents\TimeControllerControllers</Filter>
     </ClCompile>
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\EruptEffect.cpp">
+      <Filter>來源檔案\RulesetMeteor\Schedulers\Events\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\EruptEffectMapper.cpp">
+      <Filter>來源檔案\RulesetMeteor\Schedulers\Events\Effects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="DailyLog.txt">
@@ -2202,6 +2208,12 @@
     </ClInclude>
     <ClInclude Include="RulesetMeteor\Scheduler\Event\TimeEvents\TimeControllerControllers\RepeatPracticeController.h">
       <Filter>標頭檔\RulesetMeteor\Schedulers\Events\TimeEvents\TimeControllerControllers</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\EruptEffect.h">
+      <Filter>標頭檔\RulesetMeteor\Schedulers\Events\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\EruptEffectMapper.h">
+      <Filter>標頭檔\RulesetMeteor\Schedulers\Events\Effects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

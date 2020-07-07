@@ -27,6 +27,8 @@ namespace Algorithms{
 
 		LinearMapPitchShifter();
 
+		virtual int JumpToPitch(Pitch p);
+
 		virtual int SetSeekPitch(Pitch p);
 
 		virtual bool GetIsShifting();

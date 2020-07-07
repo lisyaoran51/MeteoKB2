@@ -130,49 +130,72 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 		//abort();
 	}
 
-	eventProcessorPeriods->GetItemsContainPeriods(make_pair<float, float>(currentTime - visibleTimeRange, currentTime + visibleTimeRange), &eventProcessors);
+	/*
+	 * 正轉的狀態或是快轉的狀態
+	 */
+	if (elapsedTime > 0) {
 
-	eventProcessorFilter->Filter(&eventProcessors);
+		eventProcessorPeriods->GetItemsContainPeriods(make_pair<float, float>(currentTime - visibleTimeRange, currentTime + visibleTimeRange), &eventProcessors);
 
-	for (int i = 0; i < eventProcessors.size(); i++) {
+		eventProcessorFilter->Filter(&eventProcessors);
 
-		LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent : this processor is for [" << eventProcessors[i]->GetEvent()->GetTypeName() << "].";
+		for (int i = 0; i < eventProcessors.size(); i++) {
 
-		// TODO: 直接改成 eventProcessor.Process()就好，下面可以全部刪掉
+			LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent : this processor is for [" << eventProcessors[i]->GetEvent()->GetTypeName() << "].";
 
-		IoEventProcessorInterface* ioEventProcessors = dynamic_cast<IoEventProcessorInterface*>(eventProcessors[i]);
-		if (ioEventProcessors) {
-			if (ioEventProcessors->GetStartTime() < currentTime) {
-				LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent : found io event processor [" << ioEventProcessors->GetStartTime() << "].";
-				ioEventProcessors->ProcessIo();
+			// TODO: 直接改成 eventProcessor.Process()就好，下面可以全部刪掉
+
+			IoEventProcessorInterface* ioEventProcessors = dynamic_cast<IoEventProcessorInterface*>(eventProcessors[i]);
+			if (ioEventProcessors) {
+				if (ioEventProcessors->GetStartTime() < currentTime) {
+					LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent : found io event processor [" << ioEventProcessors->GetStartTime() << "].";
+					ioEventProcessors->ProcessIo();
+				}
+				continue;
 			}
-			continue;
-		}
 
-		InstrumentEventProcessorInterface* instrumentEventProcessor = dynamic_cast<InstrumentEventProcessorInterface*>(eventProcessors[i]);
-		if (instrumentEventProcessor) {
-			if (instrumentEventProcessor->GetStartTime() < currentTime) {
-				LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent : found instrument event processor [" << instrumentEventProcessor->GetStartTime() << "].";
-				instrumentEventProcessor->ControlInstrument();
+			InstrumentEventProcessorInterface* instrumentEventProcessor = dynamic_cast<InstrumentEventProcessorInterface*>(eventProcessors[i]);
+			if (instrumentEventProcessor) {
+				if (instrumentEventProcessor->GetStartTime() < currentTime) {
+					LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent : found instrument event processor [" << instrumentEventProcessor->GetStartTime() << "].";
+					instrumentEventProcessor->ControlInstrument();
+				}
+				continue;
 			}
-			continue;
-		}
 
-		PlayfieldEventProcessorInterface* playfieldEventProcessor = dynamic_cast<PlayfieldEventProcessorInterface*>(eventProcessors[i]);
-		if (playfieldEventProcessor) {
-			if (playfieldEventProcessor->GetStartTime() < currentTime) {
-				LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent : found playfield event processor [" << playfieldEventProcessor->GetStartTime() << "].";
-				playfieldEventProcessor->ControlPlayfield();
+			PlayfieldEventProcessorInterface* playfieldEventProcessor = dynamic_cast<PlayfieldEventProcessorInterface*>(eventProcessors[i]);
+			if (playfieldEventProcessor) {
+				if (playfieldEventProcessor->GetStartTime() < currentTime) {
+					LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent : found playfield event processor [" << playfieldEventProcessor->GetStartTime() << "].";
+					playfieldEventProcessor->ControlPlayfield();
+				}
+				continue;
 			}
-			continue;
 		}
 	}
 
-	// 這邊本來是用來更新event processor的時間，但是這樣太浪費效能，改成所有processor直接拿master的clock去讀就好
+	/*
+	 * 倒轉的狀態
+	 */
+	if (elapsedTime < 0) {
 
-	//for (int i = 0; i < eventProcessors->size(); i++) {
-	//	eventProcessors->at(i)->Elapse(elapsedTime);
-	//}
+		eventProcessorPeriods->GetItemsContainPeriods(make_pair<float, float>((float)currentTime, currentTime - elapsedTime), &eventProcessors);
+
+		eventProcessorFilter->Filter(&eventProcessors);
+
+		for (int i = 0; i < eventProcessors.size(); i++) {
+			PlayfieldEventProcessorInterface* playfieldEventProcessor = dynamic_cast<PlayfieldEventProcessorInterface*>(eventProcessors[i]);
+			if (playfieldEventProcessor) {
+				if (playfieldEventProcessor->GetStartTime() > currentTime && playfieldEventProcessor->GetStartTime() < currentTime - elapsedTime) {
+					LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent : found playfield event processor [" << playfieldEventProcessor->GetStartTime() << "].";
+					playfieldEventProcessor->UndoControlPlayfield();
+				}
+				continue;
+			}
+		}
+
+	}
+
 
 	return 0;
 }
