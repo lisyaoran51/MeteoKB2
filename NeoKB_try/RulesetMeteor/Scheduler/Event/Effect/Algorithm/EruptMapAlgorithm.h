@@ -9,7 +9,7 @@
 #include "../../../../../Games/Scheduler/Event/Effect/Algorithm/MapAlgorithm.h"
 #include "../../../../../Games/Scheduler/Event/Effect/Effect.h"
 #include "../../../../../Games/Scheduler/Event/Effect/EffectMapper.h"
-#include "../FallEffect.h"
+#include "../EruptEffect.h"
 #include "../../../../Config/MeteorConfigManager.h"
 
 
@@ -28,7 +28,7 @@ namespace Events {
 namespace Effects {
 namespace Algorithms{
 	
-	class EruptMapAlgorithm: public MapAlgorithm<FallEffect>
+	class EruptMapAlgorithm: public MapAlgorithm<EruptEffect>
 	{
 		int load();
 
@@ -47,7 +47,7 @@ namespace Algorithms{
 
 	};
 
-	class EruptMapGenerateAlgorithm : public MapGenerateAlgorithm<FallEffect> {
+	class EruptMapGenerateAlgorithm : public MapGenerateAlgorithm<EruptEffect> {
 
 	public:
 
@@ -61,7 +61,7 @@ namespace Algorithms{
 		/// <summary>
 		/// 把evnet的狀態轉成圖案
 		///	</summary>
-		virtual int ImplementGenerate(Map* m, EffectMapper<FallEffect>* em);
+		virtual int ImplementGenerate(Map* m, EffectMapper<EruptEffect>* em);
 	};
 	
 

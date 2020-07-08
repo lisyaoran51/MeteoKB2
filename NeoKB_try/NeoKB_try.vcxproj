@@ -513,6 +513,7 @@
     <ClInclude Include="RulesetMeteor\Ruleset\Modifiers\MeteorDifficultyModifier.h" />
     <ClInclude Include="RulesetMeteor\Ruleset\Modifiers\FallSpeedModifier.h" />
     <ClInclude Include="RulesetMeteor\Ruleset\Modifiers\HandModifier.h" />
+    <ClInclude Include="RulesetMeteor\Ruleset\Modifiers\MusicGameModifier.h" />
     <ClInclude Include="RulesetMeteor\Ruleset\Modifiers\RepeatPracticeModifier.h" />
     <ClInclude Include="RulesetMeteor\Ruleset\Scoring\MeteorScoreProcessor.h" />
     <ClInclude Include="RulesetMeteor\Scheduler\Event\ControlPoints\MeteorInputKeyControlPointHitObject.h" />

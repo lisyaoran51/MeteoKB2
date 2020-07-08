@@ -32,6 +32,7 @@ namespace Config{
 
 		PatternGenerator,
 		FallMapAlgorithm,
+		EruptMapAlgorithm,
 		ExplodeMapAlgorithm,
 		GlowLineMapAlgorithm,
 		TargetLineMapAlgorithm,

@@ -13,7 +13,7 @@ int EruptMapAlgorithm::load()
 {
 	LOG(LogLevel::Info) << "EruptMapAlgorithm::load() : Start loading config.";
 
-	shiftAlgo = new MapShiftAlgorithm<FallEffect>(startX);
+	shiftAlgo = new MapShiftAlgorithm<EruptEffect>(startX);
 
 	MeteorConfigManager* m = GetCache<MeteorConfigManager>("MeteorConfigManager");
 

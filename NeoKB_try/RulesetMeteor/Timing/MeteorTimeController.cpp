@@ -9,6 +9,7 @@
 using namespace Meteor::Timing;
 using namespace std;
 using namespace Games::Schedulers::Events::ControlPoints;
+using namespace Meteor::Schedulers::Events::Effects;
 
 
 
@@ -48,6 +49,12 @@ int MeteorTimeController::filterEruptEffect(vector<EventProcessor<Event>*>* even
 {
 	for (int i = 0; i < eventProcessors->size(); i++) {
 
+		EruptEffectMapper* eruptEffectMapper = dynamic_cast<EruptEffectMapper*>(eventProcessors->at(i));
+
+		if (eruptEffectMapper) {
+			eventProcessors->erase(eventProcessors->begin() + i);
+			i--;
+		}
 
 	}
 
@@ -57,6 +64,16 @@ int MeteorTimeController::filterEruptEffect(vector<EventProcessor<Event>*>* even
 
 int MeteorTimeController::filterFallEffect(vector<EventProcessor<Event>*>* eventProcessors)
 {
+	for (int i = 0; i < eventProcessors->size(); i++) {
+
+		FallEffectMapper* fallEffectMapper = dynamic_cast<FallEffectMapper*>(eventProcessors->at(i));
+
+		if (fallEffectMapper) {
+			eventProcessors->erase(eventProcessors->begin() + i);
+			i--;
+		}
+
+	}
 	return 0;
 }
 
@@ -136,6 +153,7 @@ int MeteorTimeController::RepeatSection(int section)
 
 		/*
 		 * 這邊有個很大的問題，就是在倒退的時候，燈光還是會在，解決方法是1.先把燈光關掉，倒退完在打開 2.瞬間倒退，讓大家看不到 3.取消向上燈光
+		 * 現在用方法2，直接跳過去
 		 */
 		if (repeatPracticeMode == RepeatPracticeMode::Demonstrate) {
 			eventProcessorFilter->SwitchVariant(0);	// 落下燈光示範
@@ -153,9 +171,7 @@ int MeteorTimeController::RepeatSection(int section)
 		totalRewindLength = sectionTime[section + 1] - sectionTime[tempStartSection] + repeatBufferTime;	//額外多一秒緩衝時間
 	}
 
-	Pause();
-
-	speedAdjuster->SetSeekTime(-totalRewindLength);
+	JumpTo(controllableClock->GetCurrentTime() - totalRewindLength);
 
 	return 0;
 }

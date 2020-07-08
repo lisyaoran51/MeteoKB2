@@ -38,6 +38,11 @@ int EventProcessorFilter::SwitchVariant(int v)
 	return 0;
 }
 
+int EventProcessorFilter::GetVariant()
+{
+	return variant;
+}
+
 int EventProcessorFilter::ClearFilterCallback()
 {
 	filterCallbacks.clear();

@@ -108,6 +108,7 @@ MeteorRulesetExecutor::MeteorRulesetExecutor(): RegisterType("MeteorRulesetExecu
 {
 	// 如果要自定效果，要直接從config那裡改map algo，這邊不能動。
 	eventProcessorTable["FallEffect"		] = "FallEffectMapper";
+	eventProcessorTable["EruptEffect"		] = "EruptEffectMapper";
 	eventProcessorTable["ExplodeEffect"		] = "ExplodeEffectMapper";
 	eventProcessorTable["GlowLineEffect"	] = "GlowLineEffectMapper";
 	eventProcessorTable["TargetLineEffect"	] = "TargetLineEffectMapper";
@@ -182,6 +183,7 @@ EventProcessor<Event>* MeteorRulesetExecutor::getEventProcessor(Event * e)
 		int height = playfield->GetHeight();
 		return (new FallEffectMapper(width, height))->RegisterEvent(e);
 	}
+	/* 這幾個效果不好，所以拿掉了
 	//else if (processorType == "GlowLineEffectMapper") {
 	//	int width = playfield->GetWidth();
 	//	int height = playfield->GetHeight();
@@ -197,6 +199,7 @@ EventProcessor<Event>* MeteorRulesetExecutor::getEventProcessor(Event * e)
 	//	int height = playfield->GetHeight();
 	//	return (new TargetLineEffectMapper(width, height))->RegisterEvent(e);
 	//}
+	*/
 	else if (processorType == "SystemEventHandler") {
 		// TODO: 在這邊把歌曲名稱擺進去
 		return (new SystemEventHandler<StopSystemEvent>())->RegisterEvent(e);
@@ -244,7 +247,7 @@ int MeteorRulesetExecutor::playfieldLoad()
 
 	PeriodMap<EventProcessor<Event>*>* processors = playfield->GetEventProcessorMaster()->GetEventProcessorPeriods();
 
-	LOG(LogLevel::Debug) << "MeteorRulesetExecutor::playfieldLoad() : " << [](PeriodMap<EventProcessor<Event>*>* ps) {
+	LOG(LogLevel::Fine) << "MeteorRulesetExecutor::playfieldLoad() : " << [](PeriodMap<EventProcessor<Event>*>* ps) {
 
 		multimap<pair<float, float>, EventProcessor<Event>*>* periods = ps->GetPeriods();
 		typename multimap<pair<float, float>, EventProcessor<Event>*>::iterator it;

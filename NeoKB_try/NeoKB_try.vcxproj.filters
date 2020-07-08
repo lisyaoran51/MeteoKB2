@@ -2215,6 +2215,9 @@
     <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\EruptEffectMapper.h">
       <Filter>標頭檔\RulesetMeteor\Schedulers\Events\Effects</Filter>
     </ClInclude>
+    <ClInclude Include="RulesetMeteor\Ruleset\Modifiers\MusicGameModifier.h">
+      <Filter>標頭檔\RulesetMeteor\Ruleset\Modifiers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Makefile">

@@ -33,10 +33,19 @@ namespace Timing {
 
 		int load(EventProcessorFilter* eProcessorFilter);
 
+		/// <summary>
+		/// 再反覆練彈模式中，避免彈到別的段落的音，所使用的filter
+		/// </summary>
 		int filterEventBySection(vector<EventProcessor<Event>*>* eventProcessors);
 
+		/// <summary>
+		/// 反覆練彈模視中，用來示範的
+		/// </summary>
 		int filterEruptEffect(vector<EventProcessor<Event>*>* eventProcessors);
 
+		/// <summary>
+		/// 反覆練彈模視中，用來練習的
+		/// </summary>
 		int filterFallEffect(vector<EventProcessor<Event>*>* eventProcessors);
 
 	public:
@@ -107,7 +116,7 @@ namespace Timing {
 		/// </summary>
 		vector<float> sectionTime;
 
-		float repeatBufferTime = 0.5;
+		float repeatBufferTime = 1;
 		/*---------反覆練彈專用---------*/
 
 		EventProcessorFilter* eventProcessorFilter = nullptr;

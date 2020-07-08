@@ -3,6 +3,7 @@
 #include "../../Games/Scheduler/Event/Effect/Algorithm/MapAlgorithm.h"
 #include "../../RulesetMeteor/Scheduler/Event/Effect/Algorithm/ExplodeMapAlgorithm.h"
 #include "../../RulesetMeteor/Scheduler/Event/Effect/Algorithm/FallMapAlgorithm.h"
+#include "../../RulesetMeteor/Scheduler/Event/Effect/Algorithm/EruptMapAlgorithm.h"
 #include "../../RulesetMeteor/Scheduler/Event/Effect/Algorithm/GlowLineMapAlgorithm.h"
 #include "../../RulesetMeteor/Scheduler/Event/Effect/Algorithm/TargetLineMapAlgorithm.h"
 #include "../../Util/Log.h"
@@ -85,6 +86,23 @@ int MeteorPlayfield::load(FrameworkConfigManager* f, MeteorConfigManager * m)
 
 	AddChild(mapAlgorithms["FallEffect"]);
 	mapAlgorithms["FallEffect"]->RegisterBufferMap(bufferMap);
+
+	/* --------------------- EruptEffect map algo --------------------- */
+	if (m->Get(MeteorSetting::EruptMapAlgorithm, &mapAlgoName)) {
+		LOG(LogLevel::Finer) << "MeteorPlayfield::load() : finding erupt effect map algorithm";
+		MapAlgorithmInterface* mapAlgo = iCreator.CreateInstanceWithT<MapAlgorithmInterface>(mapAlgoName);
+
+		LOG(LogLevel::Finer) << "MeteorPlayfield::load() : put into algorithms table";
+		mapAlgorithms["EruptEffect"] = mapAlgo;
+	}
+	else
+		mapAlgorithms["EruptEffect"] = new EruptMapAlgorithm();
+	LOG(LogLevel::Finer) << "MeteorPlayfield::load() : EruptMapAlgorithm chosed" << mapAlgorithms["EruptEffect"];
+
+	LOG(LogLevel::Finer) << "MeteorPlayfield::load() : EruptMapAlgorithm [" << mapAlgorithms["EruptEffect"]->GetTypeName() << "] loaded.";
+
+	AddChild(mapAlgorithms["EruptEffect"]);
+	mapAlgorithms["EruptEffect"]->RegisterBufferMap(bufferMap);
 
 	/* --------------------- ExplodeEffect map algo --------------------- */
 	if (m->Get(MeteorSetting::ExplodeMapAlgorithm, &mapAlgoName)) {

@@ -18,6 +18,7 @@
 #include "../../Framework/Timing/TimeController.h"
 #include "Scoring/ScoreProcessor.h"
 #include "Modifiers/DifficultyModifier.h"
+#include "Modifiers/EventProcessorFilterModifier.h"
 
 
 
@@ -97,15 +98,8 @@ namespace Rulesets {
 			LOG(LogLevel::Info) << "RulesetExecutor::load : creating [" << pgName << "] ...";
 			InstanceCreator<MtoObject> &iCreator = InstanceCreator<MtoObject>::GetInstance();
 			PatternGenerator* pg = iCreator.CreateInstanceWithT<PatternGenerator>(pgName);
-			AddChild(pg);
+			AddChild(pg);	// TODO: 以後要把pattern generator擺回converter裡面，不要擺在這裡，effect設定丟給map algorithm處理就好
 
-
-			for (int i = 0; i < workingSm->GetModifiers()->GetValue()->size(); i++) {
-				if (dynamic_cast<DifficultyModifier*>(workingSmValue->GetModifiers()->GetValue()->at(i))) {
-					dynamic_cast<DifficultyModifier*>(workingSmValue->GetModifiers()->GetValue()->at(i))
-						->ApplyToDifficulty(workingSm->GetSm()->GetSmInfo()->difficuty);
-				}
-			}
 
 
 			// 要把converter和postprocessor擺到load()裡，因為pattern Generator是擺在cache裡的
@@ -124,6 +118,31 @@ namespace Rulesets {
 
 			delete converter;
 			delete postprocessor;
+
+			/*
+			 * 計分的時候用來調整分數
+			 */
+			for (int i = 0; i < workingSm->GetModifiers()->GetValue()->size(); i++) {
+				if (dynamic_cast<DifficultyModifier*>(workingSmValue->GetModifiers()->GetValue()->at(i))) {
+					dynamic_cast<DifficultyModifier*>(workingSmValue->GetModifiers()->GetValue()->at(i))
+						->ApplyToDifficulty(workingSm->GetSm()->GetSmInfo()->difficuty);
+				}
+			}
+
+			/*
+			 * 把跟目前遊戲模式無關的event processor刪掉，因為converter會把所有processor全都生出來，我們要自己篩自己要的
+			 */
+			EventProcessorFilter* eventProcessorFilter = createEventProcessorFilter();
+
+			for (int i = 0; i < workingSm->GetModifiers()->GetValue()->size(); i++) {
+				if (dynamic_cast<EventProcessorFilterModifier*>(workingSmValue->GetModifiers()->GetValue()->at(i))) {
+					dynamic_cast<EventProcessorFilterModifier*>(workingSmValue->GetModifiers()->GetValue()->at(i))
+						->ApplyToEventProcessorFilter(eventProcessorFilter);
+				}
+			}
+
+			AddChild(eventProcessorFilter);
+
 
 			// Add mods, should always be the last thing applied to give full control to mods
 			// applyMods(mods);
@@ -149,6 +168,10 @@ namespace Rulesets {
 		virtual SmConverter* createSmConverter(PatternGenerator* pg) = 0;
 
 		virtual SmPostprocessor* createSmPostprocessor() = 0;
+
+		virtual EventProcessorFilter* createEventProcessorFilter() {
+			return new EventProcessorFilter();
+		}
 
 	public:
 

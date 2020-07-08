@@ -1817,5 +1817,9 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	目前寫到把反覆練彈家到Meteor time controoler裡面，還沒寫怎麼樣控制filter
 	再寫filter
 	
-	filter寫到一半，先寫erupt effect
+	filter寫到一半，先寫erupt effect，都寫完以後要開始改modifier
+	
+	改了設計 difficulty modifier以後只用來調整分數，converter會把所有processor都生出來，我們再自己用filter去篩，modifier可以去調整filter
+	
+	然後落下速度改為使用modifier對每一個event修正，這邊寫到一半
 	
