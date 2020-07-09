@@ -1308,6 +1308,12 @@
     <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\EruptEffectMapper.cpp">
       <Filter>來源檔案\RulesetMeteor\Schedulers\Events\Effects</Filter>
     </ClCompile>
+    <ClCompile Include="Games\Ruleset\Judgements\HitWindow.cpp">
+      <Filter>來源檔案\Games\Ruleset\Judgements</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\Ruleset\Modifiers\MusicGameModifier.cpp">
+      <Filter>來源檔案\RulesetMeteor\Ruleset\Modifiers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="DailyLog.txt">

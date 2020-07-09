@@ -109,6 +109,11 @@ Event * Event::GetSourceEvent()
 	return sourceEvent;
 }
 
+int Event::ApplyDefaultValues(SmDifficulty * smDifficulty)
+{
+	return 0;
+}
+
 bool Event::operator<(const Event & rhs) const
 {
 	return startTime < rhs.GetStartTime();

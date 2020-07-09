@@ -13,6 +13,9 @@ namespace Schedulers {
 namespace Events {
 namespace TimeEvents {
 
+	/// <summary>
+	/// 這個事件的start time是在一個小節的最尾巴，life time是-1，迴轉長度是rewind length
+	///	</summary>
 	class RepeatPracticeEvent : public TimeEvent {
 
 	public:

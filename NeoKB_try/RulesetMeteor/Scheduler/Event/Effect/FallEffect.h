@@ -45,11 +45,26 @@ namespace Effects {
 			MTO_FLOAT sp
 		);
 
+		virtual int ApplyDefaultValues(SmDifficulty* smDifficulty);
+
+		int SetTargetHeight(int tHeight);
+
+		/// <summary>
+		/// 必須要先設SetTargetHeight，之後才可以adjust speed，不然會跳錯誤，因為沒有target height，會無法換算開始時間
+		///	</summary>
+		int AdjustSpeed(float sp);
+
 		// 一定要每次都override!!
 		virtual string GetTypeName();
 
 
 	protected:
+
+		int targetHeight = -1;
+
+		bool isSpeedAdjustable = false;
+
+
 	};
 
 

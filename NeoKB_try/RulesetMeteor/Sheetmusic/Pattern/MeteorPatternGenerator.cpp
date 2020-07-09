@@ -13,6 +13,8 @@
 #include "../../Scheduler/Event/IoEvents/SustainPedalIoEvent.h"
 #include "../../Scheduler/Event/InstrumentEvents/PianoEvent.h"
 #include "../../Scheduler/Event/PlayfieldEvents/OctaveShiftEvent.h"
+#include "../../Scheduler/Event/TimeEvents/RepeatPracticeEvent.h"
+#include "../../Scheduler/Event/Effect/EruptEffect.h"
 
 
 
@@ -26,7 +28,8 @@ using namespace Games::Schedulers::Events::SystemEvents;
 using namespace Instruments;
 using namespace Meteor::Schedulers::Events::IoEvents;
 using namespace Meteor::Schedulers::Events::InstrumentEvents;
-using namespace Meteor::Schedulers::Events::PlayfieldEvents; 
+using namespace Meteor::Schedulers::Events::PlayfieldEvents;
+using namespace Meteor::Schedulers::Events::TimeEvents;
 
 
 
@@ -116,6 +119,85 @@ Pattern* MeteorPatternGenerator::Generate(vector<Event*>* es, Event * e)
 
 int MeteorPatternGenerator::CreateOtherEvent(vector<Event*>* es)
 {
+	/*
+	 *	這邊會抓所有section結束時間，然後在每個section結束時間建repeat practice event，
+	 *	另外meteor ruleset executor自己就會檢查一遍所有control point，然後建立所有的section start time，所以其實他不用看我們這邊的rewind length
+	 *	不過還是把rewind length紀錄一下留著用
+	 */
+
+	 /*
+	  *	一開始先檢查這個譜有沒有小節資訊
+	  */
+	bool hasSectionIndex = true;
+	for (int i = 0; i < es->size(); i++) {
+		if (es->at(i)->Cast<PlayableControlPoint>()->GetSectionIndex() < 0)
+			hasSectionIndex = false;
+		if (!hasSectionIndex && es->at(i)->Cast<PlayableControlPoint>()->GetSectionIndex() >= 0) {
+			LOG(LogLevel::Error) << "MeteorPatternGenerator::CreateOtherEvent() : sheetmusic section index wrong at time [" << es->at(i - 1)->Cast<PlayableControlPoint>()->GetStartTime() << "]";
+			throw runtime_error("MeteorPatternGenerator::CreateOtherEvent() : sheetmusic section index wrong.");
+		}
+	}
+
+
+	vector<float> sectionEndTime;
+
+	if (hasSectionIndex) {	// 譜裡面有小節資訊
+		int tempSection = 0;
+		float minEventStartTime = 99999;
+
+		for (int i = 0; i < es->size(); i++) {
+			if (es->at(i)->Cast<PlayableControlPoint>()) {	// section index其實不該擺在playable control point，應該要擺在她的上一層，因為不識只有playable control point會有section
+				if (es->at(i)->Cast<PlayableControlPoint>()->GetSectionIndex() == tempSection + 1) {
+					// 下個小節的第一個音就是這個小節的結束點
+					sectionEndTime.push_back(es->at(i)->GetStartTime());
+					tempSection++;
+				}
+				else if (es->at(i)->Cast<PlayableControlPoint>()->GetSectionIndex() > tempSection + 1) {
+					// 空白小節的時候就先把目前秒數加上去section end time，然後再重新檢查一次同一個音
+					// 這邊之後在repeat的時候要小心，因為有兩個小節同時在同一個瞬間，會出錯
+					sectionEndTime.push_back(es->at(i)->GetStartTime());
+					tempSection++;
+					i--;
+				}
+				else if (es->at(i)->Cast<PlayableControlPoint>()->GetSectionIndex() < tempSection) {
+					// 沒有照時間排序，要不然就是譜有錯
+					LOG(LogLevel::Error) << "MeteorPatternGenerator::CreateOtherEvent() : events not sorted by time.";
+					throw runtime_error("MeteorPatternGenerator::CreateOtherEvent() : events not sorted by time.");
+				}
+			}
+		}
+	}
+	else {	// 譜裡面沒有小節資訊的話，就以3秒為一小節
+
+		int tempSection = 0;
+		float maxControlPointTime = 0;
+
+		for (int i = 0; i < es->size(); i++) {
+			if (es->at(i)->GetStartTime() < (tempSection + 1) * defaultSectionInterval) {
+				es->at(i)->Cast<PlayableControlPoint>()->SetSectionIndex(tempSection);
+				if (es->at(i)->GetStartTime() >= maxControlPointTime) {
+					maxControlPointTime = es->at(i)->GetStartTime();
+				}
+				else {
+					LOG(LogLevel::Error) << "MeteorPatternGenerator::CreateOtherEvent() : events not sorted by time.";
+					throw runtime_error("MeteorPatternGenerator::CreateOtherEvent() : events not sorted by time.");
+				}
+			}
+			else {
+				tempSection++;
+				i--;
+			}
+		}
+
+		for (int i = 0; i < tempSection; i++) {
+			sectionEndTime.push_back((i + 1) * defaultSectionInterval);
+		}
+	}
+
+	generateRepeatPracticeEvents(es, &sectionEndTime);
+
+
+	/*
 	if (restartSection == 0)
 		return -1;
 
@@ -125,7 +207,6 @@ int MeteorPatternGenerator::CreateOtherEvent(vector<Event*>* es)
 	for (int i = 0; i < patterns.size(); i++) {
 		Event* e = patterns.at(i)->GetOriginalEvent();
 		
-		/* 抓小節的開始時間 */
 		if (e)
 		if (e->Cast<NoteControlPoint>())
 		if (e->Cast<NoteControlPoint>()->GetSectionIndex() == restartSection)
@@ -140,6 +221,8 @@ int MeteorPatternGenerator::CreateOtherEvent(vector<Event*>* es)
 	SystemEvent* systemEvent = new StopSystemEvent(sectionStartTime, -1);
 
 	es->push_back(systemEvent);
+	*/
+
 
 	return 0;
 }
@@ -188,6 +271,7 @@ Pattern * MeteorPatternGenerator::generateNoteControlPoint(vector<Event*>* es, N
 			height : blackKeyHeight) + fallLength
 	) / fallSpeed;
 
+	/* 這個是原本要做glow line特效的code，效果太差所以拿掉了
 	MTO_FLOAT glowLineTime = fallTime + MTO_FLOAT(1) / glowLineSpeed + glowLineDuration;
 
 	MTO_FLOAT noteLifeTime = MTO_FLOAT(
@@ -196,7 +280,7 @@ Pattern * MeteorPatternGenerator::generateNoteControlPoint(vector<Event*>* es, N
 	) / glowLineSpeed;
 
 	LOG(LogLevel::Finest) << "int MeteorSmConverter::Generate(vector<Event*>*, Event*) : Fall speed is [" << fallSpeed << "], GlowLine speed is [" << glowLineSpeed << "].";
-	/*
+	
 	LOG(LogLevel::Finer) << "int MeteorSmConverter::Generate(vector<Event*>*, Event*) : Generate GlowLine at [" << (int)pitch << "], start time [" << note->GetStartTime() - glowLineTime << "], life time [" << fallTime + glowLineDuration << "].";
 
 	GlowLineEffect* glow = new GlowLineEffect(
@@ -214,18 +298,31 @@ Pattern * MeteorPatternGenerator::generateNoteControlPoint(vector<Event*>* es, N
 		note->GetStartTime() - fallTime,
 		fallLifeTime,
 		fallSpeed);
+	fall->SetTargetHeight(note->IsWhiteKey() ? targetHeight : blackKeyTargetHeight);
 	fall->SetSourceEvent(note);
+
+	EruptEffect* erupt = new EruptEffect(
+		int(pitch),
+		0,
+		note->GetStartTime() - fallTime,
+		fallLifeTime,
+		fallSpeed
+	);
+	erupt->SetTargetHeight(note->IsWhiteKey() ? targetHeight : blackKeyTargetHeight);
+	erupt->SetSourceEvent(note);
 
 
 	//note->SetLifeTime(noteLifeTime);
 
 	//pattern->Add(glow);
 	pattern->Add(fall);
+	pattern->Add(erupt);
 	//pattern->Add(note);
 
 	// 把pattern裡面的event一個一個加進去es裡
 	//es->push_back(glow);
 	es->push_back(fall);
+	es->push_back(erupt);
 	//es->push_back(note);
 
 	return pattern;
@@ -321,5 +418,17 @@ Pattern * MeteorPatternGenerator::generateInputKeyControlPoint(vector<Event*>* e
 
 
 	return pattern;
+}
+
+int MeteorPatternGenerator::generateRepeatPracticeEvents(vector<Event*>* es, vector<float>* sectionEndTime)
+{
+	for (int i = 0; i < sectionEndTime->size(); i++) {
+		float rewindLength = i == 0 ? sectionEndTime->at(i) : sectionEndTime->at(i) - sectionEndTime->at(i - 1);
+		RepeatPracticeEvent* repeatPracticeEvent = new RepeatPracticeEvent(i, rewindLength, sectionEndTime->at(i), 0);
+
+		es->push_back(repeatPracticeEvent);
+	}
+
+	return 0;
 }
 

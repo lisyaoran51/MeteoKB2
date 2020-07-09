@@ -1823,3 +1823,9 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	
 	然後落下速度改為使用modifier對每一個event修正，這邊寫到一半
 	
+7/8
+	目前寫到把所有event都根據modifier去做修改，有的修改落下速度(fall effect)，有的修改得分(hit object)，部過從sm difficulty轉換成hit window那邊還沒寫
+	接下來要寫converter做出倒轉事件、上升特效事件
+	
+	倒轉事件做完了，接下來要把每個modifier都寫完
+	

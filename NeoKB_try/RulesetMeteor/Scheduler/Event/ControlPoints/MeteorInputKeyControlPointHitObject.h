@@ -24,6 +24,11 @@ namespace ControlPoints{
 		virtual Judgement* createJudgement(HitResult hResult);
 
 		virtual Judgement* GetBestJudgement();
+
+	protected:
+
+		virtual HitWindow* createHitWindow();
+
 	};
 
 }}}}

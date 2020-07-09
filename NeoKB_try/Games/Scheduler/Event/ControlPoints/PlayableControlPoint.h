@@ -19,6 +19,9 @@ namespace ControlPoints{
 
 		PlayableControlPoint(MTO_FLOAT s, MTO_FLOAT l);
 
+		virtual int ApplyDefaultValues(SmDifficulty* sDifficulty);
+		SmDifficulty* GetSmDifficulty();
+
 		MTO_FLOAT GetVolume();
 		int SetVolume(MTO_FLOAT v);
 
@@ -33,6 +36,8 @@ namespace ControlPoints{
 
 
 	protected:
+
+		SmDifficulty* smDifficulty = nullptr;
 
 		MTO_FLOAT volume = -1;
 

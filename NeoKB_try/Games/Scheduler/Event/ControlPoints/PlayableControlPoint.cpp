@@ -7,6 +7,17 @@ PlayableControlPoint::PlayableControlPoint(MTO_FLOAT s, MTO_FLOAT l): ControlPoi
 {
 }
 
+int PlayableControlPoint::ApplyDefaultValues(SmDifficulty * sDifficulty)
+{
+	smDifficulty = sDifficulty;
+	return 0;
+}
+
+SmDifficulty * PlayableControlPoint::GetSmDifficulty()
+{
+	return smDifficulty;
+}
+
 
 
 MTO_FLOAT PlayableControlPoint::GetVolume() {

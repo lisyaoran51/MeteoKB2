@@ -20,6 +20,18 @@ HitObject::HitObject(HitWindow * hWindow)
 	hitWindow = hWindow;
 }
 
+EventProcessor<Event>* HitObject::RegisterEvent(Event * e)
+{
+	if (dynamic_cast<PlayableControlPoint*>(e)) {
+		if (dynamic_cast<PlayableControlPoint*>(e)->GetSmDifficulty()) {
+			delete hitWindow;
+			hitWindow = createHitWindow(dynamic_cast<PlayableControlPoint*>(e)->GetSmDifficulty());
+		}
+	}
+
+	return nullptr;
+}
+
 bool HitObject::GetHasJudgementResult()
 {
 	return hasJudgementResult;

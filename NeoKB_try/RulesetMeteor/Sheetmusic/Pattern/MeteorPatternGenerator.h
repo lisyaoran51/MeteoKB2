@@ -56,7 +56,7 @@ namespace Patterns {
 
 	protected:
 
-		int extendWidth = 12;
+		int extendWidth = 12;	// 應該要分左右邊不同的extend width
 
 		MTO_FLOAT fallSpeed = 0;
 		MTO_FLOAT fallBrightness = 0;
@@ -72,9 +72,12 @@ namespace Patterns {
 		MTO_FLOAT pedalInterval = 0.2f;
 		MTO_FLOAT defaultNextPedalTargetStartTime = 1.f;
 
+		float defaultSectionInterval = 3.f;
+
 		Pattern* generateNoteControlPoint(vector<Event*>* es, NoteControlPoint* note);
 		Pattern* generateStartGameEvent(vector<Event*>* es, StartGameEvent* start);
 		Pattern* generateInputKeyControlPoint(vector<Event*>* es, InputKeyControlPoint* inputKey);
+		int generateRepeatPracticeEvents(vector<Event*>* es, vector<float>* sectionEndTime);
 
 	};
 

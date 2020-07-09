@@ -5,6 +5,7 @@
 #include "EventProcessor.h"
 #include "../../Ruleset/Judgements/Judgement.h"
 #include "../../Ruleset/Judgements/HitWindow.h"
+#include "ControlPoints/PlayableControlPoint.h"
 #include "ArmedState.h"
 #include <vector>
 
@@ -13,6 +14,7 @@
 
 using namespace Games::Rulesets::Judgements;
 using namespace std;
+using namespace Games::Schedulers::Events::ControlPoints;
 
 
 
@@ -28,8 +30,6 @@ namespace Events{
 
 		ActionList<int, HitObject*, Judgement*> onJudgement;
 
-		HitWindow* hitWindow = nullptr;
-
 		ArmedState state = ArmedState::Idle;
 
 		vector<Judgement*> judgements;
@@ -39,6 +39,11 @@ namespace Events{
 	public:
 
 		HitObject(HitWindow* hWindow);
+
+		/// <summary>
+		/// register the Event to be processed.
+		/// </summary>
+		virtual EventProcessor<Event>* RegisterEvent(Event* e);
 
 		template<class _Type>
 		int AddOnJudgement(_Type* callableObject, function<int(HitObject*, Judgement*)> callback, string name = "HandleJudgement") {
@@ -62,6 +67,10 @@ namespace Events{
 		virtual Judgement* GetBestJudgement() = 0;
 
 	protected:
+
+		HitWindow* hitWindow = nullptr;
+
+		virtual HitWindow* createHitWindow() = 0;
 
 		HitWindow* getHitWindow();
 

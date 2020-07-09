@@ -98,8 +98,9 @@ namespace Rulesets {
 			LOG(LogLevel::Info) << "RulesetExecutor::load : creating [" << pgName << "] ...";
 			InstanceCreator<MtoObject> &iCreator = InstanceCreator<MtoObject>::GetInstance();
 			PatternGenerator* pg = iCreator.CreateInstanceWithT<PatternGenerator>(pgName);
-			AddChild(pg);	// TODO: 以後要把pattern generator擺回converter裡面，不要擺在這裡，effect設定丟給map algorithm處理就好
-
+			AddChild(pg);
+			// TODO: 以後要把pattern generator擺回converter裡面，不要擺在這裡，effect設定丟給map algorithm處理就好
+			// ^^ 搞錯了，pattern generator只能在這邊生成，因為meteor ruleset executor還沒拿到config就會生成converter，就會沒有config資料，沒辦法建effect
 
 
 			// 要把converter和postprocessor擺到load()裡，因為pattern Generator是擺在cache裡的
@@ -119,15 +120,6 @@ namespace Rulesets {
 			delete converter;
 			delete postprocessor;
 
-			/*
-			 * 計分的時候用來調整分數
-			 */
-			for (int i = 0; i < workingSm->GetModifiers()->GetValue()->size(); i++) {
-				if (dynamic_cast<DifficultyModifier*>(workingSmValue->GetModifiers()->GetValue()->at(i))) {
-					dynamic_cast<DifficultyModifier*>(workingSmValue->GetModifiers()->GetValue()->at(i))
-						->ApplyToDifficulty(workingSm->GetSm()->GetSmInfo()->difficuty);
-				}
-			}
 
 			/*
 			 * 把跟目前遊戲模式無關的event processor刪掉，因為converter會把所有processor全都生出來，我們要自己篩自己要的
@@ -140,8 +132,25 @@ namespace Rulesets {
 						->ApplyToEventProcessorFilter(eventProcessorFilter);
 				}
 			}
-
 			AddChild(eventProcessorFilter);
+			
+			/*
+			 * 計分的時候用來調整分數
+			 */
+			for (int i = 0; i < workingSm->GetModifiers()->GetValue()->size(); i++) {
+				if (dynamic_cast<DifficultyModifier*>(workingSmValue->GetModifiers()->GetValue()->at(i))) {
+					dynamic_cast<DifficultyModifier*>(workingSmValue->GetModifiers()->GetValue()->at(i))
+						->ApplyToDifficulty(workingSm->GetSm()->GetSmInfo()->difficuty);
+				}
+			}
+
+			/*
+			 * 把所有遊戲物件的難度、設定更改，例如說更改落下速度，更改得分標準、更改音效
+			 */
+			for (int i = 0; i < sm->GetEvents()->size(); i++) {
+				sm->GetEvents()->at(i)->ApplyDefaultValues(workingSm->GetSm()->GetSmInfo()->difficuty);
+			}
+
 
 
 			// Add mods, should always be the last thing applied to give full control to mods

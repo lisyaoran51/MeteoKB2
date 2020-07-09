@@ -63,6 +63,7 @@
     </ClCompile>
     <ClCompile Include="Games\MeteoGameBase.cpp" />
     <ClCompile Include="Games\Ruleset\Judgements\HasHitWindow.cpp" />
+    <ClCompile Include="Games\Ruleset\Judgements\HitWindow.cpp" />
     <ClCompile Include="Games\Ruleset\Judgements\Judgement.cpp" />
     <ClCompile Include="Games\Ruleset\Modifiers\Modifier.cpp" />
     <ClCompile Include="Games\Ruleset\Ruleset.cpp" />
@@ -213,6 +214,7 @@
     <ClCompile Include="RulesetMeteor\Ruleset\Modifiers\MeteorDifficultyModifier.cpp" />
     <ClCompile Include="RulesetMeteor\Ruleset\Modifiers\FallSpeedModifier.cpp" />
     <ClCompile Include="RulesetMeteor\Ruleset\Modifiers\HandModifier.cpp" />
+    <ClCompile Include="RulesetMeteor\Ruleset\Modifiers\MusicGameModifier.cpp" />
     <ClCompile Include="RulesetMeteor\Ruleset\Modifiers\RepeatPracticeModifier.cpp" />
     <ClCompile Include="RulesetMeteor\Ruleset\Scoring\MeteorScoreProcessor.cpp" />
     <ClCompile Include="RulesetMeteor\Scheduler\Event\ControlPoints\MeteorInputKeyControlPointHitObject.cpp" />

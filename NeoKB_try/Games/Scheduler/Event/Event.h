@@ -6,11 +6,14 @@
 #include <vector>
 #include "../../../Util/TemplateConstraint.h"
 #include "../../../Util/MtoType.h"
+#include "../../Sheetmusic/SheetmusicDifficulty.h"
 
 
 
 using namespace std;
 using namespace Util;
+using namespace Games::Sheetmusics;
+
 
 namespace Games {
 namespace Schedulers {
@@ -39,6 +42,8 @@ namespace Events {
 
 		int SetSourceEvent(Event* e);
 		Event* GetSourceEvent();
+
+		virtual int ApplyDefaultValues(SmDifficulty* smDifficulty);
 
 		bool operator<(const Event &rhs) const;
 
