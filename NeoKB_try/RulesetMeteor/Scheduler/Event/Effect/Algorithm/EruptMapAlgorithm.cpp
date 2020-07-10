@@ -44,7 +44,7 @@ EruptMapGenerateAlgorithm::EruptMapGenerateAlgorithm(MeteorConfigManager* m)
 	if (m->Get(MeteorSetting::FallBrightness, &fallBrightness)) {}
 }
 
-int EruptMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper<FallEffect>* em)
+int EruptMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper<EruptEffect>* em)
 {
 
 	//LOG(LogLevel::Depricated) << "FallMapGenerateAlgorithm::ImplementGenerate() : Generate Effect [" << em->GetStartTime() << "] on [" << em->GetCurrentTime() << "].";
