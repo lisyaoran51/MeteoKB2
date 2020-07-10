@@ -15,7 +15,7 @@ int AudioComponent::Update()
 	unique_lock<mutex> uLock(pendingActionMutex);
 	pendingActions.TriggerThenClear();
 
-	unique_lock<mutex> uLock(permanentActionMutex);
+	unique_lock<mutex> uLock2(permanentActionMutex);
 	permanentActions.Trigger();
 
 	return 0;
