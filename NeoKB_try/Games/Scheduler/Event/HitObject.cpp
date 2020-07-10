@@ -22,18 +22,16 @@ HitObject::HitObject(HitWindow * hWindow)
 
 EventProcessor<Event>* HitObject::RegisterEvent(Event * e)
 {
-	LOG(LogLevel::Debug) << "HitObject::RegisterEvent(Event*) :0";
 	if (dynamic_cast<PlayableControlPoint*>(e)) {
 		if (dynamic_cast<PlayableControlPoint*>(e)->GetSmDifficulty()) {
-			LOG(LogLevel::Debug) << "HitObject::RegisterEvent(Event*) :1";
 
 			delete hitWindow;
-			LOG(LogLevel::Debug) << "HitObject::RegisterEvent(Event*) :2";
 			hitWindow = createHitWindow(dynamic_cast<PlayableControlPoint*>(e)->GetSmDifficulty());
-			LOG(LogLevel::Debug) << "HitObject::RegisterEvent(Event*) :3";
+			return this;
 		}
 	}
 
+	LOG(LogLevel::Error) << "HitObject::RegisterEvent() : No Difficulty found at event [" << GetStartTime() << "].";
 	return nullptr;
 }
 
