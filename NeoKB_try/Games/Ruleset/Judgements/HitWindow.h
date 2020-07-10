@@ -20,8 +20,9 @@ namespace Judgements{
 	class HitWindow {
 
 	public:
+		HitWindow();
 
-		HitWindow(SmDifficulty* smDifficulty = nullptr);
+		HitWindow(SmDifficulty* smDifficulty);
 
 		virtual HitResult GetResultFor(double hitOffset) = 0;
 
