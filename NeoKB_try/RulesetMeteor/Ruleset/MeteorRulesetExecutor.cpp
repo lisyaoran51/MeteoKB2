@@ -218,6 +218,7 @@ EventProcessor<Event>* MeteorRulesetExecutor::getEventProcessor(Event * e)
 		return (new SustainPedalLightRing())->RegisterEvent(e);
 	}
 	else if (processorType == "MeteorInputKeyControlPointHitObject") {
+		LOG(LogLevel::Debug) << "MeteorRulesetExecutor::getEventProcessor : getting event MeteorInputKeyControlPointHitObject at [" << e->GetStartTime() << "]";
 		return (new MeteorInputKeyControlPointHitObject())->RegisterEvent(e);
 	}
 	else if (processorType == "PianoEventProcessor") {
