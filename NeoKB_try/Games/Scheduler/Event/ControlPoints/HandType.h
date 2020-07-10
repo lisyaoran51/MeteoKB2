@@ -17,6 +17,7 @@ namespace ControlPoints{
 		RightEasy,
 		RightOther,
 		Foot,
+		Auto,
 		OctaveShift,
 		HiddenNone,
 		HiddenLeft,
