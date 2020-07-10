@@ -127,8 +127,8 @@ namespace Rulesets {
 			EventProcessorFilter* eventProcessorFilter = createEventProcessorFilter();
 
 			for (int i = 0; i < workingSm->GetModifiers()->GetValue()->size(); i++) {
-				if (dynamic_cast<EventProcessorFilterModifier*>(workingSmValue->GetModifiers()->GetValue()->at(i))) {
-					dynamic_cast<EventProcessorFilterModifier*>(workingSmValue->GetModifiers()->GetValue()->at(i))
+				if (dynamic_cast<EventProcessorFilterModifier*>(workingSm->GetModifiers()->GetValue()->at(i))) {
+					dynamic_cast<EventProcessorFilterModifier*>(workingSm->GetModifiers()->GetValue()->at(i))
 						->ApplyToEventProcessorFilter(eventProcessorFilter);
 				}
 			}
@@ -138,8 +138,8 @@ namespace Rulesets {
 			 * 計分的時候用來調整分數
 			 */
 			for (int i = 0; i < workingSm->GetModifiers()->GetValue()->size(); i++) {
-				if (dynamic_cast<DifficultyModifier*>(workingSmValue->GetModifiers()->GetValue()->at(i))) {
-					dynamic_cast<DifficultyModifier*>(workingSmValue->GetModifiers()->GetValue()->at(i))
+				if (dynamic_cast<DifficultyModifier*>(workingSm->GetModifiers()->GetValue()->at(i))) {
+					dynamic_cast<DifficultyModifier*>(workingSm->GetModifiers()->GetValue()->at(i))
 						->ApplyToDifficulty(workingSm->GetSm()->GetSmInfo()->difficuty);
 				}
 			}
