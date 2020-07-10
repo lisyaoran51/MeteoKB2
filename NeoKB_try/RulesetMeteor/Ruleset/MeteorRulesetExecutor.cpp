@@ -214,12 +214,14 @@ EventProcessor<Event>* MeteorRulesetExecutor::getEventProcessor(Event * e)
 		return (new MeteorNoteControlPointHitObject())->RegisterEvent(e);
 	}
 	else if (processorType == "SustainPedalLightRing") {
+		LOG(LogLevel::Debug) << "MeteorRulesetExecutor::getEventProcessor : getting event SustainPedalLightRing at [" << e->GetStartTime() << "]";
 		return (new SustainPedalLightRing())->RegisterEvent(e);
 	}
 	else if (processorType == "MeteorInputKeyControlPointHitObject") {
 		return (new MeteorInputKeyControlPointHitObject())->RegisterEvent(e);
 	}
 	else if (processorType == "PianoEventProcessor") {
+		LOG(LogLevel::Debug) << "MeteorRulesetExecutor::getEventProcessor : getting event PianoEventProcessor at [" << e->GetStartTime() << "]";
 		return (new PianoEventProcessor())->RegisterEvent(e);
 	}
 	else if (processorType == "OctaveShiftEventProcessor") {
