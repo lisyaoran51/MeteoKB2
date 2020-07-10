@@ -31,7 +31,7 @@ namespace Timing {
 
 		int load();
 
-		int load(EventProcessorFilter* eProcessorFilter);
+		int loadOnComplete(EventProcessorFilter* e);
 
 		/// <summary>
 		/// 再反覆練彈模式中，避免彈到別的段落的音，所使用的filter
@@ -75,6 +75,8 @@ namespace Timing {
 
 
 	protected:
+
+		virtual int LoadOnComplete();
 
 		MeteorTimeControllerMode timeControllerMode = MeteorTimeControllerMode::MusicGame;
 

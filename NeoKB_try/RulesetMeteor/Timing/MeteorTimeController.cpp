@@ -16,16 +16,13 @@ using namespace Meteor::Schedulers::Events::Effects;
 int MeteorTimeController::load()
 {
 
-	EventProcessorFilter * e = GetCache<EventProcessorFilter>("EventProcessorFilter");
-	if (!e)
-		throw runtime_error("MeteorTimeController::load() : EventProcessorFilter not found in cache.");
-
-	return load(e);
+	
+	return 0;
 }
 
-int MeteorTimeController::load(EventProcessorFilter * eProcessorFilter)
+int MeteorTimeController::loadOnComplete(EventProcessorFilter * e)
 {
-	eventProcessorFilter = eProcessorFilter;
+	eventProcessorFilter = e;
 	return 0;
 }
 
@@ -174,6 +171,15 @@ int MeteorTimeController::RepeatSection(int section)
 	JumpTo(controllableClock->GetCurrentTime() - totalRewindLength);
 
 	return 0;
+}
+
+int MeteorTimeController::LoadOnComplete()
+{
+	EventProcessorFilter * e = GetCache<EventProcessorFilter>("EventProcessorFilter");
+	if (!e)
+		throw runtime_error("MeteorTimeController::load() : EventProcessorFilter not found in cache.");
+
+	return loadOnComplete(e);
 }
 
 int MeteorTimeController::onButtonDown(InputState * inputState, InputKey button)
