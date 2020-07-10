@@ -116,7 +116,7 @@
     <ClCompile Include="Games\Scheduler\Event\SystemEvents\StopSystemEvent.cpp" />
     <ClCompile Include="Games\Scheduler\Event\SystemEvents\SystemEvent.cpp" />
     <ClCompile Include="Games\Scheduler\Event\SystemEvents\SystemEventHandler.cpp" />
-    <ClCompile Include="Games\Scheduler\Event\TimeEvents\TimeControllerConrtollers\TimeControllerController.cpp" />
+    <ClCompile Include="Games\Scheduler\Event\TimeEvents\TimeControllerControllers\TimeControllerController.cpp" />
     <ClCompile Include="Games\Scheduler\Event\TimeEvents\TimeEvent.cpp" />
     <ClCompile Include="Games\Scheduler\Event\TimeEvents\TimeEventProcessor.cpp" />
     <ClCompile Include="Games\Sheetmusic\Format\SimpleSmDecoder.cpp" />
@@ -389,7 +389,7 @@
     <ClInclude Include="Games\Scheduler\Event\SystemEvents\StopSystemEvent.h" />
     <ClInclude Include="Games\Scheduler\Event\SystemEvents\SystemEvent.h" />
     <ClInclude Include="Games\Scheduler\Event\SystemEvents\SystemEventHandler.h" />
-    <ClInclude Include="Games\Scheduler\Event\TimeEvents\TimeControllerConrtollers\TimeControllerController.h" />
+    <ClInclude Include="Games\Scheduler\Event\TimeEvents\TimeControllerControllers\TimeControllerController.h" />
     <ClInclude Include="Games\Scheduler\Event\TimeEvents\TimeEvent.h" />
     <ClInclude Include="Games\Scheduler\Event\TimeEvents\TimeEventProcessor.h" />
     <ClInclude Include="Games\Sheetmusic\Format\Parser\EventParser.h" />

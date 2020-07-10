@@ -10,7 +10,7 @@
 #include "../../Scheduler/Event/IoEvents/IoCommunicators/IoCommunicator.h"
 #include "../../Scheduler/Event/InstrumentEvents/InstrumentControllers/InstrumentController.h"
 #include "../../Scheduler/Event/PlayfieldEvents/PlayfieldControllers/PlayfieldController.h"
-#include "../../Scheduler/Event/TimeEvents/TimeControllerConrtollers/TimeControllerController.h"
+#include "../../Scheduler/Event/TimeEvents/TimeControllerControllers/TimeControllerController.h"
 
 
 

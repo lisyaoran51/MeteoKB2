@@ -1284,9 +1284,6 @@
     <ClCompile Include="RulesetMeteor\Ruleset\Modifiers\MeteorDifficultyModifier.cpp">
       <Filter>來源檔案\RulesetMeteor\Ruleset\Modifiers</Filter>
     </ClCompile>
-    <ClCompile Include="Games\Scheduler\Event\TimeEvents\TimeControllerConrtollers\TimeControllerController.cpp">
-      <Filter>來源檔案\Games\Schedulers\Events\TimeEvents\TimeControllerControllers</Filter>
-    </ClCompile>
     <ClCompile Include="Games\Scheduler\Event\TimeEvents\TimeEvent.cpp">
       <Filter>來源檔案\Games\Schedulers\Events\TimeEvents</Filter>
     </ClCompile>
@@ -1325,6 +1322,9 @@
     </ClCompile>
     <ClCompile Include="Games\Ruleset\Modifiers\EventProcessorFilterModifier.cpp">
       <Filter>來源檔案\Games\Ruleset\Mod</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\Scheduler\Event\TimeEvents\TimeControllerControllers\TimeControllerController.cpp">
+      <Filter>來源檔案\Games\Schedulers\Events\TimeEvents\TimeControllerControllers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2209,9 +2209,6 @@
     <ClInclude Include="RulesetMeteor\Ruleset\Modifiers\MeteorDifficultyModifier.h">
       <Filter>標頭檔\RulesetMeteor\Ruleset\Modifiers</Filter>
     </ClInclude>
-    <ClInclude Include="Games\Scheduler\Event\TimeEvents\TimeControllerConrtollers\TimeControllerController.h">
-      <Filter>標頭檔\Games\Scheduler\Events\TimeEvents\TimeControllerControllers</Filter>
-    </ClInclude>
     <ClInclude Include="Games\Scheduler\Event\TimeEvents\TimeEvent.h">
       <Filter>標頭檔\Games\Scheduler\Events\TimeEvents</Filter>
     </ClInclude>
@@ -2238,6 +2235,9 @@
     </ClInclude>
     <ClInclude Include="RulesetMeteor\Ruleset\Modifiers\ManualPedalMdifier.h">
       <Filter>標頭檔\RulesetMeteor\Ruleset\Modifiers</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Scheduler\Event\TimeEvents\TimeControllerControllers\TimeControllerController.h">
+      <Filter>標頭檔\Games\Scheduler\Events\TimeEvents\TimeControllerControllers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

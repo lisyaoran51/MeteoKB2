@@ -4,7 +4,7 @@
 
 
 #include "../../../Scheduler/Event/EventProcessor.h"
-#include "TimeControllerConrtollers/TimeControllerController.h"
+#include "TimeControllerControllers/TimeControllerController.h"
 
 
 using namespace Games::Schedulers::Events;

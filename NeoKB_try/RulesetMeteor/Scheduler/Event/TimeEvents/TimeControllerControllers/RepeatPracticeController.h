@@ -3,7 +3,7 @@
 
 
 #include "../RepeatPracticeEvent.h"
-#include "../../../../../Games/Scheduler/Event/TimeEvents/TimeControllerConrtollers/TimeControllerController.h"
+#include "../../../../../Games/Scheduler/Event/TimeEvents/TimeControllerControllers/TimeControllerController.h"
 #include "../../../../Timing/MeteorTimeController.h"
 
 

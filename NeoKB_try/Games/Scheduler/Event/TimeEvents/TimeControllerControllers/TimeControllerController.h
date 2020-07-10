@@ -37,7 +37,7 @@ namespace TimeControllerControllers {
 
 		int load() {
 
-			LOG(LogLevel::Info) << "TimeControllerConrtoller::load() : Start loading config.";
+			LOG(LogLevel::Info) << "TimeControllerController::load() : Start loading config.";
 
 			FrameworkConfigManager* f = GetCache<FrameworkConfigManager>("FrameworkConfigManager");
 
