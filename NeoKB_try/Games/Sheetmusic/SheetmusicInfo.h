@@ -31,7 +31,13 @@ using namespace Games::Rulesets;
 namespace Games {
 namespace Sheetmusics {
 	
-	 
+	enum class SmHandType {
+		None,
+		Hand,
+		Difficulty,
+		All
+	};
+
 	struct SmInfo
 	{
 
@@ -39,27 +45,30 @@ namespace Sheetmusics {
 
 		int smVersion;
 
-		SmMetadata* metadata;
+		SmMetadata* metadata = nullptr;
 
-		SmDifficulty* difficuty;
+		SmDifficulty* difficuty = nullptr;
 
 		string fileName;
 
-		int rulesetId;
-
+		// General
 		int audioLeadIn;
+
+		bool countdown;
 
 		int version;
 
-		Ruleset* ruleset;
+		int rulesetId;
 
-		RulesetInfo* rulesetInfo;
+		RulesetInfo* rulesetInfo = nullptr;
 
-		SmSetInfo* smSetInfo;
+		SmSetInfo* smSetInfo = nullptr;
 
-		FileInfo* fileInfo;
+		FileInfo* fileInfo = nullptr;
 
-		bool hasSection = false;
+		bool section = false;
+
+		SmHandType smHandType = SmHandType::None;
 
 	};
 

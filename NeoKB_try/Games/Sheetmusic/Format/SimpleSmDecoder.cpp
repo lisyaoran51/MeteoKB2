@@ -31,6 +31,7 @@ int SimpleSmDecoder::handleGeneral(Sm<Event>* sm, string & line)
 	if (pair.at(0) == "AudioFilename") {
 		LOG(LogLevel::Finer) << "int SimpleSmDecoder::handleGeneral(Sm<Event>*,string) : tag [AudioFilename] chosen.";
 		metadata->AudioFile = pair.at(1);
+		metadata->hasAudioFile = true;
 	}
 	else if (pair.at(0) == "AudioLeadIn") {
 		sm->GetSmInfo()->audioLeadIn = atoi(pair.at(1).c_str());
@@ -39,13 +40,14 @@ int SimpleSmDecoder::handleGeneral(Sm<Event>* sm, string & line)
 		metadata->PreviewTime = atoi(pair.at(1).c_str());
 	}
 	else if (pair.at(0) == "Countdown") {
+		sm->GetSmInfo()->countdown = atoi(pair.at(1).c_str()) == 1;
 		//metadata->AudioFile = pair.at(1);
 	}
 	else if (pair.at(0) == "SampleSet") {
 		//metadata->AudioFile = pair.at(1);
 	}
 	else if (pair.at(0) == "SampleVolume") {
-		//metadata->AudioFile = pair.at(1);
+		defaultSampleVolume = atoi(pair.at(1).c_str());
 	}
 	else if (pair.at(0) == "StackLeniency") {
 		//metadata->AudioFile = pair.at(1);
@@ -59,7 +61,26 @@ int SimpleSmDecoder::handleGeneral(Sm<Event>* sm, string & line)
 	else if (pair.at(0) == "SpecialStyle") {
 		//metadata->AudioFile = pair.at(1);
 	}
-	
+	else if (pair.at(0) == "Section") {
+		sm->GetSmInfo()->section = atoi(pair.at(1).c_str()) == 1;
+	}
+	else if (pair.at(0) == "HandType") {
+		switch (atoi(pair.at(1).c_str())) {
+		case 0:
+			sm->GetSmInfo()->smHandType == SmHandType::None;
+			break;
+		case 1:
+			sm->GetSmInfo()->smHandType == SmHandType::Hand;
+			break;
+		case 2:
+			sm->GetSmInfo()->smHandType == SmHandType::Difficulty;
+			break;
+		case 3:
+			sm->GetSmInfo()->smHandType == SmHandType::All;
+			break;
+
+		}
+	}
     
 	return 0;
 }
@@ -95,7 +116,6 @@ int SimpleSmDecoder::handleMetadata(Sm<Event>* sm, string & line)
 		metadata->Source = pair.at(1);
 	}
 	else if (pair.at(0) == "Tags") {
-		sm->GetSmInfo()->rulesetId = atoi(pair.at(1).c_str());
 	}
 	else if (pair.at(0) == "SheetmusicID") {
 		//metadata->AudioFile = pair.at(1);
@@ -112,27 +132,33 @@ int SimpleSmDecoder::handleDifficulty(Sm<Event>* sm, string & line)
 {
 	vector<string> pair = split(line, ":");
 
-	SmMetadata* metadata = sm->GetSmInfo()->metadata;
+	SmDifficulty* difficulty = sm->GetSmInfo()->difficuty;
+	
+	if (pair.at(0) == "Speed") {
+		difficulty->Speed = atoi(pair.at(1).c_str());
+	}
+
 	/*
 	switch (pair.Key) {
-                case @"HPDrainRate":
-                    difficulty.DrainRate = float.Parse(pair.Value);
-                    break;
-                case @"OverallDifficulty":
-                    difficulty.OverallDifficulty = float.Parse(pair.Value);
-                    break;
-                case @"ApproachRate":
-                    difficulty.ApproachRate = float.Parse(pair.Value);
-                    break;
-                case @"SliderMultiplier":
-                    difficulty.SliderMultiplier = float.Parse(pair.Value);
-                    break;
-                case @"SliderTickRate":
-                    difficulty.SliderTickRate = float.Parse(pair.Value);
-                    break;
-            }
+        case @"HPDrainRate":
+            difficulty.DrainRate = float.Parse(pair.Value);
+            break;
+        case @"OverallDifficulty":
+            difficulty.OverallDifficulty = float.Parse(pair.Value);
+            break;
+        case @"ApproachRate":
+            difficulty.ApproachRate = float.Parse(pair.Value);
+            break;
+        case @"SliderMultiplier":
+            difficulty.SliderMultiplier = float.Parse(pair.Value);
+            break;
+        case @"SliderTickRate":
+            difficulty.SliderTickRate = float.Parse(pair.Value);
+            break;
+    }
+	*/
 
-			*/
+			
 
 	return 0;
 }
@@ -210,12 +236,16 @@ int SimpleSmDecoder::handleNoteControlPoints(Sm<Event>* sm, string & line)
 			{
 			case -1:
 				inputKey = InputKey::SustainPedal;
+				if (volume <= 0)
+					volume = defaultSampleVolume;
 				break;
 			case -2:
 				inputKey = InputKey::LowerOctave; // 這邊程式邏輯有問題，遊戲中升降8度是不能夠手動控制的，只能電腦自動控制
+												  // 應該要放在Event section裡面
 				break;
 			case -3:
 				inputKey = InputKey::RaiseOctave; // 這邊程式邏輯有問題，遊戲中升降8度是不能夠手動控制的，只能電腦自動控制
+												  // 應該要放在Event section裡面
 				break;
 			}
 			newPlayableControlPoint = new InputKeyControlPoint(inputKey, inputValue, time, noteLength);
@@ -288,7 +318,7 @@ int SimpleSmDecoder::setSectionMap()
 	sectionMap[SimpleSmDecoderSection::General] = "General";
 	sectionMap[SimpleSmDecoderSection::Editor] = "Editor";
 	sectionMap[SimpleSmDecoderSection::Metadata] = "Metadata";
-	sectionMap[SimpleSmDecoderSection::Difficulty] = "None";
+	sectionMap[SimpleSmDecoderSection::Difficulty] = "Difficulty";
 	sectionMap[SimpleSmDecoderSection::Events] = "Events";
 	sectionMap[SimpleSmDecoderSection::NoteControlPoints] = "NoteControlPoints";
 	sectionMap[SimpleSmDecoderSection::Variables] = "Variables";

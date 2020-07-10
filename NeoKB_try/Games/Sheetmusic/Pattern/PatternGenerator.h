@@ -13,6 +13,7 @@
 #include "../../../Framework/Configurations/FrameworkConfigManager.h"
 #include "../../../Framework/Allocation/Hierachal/Container.h"
 #include "../../../Instruments/Pitch.h"
+#include "../../Sheetmusic/Sheetmusic.h"
 
 
 
@@ -24,6 +25,7 @@ using namespace Games::Sheetmusics;
 using namespace Framework::Configurations;
 using namespace Framework::Allocation::Hierachal;
 using namespace Instruments;
+using namespace Games::Sheetmusics;
 
 
 
@@ -46,6 +48,8 @@ namespace Patterns {
 		PatternGenerator();
 
 		~PatternGenerator();
+
+		virtual int Initialize(Sm<Event>* s);
 
 		virtual Pattern* Generate(vector<Event*>* es, Event * e) = 0;
 
@@ -74,7 +78,7 @@ namespace Patterns {
 
 		Event* event;
 
-		//Sm<Event>* sm;
+		Sm<Event>* sm = nullptr;
 
 	};
 

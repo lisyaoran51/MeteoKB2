@@ -8,6 +8,7 @@
 #include "../../../Games/Ruleset/Modifiers/Modifier.h"
 #include "../../../Games/Ruleset/Modifiers/DifficultyModifier.h"
 #include "../../../Games/Ruleset/Modifiers/EventProcessorFilterModifier.h"
+#include "../../../Games/Scheduler/Event/EventProcessor.h"
 
 
 
@@ -30,6 +31,10 @@ namespace Modifiers{
 	protected:
 
 		SmDifficultyDifficulty difficulty = SmDifficultyDifficulty::None;
+
+		int filterEventProcessorsByDifficulty(vector<EventProcessor<Event>*>* eventProcessors);
+
+
 
 	};
 

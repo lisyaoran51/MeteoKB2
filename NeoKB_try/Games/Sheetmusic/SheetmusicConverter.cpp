@@ -25,6 +25,8 @@ Sm<Event>* SmConverter::Convert(Sm<Event>* s)
 	LOG(LogLevel::Finer) << "Sm<Event>* SmConverter::Convert(Sm<Event>*) : Cloning sm ...";
 	Sm<Event>* sm = new Sm<Event>(s);
 
+	patternGenerator->Initialize(sm);
+
 	// 從sm讀出來的event
 	LOG(LogLevel::Finer) << "Sm<Event>* SmConverter::Convert(Sm<Event>*) : Getting events ...";
 	vector<Event*>* originalEvents = sm->GetEvents();

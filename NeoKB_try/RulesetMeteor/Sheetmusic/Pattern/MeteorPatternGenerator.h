@@ -45,6 +45,8 @@ namespace Patterns {
 
 		MeteorPatternGenerator();
 
+		virtual int Initialize(Sm<Event>* s);
+
 		virtual Pattern* Generate(vector<Event*>* es, Event * e);
 
 		/// <summary>

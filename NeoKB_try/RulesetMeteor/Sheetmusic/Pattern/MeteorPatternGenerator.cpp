@@ -86,6 +86,15 @@ MeteorPatternGenerator::MeteorPatternGenerator(): PatternGenerator(), RegisterTy
 	registerLoad(bind(static_cast<int(MeteorPatternGenerator::*)(void)>(&MeteorPatternGenerator::load), this));
 }
 
+int MeteorPatternGenerator::Initialize(Sm<Event>* s)
+{
+	PatternGenerator::Initialize(s);
+
+	fallSpeed = s->GetSmInfo()->difficuty->Speed;
+
+	return 0;
+}
+
 Pattern* MeteorPatternGenerator::Generate(vector<Event*>* es, Event * e)
 {
 	

@@ -34,8 +34,6 @@ namespace Sheetmusics {
 		
 		vector<T*>* events = NULL;
 
-		RulesetInfo* rulesetInfo = NULL;
-
 	public:
 		
 		Sm(Sm<T>* sm = NULL) {
@@ -51,10 +49,11 @@ namespace Sheetmusics {
 				SetRulesetInfo(sm->GetRulesetInfo());
 			}
 			else {
-				SetSmInfo(new SmInfo());
+				smInfo = new SmInfo();
 				smInfo->metadata = new SmMetadata();
+				smInfo->difficuty = new SmDifficulty();
 				// TODO: metadata到底要存哪？info裡還是sm裡
-				SetSmMetadata(new SmMetadata());
+				smMetadata = smInfo->metadata;
 				SetEvents(new vector<T*>());
 				// SetRulesetInfo
 			}

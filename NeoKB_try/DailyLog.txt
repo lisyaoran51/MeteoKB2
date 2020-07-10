@@ -1827,5 +1827,24 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	目前寫到把所有event都根據modifier去做修改，有的修改落下速度(fall effect)，有的修改得分(hit object)，部過從sm difficulty轉換成hit window那邊還沒寫
 	接下來要寫converter做出倒轉事件、上升特效事件
 	
-	倒轉事件做完了，接下來要把每個modifier都寫完
+	倒轉事件做完了，接下來要把每個modifier都寫
 	
+7/9
+	modifire改玩了，部過要把decoder 裡面加上可以去讀這個埔有沒有hand section difficulty speed這些資訊
+	Score processor比較不急，先不改
+	要找時間研究一下在遊戲開始之前就可以彈出聲音(以後要寫換音色)
+	
+	看起來是ok，遊戲還沒開始就會可以談音樂，換音色在load and map samples那邊，應該很好改
+	
+7/10
+	osu beatmap的一些參數介紹
+	https://firce777.wixsite.com/taiko-mapping/1-2
+	
+	改好decoder了，以後要再general裡面加兩行
+	Mode:1
+	Section:1
+	HandType:3
+	[Difficulty]
+	Speed:16
+	
+	decoder都改完了，接下來最大的鏗是storage，裡面有資料庫，看看要怎麼寫

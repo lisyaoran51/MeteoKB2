@@ -40,7 +40,7 @@ namespace Sheetmusics {
 		/// <summary>
 		/// 落下速度每秒掉多遠，16就是一秒掉完一個白鍵長度
 		/// </summary>
-		float FallSpeed = 16;
+		float Speed = 16;
 
 	};
 

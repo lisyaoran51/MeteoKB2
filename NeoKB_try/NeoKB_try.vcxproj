@@ -512,6 +512,7 @@
     <ClInclude Include="RulesetMeteor\Ruleset\MeteorRulesetExecutor.h" />
     <ClInclude Include="RulesetMeteor\Ruleset\Modifiers\AutoPedalModifier.h" />
     <ClInclude Include="RulesetMeteor\Ruleset\Modifiers\ClockRateModifier.h" />
+    <ClInclude Include="RulesetMeteor\Ruleset\Modifiers\ManualPedalMdifier.h" />
     <ClInclude Include="RulesetMeteor\Ruleset\Modifiers\MeteorDifficultyModifier.h" />
     <ClInclude Include="RulesetMeteor\Ruleset\Modifiers\FallSpeedModifier.h" />
     <ClInclude Include="RulesetMeteor\Ruleset\Modifiers\HandModifier.h" />

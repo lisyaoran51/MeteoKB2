@@ -5,9 +5,11 @@
 #include "../../../Games/Ruleset/Modifiers/Modifier.h"
 #include "../../../Games/Ruleset/Modifiers/DifficultyModifier.h"
 #include "../../../Games/Ruleset/Modifiers/EventProcessorFilterModifier.h"
+#include "../../../Games/Scheduler/Event/EventProcessor.h"
 
 
 using namespace Games::Rulesets::Modifiers;
+using namespace Games::Schedulers::Events;
 
 namespace Meteor {
 namespace Rulesets{
@@ -26,6 +28,8 @@ namespace Modifiers{
 	protected:
 
 		SmDifficultyHandType handType = SmDifficultyHandType::None;
+
+		int filterEventProcessorsByHandType(vector<EventProcessor<Event>*>* eventProcessors);
 
 	};
 

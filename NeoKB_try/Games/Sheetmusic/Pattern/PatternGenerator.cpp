@@ -34,6 +34,13 @@ PatternGenerator::~PatternGenerator()
 	CleanPatterns();
 }
 
+int PatternGenerator::Initialize(Sm<Event>* s)
+{
+	sm = s;
+
+	return 0;
+}
+
 int PatternGenerator::Add(Pattern * p)
 {
 

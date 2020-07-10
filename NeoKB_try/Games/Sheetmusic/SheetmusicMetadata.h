@@ -20,6 +20,7 @@ namespace Sheetmusics {
 
 		string Artist;
 		string ArtistUnicode;
+		bool hasAudioFile = false;
 		string AudioFile;
 		string Author;
 		int OnlineSheetmusic;
