@@ -22,7 +22,7 @@ FallEffect::FallEffect(int xPos, int yPos, MTO_FLOAT sTime, MTO_FLOAT l, MTO_FLO
 int FallEffect::ApplyDefaultValues(SmDifficulty * smDifficulty)
 {
 
-	AdjustSpeed(smDifficulty->FallSpeed);
+	AdjustSpeed(smDifficulty->Speed);
 
 	return 0;
 }
