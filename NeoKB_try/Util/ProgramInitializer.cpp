@@ -151,6 +151,9 @@ int ProgramInitializer::Initialize()
 	// Meteor/Schedulers/Events/PlayfieldEvents/PlayfieldControllers
 	iCreator.RegisterType<OctaveShifter>("OctaveShifter");
 
+	// Meteor/Schedulers/Events/TimeEvents/TimeControllerControllers
+	iCreator.RegisterType<OctaveShifter>("RepeatPracticeController");
+
 	// Meteor/Sheetmusics/Patterns
 	iCreator.RegisterType<MeteorPatternGenerator>("MeteorPatternGenerator");
 

@@ -8,6 +8,7 @@
 #include "../Scheduler/Event/Effect/ExplodeEffect.h"
 #include "../Scheduler/Event/Effect/GlowLineEffect.h"
 #include "../Scheduler/Event/Effect/FallEffectMapper.h"
+#include "../Scheduler/Event/Effect/EruptEffectMapper.h"
 #include "../Scheduler/Event/Effect/ExplodeEffectMapper.h"
 #include "../Scheduler/Event/Effect/GlowLineEffectMapper.h"
 #include "../Scheduler/Event/Effect/TargetLineEffectMapper.h"
@@ -182,6 +183,11 @@ EventProcessor<Event>* MeteorRulesetExecutor::getEventProcessor(Event * e)
 		int width = playfield->GetWidth();
 		int height = playfield->GetHeight();
 		return (new FallEffectMapper(width, height))->RegisterEvent(e);
+	}
+	else if (processorType == "EruptEffectMapper") {
+		int width = playfield->GetWidth();
+		int height = playfield->GetHeight();
+		return (new EruptEffectMapper(width, height))->RegisterEvent(e);
 	}
 	/* 這幾個效果不好，所以拿掉了
 	//else if (processorType == "GlowLineEffectMapper") {
