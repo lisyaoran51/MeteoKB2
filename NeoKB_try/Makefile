@@ -172,7 +172,7 @@ SustainPedalLightRingOutputer.o SustainPedalLightRingPanelMessage.o \
 MeteorEventProcessorMaster.o MeteorNoteControlPointHitObject.o MeteorInputKeyControlPointHitObject.o \
 ExplodeEffect.o ExplodeEffectMapper.o FallEffect.o FallEffectMapper.o EruptEffect.o EruptEffectMapper.o GlowLineEffect.o GlowLineEffectMapper.o TargetLineEffect.o TargetLineEffectMapper.o \
 ExplodeMapAlgorithm.o FallMapAlgorithm.o EruptMapAlgorithm.o GlowLineMapAlgorithm.o TargetLineMapAlgorithm.o \
-SustainPedalIoEvent.o SustainPedalLightRing.o SustainPedalLightRingIoCommunicator.o EruptMapAlgorithm.o \
+SustainPedalIoEvent.o SustainPedalLightRing.o SustainPedalLightRingIoCommunicator.o \
 PianoEvent.o PianoEventProcessor.o PianoController.o \
 OctaveShiftEvent.o OctaveShiftEventProcessor.o OctaveShifter.o \
 RepeatPracticeEvent.o RepeatPracticeEventProcessor.o RepeatPracticeController.o \
