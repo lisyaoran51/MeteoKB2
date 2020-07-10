@@ -70,7 +70,7 @@ namespace Events{
 
 		HitWindow* hitWindow = nullptr;
 
-		virtual HitWindow* createHitWindow() = 0;
+		virtual HitWindow* createHitWindow(SmDifficulty* smDifficulty) = 0;
 
 		HitWindow* getHitWindow();
 
