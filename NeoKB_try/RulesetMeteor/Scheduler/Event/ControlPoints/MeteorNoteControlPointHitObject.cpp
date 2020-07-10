@@ -22,3 +22,8 @@ Judgement * MeteorNoteControlPointHitObject::GetBestJudgement()
 {
 	return new MeteorJudgement(HitResult::Perfect);
 }
+
+HitWindow * MeteorNoteControlPointHitObject::createHitWindow(SmDifficulty * smDifficulty)
+{
+	return new MeteorHitWindow();
+}

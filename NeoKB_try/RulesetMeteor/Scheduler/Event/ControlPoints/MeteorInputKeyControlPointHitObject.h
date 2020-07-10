@@ -27,7 +27,7 @@ namespace ControlPoints{
 
 	protected:
 
-		virtual HitWindow* createHitWindow();
+		virtual HitWindow* createHitWindow(SmDifficulty* smDifficulty);
 
 	};
 

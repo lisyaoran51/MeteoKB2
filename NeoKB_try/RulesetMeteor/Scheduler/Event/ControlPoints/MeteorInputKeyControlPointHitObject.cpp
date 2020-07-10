@@ -22,3 +22,8 @@ Judgement * MeteorInputKeyControlPointHitObject::GetBestJudgement()
 {
 	return new MeteorJudgement(HitResult::Perfect);
 }
+
+HitWindow * MeteorInputKeyControlPointHitObject::createHitWindow(SmDifficulty * smDifficulty)
+{
+	return new MeteorHitWindow();
+}
