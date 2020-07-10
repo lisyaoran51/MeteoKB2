@@ -46,7 +46,7 @@ namespace Sheetmusics {
 				LOG(LogLevel::Finer) << "Sm(Sm<T>*) : Getting events ...";
 				SetEvents(sm->GetEvents());
 				LOG(LogLevel::Finer) << "Sm(Sm<T>*) : Getting ruleset info ...";
-				SetRulesetInfo(sm->GetRulesetInfo());
+				//SetRulesetInfo(sm->GetRulesetInfo());
 			}
 			else {
 				smInfo = new SmInfo();
@@ -63,7 +63,6 @@ namespace Sheetmusics {
 			delete smInfo;
 			delete smMetadata;
 			delete events;
-			delete rulesetInfo;
 		}
 
 		int SetSmInfo(SmInfo* si) {
@@ -98,6 +97,7 @@ namespace Sheetmusics {
 			return events;
 		}
 
+		/* «Ý§R
 		int SetRulesetInfo(RulesetInfo* r) {
 			rulesetInfo = r;
 			return 0;
@@ -106,7 +106,7 @@ namespace Sheetmusics {
 		RulesetInfo* GetRulesetInfo() {
 			return rulesetInfo;
 		}
-
+		*/
 	};
 
 

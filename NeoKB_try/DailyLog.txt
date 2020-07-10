@@ -1848,3 +1848,6 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	Speed:16
 	
 	decoder都改完了，接下來最大的鏗是storage，裡面有資料庫，看看要怎麼寫
+	
+	當出現Please specify which branch you want to merge with.的解決辦法
+	git branch --set-upstream-to=origin/RepeatPracticeModifier RepeatPracticeModifier
