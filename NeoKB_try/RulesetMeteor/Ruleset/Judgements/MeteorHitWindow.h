@@ -15,6 +15,8 @@ namespace Judgements{
 
 	public:
 
+		MeteorHitWindow();
+
 		virtual HitResult GetResultFor(double hitOffset);
 
 		virtual double GetHitWindow(HitResult hResult);

@@ -5,6 +5,10 @@ using namespace Meteor::Rulesets::Judgements;
 
 
 
+MeteorHitWindow::MeteorHitWindow() : HitWindow()
+{
+}
+
 HitResult MeteorHitWindow::GetResultFor(double hitOffset)
 {
 	if (hitOffset < 0.08)
