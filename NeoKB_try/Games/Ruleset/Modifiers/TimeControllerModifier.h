@@ -21,6 +21,8 @@ namespace Modifiers{
 
 	public:
 
+		TimeControllerModifier();
+
 		virtual int ApplyToTimeController(TimeController* timeController) = 0;
 
 	};

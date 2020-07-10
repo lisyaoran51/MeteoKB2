@@ -17,11 +17,16 @@ namespace Modifiers{
 
 	public:
 
+		RulesetExecutorModifier(): RegisterType("RulesetExecutorModifier") {
+
+		}
+
 		virtual int ApplyToRulesetContainer(RulesetExecutor<T>* rulesetExecutor) = 0;
 
 	};
 
-}}}
+}
+}}
 
 
 #endif

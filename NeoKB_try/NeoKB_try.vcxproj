@@ -65,7 +65,11 @@
     <ClCompile Include="Games\Ruleset\Judgements\HasHitWindow.cpp" />
     <ClCompile Include="Games\Ruleset\Judgements\HitWindow.cpp" />
     <ClCompile Include="Games\Ruleset\Judgements\Judgement.cpp" />
+    <ClCompile Include="Games\Ruleset\Modifiers\DifficultyModifier.cpp" />
+    <ClCompile Include="Games\Ruleset\Modifiers\EventProcessorFilterModifier.cpp" />
+    <ClCompile Include="Games\Ruleset\Modifiers\InstrumentModifier.cpp" />
     <ClCompile Include="Games\Ruleset\Modifiers\Modifier.cpp" />
+    <ClCompile Include="Games\Ruleset\Modifiers\TimeControllerModifier.cpp" />
     <ClCompile Include="Games\Ruleset\Ruleset.cpp" />
     <ClCompile Include="Games\Ruleset\RulesetInfo.cpp" />
     <ClCompile Include="Games\Ruleset\RulesetStore.cpp" />

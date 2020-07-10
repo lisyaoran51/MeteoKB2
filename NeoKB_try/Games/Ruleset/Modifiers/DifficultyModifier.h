@@ -20,6 +20,8 @@ namespace Modifiers{
 
 	public:
 
+		DifficultyModifier();
+
 		virtual int ApplyToDifficulty(SmDifficulty* smDifficulty) = 0;
 
 	};

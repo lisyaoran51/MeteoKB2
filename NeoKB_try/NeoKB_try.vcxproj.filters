@@ -1314,6 +1314,18 @@
     <ClCompile Include="RulesetMeteor\Ruleset\Modifiers\MusicGameModifier.cpp">
       <Filter>來源檔案\RulesetMeteor\Ruleset\Modifiers</Filter>
     </ClCompile>
+    <ClCompile Include="Games\Ruleset\Modifiers\InstrumentModifier.cpp">
+      <Filter>來源檔案\Games\Ruleset\Mod</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\Ruleset\Modifiers\TimeControllerModifier.cpp">
+      <Filter>來源檔案\Games\Ruleset\Mod</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\Ruleset\Modifiers\DifficultyModifier.cpp">
+      <Filter>來源檔案\Games\Ruleset\Mod</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\Ruleset\Modifiers\EventProcessorFilterModifier.cpp">
+      <Filter>來源檔案\Games\Ruleset\Mod</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="DailyLog.txt">

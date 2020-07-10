@@ -20,6 +20,8 @@ namespace Modifiers{
 
 	public:
 
+		EventProcessorFilterModifier();
+
 		virtual int ApplyToEventProcessorFilter(EventProcessorFilter* eventProcessorFilter) = 0;
 
 	};

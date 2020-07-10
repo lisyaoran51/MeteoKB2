@@ -17,6 +17,8 @@ namespace Modifiers{
 
 	public:
 
+		InstrumentModifier();
+
 		virtual int ApplyToInstrument(Instrument* instrument) = 0;
 
 	};
