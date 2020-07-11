@@ -37,6 +37,8 @@ int EventProcessorMaster::load()
 
 int EventProcessorMaster::load(FrameworkConfigManager * f, EventProcessorFilter * e)
 {
+	eventProcessorFilter = e;
+
 	isPresent = true;
 	// TODO: 去framework config manager拿period map要切成多寬一段 ex:每5秒一段
 	// 目前先暫訂5秒一段
