@@ -5,9 +5,9 @@ using namespace Framework::Audio;
 
 AdjustableAudioComponent::AdjustableAudioComponent()
 {
-	LOG(LogLevel::Debug) << "AdjustableAudioComponent::AdjustableAudioComponent() : constructor start.";
+	LOG(LogLevel::Depricated) << "AdjustableAudioComponent::AdjustableAudioComponent() : constructor start.";
 	volume->AddOnValueChanged(this, bind(&AdjustableAudioComponent::OnStateChange, this), "AdjustableAudioComponent::OnStateChange");
-	LOG(LogLevel::Debug) << "AdjustableAudioComponent::AdjustableAudioComponent() : constructor done.";
+	LOG(LogLevel::Depricated) << "AdjustableAudioComponent::AdjustableAudioComponent() : constructor done.";
 }
 
 int AdjustableAudioComponent::AddAdjustmentDependency(AdjustableAudioComponent * adjustableAudioComponent)

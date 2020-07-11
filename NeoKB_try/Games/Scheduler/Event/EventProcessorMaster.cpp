@@ -227,7 +227,7 @@ Map * EventProcessorMaster::GetGraph()
 	vector<EventProcessor<Event>*> eventProcessors;
 
 	eventProcessorPeriods->GetItemsContainPeriods(make_pair<float, float>(currentTime - visibleTimeRange, currentTime + visibleTimeRange), &eventProcessors);
-	LOG(LogLevel::Debug) << "EventProcessorMaster::GetGraph : filter event processors.";
+	LOG(LogLevel::Depricated) << "EventProcessorMaster::GetGraph : filter event processors.";
 	eventProcessorFilter->Filter(&eventProcessors);
 
 	LOG(LogLevel::Depricated) << "EventProcessorMaster::GetGraph() : get graph from [" << eventProcessors.size() << "] processors in (" << currentTime - visibleTimeRange  << "," << currentTime + visibleTimeRange << ") seconds."
