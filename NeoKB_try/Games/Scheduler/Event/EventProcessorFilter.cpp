@@ -70,6 +70,7 @@ int EventProcessorFilter::DeleteNamedFilterCallback(string name)
 
 vector<EventProcessor<Event>*>* EventProcessorFilter::Filter(vector<EventProcessor<Event>*>* eventProcessors)
 {
+
 	for (int i = 0; i < filterCallbacks.size(); i++) {
 		filterCallbacks[i](eventProcessors);
 	}

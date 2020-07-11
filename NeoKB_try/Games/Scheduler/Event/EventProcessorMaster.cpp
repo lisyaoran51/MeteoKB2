@@ -136,7 +136,7 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 	if (elapsedTime > 0) {
 
 		eventProcessorPeriods->GetItemsContainPeriods(make_pair<float, float>(currentTime - visibleTimeRange, currentTime + visibleTimeRange), &eventProcessors);
-
+		LOG(LogLevel::Debug) << "EventProcessorMaster::processEvent() : filter event processors.";
 		eventProcessorFilter->Filter(&eventProcessors);
 
 		for (int i = 0; i < eventProcessors.size(); i++) {
@@ -180,7 +180,7 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 	if (elapsedTime < 0) {
 
 		eventProcessorPeriods->GetItemsContainPeriods(make_pair<float, float>((float)currentTime, currentTime - elapsedTime), &eventProcessors);
-
+		LOG(LogLevel::Debug) << "EventProcessorMaster::processEvent() : filter event processors(rewind state).";
 		eventProcessorFilter->Filter(&eventProcessors);
 
 		for (int i = 0; i < eventProcessors.size(); i++) {
@@ -221,7 +221,7 @@ Map * EventProcessorMaster::GetGraph()
 	vector<EventProcessor<Event>*> eventProcessors;
 
 	eventProcessorPeriods->GetItemsContainPeriods(make_pair<float, float>(currentTime - visibleTimeRange, currentTime + visibleTimeRange), &eventProcessors);
-	
+	LOG(LogLevel::Debug) << "EventProcessorMaster::GetGraph : filter event processors.";
 	eventProcessorFilter->Filter(&eventProcessors);
 
 	LOG(LogLevel::Depricated) << "EventProcessorMaster::GetGraph() : get graph from [" << eventProcessors.size() << "] processors in (" << currentTime - visibleTimeRange  << "," << currentTime + visibleTimeRange << ") seconds."
