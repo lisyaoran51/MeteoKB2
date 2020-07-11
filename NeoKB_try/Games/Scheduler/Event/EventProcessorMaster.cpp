@@ -142,7 +142,7 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 	if (elapsedTime > 0) {
 
 		eventProcessorPeriods->GetItemsContainPeriods(make_pair<float, float>(currentTime - visibleTimeRange, currentTime + visibleTimeRange), &eventProcessors);
-		LOG(LogLevel::Debug) << "EventProcessorMaster::processEvent() : filter event processors.";
+		LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent() : filter event processors.";
 		eventProcessorFilter->Filter(&eventProcessors);
 
 		for (int i = 0; i < eventProcessors.size(); i++) {
