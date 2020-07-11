@@ -2,6 +2,7 @@
 
 #include "../../MeteoGame.h"
 #include "../../../RulesetMeteor/Ruleset/Modifiers/AutoPedalModifier.h"
+#include "../../../RulesetMeteor/Ruleset/Modifiers/MusicGameModifier.h"
 
 
 using namespace Games::Scenes::Select;
@@ -93,6 +94,7 @@ int SongSelect::selectionChanged(SmInfo * sheetmusicInfo)
 
 		// 這邊先加mod，之後要拿掉，擺在on select(on command)
 		workingSm.GetValue()->GetModifiers()->GetValue()->push_back(new AutoPedalModifier());
+		workingSm.GetValue()->GetModifiers()->GetValue()->push_back(new MusicGameModifier());
 	}
 
 	updateSheetmusic(workingSm.GetValue());

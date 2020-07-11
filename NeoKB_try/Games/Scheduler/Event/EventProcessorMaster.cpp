@@ -186,7 +186,7 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 	if (elapsedTime < 0) {
 
 		eventProcessorPeriods->GetItemsContainPeriods(make_pair<float, float>((float)currentTime, currentTime - elapsedTime), &eventProcessors);
-		LOG(LogLevel::Debug) << "EventProcessorMaster::processEvent() : filter event processors(rewind state).";
+		LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent() : filter event processors(rewind state).";
 		eventProcessorFilter->Filter(&eventProcessors);
 
 		for (int i = 0; i < eventProcessors.size(); i++) {
