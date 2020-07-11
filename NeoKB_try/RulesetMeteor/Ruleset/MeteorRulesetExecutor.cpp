@@ -63,7 +63,7 @@ SmPostprocessor * MeteorRulesetExecutor::createSmPostprocessor()
 int MeteorRulesetExecutor::load()
 {
 	
-	MeteorTimeController* t = GetCache<MeteorTimeController>("MeteorTimeController");
+	MeteorTimeController* t = GetCache<MeteorTimeController>("TimeController");
 	if (!t) {
 		GetDependencies()->_DebugPrintCache();
 		throw runtime_error("int MeteorRulesetExecutor::load() : MeteorTimeController not found in cache.");
