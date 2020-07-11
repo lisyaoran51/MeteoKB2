@@ -64,8 +64,10 @@ int MeteorRulesetExecutor::load()
 {
 	
 	MeteorTimeController* t = GetCache<MeteorTimeController>("MeteorTimeController");
-	if (!t)
+	if (!t) {
+		GetDependencies()->_DebugPrintCache();
 		throw runtime_error("int MeteorRulesetExecutor::load() : MeteorTimeController not found in cache.");
+	}
 	// Ūconfig
 	return 0;
 }
