@@ -34,6 +34,8 @@ namespace Events {
 	/// </summary>
 	class EventProcessorFilter : public Container {
 
+		int load();
+
 		/// <summary>
 		/// 一定會執行
 		/// </summary>

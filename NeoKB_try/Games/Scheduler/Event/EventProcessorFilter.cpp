@@ -6,8 +6,15 @@ using namespace Games::Schedulers::Events;
 
 
 
+int EventProcessorFilter::load()
+{
+	GetDependencies()->Cache(this);
+	return 0;
+}
+
 EventProcessorFilter::EventProcessorFilter(): RegisterType("EventProcessorFilter")
 {
+	registerLoad(bind(static_cast<int(EventProcessorFilter::*)(void)>(&EventProcessorFilter::load), this));
 }
 
 int EventProcessorFilter::AddFilterCallback(function<int(vector<EventProcessor<Event>*>*)> filterCallback)
