@@ -11,6 +11,6 @@ FallSpeedModifier::FallSpeedModifier(float fSpeed) : RegisterType("FallSpeedModi
 
 int FallSpeedModifier::ApplyToDifficulty(SmDifficulty * smDifficulty)
 {
-	smDifficulty->FallSpeed = fallSpeed;
+	smDifficulty->Speed = fallSpeed;
 	return 0;
 }
