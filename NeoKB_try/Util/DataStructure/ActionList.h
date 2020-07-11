@@ -50,9 +50,12 @@ namespace DataStructure {
 			//LOG(LogLevel::Finest) << "ActionList::Add() : key list size:" << callbackKeys.size();
 
 			unique_lock<mutex> uLock(callbackMutex);
+			LOG(LogLevel::Finest) << "ActionList::Add() :1";
 			callbackKeys.push_back(key);
+			LOG(LogLevel::Finest) << "ActionList::Add() :2";
 
 			callbacks.push_back(callback);
+			LOG(LogLevel::Finest) << "ActionList::Add() :3";
 
 
 			return 0;
