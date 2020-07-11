@@ -285,7 +285,6 @@ namespace Rulesets {
 						return 0;
 					}, "RulesetExecutor::HandleJudgement");
 				}
-
 				playfield->Add(ep);
 			}
 
