@@ -15,7 +15,7 @@ using namespace Meteor::Schedulers::Events::Effects;
 
 int MeteorTimeController::load()
 {
-
+	LOG(LogLevel::Info) << "MeteorTimeController::load() : loaded. ";
 	
 	return 0;
 }

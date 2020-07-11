@@ -14,6 +14,7 @@ using namespace Framework::Timing::SpeedAdjusters;
 
 int TimeController::load()
 {
+
 	GetDependencies()->Cache<TimeController>(this, "TimeController");
 
 	return 0;
