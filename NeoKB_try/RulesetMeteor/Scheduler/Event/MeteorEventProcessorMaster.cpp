@@ -162,7 +162,7 @@ int MeteorEventProcessorMaster::update()
 
 	// 拿已經結束的event
 	eventProcessorPeriods->GetItemsContainPeriods(make_pair<float, float>(currentTime - visibleTimeRange, (float)currentTime), &eventProcessors);
-
+	LOG(LogLevel::Debug) << "MeteorEventProcessorMaster::update() : filter event processors.";
 	eventProcessorFilter->Filter(&eventProcessors);
 
 	for (int i = 0; i < eventProcessors.size(); i++) {
