@@ -27,7 +27,7 @@ EventProcessor<Event>* HitObject::RegisterEvent(Event * e)
 
 			delete hitWindow;
 			hitWindow = createHitWindow(dynamic_cast<PlayableControlPoint*>(e)->GetSmDifficulty());
-			return this;
+			return EventProcessor<Event>::RegisterEvent(e);
 		}
 	}
 
