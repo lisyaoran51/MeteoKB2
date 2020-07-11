@@ -27,11 +27,15 @@ int EventProcessorMaster::load()
 	if (!f)
 		throw runtime_error("int EventProcessorMaster::load() : FrameworkConfigManager not found in cache.");
 
+	EventProcessorFilter* e = GetCache<EventProcessorFilter>("EventProcessorFilter");
+	if (!e)
+		throw runtime_error("int EventProcessorMaster::load() : EventProcessorFilter not found in cache.");
 
-	return load(f);
+	return load(f, e);
 }
 
-int EventProcessorMaster::load(FrameworkConfigManager * f)
+
+int EventProcessorMaster::load(FrameworkConfigManager * f, EventProcessorFilter * e)
 {
 	isPresent = true;
 	// TODO: 去framework config manager拿period map要切成多寬一段 ex:每5秒一段

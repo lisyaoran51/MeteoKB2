@@ -54,7 +54,7 @@ namespace Events {
 
 		int load();
 
-		int load(FrameworkConfigManager* f);
+		int load(FrameworkConfigManager* f, EventProcessorFilter* e);
 
 
 	public:
