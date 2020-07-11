@@ -51,7 +51,7 @@ namespace Events{
 
 			onJudgement.Add(callableObject, callback, name);
 			LOG(LogLevel::Finest) << "HitObject::AddOnJudgement : 4";
-			LOG(LogLevel::Finest) << "HitObject::AddOnJudgement : add [" << name << "] to " << GetEventTypeName() << ".";
+			LOG(LogLevel::Finest) << "HitObject::AddOnJudgement : add [" << name << "].";
 			return 0;
 		}
 
