@@ -1853,3 +1853,33 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	git branch --set-upstream-to=origin/RepeatPracticeModifier RepeatPracticeModifier
 	
 	ruleset executor - playfield - add on judgement那邊友bug
+	
+7/11
+	music game mode成功跑起來了，repeat practice先不管
+	
+7/12
+	database分兩種，一種是readonly的csv假DB，一種是memory做的假DB，一關機就會消失，所以不能真的存資料
+	
+	找到osu加beatmap進db的方法 ImportFromStable -> Import(stable.GetDirectories("Songs")); ->  Import(reader); -> var iBeatmaps = createBeatmapStore(() => context); 
+	
+	下載後加入db有兩個方法: BeatmapManager::Download 和 OsuGameDesktop::fileDrop
+	
+	song select拿到beatmap資料的方法是 carousel.Beatmaps = this.beatmaps.GetAllUsableBeatmapSets();
+	
+	panel裡面每個sm都要有一個workingsm
+	
+	MeteoGame在load on complete的時候會先把sm給import from stable，讀完所有sm才會開始進入loader，開始push scene，所以song select拿到的sm infos是固定的
+	如果變成sm manager可以下載的話，song select就必須隨時修改sm infos
+	
+	照osu原本的寫法，如果他在選歌畫面下載歌曲，下載完就要重新載入song select或是carousel，因為他沒有sync beatmaps的機制
+	
+	不過我們可以改寫這個寫法，改成sheetmusic panel在每次下載完都refresh一次，對sm manager註冊一個下載完就更新的callback，當download完畢就會呼叫
+	
+	現在可以先不管這個部分，先把原本內容寫好就好
+	
+	在最後放進ruleset executor要抓出來的時候，會在working beatmap去get beatmap，這個時候才會用decoder重新把beatmap讀一遍，拿到所有hit object。
+	這個地方beatmap manager就必須先拿到beatmap set info的path，再加上beatmap info的path，才能拿到這個beatmap的位置
+	
+	所以我們必須同時在sm info裡面存資料夾路徑(如beatmap set info的path)和檔案名稱(如beatmap info的path)，不需要用到任何資料庫。
+	
+	

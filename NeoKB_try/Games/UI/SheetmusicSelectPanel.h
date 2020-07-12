@@ -33,8 +33,12 @@ namespace UI {
 
 		function<int(SmInfo*)> SelectionChanged;
 
+		int SetSms(vector<SmInfo*>* sInfos);
+
 
 	protected:
+
+		vector<SmInfo*>* smInfos = nullptr;
 
 		SmManager* smManager;
 

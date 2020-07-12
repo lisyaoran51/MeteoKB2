@@ -33,21 +33,21 @@ int SheetmusicSelectPanel::load(FrameworkConfigManager * f, SmManager * s)
 	if (!f->Get(FrameworkSetting::SongTitle, &songTitle))
 		songTitle = "GirlTellMe";
 
-	vector<SmInfo*>* smInfos = smManager->GetSmInfos();
-	LOG(LogLevel::Debug) << "int SheetmusicSelectPanel::load() : there's [" << smInfos->size() << "] songs in sm manager.";
+	vector<SmInfo*>* sInfos = smManager->GetSmInfos();
+	LOG(LogLevel::Debug) << "int SheetmusicSelectPanel::load() : there's [" << sInfos->size() << "] songs in sm manager.";
 
-	for (int i = 0; i < smInfos->size(); i++) {
+	for (int i = 0; i < sInfos->size(); i++) {
 
-		LOG(LogLevel::Fine) << "--------------------------------- " << smInfos->at(i)->metadata->Title;
+		LOG(LogLevel::Fine) << "--------------------------------- " << sInfos->at(i)->metadata->Title;
 
-		LOG(LogLevel::Debug) << "int SheetmusicSelectPanel::load() : song [" << songTitle << "] is [" << smInfos->at(i)->metadata->Title << "]?";
+		LOG(LogLevel::Debug) << "int SheetmusicSelectPanel::load() : song [" << songTitle << "] is [" << sInfos->at(i)->metadata->Title << "]?";
 
 		//if (smInfos->at(i)->metadata->Title == songTitle) {
-		if (smInfos->at(i)->metadata->Title == songTitle) { // 應該要寫一個metedata，不過這邊方便，先暫時用filename就好
+		if (sInfos->at(i)->metadata->Title == songTitle) { // 應該要寫一個metedata，不過這邊方便，先暫時用filename就好
 
 			LOG(LogLevel::Debug) << "int SheetmusicSelectPanel::load() : song [" << songTitle << "] found.";
 
-			SelectionChanged(smInfos->at(i));
+			SelectionChanged(sInfos->at(i));
 			//delete smInfos; //這個現在不能delete，因為現在改成寫死，之後改回來從檔案讀的時候才能delete
 
 
@@ -74,6 +74,15 @@ SheetmusicSelectPanel::SheetmusicSelectPanel(): RegisterType("SheetmusicSelectPa
 	isInputable = true;
 
 	registerLoad(bind(static_cast<int(SheetmusicSelectPanel::*)(void)>(&SheetmusicSelectPanel::load), this));
+}
+
+int SheetmusicSelectPanel::SetSms(vector<SmInfo*>* sInfos)
+{
+	if (smInfos != nullptr)
+		delete smInfos;
+	smInfos = sInfos;
+
+	return 0;
 }
 
 int SheetmusicSelectPanel::onCommand(InputState * inputState, InputKey command)

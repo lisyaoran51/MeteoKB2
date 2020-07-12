@@ -11,7 +11,7 @@ namespace IO{
 
 	struct FileInfo {
 
-		int ID;
+		int Id;
 
 		string Path;
 

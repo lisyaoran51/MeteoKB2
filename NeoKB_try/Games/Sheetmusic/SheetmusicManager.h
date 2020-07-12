@@ -82,6 +82,11 @@ namespace Sheetmusics {
 		/// </summary>
 		vector<SmInfo*>* GetSmInfos();
 
+		/// <summary>
+		/// 回傳值之後要改掉，可以參考osu
+		/// </summary>
+		int Download(SmInfo* s);
+
 		WorkingSm* GetWorkingSm(SmInfo* s);
 
 		/// <summary>
@@ -104,6 +109,7 @@ namespace Sheetmusics {
 		/// <summary>
 		/// 這個的功能指示把sm裡面的投檔資料讀出來，裡面的event還不需要，裡面的event要等到遊戲開始時再讀
 		/// </summary>
+		SmInfo* importToStorage(FileStore* fileStore, SheetmusicStore* smStore, FileReader& fileReader);
 		//vector<SmInfo*>* importToStorage(FileReader& fileReader); //目前沒有在存回storage所以不用
 
 		// WorkingSm(sm_info_t* s);

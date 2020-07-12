@@ -26,7 +26,11 @@ namespace Games {
 
 	class MeteoGameBase : public Game {
 
-		DatabaseContextFactory* dbContextFactory;
+		DatabaseContextFactory* dbContextFactory = nullptr;
+
+		DatabaseContextFactory* readonlyDbContextFactory = nullptr;
+
+		DatabaseContextFactory* volitileDbContextFactory = nullptr;
 
 		int load();
 

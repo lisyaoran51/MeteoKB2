@@ -1065,9 +1065,6 @@
     <ClCompile Include="Framework\Database\FakeMeteoDatabaseContext.cpp">
       <Filter>來源檔案\Framework\Database</Filter>
     </ClCompile>
-    <ClCompile Include="Framework\Database\FakeDatabaseContextFactory.cpp">
-      <Filter>來源檔案\Framework\Database</Filter>
-    </ClCompile>
     <ClCompile Include="Desktop\Devices\MeteoLightBoardV1.cpp">
       <Filter>來源檔案\Desktop\Devices</Filter>
     </ClCompile>
@@ -1325,6 +1322,12 @@
     </ClCompile>
     <ClCompile Include="Games\Scheduler\Event\TimeEvents\TimeControllerControllers\TimeControllerController.cpp">
       <Filter>來源檔案\Games\Schedulers\Events\TimeEvents\TimeControllerControllers</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Database\ReadonlyCsvDatabaseContextFactory.cpp">
+      <Filter>來源檔案\Framework\Database</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Database\MemoryBasedDatabaseContextFactory.cpp">
+      <Filter>來源檔案\Framework\Database</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1939,9 +1942,6 @@
     <ClInclude Include="Framework\Database\FakeMeteoDatabaseContext.h">
       <Filter>標頭檔\Framework\Database</Filter>
     </ClInclude>
-    <ClInclude Include="Framework\Database\FakeDatabaseContextFactory.h">
-      <Filter>標頭檔\Framework\Database</Filter>
-    </ClInclude>
     <ClInclude Include="Desktop\Devices\bcm2835.h">
       <Filter>標頭檔\Desktop\Devices</Filter>
     </ClInclude>
@@ -2238,6 +2238,15 @@
     </ClInclude>
     <ClInclude Include="Games\Scheduler\Event\TimeEvents\TimeControllerControllers\TimeControllerController.h">
       <Filter>標頭檔\Games\Scheduler\Events\TimeEvents\TimeControllerControllers</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Database\ReadonlyCsvDatabaseContextFactory.h">
+      <Filter>標頭檔\Framework\Database</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Database\MemoryBasedDatabaseContextFactory.h">
+      <Filter>標頭檔\Framework\Database</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Sheetmusic\SheetmusicFileInfo.h">
+      <Filter>標頭檔\Games\Sheetmusics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

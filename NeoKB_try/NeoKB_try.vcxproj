@@ -37,7 +37,8 @@
     <ClCompile Include="Framework\Database\DatabaseContext.cpp" />
     <ClCompile Include="Framework\Database\DatabaseContextFactory.cpp" />
     <ClCompile Include="Framework\Database\DatabaseStore.cpp" />
-    <ClCompile Include="Framework\Database\FakeDatabaseContextFactory.cpp" />
+    <ClCompile Include="Framework\Database\MemoryBasedDatabaseContextFactory.cpp" />
+    <ClCompile Include="Framework\Database\ReadonlyCsvDatabaseContextFactory.cpp" />
     <ClCompile Include="Framework\Database\FakeMeteoDatabaseContext.cpp" />
     <ClCompile Include="Framework\Database\MeteoDatabaseContext.cpp" />
     <ClCompile Include="Framework\Devices\OutputDevice.cpp" />
@@ -288,7 +289,8 @@
     <ClInclude Include="Framework\Database\DatabaseContextFactory.h" />
     <ClInclude Include="Framework\Database\DatabaseSet.h" />
     <ClInclude Include="Framework\Database\DatabaseStore.h" />
-    <ClInclude Include="Framework\Database\FakeDatabaseContextFactory.h" />
+    <ClInclude Include="Framework\Database\MemoryBasedDatabaseContextFactory.h" />
+    <ClInclude Include="Framework\Database\ReadonlyCsvDatabaseContextFactory.h" />
     <ClInclude Include="Framework\Database\FakeMeteoDatabaseContext.h" />
     <ClInclude Include="Framework\Database\MeteoDatabaseContext.h" />
     <ClInclude Include="Framework\Host\MeteoGameHost.h" />
@@ -402,6 +404,7 @@
     <ClInclude Include="Games\Sheetmusic\Sheetmusic.h" />
     <ClInclude Include="Games\Sheetmusic\SheetmusicConverter.h" />
     <ClInclude Include="Games\Sheetmusic\SheetmusicDifficulty.h" />
+    <ClInclude Include="Games\Sheetmusic\SheetmusicFileInfo.h" />
     <ClInclude Include="Games\Sheetmusic\SheetmusicInfo.h" />
     <ClInclude Include="Games\Sheetmusic\SheetmusicManager.h" />
     <ClInclude Include="Games\Sheetmusic\SheetmusicMetadata.h" />

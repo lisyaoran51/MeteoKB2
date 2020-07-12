@@ -49,6 +49,14 @@ namespace Sheetmusics {
 
 		SmDifficulty* difficuty = nullptr;
 
+		/// <summary>
+		/// 歌曲的資料夾名稱
+		/// </summary>
+		string path;
+
+		/// <summary>
+		/// 歌曲的檔案名稱
+		/// </summary>
 		string fileName;
 
 		// General

@@ -13,6 +13,9 @@ using namespace Framework::Host;
 SheetmusicStore * SmManager::createSmStore(function<DatabaseContext*()> gContext)
 {
 	return new SheetmusicStore(gContext);
+
+	// TODO: 這邊還要寫一段store.BeatmapSetAdded += s => BeatmapSetAdded?.Invoke(s);
+	// 之後每下載一首歌，就會去store裡面加入這首歌的資料
 }
 
 SmManager::SmManager(): RegisterType("SmManager")
@@ -25,6 +28,8 @@ SmManager::SmManager(): RegisterType("SmManager")
 SmManager::SmManager(Storage * s, function<DatabaseContext*()> gContext, RulesetStore * rStore, GameHost * gHost): RegisterType("SmManager")
 {
 	smInfos = new vector<SmInfo*>();
+
+	// 這兩行應該可以拿掉了，現在改成從database拿
 	rulesetInfos = new vector<RulesetInfo*>();
 	// !!!這一段是鮮血死的，以後要改成從檔案讀ruleset資料
 	rulesetInfos->push_back(new RulesetInfo("MeteorRuleset", 1));
@@ -63,6 +68,9 @@ int SmManager::RegisterRulesetInfo(RulesetInfo * r)
 
 int SmManager::Import(vector<string>* paths)
 {
+
+	// TODO : 送出initializing訊息
+
 	for (int i = 0; i < paths->size(); i++) {
 		FileReader fileReader(paths->at(i));
 		import(fileReader);
@@ -112,6 +120,16 @@ WorkingSm * SmManager::GetWorkingSm(SmInfo * s)
 
 vector<SmInfo*>* SmManager::import(FileReader & fileReader)
 {
+	// osu的寫法是一個beatmap會有一組set，回傳一組set丟進store李，但是我們的設計沒有需要set，一個普就是一個普，一個資料夾裡應該部會有超過一個普
+	SmInfo* smInfo = importToStorage(fileStore, smStore, fileReader);
+
+	// TODO: 在修改db的時候應該要用lock mutex
+	smStore->Add(smInfo);
+	
+}
+
+SmInfo * SmManager::importToStorage(FileStore * fStore, SheetmusicStore * sStore, FileReader & fileReader)
+{
 	vector<string>* smNames;
 
 	smNames = fileReader.WhereEndWith(".sm");
@@ -135,13 +153,20 @@ vector<SmInfo*>* SmManager::import(FileReader & fileReader)
 		// TODO: 把這段佔實的code改好，正確做法應該不是從filereader拿sm set info，要去trace osu的寫法
 		sm->GetSmInfo()->smSetInfo = fileReader.GetSmSetInfo();
 		sm->GetSmInfo()->fileInfo = new FileInfo{
-			0,
+			sm->GetSmInfo()->id,
 			fileReader.GetPath(),
 			0
 		};
 
+		fStore->AddFile(sm->GetSmInfo()->fileInfo);
+		
+
 		// 寫到這邊 不知道怎麼建ruleset---> 在建立sm  manager時手動把ruleset info加入
-		RulesetInfo* rulesetInfo = nullptr;
+		// 後來: 改用osu原本的寫法，去database抓
+		RulesetInfo* rulesetInfo = rulesetStore->GetRulesetInfo(sm->GetSmInfo()->rulesetId);
+
+
+		/* 後來改為用database讀ruleset info了
 
 		// 這邊鮮血死，decoder解出來的ruleset id自動設為1，然後sm manager的ruleset自動加入MeteorRuleset的id是1
 		// 之後要改成去檔案讀
@@ -151,17 +176,21 @@ vector<SmInfo*>* SmManager::import(FileReader & fileReader)
 				break;
 			}
 		}
+		*/
 
-		if(rulesetInfo)
+		if (rulesetInfo)
 			sm->GetSmInfo()->rulesetInfo = rulesetInfo;
-		else{
+		else {
 			// TODO: 噴錯誤
 		}
 
 		smInfos->push_back(sm->GetSmInfo());
+
+
 	}
 
+	SmInfo* smInfo = smInfos->at(0);
+	delete smInfos;
 
-
-	return smInfos;
+	return smInfo;
 }

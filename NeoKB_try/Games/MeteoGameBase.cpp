@@ -1,5 +1,8 @@
 #include "MeteoGameBase.h"
 
+
+#include "../Framework/Database/MemoryBasedDatabaseContextFactory.h"
+#include "../Framework/Database/ReadonlyCsvDatabaseContextFactory.h"
 #include <functional>
 
 
@@ -33,17 +36,23 @@ int MeteoGameBase::load()
 	dbContextFactory = new DatabaseContextFactory(gameHost);
 	dbContextFactory->Initialize();
 
+	readonlyDbContextFactory = new ReadonlyCsvDatabaseContextFactory(gameHost);
+	readonlyDbContextFactory->Initialize();
+
+	volitileDbContextFactory = new MemoryBasedDatabaseContextFactory();
+	volitileDbContextFactory->Initialize();
+
 	GetDependencies()->Cache<MeteoGameBase>(this, "MeteoGameBase");
 
 	GetDependencies()->Cache<MeteoConfigManager>(localConfig);
 
-	GetDependencies()->Cache<RulesetStore>(rulesetStore = new RulesetStore(bind(&DatabaseContextFactory::GetContext, dbContextFactory)));
+	GetDependencies()->Cache<RulesetStore>(rulesetStore = new RulesetStore(bind(&DatabaseContextFactory::GetContext, readonlyDbContextFactory)));
 
-	GetDependencies()->Cache<FileStore>(fileStore = new FileStore(bind(&DatabaseContextFactory::GetContext, dbContextFactory), gameHost->GetStorage()));
+	GetDependencies()->Cache<FileStore>(fileStore = new FileStore(bind(&DatabaseContextFactory::GetContext, volitileDbContextFactory), gameHost->GetStorage()));
 
-	GetDependencies()->Cache<KeyBindingStore>(keyBindingStore = new KeyBindingStore(bind(&DatabaseContextFactory::GetContext, dbContextFactory)));
+	GetDependencies()->Cache<KeyBindingStore>(keyBindingStore = new KeyBindingStore(bind(&DatabaseContextFactory::GetContext, volitileDbContextFactory)));
 
-	GetDependencies()->Cache<SmManager>(smManager = new SmManager(gameHost->GetStorage(), bind(&DatabaseContextFactory::GetContext, dbContextFactory), rulesetStore, gameHost));
+	GetDependencies()->Cache<SmManager>(smManager = new SmManager(gameHost->GetStorage(), bind(&DatabaseContextFactory::GetContext, volitileDbContextFactory), rulesetStore, gameHost));
 
 	// 原本要給Working sm做default value，但是現在不用了，所以就直接改成object而不適指標
 	//workingSm = new Bindable<WorkingSm*>();
