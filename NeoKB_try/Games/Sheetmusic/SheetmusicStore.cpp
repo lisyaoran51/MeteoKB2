@@ -15,7 +15,8 @@ int SheetmusicStore::Add(SmInfo * smInfo)
 {
 	DatabaseContext* context = getContext();
 
-	context->AddDbSetEntity<SmInfo>(smInfo);
+	// TODO: database寫完之後再加這行
+	//context->AddDbSetEntity<SmInfo>(smInfo);
 
 	return 0;
 }
