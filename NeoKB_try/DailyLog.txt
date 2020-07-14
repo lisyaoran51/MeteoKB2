@@ -1892,3 +1892,7 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	
 	現在寫storage的部分，storage最根的只會留一個，然後在那個資料夾下建link連道別的磁碟分割
 	目前麻煩的是同一批資料要來自兩個不同地方(readonly分割和可寫入分割)，要研究一下Storage是怎麼運作的
+	
+	鋼琴音ab段的問題解決了，直接讓B段從一開始就播放，然後到切換時間再把A段音量關掉，B段音量打開就好
+	
+	csv database的東西還是要寫完，不然城市不能跑，player裡面拿ruleset id的部分也要跟著換掉

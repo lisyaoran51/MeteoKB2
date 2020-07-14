@@ -81,6 +81,7 @@ int SmManager::Import(vector<string>* paths)
 
 int SmManager::ImportFromStable()
 {
+	LOG(LogLevel::Info) << "SmManager::ImportFromStable(): Start Import.";
 	Storage* stable = GetStableStorage();
 
 	vector<string>* paths = stable->GetDirectories("Songs");
