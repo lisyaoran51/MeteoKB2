@@ -190,8 +190,9 @@ SmInfo * SmManager::importToStorage(FileStore * fStore, SheetmusicStore * sStore
 
 	}
 
-	SmInfo* smInfo = smInfos->at(0);
-	delete smInfos;
+	// TODO: 之後資料庫改好以後，這邊要改成下面這兩行，sminfos改成擺在資料庫裡
+	//SmInfo* smInfo = smInfos->at(0);
+	//delete smInfos;
 
-	return smInfo;
+	return smInfos->at(0);
 }
