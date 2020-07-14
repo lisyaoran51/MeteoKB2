@@ -35,9 +35,10 @@ int Player::load(MeteoConfigManager* m, Instrument* instru)
 	LOG(LogLevel::Info) << "Player::load : start loading the player and reading the sm and ruleset from working sm.";
 
 	WorkingSm* workingSmValue = workingSm.GetValue();
-	// 這個是先寫死ruleset ，之後要改成從檔案讀
-	//rulesetInfo.SetValue(new RulesetInfo("MeteorRuleset", 1));
-	rulesetInfo.SetValue(workingSm.GetValue()->GetSm()->GetSmInfo()->rulesetInfo);
+	// 這個是先寫死ruleset ，之後要改成從檔案讀(像下一行那樣)
+	rulesetInfo.SetValue(new RulesetInfo("MeteorRuleset", 1));
+	//rulesetInfo.SetValue(workingSm.GetValue()->GetSm()->GetSmInfo()->rulesetInfo);
+
 	ruleset = rulesetInfo.GetValue()->CreateRuleset();
 	LOG(LogLevel::Fine) << "Player::load : create ruleset executor.";
 	rulesetExecutor = ruleset->CreateRulesetExecutor(workingSm.GetValue());

@@ -36,8 +36,13 @@ FakeMeteoDatabaseContext::FakeMeteoDatabaseContext(Storage * s): MeteoDatabaseCo
 
 int FakeMeteoDatabaseContext::prepare()
 {
-	if (!storage->Exist("SmInfos.csv"))
+	if (!storage->Exist("SmInfos.csv")) {
+		
+		// 還沒寫完 先留著
+		return 0;
+
 		throw runtime_error("FakeMeteoDatabaseContext::prepare(): sminfo.csv not found.");
+	}
 	
 	ifstream* stream = storage->GetStream("SmInfos.csv");
 
