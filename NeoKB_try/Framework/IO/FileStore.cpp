@@ -25,6 +25,8 @@ ResourceStore<char*>* FileStore::GetStore()
 
 int FileStore::AddFile(FileInfo * fInfo)
 {
+	// TODO: 把這邊寫完
+	return 0;
 	throw runtime_error("FileStore::AddFile(): don't use. useless.");
 	return 0;
 }
