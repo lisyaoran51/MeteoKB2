@@ -1882,4 +1882,13 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	
 	所以我們必須同時在sm info裡面存資料夾路徑(如beatmap set info的path)和檔案名稱(如beatmap info的path)，不需要用到任何資料庫。
 	
+7/13
+	還是有在get path for file的時候用到store，不過幾乎是沒用，只是拿它裡面有個寒士用而已
 	
+7/14
+	osu找不太到特別的更換sample的機制，這個應該要自己寫，另外也要寫刪除舊sample的功能，不然記憶體不夠
+	
+	keybinding store等到作更大的琴在寫都來得及
+	
+	現在寫storage的部分，storage最根的只會留一個，然後在那個資料夾下建link連道別的磁碟分割
+	目前麻煩的是同一批資料要來自兩個不同地方(readonly分割和可寫入分割)，要研究一下Storage是怎麼運作的
