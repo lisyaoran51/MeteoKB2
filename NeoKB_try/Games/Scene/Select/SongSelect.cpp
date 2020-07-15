@@ -96,7 +96,7 @@ int SongSelect::selectionChanged(SmInfo * sheetmusicInfo)
 		// 這邊先加mod，之後要拿掉，擺在on select(on command)
 		workingSm.GetValue()->GetModifiers()->GetValue()->push_back(new AutoPedalModifier());
 		//workingSm.GetValue()->GetModifiers()->GetValue()->push_back(new MusicGameModifier());
-		workingSm.GetValue()->GetModifiers()->GetValue()->push_back(new RepeatPracticeModifier());
+		workingSm.GetValue()->GetModifiers()->GetValue()->push_back(new RepeatPracticeModifier(1, 4));
 	}
 
 	updateSheetmusic(workingSm.GetValue());
