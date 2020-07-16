@@ -37,6 +37,7 @@ int VirtualPianoController::implementControlInstrument(EventProcessor<Event>* e)
 			piano->Stop(soundEvent->GetSound().first);
 		}
 		else if(soundEvent->GetSound().second > 0){
+			LOG(LogLevel::Debug) << "VirtualPianoController::implementControlInstrument() : play sound [" << soundEvent->GetStartTime() << "].";
 			piano->Play(soundEvent->GetSound().first, soundEvent->GetSound().second);
 		}
 	}
