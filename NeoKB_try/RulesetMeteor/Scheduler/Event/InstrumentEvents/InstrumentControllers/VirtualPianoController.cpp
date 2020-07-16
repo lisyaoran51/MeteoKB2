@@ -25,6 +25,8 @@ int VirtualPianoController::implementControlInstrument(EventProcessor<Event>* e)
 
 	PianoSoundEvent* soundEvent = dynamic_cast<PianoSoundEvent*>(e->GetEvent());
 
+	LOG(LogLevel::Debug) << "VirtualPianoController::implementControlInstrument() : play sound [" << soundEvent->GetStartTime() << "].";
+
 
 	if (soundEvent->GetPianoSoundEventType() == PianoSoundEventType::Pitch) { 
 		if (soundEvent->GetSound().second == 0) {
