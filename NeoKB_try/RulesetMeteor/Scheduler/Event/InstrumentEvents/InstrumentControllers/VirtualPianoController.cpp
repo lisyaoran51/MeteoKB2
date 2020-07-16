@@ -17,6 +17,7 @@ VirtualPianoController::VirtualPianoController() : RegisterType("VirtualPianoCon
 
 int VirtualPianoController::implementControlInstrument(EventProcessor<Event>* e)
 {
+	LOG(LogLevel::Debug) << "VirtualPianoController::implementControlInstrument() : Start.";
 	if (!piano)
 		return -1;
 
