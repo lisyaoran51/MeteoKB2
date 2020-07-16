@@ -26,7 +26,7 @@ int VirtualPianoController::implementControlInstrument(EventProcessor<Event>* e)
 	PianoSoundEvent* soundEvent = dynamic_cast<PianoSoundEvent*>(e->GetEvent());
 
 
-	if (soundEvent->GetPianoSoundEventType == PianoSoundEventType::Pitch) { 
+	if (soundEvent->GetPianoSoundEventType() == PianoSoundEventType::Pitch) { 
 		if (soundEvent->GetSound().second == 0) {
 			piano->Stop(soundEvent->GetSound().first);
 		}
@@ -34,7 +34,7 @@ int VirtualPianoController::implementControlInstrument(EventProcessor<Event>* e)
 			piano->Play(soundEvent->GetSound().first, soundEvent->GetSound().second);
 		}
 	}
-	else if (soundEvent->GetPianoSoundEventType == PianoSoundEventType::Pedal) {
+	else if (soundEvent->GetPianoSoundEventType() == PianoSoundEventType::Pedal) {
 		if (soundEvent->GetPedalDown()) {
 			piano->PressPedal();
 		}
