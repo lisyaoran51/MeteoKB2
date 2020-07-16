@@ -163,7 +163,7 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 			InstrumentEventProcessorInterface* instrumentEventProcessor = dynamic_cast<InstrumentEventProcessorInterface*>(eventProcessors[i]);
 			if (instrumentEventProcessor) {
 				if (instrumentEventProcessor->GetStartTime() < currentTime) {
-					LOG(LogLevel::Debug) << "EventProcessorMaster::processEvent : found instrument event processor [" << instrumentEventProcessor->GetStartTime() << "].";
+					LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent : found instrument event processor [" << instrumentEventProcessor->GetStartTime() << "].";
 					instrumentEventProcessor->ControlInstrument();
 				}
 				continue;

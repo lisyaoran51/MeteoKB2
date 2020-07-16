@@ -29,19 +29,19 @@ int VirtualPianoController::implementControlInstrument(EventProcessor<Event>* e)
 
 	PianoSoundEvent* soundEvent = dynamic_cast<PianoSoundEvent*>(e->GetEvent());
 
-	LOG(LogLevel::Debug) << "VirtualPianoController::implementControlInstrument() : play sound [" << soundEvent->GetStartTime() << "].";
 
 
-	if (soundEvent->GetPianoSoundEventType() == PianoSoundEventType::Pitch) { 
+	if (soundEvent->GetPianoSoundEventType() == PianoSoundEventType::Pitch) {
+		LOG(LogLevel::Debug) << "VirtualPianoController::implementControlInstrument() : play sound [" << soundEvent->GetStartTime() << "] on [" << soundEvent->GetSound().first << "] with volume [" << soundEvent->GetSound().second << "].";
 		if (soundEvent->GetSound().second == 0) {
 			piano->Stop(soundEvent->GetSound().first);
 		}
 		else if(soundEvent->GetSound().second > 0){
-			LOG(LogLevel::Debug) << "VirtualPianoController::implementControlInstrument() : play sound [" << soundEvent->GetStartTime() << "].";
 			piano->Play(soundEvent->GetSound().first, soundEvent->GetSound().second);
 		}
 	}
 	else if (soundEvent->GetPianoSoundEventType() == PianoSoundEventType::Pedal) {
+		LOG(LogLevel::Debug) << "VirtualPianoController::implementControlInstrument() : pedal [" << soundEvent->GetStartTime() << "] " << soundEvent->GetPedalDown() << ".";
 		if (soundEvent->GetPedalDown()) {
 			piano->PressPedal();
 		}
