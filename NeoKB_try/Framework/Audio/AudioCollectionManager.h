@@ -69,26 +69,26 @@ namespace Audio {
 
 			AudioComponent::Update();
 
-			unique_lock<mutex> uLock(itemMutex);
+			//unique_lock<mutex> uLock(itemMutex);
 			int itemsSize = items.size();
-			uLock.unlock();
+			//uLock.unlock();
 
 			LOG(LogLevel::Finest) << "AudioCollectionManager::Update() : this = [" << this << "], item size = [" << itemsSize << "].";
 
 			for (int i = 0; i < itemsSize; i++) {
 
-				uLock.lock();
+				//uLock.lock();
 				T* item = dynamic_cast<T*>(items[i]);
-				uLock.unlock();
+				//uLock.unlock();
 
 				if (item == nullptr)
 					throw runtime_error("AudioCollectionManager<T>::update: this component's type is wrong.");
 
 				if (item->GetIsCompleted()) {
 
-					uLock.lock();
+					//uLock.lock();
 					items.erase(items.begin() + i);
-					uLock.unlock();
+					//uLock.unlock();
 
 					i--;
 					deleteItem(item);
