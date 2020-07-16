@@ -16,7 +16,7 @@ PianoSoundEvent::PianoSoundEvent(bool pDown, MTO_FLOAT s, MTO_FLOAT l) : Instrum
 	pedalDown = pDown;
 }
 
-pair<Pitch, int> PianoSoundEvent::GetSound()
+pair<Pitch, float> PianoSoundEvent::GetSound()
 {
 	if (pianoSoundEventType != PianoSoundEventType::Pitch)
 		throw runtime_error("PianoSoundEvent::GetSound() : wrong PianoSoundEventType.");
