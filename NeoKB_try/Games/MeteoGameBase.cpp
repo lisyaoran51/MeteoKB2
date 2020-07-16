@@ -26,7 +26,8 @@ int MeteoGameBase::load()
 		WorkingSm* w = workingSm.GetValue();
 		Track* t = w->GetTrack();
 		LOG(LogLevel::Debug) << "MeteoGameBase::load() : track manager is [" << audioManager->GetTrackManager() << "], track is [" << t << "].";
-		audioManager->GetTrackManager()->AddItem(t);
+		if(t != nullptr)
+			audioManager->GetTrackManager()->AddItem(t);
 
 		return 0;
 	}, "WorkingSm::OnValueChanged");
