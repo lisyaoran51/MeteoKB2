@@ -7,17 +7,17 @@ using namespace Instruments;
 
 int CompositeMeteoPiano::load()
 {
-	meteoPiano = new MeteoPiano(arguments);
 	AddChild(meteoPiano);
 
-	virtualMeteoPiano = new VirtualMeteoPiano();
 	AddChild(virtualMeteoPiano);
 
 	return 0;
 }
 
-CompositeMeteoPiano::CompositeMeteoPiano(vector<string>& args) : arguments(args), MeteoPiano(args), RegisterType("CompositeMeteoPiano")
+CompositeMeteoPiano::CompositeMeteoPiano(vector<string>& args) : MeteoPiano(args), RegisterType("CompositeMeteoPiano")
 {
+	meteoPiano = new MeteoPiano(args);
+	virtualMeteoPiano = new VirtualMeteoPiano();
 
 	registerLoad(bind(static_cast<int(CompositeMeteoPiano::*)(void)>(&CompositeMeteoPiano::load), this));
 }

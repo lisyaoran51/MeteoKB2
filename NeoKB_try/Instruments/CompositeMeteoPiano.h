@@ -14,8 +14,6 @@ namespace Instruments {
 	///	</summary>
 	class CompositeMeteoPiano : public MeteoPiano {
 
-		vector<string>& arguments;
-
 		int load();
 
 	public:
