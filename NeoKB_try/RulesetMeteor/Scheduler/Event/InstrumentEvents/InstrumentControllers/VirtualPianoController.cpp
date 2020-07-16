@@ -1,12 +1,15 @@
 #include "VirtualPianoController.h"
 
+#include "../../../../../Instruments/CompositeMeteoPiano.h"
+
 
 using namespace Meteor::Schedulers::Events::InstrumentEvents::InstrumentControllers;
+using namespace Instruments;
 
 
 int VirtualPianoController::load()
 {
-	piano = dynamic_cast<VirtualMeteoPiano*>(instrument);
+	piano = dynamic_cast<CompositeMeteoPiano*>(instrument)->GetVirtualMeteoPiano();
 	return 0;
 }
 
@@ -17,7 +20,7 @@ VirtualPianoController::VirtualPianoController() : RegisterType("VirtualPianoCon
 
 int VirtualPianoController::implementControlInstrument(EventProcessor<Event>* e)
 {
-	LOG(LogLevel::Debug) << "VirtualPianoController::implementControlInstrument() : Start.";
+	LOG(LogLevel::Depricated) << "VirtualPianoController::implementControlInstrument() : Start.";
 	if (!piano)
 		return -1;
 
