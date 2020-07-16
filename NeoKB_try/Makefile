@@ -159,7 +159,7 @@ ResourceStoreWorkingSm.o SheetmusicConverter.o SheetmusicManager.o SheetmusicMet
 SimpleSmDecoder.o SmDecoder.o FileReader.o Pattern.o PatternGenerator.o \
 SheetmusicSelectPanel.o VolumeController.o \
 \
-Instrument.o HasPitch.o MeteoPiano.o Piano.o PianoInputManager.o \
+Instrument.o HasPitch.o MeteoPiano.o Piano.o PianoInputManager.o VirtualMeteoPiano.o CompositeMeteoPiano.o \
 \
 FileSystem.o ProgramInitializer.o \
 \
@@ -175,7 +175,7 @@ MeteorEventProcessorMaster.o MeteorNoteControlPointHitObject.o MeteorInputKeyCon
 ExplodeEffect.o ExplodeEffectMapper.o FallEffect.o FallEffectMapper.o EruptEffect.o EruptEffectMapper.o GlowLineEffect.o GlowLineEffectMapper.o TargetLineEffect.o TargetLineEffectMapper.o \
 ExplodeMapAlgorithm.o FallMapAlgorithm.o EruptMapAlgorithm.o GlowLineMapAlgorithm.o TargetLineMapAlgorithm.o \
 SustainPedalIoEvent.o SustainPedalLightRing.o SustainPedalLightRingIoCommunicator.o \
-PianoEvent.o PianoEventProcessor.o PianoController.o \
+PianoEvent.o PianoEventProcessor.o PianoController.o PianoSoundEvent.o PianoSoundEventProcessor.o VirtualPianoController.o \
 OctaveShiftEvent.o OctaveShiftEventProcessor.o OctaveShifter.o \
 RepeatPracticeEvent.o RepeatPracticeEventProcessor.o RepeatPracticeController.o \
 MeteorSheetmusicConverter.o MeteorSheetmusicPostprocessor.o MeteorPatternGenerator.o \
