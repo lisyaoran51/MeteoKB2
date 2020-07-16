@@ -17,7 +17,7 @@ int VirtualMeteoPiano::SetSustainType(VirtualMeteoPianoSustainType sType)
 	return 0;
 }
 
-int VirtualMeteoPiano::Play(Pitch p, int volume)
+int VirtualMeteoPiano::Play(Pitch p, float volume)
 {
 
 	LOG(LogLevel::Debug) << "VirtualMeteoPiano::Play() : play sound [" << dynamic_cast<MultiPlaybackSampleChannel*>(getSamplesByPitch()->at(p)) << "].";

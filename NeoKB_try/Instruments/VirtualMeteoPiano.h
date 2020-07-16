@@ -21,7 +21,7 @@ namespace Instruments {
 
 		int SetSustainType(VirtualMeteoPianoSustainType sType);
 
-		int Play(Pitch p, int volume);
+		int Play(Pitch p, float volume);
 
 		int Stop(Pitch action);
 
