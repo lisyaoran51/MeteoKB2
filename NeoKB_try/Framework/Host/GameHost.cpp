@@ -223,7 +223,7 @@ int GameHost::inputInitialize()
 {
 	LOG(LogLevel::Info) << "GameHost::inputInitialize() : Setting input thread.";
 	// 預設是1000了
-	inputThread->SetMaxUpdateHz(100);
+	inputThread->SetMaxUpdateHz(1000);
 	return 0;
 }
 
