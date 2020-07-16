@@ -19,6 +19,11 @@ int VirtualMeteoPiano::SetSustainType(VirtualMeteoPianoSustainType sType)
 
 int VirtualMeteoPiano::Play(Pitch p, float volume)
 {
+	if (getSamplesByPitch()->find(p) == getSamplesByPitch()->end()) {
+		LOG(LogLevel::Error) << "VirtualMeteoPiano::Play() : sound [" << int(p) << "] not found in samplesByPitch.";
+		return 0;
+	}
+
 
 	LOG(LogLevel::Debug) << "VirtualMeteoPiano::Play() : play sound [" << dynamic_cast<MultiPlaybackSampleChannel*>(getSamplesByPitch()->at(p)) << "].";
 	if (!dynamic_cast<MultiPlaybackSampleChannel*>(getSamplesByPitch()->at(p)))
@@ -106,7 +111,8 @@ map<Pitch, SampleChannel*>* VirtualMeteoPiano::getSamplesByPitch(int variant)
 
 int VirtualMeteoPiano::loadAndMapSamples()
 {
-	
+	LOG(LogLevel::Info) << "VirtualMeteoPiano::loadAndMapSamples() :mapping samplesByPitch.";
+
 	samplesByPitch[Pitch::C1 ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::C1 ));
 	samplesByPitch[Pitch::D1b] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::D1b));
 	samplesByPitch[Pitch::D1 ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::D1 ));

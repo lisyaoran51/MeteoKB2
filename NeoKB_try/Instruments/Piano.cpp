@@ -320,7 +320,8 @@ int Piano::OnKeyDown(pair<PianoAction, int> action)
 	LOG(LogLevel::Debug) << "Piano::OnKeyDown() : get key [" << int(action.first) << "] on velocity [" << action.second << "]";
 
 	//getSamples()->at(action.first)->Play();
-	getSamples()->at(action.first)->Play(double(action.second)/256.0);
+	if(getSamples()->find(action.first) != getSamples()->end())
+		getSamples()->at(action.first)->Play(double(action.second)/256.0);
 
 	isPressingMap[action.first] = true;
 	return 0;
