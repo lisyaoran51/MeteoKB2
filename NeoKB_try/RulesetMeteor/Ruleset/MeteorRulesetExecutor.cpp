@@ -22,6 +22,7 @@
 #include "../Scheduler/Event/IoEvents/SustainPedalLightRing.h"
 #include "../Scheduler/Event/ControlPoints/MeteorInputKeyControlPointHitObject.h"
 #include "../Scheduler/Event/InstrumentEvents/PianoEventProcessor.h"
+#include "../Scheduler/Event/InstrumentEvents/PianoSoundEventProcessor.h"
 #include "../Scheduler/Event/PlayfieldEvents/OctaveShiftEventProcessor.h"
 
 
@@ -235,6 +236,10 @@ EventProcessor<Event>* MeteorRulesetExecutor::getEventProcessor(Event * e)
 	else if (processorType == "PianoEventProcessor") {
 		LOG(LogLevel::Depricated) << "MeteorRulesetExecutor::getEventProcessor : getting event PianoEventProcessor at [" << e->GetStartTime() << "]";
 		return (new PianoEventProcessor())->RegisterEvent(e);
+	}
+	else if (processorType == "PianoSoundEventProcessor") {
+		LOG(LogLevel::Depricated) << "MeteorRulesetExecutor::getEventProcessor : getting event PianoEventProcessor at [" << e->GetStartTime() << "]";
+		return (new PianoSoundEventProcessor())->RegisterEvent(e);
 	}
 	else if (processorType == "OctaveShiftEventProcessor") {
 		return (new OctaveShiftEventProcessor())->RegisterEvent(e);
