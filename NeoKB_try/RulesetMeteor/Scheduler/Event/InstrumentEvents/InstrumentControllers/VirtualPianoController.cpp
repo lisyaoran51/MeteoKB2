@@ -41,7 +41,7 @@ int VirtualPianoController::implementControlInstrument(EventProcessor<Event>* e)
 		}
 	}
 	else if (soundEvent->GetPianoSoundEventType() == PianoSoundEventType::Pedal) {
-		LOG(LogLevel::Debug) << "VirtualPianoController::implementControlInstrument() : pedal [" << soundEvent->GetStartTime() << "] " << soundEvent->GetPedalDown() << ".";
+		LOG(LogLevel::Debug) << "VirtualPianoController::implementControlInstrument() : pedal [" << soundEvent->GetStartTime() << "] " << (soundEvent->GetPedalDown() ? "down" : "up") << ".";
 		if (soundEvent->GetPedalDown()) {
 			piano->PressPedal();
 		}
