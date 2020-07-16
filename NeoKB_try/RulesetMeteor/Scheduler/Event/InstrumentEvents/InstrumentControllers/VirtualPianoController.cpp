@@ -32,7 +32,7 @@ int VirtualPianoController::implementControlInstrument(EventProcessor<Event>* e)
 
 
 	if (soundEvent->GetPianoSoundEventType() == PianoSoundEventType::Pitch) {
-		LOG(LogLevel::Debug) << "VirtualPianoController::implementControlInstrument() : play sound [" << soundEvent->GetStartTime() << "] on [" << soundEvent->GetSound().first << "] with volume [" << soundEvent->GetSound().second << "].";
+		LOG(LogLevel::Debug) << "VirtualPianoController::implementControlInstrument() : play sound [" << soundEvent->GetStartTime() << "] on [" << int(soundEvent->GetSound().first) << "] with volume [" << soundEvent->GetSound().second << "].";
 		if (soundEvent->GetSound().second == 0) {
 			piano->Stop(soundEvent->GetSound().first);
 		}
