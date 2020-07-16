@@ -21,9 +21,9 @@ namespace Instruments {
 
 		int SetSustainType(VirtualMeteoPianoSustainType sType);
 
-		int Play(pair<PianoAction, int> action);
+		int Play(Pitch p, int volume);
 
-		int Stop(PianoAction action);
+		int Stop(Pitch action);
 
 		int PressPedal();
 
@@ -33,9 +33,17 @@ namespace Instruments {
 
 	protected:
 
+		map<Pitch, SampleChannel*> samplesByPitch;
+
+		map<Pitch, bool> isPressingMapByPitch;
+
+		bool pedalDown = false;
+
 		VirtualMeteoPianoSustainType sustainType = VirtualMeteoPianoSustainType::Auto;
 
 		virtual map<PianoAction, SampleChannel*>* getSamples(int variant = 0);
+
+		virtual map<Pitch, SampleChannel*>* getSamplesByPitch(int variant = 0);
 
 		virtual int loadAndMapSamples();
 

@@ -12,6 +12,7 @@
 #include "../../Games/Scheduler/Event/IoEvents/IoCommunicators/IoCommunicator.h"
 #include "../Scheduler/Event/IoEvents/IoCommunicators/SustainPedalLightRingIoCommunicator.h"
 #include "../Scheduler/Event/InstrumentEvents/InstrumentControllers/PianoController.h"
+#include "../Scheduler/Event/InstrumentEvents/InstrumentControllers/VirtualPianoController.h"
 #include "../Scheduler/Event/PlayfieldEvents/PlayfieldControllers/OctaveShifter.h"
 #include "../Scheduler/Event/TimeEvents/TimeControllerControllers/RepeatPracticeController.h"
 
@@ -169,11 +170,18 @@ int MeteorPlayfield::load(FrameworkConfigManager* f, MeteorConfigManager * m)
 	else {
 		instrumentControllers["PianoEvent"] = new PianoController();
 	}
-
-	LOG(LogLevel::Finer) << "MeteorPlayfield::load() : PianoController [" << instrumentControllers["PianoEvent"]->GetTypeName() << "] loaded.";
-
 	AddChild(instrumentControllers["PianoEvent"]);
 
+
+	if (m->Get(MeteorSetting::VirtualInstrumentController, &instrumentControllerName)) {
+		InstrumentControllerInterface* instrumentController = iCreator.CreateInstanceWithT<InstrumentControllerInterface>(instrumentControllerName);
+
+		instrumentControllers["PianoSoundEvent"] = instrumentController;
+	}
+	else {
+		instrumentControllers["PianoSoundEvent"] = new VirtualPianoController();
+	}
+	AddChild(instrumentControllers["PianoSoundEvent"]);
 
 	/*--------------------- map pitch shifter ---------------------*/
 	string MapPitchShifterName;

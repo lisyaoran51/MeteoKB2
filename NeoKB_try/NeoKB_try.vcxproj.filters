@@ -1332,8 +1332,17 @@
     <ClCompile Include="Instruments\VirtualMeteoPiano.cpp">
       <Filter>來源檔案\Instruments</Filter>
     </ClCompile>
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\InstrumentEvents\PianoSoundEvent.cpp">
+      <Filter>來源檔案\RulesetMeteor\Schedulers\Events\InstrumentEvents</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\InstrumentEvents\InstrumentControllers\VirtualPianoController.cpp">
+      <Filter>來源檔案\RulesetMeteor\Schedulers\Events\InstrumentEvents\InstrumentControllers</Filter>
+    </ClCompile>
     <ClCompile Include="Instruments\CompositeMeteoPiano.cpp">
-      <Filter>來源檔案</Filter>
+      <Filter>來源檔案\Instruments</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\InstrumentEvents\PianoSoundEventProcessor.cpp">
+      <Filter>來源檔案\RulesetMeteor\Schedulers\Events\InstrumentEvents</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2259,6 +2268,15 @@
     </ClInclude>
     <ClInclude Include="Instruments\CompositeMeteoPiano.h">
       <Filter>標頭檔\Instruments</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\InstrumentEvents\PianoSoundEvent.h">
+      <Filter>標頭檔\RulesetMeteor\Schedulers\Events\InstrumentEvents</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\InstrumentEvents\InstrumentControllers\VirtualPianoController.h">
+      <Filter>標頭檔\RulesetMeteor\Schedulers\Events\InstrumentEvents\InstrumentControllers</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\InstrumentEvents\PianoSoundEventProcessor.h">
+      <Filter>標頭檔\RulesetMeteor\Schedulers\Events\InstrumentEvents</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

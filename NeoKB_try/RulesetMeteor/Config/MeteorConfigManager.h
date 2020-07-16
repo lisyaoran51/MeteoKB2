@@ -38,6 +38,7 @@ namespace Config{
 		TargetLineMapAlgorithm,
 		SustainPedalLightRingIoCommunicator,
 		InstrumentController,
+		VirtualInstrumentController,
 		RepeatPracticeController,
 
 		MapPitchShifter,

@@ -58,6 +58,8 @@ namespace Patterns {
 
 	protected:
 
+		float defaultVolume = 1.f;
+
 		int extendWidth = 12;	// 應該要分左右邊不同的extend width
 
 		MTO_FLOAT fallSpeed = 0;

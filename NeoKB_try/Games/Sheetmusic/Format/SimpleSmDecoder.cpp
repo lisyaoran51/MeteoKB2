@@ -228,6 +228,9 @@ int SimpleSmDecoder::handleNoteControlPoints(Sm<Event>* sm, string & line)
 				time,
 				noteLength
 			);
+
+			if (volume <= 0 || volume > 255)
+				volume = defaultSampleVolume;
 		}
 		else {
 			InputKey inputKey = InputKey::None;
@@ -236,8 +239,7 @@ int SimpleSmDecoder::handleNoteControlPoints(Sm<Event>* sm, string & line)
 			{
 			case -1:
 				inputKey = InputKey::SustainPedal;
-				if (volume <= 0)
-					volume = defaultSampleVolume;
+
 				break;
 			case -2:
 				inputKey = InputKey::LowerOctave; // 這邊程式邏輯有問題，遊戲中升降8度是不能夠手動控制的，只能電腦自動控制
@@ -251,7 +253,9 @@ int SimpleSmDecoder::handleNoteControlPoints(Sm<Event>* sm, string & line)
 			newPlayableControlPoint = new InputKeyControlPoint(inputKey, inputValue, time, noteLength);
 		}
 
-		newPlayableControlPoint->SetVolume(volume);
+		
+
+		newPlayableControlPoint->SetVolume((float)volume / 256.0);
 		newPlayableControlPoint->SetSectionIndex(sectionIndex);
 		newPlayableControlPoint->SetHandType(static_cast<HandType>(hand));
 		newPlayableControlPoint->SetPartIndex(partIndex);

@@ -34,6 +34,7 @@ namespace Configurations{
 		Ruleset,
 		Username,
 		AudioOffset,
+		DefaultPianoVolume
 
 	};
 

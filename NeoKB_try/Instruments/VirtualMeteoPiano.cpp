@@ -12,36 +12,36 @@ VirtualMeteoPiano::VirtualMeteoPiano() : RegisterType("VirtualMeteoPiano")
 
 int VirtualMeteoPiano::SetSustainType(VirtualMeteoPianoSustainType sType)
 {
+	sustainType = sType;
+
 	return 0;
 }
 
-int VirtualMeteoPiano::Play(pair<PianoAction, int> action)
+int VirtualMeteoPiano::Play(Pitch p, int volume)
 {
-	if (!dynamic_cast<MultiPlaybackSampleChannel*>(getSamples()->at(action.first)))
+	if (!dynamic_cast<MultiPlaybackSampleChannel*>(getSamplesByPitch()->at(p)))
 		return 0;
 
-	dynamic_cast<MultiPlaybackSampleChannel*>(getSamples()->at(action.first))->PlayOnTrack(1, double(action.second) / 256.0);
+	dynamic_cast<MultiPlaybackSampleChannel*>(getSamplesByPitch()->at(p))->PlayOnTrack(1, double(volume) / 256.0);
 
-	isPressingMap[action.first] = true;
+	isPressingMapByPitch[p] = true;
 
 	return 0;
 }
 
-int VirtualMeteoPiano::Stop(PianoAction action)
+int VirtualMeteoPiano::Stop(Pitch p)
 {
 	if (sustainType != VirtualMeteoPianoSustainType::Pedal)
 		return 0;
 
-	if (!dynamic_cast<MultiPlaybackSampleChannel*>(getSamples()->at(action)))
+	if (!dynamic_cast<MultiPlaybackSampleChannel*>(getSamplesByPitch()->at(p)))
 		return 0;
 
-	if (!isPressingMap.at(PianoAction::SustainPedal))
-		dynamic_cast<MultiPlaybackSampleChannel*>(getSamples()->at(action))->FadeOut(1);
-
-	
+	if (!pedalDown)
+		dynamic_cast<MultiPlaybackSampleChannel*>(getSamplesByPitch()->at(p))->FadeOut(1);
 
 
-	isPressingMap[action] = false;
+	isPressingMapByPitch[p] = false;
 
 	return 0;
 }
@@ -51,7 +51,7 @@ int VirtualMeteoPiano::PressPedal()
 	if (sustainType != VirtualMeteoPianoSustainType::Pedal)
 		return 0;
 
-	isPressingMap[PianoAction::SustainPedal] = true;
+	pedalDown = true;
 
 
 	return 0;
@@ -62,15 +62,15 @@ int VirtualMeteoPiano::ReleasePedal()
 	if (sustainType != VirtualMeteoPianoSustainType::Pedal)
 		return 0;
 
-	isPressingMap[PianoAction::SustainPedal] = false;
+	pedalDown = false;
 
-	map<PianoAction, bool>::iterator it;
-	for (it = isPressingMap.begin(); it != isPressingMap.end(); ++it) {
+	map<Pitch, bool>::iterator it;
+	for (it = isPressingMapByPitch.begin(); it != isPressingMapByPitch.end(); ++it) {
 		if (!it->second) {
 
-			if (getSamples()->find(it->first) != getSamples()->end()) {
+			if (getSamplesByPitch()->find(it->first) != getSamplesByPitch()->end()) {
 
-				MultiPlaybackSampleChannel* sampleChannel = dynamic_cast<MultiPlaybackSampleChannel*>(getSamples()->at(it->first));
+				MultiPlaybackSampleChannel* sampleChannel = dynamic_cast<MultiPlaybackSampleChannel*>(getSamplesByPitch()->at(it->first));
 				if (sampleChannel) {
 					if (sampleChannel->GetIsPlaying(1))
 						sampleChannel->FadeOut(1);
@@ -86,70 +86,102 @@ int VirtualMeteoPiano::ReleasePedal()
 int VirtualMeteoPiano::MoveOctave(PianoPitchMovement m)
 {
 	// 在這邊沒用
+	throw runtime_error("VirtualMeteoPiano::MoveOctave() : this function is not available in VirtualMeteoPiano.");
 	return 0;
 }
 
 map<PianoAction, SampleChannel*>* VirtualMeteoPiano::getSamples(int variant)
 {
+	// 應該要土錯誤
+	throw runtime_error("VirtualMeteoPiano::getSamples() : this function is not available in VirtualMeteoPiano.");
 	return TInstrument<PianoAction>::getSamples();
+}
+
+map<Pitch, SampleChannel*>* VirtualMeteoPiano::getSamplesByPitch(int variant)
+{
+	return &samplesByPitch;
 }
 
 int VirtualMeteoPiano::loadAndMapSamples()
 {
+	
+	samplesByPitch[Pitch::C1 ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::C1 ));
+	samplesByPitch[Pitch::D1b] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::D1b));
+	samplesByPitch[Pitch::D1 ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::D1 ));
+	samplesByPitch[Pitch::E1b] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::E1b));
+	samplesByPitch[Pitch::E1 ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::E1 ));
+	samplesByPitch[Pitch::F1 ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::F1 ));
+	samplesByPitch[Pitch::G1b] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::G1b));
+	samplesByPitch[Pitch::G1 ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::G1 ));
+	samplesByPitch[Pitch::A1b] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::A1b));
+	samplesByPitch[Pitch::A1 ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::A1 ));
+	samplesByPitch[Pitch::B1b] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::B1b));
+	samplesByPitch[Pitch::B1 ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::B1 ));
 
-	// 這一段跟MeteoPiano依樣，有點不好
-	// 寫錯了，要用pitch來當key，晚點改
-	samples[PianoAction::VK24_L_C1  ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::C  ));
-	samples[PianoAction::VK24_L_bD1 ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::Db ));
-	samples[PianoAction::VK24_L_D1  ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::D  ));
-	samples[PianoAction::VK24_L_bE1 ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::Eb ));
-	samples[PianoAction::VK24_L_E1  ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::E  ));
-	samples[PianoAction::VK24_L_F1  ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::F  ));
-	samples[PianoAction::VK24_L_bG1 ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::Gb ));
-	samples[PianoAction::VK24_L_G1  ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::G  ));
-	samples[PianoAction::VK24_L_bA1 ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::Ab ));
-	samples[PianoAction::VK24_L_A1  ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::A  ));
-	samples[PianoAction::VK24_L_bB1 ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::Bb ));
-	samples[PianoAction::VK24_L_B1  ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::B  ));
+	samplesByPitch[Pitch::C  ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::C  ));
+	samplesByPitch[Pitch::Db ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::Db ));
+	samplesByPitch[Pitch::D  ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::D  ));
+	samplesByPitch[Pitch::Eb ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::Eb ));
+	samplesByPitch[Pitch::E  ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::E  ));
+	samplesByPitch[Pitch::F  ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::F  ));
+	samplesByPitch[Pitch::Gb ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::Gb ));
+	samplesByPitch[Pitch::G  ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::G  ));
+	samplesByPitch[Pitch::Ab ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::Ab ));
+	samplesByPitch[Pitch::A  ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::A  ));
+	samplesByPitch[Pitch::Bb ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::Bb ));
+	samplesByPitch[Pitch::B  ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::B  ));
 
-	samples[PianoAction::VK24_L_C2  ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::c  ));
-	samples[PianoAction::VK24_L_bD2 ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::db ));
-	samples[PianoAction::VK24_L_D2  ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::d  ));
-	samples[PianoAction::VK24_L_bE2 ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::eb ));
-	samples[PianoAction::VK24_L_E2  ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::e  ));
-	samples[PianoAction::VK24_L_F2  ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::f  ));
-	samples[PianoAction::VK24_L_bG2 ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::gb ));
-	samples[PianoAction::VK24_L_G2  ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::g  ));
-	samples[PianoAction::VK24_L_bA2 ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::ab ));
-	samples[PianoAction::VK24_L_A2  ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::a  ));
-	samples[PianoAction::VK24_L_bB2 ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::bb ));
-	samples[PianoAction::VK24_L_B2  ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::b  ));
+	samplesByPitch[Pitch::C  ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::c  ));
+	samplesByPitch[Pitch::Db ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::db ));
+	samplesByPitch[Pitch::D  ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::d  ));
+	samplesByPitch[Pitch::Eb ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::eb ));
+	samplesByPitch[Pitch::E  ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::e  ));
+	samplesByPitch[Pitch::F  ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::f  ));
+	samplesByPitch[Pitch::Gb ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::gb ));
+	samplesByPitch[Pitch::G  ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::g  ));
+	samplesByPitch[Pitch::Ab ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::ab ));
+	samplesByPitch[Pitch::A  ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::a  ));
+	samplesByPitch[Pitch::Bb ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::bb ));
+	samplesByPitch[Pitch::B  ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::b  ));
+		   
+	samplesByPitch[Pitch::C  ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::c1 ));
+	samplesByPitch[Pitch::Db ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::d1b));
+	samplesByPitch[Pitch::D  ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::d1 ));
+	samplesByPitch[Pitch::Eb ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::e1b));
+	samplesByPitch[Pitch::E  ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::e1 ));
+	samplesByPitch[Pitch::F  ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::f1 ));
+	samplesByPitch[Pitch::Gb ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::g1b));
+	samplesByPitch[Pitch::G  ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::g1 ));
+	samplesByPitch[Pitch::Ab ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::a1b));
+	samplesByPitch[Pitch::A  ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::a1 ));
+	samplesByPitch[Pitch::Bb ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::b1b));
+	samplesByPitch[Pitch::B  ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::b1 ));
+		   
+	samplesByPitch[Pitch::C  ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::c2 ));
+	samplesByPitch[Pitch::Db ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::d2b));
+	samplesByPitch[Pitch::D  ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::d2 ));
+	samplesByPitch[Pitch::Eb ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::e2b));
+	samplesByPitch[Pitch::E  ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::e2 ));
+	samplesByPitch[Pitch::F  ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::f2 ));
+	samplesByPitch[Pitch::Gb ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::g2b));
+	samplesByPitch[Pitch::G  ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::g2 ));
+	samplesByPitch[Pitch::Ab ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::a2b));
+	samplesByPitch[Pitch::A  ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::a2 ));
+	samplesByPitch[Pitch::Bb ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::b2b));
+	samplesByPitch[Pitch::B  ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::b2 ));
 
-	samples[PianoAction::VK24_R_C1  ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::c1 ));
-	samples[PianoAction::VK24_R_bD1 ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::d1b));
-	samples[PianoAction::VK24_R_D1  ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::d1 ));
-	samples[PianoAction::VK24_R_bE1 ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::e1b));
-	samples[PianoAction::VK24_R_E1  ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::e1 ));
-	samples[PianoAction::VK24_R_F1  ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::f1 ));
-	samples[PianoAction::VK24_R_bG1 ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::g1b));
-	samples[PianoAction::VK24_R_G1  ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::g1 ));
-	samples[PianoAction::VK24_R_bA1 ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::a1b));
-	samples[PianoAction::VK24_R_A1  ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::a1 ));
-	samples[PianoAction::VK24_R_bB1 ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::b1b));
-	samples[PianoAction::VK24_R_B1  ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::b1 ));
-
-	samples[PianoAction::VK24_R_C2  ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::c2 ));
-	samples[PianoAction::VK24_R_bD2 ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::d2b));
-	samples[PianoAction::VK24_R_D2  ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::d2 ));
-	samples[PianoAction::VK24_R_bE2 ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::e2b));
-	samples[PianoAction::VK24_R_E2  ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::e2 ));
-	samples[PianoAction::VK24_R_F2  ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::f2 ));
-	samples[PianoAction::VK24_R_bG2 ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::g2b));
-	samples[PianoAction::VK24_R_G2  ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::g2 ));
-	samples[PianoAction::VK24_R_bA2 ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::a2b));
-	samples[PianoAction::VK24_R_A2  ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::a2 ));
-	samples[PianoAction::VK24_R_bB2 ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::b2b));
-	samples[PianoAction::VK24_R_B2  ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::b2 ));
+	samplesByPitch[Pitch::c3 ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::c3 ));
+	samplesByPitch[Pitch::d3b] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::d3b));
+	samplesByPitch[Pitch::d3 ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::d3 ));
+	samplesByPitch[Pitch::e3b] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::e3b));
+	samplesByPitch[Pitch::e3 ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::e3 ));
+	samplesByPitch[Pitch::f3 ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::f3 ));
+	samplesByPitch[Pitch::g3b] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::g3b));
+	samplesByPitch[Pitch::g3 ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::g3 ));
+	samplesByPitch[Pitch::a3b] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::a3b));
+	samplesByPitch[Pitch::a3 ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::a3 ));
+	samplesByPitch[Pitch::b3b] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::b3b));
+	samplesByPitch[Pitch::b3 ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::b3 ));
 
 	return 0;
 }

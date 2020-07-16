@@ -12,6 +12,7 @@
 #include "../../../Instruments/Pitch.h"
 #include "../../Scheduler/Event/IoEvents/SustainPedalIoEvent.h"
 #include "../../Scheduler/Event/InstrumentEvents/PianoEvent.h"
+#include "../../Scheduler/Event/InstrumentEvents/PianoSoundEvent.h"
 #include "../../Scheduler/Event/PlayfieldEvents/OctaveShiftEvent.h"
 #include "../../Scheduler/Event/TimeEvents/RepeatPracticeEvent.h"
 #include "../../Scheduler/Event/Effect/EruptEffect.h"
@@ -268,6 +269,9 @@ Pattern * MeteorPatternGenerator::generateNoteControlPoint(vector<Event*>* es, N
 		return pattern;
 	}
 
+	float volume = note->GetVolume() <= 0 || note->GetVolume() > 1 ? defaultVolume : note->GetVolume();
+
+
 
 	// 公式： (鍵盤高度-打擊點高度) / 速度
 	MTO_FLOAT fallTime = MTO_FLOAT(
@@ -320,18 +324,49 @@ Pattern * MeteorPatternGenerator::generateNoteControlPoint(vector<Event*>* es, N
 	erupt->SetTargetHeight(note->IsWhiteKey() ? targetHeight : blackKeyTargetHeight);
 	erupt->SetSourceEvent(note);
 
+	PianoSoundEvent* pianoSoundEventDown = new PianoSoundEvent(
+		pair<Pitch, int>(pitch, volume),
+		note->GetStartTime(),
+		0
+	);
+	pianoSoundEventDown->SetSourceEvent(note);
+
+	PianoSoundEvent* pianoSoundEventUp = nullptr;
+
+	if (note->GetLifeTime() > 0) {
+		pianoSoundEventUp = new PianoSoundEvent(
+			pair<Pitch, int>(pitch, 0),
+			note->GetStartTime() + note->GetLifeTime(),
+			0
+		);
+	}
+	else {
+		// TODO: 這邊這樣寫可能播起來會很難聽，要設一下default life time
+		// 要好聽可能要到post process的時候去計算小節來決定按下時間，但這個很難寫
+		pianoSoundEventUp = new PianoSoundEvent(
+			pair<Pitch, int>(pitch, 0),
+			note->GetStartTime() + 0.5,
+			0
+		);
+	}
+
+
 
 	//note->SetLifeTime(noteLifeTime);
 
 	//pattern->Add(glow);
 	pattern->Add(fall);
 	pattern->Add(erupt);
+	pattern->Add(pianoSoundEventDown);
+	pattern->Add(pianoSoundEventUp);
 	//pattern->Add(note);
 
 	// 把pattern裡面的event一個一個加進去es裡
 	//es->push_back(glow);
 	es->push_back(fall);
 	es->push_back(erupt);
+	es->push_back(pianoSoundEventDown);
+	es->push_back(pianoSoundEventUp);
 	//es->push_back(note);
 
 	return pattern;
@@ -388,18 +423,28 @@ Pattern * MeteorPatternGenerator::generateInputKeyControlPoint(vector<Event*>* e
 		PianoEvent* pianoEventDown = new PianoEvent(pair<InputKey, int>(inputKey, 1), inputKeyControlPoint->GetStartTime(), 0);
 		PianoEvent* pianoEventUp = new PianoEvent(pair<InputKey, int>(inputKey, -1), inputKeyControlPoint->GetStartTime() + inputKeyControlPoint->GetLifeTime() - 0.2, 0);
 
+		PianoSoundEvent* pianoSoundEventDown = new PianoSoundEvent(true, inputKeyControlPoint->GetStartTime(), 0);
+		PianoSoundEvent* pianoSoundEventUp = new PianoSoundEvent(false, inputKeyControlPoint->GetStartTime() + inputKeyControlPoint->GetLifeTime() - 0.2, 0);
+
 		LOG(LogLevel::Depricated) << "MeteorSmConverter::generateInputKeyControlPoint() : Piano Event [" << inputKeyControlPoint->GetStartTime() << "].";
 		
 		sustainPedalIoEvent->SetSourceEvent(inputKeyControlPoint);
 		pianoEventDown->SetSourceEvent(inputKeyControlPoint);
 		pianoEventUp->SetSourceEvent(inputKeyControlPoint);
+		pianoSoundEventDown->SetSourceEvent(inputKeyControlPoint);
+		pianoSoundEventUp->SetSourceEvent(inputKeyControlPoint);
 
 		pattern->Add(sustainPedalIoEvent);
 		pattern->Add(pianoEventDown);
 		pattern->Add(pianoEventUp);
+		pattern->Add(pianoSoundEventDown);
+		pattern->Add(pianoSoundEventUp);
+
 		es->push_back(sustainPedalIoEvent);
 		es->push_back(pianoEventDown);
 		es->push_back(pianoEventUp);
+		es->push_back(pianoSoundEventDown);
+		es->push_back(pianoSoundEventUp);
 	}
 	else if (inputKey == InputKey::LowerOctave || inputKey == InputKey::RaiseOctave) {
 

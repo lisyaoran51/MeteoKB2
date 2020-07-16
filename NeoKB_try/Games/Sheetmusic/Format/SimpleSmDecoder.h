@@ -23,7 +23,7 @@ namespace Format {
 	class SimpleSmDecoder: public SmDecoderWithSection<SimpleSmDecoderSection>
 	{
 
-		int defaultSampleVolume = 100;
+		int defaultSampleVolume = 255;
 
 		int handleGeneral(Sm<Event>* sm, string& line);
 		int handleMetadata(Sm<Event>* sm, string& line);

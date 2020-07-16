@@ -128,6 +128,7 @@ MeteorRulesetExecutor::MeteorRulesetExecutor(): RegisterType("MeteorRulesetExecu
 	eventProcessorTable["InputKeyControlPoint"	] = "MeteorInputKeyControlPointHitObject";
 	eventProcessorTable["SustainPedalIoEvent"	] = "SustainPedalLightRing";
 	eventProcessorTable["PianoEvent"		] = "PianoEventProcessor";
+	eventProcessorTable["PianoSoundEvent"	] = "PianoSoundEventProcessor";
 	eventProcessorTable["OctaveShiftEvent"	] = "OctaveShiftEventProcessor";
 
 	// µù¥Uprivate load (c++¤~»Ý­n)

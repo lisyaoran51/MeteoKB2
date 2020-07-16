@@ -2,7 +2,7 @@
 
 #include "../Framework/Host/MeteoGameHost.h"
 #include "MeteoGameDesktop.h"
-#include "../Instruments/MeteoPiano.h"
+#include "../Instruments/CompositeMeteoPiano.h"
 #include "../Util/Log.h"
 #include "../Util/ProgramInitializer.h"
 
@@ -28,7 +28,7 @@ int Program::Main(vector<string>& args)
 
 	
 	
-	host->Run(new MeteoGameDesktop(args), new MeteoPiano(args));
+	host->Run(new MeteoGameDesktop(args), new CompositeMeteoPiano(args));
 
 	return 0;
 }

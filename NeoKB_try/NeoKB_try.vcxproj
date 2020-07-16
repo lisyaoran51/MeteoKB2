@@ -242,8 +242,11 @@
     <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\TargetLineEffect.cpp" />
     <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\TargetLineEffectMapper.cpp" />
     <ClCompile Include="RulesetMeteor\Scheduler\Event\InstrumentEvents\InstrumentControllers\PianoController.cpp" />
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\InstrumentEvents\InstrumentControllers\VirtualPianoController.cpp" />
     <ClCompile Include="RulesetMeteor\Scheduler\Event\InstrumentEvents\PianoEvent.cpp" />
     <ClCompile Include="RulesetMeteor\Scheduler\Event\InstrumentEvents\PianoEventProcessor.cpp" />
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\InstrumentEvents\PianoSoundEvent.cpp" />
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\InstrumentEvents\PianoSoundEventProcessor.cpp" />
     <ClCompile Include="RulesetMeteor\Scheduler\Event\IoEvents\IoCommunicators\SustainPedalLightRingIoCommunicator.cpp" />
     <ClCompile Include="RulesetMeteor\Scheduler\Event\IoEvents\SustainPedalIoEvent.cpp" />
     <ClCompile Include="RulesetMeteor\Scheduler\Event\IoEvents\SustainPedalLightRing.cpp" />
@@ -548,8 +551,11 @@
     <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\TargetLineEffect.h" />
     <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\TargetLineEffectMapper.h" />
     <ClInclude Include="RulesetMeteor\Scheduler\Event\InstrumentEvents\InstrumentControllers\PianoController.h" />
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\InstrumentEvents\InstrumentControllers\VirtualPianoController.h" />
     <ClInclude Include="RulesetMeteor\Scheduler\Event\InstrumentEvents\PianoEvent.h" />
     <ClInclude Include="RulesetMeteor\Scheduler\Event\InstrumentEvents\PianoEventProcessor.h" />
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\InstrumentEvents\PianoSoundEvent.h" />
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\InstrumentEvents\PianoSoundEventProcessor.h" />
     <ClInclude Include="RulesetMeteor\Scheduler\Event\IoEvents\IoCommunicators\SustainPedalLightRingIoCommunicator.h" />
     <ClInclude Include="RulesetMeteor\Scheduler\Event\IoEvents\SustainPedalIoEvent.h" />
     <ClInclude Include="RulesetMeteor\Scheduler\Event\IoEvents\SustainPedalLightRing.h" />
