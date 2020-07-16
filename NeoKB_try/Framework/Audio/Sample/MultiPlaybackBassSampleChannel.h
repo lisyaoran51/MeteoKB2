@@ -15,9 +15,9 @@ namespace Samples {
 
 		MultiPlaybackBassSampleChannel(Sample* s, int pAmount, int tAmount, OverrideType oType);
 
-		virtual int Play(int trackNumber);
+		virtual int PlayOnTrack(int trackNumber);
 
-		virtual int Play(int trackNumber, double v);
+		virtual int PlayOnTrack(int trackNumber, double v);
 
 		virtual int Stop(int trackNumber);
 

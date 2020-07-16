@@ -198,11 +198,13 @@
     <ClCompile Include="Framework\Timing\StopwatchClock.cpp" />
     <ClCompile Include="Games\UI\SheetmusicSelectPanel.cpp" />
     <ClCompile Include="Games\UI\VolumeController.cpp" />
+    <ClCompile Include="Instruments\CompositeMeteoPiano.cpp" />
     <ClCompile Include="Instruments\HasPitch.cpp" />
     <ClCompile Include="Instruments\Input\PianoInputManager.cpp" />
     <ClCompile Include="Instruments\Instrument.cpp" />
     <ClCompile Include="Instruments\MeteoPiano.cpp" />
     <ClCompile Include="Instruments\Piano.cpp" />
+    <ClCompile Include="Instruments\VirtualMeteoPiano.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="RulesetMeteor\Config\MeteorConfigManager.cpp" />
     <ClCompile Include="RulesetMeteor\Input\MeteorInputManager.cpp" />
@@ -498,6 +500,7 @@
     <ClInclude Include="Games\UI\SheetmusicSelectPanel.h" />
     <ClInclude Include="Games\UI\VolumeController.h" />
     <ClInclude Include="Instruments\Audio\SoundBinding.h" />
+    <ClInclude Include="Instruments\CompositeMeteoPiano.h" />
     <ClInclude Include="Instruments\HasPitch.h" />
     <ClInclude Include="Instruments\Input\PianoAction.h" />
     <ClInclude Include="Instruments\Input\InstrumentInputManager.h" />
@@ -507,6 +510,7 @@
     <ClInclude Include="Instruments\MeteoPiano.h" />
     <ClInclude Include="Instruments\Piano.h" />
     <ClInclude Include="Instruments\Pitch.h" />
+    <ClInclude Include="Instruments\VirtualMeteoPiano.h" />
     <ClInclude Include="RulesetMeteor\Config\MeteorConfigManager.h" />
     <ClInclude Include="RulesetMeteor\Input\MeteorInputManager.h" />
     <ClInclude Include="RulesetMeteor\MeteorGame.h" />

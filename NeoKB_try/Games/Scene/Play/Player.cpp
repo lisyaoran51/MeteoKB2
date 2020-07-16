@@ -55,8 +55,10 @@ int Player::load(MeteoConfigManager* m, Instrument* instru)
 		adjustableClock = new StopwatchClock();
 		LOG(LogLevel::Warning) << "Player::load : no music found. track = [" << workingSmValue->GetTrack() << "].";
 	}
-	else
+	else {
 		adjustableClock = workingSmValue->GetTrack();
+		// 要再ruleset executor李把event processor filter的sm sound event給filter調
+	}
 
 
 	LOG(LogLevel::Fine) << "Player::load : create decoupled clocks.";

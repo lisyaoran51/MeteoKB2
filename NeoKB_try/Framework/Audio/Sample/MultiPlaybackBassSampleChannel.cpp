@@ -13,16 +13,16 @@ MultiPlaybackBassSampleChannel::MultiPlaybackBassSampleChannel(Sample * s, int p
 {
 }
 
-int MultiPlaybackBassSampleChannel::Play(int trackNumber)
+int MultiPlaybackBassSampleChannel::PlayOnTrack(int trackNumber)
 {
 	if(trackNumber >= trackAmount)
 		throw runtime_error("int MultiPlaybackBassSampleChannel::Play() : track number out of range.");
 
 
-	return Play(trackNumber, 1.0);
+	return PlayOnTrack(trackNumber, 1.0);
 }
 
-int MultiPlaybackBassSampleChannel::Play(int trackNumber, double v)
+int MultiPlaybackBassSampleChannel::PlayOnTrack(int trackNumber, double v)
 {
 	if (trackNumber >= trackAmount)
 		throw runtime_error("int MultiPlaybackBassSampleChannel::Play() : track number out of range.");

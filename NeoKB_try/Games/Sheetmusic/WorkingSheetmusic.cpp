@@ -68,6 +68,10 @@ Track * WorkingSm::GetTrack()
 	LOG(LogLevel::Debug) << "WorkingSm::GetTrack() : finding track name [" << smInfo->metadata->AudioFile << "].";
 	LOG(LogLevel::Error) << "WorkingSm::GetTrack() : here is a bug not solved.";
 	//ifstream* stream = new ifstream(getPathForFile(smInfo->metadata->AudioFile));
+
+	if (smInfo->metadata->AudioFile == "")
+		return nullptr;
+
 	string path = getPathForFile(smInfo->metadata->AudioFile);
 	char * temp = new char[path.length()];
 	LOG(LogLevel::Debug) << "WorkingSm::GetTrack() : new a char array.";

@@ -18,17 +18,17 @@ namespace Sheetmusics {
 	struct SmMetadata
 	{
 
-		string Artist;
-		string ArtistUnicode;
+		string Artist = "";
+		string ArtistUnicode = "";
 		bool hasAudioFile = false;
-		string AudioFile;
-		string Author;
+		string AudioFile = "";
+		string Author = "";
 		int OnlineSheetmusic;
 		int PreviewTime;
-		string Source;
-		string Tags;
-		string Title;
-		string TitleUnicode;
+		string Source = "";
+		string Tags = "";
+		string Title = "";
+		string TitleUnicode = "";
 
 		SmMetadata();
 		SmMetadata(SmMetadata* sm);

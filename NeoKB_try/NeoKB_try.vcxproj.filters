@@ -1329,6 +1329,12 @@
     <ClCompile Include="Framework\Database\MemoryBasedDatabaseContextFactory.cpp">
       <Filter>來源檔案\Framework\Database</Filter>
     </ClCompile>
+    <ClCompile Include="Instruments\VirtualMeteoPiano.cpp">
+      <Filter>來源檔案\Instruments</Filter>
+    </ClCompile>
+    <ClCompile Include="Instruments\CompositeMeteoPiano.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="DailyLog.txt">
@@ -2247,6 +2253,12 @@
     </ClInclude>
     <ClInclude Include="Games\Sheetmusic\SheetmusicFileInfo.h">
       <Filter>標頭檔\Games\Sheetmusics</Filter>
+    </ClInclude>
+    <ClInclude Include="Instruments\VirtualMeteoPiano.h">
+      <Filter>標頭檔\Instruments</Filter>
+    </ClInclude>
+    <ClInclude Include="Instruments\CompositeMeteoPiano.h">
+      <Filter>標頭檔\Instruments</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

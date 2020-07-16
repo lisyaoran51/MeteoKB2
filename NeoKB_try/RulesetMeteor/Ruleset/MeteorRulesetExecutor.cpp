@@ -104,6 +104,14 @@ int MeteorRulesetExecutor::load(MeteorTimeController * t)
 	
 	t->SetSectionTime(&sectionTime);
 
+	EventProcessorFilter* eProcessorFilter = GetDependencies()->GetCache<EventProcessorFilter>("EventProcessorFilter");
+
+	// TODO: 根據有沒有拿到working sm裡面audio file決定要不要filter sound event
+
+	if (workingSm->GetTrack() == nullptr) {
+		//eProcessorFilter->AddFilterCallback(...);
+	}
+
 	return 0;
 }
 

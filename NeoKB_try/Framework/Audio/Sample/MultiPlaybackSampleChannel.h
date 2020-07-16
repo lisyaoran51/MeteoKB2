@@ -27,23 +27,25 @@ namespace Samples {
 		
 		MultiPlaybackSampleChannel(Sample* s, int pAmount, int tAmount, OverrideType oType);
 
-		virtual int Play(int trackNumber) = 0;
+		virtual int Play(double v);
 
-		virtual int Play(int trackNumber, double v) = 0;
+		virtual int PlayOnTrack(int trackNumber) = 0;
 
-		virtual int Stop(int trackNumber) = 0;
+		virtual int PlayOnTrack(int trackNumber, double v) = 0;
+
+		virtual int Stop(int trackNumber = 0) = 0;
 
 		//virtual int Stop(int channelId) = 0; 不會有這個狀況，要停就是所有都停，所以先不寫
 
-		virtual int FadeOut(int trackNumber) = 0;
+		virtual int FadeOut(int trackNumber = 0) = 0;
 
-		virtual int StopFadeOut(int trackNumber) = 0;
+		virtual int StopFadeOut(int trackNumber = 0) = 0;
 
-		virtual bool GetIsPlaying(int trackNumber) = 0;
+		virtual bool GetIsPlaying(int trackNumber = 0) = 0;
 
 		virtual bool GetIsLoaded() = 0;
 
-		virtual int OnStateChange(int trackNumber) = 0;
+		virtual int OnStateChange(int trackNumber = 0) = 0;
 
 	protected:
 
@@ -57,7 +59,7 @@ namespace Samples {
 
 		OverrideType overrideType = OverrideType::MinimunVolume;
 
-		virtual int getChannelToPlay(int trackNumber) = 0;
+		virtual int getChannelToPlay(int trackNumber = 0) = 0;
 
 		virtual int createSampleChannel() = 0;
 

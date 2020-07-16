@@ -40,10 +40,6 @@ namespace Instruments {
 
 		
 
-		virtual int OnButtonDown(PianoAction action);
-
-		virtual int OnKnobTurn(pair<PianoAction, int> action);
-
 
 	protected:
 
@@ -52,6 +48,10 @@ namespace Instruments {
 
 		virtual int loadAndMapSamples();
 
+
+		virtual int OnButtonDown(PianoAction action);
+
+		virtual int OnKnobTurn(pair<PianoAction, int> action);
 
 	};
 

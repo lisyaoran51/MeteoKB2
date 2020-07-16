@@ -40,3 +40,11 @@ MultiPlaybackSampleChannel::MultiPlaybackSampleChannel(Sample * s, int pAmount, 
 	
 
 }
+
+int MultiPlaybackSampleChannel::Play(double v)
+{
+	SampleChannel::Play(v);
+
+	PlayOnTrack(0, v);
+	return 0;
+}

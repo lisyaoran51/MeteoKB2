@@ -367,7 +367,8 @@ int Piano::OnButtonUp(PianoAction action)
 			if (!it->second) {
 				SampleChannel* sampleChannel = getSamples()->at(it->first);
 				if (sampleChannel)
-					sampleChannel->Stop();
+					if(sampleChannel->GetIsPlaying())
+						sampleChannel->FadeOut();
 			}
 
 		}
