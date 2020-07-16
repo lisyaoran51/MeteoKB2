@@ -253,14 +253,14 @@ int SimpleSmDecoder::handleNoteControlPoints(Sm<Event>* sm, string & line)
 			newPlayableControlPoint = new InputKeyControlPoint(inputKey, inputValue, time, noteLength);
 		}
 
-		if(pitchInt >= 0)
-			LOG(LogLevel::Debug) << "int SimpleSmDecoder::handleNoteControlPoints() : Note [" << pitchInt << "] at [" << time << "] volume [" << volume << "].";
-
 		newPlayableControlPoint->SetVolume(float(volume) / 256.f);
 		newPlayableControlPoint->SetSectionIndex(sectionIndex);
 		newPlayableControlPoint->SetHandType(static_cast<HandType>(hand));
 		newPlayableControlPoint->SetPartIndex(partIndex);
-		
+
+		if (pitchInt >= 0)
+			LOG(LogLevel::Debug) << "int SimpleSmDecoder::handleNoteControlPoints() : Note [" << pitchInt << "] at [" << time << "] volume [" << newPlayableControlPoint->GetVolume() << "].";
+
 
 		sm->GetEvents()->push_back(newPlayableControlPoint);
 	}
