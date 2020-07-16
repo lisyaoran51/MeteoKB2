@@ -207,7 +207,7 @@ int GameHost::updateFrame()
 	if (root == nullptr)
 		return 0;
 
-	LOG(LogLevel::Finest) << "GameHost::updateFrame() : update scenegraph tree.";
+	LOG(LogLevel::Depricated) << "GameHost::updateFrame() : update scenegraph tree.";
 
 	LOG(LogLevel::Depricated) << "GameHost::updateFrame() : print tree " << [](Container* r) {
 
