@@ -4,7 +4,7 @@
 using namespace Meteor::Schedulers::Events::InstrumentEvents;
 
 
-PianoSoundEvent::PianoSoundEvent(pair<Pitch, int> input, MTO_FLOAT s, MTO_FLOAT l): InstrumentEvent(s, l)
+PianoSoundEvent::PianoSoundEvent(pair<Pitch, float> input, MTO_FLOAT s, MTO_FLOAT l): InstrumentEvent(s, l)
 {
 	pianoSoundEventType = PianoSoundEventType::Pitch;
 	sound = input;

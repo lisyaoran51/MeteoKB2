@@ -259,7 +259,7 @@ int SimpleSmDecoder::handleNoteControlPoints(Sm<Event>* sm, string & line)
 		newPlayableControlPoint->SetPartIndex(partIndex);
 
 		if (pitchInt >= 0)
-			LOG(LogLevel::Debug) << "int SimpleSmDecoder::handleNoteControlPoints() : Note [" << pitchInt << "] at [" << time << "] volume [" << newPlayableControlPoint->GetVolume() << "].";
+			LOG(LogLevel::Depricated) << "int SimpleSmDecoder::handleNoteControlPoints() : Note [" << pitchInt << "] at [" << time << "] volume [" << newPlayableControlPoint->GetVolume() << "].";
 
 
 		sm->GetEvents()->push_back(newPlayableControlPoint);

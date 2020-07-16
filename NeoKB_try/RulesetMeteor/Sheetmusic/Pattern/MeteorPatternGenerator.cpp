@@ -325,7 +325,7 @@ Pattern * MeteorPatternGenerator::generateNoteControlPoint(vector<Event*>* es, N
 	erupt->SetSourceEvent(note);
 
 	PianoSoundEvent* pianoSoundEventDown = new PianoSoundEvent(
-		pair<Pitch, int>(pitch, volume),
+		pair<Pitch, float>(pitch, volume),
 		note->GetStartTime(),
 		0
 	);
@@ -335,7 +335,7 @@ Pattern * MeteorPatternGenerator::generateNoteControlPoint(vector<Event*>* es, N
 
 	if (note->GetLifeTime() > 0) {
 		pianoSoundEventUp = new PianoSoundEvent(
-			pair<Pitch, int>(pitch, 0),
+			pair<Pitch, float>(pitch, 0),
 			note->GetStartTime() + note->GetLifeTime(),
 			0
 		);
@@ -344,7 +344,7 @@ Pattern * MeteorPatternGenerator::generateNoteControlPoint(vector<Event*>* es, N
 		// TODO: 這邊這樣寫可能播起來會很難聽，要設一下default life time
 		// 要好聽可能要到post process的時候去計算小節來決定按下時間，但這個很難寫
 		pianoSoundEventUp = new PianoSoundEvent(
-			pair<Pitch, int>(pitch, 0),
+			pair<Pitch, float>(pitch, 0),
 			note->GetStartTime() + 0.5,
 			0
 		);

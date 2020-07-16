@@ -25,7 +25,7 @@ namespace InstrumentEvents{
 
 	public:
 
-		PianoSoundEvent(pair<Pitch, int> input, MTO_FLOAT s, MTO_FLOAT l);
+		PianoSoundEvent(pair<Pitch, float> input, MTO_FLOAT s, MTO_FLOAT l);
 
 		PianoSoundEvent(bool pDown, MTO_FLOAT s, MTO_FLOAT l);
 
@@ -34,7 +34,7 @@ namespace InstrumentEvents{
 
 		PianoSoundEventType GetPianoSoundEventType();
 
-		pair<Pitch, int> GetSound();
+		pair<Pitch, float> GetSound();
 
 		bool GetPedalDown();
 
@@ -42,7 +42,7 @@ namespace InstrumentEvents{
 
 		PianoSoundEventType pianoSoundEventType = PianoSoundEventType::None;
 
-		pair<Pitch, int> sound = pair<Pitch, int>();
+		pair<Pitch, float> sound = pair<Pitch, float>();
 
 		bool pedalDown = false;
 
