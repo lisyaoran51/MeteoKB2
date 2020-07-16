@@ -255,7 +255,7 @@ int SimpleSmDecoder::handleNoteControlPoints(Sm<Event>* sm, string & line)
 
 		
 
-		newPlayableControlPoint->SetVolume((float)volume / 256.0);
+		newPlayableControlPoint->SetVolume(float(volume) / 256.f);
 		newPlayableControlPoint->SetSectionIndex(sectionIndex);
 		newPlayableControlPoint->SetHandType(static_cast<HandType>(hand));
 		newPlayableControlPoint->SetPartIndex(partIndex);

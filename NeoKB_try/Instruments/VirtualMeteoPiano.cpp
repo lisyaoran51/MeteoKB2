@@ -24,7 +24,7 @@ int VirtualMeteoPiano::Play(Pitch p, float volume)
 	if (!dynamic_cast<MultiPlaybackSampleChannel*>(getSamplesByPitch()->at(p)))
 		return 0;
 
-	dynamic_cast<MultiPlaybackSampleChannel*>(getSamplesByPitch()->at(p))->PlayOnTrack(1, double(volume) / 256.0);
+	dynamic_cast<MultiPlaybackSampleChannel*>(getSamplesByPitch()->at(p))->PlayOnTrack(1, volume);
 
 	isPressingMapByPitch[p] = true;
 
