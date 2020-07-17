@@ -40,11 +40,11 @@ int MultiPlaybackBassSampleChannel::PlayOnTrack(int trackNumber, double v)
 
 	LOG(LogLevel::Depricated) << "MultiPlaybackBassSampleChannel::Play() : get channel [" << channelId << "] to play.";
 
-	BASS_ChannelSetAttribute(channelId, BASS_ATTRIB_PAN, 0);
-	BASS_ChannelSetAttribute(channelId, BASS_ATTRIB_VOL, v * volumeCalculated->GetValue());
-	BASS_ChannelPlay(channelId, true);
+	//BASS_ChannelSetAttribute(channelId, BASS_ATTRIB_PAN, 0);
+	//BASS_ChannelSetAttribute(channelId, BASS_ATTRIB_VOL, v * volumeCalculated->GetValue());
+	//BASS_ChannelPlay(channelId, true);
 
-	/*
+	
 	pendingActions.Add(this, [=]() {
 
 		LOG(LogLevel::Depricated) << "MultiPlaybackBassSampleChannel::Play() : set channel with volume [" << v * volumeCalculated->GetValue() * 2.0 << "].";
@@ -63,7 +63,7 @@ int MultiPlaybackBassSampleChannel::PlayOnTrack(int trackNumber, double v)
 
 		return 0;
 	}, "Lambda_MultiPlaybackBassSampleChannel::Play");
-	*/
+	
 
 	return 0;
 }
@@ -133,6 +133,7 @@ int MultiPlaybackBassSampleChannel::StopFadeOut(int trackNumber)
 	if (trackNumber >= trackAmount)
 		throw runtime_error("int MultiPlaybackBassSampleChannel::StopFadeOut() : track number out of range.");
 	
+	/*
 	for (int i = 0; i < playbackAmount; i++) {
 		if (BASS_ChannelIsSliding(channelIds[trackNumber][i], BASS_ATTRIB_VOL)) {
 			float v = 0;
@@ -142,7 +143,9 @@ int MultiPlaybackBassSampleChannel::StopFadeOut(int trackNumber)
 			BASS_ChannelSlideAttribute(channelIds[trackNumber][i], BASS_ATTRIB_VOL, v, 0);
 		}
 	}
-	/*
+	*/
+
+	
 	unique_lock<mutex> uLock(pendingActionMutex);
 
 	pendingActions.Add(this, [=]() {
@@ -158,7 +161,7 @@ int MultiPlaybackBassSampleChannel::StopFadeOut(int trackNumber)
 		}
 		return 0;
 	}, "Lambda_MultiPlaybackBassSampleChannel::StopFadeOut");
-	*/
+	
 
 	return 0;
 }
