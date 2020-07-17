@@ -198,7 +198,7 @@ int GameHost::updateInitialize()
 {
 	LOG(LogLevel::Info) << "GameHost::updateInitialize() : Setting update thread.";
 	// ¹w³]¬O1000
-	updateThread->SetMaxUpdateHz(30);
+	updateThread->SetMaxUpdateHz(1000);
 	return 0;
 }
 
