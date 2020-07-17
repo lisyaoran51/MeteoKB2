@@ -65,6 +65,7 @@ int BassSampleChannel::Play()
 
 			LOG(LogLevel::Debug) << "BassSampleChannel::Play() : play channel.";
 
+			BASS_ChannelSetAttribute(channelID, BASS_ATTRIB_VOL, volumeCalculated->GetValue());
 			BASS_ChannelSetPosition(channelID, 0, BASS_POS_BYTE);
 
 			return 0;
