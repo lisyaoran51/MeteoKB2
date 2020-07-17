@@ -1898,3 +1898,21 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	csv database的東西還是要寫完，不然城市不能跑，player裡面拿ruleset id的部分也要跟著換掉
 	
 	repeat prctice沒有轉出time controller event
+	
+7/15
+	電子琴城市勝：storage要分兩半、藍芽、AB段音效、換音效、播譜(1)、mcu程式(2)、降低延遲(3)、下載
+	
+	延遲時間:
+	
+	適用於延遲時間的一般準則 
+	不到 10 毫秒 (ms) – 可即時監控傳入的音軌，包括效果。 
+	10 毫秒 (ms) 時 – 可偵測到延遲，但聽起來仍自然且對監控而言仍有用。 
+	11 至 20 毫秒 (ms) – 監控開始變得不實用，實際音源變得模糊，而且監控的輸出相當明顯。 
+	20 至 30 毫秒 (ms) – 延遲的聲音開始聽起來像真正的延遲，而非原始訊號的一部分。 
+	
+	input thread速度可以到1800/s，但audio thread只有350/s，把lock拿掉也依樣慢，要看一下為什麼
+	
+7/16
+	要寫自動播譜，但是音量不知道為什麼會變亂碼
+	4 : VirtualPianoController::implementControlInstrument() : play sound [5.47] on [74] with volume [1065287680].
+	另外也找不到sample對應到pitch

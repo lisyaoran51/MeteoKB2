@@ -330,6 +330,8 @@ Pattern * MeteorPatternGenerator::generateNoteControlPoint(vector<Event*>* es, N
 		0
 	);
 	pianoSoundEventDown->SetSourceEvent(note);
+	LOG(LogLevel::Finer) << "int MeteorSmConverter::Generate(vector<Event*>*, Event*) : Generate sound at [" << (int)pitch << "], start time [" << note->GetStartTime() << "] volume [" << volume << "].";
+
 
 	PianoSoundEvent* pianoSoundEventUp = nullptr;
 
