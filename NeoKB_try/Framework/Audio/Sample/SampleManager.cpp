@@ -62,7 +62,7 @@ SampleChannel * SampleManager::GetMultiPlaybackSampleChannel(string name)
 		if (path != "") {
 			sample = sampleCache[name] = new BassSample((char*)path.c_str());
 			//sampleChannel = sampleChannelCache[name] = new MultiPlaybackBassSampleChannel(sample, playbackAmount, 2, OverrideType::MinimunVolume);
-			sampleChannel = sampleChannelCache[name] = new MultiPlaybackBassSampleChannel(sample, 5, 2, OverrideType::MinimunVolume);
+			sampleChannel = sampleChannelCache[name] = new MultiPlaybackBassSampleChannel(sample, 10, 2, OverrideType::MinimunVolume);
 			AddItem(sampleChannel);
 		}
 		else {
