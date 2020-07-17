@@ -25,7 +25,7 @@ int VirtualMeteoPiano::Play(Pitch p, float volume)
 	}
 
 
-	LOG(LogLevel::Debug) << "VirtualMeteoPiano::Play() : play sound [" << dynamic_cast<MultiPlaybackSampleChannel*>(getSamplesByPitch()->at(p)) << "].";
+	LOG(LogLevel::Fine) << "VirtualMeteoPiano::Play() : play sound [" << dynamic_cast<MultiPlaybackSampleChannel*>(getSamplesByPitch()->at(p)) << "].";
 	if (!dynamic_cast<MultiPlaybackSampleChannel*>(getSamplesByPitch()->at(p)))
 		return 0;
 
