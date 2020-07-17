@@ -360,7 +360,7 @@ Pattern * MeteorPatternGenerator::generateNoteControlPoint(vector<Event*>* es, N
 	pattern->Add(fall);
 	pattern->Add(erupt);
 	pattern->Add(pianoSoundEventDown);
-	pattern->Add(pianoSoundEventUp);
+	//pattern->Add(pianoSoundEventUp);
 	//pattern->Add(note);
 
 	// 把pattern裡面的event一個一個加進去es裡
@@ -368,7 +368,7 @@ Pattern * MeteorPatternGenerator::generateNoteControlPoint(vector<Event*>* es, N
 	es->push_back(fall);
 	es->push_back(erupt);
 	es->push_back(pianoSoundEventDown);
-	es->push_back(pianoSoundEventUp);
+	//es->push_back(pianoSoundEventUp);
 	//es->push_back(note);
 
 	return pattern;
@@ -439,14 +439,14 @@ Pattern * MeteorPatternGenerator::generateInputKeyControlPoint(vector<Event*>* e
 		pattern->Add(sustainPedalIoEvent);
 		pattern->Add(pianoEventDown);
 		pattern->Add(pianoEventUp);
-		pattern->Add(pianoSoundEventDown);
-		pattern->Add(pianoSoundEventUp);
+		//pattern->Add(pianoSoundEventDown);
+		//pattern->Add(pianoSoundEventUp);
 
 		es->push_back(sustainPedalIoEvent);
 		es->push_back(pianoEventDown);
 		es->push_back(pianoEventUp);
-		es->push_back(pianoSoundEventDown);
-		es->push_back(pianoSoundEventUp);
+		//es->push_back(pianoSoundEventDown);
+		//es->push_back(pianoSoundEventUp);
 	}
 	else if (inputKey == InputKey::LowerOctave || inputKey == InputKey::RaiseOctave) {
 
