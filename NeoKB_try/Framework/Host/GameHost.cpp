@@ -223,7 +223,7 @@ int GameHost::inputInitialize()
 {
 	LOG(LogLevel::Info) << "GameHost::inputInitialize() : Setting input thread.";
 	// 預設是1000了
-	inputThread->SetMaxUpdateHz(800);
+	inputThread->SetMaxUpdateHz(500);
 	return 0;
 }
 
@@ -276,7 +276,7 @@ int GameHost::setupConfig()
 	frameworkConfigManager->Set(FrameworkSetting::BlackKeyTargetHeight, 10);	// 14
 	frameworkConfigManager->Set(FrameworkSetting::StartPitch, 24);
 	frameworkConfigManager->Set(FrameworkSetting::FrameRate, 30);
-	frameworkConfigManager->Set(FrameworkSetting::SongTitle, string("FeelSpecial"));
+	frameworkConfigManager->Set(FrameworkSetting::SongTitle, string("Period"));
 
 	dependencies->Cache<FrameworkConfigManager>(frameworkConfigManager);
 	
