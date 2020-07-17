@@ -198,7 +198,7 @@ int GameHost::updateInitialize()
 {
 	LOG(LogLevel::Info) << "GameHost::updateInitialize() : Setting update thread.";
 	// 預設是1000
-	updateThread->SetMaxUpdateHz(1000);
+	updateThread->SetMaxUpdateHz(100);
 	return 0;
 }
 
@@ -223,7 +223,7 @@ int GameHost::inputInitialize()
 {
 	LOG(LogLevel::Info) << "GameHost::inputInitialize() : Setting input thread.";
 	// 預設是1000了
-	inputThread->SetMaxUpdateHz(1000);
+	inputThread->SetMaxUpdateHz(800);
 	return 0;
 }
 
