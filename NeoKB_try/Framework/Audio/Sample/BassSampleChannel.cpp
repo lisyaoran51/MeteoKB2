@@ -33,7 +33,7 @@ int BassSampleChannel::Play()
 			channelID = dynamic_cast<BassSample*>(sample)->CreateChannel();
 			BASS_ChannelSetAttribute(channelID, BASS_ATTRIB_PAN, 0);
 			BASS_ChannelSetAttribute(channelID, BASS_ATTRIB_VOL, volumeCalculated->GetValue());
-
+			/*
 			HFX fxHandle = BASS_ChannelSetFX(channelID, BASS_FX_DX8_REVERB, 0);
 
 			BASS_DX8_REVERB* reverbParameter = new BASS_DX8_REVERB();
@@ -45,6 +45,7 @@ int BassSampleChannel::Play()
 				LOG(LogLevel::Error) << "Lambda_BassSampleChannel::CreateChannel() : set reverb error [" << BASS_ErrorGetCode() << "]";
 				throw runtime_error("Lambda_BassSampleChannel::CreateChannel() : failed to set reverb");
 			}
+			*/
 
 			return 0;
 		}, "Lambda_BassSampleChannel::CreateChannel");
