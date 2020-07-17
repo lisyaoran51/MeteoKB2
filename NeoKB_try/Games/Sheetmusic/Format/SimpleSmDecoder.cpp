@@ -230,7 +230,7 @@ int SimpleSmDecoder::handleNoteControlPoints(Sm<Event>* sm, string & line)
 			);
 
 			if (volume <= 0 || volume > 255)
-				volume = 50.f;// defaultSampleVolume;
+				volume = 30.f;// defaultSampleVolume;
 		}
 		else {
 			InputKey inputKey = InputKey::None;
