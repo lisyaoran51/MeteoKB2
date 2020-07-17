@@ -1916,3 +1916,6 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	要寫自動播譜，但是音量不知道為什麼會變亂碼
 	4 : VirtualPianoController::implementControlInstrument() : play sound [5.47] on [74] with volume [1065287680].
 	另外也找不到sample對應到pitch
+	
+7/17
+	自動播譜寫出來了，琴音如果大於0.5就會破音，之後應該直接條小virtual piano的音量
