@@ -15,43 +15,62 @@ int BassSampleChannel::Play()
 
 	LOG(LogLevel::Debug) << "BassSampleChannel::Play() : add play action.";
 
-	unique_lock<mutex> uLock(pendingActionMutex);
-	pendingActions.Add(this, [=]() {
+	if (!GetIsPlaying()) {
 
-		LOG(LogLevel::Debug) << "BassSampleChannel::Play() : create channel.";
+		unique_lock<mutex> uLock(pendingActionMutex);
+		pendingActions.Add(this, [=]() {
 
-		if (!GetIsLoaded()) {
-			channelID = -1;
+			LOG(LogLevel::Debug) << "BassSampleChannel::Play() : create channel.";
+
+			if (!GetIsLoaded()) {
+				channelID = -1;
+				return 0;
+			}
+
+			if (channelID != -1)
+				return 0;
+
+			channelID = dynamic_cast<BassSample*>(sample)->CreateChannel();
+			BASS_ChannelSetAttribute(channelID, BASS_ATTRIB_PAN, 0);
+			BASS_ChannelSetAttribute(channelID, BASS_ATTRIB_VOL, volumeCalculated->GetValue());
+
+			HFX fxHandle = BASS_ChannelSetFX(channelID, BASS_FX_DX8_REVERB, 0);
+
+			BASS_DX8_REVERB* reverbParameter = new BASS_DX8_REVERB();
+			reverbParameter->fInGain = 0;
+			reverbParameter->fReverbMix = 0;
+			reverbParameter->fReverbTime = 1000;
+			reverbParameter->fHighFreqRTRatio = 0.001;
+			if (!BASS_FXSetParameters(fxHandle, reverbParameter)) {
+				LOG(LogLevel::Error) << "Lambda_BassSampleChannel::CreateChannel() : set reverb error [" << BASS_ErrorGetCode() << "]";
+				throw runtime_error("Lambda_BassSampleChannel::CreateChannel() : failed to set reverb");
+			}
+
 			return 0;
-		}
+		}, "Lambda_BassSampleChannel::CreateChannel");
 
-		channelID = dynamic_cast<BassSample*>(sample)->CreateChannel();
-		BASS_ChannelSetAttribute(channelID, BASS_ATTRIB_PAN, 0);
-		BASS_ChannelSetAttribute(channelID, BASS_ATTRIB_VOL, volumeCalculated->GetValue());
+		pendingActions.Add(this, [=]() {
 
-		HFX fxHandle = BASS_ChannelSetFX(channelID, BASS_FX_DX8_REVERB, 0);
+			LOG(LogLevel::Debug) << "BassSampleChannel::Play() : play channel.";
 
-		BASS_DX8_REVERB* reverbParameter = new BASS_DX8_REVERB();
-		reverbParameter->fInGain = 0;
-		reverbParameter->fReverbMix = 0;
-		reverbParameter->fReverbTime = 1000;
-		reverbParameter->fHighFreqRTRatio = 0.001;
-		if (!BASS_FXSetParameters(fxHandle, reverbParameter)) {
-			LOG(LogLevel::Error) << "Lambda_BassSampleChannel::CreateChannel() : set reverb error [" << BASS_ErrorGetCode() << "]";
-			throw runtime_error("Lambda_BassSampleChannel::CreateChannel() : failed to set reverb");
-		}
+			BASS_ChannelPlay(channelID, false);
 
-		return 0;
-	}, "Lambda_BassSampleChannel::CreateChannel");
+			return 0;
+		}, "Lambda_BassSampleChannel::Play");
 
-	pendingActions.Add(this, [=]() {
+	}
+	else {
+		pendingActions.Add(this, [=]() {
 
-		LOG(LogLevel::Debug) << "BassSampleChannel::Play() : play channel.";
+			LOG(LogLevel::Debug) << "BassSampleChannel::Play() : play channel.";
 
-		BASS_ChannelPlay(channelID, false);
+			BASS_ChannelSetPosition(channelID, 0, BASS_POS_BYTE);
 
-		return 0;
-	}, "Lambda_BassSampleChannel::Play");
+			return 0;
+		}, "Lambda_BassSampleChannel::Replay");
+	}
+
+
 	return 0;
 }
 
