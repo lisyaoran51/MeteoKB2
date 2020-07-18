@@ -34,6 +34,7 @@ int main(int argc,char *argv[]){
 	}
 
 	for (i = 0; i < width; i++) {
+		int j;
 		for (j = 0; j < height; j++) {
 
 			if (matrix[i][height - 1 - j] > 0)
