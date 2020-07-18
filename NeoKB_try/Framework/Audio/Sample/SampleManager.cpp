@@ -30,6 +30,7 @@ SampleChannel * SampleManager::GetSampleChannel(string name)
 
 		string path = resourceStore->GetFilePath(name);
 		if (path != "") {
+
 			sample = sampleCache[name] = new BassSample((char*)path.c_str());
 			sampleChannel = sampleChannelCache[name] = new DualPlaybackBassSampleChannel(sample);
 			AddItem(sampleChannel);
