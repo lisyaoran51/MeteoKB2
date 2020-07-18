@@ -78,8 +78,8 @@ int main(int argc,char *argv[]){
 
 	if(variant == 10){
 		int k;
-		for(k = 0; k < 5; i++){
-			matrix = draw(i);
+		for(k = 0; k < 5; k++){
+			matrix = draw(k);
 			
 			for (i = 0; i < width; i++) {
 				int j;
