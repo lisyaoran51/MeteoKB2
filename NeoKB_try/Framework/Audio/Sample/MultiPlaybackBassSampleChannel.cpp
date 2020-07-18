@@ -24,6 +24,7 @@ int MultiPlaybackBassSampleChannel::PlayOnTrack(int trackNumber)
 
 int MultiPlaybackBassSampleChannel::PlayOnTrack(int trackNumber, double v)
 {
+	LOG(LogLevel::debug) << "MultiPlaybackBassSampleChannel::Play() : play.";
 	if (trackNumber >= trackAmount)
 		throw runtime_error("int MultiPlaybackBassSampleChannel::Play() : track number out of range.");
 
