@@ -29,7 +29,7 @@ int main(int argc,char *argv[]){
 	if(argc > 1)
 		variant = atoi(argv[1]);
 	
-	unsigned char** matrix = draw(0);
+	unsigned char** matrix = draw(variant);
 	char lightMatrixMessage[96];
 	
 	
