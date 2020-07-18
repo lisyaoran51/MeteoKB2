@@ -119,6 +119,14 @@ unsigned char** draw(int variant){
 		
 		break;
 		case 2:
+			matrix[10][6] = 1;
+			matrix[12][15] = 1;
+			matrix[17][8] = 1;
+			matrix[26][15] = 1;
+			matrix[31][11] = 1;
+			matrix[33][7] = 1;
+			matrix[36][3] = 1;
+			matrix[38][0] = 1;
 		
 		break;
 		case 3:
