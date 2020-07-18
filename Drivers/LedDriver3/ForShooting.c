@@ -51,10 +51,6 @@ int main(int argc,char *argv[]){
 			printf("%08x ",lightMatrixMessage[i*6+j]);
 		printf("\n");
 	}
-	
-	buff[1] = 0x34;
-	buff[6] = 0xf0;
-	buff[24] = 0x73;
 
 	printf("==========================\n");
 	printf("START to write FILE\n");
@@ -92,8 +88,42 @@ unsigned char** draw(int variant){
 		for(j = 0; j < 16; j++)
 			matrix[i][j] = 0;
 	}
-	matrix[12][3] = 1;
-	matrix[10][6] = 1;
+	
+	switch(variant){
+		case 0:
+			matrix[7][15] = 1;
+			matrix[14][10] = 1;
+			matrix[19][5] = 1;
+			matrix[31][14] = 1;
+			matrix[33][12] = 1;
+			matrix[35][10] = 1;
+			matrix[36][8] = 1;
+			matrix[38][6] = 1;
+			matrix[43][16] = 1;
+		
+		break;
+		case 1:
+		
+		break;
+		case 2:
+		
+		break;
+		case 3:
+		
+		break;
+		case 4:
+		
+		break;
+		case 5:
+		
+		break;
+		case 6:
+		
+		break;
+		
+	}
+	
+	
 	
 	return matrix;
 }
