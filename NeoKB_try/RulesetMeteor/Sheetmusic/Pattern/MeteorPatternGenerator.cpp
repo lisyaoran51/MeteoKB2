@@ -138,6 +138,7 @@ int MeteorPatternGenerator::CreateOtherEvent(vector<Event*>* es)
 	 /*
 	  *	一開始先檢查這個譜有沒有小節資訊
 	  */
+	LOG(LogLevel::Fine) << "MeteorPatternGenerator::CreateOtherEvent() : checking if this sheetmusic has section index";
 	bool hasSectionIndex = true;
 	for (int i = 0; i < es->size(); i++) {
 		if (es->at(i)->Cast<PlayableControlPoint>()->GetSectionIndex() < 0)
@@ -148,10 +149,13 @@ int MeteorPatternGenerator::CreateOtherEvent(vector<Event*>* es)
 		}
 	}
 
+	LOG(LogLevel::Fine) << "MeteorPatternGenerator::CreateOtherEvent() : sorting the events.";
 	// 排序
 	sort(es->begin(), es->end(),
 		[](Event* const& a, Event* const& b) { return a->GetStartTime() < b->GetStartTime(); });
 
+
+	LOG(LogLevel::Fine) << "MeteorPatternGenerator::CreateOtherEvent() : start insert repeat event.";
 	vector<float> sectionEndTime;
 
 	if (hasSectionIndex) {	// 譜裡面有小節資訊
