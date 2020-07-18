@@ -6,6 +6,7 @@
 #include<fcntl.h>
 #include<time.h>
 #include <signal.h>
+#include <syswait.h>
 
 // gcc ForShooting.c -o ForShooting
 
@@ -75,6 +76,41 @@ int main(int argc,char *argv[]){
 	printf("==========================\n");
 
 
+
+	if(variant == 10){
+		int k;
+		for(k = 0; k < 5; i++){
+			matrix = draw(i);
+			
+			for (i = 0; i < width; i++) {
+				int j;
+				for (j = 0; j < height; j++) {
+
+					if (matrix[i][height - 1 - j] > 0)
+						lightMatrixMessage[j * 6 + i / 8] |= (0x01 << (i % 8));
+						
+				}
+			}
+			
+			int fd = open("/dev/meteo_lightboard_v1", O_WRONLY /*| O_NONBLOCK */);
+			if(fd < 0){
+				printf("can't open file meteo_lightboard_v1.\n");
+			}else{
+				res = write(fd,lightMatrixMessage,96);
+				if(res < 0){
+						perror("test:");
+				}else{
+					printf("### write function return: %d\n",res);
+				}
+			}
+			close(fd);
+			
+			sleep(5);
+			if(k == 4)
+				k = -1;
+		
+		}
+	}
 
 	return 0;
 }
@@ -147,8 +183,8 @@ unsigned char** draw(int variant){
 			matrix[17][12] = 1;
 			matrix[24][12] = 1;
 			matrix[26][2] = 1;
-			matrix[29][7] = 1;
-			matrix[29][15] = 1;
+			matrix[30][7] = 1;
+			matrix[30][15] = 1;
 			matrix[31][12] = 1;
 			matrix[33][2] = 1;
 		
