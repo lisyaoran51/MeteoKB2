@@ -102,9 +102,13 @@ int main(int argc,char *argv[]){
 					printf("### write function return: %d\n",res);
 				}
 			}
-			close(fd);
 			
 			sleep(5);
+			
+			for(i = 0; i < 96; i++)
+				lightMatrixMessage[i] = 0;
+			res = write(fd,lightMatrixMessage,96);
+			close(fd);
 			if(k == 4)
 				k = -1;
 		
