@@ -141,8 +141,12 @@ int MeteorPatternGenerator::CreateOtherEvent(vector<Event*>* es)
 	LOG(LogLevel::Fine) << "MeteorPatternGenerator::CreateOtherEvent() : checking if this sheetmusic has section index";
 	bool hasSectionIndex = true;
 	for (int i = 0; i < es->size(); i++) {
+		if (es->at(i)->Cast<PlayableControlPoint>() == nullptr)
+			continue;
+
 		if (es->at(i)->Cast<PlayableControlPoint>()->GetSectionIndex() < 0)
 			hasSectionIndex = false;
+
 		if (!hasSectionIndex && es->at(i)->Cast<PlayableControlPoint>()->GetSectionIndex() >= 0) {
 			LOG(LogLevel::Error) << "MeteorPatternGenerator::CreateOtherEvent() : sheetmusic section index wrong at time [" << es->at(i - 1)->Cast<PlayableControlPoint>()->GetStartTime() << "]";
 			throw runtime_error("MeteorPatternGenerator::CreateOtherEvent() : sheetmusic section index wrong.");
