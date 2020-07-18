@@ -24,6 +24,7 @@ int MusicGameModifier::ApplyToEventProcessorFilter(EventProcessorFilter * eventP
 
 	eventProcessorFilter->AddFilterCallback(bind(&MusicGameModifier::filterRepeatPracticeEventProcessors, this, placeholders::_1));
 
+
 	eventProcessorFilter->AddFilterCallback(bind(&MusicGameModifier::filterEruptEffects, this, placeholders::_1));
 
 	return 0;
