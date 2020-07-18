@@ -6,7 +6,6 @@
 #include<fcntl.h>
 #include<time.h>
 #include <signal.h>
-#include <syswait.h>
 
 // gcc ForShooting.c -o ForShooting
 
