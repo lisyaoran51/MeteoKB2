@@ -86,6 +86,7 @@ unsigned char** draw(int variant){
 			matrix[i][j] = 0;
 	}
 	matrix[12][3] = 1;
+	matrix[10][6] = 1;
 	
 	return matrix;
 }
