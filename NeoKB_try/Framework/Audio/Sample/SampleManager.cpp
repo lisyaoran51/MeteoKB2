@@ -32,7 +32,7 @@ SampleChannel * SampleManager::GetSampleChannel(string name)
 		if (path != "") {
 
 			sample = sampleCache[name] = new BassSample((char*)path.c_str());
-			sampleChannel = sampleChannelCache[name] = new DualPlaybackBassSampleChannel(sample);
+			sampleChannel = sampleChannelCache[name] = new BassSampleChannel(sample);
 			AddItem(sampleChannel);
 		}
 		else {
