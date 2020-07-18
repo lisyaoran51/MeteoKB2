@@ -33,7 +33,7 @@ int MeteorEventProcessorMaster::OnKeyDown(pair<MeteorAction, int> action)
 
 	eventProcessorPeriods->GetItemsContainPeriods(make_pair<float, float>(currentTime - visibleTimeRange, currentTime + visibleTimeRange), &eventProcessors);
 
-	//eventProcessorFilter->Filter(&eventProcessors);
+	eventProcessorFilter->Filter(&eventProcessors);
 
 	NoteControlPointHitObject* receivedHitObject = nullptr;
 
@@ -163,7 +163,7 @@ int MeteorEventProcessorMaster::update()
 	// 拿已經結束的event
 	eventProcessorPeriods->GetItemsContainPeriods(make_pair<float, float>(currentTime - visibleTimeRange, (float)currentTime), &eventProcessors);
 	LOG(LogLevel::Depricated) << "MeteorEventProcessorMaster::update() : filter event processors by [" << eventProcessorFilter << "].";
-	//eventProcessorFilter->Filter(&eventProcessors);
+	eventProcessorFilter->Filter(&eventProcessors);
 
 	for (int i = 0; i < eventProcessors.size(); i++) {
 		HitObject* hObject = dynamic_cast<HitObject*>(eventProcessors[i]);
