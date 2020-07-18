@@ -24,6 +24,11 @@ int main(int argc,char *argv[]){
 		buff[i] = 0x0;
 	}
 	
+	int variant = 0;
+	
+	if(argc > 1)
+		variant = atoi(argv[1]);
+	
 	unsigned char** matrix = draw(0);
 	char lightMatrixMessage[96];
 	
@@ -103,6 +108,14 @@ unsigned char** draw(int variant){
 		
 		break;
 		case 1:
+			matrix[12][0] = 1;
+			matrix[14][14] = 1;
+			matrix[19][7] = 1;
+			matrix[24][2] = 1;
+			matrix[24][8] = 1;
+			matrix[26][0] = 1;
+			matrix[26][6] = 1;
+			matrix[31][14] = 1;
 		
 		break;
 		case 2:
