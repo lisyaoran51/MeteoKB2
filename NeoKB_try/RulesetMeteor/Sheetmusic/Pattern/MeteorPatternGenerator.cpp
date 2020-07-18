@@ -148,6 +148,9 @@ int MeteorPatternGenerator::CreateOtherEvent(vector<Event*>* es)
 		}
 	}
 
+	// ±Æ§Ç
+	sort(es->begin(), es->end(),
+		[](Event* const& a, Event* const& b) { return a->GetStartTime() < b->GetStartTime(); });
 
 	vector<float> sectionEndTime;
 

@@ -58,13 +58,7 @@ Sm<Event>* SmConverter::Convert(Sm<Event>* s)
 	/* 這一段之後要擺到pot processor裡面，已後converter和post processor做的工作都delegate給pattern generator和其他子 */
 	/* 元件做 */
 	LOG(LogLevel::Finer) << "Sm<Event>* SmConverter::Convert(Sm<Event>*) : Creating other events ...";
-	patternGenerator->CreateOtherEvent(tempEvents);
-	
-	for (int j = 0; j < tempEvents->size(); j++) {
-		newEvents->push_back(tempEvents->at(j));
-	}
-
-	tempEvents->clear();
+	patternGenerator->CreateOtherEvent(newEvents);
 
 	patternGenerator->PostProcess();
 
