@@ -13,7 +13,7 @@ DualPlaybackBassSampleChannel::DualPlaybackBassSampleChannel(Sample * s) : Sampl
 
 int DualPlaybackBassSampleChannel::Play()
 {
-	//LOG(LogLevel::Debug) << "BassSampleChannel::Play() : add play action.";
+	LOG(LogLevel::Debug) << "DualPlaybackBassSampleChannel::Play() : add play action.";
 	
 	int newPlayback = 0;
 
@@ -22,6 +22,7 @@ int DualPlaybackBassSampleChannel::Play()
 	else
 		newPlayback = 0;
 
+	BASS_ChannelPause(channelID[newPlayback]);
 	BASS_ChannelSetAttribute(channelID[newPlayback], BASS_ATTRIB_VOL, volumeCalculated->GetValue());
 	BASS_ChannelPlay(channelID[newPlayback], false);
 
