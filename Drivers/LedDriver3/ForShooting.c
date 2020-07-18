@@ -41,8 +41,14 @@ int main(int argc,char *argv[]){
 
 			if (matrix[i][height - 1 - j] > 0)
 				lightMatrixMessage[j * 6 + i / 8] |= (0x01 << (i % 8));
-				printf(" %d",matrix[i][height - 1 - j]);
+				
 		}
+	}
+	
+	for(i = 0; i < 16; i++){
+		int j;
+		for(j = 0; j < 6; j++)
+			printf("%08x ",lightMatrixMessage[i*6+j]);
 		printf("\n");
 	}
 	
