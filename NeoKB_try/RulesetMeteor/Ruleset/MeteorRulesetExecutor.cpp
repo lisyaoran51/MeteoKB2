@@ -24,6 +24,7 @@
 #include "../Scheduler/Event/InstrumentEvents/PianoEventProcessor.h"
 #include "../Scheduler/Event/InstrumentEvents/PianoSoundEventProcessor.h"
 #include "../Scheduler/Event/PlayfieldEvents/OctaveShiftEventProcessor.h"
+#include "../Scheduler/Event/TimeEvents/RepeatPracticeEventProcessor.h"
 
 
 
@@ -45,6 +46,7 @@ using namespace Meteor::Schedulers::Events::ControlPoints;
 using namespace Meteor::Schedulers::Events::IoEvents;
 using namespace Meteor::Schedulers::Events::InstrumentEvents;
 using namespace Meteor::Schedulers::Events::PlayfieldEvents;
+using namespace Meteor::Schedulers::Events::TimeEvents;
 
 
 
@@ -229,6 +231,10 @@ EventProcessor<Event>* MeteorRulesetExecutor::getEventProcessor(Event * e)
 	else if (processorType == "SustainPedalLightRing") {
 		LOG(LogLevel::Depricated) << "MeteorRulesetExecutor::getEventProcessor : getting event SustainPedalLightRing at [" << e->GetStartTime() << "]";
 		return (new SustainPedalLightRing())->RegisterEvent(e);
+	}
+	else if (processorType == "RepeatPracticeEventProcessor") {
+		LOG(LogLevel::Depricated) << "MeteorRulesetExecutor::getEventProcessor : getting event RepeatPracticeEventProcessor at [" << e->GetStartTime() << "]";
+		return (new RepeatPracticeEventProcessor())->RegisterEvent(e);
 	}
 	else if (processorType == "MeteorInputKeyControlPointHitObject") {
 		LOG(LogLevel::Depricated) << "MeteorRulesetExecutor::getEventProcessor : getting event MeteorInputKeyControlPointHitObject at [" << e->GetStartTime() << "]";
