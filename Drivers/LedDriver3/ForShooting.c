@@ -7,6 +7,8 @@
 #include<time.h>
 #include <signal.h>
 
+// gcc ForShooting.c -o ForShooting
+
 
 unsigned char** draw(int variant);
  
@@ -54,7 +56,7 @@ int main(int argc,char *argv[]){
 	if(fd < 0){
 		printf("can't open file meteo_lightboard_v1.\n");
 	}else{
-		res = write(fd,buff,96);
+		res = write(fd,lightMatrixMessage,96);
 		if(res < 0){
 		        perror("test:");
 		}else{
@@ -83,6 +85,7 @@ unsigned char** draw(int variant){
 		for(j = 0; j < 16; j++)
 			matrix[i][j] = 0;
 	}
+	matrix[12][3] = 1;
 	
 	return matrix;
 }
