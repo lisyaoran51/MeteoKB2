@@ -24,6 +24,7 @@ int DualPlaybackBassSampleChannel::Play()
 
 	BASS_ChannelPause(channelID[newPlayback]);
 	BASS_ChannelSetAttribute(channelID[newPlayback], BASS_ATTRIB_VOL, volumeCalculated->GetValue());
+	BASS_ChannelSetPosition(channelID[newPlayback], 0, BASS_POS_BYTE);
 	BASS_ChannelPlay(channelID[newPlayback], false);
 
 	if (BASS_ChannelIsActive(channelID[tempPlayingPlayback]) == BASS_ACTIVE_PLAYING) {
