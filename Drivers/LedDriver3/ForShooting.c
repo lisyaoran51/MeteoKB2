@@ -130,9 +130,27 @@ unsigned char** draw(int variant){
 		
 		break;
 		case 3:
+			matrix[11][0] = 1;
+			matrix[16][6] = 1;
+			matrix[19][12] = 1;
+			matrix[26][12] = 1;
+			matrix[28][6] = 1;
+			matrix[29][0] = 1;
+			matrix[38][12] = 1;
+			matrix[40][6] = 1;
+			matrix[41][0] = 1;
 		
 		break;
 		case 4:
+			matrix[7][6] = 1;
+			matrix[12][12] = 1;
+			matrix[17][12] = 1;
+			matrix[24][12] = 1;
+			matrix[26][2] = 1;
+			matrix[29][7] = 1;
+			matrix[29][15] = 1;
+			matrix[31][12] = 1;
+			matrix[33][2] = 1;
 		
 		break;
 		case 5:
