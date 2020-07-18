@@ -8,7 +8,7 @@
 #include <signal.h>
 
 
-
+unsigned char** draw(int variant);
  
 int main(int argc,char *argv[]){
 
