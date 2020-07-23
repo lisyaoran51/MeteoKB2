@@ -176,10 +176,10 @@ int MeteorPatternGenerator::CreateOtherEvent(vector<Event*>* es)
 		for (int i = 0; i < es->size(); i++) {
 			if (es->at(i)->Cast<PlayableControlPoint>()) {	// section index其實不該擺在playable control point，應該要擺在她的上一層，因為不識只有playable control point會有section
 
-				if(es->at(i)->Cast<NoteControlPoint>())
-					LOG(LogLevel::Debug) << "MeteorPatternGenerator::CreateOtherEvent() : counting [" << int(es->at(i)->Cast<NoteControlPoint>()->GetPitch()) << "] time [" << es->at(i)->GetStartTime() << "] section [" << es->at(i)->Cast<PlayableControlPoint>()->GetSectionIndex() << "] .";
-				if (es->at(i)->Cast<InputKeyControlPoint>())
-					LOG(LogLevel::Debug) << "MeteorPatternGenerator::CreateOtherEvent() : counting [Pedal] time [" << es->at(i)->GetStartTime() << "] section [" << es->at(i)->Cast<PlayableControlPoint>()->GetSectionIndex() << "] .";
+				//if(es->at(i)->Cast<NoteControlPoint>())
+				//	LOG(LogLevel::Debug) << "MeteorPatternGenerator::CreateOtherEvent() : counting [" << int(es->at(i)->Cast<NoteControlPoint>()->GetPitch()) << "] time [" << es->at(i)->GetStartTime() << "] section [" << es->at(i)->Cast<PlayableControlPoint>()->GetSectionIndex() << "] .";
+				//if (es->at(i)->Cast<InputKeyControlPoint>())
+				//	LOG(LogLevel::Debug) << "MeteorPatternGenerator::CreateOtherEvent() : counting [Pedal] time [" << es->at(i)->GetStartTime() << "] section [" << es->at(i)->Cast<PlayableControlPoint>()->GetSectionIndex() << "] .";
 
 
 				if (es->at(i)->Cast<PlayableControlPoint>()->GetSectionIndex() == tempSection + 1) {
