@@ -182,7 +182,7 @@ int MeteorPatternGenerator::CreateOtherEvent(vector<Event*>* es)
 				}
 				else if (es->at(i)->Cast<PlayableControlPoint>()->GetSectionIndex() < tempSection) {
 					// 沒有照時間排序，要不然就是譜有錯
-					LOG(LogLevel::Error) << "MeteorPatternGenerator::CreateOtherEvent() : events not sorted by time.";
+					LOG(LogLevel::Error) << "MeteorPatternGenerator::CreateOtherEvent() : events not sorted by time. temp Section:[" << tempSection << "], error event[" << es->at(i)->GetTypeName() << "] [" << es->at(i)->GetStartTime() << "] ,section [" << es->at(i)->Cast<PlayableControlPoint>()->GetSectionIndex() << "].";
 					throw runtime_error("MeteorPatternGenerator::CreateOtherEvent() : events not sorted by time.");
 				}
 			}
