@@ -3,6 +3,7 @@ simple file format v0
 [Metadata]
 Title:Mojito
 [Difficulty]
+Speed:24
 [NoteControlPoints]
 52,1.3043475,-1,64,0,3,0
 57,1.565217,-1,65,0,3,0
