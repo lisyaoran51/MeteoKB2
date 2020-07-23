@@ -4,11 +4,13 @@
 #include "../../../RulesetMeteor/Ruleset/Modifiers/AutoPedalModifier.h"
 #include "../../../RulesetMeteor/Ruleset/Modifiers/MusicGameModifier.h"
 #include "../../../RulesetMeteor/Ruleset/Modifiers/RepeatPracticeModifier.h"
+#include "../../../RulesetMeteor/Ruleset/Modifiers/MeteorDifficultyModifier.h"
 
 
 using namespace Games::Scenes::Select;
 using namespace Games;
 using namespace Meteor::Rulesets::Modifiers;
+
 
 
 SongSelect::SongSelect(): RegisterType("SongSelect")
@@ -96,6 +98,7 @@ int SongSelect::selectionChanged(SmInfo * sheetmusicInfo)
 		// 這邊先加mod，之後要拿掉，擺在on select(on command)
 		workingSm.GetValue()->GetModifiers()->GetValue()->push_back(new AutoPedalModifier());
 		workingSm.GetValue()->GetModifiers()->GetValue()->push_back(new MusicGameModifier());
+		workingSm.GetValue()->GetModifiers()->GetValue()->push_back(new MeteorDifficultyModifier(SmDifficultyDifficulty::Easy));
 		//workingSm.GetValue()->GetModifiers()->GetValue()->push_back(new RepeatPracticeModifier(1, 4));
 	}
 
