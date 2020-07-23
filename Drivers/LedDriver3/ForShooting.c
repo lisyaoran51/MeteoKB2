@@ -78,7 +78,7 @@ int main(int argc,char *argv[]){
 
 	if(variant == 10){
 		int k;
-		for(k = 0; k < 5; k++){
+		for(k = 0; k < 6; k++){
 			matrix = draw(k);
 			
 			for (i = 0; i < width; i++) {
@@ -109,7 +109,7 @@ int main(int argc,char *argv[]){
 				lightMatrixMessage[i] = 0;
 			res = write(fd,lightMatrixMessage,96);
 			close(fd);
-			if(k == 4)
+			if(k == 5)
 				k = -1;
 		
 		}
@@ -193,6 +193,15 @@ unsigned char** draw(int variant){
 		
 		break;
 		case 5:
+			matrix[9][0] = 1;
+			matrix[33][0] = 1;
+			matrix[16][2] = 1;
+			matrix[21][4] = 1;
+			matrix[24][6] = 1;
+			matrix[28][8] = 1;
+			matrix[33][10] = 1;
+			matrix[35][12] = 1;
+			matrix[4][12] = 1;
 		
 		break;
 		case 6:

@@ -1900,7 +1900,7 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	repeat prctice沒有轉出time controller event
 	
 7/15
-	電子琴城市勝：storage要分兩半、藍芽、AB段音效、換音效、播譜(1)、mcu程式(2)、降低延遲(3)、下載
+	電子琴城市勝：storage要分兩半、藍芽、AB段音效、換音效、播譜(1)、mcu程式(2)、降低延遲(3)、下載、daemon、wifi、replay紀錄
 	
 	延遲時間:
 	
@@ -1919,3 +1919,32 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	
 7/17
 	自動播譜寫出來了，琴音如果大於0.5就會破音，之後應該直接條小virtual piano的音量
+	
+	解決延遲的方法就是要把播放直接寫再input manager李，不然從input->update->audio，延遲就會很嚴重
+	
+7/18
+	突然出現的雜音是因為一個音播放到一半突然斷掉，要解決的話就要讓他fadeout
+	
+	最後用dual playback解決了
+	
+	永久關閉raspbian的虛擬記憶體(swap memory):
+	https://paulcourt.co.uk/article/pi-swap
+	
+	sheetmusic converter裡面create other event寫錯了，temp event是空的，難怪沒有辦法生出repeat practice event
+	
+	按鍵按下是在input thread，按完以後會直接跳到audio thread，所以部會經過update thread，速度可以更快
+	
+7/20
+	storage室友寫入的功能的，只要用get stream，名稱擺上路徑，就可以寫入檔案
+	下載新譜檔的時候，下載器在success時會把data丟進beatmap manager的import裡，import會去檢查storage裡面有沒有這個檔案，沒有的話就會叫storage的get stream寫入這個Data
+	然後名稱會從剛建立的file info裡面拿
+	
+	要先把我們城市裡的ifstream改成fstream，才能同時寫入和讀取
+	
+	replay看要寫在score processor裡還是重新寫一個replay recorder
+	完全找不到osu的replay寫在哪，他應該會把replay寫入一個類似beatmap的黨哩，之後要replay時再讀
+	真的沒辦法的話我們要自己寫一個replay recorder，在遊戲結束時，自動把錄到的內容寫入一個檔案中，然後再把檔案傳到手機
+	
+	再player的oncomplete會push result，進入分數畫面結束遊戲。on complete註冊在score processor的all judge下面，每次計算分數時都會檢查一次是不適all judged，是的話就執行all judge
+	
+	執行完all judge，就會進入result，按下back button就會exit to parent scene，這時因為player的Available for resume是false，所以就會回上一層，跳到song select去

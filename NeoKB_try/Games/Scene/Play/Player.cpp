@@ -155,5 +155,13 @@ Player::~Player()
 
 int Player::onCompletion()
 {
+
+	GetScheduler()->AddDelayedTask([] {
+		
+		
+		return 0;
+	}, 3000);
+
+
 	return 0;
 }

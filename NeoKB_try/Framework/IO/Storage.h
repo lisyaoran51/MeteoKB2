@@ -27,13 +27,13 @@ namespace IO{
 		/// 把輸入路徑和strorage的路徑串在一起回傳，只能輸入輸入資料夾路徑
 		/// 要記得開頭不能有/，會出錯
 		/// </summary>
-		string GetUsableDirectoryPathFor(string directoryPath, bool createIfNotExist = false);
+		virtual string GetUsableDirectoryPathFor(string directoryPath, bool createIfNotExist = false);
 
 		/// <summary>
 		/// 把輸入路徑和strorage的路徑串在一起回傳，只能輸入輸入檔案路徑
 		/// 要記得開頭不能有/，會出錯
 		/// </summary>
-		string GetUsableFilePathFor(string directoryPath, bool createIfNotExist = false);
+		virtual string GetUsableFilePathFor(string directoryPath, bool createIfNotExist = false);
 
 		/// <summary>
 		/// 查看有沒有這個檔案

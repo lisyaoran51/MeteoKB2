@@ -160,6 +160,8 @@ SmInfo * SmManager::importToStorage(FileStore * fStore, SheetmusicStore * sStore
 		};
 
 		fStore->AddFile(sm->GetSmInfo()->fileInfo);
+
+		// 要在這邊加入如果還沒這個普，就寫入新譜
 		
 
 		// 寫到這邊 不知道怎麼建ruleset---> 在建立sm  manager時手動把ruleset info加入

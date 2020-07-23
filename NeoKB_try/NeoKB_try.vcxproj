@@ -341,10 +341,13 @@
     <ClInclude Include="Games\Ruleset\Modifiers\InstrumentModifier.h" />
     <ClInclude Include="Games\Ruleset\Modifiers\RulesetExecutorModifier.h" />
     <ClInclude Include="Games\Ruleset\Modifiers\Modifier.h" />
+    <ClInclude Include="Games\Ruleset\Replays\Replay.h" />
+    <ClInclude Include="Games\Ruleset\Replays\ReplayFrame.h" />
     <ClInclude Include="Games\Ruleset\Ruleset.h" />
     <ClInclude Include="Games\Ruleset\RulesetExecutor.h" />
     <ClInclude Include="Games\Ruleset\RulesetInfo.h" />
     <ClInclude Include="Games\Ruleset\RulesetStore.h" />
+    <ClInclude Include="Games\Ruleset\Scoring\Score.h" />
     <ClInclude Include="Games\Ruleset\Scoring\ScoreProcessor.h" />
     <ClInclude Include="Games\Scene\Interlude\Intro.h" />
     <ClInclude Include="Games\Scene\Loader.h" />
@@ -356,6 +359,7 @@
     <ClInclude Include="Games\Scene\Play\Player.h" />
     <ClInclude Include="Games\Scene\Play\PlayerLoader.h" />
     <ClInclude Include="Games\Scene\Play\Playfield.h" />
+    <ClInclude Include="Games\Scene\Results\Result.h" />
     <ClInclude Include="Games\Scene\Select\MainMenu.h" />
     <ClInclude Include="Games\Scene\Select\PlaySongSelect.h" />
     <ClInclude Include="Games\Scene\Select\SongSelect.h" />
@@ -504,6 +508,7 @@
     <ClInclude Include="Framework\Timing\ThrottledFramedClock.h" />
     <ClInclude Include="Games\UI\SheetmusicSelectPanel.h" />
     <ClInclude Include="Games\UI\VolumeController.h" />
+    <ClInclude Include="Games\Users\User.h" />
     <ClInclude Include="Instruments\Audio\SoundBinding.h" />
     <ClInclude Include="Instruments\CompositeMeteoPiano.h" />
     <ClInclude Include="Instruments\HasPitch.h" />

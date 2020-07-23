@@ -616,6 +616,15 @@
     <Filter Include="來源檔案\RulesetMeteor\Schedulers\Events\TimeEvents\TimeControllerControllers">
       <UniqueIdentifier>{5cf9ecba-238f-4cde-9aea-0ea3c984091f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="標頭檔\Games\Users">
+      <UniqueIdentifier>{61c7c12c-9f5b-43f7-9d93-4e78f952b325}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Games\Ruleset\Replays">
+      <UniqueIdentifier>{3f7bff64-c2ba-4386-ad9e-810c177fe48b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Games\Scene\Results">
+      <UniqueIdentifier>{c25dfe6b-81cf-4ac8-af70-6affd41f8652}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Games\Graphic\Renderer\renderer.cpp">
@@ -2283,6 +2292,21 @@
     </ClInclude>
     <ClInclude Include="Framework\Audio\Sample\DualPlaybackBassSampleChannel.h">
       <Filter>標頭檔\Framework\Audio\Sample</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Ruleset\Scoring\Score.h">
+      <Filter>標頭檔\Games\Ruleset\Scoring</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Users\User.h">
+      <Filter>標頭檔\Games\Users</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Ruleset\Replays\Replay.h">
+      <Filter>標頭檔\Games\Ruleset\Replays</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Ruleset\Replays\ReplayFrame.h">
+      <Filter>標頭檔\Games\Ruleset\Replays</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Scene\Results\Result.h">
+      <Filter>標頭檔\Games\Scene\Results</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
