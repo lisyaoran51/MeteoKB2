@@ -156,7 +156,14 @@ int MeteorPatternGenerator::CreateOtherEvent(vector<Event*>* es)
 	LOG(LogLevel::Fine) << "MeteorPatternGenerator::CreateOtherEvent() : sorting the events.";
 	// ±Æ§Ç
 	sort(es->begin(), es->end(),
-		[](Event* const& a, Event* const& b) { return a->GetStartTime() < b->GetStartTime(); });
+		[](Event* const& a, Event* const& b) { 
+		
+		if (a->GetStartTime() == b->GetStartTime())
+			if(a->Cast<PlayableControlPoint>() && b->Cast<PlayableControlPoint>())
+			return a->Cast<PlayableControlPoint>()->GetSectionIndex() < b->Cast<PlayableControlPoint>()->GetSectionIndex();
+		
+		return a->GetStartTime() < b->GetStartTime(); 
+	});
 
 
 	LOG(LogLevel::Fine) << "MeteorPatternGenerator::CreateOtherEvent() : start insert repeat event.";
