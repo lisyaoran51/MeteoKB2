@@ -4,9 +4,11 @@
 
 #include <vector>
 #include "ReplayFrame.h"
+#include "../../Users/User.h"
 
 
 using namespace std;
+using namespace Games::Users;
 
 
 namespace Games {
