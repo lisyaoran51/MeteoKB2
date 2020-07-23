@@ -15,7 +15,7 @@ Framework/Timing:Framework/Timing/SpeedAdjusters:\
 \
 Games:Games/Configurations:Games/Input:\
 Games/Ruleset:Games/Ruleset/Modifiers:Games/Ruleset/Judgements:Games/Ruleset/Scoring:\
-Games/Scene:Games/Scene/Interlude:Games/Scene/Play:Games/Scene/Play/Hud:Games/Scene/Select:\
+Games/Scene:Games/Scene/Interlude:Games/Scene/Play:Games/Scene/Play/Hud:Games/Scene/Select:Games/Scene/Results:\
 Games/Scheduler/Event:Games/Scheduler/Event/ControlPoints:Games/Scheduler/Event/Effect:\
 Games/Scheduler/Event/Effect/Algorithm:Games/Scheduler/Event/GameEvents:Games/Scheduler/Event/SystemEvents:\
 Games/Scheduler/Event/IoEvents:Games/Scheduler/Event/IoEvents/IoCommunicators:\
@@ -24,6 +24,7 @@ Games/Scheduler/Event/PlayfieldEvents:Games/Scheduler/Event/PlayfieldEvents/Play
 Games/Scheduler/Event/TimeEvents:Games/Scheduler/Event/TimeEvents/TimeControllerControllers:\
 Games/Sheetmusic:Games/Sheetmusic/Format:Games/Sheetmusic/Format/Parser:Games/Sheetmusic/IO:Games/Sheetmusic/Pattern:\
 Games/UI:\
+Games/Users:\
 \
 Instruments:Instruments/Audio:Instruments/Input:\
 \
@@ -64,7 +65,7 @@ INCLUDE = -IFramwork -IFramework/Allocation -IFramework/Allocation/Hierachal -IF
 \
 -IGames -IGames/Configurations -IGames/Input \
 -IGames/Ruleset -IGames/Ruleset/Modifiers -IGames/Ruleset/Judgements -IGames/Ruleset/Scoring \
--IGames/Scene -IGames/Scene/Interlude -IGames/Scene/Play -IGames/Scene/Play/Hud -IGames/Scene/Select \
+-IGames/Scene -IGames/Scene/Interlude -IGames/Scene/Play -IGames/Scene/Play/Hud -IGames/Scene/Select -IGames/Scene/Results \
 -IGames/Scheduler/Event -IGames/Scheduler/Event/ControlPoints -IGames/Scheduler/Event/Effect \
 -IGames/Scheduler/Event/Effect/Algorithm -IGames/Scheduler/Event/GameEvents -IGames/Scheduler/Event/SystemEvents \
 -IGames/Scheduler/Event/IoEvents -IGames/Scheduler/Event/IoEvents/IoCommunicators \
@@ -73,6 +74,7 @@ INCLUDE = -IFramwork -IFramework/Allocation -IFramework/Allocation/Hierachal -IF
 -IGames/Scheduler/Event/TimeEvents -IGames/Scheduler/Event/TimeEvents/TimeControllerControllers \
 -IGames/Sheetmusic -IGames/Sheetmusic/Format -IGames/Sheetmusic/Format/Parser -IGames/Sheetmusic/IO -IGames/Sheetmusic/Pattern \
 -IGames/UI \
+-IGames/Users \
 \
 -IInstruments -IInstruments/Audio -IInstruments/Input \
 \
@@ -144,7 +146,7 @@ MeteoConfigManager.o \
 Ruleset.o RulesetInfo.o RulesetStore.o Judgement.o HasHitWindow.o HitWindow.o \
 Modifier.o DifficultyModifier.o EventProcessorFilterModifier.o InstrumentModifier.o TimeControllerModifier.o \
 ScoreProcessor.o \
-Loader.o MeteoScene.o Intro.o Player.o PlayerLoader.o Playfield.o \
+Loader.o MeteoScene.o Intro.o Player.o PlayerLoader.o Playfield.o Result.o \
 HudDisplay.o JudgementFlasher.o SongProgress.o \
 MainMenu.o PlaySongSelect.o SongSelect.o \
 Event.o EventProcessorMaster.o EventProcessorFilter.o HitObject.o \

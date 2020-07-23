@@ -85,6 +85,7 @@
     <ClCompile Include="Games\Scene\Play\PlayerLoader.cpp" />
     <ClCompile Include="Games\Scene\Play\Playfield.cpp" />
     <ClCompile Include="Games\Scene\Loader.cpp" />
+    <ClCompile Include="Games\Scene\Results\Result.cpp" />
     <ClCompile Include="Games\Scene\Select\MainMenu.cpp" />
     <ClCompile Include="Games\Scene\Select\PlaySongSelect.cpp" />
     <ClCompile Include="Games\Scene\Select\SongSelect.cpp" />

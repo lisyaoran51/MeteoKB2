@@ -2,6 +2,7 @@
 
 #include <experimental/filesystem>
 #include <stdexcept>
+#include "../../Util/Log.h"
 
 /*
  * filesystem用法 (跟boost一樣)
@@ -16,6 +17,7 @@
 using namespace Framework::IO;
 using namespace std::literals::string_literals;
 using namespace std::experimental::filesystem;
+using namespace Util;
 
 
 
@@ -87,6 +89,8 @@ vector<string>* PlatformStorage::GetDirectories(string directoryPath)
 
 	path usablePath = GetUsableDirectoryPathFor(directoryPath);
 	string usablePathInString = usablePath.string();
+
+	LOG(LogLevel::Debug) << "PlatformStorage::GetDirectories : get [" << usablePathInString << "] for child paths.";
 
 	/* 這邊把子資料夾找出來，directory_iterator只會搜尋下一層資料夾，不會循環搜尋到最底部 */
 	for (auto& p : directory_iterator(usablePath)) {

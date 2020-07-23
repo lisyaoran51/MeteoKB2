@@ -625,6 +625,9 @@
     <Filter Include="標頭檔\Games\Scene\Results">
       <UniqueIdentifier>{c25dfe6b-81cf-4ac8-af70-6affd41f8652}</UniqueIdentifier>
     </Filter>
+    <Filter Include="來源檔案\Games\Scene\Results">
+      <UniqueIdentifier>{66331d1d-fae6-4048-bdee-3ee12838ea18}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Games\Graphic\Renderer\renderer.cpp">
@@ -1355,6 +1358,9 @@
     </ClCompile>
     <ClCompile Include="Framework\Audio\Sample\DualPlaybackBassSampleChannel.cpp">
       <Filter>來源檔案\Framework\Audio\Sample</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\Scene\Results\Result.cpp">
+      <Filter>來源檔案\Games\Scene\Results</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
