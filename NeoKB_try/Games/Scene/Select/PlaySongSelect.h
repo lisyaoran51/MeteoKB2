@@ -37,6 +37,8 @@ namespace Select {
 
 	protected:
 
+		virtual int onResuming(Scene* lastScene);
+
 		/// <summary>
 		/// 在選擇歌曲carouselSelectionChanged時執行，會把遊戲模式和譜綁在一起
 		/// </summary>

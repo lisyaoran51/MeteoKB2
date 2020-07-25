@@ -26,6 +26,12 @@ Drawable::Drawable(int w, int h)
 	isDrawable = true;
 }
 
+Drawable::~Drawable()
+{
+	if (isInitialized)
+		delete graph;
+}
+
 int Drawable::Initialize(int w, int h)
 {
 	width = w;

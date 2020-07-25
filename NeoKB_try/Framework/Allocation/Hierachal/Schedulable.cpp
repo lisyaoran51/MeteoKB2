@@ -8,6 +8,15 @@ Schedulable::Schedulable() : RegisterType("Schedulable")
 {
 }
 
+Schedulable::~Schedulable()
+{
+	if (scheduler != nullptr) {
+		delete scheduler;
+		scheduler = nullptr;
+	}
+
+}
+
 Scheduler * Schedulable::GetScheduler()
 {
 	if (scheduler != nullptr)

@@ -1362,6 +1362,9 @@
     <ClCompile Include="Games\Scene\Results\Result.cpp">
       <Filter>來源檔案\Games\Scene\Results</Filter>
     </ClCompile>
+    <ClCompile Include="Framework\Threading\ThreadMaster.cpp">
+      <Filter>來源檔案\Framework\Threading</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="DailyLog.txt">
@@ -2313,6 +2316,9 @@
     </ClInclude>
     <ClInclude Include="Games\Scene\Results\Result.h">
       <Filter>標頭檔\Games\Scene\Results</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Threading\ThreadMaster.h">
+      <Filter>標頭檔\Framework\Threading</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -37,6 +37,7 @@ namespace Timing {
 	public:
 
 		TimeController();
+		~TimeController();
 
 		/// <summary>
 		/// 這個時鐘的時鐘源就是audio clock，不過他可以跳到audio範圍以外的時間

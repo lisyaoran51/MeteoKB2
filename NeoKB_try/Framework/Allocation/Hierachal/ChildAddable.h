@@ -15,6 +15,13 @@ namespace Hierachal{
 	extern mutex ChildMutex;
 
 	/// <summary>
+	/// 這些是用來再update thread更改child時，禁止draw thread和input thread使用child tree，避免錯誤
+	/// </summary>
+	extern mutex TreeMutex1;
+	extern mutex TreeMutex2;
+	extern mutex TreeMutex3;
+
+	/// <summary>
 	/// able to add to a parent object
 	/// </summary>
 	class ChildAddable: public Loadable {
@@ -32,8 +39,8 @@ namespace Hierachal{
 	public:
 
 		ChildAddable();
-
-		virtual ~ChildAddable() = default;
+		~ChildAddable();
+		//virtual ~ChildAddable() = default;
 
 		/// <summary>
 		/// when add child, automatically call every privateLoad() to load in parent's configuration
@@ -58,6 +65,9 @@ namespace Hierachal{
 		int SetIsAlive(bool value);
 
 		int _DebugPrintTree(string space);
+
+	protected:
+
 	};
 
 

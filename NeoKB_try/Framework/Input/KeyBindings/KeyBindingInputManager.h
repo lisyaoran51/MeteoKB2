@@ -28,6 +28,12 @@ namespace KeyBindings {
 			
 		}
 
+		~KeyBindingInputManager() {
+			for (int i = 0; i < keyBindings.size(); i++)
+				delete keyBindings[i];
+			keyBindings.clear();
+		}
+
 		virtual vector<KeyBinding*>* GetDefaultkeyBindings() = 0;
 
 	protected:

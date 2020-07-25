@@ -12,3 +12,8 @@ MtoObject::MtoObject() : RegisterType("MtoObject")
 {
 }
 
+MtoObject::~MtoObject()
+{
+	isDeleting = true;
+}
+

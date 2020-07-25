@@ -88,8 +88,8 @@ namespace DataStructure {
 		}
 
 		int UnBind() {
-			throw runtime_error("Bindable::UnbindAll(): not implemented.");
-			return 0;
+			
+			return Bindable<void*>::UnBind();
 		}
 
 

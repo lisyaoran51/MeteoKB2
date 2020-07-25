@@ -65,6 +65,18 @@ namespace Allocation {
 			return 0;
 		}
 
+		int DeleteCache(string typeName) {
+			
+			map<string, MtoObject*>::iterator iter = cache.find("typeName");
+
+			if (iter != cache.end())
+				cache.erase(iter);
+			else
+				return -1;
+
+			return 0;
+		}
+
 		int _DebugPrintCache() {
 			LOG(LogLevel::Debug) << "DependencyContainer::_DebugPrintCache():";
 			for (auto const& x : cache)

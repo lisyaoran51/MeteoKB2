@@ -196,7 +196,11 @@ namespace Rulesets {
 			constructed = false;
 		}
 
-		virtual ~RulesetExecutor() = default;
+		//virtual ~RulesetExecutor() = default;
+		~RulesetExecutor() {
+			delete sm;
+			sm = nullptr;
+		}
 
 		virtual int LazyConstruct(WorkingSm* w, Ruleset* r) {
 

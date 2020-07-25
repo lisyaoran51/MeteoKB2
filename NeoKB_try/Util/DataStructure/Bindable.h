@@ -121,11 +121,11 @@ namespace DataStructure {
 			
 			if (other->GetBindings() == nullptr) {
 
-				LOG(LogLevel::Debug) << "Bindable::AddBindings() : other [" << other << "]'s binding is null. this = [" << this << "].";
+				LOG(LogLevel::Fine) << "Bindable::AddBindings() : other [" << other << "]'s binding is null. this = [" << this << "].";
 
 				if (bindings == nullptr) {
 					unique_lock<mutex> uLock(bindingMutex);
-					LOG(LogLevel::Debug) << "Bindable::AddBindings() : this [" << this << "] binding is null, so create bindings.";
+					LOG(LogLevel::Fine) << "Bindable::AddBindings() : this [" << this << "] binding is null, so create bindings.";
 					bindings = new vector<Bindable<T>*>();
 					bindings->push_back(this);
 				}
@@ -136,7 +136,7 @@ namespace DataStructure {
 
 				if (bindings == nullptr) {
 					unique_lock<mutex> uLock(bindingMutex);
-					LOG(LogLevel::Debug) << "Bindable::AddBindings() : other [" << other << "]'s binding is [" << other->GetBindings() << "]. this = [" << this << "].";
+					LOG(LogLevel::Fine) << "Bindable::AddBindings() : other [" << other << "]'s binding is [" << other->GetBindings() << "]. this = [" << this << "].";
 					bindings = other->GetBindings();
 					bindings->push_back(this);
 				}
@@ -161,7 +161,17 @@ namespace DataStructure {
 		}
 
 		int UnBind() {
-			throw runtime_error("Bindable::UnbindAll(): not implemented.");
+
+			unique_lock<mutex> uLock(bindingMutex);
+			if (bindings != nullptr) {
+				for (int i = 0; i < bindings->size(); i++) {
+					if (bindings->at(i) == this) {
+						bindings->erase(bindings->begin() + i);
+						i--;
+					}
+				}
+			}
+
 			return 0;
 		}
 
@@ -175,11 +185,11 @@ namespace DataStructure {
 
 			if (bindings == nullptr)
 				return 0;
-			LOG(LogLevel::Finer) << "Bindable::triggerValueChange() : start triggering [" << bindings->size() << "] bindings.";
+			LOG(LogLevel::Fine) << "Bindable::triggerValueChange() : start triggering [" << bindings->size() << "] bindings.";
 
 			unique_lock<mutex> uLock(bindingMutex);
 			for (int i = 0; i < bindings->size(); i++) {
-				LOG(LogLevel::Finer) << "Bindable::triggerValueChange() : trigger [" << bindings->at(i) << "] binding.";
+				LOG(LogLevel::Fine) << "Bindable::triggerValueChange() : trigger [" << bindings->at(i) << "] binding.";
 				bindings->at(i)->SetValueWithoutTrigger(value);
 			}
 			return 0;

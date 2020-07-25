@@ -94,10 +94,11 @@ int Scene::Enter(Scene * lastScene)
 
 int Scene::Resume(Scene * sourceScene)
 {
-	delete childScene;
 	childScene = nullptr;
 
 	if (isValidForResume) {
+		isCurrentScene = true;
+		isPresent = true;
 		onResuming(sourceScene);
 	}
 	else {

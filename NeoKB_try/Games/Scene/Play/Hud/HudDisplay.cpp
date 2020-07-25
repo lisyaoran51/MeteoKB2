@@ -21,6 +21,18 @@ HudDisplay::HudDisplay(): RegisterType("HudDisplay")
 
 }
 
+HudDisplay::~HudDisplay()
+{
+	delete scoreCounter;
+	scoreCounter = nullptr;
+	delete comboCounter;
+	comboCounter = nullptr;
+	delete accuracyCounter;
+	accuracyCounter = nullptr;
+	delete songProgress;
+	songProgress = nullptr;
+}
+
 int HudDisplay::BindScoreProcessor(ScoreProcessor * sProcessor)
 {
 	scoreCounter->GetCurrentValue()->BindTo(sProcessor->GetTotalScore());

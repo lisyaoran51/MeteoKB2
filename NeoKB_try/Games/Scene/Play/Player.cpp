@@ -5,6 +5,7 @@
 #include "../../Ruleset/Modifiers/InstrumentModifier.h"
 
 #include "../../Ruleset/Modifiers/TimeControllerModifier.h"
+#include "../Results/Result.h"
 
 
 
@@ -15,6 +16,7 @@ using namespace Games::Sheetmusics;
 using namespace Framework::Configurations;
 using namespace Rulesets::Modifiers;
 using namespace std;
+using namespace Games::Scenes::Results;
 
 
 int Player::load()
@@ -80,7 +82,7 @@ int Player::load(MeteoConfigManager* m, Instrument* instru)
 	//timeController->ImportWorkingSm(workingSmValue);
 	timeController->SetControllableClock(decoupledClock);
 	LOG(LogLevel::Fine) << "Player::load : set speed adjuster.";
-	timeController->SetSpeedAdjuster(rulesetExecutor->CreateSpeedAdjuster());
+	timeController->SetSpeedAdjuster(speedAdjuster = rulesetExecutor->CreateSpeedAdjuster());
 
 	// TODO: 把config裡面的offset和offset clock的offset bind在一起，讓config可以調整offset
 
@@ -150,15 +152,40 @@ Player::Player(): RegisterType("Player"), MeteoScene()
 Player::~Player()
 {
 	delete ruleset;
-	delete rulesetExecutor;
+	ruleset = nullptr;
+	delete adjustableClock;
+	adjustableClock = nullptr;
+	delete decoupledClock;
+	decoupledClock = nullptr;
+	delete offsetClock;
+	offsetClock = nullptr;
+	delete hudDisplay;
+	hudDisplay = nullptr;
+	delete scoreProcessor;
+	scoreProcessor = nullptr;
+	delete speedAdjuster;
+	speedAdjuster = nullptr;
+}
+
+int Player::Restart()
+{
+	SetIsValidForResume(false);
+	onRestartRequested.Trigger();
+	Exit();
+	return 0;
 }
 
 int Player::onCompletion()
 {
 
+	SetIsValidForResume(false);
+
+
 	GetScheduler()->AddDelayedTask([] {
 		
-		
+		Score* score = new Score();
+
+		//Scene::Push(new Result(score));
 		return 0;
 	}, 3000);
 

@@ -17,6 +17,21 @@ DecoupledInterpolatingFramedClock::DecoupledInterpolatingFramedClock(): Interpol
 	decoupledClock = new FramedClock(decoupledStopwatchClock = new StopwatchClock());
 }
 
+DecoupledInterpolatingFramedClock::~DecoupledInterpolatingFramedClock()
+{
+	delete decoupledStopwatchClock;
+	decoupledStopwatchClock = nullptr;
+	delete decoupledClock;
+	decoupledClock = nullptr;
+
+	if (framedSource != nullptr) {
+		if (source != framedSource) {
+			delete framedSource;
+		}
+	}
+
+}
+
 double DecoupledInterpolatingFramedClock::GetCurrentTime()
 {
 	LOG(LogLevel::Depricated) << "DecoupledInterpolatingFramedClock::GetCurrentTime() : get decoupled clock? [" << getIsUseDecoupledClock() << "].";

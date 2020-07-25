@@ -4,6 +4,7 @@
 #include <chrono>         // std::chrono::seconds
 #include <sys/syscall.h>
 #include <unistd.h>
+#include "ThreadMaster.h"
 
 
 using namespace Framework::Threading;
@@ -32,6 +33,9 @@ int GameThread::Start()
 	LOG(LogLevel::Depricated) << "GameThread::Start() : clock = [" << clock << "].";
 	runThread = new thread(&GameThread::runWork, this);
 	runThread->detach();
+
+	ThreadMaster::GetInstance().AddNewThread(threadName);
+
 	return 0;
 }
 
@@ -72,8 +76,10 @@ int GameThread::runWork()
 	threadId = syscall(SYS_gettid);
 	LOG(LogLevel::Info) << "GameThread::runWork() : thread " << threadName << "'s ID is [" << threadId << "].";
 
-	while (!exitRequested)
+	while (!exitRequested) 
 		processFrame();
+
+
 	return 0;
 }
 
@@ -95,7 +101,12 @@ int GameThread::processFrame()
 	//if(threadName == "UpdateThread")
 		LOG(LogLevel::Depricated) << "GameThread::processFrame() : [" << threadName << "] processing.";
 
+	while (!ThreadMaster::GetInstance().CheckThreadProcessable(threadName));
+	ThreadMaster::GetInstance().SetThreadProcessStatus(threadName, true);
+	
 	onNewFrame();
+	
+	ThreadMaster::GetInstance().SetThreadProcessStatus(threadName, false);
 
 
 	clock->ProcessFrame();

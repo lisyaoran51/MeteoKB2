@@ -32,6 +32,7 @@ namespace Hud {
 	public:
 
 		HudDisplay();
+		~HudDisplay();
 
 		int BindScoreProcessor(ScoreProcessor* sProcessor);
 

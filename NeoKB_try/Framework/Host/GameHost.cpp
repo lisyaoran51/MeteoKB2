@@ -8,6 +8,7 @@
 #include "../IO/Storage.h"
 #include <chrono>         // std::chrono::seconds
 #include "../../RulesetMeteor/Config/MeteorConfigManager.h"
+#include "../Threading/ThreadMaster.h"
 
 
 
@@ -18,6 +19,7 @@ using namespace Framework::IO;
 using namespace Framework;
 using namespace Instruments;
 using namespace Meteor::Config;
+using namespace Framework::Threading;
 
 
 
@@ -84,6 +86,8 @@ int GameHost::Run(Game* game, Instrument* instrument)
 
 	updateInitialize();
 	updateThread->Start();
+
+	ThreadMaster::GetInstance().Start();
 
 	if(!initialized)
 		LOG(LogLevel::Finest) << "host not initialized yet.";
@@ -159,6 +163,7 @@ int GameHost::drawFrame()
 	// TODO: 搜尋所有的child，看看是不是Drawable，是的話再根據depth，一層一層畫到Map上，然後call drawer
 	vector<Drawable*> drawables;
 	unique_lock<mutex> uLock(ChildMutex);
+	unique_lock<mutex> uLock2(TreeMutex2);
 	iterateSearchDrawable(root, &drawables);
 	uLock.unlock();
 

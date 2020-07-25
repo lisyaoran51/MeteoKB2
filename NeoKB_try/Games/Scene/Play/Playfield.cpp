@@ -124,6 +124,15 @@ Playfield::Playfield():RegisterType("Playfield")
 	registerLoad(bind((int(Playfield::*)())&Playfield::load, this));
 }
 
+Playfield::~Playfield()
+{
+	for (int i = 0; i < eventProcessors.size(); i++)
+		delete eventProcessors[i];
+	eventProcessors.clear();
+
+	delete bufferMap;
+}
+
 int Playfield::OnJudgement(HitObject * hitObject, Judgement * judgement)
 {
 	return 0;

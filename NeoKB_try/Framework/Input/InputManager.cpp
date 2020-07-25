@@ -61,6 +61,7 @@ int InputManager::handleNewState(InputState * state)
 
 	LOG(LogLevel::Depricated) << "InputManager::handleNewState(): setting last state.";
 
+	unique_lock<mutex> uLock(TreeMutex1);
 	updateInputQueue(currentState);
 
 	if (hasNewKeyboardState)

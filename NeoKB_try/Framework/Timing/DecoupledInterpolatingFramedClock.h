@@ -27,6 +27,7 @@ namespace Timing {
 	public:
 
 		DecoupledInterpolatingFramedClock();
+		~DecoupledInterpolatingFramedClock();
 
 		// Clock
 		virtual double GetCurrentTime();

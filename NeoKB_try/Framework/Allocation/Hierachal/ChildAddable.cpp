@@ -7,13 +7,37 @@ using namespace Framework::Allocation::Hierachal;
 using namespace std;
 
 mutex Framework::Allocation::Hierachal::ChildMutex;
+/// <summary>
+/// 這些是用來再update thread更改child時，禁止draw thread和input thread使用child tree，避免錯誤
+/// </summary>
+mutex Framework::Allocation::Hierachal::TreeMutex1;
+/// <summary>
+/// 這些是用來再update thread更改child時，禁止draw thread和input thread使用child tree，避免錯誤
+/// </summary>
+mutex Framework::Allocation::Hierachal::TreeMutex2;
+/// <summary>
+/// 這些是用來再update thread更改child時，禁止draw thread和input thread使用child tree，避免錯誤
+/// </summary>
+mutex Framework::Allocation::Hierachal::TreeMutex3;
 
 ChildAddable::ChildAddable(): Loadable(), RegisterType("ChildAddable")
 {
 }
 
+ChildAddable::~ChildAddable()
+{
+	unique_lock<mutex> uLock(ChildMutex);
+	for (int i = 0; i < childs.size(); i++) {
+		delete childs.at(i);
+	}
+
+	childs.clear();
+}
+
 int ChildAddable::AddChild(ChildAddable * child)
 {
+
+	
 
 	if (child->SetParent(this) == 0) {
 		child->Load();
@@ -27,6 +51,9 @@ int ChildAddable::AddChild(ChildAddable * child)
 			// TODO: throw error
 		}
 		else {
+			unique_lock<mutex> uLock2(TreeMutex1);
+			unique_lock<mutex> uLock3(TreeMutex2);
+			unique_lock<mutex> uLock4(TreeMutex3);
 			unique_lock<mutex> uLock(ChildMutex);
 			childs.push_back(child);
 		}
@@ -43,6 +70,10 @@ int ChildAddable::AddChild(ChildAddable * child)
 
 int ChildAddable::DeleteChild(ChildAddable * child)
 {
+
+	unique_lock<mutex> uLock2(TreeMutex1);
+	unique_lock<mutex> uLock3(TreeMutex2);
+	unique_lock<mutex> uLock4(TreeMutex3);
 	unique_lock<mutex> uLock(ChildMutex);
 	vector<ChildAddable*>::iterator it = find(childs.begin(), childs.end(), child);
 

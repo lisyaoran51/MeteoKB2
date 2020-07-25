@@ -52,6 +52,7 @@
     <ClCompile Include="Framework\IO\Storage.cpp" />
     <ClCompile Include="Framework\IO\Stores\StorageResourceStore.cpp" />
     <ClCompile Include="Framework\Output\OutputManager.cpp" />
+    <ClCompile Include="Framework\Threading\ThreadMaster.cpp" />
     <ClCompile Include="Framework\Timing\SpeedAdjusters\LinearSpeedAdjuster.cpp" />
     <ClCompile Include="Framework\Timing\ThrottledFramedClock.cpp" />
     <ClCompile Include="Framework\Timing\TimeController.cpp" />
@@ -323,6 +324,7 @@
     <ClInclude Include="Framework\Output\Panels\PanelManager.h" />
     <ClInclude Include="Framework\Output\Panels\PanelMessage.h" />
     <ClInclude Include="Framework\Output\Panels\PanelOutputer.h" />
+    <ClInclude Include="Framework\Threading\ThreadMaster.h" />
     <ClInclude Include="Framework\Timing\SpeedAdjusters\LinearSpeedAdjuster.h" />
     <ClInclude Include="Framework\Timing\TimeController.h" />
     <ClInclude Include="Games\Configurations\MeteoConfigManager.h" />

@@ -92,6 +92,11 @@ TimeController::TimeController() : RegisterType("TimeController")
 	isPresent = true;
 }
 
+TimeController::~TimeController()
+{
+	GetDependencies()->DeleteCache("TimeController");
+}
+
 int TimeController::SetControllableClock(AdjustableClock * cClock)
 {
 	controllableClock = cClock;

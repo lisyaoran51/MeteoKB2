@@ -53,6 +53,18 @@ ScoreProcessor::ScoreProcessor(RulesetExecutor<Event>* rExecutor)
 
 }
 
+ScoreProcessor::~ScoreProcessor()
+{
+	delete totalScore;
+	totalScore = nullptr;
+	delete accuracy;
+	accuracy = nullptr;
+	delete combo;
+	combo = nullptr;
+	delete highestCombo;
+	highestCombo = nullptr;
+}
+
 bool ScoreProcessor::getIsCompleted()
 {
 	return hits == maxHits;

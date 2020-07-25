@@ -27,6 +27,10 @@ namespace Hud {
 			currentValue = new Bindable<T>(cValue);
 		}
 
+		~RollingCounter() {
+			delete currentValue;
+		}
+
 		Bindable<T>* GetCurrentValue() {
 			return currentValue;
 		}

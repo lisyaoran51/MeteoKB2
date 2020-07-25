@@ -42,6 +42,8 @@ namespace Play {
 
 		TimeController* timeController = nullptr;
 
+		SpeedAdjuster* speedAdjuster = nullptr;
+
 		SmManager* smManager = nullptr;
 
 		Instrument* instrument = nullptr;
@@ -72,7 +74,17 @@ namespace Play {
 
 		~Player();
 
+		int Restart();
+
+		template<class _Type>
+		int AddOnRestartRequested(_Type* callableObject, function<int(void)> callback, string name = "HandleRestartRequest") {
+			onRestartRequested.Add(callableObject, callback, name);
+			return 0;
+		}
+
 	protected:
+
+		ActionList<int(void)> onRestartRequested;
 
 		float audioOffset = 0;
 

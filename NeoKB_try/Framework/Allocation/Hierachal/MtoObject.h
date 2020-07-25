@@ -38,8 +38,9 @@ namespace Hierachal {
 	public:
 
 		MtoObject();
+		~MtoObject();
 
-		virtual ~MtoObject() = default;
+		//virtual ~MtoObject() = default;
 
 		/// <summary>
 		/// 類似java裡的 (object) as (class)，一種轉型方式
@@ -86,6 +87,11 @@ namespace Hierachal {
 				return false;
 			}
 		}
+
+	protected:
+
+		bool isDeleting = false;
+
 
 	};
 }}}

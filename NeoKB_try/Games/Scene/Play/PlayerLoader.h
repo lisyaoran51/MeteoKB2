@@ -20,6 +20,8 @@ namespace Play {
 
 		Player* player;
 
+		int onPlayerRestartRequest();
+
 	public:
 
 		PlayerLoader(Player* p);
@@ -30,6 +32,8 @@ namespace Play {
 	private:
 
 		int load();
+
+		virtual int onResuming(Scene* lastScene);
 
 		/// <summary>
 		/// 不停詢問是否讀取完成，完成後進入player畫面

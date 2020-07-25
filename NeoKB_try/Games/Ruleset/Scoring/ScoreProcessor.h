@@ -33,6 +33,7 @@ namespace Scoring {
 
 	public:
 
+		~ScoreProcessor();
 
 		template<class _Type>
 		int AddOnAllJudged(_Type* callableObject, function<int(void)> callback, string name = "HandleCompletion") {
