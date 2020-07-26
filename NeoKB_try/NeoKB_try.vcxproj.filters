@@ -628,6 +628,27 @@
     <Filter Include="來源檔案\Games\Scene\Results">
       <UniqueIdentifier>{66331d1d-fae6-4048-bdee-3ee12838ea18}</UniqueIdentifier>
     </Filter>
+    <Filter Include="標頭檔\RulesetMeteor\Ruleset\Replays">
+      <UniqueIdentifier>{4a16bde3-ef47-427e-8783-14f5cf0bb802}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Games\Ruleset\Replays">
+      <UniqueIdentifier>{3361d7e5-094c-40b3-8b84-42dae9ee412f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetMeteor\Ruleset\Replays">
+      <UniqueIdentifier>{8a0241e2-62fd-4144-aa61-e29d06bd1cd7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Framework\Input\Commands">
+      <UniqueIdentifier>{a3cae5d6-03e7-4fe7-a535-1e30dd15fa54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Framework\Input\Commands">
+      <UniqueIdentifier>{f47f3861-6faf-48c0-b072-a33893b7997c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Games\Input\Commands">
+      <UniqueIdentifier>{40db3da4-05da-43b3-9173-94cb028e7308}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\ThirdParty\json">
+      <UniqueIdentifier>{077c4a8d-d619-4cd3-8128-912183249180}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Games\Graphic\Renderer\renderer.cpp">
@@ -1364,6 +1385,21 @@
     </ClCompile>
     <ClCompile Include="Framework\Threading\ThreadMaster.cpp">
       <Filter>來源檔案\Framework\Threading</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\Ruleset\Replays\ReplayRecorder.cpp">
+      <Filter>來源檔案\Games\Ruleset\Replays</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\Ruleset\Replays\ReplayFrame.cpp">
+      <Filter>來源檔案\Games\Ruleset\Replays</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\Ruleset\Replays\MeteorReplayFrame.cpp">
+      <Filter>來源檔案\RulesetMeteor\Ruleset\Replays</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\Ruleset\Replays\MeteorReplayRecorder.cpp">
+      <Filter>來源檔案\RulesetMeteor\Ruleset\Replays</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Input\Commands\BluetoothCommand.cpp">
+      <Filter>來源檔案\Framework\Input\Commands</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2319,6 +2355,24 @@
     </ClInclude>
     <ClInclude Include="Framework\Threading\ThreadMaster.h">
       <Filter>標頭檔\Framework\Threading</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Ruleset\Replays\ReplayRecorder.h">
+      <Filter>標頭檔\Games\Ruleset\Replays</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Ruleset\Replays\MeteorReplayRecorder.h">
+      <Filter>標頭檔\RulesetMeteor\Ruleset\Replays</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Ruleset\Replays\MeteorReplayFrame.h">
+      <Filter>標頭檔\RulesetMeteor\Ruleset\Replays</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Input\Commands\BluetoothCommand.h">
+      <Filter>標頭檔\Framework\Input\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Input\Commands\MeteoBluetoothCommand.h">
+      <Filter>標頭檔\Games\Input\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="ThirdParty\json\json.hpp">
+      <Filter>標頭檔\ThirdParty\json</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

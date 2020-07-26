@@ -139,6 +139,9 @@ int Player::load(MeteoConfigManager* m, Instrument* instru)
 	hudDisplay->BindRulesetExecutor(rulesetExecutor);
 	hudDisplay->BindTimeController(timeController);
 
+	replayRecorder = rulesetExecutor->CreateReplayRecorder();
+	AddChild(replayRecorder);
+
 	scoreProcessor->AddOnAllJudged(this, bind(&Player::onCompletion, this), "Player::onCompletion"); // 顯示成績結算
 
 	return 0;
@@ -185,7 +188,7 @@ int Player::onCompletion()
 		
 		Score* score = new Score();
 
-		//Scene::Push(new Result(score));
+		//Scene::Push(new Result(score, replayRecorder));
 		return 0;
 	}, 3000);
 

@@ -38,7 +38,3 @@ bool BluetoothState::CheckIsEmpty()
 	return commands.size() == 0;
 }
 
-BluetoothCommand::BluetoothCommand(BluetoothCommand * copied)
-{
-	CommandType = copied->CommandType;
-}

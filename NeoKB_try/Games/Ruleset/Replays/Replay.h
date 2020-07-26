@@ -17,6 +17,8 @@ namespace Replays {
 
 	class Replay {
 
+	public:
+
 		vector<ReplayFrame*> replayFrames;
 
 		User* user = nullptr;

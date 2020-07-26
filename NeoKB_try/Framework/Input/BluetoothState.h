@@ -5,13 +5,13 @@
 #include <vector>
 #include <string>
 #include <stdexcept>
+#include "Commands/BluetoothCommand.h"
 
 using namespace std;
+using namespace Framework::Input::Commands;
 
 namespace Framework {
 namespace Input {
-
-	struct BluetoothCommand;
 
 	class BluetoothState : public PeripheralState<BluetoothState> {
 
@@ -31,13 +31,7 @@ namespace Input {
 	};
 
 
-	struct BluetoothCommand {
-
-		BluetoothCommand(BluetoothCommand* copied);
-
-		string CommandType;
-
-	};
+	
 
 }}
 

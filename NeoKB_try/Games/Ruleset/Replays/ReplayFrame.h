@@ -8,7 +8,17 @@ namespace Replays {
 
 	class ReplayFrame {
 
+	public:
 
+		ReplayFrame(double t);
+
+		virtual string ToString() = 0;
+
+		double GetStartTime();
+
+	protected:
+
+		double time = -1;
 
 	};
 

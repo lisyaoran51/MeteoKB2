@@ -1948,3 +1948,10 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	再player的oncomplete會push result，進入分數畫面結束遊戲。on complete註冊在score processor的all judge下面，每次計算分數時都會檢查一次是不適all judged，是的話就執行all judge
 	
 	執行完all judge，就會進入result，按下back button就會exit to parent scene，這時因為player的Available for resume是false，所以就會回上一層，跳到song select去
+	
+7/25
+	如果要再遊戲結束前後restart，要先把player loader設成valid for resume，然後再exit，這樣player loader就會load同一個東西
+	
+	再delete child的時候，為避免有其他thread正在使用那些物件，要先用thread master把所有thread都停掉，再delete child。
+	
+	寫到replay

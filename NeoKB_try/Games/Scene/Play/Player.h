@@ -12,6 +12,7 @@
 #include "../../../Instruments/Instrument.h"
 #include "Hud/HudDisplay.h"
 #include "../../Configurations/MeteoConfigManager.h"
+#include "../../Ruleset/Replays/ReplayRecorder.h"
 
 
 
@@ -25,6 +26,7 @@ using namespace Framework::Timing;
 using namespace Instruments;
 using namespace Games::Scenes::Play::Hud;
 using namespace Games::Configurations;
+using namespace Games::Rulesets::Replays;
 
 
 
@@ -60,6 +62,8 @@ namespace Play {
 		
 
 		HudDisplay* hudDisplay = nullptr;
+
+		ReplayRecorder* replayRecorder = nullptr;
 
 		/// <summary>
 		/// load in things like sm, Ruleset info. then create Ruleset executor
