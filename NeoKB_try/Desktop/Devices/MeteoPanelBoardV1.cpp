@@ -156,7 +156,7 @@ int MeteoPanelBoardV1::work()
 	while (!exitRequested) {
 		readPanel();
 		writePanel();
-		this_thread::sleep_for(chrono::milliseconds(10));
+		//this_thread::sleep_for(chrono::milliseconds(10));
 	}
 	return 0;
 }

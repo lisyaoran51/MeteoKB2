@@ -81,3 +81,8 @@ int PassThroughInputManager::onSlide(InputState * inputState, InputKey slider)
 {
 	return acceptState(inputState);
 }
+
+int PassThroughInputManager::onCommand(InputState * inputState, BluetoothCommand * bluetoothCommand)
+{
+	return acceptState(inputState);
+}

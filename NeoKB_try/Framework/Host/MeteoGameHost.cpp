@@ -10,6 +10,7 @@
 #include "../IO/PlatformStorage.h"
 #include "../Output/OutputManager.h"
 #include "../../RulesetMeteor/Output/Panels/SustainPedalLightRingOutputer.h"
+#include "../../Desktop/Devices/MeteoPacketConverterV1.h"
 
 
 
@@ -36,7 +37,10 @@ int MeteoGameHost::setupMainInterface()
 	mainInterface->Initialize();
 
 	DisplayDevice* displayDevice = new MeteoBitbangDisplayDevice(48, 16);// 之後再改
-	BluetoothDevice* bluetoothDevice = new MeteoBluetoothDevice();
+
+	MeteoPacketConverterV1* packetConverter = new MeteoPacketConverterV1(storage);
+	MeteoBluetoothPhoneV1* bluetoothPhone = new MeteoBluetoothPhoneV1(packetConverter);
+	BluetoothDevice* bluetoothDevice = new MeteoBluetoothDevice(bluetoothPhone);
 
 	MeteoPanelBoardV1* meteoPanelBoard = new MeteoPanelBoardV1(7); // i2c address設為7
 	KeyboardDevice* keyboardDevice = new MeteoKeyboardDevice(meteoPanelBoard);

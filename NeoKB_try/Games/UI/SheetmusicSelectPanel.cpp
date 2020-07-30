@@ -85,45 +85,68 @@ int SheetmusicSelectPanel::SetSms(vector<SmInfo*>* sInfos)
 	return 0;
 }
 
+int SheetmusicSelectPanel::OnCommand(MeteoBluetoothCommand * command)
+{
+	if (command->GetCommand() == MeteoCommand::SheetmusicData) {
+		int songId = command->GetContext()["Id"].get<int>();
+
+		vector<SmInfo*>* sInfos = smManager->GetSmInfos();
+		for (int i = 0; i < sInfos->size(); i++) {
+			if (sInfos->at(i)->id == songId) {
+				SelectionChanged(sInfos->at(i));
+				//delete smInfos; //這個現在不能delete，因為現在改成寫死，之後改回來從檔案讀的時候才能delete
+
+
+				StartRequest();
+				return 0;
+			}
+		}
+	}
+
+
+
+	return -1;
+}
+
 int SheetmusicSelectPanel::onCommand(InputState * inputState, InputKey command)
 {
 
 	if (command == InputKey::Bluetooth) {
 		for (int i = 0; i < inputState->GetBluetoothState()->GetCommands()->size(); i++) {
 
-			if (inputState->GetBluetoothState()->GetCommands()->at(i)->CommandType == "Download") {
-
-				// 下載歌曲...
-
-			}
+			//if (inputState->GetBluetoothState()->GetCommands()->at(i)->CommandType == "Download") {
+			//
+			//	// 下載歌曲...
+			//
+			//}
 
 		}
 
 		for (int i = 0; i < inputState->GetBluetoothState()->GetCommands()->size(); i++) {
 
-			if (inputState->GetBluetoothState()->GetCommands()->at(i)->CommandType == "Select") {
-
-				// 選擇歌曲...
-				SmInfo* smInfo = nullptr;
-
-				LOG(LogLevel::Info) << "SheetmusicSelectPanel::onCommand : song selected.";
-				SelectionChanged(smInfo);
-
-			}
+			//if (inputState->GetBluetoothState()->GetCommands()->at(i)->CommandType == "Select") {
+			//
+			//	// 選擇歌曲...
+			//	SmInfo* smInfo = nullptr;
+			//
+			//	LOG(LogLevel::Info) << "SheetmusicSelectPanel::onCommand : song selected.";
+			//	SelectionChanged(smInfo);
+			//
+			//}
 
 		}
 
 
 
 		for (int i = 0; i < inputState->GetBluetoothState()->GetCommands()->size(); i++){
-			if (inputState->GetBluetoothState()->GetCommands()->at(i)->CommandType == "Start") {
-
-				isPresent = false;
-
-				LOG(LogLevel::Info) << "SheetmusicSelectPanel::onCommand : game start.";
-				StartRequest();
-
-			}
+			//if (inputState->GetBluetoothState()->GetCommands()->at(i)->CommandType == "Start") {
+			//
+			//	isPresent = false;
+			//
+			//	LOG(LogLevel::Info) << "SheetmusicSelectPanel::onCommand : game start.";
+			//	StartRequest();
+			//
+			//}
 		}
 	}
 	return 0;

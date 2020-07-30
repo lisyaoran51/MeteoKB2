@@ -6,12 +6,14 @@
 #include "IO/Stores/ResourceStore.h"
 #include "Audio/AudioManager.h"
 #include "Host/GameHost.h"
+#include "Input/UserInputManager.h"
 
 
 using namespace Framework::Allocation;
 using namespace Framework::IO;
 using namespace Framework::Audio;
 using namespace Framework::Host;
+using namespace Framework::Input;
 
 
 namespace Framework {
@@ -28,7 +30,7 @@ namespace Framework {
 
 	public:
 
-		
+		virtual InputManager* CreateInputManager() = 0;
 		
 		//virtual string GetResourcePath();
 		

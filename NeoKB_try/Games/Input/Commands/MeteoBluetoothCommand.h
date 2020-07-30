@@ -16,7 +16,9 @@ namespace Commands{
 
 	class MeteoBluetoothCommand : public TBluetoothCommand<MeteoCommand> {
 
+	public:
 
+		MeteoBluetoothCommand(MeteoCommand c, json text);
 
 	};
 

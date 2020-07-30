@@ -17,9 +17,16 @@ namespace Commands{
 
 		string GetCommandName();
 
+		virtual bool EqualTo(BluetoothCommand* other);
+
+		json& GetContext();
+
 	protected:
 
 		string commandName;
+
+		json context;
+
 	};
 
 	template<typename T>
@@ -27,9 +34,15 @@ namespace Commands{
 
 	public:
 
-		TBluetoothCommand(T c) {
+		TBluetoothCommand(T c, json text) {
 			command = c;
 		}
+
+		T GetCommand() {
+			return command;
+		}
+
+
 
 	protected:
 

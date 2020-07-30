@@ -4,11 +4,13 @@
 #include "../Framework/Database/MemoryBasedDatabaseContextFactory.h"
 #include "../Framework/Database/ReadonlyCsvDatabaseContextFactory.h"
 #include <functional>
+#include "Input/Commands/MeteoBluetoothCommand.h"
 
 
 using namespace Games;
 using namespace Games::Rulesets;
 using namespace std;
+using namespace Games::Input::Commands;
 
 
 int MeteoGameBase::load()
@@ -78,6 +80,11 @@ int MeteoGameBase::SetHost(GameHost * host)
 	localConfig = new MeteoConfigManager();
 	localConfig->Initialize();
 	return Base::SetHost(host);
+}
+
+InputManager * MeteoGameBase::CreateInputManager()
+{
+	return new UserInputManager<MeteoBluetoothCommand>();
 }
 
 int MeteoGameBase::update()

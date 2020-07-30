@@ -1955,3 +1955,9 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	再delete child的時候，為避免有其他thread正在使用那些物件，要先用thread master把所有thread都停掉，再delete child。
 	
 	寫到replay
+	
+7/28
+	輸出藍芽是要物件自己去抓output manager，然後建藍芽message，丟給output manager，output manager會自己根據你丟的訊號種類，找到藍芽output manager，然後叫他把訊號丟出去
+	
+7/29
+	在寫bt device

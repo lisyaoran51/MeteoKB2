@@ -13,6 +13,13 @@ namespace Bluetooths{
 
 	class BluetoothOutputer : virtual public OutputComponent {
 
+	public:
+
+		virtual int SetupPeripheral(MainInterface* mainInterface);
+
+	protected:
+
+		BluetoothPhone* bluetoothPhone = nullptr;
 
 
 	};

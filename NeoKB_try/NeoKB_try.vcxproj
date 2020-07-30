@@ -22,8 +22,10 @@
     <ClCompile Include="Desktop\Devices\bcm2835.c" />
     <ClCompile Include="Desktop\Devices\MeteoBitbangDisplayDevice.cpp" />
     <ClCompile Include="Desktop\Devices\MeteoBluetoothDevice.cpp" />
+    <ClCompile Include="Desktop\Devices\MeteoBluetoothPhoneV1.cpp" />
     <ClCompile Include="Desktop\Devices\MeteoKeyboardDevice.cpp" />
     <ClCompile Include="Desktop\Devices\MeteoLightBoardV1.cpp" />
+    <ClCompile Include="Desktop\Devices\MeteoPacketConverterV1.cpp" />
     <ClCompile Include="Desktop\Devices\MeteoPanelBoardV1.cpp" />
     <ClCompile Include="Desktop\Devices\MeteoPanelDevice.cpp" />
     <ClCompile Include="Desktop\Devices\MeteoSpidevDisplayDevice.cpp" />
@@ -52,6 +54,7 @@
     <ClCompile Include="Framework\IO\PlatformStorage.cpp" />
     <ClCompile Include="Framework\IO\Storage.cpp" />
     <ClCompile Include="Framework\IO\Stores\StorageResourceStore.cpp" />
+    <ClCompile Include="Framework\Output\Bluetooths\BluetoothOutputer.cpp" />
     <ClCompile Include="Framework\Output\OutputManager.cpp" />
     <ClCompile Include="Framework\Threading\ThreadMaster.cpp" />
     <ClCompile Include="Framework\Timing\SpeedAdjusters\LinearSpeedAdjuster.cpp" />
@@ -66,6 +69,8 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Games\MeteoGameBase.cpp" />
+    <ClCompile Include="Games\Output\Bluetooths\MeteoBluetoothMessage.cpp" />
+    <ClCompile Include="Games\Output\Bluetooths\MeteoBluetoothOutputer.cpp" />
     <ClCompile Include="Games\Ruleset\Judgements\HasHitWindow.cpp" />
     <ClCompile Include="Games\Ruleset\Judgements\HitWindow.cpp" />
     <ClCompile Include="Games\Ruleset\Judgements\Judgement.cpp" />
@@ -285,11 +290,14 @@
     <ClInclude Include="Desktop\Devices\bcm2835.h" />
     <ClInclude Include="Desktop\Devices\MeteoBitbangDisplayDevice.h" />
     <ClInclude Include="Desktop\Devices\MeteoBluetoothDevice.h" />
+    <ClInclude Include="Desktop\Devices\MeteoBluetoothPhoneV1.h" />
+    <ClInclude Include="Desktop\Devices\MeteoPacketConverterV1.h" />
     <ClInclude Include="Desktop\Devices\MeteoSpidevDisplayDevice.h" />
     <ClInclude Include="Desktop\Devices\MeteoKeyboardDevice.h" />
     <ClInclude Include="Desktop\Devices\MeteoLightBoardV1.h" />
     <ClInclude Include="Desktop\Devices\MeteoPanelBoardV1.h" />
     <ClInclude Include="Desktop\Devices\MeteoPanelDevice.h" />
+    <ClInclude Include="Desktop\Devices\PacketConverter.h" />
     <ClInclude Include="Desktop\Devices\Pi2c.h" />
     <ClInclude Include="Desktop\MeteoGameDesktop.h" />
     <ClInclude Include="Desktop\Program.h" />
@@ -309,6 +317,8 @@
     <ClInclude Include="Framework\Database\MeteoDatabaseContext.h" />
     <ClInclude Include="Framework\Host\MeteoGameHost.h" />
     <ClInclude Include="Framework\Input\Commands\BluetoothCommand.h" />
+    <ClInclude Include="Framework\Input\Commands\CommandHandler.h" />
+    <ClInclude Include="Framework\Input\Commands\CommandInputManager.h" />
     <ClInclude Include="Framework\Input\KeyBindings\HasInputKey.h" />
     <ClInclude Include="Framework\Input\KeyBindings\KeyBindingStore.h" />
     <ClInclude Include="Framework\IO\FileInfo.h" />
@@ -341,6 +351,8 @@
     <ClInclude Include="Games\Input\RulesetInputManager.h" />
     <ClInclude Include="Games\MeteoGame.h" />
     <ClInclude Include="Games\MeteoGameBase.h" />
+    <ClInclude Include="Games\Output\Bluetooths\MeteoBluetoothMessage.h" />
+    <ClInclude Include="Games\Output\Bluetooths\MeteoBluetoothOutputer.h" />
     <ClInclude Include="Games\Ruleset\Judgements\HitResult.h" />
     <ClInclude Include="Games\Ruleset\Judgements\HitWindow.h" />
     <ClInclude Include="Games\Ruleset\Judgements\HasHitWindow.h" />

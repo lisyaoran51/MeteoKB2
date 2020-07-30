@@ -42,6 +42,8 @@ namespace Games {
 
 		virtual int SetHost(GameHost* host);
 
+		virtual InputManager* CreateInputManager();
+
 	protected:
 
 		RulesetStore* rulesetStore;

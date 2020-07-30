@@ -649,6 +649,21 @@
     <Filter Include="標頭檔\ThirdParty\json">
       <UniqueIdentifier>{077c4a8d-d619-4cd3-8128-912183249180}</UniqueIdentifier>
     </Filter>
+    <Filter Include="標頭檔\Games\Output">
+      <UniqueIdentifier>{f734fa27-c458-414e-91d5-0fdba3fdfa4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Games\Output\Bluetooths">
+      <UniqueIdentifier>{cf2ac72e-d72e-4f43-a380-646cddb7bbdb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Games\Output">
+      <UniqueIdentifier>{b6d958af-f0ae-4e75-b636-11ecfc586f9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Games\Output\Bluetooths">
+      <UniqueIdentifier>{eb0f5e9b-9911-4d44-b715-d4279e517020}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Framework\Output\Bluetooths">
+      <UniqueIdentifier>{23023baf-d636-4d5b-8aca-7ca018ec886f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Games\Graphic\Renderer\renderer.cpp">
@@ -1400,6 +1415,21 @@
     </ClCompile>
     <ClCompile Include="Framework\Input\Commands\BluetoothCommand.cpp">
       <Filter>來源檔案\Framework\Input\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Desktop\Devices\MeteoBluetoothPhoneV1.cpp">
+      <Filter>來源檔案\Desktop\Devices</Filter>
+    </ClCompile>
+    <ClCompile Include="Desktop\Devices\MeteoPacketConverterV1.cpp">
+      <Filter>來源檔案\Desktop\Devices</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\Output\Bluetooths\MeteoBluetoothOutputer.cpp">
+      <Filter>來源檔案\Games\Output\Bluetooths</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\Output\Bluetooths\MeteoBluetoothMessage.cpp">
+      <Filter>來源檔案\Games\Output\Bluetooths</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Output\Bluetooths\BluetoothOutputer.cpp">
+      <Filter>來源檔案\Framework\Output\Bluetooths</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2373,6 +2403,27 @@
     </ClInclude>
     <ClInclude Include="ThirdParty\json\json.hpp">
       <Filter>標頭檔\ThirdParty\json</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Input\Commands\CommandHandler.h">
+      <Filter>標頭檔\Framework\Input\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Input\Commands\CommandInputManager.h">
+      <Filter>標頭檔\Framework\Input\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Desktop\Devices\MeteoBluetoothPhoneV1.h">
+      <Filter>標頭檔\Desktop\Devices</Filter>
+    </ClInclude>
+    <ClInclude Include="Desktop\Devices\PacketConverter.h">
+      <Filter>標頭檔\Desktop\Devices</Filter>
+    </ClInclude>
+    <ClInclude Include="Desktop\Devices\MeteoPacketConverterV1.h">
+      <Filter>標頭檔\Desktop\Devices</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Output\Bluetooths\MeteoBluetoothMessage.h">
+      <Filter>標頭檔\Games\Output\Bluetooths</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Output\Bluetooths\MeteoBluetoothOutputer.h">
+      <Filter>標頭檔\Games\Output\Bluetooths</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

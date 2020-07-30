@@ -17,6 +17,7 @@ namespace Panels{
 
 	class SustainPedalLightRingOutputer : public TPanelOutputer<SustainPedalLightRingPanelMessage> {
 
+	public:
 
 		virtual int SetupPeripheral(MainInterface* mainInterface);
 

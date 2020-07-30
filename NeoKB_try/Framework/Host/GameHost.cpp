@@ -1,7 +1,7 @@
 #include "GameHost.h"
 
 
-#include "../Input/UserInputManager.h"
+#include "../Input/InputManager.h"
 #include "../IO/Display.h"
 #include "../Game.h"
 #include "../../Instruments/Instrument.h"
@@ -312,7 +312,7 @@ int GameHost::bootstrapSceneGraph(Game* game, Instrument* instrument)
 	LOG(LogLevel::Info) << "GameHost::bootstrapSceneGraph() : build scenegraph tree.";
 	LOG(LogLevel::Debug) << "GameHost::bootstrapSceneGraph() : host address = [" << this << "], clock = [" << sceneGraphClock << "].";
 
-	root = new UserInputManager();
+	root = game->CreateInputManager();
 
 	dependencies->Cache(root);
 	
