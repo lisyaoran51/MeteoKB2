@@ -1,7 +1,7 @@
 #include "sdp.h"
 
 // https://stackoverflow.com/questions/9751710/c-c-warning-address-of-temporary-with-bdaddr-any-bluetooth-library
-bdaddr_t bdaddr_any_cpp = { };
+const bdaddr_t bdaddr_any_cpp = { };
 bdaddr_t bdaddr_local_cpp = { {0, 0, 0, 0xff, 0xff, 0xff} };
 
 sdp_session_t * sdp_register_service(int port)
