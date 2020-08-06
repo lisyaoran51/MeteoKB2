@@ -38,7 +38,7 @@ namespace Hierachal {
 	public:
 
 		MtoObject();
-		~MtoObject();
+		virtual ~MtoObject();
 
 		//virtual ~MtoObject() = default;
 
