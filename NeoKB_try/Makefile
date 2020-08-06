@@ -132,7 +132,7 @@ DatabaseContext.o DatabaseContextFactory.o DatabaseStore.o FakeMeteoDatabaseCont
 BluetoothDevice.o Device.o DisplayDevice.o InputDevice.o OutputDevice.o KeyboardDevice.o PanelDevice.o \
 Drawable.o Map.o \
 GameHost.o MeteoGameHost.o \
-BluetoothState.o CustomInputManager.o InputManager.o InputState.o KeyboardState.o PanelState.o PassThroughInputManager.o UserInputManager.o HasInputKey.o \
+BluetoothState.o CustomInputManager.o InputManager.o InputState.o KeyboardState.o PanelState.o PassThroughInputManager.o HasInputKey.o \
 BluetoothInputHandler.o KeyboardInputHandler.o PanelInputHandler.o KeyBindingStore.o \
 BluetoothPhone.o Display.o FileStore.o Keyboard.o MainInterface.o Panel.o Peripheral.o PlatformStorage.o Storage.o StorageResourceStore.o DynamicPathResourceStore.o \
 OutputManager.o \
