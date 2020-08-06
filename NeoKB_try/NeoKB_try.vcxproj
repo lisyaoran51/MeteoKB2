@@ -30,6 +30,7 @@
     <ClCompile Include="Desktop\Devices\MeteoPanelDevice.cpp" />
     <ClCompile Include="Desktop\Devices\MeteoSpidevDisplayDevice.cpp" />
     <ClCompile Include="Desktop\Devices\Pi2c.cpp" />
+    <ClCompile Include="Desktop\Devices\sdp.c" />
     <ClCompile Include="Desktop\MeteoGameDesktop.cpp" />
     <ClCompile Include="Desktop\Program.cpp" />
     <ClCompile Include="Framework\Audio\Sample\DualPlaybackBassSampleChannel.cpp" />
@@ -298,6 +299,7 @@
     <ClInclude Include="Desktop\Devices\MeteoPanelDevice.h" />
     <ClInclude Include="Desktop\Devices\PacketConverter.h" />
     <ClInclude Include="Desktop\Devices\Pi2c.h" />
+    <ClInclude Include="Desktop\Devices\sdp.h" />
     <ClInclude Include="Desktop\MeteoGameDesktop.h" />
     <ClInclude Include="Desktop\Program.h" />
     <ClInclude Include="Framework\Audio\Sample\DualPlaybackBassSampleChannel.h" />
