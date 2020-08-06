@@ -75,9 +75,7 @@ namespace Commands {
 
 	};
 
-}
-
-}}
+}}}
 
 
 
