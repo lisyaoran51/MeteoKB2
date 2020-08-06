@@ -36,7 +36,7 @@ int MeteoPacketConverterV1::getFileSegmentNumber(char * buffer, int size)
 	return 0;
 }
 
-MeteoPacketConverterFileType MeteoPacketConverterV1::getFileType(char * buffer, int size)
+MeteoPacketConverterV1::MeteoPacketConverterFileType MeteoPacketConverterV1::getFileType(char * buffer, int size)
 {
 	// TODO: ¡Ÿ®Sºg
 	LOG(LogLevel::Error) << "MeteoPacketConverterV1::getFileType() : not implemented.";
