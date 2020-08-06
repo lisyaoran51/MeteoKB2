@@ -133,11 +133,11 @@ BluetoothDevice.o Device.o DisplayDevice.o InputDevice.o OutputDevice.o Keyboard
 Drawable.o Map.o \
 GameHost.o MeteoGameHost.o \
 BluetoothState.o CustomInputManager.o InputManager.o InputState.o KeyboardState.o PanelState.o PassThroughInputManager.o HasInputKey.o \
-BluetoothInputHandler.o KeyboardInputHandler.o PanelInputHandler.o KeyBindingStore.o \
+BluetoothCommand.o BluetoothInputHandler.o KeyboardInputHandler.o PanelInputHandler.o KeyBindingStore.o \
 BluetoothPhone.o Display.o FileStore.o Keyboard.o MainInterface.o Panel.o Peripheral.o PlatformStorage.o Storage.o StorageResourceStore.o DynamicPathResourceStore.o \
-OutputManager.o \
+OutputManager.o BluetoothOutputer.o \
 Scene.o \
-GameThread.o \
+GameThread.o ThreadMaster.o \
 DecoupledInterpolatingFramedClock.o FramedClock.o InterpolatingFramedClock.o OffsetFramedClock.o StopwatchClock.o ThrottledFramedClock.o TimeController.o \
 LinearSpeedAdjuster.o SpeedAdjuster.o \
 \
@@ -166,7 +166,8 @@ Instrument.o HasPitch.o MeteoPiano.o Piano.o PianoInputManager.o VirtualMeteoPia
 FileSystem.o ProgramInitializer.o \
 \
 MeteoGameDesktop.o Program.o \
-MeteoLightBoardV1.o bcm2835.o MeteoBluetoothDevice.o MeteoBitbangDisplayDevice.o MeteoSpidevDisplayDevice.o MeteoKeyboardDevice.o MeteoPanelDevice.o MeteoPanelBoardV1.o pi2c.o\
+MeteoLightBoardV1.o bcm2835.o MeteoBitbangDisplayDevice.o MeteoSpidevDisplayDevice.o MeteoKeyboardDevice.o MeteoPanelDevice.o MeteoPanelBoardV1.o pi2c.o \
+MeteoBluetoothDevice.o MeteoBluetoothPhoneV1.o MeteoPacketConverterV1.o \
 \
 MeteorGame.o MeteorConfigManager.o MeteorInputManager.o MeteorPlayfield.o \
 MeteorRuleset.o MeteorRulesetExecutor.o MeteorJudgement.o MeteorHitWindow.o \
