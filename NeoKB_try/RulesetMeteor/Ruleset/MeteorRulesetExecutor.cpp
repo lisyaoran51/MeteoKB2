@@ -167,6 +167,12 @@ ScoreProcessor * MeteorRulesetExecutor::CreateScoreProcessor()
 	return new MeteorScoreProcessor(this);
 }
 
+ReplayRecorder * MeteorRulesetExecutor::CreateReplayRecorder()
+{
+	throw runtime_error("int MeteorRulesetExecutor::CreateReplayRecorder() : not implemented.");
+	return nullptr;
+}
+
 int MeteorRulesetExecutor::Elapse(MTO_FLOAT elapsedTime)
 {
 	// 之後可用來讀取輸入??先留著

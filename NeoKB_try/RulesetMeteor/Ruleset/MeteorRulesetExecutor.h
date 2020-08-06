@@ -36,9 +36,9 @@ namespace Rulesets {
 		///</summary>
 		map<string, string> eventProcessorTable;
 
-		virtual SmConverter* createSmConverter(PatternGenerator* pg);
+		virtual SmConverter* createSmConverter(PatternGenerator* pg) override;
 
-		virtual SmPostprocessor* createSmPostprocessor();
+		virtual SmPostprocessor* createSmPostprocessor() override;
 
 		int load();
 
@@ -52,13 +52,15 @@ namespace Rulesets {
 
 		virtual int LazyConstruct(WorkingSm* w, Ruleset* r);
 
-		virtual PassThroughInputManager* CreateInputManager();
+		virtual PassThroughInputManager* CreateInputManager() override;
 
-		virtual TimeController* CreateTimeController();
+		virtual TimeController* CreateTimeController() override;
 		
-		virtual SpeedAdjuster* CreateSpeedAdjuster();
+		virtual SpeedAdjuster* CreateSpeedAdjuster() override;
 
-		virtual ScoreProcessor* CreateScoreProcessor();
+		virtual ScoreProcessor* CreateScoreProcessor() override;
+
+		virtual ReplayRecorder* CreateReplayRecorder() override;
 
 		virtual int Elapse(MTO_FLOAT elapsedTime);
 
@@ -70,7 +72,7 @@ namespace Rulesets {
 
 		string GetProcessorType(string eventType);
 
-		virtual int playfieldLoad();
+		virtual int playfieldLoad() override;
 
 	};
 
