@@ -3,6 +3,8 @@
 
 #include "../../../ThirdParty/json/json.hpp"
 
+using namespace std;
+
 using json = nlohmann::json;
 
 namespace Framework {
