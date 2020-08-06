@@ -5,7 +5,7 @@ Framework/Devices:\
 Framework/Exception:\
 Framework/Graphic:Framework/Graphic/Map:\
 Framework/Host:\
-Framework/Input:Framework/Input/Handler:Framework/Input/KeyBindings:\
+Framework/Input:Framework/Input/Commands:Framework/Input/Handler:Framework/Input/KeyBindings:\
 Framework/IO:Framework/IO/Stores:\
 Framework/Output:Framework/Output/Panels:Framework/Output/Bluetooths:\
 Framework/Database:\
@@ -55,7 +55,7 @@ INCLUDE = -IFramwork -IFramework/Allocation -IFramework/Allocation/Hierachal -IF
 -IFramework/Exception \
 -IFramework/Graphic -IFramework/Graphic/Map \
 -IFramework/Host \
--IFramework/Input -IFramework/Input/Handler -IFramework/Input/KeyBindings \
+-IFramework/Input -IFramework/Input/Commands -IFramework/Input/Handler -IFramework/Input/KeyBindings \
 -IFramework/IO -IFramework/IO/Stores \
 -IFramework/Output -IFramework/Output/Panels -IFramework/Output/Bluetooths \
 -IFramework/Database \
