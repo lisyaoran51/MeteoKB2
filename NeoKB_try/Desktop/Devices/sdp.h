@@ -11,8 +11,8 @@
 extern "C" {
 #endif
 
-sdp_session_t * sdp_register_service(int port);
-int sdp_init_server(int port);
+	extern sdp_session_t * sdp_register_service(int port);
+	extern int sdp_init_server(int port);
 
 
 #ifdef __cplusplus
