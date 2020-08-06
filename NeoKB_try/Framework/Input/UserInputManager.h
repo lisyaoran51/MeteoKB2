@@ -16,7 +16,7 @@ namespace Input {
 
 	public:
 
-		UserInputManager() : CommandInputManager(), RegisterType("UserInputManager")
+		UserInputManager() : CommandInputManager<FrameworkAction, TCommand>(), RegisterType("UserInputManager")
 		{
 			useParentState = false;
 		}
