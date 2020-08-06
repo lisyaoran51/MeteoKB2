@@ -18,7 +18,7 @@ namespace Framework {
 namespace Input {
 namespace Commands {
 
-	template<typename T, typename TCommand>
+	template<typename TCommand, typename T>
 	class CommandInputManager : public KeyBindingInputManager<T> {
 
 
