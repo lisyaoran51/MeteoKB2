@@ -9,6 +9,7 @@
 
 
 using namespace Framework::Input;
+using namespace Framework::Input::KeyBindings;
 using namespace std;
 
 
