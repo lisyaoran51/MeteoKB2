@@ -1,5 +1,7 @@
 #include "sdp.h"
 
+// https://stackoverflow.com/questions/9751710/c-c-warning-address-of-temporary-with-bdaddr-any-bluetooth-library
+bdaddr_t bdaddr_any_cpp = { };
 
 sdp_session_t * sdp_register_service(int port)
 {
@@ -64,7 +66,7 @@ sdp_session_t * sdp_register_service(int port)
 	// PART TWO
 	// connect to the local SDP server, register the service record, and
 	// disconnect
-	session = sdp_connect(BDADDR_ANY, BDADDR_LOCAL, 0);
+	session = sdp_connect(bdaddr_any_cpp, BDADDR_LOCAL, 0);
 	sdp_record_register(session, &record, 0);
 
 	// cleanup
@@ -84,7 +86,9 @@ int sdp_init_server(int port)
 	int s, client, bytes_read;
 	int opt = sizeof(rem_addr);
 
-	session = sdp_register_service(port);
+	
+
+	sdp_session_t *session = sdp_register_service(port);
 
 	// allocate socket
 	s = socket(AF_BLUETOOTH, SOCK_STREAM, BTPROTO_RFCOMM);
@@ -92,7 +96,7 @@ int sdp_init_server(int port)
 	// bind socket to port 1 of the first available
 	// local bluetooth adapter
 	loc_addr.rc_family = AF_BLUETOOTH;
-	loc_addr.rc_bdaddr = *BDADDR_ANY;
+	loc_addr.rc_bdaddr = *bdaddr_any_cpp;
 	loc_addr.rc_channel = (uint8_t)port;//1;
 	bind(s, (struct sockaddr *)&loc_addr, sizeof(loc_addr));
 
