@@ -118,7 +118,7 @@ TARGET  = MeteoKB
 #compiler 
 CC = g++
 #cflags 
-CFLAGS = -Wall -ansi -s -std=c++14 -pthread -lbass -lstdc++fs
+CFLAGS = -Wall -ansi -s -std=c++14 -pthread -lbass -lstdc++fs -lbluetooth
 #object 
 OBJS = Main.o \
 \
@@ -206,7 +206,7 @@ MeteorTimeController.o
 all:$(TARGET)
 
 $(TARGET): $(OBJS) 
-	$(CC) $(OBJS) -o $@ -pthread -lstdc++fs -lbass -lbass_fx
+	$(CC) $(OBJS) -o $@ -pthread -lstdc++fs -lbass -lbass_fx -lbluetooth
 	
 .c.o:
 	$(CC) $(INCLUDE) $(CFLAGS) -c -o $@ $< 	
