@@ -1,8 +1,47 @@
 #include "MeteoPacketConverterV1.h"
 
+#include "../../Util/Log.h"
+
 
 using namespace Desktop::Devices;
+using namespace Util;
 
+
+string MeteoPacketConverterV1::getFileName(char * buffer, int size)
+{
+	// TODO: 還沒寫
+	LOG(LogLevel::Error) << "MeteoPacketConverterV1::getFileName() : not implemented.";
+	return string();
+}
+
+int MeteoPacketConverterV1::getFileSize(char * buffer, int size)
+{
+
+	// TODO: 還沒寫
+	LOG(LogLevel::Error) << "MeteoPacketConverterV1::getFileSize() : not implemented.";
+	return 0;
+}
+
+char * MeteoPacketConverterV1::getFileSegment(char * buffer, int size)
+{
+	// TODO: 還沒寫
+	LOG(LogLevel::Error) << "MeteoPacketConverterV1::getFileSegment() : not implemented.";
+	return nullptr;
+}
+
+int MeteoPacketConverterV1::getFileSegmentNumber(char * buffer, int size)
+{
+	// TODO: 還沒寫
+	LOG(LogLevel::Error) << "MeteoPacketConverterV1::getFileSegmentNumber() : not implemented.";
+	return 0;
+}
+
+MeteoPacketConverterFileType MeteoPacketConverterV1::getFileType(char * buffer, int size)
+{
+	// TODO: 還沒寫
+	LOG(LogLevel::Error) << "MeteoPacketConverterV1::getFileType() : not implemented.";
+	return MeteoPacketConverterFileType();
+}
 
 MeteoPacketConverterV1::MeteoPacketConverterV1(Storage* s)
 {
