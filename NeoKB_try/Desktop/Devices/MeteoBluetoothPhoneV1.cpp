@@ -1,9 +1,7 @@
 #include "MeteoBluetoothPhoneV1.h"
 
 #include <thread>
-extern "C" {
 #include "sdp.h"
-}
 
 using namespace std;
 using namespace Desktop::Devices;

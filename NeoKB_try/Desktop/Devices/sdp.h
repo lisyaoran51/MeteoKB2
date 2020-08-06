@@ -7,9 +7,16 @@
 #include <bluetooth/rfcomm.h>
 #include <sys/socket.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 sdp_session_t * sdp_register_service(int port);
 int sdp_init_server(int port);
 
+#ifdef __cplusplus
+}
+#endif
 
 
 #endif
