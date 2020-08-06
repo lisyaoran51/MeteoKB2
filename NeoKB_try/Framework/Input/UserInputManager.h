@@ -12,11 +12,11 @@ namespace Input {
 	enum class FrameworkAction;
 
 	template<typename TCommand>
-	class UserInputManager : public CommandInputManager<TCommand, FrameworkAction> {
+	class UserInputManager : public CommandInputManager<FrameworkAction, TCommand> {
 
 	public:
 
-		UserInputManager() : CommandInputManager<TCommand, FrameworkAction>(), RegisterType("UserInputManager")
+		UserInputManager() : CommandInputManager<FrameworkAction, TCommand>(), RegisterType("UserInputManager")
 		{
 			useParentState = false;
 		}

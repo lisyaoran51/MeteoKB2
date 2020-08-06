@@ -41,7 +41,7 @@ namespace Commands {
 		/// 會把queue裡面的keybindingReceivable抓出來，然後呼叫onKeyDown(pair<T, int> key)
 		/// 好處是只需要抓key，不用看input state，比較簡單操作
 		/// </summary>
-		virtual int propagateKeyDown(vector<Triggerable*>* queue, TCommand* command) {
+		virtual int propagateBluetoothCommand(vector<Triggerable*>* queue, TCommand* command) {
 
 			for (int i = 0; i < queue->size(); i++) {
 				CommandHandler<TCommand>* commandHandler = dynamic_cast<CommandHandler<TCommand>*>(queue->at(i));
