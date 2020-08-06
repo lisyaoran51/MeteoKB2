@@ -88,7 +88,7 @@ namespace Play {
 
 	protected:
 
-		ActionList<int()> onRestartRequested;
+		ActionList<int> onRestartRequested;
 
 		float audioOffset = 0;
 
