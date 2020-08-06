@@ -65,7 +65,7 @@ namespace Commands {
 		int handleNewBluetoothCommand(vector<Triggerable*>* queue, BluetoothCommand* command) {
 
 			if (dynamic_cast<TCommand*>(command) != nullptr) {
-				propagateBluetoothCommand(queue, dynamic_cast<T*>(command));
+				propagateBluetoothCommand(queue, dynamic_cast<TCommand*>(command));
 				return 0;
 			}
 			else {
