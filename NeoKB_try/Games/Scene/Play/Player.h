@@ -81,14 +81,14 @@ namespace Play {
 		int Restart();
 
 		template<class _Type>
-		int AddOnRestartRequested(_Type* callableObject, function<int(void)> callback, string name = "HandleRestartRequest") {
+		int AddOnRestartRequested(_Type* callableObject, function<int()> callback, string name = "HandleRestartRequest") {
 			onRestartRequested.Add(callableObject, callback, name);
 			return 0;
 		}
 
 	protected:
 
-		ActionList<int(void)> onRestartRequested;
+		ActionList<int()> onRestartRequested;
 
 		float audioOffset = 0;
 
