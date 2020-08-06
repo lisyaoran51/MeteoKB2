@@ -3,6 +3,7 @@
 
 
 #include "../IO/MainInterface.h"
+#include "OutputMessage.h"
 
 
 using namespace Framework::IO;
