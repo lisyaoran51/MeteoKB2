@@ -13,13 +13,13 @@ namespace Input {
 
 	enum class FrameworkAction;
 
-	template<typename TCommand>
-	class UserInputManager : public CommandInputManager<FrameworkAction, TCommand> {
+	//template<typename TCommand>
+	class UserInputManager : public CommandInputManager<FrameworkAction, BluetoothCommand> {
 	//class UserInputManager :public KeyBindingInputManager<FrameworkAction>{
 
 	public:
 
-		UserInputManager() : CommandInputManager<FrameworkAction, TCommand>(), RegisterType("UserInputManager")
+		UserInputManager() : CommandInputManager<FrameworkAction, BluetoothCommand>(), RegisterType("UserInputManager")
 		//UserInputManager() :KeyBindingInputManager<FrameworkAction>(), RegisterType("UserInputManager")
 		{
 			useParentState = false;
