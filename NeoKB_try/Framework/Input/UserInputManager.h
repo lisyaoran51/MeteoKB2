@@ -5,6 +5,7 @@
 
 
 using namespace Framework::Input::Commands;
+using namespace Framework::Input::KeyBindings;
 
 namespace Framework {
 namespace Input {
