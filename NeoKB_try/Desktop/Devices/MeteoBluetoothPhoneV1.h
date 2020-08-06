@@ -1,6 +1,11 @@
 #ifndef METEO_BLUETOOTH_PHONE_V1_H
 #define METEO_BLUETOOTH_PHONE_V1_H
 
+#include <bluetooth/bluetooth.h>
+#include <bluetooth/sdp.h>
+#include <bluetooth/sdp_lib.h>
+#include <bluetooth/rfcomm.h>
+#include <sys/socket.h>
 
 #include "PacketConverter.h"
 #include "../../Games/Input/Commands/MeteoBluetoothCommand.h"
