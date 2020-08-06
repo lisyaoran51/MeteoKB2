@@ -53,7 +53,7 @@ namespace Commands {
 			for (int i = 0; i < queue->size(); i++) {
 				CommandHandler<TCommand>* commandHandler = dynamic_cast<CommandHandler<TCommand>*>(queue->at(i));
 				if (commandHandler != nullptr) {
-					commandHandler->OnBluetoothCommand(command);
+					commandHandler->OnCommand(command);
 				}
 			}
 
