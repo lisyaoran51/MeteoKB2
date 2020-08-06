@@ -2,6 +2,7 @@
 
 #include <thread>
 #include "sdp.h"
+#include <fcntl.h>
 
 using namespace std;
 using namespace Desktop::Devices;
