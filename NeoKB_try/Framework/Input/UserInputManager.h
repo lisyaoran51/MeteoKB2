@@ -20,7 +20,7 @@ namespace Input {
 	public:
 
 		//UserInputManager() : CommandInputManager<FrameworkAction, TCommand>(), RegisterType("UserInputManager")
-		UserInputManager() :KeyBindingInputManager<T>(), RegisterType("UserInputManager")
+		UserInputManager() :KeyBindingInputManager<FrameworkAction>(), RegisterType("UserInputManager")
 		{
 			useParentState = false;
 		}
