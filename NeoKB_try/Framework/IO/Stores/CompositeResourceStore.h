@@ -68,10 +68,10 @@ namespace Stores {
 			return T();
 		}
 
-		virtual ifstream* GetStream(string name) {
+		virtual fstream* GetStream(string name) {
 			vector<string>* names = getFileNames(name);
 
-			ifstream * tempStream = nullptr;
+			fstream * tempStream = nullptr;
 
 			for (int i = 0; i < stores.size(); i++) {
 				for (int j = 0; j < names->size(); j++) {

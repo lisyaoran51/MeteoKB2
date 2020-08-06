@@ -197,7 +197,13 @@ int MeteoBluetoothPhoneV1::readBluetooth()
 
 			BluetoothCommand* btCommand = packetConverter->ConvertToBluetoothCommand(bufferIn, bytes_read);
 
-			// TODO:回傳收到
+			// TODO:檢查是不是傳送音色包，是的話要再converter裡面記錄音色包資料
+
+			if (packetConverter->CheckIsWrtieFileFinishCommand(btCommand)) {
+				BluetoothCommand* returnCommand = packetConverter->FinishWriteFile(btCommand);
+				outputMessages.push_back(dynamic_cast<MeteoBluetoothCommand*>(returnCommand));
+			}
+			// TODO:回傳收到，有時是這邊回傳，有時是其他物件回傳
 
 			if (btCommand != nullptr)
 				pushBluetoothState(btCommand);

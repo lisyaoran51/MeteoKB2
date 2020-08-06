@@ -34,7 +34,7 @@ int SmDecoder::RegisterDecoder(string version, string typeName)
 	return 0;
 }
 
-SmDecoder* SmDecoder::GetDecoder(ifstream * stream)
+SmDecoder* SmDecoder::GetDecoder(fstream * stream)
 {
 	if (!initialized)
 		Initialize();
@@ -62,12 +62,12 @@ SmDecoder* SmDecoder::GetDecoder(ifstream * stream)
 	return instance_creater.CreateInstanceWithT<SmDecoder>(decoders[line]);
 }
 
-Sm<Event>* SmDecoder::Decode(ifstream * stream)
+Sm<Event>* SmDecoder::Decode(fstream * stream)
 {
 	return parseFile(stream);
 }
 
-Sm<Event>* SmDecoder::parseFile(ifstream * stream)
+Sm<Event>* SmDecoder::parseFile(fstream * stream)
 {
 	Sm<Event>* sm = new Sm<Event>();
 

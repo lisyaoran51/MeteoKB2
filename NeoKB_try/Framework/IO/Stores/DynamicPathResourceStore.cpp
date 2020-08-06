@@ -17,7 +17,7 @@ char* DynamicPathResourceStore::Get(string name)
 {
 	string filePath = path + "/" + name;
 
-	ifstream ifs(filePath);
+	fstream ifs(filePath);
 
 
 
@@ -36,12 +36,12 @@ char* DynamicPathResourceStore::Get(string name)
 	return contentInChar;
 }
 
-ifstream * DynamicPathResourceStore::GetStream(string name)
+fstream * DynamicPathResourceStore::GetStream(string name)
 {
 
 	string filePath = path + "/" + name;
 
-	ifstream* ifs = new ifstream(filePath);
+	fstream* ifs = new fstream(filePath);
 
 
 

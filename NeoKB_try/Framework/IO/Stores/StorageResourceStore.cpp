@@ -16,7 +16,7 @@ char * StorageResourceStore::Get(string name)
 	return nullptr;
 }
 
-ifstream * StorageResourceStore::GetStream(string name)
+fstream * StorageResourceStore::GetStream(string name)
 {
 	return storage->GetStream(name);
 }

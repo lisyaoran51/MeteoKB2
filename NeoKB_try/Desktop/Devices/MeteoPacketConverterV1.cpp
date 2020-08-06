@@ -386,9 +386,22 @@ BluetoothCommand * MeteoPacketConverterV1::ConvertToBluetoothCommand(char * buff
 
 		if (CheckPacketType(buffer, size) == PacketType::Json) {
 
-			json context;
+			BluetoothCommand* btCommand = new MeteoBluetoothCommand(commandMap[command]);
 
-			BluetoothCommand* btCommand = new MeteoBluetoothCommand(commandMap[command], context);
+			unsigned short length;
+			memcpy(&length, buffer + sizeof(command), sizeof(length));
+			
+			memset(contextBuffer, 0, sizeof(contextBuffer));
+			memcpy(contextBuffer,
+				buffer + sizeof(command) + sizeof(length) + sizeof(unsigned short) * 2,
+				length - (sizeof(command) + sizeof(length) + sizeof(unsigned short) * 2));
+			// Id:unisgned int
+			// Length:unsigned short 長度
+			// Category : unsigned short 類別
+			// Function : unsigned short 功能
+			// Text : char[] 內文
+
+			btCommand->GetContext() = json::parse(contextBuffer);
 
 			return btCommand;
 		}
@@ -399,12 +412,50 @@ BluetoothCommand * MeteoPacketConverterV1::ConvertToBluetoothCommand(char * buff
 
 MeteoBluetoothCommand * MeteoPacketConverterV1::ConvertToBluetoothCommand(BluetoothMessage * bluetoothMessage)
 {
+	// TODO: 丟出去的部分還沒寫
+	return nullptr;
+}
 
+int MeteoPacketConverterV1::ConvertToByteArray(BluetoothCommand * bluetoothCommand, char * buffer, int bufferMaxSize)
+{
+	// TODO: 丟出去的部分還沒寫
+	return 0;
+}
+
+MeteoBluetoothCommand * MeteoPacketConverterV1::FinishWriteFile(BluetoothCommand * bluetoothCommand)
+{
+	if (!dynamic_cast<MeteoBluetoothCommand*>(bluetoothCommand))
+		return nullptr;
+
+	if (dynamic_cast<MeteoBluetoothCommand*>(bluetoothCommand)->GetCommand() == MeteoCommand::FinishWriteSheetmusic) {
+		string fileName = dynamic_cast<MeteoBluetoothCommand*>(bluetoothCommand)->GetContext()["FileName"];
+
+		MeteoPacketConverterFileSegmentMap* file = fileMap[fileName];
+
+		if (writeFile(file, string("Songs")) > -1) {
+			delete file;
+
+			fileMap.erase(fileName);
+
+			//return returnBluetoothCommand;
+		}
+		else {
+			// 回傳需重傳的片段
+			//return returnBluetoothCommand;
+		}
+		
+
+	}
 
 	return nullptr;
 }
 
-string MeteoPacketConverterV1::ConvertToFile(char * buffer, int size)
+bool MeteoPacketConverterV1::CheckIsWrtieFileFinishCommand(BluetoothCommand * bluetoothCommand)
+{
+	return false;
+}
+
+MeteoBluetoothCommand* MeteoPacketConverterV1::ConvertToFile(char * buffer, int size)
 {
 	unsigned long command = 0x0;
 	memcpy(&command, buffer, sizeof(command));
@@ -440,9 +491,34 @@ string MeteoPacketConverterV1::ConvertToFile(char * buffer, int size)
 			// TODO:檢查重複
 
 
-			return fileName;
+			return nullptr;
 		}
 	}
 
-	return "";
+	return nullptr;
+}
+
+bool MeteoPacketConverterV1::CheckIsFinishWriteCommand(BluetoothCommand * bluetoothCommand)
+{
+	return false;
+}
+
+int MeteoPacketConverterV1::writeFile(MeteoPacketConverterFileSegmentMap * file, string path)
+{
+	if (file->fileSegmentMap.size() < file->segmentAmount)
+		return -1;
+
+	fstream* fileStream = storage->GetStream(path + string("/") + file->fileName, false, true);
+
+	for (int i = 0; i < file->fileSegmentMap.size(); i++) {
+
+		fileStream->write(file->fileSegmentMap[i].first, file->fileSegmentMap[i].second);
+
+	}
+
+	fileStream->close();
+
+	delete fileStream;
+
+	return 0;
 }

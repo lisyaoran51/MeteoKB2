@@ -139,7 +139,7 @@ SmInfo * SmManager::importToStorage(FileStore * fStore, SheetmusicStore * sStore
 
 		LOG(LogLevel::Finer) << "vector<SmInfo*>* SmManager::importToStorage(FileReader&) : Getting stream of [" << smNames->at(i) << "].";
 
-		ifstream* stream = fileReader.GetStream(smNames->at(i));
+		fstream* stream = fileReader.GetStream(smNames->at(i));
 
 		// 每一個要用的decoder會在程式開始的時候註冊
 		LOG(LogLevel::Finer) << "vector<SmInfo*>* SmManager::importToStorage(FileReader&) : Getting decoder of [" << smNames->at(i) << "].";

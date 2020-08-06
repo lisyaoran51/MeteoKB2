@@ -21,7 +21,7 @@ namespace IO {
 	public:
 		FileReader(string p);
 
-		ifstream* GetStream(string name);
+		fstream* GetStream(string name);
 
 		string GetPath();
 

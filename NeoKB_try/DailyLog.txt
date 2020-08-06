@@ -1960,4 +1960,7 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	輸出藍芽是要物件自己去抓output manager，然後建藍芽message，丟給output manager，output manager會自己根據你丟的訊號種類，找到藍芽output manager，然後叫他把訊號丟出去
 	
 7/29
-	在寫bt device
+	在寫bt device，暫時不用寫太完整
+	
+7/31
+	把bt的部分很多東西補起來，但是沒有補得很完整

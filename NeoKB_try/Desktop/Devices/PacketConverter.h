@@ -52,7 +52,13 @@ namespace Devices{
 
 		virtual int ConvertToByteArray(BluetoothCommand* bluetoothCommand, char* buffer, int bufferMaxSize) = 0;
 
-		virtual string ConvertToFile(char* buffer, int size) = 0;
+		virtual BluetoothCommand* ConvertToFile(char* buffer, int size) = 0;
+
+		virtual bool CheckIsFinishWriteCommand(BluetoothCommand* bluetoothCommand) = 0;
+
+		virtual BluetoothCommand* FinishWriteFile(BluetoothCommand* bluetoothCommand) = 0;
+
+		virtual bool CheckIsWrtieFileFinishCommand(BluetoothCommand* bluetoothCommand) = 0;
 
 	protected:
 

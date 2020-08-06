@@ -4,7 +4,7 @@
 using namespace Framework::Database;
 
 
-vector<SmInfo*>* FakeMeteoDatabaseContext::parseSmInfoCsv(ifstream * stream)
+vector<SmInfo*>* FakeMeteoDatabaseContext::parseSmInfoCsv(fstream * stream)
 {
 	vector<SmInfo*>* smInfos = new vector<SmInfo*>();
 
@@ -44,7 +44,7 @@ int FakeMeteoDatabaseContext::prepare()
 		throw runtime_error("FakeMeteoDatabaseContext::prepare(): sminfo.csv not found.");
 	}
 	
-	ifstream* stream = storage->GetStream("SmInfos.csv");
+	fstream* stream = storage->GetStream("SmInfos.csv");
 
 	vector<SmInfo*>* smInfos = parseSmInfoCsv(stream);
 

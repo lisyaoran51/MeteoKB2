@@ -20,9 +20,9 @@ FileReader::FileReader(string p)
 	path = p;
 }
 
-ifstream * FileReader::GetStream(string name)
+fstream * FileReader::GetStream(string name)
 {
-	return new ifstream(path + "/" + name);
+	return new fstream(path + "/" + name);
 }
 
 string FileReader::GetPath()

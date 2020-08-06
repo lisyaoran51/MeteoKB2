@@ -65,7 +65,9 @@ namespace IO{
 		/// <summary>
 		/// 使用前要先check exist，不然會出錯
 		/// </summary>
-		virtual ifstream* GetStream(string filePath) = 0;
+		virtual fstream* GetStream(string filePath) = 0;
+
+		virtual fstream* GetStream(string filePath, bool volitile, bool binary = false) = 0;
 
 	protected:
 

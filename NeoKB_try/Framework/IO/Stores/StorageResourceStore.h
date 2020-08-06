@@ -24,7 +24,7 @@ namespace Stores {
 
 		virtual char* Get(string name);
 
-		virtual ifstream* GetStream(string name);
+		virtual fstream* GetStream(string name);
 
 		virtual string GetFilePath(string name);
 

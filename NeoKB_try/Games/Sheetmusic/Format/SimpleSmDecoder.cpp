@@ -331,7 +331,7 @@ int SimpleSmDecoder::setSectionMap()
 
 }
 
-int SimpleSmDecoder::parseFile(ifstream * stream, Sm<Event>* sm)
+int SimpleSmDecoder::parseFile(fstream * stream, Sm<Event>* sm)
 {
 	LOG(LogLevel::Info) << "int SimpleSmDecoder::parseFile(ifstream*, Sm<Event>*) : Start parsing file.";
 

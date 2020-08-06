@@ -18,7 +18,7 @@ Sm<Event>* ResourceStoreWorkingSm::GetSm()
 	return WorkingSm::GetSm();
 
 	// 新的方法以後再用
-	ifstream* stream = resourceStore->GetStream(getPathForFile(smInfo->fileName));
+	fstream* stream = resourceStore->GetStream(getPathForFile(smInfo->fileName));
 
 
 

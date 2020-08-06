@@ -33,7 +33,7 @@ namespace Stores {
 			throw runtime_error("int FakeEmbeddedResourceStore::Get() : the fake resource store cannot turn into T.");
 		}
 
-		virtual ifstream* GetStream(string name) {
+		virtual fstream* GetStream(string name) {
 			if (storage->Exist(name))
 				return storage->GetStream();
 			else

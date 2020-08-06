@@ -26,6 +26,8 @@ namespace Devices{
 
 	private:
 
+		char contextBuffer[32768] = { 0 };
+
 		map<unsigned long, MeteoCommand> commandMap;
 
 		string getFileName(char* buffer, int size);
@@ -51,7 +53,16 @@ namespace Devices{
 
 		virtual int ConvertToByteArray(BluetoothCommand* bluetoothCommand, char* buffer, int bufferMaxSize);
 		
-		virtual string ConvertToFile(char* buffer, int size);
+		/// <summary>
+		/// 回傳值就是收到訊息的ack訊息，直接傳回手機就好
+		/// <//summary>
+		virtual MeteoBluetoothCommand* ConvertToFile(char* buffer, int size);
+
+		virtual bool CheckIsFinishWriteCommand(BluetoothCommand* bluetoothCommand);
+
+		virtual MeteoBluetoothCommand* FinishWriteFile(BluetoothCommand* bluetoothCommand);
+
+		virtual bool CheckIsWrtieFileFinishCommand(BluetoothCommand* bluetoothCommand);
 
 	protected:
 
@@ -59,7 +70,7 @@ namespace Devices{
 
 		map<string, MeteoPacketConverterFileSegmentMap*> fileMap;
 
-
+		int writeFile(MeteoPacketConverterFileSegmentMap* file, string path);
 
 		enum class MeteoPacketConverterFileType {
 			None,
@@ -75,7 +86,7 @@ namespace Devices{
 			int segmentAmount;
 			MeteoPacketConverterFileType fileType;
 			bool CheckFullFilled();
-			//WriteFile(storage);
+			int WriteFile(fstream* fStream);
 		};
 
 	};

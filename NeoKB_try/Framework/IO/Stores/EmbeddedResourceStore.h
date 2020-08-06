@@ -26,7 +26,7 @@ namespace Stores {
 			return T;
 		}
 
-		virtual ifstream* GetStream(string name) {
+		virtual fstream* GetStream(string name) {
 			throw runtime_error("int NamespacedResourceStore::GetStream() : not implemented yet.");
 			return nullptr;
 		}

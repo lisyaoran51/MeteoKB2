@@ -45,7 +45,9 @@ namespace IO{
 		/// </summary>
 		virtual vector<string>* GetDirectories(string directoryPath);
 
-		virtual ifstream* GetStream(string filePath);
+		virtual fstream* GetStream(string filePath);
+
+		virtual fstream* GetStream(string filePath, bool volitile, bool binary = false);
 
 	protected:
 

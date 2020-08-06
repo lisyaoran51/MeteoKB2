@@ -12,7 +12,7 @@ namespace Database{
 
 	class FakeMeteoDatabaseContext : public MeteoDatabaseContext {
 		
-		vector<SmInfo*>* parseSmInfoCsv(ifstream* stream);
+		vector<SmInfo*>* parseSmInfoCsv(fstream* stream);
 
 	public:
 

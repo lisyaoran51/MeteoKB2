@@ -36,7 +36,7 @@ namespace Stores {
 
 		virtual T Get(string name) = 0;
 
-		virtual ifstream* GetStream(string name) = 0;
+		virtual fstream* GetStream(string name) = 0;
 		
 		virtual string GetFilePath(string name) = 0;
 

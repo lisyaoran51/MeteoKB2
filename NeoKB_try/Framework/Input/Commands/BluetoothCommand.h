@@ -13,6 +13,8 @@ namespace Commands{
 
 	public:
 
+		BluetoothCommand();
+
 		BluetoothCommand(BluetoothCommand* copied);
 
 		string GetCommandName();
@@ -36,19 +38,20 @@ namespace Commands{
 
 		TBluetoothCommand(T c, json text) {
 			command = c;
+			context = text;
+		}
+
+		TBluetoothCommand(T c) {
+			command = c;
 		}
 
 		T GetCommand() {
 			return command;
 		}
 
-
-
 	protected:
 
 		T command;
-
-
 
 	};
 

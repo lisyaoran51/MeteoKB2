@@ -20,6 +20,8 @@ namespace Commands{
 
 		MeteoBluetoothCommand(MeteoCommand c, json text);
 
+		MeteoBluetoothCommand(MeteoCommand c);
+
 	};
 
 	enum class MeteoCommand {

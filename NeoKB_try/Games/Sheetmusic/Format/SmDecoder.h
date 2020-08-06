@@ -39,15 +39,15 @@ namespace Format {
 		static int Initialize();
 
 		static int RegisterDecoder(string version, string typeName);
-		static SmDecoder* GetDecoder(ifstream* stream);
-		Sm<Event>* Decode(ifstream* stream);
+		static SmDecoder* GetDecoder(fstream* stream);
+		Sm<Event>* Decode(fstream* stream);
 
 	protected:
 
 		SmDecoder();
 
-		virtual Sm<Event>* parseFile(ifstream* stream);
-		virtual int parseFile(ifstream* stream, Sm<Event>* sm) = 0;
+		virtual Sm<Event>* parseFile(fstream* stream);
+		virtual int parseFile(fstream* stream, Sm<Event>* sm) = 0;
 	};
 
 	

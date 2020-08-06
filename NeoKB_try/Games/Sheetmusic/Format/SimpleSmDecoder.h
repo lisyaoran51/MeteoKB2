@@ -40,7 +40,7 @@ namespace Format {
 
 		virtual int setSectionMap();
 
-		virtual int parseFile(ifstream* stream, Sm<Event>* sm);
+		virtual int parseFile(fstream* stream, Sm<Event>* sm);
 	};
 
 	enum class SimpleSmDecoderSection {

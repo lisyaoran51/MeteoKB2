@@ -111,14 +111,24 @@ vector<string>* PlatformStorage::GetDirectories(string directoryPath)
 	return directoryPaths;
 }
 
-ifstream* PlatformStorage::GetStream(string filePath)
+fstream* PlatformStorage::GetStream(string filePath)
 {
 	if (!initialized)
 		throw runtime_error("int PlatformStorage::GetStream() : Not initialized.");
 
 
 	// 如果沒先check exist會有error
-	return new ifstream(GetUsableFilePathFor(filePath));
+	return new fstream(GetUsableFilePathFor(filePath));
+}
+
+fstream * PlatformStorage::GetStream(string filePath, bool volitile, bool binary)
+{
+
+	if (binary) {
+		return new fstream(filePath, ios::binary|ios::in|ios::out);
+	}
+
+	return new fstream(filePath);;
 }
 
 string PlatformStorage::locateBasePath()
