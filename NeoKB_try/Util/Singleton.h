@@ -2,6 +2,7 @@
 #define SINGLETON_H
 
 
+#include <type_traits>
 /*
  * https://stackoverflow.com/questions/1008019/c-singleton-design-pattern
  *
