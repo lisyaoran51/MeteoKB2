@@ -7,6 +7,7 @@
 #include "Audio/AudioManager.h"
 #include "Host/GameHost.h"
 #include "Input/UserInputManager.h"
+#include "Input/Commands/CommandInputManager.h"
 
 
 using namespace Framework::Allocation;
@@ -14,6 +15,8 @@ using namespace Framework::IO;
 using namespace Framework::Audio;
 using namespace Framework::Host;
 using namespace Framework::Input;
+using namespace Framework::Input::Commands;
+
 
 
 namespace Framework {
