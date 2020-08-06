@@ -16,5 +16,4 @@ int Game::load()
 Game::Game() : RegisterType("Game")
 {
 	registerLoad(bind((int(Game::*)())&Game::load, this));
-	//CommandInputManager<FrameworkAction, BluetoothCommand>();
 }

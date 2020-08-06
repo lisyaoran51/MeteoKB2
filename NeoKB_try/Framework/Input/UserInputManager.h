@@ -14,15 +14,13 @@ namespace Input {
 	enum class FrameworkAction;
 
 	template<typename TCommand>
-	class UserInputManager : public CommandInputManager<TCommand, FrameworkAction> {
-	//class UserInputManager :public KeyBindingInputManager<FrameworkAction>{
+	class UserInputManager : public CommandInputManager<FrameworkAction, TCommand> {
 
 	public:
 
-		UserInputManager() : CommandInputManager<TCommand, FrameworkAction>(), RegisterType("UserInputManager")
-		//UserInputManager() :KeyBindingInputManager<FrameworkAction>(), RegisterType("UserInputManager")
+		UserInputManager() : CommandInputManager<FrameworkAction, TCommand>(), RegisterType("UserInputManager")
 		{
-			useParentState = false;
+			this->useParentState = false;
 		}
 
 		virtual vector<KeyBinding*>* GetDefaultkeyBindings() {
@@ -32,7 +30,7 @@ namespace Input {
 	protected:
 
 		virtual vector<InputHandler*>* getInputHandlers() {
-			return host->GetAvailableInputHandlers();
+			return this->host->GetAvailableInputHandlers();
 		}
 
 
