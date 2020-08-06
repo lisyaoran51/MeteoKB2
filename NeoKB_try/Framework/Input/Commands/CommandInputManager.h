@@ -28,6 +28,10 @@ namespace Commands {
 			
 		}
 
+		virtual vector<KeyBinding*>* GetDefaultkeyBindings() {
+			return new vector<KeyBinding*>();
+		}
+
 	protected:
 
 		int command;
