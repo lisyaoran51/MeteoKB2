@@ -67,7 +67,7 @@ sdp_session_t * sdp_register_service(int port)
 	// PART TWO
 	// connect to the local SDP server, register the service record, and
 	// disconnect
-	session = sdp_connect(bdaddr_any_cpp, bdaddr_local_cpp, 0);
+	session = sdp_connect(&bdaddr_any_cpp, bdaddr_local_cpp, 0);
 	sdp_record_register(session, &record, 0);
 
 	// cleanup
