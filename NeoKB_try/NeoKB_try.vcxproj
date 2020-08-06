@@ -191,7 +191,6 @@
     <ClCompile Include="Framework\Input\KeyboardState.cpp" />
     <ClCompile Include="Framework\Input\PanelState.cpp" />
     <ClCompile Include="Framework\Input\PassThroughInputManager.cpp" />
-    <ClCompile Include="Framework\Input\UserInputManager.cpp" />
     <ClCompile Include="Framework\IO\BluetoothPhone.cpp" />
     <ClCompile Include="Framework\IO\Display.cpp" />
     <ClCompile Include="Framework\IO\Keyboard.cpp" />

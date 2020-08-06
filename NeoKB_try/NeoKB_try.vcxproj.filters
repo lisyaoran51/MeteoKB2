@@ -984,9 +984,6 @@
     <ClCompile Include="Framework\Devices\InputDevice.cpp">
       <Filter>來源檔案\Framework\Devices</Filter>
     </ClCompile>
-    <ClCompile Include="Framework\Input\UserInputManager.cpp">
-      <Filter>來源檔案\Framework\Input</Filter>
-    </ClCompile>
     <ClCompile Include="Framework\Input\PassThroughInputManager.cpp">
       <Filter>來源檔案\Framework\Input</Filter>
     </ClCompile>

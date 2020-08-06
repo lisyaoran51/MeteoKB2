@@ -30,6 +30,8 @@ namespace Commands {
 
 	protected:
 
+		int command;
+
 		/// <summary>
 		/// 本來會去比對command有沒有在state李，這邊懶得比了直接丟到handleNewBluetoothCommand去
 		/// </summary>

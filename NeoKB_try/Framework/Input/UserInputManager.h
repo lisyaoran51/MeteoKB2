@@ -19,6 +19,9 @@ namespace Input {
 
 		UserInputManager() : CommandInputManager<FrameworkAction, TCommand>(), RegisterType("UserInputManager")
 		{
+			command = 1;
+			keyBindings.size();
+
 			useParentState = false;
 		}
 
