@@ -26,6 +26,8 @@ MeteoBluetoothPhoneV1::MeteoBluetoothPhoneV1(PacketConverter<MeteoCommand>* pCon
 {
 	packetConverter = pConverter;
 
+	return;
+
 	client = init_server(0x1);
 
 	isConnected = true;
