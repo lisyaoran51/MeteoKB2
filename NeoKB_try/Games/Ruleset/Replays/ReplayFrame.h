@@ -2,6 +2,8 @@
 #define REPLAY_FRAME_H
 
 
+#include <string>
+
 using namespace std;
 
 
