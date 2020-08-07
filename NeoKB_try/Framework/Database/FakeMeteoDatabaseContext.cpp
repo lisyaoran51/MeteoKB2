@@ -43,7 +43,7 @@ int FakeMeteoDatabaseContext::prepare()
 
 		throw runtime_error("FakeMeteoDatabaseContext::prepare(): sminfo.csv not found.");
 	}
-	
+	LOG(LogLevel::Debug) << "FakeMeteoDatabaseContext::prepare() : parsing infos.";
 	fstream* stream = storage->GetStream("SmInfos.csv");
 
 	vector<SmInfo*>* smInfos = parseSmInfoCsv(stream);
@@ -51,8 +51,10 @@ int FakeMeteoDatabaseContext::prepare()
 	for (int i = 0; i < smInfos->size(); i++)
 		AddDbSetEntity<SmInfo>(smInfos->at(i));
 
+	LOG(LogLevel::Debug) << "FakeMeteoDatabaseContext::prepare() : adding entity.";
 	delete smInfos;
 	delete stream;
 
+	LOG(LogLevel::Debug) << "FakeMeteoDatabaseContext::prepare() : end.";
 	return 0;
 }
