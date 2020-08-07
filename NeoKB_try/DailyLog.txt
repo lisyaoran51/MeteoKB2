@@ -1964,3 +1964,6 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	
 7/31
 	把bt的部分很多東西補起來，但是沒有補得很完整
+	
+8/7
+	compile看看程式

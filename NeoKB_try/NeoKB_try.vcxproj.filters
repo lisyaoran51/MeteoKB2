@@ -664,6 +664,12 @@
     <Filter Include="來源檔案\Framework\Output\Bluetooths">
       <UniqueIdentifier>{23023baf-d636-4d5b-8aca-7ca018ec886f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="來源檔案\Games\Input">
+      <UniqueIdentifier>{5cfa2f76-9c52-4bbe-bded-06bf98073bda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Games\Input\Commands">
+      <UniqueIdentifier>{ab75022e-e601-40c0-9c22-02f587d65e1d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Games\Graphic\Renderer\renderer.cpp">
@@ -1430,6 +1436,9 @@
     </ClCompile>
     <ClCompile Include="Desktop\Devices\sdp.c">
       <Filter>來源檔案\Desktop\Devices</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\Input\Commands\MeteoBluetoothCommand.cpp">
+      <Filter>來源檔案\Games\Input\Commands</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
