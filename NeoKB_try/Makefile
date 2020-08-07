@@ -173,7 +173,7 @@ MeteoLightBoardV1.o bcm2835.o MeteoBitbangDisplayDevice.o MeteoSpidevDisplayDevi
 MeteoBluetoothDevice.o MeteoBluetoothPhoneV1.o MeteoPacketConverterV1.o sdp.o \
 \
 MeteorGame.o MeteorConfigManager.o MeteorInputManager.o MeteorPlayfield.o \
-MeteorRuleset.o MeteorRulesetExecutor.o MeteorJudgement.o MeteorHitWindow.o MeteorReplayRecorder.o \
+MeteorRuleset.o MeteorRulesetExecutor.o MeteorJudgement.o MeteorHitWindow.o MeteorReplayRecorder.o MeteorReplayFrame.o \
 AutoPedalModifier.o MusicGameModifier.o HandModifier.o MeteorDifficultyModifier.o RepeatPracticeModifier.o FallSpeedModifier.o ClockRateModifier.o \
 MeteorScoreProcessor.o \
 SustainPedalLightRingOutputer.o SustainPedalLightRingPanelMessage.o \
