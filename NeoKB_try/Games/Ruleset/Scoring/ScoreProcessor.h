@@ -7,6 +7,7 @@
 #include "../../Scheduler/Event/Event.h"
 #include "../../Scheduler/Event/EventProcessor.h"
 #include "../../../Util/DataStructure//Bindable.h"
+#include "Score.h"
 
 
 using namespace Games::Rulesets::Judgements;
@@ -50,6 +51,8 @@ namespace Scoring {
 		Bindable<double>* GetAccuracy();
 
 		Bindable<int>* GetCombo();
+
+		virtual int PopulateScore(Score* score);
 
 	protected:
 

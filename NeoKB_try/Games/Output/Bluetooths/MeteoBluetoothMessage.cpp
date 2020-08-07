@@ -8,7 +8,13 @@ MeteoBluetoothMessage::MeteoBluetoothMessage(MeteoCommand mCommand)
 {
 }
 
-json & MeteoBluetoothMessage::GetContext()
+MeteoCommand MeteoBluetoothMessage::GetCommand()
 {
-	// TODO: 於此處插入傳回陳述式
+	return meteoCommand;
+}
+
+string MeteoBluetoothMessage::ToString()
+{
+	// 好像沒用，要做table太麻煩
+	return string();
 }

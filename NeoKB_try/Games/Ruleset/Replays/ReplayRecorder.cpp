@@ -16,6 +16,7 @@ int ReplayRecorder::load()
 int ReplayRecorder::load(TimeController * t)
 {
 	timeController = t;
+	replay = new Replay();
 	return 0;
 }
 

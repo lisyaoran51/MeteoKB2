@@ -184,10 +184,18 @@ int Player::onCompletion()
 	SetIsValidForResume(false);
 
 
-	GetScheduler()->AddDelayedTask([] {
+	GetScheduler()->AddDelayedTask([=] {
 		
 		Score* score = new Score();
 
+		scoreProcessor->PopulateScore(score);
+
+		//score->user = local user 再看一下怎麼寫
+
+		score->smInfo = workingSm.GetValue()->GetSm()->GetSmInfo();
+		score->rulesetInfo = rulesetInfo.GetValue();
+
+		// osu 再這邊不會去加入replay，她錄製replay和進入result是分開的兩件事
 		//Scene::Push(new Result(score, replayRecorder));
 		return 0;
 	}, 3000);

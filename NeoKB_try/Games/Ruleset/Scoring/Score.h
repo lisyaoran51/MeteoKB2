@@ -28,6 +28,9 @@ namespace Scoring {
 
 	public:
 
+		int hits = 0;
+
+		int maxHits = 0;
 		
 		double totalScore = 0;
 

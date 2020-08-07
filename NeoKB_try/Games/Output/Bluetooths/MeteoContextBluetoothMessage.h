@@ -1,9 +1,10 @@
-#ifndef METEO_BLUETOOTH_MESSAGE_H
-#define METEO_BLUETOOTH_MESSAGE_H
+#ifndef METEO_CONTEXT_BLUETOOTH_MESSAGE_H
+#define METEO_CONTEXT_BLUETOOTH_MESSAGE_H
 
 
 #include "../../../Framework/Output/Bluetooths/BluetoothMessage.h"
 #include "../../Input/Commands/MeteoBluetoothCommand.h"
+#include "MeteoBluetoothMessage.h"
 
 
 using namespace Framework::Output::Bluetooths;
@@ -14,20 +15,18 @@ namespace Games {
 namespace Output{
 namespace Bluetooths{
 
-	class MeteoBluetoothMessage : public BluetoothMessage {
+	class MeteoContextBluetoothMessage : public MeteoBluetoothMessage {
 
 
 	public:
 
-		MeteoBluetoothMessage(MeteoCommand mCommand);
+		MeteoContextBluetoothMessage(MeteoCommand mCommand);
 
-		MeteoCommand GetCommand();
-
-		virtual string ToString();
+		json& GetContext();
 
 	protected:
 
-		MeteoCommand meteoCommand;
+		json context;
 
 	};
 

@@ -17,6 +17,8 @@ namespace Replays{
 
 	class MeteorReplayRecorder : public TReplayRecorder<MeteorAction> {
 
+		
+
 	public:
 
 		MeteorReplayRecorder();
@@ -37,7 +39,11 @@ namespace Replays{
 
 	protected:
 
+		double lastCurrentTime = -1;
 
+		double thisCurrentTime = -1;
+
+		virtual int update();
 
 	};
 

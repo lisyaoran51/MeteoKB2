@@ -670,6 +670,18 @@
     <Filter Include="來源檔案\Games\Input\Commands">
       <UniqueIdentifier>{ab75022e-e601-40c0-9c22-02f587d65e1d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="標頭檔\RulesetMeteor\Scenes">
+      <UniqueIdentifier>{c496c7e7-c0d4-4851-b2c4-988a028cb83e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\RulesetMeteor\Scenes\Results">
+      <UniqueIdentifier>{3f5b4463-e1df-4113-905b-604ecefbf58e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetMeteor\Scenes">
+      <UniqueIdentifier>{3539cfb9-636c-42b4-8f85-e48a9d23ad6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetMeteor\Scenes\Results">
+      <UniqueIdentifier>{dbcec8d1-30e3-4810-b51c-0a09a6cadef4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Games\Graphic\Renderer\renderer.cpp">
@@ -1439,6 +1451,15 @@
     </ClCompile>
     <ClCompile Include="Games\Input\Commands\MeteoBluetoothCommand.cpp">
       <Filter>來源檔案\Games\Input\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\Scenes\Results\MeteorResult.cpp">
+      <Filter>來源檔案\RulesetMeteor\Scenes\Results</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\Output\Bluetooths\MeteoFileBluetoothMessage.cpp">
+      <Filter>來源檔案\Games\Output\Bluetooths</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\Output\Bluetooths\MeteoContextBluetoothMessage.cpp">
+      <Filter>來源檔案\Games\Output\Bluetooths</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2436,6 +2457,15 @@
     </ClInclude>
     <ClInclude Include="Desktop\Devices\sdp.h">
       <Filter>標頭檔\Desktop\Devices</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Scenes\Results\MeteorResult.h">
+      <Filter>標頭檔\RulesetMeteor\Scenes\Results</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Output\Bluetooths\MeteoContextBluetoothMessage.h">
+      <Filter>標頭檔\Games\Output\Bluetooths</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Output\Bluetooths\MeteoFileBluetoothMessage.h">
+      <Filter>標頭檔\Games\Output\Bluetooths</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -26,6 +26,19 @@ Bindable<int>* ScoreProcessor::GetCombo()
 	return combo;
 }
 
+int ScoreProcessor::PopulateScore(Score * score)
+{
+	score->hits = hits;
+	score->maxHits = maxHits;
+	score->totalScore = totalScore->GetValue();
+	score->combo = combo->GetValue();
+	score->highestCombo = highestCombo->GetValue();
+	score->accuracy = accuracy->GetValue();
+
+
+	return 0;
+}
+
 ScoreProcessor::ScoreProcessor(RulesetExecutor<Event>* rExecutor)
 {
 

@@ -5,6 +5,7 @@
 #include <vector>
 #include "ReplayFrame.h"
 #include "../../Users/User.h"
+#include <mutex>
 
 
 using namespace std;
@@ -18,6 +19,8 @@ namespace Replays {
 	class Replay {
 
 	public:
+
+		mutable mutex replayFramesMutex;
 
 		vector<ReplayFrame*> replayFrames;
 
