@@ -14,7 +14,7 @@ Framework/Threading:\
 Framework/Timing:Framework/Timing/SpeedAdjusters:\
 \
 Games:Games/Configurations:Games/Input:\
-Games/Ruleset:Games/Ruleset/Modifiers:Games/Ruleset/Judgements:Games/Ruleset/Scoring:\
+Games/Ruleset:Games/Ruleset/Modifiers:Games/Ruleset/Judgements:Games/Ruleset/Scoring:Games/Ruleset/Replays:\
 Games/Scene:Games/Scene/Interlude:Games/Scene/Play:Games/Scene/Play/Hud:Games/Scene/Select:Games/Scene/Results:\
 Games/Input:Games/Input/Commands:\
 Games/Scheduler/Event:Games/Scheduler/Event/ControlPoints:Games/Scheduler/Event/Effect:\
@@ -65,7 +65,7 @@ INCLUDE = -IFramwork -IFramework/Allocation -IFramework/Allocation/Hierachal -IF
 -IFramework/Timing -IFramework/Timing/SpeedAdjusters \
 \
 -IGames -IGames/Configurations -IGames/Input \
--IGames/Ruleset -IGames/Ruleset/Modifiers -IGames/Ruleset/Judgements -IGames/Ruleset/Scoring \
+-IGames/Ruleset -IGames/Ruleset/Modifiers -IGames/Ruleset/Judgements -IGames/Ruleset/Scoring -IGames/Ruleset/Replays \
 -IGames/Scene -IGames/Scene/Interlude -IGames/Scene/Play -IGames/Scene/Play/Hud -IGames/Scene/Select -IGames/Scene/Results \
 -IGames/Input -IGames/Input/Commands \
 -IGames/Scheduler/Event -IGames/Scheduler/Event/ControlPoints -IGames/Scheduler/Event/Effect \
@@ -145,7 +145,7 @@ LinearSpeedAdjuster.o SpeedAdjuster.o \
 \
 MeteoGame.o MeteoGameBase.o \
 MeteoConfigManager.o \
-Ruleset.o RulesetInfo.o RulesetStore.o Judgement.o HasHitWindow.o HitWindow.o \
+Ruleset.o RulesetInfo.o RulesetStore.o Judgement.o HasHitWindow.o HitWindow.o ReplayRecorder.o \
 Modifier.o DifficultyModifier.o EventProcessorFilterModifier.o InstrumentModifier.o TimeControllerModifier.o \
 ScoreProcessor.o \
 MeteoBluetoothCommand.o \
