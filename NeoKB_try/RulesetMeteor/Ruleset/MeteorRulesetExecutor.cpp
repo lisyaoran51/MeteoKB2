@@ -25,6 +25,7 @@
 #include "../Scheduler/Event/InstrumentEvents/PianoSoundEventProcessor.h"
 #include "../Scheduler/Event/PlayfieldEvents/OctaveShiftEventProcessor.h"
 #include "../Scheduler/Event/TimeEvents/RepeatPracticeEventProcessor.h"
+#include "Replays/MeteorReplayRecorder.h"
 
 
 
@@ -47,6 +48,7 @@ using namespace Meteor::Schedulers::Events::IoEvents;
 using namespace Meteor::Schedulers::Events::InstrumentEvents;
 using namespace Meteor::Schedulers::Events::PlayfieldEvents;
 using namespace Meteor::Schedulers::Events::TimeEvents;
+using namespace Meteor::Rulesets::Replays;
 
 
 
@@ -169,8 +171,8 @@ ScoreProcessor * MeteorRulesetExecutor::CreateScoreProcessor()
 
 ReplayRecorder * MeteorRulesetExecutor::CreateReplayRecorder()
 {
-	throw runtime_error("int MeteorRulesetExecutor::CreateReplayRecorder() : not implemented.");
-	return nullptr;
+	//throw runtime_error("int MeteorRulesetExecutor::CreateReplayRecorder() : not implemented.");
+	return new MeteorReplayRecorder();
 }
 
 int MeteorRulesetExecutor::Elapse(MTO_FLOAT elapsedTime)

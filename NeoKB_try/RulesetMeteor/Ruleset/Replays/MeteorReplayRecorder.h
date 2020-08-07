@@ -21,7 +21,7 @@ namespace Replays{
 
 		MeteorReplayRecorder();
 
-		virtual string* GetReplayRecorderVersion();
+		virtual string GetReplayRecorderVersion();
 
 		virtual int OnKeyDown(pair<MeteorAction, int> action);
 

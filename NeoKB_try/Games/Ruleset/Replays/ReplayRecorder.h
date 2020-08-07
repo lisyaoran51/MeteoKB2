@@ -29,7 +29,7 @@ namespace Replays {
 
 		Replay* GetReplay();
 
-		virtual string* GetReplayRecorderVersion() = 0;
+		virtual string GetReplayRecorderVersion() = 0;
 
 	protected:
 
