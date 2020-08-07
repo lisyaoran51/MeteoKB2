@@ -2,6 +2,9 @@
 #define REPLAY_FRAME_H
 
 
+using namespace std;
+
+
 namespace Games {
 namespace Rulesets {
 namespace Replays {
