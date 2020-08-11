@@ -1966,4 +1966,4 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	把bt的部分很多東西補起來，但是沒有補得很完整
 	
 8/7
-	compile看看程式
+	compile看看程式，compile過了，可以來寫寫看recorder。寫了紀錄，沒寫轉檔成文字，和送出藍芽
