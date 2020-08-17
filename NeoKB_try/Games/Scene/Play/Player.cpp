@@ -200,7 +200,7 @@ int Player::onCompletion()
 		score->rulesetInfo = rulesetInfo.GetValue();
 
 		// osu 再這邊不會去加入replay，她錄製replay和進入result是分開的兩件事
-		Scene::Push(rulesetExecutor->CreateResult(score));
+		Push(rulesetExecutor->CreateResult(score));
 		return 0;
 	}, 3);
 
