@@ -181,6 +181,7 @@ int Player::Restart()
 int Player::onCompletion()
 {
 
+	LOG(LogLevel::Info) << "Player::onCompletion : Game end. Go to result.";
 	SetIsValidForResume(false);
 
 
