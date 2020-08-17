@@ -187,6 +187,8 @@ int Player::onCompletion()
 
 	GetScheduler()->AddDelayedTask([=] {
 		
+		LOG(LogLevel::Info) << "Player::onCompletion : push to result.";
+
 		Score* score = new Score();
 
 		scoreProcessor->PopulateScore(score);
