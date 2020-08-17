@@ -20,6 +20,7 @@
 #include "Modifiers/DifficultyModifier.h"
 #include "Modifiers/EventProcessorFilterModifier.h"
 #include "Replays/ReplayRecorder.h"
+#include "../Scene/Results/Result.h"
 
 
 
@@ -45,6 +46,7 @@ using namespace Framework::Timing;
 using namespace Games::Rulesets::Scoring;
 using namespace Games::Rulesets::Modifiers;
 using namespace Games::Rulesets::Replays;
+using namespace Games::Scenes::Results;
 
 
 
@@ -226,6 +228,8 @@ namespace Rulesets {
 		virtual ScoreProcessor* CreateScoreProcessor() = 0;
 
 		virtual ReplayRecorder* CreateReplayRecorder() = 0;
+
+		virtual Result* CreateResult(Score* s) = 0;
 
 
 		template<class _Type>

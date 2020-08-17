@@ -30,6 +30,7 @@ MeteorResult::MeteorResult(Score * s) : Result(s), RegisterType("MeteorResult")
 
 int MeteorResult::onEntering(Scene * lastScene)
 {
+	LOG(LogLevel::Info) << "MeteorResult::onEntering : pushing game over message.";
 	// bluetooth±À°eµ²ªG
 	MeteoBluetoothMessage* meteoBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::FinalScore);
 	outputManager->PushMessage(meteoBluetoothMessage);

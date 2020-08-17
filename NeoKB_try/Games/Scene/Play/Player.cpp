@@ -191,13 +191,16 @@ int Player::onCompletion()
 
 		scoreProcessor->PopulateScore(score);
 
+		// TODO: 這邊應該要把replay做一下clone，城市會比較漂亮
+		score->replay = replayRecorder->GetReplay();
+
 		//score->user = local user 再看一下怎麼寫
 
 		score->smInfo = workingSm.GetValue()->GetSm()->GetSmInfo();
 		score->rulesetInfo = rulesetInfo.GetValue();
 
 		// osu 再這邊不會去加入replay，她錄製replay和進入result是分開的兩件事
-		//Scene::Push(new Result(score, replayRecorder));
+		Scene::Push(rulesetExecutor->CreateResult(score));
 		return 0;
 	}, 3000);
 

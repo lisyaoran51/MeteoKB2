@@ -62,6 +62,8 @@ namespace Rulesets {
 
 		virtual ReplayRecorder* CreateReplayRecorder() override;
 
+		virtual Result* CreateResult(Score* s) override;
+
 		virtual int Elapse(MTO_FLOAT elapsedTime);
 
 	protected:
