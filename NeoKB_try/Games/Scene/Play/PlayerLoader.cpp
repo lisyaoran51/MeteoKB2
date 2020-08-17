@@ -59,7 +59,7 @@ int PlayerLoader::pushWhenLoaded()
 {
 	if (player->GetLoadState() != LoadState::Ready) {
 		try {
-			GetScheduler()->AddDelayedTask(bind((int(PlayerLoader::*)())&PlayerLoader::pushWhenLoaded, this), 500);
+			GetScheduler()->AddDelayedTask(bind((int(PlayerLoader::*)())&PlayerLoader::pushWhenLoaded, this), 0.5);
 		}
 		catch (exception& e) {
 			LOG(LogLevel::Error) << "PlayerLoader::pushWhenLoaded() : add delay task failed [" << e.what() << "].";
