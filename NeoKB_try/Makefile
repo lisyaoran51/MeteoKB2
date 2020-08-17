@@ -36,8 +36,9 @@ ThirdParty/Bass:\
 Desktop:Desktop/Devices:\
 \
 RulesetMeteor:RulesetMeteor/Config:RulesetMeteor/Input:RulesetMeteor/Play:\
-RulesetMeteor/Ruleset:RulesetMeteor/Ruleset/Modifiers:RulesetMeteor/Ruleset/Judgements:RulesetMeteor/Ruleset/Scoring:RulesetMeteor/Ruleset/Replays:\
 RulesetMeteor/Output/Panels:\
+RulesetMeteor/Ruleset:RulesetMeteor/Ruleset/Modifiers:RulesetMeteor/Ruleset/Judgements:RulesetMeteor/Ruleset/Scoring:RulesetMeteor/Ruleset/Replays:\
+RulesetMeteor/Scenes/Results:\
 RulesetMeteor/Scheduler/Event:RulesetMeteor/Scheduler/Event/ControlPoints:RulesetMeteor/Scheduler/Event/Effect:RulesetMeteor/Scheduler/Event/Effect/Algorithm:\
 RulesetMeteor/Scheduler/Event/IoEvents:RulesetMeteor/Scheduler/Event/IoEvents/IoCommunicators:\
 RulesetMeteor/Scheduler/Event/InstrumentEvents:RulesetMeteor/Scheduler/Event/InstrumentEvents/InstrumentControllers:\
@@ -88,6 +89,7 @@ INCLUDE = -IFramwork -IFramework/Allocation -IFramework/Allocation/Hierachal -IF
 \
 -IRulesetMeteor -IRulesetMeteor/Config -IRulesetMeteor/Input -IRulesetMeteor/Output -IRulesetMeteor/Output/Panels \
 -IRulesetMeteor/Play -IRulesetMeteor/Ruleset -IRulesetMeteor/Ruleset/Modifiers -IRulesetMeteor/Ruleset/Judgements -IRulesetMeteor/Ruleset/Scoring -IRulesetMeteor/Ruleset/Replays \
+-IRulesetMeteor/Scenes/Results \
 -IRulesetMeteor/Scheduler/Event -IRulesetMeteor/Scheduler/Event/ControlPoints -IRulesetMeteor/Scheduler/Event/Effect -IRulesetMeteor/Scheduler/Event/Effect/Algorithm \
 -IRulesetMeteor/Scheduler/Event/IoEvents -IRulesetMeteor/Scheduler/Event/IoEvents/IoCommunicators \
 -IRulesetMeteor/Scheduler/Event/InstrumentEvents -IRulesetMeteor/Scheduler/Event/InstrumentEvents/InstrumentControllers \
@@ -174,6 +176,7 @@ MeteoBluetoothDevice.o MeteoBluetoothPhoneV1.o MeteoPacketConverterV1.o sdp.o \
 \
 MeteorGame.o MeteorConfigManager.o MeteorInputManager.o MeteorPlayfield.o \
 MeteorRuleset.o MeteorRulesetExecutor.o MeteorJudgement.o MeteorHitWindow.o MeteorReplayRecorder.o MeteorReplayFrame.o \
+MeteorResult.o \
 AutoPedalModifier.o MusicGameModifier.o HandModifier.o MeteorDifficultyModifier.o RepeatPracticeModifier.o FallSpeedModifier.o ClockRateModifier.o \
 MeteorScoreProcessor.o \
 SustainPedalLightRingOutputer.o SustainPedalLightRingPanelMessage.o \
