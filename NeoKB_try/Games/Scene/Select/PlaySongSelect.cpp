@@ -18,6 +18,8 @@ PlaySongSelect::PlaySongSelect() :RegisterType("PlaySongSelect")
 int PlaySongSelect::onResuming(Scene * lastScene)
 {
 
+	LOG(LogLevel::Debug) << "int PlaySongSelect::onResuming() : go back to song select.";
+
 	DeleteChild(player);
 	ThreadMaster::GetInstance().AddObjectToDelete(player);
 	player = nullptr;
