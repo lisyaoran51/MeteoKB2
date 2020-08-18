@@ -122,7 +122,8 @@ int ScoreProcessor::addUpJudgementScore(Judgement * judgement)
 
 	LOG(LogLevel::Info) << "ScoreProcessor::addUpJudgementScore : add score [" << judgement->GetResultScore() << "], score ["
 		<< baseScore << "/" << maxScore << "], hits [" << hits - miss << "/ " << maxHits << "], combo [" 
-		<< combo->GetValue() <<"/" << highestCombo->GetValue() << "], [" << fixed << setprecision(1) << (float)baseScore / (float)maxScore * 100.f << "%]";
+		<< combo->GetValue() <<"/" << highestCombo->GetValue() << "], [" << fixed << setprecision(1) << (float)baseScore / (float)maxScore * 100.f << "%], progress ["
+		<< hits << "/" << maxHits << "].";
 
 	if (rollingMaxBaseScore != 0)
 		accuracy->SetValue(baseScore / rollingMaxBaseScore);
