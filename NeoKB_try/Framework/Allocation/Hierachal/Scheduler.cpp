@@ -19,7 +19,7 @@ int Scheduler::Update()
 
 	double localCurrentTime = clock->GetCurrentTime();
 
-	LOG(LogLevel::Depricated) << "Scheduler::Update() : current time is [" << localCurrentTime << "].";
+	LOG(LogLevel::Finer) << "Scheduler::Update() : current time is [" << localCurrentTime << "], timed task [" << timedTasks.size() << "], task queue[" << taskQueue.size() << "].";
 
 
 	for (int i = 0; i < timedTasks.size(); i++) {
