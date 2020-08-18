@@ -126,6 +126,7 @@ ScheduledTask::ScheduledTask(function<int(void)> t, double eTime, double rInterv
 	executionTime = eTime;
 	// 如果repeatInterval是-1代表他不repeat，預設值是-1
 	repeatInterval = rInterval;
+	isCancelled = false;
 }
 
 int ScheduledTask::SetExecutionTime(double eTime)
