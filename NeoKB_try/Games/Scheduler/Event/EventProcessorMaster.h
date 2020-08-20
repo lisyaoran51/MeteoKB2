@@ -54,7 +54,7 @@ namespace Events {
 
 		int load();
 
-		int load(FrameworkConfigManager* f, EventProcessorFilter* e);
+		int load(FrameworkConfigManager* f, EventProcessorFilter* e, OutputManager* o);
 
 
 	public:
@@ -103,6 +103,8 @@ namespace Events {
 		PeriodMap<EventProcessor<Event>*>* eventProcessorPeriods;
 
 		EventProcessorFilter* eventProcessorFilter = nullptr;
+
+		OutputManager* outputManager = nullptr;
 
 		int processEvent(MTO_FLOAT elapsedTime);
 

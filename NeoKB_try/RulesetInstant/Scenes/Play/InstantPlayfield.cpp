@@ -1,10 +1,11 @@
 #include "InstantPlayfield.h"
 
 #include "../../../Games/Scheduler/Event/Effect/Algorithm/MapAlgorithm.h"
-#include "../../../RulesetInstant/Scheduler/Event/Effect/Algorithm/FallMapAlgorithm.h"
+#include "../../Scheduler/Event/Effect/Algorithm/InstantFallMapAlgorithm.h"
 #include "../../../Util/Log.h"
 #include "../../../Games/Scheduler/Event/Effect/Algorithm/LinearMapPitchShifter.h"
 #include "../../Scheduler/Event/InstantEventProcessorMaster.h"
+#include "../../../Games/Output/Bluetooths/MeteoContextBluetoothMessage.h"
 
 
 
@@ -14,6 +15,7 @@ using namespace Games::Schedulers::Events::Effects::Algorithms;
 using namespace Instant::Schedulers::Events::Effects::Algorithms;
 using namespace Util;
 using namespace Instant::Schedulers::Events;
+using namespace Games::Output::Bluetooths;
 
 
 int InstantPlayfield::load()
@@ -127,7 +129,6 @@ MeteoPianoPitchState InstantPlayfield::GetMeteoPianoPitchState()
 
 int InstantPlayfield::OnKeyDown(pair<InstantAction, int> action)
 {
-
 
 	return 0;
 }

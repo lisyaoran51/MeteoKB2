@@ -31,11 +31,15 @@ int EventProcessorMaster::load()
 	if (!e)
 		throw runtime_error("int EventProcessorMaster::load() : EventProcessorFilter not found in cache.");
 
-	return load(f, e);
+	OutputManager* o = GetCache<OutputManager>("OutputManager");
+	if (!o)
+		throw runtime_error("int EventProcessorMaster::load() : OutputManager not found in cache.");
+
+	return load(f, e, o);
 }
 
 
-int EventProcessorMaster::load(FrameworkConfigManager * f, EventProcessorFilter * e)
+int EventProcessorMaster::load(FrameworkConfigManager * f, EventProcessorFilter * e, OutputManager* o)
 {
 	eventProcessorFilter = e;
 
@@ -67,7 +71,7 @@ int EventProcessorMaster::load(FrameworkConfigManager * f, EventProcessorFilter 
 	else
 		throw runtime_error("int EventProcessorMaster::load() : Width and Height not found in Setting.");
 
-
+	outputManager = o;
 
 	return 0;
 }
