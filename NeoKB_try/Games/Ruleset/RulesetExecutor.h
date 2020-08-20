@@ -299,6 +299,8 @@ namespace Rulesets {
 				playfield->Add(ep);
 			}
 
+			playfield->SetGetEventProcessorFunction(bind(&RulesetExecutor<T>::getEventProcessor, this, placeholders::_1));
+
 			return 0;
 		}
 

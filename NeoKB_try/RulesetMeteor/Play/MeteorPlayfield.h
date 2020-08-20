@@ -91,6 +91,8 @@ namespace Play{
 
 		virtual EventProcessorMaster* createEventProcessorMaster();
 
+		virtual DynamicEventGenerator* createDynamicEventGenerator();
+
 	};
 
 }

@@ -106,7 +106,7 @@ int EventProcessorMaster::AddDynamicEventProcessor(EventProcessor<Event>* dEvent
 	lock_guard<mutex> guard(processorsMutex);
 
 	dynamicEventProcessors.push_back(dEventProcessor);
-	LOG(LogLevel::Debug) << "EventProcessorMaster::AddDynamicEventProcessor : add explosion [" << dEventProcessor << "], dynamic size = [" << dynamicEventProcessors.size() << "].";
+	LOG(LogLevel::Depricated) << "EventProcessorMaster::AddDynamicEventProcessor : add explosion [" << dEventProcessor << "], dynamic size = [" << dynamicEventProcessors.size() << "].";
 	return 0;
 }
 

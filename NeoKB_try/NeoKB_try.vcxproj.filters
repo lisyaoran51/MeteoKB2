@@ -682,6 +682,108 @@
     <Filter Include="來源檔案\RulesetMeteor\Scenes\Results">
       <UniqueIdentifier>{dbcec8d1-30e3-4810-b51c-0a09a6cadef4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="來源檔案\RulesetInstant">
+      <UniqueIdentifier>{f4fbaddc-990b-4780-9c70-19290d66e258}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\RulesetInstant">
+      <UniqueIdentifier>{8603998d-b16b-437a-896f-a3fb3cbcdc96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\RulesetInstant\Config">
+      <UniqueIdentifier>{57806618-dd49-4847-bcb2-3d637eaeaa87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\RulesetInstant\Input">
+      <UniqueIdentifier>{c2e63a4c-1be0-4b60-a9cc-2afcce829076}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\RulesetInstant\Output">
+      <UniqueIdentifier>{aac5f4b9-66f2-4ca0-aff6-48e1d1dd33c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\RulesetInstant\Rulesets">
+      <UniqueIdentifier>{02bdf752-da1f-43f8-8e91-7191e051e1ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\RulesetInstant\Scenes">
+      <UniqueIdentifier>{0edfdb5a-29dd-478e-a35b-efb2107fb5da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\RulesetInstant\Schedulers">
+      <UniqueIdentifier>{7c5b2b27-7aeb-4171-9e11-cc5b63ecb09c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\RulesetInstant\Sheetmusics">
+      <UniqueIdentifier>{ee4a8bd6-b8b2-481b-94cb-0ec44246a047}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetInstant\Config">
+      <UniqueIdentifier>{cfad9fa6-52f3-4c15-a3ac-38c9c0157460}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetInstant\Input">
+      <UniqueIdentifier>{a1c2cf60-77fc-4152-92b8-198d47b41c39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetInstant\Output">
+      <UniqueIdentifier>{2acaa74c-c883-46cc-96fb-dd58b0e25ab4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetInstant\Rulesets">
+      <UniqueIdentifier>{9fed8a01-22f0-405b-9831-2344868f9ba7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetInstant\Scenes">
+      <UniqueIdentifier>{0999c9c9-24ed-46b9-b780-574a746679d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetInstant\Schedulers">
+      <UniqueIdentifier>{a8dc2df2-5f2c-4af1-a141-2bff56e22481}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetInstant\Sheetmusics">
+      <UniqueIdentifier>{014d86a7-42f7-4be3-a487-f64f72c95401}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetInstant\Sheetmusics\Patterns">
+      <UniqueIdentifier>{d5e605a0-9729-401e-8a00-bd0adf349fea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetInstant\Schedulers\Events">
+      <UniqueIdentifier>{aed8da47-95b0-49b4-8ae4-9f1309643878}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetInstant\Schedulers\Events\ControlPoints">
+      <UniqueIdentifier>{4fdd564b-a1db-4229-aebc-58cadf73f0e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetInstant\Schedulers\Events\Effects">
+      <UniqueIdentifier>{81e5daa5-ceaa-4bfa-a731-dc4c952b579a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetInstant\Schedulers\Events\InstrumentEvents">
+      <UniqueIdentifier>{f62c02cf-7cec-42e8-8817-38de29699a68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetInstant\Schedulers\Events\IoEvents">
+      <UniqueIdentifier>{79f8ebd9-559e-4323-8faf-dc9afc9db45c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetInstant\Schedulers\Events\Effects\Algorithms">
+      <UniqueIdentifier>{0dc83083-4d08-4505-90c4-0f5aab7a453e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetInstant\Scenes\Play">
+      <UniqueIdentifier>{82d4d71c-ea3e-47ef-a971-c22f8f5af6d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetInstant\Scenes\Results">
+      <UniqueIdentifier>{d54cfc0d-43cf-4e71-849e-959dd2abbd64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetInstant\Rulesets\Scoring">
+      <UniqueIdentifier>{96f1dc93-9c39-4d25-a730-3eef6a9b031c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\RulesetInstant\Sheetmusics\Patterns">
+      <UniqueIdentifier>{81c2e9b0-0776-452e-82d7-7e1e7a12ced3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\RulesetInstant\Schedulers\Events">
+      <UniqueIdentifier>{86aafd11-bc9e-44c2-93df-d8f9ae9da1e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\RulesetInstant\Schedulers\Events\ControlPoints">
+      <UniqueIdentifier>{da7362f9-89a7-47ee-88b5-bb4a7ee78c48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\RulesetInstant\Schedulers\Events\Effects">
+      <UniqueIdentifier>{15dcc6fa-dbf3-4167-b4fe-4d89799d9dad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\RulesetInstant\Schedulers\Events\Effects\Algorithms">
+      <UniqueIdentifier>{b468579b-629b-4ef0-a52d-76e9ad91f3f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\RulesetInstant\Scenes\Play">
+      <UniqueIdentifier>{f8a10ec7-7dae-4953-83cb-0bada79d8cc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\RulesetInstant\Scenes\Results">
+      <UniqueIdentifier>{7d62fad6-709e-4069-85bc-54f15149309d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\RulesetInstant\Rulesets\Scoring">
+      <UniqueIdentifier>{baf86c84-8717-469e-a75d-4f7ec244f7e9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Games\Graphic\Renderer\renderer.cpp">
@@ -1460,6 +1562,63 @@
     </ClCompile>
     <ClCompile Include="Games\Output\Bluetooths\MeteoContextBluetoothMessage.cpp">
       <Filter>來源檔案\Games\Output\Bluetooths</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetInstant\Config\InstantConfigManager.cpp">
+      <Filter>來源檔案\RulesetInstant\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetInstant\Input\InstantInputManager.cpp">
+      <Filter>來源檔案\RulesetInstant\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetInstant\Sheetmusic\InstantSheetmusicConverter.cpp">
+      <Filter>來源檔案\RulesetInstant\Sheetmusics</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetInstant\Sheetmusic\InstantSheetmusicPostprocessor.cpp">
+      <Filter>來源檔案\RulesetInstant\Sheetmusics</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetInstant\Sheetmusic\Pattern\InstantPatternGenerator.cpp">
+      <Filter>來源檔案\RulesetInstant\Sheetmusics\Patterns</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetInstant\Scheduler\Event\InstantEventProcessorMaster.cpp">
+      <Filter>來源檔案\RulesetInstant\Schedulers\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetInstant\Scheduler\Event\ControlPoints\InstantInputKeyControlPointHitObject.cpp">
+      <Filter>來源檔案\RulesetInstant\Schedulers\Events\ControlPoints</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetInstant\Scheduler\Event\ControlPoints\InstantNoteControlPointHitObject.cpp">
+      <Filter>來源檔案\RulesetInstant\Schedulers\Events\ControlPoints</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetInstant\Scenes\Play\InstantPlayfield.cpp">
+      <Filter>來源檔案\RulesetInstant\Scenes\Play</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetInstant\Scenes\Results\InstantResult.cpp">
+      <Filter>來源檔案\RulesetInstant\Scenes\Results</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetInstant\Ruleset\InstantRuleset.cpp">
+      <Filter>來源檔案\RulesetInstant\Rulesets</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetInstant\Ruleset\InstantRulesetExecutor.cpp">
+      <Filter>來源檔案\RulesetInstant\Rulesets</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetInstant\Ruleset\Scoring\InstantScoreProcessor.cpp">
+      <Filter>來源檔案\RulesetInstant\Rulesets\Scoring</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetInstant\InstantGame.cpp">
+      <Filter>來源檔案\RulesetInstant</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\Scheduler\Event\DynamicEventGenerator.cpp">
+      <Filter>來源檔案\Games\Schedulers\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetInstant\Scheduler\Event\InstantDynamicEventGenerator.cpp">
+      <Filter>來源檔案\RulesetInstant\Schedulers\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetInstant\Scheduler\Event\Effect\InstantFallEffect.cpp">
+      <Filter>來源檔案\RulesetInstant\Schedulers\Events\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetInstant\Scheduler\Event\Effect\InstantFallEffectMapper.cpp">
+      <Filter>來源檔案\RulesetInstant\Schedulers\Events\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetInstant\Scheduler\Event\Effect\Algorithm\InstantFallMapAlgorithm.cpp">
+      <Filter>來源檔案\RulesetInstant\Schedulers\Events\Effects\Algorithms</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2466,6 +2625,63 @@
     </ClInclude>
     <ClInclude Include="Games\Output\Bluetooths\MeteoFileBluetoothMessage.h">
       <Filter>標頭檔\Games\Output\Bluetooths</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetInstant\Config\InstantConfigManager.h">
+      <Filter>標頭檔\RulesetInstant\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetInstant\Input\InstantInputManager.h">
+      <Filter>標頭檔\RulesetInstant\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetInstant\Sheetmusic\InstantSheetmusicConverter.h">
+      <Filter>標頭檔\RulesetInstant\Sheetmusics</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetInstant\Sheetmusic\InstantSheetmusicPostProcessor.h">
+      <Filter>標頭檔\RulesetInstant\Sheetmusics</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetInstant\Sheetmusic\Pattern\InstantPatternGenerator.h">
+      <Filter>標頭檔\RulesetInstant\Sheetmusics\Patterns</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetInstant\Scheduler\Event\InstantEventProcessorMaster.h">
+      <Filter>標頭檔\RulesetInstant\Schedulers\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetInstant\Scheduler\Event\ControlPoints\InstantInputKeyControlPointHitObject.h">
+      <Filter>標頭檔\RulesetInstant\Schedulers\Events\ControlPoints</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetInstant\Scheduler\Event\ControlPoints\InstantNoteControlPointHitObject.h">
+      <Filter>標頭檔\RulesetInstant\Schedulers\Events\ControlPoints</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetInstant\Scenes\Results\InstantResult.h">
+      <Filter>標頭檔\RulesetInstant\Scenes\Results</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetInstant\Scenes\Play\InstantPlayfield.h">
+      <Filter>標頭檔\RulesetInstant\Scenes\Play</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetInstant\Ruleset\InstantRuleset.h">
+      <Filter>標頭檔\RulesetInstant\Rulesets</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetInstant\Ruleset\InstantRulesetExecutor.h">
+      <Filter>標頭檔\RulesetInstant\Rulesets</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetInstant\Ruleset\Scoring\InstantScoreProcessor.h">
+      <Filter>標頭檔\RulesetInstant\Rulesets\Scoring</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetInstant\InstantGame.h">
+      <Filter>標頭檔\RulesetInstant</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Scheduler\Event\DynamicEventGenerator.h">
+      <Filter>標頭檔\Games\Scheduler\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetInstant\Scheduler\Event\InstantDynamicEventGenerator.h">
+      <Filter>標頭檔\RulesetInstant\Schedulers\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetInstant\Scheduler\Event\Effect\InstantFallEffect.h">
+      <Filter>標頭檔\RulesetInstant\Schedulers\Events\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetInstant\Scheduler\Event\Effect\InstantFallEffectMapper.h">
+      <Filter>標頭檔\RulesetInstant\Schedulers\Events\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetInstant\Scheduler\Event\Effect\Algorithm\InstantFallMapAlgorithm.h">
+      <Filter>標頭檔\RulesetInstant\Schedulers\Events\Effects\Algorithms</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

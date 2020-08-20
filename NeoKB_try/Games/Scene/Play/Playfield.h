@@ -3,6 +3,7 @@
 
 
 #include "../../Scheduler/Event/EventProcessorMaster.h"
+#include "../../Scheduler/Event/DynamicEventGenerator.h"
 #include "../../Scheduler/Event/Effect/Algorithm/MapAlgorithm.h"
 #include "../../../Framework/Configurations/FrameworkConfigManager.h"
 #include "../../../Framework/Allocation/Hierachal/Container.h"
@@ -45,7 +46,7 @@ namespace Play {
 		int load();
 
 		// 繼承playfield的class，在load的時候一定要寫讀取map algo的工作
-		int load(FrameworkConfigManager* f);
+		int load(FrameworkConfigManager* f, OutputManager* o);
 
 
 	public:
@@ -60,6 +61,8 @@ namespace Play {
 		/// </summary>
 		virtual int Add(EventProcessor<Event>* ep);
 
+		int SetGetEventProcessorFunction(function<EventProcessor<Event>*(Event*)> getEventProcessorFunction);
+
 		vector<EventProcessor<Event>*>* GetEventProcessors();
 
 		/// <summary>
@@ -67,13 +70,21 @@ namespace Play {
 		/// </summary>
 		virtual int AddDynamic(EventProcessor<Event>* ep);
 
+		virtual int AddDynamic(Event* e);
+
 		int GetWidth();
 
 		int GetHeight();
 
 		EventProcessorMaster* GetEventProcessorMaster();
 
+		DynamicEventGenerator* GetDynamicEventGenerator();
+
 	protected:
+
+		OutputManager* outputManager = nullptr;
+
+		function<EventProcessor<Event>*(Event*)> getEventProcessor;
 
 		///<summary>
 		/// 在這邊存了會用到的algo，在getEventProcessor時可以到這邊選擇要用的algo
@@ -103,14 +114,18 @@ namespace Play {
 
 		vector<EventProcessor<Event>*> eventProcessors;
 
-		EventProcessorMaster* eventProcessorMaster;
+		EventProcessorMaster* eventProcessorMaster = nullptr;
+
+		DynamicEventGenerator* dynamicEventGenerator = nullptr;
 
 		///<summary>
 		/// 佔存剛建完的影像，還沒位移到正確位置上
 		///</summary>
-		Map* bufferMap;
+		Map* bufferMap = nullptr;
 
 		virtual EventProcessorMaster* createEventProcessorMaster() = 0;
+
+		virtual DynamicEventGenerator* createDynamicEventGenerator() = 0;
 
 	};
 

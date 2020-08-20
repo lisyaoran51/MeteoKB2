@@ -359,4 +359,9 @@ EventProcessorMaster * MeteorPlayfield::createEventProcessorMaster()
 	return new MeteorEventProcessorMaster();
 }
 
+DynamicEventGenerator * MeteorPlayfield::createDynamicEventGenerator()
+{
+	return new DynamicEventGenerator();
+}
+
 

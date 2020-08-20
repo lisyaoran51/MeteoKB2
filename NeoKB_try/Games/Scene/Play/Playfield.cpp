@@ -33,31 +33,28 @@ int Playfield::load()
 	LOG(LogLevel::Info) << "Playfield::load() : Start loading game scene";
 
 
-	//LOG(LogLevel::Finer) << "Playfield::load() : getting scheduler";
-	//Scheduler* s = GetCache<Scheduler>("Scheduler");
-	//if (!s)
-	//	throw runtime_error("int Playfield::load() : Scheduler not found in cache.");
-
-	//LOG(LogLevel::Finer) << "Playfield::load() : getting EventProcessorMaster";
-	//EventProcessorMaster* e = GetCache<EventProcessorMaster>("EventProcessorMaster");
-	//if (!e)
-	//	throw runtime_error("int Playfield::load() : EventProcessorMaster not found in cache.");
-
 	LOG(LogLevel::Finer) << "Playfield::load() : getting FrameworkConfigManager";
 	FrameworkConfigManager* f = GetCache<FrameworkConfigManager>("FrameworkConfigManager");
 	if (!f)
 		throw runtime_error("int Playfield::load() : FrameworkConfigManager not found in cache.");
 
-	return load(f);
+	OutputManager* o = GetCache<OutputManager>("OutputManager");
+	if (!f)
+		throw runtime_error("int Playfield::load() : OutputManager not found in cache.");
+
+	return load(f, o);
 }
 
-int Playfield::load(FrameworkConfigManager* f) {
+int Playfield::load(FrameworkConfigManager* f, OutputManager* o) {
+
+	outputManager = o;
 
 	isPresent = true;
 
 	//scheduler = new Scheduler();
 	eventProcessorMaster = createEventProcessorMaster();
 	//updater = u;
+	dynamicEventGenerator = createDynamicEventGenerator();
 
 
 	int hwVersion;
@@ -113,6 +110,10 @@ int Playfield::load(FrameworkConfigManager* f) {
 	// 這一步是讓他們去抓updater
 	LOG(LogLevel::Fine) << "Playfield::load() : Adding event proessor master ...";
 	AddChild(eventProcessorMaster);
+
+	AddChild(dynamicEventGenerator);
+
+
 
 }
 
@@ -234,6 +235,13 @@ int Playfield::Add(EventProcessor<Event> * ep)
 	return 0;
 }
 
+int Playfield::SetGetEventProcessorFunction(function<EventProcessor<Event>*(Event*)> getEventProcessorFunction)
+{
+	getEventProcessor = getEventProcessorFunction;
+
+	return 0;
+}
+
 vector<EventProcessor<Event>*>* Playfield::GetEventProcessors()
 {
 	return &eventProcessors;
@@ -269,6 +277,11 @@ int Playfield::AddDynamic(EventProcessor<Event>* ep) {
 	return 0;
 }
 
+int Playfield::AddDynamic(Event * e)
+{
+	return AddDynamic(getEventProcessor(e));
+}
+
 
 int Playfield::GetWidth()
 {
@@ -283,4 +296,9 @@ int Playfield::GetHeight()
 EventProcessorMaster * Playfield::GetEventProcessorMaster()
 {
 	return eventProcessorMaster;
+}
+
+DynamicEventGenerator * Playfield::GetDynamicEventGenerator()
+{
+	return dynamicEventGenerator;
 }

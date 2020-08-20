@@ -1970,3 +1970,7 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 
 8/18
 	看一下result有沒有問題
+	
+8/19
+	result可以順利跳回song select了
+	現在來寫及時模式instant
