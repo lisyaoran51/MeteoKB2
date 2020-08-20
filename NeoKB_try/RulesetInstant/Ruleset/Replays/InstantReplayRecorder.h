@@ -1,49 +1,43 @@
-#ifndef METEOR_REPLAY_RECORDER_H
-#define METEOR_REPLAY_RECORDER_H
+#ifndef INSTANT_REPLAY_RECORDER_H
+#define INSTANT_REPLAY_RECORDER_H
 
 
 #include "../../../Games/Ruleset/Replays/ReplayRecorder.h"
-#include "../../Input/MeteorInputManager.h"
+#include "../../Input/InstantInputManager.h"
 
 
 
 using namespace Games::Rulesets::Replays;
-using namespace Meteor::Input;
+using namespace Instant::Input;
 
 
-namespace Meteor {
+namespace Instant {
 namespace Rulesets{
 namespace Replays{
 
-	class MeteorReplayRecorder : public TReplayRecorder<MeteorAction> {
+	class InstantReplayRecorder : public TReplayRecorder<InstantAction> {
 
 		
 
 	public:
 
-		MeteorReplayRecorder();
+		InstantReplayRecorder();
 
 		virtual string GetReplayRecorderVersion();
 
-		virtual int OnKeyDown(pair<MeteorAction, int> action);
+		virtual int OnKeyDown(pair<InstantAction, int> action);
 
-		virtual int OnKeyUp(MeteorAction action);
+		virtual int OnKeyUp(InstantAction action);
 
-		virtual int OnButtonDown(MeteorAction action);
+		virtual int OnButtonDown(InstantAction action);
 
-		virtual int OnButtonUp(MeteorAction action);
+		virtual int OnButtonUp(InstantAction action);
 
-		virtual int OnKnobTurn(pair<MeteorAction, int> action);
+		virtual int OnKnobTurn(pair<InstantAction, int> action);
 
-		virtual int OnSlide(pair<MeteorAction, int> action);
+		virtual int OnSlide(pair<InstantAction, int> action);
 
 	protected:
-
-		double lastCurrentTime = -1;
-
-		double thisCurrentTime = -1;
-
-		virtual int update();
 
 	};
 

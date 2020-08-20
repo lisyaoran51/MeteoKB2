@@ -51,7 +51,8 @@ int InstantFallMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper<Ins
 
 	MTO_FLOAT currentTime = em->GetCurrentTime();// em->GetCurrentTime();
 	MTO_FLOAT startTime = em->GetStartTime();
-	if (startTime > currentTime)
+	// 這個跟meteor fall effect不同的地方是，這個的start time是往下掉的瞬間，meteor的start time是到達底部的時間
+	if (startTime < currentTime)
 		return -1;
 
 	// MTO_FLOAT lifeTime = em->GetLifeTime();
@@ -78,7 +79,7 @@ int InstantFallMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper<Ins
 	}(width, height, m);
 
 	// 目前流星位置：height - speed * currentTime 
-	MTO_FLOAT meteorPos = height - speed * (currentTime - startTime);
+	MTO_FLOAT meteorPos = speed * (startTime - currentTime);
 	
 	LOG(LogLevel::Depricated) << "FallMapGenerateAlgorithm::ImplementGenerate : meteorPos = " << meteorPos << ", current time = " << currentTime << ", speed = " << speed;
 	// 公式: -256*y + 256 

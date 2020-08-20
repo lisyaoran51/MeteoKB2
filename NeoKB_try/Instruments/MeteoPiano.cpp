@@ -2,10 +2,13 @@
 
 #include "Input/PianoAction.h"
 #include "Pitch.h"
+#include "../Games/Output/Bluetooths/MeteoContextBluetoothMessage.h"
+
 
 
 using namespace Instruments;
 using namespace Instruments::Input;
+using namespace Games::Output::Bluetooths;
 
 
 
@@ -65,12 +68,24 @@ int MeteoPiano::OnButtonDown(PianoAction action)
 {
 	LOG(LogLevel::Debug) << "MeteoPiano::OnButtonDown() : get button " << (int)action << ".";
 	if (!isGameControllingPitchState) {
+		MeteoPianoPitchState lastState = state;
+
+		MeteoContextBluetoothMessage* meteoContextBluetoothMessage = nullptr;
 		if (action == PianoAction::LowerOctave) {
 			MoveOctave(PianoPitchMovement::Lower);
+			meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::PressLowerOctaveButton);
 		}
 		else if (action == PianoAction::RaiseOctave) {
 			MoveOctave(PianoPitchMovement::Raise);
+			meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::PressRaiseOctaveButton);
 		}
+		
+		outputManager->PushMessage(meteoContextBluetoothMessage);
+
+		if (state != lastState) {
+			// §ïpanel¿O¸¹
+		}
+
 	}
 	return Piano::OnButtonDown(action);
 }

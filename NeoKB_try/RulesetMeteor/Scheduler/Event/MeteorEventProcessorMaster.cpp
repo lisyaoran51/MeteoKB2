@@ -3,6 +3,7 @@
 #include "Effect/FallEffectMapper.h"
 #include <utility>
 #include "../../../Games/Scheduler/Event/ControlPoints/NoteControlPointHitObject.h"
+#include "../../../Games/Output/Bluetooths/MeteoContextBluetoothMessage.h"
 
 
 
@@ -10,6 +11,7 @@ using namespace Meteor::Schedulers::Events;
 using namespace Meteor::Schedulers::Events::Effects;
 using namespace std;
 using namespace Games::Schedulers::Events::ControlPoints;
+using namespace Games::Output::Bluetooths;
 
 
 
@@ -115,11 +117,78 @@ int MeteorEventProcessorMaster::OnKeyDown(pair<MeteorAction, int> action)
 
 	}
 	*/
+
+	MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::PressKey);
+
+	switch (pitchState) {
+
+	case MeteoPianoPitchState::None:
+		for (auto it = pitchBindings.begin(); it != pitchBindings.end(); it++)
+		{
+			if (action.first == (*it).second)
+				meteoContextBluetoothMessage->GetContext()["Key"] = int((*it).first);
+		}
+		break;
+
+	case MeteoPianoPitchState::Lowered:
+		for (auto it = loweredPitchBindings.begin(); it != loweredPitchBindings.end(); it++)
+		{
+			if (action.first == (*it).second)
+				meteoContextBluetoothMessage->GetContext()["Key"] = int((*it).first);
+		}
+		break;
+
+	case MeteoPianoPitchState::Raised:
+		for (auto it = raisedPitchBindings.begin(); it != raisedPitchBindings.end(); it++)
+		{
+			if (action.first == (*it).second)
+				meteoContextBluetoothMessage->GetContext()["Key"] = int((*it).first);
+		}
+		break;
+
+	}
+
+	meteoContextBluetoothMessage->GetContext()["Volume"] = action.second;
+
+	outputManager->PushMessage(meteoContextBluetoothMessage);
+
 	return 0;
 }
 
 int MeteorEventProcessorMaster::OnKeyUp(MeteorAction action)
 {
+	MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::ReleaseKey);
+
+	switch (pitchState) {
+
+	case MeteoPianoPitchState::None:
+		for (auto it = pitchBindings.begin(); it != pitchBindings.end(); it++)
+		{
+			if (action == (*it).second)
+				meteoContextBluetoothMessage->GetContext()["Key"] = int((*it).first);
+		}
+		break;
+
+	case MeteoPianoPitchState::Lowered:
+		for (auto it = loweredPitchBindings.begin(); it != loweredPitchBindings.end(); it++)
+		{
+			if (action == (*it).second)
+				meteoContextBluetoothMessage->GetContext()["Key"] = int((*it).first);
+		}
+		break;
+
+	case MeteoPianoPitchState::Raised:
+		for (auto it = raisedPitchBindings.begin(); it != raisedPitchBindings.end(); it++)
+		{
+			if (action == (*it).second)
+				meteoContextBluetoothMessage->GetContext()["Key"] = int((*it).first);
+		}
+		break;
+
+	}
+
+	outputManager->PushMessage(meteoContextBluetoothMessage);
+
 	return 0;
 }
 

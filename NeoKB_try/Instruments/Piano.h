@@ -4,9 +4,11 @@
 #include "Instrument.h"
 #include "../Framework/Input/KeyBindings/KeyBinding.h"
 #include "Input/PianoAction.h"
+#include "../Framework/Output/OutputManager.h"
 
 using namespace Framework::Input::KeyBindings;
 using namespace Instruments::Input;
+using namespace Framework::Output;
 
 
 namespace Instruments {
@@ -47,6 +49,8 @@ namespace Instruments {
 
 		int load();
 
+		int load(OutputManager* o);
+
 	public:
 
 		Piano();
@@ -71,6 +75,8 @@ namespace Instruments {
 
 	protected:
 
+		OutputManager* outputManager = nullptr;
+
 		/// <summary>
 		/// 目前的延音方式
 		///	</summary>
@@ -80,6 +86,8 @@ namespace Instruments {
 		/// 是否有打開自動延音
 		///	</summary>
 		bool isAutoSustain = false;
+
+		bool isSensitive = true;
 
 		/// <summary>
 		/// 看哪個鍵正在按下

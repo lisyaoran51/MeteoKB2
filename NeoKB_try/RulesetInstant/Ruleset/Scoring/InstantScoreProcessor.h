@@ -1,5 +1,5 @@
-#ifndef METEOR_SCORE_PROCESSOR_H
-#define METEOR_SCORE_PROCESSOR_H
+#ifndef INSTANT_SCORE_PROCESSOR_H
+#define INSTANT_SCORE_PROCESSOR_H
 
 
 #include "../../../Games/Ruleset/Scoring/ScoreProcessor.h"
@@ -8,15 +8,15 @@
 using namespace Games::Rulesets::Scoring;
 
 
-namespace Meteor {
+namespace Instant {
 namespace Rulesets{
 namespace Scoring{
 
-	class MeteorScoreProcessor : public ScoreProcessor {
+	class InstantScoreProcessor : public ScoreProcessor {
 
 	public:
 
-		MeteorScoreProcessor(RulesetExecutor<Event>* rExecutor);
+		InstantScoreProcessor(RulesetExecutor<Event>* rExecutor);
 
 	};
 

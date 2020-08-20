@@ -3,15 +3,28 @@
 #include "Input/PianoAction.h"
 #include "Pitch.h"
 #include "Input/PianoInputManager.h"
+#include "../Games/Output/Bluetooths/MeteoContextBluetoothMessage.h"
 
 
 using namespace Instruments;
 using namespace Instruments::Input;
+using namespace Games::Output::Bluetooths;
 
 
 
 int Piano::load()
 {
+	OutputManager * o = GetCache<OutputManager>("OutputManager");
+	if (!o)
+		throw runtime_error("int Piano::load() : OutputManager not found in cache.");
+
+	return load(o);
+}
+
+int Piano::load(OutputManager * o)
+{
+	outputManager = o;
+
 	for (int i = (int)PianoAction::VK27_A1; i <= (int)PianoAction::VK37_C4; i++) {
 		isPressingMap[(PianoAction)i] = false;
 	}
@@ -321,7 +334,7 @@ int Piano::OnKeyDown(pair<PianoAction, int> action)
 
 	//getSamples()->at(action.first)->Play();
 	if(getSamples()->find(action.first) != getSamples()->end())
-		getSamples()->at(action.first)->Play(double(action.second)/256.0);
+		getSamples()->at(action.first)->Play(isSensitive ? double(action.second)/256.0 : 0.8);
 
 	isPressingMap[action.first] = true;
 	return 0;
@@ -340,6 +353,34 @@ int Piano::OnKeyUp(PianoAction action)
 
 int Piano::OnButtonDown(PianoAction action)
 {
+	/* 沿音 */
+	if (action == PianoAction::Sustain) {
+		MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::PressSustainButton);
+		if (isAutoSustain == true) {
+			isAutoSustain = false;
+			meteoContextBluetoothMessage->GetContext()["State"] = false;
+		}
+		else {
+			isAutoSustain = true;
+			meteoContextBluetoothMessage->GetContext()["State"] = true;
+		}
+		outputManager->PushMessage(meteoContextBluetoothMessage);
+	}
+	/* 力度 */
+	if (action == PianoAction::Sensitivity) {
+		MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::PressSensitiveButton);
+		if (isSensitive == true) {
+			isSensitive = false;
+			meteoContextBluetoothMessage->GetContext()["State"] = false;
+		}
+		else {
+			isSensitive = true;
+			meteoContextBluetoothMessage->GetContext()["State"] = true;
+		}
+		outputManager->PushMessage(meteoContextBluetoothMessage);
+	}
+
+
 	// 如果目前是電腦控制踏板，就先停止接收踏板訓皓
 	if (sustainType == SustainType::GameControllingSustain && action == PianoAction::SustainPedal)
 		return 0;
@@ -351,7 +392,6 @@ int Piano::OnButtonDown(PianoAction action)
 	if (action == PianoAction::SustainPedalPlugin) {
 		// mainInterface->GetPanel()->ChangeState(PianoAction::SustainButton, false);
 	}
-
 	return 0;
 }
 
@@ -371,10 +411,8 @@ int Piano::OnButtonUp(PianoAction action)
 					if(sampleChannel->GetIsPlaying())
 						sampleChannel->FadeOut();
 			}
-
 		}
 	}
-
 	return 0;
 }
 

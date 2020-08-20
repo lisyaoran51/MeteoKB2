@@ -784,6 +784,12 @@
     <Filter Include="標頭檔\RulesetInstant\Rulesets\Scoring">
       <UniqueIdentifier>{baf86c84-8717-469e-a75d-4f7ec244f7e9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="標頭檔\RulesetInstant\Rulesets\Replays">
+      <UniqueIdentifier>{c755e18b-3dc9-4eb5-b6b5-72efbf949e3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetInstant\Rulesets\Replays">
+      <UniqueIdentifier>{35b901e3-f155-400b-931c-59cd54b59fd1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Games\Graphic\Renderer\renderer.cpp">
@@ -1581,12 +1587,6 @@
     <ClCompile Include="RulesetInstant\Scheduler\Event\InstantEventProcessorMaster.cpp">
       <Filter>來源檔案\RulesetInstant\Schedulers\Events</Filter>
     </ClCompile>
-    <ClCompile Include="RulesetInstant\Scheduler\Event\ControlPoints\InstantInputKeyControlPointHitObject.cpp">
-      <Filter>來源檔案\RulesetInstant\Schedulers\Events\ControlPoints</Filter>
-    </ClCompile>
-    <ClCompile Include="RulesetInstant\Scheduler\Event\ControlPoints\InstantNoteControlPointHitObject.cpp">
-      <Filter>來源檔案\RulesetInstant\Schedulers\Events\ControlPoints</Filter>
-    </ClCompile>
     <ClCompile Include="RulesetInstant\Scenes\Play\InstantPlayfield.cpp">
       <Filter>來源檔案\RulesetInstant\Scenes\Play</Filter>
     </ClCompile>
@@ -1618,6 +1618,21 @@
       <Filter>來源檔案\RulesetInstant\Schedulers\Events\Effects</Filter>
     </ClCompile>
     <ClCompile Include="RulesetInstant\Scheduler\Event\Effect\Algorithm\InstantFallMapAlgorithm.cpp">
+      <Filter>來源檔案\RulesetInstant\Schedulers\Events\Effects\Algorithms</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetInstant\Ruleset\Replays\InstantReplayFrame.cpp">
+      <Filter>來源檔案\RulesetInstant\Rulesets\Replays</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetInstant\Ruleset\Replays\InstantReplayRecorder.cpp">
+      <Filter>來源檔案\RulesetInstant\Rulesets\Replays</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetInstant\Scheduler\Event\Effect\InstantGlowLineEffect.cpp">
+      <Filter>來源檔案\RulesetInstant\Schedulers\Events\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetInstant\Scheduler\Event\Effect\InstantGlowLineEffectMapper.cpp">
+      <Filter>來源檔案\RulesetInstant\Schedulers\Events\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetInstant\Scheduler\Event\Effect\Algorithm\InstantGlowLineMapAlgorithm.cpp">
       <Filter>來源檔案\RulesetInstant\Schedulers\Events\Effects\Algorithms</Filter>
     </ClCompile>
   </ItemGroup>
@@ -2644,12 +2659,6 @@
     <ClInclude Include="RulesetInstant\Scheduler\Event\InstantEventProcessorMaster.h">
       <Filter>標頭檔\RulesetInstant\Schedulers\Events</Filter>
     </ClInclude>
-    <ClInclude Include="RulesetInstant\Scheduler\Event\ControlPoints\InstantInputKeyControlPointHitObject.h">
-      <Filter>標頭檔\RulesetInstant\Schedulers\Events\ControlPoints</Filter>
-    </ClInclude>
-    <ClInclude Include="RulesetInstant\Scheduler\Event\ControlPoints\InstantNoteControlPointHitObject.h">
-      <Filter>標頭檔\RulesetInstant\Schedulers\Events\ControlPoints</Filter>
-    </ClInclude>
     <ClInclude Include="RulesetInstant\Scenes\Results\InstantResult.h">
       <Filter>標頭檔\RulesetInstant\Scenes\Results</Filter>
     </ClInclude>
@@ -2681,6 +2690,21 @@
       <Filter>標頭檔\RulesetInstant\Schedulers\Events\Effects</Filter>
     </ClInclude>
     <ClInclude Include="RulesetInstant\Scheduler\Event\Effect\Algorithm\InstantFallMapAlgorithm.h">
+      <Filter>標頭檔\RulesetInstant\Schedulers\Events\Effects\Algorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetInstant\Ruleset\Replays\InstantReplayRecorder.h">
+      <Filter>標頭檔\RulesetInstant\Rulesets\Replays</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetInstant\Ruleset\Replays\InstantReplayFrame.h">
+      <Filter>標頭檔\RulesetInstant\Rulesets\Replays</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetInstant\Scheduler\Event\Effect\InstantGlowLineEffect.h">
+      <Filter>標頭檔\RulesetInstant\Schedulers\Events\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetInstant\Scheduler\Event\Effect\InstantGlowLineEffectMapper.h">
+      <Filter>標頭檔\RulesetInstant\Schedulers\Events\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetInstant\Scheduler\Event\Effect\Algorithm\InstantGlowLineMapAlgorithm.h">
       <Filter>標頭檔\RulesetInstant\Schedulers\Events\Effects\Algorithms</Filter>
     </ClInclude>
   </ItemGroup>

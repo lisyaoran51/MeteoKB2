@@ -1,6 +1,7 @@
 #include "InstantDynamicEventGenerator.h"
 
 #include "Effect/InstantFallEffect.h"
+#include "Effect/InstantGlowLineEffect.h"
 
 
 using namespace Instant::Schedulers::Events;
@@ -19,7 +20,7 @@ int InstantDynamicEventGenerator::OnCommand(MeteoBluetoothCommand * command)
 
 			int key = command->GetContext()["Key"].get<int>();
 
-			float startTime = GetClock()->GetCurrentTime();
+			double startTime = GetClock()->GetCurrentTime();
 
 			// 如果是黑鍵，就要稍微往後移一點，不然會提早掉下來
 			switch (key % 12) {
@@ -36,6 +37,23 @@ int InstantDynamicEventGenerator::OnCommand(MeteoBluetoothCommand * command)
 
 			playfield->AddDynamic(instantFallEffect);
 		}
+		else if (command->GetContext()["EventType"].get<string>() == "Line") {
+
+			double lifeTime = command->GetContext()["Time"].get<double>();
+
+			int key = command->GetContext()["Key"].get<int>();
+
+			double startTime = GetClock()->GetCurrentTime();
+
+			InstantGlowLineEffect* instantGlowLineEffect = new InstantGlowLineEffect(key, 0, startTime, lifeTime);
+
+			playfield->AddDynamic(instantGlowLineEffect);
+		}
+
+	}
+
+	if (command->GetCommand() == MeteoCommand::InstantLedMatrix) {
+		// 無法避免重疊問題?
 	}
 
 

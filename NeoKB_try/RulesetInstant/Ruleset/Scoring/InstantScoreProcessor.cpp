@@ -1,29 +1,14 @@
-#include "MeteorScoreProcessor.h"
+#include "InstantScoreProcessor.h"
 
-#include "../../Scheduler/Event/ControlPoints/MeteorInputKeyControlPointHitObject.h"
+#include "../../Scheduler/Event/ControlPoints/InstantInputKeyControlPointHitObject.h"
 
-using namespace Meteor::Rulesets::Scoring;
-using namespace Meteor::Schedulers::Events::ControlPoints;
-
-
-MeteorScoreProcessor::MeteorScoreProcessor(RulesetExecutor<Event>* rExecutor) : ScoreProcessor(rExecutor) {
+using namespace Instant::Rulesets::Scoring;
+using namespace Instant::Schedulers::Events::ControlPoints;
 
 
-	// 如果有踏板，而且是電腦控制踏板的話，要把踏板的打擊點拿掉
-	// 這邊先暫時把踏板扣掉，以後再把code改正長一點
-	// pedal事件先全部跳過，以後要檢查視不適game control pedal，是的話再跳過，game control pedal現在存在piano和meteo piano裡
-	for (int i = 0; i < eventProcessors->size(); i++) {
-		if (dynamic_cast<MeteorInputKeyControlPointHitObject*>(eventProcessors->at(i))) {
+InstantScoreProcessor::InstantScoreProcessor(RulesetExecutor<Event>* rExecutor) : ScoreProcessor(rExecutor) {
 
-			maxHits--;
 
-			Judgement* judgement = dynamic_cast<MeteorInputKeyControlPointHitObject*>(eventProcessors->at(i))->GetBestJudgement();
-
-			maxScore -= judgement->GetMaxResultScore();
-
-			delete judgement;
-		}
-	}
 
 
 

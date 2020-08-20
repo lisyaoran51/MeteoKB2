@@ -1,8 +1,9 @@
 #include "InstantEventProcessorMaster.h"
 
-#include "Effect/FallEffectMapper.h"
+#include "Effect/InstantFallEffectMapper.h"
 #include <utility>
 #include "../../../Games/Scheduler/Event/ControlPoints/NoteControlPointHitObject.h"
+#include "../../../Games/Output/Bluetooths/MeteoContextBluetoothMessage.h"
 
 
 
@@ -10,6 +11,7 @@ using namespace Instant::Schedulers::Events;
 using namespace Instant::Schedulers::Events::Effects;
 using namespace std;
 using namespace Games::Schedulers::Events::ControlPoints;
+using namespace Games::Output::Bluetooths;
 
 
 
@@ -26,100 +28,79 @@ int InstantEventProcessorMaster::ChangePitchState(MeteoPianoPitchState pState)
 
 int InstantEventProcessorMaster::OnKeyDown(pair<InstantAction, int> action)
 {
-	LOG(LogLevel::Depricated) << "InstantEventProcessorMaster::OnKeyDown() : get input." << int(action.first);
-	double currentTime = GetClock()->GetCurrentTime();
+	
+	MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::InstantPressKey);
 
-	vector<EventProcessor<Event>*> eventProcessors;
+	switch (pitchState) {
 
-	eventProcessorPeriods->GetItemsContainPeriods(make_pair<float, float>(currentTime - visibleTimeRange, currentTime + visibleTimeRange), &eventProcessors);
-
-	eventProcessorFilter->Filter(&eventProcessors);
-
-	NoteControlPointHitObject* receivedHitObject = nullptr;
-
-	for (int i = 0; i < eventProcessors.size(); i++) {
-
-		NoteControlPointHitObject* noteControlPointHitObject = dynamic_cast<NoteControlPointHitObject*>(eventProcessors[i]);
-
-		if (noteControlPointHitObject == nullptr)
-			continue;
-
-		LOG(LogLevel::Depricated) << "MeteorEventProcessorMaster::OnKeyDown() : checking hit object [" << (int)noteControlPointHitObject->GetPitch() << "] on [" << noteControlPointHitObject->GetStartTime() << "] matching [" << int(action.first) << "] on [" << currentTime << "].";
-
-		if (!matchPitch(noteControlPointHitObject, action.first))
-			continue;
-
-		LOG(LogLevel::Depricated) << "MeteorEventProcessorMaster::OnKeyDown() : matched input! " << int(action.first);
-
-
-		if (noteControlPointHitObject->GetHasJudgementResult())
-			continue;
-
-		LOG(LogLevel::Depricated) << "MeteorEventProcessorMaster::OnKeyDown() : not judged! " << int(action.first);
-
-		if (noteControlPointHitObject->TryJudgement() > 0) {
-			if (receivedHitObject != nullptr) {
-
-				// 最晚的最先被打中，早的hit object就直接跳過
-				// pedal事件先全部跳過，以後要檢查視不適game control pedal，是的話再跳過，game control pedal現在存在piano和meteo piano裡
-				if (noteControlPointHitObject->TryJudgement() > receivedHitObject->TryJudgement())
-					continue;
-			}
-			receivedHitObject = noteControlPointHitObject;
+	case MeteoPianoPitchState::None:
+		for (auto it = pitchBindings.begin(); it != pitchBindings.end(); it++)
+		{
+			if (action.first == (*it).second)
+				meteoContextBluetoothMessage->GetContext()["Key"] = int((*it).first);
 		}
-	}
+		break;
 
-	if (receivedHitObject) {
-
-		LOG(LogLevel::Debug) << "MeteorEventProcessorMaster::OnKeyDown() : find a hit object [" << receivedHitObject << "] on [" << int(action.first) << "].";
-		receivedHitObject->UpdateJudgement(true);
-
-	}
-
-	/*
-	HitObject* receivedHitObject = nullptr;
-
-	for (int i = 0; i < eventProcessors.size(); i++) {
-
-		HitObject* hObject = dynamic_cast<HitObject*>(eventProcessors[i]);
-
-		if (hObject == nullptr)
-			continue;
-
-		if (!matchPitch(hObject, action.first))
-			continue;
-
-		LOG(LogLevel::Depricated) << "MeteorEventProcessorMaster::OnKeyDown() : matched input! " << int(action.first);
-
-
-		if (hObject->GetHasJudgementResult())
-			continue;
-
-		LOG(LogLevel::Depricated) << "MeteorEventProcessorMaster::OnKeyDown() : not judged! " << int(action.first);
-		
-		if (hObject->TryJudgement() > 0) {
-			if (receivedHitObject != nullptr) {
-
-				// 最晚的最先被打中，早的hit object就直接跳過
-				if (hObject->TryJudgement() > receivedHitObject->TryJudgement())
-					continue;
-			}
-			receivedHitObject = hObject;
+	case MeteoPianoPitchState::Lowered:
+		for (auto it = loweredPitchBindings.begin(); it != loweredPitchBindings.end(); it++)
+		{
+			if (action.first == (*it).second)
+				meteoContextBluetoothMessage->GetContext()["Key"] = int((*it).first);
 		}
+		break;
+
+	case MeteoPianoPitchState::Raised:
+		for (auto it = raisedPitchBindings.begin(); it != raisedPitchBindings.end(); it++)
+		{
+			if (action.first == (*it).second)
+				meteoContextBluetoothMessage->GetContext()["Key"] = int((*it).first);
+		}
+		break;
+
 	}
 
-	if (receivedHitObject) {
+	meteoContextBluetoothMessage->GetContext()["Volume"] = action.second;
 
-		LOG(LogLevel::Debug) << "MeteorEventProcessorMaster::OnKeyDown() : find a hit object [" << receivedHitObject << "].";
-		receivedHitObject->UpdateJudgement(true);
+	outputManager->PushMessage(meteoContextBluetoothMessage);
+	
 
-	}
-	*/
 	return 0;
 }
 
 int InstantEventProcessorMaster::OnKeyUp(InstantAction action)
 {
+	MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::InstantReleaseKey);
+
+	switch (pitchState) {
+
+	case MeteoPianoPitchState::None:
+		for (auto it = pitchBindings.begin(); it != pitchBindings.end(); it++)
+		{
+			if (action == (*it).second)
+				meteoContextBluetoothMessage->GetContext()["Key"] = int((*it).first);
+		}
+		break;
+
+	case MeteoPianoPitchState::Lowered:
+		for (auto it = loweredPitchBindings.begin(); it != loweredPitchBindings.end(); it++)
+		{
+			if (action == (*it).second)
+				meteoContextBluetoothMessage->GetContext()["Key"] = int((*it).first);
+		}
+		break;
+
+	case MeteoPianoPitchState::Raised:
+		for (auto it = raisedPitchBindings.begin(); it != raisedPitchBindings.end(); it++)
+		{
+			if (action == (*it).second)
+				meteoContextBluetoothMessage->GetContext()["Key"] = int((*it).first);
+		}
+		break;
+
+	}
+
+	outputManager->PushMessage(meteoContextBluetoothMessage);
+
 	return 0;
 }
 
@@ -315,44 +296,44 @@ int InstantEventProcessorMaster::loadAndMapPitches()
 	/* 升八度 */
 #pragma region RaisedPitchState
 	 
-	raisedPitchBindings[Pitch::c		] =	 InstantrAction::VK24_L_C1 ;
-	raisedPitchBindings[Pitch::db		] =	 InstantrAction::VK24_L_bD1;
-	raisedPitchBindings[Pitch::d		] =	 InstantrAction::VK24_L_D1 ;
-	raisedPitchBindings[Pitch::eb		] =	 InstantrAction::VK24_L_bE1;
-	raisedPitchBindings[Pitch::e		] =	 InstantrAction::VK24_L_E1 ;
-	raisedPitchBindings[Pitch::f		] =	 InstantrAction::VK24_L_F1 ;
-	raisedPitchBindings[Pitch::gb		] =	 InstantrAction::VK24_L_bG1;
-	raisedPitchBindings[Pitch::g		] =	 InstantrAction::VK24_L_G1 ;
-	raisedPitchBindings[Pitch::ab		] =	 InstantrAction::VK24_L_bA1;
-	raisedPitchBindings[Pitch::a		] =	 InstantrAction::VK24_L_A1 ;
-	raisedPitchBindings[Pitch::bb		] =	 InstantrAction::VK24_L_bB1;
-	raisedPitchBindings[Pitch::b		] =	 InstantrAction::VK24_L_B1 ;
+	raisedPitchBindings[Pitch::c		] =	 InstantAction::VK24_L_C1 ;
+	raisedPitchBindings[Pitch::db		] =	 InstantAction::VK24_L_bD1;
+	raisedPitchBindings[Pitch::d		] =	 InstantAction::VK24_L_D1 ;
+	raisedPitchBindings[Pitch::eb		] =	 InstantAction::VK24_L_bE1;
+	raisedPitchBindings[Pitch::e		] =	 InstantAction::VK24_L_E1 ;
+	raisedPitchBindings[Pitch::f		] =	 InstantAction::VK24_L_F1 ;
+	raisedPitchBindings[Pitch::gb		] =	 InstantAction::VK24_L_bG1;
+	raisedPitchBindings[Pitch::g		] =	 InstantAction::VK24_L_G1 ;
+	raisedPitchBindings[Pitch::ab		] =	 InstantAction::VK24_L_bA1;
+	raisedPitchBindings[Pitch::a		] =	 InstantAction::VK24_L_A1 ;
+	raisedPitchBindings[Pitch::bb		] =	 InstantAction::VK24_L_bB1;
+	raisedPitchBindings[Pitch::b		] =	 InstantAction::VK24_L_B1 ;
 											 
-	raisedPitchBindings[Pitch::c1		] =	 InstantrAction::VK24_L_C2 ;
-	raisedPitchBindings[Pitch::d1b		] =	 InstantrAction::VK24_L_bD2;
-	raisedPitchBindings[Pitch::d1		] =	 InstantrAction::VK24_L_D2 ;
-	raisedPitchBindings[Pitch::e1b		] =	 InstantrAction::VK24_L_bE2;
-	raisedPitchBindings[Pitch::e1		] =	 InstantrAction::VK24_L_E2 ;
-	raisedPitchBindings[Pitch::f1		] =	 InstantrAction::VK24_L_F2 ;
-	raisedPitchBindings[Pitch::g1b		] =	 InstantrAction::VK24_L_bG2;
-	raisedPitchBindings[Pitch::g1		] =	 InstantrAction::VK24_L_G2 ;
-	raisedPitchBindings[Pitch::a1b		] =	 InstantrAction::VK24_L_bA2;
-	raisedPitchBindings[Pitch::a1		] =	 InstantrAction::VK24_L_A2 ;
-	raisedPitchBindings[Pitch::b1b		] =	 InstantrAction::VK24_L_bB2;
-	raisedPitchBindings[Pitch::b1		] =	 InstantrAction::VK24_L_B2 ;
+	raisedPitchBindings[Pitch::c1		] =	 InstantAction::VK24_L_C2 ;
+	raisedPitchBindings[Pitch::d1b		] =	 InstantAction::VK24_L_bD2;
+	raisedPitchBindings[Pitch::d1		] =	 InstantAction::VK24_L_D2 ;
+	raisedPitchBindings[Pitch::e1b		] =	 InstantAction::VK24_L_bE2;
+	raisedPitchBindings[Pitch::e1		] =	 InstantAction::VK24_L_E2 ;
+	raisedPitchBindings[Pitch::f1		] =	 InstantAction::VK24_L_F2 ;
+	raisedPitchBindings[Pitch::g1b		] =	 InstantAction::VK24_L_bG2;
+	raisedPitchBindings[Pitch::g1		] =	 InstantAction::VK24_L_G2 ;
+	raisedPitchBindings[Pitch::a1b		] =	 InstantAction::VK24_L_bA2;
+	raisedPitchBindings[Pitch::a1		] =	 InstantAction::VK24_L_A2 ;
+	raisedPitchBindings[Pitch::b1b		] =	 InstantAction::VK24_L_bB2;
+	raisedPitchBindings[Pitch::b1		] =	 InstantAction::VK24_L_B2 ;
 											 
-	raisedPitchBindings[Pitch::c2	    ] =	 InstantrAction::VK24_R_C1 ;
-	raisedPitchBindings[Pitch::d2b		] =	 InstantrAction::VK24_R_bD1;
-	raisedPitchBindings[Pitch::d2	    ] =	 InstantrAction::VK24_R_D1 ;
-	raisedPitchBindings[Pitch::e2b		] =	 InstantrAction::VK24_R_bE1;
-	raisedPitchBindings[Pitch::e2	    ] =	 InstantrAction::VK24_R_E1 ;
-	raisedPitchBindings[Pitch::f2	    ] =	 InstantrAction::VK24_R_F1 ;
-	raisedPitchBindings[Pitch::g2b		] =	 InstantrAction::VK24_R_bG1;
-	raisedPitchBindings[Pitch::g2	    ] =	 InstantrAction::VK24_R_G1 ;
-	raisedPitchBindings[Pitch::a2b		] =	 InstantrAction::VK24_R_bA1;
-	raisedPitchBindings[Pitch::a2	    ] =	 InstantrAction::VK24_R_A1 ;
-	raisedPitchBindings[Pitch::b2b		] =	 InstantrAction::VK24_R_bB1;
-	raisedPitchBindings[Pitch::b2	    ] =	 InstantrAction::VK24_R_B1 ; 
+	raisedPitchBindings[Pitch::c2	    ] =	 InstantAction::VK24_R_C1 ;
+	raisedPitchBindings[Pitch::d2b		] =	 InstantAction::VK24_R_bD1;
+	raisedPitchBindings[Pitch::d2	    ] =	 InstantAction::VK24_R_D1 ;
+	raisedPitchBindings[Pitch::e2b		] =	 InstantAction::VK24_R_bE1;
+	raisedPitchBindings[Pitch::e2	    ] =	 InstantAction::VK24_R_E1 ;
+	raisedPitchBindings[Pitch::f2	    ] =	 InstantAction::VK24_R_F1 ;
+	raisedPitchBindings[Pitch::g2b		] =	 InstantAction::VK24_R_bG1;
+	raisedPitchBindings[Pitch::g2	    ] =	 InstantAction::VK24_R_G1 ;
+	raisedPitchBindings[Pitch::a2b		] =	 InstantAction::VK24_R_bA1;
+	raisedPitchBindings[Pitch::a2	    ] =	 InstantAction::VK24_R_A1 ;
+	raisedPitchBindings[Pitch::b2b		] =	 InstantAction::VK24_R_bB1;
+	raisedPitchBindings[Pitch::b2	    ] =	 InstantAction::VK24_R_B1 ; 
 											 
 	raisedPitchBindings[Pitch::c3	    ] =  InstantAction::VK24_R_C2 ;
 	raisedPitchBindings[Pitch::d3b		] =  InstantAction::VK24_R_bD2;
@@ -382,21 +363,21 @@ bool InstantEventProcessorMaster::matchPitch(HitObject * hObject, InstantAction 
 
 	case MeteoPianoPitchState::None:
 		if (pitchBindings.find(hasPitch->GetPitch()) != pitchBindings.end()) {
-			if (pitchBindings[hasPitch->GetPitch()] == meteorAction)
+			if (pitchBindings[hasPitch->GetPitch()] == instantAction)
 				return true;
 		}
 		break;
 
 	case MeteoPianoPitchState::Lowered:
 		if (loweredPitchBindings.find(hasPitch->GetPitch()) != loweredPitchBindings.end()) {
-			if (loweredPitchBindings[hasPitch->GetPitch()] == meteorAction)
+			if (loweredPitchBindings[hasPitch->GetPitch()] == instantAction)
 				return true;
 		}
 		break;
 
 	case MeteoPianoPitchState::Raised:
 		if (raisedPitchBindings.find(hasPitch->GetPitch()) != raisedPitchBindings.end()) {
-			if (raisedPitchBindings[hasPitch->GetPitch()] == meteorAction)
+			if (raisedPitchBindings[hasPitch->GetPitch()] == instantAction)
 				return true;
 		}
 		break;

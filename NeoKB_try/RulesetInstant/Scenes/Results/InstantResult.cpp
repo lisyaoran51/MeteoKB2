@@ -22,7 +22,7 @@ int InstantResult::load(OutputManager * o)
 	return 0;
 }
 
-InstantResult::MeteorResult(Score * s) : Result(s), RegisterType("InstantResult")
+InstantResult::InstantResult(Score * s) : Result(s), RegisterType("InstantResult")
 {
 
 	registerLoad(bind((int(InstantResult::*)())&InstantResult::load, this));

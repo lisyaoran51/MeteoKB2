@@ -1,31 +1,31 @@
-#include "MeteorReplayFrame.h"
+#include "InstantReplayFrame.h"
 
-using namespace Meteor::Rulesets::Replays;
+using namespace Instant::Rulesets::Replays;
 
 
-MeteorReplayFrame::MeteorReplayFrame(double t, MeteorAction mAction, int v, bool down): ReplayFrame(t)
+InstantReplayFrame::InstantReplayFrame(double t, InstantAction mAction, int v, bool down): ReplayFrame(t)
 {
 	action = mAction;
 	volume = v;
 	isPressingDown = down;
 }
 
-string MeteorReplayFrame::ToString()
+string InstantReplayFrame::ToString()
 {
 	return string();
 }
 
-MeteorAction MeteorReplayFrame::GetMeteorAction()
+InstantAction InstantReplayFrame::GetInstantAction()
 {
 	return action;
 }
 
-int MeteorReplayFrame::GetVolume()
+int InstantReplayFrame::GetVolume()
 {
 	return volume;
 }
 
-bool MeteorReplayFrame::GetIsPressingDown()
+bool InstantReplayFrame::GetIsPressingDown()
 {
 	return isPressingDown;
 }

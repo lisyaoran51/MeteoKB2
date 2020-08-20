@@ -42,6 +42,7 @@ int EventProcessorMaster::load()
 int EventProcessorMaster::load(FrameworkConfigManager * f, EventProcessorFilter * e, OutputManager* o)
 {
 	eventProcessorFilter = e;
+	outputManager = o;
 
 	isPresent = true;
 	// TODO: 去framework config manager拿period map要切成多寬一段 ex:每5秒一段
@@ -71,7 +72,6 @@ int EventProcessorMaster::load(FrameworkConfigManager * f, EventProcessorFilter 
 	else
 		throw runtime_error("int EventProcessorMaster::load() : Width and Height not found in Setting.");
 
-	outputManager = o;
 
 	return 0;
 }
