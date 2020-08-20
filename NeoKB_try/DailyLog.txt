@@ -1974,3 +1974,14 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 8/19
 	result可以順利跳回song select了
 	現在來寫及時模式instant
+	在playfiend下面加一個DynamicEventGenerator，即時收到訊息然後轉換成事件丟進去
+	
+8/20
+	用event processor master把按下的鍵丟出去，丟到藍芽
+	
+	應該要自己測試傳檔o不ok，自己寫一隻程式來測
+	
+	做了互動的落下和光線特效
+	
+	要去sheetmusic manager改收到新埔的反應，因為bt收到普不會讓琴知道，琴要自己去重新掃一遍所有普，然後把新埔加進去
+	song select panel則是只能等待譜傳完以後，收到開始遊戲，才會開始。如果譜沒傳完，收到開始遊戲時不會開始。這邊要修改每次呼叫遊戲開始，都要重新掃一遍所有譜

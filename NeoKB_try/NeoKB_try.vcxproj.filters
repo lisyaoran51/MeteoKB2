@@ -736,9 +736,6 @@
     <Filter Include="來源檔案\RulesetInstant\Schedulers\Events">
       <UniqueIdentifier>{aed8da47-95b0-49b4-8ae4-9f1309643878}</UniqueIdentifier>
     </Filter>
-    <Filter Include="來源檔案\RulesetInstant\Schedulers\Events\ControlPoints">
-      <UniqueIdentifier>{4fdd564b-a1db-4229-aebc-58cadf73f0e0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="來源檔案\RulesetInstant\Schedulers\Events\Effects">
       <UniqueIdentifier>{81e5daa5-ceaa-4bfa-a731-dc4c952b579a}</UniqueIdentifier>
     </Filter>

@@ -28,6 +28,8 @@ int SheetmusicSelectPanel::load(FrameworkConfigManager * f, SmManager * s)
 
 	smManager = s;
 
+	frameworkConfigManager = f;
+
 	// 暫時先這樣 之後再改
 	string songTitle;
 	if (!f->Get(FrameworkSetting::SongTitle, &songTitle))
@@ -87,6 +89,22 @@ int SheetmusicSelectPanel::SetSms(vector<SmInfo*>* sInfos)
 
 int SheetmusicSelectPanel::OnCommand(MeteoBluetoothCommand * command)
 {
+	if (command->GetCommand() == MeteoCommand::WriteHardwareConfiguration) {
+		for (int i = 0; i < command->GetContext()["Configurations"].size(); i++) {
+			if (command->GetContext()["Configurations"].at(i)["category"].get<string>() == "Framework" &&
+				command->GetContext()["Configurations"].at(i)["Object"].get<string>() == "TargetHeight") {
+				int height = command->GetContext()["Configurations"].at(i)["Value"].get<int>();
+
+				frameworkConfigManager->Set(FrameworkSetting::TargetHeight, height); // 不是10就是15，對齊黑鍵或是黑白鍵不同高
+			}
+		}
+
+		
+
+	}
+
+
+	// 這一段要等檔案傳送完畢以後才能執行，不然會失敗
 	if (command->GetCommand() == MeteoCommand::SheetmusicData) {
 		int songId = command->GetContext()["Id"].get<int>();
 

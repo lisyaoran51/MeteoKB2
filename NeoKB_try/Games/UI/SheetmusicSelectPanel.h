@@ -45,7 +45,9 @@ namespace UI {
 
 		vector<SmInfo*>* smInfos = nullptr;
 
-		SmManager* smManager;
+		SmManager* smManager = nullptr;
+
+		FrameworkConfigManager* frameworkConfigManager = nullptr;
 
 		virtual int onCommand(InputState* inputState, InputKey command);
 
