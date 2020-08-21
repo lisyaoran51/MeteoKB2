@@ -104,23 +104,40 @@ int SheetmusicSelectPanel::OnCommand(MeteoBluetoothCommand * command)
 	}
 
 
-	// 這一段要等檔案傳送完畢以後才能執行，不然會失敗
+	// 這一段要在開始傳檔之前送，確認琴裡面有沒有這首歌
 	if (command->GetCommand() == MeteoCommand::SheetmusicData) {
 		int songId = command->GetContext()["Id"].get<int>();
 
 		vector<SmInfo*>* sInfos = smManager->GetSmInfos();
 		for (int i = 0; i < sInfos->size(); i++) {
 			if (sInfos->at(i)->id == songId) {
-				SelectionChanged(sInfos->at(i));
-				//delete smInfos; //這個現在不能delete，因為現在改成寫死，之後改回來從檔案讀的時候才能delete
+				// 回傳已有這首曲子
 
 
-				StartRequest();
+				return 0;
+			}
+			else {
+				// 回傳沒有這首曲子
 				return 0;
 			}
 		}
 	}
 
+	if (command->GetCommand() == MeteoCommand::RequestLoadGame) {
+		string fileName = command->GetContext()["FileName"].get<string>();
+
+		vector<SmInfo*>* sInfos = smManager->GetSmInfos();
+		for (int i = 0; i < sInfos->size(); i++) {
+			if (sInfos->at(i)->fileName == fileName) {
+
+				SelectionChanged(sInfos->at(i));
+
+				StartRequest();
+				return 0;
+			}
+		}
+
+	}
 
 
 	return -1;

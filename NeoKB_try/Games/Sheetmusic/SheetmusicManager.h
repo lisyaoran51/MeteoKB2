@@ -21,10 +21,20 @@
 #include "../../Framework/IO/FileStore.h"
 
 
+
 namespace Framework {
 namespace Host{
 	class GameHost;
 }}
+
+namespace Framework {
+namespace IO{
+namespace Api{
+
+	class ApiAccess;
+
+}}}
+
 
 
 using namespace std;
@@ -33,6 +43,7 @@ using namespace Games::Sheetmusics::IO;
 using namespace Games::Sheetmusics::Format;
 using namespace Games::Rulesets;
 using namespace Framework::IO;
+using namespace Framework::IO::Api;
 using namespace Framework::Allocation::Hierachal;
 
 
@@ -50,21 +61,25 @@ namespace Sheetmusics {
 
 		function<DatabaseContext*()> getContext;
 
-		SheetmusicStore* smStore;
+		SheetmusicStore* smStore = nullptr;
 
-		FileStore* fileStore;
+		FileStore* fileStore = nullptr;
 
-		Storage* storage;
+		Storage* storage = nullptr;
 
-		RulesetStore* rulesetStore;
+		RulesetStore* rulesetStore = nullptr;
+
+		ApiAccess* apiAccess = nullptr;
 
 		SheetmusicStore* createSmStore(function<DatabaseContext*()> gContext);
+
+		int setupApiAccess();
 
 	public:
 
 		SmManager();
 
-		SmManager(Storage* s, function<DatabaseContext*()> gContext, RulesetStore* rStore, GameHost* gHost);
+		SmManager(Storage* s, function<DatabaseContext*()> gContext, RulesetStore* rStore, ApiAccess* aAccess, GameHost* gHost);
 
 		~SmManager();
 
@@ -110,6 +125,7 @@ namespace Sheetmusics {
 		/// 這個的功能指示把sm裡面的投檔資料讀出來，裡面的event還不需要，裡面的event要等到遊戲開始時再讀
 		/// </summary>
 		SmInfo* importToStorage(FileStore* fileStore, SheetmusicStore* smStore, FileReader& fileReader);
+
 		//vector<SmInfo*>* importToStorage(FileReader& fileReader); //目前沒有在存回storage所以不用
 
 		// WorkingSm(sm_info_t* s);

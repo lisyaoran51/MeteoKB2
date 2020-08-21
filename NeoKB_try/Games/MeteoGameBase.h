@@ -9,6 +9,7 @@
 #include "../Framework/Database/DatabaseContextFactory.h"
 #include "Configurations/MeteoConfigManager.h"
 #include "../Util/DataStructure/BindablePointer.h"
+#include "../Framework/IO/Api/ApiAccess.h"
 
 
 using namespace Framework;
@@ -19,6 +20,7 @@ using namespace Framework::IO;
 using namespace Framework::Database;
 using namespace Games::Configurations;
 using namespace Util::DataStructure;
+using namespace Framework::IO::Api;
 
 
 namespace Games {
@@ -46,17 +48,19 @@ namespace Games {
 
 	protected:
 
-		RulesetStore* rulesetStore;
+		ApiAccess* apiAccess = nullptr;
 
-		FileStore* fileStore;
+		RulesetStore* rulesetStore = nullptr;
 
-		KeyBindingStore* keyBindingStore;
+		FileStore* fileStore = nullptr;
 
-		SmManager* smManager;
+		KeyBindingStore* keyBindingStore = nullptr;
+
+		SmManager* smManager = nullptr;
 
 		BindablePointer<WorkingSm*> workingSm;
 
-		MeteoConfigManager* localConfig;
+		MeteoConfigManager* localConfig = nullptr;
 
 		virtual int update();
 

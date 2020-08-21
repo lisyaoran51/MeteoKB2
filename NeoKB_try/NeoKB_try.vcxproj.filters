@@ -787,6 +787,12 @@
     <Filter Include="來源檔案\RulesetInstant\Rulesets\Replays">
       <UniqueIdentifier>{35b901e3-f155-400b-931c-59cd54b59fd1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="標頭檔\Framework\IO\Api">
+      <UniqueIdentifier>{0c3b690e-fbc3-4849-a810-d41f2da0c416}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Framework\IO\Api">
+      <UniqueIdentifier>{8f1516d4-f638-4b7b-ae64-bdd5589d160c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Games\Graphic\Renderer\renderer.cpp">
@@ -1631,6 +1637,9 @@
     </ClCompile>
     <ClCompile Include="RulesetInstant\Scheduler\Event\Effect\Algorithm\InstantGlowLineMapAlgorithm.cpp">
       <Filter>來源檔案\RulesetInstant\Schedulers\Events\Effects\Algorithms</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\IO\Api\ApiAccess.cpp">
+      <Filter>來源檔案\Framework\IO\Api</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2703,6 +2712,9 @@
     </ClInclude>
     <ClInclude Include="RulesetInstant\Scheduler\Event\Effect\Algorithm\InstantGlowLineMapAlgorithm.h">
       <Filter>標頭檔\RulesetInstant\Schedulers\Events\Effects\Algorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\IO\Api\ApiAccess.h">
+      <Filter>標頭檔\Framework\IO\Api</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

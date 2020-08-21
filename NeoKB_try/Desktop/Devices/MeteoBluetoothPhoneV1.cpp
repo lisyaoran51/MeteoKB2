@@ -107,6 +107,8 @@ int MeteoBluetoothPhoneV1::readBluetooth()
 			if (packetConverter->CheckIsWrtieFileFinishCommand(btCommand)) {
 				BluetoothCommand* returnCommand = packetConverter->FinishWriteFile(btCommand);
 				outputMessages.push_back(dynamic_cast<MeteoBluetoothCommand*>(returnCommand));
+				// 讓sm manager把新的sm檔寫入sm info裡面
+				onWriteSmFileSuccess.Trigger(returnCommand->GetContext()["FileName"].get<string>());
 			}
 			// TODO:回傳收到，有時是這邊回傳，有時是其他物件回傳
 

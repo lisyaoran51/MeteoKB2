@@ -469,9 +469,13 @@ MeteoBluetoothCommand * MeteoPacketConverterV1::FinishWriteFile(BluetoothCommand
 	if (dynamic_cast<MeteoBluetoothCommand*>(bluetoothCommand)->GetCommand() == MeteoCommand::FinishWriteSheetmusic) {
 		string fileName = dynamic_cast<MeteoBluetoothCommand*>(bluetoothCommand)->GetContext()["FileName"];
 
+		// 拿掉附檔名
+		string documentName = fileName.substr(0, fileName.find(string("."), 0));
+
 		MeteoPacketConverterFileSegmentMap* file = fileMap[fileName];
 
-		if (writeFile(file, string("Songs")) > -1) {
+		// sm檔位置為"song/檔名/檔名.sm"
+		if (writeFile(file, string("Songs/") + documentName) > -1) {
 			delete file;
 
 			fileMap.erase(fileName);

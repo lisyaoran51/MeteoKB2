@@ -6,6 +6,7 @@
 #include <bluetooth/sdp_lib.h>
 #include <bluetooth/rfcomm.h>
 #include <sys/socket.h>
+#include "../../Util/DataStructure/ActionList.h"
 
 #include "PacketConverter.h"
 #include "../../Games/Input/Commands/MeteoBluetoothCommand.h"
@@ -14,9 +15,13 @@
 #include <vector>
 
 
+
 using namespace Games::Input::Commands;
 using namespace Framework::Input;
 using namespace std;
+using namespace Util::DataStructure;
+
+
 
 
 namespace Desktop {
@@ -51,6 +56,24 @@ namespace Devices {
 
 		int PushOutputMessage(OutputMessage* outputMessage);
 
+		/// <summary>
+		/// 寫入sm檔時的callback
+		/// </summary>
+		int AddOnStartWritingSmFile(function<int(string)> callback);
+		int AddOnWriteSmFileSuccess(function<int(string)> callback);
+
+		/// <summary>
+		/// 寫入新音色時的callback
+		/// </summary>
+		int AddOnStartWritingSoundFilePackage(function<int(string)> callback);
+		int AddOnWriteSoundFilePackageSuccess(function<int(string)> callback);
+
+		/// <summary>
+		/// 寫入新主程式時的callback
+		/// </summary>
+		int AddOnStartWritingProgram(function<int(string)> callback);
+		int AddOnWriteProgramSuccess(function<int(string)> callback);
+
 	protected:
 
 		bool isConnected = false;
@@ -62,6 +85,15 @@ namespace Devices {
 		PacketConverter<MeteoCommand>* packetConverter = nullptr;
 
 		vector<MeteoBluetoothCommand*> outputMessages;
+
+		ActionList<int, string> onStartWritingSmFile;
+		ActionList<int, string> onWriteSmFileSuccess;
+
+		ActionList<int, string> onStartWritingSoundFilePackage;
+		ActionList<int, string> onWriteSoundFilePackageSuccess;
+
+		ActionList<int, string> onStartWritingProgram;
+		ActionList<int, string> onWriteProgramSuccess;
 
 		int work();
 

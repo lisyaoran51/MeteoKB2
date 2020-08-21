@@ -49,13 +49,15 @@ int MeteoGameBase::load()
 
 	GetDependencies()->Cache<MeteoConfigManager>(localConfig);
 
+	GetDependencies()->Cache<ApiAccess>(apiAccess = new ApiAccess(gameHost));
+
 	GetDependencies()->Cache<RulesetStore>(rulesetStore = new RulesetStore(bind(&DatabaseContextFactory::GetContext, readonlyDbContextFactory)));
 
 	GetDependencies()->Cache<FileStore>(fileStore = new FileStore(bind(&DatabaseContextFactory::GetContext, volitileDbContextFactory), gameHost->GetStorage()));
 
 	GetDependencies()->Cache<KeyBindingStore>(keyBindingStore = new KeyBindingStore(bind(&DatabaseContextFactory::GetContext, volitileDbContextFactory)));
 
-	GetDependencies()->Cache<SmManager>(smManager = new SmManager(gameHost->GetStorage(), bind(&DatabaseContextFactory::GetContext, volitileDbContextFactory), rulesetStore, gameHost));
+	GetDependencies()->Cache<SmManager>(smManager = new SmManager(gameHost->GetStorage(), bind(&DatabaseContextFactory::GetContext, volitileDbContextFactory), rulesetStore, apiAccess, gameHost));
 
 	// 原本要給Working sm做default value，但是現在不用了，所以就直接改成object而不適指標
 	//workingSm = new Bindable<WorkingSm*>();
