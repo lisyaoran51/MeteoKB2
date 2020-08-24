@@ -2,10 +2,12 @@
 
 #include "Effect/InstantFallEffect.h"
 #include "Effect/InstantGlowLineEffect.h"
+#include "InstrumentEvents/InstantPianoSoundEvent.h"
 
 
 using namespace Instant::Schedulers::Events;
 using namespace Instant::Schedulers::Events::Effects;
+using namespace Instant::Schedulers::Events::InstrumentEvents;
 
 
 
@@ -54,6 +56,28 @@ int InstantDynamicEventGenerator::OnCommand(MeteoBluetoothCommand * command)
 
 	if (command->GetCommand() == MeteoCommand::InstantLedMatrix) {
 		// 無法避免重疊問題?
+		// 懶得做這個功能
+	}
+
+	if (command->GetCommand() == MeteoCommand::InstantPianoEvent) {
+
+		double delayStartTime = command->GetContext()["DelayTime"].get<double>();
+
+		int key = command->GetContext()["Key"].get<int>();
+
+		int volume = command->GetContext()["Volume"].get<int>();
+
+		double startTime = GetClock()->GetCurrentTime();
+
+		InstantPianoSoundEvent* instantPianoSoundEvent = nullptr;
+
+		if (key == -1)
+			instantPianoSoundEvent = new InstantPianoSoundEvent(volume == 0, startTime + delayStartTime, 0);
+		else
+			instantPianoSoundEvent = new InstantPianoSoundEvent(pair<Pitch, float>((Pitch)key, float(volume) / 128.f), startTime + delayStartTime, 0);
+
+		playfield->AddDynamic(instantPianoSoundEvent);
+
 	}
 
 

@@ -5,7 +5,6 @@
 #include "../../Framework/Input/PassThroughInputManager.h"
 #include "../../Framework/Timing/TimeController.h"
 #include "../../Games/Ruleset/Scoring/ScoreProcessor.h"
-#include "../Timing/MeteorTimeController.h"
 
 
 using namespace Games::Rulesets;
@@ -13,7 +12,6 @@ using namespace Games::Schedulers::Events;
 using namespace Framework::Input;
 using namespace Framework::Timing;
 using namespace Games::Rulesets::Scoring;
-using namespace Instant::Timing;
 
 
 

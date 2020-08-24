@@ -31,7 +31,9 @@ namespace Config{
 	enum class InstantSetting {
 
 		PatternGenerator,
-		FallMapAlgorithm,
+		InstantFallMapAlgorithm,
+		InstantGlowLineMapAlgorithm,
+		InstantVirtualInstrumentController,
 
 		WhiteKeyTargetHeight,
 		BlackKeyTargetHeight,

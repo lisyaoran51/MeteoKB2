@@ -4,16 +4,17 @@
 #include "../Sheetmusic/InstantSheetmusicPostProcessor.h"
 #include "../Scenes/Play/InstantPlayfield.h"
 #include "../../Games/Scheduler/Event/Effect/EffectMapper.h"
-#include "../Scheduler/Event/Effect/FallEffect.h"
-#include "../Scheduler/Event/Effect/FallEffectMapper.h"
+#include "../Scheduler/Event/Effect/InstantFallEffect.h"
+#include "../Scheduler/Event/Effect/InstantFallEffectMapper.h"
+#include "../Scheduler/Event/InstrumentEvents/InstantPianoSoundEventProcessor.h"
 #include "../../Games/Scheduler/Event/SystemEvents/SystemEventHandler.h"
 #include "../../Games/Scheduler/Event/SystemEvents/StopSystemEvent.h"
 #include "../Input/InstantInputManager.h"
 #include "../Timing/InstantTimeController.h"
 #include "../../Framework/Timing/SpeedAdjusters/LinearSpeedAdjuster.h"
 #include "Scoring/InstantScoreProcessor.h"
-#include "../Scheduler/Event/ControlPoints/InstantNoteControlPointHitObject.h"
 #include "../Scenes/Results/InstantResult.h"
+#include "Replays/InstantReplayRecorder.h"
 
 
 
@@ -26,13 +27,14 @@ using namespace Games::Sheetmusics;
 using namespace Instant::Sheetmusics;
 using namespace Instant::Scenes::Play;
 using namespace Games::Schedulers::Events::Effects;
-using namespace Meteor::Schedulers::Events::Effects;
+using namespace Instant::Schedulers::Events::Effects;
+using namespace Instant::Schedulers::Events::InstrumentEvents;
 using namespace Instant::Input;
 using namespace Instant::Timing;
 using namespace Framework::Timing::SpeedAdjusters;
 using namespace Instant::Rulesets::Scoring;
-using namespace Instant::Schedulers::Events::ControlPoints;
 using namespace Instant::Scenes::Results;
+using namespace Instant::Rulesets::Replays;
 
 
 
@@ -66,13 +68,10 @@ int InstantRulesetExecutor::load()
 InstantRulesetExecutor::InstantRulesetExecutor(): RegisterType("InstantRulesetExecutor"), RulesetExecutor()
 {
 	// 如果要自定效果，要直接從config那裡改map algo，這邊不能動。
-	eventProcessorTable["FallEffect"		] = "FallEffectMapper";
-	eventProcessorTable["StopSystemEvent"	] = "SystemEventHandler";
-	eventProcessorTable["NoteControlPoint"	] = "InstantNoteControlPointHitObject";
-	eventProcessorTable["InputKeyControlPoint"	] = "InstantInputKeyControlPointHitObject";
-	eventProcessorTable["PianoEvent"		] = "PianoEventProcessor";
-	eventProcessorTable["PianoSoundEvent"	] = "PianoSoundEventProcessor";
-	eventProcessorTable["OctaveShiftEvent"	] = "OctaveShiftEventProcessor";
+	eventProcessorTable["InstantFallEffect"		] = "InstantFallEffectMapper";
+	eventProcessorTable["InstantGlowLineEffect"	] = "InstantGlowLineEffectMapper";
+	eventProcessorTable["StopSystemEvent"		] = "SystemEventHandler";
+	eventProcessorTable["InstantPianoSoundEvent"] = "InstantPianoSoundEventProcessor";
 
 	// 註冊private load (c++才需要)
 	registerLoad(bind(static_cast<int(InstantRulesetExecutor::*)(void)>(&InstantRulesetExecutor::load), this));
@@ -139,37 +138,23 @@ EventProcessor<Event>* InstantRulesetExecutor::getEventProcessor(Event * e)
 	// 為什麼不用event自己來create? 因為要去搭配不同的mapper，所以要動態調配
 	string processorType = GetProcessorType(e->GetTypeName()); // .c_str();
 
-	LOG(LogLevel::Finer) << "MeteorRulesetExecutor::getEventProcessor(Event*) : event [" << e->GetStartTime() << "] has processor type [" << processorType << "] from ["<< e->GetTypeName() << "].";
+	LOG(LogLevel::Finer) << "InstantRulesetExecutor::getEventProcessor(Event*) : event [" << e->GetStartTime() << "] has processor type [" << processorType << "] from ["<< e->GetTypeName() << "].";
 
 
 	//InstanceCreator<MtoObject>& iCreator = InstanceCreator<MtoObject>::GetInstance();
 	//EventProcessor<Event>* eventProcessor = iCreator.CreateInstance<EventProcessor<Event>>(processorType);
-	if (processorType == "FallEffectMapper") {
+	if (processorType == "InstantFallEffectMapper") {
 		int width = playfield->GetWidth();
 		int height = playfield->GetHeight();
-		return (new FallEffectMapper(width, height))->RegisterEvent(e);
+		return (new InstantFallEffectMapper(width, height))->RegisterEvent(e);
 	}
 	else if (processorType == "SystemEventHandler") {
 		// TODO: 在這邊把歌曲名稱擺進去
 		return (new SystemEventHandler<StopSystemEvent>())->RegisterEvent(e);
 	}
-	else if (processorType == "InstantNoteControlPointHitObject") {
-		return (new MeteorNoteControlPointHitObject())->RegisterEvent(e);
-	}
-	else if (processorType == "InstantInputKeyControlPointHitObject") {
-		LOG(LogLevel::Depricated) << "InstantRulesetExecutor::getEventProcessor : getting event InstantInputKeyControlPointHitObject at [" << e->GetStartTime() << "]";
-		return (new MeteorInputKeyControlPointHitObject())->RegisterEvent(e);
-	}
-	else if (processorType == "PianoEventProcessor") {
+	else if (processorType == "InstantPianoSoundEventProcessor") {
 		LOG(LogLevel::Depricated) << "MeteorRulesetExecutor::getEventProcessor : getting event PianoEventProcessor at [" << e->GetStartTime() << "]";
-		return (new PianoEventProcessor())->RegisterEvent(e);
-	}
-	else if (processorType == "PianoSoundEventProcessor") {
-		LOG(LogLevel::Depricated) << "MeteorRulesetExecutor::getEventProcessor : getting event PianoEventProcessor at [" << e->GetStartTime() << "]";
-		return (new PianoSoundEventProcessor())->RegisterEvent(e);
-	}
-	else if (processorType == "OctaveShiftEventProcessor") {
-		return (new OctaveShiftEventProcessor())->RegisterEvent(e);
+		return (new InstantPianoSoundEventProcessor())->RegisterEvent(e);
 	}
 
 

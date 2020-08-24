@@ -12,7 +12,9 @@ InstantConfigManager::InstantConfigManager(): ConfigManager(), RegisterType("Ins
 int InstantConfigManager::InitializeDefault()
 {
 	Set(InstantSetting::PatternGenerator, "MeteorPatternGenerator");
-	Set(InstantSetting::FallMapAlgorithm, "FallMapAlgorithm");
+	Set(InstantSetting::InstantFallMapAlgorithm, "InstantFallMapAlgorithm");
+	Set(InstantSetting::InstantGlowLineMapAlgorithm, "InstantGlowLineMapAlgorithm");
+	Set(InstantSetting::InstantVirtualInstrumentController, "InstantVirtualPianoController");
 
 	Set(InstantSetting::FallSpeed, MTO_FLOAT(16.f));
 	Set(InstantSetting::FallBrightness, MTO_FLOAT(1.f));

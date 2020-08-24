@@ -1,25 +1,25 @@
-#ifndef PIANO_SOUND_EVENT_PROCESSOR_H
-#define PIANO_SOUND_EVENT_PROCESSOR_H
+#ifndef INSTANT_PIANO_SOUND_EVENT_PROCESSOR_H
+#define INSTANT_PIANO_SOUND_EVENT_PROCESSOR_H
 
 
 #include "../../../../Games/Scheduler/Event/InstrumentEvents/InstrumentEventProcessor.h"
-#include "PianoSoundEvent.h"
+#include "InstantPianoSoundEvent.h"
 #include <utility>
 
 using namespace Games::Schedulers::Events::InstrumentEvents;
 using namespace std;
 
 
-namespace Meteor {
+namespace Instant {
 namespace Schedulers{
 namespace Events{
 namespace InstrumentEvents{
 
-	class PianoSoundEventProcessor : public InstrumentEventProcessor<PianoSoundEvent> {
+	class InstantPianoSoundEventProcessor : public InstrumentEventProcessor<InstantPianoSoundEvent> {
 
 	public:
 
-		PianoSoundEventType GetPianoSoundEventType();
+		InstantPianoSoundEventType GetPianoSoundEventType();
 
 		pair<Pitch, int> GetSound();
 

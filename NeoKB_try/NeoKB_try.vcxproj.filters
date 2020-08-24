@@ -793,6 +793,21 @@
     <Filter Include="來源檔案\Framework\IO\Api">
       <UniqueIdentifier>{8f1516d4-f638-4b7b-ae64-bdd5589d160c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="標頭檔\RulesetInstant\Schedulers\Events\InstrumentEvents">
+      <UniqueIdentifier>{209a4f8a-3358-475c-98d1-c6d9a7b3eeb0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\RulesetInstant\Schedulers\Events\InstrumentEvents\InstrumentControllers">
+      <UniqueIdentifier>{9fb21922-b1c2-42c3-9b8b-ce13de3451fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetInstant\Schedulers\Events\InstrumentEvents\InstrumentControllers">
+      <UniqueIdentifier>{95b08758-8b83-4616-8066-ad07e0ef0c37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\RulesetInstant\Timing">
+      <UniqueIdentifier>{d529f419-cba0-4e46-845c-75d84798fc97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetInstant\Timing">
+      <UniqueIdentifier>{23681f84-1dcf-4b40-acc8-2ac622f58ec6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Games\Graphic\Renderer\renderer.cpp">
@@ -1640,6 +1655,18 @@
     </ClCompile>
     <ClCompile Include="Framework\IO\Api\ApiAccess.cpp">
       <Filter>來源檔案\Framework\IO\Api</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetInstant\Scheduler\Event\InstrumentEvents\InstrumentControllers\InstantVirtualPianoController.cpp">
+      <Filter>來源檔案\RulesetInstant\Schedulers\Events\InstrumentEvents\InstrumentControllers</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetInstant\Scheduler\Event\InstrumentEvents\InstantPianoSoundEvent.cpp">
+      <Filter>來源檔案\RulesetInstant\Schedulers\Events\InstrumentEvents</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetInstant\Scheduler\Event\InstrumentEvents\InstantPianoSoundEventProcessor.cpp">
+      <Filter>來源檔案\RulesetInstant\Schedulers\Events\InstrumentEvents</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetInstant\Timing\InstantTimeController.cpp">
+      <Filter>來源檔案\RulesetInstant\Timing</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2715,6 +2742,18 @@
     </ClInclude>
     <ClInclude Include="Framework\IO\Api\ApiAccess.h">
       <Filter>標頭檔\Framework\IO\Api</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetInstant\Scheduler\Event\InstrumentEvents\InstantPianoSoundEvent.h">
+      <Filter>標頭檔\RulesetInstant\Schedulers\Events\InstrumentEvents</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetInstant\Scheduler\Event\InstrumentEvents\InstantPianoSoundEventProcessor.h">
+      <Filter>標頭檔\RulesetInstant\Schedulers\Events\InstrumentEvents</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetInstant\Scheduler\Event\InstrumentEvents\InstrumentControllers\InstantVirtualPianoController.h">
+      <Filter>標頭檔\RulesetInstant\Schedulers\Events\InstrumentEvents\InstrumentControllers</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetInstant\Timing\InstantTimeController.h">
+      <Filter>標頭檔\RulesetInstant\Timing</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

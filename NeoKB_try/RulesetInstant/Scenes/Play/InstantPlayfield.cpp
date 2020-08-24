@@ -2,10 +2,13 @@
 
 #include "../../../Games/Scheduler/Event/Effect/Algorithm/MapAlgorithm.h"
 #include "../../Scheduler/Event/Effect/Algorithm/InstantFallMapAlgorithm.h"
+#include "../../Scheduler/Event/Effect/Algorithm/InstantGlowLineMapAlgorithm.h"
+#include "../../Scheduler/Event/InstrumentEvents/InstrumentControllers/InstantVirtualPianoController.h"
 #include "../../../Util/Log.h"
 #include "../../../Games/Scheduler/Event/Effect/Algorithm/LinearMapPitchShifter.h"
 #include "../../Scheduler/Event/InstantEventProcessorMaster.h"
 #include "../../../Games/Output/Bluetooths/MeteoContextBluetoothMessage.h"
+#include "../../Scheduler/Event/InstantDynamicEventGenerator.h"
 
 
 
@@ -13,6 +16,7 @@ using namespace Instant::Scenes::Play;
 using namespace Instant::Config;
 using namespace Games::Schedulers::Events::Effects::Algorithms;
 using namespace Instant::Schedulers::Events::Effects::Algorithms;
+using namespace Instant::Schedulers::Events::InstrumentEvents::InstrumentControllers;
 using namespace Util;
 using namespace Instant::Schedulers::Events;
 using namespace Games::Output::Bluetooths;
@@ -54,22 +58,52 @@ int InstantPlayfield::load(FrameworkConfigManager* f, InstantConfigManager * m)
 	InstanceCreator<MtoObject> &iCreator = InstanceCreator<MtoObject>::GetInstance();
 	string mapAlgoName;
 
-	/* --------------------- FallEffect map algo --------------------- */
-	if (m->Get(InstantSetting::FallMapAlgorithm, &mapAlgoName)) {
+	/* --------------------- InstantFallEffect map algo --------------------- */
+	if (m->Get(InstantSetting::InstantFallMapAlgorithm, &mapAlgoName)) {
 		LOG(LogLevel::Finer) << "InstantPlayfield::load() : finding fall effect map algorithm";
 		MapAlgorithmInterface* mapAlgo = iCreator.CreateInstanceWithT<MapAlgorithmInterface>(mapAlgoName);
 
 		LOG(LogLevel::Finer) << "InstantPlayfield::load() : put into algorithms table";
-		mapAlgorithms["FallEffect"] = mapAlgo;
+		mapAlgorithms["InstantFallEffect"] = mapAlgo;
 	}
 	else
-		mapAlgorithms["FallEffect"] = new FallMapAlgorithm();
-	LOG(LogLevel::Finer) << "InstantPlayfield::load() : FallMapAlgorithm chosed" << mapAlgorithms["FallEffect"];
+		mapAlgorithms["InstantFallEffect"] = new InstantFallMapAlgorithm();
+	LOG(LogLevel::Finer) << "InstantPlayfield::load() : FallMapAlgorithm chosed" << mapAlgorithms["InstantFallEffect"];
 
-	LOG(LogLevel::Finer) << "InstantPlayfield::load() : FallMapAlgorithm [" << mapAlgorithms["FallEffect"]->GetTypeName() << "] loaded.";
+	LOG(LogLevel::Finer) << "InstantPlayfield::load() : FallMapAlgorithm [" << mapAlgorithms["InstantFallEffect"]->GetTypeName() << "] loaded.";
 
-	AddChild(mapAlgorithms["FallEffect"]);
-	mapAlgorithms["FallEffect"]->RegisterBufferMap(bufferMap);
+	AddChild(mapAlgorithms["InstantFallEffect"]);
+	mapAlgorithms["InstantFallEffect"]->RegisterBufferMap(bufferMap);
+
+	/* --------------------- InstantGlowLineEffect map algo --------------------- */
+	if (m->Get(InstantSetting::InstantGlowLineMapAlgorithm, &mapAlgoName)) {
+		LOG(LogLevel::Finer) << "InstantPlayfield::load() : finding fall effect map algorithm";
+		MapAlgorithmInterface* mapAlgo = iCreator.CreateInstanceWithT<MapAlgorithmInterface>(mapAlgoName);
+
+		LOG(LogLevel::Finer) << "InstantPlayfield::load() : put into algorithms table";
+		mapAlgorithms["InstantGlowLineEffect"] = mapAlgo;
+	}
+	else
+		mapAlgorithms["InstantGlowLineEffect"] = new InstantGlowLineMapAlgorithm();
+	LOG(LogLevel::Finer) << "InstantPlayfield::load() : InstantGlowLineMapAlgorithm chosed" << mapAlgorithms["InstantGlowLineEffect"];
+
+	LOG(LogLevel::Finer) << "InstantPlayfield::load() : InstantGlowLineMapAlgorithm [" << mapAlgorithms["InstantGlowLineEffect"]->GetTypeName() << "] loaded.";
+
+	AddChild(mapAlgorithms["InstantGlowLineEffect"]);
+	mapAlgorithms["InstantGlowLineEffect"]->RegisterBufferMap(bufferMap);
+
+	/* --------------------- Piano Controller --------------------- */
+	string instrumentControllerName;
+
+	if (m->Get(InstantSetting::InstantVirtualInstrumentController, &instrumentControllerName)) {
+		InstrumentControllerInterface* instrumentController = iCreator.CreateInstanceWithT<InstrumentControllerInterface>(instrumentControllerName);
+
+		instrumentControllers["InstantPianoSoundEvent"] = instrumentController;
+	}
+	else {
+		instrumentControllers["InstantPianoSoundEvent"] = new InstantVirtualPianoController();
+	}
+	AddChild(instrumentControllers["InstantPianoSoundEvent"]);
 
 	return 0;
 }
@@ -149,11 +183,11 @@ int InstantPlayfield::OnButtonDown(InstantAction action)
 				break;
 			case MeteoPianoPitchState::None:
 				pitchState = MeteoPianoPitchState::Lowered;
-				mapPitchShifter->SetSeekPitch(Pitch::C1);
+				//mapPitchShifter->SetSeekPitch(Pitch::C1);
 				break;
 			case MeteoPianoPitchState::Raised:
 				pitchState = MeteoPianoPitchState::None;
-				mapPitchShifter->SetSeekPitch(Pitch::C);
+				//mapPitchShifter->SetSeekPitch(Pitch::C);
 				break;
 			}
 		}
@@ -161,11 +195,11 @@ int InstantPlayfield::OnButtonDown(InstantAction action)
 			switch (pitchState) {
 			case MeteoPianoPitchState::Lowered:
 				pitchState = MeteoPianoPitchState::None;
-				mapPitchShifter->SetSeekPitch(Pitch::C);
+				//mapPitchShifter->SetSeekPitch(Pitch::C);
 				break;
 			case MeteoPianoPitchState::None:
 				pitchState = MeteoPianoPitchState::Raised;
-				mapPitchShifter->SetSeekPitch(Pitch::c);
+				//mapPitchShifter->SetSeekPitch(Pitch::c);
 				break;
 			case MeteoPianoPitchState::Raised:
 				break;

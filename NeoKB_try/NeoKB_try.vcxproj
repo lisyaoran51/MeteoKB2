@@ -240,9 +240,13 @@
     <ClCompile Include="RulesetInstant\Scheduler\Event\Effect\InstantGlowLineEffectMapper.cpp" />
     <ClCompile Include="RulesetInstant\Scheduler\Event\InstantDynamicEventGenerator.cpp" />
     <ClCompile Include="RulesetInstant\Scheduler\Event\InstantEventProcessorMaster.cpp" />
+    <ClCompile Include="RulesetInstant\Scheduler\Event\InstrumentEvents\InstantPianoSoundEvent.cpp" />
+    <ClCompile Include="RulesetInstant\Scheduler\Event\InstrumentEvents\InstantPianoSoundEventProcessor.cpp" />
+    <ClCompile Include="RulesetInstant\Scheduler\Event\InstrumentEvents\InstrumentControllers\InstantVirtualPianoController.cpp" />
     <ClCompile Include="RulesetInstant\Sheetmusic\InstantSheetmusicConverter.cpp" />
     <ClCompile Include="RulesetInstant\Sheetmusic\InstantSheetmusicPostprocessor.cpp" />
     <ClCompile Include="RulesetInstant\Sheetmusic\Pattern\InstantPatternGenerator.cpp" />
+    <ClCompile Include="RulesetInstant\Timing\InstantTimeController.cpp" />
     <ClCompile Include="RulesetMeteor\Config\MeteorConfigManager.cpp" />
     <ClCompile Include="RulesetMeteor\Input\MeteorInputManager.cpp" />
     <ClCompile Include="RulesetMeteor\MeteorGame.cpp" />
@@ -594,9 +598,13 @@
     <ClInclude Include="RulesetInstant\Scheduler\Event\Effect\InstantGlowLineEffectMapper.h" />
     <ClInclude Include="RulesetInstant\Scheduler\Event\InstantDynamicEventGenerator.h" />
     <ClInclude Include="RulesetInstant\Scheduler\Event\InstantEventProcessorMaster.h" />
+    <ClInclude Include="RulesetInstant\Scheduler\Event\InstrumentEvents\InstantPianoSoundEvent.h" />
+    <ClInclude Include="RulesetInstant\Scheduler\Event\InstrumentEvents\InstantPianoSoundEventProcessor.h" />
+    <ClInclude Include="RulesetInstant\Scheduler\Event\InstrumentEvents\InstrumentControllers\InstantVirtualPianoController.h" />
     <ClInclude Include="RulesetInstant\Sheetmusic\InstantSheetmusicConverter.h" />
     <ClInclude Include="RulesetInstant\Sheetmusic\InstantSheetmusicPostProcessor.h" />
     <ClInclude Include="RulesetInstant\Sheetmusic\Pattern\InstantPatternGenerator.h" />
+    <ClInclude Include="RulesetInstant\Timing\InstantTimeController.h" />
     <ClInclude Include="RulesetMeteor\Config\MeteorConfigManager.h" />
     <ClInclude Include="RulesetMeteor\Input\MeteorInputManager.h" />
     <ClInclude Include="RulesetMeteor\MeteorGame.h" />

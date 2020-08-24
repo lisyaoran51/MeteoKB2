@@ -3,7 +3,7 @@
 #include "../../../Util/MtoType.h"
 #include "../../../Games/Scheduler/Event/ControlPoints/NoteControlPoint.h"
 #include "../../../Games/Scheduler/Event/ControlPoints/InputKeyControlPoint.h"
-#include "../../Scheduler/Event/Effect/FallEffect.h"
+#include "../../Scheduler/Event/Effect/InstantFallEffect.h"
 #include "../../../Games/Scheduler/Event/GameEvents/StartGameEvent.h"
 #include "../../../Games/Scheduler/Event/SystemEvents/SystemEvent.h"
 #include "../../../Games/Scheduler/Event/SystemEvents/StopSystemEvent.h"
@@ -25,15 +25,15 @@ using namespace Instruments;
 int InstantPatternGenerator::load()
 {
 
-	InstantConfigManager * m = GetCache<MeteorConfigManager>("InstantConfigManager");
+	InstantConfigManager * i = GetCache<InstantConfigManager>("InstantConfigManager");
 
-	if (!m)
+	if (!i)
 		throw runtime_error("int InstantPatternGenerator::load() : InstantConfigManager not found in cache.");
 
-	return load(m);
+	return load(i);
 }
 
-int InstantPatternGenerator::load(InstantConfigManager * mcf)
+int InstantPatternGenerator::load(InstantConfigManager * i)
 {
 
 	return 0;

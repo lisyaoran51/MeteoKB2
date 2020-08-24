@@ -1,7 +1,7 @@
-#ifndef VIRTUAL_PIANO_CONTROLLER_H
-#define VIRTUAL_PIANO_CONTROLLER_H
+#ifndef INSTANT_VIRTUAL_PIANO_CONTROLLER_H
+#define INSTANT_VIRTUAL_PIANO_CONTROLLER_H
 
-#include "../PianoSoundEvent.h"
+#include "../InstantPianoSoundEvent.h"
 #include "../../../../../Games/Scheduler/Event/InstrumentEvents/InstrumentControllers/InstrumentController.h"
 #include "../../../../../Instruments/VirtualMeteoPiano.h"
 
@@ -10,19 +10,19 @@ using namespace Games::Schedulers::Events::InstrumentEvents::InstrumentControlle
 using namespace Instruments;
 
 
-namespace Meteor {
+namespace Instant {
 namespace Schedulers{
 namespace Events{
 namespace InstrumentEvents{
 namespace InstrumentControllers{
 
-	class VirtualPianoController : public InstrumentController<PianoSoundEvent> {
+	class InstantVirtualPianoController : public InstrumentController<InstantPianoSoundEvent> {
 
 		int load();
 
 	public:
 
-		VirtualPianoController();
+		InstantVirtualPianoController();
 
 	protected:
 

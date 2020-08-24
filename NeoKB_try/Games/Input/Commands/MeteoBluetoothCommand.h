@@ -198,6 +198,19 @@ namespace Commands{
 		AckRewritePlayRecordFileSegment			,
 		FinishWritePlayRecord					,
 		AckFinishWritePlayRecord				,
+		// ­«¼½
+
+		// ¤¬°Ê¹CÀ¸
+		StartInstant = 1000						,
+		AckStartInstant							,
+		InstantPressKey							,
+		InstantReleaseKey						,
+		InstantLedMatrix						,
+		InstantLightEvent						,
+		InstantPianoEvent						,
+
+
+
 
 
 

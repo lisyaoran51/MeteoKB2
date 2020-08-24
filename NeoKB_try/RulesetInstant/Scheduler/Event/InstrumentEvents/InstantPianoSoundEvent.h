@@ -1,5 +1,5 @@
-#ifndef PIANO_SOUND_EVENT_H
-#define PIANO_SOUND_EVENT_H
+#ifndef INSTANT_PIANO_SOUND_EVENT_H
+#define INSTANT_PIANO_SOUND_EVENT_H
 
 
 #include "../../../../Games/Scheduler/Event/InstrumentEvents/InstrumentEvent.h"
@@ -10,29 +10,29 @@ using namespace Games::Schedulers::Events::InstrumentEvents;
 using namespace Instruments;
 
 
-namespace Meteor {
+namespace Instant {
 namespace Schedulers{
 namespace Events{
 namespace InstrumentEvents{
 
-	enum class PianoSoundEventType {
+	enum class InstantPianoSoundEventType {
 		None,
 		Pitch,
 		Pedal
 	};
 
-	class PianoSoundEvent : public InstrumentEvent {
+	class InstantPianoSoundEvent : public InstrumentEvent {
 
 	public:
 
-		PianoSoundEvent(pair<Pitch, float> input, MTO_FLOAT s, MTO_FLOAT l);
+		InstantPianoSoundEvent(pair<Pitch, float> input, MTO_FLOAT s, MTO_FLOAT l);
 
-		PianoSoundEvent(bool pDown, MTO_FLOAT s, MTO_FLOAT l);
+		InstantPianoSoundEvent(bool pDown, MTO_FLOAT s, MTO_FLOAT l);
 
 		// 一定要每次都override!!
 		virtual string GetTypeName();
 
-		PianoSoundEventType GetPianoSoundEventType();
+		InstantPianoSoundEventType GetPianoSoundEventType();
 
 		pair<Pitch, float> GetSound();
 
@@ -40,7 +40,7 @@ namespace InstrumentEvents{
 
 	protected:
 
-		PianoSoundEventType pianoSoundEventType = PianoSoundEventType::None;
+		InstantPianoSoundEventType pianoSoundEventType = InstantPianoSoundEventType::None;
 
 		pair<Pitch, float> sound = pair<Pitch, float>();
 
