@@ -19,11 +19,15 @@ namespace Modifiers{
 
 	public:
 
+		HandModifier();
+
 		HandModifier(SmDifficultyHandType hType);
 
 		virtual int ApplyToDifficulty(SmDifficulty* smDifficulty);
 
 		virtual int ApplyToEventProcessorFilter(EventProcessorFilter* eventProcessorFilter);
+
+		virtual int SetValue(int value1, int value2);
 
 	protected:
 

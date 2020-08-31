@@ -56,7 +56,7 @@ namespace Events {
 
 		int load(FrameworkConfigManager* f, EventProcessorFilter* e, OutputManager* o);
 
-
+		bool isFirstUpdate = true;
 	public:
 
 		EventProcessorMaster();

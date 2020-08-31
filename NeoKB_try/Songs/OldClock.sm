@@ -1,6 +1,6 @@
 simple file format v0
 [General]
-AudioFilename:OldClock.mp3
+Mode:1
 [Metadata]
 Title:OldClock
 [Difficulty]

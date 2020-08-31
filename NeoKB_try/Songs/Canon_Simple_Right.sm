@@ -1,6 +1,6 @@
 simple file format v0
 [General]
-AudioFilename:Canon.mp3
+Mode:1
 [Metadata]
 Title:Canon_Simple_Right
 [Difficulty]

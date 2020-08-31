@@ -27,11 +27,15 @@ namespace UI {
 
 		int load();
 
-		int load(FrameworkConfigManager* f, SmManager* s);
+		int load(FrameworkConfigManager* f, SmManager* s, OutputManager* o);
 
 	public:
 
 		SheetmusicSelectPanel();
+
+		BindablePointer<vector<Modifier*>*>* GetSelectedModifiers();
+
+		int AddModifier(Modifier* modifier);
 
 		function<int(void)> StartRequest;
 
@@ -48,6 +52,10 @@ namespace UI {
 		SmManager* smManager = nullptr;
 
 		FrameworkConfigManager* frameworkConfigManager = nullptr;
+
+		OutputManager* outputManager = nullptr;
+
+		BindablePointer<vector<Modifier*>*> selectedModifiers;
 
 		virtual int onCommand(InputState* inputState, InputKey command);
 

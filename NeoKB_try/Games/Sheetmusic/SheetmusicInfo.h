@@ -62,7 +62,7 @@ namespace Sheetmusics {
 		// General
 		int audioLeadIn;
 
-		bool countdown;
+		bool countdown = true;
 
 		int version;
 

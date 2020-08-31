@@ -75,12 +75,21 @@ int MeteorRulesetExecutor::load()
 		GetDependencies()->_DebugPrintCache();
 		throw runtime_error("int MeteorRulesetExecutor::load() : MeteorTimeController not found in cache.");
 	}
+
+	Instrument* i = GetCache<Instrument>("Instrument");
+	if (!i) {
+		throw runtime_error("int MeteorRulesetExecutor::load() : Instrument not found in cache.");
+	}
 	// Åªconfig
-	return 0;
+	return load(t, i);
 }
 
-int MeteorRulesetExecutor::load(MeteorTimeController * t)
+int MeteorRulesetExecutor::load(MeteorTimeController * t, Instrument* i)
 {
+	meteoPiano = dynamic_cast<MeteoPiano*>(i);
+	meteoPiano->ChangePitchState(MeteoPianoPitchState::None);
+	meteoPiano->SetGameControllingPitchState(true);
+
 	vector<Event*>* originalEvents = workingSm->GetSm()->GetEvents();
 	vector<float> sectionTime;
 
@@ -142,6 +151,11 @@ MeteorRulesetExecutor::MeteorRulesetExecutor(): RegisterType("MeteorRulesetExecu
 	// µù¥Uprivate load (c++¤~»Ý­n)
 	registerLoad(bind(static_cast<int(MeteorRulesetExecutor::*)(void)>(&MeteorRulesetExecutor::load), this));
 	constructed = false;
+}
+
+MeteorRulesetExecutor::~MeteorRulesetExecutor()
+{
+	meteoPiano->SetGameControllingPitchState(false);
 }
 
 int MeteorRulesetExecutor::LazyConstruct(WorkingSm * w, Ruleset* r)

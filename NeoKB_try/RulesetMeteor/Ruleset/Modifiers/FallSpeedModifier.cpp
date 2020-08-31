@@ -7,6 +7,7 @@ using namespace Meteor::Rulesets::Modifiers;
 FallSpeedModifier::FallSpeedModifier(float fSpeed) : RegisterType("FallSpeedModifier")
 {
 	fallSpeed = fSpeed;
+	throw runtime_error("FallSpeedModifier::FallSpeedModifier() : not implemented.");
 }
 
 int FallSpeedModifier::ApplyToDifficulty(SmDifficulty * smDifficulty)

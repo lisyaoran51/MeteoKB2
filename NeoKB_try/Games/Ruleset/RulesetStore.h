@@ -20,6 +20,8 @@ namespace Rulesets{
 		/// </summary>
 		int loadRulesetFromFile(string path);
 
+		map<int, RulesetInfo*> rulesetInfos;
+
 	public:
 
 		RulesetStore(function<DatabaseContext*(void)> getContext, Storage* s = nullptr);
@@ -28,6 +30,8 @@ namespace Rulesets{
 		/// 用完記得要刪掉，不然會memory leak
 		/// </summary>
 		vector<RulesetInfo*>* GetRulesetInfos();
+
+		int SetRulesetInfo(int id, RulesetInfo* rulesetInfo);
 
 		RulesetInfo* GetRulesetInfo(int id);
 

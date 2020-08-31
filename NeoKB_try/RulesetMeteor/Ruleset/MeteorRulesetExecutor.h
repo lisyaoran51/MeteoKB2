@@ -42,13 +42,13 @@ namespace Rulesets {
 
 		int load();
 
-		int load(MeteorTimeController* t);
+		int load(MeteorTimeController* t, Instrument* i);
 
 	public:
 
 		MeteorRulesetExecutor();
 
-		virtual ~MeteorRulesetExecutor() = default;
+		virtual ~MeteorRulesetExecutor();
 
 		virtual int LazyConstruct(WorkingSm* w, Ruleset* r);
 
@@ -67,6 +67,8 @@ namespace Rulesets {
 		virtual int Elapse(MTO_FLOAT elapsedTime);
 
 	protected:
+
+		MeteoPiano* meteoPiano = nullptr;
 
 		Playfield* createPlayfield();
 

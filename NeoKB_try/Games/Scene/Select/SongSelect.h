@@ -29,8 +29,6 @@ namespace Select {
 	/// </summary>
 	class SongSelect : public MeteoScene {
 
-		SheetmusicSelectPanel* smSelectPanel;
-
 	public:
 
 		SongSelect();
@@ -43,6 +41,8 @@ namespace Select {
 	protected:
 
 		SmManager* smManager;
+
+		SheetmusicSelectPanel* smSelectPanel;
 
 		/// <summary>
 		/// 在選擇歌曲carouselSelectionChanged時執行，會把遊戲模式和譜綁在一起

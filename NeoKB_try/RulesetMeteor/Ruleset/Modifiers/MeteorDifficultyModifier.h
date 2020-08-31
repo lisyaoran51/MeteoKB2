@@ -22,11 +22,15 @@ namespace Modifiers{
 
 	public:
 
+		MeteorDifficultyModifier();
+
 		MeteorDifficultyModifier(SmDifficultyDifficulty d);
 
 		virtual int ApplyToDifficulty(SmDifficulty* smDifficulty);
 
 		virtual int ApplyToEventProcessorFilter(EventProcessorFilter* eventProcessorFilter);
+
+		virtual int SetValue(int value1, int value2);
 
 	protected:
 

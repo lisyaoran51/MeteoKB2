@@ -22,6 +22,8 @@ namespace Modifiers{
 
 		virtual int ApplyToTimeController(TimeController* timeController);
 
+		virtual int SetValue(int value1, int value2);
+
 	protected:
 
 		float clockRate = 1.0;

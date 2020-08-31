@@ -1,6 +1,6 @@
 simple file format v0
 [General]
-AudioFilename:SongForBrother.mp3
+Mode:1
 [Metadata]
 Title:SongForBrother_Simple
 [Difficulty]

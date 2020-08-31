@@ -24,6 +24,12 @@ int PlaySongSelect::onResuming(Scene * lastScene)
 	ThreadMaster::GetInstance().AddObjectToDelete(player);
 	player = nullptr;
 
+	// 清除上一場遊戲的modifier
+	for (int i = 0; i < smSelectPanel->GetSelectedModifiers()->GetValue()->size(); i++) {
+		delete smSelectPanel->GetSelectedModifiers()->GetValue()->at(i);
+	}
+	smSelectPanel->GetSelectedModifiers()->GetValue()->clear();
+	
 
 	return 0;
 }
@@ -32,8 +38,8 @@ int PlaySongSelect::updateSheetmusic(WorkingSm * workingSm)
 {
 	SongSelect::updateSheetmusic(workingSm);
 
-	for (int i = 0; i < selectedModifiers.size(); i++)
-		workingSm->GetModifiers()->GetValue()->push_back(selectedModifiers[i]);
+	workingSm->GetModifiers()->BindTo(smSelectPanel->GetSelectedModifiers());
+
 
 	return 0;
 }
@@ -48,7 +54,6 @@ int PlaySongSelect::onSelected()
 
 int PlaySongSelect::load()
 {
-
 
 	return 0;
 }

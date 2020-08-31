@@ -1,7 +1,9 @@
 #include "SheetmusicSelectPanel.h"
 
+#include "../Output/Bluetooths/MeteoContextBluetoothMessage.h"
 
 using namespace Games::UI;
+using namespace Games::Output::Bluetooths;
 
 
 
@@ -17,10 +19,14 @@ int SheetmusicSelectPanel::load()
 	if (!s)
 		throw runtime_error("int SheetmusicSelectPanel::load : SmManager not found in cache.");
 
-	return load(f, s);
+	OutputManager * o = GetCache<OutputManager>("OutputManager");
+	if (!o)
+		throw runtime_error("int SheetmusicSelectPanel::load : OutputManager not found in cache.");
+
+	return load(f, s, o);
 }
 
-int SheetmusicSelectPanel::load(FrameworkConfigManager * f, SmManager * s)
+int SheetmusicSelectPanel::load(FrameworkConfigManager * f, SmManager * s, OutputManager* o)
 {
 	LOG(LogLevel::Info) << "int SheetmusicSelectPanel::load() : insert sheetmusic manager.";
 
@@ -29,6 +35,10 @@ int SheetmusicSelectPanel::load(FrameworkConfigManager * f, SmManager * s)
 	smManager = s;
 
 	frameworkConfigManager = f;
+
+	outputManager = o;
+
+	selectedModifiers.SetValue(new vector<Modifier*>());
 
 	// 暫時先這樣 之後再改
 	string songTitle;
@@ -78,6 +88,18 @@ SheetmusicSelectPanel::SheetmusicSelectPanel(): RegisterType("SheetmusicSelectPa
 	registerLoad(bind(static_cast<int(SheetmusicSelectPanel::*)(void)>(&SheetmusicSelectPanel::load), this));
 }
 
+BindablePointer<vector<Modifier*>*>* SheetmusicSelectPanel::GetSelectedModifiers()
+{
+	return &selectedModifiers;
+}
+
+int SheetmusicSelectPanel::AddModifier(Modifier * modifier)
+{
+	// TODO: 檢查有沒有衝突的modifier，然後把衝突的modifier刪掉
+	selectedModifiers.GetValue()->push_back(modifier);
+	return 0;
+}
+
 int SheetmusicSelectPanel::SetSms(vector<SmInfo*>* sInfos)
 {
 	if (smInfos != nullptr)
@@ -98,10 +120,40 @@ int SheetmusicSelectPanel::OnCommand(MeteoBluetoothCommand * command)
 				frameworkConfigManager->Set(FrameworkSetting::TargetHeight, height); // 不是10就是15，對齊黑鍵或是黑白鍵不同高
 			}
 		}
-
-		
-
 	}
+
+	if (command->GetCommand() == MeteoCommand::WriteGameConfiguration) {
+		vector<string> modifierIds;
+		string modifierName;
+		int value1, value2;
+		for (int i = 0; i < command->GetContext()["Modifiers"].size(); i++) {
+			modifierName = command->GetContext()["Modifiers"].at(i)["Modifier Name"].get<string>() == "AutoPedalModifier";
+			value1 = command->GetContext()["Modifiers"].at(i)["Value1"].get<int>();
+			value2 = command->GetContext()["Modifiers"].at(i)["Value2"].get<int>();
+
+			InstanceCreator<MtoObject> &iCreator = InstanceCreator<MtoObject>::GetInstance();
+				
+			LOG(LogLevel::Fine) << "SheetmusicSelectPanel::OnCommand() : select autopedal modifier";
+
+			Modifier* modifier = iCreator.CreateInstanceWithT<Modifier>(modifierName);
+			modifier->SetValue(value1, value2);
+
+			if (AddModifier(modifier))
+				modifierIds.push_back(command->GetContext()["Modifiers"].at(i)["Modifier Id"].get<string>());
+
+		}
+		MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::ReturnWriteGameConfiguration);
+
+		meteoContextBluetoothMessage->GetContext()["Scene"] = string("SongSelect");
+		for (int i = 0; i < modifierIds.size(); i++) {
+			json modifierId;
+			modifierId["Modifier Id"] = modifierIds[i];
+			meteoContextBluetoothMessage->GetContext()["Status"].push_back(modifierId);
+		}
+
+		outputManager->PushMessage(meteoContextBluetoothMessage);
+	}
+
 
 
 	// 這一段要在開始傳檔之前送，確認琴裡面有沒有這首歌
@@ -112,19 +164,30 @@ int SheetmusicSelectPanel::OnCommand(MeteoBluetoothCommand * command)
 		for (int i = 0; i < sInfos->size(); i++) {
 			if (sInfos->at(i)->id == songId) {
 				// 回傳已有這首曲子
+				MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::AckSheetmusicData);
+				meteoContextBluetoothMessage->GetContext()["Status"] = short(-1);
+				meteoContextBluetoothMessage->GetContext()["Id"] = unsigned int(songId);
 
-
-				return 0;
-			}
-			else {
-				// 回傳沒有這首曲子
+				outputManager->PushMessage(meteoContextBluetoothMessage);
 				return 0;
 			}
 		}
+		// 回傳沒有這首曲子
+		MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::AckSheetmusicData);
+		meteoContextBluetoothMessage->GetContext()["Status"] = short(0);
+		meteoContextBluetoothMessage->GetContext()["Id"] = unsigned int(songId);
+
+		outputManager->PushMessage(meteoContextBluetoothMessage);
+		return 0;
 	}
 
 	if (command->GetCommand() == MeteoCommand::RequestLoadGame) {
 		string fileName = command->GetContext()["FileName"].get<string>();
+
+		MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::AckRequestLoadGame);
+		meteoContextBluetoothMessage->GetContext()["Status"] = short(0);
+
+		outputManager->PushMessage(meteoContextBluetoothMessage);
 
 		vector<SmInfo*>* sInfos = smManager->GetSmInfos();
 		for (int i = 0; i < sInfos->size(); i++) {
@@ -146,43 +209,5 @@ int SheetmusicSelectPanel::OnCommand(MeteoBluetoothCommand * command)
 int SheetmusicSelectPanel::onCommand(InputState * inputState, InputKey command)
 {
 
-	if (command == InputKey::Bluetooth) {
-		for (int i = 0; i < inputState->GetBluetoothState()->GetCommands()->size(); i++) {
-
-			//if (inputState->GetBluetoothState()->GetCommands()->at(i)->CommandType == "Download") {
-			//
-			//	// 下載歌曲...
-			//
-			//}
-
-		}
-
-		for (int i = 0; i < inputState->GetBluetoothState()->GetCommands()->size(); i++) {
-
-			//if (inputState->GetBluetoothState()->GetCommands()->at(i)->CommandType == "Select") {
-			//
-			//	// 選擇歌曲...
-			//	SmInfo* smInfo = nullptr;
-			//
-			//	LOG(LogLevel::Info) << "SheetmusicSelectPanel::onCommand : song selected.";
-			//	SelectionChanged(smInfo);
-			//
-			//}
-
-		}
-
-
-
-		for (int i = 0; i < inputState->GetBluetoothState()->GetCommands()->size(); i++){
-			//if (inputState->GetBluetoothState()->GetCommands()->at(i)->CommandType == "Start") {
-			//
-			//	isPresent = false;
-			//
-			//	LOG(LogLevel::Info) << "SheetmusicSelectPanel::onCommand : game start.";
-			//	StartRequest();
-			//
-			//}
-		}
-	}
 	return 0;
 }

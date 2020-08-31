@@ -1,6 +1,6 @@
 simple file format v0
 [General]
-AudioFilename:FlightOfBumblebee.mp3
+Mode:1
 [Metadata]
 Title:FlightOfBumblebee
 [Difficulty]

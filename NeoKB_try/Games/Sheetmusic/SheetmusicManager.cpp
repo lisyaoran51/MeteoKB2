@@ -53,7 +53,7 @@ SmManager::SmManager(Storage * s, function<DatabaseContext*()> gContext, Ruleset
 	// 這兩行應該可以拿掉了，現在改成從database拿
 	rulesetInfos = new vector<RulesetInfo*>();
 	// !!!這一段是鮮血死的，以後要改成從檔案讀ruleset資料
-	rulesetInfos->push_back(new RulesetInfo("MeteorRuleset", 1));
+	//rulesetInfos->push_back(new RulesetInfo("MeteorRuleset", 1));
 
 	getContext = gContext;
 

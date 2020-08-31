@@ -7,6 +7,7 @@
 #include "IoEvents/IoEventProcessor.h"
 #include "InstrumentEvents/InstrumentEventProcessor.h"
 #include "PlayfieldEvents/PlayfieldEventProcessor.h"
+#include "../../Output/Bluetooths/MeteoContextBluetoothMessage.h"
 
 
 using namespace Games::Schedulers::Events;
@@ -16,6 +17,7 @@ using namespace Games::Schedulers::Events::IoEvents;
 using namespace std;
 using namespace Games::Schedulers::Events::InstrumentEvents;
 using namespace Games::Schedulers::Events::PlayfieldEvents;
+using namespace Games::Output::Bluetooths;
 
 
 
@@ -290,6 +292,13 @@ Map * EventProcessorMaster::GetGraph()
 
 int EventProcessorMaster::update()
 {
+	if (isFirstUpdate) {
+		isFirstUpdate = false;
+
+		MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::StartGame);
+		outputManager->PushMessage(meteoContextBluetoothMessage);
+	}
+
 
 	LOG(LogLevel::Finest) << "EventProcessorMaster::update() : current time is " << fixed << setprecision(5) << GetClock()->GetCurrentTime() << " .";
 

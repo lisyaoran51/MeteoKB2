@@ -54,6 +54,9 @@ int SimpleSmDecoder::handleGeneral(Sm<Event>* sm, string & line)
 	}
 	else if (pair.at(0) == "Mode") {
 		sm->GetSmInfo()->rulesetId = atoi(pair.at(1).c_str());
+
+
+
 	}
 	else if (pair.at(0) == "LetterboxInBreaks") {
 		//metadata->AudioFile = pair.at(1);
@@ -392,6 +395,9 @@ int SimpleSmDecoder::parseFile(fstream * stream, Sm<Event>* sm)
             //    handleEvents(sheetmusic, line, ref storyboardSprite, ref timelineGroup);
             //    break;
 		case SimpleSmDecoderSection::NoteControlPoints:
+				// 這裡應該改成根據rulesetId叫parset出來
+				// 之後再改，現在還沒需要(沒有其他遊戲規則的譜面)
+
                 handleNoteControlPoints(sm, line);
                 break;
             //case Section.Colours:

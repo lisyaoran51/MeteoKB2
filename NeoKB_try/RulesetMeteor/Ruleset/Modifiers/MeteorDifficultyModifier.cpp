@@ -8,6 +8,10 @@ using namespace Games::Schedulers::Events::ControlPoints;
 
 
 
+MeteorDifficultyModifier::MeteorDifficultyModifier() :RegisterType("DifficultyModifier")
+{
+}
+
 MeteorDifficultyModifier::MeteorDifficultyModifier(SmDifficultyDifficulty d) :RegisterType("DifficultyModifier")
 {
 	difficulty = d;
@@ -26,6 +30,12 @@ int MeteorDifficultyModifier::ApplyToEventProcessorFilter(EventProcessorFilter *
 	eventProcessorFilter->AddFilterCallback(bind(&MeteorDifficultyModifier::filterEventProcessorsByDifficulty, this, placeholders::_1));
 
 
+	return 0;
+}
+
+int MeteorDifficultyModifier::SetValue(int value1, int value2)
+{
+	difficulty = (SmDifficultyDifficulty)value1;
 	return 0;
 }
 

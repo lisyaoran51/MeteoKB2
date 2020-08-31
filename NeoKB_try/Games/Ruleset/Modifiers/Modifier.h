@@ -15,13 +15,15 @@ namespace Games {
 namespace Rulesets{
 namespace Modifiers{
 
-	class Modifier : virtual public RegisterType{
+	class Modifier : public MtoObject{
 
 	public:
 
 		Modifier();
 
 		virtual string GetDescription();
+
+		virtual int SetValue(int value1, int value2);
 
 	protected:
 

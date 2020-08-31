@@ -12,3 +12,8 @@ string Modifier::GetDescription()
 {
 	return description;
 }
+
+int Modifier::SetValue(int value1, int value2)
+{
+	return 0;
+}

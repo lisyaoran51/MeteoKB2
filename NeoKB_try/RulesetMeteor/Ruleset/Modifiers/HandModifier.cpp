@@ -6,6 +6,10 @@ using namespace Meteor::Rulesets::Modifiers;
 using namespace Games::Schedulers::Events::ControlPoints;
 
 
+HandModifier::HandModifier() : RegisterType("HandModifier")
+{
+}
+
 HandModifier::HandModifier(SmDifficultyHandType hType) : RegisterType("HandModifier")
 {
 	handType = hType;
@@ -22,6 +26,12 @@ int HandModifier::ApplyToEventProcessorFilter(EventProcessorFilter * eventProces
 
 	eventProcessorFilter->AddFilterCallback(bind(&HandModifier::filterEventProcessorsByHandType, this, placeholders::_1));
 
+	return 0;
+}
+
+int HandModifier::SetValue(int value1, int value2)
+{
+	handType = (SmDifficultyHandType)value1;
 	return 0;
 }
 

@@ -1,6 +1,6 @@
 simple file format v0
 [General]
-AudioFilename:WhatHappenInstrumental.mp3
+Mode:1
 [Metadata]
 Title:WhatHappen_Left
 [Difficulty]

@@ -119,11 +119,11 @@ namespace DataStructure {
 		int AddBindings(Bindable<T>* other) {
 
 			
-			if (other->GetBindings() == nullptr) {
+			if (other->GetBindings() == nullptr) {	// 對方沒有binding
 
 				LOG(LogLevel::Fine) << "Bindable::AddBindings() : other [" << other << "]'s binding is null. this = [" << this << "].";
 
-				if (bindings == nullptr) {
+				if (bindings == nullptr) {	// 自己也沒有binding
 					unique_lock<mutex> uLock(bindingMutex);
 					LOG(LogLevel::Fine) << "Bindable::AddBindings() : this [" << this << "] binding is null, so create bindings.";
 					bindings = new vector<Bindable<T>*>();
@@ -132,17 +132,24 @@ namespace DataStructure {
 					
 				other->AddBindings(this);
 			}
-			else {
+			else {	// 自己沒有binding
 
-				if (bindings == nullptr) {
+				if (bindings == nullptr) {	// 對方也沒有binding
 					unique_lock<mutex> uLock(bindingMutex);
 					LOG(LogLevel::Fine) << "Bindable::AddBindings() : other [" << other << "]'s binding is [" << other->GetBindings() << "]. this = [" << this << "].";
 					bindings = other->GetBindings();
 					bindings->push_back(this);
 				}
-				else 
-					throw logic_error("Bindable<T>::AddBindings(): cannot bind two list of bindings.");
-					// 之後可以寫寫看兩個bindable list相加
+				else {	// 雙方早就已經bind在一起
+					if (other->GetBindings() == bindings) {
+						LOG(LogLevel::Fine) << "Bindable::AddBindings() : these two has already binded.";
+					}
+					else
+						throw logic_error("Bindable<T>::AddBindings(): cannot bind two list of bindings.");
+						// 之後可以寫寫看兩個bindable list相加
+
+				}
+					
 				
 			}
 			

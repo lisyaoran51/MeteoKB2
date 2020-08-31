@@ -38,8 +38,8 @@ int Player::load(MeteoConfigManager* m, Instrument* instru)
 
 	WorkingSm* workingSmValue = workingSm.GetValue();
 	// 這個是先寫死ruleset ，之後要改成從檔案讀(像下一行那樣)
-	rulesetInfo.SetValue(new RulesetInfo("MeteorRuleset", 1));
-	//rulesetInfo.SetValue(workingSm.GetValue()->GetSm()->GetSmInfo()->rulesetInfo);
+	//rulesetInfo.SetValue(new RulesetInfo("MeteorRuleset", 1));
+	rulesetInfo.SetValue(workingSm.GetValue()->GetSm()->GetSmInfo()->rulesetInfo);
 
 	ruleset = rulesetInfo.GetValue()->CreateRuleset();
 	LOG(LogLevel::Fine) << "Player::load : create ruleset executor.";
@@ -93,7 +93,6 @@ int Player::load(MeteoConfigManager* m, Instrument* instru)
 		LOG(LogLevel::Info) << "Player::load : scheduled task to change source to track [" << adjustableClock << "].";
 		adjustableClock->Reset();
 
-
 		LOG(LogLevel::Debug) << "Player::load : reseted.";
 		decoupledClock->ChangeSource(adjustableClock);
 
@@ -103,6 +102,13 @@ int Player::load(MeteoConfigManager* m, Instrument* instru)
 			}
 
 		}
+
+		/* 倒數 */
+		if (workingSmValue->GetSm()->GetSmInfo()->countdown)
+			timeController->JumpTo(-4.0 / timeController->GetRate());
+		else
+			timeController->JumpTo(-1.0 / timeController->GetRate());
+			
 		
 		LOG(LogLevel::Debug) << "Player::load : scheduled task end.";
 
