@@ -166,7 +166,7 @@ int SheetmusicSelectPanel::OnCommand(MeteoBluetoothCommand * command)
 				// 回傳已有這首曲子
 				MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::AckSheetmusicData);
 				meteoContextBluetoothMessage->GetContext()["Status"] = short(-1);
-				meteoContextBluetoothMessage->GetContext()["Id"] = unsigned int(songId);
+				meteoContextBluetoothMessage->GetContext()["Id"] = int(songId);
 
 				outputManager->PushMessage(meteoContextBluetoothMessage);
 				return 0;
@@ -175,7 +175,7 @@ int SheetmusicSelectPanel::OnCommand(MeteoBluetoothCommand * command)
 		// 回傳沒有這首曲子
 		MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::AckSheetmusicData);
 		meteoContextBluetoothMessage->GetContext()["Status"] = short(0);
-		meteoContextBluetoothMessage->GetContext()["Id"] = unsigned int(songId);
+		meteoContextBluetoothMessage->GetContext()["Id"] = int(songId);
 
 		outputManager->PushMessage(meteoContextBluetoothMessage);
 		return 0;
