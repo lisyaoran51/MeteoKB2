@@ -54,37 +54,26 @@ namespace IO {
 		/// 寫入sm檔時的callback
 		/// </summary>
 		template<class _Type>
-		int AddOnStartWritingSmFile(_Type* callableObject, function<int(string)> callback, string name) {
-			matchedBluetoothDevice->AddOnStartWritingSmFile(callableObject, callback, name);
-		}
+		int AddOnStartWritingSmFile(_Type* callableObject, function<int(string)> callback, string name);
+
 		template<class _Type>
-		int AddOnWriteSmFileSuccess(_Type* callableObject, function<int(string)> callback, string name) {
-			matchedBluetoothDevice->AddOnWriteSmFileSuccess(callableObject, callback, name);
-		}
+		int AddOnWriteSmFileSuccess(_Type* callableObject, function<int(string)> callback, string name);
 
 		/// <summary>
 		/// 寫入新音色時的callback
 		/// </summary>
 		template<class _Type>
-		int AddOnStartWritingSoundFilePackage(_Type* callableObject, function<int(string)> callback, string name) {
-			matchedBluetoothDevice->AddOnStartWritingSoundFilePackage(callableObject, callback, name);
-		}
+		int AddOnStartWritingSoundFilePackage(_Type* callableObject, function<int(string)> callback, string name);
 		template<class _Type>
-		int AddOnWriteSoundFilePackageSuccess(_Type* callableObject, function<int(string)> callback, string name) {
-			matchedBluetoothDevice->AddOnWriteSoundFilePackageSuccess(callableObject, callback, name);
-		}
+		int AddOnWriteSoundFilePackageSuccess(_Type* callableObject, function<int(string)> callback, string name);
 
 		/// <summary>
 		/// 寫入新主程式時的callback
 		/// </summary>
 		template<class _Type>
-		int AddOnStartWritingProgram(_Type* callableObject, function<int(string)> callback, string name) {
-			matchedBluetoothDevice->AddOnStartWritingProgram(callableObject, callback, name);
-		}
+		int AddOnStartWritingProgram(_Type* callableObject, function<int(string)> callback, string name);
 		template<class _Type>
-		int AddOnWriteProgramSuccess(_Type* callableObject, function<int(string)> callback, string name) {
-			matchedBluetoothDevice->AddOnWriteProgramSuccess(callableObject, callback, name);
-		}
+		int AddOnWriteProgramSuccess(_Type* callableObject, function<int(string)> callback, string name);
 
 	protected:
 
@@ -97,15 +86,7 @@ namespace IO {
 
 	};
 
-
-	
-
-}
-}
-
-
-
-
+}}
 
 
 
