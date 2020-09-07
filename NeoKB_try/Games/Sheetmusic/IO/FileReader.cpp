@@ -59,16 +59,16 @@ vector<string>* FileReader::WhereEndWith(string s)
 
 		int len = strlen((*fileNames)[i]);
 		
-		LOG(LogLevel::Debug) << "FileReader::WhereEndWith : check if [" << (*fileNames)[i] << "] is .sm ";
+		LOG(LogLevel::Finer) << "FileReader::WhereEndWith : check if [" << (*fileNames)[i] << "] is .sm ";
 
 		if (len >= 3 && strcmp((*fileNames)[i] + len - 3, ".sm") == 0) {
 
-			LOG(LogLevel::Info) << "FileReader::WhereEndWith : sheetmusic read : [" << (*fileNames)[i] << "]";
+			LOG(LogLevel::Fine) << "FileReader::WhereEndWith : sheetmusic read : [" << (*fileNames)[i] << "]";
 			files->push_back((*fileNames)[i]);
 
 		}
 		else if (len >= 3){
-			LOG(LogLevel::Debug) << "FileReader::WhereEndWith : not sm : [" << (*fileNames)[i] << "]. the last words are ["
+			LOG(LogLevel::Finer) << "FileReader::WhereEndWith : not sm : [" << (*fileNames)[i] << "]. the last words are ["
 				<< (*fileNames)[i] + len - 3 << "], the return of strcmp is [" << strcmp((*fileNames)[i] + len - 3, ".sm") << "]";
 		}
 	}
