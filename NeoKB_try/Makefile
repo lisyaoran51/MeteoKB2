@@ -6,7 +6,7 @@ Framework/Exception:\
 Framework/Graphic:Framework/Graphic/Map:\
 Framework/Host:\
 Framework/Input:Framework/Input/Commands:Framework/Input/Handler:Framework/Input/KeyBindings:\
-Framework/IO:Framework/IO/Stores:\
+Framework/IO:Framework/IO/Stores:Framework/IO/Api:\
 Framework/Output:Framework/Output/Panels:Framework/Output/Bluetooths:\
 Framework/Database:\
 Framework/Scenes:\
@@ -59,7 +59,7 @@ INCLUDE = -IFramwork -IFramework/Allocation -IFramework/Allocation/Hierachal -IF
 -IFramework/Graphic -IFramework/Graphic/Map \
 -IFramework/Host \
 -IFramework/Input -IFramework/Input/Commands -IFramework/Input/Handler -IFramework/Input/KeyBindings \
--IFramework/IO -IFramework/IO/Stores \
+-IFramework/IO -IFramework/IO/Stores -IFramework/IO/Api \
 -IFramework/Output -IFramework/Output/Panels -IFramework/Output/Bluetooths \
 -IFramework/Database \
 -IFramework/Scenes \
@@ -140,7 +140,7 @@ Drawable.o Map.o \
 GameHost.o MeteoGameHost.o \
 BluetoothState.o CustomInputManager.o InputManager.o InputState.o KeyboardState.o PanelState.o PassThroughInputManager.o HasInputKey.o \
 BluetoothCommand.o BluetoothInputHandler.o KeyboardInputHandler.o PanelInputHandler.o KeyBindingStore.o \
-BluetoothPhone.o Display.o FileStore.o Keyboard.o MainInterface.o Panel.o Peripheral.o PlatformStorage.o Storage.o StorageResourceStore.o DynamicPathResourceStore.o \
+BluetoothPhone.o Display.o FileStore.o Keyboard.o MainInterface.o Panel.o Peripheral.o PlatformStorage.o Storage.o StorageResourceStore.o DynamicPathResourceStore.o ApiAccess.o \
 OutputManager.o BluetoothOutputer.o \
 Scene.o \
 GameThread.o ThreadMaster.o \
