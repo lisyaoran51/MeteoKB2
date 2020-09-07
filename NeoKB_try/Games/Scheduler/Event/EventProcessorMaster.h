@@ -17,6 +17,7 @@
 #include "../../../Framework/Timing/FramedClock.h"
 #include "../../../Framework/Configurations/FrameworkConfigManager.h"
 #include "../../../Framework/Input/KeyBindings/KeyBindingHandler.h"
+#include "../../../Framework/Output/OutputManager.h"
 
 
 
@@ -29,6 +30,8 @@ using namespace Framework::Allocation::Hierachal;
 using namespace Framework::Timing;
 using namespace Framework::Configurations;
 using namespace Framework::Input::KeyBindings;
+using namespace Framework::Output;
+
 
 
 /*

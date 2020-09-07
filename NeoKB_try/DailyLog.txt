@@ -1995,6 +1995,60 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	
 8/31
 	缺的東西: mcu、ruleset info(ok)、未進入遊戲的移調(ok)、琴音分為全長和AB段、琴音切換、wifi、daemon、重播存檔、OS設定、平移會lag、換上新音色、遊戲開始前倒數3秒(ok)、刪除所有memory leak
-				遊戲開始前設定mod(ok)、遊戲開始時改速度(ok)、手動踏板modifier、紀錄每個modifier到藍芽架構裡、
+				遊戲開始前設定mod(ok)、遊戲開始時改速度(ok)、手動踏板modifier、紀錄每個modifier到藍芽架構裡、me555
 	
+9/1
+	找到mcu輸出uart debug資料的方法: 在project裡面DEBUG_ENABLE_SEMIHOST=1，才能收到uart訊號
+	
+9/2
+	找出怎麼接i2c訊號，他會一個一個char擺進g_au8SlvRxData裡面，
+	目前的mcu是直接設定不看地址，所有資料都收
+	pi先執行pi2c，把資料write進mcu，mcu再用中斷printf出來
+	
+	讀slave資料目前讀不出來
+	https://www.nuvoton.com/export/resource-files/TRM_ML51_Series_EN_Rev1.02.pdf
+	249頁，status先是0xa8，之後變oxb8
+	在handler裡面加上這行就好，oxb8是代表說要循環取i2cdat的意思
+	
+    else if(u32Status == 0xB8)                  /* from datasheet to know 0xb8 is how to use TRM_ML51_Series_EN_Rev1.02.pdf */
+    {
+
+        I2C0->I2CDAT = g_au8SlvData[slave_buff_addr];
+        slave_buff_addr++;
+        I2C_SET_CONTROL_REG(I2C0, I2C_I2CON_SI_AA);
+    }
+	
+	read是在0xC0結束，write沒有結束status，可能要用\0來判斷，不過在收到下一個訊號的時候會先收到0xA0(restart的意思)
+	
+	
+	
+9/3
+	把mcu的i2c城市稍微寫出來
+	
+9/4
+	不知道為什麼在mcu不能用時間韓式
+	timer_perodicINT專案有計時的程式，mcu的時間要用timer來換算，沒有內建的時間函示
+	用他的timer來抓ms，就可以寫程式了
+	
+9/5
+	不知道為什麼i2c一職丟不出去list裡面的資料
+	忘記給buffer的指標
+	
+	現在改成如果收到的第一個unsigned char是1，就是有心資料可以讀，如果是0就是沒有資料
+	
+	要寫一下list 的 lock
+	
+	i2c差不多寫出來了，不過要注意的是，mcu的i2c沒有read fail的功能，只能讀到空值，如果是空值的時候，第一個獨到的字的第一個bit會變成1，如0x0會變成0x80，可以用這個判斷mcu有沒有送資料
+	
+9/6
+	在i2c read pi的時候，list不能用blocking，會出很多問題，所以暫時不用lock直接操作
+	
+	如果i2c時有printf的話就很容易當機，沒printf也會盪
+	
+	i2c的pi write mcu i2c status是0x60開始，傳資料是0x80，沒有結束，但是下一個開始的時候會先叫0xA0，然後才重新開始0x60、0x80...
+	
+	在list.c裡面 memcpy(buffer, list->head->content, sizeof(char) * CIRCULAR_LINKED_LIST_CONTENT_MAX_SIZE);的時候，size會莫名其妙+1
+	https://community.arm.com/developer/tools-software/tools/f/keil-forum/31706/hard-fault-at-misaligned-memcpy-memset]
+	
+	把memcpy和memset全都拿掉，結果過了好幾個while迴圈還是會自動跑出來list的size+1，只能去問問看
 	
