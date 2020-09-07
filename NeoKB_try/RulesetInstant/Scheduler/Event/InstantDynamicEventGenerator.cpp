@@ -11,6 +11,10 @@ using namespace Instant::Schedulers::Events::InstrumentEvents;
 
 
 
+InstantDynamicEventGenerator::InstantDynamicEventGenerator(Playfield * p) : RegisterType("InstantDynamicEventGenerator"), DynamicEventGenerator(p)
+{
+}
+
 int InstantDynamicEventGenerator::OnCommand(MeteoBluetoothCommand * command)
 {
 	if (command->GetCommand() == MeteoCommand::InstantLightEvent) {

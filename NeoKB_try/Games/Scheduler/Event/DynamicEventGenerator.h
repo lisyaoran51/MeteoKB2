@@ -33,6 +33,8 @@ namespace Events{
 
 		DynamicEventGenerator();
 
+		DynamicEventGenerator(Playfield* p);
+
 	protected:
 
 		mutable mutex dynamicEventProcessorsMutex;

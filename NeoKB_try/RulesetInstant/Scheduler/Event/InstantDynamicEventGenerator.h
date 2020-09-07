@@ -20,6 +20,8 @@ namespace Events{
 	class InstantDynamicEventGenerator : public DynamicEventGenerator, public CommandHandler<MeteoBluetoothCommand> {
 	
 	public:
+
+		InstantDynamicEventGenerator(Playfield* p);
 		
 		virtual int OnCommand(MeteoBluetoothCommand* command);
 

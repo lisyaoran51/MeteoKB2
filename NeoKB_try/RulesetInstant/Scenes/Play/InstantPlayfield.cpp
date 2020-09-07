@@ -237,7 +237,7 @@ EventProcessorMaster * InstantPlayfield::createEventProcessorMaster()
 
 DynamicEventGenerator * InstantPlayfield::createDynamicEventGenerator()
 {
-	return new InstantDynamicEventGenerator();
+	return new InstantDynamicEventGenerator(this);
 }
 
 

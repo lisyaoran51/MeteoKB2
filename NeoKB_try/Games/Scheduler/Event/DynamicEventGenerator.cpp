@@ -26,9 +26,15 @@ int DynamicEventGenerator::load(Playfield * p)
 
 DynamicEventGenerator::DynamicEventGenerator() : RegisterType("DynamicEventGenerator")
 {
-
+	// 這一個函示不用了，把playfield給cache的話遊戲結束的時候很麻煩
+	throw runtime_error("DynamicEventGenerator::DynamicEventGenerator() : con't use this constructor. playfield is not in cache.");
 	registerLoad(bind((int(DynamicEventGenerator::*)())&DynamicEventGenerator::load, this));
 
+}
+
+DynamicEventGenerator::DynamicEventGenerator(Playfield * p) : RegisterType("DynamicEventGenerator")
+{
+	playfield = p;
 }
 
 int DynamicEventGenerator::update()
