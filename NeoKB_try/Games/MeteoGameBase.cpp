@@ -5,12 +5,14 @@
 #include "../Framework/Database/ReadonlyCsvDatabaseContextFactory.h"
 #include <functional>
 #include "Input/Commands/MeteoBluetoothCommand.h"
+#include "../Framework/IO/Api/ApiAccess.h"
 
 
 using namespace Games;
 using namespace Games::Rulesets;
 using namespace std;
 using namespace Games::Input::Commands;
+using namespace Framework::IO::Api;
 
 
 int MeteoGameBase::load()
