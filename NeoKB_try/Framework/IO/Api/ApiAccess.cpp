@@ -13,40 +13,32 @@ ApiAccess::ApiAccess(GameHost * gHost): RegisterType("ApiAccess")
 
 }
 
-template<class _Type>
-int ApiAccess::AddOnStartWritingSmFile(_Type * callableObject, function<int(string)> callback, string name)
+int ApiAccess::AddOnStartWritingSmFile(MtoObject * callableObject, function<int(string)> callback, string name)
 {
 	return gameHost->GetMainInterface()->GetBluetoothPhone()->AddOnStartWritingSmFile(callableObject, callback, name);
 }
-template int ApiAccess::AddOnStartWritingSmFile<MtoObject>(MtoObject * callableObject, function<int(string)> callback, string name);
 
-template<class _Type>
-int ApiAccess::AddOnWriteSmFileSuccess(_Type * callableObject, function<int(string)> callback, string name)
+int ApiAccess::AddOnWriteSmFileSuccess(MtoObject * callableObject, function<int(string)> callback, string name)
 {
 	return gameHost->GetMainInterface()->GetBluetoothPhone()->AddOnWriteSmFileSuccess(callableObject, callback, name);
 }
-template int ApiAccess::AddOnWriteSmFileSuccess<MtoObject>(MtoObject * callableObject, function<int(string)> callback, string name);
 
-template<class _Type>
-int ApiAccess::AddOnStartWritingSoundFilePackage(_Type * callableObject, function<int(string)> callback, string name)
+int ApiAccess::AddOnStartWritingSoundFilePackage(MtoObject * callableObject, function<int(string)> callback, string name)
 {
 	return gameHost->GetMainInterface()->GetBluetoothPhone()->AddOnStartWritingSoundFilePackage(callableObject, callback, name);
 }
 
-template<class _Type>
-int ApiAccess::AddOnWriteSoundFilePackageSuccess(_Type * callableObject, function<int(string)> callback, string name)
+int ApiAccess::AddOnWriteSoundFilePackageSuccess(MtoObject * callableObject, function<int(string)> callback, string name)
 {
 	return gameHost->GetMainInterface()->GetBluetoothPhone()->AddOnWriteSoundFilePackageSuccess(callableObject, callback, name);
 }
 
-template<class _Type>
-int ApiAccess::AddOnStartWritingProgram(_Type * callableObject, function<int(string)> callback, string name)
+int ApiAccess::AddOnStartWritingProgram(MtoObject * callableObject, function<int(string)> callback, string name)
 {
 	return gameHost->GetMainInterface()->GetBluetoothPhone()->AddOnStartWritingProgram(callableObject, callback, name);
 }
 
-template<class _Type>
-int ApiAccess::AddOnWriteProgramSuccess(_Type * callableObject, function<int(string)> callback, string name)
+int ApiAccess::AddOnWriteProgramSuccess(MtoObject * callableObject, function<int(string)> callback, string name)
 {
 	return gameHost->GetMainInterface()->GetBluetoothPhone()->AddOnWriteProgramSuccess(callableObject, callback, name);
 }

@@ -26,51 +26,33 @@ int BluetoothPhone::TriggerOnInput()
 	return 0;
 }
 
-/*
-template<class _Type>
-int BluetoothPhone::AddOnCommand(_Type* callableObject, function<int(InputState*)> callback, string name) {
 
-	LOG(LogLevel::Fine) << "BluetoothPhone::AddOnCommand() : register handler into list.";
-
-	OnCommand.Add(callableObject, callback, name);
-	return 0;
-}
-*/
-
-template<class _Type>
-int BluetoothPhone::AddOnStartWritingSmFile(_Type * callableObject, function<int(string)> callback, string name)
+int BluetoothPhone::AddOnStartWritingSmFile(MtoObject * callableObject, function<int(string)> callback, string name)
 {
 	return matchedBluetoothDevice->AddOnStartWritingSmFile(callableObject, callback, name);
 }
-template int BluetoothPhone::AddOnStartWritingSmFile<MtoObject>(MtoObject * callableObject, function<int(string)> callback, string name);
 
-template<class _Type>
-int BluetoothPhone::AddOnWriteSmFileSuccess(_Type * callableObject, function<int(string)> callback, string name)
+int BluetoothPhone::AddOnWriteSmFileSuccess(MtoObject * callableObject, function<int(string)> callback, string name)
 {
 	return matchedBluetoothDevice->AddOnWriteSmFileSuccess(callableObject, callback, name);
 }
-template int BluetoothPhone::AddOnWriteSmFileSuccess<MtoObject>(MtoObject * callableObject, function<int(string)> callback, string name);
 
-template<class _Type>
-int BluetoothPhone::AddOnStartWritingSoundFilePackage(_Type * callableObject, function<int(string)> callback, string name)
+int BluetoothPhone::AddOnStartWritingSoundFilePackage(MtoObject * callableObject, function<int(string)> callback, string name)
 {
 	return matchedBluetoothDevice->AddOnStartWritingSoundFilePackage(callableObject, callback, name);
 }
 
-template<class _Type>
-int BluetoothPhone::AddOnWriteSoundFilePackageSuccess(_Type * callableObject, function<int(string)> callback, string name)
+int BluetoothPhone::AddOnWriteSoundFilePackageSuccess(MtoObject * callableObject, function<int(string)> callback, string name)
 {
 	return matchedBluetoothDevice->AddOnWriteSoundFilePackageSuccess(callableObject, callback, name);
 }
 
-template<class _Type>
-int BluetoothPhone::AddOnStartWritingProgram(_Type * callableObject, function<int(string)> callback, string name)
+int BluetoothPhone::AddOnStartWritingProgram(MtoObject * callableObject, function<int(string)> callback, string name)
 {
 	return matchedBluetoothDevice->AddOnStartWritingProgram(callableObject, callback, name);
 }
 
-template<class _Type>
-int BluetoothPhone::AddOnWriteProgramSuccess(_Type * callableObject, function<int(string)> callback, string name)
+int BluetoothPhone::AddOnWriteProgramSuccess(MtoObject * callableObject, function<int(string)> callback, string name)
 {
 	return matchedBluetoothDevice->AddOnWriteProgramSuccess(callableObject, callback, name);
 }

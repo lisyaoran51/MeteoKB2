@@ -24,33 +24,24 @@ namespace Api{
 		/// <summary>
 		/// 寫入sm檔時的callback
 		/// </summary>
-		template<class _Type>
-		int AddOnStartWritingSmFile(_Type* callableObject, function<int(string)> callback, string name = "HandleReceivingNewSmFile");
-
-		template<class _Type>
-		int AddOnWriteSmFileSuccess(_Type* callableObject, function<int(string)> callback, string name = "HandleNewSmFileReceived");
+		int AddOnStartWritingSmFile(MtoObject* callableObject, function<int(string)> callback, string name = "HandleReceivingNewSmFile");
+		int AddOnWriteSmFileSuccess(MtoObject* callableObject, function<int(string)> callback, string name = "HandleNewSmFileReceived");
 		// on sm file success, import
 
 
 		/// <summary>
 		/// 寫入新音色時的callback
 		/// </summary>
-		template<class _Type>
-		int AddOnStartWritingSoundFilePackage(_Type* callableObject, function<int(string)> callback, string name = "HandleReceivingNewSoundFilePackage");
-
-		template<class _Type>
-		int AddOnWriteSoundFilePackageSuccess(_Type* callableObject, function<int(string)> callback, string name = "HandleNewSoundFilePackageReceived");
+		int AddOnStartWritingSoundFilePackage(MtoObject* callableObject, function<int(string)> callback, string name = "HandleReceivingNewSoundFilePackage");
+		int AddOnWriteSoundFilePackageSuccess(MtoObject* callableObject, function<int(string)> callback, string name = "HandleNewSoundFilePackageReceived");
 		// on sound file success, add to new sound binding
 		
 
 		/// <summary>
 		/// 寫入新主程式時的callback
 		/// </summary>
-		template<class _Type>
-		int AddOnStartWritingProgram(_Type* callableObject, function<int(string)> callback, string name = "HandleReceivingNewProgram");
-
-		template<class _Type>
-		int AddOnWriteProgramSuccess(_Type* callableObject, function<int(string)> callback, string name = "HandleNewProgramReceived");
+		int AddOnStartWritingProgram(MtoObject* callableObject, function<int(string)> callback, string name = "HandleReceivingNewProgram");
+		int AddOnWriteProgramSuccess(MtoObject* callableObject, function<int(string)> callback, string name = "HandleNewProgramReceived");
 
 	protected:
 
