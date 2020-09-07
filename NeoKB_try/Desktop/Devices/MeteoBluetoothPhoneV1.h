@@ -61,7 +61,7 @@ namespace Devices {
 		/// </summary>
 		template<class _Type>
 		int AddOnStartWritingSmFile(_Type* callableObject, function<int(string)> callback, string name) {
-			return onStartWritingSmFile(callableObject, callback, name);
+			return AddOnStartWritingSmFile(callableObject, callback, name);
 		}
 		template<class _Type>
 		int AddOnWriteSmFileSuccess(_Type* callableObject, function<int(string)> callback, string name) {
