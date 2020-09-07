@@ -8,6 +8,36 @@ MeteoBluetoothDevice::MeteoBluetoothDevice(MeteoBluetoothPhoneV1 * mBluetoothPho
 	meteoBluetoothPhone = mBluetoothPhone;
 }
 
+int MeteoBluetoothDevice::AddOnStartWritingSmFile(MtoObject * callableObject, function<int(string)> callback, string name)
+{
+	return meteoBluetoothPhone->AddOnStartWritingSmFile(callableObject, callback, name);
+}
+
+int MeteoBluetoothDevice::AddOnWriteSmFileSuccess(MtoObject * callableObject, function<int(string)> callback, string name)
+{
+	return meteoBluetoothPhone->AddOnWriteSmFileSuccess(callableObject, callback, name);
+}
+
+int MeteoBluetoothDevice::AddOnStartWritingSoundFilePackage(MtoObject * callableObject, function<int(string)> callback, string name)
+{
+	return meteoBluetoothPhone->AddOnStartWritingSoundFilePackage(callableObject, callback, name);
+}
+
+int MeteoBluetoothDevice::AddOnWriteSoundFilePackageSuccess(MtoObject * callableObject, function<int(string)> callback, string name)
+{
+	return meteoBluetoothPhone->AddOnWriteSoundFilePackageSuccess(callableObject, callback, name);
+}
+
+int MeteoBluetoothDevice::AddOnStartWritingProgram(MtoObject * callableObject, function<int(string)> callback, string name)
+{
+	return meteoBluetoothPhone->AddOnStartWritingProgram(callableObject, callback, name);
+}
+
+int MeteoBluetoothDevice::AddOnWriteProgramSuccess(MtoObject * callableObject, function<int(string)> callback, string name)
+{
+	return meteoBluetoothPhone->AddOnWriteProgramSuccess(callableObject, callback, name);
+}
+
 int MeteoBluetoothDevice::readFromDevice()
 {
 	return 0;

@@ -2052,3 +2052,5 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	
 	把memcpy和memset全都拿掉，結果過了好幾個while迴圈還是會自動跑出來list的size+1，只能去問問看
 	
+9/7
+	把access的on write sm success寫完了，之後要去寫下載好主程式、音檔的時候要如何移動到正確的位置。

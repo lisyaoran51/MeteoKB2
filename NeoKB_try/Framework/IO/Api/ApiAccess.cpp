@@ -9,6 +9,4 @@ ApiAccess::ApiAccess(GameHost * gHost): RegisterType("ApiAccess")
 
 	gameHost = gHost;
 
-	gameHost->GetMainInterface()->GetBluetoothPhone()->Add
-
 }

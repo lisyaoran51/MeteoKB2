@@ -59,20 +59,38 @@ namespace Devices {
 		/// <summary>
 		/// 寫入sm檔時的callback
 		/// </summary>
-		int AddOnStartWritingSmFile(function<int(string)> callback);
-		int AddOnWriteSmFileSuccess(function<int(string)> callback);
+		template<class _Type>
+		int AddOnStartWritingSmFile(_Type* callableObject, function<int(string)> callback, string name) {
+			return onStartWritingSmFile(callableObject, callback, name);
+		}
+		template<class _Type>
+		int AddOnWriteSmFileSuccess(_Type* callableObject, function<int(string)> callback, string name) {
+			return AddOnWriteSmFileSuccess(callableObject, callback, name);
+		}
 
 		/// <summary>
 		/// 寫入新音色時的callback
 		/// </summary>
-		int AddOnStartWritingSoundFilePackage(function<int(string)> callback);
-		int AddOnWriteSoundFilePackageSuccess(function<int(string)> callback);
+		template<class _Type>
+		int AddOnStartWritingSoundFilePackage(_Type* callableObject, function<int(string)> callback, string name) {
+			return AddOnStartWritingSoundFilePackage(callableObject, callback, name);
+		}
+		template<class _Type>
+		int AddOnWriteSoundFilePackageSuccess(_Type* callableObject, function<int(string)> callback, string name) {
+			return AddOnWriteSoundFilePackageSuccess(callableObject, callback, name);
+		}
 
 		/// <summary>
 		/// 寫入新主程式時的callback
 		/// </summary>
-		int AddOnStartWritingProgram(function<int(string)> callback);
-		int AddOnWriteProgramSuccess(function<int(string)> callback);
+		template<class _Type>
+		int AddOnStartWritingProgram(_Type* callableObject, function<int(string)> callback, string name) {
+			return AddOnStartWritingProgram(callableObject, callback, name);
+		}
+		template<class _Type>
+		int AddOnWriteProgramSuccess(_Type* callableObject, function<int(string)> callback, string name) {
+			return AddOnWriteProgramSuccess(callableObject, callback, name);
+		}
 
 	protected:
 

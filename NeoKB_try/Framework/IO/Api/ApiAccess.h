@@ -26,12 +26,12 @@ namespace Api{
 		/// </summary>
 		template<class _Type>
 		int AddOnStartWritingSmFile(_Type* callableObject, function<int(string)> callback, string name = "HandleReceivingNewSmFile") {
-			return onStartWritingSmFile.Add(callableObject, callback, name);
+			return gameHost->GetMainInterface()->GetBluetoothPhone()->AddOnStartWritingSmFile(callableObject, callback, name);
 		}
 
 		template<class _Type>
 		int AddOnWriteSmFileSuccess(_Type* callableObject, function<int(string)> callback, string name = "HandleNewSmFileReceived") {
-			return onWriteSmFileSuccess.Add(callableObject, callback, name);
+			return gameHost->GetMainInterface()->GetBluetoothPhone()->AddOnWriteSmFileSuccess(callableObject, callback, name);
 		}
 		// on sm file success, import
 
@@ -41,12 +41,12 @@ namespace Api{
 		/// </summary>
 		template<class _Type>
 		int AddOnStartWritingSoundFilePackage(_Type* callableObject, function<int(string)> callback, string name = "HandleReceivingNewSoundFilePackage") {
-			return onStartWritingSoundFilePackage.Add(callableObject, callback, name);
+			return gameHost->GetMainInterface()->GetBluetoothPhone()->AddOnStartWritingSoundFilePackage(callableObject, callback, name);
 		}
 
 		template<class _Type>
 		int AddOnWriteSoundFilePackageSuccess(_Type* callableObject, function<int(string)> callback, string name = "HandleNewSoundFilePackageReceived") {
-			return onWriteSoundFilePackageSuccess.Add(callableObject, callback, name);
+			return gameHost->GetMainInterface()->GetBluetoothPhone()->AddOnWriteSoundFilePackageSuccess(callableObject, callback, name);
 		}
 		// on sound file success, add to new sound binding
 		
@@ -56,12 +56,12 @@ namespace Api{
 		/// </summary>
 		template<class _Type>
 		int AddOnStartWritingProgram(_Type* callableObject, function<int(string)> callback, string name = "HandleReceivingNewProgram") {
-			return onStartWritingProgram.Add(callableObject, callback, name);
+			return gameHost->GetMainInterface()->GetBluetoothPhone()->AddOnStartWritingProgram(callableObject, callback, name);
 		}
 
 		template<class _Type>
 		int AddOnWriteProgramSuccess(_Type* callableObject, function<int(string)> callback, string name = "HandleNewProgramReceived") {
-			return onWriteProgramSuccess.Add(callableObject, callback, name);
+			return gameHost->GetMainInterface()->GetBluetoothPhone()->AddOnWriteProgramSuccess(callableObject, callback, name);
 		}
 
 	protected:

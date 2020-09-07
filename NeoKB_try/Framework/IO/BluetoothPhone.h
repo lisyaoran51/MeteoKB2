@@ -41,8 +41,8 @@ namespace IO {
 
 		virtual int TriggerOnInput();
 
-		template<class _Type>
-		int AddOnCommand(_Type* callableObject, function<int(InputState*)> callback, string name = "HandleCommand") {
+		
+		int AddOnCommand(MtoObject* callableObject, function<int(InputState*)> callback, string name = "HandleCommand") {
 
 			LOG(LogLevel::Fine) << "BluetoothPhone::AddOnCommand() : register handler into list.";
 
@@ -55,26 +55,36 @@ namespace IO {
 		/// </summary>
 		template<class _Type>
 		int AddOnStartWritingSmFile(_Type* callableObject, function<int(string)> callback, string name) {
-
+			matchedBluetoothDevice->AddOnStartWritingSmFile(callableObject, callback, name);
 		}
 		template<class _Type>
-		int AddOnWriteSmFileSuccess(_Type* callableObject, function<int(string)> callback, string name);
+		int AddOnWriteSmFileSuccess(_Type* callableObject, function<int(string)> callback, string name) {
+			matchedBluetoothDevice->AddOnWriteSmFileSuccess(callableObject, callback, name);
+		}
 
 		/// <summary>
 		/// 寫入新音色時的callback
 		/// </summary>
 		template<class _Type>
-		int AddOnStartWritingSoundFilePackage(_Type* callableObject, function<int(string)> callback, string name);
+		int AddOnStartWritingSoundFilePackage(_Type* callableObject, function<int(string)> callback, string name) {
+			matchedBluetoothDevice->AddOnStartWritingSoundFilePackage(callableObject, callback, name);
+		}
 		template<class _Type>
-		int AddOnWriteSoundFilePackageSuccess(_Type* callableObject, function<int(string)> callback, string name);
+		int AddOnWriteSoundFilePackageSuccess(_Type* callableObject, function<int(string)> callback, string name) {
+			matchedBluetoothDevice->AddOnWriteSoundFilePackageSuccess(callableObject, callback, name);
+		}
 
 		/// <summary>
 		/// 寫入新主程式時的callback
 		/// </summary>
 		template<class _Type>
-		int AddOnStartWritingProgram(_Type* callableObject, function<int(string)> callback, string name);
+		int AddOnStartWritingProgram(_Type* callableObject, function<int(string)> callback, string name) {
+			matchedBluetoothDevice->AddOnStartWritingProgram(callableObject, callback, name);
+		}
 		template<class _Type>
-		int AddOnWriteProgramSuccess(_Type* callableObject, function<int(string)> callback, string name);
+		int AddOnWriteProgramSuccess(_Type* callableObject, function<int(string)> callback, string name) {
+			matchedBluetoothDevice->AddOnWriteProgramSuccess(callableObject, callback, name);
+		}
 
 	protected:
 

@@ -22,49 +22,22 @@ namespace Devices{
 		/// <summary>
 		/// 寫入sm檔時的callback
 		/// </summary>
-		template<class _Type>
-		int AddOnStartWritingSmFile(_Type* callableObject, function<int(string)> callback, string name) {
-			return onStartWritingSmFile.Add(callableObject, callback, name);
-		}
-		template<class _Type>
-		int AddOnWriteSmFileSuccess(_Type* callableObject, function<int(string)> callback, string name) {
-			return onWriteSmFileSuccess.Add(callableObject, callback, name);
-		}
+		virtual int AddOnStartWritingSmFile(MtoObject* callableObject, function<int(string)> callback, string name) = 0;
+		virtual int AddOnWriteSmFileSuccess(MtoObject* callableObject, function<int(string)> callback, string name) = 0;
 
 		/// <summary>
 		/// 寫入新音色時的callback
 		/// </summary>
-		template<class _Type>
-		int AddOnStartWritingSoundFilePackage(_Type* callableObject, function<int(string)> callback, string name) {
-			return onStartWritingSoundFilePackage.Add(callableObject, callback, name);
-		}
-		template<class _Type>
-		int AddOnWriteSoundFilePackageSuccess(_Type* callableObject, function<int(string)> callback, string name) {
-			return onWriteSoundFilePackageSuccess.Add(callableObject, callback, name);
-		}
+		virtual int AddOnStartWritingSoundFilePackage(MtoObject* callableObject, function<int(string)> callback, string name) = 0;
+		virtual int AddOnWriteSoundFilePackageSuccess(MtoObject* callableObject, function<int(string)> callback, string name) = 0;
 
 		/// <summary>
 		/// 寫入新主程式時的callback
 		/// </summary>
-		template<class _Type>
-		int AddOnStartWritingProgram(_Type* callableObject, function<int(string)> callback, string name) {
-			return onStartWritingProgram.Add(callableObject, callback, name);
-		}
-		template<class _Type>
-		int AddOnWriteProgramSuccess(_Type* callableObject, function<int(string)> callback, string name) {
-			return onWriteProgramSuccess.Add(callableObject, callback, name);
-		}
+		virtual int AddOnStartWritingProgram(MtoObject* callableObject, function<int(string)> callback, string name) = 0;
+		virtual int AddOnWriteProgramSuccess(MtoObject* callableObject, function<int(string)> callback, string name) = 0;
 
 	protected:
-
-		ActionList<int, string> onStartWritingSmFile;
-		ActionList<int, string> onWriteSmFileSuccess;
-
-		ActionList<int, string> onStartWritingSoundFilePackage;
-		ActionList<int, string> onWriteSoundFilePackageSuccess;
-
-		ActionList<int, string> onStartWritingProgram;
-		ActionList<int, string> onWriteProgramSuccess;
 
 		BluetoothPhone* matchedBluetoothPhone;
 
