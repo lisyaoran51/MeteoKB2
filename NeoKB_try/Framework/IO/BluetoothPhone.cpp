@@ -42,13 +42,14 @@ int BluetoothPhone::AddOnStartWritingSmFile(_Type * callableObject, function<int
 {
 	return matchedBluetoothDevice->AddOnStartWritingSmFile(callableObject, callback, name);
 }
-template int BluetoothPhone::AddOnStartWritingSmFile(MtoObject * callableObject, function<int(string)> callback, string name);
+template int BluetoothPhone::AddOnStartWritingSmFile<MtoObject>(MtoObject * callableObject, function<int(string)> callback, string name);
 
 template<class _Type>
 int BluetoothPhone::AddOnWriteSmFileSuccess(_Type * callableObject, function<int(string)> callback, string name)
 {
 	return matchedBluetoothDevice->AddOnWriteSmFileSuccess(callableObject, callback, name);
 }
+template int BluetoothPhone::AddOnWriteSmFileSuccess<MtoObject>(MtoObject * callableObject, function<int(string)> callback, string name);
 
 template<class _Type>
 int BluetoothPhone::AddOnStartWritingSoundFilePackage(_Type * callableObject, function<int(string)> callback, string name)

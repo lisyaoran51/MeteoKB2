@@ -49,7 +49,6 @@ namespace IO {
 			OnCommand.Add(callableObject, callback, name);
 			return 0;
 		}
-		
 
 		/// <summary>
 		/// ¼g¤JsmÀÉ®Éªºcallback

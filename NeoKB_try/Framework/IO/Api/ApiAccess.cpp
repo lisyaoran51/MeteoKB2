@@ -25,6 +25,7 @@ int ApiAccess::AddOnWriteSmFileSuccess(_Type * callableObject, function<int(stri
 {
 	return gameHost->GetMainInterface()->GetBluetoothPhone()->AddOnWriteSmFileSuccess(callableObject, callback, name);
 }
+template int ApiAccess::AddOnWriteSmFileSuccess<MtoObject>(MtoObject * callableObject, function<int(string)> callback, string name);
 
 template<class _Type>
 int ApiAccess::AddOnStartWritingSoundFilePackage(_Type * callableObject, function<int(string)> callback, string name)
