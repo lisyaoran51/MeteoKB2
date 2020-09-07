@@ -35,6 +35,7 @@ int BluetoothPhone::AddOnCommand(_Type* callableObject, function<int(InputState*
 	OnCommand.Add(callableObject, callback, name);
 	return 0;
 }
+template int BluetoothPhone::AddOnCommand(MtoObject* callableObject, function<int(InputState*)> callback, string name);
 
 template<class _Type>
 int BluetoothPhone::AddOnStartWritingSmFile(_Type * callableObject, function<int(string)> callback, string name)
