@@ -15,7 +15,7 @@ using namespace Framework::Input;
 using namespace Framework::Timing;
 using namespace Games::Rulesets::Scoring;
 using namespace Meteor::Timing;
-using namespace Instrument;
+using namespace Instruments;
 
 
 
