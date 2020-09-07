@@ -153,7 +153,7 @@ Ruleset.o RulesetInfo.o RulesetStore.o Judgement.o HasHitWindow.o HitWindow.o Re
 Modifier.o DifficultyModifier.o EventProcessorFilterModifier.o InstrumentModifier.o TimeControllerModifier.o \
 ScoreProcessor.o \
 MeteoBluetoothCommand.o \
-MeteoBluetoothMessage.o MeteoBluetoothOutputer.o MeteoContextBluetoothMessage.o MeteoFileBluetoothMessage.o \ 
+MeteoBluetoothMessage.o MeteoBluetoothOutputer.o MeteoContextBluetoothMessage.o MeteoFileBluetoothMessage.o \
 Loader.o MeteoScene.o Intro.o Player.o PlayerLoader.o Playfield.o Result.o \
 HudDisplay.o JudgementFlasher.o SongProgress.o \
 MainMenu.o PlaySongSelect.o SongSelect.o \
