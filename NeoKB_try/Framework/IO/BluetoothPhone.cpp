@@ -41,6 +41,7 @@ int BluetoothPhone::AddOnStartWritingSmFile(_Type * callableObject, function<int
 {
 	return matchedBluetoothDevice->AddOnStartWritingSmFile(callableObject, callback, name);
 }
+template int BluetoothPhone::AddOnStartWritingSmFile(MtoObject * callableObject, function<int(string)> callback, string name);
 
 template<class _Type>
 int BluetoothPhone::AddOnWriteSmFileSuccess(_Type * callableObject, function<int(string)> callback, string name)
