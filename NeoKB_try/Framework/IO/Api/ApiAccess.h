@@ -25,14 +25,10 @@ namespace Api{
 		/// 寫入sm檔時的callback
 		/// </summary>
 		template<class _Type>
-		int AddOnStartWritingSmFile(_Type* callableObject, function<int(string)> callback, string name = "HandleReceivingNewSmFile") {
-			return gameHost->GetMainInterface()->GetBluetoothPhone()->AddOnStartWritingSmFile(callableObject, callback, name);
-		}
+		int AddOnStartWritingSmFile(_Type* callableObject, function<int(string)> callback, string name = "HandleReceivingNewSmFile");
 
 		template<class _Type>
-		int AddOnWriteSmFileSuccess(_Type* callableObject, function<int(string)> callback, string name = "HandleNewSmFileReceived") {
-			return gameHost->GetMainInterface()->GetBluetoothPhone()->AddOnWriteSmFileSuccess(callableObject, callback, name);
-		}
+		int AddOnWriteSmFileSuccess(_Type* callableObject, function<int(string)> callback, string name = "HandleNewSmFileReceived");
 		// on sm file success, import
 
 
@@ -40,14 +36,10 @@ namespace Api{
 		/// 寫入新音色時的callback
 		/// </summary>
 		template<class _Type>
-		int AddOnStartWritingSoundFilePackage(_Type* callableObject, function<int(string)> callback, string name = "HandleReceivingNewSoundFilePackage") {
-			return gameHost->GetMainInterface()->GetBluetoothPhone()->AddOnStartWritingSoundFilePackage(callableObject, callback, name);
-		}
+		int AddOnStartWritingSoundFilePackage(_Type* callableObject, function<int(string)> callback, string name = "HandleReceivingNewSoundFilePackage");
 
 		template<class _Type>
-		int AddOnWriteSoundFilePackageSuccess(_Type* callableObject, function<int(string)> callback, string name = "HandleNewSoundFilePackageReceived") {
-			return gameHost->GetMainInterface()->GetBluetoothPhone()->AddOnWriteSoundFilePackageSuccess(callableObject, callback, name);
-		}
+		int AddOnWriteSoundFilePackageSuccess(_Type* callableObject, function<int(string)> callback, string name = "HandleNewSoundFilePackageReceived");
 		// on sound file success, add to new sound binding
 		
 
@@ -55,14 +47,10 @@ namespace Api{
 		/// 寫入新主程式時的callback
 		/// </summary>
 		template<class _Type>
-		int AddOnStartWritingProgram(_Type* callableObject, function<int(string)> callback, string name = "HandleReceivingNewProgram") {
-			return gameHost->GetMainInterface()->GetBluetoothPhone()->AddOnStartWritingProgram(callableObject, callback, name);
-		}
+		int AddOnStartWritingProgram(_Type* callableObject, function<int(string)> callback, string name = "HandleReceivingNewProgram");
 
 		template<class _Type>
-		int AddOnWriteProgramSuccess(_Type* callableObject, function<int(string)> callback, string name = "HandleNewProgramReceived") {
-			return gameHost->GetMainInterface()->GetBluetoothPhone()->AddOnWriteProgramSuccess(callableObject, callback, name);
-		}
+		int AddOnWriteProgramSuccess(_Type* callableObject, function<int(string)> callback, string name = "HandleNewProgramReceived");
 
 	protected:
 
@@ -78,6 +66,8 @@ namespace Api{
 		ActionList<int, string> onWriteProgramSuccess;
 
 	};
+
+	
 
 }
 }
