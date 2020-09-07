@@ -28,6 +28,15 @@ int BluetoothPhone::TriggerOnInput()
 
 
 template<class _Type>
+int BluetoothPhone::AddOnCommand(_Type* callableObject, function<int(InputState*)> callback, string name) {
+
+	LOG(LogLevel::Fine) << "BluetoothPhone::AddOnCommand() : register handler into list.";
+
+	OnCommand.Add(callableObject, callback, name);
+	return 0;
+}
+
+template<class _Type>
 int BluetoothPhone::AddOnStartWritingSmFile(_Type * callableObject, function<int(string)> callback, string name)
 {
 	return matchedBluetoothDevice->AddOnStartWritingSmFile(callableObject, callback, name);

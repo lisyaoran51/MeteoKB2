@@ -41,14 +41,9 @@ namespace IO {
 
 		virtual int TriggerOnInput();
 
+		template<class _Type>
+		int AddOnCommand(_Type* callableObject, function<int(InputState*)> callback, string name = "HandleCommand");
 		
-		int AddOnCommand(MtoObject* callableObject, function<int(InputState*)> callback, string name = "HandleCommand") {
-
-			LOG(LogLevel::Fine) << "BluetoothPhone::AddOnCommand() : register handler into list.";
-
-			OnCommand.Add(callableObject, callback, name);
-			return 0;
-		}
 
 		/// <summary>
 		/// ¼g¤JsmÀÉ®Éªºcallback
