@@ -25,6 +25,9 @@ int SmManager::setupApiAccess()
 	if (apiAccess == nullptr)
 		throw runtime_error("SmManager::setupApiAccess() : no api access.");
 
+
+	LOG(LogLevel::Debug) << "SmManager::setupApiAccess() : api access setup. ";
+
 	apiAccess->AddOnWriteSmFileSuccess(dynamic_cast<MtoObject*>(this), [=](string fileName) {
 
 		string documentName = fileName.substr(0, fileName.find(string("."), 0));

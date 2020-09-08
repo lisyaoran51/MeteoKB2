@@ -2054,3 +2054,11 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	
 9/7
 	把access的on write sm success寫完了，之後要去寫下載好主程式、音檔的時候要如何移動到正確的位置。
+	
+	template function循環include
+	https://stackoverflow.com/questions/17482316/c-circular-dependency-issue-with-function-templates
+	
+	circular dependency的template function會讓程式碼失去彈性，因為template必需要explicitly instantiation才能定義function，如果沒有explicitly instantiation的template就不能用
+	所以要避免
+	
+	cns14408、cns13439
