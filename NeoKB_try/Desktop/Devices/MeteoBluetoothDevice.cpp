@@ -15,6 +15,7 @@ int MeteoBluetoothDevice::AddOnStartWritingSmFile(MtoObject * callableObject, fu
 
 int MeteoBluetoothDevice::AddOnWriteSmFileSuccess(MtoObject * callableObject, function<int(string)> callback, string name)
 {
+	LOG(LogLevel::Debug) << "MeteoBluetoothDevice::AddOnWriteSmFileSuccess() : api access setup. ";
 	return meteoBluetoothPhone->AddOnWriteSmFileSuccess(callableObject, callback, name);
 }
 
