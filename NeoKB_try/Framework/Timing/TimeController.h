@@ -89,7 +89,7 @@ namespace Timing {
 		/// <summary>
 		/// 可以跳到歌曲的任何斷落的clock，就是歌曲中的clock，外面包一個額外的時鐘
 		/// </summary>
-		AdjustableClock* controllableClock;
+		AdjustableClock* controllableClock = nullptr;
 
 		/// <summary>
 		/// 一個與parent獨立的時終，下面接的式遊戲的物件，遊戲根據這個時鐘運行

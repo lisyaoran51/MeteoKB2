@@ -26,6 +26,7 @@ namespace Replays {
 	public:
 
 		ReplayRecorder();
+		~ReplayRecorder();
 
 		Replay* GetReplay();
 

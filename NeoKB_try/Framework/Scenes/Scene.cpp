@@ -96,6 +96,10 @@ int Scene::Resume(Scene * sourceScene)
 {
 	LOG(LogLevel::Debug) << "Scene::Resume() : Scene [" << GetTypeName() << "] try to resume [" << (isValidForResume ? "Success" : "Failed") << "]";
 
+	DeleteChild(sourceScene);
+	delete childScene;
+	// ThreadMaster::GetInstance().AddObjectToDelete(childScene); //如果會race condition的話就要這樣改
+
 	childScene = nullptr;
 
 	if (isValidForResume) {

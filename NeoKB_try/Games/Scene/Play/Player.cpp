@@ -160,20 +160,41 @@ Player::Player(): RegisterType("Player"), MeteoScene()
 
 Player::~Player()
 {
-	delete ruleset;
-	ruleset = nullptr;
-	delete adjustableClock;
-	adjustableClock = nullptr;
-	delete decoupledClock;
-	decoupledClock = nullptr;
-	delete offsetClock;
-	offsetClock = nullptr;
-	delete hudDisplay;
-	hudDisplay = nullptr;
-	delete scoreProcessor;
-	scoreProcessor = nullptr;
-	delete speedAdjuster;
-	speedAdjuster = nullptr;
+	/*
+	vector<ChildAddable*>* deletedChilds = DeleteChilds();
+	delete deletedChilds;
+	*/
+	if (ruleset) {
+		delete ruleset;
+		ruleset = nullptr;
+	}
+
+	if (speedAdjuster) {
+		delete speedAdjuster;
+		speedAdjuster = nullptr;
+	}
+	if (offsetClock) {
+		delete offsetClock;
+		offsetClock = nullptr;
+	}
+	if (decoupledClock) {
+		delete decoupledClock;
+		decoupledClock = nullptr;
+	}
+	if (adjustableClock) {
+		delete adjustableClock;
+		adjustableClock = nullptr;
+	}
+
+
+	if (hudDisplay) {
+		delete hudDisplay;
+		hudDisplay = nullptr;
+	}
+	if (scoreProcessor) {
+		delete scoreProcessor;
+		scoreProcessor = nullptr;
+	}
 }
 
 int Player::Restart()
@@ -199,7 +220,7 @@ int Player::onCompletion()
 
 		scoreProcessor->PopulateScore(score);
 
-		// TODO: 這邊應該要把replay做一下clone，城市會比較漂亮
+		// TODO: 這邊應該要把replay做一下clone，城市會比較漂亮。如果clone的話score在解構的時候就要刪掉replay
 		score->replay = replayRecorder->GetReplay();
 
 		//score->user = local user 再看一下怎麼寫
@@ -213,5 +234,10 @@ int Player::onCompletion()
 	}, 3);
 
 
+	return 0;
+}
+
+int Player::onExiting(Scene * lastScene)
+{
 	return 0;
 }

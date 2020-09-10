@@ -20,6 +20,12 @@ HitObject::HitObject(HitWindow * hWindow)
 	hitWindow = hWindow;
 }
 
+HitObject::~HitObject()
+{
+	delete hitWindow;
+	hitWindow = nullptr;
+}
+
 EventProcessor<Event>* HitObject::RegisterEvent(Event * e)
 {
 	if (dynamic_cast<PlayableControlPoint*>(e)) {

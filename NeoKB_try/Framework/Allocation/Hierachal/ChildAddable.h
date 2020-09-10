@@ -49,6 +49,10 @@ namespace Hierachal{
 
 		virtual int DeleteChild(ChildAddable* child);
 
+		virtual vector<ChildAddable*>* DeleteChild(string name);
+
+		virtual vector<ChildAddable*>* DeleteChilds();
+
 		int RegisterOnAdd(MTO_FUNC_POINTER func);
 
 		/// <summary>

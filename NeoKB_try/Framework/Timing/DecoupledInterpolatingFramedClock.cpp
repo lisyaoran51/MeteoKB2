@@ -24,11 +24,14 @@ DecoupledInterpolatingFramedClock::~DecoupledInterpolatingFramedClock()
 	delete decoupledClock;
 	decoupledClock = nullptr;
 
+	/* 如果framed source是我創造的舊我來刪，不適的話就交給source教給別人去山 */
+	
 	if (framedSource != nullptr) {
 		if (source != framedSource) {
 			delete framedSource;
 		}
 	}
+	
 
 }
 
@@ -75,6 +78,7 @@ int DecoupledInterpolatingFramedClock::ChangeSource(Clock * s)
 
 	LOG(LogLevel::Depricated) << "DecoupledInterpolatingFramedClock::ChangeSource : get framed source.";
 	source = s;
+
 	framedSource = dynamic_cast<FramedClock*>(s) != nullptr ? dynamic_cast<FrameBasedClock*>(s) : new FramedClock(s);
 	return 0;
 }

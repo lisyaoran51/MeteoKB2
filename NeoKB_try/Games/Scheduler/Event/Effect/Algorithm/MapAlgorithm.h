@@ -96,7 +96,14 @@ namespace Algorithms{
 		}
 
 		~MapAlgorithm() {
-			// TODO: ???
+			if (genAlgo) {
+				delete genAlgo;
+				genAlgo = nullptr;
+			}
+			if (shiftAlgo) {
+				delete shiftAlgo;
+				shiftAlgo = nullptr;
+			}
 		}
 
 		virtual int RegisterBufferMap(Map* b) {
@@ -160,7 +167,7 @@ namespace Algorithms{
 		int startX;
 		//static Matrix2D<int>* matrix;
 
-		Map* bufferMap;
+		Map* bufferMap = nullptr;
 
 		/// <summary>
 		/// to transform the effect to the map with every parameter relevant.
@@ -195,16 +202,22 @@ namespace Algorithms{
 		///	</summary>
 		virtual int ImplementDraw(Map* m, EffectMapper<T>* em) {
 
+			if (!bufferMap)
+				return 0;
+
 			if (!bufferMap->IsClear())
 				bufferMap->Reset();
 
-			int returnValue = genAlgo->Generate(bufferMap, em);
+			int returnValue = -1;
+			if(genAlgo != nullptr)
+				genAlgo->Generate(bufferMap, em);
 
 			if (returnValue == -1)
 				return 0;
 
 			unique_lock<mutex> uLock(shiftAlgoMutex);
-			shiftAlgo->Shift(bufferMap, m, em);
+			if (shiftAlgo != nullptr)
+				shiftAlgo->Shift(bufferMap, m, em);
 			uLock.unlock();
 
 			bufferMap->Reset();

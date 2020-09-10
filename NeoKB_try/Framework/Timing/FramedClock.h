@@ -16,6 +16,7 @@ namespace Timing {
 	public:
 
 		FramedClock(Clock* s = nullptr);
+		~FramedClock();
 
 		virtual int ProcessFrame();
 
@@ -38,7 +39,9 @@ namespace Timing {
 
 	protected:
 
-		Clock* source;
+		Clock* source = nullptr;
+
+		bool isSourceCreatedByMyself = false;
 
 		double lastFrameTime;
 

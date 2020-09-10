@@ -25,6 +25,12 @@ ReplayRecorder::ReplayRecorder(): RegisterType("ReplayRecorder")
 	registerLoad(bind(static_cast<int(ReplayRecorder::*)(void)>(&ReplayRecorder::load), this));
 }
 
+ReplayRecorder::~ReplayRecorder()
+{
+	delete replay;
+	replay = nullptr;
+}
+
 Replay * ReplayRecorder::GetReplay()
 {
 	return replay;

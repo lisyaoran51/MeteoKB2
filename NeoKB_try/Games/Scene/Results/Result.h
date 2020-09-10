@@ -25,8 +25,11 @@ namespace Results{
 
 		Score* score = nullptr;
 
+		/* -------------------Scene------------------- */
+
 		virtual int onEntering(Scene* lastScene);
 
+		virtual int onExiting(Scene* lastScene);
 
 	};
 

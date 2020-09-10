@@ -87,6 +87,41 @@ int ChildAddable::DeleteChild(ChildAddable * child)
 	return 0;
 }
 
+vector<ChildAddable*>* ChildAddable::DeleteChild(string name)
+{
+	vector<ChildAddable*>* deletedChilds = new vector<ChildAddable*>();
+
+	for (int i = 0; i < childs.size(); i++) {
+		if (childs[i]->GetTypeName() == name) {
+			deletedChilds->push_back(childs[i]);
+			childs.erase(childs.begin() + i);
+			i--;
+		}
+	}
+
+
+
+	return deletedChilds;
+}
+
+vector<ChildAddable*>* ChildAddable::DeleteChilds()
+{
+	vector<ChildAddable*>* deletedChilds = new vector<ChildAddable*>();
+
+	unique_lock<mutex> uLock2(TreeMutex1);
+	unique_lock<mutex> uLock3(TreeMutex2);
+	unique_lock<mutex> uLock4(TreeMutex3);
+	unique_lock<mutex> uLock(ChildMutex);
+
+	for (int i = 0; i < childs.size(); i++) {
+		deletedChilds->push_back(childs[i]);
+	}
+
+	childs.clear();
+
+	return deletedChilds;
+}
+
 
 int ChildAddable::RegisterOnAdd(MTO_FUNC_POINTER func)
 {

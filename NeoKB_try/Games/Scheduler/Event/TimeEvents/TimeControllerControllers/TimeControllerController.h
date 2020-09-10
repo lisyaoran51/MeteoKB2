@@ -46,6 +46,8 @@ namespace TimeControllerControllers {
 
 			TimeController* t = GetCache<TimeController>("TimeController");
 
+			if (!t)
+				throw runtime_error("int PlayfieldController::load() : TimeController not found in cache.");
 
 			return load(f, t);
 		}

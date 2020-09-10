@@ -23,10 +23,20 @@ FramedClock::FramedClock(Clock * s)
 		source = s;
 	}
 	else {
+		isSourceCreatedByMyself = true;
 		source = new StopwatchClock();
 	}
 	
 	isProcessSourceClockFrames = true;
+}
+
+FramedClock::~FramedClock()
+{
+	if (isSourceCreatedByMyself) {
+		delete source;
+		source = nullptr;
+	}
+
 }
 
 int FramedClock::ProcessFrame()

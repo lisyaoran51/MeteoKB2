@@ -20,9 +20,11 @@ int PlaySongSelect::onResuming(Scene * lastScene)
 
 	LOG(LogLevel::Debug) << "int PlaySongSelect::onResuming() : go back to song select.";
 
+	/* 在scene::Resume就會把這個child給刪掉了
 	DeleteChild(player);
 	ThreadMaster::GetInstance().AddObjectToDelete(player);
 	player = nullptr;
+	*/
 
 	// 清除上一場遊戲的modifier
 	for (int i = 0; i < smSelectPanel->GetSelectedModifiers()->GetValue()->size(); i++) {

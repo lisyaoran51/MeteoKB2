@@ -36,8 +36,10 @@ int PlayerLoader::load()
 int PlayerLoader::onResuming(Scene * lastScene)
 {
 	// TODO: 這邊要做thread safe
+	/*
 	DeleteChild(player);
 	ThreadMaster::GetInstance().AddObjectToDelete(player);
+	*/
 	player = nullptr;
 
 	GetScheduler()->AddDelayedTask([=] {

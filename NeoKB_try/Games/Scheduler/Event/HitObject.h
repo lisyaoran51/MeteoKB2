@@ -39,6 +39,7 @@ namespace Events{
 	public:
 
 		HitObject(HitWindow* hWindow);
+		~HitObject();
 
 		/// <summary>
 		/// register the Event to be processed.

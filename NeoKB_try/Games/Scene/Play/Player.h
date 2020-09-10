@@ -94,6 +94,10 @@ namespace Play {
 
 		int onCompletion();
 
+		/* --------Scene-------- */
+
+		virtual int onExiting(Scene* lastScene);
+
 	};
 
 }
