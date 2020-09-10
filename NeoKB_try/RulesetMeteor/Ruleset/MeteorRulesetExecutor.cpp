@@ -115,7 +115,7 @@ int MeteorRulesetExecutor::load(MeteorTimeController * t, Instrument* i)
 			 * TODO: 重要!! 這邊要先將events用時間排序，不然就是decoder要先排序一次，不然會出錯
 			 */
 			if (playableControlPoint->GetSectionIndex() > section) {
-				for (int j = 0; i < playableControlPoint->GetSectionIndex() - section; j++) {
+				for (int j = 0; j < playableControlPoint->GetSectionIndex() - section; j++) {
 					sectionTime.push_back(playableControlPoint->GetStartTime());
 				}
 				section = playableControlPoint->GetSectionIndex();
