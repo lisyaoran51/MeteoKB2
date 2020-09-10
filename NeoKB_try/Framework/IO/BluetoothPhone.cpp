@@ -34,7 +34,7 @@ int BluetoothPhone::AddOnStartWritingSmFile(MtoObject * callableObject, function
 
 int BluetoothPhone::AddOnWriteSmFileSuccess(MtoObject * callableObject, function<int(string)> callback, string name)
 {
-	LOG(LogLevel::Debug) << "BluetoothPhone::AddOnWriteSmFileSuccess() : api access setup. ";
+	LOG(LogLevel::Depricated) << "BluetoothPhone::AddOnWriteSmFileSuccess() : api access setup. ";
 	return matchedBluetoothDevice->AddOnWriteSmFileSuccess(callableObject, callback, name);
 }
 

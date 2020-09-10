@@ -20,7 +20,7 @@ int ApiAccess::AddOnStartWritingSmFile(MtoObject * callableObject, function<int(
 
 int ApiAccess::AddOnWriteSmFileSuccess(MtoObject * callableObject, function<int(string)> callback, string name)
 {
-	LOG(LogLevel::Debug) << "ApiAccess::AddOnWriteSmFileSuccess() : api access setup. ";
+	LOG(LogLevel::Depricated) << "ApiAccess::AddOnWriteSmFileSuccess() : api access setup. ";
 	return gameHost->GetMainInterface()->GetBluetoothPhone()->AddOnWriteSmFileSuccess(callableObject, callback, name);
 }
 

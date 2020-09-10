@@ -86,12 +86,17 @@ int MeteorRulesetExecutor::load()
 
 int MeteorRulesetExecutor::load(MeteorTimeController * t, Instrument* i)
 {
+
+	LOG(LogLevel::Info) << "MeteorRulesetExecutor::load() : computing section time.";
+
 	meteoPiano = dynamic_cast<MeteoPiano*>(i);
 	meteoPiano->ChangePitchState(MeteoPianoPitchState::None);
 	meteoPiano->SetGameControllingPitchState(true);
 
 	vector<Event*>* originalEvents = workingSm->GetSm()->GetEvents();
 	vector<float> sectionTime;
+
+	LOG(LogLevel::Fine) << "MeteorRulesetExecutor::load() : event size [" << originalEvents->size() << "].";
 
 	int section = -1;
 
@@ -128,6 +133,7 @@ int MeteorRulesetExecutor::load(MeteorTimeController * t, Instrument* i)
 		//eProcessorFilter->AddFilterCallback(...);
 	}
 
+	LOG(LogLevel::Fine) << "MeteorRulesetExecutor::load() : end.";
 	return 0;
 }
 

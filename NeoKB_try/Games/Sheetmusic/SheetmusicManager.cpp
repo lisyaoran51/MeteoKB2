@@ -26,7 +26,7 @@ int SmManager::setupApiAccess()
 		throw runtime_error("SmManager::setupApiAccess() : no api access.");
 
 
-	LOG(LogLevel::Debug) << "SmManager::setupApiAccess() : api access setup. ";
+	LOG(LogLevel::Depricated) << "SmManager::setupApiAccess() : api access setup. ";
 
 	apiAccess->AddOnWriteSmFileSuccess(dynamic_cast<MtoObject*>(this), [=](string fileName) {
 
