@@ -66,7 +66,7 @@ namespace Devices {
 		}
 		template<class _Type>
 		int AddOnWriteSmFileSuccess(_Type* callableObject, function<int(string)> callback, string name) {
-			AddOnWriteSmFileSuccess.Add(callableObject, callback, name);
+			onWriteSmFileSuccess.Add(callableObject, callback, name);
 			return 0;
 		}
 
@@ -75,12 +75,12 @@ namespace Devices {
 		/// </summary>
 		template<class _Type>
 		int AddOnStartWritingSoundFilePackage(_Type* callableObject, function<int(string)> callback, string name) {
-			AddOnStartWritingSoundFilePackage.Add(callableObject, callback, name);
+			onStartWritingSoundFilePackage.Add(callableObject, callback, name);
 			return 0;
 		}
 		template<class _Type>
 		int AddOnWriteSoundFilePackageSuccess(_Type* callableObject, function<int(string)> callback, string name) {
-			AddOnWriteSoundFilePackageSuccess.Add(callableObject, callback, name);
+			onWriteSoundFilePackageSuccess.Add(callableObject, callback, name);
 			return 0;
 		}
 
@@ -89,12 +89,12 @@ namespace Devices {
 		/// </summary>
 		template<class _Type>
 		int AddOnStartWritingProgram(_Type* callableObject, function<int(string)> callback, string name) {
-			AddOnStartWritingProgram.Add(callableObject, callback, name);
+			onStartWritingProgram.Add(callableObject, callback, name);
 			return 0;
 		}
 		template<class _Type>
 		int AddOnWriteProgramSuccess(_Type* callableObject, function<int(string)> callback, string name) {
-			AddOnWriteProgramSuccess.Add(callableObject, callback, name);
+			onWriteProgramSuccess.Add(callableObject, callback, name);
 			return 0;
 		}
 
