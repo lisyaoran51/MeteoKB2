@@ -94,6 +94,8 @@ int Scene::Enter(Scene * lastScene)
 
 int Scene::Resume(Scene * sourceScene)
 {
+	LOG(LogLevel::Debug) << "Scene::Resume() : Scene [" << GetTypeName() << "] try to resume [" << (isValidForResume ? "Success" : "Failed") << "]";
+
 	childScene = nullptr;
 
 	if (isValidForResume) {
