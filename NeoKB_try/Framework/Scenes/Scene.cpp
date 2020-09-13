@@ -1,11 +1,13 @@
 #include "Scene.h"
 
 #include "../Exceptions/FrameworkException.h"
+#include "../Threading/ThreadMaster.h"
 
 using namespace Framework::Scenes;
 using namespace Framework::Allocation::Hierachal;
 using namespace Framework::Exceptions;
 using namespace Framework;
+using namespace Framework::Threading;
 
 
 
@@ -98,7 +100,7 @@ int Scene::Resume(Scene * sourceScene)
 
 	DeleteChild(sourceScene);
 	//delete childScene;
-	//ThreadMaster::GetInstance().AddObjectToDelete(childScene); //如果會race condition的話就要這樣改
+	ThreadMaster::GetInstance().AddObjectToDelete(childScene); //如果會race condition的話就要這樣改
 
 	childScene = nullptr;
 
