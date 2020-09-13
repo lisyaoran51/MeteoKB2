@@ -124,6 +124,7 @@ int Scene::ExitTo(Scene * sourceScene)
 	if (isExited)
 		return 0;
 
+	LOG(LogLevel::Debug) << "Scene::ExitTo() : Scene [" << GetTypeName() << "]'s parent scene [" << parentScene << "]";
 	LOG(LogLevel::Debug) << "Scene::ExitTo() : Scene [" << GetTypeName() << "] try to exit to [" << parentScene->GetTypeName() << "]";
 
 	onExiting(parentScene);
