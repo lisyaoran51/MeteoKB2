@@ -97,8 +97,8 @@ int Scene::Resume(Scene * sourceScene)
 	LOG(LogLevel::Debug) << "Scene::Resume() : Scene [" << GetTypeName() << "] try to resume [" << (isValidForResume ? "Success" : "Failed") << "]";
 
 	DeleteChild(sourceScene);
-	delete childScene;
-	// ThreadMaster::GetInstance().AddObjectToDelete(childScene); //如果會race condition的話就要這樣改
+	//delete childScene;
+	//ThreadMaster::GetInstance().AddObjectToDelete(childScene); //如果會race condition的話就要這樣改
 
 	childScene = nullptr;
 
@@ -121,10 +121,10 @@ int Scene::Exit()
 
 int Scene::ExitTo(Scene * sourceScene)
 {
-	LOG(LogLevel::Debug) << "Scene::ExitTo() : Scene [" << GetTypeName() << "] try to exit to [" << parentScene->GetTypeName() << "]";
 	if (isExited)
 		return 0;
 
+	LOG(LogLevel::Debug) << "Scene::ExitTo() : Scene [" << GetTypeName() << "] try to exit to [" << parentScene->GetTypeName() << "]";
 
 	onExiting(parentScene);
 
