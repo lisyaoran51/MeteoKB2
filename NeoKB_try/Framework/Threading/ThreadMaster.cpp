@@ -1,8 +1,9 @@
 #include "ThreadMaster.h"
 
+#include "../../Util/Log.h"
 
 using namespace Framework::Threading;
-
+using namespace Util;
 
 
 int ThreadMaster::AddNewThread(string threadName)
@@ -84,6 +85,7 @@ int ThreadMaster::runWork()
 		HoldAllThreads();
 
 		for (int i = 0; i < objectToDelete.size(); i++) {
+			LOG(LogLevel::Debug) << "ThreadMaster::runWork : deleting object [" << objectToDelete[i]->GetTypeName() << "].";
 			delete objectToDelete[i];
 			i--;
 		}
