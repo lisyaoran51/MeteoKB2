@@ -94,6 +94,8 @@ TimeController::TimeController() : RegisterType("TimeController")
 
 TimeController::~TimeController()
 {
+	LOG(LogLevel::Debug) << "TimeController::~TimeController() : deleting from cache.";
+
 	GetDependencies()->DeleteCache("TimeController");
 }
 

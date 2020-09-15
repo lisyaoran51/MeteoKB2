@@ -82,7 +82,6 @@ int ThreadMaster::AddObjectToDelete(MtoObject * oToDelete)
 
 int ThreadMaster::runWork()
 {
-	bool exitRequest = false;
 
 	while (!exitRequest) {
 

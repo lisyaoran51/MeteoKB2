@@ -44,19 +44,21 @@ namespace Threading {
 
 	protected:
 
-		int runWork();
+		bool exitRequest = false;
 
 		pid_t threadId = -1;
 
-		double runHz = 1000;
+		double runHz = 100;
 
 		thread* runThread = nullptr;
 
 		map<string, bool> threadProcessing;
 
 		bool isHolding = false;
-		
+
 		vector<MtoObject*> objectToDelete;
+
+		int runWork();
 
 	};
 

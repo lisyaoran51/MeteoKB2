@@ -67,7 +67,7 @@ namespace Allocation {
 
 		int DeleteCache(string typeName) {
 			
-			map<string, MtoObject*>::iterator iter = cache.find("typeName");
+			map<string, MtoObject*>::iterator iter = cache.find(typeName);
 
 			if (iter != cache.end())
 				cache.erase(iter);
