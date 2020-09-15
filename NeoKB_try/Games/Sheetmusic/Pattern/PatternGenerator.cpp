@@ -31,7 +31,10 @@ PatternGenerator::PatternGenerator(): Container(), RegisterType("PatternGenerato
 
 PatternGenerator::~PatternGenerator()
 {
+
 	CleanPatterns();
+
+	LOG(LogLevel::Debug) << "PatternGenerator::~PatternGenerator() : CleanPatterns.";
 }
 
 int PatternGenerator::Initialize(Sm<Event>* s)
@@ -54,6 +57,7 @@ int PatternGenerator::CleanPatterns()
 	for (int i = 0; i < patterns.size(); i++) {
 		delete patterns[i];
 	}
+	patterns.clear();
 	return 0;
 }
 
