@@ -97,6 +97,9 @@ TimeController::~TimeController()
 	LOG(LogLevel::Debug) << "TimeController::~TimeController() : deleting from cache.";
 
 	GetDependencies()->DeleteCache("TimeController");
+
+	LOG(LogLevel::Debug) << "TimeController::~TimeController() : deleting from cache over.";
+
 }
 
 int TimeController::SetControllableClock(AdjustableClock * cClock)
