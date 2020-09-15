@@ -102,7 +102,7 @@ int ThreadMaster::runWork()
 					parent->DeleteChild(dynamic_cast<ChildAddable*>(objectToDelete[i]));
 
 					if(dynamic_cast<ChildAddable*>(objectToDelete[i])->GetChilds()->size() > 0)
-						dynamic_cast<ChildAddable*>(objectToDelete[i])->_DebugPrintTree(" ");
+						dynamic_cast<ChildAddable*>(objectToDelete[i])->_DebugPrintTree("                       ");
 
 				}
 
