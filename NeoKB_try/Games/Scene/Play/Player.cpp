@@ -197,6 +197,9 @@ Player::~Player()
 		delete scoreProcessor;
 		scoreProcessor = nullptr;
 	}
+
+	LOG(LogLevel::Debug) << "Player::~Player : delete its members over.";
+
 }
 
 int Player::Restart()
