@@ -82,6 +82,8 @@ int ThreadMaster::AddObjectToDelete(MtoObject * oToDelete)
 
 int ThreadMaster::runWork()
 {
+	LOG(LogLevel::Debug) << "ThreadMaster::runWork : ...";
+
 	this_thread::sleep_for(chrono::milliseconds(long(runHz / 1000)));
 
 	if (objectToDelete.size() > 0) {
