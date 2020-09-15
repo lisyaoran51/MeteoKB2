@@ -87,6 +87,7 @@ int GameHost::Run(Game* game, Instrument* instrument)
 	updateInitialize();
 	updateThread->Start();
 
+	ThreadMaster::GetInstance().SetFrequency(100);
 	ThreadMaster::GetInstance().Start();
 
 	if(!initialized)

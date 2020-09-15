@@ -26,7 +26,6 @@ bool ThreadMaster::CheckThreadProcessable()
 
 bool ThreadMaster::CheckThreadProcessable(string threadName)
 {
-
 	return CheckThreadProcessable();
 }
 
@@ -35,7 +34,9 @@ int ThreadMaster::HoldAllThreads()
 	isHolding = true;
 
 	bool allThreadsHolded = true;
+
 	do {
+		allThreadsHolded = true;
 		for (map<string, bool>::const_iterator it = threadProcessing.begin(); it != threadProcessing.end(); ++it)
 		{
 			if (it->second)
@@ -57,6 +58,8 @@ int ThreadMaster::ReleaseAllThreads()
 
 int ThreadMaster::Start()
 {
+
+
 	runThread = new thread(&ThreadMaster::runWork, this);
 	runThread->detach();
 

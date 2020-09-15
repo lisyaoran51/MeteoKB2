@@ -85,18 +85,22 @@ int GameThread::runWork()
 
 int GameThread::processFrame()
 {
-	if (clock->GetIsStarted())
-	if (int(clock->GetCurrentTime()) > currentSecond) {
-		currentSecond = int(clock->GetCurrentTime());
-		LOG(LogLevel::Info) << "GameThread::processFrame() : [" << threadName << "] frame rate = " << statisticFrameRate;
-		statisticFrameRate = 0;
-	}
+	LOG(LogLevel::Debug) << [=]() {
+		if (clock->GetIsStarted())
+			if (int(clock->GetCurrentTime()) > currentSecond) {
+				currentSecond = int(clock->GetCurrentTime());
+				LOG(LogLevel::Debug) << "GameThread::processFrame() : [" << threadName << "] frame rate = " << statisticFrameRate;
+				statisticFrameRate = 0;
+			}
+		return 0;
+	}();
+	
 
 	LOG(LogLevel::Depricated) << "GameThread::processFrame() [" << threadName << "]";
 
 
 	if(clock->GetIsRunning())
-		LOG(LogLevel::Finest) << "GameThread::processFrame() : current time = [" << fixed << setprecision(5) << clock->GetCurrentTime() << "] by [" << threadName << "].";
+		LOG(LogLevel::Depricated) << "GameThread::processFrame() : current time = [" << fixed << setprecision(5) << clock->GetCurrentTime() << "] by [" << threadName << "].";
 
 	//if(threadName == "UpdateThread")
 		LOG(LogLevel::Depricated) << "GameThread::processFrame() : [" << threadName << "] processing.";
