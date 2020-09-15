@@ -1,9 +1,11 @@
 #include "ThreadMaster.h"
 
 #include "../../Util/Log.h"
+#include "../Allocation/Hierachal/ChildAddable.h"
 
 using namespace Framework::Threading;
 using namespace Util;
+using namespace Framework::Allocation;
 
 
 int ThreadMaster::AddNewThread(string threadName)
@@ -94,6 +96,12 @@ int ThreadMaster::runWork()
 
 			for (int i = 0; i < objectToDelete.size(); i++) {
 				LOG(LogLevel::Debug) << "ThreadMaster::runWork : deleting object [" << objectToDelete[i]->GetTypeName() << "].";
+				
+				if (dynamic_cast<ChildAddable*>(objectToDelete[i])) {
+					ChildAddable* parent = dynamic_cast<ChildAddable*>(dynamic_cast<ChildAddable*>(objectToDelete[i])->GetParent());
+					parent->DeleteChild(dynamic_cast<ChildAddable*>(objectToDelete[i]));
+				}
+
 				delete objectToDelete[i];
 				objectToDelete.erase(objectToDelete.begin() + i);
 				i--;
