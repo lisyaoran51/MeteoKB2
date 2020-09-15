@@ -34,7 +34,7 @@ PatternGenerator::~PatternGenerator()
 
 	CleanPatterns();
 
-	LOG(LogLevel::Debug) << "PatternGenerator::~PatternGenerator() : CleanPatterns.";
+	LOG(LogLevel::Depricated) << "PatternGenerator::~PatternGenerator() : CleanPatterns.";
 }
 
 int PatternGenerator::Initialize(Sm<Event>* s)

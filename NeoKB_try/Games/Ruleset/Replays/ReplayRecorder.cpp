@@ -27,8 +27,11 @@ ReplayRecorder::ReplayRecorder(): RegisterType("ReplayRecorder")
 
 ReplayRecorder::~ReplayRecorder()
 {
+
+	LOG(LogLevel::Debug) << "ReplayRecorder::~ReplayRecorder() : delete replay.";
 	delete replay;
 	replay = nullptr;
+	LOG(LogLevel::Debug) << "ReplayRecorder::~ReplayRecorder() : delete replay over.";
 }
 
 Replay * ReplayRecorder::GetReplay()
