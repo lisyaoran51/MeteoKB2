@@ -102,6 +102,8 @@ int ThreadMaster::runWork()
 					parent->DeleteChild(dynamic_cast<ChildAddable*>(objectToDelete[i]));
 				}
 
+				dynamic_cast<ChildAddable*>(objectToDelete[i])->_DebugPrintTree(" ");
+
 				delete objectToDelete[i];
 				objectToDelete.erase(objectToDelete.begin() + i);
 				i--;
