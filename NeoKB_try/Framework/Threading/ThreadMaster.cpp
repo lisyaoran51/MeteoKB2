@@ -86,7 +86,7 @@ int ThreadMaster::runWork()
 
 	while (!exitRequest) {
 
-		this_thread::sleep_for(chrono::milliseconds(long(runHz / 1000)));
+		this_thread::sleep_for(chrono::milliseconds(long(1000 / runHz)));
 
 		if (objectToDelete.size() > 0) {
 			LOG(LogLevel::Debug) << "ThreadMaster::runWork : try to delete [" << objectToDelete.size() << "] objects.";
@@ -96,6 +96,7 @@ int ThreadMaster::runWork()
 			for (int i = 0; i < objectToDelete.size(); i++) {
 				LOG(LogLevel::Debug) << "ThreadMaster::runWork : deleting object [" << objectToDelete[i]->GetTypeName() << "].";
 				delete objectToDelete[i];
+				objectToDelete.erase(objectToDelete.begin() + i);
 				i--;
 			}
 			ReleaseAllThreads();
