@@ -198,7 +198,7 @@ Player::~Player()
 		scoreProcessor = nullptr;
 	}
 
-	LOG(LogLevel::Debug) << "Player::~Player : delete its members over.";
+	LOG(LogLevel::Depricated) << "Player::~Player : delete its members over.";
 
 }
 
