@@ -37,7 +37,7 @@ ChildAddable::~ChildAddable()
 
 	}
 
-	LOG(LogLevel::Debug) << "ChildAddable::~ChildAddable() : child size [" << childs.size() << "].";
+	LOG(LogLevel::Debug) << "ChildAddable::~ChildAddable() : " << GetTypeName() << "'s child size [" << childs.size() << "].";
 	for (int i = 0; i < childs.size(); i++) {
 		LOG(LogLevel::Debug) << "ChildAddable::~ChildAddable() : delete child [" << childs.at(i)->GetTypeName() << "].";
 
