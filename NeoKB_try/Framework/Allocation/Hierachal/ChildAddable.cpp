@@ -28,6 +28,7 @@ ChildAddable::~ChildAddable()
 {
 	unique_lock<mutex> uLock(ChildMutex);
 	for (int i = 0; i < childs.size(); i++) {
+		LOG(LogLevel::Debug) << "ChildAddable::~ChildAddable() : delete child [" << childs.at(i)->GetTypeName() << "].";
 		delete childs.at(i);
 	}
 

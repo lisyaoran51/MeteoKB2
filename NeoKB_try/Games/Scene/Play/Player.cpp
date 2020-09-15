@@ -164,6 +164,8 @@ Player::~Player()
 	vector<ChildAddable*>* deletedChilds = DeleteChilds();
 	delete deletedChilds;
 	*/
+	LOG(LogLevel::Debug) << "Player::~Player : delete its members.";
+
 	if (ruleset) {
 		delete ruleset;
 		ruleset = nullptr;
