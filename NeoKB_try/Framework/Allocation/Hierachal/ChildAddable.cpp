@@ -26,13 +26,14 @@ ChildAddable::ChildAddable(): Loadable(), RegisterType("ChildAddable")
 
 ChildAddable::~ChildAddable()
 {
+	/*
 	for (int i = 0; i < childs.size(); i++) {
 
 		childs[i]->_DebugPrintTree(" " + string("-"));
 
 	}
-
-	unique_lock<mutex> uLock(ChildMutex);
+	*/
+	//unique_lock<mutex> uLock(ChildMutex);
 
 
 	for (int i = 0; i < childs.size(); i++) {
