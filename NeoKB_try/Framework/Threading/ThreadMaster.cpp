@@ -85,6 +85,8 @@ int ThreadMaster::runWork()
 	this_thread::sleep_for(chrono::milliseconds(long(runHz / 1000)));
 
 	if (objectToDelete.size() > 0) {
+		LOG(LogLevel::Debug) << "ThreadMaster::runWork : try to delete [" << objectToDelete.size() << "] objects.";
+
 		HoldAllThreads();
 
 		for (int i = 0; i < objectToDelete.size(); i++) {
