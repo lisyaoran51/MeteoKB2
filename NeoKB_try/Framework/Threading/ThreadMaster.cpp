@@ -82,21 +82,24 @@ int ThreadMaster::AddObjectToDelete(MtoObject * oToDelete)
 
 int ThreadMaster::runWork()
 {
-	LOG(LogLevel::Debug) << "ThreadMaster::runWork : ...";
+	bool exitRequest = false;
 
-	this_thread::sleep_for(chrono::milliseconds(long(runHz / 1000)));
+	while (!exitRequest) {
 
-	if (objectToDelete.size() > 0) {
-		LOG(LogLevel::Debug) << "ThreadMaster::runWork : try to delete [" << objectToDelete.size() << "] objects.";
+		this_thread::sleep_for(chrono::milliseconds(long(runHz / 1000)));
 
-		HoldAllThreads();
+		if (objectToDelete.size() > 0) {
+			LOG(LogLevel::Debug) << "ThreadMaster::runWork : try to delete [" << objectToDelete.size() << "] objects.";
 
-		for (int i = 0; i < objectToDelete.size(); i++) {
-			LOG(LogLevel::Debug) << "ThreadMaster::runWork : deleting object [" << objectToDelete[i]->GetTypeName() << "].";
-			delete objectToDelete[i];
-			i--;
+			HoldAllThreads();
+
+			for (int i = 0; i < objectToDelete.size(); i++) {
+				LOG(LogLevel::Debug) << "ThreadMaster::runWork : deleting object [" << objectToDelete[i]->GetTypeName() << "].";
+				delete objectToDelete[i];
+				i--;
+			}
+			ReleaseAllThreads();
 		}
-		ReleaseAllThreads();
 	}
 
 
