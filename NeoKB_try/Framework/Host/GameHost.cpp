@@ -215,7 +215,7 @@ int GameHost::updateFrame()
 
 	LOG(LogLevel::Depricated) << "GameHost::updateFrame() : update scenegraph tree.";
 
-	LOG(LogLevel::Depricated) << "GameHost::updateFrame() : print tree " << [](Container* r) {
+	LOG(LogLevel::Debug) << "GameHost::updateFrame() : print tree " << [](Container* r) {
 
 		r->_DebugPrintTree("|");
 
