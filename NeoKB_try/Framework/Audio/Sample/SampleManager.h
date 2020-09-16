@@ -21,6 +21,8 @@ namespace Samples {
 
 		SampleChannel* GetSampleChannel(string name);
 
+		SampleChannel* GetTwoStageSampleChannel(string name, float switchPoint);
+
 		SampleChannel* GetMultiPlaybackSampleChannel(string name);
 
 		int SetPlaybackAmount(int pAmount);

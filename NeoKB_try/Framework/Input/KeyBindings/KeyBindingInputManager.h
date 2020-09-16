@@ -87,7 +87,8 @@ namespace KeyBindings {
 			for (int i = 0; i < queue->size(); i++) {
 				KeyBindingHandler<T>* keyBindingHandler = dynamic_cast<KeyBindingHandler<T>*>(queue->at(i));
 				if (keyBindingHandler != nullptr) {
-					keyBindingHandler->OnKeyDown(key);
+					if(keyBindingHandler->GetIsActive())
+						keyBindingHandler->OnKeyDown(key);
 				}
 			}
 
@@ -103,7 +104,8 @@ namespace KeyBindings {
 			for (int i = 0; i < queue->size(); i++) {
 				KeyBindingHandler<T>* keyBindingHandler = dynamic_cast<KeyBindingHandler<T>*>(queue->at(i));
 				if (keyBindingHandler != nullptr) {
-					keyBindingHandler->OnKeyUp(key);
+					if (keyBindingHandler->GetIsActive())
+						keyBindingHandler->OnKeyUp(key);
 				}
 			}
 
@@ -121,7 +123,8 @@ namespace KeyBindings {
 			for (int i = 0; i < queue->size(); i++) {
 				KeyBindingHandler<T>* keyBindingHandler = dynamic_cast<KeyBindingHandler<T>*>(queue->at(i));
 				if (keyBindingHandler != nullptr) {
-					keyBindingHandler->OnButtonDown(button);
+					if (keyBindingHandler->GetIsActive())
+						keyBindingHandler->OnButtonDown(button);
 				}
 			}
 
@@ -137,7 +140,8 @@ namespace KeyBindings {
 			for (int i = 0; i < queue->size(); i++) {
 				KeyBindingHandler<T>* keyBindingHandler = dynamic_cast<KeyBindingHandler<T>*>(queue->at(i));
 				if (keyBindingHandler != nullptr) {
-					keyBindingHandler->OnButtonUp(button);
+					if (keyBindingHandler->GetIsActive())
+						keyBindingHandler->OnButtonUp(button);
 				}
 			}
 
@@ -160,7 +164,8 @@ namespace KeyBindings {
 			for (int i = 0; i < queue->size(); i++) {
 				KeyBindingHandler<T>* keyBindingHandler = dynamic_cast<KeyBindingHandler<T>*>(queue->at(i));
 				if (keyBindingHandler != nullptr) {
-					keyBindingHandler->OnKnobTurn(knob);
+					if (keyBindingHandler->GetIsActive())
+						keyBindingHandler->OnKnobTurn(knob);
 				}
 			}
 
@@ -185,7 +190,8 @@ namespace KeyBindings {
 			for (int i = 0; i < queue->size(); i++) {
 				KeyBindingHandler<T>* keyBindingHandler = dynamic_cast<KeyBindingHandler<T>*>(queue->at(i));
 				if (keyBindingHandler != nullptr) {
-					keyBindingHandler->OnSlide(Slider);
+					if (keyBindingHandler->GetIsActive())
+						keyBindingHandler->OnSlide(Slider);
 				}
 			}
 

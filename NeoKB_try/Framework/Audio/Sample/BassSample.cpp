@@ -11,6 +11,11 @@ BassSample::BassSample(char * fileName)
 	isLoaded = true;
 }
 
+BassSample::~BassSample()
+{
+	BASS_SampleFree(sampleID);
+}
+
 int BassSample::CreateChannel()
 {
 	HCHANNEL channel = BASS_SampleGetChannel(sampleID, true);

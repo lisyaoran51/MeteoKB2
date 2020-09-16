@@ -808,6 +808,9 @@
     <Filter Include="來源檔案\RulesetInstant\Timing">
       <UniqueIdentifier>{23681f84-1dcf-4b40-acc8-2ac622f58ec6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="來源檔案\Instruments\Audio">
+      <UniqueIdentifier>{be64bba6-d3a1-4583-ba0b-785fdcf93875}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Games\Graphic\Renderer\renderer.cpp">
@@ -1667,6 +1670,12 @@
     </ClCompile>
     <ClCompile Include="RulesetInstant\Timing\InstantTimeController.cpp">
       <Filter>來源檔案\RulesetInstant\Timing</Filter>
+    </ClCompile>
+    <ClCompile Include="Instruments\Audio\SoundBindingSet.cpp">
+      <Filter>來源檔案\Instruments\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Instruments\Audio\TwoStageSoundBindingSet.cpp">
+      <Filter>來源檔案\Instruments\Audio</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2754,6 +2763,12 @@
     </ClInclude>
     <ClInclude Include="RulesetInstant\Timing\InstantTimeController.h">
       <Filter>標頭檔\RulesetInstant\Timing</Filter>
+    </ClInclude>
+    <ClInclude Include="Instruments\Audio\SoundBindingSet.h">
+      <Filter>標頭檔\Instruments\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Instruments\Audio\TwoStageSoundBindingSet.h">
+      <Filter>標頭檔\Instruments\Audio</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

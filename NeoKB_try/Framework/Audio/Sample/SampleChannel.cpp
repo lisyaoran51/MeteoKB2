@@ -56,3 +56,10 @@ SampleChannel::SampleChannel(Sample * s)
 	sample = s;
 
 }
+
+SampleChannel::~SampleChannel()
+{
+
+	delete sample;
+	sample = nullptr;
+}

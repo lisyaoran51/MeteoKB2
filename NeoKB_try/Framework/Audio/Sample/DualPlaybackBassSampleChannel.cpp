@@ -11,6 +11,12 @@ DualPlaybackBassSampleChannel::DualPlaybackBassSampleChannel(Sample * s) : Sampl
 	channelID[1] = dynamic_cast<BassSample*>(sample)->CreateChannel();
 }
 
+DualPlaybackBassSampleChannel::~DualPlaybackBassSampleChannel()
+{
+	BASS_ChannelStop(channelID[0]);
+	BASS_ChannelStop(channelID[1]);
+}
+
 int DualPlaybackBassSampleChannel::Play()
 {
 	LOG(LogLevel::Debug) << "DualPlaybackBassSampleChannel::Play() : add play action.";

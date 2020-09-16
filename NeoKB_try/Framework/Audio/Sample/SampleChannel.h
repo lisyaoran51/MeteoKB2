@@ -49,6 +49,7 @@ namespace Samples {
 		float fadeOutTime = 0.2f;
 
 		SampleChannel(Sample* s);
+		~SampleChannel();
 
 		Sample* sample = nullptr;
 

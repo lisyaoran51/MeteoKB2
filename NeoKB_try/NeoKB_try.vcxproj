@@ -214,6 +214,8 @@
     <ClCompile Include="Framework\Timing\StopwatchClock.cpp" />
     <ClCompile Include="Games\UI\SheetmusicSelectPanel.cpp" />
     <ClCompile Include="Games\UI\VolumeController.cpp" />
+    <ClCompile Include="Instruments\Audio\SoundBindingSet.cpp" />
+    <ClCompile Include="Instruments\Audio\TwoStageSoundBindingSet.cpp" />
     <ClCompile Include="Instruments\CompositeMeteoPiano.cpp" />
     <ClCompile Include="Instruments\HasPitch.cpp" />
     <ClCompile Include="Instruments\Input\PianoInputManager.cpp" />
@@ -569,6 +571,8 @@
     <ClInclude Include="Games\UI\VolumeController.h" />
     <ClInclude Include="Games\Users\User.h" />
     <ClInclude Include="Instruments\Audio\SoundBinding.h" />
+    <ClInclude Include="Instruments\Audio\SoundBindingSet.h" />
+    <ClInclude Include="Instruments\Audio\TwoStageSoundBindingSet.h" />
     <ClInclude Include="Instruments\CompositeMeteoPiano.h" />
     <ClInclude Include="Instruments\HasPitch.h" />
     <ClInclude Include="Instruments\Input\PianoAction.h" />

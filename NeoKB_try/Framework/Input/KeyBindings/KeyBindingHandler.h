@@ -15,6 +15,10 @@ namespace KeyBindings {
 
 	public:
 
+		bool GetIsActive() {
+			return isActive;
+		}
+
 		virtual int OnKeyDown(pair<T, int> action) = 0;
 
 		virtual int OnKeyUp(T action) = 0;
@@ -27,6 +31,9 @@ namespace KeyBindings {
 
 		virtual int OnSlide(pair<T, int> action) = 0;
 
+	protected:
+
+		bool isActive = true;
 
 	};
 
