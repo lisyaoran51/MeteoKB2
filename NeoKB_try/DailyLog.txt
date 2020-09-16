@@ -2071,3 +2071,7 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	
 	改用thread master，不過thread master沒執行，可能是沒放這條thread
 	
+9/15
+	把delete child scene寫完了，但是working sm裡面的event有沒有清乾淨還要在確定
+	
+	
