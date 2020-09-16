@@ -42,7 +42,7 @@ HSAMPLE loadSample(char * filename)
 		cout << "sample " << filename << " loaded!" << endl;
 	else
 	{
-		cout << "Can't load sample";
+		cout << "Can't load sample1";
 		exit (0);
 	}
 	return sam;
@@ -55,7 +55,7 @@ HSAMPLE loadSampleRepeat(char * filename)
 		cout << "sample " << filename << " loaded!" << endl;
 	else
 	{
-		cout << "Can't load sample";
+		cout << "Can't load sample2";
 		exit (0);
 	}
 	return sam;
@@ -73,16 +73,16 @@ void init(void)
 	// Following comment is from source basstest file!
 	/* Load a sample from "file" and give it a max of 3 simultaneous
 	playings using playback position as override decider */
-	samples[0] = loadSample( "German_Concert_D_051_083.wav");
-	samples[1] = loadSample( "German_Concert_D_052_083.wav");
-	samples[2] = loadSample( "German_Concert_D_053_083.wav");
-	samples[3] = loadSample( "German_Concert_D_054_083.wav");
-	samples[4] = loadSample( "German_Concert_D_055_083.wav");
-	samples[5] = loadSample( "German_Concert_D_056_083.wav");
-	samples[6] = loadSample( "German_Concert_D_057_083.wav");
-	samples[7] = loadSample( "German_Concert_D_058_083.wav");
-	samples[8] = loadSample( "German_Concert_D_059_083.wav");
-	samples[9] = loadSample( "German_Concert_D_060_083.wav");
+	//samples[0] = loadSample( "German_Concert_D_051_083.wav");
+	//samples[1] = loadSample( "German_Concert_D_052_083.wav");
+	//samples[2] = loadSample( "German_Concert_D_053_083.wav");
+	//samples[3] = loadSample( "German_Concert_D_054_083.wav");
+	//samples[4] = loadSample( "German_Concert_D_055_083.wav");
+	//samples[5] = loadSample( "German_Concert_D_056_083.wav");
+	//samples[6] = loadSample( "German_Concert_D_057_083.wav");
+	//samples[7] = loadSample( "German_Concert_D_058_083.wav");
+	//samples[8] = loadSample( "German_Concert_D_059_083.wav");
+	//samples[9] = loadSample( "German_Concert_D_060_083.wav");
 	//samples[10] = loadSample( "German_Concert_D_060_083_Start.wav");
 	samples[10] = loadSample( "German_Concert_D_060_083_Start7.wav");
 	
@@ -171,7 +171,7 @@ ch[10]=BASS_SampleGetChannel(samples[10],FALSE);
 			
 ch[11]=BASS_SampleGetChannel(samples[11],FALSE);
 			BASS_ChannelSetAttribute(ch[11],BASS_ATTRIB_PAN,0);
-			BASS_ChannelSetAttribute(ch[11],BASS_ATTRIB_VOL,1);
+			BASS_ChannelSetAttribute(ch[11],BASS_ATTRIB_VOL,0);
 			
 			HSTREAM streamHandle = BASS_StreamCreateFile(FALSE, "Take_a_bow.mp3", 0, 0, 0);
 			//BASS_ChannelPlay(streamHandle, FALSE);
@@ -188,6 +188,8 @@ int count = 0;
 	  
 	  if( count == 100000){
 		  if (!BASS_ChannelPlay(ch[10],FALSE))
+				cout << "Can't play sample" << endl;
+			if (!BASS_ChannelPlay(ch[11],FALSE))
 				cout << "Can't play sample" << endl;
 	  }
 	  
@@ -206,6 +208,27 @@ int count = 0;
 		//cout << length - secPos << endl;
 		float vol = -1;
 		BASS_ChannelGetAttribute(ch[11],BASS_ATTRIB_VOL, &vol);
+		
+		if(secPos > 5 && !tail){
+			
+			BASS_ChannelSetAttribute(ch[10],BASS_ATTRIB_VOL, 0);
+			BASS_ChannelSetAttribute(ch[11],BASS_ATTRIB_VOL, 1);
+			
+			BASS_ChannelSlideAttribute(ch[11], BASS_ATTRIB_VOL, 0, (DWORD)10000);
+			tail = true;
+		}
+		else if(secPos > 5){
+			if(BASS_ChannelIsActive(ch[10]) == BASS_ACTIVE_PLAYING)
+				BASS_ChannelPause(ch[10]);
+			
+			cout << secPos << ":" << vol << endl;
+			if(vol == 0){
+				BASS_ChannelPause(ch[11]);
+				cout << "over" << endl;
+			}
+		}
+		
+		/*
 		
 		//if(length - secPos < 0.2 && !tail){
 		if(secPos > 5 && !tail){
@@ -229,7 +252,7 @@ int count = 0;
 		else if(tail && !BASS_ChannelIsSliding(ch[11], BASS_ATTRIB_VOL)){
 			BASS_ChannelSlideAttribute(ch[11], BASS_ATTRIB_VOL, 0, (DWORD)8000);
 		}
-			
+		*/
 	  }
 	  
 	  //if( count == 1000000){
