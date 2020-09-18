@@ -7,6 +7,8 @@
 #include <string>
 #include "../Pitch.h"
 #include "SoundBindingSet.h"
+#include "TwoStageSoundBinding.h"
+
 
 using namespace std;
 using namespace Instruments;
@@ -14,11 +16,15 @@ using namespace Instruments;
 namespace Instruments {
 namespace Audio {
 
-	class TwoStageSoundBindingSet : public SoundBindingSet {
+	class TwoStageSoundBindingSet : public TSoundBindingSet<Pitch> {
 
 	public:
 		TwoStageSoundBindingSet(string fName, float sPoint, float tLength);
 		
+		virtual string GetFileName(Pitch p);
+
+		virtual TwoStageSoundBinding<Pitch>* GetSoundBinding(Pitch p);
+
 		float GetSwitchPoint();
 		float GetTailLength();
 

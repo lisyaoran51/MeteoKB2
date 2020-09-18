@@ -284,6 +284,38 @@ vector<KeyBinding*>* Piano::GetDefaultkeyBindings(int variant)
 	return bindings;
 }
 
+int Piano::SwitchSoundBindings(TSoundBindingSet<Pitch>* sBindingSet)
+{
+	if (sBindingSet == soundBindingSet) {
+
+		// output manager -> 藍芽回傳這是一樣的音色
+		return 0;
+	}
+	soundBindingSet = sBindingSet;
+
+
+	/* 暫停任何輸入 */
+	isActive == false;
+
+	/* 重置鋼琴狀態 */
+	resetState();
+
+	for (int i = 0; i < soundBindings.size(); i++) {
+		delete soundBindings[i];
+	}
+	soundBindings.clear();
+
+	for (int i = (int)soundBindingSet->GetStartKey(); i <= (int)soundBindingSet->GetEndKey(); i++) {
+		soundBindings.push_back(soundBindingSet->GetSoundBinding(Pitch(i)));
+	}
+
+	audioManager->GetSampleManager()->ClearSampleChannels();
+
+	loadAndMapSamples();
+
+	return 0;
+}
+
 int Piano::ChangeSustainType(SustainType sType)
 {
 	sustainType = sType;

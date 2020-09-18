@@ -6,9 +6,12 @@
 
 #include <string>
 #include "../Pitch.h"
+#include "SoundBinding.h"
+
 
 using namespace std;
 using namespace Instruments;
+
 
 namespace Instruments {
 namespace Audio {
@@ -18,21 +21,39 @@ namespace Audio {
 	public:
 		SoundBindingSet(string fName);
 
-		int SetKeySpan(Pitch sKey, Pitch eKey);
-
-		Pitch GetStartKey();
-		Pitch GetEndKey();
-
-		string GetFileName(Pitch p);
-
 	protected:
 
 		string fileName;
 
-		Pitch startKey = Pitch::A2;
-		Pitch EndKey = Pitch::c5;
+	};
+
+	template<typename T>
+	class TSoundBindingSet : public SoundBindingSet {
+
+	public:
+
+		TSoundBindingSet(string fName): SoundBindingSet(fName){}
+
+		int SetKeySpan(T sKey, T eKey) {
+			startKey = sKey;
+			endKey = eKey;
+			return 0;
+		}
+
+		T GetStartKey() { return startKey; }
+		T GetEndKey() { return endKey; }
+
+		virtual string GetFileName(T p) = 0;
+
+		virtual TSoundBinding<T>* GetSoundBinding(T p) = 0;
+
+	protected:
+
+		T startKey;
+		T endKey;
 
 	};
+
 
 }}
 

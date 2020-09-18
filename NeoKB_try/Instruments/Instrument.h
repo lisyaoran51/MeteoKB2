@@ -3,6 +3,7 @@
 
 #include "../Framework/Allocation/Hierachal/Container.h"
 #include "Audio/SoundBinding.h"
+#include "Audio/SoundBindingSet.h"
 #include <map>
 #include "../Framework/Audio/Sample/SampleChannel.h"
 #include "../Framework/Input/KeyBindings/KeyBinding.h"
@@ -53,6 +54,8 @@ namespace Instruments {
 
 		virtual vector<SoundBinding*>* GetDefaultSoundBindings(int variant = 0) = 0;
 
+		virtual int SwitchSoundBindings(SoundBindingSet* soundBindingSet) = 0;
+
 		//¼g¿ù¤F
 		//virtual vector<PitchBinding*>* GetDefaultPitchBindings(int variant = 0) = 0;
 
@@ -65,6 +68,8 @@ namespace Instruments {
 		AudioManager* audioManager;
 
 		vector<SoundBinding*> soundBindings;
+
+		TSoundBindingSet<Pitch>* soundBindingSet = nullptr;
 
 		//¼g¿ù¤F
 		//vector<PitchBinding*> pitchBindings;

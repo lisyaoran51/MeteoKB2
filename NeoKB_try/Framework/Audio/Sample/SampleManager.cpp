@@ -5,6 +5,7 @@
 #include "BassSampleChannel.h"
 #include "DualPlaybackBassSampleChannel.h"
 #include "MultiPlaybackBassSampleChannel.h"
+#include "BassSampleChannelGenerator.h"
 
 
 using namespace Framework::Audio::Samples;
@@ -16,7 +17,7 @@ using namespace std::literals::string_literals;
 SampleManager::SampleManager(CompositeResourceStore<char*>* rStore)
 {
 	resourceStore = rStore;
-
+	sampleChannelGenerator = new BassSampleChannelGenerator(rStore);
 }
 
 SampleChannel * SampleManager::GetSampleChannel(string name)
@@ -25,13 +26,13 @@ SampleChannel * SampleManager::GetSampleChannel(string name)
 	SampleChannel* sampleChannel = nullptr;
 
 
-	map<string, Sample*>::iterator it = sampleCache.find(name);
-	if (it == sampleCache.end()) {
+	map<string, SampleChannel*>::iterator it = sampleChannelCache.find(name);
+	if (it == sampleChannelCache.end()) {
 
 		string path = resourceStore->GetFilePath(name);
 		if (path != "") {
 
-			sample = sampleCache[name] = new BassSample((char*)path.c_str());
+			sample = new BassSample((char*)path.c_str());
 			sampleChannel = sampleChannelCache[name] = new DualPlaybackBassSampleChannel(sample);
 			AddItem(sampleChannel);
 		}
@@ -47,6 +48,25 @@ SampleChannel * SampleManager::GetSampleChannel(string name)
 		sampleChannel = sampleChannelCache[name];
 	}
 
+
+	return sampleChannel;
+}
+
+SampleChannel * SampleManager::GetSampleChannel(SoundBinding * soundBinding)
+{
+	SampleChannel* sampleChannel = nullptr;
+
+
+	map<string, SampleChannel*>::iterator it = sampleChannelCache.find(soundBinding->GetFileName());
+	if (it == sampleChannelCache.end()) {
+
+		sampleChannel = sampleChannelCache[soundBinding->GetFileName()] = sampleChannelGenerator->GenerateSampleChannel(soundBinding);
+		AddItem(sampleChannel);
+
+	}
+	else {
+		sampleChannel = sampleChannelCache[soundBinding->GetFileName()];
+	}
 
 	return sampleChannel;
 }
@@ -86,5 +106,10 @@ SampleChannel * SampleManager::GetMultiPlaybackSampleChannel(string name)
 int SampleManager::SetPlaybackAmount(int pAmount)
 {
 	playbackAmount = pAmount;
+	return 0;
+}
+
+int SampleManager::ClearSampleChannels()
+{
 	return 0;
 }

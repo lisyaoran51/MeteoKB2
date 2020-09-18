@@ -66,6 +66,12 @@ int MeteoGame::LoadOnComplete()
 	smManager->ImportFromStable();
 	// 這邊應該要import from args，以後再寫
 
+	/* ------------ Sample manager載入音色的方式與sm manager相同 ------------ */
+	audioManager->GetSampleManager()->SetupApiAccess(apiAccess);
+
+	audioManager->GetSampleManager()->ImportFromStable();
+
+
 	AddChild(volumeController = new VolumeController());
 
 	AddChild(screenStack = new Loader());

@@ -67,6 +67,12 @@ namespace Instruments {
 		///	</summary>
 		virtual vector<KeyBinding*>* GetDefaultkeyBindings(int variant = 0);
 
+
+		virtual int SwitchSoundBindings(TSoundBindingSet<Pitch>* sBindingSet);
+
+
+		/* ------------------- 鋼琴專屬功能 ------------------- */
+
 		int ChangeSustainType(SustainType sType);
 
 		int ControlSustainPedal(bool down);
@@ -93,6 +99,8 @@ namespace Instruments {
 		/// 看哪個鍵正在按下
 		///	</summary>
 		map<PianoAction, bool> isPressingMap;
+
+		virtual int resetState();
 
 		virtual int update();
 

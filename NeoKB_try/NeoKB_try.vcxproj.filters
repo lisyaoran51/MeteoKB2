@@ -1677,6 +1677,24 @@
     <ClCompile Include="Instruments\Audio\TwoStageSoundBindingSet.cpp">
       <Filter>來源檔案\Instruments\Audio</Filter>
     </ClCompile>
+    <ClCompile Include="Instruments\Audio\SoundBinding.cpp">
+      <Filter>來源檔案\Instruments\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Audio\Sample\SampleChannelGenerator.cpp">
+      <Filter>來源檔案\Framework\Audio\Sample</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Audio\Sample\BassSampleChannelGenerator.cpp">
+      <Filter>來源檔案\Framework\Audio\Sample</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\UI\SoundSelectPanel.cpp">
+      <Filter>來源檔案\Games\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Instruments\Audio\SimpleSoundBindingSet.cpp">
+      <Filter>來源檔案\Instruments\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Instruments\Audio\RepeatSoundBindingSet.cpp">
+      <Filter>來源檔案\Instruments\Audio</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="DailyLog.txt">
@@ -2768,6 +2786,30 @@
       <Filter>標頭檔\Instruments\Audio</Filter>
     </ClInclude>
     <ClInclude Include="Instruments\Audio\TwoStageSoundBindingSet.h">
+      <Filter>標頭檔\Instruments\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Audio\Sample\SampleChannelGenerator.h">
+      <Filter>標頭檔\Framework\Audio\Sample</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Audio\Sample\BassSampleChannelGenerator.h">
+      <Filter>標頭檔\Framework\Audio\Sample</Filter>
+    </ClInclude>
+    <ClInclude Include="Instruments\Audio\SimpleSoundBinding.h">
+      <Filter>標頭檔\Instruments\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Instruments\Audio\RepeatSoundBinding.h">
+      <Filter>標頭檔\Instruments\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Instruments\Audio\TwoStageSoundBinding.h">
+      <Filter>標頭檔\Instruments\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\UI\SoundSelectPanel.h">
+      <Filter>標頭檔\Games\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Instruments\Audio\SimpleSoundBindingSet.h">
+      <Filter>標頭檔\Instruments\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Instruments\Audio\RepeatSoundBindingSet.h">
       <Filter>標頭檔\Instruments\Audio</Filter>
     </ClInclude>
   </ItemGroup>

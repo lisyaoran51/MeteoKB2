@@ -3,17 +3,21 @@
 
 #include <string>
 
+
 using namespace std;
 
 namespace Instruments {
 namespace Audio {
 
-	struct SoundBinding {
+	class SoundBinding {
 
-		SoundBinding(string fName, int a) {
-			fileName = fName;
-			action = a;
-		}
+	public:
+
+		SoundBinding(string fName, int a);
+
+		string GetFileName();
+
+	protected:
 
 		string fileName;
 
@@ -24,7 +28,9 @@ namespace Audio {
 
 
 	template<typename T>
-	struct TSoundBinding : public SoundBinding {
+	class TSoundBinding : public SoundBinding {
+
+	public:
 
 		TSoundBinding(string fName, T a) : SoundBinding(fName, (int)a){
 			fileName = fName;
