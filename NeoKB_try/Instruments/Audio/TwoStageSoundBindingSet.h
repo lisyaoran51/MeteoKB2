@@ -19,23 +19,23 @@ namespace Audio {
 	class TwoStageSoundBindingSet : public TSoundBindingSet<Pitch> {
 
 	public:
+
+		TwoStageSoundBindingSet();
 		TwoStageSoundBindingSet(string fName, float sPoint, float tLength);
+
+
+		float switchPoint = 5.f;
+		float tailLength = 10.f;
 		
 		virtual string GetFileName(Pitch p);
 
 		virtual TwoStageSoundBinding<Pitch>* GetSoundBinding(Pitch p);
-
-		float GetSwitchPoint();
-		float GetTailLength();
 
 		string GetStageAFileName(Pitch p);
 		string GetStageBFileName(Pitch p);
 
 
 	protected:
-
-		float switchPoint = 5.f;
-		float tailLength = 10.f;
 
 
 	};

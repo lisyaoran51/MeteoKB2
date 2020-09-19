@@ -41,6 +41,19 @@ namespace Audio {
 			return 0;
 		}
 
+		int DeleteItemFromList(T* item) {
+
+			unique_lock<mutex> uLock(itemMutex);
+			for (int i = 0; i < items.size(); i++) {
+				if (items[i] == item) {
+					items.erase(items.begin() + i);
+					return 0;
+				}
+
+			}
+			return -1;
+		}
+
 		/// <summary>
 		/// 懶得寫action，所以還沒有用
 		/// </summary>
@@ -59,7 +72,17 @@ namespace Audio {
 
 		int UnregisterItem(T* item) {
 			// 懶得寫
+			// 其實不用血，AddAdjustmentDependency沒有影響到外界的物件，所以直接刪掉就好
 			return 0;
+		}
+
+
+		virtual int OnStateChange() {
+			AdjustableAudioComponent::OnStateChange();
+			unique_lock<mutex> uLock(itemMutex);
+			for (int i = 0; i < items.size(); i++) {
+				items[i]->OnStateChange();
+			}
 		}
 
 		/// <summary>
@@ -67,38 +90,41 @@ namespace Audio {
 		/// </summary>
 		virtual int Update() {
 
+			if (!isActive)
+				return 0;
+
 			AudioComponent::Update();
 
-			unique_lock<mutex> uLock(itemMutex);
-			int itemsSize = items.size();
-			uLock.unlock();
 
 			LOG(LogLevel::Finest) << "AudioCollectionManager::Update() : this = [" << this << "], item size = [" << itemsSize << "].";
 
-			for (int i = 0; i < itemsSize; i++) {
+			for (int i = 0; i < items.size(); i++) {
 
-				uLock.lock();
 				T* item = dynamic_cast<T*>(items[i]);
-				uLock.unlock();
 
 				if (item == nullptr)
 					throw runtime_error("AudioCollectionManager<T>::update: this component's type is wrong.");
 
+				/* 這個應該要用pending action來做。現在沒有在用track，應該不用寫這段
 				if (item->GetIsCompleted()) {
 
-					uLock.lock();
 					items.erase(items.begin() + i);
-					uLock.unlock();
 
 					i--;
 					deleteItem(item);
 					continue;
 					// smaple不用delete，但是track要delete
 				}
+				*/
+
 				item->Update();
 			}
 
 			return 0;
+		}
+
+		int SetIsActive(bool iActive) {
+			isActive = iActive;
 		}
 
 		int _DebugPrintComponents(string spaces) {
@@ -113,9 +139,17 @@ namespace Audio {
 
 	protected:
 
+		bool isActive = true;
+
 		vector<T*> items;
 
 		virtual int deleteItem(T* item) {
+			UnregisterItem();
+
+			unique_lock<mutex> uLock(itemMutex);
+
+			DeleteItemFromList(item);
+			
 			return 0;
 		}
 

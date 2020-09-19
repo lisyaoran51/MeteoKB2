@@ -14,14 +14,13 @@ namespace Audio {
 	public:
 
 		SoundBinding(string fName, int a);
-
-		string GetFileName();
-
-	protected:
+		virtual ~SoundBinding() = default;
 
 		string fileName;
 
 		int action;
+
+		virtual string GetFileName() = 0;
 
 	};
 

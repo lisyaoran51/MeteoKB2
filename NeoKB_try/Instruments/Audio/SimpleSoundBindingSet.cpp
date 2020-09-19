@@ -4,6 +4,12 @@
 using namespace Instruments::Audio;
 
 
+SimpleSoundBindingSet::SimpleSoundBindingSet()
+{
+	startKey = Pitch::A2;
+	endKey = Pitch::c5;
+}
+
 SimpleSoundBindingSet::SimpleSoundBindingSet(string fName) : TSoundBindingSet<Pitch>(fName)
 {
 	startKey = Pitch::A2;

@@ -1,13 +1,12 @@
-/* ²¾¨ìframework/IO²z¤F
 #include "FileReader.h"
 
-#include "../../../Util/FileSystem.h"
-#include "../../../Util/Log.h"
+#include "../../Util/FileSystem.h"
+#include "../../Util/Log.h"
 #include <string.h>
 #include <iostream>
 
 
-using namespace Games::Sheetmusics::IO;
+using namespace Framework::IO;
 using namespace Util;
 using namespace std;
 using namespace std::literals::string_literals;
@@ -36,17 +35,10 @@ string FileReader::GetPath(string name)
 	return path + "/"s + name;
 }
 
-SmSetInfo * FileReader::GetSmSetInfo()
-{
-	SmSetInfo* smSetInfo = new SmSetInfo();
-	smSetInfo->path = path;
-	return smSetInfo;
-}
-
 vector<string>* FileReader::WhereEndWith(string s)
 {
 
-	LOG(LogLevel::Info) << "FileReader::WhereEndWith(string) : read all sheetmusics under [" << s << "].";
+	LOG(LogLevel::Info) << "FileReader::WhereEndWith(string) : read all files with extension [" << s << "].";
 
 	char*** fileNames = new char**();
 
@@ -54,6 +46,10 @@ vector<string>* FileReader::WhereEndWith(string s)
 
 	vector<string>* files = new vector<string>();
 
+	string extension = s;
+	if (extension[0] != '.') {
+		extension = string(".") + extension;
+	}
 
 
 	for (int i = 0; i < fileCount; i++) {
@@ -62,15 +58,15 @@ vector<string>* FileReader::WhereEndWith(string s)
 		
 		LOG(LogLevel::Finer) << "FileReader::WhereEndWith : check if [" << (*fileNames)[i] << "] is .sm ";
 
-		if (len >= 3 && strcmp((*fileNames)[i] + len - 3, ".sm") == 0) {
+		if (len >= extension.size() && strcmp((*fileNames)[i] + len - extension.size(), extension.c_str()) == 0) {
 
-			LOG(LogLevel::Fine) << "FileReader::WhereEndWith : sheetmusic read : [" << (*fileNames)[i] << "]";
+			LOG(LogLevel::Fine) << "FileReader::WhereEndWith : " << extension << " read : [" << (*fileNames)[i] << "]";
 			files->push_back((*fileNames)[i]);
 
 		}
-		else if (len >= 3){
-			LOG(LogLevel::Finer) << "FileReader::WhereEndWith : not sm : [" << (*fileNames)[i] << "]. the last words are ["
-				<< (*fileNames)[i] + len - 3 << "], the return of strcmp is [" << strcmp((*fileNames)[i] + len - 3, ".sm") << "]";
+		else if (len >= extension.size()){
+			LOG(LogLevel::Finer) << "FileReader::WhereEndWith : not " << extension << " : [" << (*fileNames)[i] << "]. the last words are ["
+				<< (*fileNames)[i] + len - extension.size() << "], the return of strcmp is [" << strcmp((*fileNames)[i] + len - extension.size(), extension.c_str()) << "]";
 		}
 	}
 
@@ -88,4 +84,3 @@ vector<string>* FileReader::WhereEndWith(string s)
 	LOG(LogLevel::Finer) << "FileReader::WhereEndWith : function ends.";
 	return files;
 }
-*/

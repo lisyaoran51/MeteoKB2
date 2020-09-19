@@ -4,6 +4,12 @@
 using namespace Instruments::Audio;
 
 
+TwoStageSoundBindingSet::TwoStageSoundBindingSet()
+{
+	startKey = Pitch::A2;
+	endKey = Pitch::c5;
+}
+
 TwoStageSoundBindingSet::TwoStageSoundBindingSet(string fName, float sPoint, float tLength): TSoundBindingSet(fName)
 {
 	startKey = Pitch::A2;
@@ -21,16 +27,6 @@ string TwoStageSoundBindingSet::GetFileName(Pitch p)
 TwoStageSoundBinding<Pitch>* TwoStageSoundBindingSet::GetSoundBinding(Pitch p)
 {
 	return new TwoStageSoundBinding<Pitch>(fileName, p, switchPoint, tailLength);
-}
-
-float TwoStageSoundBindingSet::GetSwitchPoint()
-{
-	return switchPoint;
-}
-
-float TwoStageSoundBindingSet::GetTailLength()
-{
-	return tailLength;
 }
 
 string TwoStageSoundBindingSet::GetStageAFileName(Pitch p)

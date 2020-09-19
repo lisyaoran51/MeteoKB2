@@ -8,15 +8,27 @@
 #include "../../IO/Stores/CompositeResourceStore.h"
 #include <map>
 #include "BassSampleChannelGenerator.h"
-#include "../../IO/Api/ApiAccess.h"
+#include "../../../Instruments/Audio/SoundBindingSet.h"
+#include "../../IO/Storage.h"
+#include "../../IO/FileReader.h"
 
 
 
 using namespace std;
 using namespace Framework::IO::Stores;
+using namespace Instruments::Audio;
+using namespace Framework::IO;
+
+
+
+namespace Framework {
+namespace IO{
+namespace Api{
+
+	class ApiAccess;
+
+}}}
 using namespace Framework::IO::Api;
-
-
 
 
 namespace Framework {
@@ -69,9 +81,12 @@ namespace Samples {
 
 		vector<SoundBindingSet*>* GetSoundBindingSets();
 
+		/// <summary>
+		/// 從系統預設的路徑抓到所有儲存內容
+		/// </summary>
+		function<Storage*(void)> GetStableStorage;
+
 		/* -------------------- 更換音色 -------------------- */
-
-
 
 	protected:
 

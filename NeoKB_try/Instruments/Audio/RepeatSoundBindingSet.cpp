@@ -4,6 +4,12 @@
 using namespace Instruments::Audio;
 
 
+RepeatSoundBindingSet::RepeatSoundBindingSet()
+{
+	startKey = Pitch::A2;
+	endKey = Pitch::c5;
+}
+
 RepeatSoundBindingSet::RepeatSoundBindingSet(string fName, float tlength): TSoundBindingSet(fName)
 {
 	startKey = Pitch::A2;

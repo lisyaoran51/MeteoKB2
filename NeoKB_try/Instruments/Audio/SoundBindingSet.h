@@ -19,11 +19,13 @@ namespace Audio {
 	class SoundBindingSet {
 
 	public:
+
+		SoundBindingSet();
 		SoundBindingSet(string fName);
 
-	protected:
+		virtual ~SoundBindingSet() = default;
 
-		string fileName;
+		string fileName = "";
 
 	};
 
@@ -32,25 +34,18 @@ namespace Audio {
 
 	public:
 
+		TSoundBindingSet(){}
 		TSoundBindingSet(string fName): SoundBindingSet(fName){}
 
-		int SetKeySpan(T sKey, T eKey) {
-			startKey = sKey;
-			endKey = eKey;
-			return 0;
-		}
+		virtual ~TSoundBindingSet() = default;
 
-		T GetStartKey() { return startKey; }
-		T GetEndKey() { return endKey; }
+		T startKey;
+		T endKey;
 
 		virtual string GetFileName(T p) = 0;
 
 		virtual TSoundBinding<T>* GetSoundBinding(T p) = 0;
 
-	protected:
-
-		T startKey;
-		T endKey;
 
 	};
 

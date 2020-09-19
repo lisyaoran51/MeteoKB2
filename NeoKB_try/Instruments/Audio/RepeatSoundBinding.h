@@ -17,12 +17,6 @@ namespace Audio {
 			tailLength = tLength;
 		}
 
-		float GetTailLength() {
-			return tailLength;
-		}
-
-	protected:
-
 		float tailLength = 10.f;
 
 	};

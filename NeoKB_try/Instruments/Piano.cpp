@@ -300,18 +300,29 @@ int Piano::SwitchSoundBindings(TSoundBindingSet<Pitch>* sBindingSet)
 	/* 重置鋼琴狀態 */
 	resetState();
 
+	/* 暫停sample manager更新 */
+	audioManager->GetSampleManager()->SetIsActive(false);
+
+	/* 更新sound binding */
 	for (int i = 0; i < soundBindings.size(); i++) {
 		delete soundBindings[i];
 	}
 	soundBindings.clear();
 
-	for (int i = (int)soundBindingSet->GetStartKey(); i <= (int)soundBindingSet->GetEndKey(); i++) {
+	for (int i = (int)soundBindingSet->startKey; i <= (int)soundBindingSet->endKey; i++) {
 		soundBindings.push_back(soundBindingSet->GetSoundBinding(Pitch(i)));
 	}
 
+	/* 重置smaple channel */
 	audioManager->GetSampleManager()->ClearSampleChannels();
 
 	loadAndMapSamples();
+
+	/* 重啟sample manager更新 */
+	audioManager->GetSampleManager()->SetIsActive(true);
+
+	/* 重啟任何輸入 */
+	isActive == true;
 
 	return 0;
 }

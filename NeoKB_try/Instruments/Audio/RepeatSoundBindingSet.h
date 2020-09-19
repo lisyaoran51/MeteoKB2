@@ -19,16 +19,15 @@ namespace Audio {
 
 	public:
 
+		RepeatSoundBindingSet();
 		RepeatSoundBindingSet(string fName, float tLength);
+
+		float tailLength = 10.f;
 
 		virtual string GetFileName(Pitch p);
 
 		virtual RepeatSoundBinding<Pitch>* GetSoundBinding(Pitch p);
 
-
-	protected:
-
-		float tailLength = 10.f;
 
 
 	};

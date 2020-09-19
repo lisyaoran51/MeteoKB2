@@ -49,6 +49,11 @@ int SongSelect::load(SmManager * sManager, MeteoGame * game)
 	smManager = sManager;
 
 	// ruleset info 可能需要重新bind一次，本來meteo scene裡面有bind過
+	
+	/* 更換音色 */
+	soundSelectPanel = new SoundSelectPanel();
+
+	AddChild(soundSelectPanel);
 
 	// 把選則歌曲的method註冊進去select panel裡面，select panel選好歌就會直接呼叫回來
 	smSelectPanel = new SheetmusicSelectPanel();

@@ -25,7 +25,7 @@ namespace UI {
 
 		int load();
 
-		int load(FrameworkConfigManager* f, AudioManager* a, OutputManager* o);
+		int load(FrameworkConfigManager* f, Instrument* i, AudioManager* a, OutputManager* o);
 
 	public:
 
@@ -45,9 +45,11 @@ namespace UI {
 
 	protected:
 
-		AudioManager* audioManager = nullptr;
+		Instrument* instrument = nullptr;
 
 		FrameworkConfigManager* frameworkConfigManager = nullptr;
+
+		AudioManager* audioManager = nullptr;
 
 		OutputManager* outputManager = nullptr;
 

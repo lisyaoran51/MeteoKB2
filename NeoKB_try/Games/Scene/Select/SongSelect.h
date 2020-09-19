@@ -8,6 +8,7 @@
 #include "../../Sheetmusic/SheetmusicManager.h"
 #include "../MeteoScene.h"
 #include "../../../Games/UI/SheetmusicSelectPanel.h"
+#include "../../UI/SoundSelectPanel.h"
 //#include "../../MeteoGame.h" // 不可以include 匯recursive
 
 
@@ -40,9 +41,11 @@ namespace Select {
 
 	protected:
 
-		SmManager* smManager;
+		SmManager* smManager = nullptr;
 
-		SheetmusicSelectPanel* smSelectPanel;
+		SheetmusicSelectPanel* smSelectPanel = nullptr;
+
+		SoundSelectPanel* soundSelectPanel = nullptr;
 
 		/// <summary>
 		/// 在選擇歌曲carouselSelectionChanged時執行，會把遊戲模式和譜綁在一起

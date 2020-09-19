@@ -6,11 +6,14 @@
 #include "DualPlaybackBassSampleChannel.h"
 #include "MultiPlaybackBassSampleChannel.h"
 #include "BassSampleChannelGenerator.h"
+#include "../../IO/Storage.h"
+#include "Format/SoundBindingSetDecoder.h"
 
 
 using namespace Framework::Audio::Samples;
 using namespace std;
 using namespace std::literals::string_literals;
+using namespace Framework::Audio::Samples::Format;
 
 
 
@@ -18,6 +21,7 @@ SampleManager::SampleManager(CompositeResourceStore<char*>* rStore)
 {
 	resourceStore = rStore;
 	sampleChannelGenerator = new BassSampleChannelGenerator(rStore);
+	soundBindingSets = new vector<SoundBindingSet*>();
 }
 
 SampleChannel * SampleManager::GetSampleChannel(string name)
@@ -57,15 +61,15 @@ SampleChannel * SampleManager::GetSampleChannel(SoundBinding * soundBinding)
 	SampleChannel* sampleChannel = nullptr;
 
 
-	map<string, SampleChannel*>::iterator it = sampleChannelCache.find(soundBinding->GetFileName());
+	map<string, SampleChannel*>::iterator it = sampleChannelCache.find(soundBinding->fileName);
 	if (it == sampleChannelCache.end()) {
 
-		sampleChannel = sampleChannelCache[soundBinding->GetFileName()] = sampleChannelGenerator->GenerateSampleChannel(soundBinding);
+		sampleChannel = sampleChannelCache[soundBinding->fileName] = sampleChannelGenerator->GenerateSampleChannel(soundBinding);
 		AddItem(sampleChannel);
 
 	}
 	else {
-		sampleChannel = sampleChannelCache[soundBinding->GetFileName()];
+		sampleChannel = sampleChannelCache[soundBinding->fileName];
 	}
 
 	return sampleChannel;
@@ -77,12 +81,12 @@ SampleChannel * SampleManager::GetMultiPlaybackSampleChannel(string name)
 	SampleChannel* sampleChannel = nullptr;
 
 
-	map<string, Sample*>::iterator it = sampleCache.find(name);
-	if (it == sampleCache.end()) {
+	map<string, SampleChannel*>::iterator it = sampleChannelCache.find(name);
+	if (it == sampleChannelCache.end()) {
 
 		string path = resourceStore->GetFilePath(name);
 		if (path != "") {
-			sample = sampleCache[name] = new BassSample((char*)path.c_str());
+			sample = new BassSample((char*)path.c_str());
 			//sampleChannel = sampleChannelCache[name] = new MultiPlaybackBassSampleChannel(sample, playbackAmount, 2, OverrideType::MinimunVolume);
 			sampleChannel = sampleChannelCache[name] = new MultiPlaybackBassSampleChannel(sample, 1, 2, OverrideType::MinimunVolume);
 			AddItem(sampleChannel);
@@ -111,5 +115,90 @@ int SampleManager::SetPlaybackAmount(int pAmount)
 
 int SampleManager::ClearSampleChannels()
 {
+	/* 執行前必須暫停整個Sample系統 */
+
+	map<string, SampleChannel*>::iterator it;
+
+	for (it = sampleChannelCache.begin(); it != sampleChannelCache.end(); it++)
+	{
+		SampleChannel* smapleChannel = (*it).second;
+		deleteItem(smapleChannel);
+		delete smapleChannel;
+	}
+	sampleChannelCache.clear();
+
 	return 0;
+}
+
+int SampleManager::Import(vector<string>* paths)
+{
+	// TODO : 送出initializing訊息
+
+	for (int i = 0; i < paths->size(); i++) {
+		FileReader fileReader(paths->at(i));
+		import(fileReader);
+	}
+
+	return 0;
+}
+
+int SampleManager::ImportFromStable()
+{
+	LOG(LogLevel::Info) << "SampleManager::ImportFromStable(): Start Import.";
+	Storage* stable = GetStableStorage();
+
+	vector<string>* paths = stable->GetDirectories("Resources/Samples");
+	paths->push_back(stable->GetUsableDirectoryPathFor("Resources/Samples"));
+
+	LOG(LogLevel::Info) << "SampleManager::ImportFromStable() : import paths ^^^" << [](vector<string>* p) {
+
+		for (int i = 0; i < p->size(); i++) {
+			LOG(LogLevel::Info) << "---------------------------- " << p->at(i);
+		}
+
+		return 0;
+	}(paths);
+
+	Import(paths);
+
+	delete stable;
+	delete paths;
+
+	return 0;
+}
+
+vector<SoundBindingSet*>* SampleManager::import(FileReader & fileReader)
+{
+	// osu的寫法是一個beatmap會有一組set，回傳一組set丟進store李，但是我們的設計沒有需要set，一個普就是一個普，一個資料夾裡應該部會有超過一個普
+	importToStorage(fileReader);
+
+
+	return nullptr;
+}
+
+SoundBindingSet * SampleManager::importToStorage(FileReader & fileReader)
+{
+	vector<string>* sbsNames;
+
+	sbsNames = fileReader.WhereEndWith(".sbs");
+
+	for (int i = 0; i < sbsNames->size(); i++) {
+
+		LOG(LogLevel::Finer) << "vector<SmInfo*>* SmManager::importToStorage(FileReader&) : Getting stream of [" << sbsNames->at(i) << "].";
+
+		fstream* stream = fileReader.GetStream(sbsNames->at(i));
+
+		// 每一個要用的decoder會在程式開始的時候註冊
+		LOG(LogLevel::Finer) << "vector<SmInfo*>* SmManager::importToStorage(FileReader&) : Getting decoder of [" << sbsNames->at(i) << "].";
+		SoundBindingSetDecoder* soundBindingSetDecoder = SoundBindingSetDecoder::GetDecoder(stream);
+
+		LOG(LogLevel::Finer) << "vector<SmInfo*>* SmManager::importToStorage(FileReader&) : Decode [" << sbsNames->at(i) << "] ...";
+		SoundBindingSet* sbs = soundBindingSetDecoder->Decode(stream);
+		
+		soundBindingSets->push_back(sbs);
+
+	}
+
+	// 這一行沒有用，以後有需要再改
+	return soundBindingSets->at(0);
 }

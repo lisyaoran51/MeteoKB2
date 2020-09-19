@@ -9,7 +9,7 @@
 #include "../../Util/TemplateConstraint.h"
 #include "SheetmusicInfo.h"
 #include "Sheetmusic.h"
-#include "IO/FileReader.h"
+#include "../../Framework/IO/FileReader.h"
 #include "Format/SmDecoder.h"
 #include "../Ruleset/Ruleset.h"
 #include "../Ruleset/RulesetInfo.h"
@@ -39,7 +39,6 @@ namespace Api{
 
 using namespace std;
 using namespace Util;
-using namespace Games::Sheetmusics::IO;
 using namespace Games::Sheetmusics::Format;
 using namespace Games::Rulesets;
 using namespace Framework::IO;

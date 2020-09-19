@@ -209,6 +209,14 @@ int count = 0;
 		float vol = -1;
 		BASS_ChannelGetAttribute(ch[11],BASS_ATTRIB_VOL, &vol);
 		
+		if(count > 200000){
+			
+			BASS_ChannelStop(ch[10]);
+			BASS_SampleFree(samples[10]);
+			
+			cout << "Stop" << endl;
+		}
+		
 		if(secPos > 5 && !tail){
 			
 			BASS_ChannelSetAttribute(ch[10],BASS_ATTRIB_VOL, 0);

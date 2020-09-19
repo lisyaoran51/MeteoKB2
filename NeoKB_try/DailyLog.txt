@@ -1995,7 +1995,7 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	
 8/31
 	缺的東西: mcu、ruleset info(ok)、未進入遊戲的移調(ok)、琴音分為全長和AB段、琴音切換、wifi、daemon、重播存檔、OS設定、平移會lag、換上新音色、遊戲開始前倒數3秒(ok)、刪除所有memory leak
-				遊戲開始前設定mod(ok)、遊戲開始時改速度(ok)、手動踏板modifier、紀錄每個modifier到藍芽架構裡、me555
+				遊戲開始前設定mod(ok)、遊戲開始時改速度(ok)、手動踏板modifier、紀錄每個modifier到藍芽架構裡、me555、測試藍芽傳送
 	
 9/1
 	找到mcu輸出uart debug資料的方法: 在project裡面DEBUG_ENABLE_SEMIHOST=1，才能收到uart訊號
@@ -2085,4 +2085,15 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 9/17
 	寫了SwitchSoundBindings，之後用這個來切換音色
 	接下來要研究怎麼把audio component給移除掉
+	
+9/18
+	BASS_SampleFree和BASS_ChannelStop哪個先都可以
+	
+	接下癌要寫用sample manager讀sound binding set，還有sound select panel切換音色
+	
+9/19
+	要把sound binding set全改public，比較好decode
+	
+	decoder和switch sound都寫了，接下來要寫各種sample channel，有Repeat和ABcut
+	接下來應該要先測藍芽手機連線
 	

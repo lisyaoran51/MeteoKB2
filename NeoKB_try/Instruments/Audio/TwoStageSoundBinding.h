@@ -17,13 +17,8 @@ namespace Audio {
 			tailLength = tLength;
 		}
 
-		float GetSwitchPoint() {
-			return switchPoint;
-		}
-
-		float GetTailLength() {
-			return tailLength;
-		}
+		float switchPoint = 5.f;
+		float tailLength = 10.f;
 
 		string GetStageAFileName() {
 			return fileName + string("_A_") + to_string(int(action));
@@ -32,12 +27,6 @@ namespace Audio {
 		string GetStageBFileName() {
 			return fileName + string("_B_") + to_string(int(action));
 		}
-
-
-	protected:
-
-		float switchPoint = 5.f;
-		float tailLength = 10.f;
 
 	};
 

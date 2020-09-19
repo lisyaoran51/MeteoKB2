@@ -19,6 +19,7 @@ namespace Audio {
 
 	public:
 
+		SimpleSoundBindingSet();
 		SimpleSoundBindingSet(string fName);
 
 		virtual string GetFileName(Pitch p);

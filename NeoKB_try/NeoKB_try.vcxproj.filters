@@ -811,6 +811,12 @@
     <Filter Include="來源檔案\Instruments\Audio">
       <UniqueIdentifier>{be64bba6-d3a1-4583-ba0b-785fdcf93875}</UniqueIdentifier>
     </Filter>
+    <Filter Include="標頭檔\Framework\Audio\Sample\Format">
+      <UniqueIdentifier>{3ffa8f67-2b02-4f4f-868d-853fef765659}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Framework\Audio\Sample\Format">
+      <UniqueIdentifier>{668ebd0f-9ec3-4d11-b094-cc669e3a8784}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Games\Graphic\Renderer\renderer.cpp">
@@ -1694,6 +1700,15 @@
     </ClCompile>
     <ClCompile Include="Instruments\Audio\RepeatSoundBindingSet.cpp">
       <Filter>來源檔案\Instruments\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\IO\FileReader.cpp">
+      <Filter>來源檔案\Framework\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Audio\Sample\Format\SoundBindingSetDecoder.cpp">
+      <Filter>來源檔案\Framework\Audio\Sample\Format</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Audio\Sample\Format\SimpleSoundBindingSetDecoderDecoder.cpp">
+      <Filter>來源檔案\Framework\Audio\Sample\Format</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2811,6 +2826,21 @@
     </ClInclude>
     <ClInclude Include="Instruments\Audio\RepeatSoundBindingSet.h">
       <Filter>標頭檔\Instruments\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\IO\FileReader.h">
+      <Filter>標頭檔\Framework\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Audio\Sample\Format\SoundBindingSetDecoder.h">
+      <Filter>標頭檔\Framework\Audio\Sample\Format</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Audio\Sample\Format\SimpleSoundBindingSetDecoder.h">
+      <Filter>標頭檔\Framework\Audio\Sample\Format</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Audio\Sample\RepeatDualPlaybackBassSampleChannel.h">
+      <Filter>標頭檔\Framework\Audio\Sample</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Audio\Sample\TwoStageDualPlaybackBassSampleChannel.h">
+      <Filter>標頭檔\Framework\Audio\Sample</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

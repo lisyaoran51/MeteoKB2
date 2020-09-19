@@ -54,7 +54,7 @@ namespace Instruments {
 
 		virtual vector<SoundBinding*>* GetDefaultSoundBindings(int variant = 0) = 0;
 
-		virtual int SwitchSoundBindings(SoundBindingSet* soundBindingSet) = 0;
+		virtual int SwitchSoundBindings(TSoundBindingSet<Pitch>* soundBindingSet) = 0;
 
 		//¼g¿ù¤F
 		//virtual vector<PitchBinding*>* GetDefaultPitchBindings(int variant = 0) = 0;
@@ -63,9 +63,9 @@ namespace Instruments {
 
 	protected:
 
-		GameHost* host;
+		GameHost* host = nullptr;
 
-		AudioManager* audioManager;
+		AudioManager* audioManager = nullptr;
 
 		vector<SoundBinding*> soundBindings;
 
@@ -81,7 +81,9 @@ namespace Instruments {
 		//¼g¿ù¤F
 		//virtual int mapActionToPitch() = 0;
 
-		string getSoundBinding(int action);
+		string getSoundBindingFileName(int action);
+
+		SoundBinding* getSoundBinding(int action);
 
 	};
 

@@ -5,6 +5,10 @@ using namespace Instruments::Audio;
 
 
 
+SoundBindingSet::SoundBindingSet()
+{
+}
+
 SoundBindingSet::SoundBindingSet(string fName)
 {
 	fileName = fName;

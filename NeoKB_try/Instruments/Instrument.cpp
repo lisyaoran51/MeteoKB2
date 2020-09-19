@@ -58,11 +58,20 @@ int Instrument::LoadOnComplete()
 	return 0;
 }
 
-string Instrument::getSoundBinding(int action)
+string Instrument::getSoundBindingFileName(int action)
 {
 	for (int i = 0; i < soundBindings.size(); i++) {
 		if (soundBindings[i]->action == action)
 			return soundBindings[i]->fileName;
 	}
 	return string();
+}
+
+SoundBinding * Instrument::getSoundBinding(int action)
+{
+	for (int i = 0; i < soundBindings.size(); i++) {
+		if (soundBindings[i]->action == action)
+			return soundBindings[i];
+	}
+	return nullptr;
 }
