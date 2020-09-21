@@ -140,14 +140,16 @@ int main()
 		
 		char contextBuffer[1024] = { 0 };
 
+
+		char msg[6] = "hello";
+		msg[5] = 10;
+		
+		write(client, msg, 6);
+		printf("s");printf("e");printf("n");printf("d");printf(".");printf("\n");
         // read data from the client
         while(1){
 			
-				char msg[6] = "hello";
-				msg[5] = 10;
 				
-				write(client, msg, 6);
-				printf("s");printf("e");printf("n");printf("d");printf(".");printf("\n");
                 bytes_read = read(client, buf, sizeof(buf));
                 if( bytes_read > 0 ) {
 					
