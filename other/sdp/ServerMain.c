@@ -153,6 +153,9 @@ int main()
                 bytes_read = read(client, buf, sizeof(buf));
                 if( bytes_read > 0 ) {
 					
+					printf("received [%s]\n",buf);
+					
+					/*
 					unsigned long command = 0x0;
 					memcpy(&command, buf, sizeof(command));
 					
@@ -166,6 +169,7 @@ int main()
 					
 					
                     printf("received [%d](%d) [%s]\n",command ,length ,contextBuffer);
+					*/
                 }
         }
         // close connection
