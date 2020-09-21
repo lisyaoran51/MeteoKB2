@@ -144,8 +144,8 @@ int main()
 		char msg[6] = "hello";
 		msg[5] = 10;
 		
-		write(client, msg, 6);
-		printf("s");printf("e");printf("n");printf("d");printf(".");printf("\n");
+		//write(client, msg, 6);
+		//printf("s");printf("e");printf("n");printf("d");printf(".");printf("\n");
         // read data from the client
         while(1){
 			
