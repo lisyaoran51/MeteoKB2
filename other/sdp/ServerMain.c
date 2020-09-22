@@ -144,33 +144,33 @@ int main()
 		char msg[6] = "hello";
 		msg[5] = 10;
 		
-		//write(client, msg, 6);
-		//printf("s");printf("e");printf("n");printf("d");printf(".");printf("\n");
         // read data from the client
         while(1){
 			
+			write(client, msg, 6);
+			printf("s");printf("e");printf("n");printf("d");printf(".");printf("\n");
+			
+			bytes_read = read(client, buf, sizeof(buf));
+			if( bytes_read > 0 ) {
 				
-                bytes_read = read(client, buf, sizeof(buf));
-                if( bytes_read > 0 ) {
-					
-					printf("received [%s]\n",buf);
-					
-					/*
-					unsigned long command = 0x0;
-					memcpy(&command, buf, sizeof(command));
-					
-					unsigned short length;
-					memcpy(&length, buf + sizeof(command), sizeof(length));
-					
-					memset(contextBuffer, 0, sizeof(contextBuffer));
-					memcpy(contextBuffer,
-						buf + sizeof(command) + sizeof(length) + sizeof(unsigned short) * 2,
-						length - (sizeof(command) + sizeof(length) + sizeof(unsigned short) * 2));
-					
-					
-                    printf("received [%d](%d) [%s]\n",command ,length ,contextBuffer);
-					*/
-                }
+				//printf("received [%s]\n",buf);
+				
+				
+				unsigned long command = 0x0;
+				memcpy(&command, buf, sizeof(command));
+				
+				unsigned short length;
+				memcpy(&length, buf + sizeof(command), sizeof(length));
+				
+				memset(contextBuffer, 0, sizeof(contextBuffer));
+				memcpy(contextBuffer,
+					buf + sizeof(command) + sizeof(length) + sizeof(unsigned short) * 2,
+					length - (sizeof(command) + sizeof(length) + sizeof(unsigned short) * 2));
+				
+				
+				printf("received [%d](%d) [%s]\n",command ,length ,contextBuffer);
+				
+			}
         }
         // close connection
         close(client);
