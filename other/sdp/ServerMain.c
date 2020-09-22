@@ -167,7 +167,7 @@ int main()
 					buf + sizeof(command) + sizeof(length) + sizeof(unsigned short) * 2,
 					length - (sizeof(command) + sizeof(length) + sizeof(unsigned short) * 2));
 				
-				
+				printf("received %d bytes \n", bytes_read);
 				printf("received %d bytes [%d](%d) [%s]\n", bytes_read, command ,length ,contextBuffer);
 				
 				
