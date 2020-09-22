@@ -160,8 +160,13 @@ int main()
 				unsigned long command = 0x0;
 				memcpy(&command, buf, sizeof(command));
 				
+				printf("command: %d\n", command);
+				
 				unsigned short length;
 				memcpy(&length, buf + sizeof(command), sizeof(length));
+				
+				printf("length: %d\n", length);
+				
 				
 				memset(contextBuffer, 0, sizeof(contextBuffer));
 				memcpy(contextBuffer,
