@@ -153,9 +153,9 @@ int main()
 			bytes_read = read(client, buf, sizeof(buf));
 			if( bytes_read > 0 ) {
 				
-				printf("received [%s]\n",buf);
+				//printf("received [%s]\n",buf);
 				
-				/*
+				
 				unsigned long command = 0x0;
 				memcpy(&command, buf, sizeof(command));
 				
@@ -168,8 +168,8 @@ int main()
 					length - (sizeof(command) + sizeof(length) + sizeof(unsigned short) * 2));
 				
 				
-				printf("received [%d](%d) [%s]\n",command ,length ,contextBuffer);
-				*/
+				printf("received %d bytes [%d](%d) [%s]\n", bytes_read, command ,length ,contextBuffer);
+				
 				
 			}
         }

@@ -2097,3 +2097,10 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	decoder和switch sound都寫了，接下來要寫各種sample channel，有Repeat和ABcut
 	接下來應該要先測藍芽手機連線
 	
+9/22
+	想要測量bass audio播放音效的延遲多久，但是因為bass讀取播放秒數是每10ms更新一次，所以不太準，只知道延遲不會超過5ms
+	
+time after play(us):15461, real play time:9977.32
+time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
+
+	不管怎樣就是沒辦法用手機丟訊息到pi
