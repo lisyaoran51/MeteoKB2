@@ -160,12 +160,19 @@ int main()
 				unsigned long command = 0x0;
 				memcpy(&command, buf, sizeof(command));
 				
-				printf("command: %d\n", command);
+				printf("command: %X\n", command);
 				
 				unsigned short length;
 				memcpy(&length, buf + sizeof(command), sizeof(length));
 				
-				printf("length: %d\n", length);
+				printf("length: %X\n", length);
+				
+				int i;
+				for(i = 0; i < bytes_read; i++){
+					printf(" %2X", buf[i]);
+					if(i == 16)
+						printf("\n");
+				}
 				
 				
 				memset(contextBuffer, 0, sizeof(contextBuffer));
