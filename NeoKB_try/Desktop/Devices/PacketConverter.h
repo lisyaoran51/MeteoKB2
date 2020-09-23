@@ -23,6 +23,15 @@ namespace Devices{
 		AckFile,
 	};
 
+	enum class PacketStatus {
+		None,
+		Fine,
+		Overlength,
+		Underlength,
+		OutOfBound,
+		Damaged,
+	};
+
 
 	template<typename T>
 	class PacketConverter {
@@ -44,13 +53,19 @@ namespace Devices{
 			return this;
 		}
 
+		virtual int SplitPacket(char* bufferIn, int bytesRead, char** packets, int* packerLengths) = 0;
+
+		virtual PacketStatus CheckPacketStatus(char* packet, int length) = 0;
+
 		virtual PacketType CheckPacketType(char* buffer, int size) = 0;
 
 		virtual BluetoothCommand* ConvertToBluetoothCommand(char* buffer, int size) = 0;
 
 		virtual BluetoothCommand* ConvertToBluetoothCommand(BluetoothMessage* bluetoothMessage) = 0;
 
-		virtual int ConvertToByteArray(BluetoothCommand* bluetoothCommand, char* buffer, int bufferMaxSize) = 0;
+		virtual int GetCountOfPacket(BluetoothCommand* bluetoothCommand) = 0;
+
+		virtual int ConvertToByteArray(BluetoothCommand* bluetoothCommand, int packetOrder, char* buffer, int bufferMaxSize) = 0;
 
 		virtual BluetoothCommand* ConvertToFile(char* buffer, int size) = 0;
 

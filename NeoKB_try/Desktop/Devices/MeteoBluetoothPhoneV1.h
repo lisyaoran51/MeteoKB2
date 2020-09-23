@@ -38,7 +38,7 @@ namespace Devices {
 
 		char bufferIn[32768] = { 0 };
 
-		char bufferOut[32768] = { 0 };
+		char bufferOut[1024] = { 0 };
 
 		bool lastRunReceived = false;
 
@@ -126,6 +126,9 @@ namespace Devices {
 		int writeBluetooth();
 
 		int pushBluetoothState(BluetoothCommand* btCommand);
+
+		int handleNewPacket(char* packet, int length);
+
 	};
 
 

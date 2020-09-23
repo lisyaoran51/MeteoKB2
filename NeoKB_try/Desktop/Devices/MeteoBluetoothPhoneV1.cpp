@@ -96,31 +96,25 @@ int MeteoBluetoothPhoneV1::readBluetooth()
 	if (bytes_read > 0) {
 		lastRunReceived = true;
 
-		PacketType packetType = packetConverter->CheckPacketType(bufferIn, bytes_read);
+		char** packets = nullptr;
+		int* packetLengths = nullptr;
 
-		if (packetType == PacketType::Json) {
+		int packetCount = packetConverter->SplitPacket(bufferIn, bytes_read, packets, packetLengths);
 
-			BluetoothCommand* btCommand = packetConverter->ConvertToBluetoothCommand(bufferIn, bytes_read);
+		for (int i = 0; i < packetCount; i++) {
 
-			// TODO:檢查是不是傳送音色包，是的話要再converter裡面記錄音色包資料
+			PacketStatus packetStatus = packetConverter->CheckPacketStatus(packets[i], packetLengths[i]);
 
-			if (packetConverter->CheckIsWrtieFileFinishCommand(btCommand)) {
-				BluetoothCommand* returnCommand = packetConverter->FinishWriteFile(btCommand);
-				outputMessages.push_back(dynamic_cast<MeteoBluetoothCommand*>(returnCommand));
-				// 讓sm manager把新的sm檔寫入sm info裡面
-				onWriteSmFileSuccess.Trigger(returnCommand->GetContext()["FileName"].get<string>());
+			if (packetStatus == PacketStatus::Fine) {
+				handleNewPacket(packets[i], packetLengths[i]);
 			}
-			// TODO:回傳收到，有時是這邊回傳，有時是其他物件回傳
-
-			if (btCommand != nullptr)
-				pushBluetoothState(btCommand);
+			else {
+				// 處理錯誤的封包
+			}
 		}
-		else if (packetType == PacketType::File) {
 
-			packetConverter->ConvertToFile(bufferIn, bytes_read);
-
-			// TODO:回傳收到
-		}
+		// delete packet
+		// delete packetLengths
 
 	}
 	else
@@ -139,11 +133,17 @@ int MeteoBluetoothPhoneV1::writeBluetooth()
 	if (outputMessages.size() > 0) {
 
 		for (int i = 0; i < outputMessages.size(); i++) {
-			int bytes_write = packetConverter->ConvertToByteArray(outputMessages[i], bufferOut, 32768);
 
-			write(client, bufferOut, bytes_write);
+			int packetCount = packetConverter->GetCountOfPacket(outputMessages[i]);
 
-			memset(bufferOut, 0, sizeof(bufferOut));
+			for (int j = 0; j < packetCount; j++) {
+
+				int bytes_write = packetConverter->ConvertToByteArray(outputMessages[i], j, bufferOut, 1024);
+
+				write(client, bufferOut, bytes_write);
+
+				memset(bufferOut, 0, sizeof(bufferOut));
+			}
 		}
 
 		lastRunSended = true;
@@ -160,6 +160,42 @@ int MeteoBluetoothPhoneV1::pushBluetoothState(BluetoothCommand * btCommand)
 	unique_lock<mutex> uLock(bluetoothStateMutex);
 
 	bluetoothState->GetBluetoothState()->AddCommand(btCommand);
+
+	return 0;
+}
+
+int MeteoBluetoothPhoneV1::handleNewPacket(char * packet, int length)
+{
+
+	PacketType packetType = packetConverter->CheckPacketType(packet, length);
+
+	if (packetType == PacketType::Json) {
+
+		BluetoothCommand* btCommand = packetConverter->ConvertToBluetoothCommand(packet, length);
+
+		// TODO:檢查是不是傳送音色包，是的話要再converter裡面記錄音色包資料
+
+		if (packetConverter->CheckIsWrtieFileFinishCommand(btCommand)) {
+			BluetoothCommand* returnCommand = packetConverter->FinishWriteFile(btCommand);
+			outputMessages.push_back(dynamic_cast<MeteoBluetoothCommand*>(returnCommand));
+			// 讓sm manager把新的sm檔寫入sm info裡面
+			onWriteSmFileSuccess.Trigger(returnCommand->GetContext()["FileName"].get<string>());
+		}
+		// TODO:回傳收到，有時是這邊回傳，有時是其他物件回傳
+
+		if (btCommand != nullptr)
+			pushBluetoothState(btCommand);
+	}
+	else if (packetType == PacketType::File) {
+
+		packetConverter->ConvertToFile(packet, length);
+
+		// TODO:回傳收到
+	}
+	else if (packetType == PacketType::None) {
+		// 封包壞掉，直接丟掉
+		// packetConverter->CleanBuffer();
+	}
 
 	return 0;
 }

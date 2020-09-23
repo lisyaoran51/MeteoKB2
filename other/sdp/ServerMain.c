@@ -169,11 +169,11 @@ int main()
 				
 				int i;
 				for(i = 0; i < bytes_read; i++){
-					printf(" %2X", buf[i]);
-					if(i == 16)
+					printf(" %02X", buf[i]);
+					if((i+1) % 16 == 0)
 						printf("\n");
 				}
-				
+				printf("\n");
 				
 				memset(contextBuffer, 0, sizeof(contextBuffer));
 				memcpy(contextBuffer,

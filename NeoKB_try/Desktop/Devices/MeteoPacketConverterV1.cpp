@@ -430,14 +430,14 @@ BluetoothCommand * MeteoPacketConverterV1::ConvertToBluetoothCommand(char * buff
 			unsigned short length;
 			memcpy(&length, buffer + sizeof(command), sizeof(length));
 			
-			memset(contextBuffer, 0, sizeof(contextBuffer));
+			memset(contextBuffer, 0, sizeof(char) * 1024);
 			memcpy(contextBuffer,
 				buffer + sizeof(command) + sizeof(length) + sizeof(unsigned short) * 2,
 				length - (sizeof(command) + sizeof(length) + sizeof(unsigned short) * 2));
-			// Id:unisgned int
-			// Length:unsigned short 長度
-			// Category : unsigned short 類別
-			// Function : unsigned short 功能
+			// Id:unisgned int(4)
+			// Length:unsigned short 長度(2)
+			// Order : unsigned short 順序(2)
+			// Amount : unsigned short 封包數(2)
 			// Text : char[] 內文
 
 			btCommand->GetContext() = json::parse(contextBuffer);
@@ -457,6 +457,9 @@ MeteoBluetoothCommand * MeteoPacketConverterV1::ConvertToBluetoothCommand(Blueto
 
 int MeteoPacketConverterV1::ConvertToByteArray(BluetoothCommand * bluetoothCommand, char * buffer, int bufferMaxSize)
 {
+
+
+
 	// TODO: 丟出去的部分還沒寫
 	return 0;
 }

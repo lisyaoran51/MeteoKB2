@@ -2104,3 +2104,53 @@ time after play(us):15461, real play time:9977.32
 time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 
 	不管怎樣就是沒辦法用手機丟訊息到pi
+	
+	藍芽傳輸測完，要用大台電腦的my demo才有辦法從手機丟訊號到pi
+	c#的binary formatter不能用，要自己用byte的copyto功能，把struct一段一段轉成byte。不知道為什麼c#的String沒有結尾符號(\0)。所以要自己在字串結尾補一個值為10的byte
+	
+	藍芽app的source code在這
+	https://github.com/badranX/bt-lib
+	在這裡面再補上sdp的code就沒問題。部過pi那邊還要解決要用bluetooth之前要先下好指令的問題
+	sudo systemctl start hciuart
+	sudo bluetoothctl
+	discoverable on
+	pairable on
+	
+	只要下sudo hciconfig hciX piscan就可以，所以開機時要執行的指令有
+	sudo chmod 777 /var/run/sdp
+	sudo systemctl start hciuart
+	sudo hciconfig hci0 piscan
+	下完就可以連藍芽了
+	
+	新的規畫讓藍芽大小不會超過600byte，所以應該不會有同一個封包被切成兩段的問題，但是還是可能會兩個封包擠在一起
+	
+	
+	i2c: 
+	只要pi沒有read的話，記憶體通常不會亂掉
+	只要interrupt裡面沒東西，mcu就不會當掉
+	
+	memset會亂掉，0xA8會直接當掉
+	把0xA8裡面的 if(CircularLinkedList_PopHeadNonBlocking(outputBuffer, (char*)g_au8SlvSendData) > 0) 拿掉以後就不會當掉了
+	
+	0xB8也會亂掉
+	
+	重新測一次，前面測的有問題
+	
+	0x60 ok
+	
+	0x80 裡面的
+		CircularLinkedList_PushBack(inputBuffer, (char*)g_au8SlvReceiveData, g_u8SlvReceiveDataLen); 有問題，一執行記憶體就會亂掉
+		
+	0xA8 裡面的
+		if(CircularLinkedList_PopHeadNonBlocking(outputBuffer, (char*)g_au8SlvSendData) > 0) 有問題，一執行記憶體就會亂掉
+		
+	0xB8 ok
+		
+	0xC0 ok
+	
+	0xA0 ok
+	
+	所以問題都是出在CircularLinkedList上面
+	
+9/23
+	鮮血藍芽加解碼

@@ -26,7 +26,7 @@ namespace Devices{
 
 	private:
 
-		char contextBuffer[32768] = { 0 };
+		char contextBuffer[1024] = { 0 };
 
 		map<unsigned long, MeteoCommand> commandMap;
 
