@@ -20,6 +20,10 @@ namespace Devices{
 
 	class MeteoPacketConverterV1 : public PacketConverter<MeteoCommand> {
 
+		const int maxPacketLength = 538;
+
+		const int maxFileSegmentSize = 512;
+
 	protected:
 		enum class MeteoPacketConverterFileType;
 		class MeteoPacketConverterFileSegmentMap;
@@ -36,22 +40,34 @@ namespace Devices{
 
 		char* getFileSegment(char* buffer, int size);
 
-		int getFileSegmentNumber(char* buffer, int size);
+		int getFileSegmentOrder(char* buffer, int size);
+
+		int getFileSegmentCount(char* buffer, int size);
 
 		MeteoPacketConverterFileType getFileType(char* buffer, int size);
+
+		MeteoBluetoothCommand* createAckFileSegmentBluetoothCommand(char* buffer, int size);
 
 
 	public:
 
 		MeteoPacketConverterV1(Storage* s);
 
+		virtual int SplitPacket(char* bufferIn, int bytesRead, char** packets, int* packerLengths);
+
+		virtual PacketStatus CheckPacketStatus(char* packet, int length);
+
 		virtual PacketType CheckPacketType(char* buffer, int size);
+
+		virtual PacketType CheckCommandType(BluetoothCommand* bluetoothCommand);
 
 		virtual BluetoothCommand* ConvertToBluetoothCommand(char* buffer, int size);
 
 		virtual MeteoBluetoothCommand* ConvertToBluetoothCommand(BluetoothMessage* bluetoothMessage);
 
-		virtual int ConvertToByteArray(BluetoothCommand* bluetoothCommand, char* buffer, int bufferMaxSize);
+		virtual int GetCountOfPacket(BluetoothCommand* bluetoothCommand);
+
+		virtual int ConvertToByteArray(BluetoothCommand* bluetoothCommand, int packetOrder, char* buffer, int bufferMaxSize);
 		
 		/// <summary>
 		/// 回傳值就是收到訊息的ack訊息，直接傳回手機就好
@@ -60,7 +76,7 @@ namespace Devices{
 
 		virtual bool CheckIsFinishWriteCommand(BluetoothCommand* bluetoothCommand);
 
-		virtual MeteoBluetoothCommand* FinishWriteFile(BluetoothCommand* bluetoothCommand);
+		virtual BluetoothCommand* FinishWriteFile(BluetoothCommand* bluetoothCommand);
 
 		virtual bool CheckIsWrtieFileFinishCommand(BluetoothCommand* bluetoothCommand);
 
@@ -81,6 +97,8 @@ namespace Devices{
 
 		class MeteoPacketConverterFileSegmentMap {
 		public:
+			~MeteoPacketConverterFileSegmentMap();
+
 			string fileName;
 			map<int, pair<char*, int>> fileSegmentMap;
 			int segmentAmount;

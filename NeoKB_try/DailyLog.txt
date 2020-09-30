@@ -1995,7 +1995,7 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	
 8/31
 	缺的東西: mcu、ruleset info(ok)、未進入遊戲的移調(ok)、琴音分為全長和AB段、琴音切換、wifi、daemon、重播存檔、OS設定、平移會lag、換上新音色、遊戲開始前倒數3秒(ok)、刪除所有memory leak
-				遊戲開始前設定mod(ok)、遊戲開始時改速度(ok)、手動踏板modifier、紀錄每個modifier到藍芽架構裡、me555、測試藍芽傳送
+				遊戲開始前設定mod(ok)、遊戲開始時改速度(ok)、手動踏板modifier、紀錄每個modifier到藍芽架構裡、me555、測試藍芽傳送、關機
 	
 9/1
 	找到mcu輸出uart debug資料的方法: 在project裡面DEBUG_ENABLE_SEMIHOST=1，才能收到uart訊號
@@ -2154,3 +2154,13 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 	
 9/23
 	鮮血藍芽加解碼
+	
+9/26
+	read bluetooth寫完了
+	
+9/29
+	要寫write bluetooth
+	寫到檢查重傳
+	
+9/30
+	寫完write bluetooth

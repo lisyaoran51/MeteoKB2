@@ -2,6 +2,11 @@
 #define METEO_BLUETOOTH_COMMAND_H
 
 
+#ifndef FIRMWARE_VERSION
+#define FIRMWARE_VERSION 0x0
+#endif
+
+
 #include "../../../Framework/Input/Commands/BluetoothCommand.h"
 
 
@@ -21,6 +26,8 @@ namespace Commands{
 		MeteoBluetoothCommand(MeteoCommand c, json text);
 
 		MeteoBluetoothCommand(MeteoCommand c);
+
+		unsigned int firmwareVersion = FIRMWARE_VERSION;
 
 	};
 

@@ -68,6 +68,7 @@
     <ClCompile Include="Framework\Timing\ThrottledFramedClock.cpp" />
     <ClCompile Include="Framework\Timing\TimeController.cpp" />
     <ClCompile Include="Games\Configurations\MeteoConfigManager.cpp" />
+    <ClCompile Include="Games\Input\Commands\MeteoAckFileBluetoothCommand.cpp" />
     <ClCompile Include="Games\Input\Commands\MeteoBluetoothCommand.cpp" />
     <ClCompile Include="Games\MeteoGame.cpp" />
     <ClCompile Include="Games\Graphic\Renderer\MapAlgorithm\HardwareMapAlgorithm.cpp">
@@ -77,6 +78,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Games\MeteoGameBase.cpp" />
+    <ClCompile Include="Games\Output\Bluetooths\Commands\MeteoOutputFileBluetoothCommand.cpp" />
     <ClCompile Include="Games\Output\Bluetooths\MeteoBluetoothMessage.cpp" />
     <ClCompile Include="Games\Output\Bluetooths\MeteoBluetoothOutputer.cpp" />
     <ClCompile Include="Games\Output\Bluetooths\MeteoContextBluetoothMessage.cpp" />
@@ -398,10 +400,12 @@
     <ClInclude Include="Games\Graphic\Renderer\MapAlgorithm\HardwareMapAlgorithm.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="Games\Input\Commands\MeteoAckFileBluetoothCommand.h" />
     <ClInclude Include="Games\Input\Commands\MeteoBluetoothCommand.h" />
     <ClInclude Include="Games\Input\RulesetInputManager.h" />
     <ClInclude Include="Games\MeteoGame.h" />
     <ClInclude Include="Games\MeteoGameBase.h" />
+    <ClInclude Include="Games\Output\Bluetooths\Commands\MeteoOutputFileBluetoothCommand.h" />
     <ClInclude Include="Games\Output\Bluetooths\MeteoBluetoothMessage.h" />
     <ClInclude Include="Games\Output\Bluetooths\MeteoBluetoothOutputer.h" />
     <ClInclude Include="Games\Output\Bluetooths\MeteoContextBluetoothMessage.h" />

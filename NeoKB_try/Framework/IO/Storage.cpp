@@ -21,8 +21,9 @@ string Storage::GetUsableDirectoryPathFor(string directoryPath, bool createIfNot
 {
 	string resolvedPath = basePath;
 
-	if(baseName != "")
-		basePath += "/"s + baseName;
+	
+	//if(baseName != "")
+	//	basePath += "/"s + baseName;
 
 	if (subDirectory != "")
 		resolvedPath += "/"s + subDirectory;
@@ -45,8 +46,8 @@ string Storage::GetUsableFilePathFor(string filePath, bool createIfNotExist)
 {
 	string resolvedPath = basePath;
 
-	if (baseName != "")
-		basePath += "/"s + baseName;
+	//if (baseName != "")
+	//	basePath += "/"s + baseName;
 
 	if (subDirectory != "")
 		resolvedPath += "/"s + subDirectory;

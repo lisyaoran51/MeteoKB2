@@ -1,46 +1,97 @@
 #include "MeteoPacketConverterV1.h"
 
 #include "../../Util/Log.h"
+#include "../../Games/Output/Bluetooths/Commands/MeteoOutputFileBluetoothCommand.h"
+#include "../../Games/Input/Commands/MeteoAckFileBluetoothCommand.h"
 
 
 using namespace Desktop::Devices;
 using namespace Util;
+using namespace Games::Output::Bluetooths::Commands;
+using namespace Games::Input::Commands;
 
 
 string MeteoPacketConverterV1::getFileName(char * buffer, int size)
 {
-	// TODO: 還沒寫
-	LOG(LogLevel::Error) << "MeteoPacketConverterV1::getFileName() : not implemented.";
-	return string();
+
+	char name[17] = { 0 };
+	memcpy(name, buffer + sizeof(unsigned long) + sizeof(unsigned short), sizeof(char) * 16);
+
+	for (int i = 0; i < 17; i++) {
+		if (name[i] == 0x0) {
+			name[i] = '\0';
+			break;
+		}
+	}
+
+	return string(name);
 }
 
 int MeteoPacketConverterV1::getFileSize(char * buffer, int size)
 {
+	unsigned short length;
+	memcpy(&length, buffer + sizeof(unsigned long), sizeof(unsigned short));
 
-	// TODO: 還沒寫
-	LOG(LogLevel::Error) << "MeteoPacketConverterV1::getFileSize() : not implemented.";
-	return 0;
+	int fileSize = length - sizeof(unsigned long) + sizeof(unsigned short) + sizeof(char) * 16 + sizeof(unsigned short) * 2;
+
+	return fileSize;
 }
 
 char * MeteoPacketConverterV1::getFileSegment(char * buffer, int size)
 {
-	// TODO: 還沒寫
-	LOG(LogLevel::Error) << "MeteoPacketConverterV1::getFileSegment() : not implemented.";
-	return nullptr;
+	int fileSegmentSize = getFileSize(buffer, size);
+
+	if (fileSegmentSize < 0 && fileSegmentSize > maxFileSegmentSize) {
+		LOG(LogLevel::Error) << "MeteoPacketConverterV1::getFileSegment() : wrong file segment size [" << fileSegmentSize << "].";
+		return nullptr;
+	}
+
+	char* fileSegment = new char[fileSegmentSize];
+
+	memcpy(fileSegment, 
+		   buffer + sizeof(unsigned long) + sizeof(unsigned short) + sizeof(char) * 16 + sizeof(unsigned short) * 2, 
+		   sizeof(char) * fileSegmentSize);
+
+
+
+	return fileSegment;
 }
 
-int MeteoPacketConverterV1::getFileSegmentNumber(char * buffer, int size)
+int MeteoPacketConverterV1::getFileSegmentOrder(char * buffer, int size)
 {
-	// TODO: 還沒寫
-	LOG(LogLevel::Error) << "MeteoPacketConverterV1::getFileSegmentNumber() : not implemented.";
-	return 0;
+	unsigned short fileSegmentNumber;
+
+	memcpy(&fileSegmentNumber, buffer + sizeof(unsigned long) + sizeof(unsigned short) + sizeof(char) * 16, sizeof(unsigned short));
+
+	return fileSegmentNumber;
+}
+
+int MeteoPacketConverterV1::getFileSegmentCount(char * buffer, int size)
+{
+	unsigned short fileSegmentCount;
+
+	memcpy(&fileSegmentCount, buffer + sizeof(unsigned long) + sizeof(unsigned short) + sizeof(char) * 16 + sizeof(unsigned short), sizeof(unsigned short));
+
+	return fileSegmentCount;
 }
 
 MeteoPacketConverterV1::MeteoPacketConverterFileType MeteoPacketConverterV1::getFileType(char * buffer, int size)
 {
-	// TODO: 還沒寫
-	LOG(LogLevel::Error) << "MeteoPacketConverterV1::getFileType() : not implemented.";
-	return MeteoPacketConverterFileType();
+	// TODO: 之後要加其他檔案類型
+	return MeteoPacketConverterFileType::Sheetmusic;
+}
+
+MeteoBluetoothCommand * MeteoPacketConverterV1::createAckFileSegmentBluetoothCommand(char * buffer, int size)
+{
+	// 根據丟過來的packet建立回傳
+	MeteoBluetoothCommand* returnBluetoothCommand = new MeteoBluetoothCommand(MeteoCommand::AckSheetmusicFileSegment);
+
+	string fileName = getFileName(buffer, size);
+	int order = getFileSegmentOrder(buffer, size);
+	returnBluetoothCommand->GetContext()["FileName"] = fileName;
+	returnBluetoothCommand->GetContext()["Order"] = order;
+
+	return returnBluetoothCommand;
 }
 
 MeteoPacketConverterV1::MeteoPacketConverterV1(Storage* s)
@@ -220,8 +271,8 @@ MeteoPacketConverterV1::MeteoPacketConverterV1(Storage* s)
 	commandMap[0x000846] = MeteoCommand::FinishWritePlayRecord;
 	commandMap[0x110846] = MeteoCommand::AckFinishWritePlayRecord;
 
-	SetJsonPacketTypeCommand(MeteoCommand::ReadFirmwareVersion);
-	SetJsonPacketTypeCommand(MeteoCommand::ReturnFirmwareVersion);
+	SetReadFirmwareVersionPacketTypeCommand(MeteoCommand::ReadFirmwareVersion);
+	SetReturnFirmwareVersionPacketTypeCommand(MeteoCommand::ReturnFirmwareVersion);
 	SetJsonPacketTypeCommand(MeteoCommand::ReadFirmwareData);
 	SetJsonPacketTypeCommand(MeteoCommand::ReturnFirmwareData);
 	SetJsonPacketTypeCommand(MeteoCommand::ReadHardwareData);
@@ -276,17 +327,17 @@ MeteoPacketConverterV1::MeteoPacketConverterV1(Storage* s)
 
 	SetJsonPacketTypeCommand(MeteoCommand::NewFirmwareData);
 	SetJsonPacketTypeCommand(MeteoCommand::AckNewFirmwareData);
-	SetJsonPacketTypeCommand(MeteoCommand::NewFirmwareFileSegment);
-	SetJsonPacketTypeCommand(MeteoCommand::AckNewFirmwareFileSegment);
+	SetFilePacketTypeCommand(MeteoCommand::NewFirmwareFileSegment);
+	SetAckFilePacketTypeCommand(MeteoCommand::AckNewFirmwareFileSegment);
 	SetJsonPacketTypeCommand(MeteoCommand::RequestRewriteNewFirmwareFileSegment);
-	SetJsonPacketTypeCommand(MeteoCommand::RewriteNewFirmwareFileSegment);
-	SetJsonPacketTypeCommand(MeteoCommand::AckRewriteNewFirmwareFileSegment);
+	SetFilePacketTypeCommand(MeteoCommand::RewriteNewFirmwareFileSegment);
+	SetAckFilePacketTypeCommand(MeteoCommand::AckRewriteNewFirmwareFileSegment);
 	SetJsonPacketTypeCommand(MeteoCommand::FinishWriteNewFirmwareFile);
 	SetJsonPacketTypeCommand(MeteoCommand::AckFinishWriteNewFirmwareFile);
 	SetJsonPacketTypeCommand(MeteoCommand::NewInstrumentPackageData);
 	SetJsonPacketTypeCommand(MeteoCommand::AckNewInstrumentPackageData);
-	SetJsonPacketTypeCommand(MeteoCommand::NewInstrumentFileSegment);
-	SetJsonPacketTypeCommand(MeteoCommand::AckNewInstrumentFileSegment);
+	SetFilePacketTypeCommand(MeteoCommand::NewInstrumentFileSegment);
+	SetAckFilePacketTypeCommand(MeteoCommand::AckNewInstrumentFileSegment);
 	SetJsonPacketTypeCommand(MeteoCommand::FinishWriteNewInstrumentFile);
 	SetJsonPacketTypeCommand(MeteoCommand::AckFinishWriteNewInstrumentFile);
 	SetJsonPacketTypeCommand(MeteoCommand::FinishWriteNewInstrumentFilePackage);
@@ -295,14 +346,14 @@ MeteoPacketConverterV1::MeteoPacketConverterV1(Storage* s)
 	SetJsonPacketTypeCommand(MeteoCommand::RewriteNewInstrumentFile);
 	SetJsonPacketTypeCommand(MeteoCommand::AckRewriteNewInstrumentFile);
 	SetJsonPacketTypeCommand(MeteoCommand::RequestRewriteNewInstrumentFileSegment);
-	SetJsonPacketTypeCommand(MeteoCommand::RewriteNewInstrumentFileSegment);
-	SetJsonPacketTypeCommand(MeteoCommand::AckRewriteNewInstrumentFileSegment);
+	SetFilePacketTypeCommand(MeteoCommand::RewriteNewInstrumentFileSegment);
+	SetAckFilePacketTypeCommand(MeteoCommand::AckRewriteNewInstrumentFileSegment);
 
 	SetJsonPacketTypeCommand(MeteoCommand::ChangeHardwareLogLevel);
 	SetJsonPacketTypeCommand(MeteoCommand::AckChangeHardwareLogLevel);
 	SetJsonPacketTypeCommand(MeteoCommand::DownloadHardwareLog);
-	SetJsonPacketTypeCommand(MeteoCommand::HardwareLogFileSegment);
-	SetJsonPacketTypeCommand(MeteoCommand::AckHardwareLogFileSegment);
+	SetFilePacketTypeCommand(MeteoCommand::HardwareLogFileSegment);
+	SetAckFilePacketTypeCommand(MeteoCommand::AckHardwareLogFileSegment);
 	SetJsonPacketTypeCommand(MeteoCommand::DeleteHardwareLog);
 	SetJsonPacketTypeCommand(MeteoCommand::AckDeleteHardwareLog);
 	SetJsonPacketTypeCommand(MeteoCommand::SaveHardwareLog);
@@ -338,11 +389,11 @@ MeteoPacketConverterV1::MeteoPacketConverterV1(Storage* s)
 	SetJsonPacketTypeCommand(MeteoCommand::ReturnWriteGameConfiguration);
 	SetJsonPacketTypeCommand(MeteoCommand::SheetmusicData);
 	SetJsonPacketTypeCommand(MeteoCommand::AckSheetmusicData);
-	SetJsonPacketTypeCommand(MeteoCommand::SheetmusicFileSegment);
-	SetJsonPacketTypeCommand(MeteoCommand::AckSheetmusicFileSegment);
+	SetFilePacketTypeCommand(MeteoCommand::SheetmusicFileSegment);
+	SetAckFilePacketTypeCommand(MeteoCommand::AckSheetmusicFileSegment);
 	SetJsonPacketTypeCommand(MeteoCommand::RequestRewriteSheetmusicFileSegment);
-	SetJsonPacketTypeCommand(MeteoCommand::RewriteSheetmusicFileSegment);
-	SetJsonPacketTypeCommand(MeteoCommand::AckRewriteSheetmusicFileSegment);
+	SetFilePacketTypeCommand(MeteoCommand::RewriteSheetmusicFileSegment);
+	SetAckFilePacketTypeCommand(MeteoCommand::AckRewriteSheetmusicFileSegment);
 	SetJsonPacketTypeCommand(MeteoCommand::FinishWriteSheetmusic);
 	SetJsonPacketTypeCommand(MeteoCommand::AckFinishWriteSheetmusic);
 	SetJsonPacketTypeCommand(MeteoCommand::RequestLoadGame);
@@ -385,14 +436,104 @@ MeteoPacketConverterV1::MeteoPacketConverterV1(Storage* s)
 	SetJsonPacketTypeCommand(MeteoCommand::AckFinalScore);
 	SetJsonPacketTypeCommand(MeteoCommand::PlayRecordData);
 	SetJsonPacketTypeCommand(MeteoCommand::AckPlayRecordData);
-	SetJsonPacketTypeCommand(MeteoCommand::PlayRecordFileSegment);
-	SetJsonPacketTypeCommand(MeteoCommand::AckPlayRecordFileSegment);
+	SetFilePacketTypeCommand(MeteoCommand::PlayRecordFileSegment);
+	SetAckFilePacketTypeCommand(MeteoCommand::AckPlayRecordFileSegment);
 	SetJsonPacketTypeCommand(MeteoCommand::RequestRewritePlayRecordFileSegment);
-	SetJsonPacketTypeCommand(MeteoCommand::RewritePlayRecordFileSegment);
-	SetJsonPacketTypeCommand(MeteoCommand::AckRewritePlayRecordFileSegment);
+	SetFilePacketTypeCommand(MeteoCommand::RewritePlayRecordFileSegment);
+	SetAckFilePacketTypeCommand(MeteoCommand::AckRewritePlayRecordFileSegment);
 	SetJsonPacketTypeCommand(MeteoCommand::FinishWritePlayRecord);
 	SetJsonPacketTypeCommand(MeteoCommand::AckFinishWritePlayRecord);
 
+}
+
+int MeteoPacketConverterV1::SplitPacket(char * bufferIn, int bytesRead, char ** packets, int * packerLengths)
+{
+	int totalByteSplited = 0;
+
+	vector<char*> returnPackets;
+	vector<int> returnPacketLengths;
+
+	char* splitPosition = bufferIn;
+
+	while (totalByteSplited < bytesRead) {
+
+		unsigned long command;
+		unsigned short length = 0;
+		memcpy(&length, splitPosition + sizeof(command), sizeof(length));
+
+		/* 判斷封包是否損壞。最大封包長度為538，如果超過就代表已損壞 */
+		/* 判斷封包是否超過目前讀到的資料長度，超過的話可能在read的時候被切斷了 */
+		/* 封包過短，可能也已經整個壞掉了 */
+		if (length > maxPacketLength || 
+			length > bytesRead - totalByteSplited ||
+			(length < 10 && length != 8 && length != 4)) {
+
+			char* tempPacket = splitPosition;
+			returnPackets.push_back(splitPosition);
+			returnPacketLengths.push_back(bytesRead - totalByteSplited);
+			totalByteSplited = bytesRead;
+			continue;
+		}
+
+		char* tempPacket = splitPosition;
+		returnPackets.push_back(tempPacket);
+		returnPacketLengths.push_back(length);
+		splitPosition += length;
+		totalByteSplited += length;
+
+	}
+
+	/* 把切好的packet複製一份丟進回傳值裡 */
+	packets = new char*[returnPackets.size()];
+	packerLengths = new int[returnPackets.size()];
+	for (int i = 0; i < returnPackets.size(); i++) {
+
+		packets[i] = new char[returnPacketLengths[i]];
+		memcpy(packets[i], returnPackets[i], returnPacketLengths[i]);
+
+		packerLengths[i] = returnPacketLengths[i];
+	}
+
+	return returnPackets.size();
+}
+
+PacketStatus MeteoPacketConverterV1::CheckPacketStatus(char * packet, int length)
+{
+
+	unsigned long command;
+	unsigned short packetLength = 0;
+	memcpy(&packetLength, packet + sizeof(command), sizeof(packetLength));
+
+	/* 判斷封包是否損壞。最大封包長度為538，如果超過就代表已損壞 */
+	/* 判斷封包是否超過目前讀到的資料長度，超過的話可能在read的時候被切斷了 */
+	/* 封包過短，可能也已經整個壞掉了 */
+	if (packetLength > maxPacketLength) {
+		return PacketStatus::OutOfBound;
+	}
+
+	if (packetLength > length) {
+		return PacketStatus::Overlength;
+	}
+
+	if (packetLength < length) {
+		return PacketStatus::Underlength;
+	}
+
+	if (packetLength < 10 && packetLength != 8 && packetLength != 4) {
+		return PacketStatus::WrongLength;
+	}
+
+	map<unsigned long, MeteoCommand>::iterator iter;
+	iter = commandMap.find(command);
+	if (iter == commandMap.end()) {
+		return PacketStatus::WrongCommand;
+	}
+
+	// TODO: wrong json format
+
+	// TODO: damaged
+
+	return PacketStatus::Fine;
 }
 
 PacketType MeteoPacketConverterV1::CheckPacketType(char * buffer, int size)
@@ -406,10 +547,21 @@ PacketType MeteoPacketConverterV1::CheckPacketType(char * buffer, int size)
 
 		map<MeteoCommand, PacketType>::iterator iter2;
 		iter2 = CommandPacketTypeMap.find(commandMap[command]);
-		iter2 = CommandPacketTypeMap.find(commandMap[command]);
 		if(iter2 != CommandPacketTypeMap.end())
 			return CommandPacketTypeMap[commandMap[command]];
 	}
+
+	return PacketType::None;
+}
+
+PacketType Desktop::Devices::MeteoPacketConverterV1::CheckCommandType(BluetoothCommand * bluetoothCommand)
+{
+	MeteoCommand command = dynamic_cast<MeteoBluetoothCommand*>(bluetoothCommand)->GetCommand();
+	
+	map<MeteoCommand, PacketType>::iterator iter;
+	iter = CommandPacketTypeMap.find(command);
+	if (iter != CommandPacketTypeMap.end())
+		return CommandPacketTypeMap[command];
 
 	return PacketType::None;
 }
@@ -442,7 +594,26 @@ BluetoothCommand * MeteoPacketConverterV1::ConvertToBluetoothCommand(char * buff
 
 			btCommand->GetContext() = json::parse(contextBuffer);
 
+			// TODO: parse失敗要error handle
+
 			return btCommand;
+		}
+		else if (CheckPacketType(buffer, size) == PacketType::AckFile) {
+
+			MeteoAckFileBluetoothCommand* btCommand = new MeteoAckFileBluetoothCommand(commandMap[command]);
+
+			unsigned short length;
+			memcpy(&length, buffer + sizeof(command), sizeof(length));
+
+			string fileName = getFileName(buffer, size);
+
+			int order = getFileSegmentOrder(buffer, size);
+
+			btCommand->SetFileName(fileName);
+			btCommand->SetOrder(order);
+
+			return btCommand;
+
 		}
 	}
 
@@ -452,22 +623,40 @@ BluetoothCommand * MeteoPacketConverterV1::ConvertToBluetoothCommand(char * buff
 MeteoBluetoothCommand * MeteoPacketConverterV1::ConvertToBluetoothCommand(BluetoothMessage * bluetoothMessage)
 {
 	// TODO: 丟出去的部分還沒寫
+	// 好像不用血這段
+
+
+
 	return nullptr;
 }
 
-int MeteoPacketConverterV1::ConvertToByteArray(BluetoothCommand * bluetoothCommand, char * buffer, int bufferMaxSize)
+int MeteoPacketConverterV1::GetCountOfPacket(BluetoothCommand * bluetoothCommand)
 {
+	if (dynamic_cast<MeteoOutputFileBluetoothCommand*>(bluetoothCommand)) {
+		return dynamic_cast<MeteoOutputFileBluetoothCommand*>(bluetoothCommand)->GetFileSegmentCount();
+	}
+	else if (dynamic_cast<MeteoBluetoothCommand*>(bluetoothCommand)) {
+		// TODO: 暫時規定所有command大小不能超過538，就是一個packet的最大尺寸
+		return 1;
+	}
 
+	return -1;
+}
+
+int MeteoPacketConverterV1::ConvertToByteArray(BluetoothCommand * bluetoothCommand, int packetOrder, char * buffer, int bufferMaxSize)
+{
+	// 改成寫在bluetooth phone裡面了
 
 
 	// TODO: 丟出去的部分還沒寫
 	return 0;
 }
 
-MeteoBluetoothCommand * MeteoPacketConverterV1::FinishWriteFile(BluetoothCommand * bluetoothCommand)
+BluetoothCommand * MeteoPacketConverterV1::FinishWriteFile(BluetoothCommand * bluetoothCommand)
 {
 	if (!dynamic_cast<MeteoBluetoothCommand*>(bluetoothCommand))
 		return nullptr;
+
 
 	if (dynamic_cast<MeteoBluetoothCommand*>(bluetoothCommand)->GetCommand() == MeteoCommand::FinishWriteSheetmusic) {
 		string fileName = dynamic_cast<MeteoBluetoothCommand*>(bluetoothCommand)->GetContext()["FileName"];
@@ -483,14 +672,38 @@ MeteoBluetoothCommand * MeteoPacketConverterV1::FinishWriteFile(BluetoothCommand
 
 			fileMap.erase(fileName);
 
-			//return returnBluetoothCommand;
+			MeteoBluetoothCommand* returnBluetoothCommand = new MeteoBluetoothCommand(MeteoCommand::AckFinishWriteSheetmusic);
+			returnBluetoothCommand->GetContext()["FileName"] = fileName;
+
+			return returnBluetoothCommand;
+
 		}
 		else {
-			// 回傳需重傳的片段
-			//return returnBluetoothCommand;
-		}
-		
 
+			/* 建立訊息告訴手機沒收到的Segment是幾號 */
+			MeteoBluetoothCommand* returnBluetoothCommand = new MeteoBluetoothCommand(MeteoCommand::RequestRewriteSheetmusicFileSegment);
+			returnBluetoothCommand->GetContext()["FileName"] = fileName;
+
+			/* 檢查哪幾個segment沒有收到 */
+			map<int, pair<char*, int>>::iterator iter;
+			for (int i = 0; i < file->segmentAmount; i++) {
+				iter = file->fileSegmentMap.find(i);
+				if (iter == file->fileSegmentMap.end()) {
+
+					if (returnBluetoothCommand->GetContext()["Orders"].size() > 15) {
+						LOG(LogLevel::Fine) << "MeteoPacketConverterV1::FinishWriteFile() : sending rewrite reuqest overflow.";
+						continue;
+					}
+
+					json order;
+					order["Order"] = i;
+					returnBluetoothCommand->GetContext()["Orders"].push_back(order);
+
+				}
+			}
+
+			return returnBluetoothCommand;
+		}
 	}
 
 	return nullptr;
@@ -498,6 +711,12 @@ MeteoBluetoothCommand * MeteoPacketConverterV1::FinishWriteFile(BluetoothCommand
 
 bool MeteoPacketConverterV1::CheckIsWrtieFileFinishCommand(BluetoothCommand * bluetoothCommand)
 {
+	if (dynamic_cast<MeteoBluetoothCommand*>(bluetoothCommand)->GetCommand() == MeteoCommand::AckFinishWriteNewFirmwareFile ||
+		dynamic_cast<MeteoBluetoothCommand*>(bluetoothCommand)->GetCommand() == MeteoCommand::AckFinishWriteNewInstrumentFile ||
+		dynamic_cast<MeteoBluetoothCommand*>(bluetoothCommand)->GetCommand() == MeteoCommand::AckFinishWriteSheetmusic) {
+		return true;
+	}
+
 	return false;
 }
 
@@ -510,12 +729,21 @@ MeteoBluetoothCommand* MeteoPacketConverterV1::ConvertToFile(char * buffer, int 
 	iter = commandMap.find(command);
 	if (iter != commandMap.end()) {
 
+		LOG(LogLevel::Fine) << "MeteoPacketConverterV1::ConvertToFile() : converting [" << command << "] command file.";
+
 		if (CheckPacketType(buffer, size) == PacketType::File) {
 
 			string fileName = getFileName(buffer, size);
 			int fileSegmentSize = getFileSize(buffer, size);
+
+			if (fileSegmentSize < 0 || fileSegmentSize > maxFileSegmentSize) {
+				LOG(LogLevel::Error) << "MeteoPacketConverterV1::ConvertToFile() : wrong file size [" << fileSegmentSize << "].";
+				return nullptr;
+			}
+
 			char* fileSegment = getFileSegment(buffer, size);
-			int fileSegmentNumber = getFileSegmentNumber(buffer, size);
+			int fileSegmentNumber = getFileSegmentOrder(buffer, size);
+			int fileSegmentCount = getFileSegmentCount(buffer, size);
 			MeteoPacketConverterFileType fileType = getFileType(buffer, size);
 
 			MeteoPacketConverterFileSegmentMap* fileSegmentMap = nullptr;
@@ -528,19 +756,26 @@ MeteoBluetoothCommand* MeteoPacketConverterV1::ConvertToFile(char * buffer, int 
 			else {
 				fileSegmentMap = new MeteoPacketConverterFileSegmentMap();
 				fileSegmentMap->fileName = fileName;
-				fileSegmentMap->segmentAmount = fileSegmentSize;
+				fileSegmentMap->segmentAmount = fileSegmentCount;
 				fileSegmentMap->fileType = fileType;
 				fileMap[fileName] = fileSegmentMap;
 			}
 
+			/* 如果有重複的file segment，就把舊的刪掉補上新的 */
+			map<int, pair<char*, int>>::iterator iter3;
+			iter3 = fileSegmentMap->fileSegmentMap.find(fileSegmentNumber);
+			if (iter3 != fileSegmentMap->fileSegmentMap.end()) {
+				LOG(LogLevel::Error) << "MeteoPacketConverterV1::ConvertToFile() : duplicated file segment [" << fileSegmentNumber << "].";
+				delete fileSegmentMap->fileSegmentMap[fileSegmentNumber].first;
+			}
+
 			fileSegmentMap->fileSegmentMap[fileSegmentNumber] = pair<char*, int>(fileSegment, fileSegmentSize);
-			// TODO:檢查重複
-
-
-			return nullptr;
+			
+			return createAckFileSegmentBluetoothCommand(buffer, size);
 		}
 	}
 
+	LOG(LogLevel::Error) << "MeteoPacketConverterV1::ConvertToFile() : convert failed .";
 	return nullptr;
 }
 
@@ -554,7 +789,7 @@ int MeteoPacketConverterV1::writeFile(MeteoPacketConverterFileSegmentMap * file,
 	if (file->fileSegmentMap.size() < file->segmentAmount)
 		return -1;
 
-	fstream* fileStream = storage->GetStream(path + string("/") + file->fileName, false, true);
+	fstream* fileStream = storage->GetStream(path + string("/") + file->fileName, true, true);
 
 	for (int i = 0; i < file->fileSegmentMap.size(); i++) {
 
@@ -567,4 +802,15 @@ int MeteoPacketConverterV1::writeFile(MeteoPacketConverterFileSegmentMap * file,
 	delete fileStream;
 
 	return 0;
+}
+
+
+
+MeteoPacketConverterV1::MeteoPacketConverterFileSegmentMap::~MeteoPacketConverterFileSegmentMap()
+{
+	for (int i = 0; i < fileSegmentMap.size(); i++) {
+		delete[] fileSegmentMap[i].first;
+	}
+
+
 }

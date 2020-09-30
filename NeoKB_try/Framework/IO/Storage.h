@@ -76,12 +76,12 @@ namespace IO{
 		/// <summary>
 		/// 從系統預設的路徑上面再指定一個資料夾 前後都不能有斜線
 		/// </summary>
-		string baseName;
+		string baseName = "";
 
 		/// <summary>
 		/// 從系統預設的路徑 前後都不能有斜線
 		/// </summary>
-		string basePath;
+		string basePath = "";
 
 		Storage(string bName, string sDirectory = "");
 
@@ -91,6 +91,8 @@ namespace IO{
 		string subDirectory;
 
 		virtual string locateBasePath() = 0;
+
+		virtual string locateWriteBasePath() = 0;
 
 		/// <summary>
 		/// 前後都不能有斜線，會現在有的subdirectory下面再嘉一個subDirectory

@@ -18,6 +18,8 @@ namespace Devices{
 
 	enum class PacketType {
 		None,
+		ReadFirmwareVersion,
+		ReturnFirmwareVersion,
 		Json,
 		File,
 		AckFile,
@@ -26,10 +28,13 @@ namespace Devices{
 	enum class PacketStatus {
 		None,
 		Fine,
-		Overlength,
-		Underlength,
-		OutOfBound,
-		Damaged,
+		Overlength,		// 封包長度大於length
+		Underlength,	// 封包長度小於length
+		OutOfBound,		// length超過最大封包大小(538)
+		Damaged,		// 封包損壞
+		WrongCommand,	// 沒有這個command
+		WrongLength,	// 沒有這個封包長度 ex:0
+		WrongJsonFormat,// json格式錯誤
 	};
 
 
@@ -37,6 +42,16 @@ namespace Devices{
 	class PacketConverter {
 
 	public:
+
+		PacketConverter<T>* SetReadFirmwareVersionPacketTypeCommand(T command) {
+			CommandPacketTypeMap[command] = PacketType::ReadFirmwareVersion;
+			return this;
+		}
+
+		PacketConverter<T>* SetReturnFirmwareVersionPacketTypeCommand(T command) {
+			CommandPacketTypeMap[command] = PacketType::ReturnFirmwareVersion;
+			return this;
+		}
 
 		PacketConverter<T>* SetJsonPacketTypeCommand(T command) {
 			CommandPacketTypeMap[command] = PacketType::Json;
@@ -58,6 +73,8 @@ namespace Devices{
 		virtual PacketStatus CheckPacketStatus(char* packet, int length) = 0;
 
 		virtual PacketType CheckPacketType(char* buffer, int size) = 0;
+
+		virtual PacketType CheckCommandType(BluetoothCommand* bluetoothCommand) = 0;
 
 		virtual BluetoothCommand* ConvertToBluetoothCommand(char* buffer, int size) = 0;
 

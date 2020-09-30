@@ -817,6 +817,12 @@
     <Filter Include="來源檔案\Framework\Audio\Sample\Format">
       <UniqueIdentifier>{668ebd0f-9ec3-4d11-b094-cc669e3a8784}</UniqueIdentifier>
     </Filter>
+    <Filter Include="標頭檔\Games\Output\Bluetooths\Commands">
+      <UniqueIdentifier>{f376b68b-0b57-46ef-8485-9bbd03aaa6bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Games\Output\Bluetooths\Commands">
+      <UniqueIdentifier>{28661f84-b9d3-4df1-9edd-675cc7cc97cc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Games\Graphic\Renderer\renderer.cpp">
@@ -1709,6 +1715,12 @@
     </ClCompile>
     <ClCompile Include="Framework\Audio\Sample\Format\SimpleSoundBindingSetDecoderDecoder.cpp">
       <Filter>來源檔案\Framework\Audio\Sample\Format</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\Output\Bluetooths\Commands\MeteoOutputFileBluetoothCommand.cpp">
+      <Filter>來源檔案\Games\Output\Bluetooths\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\Input\Commands\MeteoAckFileBluetoothCommand.cpp">
+      <Filter>來源檔案\Framework\Input\Commands</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2841,6 +2853,12 @@
     </ClInclude>
     <ClInclude Include="Framework\Audio\Sample\TwoStageDualPlaybackBassSampleChannel.h">
       <Filter>標頭檔\Framework\Audio\Sample</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Output\Bluetooths\Commands\MeteoOutputFileBluetoothCommand.h">
+      <Filter>標頭檔\Games\Output\Bluetooths\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Input\Commands\MeteoAckFileBluetoothCommand.h">
+      <Filter>標頭檔\Games\Input\Commands</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

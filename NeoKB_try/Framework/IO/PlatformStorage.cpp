@@ -125,16 +125,21 @@ fstream * PlatformStorage::GetStream(string filePath, bool volitile, bool binary
 {
 
 	if (binary) {
-		return new fstream(filePath, ios::binary|ios::in|ios::out);
+		return new fstream(locateWriteBasePath() + "/" + filePath, ios::binary|ios::in|ios::out);
 	}
 
-	return new fstream(filePath);;
+	return new fstream(locateWriteBasePath() + "/" + filePath);;
 }
 
 string PlatformStorage::locateBasePath()
 {
 	//暫時先這樣，之後再改
 	return string(".");
+}
+
+string PlatformStorage::locateWriteBasePath()
+{
+	return string("~/temp");
 }
 
 Storage * PlatformStorage::clone(string newSubDirectory)

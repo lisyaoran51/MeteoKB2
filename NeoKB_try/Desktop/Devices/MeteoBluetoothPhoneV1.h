@@ -10,6 +10,7 @@
 
 #include "PacketConverter.h"
 #include "../../Games/Input/Commands/MeteoBluetoothCommand.h"
+#include "../../Games/Output/Bluetooths/Commands/MeteoOutputFileBluetoothCommand.h"
 #include "../../Framework/Input/InputState.h"
 #include <mutex>
 #include <vector>
@@ -20,6 +21,7 @@ using namespace Games::Input::Commands;
 using namespace Framework::Input;
 using namespace std;
 using namespace Util::DataStructure;
+using namespace Games::Output::Bluetooths::Commands;
 
 
 
@@ -43,6 +45,11 @@ namespace Devices {
 		bool lastRunReceived = false;
 
 		bool lastRunSended = false;
+
+		/// <summary>
+		/// 輸出檔案之後要等幾個回合才開始詢問收到了沒
+		/// </summary>
+		int OutputMessageToRewriteCountdown = 3;
 
 		sdp_session_t *register_service(int port);
 
@@ -109,6 +116,12 @@ namespace Devices {
 		PacketConverter<MeteoCommand>* packetConverter = nullptr;
 
 		vector<MeteoBluetoothCommand*> outputMessages;
+
+		/// <summary>
+		/// 看有沒有掉封包，掉了要再重傳。pair前面的int是等待迴圈數，會從3開始倒數，每write bluetooth時-1。扣到0的時候才開始rewrite。
+		/// 是用來避免手機還沒接收完封包，琴就一直傳訊息問手機收到沒，所以先等3輪再開始問。
+		/// </summary>
+		vector<pair<int, MeteoOutputFileBluetoothCommand*>> outputMessagesToRewrite;
 
 		ActionList<int, string> onStartWritingSmFile;
 		ActionList<int, string> onWriteSmFileSuccess;

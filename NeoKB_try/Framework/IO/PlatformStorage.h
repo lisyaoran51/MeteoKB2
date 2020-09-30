@@ -53,6 +53,8 @@ namespace IO{
 
 		virtual string locateBasePath();
 
+		virtual string locateWriteBasePath();
+
 		virtual Storage* clone(string newSubDirectory = "");
 
 
