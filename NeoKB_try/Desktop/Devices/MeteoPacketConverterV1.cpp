@@ -430,8 +430,10 @@ MeteoPacketConverterV1::MeteoPacketConverterV1(Storage* s)
 	SetJsonPacketTypeCommand(MeteoCommand::HardwareSwitchRepeatPracticeRound);
 	SetJsonPacketTypeCommand(MeteoCommand::HardwareTerminateGame);
 	SetJsonPacketTypeCommand(MeteoCommand::AckHardwareTerminateGame);
-	SetJsonPacketTypeCommand(MeteoCommand::AppTerminateGame);
-	SetJsonPacketTypeCommand(MeteoCommand::AckAppTerminateGame);
+	SetJsonPacketTypeCommand(MeteoCommand::AppQuitGame);
+	SetJsonPacketTypeCommand(MeteoCommand::AckAppQuitGame);
+	SetJsonPacketTypeCommand(MeteoCommand::AppRestartGame);
+	SetJsonPacketTypeCommand(MeteoCommand::AckAppRestartGame);
 	
 	SetJsonPacketTypeCommand(MeteoCommand::HardwareFinishGame);
 	SetJsonPacketTypeCommand(MeteoCommand::AckHardwareFinishGame);
