@@ -21,11 +21,11 @@ namespace Audio {
 		float tailLength = 10.f;
 
 		string GetStageAFileName() {
-			return fileName + string("_A_") + to_string(int(action));
+			return SoundBinding::fileName + string("_A_") + to_string(int(SoundBinding::action));
 		}
 
 		string GetStageBFileName() {
-			return fileName + string("_B_") + to_string(int(action));
+			return SoundBinding::fileName + string("_B_") + to_string(int(SoundBinding::action));
 		}
 
 	};
