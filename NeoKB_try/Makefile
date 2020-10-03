@@ -25,6 +25,7 @@ Games/Scheduler/Event/InstrumentEvents:Games/Scheduler/Event/InstrumentEvents/In
 Games/Scheduler/Event/PlayfieldEvents:Games/Scheduler/Event/PlayfieldEvents/PlayfieldControllers:\
 Games/Scheduler/Event/TimeEvents:Games/Scheduler/Event/TimeEvents/TimeControllerControllers:\
 Games/Sheetmusic:Games/Sheetmusic/Format:Games/Sheetmusic/Format/Parser:Games/Sheetmusic/IO:Games/Sheetmusic/Pattern:\
+Games/Timing:\
 Games/UI:\
 Games/Users:\
 \
@@ -78,6 +79,7 @@ INCLUDE = -IFramwork -IFramework/Allocation -IFramework/Allocation/Hierachal -IF
 -IGames/Scheduler/Event/PlayfieldEvents -IGames/Scheduler/Event/PlayfieldEvents/PlayfieldControllers \
 -IGames/Scheduler/Event/TimeEvents -IGames/Scheduler/Event/TimeEvents/TimeControllerControllers \
 -IGames/Sheetmusic -IGames/Sheetmusic/Format -IGames/Sheetmusic/Format/Parser -IGames/Sheetmusic/IO -IGames/Sheetmusic/Pattern \
+-IGames/Timing \
 -IGames/UI \
 -IGames/Users \
 \
@@ -167,6 +169,7 @@ GameEvent.o StartGameEvent.o StopSystemEvent.o SystemEvent.o SystemEventHandler.
 TimeEvent.o TimeEventProcessor.o TimeControllerController.o \
 ResourceStoreWorkingSm.o SheetmusicConverter.o SheetmusicManager.o SheetmusicMetadata.o SheetmusicPostprocessor.o SheetmusicStore.o WorkingSheetmusic.o \
 SimpleSmDecoder.o SmDecoder.o FileReader.o Pattern.o PatternGenerator.o \
+MeteoTimeController.o \
 SheetmusicSelectPanel.o VolumeController.o \
 \
 Instrument.o HasPitch.o MeteoPiano.o Piano.o PianoInputManager.o VirtualMeteoPiano.o CompositeMeteoPiano.o \
