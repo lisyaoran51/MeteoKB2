@@ -6,12 +6,14 @@
 #include "../Input/Commands/MeteoBluetoothCommand.h"
 #include "../Output/Bluetooths/MeteoContextBluetoothMessage.h"
 #include "../../Framework/Output/OutputManager.h"
+#include "../../Framework/Allocation/Hierachal/Cachable.h"
 
 
 using namespace Framework::Timing;
 using namespace Games::Input::Commands;
 using namespace Games::Output::Bluetooths;
 using namespace Framework::Output;
+using namespace Framework::Allocation::Hierachal;
 
 
 namespace Games {
