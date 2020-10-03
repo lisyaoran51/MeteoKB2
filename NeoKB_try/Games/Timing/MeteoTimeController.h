@@ -36,7 +36,7 @@ namespace Timing{
 	public:
 
 		MeteoTimeController() : RegisterType("MeteoTimeController") {
-			registerLoad(bind(static_cast<int(MeteoTimeController::*)(void)>(&MeteoTimeController::load), this));
+			registerLoad(bind(static_cast<int(MeteoTimeController<T>::*)(void)>(&MeteoTimeController<T>::load), this));
 		}
 
 		virtual int OnCommand(MeteoBluetoothCommand* command) {
