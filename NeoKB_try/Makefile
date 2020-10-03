@@ -172,7 +172,7 @@ SimpleSmDecoder.o SmDecoder.o FileReader.o Pattern.o PatternGenerator.o \
 SheetmusicSelectPanel.o VolumeController.o SoundSelectPanel.o \
 \
 Instrument.o HasPitch.o MeteoPiano.o Piano.o VirtualMeteoPiano.o CompositeMeteoPiano.o \
-SimpleSoundBinding.o SoundBinding.o SoundBindingSet.o PianoInputManager.o \
+SimpleSoundBindingSet.o SoundBinding.o SoundBindingSet.o PianoInputManager.o \
 \
 FileSystem.o ProgramInitializer.o \
 \
