@@ -144,7 +144,7 @@ namespace Audio {
 		vector<T*> items;
 
 		virtual int deleteItem(T* item) {
-			UnregisterItem();
+			UnregisterItem(item);
 
 			unique_lock<mutex> uLock(itemMutex);
 
