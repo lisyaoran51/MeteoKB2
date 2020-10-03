@@ -20,9 +20,9 @@ namespace Timing{
 	class MeteoTimeController : public TTimeController<T, MeteoBluetoothCommand> {
 
 		int load() {
-			OutputManager * o = GetCache<OutputManager>("OutputManager");
-			if (!o)
-				throw runtime_error("int MeteoTimeController::load() : OutputManager not found in cache.");
+			//OutputManager * o = GetCache<OutputManager>("OutputManager");
+			//if (!o)
+			//	throw runtime_error("int MeteoTimeController::load() : OutputManager not found in cache.");
 			
 			return load(o);
 		}
@@ -47,7 +47,7 @@ namespace Timing{
 				MeteoContextBluetoothMessage* ack = new MeteoContextBluetoothMessage(MeteoCommand::AckAppQuitGame);
 				outputManager->PushMessage(ack);
 
-				onQuitRequested.Trigger();
+				//onQuitRequested.Trigger();
 			}
 			else if (command->GetCommand() == MeteoCommand::AppRestartGame) {
 
@@ -55,7 +55,7 @@ namespace Timing{
 				MeteoContextBluetoothMessage* ack = new MeteoContextBluetoothMessage(MeteoCommand::AckAppRestartGame);
 				outputManager->PushMessage(ack);
 
-				onRetryRequested.Trigger();
+				//onRetryRequested.Trigger();
 			}
 
 			return 0;
