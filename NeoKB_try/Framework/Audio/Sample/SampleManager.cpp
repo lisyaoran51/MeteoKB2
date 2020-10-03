@@ -8,16 +8,18 @@
 #include "BassSampleChannelGenerator.h"
 #include "../../IO/Storage.h"
 #include "Format/SoundBindingSetDecoder.h"
+#include "../../IO/Api/ApiAccess.h"
 
 
 using namespace Framework::Audio::Samples;
 using namespace std;
 using namespace std::literals::string_literals;
 using namespace Framework::Audio::Samples::Format;
+using namespace Framework::IO::Api;
 
 
 
-SampleManager::SampleManager(CompositeResourceStore<char*>* rStore)
+SampleManager::SampleManager(CompositeResourceStore<char*>* rStore) : RegisterType("SampleManager")
 {
 	resourceStore = rStore;
 	sampleChannelGenerator = new BassSampleChannelGenerator(rStore);
@@ -160,9 +162,22 @@ int SampleManager::ClearSampleChannels()
 
 int SampleManager::SetupApiAccess(ApiAccess * aAccess)
 {
-	// TODO: 現在還沒有要寫下載新音色，所以不用作這個
-	LOG(LogLevel::Error) << "SampleManager::SetupApiAccess(): No use when no download sample.";
-	throw runtime_error("SampleManager::SetupApiAccess(): not implemented. "s);
+	
+
+	aAccess->AddOnWriteSoundFilePackageSuccess(dynamic_cast<MtoObject*>(this), [=](string fileName) {
+
+		// TODO: 現在還沒有要寫下載新音色，所以不用作這個
+		LOG(LogLevel::Error) << "SampleManager::SetupApiAccess(): No use when no download sample.";
+		throw runtime_error("SampleManager::SetupApiAccess(): not implemented. "s);
+
+		string documentName = fileName.substr(0, fileName.find(string("."), 0));
+
+		FileReader fileReader(documentName);
+
+		import(fileReader);
+
+		return 0;
+	});
 
 	return 0;
 }

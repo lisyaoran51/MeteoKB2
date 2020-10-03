@@ -35,7 +35,7 @@ namespace Framework {
 namespace Audio {
 namespace Samples {
 
-	class SampleManager : public AudioCollectionManager<SampleChannel> {
+	class SampleManager : public AudioCollectionManager<SampleChannel> , public MtoObject{
 
 
 		ApiAccess* apiAccess = nullptr;
