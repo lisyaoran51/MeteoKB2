@@ -53,7 +53,8 @@ SampleChannel * BassSampleChannelGenerator::GenerateSampleChannel(SoundBinding *
 		if (path != "") {
 
 			Sample* sample = new BassSample((char*)path.c_str());
-			sampleChannel = new RepeatDualPlaybackBassSampleChannel(sample, repeatSoundBinding->tailLength);
+			// TODO: 還沒寫好，寫好再來改
+			//sampleChannel = new RepeatDualPlaybackBassSampleChannel(sample, repeatSoundBinding->tailLength);
 
 			LOG(LogLevel::Debug) << "SampleManager::GetSampleChannel() : repeat sample file path found [" << soundBinding->GetFileName() << "].";
 
@@ -75,7 +76,8 @@ SampleChannel * BassSampleChannelGenerator::GenerateSampleChannel(SoundBinding *
 
 			Sample* sampleA = new BassSample((char*)pathA.c_str());
 			Sample* sampleB = new BassSample((char*)pathB.c_str());
-			sampleChannel = new TwoStageDualPlaybackBassSampleChannel(sampleA, sampleB, twoStageSoundBinding->switchPoint, twoStageSoundBinding->tailLength);
+			// TODO: 還沒寫好，寫好再來改
+			//sampleChannel = new TwoStageDualPlaybackBassSampleChannel(sampleA, sampleB, twoStageSoundBinding->switchPoint, twoStageSoundBinding->tailLength);
 
 			LOG(LogLevel::Debug) << "SampleManager::GetSampleChannel() : two stage sample file path found [" << soundBinding->GetFileName() << "].";
 
