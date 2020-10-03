@@ -204,6 +204,11 @@ int SampleManager::ImportFromStable()
 	return 0;
 }
 
+vector<SoundBindingSet*>* SampleManager::GetSoundBindingSets()
+{
+	return soundBindingSets;
+}
+
 vector<SoundBindingSet*>* SampleManager::import(FileReader & fileReader)
 {
 	// osu的寫法是一個beatmap會有一組set，回傳一組set丟進store李，但是我們的設計沒有需要set，一個普就是一個普，一個資料夾裡應該部會有超過一個普
