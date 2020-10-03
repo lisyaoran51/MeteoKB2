@@ -20,10 +20,10 @@ RepeatSoundBindingSet::RepeatSoundBindingSet(string fName, float tlength): TSoun
 
 string RepeatSoundBindingSet::GetFileName(Pitch p)
 {
-	return fileName + string("_") + to_string(int(p));
+	return SoundBindingSet::fileName + string("_") + to_string(int(p));
 }
 
 RepeatSoundBinding<Pitch>* RepeatSoundBindingSet::GetSoundBinding(Pitch p)
 {
-	return new RepeatSoundBinding<Pitch>(fileName, p, tailLength);
+	return new RepeatSoundBinding<Pitch>(SoundBindingSet::fileName, p, tailLength);
 }

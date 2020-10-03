@@ -21,20 +21,20 @@ TwoStageSoundBindingSet::TwoStageSoundBindingSet(string fName, float sPoint, flo
 
 string TwoStageSoundBindingSet::GetFileName(Pitch p)
 {
-	return "";
+	return SoundBindingSet::fileName + string("_") + to_string(int(p));
 }
 
 TwoStageSoundBinding<Pitch>* TwoStageSoundBindingSet::GetSoundBinding(Pitch p)
 {
-	return new TwoStageSoundBinding<Pitch>(fileName, p, switchPoint, tailLength);
+	return new TwoStageSoundBinding<Pitch>(SoundBindingSet::fileName, p, switchPoint, tailLength);
 }
 
 string TwoStageSoundBindingSet::GetStageAFileName(Pitch p)
 {
-	return fileName + string("_A_") + to_string(int(p));
+	return SoundBindingSet::fileName + string("_A_") + to_string(int(p));
 }
 
 string TwoStageSoundBindingSet::GetStageBFileName(Pitch p)
 {
-	return fileName + string("_B_") + to_string(int(p));
+	return SoundBindingSet::fileName + string("_B_") + to_string(int(p));
 }
