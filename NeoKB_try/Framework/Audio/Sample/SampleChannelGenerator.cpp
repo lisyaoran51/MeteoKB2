@@ -8,7 +8,7 @@ SampleChannelGenerator::SampleChannelGenerator() : RegisterType("SampleChannelGe
 {
 }
 
-SampleChannelGenerator::SampleChannelGenerator(CompositeResourceStore<char*>* rStore)
+SampleChannelGenerator::SampleChannelGenerator(CompositeResourceStore<char*>* rStore) : RegisterType("SampleChannelGenerator")
 {
 	resourceStore = rStore;
 }
