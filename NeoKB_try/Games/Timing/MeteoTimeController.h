@@ -24,7 +24,7 @@ namespace Timing{
 			//if (!o)
 			//	throw runtime_error("int MeteoTimeController::load() : OutputManager not found in cache.");
 			
-			return load(o);
+			return 0;//load(o);
 		}
 
 		int load(OutputManager* o) {
