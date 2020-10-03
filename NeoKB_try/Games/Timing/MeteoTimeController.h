@@ -6,14 +6,12 @@
 #include "../Input/Commands/MeteoBluetoothCommand.h"
 #include "../Output/Bluetooths/MeteoContextBluetoothMessage.h"
 #include "../../Framework/Output/OutputManager.h"
-#include "../../Framework/Allocation/Hierachal/Cachable.h"
 
 
 using namespace Framework::Timing;
 using namespace Games::Input::Commands;
 using namespace Games::Output::Bluetooths;
 using namespace Framework::Output;
-using namespace Framework::Allocation::Hierachal;
 
 
 namespace Games {
@@ -24,7 +22,7 @@ namespace Timing{
 	class MeteoTimeController : public TTimeController<T, MeteoBluetoothCommand> {
 
 		int load() {
-			OutputManager * o = this->GetCache<OutputManager>("OutputManager");
+			OutputManager * o = TimeController::GetCache<OutputManager>("OutputManager");
 			if (!o)
 				throw runtime_error("int MeteoTimeController::load() : OutputManager not found in cache.");
 			
@@ -51,7 +49,7 @@ namespace Timing{
 				MeteoContextBluetoothMessage* ack = new MeteoContextBluetoothMessage(MeteoCommand::AckAppQuitGame);
 				outputManager->PushMessage(ack);
 
-				this->onQuitRequested.Trigger();
+				TimeController::onQuitRequested.Trigger();
 			}
 			else if (command->GetCommand() == MeteoCommand::AppRestartGame) {
 
@@ -59,7 +57,7 @@ namespace Timing{
 				MeteoContextBluetoothMessage* ack = new MeteoContextBluetoothMessage(MeteoCommand::AckAppRestartGame);
 				outputManager->PushMessage(ack);
 
-				this->onRetryRequested.Trigger();
+				TimeController::onRetryRequested.Trigger();
 			}
 
 			return 0;
