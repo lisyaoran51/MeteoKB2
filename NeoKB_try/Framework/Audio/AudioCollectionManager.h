@@ -96,7 +96,7 @@ namespace Audio {
 			AudioComponent::Update();
 
 
-			LOG(LogLevel::Finest) << "AudioCollectionManager::Update() : this = [" << this << "], item size = [" << itemsSize << "].";
+			LOG(LogLevel::Finest) << "AudioCollectionManager::Update() : this = [" << this << "], item size = [" << items.size() << "].";
 
 			for (int i = 0; i < items.size(); i++) {
 
