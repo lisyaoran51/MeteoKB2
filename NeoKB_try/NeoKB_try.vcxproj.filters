@@ -1723,7 +1723,7 @@
       <Filter>來源檔案\Games\Output\Bluetooths\Commands</Filter>
     </ClCompile>
     <ClCompile Include="Games\Input\Commands\MeteoAckFileBluetoothCommand.cpp">
-      <Filter>來源檔案\Framework\Input\Commands</Filter>
+      <Filter>來源檔案\Games\Input\Commands</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

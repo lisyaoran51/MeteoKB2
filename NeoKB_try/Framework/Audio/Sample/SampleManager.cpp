@@ -157,6 +157,16 @@ int SampleManager::ClearSampleChannels()
 	return 0;
 }
 
+
+int SampleManager::SetupApiAccess(ApiAccess * aAccess)
+{
+	// TODO: 現在還沒有要寫下載新音色，所以不用作這個
+	LOG(LogLevel::Error) << "SampleManager::SetupApiAccess(): No use when no download sample.";
+	throw runtime_error("SampleManager::SetupApiAccess(): not implemented. "s);
+
+	return 0;
+}
+
 int SampleManager::Import(vector<string>* paths)
 {
 	// TODO : 送出initializing訊息

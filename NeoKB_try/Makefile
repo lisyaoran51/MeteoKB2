@@ -169,9 +169,10 @@ GameEvent.o StartGameEvent.o StopSystemEvent.o SystemEvent.o SystemEventHandler.
 TimeEvent.o TimeEventProcessor.o TimeControllerController.o \
 ResourceStoreWorkingSm.o SheetmusicConverter.o SheetmusicManager.o SheetmusicMetadata.o SheetmusicPostprocessor.o SheetmusicStore.o WorkingSheetmusic.o \
 SimpleSmDecoder.o SmDecoder.o FileReader.o Pattern.o PatternGenerator.o \
-SheetmusicSelectPanel.o VolumeController.o \
+SheetmusicSelectPanel.o VolumeController.o SoundSelectPanel.o \
 \
-Instrument.o HasPitch.o MeteoPiano.o Piano.o PianoInputManager.o VirtualMeteoPiano.o CompositeMeteoPiano.o \
+Instrument.o HasPitch.o MeteoPiano.o Piano.o VirtualMeteoPiano.o CompositeMeteoPiano.o \
+SimpleSoundBinding.o SoundBinding.o SoundBindingSet.o PianoInputManager.o \
 \
 FileSystem.o ProgramInitializer.o \
 \
