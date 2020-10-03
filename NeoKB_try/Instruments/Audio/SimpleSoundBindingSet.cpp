@@ -18,10 +18,10 @@ SimpleSoundBindingSet::SimpleSoundBindingSet(string fName) : TSoundBindingSet<Pi
 
 string SimpleSoundBindingSet::GetFileName(Pitch p)
 {
-	return SoundBindingSet::fileName + string("_") + to_string(int(p));
+	return fileName + string("_") + to_string(int(p));
 }
 
 SimpleSoundBinding<Pitch>* SimpleSoundBindingSet::GetSoundBinding(Pitch p)
 {
-	return new SimpleSoundBinding<Pitch>(SoundBindingSet::fileName, p);
+	return new SimpleSoundBinding<Pitch>(fileName, p);
 }
