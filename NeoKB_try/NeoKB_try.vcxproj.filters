@@ -823,6 +823,9 @@
     <Filter Include="來源檔案\Games\Output\Bluetooths\Commands">
       <UniqueIdentifier>{28661f84-b9d3-4df1-9edd-675cc7cc97cc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="標頭檔\Games\Timing">
+      <UniqueIdentifier>{461020f9-8ff4-40db-a8c0-77c1df9903f1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Games\Graphic\Renderer\renderer.cpp">
@@ -2859,6 +2862,9 @@
     </ClInclude>
     <ClInclude Include="Games\Input\Commands\MeteoAckFileBluetoothCommand.h">
       <Filter>標頭檔\Games\Input\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Timing\MeteoTimeController.h">
+      <Filter>標頭檔\Games\Timing</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

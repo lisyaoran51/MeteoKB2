@@ -242,6 +242,20 @@ int Player::onCompletion()
 	return 0;
 }
 
+int Player::onQuiting()
+{
+	LOG(LogLevel::Info) << "Player::onQuiting : quit game. go back to song select";
+	Exit();
+	return 0;
+}
+
+int Player::onRestarting()
+{
+	LOG(LogLevel::Info) << "Player::onRestarting : go back to player loader.";
+	Restart();
+	return 0;
+}
+
 int Player::onExiting(Scene * lastScene)
 {
 	return 0;

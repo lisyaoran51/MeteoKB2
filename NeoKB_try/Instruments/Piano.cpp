@@ -286,6 +286,9 @@ vector<KeyBinding*>* Piano::GetDefaultkeyBindings(int variant)
 
 int Piano::SwitchSoundBindings(TSoundBindingSet<Pitch>* sBindingSet)
 {
+
+	LOG(LogLevel::Debug) << "Piano::SwitchSoundBindings() : switch piano sound to [" << sBindingSet->fileName << "].";
+
 	if (sBindingSet == soundBindingSet) {
 
 		// output manager -> 藍芽回傳這是一樣的音色
@@ -305,6 +308,8 @@ int Piano::SwitchSoundBindings(TSoundBindingSet<Pitch>* sBindingSet)
 
 	/* 更新sound binding */
 	for (int i = 0; i < soundBindings.size(); i++) {
+
+		audioManager->GetSampleManager()->RemoveSampleChannel(soundBindings[i]);
 		delete soundBindings[i];
 	}
 	soundBindings.clear();
@@ -314,7 +319,7 @@ int Piano::SwitchSoundBindings(TSoundBindingSet<Pitch>* sBindingSet)
 	}
 
 	/* 重置smaple channel */
-	audioManager->GetSampleManager()->ClearSampleChannels();
+	//audioManager->GetSampleManager()->ClearSampleChannels();	// 不應該直接清空，有些sample可能不是樂器的，是其他音效
 
 	loadAndMapSamples();
 
@@ -361,6 +366,22 @@ int Piano::ControlSustainPedal(bool down)
 			}
 		}
 	}
+	return 0;
+}
+
+int Piano::resetState()
+{
+	map<PianoAction, bool>::iterator it;
+	for (it = isPressingMap.begin(); it != isPressingMap.end(); ++it) {
+		(*it).second = false;
+	}
+
+	map<PianoAction, SampleChannel*>::iterator it2;
+	for (it2 = getSamples()->begin(); it2 != getSamples()->end(); ++it2) {
+
+		(*it2).second->Stop();
+	}
+
 	return 0;
 }
 

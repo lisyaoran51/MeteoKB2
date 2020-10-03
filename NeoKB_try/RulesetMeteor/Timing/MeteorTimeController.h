@@ -1,12 +1,14 @@
 #ifndef METEOR_TIME_CONTROLLER_H
 #define METEOR_TIME_CONTROLLER_H
 
-#include "../../Framework/Timing/TimeController.h"
+
+#include "../../Games/Timing/MeteoTimeController.h"
 #include "../Input/MeteorInputManager.h"
 
 
 using namespace Meteor::Input;
 using namespace Framework::Timing;
+using namespace Games::Timing;
 
 
 namespace Meteor {
@@ -27,7 +29,7 @@ namespace Timing {
 		Practice
 	};
 
-	class MeteorTimeController : public TimeController {
+	class MeteorTimeController : public MeteoTimeController<MeteorAction> {
 
 		int load();
 

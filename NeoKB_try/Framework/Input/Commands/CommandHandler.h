@@ -17,6 +17,9 @@ namespace Commands{
 		virtual int OnCommand(T* command) = 0;
 
 	protected:
+
+		bool isCommandActive = true;
+
 	};
 
 

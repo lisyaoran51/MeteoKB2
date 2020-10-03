@@ -52,7 +52,7 @@ int PlayerLoader::onResuming(Scene * lastScene)
 		pushWhenLoaded();
 
 		return 0;
-	}, 100);
+	}, 0.5);
 	
 	return 0;
 }

@@ -41,6 +41,9 @@ namespace Audio {
 			return dynamic_cast<T>(action);
 		}
 		
+		virtual string GetFileName() {
+			return fileName;
+		}
 
 	};
 

@@ -100,9 +100,10 @@ int Scene::Resume(Scene * sourceScene)
 
 	DeleteChild(sourceScene);
 	//delete childScene;
-	ThreadMaster::GetInstance().AddObjectToDelete(childScene); //如果會race condition的話就要這樣改
+	ThreadMaster::GetInstance().AddObjectToDelete(sourceScene); //如果會race condition的話就要這樣改
 
-	childScene = nullptr;
+	if(sourceScene == childScene)
+		childScene = nullptr;
 
 	if (isValidForResume) {
 		isCurrentScene = true;
@@ -110,7 +111,7 @@ int Scene::Resume(Scene * sourceScene)
 		onResuming(sourceScene);
 	}
 	else {
-		ExitTo(sourceScene);
+		Exit();
 	}
 
 	return 0;
@@ -118,7 +119,7 @@ int Scene::Resume(Scene * sourceScene)
 
 int Scene::Exit()
 {
-	return ExitTo(nullptr);
+	return ExitTo(this);
 }
 
 int Scene::ExitTo(Scene * sourceScene)

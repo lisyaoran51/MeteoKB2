@@ -69,6 +69,18 @@ namespace Timing {
 
 		bool GetIsAllowSeek();
 
+		template<class _Type>
+		int AddOnRetry(_Type* callableObject, function<int()> callback, string name = "HandleRetryRequest") {
+			onRetryRequested.Add(callableObject, callback, name);
+			return 0;
+		}
+
+		template<class _Type>
+		int AddOnQuit(_Type* callableObject, function<int()> callback, string name = "HandleQuitRequest") {
+			onQuitRequested.Add(callableObject, callback, name);
+			return 0;
+		}
+
 		/* 暫時不寫這段，以後響到要怎麼寫再回來改
 		int ImportWorkingSm(WorkingSm* workingSm);
 		*/
@@ -113,7 +125,8 @@ namespace Timing {
 		/// </summary>
 		bool isWaitingFreeze = false;
 
-
+		ActionList<int> onRetryRequested;
+		ActionList<int> onQuitRequested;
 
 
 		/* 暫時不寫這段，以後響到要怎麼寫再回來改
@@ -136,8 +149,8 @@ namespace Timing {
 	/// <summary>
 	/// 其實這個不是scene，應該移到timing去
 	/// </summary>
-	template<typename T>
-	class TTimeController : public TimeController, public KeyBindingHandler<T> {
+	template<typename T, typename TCommand>
+	class TTimeController : public TimeController, public KeyBindingHandler<T>, public CommandHandler<TCommand> {
 
 		int load() {
 
@@ -166,6 +179,9 @@ namespace Timing {
 			return 0;
 		}
 
+		/// <summary>
+		/// 這段寫錯了，不要用
+		/// </summary>
 		virtual int OnButtonDown(T action) {
 			typename map<T, InputKey>::iterator it;
 			it = keyBindings.find(action);
@@ -192,6 +208,9 @@ namespace Timing {
 			return 0;
 		}
 
+		/// <summary>
+		/// 這段寫錯了，不要用
+		/// </summary>
 		virtual int OnKnobTurn(pair<T, int> action) {
 			if (keyBindings[action.first] == InputKey::SpeedKnob) {
 				SetRate(GetRate() + action.second);
@@ -217,6 +236,10 @@ namespace Timing {
 			return 0;
 		}
 
+		virtual int OnCommand(TCommand* command) {
+			return 0;
+		}
+
 	protected:
 
 
@@ -227,7 +250,7 @@ namespace Timing {
 		/// </summary>
 		virtual int LoadOnComplete() {
 
-			reloadMappings();
+			//reloadMappings();
 
 			return 0;
 		}
@@ -235,7 +258,7 @@ namespace Timing {
 		/// <summary>
 		/// 把input key和新的輸入結合一下
 		/// </summary>
-		virtual int reloadMappings() = 0;
+		//virtual int reloadMappings() = 0;
 
 
 	};

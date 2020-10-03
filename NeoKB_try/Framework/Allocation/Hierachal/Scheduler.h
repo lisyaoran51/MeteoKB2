@@ -52,6 +52,9 @@ namespace Hierachal {
 
 		int AddScheduledTask(ScheduledTask* task);
 
+		/// <summary>
+		/// timeUntilRun的單位是秒
+		/// </summary>
 		int AddDelayedTask(function<int(void)> task, double timeUntilRun, bool repeat = false);
 
 		int CancelDelayedTasks();

@@ -69,6 +69,8 @@ int MeteoGame::LoadOnComplete()
 	/* ------------ Sample manager載入音色的方式與sm manager相同 ------------ */
 	audioManager->GetSampleManager()->SetupApiAccess(apiAccess);
 
+	audioManager->GetSampleManager()->GetStableStorage = [=]() {return GetStableStorage(); };
+
 	audioManager->GetSampleManager()->ImportFromStable();
 
 

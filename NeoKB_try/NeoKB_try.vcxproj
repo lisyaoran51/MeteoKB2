@@ -587,6 +587,7 @@
     <ClInclude Include="Framework\Timing\SpeedAdjusters\SpeedAdjuster.h" />
     <ClInclude Include="Framework\Timing\StopwatchClock.h" />
     <ClInclude Include="Framework\Timing\ThrottledFramedClock.h" />
+    <ClInclude Include="Games\Timing\MeteoTimeController.h" />
     <ClInclude Include="Games\UI\SheetmusicSelectPanel.h" />
     <ClInclude Include="Games\UI\SoundSelectPanel.h" />
     <ClInclude Include="Games\UI\VolumeController.h" />

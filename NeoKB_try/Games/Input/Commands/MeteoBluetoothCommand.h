@@ -189,8 +189,10 @@ namespace Commands{
 		HardwareSwitchRepeatPracticeRound		,
 		HardwareTerminateGame					,
 		AckHardwareTerminateGame				,
-		AppTerminateGame						,
-		AckAppTerminateGame						,
+		AppQuitGame								,
+		AckAppQuitGame							,
+		AppRestartGame							,
+		AckAppRestartGame						,
 		// ¹CÀ¸µ²§ô
 		HardwareFinishGame						,
 		AckHardwareFinishGame					,

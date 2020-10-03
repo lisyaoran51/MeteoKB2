@@ -254,8 +254,11 @@ MeteoPacketConverterV1::MeteoPacketConverterV1(Storage* s)
 	commandMap[0x11081E] = MeteoCommand::HardwareSwitchRepeatPracticeRound;
 	commandMap[0x10080F] = MeteoCommand::HardwareTerminateGame;
 	commandMap[0x01081F] = MeteoCommand::AckHardwareTerminateGame;
-	commandMap[0x000820] = MeteoCommand::AppTerminateGame;
-	commandMap[0x110820] = MeteoCommand::AckAppTerminateGame;
+	commandMap[0x000820] = MeteoCommand::AppQuitGame;
+	commandMap[0x110820] = MeteoCommand::AckAppQuitGame;
+	commandMap[0x000821] = MeteoCommand::AppRestartGame;
+	commandMap[0x110821] = MeteoCommand::AckAppRestartGame;
+
 	
 	commandMap[0x100840] = MeteoCommand::HardwareFinishGame;
 	commandMap[0x010840] = MeteoCommand::AckHardwareFinishGame;

@@ -92,7 +92,20 @@ namespace Play {
 
 		float audioOffset = 0;
 
+		/// <summary>
+		/// 整個遊戲都結束了
+		/// </summary>
 		int onCompletion();
+
+		/// <summary>
+		/// 玩到一半不玩了
+		/// </summary>
+		int onQuiting();
+
+		/// <summary>
+		/// 重新開始
+		/// </summary>
+		int onRestarting();
 
 		/* --------Scene-------- */
 

@@ -113,6 +113,33 @@ int SampleManager::SetPlaybackAmount(int pAmount)
 	return 0;
 }
 
+int SampleManager::RemoveSampleChannel(string name)
+{
+	// TODO: 還沒寫
+	return 0;
+}
+
+int SampleManager::RemoveSampleChannel(SoundBinding * soundBinding)
+{
+	LOG(LogLevel::Debug) << "SampleManager::RemoveSampleChannel() : file [" << soundBinding->GetFileName() << "].";
+	map<string, SampleChannel*>::iterator it = sampleChannelCache.find(soundBinding->GetFileName());
+	if (it != sampleChannelCache.end()) {
+
+		SampleChannel* sampleChannel = (*it).second;
+		deleteItem(sampleChannel);
+		delete sampleChannel;
+		sampleChannelCache.erase(it);
+
+		LOG(LogLevel::Debug) << "SampleManager::RemoveSampleChannel() : file [" << soundBinding->GetFileName() << "] removed from sample cache.";
+
+	}
+	else {
+		LOG(LogLevel::Error) << "SampleManager::RemoveSampleChannel() : file [" << soundBinding->GetFileName() << "] not found in sample cache.";
+	}
+
+	return 0;
+}
+
 int SampleManager::ClearSampleChannels()
 {
 	/* 執行前必須暫停整個Sample系統 */

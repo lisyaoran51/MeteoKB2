@@ -17,6 +17,10 @@ namespace Audio {
 
 		}
 
+		virtual string GetFileName() {
+			return fileName + string("_") + to_string(action);
+		}
+
 	};
 
 }}
