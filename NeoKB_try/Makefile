@@ -134,7 +134,7 @@ Base.o Game.o \
 Cachable.o ChildAddable.o Container.o HasParent.o Loadable.o LoadStateHandler.o MtoObject.o Schedulable.o Scheduler.o Triggerable.o Updatable.o \
 AdjustableAudioComponent.o AudioComponent.o AudioManager.o \
 BassSample.o BassSampleChannel.o MultiPlaybackBassSampleChannel.o Sample.o SampleChannel.o MultiPlaybackSampleChannel.o DualPlaybackBassSampleChannel.o SampleManager.o \
-BassSampleChannelGenerator.o SimpleSoundBindingSetDecoder.o SoundBindingSetDecoder.o \
+SampleChannelGenerator.o BassSampleChannelGenerator.o SimpleSoundBindingSetDecoder.o SoundBindingSetDecoder.o \
 BassTrack.o RateSettableBassTrack.o Track.o TrackManager.o \
 ConfigManager.o FrameworkConfigManager.o \
 DatabaseContext.o DatabaseContextFactory.o DatabaseStore.o FakeMeteoDatabaseContext.o MeteoDatabaseContext.o ReadonlyCsvDatabaseContextFactory.o MemoryBasedDatabaseContextFactory.o \
