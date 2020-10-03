@@ -1716,14 +1716,14 @@
     <ClCompile Include="Framework\Audio\Sample\Format\SoundBindingSetDecoder.cpp">
       <Filter>來源檔案\Framework\Audio\Sample\Format</Filter>
     </ClCompile>
-    <ClCompile Include="Framework\Audio\Sample\Format\SimpleSoundBindingSetDecoderDecoder.cpp">
-      <Filter>來源檔案\Framework\Audio\Sample\Format</Filter>
-    </ClCompile>
     <ClCompile Include="Games\Output\Bluetooths\Commands\MeteoOutputFileBluetoothCommand.cpp">
       <Filter>來源檔案\Games\Output\Bluetooths\Commands</Filter>
     </ClCompile>
     <ClCompile Include="Games\Input\Commands\MeteoAckFileBluetoothCommand.cpp">
       <Filter>來源檔案\Games\Input\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Audio\Sample\Format\SimpleSoundBindingSetDecoder.cpp">
+      <Filter>來源檔案\Framework\Audio\Sample\Format</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

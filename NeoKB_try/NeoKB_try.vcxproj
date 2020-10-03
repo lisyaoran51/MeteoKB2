@@ -35,7 +35,7 @@
     <ClCompile Include="Desktop\Program.cpp" />
     <ClCompile Include="Framework\Audio\Sample\BassSampleChannelGenerator.cpp" />
     <ClCompile Include="Framework\Audio\Sample\DualPlaybackBassSampleChannel.cpp" />
-    <ClCompile Include="Framework\Audio\Sample\Format\SimpleSoundBindingSetDecoderDecoder.cpp" />
+    <ClCompile Include="Framework\Audio\Sample\Format\SimpleSoundBindingSetDecoder.cpp" />
     <ClCompile Include="Framework\Audio\Sample\Format\SoundBindingSetDecoder.cpp" />
     <ClCompile Include="Framework\Audio\Sample\InstrumentBassSampleChannel.cpp" />
     <ClCompile Include="Framework\Audio\Sample\MultiPlaybackBassSampleChannel.cpp" />
