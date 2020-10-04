@@ -241,6 +241,11 @@ SoundBindingSet * SampleManager::importToStorage(FileReader & fileReader)
 
 	sbsNames = fileReader.WhereEndWith(".sbs");
 
+	if (sbsNames->size() == 0) {
+		LOG(LogLevel::Debug) << "SampleManager::importToStorage(FileReader&) : no sound binding set found.";
+		return nullptr;
+	}
+
 	for (int i = 0; i < sbsNames->size(); i++) {
 
 		LOG(LogLevel::Finer) << "vector<SmInfo*>* SmManager::importToStorage(FileReader&) : Getting stream of [" << sbsNames->at(i) << "].";
