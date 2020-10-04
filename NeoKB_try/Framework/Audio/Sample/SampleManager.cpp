@@ -199,6 +199,7 @@ int SampleManager::ImportFromStable()
 	LOG(LogLevel::Info) << "SampleManager::ImportFromStable(): Start Import.";
 	Storage* stable = GetStableStorage();
 
+	LOG(LogLevel::Debug) << "SampleManager::ImportFromStable(): Find directory Resources/Samples.";
 	vector<string>* paths = stable->GetDirectories("Resources/Samples");
 	paths->push_back(stable->GetUsableDirectoryPathFor("Resources/Samples"));
 
