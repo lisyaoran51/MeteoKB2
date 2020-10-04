@@ -7,14 +7,14 @@
 #include "MultiPlaybackBassSampleChannel.h"
 #include "BassSampleChannelGenerator.h"
 #include "../../IO/Storage.h"
-#include "Format/SoundBindingSetDecoder.h"
+#include "../../../Instruments/Audio/Format/SimpleSoundBindingSetDecoder.h"
 #include "../../IO/Api/ApiAccess.h"
 
 
 using namespace Framework::Audio::Samples;
 using namespace std;
 using namespace std::literals::string_literals;
-using namespace Framework::Audio::Samples::Format;
+using namespace Instruments::Audio::Format;
 using namespace Framework::IO::Api;
 
 
