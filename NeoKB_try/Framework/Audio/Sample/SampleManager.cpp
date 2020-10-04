@@ -202,8 +202,6 @@ int SampleManager::ImportFromStable()
 	LOG(LogLevel::Debug) << "SampleManager::ImportFromStable(): Find directory Resources/Samples.";
 	vector<string>* paths = stable->GetDirectories("Resources/Samples");
 
-	LOG(LogLevel::Debug) << "SampleManager::ImportFromStable():sss." << paths;
-
 	paths->push_back(stable->GetUsableDirectoryPathFor("Resources/Samples"));
 
 	LOG(LogLevel::Info) << "SampleManager::ImportFromStable() : import paths ^^^" << [](vector<string>* p) {
