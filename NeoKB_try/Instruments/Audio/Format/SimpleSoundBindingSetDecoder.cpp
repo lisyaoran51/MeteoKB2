@@ -175,6 +175,6 @@ int SimpleSoundBindingSetDecoder::parseFile(fstream * stream, SoundBindingSet* s
 			
 		}
 	}
-
+	LOG(LogLevel::Fine) << "int SimpleSoundBindingSetDecoder::parseFile() : parsing file over.";
 	return 0;
 }
