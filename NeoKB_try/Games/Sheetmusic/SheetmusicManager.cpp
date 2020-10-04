@@ -152,7 +152,8 @@ vector<SmInfo*>* SmManager::import(FileReader & fileReader)
 	SmInfo* smInfo = importToStorage(fileStore, smStore, fileReader);
 
 	// TODO: 在修改db的時候應該要用lock mutex
-	smStore->Add(smInfo);
+	if(smInfo != nullptr)
+		smStore->Add(smInfo);
 	
 }
 
@@ -161,6 +162,10 @@ SmInfo * SmManager::importToStorage(FileStore * fStore, SheetmusicStore * sStore
 	vector<string>* smNames;
 
 	smNames = fileReader.WhereEndWith(".sm");
+
+	if (smNames->size() == 0) {
+		return nullptr;
+	}
 
 	for (int i = 0; i < smNames->size(); i++) {
 

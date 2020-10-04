@@ -248,15 +248,15 @@ SoundBindingSet * SampleManager::importToStorage(FileReader & fileReader)
 
 	for (int i = 0; i < sbsNames->size(); i++) {
 
-		LOG(LogLevel::Finer) << "vector<SmInfo*>* SmManager::importToStorage(FileReader&) : Getting stream of [" << sbsNames->at(i) << "].";
+		LOG(LogLevel::Finer) << "SampleManager::importToStorage(FileReader&) : Getting stream of [" << sbsNames->at(i) << "].";
 
 		fstream* stream = fileReader.GetStream(sbsNames->at(i));
 
 		// 每一個要用的decoder會在程式開始的時候註冊
-		LOG(LogLevel::Finer) << "vector<SmInfo*>* SmManager::importToStorage(FileReader&) : Getting decoder of [" << sbsNames->at(i) << "].";
+		LOG(LogLevel::Finer) << "SampleManager::importToStorage(FileReader&) : Getting decoder of [" << sbsNames->at(i) << "].";
 		SoundBindingSetDecoder* soundBindingSetDecoder = SoundBindingSetDecoder::GetDecoder(stream);
 
-		LOG(LogLevel::Finer) << "vector<SmInfo*>* SmManager::importToStorage(FileReader&) : Decode [" << sbsNames->at(i) << "] ...";
+		LOG(LogLevel::Finer) << "SampleManager::importToStorage(FileReader&) : Decode [" << sbsNames->at(i) << "] ...";
 		SoundBindingSet* sbs = soundBindingSetDecoder->Decode(stream);
 		
 		soundBindingSets->push_back(sbs);
