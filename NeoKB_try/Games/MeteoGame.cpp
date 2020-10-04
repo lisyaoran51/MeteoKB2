@@ -59,7 +59,8 @@ int MeteoGame::LoadOnComplete()
 	// 應該是不用這樣，virtual function會自動bind上去override，不用特別寫成lambda式
 	// https://stackoverflow.com/questions/14408105/how-do-i-use-stdbind-to-call-the-base-classs-version-of-a-virtual-function/14408253
 	// 確實不用寫lambda式，值接bind base::function，也會bind override function上去
-	smManager->GetStableStorage = [=]() {return GetStableStorage(); };
+	//smManager->GetStableStorage = [=]() {return GetStableStorage(); };
+	smManager->GetStableStorage = bind(&MeteoGame::GetStableStorage, this);
 	
 	// storage的位置目前設為"./"，import from stable會去"./Songs"下面抓檔案
 
@@ -69,7 +70,8 @@ int MeteoGame::LoadOnComplete()
 	/* ------------ Sample manager載入音色的方式與sm manager相同 ------------ */
 	audioManager->GetSampleManager()->SetupApiAccess(apiAccess);
 
-	audioManager->GetSampleManager()->GetStableStorage = [=]() {return GetStableStorage(); };
+	//audioManager->GetSampleManager()->GetStableStorage = [=]() {return GetStableStorage(); };
+	audioManager->GetSampleManager()->GetStableStorage = bind(&MeteoGame::GetStableStorage, this);
 
 	audioManager->GetSampleManager()->ImportFromStable();
 

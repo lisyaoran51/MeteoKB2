@@ -108,6 +108,9 @@ vector<string>* PlatformStorage::GetDirectories(string directoryPath)
 
 		}
 	}
+
+	LOG(LogLevel::Debug) << "PlatformStorage::GetDirectories : get [" << usablePathInString << "] for child paths end.";
+
 	return directoryPaths;
 }
 
