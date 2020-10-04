@@ -95,6 +95,9 @@ vector<string>* PlatformStorage::GetDirectories(string directoryPath)
 	/* 這邊把子資料夾找出來，directory_iterator只會搜尋下一層資料夾，不會循環搜尋到最底部 */
 	for (auto& p : directory_iterator(usablePath)) {
 
+		LOG(LogLevel::Debug) << "PlatformStorage::GetDirectories : aa";
+		LOG(LogLevel::Debug) << "PlatformStorage::GetDirectories : aa" << p.path();
+
 		/* 代表是資料夾不是檔案 */
 		if (is_directory(p.path())) {
 
