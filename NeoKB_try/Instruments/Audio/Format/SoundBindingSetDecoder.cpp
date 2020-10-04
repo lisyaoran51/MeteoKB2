@@ -1,9 +1,9 @@
 #include "SoundBindingSetDecoder.h"
-#include "../../../../Util/InstanceCreator.h"
+#include "../../../Util/InstanceCreator.h"
 
 
 using namespace std;
-using namespace Framework::Audio::Samples::Format;
+using namespace Instruments::Audio::Format;
 using namespace Util;
 
 /*

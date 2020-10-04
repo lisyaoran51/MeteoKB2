@@ -1,5 +1,5 @@
 VPATH=Framework:Framework/Allocation:Framework/Allocation/Hierachal:Framework/Allocation/Update:\
-Framework/Audio:Framework/Audio/Sample:Framework/Audio/Track:Framework/Audio/Sample/Format:\
+Framework/Audio:Framework/Audio/Sample:Framework/Audio/Track:\
 Framework/Configurations:\
 Framework/Devices:\
 Framework/Exception:\
@@ -29,7 +29,7 @@ Games/Timing:\
 Games/UI:\
 Games/Users:\
 \
-Instruments:Instruments/Audio:Instruments/Input:\
+Instruments:Instruments/Audio:Instruments/Audio/Format:Instruments/Input:\
 \
 Util:Util/DataStructure:\
 \
@@ -53,7 +53,7 @@ RulesetMeteor/Timing:\
 
 
 INCLUDE = -IFramwork -IFramework/Allocation -IFramework/Allocation/Hierachal -IFramework/Allocation/Update \
--IFramework/Audio -IFramework/Audio/Sample -IFramework/Audio/Sample/Format -IFramework/Audio/Track \
+-IFramework/Audio -IFramework/Audio/Sample -IFramework/Audio/Track \
 -IFramework/Configurations \
 -IFramework/Devices \
 -IFramework/Exception \
@@ -83,7 +83,7 @@ INCLUDE = -IFramwork -IFramework/Allocation -IFramework/Allocation/Hierachal -IF
 -IGames/UI \
 -IGames/Users \
 \
--IInstruments -IInstruments/Audio -IInstruments/Input \
+-IInstruments -IInstruments/Audio -IInstruments/Audio/Format -IInstruments/Input \
 \
 -IUtil -IUtil/DataStructure \
 \
@@ -134,7 +134,7 @@ Base.o Game.o \
 Cachable.o ChildAddable.o Container.o HasParent.o Loadable.o LoadStateHandler.o MtoObject.o Schedulable.o Scheduler.o Triggerable.o Updatable.o \
 AdjustableAudioComponent.o AudioComponent.o AudioManager.o \
 BassSample.o BassSampleChannel.o MultiPlaybackBassSampleChannel.o Sample.o SampleChannel.o MultiPlaybackSampleChannel.o DualPlaybackBassSampleChannel.o SampleManager.o \
-SampleChannelGenerator.o BassSampleChannelGenerator.o SimpleSoundBindingSetDecoder.o SoundBindingSetDecoder.o \
+SampleChannelGenerator.o BassSampleChannelGenerator.o \
 BassTrack.o RateSettableBassTrack.o Track.o TrackManager.o \
 ConfigManager.o FrameworkConfigManager.o \
 DatabaseContext.o DatabaseContextFactory.o DatabaseStore.o FakeMeteoDatabaseContext.o MeteoDatabaseContext.o ReadonlyCsvDatabaseContextFactory.o MemoryBasedDatabaseContextFactory.o \
@@ -173,6 +173,7 @@ SimpleSmDecoder.o SmDecoder.o FileReader.o Pattern.o PatternGenerator.o \
 SheetmusicSelectPanel.o VolumeController.o SoundSelectPanel.o \
 \
 Instrument.o HasPitch.o MeteoPiano.o Piano.o VirtualMeteoPiano.o CompositeMeteoPiano.o \
+SimpleSoundBindingSetDecoder.o SoundBindingSetDecoder.o \
 RepeatSoundBindingSet.o SimpleSoundBindingSet.o SoundBinding.o SoundBindingSet.o TwoStageSoundBindingSet.o PianoInputManager.o \
 \
 FileSystem.o ProgramInitializer.o \

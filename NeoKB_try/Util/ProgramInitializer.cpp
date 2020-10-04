@@ -38,6 +38,12 @@ using namespace Games::Sheetmusics::Format;
 
 // ===============================================
 
+// Instruments/Audio/Format
+#include "../Instruments/Audio/Format/SimpleSoundBindingSetDecoder.h"
+using namespace Instruments::Audio::Format;
+
+// ===============================================
+
 // Devices/Graphic/Renderers
 //#include "../Devices/Graphic/Renderers/WS2812v10Renderer.h"
 //using namespace Devices::Graphics::Renderers;
@@ -119,6 +125,11 @@ int ProgramInitializer::Initialize()
 
 	// Devices/Graphic/Renderers
 	//iCreator.RegisterType<WS2812v10Renderer>("WS2812v10Renderer");
+
+	// ===============================================
+
+	// Instruments/Audio/Format
+	iCreator.RegisterType<SimpleSoundBindingSetDecoder>("SimpleSoundBindingSetDecoder");
 
 	// ===============================================
 

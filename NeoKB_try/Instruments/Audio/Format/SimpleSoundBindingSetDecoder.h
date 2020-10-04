@@ -9,9 +9,8 @@ using namespace std;
 
 
 
-namespace Framework {
+namespace Instruments {
 namespace Audio {
-namespace Samples {
 namespace Format {
 
 	enum class SimpleSoundBindingSetDecoderSection;
@@ -45,7 +44,7 @@ namespace Format {
 		Variables,
 	};
 
-}}}}
+}}}
 
 
 

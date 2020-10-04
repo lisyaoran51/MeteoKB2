@@ -1,12 +1,12 @@
 ﻿#include "SimpleSoundBindingSetDecoder.h"
 
-#include "../../../../Util/Log.h"
-#include "../../../../Instruments/Audio/SimpleSoundBindingSet.h"
-#include "../../../../Instruments/Audio/RepeatSoundBindingSet.h"
-#include "../../../../Instruments/Audio/TwoStageSoundBindingSet.h"
+#include "../../../Util/Log.h"
+#include "../SimpleSoundBindingSet.h"
+#include "../RepeatSoundBindingSet.h"
+#include "../TwoStageSoundBindingSet.h"
 
 
-using namespace Framework::Audio::Samples::Format;
+using namespace Instruments::Audio::Format;
 using namespace std;
 using namespace Util;
 using namespace Instruments::Audio;

@@ -5,8 +5,8 @@
 #include <fstream>
 #include <map>
 #include <stdexcept>
-#include "../../../Allocation/Hierachal/MtoObject.h"
-#include "../../../../Instruments/Audio/SoundBindingSet.h"
+#include "../../../Framework/Allocation/Hierachal/MtoObject.h"
+#include "../SoundBindingSet.h"
 
 
 using namespace std;
@@ -19,9 +19,8 @@ using namespace Instruments::Audio;
 //
 
 
-namespace Framework {
+namespace Instruments {
 namespace Audio {
-namespace Samples {
 namespace Format {
 
 
@@ -96,7 +95,7 @@ namespace Format {
 
 	};
 
-}}}}
+}}}
 
 
 
