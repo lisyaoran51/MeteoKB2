@@ -107,7 +107,9 @@ vector<string>* PlatformStorage::GetDirectories(string directoryPath)
 			// "Build/heresy"的長度是12，"Build/heresy/aout"的長度是17
 			// substr的第一個字是編號1，所以第12個字就是y，從y之後的/開始才是擷取出來的字串，字串長度5個字，就會擷取出"/aout"
 			// 如果我想要把第一個/拿掉，就要從第13個字之後擷取，也就是/之後的a開始，擷取4個字，才會擷取出"aout"
-			directoryPaths->push_back(childDirectory.substr(usablePathInString.length(), usablePathInString.length() - childDirectory.length()));
+			//directoryPaths->push_back(childDirectory.substr(usablePathInString.length(), usablePathInString.length() - childDirectory.length()));
+
+			directoryPaths->push_back(childDirectory);
 
 		}
 	}
