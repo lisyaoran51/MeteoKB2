@@ -43,6 +43,7 @@ int SimpleSoundBindingSetDecoder::handleGeneral(SoundBindingSet* sbs, string & l
 		}
 	}
 	else if (pair.at(0) == "Filename") {
+		LOG(LogLevel::Finer) << "int SimpleSoundBindingSetDecoder::handleGeneral() : sbs " << sbs;
 		sbs->fileName = pair.at(1);
 		LOG(LogLevel::Finer) << "int SimpleSoundBindingSetDecoder::handleGeneral() : tag [Filename] chosen.";
 	}
