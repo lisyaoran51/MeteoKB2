@@ -183,15 +183,15 @@ SmInfo * SmManager::importToStorage(FileStore * fStore, SheetmusicStore * sStore
 		Sm<Event>* sm = smDecoder->Decode(stream);
 		sm->GetSmInfo()->fileName = smNames->at(i);
 
-		/* --------- 這段不用了，反正也用步道，要把file reader的get sm info set拿掉
+		/* --------- 這段不用了，反正也用步道，要把file reader的get sm info set拿掉。後來發現要留，不然working sm會拿不到path */
 		// TODO: 把這段佔實的code改好，正確做法應該不是從filereader拿sm set info，要去trace osu的寫法
-		sm->GetSmInfo()->smSetInfo = fileReader.GetSmSetInfo();
+		//sm->GetSmInfo()->smSetInfo = fileReader.GetSmSetInfo();
 		sm->GetSmInfo()->fileInfo = new FileInfo{
 			sm->GetSmInfo()->id,
 			fileReader.GetPath(),
 			0
 		};
-		*/
+		
 
 		fStore->AddFile(sm->GetSmInfo()->fileInfo);
 
