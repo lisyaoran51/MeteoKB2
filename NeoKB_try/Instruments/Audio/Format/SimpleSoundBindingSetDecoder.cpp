@@ -32,6 +32,7 @@ int SimpleSoundBindingSetDecoder::handleGeneral(SoundBindingSet* sbs, string & l
 		switch (atoi(pair.at(1).c_str())) {
 		case 1:
 			sbs = new SimpleSoundBindingSet();
+			LOG(LogLevel::Debug) << "int SimpleSoundBindingSetDecoder::handleGeneral() : create SimpleSoundBindingSet.";
 			break;
 		case 2:
 			sbs = new RepeatSoundBindingSet();
