@@ -45,8 +45,7 @@ namespace Format {
 
 		SoundBindingSetDecoder();
 
-		virtual SoundBindingSet* parseFile(fstream* stream);
-		virtual int parseFile(fstream* stream, SoundBindingSet* sm) = 0;
+		virtual SoundBindingSet* parseFile(fstream* stream) = 0;
 	};
 
 	

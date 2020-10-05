@@ -1,6 +1,7 @@
 simple file format v0
-[General]
+[Mode]
 Mode:1
+[General]
 Filename:piano
 Start:9
 End:96

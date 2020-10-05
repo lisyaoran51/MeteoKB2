@@ -20,6 +20,7 @@ namespace Format {
 	/// </summary>
 	class SimpleSoundBindingSetDecoder : public SoundBindingSetDecoderWithSection<SimpleSoundBindingSetDecoderSection>
 	{
+		SoundBindingSet* handleMode(string& line);
 
 		int handleGeneral(SoundBindingSet* sbs, string& line);
 	
@@ -33,11 +34,12 @@ namespace Format {
 
 		virtual int setSectionMap();
 
-		virtual int parseFile(fstream* stream, SoundBindingSet* sm);
+		virtual SoundBindingSet* parseFile(fstream* stream);
 	};
 
 	enum class SimpleSoundBindingSetDecoderSection {
 		None,
+		Mode,
 		General,
 		Editor,
 		Metadata,

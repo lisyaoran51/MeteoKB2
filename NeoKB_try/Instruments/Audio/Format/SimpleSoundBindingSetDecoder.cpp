@@ -21,18 +21,17 @@ using namespace Instruments::Audio;
 
 
 
-int SimpleSoundBindingSetDecoder::handleGeneral(SoundBindingSet* sbs, string & line)
+SoundBindingSet * SimpleSoundBindingSetDecoder::handleMode(string & line)
 {
 	vector<string> pair = split(line, ":");
 
-	LOG(LogLevel::Finer) << "int SimpleSoundBindingSetDecoder::handleGeneral() : tag is[" << pair.at(0) << "]. value is [" << pair.at(1) << "].";
-
+	SoundBindingSet* sbs = nullptr;
 
 	if (pair.at(0) == "Mode") {
 		switch (atoi(pair.at(1).c_str())) {
 		case 1:
 			sbs = new SimpleSoundBindingSet();
-			LOG(LogLevel::Depricated) << "int SimpleSoundBindingSetDecoder::handleGeneral() : create SimpleSoundBindingSet.";
+			LOG(LogLevel::Fine) << "int SimpleSoundBindingSetDecoder::handleGeneral() : create SimpleSoundBindingSet.";
 			break;
 		case 2:
 			sbs = new RepeatSoundBindingSet();
@@ -42,7 +41,18 @@ int SimpleSoundBindingSetDecoder::handleGeneral(SoundBindingSet* sbs, string & l
 			break;
 		}
 	}
-	else if (pair.at(0) == "Filename") {
+
+	return sbs;
+}
+
+int SimpleSoundBindingSetDecoder::handleGeneral(SoundBindingSet* sbs, string & line)
+{
+	vector<string> pair = split(line, ":");
+
+	LOG(LogLevel::Finer) << "int SimpleSoundBindingSetDecoder::handleGeneral() : tag is[" << pair.at(0) << "]. value is [" << pair.at(1) << "].";
+
+
+	if (pair.at(0) == "Filename") {
 		LOG(LogLevel::Finer) << "int SimpleSoundBindingSetDecoder::handleGeneral() : sbs " << sbs;
 		sbs->fileName = pair.at(1);
 		LOG(LogLevel::Finer) << "int SimpleSoundBindingSetDecoder::handleGeneral() : tag [Filename] chosen.";
@@ -105,6 +115,7 @@ int SimpleSoundBindingSetDecoder::setSectionMap()
 {
 
 	sectionMap[SimpleSoundBindingSetDecoderSection::None] = "None";
+	sectionMap[SimpleSoundBindingSetDecoderSection::Mode] = "Mode";
 	sectionMap[SimpleSoundBindingSetDecoderSection::General] = "General";
 	sectionMap[SimpleSoundBindingSetDecoderSection::Editor] = "Editor";
 	sectionMap[SimpleSoundBindingSetDecoderSection::Metadata] = "Metadata";
@@ -113,9 +124,12 @@ int SimpleSoundBindingSetDecoder::setSectionMap()
 
 }
 
-int SimpleSoundBindingSetDecoder::parseFile(fstream * stream, SoundBindingSet* sbs)
+SoundBindingSet* SimpleSoundBindingSetDecoder::parseFile(fstream * stream)
 {
+	SoundBindingSet* sbs = nullptr;
+
 	LOG(LogLevel::Fine) << "int SimpleSoundBindingSetDecoder::parseFile() : Start parsing file.";
+
 
 	string line;
 
@@ -168,7 +182,12 @@ int SimpleSoundBindingSetDecoder::parseFile(fstream * stream, SoundBindingSet* s
 		}
 
 		switch (section) {
+		case SimpleSoundBindingSetDecoderSection::Mode:
+			sbs = handleMode(line);
+			break;
 		case SimpleSoundBindingSetDecoderSection::General:
+			if (!sbs)
+				throw runtime_error("SimpleSoundBindingSetDecoder::parseFile() : no sound binding set created.");
 			handleGeneral(sbs, line);
 			break;
 		case SimpleSoundBindingSetDecoderSection::Metadata:
@@ -178,5 +197,5 @@ int SimpleSoundBindingSetDecoder::parseFile(fstream * stream, SoundBindingSet* s
 		}
 	}
 	LOG(LogLevel::Fine) << "int SimpleSoundBindingSetDecoder::parseFile() : parsing file over.";
-	return 0;
+	return sbs;
 }

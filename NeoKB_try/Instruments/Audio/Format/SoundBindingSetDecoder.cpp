@@ -67,14 +67,5 @@ SoundBindingSet* SoundBindingSetDecoder::Decode(fstream * stream)
 	return parseFile(stream);
 }
 
-SoundBindingSet* SoundBindingSetDecoder::parseFile(fstream * stream)
-{
-	SoundBindingSet* sbs = nullptr;
-
-	parseFile(stream, sbs);
-
-	return sbs;
-}
-
 
 
