@@ -2168,3 +2168,7 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 10/3
 	把離開遊戲寫完，補了command handler
 	compile看看能不能過
+	
+10/4
+	繼續是怎麼換音色，音色decoder會出錯
+	目前可以順利使用的commit是81a1292de0f1a3e3b8ec7ed6da000e0dfc020d6d
