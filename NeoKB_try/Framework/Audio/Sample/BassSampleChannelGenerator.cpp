@@ -26,11 +26,15 @@ BassSampleChannelGenerator::BassSampleChannelGenerator(CompositeResourceStore<ch
 
 SampleChannel * BassSampleChannelGenerator::GenerateSampleChannel(SoundBinding * soundBinding)
 {
+	LOG(LogLevel::Debug) << "SampleManager::GetSampleChannel() : start generating sample channel [" << soundBinding->GetFileName() << "].";
+
 	SampleChannel* sampleChannel = nullptr;
 
 	/* 從頭播到尾的音色 */
 	if (dynamic_cast<SimpleSoundBinding<Pitch>*>(soundBinding)) {
 		string path = resourceStore->GetFilePath(soundBinding->GetFileName());
+
+		LOG(LogLevel::Debug) << "SampleManager::GetSampleChannel() : get path [" << path << "].";
 
 		if (path != "") {
 

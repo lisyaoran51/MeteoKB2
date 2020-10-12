@@ -31,7 +31,7 @@ AudioManager::AudioManager(CompositeResourceStore<char*>* trackStore, CompositeR
 
 SampleManager * AudioManager::GetSampleManager(CompositeResourceStore<char*>* sampleStore)
 {
-	LOG(LogLevel::Fine) << "AudioManager::GetSampleManager() : get sample manager [" << sampleManager << "].";
+	LOG(LogLevel::Depricated) << "AudioManager::GetSampleManager() : get sample manager [" << sampleManager << "].";
 	if (sampleStore == nullptr)
 		return sampleManager;
 
