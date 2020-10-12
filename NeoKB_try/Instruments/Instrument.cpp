@@ -82,7 +82,7 @@ SoundBinding * Instrument::getSoundBinding(int action)
 		for (int i = 0; i < soundBindings.size(); i++) {
 			LOG(LogLevel::Debug) << soundBindings[i]->action << " : " << soundBindings[i]->fileName;
 		}
-		return string("");
+		return 0;
 	};
 
 	return nullptr;
