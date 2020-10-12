@@ -34,6 +34,8 @@ int Instrument::SetHost(GameHost * h)
 
 int Instrument::LoadOnComplete()
 {
+	LOG(LogLevel::Fine) << "Instrument::LoadOnComplete() : start loading...";
+
 	// 把sound binding丟進去
 	// TODO: variant應該要從setting拿
 	vector<SoundBinding*>* defaultSoundBindings = GetDefaultSoundBindings(1);
@@ -41,6 +43,7 @@ int Instrument::LoadOnComplete()
 	soundBindings.insert(soundBindings.end(), defaultSoundBindings->begin(), defaultSoundBindings->end());
 
 	delete defaultSoundBindings;
+
 
 	loadAndMapSamples();
 

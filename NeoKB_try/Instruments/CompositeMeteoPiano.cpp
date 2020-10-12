@@ -9,11 +9,7 @@ int CompositeMeteoPiano::load()
 {
 	AddChild(meteoPiano);
 
-	LOG(LogLevel::Fine) << "CompositeMeteoPiano::load() : adding chile meteo piano ...";
-
 	AddChild(virtualMeteoPiano);
-
-	LOG(LogLevel::Fine) << "CompositeMeteoPiano::load() : adding chile virtual meteo piano ...";
 
 	return 0;
 }
