@@ -76,5 +76,14 @@ SoundBinding * Instrument::getSoundBinding(int action)
 		if (soundBindings[i]->action == action)
 			return soundBindings[i];
 	}
+	LOG(LogLevel::Error) << "Instrument::getSoundBinding() : sound binding [" << action << "] not foung.";
+
+	LOG(LogLevel::Debug) << [=]() {
+		for (int i = 0; i < soundBindings.size(); i++) {
+			LOG(LogLevel::Debug) << soundBindings[i]->action << " : " << soundBindings[i]->fileName;
+		}
+		
+	}
+
 	return nullptr;
 }
