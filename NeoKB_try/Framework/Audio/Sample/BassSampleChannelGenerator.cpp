@@ -26,25 +26,25 @@ BassSampleChannelGenerator::BassSampleChannelGenerator(CompositeResourceStore<ch
 
 SampleChannel * BassSampleChannelGenerator::GenerateSampleChannel(SoundBinding * soundBinding)
 {
-	LOG(LogLevel::Debug) << "SampleManager::GetSampleChannel() : start generating sample channel [" << soundBinding->GetFileName() << "].";
+	LOG(LogLevel::Depricated) << "SampleManager::GetSampleChannel() : start generating sample channel [" << soundBinding->GetFileName() << "].";
 
 	SampleChannel* sampleChannel = nullptr;
 
 	/* 從頭播到尾的音色 */
 	if (dynamic_cast<SimpleSoundBinding<Pitch>*>(soundBinding)) {
 
-		LOG(LogLevel::Debug) << "SampleManager::GetSampleChannel() : resource store [" << resourceStore << "].";
+		LOG(LogLevel::Fine) << "SampleManager::GetSampleChannel() : resource store [" << resourceStore << "].";
 
 		string path = resourceStore->GetFilePath(soundBinding->GetFileName());
 
-		LOG(LogLevel::Debug) << "SampleManager::GetSampleChannel() : get path [" << path << "].";
+		LOG(LogLevel::Fine) << "SampleManager::GetSampleChannel() : get path [" << path << "].";
 
 		if (path != "") {
 
 			Sample* sample = new BassSample((char*)path.c_str());
 			sampleChannel = new DualPlaybackBassSampleChannel(sample);
 
-			LOG(LogLevel::Debug) << "SampleManager::GetSampleChannel() : simple sample file path found [" << soundBinding->GetFileName() << "].";
+			LOG(LogLevel::Fine) << "SampleManager::GetSampleChannel() : simple sample file path found [" << soundBinding->GetFileName() << "].";
 
 		}
 		else {
@@ -53,6 +53,9 @@ SampleChannel * BassSampleChannelGenerator::GenerateSampleChannel(SoundBinding *
 	}
 	/* 不停重複的音色 */
 	else if(dynamic_cast<RepeatSoundBinding<Pitch>*>(soundBinding)) {
+
+		LOG(LogLevel::Fine) << "SampleManager::GetSampleChannel() : create RepeatSoundBinding [" << soundBinding->GetFileName() << "].";
+
 		string path = resourceStore->GetFilePath(soundBinding->GetFileName());
 
 		RepeatSoundBinding<Pitch>* repeatSoundBinding = dynamic_cast<RepeatSoundBinding<Pitch>*>(soundBinding);
@@ -63,7 +66,7 @@ SampleChannel * BassSampleChannelGenerator::GenerateSampleChannel(SoundBinding *
 			// TODO: 還沒寫好，寫好再來改
 			//sampleChannel = new RepeatDualPlaybackBassSampleChannel(sample, repeatSoundBinding->tailLength);
 
-			LOG(LogLevel::Debug) << "SampleManager::GetSampleChannel() : repeat sample file path found [" << soundBinding->GetFileName() << "].";
+			LOG(LogLevel::Fine) << "SampleManager::GetSampleChannel() : repeat sample file path found [" << soundBinding->GetFileName() << "].";
 
 		}
 		else {
@@ -72,6 +75,9 @@ SampleChannel * BassSampleChannelGenerator::GenerateSampleChannel(SoundBinding *
 	}
 	/* AB段的音色 */
 	else if (dynamic_cast<TwoStageSoundBinding<Pitch>*>(soundBinding)) {
+
+		LOG(LogLevel::Fine) << "SampleManager::GetSampleChannel() : create TwoStageSoundBinding [" << soundBinding->GetFileName() << "].";
+
 		string path = resourceStore->GetFilePath(soundBinding->GetFileName());
 
 		string pathA = resourceStore->GetFilePath(dynamic_cast<TwoStageSoundBinding<Pitch>*>(soundBinding)->GetStageAFileName());
@@ -92,6 +98,27 @@ SampleChannel * BassSampleChannelGenerator::GenerateSampleChannel(SoundBinding *
 		else {
 			throw runtime_error("SampleManager::GetSampleChannel(): two stage sample file not found : "s + soundBinding->GetFileName());
 		}
+	}
+	else if (dynamic_cast<TSoundBinding<Pitch>*>(soundBinding)) {
+
+		LOG(LogLevel::Fine) << "SampleManager::GetSampleChannel() : create TSoundBinding [" << soundBinding->GetFileName() << "].";
+
+		string path = resourceStore->GetFilePath(soundBinding->GetFileName());
+
+		LOG(LogLevel::Fine) << "SampleManager::GetSampleChannel() : get path [" << path << "].";
+
+		if (path != "") {
+
+			Sample* sample = new BassSample((char*)path.c_str());
+			sampleChannel = new DualPlaybackBassSampleChannel(sample);
+
+			LOG(LogLevel::Fine) << "SampleManager::GetSampleChannel() : no-type sample file path found [" << soundBinding->GetFileName() << "].";
+
+		}
+		else {
+			throw runtime_error("SampleManager::GetSampleChannel(): no-type sample file not found : "s + soundBinding->GetFileName());
+		}
+
 	}
 
 
