@@ -35,6 +35,9 @@ SampleChannel * SampleManager::GetSampleChannel(string name)
 	map<string, SampleChannel*>::iterator it = sampleChannelCache.find(name);
 	if (it == sampleChannelCache.end()) {
 
+
+		LOG(LogLevel::Fine) << "SampleManager::GetSampleChannel() : resourceStore [" << resourceStore << "].";
+
 		string path = resourceStore->GetFilePath(name);
 
 		LOG(LogLevel::Fine) << "SampleManager::GetSampleChannel() : finding file path [" << path << "].";
