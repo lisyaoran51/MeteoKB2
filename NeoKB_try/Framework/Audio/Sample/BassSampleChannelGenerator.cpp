@@ -32,6 +32,9 @@ SampleChannel * BassSampleChannelGenerator::GenerateSampleChannel(SoundBinding *
 
 	/* 從頭播到尾的音色 */
 	if (dynamic_cast<SimpleSoundBinding<Pitch>*>(soundBinding)) {
+
+		LOG(LogLevel::Debug) << "SampleManager::GetSampleChannel() : resource store [" << resourceStore << "].";
+
 		string path = resourceStore->GetFilePath(soundBinding->GetFileName());
 
 		LOG(LogLevel::Debug) << "SampleManager::GetSampleChannel() : get path [" << path << "].";
