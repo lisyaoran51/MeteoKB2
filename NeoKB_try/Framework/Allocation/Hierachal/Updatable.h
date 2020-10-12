@@ -50,6 +50,8 @@ namespace Hierachal {
 
 	protected:
 
+		bool isFirstUpdate = true;
+
 		virtual int update();
 	};
 

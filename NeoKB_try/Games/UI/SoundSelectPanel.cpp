@@ -37,9 +37,6 @@ int SoundSelectPanel::load(FrameworkConfigManager * f, Instrument* i, AudioManag
 	audioManager = a;
 	outputManager = o;
 
-	/* 測試用，之後要刪掉改用bluetooth */
-	TSoundBindingSet<Pitch>* soundBindingSet = dynamic_cast<TSoundBindingSet<Pitch>*>(audioManager->GetSampleManager()->GetSoundBindingSets()->at(0));
-	dynamic_cast<Piano*>(instrument)->SwitchSoundBindings(soundBindingSet);
 
 	return 0;
 }
@@ -53,5 +50,20 @@ SoundSelectPanel::SoundSelectPanel() : RegisterType("SoundSelectPanel")
 
 int SoundSelectPanel::OnCommand(MeteoBluetoothCommand * command)
 {
+	return 0;
+}
+
+int SoundSelectPanel::update()
+{
+	if (!isFirstUpdate)
+		return 0;
+
+	return 0;
+
+	LOG(LogLevel::Debug) << "SoundSelectPanel::update() : test switch sound select panel.";
+	/* 測試用，之後要刪掉改用bluetooth */
+	TSoundBindingSet<Pitch>* soundBindingSet = dynamic_cast<TSoundBindingSet<Pitch>*>(audioManager->GetSampleManager()->GetSoundBindingSets()->at(0));
+	dynamic_cast<Piano*>(instrument)->SwitchSoundBindings(soundBindingSet);
+
 	return 0;
 }

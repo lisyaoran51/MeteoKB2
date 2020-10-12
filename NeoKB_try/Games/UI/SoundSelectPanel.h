@@ -43,6 +43,8 @@ namespace UI {
 
 		virtual int OnCommand(MeteoBluetoothCommand* command);
 
+		virtual int update();
+
 	protected:
 
 		Instrument* instrument = nullptr;

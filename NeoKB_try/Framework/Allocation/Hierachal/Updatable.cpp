@@ -54,6 +54,7 @@ bool Updatable::UpdateSubTree()
 
 		LOG(LogLevel::Depricated) << "Updatable::UpdateSubTree() : before update [" << GetTypeName() << "].";
 		update();
+		isFirstUpdate = false;
 		LOG(LogLevel::Depricated) << "Updatable::UpdateSubTree() : after update [" << GetTypeName() << "].";
 	}
 	catch (exception& e) {
