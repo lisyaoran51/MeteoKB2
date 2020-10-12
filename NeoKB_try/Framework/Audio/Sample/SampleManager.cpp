@@ -31,6 +31,7 @@ SampleChannel * SampleManager::GetSampleChannel(string name)
 	Sample* sample = nullptr;
 	SampleChannel* sampleChannel = nullptr;
 
+	LOG(LogLevel::Fine) << "SampleManager::GetSampleChannel() : getting channel with file name [" << name << "].";
 
 	map<string, SampleChannel*>::iterator it = sampleChannelCache.find(name);
 	if (it == sampleChannelCache.end()) {
