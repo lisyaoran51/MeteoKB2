@@ -119,7 +119,7 @@ map<PianoAction, SampleChannel*>* MeteoPiano::getSamples(int variant)
 
 int MeteoPiano::loadAndMapSamples()
 {
-	LOG(LogLevel::Info) << "MeteoPiano::loadAndMapSamples() :mapping samplesByPitch." << audioManager->GetSampleManager();
+	LOG(LogLevel::Info) << "MeteoPiano::loadAndMapSamples() :mapping samplesByPitch.";
 
 	/* ¥¼¤É­° */
 #pragma region NonePitchState
