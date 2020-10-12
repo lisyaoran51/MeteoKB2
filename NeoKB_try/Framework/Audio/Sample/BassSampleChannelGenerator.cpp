@@ -120,6 +120,9 @@ SampleChannel * BassSampleChannelGenerator::GenerateSampleChannel(SoundBinding *
 		}
 
 	}
+	else {
+		throw runtime_error("SampleManager::GetSampleChannel(): no match sound binding type : "s + soundBinding->GetFileName());
+	}
 
 
 	return sampleChannel;

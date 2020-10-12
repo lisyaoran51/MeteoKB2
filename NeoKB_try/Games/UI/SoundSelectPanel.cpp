@@ -30,6 +30,8 @@ int SoundSelectPanel::load()
 
 int SoundSelectPanel::load(FrameworkConfigManager * f, Instrument* i, AudioManager* a, OutputManager * o)
 {
+	LOG(LogLevel::Info) << "SoundSelectPanel::load() : setting sound select panel.";
+
 	frameworkConfigManager = f;
 	instrument = i;
 	audioManager = a;
@@ -44,6 +46,9 @@ int SoundSelectPanel::load(FrameworkConfigManager * f, Instrument* i, AudioManag
 
 SoundSelectPanel::SoundSelectPanel() : RegisterType("SoundSelectPanel")
 {
+	isInputable = true;
+
+	registerLoad(bind(static_cast<int(SoundSelectPanel::*)(void)>(&SoundSelectPanel::load), this));
 }
 
 int SoundSelectPanel::OnCommand(MeteoBluetoothCommand * command)
