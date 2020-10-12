@@ -36,6 +36,9 @@ SampleChannel * SampleManager::GetSampleChannel(string name)
 	if (it == sampleChannelCache.end()) {
 
 		string path = resourceStore->GetFilePath(name);
+
+		LOG(LogLevel::Fine) << "SampleManager::GetSampleChannel() : finding file path [" << path << "].";
+
 		if (path != "") {
 
 			sample = new BassSample((char*)path.c_str());
