@@ -154,10 +154,13 @@ int SampleManager::RemoveSampleChannel(SoundBinding * soundBinding)
 	LOG(LogLevel::Debug) << "SampleManager::RemoveSampleChannel() : file [" << soundBinding->GetFileName() << "].";
 	map<string, SampleChannel*>::iterator it = sampleChannelCache.find(soundBinding->GetFileName());
 	if (it != sampleChannelCache.end()) {
+		LOG(LogLevel::Debug) << "SampleManager::RemoveSampleChannel() : start removing.";
 
 		SampleChannel* sampleChannel = (*it).second;
 		deleteItem(sampleChannel);
+		LOG(LogLevel::Debug) << "SampleManager::RemoveSampleChannel() : deleting item.";
 		delete sampleChannel;
+		LOG(LogLevel::Debug) << "SampleManager::RemoveSampleChannel() : deleting sample channel.";
 		sampleChannelCache.erase(it);
 
 		LOG(LogLevel::Debug) << "SampleManager::RemoveSampleChannel() : file [" << soundBinding->GetFileName() << "] removed from sample cache.";
