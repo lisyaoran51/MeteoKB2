@@ -333,7 +333,7 @@ int Piano::SwitchSoundBindings(TSoundBindingSet<Pitch>* sBindingSet)
 		}
 
 		return 0;
-	};
+	}();
 
 
 	/* ­«±Òsample manager§ó·s */
