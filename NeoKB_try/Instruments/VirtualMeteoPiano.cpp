@@ -136,6 +136,8 @@ int VirtualMeteoPiano::MoveOctave(PianoPitchMovement m)
 int VirtualMeteoPiano::SwitchSoundBindings(TSoundBindingSet<Pitch>* sBindingSet)
 {
 	LOG(LogLevel::Debug) << "VirtualMeteoPiano::SwitchSoundBindings() : switch piano sound to [" << sBindingSet->fileName << "].";
+
+	Piano::SwitchSoundBindings(sBindingSet);
 	LOG(LogLevel::Debug) << [=]() {
 
 		map<Pitch, SampleChannel*>::iterator it;
@@ -147,7 +149,7 @@ int VirtualMeteoPiano::SwitchSoundBindings(TSoundBindingSet<Pitch>* sBindingSet)
 		return 0;
 	}();
 
-	return Piano::SwitchSoundBindings(sBindingSet);
+	return 0;
 }
 
 map<PianoAction, SampleChannel*>* VirtualMeteoPiano::getSamples(int variant)
