@@ -332,6 +332,7 @@ int Piano::SwitchSoundBindings(TSoundBindingSet<Pitch>* sBindingSet)
 			LOG(LogLevel::Debug) << "Piano::SwitchSoundBindings() : switch to [" << (int)(*it2).first << "]";
 		}
 
+		return 0;
 	};
 
 
