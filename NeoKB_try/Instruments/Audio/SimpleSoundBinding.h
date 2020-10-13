@@ -13,12 +13,12 @@ namespace Audio {
 
 	public:
 
-		SimpleSoundBinding(string fName, T a): TSoundBinding<T>(fName, a){
+		SimpleSoundBinding(string sBankName, T a): TSoundBinding<T>(sBankName, a){
 
 		}
 
 		virtual string GetFileName() {
-			return SoundBinding::fileName + string("_") + to_string(SoundBinding::action);
+			return SoundBinding::soundBankName + string("_") + to_string(SoundBinding::action);
 		}
 
 	};

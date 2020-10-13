@@ -13,7 +13,7 @@ namespace Audio {
 
 	public:
 
-		RepeatSoundBinding(string fName, T a, float tLength) : TSoundBinding<T>(fName, a) {
+		RepeatSoundBinding(string sBankName, T a, float tLength) : TSoundBinding<T>(sBankName, a) {
 			tailLength = tLength;
 		}
 

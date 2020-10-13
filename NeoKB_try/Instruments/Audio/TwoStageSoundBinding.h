@@ -12,7 +12,7 @@ namespace Audio {
 	class TwoStageSoundBinding : public TSoundBinding<T> {
 
 	public:
-		TwoStageSoundBinding(string fName, T a, float sPoint, float tLength) : TSoundBinding<T>(fName, a) {
+		TwoStageSoundBinding(string sBankName, T a, float sPoint, float tLength) : TSoundBinding<T>(sBankName, a) {
 			switchPoint = sPoint;
 			tailLength = tLength;
 		}
@@ -21,11 +21,11 @@ namespace Audio {
 		float tailLength = 10.f;
 
 		string GetStageAFileName() {
-			return SoundBinding::fileName + string("_A_") + to_string(int(SoundBinding::action));
+			return SoundBinding::soundBankName + string("_A_") + to_string(int(SoundBinding::action));
 		}
 
 		string GetStageBFileName() {
-			return SoundBinding::fileName + string("_B_") + to_string(int(SoundBinding::action));
+			return SoundBinding::soundBankName + string("_B_") + to_string(int(SoundBinding::action));
 		}
 
 	};

@@ -35,7 +35,7 @@ SampleChannel * BassSampleChannelGenerator::GenerateSampleChannel(SoundBinding *
 
 		LOG(LogLevel::Fine) << "SampleManager::GetSampleChannel() : resource store [" << resourceStore << "].";
 
-		string path = resourceStore->GetFilePath(soundBinding->GetFileName());
+		string path = resourceStore->GetFilePath(soundBinding->GetSoundBankName() + "/"s + soundBinding->GetFileName());
 
 		LOG(LogLevel::Fine) << "SampleManager::GetSampleChannel() : get path [" << path << "].";
 
@@ -56,7 +56,7 @@ SampleChannel * BassSampleChannelGenerator::GenerateSampleChannel(SoundBinding *
 
 		LOG(LogLevel::Fine) << "SampleManager::GetSampleChannel() : create RepeatSoundBinding [" << soundBinding->GetFileName() << "].";
 
-		string path = resourceStore->GetFilePath(soundBinding->GetFileName());
+		string path = resourceStore->GetFilePath(soundBinding->GetSoundBankName() + "/"s + soundBinding->GetFileName());
 
 		RepeatSoundBinding<Pitch>* repeatSoundBinding = dynamic_cast<RepeatSoundBinding<Pitch>*>(soundBinding);
 
@@ -78,10 +78,10 @@ SampleChannel * BassSampleChannelGenerator::GenerateSampleChannel(SoundBinding *
 
 		LOG(LogLevel::Fine) << "SampleManager::GetSampleChannel() : create TwoStageSoundBinding [" << soundBinding->GetFileName() << "].";
 
-		string path = resourceStore->GetFilePath(soundBinding->GetFileName());
+		string path = resourceStore->GetFilePath(soundBinding->GetSoundBankName() + "/"s + soundBinding->GetFileName());
 
-		string pathA = resourceStore->GetFilePath(dynamic_cast<TwoStageSoundBinding<Pitch>*>(soundBinding)->GetStageAFileName());
-		string pathB = resourceStore->GetFilePath(dynamic_cast<TwoStageSoundBinding<Pitch>*>(soundBinding)->GetStageBFileName());
+		string pathA = resourceStore->GetFilePath(soundBinding->GetSoundBankName() + "/"s + dynamic_cast<TwoStageSoundBinding<Pitch>*>(soundBinding)->GetStageAFileName());
+		string pathB = resourceStore->GetFilePath(soundBinding->GetSoundBankName() + "/"s + dynamic_cast<TwoStageSoundBinding<Pitch>*>(soundBinding)->GetStageBFileName());
 
 		TwoStageSoundBinding<Pitch>* twoStageSoundBinding = dynamic_cast<TwoStageSoundBinding<Pitch>*>(soundBinding);
 

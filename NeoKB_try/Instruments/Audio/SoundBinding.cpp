@@ -4,13 +4,13 @@
 using namespace Instruments::Audio;
 
 
-SoundBinding::SoundBinding(string fName, int a)
+SoundBinding::SoundBinding(string sBankName, int a)
 {
-	fileName = fName;
+	soundBankName = sBankName;
 	action = a;
 }
 
-string SoundBinding::GetFileName()
+string SoundBinding::GetSoundBankName()
 {
-	return fileName;
+	return soundBankName;
 }

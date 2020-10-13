@@ -13,12 +13,14 @@ namespace Audio {
 
 	public:
 
-		SoundBinding(string fName, int a);
+		SoundBinding(string sBankName, int a);
 		virtual ~SoundBinding() = default;
 
-		string fileName;
+		string soundBankName;
 
 		int action;
+
+		virtual string GetSoundBankName();
 
 		virtual string GetFileName() = 0;
 
@@ -31,10 +33,7 @@ namespace Audio {
 
 	public:
 
-		TSoundBinding(string fName, T a) : SoundBinding(fName, (int)a){
-			fileName = fName;
-
-			action = (int)a;
+		TSoundBinding(string sBankName, T a) : SoundBinding(sBankName, (int)a){
 		}
 
 		T GetAction() {
@@ -42,7 +41,7 @@ namespace Audio {
 		}
 		
 		virtual string GetFileName() {
-			return fileName;
+			return soundBankName;
 		}
 
 	};
