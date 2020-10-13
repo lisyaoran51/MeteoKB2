@@ -32,6 +32,11 @@ int Instrument::SetHost(GameHost * h)
 	return 0;
 }
 
+int Instrument::LoadAndMapSamples()
+{
+	return loadAndMapSamples();
+}
+
 int Instrument::LoadOnComplete()
 {
 	LOG(LogLevel::Fine) << "Instrument::LoadOnComplete() : start loading...";

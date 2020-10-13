@@ -69,6 +69,8 @@ namespace Instruments {
 
 		VirtualMeteoPiano* virtualMeteoPiano = nullptr;
 
+		virtual int loadAndMapSamples();
+
 	};
 
 }

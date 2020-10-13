@@ -71,3 +71,12 @@ VirtualMeteoPiano * CompositeMeteoPiano::GetVirtualMeteoPiano()
 {
 	return virtualMeteoPiano;
 }
+
+int CompositeMeteoPiano::loadAndMapSamples()
+{
+	if (GetLoadState() == LoadState::Loaded) {
+		meteoPiano->LoadAndMapSamples();
+		virtualMeteoPiano->LoadAndMapSamples();
+	}
+	return 0;
+}

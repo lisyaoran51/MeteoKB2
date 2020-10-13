@@ -61,6 +61,8 @@ namespace Instruments {
 
 		int SetHost(GameHost* h);
 
+		virtual int LoadAndMapSamples();
+
 	protected:
 
 		GameHost* host = nullptr;
