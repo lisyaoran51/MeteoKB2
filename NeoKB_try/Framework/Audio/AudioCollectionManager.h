@@ -146,8 +146,6 @@ namespace Audio {
 		virtual int deleteItem(T* item) {
 			UnregisterItem(item);
 
-			unique_lock<mutex> uLock(itemMutex);
-
 			DeleteItemFromList(item);
 			
 			return 0;
