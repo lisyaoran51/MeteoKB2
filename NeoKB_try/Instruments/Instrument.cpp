@@ -65,7 +65,7 @@ string Instrument::getSoundBindingFileName(int action)
 {
 	for (int i = 0; i < soundBindings.size(); i++) {
 		if (soundBindings[i]->action == action)
-			return soundBindings[i]->fileName;
+			return soundBindings[i]->GetFileName();
 	}
 	return string();
 }
