@@ -91,15 +91,15 @@ SampleChannel * SampleManager::GetSampleChannel(SoundBinding * soundBinding)
 	SampleChannel* sampleChannel = nullptr;
 
 
-	map<string, SampleChannel*>::iterator it = sampleChannelCache.find(soundBinding->GetSoundBankName());
+	map<string, SampleChannel*>::iterator it = sampleChannelCache.find(soundBinding->GetFileName());
 	if (it == sampleChannelCache.end()) {
 
-		sampleChannel = sampleChannelCache[soundBinding->GetSoundBankName()] = sampleChannelGenerator->GenerateSampleChannel(soundBinding);
+		sampleChannel = sampleChannelCache[soundBinding->GetFileName()] = sampleChannelGenerator->GenerateSampleChannel(soundBinding);
 		AddItem(sampleChannel);
 
 	}
 	else {
-		sampleChannel = sampleChannelCache[soundBinding->GetSoundBankName()];
+		sampleChannel = sampleChannelCache[soundBinding->GetFileName()];
 	}
 
 	return sampleChannel;
