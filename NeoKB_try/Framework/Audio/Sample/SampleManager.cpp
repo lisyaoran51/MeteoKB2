@@ -157,10 +157,18 @@ int SampleManager::RemoveSampleChannel(SoundBinding * soundBinding)
 		LOG(LogLevel::Debug) << "SampleManager::RemoveSampleChannel() : start removing.";
 
 		SampleChannel* sampleChannel = (*it).second;
-		deleteItem(sampleChannel);
 		LOG(LogLevel::Debug) << "SampleManager::RemoveSampleChannel() : deleting item.";
-		delete sampleChannel;
-		LOG(LogLevel::Debug) << "SampleManager::RemoveSampleChannel() : deleting sample channel.";
+		deleteItem(sampleChannel);
+
+		pendingActions.Add(this, [=]() {
+
+			LOG(LogLevel::Debug) << "SampleManager::RemoveSampleChannel() : delete channel.";
+			delete sampleChannel;
+			return 0;
+		}, "Lambda_SampleManager::RemoveSampleChannel");
+
+		
+		LOG(LogLevel::Debug) << "SampleManager::RemoveSampleChannel() : erasing sample channel.";
 		sampleChannelCache.erase(it);
 
 		LOG(LogLevel::Debug) << "SampleManager::RemoveSampleChannel() : file [" << soundBinding->GetFileName() << "] removed from sample cache.";
