@@ -46,7 +46,7 @@ int SoundSelectPanel::load(FrameworkConfigManager * f, Instrument* i, AudioManag
 		dynamic_cast<Piano*>(instrument)->SwitchSoundBindings(soundBindingSet);
 
 		return 0;
-	}, 1);
+	}, 3);
 
 	return 0;
 }
