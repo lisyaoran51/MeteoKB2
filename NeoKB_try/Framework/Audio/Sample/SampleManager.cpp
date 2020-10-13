@@ -154,24 +154,24 @@ int SampleManager::RemoveSampleChannel(SoundBinding * soundBinding)
 	LOG(LogLevel::Debug) << "SampleManager::RemoveSampleChannel() : file [" << soundBinding->GetFileName() << "].";
 	map<string, SampleChannel*>::iterator it = sampleChannelCache.find(soundBinding->GetFileName());
 	if (it != sampleChannelCache.end()) {
-		LOG(LogLevel::Debug) << "SampleManager::RemoveSampleChannel() : start removing.";
+		LOG(LogLevel::Depricated) << "SampleManager::RemoveSampleChannel() : start removing.";
 
 		SampleChannel* sampleChannel = (*it).second;
-		LOG(LogLevel::Debug) << "SampleManager::RemoveSampleChannel() : deleting item.";
+		LOG(LogLevel::Depricated) << "SampleManager::RemoveSampleChannel() : deleting item.";
 		deleteItem(sampleChannel);
 
 		pendingActions.Add(this, [=]() {
 
-			LOG(LogLevel::Debug) << "SampleManager::RemoveSampleChannel() : delete channel.";
+			LOG(LogLevel::Depricated) << "SampleManager::RemoveSampleChannel() : delete channel.";
 			delete sampleChannel;
 			return 0;
-		}, "Lambda_SampleManager::RemoveSampleChannel");
+		}, "Lambda_SampleManager::DeleteSampleChannel");
 
 		
-		LOG(LogLevel::Debug) << "SampleManager::RemoveSampleChannel() : erasing sample channel.";
+		LOG(LogLevel::Depricated) << "SampleManager::RemoveSampleChannel() : erasing sample channel.";
 		sampleChannelCache.erase(it);
 
-		LOG(LogLevel::Debug) << "SampleManager::RemoveSampleChannel() : file [" << soundBinding->GetFileName() << "] removed from sample cache.";
+		LOG(LogLevel::Depricated) << "SampleManager::RemoveSampleChannel() : file [" << soundBinding->GetFileName() << "] removed from sample cache.";
 
 	}
 	else {

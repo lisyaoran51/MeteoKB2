@@ -324,18 +324,6 @@ int Piano::SwitchSoundBindings(TSoundBindingSet<Pitch>* sBindingSet)
 
 	loadAndMapSamples();
 
-	LOG(LogLevel::Debug) << [=]() {
-
-		map<PianoAction, SampleChannel*>::iterator it2;
-		for (it2 = getSamples()->begin(); it2 != getSamples()->end(); ++it2) {
-
-			LOG(LogLevel::Debug) << "Piano::SwitchSoundBindings() : switch to [" << (int)(*it2).first << "]";
-		}
-
-		return 0;
-	}();
-
-
 	/* ­«±Òsample manager§ó·s */
 	audioManager->GetSampleManager()->SetIsActive(true);
 
