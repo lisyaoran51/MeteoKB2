@@ -48,6 +48,10 @@ namespace Samples {
 
 		SampleManager(CompositeResourceStore<char*>* rStore);
 
+		bool HasSampleChannel(string name);
+
+		bool HasSampleChannel(SoundBinding* soundBinding);
+
 		SampleChannel* GetSampleChannel(string name);
 
 		SampleChannel* GetSampleChannel(SoundBinding* soundBinding);

@@ -19,6 +19,10 @@ int VirtualMeteoPiano::SetSustainType(VirtualMeteoPianoSustainType sType)
 
 int VirtualMeteoPiano::Play(Pitch p, float volume)
 {
+	/* 先檢查是否可以輸入，可以的時候才能控制 */
+	if (!isActive)
+		return 0;
+
 	if (getSamplesByPitch()->find(p) == getSamplesByPitch()->end()) {
 		LOG(LogLevel::Error) << "VirtualMeteoPiano::Play() : sound [" << int(p) << "] not found in samplesByPitch.";
 		return 0;
@@ -40,6 +44,10 @@ int VirtualMeteoPiano::Play(Pitch p, float volume)
 
 int VirtualMeteoPiano::Stop(Pitch p)
 {
+	/* 先檢查是否可以輸入，可以的時候才能控制 */
+	if (!isActive)
+		return 0;
+
 	if (sustainType != VirtualMeteoPianoSustainType::Pedal)
 		return 0;
 
@@ -57,6 +65,10 @@ int VirtualMeteoPiano::Stop(Pitch p)
 
 int VirtualMeteoPiano::PressPedal()
 {
+	/* 先檢查是否可以輸入，可以的時候才能控制 */
+	if (!isActive)
+		return 0;
+
 	if (sustainType != VirtualMeteoPianoSustainType::Pedal)
 		return 0;
 
@@ -68,6 +80,10 @@ int VirtualMeteoPiano::PressPedal()
 
 int VirtualMeteoPiano::ReleasePedal()
 {
+	/* 先檢查是否可以輸入，可以的時候才能控制 */
+	if (!isActive)
+		return 0;
+
 	if (sustainType != VirtualMeteoPianoSustainType::Pedal)
 		return 0;
 
@@ -95,11 +111,34 @@ int VirtualMeteoPiano::ReleasePedal()
 	return 0;
 }
 
+int VirtualMeteoPiano::resetState()
+{
+	map<Pitch, bool>::iterator it;
+	for (it = isPressingMapByPitch.begin(); it != isPressingMapByPitch.end(); ++it) {
+		(*it).second = false;
+	}
+
+	map<Pitch, SampleChannel*>::iterator it2;
+	for (it2 = getSamplesByPitch()->begin(); it2 != getSamplesByPitch()->end(); ++it2) {
+
+		(*it2).second->Stop();
+	}
+
+	return 0;
+}
+
 int VirtualMeteoPiano::MoveOctave(PianoPitchMovement m)
 {
 	// 在這邊沒用
 	throw runtime_error("VirtualMeteoPiano::MoveOctave() : this function is not available in VirtualMeteoPiano.");
 	return 0;
+}
+
+int VirtualMeteoPiano::SwitchSoundBindings(TSoundBindingSet<Pitch>* sBindingSet)
+{
+	LOG(LogLevel::Debug) << "VirtualMeteoPiano::SwitchSoundBindings() : switch piano sound to [" << sBindingSet->fileName << "].";
+
+	return Piano::SwitchSoundBindings(sBindingSet);
 }
 
 map<PianoAction, SampleChannel*>* VirtualMeteoPiano::getSamples(int variant)

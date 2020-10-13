@@ -51,6 +51,8 @@ namespace Instruments {
 		/// </summary>
 		int MoveOctave(PianoPitchMovement s);
 
+		virtual int SwitchSoundBindings(TSoundBindingSet<Pitch>* sBindingSet);
+
 
 		/* ----------------------- MeteoPiano.h ----------------------- */
 

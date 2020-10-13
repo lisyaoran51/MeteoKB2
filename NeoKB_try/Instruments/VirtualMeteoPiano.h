@@ -19,6 +19,14 @@ namespace Instruments {
 
 		VirtualMeteoPiano();
 
+		/* ----------------------- Piano.h ----------------------- */
+
+		virtual int MoveOctave(PianoPitchMovement m);
+
+		virtual int SwitchSoundBindings(TSoundBindingSet<Pitch>* sBindingSet);
+
+		/* ----------------------- VirtualMeteoPiano.h ----------------------- */
+
 		int SetSustainType(VirtualMeteoPianoSustainType sType);
 
 		int Play(Pitch p, float volume);
@@ -29,9 +37,13 @@ namespace Instruments {
 
 		int ReleasePedal();
 
-		virtual int MoveOctave(PianoPitchMovement m);
-
 	protected:
+
+		/* ----------------------- Piano.h ----------------------- */
+
+		virtual int resetState();
+
+		/* ----------------------- VirtualMeteoPiano.h ----------------------- */
 
 		map<Pitch, SampleChannel*> samplesByPitch;
 

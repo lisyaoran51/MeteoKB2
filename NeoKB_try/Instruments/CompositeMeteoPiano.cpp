@@ -62,6 +62,17 @@ int CompositeMeteoPiano::MoveOctave(PianoPitchMovement s)
 	return meteoPiano->MoveOctave(s);
 }
 
+int CompositeMeteoPiano::SwitchSoundBindings(TSoundBindingSet<Pitch>* sBindingSet)
+{
+	LOG(LogLevel::Debug) << "CompositeMeteoPiano::SwitchSoundBindings() : switch piano sound to [" << sBindingSet->fileName << "].";
+
+	meteoPiano->SwitchSoundBindings(sBindingSet);
+	virtualMeteoPiano->SwitchSoundBindings(sBindingSet);
+
+
+	return 0;
+}
+
 int CompositeMeteoPiano::ChangePitchState(MeteoPianoPitchState s)
 {
 	return meteoPiano->ChangePitchState(s);

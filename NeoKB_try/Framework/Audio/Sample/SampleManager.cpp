@@ -26,6 +26,25 @@ SampleManager::SampleManager(CompositeResourceStore<char*>* rStore) : RegisterTy
 	soundBindingSets = new vector<SoundBindingSet*>();
 }
 
+bool SampleManager::HasSampleChannel(string name)
+{
+	map<string, SampleChannel*>::iterator it = sampleChannelCache.find(name);
+	if (it != sampleChannelCache.end())
+		return true;
+	else
+		return false;
+}
+
+bool SampleManager::HasSampleChannel(SoundBinding * soundBinding)
+{
+	map<string, SampleChannel*>::iterator it = sampleChannelCache.find(soundBinding->GetFileName());
+	if (it != sampleChannelCache.end())
+		return true;
+	else
+		return false;
+
+}
+
 SampleChannel * SampleManager::GetSampleChannel(string name)
 {
 	Sample* sample = nullptr;

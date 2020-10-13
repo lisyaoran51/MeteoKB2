@@ -309,7 +309,8 @@ int Piano::SwitchSoundBindings(TSoundBindingSet<Pitch>* sBindingSet)
 	/* §ó·ssound binding */
 	for (int i = 0; i < soundBindings.size(); i++) {
 
-		audioManager->GetSampleManager()->RemoveSampleChannel(soundBindings[i]);
+		if(audioManager->GetSampleManager()->HasSampleChannel(soundBindings[i]))
+			audioManager->GetSampleManager()->RemoveSampleChannel(soundBindings[i]);
 		delete soundBindings[i];
 	}
 	soundBindings.clear();
