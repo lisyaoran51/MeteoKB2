@@ -58,7 +58,6 @@ int SoundSelectPanel::update()
 	if (!isFirstUpdate)
 		return 0;
 
-	return 0;
 
 	LOG(LogLevel::Debug) << "SoundSelectPanel::update() : test switch sound select panel.";
 	/* 測試用，之後要刪掉改用bluetooth */
