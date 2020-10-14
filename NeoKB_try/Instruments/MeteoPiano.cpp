@@ -73,11 +73,11 @@ int MeteoPiano::OnButtonDown(PianoAction action)
 		MeteoContextBluetoothMessage* meteoContextBluetoothMessage = nullptr;
 		if (action == PianoAction::LowerOctave) {
 			MoveOctave(PianoPitchMovement::Lower);
-			meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::PressLowerOctaveButton);
+			meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::PianoPressLowerOctaveButton);
 		}
 		else if (action == PianoAction::RaiseOctave) {
 			MoveOctave(PianoPitchMovement::Raise);
-			meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::PressRaiseOctaveButton);
+			meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::PianoPressRaiseOctaveButton);
 		}
 		
 		outputManager->PushMessage(meteoContextBluetoothMessage);
