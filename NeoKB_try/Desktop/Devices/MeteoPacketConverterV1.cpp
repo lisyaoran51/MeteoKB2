@@ -97,7 +97,7 @@ MeteoBluetoothCommand * MeteoPacketConverterV1::createAckFileSegmentBluetoothCom
 MeteoPacketConverterV1::MeteoPacketConverterV1(Storage* s)
 {
 	storage = s;
-
+	// 識別
 	commandMap[0x000000] = MeteoCommand::ReadFirmwareVersion;
 	commandMap[0x110000] = MeteoCommand::ReturnFirmwareVersion;
 	commandMap[0x000001] = MeteoCommand::ReadFirmwareData;
@@ -112,7 +112,7 @@ MeteoPacketConverterV1::MeteoPacketConverterV1(Storage* s)
 	commandMap[0x010009] = MeteoCommand::ReturnUserData;
 	commandMap[0x00000A] = MeteoCommand::ChangeUserData;
 	commandMap[0x11000A] = MeteoCommand::AckChangeUserData;
-
+	// 系統
 	commandMap[0x000100] = MeteoCommand::ReadMainboardStatus;
 	commandMap[0x110100] = MeteoCommand::ReturnMainboardStatus;
 	commandMap[0x000101] = MeteoCommand::RestartMainboard;
@@ -121,7 +121,7 @@ MeteoPacketConverterV1::MeteoPacketConverterV1(Storage* s)
 	commandMap[0x110102] = MeteoCommand::AckRestartControlboard;
 	commandMap[0x100103] = MeteoCommand::RestartApp;
 	commandMap[0x010103] = MeteoCommand::AckRestartApp;
-
+	// 心跳
 	commandMap[0x000200] = MeteoCommand::SetHearbeatFrequency;
 	commandMap[0x110200] = MeteoCommand::AckSetHearbeatFrequency;
 	commandMap[0x000201] = MeteoCommand::Ping;
@@ -132,26 +132,80 @@ MeteoPacketConverterV1::MeteoPacketConverterV1(Storage* s)
 	commandMap[0x110203] = MeteoCommand::AckAppRequestTerminate;
 	commandMap[0x100204] = MeteoCommand::ReadAppTime;
 	commandMap[0x010204] = MeteoCommand::ReturnAppTime;
-	
-	commandMap[0x000300] = MeteoCommand::PressPowerButton;
-	commandMap[0x110300] = MeteoCommand::AckPressPowerButton;
-	commandMap[0x000301] = MeteoCommand::PressSustainButton;
-	commandMap[0x110301] = MeteoCommand::AckPressSustainButton;
-	commandMap[0x000302] = MeteoCommand::PressSensitiveButton;
-	commandMap[0x110302] = MeteoCommand::AckPressSensitiveButton;
-	commandMap[0x000303] = MeteoCommand::PressLowerOctaveButton;
-	commandMap[0x110303] = MeteoCommand::AckPressLowerOctaveButton;
-	commandMap[0x000304] = MeteoCommand::PressRaiseOctaveButton;
-	commandMap[0x110304] = MeteoCommand::AckPressRaiseOctaveButton;
-	commandMap[0x000305] = MeteoCommand::AdjustInstrumentVolume;
-	commandMap[0x110305] = MeteoCommand::AckAdjustInstrumentVolume;
-	commandMap[0x000306] = MeteoCommand::AdjustBackgroundButton;
-	commandMap[0x110306] = MeteoCommand::AckAdjustBackgroundButton;
-	commandMap[0x000307] = MeteoCommand::PluginPedal;
-	commandMap[0x110307] = MeteoCommand::AckPluginPedal;
-	commandMap[0x000308] = MeteoCommand::PluginEarphone;
-	commandMap[0x110308] = MeteoCommand::AckPluginEarphone;
-
+	// 基本功能
+	commandMap[0x000300] = MeteoCommand::AppPressPowerButton			   ;
+	commandMap[0x110300] = MeteoCommand::AckAppPressPowerButton			   ;
+	commandMap[0x100300] = MeteoCommand::PianoPressPowerButton			   ;
+	commandMap[0x010300] = MeteoCommand::AckPianoPressPowerButton		   ;
+	commandMap[0x000301] = MeteoCommand::AppPressSustainButton			   ;
+	commandMap[0x110301] = MeteoCommand::AckAppPressSustainButton		   ;
+	commandMap[0x100301] = MeteoCommand::PianoPressSustainButton		   ;
+	commandMap[0x010301] = MeteoCommand::AckPianoPressSustainButton		   ;
+	commandMap[0x000302] = MeteoCommand::AppPressSensitiveButton		   ;
+	commandMap[0x110302] = MeteoCommand::AckAppPressSensitiveButton		   ;
+	commandMap[0x100302] = MeteoCommand::PianoPressSensitiveButton		   ;
+	commandMap[0x010302] = MeteoCommand::AckPianoPressSensitiveButton	   ;
+	commandMap[0x000303] = MeteoCommand::AppPressLowerOctaveButton		   ;
+	commandMap[0x110303] = MeteoCommand::AckAppPressLowerOctaveButton	   ;
+	commandMap[0x100303] = MeteoCommand::PianoPressLowerOctaveButton	   ;
+	commandMap[0x010303] = MeteoCommand::AckPianoPressLowerOctaveButton	   ;
+	commandMap[0x000304] = MeteoCommand::AppPressRaiseOctaveButton		   ;
+	commandMap[0x110305] = MeteoCommand::AckAppPressRaiseOctaveButton	   ;
+	commandMap[0x100304] = MeteoCommand::PianoPressRaiseOctaveButton	   ;
+	commandMap[0x010305] = MeteoCommand::AckPianoPressRaiseOctaveButton	   ;
+	commandMap[0x000305] = MeteoCommand::AppPressPauseButton			   ;
+	commandMap[0x110305] = MeteoCommand::AckAppPressPauseButton			   ;
+	commandMap[0x100305] = MeteoCommand::PianoPressPauseButton			   ;
+	commandMap[0x010305] = MeteoCommand::AckPianoPressPauseButton		   ;
+	commandMap[0x000306] = MeteoCommand::AppAdjustInstrumentVolume		   ;
+	commandMap[0x110306] = MeteoCommand::AckAppAdjustInstrumentVolume	   ;
+	commandMap[0x100306] = MeteoCommand::PianoAdjustInstrumentVolume	   ;
+	commandMap[0x010306] = MeteoCommand::AckPianoAdjustInstrumentVolume	   ;
+	commandMap[0x000307] = MeteoCommand::AppAdjustBackgroundButton		   ;
+	commandMap[0x110307] = MeteoCommand::AckAppAdjustBackgroundButton	   ;
+	commandMap[0x100307] = MeteoCommand::PianoAdjustBackgroundButton	   ;
+	commandMap[0x010307] = MeteoCommand::AckPianoAdjustBackgroundButton	   ;
+	commandMap[0x000308] = MeteoCommand::AppPluginPedal					   ;
+	commandMap[0x110308] = MeteoCommand::AckAppPluginPedal				   ;
+	commandMap[0x100308] = MeteoCommand::PianoPluginPedal				   ;
+	commandMap[0x010308] = MeteoCommand::AckPianoPluginPedal			   ;
+	commandMap[0x000309] = MeteoCommand::AppPluginEarphone				   ;
+	commandMap[0x110309] = MeteoCommand::AckAppPluginEarphone			   ;
+	commandMap[0x100309] = MeteoCommand::PianoPluginEarphone			   ;
+	commandMap[0x010309] = MeteoCommand::AckPianoPluginEarphone			   ;
+	commandMap[0x00030A] = MeteoCommand::AppPressKey					   ;
+	commandMap[0x11030A] = MeteoCommand::AckAppPressKey					   ;
+	commandMap[0x10030A] = MeteoCommand::PianoPressKey					   ;
+	commandMap[0x01030A] = MeteoCommand::AckPianoPressKey				   ;
+	commandMap[0x00030B] = MeteoCommand::AppReleaseKey					   ;
+	commandMap[0x11030B] = MeteoCommand::AckAppReleaseKey				   ;
+	commandMap[0x10030B] = MeteoCommand::PianoReleaseKey				   ;
+	commandMap[0x01030B] = MeteoCommand::AckPianoReleaseKey				   ;
+	commandMap[0x00030C] = MeteoCommand::AppPushInSustainPedal			   ;
+	commandMap[0x11030C] = MeteoCommand::AckAppPushInSustainPedal		   ;
+	commandMap[0x10030C] = MeteoCommand::PianoPushInSustainPedal		   ;
+	commandMap[0x01030C] = MeteoCommand::AckPianoPushInSustainPedal		   ;
+	commandMap[0x00030D] = MeteoCommand::AppReleaseSustainPedal			   ;
+	commandMap[0x11030D] = MeteoCommand::AckAppReleaseSustainPedal		   ;
+	commandMap[0x10030D] = MeteoCommand::PianoReleaseSustainPedal		   ;
+	commandMap[0x01030D] = MeteoCommand::AckPianoReleaseSustainPedal	   ;
+	commandMap[0x000310] = MeteoCommand::AppReadPianoInstruments		   ;
+	commandMap[0x110310] = MeteoCommand::AckAppReadPianoInstruments		   ;
+	commandMap[0x100310] = MeteoCommand::PianoReadAppInstruments		   ;
+	commandMap[0x010310] = MeteoCommand::AckPianoReadAppInstruments		   ;
+	commandMap[0x000311] = MeteoCommand::AppSwitchInstrument			   ;
+	commandMap[0x110311] = MeteoCommand::AckAppSwitchInstrument			   ;
+	commandMap[0x100311] = MeteoCommand::PianoSwitchInstrument			   ;
+	commandMap[0x010311] = MeteoCommand::AckPianoSwitchInstrument		   ;
+	commandMap[0x000312] = MeteoCommand::FinishAppSwitchInstrument		   ;
+	commandMap[0x110312] = MeteoCommand::AckFinishAppSwitchInstrument	   ;
+	commandMap[0x100312] = MeteoCommand::FinishPianoSwitchInstrument	   ;
+	commandMap[0x010312] = MeteoCommand::AckFinishPianoSwitchInstrument	   ;
+	commandMap[0x000313] = MeteoCommand::AppSwitchPianoInstrument		   ;
+	commandMap[0x110313] = MeteoCommand::AckAppSwitchPianoInstrument	   ;
+	commandMap[0x100314] = MeteoCommand::FinishAppSwitchPianoInstrument	   ;
+	commandMap[0x010314] = MeteoCommand::AckFinishAppSwitchPianoInstrument ;
+	// 擴充升級
 	commandMap[0x000400] = MeteoCommand::NewFirmwareData;
 	commandMap[0x110400] = MeteoCommand::AckNewFirmwareData;
 	commandMap[0x000401] = MeteoCommand::NewFirmwareFileSegment;
@@ -175,7 +229,7 @@ MeteoPacketConverterV1::MeteoPacketConverterV1(Storage* s)
 	commandMap[0x10040E] = MeteoCommand::RequestRewriteNewInstrumentFileSegment;
 	commandMap[0x00040F] = MeteoCommand::RewriteNewInstrumentFileSegment;
 	commandMap[0x11040F] = MeteoCommand::AckRewriteNewInstrumentFileSegment;
-
+	// log
 	commandMap[0x000500] = MeteoCommand::ChangeHardwareLogLevel;
 	commandMap[0x110500] = MeteoCommand::AckChangeHardwareLogLevel;
 	commandMap[0x000501] = MeteoCommand::DownloadHardwareLog;
@@ -190,14 +244,14 @@ MeteoPacketConverterV1::MeteoPacketConverterV1(Storage* s)
 	commandMap[0x110506] = MeteoCommand::InstantLog;
 	commandMap[0x100507] = MeteoCommand::StopInstantLog;
 	commandMap[0x010507] = MeteoCommand::AckStopInstantLog;
-
+	// 設定
 	commandMap[0x000600] = MeteoCommand::ReadHardwareConfiguration;
 	commandMap[0x110600] = MeteoCommand::ReturnHardwareConfiguration;
 	commandMap[0x000601] = MeteoCommand::WriteHardwareConfiguration;
 	commandMap[0x110601] = MeteoCommand::ReturnWriteHardwareConfiguration;
 	commandMap[0x000602] = MeteoCommand::ReadHardwareRecord;
 	commandMap[0x110602] = MeteoCommand::ReturnHardwareRecord;
-
+	// 場警
 	commandMap[0x000700] = MeteoCommand::ReadScene;
 	commandMap[0x110700] = MeteoCommand::ReturnScene;
 	commandMap[0x000701] = MeteoCommand::ReadSceneAvailability;
@@ -209,6 +263,8 @@ MeteoPacketConverterV1::MeteoPacketConverterV1(Storage* s)
 	commandMap[0x000704] = MeteoCommand::EnterSubscene;
 	commandMap[0x110704] = MeteoCommand::AckEnterSubscene;
 	
+	// 音樂遊戲
+	// 遊戲準備
 	
 	commandMap[0x000800] = MeteoCommand::ReadGameConfiguration;
 	commandMap[0x110800] = MeteoCommand::ReturnGameConfiguration;
@@ -227,7 +283,7 @@ MeteoPacketConverterV1::MeteoPacketConverterV1(Storage* s)
 	commandMap[0x110807] = MeteoCommand::AckRequestLoadGame;
 	commandMap[0x100808] = MeteoCommand::FinishLoadGame;
 	commandMap[0x010808] = MeteoCommand::AckFinishLoadGame;
-	
+	// 遊戲進行
 	commandMap[0x100810] = MeteoCommand::StartGame;
 	commandMap[0x010810] = MeteoCommand::AckStartGame;
 	commandMap[0x110811] = MeteoCommand::GameTime;
@@ -259,7 +315,7 @@ MeteoPacketConverterV1::MeteoPacketConverterV1(Storage* s)
 	commandMap[0x000821] = MeteoCommand::AppRestartGame;
 	commandMap[0x110821] = MeteoCommand::AckAppRestartGame;
 
-	
+	// 遊戲結束
 	commandMap[0x100840] = MeteoCommand::HardwareFinishGame;
 	commandMap[0x010840] = MeteoCommand::AckHardwareFinishGame;
 	commandMap[0x100841] = MeteoCommand::FinalScore;
@@ -274,6 +330,8 @@ MeteoPacketConverterV1::MeteoPacketConverterV1(Storage* s)
 	commandMap[0x000846] = MeteoCommand::FinishWritePlayRecord;
 	commandMap[0x110846] = MeteoCommand::AckFinishWritePlayRecord;
 
+	
+	// 識別
 	SetReadFirmwareVersionPacketTypeCommand(MeteoCommand::ReadFirmwareVersion);
 	SetReturnFirmwareVersionPacketTypeCommand(MeteoCommand::ReturnFirmwareVersion);
 	SetJsonPacketTypeCommand(MeteoCommand::ReadFirmwareData);
@@ -288,7 +346,7 @@ MeteoPacketConverterV1::MeteoPacketConverterV1(Storage* s)
 	SetJsonPacketTypeCommand(MeteoCommand::ReturnUserData);
 	SetJsonPacketTypeCommand(MeteoCommand::ChangeUserData);
 	SetJsonPacketTypeCommand(MeteoCommand::AckChangeUserData);
-
+	// 系統
 	SetJsonPacketTypeCommand(MeteoCommand::ReadMainboardStatus);
 	SetJsonPacketTypeCommand(MeteoCommand::ReturnMainboardStatus);
 	SetJsonPacketTypeCommand(MeteoCommand::RestartMainboard);
@@ -297,7 +355,7 @@ MeteoPacketConverterV1::MeteoPacketConverterV1(Storage* s)
 	SetJsonPacketTypeCommand(MeteoCommand::AckRestartControlboard);
 	SetJsonPacketTypeCommand(MeteoCommand::RestartApp);
 	SetJsonPacketTypeCommand(MeteoCommand::AckRestartApp);
-
+	// 心跳
 	SetJsonPacketTypeCommand(MeteoCommand::SetHearbeatFrequency);
 	SetJsonPacketTypeCommand(MeteoCommand::AckSetHearbeatFrequency);
 	SetJsonPacketTypeCommand(MeteoCommand::Ping);
@@ -308,26 +366,81 @@ MeteoPacketConverterV1::MeteoPacketConverterV1(Storage* s)
 	SetJsonPacketTypeCommand(MeteoCommand::AckAppRequestTerminate);
 	SetJsonPacketTypeCommand(MeteoCommand::ReadAppTime);
 	SetJsonPacketTypeCommand(MeteoCommand::ReturnAppTime);
+	// 基本功能
+	SetJsonPacketTypeCommand(MeteoCommand::AppPressPowerButton			  	 );
+	SetJsonPacketTypeCommand(MeteoCommand::AckAppPressPowerButton			 ); 
+	SetJsonPacketTypeCommand(MeteoCommand::PianoPressPowerButton			 ); 
+	SetJsonPacketTypeCommand(MeteoCommand::AckPianoPressPowerButton		  	 );
+	SetJsonPacketTypeCommand(MeteoCommand::AppPressSustainButton			 ); 
+	SetJsonPacketTypeCommand(MeteoCommand::AckAppPressSustainButton		  	 );
+	SetJsonPacketTypeCommand(MeteoCommand::PianoPressSustainButton		  	 );
+	SetJsonPacketTypeCommand(MeteoCommand::AckPianoPressSustainButton		 ); 
+	SetJsonPacketTypeCommand(MeteoCommand::AppPressSensitiveButton		  	 );
+	SetJsonPacketTypeCommand(MeteoCommand::AckAppPressSensitiveButton		 ); 
+	SetJsonPacketTypeCommand(MeteoCommand::PianoPressSensitiveButton		 ); 
+	SetJsonPacketTypeCommand(MeteoCommand::AckPianoPressSensitiveButton	  	 );
+	SetJsonPacketTypeCommand(MeteoCommand::AppPressLowerOctaveButton		 ); 
+	SetJsonPacketTypeCommand(MeteoCommand::AckAppPressLowerOctaveButton	  	 );
+	SetJsonPacketTypeCommand(MeteoCommand::PianoPressLowerOctaveButton	  	 );
+	SetJsonPacketTypeCommand(MeteoCommand::AckPianoPressLowerOctaveButton	 ); 
+	SetJsonPacketTypeCommand(MeteoCommand::AppPressRaiseOctaveButton		 ); 
+	SetJsonPacketTypeCommand(MeteoCommand::AckAppPressRaiseOctaveButton	  	 );
+	SetJsonPacketTypeCommand(MeteoCommand::PianoPressRaiseOctaveButton	  	 );
+	SetJsonPacketTypeCommand(MeteoCommand::AckPianoPressRaiseOctaveButton	 ); 
+	SetJsonPacketTypeCommand(MeteoCommand::AppPressPauseButton			  	 );
+	SetJsonPacketTypeCommand(MeteoCommand::AckAppPressPauseButton			 ); 
+	SetJsonPacketTypeCommand(MeteoCommand::PianoPressPauseButton			 ); 
+	SetJsonPacketTypeCommand(MeteoCommand::AckPianoPressPauseButton		  	 );
+	SetJsonPacketTypeCommand(MeteoCommand::AppAdjustInstrumentVolume		 ); 
+	SetJsonPacketTypeCommand(MeteoCommand::AckAppAdjustInstrumentVolume	  	 );
+	SetJsonPacketTypeCommand(MeteoCommand::PianoAdjustInstrumentVolume	  	 );
+	SetJsonPacketTypeCommand(MeteoCommand::AckPianoAdjustInstrumentVolume	 ); 
+	SetJsonPacketTypeCommand(MeteoCommand::AppAdjustBackgroundButton		 ); 
+	SetJsonPacketTypeCommand(MeteoCommand::AckAppAdjustBackgroundButton	  	 );
+	SetJsonPacketTypeCommand(MeteoCommand::PianoAdjustBackgroundButton	  	 );
+	SetJsonPacketTypeCommand(MeteoCommand::AckPianoAdjustBackgroundButton	 ); 
+	SetJsonPacketTypeCommand(MeteoCommand::AppPluginPedal					 ); 
+	SetJsonPacketTypeCommand(MeteoCommand::AckAppPluginPedal				 ); 
+	SetJsonPacketTypeCommand(MeteoCommand::PianoPluginPedal				  	 );
+	SetJsonPacketTypeCommand(MeteoCommand::AckPianoPluginPedal			  	 );
+	SetJsonPacketTypeCommand(MeteoCommand::AppPluginEarphone				 ); 
+	SetJsonPacketTypeCommand(MeteoCommand::AckAppPluginEarphone			  	 );
+	SetJsonPacketTypeCommand(MeteoCommand::PianoPluginEarphone			  	 );
+	SetJsonPacketTypeCommand(MeteoCommand::AckPianoPluginEarphone			 ); 
+	SetJsonPacketTypeCommand(MeteoCommand::AppPressKey					  	 );
+	SetJsonPacketTypeCommand(MeteoCommand::AckAppPressKey					 ); 
+	SetJsonPacketTypeCommand(MeteoCommand::PianoPressKey					 ); 
+	SetJsonPacketTypeCommand(MeteoCommand::AckPianoPressKey				  	 );
+	SetJsonPacketTypeCommand(MeteoCommand::AppReleaseKey					 ); 
+	SetJsonPacketTypeCommand(MeteoCommand::AckAppReleaseKey				  	 );
+	SetJsonPacketTypeCommand(MeteoCommand::PianoReleaseKey				  	 );
+	SetJsonPacketTypeCommand(MeteoCommand::AckPianoReleaseKey				 ); 
+	SetJsonPacketTypeCommand(MeteoCommand::AppPushInSustainPedal			 ); 
+	SetJsonPacketTypeCommand(MeteoCommand::AckAppPushInSustainPedal		  	 );
+	SetJsonPacketTypeCommand(MeteoCommand::PianoPushInSustainPedal		  	 );
+	SetJsonPacketTypeCommand(MeteoCommand::AckPianoPushInSustainPedal		 ); 
+	SetJsonPacketTypeCommand(MeteoCommand::AppReleaseSustainPedal			 ); 
+	SetJsonPacketTypeCommand(MeteoCommand::AckAppReleaseSustainPedal		 ); 
+	SetJsonPacketTypeCommand(MeteoCommand::PianoReleaseSustainPedal		  	 );
+	SetJsonPacketTypeCommand(MeteoCommand::AckPianoReleaseSustainPedal	  	 );
+	SetJsonPacketTypeCommand(MeteoCommand::AppReadPianoInstruments		  	 );
+	SetJsonPacketTypeCommand(MeteoCommand::AckAppReadPianoInstruments		 ); 
+	SetJsonPacketTypeCommand(MeteoCommand::PianoReadAppInstruments		  	 );
+	SetJsonPacketTypeCommand(MeteoCommand::AckPianoReadAppInstruments		 ); 
+	SetJsonPacketTypeCommand(MeteoCommand::AppSwitchInstrument			  	 );
+	SetJsonPacketTypeCommand(MeteoCommand::AckAppSwitchInstrument			 ); 
+	SetJsonPacketTypeCommand(MeteoCommand::PianoSwitchInstrument			 ); 
+	SetJsonPacketTypeCommand(MeteoCommand::AckPianoSwitchInstrument		  	 );
+	SetJsonPacketTypeCommand(MeteoCommand::FinishAppSwitchInstrument		 ); 
+	SetJsonPacketTypeCommand(MeteoCommand::AckFinishAppSwitchInstrument	  	 );
+	SetJsonPacketTypeCommand(MeteoCommand::FinishPianoSwitchInstrument	  	 );
+	SetJsonPacketTypeCommand(MeteoCommand::AckFinishPianoSwitchInstrument	 ); 
+	SetJsonPacketTypeCommand(MeteoCommand::AppSwitchPianoInstrument		  	 );
+	SetJsonPacketTypeCommand(MeteoCommand::AckAppSwitchPianoInstrument	  	 );
+	SetJsonPacketTypeCommand(MeteoCommand::FinishAppSwitchPianoInstrument	 ); 
+	SetJsonPacketTypeCommand(MeteoCommand::AckFinishAppSwitchPianoInstrument );
 
-	SetJsonPacketTypeCommand(MeteoCommand::PressPowerButton);
-	SetJsonPacketTypeCommand(MeteoCommand::AckPressPowerButton);
-	SetJsonPacketTypeCommand(MeteoCommand::PressSustainButton);
-	SetJsonPacketTypeCommand(MeteoCommand::AckPressSustainButton);
-	SetJsonPacketTypeCommand(MeteoCommand::PressSensitiveButton);
-	SetJsonPacketTypeCommand(MeteoCommand::AckPressSensitiveButton);
-	SetJsonPacketTypeCommand(MeteoCommand::PressLowerOctaveButton);
-	SetJsonPacketTypeCommand(MeteoCommand::AckPressLowerOctaveButton);
-	SetJsonPacketTypeCommand(MeteoCommand::PressRaiseOctaveButton);
-	SetJsonPacketTypeCommand(MeteoCommand::AckPressRaiseOctaveButton);
-	SetJsonPacketTypeCommand(MeteoCommand::AdjustInstrumentVolume);
-	SetJsonPacketTypeCommand(MeteoCommand::AckAdjustInstrumentVolume);
-	SetJsonPacketTypeCommand(MeteoCommand::AdjustBackgroundButton);
-	SetJsonPacketTypeCommand(MeteoCommand::AckAdjustBackgroundButton);
-	SetJsonPacketTypeCommand(MeteoCommand::PluginPedal);
-	SetJsonPacketTypeCommand(MeteoCommand::AckPluginPedal);
-	SetJsonPacketTypeCommand(MeteoCommand::PluginEarphone);
-	SetJsonPacketTypeCommand(MeteoCommand::AckPluginEarphone);
-
+	// 擴充升級
 	SetJsonPacketTypeCommand(MeteoCommand::NewFirmwareData);
 	SetJsonPacketTypeCommand(MeteoCommand::AckNewFirmwareData);
 	SetFilePacketTypeCommand(MeteoCommand::NewFirmwareFileSegment);
@@ -351,7 +464,7 @@ MeteoPacketConverterV1::MeteoPacketConverterV1(Storage* s)
 	SetJsonPacketTypeCommand(MeteoCommand::RequestRewriteNewInstrumentFileSegment);
 	SetFilePacketTypeCommand(MeteoCommand::RewriteNewInstrumentFileSegment);
 	SetAckFilePacketTypeCommand(MeteoCommand::AckRewriteNewInstrumentFileSegment);
-
+	// log
 	SetJsonPacketTypeCommand(MeteoCommand::ChangeHardwareLogLevel);
 	SetJsonPacketTypeCommand(MeteoCommand::AckChangeHardwareLogLevel);
 	SetJsonPacketTypeCommand(MeteoCommand::DownloadHardwareLog);
@@ -366,14 +479,14 @@ MeteoPacketConverterV1::MeteoPacketConverterV1(Storage* s)
 	SetJsonPacketTypeCommand(MeteoCommand::InstantLog);
 	SetJsonPacketTypeCommand(MeteoCommand::StopInstantLog);
 	SetJsonPacketTypeCommand(MeteoCommand::AckStopInstantLog);
-
+	// 設定
 	SetJsonPacketTypeCommand(MeteoCommand::ReadHardwareConfiguration);
 	SetJsonPacketTypeCommand(MeteoCommand::ReturnHardwareConfiguration);
 	SetJsonPacketTypeCommand(MeteoCommand::WriteHardwareConfiguration);
 	SetJsonPacketTypeCommand(MeteoCommand::ReturnWriteHardwareConfiguration);
 	SetJsonPacketTypeCommand(MeteoCommand::ReadHardwareRecord);
 	SetJsonPacketTypeCommand(MeteoCommand::ReturnHardwareRecord);
-
+	// 場警
 	SetJsonPacketTypeCommand(MeteoCommand::ReadScene);
 	SetJsonPacketTypeCommand(MeteoCommand::ReturnScene);
 	SetJsonPacketTypeCommand(MeteoCommand::ReadSceneAvailability);
@@ -384,7 +497,8 @@ MeteoPacketConverterV1::MeteoPacketConverterV1(Storage* s)
 	SetJsonPacketTypeCommand(MeteoCommand::RerturnSubsceneAvailability);
 	SetJsonPacketTypeCommand(MeteoCommand::EnterSubscene);
 	SetJsonPacketTypeCommand(MeteoCommand::AckEnterSubscene);
-	
+	// 音樂遊戲
+	// 遊戲準備
 	
 	SetJsonPacketTypeCommand(MeteoCommand::ReadGameConfiguration);
 	SetJsonPacketTypeCommand(MeteoCommand::ReturnGameConfiguration);
@@ -403,7 +517,7 @@ MeteoPacketConverterV1::MeteoPacketConverterV1(Storage* s)
 	SetJsonPacketTypeCommand(MeteoCommand::AckRequestLoadGame);
 	SetJsonPacketTypeCommand(MeteoCommand::FinishLoadGame);
 	SetJsonPacketTypeCommand(MeteoCommand::AckFinishLoadGame);
-	
+	// 遊戲進行
 	SetJsonPacketTypeCommand(MeteoCommand::StartGame);
 	SetJsonPacketTypeCommand(MeteoCommand::AckStartGame);
 	SetJsonPacketTypeCommand(MeteoCommand::GameTime);
@@ -434,7 +548,7 @@ MeteoPacketConverterV1::MeteoPacketConverterV1(Storage* s)
 	SetJsonPacketTypeCommand(MeteoCommand::AckAppQuitGame);
 	SetJsonPacketTypeCommand(MeteoCommand::AppRestartGame);
 	SetJsonPacketTypeCommand(MeteoCommand::AckAppRestartGame);
-	
+	// 遊戲結束
 	SetJsonPacketTypeCommand(MeteoCommand::HardwareFinishGame);
 	SetJsonPacketTypeCommand(MeteoCommand::AckHardwareFinishGame);
 	SetJsonPacketTypeCommand(MeteoCommand::FinalScore);

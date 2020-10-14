@@ -1,9 +1,11 @@
 #include "SoundSelectPanel.h"
 
 #include "../../Instruments/Piano.h"
+#include "../Output/Bluetooths/MeteoContextBluetoothMessage.h"
 
 using namespace Games::UI;
 using namespace Instruments;
+using namespace Games::Output::Bluetooths;
 
 
 
@@ -38,16 +40,16 @@ int SoundSelectPanel::load(FrameworkConfigManager * f, Instrument* i, AudioManag
 	outputManager = o;
 
 	
-	//GetScheduler()->AddDelayedTask([=]() {
-	//
-	//
-	//	LOG(LogLevel::Debug) << "SoundSelectPanel::load() : test switch sound select panel on [" << instrument->GetTypeName() << "].";
-	//	/* 測試用，之後要刪掉改用bluetooth */
-	//	TSoundBindingSet<Pitch>* soundBindingSet = dynamic_cast<TSoundBindingSet<Pitch>*>(audioManager->GetSampleManager()->GetSoundBindingSets()->at(0));
-	//	dynamic_cast<Piano*>(instrument)->SwitchSoundBindings(soundBindingSet);
-	//
-	//	return 0;
-	//}, 3);
+	GetScheduler()->AddDelayedTask([=]() {
+	
+	
+		LOG(LogLevel::Debug) << "SoundSelectPanel::load() : test switch sound select panel on [" << instrument->GetTypeName() << "].";
+		/* 測試用，之後要刪掉改用bluetooth */
+		TSoundBindingSet<Pitch>* soundBindingSet = dynamic_cast<TSoundBindingSet<Pitch>*>(audioManager->GetSampleManager()->GetSoundBindingSets()->at(0));
+		dynamic_cast<Piano*>(instrument)->SwitchSoundBindings(soundBindingSet);
+	
+		return 0;
+	}, 3);
 
 	return 0;
 }
@@ -61,6 +63,42 @@ SoundSelectPanel::SoundSelectPanel() : RegisterType("SoundSelectPanel")
 
 int SoundSelectPanel::OnCommand(MeteoBluetoothCommand * command)
 {
+
+	if (command->GetCommand() == MeteoCommand::AppSwitchPianoInstrument) {
+
+		string soundBank = command->GetContext()["Instrument"];
+		
+		vector<SoundBindingSet*>* soundBindingSets = audioManager->GetSampleManager()->GetSoundBindingSets();
+
+		SoundBindingSet* soundBindingSet = nullptr;
+
+		for (int i = 0; i < soundBindingSets->size(); i++) {
+			if (soundBindingSets->at(i)->fileName == soundBank) {
+				soundBindingSet = soundBindingSets->at(i);
+			}
+		}
+
+		MeteoContextBluetoothMessage* outputMessage = new MeteoContextBluetoothMessage(MeteoCommand::AckAppSwitchPianoInstrument);
+
+		if (soundBindingSet) {
+			outputMessage->GetContext()["Status"] = 0;
+			outputManager->PushMessage(outputMessage);
+
+			dynamic_cast<Piano*>(instrument)->SwitchSoundBindings(dynamic_cast<TSoundBindingSet<Pitch>*>(soundBindingSet));
+
+			outputMessage = new MeteoContextBluetoothMessage(MeteoCommand::FinishAppSwitchPianoInstrument);
+			outputMessage->GetContext()["Instrument"] = soundBank;
+			outputManager->PushMessage(outputMessage);
+
+		}
+		else {
+			outputMessage->GetContext()["Status"] = -1;
+			outputManager->PushMessage(outputMessage);
+		}
+
+
+	}
+
 	return 0;
 }
 
