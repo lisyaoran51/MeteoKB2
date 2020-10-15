@@ -2172,3 +2172,11 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 10/4
 	繼續是怎麼換音色，音色decoder會出錯
 	目前可以順利使用的commit是81a1292de0f1a3e3b8ec7ed6da000e0dfc020d6d
+	
+10/13
+	osu在蒐譜檔時，會用LegacyFilesystemReader把資料夾下面所有檔案名稱都爬出來，然後再trim掉父資料夾路徑，就只剩子資料夾到檔案的路徑
+	搜尋完普檔以後，才會把這些路徑丟給file reader去讀，所以file reader的get stream沒有爬所有檔案路徑的功能，只能對一個檔案讀取
+	
+	刪不掉smaple channel
+	
+	切換音色寫完了
