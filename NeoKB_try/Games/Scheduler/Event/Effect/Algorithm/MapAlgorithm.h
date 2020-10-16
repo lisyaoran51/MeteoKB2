@@ -210,7 +210,7 @@ namespace Algorithms{
 
 			int returnValue = -1;
 			if(genAlgo != nullptr)
-				genAlgo->Generate(bufferMap, em);
+				returnValue = genAlgo->Generate(bufferMap, em);
 
 			if (returnValue == -1)
 				return 0;
