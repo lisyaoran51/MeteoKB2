@@ -39,6 +39,7 @@ int InputManager::update()
 	LOG(LogLevel::Finest) << "InputManager::update(): after handling states.";
 
 	delete distinctInputStates;
+	LOG(LogLevel::Finest) << "InputManager::update(): delete states.";
 
 	return 0;
 }
