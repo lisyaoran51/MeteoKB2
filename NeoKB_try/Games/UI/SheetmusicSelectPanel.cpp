@@ -184,7 +184,12 @@ int SheetmusicSelectPanel::OnCommand(MeteoBluetoothCommand * command)
 	}
 
 	if (command->GetCommand() == MeteoCommand::RequestLoadGame) {
+
+		LOG(LogLevel::Debug) << "int SheetmusicSelectPanel::OnCommand() : request load game.";
+
 		string fileName = command->GetContext()["FileName"].get<string>();
+
+		LOG(LogLevel::Debug) << "int SheetmusicSelectPanel::OnCommand() : selected file name [" << fileName << "].";
 
 		MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::AckRequestLoadGame);
 		meteoContextBluetoothMessage->GetContext()["Status"] = short(0);
