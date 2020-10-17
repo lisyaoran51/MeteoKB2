@@ -22,6 +22,8 @@ int BluetoothInputHandler::Initialize(GameHost * host)
 
 int BluetoothInputHandler::HandleState(InputState * inputState)
 {
+	LOG(LogLevel::Debug) << "BluetoothInputHandler::HandleState() : cloning new state and pend.";
+
 	auto bluetoothState = inputState->GetBluetoothState()->Clone();
 
 	InputState* pendingState = new InputState();
