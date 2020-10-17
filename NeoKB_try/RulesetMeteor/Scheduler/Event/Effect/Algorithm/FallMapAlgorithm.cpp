@@ -77,6 +77,21 @@ int FallMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper<FallEffect
 		return 0;
 	}(width, height, m);
 
+	/* 流光運作方式
+
+	16 --- start ---
+		|		  |
+		|		  |	位置
+		|		  |
+		O   now	 ---
+	   ||
+	   v|
+		|
+		|
+	0  ---
+	
+	*/
+
 	// 目前流星位置：height - speed * currentTime 
 	MTO_FLOAT meteorPos = height - speed * (currentTime - startTime);
 	
@@ -85,14 +100,11 @@ int FallMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper<FallEffect
 	// 算流星燈每一個燈泡的亮度，從下面網上算
 	for (int i = 0; i < height; i++) {
 
-		/* 新版fall algo */
-		if (i > meteorPos - 0.5 && i < meteorPos + MTO_FLOAT(fallLength)) {
-			int brightness = (-BRIGHTNESS_MAX * (MTO_FLOAT(i) - meteorPos) / MTO_FLOAT(fallLength) + BRIGHTNESS_MAX) * fallBrightness;
-			if (brightness > 0) {
-				m->Add(width, height + i, brightness);
-				isAdded = true;
-				break;
-			}
+		/* 新版fall algo，不能這樣寫，會閃得更嚴重 */
+		if (i > meteorPos - 0.5 && i <= meteorPos + 0.5) {
+			m->Add(width, height + i, 1);
+			isAdded = true;
+			break;
 		}
 		continue;
 
