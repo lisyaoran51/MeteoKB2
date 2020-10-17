@@ -87,7 +87,10 @@ vector<InputState*>* InputManager::getPendingState(vector<InputState*>* pStates)
 			pStates->insert(pStates->end(), inputHandlerPendingState->begin(), inputHandlerPendingState->end());
 		
 			if (inputHandlerPendingState->at(0)->GetPanelState())
-				LOG(LogLevel::Debug) << "InputManager::getPendingState() : get fake input.";
+				LOG(LogLevel::Depricated) << "InputManager::getPendingState() : get fake input.";
+
+			if (inputHandlerPendingState->at(0)->GetBluetoothState())
+				LOG(LogLevel::Debug) << "InputManager::getPendingState() : get bt input.";
 		}
 
 		delete inputHandlerPendingState;
