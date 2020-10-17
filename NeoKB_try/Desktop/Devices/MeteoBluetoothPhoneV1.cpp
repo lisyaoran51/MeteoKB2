@@ -107,8 +107,11 @@ int MeteoBluetoothPhoneV1::readBluetooth()
 		char** packets = nullptr;
 		int* packetLengths = nullptr;
 
+		LOG(LogLevel::Debug) << "MeteoPacketConverterV1::readBluetooth() : spliting packet.";
+
 		int packetCount = packetConverter->SplitPacket(bufferIn, bytes_read, packets, packetLengths);
 
+		LOG(LogLevel::Debug) << "MeteoPacketConverterV1::readBluetooth() : packets [" << packetCount << "].";
 		for (int i = 0; i < packetCount; i++) {
 
 			PacketStatus packetStatus = packetConverter->CheckPacketStatus(packets[i], packetLengths[i]);
@@ -236,6 +239,8 @@ int MeteoBluetoothPhoneV1::pushBluetoothState(BluetoothCommand * btCommand)
 
 int MeteoBluetoothPhoneV1::handleNewPacket(char * packet, int length)
 {
+
+	LOG(LogLevel::Debug) << "MeteoPacketConverterV1::handleNewPacket() : length [" << length << "].";
 
 	PacketType packetType = packetConverter->CheckPacketType(packet, length);
 
