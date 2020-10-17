@@ -93,7 +93,7 @@ int MeteoBluetoothPhoneV1::work()
 
 int MeteoBluetoothPhoneV1::readBluetooth()
 {
-	LOG(LogLevel::Depricated) << "MeteoPacketConverterV1::readBluetooth() : start reading.";
+	LOG(LogLevel::Depricated) << "MeteoBluetoothPhoneV1::readBluetooth() : start reading.";
 	if(lastRunReceived)
 		memset(bufferIn, 0, sizeof(bufferIn));
 
@@ -102,16 +102,16 @@ int MeteoBluetoothPhoneV1::readBluetooth()
 		lastRunReceived = true;
 
 		if(bytes_read == 32768)
-			LOG(LogLevel::Error) << "MeteoPacketConverterV1::readBluetooth() : buffer overflow.";
+			LOG(LogLevel::Error) << "MeteoBluetoothPhoneV1::readBluetooth() : buffer overflow.";
 
 		char** packets = new char*[128];
 		int* packetLengths = new int[128];
 
-		LOG(LogLevel::Depricated) << "MeteoPacketConverterV1::readBluetooth() : spliting packet.";
+		LOG(LogLevel::Depricated) << "MeteoBluetoothPhoneV1::readBluetooth() : spliting packet.";
 
 		int packetCount = packetConverter->SplitPacket(bufferIn, bytes_read, packets, packetLengths);
 
-		LOG(LogLevel::Debug) << "MeteoPacketConverterV1::readBluetooth() : packets [" << packetCount << "].";
+		LOG(LogLevel::Debug) << "MeteoBluetoothPhoneV1::readBluetooth() : packets [" << packetCount << "] from [" << bytes_read << "] bytes.";
 		for (int i = 0; i < packetCount; i++) {
 
 			PacketStatus packetStatus = packetConverter->CheckPacketStatus(packets[i], packetLengths[i]);
@@ -120,7 +120,7 @@ int MeteoBluetoothPhoneV1::readBluetooth()
 				handleNewPacket(packets[i], packetLengths[i]);
 			}
 			else {
-				LOG(LogLevel::Error) << "MeteoPacketConverterV1::readBluetooth() : packet error with status [" << (int)packetStatus << "].";
+				LOG(LogLevel::Error) << "MeteoBluetoothPhoneV1::readBluetooth() : packet error with status [" << (int)packetStatus << "].";
 				// 處理錯誤的封包
 			}
 
@@ -311,6 +311,7 @@ int MeteoBluetoothPhoneV1::handleNewPacket(char * packet, int length)
 	else if (packetType == PacketType::None) {
 		// 封包壞掉，直接丟掉，不用刪因為return以後外面會刪
 		// packetConverter->CleanBuffer();
+		LOG(LogLevel::Debug) << "MeteoBluetoothPhoneV1::handleNewPacket() : got error packet.";
 	}
 
 	return 0;
