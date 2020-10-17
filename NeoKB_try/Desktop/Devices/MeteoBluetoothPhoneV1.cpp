@@ -93,6 +93,7 @@ int MeteoBluetoothPhoneV1::work()
 
 int MeteoBluetoothPhoneV1::readBluetooth()
 {
+	LOG(LogLevel::Debug) << "MeteoPacketConverterV1::readBluetooth() : start reading.";
 	if(lastRunReceived)
 		memset(bufferIn, 0, sizeof(bufferIn));
 
@@ -138,6 +139,7 @@ int MeteoBluetoothPhoneV1::readBluetooth()
 
 int MeteoBluetoothPhoneV1::writeBluetooth()
 {
+	LOG(LogLevel::Debug) << "MeteoPacketConverterV1::writeBluetooth() : start writing.";
 	if (lastRunSended)
 		memset(bufferOut, 0, sizeof(bufferOut));
 
