@@ -104,8 +104,8 @@ int MeteoBluetoothPhoneV1::readBluetooth()
 		if(bytes_read == 32768)
 			LOG(LogLevel::Error) << "MeteoPacketConverterV1::readBluetooth() : buffer overflow.";
 
-		char** packets = nullptr;
-		int* packetLengths = nullptr;
+		char** packets = new char*[128];
+		int* packetLengths = new int[128];
 
 		LOG(LogLevel::Debug) << "MeteoPacketConverterV1::readBluetooth() : spliting packet.";
 
