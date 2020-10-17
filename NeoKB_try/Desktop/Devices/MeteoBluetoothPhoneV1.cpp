@@ -230,6 +230,8 @@ int MeteoBluetoothPhoneV1::writeBluetooth()
 
 int MeteoBluetoothPhoneV1::pushBluetoothState(BluetoothCommand * btCommand)
 {
+	LOG(LogLevel::Debug) << "MeteoBluetoothPhoneV1::pushBluetoothState() : got new bt command.";
+
 	unique_lock<mutex> uLock(bluetoothStateMutex);
 
 	bluetoothState->GetBluetoothState()->AddCommand(btCommand);
