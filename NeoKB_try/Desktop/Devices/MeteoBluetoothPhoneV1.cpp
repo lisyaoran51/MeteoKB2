@@ -30,10 +30,6 @@ MeteoBluetoothPhoneV1::MeteoBluetoothPhoneV1(PacketConverter<MeteoCommand>* pCon
 {
 	packetConverter = pConverter;
 
-	client = init_server(0x1);
-
-	isConnected = true;
-
 	bluetoothState = new InputState();
 	bluetoothState->SetBluetoothState(new BluetoothState());
 
@@ -78,6 +74,12 @@ int MeteoBluetoothPhoneV1::PushOutputMessage(OutputMessage * outputMessage)
 
 int MeteoBluetoothPhoneV1::work()
 {
+
+
+	client = init_server(0x1);
+
+	isConnected = true;
+
 	while (!exitRequested) {
 		readBluetooth();
 		writeBluetooth();
