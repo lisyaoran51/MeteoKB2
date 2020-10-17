@@ -580,6 +580,8 @@ int MeteoPacketConverterV1::SplitPacket(char * bufferIn, int bytesRead, char ** 
 		unsigned short length = 0;
 		memcpy(&length, splitPosition + sizeof(command), sizeof(length));
 
+		LOG(LogLevel::Debug) << "MeteoPacketConverterV1::SplitPacket() : get packet [" << command << "], length [" << length << "].";
+
 		/* 判斷封包是否損壞。最大封包長度為538，如果超過就代表已損壞 */
 		/* 判斷封包是否超過目前讀到的資料長度，超過的話可能在read的時候被切斷了 */
 		/* 封包過短，可能也已經整個壞掉了 */
@@ -602,9 +604,15 @@ int MeteoPacketConverterV1::SplitPacket(char * bufferIn, int bytesRead, char ** 
 
 	}
 
+
+	/* 檢查收到的packets有沒有超過buffer最大量128個 */
+	if (returnPackets.size() > 128) {
+		LOG(LogLevel::Error) << "MeteoPacketConverterV1::SplitPacket() : get packet amount overflow [" << returnPackets.size() << "].";
+
+
+	}
+
 	/* 把切好的packet複製一份丟進回傳值裡 */
-	packets = new char*[returnPackets.size()];
-	packerLengths = new int[returnPackets.size()];
 	for (int i = 0; i < returnPackets.size(); i++) {
 
 		packets[i] = new char[returnPacketLengths[i]];
