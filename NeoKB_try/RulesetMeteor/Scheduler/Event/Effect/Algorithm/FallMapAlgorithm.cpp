@@ -101,7 +101,7 @@ int FallMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper<FallEffect
 	for (int i = 0; i < height; i++) {
 
 		/* 新版fall algo，不能這樣寫，會閃得更嚴重 */
-		if (i > meteorPos - 0.5 && i <= meteorPos + 0.5) {
+		if (i > meteorPos - 0.6 && i <= meteorPos + 0.6) {
 			m->Add(width, height + i, 1);
 			isAdded = true;
 			break;
