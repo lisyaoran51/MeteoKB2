@@ -93,7 +93,7 @@ int MeteoBluetoothPhoneV1::work()
 
 int MeteoBluetoothPhoneV1::readBluetooth()
 {
-	LOG(LogLevel::Debug) << "MeteoPacketConverterV1::readBluetooth() : start reading.";
+	LOG(LogLevel::Depricated) << "MeteoPacketConverterV1::readBluetooth() : start reading.";
 	if(lastRunReceived)
 		memset(bufferIn, 0, sizeof(bufferIn));
 
@@ -107,7 +107,7 @@ int MeteoBluetoothPhoneV1::readBluetooth()
 		char** packets = new char*[128];
 		int* packetLengths = new int[128];
 
-		LOG(LogLevel::Debug) << "MeteoPacketConverterV1::readBluetooth() : spliting packet.";
+		LOG(LogLevel::Depricated) << "MeteoPacketConverterV1::readBluetooth() : spliting packet.";
 
 		int packetCount = packetConverter->SplitPacket(bufferIn, bytes_read, packets, packetLengths);
 
