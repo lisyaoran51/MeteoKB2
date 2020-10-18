@@ -88,7 +88,7 @@ vector<InputState*>* InputManager::getPendingState(vector<InputState*>* pStates)
 			pStates->insert(pStates->end(), inputHandlerPendingState->begin(), inputHandlerPendingState->end());
 		
 			if (inputHandlerPendingState->at(0)->GetPanelState())
-				LOG(LogLevel::Depricated) << "InputManager::getPendingState() : get fake input.";
+				LOG(LogLevel::Depricated) << "InputManager::getPendingState() : get panel input.";
 
 			if (inputHandlerPendingState->at(0)->GetBluetoothState())
 				LOG(LogLevel::Debug) << "InputManager::getPendingState() : get bt input.";
@@ -294,7 +294,7 @@ int InputManager::updateKeyboardEvents(InputState * inputState)
 
 int InputManager::updatePanelEvents(InputState * inputState)
 {
-	LOG(LogLevel::Debug) << "InputManager::updatePanelEvents() : updateing fake input.";
+	LOG(LogLevel::Depricated) << "InputManager::updatePanelEvents() : updateing fake input.";
 
 	PanelState* panelState = inputState->GetPanelState();
 	PanelState* lastPanelState = inputState->GetLastState() ? inputState->GetLastState()->GetPanelState() : nullptr;
@@ -345,6 +345,14 @@ int InputManager::updateBluetoothEvents(InputState * inputState)
 	BluetoothState* bluetoothState = inputState->GetBluetoothState();
 	BluetoothState* lastBluetoothState = inputState->GetLastState() ? inputState->GetLastState()->GetBluetoothState() : nullptr;
 
+	LOG(LogLevel::Debug) << "InputManager::updateBluetoothEvents() : trigger queue- by " << GetTypeName();
+	LOG(LogLevel::Debug) << [](vector<Triggerable*>& triggerables) {
+
+		for (int i = 0; i < triggerables.size(); i++)
+			LOG(LogLevel::Debug) << "|---------[" << triggerables[i]->GetTypeName() << "]";
+
+		return 0;
+	}(triggerQueue);
 
 	for (int i = 0; i < bluetoothState->GetCommands()->size(); i++) {
 		handleBluetoothCommand(inputState, bluetoothState->GetCommands()->at(i));
