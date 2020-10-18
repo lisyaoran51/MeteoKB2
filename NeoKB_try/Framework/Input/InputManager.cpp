@@ -467,7 +467,7 @@ int InputManager::propagateSlide(vector<Triggerable*>* queue, InputState * state
 
 int InputManager::handleBluetoothCommand(InputState * state, BluetoothCommand * command)
 {
-	LOG(LogLevel::Debug) << "InputManager::handleBluetoothCommand : handling bt command.";
+	LOG(LogLevel::Debug) << "InputManager::handleBluetoothCommand : handling bt command " << command << ".";
 	return propagateBluetoothCommand(&triggerQueue, state, command);
 }
 
