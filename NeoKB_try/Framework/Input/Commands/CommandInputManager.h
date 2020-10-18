@@ -50,9 +50,15 @@ namespace Commands {
 		/// </summary>
 		virtual int propagateBluetoothCommand(vector<Triggerable*>* queue, TCommand* command) {
 
+			LOG(LogLevel::Debug) << "CommandInputManager::propagateBluetoothCommand() : check if there is [" << queue->size() << "] command handler.";
+
 			for (int i = 0; i < queue->size(); i++) {
+
 				CommandHandler<TCommand>* commandHandler = dynamic_cast<CommandHandler<TCommand>*>(queue->at(i));
 				if (commandHandler != nullptr) {
+
+					LOG(LogLevel::Debug) << "CommandInputManager::propagateBluetoothCommand() : get command handler [" << queue->at(i)->GetTypeName() << "].";
+
 					commandHandler->OnCommand(command);
 				}
 			}
@@ -65,6 +71,8 @@ namespace Commands {
 		int handleNewBluetoothCommand(vector<Triggerable*>* queue, BluetoothCommand* command) {
 
 			if (dynamic_cast<TCommand*>(command) != nullptr) {
+
+				LOG(LogLevel::Debug) << "CommandInputManager::handleNewBluetoothCommand() : get new T command.";
 				propagateBluetoothCommand(queue, dynamic_cast<TCommand*>(command));
 				return 0;
 			}
