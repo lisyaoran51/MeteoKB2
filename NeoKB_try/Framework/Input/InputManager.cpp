@@ -473,6 +473,8 @@ int InputManager::handleBluetoothCommand(InputState * state, BluetoothCommand * 
 
 int InputManager::propagateBluetoothCommand(vector<Triggerable*>* queue, InputState * state, BluetoothCommand* command)
 {
+	LOG(LogLevel::Debug) << "InputManager::propagateBluetoothCommand : handling bt command " << command << ".";
+
 	for (int i = 0; i < queue->size(); i++) {
 		queue->at(i)->TriggerOnCommand(state, command);
 	}
