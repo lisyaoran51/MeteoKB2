@@ -24,7 +24,7 @@ int InputDevice::ScanInput()
 int InputDevice::passToPeripheral(Peripheral * peripheral)
 {
 	if(inputStates.size() > 0)
-		LOG(LogLevel::Debug) << "InputDevice::passToPeripheral() : pass to device [" << inputStates.size() << "] states.";
+		LOG(LogLevel::Depricated) << "InputDevice::passToPeripheral() : pass to device [" << inputStates.size() << "] states.";
 
 	for (int i = 0; i < inputStates.size(); i++) {
 		peripheral->PushInputState(inputStates[i]);
