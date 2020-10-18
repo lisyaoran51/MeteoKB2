@@ -42,6 +42,8 @@ vector<InputState*>* PassThroughInputManager::getPendingState(vector<InputState*
 	pStates->clear();
 
 	for (int i = 0; i < pendingParentStates.size(); i++) {
+
+		LOG(LogLevel::Debug) << "PassThroughInputManager::getPendingState(): passing states.";
 		// 很有可能都是重複的同一個input state，所以先確定一下
 		if (find(pStates->begin(), pStates->end(), pendingParentStates[i]) == pStates->end())
 			pStates->push_back(pendingParentStates[i]);
