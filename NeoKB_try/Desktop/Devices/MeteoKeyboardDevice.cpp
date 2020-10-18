@@ -10,7 +10,7 @@ MeteoKeyboardDevice::MeteoKeyboardDevice(MeteoPanelBoardV1 * panelBoard)
 
 int MeteoKeyboardDevice::readFromDevice()
 {
-#if 1
+#if 0
 	InputState* newState = meteoPanelBoard->GetKeyboardState();
 	if(newState != nullptr)
 		inputStates.push_back(newState);
@@ -19,7 +19,7 @@ int MeteoKeyboardDevice::readFromDevice()
 	_debugCount++;
 #endif
 
-	if (_debugCount % 300 == 89) {
+	if (_debugCount % 3000 == 2999) {
 
 		InputState* newState = new InputState();
 		newState->SetKeyboardState(new KeyboardState());
@@ -32,7 +32,7 @@ int MeteoKeyboardDevice::readFromDevice()
 		LOG(LogLevel::Depricated) << "MeteoKeyboardDevice::readFromDevice() : Create fake kb input.";
 	}
 
-	if (_debugCount % 100 == 99) {
+	if (_debugCount % 100 == 99 || false) {
 
 		InputState* newState = new InputState();
 		newState->SetKeyboardState(new KeyboardState());
