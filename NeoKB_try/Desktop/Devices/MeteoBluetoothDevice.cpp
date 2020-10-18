@@ -41,10 +41,30 @@ int MeteoBluetoothDevice::AddOnWriteProgramSuccess(MtoObject * callableObject, f
 
 int MeteoBluetoothDevice::readFromDevice()
 {
+#if 0
+
 	InputState* newState = meteoBluetoothPhone->GetBluetoothState();
 	if (newState != nullptr) {
 		LOG(LogLevel::Debug) << "MeteoBluetoothDevice::readFromDevice() : got new bt state. ";
 		inputStates.push_back(newState);
+	}
+
+#else
+	_debugCount++;
+#endif
+
+	if (_debugCount == 3000) {
+
+		InputState* newState = new InputState();
+		newState->SetBluetoothState(new BluetoothState());
+		MeteoBluetoothCommand* btCommand = new MeteoBluetoothCommand(MeteoCommand::RequestLoadGame);
+		btCommand->GetContext()["FileName"] = "AnySong";
+
+		newState->GetBluetoothState()->AddCommand(btCommand);
+
+		inputStates.push_back(newState);
+
+		LOG(LogLevel::Debug) << "MeteoBluetoothDevice::readFromDevice() : Create fake bt input.";
 	}
 
 	return 0;

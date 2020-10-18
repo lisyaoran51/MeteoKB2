@@ -20,6 +20,8 @@ namespace Devices {
 
 		MeteoBluetoothPhoneV1* meteoBluetoothPhone = nullptr;
 
+		int _debugCount = 0;
+
 	public:
 
 		MeteoBluetoothDevice(MeteoBluetoothPhoneV1* mBluetoothPhone);
