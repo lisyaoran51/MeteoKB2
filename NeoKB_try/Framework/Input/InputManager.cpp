@@ -476,6 +476,7 @@ int InputManager::propagateBluetoothCommand(vector<Triggerable*>* queue, InputSt
 	LOG(LogLevel::Debug) << "InputManager::propagateBluetoothCommand : handling bt command " << command << ".";
 
 	for (int i = 0; i < queue->size(); i++) {
+		LOG(LogLevel::Debug) << "InputManager::propagateBluetoothCommand : [" << queue->at(i)->GetTypeName() << "].";
 		queue->at(i)->TriggerOnCommand(state, command);
 	}
 	return 0;
