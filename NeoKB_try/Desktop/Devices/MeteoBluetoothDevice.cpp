@@ -41,7 +41,7 @@ int MeteoBluetoothDevice::AddOnWriteProgramSuccess(MtoObject * callableObject, f
 
 int MeteoBluetoothDevice::readFromDevice()
 {
-#if 1
+#if 0
 
 	InputState* newState = meteoBluetoothPhone->GetBluetoothState();
 	if (newState != nullptr) {
