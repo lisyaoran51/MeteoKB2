@@ -113,6 +113,9 @@ int SheetmusicSelectPanel::SetSms(vector<SmInfo*>* sInfos)
 
 int SheetmusicSelectPanel::OnCommand(MeteoBluetoothCommand * command)
 {
+
+	LOG(LogLevel::Debug) << "SoundSelectPanel::OnCommand() : got new bt command. ";
+
 	if (command->GetCommand() == MeteoCommand::WriteHardwareConfiguration) {
 		for (int i = 0; i < command->GetContext()["Configurations"].size(); i++) {
 			if (command->GetContext()["Configurations"].at(i)["category"].get<string>() == "Framework" &&
