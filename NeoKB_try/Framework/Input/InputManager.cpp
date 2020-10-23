@@ -21,8 +21,9 @@ int InputManager::ChangeFocus(Triggerable * fTriggerable)
 
 int InputManager::update()
 {
-	
+	LOG(LogLevel::Finest) << "InputManager::update(): start update.";
 	getPendingState(&pendingStates);
+	LOG(LogLevel::Finest) << "InputManager::update(): get pending states.";
 	if(pendingStates.size() > 0)
 		LOG(LogLevel::Finest) << "InputManager::update(): get [" << pendingStates[0] << "] states by " << GetTypeName() << ".";
 
