@@ -68,7 +68,7 @@ bool Updatable::UpdateSubTree()
 		abort();
 	}
 
-
+	LOG(LogLevel::Depricated) << "Updatable::UpdateSubTree() : [" << GetTypeName() << "] try get new child list.";
 	cacheChilds.clear();
 	unique_lock<mutex> uLock(ChildMutex);
 	cacheChilds.assign(GetChilds()->begin(), GetChilds()->end());
