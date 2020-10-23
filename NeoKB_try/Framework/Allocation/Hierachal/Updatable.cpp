@@ -73,7 +73,7 @@ bool Updatable::UpdateSubTree()
 	unique_lock<mutex> uLock(ChildMutex);
 	cacheChilds.assign(GetChilds()->begin(), GetChilds()->end());
 	uLock.unlock();
-
+	LOG(LogLevel::Depricated) << "Updatable::UpdateSubTree() : [" << GetTypeName() << "] got new child list.";
 
 	for (vector<ChildAddable*>::iterator iter = cacheChilds.begin(); iter != cacheChilds.end(); iter++) {
 		Updatable* child = Cast<Updatable>(*iter);
