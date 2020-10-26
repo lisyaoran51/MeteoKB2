@@ -22,10 +22,12 @@ int PassThroughInputManager::update()
 {
 	InputManager::update();
 
-	LOG(LogLevel::Finest) << "PassThroughInputManager::getPendingState(): [" << GetTypeName() << "] start update." << (useParentState ? 1 : 0);
+	LOG(LogLevel::Finest) << "PassThroughInputManager::getPendingState(): [" << GetTypeName() << "] start update." << (useParentState ? 1 : 0) << pendingStates.size();
 
 	if(!useParentState)
 		for (int i = 0; i < pendingStates.size(); i++) {	// 從input handler創建，到這邊delete掉
+
+			LOG(LogLevel::Finest) << "PassThroughInputManager::getPendingState(): [" << GetTypeName() << "] deleting pending state [" << pendingStates[i] << "].";
 			delete pendingStates[i];						//
 		}
 
