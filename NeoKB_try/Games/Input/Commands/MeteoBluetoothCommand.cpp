@@ -11,3 +11,10 @@ MeteoBluetoothCommand::MeteoBluetoothCommand(MeteoCommand c, json text): TBlueto
 MeteoBluetoothCommand::MeteoBluetoothCommand(MeteoCommand c): TBluetoothCommand<MeteoCommand>(c)
 {
 }
+
+BluetoothCommand * MeteoBluetoothCommand::Clone()
+{
+	MeteoBluetoothCommand* btCommand = new MeteoBluetoothCommand(command, context);
+
+	return btCommand;
+}

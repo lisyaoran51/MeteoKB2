@@ -213,7 +213,7 @@ vector<InputState*>* InputManager::createDistinctInputStates(vector<InputState*>
 			/* bt */
 			for (int i = 0; i < state->GetBluetoothState()->GetCommands()->size(); i++) {
 				BluetoothCommand* bluetoothCommand = state->GetBluetoothState()->GetCommands()->at(i);
-				newBluetoothState->GetCommands()->push_back(new BluetoothCommand(bluetoothCommand));
+				newBluetoothState->GetCommands()->push_back(bluetoothCommand->Clone());
 			}
 		}
 	}

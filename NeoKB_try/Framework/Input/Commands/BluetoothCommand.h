@@ -25,6 +25,8 @@ namespace Commands{
 
 		json& GetContext();
 
+		virtual BluetoothCommand* Clone();
+
 	protected:
 
 		string commandName;

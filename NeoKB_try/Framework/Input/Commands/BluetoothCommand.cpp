@@ -30,3 +30,12 @@ json & BluetoothCommand::GetContext()
 {
 	return context;
 }
+
+BluetoothCommand * BluetoothCommand::Clone()
+{
+	BluetoothCommand* btCommand = new BluetoothCommand();
+	btCommand->commandName = commandName;
+	btCommand->context = context;
+
+	return btCommand;
+}

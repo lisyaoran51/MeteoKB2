@@ -29,6 +29,8 @@ namespace Commands{
 
 		unsigned int firmwareVersion = FIRMWARE_VERSION;
 
+		virtual BluetoothCommand* Clone();
+
 	};
 
 	enum class MeteoCommand {
