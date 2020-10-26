@@ -14,8 +14,10 @@ InputState::~InputState()
 	LOG(LogLevel::Finest) << "InputState::~InputState(): deleting [" << this << "].";
 	if (bluetoothState != nullptr)
 		delete bluetoothState;
+	LOG(LogLevel::Finest) << "InputState::~InputState(): bt deleted.";
 	if (keyboardState != nullptr)
 		delete keyboardState;
+	LOG(LogLevel::Finest) << "InputState::~InputState(): kb deleted.";
 	if (panelState != nullptr)
 		delete panelState;
 	LOG(LogLevel::Finest) << "InputState::~InputState(): deleted.";
