@@ -11,14 +11,14 @@ using namespace Util;
 InputState::~InputState()
 {
 
-	LOG(LogLevel::Depricated) << "InputState::SetIsLastState(): deleting [" << this << "].";
+	LOG(LogLevel::Finest) << "InputState::~InputState(): deleting [" << this << "].";
 	if (bluetoothState != nullptr)
 		delete bluetoothState;
 	if (keyboardState != nullptr)
 		delete keyboardState;
 	if (panelState != nullptr)
 		delete panelState;
-	LOG(LogLevel::Depricated) << "InputState::SetIsLastState(): deleted.";
+	LOG(LogLevel::Finest) << "InputState::~InputState(): deleted.";
 }
 
 InputState * InputState::Clone()
