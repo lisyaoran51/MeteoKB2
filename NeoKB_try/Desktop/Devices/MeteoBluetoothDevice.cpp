@@ -60,6 +60,8 @@ int MeteoBluetoothDevice::readFromDevice()
 		MeteoBluetoothCommand* btCommand = new MeteoBluetoothCommand(MeteoCommand::RequestLoadGame);
 		btCommand->GetContext()["FileName"] = "AnySong";
 
+		LOG(LogLevel::Debug) << "MeteoBluetoothDevice::readFromDevice() : Create fake bt input [" << btCommand->GetContext().dump() << "].";
+
 		newState->GetBluetoothState()->AddCommand(btCommand);
 
 		inputStates.push_back(newState);
