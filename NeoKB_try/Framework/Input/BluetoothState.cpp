@@ -12,7 +12,7 @@ BluetoothState::~BluetoothState()
 {
 	LOG(LogLevel::Finest) << "BluetoothState::~BluetoothState(): deleting commands." << commands.size();
 	for (int i = 0; i < commands.size(); i++) {
-		LOG(LogLevel::Finest) << "BluetoothState::~BluetoothState(): deleting command [" << commands[i]->GetContext()["FileName"].get<string>() << "] .";
+		LOG(LogLevel::Finest) << "BluetoothState::~BluetoothState(): deleting command [" << commands[i]->GetContext()["FileName"] << "] .";
 		delete commands[i];
 
 	}
