@@ -1,14 +1,20 @@
 #include "BluetoothState.h"
 
+#include "../../Util/Log.h"
+
 
 using namespace Framework::Input;
 using namespace std;
+using namespace Util;
 
 
 BluetoothState::~BluetoothState()
 {
+	LOG(LogLevel::Finest) << "BluetoothState::~BluetoothState(): deleting commands." << commands.size();
 	for (int i = 0; i < commands.size(); i++)
 		delete commands[i];
+	commands.clear();
+	LOG(LogLevel::Finest) << "BluetoothState::~BluetoothState(): deleted.";
 }
 
 int BluetoothState::AddCommand(BluetoothCommand * command)
