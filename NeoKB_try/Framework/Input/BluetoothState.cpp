@@ -11,8 +11,11 @@ using namespace Util;
 BluetoothState::~BluetoothState()
 {
 	LOG(LogLevel::Finest) << "BluetoothState::~BluetoothState(): deleting commands." << commands.size();
-	for (int i = 0; i < commands.size(); i++)
+	for (int i = 0; i < commands.size(); i++) {
+		LOG(LogLevel::Finest) << "BluetoothState::~BluetoothState(): deleting command [" << commands[i]->GetContext().dump() << "] .";
 		delete commands[i];
+
+	}
 	commands.clear();
 	LOG(LogLevel::Finest) << "BluetoothState::~BluetoothState(): deleted.";
 }
