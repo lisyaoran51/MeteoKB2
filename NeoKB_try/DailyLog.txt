@@ -1994,7 +1994,7 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	補了一些instant的東西，之後還要做ruleset info和未進入遊戲時的移調
 	
 8/31
-	缺的東西: mcu、ruleset info(ok)、未進入遊戲的移調(ok)、琴音分為全長和AB段、琴音切換(ok)、wifi、daemon、重播存檔、OS設定、平移會lag、刪除平移、遊戲開始前倒數3秒(ok)、刪除所有memory leak
+	缺的東西: mcu、ruleset info(ok)、未進入遊戲的移調(ok)、琴音分為全長和AB段、琴音切換(ok)、關閉wifi、daemon、重播存檔、OS設定、平移會lag、刪除平移、遊戲開始前倒數3秒(ok)、刪除所有memory leak
 				遊戲開始前設定mod(ok)、遊戲開始時改速度(ok)、手動踏板modifier、紀錄每個modifier到藍芽架構裡、me555、測試藍芽傳送、藍芽傳黨、關機、反覆模式、燈光過度閃爍(ok，慢速無解)
 	額外音效：節拍器
 	
@@ -2184,3 +2184,9 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 	
 10/18 
 	pi收的到手機的訊息，也可以分解成json。現在是pi呃藍芽處理會當掉，城市要Debug
+	
+10/23
+	還沒到下一個update frame就當了，所以是這一個update中有一個東西當掉
+	
+	看起來是user input manager一update結束就當掉，還沒進入下一個物件的update
+	還沒get child就當了，是再pass through input manager裡面的update之後當掉的
