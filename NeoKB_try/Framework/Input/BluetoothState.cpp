@@ -37,7 +37,10 @@ BluetoothState * BluetoothState::Clone()
 
 	if(lastState != nullptr)
 		cloned->SetLastState(lastState);
-	cloned->GetCommands()->assign(commands.begin(), commands.end());
+
+	for (int i = 0; i < commands.size(); i++) {
+		cloned->GetCommands()->push_back(commands[i]->Clone());
+	}
 
 	return cloned;
 }
