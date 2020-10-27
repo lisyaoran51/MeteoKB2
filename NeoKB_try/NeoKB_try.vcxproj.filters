@@ -1725,6 +1725,9 @@
     <ClCompile Include="Instruments\Audio\Format\SoundBindingSetDecoder.cpp">
       <Filter>來源檔案\Instruments\Audio\Format</Filter>
     </ClCompile>
+    <ClCompile Include="Framework\Input\Handler\InputHandler.cpp">
+      <Filter>來源檔案\Framework\Input\Handler</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="DailyLog.txt">

@@ -50,6 +50,7 @@
     <ClCompile Include="Framework\Devices\OutputDevice.cpp" />
     <ClCompile Include="Framework\Host\MeteoGameHost.cpp" />
     <ClCompile Include="Framework\Input\Commands\BluetoothCommand.cpp" />
+    <ClCompile Include="Framework\Input\Handler\InputHandler.cpp" />
     <ClCompile Include="Framework\Input\Handler\TestCaseKeyboardInputHandler.cpp" />
     <ClCompile Include="Framework\Input\KeyBindings\HasInputKey.cpp" />
     <ClCompile Include="Framework\Input\KeyBindings\KeyBindingStore.cpp" />

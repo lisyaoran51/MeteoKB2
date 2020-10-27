@@ -21,12 +21,7 @@ namespace Handler {
 
 		virtual int Initialize(GameHost* host) = 0;
 
-		virtual vector<InputState*>* GetPendingStates() {
-			vector<InputState*>* states = new vector<InputState*>();
-			states->assign(pendingStates.begin(), pendingStates.end());
-			pendingStates.clear();
-			return states;
-		}
+		virtual vector<InputState*>* GetPendingStates();
 
 		virtual int HandleState(InputState* inputEvent) = 0;
 
