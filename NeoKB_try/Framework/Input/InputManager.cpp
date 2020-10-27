@@ -21,26 +21,26 @@ int InputManager::ChangeFocus(Triggerable * fTriggerable)
 
 int InputManager::update()
 {
-	LOG(LogLevel::Finest) << "InputManager::update(): start update.";
+	LOG(LogLevel::Depricated) << "InputManager::update(): start update.";
 	getPendingState(&pendingStates);
-	LOG(LogLevel::Finest) << "InputManager::update(): get pending states.";
+	LOG(LogLevel::Depricated) << "InputManager::update(): get pending states.";
 	if(pendingStates.size() > 0)
 		LOG(LogLevel::Finest) << "InputManager::update(): get [" << pendingStates[0] << "] states by " << GetTypeName() << ".";
 
 	/* 這邊本來要做create distinct states，這樣可以確保舊的輸入沒被更動，經過這個以後panel.keyboard.bt都部會是null，但裡面會是沒有東西的 */
 	vector<InputState*>* distinctInputStates = createDistinctInputStates(&pendingStates);
 	
-	LOG(LogLevel::Finest) << "InputManager::update():create distinct input state [" << distinctInputStates->at(0) << "] by " << GetTypeName() << ".";
+	LOG(LogLevel::Depricated) << "InputManager::update():create distinct input state [" << distinctInputStates->at(0) << "] by " << GetTypeName() << ".";
 
 	//LOG(LogLevel::Debug) << "InputManager::update() : distinct input states size = [" << distinctInputStates->size() << "].";
 	for (int i = 0; i < distinctInputStates->size(); i++) {
 		handleNewState(distinctInputStates->at(i));
 	}
 
-	LOG(LogLevel::Finest) << "InputManager::update(): after handling states.";
+	LOG(LogLevel::Depricated) << "InputManager::update(): after handling states.";
 
 	delete distinctInputStates;
-	LOG(LogLevel::Finest) << "InputManager::update(): delete states.";
+	LOG(LogLevel::Depricated) << "InputManager::update(): delete states.";
 
 	return 0;
 }
@@ -358,11 +358,11 @@ int InputManager::updateBluetoothEvents(InputState * inputState)
 	BluetoothState* bluetoothState = inputState->GetBluetoothState();
 	BluetoothState* lastBluetoothState = inputState->GetLastState() ? inputState->GetLastState()->GetBluetoothState() : nullptr;
 
-	LOG(LogLevel::Debug) << "InputManager::updateBluetoothEvents() : trigger queue- by " << GetTypeName();
-	LOG(LogLevel::Debug) << [](vector<Triggerable*>& triggerables) {
+	LOG(LogLevel::Finest) << "InputManager::updateBluetoothEvents() : trigger queue- by " << GetTypeName();
+	LOG(LogLevel::Depricated) << [](vector<Triggerable*>& triggerables) {
 
 		for (int i = 0; i < triggerables.size(); i++)
-			LOG(LogLevel::Debug) << "|---------[" << triggerables[i]->GetTypeName() << "]";
+			LOG(LogLevel::Depricated) << "|---------[" << triggerables[i]->GetTypeName() << "]";
 
 		return 0;
 	}(triggerQueue);
@@ -378,11 +378,11 @@ int InputManager::updateBluetoothEvents(InputState * inputState)
 
 int InputManager::handleKeyDown(InputState * state, InputKey key)
 {
-	LOG(LogLevel::Debug) << "InputManager::handleKeyDown() : trigger queue- by " << GetTypeName();
-	LOG(LogLevel::Debug) << [](vector<Triggerable*>& triggerables) {
+	LOG(LogLevel::Finest) << "InputManager::handleKeyDown() : trigger queue- by " << GetTypeName();
+	LOG(LogLevel::Depricated) << [](vector<Triggerable*>& triggerables) {
 
 		for (int i = 0; i < triggerables.size(); i++)
-			LOG(LogLevel::Debug) << "|---------[" << triggerables[i]->GetTypeName() << "]";
+			LOG(LogLevel::Depricated) << "|---------[" << triggerables[i]->GetTypeName() << "]";
 
 		return 0;
 	}(triggerQueue);
@@ -480,16 +480,16 @@ int InputManager::propagateSlide(vector<Triggerable*>* queue, InputState * state
 
 int InputManager::handleBluetoothCommand(InputState * state, BluetoothCommand * command)
 {
-	LOG(LogLevel::Debug) << "InputManager::handleBluetoothCommand : handling bt command " << command << ".";
+	LOG(LogLevel::Finest) << "InputManager::handleBluetoothCommand : handling bt command " << command << ".";
 	return propagateBluetoothCommand(&triggerQueue, state, command);
 }
 
 int InputManager::propagateBluetoothCommand(vector<Triggerable*>* queue, InputState * state, BluetoothCommand* command)
 {
-	LOG(LogLevel::Debug) << "InputManager::propagateBluetoothCommand : handling bt command " << command << ".";
+	LOG(LogLevel::Finest) << "InputManager::propagateBluetoothCommand : handling bt command " << command << ".";
 
 	for (int i = 0; i < queue->size(); i++) {
-		LOG(LogLevel::Debug) << "InputManager::propagateBluetoothCommand : [" << queue->at(i)->GetTypeName() << "].";
+		LOG(LogLevel::Depricated) << "InputManager::propagateBluetoothCommand : [" << queue->at(i)->GetTypeName() << "].";
 		queue->at(i)->TriggerOnCommand(state, command);
 	}
 	return 0;
