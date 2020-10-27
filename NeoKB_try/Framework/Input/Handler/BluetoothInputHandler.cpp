@@ -26,6 +26,8 @@ int BluetoothInputHandler::HandleState(InputState * inputState)
 
 	auto bluetoothState = inputState->GetBluetoothState()->Clone();
 
+	LOG(LogLevel::Finest) << "BluetoothInputHandler::HandleState(): clone [" << bluetoothState->GetCommands()->at(0)->GetContext().dump() << "] into pending states.";
+
 	InputState* pendingState = new InputState();
 	pendingState->SetBluetoothState(bluetoothState);
 
