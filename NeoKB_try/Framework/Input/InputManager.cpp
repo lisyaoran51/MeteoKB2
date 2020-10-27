@@ -264,9 +264,9 @@ int InputManager::updateInputQueue(InputState * inputState)
 	else {
 		vector<ChildAddable*> childs;
 
-		//unique_lock<mutex> uLock(ChildMutex);
+		unique_lock<mutex> uLock(ChildMutex);
 		childs.assign(GetChilds()->begin(), GetChilds()->end());
-		//uLock.unlock();
+		uLock.unlock();
 
 		for (int i = 0; i < childs.size(); i++) {
 			Triggerable* temp = childs[i]->Cast<Triggerable>();
