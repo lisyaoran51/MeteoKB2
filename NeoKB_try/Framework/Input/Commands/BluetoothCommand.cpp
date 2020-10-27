@@ -1,7 +1,9 @@
 #include "BluetoothCommand.h"
 
+#include "../../../Util/Log.h"
 
 using namespace Framework::Input::Commands;
+using namespace Util;
 
 
 BluetoothCommand::BluetoothCommand()
@@ -33,8 +35,10 @@ json & BluetoothCommand::GetContext()
 
 BluetoothCommand * BluetoothCommand::Clone()
 {
+	LOG(LogLevel::Finest) << "BluetoothCommand::Clone(): create new command.";
 	BluetoothCommand* btCommand = new BluetoothCommand();
 	btCommand->commandName = commandName;
+	LOG(LogLevel::Finest) << "BluetoothCommand::Clone(): cloning context.";
 	btCommand->context = context;
 
 	return btCommand;
