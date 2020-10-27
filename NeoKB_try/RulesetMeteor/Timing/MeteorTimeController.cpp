@@ -175,6 +175,8 @@ int MeteorTimeController::RepeatSection(int section)
 
 int MeteorTimeController::LoadOnComplete()
 {
+	LOG(LogLevel::Debug) << "MeteorTimeController::LoadOnComplete() : loading event processor filter.";
+
 	EventProcessorFilter * e = GetCache<EventProcessorFilter>("EventProcessorFilter");
 	if (!e)
 		throw runtime_error("MeteorTimeController::load() : EventProcessorFilter not found in cache.");
