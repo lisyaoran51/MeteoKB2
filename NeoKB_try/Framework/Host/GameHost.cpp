@@ -163,11 +163,11 @@ int GameHost::drawFrame()
 
 	// TODO: 搜尋所有的child，看看是不是Drawable，是的話再根據depth，一層一層畫到Map上，然後call drawer
 	vector<Drawable*> drawables;
-	unique_lock<mutex> uLock(ChildMutex);
-	unique_lock<mutex> uLock2(TreeMutex2);
+	//unique_lock<mutex> uLock(ChildMutex);
+	//unique_lock<mutex> uLock2(TreeMutex2);	// 為什麼要用兩個lock?
 	iterateSearchDrawable(root, &drawables);
-	uLock.unlock();
-	uLock2.unlock();
+	//uLock.unlock();
+	//uLock2.unlock();
 
 	LOG(LogLevel::Depricated) << "GameHost::drawFrame() : drawables size = [" << drawables.size() << "].";
 
