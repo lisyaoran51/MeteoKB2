@@ -92,7 +92,7 @@ vector<InputState*>* InputManager::getPendingState(vector<InputState*>* pStates)
 				LOG(LogLevel::Depricated) << "InputManager::getPendingState() : get panel input.";
 
 			if (inputHandlerPendingState->at(0)->GetBluetoothState())
-				LOG(LogLevel::Debug) << "InputManager::getPendingState() : get bt input [" << inputHandlerPendingState->at(0)->GetBluetoothState()->GetCommands()->at(i)->GetContext().dump() << "].";
+				LOG(LogLevel::Debug) << "InputManager::getPendingState() : get bt input [" << inputHandlerPendingState->at(0)->GetBluetoothState()->GetCommands()->at(0)->GetContext().dump() << "].";
 		}
 
 		delete inputHandlerPendingState;
