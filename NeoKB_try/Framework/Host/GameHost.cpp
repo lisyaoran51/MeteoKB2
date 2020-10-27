@@ -167,6 +167,7 @@ int GameHost::drawFrame()
 	unique_lock<mutex> uLock2(TreeMutex2);
 	iterateSearchDrawable(root, &drawables);
 	uLock.unlock();
+	uLock2.unlock();
 
 	LOG(LogLevel::Depricated) << "GameHost::drawFrame() : drawables size = [" << drawables.size() << "].";
 
