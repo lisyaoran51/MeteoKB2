@@ -122,7 +122,10 @@ int Player::load(MeteoConfigManager* m, Instrument* instru)
 	Container* container = new Container();
 	timeController->AddChild(container);
 	container->SetClock(offsetClock);
+	LOG(LogLevel::Debug) << "Player::load() : loading ruleset executor.";
 	container->AddChild(rulesetExecutor);
+
+	LOG(LogLevel::Debug) << "Player::load() : ruleset executor loaded.";
 
 
 	instrument = instru;
