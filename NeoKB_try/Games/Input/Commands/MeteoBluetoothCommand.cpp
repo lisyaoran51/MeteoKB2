@@ -17,11 +17,11 @@ MeteoBluetoothCommand::MeteoBluetoothCommand(MeteoCommand c): TBluetoothCommand<
 BluetoothCommand * MeteoBluetoothCommand::Clone()
 {
 
-	LOG(LogLevel::Finest) << "MeteoBluetoothCommand::Clone(): create new command.";
+	LOG(LogLevel::Depricated) << "MeteoBluetoothCommand::Clone(): create new command.";
 	MeteoBluetoothCommand* btCommand = new MeteoBluetoothCommand(command);
 
-	LOG(LogLevel::Finest) << "MeteoBluetoothCommand::Clone(): start get context.";
+	LOG(LogLevel::Depricated) << "MeteoBluetoothCommand::Clone(): start get context.";
 	btCommand->GetContext() = context;
-	LOG(LogLevel::Finest) << "MeteoBluetoothCommand::Clone(): cloning context over.";
+	LOG(LogLevel::Depricated) << "MeteoBluetoothCommand::Clone(): cloning context over.";
 	return btCommand;
 }

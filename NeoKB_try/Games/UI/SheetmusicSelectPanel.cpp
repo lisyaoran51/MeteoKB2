@@ -201,6 +201,7 @@ int SheetmusicSelectPanel::OnCommand(MeteoBluetoothCommand * command)
 
 		vector<SmInfo*>* sInfos = smManager->GetSmInfos();
 		for (int i = 0; i < sInfos->size(); i++) {
+			LOG(LogLevel::Fine) << "int SheetmusicSelectPanel::OnCommand() : searching song name [" << sInfos->at(i)->fileName << "] = [" << fileName << "].";
 			if (sInfos->at(i)->fileName == fileName) {
 
 				SelectionChanged(sInfos->at(i));
@@ -209,7 +210,7 @@ int SheetmusicSelectPanel::OnCommand(MeteoBluetoothCommand * command)
 				return 0;
 			}
 		}
-
+		LOG(LogLevel::Error) << "int SheetmusicSelectPanel::OnCommand() : song not found.";
 	}
 
 

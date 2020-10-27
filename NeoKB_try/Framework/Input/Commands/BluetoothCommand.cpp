@@ -35,10 +35,10 @@ json & BluetoothCommand::GetContext()
 
 BluetoothCommand * BluetoothCommand::Clone()
 {
-	LOG(LogLevel::Finest) << "BluetoothCommand::Clone(): create new command.";
+	LOG(LogLevel::Depricated) << "BluetoothCommand::Clone(): create new command.";
 	BluetoothCommand* btCommand = new BluetoothCommand();
 	btCommand->commandName = commandName;
-	LOG(LogLevel::Finest) << "BluetoothCommand::Clone(): cloning context.";
+	LOG(LogLevel::Depricated) << "BluetoothCommand::Clone(): cloning context.";
 	btCommand->context = context;
 
 	return btCommand;

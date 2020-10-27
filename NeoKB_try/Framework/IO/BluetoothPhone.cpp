@@ -21,7 +21,7 @@ int BluetoothPhone::TriggerOnInput()
 {
 	for (int i = 0; i < inputStates.size(); i++) {
 		OnCommand.Trigger(inputStates[i]);
-		LOG(LogLevel::Debug) << "BluetoothPhone::TriggerOnInput() : bt command .";
+		LOG(LogLevel::Depricated) << "BluetoothPhone::TriggerOnInput() : bt command .";
 	}
 
 	inputStates.clear();

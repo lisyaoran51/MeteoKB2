@@ -40,7 +40,7 @@ int PassThroughInputManager::update()
 
 vector<InputState*>* PassThroughInputManager::getPendingState(vector<InputState*>* pStates)
 {
-	LOG(LogLevel::Finest) << "PassThroughInputManager::getPendingState(): " << GetTypeName() << " start getting passing states." << (useParentState ? 1 : 0) ;
+	LOG(LogLevel::Depricated) << "PassThroughInputManager::getPendingState(): " << GetTypeName() << " start getting passing states." << (useParentState ? 1 : 0) ;
 	/* 先把handlers裡面的pending states全都清出來 */
 	InputManager::getPendingState(pStates);
 
@@ -51,13 +51,13 @@ vector<InputState*>* PassThroughInputManager::getPendingState(vector<InputState*
 
 	for (int i = 0; i < pendingParentStates.size(); i++) {
 
-		LOG(LogLevel::Debug) << "PassThroughInputManager::getPendingState(): " << GetTypeName() << " passing states.";
+		LOG(LogLevel::Depricated) << "PassThroughInputManager::getPendingState(): " << GetTypeName() << " passing states.";
 		// 很有可能都是重複的同一個input state，所以先確定一下
 		if (find(pStates->begin(), pStates->end(), pendingParentStates[i]) == pStates->end())
 			pStates->push_back(pendingParentStates[i]);
 
 		if (dynamic_cast<BluetoothCommand*>(pendingParentStates[i])) {
-			LOG(LogLevel::Finest) << "PassThroughInputManager::getPendingState(): push [" << dynamic_cast<BluetoothCommand*>(pendingParentStates[i])->GetContext().dump() << "] into pending states.";
+			LOG(LogLevel::Depricated) << "PassThroughInputManager::getPendingState(): push [" << dynamic_cast<BluetoothCommand*>(pendingParentStates[i])->GetContext().dump() << "] into pending states.";
 		}
 	}
 
