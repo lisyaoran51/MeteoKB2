@@ -118,6 +118,7 @@ int Player::load(MeteoConfigManager* m, Instrument* instru)
 
 	LOG(LogLevel::Fine) << "Player::load : adding time controller, ruleset executor. clock = [" << GetClock() << "].";
 	AddChild(timeController);
+	LOG(LogLevel::Debug) << "Player::load() : time controller added.";
 	// 把time controller下面所有東西的clock都改成由time controller控制的clock
 	Container* container = new Container();
 	timeController->AddChild(container);
