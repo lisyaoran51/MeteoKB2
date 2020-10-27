@@ -55,6 +55,10 @@ vector<InputState*>* PassThroughInputManager::getPendingState(vector<InputState*
 		// 很有可能都是重複的同一個input state，所以先確定一下
 		if (find(pStates->begin(), pStates->end(), pendingParentStates[i]) == pStates->end())
 			pStates->push_back(pendingParentStates[i]);
+
+		if (dynamic_cast<BluetoothCommand*>(pendingParentStates[i])) {
+			LOG(LogLevel::Finest) << "PassThroughInputManager::getPendingState(): push [" << dynamic_cast<BluetoothCommand*>(pendingParentStates[i])->GetContext().dump() << "] into pending states.";
+		}
 	}
 
 	pendingParentStates.clear();
@@ -94,5 +98,7 @@ int PassThroughInputManager::onSlide(InputState * inputState, InputKey slider)
 
 int PassThroughInputManager::onCommand(InputState * inputState, BluetoothCommand * bluetoothCommand)
 {
+	LOG(LogLevel::Finest) << "PassThroughInputManager::onCommand(): get command [" << bluetoothCommand->GetContext().dump() << "].";
+
 	return acceptState(inputState);
 }
