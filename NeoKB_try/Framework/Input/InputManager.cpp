@@ -218,6 +218,9 @@ vector<InputState*>* InputManager::createDistinctInputStates(vector<InputState*>
 
 				BluetoothCommand* bluetoothCommand = state->GetBluetoothState()->GetCommands()->at(i);
 				newBluetoothState->GetCommands()->push_back(bluetoothCommand->Clone());
+
+				LOG(LogLevel::Finest) << "InputManager::createDistinctInputStates(): cloning over.";
+
 			}
 		}
 	}
