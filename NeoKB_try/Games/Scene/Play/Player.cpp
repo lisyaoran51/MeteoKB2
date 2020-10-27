@@ -121,8 +121,9 @@ int Player::load(MeteoConfigManager* m, Instrument* instru)
 	// 把time controller下面所有東西的clock都改成由time controller控制的clock
 	Container* container = new Container();
 	timeController->AddChild(container);
+	LOG(LogLevel::Debug) << "Player::load() : set offset clock.";
 	container->SetClock(offsetClock);
-	LOG(LogLevel::Debug) << "Player::load() : loading ruleset executor.";
+	LOG(LogLevel::Debug) << "Player::load() : add ruleset executor.";
 	container->AddChild(rulesetExecutor);
 
 	LOG(LogLevel::Debug) << "Player::load() : ruleset executor loaded.";
