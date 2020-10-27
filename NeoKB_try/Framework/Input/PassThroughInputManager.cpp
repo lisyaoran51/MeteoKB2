@@ -40,7 +40,7 @@ int PassThroughInputManager::update()
 
 vector<InputState*>* PassThroughInputManager::getPendingState(vector<InputState*>* pStates)
 {
-	LOG(LogLevel::Finest) << "PassThroughInputManager::getPendingState(): start getting passing states.";
+	LOG(LogLevel::Finest) << "PassThroughInputManager::getPendingState(): " << GetTypeName() << " start getting passing states." << (useParentState ? 1 : 0) ;
 	/* 先把handlers裡面的pending states全都清出來 */
 	InputManager::getPendingState(pStates);
 
