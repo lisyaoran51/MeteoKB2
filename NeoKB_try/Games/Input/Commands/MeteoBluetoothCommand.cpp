@@ -16,6 +16,8 @@ MeteoBluetoothCommand::MeteoBluetoothCommand(MeteoCommand c): TBluetoothCommand<
 
 BluetoothCommand * MeteoBluetoothCommand::Clone()
 {
+
+	LOG(LogLevel::Finest) << "MeteoBluetoothCommand::Clone(): create new command.";
 	MeteoBluetoothCommand* btCommand = new MeteoBluetoothCommand(command);
 
 	LOG(LogLevel::Finest) << "MeteoBluetoothCommand::Clone(): start get context.";
