@@ -728,6 +728,8 @@ BluetoothCommand * MeteoPacketConverterV1::ConvertToBluetoothCommand(char * buff
 
 			btCommand->GetContext() = json::parse(contextBuffer);
 
+			LOG(LogLevel::Debug) << "MeteoPacketConverterV1::ConvertToBluetoothCommand() : command [" << hex << command << dec << "], context [" << btCommand->GetContext().dump() << "].";
+
 			// TODO: parse¥¢±Ñ­nerror handle
 
 			return btCommand;
