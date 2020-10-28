@@ -99,6 +99,7 @@ int SoundSelectPanel::OnCommand(MeteoBluetoothCommand * command)
 
 
 	}
+	LOG(LogLevel::Fine) << "SoundSelectPanel::OnCommand() : over. ";
 
 	return 0;
 }
