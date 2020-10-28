@@ -577,6 +577,7 @@ int MeteoPacketConverterV1::SplitPacket(char * bufferIn, int bytesRead, char ** 
 	while (totalByteSplited < bytesRead) {
 
 		unsigned long command;
+		memcpy(&command, splitPosition, sizeof(command));
 		unsigned short length = 0;
 		memcpy(&length, splitPosition + sizeof(command), sizeof(length));
 
