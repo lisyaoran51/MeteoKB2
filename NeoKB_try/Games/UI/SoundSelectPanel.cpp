@@ -66,6 +66,7 @@ int SoundSelectPanel::OnCommand(MeteoBluetoothCommand * command)
 	LOG(LogLevel::Debug) << "SoundSelectPanel::OnCommand() : got new bt command. ";
 
 	if (command->GetCommand() == MeteoCommand::AppSwitchPianoInstrument) {
+		LOG(LogLevel::Debug) << "SoundSelectPanel::OnCommand() : AppSwitchPianoInstrument. ";
 
 		string soundBank = command->GetContext()["Instrument"];
 		
