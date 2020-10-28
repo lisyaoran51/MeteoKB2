@@ -580,7 +580,7 @@ int MeteoPacketConverterV1::SplitPacket(char * bufferIn, int bytesRead, char ** 
 		unsigned short length = 0;
 		memcpy(&length, splitPosition + sizeof(command), sizeof(length));
 
-		LOG(LogLevel::Debug) << "MeteoPacketConverterV1::SplitPacket() : get packet [" << command << "], length [" << length << "].";
+		LOG(LogLevel::Debug) << "MeteoPacketConverterV1::SplitPacket() : get packet [" << hex << command << dec << "], length [" << length << "].";
 
 		/* 判斷封包是否損壞。最大封包長度為538，如果超過就代表已損壞 */
 		/* 判斷封包是否超過目前讀到的資料長度，超過的話可能在read的時候被切斷了 */
