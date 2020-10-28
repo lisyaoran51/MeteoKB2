@@ -191,6 +191,7 @@ int SheetmusicSelectPanel::OnCommand(MeteoBluetoothCommand * command)
 		LOG(LogLevel::Debug) << "int SheetmusicSelectPanel::OnCommand() : request load game. " << command->GetContext().dump();
 
 		string fileName = command->GetContext()["FileName"].get<string>();
+		
 
 		LOG(LogLevel::Debug) << "int SheetmusicSelectPanel::OnCommand() : selected file name [" << fileName << "].";
 
