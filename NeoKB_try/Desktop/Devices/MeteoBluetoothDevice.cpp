@@ -69,6 +69,22 @@ int MeteoBluetoothDevice::readFromDevice()
 		LOG(LogLevel::Debug) << "MeteoBluetoothDevice::readFromDevice() : Create fake bt input.";
 	}
 
+	if (_debugCount == 30000) {
+
+		InputState* newState = new InputState();
+		newState->SetBluetoothState(new BluetoothState());
+		MeteoBluetoothCommand* btCommand = new MeteoBluetoothCommand(MeteoCommand::AppSwitchPianoInstrument);
+		btCommand->GetContext()["Instrument"] = "piano";
+
+		LOG(LogLevel::Debug) << "MeteoBluetoothDevice::readFromDevice() : Create fake bt input [" << btCommand->GetContext().dump() << "].";
+
+		newState->GetBluetoothState()->AddCommand(btCommand);
+
+		inputStates.push_back(newState);
+
+		LOG(LogLevel::Debug) << "MeteoBluetoothDevice::readFromDevice() : Create fake bt input.";
+	}
+
 	return 0;
 }
 
