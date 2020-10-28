@@ -151,6 +151,8 @@ int main()
 		
 		int i = 0, j = 0;
 		
+		char** fileSegmentMap;
+		
 		while(1){
 			
 			bytes_read = read(client, buf, sizeof(buf));
@@ -168,7 +170,7 @@ int main()
 				
 				/* int fileSegmentSize = getFileSize(buffer, size); */
 				unsigned short length;
-				memcpy(&length, buffer + sizeof(unsigned long), sizeof(unsigned short));
+				memcpy(&length, buf + sizeof(unsigned long), sizeof(unsigned short));
 
 				int fileSegmentSize = length - sizeof(unsigned long) + sizeof(unsigned short) + sizeof(char) * 16 + sizeof(unsigned short) * 2;
 				
@@ -184,7 +186,7 @@ int main()
 				char* fileSegment = (char*)malloc(sizeof(char) * fileSegmentSize);
 
 				memcpy(fileSegment, 
-					   buffer + sizeof(unsigned long) + sizeof(unsigned short) + sizeof(char) * 16 + sizeof(unsigned short) * 2, 
+					   buf + sizeof(unsigned long) + sizeof(unsigned short) + sizeof(char) * 16 + sizeof(unsigned short) * 2, 
 					   sizeof(char) * fileSegmentSize);
 				
 				
@@ -192,20 +194,22 @@ int main()
 				/* int fileSegmentNumber = getFileSegmentOrder(buffer, size); */
 				unsigned short fileSegmentNumber;
 
-				memcpy(&fileSegmentNumber, buffer + sizeof(unsigned long) + sizeof(unsigned short) + sizeof(char) * 16, sizeof(unsigned short));
+				memcpy(&fileSegmentNumber, buf + sizeof(unsigned long) + sizeof(unsigned short) + sizeof(char) * 16, sizeof(unsigned short));
 				
 				/* 總共幾個片段 */
 				/* int fileSegmentCount = getFileSegmentCount(buffer, size); */
 				unsigned short fileSegmentCount;
 
-				memcpy(&fileSegmentCount, buffer + sizeof(unsigned long) + sizeof(unsigned short) + sizeof(char) * 16 + sizeof(unsigned short), sizeof(unsigned short));
+				memcpy(&fileSegmentCount, buf + sizeof(unsigned long) + sizeof(unsigned short) + sizeof(char) * 16 + sizeof(unsigned short), sizeof(unsigned short));
 
 				if(isFileBufferCreated == 0){
-					char** fileSegmentMap = (char**)malloc(sizeof(char*) * fileSegmentCount);
+					fileSegmentMap = (char**)malloc(sizeof(char*) * fileSegmentCount);
 					
 					for(i = 0; i < fileSegmentCount; i++){
 						fileSegmentMap[i] = (char*)malloc(sizeof(char) * maxFileSegmentSize);
 					}
+					
+					isFileBufferCreated = 1;
 				}
 				
 				/* 寫入資料到map裡 */
