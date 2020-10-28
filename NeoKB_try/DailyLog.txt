@@ -2190,3 +2190,13 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 	
 	看起來是user input manager一update結束就當掉，還沒進入下一個物件的update
 	還沒get child就當了，是再pass through input manager裡面的update之後當掉的
+	
+10/26
+	結果是~input state只要刪到bluetooth state就會當掉
+	在BluetoothState::~BluetoothState()的delete commands的時候當掉
+	
+10/27
+	改成clone來複製Command以後，變成createDistinctInputStates會當掉
+	找到問題了，是bluetooth phone每次丟完訊息到input handler，就會把原本的訊息刪掉。如果input handler沒有用clone把command複製過去，command就會全部被delete，就會出錯
+	
+	選曲成功，但是沒有開始遊戲，time controller loaded就卡住了，在add child的時候被lock住了
