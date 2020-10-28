@@ -636,7 +636,7 @@ PacketStatus MeteoPacketConverterV1::CheckPacketStatus(char * packet, int length
 	memcpy(&packetLength, packet + sizeof(command), sizeof(packetLength));
 
 
-	LOG(LogLevel::Debug) << "MeteoPacketConverterV1::CheckPacketStatus() : command [" << command << "], length[" << packetLength << "].";
+	LOG(LogLevel::Debug) << "MeteoPacketConverterV1::CheckPacketStatus() : command [" << hex << command << dec << "], length[" << packetLength << "].";
 
 	/* 判斷封包是否損壞。最大封包長度為538，如果超過就代表已損壞 */
 	/* 判斷封包是否超過目前讀到的資料長度，超過的話可能在read的時候被切斷了 */
@@ -688,7 +688,7 @@ PacketType MeteoPacketConverterV1::CheckPacketType(char * buffer, int size)
 	return PacketType::None;
 }
 
-PacketType Desktop::Devices::MeteoPacketConverterV1::CheckCommandType(BluetoothCommand * bluetoothCommand)
+PacketType MeteoPacketConverterV1::CheckCommandType(BluetoothCommand * bluetoothCommand)
 {
 	MeteoCommand command = dynamic_cast<MeteoBluetoothCommand*>(bluetoothCommand)->GetCommand();
 	

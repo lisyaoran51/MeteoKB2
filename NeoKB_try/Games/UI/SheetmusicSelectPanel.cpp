@@ -114,7 +114,7 @@ int SheetmusicSelectPanel::SetSms(vector<SmInfo*>* sInfos)
 int SheetmusicSelectPanel::OnCommand(MeteoBluetoothCommand * command)
 {
 
-	LOG(LogLevel::Debug) << "SoundSelectPanel::OnCommand() : got new bt command. ";
+	LOG(LogLevel::Debug) << "SheetmusicSelectPanel::OnCommand() : got new bt command. ";
 
 	if (command->GetCommand() == MeteoCommand::WriteHardwareConfiguration) {
 		for (int i = 0; i < command->GetContext()["Configurations"].size(); i++) {
@@ -188,7 +188,7 @@ int SheetmusicSelectPanel::OnCommand(MeteoBluetoothCommand * command)
 
 	if (command->GetCommand() == MeteoCommand::RequestLoadGame) {
 
-		LOG(LogLevel::Debug) << "int SheetmusicSelectPanel::OnCommand() : request load game.";
+		LOG(LogLevel::Debug) << "int SheetmusicSelectPanel::OnCommand() : request load game. " << command->GetContext().dump();
 
 		string fileName = command->GetContext()["FileName"].get<string>();
 
