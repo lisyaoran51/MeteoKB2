@@ -156,10 +156,12 @@ int main()
 		while(1){
 			
 			write(client, msg, 6);
-			printf("s");printf("e");printf("n");printf("d");printf(".");printf("\n");
+			printf("send\n");
 			
 			bytes_read = read(client, buf, sizeof(buf));
 			if( bytes_read > 0 ) {
+				
+				printf("read %d\n", bytes_read);
 			
 				/* string fileName = getFileName(buffer, size); */
 				char name[17] = { 0 };
