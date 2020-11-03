@@ -177,7 +177,7 @@ int main()
 				unsigned short length;
 				memcpy(&length, buf + sizeof(unsigned long), sizeof(unsigned short));
 
-				int fileSegmentSize = length - sizeof(unsigned long) + sizeof(unsigned short) + sizeof(char) * 16 + sizeof(unsigned short) * 2;
+				int fileSegmentSize = length - sizeof(unsigned long) - sizeof(unsigned short) - sizeof(char) * 16 - sizeof(unsigned short) * 2;
 				
 				
 
@@ -230,6 +230,8 @@ int main()
 				printf("get segment %d\n", fileSegmentNumber);
 				
 				if(fileSegmentNumber == fileSegmentCount - 1){
+					
+					printf("write file\n");
 					
 					FILE *fid;
 					fid = fopen("binary.dat","wb");
