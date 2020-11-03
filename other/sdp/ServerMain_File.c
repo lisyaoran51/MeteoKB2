@@ -185,6 +185,13 @@ int main()
 					printf("wrong file size %d bytes \n", fileSegmentSize);
 					//LOG(LogLevel::Error) << "MeteoPacketConverterV1::ConvertToFile() : wrong file size [" << fileSegmentSize << "].";
 					//return nullptr;
+					
+					for(j = 0; j < bytes_read; j++){
+						printf(" %02X", buf[j]);
+						if((j+1) % 16 == 0)
+							printf("\n");
+					}
+					
 				}
 
 				/* char* fileSegment = getFileSegment(buffer, size); */
