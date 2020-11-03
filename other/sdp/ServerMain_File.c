@@ -229,14 +229,14 @@ int main()
 				
 				printf("get segment %d by %d\n", fileSegmentNumber, fileSegmentCount);
 				
-				if(fileSegmentNumber == fileSegmentCount - 1){
+				if(fileSegmentNumber == fileSegmentCount - 2){
 					
 					printf("write file\n");
 					
 					FILE *fid;
 					fid = fopen("binary.dat","wb");
 					
-					for(i = 0; i < fileSegmentCount; i++){
+					for(i = 0; i < fileSegmentCount-1; i++){
 						int tempSegmentSize = 0;
 						if(i == fileSegmentCount - 1)
 							tempSegmentSize = fileSegmentSize;
