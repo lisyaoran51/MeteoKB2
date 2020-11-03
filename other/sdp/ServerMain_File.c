@@ -227,7 +227,7 @@ int main()
 				/* 寫入資料到map裡 */
 				memcpy(fileSegmentMap[fileSegmentNumber], fileSegment, sizeof(char) * fileSegmentSize);
 				
-				printf("get segment %d\n", fileSegmentNumber);
+				printf("get segment %d by %d\n", fileSegmentNumber, fileSegmentCount);
 				
 				if(fileSegmentNumber == fileSegmentCount - 1){
 					
@@ -249,7 +249,7 @@ int main()
 					}
 					
 					fclose(fid);
-					
+					return 0;
 				}
 			}
 		}
