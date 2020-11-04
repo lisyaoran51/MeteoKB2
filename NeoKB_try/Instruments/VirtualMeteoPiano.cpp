@@ -44,6 +44,7 @@ int VirtualMeteoPiano::Play(Pitch p, float volume)
 
 int VirtualMeteoPiano::Stop(Pitch p)
 {
+
 	/* 先檢查是否可以輸入，可以的時候才能控制 */
 	if (!isActive)
 		return 0;
@@ -65,6 +66,7 @@ int VirtualMeteoPiano::Stop(Pitch p)
 
 int VirtualMeteoPiano::PressPedal()
 {
+	LOG(LogLevel::Debug) << "VirtualMeteoPiano::PressPedal() : sustain type [" << (int)sustainType << "].";
 	/* 先檢查是否可以輸入，可以的時候才能控制 */
 	if (!isActive)
 		return 0;
@@ -80,6 +82,7 @@ int VirtualMeteoPiano::PressPedal()
 
 int VirtualMeteoPiano::ReleasePedal()
 {
+	LOG(LogLevel::Debug) << "VirtualMeteoPiano::ReleasePedal() : sustain type [" << (int)sustainType << "] releasing pedal.";
 	/* 先檢查是否可以輸入，可以的時候才能控制 */
 	if (!isActive)
 		return 0;
@@ -89,6 +92,7 @@ int VirtualMeteoPiano::ReleasePedal()
 
 	pedalDown = false;
 
+	LOG(LogLevel::Debug) << "VirtualMeteoPiano::ReleasePedal() : fadeout every key.";
 	map<Pitch, bool>::iterator it;
 	for (it = isPressingMapByPitch.begin(); it != isPressingMapByPitch.end(); ++it) {
 		if (!it->second) {
