@@ -372,10 +372,11 @@ Pattern * MeteorPatternGenerator::generateNoteControlPoint(vector<Event*>* es, N
 		// 要好聽可能要到post process的時候去計算小節來決定按下時間，但這個很難寫
 		pianoSoundEventUp = new PianoSoundEvent(
 			pair<Pitch, float>(pitch, 0),
-			note->GetStartTime() + 0.5,
+			note->GetStartTime() + 0.1,
 			0
 		);
 	}
+	pianoSoundEventUp->SetSourceEvent(note);
 
 
 
