@@ -105,7 +105,7 @@ int SongSelect::selectionChanged(SmInfo * sheetmusicInfo)
 		workingSm.GetValue()->GetModifiers()->SetValue(new vector<Modifier*>());
 		workingSm.GetValue()->GetModifiers()->GetValue()->push_back(new AutoPedalModifier());
 		workingSm.GetValue()->GetModifiers()->GetValue()->push_back(new MusicGameModifier());
-		workingSm.GetValue()->GetModifiers()->GetValue()->push_back(new MeteorDifficultyModifier(SmDifficultyDifficulty::Easy));
+		//workingSm.GetValue()->GetModifiers()->GetValue()->push_back(new MeteorDifficultyModifier(SmDifficultyDifficulty::Easy));
 		//workingSm.GetValue()->GetModifiers()->GetValue()->push_back(new RepeatPracticeModifier(1, 4));
 	}
 
