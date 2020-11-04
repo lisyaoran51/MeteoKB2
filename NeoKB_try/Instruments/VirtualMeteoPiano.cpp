@@ -58,7 +58,7 @@ int VirtualMeteoPiano::Stop(Pitch p)
 	LOG(LogLevel::Depricated) << "VirtualMeteoPiano::Stop() : release key check pedal down." << (pedalDown?1:0);
 	if (!pedalDown)
 		getSamplesByPitch()->at(p)->FadeOut();
-	LOG(LogLevel::Debug) << "VirtualMeteoPiano::Stop() : release key seccuess." << int(p);
+	LOG(LogLevel::Debug) << "VirtualMeteoPiano::Stop() : release key seccuess? " << (pedalDown ? 1 : 0) << "[" << int(p) << "].";
 
 	isPressingMapByPitch[p] = false;
 
