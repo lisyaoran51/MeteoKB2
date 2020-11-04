@@ -18,6 +18,7 @@ CompositeMeteoPiano::CompositeMeteoPiano(vector<string>& args) : MeteoPiano(args
 {
 	meteoPiano = new MeteoPiano(args);
 	virtualMeteoPiano = new VirtualMeteoPiano();
+	virtualMeteoPiano->SetSustainType(VirtualMeteoPianoSustainType::Pedal);
 
 	registerLoad(bind(static_cast<int(CompositeMeteoPiano::*)(void)>(&CompositeMeteoPiano::load), this));
 }

@@ -9,8 +9,14 @@ namespace Instruments {
 
 	enum class VirtualMeteoPianoSustainType {
 		None,
+		/// <summary>
+		/// 全部延音
+		///	</summary>
 		Auto,
-		Pedal
+		/// <summary>
+		/// 遊戲控制踏板
+		///	</summary>
+		Pedal	
 	};
 
 	class VirtualMeteoPiano : public Piano {
