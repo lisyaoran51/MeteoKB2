@@ -44,7 +44,7 @@ int VirtualMeteoPiano::Play(Pitch p, float volume)
 
 int VirtualMeteoPiano::Stop(Pitch p)
 {
-	LOG(LogLevel::Debug) << "VirtualMeteoPiano::Stop() : release key." << int(p);
+	LOG(LogLevel::Depricated) << "VirtualMeteoPiano::Stop() : release key." << int(p);
 	/* 先檢查是否可以輸入，可以的時候才能控制 */
 	if (!isActive)
 		return 0;
@@ -55,10 +55,10 @@ int VirtualMeteoPiano::Stop(Pitch p)
 	//if (!dynamic_cast<MultiPlaybackSampleChannel*>(getSamplesByPitch()->at(p)))
 	//	return 0;
 
-	LOG(LogLevel::Debug) << "VirtualMeteoPiano::Stop() : release key check pedal down." << (pedalDown?1:0);
+	LOG(LogLevel::Depricated) << "VirtualMeteoPiano::Stop() : release key check pedal down." << (pedalDown?1:0);
 	if (!pedalDown)
 		getSamplesByPitch()->at(p)->FadeOut();
-	LOG(LogLevel::Debug) << "VirtualMeteoPiano::Stop() : release key seccuess.";
+	LOG(LogLevel::Debug) << "VirtualMeteoPiano::Stop() : release key seccuess." << int(p);
 
 	isPressingMapByPitch[p] = false;
 
@@ -97,7 +97,7 @@ int VirtualMeteoPiano::ReleasePedal()
 	map<Pitch, bool>::iterator it;
 	for (it = isPressingMapByPitch.begin(); it != isPressingMapByPitch.end(); ++it) {
 		if (!it->second) {
-
+			LOG(LogLevel::Debug) << "VirtualMeteoPiano::ReleasePedal() : fadeout [" << (int)it->first << "].";
 			if (getSamplesByPitch()->find(it->first) != getSamplesByPitch()->end()) {
 
 				//MultiPlaybackSampleChannel* sampleChannel = dynamic_cast<MultiPlaybackSampleChannel*>(getSamplesByPitch()->at(it->first));
@@ -105,6 +105,8 @@ int VirtualMeteoPiano::ReleasePedal()
 				//	if (sampleChannel->GetIsPlaying(1))
 				//		sampleChannel->FadeOut(1);
 				//}
+
+				LOG(LogLevel::Debug) << "VirtualMeteoPiano::ReleasePedal() : fadeout [" << (int)it->first << "] success? " << (getSamplesByPitch()->at(it->first)->GetIsPlaying() ? 1 : 0);
 				if(getSamplesByPitch()->at(it->first)->GetIsPlaying())
 					getSamplesByPitch()->at(it->first)->FadeOut();
 
