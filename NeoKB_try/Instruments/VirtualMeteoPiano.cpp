@@ -44,7 +44,7 @@ int VirtualMeteoPiano::Play(Pitch p, float volume)
 
 int VirtualMeteoPiano::Stop(Pitch p)
 {
-	LOG(LogLevel::Debug) << "VirtualMeteoPiano::Stop() : release key.";
+	LOG(LogLevel::Debug) << "VirtualMeteoPiano::Stop() : release key." << int(p);
 	/* 先檢查是否可以輸入，可以的時候才能控制 */
 	if (!isActive)
 		return 0;
@@ -52,12 +52,12 @@ int VirtualMeteoPiano::Stop(Pitch p)
 	if (sustainType != VirtualMeteoPianoSustainType::Pedal)
 		return 0;
 
-	if (!dynamic_cast<MultiPlaybackSampleChannel*>(getSamplesByPitch()->at(p)))
-		return 0;
+	//if (!dynamic_cast<MultiPlaybackSampleChannel*>(getSamplesByPitch()->at(p)))
+	//	return 0;
 
 	LOG(LogLevel::Debug) << "VirtualMeteoPiano::Stop() : release key check pedal down." << (pedalDown?1:0);
 	if (!pedalDown)
-		dynamic_cast<MultiPlaybackSampleChannel*>(getSamplesByPitch()->at(p))->FadeOut(1);
+		getSamplesByPitch()->at(p)->FadeOut();
 	LOG(LogLevel::Debug) << "VirtualMeteoPiano::Stop() : release key seccuess.";
 
 	isPressingMapByPitch[p] = false;
