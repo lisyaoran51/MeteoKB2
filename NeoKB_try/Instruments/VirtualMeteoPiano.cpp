@@ -97,7 +97,7 @@ int VirtualMeteoPiano::ReleasePedal()
 	map<Pitch, bool>::iterator it;
 	for (it = isPressingMapByPitch.begin(); it != isPressingMapByPitch.end(); ++it) {
 		if (!it->second) {
-			LOG(LogLevel::Debug) << "VirtualMeteoPiano::ReleasePedal() : fadeout [" << (int)it->first << "].";
+			LOG(LogLevel::Depricated) << "VirtualMeteoPiano::ReleasePedal() : fadeout [" << (int)it->first << "].";
 			if (getSamplesByPitch()->find(it->first) != getSamplesByPitch()->end()) {
 
 				//MultiPlaybackSampleChannel* sampleChannel = dynamic_cast<MultiPlaybackSampleChannel*>(getSamplesByPitch()->at(it->first));
