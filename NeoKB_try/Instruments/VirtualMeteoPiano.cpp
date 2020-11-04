@@ -58,7 +58,7 @@ int VirtualMeteoPiano::Stop(Pitch p)
 	LOG(LogLevel::Depricated) << "VirtualMeteoPiano::Stop() : release key check pedal down." << (pedalDown?1:0);
 	if (!pedalDown)
 		getSamplesByPitch()->at(p)->FadeOut();
-	LOG(LogLevel::Debug) << "VirtualMeteoPiano::Stop() : release key seccuess? " << (pedalDown ? 1 : 0) << "[" << int(p) << "].";
+	LOG(LogLevel::Fine) << "VirtualMeteoPiano::Stop() : release key seccuess? " << (pedalDown ? 1 : 0) << "[" << int(p) << "].";
 
 	isPressingMapByPitch[p] = false;
 
@@ -93,7 +93,7 @@ int VirtualMeteoPiano::ReleasePedal()
 
 	pedalDown = false;
 
-	LOG(LogLevel::Debug) << "VirtualMeteoPiano::ReleasePedal() : fadeout every key.";
+	LOG(LogLevel::Fine) << "VirtualMeteoPiano::ReleasePedal() : fadeout every key.";
 	map<Pitch, bool>::iterator it;
 	for (it = isPressingMapByPitch.begin(); it != isPressingMapByPitch.end(); ++it) {
 		if (!it->second) {
@@ -106,7 +106,7 @@ int VirtualMeteoPiano::ReleasePedal()
 				//		sampleChannel->FadeOut(1);
 				//}
 
-				LOG(LogLevel::Debug) << "VirtualMeteoPiano::ReleasePedal() : fadeout [" << (int)it->first << "] success? " << (getSamplesByPitch()->at(it->first)->GetIsPlaying() ? 1 : 0);
+				LOG(LogLevel::Fine) << "VirtualMeteoPiano::ReleasePedal() : fadeout [" << (int)it->first << "] success? " << (getSamplesByPitch()->at(it->first)->GetIsPlaying() ? 1 : 0);
 				if(getSamplesByPitch()->at(it->first)->GetIsPlaying())
 					getSamplesByPitch()->at(it->first)->FadeOut();
 
