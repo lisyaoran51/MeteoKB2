@@ -65,6 +65,10 @@ int DualPlaybackBassSampleChannel::StopFadeOut()
 
 bool DualPlaybackBassSampleChannel::GetIsPlaying()
 {
+	if (BASS_ChannelIsActive(channelID[0]) == BASS_ACTIVE_PLAYING ||
+		BASS_ChannelIsActive(channelID[1]) == BASS_ACTIVE_PLAYING)
+		return true;
+
 	return false;
 }
 
