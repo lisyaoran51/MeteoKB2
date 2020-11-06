@@ -1728,6 +1728,15 @@
     <ClCompile Include="Framework\Input\Handler\InputHandler.cpp">
       <Filter>來源檔案\Framework\Input\Handler</Filter>
     </ClCompile>
+    <ClCompile Include="Games\Scheduler\Event\ControlPoints\MarkControlPoint.cpp">
+      <Filter>來源檔案\Games\Schedulers\Events\ControlPoints</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\Scheduler\Event\ControlPoints\SectionStartControlPoint.cpp">
+      <Filter>來源檔案\Games\Schedulers\Events\ControlPoints</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\Scheduler\Event\ControlPoints\OctaveShiftSpanControlPoint.cpp">
+      <Filter>來源檔案\Games\Schedulers\Events\ControlPoints</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="DailyLog.txt">
@@ -2868,6 +2877,15 @@
     </ClInclude>
     <ClInclude Include="Instruments\Audio\Format\SoundBindingSetDecoder.h">
       <Filter>標頭檔\Instruments\Audio\Format</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Scheduler\Event\ControlPoints\MarkControlPoint.h">
+      <Filter>標頭檔\Games\Scheduler\Events\ControlPoints</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Scheduler\Event\ControlPoints\SectionStartControlPoint.h">
+      <Filter>標頭檔\Games\Scheduler\Events\ControlPoints</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Scheduler\Event\ControlPoints\OctaveShiftSpanControlPoint.h">
+      <Filter>標頭檔\Games\Scheduler\Events\ControlPoints</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

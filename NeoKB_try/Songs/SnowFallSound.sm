@@ -1,6 +1,8 @@
 simple file format v0
 [General]
 Mode:1
+Pedal:1
+Section:1
 [Metadata]
 Title:SnowFallSound
 [Difficulty]

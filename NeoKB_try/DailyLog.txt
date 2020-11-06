@@ -1994,10 +1994,12 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	補了一些instant的東西，之後還要做ruleset info和未進入遊戲時的移調
 	
 8/31
-	缺的東西: mcu、ruleset info(ok)、未進入遊戲的移調(ok)、琴音分為全長和AB段、琴音切換(ok)、關閉wifi、daemon、重播存檔、OS設定、平移會lag、刪除平移、遊戲開始前倒數3秒(ok)、刪除所有memory leak
-				遊戲開始前設定mod(ok)、遊戲開始時改速度(ok)、手動踏板modifier、紀錄每個modifier到藍芽架構裡、me555、測試藍芽傳送(ok)、藍芽傳黨、關機、反覆模式、燈光過度閃爍(ok，慢速無解)、
-				背景音樂的延音控制、sbs音量設定
-	額外音效：節拍器
+	缺的東西: ruleset info(ok)、未進入遊戲的移調(ok)、琴音切換(ok)、遊戲開始前倒數3秒(ok)、遊戲開始前設定mod(ok)、遊戲開始時改速度(ok)、測試藍芽選歌(ok)、
+				藍芽接黨測試(ok)、燈光過度閃爍(ok，慢速無解)、背景音樂的延音控制(ok)、琴音雜音(好像是音色的問題)
+				反覆模式、切藍芽封包、重播存檔、根據是否有小節記號來產生小節事件、跳轉時反向觸發特效、刪除所有memory leak、琴音分為全長和AB段、手動踏板modifier、關機、
+				sbs音量設定、藍芽操控播音、紀錄每個modifier到藍芽架構裡、藍芽傳黨、開機燈號、當機燈號、storage分流、讀取音符音量max127、平移會lag、刪除平移
+				mcu、關閉wifi、daemon、OS設定、me555、
+	額外音效：節拍器、成功失敗音效
 	
 9/1
 	找到mcu輸出uart debug資料的方法: 在project裡面DEBUG_ENABLE_SEMIHOST=1，才能收到uart訊號
@@ -2207,4 +2209,11 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 11/3
 	藍芽傳黨的小測試完成，速度大概是20kbps，容易有多個封包同時丟在一起亂掉的狀態，以後split packet要處理這個問題。
 	
-	7.6m傳了4:25，速度29kbps
+	7.6m傳了4:25，速度29kbps，最後還是兩個封包黏在一起
+	
+11/4
+	dual playback bass sample channel沒有寫完整，所以沒有辦法控制延音，目前先把言因部分補丸，其他部分還要再補
+	要寫反覆練彈，要先判斷這個譜有沒有小節資訊，可能產生反覆資訊的位置要更改
+	
+11/5
+	改反覆練彈的光圈，改到一半，之後要確定整條光圈的流程都改好

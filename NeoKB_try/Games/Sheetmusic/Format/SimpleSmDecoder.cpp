@@ -3,6 +3,8 @@
 #include "../../Scheduler/Event/ControlPoints/NoteControlPoint.h"
 #include "../../Scheduler/Event/ControlPoints/InputKeyControlPoint.h"
 #include "../../Scheduler/Event/ControlPoints/OctaveAutoControlPoint.h"
+#include "../../Scheduler/Event/ControlPoints/SectionStartControlPoint.h"
+
 
 
 using namespace Games::Sheetmusics::Format;
@@ -53,10 +55,9 @@ int SimpleSmDecoder::handleGeneral(Sm<Event>* sm, string & line)
 		//metadata->AudioFile = pair.at(1);
 	}
 	else if (pair.at(0) == "Mode") {
+		// Mode 1 : Meteor
+		// Mode 2 : Instant
 		sm->GetSmInfo()->rulesetId = atoi(pair.at(1).c_str());
-
-
-
 	}
 	else if (pair.at(0) == "LetterboxInBreaks") {
 		//metadata->AudioFile = pair.at(1);
@@ -64,8 +65,11 @@ int SimpleSmDecoder::handleGeneral(Sm<Event>* sm, string & line)
 	else if (pair.at(0) == "SpecialStyle") {
 		//metadata->AudioFile = pair.at(1);
 	}
-	else if (pair.at(0) == "Section") {
-		sm->GetSmInfo()->section = atoi(pair.at(1).c_str()) == 1;
+	else if (pair.at(0) == "Pedal") {	/* 代表這份譜有標示踏板 */
+		sm->GetSmInfo()->hasPedalData = atoi(pair.at(1).c_str()) == 1;
+	}
+	else if (pair.at(0) == "Section") {	/* 代表這份譜有標示小節 */
+		sm->GetSmInfo()->hasSectionData = atoi(pair.at(1).c_str()) == 1;
 	}
 	else if (pair.at(0) == "HandType") {
 		switch (atoi(pair.at(1).c_str())) {
@@ -221,12 +225,12 @@ int SimpleSmDecoder::handleNoteControlPoints(Sm<Event>* sm, string & line)
 
 	if (timingChange) {
 
-		PlayableControlPoint* newPlayableControlPoint = nullptr;
+		MarkControlPoint* newMarkControlPoint = nullptr;
 
 		if (pitchInt >= 0) {
 			Pitch pitch = static_cast<Pitch>(pitchInt);
 
-			newPlayableControlPoint = new NoteControlPoint(
+			newMarkControlPoint = new NoteControlPoint(
 				pitch,
 				time,
 				noteLength
@@ -234,6 +238,7 @@ int SimpleSmDecoder::handleNoteControlPoints(Sm<Event>* sm, string & line)
 
 			if (volume <= 0 || volume > 255)
 				volume = 50.f;// defaultSampleVolume;
+
 		}
 		else {
 			InputKey inputKey = InputKey::None;
@@ -242,30 +247,44 @@ int SimpleSmDecoder::handleNoteControlPoints(Sm<Event>* sm, string & line)
 			{
 			case -1:
 				inputKey = InputKey::SustainPedal;
-
+				newMarkControlPoint = new InputKeyControlPoint(inputKey, inputValue, time, noteLength);
 				break;
 			case -2:
 				inputKey = InputKey::LowerOctave; // 這邊程式邏輯有問題，遊戲中升降8度是不能夠手動控制的，只能電腦自動控制
 												  // 應該要放在Event section裡面
+				newMarkControlPoint = new InputKeyControlPoint(inputKey, inputValue, time, noteLength);
 				break;
 			case -3:
 				inputKey = InputKey::RaiseOctave; // 這邊程式邏輯有問題，遊戲中升降8度是不能夠手動控制的，只能電腦自動控制
 												  // 應該要放在Event section裡面
+				newMarkControlPoint = new InputKeyControlPoint(inputKey, inputValue, time, noteLength);
 				break;
+			case -4:
+				newMarkControlPoint = new SectionStartControlPoint(sectionIndex, time, noteLength);
 			}
-			newPlayableControlPoint = new InputKeyControlPoint(inputKey, inputValue, time, noteLength);
+			
 		}
 
-		newPlayableControlPoint->SetVolume(float(volume) / 256.f);
-		newPlayableControlPoint->SetSectionIndex(sectionIndex);
-		newPlayableControlPoint->SetHandType(static_cast<HandType>(hand));
-		newPlayableControlPoint->SetPartIndex(partIndex);
+		newMarkControlPoint->SetSectionIndex(sectionIndex);
+		newMarkControlPoint->SetPartIndex(partIndex);
+
+		/* 
+		 * 如果這個控制點是音符，就加入[音量]
+		 * 如果控制點是可彈奏控制點，就加入[使用手]
+		 */
+		if (dynamic_cast<PlayableControlPoint*>(newMarkControlPoint)) {
+			dynamic_cast<InputKeyControlPoint*>(newMarkControlPoint)->SetHandType(static_cast<HandType>(hand));
+			if (dynamic_cast<NoteControlPoint*>(newMarkControlPoint)) {
+				dynamic_cast<NoteControlPoint*>(newMarkControlPoint)->SetVolume(float(volume) / 128.f);
+			}
+		}
+
 
 		if (pitchInt >= 0)
 			LOG(LogLevel::Depricated) << "int SimpleSmDecoder::handleNoteControlPoints() : Note [" << pitchInt << "] at [" << time << "] volume [" << newPlayableControlPoint->GetVolume() << "].";
 
 
-		sm->GetEvents()->push_back(newPlayableControlPoint);
+		sm->GetEvents()->push_back(newMarkControlPoint);
 	}
 
 	//if (speedMultiplier != difficultyPoint.SpeedMultiplier) {
@@ -426,7 +445,8 @@ int SimpleSmDecoder::parseFile(fstream * stream, Sm<Event>* sm)
     //    hitObject.ApplyDefaults(sheetmusic.ControlPointInfo, sheetmusic.SheetmusicInfo.BaseDifficulty);
 
 	// TODO: 先亂寫，1就是MeteorRuleset
-	sm->GetSmInfo()->rulesetId = 1;
+	if (sm->GetSmInfo()->rulesetId == 0)
+		sm->GetSmInfo()->rulesetId = 1;
 
 	return 0;
 }

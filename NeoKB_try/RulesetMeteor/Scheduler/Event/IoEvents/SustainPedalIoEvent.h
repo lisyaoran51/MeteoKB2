@@ -21,6 +21,8 @@ namespace IoEvents {
 
 		int SetTargetTime(MTO_FLOAT tStartTime, MTO_FLOAT tLifeTime, MTO_FLOAT pDownLifeTime, MTO_FLOAT rLifeTime);
 
+
+		bool GetHasNotifyInAdvance();
 		MTO_FLOAT GetTargetStartTime();
 		MTO_FLOAT GetTargetLifeTime();
 		MTO_FLOAT GetPedalDownLifeTime();
@@ -30,6 +32,11 @@ namespace IoEvents {
 		virtual string GetTypeName();
 
 	protected:
+
+		/// <summary>
+		/// 是否是預先告知踏板即將踏下，如果不適的話，只要在踏板開始的時候亮光環，踏板結束的時候暗掉光環就可以
+		/// </summary>
+		bool hasNotifyInAdvance = false;
 
 		/// <summary>
 		/// 踏板目標點亮起的時間，就是光圈最上面那顆

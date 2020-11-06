@@ -12,6 +12,7 @@
 #include "../../../Games/Scheduler/Event/GameEvents/StartGameEvent.h"
 #include "../../../Games/Scheduler/Event/ControlPoints/NoteControlPoint.h"
 #include "../../../Games/Scheduler/Event/ControlPoints/InputKeyControlPoint.h"
+#include "../../../Games/Scheduler/Event/ControlPoints/SectionStartControlPoint.h"
 
 
 
@@ -76,12 +77,21 @@ namespace Patterns {
 		MTO_FLOAT pedalInterval = 0.2f;
 		MTO_FLOAT defaultNextPedalTargetStartTime = 1.f;
 
-		float defaultSectionInterval = 3.f;
+		float defaultSectionInterval = 5.f;
 
 		Pattern* generateNoteControlPoint(vector<Event*>* es, NoteControlPoint* note);
 		Pattern* generateStartGameEvent(vector<Event*>* es, StartGameEvent* start);
 		Pattern* generateInputKeyControlPoint(vector<Event*>* es, InputKeyControlPoint* inputKey);
+
+		/// <summary>
+		/// 建立一整首歌的所有反覆練習事件
+		/// </summary>
 		int generateRepeatPracticeEvents(vector<Event*>* es, vector<float>* sectionEndTime);
+
+		/// <summary>
+		/// 建立單個反覆練習事件
+		/// </summary>
+		Pattern* generateRepeatPracticeEvent(vector<Event*>* es, SectionStartControlPoint* sectionStart);
 
 	};
 

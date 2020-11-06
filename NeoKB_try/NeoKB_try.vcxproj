@@ -113,10 +113,13 @@
     <ClCompile Include="Games\Scheduler\Event\ControlPoints\ControlPoint.cpp" />
     <ClCompile Include="Games\Scheduler\Event\ControlPoints\InputKeyControlPoint.cpp" />
     <ClCompile Include="Games\Scheduler\Event\ControlPoints\InputKeyControlPointHitObject.cpp" />
+    <ClCompile Include="Games\Scheduler\Event\ControlPoints\MarkControlPoint.cpp" />
     <ClCompile Include="Games\Scheduler\Event\ControlPoints\NoteControlPoint.cpp" />
     <ClCompile Include="Games\Scheduler\Event\ControlPoints\NoteControlPointHitObject.cpp" />
     <ClCompile Include="Games\Scheduler\Event\ControlPoints\OctaveAutoControlPoint.cpp" />
+    <ClCompile Include="Games\Scheduler\Event\ControlPoints\OctaveShiftSpanControlPoint.cpp" />
     <ClCompile Include="Games\Scheduler\Event\ControlPoints\PlayableControlPoint.cpp" />
+    <ClCompile Include="Games\Scheduler\Event\ControlPoints\SectionStartControlPoint.cpp" />
     <ClCompile Include="Games\Scheduler\Event\DynamicEventGenerator.cpp" />
     <ClCompile Include="Games\Scheduler\Event\Effect\Algorithm\LinearMapPitchShifter.cpp" />
     <ClCompile Include="Games\Scheduler\Event\Effect\Algorithm\MapPitchShifter.cpp" />
@@ -448,10 +451,13 @@
     <ClInclude Include="Games\Scheduler\Event\ControlPoints\HandType.h" />
     <ClInclude Include="Games\Scheduler\Event\ControlPoints\InputKeyControlPoint.h" />
     <ClInclude Include="Games\Scheduler\Event\ControlPoints\InputKeyControlPointHitObject.h" />
+    <ClInclude Include="Games\Scheduler\Event\ControlPoints\MarkControlPoint.h" />
     <ClInclude Include="Games\Scheduler\Event\ControlPoints\NoteControlPoint.h" />
     <ClInclude Include="Games\Scheduler\Event\ControlPoints\NoteControlPointHitObject.h" />
     <ClInclude Include="Games\Scheduler\Event\ControlPoints\OctaveAutoControlPoint.h" />
+    <ClInclude Include="Games\Scheduler\Event\ControlPoints\OctaveShiftSpanControlPoint.h" />
     <ClInclude Include="Games\Scheduler\Event\ControlPoints\PlayableControlPoint.h" />
+    <ClInclude Include="Games\Scheduler\Event\ControlPoints\SectionStartControlPoint.h" />
     <ClInclude Include="Games\Scheduler\Event\DynamicEventGenerator.h" />
     <ClInclude Include="Games\Scheduler\Event\Effect\Algorithm\LinearMapPitchShifter.h" />
     <ClInclude Include="Games\Scheduler\Event\Effect\Algorithm\MapAlgorithm.h" />

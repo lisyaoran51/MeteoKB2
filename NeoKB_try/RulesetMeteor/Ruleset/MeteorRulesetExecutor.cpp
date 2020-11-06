@@ -14,6 +14,7 @@
 #include "../Scheduler/Event/Effect/TargetLineEffectMapper.h"
 #include "../../Games/Scheduler/Event/SystemEvents/SystemEventHandler.h"
 #include "../../Games/Scheduler/Event/SystemEvents/StopSystemEvent.h"
+#include "../../Games/Scheduler/Event/ControlPoints/SectionStartControlPoint.h"
 #include "../Input/MeteorInputManager.h"
 #include "../Timing/MeteorTimeController.h"
 #include "../../Framework/Timing/SpeedAdjusters/LinearSpeedAdjuster.h"
@@ -93,6 +94,7 @@ int MeteorRulesetExecutor::load(MeteorTimeController * t, Instrument* i)
 	meteoPiano->ChangePitchState(MeteoPianoPitchState::None);
 	meteoPiano->SetGameControllingPitchState(true);
 
+	// 這邊拿到的Event已經被處理過了
 	vector<Event*>* originalEvents = workingSm->GetSm()->GetEvents();
 	vector<float> sectionTime;
 
@@ -100,26 +102,11 @@ int MeteorRulesetExecutor::load(MeteorTimeController * t, Instrument* i)
 
 	int section = -1;
 
+	
 	for (int i = 0; i < originalEvents->size(); i++) {
-		if (dynamic_cast<PlayableControlPoint*>(originalEvents->at(i))) {
+		if (dynamic_cast<SectionStartControlPoint*>(originalEvents->at(i))) {
 
-			PlayableControlPoint* playableControlPoint = dynamic_cast<PlayableControlPoint*>(originalEvents->at(i));
-
-			if (playableControlPoint->GetSectionIndex() == -1) {
-				if(sectionTime.size() != 0)
-					throw runtime_error("int MeteorRulesetExecutor::load() : working sm section index error.");
-				break;
-			}
-				
-			/*
-			 * TODO: 重要!! 這邊要先將events用時間排序，不然就是decoder要先排序一次，不然會出錯
-			 */
-			if (playableControlPoint->GetSectionIndex() > section) {
-				for (int j = 0; j < playableControlPoint->GetSectionIndex() - section; j++) {
-					sectionTime.push_back(playableControlPoint->GetStartTime());
-				}
-				section = playableControlPoint->GetSectionIndex();
-			}
+			sectionTime.push_back(originalEvents->at(i)->GetStartTime());
 		}
 	}
 	
@@ -291,7 +278,7 @@ EventProcessor<Event>* MeteorRulesetExecutor::getEventProcessor(Event * e)
 	LOG(LogLevel::Error) << "MeteorRulesetExecutor::getEventProcessor() : [" << processorType << "] not found match.";
 	throw runtime_error("MeteorRulesetExecutor::getEventProcessor(Event*) : No matched processor type.");
 	// TODO:吐錯誤訊息
-	return NULL;
+	return nullptr;
 }
 
 string MeteorRulesetExecutor::GetProcessorType(string eventType)
@@ -320,7 +307,7 @@ int MeteorRulesetExecutor::playfieldLoad()
 		typename multimap<pair<float, float>, EventProcessor<Event>*>::iterator it;
 
 		for (it = periods->begin(); it != periods->end(); it++) {
-			LOG(LogLevel::Debug) << "---timespan [" << it->first.first << "," << it->first.second << "] -> processor [" << it->second->GetStartTime() << "].";
+			LOG(LogLevel::Fine) << "---timespan [" << it->first.first << "," << it->first.second << "] -> processor [" << it->second->GetStartTime() << "].";
 		}
 
 

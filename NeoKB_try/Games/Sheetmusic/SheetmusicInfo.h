@@ -66,7 +66,12 @@ namespace Sheetmusics {
 
 		int version;
 
-		int rulesetId;
+		/// <summary>
+		/// 規則
+		/// 1 : Meteor
+		/// 2 : Instant
+		/// </summary>
+		int rulesetId = 0;
 
 		RulesetInfo* rulesetInfo = nullptr;
 
@@ -74,7 +79,15 @@ namespace Sheetmusics {
 
 		FileInfo* fileInfo = nullptr;
 
-		bool section = false;
+		/// <summary>
+		/// 這份譜是否有標示小節
+		/// </summary>
+		bool hasSectionData = false;
+
+		/// <summary>
+		/// 這份譜是否有標示踏板，若無標示踏板就會auto sustain
+		/// </summary>
+		bool hasPedalData = false;
 
 		SmHandType smHandType = SmHandType::None;
 

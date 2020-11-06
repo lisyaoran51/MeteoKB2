@@ -20,6 +20,8 @@ namespace IoEvents {
 
 		SustainPedalLightRing();
 
+		bool GetHasNotifyInAdvance();
+
 		/// <summary>
 		/// 是target點出現的時機，不是pedal踏下的時機
 		/// </summary>

@@ -20,6 +20,11 @@ int SustainPedalIoEvent::SetTargetTime(MTO_FLOAT tStartTime, MTO_FLOAT tLifeTime
 	return 0;
 }
 
+bool SustainPedalIoEvent::GetHasNotifyInAdvance()
+{
+	return hasNotifyInAdvance;
+}
+
 MTO_FLOAT SustainPedalIoEvent::GetTargetStartTime()
 {
 	return targetStartTime;

@@ -16,6 +16,10 @@ namespace Schedulers{
 namespace Events{
 namespace ControlPoints{
 
+	/// <summary>
+	/// 平移八度的特效，結果沒有用到
+	/// 這邊的life time是指平移八度移過去花多少時間，不是指維持這個音域的時長多久
+	///	</summary>
 	class OctaveAutoControlPoint : public AutoControlPoint, public HasInputKey {
 
 

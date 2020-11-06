@@ -3,7 +3,7 @@
 
 
 #include "HandType.h"
-#include "ControlPoint.h"
+#include "MarkControlPoint.h"
 
 
 
@@ -13,7 +13,10 @@ namespace Events{
 namespace ControlPoints{
 
 
-	class AutoControlPoint : public ControlPoint {
+	/// <summary>
+	/// 不須輸入就會自動執行的control point
+	///	</summary>
+	class AutoControlPoint : public MarkControlPoint {
 
 	public:
 
@@ -22,22 +25,16 @@ namespace ControlPoints{
 		MTO_FLOAT GetVolume();
 		int SetVolume(MTO_FLOAT v);
 
-		int GetSectionIndex();
-		int SetSectionIndex(int sI);
-
-		int GetPartIndex();
-		int SetPartIndex(int pIndex);
-
 		HandType GetHandType();
 		int SetHandType(HandType h);
+
+		// 一定要每次都override!!
+		virtual string GetTypeName();
 
 
 	protected:
 
 		MTO_FLOAT volume = -1;
-
-		int sectionIndex = -1;
-		int partIndex = -1;
 
 		HandType handType = HandType::Auto;
 

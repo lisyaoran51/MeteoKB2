@@ -3,7 +3,7 @@
 
 
 #include "HandType.h"
-#include "ControlPoint.h"
+#include "MarkControlPoint.h"
 
 
 
@@ -12,8 +12,10 @@ namespace Schedulers{
 namespace Events{
 namespace ControlPoints{
 
-
-	class PlayableControlPoint : public ControlPoint {
+	/// <summary>
+	/// 須輸入才會自動執行的control point
+	///	</summary>
+	class PlayableControlPoint : public MarkControlPoint {
 
 	public:
 
@@ -25,12 +27,6 @@ namespace ControlPoints{
 		MTO_FLOAT GetVolume();
 		int SetVolume(MTO_FLOAT v);
 
-		int GetSectionIndex();
-		int SetSectionIndex(int sI);
-
-		int GetPartIndex();
-		int SetPartIndex(int pIndex);
-
 		HandType GetHandType();
 		int SetHandType(HandType h);
 
@@ -40,9 +36,6 @@ namespace ControlPoints{
 		SmDifficulty* smDifficulty = nullptr;
 
 		MTO_FLOAT volume = -1;
-
-		int sectionIndex = -1;
-		int partIndex = -1;
 
 		HandType handType = HandType::None;
 

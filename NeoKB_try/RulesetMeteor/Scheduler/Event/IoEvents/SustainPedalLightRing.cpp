@@ -10,9 +10,17 @@ SustainPedalLightRing::SustainPedalLightRing()
 	ioTransferType = IoTransferType::Once;
 }
 
+bool SustainPedalLightRing::GetHasNotifyInAdvance()
+{
+	return GetIoEvent()->GetHasNotifyInAdvance();
+}
+
 MTO_FLOAT SustainPedalLightRing::GetStartTime()
 {
-	return GetIoEvent()->GetTargetStartTime();
+	if (GetHasNotifyInAdvance())
+		return GetIoEvent()->GetTargetStartTime();
+	else
+		return GetIoEvent()->GetStartTime();
 }
 
 MTO_FLOAT SustainPedalLightRing::GetTargetStartTime()

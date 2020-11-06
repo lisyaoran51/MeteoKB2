@@ -14,6 +14,15 @@ MeteorSmPostprocessor::MeteorSmPostprocessor()
 
 Sm<Event>* MeteorSmPostprocessor::postprocess(Sm<Event>* s)
 {
+	// 不對光圈做後處理，以後就踏多久，光圈就亮多久，不用提早顯示，也不用管下一個光圈在多久以後
+
+	return SmPostprocessor::postprocess(s);
+
+
+
+	// --------------------------------------------舊的code--------------------------------------------
+
+	/*
 	sort(s->GetEvents()->begin(), s->GetEvents()->end(),
 		[](Event* const& a, Event* const& b) { return a->GetStartTime() < b->GetStartTime(); });
 
@@ -41,7 +50,7 @@ Sm<Event>* MeteorSmPostprocessor::postprocess(Sm<Event>* s)
 			if (ringLifeTime > sustainPedalIoEvent->GetLifeTime() + defaultNextPedalTargetStartTime * 2.f)
 				ringLifeTime = sustainPedalIoEvent->GetLifeTime();
 
-			/* 第一個pedal時 */
+			// 第一個pedal時 
 			if (lastSustainPedalIoEvent == nullptr) {
 
 				sustainPedalIoEvent->SetTargetTime(
@@ -54,7 +63,7 @@ Sm<Event>* MeteorSmPostprocessor::postprocess(Sm<Event>* s)
 				
 
 			}
-			/* 第2~n個pedal */
+			// 第2~n個pedal 
 			else {
 
 				// 如果上一個pedal沒有跟這個連續的話，那就不要把target start time設在上一個pedal結束的時間，改成設在這個pedal快開始的時候。
@@ -85,4 +94,5 @@ Sm<Event>* MeteorSmPostprocessor::postprocess(Sm<Event>* s)
 
 
 	return SmPostprocessor::postprocess(s);
+	*/
 }

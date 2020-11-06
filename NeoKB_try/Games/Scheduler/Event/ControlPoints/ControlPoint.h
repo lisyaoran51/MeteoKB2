@@ -26,6 +26,8 @@ namespace ControlPoints {
 	};
 
 	enum class ControlPointType {
+		None,
+		Mark,
 		Note,
 		Input,
 		Sound,

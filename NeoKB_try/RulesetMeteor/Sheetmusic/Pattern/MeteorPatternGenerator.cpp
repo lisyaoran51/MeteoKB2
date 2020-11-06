@@ -105,12 +105,14 @@ Pattern* MeteorPatternGenerator::Generate(vector<Event*>* es, Event * e)
 	NoteControlPoint* note = e->Cast<NoteControlPoint>(); //eventClone->Cast<NoteControlPoint>();
 	StartGameEvent* start = e->Cast<StartGameEvent>(); //eventClone->Cast<StartGameEvent>();
 	InputKeyControlPoint* inputKey = e->Cast<InputKeyControlPoint>();
+	SectionStartControlPoint* sectionStart = e->Cast<SectionStartControlPoint>();
+
 
 	/* 鍵力音符的特效 */
 	if (note)
 		return generateNoteControlPoint(es, note);
 
-	/* 鍵力開始的特效 */
+	/* 鍵力開始的特效 */ /* (這個功能已經沒有再用了，因為target line被拿掉了) */
 	if (start)
 		return generateStartGameEvent(es, start);
 
@@ -118,9 +120,11 @@ Pattern* MeteorPatternGenerator::Generate(vector<Event*>* es, Event * e)
 	if (inputKey)
 		return generateInputKeyControlPoint(es, inputKey);
 
+	if (sectionStart)
+		return generateRepeatPracticeEvent(es, sectionStart);
 
-	if (!note && !start && !inputKey)
-		throw runtime_error("Pattern* MeteorPatternGenerator::Generate(vector<Event*>*, Event*) : event cannot cast to NoteControlPoint or StartGameEvent.");
+	if (!note && !start && !inputKey && !sectionStart)
+		throw runtime_error("Pattern* MeteorPatternGenerator::Generate(vector<Event*>*, Event*) : event cannot cast to any control point.");
 
 
 	return nullptr;
@@ -129,6 +133,61 @@ Pattern* MeteorPatternGenerator::Generate(vector<Event*>* es, Event * e)
 
 int MeteorPatternGenerator::CreateOtherEvent(vector<Event*>* es)
 {
+	/* 這段程式碼重寫 */
+
+	LOG(LogLevel::Fine) << "MeteorPatternGenerator::CreateOtherEvent() : sorting the events.";
+	/* 將目前所有Event排序 */
+	sort(es->begin(), es->end(),
+		[](Event* const& a, Event* const& b) {
+
+		if (a->GetStartTime() == b->GetStartTime())
+			if (a->Cast<PlayableControlPoint>() && b->Cast<PlayableControlPoint>())
+				return a->Cast<PlayableControlPoint>()->GetSectionIndex() < b->Cast<PlayableControlPoint>()->GetSectionIndex();
+
+		return a->GetStartTime() < b->GetStartTime();
+	});
+
+	/*
+	 *	一開始先檢查這個譜有沒有小節資訊，沒有小節資訊才要加小節事件。譜裡面沒有小節資訊的話，就以5秒為一小節
+	 */
+	
+	if (!sm->GetSmInfo()->hasSectionData) {
+		vector<float> sectionEndTime;
+
+		int tempSection = 0;
+		float maxControlPointTime = 0;
+
+		for (int i = 0; i < es->size(); i++) {
+			if (es->at(i)->GetStartTime() < (tempSection + 1) * defaultSectionInterval) {
+				
+				if(es->at(i)->Cast<MarkControlPoint>())
+					es->at(i)->Cast<MarkControlPoint>()->SetSectionIndex(tempSection);
+
+				if (es->at(i)->GetStartTime() >= maxControlPointTime) {
+					maxControlPointTime = es->at(i)->GetStartTime();
+				}
+				else {
+					LOG(LogLevel::Error) << "MeteorPatternGenerator::CreateOtherEvent() : events not sorted by time.";
+					throw runtime_error("MeteorPatternGenerator::CreateOtherEvent() : events not sorted by time.");
+				}
+			}
+			else {
+				tempSection++;
+				i--;
+			}
+		}
+
+		for (int i = 0; i < tempSection; i++) {
+			sectionEndTime.push_back((i + 1) * defaultSectionInterval);
+		}
+
+		generateRepeatPracticeEvents(es, &sectionEndTime);
+	}
+	
+	return 0;
+
+	// --------------------------------------------後面的code 不用了--------------------------------------------
+
 	/*
 	 *	這邊會抓所有section結束時間，然後在每個section結束時間建repeat practice event，
 	 *	另外meteor ruleset executor自己就會檢查一遍所有control point，然後建立所有的section start time，所以其實他不用看我們這邊的rewind length
@@ -138,6 +197,8 @@ int MeteorPatternGenerator::CreateOtherEvent(vector<Event*>* es)
 	 /*
 	  *	一開始先檢查這個譜有沒有小節資訊
 	  */
+
+	/*
 	LOG(LogLevel::Fine) << "MeteorPatternGenerator::CreateOtherEvent() : checking if this sheetmusic has section index";
 	bool hasSectionIndex = true;
 	for (int i = 0; i < es->size(); i++) {
@@ -167,7 +228,7 @@ int MeteorPatternGenerator::CreateOtherEvent(vector<Event*>* es)
 
 
 	LOG(LogLevel::Fine) << "MeteorPatternGenerator::CreateOtherEvent() : start insert repeat event.";
-	vector<float> sectionEndTime;
+	
 
 	if (hasSectionIndex) {	// 譜裡面有小節資訊
 		int tempSection = 0;
@@ -229,7 +290,7 @@ int MeteorPatternGenerator::CreateOtherEvent(vector<Event*>* es)
 		}
 	}
 
-	generateRepeatPracticeEvents(es, &sectionEndTime);
+	*/
 
 
 	/*
@@ -512,5 +573,24 @@ int MeteorPatternGenerator::generateRepeatPracticeEvents(vector<Event*>* es, vec
 	}
 
 	return 0;
+}
+
+Pattern* MeteorPatternGenerator::generateRepeatPracticeEvent(vector<Event*>* es, SectionStartControlPoint * sectionStart)
+{
+	Pattern* pattern = new Pattern(sectionStart);
+
+
+	RepeatPracticeEvent* repeatPracticeEvent = new RepeatPracticeEvent(
+		sectionStart->GetSectionIndex(), 
+		sectionStart->GetLifeTime, 
+		sectionStart->GetStartTime() + sectionStart->GetLifeTime(), 
+		0);
+
+	repeatPracticeEvent->SetSourceEvent(sectionStart);
+
+	pattern->Add(repeatPracticeEvent);
+	es->push_back(repeatPracticeEvent);
+
+	return pattern;
 }
 
