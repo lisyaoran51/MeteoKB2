@@ -210,6 +210,11 @@ int MeteorTimeController::onButtonDown(InputState * inputState, InputKey button)
 			speedAdjuster->SetFreezeTime(defaultFreezeTime);
 			isWaitingFreeze = true;
 			isAdjustAfterPause = false;
+
+			/* 這編讓光圈跑一圈，跑的時間是defaultFreezeTime */
+			LightRingPanelMessage* message = new LightRingPanelMessage(defaultFreezeTime);
+			LOG(LogLevel::Depricated) << "MeteorTimeController::onButtonDown : send i2c [" << message->ToString() << "].";
+			outputManager->PushMessage(message);
 		}
 		else
 			return -1;
@@ -236,11 +241,29 @@ int MeteorTimeController::onKnobTurn(InputState * inputState, InputKey knob)
 		else if(!speedAdjuster->GetIsAdjustingTime())
 			isAdjustAfterPause = true;
 
-		speedAdjuster->SetSeekTime(turnValue * defaultAdjustTime);
+		if (timeControllerMode == MeteorTimeControllerMode::RepeatPractice) {
+			if (turnValue > 0) {
+				/* 往後轉的時候，就跳到下個小節 */
+				speedAdjuster->SetSeekTime(GetClock()->GetCurrentTime() - sectionTime[tempStartSection + 1]);
+				tempStartSection++;
+			}
+			else {
+				/* 往回轉的時候，就跳到上個小節 */
+				speedAdjuster->SetSeekTime(-(GetClock()->GetCurrentTime() - sectionTime[tempStartSection - 1]));
+				tempStartSection--;
+			}
+			tempRepeatTimes = 0;
+		}
+		else if(timeControllerMode == MeteorTimeControllerMode::MusicGame){
 
-		// 這邊是避免剛好set seek time以後seek time剛好等於0，會造成意外狀況，所以刻意不讓他最後變成0，就隨便加一個數字上去
-		if(speedAdjuster->GetSeekTime() == 0)
-			speedAdjuster->SetSeekTime(turnValue);
+			speedAdjuster->SetSeekTime(turnValue * defaultAdjustTime);
+
+			// 這邊是避免剛好set seek time以後seek time剛好等於0，會造成意外狀況，所以刻意不讓他最後變成0，就隨便加一個數字上去
+			if (speedAdjuster->GetSeekTime() == 0)
+				speedAdjuster->SetSeekTime(turnValue);
+		}
+		
+
 
 	}
 
@@ -252,16 +275,23 @@ int MeteorTimeController::onKnobTurn(InputState * inputState, InputKey knob)
 			if (inputState->GetPanelState()->GetKnobs()->at(i).first == InputKey::SpeedKnob)
 				turnValue = inputState->GetPanelState()->GetKnobs()->at(i).second;
 		if (turnValue < 0) {
-			if (GetRate() > 0.8) {
+			if (GetRate() > 0.5) {
 				LOG(LogLevel::Debug) << "MeteorTimeController::onKnobTurn() : [SpeedKnob] action turn value = " << turnValue << ". rate = " << GetRate();
-				//SetRate(GetRate() - 0.1);
-				SetRate(0.8);
+				SetRate(GetRate() - 0.1);
+				//SetRate(0.8);
+
+				// TODO:
+				// OutputManager->push(減速訊號給mcu)
+
 			}
 		}
 		else {
 			if (GetRate() < 1.5) {
 				LOG(LogLevel::Debug) << "MeteorTimeController::onKnobTurn() : [SpeedKnob] action turn value = " << turnValue << ". rate = " << GetRate();
 				SetRate(GetRate() + 0.1);
+
+				// TODO:
+				// OutputManager->push(加速訊號給mcu)
 
 			}
 		}
