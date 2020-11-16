@@ -1737,6 +1737,12 @@
     <ClCompile Include="Games\Scheduler\Event\ControlPoints\OctaveShiftSpanControlPoint.cpp">
       <Filter>來源檔案\Games\Schedulers\Events\ControlPoints</Filter>
     </ClCompile>
+    <ClCompile Include="RulesetMeteor\Output\Panels\LightRingPanelMessage.cpp">
+      <Filter>來源檔案\RulesetMeteor\Output\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\Output\Panels\LightRingOutputer.cpp">
+      <Filter>來源檔案\RulesetMeteor\Output\Panels</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="DailyLog.txt">
@@ -2886,6 +2892,12 @@
     </ClInclude>
     <ClInclude Include="Games\Scheduler\Event\ControlPoints\OctaveShiftSpanControlPoint.h">
       <Filter>標頭檔\Games\Scheduler\Events\ControlPoints</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Output\Panels\LightRingPanelMessage.h">
+      <Filter>標頭檔\RulesetMeteor\Output\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Output\Panels\LightRingOutputer.h">
+      <Filter>標頭檔\RulesetMeteor\Output\Panels</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

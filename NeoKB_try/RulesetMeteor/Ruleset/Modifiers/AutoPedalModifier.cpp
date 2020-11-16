@@ -17,6 +17,7 @@ AutoPedalModifier::AutoPedalModifier(): RegisterType("AutoPedalModifier")
 int AutoPedalModifier::ApplyToInstrument(Instrument* instrument)
 {
 	LOG(LogLevel::Debug) << "AutoPedalModifier::ApplyToInstrument() : make piano pedal controlled by game.";
+	LOG(LogLevel::Error) << "AutoPedalModifier::ApplyToInstrument() : this modifier should be deleted? only manual pedal modifier should left?";
 
 	if (dynamic_cast<Piano*>(instrument)) {
 

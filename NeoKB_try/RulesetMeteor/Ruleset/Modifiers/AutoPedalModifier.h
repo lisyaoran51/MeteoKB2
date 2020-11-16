@@ -14,6 +14,9 @@ namespace Meteor {
 namespace Rulesets{
 namespace Modifiers{
 
+	/// <summary>
+	/// 這個應該要拿掉，以後只要譜裡有pedal就要自動踏踏板，不用用這個modifier去設定
+	///	</summary>
 	class AutoPedalModifier : public InstrumentModifier {
 
 	public:

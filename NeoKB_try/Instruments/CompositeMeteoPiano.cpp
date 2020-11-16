@@ -18,7 +18,7 @@ CompositeMeteoPiano::CompositeMeteoPiano(vector<string>& args) : MeteoPiano(args
 {
 	meteoPiano = new MeteoPiano(args);
 	virtualMeteoPiano = new VirtualMeteoPiano();
-	virtualMeteoPiano->SetSustainType(VirtualMeteoPianoSustainType::Pedal);
+	virtualMeteoPiano->SetVirtualMeteoPianoSustainType(VirtualMeteoPianoSustainType::Pedal);
 
 	registerLoad(bind(static_cast<int(CompositeMeteoPiano::*)(void)>(&CompositeMeteoPiano::load), this));
 }
@@ -46,6 +46,11 @@ vector<KeyBinding*>* CompositeMeteoPiano::GetDefaultkeyBindings(int variant)
 int CompositeMeteoPiano::ChangeSustainType(SustainType sType)
 {
 	return meteoPiano->ChangeSustainType(sType);
+}
+
+SustainType CompositeMeteoPiano::GetSustainType()
+{
+	return meteoPiano->GetSustainType();
 }
 
 int CompositeMeteoPiano::ControlSustainPedal(bool down)

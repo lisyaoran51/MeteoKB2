@@ -337,7 +337,14 @@ int Piano::ChangeSustainType(SustainType sType)
 {
 	sustainType = sType;
 
+	// TODO: 用output manager把更改sustain type送到mcu
+
 	return 0;
+}
+
+SustainType Piano::GetSustainType()
+{
+	return sustainType;
 }
 
 int Piano::ControlSustainPedal(bool down)
@@ -408,7 +415,7 @@ int Piano::OnKeyDown(pair<PianoAction, int> action)
 int Piano::OnKeyUp(PianoAction action)
 {
 	// 沒踏踏板、有插踏板、沒開啟自動延音
-	if(!isPressingMap.at(PianoAction::SustainPedal) && !isAutoSustain )
+	if(!isPressingMap.at(PianoAction::SustainPedal) && sustainType != SustainType::AutoSustain )
 		getSamples()->at(action)->FadeOut();
 		//getSamples()->at(action)->Stop();
 
@@ -420,16 +427,29 @@ int Piano::OnButtonDown(PianoAction action)
 {
 	/* 沿音 */
 	if (action == PianoAction::Sustain) {
-		MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::PianoPressSustainButton);
-		if (isAutoSustain == true) {
-			isAutoSustain = false;
-			meteoContextBluetoothMessage->GetContext()["State"] = false;
+		
+
+		if (sustainType == SustainType::GameControllingSustain || sustainType == SustainType::SustainPedal) {
+
+			// TODO: 回傳失敗，遊戲控制的情況下無法切換game control sustain
+
 		}
 		else {
-			isAutoSustain = true;
-			meteoContextBluetoothMessage->GetContext()["State"] = true;
+			MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::PianoPressSustainButton);
+
+			if (sustainType == SustainType::AutoSustain) {
+				sustainType = SustainType::None;
+				meteoContextBluetoothMessage->GetContext()["State"] = false;
+			}
+			else {
+				sustainType = SustainType::AutoSustain;
+				meteoContextBluetoothMessage->GetContext()["State"] = true;
+			}
+			outputManager->PushMessage(meteoContextBluetoothMessage);
+
 		}
-		outputManager->PushMessage(meteoContextBluetoothMessage);
+
+		
 	}
 	/* 力度 */
 	if (action == PianoAction::Sensitivity) {
@@ -450,7 +470,7 @@ int Piano::OnButtonDown(PianoAction action)
 	if (sustainType == SustainType::GameControllingSustain && action == PianoAction::SustainPedal)
 		return 0;
 
-	if(isAutoSustain && action == PianoAction::SustainPedal)
+	if(sustainType == SustainType::AutoSustain && action == PianoAction::SustainPedal)
 		return 0;
 
 	isPressingMap[action] = true;

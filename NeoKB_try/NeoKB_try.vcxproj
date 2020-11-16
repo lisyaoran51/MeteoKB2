@@ -267,6 +267,8 @@
     <ClCompile Include="RulesetMeteor\Config\MeteorConfigManager.cpp" />
     <ClCompile Include="RulesetMeteor\Input\MeteorInputManager.cpp" />
     <ClCompile Include="RulesetMeteor\MeteorGame.cpp" />
+    <ClCompile Include="RulesetMeteor\Output\Panels\LightRingOutputer.cpp" />
+    <ClCompile Include="RulesetMeteor\Output\Panels\LightRingPanelMessage.cpp" />
     <ClCompile Include="RulesetMeteor\Output\Panels\SustainPedalLightRingOutputer.cpp" />
     <ClCompile Include="RulesetMeteor\Output\Panels\SustainPedalLightRingPanelMessage.cpp" />
     <ClCompile Include="RulesetMeteor\Play\MeteorPlayfield.cpp" />
@@ -646,6 +648,8 @@
     <ClInclude Include="RulesetMeteor\Config\MeteorConfigManager.h" />
     <ClInclude Include="RulesetMeteor\Input\MeteorInputManager.h" />
     <ClInclude Include="RulesetMeteor\MeteorGame.h" />
+    <ClInclude Include="RulesetMeteor\Output\Panels\LightRingOutputer.h" />
+    <ClInclude Include="RulesetMeteor\Output\Panels\LightRingPanelMessage.h" />
     <ClInclude Include="RulesetMeteor\Output\Panels\SustainPedalLightRingOutputer.h" />
     <ClInclude Include="RulesetMeteor\Output\Panels\SustainPedalLightRingPanelMessage.h" />
     <ClInclude Include="RulesetMeteor\Play\MeteorPlayfield.h" />

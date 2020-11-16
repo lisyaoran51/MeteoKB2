@@ -3,6 +3,7 @@
 #include "../../Games/Scheduler/Event/ControlPoints/PlayableControlPoint.h"
 #include "../Scheduler/Event/Effect/FallEffectMapper.h"
 #include "../Scheduler/Event/Effect/EruptEffectMapper.h"
+#include "../Output/Panels/LightRingPanelMessage.h"
 
 
 
@@ -10,6 +11,7 @@ using namespace Meteor::Timing;
 using namespace std;
 using namespace Games::Schedulers::Events::ControlPoints;
 using namespace Meteor::Schedulers::Events::Effects;
+using namespace Meteor::Output::Panels;
 
 
 
@@ -144,7 +146,8 @@ int MeteorTimeController::RepeatSection(int section)
 		return 0;
 
 	float totalRewindLength = sectionTime[section + 1] - sectionTime[tempStartSection] + repeatBufferTime;	//額外多一秒緩衝時間
-
+	
+	// TODO: 切換Event processor filter
 
 	if (tempRepeatTimes < repeatTimes) {
 
@@ -169,6 +172,12 @@ int MeteorTimeController::RepeatSection(int section)
 	}
 
 	JumpTo(controllableClock->GetCurrentTime() - totalRewindLength);
+
+
+	/* 這編讓光圈跑一圈，跑的時間是repeatBufferTime */
+	LightRingPanelMessage* message = new LightRingPanelMessage(repeatBufferTime);
+	LOG(LogLevel::Depricated) << "MeteorTimeController::RepeatSection : send i2c [" << message->ToString() << "].";
+	outputManager->PushMessage(message);
 
 	return 0;
 }

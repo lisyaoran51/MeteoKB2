@@ -23,7 +23,7 @@ namespace Instruments {
 
 		/* ----------------------- Instrument.h ----------------------- */
 
-		int SetHost(GameHost* h);
+		virtual int SetHost(GameHost* h);
 
 
 		/* ----------------------- Piano.h ----------------------- */
@@ -40,23 +40,25 @@ namespace Instruments {
 		///	</summary>
 		virtual vector<KeyBinding*>* GetDefaultkeyBindings(int variant = 0);
 
-		int ChangeSustainType(SustainType sType);
+		virtual int ChangeSustainType(SustainType sType);
 
-		int ControlSustainPedal(bool down);
+		virtual SustainType GetSustainType();
 
-		int SetGameControllingPitchState(bool value);
+		virtual int ControlSustainPedal(bool down);
 
 		/// <summary>
 		///	MeteoPianoPitchState用這個改，piano不知道有哪幾種State，只能控制現在要往上移還是往下移
 		/// </summary>
-		int MoveOctave(PianoPitchMovement s);
+		virtual int MoveOctave(PianoPitchMovement s);
 
 		virtual int SwitchSoundBindings(TSoundBindingSet<Pitch>* sBindingSet);
 
 
 		/* ----------------------- MeteoPiano.h ----------------------- */
 
-		int ChangePitchState(MeteoPianoPitchState s);
+		virtual int SetGameControllingPitchState(bool value);
+
+		virtual int ChangePitchState(MeteoPianoPitchState s);
 
 
 		/* ----------------------- CompositeMeteoPiano.h ----------------------- */

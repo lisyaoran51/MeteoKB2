@@ -20,6 +20,8 @@ MeteoPiano::MeteoPiano(vector<string>& args) : RegisterType("MeteoPiano")
 int MeteoPiano::SetGameControllingPitchState(bool value)
 {
 	isGameControllingPitchState = value;
+
+
 	return 0;
 }
 
@@ -61,6 +63,9 @@ int MeteoPiano::MoveOctave(PianoPitchMovement m)
 int MeteoPiano::ChangePitchState(MeteoPianoPitchState s)
 {
 	state = s;
+
+	// TODO: 要傳送新的pitch state到手機和mcu
+
 	return 0;
 }
 

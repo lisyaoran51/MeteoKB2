@@ -370,25 +370,7 @@ Pattern * MeteorPatternGenerator::generateNoteControlPoint(vector<Event*>* es, N
 			height : blackKeyHeight) + fallLength
 	) / fallSpeed;
 
-	/* 這個是原本要做glow line特效的code，效果太差所以拿掉了
-	MTO_FLOAT glowLineTime = fallTime + MTO_FLOAT(1) / glowLineSpeed + glowLineDuration;
 
-	MTO_FLOAT noteLifeTime = MTO_FLOAT(
-		note->IsWhiteKey() ?
-		(targetHeight) : (blackKeyTargetHeight)
-	) / glowLineSpeed;
-
-	LOG(LogLevel::Finest) << "int MeteorSmConverter::Generate(vector<Event*>*, Event*) : Fall speed is [" << fallSpeed << "], GlowLine speed is [" << glowLineSpeed << "].";
-	
-	LOG(LogLevel::Finer) << "int MeteorSmConverter::Generate(vector<Event*>*, Event*) : Generate GlowLine at [" << (int)pitch << "], start time [" << note->GetStartTime() - glowLineTime << "], life time [" << fallTime + glowLineDuration << "].";
-
-	GlowLineEffect* glow = new GlowLineEffect(
-		(int)pitch,
-		0,
-		note->GetStartTime() - glowLineTime,
-		fallTime + glowLineDuration,
-		glowLineSpeed);
-	*/
 	LOG(LogLevel::Finer) << "int MeteorSmConverter::Generate(vector<Event*>*, Event*) : Generate Fall at [" << (int)pitch << "], start time [" << note->GetStartTime() - fallTime << "], life time [" << fallLifeTime << "].";
 
 	FallEffect* fall = new FallEffect(
@@ -441,22 +423,17 @@ Pattern * MeteorPatternGenerator::generateNoteControlPoint(vector<Event*>* es, N
 
 
 
-	//note->SetLifeTime(noteLifeTime);
 
-	//pattern->Add(glow);
 	pattern->Add(fall);
 	pattern->Add(erupt);
 	pattern->Add(pianoSoundEventDown);
 	pattern->Add(pianoSoundEventUp);
-	//pattern->Add(note);
 
 	// 把pattern裡面的event一個一個加進去es裡
-	//es->push_back(glow);
 	es->push_back(fall);
 	es->push_back(erupt);
 	es->push_back(pianoSoundEventDown);
 	es->push_back(pianoSoundEventUp);
-	//es->push_back(note);
 
 	return pattern;
 

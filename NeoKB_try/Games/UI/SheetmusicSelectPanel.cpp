@@ -132,6 +132,7 @@ int SheetmusicSelectPanel::OnCommand(MeteoBluetoothCommand * command)
 		string modifierName;
 		int value1, value2;
 		for (int i = 0; i < command->GetContext()["Modifiers"].size(); i++) {
+			// TODO: 下面這行寫錯了，之後要再改
 			modifierName = command->GetContext()["Modifiers"].at(i)["Modifier Name"].get<string>() == "AutoPedalModifier";
 			value1 = command->GetContext()["Modifiers"].at(i)["Value1"].get<int>();
 			value2 = command->GetContext()["Modifiers"].at(i)["Value2"].get<int>();

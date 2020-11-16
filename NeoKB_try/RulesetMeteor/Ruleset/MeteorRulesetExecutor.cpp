@@ -90,17 +90,28 @@ int MeteorRulesetExecutor::load(MeteorTimeController * t, Instrument* i)
 
 	LOG(LogLevel::Info) << "MeteorRulesetExecutor::load() : computing section time.";
 
-	meteoPiano = dynamic_cast<MeteoPiano*>(i);
-	meteoPiano->ChangePitchState(MeteoPianoPitchState::None);
-	meteoPiano->SetGameControllingPitchState(true);
+	compositeMeteoPiano = dynamic_cast<CompositeMeteoPiano*>(i);
+	compositeMeteoPiano->ChangePitchState(MeteoPianoPitchState::None);
+	compositeMeteoPiano->SetGameControllingPitchState(true);
 
-	// 這邊拿到的Event已經被處理過了
+	/* 根據這個譜有沒有踏板資訊決定要不要用電腦控制踏板。 */
+	if (workingSm->GetSm()->GetSmInfo()->hasPedalData) {
+
+		/* 如果插著踏板，就一律不用game control sustain */
+		if(compositeMeteoPiano->GetSustainType() != SustainType::SustainPedal)
+			compositeMeteoPiano->ChangeSustainType(SustainType::GameControllingSustain);
+
+		compositeMeteoPiano->GetVirtualMeteoPiano()->SetVirtualMeteoPianoSustainType(VirtualMeteoPianoSustainType::Pedal);
+	}
+	else {
+		compositeMeteoPiano->GetVirtualMeteoPiano()->SetVirtualMeteoPianoSustainType(VirtualMeteoPianoSustainType::Auto);
+	}
+
+	// 這邊拿到的Event已經被處理過了，沒有section也被加好了
 	vector<Event*>* originalEvents = workingSm->GetSm()->GetEvents();
 	vector<float> sectionTime;
 
 	LOG(LogLevel::Fine) << "MeteorRulesetExecutor::load() : event size [" << originalEvents->size() << "].";
-
-	int section = -1;
 
 	
 	for (int i = 0; i < originalEvents->size(); i++) {
@@ -148,7 +159,9 @@ MeteorRulesetExecutor::MeteorRulesetExecutor(): RegisterType("MeteorRulesetExecu
 
 MeteorRulesetExecutor::~MeteorRulesetExecutor()
 {
-	meteoPiano->SetGameControllingPitchState(false);
+	compositeMeteoPiano->SetGameControllingPitchState(false);
+	if(compositeMeteoPiano->GetSustainType() == SustainType::GameControllingSustain)
+		compositeMeteoPiano->ChangeSustainType(SustainType::None);
 }
 
 int MeteorRulesetExecutor::LazyConstruct(WorkingSm * w, Ruleset* r)

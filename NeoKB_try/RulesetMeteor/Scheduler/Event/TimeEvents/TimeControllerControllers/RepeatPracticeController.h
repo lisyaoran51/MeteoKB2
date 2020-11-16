@@ -21,6 +21,8 @@ namespace TimeControllerControllers {
 
 		int load();
 
+		int load(OutputManager* o);
+
 	public:
 
 		RepeatPracticeController();
@@ -28,6 +30,8 @@ namespace TimeControllerControllers {
 	protected:
 
 		MeteorTimeController* meteorTimeController = nullptr;
+
+		OutputManager* outputManager = nullptr;
 
 		virtual int implementControlTimeController(EventProcessor<Event>* e);
 

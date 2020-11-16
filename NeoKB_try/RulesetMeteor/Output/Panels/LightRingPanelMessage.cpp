@@ -1,4 +1,4 @@
-#include "SustainPedalLightRingPanelMessage.h"
+#include "LightRingPanelMessage.h"
 
 #include <math.h>
 #include <sstream>
@@ -12,7 +12,7 @@ using namespace std::literals::string_literals;
 using namespace Util;
 
 
-string SustainPedalLightRingPanelMessage::roundAndToString(float number, int digit)
+string LightRingPanelMessage::roundAndToString(float number, int digit)
 {
 
 	ostringstream ss;
@@ -21,7 +21,7 @@ string SustainPedalLightRingPanelMessage::roundAndToString(float number, int dig
 
 	return s;
 
-
+	// 以下為測試用
 	int dotPos = 999;
 	string toString = to_string(number);
 	for (int i = toString.length() - 1; i >= 0; i--) {
@@ -36,15 +36,18 @@ string SustainPedalLightRingPanelMessage::roundAndToString(float number, int dig
 	return toString;
 }
 
-SustainPedalLightRingPanelMessage::SustainPedalLightRingPanelMessage(float tLifeTime, float pDownLifeTime, float rLifeTime):
-	targetLifeTime(tLifeTime), pedalDownLifeTime(pDownLifeTime), ringLifeTime(rLifeTime)
+LightRingPanelMessage::LightRingPanelMessage(float lTime) :
+	targetLifeTime(0), pedalDownLifeTime(lTime), ringLifeTime(lTime)
 {
-
+	lifeTime = lTime;
 }
 
-string SustainPedalLightRingPanelMessage::ToString()
+string LightRingPanelMessage::ToString()
 {
 	// TODO: 改名成Light Ring
 	LOG(LogLevel::Depricated) << "SustainPedalLightRingPanelMessage::ToString() : pass [" << ("SP,"s + roundAndToString(targetLifeTime, 2) + ","s + roundAndToString(pedalDownLifeTime, 2) + ","s + roundAndToString(ringLifeTime, 2)) << "] to board.";
 	return "SP,"s + roundAndToString(targetLifeTime, 2) + ","s + roundAndToString(pedalDownLifeTime, 2) + ","s + roundAndToString(ringLifeTime, 2);
+
+	// 之後再改成這樣
+	return "LR,"s + roundAndToString(lifeTime, 2);
 }

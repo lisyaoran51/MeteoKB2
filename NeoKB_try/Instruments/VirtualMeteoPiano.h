@@ -8,6 +8,10 @@
 namespace Instruments {
 
 	enum class VirtualMeteoPianoSustainType {
+
+		/// <summary>
+		/// 無延音
+		///	</summary>
 		None,
 		/// <summary>
 		/// 全部延音
@@ -33,7 +37,9 @@ namespace Instruments {
 
 		/* ----------------------- VirtualMeteoPiano.h ----------------------- */
 
-		int SetSustainType(VirtualMeteoPianoSustainType sType);
+		int SetVirtualMeteoPianoSustainType(VirtualMeteoPianoSustainType sType);
+
+		VirtualMeteoPianoSustainType GetVirtualMeteoPianoSustainType();
 
 		int Play(Pitch p, float volume);
 

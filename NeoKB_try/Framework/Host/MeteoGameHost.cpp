@@ -10,6 +10,7 @@
 #include "../IO/PlatformStorage.h"
 #include "../Output/OutputManager.h"
 #include "../../RulesetMeteor/Output/Panels/SustainPedalLightRingOutputer.h"
+#include "../../RulesetMeteor/Output/Panels/LightRingOutputer.h"
 #include "../../Desktop/Devices/MeteoPacketConverterV1.h"
 
 
@@ -59,9 +60,13 @@ int MeteoGameHost::setupMainInterface()
 
 int MeteoGameHost::SetupOutputManager(OutputManager * oManager)
 {
-	OutputComponent* panelOutputer = new SustainPedalLightRingOutputer();
-	panelOutputer->SetupPeripheral(mainInterface);
-	oManager->AddItem(panelOutputer);
+	OutputComponent* sustainPedalLightRingOutputer = new SustainPedalLightRingOutputer();
+	sustainPedalLightRingOutputer->SetupPeripheral(mainInterface);
+	oManager->AddItem(sustainPedalLightRingOutputer);
+
+	OutputComponent* lightRingOutputer = new LightRingOutputer();
+	lightRingOutputer->SetupPeripheral(mainInterface);
+	oManager->AddItem(lightRingOutputer);
 
 	return 0;
 }

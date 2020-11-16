@@ -59,7 +59,7 @@ namespace Instruments {
 		//¼g¿ù¤F
 		//virtual vector<PitchBinding*>* GetDefaultPitchBindings(int variant = 0) = 0;
 
-		int SetHost(GameHost* h);
+		virtual int SetHost(GameHost* h);
 
 		virtual int LoadAndMapSamples();
 

@@ -82,7 +82,7 @@ namespace Timing {
 
 		MeteorTimeControllerMode timeControllerMode = MeteorTimeControllerMode::MusicGame;
 
-		/*---------反覆練彈專用---------*/
+		/*---------反覆練彈專用---------*/ // 這個不適應該擺再repeat practice event processor裡面嗎?
 		bool hasSection = false;
 
 		/// <summary>

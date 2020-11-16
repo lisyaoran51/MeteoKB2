@@ -10,11 +10,16 @@ VirtualMeteoPiano::VirtualMeteoPiano() : RegisterType("VirtualMeteoPiano")
 {
 }
 
-int VirtualMeteoPiano::SetSustainType(VirtualMeteoPianoSustainType sType)
+int VirtualMeteoPiano::SetVirtualMeteoPianoSustainType(VirtualMeteoPianoSustainType sType)
 {
 	sustainType = sType;
 
 	return 0;
+}
+
+VirtualMeteoPianoSustainType VirtualMeteoPiano::GetVirtualMeteoPianoSustainType()
+{
+	return sustainType;
 }
 
 int VirtualMeteoPiano::Play(Pitch p, float volume)
@@ -49,7 +54,7 @@ int VirtualMeteoPiano::Stop(Pitch p)
 	if (!isActive)
 		return 0;
 
-	if (sustainType != VirtualMeteoPianoSustainType::Pedal)
+	if (sustainType == VirtualMeteoPianoSustainType::Auto)
 		return 0;
 
 	//if (!dynamic_cast<MultiPlaybackSampleChannel*>(getSamplesByPitch()->at(p)))

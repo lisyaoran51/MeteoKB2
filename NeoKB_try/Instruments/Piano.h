@@ -33,6 +33,7 @@ namespace Instruments {
 
 		/// <summary>
 		/// 電腦控制延音
+		/// 這個跟Meteo piano的is game controlling sustain pedal重複了，要小心
 		///	</summary>
 		GameControllingSustain,
 
@@ -73,9 +74,11 @@ namespace Instruments {
 
 		/* ------------------- 鋼琴專屬功能 ------------------- */
 
-		int ChangeSustainType(SustainType sType);
+		virtual int ChangeSustainType(SustainType sType);
 
-		int ControlSustainPedal(bool down);
+		virtual SustainType GetSustainType();
+
+		virtual int ControlSustainPedal(bool down);
 
 		virtual int MoveOctave(PianoPitchMovement m) = 0;
 
@@ -89,9 +92,10 @@ namespace Instruments {
 		SustainType sustainType = SustainType::None;
 
 		/// <summary>
-		/// 是否有打開自動延音
+		/// 是否有打開自動延音 
+		/// 跟sustain type重複了，所以拿掉
 		///	</summary>
-		bool isAutoSustain = false;
+		//bool isAutoSustain = false;
 
 		bool isSensitive = true;
 

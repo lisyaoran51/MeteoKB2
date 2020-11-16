@@ -1997,7 +1997,7 @@ g++ main.o ../tlc5940-raspberry/gpio.o ../tlc5940-raspberry/raspberry-gpio.o ../
 	缺的東西: ruleset info(ok)、未進入遊戲的移調(ok)、琴音切換(ok)、遊戲開始前倒數3秒(ok)、遊戲開始前設定mod(ok)、遊戲開始時改速度(ok)、測試藍芽選歌(ok)、
 				藍芽接黨測試(ok)、燈光過度閃爍(ok，慢速無解)、背景音樂的延音控制(ok)、琴音雜音(好像是音色的問題)
 				反覆模式、切藍芽封包、重播存檔、根據是否有小節記號來產生小節事件、跳轉時反向觸發特效、刪除所有memory leak、琴音分為全長和AB段、手動踏板modifier、關機、
-				sbs音量設定、藍芽操控播音、紀錄每個modifier到藍芽架構裡、藍芽傳黨、開機燈號、當機燈號、storage分流、讀取音符音量max127、平移會lag、刪除平移
+				sbs音量設定、藍芽操控播音、紀錄每個modifier到藍芽架構裡、藍芽傳黨、開機燈號、當機燈號、storage分流、讀取音符音量max127、平移會lag、刪除平移、erupt的黑鍵位置錯誤
 				mcu、關閉wifi、daemon、OS設定、me555、
 	額外音效：節拍器、成功失敗音效
 	
@@ -2217,3 +2217,20 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 	
 11/5
 	改反覆練彈的光圈，改到一半，之後要確定整條光圈的流程都改好
+	把小節事件放進去了
+	
+	time controller的repeat practice寫的怪怪的 要再看一下
+	之後要研究怎麼樣一次repeat兩個小節
+	
+	要加上如果沒踏板資訊，就自動用小節來生成光圈(再看看要不要做)，然後要auto sustain。
+	(之後要加上：如果手機有關掉game control sustain，就要傳modifier過去，然後控制playfield關掉game control sustain)
+	
+11/16
+	改好沒踏板資訊就不開game control sustain。(要看一下是piano還是virtual piano不開，virtual piano要開auto sustain)
+	
+	把game control pitch state改對
+	
+	在repeat practice的controller裡面要增加eventProcessorFilter的切換，和新增光圈
+	
+	output manager街道的message之後要怎麼delete掉要注意
+	

@@ -6,7 +6,7 @@
 #include "../../Framework/Timing/TimeController.h"
 #include "../../Games/Ruleset/Scoring/ScoreProcessor.h"
 #include "../Timing/MeteorTimeController.h"
-#include "../../Instruments/MeteoPiano.h"
+#include "../../Instruments/CompositeMeteoPiano.h"
 
 
 using namespace Games::Rulesets;
@@ -70,7 +70,7 @@ namespace Rulesets {
 
 	protected:
 
-		MeteoPiano* meteoPiano = nullptr;
+		CompositeMeteoPiano* compositeMeteoPiano = nullptr;
 
 		Playfield* createPlayfield();
 
