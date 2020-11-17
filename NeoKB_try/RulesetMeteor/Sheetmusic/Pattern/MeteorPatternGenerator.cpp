@@ -556,11 +556,13 @@ Pattern* MeteorPatternGenerator::generateRepeatPracticeEvent(vector<Event*>* es,
 {
 	Pattern* pattern = new Pattern(sectionStart);
 
+	/* 直接用sectionStart->GetStartTime() + sectionStart->GetLifeTime()的話會被error說invalid use */
+	float repeatPracticeLifeTime = sectionStart->GetStartTime() + sectionStart->GetLifeTime();
 
 	RepeatPracticeEvent* repeatPracticeEvent = new RepeatPracticeEvent(
 		sectionStart->GetSectionIndex(), 
 		sectionStart->GetLifeTime, 
-		sectionStart->GetStartTime() + sectionStart->GetLifeTime(), 
+		repeatPracticeLifeTime,
 		0);
 
 	repeatPracticeEvent->SetSourceEvent(sectionStart);
