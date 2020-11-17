@@ -557,7 +557,7 @@ Pattern* MeteorPatternGenerator::generateRepeatPracticeEvent(vector<Event*>* es,
 	Pattern* pattern = new Pattern(sectionStart);
 
 	/* 直接用sectionStart->GetStartTime() + sectionStart->GetLifeTime()的話會被error說invalid use of non-static member function */
-	float rewindLength = 0 + sectionStart->GetLifeTime;
+	float rewindLength = sectionStart->GetLifeTime();
 	float repeatPracticeLifeTime = sectionStart->GetStartTime() + sectionStart->GetLifeTime();
 
 	RepeatPracticeEvent* repeatPracticeEvent = new RepeatPracticeEvent(
