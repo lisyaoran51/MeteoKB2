@@ -161,7 +161,7 @@ Loader.o MeteoScene.o Intro.o Player.o PlayerLoader.o Playfield.o Result.o \
 HudDisplay.o JudgementFlasher.o SongProgress.o \
 MainMenu.o PlaySongSelect.o SongSelect.o \
 Event.o EventProcessorMaster.o EventProcessorFilter.o HitObject.o DynamicEventGenerator.o \
-ControlPoint.o NoteControlPoint.o NoteControlPointHitObject.o PlayableControlPoint.o InputKeyControlPoint.o InputKeyControlPointHitObject.o \
+ControlPoint.o MarkControlPoint.o NoteControlPoint.o NoteControlPointHitObject.o PlayableControlPoint.o InputKeyControlPoint.o InputKeyControlPointHitObject.o \
 Effect.o LinearMapPitchShifter.o MapPitchShifter.o \
 IoEvent.o IoEventProcessor.o PanelEvent.o IoCommunicator.o \
 InstrumentEvent.o InstrumentEventProcessor.o InstrumentController.o \
@@ -187,7 +187,7 @@ MeteorRuleset.o MeteorRulesetExecutor.o MeteorJudgement.o MeteorHitWindow.o Mete
 MeteorResult.o \
 AutoPedalModifier.o MusicGameModifier.o HandModifier.o MeteorDifficultyModifier.o RepeatPracticeModifier.o FallSpeedModifier.o ClockRateModifier.o \
 MeteorScoreProcessor.o \
-SustainPedalLightRingOutputer.o SustainPedalLightRingPanelMessage.o \
+LightRingOutputer.o LightRingPanelMessage.o SustainPedalLightRingOutputer.o SustainPedalLightRingPanelMessage.o \
 MeteorEventProcessorMaster.o MeteorNoteControlPointHitObject.o MeteorInputKeyControlPointHitObject.o \
 ExplodeEffect.o ExplodeEffectMapper.o FallEffect.o FallEffectMapper.o EruptEffect.o EruptEffectMapper.o GlowLineEffect.o GlowLineEffectMapper.o TargetLineEffect.o TargetLineEffectMapper.o \
 ExplodeMapAlgorithm.o FallMapAlgorithm.o EruptMapAlgorithm.o GlowLineMapAlgorithm.o TargetLineMapAlgorithm.o \
