@@ -236,7 +236,7 @@ int SimpleSmDecoder::handleNoteControlPoints(Sm<Event>* sm, string & line)
 				noteLength
 			);
 
-			if (volume <= 0 || volume > 255)
+			if (volume <= 0 || volume > 127)
 				volume = 50.f;// defaultSampleVolume;
 
 		}
@@ -281,7 +281,7 @@ int SimpleSmDecoder::handleNoteControlPoints(Sm<Event>* sm, string & line)
 
 
 		if (pitchInt >= 0)
-			LOG(LogLevel::Depricated) << "int SimpleSmDecoder::handleNoteControlPoints() : Note [" << pitchInt << "] at [" << time << "] volume [" << newPlayableControlPoint->GetVolume() << "].";
+			LOG(LogLevel::Depricated) << "int SimpleSmDecoder::handleNoteControlPoints() : Note [" << pitchInt << "] at [" << time << "] volume [" << volume / 128.f << "].";
 
 
 		sm->GetEvents()->push_back(newMarkControlPoint);

@@ -2234,3 +2234,5 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 	
 	output manager街道的message之後要怎麼delete掉要注意
 	
+	明天可以來測試反覆練談有沒有成功
+	
