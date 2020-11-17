@@ -161,7 +161,8 @@ Loader.o MeteoScene.o Intro.o Player.o PlayerLoader.o Playfield.o Result.o \
 HudDisplay.o JudgementFlasher.o SongProgress.o \
 MainMenu.o PlaySongSelect.o SongSelect.o \
 Event.o EventProcessorMaster.o EventProcessorFilter.o HitObject.o DynamicEventGenerator.o \
-ControlPoint.o MarkControlPoint.o NoteControlPoint.o NoteControlPointHitObject.o PlayableControlPoint.o InputKeyControlPoint.o InputKeyControlPointHitObject.o \
+ControlPoint.o MarkControlPoint.o NoteControlPoint.o PlayableControlPoint.o InputKeyControlPoint.o SectionStartControlPoint.o \
+NoteControlPointHitObject.o InputKeyControlPointHitObject.o \
 Effect.o LinearMapPitchShifter.o MapPitchShifter.o \
 IoEvent.o IoEventProcessor.o PanelEvent.o IoCommunicator.o \
 InstrumentEvent.o InstrumentEventProcessor.o InstrumentController.o \
