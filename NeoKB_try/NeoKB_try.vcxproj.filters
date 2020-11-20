@@ -2899,6 +2899,12 @@
     <ClInclude Include="RulesetMeteor\Output\Panels\LightRingOutputer.h">
       <Filter>標頭檔\RulesetMeteor\Output\Panels</Filter>
     </ClInclude>
+    <ClInclude Include="Framework\IO\FileMode.h">
+      <Filter>標頭檔\Framework\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\IO\FileAccess.h">
+      <Filter>標頭檔\Framework\IO</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Makefile">

@@ -49,6 +49,13 @@ namespace IO{
 
 		virtual fstream* GetStream(string filePath, bool volitile, bool binary = false);
 
+		/// <summary>
+		/// 會自動建資料夾和檔案
+		/// 寫入專用，平常不要用這個
+		/// </summary>
+		virtual fstream* GetStream(string filePath, FileAccess fileAccess, FileMode fileMode, bool binary = false);
+
+
 	protected:
 
 		virtual string locateBasePath();

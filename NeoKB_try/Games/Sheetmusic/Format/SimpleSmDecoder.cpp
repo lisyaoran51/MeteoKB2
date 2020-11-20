@@ -71,7 +71,7 @@ int SimpleSmDecoder::handleGeneral(Sm<Event>* sm, string & line)
 	else if (pair.at(0) == "Section") {	/* 代表這份譜有標示小節 */
 		sm->GetSmInfo()->hasSectionData = atoi(pair.at(1).c_str()) == 1;
 	}
-	else if (pair.at(0) == "HandType") {
+	else if (pair.at(0) == "HandType") { 
 		switch (atoi(pair.at(1).c_str())) {
 		case 0:
 			sm->GetSmInfo()->smHandType == SmHandType::None;
@@ -273,7 +273,7 @@ int SimpleSmDecoder::handleNoteControlPoints(Sm<Event>* sm, string & line)
 		 * 如果控制點是可彈奏控制點，就加入[使用手]
 		 */
 		if (dynamic_cast<PlayableControlPoint*>(newMarkControlPoint)) {
-			dynamic_cast<InputKeyControlPoint*>(newMarkControlPoint)->SetHandType(static_cast<HandType>(hand));
+			dynamic_cast<PlayableControlPoint*>(newMarkControlPoint)->SetHandType(static_cast<HandType>(hand));
 			if (dynamic_cast<NoteControlPoint*>(newMarkControlPoint)) {
 				dynamic_cast<NoteControlPoint*>(newMarkControlPoint)->SetVolume(float(volume) / 128.f);
 			}

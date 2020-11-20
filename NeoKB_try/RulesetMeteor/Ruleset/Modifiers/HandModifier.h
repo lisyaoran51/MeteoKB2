@@ -29,6 +29,8 @@ namespace Modifiers{
 
 		virtual int SetValue(int value1, int value2);
 
+		SmDifficultyHandType GetHandType();
+
 	protected:
 
 		SmDifficultyHandType handType = SmDifficultyHandType::None;

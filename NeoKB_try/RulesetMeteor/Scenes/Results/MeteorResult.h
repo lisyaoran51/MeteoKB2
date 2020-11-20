@@ -4,10 +4,12 @@
 
 #include "../../../Games/Scene/Results/Result.h"
 #include "../../../Framework/Output/OutputManager.h"
+#include "../../../Instruments/Piano.h"
 
 
 using namespace Games::Scenes::Results;
 using namespace Framework::Output;
+using namespace Instruments;
 
 
 
@@ -20,7 +22,7 @@ namespace Results{
 
 		int load();
 
-		int load(OutputManager* o);
+		int load(OutputManager* o, Instrument* i);
 
 	public:
 
@@ -29,6 +31,10 @@ namespace Results{
 	protected:
 
 		OutputManager* outputManager = nullptr;
+
+		Piano* piano = nullptr;
+
+		string writeGameRecord();
 
 		virtual int onEntering(Scene* lastScene);
 

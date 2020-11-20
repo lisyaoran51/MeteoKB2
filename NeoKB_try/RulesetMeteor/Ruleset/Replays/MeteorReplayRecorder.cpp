@@ -6,6 +6,7 @@ using namespace Meteor::Rulesets::Replays;
 
 
 
+
 MeteorReplayRecorder::MeteorReplayRecorder() : RegisterType("MeteorReplayRecorder")
 {
 }

@@ -35,6 +35,11 @@ int HandModifier::SetValue(int value1, int value2)
 	return 0;
 }
 
+SmDifficultyHandType HandModifier::GetHandType()
+{
+	return handType;
+}
+
 int HandModifier::filterEventProcessorsByHandType(vector<EventProcessor<Event>*>* eventProcessors)
 {
 	for (int i = 0; i < eventProcessors->size(); i++) {

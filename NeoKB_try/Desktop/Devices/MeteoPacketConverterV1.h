@@ -32,6 +32,16 @@ namespace Devices{
 
 		char contextBuffer[1024] = { 0 };
 
+		/// <summary>
+		/// 上一次split packet的時候，最尾巴如果有剩下被截斷的packet，就存到這裡面，下次split packet的時候就在把這個接到下一次的buffer的頭
+		/// </summary>
+		char lastBufferSegment[2048] = { 0 };
+
+		/// <summary>
+		/// 上一次split packet的時候，最尾巴有剩下被截斷的packet的size。如果沒有剩就是0
+		/// </summary>
+		int lastBufferSegmentSize = 0;
+
 		map<unsigned long, MeteoCommand> commandMap;
 
 		string getFileName(char* buffer, int size);

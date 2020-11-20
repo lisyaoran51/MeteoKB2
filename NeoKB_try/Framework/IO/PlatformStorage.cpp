@@ -137,6 +137,24 @@ fstream * PlatformStorage::GetStream(string filePath, bool volitile, bool binary
 	return new fstream(locateWriteBasePath() + "/" + filePath);;
 }
 
+fstream * PlatformStorage::GetStream(string filePath, FileAccess fileAccess, FileMode fileMode, bool binary)
+{
+	/* 正常建立檔案的話就是write和create */
+	if (fileAccess == FileAccess::Write && fileMode == FileMode::Create) {
+
+		// TODO: 檢查有沒有要鍵資料夾，有的話就先見資料夾再建檔案
+
+		if (binary) {
+			return new fstream(locateWriteBasePath() + "/" + filePath, ios::binary | ios::out | ios::trunc);
+		}
+		else {
+			return new fstream(locateWriteBasePath() + "/" + filePath, ios::out | ios::trunc);
+		}
+	}
+
+	return nullptr;
+}
+
 string PlatformStorage::locateBasePath()
 {
 	//暫時先這樣，之後再改

@@ -39,6 +39,11 @@ int MeteorDifficultyModifier::SetValue(int value1, int value2)
 	return 0;
 }
 
+SmDifficultyDifficulty MeteorDifficultyModifier::GetDifficulty()
+{
+	return difficulty;
+}
+
 int MeteorDifficultyModifier::filterEventProcessorsByDifficulty(vector<EventProcessor<Event>*>* eventProcessors)
 {
 	for (int i = 0; i < eventProcessors->size(); i++) {

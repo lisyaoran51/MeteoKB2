@@ -1,0 +1,26 @@
+simple file format v0
+
+
+[General]
+流光遊戲1 即時互動2 遊戲紀錄3
+Mode:3
+有踏板資訊1，沒有就不要這行或0
+Pedal:1
+有小節資訊1，沒有就不要這行或0
+Section:1
+無使用手選項0，左手1，右手2，左右手3
+HandType:3
+無難度設定0，簡單1，中等2，困難3
+Difficulty:0
+
+[Metadata]
+Title:SnowFallSound
+[Difficulty]
+每秒落下幾格，一條燈條有16格，黑鍵11格
+Speed:16
+[NoteControlPoints]
+音高,開始時間,持續時間,音量,小節,使用手,段落
+23,0,-1,69,0,4,0
+
+
+音高: -1踏板，-2降八度，-3升八度，-4小節起始點

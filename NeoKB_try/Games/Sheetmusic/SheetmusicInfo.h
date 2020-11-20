@@ -32,9 +32,21 @@ namespace Games {
 namespace Sheetmusics {
 	
 	enum class SmHandType {
+		/// <summary>
+		/// 無選擇
+		/// </summary>
 		None,
+		/// <summary>
+		/// 僅能選擇使用手
+		/// </summary>
 		Hand,
+		/// <summary>
+		/// 僅能選擇難度
+		/// </summary>
 		Difficulty,
+		/// <summary>
+		/// 難度、左右手都能選擇
+		/// </summary>
 		All
 	};
 

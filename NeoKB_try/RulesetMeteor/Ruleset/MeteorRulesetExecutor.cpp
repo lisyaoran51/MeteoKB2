@@ -199,7 +199,11 @@ ReplayRecorder * MeteorRulesetExecutor::CreateReplayRecorder()
 
 Result * MeteorRulesetExecutor::CreateResult(Score* s)
 {
-	return new MeteorResult(s);
+	MeteorResult* meteorResult = new MeteorResult(s);
+
+	
+
+	return 
 }
 
 int MeteorRulesetExecutor::Elapse(MTO_FLOAT elapsedTime)

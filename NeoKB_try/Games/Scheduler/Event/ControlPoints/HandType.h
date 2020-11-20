@@ -17,7 +17,7 @@ namespace ControlPoints{
 		RightEasy,
 		RightOther,
 		Foot,
-		Auto,
+		//Auto,	// 這個是不是舊的要刪掉?
 		OctaveShift,
 		HiddenNone,
 		HiddenLeft,

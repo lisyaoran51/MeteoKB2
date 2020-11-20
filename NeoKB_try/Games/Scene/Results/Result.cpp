@@ -10,6 +10,8 @@ Result::Result(Score * s): RegisterType("Result")
 
 int Result::onEntering(Scene * lastScene)
 {
+
+
 	return 0;
 }
 

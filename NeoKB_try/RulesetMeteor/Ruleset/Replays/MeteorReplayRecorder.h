@@ -17,7 +17,6 @@ namespace Replays{
 
 	class MeteorReplayRecorder : public TReplayRecorder<MeteorAction> {
 
-		
 
 	public:
 

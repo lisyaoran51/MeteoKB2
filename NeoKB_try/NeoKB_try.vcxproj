@@ -377,7 +377,9 @@
     <ClInclude Include="Framework\Input\KeyBindings\HasInputKey.h" />
     <ClInclude Include="Framework\Input\KeyBindings\KeyBindingStore.h" />
     <ClInclude Include="Framework\IO\Api\ApiAccess.h" />
+    <ClInclude Include="Framework\IO\FileAccess.h" />
     <ClInclude Include="Framework\IO\FileInfo.h" />
+    <ClInclude Include="Framework\IO\FileMode.h" />
     <ClInclude Include="Framework\IO\FileNotFoundException.h" />
     <ClInclude Include="Framework\IO\FileReader.h" />
     <ClInclude Include="Framework\IO\FileStore.h" />

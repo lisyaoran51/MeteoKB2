@@ -160,7 +160,12 @@ int SheetmusicSelectPanel::OnCommand(MeteoBluetoothCommand * command)
 		outputManager->PushMessage(meteoContextBluetoothMessage);
 	}
 
+	/* 寫入譜檔片段 */
+	if (command->GetCommand() == MeteoCommand::SheetmusicFileSegment) {
 
+
+
+	}
 
 	// 這一段要在開始傳檔之前送，確認琴裡面有沒有這首歌
 	if (command->GetCommand() == MeteoCommand::SheetmusicData) {

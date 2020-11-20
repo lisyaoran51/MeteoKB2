@@ -32,6 +32,8 @@ namespace Modifiers{
 
 		virtual int SetValue(int value1, int value2);
 
+		SmDifficultyDifficulty GetDifficulty();
+
 	protected:
 
 		SmDifficultyDifficulty difficulty = SmDifficultyDifficulty::None;
