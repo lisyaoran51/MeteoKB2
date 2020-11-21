@@ -24,6 +24,8 @@ namespace Rulesets{
 
 		virtual vector<KeyBinding*>* GetDefaultkeyBindings(int variant = 0);
 
+		virtual PitchBindingSet* GetDefaultPitchBindingSet(int variant = 0);
+
 	};
 
 }

@@ -266,6 +266,7 @@
     <ClCompile Include="RulesetInstant\Timing\InstantTimeController.cpp" />
     <ClCompile Include="RulesetMeteor\Config\MeteorConfigManager.cpp" />
     <ClCompile Include="RulesetMeteor\Input\MeteorInputManager.cpp" />
+    <ClCompile Include="RulesetMeteor\Input\MeteorPitchBindingSet.cpp" />
     <ClCompile Include="RulesetMeteor\MeteorGame.cpp" />
     <ClCompile Include="RulesetMeteor\Output\Panels\LightRingOutputer.cpp" />
     <ClCompile Include="RulesetMeteor\Output\Panels\LightRingPanelMessage.cpp" />
@@ -616,9 +617,10 @@
     <ClInclude Include="Instruments\Input\PianoAction.h" />
     <ClInclude Include="Instruments\Input\InstrumentInputManager.h" />
     <ClInclude Include="Instruments\Input\PianoInputManager.h" />
-    <ClInclude Include="Instruments\Input\PitchBinding.h" />
+    <ClInclude Include="Instruments\Input\PitchBindingSet.h" />
     <ClInclude Include="Instruments\Instrument.h" />
     <ClInclude Include="Instruments\MeteoPiano.h" />
+    <ClInclude Include="Instruments\MeteoPianoPitchState.h" />
     <ClInclude Include="Instruments\Piano.h" />
     <ClInclude Include="Instruments\Pitch.h" />
     <ClInclude Include="Instruments\VirtualMeteoPiano.h" />
@@ -649,6 +651,7 @@
     <ClInclude Include="RulesetInstant\Timing\InstantTimeController.h" />
     <ClInclude Include="RulesetMeteor\Config\MeteorConfigManager.h" />
     <ClInclude Include="RulesetMeteor\Input\MeteorInputManager.h" />
+    <ClInclude Include="RulesetMeteor\Input\MeteorPitchBindingSet.h" />
     <ClInclude Include="RulesetMeteor\MeteorGame.h" />
     <ClInclude Include="RulesetMeteor\Output\Panels\LightRingOutputer.h" />
     <ClInclude Include="RulesetMeteor\Output\Panels\LightRingPanelMessage.h" />

@@ -2,18 +2,13 @@
 #define METEO_PIANO_H
 
 #include "Piano.h"
+#include "MeteoPianoPitchState.h"
 
 
 using namespace Framework::Input::KeyBindings;
 
 
 namespace Instruments {
-
-	enum class MeteoPianoPitchState {
-		None,
-		Raised,
-		Lowered
-	};
 
 	class MeteoPiano : public Piano {
 
@@ -48,6 +43,7 @@ namespace Instruments {
 
 		virtual int loadAndMapSamples();
 
+		virtual int loadAndMapPitches();
 
 		virtual int OnButtonDown(PianoAction action);
 

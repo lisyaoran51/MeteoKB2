@@ -2250,4 +2250,15 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 	
 11/20
 	來寫遊戲紀錄
-	寫到meteor result要把replay frame轉換成control point那邊，目前要找一下input key和pitch的key binding擺在哪
+	寫到meteor result要把replay frame轉換成control point那邊，目前要找一下input key和pitch的key binding擺在哪'
+	
+11/21
+	pitch binding擺在MeteorEventProcessorMaster李
+	
+	meteor action和pitch的比對寫在MeteorEventProcessorMaster的matchPitch李，寫這邊不太對，要找一下要怎麼改
+	
+	以後如果要移調，可以直接改sound binding，輸入的地方就都不用改
+	
+	寫了pitch binding set，之後要把 MeteorEventProcessorMaster 裡面的match pitch改成用pitch binding set來判斷
+	
+	接下來要繼續把meteor result寫完

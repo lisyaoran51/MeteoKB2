@@ -12,7 +12,7 @@
 #include "../Framework/Audio/Sample/SampleChannel.h"
 #include "../Framework/Input/PassThroughInputManager.h"
 #include "../Framework/Host/GameHost.h"
-#include "Input/PitchBinding.h"
+#include "Input/PitchBindingSet.h"
 
 
 using namespace Framework::Allocation::Hierachal;
@@ -56,12 +56,16 @@ namespace Instruments {
 
 		virtual int SwitchSoundBindings(TSoundBindingSet<Pitch>* soundBindingSet) = 0;
 
+		virtual PitchBindingSet* GetDefaultPitchBindingSet(int variant = 0) = 0;
+
 		//¼g¿ù¤F
 		//virtual vector<PitchBinding*>* GetDefaultPitchBindings(int variant = 0) = 0;
 
 		virtual int SetHost(GameHost* h);
 
 		virtual int LoadAndMapSamples();
+
+		virtual int LoadAndMapPitches();
 
 	protected:
 
@@ -73,12 +77,16 @@ namespace Instruments {
 
 		TSoundBindingSet<Pitch>* soundBindingSet = nullptr;
 
+		PitchBindingSet* pitchBindingSet = nullptr;
+
 		//¼g¿ù¤F
 		//vector<PitchBinding*> pitchBindings;
 
 		virtual int LoadOnComplete();
 
 		virtual int loadAndMapSamples() = 0;
+
+		virtual int loadAndMapPitches() = 0;
 
 		//¼g¿ù¤F
 		//virtual int mapActionToPitch() = 0;

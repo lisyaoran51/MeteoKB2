@@ -1743,6 +1743,9 @@
     <ClCompile Include="RulesetMeteor\Output\Panels\LightRingOutputer.cpp">
       <Filter>來源檔案\RulesetMeteor\Output\Panels</Filter>
     </ClCompile>
+    <ClCompile Include="RulesetMeteor\Input\MeteorPitchBindingSet.cpp">
+      <Filter>來源檔案\RulesetMeteor\Input</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="DailyLog.txt">
@@ -2539,9 +2542,6 @@
     <ClInclude Include="Games\Ruleset\Modifiers\InstrumentModifier.h">
       <Filter>標頭檔\Games\Ruleset\Modifiers</Filter>
     </ClInclude>
-    <ClInclude Include="Instruments\Input\PitchBinding.h">
-      <Filter>標頭檔\Instruments\Input</Filter>
-    </ClInclude>
     <ClInclude Include="Games\Scene\Play\Hud\HudDisplay.h">
       <Filter>標頭檔\Games\Scene\play\Hud</Filter>
     </ClInclude>
@@ -2904,6 +2904,15 @@
     </ClInclude>
     <ClInclude Include="Framework\IO\FileAccess.h">
       <Filter>標頭檔\Framework\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="Instruments\Input\PitchBindingSet.h">
+      <Filter>標頭檔\Instruments\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Input\MeteorPitchBindingSet.h">
+      <Filter>標頭檔\RulesetMeteor\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Instruments\MeteoPianoPitchState.h">
+      <Filter>標頭檔\Instruments</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -301,3 +301,8 @@ int MeteoPiano::loadAndMapSamples()
 
 	return 0;
 }
+
+int MeteoPiano::loadAndMapPitches()
+{
+	return 0;
+}

@@ -6,10 +6,12 @@
 #include "RulesetExecutor.h"
 #include "../Sheetmusic/WorkingSheetmusic.h"
 #include "../../Framework/Input/KeyBindings/KeyBinding.h"
+#include "../../Instruments/Input/PitchBindingSet.h"
 
 
 using namespace Games::Sheetmusics;
 using namespace Framework::Input::KeyBindings;
+using namespace Instruments::Input;
 
 namespace Games {
 namespace Rulesets {
@@ -39,6 +41,8 @@ namespace Rulesets {
 		virtual RulesetExecutor<Event>* CreateRulesetExecutor(WorkingSm* sm) = 0;
 
 		virtual vector<KeyBinding*>* GetDefaultkeyBindings(int variant = 0) = 0;
+
+		virtual PitchBindingSet* GetDefaultPitchBindingSet(int variant = 0) = 0;
 
 		RulesetInfo* GetRulesetInfo();
 

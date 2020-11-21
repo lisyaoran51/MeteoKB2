@@ -52,6 +52,8 @@ int Instrument::LoadOnComplete()
 
 	loadAndMapSamples();
 
+	loadAndMapPitches();
+
 	//¼g¿ù¤F
 	/*
 	vector<PitchBinding*>* defaultPitchBindings = GetDefaultPitchBindings();

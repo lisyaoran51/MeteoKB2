@@ -103,7 +103,15 @@ string MeteorResult::writeGameRecord()
 		}
 	}
 
+	Ruleset* ruleset = rulesetInfo.GetValue()->CreateRuleset();
+	PitchBindingSet* pitchBindingSet = ruleset->GetDefaultPitchBindingSet();
 
+	/* Âà´«replay frame¦¨¹CÀ¸¬ö¿ý */
+	for (int i = 0; i < score->replay->replayFrames.size(); i++) {
+
+
+
+	}
 
 
 
