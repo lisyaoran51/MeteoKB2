@@ -5,11 +5,13 @@
 #include "../../../Games/Scene/Results/Result.h"
 #include "../../../Framework/Output/OutputManager.h"
 #include "../../../Instruments/Piano.h"
+#include "../../../Games/Scheduler/Event/ControlPoints/ControlPoint.h"
 
 
 using namespace Games::Scenes::Results;
 using namespace Framework::Output;
 using namespace Instruments;
+using namespace Games::Schedulers::Events::ControlPoints;
 
 
 
@@ -23,6 +25,12 @@ namespace Results{
 		int load();
 
 		int load(OutputManager* o, Instrument* i);
+
+		int convertToControlPoints(vector<ControlPoint*>& controlPoints);
+		
+		int tagSectionData(vector<ControlPoint*>& controlPoints);
+
+		string encodeToRecordFile(vector<ControlPoint*>& controlPoints);
 
 	public:
 
