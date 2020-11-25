@@ -24,7 +24,7 @@ int Program::Main(vector<string>& args)
 	ProgramInitializer::Initialize();
 
 	GameHost* host = new MeteoGameHost();
-	host->Initialize();
+	host->Initialize("~");
 
 	
 	

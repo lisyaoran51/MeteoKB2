@@ -9,6 +9,8 @@
 #include "../../../Games/Scheduler/Event/ControlPoints/NoteControlPoint.h"
 #include "../../Input/MeteorPitchBindingSet.h"
 #include "../../Ruleset/Replays/MeteorReplayFrame.h"
+#include <cstdlib> /* 亂數相關函數 */
+#include <ctime>   /* 時間相關函數 */
 
 
 using namespace Meteor::Scenes::Results;
@@ -29,10 +31,15 @@ int MeteorResult::load()
 	if (!i)
 		throw runtime_error("MeteorResult::load() : Instrument not found in cache.");
 
-	return load(o, i);
+
+	Storage * s = GetCache<Storage>("Storage");
+	if (!s)
+		throw runtime_error("MeteorResult::load() : Storage not found in cache.");
+
+	return load(o, i, s);
 }
 
-int MeteorResult::load(OutputManager * o, Instrument * i)
+int MeteorResult::load(OutputManager * o, Instrument * i, Storage* s)
 {
 	outputManager = o;
 	piano = dynamic_cast<Piano*>(i);
@@ -41,20 +48,16 @@ int MeteorResult::load(OutputManager * o, Instrument * i)
 		LOG(LogLevel::Error) << "MeteorResult::load : Instrument cannot cast to piano.";
 	}
 
+	storage = s;
+
 	return 0;
 }
 
-MeteorResult::MeteorResult(Score * s) : Result(s), RegisterType("MeteorResult")
-{
-
-	registerLoad(bind((int(MeteorResult::*)())&MeteorResult::load, this));
-}
-
-string MeteorResult::writeGameRecord()
+int MeteorResult::convertToControlPoints(vector<ControlPoint*>& controlPoints)
 {
 	/* 是否使用原始踏板資訊，如果譜裡本來就有踏板資訊，琴又沒插踏板，就用原始踏板資訊 */
 	bool useOriginalPedalData = workingSm.GetValue()->GetSm()->GetSmInfo()->hasPedalData &&
-								piano->GetSustainType() == SustainType::GameControllingSustain;
+		piano->GetSustainType() == SustainType::GameControllingSustain;
 
 	bool hasSectionData = workingSm.GetValue()->GetSm()->GetSmInfo()->hasSectionData;
 
@@ -78,26 +81,25 @@ string MeteorResult::writeGameRecord()
 	MeteoPianoPitchState tempPitchState = MeteoPianoPitchState::None;
 	//pitchStateSwitchPoint.push_back(pair<float, MeteoPianoPitchState>(-5.f, tempPitchState));	// 把第一個時間點設早一點，免得有的歌是0秒第一個音
 
-	/* 把遊戲紀錄轉存成control point */
-	vector<ControlPoint*> controlPoints;
+
 	map<Pitch, NoteControlPoint*> pressedNote;	// 記錄哪個音按下了還沒放開
 	InputKeyControlPoint* pedalDown = nullptr;	// 紀錄踏板開始踏下的時間。如果踏板沒踏下，就設為nullptr
-	
+
 
 	/* 把譜裡面原始的資訊抓出來 */
 	for (int i = 0; i < workingSm.GetValue()->GetSm()->GetEvents()->size(); i++) {
 		if (dynamic_cast<InputKeyControlPoint*>(workingSm.GetValue()->GetSm()->GetEvents()->at(i))) {
-			
+
 			/* 複製踏板資訊 */
 			if (useOriginalPedalData &&
 				dynamic_cast<InputKeyControlPoint*>(workingSm.GetValue()->GetSm()->GetEvents()->at(i))->GetInputKey() == InputKey::SustainPedal) {
-				
+
 				controlPoints.push_back(dynamic_cast<InputKeyControlPoint*>(workingSm.GetValue()->GetSm()->GetEvents()->at(i)));
 
 			}
 			/* 複製平移八度資訊 */
 			else if (dynamic_cast<InputKeyControlPoint*>(workingSm.GetValue()->GetSm()->GetEvents()->at(i))->GetInputKey() == InputKey::LowerOctave ||
-					 dynamic_cast<InputKeyControlPoint*>(workingSm.GetValue()->GetSm()->GetEvents()->at(i))->GetInputKey() == InputKey::RaiseOctave) {
+				dynamic_cast<InputKeyControlPoint*>(workingSm.GetValue()->GetSm()->GetEvents()->at(i))->GetInputKey() == InputKey::RaiseOctave) {
 
 				controlPoints.push_back(dynamic_cast<InputKeyControlPoint*>(workingSm.GetValue()->GetSm()->GetEvents()->at(i)));
 
@@ -114,7 +116,7 @@ string MeteorResult::writeGameRecord()
 						pitchStateSwitchPoint.push_back(pair<float, MeteoPianoPitchState>(tempTime, tempPitchState));
 					}
 				}
-				else if(dynamic_cast<InputKeyControlPoint*>(workingSm.GetValue()->GetSm()->GetEvents()->at(i))->GetInputKey() == InputKey::RaiseOctave) {
+				else if (dynamic_cast<InputKeyControlPoint*>(workingSm.GetValue()->GetSm()->GetEvents()->at(i))->GetInputKey() == InputKey::RaiseOctave) {
 					if (tempPitchState == MeteoPianoPitchState::None) {
 						tempPitchState = MeteoPianoPitchState::Raised;
 						pitchStateSwitchPoint.push_back(pair<float, MeteoPianoPitchState>(tempTime, tempPitchState));
@@ -147,20 +149,20 @@ string MeteorResult::writeGameRecord()
 	for (int i = 0; i < score->replay->replayFrames.size(); i++) {
 
 		MeteorReplayFrame* replayFrame = dynamic_cast<MeteorReplayFrame*>(score->replay->replayFrames[i]);
-		
+
 		/* 如果這個音的音域不同，就切換八度 */
 		for (int j = 0; j < pitchStateSwitchPoint.size(); j++) {
 			if (i < score->replay->replayFrames.size() - 1)
-			if (score->replay->replayFrames[ i ]->GetStartTime() >= pitchStateSwitchPoint[j].first &&
-				score->replay->replayFrames[i+1]->GetStartTime() <= pitchStateSwitchPoint[j].first) {
-				pitchBindingSet->SwitchPitchState(pitchStateSwitchPoint[j].second);
-			}
+				if (score->replay->replayFrames[i]->GetStartTime() >= pitchStateSwitchPoint[j].first &&
+					score->replay->replayFrames[i + 1]->GetStartTime() <= pitchStateSwitchPoint[j].first) {
+					pitchBindingSet->SwitchPitchState(pitchStateSwitchPoint[j].second);
+				}
 		}
 
 		/* 是琴鍵的話 */
-		if (replayFrame->GetMeteorAction() >= MeteorAction::VK27_A1 && 
+		if (replayFrame->GetMeteorAction() >= MeteorAction::VK27_A1 &&
 			replayFrame->GetMeteorAction() < MeteorAction::SustainPedal) {
-			
+
 			Pitch pitch = pitchBindingSet->GetPitch(replayFrame->GetMeteorAction());
 
 			map<Pitch, NoteControlPoint*>::iterator iter = pressedNote.find(pitch);
@@ -175,7 +177,7 @@ string MeteorResult::writeGameRecord()
 			}
 			/* 如果已經按下，正要放開，就先加入controlPoints中中 */
 			else if (iter != pressedNote.end() &&
-					 !replayFrame->GetIsPressingDown()) {
+				!replayFrame->GetIsPressingDown()) {
 
 				pressedNote[pitch]->SetLifeTime(replayFrame->GetStartTime() - pressedNote[pitch]->GetStartTime());
 				controlPoints.push_back(pressedNote[pitch]);
@@ -184,7 +186,7 @@ string MeteorResult::writeGameRecord()
 			}
 			/* 如果已經按下，又收到一次按下，就先把舊的note加入controlPoints，再把新的note放入pressedNote */
 			else if (iter != pressedNote.end() &&
-					 replayFrame->GetIsPressingDown()) {
+				replayFrame->GetIsPressingDown()) {
 
 				if (replayFrame->GetStartTime() - pressedNote[pitch]->GetStartTime() > 5)
 					pressedNote[pitch]->SetLifeTime(5);
@@ -200,7 +202,7 @@ string MeteorResult::writeGameRecord()
 		}
 		/* 是踏板的話 */
 		else if (replayFrame->GetMeteorAction() == MeteorAction::SustainPedal &&
-				 !useOriginalPedalData) {
+			!useOriginalPedalData) {
 
 			/* 如果剛踏下，就先設定pedalDownTime */
 			if (pedalDown == nullptr &&
@@ -211,7 +213,7 @@ string MeteorResult::writeGameRecord()
 			}
 			/* 如果已經踏下，正要放開，就先加入controlPoints中中 */
 			else if (pedalDown == nullptr &&
-					 !replayFrame->GetIsPressingDown()) {
+				!replayFrame->GetIsPressingDown()) {
 
 				pedalDown->SetLifeTime(replayFrame->GetStartTime() - pedalDown->GetStartTime());
 				controlPoints.push_back(pedalDown);
@@ -220,11 +222,11 @@ string MeteorResult::writeGameRecord()
 			}
 			/* 如果已經踏下，又收到一次踏下，就先把舊的pedal down加入controlPoints，再建新的pedal down */
 			else if (pedalDown != nullptr &&
-					 replayFrame->GetIsPressingDown()) {
+				replayFrame->GetIsPressingDown()) {
 
 				pedalDown->SetLifeTime(replayFrame->GetStartTime() - pedalDown->GetStartTime() - 0.1f);
 				controlPoints.push_back(pedalDown);
-				
+
 				pedalDown = new InputKeyControlPoint(InputKey::SustainPedal, replayFrame->GetStartTime(), 0.1f);
 
 			}
@@ -259,6 +261,227 @@ string MeteorResult::writeGameRecord()
 
 		return a->GetStartTime() < b->GetStartTime();
 	});
+
+	return 0;
+}
+
+int MeteorResult::tagSectionData(vector<ControlPoint*>& controlPoints)
+{
+	bool hasSectionData = workingSm.GetValue()->GetSm()->GetSmInfo()->hasSectionData;
+
+	if (!hasSectionData)
+		return 0;
+
+	/* 是否使用原始踏板資訊，如果譜裡本來就有踏板資訊，琴又沒插踏板，就用原始踏板資訊 */
+	bool useOriginalPedalData = workingSm.GetValue()->GetSm()->GetSmInfo()->hasPedalData &&
+								piano->GetSustainType() == SustainType::GameControllingSustain;
+
+	int tempSectionIndex = 0;
+
+	for (int i = 0; i < controlPoints.size(); i++) {
+		/* 如果是小節事件，就更新tempSectionIndex */
+		if (dynamic_cast<SectionStartControlPoint*>(controlPoints[i]) != nullptr) {
+			tempSectionIndex = dynamic_cast<SectionStartControlPoint*>(controlPoints[i])->GetSectionIndex();
+		}
+		else if (dynamic_cast<InputKeyControlPoint*>(controlPoints[i]) != nullptr) {
+			/* 如果是踏板，就更新踏板小節 */
+			if (dynamic_cast<InputKeyControlPoint*>(controlPoints[i])->GetInputKey() == InputKey::SustainPedal &&
+				!useOriginalPedalData) {
+				dynamic_cast<InputKeyControlPoint*>(controlPoints[i])->SetSectionIndex(tempSectionIndex);
+			}
+			/* 如果是升降八度，就更新升降八度小節 */
+			else if(dynamic_cast<InputKeyControlPoint*>(controlPoints[i])->GetInputKey() == InputKey::LowerOctave ||
+					dynamic_cast<InputKeyControlPoint*>(controlPoints[i])->GetInputKey() == InputKey::RaiseOctave){
+				dynamic_cast<InputKeyControlPoint*>(controlPoints[i])->SetSectionIndex(tempSectionIndex);
+			}
+		}
+		/* 如果是音符，就更新音符小節 */
+		else if (dynamic_cast<NoteControlPoint*>(controlPoints[i]) != nullptr) {
+			dynamic_cast<NoteControlPoint*>(controlPoints[i])->SetSectionIndex(tempSectionIndex);
+		}
+	}
+
+	
+
+	return 0;
+}
+
+string MeteorResult::encodeToRecordFile(vector<ControlPoint*>& controlPoints)
+{
+	string fileName;
+	char randomFileName[8] = { 0 };
+
+	srand(time(NULL));
+
+	/* random 0~9 a~z A~Z等字 */
+	for (int i = 0; i < 8; i++) {
+		int charInInt = rand() % 62;
+		
+		if (charInInt < 10)
+			randomFileName[i] = charInInt + 48;
+		else if(charInInt >= 10 && charInInt < 36)
+			randomFileName[i] = charInInt - 10 + 65;
+		else if(charInInt >= 36)
+			randomFileName[i] = charInInt - 36 + 97;
+
+	}
+
+	
+	fileName = string(randomFileName, 8) + string(".mr");
+	fstream* stream = storage->GetStream(string("temp/mr/") + fileName, FileAccess::Write, FileMode::Create);
+
+	/* 檔案格式 */
+	*stream << "simple file format v0\n";
+
+#pragma region GeneralSection
+
+	*stream << "[General]\n";
+
+	/* 遊戲紀錄 */
+	*stream << "Mode:3\n";
+
+	/* 是否使用原始踏板資訊，如果譜裡本來就有踏板資訊，琴又沒插踏板，就用原始踏板資訊 */
+	bool useOriginalPedalData = workingSm.GetValue()->GetSm()->GetSmInfo()->hasPedalData &&
+								piano->GetSustainType() == SustainType::GameControllingSustain;
+	bool usePluginPedal = piano->GetSustainType() == SustainType::SustainPedal;
+	
+	/* 踏板資訊 */
+	if (useOriginalPedalData || usePluginPedal)
+		*stream << "Pedal:1\n";
+
+	/* 小節資訊 */
+	bool hasSectionData = workingSm.GetValue()->GetSm()->GetSmInfo()->hasSectionData;
+	if (hasSectionData)
+		*stream << "Section:1\n";
+
+	/* 這次遊戲是用哪隻手 */
+	SmDifficultyHandType hand = SmDifficultyHandType::None;
+
+	/* 這次遊戲難度為何 */
+	SmDifficultyDifficulty difficulty = SmDifficultyDifficulty::None;
+
+	for (int i = 0; i < workingSm.GetValue()->GetModifiers()->GetValue()->size(); i++) {
+		if (dynamic_cast<HandModifier*>(workingSm.GetValue()->GetModifiers()->GetValue()->at(i))) {
+			hand = dynamic_cast<HandModifier*>(workingSm.GetValue()->GetModifiers()->GetValue()->at(i))->GetHandType();
+		}
+		if (dynamic_cast<MeteorDifficultyModifier*>(workingSm.GetValue()->GetModifiers()->GetValue()->at(i))) {
+			difficulty = dynamic_cast<MeteorDifficultyModifier*>(workingSm.GetValue()->GetModifiers()->GetValue()->at(i))->GetDifficulty();
+		}
+	}
+
+	/* 使用手資訊 */
+	*stream << "HandType:" << (int)hand << "\n";
+
+	/* 難度資訊 */
+	*stream << "Difficulty:" << (int)difficulty << "\n";
+
+#pragma endregion
+
+#pragma region MetadataSection
+
+	*stream << "[Metadata]\n";
+
+	string title = workingSm.GetValue()->GetSm()->GetSmMetadata()->Title;
+
+	/* 曲名資訊 */
+	*stream << "Title:" << title << "\n";
+
+	/* 玩家資訊 */
+	//*stream << "User:" << user << "\n";
+
+
+
+#pragma endregion
+
+#pragma region DifficultySection
+
+	*stream << "[Difficulty]\n";
+
+	float speed = workingSm.GetValue()->GetSm()->GetSmInfo()->difficuty->Speed;
+
+	/* 速度資訊 */
+	*stream << "Speed:" << (int)speed << "\n";
+
+#pragma endregion
+
+#pragma region ControlPointSection
+
+	*stream << "[NoteControlPoints]\n";
+
+	/* 音符資訊 */
+	for (int i = 0; i < controlPoints.size(); i++) {
+
+		string controlPoint = "";
+
+		if (dynamic_cast<InputKeyControlPoint*>(controlPoints[i]) != nullptr) {
+
+			InputKeyControlPoint* inputKeyControlPoint = dynamic_cast<InputKeyControlPoint*>(controlPoints[i]);
+
+			/* 踏板資訊 */
+			if (inputKeyControlPoint->GetInputKey() == InputKey::SustainPedal) {
+				controlPoint = string("-1,") + to_string(inputKeyControlPoint->GetStartTime()) + string(",") +
+											   to_string(inputKeyControlPoint->GetLifeTime()) + string("-1,") + 
+											   to_string(inputKeyControlPoint->GetSectionIndex()) + string(",5,") +	// 踏板的使用手是5
+											   to_string(inputKeyControlPoint->GetPartIndex()) + string("\n");
+			}
+			/* 降八度資訊 */
+			else if (inputKeyControlPoint->GetInputKey() == InputKey::LowerOctave) {
+				controlPoint = string("-2,") + to_string(inputKeyControlPoint->GetStartTime()) + string(",") +
+											   to_string(inputKeyControlPoint->GetLifeTime()) + string("-1,") + 
+											   to_string(inputKeyControlPoint->GetSectionIndex()) + string(",6,") +	// 平移八度的使用手是6
+											   to_string(inputKeyControlPoint->GetPartIndex()) + string("\n");
+			}
+			/* 升八度資訊 */
+			else if(inputKeyControlPoint->GetInputKey() == InputKey::RaiseOctave) {
+				controlPoint = string("-3,") + to_string(inputKeyControlPoint->GetStartTime()) + string(",") +
+											   to_string(inputKeyControlPoint->GetLifeTime()) + string("-1,") + 
+											   to_string(inputKeyControlPoint->GetSectionIndex()) + string(",6,") +	// 平移八度的使用手是6
+											   to_string(inputKeyControlPoint->GetPartIndex()) + string("\n");
+			}
+		}
+		else if (dynamic_cast<SectionStartControlPoint*>(controlPoints[i]) != nullptr) {
+			/* 小節資訊 */
+			SectionStartControlPoint* sectionStartControlPoint = dynamic_cast<SectionStartControlPoint*>(controlPoints[i]);
+			controlPoint = string("-4,") + to_string(sectionStartControlPoint->GetStartTime()) + string(",") +
+										   to_string(sectionStartControlPoint->GetLifeTime()) + string("-1,") +
+										   to_string(sectionStartControlPoint->GetSectionIndex()) + string(",0,") +
+										   to_string(sectionStartControlPoint->GetPartIndex()) + string("\n");
+		}
+		else if (dynamic_cast<NoteControlPoint*>(controlPoints[i]) != nullptr) {
+			/* 音符資訊 */
+			NoteControlPoint* noteControlPoint = dynamic_cast<NoteControlPoint*>(controlPoints[i]);
+			controlPoint = to_string((int)noteControlPoint->GetPitch()) + string(",") + 
+						   to_string(noteControlPoint->GetStartTime()) + string(",") +
+						   to_string(noteControlPoint->GetLifeTime()) + string(",") +
+						   to_string(noteControlPoint->GetVolume()) + string(",") +
+						   to_string(noteControlPoint->GetSectionIndex()) + string(",0,") +
+						   to_string(noteControlPoint->GetPartIndex()) + string("\n");
+
+		}
+
+		*stream << controlPoint;
+	}
+
+
+#pragma endregion
+
+	stream->close();
+
+	return string("temp/mr/") + fileName;
+}
+
+MeteorResult::MeteorResult(Score * s) : Result(s), RegisterType("MeteorResult")
+{
+
+	registerLoad(bind((int(MeteorResult::*)())&MeteorResult::load, this));
+}
+
+string MeteorResult::writeGameRecord()
+{
+	/* 把遊戲紀錄轉存成control point */
+	vector<ControlPoint*> controlPoints;
+
+	
 
 	/* 把replay轉換成control point */
 	convertToControlPoints(controlPoints);

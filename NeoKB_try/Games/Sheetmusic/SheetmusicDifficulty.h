@@ -16,9 +16,9 @@ namespace Sheetmusics {
 	
 	enum class  SmDifficultyHandType {
 		None,
-		Both,
 		Left,
-		Right
+		Right,
+		Both,
 	};
 
 	enum class SmDifficultyDifficulty {

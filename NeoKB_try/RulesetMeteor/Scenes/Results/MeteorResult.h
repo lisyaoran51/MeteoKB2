@@ -24,12 +24,21 @@ namespace Results{
 
 		int load();
 
-		int load(OutputManager* o, Instrument* i);
+		int load(OutputManager* o, Instrument* i, Storage* s);
 
+		/// <summary>
+		/// 將遊戲紀錄寫入檔案步驟一：把遊戲紀錄轉乘control point
+		/// </summary>
 		int convertToControlPoints(vector<ControlPoint*>& controlPoints);
 		
+		/// <summary>
+		/// 將遊戲紀錄寫入檔案步驟二：標註小節記號
+		/// </summary>
 		int tagSectionData(vector<ControlPoint*>& controlPoints);
 
+		/// <summary>
+		/// 將遊戲紀錄寫入檔案步驟三：轉乘string，寫入sm檔
+		/// </summary>
 		string encodeToRecordFile(vector<ControlPoint*>& controlPoints);
 
 	public:
@@ -41,6 +50,8 @@ namespace Results{
 		OutputManager* outputManager = nullptr;
 
 		Piano* piano = nullptr;
+
+		Storage* storage = nullptr;
 
 		string writeGameRecord();
 

@@ -2262,3 +2262,9 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 	寫了pitch binding set，之後要把 MeteorEventProcessorMaster 裡面的match pitch改成用pitch binding set來判斷
 	
 	接下來要繼續把meteor result寫完
+	
+11/25
+	讀寫storage主要還是靠MeteoGameHost::getStorage -> GameHost::Initialize -> Program::Main 所以在main裡面要先擺好路徑
+	跟stable storage不一樣的是，stable storage固定位置是在檔案旁邊，然後這個只能用來載入sm和音效
+	
+	接下來要寫把紀錄送到手機
