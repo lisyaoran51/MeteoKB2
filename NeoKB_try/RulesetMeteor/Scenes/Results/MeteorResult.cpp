@@ -499,23 +499,48 @@ int MeteorResult::onEntering(Scene * lastScene)
 {
 	LOG(LogLevel::Info) << "MeteorResult::onEntering : pushing game over message.";
 
-	/* 寫入遊戲紀錄 */
-	string recordFilePath = writeGameRecord();
+	// bluetooth推送結果
+	MeteoContextBluetoothMessage* scoreMessage = new MeteoContextBluetoothMessage(MeteoCommand::FinalScore);
+	scoreMessage->GetContext()["Hit Amount"] = score->hits;
+	scoreMessage->GetContext()["Max Hit Amount"] = score->maxHits;
+	scoreMessage->GetContext()["Score"] = score->score;
+	scoreMessage->GetContext()["Max Score"] = score->maxScore;
+	scoreMessage->GetContext()["Accuracy"] = int(score->accuracy * 10000);
+	scoreMessage->GetContext()["Combo"] = score->combo;
+
+	// 還要寫入各個分數的次數
+	json judgementMiss, judgementBad, judgementOk, judgementGood, judgementGreat, judgementPerfect;
+	judgementMiss["Result"] = "Miss";	judgementMiss["HitAmount"] = score->hitResults[HitResult::Miss];
+	judgementBad["Result"] = "Bad";	judgementMiss["HitAmount"] = score->hitResults[HitResult::Bad];
+	judgementOk["Result"] = "Ok";	judgementMiss["HitAmount"] = score->hitResults[HitResult::Ok];
+	judgementGood["Result"] = "Good";	judgementMiss["HitAmount"] = score->hitResults[HitResult::Good];
+	judgementGreat["Result"] = "Great";	judgementMiss["HitAmount"] = score->hitResults[HitResult::Great];
+	judgementPerfect["Result"] = "Perfect";	judgementMiss["HitAmount"] = score->hitResults[HitResult::Perfect];
+
+	scoreMessage->GetContext()["Hits"].push_back(judgementMiss);
+	scoreMessage->GetContext()["Hits"].push_back(judgementBad);
+	scoreMessage->GetContext()["Hits"].push_back(judgementOk);
+	scoreMessage->GetContext()["Hits"].push_back(judgementGood);
+	scoreMessage->GetContext()["Hits"].push_back(judgementGreat);
+	scoreMessage->GetContext()["Hits"].push_back(judgementPerfect);
+
+	outputManager->PushMessage(scoreMessage);
+	
 
 
 	/* 還沒寫好
-	// bluetooth推送結果
-	MeteoBluetoothMessage* meteoBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::FinalScore);
-	outputManager->PushMessage(meteoBluetoothMessage);
-
 	meteoBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::PlayRecordData);
 	outputManager->PushMessage(meteoBluetoothMessage);
 
 	string recordFilePath;
-
-	meteoBluetoothMessage = new MeteoFileBluetoothMessage(MeteoCommand::PlayRecordFileSegment, recordFilePath);
-	outputManager->PushMessage(meteoBluetoothMessage);
 	*/
+
+	/* 寫入遊戲紀錄 */
+	string recordFilePath = writeGameRecord();
+
+	MeteoFileBluetoothMessage* recordFileMessage = new MeteoFileBluetoothMessage(MeteoCommand::PlayRecordFileSegment, recordFilePath);
+	outputManager->PushMessage(recordFileMessage);
+	
 
 	Exit();
 

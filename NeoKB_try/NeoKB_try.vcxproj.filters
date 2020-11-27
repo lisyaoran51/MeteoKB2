@@ -1746,6 +1746,9 @@
     <ClCompile Include="RulesetMeteor\Input\MeteorPitchBindingSet.cpp">
       <Filter>來源檔案\RulesetMeteor\Input</Filter>
     </ClCompile>
+    <ClCompile Include="Games\Ruleset\Scoring\Score.cpp">
+      <Filter>來源檔案\Games\Ruleset\Scoring</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="DailyLog.txt">

@@ -95,6 +95,7 @@
     <ClCompile Include="Games\Ruleset\Ruleset.cpp" />
     <ClCompile Include="Games\Ruleset\RulesetInfo.cpp" />
     <ClCompile Include="Games\Ruleset\RulesetStore.cpp" />
+    <ClCompile Include="Games\Ruleset\Scoring\Score.cpp" />
     <ClCompile Include="Games\Ruleset\Scoring\ScoreProcessor.cpp" />
     <ClCompile Include="Games\Scene\Interlude\Intro.cpp" />
     <ClCompile Include="Games\Scene\MeteoScene.cpp" />

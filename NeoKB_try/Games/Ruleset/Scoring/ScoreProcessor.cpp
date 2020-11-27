@@ -26,15 +26,22 @@ Bindable<int>* ScoreProcessor::GetCombo()
 	return combo;
 }
 
-int ScoreProcessor::PopulateScore(Score * score)
+int ScoreProcessor::PopulateScore(Score * s)
 {
-	score->hits = hits;
-	score->maxHits = maxHits;
-	score->totalScore = totalScore->GetValue();
-	score->combo = combo->GetValue();
-	score->highestCombo = highestCombo->GetValue();
-	score->accuracy = accuracy->GetValue();
+	s->hits = hits;
+	s->maxHits = maxHits;
+	s->score = score->GetValue();
+	s->maxScore = maxScore;
+	s->combo = highestCombo->GetValue();
+	s->accuracy = accuracy->GetValue();
 
+	s->hitResults[HitResult::None] = hitResults[HitResult::None];
+	s->hitResults[HitResult::Miss] = hitResults[HitResult::Miss];
+	s->hitResults[HitResult::Bad] = hitResults[HitResult::Bad];
+	s->hitResults[HitResult::Ok] = hitResults[HitResult::Ok];
+	s->hitResults[HitResult::Good] = hitResults[HitResult::Good];
+	s->hitResults[HitResult::Great] = hitResults[HitResult::Great];
+	s->hitResults[HitResult::Perfect] = hitResults[HitResult::Perfect];
 
 	return 0;
 }
@@ -46,6 +53,14 @@ ScoreProcessor::ScoreProcessor(RulesetExecutor<Event>* rExecutor)
 
 	maxHits = 0;
 	maxScore = 0;
+
+	hitResults[HitResult::None] = 0;
+	hitResults[HitResult::Miss] = 0;
+	hitResults[HitResult::Bad] = 0;
+	hitResults[HitResult::Ok] = 0;
+	hitResults[HitResult::Good] = 0;
+	hitResults[HitResult::Great] = 0;
+	hitResults[HitResult::Perfect] = 0;
 
 	for (int i = 0; i < eventProcessors->size(); i++) {
 		if (dynamic_cast<HitObject*>(eventProcessors->at(i))) {
@@ -68,8 +83,8 @@ ScoreProcessor::ScoreProcessor(RulesetExecutor<Event>* rExecutor)
 
 ScoreProcessor::~ScoreProcessor()
 {
-	delete totalScore;
-	totalScore = nullptr;
+	delete score;
+	score = nullptr;
 	delete accuracy;
 	accuracy = nullptr;
 	delete combo;
@@ -112,8 +127,14 @@ int ScoreProcessor::addUpJudgementScore(Judgement * judgement)
 		break;
 	}
 
+	/* 記錄每一種得分的數量 */
+	hitResults[judgement->GetResult()] = hitResults[judgement->GetResult()] + 1;
+
+
 	baseScore += judgement->GetResultScore();
 	rollingMaxBaseScore += judgement->GetMaxResultScore();
+
+	score->SetValue(score->GetValue() + judgement->GetResultScore());	// 最後結算用的成績，以後可以在這邊做依些額外權重加乘
 
 	hits++;
 	
@@ -155,7 +176,7 @@ int ScoreProcessor::NotifyNewJudgement(Judgement * judgement)
 int ScoreProcessor::reset(bool storeResults)
 {
 
-	totalScore->SetValue(0);
+	score->SetValue(0);
 	accuracy->SetValue(1);
 	combo->SetValue(0);
 	highestCombo->SetValue(0);

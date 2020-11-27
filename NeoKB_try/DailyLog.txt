@@ -2267,4 +2267,10 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 	讀寫storage主要還是靠MeteoGameHost::getStorage -> GameHost::Initialize -> Program::Main 所以在main裡面要先擺好路徑
 	跟stable storage不一樣的是，stable storage固定位置是在檔案旁邊，然後這個只能用來載入sm和音效
 	
-	接下來要寫把紀錄送到手機
+	接下來要寫把紀錄送到手機，正在把result輸入score
+	
+11/27
+	play record data還沒寫好，如果現在不補好這個部分的話，就可以先開始寫mcu了
+	
+	osu是在api access在game base 一cache的時候，就立刻跟網路去跑get user request，拿到user資料。在player裡面，會把api access的user丟進去score裡面。
+	藍芽去跟手機曲資料的時候，應該要寫一個跟osu一樣的api request，來控制狀況

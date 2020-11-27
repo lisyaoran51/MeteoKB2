@@ -8,6 +8,8 @@
 #include "../../Sheetmusic/SheetmusicInfo.h"
 #include "../Replays/Replay.h"
 #include "../../Users/User.h"
+#include "../Judgements/HitResult.h"
+#include <map>
 #include <ctime>
 
 
@@ -17,6 +19,7 @@ using namespace std;
 using namespace Games::Sheetmusics;
 using namespace Games::Rulesets::Replays;
 using namespace Games::Users;
+using namespace Games::Rulesets::Judgements;
 
 
 
@@ -28,17 +31,21 @@ namespace Scoring {
 
 	public:
 
+		Score();
+
 		int hits = 0;
 
 		int maxHits = 0;
-		
-		double totalScore = 0;
+
+		double score = 0;
+
+		double maxScore = 0;
 
 		double accuracy = 0;
 
 		int combo = 0;
 
-		int highestCombo = 0;
+		map<HitResult, int> hitResults;
 
 		RulesetInfo* rulesetInfo = nullptr;
 

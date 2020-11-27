@@ -72,7 +72,9 @@ namespace Scoring {
 
 		double maxScore = 1.0;
 
-		Bindable<double>* totalScore = new Bindable<double>(0);
+		map<HitResult, int> hitResults;
+
+		Bindable<double>* score = new Bindable<double>(0);
 
 		Bindable<double>* accuracy = new Bindable<double>(1);
 
