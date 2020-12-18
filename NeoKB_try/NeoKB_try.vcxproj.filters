@@ -787,12 +787,6 @@
     <Filter Include="來源檔案\RulesetInstant\Rulesets\Replays">
       <UniqueIdentifier>{35b901e3-f155-400b-931c-59cd54b59fd1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="標頭檔\Framework\IO\Api">
-      <UniqueIdentifier>{0c3b690e-fbc3-4849-a810-d41f2da0c416}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="來源檔案\Framework\IO\Api">
-      <UniqueIdentifier>{8f1516d4-f638-4b7b-ae64-bdd5589d160c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="標頭檔\RulesetInstant\Schedulers\Events\InstrumentEvents">
       <UniqueIdentifier>{209a4f8a-3358-475c-98d1-c6d9a7b3eeb0}</UniqueIdentifier>
     </Filter>
@@ -825,6 +819,18 @@
     </Filter>
     <Filter Include="來源檔案\Instruments\Audio\Format">
       <UniqueIdentifier>{cf8a6b4b-2e3c-415b-9a7a-6786e2d2ed19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Games\IO">
+      <UniqueIdentifier>{75c05d3d-75d5-4d76-89a5-5da39c2e36f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Games\IO\Api">
+      <UniqueIdentifier>{01b19c32-77f9-44b1-93c3-44a1c5276f3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Games\IO">
+      <UniqueIdentifier>{2500b038-dbbf-4cc8-9027-ae1c353583b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Games\IO\Api">
+      <UniqueIdentifier>{b5749f8b-8c60-499f-89b9-6f9af08b1634}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1671,9 +1677,6 @@
     <ClCompile Include="RulesetInstant\Scheduler\Event\Effect\Algorithm\InstantGlowLineMapAlgorithm.cpp">
       <Filter>來源檔案\RulesetInstant\Schedulers\Events\Effects\Algorithms</Filter>
     </ClCompile>
-    <ClCompile Include="Framework\IO\Api\ApiAccess.cpp">
-      <Filter>來源檔案\Framework\IO\Api</Filter>
-    </ClCompile>
     <ClCompile Include="RulesetInstant\Scheduler\Event\InstrumentEvents\InstrumentControllers\InstantVirtualPianoController.cpp">
       <Filter>來源檔案\RulesetInstant\Schedulers\Events\InstrumentEvents\InstrumentControllers</Filter>
     </ClCompile>
@@ -1748,6 +1751,9 @@
     </ClCompile>
     <ClCompile Include="Games\Ruleset\Scoring\Score.cpp">
       <Filter>來源檔案\Games\Ruleset\Scoring</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\IO\Api\ApiAccess.cpp">
+      <Filter>來源檔案\Games\IO\Api</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2818,9 +2824,6 @@
     <ClInclude Include="RulesetInstant\Scheduler\Event\Effect\Algorithm\InstantGlowLineMapAlgorithm.h">
       <Filter>標頭檔\RulesetInstant\Schedulers\Events\Effects\Algorithms</Filter>
     </ClInclude>
-    <ClInclude Include="Framework\IO\Api\ApiAccess.h">
-      <Filter>標頭檔\Framework\IO\Api</Filter>
-    </ClInclude>
     <ClInclude Include="RulesetInstant\Scheduler\Event\InstrumentEvents\InstantPianoSoundEvent.h">
       <Filter>標頭檔\RulesetInstant\Schedulers\Events\InstrumentEvents</Filter>
     </ClInclude>
@@ -2916,6 +2919,9 @@
     </ClInclude>
     <ClInclude Include="Instruments\MeteoPianoPitchState.h">
       <Filter>標頭檔\Instruments</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\IO\Api\ApiAccess.h">
+      <Filter>標頭檔\Games\IO\Api</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

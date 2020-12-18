@@ -2274,3 +2274,115 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 	
 	osu是在api access在game base 一cache的時候，就立刻跟網路去跑get user request，拿到user資料。在player裡面，會把api access的user丟進去score裡面。
 	藍芽去跟手機曲資料的時候，應該要寫一個跟osu一樣的api request，來控制狀況
+	
+	furbo再連網的時候試用http套件和socket
+	
+12/4
+	藍芽那段的架構要全改，應該是有api request，裡面再用bt request去送資料。
+	
+	再api access裡面擺一個map<type, map<int,callback>> ，存收到每一個藍芽訊號的時候要做什麼事。
+	另外api access要有一個發送訊息的request功能，每發送一次訊息就要開一個新的thread，等待是否收到回傳，如果沒收到回傳就要繼續送，直到失敗為止。
+	開thread的腳色為 api request，他匯在api access的thread上面發request。所有訊息要丟出去都要經過api request的thread上面的queue去排成。
+	
+	queue應該要分優先順序。當queue裡面一個訊號丟完，就先丟到等待區，等待倒數完敝仍沒收到回覆的話再排進去queue裡面。
+	訊號丟出去以後，要再bluetooth phone那邊註冊一個response的command，並且放上callback，這樣bluetooth phone收到回傳的時候才能及時告知原訊號可以結束工作，離開queue。
+	
+	osu可以接受一個reuquest失敗兩次，失敗第三次就會把request踢出queue，並且發出fail的exception給那個api request。
+	
+	另外在bluetooth phone裡面擺一個on connected，存在連線成功的時候要做什麼事，然後api access去add on connected，在連線完成時去發送訊息詢問對方user資料
+	
+	https://www.ncc.gov.tw/chinese/files/19123/5138_42448_191231_20.pdf http傳輸方式
+	
+12/5
+	正常拿藍芽訊號的流程是bluetooth phone -> bluetooth input handler -> input manager -> update to object queue
+	api access如果要監測有沒有拿到藍芽訊號，要獨自去bluetooth phone裡面把自己給add on command，讓每次收到訊號的時候api access都會第一時間知道。
+	
+	另外output manager應該也要接到api access，記錄起來，來知道對方有沒有收到，沒收到的話就要重傳、timeout、failure...等
+	api access本身也要拿output manager，如果宋失敗要重送的話，要經由api access來重送。
+	
+	input如果由api access來add on command，可以用來監測CON訊號有沒有真的回傳給對方(沒有必要性，但是可以作)
+	
+	結論：
+	bluetooth phone -> add on command( api access ) 			===>讓每次收到訊號都被api access知道，才知道要不要重傳、timeout等
+	所有的bluetooth outputer -> get cache( api access )			===>他們output的時候統一要經過api access，去控管對方是否收到、重傳...等
+	bluetooth phone -> push message( api access -> messages )	===>api access收到要輸出哪些bluetooth message，再一個一個丟給bluetooth phone去送出
+	
+	Meteo hame host的SetupOutputManager位置擺錯了，應該根據載入的遊戲模式來加入output manager。
+	
+12/7
+	藍芽出問題，bluetooth classic不能再ios用，
+	
+	ble最快速度： 個位數kbps
+	https://punchthrough.com/maximizing-ble-throughput-on-ios-and-android/
+	
+	測試ble gatt(bluez)
+	https://scribles.net/running-ble-gatt-server-example-on-raspbian-stretch/
+	
+	l2cap linux->ios
+	https://stackoverflow.com/questions/55608145/l2cap-ios-linux-bluez
+	
+	l2cap語ios不能直接使用
+	https://www.raspberrypi.org/forums/viewtopic.php?t=232363
+	
+12/9
+	可以動的commit: 7e2c3f357e3e59519dc2196343ad36de8fd75209 在branch origin/SwitchSample
+	不過因為這版還沒寫小節資訊，所以要把SimpleSmDecoder.cpp 255行加上
+	case -4:
+				return 0;
+				break;
+	避免小節資訊讓程式當掉
+	
+	btstack用法
+	https://bluekitchen-gmbh.com/btstack/ports/existing_ports/index.html#sec:raspiPort
+	
+12/15
+
+	藍芽寫程式
+	https://blog.csdn.net/kobbee9/article/details/7751372
+	https://www.jianshu.com/p/6466eafd24e1
+	
+	暫時用bleconfd來試試看怎麼寫ble城市
+	
+12/16
+	另外搜尋 dbus ble example，會找到 gattlib
+	https://github.com/labapart/gattlib/
+	應該滿有參考價值的
+	
+	server端用btstack的gatt_streamer_server，client端用gattlib的ble_scan才免強搜尋得到，server端如果用bluez根本搜部到
+	 
+	用bluez的Gatt時記得要打指令 sudo hciconfig hci0 leadv 0
+	https://scribles.net/running-ble-gatt-server-example-on-raspbian-stretch/
+	
+	因為gattlib沒有server的example，所以改從bleconfd下手
+	
+12/17
+	仔細看了bleconfd的code，大概可以看出整個gatt server設定的流程
+	
+	首先是建立gatt server
+	gatt server init->
+		listen client fd = socket(PF_BLUETOOTH, SOCK_SEQPACKET, BTPROTO_L2CAP);
+		listen(listen client fd, 2);
+	
+	然後要accept client
+	gatt server.accept->
+		mainloop_init();
+		fd = accept(listen client fd)
+		new gatt client(fd)
+		
+	然後再init client
+	gatt client.init()->
+		att = bt_att_new(fd);
+		db = bt_db_new();
+		server = bt_gatt_server_new(db, att, mtu);
+		mainloop_add_timeout(1000, on time out);
+		
+	最後建立整個gatt server
+	buildGattBatabase()->
+		buildGapService()
+		buildGattService()
+		buildDeviceInfoCharacteristics()
+		
+		
+
+		
+		

@@ -3,15 +3,17 @@
 
 #include <functional>
 #include "../../../Util/DataStructure/ActionList.h"
-#include "../../Host/GameHost.h"
+#include "../../../Framework/Host/GameHost.h"
+#include "../../Users/User.h"
 
 
 using namespace std;
 using namespace Util::DataStructure;
 using namespace Framework::Host;
+using namespace Games::Users;
 
 
-namespace Framework {
+namespace Games {
 namespace IO{
 namespace Api{
 
@@ -46,6 +48,8 @@ namespace Api{
 	protected:
 
 		GameHost* gameHost = nullptr;
+
+		User* user = nullptr;
 
 		ActionList<int, string> onStartWritingSmFile;
 		ActionList<int, string> onWriteSmFileSuccess;

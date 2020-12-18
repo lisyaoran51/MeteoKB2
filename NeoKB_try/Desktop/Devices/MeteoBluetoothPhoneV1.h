@@ -59,6 +59,8 @@ namespace Devices {
 
 		MeteoBluetoothPhoneV1(PacketConverter<MeteoCommand>* pConverter);
 
+		int Initialize();
+
 		InputState* GetBluetoothState();
 
 		int PushOutputMessage(OutputMessage* outputMessage);

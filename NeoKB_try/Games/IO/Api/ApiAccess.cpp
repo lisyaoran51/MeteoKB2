@@ -1,8 +1,8 @@
 #include "ApiAccess.h"
 
-#include "../BluetoothPhone.h"
+#include "../../../Framework/Devices/BluetoothDevice.h"
 
-using namespace Framework::IO::Api;
+using namespace Games::IO::Api;
 using namespace Framework::IO;
 
 

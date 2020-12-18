@@ -54,7 +54,6 @@
     <ClCompile Include="Framework\Input\Handler\TestCaseKeyboardInputHandler.cpp" />
     <ClCompile Include="Framework\Input\KeyBindings\HasInputKey.cpp" />
     <ClCompile Include="Framework\Input\KeyBindings\KeyBindingStore.cpp" />
-    <ClCompile Include="Framework\IO\Api\ApiAccess.cpp" />
     <ClCompile Include="Framework\IO\FileReader.cpp" />
     <ClCompile Include="Framework\IO\FileStore.cpp" />
     <ClCompile Include="Framework\IO\PlatformStorage.cpp" />
@@ -69,6 +68,7 @@
     <ClCompile Include="Games\Configurations\MeteoConfigManager.cpp" />
     <ClCompile Include="Games\Input\Commands\MeteoAckFileBluetoothCommand.cpp" />
     <ClCompile Include="Games\Input\Commands\MeteoBluetoothCommand.cpp" />
+    <ClCompile Include="Games\IO\Api\ApiAccess.cpp" />
     <ClCompile Include="Games\MeteoGame.cpp" />
     <ClCompile Include="Games\Graphic\Renderer\MapAlgorithm\HardwareMapAlgorithm.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
@@ -378,7 +378,6 @@
     <ClInclude Include="Framework\Input\Commands\CommandInputManager.h" />
     <ClInclude Include="Framework\Input\KeyBindings\HasInputKey.h" />
     <ClInclude Include="Framework\Input\KeyBindings\KeyBindingStore.h" />
-    <ClInclude Include="Framework\IO\Api\ApiAccess.h" />
     <ClInclude Include="Framework\IO\FileAccess.h" />
     <ClInclude Include="Framework\IO\FileInfo.h" />
     <ClInclude Include="Framework\IO\FileMode.h" />
@@ -411,6 +410,7 @@
     <ClInclude Include="Games\Input\Commands\MeteoAckFileBluetoothCommand.h" />
     <ClInclude Include="Games\Input\Commands\MeteoBluetoothCommand.h" />
     <ClInclude Include="Games\Input\RulesetInputManager.h" />
+    <ClInclude Include="Games\IO\Api\ApiAccess.h" />
     <ClInclude Include="Games\MeteoGame.h" />
     <ClInclude Include="Games\MeteoGameBase.h" />
     <ClInclude Include="Games\Output\Bluetooths\Commands\MeteoOutputFileBluetoothCommand.h" />

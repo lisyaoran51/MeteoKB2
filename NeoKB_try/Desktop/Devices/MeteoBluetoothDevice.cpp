@@ -6,6 +6,7 @@ using namespace Desktop::Devices;
 MeteoBluetoothDevice::MeteoBluetoothDevice(MeteoBluetoothPhoneV1 * mBluetoothPhone)
 {
 	meteoBluetoothPhone = mBluetoothPhone;
+	mBluetoothPhone->Initialize();
 }
 
 int MeteoBluetoothDevice::AddOnStartWritingSmFile(MtoObject * callableObject, function<int(string)> callback, string name)

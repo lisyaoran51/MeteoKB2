@@ -30,14 +30,17 @@ MeteoBluetoothPhoneV1::MeteoBluetoothPhoneV1(PacketConverter<MeteoCommand>* pCon
 {
 	packetConverter = pConverter;
 
+}
+
+int MeteoBluetoothPhoneV1::Initialize()
+{
 	bluetoothState = new InputState();
 	bluetoothState->SetBluetoothState(new BluetoothState());
 
 
 	thread t(&MeteoBluetoothPhoneV1::work, this);
 	t.detach();
-
-
+	return 0;
 }
 
 InputState * MeteoBluetoothPhoneV1::GetBluetoothState()
