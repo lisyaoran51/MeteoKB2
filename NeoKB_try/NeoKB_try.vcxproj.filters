@@ -832,6 +832,12 @@
     <Filter Include="標頭檔\Games\IO\Api">
       <UniqueIdentifier>{b5749f8b-8c60-499f-89b9-6f9af08b1634}</UniqueIdentifier>
     </Filter>
+    <Filter Include="來源檔案\Framework\IO\Communications">
+      <UniqueIdentifier>{c9b7c1ae-9a52-4a2f-9ab3-d228aa09da8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Framework\IO\Communications">
+      <UniqueIdentifier>{423c9df2-99b2-4565-8f59-b008448de5f7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Games\Graphic\Renderer\renderer.cpp">
@@ -2922,6 +2928,18 @@
     </ClInclude>
     <ClInclude Include="Games\IO\Api\ApiAccess.h">
       <Filter>標頭檔\Games\IO\Api</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\IO\Communications\CommunicationAccess.h">
+      <Filter>標頭檔\Framework\IO\Communications</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\IO\Communications\CommunicationRequest.h">
+      <Filter>標頭檔\Framework\IO\Communications</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\IO\Communications\CommunicationComponent.h">
+      <Filter>標頭檔\Framework\IO\Communications</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\IO\Communications\CommunicationCollectionManager.h">
+      <Filter>標頭檔\Framework\IO\Communications</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

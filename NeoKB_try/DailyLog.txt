@@ -2383,6 +2383,62 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 		buildDeviceInfoCharacteristics()
 		
 		
+	bluez資源
+	https://blog.csdn.net/buyicn/article/details/77414067
+	
+	如果要用bluez裡面的notify去傳資料，bt_gatt_server_send_notification一次只能傳20 byte(不太確定)
+	要確定怎麼樣才能抓到mtu然後依次丟最大的資料量
+		
+		
+12/18
+	要compile gatt server之前，要先安裝bleconfd，然後在compile的時候加上-I/home/pi/bleconfd/build/deps/src/bluez，才能夠include到要用的header
+	
+	include的方法是在/home/pi/bleconfd/build/CMakeFiles/bleconfd.dir/flags.make找到的
+	
+	後來跳undefined reference，就想辦法把.o給link進去
+	
+	g++ Main.cpp -o test -I/home/pi/bleconfd/build/deps/src/bluez -lbluetooth /home/pi/bleconfd/build/deps/src/bluez/src/.libs/libshared-mainloop.a /home/pi/bleconfd/build/deps/src/bluez/lib/.libs/uuid.o
 
-		
-		
+	目前的程式(還沒有build gatt batabase，也沒有Start beacon)只要下sudo hciconfig hci0 leadv 0就可以被手機搜尋到
+	但是一connect就會斷線，程式也會跳出failed to create gatt server(跟mtu無關)
+	
+	目前暫時寫了一個gatt server，但是因為還沒加上callback，所以都不能read，只能連線
+	這個server用之前要先make一個bleconfd，再用bleconfd裡面的檔案來compile我們要的server
+	
+	看起來ble沒什麼問題，所以先回去寫遊戲主程式，不過之後還是要回來看怎麼修改mtu，這邊還沒寫到
+	
+12/19
+	
+	現在遊戲主程式有三種對外連線方式: bt gatt wifi，要把它們結合起來寫進output manager或是api access裡面
+	
+	osu的api access下面有接i online component，是再上線狀態更新的時候可以及時通知，例如上限以後聊天室窗就會開啟
+	
+	所有要向外連線的人，都要透過api access去丟request，api access有一個自己的thread把這些request queue給處理掉。
+	但是如果是要下載譜面，則會由request本身再開一個thread，然後去下載譜面，避免把所有其他request給卡住
+	
+	request都會友success和failure兩個事件可以註冊，download request則會多一個progress事件可以註冊
+	
+	以我的狀況，應該要用communication access當主要途徑，下面接api access、ble access、bt access等三種連線模式，根據request的種類再分配給下面的access去處理
+	
+	如果下載譜面同時可以使用api access或ble access，則讓communication access去溝通個個access的狀態，再讓access自己決定要不要接這個request。
+	request如果同時被兩個access街的話也可以跳錯誤
+	
+	感覺目前message的層級比request低一層，request可以包含很多message，然後在message傳遞後決定要執行succcess還是failure
+	
+	結論：
+	由communication access為主要收發資訊的中間點，繼承container(才能用update和scheduler)，下面接api access、bt access和ble access
+	每一個子access都有一個自己的thread，除非下載大檔案以外，不然傳送資料的時候都是用自己的thread把queue裡面的request一個一個丟出去
+	request也是分三種，不過可以同時virtual 繼承多種，例如下載譜檔可以用ble或wifi，傳送訊號可以用ble或bt
+	
+12/20
+	看起來communication access要去跟bluetooth phone做add on command時，可以直接從host去註冊，不過不是直接用add on command，應該是用其他的方式(如add on raw command、add on file progress等)
+	或是bt access可以直接對bluetooth phone註冊每一種request command的回傳command是什麼，就可以直接對該command註冊add on response
+	
+	bluetooth phone有自己的thread去隨時收發packet，不過communication access應該也要再自己開一個thread去處理queue上面的command，並且接到raw command時發送on success或on failed
+	
+	我要整理哪幾個message要包成request，通常是需要對方回傳資料的才需要包成request，
+	
+	確定下載譜檔要用request包，要思考一下藍芽要怎麼包成一個reuquest，應該還是packet converter把檔案組好以後，再丟到request去給request轉成檔案，用on success丟進去該放的位置。
+	packet converter要把組好的檔案轉成byte array才能丟到on success
+	
+	目前寫道communication request的success那邊
