@@ -14,11 +14,13 @@ namespace IO{
 namespace Communications{
 
 	template<typename T>
-	class CommunicationCollectionManager : public CommunicationComponent {
+	class CommunicationCollectionManager : public TCommunicationComponent<CommunicationRequest> {
 
 		mutable mutex itemMutex;
 
 	public:
+
+		CommunicationCollectionManager(GameHost* gHost) : TCommunicationComponent(gHost){}
 
 		int AddItem(T* item) {
 			RegisterItem(item);
@@ -50,14 +52,7 @@ namespace Communications{
 		/// 懶得寫action，所以還沒有用
 		/// </summary>
 		virtual int RegisterItem(T* item) {
-			item->SetClock(clock);
 
-			pendingActions.Add(this, [=]() {
-
-				item->AddAdjustmentDependency(this);
-
-				return 0;
-			}, "CommunicationCollectionManager::RegisterItemAdjustments");
 
 			return 0;
 		}

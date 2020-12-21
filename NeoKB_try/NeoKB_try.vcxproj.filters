@@ -838,6 +838,9 @@
     <Filter Include="標頭檔\Framework\IO\Communications">
       <UniqueIdentifier>{423c9df2-99b2-4565-8f59-b008448de5f7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="標頭檔\Games\IO\Communications">
+      <UniqueIdentifier>{f8ed896c-ff20-40f2-9677-2a72e4d09492}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Games\Graphic\Renderer\renderer.cpp">
@@ -1760,6 +1763,9 @@
     </ClCompile>
     <ClCompile Include="Games\IO\Api\ApiAccess.cpp">
       <Filter>來源檔案\Games\IO\Api</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\IO\Communications\CommunicationAccess.cpp">
+      <Filter>來源檔案\Framework\IO\Communications</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2940,6 +2946,12 @@
     </ClInclude>
     <ClInclude Include="Framework\IO\Communications\CommunicationCollectionManager.h">
       <Filter>標頭檔\Framework\IO\Communications</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\IO\BleAccess.h">
+      <Filter>標頭檔\Games\IO\Communications</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\IO\BluetoothAccess.h">
+      <Filter>標頭檔\Games\IO\Communications</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

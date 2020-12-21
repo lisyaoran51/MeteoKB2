@@ -24,8 +24,14 @@ namespace Communications{
 
 		CommunicationAccess(GameHost* gHost);
 
+		/// <summary>
+		/// 把request丟給下面所有component，如果有component可以接，就會跑
+		/// </summary>
+		virtual int Queue(CommunicationRequest* communicationRequest);
+
 	protected:
 
+		
 
 	};
 

@@ -2442,3 +2442,25 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 	packet converter要把組好的檔案轉成byte array才能丟到on success
 	
 	目前寫道communication request的success那邊
+	
+12/21
+	communication access的連接方式跟output manager不一樣，他是直接接到連接工具上，例如ble、wifi等，不會再透過driver-device的分層。這樣可以即時的獲得device資訊
+	不會有延遲的狀況。
+	
+	會出現現在的問題，主要是原本device-driver設計裡面只有設計input、output兩種溝通方式，正常driver應該還有ioctl、中斷(callback)等溝通方式，但是那樣架構又會更龐大
+	
+	目前如果要鮮血一個輕量的韌體，就直接把communication access連到硬體就好，就不要再做芬曾了。目前的韌體也沒必要做到有這麼強的延展性。直接從gamehost去拿
+	
+	其實應該可以，就不要接input handler就好，直接把bt access和ble access接到bluetooth phone的on command，然後bluetooth command直接把所有command全都往下丟，不用分json、file
+	這樣access就不會有延遲，可以立刻抓到進來的封包，然後做每種request對應的callback
+	
+	output的時候應該要繞過outputer、output manager，直接對pluetooth phone做push message，就可以不用拿output manager，直接丟要丟的東西給bluetooth phone了
+	
+	不過bluetooth phone還是會有在傳檔的時候block的狀況，所以push message以後應該是bt device要對不同的message做分流，檔案的message較不優先，一班json的message優先，才不會一傳檔就block
+	
+	另外收到檔案的那一方就不要再發ack了，這樣會雙向同時都滿載
+	
+	接下來:
+	把bluetooth access接到bluetooth phone，ble access接到ble phone，wifi暫時不寫。request也要寫
+	
+	
