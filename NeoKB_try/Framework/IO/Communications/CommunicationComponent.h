@@ -4,14 +4,17 @@
 
 
 #include "../../../Framework/Host/GameHost.h"
+#include "../../../Framework/Timing/StopwatchClock.h"
 #include <deque>
 #include "../../../Framework/Allocation/Hierachal/MtoObject.h"
+#include "CommunicationRequest.h"
 
 
 
 using namespace Framework::Host;
 using namespace std;
 using namespace Framework::Allocation::Hierachal;
+using namespace Framework::Timing;
 
 
 namespace Framework {
@@ -42,7 +45,23 @@ namespace Communications{
 
 		GameThread* GetCommunicationThread();
 
+		int SetSourceClock(StopwatchClock* sClock);
+
+		StopwatchClock* GetSourceClock();
+
+		int InitializeFramedClockAndScheduler();
+
+		FrameBasedClock* GetFramedClock();
+
+		Scheduler* GetScheduler();
+
 	protected:
+
+		StopwatchClock* sourceClock = nullptr;
+
+		FrameBasedClock* framedClock = nullptr;
+
+		Scheduler* scheduler = nullptr;
 
 		GameHost* host = nullptr;
 

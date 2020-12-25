@@ -52,6 +52,15 @@ namespace IO {
 			return 0;
 		}
 
+		template<class _Type>
+		int AddOnRawCommand(_Type* callableObject, function<int(InputState*)> callback, string name = "HandleRawCommand") {
+
+			LOG(LogLevel::Fine) << "BluetoothPhone::AddOnRawCommand() : register handler into list.";
+
+			OnRawCommand.Add(callableObject, callback, name);
+			return 0;
+		}
+
 		/// <summary>
 		/// 寫入sm檔時的callback
 		/// </summary>
@@ -76,7 +85,15 @@ namespace IO {
 
 	private:
 
+		/// <summary>
+		/// 一般json con non message的時候用這個
+		/// </summary>
 		ActionList<int, InputState*> OnCommand;
+
+		/// <summary>
+		/// 所有message都用這個，例如file、json、con、ack、non、ret
+		/// </summary>
+		ActionList<int, InputState*> OnRawCommand;
 
 
 	};

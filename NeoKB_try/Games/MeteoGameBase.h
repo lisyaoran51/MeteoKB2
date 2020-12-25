@@ -10,6 +10,7 @@
 #include "Configurations/MeteoConfigManager.h"
 #include "../Util/DataStructure/BindablePointer.h"
 #include "../Framework/IO/Api/ApiAccess.h"
+#include "../Framework/IO/Communications/CommunicationAccess.h"
 
 
 using namespace Framework;
@@ -17,6 +18,7 @@ using namespace Framework::Scenes;
 using namespace Games::Scenes::Interlude;
 using namespace Framework::Input::KeyBindings;
 using namespace Framework::IO;
+using namespace Framework::IO::Communications;
 using namespace Framework::Database;
 using namespace Games::Configurations;
 using namespace Util::DataStructure;
@@ -49,6 +51,8 @@ namespace Games {
 	protected:
 
 		ApiAccess* apiAccess = nullptr;
+
+		CommunicationAccess* communicationAccess = nullptr;
 
 		RulesetStore* rulesetStore = nullptr;
 

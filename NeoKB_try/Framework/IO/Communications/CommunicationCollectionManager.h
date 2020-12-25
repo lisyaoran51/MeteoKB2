@@ -20,7 +20,9 @@ namespace Communications{
 
 	public:
 
-		CommunicationCollectionManager(GameHost* gHost) : TCommunicationComponent(gHost){}
+		CommunicationCollectionManager(GameHost* gHost) : TCommunicationComponent(gHost){
+			sourceClock = new StopwatchClock();
+		}
 
 		int AddItem(T* item) {
 			RegisterItem(item);
@@ -53,6 +55,8 @@ namespace Communications{
 		/// </summary>
 		virtual int RegisterItem(T* item) {
 
+			dynamic_cast<CommunicationComponent*>(item)->SetSourceClock(sourceClock);
+			dynamic_cast<CommunicationComponent*>(item)->InitializeFramedClockAndScheduler();
 
 			return 0;
 		}
@@ -98,7 +102,17 @@ namespace Communications{
 		}
 		*/
 
+		StopwatchClock* GetSourceClock();
+
+		FrameBasedClock* GetFramedClock();
+
+
 	protected:
+
+
+		StopwatchClock* sourceClock = nullptr;
+
+		FrameBasedClock* clock = nullptr;
 
 		bool isActive = true;
 

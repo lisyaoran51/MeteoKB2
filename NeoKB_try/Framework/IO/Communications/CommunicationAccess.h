@@ -3,7 +3,7 @@
 
 #include "CommunicationCollectionManager.h"
 #include "CommunicationRequest.h"
-#include "../../Allocation/Hierachal/Container.h"
+#include "../../Allocation/Hierachal/MtoObject.h"
 #include "../../../Framework/Host/GameHost.h"
 #include <deque>
 
@@ -18,7 +18,7 @@ namespace Framework {
 namespace IO{
 namespace Communications{
 
-	class CommunicationAccess : public Container, public CommunicationCollectionManager<CommunicationComponent> {
+	class CommunicationAccess : public MtoObject, public CommunicationCollectionManager<CommunicationComponent> {
 
 	public:
 
@@ -29,8 +29,8 @@ namespace Communications{
 		/// </summary>
 		virtual int Queue(CommunicationRequest* communicationRequest);
 
-	protected:
 
+	protected:
 		
 
 	};

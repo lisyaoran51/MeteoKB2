@@ -841,6 +841,12 @@
     <Filter Include="標頭檔\Games\IO\Communications">
       <UniqueIdentifier>{f8ed896c-ff20-40f2-9677-2a72e4d09492}</UniqueIdentifier>
     </Filter>
+    <Filter Include="標頭檔\Framework\IO\Communications\Api">
+      <UniqueIdentifier>{efe80039-80a7-4fbc-b4bc-831e25816103}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Games\IO\Communications">
+      <UniqueIdentifier>{028e2475-cf34-4838-aede-a8fe3d4bbe3d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Games\Graphic\Renderer\renderer.cpp">
@@ -1765,6 +1771,12 @@
       <Filter>來源檔案\Games\IO\Api</Filter>
     </ClCompile>
     <ClCompile Include="Framework\IO\Communications\CommunicationAccess.cpp">
+      <Filter>來源檔案\Framework\IO\Communications</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\IO\Communications\BleAccess.cpp">
+      <Filter>來源檔案\Games\IO\Communications</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\IO\Communications\CommunicationComponent.cpp">
       <Filter>來源檔案\Framework\IO\Communications</Filter>
     </ClCompile>
   </ItemGroup>
@@ -2947,10 +2959,19 @@
     <ClInclude Include="Framework\IO\Communications\CommunicationCollectionManager.h">
       <Filter>標頭檔\Framework\IO\Communications</Filter>
     </ClInclude>
-    <ClInclude Include="Games\IO\BleAccess.h">
+    <ClInclude Include="Games\IO\Communications\BleAccess.h">
       <Filter>標頭檔\Games\IO\Communications</Filter>
     </ClInclude>
-    <ClInclude Include="Games\IO\BluetoothAccess.h">
+    <ClInclude Include="Games\IO\Communications\BleRequest.h">
+      <Filter>標頭檔\Games\IO\Communications</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\IO\Communications\BtClassicAccess.h">
+      <Filter>標頭檔\Games\IO\Communications</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\IO\Communications\BtClassicRequest.h">
+      <Filter>標頭檔\Games\IO\Communications</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\IO\Communications\ApiRequest.h">
       <Filter>標頭檔\Games\IO\Communications</Filter>
     </ClInclude>
   </ItemGroup>

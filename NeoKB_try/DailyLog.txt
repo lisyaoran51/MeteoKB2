@@ -2464,3 +2464,9 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 	把bluetooth access接到bluetooth phone，ble access接到ble phone，wifi暫時不寫。request也要寫
 	
 	
+12/25
+	input handler和access的順序是：game host先在run的時候把input handler都跟driver接好，然後在boot scene graph的時候再new gamebase，這時才會new access然後cache。
+	
+	所以input handler是拿不到access的，也沒有辦法把訊號統一收到access，再一起丟到input manager去。只能handler自己收自己要的，access也自己收自己要的。
+	
+	寫起來有點卡關，先想辦法把ble access寫完再說

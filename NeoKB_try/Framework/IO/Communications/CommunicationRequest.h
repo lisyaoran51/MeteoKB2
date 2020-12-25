@@ -15,6 +15,8 @@ namespace Framework {
 namespace IO{
 namespace Communications{
 
+	class CommunicationComponent;
+
 	class CommunicationRequest;
 
 	class CommunicationRequest {
@@ -36,6 +38,8 @@ namespace Communications{
 		/// 然後再執行
 		/// </summary>
 		virtual int ChooseCommunicationComponentAndPerform() = 0;
+
+		virtual int Perform(CommunicationComponent* communicationComponent) = 0;
 
 		int AddOnSuccess(MtoObject * callableObject, function<int()> callback, string name);
 
@@ -76,7 +80,7 @@ namespace Communications{
 	};
 
 	template<typename T>
-	class TCommunicationRequest : public CommunicationRequest {
+	class TCommunicationRequest : virtual public CommunicationRequest {
 
 	public:
 
