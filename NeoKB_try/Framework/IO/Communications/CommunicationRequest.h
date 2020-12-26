@@ -4,11 +4,18 @@
 
 #include <chrono>
 #include <deque>
+#include <exception>
+#include "../../Allocation/Hierachal/MtoObject.h"
+#include <functional>
+#include "../../../Util/DataStructure/ActionList.h"
+#include <map>
 
 
 
 using namespace std::chrono;
-
+using namespace std;
+using namespace Framework::Allocation::Hierachal;
+using namespace Util::DataStructure;
 
 
 namespace Framework {
@@ -18,6 +25,10 @@ namespace Communications{
 	class CommunicationComponent;
 
 	class CommunicationRequest;
+
+	class CommunicationRequestException : public exception {
+
+	};
 
 	class CommunicationRequest {
 
@@ -39,7 +50,9 @@ namespace Communications{
 		/// </summary>
 		virtual int ChooseCommunicationComponentAndPerform() = 0;
 
-		virtual int Perform(CommunicationComponent* communicationComponent) = 0;
+		virtual int Perform(CommunicationComponent* cComponent) = 0;
+
+		virtual int Fail(CommunicationRequestException& communicationRequestException);
 
 		int AddOnSuccess(MtoObject * callableObject, function<int()> callback, string name);
 
@@ -70,11 +83,17 @@ namespace Communications{
 		/// </summary>
 		int tryCountLeft = 3;
 
+		int retryCount = 0;
+
+		CommunicationComponent* communicationComponent = nullptr;
+
 		ActionList<int> onSuccess;
 
 		ActionList<int> onFailed;
 
 		ActionList<int> onCancelled;
+
+		virtual int fail(CommunicationRequestException& communicationRequestException) = 0;
 
 
 	};

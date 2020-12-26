@@ -69,6 +69,11 @@ int GameThread::SetIsActive(bool value)
 	return 0;
 }
 
+bool GameThread::GetIsActive()
+{
+	return isActive;
+}
+
 int GameThread::runWork()
 {
 	this_thread::sleep_for(chrono::milliseconds(1000));

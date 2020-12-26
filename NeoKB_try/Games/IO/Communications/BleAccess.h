@@ -28,6 +28,8 @@ namespace Communications{
 
 		BluetoothPhone* bluetoothPhone = nullptr;
 
+		virtual int run();
+
 		/// <summary>
 		/// 這邊要用strategy處理wifi和ble同時處理的問題
 		/// </summary>

@@ -1779,6 +1779,12 @@
     <ClCompile Include="Framework\IO\Communications\CommunicationComponent.cpp">
       <Filter>來源檔案\Framework\IO\Communications</Filter>
     </ClCompile>
+    <ClCompile Include="Framework\IO\Communications\CommunicationRequest.cpp">
+      <Filter>來源檔案\Framework\IO\Communications</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\IO\Communications\BleRequest.cpp">
+      <Filter>來源檔案\Games\IO\Communications</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="DailyLog.txt">

@@ -48,6 +48,8 @@ namespace Threading {
 
 		int SetIsActive(bool value);
 
+		bool GetIsActive();
+
 
 	protected:
 

@@ -56,6 +56,7 @@
     <ClCompile Include="Framework\Input\KeyBindings\KeyBindingStore.cpp" />
     <ClCompile Include="Framework\IO\Communications\CommunicationAccess.cpp" />
     <ClCompile Include="Framework\IO\Communications\CommunicationComponent.cpp" />
+    <ClCompile Include="Framework\IO\Communications\CommunicationRequest.cpp" />
     <ClCompile Include="Framework\IO\FileReader.cpp" />
     <ClCompile Include="Framework\IO\FileStore.cpp" />
     <ClCompile Include="Framework\IO\PlatformStorage.cpp" />
@@ -72,6 +73,7 @@
     <ClCompile Include="Games\Input\Commands\MeteoBluetoothCommand.cpp" />
     <ClCompile Include="Games\IO\Api\ApiAccess.cpp" />
     <ClCompile Include="Games\IO\Communications\BleAccess.cpp" />
+    <ClCompile Include="Games\IO\Communications\BleRequest.cpp" />
     <ClCompile Include="Games\MeteoGame.cpp" />
     <ClCompile Include="Games\Graphic\Renderer\MapAlgorithm\HardwareMapAlgorithm.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>

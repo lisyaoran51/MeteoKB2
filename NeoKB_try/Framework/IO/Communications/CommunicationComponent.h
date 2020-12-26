@@ -23,6 +23,7 @@ namespace Communications{
 
 	enum class CommunicationState {
 		None,
+		Offline,
 		Listening,
 		Connecting,
 		Connected,
@@ -73,7 +74,9 @@ namespace Communications{
 		/// </summary>
 		GameThread* communicationThread = nullptr;
 
-		int run();
+		int failureCount = 0;
+
+		virtual int run();
 
 		/// <summary>
 		/// 這邊要用strategy處理wifi和ble同時處理的問題

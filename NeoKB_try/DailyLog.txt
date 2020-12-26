@@ -2470,3 +2470,6 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 	所以input handler是拿不到access的，也沒有辦法把訊號統一收到access，再一起丟到input manager去。只能handler自己收自己要的，access也自己收自己要的。
 	
 	寫起來有點卡關，先想辦法把ble access寫完再說
+	
+12/26
+	寫到BleRequest::Perform，要寫丟訊號出去然後收訊號
