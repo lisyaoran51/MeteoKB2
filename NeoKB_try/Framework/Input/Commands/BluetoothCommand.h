@@ -23,15 +23,23 @@ namespace Commands{
 
 		virtual bool EqualTo(BluetoothCommand* other);
 
-		json& GetContext();
-
 		virtual BluetoothCommand* Clone();
+
+		/// <summary>
+		/// 要不要包含\0 ?
+		/// </summary>
+		int GetContextSize();
 
 	protected:
 
 		string commandName;
 
-		json context;
+		char* context = nullptr;
+
+		/// <summary>
+		/// 要不要包含\0 ?
+		/// </summary>
+		int contextSize = -1;
 
 	};
 
@@ -39,11 +47,6 @@ namespace Commands{
 	class TBluetoothCommand : public BluetoothCommand {
 
 	public:
-
-		TBluetoothCommand(T c, json text) {
-			command = c;
-			context = text;
-		}
 
 		TBluetoothCommand(T c) {
 			command = c;

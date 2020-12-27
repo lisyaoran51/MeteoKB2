@@ -47,6 +47,15 @@ Scheduler * CommunicationComponent::GetScheduler()
 	return scheduler;
 }
 
+int CommunicationComponent::Update()
+{
+	if (scheduler != nullptr) {
+		scheduler->Update();
+	}
+
+	return 0;
+}
+
 int CommunicationComponent::run()
 {
 

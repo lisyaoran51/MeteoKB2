@@ -40,10 +40,6 @@ namespace Communications{
 
 		CommunicationState GetCommunicationState();
 
-		virtual int Queue(CommunicationRequest*) = 0;
-
-		virtual int Flush() = 0;
-
 		GameThread* GetCommunicationThread();
 
 		int SetSourceClock(StopwatchClock* sClock);
@@ -55,6 +51,15 @@ namespace Communications{
 		FrameBasedClock* GetFramedClock();
 
 		Scheduler* GetScheduler();
+
+		virtual int Queue(CommunicationRequest*) = 0;
+
+		virtual int Flush() = 0;
+
+		/// <summary>
+		/// 執行scheduler的代辦工作
+		/// </summary>
+		virtual int Update();
 
 	protected:
 

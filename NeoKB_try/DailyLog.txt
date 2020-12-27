@@ -2473,3 +2473,8 @@ time after play(us):15510, real play time:19954.6 ->>程┑筐5ms琌ぃび非
 	
 12/26
 	糶BleRequest::Perform璶糶メ癟腹礛Μ癟腹
+	
+12/27
+	ヘ玡璶рbluetooth command讽Θble request篶把计┮璶糶bluetooth commandрfile㎝text常bluetooth command
+	ぇрble requestmethodstrategy糶Ч
+	

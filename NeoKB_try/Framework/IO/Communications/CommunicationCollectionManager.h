@@ -24,6 +24,13 @@ namespace Communications{
 			sourceClock = new StopwatchClock();
 		}
 
+		virtual int Update() {
+			CommunicationComponent::Update();
+			for (int i = 0; i < items.size(); i++) {
+				items[i]->Update();
+			}
+		}
+
 		int AddItem(T* item) {
 			RegisterItem(item);
 			AddItemToList(item);

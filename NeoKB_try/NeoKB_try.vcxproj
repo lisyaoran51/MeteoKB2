@@ -418,6 +418,9 @@
     </ClInclude>
     <ClInclude Include="Games\Input\Commands\MeteoAckFileBluetoothCommand.h" />
     <ClInclude Include="Games\Input\Commands\MeteoBluetoothCommand.h" />
+    <ClInclude Include="Games\Input\Commands\MeteoCommand.h" />
+    <ClInclude Include="Games\Input\Commands\MeteoFileBluetoothCommand.h" />
+    <ClInclude Include="Games\Input\Commands\MeteoTextBluetoothCommand.h" />
     <ClInclude Include="Games\Input\RulesetInputManager.h" />
     <ClInclude Include="Games\IO\Api\ApiAccess.h" />
     <ClInclude Include="Games\IO\Communications\ApiRequest.h" />
