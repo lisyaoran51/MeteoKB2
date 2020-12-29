@@ -22,6 +22,13 @@ deque<BluetoothCommand*>& BleAccess::GetInputRawCommand()
 	return inputRawCommand;
 }
 
+int BleAccess::GetMtu()
+{
+	// TODO: 確定notify怎麼運作以後再來把這段補完
+	// ios 舊版mtu158，新版185，抓個整數156(扣掉標頭28以後剛好是128)
+	return 156;
+}
+
 int BleAccess::run()
 {
 	switch (communicationState) {

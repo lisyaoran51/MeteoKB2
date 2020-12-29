@@ -4,10 +4,11 @@
 
 #include "../../../Framework/IO/Communications/CommunicationComponent.h"
 #include "BleRequest.h"
+#include "../../../Framework/IO/BluetoothPhone.h"
 
 
 using namespace Framework::IO::Communications;
-
+using namespace Framework::IO;
 
 
 namespace Games {
@@ -27,6 +28,11 @@ namespace Communications{
 		Peripheral* GetPeripheral();
 
 		deque<BluetoothCommand*>& GetInputRawCommand();
+
+		/// <summary>
+		/// 拿到目前設定的mtu，這個還要確認norify是怎麼運作才知道能不能這樣寫
+		/// </summary>
+		int GetMtu();
 
 	protected:
 

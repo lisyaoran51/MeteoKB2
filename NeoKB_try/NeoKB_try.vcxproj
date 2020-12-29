@@ -74,6 +74,7 @@
     <ClCompile Include="Games\IO\Api\ApiAccess.cpp" />
     <ClCompile Include="Games\IO\Communications\BleAccess.cpp" />
     <ClCompile Include="Games\IO\Communications\BleRequest.cpp" />
+    <ClCompile Include="Games\IO\Communications\BleRequestException.cpp" />
     <ClCompile Include="Games\MeteoGame.cpp" />
     <ClCompile Include="Games\Graphic\Renderer\MapAlgorithm\HardwareMapAlgorithm.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
@@ -426,6 +427,7 @@
     <ClInclude Include="Games\IO\Communications\ApiRequest.h" />
     <ClInclude Include="Games\IO\Communications\BleAccess.h" />
     <ClInclude Include="Games\IO\Communications\BleRequest.h" />
+    <ClInclude Include="Games\IO\Communications\BleRequestException.h" />
     <ClInclude Include="Games\IO\Communications\BtClassicAccess.h" />
     <ClInclude Include="Games\IO\Communications\BtClassicRequest.h" />
     <ClInclude Include="Games\MeteoGame.h" />

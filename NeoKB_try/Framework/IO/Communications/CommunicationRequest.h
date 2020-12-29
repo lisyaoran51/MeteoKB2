@@ -24,8 +24,6 @@ namespace Communications{
 
 	class CommunicationComponent;
 
-	class CommunicationRequest;
-
 	class CommunicationRequestException : public exception {
 
 	};

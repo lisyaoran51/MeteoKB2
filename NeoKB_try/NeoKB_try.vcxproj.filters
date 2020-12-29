@@ -1785,6 +1785,9 @@
     <ClCompile Include="Games\IO\Communications\BleRequest.cpp">
       <Filter>來源檔案\Games\IO\Communications</Filter>
     </ClCompile>
+    <ClCompile Include="Games\IO\Communications\BleRequestException.cpp">
+      <Filter>來源檔案\Games\IO\Communications</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="DailyLog.txt">
@@ -2991,6 +2994,9 @@
     </ClInclude>
     <ClInclude Include="Games\Output\Bluetooths\MeteoFileSegmentBluetoothMessage.h">
       <Filter>標頭檔\Games\Output\Bluetooths</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\IO\Communications\BleRequestException.h">
+      <Filter>標頭檔\Games\IO\Communications</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

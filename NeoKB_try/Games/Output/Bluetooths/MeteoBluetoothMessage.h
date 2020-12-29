@@ -3,7 +3,7 @@
 
 
 #include "../../../Framework/Output/Bluetooths/BluetoothMessage.h"
-#include "../../Input/Commands/MeteoBluetoothCommand.h"
+#include "../../Input/Commands/MeteoCommand.h"
 
 
 using namespace Framework::Output::Bluetooths;
