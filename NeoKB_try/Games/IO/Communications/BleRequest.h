@@ -241,6 +241,8 @@ namespace Communications{
 
 	public:
 
+		BleRequestException(BleResponseCode bResponseCode);
+
 		BleResponseCode GetBleResponseCode();
 
 	protected:
@@ -248,6 +250,8 @@ namespace Communications{
 		BleResponseCode bleResponseCode = BleResponseCode::None;
 
 	};
+
+
 
 	class BleRequest : virtual public CommunicationRequest {
 
@@ -257,6 +261,7 @@ namespace Communications{
 
 	protected:
 
+
 		BleRequestMethodType requestMethodType = BleRequestMethodType::None;
 
 		class BleRequestMethod;
@@ -265,12 +270,17 @@ namespace Communications{
 
 
 
+		/* ------------- BleBinaryRequest用的儲存檔案的map ------------- */
+
+		class BleBinaryRequestFileSegmentMap;
+
+
 		/* ------------- BleRequestMethod ------------- */
 
 		class BleRequestMethod {
 		public:
 
-			virtual int PerformAndWait() = 0;
+			virtual int PerformAndWait(BleRequest* thisRequest) = 0;
 
 		};
 
@@ -284,22 +294,29 @@ namespace Communications{
 			/// <summary>
 			/// 不用回傳的建構子(no ack) 
 			/// </summary>
-			PostTextBleRequestMethod(MeteoBluetoothCommand& pMessage);
+			PostTextBleRequestMethod(MeteoBluetoothCommand* pMessage);
 
 			/// <summary>
 			/// 要回傳的建構子
 			/// </summary>
-			PostTextBleRequestMethod(MeteoBluetoothCommand& pMessage, MeteoCommand aCommand);
+			PostTextBleRequestMethod(MeteoBluetoothCommand* pMessage, MeteoCommand aCommand);
 
-			virtual int PerformAndWait();
+			virtual int PerformAndWait(BleRequest* thisRequest);
+
+			int AddOnAck(MtoObject * callableObject, function<int(json)> callback, string name = "HandleAck");
 
 		protected:
 
-			MeteoBluetoothCommand& postMessage;
+			/// <summary>
+			/// 這個在Request裡面new delete，
+			/// </summary>
+			MeteoBluetoothCommand* postMessage;
 
 			MeteoCommand ackCommand = MeteoCommand::None;
 
 			bool isNeedCheckAck = true;
+
+			ActionList<int, json> onAck;
 
 		};
 
@@ -319,7 +336,7 @@ namespace Communications{
 										MeteoCommand rRetransferCommand, 
 										MeteoCommand aFinishCommand);
 
-			virtual int PerformAndWait();
+			virtual int PerformAndWait(BleRequest* thisRequest);
 
 		protected:
 
@@ -328,6 +345,8 @@ namespace Communications{
 			MeteoCommand finishCommand = MeteoCommand::None;
 			MeteoCommand requestRetransferCommand = MeteoCommand::None;
 			MeteoCommand ackFinishCommand = MeteoCommand::None;
+
+			BleBinaryRequestFileSegmentMap* fileMap = nullptr;
 
 		};
 
@@ -343,7 +362,7 @@ namespace Communications{
 			/// </summary>
 			GetTextBleRequestMethod(MeteoBluetoothCommand& gMessage, MeteoCommand rCommand);
 
-			virtual int PerformAndWait();
+			virtual int PerformAndWait(BleRequest* thisRequest);
 
 			string GetReturnText();
 
@@ -376,7 +395,7 @@ namespace Communications{
 				MeteoCommand rRetransferCommand,
 				MeteoCommand aFinishCommand);
 
-			virtual int PerformAndWait();
+			virtual int PerformAndWait(BleRequest* thisRequest);
 
 		protected:
 
@@ -393,11 +412,25 @@ namespace Communications{
 
 			string fileName = "";
 
-
+			BleBinaryRequestFileSegmentMap* fileSegmentMap = nullptr;
 
 		};
 
 
+		/* ------------- BleRequestMethod ------------- */
+
+		/// <summary>
+		/// 用一個map來讓ble收到的檔案片段連接成一個完整的檔案
+		/// </summary>
+		class BleBinaryRequestFileSegmentMap {
+		public:
+			~BleBinaryRequestFileSegmentMap();
+
+			string fileName;
+			map<int, pair<char*, int>> fileSegmentMap;
+			int segmentAmount;
+			bool CheckFullFilled();
+			int WriteFile(fstream* fStream);
 
 	};
 

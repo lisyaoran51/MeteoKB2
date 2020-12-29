@@ -24,6 +24,8 @@ namespace Commands{
 
 		virtual BluetoothCommand* Clone();
 
+		json GetContextInJson();
+
 	};
 
 }}}

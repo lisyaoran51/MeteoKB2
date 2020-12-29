@@ -55,7 +55,7 @@ namespace IO {
 		template<class _Type>
 		int AddOnRawCommand(_Type* callableObject, function<int(InputState*)> callback, string name = "HandleRawCommand") {
 
-			LOG(LogLevel::Fine) << "BluetoothPhone::AddOnRawCommand() : register handler into list.";
+			LOG(LogLevel::Fine) << "BluetoothPhone::AddOnRawCommand() : register ble access into list.";
 
 			OnRawCommand.Add(callableObject, callback, name);
 			return 0;

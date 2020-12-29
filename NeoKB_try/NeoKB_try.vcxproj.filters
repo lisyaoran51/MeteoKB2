@@ -2989,6 +2989,9 @@
     <ClInclude Include="Games\Input\Commands\MeteoTextBluetoothCommand.h">
       <Filter>標頭檔\Games\Input\Commands</Filter>
     </ClInclude>
+    <ClInclude Include="Games\Output\Bluetooths\MeteoFileSegmentBluetoothMessage.h">
+      <Filter>標頭檔\Games\Output\Bluetooths</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Makefile">

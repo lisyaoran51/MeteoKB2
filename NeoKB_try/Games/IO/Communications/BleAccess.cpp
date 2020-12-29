@@ -7,6 +7,19 @@ using namespace Games::IO::Communications;
 BleAccess::BleAccess(GameHost * gHost): TCommunicationComponent(gHost), RegisterType("BleAccess")
 {
 	bluetoothPhone = host->GetMainInterface()->GetBluetoothPhone();
+
+
+}
+
+Peripheral * BleAccess::GetPeripheral()
+{
+	return bluetoothPhone;
+}
+
+deque<BluetoothCommand*>& BleAccess::GetInputRawCommand()
+{
+	// TODO: 於此處插入傳回陳述式
+	return inputRawCommand;
 }
 
 int BleAccess::run()
@@ -75,6 +88,17 @@ int BleAccess::handleRequest(CommunicationRequest * communicationRequest)
 
 		communicationRequest->Fail(e);
 
+	}
+
+	return 0;
+}
+
+int BleAccess::handleOnRawCommand(InputState * inputState)
+{
+	if (inputState->GetBluetoothState()->GetCommands()->size() > 0) {
+		for (int i = 0; i < inputState->GetBluetoothState()->GetCommands()->size(); i++) {
+			inputRawCommand.push_front(inputState->GetBluetoothState()->GetCommands()->at(i)->Clone());
+		}
 	}
 
 	return 0;

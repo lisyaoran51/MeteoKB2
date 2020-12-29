@@ -33,13 +33,6 @@ namespace Communications{
 	class CommunicationRequest {
 
 
-		/// <summary>
-		/// 取得目前執行個體所測量的已耗用時間總和。(看stopwatch clock)
-		/// </summary>
-		long long getElapsedMicroseconds();
-
-		double getElapsedSeconds();
-
 	public:
 
 		int AddCommunicationComponentOption(string componentName, deque<CommunicationRequest*>* componentRequestQueue);
@@ -69,19 +62,19 @@ namespace Communications{
 		/// </summary>
 		map<string, deque<CommunicationRequest*>*> acceptedCommunicationComponentRequestQueues;
 
-		system_clock::time_point systemCurrentTime;
+		system_clock::time_point requestCurrentTime;
 
-		system_clock::time_point systemStartTime;
+		system_clock::time_point requestStartTime;
 
 		/// <summary>
-		/// 預設0.01秒就fail
+		/// 預設0.1秒就time out
 		/// </summary>
-		float timeout = 0.01;
+		float timeout = 0.1;
 
 		/// <summary>
 		/// 預設最多重連三次
 		/// </summary>
-		int tryCountLeft = 3;
+		int maxRetryCount = 3;
 
 		int retryCount = 0;
 
@@ -92,6 +85,18 @@ namespace Communications{
 		ActionList<int> onFailed;
 
 		ActionList<int> onCancelled;
+
+		/// <summary>
+		/// request開始計時
+		/// </summary>
+		int requestTimeStart();
+
+		/// <summary>
+		/// 取得目前執行個體所測量的已耗用時間總和。(看stopwatch clock)
+		/// </summary>
+		long long getElapsedMicroseconds();
+
+		double getElapsedSeconds();
 
 		virtual int fail(CommunicationRequestException& communicationRequestException) = 0;
 

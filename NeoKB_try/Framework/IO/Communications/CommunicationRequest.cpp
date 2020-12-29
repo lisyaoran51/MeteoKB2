@@ -6,9 +6,9 @@ using namespace Framework::IO::Communications;
 
 long long CommunicationRequest::getElapsedMicroseconds()
 {
-	systemCurrentTime = system_clock::now();
+	requestCurrentTime = system_clock::now();
 
-	return duration_cast<microseconds>(systemCurrentTime - systemStartTime).count();
+	return duration_cast<microseconds>(requestCurrentTime - requestStartTime).count();
 }
 
 double CommunicationRequest::getElapsedSeconds()
@@ -46,5 +46,12 @@ int CommunicationRequest::AddOnFailed(MtoObject * callableObject, function<int()
 int CommunicationRequest::AddOnCancelled(MtoObject * callableObject, function<int()> callback, string name)
 {
 	onCancelled.Add(callableObject, callback, name);
+	return 0;
+}
+
+int CommunicationRequest::requestTimeStart()
+{
+	requestStartTime = system_clock::now();
+
 	return 0;
 }

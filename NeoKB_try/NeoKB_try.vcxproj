@@ -435,6 +435,7 @@
     <ClInclude Include="Games\Output\Bluetooths\MeteoBluetoothOutputer.h" />
     <ClInclude Include="Games\Output\Bluetooths\MeteoContextBluetoothMessage.h" />
     <ClInclude Include="Games\Output\Bluetooths\MeteoFileBluetoothMessage.h" />
+    <ClInclude Include="Games\Output\Bluetooths\MeteoFileSegmentBluetoothMessage.h" />
     <ClInclude Include="Games\Ruleset\Judgements\HitResult.h" />
     <ClInclude Include="Games\Ruleset\Judgements\HitWindow.h" />
     <ClInclude Include="Games\Ruleset\Judgements\HasHitWindow.h" />

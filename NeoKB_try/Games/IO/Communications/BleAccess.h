@@ -24,9 +24,15 @@ namespace Communications{
 
 		BleAccess(GameHost* gHost);
 
+		Peripheral* GetPeripheral();
+
+		deque<BluetoothCommand*>& GetInputRawCommand();
+
 	protected:
 
 		BluetoothPhone* bluetoothPhone = nullptr;
+
+		deque<BluetoothCommand*> inputRawCommand;
 
 		virtual int run();
 
@@ -34,6 +40,11 @@ namespace Communications{
 		/// 這邊要用strategy處理wifi和ble同時處理的問題
 		/// </summary>
 		virtual int handleRequest(CommunicationRequest* communicationRequest);
+
+		/// <summary>
+		/// 把bluetooth phone新收到的所有訊息都clone一份進來
+		/// </summary>
+		int handleOnRawCommand(InputState* inputState);
 		
 
 	};

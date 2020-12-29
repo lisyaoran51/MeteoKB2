@@ -2478,3 +2478,8 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 	目前要把bluetooth command當成ble request的建構子參數，所以要重寫bluetooth command，把file和text都包含在bluetooth command下面。
 	之後再把ble request的method的strategy一個一個寫完
 	
+12/29
+	寫第一個strategy PostTextBleRequestMethod，就因為智慧補齊當掉，搞得寫得亂七八糟
+	
+	不過大概寫好perform and wait了
+	
