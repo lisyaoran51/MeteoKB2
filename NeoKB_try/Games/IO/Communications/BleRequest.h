@@ -3,13 +3,16 @@
 
 #include "../../../Framework/IO/Communications/CommunicationRequest.h"
 #include <exception>
-#include "../../Input/Commands/MeteoBluetoothCommand.h"
+#include "../../Output/Bluetooths/MeteoBluetoothMessage.h"
 #include "BleRequestException.h"
+#include "../../../ThirdParty/json/json.hpp"
 
 
 using namespace std;
 using namespace Framework::IO::Communications;
-using namespace Games::Input::Commands;
+using namespace Games::Output::Bluetooths;
+
+using json = nlohmann::json;
 
 
 namespace Games {
@@ -31,10 +34,24 @@ namespace Communications{
 
 		virtual int Perform(CommunicationComponent* cComponent);
 
+		/// <summary>
+		/// 把新的raw message丟進去
+		/// </summary>
+		int PushInputRawMessage(MeteoBluetoothMessage* rawMessage);
+
 	protected:
 
 
 		BleRequestMethodType requestMethodType = BleRequestMethodType::None;
+
+		deque<MeteoBluetoothMessage*> inputRawMessages;
+
+		deque<MeteoBluetoothMessage*> inputRawMessagesBuffer;
+
+		mutable mutex rawMessageMutex;
+
+		mutable mutex rawMessageBufferMutex;
+
 
 		class BleRequestMethod;
 
@@ -66,12 +83,12 @@ namespace Communications{
 			/// <summary>
 			/// 不用回傳的建構子(no ack) 
 			/// </summary>
-			PostTextBleRequestMethod(MeteoBluetoothCommand* pMessage);
+			PostTextBleRequestMethod(MeteoBluetoothMessage* pMessage);
 
 			/// <summary>
 			/// 要回傳的建構子
 			/// </summary>
-			PostTextBleRequestMethod(MeteoBluetoothCommand* pMessage, MeteoCommand aCommand);
+			PostTextBleRequestMethod(MeteoBluetoothMessage* pMessage, MeteoCommand aCommand);
 
 			virtual int PerformAndWait(BleRequest* thisRequest);
 
@@ -82,7 +99,7 @@ namespace Communications{
 			/// <summary>
 			/// 這個在Request裡面new delete，
 			/// </summary>
-			MeteoBluetoothCommand* postMessage;
+			MeteoBluetoothMessage* postMessage;
 
 			MeteoCommand ackCommand = MeteoCommand::None;
 
@@ -141,7 +158,7 @@ namespace Communications{
 			/// <summary>
 			/// 
 			/// </summary>
-			GetTextBleRequestMethod(MeteoBluetoothCommand* gMessage, MeteoCommand rCommand);
+			GetTextBleRequestMethod(MeteoBluetoothMessage* gMessage, MeteoCommand rCommand);
 
 			virtual int PerformAndWait(BleRequest* thisRequest);
 
@@ -151,7 +168,7 @@ namespace Communications{
 
 		protected:
 
-			MeteoBluetoothCommand* getMessage;
+			MeteoBluetoothMessage* getMessage;
 
 			MeteoCommand returnCommand = MeteoCommand::None;
 
@@ -172,7 +189,7 @@ namespace Communications{
 			/// 資料夾位置最後面部要加上斜線
 			/// </summary>
 			GetBinaryBleRequestMethod(string dPath,
-				MeteoBluetoothCommand* gMessage,
+				MeteoBluetoothMessage* gMessage,
 				MeteoCommand tCommand,
 				MeteoCommand fCommand,
 				MeteoCommand rRetransferCommand,
@@ -186,7 +203,7 @@ namespace Communications{
 			/// 資料夾位置，最後面不要加上斜線
 			/// </summary>
 			string directoryPath = "";
-			MeteoBluetoothCommand* getMessage;
+			MeteoBluetoothMessage* getMessage;
 			MeteoCommand getCommand = MeteoCommand::None;
 			MeteoCommand transferCommand = MeteoCommand::None;
 			MeteoCommand finishCommand = MeteoCommand::None;

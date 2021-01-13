@@ -2494,3 +2494,8 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 	
 1/11
 	正在把command全都換成message
+	
+1/14
+	request拿raw command的方法完全寫錯，應該不是由request去跟access拿raw command，而是access每次拿到raw command都要直接分給每一個request
+	
+	正在一個一個改，目前改道GetTextBleRequestMethod，接下來GetBinaryBleRequestMethod也要寫

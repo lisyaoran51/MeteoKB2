@@ -25,16 +25,26 @@ namespace Communications{
 
 		BleAccess(GameHost* gHost);
 
+
+		/// <summary>
+		/// 將buffer中的raw command更新進command中
+		/// </summary>
+		virtual int Update();
+
 		Peripheral* GetPeripheral();
 
 		BluetoothPhone* GetBluetoothPhone();
+
+		int RegisterBleRequest(BleRequest* bleRequest);
+
+		int UnregisterBleRequest(BleRequest* bleRequest);
 
 		/// <summary>
 		/// 刪掉時要怎麼保持thread safe?
 		/// 用複製的是最安全的方法，但是效率不知道會慢多少
 		/// 複製完還要clear
 		/// </summary>
-		deque<BluetoothCommand*>* GetInputRawCommand();
+		deque<BluetoothMessage*>* GetInputRawCommand();
 
 		mutex* GetRawCommandMutex();
 
@@ -47,9 +57,21 @@ namespace Communications{
 
 		BluetoothPhone* bluetoothPhone = nullptr;
 
-		deque<BluetoothCommand*> inputRawCommand;
+		vector<BleRequest*> bleRequests;
+
+		mutable mutex bleRequestMutex;
+
+		deque<BluetoothMessage*> inputRawCommand;
+
+		/// <summary>
+		/// 有時候handle on new command時剛剛好input raw command被別的request給lock起來，就要先把input command給丟進這個buffer裡面，
+		/// 之後再找時間把buffer內容丟回inputRawCommand
+		/// </summary>
+		deque<BluetoothMessage*> inputRawCommandBuffer;
 
 		mutable mutex rawCommandMutex;
+
+		mutable mutex rawCommandBufferMutex;
 
 		virtual int run();
 

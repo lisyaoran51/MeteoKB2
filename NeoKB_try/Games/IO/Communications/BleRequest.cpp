@@ -23,14 +23,20 @@ int BleRequest::Perform(CommunicationComponent * cComponent)
 {
 	communicationComponent = cComponent;
 
+	BleAccess* bleAccess = dynamic_cast<BleAccess*>(communicationComponent);
+	// 讓ble access把raw message丟進來，好讓我們檢查有沒有ack或return
+	bleAccess->RegisterBleRequest(this);
+
 	requestStartTime = system_clock::now();
 
 	// preform 丟資訊出去然後等回覆
 
 	requestMethod->PerformAndWait(this);
 
-	// 如果有出現錯誤，會丟exception，就不會執行on success
+	// 執行完畢以後就不讓ble access把raw message丟進來
+	bleAccess->UnregisterBleRequest(this);
 
+	// 如果有出現錯誤，會丟exception，就不會執行on success
 	communicationComponent->GetScheduler()->AddTask([=]() {
 		onSuccess.TriggerThenClear();
 		return 0;
@@ -39,13 +45,48 @@ int BleRequest::Perform(CommunicationComponent * cComponent)
 	return 0;
 }
 
+int BleRequest::PushInputRawMessage(MeteoBluetoothMessage * rawMessage)
+{
+	bool isAcceptMessage = false;
 
-BleRequest::PostTextBleRequestMethod::PostTextBleRequestMethod(MeteoBluetoothCommand* pMessage) : postMessage(pMessage)
+	/* 如果是file segment的話，只有get file request要收。其他狀況就全都收 */
+	if (dynamic_cast<MeteoFileSegmentBluetoothMessage*>(rawMessage)) {
+		if (dynamic_cast<GetBinaryBleRequestMethod*>(requestMethod)) {
+			isAcceptMessage = true;
+		}
+	}
+	else {
+		isAcceptMessage = true;
+	}
+
+	if (isAcceptMessage) {
+
+		unique_lock<mutex> uLock(rawMessageMutex, defer_lock);
+		if (uLock.try_lock()) {
+			inputRawMessages.push_front(rawMessage);
+			uLock.unlock();
+		}
+		else {
+			unique_lock<mutex> uBufferLock(rawMessageBufferMutex);
+			inputRawMessagesBuffer.push_front(rawMessage);
+		}
+	}
+	else {
+		/* 因為這邊的raw message全都是複製過來的，所以不用的話要delete調 */
+		delete rawMessage;
+		rawMessage = nullptr;
+	}
+
+	return 0;
+}
+
+
+BleRequest::PostTextBleRequestMethod::PostTextBleRequestMethod(MeteoBluetoothMessage* pMessage) : postMessage(pMessage)
 {
 	isNeedCheckAck = false;
 }
 
-BleRequest::PostTextBleRequestMethod::PostTextBleRequestMethod(MeteoBluetoothCommand* pMessage, MeteoCommand aCommand) : postMessage(pMessage)
+BleRequest::PostTextBleRequestMethod::PostTextBleRequestMethod(MeteoBluetoothMessage* pMessage, MeteoCommand aCommand) : postMessage(pMessage)
 {
 	ackCommand = aCommand;
 }
@@ -68,22 +109,44 @@ int BleRequest::PostTextBleRequestMethod::PerformAndWait(BleRequest* thisRequest
 			}
 
 			/* 這段寫得很長，功能就只是把收到的ack丟給request而已 */
+			unique_lock<mutex> uLock(thisRequest->rawMessageMutex);
+			for (int i = 0; i < thisRequest->inputRawMessages.size(); i++) {
+				if (dynamic_cast<MeteoContextBluetoothMessage*>(thisRequest->inputRawMessages[i])) {
+					if (dynamic_cast<MeteoContextBluetoothMessage*>(thisRequest->inputRawMessages[i])->GetCommand() == ackCommand) {
+
+						onAck.TriggerThenClear(dynamic_cast<MeteoContextBluetoothMessage*>(thisRequest->inputRawMessages[i])->GetContextInJson());
+
+						return 0;
+
+					}
+				}
+				delete thisRequest->inputRawMessages[i];
+			}
+			thisRequest->inputRawMessages.clear();
+
+			uLock.unlock();
+
+			thread sleep(0.01);
+
+			/* 舊的程式，寫得不好
+			mutex* inputRawCommandMutex = bleAccess->GetRawCommandMutex();
+			unique_lock<mutex> uLock(*inputRawCommandMutex);
+
 			for (int i = 0; i < bleAccess->GetInputRawCommand().size(); i++) {
 				if (dynamic_cast<MeteoTextBluetoothCommand*>(bleAccess->GetInputRawCommand()[i])) {
 					if (dynamic_cast<MeteoTextBluetoothCommand*>(bleAccess->GetInputRawCommand()[i])->GetCommand() == ackCommand) {
 
 						onAck.TriggerThenClear(dynamic_cast<MeteoTextBluetoothCommand*>(bleAccess->GetInputRawCommand()[i])->GetContextInJson());
 
-						bleAccess->GetInputRawCommand().clear();
+						bleAccess->GetInputRawCommand()->erase(bleAccess->GetInputRawCommand()->begin() + i);
 						return 0;
 
 					}
 				}
 			}
-
-			bleAccess->GetInputRawCommand().clear();
+			uLock.unlock();
+			*/
 		}
-
 	}
 
 
@@ -171,7 +234,37 @@ int BleRequest::PostBinaryBleRequestMethod::PerformAndWait(BleRequest * thisRequ
 		}
 
 		/* 這段寫得很長，功能就只是把收到的ack丟給request而已 */
+		unique_lock<mutex> uLock(thisRequest->rawMessageMutex);
+		for (int i = 0; i < thisRequest->inputRawMessages.size(); i++) {
+			if (dynamic_cast<MeteoContextBluetoothMessage*>(thisRequest->inputRawMessages[i])) {
+				if (dynamic_cast<MeteoContextBluetoothMessage*>(thisRequest->inputRawMessages[i])->GetCommand() == ackFinishCommand) {
+
+					onFinish.TriggerThenClear();
+					isFinished = true;
+					return 0;
+
+				}
+				else if (dynamic_cast<MeteoContextBluetoothMessage*>(thisRequest->inputRawMessages[i])->GetCommand() == requestRetransferCommand) {
+					if (dynamic_cast<MeteoContextBluetoothMessage*>(thisRequest->inputRawMessages[i])->GetContextInJson()["FileName"].get<string>() == fileName) {
+						int retransferOrder = dynamic_cast<MeteoContextBluetoothMessage*>(thisRequest->inputRawMessages[i])->GetContextInJson()["Order"].get<int>();
+
+						// TODO 重傳這個file segment
+						retransferOrders.push_pack(retransferOrder);
+					}
+				}
+			}
+			delete thisRequest->inputRawMessages[i];
+		}
+		thisRequest->inputRawMessages.clear();
+
+		uLock.unlock();
+
+
+
+		/* 這段寫得很長，功能就只是把收到的ack丟給request而已 */
+		/* 這段成是不用了，改用上面那段
 		unique_lock<mutex> uLock(*bleAccess->GetRawCommandMutex());
+
 		for (int i = 0; i < bleAccess->GetInputRawCommand()->size(); i++) {
 			if (dynamic_cast<MeteoTextBluetoothCommand*>(bleAccess->GetInputRawCommand()->at(i))) {
 				if (dynamic_cast<MeteoTextBluetoothCommand*>(bleAccess->GetInputRawCommand()->at(i))->GetCommand() == ackFinishCommand) {
@@ -194,6 +287,8 @@ int BleRequest::PostBinaryBleRequestMethod::PerformAndWait(BleRequest * thisRequ
 			}
 		}
 		uLock.unlock();
+
+		*/
 
 		if (isFinished)
 			break;
@@ -223,7 +318,7 @@ int BleRequest::PostBinaryBleRequestMethod::AddOnFinish(MtoObject * callableObje
 	return 0;
 }
 
-BleRequest::GetTextBleRequestMethod::GetTextBleRequestMethod(MeteoBluetoothCommand * gMessage, MeteoCommand rCommand) : getMessage(gMessage)
+BleRequest::GetTextBleRequestMethod::GetTextBleRequestMethod(MeteoBluetoothMessage * gMessage, MeteoCommand rCommand) : getMessage(gMessage)
 {
 	returnCommand = rCommand;
 }
@@ -235,34 +330,57 @@ int BleRequest::GetTextBleRequestMethod::PerformAndWait(BleRequest * thisRequest
 
 	MeteoContextBluetoothMessage* outputMessage = nullptr;
 
-	bluetoothPhone->PushOutputMessage(outputMessage);
+	bluetoothPhone->PushOutputMessage(getMessage);
 
-	if (isNeedCheckAck) {
+	while (1) {
 
-		while (1) {
-
-			if (thisRequest->getElapsedSeconds() > thisRequest->timeout) {
-				throw BleRequestException(BleResponseCode::RequestTimeout);
-			}
-
-			/* 這段寫得很長，功能就只是把收到的ack丟給request而已 */
-			for (int i = 0; i < bleAccess->GetInputRawCommand().size(); i++) {
-				if (dynamic_cast<MeteoTextBluetoothCommand*>(bleAccess->GetInputRawCommand()[i])) {
-					if (dynamic_cast<MeteoTextBluetoothCommand*>(bleAccess->GetInputRawCommand()[i])->GetCommand() == ackCommand) {
-
-						onAck.TriggerThenClear(dynamic_cast<MeteoTextBluetoothCommand*>(bleAccess->GetInputRawCommand()[i])->GetContextInJson());
-
-						bleAccess->GetInputRawCommand().clear();
-						return 0;
-
-					}
-				}
-			}
-
-			bleAccess->GetInputRawCommand().clear();
+		if (thisRequest->getElapsedSeconds() > thisRequest->timeout) {
+			throw BleRequestException(BleResponseCode::RequestTimeout);
 		}
 
+		/* 確認收到的command是不是return command */
+		unique_lock<mutex> uLock(thisRequest->rawMessageMutex);
+		for (int i = 0; i < thisRequest->inputRawMessages.size(); i++) {
+			if (dynamic_cast<MeteoContextBluetoothMessage*>(thisRequest->inputRawMessages[i])) {
+				if (dynamic_cast<MeteoContextBluetoothMessage*>(thisRequest->inputRawMessages[i])->GetCommand() == returnCommand) {
+
+					onReturn.TriggerThenClear(dynamic_cast<MeteoContextBluetoothMessage*>(thisRequest->inputRawMessages[i])->GetContextInJson());
+
+					return 0;
+
+				}
+			}
+			delete thisRequest->inputRawMessages[i];
+		}
+		thisRequest->inputRawMessages.clear();
+
+		uLock.unlock();
+
+		thread sleep(0.01);
+
+
+		
+		/* 這段成是寫得不好，不用了
+		unique_lock<mutex> uLock(*bleAccess->GetRawCommandMutex());
+
+		for (int i = 0; i < bleAccess->GetInputRawCommand().size(); i++) {
+			if (dynamic_cast<MeteoTextBluetoothCommand*>(bleAccess->GetInputRawCommand()[i])) {
+				if (dynamic_cast<MeteoTextBluetoothCommand*>(bleAccess->GetInputRawCommand()[i])->GetCommand() == ackCommand) {
+
+					onAck.TriggerThenClear(dynamic_cast<MeteoTextBluetoothCommand*>(bleAccess->GetInputRawCommand()[i])->GetContextInJson());
+
+					bleAccess->GetInputRawCommand()->erase(bleAccess->GetInputRawCommand()->begin() + i);
+					return 0;
+
+				}
+			}
+		}
+
+		uLock.unlock();
+		*/
 	}
+
+	
 
 
 	return 0;
