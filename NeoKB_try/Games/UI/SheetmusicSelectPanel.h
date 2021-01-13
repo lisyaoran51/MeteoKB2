@@ -4,7 +4,7 @@
 #include "../../Framework/Allocation/Hierachal/Container.h"
 #include "../Sheetmusic/SheetmusicInfo.h"
 #include "../Sheetmusic/SheetmusicManager.h"
-#include "../../Framework/Input/Commands/CommandHandler.h"
+#include "../../Framework/Input/Commands/MessageHandler.h"
 #include "../Input/Commands/MeteoBluetoothCommand.h"
 
 
@@ -21,7 +21,7 @@ namespace UI {
 	/// <summary>
 	/// 在這邊選則歌曲，之後ispresent應該要改成註冊到song select的scene enter和resume上，不要自己去設定ispresent
 	/// </summary>
-	class SheetmusicSelectPanel : public Container, public CommandHandler<MeteoBluetoothCommand> {
+	class SheetmusicSelectPanel : public Container, public MessageHandler<MeteoBluetoothMessage> {
 
 		
 
@@ -43,7 +43,7 @@ namespace UI {
 
 		int SetSms(vector<SmInfo*>* sInfos);
 
-		virtual int OnCommand(MeteoBluetoothCommand* command);
+		virtual int OnMessage(MeteoBluetoothMessage* message);
 
 	protected:
 
@@ -57,7 +57,7 @@ namespace UI {
 
 		BindablePointer<vector<Modifier*>*> selectedModifiers;
 
-		virtual int onCommand(InputState* inputState, InputKey command);
+		virtual int onMessage(InputState* inputState, InputKey command);
 
 	};
 

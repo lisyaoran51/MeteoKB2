@@ -1,11 +1,11 @@
 #ifndef USER_INPUT_MANAGER_H
 #define USER_INPUT_MANAGER_H
 
-#include "Commands/CommandInputManager.h"
+#include "Messages/MessageInputManager.h"
 #include "KeyBindings/KeyBindingInputManager.h"
 
 
-using namespace Framework::Input::Commands;
+using namespace Framework::Input::Messages;
 using namespace Framework::Input::KeyBindings;
 
 namespace Framework {
@@ -13,12 +13,12 @@ namespace Input {
 
 	enum class FrameworkAction;
 
-	template<typename TCommand>
-	class UserInputManager : public CommandInputManager<FrameworkAction, TCommand> {
+	template<typename TMessage>
+	class UserInputManager : public MessageInputManager<FrameworkAction, TMessage> {
 
 	public:
 
-		UserInputManager() : CommandInputManager<FrameworkAction, TCommand>(), RegisterType("UserInputManager")
+		UserInputManager() : MessageInputManager<FrameworkAction, TMessage>(), RegisterType("UserInputManager")
 		{
 			this->useParentState = false;
 		}

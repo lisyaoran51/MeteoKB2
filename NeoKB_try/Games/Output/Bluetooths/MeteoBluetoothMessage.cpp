@@ -4,17 +4,18 @@
 using namespace Games::Output::Bluetooths;
 
 
-MeteoBluetoothMessage::MeteoBluetoothMessage(MeteoCommand mCommand)
+MeteoBluetoothMessage::MeteoBluetoothMessage(MeteoCommand mCommand) : TBluetoothMessage(mCommand)
 {
-}
-
-MeteoCommand MeteoBluetoothMessage::GetCommand()
-{
-	return meteoCommand;
 }
 
 string MeteoBluetoothMessage::ToString()
 {
 	// 好像沒用，要做table太麻煩
 	return string();
+}
+
+int MeteoBluetoothMessage::SetAccessType(MeteoBluetoothMessageAccessType aType)
+{
+	accessType = aType;
+	return 0;
 }

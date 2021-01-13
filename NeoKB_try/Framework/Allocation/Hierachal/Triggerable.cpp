@@ -116,9 +116,9 @@ int Triggerable::TriggerOnSlide(InputState * inputState, InputKey slider)
 	return onSlide(inputState, slider);
 }
 
-int Triggerable::TriggerOnCommand(InputState * inputState, BluetoothCommand* command)
+int Triggerable::TriggerOnMessage(InputState * inputState, BluetoothMessage* message)
 {
-	return onCommand(inputState, command);
+	return onMessage(inputState, message);
 }
 
 int Triggerable::onKeyDown(InputState * inputState, InputKey key)
@@ -151,7 +151,7 @@ int Triggerable::onSlide(InputState * inputState, InputKey slider)
 	return -1;
 }
 
-int Triggerable::onCommand(InputState * inputState, BluetoothCommand* command)
+int Triggerable::onMessage(InputState * inputState, BluetoothMessage* command)
 {
 	return -1;
 }

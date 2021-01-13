@@ -81,7 +81,7 @@ namespace Hierachal {
 		
 		virtual int TriggerOnSlide(InputState* inputState, InputKey slider) final;
 
-		virtual int TriggerOnCommand(InputState* inputState, BluetoothCommand* command) final;
+		virtual int TriggerOnMessage(InputState* inputState, BluetoothMessage* message) final;
 
 	protected:
 
@@ -108,7 +108,7 @@ namespace Hierachal {
 
 		virtual int onSlide(InputState* inputState, InputKey slider);
 
-		virtual int onCommand(InputState* inputState, BluetoothCommand* command);
+		virtual int onMessage(InputState* inputState, BluetoothMessage* message);
 
 	};
 

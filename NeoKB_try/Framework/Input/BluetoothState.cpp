@@ -11,24 +11,24 @@ using namespace Util;
 BluetoothState::~BluetoothState()
 {
 	LOG(LogLevel::Finest) << "BluetoothState::~BluetoothState(): deleting commands." << commands.size();
-	for (int i = 0; i < commands.size(); i++) {
+	for (int i = 0; i < messages.size(); i++) {
 		LOG(LogLevel::Finest) << "BluetoothState::~BluetoothState(): deleting command [" << commands[i]->GetContext()["FileName"] << "] .";
-		delete commands[i];
+		delete messages[i];
 
 	}
-	commands.clear();
+	messages.clear();
 	LOG(LogLevel::Finest) << "BluetoothState::~BluetoothState(): deleted.";
 }
 
-int BluetoothState::AddCommand(BluetoothCommand * command)
+int BluetoothState::AddMessage(BluetoothMessage * message)
 {
-	commands.push_back(command);
+	messages.push_back(message);
 	return 0;
 }
 
-vector<BluetoothCommand*>* BluetoothState::GetCommands()
+vector<BluetoothMessage*>* BluetoothState::GetMessages()
 {
-	return &commands;
+	return &messages;
 }
 
 BluetoothState * BluetoothState::Clone()
@@ -38,8 +38,8 @@ BluetoothState * BluetoothState::Clone()
 	if(lastState != nullptr)
 		cloned->SetLastState(lastState);
 
-	for (int i = 0; i < commands.size(); i++) {
-		cloned->GetCommands()->push_back(commands[i]->Clone());
+	for (int i = 0; i < messages.size(); i++) {
+		cloned->GetMessages()->push_back(messages[i]->Clone());
 	}
 
 	return cloned;
@@ -47,6 +47,6 @@ BluetoothState * BluetoothState::Clone()
 
 bool BluetoothState::CheckIsEmpty()
 {
-	return commands.size() == 0;
+	return messages.size() == 0;
 }
 

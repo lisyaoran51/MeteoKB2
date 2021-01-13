@@ -65,9 +65,9 @@ namespace Communications{
 		system_clock::time_point requestStartTime;
 
 		/// <summary>
-		/// 預設0.1秒就time out
+		/// 預設5秒就time out
 		/// </summary>
-		float timeout = 0.1;
+		float timeout = 5;
 
 		/// <summary>
 		/// 預設最多重連三次

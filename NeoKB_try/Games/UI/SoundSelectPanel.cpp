@@ -61,14 +61,17 @@ SoundSelectPanel::SoundSelectPanel() : RegisterType("SoundSelectPanel")
 	registerLoad(bind(static_cast<int(SoundSelectPanel::*)(void)>(&SoundSelectPanel::load), this));
 }
 
-int SoundSelectPanel::OnCommand(MeteoBluetoothCommand * command)
+int SoundSelectPanel::OnMessage(MeteoBluetoothMessage * message)
 {
-	LOG(LogLevel::Debug) << "SoundSelectPanel::OnCommand() : got new bt command. ";
+	LOG(LogLevel::Debug) << "SoundSelectPanel::OnMessage() : got new bt command. ";
+	MeteoContextBluetoothMessage* contextMessage = dynamic_cast<MeteoContextBluetoothMessage*>(message);
 
-	if (command->GetCommand() == MeteoCommand::AppSwitchPianoInstrument) {
-		LOG(LogLevel::Debug) << "SoundSelectPanel::OnCommand() : AppSwitchPianoInstrument. ";
+	if (message->GetCommand() == MeteoCommand::AppSwitchPianoInstrument) {
+		LOG(LogLevel::Info) << "SoundSelectPanel::OnMessage() : AppSwitchPianoInstrument. ";
 
-		string soundBank = command->GetContext()["Instrument"];
+		json context = contextMessage->GetContextInJson();
+
+		string soundBank = context["Instrument"];
 		
 		vector<SoundBindingSet*>* soundBindingSets = audioManager->GetSampleManager()->GetSoundBindingSets();
 
@@ -82,25 +85,42 @@ int SoundSelectPanel::OnCommand(MeteoBluetoothCommand * command)
 
 		MeteoContextBluetoothMessage* outputMessage = new MeteoContextBluetoothMessage(MeteoCommand::AckAppSwitchPianoInstrument);
 
+		json returnContext;
+
 		if (soundBindingSet) {
-			outputMessage->GetContext()["Status"] = 0;
+
+
+			returnContext["Status"] = 0;
+			outputMessage->SetContextInJson(returnContext);
+			outputMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
+
 			outputManager->PushMessage(outputMessage);
 
 			dynamic_cast<Piano*>(instrument)->SwitchSoundBindings(dynamic_cast<TSoundBindingSet<Pitch>*>(soundBindingSet));
 
+			// 重複使用一下
 			outputMessage = new MeteoContextBluetoothMessage(MeteoCommand::FinishAppSwitchPianoInstrument);
-			outputMessage->GetContext()["Instrument"] = soundBank;
+			returnContext.clear();
+			returnContext["Instrument"] = soundBank;
+			outputMessage->SetContextInJson(returnContext);
+			outputMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
+
 			outputManager->PushMessage(outputMessage);
 
 		}
 		else {
-			outputMessage->GetContext()["Status"] = -1;
+			// 切換失敗
+			LOG(LogLevel::Info) << "SoundSelectPanel::OnMessage() : switch instrument failed. ";
+			returnContext["Status"] = -1;
+			outputMessage->SetContextInJson(returnContext);
+			outputMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
+
 			outputManager->PushMessage(outputMessage);
 		}
 
 
 	}
-	LOG(LogLevel::Fine) << "SoundSelectPanel::OnCommand() : over. ";
+	LOG(LogLevel::Fine) << "SoundSelectPanel::OnMessage() : over. ";
 
 	return 0;
 }

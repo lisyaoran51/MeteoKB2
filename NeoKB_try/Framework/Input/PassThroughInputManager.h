@@ -46,7 +46,7 @@ namespace Input {
 
 		virtual int onSlide(InputState* inputState, InputKey slider) override;
 
-		virtual int onCommand(InputState* inputState, BluetoothCommand* bluetoothCommand) override;
+		virtual int onMessage(InputState* inputState, BluetoothMessage* bluetoothMessage) override;
 
 	};
 

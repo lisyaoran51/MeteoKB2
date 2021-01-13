@@ -43,12 +43,17 @@ namespace IO {
 
 		virtual int TriggerOnInput();
 
+		/// <summary>
+		/// 看有沒有沒丟完的file segment message
+		/// </summary>
+		bool CheckFileSegmentMessageOutputClear();
+
 		template<class _Type>
-		int AddOnCommand(_Type* callableObject, function<int(InputState*)> callback, string name = "HandleCommand") {
+		int AddOnMessage(_Type* callableObject, function<int(InputState*)> callback, string name = "HandleCommand") {
 
-			LOG(LogLevel::Fine) << "BluetoothPhone::AddOnCommand() : register handler into list.";
+			LOG(LogLevel::Fine) << "BluetoothPhone::AddOnMessage() : register handler into list.";
 
-			OnCommand.Add(callableObject, callback, name);
+			OnMessage.Add(callableObject, callback, name);
 			return 0;
 		}
 
@@ -88,7 +93,7 @@ namespace IO {
 		/// <summary>
 		/// 一般json con non message的時候用這個
 		/// </summary>
-		ActionList<int, InputState*> OnCommand;
+		ActionList<int, InputState*> OnMessage;
 
 		/// <summary>
 		/// 所有message都用這個，例如file、json、con、ack、non、ret

@@ -14,20 +14,29 @@ namespace Games {
 namespace Output{
 namespace Bluetooths{
 
-	class MeteoBluetoothMessage : public BluetoothMessage {
+	enum class MeteoBluetoothMessageAccessType {
+		None,
+		ReadOnly,
+		WriteOnly,
+		ReadWrite
+	};
+
+	class MeteoBluetoothMessage : public TBluetoothMessage<MeteoCommand> {
 
 
 	public:
 
 		MeteoBluetoothMessage(MeteoCommand mCommand);
 
-		MeteoCommand GetCommand();
-
 		virtual string ToString();
+
+		virtual int SetContext(char* c, int cSize) = 0;
+
+		virtual int SetAccessType(MeteoBluetoothMessageAccessType aType) = 0;
 
 	protected:
 
-		MeteoCommand meteoCommand;
+		MeteoBluetoothMessageAccessType accessType = MeteoBluetoothMessageAccessType::WriteOnly;
 
 	};
 

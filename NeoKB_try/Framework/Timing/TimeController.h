@@ -6,7 +6,7 @@
 #include "SpeedAdjusters/SpeedAdjuster.h"
 #include "DecoupledInterpolatingFramedClock.h"
 #include "../Input/KeyBindings/KeyBindingHandler.h"
-#include "../Input/Commands/CommandHandler.h"
+#include "../Input/Commands/MessageHandler.h"
 
 
 using namespace Framework::Timing::SpeedAdjusters;
@@ -152,8 +152,8 @@ namespace Timing {
 	/// <summary>
 	/// 其實這個不是scene，應該移到timing去
 	/// </summary>
-	template<typename T, typename TCommand>
-	class TTimeController : public TimeController, public KeyBindingHandler<T>, public CommandHandler<TCommand> {
+	template<typename T, typename TMessage>
+	class TTimeController : public TimeController, public KeyBindingHandler<T>, public MessageHandler<TMessage> {
 
 		int load() {
 
@@ -168,7 +168,7 @@ namespace Timing {
 
 		TTimeController(): RegisterType("TTimeController") {
 
-			registerLoad(bind(static_cast<int(TTimeController<T, TCommand>::*)(void)>(&TTimeController<T, TCommand>::load), this));
+			registerLoad(bind(static_cast<int(TTimeController<T, TMessage>::*)(void)>(&TTimeController<T, TMessage>::load), this));
 
 		}
 
@@ -239,7 +239,7 @@ namespace Timing {
 			return 0;
 		}
 
-		virtual int OnCommand(TCommand* command) {
+		virtual int OnMessage(TMessage* command) {
 			return 0;
 		}
 

@@ -16,7 +16,7 @@ namespace Bluetooths {
 		/// <summary>
 		/// 會把丟進去的buffer給複製進去
 		/// </summary>
-		MeteoFileSegmentBluetoothMessage(MeteoCommand mCommand, char* fSegment, int fSegmentSize, string fName, int o);
+		MeteoFileSegmentBluetoothMessage(MeteoCommand mCommand, char* fSegment, int fSegmentSize, string fName, int o, int a);
 
 		string GetFileName();
 
@@ -33,6 +33,8 @@ namespace Bluetooths {
 		string fileName;
 
 		int order = -1;
+
+		int amount = -1;
 
 		char* fileSegment = nullptr;
 

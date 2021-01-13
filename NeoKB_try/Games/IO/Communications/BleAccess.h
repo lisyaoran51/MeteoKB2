@@ -27,7 +27,16 @@ namespace Communications{
 
 		Peripheral* GetPeripheral();
 
-		deque<BluetoothCommand*>& GetInputRawCommand();
+		BluetoothPhone* GetBluetoothPhone();
+
+		/// <summary>
+		/// 刪掉時要怎麼保持thread safe?
+		/// 用複製的是最安全的方法，但是效率不知道會慢多少
+		/// 複製完還要clear
+		/// </summary>
+		deque<BluetoothCommand*>* GetInputRawCommand();
+
+		mutex* GetRawCommandMutex();
 
 		/// <summary>
 		/// 拿到目前設定的mtu，這個還要確認norify是怎麼運作才知道能不能這樣寫
@@ -40,6 +49,8 @@ namespace Communications{
 
 		deque<BluetoothCommand*> inputRawCommand;
 
+		mutable mutex rawCommandMutex;
+
 		virtual int run();
 
 		/// <summary>
@@ -49,6 +60,8 @@ namespace Communications{
 
 		/// <summary>
 		/// 把bluetooth phone新收到的所有訊息都clone一份進來
+		/// 超過一定時間沒有input的時候就會清空，另外raw command也會保持一定數量，超出數量就會刪掉
+		/// 刪掉的時候要怎麼保持thread safe?
 		/// </summary>
 		int handleOnRawCommand(InputState* inputState);
 		

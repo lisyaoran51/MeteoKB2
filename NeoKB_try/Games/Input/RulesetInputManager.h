@@ -1,7 +1,7 @@
 #ifndef RULESET_INPUT_MANAGER_H
 #define RULESET_INPUT_MANAGER_H
 
-#include "../../Framework/Input/Commands/CommandInputManager.h"
+#include "../../Framework/Input/Commands/MessageInputManager.h"
 #include "../Ruleset/RulesetInfo.h"
 #include "../Ruleset/Ruleset.h"
 #include "Commands/MeteoBluetoothCommand.h"
@@ -20,7 +20,7 @@ namespace Input {
 	/// 另外他的父類DatabasedKeyBindingInputManager有額外的功能，可以拿到ruleset的keybinding，直接把這個功能擺到這個class裡
 	/// </summary>
 	template<typename T>
-	class RulesetInputManager : public CommandInputManager<T, MeteoBluetoothCommand> {
+	class RulesetInputManager : public MessageInputManager<T, MeteoBluetoothCommand> {
 
 		RulesetInfo* rulesetInfo;
 

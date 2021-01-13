@@ -4,14 +4,14 @@
 #include "../../Framework/Allocation/Hierachal/Container.h"
 #include "../Sheetmusic/SheetmusicInfo.h"
 #include "../Sheetmusic/SheetmusicManager.h"
-#include "../../Framework/Input/Commands/CommandHandler.h"
-#include "../Input/Commands/MeteoBluetoothCommand.h"
+#include "../../Framework/Input/Messages/MessageHandler.h"
+
 
 
 
 using namespace Framework::Allocation::Hierachal;
 using namespace Games::Sheetmusics;
-using namespace Framework::Input::Commands;
+using namespace Framework::Input::Messages;
 using namespace Games::Input::Commands;
 
 
@@ -21,7 +21,7 @@ namespace UI {
 	/// <summary>
 	/// 在這邊選則歌曲，之後ispresent應該要改成註冊到song select的scene enter和resume上，不要自己去設定ispresent
 	/// </summary>
-	class SoundSelectPanel : public Container, public CommandHandler<MeteoBluetoothCommand> {
+	class SoundSelectPanel : public Container, public MessageHandler<MeteoBluetoothMessage> {
 
 		int load();
 
@@ -41,7 +41,7 @@ namespace UI {
 
 		function<int(void)> OnSoundSwitched;
 
-		virtual int OnCommand(MeteoBluetoothCommand* command);
+		virtual int OnMessage(MeteoBluetoothMessage* command);
 
 		virtual int update();
 

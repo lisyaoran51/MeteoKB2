@@ -3,11 +3,13 @@
 #include "Effect/InstantFallEffect.h"
 #include "Effect/InstantGlowLineEffect.h"
 #include "InstrumentEvents/InstantPianoSoundEvent.h"
+#include "../../../Games/Output/Bluetooths/MeteoContextBluetoothMessage.h"
 
 
 using namespace Instant::Schedulers::Events;
 using namespace Instant::Schedulers::Events::Effects;
 using namespace Instant::Schedulers::Events::InstrumentEvents;
+using namespace Games::Output::Bluetooths;
 
 
 
@@ -15,16 +17,20 @@ InstantDynamicEventGenerator::InstantDynamicEventGenerator(Playfield * p) : Regi
 {
 }
 
-int InstantDynamicEventGenerator::OnCommand(MeteoBluetoothCommand * command)
+int InstantDynamicEventGenerator::OnMessage(MeteoBluetoothMessage * message)
 {
-	if (command->GetCommand() == MeteoCommand::InstantLightEvent) {
-		if (command->GetContext()["EventType"].get<string>() == "Fall") {
+	if (message->GetCommand() == MeteoCommand::InstantLightEvent) {
+
+		MeteoContextBluetoothMessage* contextMessage = dynamic_cast<MeteoContextBluetoothMessage*>(message);
+		json context = contextMessage->GetContextInJson();
+
+		if (context["EventType"].get<string>() == "Fall") {
 			
-			double lifeTime = command->GetContext()["Time"].get<double>();
+			double lifeTime = context["Time"].get<double>();
 
 			int speed = lifeTime * 16;
 
-			int key = command->GetContext()["Key"].get<int>();
+			int key = context["Key"].get<int>();
 
 			double startTime = GetClock()->GetCurrentTime();
 
@@ -43,11 +49,11 @@ int InstantDynamicEventGenerator::OnCommand(MeteoBluetoothCommand * command)
 
 			playfield->AddDynamic(instantFallEffect);
 		}
-		else if (command->GetContext()["EventType"].get<string>() == "Line") {
+		else if (context["EventType"].get<string>() == "Line") {
 
-			double lifeTime = command->GetContext()["Time"].get<double>();
+			double lifeTime = context["Time"].get<double>();
 
-			int key = command->GetContext()["Key"].get<int>();
+			int key = context["Key"].get<int>();
 
 			double startTime = GetClock()->GetCurrentTime();
 
@@ -58,18 +64,21 @@ int InstantDynamicEventGenerator::OnCommand(MeteoBluetoothCommand * command)
 
 	}
 
-	if (command->GetCommand() == MeteoCommand::InstantLedMatrix) {
+	if (message->GetCommand() == MeteoCommand::InstantLedMatrix) {
 		// 無法避免重疊問題?
 		// 懶得做這個功能
 	}
 
-	if (command->GetCommand() == MeteoCommand::InstantPianoEvent) {
+	if (message->GetCommand() == MeteoCommand::InstantPianoEvent) {
 
-		double delayStartTime = command->GetContext()["DelayTime"].get<double>();
+		MeteoContextBluetoothMessage* contextMessage = dynamic_cast<MeteoContextBluetoothMessage*>(message);
+		json context = contextMessage->GetContextInJson();
 
-		int key = command->GetContext()["Key"].get<int>();
+		double delayStartTime = context["DelayTime"].get<double>();
 
-		int volume = command->GetContext()["Volume"].get<int>();
+		int key = context["Key"].get<int>();
+
+		int volume = context["Volume"].get<int>();
 
 		double startTime = GetClock()->GetCurrentTime();
 

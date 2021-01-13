@@ -16,7 +16,7 @@ Peripheral * BleAccess::GetPeripheral()
 	return bluetoothPhone;
 }
 
-deque<BluetoothCommand*>& BleAccess::GetInputRawCommand()
+deque<BluetoothCommand*> BleAccess::GetInputRawCommand()
 {
 	// TODO: 於此處插入傳回陳述式
 	return inputRawCommand;
@@ -60,7 +60,10 @@ int BleAccess::run()
 
 	}
 
-
+	// TODO: clear raw commmand
+	unique_lock<mutex> uLock(rawCommandMutex);
+	raw command clear
+	uLock.unlock;
 	return 0;
 }
 

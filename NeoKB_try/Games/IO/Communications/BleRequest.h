@@ -115,6 +115,9 @@ namespace Communications{
 
 			virtual int PerformAndWait(BleRequest* thisRequest);
 
+
+			int AddOnFinish(MtoObject * callableObject, function<int()> callback, string name = "HandleFinish");
+
 		protected:
 
 			string filePath = "";
@@ -125,6 +128,7 @@ namespace Communications{
 
 			BleBinaryRequestFileSegmentMap* fileMap = nullptr;
 
+			ActionList<int> onFinish;
 		};
 
 		/// <summary>
@@ -137,7 +141,7 @@ namespace Communications{
 			/// <summary>
 			/// 
 			/// </summary>
-			GetTextBleRequestMethod(MeteoBluetoothCommand& gMessage, MeteoCommand rCommand);
+			GetTextBleRequestMethod(MeteoBluetoothCommand* gMessage, MeteoCommand rCommand);
 
 			virtual int PerformAndWait(BleRequest* thisRequest);
 
@@ -147,11 +151,13 @@ namespace Communications{
 
 		protected:
 
-			MeteoBluetoothCommand& getMessage;
+			MeteoBluetoothCommand* getMessage;
 
 			MeteoCommand returnCommand = MeteoCommand::None;
 
 			string returnText = "";
+
+			ActionList<int, json> onReturn;
 
 		};
 
@@ -166,7 +172,7 @@ namespace Communications{
 			/// 資料夾位置最後面部要加上斜線
 			/// </summary>
 			GetBinaryBleRequestMethod(string dPath,
-				MeteoBluetoothCommand& gMessage,
+				MeteoBluetoothCommand* gMessage,
 				MeteoCommand tCommand,
 				MeteoCommand fCommand,
 				MeteoCommand rRetransferCommand,
@@ -180,7 +186,7 @@ namespace Communications{
 			/// 資料夾位置，最後面不要加上斜線
 			/// </summary>
 			string directoryPath = "";
-			MeteoBluetoothCommand& getMessage;
+			MeteoBluetoothCommand* getMessage;
 			MeteoCommand getCommand = MeteoCommand::None;
 			MeteoCommand transferCommand = MeteoCommand::None;
 			MeteoCommand finishCommand = MeteoCommand::None;

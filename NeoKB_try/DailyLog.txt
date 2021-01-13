@@ -2483,3 +2483,14 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 	
 	不過大概寫好perform and wait了
 	
+	現在正在寫post binary method
+	
+1/8
+	post binary暫時寫一個段落，部過還有問題(像重傳...等)
+	
+	現在發現command和message重疊性太高了
+	
+	把command拿掉，全部換成message，但是調整兩種模式：read only、write only，一次只能一種模式
+	
+1/11
+	正在把command全都換成message

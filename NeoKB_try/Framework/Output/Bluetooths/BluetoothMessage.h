@@ -15,7 +15,28 @@ namespace Bluetooths{
 
 	public:
 
+		virtual BluetoothMessage* Clone() = 0;
+
 	protected:
+
+	};
+
+	template<typename T>
+	class TBluetoothMessage : public BluetoothMessage {
+
+	public:
+
+		TBluetoothMessage(T c) {
+			command = c;
+		}
+
+		T GetCommand() {
+			return command;
+		}
+
+	protected:
+
+		T command;
 
 	};
 

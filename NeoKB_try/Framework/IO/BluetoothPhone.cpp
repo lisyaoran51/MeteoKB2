@@ -20,7 +20,7 @@ int BluetoothPhone::SetDevice(Device * device)
 int BluetoothPhone::TriggerOnInput()
 {
 	for (int i = 0; i < inputStates.size(); i++) {
-		OnCommand.Trigger(inputStates[i]);
+		OnMessage.Trigger(inputStates[i]);
 		LOG(LogLevel::Depricated) << "BluetoothPhone::TriggerOnInput() : bt command .";
 	}
 

@@ -41,9 +41,9 @@ namespace Timing{
 			TimeController::registerLoad(bind(static_cast<int(MeteoTimeController<T>::*)(void)>(&MeteoTimeController<T>::load), this));
 		}
 
-		virtual int OnCommand(MeteoBluetoothCommand* command) {
+		virtual int OnMessage(MeteoBluetoothMessage* message) {
 
-			if (command->GetCommand() == MeteoCommand::AppQuitGame) {
+			if (message->GetCommand() == MeteoCommand::AppQuitGame) {
 
 				// 回傳Ack
 				MeteoContextBluetoothMessage* ack = new MeteoContextBluetoothMessage(MeteoCommand::AckAppQuitGame);
@@ -51,7 +51,7 @@ namespace Timing{
 
 				TimeController::onQuitRequested.Trigger();
 			}
-			else if (command->GetCommand() == MeteoCommand::AppRestartGame) {
+			else if (message->GetCommand() == MeteoCommand::AppRestartGame) {
 
 				// 回傳Ack
 				MeteoContextBluetoothMessage* ack = new MeteoContextBluetoothMessage(MeteoCommand::AckAppRestartGame);

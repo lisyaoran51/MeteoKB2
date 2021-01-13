@@ -96,9 +96,9 @@ int PassThroughInputManager::onSlide(InputState * inputState, InputKey slider)
 	return acceptState(inputState);
 }
 
-int PassThroughInputManager::onCommand(InputState * inputState, BluetoothCommand * bluetoothCommand)
+int PassThroughInputManager::onMessage(InputState * inputState, BluetoothMessage * bluetoothMessage)
 {
-	LOG(LogLevel::Finest) << "PassThroughInputManager::onCommand(): get command [" << bluetoothCommand->GetContext().dump() << "].";
+	//LOG(LogLevel::Finest) << "PassThroughInputManager::onMessage(): get command [" << bluetoothMessage->GetContext().dump() << "].";
 
 	return acceptState(inputState);
 }

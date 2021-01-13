@@ -5,25 +5,25 @@
 #include <vector>
 #include <string>
 #include <stdexcept>
-#include "Commands/BluetoothCommand.h"
+#include "../Output/Bluetooths/BluetoothMessage.h"
 
 using namespace std;
-using namespace Framework::Input::Commands;
+using namespace Framework::Output::Bluetooths;
 
 namespace Framework {
 namespace Input {
 
 	class BluetoothState : public PeripheralState<BluetoothState> {
 
-		vector<BluetoothCommand*> commands;
+		vector<BluetoothMessage*> messages;
 
 	public:
 
 		~BluetoothState();
 
-		int AddCommand(BluetoothCommand* command);
+		int AddMessage(BluetoothMessage* message);
 
-		vector<BluetoothCommand*>* GetCommands();
+		vector<BluetoothMessage*>* GetMessages();
 
 		virtual BluetoothState* Clone();
 

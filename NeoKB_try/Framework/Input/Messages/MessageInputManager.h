@@ -1,9 +1,9 @@
-#ifndef COMMAND_INPUT_MANAGER_H
-#define COMMAND_INPUT_MANAGER_H
+#ifndef MESSAGE_INPUT_MANAGER_H
+#define MESSAGE_INPUT_MANAGER_H
 
 #include "../KeyBindings/KeyBindingInputManager.h"
 #include <utility>
-#include "CommandHandler.h"
+#include "MessageHandler.h"
 #include <algorithm>
 #include <vector>
 
@@ -16,15 +16,15 @@ using namespace std;
 
 namespace Framework {
 namespace Input {
-namespace Commands {
+namespace Messages {
 
-	template<typename T, typename TCommand>
-	class CommandInputManager : public KeyBindingInputManager<T> {
+	template<typename T, typename TMessage>
+	class MessageInputManager : public KeyBindingInputManager<T> {
 
 
 	public:
 
-		CommandInputManager() : KeyBindingInputManager<T>(), RegisterType("CommandInputManager"){
+		MessageInputManager() : KeyBindingInputManager<T>(), RegisterType("MessageInputManager"){
 			
 		}
 
@@ -48,18 +48,18 @@ namespace Commands {
 		/// 會把queue裡面的keybindingReceivable抓出來，然後呼叫onKeyDown(pair<T, int> key)
 		/// 好處是只需要抓key，不用看input state，比較簡單操作
 		/// </summary>
-		virtual int propagateBluetoothCommand(vector<Triggerable*>* queue, TCommand* command) {
+		virtual int propagateBluetoothCommand(vector<Triggerable*>* queue, TMessage* command) {
 
-			LOG(LogLevel::Fine) << "CommandInputManager::propagateBluetoothCommand() : check if there is [" << queue->size() << "] command handler.";
+			LOG(LogLevel::Fine) << "MessageInputManager::propagateBluetoothCommand() : check if there is [" << queue->size() << "] command handler.";
 
 			for (int i = 0; i < queue->size(); i++) {
 
-				CommandHandler<TCommand>* commandHandler = dynamic_cast<CommandHandler<TCommand>*>(queue->at(i));
+				MessageHandler<TMessage>* commandHandler = dynamic_cast<MessageHandler<TMessage>*>(queue->at(i));
 				if (commandHandler != nullptr) {
 
-					LOG(LogLevel::Fine) << "CommandInputManager::propagateBluetoothCommand() : get command handler [" << queue->at(i)->GetTypeName() << "].";
+					LOG(LogLevel::Fine) << "MessageInputManager::propagateBluetoothCommand() : get command handler [" << queue->at(i)->GetTypeName() << "].";
 
-					commandHandler->OnCommand(command);
+					commandHandler->OnMessage(command);
 				}
 			}
 
@@ -70,10 +70,10 @@ namespace Commands {
 
 		int handleNewBluetoothCommand(vector<Triggerable*>* queue, BluetoothCommand* command) {
 
-			if (dynamic_cast<TCommand*>(command) != nullptr) {
+			if (dynamic_cast<TMessage*>(command) != nullptr) {
 
-				LOG(LogLevel::Fine) << "CommandInputManager::handleNewBluetoothCommand() : get new T command.";
-				propagateBluetoothCommand(queue, dynamic_cast<TCommand*>(command));
+				LOG(LogLevel::Fine) << "MessageInputManager::handleNewBluetoothCommand() : get new T command.";
+				propagateBluetoothCommand(queue, dynamic_cast<TMessage*>(command));
 				return 0;
 			}
 			else {
