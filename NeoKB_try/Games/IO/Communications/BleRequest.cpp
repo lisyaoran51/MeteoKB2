@@ -36,7 +36,7 @@ int BleRequest::Perform(CommunicationComponent * cComponent)
 	// 執行完畢以後就不讓ble access把raw message丟進來
 	bleAccess->UnregisterBleRequest(this);
 
-	// 如果有出現錯誤，會丟exception，就不會執行on success
+	// 如果有出現錯誤，會丟exception，就不會執行on success。這邊要注意request在執行完以後不能直接刪掉，要確定所有task都跑完才能刪
 	communicationComponent->GetScheduler()->AddTask([=]() {
 		onSuccess.TriggerThenClear();
 		return 0;
@@ -153,8 +153,20 @@ int BleRequest::PostTextBleRequestMethod::PerformAndWait(BleRequest* thisRequest
 	return 0;
 }
 
-int BleRequest::PostTextBleRequestMethod::AddOnAck(MtoObject * callableObject, function<int(json)> callback, string name)
+int BleRequest::PostTextBleRequestMethod::AddOnAck(BleRequest* thisRequest, MtoObject * callableObject, function<int(json)> callback, string name)
 {
+	/* 不是scene就不能用request的callback */
+	if (dynamic_cast<Scene*>(callableObject) == nullptr)
+		return -1;
+
+	/* 紀錄callback scene */
+	if (thisRequest->callbackScene == nullptr)
+		thisRequest->callbackScene = dynamic_cast<Scene*>(callableObject);
+
+	/* 不允許由不同scene註冊，會當作error */
+	if (thisRequest->callbackScene != dynamic_cast<Scene*>(callableObject))
+		return -1;
+
 	return onAck.Add(callableObject, callback, name);
 }
 
@@ -344,6 +356,7 @@ int BleRequest::GetTextBleRequestMethod::PerformAndWait(BleRequest * thisRequest
 			if (dynamic_cast<MeteoContextBluetoothMessage*>(thisRequest->inputRawMessages[i])) {
 				if (dynamic_cast<MeteoContextBluetoothMessage*>(thisRequest->inputRawMessages[i])->GetCommand() == returnCommand) {
 
+					// 確認Scene還存不存在，如果不存在就不執行callback，避免該scene已經被刪掉的情況
 					onReturn.TriggerThenClear(dynamic_cast<MeteoContextBluetoothMessage*>(thisRequest->inputRawMessages[i])->GetContextInJson());
 
 					return 0;

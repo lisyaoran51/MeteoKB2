@@ -2499,3 +2499,27 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 	request拿raw command的方法完全寫錯，應該不是由request去跟access拿raw command，而是access每次拿到raw command都要直接分給每一個request
 	
 	正在一個一個改，目前改道GetTextBleRequestMethod，接下來GetBinaryBleRequestMethod也要寫
+	
+	看一下thread sleep要怎麼寫，先看access是在哪個thread上面跑
+	
+	發現有個問題，就是request如果有使用到遊戲中的物件，當物件被刪除時，request就很有可能出錯當掉。所以要確保request部會使用遊戲中的物件
+	或者是在使用之前先檢查物件是否存在，例如onAck、onReturn、onSuccess等，執行時先檢查那個物件還在不在。
+	
+	看起來request很難檢查物件是否存在，因為c++不能檢查pointer指向的位置是否被delete，所以只能在物件被刪除時，把request一起刪掉。
+	這種狀況必須盡量減少發生，因為很容易把程式寫錯。目前最常會出現這個狀況的地方是result場景的傳送分數request，因為result場景很容易結束並且返回選單
+	所以在result結束時必須檢查所有request，讓他們不會做出預期外的行為。
+	
+	request和物件雙方都不知道誰會先消失，可能要用統一的管理者，讓request和物件把是否delete告知管理者，在request向物件使用指標時，先詢問管理者物件是否還存在。
+	osu裡面完全沒有這個部分，可能是osu發出request的物件永遠不會消失，或是osu的物件消失後，callback可以自動不執行
+	找到osu是在api access的scheduler裡面去執行onsuccess，他們自己城市的確漏寫error handling，所以他們本來是想用error handling處理。這邊我們應該也直接用error handing處理就好
+	
+	c++沒有設計可以處理invalid pointer exception的try catch，所以沒辦法用error handling處理，除非用一些額外的library或是用linux的signal，比較麻煩
+	https://cristianadam.eu/20160914/nullpointerexception-in-c-plus-plus/
+	
+	是是看如果物件刪除時，自己去access把對應的request上面的on success...callback給刪掉？有沒有更自動的方法？
+	
+	暫時看起來只有request會出現這種狀況，一般的物件在callback時都不太會有對方消失的狀況
+	
+	這邊限制一下，只有scene可以丟request，其他一般container不能丟request，這樣就可以用一個scene master控管所有scene，然後在執行callback之前先確認那個scene還存不存在
+	
+	用callback scene來處理，寫完以後還要再建一個scene master來給request查詢

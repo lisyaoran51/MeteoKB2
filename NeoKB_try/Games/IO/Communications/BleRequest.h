@@ -92,7 +92,7 @@ namespace Communications{
 
 			virtual int PerformAndWait(BleRequest* thisRequest);
 
-			int AddOnAck(MtoObject * callableObject, function<int(json)> callback, string name = "HandleAck");
+			int AddOnAck(BleRequest* thisRequest, MtoObject * callableObject, function<int(json)> callback, string name = "HandleAck");
 
 		protected:
 

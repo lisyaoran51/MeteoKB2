@@ -33,18 +33,55 @@ int CommunicationRequest::Fail(CommunicationRequestException & communicationRequ
 
 int CommunicationRequest::AddOnSuccess(MtoObject * callableObject, function<int()> callback, string name)
 {
+	/* 不是scene就不能用request的callback */
+	if (dynamic_cast<Scene*>(callableObject) == nullptr)
+		return -1;
+
+	/* 紀錄callback scene */
+	if (callbackScene == nullptr)
+		callbackScene = dynamic_cast<Scene*>(callableObject);
+
+	/* 不允許由不同scene註冊，會當作error */
+	if (callbackScene != dynamic_cast<Scene*>(callableObject))
+		return -1;
+
+
 	onSuccess.Add(callableObject, callback, name);
 	return 0;
 }
 
 int CommunicationRequest::AddOnFailed(MtoObject * callableObject, function<int()> callback, string name)
 {
+	/* 不是scene就不能用request的callback */
+	if (dynamic_cast<Scene*>(callableObject) == nullptr)
+		return -1;
+
+	/* 紀錄callback scene */
+	if (callbackScene == nullptr)
+		callbackScene = dynamic_cast<Scene*>(callableObject);
+
+	/* 不允許由不同scene註冊，會當作error */
+	if (callbackScene != dynamic_cast<Scene*>(callableObject))
+		return -1;
+
 	onFailed.Add(callableObject, callback, name);
 	return 0;
 }
 
 int CommunicationRequest::AddOnCancelled(MtoObject * callableObject, function<int()> callback, string name)
 {
+	/* 不是scene就不能用request的callback */
+	if (dynamic_cast<Scene*>(callableObject) == nullptr)
+		return -1;
+
+	/* 紀錄callback scene */
+	if (callbackScene == nullptr)
+		callbackScene = dynamic_cast<Scene*>(callableObject);
+
+	/* 不允許由不同scene註冊，會當作error */
+	if (callbackScene != dynamic_cast<Scene*>(callableObject))
+		return -1;
+
 	onCancelled.Add(callableObject, callback, name);
 	return 0;
 }

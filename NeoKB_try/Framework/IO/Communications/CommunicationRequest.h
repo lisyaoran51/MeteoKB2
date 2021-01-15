@@ -9,6 +9,7 @@
 #include <functional>
 #include "../../../Util/DataStructure/ActionList.h"
 #include <map>
+#include "../../Scenes/Scene.h"
 
 
 
@@ -16,6 +17,7 @@ using namespace std::chrono;
 using namespace std;
 using namespace Framework::Allocation::Hierachal;
 using namespace Util::DataStructure;
+using namespace Framework::Scenes;
 
 
 namespace Framework {
@@ -45,11 +47,11 @@ namespace Communications{
 
 		virtual int Fail(CommunicationRequestException& communicationRequestException);
 
-		int AddOnSuccess(MtoObject * callableObject, function<int()> callback, string name);
+		int AddOnSuccess(MtoObject * callableObject, function<int()> callback, string name = "OnRequestSuccess");
 
-		int AddOnFailed(MtoObject * callableObject, function<int()> callback, string name);
+		int AddOnFailed(MtoObject * callableObject, function<int()> callback, string name = "OnRequestFailed");
 
-		int AddOnCancelled(MtoObject * callableObject, function<int()> callback, string name);
+		int AddOnCancelled(MtoObject * callableObject, function<int()> callback, string name = "OnRequestCancelled");
 
 
 	protected:
@@ -77,6 +79,8 @@ namespace Communications{
 		int retryCount = 0;
 
 		CommunicationComponent* communicationComponent = nullptr;
+
+		Scene* callbackScene = nullptr;
 
 		ActionList<int> onSuccess;
 
