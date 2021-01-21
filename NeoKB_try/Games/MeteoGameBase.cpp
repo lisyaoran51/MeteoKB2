@@ -9,8 +9,6 @@
 using namespace Games;
 using namespace Games::Rulesets;
 using namespace std;
-using namespace Games::Input::Commands;
-using namespace Framework::IO::Api;
 
 
 int MeteoGameBase::load()
@@ -87,7 +85,7 @@ int MeteoGameBase::SetHost(GameHost * host)
 
 InputManager * MeteoGameBase::CreateInputManager()
 {
-	return new UserInputManager<MeteoBluetoothCommand>();
+	return new UserInputManager<MeteoBluetoothMessage>();
 }
 
 int MeteoGameBase::update()
