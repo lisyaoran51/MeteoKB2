@@ -24,6 +24,9 @@ namespace Communications{
 			sourceClock = new StopwatchClock();
 		}
 
+		/// <summary>
+		/// 這個會把他下面的其他manager更新，然後audio manager會把這個update放到thread裡面跑
+		/// </summary>
 		virtual int Update() {
 			CommunicationComponent::Update();
 			for (int i = 0; i < items.size(); i++) {
@@ -81,16 +84,6 @@ namespace Communications{
 			for (int i = 0; i < items.size(); i++) {
 				items[i]->OnStateChange();
 			}
-		}
-
-		/// <summary>
-		/// 這個會把他下面的其他manager更新，然後audio manager會把這個update放到thread裡面跑
-		/// </summary>
-		virtual int Update() {
-
-			
-
-			return 0;
 		}
 
 		int SetIsActive(bool iActive) {
