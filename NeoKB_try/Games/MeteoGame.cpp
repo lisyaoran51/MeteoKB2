@@ -68,7 +68,7 @@ int MeteoGame::LoadOnComplete()
 	// 這邊應該要import from args，以後再寫
 
 	/* ------------ Sample manager載入音色的方式與sm manager相同 ------------ */
-	audioManager->GetSampleManager()->SetupApiAccess(apiAccess);
+	audioManager->GetSampleManager()->SetupApiAccess(apiAccess);	// 這個地方要改，應該是可以整行刪掉，移到sound package request裡面
 
 	//audioManager->GetSampleManager()->GetStableStorage = [=]() {return GetStableStorage(); };
 	audioManager->GetSampleManager()->GetStableStorage = bind(&MeteoGame::GetStableStorage, this);

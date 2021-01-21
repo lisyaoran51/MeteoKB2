@@ -202,7 +202,7 @@ int SampleManager::ClearSampleChannels()
 int SampleManager::SetupApiAccess(ApiAccess * aAccess)
 {
 	
-
+	/*
 	aAccess->AddOnWriteSoundFilePackageSuccess(dynamic_cast<MtoObject*>(this), [=](string fileName) {
 
 		// TODO: 現在還沒有要寫下載新音色，所以不用作這個
@@ -217,7 +217,7 @@ int SampleManager::SetupApiAccess(ApiAccess * aAccess)
 
 		return 0;
 	});
-
+	*/
 	return 0;
 }
 

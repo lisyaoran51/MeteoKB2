@@ -74,6 +74,9 @@ namespace Samples {
 
 		/* -------------------- 載入新音色 -------------------- */
 
+		/// <summary>
+		/// 這個應該要拿掉？改成用sound package request來做
+		/// </summary>
 		int SetupApiAccess(ApiAccess* aAccess);
 
 		int Import(vector<string>* paths);
