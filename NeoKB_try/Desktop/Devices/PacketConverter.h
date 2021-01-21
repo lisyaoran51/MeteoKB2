@@ -72,7 +72,7 @@ namespace Devices{
 
 		virtual PacketType CheckPacketType(char* buffer, int size) = 0;
 
-		virtual PacketType CheckCommandType(BluetoothCommand* bluetoothMessage) = 0;
+		virtual PacketType CheckCommandType(BluetoothMessage* bluetoothMessage) = 0;
 
 		virtual BluetoothMessage* ConvertToBluetoothMessage(char* buffer, int size) = 0;
 
