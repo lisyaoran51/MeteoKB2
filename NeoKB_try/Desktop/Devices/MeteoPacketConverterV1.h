@@ -3,7 +3,7 @@
 
 
 #include "PacketConverter.h"
-#include "../../Games/Input/Commands/MeteoBluetoothCommand.h"
+#include "../../Games/Output/Bluetooths/MeteoBluetoothMessage.h"
 #include <vector>
 #include <map>
 #include "../../Framework/IO/Storage.h"
@@ -13,6 +13,7 @@
 using namespace std;
 using namespace Games::Input::Commands;
 using namespace Framework::IO;
+using namespace Games::Output::Bluetooths;
 
 
 namespace Desktop {
@@ -69,26 +70,26 @@ namespace Devices{
 
 		virtual PacketType CheckPacketType(char* buffer, int size);
 
-		virtual PacketType CheckCommandType(BluetoothCommand* bluetoothCommand);
+		virtual PacketType CheckCommandType(BluetoothMessage* bluetoothMessage);
 
-		virtual BluetoothCommand* ConvertToBluetoothCommand(char* buffer, int size);
+		virtual BluetoothMessage* ConvertToBluetoothMessage(char* buffer, int size);
 
-		virtual MeteoBluetoothCommand* ConvertToBluetoothCommand(BluetoothMessage* bluetoothMessage);
+		//virtual MeteoBluetoothCommand* ConvertToBluetoothCommand(BluetoothMessage* bluetoothMessage);
 
-		virtual int GetCountOfPacket(BluetoothCommand* bluetoothCommand);
+		virtual int GetCountOfPacket(BluetoothMessage* bluetoothMessage);
 
-		virtual int ConvertToByteArray(BluetoothCommand* bluetoothCommand, int packetOrder, char* buffer, int bufferMaxSize);
+		virtual int ConvertToByteArray(BluetoothMessage* bluetoothMessage, int packetOrder, char* buffer, int bufferMaxSize);
 		
 		/// <summary>
 		/// 回傳值就是收到訊息的ack訊息，直接傳回手機就好
 		/// <//summary>
-		virtual MeteoBluetoothCommand* ConvertToFile(char* buffer, int size);
+		virtual BluetoothMessage* ConvertToFile(char* buffer, int size);
 
-		virtual bool CheckIsFinishWriteCommand(BluetoothCommand* bluetoothCommand);
+		virtual bool CheckIsFinishWriteCommand(BluetoothMessage* bluetoothMessage);
 
-		virtual BluetoothCommand* FinishWriteFile(BluetoothCommand* bluetoothCommand);
+		virtual BluetoothMessage* FinishWriteFile(BluetoothMessage* bluetoothMessage);
 
-		virtual bool CheckIsWrtieFileFinishCommand(BluetoothCommand* bluetoothCommand);
+		virtual bool CheckIsWrtieFileFinishCommand(BluetoothMessage* bluetoothMessage);
 
 	protected:
 

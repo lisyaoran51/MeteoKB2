@@ -3,12 +3,10 @@
 
 
 
-#include "../../Framework/Input/Commands/BluetoothCommand.h"
 #include <map>
 #include "../../Framework/Output/Bluetooths/BluetoothMessage.h"
 
 
-using namespace Framework::Input::Commands;
 using namespace std;
 using namespace Framework::Output::Bluetooths;
 
@@ -74,23 +72,23 @@ namespace Devices{
 
 		virtual PacketType CheckPacketType(char* buffer, int size) = 0;
 
-		virtual PacketType CheckCommandType(BluetoothCommand* bluetoothCommand) = 0;
+		virtual PacketType CheckCommandType(BluetoothCommand* bluetoothMessage) = 0;
 
-		virtual BluetoothCommand* ConvertToBluetoothCommand(char* buffer, int size) = 0;
+		virtual BluetoothMessage* ConvertToBluetoothMessage(char* buffer, int size) = 0;
 
-		virtual BluetoothCommand* ConvertToBluetoothCommand(BluetoothMessage* bluetoothMessage) = 0;
+		//virtual BluetoothCommand* ConvertToBluetoothCommand(BluetoothMessage* bluetoothMessage) = 0;
 
-		virtual int GetCountOfPacket(BluetoothCommand* bluetoothCommand) = 0;
+		virtual int GetCountOfPacket(BluetoothMessage* bluetoothMessage) = 0;
 
-		virtual int ConvertToByteArray(BluetoothCommand* bluetoothCommand, int packetOrder, char* buffer, int bufferMaxSize) = 0;
+		virtual int ConvertToByteArray(BluetoothMessage* bluetoothMessage, int packetOrder, char* buffer, int bufferMaxSize) = 0;
 
-		virtual BluetoothCommand* ConvertToFile(char* buffer, int size) = 0;
+		virtual BluetoothMessage* ConvertToFile(char* buffer, int size) = 0;
 
-		virtual bool CheckIsFinishWriteCommand(BluetoothCommand* bluetoothCommand) = 0;
+		virtual bool CheckIsFinishWriteCommand(BluetoothMessage* bluetoothMessage) = 0;
 
-		virtual BluetoothCommand* FinishWriteFile(BluetoothCommand* bluetoothCommand) = 0;
+		virtual BluetoothMessage* FinishWriteFile(BluetoothMessage* bluetoothMessage) = 0;
 
-		virtual bool CheckIsWrtieFileFinishCommand(BluetoothCommand* bluetoothCommand) = 0;
+		virtual bool CheckIsWrtieFileFinishCommand(BluetoothMessage* bluetoothMessage) = 0;
 
 	protected:
 

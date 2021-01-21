@@ -727,7 +727,7 @@ PacketType MeteoPacketConverterV1::CheckPacketType(char * buffer, int size)
 	return PacketType::None;
 }
 
-PacketType MeteoPacketConverterV1::CheckCommandType(BluetoothCommand * bluetoothCommand)
+PacketType MeteoPacketConverterV1::CheckCommandType(BluetoothMessage * bluetoothCommand)
 {
 	MeteoCommand command = dynamic_cast<MeteoBluetoothCommand*>(bluetoothCommand)->GetCommand();
 	
@@ -739,7 +739,7 @@ PacketType MeteoPacketConverterV1::CheckCommandType(BluetoothCommand * bluetooth
 	return PacketType::None;
 }
 
-BluetoothCommand * MeteoPacketConverterV1::ConvertToBluetoothCommand(char * buffer, int size)
+BluetoothMessage * MeteoPacketConverterV1::ConvertToBluetoothMessage(char * buffer, int size)
 {
 	unsigned long command = 0x0;
 	memcpy(&command, buffer, sizeof(command));
@@ -795,17 +795,7 @@ BluetoothCommand * MeteoPacketConverterV1::ConvertToBluetoothCommand(char * buff
 	return nullptr;
 }
 
-MeteoBluetoothCommand * MeteoPacketConverterV1::ConvertToBluetoothCommand(BluetoothMessage * bluetoothMessage)
-{
-	// TODO: 丟出去的部分還沒寫
-	// 好像不用血這段
-
-
-
-	return nullptr;
-}
-
-int MeteoPacketConverterV1::GetCountOfPacket(BluetoothCommand * bluetoothCommand)
+int MeteoPacketConverterV1::GetCountOfPacket(BluetoothMessage * bluetoothCommand)
 {
 	if (dynamic_cast<MeteoOutputFileBluetoothCommand*>(bluetoothCommand)) {
 		return dynamic_cast<MeteoOutputFileBluetoothCommand*>(bluetoothCommand)->GetFileSegmentCount();
@@ -818,7 +808,7 @@ int MeteoPacketConverterV1::GetCountOfPacket(BluetoothCommand * bluetoothCommand
 	return -1;
 }
 
-int MeteoPacketConverterV1::ConvertToByteArray(BluetoothCommand * bluetoothCommand, int packetOrder, char * buffer, int bufferMaxSize)
+int MeteoPacketConverterV1::ConvertToByteArray(BluetoothMessage * bluetoothCommand, int packetOrder, char * buffer, int bufferMaxSize)
 {
 	// 改成寫在bluetooth phone裡面了
 
@@ -827,7 +817,7 @@ int MeteoPacketConverterV1::ConvertToByteArray(BluetoothCommand * bluetoothComma
 	return 0;
 }
 
-BluetoothCommand * MeteoPacketConverterV1::FinishWriteFile(BluetoothCommand * bluetoothCommand)
+BluetoothMessage * MeteoPacketConverterV1::FinishWriteFile(BluetoothMessage * bluetoothCommand)
 {
 	if (!dynamic_cast<MeteoBluetoothCommand*>(bluetoothCommand))
 		return nullptr;
@@ -884,7 +874,7 @@ BluetoothCommand * MeteoPacketConverterV1::FinishWriteFile(BluetoothCommand * bl
 	return nullptr;
 }
 
-bool MeteoPacketConverterV1::CheckIsWrtieFileFinishCommand(BluetoothCommand * bluetoothCommand)
+bool MeteoPacketConverterV1::CheckIsWrtieFileFinishCommand(BluetoothMessage * bluetoothCommand)
 {
 	if (dynamic_cast<MeteoBluetoothCommand*>(bluetoothCommand)->GetCommand() == MeteoCommand::AckFinishWriteNewFirmwareFile ||
 		dynamic_cast<MeteoBluetoothCommand*>(bluetoothCommand)->GetCommand() == MeteoCommand::AckFinishWriteNewInstrumentFile ||
@@ -895,7 +885,7 @@ bool MeteoPacketConverterV1::CheckIsWrtieFileFinishCommand(BluetoothCommand * bl
 	return false;
 }
 
-MeteoBluetoothCommand* MeteoPacketConverterV1::ConvertToFile(char * buffer, int size)
+BluetoothMessage* MeteoPacketConverterV1::ConvertToFile(char * buffer, int size)
 {
 	unsigned long command = 0x0;
 	memcpy(&command, buffer, sizeof(command));
@@ -954,7 +944,7 @@ MeteoBluetoothCommand* MeteoPacketConverterV1::ConvertToFile(char * buffer, int 
 	return nullptr;
 }
 
-bool MeteoPacketConverterV1::CheckIsFinishWriteCommand(BluetoothCommand * bluetoothCommand)
+bool MeteoPacketConverterV1::CheckIsFinishWriteCommand(BluetoothMessage * bluetoothCommand)
 {
 	return false;
 }
