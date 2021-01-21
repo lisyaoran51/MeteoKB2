@@ -57,7 +57,7 @@ namespace Devices{
 
 		MeteoPacketConverterFileType getFileType(char* buffer, int size);
 
-		MeteoBluetoothCommand* createAckFileSegmentBluetoothCommand(char* buffer, int size);
+		MeteoBluetoothMessage* createAckFileSegmentBluetoothMessage(char* buffer, int size);
 
 
 	public:
