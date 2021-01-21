@@ -367,8 +367,8 @@ int InputManager::updateBluetoothEvents(InputState * inputState)
 		return 0;
 	}(triggerQueue);
 
-	for (int i = 0; i < bluetoothState->GetCommands()->size(); i++) {
-		handleBluetoothCommand(inputState, bluetoothState->GetCommands()->at(i));
+	for (int i = 0; i < bluetoothState->GetMessages()->size(); i++) {
+		handleBluetoothMessage(inputState, bluetoothState->GetMessages()->at(i));
 	}
 
 	// 還沒想到有什麼互動
