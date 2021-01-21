@@ -7,7 +7,7 @@
 #include "Audio/AudioManager.h"
 #include "Host/GameHost.h"
 #include "Input/UserInputManager.h"
-#include "Input/Commands/MessageInputManager.h"
+#include "Input/Messages/MessageInputManager.h"
 
 
 using namespace Framework::Allocation;
