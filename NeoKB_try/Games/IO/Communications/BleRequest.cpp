@@ -1,7 +1,6 @@
 #include "BleRequest.h"
 
 #include "BleAccess.h"
-#include "../../Input/Commands/MeteoTextBluetoothCommand.h"
 #include "../../Output/Bluetooths/MeteoContextBluetoothMessage.h"
 #include "../../Output/Bluetooths/MeteoFileSegmentBluetoothMessage.h"
 #include <exception>
@@ -12,7 +11,6 @@
 
 
 using namespace Games::IO::Communications;
-using namespace Games::Input::Commands;
 using namespace Games::Output::Bluetooths;
 using namespace std;
 using namespace Util::DataStructure;

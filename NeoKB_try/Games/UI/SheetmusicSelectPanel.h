@@ -4,15 +4,13 @@
 #include "../../Framework/Allocation/Hierachal/Container.h"
 #include "../Sheetmusic/SheetmusicInfo.h"
 #include "../Sheetmusic/SheetmusicManager.h"
-#include "../../Framework/Input/Commands/MessageHandler.h"
-#include "../Input/Commands/MeteoBluetoothCommand.h"
+#include "../../Framework/Input/Messages/MessageHandler.h"
 
 
 
 using namespace Framework::Allocation::Hierachal;
 using namespace Games::Sheetmusics;
-using namespace Framework::Input::Commands;
-using namespace Games::Input::Commands;
+using namespace Framework::Input::Messages;
 
 
 namespace Games {

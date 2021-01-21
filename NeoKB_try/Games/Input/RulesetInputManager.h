@@ -1,14 +1,12 @@
 #ifndef RULESET_INPUT_MANAGER_H
 #define RULESET_INPUT_MANAGER_H
 
-#include "../../Framework/Input/Commands/MessageInputManager.h"
+#include "../../Framework/Input/Messages/MessageInputManager.h"
 #include "../Ruleset/RulesetInfo.h"
 #include "../Ruleset/Ruleset.h"
-#include "Commands/MeteoBluetoothCommand.h"
 
-using namespace Framework::Input::Commands;
+using namespace Framework::Input::Messages;
 using namespace Games::Rulesets;
-using namespace Games::Input::Commands;
 
 
 namespace Games {

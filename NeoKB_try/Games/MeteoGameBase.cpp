@@ -4,8 +4,6 @@
 #include "../Framework/Database/MemoryBasedDatabaseContextFactory.h"
 #include "../Framework/Database/ReadonlyCsvDatabaseContextFactory.h"
 #include <functional>
-#include "Input/Commands/MeteoBluetoothCommand.h"
-#include "../Framework/IO/Api/ApiAccess.h"
 
 
 using namespace Games;
@@ -51,7 +49,8 @@ int MeteoGameBase::load()
 
 	GetDependencies()->Cache<MeteoConfigManager>(localConfig);
 
-	GetDependencies()->Cache<ApiAccess>(apiAccess = new ApiAccess(gameHost));
+	//GetDependencies()->Cache<ApiAccess>(apiAccess = new ApiAccess(gameHost));
+	// TODO: §ï¦¨communication access
 
 	GetDependencies()->Cache<RulesetStore>(rulesetStore = new RulesetStore(bind(&DatabaseContextFactory::GetContext, readonlyDbContextFactory)));
 

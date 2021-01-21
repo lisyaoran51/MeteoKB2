@@ -1,8 +1,8 @@
 #include "MeteoPacketConverterV1.h"
 
 #include "../../Util/Log.h"
-#include "../../Games/Output/Bluetooths/Commands/MeteoOutputFileBluetoothCommand.h"
-#include "../../Games/Input/Commands/MeteoAckFileBluetoothCommand.h"
+//#include "../../Games/Output/Bluetooths/Commands/MeteoOutputFileBluetoothCommand.h"
+//#include "../../Games/Input/Commands/MeteoAckFileBluetoothCommand.h"
 
 
 using namespace Desktop::Devices;

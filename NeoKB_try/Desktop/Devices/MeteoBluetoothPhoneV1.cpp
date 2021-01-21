@@ -3,8 +3,8 @@
 #include <thread>
 #include "sdp.h"
 #include <unistd.h>
-#include "../../Games/Output/Bluetooths/Commands/MeteoOutputFileBluetoothCommand.h"
-#include "../../Games/Input/Commands/MeteoAckFileBluetoothCommand.h"
+//#include "../../Games/Output/Bluetooths/Commands/MeteoOutputFileBluetoothCommand.h"
+//#include "../../Games/Input/Commands/MeteoAckFileBluetoothCommand.h"
 
 
 using namespace std;
