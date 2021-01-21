@@ -5,7 +5,7 @@ Framework/Devices:\
 Framework/Exception:\
 Framework/Graphic:Framework/Graphic/Map:\
 Framework/Host:\
-Framework/Input:Framework/Input/Commands:Framework/Input/Handler:Framework/Input/KeyBindings:\
+Framework/Input:Framework/Input/Messages:Framework/Input/Handler:Framework/Input/KeyBindings:\
 Framework/IO:Framework/IO/Stores:Framework/IO/Api:\
 Framework/Output:Framework/Output/Panels:Framework/Output/Bluetooths:\
 Framework/Database:\
@@ -16,8 +16,8 @@ Framework/Timing:Framework/Timing/SpeedAdjusters:\
 Games:Games/Configurations:Games/Input:\
 Games/Ruleset:Games/Ruleset/Modifiers:Games/Ruleset/Judgements:Games/Ruleset/Scoring:Games/Ruleset/Replays:\
 Games/Scene:Games/Scene/Interlude:Games/Scene/Play:Games/Scene/Play/Hud:Games/Scene/Select:Games/Scene/Results:\
-Games/Input:Games/Input/Commands:\
-Games/Output:Games/Output/Bluetooths:Games/Output/Bluetooths/Commands:\
+Games/Input:Games/Input/Messages:\
+Games/Output:Games/Output/Bluetooths:\
 Games/Scheduler/Event:Games/Scheduler/Event/ControlPoints:Games/Scheduler/Event/Effect:\
 Games/Scheduler/Event/Effect/Algorithm:Games/Scheduler/Event/GameEvents:Games/Scheduler/Event/SystemEvents:\
 Games/Scheduler/Event/IoEvents:Games/Scheduler/Event/IoEvents/IoCommunicators:\
@@ -59,7 +59,7 @@ INCLUDE = -IFramwork -IFramework/Allocation -IFramework/Allocation/Hierachal -IF
 -IFramework/Exception \
 -IFramework/Graphic -IFramework/Graphic/Map \
 -IFramework/Host \
--IFramework/Input -IFramework/Input/Commands -IFramework/Input/Handler -IFramework/Input/KeyBindings \
+-IFramework/Input -IFramework/Input/Messages -IFramework/Input/Handler -IFramework/Input/KeyBindings \
 -IFramework/IO -IFramework/IO/Stores -IFramework/IO/Api \
 -IFramework/Output -IFramework/Output/Panels -IFramework/Output/Bluetooths \
 -IFramework/Database \
@@ -70,8 +70,8 @@ INCLUDE = -IFramwork -IFramework/Allocation -IFramework/Allocation/Hierachal -IF
 -IGames -IGames/Configurations -IGames/Input \
 -IGames/Ruleset -IGames/Ruleset/Modifiers -IGames/Ruleset/Judgements -IGames/Ruleset/Scoring -IGames/Ruleset/Replays \
 -IGames/Scene -IGames/Scene/Interlude -IGames/Scene/Play -IGames/Scene/Play/Hud -IGames/Scene/Select -IGames/Scene/Results \
--IGames/Input -IGames/Input/Commands \
--IGames/Output -IGames/Output/Bluetooths -IGames/Output/Bluetooths/Commands \
+-IGames/Input -IGames/Input/Messages \
+-IGames/Output -IGames/Output/Bluetooths \
 -IGames/Scheduler/Event -IGames/Scheduler/Event/ControlPoints -IGames/Scheduler/Event/Effect \
 -IGames/Scheduler/Event/Effect/Algorithm -IGames/Scheduler/Event/GameEvents -IGames/Scheduler/Event/SystemEvents \
 -IGames/Scheduler/Event/IoEvents -IGames/Scheduler/Event/IoEvents/IoCommunicators \
