@@ -9,7 +9,6 @@
 #include "../Framework/Database/DatabaseContextFactory.h"
 #include "Configurations/MeteoConfigManager.h"
 #include "../Util/DataStructure/BindablePointer.h"
-#include "../Framework/IO/Api/ApiAccess.h"
 #include "../Framework/IO/Communications/CommunicationAccess.h"
 
 
@@ -22,7 +21,6 @@ using namespace Framework::IO::Communications;
 using namespace Framework::Database;
 using namespace Games::Configurations;
 using namespace Util::DataStructure;
-using namespace Framework::IO::Api;
 
 
 namespace Games {
@@ -49,8 +47,6 @@ namespace Games {
 		virtual InputManager* CreateInputManager();
 
 	protected:
-
-		ApiAccess* apiAccess = nullptr;
 
 		CommunicationAccess* communicationAccess = nullptr;
 
