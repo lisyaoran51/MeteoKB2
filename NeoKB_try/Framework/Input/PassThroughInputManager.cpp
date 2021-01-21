@@ -56,9 +56,10 @@ vector<InputState*>* PassThroughInputManager::getPendingState(vector<InputState*
 		if (find(pStates->begin(), pStates->end(), pendingParentStates[i]) == pStates->end())
 			pStates->push_back(pendingParentStates[i]);
 
-		if (dynamic_cast<BluetoothCommand*>(pendingParentStates[i])) {
-			LOG(LogLevel::Depricated) << "PassThroughInputManager::getPendingState(): push [" << dynamic_cast<BluetoothCommand*>(pendingParentStates[i])->GetContext().dump() << "] into pending states.";
-		}
+		// 下面這個是什麼東西? 為什麼State可以轉乘command?
+		//if (dynamic_cast<BluetoothCommand*>(pendingParentStates[i])) {
+		//	LOG(LogLevel::Depricated) << "PassThroughInputManager::getPendingState(): push [" << dynamic_cast<BluetoothCommand*>(pendingParentStates[i])->GetContext().dump() << "] into pending states.";
+		//}
 	}
 
 	pendingParentStates.clear();
