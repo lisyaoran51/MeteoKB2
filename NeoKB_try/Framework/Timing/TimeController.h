@@ -6,14 +6,14 @@
 #include "SpeedAdjusters/SpeedAdjuster.h"
 #include "DecoupledInterpolatingFramedClock.h"
 #include "../Input/KeyBindings/KeyBindingHandler.h"
-#include "../Input/Commands/MessageHandler.h"
+#include "../Input/Messages/MessageHandler.h"
 
 
 using namespace Framework::Timing::SpeedAdjusters;
 using namespace Framework::Timing;
 using namespace Framework::Allocation::Hierachal;
 using namespace Framework::Input::KeyBindings;
-using namespace Framework::Input::Commands;
+using namespace Framework::Input::Messages;
 
 
 
