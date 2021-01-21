@@ -478,19 +478,19 @@ int InputManager::propagateSlide(vector<Triggerable*>* queue, InputState * state
 	return 0;
 }
 
-int InputManager::handleBluetoothCommand(InputState * state, BluetoothCommand * command)
+int InputManager::handleBluetoothMessage(InputState * state, BluetoothMessage* message)
 {
-	LOG(LogLevel::Finest) << "InputManager::handleBluetoothCommand : handling bt command " << command << ".";
-	return propagateBluetoothCommand(&triggerQueue, state, command);
+	LOG(LogLevel::Finest) << "InputManager::handleBluetoothCommand : handling bt command " << message << ".";
+	return propagateBluetoothMessage(&triggerQueue, state, message);
 }
 
-int InputManager::propagateBluetoothCommand(vector<Triggerable*>* queue, InputState * state, BluetoothCommand* command)
+int InputManager::propagateBluetoothMessage(vector<Triggerable*>* queue, InputState * state, BluetoothMessage* message)
 {
-	LOG(LogLevel::Finest) << "InputManager::propagateBluetoothCommand : handling bt command " << command << ".";
+	LOG(LogLevel::Finest) << "InputManager::propagateBluetoothCommand : handling bt command " << message << ".";
 
 	for (int i = 0; i < queue->size(); i++) {
 		LOG(LogLevel::Depricated) << "InputManager::propagateBluetoothCommand : [" << queue->at(i)->GetTypeName() << "].";
-		queue->at(i)->TriggerOnMessage(state, command);
+		queue->at(i)->TriggerOnMessage(state, message);
 	}
 	return 0;
 }

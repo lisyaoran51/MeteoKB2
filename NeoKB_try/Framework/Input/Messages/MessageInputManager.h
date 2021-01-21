@@ -39,16 +39,16 @@ namespace Messages {
 		/// <summary>
 		/// 本來會去比對command有沒有在state李，這邊懶得比了直接丟到handleNewBluetoothCommand去
 		/// </summary>
-		virtual int propagateBluetoothCommand(vector<Triggerable*>* queue, InputState* state, BluetoothCommand* command) {
+		virtual int propagateBluetoothMessage(vector<Triggerable*>* queue, InputState* state, BluetoothMessage* message) {
 
-			return InputManager::propagateBluetoothCommand(queue, state, command) + handleNewBluetoothCommand(queue, command);
+			return InputManager::propagateBluetoothMessage(queue, state, message) + handleNewBluetoothMessage(queue, message);
 		}
 
 		/// <summary>
 		/// 會把queue裡面的keybindingReceivable抓出來，然後呼叫onKeyDown(pair<T, int> key)
 		/// 好處是只需要抓key，不用看input state，比較簡單操作
 		/// </summary>
-		virtual int propagateBluetoothCommand(vector<Triggerable*>* queue, TMessage* command) {
+		virtual int propagateBluetoothMessage(vector<Triggerable*>* queue, TMessage* message) {
 
 			LOG(LogLevel::Fine) << "MessageInputManager::propagateBluetoothCommand() : check if there is [" << queue->size() << "] command handler.";
 
@@ -59,7 +59,7 @@ namespace Messages {
 
 					LOG(LogLevel::Fine) << "MessageInputManager::propagateBluetoothCommand() : get command handler [" << queue->at(i)->GetTypeName() << "].";
 
-					commandHandler->OnMessage(command);
+					commandHandler->OnMessage(message);
 				}
 			}
 
@@ -68,12 +68,12 @@ namespace Messages {
 
 	private:
 
-		int handleNewBluetoothCommand(vector<Triggerable*>* queue, BluetoothCommand* command) {
+		int handleNewBluetoothMessage(vector<Triggerable*>* queue, BluetoothMessage* message) {
 
-			if (dynamic_cast<TMessage*>(command) != nullptr) {
+			if (dynamic_cast<TMessage*>(message) != nullptr) {
 
 				LOG(LogLevel::Fine) << "MessageInputManager::handleNewBluetoothCommand() : get new T command.";
-				propagateBluetoothCommand(queue, dynamic_cast<TMessage*>(command));
+				propagateBluetoothMessage(queue, dynamic_cast<TMessage*>(message));
 				return 0;
 			}
 			else {
