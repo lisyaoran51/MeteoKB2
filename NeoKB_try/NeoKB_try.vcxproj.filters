@@ -1788,6 +1788,12 @@
     <ClCompile Include="Games\IO\Communications\BleRequestException.cpp">
       <Filter>來源檔案\Games\IO\Communications</Filter>
     </ClCompile>
+    <ClCompile Include="Framework\Scenes\SceneMaster.cpp">
+      <Filter>來源檔案\Framework\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\Output\Bluetooths\MeteoFileSegmentBluetoothMessage.cpp">
+      <Filter>來源檔案\Games\Output\Bluetooths</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="DailyLog.txt">
@@ -3000,6 +3006,9 @@
     </ClInclude>
     <ClInclude Include="Framework\Input\Messages\MessageInputManager.h">
       <Filter>標頭檔\Framework\Input\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Scenes\SceneMaster.h">
+      <Filter>標頭檔\Framework\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

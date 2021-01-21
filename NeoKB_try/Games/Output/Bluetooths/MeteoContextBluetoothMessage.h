@@ -20,10 +20,21 @@ namespace Bluetooths{
 
 		MeteoContextBluetoothMessage(MeteoCommand mCommand);
 
+		virtual BluetoothMessage* Clone();
+
+		/// <summary>
+		/// 暫時不能用readwrite，那樣會有點複雜，先不要用
+		/// </summary>
 		virtual int SetAccessType(MeteoBluetoothMessageAccessType aType);
 
+		/// <summary>
+		/// 只能set依次，如果第二次set就會把之前set的內容都刪掉
+		/// </summary>
 		virtual int SetContext(char* c, int cSize);
 
+		/// <summary>
+		/// 只能set依次，如果第二次set就會把之前set的內容都刪掉
+		/// </summary>
 		int SetContextInJson(json cInJson);
 
 		string GetContext();

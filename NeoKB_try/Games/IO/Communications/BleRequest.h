@@ -145,6 +145,8 @@ namespace Communications{
 
 			BleBinaryRequestFileSegmentMap* fileMap = nullptr;
 
+			vector<int> retransferOrders;
+
 			ActionList<int> onFinish;
 		};
 
@@ -188,8 +190,9 @@ namespace Communications{
 			/// <summary>
 			/// 資料夾位置最後面部要加上斜線
 			/// </summary>
-			GetBinaryBleRequestMethod(string dPath,
+			GetBinaryBleRequestMethod(string fPath,
 				MeteoBluetoothMessage* gMessage,
+				MeteoCommand ackGetCommand,
 				MeteoCommand tCommand,
 				MeteoCommand fCommand,
 				MeteoCommand rRetransferCommand,
@@ -203,8 +206,10 @@ namespace Communications{
 			/// 資料夾位置，最後面不要加上斜線
 			/// </summary>
 			string directoryPath = "";
+			string fileName = "";
 			MeteoBluetoothMessage* getMessage;
 			MeteoCommand getCommand = MeteoCommand::None;
+			MeteoCommand ackGetCommand = MeteoCommand::None;
 			MeteoCommand transferCommand = MeteoCommand::None;
 			MeteoCommand finishCommand = MeteoCommand::None;
 			MeteoCommand requestRetransferCommand = MeteoCommand::None;
@@ -213,6 +218,12 @@ namespace Communications{
 			string fileName = "";
 
 			BleBinaryRequestFileSegmentMap* fileSegmentMap = nullptr;
+
+			bool isTransferFinished = false;
+			bool isAckedTransferFinished = false;
+
+			ActionList<int> onFinish;
+			ActionList<int, json> onAck;
 
 		};
 
@@ -231,7 +242,15 @@ namespace Communications{
 			int segmentSize;
 			int segmentAmount;
 			bool CheckFullFilled();
+
+			/// <summary>
+			/// 部會close fstream，執行完畢還要自己去close stream
+			/// </summary>
 			int WriteFile(fstream* fStream);
+
+			/// <summary>
+			/// 部會close fstream，執行完畢還要自己去close stream
+			/// </summary>
 			int ReadFile(fstream* fStream);
 
 		};

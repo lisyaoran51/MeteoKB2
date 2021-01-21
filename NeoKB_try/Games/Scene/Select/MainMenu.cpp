@@ -10,6 +10,7 @@ MainMenu::MainMenu(): RegisterType("MainMenu")
 
 int MainMenu::onEntering(Scene * lastScene)
 {
+	MeteoScene::onEntering(lastScene);
 
 	songSelect = new PlaySongSelect();
 

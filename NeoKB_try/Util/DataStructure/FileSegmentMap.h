@@ -24,7 +24,12 @@ namespace DataStructure{
 
 
 		string fileName;
+
+		/// <summary>
+		/// map(order, pair(data, size))
+		/// </summary>
 		map<int, pair<char*, int>> fileSegmentMap;
+
 		int segmentAmount;
 
 		/// <summary>

@@ -30,6 +30,8 @@ InstantResult::InstantResult(Score * s) : Result(s), RegisterType("InstantResult
 
 int InstantResult::onEntering(Scene * lastScene)
 {
+	MeteoScene::onEntering(lastScene);
+
 	LOG(LogLevel::Info) << "InstantResult::onEntering : pushing game over message.";
 
 	/* ÁÙ¨S¼g¦n

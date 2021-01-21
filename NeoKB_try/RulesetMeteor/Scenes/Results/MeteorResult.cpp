@@ -497,6 +497,8 @@ string MeteorResult::writeGameRecord()
 
 int MeteorResult::onEntering(Scene * lastScene)
 {
+	MeteoScene::onEntering(lastScene);
+
 	LOG(LogLevel::Info) << "MeteorResult::onEntering : pushing game over message.";
 
 	// bluetooth±À°eµ²ªG

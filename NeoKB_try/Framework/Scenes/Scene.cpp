@@ -2,6 +2,7 @@
 
 #include "../Exceptions/FrameworkException.h"
 #include "../Threading/ThreadMaster.h"
+#include "SceneMaster.h"
 
 using namespace Framework::Scenes;
 using namespace Framework::Allocation::Hierachal;
@@ -140,12 +141,16 @@ int Scene::ExitTo(Scene * sourceScene)
 
 int Scene::onEntering(Scene * lastScene)
 {
+	SceneMaster::GetInstance().AddScene(this);
+
 	// 繼承的人寫
 	return 0;
 }
 
 int Scene::onExiting(Scene * lastScene)
 {
+	SceneMaster::GetInstance().DeleteScene(this);
+
 	// 繼承的人寫
 	return 0;
 }

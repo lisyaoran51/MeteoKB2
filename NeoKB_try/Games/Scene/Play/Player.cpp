@@ -263,5 +263,6 @@ int Player::onRestarting()
 
 int Player::onExiting(Scene * lastScene)
 {
+	MeteoScene::onExiting(lastScene);
 	return 0;
 }

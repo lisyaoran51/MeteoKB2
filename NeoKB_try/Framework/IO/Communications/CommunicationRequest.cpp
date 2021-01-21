@@ -26,7 +26,7 @@ int CommunicationRequest::AddCommunicationComponentOption(string componentName, 
 
 int CommunicationRequest::Fail(CommunicationRequestException & communicationRequestException)
 {
-	onFailed.Trigger();
+	//onFailed.Trigger();
 
 	return fail(communicationRequestException);
 }

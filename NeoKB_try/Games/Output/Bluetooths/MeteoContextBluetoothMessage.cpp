@@ -12,8 +12,51 @@ MeteoContextBluetoothMessage::MeteoContextBluetoothMessage(MeteoCommand mCommand
 {
 }
 
+BluetoothMessage * MeteoContextBluetoothMessage::Clone()
+{
+	MeteoContextBluetoothMessage* clonedMessage = new MeteoContextBluetoothMessage(command);
+
+	if (accessType == MeteoBluetoothMessageAccessType::WriteOnly) {
+		if (contextSize > 0)
+			clonedMessage->SetContext(context, contextSize);
+
+		if (contextInJson.size() > 0)
+			clonedMessage->SetContextInJson(contextInJson);
+	}
+	else if (accessType == MeteoBluetoothMessageAccessType::ReadOnly) {
+		clonedMessage->SetContextInJson(GetContextInJson());
+		clonedMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
+	}
+
+	return clonedMessage;
+}
+
 int MeteoContextBluetoothMessage::SetAccessType(MeteoBluetoothMessageAccessType aType)
 {
+	if (accessType == MeteoBluetoothMessageAccessType::WriteOnly) {
+		contextInJson.clear();
+		if (contextSize > 0) {
+			delete[] context;
+			contextSize = 0;
+		}
+
+	}
+	else if (accessType == MeteoBluetoothMessageAccessType::ReadOnly) {
+		if (contextInJson.size() > 0) {
+			string jsonDump = contextInJson.dump();
+
+			context = new char[jsonDump.length() + 1];
+			strcpy(context, jsonDump.c_str());
+			contextSize = jsonDump.length() + 1;
+		}
+		else if (contextSize > 0) {
+			contextInJson.parse(context);
+		}
+
+	}
+
+	accessType = aType;
+
 	return 0;
 }
 
@@ -28,6 +71,8 @@ int MeteoContextBluetoothMessage::SetContext(char * c, int cSize)
 			delete[] context;
 			contextSize = 0;
 		}
+
+		contextInJson.clear();
 
 		context = new char[cSize];
 		memcpy(context, c, cSize);
@@ -48,6 +93,11 @@ int MeteoContextBluetoothMessage::SetContextInJson(json cInJson)
 	if (accessType == MeteoBluetoothMessageAccessType::ReadWrite ||
 		accessType == MeteoBluetoothMessageAccessType::WriteOnly) {
 		contextInJson = cInJson;
+
+		if (contextSize != 0) {
+			delete[] context;
+			contextSize = 0;
+		}
 	}
 }
 

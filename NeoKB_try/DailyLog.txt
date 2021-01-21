@@ -2523,3 +2523,13 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 	這邊限制一下，只有scene可以丟request，其他一般container不能丟request，這樣就可以用一個scene master控管所有scene，然後在執行callback之前先確認那個scene還存不存在
 	
 	用callback scene來處理，寫完以後還要再建一個scene master來給request查詢
+	
+	
+1/19
+	寫好scene master了，接下來要寫完reuqest method
+	
+1/21
+	json的介紹
+	https://nlohmann.github.io/json/doxygen/classnlohmann_1_1basic__json_a476756fb08e7f2416aad116d137977f4.html
+	
+	把request method都寫完了，暫時先不繼續寫連線，先把程式寫到可以跑，然後要來測主板

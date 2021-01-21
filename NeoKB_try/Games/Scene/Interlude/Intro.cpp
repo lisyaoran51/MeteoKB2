@@ -14,6 +14,8 @@ Intro::Intro(): RegisterType("Intro")
 
 int Intro::onEntering(Scene * lastScene)
 {
+	MeteoScene::onEntering(lastScene);
+
 	LOG(LogLevel::Info) << "Intro::onEntering() : pushing main menu.";
 
 	mainMenu = new MainMenu();

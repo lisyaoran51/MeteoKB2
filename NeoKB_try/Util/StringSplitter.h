@@ -19,6 +19,8 @@ namespace Util {
 		static vector<string> Split(string s, char splitter);
 		static vector<string> Split(string s, char splitter1, char splitter2);
 
+		static string Combine(vector<string> element, char delimiter);
+
 	};
 
 

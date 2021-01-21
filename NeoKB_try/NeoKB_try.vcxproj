@@ -64,6 +64,7 @@
     <ClCompile Include="Framework\IO\Stores\StorageResourceStore.cpp" />
     <ClCompile Include="Framework\Output\Bluetooths\BluetoothOutputer.cpp" />
     <ClCompile Include="Framework\Output\OutputManager.cpp" />
+    <ClCompile Include="Framework\Scenes\SceneMaster.cpp" />
     <ClCompile Include="Framework\Threading\ThreadMaster.cpp" />
     <ClCompile Include="Framework\Timing\SpeedAdjusters\LinearSpeedAdjuster.cpp" />
     <ClCompile Include="Framework\Timing\ThrottledFramedClock.cpp" />
@@ -88,6 +89,7 @@
     <ClCompile Include="Games\Output\Bluetooths\MeteoBluetoothOutputer.cpp" />
     <ClCompile Include="Games\Output\Bluetooths\MeteoContextBluetoothMessage.cpp" />
     <ClCompile Include="Games\Output\Bluetooths\MeteoFileBluetoothMessage.cpp" />
+    <ClCompile Include="Games\Output\Bluetooths\MeteoFileSegmentBluetoothMessage.cpp" />
     <ClCompile Include="Games\Ruleset\Judgements\HasHitWindow.cpp" />
     <ClCompile Include="Games\Ruleset\Judgements\HitWindow.cpp" />
     <ClCompile Include="Games\Ruleset\Judgements\Judgement.cpp" />
@@ -409,6 +411,7 @@
     <ClInclude Include="Framework\Output\Panels\PanelManager.h" />
     <ClInclude Include="Framework\Output\Panels\PanelMessage.h" />
     <ClInclude Include="Framework\Output\Panels\PanelOutputer.h" />
+    <ClInclude Include="Framework\Scenes\SceneMaster.h" />
     <ClInclude Include="Framework\Threading\ThreadMaster.h" />
     <ClInclude Include="Framework\Timing\SpeedAdjusters\LinearSpeedAdjuster.h" />
     <ClInclude Include="Framework\Timing\TimeController.h" />
