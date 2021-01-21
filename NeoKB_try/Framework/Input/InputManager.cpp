@@ -94,9 +94,9 @@ vector<InputState*>* InputManager::getPendingState(vector<InputState*>* pStates)
 			if (inputHandlerPendingState->at(0)->GetPanelState())
 				LOG(LogLevel::Depricated) << "InputManager::getPendingState() : get panel input.";
 
-			if (inputHandlerPendingState->at(0)->GetBluetoothState() && inputHandlerPendingState->at(0)->GetBluetoothState()->GetCommands()->size() > 0) {
+			if (inputHandlerPendingState->at(0)->GetBluetoothState() && inputHandlerPendingState->at(0)->GetBluetoothState()->GetMessages()->size() > 0) {
 				LOG(LogLevel::Depricated) << "InputManager::getPendingState() : receive bt input.";
-				LOG(LogLevel::Depricated) << "InputManager::getPendingState() : get bt input [" << inputHandlerPendingState->at(0)->GetBluetoothState()->GetCommands()->at(0)->GetContext().dump() << "].";
+				//LOG(LogLevel::Depricated) << "InputManager::getPendingState() : get bt input [" << inputHandlerPendingState->at(0)->GetBluetoothState()->GetCommands()->at(0)->GetContext().dump() << "].";
 			}
 		}
 
@@ -219,7 +219,7 @@ vector<InputState*>* InputManager::createDistinctInputStates(vector<InputState*>
 
 			/* bt */
 			for (int i = 0; i < state->GetBluetoothState()->GetMessages()->size(); i++) {
-				LOG(LogLevel::Finest) << "InputManager::createDistinctInputStates(): cloning bt command [" << state->GetBluetoothState()->GetMessages()->at(i) << "] into distinct state." << state->GetBluetoothState()->GetCommands()->at(i)->GetContext().dump();
+				LOG(LogLevel::Finest) << "InputManager::createDistinctInputStates(): cloning bt command [" << state->GetBluetoothState()->GetMessages()->at(i) << "] into distinct state.";// << state->GetBluetoothState()->GetMessages()->at(i)->GetContext().dump();
 
 				BluetoothMessage* bluetoothMessage = state->GetBluetoothState()->GetMessages()->at(i);
 				newBluetoothState->GetMessages()->push_back(bluetoothMessage->Clone());
