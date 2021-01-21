@@ -9,8 +9,7 @@
 #include "../../Util/DataStructure/ActionList.h"
 
 #include "PacketConverter.h"
-#include "../../Games/Input/Commands/MeteoBluetoothCommand.h"
-#include "../../Games/Output/Bluetooths/Commands/MeteoOutputFileBluetoothCommand.h"
+#include "../../Games/Output/Bluetooths/MeteoBluetoothMessage.h"
 #include "../../Framework/Input/InputState.h"
 #include <mutex>
 #include <vector>
@@ -21,7 +20,7 @@ using namespace Games::Input::Commands;
 using namespace Framework::Input;
 using namespace std;
 using namespace Util::DataStructure;
-using namespace Games::Output::Bluetooths::Commands;
+using namespace Games::Output::Bluetooths;
 
 
 
@@ -117,13 +116,13 @@ namespace Devices {
 
 		PacketConverter<MeteoCommand>* packetConverter = nullptr;
 
-		vector<MeteoBluetoothCommand*> outputMessages;
+		vector<BluetoothMessage*> outputMessages;
 
 		/// <summary>
 		/// 看有沒有掉封包，掉了要再重傳。pair前面的int是等待迴圈數，會從3開始倒數，每write bluetooth時-1。扣到0的時候才開始rewrite。
 		/// 是用來避免手機還沒接收完封包，琴就一直傳訊息問手機收到沒，所以先等3輪再開始問。
 		/// </summary>
-		vector<pair<int, MeteoOutputFileBluetoothCommand*>> outputMessagesToRewrite;
+		//vector<pair<int, MeteoOutputFileBluetoothCommand*>> outputMessagesToRewrite;	// 先不用這個
 
 		ActionList<int, string> onStartWritingSmFile;
 		ActionList<int, string> onWriteSmFileSuccess;
@@ -140,7 +139,7 @@ namespace Devices {
 
 		int writeBluetooth();
 
-		int pushBluetoothState(BluetoothCommand* btCommand);
+		int pushBluetoothState(BluetoothMessage* btMessage);
 
 		int handleNewPacket(char* packet, int length);
 

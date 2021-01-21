@@ -231,13 +231,13 @@ int MeteoBluetoothPhoneV1::writeBluetooth()
 	return 0;
 }
 
-int MeteoBluetoothPhoneV1::pushBluetoothState(BluetoothCommand * btCommand)
+int MeteoBluetoothPhoneV1::pushBluetoothState(BluetoothMessage * btMessage)
 {
 	LOG(LogLevel::Debug) << "MeteoBluetoothPhoneV1::pushBluetoothState() : got new bt command.";
 
 	unique_lock<mutex> uLock(bluetoothStateMutex);
 
-	bluetoothState->GetBluetoothState()->AddCommand(btCommand);
+	bluetoothState->GetBluetoothState()->AddMessage(btMessage);
 
 	return 0;
 }
@@ -251,55 +251,55 @@ int MeteoBluetoothPhoneV1::handleNewPacket(char * packet, int length)
 
 	/* 讀取韌體版號 */
 	if (packetType == PacketType::ReadFirmwareVersion) {
-		MeteoBluetoothCommand* returnCommand = new MeteoBluetoothCommand(MeteoCommand::ReturnFirmwareVersion);
-		outputMessages.push_back(returnCommand);
+		MeteoBluetoothMessage* returnMessage = new MeteoBluetoothMessage(MeteoCommand::ReturnFirmwareVersion);
+		outputMessages.push_back(returnMessage);
 	}
 	else if (packetType == PacketType::Json) {
 
-		BluetoothCommand* btCommand = packetConverter->ConvertToBluetoothCommand(packet, length);
+		BluetoothMessage* btMessage = packetConverter->ConvertToBluetoothMessage(packet, length);
 
-		if (btCommand == nullptr) {
+		if (btMessage == nullptr) {
 			LOG(LogLevel::Error) << "MeteoBluetoothPhoneV1::handleNewPacket() : convert to bt command failed.";
 		}
 
 		// TODO:檢查是不是傳送音色包，是的話要再converter裡面記錄音色包資料
 
-		if (packetConverter->CheckIsWrtieFileFinishCommand(btCommand)) {
-			BluetoothCommand* returnCommand = packetConverter->FinishWriteFile(btCommand);
+		if (packetConverter->CheckIsWrtieFileFinishCommand(btMessage)) {
+			BluetoothMessage* returnMessage = packetConverter->FinishWriteFile(btMessage);
 
 			/* 發生錯誤 */
-			if (returnCommand == nullptr)
+			if (returnMessage == nullptr)
 				return 0;
 			
 			/* 確認整個檔案已經完成傳輸，讓sm manager把新的sm檔寫入sm info裡面 */
-			if (dynamic_cast<MeteoBluetoothCommand*>(returnCommand)->GetCommand() == MeteoCommand::AckFinishWriteSheetmusic)
-				onWriteSmFileSuccess.Trigger(returnCommand->GetContext()["FileName"].get<string>());
+			if (dynamic_cast<MeteoBluetoothMessage*>(returnMessage)->GetCommand() == MeteoCommand::AckFinishWriteSheetmusic)
+				onWriteSmFileSuccess.Trigger(returnMessage->GetContext()["FileName"].get<string>());
 				
 			/* 把回傳的訊息丟到手機 */
-			outputMessages.push_back(dynamic_cast<MeteoBluetoothCommand*>(returnCommand));
+			outputMessages.push_back(dynamic_cast<MeteoBluetoothMessage*>(returnMessage));
 			
 		}
 		// TODO:回傳收到，有時是這邊回傳，有時是其他物件回傳
 
-		if (btCommand != nullptr)
-			pushBluetoothState(btCommand);
+		if (btMessage != nullptr)
+			pushBluetoothState(btMessage);
 	}
 	else if (packetType == PacketType::File) {
 
-		BluetoothCommand* ack = packetConverter->ConvertToFile(packet, length);
+		BluetoothMessage* ack = packetConverter->ConvertToFile(packet, length);
 
 		if (ack != nullptr) 
-			outputMessages.push_back(dynamic_cast<MeteoBluetoothCommand*>(ack));
+			outputMessages.push_back(dynamic_cast<MeteoBluetoothMessage*>(ack));
 		// TODO:回傳收到
 	}
 	else if (packetType == PacketType::AckFile) {
 
-		BluetoothCommand* btCommand = packetConverter->ConvertToBluetoothCommand(packet, length);
+		BluetoothMessage* btMessage = packetConverter->ConvertToBluetoothMessage(packet, length);
 
-		MeteoAckFileBluetoothCommand* ack = dynamic_cast<MeteoAckFileBluetoothCommand*>(btCommand);
+		BluetoothMessage* ack = dynamic_cast<BluetoothMessage*>(btMessage);
 
 		if (ack == nullptr) {
-			LOG(LogLevel::Error) << "MeteoBluetoothPhoneV1::handleNewPacket() : ack command [" << (int)dynamic_cast<MeteoBluetoothCommand*>(btCommand)->GetCommand() << "] cannot cast to MeteoAckFileBluetoothCommand.";
+			LOG(LogLevel::Error) << "MeteoBluetoothPhoneV1::handleNewPacket() : ack command [" << (int)dynamic_cast<MeteoBluetoothMessage*>(btMessage)->GetCommand() << "] cannot cast to MeteoAckFileBluetoothCommand.";
 			return -1;
 		}
 
