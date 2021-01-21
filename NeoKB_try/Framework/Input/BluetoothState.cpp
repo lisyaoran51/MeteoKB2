@@ -10,9 +10,9 @@ using namespace Util;
 
 BluetoothState::~BluetoothState()
 {
-	LOG(LogLevel::Finest) << "BluetoothState::~BluetoothState(): deleting commands." << commands.size();
+	LOG(LogLevel::Finest) << "BluetoothState::~BluetoothState(): deleting commands." << messages.size();
 	for (int i = 0; i < messages.size(); i++) {
-		LOG(LogLevel::Finest) << "BluetoothState::~BluetoothState(): deleting command [" << commands[i]->GetContext()["FileName"] << "] .";
+		//LOG(LogLevel::Finest) << "BluetoothState::~BluetoothState(): deleting command [" << messages[i]->GetContext()["FileName"] << "] .";
 		delete messages[i];
 
 	}
