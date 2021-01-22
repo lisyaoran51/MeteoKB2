@@ -92,30 +92,31 @@ int BleAccess::GetMtu()
 
 int BleAccess::run()
 {
-	//switch (communicationState) {
-	//case CommunicationState::Offline:
-	//	this_thread::sleep_for(std::chrono::milliseconds(500));
-	//	return -1;
-	//	break;
-	//
-	//case CommunicationState::Connecting:
-	//
-	//	// if login
-	//	communicationState = CommunicationState::Connected;
-	//	// else sleep(500); return -1;
-	//
-	//	break;
-	//
-	//}
-	//
-	//
+	switch (communicationState) {
+	case CommunicationState::Offline:
+		this_thread::sleep_for(std::chrono::milliseconds(500));
+		return -1;
+		break;
+	
+	case CommunicationState::Connecting:
+	
+		// if login
+		communicationState = CommunicationState::Connected;
+		// else sleep(500); return -1;
+	
+		break;
+	
+	}
+	
+	
 	/* 再執行request */
 	CommunicationRequest* request = nullptr;
 	if (communicationRequests.size() > 0) {
 		request = communicationRequests.back();
 	
 		// request處理成功
-		int result = handleRequest(request);
+		int result;
+		result = handleRequest(request);
 		//if (handleRequest(request) >= 0) {	// 這邊很奇怪，如果把handle request放進if裡面，compile就會失敗
 		if (result >= 0) {
 			communicationRequests.pop_back();
