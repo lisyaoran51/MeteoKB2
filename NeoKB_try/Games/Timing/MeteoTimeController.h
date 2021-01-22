@@ -17,7 +17,7 @@ namespace Timing{
 
 
 	template<typename T>
-	class MeteoTimeController : public TTimeController<T, MeteoBluetoothCommand> {
+	class MeteoTimeController : public TTimeController<T, MeteoBluetoothMessage> {
 
 		int load() {
 			OutputManager * o = TimeController::GetCache<OutputManager>("OutputManager");
