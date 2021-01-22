@@ -20,7 +20,7 @@ namespace Communications{
 
 	public:
 
-		CommunicationCollectionManager(GameHost* gHost) : TCommunicationComponent(gHost){
+		CommunicationCollectionManager(GameHost* gHost) : TCommunicationComponent(gHost), RegisterType("CommunicationCollectionManager"){
 			sourceClock = new StopwatchClock();
 		}
 
