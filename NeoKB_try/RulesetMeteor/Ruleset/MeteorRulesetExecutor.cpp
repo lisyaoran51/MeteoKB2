@@ -203,7 +203,7 @@ Result * MeteorRulesetExecutor::CreateResult(Score* s)
 
 	
 
-	return 
+	return meteorResult;
 }
 
 int MeteorRulesetExecutor::Elapse(MTO_FLOAT elapsedTime)
