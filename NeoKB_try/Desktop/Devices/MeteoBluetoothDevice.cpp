@@ -1,6 +1,9 @@
 #include "MeteoBluetoothDevice.h"
 
+#include "../../Games/Output/Bluetooths/MeteoContextBluetoothMessage.h"
+
 using namespace Desktop::Devices;
+using namespace Games::Output::Bluetooths;
 
 
 MeteoBluetoothDevice::MeteoBluetoothDevice(MeteoBluetoothPhoneV1 * mBluetoothPhone)
@@ -58,12 +61,15 @@ int MeteoBluetoothDevice::readFromDevice()
 
 		InputState* newState = new InputState();
 		newState->SetBluetoothState(new BluetoothState());
-		MeteoBluetoothCommand* btCommand = new MeteoBluetoothCommand(MeteoCommand::RequestLoadGame);
-		btCommand->GetContext()["FileName"] = "LittleStar.sm";
+		MeteoContextBluetoothMessage* btMessage = new MeteoContextBluetoothMessage(MeteoCommand::RequestLoadGame);
+		json context;
+		context["FileName"] = "LittleStar.sm";
+		btMessage->SetContextInJson(context);
 
-		LOG(LogLevel::Debug) << "MeteoBluetoothDevice::readFromDevice() : Create fake bt input [" << btCommand->GetContext().dump() << "].";
+		//LOG(LogLevel::Debug) << "MeteoBluetoothDevice::readFromDevice() : Create fake bt input [" << btCommand->GetContext().dump() << "].";
 
-		newState->GetBluetoothState()->AddCommand(btCommand);
+		btMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
+		newState->GetBluetoothState()->AddMessage(btMessage);
 
 		inputStates.push_back(newState);
 
@@ -74,12 +80,15 @@ int MeteoBluetoothDevice::readFromDevice()
 
 		InputState* newState = new InputState();
 		newState->SetBluetoothState(new BluetoothState());
-		MeteoBluetoothCommand* btCommand = new MeteoBluetoothCommand(MeteoCommand::AppSwitchPianoInstrument);
-		btCommand->GetContext()["Instrument"] = "piano";
+		MeteoContextBluetoothMessage* btMessage = new MeteoContextBluetoothMessage(MeteoCommand::AppSwitchPianoInstrument);
+		json context;
+		context["Instrument"] = "piano";
+		btMessage->SetContextInJson(context);
 
-		LOG(LogLevel::Debug) << "MeteoBluetoothDevice::readFromDevice() : Create fake bt input [" << btCommand->GetContext().dump() << "].";
+		//LOG(LogLevel::Debug) << "MeteoBluetoothDevice::readFromDevice() : Create fake bt input [" << btCommand->GetContext().dump() << "].";
 
-		newState->GetBluetoothState()->AddCommand(btCommand);
+		btMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
+		newState->GetBluetoothState()->AddMessage(btMessage);
 
 		inputStates.push_back(newState);
 
