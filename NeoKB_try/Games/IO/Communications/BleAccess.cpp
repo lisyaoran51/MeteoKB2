@@ -114,6 +114,7 @@ int BleAccess::run()
 	if (communicationRequests.size() > 0) {
 		request = communicationRequests.back();
 	
+		handleRequest(request);
 		// request處理成功
 		//if (handleRequest(request) >= 0) {
 		if (true) {
