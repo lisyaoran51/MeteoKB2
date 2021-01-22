@@ -116,7 +116,7 @@ int BleAccess::run()
 	
 		// request處理成功
 		int result = handleRequest(request);
-		//if (handleRequest(request) >= 0) {
+		//if (handleRequest(request) >= 0) {	// 這邊很奇怪，如果把handle request放進if裡面，compile就會失敗
 		if (result >= 0) {
 			communicationRequests.pop_back();
 		}
@@ -171,7 +171,7 @@ int BleAccess::handleOnRawCommand(InputState * inputState)
 	for (int i = 0; i < bleRequests.size(); i++) {
 		if (inputState->GetBluetoothState()->GetMessages()->size() > 0) {
 			for (int j = 0; j < inputState->GetBluetoothState()->GetMessages()->size(); j++) {
-				bleRequests[i]->PushInputRawMessage(inputState->GetBluetoothState()->GetMessages()->at(j)->Clone());
+				bleRequests[i]->PushInputRawMessage(dynamic_cast<MeteoBluetoothMessage*>(inputState->GetBluetoothState()->GetMessages()->at(j)->Clone()));
 			}
 		}
 	}
@@ -180,32 +180,32 @@ int BleAccess::handleOnRawCommand(InputState * inputState)
 	// --------------------後面是舊的城市，寫得不好
 
 	/* defer_lock代表初始化時先不鎖住這個lock */
-	unique_lock<mutex> uLock(rawCommandMutex, defer_lock);
-
-
-	if (uLock.try_lock()) {
-
-		if (inputState->GetBluetoothState()->GetMessages()->size() > 0) {
-			for (int i = 0; i < inputState->GetBluetoothState()->GetMessages()->size(); i++) {
-				inputRawCommand.push_front(inputState->GetBluetoothState()->GetMessages()->at(i)->Clone());
-			}
-		}
-
-		uLock.unlock();
-	}
-	else {
-		/* inputRawCommand正在被使用中的話，就先把新的command丟到buffer中 */
-		unique_lock<mutex> uLockBuffer(rawCommandBufferMutex);
-
-		if (inputState->GetBluetoothState()->GetMessages()->size() > 0) {
-			for (int i = 0; i < inputState->GetBluetoothState()->GetMessages()->size(); i++) {
-				inputRawCommandBuffer.push_front(inputState->GetBluetoothState()->GetMessages()->at(i)->Clone());
-			}
-		}
-		uLockBuffer.unlock();
-
-
-	}
+	//unique_lock<mutex> uLock(rawCommandMutex, defer_lock);
+	//
+	//
+	//if (uLock.try_lock()) {
+	//
+	//	if (inputState->GetBluetoothState()->GetMessages()->size() > 0) {
+	//		for (int i = 0; i < inputState->GetBluetoothState()->GetMessages()->size(); i++) {
+	//			inputRawCommand.push_front(inputState->GetBluetoothState()->GetMessages()->at(i)->Clone());
+	//		}
+	//	}
+	//
+	//	uLock.unlock();
+	//}
+	//else {
+	//	/* inputRawCommand正在被使用中的話，就先把新的command丟到buffer中 */
+	//	unique_lock<mutex> uLockBuffer(rawCommandBufferMutex);
+	//
+	//	if (inputState->GetBluetoothState()->GetMessages()->size() > 0) {
+	//		for (int i = 0; i < inputState->GetBluetoothState()->GetMessages()->size(); i++) {
+	//			inputRawCommandBuffer.push_front(inputState->GetBluetoothState()->GetMessages()->at(i)->Clone());
+	//		}
+	//	}
+	//	uLockBuffer.unlock();
+	//
+	//
+	//}
 
 	
 
