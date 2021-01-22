@@ -130,7 +130,7 @@ int BleRequest::PostTextBleRequestMethod::PerformAndWait(BleRequest* thisRequest
 
 			uLock.unlock();
 
-			thread sleep(0.01);
+			this_thread::sleep_for(std::chrono::milliseconds(100));
 
 			/* 舊的程式，寫得不好
 			mutex* inputRawCommandMutex = bleAccess->GetRawCommandMutex();
@@ -326,7 +326,7 @@ int BleRequest::PostBinaryBleRequestMethod::PerformAndWait(BleRequest * thisRequ
 			break;
 
 
-		thread sleep(0.01);
+		this_thread::sleep_for(std::chrono::milliseconds(100));
 
 		// bleAccess->GetInputRawCommand().clear();	改由ble access自己清
 	}
@@ -383,7 +383,7 @@ int BleRequest::GetTextBleRequestMethod::PerformAndWait(BleRequest * thisRequest
 
 		uLock.unlock();
 
-		thread sleep(0.01);
+		this_thread::sleep_for(std::chrono::milliseconds(100));
 
 
 		
