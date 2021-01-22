@@ -27,14 +27,6 @@ namespace Host{
 	class GameHost;
 }}
 
-namespace Framework {
-namespace IO{
-namespace Api{
-
-	class ApiAccess;
-
-}}}
-
 
 
 using namespace std;
@@ -42,7 +34,6 @@ using namespace Util;
 using namespace Games::Sheetmusics::Format;
 using namespace Games::Rulesets;
 using namespace Framework::IO;
-using namespace Framework::IO::Api;
 using namespace Framework::Allocation::Hierachal;
 
 
@@ -68,8 +59,6 @@ namespace Sheetmusics {
 
 		RulesetStore* rulesetStore = nullptr;
 
-		ApiAccess* apiAccess = nullptr;
-
 		SheetmusicStore* createSmStore(function<DatabaseContext*()> gContext);
 
 		int setupApiAccess();
@@ -78,7 +67,7 @@ namespace Sheetmusics {
 
 		SmManager();
 
-		SmManager(Storage* s, function<DatabaseContext*()> gContext, RulesetStore* rStore, ApiAccess* aAccess, GameHost* gHost);
+		SmManager(Storage* s, function<DatabaseContext*()> gContext, RulesetStore* rStore, GameHost* gHost);
 
 		~SmManager();
 

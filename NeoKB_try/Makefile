@@ -144,8 +144,9 @@ GameHost.o MeteoGameHost.o \
 BluetoothState.o CustomInputManager.o InputManager.o InputState.o KeyboardState.o PanelState.o PassThroughInputManager.o HasInputKey.o \
 InputHandler.o BluetoothInputHandler.o KeyboardInputHandler.o PanelInputHandler.o KeyBindingStore.o \
 BluetoothPhone.o Display.o FileStore.o Keyboard.o MainInterface.o Panel.o Peripheral.o PlatformStorage.o Storage.o StorageResourceStore.o DynamicPathResourceStore.o \
+CommunicationAccess.o CommunicationComponent.o CommunicationRequest.o \
 OutputManager.o BluetoothOutputer.o \
-Scene.o \
+Scene.o SceneMaster.o \
 GameThread.o ThreadMaster.o \
 DecoupledInterpolatingFramedClock.o FramedClock.o InterpolatingFramedClock.o OffsetFramedClock.o StopwatchClock.o ThrottledFramedClock.o TimeController.o \
 LinearSpeedAdjuster.o SpeedAdjuster.o \
@@ -155,7 +156,8 @@ MeteoConfigManager.o \
 Ruleset.o RulesetInfo.o RulesetStore.o Judgement.o HasHitWindow.o HitWindow.o ReplayRecorder.o ReplayFrame.o \
 Modifier.o DifficultyModifier.o EventProcessorFilterModifier.o InstrumentModifier.o TimeControllerModifier.o \
 ScoreProcessor.o \
-MeteoBluetoothMessage.o MeteoBluetoothOutputer.o MeteoContextBluetoothMessage.o MeteoFileBluetoothMessage.o \
+BleAccess.o BleRequest.o BleRequestException.o \
+MeteoBluetoothMessage.o MeteoBluetoothOutputer.o MeteoContextBluetoothMessage.o MeteoFileSegmentBluetoothMessage.o \
 Loader.o MeteoScene.o Intro.o Player.o PlayerLoader.o Playfield.o Result.o \
 HudDisplay.o JudgementFlasher.o SongProgress.o \
 MainMenu.o PlaySongSelect.o SongSelect.o \

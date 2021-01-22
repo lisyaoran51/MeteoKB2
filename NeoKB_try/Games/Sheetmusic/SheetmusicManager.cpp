@@ -2,7 +2,6 @@
 
 #include "../../Framework/Host/GameHost.h"
 #include "ResourceStoreWorkingSm.h"
-#include "../../Framework/IO/Api/ApiAccess.h"
 
 
 using namespace Games::Sheetmusics;
@@ -22,6 +21,7 @@ SheetmusicStore * SmManager::createSmStore(function<DatabaseContext*()> gContext
 
 int SmManager::setupApiAccess()
 {
+	/*
 	if (apiAccess == nullptr)
 		throw runtime_error("SmManager::setupApiAccess() : no api access.");
 
@@ -38,7 +38,7 @@ int SmManager::setupApiAccess()
 
 		return 0;
 	});
-
+	*/
 	return 0;
 }
 
@@ -49,7 +49,7 @@ SmManager::SmManager(): RegisterType("SmManager")
 	// TODO: 從資料庫中加入每個ruleset info? 應該在sm manager外面手動加
 }
 
-SmManager::SmManager(Storage * s, function<DatabaseContext*()> gContext, RulesetStore * rStore, ApiAccess* aAccess, GameHost * gHost): RegisterType("SmManager")
+SmManager::SmManager(Storage * s, function<DatabaseContext*()> gContext, RulesetStore * rStore, GameHost * gHost): RegisterType("SmManager")
 {
 	smInfos = new vector<SmInfo*>();
 
@@ -67,8 +67,8 @@ SmManager::SmManager(Storage * s, function<DatabaseContext*()> gContext, Ruleset
 	// 這邊拿到的Storage會是在Files資料夾下，因為加入file store的時候會幫他加一層資料夾Files
 	storage = fileStore->GetStorage();
 
-	apiAccess = aAccess;
-	setupApiAccess();
+	//apiAccess = aAccess;
+	//setupApiAccess();
 
 	rulesetStore = rStore;
 
