@@ -16,6 +16,7 @@ namespace Input {
 	struct PitchBindingSet {
 
 	public:
+		virtual ~PitchBindingSet() = default;
 
 	};
 
