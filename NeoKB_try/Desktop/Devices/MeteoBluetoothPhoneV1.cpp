@@ -3,14 +3,12 @@
 #include <thread>
 #include "sdp.h"
 #include <unistd.h>
-//#include "../../Games/Output/Bluetooths/Commands/MeteoOutputFileBluetoothCommand.h"
-//#include "../../Games/Input/Commands/MeteoAckFileBluetoothCommand.h"
+#include "../../Games/Output/Bluetooths/MeteoContextBluetoothMessage.h"
 
 
 using namespace std;
 using namespace Desktop::Devices;
-using namespace Games::Output::Bluetooths::Commands;
-using namespace Games::Input::Commands;
+using namespace Games::Output::Bluetooths;
 
 
 
@@ -63,14 +61,11 @@ int MeteoBluetoothPhoneV1::PushOutputMessage(OutputMessage * outputMessage)
 	BluetoothMessage* bluetoothMessage = dynamic_cast<BluetoothMessage*>(outputMessage);
 
 	if (bluetoothMessage != nullptr) {
-		BluetoothCommand* command = packetConverter->ConvertToBluetoothCommand(bluetoothMessage);
-		if (dynamic_cast<MeteoBluetoothCommand*>(command)) {
-			outputMessages.push_back(dynamic_cast<MeteoBluetoothCommand*>(command));
+			outputMessages.push_back(bluetoothMessage);
 			
-			return 0;
-		}
+		return 0;
+		
 	}
-
 
 	return -1;
 }
@@ -149,7 +144,7 @@ int MeteoBluetoothPhoneV1::writeBluetooth()
 	if (lastRunSended)
 		memset(bufferOut, 0, sizeof(bufferOut));
 
-	if (outputMessages.size() > 0 || outputMessagesToRewrite.size() > 0) {
+	if (outputMessages.size() > 0/* || outputMessagesToRewrite.size() > 0*/) {
 
 		for (int i = 0; i < outputMessages.size(); i++) {
 
@@ -166,7 +161,7 @@ int MeteoBluetoothPhoneV1::writeBluetooth()
 
 			/* 如果是傳送檔案的話，要檢查有沒有傳送成功 */
 			if (packetConverter->CheckCommandType(outputMessages[i]) == PacketType::File) {
-				outputMessagesToRewrite.push_back(pair<int, MeteoOutputFileBluetoothCommand*>(OutputMessageToRewriteCountdown, dynamic_cast<MeteoOutputFileBluetoothCommand*>(outputMessages[i])));
+				//outputMessagesToRewrite.push_back(pair<int, MeteoOutputFileBluetoothCommand*>(OutputMessageToRewriteCountdown, dynamic_cast<MeteoOutputFileBluetoothCommand*>(outputMessages[i])));
 			}
 			else {
 				delete outputMessages[i];
@@ -176,51 +171,53 @@ int MeteoBluetoothPhoneV1::writeBluetooth()
 			i--;
 		}
 
-		for (int i = 0; i < outputMessagesToRewrite.size(); i++) {
+		// outputMessagesToRewrite整個要拿掉，以後rewrite由request來處理
 
-			/* countdown要檢查重新輸出的檔案，Countdown完畢以後就開始檢查重新輸出 */
-			if (outputMessagesToRewrite[i].first > 0) {
-				MeteoOutputFileBluetoothCommand* outputMessageToRewrite = outputMessagesToRewrite[i].second;
-				int tempOutputMessageToRewriteCountdown = outputMessagesToRewrite[i].first--;
-				
-				outputMessagesToRewrite.erase(outputMessagesToRewrite.begin() + i);
-				outputMessagesToRewrite.insert(outputMessagesToRewrite.begin() + i, pair<int, MeteoOutputFileBluetoothCommand*>(tempOutputMessageToRewriteCountdown, outputMessageToRewrite));
-
-			}
-			/* 檢查是否需要重新輸出 */
-			else {
-				MeteoOutputFileBluetoothCommand* outputMessageToRewrite = dynamic_cast<MeteoOutputFileBluetoothCommand*>(outputMessagesToRewrite[i].second);
-
-				if (outputMessageToRewrite->GetSegmentsToReOutput().size() > 0) {
-					for (int j = 0; j < outputMessageToRewrite->GetSegmentsToReOutput().size(); j++) {
-
-						int segmentNumber = outputMessageToRewrite->GetSegmentsToReOutput()[j];
-
-						int bytes_write = packetConverter->ConvertToByteArray(outputMessageToRewrite, segmentNumber, bufferOut, 1024);
-
-						write(client, bufferOut, bytes_write);
-
-						memset(bufferOut, 0, sizeof(bufferOut));
-
-					}
-
-					/* 重新輸出完畢之後再丟回去重新countdown */
-					outputMessagesToRewrite.erase(outputMessagesToRewrite.begin() + i);
-					outputMessagesToRewrite.insert(outputMessagesToRewrite.begin() + i, pair<int, MeteoOutputFileBluetoothCommand*>(OutputMessageToRewriteCountdown, outputMessageToRewrite));
-
-				}
-				/* 對方全部接收到以後，就可以送FinishWrite指令給對方，確認還有沒有需要接收的片段 */
-				else {
-
-					// TODO: 寫送finish write封包
-					MeteoBluetoothCommand* outputMessageToRewrite = outputMessagesToRewrite[i].second;
-					outputMessagesToRewrite.erase(outputMessagesToRewrite.begin() + i);
-					delete outputMessageToRewrite;
-
-					i--;
-				}
-			}
-		}
+		//for (int i = 0; i < outputMessagesToRewrite.size(); i++) {
+		//
+		//	/* countdown要檢查重新輸出的檔案，Countdown完畢以後就開始檢查重新輸出 */
+		//	if (outputMessagesToRewrite[i].first > 0) {
+		//		MeteoOutputFileBluetoothCommand* outputMessageToRewrite = outputMessagesToRewrite[i].second;
+		//		int tempOutputMessageToRewriteCountdown = outputMessagesToRewrite[i].first--;
+		//		
+		//		outputMessagesToRewrite.erase(outputMessagesToRewrite.begin() + i);
+		//		outputMessagesToRewrite.insert(outputMessagesToRewrite.begin() + i, pair<int, MeteoOutputFileBluetoothCommand*>(tempOutputMessageToRewriteCountdown, outputMessageToRewrite));
+		//
+		//	}
+		//	/* 檢查是否需要重新輸出 */
+		//	else {
+		//		MeteoOutputFileBluetoothCommand* outputMessageToRewrite = dynamic_cast<MeteoOutputFileBluetoothCommand*>(outputMessagesToRewrite[i].second);
+		//
+		//		if (outputMessageToRewrite->GetSegmentsToReOutput().size() > 0) {
+		//			for (int j = 0; j < outputMessageToRewrite->GetSegmentsToReOutput().size(); j++) {
+		//
+		//				int segmentNumber = outputMessageToRewrite->GetSegmentsToReOutput()[j];
+		//
+		//				int bytes_write = packetConverter->ConvertToByteArray(outputMessageToRewrite, segmentNumber, bufferOut, 1024);
+		//
+		//				write(client, bufferOut, bytes_write);
+		//
+		//				memset(bufferOut, 0, sizeof(bufferOut));
+		//
+		//			}
+		//
+		//			/* 重新輸出完畢之後再丟回去重新countdown */
+		//			outputMessagesToRewrite.erase(outputMessagesToRewrite.begin() + i);
+		//			outputMessagesToRewrite.insert(outputMessagesToRewrite.begin() + i, pair<int, MeteoOutputFileBluetoothCommand*>(OutputMessageToRewriteCountdown, outputMessageToRewrite));
+		//
+		//		}
+		//		/* 對方全部接收到以後，就可以送FinishWrite指令給對方，確認還有沒有需要接收的片段 */
+		//		else {
+		//
+		//			// TODO: 寫送finish write封包
+		//			MeteoBluetoothCommand* outputMessageToRewrite = outputMessagesToRewrite[i].second;
+		//			outputMessagesToRewrite.erase(outputMessagesToRewrite.begin() + i);
+		//			delete outputMessageToRewrite;
+		//
+		//			i--;
+		//		}
+		//	}
+		//}
 	
 		lastRunSended = true;
 	}
@@ -251,7 +248,8 @@ int MeteoBluetoothPhoneV1::handleNewPacket(char * packet, int length)
 
 	/* 讀取韌體版號 */
 	if (packetType == PacketType::ReadFirmwareVersion) {
-		MeteoBluetoothMessage* returnMessage = new MeteoBluetoothMessage(MeteoCommand::ReturnFirmwareVersion);
+		// TODO: 做一個firmware version專用的bt message class
+		MeteoBluetoothMessage* returnMessage = new MeteoContextBluetoothMessage(MeteoCommand::ReturnFirmwareVersion);
 		outputMessages.push_back(returnMessage);
 	}
 	else if (packetType == PacketType::Json) {
@@ -272,8 +270,8 @@ int MeteoBluetoothPhoneV1::handleNewPacket(char * packet, int length)
 				return 0;
 			
 			/* 確認整個檔案已經完成傳輸，讓sm manager把新的sm檔寫入sm info裡面 */
-			if (dynamic_cast<MeteoBluetoothMessage*>(returnMessage)->GetCommand() == MeteoCommand::AckFinishWriteSheetmusic)
-				onWriteSmFileSuccess.Trigger(returnMessage->GetContext()["FileName"].get<string>());
+			//if (dynamic_cast<MeteoBluetoothMessage*>(returnMessage)->GetCommand() == MeteoCommand::AckFinishWriteSheetmusic)
+			//	onWriteSmFileSuccess.Trigger(returnMessage->GetContext()["FileName"].get<string>());
 				
 			/* 把回傳的訊息丟到手機 */
 			outputMessages.push_back(dynamic_cast<MeteoBluetoothMessage*>(returnMessage));
@@ -303,14 +301,15 @@ int MeteoBluetoothPhoneV1::handleNewPacket(char * packet, int length)
 			return -1;
 		}
 
+		// rewrite改由request處理
 
-		for (int i = 0; i < outputMessagesToRewrite.size(); i++) {
-			if (outputMessagesToRewrite[i].second->GetFileName() == ack->GetFileName()) {
-
-				outputMessagesToRewrite[i].second->DeleteSegmentToReOutput(ack->GetOrder());
-
-			}
-		}
+		//for (int i = 0; i < outputMessagesToRewrite.size(); i++) {
+		//	if (outputMessagesToRewrite[i].second->GetFileName() == ack->GetFileName()) {
+		//
+		//		outputMessagesToRewrite[i].second->DeleteSegmentToReOutput(ack->GetOrder());
+		//
+		//	}
+		//}
 
 	}
 	else if (packetType == PacketType::None) {
