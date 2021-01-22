@@ -503,12 +503,15 @@ int MeteorResult::onEntering(Scene * lastScene)
 
 	// bluetooth推送結果
 	MeteoContextBluetoothMessage* scoreMessage = new MeteoContextBluetoothMessage(MeteoCommand::FinalScore);
-	scoreMessage->GetContext()["Hit Amount"] = score->hits;
-	scoreMessage->GetContext()["Max Hit Amount"] = score->maxHits;
-	scoreMessage->GetContext()["Score"] = score->score;
-	scoreMessage->GetContext()["Max Score"] = score->maxScore;
-	scoreMessage->GetContext()["Accuracy"] = int(score->accuracy * 10000);
-	scoreMessage->GetContext()["Combo"] = score->combo;
+	json context;
+	context["Hit Amount"] = score->hits;
+	context["Max Hit Amount"] = score->maxHits;
+	context["Score"] = score->score;
+	context["Max Score"] = score->maxScore;
+	context["Accuracy"] = int(score->accuracy * 10000);
+	context["Combo"] = score->combo;
+
+
 
 	// 還要寫入各個分數的次數
 	json judgementMiss, judgementBad, judgementOk, judgementGood, judgementGreat, judgementPerfect;
@@ -519,12 +522,15 @@ int MeteorResult::onEntering(Scene * lastScene)
 	judgementGreat["Result"] = "Great";	judgementMiss["HitAmount"] = score->hitResults[HitResult::Great];
 	judgementPerfect["Result"] = "Perfect";	judgementMiss["HitAmount"] = score->hitResults[HitResult::Perfect];
 
-	scoreMessage->GetContext()["Hits"].push_back(judgementMiss);
-	scoreMessage->GetContext()["Hits"].push_back(judgementBad);
-	scoreMessage->GetContext()["Hits"].push_back(judgementOk);
-	scoreMessage->GetContext()["Hits"].push_back(judgementGood);
-	scoreMessage->GetContext()["Hits"].push_back(judgementGreat);
-	scoreMessage->GetContext()["Hits"].push_back(judgementPerfect);
+	context["Hits"].push_back(judgementMiss);
+	context["Hits"].push_back(judgementBad);
+	context["Hits"].push_back(judgementOk);
+	context["Hits"].push_back(judgementGood);
+	context["Hits"].push_back(judgementGreat);
+	context["Hits"].push_back(judgementPerfect);
+
+	scoreMessage->SetContextInJson(context);
+	scoreMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
 
 	outputManager->PushMessage(scoreMessage);
 	
@@ -538,10 +544,11 @@ int MeteorResult::onEntering(Scene * lastScene)
 	*/
 
 	/* 寫入遊戲紀錄 */
-	string recordFilePath = writeGameRecord();
-
-	MeteoFileBluetoothMessage* recordFileMessage = new MeteoFileBluetoothMessage(MeteoCommand::PlayRecordFileSegment, recordFilePath);
-	outputManager->PushMessage(recordFileMessage);
+	// 這邊之後要改成發request
+	//string recordFilePath = writeGameRecord();
+	//
+	//MeteoFileBluetoothMessage* recordFileMessage = new MeteoFileBluetoothMessage(MeteoCommand::PlayRecordFileSegment, recordFilePath);
+	//outputManager->PushMessage(recordFileMessage);
 	
 
 	Exit();
