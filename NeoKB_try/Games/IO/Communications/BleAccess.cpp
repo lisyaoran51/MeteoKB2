@@ -118,8 +118,9 @@ int BleAccess::run()
 		if (handleRequest(request) >= 0) {
 			communicationRequests.pop_back();
 		}
-		else
+		else {
 			return -1;
+		}
 	}
 
 	return 0;
