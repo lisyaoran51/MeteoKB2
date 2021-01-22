@@ -115,9 +115,9 @@ int BleAccess::run()
 		request = communicationRequests.back();
 	
 		// request處理成功
-		//if (handleRequest(request) >= 0) {
-		//	communicationRequests.pop_back();
-		//}
+		if (handleRequest(request) >= 0) {
+			communicationRequests.pop_back();
+		}
 		//else 
 		//	return -1;
 		
