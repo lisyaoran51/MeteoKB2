@@ -13,7 +13,7 @@ using namespace std;
 
 Bindable<double>* ScoreProcessor::GetTotalScore()
 {
-	return totalScore;
+	return score;
 }
 
 Bindable<double>* ScoreProcessor::GetAccuracy()

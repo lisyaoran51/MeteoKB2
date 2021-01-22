@@ -2533,3 +2533,8 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 	https://nlohmann.github.io/json/doxygen/classnlohmann_1_1basic__json_a476756fb08e7f2416aad116d137977f4.html
 	
 	把request method都寫完了，暫時先不繼續寫連線，先把程式寫到可以跑，然後要來測主板
+	
+	request底層寫完，應該要來寫各種request(下載譜、要求資訊...等)，這部分先不寫，先補一下還沒寫完的東西，讓程式跑起來，來測主板
+	
+	先繼續Compile主程式
+	
