@@ -1,13 +1,14 @@
 #include "MeteoPacketConverterV1.h"
 
 #include "../../Util/Log.h"
-//#include "../../Games/Output/Bluetooths/Commands/MeteoOutputFileBluetoothCommand.h"
+#include "../../Games/Output/Bluetooths/MeteoContextBluetoothMessage.h"
+#include "../../Games/Output/Bluetooths/MeteoFileSegmentBluetoothMessage.h"
 //#include "../../Games/Input/Commands/MeteoAckFileBluetoothCommand.h"
 
 
 using namespace Desktop::Devices;
 using namespace Util;
-using namespace Games::Output::Bluetooths::Commands;
+using namespace Games::Output::Bluetooths;
 using namespace Games::Input::Commands;
 
 
@@ -81,17 +82,17 @@ MeteoPacketConverterV1::MeteoPacketConverterFileType MeteoPacketConverterV1::get
 	return MeteoPacketConverterFileType::Sheetmusic;
 }
 
-MeteoBluetoothCommand * MeteoPacketConverterV1::createAckFileSegmentBluetoothCommand(char * buffer, int size)
+MeteoBluetoothMessage * MeteoPacketConverterV1::createAckFileSegmentBluetoothMessage(char * buffer, int size)
 {
 	// 根據丟過來的packet建立回傳
-	MeteoBluetoothCommand* returnBluetoothCommand = new MeteoBluetoothCommand(MeteoCommand::AckSheetmusicFileSegment);
+	//MeteoBluetoothCommand* returnBluetoothCommand = new MeteoBluetoothCommand(MeteoCommand::AckSheetmusicFileSegment);
+	//
+	//string fileName = getFileName(buffer, size);
+	//int order = getFileSegmentOrder(buffer, size);
+	//returnBluetoothCommand->GetContext()["FileName"] = fileName;
+	//returnBluetoothCommand->GetContext()["Order"] = order;
 
-	string fileName = getFileName(buffer, size);
-	int order = getFileSegmentOrder(buffer, size);
-	returnBluetoothCommand->GetContext()["FileName"] = fileName;
-	returnBluetoothCommand->GetContext()["Order"] = order;
-
-	return returnBluetoothCommand;
+	return nullptr;
 }
 
 MeteoPacketConverterV1::MeteoPacketConverterV1(Storage* s)
@@ -729,7 +730,7 @@ PacketType MeteoPacketConverterV1::CheckPacketType(char * buffer, int size)
 
 PacketType MeteoPacketConverterV1::CheckCommandType(BluetoothMessage * bluetoothCommand)
 {
-	MeteoCommand command = dynamic_cast<MeteoBluetoothCommand*>(bluetoothCommand)->GetCommand();
+	MeteoCommand command = dynamic_cast<MeteoBluetoothMessage*>(bluetoothCommand)->GetCommand();
 	
 	map<MeteoCommand, PacketType>::iterator iter;
 	iter = CommandPacketTypeMap.find(command);
@@ -750,7 +751,7 @@ BluetoothMessage * MeteoPacketConverterV1::ConvertToBluetoothMessage(char * buff
 
 		if (CheckPacketType(buffer, size) == PacketType::Json) {
 
-			BluetoothCommand* btCommand = new MeteoBluetoothCommand(commandMap[command]);
+			MeteoContextBluetoothMessage* btMessage = new MeteoContextBluetoothMessage(commandMap[command]);
 
 			unsigned short length;
 			memcpy(&length, buffer + sizeof(command), sizeof(length));
@@ -765,30 +766,16 @@ BluetoothMessage * MeteoPacketConverterV1::ConvertToBluetoothMessage(char * buff
 			// Amount : unsigned short 封包數(2)
 			// Text : char[] 內文
 
-			btCommand->GetContext() = json::parse(contextBuffer);
+			json context = json::parse(contextBuffer);
 
-			LOG(LogLevel::Debug) << "MeteoPacketConverterV1::ConvertToBluetoothCommand() : command [" << hex << command << dec << "], context [" << btCommand->GetContext().dump() << "].";
+			btMessage->SetContextInJson(context);
+			btMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
+
+			//LOG(LogLevel::Debug) << "MeteoPacketConverterV1::ConvertToBluetoothCommand() : command [" << hex << command << dec << "], context [" << btCommand->GetContext().dump() << "].";
 
 			// TODO: parse失敗要error handle
 
-			return btCommand;
-		}
-		else if (CheckPacketType(buffer, size) == PacketType::AckFile) {
-
-			MeteoAckFileBluetoothCommand* btCommand = new MeteoAckFileBluetoothCommand(commandMap[command]);
-
-			unsigned short length;
-			memcpy(&length, buffer + sizeof(command), sizeof(length));
-
-			string fileName = getFileName(buffer, size);
-
-			int order = getFileSegmentOrder(buffer, size);
-
-			btCommand->SetFileName(fileName);
-			btCommand->SetOrder(order);
-
-			return btCommand;
-
+			return btMessage;
 		}
 	}
 
@@ -797,15 +784,12 @@ BluetoothMessage * MeteoPacketConverterV1::ConvertToBluetoothMessage(char * buff
 
 int MeteoPacketConverterV1::GetCountOfPacket(BluetoothMessage * bluetoothCommand)
 {
-	if (dynamic_cast<MeteoOutputFileBluetoothCommand*>(bluetoothCommand)) {
-		return dynamic_cast<MeteoOutputFileBluetoothCommand*>(bluetoothCommand)->GetFileSegmentCount();
-	}
-	else if (dynamic_cast<MeteoBluetoothCommand*>(bluetoothCommand)) {
-		// TODO: 暫時規定所有command大小不能超過538，就是一個packet的最大尺寸
-		return 1;
+	if (dynamic_cast<MeteoFileSegmentBluetoothMessage*>(bluetoothCommand)) {
+		return dynamic_cast<MeteoFileSegmentBluetoothMessage*>(bluetoothCommand)->GetAmount();
 	}
 
-	return -1;
+	// 目前一班封包通常只有不會切成兩個
+	return 1;
 }
 
 int MeteoPacketConverterV1::ConvertToByteArray(BluetoothMessage * bluetoothCommand, int packetOrder, char * buffer, int bufferMaxSize)
@@ -819,68 +803,69 @@ int MeteoPacketConverterV1::ConvertToByteArray(BluetoothMessage * bluetoothComma
 
 BluetoothMessage * MeteoPacketConverterV1::FinishWriteFile(BluetoothMessage * bluetoothCommand)
 {
-	if (!dynamic_cast<MeteoBluetoothCommand*>(bluetoothCommand))
+	if (!dynamic_cast<MeteoBluetoothMessage*>(bluetoothCommand))
 		return nullptr;
 
+	// 這個改道request裡面放
 
-	if (dynamic_cast<MeteoBluetoothCommand*>(bluetoothCommand)->GetCommand() == MeteoCommand::FinishWriteSheetmusic) {
-		string fileName = dynamic_cast<MeteoBluetoothCommand*>(bluetoothCommand)->GetContext()["FileName"];
-
-		// 拿掉附檔名
-		string documentName = fileName.substr(0, fileName.find(string("."), 0));
-
-		MeteoPacketConverterFileSegmentMap* file = fileMap[fileName];
-
-		// sm檔位置為"song/檔名/檔名.sm"
-		if (writeFile(file, string("Songs/") + documentName) > -1) {
-			delete file;
-
-			fileMap.erase(fileName);
-
-			MeteoBluetoothCommand* returnBluetoothCommand = new MeteoBluetoothCommand(MeteoCommand::AckFinishWriteSheetmusic);
-			returnBluetoothCommand->GetContext()["FileName"] = fileName;
-
-			return returnBluetoothCommand;
-
-		}
-		else {
-
-			/* 建立訊息告訴手機沒收到的Segment是幾號 */
-			MeteoBluetoothCommand* returnBluetoothCommand = new MeteoBluetoothCommand(MeteoCommand::RequestRewriteSheetmusicFileSegment);
-			returnBluetoothCommand->GetContext()["FileName"] = fileName;
-
-			/* 檢查哪幾個segment沒有收到 */
-			map<int, pair<char*, int>>::iterator iter;
-			for (int i = 0; i < file->segmentAmount; i++) {
-				iter = file->fileSegmentMap.find(i);
-				if (iter == file->fileSegmentMap.end()) {
-
-					if (returnBluetoothCommand->GetContext()["Orders"].size() > 15) {
-						LOG(LogLevel::Fine) << "MeteoPacketConverterV1::FinishWriteFile() : sending rewrite reuqest overflow.";
-						continue;
-					}
-
-					json order;
-					order["Order"] = i;
-					returnBluetoothCommand->GetContext()["Orders"].push_back(order);
-
-				}
-			}
-
-			return returnBluetoothCommand;
-		}
-	}
+	//if (dynamic_cast<MeteoBluetoothCommand*>(bluetoothCommand)->GetCommand() == MeteoCommand::FinishWriteSheetmusic) {
+	//	string fileName = dynamic_cast<MeteoBluetoothCommand*>(bluetoothCommand)->GetContext()["FileName"];
+	//
+	//	// 拿掉附檔名
+	//	string documentName = fileName.substr(0, fileName.find(string("."), 0));
+	//
+	//	MeteoPacketConverterFileSegmentMap* file = fileMap[fileName];
+	//
+	//	// sm檔位置為"song/檔名/檔名.sm"
+	//	if (writeFile(file, string("Songs/") + documentName) > -1) {
+	//		delete file;
+	//
+	//		fileMap.erase(fileName);
+	//
+	//		MeteoBluetoothCommand* returnBluetoothCommand = new MeteoBluetoothCommand(MeteoCommand::AckFinishWriteSheetmusic);
+	//		returnBluetoothCommand->GetContext()["FileName"] = fileName;
+	//
+	//		return returnBluetoothCommand;
+	//
+	//	}
+	//	else {
+	//
+	//		/* 建立訊息告訴手機沒收到的Segment是幾號 */
+	//		MeteoBluetoothCommand* returnBluetoothCommand = new MeteoBluetoothCommand(MeteoCommand::RequestRewriteSheetmusicFileSegment);
+	//		returnBluetoothCommand->GetContext()["FileName"] = fileName;
+	//
+	//		/* 檢查哪幾個segment沒有收到 */
+	//		map<int, pair<char*, int>>::iterator iter;
+	//		for (int i = 0; i < file->segmentAmount; i++) {
+	//			iter = file->fileSegmentMap.find(i);
+	//			if (iter == file->fileSegmentMap.end()) {
+	//
+	//				if (returnBluetoothCommand->GetContext()["Orders"].size() > 15) {
+	//					LOG(LogLevel::Fine) << "MeteoPacketConverterV1::FinishWriteFile() : sending rewrite reuqest overflow.";
+	//					continue;
+	//				}
+	//
+	//				json order;
+	//				order["Order"] = i;
+	//				returnBluetoothCommand->GetContext()["Orders"].push_back(order);
+	//
+	//			}
+	//		}
+	//
+	//		return returnBluetoothCommand;
+	//	}
+	//}
 
 	return nullptr;
 }
 
 bool MeteoPacketConverterV1::CheckIsWrtieFileFinishCommand(BluetoothMessage * bluetoothCommand)
 {
-	if (dynamic_cast<MeteoBluetoothCommand*>(bluetoothCommand)->GetCommand() == MeteoCommand::AckFinishWriteNewFirmwareFile ||
-		dynamic_cast<MeteoBluetoothCommand*>(bluetoothCommand)->GetCommand() == MeteoCommand::AckFinishWriteNewInstrumentFile ||
-		dynamic_cast<MeteoBluetoothCommand*>(bluetoothCommand)->GetCommand() == MeteoCommand::AckFinishWriteSheetmusic) {
-		return true;
-	}
+	//if (dynamic_cast<MeteoBluetoothCommand*>(bluetoothCommand)->GetCommand() == MeteoCommand::AckFinishWriteNewFirmwareFile ||
+	//	dynamic_cast<MeteoBluetoothCommand*>(bluetoothCommand)->GetCommand() == MeteoCommand::AckFinishWriteNewInstrumentFile ||
+	//	dynamic_cast<MeteoBluetoothCommand*>(bluetoothCommand)->GetCommand() == MeteoCommand::AckFinishWriteSheetmusic) {
+	//	return true;
+	//}
 
 	return false;
 }
@@ -936,7 +921,8 @@ BluetoothMessage* MeteoPacketConverterV1::ConvertToFile(char * buffer, int size)
 
 			fileSegmentMap->fileSegmentMap[fileSegmentNumber] = pair<char*, int>(fileSegment, fileSegmentSize);
 			
-			return createAckFileSegmentBluetoothCommand(buffer, size);
+			//return createAckFileSegmentBluetoothCommand(buffer, size);
+
 		}
 	}
 
