@@ -25,6 +25,8 @@ namespace Instruments {
 
 		virtual int SetHost(GameHost* h);
 
+		virtual PitchBindingSet* GetDefaultPitchBindingSet(int variant = 0);	// 這個還沒寫
+
 
 		/* ----------------------- Piano.h ----------------------- */
 

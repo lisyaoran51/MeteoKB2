@@ -24,6 +24,12 @@ namespace Instruments {
 
 		MeteoPiano(vector<string>& args);
 
+		/* ----------------------- Instrument.h ----------------------- */
+
+		virtual PitchBindingSet* GetDefaultPitchBindingSet(int variant = 0);	// 這個還沒寫
+
+		/* ----------------------- MeteoPiano.h ----------------------- */
+
 		virtual int SetGameControllingPitchState(bool value);
 
 		/// <summary>

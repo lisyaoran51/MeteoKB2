@@ -56,6 +56,9 @@ namespace Instruments {
 
 		virtual int SwitchSoundBindings(TSoundBindingSet<Pitch>* soundBindingSet) = 0;
 
+		/// <summary>
+		/// 忘記這個要怎麼寫了，之後再回來研究
+		///	</summary>
 		virtual PitchBindingSet* GetDefaultPitchBindingSet(int variant = 0) = 0;
 
 		//寫錯了

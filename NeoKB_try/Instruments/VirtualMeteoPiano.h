@@ -29,6 +29,11 @@ namespace Instruments {
 
 		VirtualMeteoPiano();
 
+		/* ----------------------- Instrument.h ----------------------- */
+
+
+		virtual PitchBindingSet* GetDefaultPitchBindingSet(int variant = 0);	// 這個還沒寫
+
 		/* ----------------------- Piano.h ----------------------- */
 
 		virtual int MoveOctave(PianoPitchMovement m);
@@ -50,6 +55,10 @@ namespace Instruments {
 		int ReleasePedal();
 
 	protected:
+
+		/* ----------------------- Instrument.h ----------------------- */
+
+		virtual int loadAndMapPitches();	// 這個還沒寫
 
 		/* ----------------------- Piano.h ----------------------- */
 
