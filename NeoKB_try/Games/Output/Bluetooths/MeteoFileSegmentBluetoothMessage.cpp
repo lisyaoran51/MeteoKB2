@@ -1,5 +1,7 @@
 #include "MeteoFileSegmentBluetoothMessage.h"
 
+#include <string.h>
+
 
 using namespace Games::Output::Bluetooths;
 
