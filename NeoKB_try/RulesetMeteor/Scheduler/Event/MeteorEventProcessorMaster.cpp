@@ -119,6 +119,7 @@ int MeteorEventProcessorMaster::OnKeyDown(pair<MeteorAction, int> action)
 	*/
 
 	MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::PressKey);
+	json context;
 
 	switch (pitchState) {
 
@@ -126,7 +127,7 @@ int MeteorEventProcessorMaster::OnKeyDown(pair<MeteorAction, int> action)
 		for (auto it = pitchBindings.begin(); it != pitchBindings.end(); it++)
 		{
 			if (action.first == (*it).second)
-				meteoContextBluetoothMessage->GetContext()["Key"] = int((*it).first);
+				context["Key"] = int((*it).first);
 		}
 		break;
 
@@ -134,7 +135,7 @@ int MeteorEventProcessorMaster::OnKeyDown(pair<MeteorAction, int> action)
 		for (auto it = loweredPitchBindings.begin(); it != loweredPitchBindings.end(); it++)
 		{
 			if (action.first == (*it).second)
-				meteoContextBluetoothMessage->GetContext()["Key"] = int((*it).first);
+				context["Key"] = int((*it).first);
 		}
 		break;
 
@@ -142,13 +143,16 @@ int MeteorEventProcessorMaster::OnKeyDown(pair<MeteorAction, int> action)
 		for (auto it = raisedPitchBindings.begin(); it != raisedPitchBindings.end(); it++)
 		{
 			if (action.first == (*it).second)
-				meteoContextBluetoothMessage->GetContext()["Key"] = int((*it).first);
+				context["Key"] = int((*it).first);
 		}
 		break;
 
 	}
 
-	meteoContextBluetoothMessage->GetContext()["Volume"] = action.second;
+	context["Volume"] = action.second;
+
+	meteoContextBluetoothMessage->SetContextInJson(context);
+	meteoContextBluetoothMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
 
 	outputManager->PushMessage(meteoContextBluetoothMessage);
 
@@ -158,6 +162,7 @@ int MeteorEventProcessorMaster::OnKeyDown(pair<MeteorAction, int> action)
 int MeteorEventProcessorMaster::OnKeyUp(MeteorAction action)
 {
 	MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::ReleaseKey);
+	json context;
 
 	switch (pitchState) {
 
@@ -165,7 +170,7 @@ int MeteorEventProcessorMaster::OnKeyUp(MeteorAction action)
 		for (auto it = pitchBindings.begin(); it != pitchBindings.end(); it++)
 		{
 			if (action == (*it).second)
-				meteoContextBluetoothMessage->GetContext()["Key"] = int((*it).first);
+				context["Key"] = int((*it).first);
 		}
 		break;
 
@@ -173,7 +178,7 @@ int MeteorEventProcessorMaster::OnKeyUp(MeteorAction action)
 		for (auto it = loweredPitchBindings.begin(); it != loweredPitchBindings.end(); it++)
 		{
 			if (action == (*it).second)
-				meteoContextBluetoothMessage->GetContext()["Key"] = int((*it).first);
+				context["Key"] = int((*it).first);
 		}
 		break;
 
@@ -181,11 +186,14 @@ int MeteorEventProcessorMaster::OnKeyUp(MeteorAction action)
 		for (auto it = raisedPitchBindings.begin(); it != raisedPitchBindings.end(); it++)
 		{
 			if (action == (*it).second)
-				meteoContextBluetoothMessage->GetContext()["Key"] = int((*it).first);
+				context["Key"] = int((*it).first);
 		}
 		break;
 
 	}
+
+	meteoContextBluetoothMessage->SetContextInJson(context);
+	meteoContextBluetoothMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
 
 	outputManager->PushMessage(meteoContextBluetoothMessage);
 
