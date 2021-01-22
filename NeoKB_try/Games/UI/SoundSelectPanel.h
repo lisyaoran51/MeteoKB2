@@ -5,6 +5,7 @@
 #include "../Sheetmusic/SheetmusicInfo.h"
 #include "../Sheetmusic/SheetmusicManager.h"
 #include "../../Framework/Input/Messages/MessageHandler.h"
+#include "../Output/Bluetooths/MeteoBluetoothMessage.h"
 
 
 
@@ -12,6 +13,7 @@
 using namespace Framework::Allocation::Hierachal;
 using namespace Games::Sheetmusics;
 using namespace Framework::Input::Messages;
+using namespace Games::Output::Bluetooths;
 
 
 namespace Games {
@@ -40,7 +42,7 @@ namespace UI {
 
 		function<int(void)> OnSoundSwitched;
 
-		virtual int OnMessage(MeteoBluetoothMessage* command);
+		virtual int OnMessage(MeteoBluetoothMessage* message);
 
 		virtual int update();
 
