@@ -4,9 +4,11 @@
 #include "../../Framework/Input/Messages/MessageInputManager.h"
 #include "../Ruleset/RulesetInfo.h"
 #include "../Ruleset/Ruleset.h"
+#include "../Output/Bluetooths/MeteoBluetoothMessage.h"
 
 using namespace Framework::Input::Messages;
 using namespace Games::Rulesets;
+using namespace Games::Output::Bluetooths;
 
 
 namespace Games {
@@ -18,7 +20,7 @@ namespace Input {
 	/// 另外他的父類DatabasedKeyBindingInputManager有額外的功能，可以拿到ruleset的keybinding，直接把這個功能擺到這個class裡
 	/// </summary>
 	template<typename T>
-	class RulesetInputManager : public MessageInputManager<T, MeteoBluetoothCommand> {
+	class RulesetInputManager : public MessageInputManager<T, MeteoBluetoothMessage> {
 
 		RulesetInfo* rulesetInfo;
 
