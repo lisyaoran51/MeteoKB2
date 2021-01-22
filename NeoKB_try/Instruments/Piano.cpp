@@ -439,12 +439,17 @@ int Piano::OnButtonDown(PianoAction action)
 
 			if (sustainType == SustainType::AutoSustain) {
 				sustainType = SustainType::None;
-				meteoContextBluetoothMessage->GetContext()["State"] = false;
+				json context;
+				context["State"] = false;
+				meteoContextBluetoothMessage->SetContextInJson(context);
 			}
 			else {
 				sustainType = SustainType::AutoSustain;
-				meteoContextBluetoothMessage->GetContext()["State"] = true;
+				json context;
+				context["State"] = false;
+				meteoContextBluetoothMessage->SetContextInJson(context);
 			}
+			meteoContextBluetoothMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
 			outputManager->PushMessage(meteoContextBluetoothMessage);
 
 		}
@@ -456,12 +461,17 @@ int Piano::OnButtonDown(PianoAction action)
 		MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::PianoPressSensitiveButton);
 		if (isSensitive == true) {
 			isSensitive = false;
-			meteoContextBluetoothMessage->GetContext()["State"] = false;
+			json context;
+			context["State"] = false;
+			meteoContextBluetoothMessage->SetContextInJson(context);
 		}
 		else {
 			isSensitive = true;
-			meteoContextBluetoothMessage->GetContext()["State"] = true;
+			json context;
+			context["State"] = false;
+			meteoContextBluetoothMessage->SetContextInJson(context);
 		}
+		meteoContextBluetoothMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
 		outputManager->PushMessage(meteoContextBluetoothMessage);
 	}
 
