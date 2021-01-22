@@ -215,8 +215,6 @@ namespace Communications{
 			MeteoCommand requestRetransferCommand = MeteoCommand::None;
 			MeteoCommand ackFinishCommand = MeteoCommand::None;
 
-			string fileName = "";
-
 			BleBinaryRequestFileSegmentMap* fileSegmentMap = nullptr;
 
 			bool isTransferFinished = false;
