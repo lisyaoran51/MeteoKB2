@@ -476,7 +476,9 @@ Pattern * MeteorPatternGenerator::generateInputKeyControlPoint(vector<Event*>* e
 	LOG(LogLevel::Finer) << "int MeteorSmConverter::generateNoteControlPoint(vector<Event*>*, Event*) : Start converting [" << static_cast<int>(inputKeyControlPoint->GetInputKey()) << "," << inputKeyControlPoint->GetStartTime() << "] to pattern...";
 
 	/* 如果這個音的狀態是隱藏，就直接返回 */
-	if (inputKeyControlPoint->GetHandType() >= HandType::HiddenNone)
+	if (inputKeyControlPoint->GetHandType() == HandType::Hidden ||
+		inputKeyControlPoint->GetHandType() == HandType::HiddenLeft || 
+		inputKeyControlPoint->GetHandType() == HandType::HiddenRight)
 		return pattern;
 
 	InputKey inputKey = inputKeyControlPoint->GetInputKey();
