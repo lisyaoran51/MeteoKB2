@@ -109,18 +109,18 @@ int BleAccess::run()
 	//}
 	//
 	//
-	///* 再執行request */
-	//CommunicationRequest* request = nullptr;
-	//if (communicationRequests.size() > 0) {
-	//	request = communicationRequests.back();
-	//
-	//	// request處理成功
-	//	if (handleRequest(request) >= 0) {
-	//		communicationRequests.pop_back();
-	//	}
-	//	else
-	//		return -1;
-	//}
+	/* 再執行request */
+	CommunicationRequest* request = nullptr;
+	if (communicationRequests.size() > 0) {
+		request = communicationRequests.back();
+	
+		// request處理成功
+		if (handleRequest(request) >= 0) {
+			communicationRequests.pop_back();
+		}
+		else
+			return -1;
+	}
 
 	return 0;
 }
