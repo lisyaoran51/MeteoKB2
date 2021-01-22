@@ -36,7 +36,7 @@ namespace ControlPoints{
 
 		MTO_FLOAT volume = -1;
 
-		HandType handType = HandType::Auto;
+		HandType handType = HandType::None;	// 看看之後要不要改成auto
 
 	};
 

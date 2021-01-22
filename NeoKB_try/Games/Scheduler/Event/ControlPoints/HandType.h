@@ -12,16 +12,16 @@ namespace ControlPoints{
 
 	enum class HandType {
 		None,
-		LeftEasy,
+		LeftEasy,	// 如果沒有分手右手，就一律左手，玫芬難度的話就一律簡單
 		LeftOther,
 		RightEasy,
 		RightOther,
 		Foot,
-		//Auto,	// 這個是不是舊的要刪掉?
-		OctaveShift,
-		HiddenNone,
+		OctaveShift, 
 		HiddenLeft,
 		HiddenRight,
+		Hidden,	// 不分左右手
+		//Auto,	// 這個是不是舊的要刪掉? 6通常是平移八度
 	};
 
 
