@@ -115,14 +115,14 @@ int BleAccess::run()
 		request = communicationRequests.back();
 	
 		// request處理成功
-		int result = 0;
+		//int result = 0;
 		//result = handleRequest(request);		// 執行handleRequest，result就會變成undeclared
 		//if (handleRequest(request) >= 0) {	// 這邊很奇怪，如果把handle request放進if裡面，compile就會失敗
-		if (result >= 0) {
-			communicationRequests.pop_back();
-		}
-		else 
-			return -1;
+		//if (result >= 0) {
+		//	communicationRequests.pop_back();
+		//}
+		//else 
+		//	return -1;
 		
 	}
 
