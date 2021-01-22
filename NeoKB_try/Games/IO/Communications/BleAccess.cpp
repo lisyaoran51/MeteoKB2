@@ -123,12 +123,6 @@ int BleAccess::run()
 
 	}
 
-	/*	不能把command清掉，因為同時可能有多個thread都要看raw command，要確定每個thread都讀過才能清掉
-	unique_lock<mutex> uLock(rawCommandMutex);
-	inputRawCommand.clear();
-	uLock.unlock;
-
-	*/
 	return 0;
 }
 
