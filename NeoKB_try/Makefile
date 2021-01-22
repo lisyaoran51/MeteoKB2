@@ -17,6 +17,7 @@ Games:Games/Configurations:Games/Input:\
 Games/Ruleset:Games/Ruleset/Modifiers:Games/Ruleset/Judgements:Games/Ruleset/Scoring:Games/Ruleset/Replays:\
 Games/Scene:Games/Scene/Interlude:Games/Scene/Play:Games/Scene/Play/Hud:Games/Scene/Select:Games/Scene/Results:\
 Games/Input:Games/Input/Messages:\
+Games/IO/Communications:\
 Games/Output:Games/Output/Bluetooths:\
 Games/Scheduler/Event:Games/Scheduler/Event/ControlPoints:Games/Scheduler/Event/Effect:\
 Games/Scheduler/Event/Effect/Algorithm:Games/Scheduler/Event/GameEvents:Games/Scheduler/Event/SystemEvents:\
