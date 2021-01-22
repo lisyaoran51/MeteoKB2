@@ -6,7 +6,7 @@ Framework/Exception:\
 Framework/Graphic:Framework/Graphic/Map:\
 Framework/Host:\
 Framework/Input:Framework/Input/Messages:Framework/Input/Handler:Framework/Input/KeyBindings:\
-Framework/IO:Framework/IO/Stores:Framework/IO/Api:\
+Framework/IO:Framework/IO/Stores:Framework/IO/Communications:\
 Framework/Output:Framework/Output/Panels:Framework/Output/Bluetooths:\
 Framework/Database:\
 Framework/Scenes:\
@@ -60,7 +60,7 @@ INCLUDE = -IFramwork -IFramework/Allocation -IFramework/Allocation/Hierachal -IF
 -IFramework/Graphic -IFramework/Graphic/Map \
 -IFramework/Host \
 -IFramework/Input -IFramework/Input/Messages -IFramework/Input/Handler -IFramework/Input/KeyBindings \
--IFramework/IO -IFramework/IO/Stores -IFramework/IO/Api \
+-IFramework/IO -IFramework/IO/Stores -IFramework/IO/Communications \
 -IFramework/Output -IFramework/Output/Panels -IFramework/Output/Bluetooths \
 -IFramework/Database \
 -IFramework/Scenes \
