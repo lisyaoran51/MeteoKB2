@@ -1,5 +1,7 @@
 #include "FileSegmentMap.h"
 
+#include <string.h>
+
 
 using namespace Util::DataStructure;
 
