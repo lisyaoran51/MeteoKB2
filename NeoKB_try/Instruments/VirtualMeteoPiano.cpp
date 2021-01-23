@@ -10,6 +10,11 @@ VirtualMeteoPiano::VirtualMeteoPiano() : RegisterType("VirtualMeteoPiano")
 {
 }
 
+PitchBindingSet * VirtualMeteoPiano::GetDefaultPitchBindingSet(int variant)
+{
+	return nullptr;
+}
+
 int VirtualMeteoPiano::SetVirtualMeteoPianoSustainType(VirtualMeteoPianoSustainType sType)
 {
 	sustainType = sType;
@@ -120,6 +125,12 @@ int VirtualMeteoPiano::ReleasePedal()
 	}
 
 
+	return 0;
+}
+
+int VirtualMeteoPiano::loadAndMapPitches()
+{
+	// 在VirtualMeteoPiano中沒有輸入，所以不用管piano action怎麼對應到pitch
 	return 0;
 }
 

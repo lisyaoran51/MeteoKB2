@@ -42,6 +42,9 @@ namespace Rulesets {
 
 		virtual vector<KeyBinding*>* GetDefaultkeyBindings(int variant = 0) = 0;
 
+		/// <summary>
+		/// 這個是用來在演奏過程中，把按下的鍵轉換成樂譜用的
+		///	</summary>
 		virtual PitchBindingSet* GetDefaultPitchBindingSet(int variant = 0) = 0;
 
 		RulesetInfo* GetRulesetInfo();

@@ -31,8 +31,10 @@ namespace Instruments {
 
 		/* ----------------------- Instrument.h ----------------------- */
 
-
-		virtual PitchBindingSet* GetDefaultPitchBindingSet(int variant = 0);	// 這個還沒寫
+		/// <summary>
+		/// 這個完全用步道，所以是空的。一班要拿GetDefaultPitchBindingSet會去meteo piano拿
+		///	</summary>
+		virtual PitchBindingSet* GetDefaultPitchBindingSet(int variant = 0);
 
 		/* ----------------------- Piano.h ----------------------- */
 
@@ -58,7 +60,7 @@ namespace Instruments {
 
 		/* ----------------------- Instrument.h ----------------------- */
 
-		virtual int loadAndMapPitches();	// 這個還沒寫
+		virtual int loadAndMapPitches();
 
 		/* ----------------------- Piano.h ----------------------- */
 

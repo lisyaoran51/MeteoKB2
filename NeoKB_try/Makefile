@@ -156,7 +156,7 @@ MeteoGame.o MeteoGameBase.o \
 MeteoConfigManager.o \
 Ruleset.o RulesetInfo.o RulesetStore.o Judgement.o HasHitWindow.o HitWindow.o ReplayRecorder.o ReplayFrame.o \
 Modifier.o DifficultyModifier.o EventProcessorFilterModifier.o InstrumentModifier.o TimeControllerModifier.o \
-ScoreProcessor.o \
+Score.o ScoreProcessor.o \
 BleAccess.o BleRequest.o BleRequestException.o \
 MeteoBluetoothMessage.o MeteoBluetoothOutputer.o MeteoContextBluetoothMessage.o MeteoFileSegmentBluetoothMessage.o \
 Loader.o MeteoScene.o Intro.o Player.o PlayerLoader.o Playfield.o Result.o \
@@ -179,13 +179,13 @@ Instrument.o HasPitch.o MeteoPiano.o Piano.o VirtualMeteoPiano.o CompositeMeteoP
 SimpleSoundBindingSetDecoder.o SoundBindingSetDecoder.o \
 RepeatSoundBindingSet.o SimpleSoundBindingSet.o SoundBinding.o SoundBindingSet.o TwoStageSoundBindingSet.o PianoInputManager.o \
 \
-FileSystem.o ProgramInitializer.o \
+FileSystem.o ProgramInitializer.o FileSegmentMap.o \
 \
 MeteoGameDesktop.o Program.o \
 MeteoLightBoardV1.o bcm2835.o MeteoBitbangDisplayDevice.o MeteoSpidevDisplayDevice.o MeteoKeyboardDevice.o MeteoPanelDevice.o MeteoPanelBoardV1.o pi2c.o \
 MeteoBluetoothDevice.o MeteoBluetoothPhoneV1.o MeteoPacketConverterV1.o sdp.o \
 \
-MeteorGame.o MeteorConfigManager.o MeteorInputManager.o MeteorPlayfield.o \
+MeteorGame.o MeteorConfigManager.o MeteorInputManager.o MeteorPitchBindingSet.o MeteorPlayfield.o \
 MeteorRuleset.o MeteorRulesetExecutor.o MeteorJudgement.o MeteorHitWindow.o MeteorReplayRecorder.o MeteorReplayFrame.o \
 MeteorResult.o \
 AutoPedalModifier.o MusicGameModifier.o HandModifier.o MeteorDifficultyModifier.o RepeatPracticeModifier.o FallSpeedModifier.o ClockRateModifier.o \

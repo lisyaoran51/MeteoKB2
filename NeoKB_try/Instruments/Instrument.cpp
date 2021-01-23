@@ -37,6 +37,11 @@ int Instrument::LoadAndMapSamples()
 	return loadAndMapSamples();
 }
 
+int Instrument::LoadAndMapPitches()
+{
+	return loadAndMapPitches();
+}
+
 int Instrument::LoadOnComplete()
 {
 	LOG(LogLevel::Fine) << "Instrument::LoadOnComplete() : start loading...";

@@ -68,6 +68,8 @@ namespace Communications{
 
 	protected:
 
+		thread* runThread = nullptr;
+
 		StopwatchClock* sourceClock = nullptr;
 
 		FrameBasedClock* framedClock = nullptr;

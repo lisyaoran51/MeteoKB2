@@ -3,6 +3,7 @@
 
 
 #include <map>
+#include <fstream>
 
 
 using namespace std;
@@ -21,7 +22,6 @@ namespace DataStructure{
 
 		FileSegmentMap(int sSize);
 		~FileSegmentMap();
-
 
 		string fileName;
 
@@ -44,8 +44,14 @@ namespace DataStructure{
 		/// </summary>
 		bool CheckFullFilled();
 
+		/// <summary>
+		/// 部會close fstream，執行完畢還要自己去close stream
+		/// </summary>
 		int WriteFile(fstream* fStream);
 		
+		/// <summary>
+		/// 部會close fstream，執行完畢還要自己去close stream
+		/// </summary>
 		int ReadFile(fstream* fStream);
 
 	protected:

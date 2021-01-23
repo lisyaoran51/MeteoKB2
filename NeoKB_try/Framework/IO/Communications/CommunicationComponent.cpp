@@ -8,6 +8,17 @@ CommunicationComponent::CommunicationComponent(GameHost * gHost): host(gHost), R
 {
 }
 
+int CommunicationComponent::Start()
+{
+	runThread = new thread(&CommunicationComponent::run, this);
+	runThread->detach();
+
+	// 要不要加入thread master? 避免thread safe問題
+	// ThreadMaster::GetInstance().AddNewThread(threadName);
+
+	return 0;
+}
+
 CommunicationState CommunicationComponent::GetCommunicationState()
 {
 	return communicationState;

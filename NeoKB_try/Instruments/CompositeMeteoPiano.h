@@ -25,7 +25,7 @@ namespace Instruments {
 
 		virtual int SetHost(GameHost* h);
 
-		virtual PitchBindingSet* GetDefaultPitchBindingSet(int variant = 0);	// 這個還沒寫
+		virtual PitchBindingSet* GetDefaultPitchBindingSet(int variant = 0);
 
 
 		/* ----------------------- Piano.h ----------------------- */
@@ -75,7 +75,15 @@ namespace Instruments {
 
 		VirtualMeteoPiano* virtualMeteoPiano = nullptr;
 
+		/// <summary>
+		///	照理來說這個會在load on complete時執行，應該piano和virtual piano都會執行一次，為什麼這邊還要特別在讓他們執行一次？
+		/// </summary>
 		virtual int loadAndMapSamples();
+
+		/// <summary>
+		///	照理來說這個會在load on complete時執行，應該piano和virtual piano都會執行一次，為什麼這邊還要特別在讓他們執行一次？
+		/// </summary>
+		virtual int loadAndMapPitches();
 
 	};
 

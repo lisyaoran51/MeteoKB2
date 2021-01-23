@@ -49,6 +49,11 @@ Peripheral * BleAccess::GetPeripheral()
 	return bluetoothPhone;
 }
 
+BluetoothPhone * BleAccess::GetBluetoothPhone()
+{
+	return bluetoothPhone;
+}
+
 int BleAccess::RegisterBleRequest(BleRequest * bleRequest)
 {
 	unique_lock<mutex> uLock(bleRequestMutex);

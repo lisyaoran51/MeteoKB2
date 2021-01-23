@@ -243,6 +243,7 @@
     <ClCompile Include="Instruments\CompositeMeteoPiano.cpp" />
     <ClCompile Include="Instruments\HasPitch.cpp" />
     <ClCompile Include="Instruments\Input\PianoInputManager.cpp" />
+    <ClCompile Include="Instruments\Input\PianoPitchBindingSet.cpp" />
     <ClCompile Include="Instruments\Instrument.cpp" />
     <ClCompile Include="Instruments\MeteoPiano.cpp" />
     <ClCompile Include="Instruments\Piano.cpp" />
@@ -338,10 +339,12 @@
     <ClCompile Include="TestCases\TestCaseMeteoGameHost.cpp" />
     <ClCompile Include="TestCases\TestCaseStopwatch.cpp" />
     <ClCompile Include="Util\DataStructure\ActionListTestcase.cpp" />
+    <ClCompile Include="Util\DataStructure\FileSegmentMap.cpp" />
     <ClCompile Include="Util\FileSystem.c" />
     <ClCompile Include="Util\ProgramInitializer.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Util\StringSplitter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="DailyLog.txt" />
@@ -640,6 +643,7 @@
     <ClInclude Include="Instruments\Input\PianoAction.h" />
     <ClInclude Include="Instruments\Input\InstrumentInputManager.h" />
     <ClInclude Include="Instruments\Input\PianoInputManager.h" />
+    <ClInclude Include="Instruments\Input\PianoPitchBindingSet.h" />
     <ClInclude Include="Instruments\Input\PitchBindingSet.h" />
     <ClInclude Include="Instruments\Instrument.h" />
     <ClInclude Include="Instruments\MeteoPiano.h" />

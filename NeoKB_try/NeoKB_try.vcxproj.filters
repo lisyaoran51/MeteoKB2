@@ -1794,6 +1794,15 @@
     <ClCompile Include="Games\Output\Bluetooths\MeteoFileSegmentBluetoothMessage.cpp">
       <Filter>來源檔案\Games\Output\Bluetooths</Filter>
     </ClCompile>
+    <ClCompile Include="Util\DataStructure\FileSegmentMap.cpp">
+      <Filter>來源檔案\Util\DataStructure</Filter>
+    </ClCompile>
+    <ClCompile Include="Util\StringSplitter.cpp">
+      <Filter>來源檔案\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Instruments\Input\PianoPitchBindingSet.cpp">
+      <Filter>來源檔案\Instruments\Input</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="DailyLog.txt">
@@ -3009,6 +3018,9 @@
     </ClInclude>
     <ClInclude Include="Framework\Scenes\SceneMaster.h">
       <Filter>標頭檔\Framework\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Instruments\Input\PianoPitchBindingSet.h">
+      <Filter>標頭檔\Instruments\Input</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

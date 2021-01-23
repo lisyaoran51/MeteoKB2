@@ -16,10 +16,17 @@ namespace Util {
 
 	public:
 
-		static vector<string> Split(string s, char splitter);
-		static vector<string> Split(string s, char splitter1, char splitter2);
+		/// <summary>
+		/// 如果最後一個字也是splitter的話就會出錯，之後要改一下
+		/// </summary>
+		static vector<string> Split(string s, string splitter);
 
-		static string Combine(vector<string> element, char delimiter);
+		/// <summary>
+		/// 這個懶得寫，先不要用
+		/// </summary>
+		static vector<string> Split(string s, string splitter1, string splitter2);
+
+		static string Combine(vector<string> element, string delimiter);
 
 	};
 

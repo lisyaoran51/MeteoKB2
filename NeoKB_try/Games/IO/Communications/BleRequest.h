@@ -231,27 +231,27 @@ namespace Communications{
 		/// <summary>
 		/// 用一個map來讓ble收到的檔案片段連接成一個完整的檔案
 		/// </summary>
-		class BleBinaryRequestFileSegmentMap {
-		public:
-			~BleBinaryRequestFileSegmentMap();
-
-			string fileName;
-			map<int, pair<char*, int>> fileSegmentMap;
-			int segmentSize;
-			int segmentAmount;
-			bool CheckFullFilled();
-
-			/// <summary>
-			/// 部會close fstream，執行完畢還要自己去close stream
-			/// </summary>
-			int WriteFile(fstream* fStream);
-
-			/// <summary>
-			/// 部會close fstream，執行完畢還要自己去close stream
-			/// </summary>
-			int ReadFile(fstream* fStream);
-
-		};
+		//class BleBinaryRequestFileSegmentMap {
+		//public:
+		//	~BleBinaryRequestFileSegmentMap();
+		//
+		//	string fileName;
+		//	map<int, pair<char*, int>> fileSegmentMap;
+		//	int segmentSize;
+		//	int segmentAmount;
+		//	bool CheckFullFilled();
+		//
+		//	/// <summary>
+		//	/// 部會close fstream，執行完畢還要自己去close stream
+		//	/// </summary>
+		//	int WriteFile(fstream* fStream);
+		//
+		//	/// <summary>
+		//	/// 部會close fstream，執行完畢還要自己去close stream
+		//	/// </summary>
+		//	int ReadFile(fstream* fStream);
+		//
+		//};
 
 	};
 

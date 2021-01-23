@@ -203,7 +203,7 @@ int BleRequest::PostBinaryBleRequestMethod::PerformAndWait(BleRequest * thisRequ
 
 	FileSegmentMap bleBinaryRequestFileSegmentMap(binarySegmentSize);
 	bleBinaryRequestFileSegmentMap.ReadFile(&file);
-	vector<string> splitPath = StringSplitter::Split(filePath, '/', '\\');
+	vector<string> splitPath = StringSplitter::Split(filePath, "/");
 	string fileName = splitPath[splitPath.size() - 1];
 	bleBinaryRequestFileSegmentMap.fileName = fileName;
 
@@ -415,10 +415,10 @@ int BleRequest::GetTextBleRequestMethod::PerformAndWait(BleRequest * thisRequest
 
 BleRequest::GetBinaryBleRequestMethod::GetBinaryBleRequestMethod(string fPath, MeteoBluetoothMessage * gMessage, MeteoCommand aGetCommand, MeteoCommand tCommand, MeteoCommand fCommand, MeteoCommand rRetransferCommand, MeteoCommand aFinishCommand)
 {
-	vector<string> filePathHierachy = StringSplitter::Split(fPath, '/', '\\');
+	vector<string> filePathHierachy = StringSplitter::Split(fPath, "/");
 	fileName = filePathHierachy[filePathHierachy.size() - 1];
 	filePathHierachy.pop_back();
-	directoryPath = StringSplitter::Combine(filePathHierachy, '/');
+	directoryPath = StringSplitter::Combine(filePathHierachy, "/");
 
 	getMessage = gMessage;
 	ackGetCommand = aGetCommand;
@@ -557,62 +557,62 @@ int BleRequest::GetBinaryBleRequestMethod::PerformAndWait(BleRequest * thisReque
 	return 0;
 }
 
-BleRequest::BleBinaryRequestFileSegmentMap::~BleBinaryRequestFileSegmentMap()
-{
-
-	for (map<int, pair<char*, int>>::const_iterator it = fileSegmentMap.begin(); it != fileSegmentMap.end(); ++it)
-	{
-		delete[] it->second.first;
-	}
-	fileSegmentMap.clear();
-}
-
-bool BleRequest::BleBinaryRequestFileSegmentMap::CheckFullFilled()
-{
-	if (segmentAmount == fileSegmentMap.size())
-		return true;
-	return false;
-}
-
-int BleRequest::BleBinaryRequestFileSegmentMap::WriteFile(fstream * fStream)
-{
-	for (map<int, pair<char*, int>>::const_iterator it = fileSegmentMap.begin(); it != fileSegmentMap.end(); ++it)
-	{
-		fStream->write(it->second.first, it->second.second * sizeof(char*));
-
-	}
-
-	return 0;
-}
-
-int BleRequest::BleBinaryRequestFileSegmentMap::ReadFile(fstream * fStream)
-{
-	/* 計算檔案大小 */
-	fStream->seekp(0, ios_base::beg);
-	streampos fileSize = fStream->tellg();
-	fStream->seekg(0, std::ios::end);
-	fileSize = fStream->tellg() - fileSize;
-
-	/* 計算segment數量 */
-	segmentAmount = fileSize / segmentSize + fileSize % segmentSize > 0 ? 1 : 0;
-
-	/* 開始讀黨 */
-	fStream->seekp(0, ios_base::beg);
-	for (int i = 0; i < segmentAmount; i++) {
-
-		char* buffer = nullptr;
-		int bufferSize = 0;
-
-		if (i == segmentAmount - 1 && fileSize % segmentSize != 0)
-			bufferSize = fileSize % segmentSize;
-		else 
-			bufferSize = segmentSize;
-
-		buffer = new char[bufferSize];
-		fStream->read(buffer, bufferSize);
-		fileSegmentMap[i] = pair<char*, int>(buffer, bufferSize);
-
-	}
-
-	return 0;
-}
+//BleRequest::BleBinaryRequestFileSegmentMap::~BleBinaryRequestFileSegmentMap()
+//{
+//
+//	for (map<int, pair<char*, int>>::const_iterator it = fileSegmentMap.begin(); it != fileSegmentMap.end(); ++it)
+//	{
+//		delete[] it->second.first;
+//	}
+//	fileSegmentMap.clear();
+//}
+//
+//bool BleRequest::BleBinaryRequestFileSegmentMap::CheckFullFilled()
+//{
+//	if (segmentAmount == fileSegmentMap.size())
+//		return true;
+//	return false;
+//}
+//
+//int BleRequest::BleBinaryRequestFileSegmentMap::WriteFile(fstream * fStream)
+//{
+//	for (map<int, pair<char*, int>>::const_iterator it = fileSegmentMap.begin(); it != fileSegmentMap.end(); ++it)
+//	{
+//		fStream->write(it->second.first, it->second.second * sizeof(char*));
+//
+//	}
+//
+//	return 0;
+//}
+//
+//int BleRequest::BleBinaryRequestFileSegmentMap::ReadFile(fstream * fStream)
+//{
+//	/* 計算檔案大小 */
+//	fStream->seekp(0, ios_base::beg);
+//	streampos fileSize = fStream->tellg();
+//	fStream->seekg(0, std::ios::end);
+//	fileSize = fStream->tellg() - fileSize;
+//
+//	/* 計算segment數量 */
+//	segmentAmount = fileSize / segmentSize + fileSize % segmentSize > 0 ? 1 : 0;
+//
+//	/* 開始讀黨 */
+//	fStream->seekp(0, ios_base::beg);
+//	for (int i = 0; i < segmentAmount; i++) {
+//
+//		char* buffer = nullptr;
+//		int bufferSize = 0;
+//
+//		if (i == segmentAmount - 1 && fileSize % segmentSize != 0)
+//			bufferSize = fileSize % segmentSize;
+//		else 
+//			bufferSize = segmentSize;
+//
+//		buffer = new char[bufferSize];
+//		fStream->read(buffer, bufferSize);
+//		fileSegmentMap[i] = pair<char*, int>(buffer, bufferSize);
+//
+//	}
+//
+//	return 0;
+//}

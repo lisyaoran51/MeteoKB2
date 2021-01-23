@@ -406,7 +406,7 @@ int Piano::OnKeyDown(pair<PianoAction, int> action)
 
 	//getSamples()->at(action.first)->Play();
 	if(getSamples()->find(action.first) != getSamples()->end())
-		getSamples()->at(action.first)->Play(isSensitive ? double(action.second)/256.0 : 0.8);
+		getSamples()->at(action.first)->Play(isSensitive ? double(action.second)/128.0 : 0.8);
 
 	isPressingMap[action.first] = true;
 	return 0;

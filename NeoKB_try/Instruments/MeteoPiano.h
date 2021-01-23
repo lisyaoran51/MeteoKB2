@@ -44,6 +44,8 @@ namespace Instruments {
 
 	protected:
 
+		PitchBindingSet* pitchBindingSet = nullptr;
+
 		virtual map<PianoAction, SampleChannel*>* getSamples(int variant = 0);
 
 

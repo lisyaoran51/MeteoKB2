@@ -3,6 +3,7 @@
 #include "Input/PianoAction.h"
 #include "Pitch.h"
 #include "../Games/Output/Bluetooths/MeteoContextBluetoothMessage.h"
+#include "Input/PianoPitchBindingSet.h"
 
 
 
@@ -15,6 +16,11 @@ using namespace Games::Output::Bluetooths;
 
 MeteoPiano::MeteoPiano(vector<string>& args) : RegisterType("MeteoPiano")
 {
+}
+
+PitchBindingSet * MeteoPiano::GetDefaultPitchBindingSet(int variant)
+{
+	return new PianoPitchBindingSet();
 }
 
 int MeteoPiano::SetGameControllingPitchState(bool value)
@@ -304,5 +310,187 @@ int MeteoPiano::loadAndMapSamples()
 
 int MeteoPiano::loadAndMapPitches()
 {
+	PianoPitchBindingSet* pianoPitchBindingSet = new PianoPitchBindingSet();
+	
+	/* 未升降 */
+#pragma region NonePitchState
+
+	pianoPitchBindingSet->SetPitchBinding(Pitch::C   , PianoAction::VK24_L_C1 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::Db  , PianoAction::VK24_L_bD1);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::D   , PianoAction::VK24_L_D1 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::Eb  , PianoAction::VK24_L_bE1);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::E   , PianoAction::VK24_L_E1 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::F   , PianoAction::VK24_L_F1 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::Gb  , PianoAction::VK24_L_bG1);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::G   , PianoAction::VK24_L_G1 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::Ab  , PianoAction::VK24_L_bA1);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::A   , PianoAction::VK24_L_A1 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::Bb  , PianoAction::VK24_L_bB1);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::B   , PianoAction::VK24_L_B1 );
+		 
+	pianoPitchBindingSet->SetPitchBinding(Pitch::c   , PianoAction::VK24_L_C2 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::db  , PianoAction::VK24_L_bD2);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::d   , PianoAction::VK24_L_D2 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::eb  , PianoAction::VK24_L_bE2);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::e   , PianoAction::VK24_L_E2 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::f   , PianoAction::VK24_L_F2 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::gb  , PianoAction::VK24_L_bG2);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::g   , PianoAction::VK24_L_G2 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::ab  , PianoAction::VK24_L_bA2);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::a   , PianoAction::VK24_L_A2 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::bb  , PianoAction::VK24_L_bB2);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::b   , PianoAction::VK24_L_B2 );
+		 
+	pianoPitchBindingSet->SetPitchBinding(Pitch::c1  , PianoAction::VK24_R_C1 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::d1b , PianoAction::VK24_R_bD1);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::d1  , PianoAction::VK24_R_D1 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::e1b , PianoAction::VK24_R_bE1);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::e1  , PianoAction::VK24_R_E1 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::f1  , PianoAction::VK24_R_F1 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::g1b , PianoAction::VK24_R_bG1);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::g1  , PianoAction::VK24_R_G1 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::a1b , PianoAction::VK24_R_bA1);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::a1  , PianoAction::VK24_R_A1 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::b1b , PianoAction::VK24_R_bB1);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::b1  , PianoAction::VK24_R_B1 );
+		 
+	pianoPitchBindingSet->SetPitchBinding(Pitch::c2  , PianoAction::VK24_R_C2 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::d2b , PianoAction::VK24_R_bD2);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::d2  , PianoAction::VK24_R_D2 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::e2b , PianoAction::VK24_R_bE2);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::e2  , PianoAction::VK24_R_E2 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::f2  , PianoAction::VK24_R_F2 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::g2b , PianoAction::VK24_R_bG2);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::g2  , PianoAction::VK24_R_G2 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::a2b , PianoAction::VK24_R_bA2);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::a2  , PianoAction::VK24_R_A2 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::b2b , PianoAction::VK24_R_bB2);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::b2  , PianoAction::VK24_R_B2 );
+
+
+#pragma endregion
+
+	/* 降八度 */
+#pragma region LoweredPitchState
+
+	pianoPitchBindingSet->SwitchPitchState(MeteoPianoPitchState::Lowered);
+
+	pianoPitchBindingSet->SetPitchBinding(Pitch::C1  , PianoAction::VK24_L_C1 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::D1b , PianoAction::VK24_L_bD1);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::D1  , PianoAction::VK24_L_D1 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::E1b , PianoAction::VK24_L_bE1);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::E1  , PianoAction::VK24_L_E1 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::F1  , PianoAction::VK24_L_F1 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::G1b , PianoAction::VK24_L_bG1);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::G1  , PianoAction::VK24_L_G1 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::A1b , PianoAction::VK24_L_bA1);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::A1  , PianoAction::VK24_L_A1 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::B1b , PianoAction::VK24_L_bB1);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::B1  , PianoAction::VK24_L_B1 );
+
+	pianoPitchBindingSet->SetPitchBinding(Pitch::C   , PianoAction::VK24_L_C2 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::Db  , PianoAction::VK24_L_bD2);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::D   , PianoAction::VK24_L_D2 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::Eb  , PianoAction::VK24_L_bE2);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::E   , PianoAction::VK24_L_E2 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::F   , PianoAction::VK24_L_F2 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::Gb  , PianoAction::VK24_L_bG2);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::G   , PianoAction::VK24_L_G2 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::Ab  , PianoAction::VK24_L_bA2);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::A   , PianoAction::VK24_L_A2 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::Bb  , PianoAction::VK24_L_bB2);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::B   , PianoAction::VK24_L_B2 );
+
+	pianoPitchBindingSet->SetPitchBinding(Pitch::c   , PianoAction::VK24_R_C1 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::db  , PianoAction::VK24_R_bD1);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::d   , PianoAction::VK24_R_D1 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::eb  , PianoAction::VK24_R_bE1);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::e   , PianoAction::VK24_R_E1 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::f   , PianoAction::VK24_R_F1 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::gb  , PianoAction::VK24_R_bG1);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::g   , PianoAction::VK24_R_G1 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::ab  , PianoAction::VK24_R_bA1);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::a   , PianoAction::VK24_R_A1 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::bb  , PianoAction::VK24_R_bB1);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::b   , PianoAction::VK24_R_B1 );
+
+	pianoPitchBindingSet->SetPitchBinding(Pitch::c1  , PianoAction::VK24_R_C2 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::d1b , PianoAction::VK24_R_bD2);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::d1  , PianoAction::VK24_R_D2 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::e1b , PianoAction::VK24_R_bE2);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::e1  , PianoAction::VK24_R_E2 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::f1  , PianoAction::VK24_R_F2 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::g1b , PianoAction::VK24_R_bG2);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::g1  , PianoAction::VK24_R_G2 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::a1b , PianoAction::VK24_R_bA2);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::a1  , PianoAction::VK24_R_A2 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::b1b , PianoAction::VK24_R_bB2);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::b1  , PianoAction::VK24_R_B2 );
+
+#pragma endregion
+
+	/* 升八度 */
+#pragma region RaisedPitchState
+
+	pianoPitchBindingSet->SwitchPitchState(MeteoPianoPitchState::Raised);
+
+	pianoPitchBindingSet->SetPitchBinding(Pitch::c		, PianoAction::VK24_L_C1 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::db		, PianoAction::VK24_L_bD1);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::d		, PianoAction::VK24_L_D1 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::eb		, PianoAction::VK24_L_bE1);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::e		, PianoAction::VK24_L_E1 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::f		, PianoAction::VK24_L_F1 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::gb		, PianoAction::VK24_L_bG1);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::g		, PianoAction::VK24_L_G1 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::ab		, PianoAction::VK24_L_bA1);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::a		, PianoAction::VK24_L_A1 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::bb		, PianoAction::VK24_L_bB1);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::b		, PianoAction::VK24_L_B1 );
+
+	pianoPitchBindingSet->SetPitchBinding(Pitch::c1		, PianoAction::VK24_L_C2 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::d1b	, PianoAction::VK24_L_bD2);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::d1		, PianoAction::VK24_L_D2 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::e1b	, PianoAction::VK24_L_bE2);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::e1		, PianoAction::VK24_L_E2 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::f1		, PianoAction::VK24_L_F2 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::g1b	, PianoAction::VK24_L_bG2);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::g1		, PianoAction::VK24_L_G2 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::a1b	, PianoAction::VK24_L_bA2);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::a1		, PianoAction::VK24_L_A2 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::b1b	, PianoAction::VK24_L_bB2);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::b1		, PianoAction::VK24_L_B2 );
+
+	pianoPitchBindingSet->SetPitchBinding(Pitch::c2	    , PianoAction::VK24_R_C1 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::d2b	, PianoAction::VK24_R_bD1);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::d2	    , PianoAction::VK24_R_D1 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::e2b	, PianoAction::VK24_R_bE1);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::e2	    , PianoAction::VK24_R_E1 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::f2	    , PianoAction::VK24_R_F1 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::g2b	, PianoAction::VK24_R_bG1);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::g2	    , PianoAction::VK24_R_G1 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::a2b	, PianoAction::VK24_R_bA1);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::a2	    , PianoAction::VK24_R_A1 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::b2b	, PianoAction::VK24_R_bB1);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::b2	    , PianoAction::VK24_R_B1 ); 
+
+	pianoPitchBindingSet->SetPitchBinding(Pitch::c3	    , PianoAction::VK24_R_C2 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::d3b	, PianoAction::VK24_R_bD2);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::d3	    , PianoAction::VK24_R_D2 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::e3b	, PianoAction::VK24_R_bE2);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::e3	    , PianoAction::VK24_R_E2 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::f3	    , PianoAction::VK24_R_F2 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::g3b	, PianoAction::VK24_R_bG2);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::g3	    , PianoAction::VK24_R_G2 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::a3b	, PianoAction::VK24_R_bA2);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::a3	    , PianoAction::VK24_R_A2 );
+	pianoPitchBindingSet->SetPitchBinding(Pitch::b3b	, PianoAction::VK24_R_bB2);
+	pianoPitchBindingSet->SetPitchBinding(Pitch::b3	    , PianoAction::VK24_R_B2 );
+
+#pragma endregion
+
+	pianoPitchBindingSet->SwitchPitchState(MeteoPianoPitchState::None);
+
+	pitchBindingSet = pianoPitchBindingSet;
+
 	return 0;
 }

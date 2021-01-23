@@ -57,7 +57,10 @@ namespace Instruments {
 		virtual int SwitchSoundBindings(TSoundBindingSet<Pitch>* soundBindingSet) = 0;
 
 		/// <summary>
-		/// 忘記這個要怎麼寫了，之後再回來研究
+		/// 這個是用來在演奏過程中，把按下的鍵轉換成樂譜用的。部過適用再ruleset上，instrument不知道要怎麼用
+		/// 在按下琴鍵時，目前是直接用piano action對應到sound，如果用pitch binding的話，就可以先從piano action對應到pitch，再用pitch去對應到sound，會比較乾淨
+		/// 不過現在不急著改，可以先寫好pitch binding set就好，以後有需要再改。
+		/// 另外在virtual meteo piano就很明顯，因為virtual meteo piano是直接用pitch去播放聲音，造成get sample by pitch和get samples兩個功能重複了
 		///	</summary>
 		virtual PitchBindingSet* GetDefaultPitchBindingSet(int variant = 0) = 0;
 
@@ -89,6 +92,9 @@ namespace Instruments {
 
 		virtual int loadAndMapSamples() = 0;
 
+		/// <summary>
+		/// 這個應該是用在把pitchBindingSet給設定好，之後要抓pitch的時候就直接用
+		///	</summary>
 		virtual int loadAndMapPitches() = 0;
 
 		//寫錯了
