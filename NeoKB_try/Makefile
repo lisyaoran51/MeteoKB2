@@ -180,7 +180,7 @@ SimpleSoundBindingSetDecoder.o SoundBindingSetDecoder.o \
 RepeatSoundBindingSet.o SimpleSoundBindingSet.o SoundBinding.o SoundBindingSet.o TwoStageSoundBindingSet.o \
 PianoInputManager.o PianoPitchBindingSet.o \
 \
-FileSystem.o ProgramInitializer.o FileSegmentMap.o \
+FileSystem.o ProgramInitializer.o StringSplitter.o FileSegmentMap.o \
 \
 MeteoGameDesktop.o Program.o \
 MeteoLightBoardV1.o bcm2835.o MeteoBitbangDisplayDevice.o MeteoSpidevDisplayDevice.o MeteoKeyboardDevice.o MeteoPanelDevice.o MeteoPanelBoardV1.o pi2c.o \
