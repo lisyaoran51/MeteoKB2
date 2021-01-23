@@ -20,6 +20,11 @@ namespace Devices{
 	public:
 
 		/// <summary>
+		/// 看有沒有沒丟完的file segment message
+		/// </summary>
+		virtual bool CheckFileSegmentMessageOutputClear() = 0;
+
+		/// <summary>
 		/// 寫入sm檔時的callback
 		/// </summary>
 		virtual int AddOnStartWritingSmFile(MtoObject* callableObject, function<int(string)> callback, string name) = 0;

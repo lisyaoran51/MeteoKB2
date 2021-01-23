@@ -28,6 +28,11 @@ int BluetoothPhone::TriggerOnInput()
 	return 0;
 }
 
+bool BluetoothPhone::CheckFileSegmentMessageOutputClear()
+{
+	return matchedBluetoothDevice->CheckFileSegmentMessageOutputClear();
+}
+
 
 int BluetoothPhone::AddOnStartWritingSmFile(MtoObject * callableObject, function<int(string)> callback, string name)
 {

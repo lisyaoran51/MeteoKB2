@@ -27,6 +27,11 @@ namespace Devices {
 		MeteoBluetoothDevice(MeteoBluetoothPhoneV1* mBluetoothPhone);
 
 		/// <summary>
+		/// 看有沒有沒丟完的file segment message，這個還沒寫，之後要連到MeteoBluetoothPhoneV1去檢查
+		/// </summary>
+		virtual bool CheckFileSegmentMessageOutputClear();
+
+		/// <summary>
 		/// 寫入sm檔時的callback
 		/// </summary>
 		virtual int AddOnStartWritingSmFile(MtoObject* callableObject, function<int(string)> callback, string name);

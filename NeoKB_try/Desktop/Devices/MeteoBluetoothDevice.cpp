@@ -12,6 +12,13 @@ MeteoBluetoothDevice::MeteoBluetoothDevice(MeteoBluetoothPhoneV1 * mBluetoothPho
 	mBluetoothPhone->Initialize();
 }
 
+bool MeteoBluetoothDevice::CheckFileSegmentMessageOutputClear()
+{
+	// TODO: meteoBluetoothPhone->CheckFileSegmentMessageOutputClear()
+	LOG(LogLevel::Error) << "MeteoBluetoothDevice::CheckFileSegmentMessageOutputClear() : not implemented. ";
+	return false;
+}
+
 int MeteoBluetoothDevice::AddOnStartWritingSmFile(MtoObject * callableObject, function<int(string)> callback, string name)
 {
 	return meteoBluetoothPhone->AddOnStartWritingSmFile(callableObject, callback, name);

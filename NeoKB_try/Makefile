@@ -177,7 +177,8 @@ SheetmusicSelectPanel.o VolumeController.o SoundSelectPanel.o \
 \
 Instrument.o HasPitch.o MeteoPiano.o Piano.o VirtualMeteoPiano.o CompositeMeteoPiano.o \
 SimpleSoundBindingSetDecoder.o SoundBindingSetDecoder.o \
-RepeatSoundBindingSet.o SimpleSoundBindingSet.o SoundBinding.o SoundBindingSet.o TwoStageSoundBindingSet.o PianoInputManager.o \
+RepeatSoundBindingSet.o SimpleSoundBindingSet.o SoundBinding.o SoundBindingSet.o TwoStageSoundBindingSet.o \
+PianoInputManager.o PianoPitchBindingSet.o \
 \
 FileSystem.o ProgramInitializer.o FileSegmentMap.o \
 \
