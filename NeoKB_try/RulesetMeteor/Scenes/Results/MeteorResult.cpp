@@ -551,6 +551,7 @@ int MeteorResult::onEntering(Scene * lastScene)
 	//outputManager->PushMessage(recordFileMessage);
 	
 
+	LOG(LogLevel::Info) << "MeteorResult::onEntering : exit.";
 	Exit();
 
 	return 0;

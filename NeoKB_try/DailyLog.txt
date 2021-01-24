@@ -2538,3 +2538,12 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 	
 	先繼續Compile主程式
 	
+1/22
+	ble access的122行那邊編譯不知道為什麼會跳錯，先不那邊註解調，之後重編的時候再來看
+	
+1/23
+	旺季loadAndMapPitches怎麼寫了
+	loadAndMapPitches本來是用來在玩的時候把按的琴鍵轉換成pitch，存到遊戲紀錄。
+	另外piano在把輸入轉換到sound的時候，應該要先轉換到pitch，在從pitch轉換到sound，程式會比較乾淨
+	
+	試跑以後，出現push game over message以後會當掉
