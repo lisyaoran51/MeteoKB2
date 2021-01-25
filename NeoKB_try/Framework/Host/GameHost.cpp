@@ -43,6 +43,9 @@ int GameHost::Initialize(string name)
 
 	setupMainInterface();
 
+	LOG(LogLevel::Finest) << "GameHost::Initialize() : test Segmet fault.";
+	while(1){}
+
 	drawThread = new GameThread(bind(&GameHost::drawFrame, this), "DrawThread");
 
 
