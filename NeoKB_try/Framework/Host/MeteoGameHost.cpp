@@ -43,13 +43,14 @@ int MeteoGameHost::setupMainInterface()
 	MeteoBluetoothPhoneV1* bluetoothPhone = new MeteoBluetoothPhoneV1(packetConverter);
 	BluetoothDevice* bluetoothDevice = new MeteoBluetoothDevice(bluetoothPhone);
 
+	LOG(LogLevel::Finest) << "MeteoGameHost::setupMainInterface() : test Segmet fault.";
+	while (1) {}
+
 	MeteoPanelBoardV1* meteoPanelBoard = new MeteoPanelBoardV1(7); // i2c address設為7
 	KeyboardDevice* keyboardDevice = new MeteoKeyboardDevice(meteoPanelBoard);
 	PanelDevice* panelDevice = new MeteoPanelDevice(meteoPanelBoard);
 
 
-	LOG(LogLevel::Finest) << "MeteoGameHost::setupMainInterface() : test Segmet fault.";
-	while (1) {}
 
 	// bt和panel都同時有input和output特性，先暫時把他們都擺input
 	mainInterface->RegisterInputDevice(bluetoothDevice);
