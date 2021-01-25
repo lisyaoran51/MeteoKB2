@@ -70,10 +70,6 @@ int GameHost::Run(Game* game, Instrument* instrument)
 	if(!initialized)
 		throw runtime_error("int GameHost::Run() : Not initialized.");
 
-	LOG(LogLevel::Finest) << "GameHost::Run() : test segment fault" << []() {
-		while(1){}
-		return 0;
-	};
 
 	LOG(LogLevel::Finest) << "GameHost::Run() : Setup confing.";
 	setupConfig();

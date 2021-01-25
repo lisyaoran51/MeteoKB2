@@ -26,6 +26,10 @@ int Program::Main(vector<string>& args)
 	GameHost* host = new MeteoGameHost();
 	host->Initialize("~");
 
+	LOG(LogLevel::Finest) << "Program::Main() : test segment fault" << []() {
+		while (1) {}
+		return 0;
+	};
 	
 	
 	host->Run(new MeteoGameDesktop(args), new CompositeMeteoPiano(args));
