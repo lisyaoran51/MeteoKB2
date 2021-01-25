@@ -23,14 +23,11 @@ int Program::Main(vector<string>& args)
 
 	ProgramInitializer::Initialize();
 
-	LOG(LogLevel::Finest) << "Program::Main() : test segment fault" << []() {
-		while (1) {}
-		return 0;
-	};
-	while (1) {}
-
 	GameHost* host = new MeteoGameHost();
 	host->Initialize("~");
+
+	LOG(LogLevel::Finest) << "Program::Main() : test segment fault";
+	while (1) {}
 
 	
 	
