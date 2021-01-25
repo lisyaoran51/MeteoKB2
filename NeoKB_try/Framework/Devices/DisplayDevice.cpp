@@ -15,7 +15,7 @@ bool DisplayDevice::match(Peripheral * peripheral)
 int DisplayDevice::handlePeripheralRegister(Peripheral * peripheral)
 {
 
-	LOG(LogLevel::Debug) << "DisplayDevice::handlePeripheralRegister() : peripheral: " << peripheral << ".";
+	LOG(LogLevel::Depricated) << "DisplayDevice::handlePeripheralRegister() : peripheral: " << peripheral << ".";
 	matchedPeripheral = peripheral;
 	matchedDisplay = dynamic_cast<Display*>(peripheral);
 	peripheral->SetDevice(this);
