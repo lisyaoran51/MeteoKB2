@@ -39,9 +39,6 @@ int MeteoGameHost::setupMainInterface()
 
 	DisplayDevice* displayDevice = new MeteoBitbangDisplayDevice(48, 16);// 之後再改
 
-	LOG(LogLevel::Finest) << "MeteoGameHost::setupMainInterface() : test Segmet fault.";
-	while (1) {}
-
 	MeteoPacketConverterV1* packetConverter = new MeteoPacketConverterV1(storage);
 	MeteoBluetoothPhoneV1* bluetoothPhone = new MeteoBluetoothPhoneV1(packetConverter);
 	BluetoothDevice* bluetoothDevice = new MeteoBluetoothDevice(bluetoothPhone);
