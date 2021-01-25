@@ -41,8 +41,6 @@ int GameHost::Initialize(string name)
 	// name是資料夾名稱
 	dependencies->Cache<Storage>(storage = getStorage(name), "Storage");
 
-	LOG(LogLevel::Finest) << "GameHost::Initialize() : test Segmet fault.";
-	while (1) {}
 
 	setupMainInterface();
 

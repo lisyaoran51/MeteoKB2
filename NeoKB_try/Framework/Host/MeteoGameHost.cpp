@@ -47,6 +47,10 @@ int MeteoGameHost::setupMainInterface()
 	KeyboardDevice* keyboardDevice = new MeteoKeyboardDevice(meteoPanelBoard);
 	PanelDevice* panelDevice = new MeteoPanelDevice(meteoPanelBoard);
 
+
+	LOG(LogLevel::Finest) << "MeteoGameHost::setupMainInterface() : test Segmet fault.";
+	while (1) {}
+
 	// bt和panel都同時有input和output特性，先暫時把他們都擺input
 	mainInterface->RegisterInputDevice(bluetoothDevice);
 	mainInterface->RegisterInputDevice(keyboardDevice);
