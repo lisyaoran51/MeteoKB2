@@ -173,7 +173,7 @@ enum hrtimer_restart my_hrtimer_callback(struct hrtimer *hr_timer)
 	calltime = ktime_get();
 	hrtimer_count++;
 	if (hrtimer_count == 1000) {
-		//printk("hrtimer 1000\n");
+		printk("hrtimer 1000\n");
 		hrtimer_count = 0;
 	}
 	hrtimer_forward(hr_timer, hrtimer_cb_get_time(hr_timer), ktime_set(0, i64TimeInNsec));
