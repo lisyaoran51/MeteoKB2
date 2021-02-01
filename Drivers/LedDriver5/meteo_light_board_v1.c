@@ -328,7 +328,7 @@ void makemap() {
 	}
 
 	for (i = 0; i < 1; i++) {
-		spi_led.map[6][i] = true;
+		spi_led.map[7][i] = true;
 	}
 
 
