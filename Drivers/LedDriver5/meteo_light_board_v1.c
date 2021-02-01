@@ -328,7 +328,7 @@ void makemap() {
 	}
 
 	for (i = 0; i < 1; i++) {
-		spi_led.map[2][i] = true;
+		spi_led.map[4][i] = true;
 	}
 
 
@@ -409,8 +409,8 @@ void switch_row_sequencely(int row)
 		break;
 
 	case 4:
-		gpio_set_value(DECODE_A_PIN, 1);
-		gpio_set_value(DECODE_B_PIN, 0);
+		gpio_set_value(DECODE_A_PIN, 0);
+		gpio_set_value(DECODE_B_PIN, 1);
 		gpio_set_value(DECODE_C_PIN, 0);
 		break;
 
