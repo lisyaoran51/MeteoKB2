@@ -328,7 +328,7 @@ void makemap() {
 	}
 
 	for (i = 0; i < 16; i++) {
-		spi_led.map[2][i] = true;
+		spi_led.map[1][i] = true;
 	}
 
 
@@ -385,6 +385,54 @@ void switch_row_sequencely(int row)
 		gpio_set_value(DECODE_C_PIN, 1);
 		break;
 	}
+	/*
+	switch (row) {
+	case 0:
+		gpio_set_value(DECODE_A_PIN, 0);
+		gpio_set_value(DECODE_B_PIN, 0);
+		gpio_set_value(DECODE_C_PIN, 0);
+		break;
+
+	case 1:
+		gpio_set_value(DECODE_A_PIN, 0);
+		gpio_set_value(DECODE_B_PIN, 0);
+		gpio_set_value(DECODE_C_PIN, 1);
+		break;
+
+	case 2:
+		break;
+
+	case 3:
+		gpio_set_value(DECODE_A_PIN, 0);
+		gpio_set_value(DECODE_B_PIN, 1);
+		gpio_set_value(DECODE_C_PIN, 1);
+		break;
+
+	case 4:
+		gpio_set_value(DECODE_A_PIN, 1);
+		gpio_set_value(DECODE_B_PIN, 0);
+		gpio_set_value(DECODE_C_PIN, 0);
+		break;
+
+	case 5:
+		gpio_set_value(DECODE_A_PIN, 0);
+		gpio_set_value(DECODE_B_PIN, 1);
+		gpio_set_value(DECODE_C_PIN, 0);
+		break;
+
+	case 6:
+		gpio_set_value(DECODE_A_PIN, 1);
+		gpio_set_value(DECODE_B_PIN, 1);
+		gpio_set_value(DECODE_C_PIN, 0);
+		break;
+
+	case 7:
+		gpio_set_value(DECODE_A_PIN, 1);
+		gpio_set_value(DECODE_B_PIN, 1);
+		gpio_set_value(DECODE_C_PIN, 1);
+		break;
+	}
+	*/
 	return 0;
 }
 
