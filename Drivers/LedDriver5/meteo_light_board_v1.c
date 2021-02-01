@@ -119,12 +119,13 @@ static irqreturn_t row_print_isr(int irq, void *data)
 			gpio_set_value(DI_PIN, 1);
 		else
 			gpio_set_value(DI_PIN, 0);
+		gpio_set_value(CL_PIN, 1);
 		
+		gpio_set_value(CL_PIN, 0);
 		if (map[col + 8][47 - row])
 			gpio_set_value(DI_PIN, 1);
 		else
 			gpio_set_value(DI_PIN, 0);
-
 		gpio_set_value(CL_PIN, 1);
 	}
 	/*
