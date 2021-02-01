@@ -73,9 +73,13 @@ static char *msg=NULL;
 #define NA_PIN 22
 #define NB_PIN 23
 
-#define DECODE_A_PIN 17
+//#define DECODE_A_PIN 17
+//#define DECODE_B_PIN 27
+//#define DECODE_C_PIN 22
+
+#define DECODE_A_PIN 22
 #define DECODE_B_PIN 27
-#define DECODE_C_PIN 22
+#define DECODE_C_PIN 17
 
 struct bitbang_spi_led {
 	spinlock_t		map_lock;
@@ -394,7 +398,7 @@ void switch_row_sequencely(int row)
 		break;
 
 	case 1:
-		gpio_set_value(DECODE_A_PIN, 0);
+		gpio_set_value(DECODE_A_PIN, 1);
 		gpio_set_value(DECODE_B_PIN, 0);
 		gpio_set_value(DECODE_C_PIN, 0);
 		break;
