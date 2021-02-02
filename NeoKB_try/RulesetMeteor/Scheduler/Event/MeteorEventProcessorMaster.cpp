@@ -5,6 +5,11 @@
 #include "../../../Games/Scheduler/Event/ControlPoints/NoteControlPointHitObject.h"
 #include "../../../Games/Output/Bluetooths/MeteoContextBluetoothMessage.h"
 
+// debug用
+#include <chrono>
+using namespace std::chrono;
+// debug用
+
 
 
 using namespace Meteor::Schedulers::Events;
@@ -29,19 +34,19 @@ int MeteorEventProcessorMaster::ChangePitchState(MeteoPianoPitchState pState)
 int MeteorEventProcessorMaster::OnKeyDown(pair<MeteorAction, int> action)
 {
 	LOG(LogLevel::Depricated) << "MeteorEventProcessorMaster::OnKeyDown() : get input." << int(action.first);
-	double currentTime = GetClock()->GetCurrentTime();
-
-	vector<EventProcessor<Event>*> eventProcessors;
-
-	eventProcessorPeriods->GetItemsContainPeriods(make_pair<float, float>(currentTime - visibleTimeRange, currentTime + visibleTimeRange), &eventProcessors);
-
-	eventProcessorFilter->Filter(&eventProcessors);
+	//double currentTime = GetClock()->GetCurrentTime();
+	//
+	//vector<EventProcessor<Event>*> eventProcessors;
+	//
+	//eventProcessorPeriods->GetItemsContainPeriods(make_pair<float, float>(currentTime - visibleTimeRange, currentTime + visibleTimeRange), &eventProcessors);
+	//
+	//eventProcessorFilter->Filter(&eventProcessors);
 
 	NoteControlPointHitObject* receivedHitObject = nullptr;
 
-	for (int i = 0; i < eventProcessors.size(); i++) {
+	for (int i = 0; i < filteredTempStaticEventProcessors.size(); i++) {
 
-		NoteControlPointHitObject* noteControlPointHitObject = dynamic_cast<NoteControlPointHitObject*>(eventProcessors[i]);
+		NoteControlPointHitObject* noteControlPointHitObject = dynamic_cast<NoteControlPointHitObject*>(filteredTempStaticEventProcessors[i]);
 
 		if (noteControlPointHitObject == nullptr)
 			continue;
@@ -222,6 +227,8 @@ int MeteorEventProcessorMaster::OnSlide(pair<MeteorAction, int> action)
 
 int MeteorEventProcessorMaster::update()
 {
+	system_clock::time_point systemStartTime = system_clock::now();
+
 	EventProcessorMaster::update();
 
 	double currentTime = 0;
@@ -235,15 +242,26 @@ int MeteorEventProcessorMaster::update()
 		//abort();
 	}
 
+	system_clock::time_point systemCurrentTime = system_clock::now();
+	LOG(LogLevel::Finest) << "MeteorEventProcessorMaster::update() : [EventProcessorMaster] update cost time = [" << duration_cast<microseconds>(systemCurrentTime - systemStartTime).count() << "].";
+	
+	/*
 	vector<EventProcessor<Event>*> eventProcessors;
 
 	// 拿已經結束的event
 	eventProcessorPeriods->GetItemsContainPeriods(make_pair<float, float>(currentTime - visibleTimeRange, (float)currentTime), &eventProcessors);
 	LOG(LogLevel::Depricated) << "MeteorEventProcessorMaster::update() : filter event processors by [" << eventProcessorFilter << "].";
+
+	systemStartTime = system_clock::now();
+	LOG(LogLevel::Finest) << "MeteorEventProcessorMaster::update() : event processors [" << eventProcessors.size() << "].";
 	eventProcessorFilter->Filter(&eventProcessors);
 
-	for (int i = 0; i < eventProcessors.size(); i++) {
-		HitObject* hObject = dynamic_cast<HitObject*>(eventProcessors[i]);
+	systemCurrentTime = system_clock::now();
+	LOG(LogLevel::Finest) << "MeteorEventProcessorMaster::update() : [eventProcessorFilter] update cost time = [" << duration_cast<microseconds>(systemCurrentTime - systemStartTime).count() << "].";
+	*/
+
+	for (int i = 0; i < filteredTempStaticEventProcessors.size(); i++) {
+		HitObject* hObject = dynamic_cast<HitObject*>(filteredTempStaticEventProcessors[i]);
 
 		if (hObject == nullptr)
 			continue;
@@ -251,7 +269,6 @@ int MeteorEventProcessorMaster::update()
 		if (hObject->GetHasJudgementResult())
 			continue;
 
-		
 		if (hObject->TryJudgement() == -2) {
 			// TODO: 目前先不檢查踏板，之後要改成如果有插入踏板就要檢查踏板
 			if (dynamic_cast<NoteControlPointHitObject*>(hObject)) {

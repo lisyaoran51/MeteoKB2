@@ -107,6 +107,8 @@ namespace Events {
 
 		EventProcessorFilter* eventProcessorFilter = nullptr;
 
+		vector<EventProcessor<Event>*> filteredTempStaticEventProcessors;
+
 		OutputManager* outputManager = nullptr;
 
 		int processEvent(MTO_FLOAT elapsedTime);

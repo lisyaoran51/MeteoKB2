@@ -171,6 +171,8 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 		LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent() : filter event processors.";
 		eventProcessorFilter->Filter(&eventProcessors);
 
+		filteredTempStaticEventProcessors.assign(eventProcessors.begin(), eventProcessors.end());
+
 		for (int i = 0; i < eventProcessors.size(); i++) {
 
 			LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent : this processor is for [" << eventProcessors[i]->GetEvent()->GetTypeName() << "].";
@@ -215,6 +217,8 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 		LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent() : filter event processors(rewind state).";
 		eventProcessorFilter->Filter(&eventProcessors);
 
+		filteredTempStaticEventProcessors.assign(eventProcessors.begin(), eventProcessors.end());
+
 		for (int i = 0; i < eventProcessors.size(); i++) {
 			PlayfieldEventProcessorInterface* playfieldEventProcessor = dynamic_cast<PlayfieldEventProcessorInterface*>(eventProcessors[i]);
 			if (playfieldEventProcessor) {
@@ -252,9 +256,11 @@ Map * EventProcessorMaster::GetGraph()
 
 	vector<EventProcessor<Event>*> eventProcessors;
 
-	eventProcessorPeriods->GetItemsContainPeriods(make_pair<float, float>(currentTime - visibleTimeRange, currentTime + visibleTimeRange), &eventProcessors);
-	LOG(LogLevel::Depricated) << "EventProcessorMaster::GetGraph : filter event processors.";
-	eventProcessorFilter->Filter(&eventProcessors);
+	eventProcessors.assign(filteredTempStaticEventProcessors.begin(), filteredTempStaticEventProcessors.end());
+
+	//eventProcessorPeriods->GetItemsContainPeriods(make_pair<float, float>(currentTime - visibleTimeRange, currentTime + visibleTimeRange), &eventProcessors);
+	//LOG(LogLevel::Depricated) << "EventProcessorMaster::GetGraph : filter event processors.";
+	//eventProcessorFilter->Filter(&eventProcessors);
 
 	LOG(LogLevel::Depricated) << "EventProcessorMaster::GetGraph() : get graph from [" << eventProcessors.size() << "] processors in (" << currentTime - visibleTimeRange  << "," << currentTime + visibleTimeRange << ") seconds."
 		<< [](vector<EventProcessor<Event>*>& eProcessors) {
