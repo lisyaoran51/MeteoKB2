@@ -95,9 +95,9 @@ namespace DataStructure {
 
 			for (int i = startSection; i <= endSection; i++) {
 
-				for (int j = 0; j < secondPeriods[i]->size(); j++) {
+				for (int j = 0; j < secondPeriods[i]->objects.size(); j++) {
 
-					results->push_back(secondPeriods[i]->at(j));
+					results->push_back(secondPeriods[i]->objects[j]);
 					
 				}
 			}
