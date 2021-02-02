@@ -47,7 +47,7 @@ namespace DataStructure {
 				// <3,8> <8,13> <13,18>
 				if (secondPeriodsInList.size() <= i) {
 					for (int j = secondPeriodsInList.size(); j <= i; j++) {
-						secondPeriodsInList.push_back(new SecondPeriod<T>(j))
+						secondPeriodsInList.push_back(new SecondPeriod<T>(j));
 					}
 				}
 
