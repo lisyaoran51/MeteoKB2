@@ -1,6 +1,11 @@
 #include "InputManager.h"
 
 
+// debug¥Î
+#include <chrono>
+using namespace std::chrono;
+// debug¥Î
+
 using namespace Framework::Input;
 
 
@@ -47,6 +52,7 @@ int InputManager::update()
 
 int InputManager::handleNewState(InputState * state)
 {
+	system_clock::time_point systemStartTime = system_clock::now();
 
 	bool hasNewKeyboardState = !state->GetKeyboardState()->CheckIsEmpty();
 	bool hasNewPanelState = !state->GetPanelState()->CheckIsEmpty();
@@ -65,6 +71,10 @@ int InputManager::handleNewState(InputState * state)
 
 	//unique_lock<mutex> uLock(TreeMutex1);
 	updateInputQueue(currentState);
+
+	system_clock::time_point systemCurrentTime = system_clock::now();
+	LOG(LogLevel::Finest) << "InputManager::handleNewState() : [" << GetTypeName() << "] fresg input queue cost time = [" << duration_cast<microseconds>(systemCurrentTime - systemStartTime).count() << "].";
+
 
 	if (hasNewKeyboardState)
 		updateKeyboardEvents(currentState);
