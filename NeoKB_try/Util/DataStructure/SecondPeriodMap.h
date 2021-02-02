@@ -35,7 +35,7 @@ namespace DataStructure {
 		~SecondPeriodMap() {
 
 
-			for (map<int, SecondPeriod<T>*>::iterator it = secondPeriods.begin(); it != secondPeriods.end(); ++it) {
+			for (typename map<int, SecondPeriod<T>*>::iterator it = secondPeriods.begin(); it != secondPeriods.end(); ++it) {
 				delete (*it).second;
 			}
 		}
