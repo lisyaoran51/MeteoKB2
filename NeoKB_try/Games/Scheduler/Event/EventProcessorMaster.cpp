@@ -8,7 +8,7 @@
 #include "InstrumentEvents/InstrumentEventProcessor.h"
 #include "PlayfieldEvents/PlayfieldEventProcessor.h"
 #include "../../Output/Bluetooths/MeteoContextBluetoothMessage.h"
-#include "../../../Util/DataStructure/SecondPeriodMap.h"
+#include "../../../Util/DataStructure/SecondPeriodList.h"
 
 
 using namespace Games::Schedulers::Events;
@@ -67,14 +67,22 @@ int EventProcessorMaster::load(FrameworkConfigManager * f, EventProcessorFilter 
 	//});
 
 	/* 改為使用更快的second period map */
-	eventProcessorPeriods = new SecondPeriodMap<EventProcessor<Event>*>([=](EventProcessor<Event>* ep)->pair<float, float> {
+	//eventProcessorPeriods = new SecondPeriodMap<EventProcessor<Event>*>([=](EventProcessor<Event>* ep)->pair<float, float> {
+	//
+	//	float startTime = ep->GetStartTime();// -visibleTimeRange;	// visible time range擺在GetItemsContainPeriods那邊用就好，這邊就不要加了
+	//	float endTime = ep->GetStartTime() + ep->GetLifeTime();// +visibleTimeRange;
+	//
+	//	return make_pair(startTime, endTime);
+	//});
 
+	/* 再改為使用更快的second period list */
+	eventProcessorPeriods = new SecondPeriodList<EventProcessor<Event>*>([=](EventProcessor<Event>* ep)->pair<float, float> {
+	
 		float startTime = ep->GetStartTime();// -visibleTimeRange;	// visible time range擺在GetItemsContainPeriods那邊用就好，這邊就不要加了
 		float endTime = ep->GetStartTime() + ep->GetLifeTime();// +visibleTimeRange;
-
+	
 		return make_pair(startTime, endTime);
 	});
-
 
 	int width, height;
 
