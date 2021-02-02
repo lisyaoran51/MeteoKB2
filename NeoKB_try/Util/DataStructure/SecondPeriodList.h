@@ -30,8 +30,14 @@ namespace DataStructure {
 		SecondPeriodList(function<pair<float, float>(T)> gTimeOfPeriod): SecondPeriodMap<T>(gTimeOfPeriod){
 		}
 
+		~SecondPeriodList() {
+			for (int i = 0; i < secondPeriodsInList.size(); i++) {
+				delete secondPeriodsInList[i];
+			}
+		}
+
 		virtual int InsertItem(T item) {
-			pair<float, float> insertTimeSpan = getTimeOfPeriod(item);
+			pair<float, float> insertTimeSpan = PeriodMap<T>::getTimeOfPeriod(item);
 
 			// 例如 起始點3 區監5 物件時間7~13 => start=0, end=2
 			int startSection = floor(insertTimeSpan.first);
