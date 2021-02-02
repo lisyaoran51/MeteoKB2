@@ -1,5 +1,10 @@
 #include "Updatable.h"
 
+// debug¥Î
+#include <chrono>
+using namespace std::chrono;
+// debug¥Î
+
 using namespace Framework::Allocation::Hierachal;
 
 
@@ -49,6 +54,9 @@ bool Updatable::UpdateSubTree()
 	if (GetLoadState() == LoadState::Ready)
 		LoadComplete();
 
+	system_clock::time_point startTime = system_clock::now();
+
+
 	try {
 		if (GetParent() != nullptr && customClock != nullptr) {
 			customClock->ProcessFrame();
@@ -67,6 +75,11 @@ bool Updatable::UpdateSubTree()
 		LOG(LogLevel::Error) << "Updatable::UpdateSubTree() : error [" << e.what() << "] by [" << GetTypeName() << "].";
 		abort();
 	}
+
+
+	system_clock::time_point currentTime = system_clock::now();
+	LOG(LogLevel::Debug) << "Updatable::UpdateSubTree() : [" << GetTypeName() << "] update cost time = [" << duration_cast<microseconds>(currentTime - startTime).count() << "].";
+
 
 	LOG(LogLevel::Depricated) << "Updatable::UpdateSubTree() : [" << GetTypeName() << "] try get new child list.";
 	cacheChilds.clear();
