@@ -109,7 +109,7 @@ namespace DataStructure {
 			return make_pair<float, float>(startSection, startSection + 1));
 		}
 
-		map<int, SecondPeriod*>* GetSecondPeriods() {
+		map<int, SecondPeriod<T>*>* GetSecondPeriods() {
 			return &secondPeriods;
 		}
 
