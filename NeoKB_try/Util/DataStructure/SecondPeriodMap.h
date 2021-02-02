@@ -35,7 +35,7 @@ namespace DataStructure {
 		/// <summary>
 		/// second period map跟period map的差別是，他固定insertion point是0，interval是1
 		/// </summary>
-		SecondPeriodMap(function<pair<float, float>(T)> gTimeOfPeriod): PeriodMap(0, 1, gTimeOfPeriod){
+		SecondPeriodMap(function<pair<float, float>(T)> gTimeOfPeriod): PeriodMap<T>(0, 1, gTimeOfPeriod){
 		}
 
 		virtual int InsertItem(T item) {
