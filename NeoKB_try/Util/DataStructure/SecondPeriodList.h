@@ -41,7 +41,11 @@ namespace DataStructure {
 
 			// 例如 起始點3 區監5 物件時間7~13 => start=0, end=2
 			int startSection = floor(insertTimeSpan.first);
+			if (startSection < 0)
+				startSection = 0;
 			int endSection = floor(insertTimeSpan.second);
+			if (endSection < 0)
+				endSection = 0;
 
 			for (int i = startSection; i <= endSection; i++) {
 				// <3,8> <8,13> <13,18>
@@ -89,9 +93,13 @@ namespace DataStructure {
 
 			// 例如 起始點3 區監5 物件時間7~13 => start=0, end=2
 			int startSection = floor(timeOfPeriod.first);
+			if (startSection < 0)
+				startSection = 0;
 			int endSection = floor(timeOfPeriod.second);
+			if (endSection < 0)
+				endSection = 0;
 
-			LOG(LogLevel::Finest) << "SecondPeriodMap::GetItemsContainPeriods() : period from [" << startSection << "] to [" << endSection << "] section.";
+			LOG(LogLevel::Finest) << "SecondPeriodList::GetItemsContainPeriods() : period from [" << startSection << "] to [" << endSection << "] section.";
 
 			for (int i = startSection; i <= endSection; i++) {
 
