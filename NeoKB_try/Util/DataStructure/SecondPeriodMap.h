@@ -16,19 +16,13 @@ namespace DataStructure {
 	template<typename T>
 	class SecondPeriodMap: public PeriodMap<T> {
 
-		float insertionPoint;
-		float periodLength;
+	protected:
 
 		/// <summary>
 		/// 將一整個map分成很多段，這樣蒐尋的時候就不用一段一段找
 		/// 這個如果太慢，可以再改成vector，速度會變成O(1)，目前是O(logn)
 		/// </summary>
 		map<int, SecondPeriod<T>*> secondPeriods;
-
-		/// <summary>
-		/// 用來把丟進去的event processor，抓出來他的時間區間是往前幾秒，往後幾秒
-		/// </summary>
-		function<pair<float, float>(T)> getTimeOfPeriod;
 
 	public:
 

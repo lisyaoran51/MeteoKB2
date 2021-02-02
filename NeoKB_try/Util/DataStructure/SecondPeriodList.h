@@ -15,7 +15,7 @@ namespace DataStructure {
 	template<typename T>
 	class SecondPeriodList: public SecondPeriodMap<T> {
 
-
+	protected:
 
 		/// <summary>
 		/// map太慢，改成vector，速度會變成O(1)

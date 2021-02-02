@@ -5,9 +5,11 @@
 #include <map>
 #include <functional>
 #include <cmath>
+#include "../Log.h"
 
 
 using namespace std;
+using namespace Util;
 
 
 namespace Util {
@@ -18,6 +20,8 @@ namespace DataStructure {
 	/// </summary>
 	template<typename T>
 	class PeriodMap {
+
+	protected:
 
 		float insertionPoint;
 		float periodLength;
@@ -41,7 +45,7 @@ namespace DataStructure {
 
 
 
-		int InsertItem(T item) {
+		virtual int InsertItem(T item) {
 			pair<float, float> insertTimeSpan = getTimeOfPeriod(item);
 
 			// 例如 起始點3 區監5 物件時間7~13 => start=0, end=2
@@ -63,7 +67,7 @@ namespace DataStructure {
 			return 0;
 		}
 
-		int DeleteItem(T item) {
+		virtual int DeleteItem(T item) {
 			typename multimap<pair<float, float>, T>::iterator it;
 			for (it = periods.begin(); it != periods.end(); it++) {
 				if (it->second == item) {
@@ -74,7 +78,7 @@ namespace DataStructure {
 			return 0;
 		}
 
-		int DeleteItem(pair<float, float> timeOfPeriod) {
+		virtual int DeleteItem(pair<float, float> timeOfPeriod) {
 			int startSection = floor((timeOfPeriod.first - insertionPoint) / periodLength);
 			int endSection = floor((timeOfPeriod.second - insertionPoint) / periodLength);
 
@@ -99,7 +103,7 @@ namespace DataStructure {
 		/// <summary>
 		/// 把所有區間和這個區間相比，有整段都在區間內就家進result裡
 		/// </summary>
-		int GetItemsInsidePeriods(pair<float, float> timeOfPeriod, vector<T>* results) {
+		virtual int GetItemsInsidePeriods(pair<float, float> timeOfPeriod, vector<T>* results) {
 			int startSection = floor((timeOfPeriod.first - insertionPoint) / periodLength);
 			int endSection = floor((timeOfPeriod.second - insertionPoint) / periodLength);
 
@@ -122,7 +126,7 @@ namespace DataStructure {
 		/// <summary>
 		/// 把所有區間和這個區間相比，有重疊到的話就家進去result裡
 		/// </summary>
-		int GetItemsContainPeriods(pair<float, float> timeOfPeriod, vector<T>* results) {
+		virtual int GetItemsContainPeriods(pair<float, float> timeOfPeriod, vector<T>* results) {
 			int startSection = floor((timeOfPeriod.first - insertionPoint) / periodLength);
 			int endSection = floor((timeOfPeriod.second - insertionPoint) / periodLength);
 
@@ -144,7 +148,7 @@ namespace DataStructure {
 		}
 
 
-		pair<float, float> GetPeriod(float timePoint) {
+		virtual pair<float, float> GetPeriod(float timePoint) {
 			int startSection = floor((timePoint - insertionPoint) / periodLength);
 			return make_pair<float, float>(
 				insertionPoint + periodLength * (float)startSection,
@@ -152,6 +156,10 @@ namespace DataStructure {
 		}
 
 		multimap<pair<float, float>, T>* GetPeriods() {
+			return &periods;
+		}
+
+		multimap<pair<float, float>, T>* GetMultiMapPeriods() {
 			return &periods;
 		}
 
