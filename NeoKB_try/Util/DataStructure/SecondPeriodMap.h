@@ -106,7 +106,7 @@ namespace DataStructure {
 
 		virtual pair<float, float> GetPeriod(float timePoint) {
 			int startSection = floor(timePoint);
-			return make_pair<float, float>(startSection, startSection + 1));
+			return make_pair<float, float>(startSection, startSection + 1);
 		}
 
 		map<int, SecondPeriod<T>*>* GetSecondPeriods() {
