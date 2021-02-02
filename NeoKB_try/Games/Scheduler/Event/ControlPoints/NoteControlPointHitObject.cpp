@@ -8,7 +8,7 @@ using namespace Games::Schedulers::Events::ControlPoints;
 
 NoteControlPointHitObject::NoteControlPointHitObject(HitWindow * hWindow): HasPitch(Pitch::None), HitObject(hWindow)
 {
-	
+	eventProcessorType = EventProcessorType::ControlPoint;
 }
 
 string NoteControlPointHitObject::GetTypeName()

@@ -178,32 +178,37 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 			LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent : this processor is for [" << eventProcessors[i]->GetEvent()->GetTypeName() << "].";
 
 			// TODO: 直接改成 eventProcessor.Process()就好，下面可以全部刪掉
-
-			IoEventProcessorInterface* ioEventProcessors = dynamic_cast<IoEventProcessorInterface*>(eventProcessors[i]);
-			if (ioEventProcessors) {
-				if (ioEventProcessors->GetStartTime() < currentTime) {
-					LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent : found io event processor [" << ioEventProcessors->GetStartTime() << "].";
-					ioEventProcessors->ProcessIo();
+			if (eventProcessors[i]->GetEventProcessorType() == EventProcessorType::Io) {
+				IoEventProcessorInterface* ioEventProcessors = dynamic_cast<IoEventProcessorInterface*>(eventProcessors[i]);
+				if (ioEventProcessors) {
+					if (ioEventProcessors->GetStartTime() < currentTime) {
+						LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent : found io event processor [" << ioEventProcessors->GetStartTime() << "].";
+						ioEventProcessors->ProcessIo();
+					}
+					continue;
 				}
-				continue;
+			}
+			
+			if (eventProcessors[i]->GetEventProcessorType() == EventProcessorType::Instrument) {
+				InstrumentEventProcessorInterface* instrumentEventProcessor = dynamic_cast<InstrumentEventProcessorInterface*>(eventProcessors[i]);
+				if (instrumentEventProcessor) {
+					if (instrumentEventProcessor->GetStartTime() < currentTime) {
+						LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent : found instrument event processor [" << instrumentEventProcessor->GetStartTime() << "].";
+						instrumentEventProcessor->ControlInstrument();
+					}
+					continue;
+				}
 			}
 
-			InstrumentEventProcessorInterface* instrumentEventProcessor = dynamic_cast<InstrumentEventProcessorInterface*>(eventProcessors[i]);
-			if (instrumentEventProcessor) {
-				if (instrumentEventProcessor->GetStartTime() < currentTime) {
-					LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent : found instrument event processor [" << instrumentEventProcessor->GetStartTime() << "].";
-					instrumentEventProcessor->ControlInstrument();
+			if (eventProcessors[i]->GetEventProcessorType() == EventProcessorType::Playfield) {
+				PlayfieldEventProcessorInterface* playfieldEventProcessor = dynamic_cast<PlayfieldEventProcessorInterface*>(eventProcessors[i]);
+				if (playfieldEventProcessor) {
+					if (playfieldEventProcessor->GetStartTime() < currentTime) {
+						LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent : found playfield event processor [" << playfieldEventProcessor->GetStartTime() << "].";
+						playfieldEventProcessor->ControlPlayfield();
+					}
+					continue;
 				}
-				continue;
-			}
-
-			PlayfieldEventProcessorInterface* playfieldEventProcessor = dynamic_cast<PlayfieldEventProcessorInterface*>(eventProcessors[i]);
-			if (playfieldEventProcessor) {
-				if (playfieldEventProcessor->GetStartTime() < currentTime) {
-					LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent : found playfield event processor [" << playfieldEventProcessor->GetStartTime() << "].";
-					playfieldEventProcessor->ControlPlayfield();
-				}
-				continue;
 			}
 		}
 	}
@@ -220,13 +225,16 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 		filteredTempStaticEventProcessors.assign(eventProcessors.begin(), eventProcessors.end());
 
 		for (int i = 0; i < eventProcessors.size(); i++) {
-			PlayfieldEventProcessorInterface* playfieldEventProcessor = dynamic_cast<PlayfieldEventProcessorInterface*>(eventProcessors[i]);
-			if (playfieldEventProcessor) {
-				if (playfieldEventProcessor->GetStartTime() > currentTime && playfieldEventProcessor->GetStartTime() < currentTime - elapsedTime) {
-					LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent : found playfield event processor [" << playfieldEventProcessor->GetStartTime() << "].";
-					playfieldEventProcessor->UndoControlPlayfield();
+
+			if (eventProcessors[i]->GetEventProcessorType() == EventProcessorType::Playfield) {
+				PlayfieldEventProcessorInterface* playfieldEventProcessor = dynamic_cast<PlayfieldEventProcessorInterface*>(eventProcessors[i]);
+				if (playfieldEventProcessor) {
+					if (playfieldEventProcessor->GetStartTime() > currentTime && playfieldEventProcessor->GetStartTime() < currentTime - elapsedTime) {
+						LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent : found playfield event processor [" << playfieldEventProcessor->GetStartTime() << "].";
+						playfieldEventProcessor->UndoControlPlayfield();
+					}
+					continue;
 				}
-				continue;
 			}
 		}
 

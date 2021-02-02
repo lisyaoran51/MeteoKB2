@@ -44,6 +44,10 @@ namespace PlayfieldEvents {
 
 	public:
 
+		PlayfieldEventProcessor() {
+			eventProcessorType = EventProcessorType::Playfield;
+		}
+
 		virtual int RegisterPlayfieldController(PlayfieldControllerInterface* pControllerInterface) {
 			if (MtoObject::CanCast<PlayfieldController<T>>(pControllerInterface)) {
 				playfieldController = MtoObject::Cast<PlayfieldController<T>>(pControllerInterface);

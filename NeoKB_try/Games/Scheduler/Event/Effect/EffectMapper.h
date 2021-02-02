@@ -24,6 +24,7 @@ namespace Effects {
 
 		EffectMapperInterface(): EventProcessor<Event>()
 		{
+			eventProcessorType = EventProcessorType::Effect;
 		}
 
 		/// <summary>

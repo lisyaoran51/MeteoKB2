@@ -38,6 +38,7 @@ namespace IoEvents {
 
 	public:
 
+
 		virtual int RegisterIoCommunicator(IoCommunicatorInterface* iCommunicator) = 0;
 
 		virtual int Process();
@@ -54,6 +55,10 @@ namespace IoEvents {
 	class IoEventProcessor : public IoEventProcessorInterface {
 
 	public:
+
+		IoEventProcessor() {
+			eventProcessorType = EventProcessorType::Io;
+		}
 
 		virtual int RegisterIoCommunicator(IoCommunicatorInterface* iCommunicator) {
 			if (MtoObject::CanCast<IoCommunicator<T>>(iCommunicator)) {

@@ -261,18 +261,21 @@ int MeteorEventProcessorMaster::update()
 	*/
 
 	for (int i = 0; i < filteredTempStaticEventProcessors.size(); i++) {
-		HitObject* hObject = dynamic_cast<HitObject*>(filteredTempStaticEventProcessors[i]);
 
-		if (hObject == nullptr)
-			continue;
+		if (filteredTempStaticEventProcessors[i]->GetEventProcessorType() == EventProcessorType::ControlPoint) {
 
-		if (hObject->GetHasJudgementResult())
-			continue;
+			HitObject* hObject = dynamic_cast<HitObject*>(filteredTempStaticEventProcessors[i]);
+			if (hObject == nullptr)
+				continue;
 
-		if (hObject->TryJudgement() == -2) {
-			// TODO: ヘ玡ぃ浪琩今狾ぇ璶эΘ狦Τ础今狾碞璶浪琩今狾
-			if (dynamic_cast<NoteControlPointHitObject*>(hObject)) {
-				hObject->UpdateJudgement(false);
+			if (hObject->GetHasJudgementResult())
+				continue;
+
+			if (hObject->TryJudgement() == -2) {
+				// TODO: ヘ玡ぃ浪琩今狾ぇ璶эΘ狦Τ础今狾碞璶浪琩今狾
+				if (dynamic_cast<NoteControlPointHitObject*>(hObject)) {
+					hObject->UpdateJudgement(false);
+				}
 			}
 		}
 		

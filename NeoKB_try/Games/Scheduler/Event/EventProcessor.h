@@ -9,6 +9,7 @@
 #include "Event.h"
 #include "EventProcessorMaster.h"
 #include "../../../Framework/Timing/Clock.h"
+#include "EventProcessorType.h";
 
 
 using namespace std;
@@ -43,6 +44,10 @@ namespace Events {
 	public:
 
 		virtual ~EventProcessor() {}
+
+		EventProcessorType GetEventProcessorType() {
+			return eventProcessorType;
+		}
 		
 		/// <summary>
 		/// register the Event to be processed.
@@ -180,6 +185,8 @@ namespace Events {
 		T* event = nullptr;
 
 		EventProcessorLifeType lifeType = EventProcessorLifeType::None;
+
+		EventProcessorType eventProcessorType = EventProcessorType::None;
 
 		/// <summary>
 		/// 在EventProcessorLifeType :: immediate事件才會使用

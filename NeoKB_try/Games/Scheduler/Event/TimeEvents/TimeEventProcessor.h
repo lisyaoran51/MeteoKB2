@@ -39,6 +39,10 @@ namespace TimeEvents {
 
 	public:
 
+		TimeEventProcessor() {
+			eventProcessorType = EventProcessorType::Time;
+		}
+
 		virtual int RegisterTimeControllerController(TimeControllerControllerInterface* tControllerController) {
 			if (MtoObject::CanCast<TimeControllerController<T>>(tControllerController)) {
 				timeControllerController = MtoObject::Cast<TimeControllerController<T>>(tControllerController);

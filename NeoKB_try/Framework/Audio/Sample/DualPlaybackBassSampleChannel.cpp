@@ -19,7 +19,7 @@ DualPlaybackBassSampleChannel::~DualPlaybackBassSampleChannel()
 
 int DualPlaybackBassSampleChannel::Play()
 {
-	LOG(LogLevel::Debug) << "DualPlaybackBassSampleChannel::Play() : add play action.";
+	LOG(LogLevel::Depricated) << "DualPlaybackBassSampleChannel::Play() : add play action.";
 	
 	int newPlayback = 0;
 

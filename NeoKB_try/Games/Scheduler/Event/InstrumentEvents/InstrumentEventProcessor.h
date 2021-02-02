@@ -37,6 +37,8 @@ namespace InstrumentEvents{
 	public:
 
 		InstrumentEventProcessor(){
+
+			eventProcessorType = EventProcessorType::Instrument;
 		}
 
 		virtual int RegisterInstrumentController(InstrumentControllerInterface* iController) {

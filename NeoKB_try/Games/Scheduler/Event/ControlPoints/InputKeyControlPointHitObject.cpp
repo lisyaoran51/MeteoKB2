@@ -6,6 +6,7 @@ using namespace Games::Schedulers::Events::ControlPoints;
 
 InputKeyControlPointHitObject::InputKeyControlPointHitObject(HitWindow * hWindow): HitObject(hWindow), HasInputKey(InputKey::None, 0)
 {
+	eventProcessorType = EventProcessorType::ControlPoint;
 }
 
 string InputKeyControlPointHitObject::GetTypeName()
