@@ -318,7 +318,7 @@ namespace Rulesets {
 
 	
 
-}}
+}; }
 
 
 
