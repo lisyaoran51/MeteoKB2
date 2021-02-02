@@ -290,7 +290,7 @@ namespace Rulesets {
 				EventProcessor<Event>* ep = getEventProcessor(sm->GetEvents()->at(i));
 
 				// ¦b³oÃäfilter event processor
-				if (eventProcessorFilter->Filter(ep) {
+				if (eventProcessorFilter->Filter(ep)) {
 
 					if (dynamic_cast<HitObject*>(ep)) {
 						dynamic_cast<HitObject*>(ep)->AddOnJudgement(ep, [=](HitObject* h, Judgement* j) {
@@ -318,7 +318,7 @@ namespace Rulesets {
 
 	
 
-}; }
+}}
 
 
 
