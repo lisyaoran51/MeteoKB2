@@ -47,7 +47,7 @@ namespace DataStructure {
 
 			for (int i = startSection; i <= endSection; i++) {
 				// <3,8> <8,13> <13,18>
-				if (!secondPeriods.find(i)) {
+				if (secondPeriods.find(i) != secondPeriods.end()) {
 					secondPeriods[i] = new SecondPeriod<T>(i);
 				}
 

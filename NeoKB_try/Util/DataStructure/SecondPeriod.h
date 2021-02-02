@@ -49,7 +49,7 @@ namespace DataStructure {
 				}
 			}
 
-			if (classifiedObjects.find(typeName)) {
+			if (classifiedObjects.find(typeName) != classifiedObjects.end()) {
 				delete classifiedObjects[typeName];
 			}
 
@@ -71,7 +71,7 @@ namespace DataStructure {
 				}
 			}
 
-			if (classifiedObjects.find(typeName)) {
+			if (classifiedObjects.find(typeName) != classifiedObjects.end()) {
 				delete classifiedObjects[typeName];
 			}
 
