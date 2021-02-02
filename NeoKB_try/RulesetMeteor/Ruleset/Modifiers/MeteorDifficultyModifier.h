@@ -38,7 +38,7 @@ namespace Modifiers{
 
 		SmDifficultyDifficulty difficulty = SmDifficultyDifficulty::None;
 
-		int filterEventProcessorsByDifficulty(vector<EventProcessor<Event>*>* eventProcessors);
+		bool filterEventProcessorsByDifficulty(EventProcessor<Event>* eventProcessor);
 
 
 

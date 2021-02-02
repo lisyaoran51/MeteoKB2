@@ -168,8 +168,9 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 	if (elapsedTime > 0) {
 
 		eventProcessorPeriods->GetItemsContainPeriods(make_pair<float, float>(currentTime - visibleTimeRange, currentTime + visibleTimeRange), &eventProcessors);
-		LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent() : filter event processors.";
-		eventProcessorFilter->Filter(&eventProcessors);
+		// 移到遊戲最一開始就把所有event processor都先filter掉
+		//LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent() : filter event processors.";
+		//eventProcessorFilter->Filter(&eventProcessors);
 
 		filteredTempStaticEventProcessors.assign(eventProcessors.begin(), eventProcessors.end());
 
@@ -219,8 +220,9 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 	if (elapsedTime < 0) {
 
 		eventProcessorPeriods->GetItemsContainPeriods(make_pair<float, float>((float)currentTime, currentTime - elapsedTime), &eventProcessors);
-		LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent() : filter event processors(rewind state).";
-		eventProcessorFilter->Filter(&eventProcessors);
+		// 移到遊戲最一開始就把所有event processor都先filter掉
+		//LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent() : filter event processors(rewind state).";
+		//eventProcessorFilter->Filter(&eventProcessors);
 
 		filteredTempStaticEventProcessors.assign(eventProcessors.begin(), eventProcessors.end());
 

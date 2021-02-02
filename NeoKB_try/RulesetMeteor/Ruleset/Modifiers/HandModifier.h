@@ -35,7 +35,7 @@ namespace Modifiers{
 
 		SmDifficultyHandType handType = SmDifficultyHandType::None;
 
-		int filterEventProcessorsByHandType(vector<EventProcessor<Event>*>* eventProcessors);
+		bool filterEventProcessorsByHandType(EventProcessor<Event>* eventProcessor);
 
 	};
 

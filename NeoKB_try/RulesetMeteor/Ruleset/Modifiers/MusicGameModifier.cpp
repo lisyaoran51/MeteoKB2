@@ -30,35 +30,35 @@ int MusicGameModifier::ApplyToEventProcessorFilter(EventProcessorFilter * eventP
 	return 0;
 }
 
-int MusicGameModifier::filterRepeatPracticeEventProcessors(vector<EventProcessor<Event>*>* eventProcessors)
+bool MusicGameModifier::filterRepeatPracticeEventProcessors(EventProcessor<Event>* eventProcessor)
 {
+	if (eventProcessor->GetEventProcessorType() == EventProcessorType::Time) {
 
-	for (int i = 0; i < eventProcessors->size(); i++) {
-
-		RepeatPracticeEventProcessor* repeatPracticeEventProcessor = dynamic_cast<RepeatPracticeEventProcessor*>(eventProcessors->at(i));
+		RepeatPracticeEventProcessor* repeatPracticeEventProcessor = dynamic_cast<RepeatPracticeEventProcessor*>(eventProcessor);
 
 		if (repeatPracticeEventProcessor) {
-			eventProcessors->erase(eventProcessors->begin() + i);
-			i--;
+			return false;
 		}
 
 	}
 
-	return 0;
+	
+
+	return true;
 }
 
-int MusicGameModifier::filterEruptEffects(vector<EventProcessor<Event>*>* eventProcessors)
+bool MusicGameModifier::filterEruptEffects(EventProcessor<Event>* eventProcessor)
 {
-	for (int i = 0; i < eventProcessors->size(); i++) {
+	if (eventProcessor->GetEventProcessorType() == EventProcessorType::Effect) {
 
-		EruptEffectMapper* eruptEffectMapper = dynamic_cast<EruptEffectMapper*>(eventProcessors->at(i));
+		EruptEffectMapper* eruptEffectMapper = dynamic_cast<EruptEffectMapper*>(eventProcessor);
 
 		if (eruptEffectMapper) {
-			eventProcessors->erase(eventProcessors->begin() + i);
-			i--;
+			return false;
 		}
-
 	}
 
-	return 0;
+	
+
+	return true;
 }

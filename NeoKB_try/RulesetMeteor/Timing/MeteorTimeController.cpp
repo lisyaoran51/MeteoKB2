@@ -28,52 +28,47 @@ int MeteorTimeController::loadOnComplete(EventProcessorFilter * e)
 	return 0;
 }
 
-int MeteorTimeController::filterEventBySection(vector<EventProcessor<Event>*>* eventProcessors)
+bool MeteorTimeController::filterEventBySection(EventProcessor<Event>* eventProcessor)
 {
 
-	for (int i = 0; i < eventProcessors->size(); i++) {
-		PlayableControlPoint* controlPoint = dynamic_cast<PlayableControlPoint*>(eventProcessors->at(i)->GetEvent()->GetSourceEvent());
-		if (controlPoint) {
-			if (controlPoint->GetSectionIndex() < tempStartSection || controlPoint->GetSectionIndex() >= tempStartSection + repeatSections) {
-				eventProcessors->erase(eventProcessors->begin() + i);
-				i--;
-			}
+	PlayableControlPoint* controlPoint = dynamic_cast<PlayableControlPoint*>(eventProcessor->GetEvent()->GetSourceEvent());
+	if (controlPoint) {
+		if (controlPoint->GetSectionIndex() < tempStartSection || controlPoint->GetSectionIndex() >= tempStartSection + repeatSections) {
+			return false;
 		}
 	}
 
-	return 0;
+
+	return true;
 }
 
-int MeteorTimeController::filterEruptEffect(vector<EventProcessor<Event>*>* eventProcessors)
+bool MeteorTimeController::filterEruptEffect(EventProcessor<Event>* eventProcessor)
 {
-	for (int i = 0; i < eventProcessors->size(); i++) {
+	EruptEffectMapper* eruptEffectMapper = dynamic_cast<EruptEffectMapper*>(eventProcessor);
 
-		EruptEffectMapper* eruptEffectMapper = dynamic_cast<EruptEffectMapper*>(eventProcessors->at(i));
-
-		if (eruptEffectMapper) {
-			eventProcessors->erase(eventProcessors->begin() + i);
-			i--;
-		}
-
+	if (eruptEffectMapper) {
+		return false;
 	}
 
+	
 
-	return 0;
+
+	return true;
 }
 
-int MeteorTimeController::filterFallEffect(vector<EventProcessor<Event>*>* eventProcessors)
+bool MeteorTimeController::filterFallEffect(EventProcessor<Event>* eventProcessor)
 {
-	for (int i = 0; i < eventProcessors->size(); i++) {
 
-		FallEffectMapper* fallEffectMapper = dynamic_cast<FallEffectMapper*>(eventProcessors->at(i));
+	FallEffectMapper* fallEffectMapper = dynamic_cast<FallEffectMapper*>(eventProcessor);
 
-		if (fallEffectMapper) {
-			eventProcessors->erase(eventProcessors->begin() + i);
-			i--;
-		}
-
+	if (fallEffectMapper) {
+		return false;
 	}
-	return 0;
+
+
+
+
+	return true;
 }
 
 MeteorTimeController::MeteorTimeController() : RegisterType("MeteorTimeController")

@@ -37,19 +37,19 @@ namespace Events {
 		int load();
 
 		/// <summary>
-		/// 一定會執行
+		/// 一定會執行，如果允許救回傳true，如果被刪除就回傳false
 		/// </summary>
-		vector<function<int(vector<EventProcessor<Event>*>*)>> filterCallbacks;
+		vector<function<bool(EventProcessor<Event>*)>> filterCallbacks;
 
 		/// <summary>
-		/// 只有選擇某一variant時才會執行
+		/// 只有選擇某一variant時才會執行，如果允許救回傳true，如果被刪除就回傳false
 		/// </summary>
-		multimap<int, function<int(vector<EventProcessor<Event>*>*)>> variantFilterCallbacks;
+		multimap<int, function<bool(EventProcessor<Event>*)>> variantFilterCallbacks;
 
 		/// <summary>
-		/// 一定會執行
+		/// 一定會執行，如果允許救回傳true，如果被刪除就回傳false
 		/// </summary>
-		map<string, function<int(vector<EventProcessor<Event>*>*)>> namedFilterCallbacks;
+		map<string, function<bool(EventProcessor<Event>*)>> namedFilterCallbacks;
 
 		int variant = -1;
 
@@ -57,11 +57,11 @@ namespace Events {
 
 		EventProcessorFilter();
 
-		int AddFilterCallback(function<int(vector<EventProcessor<Event>*>*)> filterCallback);
+		int AddFilterCallback(function<bool(EventProcessor<Event>*)> filterCallback);
 		
-		int AddVariantFilterCallback(function<int(vector<EventProcessor<Event>*>*)> filterCallback, int v);
+		int AddVariantFilterCallback(function<bool(EventProcessor<Event>*)> filterCallback, int v);
 
-		int AddNamedFilterCallback(function<int(vector<EventProcessor<Event>*>*)> filterCallback, string name);
+		int AddNamedFilterCallback(function<bool(EventProcessor<Event>*)> filterCallback, string name);
 
 		/// <summary>
 		/// -1代表所有variant都不執行
@@ -79,17 +79,17 @@ namespace Events {
 		/// <summary>
 		/// 會執行filterCallbacks、variantFilterCallbacks、namedFilterCallbacks
 		/// </summary>
-		vector<EventProcessor<Event>*>* Filter(vector<EventProcessor<Event>*>* eventProcessors);
+		bool Filter(EventProcessor<Event>* eventProcessor);
 
 		/// <summary>
 		/// 會執行variantFilterCallbacks(應該不會這樣用)
 		/// </summary>
-		vector<EventProcessor<Event>*>* Filter(vector<EventProcessor<Event>*>* eventProcessors, int variant);
+		bool Filter(EventProcessor<Event>* eventProcessor, int variant);
 
 		/// <summary>
 		/// 會執行namedFilterCallbacks(應該不會這樣用)
 		/// </summary>
-		vector<EventProcessor<Event>*>* Filter(vector<EventProcessor<Event>*>* eventProcessors, string name);
+		bool Filter(EventProcessor<Event>* eventProcessor, string name);
 
 
 	};

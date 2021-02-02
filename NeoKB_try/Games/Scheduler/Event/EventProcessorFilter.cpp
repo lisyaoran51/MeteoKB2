@@ -17,7 +17,7 @@ EventProcessorFilter::EventProcessorFilter(): RegisterType("EventProcessorFilter
 	registerLoad(bind(static_cast<int(EventProcessorFilter::*)(void)>(&EventProcessorFilter::load), this));
 }
 
-int EventProcessorFilter::AddFilterCallback(function<int(vector<EventProcessor<Event>*>*)> filterCallback)
+int EventProcessorFilter::AddFilterCallback(function<bool(EventProcessor<Event>*)> filterCallback)
 {
 
 	filterCallbacks.push_back(filterCallback);
@@ -25,17 +25,17 @@ int EventProcessorFilter::AddFilterCallback(function<int(vector<EventProcessor<E
 	return 0;
 }
 
-int EventProcessorFilter::AddVariantFilterCallback(function<int(vector<EventProcessor<Event>*>*)> filterCallback, int v)
+int EventProcessorFilter::AddVariantFilterCallback(function<bool(EventProcessor<Event>*)> filterCallback, int v)
 {
-	variantFilterCallbacks.insert(pair<int, function<int(vector<EventProcessor<Event>*>*)>>(v, filterCallback));
+	variantFilterCallbacks.insert(pair<int, function<bool(EventProcessor<Event>*)>>(v, filterCallback));
 
 	return 0;
 }
 
-int EventProcessorFilter::AddNamedFilterCallback(function<int(vector<EventProcessor<Event>*>*)> filterCallback, string name)
+int EventProcessorFilter::AddNamedFilterCallback(function<bool(EventProcessor<Event>*)> filterCallback, string name)
 {
 
-	namedFilterCallbacks.insert(pair<string, function<int(vector<EventProcessor<Event>*>*)>>(name, filterCallback));
+	namedFilterCallbacks.insert(pair<string, function<bool(EventProcessor<Event>*)>>(name, filterCallback));
 	return 0;
 }
 
@@ -68,41 +68,51 @@ int EventProcessorFilter::DeleteNamedFilterCallback(string name)
 	return 0;
 }
 
-vector<EventProcessor<Event>*>* EventProcessorFilter::Filter(vector<EventProcessor<Event>*>* eventProcessors)
+bool EventProcessorFilter::Filter(EventProcessor<Event>* eventProcessor)
 {
+
 	LOG(LogLevel::Depricated) << "EventProcessorFilter::Filter : filter callbacks." << filterCallbacks.size();
 	for (int i = 0; i < filterCallbacks.size(); i++) {
-		filterCallbacks[i](eventProcessors);
+		if (!filterCallbacks[i](eventProcessor))
+			return false;
 	}
 	LOG(LogLevel::Depricated) << "EventProcessorFilter::Filter : filter variant callbacks." << variantFilterCallbacks.size();
-	for (multimap<int, function<int(vector<EventProcessor<Event>*>*)>>::iterator i = variantFilterCallbacks.begin(); i != variantFilterCallbacks.end(); i++) {
+	for (multimap<int, function<bool(EventProcessor<Event>*)>>::iterator i = variantFilterCallbacks.begin(); i != variantFilterCallbacks.end(); i++) {
 		if ((*i).first == variant)
-			(*i).second(eventProcessors);
+			if (!(*i).second(eventProcessor)) {
+				return false;
+			}
 	}
 	LOG(LogLevel::Depricated) << "EventProcessorFilter::Filter : filter named callbacks." << namedFilterCallbacks.size();
-	for (map<string, function<int(vector<EventProcessor<Event>*>*)>>::iterator i = namedFilterCallbacks.begin(); i != namedFilterCallbacks.end(); i++) {
+	for (map<string, function<bool(EventProcessor<Event>*)>>::iterator i = namedFilterCallbacks.begin(); i != namedFilterCallbacks.end(); i++) {
 		
-		(*i).second(eventProcessors);
+		if (!(*i).second(eventProcessor)) {
+			return false;
+		}
 	}
 
-	return eventProcessors;
+	return true;;
 }
 
-vector<EventProcessor<Event>*>* EventProcessorFilter::Filter(vector<EventProcessor<Event>*>* eventProcessors, int v)
+bool EventProcessorFilter::Filter(EventProcessor<Event>* eventProcessor, int v)
 {
-	for (multimap<int, function<int(vector<EventProcessor<Event>*>*)>>::iterator i = variantFilterCallbacks.begin(); i != variantFilterCallbacks.end(); i++) {
+	for (multimap<int, function<bool(EventProcessor<Event>*)>>::iterator i = variantFilterCallbacks.begin(); i != variantFilterCallbacks.end(); i++) {
 		if ((*i).first == v)
-			(*i).second(eventProcessors);
+			if (!(*i).second(eventProcessor)) {
+				return false;
+			}
 	}
 
-	return eventProcessors;
+	return true;
 }
 
-vector<EventProcessor<Event>*>* EventProcessorFilter::Filter(vector<EventProcessor<Event>*>* eventProcessors, string name)
+bool EventProcessorFilter::Filter(EventProcessor<Event>* eventProcessor, string name)
 {
-	for (map<string, function<int(vector<EventProcessor<Event>*>*)>>::iterator i = namedFilterCallbacks.begin(); i != namedFilterCallbacks.end(); i++) {
+	for (map<string, function<bool(EventProcessor<Event>*)>>::iterator i = namedFilterCallbacks.begin(); i != namedFilterCallbacks.end(); i++) {
 		if ((*i).first == name)
-			(*i).second(eventProcessors);
+			if (!(*i).second(eventProcessor)) {
+				return false;
+			}
 	}
-	return eventProcessors;
+	return true;
 }

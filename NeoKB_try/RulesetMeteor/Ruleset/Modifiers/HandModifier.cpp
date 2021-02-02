@@ -40,39 +40,32 @@ SmDifficultyHandType HandModifier::GetHandType()
 	return handType;
 }
 
-int HandModifier::filterEventProcessorsByHandType(vector<EventProcessor<Event>*>* eventProcessors)
+bool HandModifier::filterEventProcessorsByHandType(EventProcessor<Event>* eventProcessor)
 {
-	for (int i = 0; i < eventProcessors->size(); i++) {
+	Event* sourceEvent = eventProcessor->GetEvent()->GetSourceEvent();
 
-		Event* sourceEvent = eventProcessors->at(i)->GetEvent()->GetSourceEvent();
+	Event* eventToFilter = sourceEvent == nullptr ? eventProcessor->GetEvent() : sourceEvent;
 
-		Event* eventToFilter = sourceEvent == nullptr ? eventProcessors->at(i)->GetEvent() : sourceEvent;
-
-		if (eventToFilter) {
-			PlayableControlPoint* playableControlPoint = dynamic_cast<PlayableControlPoint*>(eventToFilter);
-			if (playableControlPoint) {
-				switch (handType) {
-				case SmDifficultyHandType::Left:
-					if (playableControlPoint->GetHandType() == HandType::RightEasy ||
-						playableControlPoint->GetHandType() == HandType::RightOther) {
-						eventProcessors->erase(eventProcessors->begin() + i);
-						i--;
-					}
-					break;
-
-				case SmDifficultyHandType::Right:
-					if (playableControlPoint->GetHandType() == HandType::LeftEasy ||
-						playableControlPoint->GetHandType() == HandType::LeftOther) {
-						eventProcessors->erase(eventProcessors->begin() + i);
-						i--;
-					}
-					break;
+	if (eventToFilter) {
+		PlayableControlPoint* playableControlPoint = dynamic_cast<PlayableControlPoint*>(eventToFilter);
+		if (playableControlPoint) {
+			switch (handType) {
+			case SmDifficultyHandType::Left:
+				if (playableControlPoint->GetHandType() == HandType::RightEasy ||
+					playableControlPoint->GetHandType() == HandType::RightOther) {
+					return false;
 				}
+				break;
+
+			case SmDifficultyHandType::Right:
+				if (playableControlPoint->GetHandType() == HandType::LeftEasy ||
+					playableControlPoint->GetHandType() == HandType::LeftOther) {
+					return false;
+				}
+				break;
 			}
 		}
-
-
 	}
 
-	return 0;
+	return true;
 }

@@ -29,9 +29,9 @@ namespace Modifiers{
 
 	protected:
 
-		virtual int filterRepeatPracticeEventProcessors(vector<EventProcessor<Event>*>* eventProcessors);
+		virtual bool filterRepeatPracticeEventProcessors(EventProcessor<Event>* eventProcessor);
 
-		virtual int filterEruptEffects(vector<EventProcessor<Event>*>* eventProcessors);
+		virtual bool filterEruptEffects(EventProcessor<Event>* eventProcessor);
 
 	};
 

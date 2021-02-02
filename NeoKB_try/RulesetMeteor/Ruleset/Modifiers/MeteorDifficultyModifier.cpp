@@ -44,32 +44,26 @@ SmDifficultyDifficulty MeteorDifficultyModifier::GetDifficulty()
 	return difficulty;
 }
 
-int MeteorDifficultyModifier::filterEventProcessorsByDifficulty(vector<EventProcessor<Event>*>* eventProcessors)
+bool MeteorDifficultyModifier::filterEventProcessorsByDifficulty(EventProcessor<Event>* eventProcessor)
 {
-	for (int i = 0; i < eventProcessors->size(); i++) {
+	Event* sourceEvent = eventProcessor->GetEvent()->GetSourceEvent();
 
-		Event* sourceEvent = eventProcessors->at(i)->GetEvent()->GetSourceEvent();
+	Event* eventToFilter = sourceEvent == nullptr ? eventProcessor->GetEvent() : sourceEvent;
 
-		Event* eventToFilter = sourceEvent == nullptr ? eventProcessors->at(i)->GetEvent() : sourceEvent;
-
-		if (eventToFilter) {
-			PlayableControlPoint* playableControlPoint = dynamic_cast<PlayableControlPoint*>(eventToFilter);
-			if (playableControlPoint) {
-				switch (difficulty) {
-				case SmDifficultyDifficulty::Easy:
-					if (playableControlPoint->GetHandType() == HandType::LeftOther ||
-						playableControlPoint->GetHandType() == HandType::RightOther) {
-						eventProcessors->erase(eventProcessors->begin() + i);
-						i--;
-					}
-					break;
-
+	if (eventToFilter) {
+		PlayableControlPoint* playableControlPoint = dynamic_cast<PlayableControlPoint*>(eventToFilter);
+		if (playableControlPoint) {
+			switch (difficulty) {
+			case SmDifficultyDifficulty::Easy:
+				if (playableControlPoint->GetHandType() == HandType::LeftOther ||
+					playableControlPoint->GetHandType() == HandType::RightOther) {
+					return false;
 				}
+				break;
+
 			}
 		}
-
-
 	}
 
-	return 0;
+	return true;
 }

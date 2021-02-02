@@ -127,7 +127,7 @@ namespace Rulesets {
 			/*
 			 * 把跟目前遊戲模式無關的event processor刪掉，因為converter會把所有processor全都生出來，我們要自己篩自己要的
 			 */
-			EventProcessorFilter* eventProcessorFilter = createEventProcessorFilter();
+			eventProcessorFilter = createEventProcessorFilter();
 
 			for (int i = 0; i < workingSm->GetModifiers()->GetValue()->size(); i++) {
 				if (dynamic_cast<EventProcessorFilterModifier*>(workingSm->GetModifiers()->GetValue()->at(i))) {
@@ -262,6 +262,8 @@ namespace Rulesets {
 
 		Playfield* playfield = nullptr;
 
+		EventProcessorFilter* eventProcessorFilter = nullptr;
+
 		ActionList<int, Judgement*> onJudgement;
 
 		virtual Playfield* createPlayfield() = 0;
@@ -287,16 +289,23 @@ namespace Rulesets {
 				LOG(LogLevel::Finer) << "RulesetExecutor::playfieldLoad : getting [" << sm->GetEvents()->at(i)->GetStartTime() << "] " << sm->GetEvents()->at(i)->GetTypeName() << " processor into playfield " << playfield << " ... ";
 				EventProcessor<Event>* ep = getEventProcessor(sm->GetEvents()->at(i));
 
-				if (dynamic_cast<HitObject*>(ep)) {
-					dynamic_cast<HitObject*>(ep)->AddOnJudgement(ep, [=](HitObject* h, Judgement* j) {
+				// 在這邊filter event processor
+				if (eventProcessorFilter->Filter(ep) {
 
-						playfield->OnJudgement(h, j);
-						onJudgement.Trigger(j); // score processor -> on judgement
+					if (dynamic_cast<HitObject*>(ep)) {
+						dynamic_cast<HitObject*>(ep)->AddOnJudgement(ep, [=](HitObject* h, Judgement* j) {
 
-						return 0;
-					}, "RulesetExecutor::HandleJudgement");
+							playfield->OnJudgement(h, j);
+							onJudgement.Trigger(j); // score processor -> on judgement
+
+							return 0;
+						}, "RulesetExecutor::HandleJudgement");
+					}
+					playfield->Add(ep);
 				}
-				playfield->Add(ep);
+				else {
+					delete ep;
+				}
 			}
 
 			playfield->SetGetEventProcessorFunction(bind(&RulesetExecutor<T>::getEventProcessor, this, placeholders::_1));
