@@ -168,11 +168,22 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 	if (elapsedTime > 0) {
 
 		eventProcessorPeriods->GetItemsContainPeriods(make_pair<float, float>(currentTime - visibleTimeRange, currentTime + visibleTimeRange), &eventProcessors);
-		// 移到遊戲最一開始就把所有event processor都先filter掉
-		//LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent() : filter event processors.";
-		//eventProcessorFilter->Filter(&eventProcessors);
+		// 移到遊戲最一開始就把所有event processor都先filter掉，這邊就只處理即時的filter
+		LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent() : filter event processors.";
+		if (eventProcessorFilter->GetIsGameTimeFiltering()) {
+			
+			filteredTempStaticEventProcessors.clear();
+			for (int i = 0; i < eventProcessors.size(); i++) {
+				if (eventProcessorFilter->GameTimeFilter(eventProcessors[i])) {
+					filteredTempStaticEventProcessors.push_back(eventProcessors[i]);
+				}
+			}
 
-		filteredTempStaticEventProcessors.assign(eventProcessors.begin(), eventProcessors.end());
+		}
+		else {
+			filteredTempStaticEventProcessors.assign(eventProcessors.begin(), eventProcessors.end());
+		}
+
 
 		for (int i = 0; i < eventProcessors.size(); i++) {
 
@@ -220,11 +231,20 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 	if (elapsedTime < 0) {
 
 		eventProcessorPeriods->GetItemsContainPeriods(make_pair<float, float>((float)currentTime, currentTime - elapsedTime), &eventProcessors);
-		// 移到遊戲最一開始就把所有event processor都先filter掉
-		//LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent() : filter event processors(rewind state).";
-		//eventProcessorFilter->Filter(&eventProcessors);
+		// 移到遊戲最一開始就把所有event processor都先filter掉，這邊就只處理即時的filter
+		LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent() : filter event processors.";
+		if (eventProcessorFilter->GetIsGameTimeFiltering()) {
 
-		filteredTempStaticEventProcessors.assign(eventProcessors.begin(), eventProcessors.end());
+			filteredTempStaticEventProcessors.clear();
+			for (int i = 0; i < eventProcessors.size(); i++) {
+				if (eventProcessorFilter->GameTimeFilter(eventProcessors[i])) {
+					filteredTempStaticEventProcessors.push_back(eventProcessors[i]);
+				}
+			}
+		}
+		else {
+			filteredTempStaticEventProcessors.assign(eventProcessors.begin(), eventProcessors.end());
+		}
 
 		for (int i = 0; i < eventProcessors.size(); i++) {
 

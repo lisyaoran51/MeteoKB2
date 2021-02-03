@@ -53,6 +53,11 @@ namespace Events {
 
 		int variant = -1;
 
+		/// <summary>
+		/// 需要在遊戲執行時一邊filter，這是variantFilterCallbacks和namedFilterCallbacks才需要的
+		/// </summary>
+		bool isGameTimeFiltering = false;
+
 	public:
 
 		EventProcessorFilter();
@@ -62,6 +67,8 @@ namespace Events {
 		int AddVariantFilterCallback(function<bool(EventProcessor<Event>*)> filterCallback, int v);
 
 		int AddNamedFilterCallback(function<bool(EventProcessor<Event>*)> filterCallback, string name);
+
+		bool GetIsGameTimeFiltering();
 
 		/// <summary>
 		/// -1代表所有variant都不執行
@@ -77,9 +84,14 @@ namespace Events {
 		int DeleteNamedFilterCallback(string name);
 
 		/// <summary>
-		/// 會執行filterCallbacks、variantFilterCallbacks、namedFilterCallbacks
+		/// 只會執行filterCallbacks
 		/// </summary>
 		bool Filter(EventProcessor<Event>* eventProcessor);
+
+		/// <summary>
+		/// 會執行variantFilterCallbacks和namedFilterCallbacks，是用來在遊戲進行中使用
+		/// </summary>
+		bool GameTimeFilter(EventProcessor<Event>* eventProcessor);
 
 		/// <summary>
 		/// 會執行variantFilterCallbacks(應該不會這樣用)

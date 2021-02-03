@@ -28,7 +28,7 @@ int EventProcessorFilter::AddFilterCallback(function<bool(EventProcessor<Event>*
 int EventProcessorFilter::AddVariantFilterCallback(function<bool(EventProcessor<Event>*)> filterCallback, int v)
 {
 	variantFilterCallbacks.insert(pair<int, function<bool(EventProcessor<Event>*)>>(v, filterCallback));
-
+	isGameTimeFiltering = true;
 	return 0;
 }
 
@@ -36,7 +36,13 @@ int EventProcessorFilter::AddNamedFilterCallback(function<bool(EventProcessor<Ev
 {
 
 	namedFilterCallbacks.insert(pair<string, function<bool(EventProcessor<Event>*)>>(name, filterCallback));
+	isGameTimeFiltering = true;
 	return 0;
+}
+
+bool EventProcessorFilter::GetIsGameTimeFiltering()
+{
+	return isGameTimeFiltering;
 }
 
 int EventProcessorFilter::SwitchVariant(int v)
@@ -76,6 +82,26 @@ bool EventProcessorFilter::Filter(EventProcessor<Event>* eventProcessor)
 		if (!filterCallbacks[i](eventProcessor))
 			return false;
 	}
+	//LOG(LogLevel::Depricated) << "EventProcessorFilter::Filter : filter variant callbacks." << variantFilterCallbacks.size();
+	//for (multimap<int, function<bool(EventProcessor<Event>*)>>::iterator i = variantFilterCallbacks.begin(); i != variantFilterCallbacks.end(); i++) {
+	//	if ((*i).first == variant)
+	//		if (!(*i).second(eventProcessor)) {
+	//			return false;
+	//		}
+	//}
+	//LOG(LogLevel::Depricated) << "EventProcessorFilter::Filter : filter named callbacks." << namedFilterCallbacks.size();
+	//for (map<string, function<bool(EventProcessor<Event>*)>>::iterator i = namedFilterCallbacks.begin(); i != namedFilterCallbacks.end(); i++) {
+	//	
+	//	if (!(*i).second(eventProcessor)) {
+	//		return false;
+	//	}
+	//}
+
+	return true;;
+}
+
+bool EventProcessorFilter::GameTimeFilter(EventProcessor<Event>* eventProcessor)
+{
 	LOG(LogLevel::Depricated) << "EventProcessorFilter::Filter : filter variant callbacks." << variantFilterCallbacks.size();
 	for (multimap<int, function<bool(EventProcessor<Event>*)>>::iterator i = variantFilterCallbacks.begin(); i != variantFilterCallbacks.end(); i++) {
 		if ((*i).first == variant)
@@ -90,8 +116,7 @@ bool EventProcessorFilter::Filter(EventProcessor<Event>* eventProcessor)
 			return false;
 		}
 	}
-
-	return true;;
+	return true;
 }
 
 bool EventProcessorFilter::Filter(EventProcessor<Event>* eventProcessor, int v)
