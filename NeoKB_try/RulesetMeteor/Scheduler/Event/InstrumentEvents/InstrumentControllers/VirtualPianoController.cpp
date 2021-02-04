@@ -3,6 +3,11 @@
 #include "../../../../../Instruments/CompositeMeteoPiano.h"
 
 
+// debug¥Î
+#include <chrono>
+using namespace std::chrono;
+// debug¥Î
+
 using namespace Meteor::Schedulers::Events::InstrumentEvents::InstrumentControllers;
 using namespace Instruments;
 
@@ -37,7 +42,13 @@ int VirtualPianoController::implementControlInstrument(EventProcessor<Event>* e)
 			piano->Stop(soundEvent->GetSound().first);
 		}
 		else if(soundEvent->GetSound().second > 0){
+			system_clock::time_point systemStartTime = system_clock::now();
+
 			piano->Play(soundEvent->GetSound().first, soundEvent->GetSound().second);
+
+			system_clock::time_point systemCurrentTime = system_clock::now();
+			LOG(LogLevel::Debug) << "VirtualPianoController::implementControlInstrument() : play sound cost time = [" << duration_cast<microseconds>(systemCurrentTime - systemStartTime).count() << "].";
+
 		}
 	}
 	else if (soundEvent->GetPianoSoundEventType() == PianoSoundEventType::Pedal) {
