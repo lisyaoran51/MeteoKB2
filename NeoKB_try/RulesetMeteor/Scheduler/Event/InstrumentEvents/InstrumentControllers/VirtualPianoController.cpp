@@ -48,6 +48,8 @@ int VirtualPianoController::implementControlInstrument(EventProcessor<Event>* e)
 
 			system_clock::time_point systemCurrentTime = system_clock::now();
 			LOG(LogLevel::Debug) << "VirtualPianoController::implementControlInstrument() : play sound cost time = [" << duration_cast<microseconds>(systemCurrentTime - systemStartTime).count() << "].";
+			system_clock::time_point newSystemCurrentTime = system_clock::now();
+			LOG(LogLevel::Debug) << "VirtualPianoController::implementControlInstrument() : log print time = [" << duration_cast<microseconds>(newSystemCurrentTime - systemCurrentTime).count() << "].";
 
 		}
 	}
