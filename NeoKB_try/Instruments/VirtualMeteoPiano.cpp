@@ -2,6 +2,11 @@
 
 #include "../Framework/Audio/Sample/MultiPlaybackSampleChannel.h"
 
+// debug¥Î
+#include <chrono>
+using namespace std::chrono;
+// debug¥Î
+
 using namespace Instruments;
 using namespace Framework::Audio::Samples;
 
@@ -46,7 +51,11 @@ int VirtualMeteoPiano::Play(Pitch p, float volume)
 	//
 	//dynamic_cast<MultiPlaybackSampleChannel*>(getSamplesByPitch()->at(p))->PlayOnTrack(1, volume);
 
+
+	system_clock::time_point systemStartTime = system_clock::now();
 	(*it).second->Play(volume);
+	system_clock::time_point systemCurrentTime = system_clock::now();
+	LOG(LogLevel::Debug) << "VirtualMeteoPiano::Play() : play sound cost time = [" << duration_cast<microseconds>(systemCurrentTime - systemStartTime).count() << "].";
 
 	isPressingMapByPitch[p] = true;
 
