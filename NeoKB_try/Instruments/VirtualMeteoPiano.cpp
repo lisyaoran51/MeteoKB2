@@ -33,7 +33,8 @@ int VirtualMeteoPiano::Play(Pitch p, float volume)
 	if (!isActive)
 		return 0;
 
-	if (getSamplesByPitch()->find(p) == getSamplesByPitch()->end()) {
+	typename map<Pitch, SampleChannel*>::iterator it = getSamplesByPitch()->find(p);
+	if (it == getSamplesByPitch()->end()) {
 		LOG(LogLevel::Error) << "VirtualMeteoPiano::Play() : sound [" << int(p) << "] not found in samplesByPitch.";
 		return 0;
 	}
@@ -45,7 +46,7 @@ int VirtualMeteoPiano::Play(Pitch p, float volume)
 	//
 	//dynamic_cast<MultiPlaybackSampleChannel*>(getSamplesByPitch()->at(p))->PlayOnTrack(1, volume);
 
-	getSamplesByPitch()->at(p)->Play(volume);
+	(*it).second->Play(volume);
 
 	isPressingMapByPitch[p] = true;
 
