@@ -12,11 +12,15 @@ int AudioComponent::Update()
 {
 	LOG(LogLevel::Depricated) << "AudioComponent::Update : this = [" << this << "] pending actions size = [" << pendingActions.GetSize() << "]";
 
-	unique_lock<mutex> uLock(pendingActionMutex);
-	pendingActions.TriggerThenClear();
+	if (pendingActions.GetSize() > 0) {
+		unique_lock<mutex> uLock(pendingActionMutex);
+		pendingActions.TriggerThenClear();
+	}
 
-	unique_lock<mutex> uLock2(permanentActionMutex);
-	permanentActions.Trigger();
+	if (permanentActions.GetSize() > 0) {
+		unique_lock<mutex> uLock2(permanentActionMutex);
+		permanentActions.Trigger();
+	}
 
 	return 0;
 }

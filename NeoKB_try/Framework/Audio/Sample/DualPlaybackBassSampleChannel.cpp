@@ -21,27 +21,32 @@ int DualPlaybackBassSampleChannel::Play()
 {
 	LOG(LogLevel::Depricated) << "DualPlaybackBassSampleChannel::Play() : add play action.";
 	
-	int newPlayback = 0;
+	unique_lock<mutex> uLock(pendingActionMutex);
+	pendingActions.Add(this, [=]() {
+		int newPlayback = 0;
 
-	if (tempPlayingPlayback == 0)
-		newPlayback = 1;
-	else
-		newPlayback = 0;
+		if (tempPlayingPlayback == 0)
+			newPlayback = 1;
+		else
+			newPlayback = 0;
 
-	BASS_ChannelPause(channelID[newPlayback]);
-	BASS_ChannelSetAttribute(channelID[newPlayback], BASS_ATTRIB_VOL, volumeCalculated->GetValue() / 4.f);
-	BASS_ChannelSetPosition(channelID[newPlayback], 0, BASS_POS_BYTE);
-	/* 檢查是否在fadeout，是的話把fadeout停掉 */
-	if (BASS_ChannelIsSliding(channelID[newPlayback], BASS_ATTRIB_VOL) == TRUE)
-		BASS_ChannelSlideAttribute(channelID[newPlayback], BASS_ATTRIB_VOL, volumeCalculated->GetValue() / 4.f, (DWORD)(0));
+		BASS_ChannelPause(channelID[newPlayback]);
+		BASS_ChannelSetAttribute(channelID[newPlayback], BASS_ATTRIB_VOL, volumeCalculated->GetValue() / 4.f);
+		BASS_ChannelSetPosition(channelID[newPlayback], 0, BASS_POS_BYTE);
+		/* 檢查是否在fadeout，是的話把fadeout停掉 */
+		if (BASS_ChannelIsSliding(channelID[newPlayback], BASS_ATTRIB_VOL) == TRUE)
+			BASS_ChannelSlideAttribute(channelID[newPlayback], BASS_ATTRIB_VOL, volumeCalculated->GetValue() / 4.f, (DWORD)(0));
 
-	BASS_ChannelPlay(channelID[newPlayback], false);
+		BASS_ChannelPlay(channelID[newPlayback], false);
 
-	if (BASS_ChannelIsActive(channelID[tempPlayingPlayback]) == BASS_ACTIVE_PLAYING) {
-		BASS_ChannelSlideAttribute(channelID[tempPlayingPlayback], BASS_ATTRIB_VOL, 0, (DWORD)(fadeOutTime / 4 * 1000));
-	}
+		if (BASS_ChannelIsActive(channelID[tempPlayingPlayback]) == BASS_ACTIVE_PLAYING) {
+			BASS_ChannelSlideAttribute(channelID[tempPlayingPlayback], BASS_ATTRIB_VOL, 0, (DWORD)(fadeOutTime / 4 * 1000));
+		}
 
-	tempPlayingPlayback = newPlayback;
+		tempPlayingPlayback = newPlayback;
+
+		return 0;
+	}, "Lambda_DualPlaybackBassSampleChannel::Play");
 
 	return 0;
 }
@@ -59,11 +64,16 @@ int DualPlaybackBassSampleChannel::Stop()
 
 int DualPlaybackBassSampleChannel::FadeOut()
 {
-	if (BASS_ChannelIsActive(channelID[0]) == BASS_ACTIVE_PLAYING)
-		BASS_ChannelSlideAttribute(channelID[0], BASS_ATTRIB_VOL, 0, (DWORD)(fadeOutTime * 1000));
+	unique_lock<mutex> uLock(pendingActionMutex);
+	pendingActions.Add(this, [=]() {
+		if (BASS_ChannelIsActive(channelID[0]) == BASS_ACTIVE_PLAYING)
+			BASS_ChannelSlideAttribute(channelID[0], BASS_ATTRIB_VOL, 0, (DWORD)(fadeOutTime * 1000));
 
-	if (BASS_ChannelIsActive(channelID[1]) == BASS_ACTIVE_PLAYING)
-		BASS_ChannelSlideAttribute(channelID[1], BASS_ATTRIB_VOL, 0, (DWORD)(fadeOutTime * 1000));
+		if (BASS_ChannelIsActive(channelID[1]) == BASS_ACTIVE_PLAYING)
+			BASS_ChannelSlideAttribute(channelID[1], BASS_ATTRIB_VOL, 0, (DWORD)(fadeOutTime * 1000));
+		return 0;
+
+	}, "Lambda_DualPlaybackBassSampleChannel::FadeOut");
 	return 0;
 }
 
