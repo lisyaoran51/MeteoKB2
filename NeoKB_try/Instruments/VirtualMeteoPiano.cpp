@@ -55,7 +55,7 @@ int VirtualMeteoPiano::Play(Pitch p, float volume)
 	system_clock::time_point systemStartTime = system_clock::now();
 	(*it).second->Play(volume);
 	system_clock::time_point systemCurrentTime = system_clock::now();
-	LOG(LogLevel::Debug) << "VirtualMeteoPiano::Play() : play sound cost time = [" << duration_cast<microseconds>(systemCurrentTime - systemStartTime).count() << "].";
+	LOG(LogLevel::Fine) << "VirtualMeteoPiano::Play() : play sound cost time = [" << duration_cast<microseconds>(systemCurrentTime - systemStartTime).count() << "].";
 
 	isPressingMapByPitch[p] = true;
 

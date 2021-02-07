@@ -37,7 +37,7 @@ int VirtualPianoController::implementControlInstrument(EventProcessor<Event>* e)
 
 
 	if (soundEvent->GetPianoSoundEventType() == PianoSoundEventType::Pitch) {
-		LOG(LogLevel::Debug) << "VirtualPianoController::implementControlInstrument() : play sound [" << soundEvent->GetStartTime() << "] on [" << int(soundEvent->GetSound().first) << "] with volume [" << soundEvent->GetSound().second << "].";
+		LOG(LogLevel::Fine) << "VirtualPianoController::implementControlInstrument() : play sound [" << soundEvent->GetStartTime() << "] on [" << int(soundEvent->GetSound().first) << "] with volume [" << soundEvent->GetSound().second << "].";
 		if (soundEvent->GetSound().second == 0) {
 			piano->Stop(soundEvent->GetSound().first);
 		}
@@ -47,9 +47,9 @@ int VirtualPianoController::implementControlInstrument(EventProcessor<Event>* e)
 			piano->Play(soundEvent->GetSound().first, soundEvent->GetSound().second);
 
 			system_clock::time_point systemCurrentTime = system_clock::now();
-			LOG(LogLevel::Debug) << "VirtualPianoController::implementControlInstrument() : play sound cost time = [" << duration_cast<microseconds>(systemCurrentTime - systemStartTime).count() << "].";
+			LOG(LogLevel::Fine) << "VirtualPianoController::implementControlInstrument() : play sound cost time = [" << duration_cast<microseconds>(systemCurrentTime - systemStartTime).count() << "].";
 			system_clock::time_point newSystemCurrentTime = system_clock::now();
-			LOG(LogLevel::Debug) << "VirtualPianoController::implementControlInstrument() : log print time = [" << duration_cast<microseconds>(newSystemCurrentTime - systemCurrentTime).count() << "].";
+			LOG(LogLevel::Fine) << "VirtualPianoController::implementControlInstrument() : log print time = [" << duration_cast<microseconds>(newSystemCurrentTime - systemCurrentTime).count() << "].";
 
 		}
 	}
