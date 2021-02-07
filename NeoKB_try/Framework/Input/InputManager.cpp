@@ -34,12 +34,15 @@ int InputManager::update()
 		LOG(LogLevel::Finest) << "InputManager::update(): get [" << pendingStates[0] << "] states by " << GetTypeName() << ".";
 
 	system_clock::time_point systemCurrentTime = system_clock::now();
-	LOG(LogLevel::Debug) << "InputManager::update() : [" << GetTypeName() << "] get pending state cost time = [" << duration_cast<microseconds>(systemCurrentTime - systemStartTime).count() << "].";
+	LOG(LogLevel::Finest) << "InputManager::update() : [" << GetTypeName() << "] get pending state cost time = [" << duration_cast<microseconds>(systemCurrentTime - systemStartTime).count() << "].";
 
 
 	/* 這邊本來要做create distinct states，這樣可以確保舊的輸入沒被更動，經過這個以後panel.keyboard.bt都部會是null，但裡面會是沒有東西的 */
+	systemStartTime = system_clock::now();
 	vector<InputState*>* distinctInputStates = createDistinctInputStates(&pendingStates);
-	
+	systemCurrentTime = system_clock::now();
+	LOG(LogLevel::Debug) << "InputManager::update() : [" << GetTypeName() << "] create distinct input state cost time = [" << duration_cast<microseconds>(systemCurrentTime - systemStartTime).count() << "].";
+
 	LOG(LogLevel::Depricated) << "InputManager::update():create distinct input state [" << distinctInputStates->at(0) << "] by " << GetTypeName() << ".";
 
 	//LOG(LogLevel::Debug) << "InputManager::update() : distinct input states size = [" << distinctInputStates->size() << "].";
