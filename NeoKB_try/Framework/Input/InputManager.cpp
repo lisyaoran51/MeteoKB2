@@ -26,11 +26,16 @@ int InputManager::ChangeFocus(Triggerable * fTriggerable)
 
 int InputManager::update()
 {
+	system_clock::time_point systemStartTime = system_clock::now();
 	LOG(LogLevel::Depricated) << "InputManager::update(): start update.";
 	getPendingState(&pendingStates);
 	LOG(LogLevel::Depricated) << "InputManager::update(): get pending states.";
 	if(pendingStates.size() > 0)
 		LOG(LogLevel::Finest) << "InputManager::update(): get [" << pendingStates[0] << "] states by " << GetTypeName() << ".";
+
+	system_clock::time_point systemCurrentTime = system_clock::now();
+	LOG(LogLevel::Finest) << "InputManager::update() : [" << GetTypeName() << "] get pending state cost time = [" << duration_cast<microseconds>(systemCurrentTime - systemStartTime).count() << "].";
+
 
 	/* 這邊本來要做create distinct states，這樣可以確保舊的輸入沒被更動，經過這個以後panel.keyboard.bt都部會是null，但裡面會是沒有東西的 */
 	vector<InputState*>* distinctInputStates = createDistinctInputStates(&pendingStates);
@@ -52,7 +57,7 @@ int InputManager::update()
 
 int InputManager::handleNewState(InputState * state)
 {
-	system_clock::time_point systemStartTime = system_clock::now();
+	
 
 	bool hasNewKeyboardState = !state->GetKeyboardState()->CheckIsEmpty();
 	bool hasNewPanelState = !state->GetPanelState()->CheckIsEmpty();
@@ -72,9 +77,7 @@ int InputManager::handleNewState(InputState * state)
 	//unique_lock<mutex> uLock(TreeMutex1);
 	updateInputQueue(currentState);
 
-	system_clock::time_point systemCurrentTime = system_clock::now();
-	LOG(LogLevel::Finest) << "InputManager::handleNewState() : [" << GetTypeName() << "] fresg input queue cost time = [" << duration_cast<microseconds>(systemCurrentTime - systemStartTime).count() << "].";
-
+	
 
 	if (hasNewKeyboardState)
 		updateKeyboardEvents(currentState);
@@ -299,9 +302,10 @@ int InputManager::updateKeyboardEvents(InputState * inputState)
 	// 我們不考慮repeat，鎖以不用寫得很複雜
 	// 暫時也不寫組合鍵，以後再寫
 
-	for (int i = 0; i < keyboardState->GetPresses()->size(); i++) {
-		handleKeyDown(inputState, keyboardState->GetPresses()->at(i).first);
-	}
+	// 這邊移到instrument input handler去，加速案下的速度
+	//for (int i = 0; i < keyboardState->GetPresses()->size(); i++) {
+	//	handleKeyDown(inputState, keyboardState->GetPresses()->at(i).first);
+	//}
 
 	for (int i = 0; i < keyboardState->GetUps()->size(); i++) {
 		handleKeyUp(inputState, keyboardState->GetUps()->at(i));

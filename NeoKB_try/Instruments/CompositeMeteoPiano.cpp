@@ -25,7 +25,12 @@ CompositeMeteoPiano::CompositeMeteoPiano(vector<string>& args) : MeteoPiano(args
 
 int CompositeMeteoPiano::SetHost(GameHost * h)
 {
-	return meteoPiano->SetHost(h);
+	meteoPiano->SetHost(h);
+
+	instrumentInputHandler = new InstrumentInputHandler(GetMeteoPiano());
+	instrumentInputHandler->Initialize(h);
+
+	return 0;
 }
 
 PitchBindingSet * CompositeMeteoPiano::GetDefaultPitchBindingSet(int variant)
@@ -94,13 +99,18 @@ VirtualMeteoPiano * CompositeMeteoPiano::GetVirtualMeteoPiano()
 	return virtualMeteoPiano;
 }
 
+MeteoPiano * CompositeMeteoPiano::GetMeteoPiano()
+{
+	return meteoPiano;
+}
+
 int CompositeMeteoPiano::loadAndMapSamples()
 {
 	// load的時候就會add child，就會執行了，為什麼這邊要讓他們在執行一次？
-	if (GetLoadState() == LoadState::Loaded) {
-		meteoPiano->LoadAndMapSamples();
-		virtualMeteoPiano->LoadAndMapSamples();
-	}
+	//if (GetLoadState() == LoadState::Loaded) {
+	//	meteoPiano->LoadAndMapSamples();
+	//	virtualMeteoPiano->LoadAndMapSamples();
+	//}
 	return 0;
 }
 

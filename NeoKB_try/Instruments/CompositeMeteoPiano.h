@@ -4,6 +4,9 @@
 
 #include "MeteoPiano.h"
 #include "VirtualMeteoPiano.h"
+#include "Input/Handlers/InstrumentInputHandler.h"
+
+using namespace Instruments::Input::Handlers;
 
 
 namespace Instruments {
@@ -23,6 +26,9 @@ namespace Instruments {
 
 		/* ----------------------- Instrument.h ----------------------- */
 
+		/// <summary>
+		/// 這邊要建立instant keyboard input handler，加到game host裡面，讓他串到keyboard上，這樣keyboard一收到key down就可以立刻到這邊把聲音播出來
+		///	</summary>
 		virtual int SetHost(GameHost* h);
 
 		virtual PitchBindingSet* GetDefaultPitchBindingSet(int variant = 0);
@@ -67,6 +73,7 @@ namespace Instruments {
 
 		VirtualMeteoPiano* GetVirtualMeteoPiano();
 
+		MeteoPiano* GetMeteoPiano();
 
 	protected:
 
@@ -74,6 +81,8 @@ namespace Instruments {
 		MeteoPiano* meteoPiano = nullptr;
 
 		VirtualMeteoPiano* virtualMeteoPiano = nullptr;
+
+		InstrumentInputHandler* instrumentInputHandler = nullptr;
 
 		/// <summary>
 		///	照理來說這個會在load on complete時執行，應該piano和virtual piano都會執行一次，為什麼這邊還要特別在讓他們執行一次？

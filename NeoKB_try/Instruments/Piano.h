@@ -68,7 +68,6 @@ namespace Instruments {
 		///	</summary>
 		virtual vector<KeyBinding*>* GetDefaultkeyBindings(int variant = 0);
 
-
 		virtual int SwitchSoundBindings(TSoundBindingSet<Pitch>* sBindingSet);
 
 
@@ -81,6 +80,11 @@ namespace Instruments {
 		virtual int ControlSustainPedal(bool down);
 
 		virtual int MoveOctave(PianoPitchMovement m) = 0;
+
+		/// <summary>
+		/// 在keyboard輸入瞬間立刻執行的on key down，避免鋼琴音有延遲
+		///	</summary>
+		virtual int OnDirectKeyDown(pair<PianoAction, int> action);
 
 	protected:
 

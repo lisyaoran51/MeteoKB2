@@ -377,6 +377,11 @@ int Piano::ControlSustainPedal(bool down)
 	return 0;
 }
 
+int Piano::OnDirectKeyDown(pair<PianoAction, int> action)
+{
+	return OnKeyDown(action);
+}
+
 int Piano::resetState()
 {
 	map<PianoAction, bool>::iterator it;
