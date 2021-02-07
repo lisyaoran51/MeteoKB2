@@ -2547,3 +2547,108 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 	另外piano在把輸入轉換到sound的時候，應該要先轉換到pitch，在從pitch轉換到sound，程式會比較乾淨
 	
 	試跑以後，出現push game over message以後會當掉
+	
+1/25
+	complie bass的時候，要把bass.so和bass_fx.so複製到/usr/local/lib去，才能執行 -lbass flag
+	sudo cp libbass* /usr/local/lib
+	跑程式的時候，要讓城市可以動態連到library，所以要放到/usr/lib去
+	sudo cp libbass* /usr/lib
+	
+	用pi0跑匯Segment fault，研究一下發生什麼事
+	找到問題了，是再MeteoBluetoothPhoneV1之後就會當掉
+	bluetooth sdp執行會出錯 segment fault
+	https://raspberrypi.stackexchange.com/questions/41776/failed-to-connect-to-sdp-server-on-ffffff000000-no-such-file-or-directory
+	要把bluetoothd改成compat
+	每次開機都要sudo chmod 777 /var/run/sdp
+
+1/26	
+	bluetooth device改得差不多以後，就來試gatt
+	
+	目前把一些bleconfd的code補上去，在onread的時候就會有一些反應，可以執行到callback，但是像bleconfd這麼多的attribute，寫入寫出的rpc handler就還沒寫進去
+	
+	把start beacon加進去以後，就不用自己輸入sudo hciconfig hci0 leadv 0，可以直接連線，而且有一些log
+	接下來要看看怎麼把sttribute寫進去，然後怎麼接到data handler
+	
+	大部分程式還是在rpc server和gatt server裡面
+	
+2/2
+	發現pi zero有點跑不動update thread，一秒只能跑8次
+	
+	4 : GameThread::processFrame() : [InputThread] frame rate = 674
+	4 : GameThread::processFrame() : [DrawThread] frame rate = 11
+	4 : GameThread::processFrame() : [UpdateThread] frame rate = 7
+	4 : GameThread::processFrame() : [AudioThread] frame rate = 103
+
+	很大問題是
+	[MeteorEventProcessorMaster] update cost time = [19015].
+	花太多時間了
+	4 : MeteorEventProcessorMaster::update() : event processors [98].
+	每次大概要檢查100個物件，檢查兩次
+	
+	---
+	4 : MeteorEventProcessorMaster::update() : [MeteorEventProcessorMaster] update cost time = [154].
+	4 : MeteorEventProcessorMaster::update() : event processors [0].
+	4 : MeteorEventProcessorMaster::update() : [eventProcessorFilter] update cost time = [26].
+	4 : Updatable::UpdateSubTree() : [MeteorEventProcessorMaster] update cost time = [9776].
+	就算沒有物件，MeteorEventProcessorMaster還是會花很多時間去檢查，可能是別的地方有問題
+	
+	eventProcessorFilter也不花時間，所以應該是GetItemsContainPeriods花太多時間
+	
+	除此之外，input manger也會花幾百us，也有點花時間
+	
+	另外一個period裡面沒幾個因，卻有近百個物件，可能要再根據物件性質去分類抓取，才不會一值浪費時間
+	periods的資料結構應該不能用multimap，這樣遍歷的時候太花時間，要再改結構
+	get period通常也只會抓到3個period，算是有擷取出整首歌一小部分的物件來做處理，只要把multimap改掉，再把物件依類型做分類，速度就會快很多
+	
+	
+	---
+	pi zero overclock
+	https://www.twblogs.net/a/5bc0daf22b717711c923fb95
+	arm_freq=1100
+	over_voltage=8
+	sdram_freq=500
+	sdram_over_voltage=2
+	force_turbo=1
+	boot_delay=1
+	
+	https://github.com/RetroPie/RetroPie-Docs/blob/master/docs/Overclocking.md
+	arm_freq=1000
+	gpu_freq=500
+	core_freq=500
+	sdram_freq=500
+	sdram_schmoo=0x02000020
+	over_voltage=6 (default)
+	over_voltage_sdram=2
+	
+	超頻教學(下面有網友分享設定)
+	https://www.youtube.com/watch?v=3ndgLXz4e90
+	
+	但是開了overclock好像會讓g++出現 internal compiler error: Segmentation fault
+	
+	---
+	
+	另外還有一個解決辦法要做，就是要把ekyboard input直接送到piano，中間不經過update thread，這樣update thread可以跑慢一點，只要input thread夠快就好
+	
+	---
+	
+	filter應該要改成直接把布用的event刪掉，可以快很多，部過遊戲中還是要及時處理少數事件
+	
+	
+2/3
+
+	已經做這麼多優化，流光還是會卡卡的，每次播放音效的時候就會頓一下
+	
+2/4
+	print log大概花2000~8000us的時間，所以之後要把進行中的log全部移掉，避免減慢速度
+	
+	bass的play花費時間浮動很大，從100~5000us都有
+	
+2/5
+	judgement全都不見了，之後要檢查一下
+	播大量sample的瞬間可能會發生segment fault，可能是沒有照正常播放方式的關係(播放全部都在audio thread做)
+	
+2/7
+	input manager裡面花最多時間的就是updateInputQueue 
+	4 : InputManager::handleNewState() : [PianoInputManager] updateInputQueue cost time = [29].
+	4 : InputManager::handleNewState() : [UserInputManager] updateInputQueue cost time = [163].
+	4 : InputManager::handleNewState() : [MeteorInputManager] updateInputQueue cost time = [60].
