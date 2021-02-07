@@ -58,7 +58,7 @@ int InstrumentInputHandler::HandleState(InputState * inputEvent)
 			
 		}
 		else {
-			LOG(LogLevel::Debug) << "InstrumentInputHandler::HandleState() : key binding [" << newKey.first << "] not found.";
+			LOG(LogLevel::Debug) << "InstrumentInputHandler::HandleState() : key binding [" << (int)newKey.first << "] not found.";
 		}
 	}
 
