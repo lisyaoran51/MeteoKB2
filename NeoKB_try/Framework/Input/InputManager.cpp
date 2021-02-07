@@ -65,7 +65,7 @@ int InputManager::update()
 
 int InputManager::handleNewState(InputState * state)
 {
-	
+	system_clock::time_point systemStartTime = system_clock::now();
 
 	bool hasNewKeyboardState = !state->GetKeyboardState()->CheckIsEmpty();
 	bool hasNewPanelState = !state->GetPanelState()->CheckIsEmpty();
@@ -80,12 +80,21 @@ int InputManager::handleNewState(InputState * state)
 	LOG(LogLevel::Depricated) << "InputManager::handleNewState(): delete last state is [" << last->GetLastState() << "], state->bt is [" << last->GetBluetoothState() << "], by [" << GetTypeName() << "].";
 	currentState->SetLastState(last);
 
+	system_clock::time_point systemCurrentTime = system_clock::now();
+	LOG(LogLevel::Debug) << "InputManager::handleNewState() : [" << GetTypeName() << "] checking new state cost time = [" << duration_cast<microseconds>(systemCurrentTime - systemStartTime).count() << "].";
+
+
 	LOG(LogLevel::Depricated) << "InputManager::handleNewState(): setting last state.";
+
+	systemStartTime = system_clock::now();
 
 	//unique_lock<mutex> uLock(TreeMutex1);
 	updateInputQueue(currentState);
 
-	
+	systemCurrentTime = system_clock::now();
+	LOG(LogLevel::Debug) << "InputManager::handleNewState() : [" << GetTypeName() << "] updateInputQueue cost time = [" << duration_cast<microseconds>(systemCurrentTime - systemStartTime).count() << "].";
+
+	systemStartTime = system_clock::now();
 
 	if (hasNewKeyboardState)
 		updateKeyboardEvents(currentState);
@@ -95,6 +104,10 @@ int InputManager::handleNewState(InputState * state)
 
 	if (hasNewBluetoothState)
 		updateBluetoothEvents(currentState);
+	
+	systemCurrentTime = system_clock::now();
+	LOG(LogLevel::Debug) << "InputManager::handleNewState() : [" << GetTypeName() << "] update Events cost time = [" << duration_cast<microseconds>(systemCurrentTime - systemStartTime).count() << "].";
+
 
 	return 0;
 }
