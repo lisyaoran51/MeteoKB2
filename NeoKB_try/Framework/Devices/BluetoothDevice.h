@@ -25,22 +25,22 @@ namespace Devices{
 		virtual bool CheckFileSegmentMessageOutputClear() = 0;
 
 		/// <summary>
-		/// 寫入sm檔時的callback
+		/// 寫入sm檔時的callback，改成擺在request裡
 		/// </summary>
-		virtual int AddOnStartWritingSmFile(MtoObject* callableObject, function<int(string)> callback, string name) = 0;
-		virtual int AddOnWriteSmFileSuccess(MtoObject* callableObject, function<int(string)> callback, string name) = 0;
+		//virtual int AddOnStartWritingSmFile(MtoObject* callableObject, function<int(string)> callback, string name) = 0;
+		//virtual int AddOnWriteSmFileSuccess(MtoObject* callableObject, function<int(string)> callback, string name) = 0;
 
 		/// <summary>
-		/// 寫入新音色時的callback
+		/// 寫入新音色時的callback，改成擺在request裡
 		/// </summary>
-		virtual int AddOnStartWritingSoundFilePackage(MtoObject* callableObject, function<int(string)> callback, string name) = 0;
-		virtual int AddOnWriteSoundFilePackageSuccess(MtoObject* callableObject, function<int(string)> callback, string name) = 0;
+		//virtual int AddOnStartWritingSoundFilePackage(MtoObject* callableObject, function<int(string)> callback, string name) = 0;
+		//virtual int AddOnWriteSoundFilePackageSuccess(MtoObject* callableObject, function<int(string)> callback, string name) = 0;
 
 		/// <summary>
-		/// 寫入新主程式時的callback
+		/// 寫入新主程式時的callback，改成擺在request裡
 		/// </summary>
-		virtual int AddOnStartWritingProgram(MtoObject* callableObject, function<int(string)> callback, string name) = 0;
-		virtual int AddOnWriteProgramSuccess(MtoObject* callableObject, function<int(string)> callback, string name) = 0;
+		//virtual int AddOnStartWritingProgram(MtoObject* callableObject, function<int(string)> callback, string name) = 0;
+		//virtual int AddOnWriteProgramSuccess(MtoObject* callableObject, function<int(string)> callback, string name) = 0;
 
 	protected:
 

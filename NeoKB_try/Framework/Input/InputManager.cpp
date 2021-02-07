@@ -51,7 +51,7 @@ int InputManager::update()
 		handleNewState(distinctInputStates->at(i));
 	}
 	systemCurrentTime = system_clock::now();
-	LOG(LogLevel::Debug) << "InputManager::update() : [" << GetTypeName() << "] handleNewState cost time = [" << duration_cast<microseconds>(systemCurrentTime - systemStartTime).count() << "].";
+	LOG(LogLevel::Finest) << "InputManager::update() : [" << GetTypeName() << "] handleNewState cost time = [" << duration_cast<microseconds>(systemCurrentTime - systemStartTime).count() << "].";
 
 
 	LOG(LogLevel::Depricated) << "InputManager::update(): after handling states.";
@@ -81,7 +81,7 @@ int InputManager::handleNewState(InputState * state)
 	currentState->SetLastState(last);
 
 	system_clock::time_point systemCurrentTime = system_clock::now();
-	LOG(LogLevel::Debug) << "InputManager::handleNewState() : [" << GetTypeName() << "] checking new state cost time = [" << duration_cast<microseconds>(systemCurrentTime - systemStartTime).count() << "].";
+	LOG(LogLevel::Finest) << "InputManager::handleNewState() : [" << GetTypeName() << "] checking new state cost time = [" << duration_cast<microseconds>(systemCurrentTime - systemStartTime).count() << "].";
 
 
 	LOG(LogLevel::Depricated) << "InputManager::handleNewState(): setting last state.";
@@ -92,7 +92,7 @@ int InputManager::handleNewState(InputState * state)
 	updateInputQueue(currentState);
 
 	systemCurrentTime = system_clock::now();
-	LOG(LogLevel::Debug) << "InputManager::handleNewState() : [" << GetTypeName() << "] updateInputQueue cost time = [" << duration_cast<microseconds>(systemCurrentTime - systemStartTime).count() << "].";
+	LOG(LogLevel::Finest) << "InputManager::handleNewState() : [" << GetTypeName() << "] updateInputQueue cost time = [" << duration_cast<microseconds>(systemCurrentTime - systemStartTime).count() << "].";
 
 	systemStartTime = system_clock::now();
 
@@ -106,7 +106,7 @@ int InputManager::handleNewState(InputState * state)
 		updateBluetoothEvents(currentState);
 	
 	systemCurrentTime = system_clock::now();
-	LOG(LogLevel::Debug) << "InputManager::handleNewState() : [" << GetTypeName() << "] update Events cost time = [" << duration_cast<microseconds>(systemCurrentTime - systemStartTime).count() << "].";
+	LOG(LogLevel::Finest) << "InputManager::handleNewState() : [" << GetTypeName() << "] update Events cost time = [" << duration_cast<microseconds>(systemCurrentTime - systemStartTime).count() << "].";
 
 
 	return 0;
@@ -118,8 +118,6 @@ vector<InputState*>* InputManager::getPendingState(vector<InputState*>* pStates)
 
 		vector<InputState*>* inputHandlerPendingState;
 		inputHandlerPendingState = getInputHandlers()->at(i)->GetPendingStates();
-
-
 
 		if (inputHandlerPendingState->size() > 0) {
 			pStates->reserve(inputHandlerPendingState->size());

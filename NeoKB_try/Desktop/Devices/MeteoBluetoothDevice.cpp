@@ -6,7 +6,7 @@ using namespace Desktop::Devices;
 using namespace Games::Output::Bluetooths;
 
 
-MeteoBluetoothDevice::MeteoBluetoothDevice(MeteoBluetoothPhoneV1 * mBluetoothPhone)
+MeteoBluetoothDevice::MeteoBluetoothDevice(MeteoBluetoothPhoneV2 * mBluetoothPhone)
 {
 	meteoBluetoothPhone = mBluetoothPhone;
 	mBluetoothPhone->Initialize();
@@ -17,37 +17,6 @@ bool MeteoBluetoothDevice::CheckFileSegmentMessageOutputClear()
 	// TODO: meteoBluetoothPhone->CheckFileSegmentMessageOutputClear()
 	LOG(LogLevel::Error) << "MeteoBluetoothDevice::CheckFileSegmentMessageOutputClear() : not implemented. ";
 	return false;
-}
-
-int MeteoBluetoothDevice::AddOnStartWritingSmFile(MtoObject * callableObject, function<int(string)> callback, string name)
-{
-	return meteoBluetoothPhone->AddOnStartWritingSmFile(callableObject, callback, name);
-}
-
-int MeteoBluetoothDevice::AddOnWriteSmFileSuccess(MtoObject * callableObject, function<int(string)> callback, string name)
-{
-	LOG(LogLevel::Depricated) << "MeteoBluetoothDevice::AddOnWriteSmFileSuccess() : api access setup. ";
-	return meteoBluetoothPhone->AddOnWriteSmFileSuccess(callableObject, callback, name);
-}
-
-int MeteoBluetoothDevice::AddOnStartWritingSoundFilePackage(MtoObject * callableObject, function<int(string)> callback, string name)
-{
-	return meteoBluetoothPhone->AddOnStartWritingSoundFilePackage(callableObject, callback, name);
-}
-
-int MeteoBluetoothDevice::AddOnWriteSoundFilePackageSuccess(MtoObject * callableObject, function<int(string)> callback, string name)
-{
-	return meteoBluetoothPhone->AddOnWriteSoundFilePackageSuccess(callableObject, callback, name);
-}
-
-int MeteoBluetoothDevice::AddOnStartWritingProgram(MtoObject * callableObject, function<int(string)> callback, string name)
-{
-	return meteoBluetoothPhone->AddOnStartWritingProgram(callableObject, callback, name);
-}
-
-int MeteoBluetoothDevice::AddOnWriteProgramSuccess(MtoObject * callableObject, function<int(string)> callback, string name)
-{
-	return meteoBluetoothPhone->AddOnWriteProgramSuccess(callableObject, callback, name);
 }
 
 int MeteoBluetoothDevice::readFromDevice()

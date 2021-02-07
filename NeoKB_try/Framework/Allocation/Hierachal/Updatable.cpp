@@ -78,7 +78,7 @@ bool Updatable::UpdateSubTree()
 
 
 	system_clock::time_point currentTime = system_clock::now();
-	LOG(LogLevel::Debug) << "Updatable::UpdateSubTree() : [" << GetTypeName() << "] update cost time = [" << duration_cast<microseconds>(currentTime - startTime).count() << "].";
+	LOG(LogLevel::Finest) << "Updatable::UpdateSubTree() : [" << GetTypeName() << "] update cost time = [" << duration_cast<microseconds>(currentTime - startTime).count() << "].";
 
 
 	LOG(LogLevel::Depricated) << "Updatable::UpdateSubTree() : [" << GetTypeName() << "] try get new child list.";

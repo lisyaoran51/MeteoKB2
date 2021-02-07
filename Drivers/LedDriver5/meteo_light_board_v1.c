@@ -73,6 +73,7 @@ static char *msg=NULL;
 #define NA_PIN 22
 #define NB_PIN 23
 
+// 之後要改一下這邊，pin應該是這樣才對，要把switch row sequently給改成相反的
 //#define DECODE_A_PIN 17
 //#define DECODE_B_PIN 27
 //#define DECODE_C_PIN 22
@@ -332,7 +333,7 @@ void makemap() {
 	}
 
 	for (i = 0; i < 1; i++) {
-		spi_led.map[8][i] = true;
+		spi_led.map[i][i] = true;
 	}
 
 

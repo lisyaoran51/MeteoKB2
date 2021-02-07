@@ -2,7 +2,7 @@
 #define METEO_BLUETOOTH_DEVICE_H
 
 #include "../../Framework/Devices/BluetoothDevice.h"
-#include "MeteoBluetoothPhoneV1.h"
+#include "MeteoBluetoothPhoneV2.h"
 
 using namespace Framework::Devices;
 
@@ -18,13 +18,13 @@ namespace Devices {
 
 	class MeteoBluetoothDevice : public BluetoothDevice {
 
-		MeteoBluetoothPhoneV1* meteoBluetoothPhone = nullptr;
+		MeteoBluetoothPhoneV2* meteoBluetoothPhone = nullptr;
 
 		int _debugCount = 0;
 
 	public:
 
-		MeteoBluetoothDevice(MeteoBluetoothPhoneV1* mBluetoothPhone);
+		MeteoBluetoothDevice(MeteoBluetoothPhoneV2* mBluetoothPhone);
 
 		/// <summary>
 		/// 看有沒有沒丟完的file segment message，這個還沒寫，之後要連到MeteoBluetoothPhoneV1去檢查
@@ -32,22 +32,22 @@ namespace Devices {
 		virtual bool CheckFileSegmentMessageOutputClear();
 
 		/// <summary>
-		/// 寫入sm檔時的callback
+		/// 寫入sm檔時的callback，改成擺在request裡
 		/// </summary>
-		virtual int AddOnStartWritingSmFile(MtoObject* callableObject, function<int(string)> callback, string name);
-		virtual int AddOnWriteSmFileSuccess(MtoObject* callableObject, function<int(string)> callback, string name);
+		//virtual int AddOnStartWritingSmFile(MtoObject* callableObject, function<int(string)> callback, string name);
+		//virtual int AddOnWriteSmFileSuccess(MtoObject* callableObject, function<int(string)> callback, string name);
 
 		/// <summary>
-		/// 寫入新音色時的callback
+		/// 寫入新音色時的callback，改成擺在request裡
 		/// </summary>
-		virtual int AddOnStartWritingSoundFilePackage(MtoObject* callableObject, function<int(string)> callback, string name);
-		virtual int AddOnWriteSoundFilePackageSuccess(MtoObject* callableObject, function<int(string)> callback, string name);
+		//virtual int AddOnStartWritingSoundFilePackage(MtoObject* callableObject, function<int(string)> callback, string name);
+		//virtual int AddOnWriteSoundFilePackageSuccess(MtoObject* callableObject, function<int(string)> callback, string name);
 
 		/// <summary>
-		/// 寫入新主程式時的callback
+		/// 寫入新主程式時的callback，改成擺在request裡
 		/// </summary>
-		virtual int AddOnStartWritingProgram(MtoObject* callableObject, function<int(string)> callback, string name);
-		virtual int AddOnWriteProgramSuccess(MtoObject* callableObject, function<int(string)> callback, string name);
+		//virtual int AddOnStartWritingProgram(MtoObject* callableObject, function<int(string)> callback, string name);
+		//virtual int AddOnWriteProgramSuccess(MtoObject* callableObject, function<int(string)> callback, string name);
 
 	protected:
 

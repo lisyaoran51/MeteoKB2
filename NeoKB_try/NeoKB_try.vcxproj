@@ -23,9 +23,11 @@
     <ClCompile Include="Desktop\Devices\MeteoBitbangDisplayDevice.cpp" />
     <ClCompile Include="Desktop\Devices\MeteoBluetoothDevice.cpp" />
     <ClCompile Include="Desktop\Devices\MeteoBluetoothPhoneV1.cpp" />
+    <ClCompile Include="Desktop\Devices\MeteoBluetoothPhoneV2.cpp" />
     <ClCompile Include="Desktop\Devices\MeteoKeyboardDevice.cpp" />
     <ClCompile Include="Desktop\Devices\MeteoLightBoardV1.cpp" />
     <ClCompile Include="Desktop\Devices\MeteoPacketConverterV1.cpp" />
+    <ClCompile Include="Desktop\Devices\MeteoPacketConverterV2.cpp" />
     <ClCompile Include="Desktop\Devices\MeteoPanelBoardV1.cpp" />
     <ClCompile Include="Desktop\Devices\MeteoPanelDevice.cpp" />
     <ClCompile Include="Desktop\Devices\MeteoSpidevDisplayDevice.cpp" />
@@ -242,6 +244,7 @@
     <ClCompile Include="Instruments\Audio\TwoStageSoundBindingSet.cpp" />
     <ClCompile Include="Instruments\CompositeMeteoPiano.cpp" />
     <ClCompile Include="Instruments\HasPitch.cpp" />
+    <ClCompile Include="Instruments\Input\Handlers\InstrumentInputHandler.cpp" />
     <ClCompile Include="Instruments\Input\PianoInputManager.cpp" />
     <ClCompile Include="Instruments\Input\PianoPitchBindingSet.cpp" />
     <ClCompile Include="Instruments\Instrument.cpp" />
@@ -354,7 +357,9 @@
     <ClInclude Include="Desktop\Devices\MeteoBitbangDisplayDevice.h" />
     <ClInclude Include="Desktop\Devices\MeteoBluetoothDevice.h" />
     <ClInclude Include="Desktop\Devices\MeteoBluetoothPhoneV1.h" />
+    <ClInclude Include="Desktop\Devices\MeteoBluetoothPhoneV2.h" />
     <ClInclude Include="Desktop\Devices\MeteoPacketConverterV1.h" />
+    <ClInclude Include="Desktop\Devices\MeteoPacketConverterV2.h" />
     <ClInclude Include="Desktop\Devices\MeteoSpidevDisplayDevice.h" />
     <ClInclude Include="Desktop\Devices\MeteoKeyboardDevice.h" />
     <ClInclude Include="Desktop\Devices\MeteoLightBoardV1.h" />
@@ -501,6 +506,7 @@
     <ClInclude Include="Games\Scheduler\Event\EventProcessor.h" />
     <ClInclude Include="Games\Scheduler\Event\EventProcessorFilter.h" />
     <ClInclude Include="Games\Scheduler\Event\EventProcessorMaster.h" />
+    <ClInclude Include="Games\Scheduler\Event\EventProcessorType.h" />
     <ClInclude Include="Games\Scheduler\Event\GameEvents\GameEvent.h" />
     <ClInclude Include="Games\Scheduler\Event\GameEvents\StartGameEvent.h" />
     <ClInclude Include="Games\Scheduler\Event\GameEvents\StopGameEvent.h" />
@@ -640,6 +646,7 @@
     <ClInclude Include="Instruments\Audio\TwoStageSoundBindingSet.h" />
     <ClInclude Include="Instruments\CompositeMeteoPiano.h" />
     <ClInclude Include="Instruments\HasPitch.h" />
+    <ClInclude Include="Instruments\Input\Handlers\InstrumentInputHandler.h" />
     <ClInclude Include="Instruments\Input\PianoAction.h" />
     <ClInclude Include="Instruments\Input\InstrumentInputManager.h" />
     <ClInclude Include="Instruments\Input\PianoInputManager.h" />
@@ -747,6 +754,9 @@
     <ClInclude Include="Util\DataStructure\BindablePointer.h" />
     <ClInclude Include="Util\DataStructure\FileSegmentMap.h" />
     <ClInclude Include="Util\DataStructure\PeriodMap.h" />
+    <ClInclude Include="Util\DataStructure\SecondPeriod.h" />
+    <ClInclude Include="Util\DataStructure\SecondPeriodList.h" />
+    <ClInclude Include="Util\DataStructure\SecondPeriodMap.h" />
     <ClInclude Include="Util\Effects\Easing.h" />
     <ClInclude Include="Util\FileSystem.h" />
     <ClInclude Include="Util\InstanceCreator.h" />
