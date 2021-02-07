@@ -30,7 +30,7 @@ Games/Timing:\
 Games/UI:\
 Games/Users:\
 \
-Instruments:Instruments/Audio:Instruments/Audio/Format:Instruments/Input:\
+Instruments:Instruments/Audio:Instruments/Audio/Format:Instruments/Input:Instruments/Input/Handlers:\
 \
 Util:Util/DataStructure:\
 \
@@ -84,7 +84,7 @@ INCLUDE = -IFramwork -IFramework/Allocation -IFramework/Allocation/Hierachal -IF
 -IGames/UI \
 -IGames/Users \
 \
--IInstruments -IInstruments/Audio -IInstruments/Audio/Format -IInstruments/Input \
+-IInstruments -IInstruments/Audio -IInstruments/Audio/Format -IInstruments/Input -IInstruments/Input/Handlers \
 \
 -IUtil -IUtil/DataStructure \
 \
