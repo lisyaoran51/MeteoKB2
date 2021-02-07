@@ -41,19 +41,24 @@ int InputManager::update()
 	systemStartTime = system_clock::now();
 	vector<InputState*>* distinctInputStates = createDistinctInputStates(&pendingStates);
 	systemCurrentTime = system_clock::now();
-	LOG(LogLevel::Debug) << "InputManager::update() : [" << GetTypeName() << "] create distinct input state cost time = [" << duration_cast<microseconds>(systemCurrentTime - systemStartTime).count() << "].";
+	LOG(LogLevel::Finest) << "InputManager::update() : [" << GetTypeName() << "] create distinct input state cost time = [" << duration_cast<microseconds>(systemCurrentTime - systemStartTime).count() << "].";
 
 	LOG(LogLevel::Depricated) << "InputManager::update():create distinct input state [" << distinctInputStates->at(0) << "] by " << GetTypeName() << ".";
 
+	systemStartTime = system_clock::now();
 	//LOG(LogLevel::Debug) << "InputManager::update() : distinct input states size = [" << distinctInputStates->size() << "].";
 	for (int i = 0; i < distinctInputStates->size(); i++) {
 		handleNewState(distinctInputStates->at(i));
 	}
+	systemCurrentTime = system_clock::now();
+	LOG(LogLevel::Debug) << "InputManager::update() : [" << GetTypeName() << "] handleNewState cost time = [" << duration_cast<microseconds>(systemCurrentTime - systemStartTime).count() << "].";
+
 
 	LOG(LogLevel::Depricated) << "InputManager::update(): after handling states.";
 
 	delete distinctInputStates;
 	LOG(LogLevel::Depricated) << "InputManager::update(): delete states.";
+
 
 	return 0;
 }
