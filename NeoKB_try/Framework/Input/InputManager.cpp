@@ -34,7 +34,7 @@ int InputManager::update()
 		LOG(LogLevel::Finest) << "InputManager::update(): get [" << pendingStates[0] << "] states by " << GetTypeName() << ".";
 
 	system_clock::time_point systemCurrentTime = system_clock::now();
-	LOG(LogLevel::Finest) << "InputManager::update() : [" << GetTypeName() << "] get pending state cost time = [" << duration_cast<microseconds>(systemCurrentTime - systemStartTime).count() << "].";
+	LOG(LogLevel::Debug) << "InputManager::update() : [" << GetTypeName() << "] get pending state cost time = [" << duration_cast<microseconds>(systemCurrentTime - systemStartTime).count() << "].";
 
 
 	/* 這邊本來要做create distinct states，這樣可以確保舊的輸入沒被更動，經過這個以後panel.keyboard.bt都部會是null，但裡面會是沒有東西的 */
@@ -540,7 +540,7 @@ int InputManager::iterateUpdateInputQueue(Triggerable * temp, vector<Triggerable
 
 		Triggerable* tempChild = childs[i]->Cast<Triggerable>();
 
-		if (tempChild->GetIsInputable())
+		if (tempChild->GetIsInputReceivable())
 			tQueue->push_back(tempChild);
 		iterateUpdateInputQueue(tempChild, tQueue);
 	}
