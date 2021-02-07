@@ -51,7 +51,7 @@ int InputManager::update()
 		handleNewState(distinctInputStates->at(i));
 	}
 	systemCurrentTime = system_clock::now();
-	LOG(LogLevel::Debug) << "InputManager::update() : [" << GetTypeName() << "] handleNewState cost time = [" << duration_cast<microseconds>(systemCurrentTime - systemStartTime).count() << "].";
+	LOG(LogLevel::Finest) << "InputManager::update() : [" << GetTypeName() << "] handleNewState cost time = [" << duration_cast<microseconds>(systemCurrentTime - systemStartTime).count() << "].";
 
 
 	LOG(LogLevel::Depricated) << "InputManager::update(): after handling states.";
