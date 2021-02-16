@@ -276,6 +276,9 @@ int MeteorResult::tagSectionData(vector<ControlPoint*>& controlPoints)
 	bool useOriginalPedalData = workingSm.GetValue()->GetSm()->GetSmInfo()->hasPedalData &&
 								piano->GetSustainType() == SustainType::GameControllingSustain;
 
+
+
+
 	int tempSectionIndex = 0;
 
 	for (int i = 0; i < controlPoints.size(); i++) {
@@ -326,9 +329,13 @@ string MeteorResult::encodeToRecordFile(vector<ControlPoint*>& controlPoints)
 
 	}
 
+	LOG(LogLevel::Debug) << "MeteorResult::encodeToRecordFile : create file stream.";
 	
 	fileName = string(randomFileName, 8) + string(".mr");
 	fstream* stream = storage->GetStream(string("temp/mr/") + fileName, FileAccess::Write, FileMode::Create);
+
+	LOG(LogLevel::Debug) << "MeteorResult::encodeToRecordFile : create file stream over.";
+
 
 	/* 檔案格式 */
 	*stream << "simple file format v0\n";
@@ -545,7 +552,7 @@ int MeteorResult::onEntering(Scene * lastScene)
 
 	/* 寫入遊戲紀錄 */
 	// 這邊之後要改成發request
-	//string recordFilePath = writeGameRecord();
+	string recordFilePath = writeGameRecord();
 	//
 	//MeteoFileBluetoothMessage* recordFileMessage = new MeteoFileBluetoothMessage(MeteoCommand::PlayRecordFileSegment, recordFilePath);
 	//outputManager->PushMessage(recordFileMessage);
