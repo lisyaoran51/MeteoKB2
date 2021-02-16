@@ -2652,3 +2652,78 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 	4 : InputManager::handleNewState() : [PianoInputManager] updateInputQueue cost time = [29].
 	4 : InputManager::handleNewState() : [UserInputManager] updateInputQueue cost time = [163].
 	4 : InputManager::handleNewState() : [MeteorInputManager] updateInputQueue cost time = [60].
+	
+2/15
+	bleconfd收到資料時只是叫另一個thread處理
+	
+	藍芽thread會卡在mainloop_run，直到斷線才會繼續
+	
+	一職notify會讓記憶體爆掉，訊息丟出去的時候會先存到一個queue李
+	att.c :
+	 1255         result = queue_push_tail(att->write_queue, op);
+	 
+	不過 write_queue被att.c給封裝起來，外面拿步道，只能重改bluez程式然後自己compile
+	
+	在att.c最後加一行
+	int bt_att_write_queue_size(struct bt_att *att){
+		
+		return queue_length(att->write_queue);
+	}
+	
+	att.h加一行
+	int bt_att_write_queue_size(struct bt_att *att);
+	
+	在gatt-server.c加一行
+	int bt_gatt_server_get_write_queue_length(struct bt_gatt_server *server){
+		return bt_att_write_queue_size(server->att);
+	}
+	
+	在gatt-server.h加一行
+	int bt_gatt_server_get_write_queue_length(struct bt_gatt_server *server);
+	
+	然後重新compile bluez，在拿他的libshared-mainloop.a和uuid.o出來用
+	
+	必須把bluez升級到5.47以上，不然mtu size只有23
+	https://github.com/IanHarvey/bluepy/issues/375
+	
+	結果還是只收的到20 byte，要研究一下怎麼樣收更多
+		
+2/16
+
+	連接時client會抓取封包大小
+	https://snowyang.com/2020/12/11/Wireless/BLE/MTU%20exchange/
+	使用bt_gatt_exchange_mtu，由client執行，只能執行一次
+	
+	只有nrf connec這個app可以改mtu size
+	https://github.com/nkolban/esp32-snippets/issues/945
+	
+	server端在bt_gatt_server_new裏面有收到BT_ATT_OP_MTU_REQ的callback，如果要修改exchange mtu的話，要把exchange_mtu_cb這個callback改一下。
+	SERVER端最大MTU SIZE就是在bt_gatt_server_new的時候設定的，應該不能設定到517以上，部過iphone最大也只有185，所以可以直接把mtu size設成 128 + header size 就好
+	
+	iphone的傳送間隔式15ms，傳輸速度大概是8kbps，10m要傳12分鐘
+	
+	如果用壓縮的方式，可以把6m降到1m
+	export GZIP=-9
+	tar cvzf file.tar.gz /path/to/directory
+	
+	
+	gatt大概沒有問題，琴到手機用notify，手機到琴用write，分兩個service，各用一個uuid，網路上隨機生一個就好
+	
+	另外可以再建一個service，讓琴丟密鑰給手機，手機解完丟回去，來確認身分
+	
+	gatt大概搞定，可以回來繼續寫主程式
+	
+	待完成工作：
+		各種request、下載檔案後移動解壓縮、gatt加入程式(bt classic刪掉)、遊戲紀錄存成sm檔
+	
+	之前沒完成的工作：
+		重播存檔、跳轉時反向觸發特效、刪除所有memory leak、琴音分為全長和AB段、手動踏板modifier、關機、
+		sbs音量設定、藍芽操控播音、紀錄每個modifier到藍芽架構裡、藍芽傳黨、開機燈號、當機燈號、storage分流、讀取音符音量max127、erupt的黑鍵位置錯誤
+		getstream檢查資料夾存在、
+		mcu、關閉wifi、daemon、OS設定、me555、
+	
+	
+	
+	先寫遊戲紀錄
+	
+	
