@@ -541,6 +541,9 @@ int MeteorResult::onEntering(Scene * lastScene)
 	scoreMessage->SetContextInJson(context);
 	scoreMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
 
+
+	LOG(LogLevel::Debug) << "MeteorResult::onEntering : Set Message Over.";
+
 	outputManager->PushMessage(scoreMessage);
 	
 
