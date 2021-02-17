@@ -233,7 +233,7 @@ int SimpleSmDecoder::handleNoteControlPoints(Sm<Event>* sm, string & line)
 			newMarkControlPoint = new NoteControlPoint(
 				pitch,
 				time,
-				noteLength
+				noteLength >= 0 ? noteLength : 0
 			);
 
 			if (volume <= 0 || volume > 127)
@@ -247,20 +247,20 @@ int SimpleSmDecoder::handleNoteControlPoints(Sm<Event>* sm, string & line)
 			{
 			case -1:
 				inputKey = InputKey::SustainPedal;
-				newMarkControlPoint = new InputKeyControlPoint(inputKey, inputValue, time, noteLength);
+				newMarkControlPoint = new InputKeyControlPoint(inputKey, inputValue, time, noteLength >= 0 ? noteLength : 0);
 				break;
 			case -2:
 				inputKey = InputKey::LowerOctave; // 這邊程式邏輯有問題，遊戲中升降8度是不能夠手動控制的，只能電腦自動控制
 												  // 應該要放在Event section裡面
-				newMarkControlPoint = new InputKeyControlPoint(inputKey, inputValue, time, noteLength);
+				newMarkControlPoint = new InputKeyControlPoint(inputKey, inputValue, time, noteLength >= 0 ? noteLength : 0);
 				break;
 			case -3:
 				inputKey = InputKey::RaiseOctave; // 這邊程式邏輯有問題，遊戲中升降8度是不能夠手動控制的，只能電腦自動控制
 												  // 應該要放在Event section裡面
-				newMarkControlPoint = new InputKeyControlPoint(inputKey, inputValue, time, noteLength);
+				newMarkControlPoint = new InputKeyControlPoint(inputKey, inputValue, time, noteLength >= 0 ? noteLength : 0);
 				break;
 			case -4:
-				newMarkControlPoint = new SectionStartControlPoint(sectionIndex, time, noteLength);
+				newMarkControlPoint = new SectionStartControlPoint(sectionIndex, time, noteLength >= 0 ? noteLength : 0);
 			}
 			
 		}
