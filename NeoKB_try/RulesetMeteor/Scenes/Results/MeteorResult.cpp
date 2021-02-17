@@ -474,7 +474,7 @@ string MeteorResult::encodeToRecordFile(vector<ControlPoint*>& controlPoints)
 
 	stream->close();
 
-	return string("temp/mr/") + fileName;
+	return string("MeteoRecords") + fileName;
 }
 
 MeteorResult::MeteorResult(Score * s) : Result(s), RegisterType("MeteorResult")

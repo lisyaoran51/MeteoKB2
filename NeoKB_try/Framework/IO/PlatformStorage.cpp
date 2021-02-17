@@ -144,6 +144,8 @@ fstream * PlatformStorage::GetStream(string filePath, FileAccess fileAccess, Fil
 
 		// TODO: 檢查有沒有要鍵資料夾，有的話就先見資料夾再建檔案
 
+		LOG(LogLevel::Debug) << "PlatformStorage::GetStream : get [" << locateWriteBasePath() + string("/") + filePath << "] file stream.";
+
 		if (binary) {
 			return new fstream(locateWriteBasePath() + "/" + filePath, ios::binary | ios::out | ios::trunc);
 		}
