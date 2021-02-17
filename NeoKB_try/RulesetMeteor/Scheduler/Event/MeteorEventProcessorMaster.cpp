@@ -273,6 +273,7 @@ int MeteorEventProcessorMaster::update()
 
 			if (hObject->TryJudgement() == -2) {
 				// TODO: 目前先不檢查踏板，之後要改成如果有插入踏板就要檢查踏板
+				// 應該永遠不檢查踏板，不考慮這個要素
 				if (dynamic_cast<NoteControlPointHitObject*>(hObject)) {
 					hObject->UpdateJudgement(false);
 				}
