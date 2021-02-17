@@ -332,7 +332,7 @@ string MeteorResult::encodeToRecordFile(vector<ControlPoint*>& controlPoints)
 	LOG(LogLevel::Debug) << "MeteorResult::encodeToRecordFile : create file stream.";
 	
 	fileName = string(randomFileName, 8) + string(".mr");
-	fstream* stream = storage->GetStream(string("temp/mr/") + fileName, FileAccess::Write, FileMode::Create);
+	fstream* stream = storage->GetStream(string("MeteoRecords/") + fileName, FileAccess::Write, FileMode::Create);
 
 	LOG(LogLevel::Debug) << "MeteorResult::encodeToRecordFile : create file stream over.";
 
