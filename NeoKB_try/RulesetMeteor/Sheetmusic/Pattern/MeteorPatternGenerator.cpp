@@ -155,7 +155,7 @@ int MeteorPatternGenerator::CreateOtherEvent(vector<Event*>* es)
 		vector<float> sectionEndTime;
 
 		int tempSection = 0;
-		float maxControlPointTime = -5;
+		float maxControlPointTime = 0;
 
 		for (int i = 0; i < es->size(); i++) {
 			if (es->at(i)->GetStartTime() < (tempSection + 1) * defaultSectionInterval) {
@@ -167,7 +167,7 @@ int MeteorPatternGenerator::CreateOtherEvent(vector<Event*>* es)
 					maxControlPointTime = es->at(i)->GetStartTime();
 				}
 				else {
-					LOG(LogLevel::Error) << "MeteorPatternGenerator::CreateOtherEvent() : events not sorted by time." << es->at(i)->GetStartTime();
+					LOG(LogLevel::Error) << "MeteorPatternGenerator::CreateOtherEvent() : events not sorted by time." << es->at(i)->GetStartTime() << es->at(i)->GetTypeName();
 					throw runtime_error("MeteorPatternGenerator::CreateOtherEvent() : events not sorted by time.");
 				}
 			}
