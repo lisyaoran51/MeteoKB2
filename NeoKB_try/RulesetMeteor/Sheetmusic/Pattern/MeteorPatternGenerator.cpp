@@ -154,10 +154,28 @@ int MeteorPatternGenerator::CreateOtherEvent(vector<Event*>* es)
 	if (!sm->GetSmInfo()->hasSectionData) {
 		vector<float> sectionEndTime;
 
-		int tempSection = 0;
+		/* 把每個event的小節數用時間回推出來，然後再設定進去 */
+		int maxSection = 0;
 		float maxControlPointTime = 0;
 
 		for (int i = 0; i < es->size(); i++) {
+
+			float startTime = 0;
+			if (es->at(i)->GetSourceEvent() != nullptr) {
+				startTime = es->at(i)->GetSourceEvent()->GetStartTime();
+			}
+			else {
+				startTime = es->at(i)->GetStartTime();
+			}
+
+			int tempSection = floor(startTime / defaultSectionInterval);
+
+			if (es->at(i)->Cast<MarkControlPoint>())
+				es->at(i)->Cast<MarkControlPoint>()->SetSectionIndex(tempSection);
+
+			if (tempSection > maxSection)
+				maxSection = tempSection;
+			/*
 			if (es->at(i)->GetStartTime() < (tempSection + 1) * defaultSectionInterval) {
 				
 				if(es->at(i)->Cast<MarkControlPoint>())
@@ -191,9 +209,10 @@ int MeteorPatternGenerator::CreateOtherEvent(vector<Event*>* es)
 				tempSection++;
 				i--;
 			}
+			*/
 		}
 
-		for (int i = 0; i < tempSection; i++) {
+		for (int i = 0; i < maxSection; i++) {
 			sectionEndTime.push_back((i + 1) * defaultSectionInterval);
 		}
 
