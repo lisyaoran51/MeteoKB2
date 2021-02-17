@@ -289,6 +289,12 @@ namespace Rulesets {
 				LOG(LogLevel::Finer) << "RulesetExecutor::playfieldLoad : getting [" << sm->GetEvents()->at(i)->GetStartTime() << "] " << sm->GetEvents()->at(i)->GetTypeName() << " processor into playfield " << playfield << " ... ";
 				EventProcessor<Event>* ep = getEventProcessor(sm->GetEvents()->at(i));
 
+				if (ep == nullptr)
+					continue;
+
+				LOG(LogLevel::Finer) << "RulesetExecutor::playfieldLoad : processor [" << ep << "] adding into playfield ... ";
+
+
 				// 在這邊filter event processor，只做固定的filter，及時變動的filter在遊戲進行中做
 				if (eventProcessorFilter->Filter(ep)) {
 

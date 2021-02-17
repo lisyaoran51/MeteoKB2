@@ -3,12 +3,14 @@
 #include "../RulesetExecutor.h"
 #include "../../../Util/Log.h"
 #include <iomanip>
+#include "../../Scheduler/Event/ControlPoints/NoteControlPointHitObject.h"
 
 
 using namespace Games::Rulesets::Scoring;
 using namespace Games::Rulesets;
 using namespace Util;
 using namespace std;
+using namespace Games::Schedulers::Events::ControlPoints;
 
 
 Bindable<double>* ScoreProcessor::GetTotalScore()
@@ -64,6 +66,7 @@ ScoreProcessor::ScoreProcessor(RulesetExecutor<Event>* rExecutor)
 
 	for (int i = 0; i < eventProcessors->size(); i++) {
 		if (dynamic_cast<HitObject*>(eventProcessors->at(i))) {
+		//if (dynamic_cast<NoteControlPointHitObject*>(eventProcessors->at(i))) {	// 不把踏板、升降八度計進去
 
 			maxHits++;
 
@@ -141,7 +144,7 @@ int ScoreProcessor::addUpJudgementScore(Judgement * judgement)
 	LOG(LogLevel::Depricated) << "ScoreProcessor::addUpJudgementScore : add score [" << judgement->GetResultScore() << "], total score [" 
 		<< baseScore << "], song max score [" << maxScore << "].";
 
-	LOG(LogLevel::Info) << "ScoreProcessor::addUpJudgementScore : add score [" << judgement->GetResultScore() << "], score ["
+	LOG(LogLevel::Debug) << "ScoreProcessor::addUpJudgementScore : add score [" << judgement->GetResultScore() << "], score ["
 		<< baseScore << "/" << maxScore << "], hits [" << hits - miss << "/ " << maxHits << "], combo [" 
 		<< combo->GetValue() <<"/" << highestCombo->GetValue() << "], [" << fixed << setprecision(1) << (float)baseScore / (float)maxScore * 100.f << "%], progress ["
 		<< hits << "/" << maxHits << "].";
