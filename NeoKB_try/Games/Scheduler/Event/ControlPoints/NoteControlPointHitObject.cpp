@@ -24,7 +24,7 @@ double NoteControlPointHitObject::TryJudgement()
 	double offset = GetStartTime() - GetCurrentTime();
 	double absOffset = fabs(offset);
 
-	LOG(LogLevel::Depricated) << "NoteControlPointHitObject::TryJudgement() : offset: " << offset << ", hit window: " << getHitWindow();
+	LOG(LogLevel::Debug) << "NoteControlPointHitObject::TryJudgement() : [" << (int)GetPitch() << "] [" << GetStartTime() << "] offset: " << offset << ", hit window: " << getHitWindow();
 
 	if (absOffset > getHitWindow()->GetHitWindow(HitResult::Bad)) {
 		if (offset > 0)
