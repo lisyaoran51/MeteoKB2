@@ -260,6 +260,9 @@ int MeteorEventProcessorMaster::update()
 	LOG(LogLevel::Finest) << "MeteorEventProcessorMaster::update() : [eventProcessorFilter] update cost time = [" << duration_cast<microseconds>(systemCurrentTime - systemStartTime).count() << "].";
 	*/
 
+	LOG(LogLevel::Debug) << "MeteorEventProcessorMaster::update() : filteredTempStaticEventProcessors size [" << filteredTempStaticEventProcessors.size() << "].";
+
+
 	for (int i = 0; i < filteredTempStaticEventProcessors.size(); i++) {
 
 		if (filteredTempStaticEventProcessors[i]->GetEventProcessorType() == EventProcessorType::ControlPoint) {
