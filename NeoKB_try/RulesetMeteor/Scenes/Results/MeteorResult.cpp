@@ -485,6 +485,8 @@ MeteorResult::MeteorResult(Score * s) : Result(s), RegisterType("MeteorResult")
 
 string MeteorResult::writeGameRecord()
 {
+	LOG(LogLevel::Debug) << "MeteorResult::writeGameRecord : converting to game record.";
+
 	/* 把遊戲紀錄轉存成control point */
 	vector<ControlPoint*> controlPoints;
 
