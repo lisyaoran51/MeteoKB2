@@ -265,6 +265,9 @@ int MeteorEventProcessorMaster::update()
 
 	for (int i = 0; i < filteredTempStaticEventProcessors.size(); i++) {
 
+		LOG(LogLevel::Debug) << "MeteorEventProcessorMaster::update() : traverse to [" << filteredTempStaticEventProcessors[i]->GetEvent()->GetTypeName() << "] .";
+
+
 		if (filteredTempStaticEventProcessors[i]->GetEventProcessorType() == EventProcessorType::ControlPoint) {
 
 			HitObject* hObject = dynamic_cast<HitObject*>(filteredTempStaticEventProcessors[i]);
