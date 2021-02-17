@@ -163,13 +163,29 @@ int MeteorPatternGenerator::CreateOtherEvent(vector<Event*>* es)
 				if(es->at(i)->Cast<MarkControlPoint>())
 					es->at(i)->Cast<MarkControlPoint>()->SetSectionIndex(tempSection);
 
-				if (es->at(i)->GetStartTime() >= maxControlPointTime) {
-					maxControlPointTime = es->at(i)->GetStartTime();
+				bool eventNotSortedError = false;
+				if (es->at(i)->GetSourceEvent() != nullptr) {
+					if (es->at(i)->GetSourceEvent()->GetStartTime() >= maxControlPointTime) {
+						maxControlPointTime = es->at(i)->GetSourceEvent()->GetStartTime();
+					}
+					else {
+						eventNotSortedError = true;
+					}
 				}
 				else {
+					if (es->at(i)->GetStartTime() >= maxControlPointTime) {
+						maxControlPointTime = es->at(i)->GetStartTime();
+					}
+					else {
+						eventNotSortedError = true;
+					}
+				}
+
+				if (eventNotSortedError) {
 					LOG(LogLevel::Error) << "MeteorPatternGenerator::CreateOtherEvent() : events not sorted by time." << es->at(i)->GetStartTime() << es->at(i)->GetTypeName();
 					throw runtime_error("MeteorPatternGenerator::CreateOtherEvent() : events not sorted by time.");
 				}
+				
 			}
 			else {
 				tempSection++;
