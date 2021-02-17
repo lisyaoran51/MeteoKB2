@@ -277,7 +277,8 @@ EventProcessor<Event>* MeteorRulesetExecutor::getEventProcessor(Event * e)
 	}
 	else if (processorType == "MeteorInputKeyControlPointHitObject") {
 		LOG(LogLevel::Depricated) << "MeteorRulesetExecutor::getEventProcessor : getting event MeteorInputKeyControlPointHitObject at [" << e->GetStartTime() << "]";
-		return (new MeteorInputKeyControlPointHitObject())->RegisterEvent(e);
+		//return (new MeteorInputKeyControlPointHitObject())->RegisterEvent(e);
+		return nullptr;	// input key不要做hit object，不會計分
 	}
 	else if (processorType == "PianoEventProcessor") {
 		LOG(LogLevel::Depricated) << "MeteorRulesetExecutor::getEventProcessor : getting event PianoEventProcessor at [" << e->GetStartTime() << "]";

@@ -16,6 +16,7 @@
 #include "../../Scheduler/Event/PlayfieldEvents/OctaveShiftEvent.h"
 #include "../../Scheduler/Event/TimeEvents/RepeatPracticeEvent.h"
 #include "../../Scheduler/Event/Effect/EruptEffect.h"
+#include <math.h>
 
 
 
