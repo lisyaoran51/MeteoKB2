@@ -155,7 +155,7 @@ int MeteorPatternGenerator::CreateOtherEvent(vector<Event*>* es)
 		vector<float> sectionEndTime;
 
 		int tempSection = 0;
-		float maxControlPointTime = 0;
+		float maxControlPointTime = -5;
 
 		for (int i = 0; i < es->size(); i++) {
 			if (es->at(i)->GetStartTime() < (tempSection + 1) * defaultSectionInterval) {
