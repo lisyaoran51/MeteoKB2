@@ -112,7 +112,7 @@ EventProcessorMaster::~EventProcessorMaster()
 
 int EventProcessorMaster::AddStaticEventProcessor(EventProcessor<Event>* sEventProcessor)
 {
-	LOG(LogLevel::Debug) << "EventProcessorMaster::AddStaticEventProcessor : add processor [" << sEventProcessor->GetEvent()->GetTypeName() << "] at [" << sEventProcessor->GetStartTime() << "," << sEventProcessor->GetLifeTime() << "] from event [" << sEventProcessor->GetEvent()->GetStartTime() << "].";
+	LOG(LogLevel::Depricated) << "EventProcessorMaster::AddStaticEventProcessor : add processor [" << sEventProcessor->GetEvent()->GetTypeName() << "] at [" << sEventProcessor->GetStartTime() << "," << sEventProcessor->GetLifeTime() << "] from event [" << sEventProcessor->GetEvent()->GetStartTime() << "].";
 
 
 	sEventProcessor->Attach(this);
@@ -190,7 +190,7 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 
 		for (int i = 0; i < eventProcessors.size(); i++) {
 
-			LOG(LogLevel::Debug) << "EventProcessorMaster::processEvent : this processor is for [" << eventProcessors[i]->GetEvent()->GetTypeName() << "].";
+			LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent : this processor is for [" << eventProcessors[i]->GetEvent()->GetTypeName() << "].";
 
 			if (eventProcessors[i]->GetStartTime() >= currentTime)
 				continue;

@@ -260,12 +260,12 @@ int MeteorEventProcessorMaster::update()
 	LOG(LogLevel::Finest) << "MeteorEventProcessorMaster::update() : [eventProcessorFilter] update cost time = [" << duration_cast<microseconds>(systemCurrentTime - systemStartTime).count() << "].";
 	*/
 
-	LOG(LogLevel::Debug) << "MeteorEventProcessorMaster::update() : filteredTempStaticEventProcessors size [" << filteredTempStaticEventProcessors.size() << "].";
+	LOG(LogLevel::Depricated) << "MeteorEventProcessorMaster::update() : filteredTempStaticEventProcessors size [" << filteredTempStaticEventProcessors.size() << "].";
 
 
 	for (int i = 0; i < filteredTempStaticEventProcessors.size(); i++) {
 
-		LOG(LogLevel::Debug) << "MeteorEventProcessorMaster::update() : traverse to [" << filteredTempStaticEventProcessors[i]->GetEvent()->GetTypeName() << "] .";
+		LOG(LogLevel::Depricated) << "MeteorEventProcessorMaster::update() : traverse to [" << filteredTempStaticEventProcessors[i]->GetEvent()->GetTypeName() << "] .";
 
 
 		if (filteredTempStaticEventProcessors[i]->GetEventProcessorType() == EventProcessorType::ControlPoint) {
