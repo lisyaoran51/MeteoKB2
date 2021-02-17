@@ -8,3 +8,8 @@ SectionStartControlPoint::SectionStartControlPoint(int sIndex, MTO_FLOAT s, MTO_
 {
 	sectionIndex = sIndex;
 }
+
+string SectionStartControlPoint::GetTypeName()
+{
+	return "SectionStartControlPoint";
+}

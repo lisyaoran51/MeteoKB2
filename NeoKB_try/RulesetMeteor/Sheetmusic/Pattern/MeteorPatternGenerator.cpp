@@ -153,29 +153,45 @@ int MeteorPatternGenerator::CreateOtherEvent(vector<Event*>* es)
 	 */
 	
 	if (!sm->GetSmInfo()->hasSectionData) {
+
+		/* 先檢查是不是有小節資料，但是忘記標註HasSection，忘記標註的話就直接退出 */
+		for (int i = 0; i < es->size(); i++) {
+			if (es->at(i)->Cast<MarkControlPoint>()) {
+				if (es->at(i)->Cast<MarkControlPoint>()->GetSectionIndex() > 0) {
+					return 0;
+				}
+			}
+		}
+
 		vector<float> sectionEndTime;
 
 		/* 把每個event的小節數用時間回推出來，然後再設定進去 */
 		int maxSection = 0;
-		float maxControlPointTime = 0;
+		//float maxControlPointTime = 0;
 
 		for (int i = 0; i < es->size(); i++) {
 
 			float startTime = 0;
-			if (es->at(i)->GetSourceEvent() != nullptr) {
-				startTime = es->at(i)->GetSourceEvent()->GetStartTime();
-			}
-			else {
+			// 如果不適MarkControlPoint就不用設定section index
+			//if (es->at(i)->GetSourceEvent() != nullptr) {
+			//	startTime = es->at(i)->GetSourceEvent()->GetStartTime();
+			//}
+			//else {
+			//	startTime = es->at(i)->GetStartTime();
+			//}
+
+			if (es->at(i)->Cast<MarkControlPoint>()) {
+
 				startTime = es->at(i)->GetStartTime();
-			}
 
-			int tempSection = floor(startTime / defaultSectionInterval);
+				int tempSection = floor(startTime / defaultSectionInterval);
 
-			if (es->at(i)->Cast<MarkControlPoint>())
 				es->at(i)->Cast<MarkControlPoint>()->SetSectionIndex(tempSection);
 
-			if (tempSection > maxSection)
-				maxSection = tempSection;
+				if (tempSection > maxSection)
+					maxSection = tempSection;
+			}
+
 			/*
 			if (es->at(i)->GetStartTime() < (tempSection + 1) * defaultSectionInterval) {
 				

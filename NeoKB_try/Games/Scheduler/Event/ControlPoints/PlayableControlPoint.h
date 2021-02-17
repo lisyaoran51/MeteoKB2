@@ -30,6 +30,8 @@ namespace ControlPoints{
 		HandType GetHandType();
 		int SetHandType(HandType h);
 
+		// 一定要每次都override!!
+		virtual string GetTypeName();
 
 	protected:
 

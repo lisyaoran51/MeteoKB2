@@ -228,6 +228,10 @@ EventProcessor<Event>* MeteorRulesetExecutor::getEventProcessor(Event * e)
 	// 為什麼不用event自己來create? 因為要去搭配不同的mapper，所以要動態調配
 	string processorType = GetProcessorType(e->GetTypeName()); // .c_str();
 
+	if (processorType == "") {
+		LOG(LogLevel::Finer) << "MeteorRulesetExecutor::getEventProcessor(Event*) : event [" << e->GetStartTime() << "] has no processor type from [" << e->GetTypeName() << "].";
+		return nullptr;
+	}
 	LOG(LogLevel::Finer) << "MeteorRulesetExecutor::getEventProcessor(Event*) : event [" << e->GetStartTime() << "] has processor type [" << processorType << "] from ["<< e->GetTypeName() << "].";
 
 
@@ -277,8 +281,8 @@ EventProcessor<Event>* MeteorRulesetExecutor::getEventProcessor(Event * e)
 	}
 	else if (processorType == "MeteorInputKeyControlPointHitObject") {
 		LOG(LogLevel::Depricated) << "MeteorRulesetExecutor::getEventProcessor : getting event MeteorInputKeyControlPointHitObject at [" << e->GetStartTime() << "]";
-		//return (new MeteorInputKeyControlPointHitObject())->RegisterEvent(e);
-		return nullptr;	// input key不要做hit object，不會計分
+		return (new MeteorInputKeyControlPointHitObject())->RegisterEvent(e);
+		// score processor會自動把input key control point的計分刪掉
 	}
 	else if (processorType == "PianoEventProcessor") {
 		LOG(LogLevel::Depricated) << "MeteorRulesetExecutor::getEventProcessor : getting event PianoEventProcessor at [" << e->GetStartTime() << "]";

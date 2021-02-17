@@ -35,3 +35,8 @@ int PlayableControlPoint::SetHandType(HandType h) {
 	handType = h;
 	return 0;
 }
+
+string PlayableControlPoint::GetTypeName()
+{
+	return "PlayableControlPoint";
+}

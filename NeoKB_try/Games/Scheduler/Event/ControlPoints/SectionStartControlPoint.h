@@ -21,6 +21,9 @@ namespace ControlPoints{
 
 		SectionStartControlPoint(int sIndex, MTO_FLOAT s, MTO_FLOAT l);
 
+		// 一定要每次都override!!
+		virtual string GetTypeName();
+
 
 	protected:
 

@@ -19,3 +19,8 @@ OctaveRange OctaveShiftSpanControlPoint::GetOctaveRange()
 {
 	return octaveRange;
 }
+
+string OctaveShiftSpanControlPoint::GetTypeName()
+{
+	return "OctaveShiftSpanControlPoint";
+}

@@ -34,6 +34,9 @@ namespace ControlPoints{
 		int SetOctaveRange(OctaveRange oRange);
 		OctaveRange GetOctaveRange();
 
+		// 一定要每次都override!!
+		virtual string GetTypeName();
+
 	protected:
 
 		OctaveRange octaveRange = OctaveRange::None;
