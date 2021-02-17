@@ -165,7 +165,7 @@ string PlatformStorage::locateBasePath()
 
 string PlatformStorage::locateWriteBasePath()
 {
-	return string("~/temp");
+	return string("/home/pi/temp");
 }
 
 Storage * PlatformStorage::clone(string newSubDirectory)
