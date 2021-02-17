@@ -112,6 +112,9 @@ EventProcessorMaster::~EventProcessorMaster()
 
 int EventProcessorMaster::AddStaticEventProcessor(EventProcessor<Event>* sEventProcessor)
 {
+	LOG(LogLevel::Debug) << "EventProcessorMaster::AddStaticEventProcessor : add processor [" << sEventProcessor->GetEvent()->GetTypeName() << "] at [" << sEventProcessor->GetStartTime() << "] from event [" << sEventProcessor->GetEvent()->GetStartTime() << "].";
+
+
 	sEventProcessor->Attach(this);
 	staticEventProcessors.push_back(sEventProcessor);
 
