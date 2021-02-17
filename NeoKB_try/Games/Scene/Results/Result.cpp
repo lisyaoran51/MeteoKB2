@@ -6,6 +6,7 @@ using namespace Games::Scenes::Results;
 
 Result::Result(Score * s): RegisterType("Result")
 {
+	score = s;
 }
 
 int Result::onEntering(Scene * lastScene)
