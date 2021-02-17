@@ -514,22 +514,34 @@ int MeteorResult::onEntering(Scene * lastScene)
 	MeteoContextBluetoothMessage* scoreMessage = new MeteoContextBluetoothMessage(MeteoCommand::FinalScore);
 	json context;
 	context["Hit Amount"] = score->hits;
+	LOG(LogLevel::Debug) << "MeteorResult::onEntering : 1";
 	context["Max Hit Amount"] = score->maxHits;
+	LOG(LogLevel::Debug) << "MeteorResult::onEntering : 2";
 	context["Score"] = score->score;
+	LOG(LogLevel::Debug) << "MeteorResult::onEntering : 3";
 	context["Max Score"] = score->maxScore;
+	LOG(LogLevel::Debug) << "MeteorResult::onEntering : 4";
 	context["Accuracy"] = int(score->accuracy * 10000);
+	LOG(LogLevel::Debug) << "MeteorResult::onEntering : 5";
 	context["Combo"] = score->combo;
+	LOG(LogLevel::Debug) << "MeteorResult::onEntering : 6";
 
 
 
 	// 還要寫入各個分數的次數
 	json judgementMiss, judgementBad, judgementOk, judgementGood, judgementGreat, judgementPerfect;
 	judgementMiss["Result"] = "Miss";	judgementMiss["HitAmount"] = score->hitResults[HitResult::Miss];
+	LOG(LogLevel::Debug) << "MeteorResult::onEntering : 7";
 	judgementBad["Result"] = "Bad";	judgementMiss["HitAmount"] = score->hitResults[HitResult::Bad];
+	LOG(LogLevel::Debug) << "MeteorResult::onEntering : 8";
 	judgementOk["Result"] = "Ok";	judgementMiss["HitAmount"] = score->hitResults[HitResult::Ok];
+	LOG(LogLevel::Debug) << "MeteorResult::onEntering : 9";
 	judgementGood["Result"] = "Good";	judgementMiss["HitAmount"] = score->hitResults[HitResult::Good];
+	LOG(LogLevel::Debug) << "MeteorResult::onEntering : 10";
 	judgementGreat["Result"] = "Great";	judgementMiss["HitAmount"] = score->hitResults[HitResult::Great];
+	LOG(LogLevel::Debug) << "MeteorResult::onEntering : 11";
 	judgementPerfect["Result"] = "Perfect";	judgementMiss["HitAmount"] = score->hitResults[HitResult::Perfect];
+	LOG(LogLevel::Debug) << "MeteorResult::onEntering : 12";
 
 	context["Hits"].push_back(judgementMiss);
 	context["Hits"].push_back(judgementBad);
@@ -537,9 +549,12 @@ int MeteorResult::onEntering(Scene * lastScene)
 	context["Hits"].push_back(judgementGood);
 	context["Hits"].push_back(judgementGreat);
 	context["Hits"].push_back(judgementPerfect);
+	LOG(LogLevel::Debug) << "MeteorResult::onEntering : 13";
 
 	scoreMessage->SetContextInJson(context);
+	LOG(LogLevel::Debug) << "MeteorResult::onEntering : 14";
 	scoreMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
+	LOG(LogLevel::Debug) << "MeteorResult::onEntering : 15";
 
 
 	LOG(LogLevel::Debug) << "MeteorResult::onEntering : Set Message Over.";
