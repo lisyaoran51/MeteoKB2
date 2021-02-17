@@ -167,7 +167,7 @@ int MeteorPatternGenerator::CreateOtherEvent(vector<Event*>* es)
 					maxControlPointTime = es->at(i)->GetStartTime();
 				}
 				else {
-					LOG(LogLevel::Error) << "MeteorPatternGenerator::CreateOtherEvent() : events not sorted by time.";
+					LOG(LogLevel::Error) << "MeteorPatternGenerator::CreateOtherEvent() : events not sorted by time." << es->at(i)->GetStartTime();
 					throw runtime_error("MeteorPatternGenerator::CreateOtherEvent() : events not sorted by time.");
 				}
 			}
