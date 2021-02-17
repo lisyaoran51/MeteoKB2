@@ -511,7 +511,7 @@ int MeteorResult::onEntering(Scene * lastScene)
 	LOG(LogLevel::Info) << "MeteorResult::onEntering : pushing game over message.";
 
 
-	LOG(LogLevel::Debug) << "MeteorResult::onEntering : score:" << score << ";
+	LOG(LogLevel::Debug) << "MeteorResult::onEntering : score:" << score;
 
 	// bluetooth±À°eµ²ªG
 	MeteoContextBluetoothMessage* scoreMessage = new MeteoContextBluetoothMessage(MeteoCommand::FinalScore);
