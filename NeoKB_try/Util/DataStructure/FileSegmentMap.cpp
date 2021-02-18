@@ -1,6 +1,7 @@
 #include "FileSegmentMap.h"
 
 #include <string.h>
+#include "../StringSplitter.h"
 
 
 using namespace Util::DataStructure;
@@ -18,6 +19,13 @@ FileSegmentMap::~FileSegmentMap()
 		delete[] it->second.first;
 	}
 	fileSegmentMap.clear();
+}
+
+string FileSegmentMap::GetFileNameWithoutExtension()
+{
+	vector<string> splitFileName = StringSplitter::Split(fileName, ".");
+
+	return splitFileName[0];
 }
 
 int FileSegmentMap::GetFileSegment(int index, char ** fileSegment)

@@ -32,6 +32,8 @@ namespace DataStructure{
 
 		int segmentAmount;
 
+		string GetFileNameWithoutExtension();
+
 		/// <summary>
 		/// 輸入你要第幾個segment，就會把資料讀進去file segment李，然後回傳這個segment的大小
 		/// </summary>

@@ -24,6 +24,10 @@ namespace IO{
 	public:
 
 		int Initialize();
+
+		string GetBasePath();
+
+		string GetTempBasePath();
 		
 		/// <summary>
 		/// 把輸入路徑和strorage的路徑串在一起回傳，只能輸入輸入資料夾路徑
@@ -73,7 +77,7 @@ namespace IO{
 		virtual fstream* GetStream(string filePath, bool volitile, bool binary = false) = 0;
 
 		/// <summary>
-		/// 會自動建資料夾和檔案
+		/// 會自動建資料夾和檔案(TODO: 建資料夾)
 		/// 寫入專用，平常不要用這個
 		/// </summary>
 		virtual fstream* GetStream(string filePath, FileAccess fileAccess, FileMode fileMode, bool binary = false) = 0;

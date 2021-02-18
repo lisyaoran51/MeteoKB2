@@ -42,23 +42,46 @@ namespace DataStructure {
 
 			//callbackMap[make_pair((uintptr_t)callableObject, callbackName)] = callback;
 
-			pair<uintptr_t, string> key = make_pair((uintptr_t)callableObject, callbackName);
+			return Add((uintptr_t)callableObject, callback, callbackName);
+		}
 
-			LOG(LogLevel::Finest) << "ActionList::Add() : key = " << key.first << ", name = " << key.second;
+		int Add(uintptr_t callableObjectPointer, function<_Fty(_Types...)> callback, string callbackName) {
+
+			pair<uintptr_t, string> key = make_pair(callableObjectPointer, callbackName);
+
+			LOG(LogLevel::Depricated) << "ActionList::Add() : key = " << key.first << ", name = " << key.second;
 
 			//LOG(LogLevel::Finest) << "ActionList::Add() : key list address:" << &callbackKeys;
 			//LOG(LogLevel::Finest) << "ActionList::Add() : key list size:" << callbackKeys.size();
 
 			unique_lock<mutex> uLock(callbackMutex);
-			LOG(LogLevel::Finest) << "ActionList::Add() :1";
+			LOG(LogLevel::Depricated) << "ActionList::Add() :1";
 			callbackKeys.push_back(key);
-			LOG(LogLevel::Finest) << "ActionList::Add() :2";
+			LOG(LogLevel::Depricated) << "ActionList::Add() :2";
 
 			callbacks.push_back(callback);
-			LOG(LogLevel::Finest) << "ActionList::Add() :3";
-
+			LOG(LogLevel::Depricated) << "ActionList::Add() :3";
 
 			return 0;
+		}
+
+		int Add(ActionList<_Fty, _Types...>* actionList) {
+			for (int i = 0; i < actionList->GetSize(); i++) {
+				Add(actionList->GetCallableObjectPointer(i), actionList->GetCallback(i), actionList->GetCallbackName(i));
+			}
+			return 0;
+		}
+
+		uintptr_t GetCallableObjectPointer(int index) {
+			return callbackKeys[index].first;
+		}
+
+		function<_Fty(_Types...)> GetCallback(int index) {
+			return callbacks[index];
+		}
+
+		string GetCallbackName(int index) {
+			return callbackKeys[index].second;
 		}
 
 		template<class _Type>

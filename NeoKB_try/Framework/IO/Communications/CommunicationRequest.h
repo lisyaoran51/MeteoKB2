@@ -47,7 +47,10 @@ namespace Communications{
 
 		virtual int Fail(CommunicationRequestException& communicationRequestException);
 
+		int SetCallbackScene(Scene* cScene);
+
 		int AddOnSuccess(MtoObject * callableObject, function<int()> callback, string name = "OnRequestSuccess");
+		int AddOnSuccess(ActionList<int>* actionsOnSuccess);
 
 		int AddOnFailed(MtoObject * callableObject, function<int()> callback, string name = "OnRequestFailed");
 

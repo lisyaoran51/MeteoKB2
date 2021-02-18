@@ -6,12 +6,14 @@
 #include "../../../Framework/Output/OutputManager.h"
 #include "../../../Instruments/Piano.h"
 #include "../../../Games/Scheduler/Event/ControlPoints/ControlPoint.h"
+#include "../../../Framework/IO/Communications/CommunicationAccess.h"
 
 
 using namespace Games::Scenes::Results;
 using namespace Framework::Output;
 using namespace Instruments;
 using namespace Games::Schedulers::Events::ControlPoints;
+using namespace Framework::IO::Communications;
 
 
 
@@ -24,7 +26,7 @@ namespace Results{
 
 		int load();
 
-		int load(OutputManager* o, Instrument* i, Storage* s);
+		int load(OutputManager* o, Instrument* i, Storage* s, CommunicationAccess* c);
 
 		/// <summary>
 		/// 將遊戲紀錄寫入檔案步驟一：把遊戲紀錄轉乘control point
@@ -52,6 +54,8 @@ namespace Results{
 		Piano* piano = nullptr;
 
 		Storage* storage = nullptr;
+
+		CommunicationAccess* communicationAccess = nullptr;
 
 		string writeGameRecord();
 

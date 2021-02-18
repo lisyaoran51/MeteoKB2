@@ -9,6 +9,7 @@
 #include "../MeteoScene.h"
 #include "../../../Games/UI/SheetmusicSelectPanel.h"
 #include "../../UI/SoundSelectPanel.h"
+#include "../../../Framework/IO/Storage.h"
 //#include "../../MeteoGame.h" // 不可以include 匯recursive
 
 
@@ -18,6 +19,7 @@ using namespace Util::DataStructure;
 using namespace Games::Scenes;
 using namespace Games::UI;
 using namespace Games;
+using namespace Framework::IO;
 
 
 namespace Games {
@@ -42,6 +44,8 @@ namespace Select {
 	protected:
 
 		SmManager* smManager = nullptr;
+
+		Storage* storage = nullptr;
 
 		SheetmusicSelectPanel* smSelectPanel = nullptr;
 
@@ -69,7 +73,7 @@ namespace Select {
 		/// <summary>
 		/// 讀取
 		/// </summary>
-		int load(SmManager* sManager, MeteoGame* game);
+		int load(SmManager* sManager, MeteoGame* game, Storage* s);
 
 		/// <summary>
 		/// 選擇歌曲後執行的程式

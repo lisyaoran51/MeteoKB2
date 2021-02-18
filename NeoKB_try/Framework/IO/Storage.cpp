@@ -17,6 +17,16 @@ int Storage::Initialize()
 	return 0;
 }
 
+string Storage::GetBasePath()
+{
+	return locateBasePath();
+}
+
+string Storage::GetTempBasePath()
+{
+	return locateWriteBasePath();
+}
+
 string Storage::GetUsableDirectoryPathFor(string directoryPath, bool createIfNotExist)
 {
 	string resolvedPath = basePath;

@@ -11,7 +11,7 @@
 #include "../Output/OutputManager.h"
 #include "../../RulesetMeteor/Output/Panels/SustainPedalLightRingOutputer.h"
 #include "../../RulesetMeteor/Output/Panels/LightRingOutputer.h"
-#include "../../Desktop/Devices/MeteoPacketConverterV1.h"
+#include "../../Desktop/Devices/MeteoPacketConverterV2.h"
 
 
 
@@ -39,8 +39,8 @@ int MeteoGameHost::setupMainInterface()
 
 	DisplayDevice* displayDevice = new MeteoBitbangDisplayDevice(48, 16);// 之後再改
 
-	MeteoPacketConverterV1* packetConverter = new MeteoPacketConverterV1(storage);
-	MeteoBluetoothPhoneV1* bluetoothPhone = new MeteoBluetoothPhoneV1(packetConverter);
+	MeteoPacketConverterV2* packetConverter = new MeteoPacketConverterV2();
+	MeteoBluetoothPhoneV2* bluetoothPhone = new MeteoBluetoothPhoneV2(packetConverter);
 	BluetoothDevice* bluetoothDevice = new MeteoBluetoothDevice(bluetoothPhone);
 
 	MeteoPanelBoardV1* meteoPanelBoard = new MeteoPanelBoardV1(7); // i2c address設為7

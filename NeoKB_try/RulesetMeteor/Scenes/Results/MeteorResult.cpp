@@ -11,6 +11,9 @@
 #include "../../Ruleset/Replays/MeteorReplayFrame.h"
 #include <cstdlib> /* 亂數相關函數 */
 #include <ctime>   /* 時間相關函數 */
+#include "../../../Games/IO/Communications/PostBinaryBleRequest.h"
+#include "../../../Util/StringSplitter.h"
+#include <stdio.h>
 
 
 using namespace Meteor::Scenes::Results;
@@ -19,7 +22,8 @@ using namespace Meteor::Rulesets::Modifiers;
 using namespace Games::Schedulers::Events::ControlPoints;
 using namespace Meteor::Input;
 using namespace Meteor::Rulesets::Replays;
-
+using namespace Games::IO::Communications;
+using namespace Util;
 
 int MeteorResult::load()
 {
@@ -36,10 +40,15 @@ int MeteorResult::load()
 	if (!s)
 		throw runtime_error("MeteorResult::load() : Storage not found in cache.");
 
-	return load(o, i, s);
+
+	CommunicationAccess * c = GetCache<CommunicationAccess>("CommunicationAccess");
+	if (!c)
+		throw runtime_error("MeteorResult::load() : CommunicationAccess not found in cache.");
+
+	return load(o, i, s, c);
 }
 
-int MeteorResult::load(OutputManager * o, Instrument * i, Storage* s)
+int MeteorResult::load(OutputManager * o, Instrument * i, Storage* s, CommunicationAccess* c)
 {
 	outputManager = o;
 	piano = dynamic_cast<Piano*>(i);
@@ -49,6 +58,8 @@ int MeteorResult::load(OutputManager * o, Instrument * i, Storage* s)
 	}
 
 	storage = s;
+
+	communicationAccess = c;
 
 	return 0;
 }
@@ -474,7 +485,7 @@ string MeteorResult::encodeToRecordFile(vector<ControlPoint*>& controlPoints)
 
 	stream->close();
 
-	return string("MeteoRecords") + fileName;
+	return string("MeteoRecords/") + fileName;
 }
 
 MeteorResult::MeteorResult(Score * s) : Result(s), RegisterType("MeteorResult")
@@ -510,41 +521,26 @@ int MeteorResult::onEntering(Scene * lastScene)
 
 	LOG(LogLevel::Info) << "MeteorResult::onEntering : pushing game over message.";
 
-
-	LOG(LogLevel::Debug) << "MeteorResult::onEntering : score:" << score;
-
 	// bluetooth推送結果
 	MeteoContextBluetoothMessage* scoreMessage = new MeteoContextBluetoothMessage(MeteoCommand::FinalScore);
 	json context;
 	context["Hit Amount"] = score->hits;
-	LOG(LogLevel::Debug) << "MeteorResult::onEntering : 1";
 	context["Max Hit Amount"] = score->maxHits;
-	LOG(LogLevel::Debug) << "MeteorResult::onEntering : 2";
 	context["Score"] = score->score;
-	LOG(LogLevel::Debug) << "MeteorResult::onEntering : 3";
 	context["Max Score"] = score->maxScore;
-	LOG(LogLevel::Debug) << "MeteorResult::onEntering : 4";
 	context["Accuracy"] = int(score->accuracy * 10000);
-	LOG(LogLevel::Debug) << "MeteorResult::onEntering : 5";
 	context["Combo"] = score->combo;
-	LOG(LogLevel::Debug) << "MeteorResult::onEntering : 6";
 
 
 
 	// 還要寫入各個分數的次數
 	json judgementMiss, judgementBad, judgementOk, judgementGood, judgementGreat, judgementPerfect;
 	judgementMiss["Result"] = "Miss";	judgementMiss["HitAmount"] = score->hitResults[HitResult::Miss];
-	LOG(LogLevel::Debug) << "MeteorResult::onEntering : 7";
 	judgementBad["Result"] = "Bad";	judgementMiss["HitAmount"] = score->hitResults[HitResult::Bad];
-	LOG(LogLevel::Debug) << "MeteorResult::onEntering : 8";
 	judgementOk["Result"] = "Ok";	judgementMiss["HitAmount"] = score->hitResults[HitResult::Ok];
-	LOG(LogLevel::Debug) << "MeteorResult::onEntering : 9";
 	judgementGood["Result"] = "Good";	judgementMiss["HitAmount"] = score->hitResults[HitResult::Good];
-	LOG(LogLevel::Debug) << "MeteorResult::onEntering : 10";
 	judgementGreat["Result"] = "Great";	judgementMiss["HitAmount"] = score->hitResults[HitResult::Great];
-	LOG(LogLevel::Debug) << "MeteorResult::onEntering : 11";
 	judgementPerfect["Result"] = "Perfect";	judgementMiss["HitAmount"] = score->hitResults[HitResult::Perfect];
-	LOG(LogLevel::Debug) << "MeteorResult::onEntering : 12";
 
 	context["Hits"].push_back(judgementMiss);
 	context["Hits"].push_back(judgementBad);
@@ -552,12 +548,9 @@ int MeteorResult::onEntering(Scene * lastScene)
 	context["Hits"].push_back(judgementGood);
 	context["Hits"].push_back(judgementGreat);
 	context["Hits"].push_back(judgementPerfect);
-	LOG(LogLevel::Debug) << "MeteorResult::onEntering : 13";
 
 	scoreMessage->SetContextInJson(context);
-	LOG(LogLevel::Debug) << "MeteorResult::onEntering : 14";
 	scoreMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
-	LOG(LogLevel::Debug) << "MeteorResult::onEntering : 15";
 
 
 	LOG(LogLevel::Debug) << "MeteorResult::onEntering : Set Message Over.";
@@ -579,10 +572,40 @@ int MeteorResult::onEntering(Scene * lastScene)
 	//
 	//MeteoFileBluetoothMessage* recordFileMessage = new MeteoFileBluetoothMessage(MeteoCommand::PlayRecordFileSegment, recordFilePath);
 	//outputManager->PushMessage(recordFileMessage);
+
+	MeteoContextBluetoothMessage* postRecordMessage = new MeteoContextBluetoothMessage(MeteoCommand::PostPlayRecord);
+	json requestContext;
+
+	requestContext["FileName"] = StringSplitter::Split(recordFilePath, "/").back;
+	postRecordMessage->SetContextInJson(requestContext);
+	postRecordMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
+
+	PostBinaryBleRequest* postRecordRequest = new PostBinaryBleRequest(
+		recordFilePath,
+		postRecordMessage,
+		MeteoCommand::AckPostPlayRecord,
+		MeteoCommand::PlayRecordFileSegment,
+		MeteoCommand::FinishWritePlayRecord,
+		MeteoCommand::RequestRewritePlayRecordFileSegment,
+		MeteoCommand::AckFinishWritePlayRecord
+	);
+
+	postRecordRequest->SetCallbackScene(this);
+
+	postRecordRequest->AddOnSuccess(this, [=]() {
+
+		FILE* fp = popen(string("rm -f ") + recordFilePath, "r");
+		if (fp == NULL) {
+			// throw error
+		}
+		pclose(fp);
+
+		LOG(LogLevel::Info) << "MeteorResult::onEntering : exit.";
+		Exit();
+		return 0;
+	}, "PostRlayRecordSuccess");
+
+	communicationAccess->Queue(postRecordRequest);
 	
-
-	LOG(LogLevel::Info) << "MeteorResult::onEntering : exit.";
-	Exit();
-
 	return 0;
 }

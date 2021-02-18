@@ -84,11 +84,11 @@ namespace Devices{
 
 		virtual BluetoothMessage* ConvertToFile(char* buffer, int size) = 0;
 
-		virtual bool CheckIsFinishWriteCommand(BluetoothMessage* bluetoothMessage) = 0;
+		//virtual bool CheckIsFinishWriteCommand(BluetoothMessage* bluetoothMessage) = 0;
 
-		virtual BluetoothMessage* FinishWriteFile(BluetoothMessage* bluetoothMessage) = 0;
+		//virtual BluetoothMessage* FinishWriteFile(BluetoothMessage* bluetoothMessage) = 0;
 
-		virtual bool CheckIsWrtieFileFinishCommand(BluetoothMessage* bluetoothMessage) = 0;
+		//virtual bool CheckIsWrtieFileFinishCommand(BluetoothMessage* bluetoothMessage) = 0;
 
 	protected:
 

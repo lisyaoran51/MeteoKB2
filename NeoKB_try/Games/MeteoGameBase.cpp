@@ -4,11 +4,13 @@
 #include "../Framework/Database/MemoryBasedDatabaseContextFactory.h"
 #include "../Framework/Database/ReadonlyCsvDatabaseContextFactory.h"
 #include <functional>
+#include "IO/Communications/BleAccess.h"
 
 
 using namespace Games;
 using namespace Games::Rulesets;
 using namespace std;
+using namespace Games::IO::Communications;
 
 
 int MeteoGameBase::load()
@@ -49,6 +51,8 @@ int MeteoGameBase::load()
 
 	//GetDependencies()->Cache<ApiAccess>(apiAccess = new ApiAccess(gameHost));
 	// TODO: §ï¦¨communication access
+	GetDependencies()->Cache<CommunicationAccess>(communicationAccess = new CommunicationAccess(gameHost));
+	communicationAccess->AddItem(new BleAccess(gameHost));
 
 	GetDependencies()->Cache<RulesetStore>(rulesetStore = new RulesetStore(bind(&DatabaseContextFactory::GetContext, readonlyDbContextFactory)));
 

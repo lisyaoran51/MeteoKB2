@@ -31,6 +31,12 @@ int CommunicationRequest::Fail(CommunicationRequestException & communicationRequ
 	return fail(communicationRequestException);
 }
 
+int CommunicationRequest::SetCallbackScene(Scene * cScene)
+{
+	callbackScene = cScene;
+	return 0;
+}
+
 int CommunicationRequest::AddOnSuccess(MtoObject * callableObject, function<int()> callback, string name)
 {
 	/* 不是scene就不能用request的callback */
@@ -47,6 +53,12 @@ int CommunicationRequest::AddOnSuccess(MtoObject * callableObject, function<int(
 
 
 	onSuccess.Add(callableObject, callback, name);
+	return 0;
+}
+
+int CommunicationRequest::AddOnSuccess(ActionList<int>* actionsOnSuccess)
+{
+	onSuccess.Add(actionsOnSuccess);
 	return 0;
 }
 

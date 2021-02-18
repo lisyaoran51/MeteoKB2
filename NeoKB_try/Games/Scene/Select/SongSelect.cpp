@@ -5,11 +5,16 @@
 #include "../../../RulesetMeteor/Ruleset/Modifiers/MusicGameModifier.h"
 #include "../../../RulesetMeteor/Ruleset/Modifiers/RepeatPracticeModifier.h"
 #include "../../../RulesetMeteor/Ruleset/Modifiers/MeteorDifficultyModifier.h"
+#include "../../../Util/DataStructure/FileSegmentMap.h"
+#include <stdio.h>
+#include "../../../Util/StringSplitter.h"
 
 
 using namespace Games::Scenes::Select;
 using namespace Games;
 using namespace Meteor::Rulesets::Modifiers;
+using namespace Util::DataStructure;
+using namespace Util;
 
 
 
@@ -41,12 +46,18 @@ int SongSelect::load()
 	if (!game)
 		throw runtime_error("int SongSelect::load() : MeteoGame not found in cache.");
 
-	return load(sManager, game);
+	Storage* s = GetCache<Storage>("Storage");
+	if (!s)
+		throw runtime_error("int SongSelect::load() : Storage not found in cache.");
+
+	return load(sManager, game, s);
 }
 
-int SongSelect::load(SmManager * sManager, MeteoGame * game)
+int SongSelect::load(SmManager * sManager, MeteoGame * game, Storage* s)
 {
 	smManager = sManager;
+
+	storage = s;
 
 	// ruleset info 可能需要重新bind一次，本來meteo scene裡面有bind過
 	
@@ -65,6 +76,48 @@ int SongSelect::load(SmManager * sManager, MeteoGame * game)
 	// function<int(void)> func = [pointer]() {return pointer->base::VirtualFunction(); };
 	smSelectPanel->StartRequest = bind(&SongSelect::onSelected, this);
 	smSelectPanel->SelectionChanged = bind(&SongSelect::selectionChanged, this, placeholders::_1);
+
+	smSelectPanel->AddOnDownloadSheetmusicFinish(this, [=](FileSegmentMap* fSegmentMap) {
+
+		fSegmentMap->WriteFile(storage->GetStream(string("temp/") + fSegmentMap->fileName + string(".temp"), FileAccess::Write, FileMode::Create));
+
+		// 解密、解壓縮
+		string decompressCommand = string("tar -xvf ") + storage->GetTempBasePath() + string("/temp/") + fSegmentMap->fileName + string(".temp ") 
+													   + storage->GetTempBasePath() + string("/Sheetmusics/") + fSegmentMap->GetFileNameWithoutExtension() + "/" + fSegmentMap->fileName;
+
+		File* fp = popen(decompressCommand.c_str(), "r");
+		if (fp == NULL) {
+			// error
+		}
+		pclose(fp);
+
+		// 刪除加密檔
+		string deleteCommand = string("rm -f ") + storage->GetTempBasePath() + string("/temp/") + fSegmentMap->fileName + string(".temp ");
+		fp = popen(deleteCommand.c_str(), "r");
+		if (fp == NULL) {
+			// error
+		}
+		pclose(fp);
+
+		return 0;
+	});
+
+	smSelectPanel->AddOnGetSheetmusicSuccess(this, [=](string fName) {
+
+		string fileNameWithoutExtension = StringSplitter::Split(fName, ".")[0];
+		string path = storage->GetTempBasePath() + string("/Sheetmusics/") + fileNameWithoutExtension;
+
+		vector<string> paths;
+		paths.push_back(path);
+
+		if (smManager->Import(&paths) < 0) {
+			// throw error
+		}
+
+		smSelectPanel->SelectAndStart(fName);
+
+		return 0;
+	});
 
 	AddChild(smSelectPanel);
 	return 0;

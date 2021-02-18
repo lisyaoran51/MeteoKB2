@@ -2714,16 +2714,32 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 	gatt大概搞定，可以回來繼續寫主程式
 	
 	待完成工作：
-		各種request、下載檔案後移動解壓縮、gatt加入程式(bt classic刪掉)、遊戲紀錄存成sm檔
+		各種request(大概ok要測試)、下載檔案後移動解壓縮(大概ok要測試)、gatt加入程式(bt classic刪掉)、遊戲紀錄存成sm檔(大概ok)、封包分流、斷線時把message和request全刪掉、
+		遊戲紀錄回傳、sm select panel修改
 	
 	之前沒完成的工作：
-		重播存檔、跳轉時反向觸發特效、刪除所有memory leak、琴音分為全長和AB段、手動踏板modifier、關機、
+		重播存檔、跳轉時反向觸發特效、刪除所有memory leak、琴音分為全長和AB段、手動踏板modifier、關機
 		sbs音量設定、藍芽操控播音、紀錄每個modifier到藍芽架構裡、藍芽傳黨、開機燈號、當機燈號、storage分流、讀取音符音量max127、erupt的黑鍵位置錯誤
 		getstream檢查資料夾存在、
 		mcu、關閉wifi、daemon、OS設定、me555、
 	
 	
 	
-	先寫遊戲紀錄
+	先寫遊戲紀錄，遊戲沒有紀錄自動踏板？
 	
+2/17
+	ScoreProcessor以後要注意，如果不要考慮踏板計分，就要刪掉踏板的max hit。最相容的方式是可以自選要不要踏板計分，目前可以先設計不計分，之後要計分再跟新程式
 	
+	events not sorted by time 這段程式碼要改掉，改成不用sorted也能排好小節順序
+	
+	遊戲紀錄寫好了，部過沒有測試，要等硬體好才能測試，先來寫request
+	
+	目前在寫把普下載下來，然後自動開始遊戲的部分，寫到on success還沒寫
+	
+2/18
+	仔埔大概寫完，之後可以寫傳遊戲紀錄
+	
+	modifier還是要寫在WriteGameConfiguration裡
+	
+	sm select panel要再改，因為callback scene直接設成song select，就可以把on success和on finish擺進sm select panel裡面，比較簡單
+	需要重新整理一下，request裡面有很多問題
