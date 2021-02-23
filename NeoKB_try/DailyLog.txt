@@ -2714,8 +2714,8 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 	gatt大概搞定，可以回來繼續寫主程式
 	
 	待完成工作：
-		各種request(大概ok要測試)、下載檔案後移動解壓縮(大概ok要測試)、gatt加入程式(bt classic刪掉)、遊戲紀錄存成sm檔(大概ok)、封包分流、斷線時把message和request全刪掉、
-		遊戲紀錄回傳、sm select panel修改
+		各種request(要重新整理)、下載檔案後移動解壓縮(大概ok要測試)、gatt加入程式(bt classic刪掉)、遊戲紀錄存成sm檔(大概ok)、封包分流、斷線時把message和request全刪掉、
+		遊戲紀錄回傳、sm select panel修改、Instant測試
 	
 	之前沒完成的工作：
 		重播存檔、跳轉時反向觸發特效、刪除所有memory leak、琴音分為全長和AB段、手動踏板modifier、關機
@@ -2745,3 +2745,36 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 	需要重新整理一下，request裡面有很多問題
 	
 	不想寫的話，看要先寫instant模式，還是先寫mcu?
+	
+2/23
+	instant寫了一半，後半要等mcu寫好才能測試
+	
+	讀kb的城市有了，在timer power down裡面可以找到寄時的程式，搭配software uart的計時方式，就能抓到時間
+	用uint32t記錄每1ms的時間，可以記錄49個小時
+	
+	i2c slave test裡面有可以動的i2c讀寫程式，不過現在寫出來的程式沒辦法讓pi讀不到資料，只能讓他讀到空白資料，所以程式要改，先判斷是不是空白資料，再決定要不要split
+	
+	
+	找到回傳-1的方法了，只要在pi讀取資料的第一個訊號(0xA8)的時候把register設成 I2C_SET_CONTROL_REG(I2C0, I2C_I2CON_SI);
+	就會回傳-1，有資料的時候再把register設成 I2C_SET_CONTROL_REG(I2C0, I2C_I2CON_SI_AA); 就可以恢復正常讀取資料
+	
+	用I2C_I2CON_SI不好，會把i2c讀取的線路卡住，有一段時間讀不到資料，所以還是不要用比較好
+	
+	改回來以後還是會掉訊號
+	
+	16 128 ?aaaaaaa
+	16 128 ?bbbbb
+	16 128 ?ccccccccc
+	16 128 ?ddddddddd
+	16 128 ?eeee
+	16 128 ?ff
+	16 0
+	16 128 ?
+	16 128 ?bbbbb
+	16 128 ?ccccccccc
+	16 128 ?ddddddddd
+	16 128 ?eeee
+	16 128 ?ff
+
+	第二次的aaaaaaa不見了
+	
