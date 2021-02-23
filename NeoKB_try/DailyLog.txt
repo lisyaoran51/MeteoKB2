@@ -2743,3 +2743,5 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 	
 	sm select panel要再改，因為callback scene直接設成song select，就可以把on success和on finish擺進sm select panel裡面，比較簡單
 	需要重新整理一下，request裡面有很多問題
+	
+	不想寫的話，看要先寫instant模式，還是先寫mcu?

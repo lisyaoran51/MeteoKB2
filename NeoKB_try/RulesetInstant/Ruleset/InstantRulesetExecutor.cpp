@@ -6,6 +6,7 @@
 #include "../../Games/Scheduler/Event/Effect/EffectMapper.h"
 #include "../Scheduler/Event/Effect/InstantFallEffect.h"
 #include "../Scheduler/Event/Effect/InstantFallEffectMapper.h"
+#include "../Scheduler/Event/Effect/InstantGlowLineEffectMapper.h"
 #include "../Scheduler/Event/InstrumentEvents/InstantPianoSoundEventProcessor.h"
 #include "../../Games/Scheduler/Event/SystemEvents/SystemEventHandler.h"
 #include "../../Games/Scheduler/Event/SystemEvents/StopSystemEvent.h"
@@ -130,7 +131,7 @@ Playfield* InstantRulesetExecutor::createPlayfield()
 
 	meteorPlayfield->LazyConstruct();
 	*/
-	return new InstantPlayfield();
+	return new InstantPlayfield()->SetLeaveGameFunction(leaveGame)->SetRestartGameFunction(restartGame);
 }
 
 EventProcessor<Event>* InstantRulesetExecutor::getEventProcessor(Event * e)
@@ -148,13 +149,18 @@ EventProcessor<Event>* InstantRulesetExecutor::getEventProcessor(Event * e)
 		int height = playfield->GetHeight();
 		return (new InstantFallEffectMapper(width, height))->RegisterEvent(e);
 	}
-	else if (processorType == "SystemEventHandler") {
-		// TODO: 在這邊把歌曲名稱擺進去
-		return (new SystemEventHandler<StopSystemEvent>())->RegisterEvent(e);
+	else if (processorType == "InstantGlowLineEffectMapper") {
+		int width = playfield->GetWidth();
+		int height = playfield->GetHeight();
+		return (new InstantGlowLineEffectMapper(width, height))->RegisterEvent(e);
 	}
 	else if (processorType == "InstantPianoSoundEventProcessor") {
 		LOG(LogLevel::Depricated) << "MeteorRulesetExecutor::getEventProcessor : getting event PianoEventProcessor at [" << e->GetStartTime() << "]";
 		return (new InstantPianoSoundEventProcessor())->RegisterEvent(e);
+	}
+	else if (processorType == "SystemEventHandler") {
+		// TODO: 在這邊把歌曲名稱擺進去
+		return (new SystemEventHandler<SystemEvent>())->RegisterEvent(e);
 	}
 
 
@@ -190,7 +196,7 @@ int InstantRulesetExecutor::playfieldLoad()
 		typename multimap<pair<float, float>, EventProcessor<Event>*>::iterator it;
 
 		for (it = periods->begin(); it != periods->end(); it++) {
-			LOG(LogLevel::Debug) << "---timespan [" << it->first.first << "," << it->first.second << "] -> processor [" << it->second->GetStartTime() << "].";
+			LOG(LogLevel::Depricated) << "---timespan [" << it->first.first << "," << it->first.second << "] -> processor [" << it->second->GetStartTime() << "].";
 		}
 
 

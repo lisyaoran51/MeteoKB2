@@ -155,7 +155,9 @@
     <ClCompile Include="Games\Scheduler\Event\PlayfieldEvents\PlayfieldControllers\PlayfieldController.cpp" />
     <ClCompile Include="Games\Scheduler\Event\PlayfieldEvents\PlayfieldEvent.cpp" />
     <ClCompile Include="Games\Scheduler\Event\PlayfieldEvents\PlayfieldEventProcessor.cpp" />
+    <ClCompile Include="Games\Scheduler\Event\SystemEvents\RestartSystemEvent.cpp" />
     <ClCompile Include="Games\Scheduler\Event\SystemEvents\StopSystemEvent.cpp" />
+    <ClCompile Include="Games\Scheduler\Event\SystemEvents\SystemControllers\SystemController.cpp" />
     <ClCompile Include="Games\Scheduler\Event\SystemEvents\SystemEvent.cpp" />
     <ClCompile Include="Games\Scheduler\Event\SystemEvents\SystemEventHandler.cpp" />
     <ClCompile Include="Games\Scheduler\Event\TimeEvents\TimeControllerControllers\TimeControllerController.cpp" />
@@ -530,7 +532,9 @@
     <ClInclude Include="Games\Scheduler\Event\PlayfieldEvents\PlayfieldControllers\PlayfieldController.h" />
     <ClInclude Include="Games\Scheduler\Event\PlayfieldEvents\PlayfieldEventProcessor.h" />
     <ClInclude Include="Games\Scheduler\Event\PlayfieldEvents\PlayfieldEvent.h" />
+    <ClInclude Include="Games\Scheduler\Event\SystemEvents\RestartSystemEvent.h" />
     <ClInclude Include="Games\Scheduler\Event\SystemEvents\StopSystemEvent.h" />
+    <ClInclude Include="Games\Scheduler\Event\SystemEvents\SystemControllers\SystemController.h" />
     <ClInclude Include="Games\Scheduler\Event\SystemEvents\SystemEvent.h" />
     <ClInclude Include="Games\Scheduler\Event\SystemEvents\SystemEventHandler.h" />
     <ClInclude Include="Games\Scheduler\Event\TimeEvents\TimeControllerControllers\TimeControllerController.h" />

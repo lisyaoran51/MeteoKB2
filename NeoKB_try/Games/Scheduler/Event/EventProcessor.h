@@ -94,7 +94,9 @@ namespace Events {
 		/// the work to do with this Event, such as stop the game, slow down...
 		/// 現在Process用來代表所有event processor執行的動作，下面override上來
 		/// </summary>
-		virtual int Process() { return 0; }
+		virtual int Process() { 
+			isProcessed = true;
+			return 0; }
 
 		virtual MTO_FLOAT GetStartTime(){ return event->GetStartTime(); }
 		virtual MTO_FLOAT GetLifeTime(){ return event->GetLifeTime(); }

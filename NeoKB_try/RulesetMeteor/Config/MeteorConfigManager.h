@@ -40,6 +40,7 @@ namespace Config{
 		InstrumentController,
 		VirtualInstrumentController,
 		RepeatPracticeController,
+		SystemController,
 
 		MapPitchShifter,
 		OctaveShifter,

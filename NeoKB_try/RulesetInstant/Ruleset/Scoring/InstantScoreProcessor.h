@@ -18,6 +18,10 @@ namespace Scoring{
 
 		InstantScoreProcessor(RulesetExecutor<Event>* rExecutor);
 
+	protected:
+
+		virtual bool getIsCompleted();
+
 	};
 
 }}}

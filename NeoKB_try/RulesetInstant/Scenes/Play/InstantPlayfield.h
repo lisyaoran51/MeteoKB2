@@ -39,8 +39,6 @@ namespace Play{
 
 		InstantPlayfield();
 
-		MapPitchShifter* GetMapPitchShifter();
-
 		virtual int OnJudgement(HitObject * hitObject, Judgement * judgement);
 
 		int SetIsGameControllingPitchState(bool value);
@@ -81,7 +79,7 @@ namespace Play{
 		/// <summary>
 		/// 用來把map平移到想要的pitch的工具
 		/// </summary>
-		MapPitchShifter* mapPitchShifter = nullptr;
+		//MapPitchShifter* mapPitchShifter = nullptr;
 
 		virtual int LoadOnComplete();
 

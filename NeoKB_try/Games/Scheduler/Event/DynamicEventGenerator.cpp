@@ -40,16 +40,16 @@ DynamicEventGenerator::DynamicEventGenerator(Playfield * p) : RegisterType("Dyna
 int DynamicEventGenerator::update()
 {
 
-	if (dynamicEventProcessors.size() == 0)
+	if (dynamicEvents.size() == 0)
 		return 0;
 
-	unique_lock<mutex> uLock(dynamicEventProcessorsMutex);
+	unique_lock<mutex> uLock(dynamicEventsMutex);
 
-	for (int i = 0; i < dynamicEventProcessors.size(); i++) {
-		playfield->AddDynamic(dynamicEventProcessors[i]);
+	for (int i = 0; i < dynamicEvents.size(); i++) {
+		playfield->AddDynamic(dynamicEvents[i]);
 	}
 
-	dynamicEventProcessors.clear();
+	dynamicEvents.clear();
 
 	return 0;
 }

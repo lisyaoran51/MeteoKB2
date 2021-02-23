@@ -32,6 +32,9 @@ using namespace Games::Schedulers::Events;
 #include "../Games/Scheduler/Event/Effect/Algorithm/LinearMapPitchShifter.h"
 using namespace Games::Schedulers::Events::Effects::Algorithms;
 
+#include "../Games/Scheduler/Event/SystemEvents/SystemControllers/SystemController.h"
+using namespace Games::Schedulers::Events::SystemEvents::SystemControllers;
+
 // Games/Sheetmusics/Format
 #include "../Games/Sheetmusic/Format/SimpleSmDecoder.h"
 using namespace Games::Sheetmusics::Format;
@@ -81,8 +84,33 @@ using namespace Meteor::Schedulers::Events::Effects::Algorithms;
 #include "../RulesetMeteor/Sheetmusic/Pattern/MeteorPatternGenerator.h"
 using namespace Meteor::Sheetmusics::Patterns;
 
+// ===============================================
 
+// Instant
+#include "../RulesetInstant/InstantGame.h"
+using namespace Instant;
 
+// Instant/Config
+#include "../RulesetInstant/Config/InstantConfigManager.h"
+using namespace Instant::Config;
+
+// Instant/Play
+#include "../RulesetInstant/Scenes/Play/InstantPlayfield.h"
+using namespace Instant::Scenes::Play;
+
+// Instant/Rulesets
+#include "../RulesetInstant/Ruleset/InstantRuleset.h"
+#include "../RulesetInstant/Ruleset/InstantRulesetExecutor.h"
+using namespace Instant::Rulesets;
+
+// Instant/Schedulers/Events/Effects/Algorithms
+#include "../RulesetInstant/Scheduler/Event/Effect/Algorithm/InstantFallMapAlgorithm.h"
+#include "../RulesetInstant/Scheduler/Event/Effect/Algorithm/InstantGlowLineMapAlgorithm.h"
+using namespace Instant::Schedulers::Events::Effects::Algorithms;
+
+// Instant/Schedulers/Events/InstrumentEvents/InstrumentControllers
+#include "../RulesetInstant/Scheduler/Event/InstrumentEvents/InstrumentControllers/InstantVirtualPianoController.h"
+using namespace Instant::Schedulers::Events::InstrumentEvents::InstrumentControllers;
 
 using namespace Util;
 
@@ -117,6 +145,9 @@ int ProgramInitializer::Initialize()
 
 	// Games/Scheduler/Events/Effects/Algorithms
 	iCreator.RegisterType<LinearMapPitchShifter>("LinearMapPitchShifter");
+
+	// Games/Scheduler/Events/SystemEvents/SystemControllers
+	iCreator.RegisterType<SystemController>("SystemController");
 
 	// Games/Sheetmusics/Format
 	iCreator.RegisterType<SimpleSmDecoder>("SimpleSmDecoder");
@@ -168,9 +199,31 @@ int ProgramInitializer::Initialize()
 	// Meteor/Sheetmusics/Patterns
 	iCreator.RegisterType<MeteorPatternGenerator>("MeteorPatternGenerator");
 
-	iCreator.PrintCreators();
 
 	// ===============================================
+
+
+	// ===============================================
+
+	// Instant
+	iCreator.RegisterType<InstantGame>("InstantGame");
+
+	// Instant/Config
+	iCreator.RegisterType<InstantConfigManager>("InstantConfigManager");
+
+	// Instant/Play
+	iCreator.RegisterType<InstantPlayfield>("InstantPlayfield");
+
+	// Instant/Rulesets
+	iCreator.RegisterType<InstantRuleset>("InstantRuleset");
+	iCreator.RegisterType<InstantRulesetExecutor>("InstantRulesetExecutor");
+
+	// Instant/Schedulers/Events/Effects/Algorithms
+	iCreator.RegisterType<InstantFallMapAlgorithm>("InstantFallMapAlgorithm");
+	iCreator.RegisterType<InstantGlowLineMapAlgorithm>("InstantGlowLineMapAlgorithm");
+
+	// Instant/Schedulers/Events/InstrumentEvents/InstrumentControllers
+	iCreator.RegisterType<InstantVirtualPianoController>("InstantVirtualPianoController");
 
 
 
@@ -179,5 +232,6 @@ int ProgramInitializer::Initialize()
 
 	//SmDecoder::RegisterDecoder("simple file format v0", "SimpleSmDecoder");
 
+	iCreator.PrintCreators();
 	return 0;
 }

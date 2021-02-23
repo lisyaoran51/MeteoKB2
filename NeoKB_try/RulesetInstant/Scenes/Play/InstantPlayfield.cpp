@@ -105,6 +105,22 @@ int InstantPlayfield::load(FrameworkConfigManager* f, InstantConfigManager * m)
 	}
 	AddChild(instrumentControllers["InstantPianoSoundEvent"]);
 
+	/* --------------------- System Controller --------------------- */
+	string systemControllerName;
+
+	if (m->Get(InstantSetting::InstantSystemController, &systemControllerName)) {
+		SystemController* systemController = iCreator.CreateInstanceWithT<SystemController>(systemControllerName);
+		systemController->LazyConstruct(leaveGame, restartGame);
+		systemControllers["StopSystemEvent"] = systemController;
+		systemControllers["RestartSystemEvent"] = systemController;
+	}
+	else {
+		systemControllers["StopSystemEvent"] = new SystemController();
+		systemControllers["RestartSystemEvent"] = systemControllers["StopSystemEvent"];
+		systemControllers["StopSystemEvent"]->LazyConstruct(leaveGame, restartGame);
+	}
+	AddChild(systemControllers["StopSystemEvent"]);
+
 	return 0;
 }
 
@@ -113,11 +129,6 @@ InstantPlayfield::InstantPlayfield(): Playfield(), RegisterType("InstantPlayfiel
 	// functional裡面的bind不能對overloading問題
 	// https://stackoverflow.com/questions/4159487/stdbind-overload-resolution
 	registerLoad(bind((int(InstantPlayfield::*)())&InstantPlayfield::load, this));
-}
-
-MapPitchShifter * InstantPlayfield::GetMapPitchShifter()
-{
-	return mapPitchShifter;
 }
 
 int InstantPlayfield::OnJudgement(HitObject * hitObject, Judgement * judgement)
@@ -176,6 +187,7 @@ int InstantPlayfield::OnButtonDown(InstantAction action)
 {
 	LOG(LogLevel::Debug) << "InstantPlayfield::OnButtonDown() : button = " << int(action) << ".";
 
+	// Instant模式應該改成不能夠change pitch state
 	if (!isGameControllingPitchState) {
 		if (action == InstantAction::LowerOctave) {
 			switch (pitchState) {

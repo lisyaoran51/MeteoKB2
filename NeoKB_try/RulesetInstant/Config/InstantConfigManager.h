@@ -34,6 +34,7 @@ namespace Config{
 		InstantFallMapAlgorithm,
 		InstantGlowLineMapAlgorithm,
 		InstantVirtualInstrumentController,
+		InstantSystemController,
 
 		WhiteKeyTargetHeight,
 		BlackKeyTargetHeight,

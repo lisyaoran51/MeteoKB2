@@ -406,6 +406,8 @@ int EventProcessorMaster::update()
 			dynamicEventProcessors.erase(iter);
 			iter--;
 
+			
+
 			LOG(LogLevel::Depricated) << "EventProcessorMaster::update : step 3 delete.";
 			// TODO: 這邊會有thread safe的問題，要lock
 			Event* e = ep->GetEvent();

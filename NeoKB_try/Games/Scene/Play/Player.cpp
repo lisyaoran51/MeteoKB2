@@ -45,6 +45,9 @@ int Player::load(MeteoConfigManager* m, Instrument* instru)
 	LOG(LogLevel::Fine) << "Player::load : create ruleset executor.";
 	rulesetExecutor = ruleset->CreateRulesetExecutor(workingSm.GetValue());
 
+	rulesetExecutor->SetLeaveGameFunction(bind(&Player::onQuiting, this));
+	rulesetExecutor->SetRestartGameFunction(bind(&Player::onRestarting, this));
+
 	/***
 	Sm<Event>* sm = workingSm->GetSm();
 	 

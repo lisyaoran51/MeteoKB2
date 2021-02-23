@@ -215,6 +215,24 @@ int MeteorPlayfield::load(FrameworkConfigManager* f, MeteorConfigManager * m)
 		timeControllerControllers["RepeatPracticeEvent"] = new RepeatPracticeController();
 	AddChild(timeControllerControllers["RepeatPracticeEvent"]);
 
+
+
+	/* --------------------- System Controller --------------------- */
+	string systemControllerName;
+
+	if (m->Get(MeteorSetting::SystemController, &systemControllerName)) {
+		SystemController* systemController = iCreator.CreateInstanceWithT<SystemController>(systemControllerName);
+		systemController->LazyConstruct(leaveGame, restartGame);
+		systemControllers["StopSystemEvent"] = systemController;
+		systemControllers["RestartSystemEvent"] = systemController;
+	}
+	else {
+		systemControllers["StopSystemEvent"] = new SystemController();
+		systemControllers["RestartSystemEvent"] = systemControllers["StopSystemEvent"];
+		systemControllers["StopSystemEvent"]->LazyConstruct(leaveGame, restartGame);
+	}
+	AddChild(systemControllers["StopSystemEvent"]);
+
 	return 0;
 }
 

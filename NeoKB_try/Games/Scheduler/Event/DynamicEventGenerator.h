@@ -37,11 +37,13 @@ namespace Events{
 
 	protected:
 
-		mutable mutex dynamicEventProcessorsMutex;
+		mutable mutex dynamicEventsMutex;
 
 		Playfield* playfield = nullptr;
 
 		vector<EventProcessor<Event>*> dynamicEventProcessors;
+
+		vector<Event*> dynamicEvents;
 
 		virtual int update();
 

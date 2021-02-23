@@ -15,6 +15,7 @@ int InstantConfigManager::InitializeDefault()
 	Set(InstantSetting::InstantFallMapAlgorithm, "InstantFallMapAlgorithm");
 	Set(InstantSetting::InstantGlowLineMapAlgorithm, "InstantGlowLineMapAlgorithm");
 	Set(InstantSetting::InstantVirtualInstrumentController, "InstantVirtualPianoController");
+	Set(InstantSetting::InstantSystemController, "InstantSystemController");
 
 	Set(InstantSetting::FallSpeed, MTO_FLOAT(16.f));
 	Set(InstantSetting::FallBrightness, MTO_FLOAT(1.f));

@@ -12,6 +12,7 @@
 #include "../../Scheduler/Event/InstrumentEvents/InstrumentControllers/InstrumentController.h"
 #include "../../Scheduler/Event/PlayfieldEvents/PlayfieldControllers/PlayfieldController.h"
 #include "../../Scheduler/Event/TimeEvents/TimeControllerControllers/TimeControllerController.h"
+#include "../../Scheduler/Event/SystemEvents/SystemControllers/SystemController.h"
 
 
 
@@ -24,6 +25,7 @@ using namespace Games::Schedulers::Events::IoEvents::IoCommunicators;
 using namespace Games::Schedulers::Events::InstrumentEvents::InstrumentControllers;
 using namespace Games::Schedulers::Events::PlayfieldEvents::PlayfieldControllers;
 using namespace Games::Schedulers::Events::TimeEvents::TimeControllerControllers;
+using namespace Games::Schedulers::Events::SystemEvents::SystemControllers;
 
 
 
@@ -63,6 +65,10 @@ namespace Play {
 
 		int SetGetEventProcessorFunction(function<EventProcessor<Event>*(Event*)> getEventProcessorFunction);
 
+		Playfield* SetLeaveGameFunction(function<int()> lGame);
+
+		Playfield* SetRestartGameFunction(function<int()> rGame);
+
 		vector<EventProcessor<Event>*>* GetEventProcessors();
 
 		/// <summary>
@@ -85,6 +91,12 @@ namespace Play {
 		OutputManager* outputManager = nullptr;
 
 		function<EventProcessor<Event>*(Event*)> getEventProcessor;
+
+
+		///<summary>
+		/// 在這邊存了會用到的algo，在getEventProcessor時可以到這邊選擇要用的algo
+		///</summary>
+		map<string, SystemController*> systemControllers;
 
 		///<summary>
 		/// 在這邊存了會用到的algo，在getEventProcessor時可以到這邊選擇要用的algo
@@ -122,6 +134,10 @@ namespace Play {
 		/// 佔存剛建完的影像，還沒位移到正確位置上
 		///</summary>
 		Map* bufferMap = nullptr;
+
+		function<int()> leaveGame;
+
+		function<int()> restartGame;
 
 		virtual EventProcessorMaster* createEventProcessorMaster() = 0;
 

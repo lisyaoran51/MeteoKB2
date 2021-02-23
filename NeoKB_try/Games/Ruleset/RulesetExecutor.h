@@ -249,6 +249,15 @@ namespace Rulesets {
 			return sm->GetEvents();
 		}
 
+		int SetLeaveGameFunction(function<int()> lGame) {
+			leaveGame = lGame;
+			return 0;
+		}
+
+		int SetRestartGameFunction(function<int()> rGame) {
+			restartGame = rGame;
+			return 0;
+		}
 
 	protected:
 
@@ -265,6 +274,10 @@ namespace Rulesets {
 		EventProcessorFilter* eventProcessorFilter = nullptr;
 
 		ActionList<int, Judgement*> onJudgement;
+
+		function<int()> leaveGame;
+
+		function<int()> restartGame;
 
 		virtual Playfield* createPlayfield() = 0;
 

@@ -86,7 +86,7 @@ namespace Scoring {
 
 		ActionList<int> onAllJudged;
 
-		bool getIsCompleted();
+		virtual bool getIsCompleted();
 
 		int addJudgement(Judgement* judgement);
 

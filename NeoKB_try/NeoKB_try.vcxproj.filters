@@ -859,6 +859,12 @@
     <Filter Include="標頭檔\RulesetMeteor\IO\Communications">
       <UniqueIdentifier>{87462d2f-477c-4483-9086-3ab7390386c3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="標頭檔\Games\Scheduler\Events\SystemEvents\SystemControllers">
+      <UniqueIdentifier>{3e84035d-96fb-4bba-9f30-c157ed649d7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Games\Schedulers\Events\SystemEvent\SystemControllers">
+      <UniqueIdentifier>{be24bef8-e01b-410a-a27b-d269669b6cb7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Games\Graphic\Renderer\renderer.cpp">
@@ -1835,6 +1841,12 @@
     </ClCompile>
     <ClCompile Include="Games\IO\Communications\GetBinaryBleRequest.cpp">
       <Filter>來源檔案\Games\IO\Communications</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\Scheduler\Event\SystemEvents\SystemControllers\SystemController.cpp">
+      <Filter>來源檔案\Games\Schedulers\Events\SystemEvent\SystemControllers</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\Scheduler\Event\SystemEvents\RestartSystemEvent.cpp">
+      <Filter>來源檔案\Games\Schedulers\Events\SystemEvent</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -3087,6 +3099,12 @@
     </ClInclude>
     <ClInclude Include="Games\IO\Communications\GetBinaryBleRequest.h">
       <Filter>標頭檔\Games\IO\Communications</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Scheduler\Event\SystemEvents\SystemControllers\SystemController.h">
+      <Filter>標頭檔\Games\Scheduler\Events\SystemEvents\SystemControllers</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Scheduler\Event\SystemEvents\RestartSystemEvent.h">
+      <Filter>標頭檔\Games\Scheduler\Events\SystemEvents</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

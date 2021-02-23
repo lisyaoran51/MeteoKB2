@@ -28,15 +28,20 @@ namespace SystemEvents {
 		// 一定要每次都override!!
 		virtual string GetTypeName();
 
+	protected:
+
+
+
 
 	};
 
 	enum class SystemEventType {
-		Start,
-		Pause,
-		Resume,
-		End,
-		Stop
+		Start,	// 用步道，遊戲會自動開始
+		Pause,	// 移到time controller了
+		Resume,	// 用步道
+		End,	// 結束整個城市的意思
+		Stop,	// 結束遊戲的一死
+		Restart
 	};
 
 }}}}

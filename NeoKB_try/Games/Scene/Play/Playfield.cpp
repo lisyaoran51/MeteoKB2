@@ -6,6 +6,7 @@
 #include "../../Scheduler/Event/InstrumentEvents/InstrumentEventProcessor.h"
 #include "../../Scheduler/Event/PlayfieldEvents/PlayfieldEventProcessor.h"
 #include "../../Scheduler/Event/TimeEvents/TimeEventProcessor.h"
+#include "../../Scheduler/Event/SystemEvents/SystemEventHandler.h"
 #include <functional>
 
 
@@ -19,6 +20,7 @@ using namespace Util;
 using namespace std;
 using namespace Games::Schedulers::Events::PlayfieldEvents;
 using namespace Games::Schedulers::Events::TimeEvents;
+using namespace Games::Schedulers::Events::SystemEvents;
 
 
 /*
@@ -242,6 +244,18 @@ int Playfield::SetGetEventProcessorFunction(function<EventProcessor<Event>*(Even
 	return 0;
 }
 
+Playfield* Playfield::SetLeaveGameFunction(function<int()> lGame)
+{
+	leaveGame = lGame;
+	return this;
+}
+
+Playfield * Playfield::SetRestartGameFunction(function<int()> rGame)
+{
+	restartGame = rGame;
+	return this;
+}
+
 vector<EventProcessor<Event>*>* Playfield::GetEventProcessors()
 {
 	return &eventProcessors;
@@ -270,6 +284,21 @@ int Playfield::AddDynamic(EventProcessor<Event>* ep) {
 		// 這邊要把map加進去
 		//EffectMapperInterface* em = ep->Cast<EffectMapperInterface>();
 		//em->RegisterMap(lightMap); //改用draw(map, effect)，所以不用內存一個map
+	}
+	else if (ep->CanCast<SystemEventHandlerInterface>()) {
+		// 為什麼不用event自己來create? 因為要去搭配不同的mapper，所以要動態調配
+		string processorType = ep->GetEventTypeName();
+		map<string, SystemController*>::iterator iter = systemControllers.find(processorType);
+
+		if (iter != systemControllers.end())
+		{
+			SystemController* systemController = systemControllers[processorType];
+			ep->Cast<SystemEventHandlerInterface>()->RegisterSystemController(systemController);
+
+			LOG(LogLevel::Finer) << "Playfield::AddDynamic() : Register [" << systemControllers[processorType]->GetTypeName() << "] to event handler [" << processorType << "] on [" << ep->GetStartTime() << "].";
+		}
+		else
+			throw runtime_error("Playfield::AddDynamic() : event handler not found");
 	}
 
 	eventProcessorMaster->AddDynamicEventProcessor(ep);
