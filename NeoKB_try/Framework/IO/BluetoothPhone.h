@@ -69,20 +69,20 @@ namespace IO {
 		/// <summary>
 		/// 寫入sm檔時的callback
 		/// </summary>
-		int AddOnStartWritingSmFile(MtoObject* callableObject, function<int(string)> callback, string name);
-		int AddOnWriteSmFileSuccess(MtoObject* callableObject, function<int(string)> callback, string name);
+		//int AddOnStartWritingSmFile(MtoObject* callableObject, function<int(string)> callback, string name);
+		//int AddOnWriteSmFileSuccess(MtoObject* callableObject, function<int(string)> callback, string name);
 
 		/// <summary>
 		/// 寫入新音色時的callback
 		/// </summary>
-		int AddOnStartWritingSoundFilePackage(MtoObject* callableObject, function<int(string)> callback, string name);
-		int AddOnWriteSoundFilePackageSuccess(MtoObject* callableObject, function<int(string)> callback, string name);
+		//int AddOnStartWritingSoundFilePackage(MtoObject* callableObject, function<int(string)> callback, string name);
+		//int AddOnWriteSoundFilePackageSuccess(MtoObject* callableObject, function<int(string)> callback, string name);
 
 		/// <summary>
 		/// 寫入新主程式時的callback
 		/// </summary>
-		int AddOnStartWritingProgram(MtoObject* callableObject, function<int(string)> callback, string name);
-		int AddOnWriteProgramSuccess(MtoObject* callableObject, function<int(string)> callback, string name);
+		//int AddOnStartWritingProgram(MtoObject* callableObject, function<int(string)> callback, string name);
+		//int AddOnWriteProgramSuccess(MtoObject* callableObject, function<int(string)> callback, string name);
 
 	protected:
 

@@ -12,7 +12,7 @@ ApiAccess::ApiAccess(GameHost * gHost): RegisterType("ApiAccess")
 	gameHost = gHost;
 
 }
-
+/*
 int ApiAccess::AddOnStartWritingSmFile(MtoObject * callableObject, function<int(string)> callback, string name)
 {
 	return gameHost->GetMainInterface()->GetBluetoothPhone()->AddOnStartWritingSmFile(callableObject, callback, name);
@@ -43,3 +43,4 @@ int ApiAccess::AddOnWriteProgramSuccess(MtoObject * callableObject, function<int
 {
 	return gameHost->GetMainInterface()->GetBluetoothPhone()->AddOnWriteProgramSuccess(callableObject, callback, name);
 }
+*/

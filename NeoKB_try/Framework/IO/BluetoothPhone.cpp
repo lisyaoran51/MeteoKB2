@@ -33,7 +33,7 @@ bool BluetoothPhone::CheckFileSegmentMessageOutputClear()
 	return matchedBluetoothDevice->CheckFileSegmentMessageOutputClear();
 }
 
-
+/*
 int BluetoothPhone::AddOnStartWritingSmFile(MtoObject * callableObject, function<int(string)> callback, string name)
 {
 	return matchedBluetoothDevice->AddOnStartWritingSmFile(callableObject, callback, name);
@@ -65,3 +65,4 @@ int BluetoothPhone::AddOnWriteProgramSuccess(MtoObject * callableObject, functio
 	return matchedBluetoothDevice->AddOnWriteProgramSuccess(callableObject, callback, name);
 }
 
+*/
