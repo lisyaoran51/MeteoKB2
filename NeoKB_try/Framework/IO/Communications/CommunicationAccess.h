@@ -29,6 +29,11 @@ namespace Communications{
 		/// </summary>
 		virtual int Queue(CommunicationRequest* communicationRequest);
 
+		/// <summary>
+		/// 這邊要用strategy處理wifi和ble同時處理的問題
+		/// </summary>
+		virtual int handleRequest(CommunicationRequest* communicationRequest);
+
 
 	protected:
 		

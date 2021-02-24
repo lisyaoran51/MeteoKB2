@@ -18,3 +18,9 @@ int CommunicationAccess::Queue(CommunicationRequest * communicationRequest)
 
 	return communicationRequest->ChooseCommunicationComponentAndPerform();
 }
+
+int CommunicationAccess::handleRequest(CommunicationRequest * communicationRequest)
+{
+	// no-op
+	return 0;
+}
