@@ -85,7 +85,7 @@ int SongSelect::load(SmManager * sManager, MeteoGame * game, Storage* s)
 		string decompressCommand = string("tar -xvf ") + storage->GetTempBasePath() + string("/temp/") + fSegmentMap->fileName + string(".temp ") 
 													   + storage->GetTempBasePath() + string("/Sheetmusics/") + fSegmentMap->GetFileNameWithoutExtension() + "/" + fSegmentMap->fileName;
 
-		File* fp = popen(decompressCommand.c_str(), "r");
+		FILE* fp = popen(decompressCommand.c_str(), "r");
 		if (fp == NULL) {
 			// error
 		}
