@@ -7,6 +7,8 @@
 #include "../../Framework/Input/Messages/MessageHandler.h"
 #include "../Output/Bluetooths/MeteoBluetoothMessage.h"
 #include "../../Framework/IO/Communications/CommunicationAccess.h"
+#include "../../Util/DataStructure/FileSegmentMap.h"
+#include <functional>
 
 
 
@@ -15,6 +17,8 @@ using namespace Games::Sheetmusics;
 using namespace Framework::Input::Messages;
 using namespace Games::Output::Bluetooths;
 using namespace Framework::IO::Communications;
+using namespace Util::DataStructure;
+using namespace std;
 
 
 namespace Games {
