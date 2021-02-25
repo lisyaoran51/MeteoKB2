@@ -1,11 +1,10 @@
-#include "GlowLineEffectMapper.h"
+#include "InstantGlowLineEffectMapper.h"
 
 
 
-using namespace Meteor::Schedulers::Events::Effects;
-using namespace std;
+using namespace Instant::Schedulers::Events::Effects;
 
 
-GlowLineEffectMapper::GlowLineEffectMapper(int w, int h): EffectMapper<GlowLineEffect>(w,h)
+InstantGlowLineEffectMapper::InstantGlowLineEffectMapper(int w, int h): EffectMapper<InstantGlowLineEffect>(w,h)
 {
 }

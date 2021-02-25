@@ -1,21 +1,17 @@
 #include "InstantFallEffectMapper.h"
 
-#include <math.h>
-#include "../../../Ruleset/Judgements/MeteorJudgement.h"
 
 
 
-using namespace Meteor::Schedulers::Events::Effects;
-using namespace std;
-using namespace Meteor::Rulesets::Judgements;
+using namespace Instant::Schedulers::Events::Effects;
 
 
-FallEffectMapper::FallEffectMapper()
+InstantFallEffectMapper::InstantFallEffectMapper()
 {
-	throw logic_error("FallEffectMapper() : This constructor is only for compile-time assurance. Not available to execute.");
+	throw logic_error("InstantFallEffectMapper() : This constructor is only for compile-time assurance. Not available to execute.");
 }
 
-FallEffectMapper::FallEffectMapper(int w, int h) : EffectMapper<FallEffect>(w, h)
+InstantFallEffectMapper::InstantFallEffectMapper(int w, int h) : EffectMapper<InstantFallEffect>(w, h)
 {
 
 }
