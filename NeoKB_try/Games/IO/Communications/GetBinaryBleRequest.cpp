@@ -162,8 +162,8 @@ int GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait(BleRequest * 
 	}
 
 	/* 檢查Scene是否還存在，存在才能執行 */
-	if (SceneMaster::GetInstance().CheckScene(thisGetBinaryRequest->callbackScene))
-		onFinish.TriggerThenClear();
+	if (SceneMaster::GetInstance().CheckScene(thisGetBinaryRequest->callbackScene))	// 之後要改掉這個，不需要驗證場景是否存在
+		onFinish.TriggerThenClear(&bleBinaryRequestFileSegmentMap);
 
 
 
@@ -189,6 +189,5 @@ int GetBinaryBleRequest::GetBinaryBleRequestMethod::AddOnFinish(ActionList<int, 
 
 GetBinaryBleRequest::GetBinaryBleRequest(string fPath, MeteoBluetoothMessage * gMessage, MeteoCommand ackGetCommand, MeteoCommand tCommand, MeteoCommand fCommand, MeteoCommand rRetransferCommand, MeteoCommand aFinishCommand)
 {
-
-	onSuccess
+	LOG(LogLevel::Error) << "GetBinaryBleRequest::GetBinaryBleRequest() : not implemented.";
 }
