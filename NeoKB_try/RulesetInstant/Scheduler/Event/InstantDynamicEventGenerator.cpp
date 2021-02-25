@@ -40,11 +40,11 @@ int InstantDynamicEventGenerator::OnMessage(MeteoBluetoothMessage * message)
 
 			if (splitCommand[0] == "Fall") {
 
-				int key = stoi(command[1]);
+				int key = stoi(splitCommand[1]);
 
-				double startTime = GetClock()->GetCurrentTime() + stod(command[2]);
+				double startTime = GetClock()->GetCurrentTime() + stod(splitCommand[2]);
 				
-				double lifeTime = stod(command[3]);
+				double lifeTime = stod(splitCommand[3]);
 
 				int speed = 1.0 / lifeTime * 16;
 
@@ -66,11 +66,11 @@ int InstantDynamicEventGenerator::OnMessage(MeteoBluetoothMessage * message)
 				dynamicEvents.push_back(instantFallEffect);
 			}
 			else if (splitCommand[0] == "Line") {
-				int key = stoi(command[1]);
+				int key = stoi(splitCommand[1]);
 
-				double startTime = GetClock()->GetCurrentTime() + stod(command[2]);
+				double startTime = GetClock()->GetCurrentTime() + stod(splitCommand[2]);
 
-				double lifeTime = stod(command[3]);
+				double lifeTime = stod(splitCommand[3]);
 
 				InstantGlowLineEffect* instantGlowLineEffect = new InstantGlowLineEffect(key, 0, startTime, lifeTime);
 
@@ -79,11 +79,11 @@ int InstantDynamicEventGenerator::OnMessage(MeteoBluetoothMessage * message)
 				dynamicEvents.push_back(instantGlowLineEffect);
 			}
 			else if (splitCommand[0] == "Sound") {
-				int key = stoi(command[1]);
+				int key = stoi(splitCommand[1]);
 
-				double startTime = GetClock()->GetCurrentTime() + stod(command[2]);
+				double startTime = GetClock()->GetCurrentTime() + stod(splitCommand[2]);
 
-				int volume = stoi(command[3]);
+				int volume = stoi(splitCommand[3]);
 
 				if (key == -1) {
 					InstantPianoSoundEvent* instantPianoSoundEvent = new InstantPianoSoundEvent(volume == 0, startTime, 1);
@@ -105,9 +105,9 @@ int InstantDynamicEventGenerator::OnMessage(MeteoBluetoothMessage * message)
 			}
 			else if (splitCommand[0] == "Stop") {
 
-				double startTime = GetClock()->GetCurrentTime() + stod(command[1]);
+				double startTime = GetClock()->GetCurrentTime() + stod(splitCommand[1]);
 
-				double lifeTime = stod(command[2]);
+				double lifeTime = stod(splitCommand[2]);
 
 				StopSystemEvent* stopSystemEvent = new StopSystemEvent(startTime, lifeTime);
 
