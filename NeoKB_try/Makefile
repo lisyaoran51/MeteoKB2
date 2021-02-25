@@ -199,7 +199,7 @@ FileSystem.o ProgramInitializer.o StringSplitter.o FileSegmentMap.o \
 \
 MeteoGameDesktop.o Program.o \
 MeteoLightBoardV1.o bcm2835.o MeteoBitbangDisplayDevice.o MeteoSpidevDisplayDevice.o MeteoKeyboardDevice.o MeteoPanelDevice.o MeteoPanelBoardV1.o pi2c.o \
-MeteoBluetoothDevice.o MeteoBluetoothPhoneV1.o MeteoPacketConverterV1.o sdp.o \
+MeteoBluetoothDevice.o sdp.o \
 \
 MeteorGame.o MeteorConfigManager.o MeteorInputManager.o MeteorPitchBindingSet.o MeteorPlayfield.o \
 MeteorRuleset.o MeteorRulesetExecutor.o MeteorJudgement.o MeteorHitWindow.o MeteorReplayRecorder.o MeteorReplayFrame.o \
