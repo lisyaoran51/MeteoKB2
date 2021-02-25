@@ -49,6 +49,14 @@ RulesetMeteor/Scheduler/Event/PlayfieldEvents:RulesetMeteor/Scheduler/Event/Play
 RulesetMeteor/Scheduler/Event/TimeEvents:RulesetMeteor/Scheduler/Event/TimeEvents/TimeControllerControllers:\
 RulesetMeteor/Sheetmusic:RulesetMeteor/Sheetmusic/Pattern:\
 RulesetMeteor/Timing:\
+\
+RulesetInstant:RulesetInstant/Config:RulesetInstant/Input:\
+RulesetInstant/Ruleset:RulesetInstant/Ruleset/Scoring:RulesetInstant/Ruleset/Replays:\
+RulesetInstant/Scenes/Play:RulesetInstant/Scenes/Results:\
+RulesetInstant/Scheduler/Event:RulesetInstant/Scheduler/Event/Effect:RulesetInstant/Scheduler/Event/Effect/Algorithm:\
+RulesetInstant/Scheduler/Event/InstrumentEvents:RulesetInstant/Scheduler/Event/InstrumentEvents/InstrumentControllers:\
+RulesetInstant/Sheetmusic:RulesetInstant/Sheetmusic/Pattern:\
+RulesetInstant/Timing:\
 
 
 
@@ -102,7 +110,14 @@ INCLUDE = -IFramwork -IFramework/Allocation -IFramework/Allocation/Hierachal -IF
 -IRulesetMeteor/Scheduler/Event/TimeEvents -IRulesetMeteor/Scheduler/Event/TimeEvents/TimeControllerControllers \
 -IRulesetMeteor/Sheetmusic -IRulesetMeteor/Sheetmusic/Pattern \
 -IRulesetMeteor/Timing 
-
+\
+-IRulesetInstant -IRulesetInstant/Config -IRulesetInstant/Input \
+-IRulesetInstant/Ruleset -IRulesetInstant/Ruleset/Scoring -IRulesetInstant/Ruleset/Replays \
+-IRulesetInstant/Scenes/Results -IRulesetInstant/Scenes/Play \
+-IRulesetInstant/Scheduler/Event -IRulesetInstant/Scheduler/Event/Effect -IRulesetInstant/Scheduler/Event/Effect/Algorithm \
+-IRulesetInstant/Scheduler/Event/InstrumentEvents -IRulesetInstant/Scheduler/Event/InstrumentEvents/InstrumentControllers \
+-IRulesetInstant/Sheetmusic -IRulesetInstant/Sheetmusic/Pattern \
+-IRulesetInstant/Timing 
 
 #INCLUDE = -IGames -IGames/Config -IGames/Graphic -IGames/Graphic/Map -IGames/Graphic/Renderer -IGames/Play -IGames/Ruleset \
 #-IGames/Scheduler -IGames/Scheduler/Event -IGames/Scheduler/Event/ControlPoints -IGames/Scheduler/Event/GameEvents -IGames/Scheduler/Event/Effect \
