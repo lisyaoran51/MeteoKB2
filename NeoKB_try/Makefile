@@ -221,6 +221,7 @@ InstantGame.o InstantConfigManager.o InstantInputManager.o InstantPlayfield.o \
 InstantRuleset.o InstantRulesetExecutor.o InstantReplayRecorder.o InstantReplayFrame.o \
 InstantResult.o \
 InstantScoreProcessor.o \
+InstantDynamicEventGenerator.o InstantEventProcessorMaster.o \
 InstantFallEffect.o InstantFallEffectMapper.o InstantGlowLineEffect.o InstantGlowLineEffectMapper.o \
 InstantFallMapAlgorithm.o InstantGlowLineMapAlgorithm.o \
 InstantPianoSoundEvent.o InstantPianoSoundEventProcessor.o InstantVirtualPianoController.o \

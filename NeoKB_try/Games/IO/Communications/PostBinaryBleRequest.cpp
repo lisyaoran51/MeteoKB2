@@ -241,3 +241,27 @@ int PostBinaryBleRequest::PostBinaryBleRequestMethod::AddOnFinish(MtoObject * ca
 	onFinish.Add(callableObject, callback, name);
 	return 0;
 }
+
+PostBinaryBleRequest::PostBinaryBleRequest(string fPath, MeteoBluetoothMessage * pMessage, MeteoCommand ackPostCommand, MeteoCommand tCommand, MeteoCommand fCommand, MeteoCommand rRetransferCommand, MeteoCommand aFinishCommand)
+{
+	LOG(LogLevel::Error) << "PostBinaryBleRequest::PostBinaryBleRequest() : not implemented.";
+}
+
+int PostBinaryBleRequest::ChooseCommunicationComponentAndPerform()
+{
+
+	LOG(LogLevel::Error) << "PostBinaryBleRequest::ChooseCommunicationComponentAndPerform() : not implemented.";
+	return 0;
+}
+
+int PostBinaryBleRequest::AddOnFinish(MtoObject * callableObject, function<int()> callback, string name)
+{
+	LOG(LogLevel::Error) << "PostBinaryBleRequest::AddOnFinish() : not implemented.";
+	return 0;
+}
+
+int PostBinaryBleRequest::fail(CommunicationRequestException & communicationRequestException)
+{
+	LOG(LogLevel::Error) << "PostBinaryBleRequest::fail() : not implemented.";
+	return 0;
+}
