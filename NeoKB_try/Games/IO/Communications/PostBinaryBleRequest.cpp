@@ -68,7 +68,7 @@ int PostBinaryBleRequest::PostBinaryBleRequestMethod::PerformAndWait(BleRequest 
 					else {
 						// fail
 						BleRequestException except(BleResponseCode::Gone);
-						Fail(except);
+						thisPostBinaryRequest->Fail(except);
 
 					}
 

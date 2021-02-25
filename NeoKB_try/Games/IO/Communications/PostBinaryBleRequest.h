@@ -77,6 +77,8 @@ namespace Communications{
 			vector<int> retransferOrders;
 
 			ActionList<int> onFinish;
+			ActionList<int, string> onPostBinarySuccess;
+			ActionList<int, json> onAck;
 		};
 	};
 
