@@ -109,7 +109,7 @@ INCLUDE = -IFramwork -IFramework/Allocation -IFramework/Allocation/Hierachal -IF
 -IRulesetMeteor/Scheduler/Event/PlayfieldEvents -IRulesetMeteor/Scheduler/Event/PlayfieldEvents/PlayfieldControllers \
 -IRulesetMeteor/Scheduler/Event/TimeEvents -IRulesetMeteor/Scheduler/Event/TimeEvents/TimeControllerControllers \
 -IRulesetMeteor/Sheetmusic -IRulesetMeteor/Sheetmusic/Pattern \
--IRulesetMeteor/Timing 
+-IRulesetMeteor/Timing \
 \
 -IRulesetInstant -IRulesetInstant/Config -IRulesetInstant/Input \
 -IRulesetInstant/Ruleset -IRulesetInstant/Ruleset/Scoring -IRulesetInstant/Ruleset/Replays \
