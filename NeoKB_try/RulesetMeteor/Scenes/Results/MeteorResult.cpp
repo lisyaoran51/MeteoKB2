@@ -576,7 +576,7 @@ int MeteorResult::onEntering(Scene * lastScene)
 	MeteoContextBluetoothMessage* postRecordMessage = new MeteoContextBluetoothMessage(MeteoCommand::PostPlayRecord);
 	json requestContext;
 
-	requestContext["FileName"] = StringSplitter::Split(recordFilePath, "/").back;
+	requestContext["FileName"] = StringSplitter::Split(recordFilePath, "/").back();
 	postRecordMessage->SetContextInJson(requestContext);
 	postRecordMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
 
