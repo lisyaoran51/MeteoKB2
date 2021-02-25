@@ -43,7 +43,7 @@ int InstantDynamicEventGenerator::OnMessage(MeteoBluetoothMessage * message)
 				int key = stoi(splitCommand[1]);
 
 				double startTime = GetClock()->GetCurrentTime() + stod(splitCommand[2]);
-				
+
 				double lifeTime = stod(splitCommand[3]);
 
 				int speed = 1.0 / lifeTime * 16;
@@ -116,7 +116,7 @@ int InstantDynamicEventGenerator::OnMessage(MeteoBluetoothMessage * message)
 				dynamicEvents.push_back(stopSystemEvent);
 			}
 		}
-
+	}
 
 
 	return 0;
