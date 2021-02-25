@@ -82,5 +82,11 @@ int BleRequest::PushInputRawMessage(MeteoBluetoothMessage * rawMessage)
 	return 0;
 }
 
+int BleRequest::fail(CommunicationRequestException & communicationRequestException)
+{
+	LOG(LogLevel::Error) << "int BleRequest::fail() : not implemented.";
+	return 0;
+}
+
 
 
