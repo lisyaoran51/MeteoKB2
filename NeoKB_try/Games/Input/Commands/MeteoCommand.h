@@ -236,6 +236,10 @@ namespace Commands{
 		AckFinalScore							,
 		PlayRecordData							,
 		AckPlayRecordData						,
+
+		PostPlayRecord							,
+		AckPostPlayRecord						,
+
 		PlayRecordFileSegment					,
 		AckPlayRecordFileSegment				,
 		RequestRewritePlayRecordFileSegment		,
