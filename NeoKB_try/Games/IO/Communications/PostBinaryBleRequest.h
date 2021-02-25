@@ -22,10 +22,21 @@ namespace Communications{
 			MeteoCommand rRetransferCommand,
 			MeteoCommand aFinishCommand);
 
+		/// <summary>
+		/// 有時一個request可以同時被wifi、ble、bt等多種communication component執行，這時request要先接收目前可選用的component有哪些，自己選定要用哪種component
+		/// 然後再執行
+		/// </summary>
+		virtual int ChooseCommunicationComponentAndPerform();
+
 		int AddOnFinish(MtoObject * callableObject, function<int()> callback, string name = "HandleFinish");
 
 
 	protected:
+
+
+
+		virtual int fail(CommunicationRequestException& communicationRequestException);
+
 		/// <summary>
 		/// post binary request的執行動作
 		/// </summary>

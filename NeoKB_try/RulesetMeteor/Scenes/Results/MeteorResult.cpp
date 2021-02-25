@@ -594,7 +594,7 @@ int MeteorResult::onEntering(Scene * lastScene)
 
 	postRecordRequest->AddOnSuccess(this, [=]() {
 
-		FILE* fp = popen(string("rm -f ") + recordFilePath, "r");
+		FILE* fp = popen((string("rm -f ") + recordFilePath).c_str(), "r");
 		if (fp == NULL) {
 			// throw error
 		}
