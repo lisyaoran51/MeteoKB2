@@ -37,7 +37,7 @@ int InstantEventProcessorMaster::OnKeyDown(pair<InstantAction, int> action)
 		for (auto it = pitchBindings.begin(); it != pitchBindings.end(); it++)
 		{
 			if (action.first == (*it).second)
-				meteoContextBluetoothMessage->GetContext()["Key"] = int((*it).first);
+				meteoContextBluetoothMessage->GetContextInJson()["Key"] = int((*it).first);
 		}
 		break;
 
@@ -45,7 +45,7 @@ int InstantEventProcessorMaster::OnKeyDown(pair<InstantAction, int> action)
 		for (auto it = loweredPitchBindings.begin(); it != loweredPitchBindings.end(); it++)
 		{
 			if (action.first == (*it).second)
-				meteoContextBluetoothMessage->GetContext()["Key"] = int((*it).first);
+				meteoContextBluetoothMessage->GetContextInJson()["Key"] = int((*it).first);
 		}
 		break;
 
@@ -53,13 +53,13 @@ int InstantEventProcessorMaster::OnKeyDown(pair<InstantAction, int> action)
 		for (auto it = raisedPitchBindings.begin(); it != raisedPitchBindings.end(); it++)
 		{
 			if (action.first == (*it).second)
-				meteoContextBluetoothMessage->GetContext()["Key"] = int((*it).first);
+				meteoContextBluetoothMessage->GetContextInJson()["Key"] = int((*it).first);
 		}
 		break;
 
 	}
 
-	meteoContextBluetoothMessage->GetContext()["Volume"] = action.second;
+	meteoContextBluetoothMessage->GetContextInJson()["Volume"] = action.second;
 
 	outputManager->PushMessage(meteoContextBluetoothMessage);
 	
