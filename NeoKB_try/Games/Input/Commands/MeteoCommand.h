@@ -258,6 +258,8 @@ namespace Commands{
 		InstantLightEvent						,
 		InstantPianoEvent						,
 
+		InstantEvent
+
 
 
 
