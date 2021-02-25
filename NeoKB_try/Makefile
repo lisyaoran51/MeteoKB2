@@ -20,7 +20,7 @@ Games/Input:Games/Input/Messages:\
 Games/IO/Communications:\
 Games/Output:Games/Output/Bluetooths:\
 Games/Scheduler/Event:Games/Scheduler/Event/ControlPoints:Games/Scheduler/Event/Effect:\
-Games/Scheduler/Event/Effect/Algorithm:Games/Scheduler/Event/GameEvents:Games/Scheduler/Event/SystemEvents:\
+Games/Scheduler/Event/Effect/Algorithm:Games/Scheduler/Event/GameEvents:Games/Scheduler/Event/SystemEvents:Games/Scheduler/Event/SystemEvents/SystemControllers:\
 Games/Scheduler/Event/IoEvents:Games/Scheduler/Event/IoEvents/IoCommunicators:\
 Games/Scheduler/Event/InstrumentEvents:Games/Scheduler/Event/InstrumentEvents/InstrumentControllers:\
 Games/Scheduler/Event/PlayfieldEvents:Games/Scheduler/Event/PlayfieldEvents/PlayfieldControllers:\
@@ -82,7 +82,7 @@ INCLUDE = -IFramwork -IFramework/Allocation -IFramework/Allocation/Hierachal -IF
 -IGames/Input -IGames/Input/Messages \
 -IGames/Output -IGames/Output/Bluetooths \
 -IGames/Scheduler/Event -IGames/Scheduler/Event/ControlPoints -IGames/Scheduler/Event/Effect \
--IGames/Scheduler/Event/Effect/Algorithm -IGames/Scheduler/Event/GameEvents -IGames/Scheduler/Event/SystemEvents \
+-IGames/Scheduler/Event/Effect/Algorithm -IGames/Scheduler/Event/GameEvents -IGames/Scheduler/Event/SystemEvents -IGames/Scheduler/Event/SystemEvents/SystemControllers \
 -IGames/Scheduler/Event/IoEvents -IGames/Scheduler/Event/IoEvents/IoCommunicators \
 -IGames/Scheduler/Event/InstrumentEvents -IGames/Scheduler/Event/InstrumentEvents/InstrumentControllers \
 -IGames/Scheduler/Event/PlayfieldEvents -IGames/Scheduler/Event/PlayfieldEvents/PlayfieldControllers \
@@ -172,7 +172,7 @@ MeteoConfigManager.o \
 Ruleset.o RulesetInfo.o RulesetStore.o Judgement.o HasHitWindow.o HitWindow.o ReplayRecorder.o ReplayFrame.o \
 Modifier.o DifficultyModifier.o EventProcessorFilterModifier.o InstrumentModifier.o TimeControllerModifier.o \
 Score.o ScoreProcessor.o \
-BleAccess.o BleRequest.o BleRequestException.o \
+BleAccess.o BleRequest.o BleRequestException.o GetTextBleRequest.o PostTextBleRequest.o GetBinaryBleRequest.o PostBinaryBleRequest.o \
 MeteoBluetoothMessage.o MeteoBluetoothOutputer.o MeteoContextBluetoothMessage.o MeteoFileSegmentBluetoothMessage.o \
 Loader.o MeteoScene.o Intro.o Player.o PlayerLoader.o Playfield.o Result.o \
 HudDisplay.o JudgementFlasher.o SongProgress.o \
@@ -184,7 +184,7 @@ Effect.o LinearMapPitchShifter.o MapPitchShifter.o \
 IoEvent.o IoEventProcessor.o PanelEvent.o IoCommunicator.o \
 InstrumentEvent.o InstrumentEventProcessor.o InstrumentController.o \
 PlayfieldEvent.o PlayfieldEventProcessor.o PlayfieldController.o \
-GameEvent.o StartGameEvent.o StopSystemEvent.o SystemEvent.o SystemEventHandler.o \
+GameEvent.o StartGameEvent.o StopSystemEvent.o RestartSystemEvent.o SystemEvent.o SystemEventHandler.o SystemController.o \
 TimeEvent.o TimeEventProcessor.o TimeControllerController.o \
 ResourceStoreWorkingSm.o SheetmusicConverter.o SheetmusicManager.o SheetmusicMetadata.o SheetmusicPostprocessor.o SheetmusicStore.o WorkingSheetmusic.o \
 SimpleSmDecoder.o SmDecoder.o FileReader.o Pattern.o PatternGenerator.o \
@@ -199,7 +199,7 @@ FileSystem.o ProgramInitializer.o StringSplitter.o FileSegmentMap.o \
 \
 MeteoGameDesktop.o Program.o \
 MeteoLightBoardV1.o bcm2835.o MeteoBitbangDisplayDevice.o MeteoSpidevDisplayDevice.o MeteoKeyboardDevice.o MeteoPanelDevice.o MeteoPanelBoardV1.o pi2c.o \
-MeteoBluetoothDevice.o sdp.o \
+MeteoBluetoothDevice.o MeteoBluetoothPhoneV2.o MeteoPacketConverterV2.o sdp.o \
 \
 MeteorGame.o MeteorConfigManager.o MeteorInputManager.o MeteorPitchBindingSet.o MeteorPlayfield.o \
 MeteorRuleset.o MeteorRulesetExecutor.o MeteorJudgement.o MeteorHitWindow.o MeteorReplayRecorder.o MeteorReplayFrame.o \
@@ -215,7 +215,17 @@ PianoEvent.o PianoEventProcessor.o PianoController.o PianoSoundEvent.o PianoSoun
 OctaveShiftEvent.o OctaveShiftEventProcessor.o OctaveShifter.o \
 RepeatPracticeEvent.o RepeatPracticeEventProcessor.o RepeatPracticeController.o \
 MeteorSheetmusicConverter.o MeteorSheetmusicPostprocessor.o MeteorPatternGenerator.o \
-MeteorTimeController.o 
+MeteorTimeController.o \
+\
+InstantGame.o InstantConfigManager.o InstantInputManager.o InstantPlayfield.o \
+InstantRuleset.o InstantRulesetExecutor.o InstantReplayRecorder.o InstantReplayFrame.o \
+InstantResult.o \
+InstantScoreProcessor.o \
+InstantFallEffect.o InstantFallEffectMapper.o InstantGlowLineEffect.o InstantGlowLineEffectMapper.o \
+InstantFallMapAlgorithm.o InstantGlowLineMapAlgorithm.o \
+InstantPianoSoundEvent.o InstantPianoSoundEventProcessor.o InstantVirtualPianoController.o \
+InstantSheetmusicConverter.o InstantSheetmusicPostprocessor.o InstantPatternGenerator.o \
+InstantTimeController.o \
 
 
 #Program.o Game.o \

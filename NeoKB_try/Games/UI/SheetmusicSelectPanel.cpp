@@ -121,6 +121,24 @@ int SheetmusicSelectPanel::SetSms(vector<SmInfo*>* sInfos)
 	return 0;
 }
 
+int SheetmusicSelectPanel::SelectAndStart(string fileName)
+{
+	LOG(LogLevel::Error) << "int SheetmusicSelectPanel::SelectAndStart() : not implemented.";
+	return 0;
+}
+
+int SheetmusicSelectPanel::AddOnDownloadSheetmusicFinish(MtoObject * callableObject, function<int(FileSegmentMap*)> callback, string name)
+{
+	onDownloadSheetmusicFinish.Add(callableObject, callback, name);
+	return 0;
+}
+
+int SheetmusicSelectPanel::AddOnGetSheetmusicSuccess(MtoObject * callableObject, function<int(string)> callback, string name)
+{
+	onGetSheetmusicSuccess.Add(callableObject, callback, name);
+	return 0;
+}
+
 int SheetmusicSelectPanel::OnMessage(MeteoBluetoothMessage * message)
 {
 	MeteoContextBluetoothMessage* contextMessage = dynamic_cast<MeteoContextBluetoothMessage*>(message);
