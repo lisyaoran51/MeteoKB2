@@ -52,7 +52,6 @@ int InstantGlowLineMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper
 	}(width, height, m);
 
 
-	LOG(LogLevel::Depricated) << "InstantGlowLineMapGenerateAlgorithm::ImplementGenerate : meteorPos = " << meteorPos << ", current time = " << currentTime << ", speed = " << speed;
 	// 公式: -256*y + 256 
 	// 算流星燈每一個燈泡的亮度，從下面網上算
 	for (int i = 0; i < height; i++) {
