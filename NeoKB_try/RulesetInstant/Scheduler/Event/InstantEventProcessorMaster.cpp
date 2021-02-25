@@ -138,7 +138,7 @@ int InstantEventProcessorMaster::update()
 		return 0;
 		//abort();
 	}
-
+	/*
 	vector<EventProcessor<Event>*> eventProcessors;
 
 	// 拿已經結束的event
@@ -164,7 +164,7 @@ int InstantEventProcessorMaster::update()
 		}
 		
 	}
-
+	*/
 	return 0;
 }
 
