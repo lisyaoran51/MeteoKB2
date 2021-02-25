@@ -183,6 +183,10 @@ namespace Commands{
 		ReturnWriteGameConfiguration			,
 		SheetmusicData							,
 		AckSheetmusicData						,
+
+		RequestSheetmusicFile					,	// 後來佳的
+		AckRequestSheetmusicFile				,	// 後來佳的
+
 		SheetmusicFileSegment					,
 		AckSheetmusicFileSegment				,
 		RequestRewriteSheetmusicFileSegment		,

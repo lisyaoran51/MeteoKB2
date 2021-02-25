@@ -240,7 +240,7 @@ int SheetmusicSelectPanel::OnMessage(MeteoBluetoothMessage * message)
 		getSheetmusicRequest->SetCallbackScene(dynamic_cast<Scene*>(GetParent()));	// 這個的parent就是song select
 
 		getSheetmusicRequest->AddOnFinish(&onDownloadSheetmusicFinish);
-		getSheetmusicRequest->AddOnSuccess(&onGetSheetmusicSuccess);
+		getSheetmusicRequest->AddOnGetBinarySuccess(&onGetSheetmusicSuccess);
 
 		communicationAccess->Queue(getSheetmusicRequest);
 

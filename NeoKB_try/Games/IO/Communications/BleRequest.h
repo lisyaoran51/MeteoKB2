@@ -52,6 +52,11 @@ namespace Communications{
 
 		mutable mutex rawMessageBufferMutex;
 
+		/// <summary>
+		/// 好像要自己把on fail.trigger擺到這裡面，on fail不能擺在public Fail裡
+		/// </summary>
+		virtual int fail(CommunicationRequestException& communicationRequestException);
+
 
 		class BleRequestMethod;
 

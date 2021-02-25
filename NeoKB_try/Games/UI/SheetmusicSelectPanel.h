@@ -69,7 +69,7 @@ namespace UI {
 
 		BindablePointer<vector<Modifier*>*> selectedModifiers;
 
-		ActionList<int, string> onDownloadSheetmusicFinish;
+		ActionList<int, FileSegmentMap*> onDownloadSheetmusicFinish;
 
 		ActionList<int, string> onGetSheetmusicSuccess;
 
