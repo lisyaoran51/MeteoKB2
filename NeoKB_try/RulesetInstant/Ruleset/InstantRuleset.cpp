@@ -83,3 +83,9 @@ vector<KeyBinding*>* InstantRuleset::GetDefaultkeyBindings(int variant)
 
 	return bindings;
 }
+
+PitchBindingSet * InstantRuleset::GetDefaultPitchBindingSet(int variant)
+{
+	LOG(LogLevel::Error) << "int InstantRuleset::GetDefaultPitchBindingSet() : not implemented.";
+	return nullptr;
+}
