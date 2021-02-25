@@ -533,7 +533,9 @@
     <ClInclude Include="Games\Scheduler\Event\PlayfieldEvents\PlayfieldEventProcessor.h" />
     <ClInclude Include="Games\Scheduler\Event\PlayfieldEvents\PlayfieldEvent.h" />
     <ClInclude Include="Games\Scheduler\Event\SystemEvents\RestartSystemEvent.h" />
+    <ClInclude Include="Games\Scheduler\Event\SystemEvents\RestartSystemEventHandler.h" />
     <ClInclude Include="Games\Scheduler\Event\SystemEvents\StopSystemEvent.h" />
+    <ClInclude Include="Games\Scheduler\Event\SystemEvents\StopSystemEventHandler.h" />
     <ClInclude Include="Games\Scheduler\Event\SystemEvents\SystemControllers\SystemController.h" />
     <ClInclude Include="Games\Scheduler\Event\SystemEvents\SystemEvent.h" />
     <ClInclude Include="Games\Scheduler\Event\SystemEvents\SystemEventHandler.h" />

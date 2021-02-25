@@ -8,8 +8,7 @@
 #include "../Scheduler/Event/Effect/InstantFallEffectMapper.h"
 #include "../Scheduler/Event/Effect/InstantGlowLineEffectMapper.h"
 #include "../Scheduler/Event/InstrumentEvents/InstantPianoSoundEventProcessor.h"
-#include "../../Games/Scheduler/Event/SystemEvents/SystemEventHandler.h"
-#include "../../Games/Scheduler/Event/SystemEvents/StopSystemEvent.h"
+#include "../../Games/Scheduler/Event/SystemEvents/StopSystemEventHandler.h"
 #include "../Input/InstantInputManager.h"
 #include "../Timing/InstantTimeController.h"
 #include "../../Framework/Timing/SpeedAdjusters/LinearSpeedAdjuster.h"
@@ -71,7 +70,7 @@ InstantRulesetExecutor::InstantRulesetExecutor(): RegisterType("InstantRulesetEx
 	// 如果要自定效果，要直接從config那裡改map algo，這邊不能動。
 	eventProcessorTable["InstantFallEffect"		] = "InstantFallEffectMapper";
 	eventProcessorTable["InstantGlowLineEffect"	] = "InstantGlowLineEffectMapper";
-	eventProcessorTable["StopSystemEvent"		] = "SystemEventHandler";
+	eventProcessorTable["StopSystemEvent"		] = "StopSystemEventHandler";
 	eventProcessorTable["InstantPianoSoundEvent"] = "InstantPianoSoundEventProcessor";
 
 	// 註冊private load (c++才需要)
@@ -158,9 +157,9 @@ EventProcessor<Event>* InstantRulesetExecutor::getEventProcessor(Event * e)
 		LOG(LogLevel::Depricated) << "MeteorRulesetExecutor::getEventProcessor : getting event PianoEventProcessor at [" << e->GetStartTime() << "]";
 		return (new InstantPianoSoundEventProcessor())->RegisterEvent(e);
 	}
-	else if (processorType == "SystemEventHandler") {
+	else if (processorType == "StopSystemEventHandler") {
 		// TODO: 在這邊把歌曲名稱擺進去
-		return (new SystemEventHandler<SystemEvent>())->RegisterEvent(e);
+		return (new StopSystemEventHandler())->RegisterEvent(e);
 	}
 
 
