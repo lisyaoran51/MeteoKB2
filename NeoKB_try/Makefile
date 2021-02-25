@@ -56,7 +56,7 @@ RulesetInstant/Scenes/Play:RulesetInstant/Scenes/Results:\
 RulesetInstant/Scheduler/Event:RulesetInstant/Scheduler/Event/Effect:RulesetInstant/Scheduler/Event/Effect/Algorithm:\
 RulesetInstant/Scheduler/Event/InstrumentEvents:RulesetInstant/Scheduler/Event/InstrumentEvents/InstrumentControllers:\
 RulesetInstant/Sheetmusic:RulesetInstant/Sheetmusic/Pattern:\
-RulesetInstant/Timing:\
+RulesetInstant/Timing\
 
 
 
