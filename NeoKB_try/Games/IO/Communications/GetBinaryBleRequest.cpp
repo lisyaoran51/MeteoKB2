@@ -64,7 +64,7 @@ int GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait(BleRequest * 
 					else {
 						// fail
 						BleRequestException except(BleResponseCode::Gone);
-						Fail(except);
+						thisGetBinaryRequest->Fail(except);
 					}
 
 					isAckReceived = true;
