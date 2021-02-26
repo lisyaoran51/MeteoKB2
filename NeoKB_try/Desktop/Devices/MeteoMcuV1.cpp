@@ -196,7 +196,7 @@ int MeteoMcuV1::readPanel()
 				if (splitMessage[0].length() > 4)
 					throw runtime_error("MeteoPanelBoardV1::readPanel() : Get unknown input.");
 
-				key = (InputKey)stoi(splitMessage[0].substr(1, splitMessage[0].length - 1));
+				key = (InputKey)stoi(splitMessage[0].substr(1, splitMessage[0].length() - 1));
 				int value = stoi(splitMessage[1]);
 				if (!checkI2cMessageValid(key, value)) {
 					LOG(LogLevel::Error) << "MeteoPanelDevice::readFromDevice() : Get unknown input [" << i2cMessage << "].";
