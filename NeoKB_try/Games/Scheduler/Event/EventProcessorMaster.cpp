@@ -369,7 +369,7 @@ int EventProcessorMaster::update()
 
 	processEvent(GetClock()->GetElapsedFrameTime()); // 在這裡面處理io event
 
-	LOG(LogLevel::Finest) << "EventProcessorMaster::update() : Process event over.";
+	LOG(LogLevel::Debug) << "EventProcessorMaster::update() : Process event over.";
 
 	//return 0;
 
