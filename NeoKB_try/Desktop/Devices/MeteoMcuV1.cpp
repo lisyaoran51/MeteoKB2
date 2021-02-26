@@ -199,7 +199,7 @@ int MeteoMcuV1::readPanel()
 				key = (InputKey)stoi(splitMessage[0].substr(1, splitMessage[0].length() - 1));
 				int value = stoi(splitMessage[1]);
 				if (!checkI2cMessageValid(key, value)) {
-					LOG(LogLevel::Error) << "MeteoPanelDevice::readFromDevice() : Get unknown input [" << i2cMessage << "].";
+					LOG(LogLevel::Error) << "MeteoPanelDevice::readFromDevice() : Get unknown input [" << i2cMessage << "]." << (int)key << " " << value;
 					throw out_of_range("MeteoPanelDevice::readFromDevice() : Get unknown input.");
 				}
 			}
@@ -252,7 +252,7 @@ int MeteoMcuV1::pushKeyboardState(InputKey key, int value)
 
 	if (value >= 0) {
 		if (!keyboardState->GetKeyboardState()->ContainPress(key))
-			keyboardState->GetKeyboardState()->AddPress(make_pair(key, value > 255 ? 255 : value));
+			keyboardState->GetKeyboardState()->AddPress(make_pair(key, value > 127 ? 127 : value));
 	}
 	else {
 		if (!keyboardState->GetKeyboardState()->ContainUp(key))
