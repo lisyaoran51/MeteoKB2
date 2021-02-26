@@ -3,15 +3,15 @@
 using namespace Desktop::Devices;
 
 
-MeteoPanelDevice::MeteoPanelDevice(MeteoPanelBoardV1 * panelBoard)
+MeteoPanelDevice::MeteoPanelDevice(MeteoMcuV1 * mMcu)
 {
-	meteoPanelBoard = panelBoard;
+	meteoMcu = mMcu;
 }
 
 int MeteoPanelDevice::readFromDevice()
 {
 #if 1
-	InputState* newState = meteoPanelBoard->GetPanelState();
+	InputState* newState = meteoMcu->GetPanelState();
 	if (newState != nullptr)
 		inputStates.push_back(newState);
 #else
@@ -90,7 +90,7 @@ int MeteoPanelDevice::passToDevice()
 
 	for (int i = 0; i < outputMessages.size(); i++) {
 		LOG(LogLevel::Depricated) << "MeteoPanelDevice::passToDevice() : pass message to board.";
-		meteoPanelBoard->PushI2cMessage(outputMessages[i]->ToString());
+		meteoMcu->PushI2cMessage(outputMessages[i]->ToString());
 		delete outputMessages[i];
 	}
 	outputMessages.clear();

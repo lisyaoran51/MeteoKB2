@@ -3,7 +3,7 @@
 
 
 #include "../../Framework/Devices/KeyboardDevice.h"
-#include "MeteoPanelBoardV1.h"
+#include "MeteoMcuV1.h"
 
 
 using namespace Framework::Devices;
@@ -15,13 +15,13 @@ namespace Devices {
 
 	class MeteoKeyboardDevice : public KeyboardDevice {
 
-		MeteoPanelBoardV1 * meteoPanelBoard = nullptr;
+		MeteoMcuV1 * meteoMcu = nullptr;
 
 		int _debugCount = 0;
 
 	public:
 
-		MeteoKeyboardDevice(MeteoPanelBoardV1* panelBoard);
+		MeteoKeyboardDevice(MeteoMcuV1* mMcu);
 
 	protected:
 

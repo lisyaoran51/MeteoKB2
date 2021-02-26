@@ -3,7 +3,7 @@
 
 
 #include "../../Framework/Devices/PanelDevice.h"
-#include "MeteoPanelBoardV1.h"
+#include "MeteoMcuV1.h"
 
 
 
@@ -16,13 +16,13 @@ namespace Devices {
 
 	class MeteoPanelDevice : public PanelDevice {
 
-		MeteoPanelBoardV1 * meteoPanelBoard = nullptr;
+		MeteoMcuV1 * meteoMcu = nullptr;
 
 		int _debugCount = 0;
 
 	public:
 
-		MeteoPanelDevice(MeteoPanelBoardV1* panelBoard);
+		MeteoPanelDevice(MeteoMcuV1* mMcu);
 
 
 	protected:

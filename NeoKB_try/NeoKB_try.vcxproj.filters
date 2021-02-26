@@ -1848,6 +1848,9 @@
     <ClCompile Include="Games\Scheduler\Event\SystemEvents\RestartSystemEvent.cpp">
       <Filter>來源檔案\Games\Schedulers\Events\SystemEvent</Filter>
     </ClCompile>
+    <ClCompile Include="Desktop\Devices\MeteoMcuV1.cpp">
+      <Filter>來源檔案\Desktop\Devices</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="DailyLog.txt">
@@ -3111,6 +3114,9 @@
     </ClInclude>
     <ClInclude Include="Games\Scheduler\Event\SystemEvents\RestartSystemEventHandler.h">
       <Filter>標頭檔\Games\Scheduler\Events\SystemEvents</Filter>
+    </ClInclude>
+    <ClInclude Include="Desktop\Devices\MeteoMcuV1.h">
+      <Filter>標頭檔\Desktop\Devices</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -3,15 +3,15 @@
 using namespace Desktop::Devices;
 
 
-MeteoKeyboardDevice::MeteoKeyboardDevice(MeteoPanelBoardV1 * panelBoard)
+MeteoKeyboardDevice::MeteoKeyboardDevice(MeteoMcuV1* mMcu)
 {
-	meteoPanelBoard = panelBoard;
+	meteoMcu = mMcu;
 }
 
 int MeteoKeyboardDevice::readFromDevice()
 {
 #if 1
-	InputState* newState = meteoPanelBoard->GetKeyboardState();
+	InputState* newState = meteoMcu->GetKeyboardState();
 	if(newState != nullptr)
 		inputStates.push_back(newState);
 

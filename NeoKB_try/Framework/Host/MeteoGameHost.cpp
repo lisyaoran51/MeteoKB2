@@ -43,9 +43,10 @@ int MeteoGameHost::setupMainInterface()
 	MeteoBluetoothPhoneV2* bluetoothPhone = new MeteoBluetoothPhoneV2(packetConverter);
 	BluetoothDevice* bluetoothDevice = new MeteoBluetoothDevice(bluetoothPhone);
 
-	MeteoPanelBoardV1* meteoPanelBoard = new MeteoPanelBoardV1(7); // i2c address設為7
-	KeyboardDevice* keyboardDevice = new MeteoKeyboardDevice(meteoPanelBoard);
-	PanelDevice* panelDevice = new MeteoPanelDevice(meteoPanelBoard);
+	//MeteoPanelBoardV1* meteoPanelBoard = new MeteoPanelBoardV1(7); // i2c address設為7
+	MeteoMcuV1* meteoMcu = new MeteoMcuV1(15);
+	KeyboardDevice* keyboardDevice = new MeteoKeyboardDevice(meteoMcu);
+	PanelDevice* panelDevice = new MeteoPanelDevice(meteoMcu);
 
 
 

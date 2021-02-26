@@ -26,6 +26,7 @@
     <ClCompile Include="Desktop\Devices\MeteoBluetoothPhoneV2.cpp" />
     <ClCompile Include="Desktop\Devices\MeteoKeyboardDevice.cpp" />
     <ClCompile Include="Desktop\Devices\MeteoLightBoardV1.cpp" />
+    <ClCompile Include="Desktop\Devices\MeteoMcuV1.cpp" />
     <ClCompile Include="Desktop\Devices\MeteoPacketConverterV1.cpp" />
     <ClCompile Include="Desktop\Devices\MeteoPacketConverterV2.cpp" />
     <ClCompile Include="Desktop\Devices\MeteoPanelBoardV1.cpp" />
@@ -364,6 +365,7 @@
     <ClInclude Include="Desktop\Devices\MeteoBluetoothDevice.h" />
     <ClInclude Include="Desktop\Devices\MeteoBluetoothPhoneV1.h" />
     <ClInclude Include="Desktop\Devices\MeteoBluetoothPhoneV2.h" />
+    <ClInclude Include="Desktop\Devices\MeteoMcuV1.h" />
     <ClInclude Include="Desktop\Devices\MeteoPacketConverterV1.h" />
     <ClInclude Include="Desktop\Devices\MeteoPacketConverterV2.h" />
     <ClInclude Include="Desktop\Devices\MeteoSpidevDisplayDevice.h" />
