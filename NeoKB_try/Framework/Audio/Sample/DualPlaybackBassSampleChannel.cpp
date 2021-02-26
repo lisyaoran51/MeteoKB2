@@ -1,6 +1,7 @@
 #include "DualPlaybackBassSampleChannel.h"
 
 #include "BassSample.h"
+#include <cmath>
 
 using namespace Framework::Audio::Samples;
 
@@ -19,11 +20,18 @@ DualPlaybackBassSampleChannel::~DualPlaybackBassSampleChannel()
 
 int DualPlaybackBassSampleChannel::Play()
 {
-	LOG(LogLevel::Depricated) << "DualPlaybackBassSampleChannel::Play() : add play action.";
+	LOG(LogLevel::Debug) << "DualPlaybackBassSampleChannel::Play() : add play action with volume calculated [" << volumeCalculated->GetValue() << "].";
 	
 	unique_lock<mutex> uLock(pendingActionMutex);
 	pendingActions.Add(this, [=]() {
 		int newPlayback = 0;
+
+		// 音量衰減公式 音量=e(-at)，a為常數，t為時間
+		double tempPlaybackCurrentTime = BASS_ChannelBytes2Seconds(
+			channelID[tempPlayingPlayback],
+			BASS_ChannelGetPosition(channelID[tempPlayingPlayback], BASS_POS_BYTE));
+
+		double tempVolume = lastVolume * exp(-tempPlaybackCurrentTime);
 
 		if (tempPlayingPlayback == 0)
 			newPlayback = 1;
@@ -39,11 +47,19 @@ int DualPlaybackBassSampleChannel::Play()
 
 		BASS_ChannelPlay(channelID[newPlayback], false);
 
-		if (BASS_ChannelIsActive(channelID[tempPlayingPlayback]) == BASS_ACTIVE_PLAYING) {
-			BASS_ChannelSlideAttribute(channelID[tempPlayingPlayback], BASS_ATTRIB_VOL, 0, (DWORD)(fadeOutTime / 4 * 1000));
+		if (tempVolume <= volume->GetValue()) {
+			if (BASS_ChannelIsActive(channelID[tempPlayingPlayback]) == BASS_ACTIVE_PLAYING) {
+				BASS_ChannelSlideAttribute(channelID[tempPlayingPlayback], BASS_ATTRIB_VOL, 0, (DWORD)(fadeOutTime / 2 * 1000));
+			}
+			tempPlayingPlayback = newPlayback;
+		}
+		else {
+			if (BASS_ChannelIsActive(channelID[newPlayback]) == BASS_ACTIVE_PLAYING) {
+				BASS_ChannelSlideAttribute(channelID[newPlayback], BASS_ATTRIB_VOL, 0, (DWORD)(fadeOutTime * 2 * 1000));
+			}
+			volume->SetValue(lastVolume);
 		}
 
-		tempPlayingPlayback = newPlayback;
 
 		return 0;
 	}, "Lambda_DualPlaybackBassSampleChannel::Play");
@@ -53,6 +69,7 @@ int DualPlaybackBassSampleChannel::Play()
 
 int DualPlaybackBassSampleChannel::Play(double v)
 {
+	lastVolume = volume->GetValue();
 	volume->SetValue(v);
 	InvalidateState();
 	return Play();

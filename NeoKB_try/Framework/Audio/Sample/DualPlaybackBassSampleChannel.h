@@ -16,6 +16,7 @@ namespace Samples {
 
 		int tempPlayingPlayback = 0;
 
+
 	public:
 
 		DualPlaybackBassSampleChannel(Sample* s);
@@ -39,6 +40,7 @@ namespace Samples {
 
 	protected:
 
+		double lastVolume = -1;
 		
 
 
