@@ -33,6 +33,8 @@ int DualPlaybackBassSampleChannel::Play()
 			BASS_ChannelGetPosition(channelID[tempPlayingPlayback], BASS_POS_BYTE));
 
 		double tempVolume = lastVolume * exp(-tempPlaybackCurrentTime);
+		LOG(LogLevel::Debug) << "DualPlaybackBassSampleChannel::Play() : last voume [" << tempVolume << "], new volume [" << volume->GetValue() << "].";
+
 
 		if (tempPlayingPlayback == 0)
 			newPlayback = 1;
