@@ -8,6 +8,7 @@
 #include "../IO/Storage.h"
 #include <chrono>         // std::chrono::seconds
 #include "../../RulesetMeteor/Config/MeteorConfigManager.h"
+#include "../../RulesetInstant/Config/InstantConfigManager.h"
 #include "../Threading/ThreadMaster.h"
 
 
@@ -19,6 +20,7 @@ using namespace Framework::IO;
 using namespace Framework;
 using namespace Instruments;
 using namespace Meteor::Config;
+using namespace Instant::Config;
 using namespace Framework::Threading;
 
 
@@ -308,6 +310,11 @@ int GameHost::setupConfig()
 	meteorConfigManager->Set(MeteorSetting::TargetLineBlinkSpeed, MTO_FLOAT(0.75f));
 	meteorConfigManager->Set(MeteorSetting::TargetLineBrightness, MTO_FLOAT(0.05f));
 	dependencies->Cache<MeteorConfigManager>(meteorConfigManager);
+
+
+	InstantConfigManager* instantConfigManager = new InstantConfigManager();
+	instantConfigManager->Initialize();
+	dependencies->Cache<InstantConfigManager>(instantConfigManager);
 
 	return 0;
 }
