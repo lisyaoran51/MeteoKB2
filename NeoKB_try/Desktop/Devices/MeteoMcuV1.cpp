@@ -163,14 +163,14 @@ int MeteoMcuV1::work()
 
 int MeteoMcuV1::readPanel()
 {
-	char buffer[16] = {0};
+	char buffer[17] = {0};
 
 	bool hasMessage = true;
 
 	do {
 		hasMessage = true;
 
-		if (i2cInterface->i2cRead(buffer, 16) < 0)
+		if (i2cInterface->i2cRead(buffer, 17) < 0)
 			return -1;
 
 
