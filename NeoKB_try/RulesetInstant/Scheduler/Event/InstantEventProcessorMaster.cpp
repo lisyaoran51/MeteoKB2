@@ -126,6 +126,8 @@ int InstantEventProcessorMaster::OnSlide(pair<InstantAction, int> action)
 
 int InstantEventProcessorMaster::update()
 {
+	LOG(LogLevel::Debug) << "InstantEventProcessorMaster::update : update start.";
+
 	EventProcessorMaster::update();
 
 	LOG(LogLevel::Debug) << "InstantEventProcessorMaster::update : update over.";
