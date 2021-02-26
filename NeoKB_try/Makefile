@@ -198,7 +198,7 @@ PianoInputManager.o PianoPitchBindingSet.o InstrumentInputHandler.o \
 FileSystem.o ProgramInitializer.o StringSplitter.o FileSegmentMap.o \
 \
 MeteoGameDesktop.o Program.o \
-MeteoLightBoardV1.o bcm2835.o MeteoBitbangDisplayDevice.o MeteoSpidevDisplayDevice.o MeteoKeyboardDevice.o MeteoPanelDevice.o MeteoPanelBoardV1.o pi2c.o \
+MeteoLightBoardV1.o bcm2835.o MeteoBitbangDisplayDevice.o MeteoSpidevDisplayDevice.o MeteoKeyboardDevice.o MeteoPanelDevice.o MeteoMcuV1.o pi2c.o \
 MeteoBluetoothDevice.o MeteoBluetoothPhoneV2.o MeteoPacketConverterV2.o sdp.o \
 \
 MeteorGame.o MeteorConfigManager.o MeteorInputManager.o MeteorPitchBindingSet.o MeteorPlayfield.o \
