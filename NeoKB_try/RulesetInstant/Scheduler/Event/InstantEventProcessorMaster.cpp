@@ -126,11 +126,11 @@ int InstantEventProcessorMaster::OnSlide(pair<InstantAction, int> action)
 
 int InstantEventProcessorMaster::update()
 {
-	LOG(LogLevel::Debug) << "InstantEventProcessorMaster::update : update start.";
+	LOG(LogLevel::Depricated) << "InstantEventProcessorMaster::update : update start.";
 
 	EventProcessorMaster::update();
 
-	LOG(LogLevel::Debug) << "InstantEventProcessorMaster::update : update over.";
+	LOG(LogLevel::Depricated) << "InstantEventProcessorMaster::update : update over.";
 
 	double currentTime = 0;
 	/* 這邊要檢查已經過去的fall effect有沒有miss */

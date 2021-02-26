@@ -173,7 +173,7 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 		eventProcessorPeriods->GetItemsContainPeriods(make_pair<float, float>(currentTime - visibleTimeRange, currentTime + visibleTimeRange * 2), &eventProcessors);	// visible time range * 2是因為好像讀不到miss
 
 		
-		LOG(LogLevel::Debug) << "EventProcessorMaster::processEvent() : get processors size[" << eventProcessors.size() << "].";
+		LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent() : get processors size[" << eventProcessors.size() << "].";
 
 		// 移到遊戲最一開始就把所有event processor都先filter掉，這邊就只處理即時的filter
 		LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent() : filter event processors.";
