@@ -54,6 +54,7 @@ int DualPlaybackBassSampleChannel::Play()
 int DualPlaybackBassSampleChannel::Play(double v)
 {
 	volume->SetValue(v);
+	InvalidateState();
 	return Play();
 }
 
@@ -96,7 +97,7 @@ bool DualPlaybackBassSampleChannel::GetIsLoaded()
 	return false;
 }
 
-int DualPlaybackBassSampleChannel::OnStateChange()
-{
-	return 0;
-}
+//int DualPlaybackBassSampleChannel::OnStateChange()
+//{
+//	return 0;
+//}
