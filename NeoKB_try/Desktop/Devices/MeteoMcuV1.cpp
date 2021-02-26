@@ -185,7 +185,7 @@ int MeteoMcuV1::readPanel()
 			if (i2cMessage[0] != 0x80)
 				return -1;
 
-			LOG(LogLevel::Depricated) << "MeteoPanelBoardV1::readPanel() : Get input from mcu [" << i2cMessage << "].";
+			LOG(LogLevel::Debug) << "MeteoPanelBoardV1::readPanel() : Get input from mcu [" << i2cMessage << "].";
 
 			vector<string> splitMessage;
 			InputKey key = InputKey::None;
