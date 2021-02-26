@@ -2782,3 +2782,6 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 	communication access怎麼run還沒寫
 	
 	ChooseCommunicationComponentAndPerform 這邊我寫得有點複雜，要看一下再改
+	
+2/26
+	改為使用mcu
