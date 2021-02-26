@@ -128,13 +128,15 @@ int InstantEventProcessorMaster::update()
 {
 	EventProcessorMaster::update();
 
+	LOG(LogLevel::Debug) << "InstantEventProcessorMaster::update : update over.";
+
 	double currentTime = 0;
 	/* 這邊要檢查已經過去的fall effect有沒有miss */
 	try {
 		currentTime = GetClock()->GetCurrentTime();
 	}
 	catch (exception& e) {
-		LOG(LogLevel::Warning) << "EventProcessorMaster::GetGraph : clock is not started [" << e.what() << "].";
+		LOG(LogLevel::Warning) << "InstantEventProcessorMaster::update : clock is not started [" << e.what() << "].";
 		return 0;
 		//abort();
 	}
