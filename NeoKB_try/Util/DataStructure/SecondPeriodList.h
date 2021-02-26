@@ -95,12 +95,12 @@ namespace DataStructure {
 			int startSection = floor(timeOfPeriod.first);
 			if (startSection < 0)
 				startSection = 0;
-			if (startSection >= secondPeriodsInList.size())
+			else if (startSection >= secondPeriodsInList.size() && secondPeriodsInList.size() != 0)
 				startSection = secondPeriodsInList.size() - 1;
 			int endSection = floor(timeOfPeriod.second);
 			if (endSection < 0)
 				endSection = 0;
-			if (endSection >= secondPeriodsInList.size())
+			else if (endSection >= secondPeriodsInList.size() && secondPeriodsInList.size() != 0)
 				endSection = secondPeriodsInList.size() - 1;
 
 			LOG(LogLevel::Finest) << "SecondPeriodList::GetItemsContainPeriods() : period from [" << startSection << "] to [" << endSection << "] section.";
