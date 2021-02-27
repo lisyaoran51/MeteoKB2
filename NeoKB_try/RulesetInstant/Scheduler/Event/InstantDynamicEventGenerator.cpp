@@ -25,7 +25,7 @@ InstantDynamicEventGenerator::InstantDynamicEventGenerator(Playfield * p) : Regi
 
 int InstantDynamicEventGenerator::OnMessage(MeteoBluetoothMessage * message)
 {
-	if (message->GetCommand() == MeteoCommand::InstantEvent) {
+	if (message->GetCommand() == MeteoCommand::RecordEvent) {
 
 		MeteoContextBluetoothMessage* contextMessage = dynamic_cast<MeteoContextBluetoothMessage*>(message);
 		json context = contextMessage->GetContextInJson();

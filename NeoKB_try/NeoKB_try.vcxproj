@@ -156,6 +156,8 @@
     <ClCompile Include="Games\Scheduler\Event\PlayfieldEvents\PlayfieldControllers\PlayfieldController.cpp" />
     <ClCompile Include="Games\Scheduler\Event\PlayfieldEvents\PlayfieldEvent.cpp" />
     <ClCompile Include="Games\Scheduler\Event\PlayfieldEvents\PlayfieldEventProcessor.cpp" />
+    <ClCompile Include="Games\Scheduler\Event\RecorderEvents\RecorderControllers\RecorderController.cpp" />
+    <ClCompile Include="Games\Scheduler\Event\RecorderEvents\RecorderEvent.cpp" />
     <ClCompile Include="Games\Scheduler\Event\SystemEvents\EndSystemEvent.cpp" />
     <ClCompile Include="Games\Scheduler\Event\SystemEvents\RestartSystemEvent.cpp" />
     <ClCompile Include="Games\Scheduler\Event\SystemEvents\StopSystemEvent.cpp" />
@@ -341,6 +343,8 @@
     <ClCompile Include="RulesetMeteor\Scheduler\Event\PlayfieldEvents\OctaveShiftEvent.cpp" />
     <ClCompile Include="RulesetMeteor\Scheduler\Event\PlayfieldEvents\OctaveShiftEventProcessor.cpp" />
     <ClCompile Include="RulesetMeteor\Scheduler\Event\PlayfieldEvents\PlayfieldControllers\OctaveShifter.cpp" />
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\RecorderEvents\MeteorButtonRecorderEvent.cpp" />
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\RecorderEvents\RecorderControllers\MeteorButtonRecorderController.cpp" />
     <ClCompile Include="RulesetMeteor\Scheduler\Event\TimeEvents\RepeatPracticeEvent.cpp" />
     <ClCompile Include="RulesetMeteor\Scheduler\Event\TimeEvents\RepeatPracticeEventProcessor.cpp" />
     <ClCompile Include="RulesetMeteor\Scheduler\Event\TimeEvents\TimeControllerControllers\RepeatPracticeController.cpp" />
@@ -552,6 +556,8 @@
     <ClInclude Include="Games\Scheduler\Event\PlayfieldEvents\PlayfieldControllers\PlayfieldController.h" />
     <ClInclude Include="Games\Scheduler\Event\PlayfieldEvents\PlayfieldEventProcessor.h" />
     <ClInclude Include="Games\Scheduler\Event\PlayfieldEvents\PlayfieldEvent.h" />
+    <ClInclude Include="Games\Scheduler\Event\RecorderEvents\RecorderControllers\RecorderController.h" />
+    <ClInclude Include="Games\Scheduler\Event\RecorderEvents\RecorderEvent.h" />
     <ClInclude Include="Games\Scheduler\Event\SystemEvents\EndSystemEvent.h" />
     <ClInclude Include="Games\Scheduler\Event\SystemEvents\EndSystemEventHandler.h" />
     <ClInclude Include="Games\Scheduler\Event\SystemEvents\RestartSystemEvent.h" />
@@ -776,6 +782,8 @@
     <ClInclude Include="RulesetMeteor\Scheduler\Event\PlayfieldEvents\OctaveShiftEvent.h" />
     <ClInclude Include="RulesetMeteor\Scheduler\Event\PlayfieldEvents\OctaveShiftEventProcessor.h" />
     <ClInclude Include="RulesetMeteor\Scheduler\Event\PlayfieldEvents\PlayfieldControllers\OctaveShifter.h" />
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\RecorderEvents\MeteorButtonRecorderEvent.h" />
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\RecorderEvents\RecorderControllers\MeteorButtonRecorderController.h" />
     <ClInclude Include="RulesetMeteor\Scheduler\Event\TimeEvents\RepeatPracticeEvent.h" />
     <ClInclude Include="RulesetMeteor\Scheduler\Event\TimeEvents\RepeatPracticeEventProcessor.h" />
     <ClInclude Include="RulesetMeteor\Scheduler\Event\TimeEvents\TimeControllerControllers\RepeatPracticeController.h" />

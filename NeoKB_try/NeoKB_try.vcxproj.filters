@@ -955,6 +955,30 @@
     <Filter Include="來源檔案\RulesetRecord\Rulesets\Scoring">
       <UniqueIdentifier>{043ed787-cde9-4bd2-b6bd-75835b5b75d4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="標頭檔\Games\Scheduler\Events\RecorderEvents">
+      <UniqueIdentifier>{d0f16350-0447-4ee1-a79c-893afba573fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Games\Schedulers\Events\RecorderEvents">
+      <UniqueIdentifier>{36a41060-82ac-4ec2-80fe-90715424aaed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Games\Scheduler\Events\RecorderEvents\RecorderControllers">
+      <UniqueIdentifier>{139203fb-59b7-401d-a135-b26311e202fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Games\Schedulers\Events\RecorderEvents\RecorderControllers">
+      <UniqueIdentifier>{3ef7f087-fcf6-4a9e-ac1f-de5deebaae5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\RulesetMeteor\Schedulers\Events\RecorderEvents">
+      <UniqueIdentifier>{00fb3e1d-75b7-4c98-ad37-a820beae9649}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\RulesetMeteor\Schedulers\Events\RecorderEvents\RecorderControllers">
+      <UniqueIdentifier>{1f4c8f85-4043-490f-950b-ae3c2918ce97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetMeteor\Schedulers\Events\RecorderEvents">
+      <UniqueIdentifier>{2965d099-b856-4d93-b0dd-20361ac95588}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetMeteor\Schedulers\Events\RecorderEvents\RecorderControllers">
+      <UniqueIdentifier>{e7a2a0ea-d70e-472b-85a2-48292e2585f2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Games\Graphic\Renderer\renderer.cpp">
@@ -1994,6 +2018,18 @@
     </ClCompile>
     <ClCompile Include="RulesetMeteor\Scheduler\Event\MeteorDynamicEventGenerator.cpp">
       <Filter>來源檔案\RulesetMeteor\Schedulers\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\Scheduler\Event\RecorderEvents\RecorderEvent.cpp">
+      <Filter>來源檔案\Games\Schedulers\Events\RecorderEvents</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\Scheduler\Event\RecorderEvents\RecorderControllers\RecorderController.cpp">
+      <Filter>來源檔案\Games\Schedulers\Events\RecorderEvents\RecorderControllers</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\RecorderEvents\MeteorButtonRecorderEvent.cpp">
+      <Filter>來源檔案\RulesetMeteor\Schedulers\Events\RecorderEvents</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\RecorderEvents\RecorderControllers\MeteorButtonRecorderController.cpp">
+      <Filter>來源檔案\RulesetMeteor\Schedulers\Events\RecorderEvents\RecorderControllers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -3318,6 +3354,18 @@
     </ClInclude>
     <ClInclude Include="RulesetMeteor\Scheduler\Event\MeteorDynamicEventGenerator.h">
       <Filter>標頭檔\RulesetMeteor\Schedulers\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Scheduler\Event\RecorderEvents\RecorderEvent.h">
+      <Filter>標頭檔\Games\Scheduler\Events\RecorderEvents</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Scheduler\Event\RecorderEvents\RecorderControllers\RecorderController.h">
+      <Filter>標頭檔\Games\Scheduler\Events\RecorderEvents\RecorderControllers</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\RecorderEvents\MeteorButtonRecorderEvent.h">
+      <Filter>標頭檔\RulesetMeteor\Schedulers\Events\RecorderEvents</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\RecorderEvents\RecorderControllers\MeteorButtonRecorderController.h">
+      <Filter>標頭檔\RulesetMeteor\Schedulers\Events\RecorderEvents\RecorderControllers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

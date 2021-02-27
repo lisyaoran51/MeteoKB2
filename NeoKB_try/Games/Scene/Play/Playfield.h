@@ -13,6 +13,7 @@
 #include "../../Scheduler/Event/PlayfieldEvents/PlayfieldControllers/PlayfieldController.h"
 #include "../../Scheduler/Event/TimeEvents/TimeControllerControllers/TimeControllerController.h"
 #include "../../Scheduler/Event/SystemEvents/SystemControllers/SystemController.h"
+#include "../../Scheduler/Event/RecorderEvents/RecorderControllers/RecorderController.h"
 
 
 
@@ -26,6 +27,7 @@ using namespace Games::Schedulers::Events::InstrumentEvents::InstrumentControlle
 using namespace Games::Schedulers::Events::PlayfieldEvents::PlayfieldControllers;
 using namespace Games::Schedulers::Events::TimeEvents::TimeControllerControllers;
 using namespace Games::Schedulers::Events::SystemEvents::SystemControllers;
+using namespace Games::Schedulers::Events::RecorderEvents::RecorderControllers;
 
 
 
@@ -125,6 +127,13 @@ namespace Play {
 		/// 在這邊存了會用到的time controller controller，在getEventProcessor時可以到這邊選擇要用的controller
 		///</summary>
 		map<string, TimeControllerControllerInterface*> timeControllerControllers;
+
+		///<summary>
+		/// 在這邊存了會用到的time controller controller，在getEventProcessor時可以到這邊選擇要用的controller
+		///</summary>
+		map<string, RecorderControllerInterface*> recordControllers;
+
+
 
 		vector<EventProcessor<Event>*> eventProcessors;
 

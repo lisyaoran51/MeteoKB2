@@ -2,8 +2,8 @@
 #define RECORD_REPLAY_RECORDER_H
 
 
-#include "../../../Games/Ruleset/Replays/ReplayRecorder.h"
 #include "../../Input/RecordInputManager.h"
+#include "../../../Games/Ruleset/Replays/ReplayRecorder.h"
 
 
 
@@ -38,7 +38,6 @@ namespace Replays{
 		virtual int OnSlide(pair<RecordAction, int> action);
 
 	protected:
-
 	};
 
 }}}

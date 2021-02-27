@@ -202,6 +202,8 @@ namespace Commands{
 		FinishLoadGame							,
 		AckFinishLoadGame						,
 		// 遊戲進行
+		MeteorEvent								,
+
 		StartGame								,
 		AckStartGame							,
 		GameTime								,
@@ -261,9 +263,10 @@ namespace Commands{
 		InstantLightEvent						,
 		InstantPianoEvent						,
 
-		InstantEvent
+		InstantEvent							,
 
-
+		// 錄音
+		RecordEvent								,
 
 
 

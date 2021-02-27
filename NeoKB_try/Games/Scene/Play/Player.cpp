@@ -56,15 +56,17 @@ int Player::load(MeteoConfigManager* m, Instrument* instru)
 		rulesetInfo = sm->GetRulesetInfo();
 	***/
 
-	LOG(LogLevel::Fine) << "Player::load : create clocks. track = [" << workingSmValue->GetTrack() << "].";
-	if (workingSmValue->GetTrack() == nullptr) {
-		adjustableClock = new StopwatchClock();
-		LOG(LogLevel::Warning) << "Player::load : no music found. track = [" << workingSmValue->GetTrack() << "].";
-	}
-	else {
-		adjustableClock = workingSmValue->GetTrack();
-		// 要再ruleset executor李把event processor filter的sm sound event給filter調
-	}
+	// 這邊取消get track
+	//LOG(LogLevel::Fine) << "Player::load : create clocks. track = [" << workingSmValue->GetTrack() << "].";
+	//if (workingSmValue->GetTrack() == nullptr) {
+	//	adjustableClock = new StopwatchClock();
+	//	LOG(LogLevel::Warning) << "Player::load : no music found. track = [" << workingSmValue->GetTrack() << "].";
+	//}
+	//else {
+	//	adjustableClock = workingSmValue->GetTrack();
+	//	// 要再ruleset executor李把event processor filter的sm sound event給filter調
+	//}
+	adjustableClock = new StopwatchClock();
 
 
 	LOG(LogLevel::Fine) << "Player::load : create decoupled clocks.";
@@ -113,7 +115,7 @@ int Player::load(MeteoConfigManager* m, Instrument* instru)
 		else
 			timeController->JumpTo(-1.0 / timeController->GetRate());
 			
-		
+		// output 遊戲開始
 		LOG(LogLevel::Debug) << "Player::load : scheduled task end.";
 
 		return 0;
@@ -122,6 +124,14 @@ int Player::load(MeteoConfigManager* m, Instrument* instru)
 
 	LOG(LogLevel::Fine) << "Player::load : adding time controller, ruleset executor. clock = [" << GetClock() << "].";
 	AddChild(timeController);
+
+	// replay recorder要去get time controller，所以time controller要先add child，再來才是replay recorder
+	// 之後playfield裡的piano controller要抓replay recorder，所以要再rulesetExecutor之前先add child replay recorder
+	replayRecorder = rulesetExecutor->CreateReplayRecorder();
+	replayRecorder->SetDefaultKeyBindings(rulesetInfo.GetValue());
+	AddChild(replayRecorder);
+
+
 	LOG(LogLevel::Debug) << "Player::load() : time controller added.";
 	// 把time controller下面所有東西的clock都改成由time controller控制的clock
 	Container* container = new Container();
@@ -154,8 +164,6 @@ int Player::load(MeteoConfigManager* m, Instrument* instru)
 	hudDisplay->BindRulesetExecutor(rulesetExecutor);
 	hudDisplay->BindTimeController(timeController);
 
-	replayRecorder = rulesetExecutor->CreateReplayRecorder();
-	AddChild(replayRecorder);
 
 	scoreProcessor->AddOnAllJudged(this, bind(&Player::onCompletion, this), "Player::onCompletion"); // 顯示成績結算
 

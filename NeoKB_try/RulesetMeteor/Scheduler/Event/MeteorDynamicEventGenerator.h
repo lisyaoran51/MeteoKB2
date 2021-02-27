@@ -1,27 +1,27 @@
-#ifndef INSTANT_DYNAMIC_EVENT_GENERATOR_H
-#define INSTANT_DYNAMIC_EVENT_GENERATOR_H
+#ifndef METEOR_DYNAMIC_EVENT_GENERATOR_H
+#define METEOR_DYNAMIC_EVENT_GENERATOR_H
 
 
 
 #include "../../../Games/Scheduler/Event/DynamicEventGenerator.h"
-#include "../../Input/InstantInputManager.h"
+#include "../../Input/MeteorInputManager.h"
 #include "../../../Games/Output/Bluetooths/MeteoBluetoothMessage.h"
 
 
 using namespace Games::Schedulers::Events;
-using namespace Instant::Input;
+using namespace Meteor::Input;
 using namespace Games::Output::Bluetooths;
 
 
-namespace Instant {
+namespace Meteor {
 namespace Schedulers{
 namespace Events{
 
-	class InstantDynamicEventGenerator : public DynamicEventGenerator, public MessageHandler<MeteoBluetoothMessage> {
+	class MeteorDynamicEventGenerator : public DynamicEventGenerator, public MessageHandler<MeteoBluetoothMessage> {
 	
 	public:
 
-		InstantDynamicEventGenerator(Playfield* p);
+		MeteorDynamicEventGenerator(Playfield* p);
 		
 		virtual int OnMessage(MeteoBluetoothMessage* message);
 

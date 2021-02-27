@@ -233,6 +233,19 @@ int MeteorPlayfield::load(FrameworkConfigManager* f, MeteorConfigManager * m)
 	}
 	AddChild(systemControllers["StopSystemEvent"]);
 
+
+	/*--------------------- recorder controller ---------------------*/
+	string recorderControllerName;
+	if (m->Get(MeteorSetting::RecorderController, &recorderControllerName)) {
+		recordControllers["MeteorRecorderEvent"] = iCreator.CreateInstanceWithT<RecorderControllerInterface>(recorderControllerName);
+	}
+	else
+		recordControllers["MeteorRecorderEvent"] = new RepeatPracticeController();
+	AddChild(recordControllers["MeteorRecorderEvent"]);
+
+
+	
+
 	return 0;
 }
 
