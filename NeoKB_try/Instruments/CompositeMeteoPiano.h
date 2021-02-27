@@ -33,6 +33,11 @@ namespace Instruments {
 
 		virtual PitchBindingSet* GetDefaultPitchBindingSet(int variant = 0);
 
+		virtual int Sleep();
+
+		virtual int WakeUp();
+
+
 
 		/* ----------------------- Piano.h ----------------------- */
 

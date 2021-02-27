@@ -42,6 +42,22 @@ int Instrument::LoadAndMapPitches()
 	return loadAndMapPitches();
 }
 
+int Instrument::Sleep()
+{
+	if (!isSleeping)
+		isSleeping = true;
+
+	return 0;
+}
+
+int Instrument::WakeUp()
+{
+	if (isSleeping)
+		isSleeping = true;
+
+	return 0;
+}
+
 int Instrument::LoadOnComplete()
 {
 	LOG(LogLevel::Fine) << "Instrument::LoadOnComplete() : start loading...";

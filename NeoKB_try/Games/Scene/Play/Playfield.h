@@ -65,9 +65,11 @@ namespace Play {
 
 		int SetGetEventProcessorFunction(function<EventProcessor<Event>*(Event*)> getEventProcessorFunction);
 
-		Playfield* SetLeaveGameFunction(function<int()> lGame);
+		int SetLeaveGameFunction(function<int()> lGame);
 
-		Playfield* SetRestartGameFunction(function<int()> rGame);
+		int SetRestartGameFunction(function<int()> rGame);
+
+		int SetEndGameFunction(function<int()> eGame);
 
 		vector<EventProcessor<Event>*>* GetEventProcessors();
 
@@ -138,6 +140,8 @@ namespace Play {
 		function<int()> leaveGame;
 
 		function<int()> restartGame;
+
+		function<int()> endGame;
 
 		virtual EventProcessorMaster* createEventProcessorMaster() = 0;
 

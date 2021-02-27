@@ -20,6 +20,26 @@ PitchBindingSet * VirtualMeteoPiano::GetDefaultPitchBindingSet(int variant)
 	return nullptr;
 }
 
+int VirtualMeteoPiano::Sleep()
+{
+	if (isSleeping)
+		return -1;
+	Piano::Sleep();
+
+	SetVirtualMeteoPianoSustainType(VirtualMeteoPianoSustainType::Auto);
+
+	return 0;
+}
+
+int VirtualMeteoPiano::WakeUp()
+{
+	if (!isSleeping)
+		return -1;
+	Piano::WakeUp();
+
+	return 0;
+}
+
 int VirtualMeteoPiano::SetVirtualMeteoPianoSustainType(VirtualMeteoPianoSustainType sType)
 {
 	sustainType = sType;
@@ -34,6 +54,9 @@ VirtualMeteoPianoSustainType VirtualMeteoPiano::GetVirtualMeteoPianoSustainType(
 
 int VirtualMeteoPiano::Play(Pitch p, float volume)
 {
+	if (isSleeping)
+		return -1;
+
 	/* 先檢查是否可以輸入，可以的時候才能控制 */
 	if (!isActive)
 		return 0;
@@ -64,6 +87,9 @@ int VirtualMeteoPiano::Play(Pitch p, float volume)
 
 int VirtualMeteoPiano::Stop(Pitch p)
 {
+	if (isSleeping)
+		return -1;
+
 	LOG(LogLevel::Depricated) << "VirtualMeteoPiano::Stop() : release key." << int(p);
 	/* 先檢查是否可以輸入，可以的時候才能控制 */
 	if (!isActive)

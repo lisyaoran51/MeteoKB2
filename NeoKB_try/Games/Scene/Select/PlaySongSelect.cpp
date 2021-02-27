@@ -26,6 +26,10 @@ int PlaySongSelect::onResuming(Scene * lastScene)
 	player = nullptr;
 	*/
 
+	/* 回到選單才能重新選歌 */
+	smSelectPanel->SetIsAvailabledForTrigger(true);
+	soundSelectPanel->SetIsAvailabledForTrigger(true);
+
 	// 清除上一場遊戲的modifier
 	for (int i = 0; i < smSelectPanel->GetSelectedModifiers()->GetValue()->size(); i++) {
 		delete smSelectPanel->GetSelectedModifiers()->GetValue()->at(i);
@@ -49,6 +53,10 @@ int PlaySongSelect::updateSheetmusic(WorkingSm * workingSm)
 int PlaySongSelect::onSelected()
 {
 	LOG(LogLevel::Info) << "PlaySongSelect::onSelected() : pushing to play scene.";
+
+	/* 進入遊戲後不能再選歌 */
+	smSelectPanel->SetIsAvailabledForTrigger(false);
+	soundSelectPanel->SetIsAvailabledForTrigger(false);
 
 	Push(player = new PlayerLoader(new Player()));
 	return 0;

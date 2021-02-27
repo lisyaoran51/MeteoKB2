@@ -131,8 +131,12 @@ Playfield* InstantRulesetExecutor::createPlayfield()
 	meteorPlayfield->LazyConstruct();
 	*/
 	Playfield* newPlayfield = new InstantPlayfield();
+	newPlayfield->SetLeaveGameFunction(leaveGame);
+	newPlayfield->SetRestartGameFunction(restartGame);
+	newPlayfield->SetEndGameFunction(endGame);
 
-	return newPlayfield->SetLeaveGameFunction(leaveGame)->SetRestartGameFunction(restartGame);
+
+	return newPlayfield;
 }
 
 EventProcessor<Event>* InstantRulesetExecutor::getEventProcessor(Event * e)

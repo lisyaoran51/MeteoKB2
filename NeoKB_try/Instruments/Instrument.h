@@ -73,7 +73,19 @@ namespace Instruments {
 
 		virtual int LoadAndMapPitches();
 
+		/// <summary>
+		/// 關閉所有執行，切掉輸入，進入睡眠
+		///	</summary>
+		virtual int Sleep();
+
+		/// <summary>
+		/// 重新啟動
+		///	</summary>
+		virtual int WakeUp();
+
 	protected:
+
+		bool isSleeping = false;
 
 		GameHost* host = nullptr;
 

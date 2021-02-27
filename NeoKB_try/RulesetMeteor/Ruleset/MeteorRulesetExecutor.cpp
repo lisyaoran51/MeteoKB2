@@ -221,7 +221,12 @@ Playfield* MeteorRulesetExecutor::createPlayfield()
 	meteorPlayfield->LazyConstruct();
 	*/
 	Playfield* newPlayfield = new MeteorPlayfield();
-	return newPlayfield->SetLeaveGameFunction(leaveGame)->SetRestartGameFunction(restartGame);
+	newPlayfield->SetLeaveGameFunction(leaveGame);
+	newPlayfield->SetRestartGameFunction(restartGame);
+	newPlayfield->SetEndGameFunction(endGame);
+
+
+	return newPlayfield;
 }
 
 EventProcessor<Event>* MeteorRulesetExecutor::getEventProcessor(Event * e)

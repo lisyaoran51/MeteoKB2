@@ -23,6 +23,30 @@ PitchBindingSet * MeteoPiano::GetDefaultPitchBindingSet(int variant)
 	return new PianoPitchBindingSet();
 }
 
+int MeteoPiano::Sleep()
+{
+	if (isSleeping)
+		return -1;
+
+	//pitchBindingSet->SwitchPitchState(MeteoPianoPitchState::None);
+
+	ChangePitchState(MeteoPianoPitchState::None);
+	SetGameControllingPitchState(false);
+
+
+
+	return 0;
+}
+
+int MeteoPiano::WakeUp()
+{
+	if (!isSleeping)
+		return -1;
+	Piano::WakeUp();
+
+	return 0;
+}
+
 int MeteoPiano::SetGameControllingPitchState(bool value)
 {
 	isGameControllingPitchState = value;
@@ -77,6 +101,9 @@ int MeteoPiano::ChangePitchState(MeteoPianoPitchState s)
 
 int MeteoPiano::OnButtonDown(PianoAction action)
 {
+	if (isSleeping)
+		return -1;
+
 	LOG(LogLevel::Debug) << "MeteoPiano::OnButtonDown() : get button " << (int)action << ".";
 	if (!isGameControllingPitchState) {
 		MeteoPianoPitchState lastState = state;
@@ -103,6 +130,33 @@ int MeteoPiano::OnButtonDown(PianoAction action)
 
 int MeteoPiano::OnKnobTurn(pair<PianoAction, int> action)
 {
+	if (isSleeping)
+		return -1;
+
+	return 0;
+}
+
+int MeteoPiano::resetState()
+{
+	// 這邊有點問題，裡面的getSamples會拿到目前音域的sample，但部會拿到所有因欲的Sample，所以這邊只好再把所有因欲都stop調
+	Piano::resetState();
+
+	map<PianoAction, SampleChannel*>::iterator it;
+	for (it = samples.begin(); it != samples.end(); ++it) {
+
+		(*it).second->Stop();
+	}
+
+	for (it = loweredSamples.begin(); it != loweredSamples.end(); ++it) {
+
+		(*it).second->Stop();
+	}
+
+	for (it = raisedSamples.begin(); it != raisedSamples.end(); ++it) {
+
+		(*it).second->Stop();
+	}
+
 	return 0;
 }
 

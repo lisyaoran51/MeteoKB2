@@ -110,14 +110,14 @@ int InstantPlayfield::load(FrameworkConfigManager* f, InstantConfigManager * m)
 
 	if (m->Get(InstantSetting::InstantSystemController, &systemControllerName)) {
 		SystemController* systemController = iCreator.CreateInstanceWithT<SystemController>(systemControllerName);
-		systemController->LazyConstruct(leaveGame, restartGame);
+		systemController->LazyConstruct(leaveGame, restartGame, endGame);
 		systemControllers["StopSystemEvent"] = systemController;
 		systemControllers["RestartSystemEvent"] = systemController;
 	}
 	else {
 		systemControllers["StopSystemEvent"] = new SystemController();
 		systemControllers["RestartSystemEvent"] = systemControllers["StopSystemEvent"];
-		systemControllers["StopSystemEvent"]->LazyConstruct(leaveGame, restartGame);
+		systemControllers["StopSystemEvent"]->LazyConstruct(leaveGame, restartGame, endGame);
 	}
 	AddChild(systemControllers["StopSystemEvent"]);
 

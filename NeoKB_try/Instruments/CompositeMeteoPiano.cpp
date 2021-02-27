@@ -38,6 +38,20 @@ PitchBindingSet * CompositeMeteoPiano::GetDefaultPitchBindingSet(int variant)
 	return meteoPiano->GetDefaultPitchBindingSet(variant);
 }
 
+int CompositeMeteoPiano::Sleep()
+{
+	meteoPiano->Sleep();
+	virtualMeteoPiano->Sleep();
+	return 0;
+}
+
+int CompositeMeteoPiano::WakeUp()
+{
+	meteoPiano->WakeUp();
+	virtualMeteoPiano->WakeUp();
+	return 0;
+}
+
 PassThroughInputManager * CompositeMeteoPiano::CreateInputManager()
 {
 	return meteoPiano->CreateInputManager();

@@ -18,7 +18,7 @@ namespace SystemControllers{
 
 		SystemController();
 
-		virtual int LazyConstruct(function<int()> lGame, function<int()> rGame);
+		virtual int LazyConstruct(function<int()> lGame, function<int()> rGame, function<int()> eGame);
 
 		virtual int ControlSystem(EventProcessor<Event>* eProcessor);
 
@@ -27,6 +27,8 @@ namespace SystemControllers{
 		function<int()> leaveGame;
 
 		function<int()> restartGame;
+
+		function<int()> endGame;
 
 
 	};

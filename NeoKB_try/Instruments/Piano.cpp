@@ -333,6 +333,27 @@ int Piano::SwitchSoundBindings(TSoundBindingSet<Pitch>* sBindingSet)
 	return 0;
 }
 
+int Piano::Sleep()
+{
+	if (isSleeping)
+		return -1;
+
+	Instrument::Sleep();
+	ChangeSustainType(SustainType::None);
+	resetState();
+	isSensitive = true;
+
+	return 0;
+}
+
+int Piano::WakeUp()
+{
+	if (!isSleeping)
+		return -1;
+	Instrument::WakeUp();
+	return 0;
+}
+
 int Piano::ChangeSustainType(SustainType sType)
 {
 	sustainType = sType;
@@ -406,6 +427,9 @@ int Piano::update()
 
 int Piano::OnKeyDown(pair<PianoAction, int> action)
 {
+	if (isSleeping)
+		return -1;
+
 	LOG(LogLevel::Depricated) << "Piano::OnKeyDown() : get fake input." << int(action.first);
 	LOG(LogLevel::Debug) << "Piano::OnKeyDown() : get key [" << int(action.first) << "] on velocity [" << action.second << "]";
 
@@ -419,6 +443,8 @@ int Piano::OnKeyDown(pair<PianoAction, int> action)
 
 int Piano::OnKeyUp(PianoAction action)
 {
+	if (isSleeping)
+		return -1;
 	// 沒踏踏板、有插踏板、沒開啟自動延音
 	if(!isPressingMap.at(PianoAction::SustainPedal) && sustainType != SustainType::AutoSustain )
 		getSamples()->at(action)->FadeOut();
@@ -430,36 +456,47 @@ int Piano::OnKeyUp(PianoAction action)
 
 int Piano::OnButtonDown(PianoAction action)
 {
+	if (isSleeping)
+		return -1;
+
+	/* 是否要設定按下，有些狀況不要設定按下 */
+	bool isSetTempPressing = true;
+
 	/* 沿音 */
 	if (action == PianoAction::Sustain) {
 		
 
-		if (sustainType == SustainType::GameControllingSustain || sustainType == SustainType::SustainPedal) {
+		if (sustainType == SustainType::GameControllingSustain) {
 
 			// TODO: 回傳失敗，遊戲控制的情況下無法切換game control sustain
-
+			LOG(LogLevel::Depricated) << "Piano::OnButtonDown() : cannot switch to auto sustain when game controlling.";
 		}
 		else {
-			MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::PianoPressSustainButton);
+			MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::KeyboardIOEvent);
+
+			json context;
 
 			if (sustainType == SustainType::AutoSustain) {
-				sustainType = SustainType::None;
-				json context;
-				context["State"] = false;
+
+				if (isPressingMap[PianoAction::SustainPedalPlugin]){
+					sustainType = SustainType::SustainPedal;
+				}
+				else
+					sustainType = SustainType::None;
+
+				context.push_back(string("1001,0"));	// 0代表關閉
 				meteoContextBluetoothMessage->SetContextInJson(context);
 			}
 			else {
 				sustainType = SustainType::AutoSustain;
-				json context;
-				context["State"] = false;
+
+				context.push_back(string("1001,1"));	// 1代表開啟
 				meteoContextBluetoothMessage->SetContextInJson(context);
 			}
 			meteoContextBluetoothMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
 			outputManager->PushMessage(meteoContextBluetoothMessage);
 
 		}
-
-		
 	}
 	/* 力度 */
 	if (action == PianoAction::Sensitivity) {
@@ -480,50 +517,84 @@ int Piano::OnButtonDown(PianoAction action)
 		outputManager->PushMessage(meteoContextBluetoothMessage);
 	}
 
-
-	// 如果目前是電腦控制踏板，就先停止接收踏板訓皓
-	if (sustainType == SustainType::GameControllingSustain && action == PianoAction::SustainPedal)
-		return 0;
-
-	if(sustainType == SustainType::AutoSustain && action == PianoAction::SustainPedal)
-		return 0;
-
-	isPressingMap[action] = true;
+	/* 插入踏板 */
 	if (action == PianoAction::SustainPedalPlugin) {
-		// mainInterface->GetPanel()->ChangeState(PianoAction::SustainButton, false);
+		if (sustainType != SustainType::AutoSustain) {
+			sustainType = SustainType::SustainPedal;
+			// mainInterface->GetPanel()->ChangeState(PianoAction::SustainButton, false);
+		}
+
 	}
+
+	/* 踏下踏板 */
+	if (action == PianoAction::SustainPedal) {
+		// 如果目前是電腦控制踏板，就先停止接收踏板訓皓
+		// 這邊程式有點問題，應該是不管怎樣都可以接收到踏下，只不過不會作用在聲音上
+		if (sustainType == SustainType::AutoSustain || sustainType == SustainType::GameControllingSustain) {
+			isSetTempPressing = false;
+		}
+	}
+
+
+	if(isSetTempPressing)
+		isPressingMap[action] = true;
+
 	return 0;
 }
 
 int Piano::OnButtonUp(PianoAction action)
 {
-	// 如果目前是電腦控制踏板，就先停止接收踏板訓皓
-	if (sustainType == SustainType::GameControllingSustain && action == PianoAction::SustainPedal)
-		return 0;
+	if (isSleeping)
+		return -1;
+	
+	bool isSetTempReleasing = true;
 
-	isPressingMap[action] = false;
-	if (action == PianoAction::SustainPedal && sustainType == SustainType::SustainPedal) {
-		map<PianoAction, bool>::iterator it;
-		for (it = isPressingMap.begin(); it != isPressingMap.end(); it++) {
-			if (!it->second) {
-				SampleChannel* sampleChannel = getSamples()->at(it->first);
-				if (sampleChannel)
-					if(sampleChannel->GetIsPlaying())
-						sampleChannel->FadeOut();
+	// 如果目前是電腦控制踏板，就先停止接收踏板訓皓
+	if (action == PianoAction::SustainPedal) {
+		if (sustainType == SustainType::GameControllingSustain)
+			isSetTempReleasing = false;
+
+		if (sustainType == SustainType::SustainPedal) {
+			map<PianoAction, bool>::iterator it;
+			for (it = isPressingMap.begin(); it != isPressingMap.end(); it++) {
+				if (!it->second) {
+					SampleChannel* sampleChannel = getSamples()->at(it->first);
+					if (sampleChannel)
+						if (sampleChannel->GetIsPlaying())
+							sampleChannel->FadeOut();
+				}
 			}
 		}
 	}
+
+	if (action == PianoAction::SustainPedalPlugin) {
+		if (sustainType != SustainType::AutoSustain) {
+			sustainType = SustainType::None;
+			// mainInterface->GetPanel()->ChangeState(PianoAction::SustainButton, false);
+		}
+	}
+
+	if(isSetTempReleasing)
+		isPressingMap[action] = false;
+
 	return 0;
 }
 
 int Piano::OnKnobTurn(pair<PianoAction, int> action)
 {
+
+	if (isSleeping)
+		return -1;
+
 	// 不需做任何動作
 	return 0;
 }
 
 int Piano::OnSlide(pair<PianoAction, int> action)
 {
+	if (isSleeping)
+		return -1;
+
 	if (action.first == PianoAction::PianoVolumeSlider) {
 		// 調整音量
 	}

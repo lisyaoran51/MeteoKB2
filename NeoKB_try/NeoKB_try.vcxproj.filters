@@ -865,6 +865,96 @@
     <Filter Include="來源檔案\Games\Schedulers\Events\SystemEvent\SystemControllers">
       <UniqueIdentifier>{be24bef8-e01b-410a-a27b-d269669b6cb7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="標頭檔\RulesetRecord">
+      <UniqueIdentifier>{109c99b0-50aa-4571-8245-94a705b731cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetRecord">
+      <UniqueIdentifier>{36443bf9-0004-442f-b2eb-3a387bd8b3b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetRecord\Config">
+      <UniqueIdentifier>{6b488f30-27a8-486c-a19e-a5e7f2214db0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetRecord\Input">
+      <UniqueIdentifier>{1d932714-1a79-4e03-be7e-d98784dbc8a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetRecord\Output">
+      <UniqueIdentifier>{fb902f99-44ad-420b-b022-c618beb57d09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetRecord\Rulesets">
+      <UniqueIdentifier>{f54e4d0a-3bfd-4734-8a05-756ae313d6e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetRecord\Scenes">
+      <UniqueIdentifier>{e4678b64-825c-4961-baf7-fdae6f30c1f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetRecord\Schedulers">
+      <UniqueIdentifier>{ac9eb757-ddac-43a3-8cca-4cd718d9ca22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetRecord\Sheetmusics">
+      <UniqueIdentifier>{61210ff3-acb5-4555-a844-1d917e2d2ff7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetRecord\Timing">
+      <UniqueIdentifier>{79720677-9f37-4ea7-9dd0-8c2053716dda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\RulesetRecord\Config">
+      <UniqueIdentifier>{cb14edd3-1648-445a-89c0-5528ae8918ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\RulesetRecord\Input">
+      <UniqueIdentifier>{1a4f5941-106b-486b-bdfe-162687dab561}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\RulesetRecord\Output">
+      <UniqueIdentifier>{ea305371-dede-41f2-8f5d-903fd08614ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\RulesetRecord\Rulesets">
+      <UniqueIdentifier>{2e511066-c63e-4bef-9d50-c7134107e348}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\RulesetRecord\Scenes">
+      <UniqueIdentifier>{90923641-eabc-4161-a8d3-d5c742363873}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\RulesetRecord\Schedulers">
+      <UniqueIdentifier>{6d9dd8a3-1191-46d5-8e12-28d53539b0c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\RulesetRecord\Sheetmusics">
+      <UniqueIdentifier>{75ec9d4e-4c6c-4d9b-a947-a8144cfdda8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\RulesetRecord\Timing">
+      <UniqueIdentifier>{c6b9b1a8-f25d-4b98-b728-3ad53aa5675d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\RulesetRecord\Sheetmusics\Patterns">
+      <UniqueIdentifier>{ae124797-4705-4a73-b017-30fe6396d0cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\RulesetRecord\Schedulers\Events">
+      <UniqueIdentifier>{ab602fbd-eec1-4d1e-836a-13ffd8f8a2c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\RulesetRecord\Scenes\Play">
+      <UniqueIdentifier>{2c929c4e-6263-4983-ac62-bdd47f60380c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\RulesetRecord\Scenes\Results">
+      <UniqueIdentifier>{04114635-be4e-468e-bb68-035a21d5c15e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\RulesetRecord\Rulesets\Replays">
+      <UniqueIdentifier>{705b598c-4869-4926-8e8b-e96e1c92342b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\RulesetRecord\Rulesets\Scoring">
+      <UniqueIdentifier>{27f1c09d-e2a9-4076-a7a7-e8e1d44dbeeb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetRecord\Sheetmusics\Patterns">
+      <UniqueIdentifier>{77f76cbb-fa84-453a-8f35-5966da6a8e78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetRecord\Schedulers\Events">
+      <UniqueIdentifier>{6aae3dfc-021a-4825-9aa2-52647d6b6ea5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetRecord\Scenes\Play">
+      <UniqueIdentifier>{bf04776c-f83c-41a2-bfd4-cabd5a069f06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetRecord\Scenes\Results">
+      <UniqueIdentifier>{ac255c3f-0a82-4104-8dc6-307a2628e115}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetRecord\Rulesets\Replays">
+      <UniqueIdentifier>{e1fee302-ca54-44f3-ad2d-aa34f8c251ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\RulesetRecord\Rulesets\Scoring">
+      <UniqueIdentifier>{043ed787-cde9-4bd2-b6bd-75835b5b75d4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Games\Graphic\Renderer\renderer.cpp">
@@ -1850,6 +1940,60 @@
     </ClCompile>
     <ClCompile Include="Desktop\Devices\MeteoMcuV1.cpp">
       <Filter>來源檔案\Desktop\Devices</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\UI\PowerPanel.cpp">
+      <Filter>來源檔案\Games\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\Scheduler\Event\SystemEvents\EndSystemEvent.cpp">
+      <Filter>來源檔案\Games\Schedulers\Events\SystemEvent</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetRecord\Config\RecordConfigManager.cpp">
+      <Filter>來源檔案\RulesetRecord\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetRecord\Input\RecordInputManager.cpp">
+      <Filter>來源檔案\RulesetRecord\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetRecord\Timing\RecordTimeController.cpp">
+      <Filter>來源檔案\RulesetRecord\Timing</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetRecord\Sheetmusic\RecordSheetmusicConverter.cpp">
+      <Filter>來源檔案\RulesetRecord\Sheetmusics</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetRecord\Sheetmusic\RecordSheetmusicPostprocessor.cpp">
+      <Filter>來源檔案\RulesetRecord\Sheetmusics</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetRecord\Sheetmusic\Pattern\RecordPatternGenerator.cpp">
+      <Filter>來源檔案\RulesetRecord\Sheetmusics\Patterns</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetRecord\Scheduler\Event\RecordEventProcessorMaster.cpp">
+      <Filter>來源檔案\RulesetRecord\Schedulers\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetRecord\Scenes\Play\RecordPlayfield.cpp">
+      <Filter>來源檔案\RulesetRecord\Scenes\Play</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetRecord\Scenes\Results\RecordResult.cpp">
+      <Filter>來源檔案\RulesetRecord\Scenes\Results</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetRecord\Ruleset\RecordRuleset.cpp">
+      <Filter>來源檔案\RulesetRecord\Rulesets</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetRecord\Ruleset\RecordRulesetExecutor.cpp">
+      <Filter>來源檔案\RulesetRecord\Rulesets</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetRecord\Ruleset\Scoring\RecordScoreProcessor.cpp">
+      <Filter>來源檔案\RulesetRecord\Rulesets\Scoring</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetRecord\Ruleset\Replays\RecordReplayFrame.cpp">
+      <Filter>來源檔案\RulesetRecord\Rulesets\Replays</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetRecord\Ruleset\Replays\RecordReplayRecorder.cpp">
+      <Filter>來源檔案\RulesetRecord\Rulesets\Replays</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetRecord\Scheduler\Event\RecordDynamicEventGenerator.cpp">
+      <Filter>來源檔案\RulesetRecord\Schedulers\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\MeteorDynamicEventGenerator.cpp">
+      <Filter>來源檔案\RulesetMeteor\Schedulers\Events</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -3117,6 +3261,63 @@
     </ClInclude>
     <ClInclude Include="Desktop\Devices\MeteoMcuV1.h">
       <Filter>標頭檔\Desktop\Devices</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\UI\PowerPanel.h">
+      <Filter>標頭檔\Games\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Scheduler\Event\SystemEvents\EndSystemEvent.h">
+      <Filter>標頭檔\Games\Scheduler\Events\SystemEvents</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Scheduler\Event\SystemEvents\EndSystemEventHandler.h">
+      <Filter>標頭檔\Games\Scheduler\Events\SystemEvents</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetRecord\Config\RecordConfigManager.h">
+      <Filter>標頭檔\RulesetRecord\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetRecord\Input\RecordInputManager.h">
+      <Filter>標頭檔\RulesetRecord\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetRecord\Timing\RecordTimeController.h">
+      <Filter>標頭檔\RulesetRecord\Timing</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetRecord\Sheetmusic\Pattern\RecordPatternGenerator.h">
+      <Filter>標頭檔\RulesetRecord\Sheetmusics\Patterns</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetRecord\Sheetmusic\RecordSheetmusicConverter.h">
+      <Filter>標頭檔\RulesetRecord\Sheetmusics</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetRecord\Sheetmusic\RecordSheetmusicPostProcessor.h">
+      <Filter>標頭檔\RulesetRecord\Sheetmusics</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetRecord\Scheduler\Event\RecordEventProcessorMaster.h">
+      <Filter>標頭檔\RulesetRecord\Schedulers\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetRecord\Scenes\Results\RecordResult.h">
+      <Filter>標頭檔\RulesetRecord\Scenes\Results</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetRecord\Scenes\Play\RecordPlayfield.h">
+      <Filter>標頭檔\RulesetRecord\Scenes\Play</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetRecord\Ruleset\RecordRuleset.h">
+      <Filter>標頭檔\RulesetRecord\Rulesets</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetRecord\Ruleset\RecordRulesetExecutor.h">
+      <Filter>標頭檔\RulesetRecord\Rulesets</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetRecord\Ruleset\Scoring\RecordScoreProcessor.h">
+      <Filter>標頭檔\RulesetRecord\Rulesets\Scoring</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetRecord\Ruleset\Replays\RecordReplayFrame.h">
+      <Filter>標頭檔\RulesetRecord\Rulesets\Replays</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetRecord\Ruleset\Replays\RecordReplayRecorder.h">
+      <Filter>標頭檔\RulesetRecord\Rulesets\Replays</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetRecord\Scheduler\Event\RecordDynamicEventGenerator.h">
+      <Filter>標頭檔\RulesetRecord\Schedulers\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\MeteorDynamicEventGenerator.h">
+      <Filter>標頭檔\RulesetMeteor\Schedulers\Events</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

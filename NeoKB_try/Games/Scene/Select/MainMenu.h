@@ -7,10 +7,12 @@
 #include "../../Sheetmusic/WorkingSheetmusic.h"
 #include "SongSelect.h"
 #include "../MeteoScene.h"
+#include "../../UI/PowerPanel.h"
 
 
 using namespace Games::Sheetmusics;
 using namespace Framework::Scenes;
+using namespace Games::UI;
 
 
 namespace Games {
@@ -29,7 +31,11 @@ namespace Select {
 
 	protected:
 
-		SongSelect* songSelect;
+		Instrument* instrument = nullptr;
+
+		SongSelect* songSelect = nullptr;
+
+		PowerPanel* powerPanel = nullptr;
 
 		virtual int onEntering(Scene* lastScene);
 
@@ -39,6 +45,8 @@ namespace Select {
 		/// Åª¨úBeatmapManager beatmaps, AudioManager audio, DialogOverlay dialog, OsuGame osu, OsuColour colours
 		/// </summary>
 		int load();
+
+		int load(Instrument* i);
 
 
 		/// <summary>

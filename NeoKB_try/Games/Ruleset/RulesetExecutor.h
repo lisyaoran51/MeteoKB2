@@ -259,6 +259,11 @@ namespace Rulesets {
 			return 0;
 		}
 
+		int SetEndGameFunction(function<int()> eGame) {
+			endGame = eGame;
+			return 0;
+		}
+
 	protected:
 
 		Ruleset* ruleset;
@@ -275,9 +280,20 @@ namespace Rulesets {
 
 		ActionList<int, Judgement*> onJudgement;
 
+		/// <summary>
+		/// 離開遊戲，回到song select
+		/// </summary>
 		function<int()> leaveGame;
 
+		/// <summary>
+		/// 重新開始遊戲
+		/// </summary>
 		function<int()> restartGame;
+
+		/// <summary>
+		/// 結束遊戲進入result
+		/// </summary>
+		function<int()> endGame;
 
 		virtual Playfield* createPlayfield() = 0;
 

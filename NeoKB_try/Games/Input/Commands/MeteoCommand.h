@@ -46,6 +46,9 @@ namespace Commands{
 		ReadAppTime					,
 		ReturnAppTime				,
 		// 基本功能
+		AppIOEvent								,
+		KeyboardIOEvent							,
+
 		AppPressPowerButton = 300				,
 		AckAppPressPowerButton					,
 		PianoPressPowerButton					,

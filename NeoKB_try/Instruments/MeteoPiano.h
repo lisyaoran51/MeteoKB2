@@ -28,6 +28,11 @@ namespace Instruments {
 
 		virtual PitchBindingSet* GetDefaultPitchBindingSet(int variant = 0);	// 這個還沒寫
 
+		virtual int Sleep();
+
+		virtual int WakeUp();
+
+
 		/* ----------------------- MeteoPiano.h ----------------------- */
 
 		virtual int SetGameControllingPitchState(bool value);
@@ -45,6 +50,8 @@ namespace Instruments {
 	protected:
 
 		PitchBindingSet* pitchBindingSet = nullptr;
+
+		virtual int resetState();
 
 		virtual map<PianoAction, SampleChannel*>* getSamples(int variant = 0);
 

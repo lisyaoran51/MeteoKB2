@@ -39,7 +39,7 @@ namespace SystemEvents {
 		Start,	// 用步道，遊戲會自動開始
 		Pause,	// 移到time controller了
 		Resume,	// 用步道
-		End,	// 結束整個城市的意思
+		End,	// 進入result
 		Stop,	// 結束遊戲的一死
 		Restart
 	};

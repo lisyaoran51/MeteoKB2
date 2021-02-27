@@ -47,7 +47,8 @@ int Player::load(MeteoConfigManager* m, Instrument* instru)
 
 	rulesetExecutor->SetLeaveGameFunction(bind(&Player::onQuiting, this));
 	rulesetExecutor->SetRestartGameFunction(bind(&Player::onRestarting, this));
-
+	rulesetExecutor->SetEndGameFunction(bind(&Player::onCompletion, this));
+	
 	/***
 	Sm<Event>* sm = workingSm->GetSm();
 	 

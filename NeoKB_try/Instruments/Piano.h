@@ -70,6 +70,9 @@ namespace Instruments {
 
 		virtual int SwitchSoundBindings(TSoundBindingSet<Pitch>* sBindingSet);
 
+		virtual int Sleep();
+
+		virtual int WakeUp();
 
 		/* ------------------- ¿ûµ^±MÄÝ¥\¯à ------------------- */
 

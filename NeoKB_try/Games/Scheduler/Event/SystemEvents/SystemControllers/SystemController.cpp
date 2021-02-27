@@ -12,10 +12,11 @@ SystemController::SystemController() : RegisterType("SystemController")
 {
 }
 
-int SystemController::LazyConstruct(function<int()> lGame, function<int()> rGame)
+int SystemController::LazyConstruct(function<int()> lGame, function<int()> rGame, function<int()> eGame)
 {
 	leaveGame = lGame;
 	restartGame = rGame;
+	endGame = eGame;
 	return 0;
 }
 
@@ -33,6 +34,10 @@ int SystemController::ControlSystem(EventProcessor<Event>* eProcessor)
 	else if (systemEvent->GetSystemEventType() == SystemEventType::Restart) {
 		// TODO: 要不要用add delayed task? 不過都是在update thread裡面的
 		restartGame();
+	}
+	else if (systemEvent->GetSystemEventType() == SystemEventType::End) {
+		// TODO: 要不要用add delayed task? 不過都是在update thread裡面的
+		endGame();
 	}
 
 

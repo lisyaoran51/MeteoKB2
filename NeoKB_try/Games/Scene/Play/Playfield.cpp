@@ -244,16 +244,21 @@ int Playfield::SetGetEventProcessorFunction(function<EventProcessor<Event>*(Even
 	return 0;
 }
 
-Playfield* Playfield::SetLeaveGameFunction(function<int()> lGame)
+int Playfield::SetLeaveGameFunction(function<int()> lGame)
 {
 	leaveGame = lGame;
-	return this;
+	return 0;
 }
-
-Playfield * Playfield::SetRestartGameFunction(function<int()> rGame)
+int Playfield::SetRestartGameFunction(function<int()> rGame)
 {
 	restartGame = rGame;
-	return this;
+	return 0;
+}
+
+int Playfield::SetEndGameFunction(function<int()> eGame)
+{
+	endGame = eGame;
+	return 0;
 }
 
 vector<EventProcessor<Event>*>* Playfield::GetEventProcessors()
