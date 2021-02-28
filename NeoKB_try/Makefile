@@ -25,6 +25,7 @@ Games/Scheduler/Event/IoEvents:Games/Scheduler/Event/IoEvents/IoCommunicators:\
 Games/Scheduler/Event/InstrumentEvents:Games/Scheduler/Event/InstrumentEvents/InstrumentControllers:\
 Games/Scheduler/Event/PlayfieldEvents:Games/Scheduler/Event/PlayfieldEvents/PlayfieldControllers:\
 Games/Scheduler/Event/TimeEvents:Games/Scheduler/Event/TimeEvents/TimeControllerControllers:\
+Games/Scheduler/Event/RecorderEvents:Games/Scheduler/Event/RecorderEvents/RecorderControllers:\
 Games/Sheetmusic:Games/Sheetmusic/Format:Games/Sheetmusic/Format/Parser:Games/Sheetmusic/IO:Games/Sheetmusic/Pattern:\
 Games/Timing:\
 Games/UI:\
@@ -47,6 +48,7 @@ RulesetMeteor/Scheduler/Event/IoEvents:RulesetMeteor/Scheduler/Event/IoEvents/Io
 RulesetMeteor/Scheduler/Event/InstrumentEvents:RulesetMeteor/Scheduler/Event/InstrumentEvents/InstrumentControllers:\
 RulesetMeteor/Scheduler/Event/PlayfieldEvents:RulesetMeteor/Scheduler/Event/PlayfieldEvents/PlayfieldControllers:\
 RulesetMeteor/Scheduler/Event/TimeEvents:RulesetMeteor/Scheduler/Event/TimeEvents/TimeControllerControllers:\
+RulesetMeteor/Scheduler/Event/RecorderEvents:RulesetMeteor/Scheduler/Event/RecorderEvents/RecorderControllers:\
 RulesetMeteor/Sheetmusic:RulesetMeteor/Sheetmusic/Pattern:\
 RulesetMeteor/Timing:\
 \
@@ -87,6 +89,7 @@ INCLUDE = -IFramwork -IFramework/Allocation -IFramework/Allocation/Hierachal -IF
 -IGames/Scheduler/Event/InstrumentEvents -IGames/Scheduler/Event/InstrumentEvents/InstrumentControllers \
 -IGames/Scheduler/Event/PlayfieldEvents -IGames/Scheduler/Event/PlayfieldEvents/PlayfieldControllers \
 -IGames/Scheduler/Event/TimeEvents -IGames/Scheduler/Event/TimeEvents/TimeControllerControllers \
+-IGames/Scheduler/Event/RecorderEvents -IGames/Scheduler/Event/RecorderEvents/RecorderControllers \
 -IGames/Sheetmusic -IGames/Sheetmusic/Format -IGames/Sheetmusic/Format/Parser -IGames/Sheetmusic/IO -IGames/Sheetmusic/Pattern \
 -IGames/Timing \
 -IGames/UI \
@@ -186,6 +189,7 @@ InstrumentEvent.o InstrumentEventProcessor.o InstrumentController.o \
 PlayfieldEvent.o PlayfieldEventProcessor.o PlayfieldController.o \
 GameEvent.o StartGameEvent.o StopSystemEvent.o RestartSystemEvent.o SystemEvent.o SystemEventHandler.o SystemController.o \
 TimeEvent.o TimeEventProcessor.o TimeControllerController.o \
+RecorderEvent.o RecorderEventProcessor.o RecorderConrtoller.o \
 ResourceStoreWorkingSm.o SheetmusicConverter.o SheetmusicManager.o SheetmusicMetadata.o SheetmusicPostprocessor.o SheetmusicStore.o WorkingSheetmusic.o \
 SimpleSmDecoder.o SmDecoder.o FileReader.o Pattern.o PatternGenerator.o \
 SheetmusicSelectPanel.o VolumeController.o SoundSelectPanel.o \
@@ -208,12 +212,13 @@ AutoPedalModifier.o MusicGameModifier.o HandModifier.o MeteorDifficultyModifier.
 MeteorScoreProcessor.o \
 LightRingOutputer.o LightRingPanelMessage.o SustainPedalLightRingOutputer.o SustainPedalLightRingPanelMessage.o \
 MeteorEventProcessorMaster.o MeteorNoteControlPointHitObject.o MeteorInputKeyControlPointHitObject.o \
-ExplodeEffect.o ExplodeEffectMapper.o FallEffect.o FallEffectMapper.o EruptEffect.o EruptEffectMapper.o GlowLineEffect.o GlowLineEffectMapper.o TargetLineEffect.o TargetLineEffectMapper.o \
+MeteorEffect.o ExplodeEffect.o ExplodeEffectMapper.o FallEffect.o FallEffectMapper.o EruptEffect.o EruptEffectMapper.o GlowLineEffect.o GlowLineEffectMapper.o TargetLineEffect.o TargetLineEffectMapper.o \
 ExplodeMapAlgorithm.o FallMapAlgorithm.o EruptMapAlgorithm.o GlowLineMapAlgorithm.o TargetLineMapAlgorithm.o \
 SustainPedalIoEvent.o SustainPedalLightRing.o SustainPedalLightRingIoCommunicator.o \
 PianoEvent.o PianoEventProcessor.o PianoController.o PianoSoundEvent.o PianoSoundEventProcessor.o VirtualPianoController.o \
 OctaveShiftEvent.o OctaveShiftEventProcessor.o OctaveShifter.o \
 RepeatPracticeEvent.o RepeatPracticeEventProcessor.o RepeatPracticeController.o \
+MeteorButtonRecorderEvent.o MeteorButtonRecorderEventProcessor.o MeteorButtonRecorderController.o \
 MeteorSheetmusicConverter.o MeteorSheetmusicPostprocessor.o MeteorPatternGenerator.o \
 MeteorTimeController.o \
 \
