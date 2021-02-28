@@ -28,11 +28,19 @@ int DualPlaybackBassSampleChannel::Play()
 		int newPlayback = 0;
 
 		// 音量衰減公式 音量=e(-at)，a為常數，t為時間
+
+
 		double tempPlaybackCurrentTime = BASS_ChannelBytes2Seconds(
 			channelID[tempPlayingPlayback],
 			BASS_ChannelGetPosition(channelID[tempPlayingPlayback], BASS_POS_BYTE));
 
 		double tempVolume = lastVolume * exp(-tempPlaybackCurrentTime);
+
+		if (BASS_ChannelIsActive(channelID[tempPlayingPlayback]) != BASS_ACTIVE_PLAYING) {
+			tempVolume = 0;
+		}
+
+		
 		LOG(LogLevel::Depricated) << "DualPlaybackBassSampleChannel::Play() : last voume [" << tempVolume << "], new volume [" << volume->GetValue() << "].";
 
 
