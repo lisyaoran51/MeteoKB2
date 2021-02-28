@@ -17,7 +17,7 @@ namespace RecorderEvents {
 
 	public:
 
-		virtual int RegisterRecorderController(RecorderEventProcessorInterface* iController) = 0;
+		virtual int RegisterRecorderController(RecorderControllerInterface* iController) = 0;
 
 		virtual int Process();
 

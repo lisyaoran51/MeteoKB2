@@ -304,8 +304,8 @@ EventProcessor<Event>* MeteorRulesetExecutor::getEventProcessor(Event * e)
 	else if (processorType == "OctaveShiftEventProcessor") {
 		return (new OctaveShiftEventProcessor())->RegisterEvent(e);
 	}
-	else if (processorType == "MeteorButtonRecorderProcessor") {
-		return (new MeteorButtonRecorderProcessor())->RegisterEvent(e);
+	else if (processorType == "MeteorButtonRecorderEventProcessor") {
+		return (new MeteorButtonRecorderEventProcessor())->RegisterEvent(e);
 	}
 
 
