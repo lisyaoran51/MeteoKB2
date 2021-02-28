@@ -50,7 +50,7 @@ int DualPlaybackBassSampleChannel::Play()
 
 		BASS_ChannelPlay(channelID[newPlayback], false);
 
-		if (tempVolume <= volume->GetValue() && false) {
+		if (tempVolume <= volume->GetValue() || true) {
 			if (BASS_ChannelIsActive(channelID[tempPlayingPlayback]) == BASS_ACTIVE_PLAYING) {
 				BASS_ChannelSlideAttribute(channelID[tempPlayingPlayback], BASS_ATTRIB_VOL, 0, (DWORD)(fadeOutTime / 2 * 1000));
 			}
