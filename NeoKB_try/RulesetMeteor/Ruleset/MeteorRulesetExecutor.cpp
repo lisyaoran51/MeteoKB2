@@ -26,6 +26,7 @@
 #include "../Scheduler/Event/InstrumentEvents/PianoSoundEventProcessor.h"
 #include "../Scheduler/Event/PlayfieldEvents/OctaveShiftEventProcessor.h"
 #include "../Scheduler/Event/TimeEvents/RepeatPracticeEventProcessor.h"
+#include "../Scheduler/Event/RecorderEvents/MeteorButtonRecorderEventProcessor.h"
 #include "Replays/MeteorReplayRecorder.h"
 #include "../Scenes/Results/MeteorResult.h"
 
@@ -52,6 +53,7 @@ using namespace Meteor::Schedulers::Events::PlayfieldEvents;
 using namespace Meteor::Schedulers::Events::TimeEvents;
 using namespace Meteor::Rulesets::Replays;
 using namespace Meteor::Scenes::Results;
+using namespace Meteor::Schedulers::Events::RecorderEvents;
 
 
 
@@ -301,6 +303,9 @@ EventProcessor<Event>* MeteorRulesetExecutor::getEventProcessor(Event * e)
 	}
 	else if (processorType == "OctaveShiftEventProcessor") {
 		return (new OctaveShiftEventProcessor())->RegisterEvent(e);
+	}
+	else if (processorType == "MeteorButtonRecorderProcessor") {
+		return (new MeteorButtonRecorderProcessor())->RegisterEvent(e);
 	}
 
 
