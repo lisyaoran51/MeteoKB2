@@ -327,6 +327,7 @@
     <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\FallEffectMapper.cpp" />
     <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\GlowLineEffect.cpp" />
     <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\GlowLineEffectMapper.cpp" />
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\MeteorEffect.cpp" />
     <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\TargetLineEffect.cpp" />
     <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\TargetLineEffectMapper.cpp" />
     <ClCompile Include="RulesetMeteor\Scheduler\Event\InstrumentEvents\InstrumentControllers\PianoController.cpp" />
@@ -766,6 +767,7 @@
     <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\FallEffectMapper.h" />
     <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\GlowLineEffect.h" />
     <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\GlowLineEffectMapper.h" />
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\MeteorEffect.h" />
     <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\TargetLineEffect.h" />
     <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\TargetLineEffectMapper.h" />
     <ClInclude Include="RulesetMeteor\Scheduler\Event\InstrumentEvents\InstrumentControllers\PianoController.h" />

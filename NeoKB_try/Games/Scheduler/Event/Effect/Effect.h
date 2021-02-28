@@ -42,8 +42,8 @@ namespace Effects {
 
 		// 一定要每次都override!!
 		virtual string GetTypeName();
-		int GetX();
-		int GetY();
+		virtual int GetX();
+		virtual int GetY();
 		MTO_FLOAT GetSpeed();
 
 		int SetBrightness(MTO_FLOAT b);

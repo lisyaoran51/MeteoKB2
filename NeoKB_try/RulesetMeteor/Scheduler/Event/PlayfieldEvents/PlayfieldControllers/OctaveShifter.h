@@ -41,7 +41,8 @@ namespace PlayfieldControllers{
 
 		MeteorPlayfield* meteorPlayfield = nullptr;
 
-		MapPitchShifter* mapPitchShifter = nullptr;
+		// 平移八度已經被改掉了
+		//MapPitchShifter* mapPitchShifter = nullptr;
 
 		virtual int implementControlPlayfield(EventProcessor<Event>* eProcessor);
 

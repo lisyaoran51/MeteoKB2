@@ -11,7 +11,7 @@ EruptEffect::EruptEffect()
 	throw logic_error("EruptEffect() : This constructor is only for compile-time assurance. Not available to execute.");
 }
 
-EruptEffect::EruptEffect(int xPos, int yPos, MTO_FLOAT sTime, MTO_FLOAT l, MTO_FLOAT sp) : Effect(xPos, yPos, sTime, l)
+EruptEffect::EruptEffect(int xPos, int yPos, MTO_FLOAT sTime, MTO_FLOAT l, MTO_FLOAT sp) : MeteorEffect(xPos, yPos, sTime, l)
 {
 	SetSpeed(sp);
 }
@@ -48,4 +48,24 @@ int EruptEffect::AdjustSpeed(float sp)
 string EruptEffect::GetTypeName()
 {
 	return "EruptEffect";
+}
+
+int EruptEffect::GetX()
+{
+	switch (meteorEffectShiftType) {
+	case MeteorEffectShiftType::None:
+		return x;
+		break;
+
+	case MeteorEffectShiftType::LoweredOctave:
+		return x + 12;
+		break;
+
+	case MeteorEffectShiftType::RaisedOctave:
+		return x - 12;
+		break;
+	}
+
+
+	return x;
 }

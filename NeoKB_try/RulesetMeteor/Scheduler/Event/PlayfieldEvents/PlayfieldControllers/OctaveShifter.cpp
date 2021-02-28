@@ -24,12 +24,12 @@ int OctaveShifter::LazyConstruct(Playfield * p)
 int OctaveShifter::implementControlPlayfield(EventProcessor<Event>* eProcessor)
 {
 
+	OctaveShiftEventProcessor* octaveShiftEventProcessor = dynamic_cast<OctaveShiftEventProcessor*>(eProcessor);
+
+	/*	平移八度已經被改掉了
 	mapPitchShifter = dynamic_cast<MeteorPlayfield*>(playfield)->GetMapPitchShifter();
 	if (mapPitchShifter == nullptr)
 		return 0;
-
-
-	OctaveShiftEventProcessor* octaveShiftEventProcessor = dynamic_cast<OctaveShiftEventProcessor*>(eProcessor);
 
 	double framesPerSecond = GetClock()->GetFramesPerSecond();
 
@@ -43,6 +43,8 @@ int OctaveShifter::implementControlPlayfield(EventProcessor<Event>* eProcessor)
 	}
 	else
 		mapPitchShifter->SetFloatSeekSpeed(12.0, shiftTime);
+
+	*/
 
 #pragma region (Drepricated)改用浮動的平移速度，不然有bug
 	/* 改用浮動的平移速度，不然有bug
@@ -64,11 +66,11 @@ int OctaveShifter::implementControlPlayfield(EventProcessor<Event>* eProcessor)
 			break;
 		case MeteoPianoPitchState::None:
 			meteorPlayfield->ChangePitchState(MeteoPianoPitchState::Lowered);
-			mapPitchShifter->SetSeekPitch(Pitch::C1);
+			//mapPitchShifter->SetSeekPitch(Pitch::C1);
 			break;
 		case MeteoPianoPitchState::Raised:
 			meteorPlayfield->ChangePitchState(MeteoPianoPitchState::None);
-			mapPitchShifter->SetSeekPitch(Pitch::C);
+			//mapPitchShifter->SetSeekPitch(Pitch::C);
 			break;
 		}
 	}
@@ -76,11 +78,11 @@ int OctaveShifter::implementControlPlayfield(EventProcessor<Event>* eProcessor)
 		switch (meteorPlayfield->GetMeteoPianoPitchState()) {
 		case MeteoPianoPitchState::Lowered:
 			meteorPlayfield->ChangePitchState(MeteoPianoPitchState::None);
-			mapPitchShifter->SetSeekPitch(Pitch::C);
+			//mapPitchShifter->SetSeekPitch(Pitch::C);
 			break;
 		case MeteoPianoPitchState::None:
 			meteorPlayfield->ChangePitchState(MeteoPianoPitchState::Raised);
-			mapPitchShifter->SetSeekPitch(Pitch::c);
+			//mapPitchShifter->SetSeekPitch(Pitch::c);
 			break;
 		case MeteoPianoPitchState::Raised:
 			break;
@@ -93,23 +95,23 @@ int OctaveShifter::implementControlPlayfield(EventProcessor<Event>* eProcessor)
 
 int OctaveShifter::implementUndoControlPlayfield(EventProcessor<Event>* eProcessor)
 {
+	OctaveShiftEventProcessor* octaveShiftEventProcessor = dynamic_cast<OctaveShiftEventProcessor*>(eProcessor);
 
+	/* 平移八度已經被改掉了
 	mapPitchShifter = dynamic_cast<MeteorPlayfield*>(playfield)->GetMapPitchShifter();
 	if (mapPitchShifter == nullptr)
 		return 0;
-
-
-	OctaveShiftEventProcessor* octaveShiftEventProcessor = dynamic_cast<OctaveShiftEventProcessor*>(eProcessor);
+	*/
 
 	if (octaveShiftEventProcessor->GetShiftType() == OctaveShiftType::Lower) {
 		switch (meteorPlayfield->GetMeteoPianoPitchState()) {
 		case MeteoPianoPitchState::Lowered:
 			meteorPlayfield->ChangePitchState(MeteoPianoPitchState::None);
-			mapPitchShifter->JumpToPitch(Pitch::C);
+			//mapPitchShifter->JumpToPitch(Pitch::C);
 			break;
 		case MeteoPianoPitchState::None:
 			meteorPlayfield->ChangePitchState(MeteoPianoPitchState::Raised);
-			mapPitchShifter->JumpToPitch(Pitch::c);
+			//mapPitchShifter->JumpToPitch(Pitch::c);
 			break;
 		case MeteoPianoPitchState::Raised:
 			break;
@@ -121,11 +123,11 @@ int OctaveShifter::implementUndoControlPlayfield(EventProcessor<Event>* eProcess
 			break;
 		case MeteoPianoPitchState::None:
 			meteorPlayfield->ChangePitchState(MeteoPianoPitchState::Lowered);
-			mapPitchShifter->JumpToPitch(Pitch::C1);
+			//mapPitchShifter->JumpToPitch(Pitch::C1);
 			break;
 		case MeteoPianoPitchState::Raised:
 			meteorPlayfield->ChangePitchState(MeteoPianoPitchState::None);
-			mapPitchShifter->JumpToPitch(Pitch::C);
+			//mapPitchShifter->JumpToPitch(Pitch::C);
 			break;
 		}
 	}

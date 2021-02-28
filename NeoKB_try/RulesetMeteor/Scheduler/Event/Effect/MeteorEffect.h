@@ -1,11 +1,10 @@
-#ifndef ERUPT_EFFECT_H
-#define ERUPT_EFFECT_H
-
+#ifndef METEOR_EFFECT_H
+#define METEOR_EFFECT_H
 
 #include <string>
 #include <fstream>
 #include <vector>
-#include "MeteorEffect.h"
+#include "../../../../Games/Scheduler/Event/Effect/Effect.h"
 #include "../../../../Instruments/Pitch.h"
 #include "../../../../Instruments/HasPitch.h"
 #include "../../../../Games/Ruleset/Judgements/HasHitWindow.h"
@@ -24,8 +23,13 @@ namespace Schedulers {
 namespace Events {
 namespace Effects {
 	
+	enum class MeteorEffectShiftType {
+		None, 
+		RaisedOctave,
+		LoweredOctave
+	};
 
-	class EruptEffect: public MeteorEffect
+	class MeteorEffect: public Effect
 	{
 
 	public:
@@ -33,40 +37,23 @@ namespace Effects {
 		/// <summary>
 		/// 這個建構子不是用來執行的，指示用來給TConstraint來確認繼承關係用
 		///	</summary>
-		EruptEffect();
+		MeteorEffect();
 
 		/// <summary>
 		/// construct an immediate effect
 		///	</summary>
-		EruptEffect(
+		MeteorEffect(
 			int xPos,
 			int yPos,
 			MTO_FLOAT sTime,
-			MTO_FLOAT l,
-			MTO_FLOAT sp
+			MTO_FLOAT l
 		);
 
-		virtual int ApplyDefaultValues(SmDifficulty* smDifficulty);
-
-		int SetTargetHeight(int tHeight);
-
-		/// <summary>
-		/// 必須要先設SetTargetHeight，之後才可以adjust speed，不然會跳錯誤，因為沒有target height，會無法換算開始時間
-		///	</summary>
-		int AdjustSpeed(float sp);
-
-		// 一定要每次都override!!
-		virtual string GetTypeName();
-
-		/* ---------------------------Effect--------------------------- */
-
-		virtual int GetX();
+		int SetMeteorEffectShiftType(MeteorEffectShiftType mEffectShiftType);
 
 	protected:
 
-		int targetHeight = -1;
-
-		bool isSpeedAdjustable = false;
+		MeteorEffectShiftType meteorEffectShiftType = MeteorEffectShiftType::None;
 
 	};
 

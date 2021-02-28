@@ -4,7 +4,7 @@
 #include <string>
 #include <fstream>
 #include <vector>
-#include "../../../../Games/Scheduler/Event/Effect/Effect.h"
+#include "MeteorEffect.h"
 #include "../../../../Instruments/Pitch.h"
 #include "../../../../Instruments/HasPitch.h"
 #include "../../../../Games/Ruleset/Judgements/HasHitWindow.h"
@@ -24,7 +24,7 @@ namespace Events {
 namespace Effects {
 	
 
-	class FallEffect: public Effect
+	class FallEffect: public MeteorEffect
 	{
 
 	public:
@@ -57,13 +57,15 @@ namespace Effects {
 		// 一定要每次都override!!
 		virtual string GetTypeName();
 
+		/* ---------------------------Effect--------------------------- */
+
+		virtual int GetX();
 
 	protected:
 
 		int targetHeight = -1;
 
 		bool isSpeedAdjustable = false;
-
 
 	};
 

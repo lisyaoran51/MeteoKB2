@@ -183,16 +183,16 @@ int MeteorPlayfield::load(FrameworkConfigManager* f, MeteorConfigManager * m)
 	}
 	AddChild(instrumentControllers["PianoSoundEvent"]);
 
-	/*--------------------- map pitch shifter ---------------------*/
-	string MapPitchShifterName;
-	if (m->Get(MeteorSetting::MapPitchShifter, &MapPitchShifterName)) {
-		mapPitchShifter = iCreator.CreateInstanceWithT<MapPitchShifter>(MapPitchShifterName);
-	}
-	else
-		mapPitchShifter = new LinearMapPitchShifter();
-
-	mapPitchShifter->LazyConstruct(&mapAlgorithms);
-	AddChild(mapPitchShifter);
+	/*--------------------- map pitch shifter ---------------------*/ // 不用這個功能了
+	//string MapPitchShifterName;
+	//if (m->Get(MeteorSetting::MapPitchShifter, &MapPitchShifterName)) {
+	//	mapPitchShifter = iCreator.CreateInstanceWithT<MapPitchShifter>(MapPitchShifterName);
+	//}
+	//else
+	//	mapPitchShifter = new LinearMapPitchShifter();
+	//
+	//mapPitchShifter->LazyConstruct(&mapAlgorithms);
+	//AddChild(mapPitchShifter);
 
 	/*--------------------- Octave shifter ---------------------*/
 	string octaveShifterName;
@@ -338,11 +338,11 @@ int MeteorPlayfield::OnButtonDown(MeteorAction action)
 				break;
 			case MeteoPianoPitchState::None:
 				pitchState = MeteoPianoPitchState::Lowered;
-				mapPitchShifter->SetSeekPitch(Pitch::C1);
+				//mapPitchShifter->SetSeekPitch(Pitch::C1);
 				break;
 			case MeteoPianoPitchState::Raised:
 				pitchState = MeteoPianoPitchState::None;
-				mapPitchShifter->SetSeekPitch(Pitch::C);
+				//mapPitchShifter->SetSeekPitch(Pitch::C);
 				break;
 			}
 		}
@@ -350,11 +350,11 @@ int MeteorPlayfield::OnButtonDown(MeteorAction action)
 			switch (pitchState) {
 			case MeteoPianoPitchState::Lowered:
 				pitchState = MeteoPianoPitchState::None;
-				mapPitchShifter->SetSeekPitch(Pitch::C);
+				//mapPitchShifter->SetSeekPitch(Pitch::C);
 				break;
 			case MeteoPianoPitchState::None:
 				pitchState = MeteoPianoPitchState::Raised;
-				mapPitchShifter->SetSeekPitch(Pitch::c);
+				//mapPitchShifter->SetSeekPitch(Pitch::c);
 				break;
 			case MeteoPianoPitchState::Raised:
 				break;

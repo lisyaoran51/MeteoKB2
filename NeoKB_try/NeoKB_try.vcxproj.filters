@@ -2031,6 +2031,9 @@
     <ClCompile Include="RulesetMeteor\Scheduler\Event\RecorderEvents\RecorderControllers\MeteorButtonRecorderController.cpp">
       <Filter>來源檔案\RulesetMeteor\Schedulers\Events\RecorderEvents\RecorderControllers</Filter>
     </ClCompile>
+    <ClCompile Include="RulesetMeteor\Scheduler\Event\Effect\MeteorEffect.cpp">
+      <Filter>來源檔案\RulesetMeteor\Schedulers\Events\Effects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="DailyLog.txt">
@@ -3366,6 +3369,9 @@
     </ClInclude>
     <ClInclude Include="RulesetMeteor\Scheduler\Event\RecorderEvents\RecorderControllers\MeteorButtonRecorderController.h">
       <Filter>標頭檔\RulesetMeteor\Schedulers\Events\RecorderEvents\RecorderControllers</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Scheduler\Event\Effect\MeteorEffect.h">
+      <Filter>標頭檔\RulesetMeteor\Schedulers\Events\Effects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

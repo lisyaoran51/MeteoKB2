@@ -432,6 +432,7 @@ Pattern * MeteorPatternGenerator::generateNoteControlPoint(vector<Event*>* es, N
 		fallLifeTime,
 		fallSpeed);
 	fall->SetTargetHeight(note->IsWhiteKey() ? targetHeight : blackKeyTargetHeight);
+	fall->SetMeteorEffectShiftType(meteorEffectShiftType);
 	fall->SetSourceEvent(note);
 
 	EruptEffect* erupt = new EruptEffect(
@@ -442,6 +443,7 @@ Pattern * MeteorPatternGenerator::generateNoteControlPoint(vector<Event*>* es, N
 		fallSpeed
 	);
 	erupt->SetTargetHeight(note->IsWhiteKey() ? targetHeight : blackKeyTargetHeight);
+	erupt->SetMeteorEffectShiftType(meteorEffectShiftType);
 	erupt->SetSourceEvent(note);
 
 	PianoSoundEvent* pianoSoundEventDown = new PianoSoundEvent(
@@ -570,10 +572,40 @@ Pattern * MeteorPatternGenerator::generateInputKeyControlPoint(vector<Event*>* e
 
 		OctaveShiftEvent* octaveShiftEvent = nullptr;
 
-		if (inputKey == InputKey::LowerOctave)
+		if (inputKey == InputKey::LowerOctave) {
 			octaveShiftEvent = new OctaveShiftEvent(OctaveShiftType::Lower, inputKeyControlPoint->GetStartTime(), inputKeyControlPoint->GetLifeTime());
-		else
+			
+			/* ち传ヘ玡办ノㄓэ跑effect瞷竚 */
+			switch (meteorEffectShiftType) {
+			case MeteorEffectShiftType::LoweredOctave:
+				break;
+
+			case MeteorEffectShiftType::None:
+				meteorEffectShiftType = MeteorEffectShiftType::LoweredOctave;
+				break;
+
+			case MeteorEffectShiftType::RaisedOctave:
+				meteorEffectShiftType = MeteorEffectShiftType::None;
+				break;
+			}
+		}
+		else {
 			octaveShiftEvent = new OctaveShiftEvent(OctaveShiftType::Raise, inputKeyControlPoint->GetStartTime(), inputKeyControlPoint->GetLifeTime());
+
+			/* ち传ヘ玡办ノㄓэ跑effect瞷竚 */
+			switch (meteorEffectShiftType) {
+			case MeteorEffectShiftType::LoweredOctave:
+				meteorEffectShiftType = MeteorEffectShiftType::None;
+				break;
+
+			case MeteorEffectShiftType::None:
+				meteorEffectShiftType = MeteorEffectShiftType::RaisedOctave;
+				break;
+
+			case MeteorEffectShiftType::RaisedOctave:
+				break;
+			}
+		}
 
 		PianoEvent* pianoEventPress = new PianoEvent(pair<InputKey, int>(inputKey, 1), inputKeyControlPoint->GetStartTime(), 0);
 

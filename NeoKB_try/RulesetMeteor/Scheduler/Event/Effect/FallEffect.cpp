@@ -9,12 +9,12 @@ using namespace Meteor::Rulesets::Judgements;
 
 
 
-FallEffect::FallEffect(): Effect()
+FallEffect::FallEffect(): MeteorEffect()
 {
 	throw logic_error("FallEffect::FallEffect() : This constructor is only for compile-time assurance. Not available to execute.");
 }
 
-FallEffect::FallEffect(int xPos, int yPos, MTO_FLOAT sTime, MTO_FLOAT l, MTO_FLOAT sp): Effect(xPos, yPos, sTime, l)
+FallEffect::FallEffect(int xPos, int yPos, MTO_FLOAT sTime, MTO_FLOAT l, MTO_FLOAT sp): MeteorEffect(xPos, yPos, sTime, l)
 {
 	SetSpeed(sp);
 }
@@ -54,4 +54,24 @@ int FallEffect::AdjustSpeed(float sp)
 string FallEffect::GetTypeName()
 {
 	return "FallEffect";
+}
+
+int FallEffect::GetX()
+{
+	switch (meteorEffectShiftType) {
+	case MeteorEffectShiftType::None:
+		return x;
+		break;
+
+	case MeteorEffectShiftType::LoweredOctave:
+		return x + 12;
+		break;
+
+	case MeteorEffectShiftType::RaisedOctave:
+		return x - 12;
+		break;
+	}
+
+
+	return x;
 }

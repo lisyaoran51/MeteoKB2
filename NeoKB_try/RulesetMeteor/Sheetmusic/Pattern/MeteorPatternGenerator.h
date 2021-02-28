@@ -32,6 +32,8 @@ namespace Meteor {
 namespace Sheetmusics {
 namespace Patterns {
 
+
+
 	/// <summary>
 	/// to generate special pattern from original events
 	///	</summary>
@@ -78,6 +80,11 @@ namespace Patterns {
 		MTO_FLOAT defaultNextPedalTargetStartTime = 1.f;
 
 		float defaultSectionInterval = 5.f;
+
+		/// <summary>
+		/// 切換目前的音域，用來改變effect出現的位置。重點是所有事件要照順序排列，不然會轉換音域失敗。而且如果轉換音域和音符在同一瞬間，也會失敗
+		/// </summary>
+		MeteorEffectShiftType meteorEffectShiftType = MeteorEffectShiftType::None;
 
 		Pattern* generateNoteControlPoint(vector<Event*>* es, NoteControlPoint* note);
 		Pattern* generateStartGameEvent(vector<Event*>* es, StartGameEvent* start);

@@ -5,14 +5,14 @@
 #include "../../../../../Framework/Allocation/Hierachal/Container.h"
 #include "../../EventProcessor.h"
 #include "../../../../Ruleset/Replays/ReplayRecorder.h"
-#include "../../../../Timing/MeteoTimeController.h"
+#include "../../../../../Framework/Timing/TimeController.h"
 
 
 
 using namespace Framework::Allocation::Hierachal;
 using namespace Games::Schedulers::Events;
 using namespace Games::Rulesets::Replays;
-using namespace Games::Timing;
+using namespace Framework::Timing;
 
 
 
@@ -43,16 +43,16 @@ namespace RecorderControllers{
 
 			ReplayRecorder* r = GetCache<ReplayRecorder>("ReplayRecorder");
 
-			MeteoTimeController* m = GetCache<MeteoTimeController>("MeteoTimeController");
+			TimeController* t = GetCache<TimeController>("TimeController");
 
-			return load(f, r, m);
+			return load(f, r, t);
 		}
 
-		int load(FrameworkConfigManager* f, ReplayRecorder* r, MeteoTimeController* m) {
+		int load(FrameworkConfigManager* f, ReplayRecorder* r, TimeController* t) {
 
 			replayRecorder = r;
 
-			meteoTimeController = m;
+			timeController = t;
 
 			return 0;
 		}
@@ -72,7 +72,7 @@ namespace RecorderControllers{
 
 		ReplayRecorder* replayRecorder = nullptr;
 
-		MeteoTimeController* meteoTimeController = nullptr;
+		TimeController* timeController = nullptr;
 
 		virtual int implementAddReplay(EventProcessor<Event>* e) = 0;
 
