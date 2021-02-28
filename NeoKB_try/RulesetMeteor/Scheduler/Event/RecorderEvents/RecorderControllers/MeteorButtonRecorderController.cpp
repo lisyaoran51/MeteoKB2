@@ -42,11 +42,11 @@ int MeteorButtonRecorderController::implementAddReplay(EventProcessor<Event>* e)
 
 		meteorReplayRecorder->OnDirectRecordButtonDown(buttonRecorderEvent->GetInput().first);
 
-
 	}
 	else if (buttonRecorderEvent->GetInput().first == InputKey::RaiseOctave) {
 
 		meteorReplayRecorder->OnDirectRecordButtonDown(buttonRecorderEvent->GetInput().first);
+
 	}
 
 

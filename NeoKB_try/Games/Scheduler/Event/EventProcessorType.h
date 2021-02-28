@@ -15,7 +15,8 @@ namespace Events {
 		Instrument,
 		Io,
 		Playfield,
-		Time
+		Time,
+		Recorder
 
 	};
 

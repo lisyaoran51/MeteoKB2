@@ -13,6 +13,7 @@
 #include "../../../Games/Scheduler/Event/ControlPoints/NoteControlPoint.h"
 #include "../../../Games/Scheduler/Event/ControlPoints/InputKeyControlPoint.h"
 #include "../../../Games/Scheduler/Event/ControlPoints/SectionStartControlPoint.h"
+#include "../../Scheduler/Event/Effect/MeteorEffect.h"
 
 
 
@@ -25,6 +26,7 @@ using namespace Meteor::Config;
 using namespace Games::Sheetmusics::Patterns;
 using namespace Games::Schedulers::Events::GameEvents;
 using namespace Games::Schedulers::Events::ControlPoints;
+using namespace Meteor::Schedulers::Events::Effects;
 
 
 
