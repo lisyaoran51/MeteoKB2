@@ -39,6 +39,18 @@ namespace Replays{
 
 	protected:
 
+		virtual int onKeyDown(pair<InstantAction, int> action);
+
+		virtual int onKeyUp(InstantAction action);
+
+		virtual int onButtonDown(InstantAction action);
+
+		virtual int onButtonUp(InstantAction action);
+
+		virtual int onKnobTurn(pair<InstantAction, int> action);
+
+		virtual int onSlide(pair<InstantAction, int> action);
+
 	};
 
 }}}

@@ -42,3 +42,33 @@ int InstantReplayRecorder::OnSlide(pair<InstantAction, int> action)
 {
 	return 0;
 }
+
+int InstantReplayRecorder::onKeyDown(pair<InstantAction, int> action)
+{
+	return 0;
+}
+
+int InstantReplayRecorder::onKeyUp(InstantAction action)
+{
+	return 0;
+}
+
+int InstantReplayRecorder::onButtonDown(InstantAction action)
+{
+	return 0;
+}
+
+int InstantReplayRecorder::onButtonUp(InstantAction action)
+{
+	return 0;
+}
+
+int InstantReplayRecorder::onKnobTurn(pair<InstantAction, int> action)
+{
+	return 0;
+}
+
+int InstantReplayRecorder::onSlide(pair<InstantAction, int> action)
+{
+	return 0;
+}
