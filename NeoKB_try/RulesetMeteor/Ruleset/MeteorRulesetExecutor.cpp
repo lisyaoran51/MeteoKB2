@@ -138,19 +138,20 @@ int MeteorRulesetExecutor::load(MeteorTimeController * t, Instrument* i, ReplayR
 MeteorRulesetExecutor::MeteorRulesetExecutor(): RegisterType("MeteorRulesetExecutor"), RulesetExecutor()
 {
 	// 如果要自定效果，要直接從config那裡改map algo，這邊不能動。
-	eventProcessorTable["FallEffect"		] = "FallEffectMapper";
-	eventProcessorTable["EruptEffect"		] = "EruptEffectMapper";
-	eventProcessorTable["ExplodeEffect"		] = "ExplodeEffectMapper";
-	eventProcessorTable["GlowLineEffect"	] = "GlowLineEffectMapper";
-	eventProcessorTable["TargetLineEffect"	] = "TargetLineEffectMapper";
-	eventProcessorTable["StopSystemEvent"	] = "SystemEventHandler";
-	eventProcessorTable["NoteControlPoint"	] = "MeteorNoteControlPointHitObject";
-	eventProcessorTable["InputKeyControlPoint"	] = "MeteorInputKeyControlPointHitObject";
-	eventProcessorTable["SustainPedalIoEvent"	] = "SustainPedalLightRing";
-	eventProcessorTable["RepeatPracticeEvent"	] = "RepeatPracticeEventProcessor";
-	eventProcessorTable["PianoEvent"		] = "PianoEventProcessor";
-	eventProcessorTable["PianoSoundEvent"	] = "PianoSoundEventProcessor";
-	eventProcessorTable["OctaveShiftEvent"	] = "OctaveShiftEventProcessor";
+	eventProcessorTable["FallEffect"				] = "FallEffectMapper";
+	eventProcessorTable["EruptEffect"				] = "EruptEffectMapper";
+	eventProcessorTable["ExplodeEffect"				] = "ExplodeEffectMapper";
+	eventProcessorTable["GlowLineEffect"			] = "GlowLineEffectMapper";
+	eventProcessorTable["TargetLineEffect"			] = "TargetLineEffectMapper";
+	eventProcessorTable["StopSystemEvent"			] = "SystemEventHandler";
+	eventProcessorTable["NoteControlPoint"			] = "MeteorNoteControlPointHitObject";
+	eventProcessorTable["InputKeyControlPoint"		] = "MeteorInputKeyControlPointHitObject";
+	eventProcessorTable["SustainPedalIoEvent"		] = "SustainPedalLightRing";
+	eventProcessorTable["RepeatPracticeEvent"		] = "RepeatPracticeEventProcessor";
+	eventProcessorTable["PianoEvent"				] = "PianoEventProcessor";
+	eventProcessorTable["PianoSoundEvent"			] = "PianoSoundEventProcessor";
+	eventProcessorTable["OctaveShiftEvent"			] = "OctaveShiftEventProcessor";
+	eventProcessorTable["MeteorButtonRecorderEvent"	] = "MeteorButtonRecorderEventProcessor";
 
 	// 註冊private load (c++才需要)
 	registerLoad(bind(static_cast<int(MeteorRulesetExecutor::*)(void)>(&MeteorRulesetExecutor::load), this));

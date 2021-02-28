@@ -15,6 +15,7 @@
 #include "../Scheduler/Event/InstrumentEvents/InstrumentControllers/VirtualPianoController.h"
 #include "../Scheduler/Event/PlayfieldEvents/PlayfieldControllers/OctaveShifter.h"
 #include "../Scheduler/Event/TimeEvents/TimeControllerControllers/RepeatPracticeController.h"
+#include "../Scheduler/Event/RecorderEvents/RecorderControllers/MeteorButtonRecorderController.h"
 
 
 
@@ -29,6 +30,7 @@ using namespace Meteor::Schedulers::Events::IoEvents::IoCommunicators;
 using namespace Meteor::Schedulers::Events::InstrumentEvents::InstrumentControllers;
 using namespace Meteor::Schedulers::Events::PlayfieldEvents::PlayfieldControllers;
 using namespace Meteor::Schedulers::Events::TimeEvents::TimeControllerControllers;
+using namespace Meteor::Schedulers::Events::RecorderEvents::RecorderControllers;
 
 
 int MeteorPlayfield::load()
@@ -237,11 +239,11 @@ int MeteorPlayfield::load(FrameworkConfigManager* f, MeteorConfigManager * m)
 	/*--------------------- recorder controller ---------------------*/
 	string recorderControllerName;
 	if (m->Get(MeteorSetting::RecorderController, &recorderControllerName)) {
-		recordControllers["MeteorRecorderEvent"] = iCreator.CreateInstanceWithT<RecorderControllerInterface>(recorderControllerName);
+		recordControllers["MeteorButtonRecorderEvent"] = iCreator.CreateInstanceWithT<RecorderControllerInterface>(recorderControllerName);
 	}
 	else
-		recordControllers["MeteorRecorderEvent"] = new RepeatPracticeController();
-	AddChild(recordControllers["MeteorRecorderEvent"]);
+		recordControllers["MeteorButtonRecorderEvent"] = new MeteorButtonRecorderController();
+	AddChild(recordControllers["MeteorButtonRecorderEvent"]);
 
 
 	
