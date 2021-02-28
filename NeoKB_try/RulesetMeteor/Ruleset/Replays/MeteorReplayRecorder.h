@@ -44,6 +44,18 @@ namespace Replays{
 
 		virtual int update();
 
+		virtual int onKeyDown(pair<MeteorAction, int> action);
+
+		virtual int onKeyUp(MeteorAction action);
+
+		virtual int onButtonDown(MeteorAction action);
+
+		virtual int onButtonUp(MeteorAction action);
+
+		virtual int onKnobTurn(pair<MeteorAction, int> action);
+
+		virtual int onSlide(pair<MeteorAction, int> action);
+
 	};
 
 }}}

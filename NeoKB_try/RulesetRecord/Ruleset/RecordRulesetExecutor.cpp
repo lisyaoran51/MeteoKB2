@@ -47,13 +47,29 @@ SmPostprocessor * RecordRulesetExecutor::createSmPostprocessor()
 
 int RecordRulesetExecutor::load()
 {
+	Instrument* i = GetCache<Instrument>("Instrument");
+	if (!i) {
+		throw runtime_error("int MeteorRulesetExecutor::load() : Instrument not found in cache.");
+	}
 
-	EventProcessorFilter* eProcessorFilter = GetDependencies()->GetCache<EventProcessorFilter>("EventProcessorFilter");
+	ReplayRecorder* r = GetCache<ReplayRecorder>("ReplayRecorder");
+	if (!r) {
+		throw runtime_error("int MeteorRulesetExecutor::load() : ReplayRecorder not found in cache.");
+	}
 
-	// TODO: 根據有沒有拿到working sm裡面audio file決定要不要filter sound event
+	return load(i, r);
 
-	if (workingSm->GetTrack() == nullptr) {
-		//eProcessorFilter->AddFilterCallback(...);
+
+
+	return 0;
+}
+
+int RecordRulesetExecutor::load(Instrument * i, ReplayRecorder * r)
+{
+	// 如果沒插踏板，要查看是否是Auto Sustain模式
+	Piano* piano = dynamic_cast<Piano*>(i);
+	if (piano->GetSustainType() == SustainType::AutoSustain) {
+		dynamic_cast<RecordReplayRecorder*>(r)->SetAutoSustain();
 	}
 
 	return 0;

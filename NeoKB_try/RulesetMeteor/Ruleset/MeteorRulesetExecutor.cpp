@@ -81,11 +81,16 @@ int MeteorRulesetExecutor::load()
 	if (!i) {
 		throw runtime_error("int MeteorRulesetExecutor::load() : Instrument not found in cache.");
 	}
+
+	ReplayRecorder* r = GetCache<ReplayRecorder>("ReplayRecorder");
+	if (!r) {
+		throw runtime_error("int MeteorRulesetExecutor::load() : ReplayRecorder not found in cache.");
+	}
 	// 讀config
-	return load(t, i);
+	return load(t, i, r);
 }
 
-int MeteorRulesetExecutor::load(MeteorTimeController * t, Instrument* i)
+int MeteorRulesetExecutor::load(MeteorTimeController * t, Instrument* i, ReplayRecorder* r)
 {
 
 	LOG(LogLevel::Info) << "MeteorRulesetExecutor::load() : computing section time.";
@@ -98,8 +103,10 @@ int MeteorRulesetExecutor::load(MeteorTimeController * t, Instrument* i)
 	if (workingSm->GetSm()->GetSmInfo()->hasPedalData) {
 
 		/* 如果插著踏板，就一律不用game control sustain */
-		if(compositeMeteoPiano->GetSustainType() != SustainType::SustainPedal)
+		if (compositeMeteoPiano->GetSustainType() != SustainType::SustainPedal) {
 			compositeMeteoPiano->ChangeSustainType(SustainType::GameControllingSustain);
+			r->SetGameControllingSustainPedal(true);
+		}
 
 		compositeMeteoPiano->GetVirtualMeteoPiano()->SetVirtualMeteoPianoSustainType(VirtualMeteoPianoSustainType::Pedal);
 	}
@@ -123,13 +130,6 @@ int MeteorRulesetExecutor::load(MeteorTimeController * t, Instrument* i)
 	
 	t->SetSectionTime(&sectionTime);
 
-	EventProcessorFilter* eProcessorFilter = GetDependencies()->GetCache<EventProcessorFilter>("EventProcessorFilter");
-
-	// TODO: 根據有沒有拿到working sm裡面audio file決定要不要filter sound event
-
-	if (workingSm->GetTrack() == nullptr) {
-		//eProcessorFilter->AddFilterCallback(...);
-	}
 
 	LOG(LogLevel::Fine) << "MeteorRulesetExecutor::load() : end.";
 	return 0;

@@ -40,6 +40,8 @@ namespace Rulesets {
 
 		int load();
 
+		int load(Instrument* i, ReplayRecorder* r);
+
 	public:
 
 		RecordRulesetExecutor();

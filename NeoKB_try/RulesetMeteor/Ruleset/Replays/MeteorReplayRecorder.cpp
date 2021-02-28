@@ -9,6 +9,7 @@ using namespace Meteor::Rulesets::Replays;
 
 MeteorReplayRecorder::MeteorReplayRecorder() : RegisterType("MeteorReplayRecorder")
 {
+	isGameControllingPitchState = true;
 }
 
 string MeteorReplayRecorder::GetReplayRecorderVersion()
@@ -18,32 +19,38 @@ string MeteorReplayRecorder::GetReplayRecorderVersion()
 
 int MeteorReplayRecorder::OnKeyDown(pair<MeteorAction, int> action)
 {
-	if (lastCurrentTime == thisCurrentTime)
-		return -1;
-
-	unique_lock<mutex> uLock(replay->replayFramesMutex);
-	replay->replayFrames.push_back(new MeteorReplayFrame(timeController->GetControllableClock()->GetCurrentTime(), action.first, action.second, true));
-	return 0;
+	
+	return onKeyDown(action);
 }
 
 int MeteorReplayRecorder::OnKeyUp(MeteorAction action)
 {
-	if (lastCurrentTime == thisCurrentTime)
-		return -1;
-
-	unique_lock<mutex> uLock(replay->replayFramesMutex);
-	replay->replayFrames.push_back(new MeteorReplayFrame(timeController->GetControllableClock()->GetCurrentTime(), action, -1, false));
-	return 0;
+	
+	return onKeyUp(action);
 }
 
 int MeteorReplayRecorder::OnButtonDown(MeteorAction action)
 {
-	return 0;
+	if (isGameControllingPitchState) {
+		if (action == MeteorAction::LowerOctave || action == MeteorAction::RaiseOctave)
+			return -1;
+	}
+
+	if (isGameControllingSustainPedal) {
+		if (action == MeteorAction::SustainPedal)
+			return -1;
+	}
+	return onButtonDown(action);
 }
 
 int MeteorReplayRecorder::OnButtonUp(MeteorAction action)
 {
-	return 0;
+
+	if (isGameControllingSustainPedal) {
+		if (action == MeteorAction::SustainPedal)
+			return -1;
+	}
+	return onButtonUp(action);
 }
 
 int MeteorReplayRecorder::OnKnobTurn(pair<MeteorAction, int> action)
@@ -77,5 +84,54 @@ int MeteorReplayRecorder::update()
 		}
 	}
 
+	return 0;
+}
+
+int MeteorReplayRecorder::onKeyDown(pair<MeteorAction, int> action)
+{
+	if (lastCurrentTime == thisCurrentTime)
+		return -1;
+
+	unique_lock<mutex> uLock(replay->replayFramesMutex);
+	replay->replayFrames.push_back(new MeteorReplayFrame(timeController->GetControllableClock()->GetCurrentTime(), action.first, action.second, true));
+	return 0;
+}
+
+int MeteorReplayRecorder::onKeyUp(MeteorAction action)
+{
+	if (lastCurrentTime == thisCurrentTime)
+		return -1;
+
+	unique_lock<mutex> uLock(replay->replayFramesMutex);
+	replay->replayFrames.push_back(new MeteorReplayFrame(timeController->GetControllableClock()->GetCurrentTime(), action, -1, false));
+	return 0;
+}
+
+int MeteorReplayRecorder::onButtonDown(MeteorAction action)
+{
+	if (action == MeteorAction::LowerOctave || action == MeteorAction::RaiseOctave || action == MeteorAction::SustainPedal) {
+		unique_lock<mutex> uLock(replay->replayFramesMutex);
+		replay->replayFrames.push_back(new MeteorReplayFrame(timeController->GetControllableClock()->GetCurrentTime(), action, -1, true));
+	}
+	
+	return 0;
+}
+
+int MeteorReplayRecorder::onButtonUp(MeteorAction action)
+{
+	if (action == MeteorAction::SustainPedal) {
+		unique_lock<mutex> uLock(replay->replayFramesMutex);
+		replay->replayFrames.push_back(new MeteorReplayFrame(timeController->GetControllableClock()->GetCurrentTime(), action, -1, false));
+	}
+	return 0;
+}
+
+int MeteorReplayRecorder::onKnobTurn(pair<MeteorAction, int> action)
+{
+	return 0;
+}
+
+int MeteorReplayRecorder::onSlide(pair<MeteorAction, int> action)
+{
 	return 0;
 }

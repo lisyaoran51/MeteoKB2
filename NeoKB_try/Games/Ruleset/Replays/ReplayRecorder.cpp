@@ -19,7 +19,7 @@ int ReplayRecorder::load(TimeController * t)
 {
 	timeController = t;
 	replay = new Replay();
-	GetDependencies()->Cache<ReplayRecorder>(this);
+	GetDependencies()->Cache<ReplayRecorder>(this, "ReplayRecorder");
 
 	return 0;
 }
@@ -63,5 +63,17 @@ int ReplayRecorder::SetDefaultKeyBindings(RulesetInfo * rInfo)
 	keyBindings = ruleset->GetDefaultkeyBindings();
 	delete ruleset;
 
+	return 0;
+}
+
+int ReplayRecorder::SetGameControllingPitchState(bool value)
+{
+	isGameControllingPitchState = value;
+	return 0;
+}
+
+int ReplayRecorder::SetGameControllingSustainPedal(bool value)
+{
+	isGameControllingSustainPedal = value;
 	return 0;
 }

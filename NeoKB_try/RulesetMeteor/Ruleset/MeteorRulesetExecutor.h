@@ -7,6 +7,7 @@
 #include "../../Games/Ruleset/Scoring/ScoreProcessor.h"
 #include "../Timing/MeteorTimeController.h"
 #include "../../Instruments/CompositeMeteoPiano.h"
+#include "../../Games/Ruleset/Replays/ReplayRecorder.h"
 
 
 using namespace Games::Rulesets;
@@ -16,6 +17,7 @@ using namespace Framework::Timing;
 using namespace Games::Rulesets::Scoring;
 using namespace Meteor::Timing;
 using namespace Instruments;
+using namespace Games::Rulesets::Replays;
 
 
 
@@ -44,7 +46,7 @@ namespace Rulesets {
 
 		int load();
 
-		int load(MeteorTimeController* t, Instrument* i);
+		int load(MeteorTimeController* t, Instrument* i, ReplayRecorder* r);
 
 	public:
 

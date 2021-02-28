@@ -38,6 +38,10 @@ namespace Replays {
 		
 		virtual int SetDefaultKeyBindings(RulesetInfo* rInfo);
 
+		int SetGameControllingPitchState(bool value);
+
+		int SetGameControllingSustainPedal(bool value);
+
 		virtual int OnDirectRecordKeyDown(pair<InputKey, int> key) = 0;
 
 		virtual int OnDirectRecordKeyUp(InputKey key) = 0;
@@ -60,6 +64,10 @@ namespace Replays {
 
 		vector<KeyBinding*>* keyBindings = nullptr;;
 
+		bool isGameControllingPitchState = false;
+
+		bool isGameControllingSustainPedal = false;
+
 	};
 
 	template<typename T>
@@ -73,7 +81,7 @@ namespace Replays {
 
 			for (int i = 0; i < keyBindings->size(); i++) {
 				if (key.first == keyBindings->at(i)->Key) {
-					OnKeyDown(pair<T, int>(keyBindings->at(i)->GetAction<T>(), key.second));
+					onKeyDown(pair<T, int>(keyBindings->at(i)->GetAction<T>(), key.second));
 					return 0;
 				}
 			}
@@ -83,7 +91,7 @@ namespace Replays {
 		virtual int OnDirectRecordKeyUp(InputKey key) {
 			for (int i = 0; i < keyBindings->size(); i++) {
 				if (key == keyBindings->at(i)->Key) {
-					OnKeyUp(keyBindings->at(i)->GetAction<T>());
+					onKeyUp(keyBindings->at(i)->GetAction<T>());
 					return 0;
 				}
 			}
@@ -91,9 +99,22 @@ namespace Replays {
 		}
 
 		virtual int OnDirectRecordButtonDown(InputKey button) {
+
+			if (!isGameControllingPitchState) {
+				if (button == InputKey::RaiseOctave || button == InputKey::LowerOctave) {
+					return -1;
+				}
+			}
+
+			if (!isGameControllingSustainPedal) {
+				if (button == InputKey::SustainPedal) {
+					return -1;
+				}
+			}
+
 			for (int i = 0; i < keyBindings->size(); i++) {
 				if (button == keyBindings->at(i)->Key) {
-					OnButtonDown(keyBindings->at(i)->GetAction<T>());
+					onButtonDown(keyBindings->at(i)->GetAction<T>());
 					return 0;
 				}
 			}
@@ -101,9 +122,16 @@ namespace Replays {
 		}
 
 		virtual int OnDirectRecordButtonUp(InputKey button) {
+
+			if (!isGameControllingSustainPedal) {
+				if (button == InputKey::SustainPedal) {
+					return -1;
+				}
+			}
+
 			for (int i = 0; i < keyBindings->size(); i++) {
 				if (button == keyBindings->at(i)->Key) {
-					OnButtonUp(keyBindings->at(i)->GetAction<T>());
+					onButtonUp(keyBindings->at(i)->GetAction<T>());
 					return 0;
 				}
 			}
@@ -113,7 +141,7 @@ namespace Replays {
 		virtual int OnDirectRecordKnobTurn(pair<InputKey, int> knob) {
 			for (int i = 0; i < keyBindings->size(); i++) {
 				if (knob.first == keyBindings->at(i)->Key) {
-					OnKnobTurn(pair<T, int>(keyBindings->at(i)->GetAction<T>(), knob.second));
+					onKnobTurn(pair<T, int>(keyBindings->at(i)->GetAction<T>(), knob.second));
 					return 0;
 				}
 			}
@@ -123,25 +151,26 @@ namespace Replays {
 		virtual int OnDirectRecordSlide(pair<InputKey, int> slider) {
 			for (int i = 0; i < keyBindings->size(); i++) {
 				if (slider.first == keyBindings->at(i)->Key) {
-					OnSlide(pair<T, int>(keyBindings->at(i)->GetAction<T>(), slider.second));
+					onSlide(pair<T, int>(keyBindings->at(i)->GetAction<T>(), slider.second));
 					return 0;
 				}
 			}
 			return 0;
 		}
 
+	protected:
 
-		virtual int OnKeyDown(pair<T, int> action) = 0;
+		virtual int onKeyDown(pair<T, int> action) = 0;
 
-		virtual int OnKeyUp(T action) = 0;
+		virtual int onKeyUp(T action) = 0;
 
-		virtual int OnButtonDown(T action) = 0;
+		virtual int onButtonDown(T action) = 0;
 
-		virtual int OnButtonUp(T action) = 0;
+		virtual int onButtonUp(T action) = 0;
 
-		virtual int OnKnobTurn(pair<T, int> action) = 0;
+		virtual int onKnobTurn(pair<T, int> action) = 0;
 
-		virtual int OnSlide(pair<T, int> action) = 0;
+		virtual int onSlide(pair<T, int> action) = 0;
 	};
 
 
