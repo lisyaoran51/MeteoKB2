@@ -189,7 +189,7 @@ InstrumentEvent.o InstrumentEventProcessor.o InstrumentController.o \
 PlayfieldEvent.o PlayfieldEventProcessor.o PlayfieldController.o \
 GameEvent.o StartGameEvent.o StopSystemEvent.o RestartSystemEvent.o SystemEvent.o SystemEventHandler.o SystemController.o \
 TimeEvent.o TimeEventProcessor.o TimeControllerController.o \
-RecorderEvent.o RecorderEventProcessor.o RecorderConrtoller.o \
+RecorderEvent.o RecorderEventProcessor.o RecorderController.o \
 ResourceStoreWorkingSm.o SheetmusicConverter.o SheetmusicManager.o SheetmusicMetadata.o SheetmusicPostprocessor.o SheetmusicStore.o WorkingSheetmusic.o \
 SimpleSmDecoder.o SmDecoder.o FileReader.o Pattern.o PatternGenerator.o \
 SheetmusicSelectPanel.o VolumeController.o SoundSelectPanel.o \
