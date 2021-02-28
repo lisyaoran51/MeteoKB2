@@ -33,7 +33,7 @@ int DualPlaybackBassSampleChannel::Play()
 			BASS_ChannelGetPosition(channelID[tempPlayingPlayback], BASS_POS_BYTE));
 
 		double tempVolume = lastVolume * exp(-tempPlaybackCurrentTime);
-		LOG(LogLevel::Debug) << "DualPlaybackBassSampleChannel::Play() : last voume [" << tempVolume << "], new volume [" << volume->GetValue() << "].";
+		LOG(LogLevel::Depricated) << "DualPlaybackBassSampleChannel::Play() : last voume [" << tempVolume << "], new volume [" << volume->GetValue() << "].";
 
 
 		if (tempPlayingPlayback == 0)
@@ -50,13 +50,14 @@ int DualPlaybackBassSampleChannel::Play()
 
 		BASS_ChannelPlay(channelID[newPlayback], false);
 
-		if (tempVolume <= volume->GetValue() || true) {
+		if (tempVolume <= volume->GetValue()) {
 			if (BASS_ChannelIsActive(channelID[tempPlayingPlayback]) == BASS_ACTIVE_PLAYING) {
 				BASS_ChannelSlideAttribute(channelID[tempPlayingPlayback], BASS_ATTRIB_VOL, 0, (DWORD)(fadeOutTime / 2 * 1000));
 			}
 			tempPlayingPlayback = newPlayback;
 		}
 		else {
+			LOG(LogLevel::Debug) << "DualPlaybackBassSampleChannel::Play() : last voume [" << tempVolume << "], louder than new volume [" << volume->GetValue() << "].";
 			if (BASS_ChannelIsActive(channelID[newPlayback]) == BASS_ACTIVE_PLAYING) {
 				BASS_ChannelSlideAttribute(channelID[newPlayback], BASS_ATTRIB_VOL, 0, (DWORD)(fadeOutTime * 2 * 1000));
 			}
