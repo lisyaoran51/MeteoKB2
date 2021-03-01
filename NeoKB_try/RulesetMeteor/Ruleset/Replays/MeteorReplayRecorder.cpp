@@ -20,6 +20,7 @@ string MeteorReplayRecorder::GetReplayRecorderVersion()
 
 ReplayRecorderReceiver * MeteorReplayRecorder::CreateReceiver()
 {
+	LOG(LogLevel::Debug) << "MeteorReplayRecorder::CreateReceiver() : create new receiver.";
 	return new MeteorReplayRecorderReceiver();
 }
 

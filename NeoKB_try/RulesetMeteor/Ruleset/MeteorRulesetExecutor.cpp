@@ -196,7 +196,8 @@ ScoreProcessor * MeteorRulesetExecutor::CreateScoreProcessor()
 
 ReplayRecorder * MeteorRulesetExecutor::CreateReplayRecorder()
 {
-	//throw runtime_error("int MeteorRulesetExecutor::CreateReplayRecorder() : not implemented.");
+	LOG(LogLevel::Debug) << "MeteorRulesetExecutor::CreateReplayRecorder() : create new recorder.";
+
 	return new MeteorReplayRecorder();
 }
 
