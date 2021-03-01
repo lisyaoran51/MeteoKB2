@@ -35,7 +35,8 @@ ReplayRecorder::~ReplayRecorder()
 		delete replay;
 	replay = nullptr;
 
-	GetDependencies()->DeleteCache("ReplayRecorder");
+	
+	//GetDependencies()->DeleteCache("ReplayRecorder");
 
 	if (keyBindings != nullptr) {
 		for (int i = 0; i < keyBindings->size(); i++) {
