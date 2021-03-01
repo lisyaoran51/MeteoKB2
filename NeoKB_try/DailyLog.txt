@@ -2715,7 +2715,7 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 	
 	待完成工作：
 		各種request(要重新整理)、下載檔案後移動解壓縮(大概ok要測試)、gatt加入程式(bt classic刪掉)、遊戲紀錄存成sm檔(大概ok)、封包分流、斷線時把message和request全刪掉、
-		遊戲紀錄回傳、sm select panel修改、Instant測試
+		遊戲紀錄回傳、sm select panel修改、Instant測試、刪掉切換八度、場景轉換的ble訊號、反覆練談
 	
 	之前沒完成的工作：
 		重播存檔、跳轉時反向觸發特效、刪除所有memory leak、琴音分為全長和AB段、手動踏板modifier、關機
@@ -2785,3 +2785,22 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 	
 2/26
 	改為使用mcu
+	
+	dual playback判斷哪一次音量大，就留那一次，判斷的滿準的
+	double tempVolume = lastVolume * exp(-tempPlaybackCurrentTime);
+	
+2/27
+	instant模式暫時沒有問題，不過之後要測試所有案件、藍芽才能確定
+	
+	可以繼續寫record模式，或是開關機
+	
+	開關機寫完了(除了刪除所有request以外)
+	
+	piano的pedal那邊各種情況太亂了，之後要直接用測的
+	
+	還要把一八度刪掉
+	
+	MeteorButtonRecorderController::implementAddReplay 這一段還沒寫完
+	
+2/28
+	有成功寫入遊戲紀錄，但是沒有抓輸入進去，也沒抓踏板進去

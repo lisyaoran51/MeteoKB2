@@ -89,8 +89,10 @@ int MeteorReplayRecorder::update()
 
 int MeteorReplayRecorder::onKeyDown(pair<MeteorAction, int> action)
 {
-	if (lastCurrentTime == thisCurrentTime)
+	if (lastCurrentTime >= thisCurrentTime)
 		return -1;
+
+	LOG(LogLevel::Debug) << "MeteorReplayRecorder::onKeyDown : record key [" << action.first << "].";
 
 	unique_lock<mutex> uLock(replay->replayFramesMutex);
 	replay->replayFrames.push_back(new MeteorReplayFrame(timeController->GetControllableClock()->GetCurrentTime(), action.first, action.second, true));
@@ -99,7 +101,7 @@ int MeteorReplayRecorder::onKeyDown(pair<MeteorAction, int> action)
 
 int MeteorReplayRecorder::onKeyUp(MeteorAction action)
 {
-	if (lastCurrentTime == thisCurrentTime)
+	if (lastCurrentTime >= thisCurrentTime)
 		return -1;
 
 	unique_lock<mutex> uLock(replay->replayFramesMutex);
@@ -109,6 +111,9 @@ int MeteorReplayRecorder::onKeyUp(MeteorAction action)
 
 int MeteorReplayRecorder::onButtonDown(MeteorAction action)
 {
+	if (lastCurrentTime >= thisCurrentTime)
+		return -1;
+
 	if (action == MeteorAction::LowerOctave || action == MeteorAction::RaiseOctave || action == MeteorAction::SustainPedal) {
 		unique_lock<mutex> uLock(replay->replayFramesMutex);
 		replay->replayFrames.push_back(new MeteorReplayFrame(timeController->GetControllableClock()->GetCurrentTime(), action, -1, true));
@@ -119,6 +124,9 @@ int MeteorReplayRecorder::onButtonDown(MeteorAction action)
 
 int MeteorReplayRecorder::onButtonUp(MeteorAction action)
 {
+	if (lastCurrentTime >= thisCurrentTime)
+		return -1;
+
 	if (action == MeteorAction::SustainPedal) {
 		unique_lock<mutex> uLock(replay->replayFramesMutex);
 		replay->replayFrames.push_back(new MeteorReplayFrame(timeController->GetControllableClock()->GetCurrentTime(), action, -1, false));

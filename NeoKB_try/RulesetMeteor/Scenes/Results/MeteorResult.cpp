@@ -506,6 +506,9 @@ string MeteorResult::writeGameRecord()
 	/* 把replay轉換成control point */
 	convertToControlPoints(controlPoints);
 
+
+	LOG(LogLevel::Debug) << "MeteorResult::writeGameRecord : [" << controlPoints.size() << "] control points converted.";
+
 	/* 標上小節記號 */
 	tagSectionData(controlPoints);
 
