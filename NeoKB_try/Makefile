@@ -172,7 +172,7 @@ LinearSpeedAdjuster.o SpeedAdjuster.o \
 \
 MeteoGame.o MeteoGameBase.o \
 MeteoConfigManager.o \
-Ruleset.o RulesetInfo.o RulesetStore.o Judgement.o HasHitWindow.o HitWindow.o ReplayRecorder.o ReplayFrame.o \
+Ruleset.o RulesetInfo.o RulesetStore.o Judgement.o HasHitWindow.o HitWindow.o ReplayRecorder.o ReplayFrame.o ReplayRecorderReceiver.o \
 Modifier.o DifficultyModifier.o EventProcessorFilterModifier.o InstrumentModifier.o TimeControllerModifier.o \
 Score.o ScoreProcessor.o \
 BleAccess.o BleRequest.o BleRequestException.o GetTextBleRequest.o PostTextBleRequest.o GetBinaryBleRequest.o PostBinaryBleRequest.o \
@@ -206,7 +206,7 @@ MeteoLightBoardV1.o bcm2835.o MeteoBitbangDisplayDevice.o MeteoSpidevDisplayDevi
 MeteoBluetoothDevice.o MeteoBluetoothPhoneV2.o MeteoPacketConverterV2.o sdp.o \
 \
 MeteorGame.o MeteorConfigManager.o MeteorInputManager.o MeteorPitchBindingSet.o MeteorPlayfield.o \
-MeteorRuleset.o MeteorRulesetExecutor.o MeteorJudgement.o MeteorHitWindow.o MeteorReplayRecorder.o MeteorReplayFrame.o \
+MeteorRuleset.o MeteorRulesetExecutor.o MeteorJudgement.o MeteorHitWindow.o MeteorReplayRecorder.o MeteorReplayFrame.o MeteorReplayRecorderReceiver.o \
 MeteorResult.o \
 AutoPedalModifier.o MusicGameModifier.o HandModifier.o MeteorDifficultyModifier.o RepeatPracticeModifier.o FallSpeedModifier.o ClockRateModifier.o \
 MeteorScoreProcessor.o \
@@ -223,7 +223,7 @@ MeteorSheetmusicConverter.o MeteorSheetmusicPostprocessor.o MeteorPatternGenerat
 MeteorTimeController.o \
 \
 InstantGame.o InstantConfigManager.o InstantInputManager.o InstantPlayfield.o \
-InstantRuleset.o InstantRulesetExecutor.o InstantReplayRecorder.o InstantReplayFrame.o \
+InstantRuleset.o InstantRulesetExecutor.o InstantReplayRecorder.o InstantReplayFrame.o InstantReplayRecorderReceiver.o \
 InstantResult.o \
 InstantScoreProcessor.o \
 InstantDynamicEventGenerator.o InstantEventProcessorMaster.o \
