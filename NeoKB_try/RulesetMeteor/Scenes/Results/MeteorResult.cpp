@@ -273,6 +273,9 @@ int MeteorResult::convertToControlPoints(vector<ControlPoint*>& controlPoints)
 		return a->GetStartTime() < b->GetStartTime();
 	});
 
+
+	LOG(LogLevel::Debug) << "MeteorResult::convertToControlPoints : [" << controlPoints.size() << "] control points converted." << &controlPoints;
+
 	return 0;
 }
 
@@ -507,7 +510,7 @@ string MeteorResult::writeGameRecord()
 	convertToControlPoints(controlPoints);
 
 
-	LOG(LogLevel::Debug) << "MeteorResult::writeGameRecord : [" << controlPoints.size() << "] control points converted.";
+	LOG(LogLevel::Debug) << "MeteorResult::writeGameRecord : [" << controlPoints.size() << "] control points converted." << &controlPoints;
 
 	/* 標上小節記號 */
 	tagSectionData(controlPoints);

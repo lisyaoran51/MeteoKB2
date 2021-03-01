@@ -89,10 +89,11 @@ int MeteorReplayRecorder::update()
 
 int MeteorReplayRecorder::onKeyDown(pair<MeteorAction, int> action)
 {
+
+	LOG(LogLevel::Debug) << "MeteorReplayRecorder::onKeyDown : record key [" << (int)action.first << "]." << lastCurrentTime << " " << thisCurrentTime;
+
 	if (lastCurrentTime >= thisCurrentTime)
 		return -1;
-
-	LOG(LogLevel::Debug) << "MeteorReplayRecorder::onKeyDown : record key [" << (int)action.first << "].";
 
 	unique_lock<mutex> uLock(replay->replayFramesMutex);
 	replay->replayFrames.push_back(new MeteorReplayFrame(timeController->GetControllableClock()->GetCurrentTime(), action.first, action.second, true));
