@@ -1,6 +1,7 @@
 #include "MeteorReplayRecorder.h"
 
 #include "MeteorReplayFrame.h"
+#include "MeteorReplayRecorderReceiver.h"
 
 using namespace Meteor::Rulesets::Replays;
 
@@ -15,6 +16,11 @@ MeteorReplayRecorder::MeteorReplayRecorder() : RegisterType("MeteorReplayRecorde
 string MeteorReplayRecorder::GetReplayRecorderVersion()
 {
 	return string("MeteorReplayRecorderV1");
+}
+
+ReplayRecorderReceiver * MeteorReplayRecorder::CreateReceiver()
+{
+	return new MeteorReplayRecorderReceiver();
 }
 
 int MeteorReplayRecorder::OnKeyDown(pair<MeteorAction, int> action)

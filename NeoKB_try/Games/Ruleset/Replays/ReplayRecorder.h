@@ -21,6 +21,8 @@ namespace Games {
 namespace Rulesets {
 namespace Replays {
 
+	class ReplayRecorderReceiver;
+
 	class ReplayRecorder : public Container {
 
 		int load();
@@ -35,6 +37,8 @@ namespace Replays {
 		Replay* GetReplay();
 
 		virtual string GetReplayRecorderVersion() = 0;
+
+		virtual ReplayRecorderReceiver* CreateReceiver() = 0;
 		
 		virtual int SetDefaultKeyBindings(RulesetInfo* rInfo);
 

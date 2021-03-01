@@ -1,6 +1,7 @@
 #include "RecordReplayRecorder.h"
 
 #include "RecordReplayFrame.h"
+#include "RecordReplayRecorderReceiver.h"
 
 
 
@@ -16,6 +17,11 @@ RecordReplayRecorder::RecordReplayRecorder() : RegisterType("RecordReplayRecorde
 string RecordReplayRecorder::GetReplayRecorderVersion()
 {
 	return string("RecordReplayRecorderV1");
+}
+
+ReplayRecorderReceiver * RecordReplayRecorder::CreateReceiver()
+{
+	return new RecordReplayRecorderReceiver();
 }
 
 int RecordReplayRecorder::OnKeyDown(pair<RecordAction, int> action)

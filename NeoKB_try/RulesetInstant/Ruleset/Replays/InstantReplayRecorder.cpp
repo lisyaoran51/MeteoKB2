@@ -1,5 +1,7 @@
 #include "InstantReplayRecorder.h"
 
+#include "InstantReplayRecorderReceiver.h"
+
 using namespace Instant::Rulesets::Replays;
 
 
@@ -11,6 +13,11 @@ InstantReplayRecorder::InstantReplayRecorder() : RegisterType("InstantReplayReco
 string InstantReplayRecorder::GetReplayRecorderVersion()
 {
 	return string("InstantReplayRecorderV1");
+}
+
+ReplayRecorderReceiver * InstantReplayRecorder::CreateReceiver()
+{
+	return new InstantReplayRecorderReceiver();
 }
 
 int InstantReplayRecorder::OnKeyDown(pair<InstantAction, int> action)

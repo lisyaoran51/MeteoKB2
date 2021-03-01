@@ -57,6 +57,8 @@ int SimpleSmDecoder::handleGeneral(Sm<Event>* sm, string & line)
 	else if (pair.at(0) == "Mode") {
 		// Mode 1 : Meteor
 		// Mode 2 : Instant
+		// Mode 3 : Record
+		// Mode 4 : MeteorRecord
 		sm->GetSmInfo()->rulesetId = atoi(pair.at(1).c_str());
 	}
 	else if (pair.at(0) == "LetterboxInBreaks") {

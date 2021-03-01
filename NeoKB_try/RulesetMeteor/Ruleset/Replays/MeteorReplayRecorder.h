@@ -24,6 +24,8 @@ namespace Replays{
 
 		virtual string GetReplayRecorderVersion();
 
+		virtual ReplayRecorderReceiver* CreateReceiver();
+
 		virtual int OnKeyDown(pair<MeteorAction, int> action);
 
 		virtual int OnKeyUp(MeteorAction action);

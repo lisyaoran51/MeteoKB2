@@ -2040,6 +2040,18 @@
     <ClCompile Include="Games\Scheduler\Event\RecorderEvents\RecorderEventProcessor.cpp">
       <Filter>來源檔案\Games\Schedulers\Events\RecorderEvents</Filter>
     </ClCompile>
+    <ClCompile Include="Games\Ruleset\Replays\ReplayRecorderReceiver.cpp">
+      <Filter>來源檔案\Games\Ruleset\Replays</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\Ruleset\Replays\MeteorReplayRecorderReceiver.cpp">
+      <Filter>來源檔案\RulesetMeteor\Ruleset\Replays</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetInstant\Ruleset\Replays\InstantReplayRecorderReceiver.cpp">
+      <Filter>來源檔案\RulesetInstant\Rulesets\Replays</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetRecord\Ruleset\Replays\RecordReplayRecorderReceiver.cpp">
+      <Filter>來源檔案\RulesetRecord\Rulesets\Replays</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="DailyLog.txt">
@@ -3384,6 +3396,18 @@
     </ClInclude>
     <ClInclude Include="Games\Scheduler\Event\RecorderEvents\RecorderEventProcessor.h">
       <Filter>標頭檔\Games\Scheduler\Events\RecorderEvents</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Ruleset\Replays\ReplayRecorderReceiver.h">
+      <Filter>標頭檔\Games\Ruleset\Replays</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Ruleset\Replays\MeteorReplayRecorderReceiver.h">
+      <Filter>標頭檔\RulesetMeteor\Ruleset\Replays</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetInstant\Ruleset\Replays\InstantReplayRecorderReceiver.h">
+      <Filter>標頭檔\RulesetInstant\Rulesets\Replays</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetRecord\Ruleset\Replays\RecordReplayRecorderReceiver.h">
+      <Filter>標頭檔\RulesetRecord\Rulesets\Replays</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -21,6 +21,7 @@
 #include "Modifiers/EventProcessorFilterModifier.h"
 #include "Replays/ReplayRecorder.h"
 #include "../Scene/Results/Result.h"
+#include "Replays/ReplayRecorderReceiver.h"
 
 
 
@@ -344,6 +345,13 @@ namespace Rulesets {
 			}
 
 			playfield->SetGetEventProcessorFunction(bind(&RulesetExecutor<T>::getEventProcessor, this, placeholders::_1));
+
+			ReplayRecorder* replayRecorder = CreateReplayRecorder();
+			ReplayRecorderReceiver* replayRecorderReceiver = replayRecorder->CreateReceiver();
+			delete replayRecorder;
+			replayRecorder = nullptr;
+
+			playfield->AddChild(replayRecorderReceiver);
 
 			return 0;
 		}

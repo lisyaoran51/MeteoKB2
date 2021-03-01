@@ -107,6 +107,7 @@
     <ClCompile Include="Games\Ruleset\Modifiers\TimeControllerModifier.cpp" />
     <ClCompile Include="Games\Ruleset\Replays\ReplayFrame.cpp" />
     <ClCompile Include="Games\Ruleset\Replays\ReplayRecorder.cpp" />
+    <ClCompile Include="Games\Ruleset\Replays\ReplayRecorderReceiver.cpp" />
     <ClCompile Include="Games\Ruleset\Ruleset.cpp" />
     <ClCompile Include="Games\Ruleset\RulesetInfo.cpp" />
     <ClCompile Include="Games\Ruleset\RulesetStore.cpp" />
@@ -271,6 +272,7 @@
     <ClCompile Include="RulesetInstant\Ruleset\InstantRulesetExecutor.cpp" />
     <ClCompile Include="RulesetInstant\Ruleset\Replays\InstantReplayFrame.cpp" />
     <ClCompile Include="RulesetInstant\Ruleset\Replays\InstantReplayRecorder.cpp" />
+    <ClCompile Include="RulesetInstant\Ruleset\Replays\InstantReplayRecorderReceiver.cpp" />
     <ClCompile Include="RulesetInstant\Ruleset\Scoring\InstantScoreProcessor.cpp" />
     <ClCompile Include="RulesetInstant\Scenes\Play\InstantPlayfield.cpp" />
     <ClCompile Include="RulesetInstant\Scenes\Results\InstantResult.cpp" />
@@ -311,6 +313,7 @@
     <ClCompile Include="RulesetMeteor\Ruleset\Modifiers\RepeatPracticeModifier.cpp" />
     <ClCompile Include="RulesetMeteor\Ruleset\Replays\MeteorReplayFrame.cpp" />
     <ClCompile Include="RulesetMeteor\Ruleset\Replays\MeteorReplayRecorder.cpp" />
+    <ClCompile Include="RulesetMeteor\Ruleset\Replays\MeteorReplayRecorderReceiver.cpp" />
     <ClCompile Include="RulesetMeteor\Ruleset\Scoring\MeteorScoreProcessor.cpp" />
     <ClCompile Include="RulesetMeteor\Scenes\Results\MeteorResult.cpp" />
     <ClCompile Include="RulesetMeteor\Scheduler\Event\ControlPoints\MeteorInputKeyControlPointHitObject.cpp" />
@@ -361,6 +364,7 @@
     <ClCompile Include="RulesetRecord\Ruleset\RecordRulesetExecutor.cpp" />
     <ClCompile Include="RulesetRecord\Ruleset\Replays\RecordReplayFrame.cpp" />
     <ClCompile Include="RulesetRecord\Ruleset\Replays\RecordReplayRecorder.cpp" />
+    <ClCompile Include="RulesetRecord\Ruleset\Replays\RecordReplayRecorderReceiver.cpp" />
     <ClCompile Include="RulesetRecord\Ruleset\Scoring\RecordScoreProcessor.cpp" />
     <ClCompile Include="RulesetRecord\Scenes\Play\RecordPlayfield.cpp" />
     <ClCompile Include="RulesetRecord\Scenes\Results\RecordResult.cpp" />
@@ -498,6 +502,7 @@
     <ClInclude Include="Games\Ruleset\Replays\Replay.h" />
     <ClInclude Include="Games\Ruleset\Replays\ReplayFrame.h" />
     <ClInclude Include="Games\Ruleset\Replays\ReplayRecorder.h" />
+    <ClInclude Include="Games\Ruleset\Replays\ReplayRecorderReceiver.h" />
     <ClInclude Include="Games\Ruleset\Ruleset.h" />
     <ClInclude Include="Games\Ruleset\RulesetExecutor.h" />
     <ClInclude Include="Games\Ruleset\RulesetInfo.h" />
@@ -712,6 +717,7 @@
     <ClInclude Include="RulesetInstant\Ruleset\InstantRulesetExecutor.h" />
     <ClInclude Include="RulesetInstant\Ruleset\Replays\InstantReplayFrame.h" />
     <ClInclude Include="RulesetInstant\Ruleset\Replays\InstantReplayRecorder.h" />
+    <ClInclude Include="RulesetInstant\Ruleset\Replays\InstantReplayRecorderReceiver.h" />
     <ClInclude Include="RulesetInstant\Ruleset\Scoring\InstantScoreProcessor.h" />
     <ClInclude Include="RulesetInstant\Scenes\Play\InstantPlayfield.h" />
     <ClInclude Include="RulesetInstant\Scenes\Results\InstantResult.h" />
@@ -753,6 +759,7 @@
     <ClInclude Include="RulesetMeteor\Ruleset\Modifiers\RepeatPracticeModifier.h" />
     <ClInclude Include="RulesetMeteor\Ruleset\Replays\MeteorReplayFrame.h" />
     <ClInclude Include="RulesetMeteor\Ruleset\Replays\MeteorReplayRecorder.h" />
+    <ClInclude Include="RulesetMeteor\Ruleset\Replays\MeteorReplayRecorderReceiver.h" />
     <ClInclude Include="RulesetMeteor\Ruleset\Scoring\MeteorScoreProcessor.h" />
     <ClInclude Include="RulesetMeteor\Scenes\Results\MeteorResult.h" />
     <ClInclude Include="RulesetMeteor\Scheduler\Event\ControlPoints\MeteorInputKeyControlPointHitObject.h" />
@@ -803,6 +810,7 @@
     <ClInclude Include="RulesetRecord\Ruleset\RecordRulesetExecutor.h" />
     <ClInclude Include="RulesetRecord\Ruleset\Replays\RecordReplayFrame.h" />
     <ClInclude Include="RulesetRecord\Ruleset\Replays\RecordReplayRecorder.h" />
+    <ClInclude Include="RulesetRecord\Ruleset\Replays\RecordReplayRecorderReceiver.h" />
     <ClInclude Include="RulesetRecord\Ruleset\Scoring\RecordScoreProcessor.h" />
     <ClInclude Include="RulesetRecord\Scenes\Play\RecordPlayfield.h" />
     <ClInclude Include="RulesetRecord\Scenes\Results\RecordResult.h" />

@@ -17,7 +17,7 @@
 #include "../../Scheduler/Event/TimeEvents/RepeatPracticeEvent.h"
 #include "../../Scheduler/Event/Effect/EruptEffect.h"
 #include <math.h>
-#include "../../Scheduler/Event/RecorderEvents/MeteorButtonRecorderEvent.h"
+//#include "../../Scheduler/Event/RecorderEvents/MeteorButtonRecorderEvent.h"
 
 
 
@@ -33,7 +33,7 @@ using namespace Meteor::Schedulers::Events::IoEvents;
 using namespace Meteor::Schedulers::Events::InstrumentEvents;
 using namespace Meteor::Schedulers::Events::PlayfieldEvents;
 using namespace Meteor::Schedulers::Events::TimeEvents;
-using namespace Meteor::Schedulers::Events::RecorderEvents;
+//using namespace Meteor::Schedulers::Events::RecorderEvents;
 
 
 int MeteorPatternGenerator::load()
@@ -549,8 +549,9 @@ Pattern * MeteorPatternGenerator::generateInputKeyControlPoint(vector<Event*>* e
 		PianoSoundEvent* pianoSoundEventDown = new PianoSoundEvent(true, inputKeyControlPoint->GetStartTime(), 0);
 		PianoSoundEvent* pianoSoundEventUp = new PianoSoundEvent(false, inputKeyControlPoint->GetStartTime() + inputKeyControlPoint->GetLifeTime() - 0.1, 0);
 
-		MeteorButtonRecorderEvent* pedalDownRecorderEvent = new MeteorButtonRecorderEvent(pair<InputKey, int>(inputKey, 1), inputKeyControlPoint->GetStartTime(), 0);
-		MeteorButtonRecorderEvent* pedalUpRecorderEvent = new MeteorButtonRecorderEvent(pair<InputKey, int>(inputKey, 0), inputKeyControlPoint->GetStartTime() + inputKeyControlPoint->GetLifeTime() - 0.01, 0);
+		// recorder會自動去抓譜裡面的pedal，不用從這邊建event
+		//MeteorButtonRecorderEvent* pedalDownRecorderEvent = new MeteorButtonRecorderEvent(pair<InputKey, int>(inputKey, 1), inputKeyControlPoint->GetStartTime(), 0);
+		//MeteorButtonRecorderEvent* pedalUpRecorderEvent = new MeteorButtonRecorderEvent(pair<InputKey, int>(inputKey, 0), inputKeyControlPoint->GetStartTime() + inputKeyControlPoint->GetLifeTime() - 0.01, 0);
 
 
 		LOG(LogLevel::Depricated) << "MeteorSmConverter::generateInputKeyControlPoint() : Piano Event [" << inputKeyControlPoint->GetStartTime() << "].";
@@ -560,24 +561,24 @@ Pattern * MeteorPatternGenerator::generateInputKeyControlPoint(vector<Event*>* e
 		pianoEventUp->SetSourceEvent(inputKeyControlPoint);
 		pianoSoundEventDown->SetSourceEvent(inputKeyControlPoint);
 		pianoSoundEventUp->SetSourceEvent(inputKeyControlPoint);
-		pedalDownRecorderEvent->SetSourceEvent(inputKeyControlPoint);
-		pedalUpRecorderEvent->SetSourceEvent(inputKeyControlPoint);
+		//pedalDownRecorderEvent->SetSourceEvent(inputKeyControlPoint);
+		//pedalUpRecorderEvent->SetSourceEvent(inputKeyControlPoint);
 
 		pattern->Add(sustainPedalIoEvent);
 		pattern->Add(pianoEventDown);
 		pattern->Add(pianoEventUp);
 		pattern->Add(pianoSoundEventDown);
 		pattern->Add(pianoSoundEventUp);
-		pattern->Add(pedalDownRecorderEvent);
-		pattern->Add(pedalUpRecorderEvent);
+		//pattern->Add(pedalDownRecorderEvent);
+		//pattern->Add(pedalUpRecorderEvent);
 
 		es->push_back(sustainPedalIoEvent);
 		es->push_back(pianoEventDown);
 		es->push_back(pianoEventUp);
 		es->push_back(pianoSoundEventDown);
 		es->push_back(pianoSoundEventUp);
-		es->push_back(pedalDownRecorderEvent);
-		es->push_back(pedalUpRecorderEvent);
+		//es->push_back(pedalDownRecorderEvent);
+		//es->push_back(pedalUpRecorderEvent);
 	}
 	else if (inputKey == InputKey::LowerOctave || inputKey == InputKey::RaiseOctave) {
 
@@ -618,20 +619,21 @@ Pattern * MeteorPatternGenerator::generateInputKeyControlPoint(vector<Event*>* e
 			}
 		}
 
-		MeteorButtonRecorderEvent* buttonRecorderEvent = new MeteorButtonRecorderEvent(pair<InputKey, int>(inputKey, 1), inputKeyControlPoint->GetStartTime(), 0);
+		// recorder會自動去抓譜裡面的pedal，不用從這邊建event
+		//MeteorButtonRecorderEvent* buttonRecorderEvent = new MeteorButtonRecorderEvent(pair<InputKey, int>(inputKey, 1), inputKeyControlPoint->GetStartTime(), 0);
 
 		PianoEvent* pianoEventPress = new PianoEvent(pair<InputKey, int>(inputKey, 1), inputKeyControlPoint->GetStartTime(), 0);
 
 		octaveShiftEvent->SetSourceEvent(inputKeyControlPoint);
-		buttonRecorderEvent->SetSourceEvent(inputKeyControlPoint);
+		//buttonRecorderEvent->SetSourceEvent(inputKeyControlPoint);
 		pianoEventPress->SetSourceEvent(inputKeyControlPoint);
 
 		pattern->Add(octaveShiftEvent);
-		pattern->Add(buttonRecorderEvent);
+		//pattern->Add(buttonRecorderEvent);
 		pattern->Add(pianoEventPress);
 
 		es->push_back(octaveShiftEvent);
-		es->push_back(buttonRecorderEvent);
+		//es->push_back(buttonRecorderEvent);
 		es->push_back(pianoEventPress);
 	}
 	else {
