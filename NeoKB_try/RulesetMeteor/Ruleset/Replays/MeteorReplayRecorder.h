@@ -38,6 +38,11 @@ namespace Replays{
 
 		virtual int OnSlide(pair<MeteorAction, int> action);
 
+		/// <summary>
+		/// replay recorder拿步道game的時間，如果遊戲時間有變動，這邊就會無法知道，所以要從receiver把時間送過來
+		/// </summary>
+		int PassCurrentTime(double cTime);
+
 	protected:
 
 		double lastCurrentTime = -1;
