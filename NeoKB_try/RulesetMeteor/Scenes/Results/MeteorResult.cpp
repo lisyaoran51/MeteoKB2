@@ -195,6 +195,9 @@ int MeteorResult::convertToControlPoints(vector<ControlPoint*>& controlPoints)
 				if (score->replay->replayFrames[i]->GetStartTime() >= pitchStateSwitchPoint[j].first &&
 					score->replay->replayFrames[i + 1]->GetStartTime() <= pitchStateSwitchPoint[j].first) {
 					pitchBindingSet->SwitchPitchState(pitchStateSwitchPoint[j].second);
+
+
+					LOG(LogLevel::Debug) << "MeteorResult::convertToControlPoints : pitch state switch to [" << pitchStateSwitchPoint[j].second << "].";
 				}
 		}
 
@@ -212,6 +215,8 @@ int MeteorResult::convertToControlPoints(vector<ControlPoint*>& controlPoints)
 				NoteControlPoint* noteControlPoint = new NoteControlPoint(pitch, replayFrame->GetStartTime(), 0.1f);
 				noteControlPoint->SetVolume(replayFrame->GetVolume());
 				pressedNote[pitch] = noteControlPoint;
+
+				LOG(LogLevel::Debug) << "MeteorResult::convertToControlPoints : get new pitch input [" << int(pitch) << "].";
 
 			}
 			/* 如果已經按下，正要放開，就先加入controlPoints中中 */
@@ -237,6 +242,8 @@ int MeteorResult::convertToControlPoints(vector<ControlPoint*>& controlPoints)
 				NoteControlPoint* noteControlPoint = new NoteControlPoint(pitch, replayFrame->GetStartTime(), 0.1f);
 				noteControlPoint->SetVolume(replayFrame->GetVolume());
 				pressedNote[pitch] = noteControlPoint;
+
+				LOG(LogLevel::Debug) << "MeteorResult::convertToControlPoints : get new pitch input [" << int(pitch) << "].";
 			}
 		}
 		/* 是踏板的話 */
