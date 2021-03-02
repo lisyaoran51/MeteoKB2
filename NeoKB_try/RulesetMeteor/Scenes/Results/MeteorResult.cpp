@@ -192,10 +192,9 @@ int MeteorResult::convertToControlPoints(vector<ControlPoint*>& controlPoints)
 		/* 如果這個音的音域不同，就切換八度 */
 		for (int j = 0; j < pitchStateSwitchPoint.size(); j++) {
 			if (i < score->replay->replayFrames.size() - 1)
-				if (score->replay->replayFrames[i]->GetStartTime() >= pitchStateSwitchPoint[j].first &&
-					score->replay->replayFrames[i + 1]->GetStartTime() <= pitchStateSwitchPoint[j].first) {
+				if (score->replay->replayFrames[i]->GetStartTime() <= pitchStateSwitchPoint[j].first &&
+					score->replay->replayFrames[i + 1]->GetStartTime() >= pitchStateSwitchPoint[j].first) {
 					pitchBindingSet->SwitchPitchState(pitchStateSwitchPoint[j].second);
-
 
 					LOG(LogLevel::Debug) << "MeteorResult::convertToControlPoints : pitch state switch to [" << (int)pitchStateSwitchPoint[j].second << "].";
 				}
