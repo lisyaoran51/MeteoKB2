@@ -2804,3 +2804,10 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 	
 2/28
 	有成功寫入遊戲紀錄，但是沒有抓輸入進去，也沒抓踏板進去
+	
+	發現result本來就會去抓踏板control point，根本不用額外去錄
+	
+3/1
+	找到問題了，replay recorder不在meteor input manager下面，所以抓步道meteor input manager的輸入
+	
+	recorder的delete cache要在改一下位置

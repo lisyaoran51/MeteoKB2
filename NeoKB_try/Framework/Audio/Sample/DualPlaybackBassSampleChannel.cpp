@@ -21,7 +21,7 @@ DualPlaybackBassSampleChannel::~DualPlaybackBassSampleChannel()
 
 int DualPlaybackBassSampleChannel::Play()
 {
-	LOG(LogLevel::Debug) << "DualPlaybackBassSampleChannel::Play() : add play action with volume calculated [" << volumeCalculated->GetValue() << "].";
+	LOG(LogLevel::Depricated) << "DualPlaybackBassSampleChannel::Play() : add play action with volume calculated [" << volumeCalculated->GetValue() << "].";
 	
 	unique_lock<mutex> uLock(pendingActionMutex);
 	pendingActions.Add(this, [=]() {
@@ -65,7 +65,7 @@ int DualPlaybackBassSampleChannel::Play()
 			tempPlayingPlayback = newPlayback;
 		}
 		else {
-			LOG(LogLevel::Debug) << "DualPlaybackBassSampleChannel::Play() : last voume [" << tempVolume << "], louder than new volume [" << volume->GetValue() << "].";
+			LOG(LogLevel::Depricated) << "DualPlaybackBassSampleChannel::Play() : last voume [" << tempVolume << "], louder than new volume [" << volume->GetValue() << "].";
 			if (BASS_ChannelIsActive(channelID[newPlayback]) == BASS_ACTIVE_PLAYING) {
 				BASS_ChannelSlideAttribute(channelID[newPlayback], BASS_ATTRIB_VOL, 0, (DWORD)(fadeOutTime * 2 * 1000));
 			}
