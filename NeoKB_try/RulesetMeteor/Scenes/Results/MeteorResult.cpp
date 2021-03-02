@@ -197,7 +197,7 @@ int MeteorResult::convertToControlPoints(vector<ControlPoint*>& controlPoints)
 					pitchBindingSet->SwitchPitchState(pitchStateSwitchPoint[j].second);
 
 
-					LOG(LogLevel::Debug) << "MeteorResult::convertToControlPoints : pitch state switch to [" << pitchStateSwitchPoint[j].second << "].";
+					LOG(LogLevel::Debug) << "MeteorResult::convertToControlPoints : pitch state switch to [" << (int)pitchStateSwitchPoint[j].second << "].";
 				}
 		}
 
