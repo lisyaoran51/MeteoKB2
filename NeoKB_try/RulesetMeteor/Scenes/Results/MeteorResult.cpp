@@ -172,6 +172,13 @@ int MeteorResult::convertToControlPoints(vector<ControlPoint*>& controlPoints)
 		}
 	}
 
+	LOG(LogLevel::Debug) << [=]() {
+		LOG(LogLevel::Debug) << "MeteorResult::convertToControlPoints : pitch state switch point";
+		for (int i = 0; i < pitchStateSwitchPoint.size(); i++) {
+			LOG(LogLevel::Debug) << "MeteorResult::convertToControlPoints : [" << pitchStateSwitchPoint[i].first << "] at state [" << int(pitchStateSwitchPoint[i].second) << "]";
+		}
+		return 0;
+	}();
 
 
 	Ruleset* ruleset = rulesetInfo.GetValue()->CreateRuleset();
