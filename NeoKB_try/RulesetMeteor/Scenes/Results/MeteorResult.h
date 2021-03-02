@@ -29,6 +29,11 @@ namespace Results{
 		int load(OutputManager* o, Instrument* i, Storage* s, CommunicationAccess* c);
 
 		/// <summary>
+		/// 去0，
+		/// </summary>
+		string TrimOff(string s, int precision);
+
+		/// <summary>
 		/// 將遊戲紀錄寫入檔案步驟一：把遊戲紀錄轉乘control point
 		/// </summary>
 		int convertToControlPoints(vector<ControlPoint*>& controlPoints);

@@ -64,6 +64,27 @@ int MeteorResult::load(OutputManager * o, Instrument * i, Storage* s, Communicat
 	return 0;
 }
 
+string MeteorResult::TrimOff(string s, int precision)
+{
+	if (s.find(".") == string::npos)
+		return s;
+
+	for (int i = s.length() - 1; i > s.find("."); i--) {
+		if (s[i] == '0')
+			s = s.substr(0, i);
+	}
+
+	if (s[s.length() - 1] == '.') {
+		return s.substr(0, s.length() - 1);
+	}
+
+	if (s.length() > s.find(".") + precision - 1) {
+		return s.substr(0, s.find(".") + precision + 1);
+	}
+
+	return s;
+}
+
 int MeteorResult::convertToControlPoints(vector<ControlPoint*>& controlPoints)
 {
 	/* 是否使用原始踏板資訊，如果譜裡本來就有踏板資訊，琴又沒插踏板，就用原始踏板資訊 */
@@ -359,7 +380,7 @@ string MeteorResult::encodeToRecordFile(vector<ControlPoint*>& controlPoints)
 	*stream << "[General]\n";
 
 	/* 遊戲紀錄 */
-	*stream << "Mode:3\n";
+	*stream << "Mode:4\n";
 
 	/* 是否使用原始踏板資訊，如果譜裡本來就有踏板資訊，琴又沒插踏板，就用原始踏板資訊 */
 	bool useOriginalPedalData = workingSm.GetValue()->GetSm()->GetSmInfo()->hasPedalData &&
@@ -440,43 +461,43 @@ string MeteorResult::encodeToRecordFile(vector<ControlPoint*>& controlPoints)
 
 			/* 踏板資訊 */
 			if (inputKeyControlPoint->GetInputKey() == InputKey::SustainPedal) {
-				controlPoint = string("-1,") + to_string(inputKeyControlPoint->GetStartTime()) + string(",") +
-											   to_string(inputKeyControlPoint->GetLifeTime()) + string("-1,") + 
-											   to_string(inputKeyControlPoint->GetSectionIndex()) + string(",5,") +	// 踏板的使用手是5
-											   to_string(inputKeyControlPoint->GetPartIndex()) + string("\n");
+				controlPoint = string("-1,") + TrimOff(to_string(inputKeyControlPoint->GetStartTime()), 2) + string(",") +
+											   TrimOff(to_string(inputKeyControlPoint->GetLifeTime()), 2) + string("-1,") + 
+											   TrimOff(to_string(inputKeyControlPoint->GetSectionIndex()), 2) + string(",5,") +	// 踏板的使用手是5
+											   TrimOff(to_string(inputKeyControlPoint->GetPartIndex()), 2) + string("\n");
 			}
 			/* 降八度資訊 */
 			else if (inputKeyControlPoint->GetInputKey() == InputKey::LowerOctave) {
-				controlPoint = string("-2,") + to_string(inputKeyControlPoint->GetStartTime()) + string(",") +
-											   to_string(inputKeyControlPoint->GetLifeTime()) + string("-1,") + 
-											   to_string(inputKeyControlPoint->GetSectionIndex()) + string(",6,") +	// 平移八度的使用手是6
-											   to_string(inputKeyControlPoint->GetPartIndex()) + string("\n");
+				controlPoint = string("-2,") + TrimOff(to_string(inputKeyControlPoint->GetStartTime()), 2) + string(",") +
+											   TrimOff(to_string(inputKeyControlPoint->GetLifeTime()), 2) + string("-1,") + 
+											   TrimOff(to_string(inputKeyControlPoint->GetSectionIndex()), 2) + string(",6,") +	// 平移八度的使用手是6
+											   TrimOff(to_string(inputKeyControlPoint->GetPartIndex()), 2) + string("\n");
 			}
 			/* 升八度資訊 */
 			else if(inputKeyControlPoint->GetInputKey() == InputKey::RaiseOctave) {
-				controlPoint = string("-3,") + to_string(inputKeyControlPoint->GetStartTime()) + string(",") +
-											   to_string(inputKeyControlPoint->GetLifeTime()) + string("-1,") + 
-											   to_string(inputKeyControlPoint->GetSectionIndex()) + string(",6,") +	// 平移八度的使用手是6
-											   to_string(inputKeyControlPoint->GetPartIndex()) + string("\n");
+				controlPoint = string("-3,") + TrimOff(to_string(inputKeyControlPoint->GetStartTime()), 2) + string(",") +
+											   TrimOff(to_string(inputKeyControlPoint->GetLifeTime()), 2) + string("-1,") + 
+											   TrimOff(to_string(inputKeyControlPoint->GetSectionIndex()), 2) + string(",6,") +	// 平移八度的使用手是6
+											   TrimOff(to_string(inputKeyControlPoint->GetPartIndex()), 2) + string("\n");
 			}
 		}
 		else if (dynamic_cast<SectionStartControlPoint*>(controlPoints[i]) != nullptr) {
 			/* 小節資訊 */
 			SectionStartControlPoint* sectionStartControlPoint = dynamic_cast<SectionStartControlPoint*>(controlPoints[i]);
-			controlPoint = string("-4,") + to_string(sectionStartControlPoint->GetStartTime()) + string(",") +
-										   to_string(sectionStartControlPoint->GetLifeTime()) + string("-1,") +
-										   to_string(sectionStartControlPoint->GetSectionIndex()) + string(",0,") +
-										   to_string(sectionStartControlPoint->GetPartIndex()) + string("\n");
+			controlPoint = string("-4,") + TrimOff(to_string(sectionStartControlPoint->GetStartTime()), 2) + string(",") +
+										   TrimOff(to_string(sectionStartControlPoint->GetLifeTime()), 2) + string("-1,") +
+										   TrimOff(to_string(sectionStartControlPoint->GetSectionIndex()), 2) + string(",0,") +
+										   TrimOff(to_string(sectionStartControlPoint->GetPartIndex()), 2) + string("\n");
 		}
 		else if (dynamic_cast<NoteControlPoint*>(controlPoints[i]) != nullptr) {
 			/* 音符資訊 */
 			NoteControlPoint* noteControlPoint = dynamic_cast<NoteControlPoint*>(controlPoints[i]);
-			controlPoint = to_string((int)noteControlPoint->GetPitch()) + string(",") + 
-						   to_string(noteControlPoint->GetStartTime()) + string(",") +
-						   to_string(noteControlPoint->GetLifeTime()) + string(",") +
-						   to_string(noteControlPoint->GetVolume()) + string(",") +
-						   to_string(noteControlPoint->GetSectionIndex()) + string(",0,") +
-						   to_string(noteControlPoint->GetPartIndex()) + string("\n");
+			controlPoint = TrimOff(to_string((int)noteControlPoint->GetPitch()), 2) + string(",") + 
+						   TrimOff(to_string(noteControlPoint->GetStartTime()), 2) + string(",") +
+						   TrimOff(to_string(noteControlPoint->GetLifeTime()), 2) + string(",") +
+						   TrimOff(to_string(noteControlPoint->GetVolume()), 2) + string(",") +
+						   TrimOff(to_string(noteControlPoint->GetSectionIndex()), 2) + string(",0,") +
+						   TrimOff(to_string(noteControlPoint->GetPartIndex()), 2) + string("\n");
 
 		}
 

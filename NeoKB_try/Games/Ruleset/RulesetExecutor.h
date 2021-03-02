@@ -351,6 +351,8 @@ namespace Rulesets {
 			delete replayRecorder;
 			replayRecorder = nullptr;
 
+			LOG(LogLevel::Fine) << "RulesetExecutor::playfieldLoad : playfield [" << playfield << "] add child ... ";
+
 			playfield->AddChild(replayRecorderReceiver);
 
 			return 0;
