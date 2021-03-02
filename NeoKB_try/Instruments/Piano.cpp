@@ -400,7 +400,18 @@ int Piano::ControlSustainPedal(bool down)
 
 int Piano::OnDirectKeyDown(pair<PianoAction, int> action)
 {
-	return OnKeyDown(action);
+	if (isSleeping)
+		return -1;
+
+	LOG(LogLevel::Depricated) << "Piano::OnKeyDown() : get fake input." << int(action.first);
+	LOG(LogLevel::Debug) << "Piano::OnKeyDown() : get key [" << int(action.first) << "] on velocity [" << action.second << "]";
+
+	//getSamples()->at(action.first)->Play();
+	if (getSamples()->find(action.first) != getSamples()->end())
+		getSamples()->at(action.first)->Play(isSensitive ? double(action.second) / 128.0 : 0.8);
+
+	isPressingMap[action.first] = true;
+	return 0;
 }
 
 int Piano::resetState()
@@ -427,17 +438,7 @@ int Piano::update()
 
 int Piano::OnKeyDown(pair<PianoAction, int> action)
 {
-	if (isSleeping)
-		return -1;
-
-	LOG(LogLevel::Depricated) << "Piano::OnKeyDown() : get fake input." << int(action.first);
-	LOG(LogLevel::Debug) << "Piano::OnKeyDown() : get key [" << int(action.first) << "] on velocity [" << action.second << "]";
-
-	//getSamples()->at(action.first)->Play();
-	if(getSamples()->find(action.first) != getSamples()->end())
-		getSamples()->at(action.first)->Play(isSensitive ? double(action.second)/128.0 : 0.8);
-
-	isPressingMap[action.first] = true;
+	// ²¾¨ìon direct key down¥h¤F
 	return 0;
 }
 

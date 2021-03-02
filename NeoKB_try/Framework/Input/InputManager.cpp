@@ -317,9 +317,9 @@ int InputManager::updateKeyboardEvents(InputState * inputState)
 	// 暫時也不寫組合鍵，以後再寫
 
 	// 這邊移到instrument input handler去，加速案下的速度
-	//for (int i = 0; i < keyboardState->GetPresses()->size(); i++) {
-	//	handleKeyDown(inputState, keyboardState->GetPresses()->at(i).first);
-	//}
+	for (int i = 0; i < keyboardState->GetPresses()->size(); i++) {
+		handleKeyDown(inputState, keyboardState->GetPresses()->at(i).first);
+	}
 
 	for (int i = 0; i < keyboardState->GetUps()->size(); i++) {
 		handleKeyUp(inputState, keyboardState->GetUps()->at(i));
