@@ -91,7 +91,7 @@ int InputManager::handleNewState(InputState * state)
 			LOG(LogLevel::Finest) << "InputManager::handleNewState():------ [" << triggerQueue[i]->GetTypeName() << "]";
 		}
 		return 0;
-	};
+	}();
 
 	if (hasNewKeyboardState)
 		updateKeyboardEvents(currentState);
