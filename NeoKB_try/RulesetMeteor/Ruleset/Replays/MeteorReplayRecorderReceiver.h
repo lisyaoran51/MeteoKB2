@@ -4,6 +4,7 @@
 
 #include "../../../Games/Ruleset/Replays/ReplayRecorderReceiver.h"
 #include "../../Input/MeteorInputManager.h"
+#include "MeteorReplayRecorder.h"
 
 
 using namespace Games::Rulesets::Replays;
@@ -16,9 +17,19 @@ namespace Replays{
 
 	class MeteorReplayRecorderReceiver : public TReplayRecorderReceiver<MeteorAction> {
 
+		int load();
+
 	public:
 
 		MeteorReplayRecorderReceiver();
+
+
+	protected:
+
+
+		MeteorReplayRecorder* meteorReplayRecorder = nullptr;
+
+		virtual int update();
 
 	};
 

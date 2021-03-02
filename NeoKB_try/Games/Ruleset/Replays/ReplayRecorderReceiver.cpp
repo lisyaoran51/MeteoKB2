@@ -21,6 +21,7 @@ int ReplayRecorderReceiver::load(ReplayRecorder * r)
 
 	replayRecorder = r;
 
+
 	return 0;
 }
 

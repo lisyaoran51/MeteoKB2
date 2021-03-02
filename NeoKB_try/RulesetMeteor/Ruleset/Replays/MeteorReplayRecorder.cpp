@@ -70,11 +70,17 @@ int MeteorReplayRecorder::OnSlide(pair<MeteorAction, int> action)
 	return 0;
 }
 
-int MeteorReplayRecorder::update()
+int MeteorReplayRecorder::PassCurrentTime(double cTime)
 {
 	lastCurrentTime = thisCurrentTime;
-	thisCurrentTime = timeController->GetControllableClock()->GetCurrentTime();
+	thisCurrentTime = cTime;
 
+	return 0;
+}
+
+int MeteorReplayRecorder::update()
+{
+	
 	if (lastCurrentTime > thisCurrentTime) {
 		// 清除倒退的音
 		for (int i = 0; i < replay->replayFrames.size(); i++) {
