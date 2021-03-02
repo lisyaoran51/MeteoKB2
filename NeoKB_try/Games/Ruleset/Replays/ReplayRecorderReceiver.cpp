@@ -17,6 +17,8 @@ int ReplayRecorderReceiver::load()
 
 int ReplayRecorderReceiver::load(ReplayRecorder * r)
 {
+	isPresent = true;
+
 	replayRecorder = r;
 
 	return 0;
@@ -24,5 +26,6 @@ int ReplayRecorderReceiver::load(ReplayRecorder * r)
 
 ReplayRecorderReceiver::ReplayRecorderReceiver(): RegisterType("ReplayRecorderReceiver")
 {
+	isInputable = true;
 	registerLoad(bind((int(ReplayRecorderReceiver::*)())&ReplayRecorderReceiver::load, this));
 }

@@ -19,6 +19,8 @@ int PowerPanel::load(OutputManager * o)
 {
 	outputManager = o;
 
+	isPresent = true;
+
 	return 0;
 }
 
@@ -27,6 +29,8 @@ PowerPanel::PowerPanel(): RegisterType("PowerPanel")
 	// functional裡面的bind不能對overloading問題
 	// https://stackoverflow.com/questions/4159487/stdbind-overload-resolution
 	registerLoad(bind((int(PowerPanel::*)())&PowerPanel::load, this));
+
+	isInputable = true;
 }
 
 int PowerPanel::onButtonUp(InputState * inputState, InputKey button)

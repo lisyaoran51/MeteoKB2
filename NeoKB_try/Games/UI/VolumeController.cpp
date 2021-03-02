@@ -20,12 +20,17 @@ int VolumeController::load(AudioManager * aManager)
 	trackVolumeMeter->BindTo(aManager->GetTrackVolume());
 	sampleVolumeMeter->BindTo(aManager->GetSampleVolume());
 
+	isPresent = true;
+
 	return 0;
 }
 
 VolumeController::VolumeController(): RegisterType("VolumeController")
 {
 	registerLoad(bind(static_cast<int(VolumeController::*)(void)>(&VolumeController::load), this));
+
+	isInputable = true;
+
 }
 
 int VolumeController::onSlide(InputState * inputState, InputKey slider)

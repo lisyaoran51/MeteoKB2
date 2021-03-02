@@ -86,7 +86,7 @@ int InputManager::handleNewState(InputState * state)
 	updateInputQueue(currentState);
 
 	LOG(LogLevel::Finest) << [=]() {
-		LOG(LogLevel::Finest) << "InputManager::handleNewState(): [" << GetTypeName() << "iterate input queue:";
+		LOG(LogLevel::Finest) << "InputManager::handleNewState(): [" << GetTypeName() << "] iterate input queue:";
 		for (int i = 0; i < triggerQueue.size(); i++) {
 			LOG(LogLevel::Finest) << "InputManager::handleNewState():------ [" << triggerQueue[i]->GetTypeName() << "]";
 		}
