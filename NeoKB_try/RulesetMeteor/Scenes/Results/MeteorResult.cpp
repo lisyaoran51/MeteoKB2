@@ -172,7 +172,7 @@ int MeteorResult::convertToControlPoints(vector<ControlPoint*>& controlPoints)
 		}
 	}
 
-	LOG(LogLevel::Debug) << [=]() {
+	LOG(LogLevel::Depricated) << [=]() {
 		LOG(LogLevel::Debug) << "MeteorResult::convertToControlPoints : pitch state switch point";
 		for (int i = 0; i < pitchStateSwitchPoint.size(); i++) {
 			LOG(LogLevel::Debug) << "MeteorResult::convertToControlPoints : [" << pitchStateSwitchPoint[i].first << "] at state [" << int(pitchStateSwitchPoint[i].second) << "]";
@@ -196,7 +196,7 @@ int MeteorResult::convertToControlPoints(vector<ControlPoint*>& controlPoints)
 					score->replay->replayFrames[i + 1]->GetStartTime() >= pitchStateSwitchPoint[j].first) {
 					pitchBindingSet->SwitchPitchState(pitchStateSwitchPoint[j].second);
 
-					LOG(LogLevel::Debug) << "MeteorResult::convertToControlPoints : pitch state switch to [" << (int)pitchStateSwitchPoint[j].second << "].";
+					LOG(LogLevel::Depricated) << "MeteorResult::convertToControlPoints : pitch state switch to [" << (int)pitchStateSwitchPoint[j].second << "].";
 				}
 		}
 
@@ -215,7 +215,7 @@ int MeteorResult::convertToControlPoints(vector<ControlPoint*>& controlPoints)
 				noteControlPoint->SetVolume(replayFrame->GetVolume());
 				pressedNote[pitch] = noteControlPoint;
 
-				LOG(LogLevel::Debug) << "MeteorResult::convertToControlPoints : get new pitch input [" << int(pitch) << "].";
+				LOG(LogLevel::Depricated) << "MeteorResult::convertToControlPoints : get new pitch input [" << int(pitch) << "].";
 
 			}
 			/* 如果已經按下，正要放開，就先加入controlPoints中中 */
@@ -242,7 +242,7 @@ int MeteorResult::convertToControlPoints(vector<ControlPoint*>& controlPoints)
 				noteControlPoint->SetVolume(replayFrame->GetVolume());
 				pressedNote[pitch] = noteControlPoint;
 
-				LOG(LogLevel::Debug) << "MeteorResult::convertToControlPoints : get new pitch input [" << int(pitch) << "].";
+				LOG(LogLevel::Depricated) << "MeteorResult::convertToControlPoints : get new pitch input [" << int(pitch) << "].";
 			}
 		}
 		/* 是踏板的話 */

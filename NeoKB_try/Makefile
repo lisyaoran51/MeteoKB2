@@ -37,7 +37,7 @@ Util:Util/DataStructure:\
 \
 ThirdParty/Bass:\
 \
-Desktop:Desktop/Devices:\
+Desktop:Desktop/Devices:Desktop/Devices/Gatt:\
 \
 RulesetMeteor:RulesetMeteor/Config:RulesetMeteor/Input:RulesetMeteor/Play:\
 RulesetMeteor/Output/Panels:\
@@ -100,8 +100,9 @@ INCLUDE = -IFramwork -IFramework/Allocation -IFramework/Allocation/Hierachal -IF
 -IUtil -IUtil/DataStructure \
 \
 -IThirdParty/Bass \
+-IThirdParty/bluez/bluez \
 \
--IDesktop -IDesktop/Devices \
+-IDesktop -IDesktop/Devices -IDesktop/Devices/Gatt \
 \
 -IRulesetMeteor -IRulesetMeteor/Config -IRulesetMeteor/Input -IRulesetMeteor/Output -IRulesetMeteor/Output/Panels \
 -IRulesetMeteor/Play -IRulesetMeteor/Ruleset -IRulesetMeteor/Ruleset/Modifiers -IRulesetMeteor/Ruleset/Judgements -IRulesetMeteor/Ruleset/Scoring -IRulesetMeteor/Ruleset/Replays \
@@ -201,9 +202,12 @@ PianoInputManager.o PianoPitchBindingSet.o InstrumentInputHandler.o \
 \
 FileSystem.o ProgramInitializer.o StringSplitter.o FileSegmentMap.o \
 \
+ThirdParty/bluez/libshared-mainloop.a ThirdParty/bluez/uuid.o \
+\
 MeteoGameDesktop.o Program.o \
 MeteoLightBoardV1.o bcm2835.o MeteoBitbangDisplayDevice.o MeteoSpidevDisplayDevice.o MeteoKeyboardDevice.o MeteoPanelDevice.o MeteoMcuV1.o pi2c.o \
-MeteoBluetoothDevice.o MeteoBluetoothPhoneV2.o MeteoPacketConverterV2.o sdp.o \
+MeteoBluetoothDevice.o MeteoBluetoothPhoneV2.o MeteoPacketConverterV2.o \
+GattServer.o GattClient.o MeteoGattServerV1.o MeteoGattClientV1.o \
 \
 MeteorGame.o MeteorConfigManager.o MeteorInputManager.o MeteorPitchBindingSet.o MeteorPlayfield.o \
 MeteorRuleset.o MeteorRulesetExecutor.o MeteorJudgement.o MeteorHitWindow.o MeteorReplayRecorder.o MeteorReplayFrame.o MeteorReplayRecorderReceiver.o \

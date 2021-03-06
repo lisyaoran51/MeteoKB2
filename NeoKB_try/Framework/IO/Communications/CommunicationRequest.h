@@ -81,6 +81,9 @@ namespace Communications{
 
 		int retryCount = 0;
 
+		/// <summary>
+		/// 這個沒有用了
+		/// </summary>
 		CommunicationComponent* communicationComponent = nullptr;
 
 		Scene* callbackScene = nullptr;

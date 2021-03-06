@@ -979,6 +979,12 @@
     <Filter Include="來源檔案\RulesetMeteor\Schedulers\Events\RecorderEvents\RecorderControllers">
       <UniqueIdentifier>{e7a2a0ea-d70e-472b-85a2-48292e2585f2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="標頭檔\Desktop\Devices\Gatt">
+      <UniqueIdentifier>{9dc3e17a-086e-48a5-8891-0903dda88bbd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Desktop\Devices\Gatt">
+      <UniqueIdentifier>{f26fd76f-6780-44ad-86b8-a5b1f68ff4d3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Games\Graphic\Renderer\renderer.cpp">
@@ -2051,6 +2057,21 @@
     </ClCompile>
     <ClCompile Include="RulesetRecord\Ruleset\Replays\RecordReplayRecorderReceiver.cpp">
       <Filter>來源檔案\RulesetRecord\Rulesets\Replays</Filter>
+    </ClCompile>
+    <ClCompile Include="Desktop\Devices\Gatt\GattServer.cpp">
+      <Filter>來源檔案\Desktop\Devices\Gatt</Filter>
+    </ClCompile>
+    <ClCompile Include="Desktop\Devices\Gatt\MeteoGattServerV1.cpp">
+      <Filter>來源檔案\Desktop\Devices\Gatt</Filter>
+    </ClCompile>
+    <ClCompile Include="Util\CommandPasser.cpp">
+      <Filter>來源檔案\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Util\FileContentGetter.cpp">
+      <Filter>來源檔案\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Desktop\Devices\Gatt\MeteoGattClientV1.cpp">
+      <Filter>來源檔案</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -3408,6 +3429,27 @@
     </ClInclude>
     <ClInclude Include="RulesetRecord\Ruleset\Replays\RecordReplayRecorderReceiver.h">
       <Filter>標頭檔\RulesetRecord\Rulesets\Replays</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\MemoryStream.h">
+      <Filter>標頭檔\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Desktop\Devices\Gatt\GattClient.h">
+      <Filter>標頭檔\Desktop\Devices\Gatt</Filter>
+    </ClInclude>
+    <ClInclude Include="Desktop\Devices\Gatt\GattServer.h">
+      <Filter>標頭檔\Desktop\Devices\Gatt</Filter>
+    </ClInclude>
+    <ClInclude Include="Desktop\Devices\Gatt\MeteoGattServerV1.h">
+      <Filter>標頭檔\Desktop\Devices\Gatt</Filter>
+    </ClInclude>
+    <ClInclude Include="Desktop\Devices\Gatt\MeteoGattClientV1.h">
+      <Filter>標頭檔\Desktop\Devices\Gatt</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\CommandPasser.h">
+      <Filter>標頭檔\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\FileContentGetter.h">
+      <Filter>標頭檔\Util</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

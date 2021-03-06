@@ -2715,7 +2715,7 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 	
 	待完成工作：
 		各種request(要重新整理)、下載檔案後移動解壓縮(大概ok要測試)、gatt加入程式(bt classic刪掉)、遊戲紀錄存成sm檔(大概ok)、封包分流、斷線時把message和request全刪掉、
-		遊戲紀錄回傳、sm select panel修改、Instant測試、刪掉切換八度、場景轉換的ble訊號、反覆練談
+		遊戲紀錄回傳、sm select panel修改、Instant測試、刪掉切換八度、場景轉換的ble訊號、反覆練談、delete child的memory leak
 	
 	之前沒完成的工作：
 		重播存檔、跳轉時反向觸發特效、刪除所有memory leak、琴音分為全長和AB段、手動踏板modifier、關機
@@ -2811,3 +2811,10 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 	找到問題了，replay recorder不在meteor input manager下面，所以抓步道meteor input manager的輸入
 	
 	recorder的delete cache要在改一下位置
+	
+3/2
+	delete child好像有memory leak
+	
+	紀錄譜檔做好了，看要把record寫完還是修request
+	
+	刪除平移八度也ok了

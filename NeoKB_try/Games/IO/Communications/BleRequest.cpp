@@ -19,6 +19,20 @@ using namespace Framework::Scenes;
 
 
 
+int BleRequest::ChooseCommunicationComponentAndPerform()
+{
+	map<string, deque<CommunicationRequest*>*>::iterator it;
+
+	for (it = acceptedCommunicationComponentRequestQueues.begin(); it != acceptedCommunicationComponentRequestQueues.end(); ++it) {
+		if (it->first == "BleAccess") {
+			it->second->push_back(this);
+		}
+	}
+
+
+	return 0;
+}
+
 int BleRequest::Perform(CommunicationComponent * cComponent)
 {
 	communicationComponent = cComponent;

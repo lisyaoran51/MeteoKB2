@@ -1,0 +1,5 @@
+以上檔案來自bluez-5.43，自行compile後所產出，詳細修改內容請看
+https://github.com/lisyaoran51/GattServerTest
+
+編譯方式參考
+https://github.com/gladish/bleconfd

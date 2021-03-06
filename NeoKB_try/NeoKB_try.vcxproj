@@ -20,6 +20,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Desktop\Devices\bcm2835.c" />
+    <ClCompile Include="Desktop\Devices\Gatt\GattServer.cpp" />
+    <ClCompile Include="Desktop\Devices\Gatt\MeteoGattClientV1.cpp" />
+    <ClCompile Include="Desktop\Devices\Gatt\MeteoGattServerV1.cpp" />
     <ClCompile Include="Desktop\Devices\MeteoBitbangDisplayDevice.cpp" />
     <ClCompile Include="Desktop\Devices\MeteoBluetoothDevice.cpp" />
     <ClCompile Include="Desktop\Devices\MeteoBluetoothPhoneV1.cpp" />
@@ -377,8 +380,10 @@
     <ClCompile Include="TestCases\TestCaseKeyboard.cpp" />
     <ClCompile Include="TestCases\TestCaseMeteoGameHost.cpp" />
     <ClCompile Include="TestCases\TestCaseStopwatch.cpp" />
+    <ClCompile Include="Util\CommandPasser.cpp" />
     <ClCompile Include="Util\DataStructure\ActionListTestcase.cpp" />
     <ClCompile Include="Util\DataStructure\FileSegmentMap.cpp" />
+    <ClCompile Include="Util\FileContentGetter.cpp" />
     <ClCompile Include="Util\FileSystem.c" />
     <ClCompile Include="Util\ProgramInitializer.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -390,6 +395,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Desktop\Devices\bcm2835.h" />
+    <ClInclude Include="Desktop\Devices\Gatt\GattClient.h" />
+    <ClInclude Include="Desktop\Devices\Gatt\GattServer.h" />
+    <ClInclude Include="Desktop\Devices\Gatt\MeteoGattClientV1.h" />
+    <ClInclude Include="Desktop\Devices\Gatt\MeteoGattServerV1.h" />
     <ClInclude Include="Desktop\Devices\MeteoBitbangDisplayDevice.h" />
     <ClInclude Include="Desktop\Devices\MeteoBluetoothDevice.h" />
     <ClInclude Include="Desktop\Devices\MeteoBluetoothPhoneV1.h" />
@@ -823,6 +832,7 @@
     <ClInclude Include="ThirdParty\Bass\bass.h" />
     <ClInclude Include="ThirdParty\Bass\bass_fx.h" />
     <ClInclude Include="ThirdParty\json\json.hpp" />
+    <ClInclude Include="Util\CommandPasser.h" />
     <ClInclude Include="Util\DataStructure\ActionList.h" />
     <ClInclude Include="Util\DataStructure\ActionMap.h" />
     <ClInclude Include="Util\DataStructure\Bindable.h" />
@@ -833,9 +843,11 @@
     <ClInclude Include="Util\DataStructure\SecondPeriodList.h" />
     <ClInclude Include="Util\DataStructure\SecondPeriodMap.h" />
     <ClInclude Include="Util\Effects\Easing.h" />
+    <ClInclude Include="Util\FileContentGetter.h" />
     <ClInclude Include="Util\FileSystem.h" />
     <ClInclude Include="Util\InstanceCreator.h" />
     <ClInclude Include="Util\Log.h" />
+    <ClInclude Include="Util\MemoryStream.h" />
     <ClInclude Include="Util\MtoType.h" />
     <ClInclude Include="Util\ProgramInitializer.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
