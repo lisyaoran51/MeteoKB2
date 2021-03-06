@@ -8,7 +8,7 @@ std::string CommandPasser::PassCommand(char const * cmd)
 {
 	FILE* fp;
 	char buffer[256];
-	fp = popen(command, "r");
+	fp = popen(cmd, "r");
 	if (fp == NULL)
 	{
 		return std::string("unknown");
