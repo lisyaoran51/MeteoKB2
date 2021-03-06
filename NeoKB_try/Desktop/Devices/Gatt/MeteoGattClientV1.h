@@ -7,8 +7,14 @@
 #include <vector>
 #include "../../../Util/MemoryStream.h"
 
+/* 
+ *	不知道為什麼，要把這兩個h檔擺在uuid.h前面，uint128_t財部會編譯失敗
+ */
 #include <bluetooth/bluetooth.h>
 #include <bluetooth/l2cap.h>
+/*
+ *	不知道為什麼，要把這兩個h檔擺在uuid.h前面，uint128_t財部會編譯失敗
+ */
 
 
 extern "C"

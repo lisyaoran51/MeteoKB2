@@ -201,9 +201,9 @@ SimpleSoundBindingSetDecoder.o SoundBindingSetDecoder.o \
 RepeatSoundBindingSet.o SimpleSoundBindingSet.o SoundBinding.o SoundBindingSet.o TwoStageSoundBindingSet.o \
 PianoInputManager.o PianoPitchBindingSet.o InstrumentInputHandler.o \
 \
-FileSystem.o ProgramInitializer.o StringSplitter.o FileSegmentMap.o \
+FileSystem.o ProgramInitializer.o StringSplitter.o FileSegmentMap.o CommandPasser.o FileContentGetter.o \
 \
-ThirdParty/bluez/libshared-mainloop.a ThirdParty/bluez/uuid.o \
+\
 \
 MeteoGameDesktop.o Program.o \
 MeteoLightBoardV1.o bcm2835.o MeteoBitbangDisplayDevice.o MeteoSpidevDisplayDevice.o MeteoKeyboardDevice.o MeteoPanelDevice.o MeteoMcuV1.o pi2c.o \
@@ -261,7 +261,7 @@ InstantTimeController.o \
 all:$(TARGET)
 
 $(TARGET): $(OBJS) 
-	$(CC) $(OBJS) -o $@ -pthread -lstdc++fs -lbass -lbass_fx -lbluetooth
+	$(CC) $(OBJS) -o $@ -pthread -lstdc++fs -lbass -lbass_fx -lbluetooth ThirdParty/bluez/libshared-mainloop.a ThirdParty/bluez/uuid.o 
 	
 .c.o:
 	$(CC) $(INCLUDE) $(CFLAGS) -c -o $@ $< 	
