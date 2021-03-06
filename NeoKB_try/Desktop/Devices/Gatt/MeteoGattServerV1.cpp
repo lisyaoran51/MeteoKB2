@@ -27,10 +27,6 @@
 extern "C"
 {
 #include <src/shared/mainloop.h>
-#include <lib/uuid.h>
-#include <src/shared/att.h>
-#include <src/shared/gatt-db.h>
-#include <src/shared/gatt-server.h>
 }
 
 using namespace Desktop::Devices::Gatt;
