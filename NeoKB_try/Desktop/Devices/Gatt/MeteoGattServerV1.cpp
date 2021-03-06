@@ -33,6 +33,39 @@ using namespace Desktop::Devices::Gatt;
 using namespace Util;
 
 
+
+void throw_errno(int err, char const* fmt, ...)
+__attribute__((format(printf, 2, 3)));
+
+
+void throw_errno(int err, char const * fmt, ...)
+{
+	char buff[256] = { 0 };
+
+	va_list args;
+	va_start(args, fmt);
+	vsnprintf(buff, sizeof(buff), fmt, args);
+	buff[sizeof(buff) - 1] = '\0';
+	va_end(args);
+
+	char err[256] = { 0 };
+	char* p = strerror_r(e, err, sizeof(err));
+
+	std::stringstream out;
+	if (strlen(buff) > 0)
+	{
+		out << buff;
+		out << ". ";
+	}
+	if (p && strlen(p) > 0)
+		out << p;
+
+	std::string message(out.str());
+	LOG(LogLevel::Error) << "exception:" << message;
+	throw std::runtime_error(message);
+}
+
+
 void MeteoGattServerV1::EnqueueAsyncMessage(const char * buff, int n)
 {
 	std::lock_guard<std::mutex> guard(m_mutex);
