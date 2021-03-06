@@ -28,7 +28,7 @@ GattClient * GattServer::Listen()
 int GattServer::Run(GattClient * gClient)
 {
 
-	unique_lock<mutex> guard(m_mutex);
+	std::unique_lock<std::mutex> guard(m_mutex);
 	m_client = gClient;
 	guard.unlock();
 
