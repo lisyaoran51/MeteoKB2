@@ -1,7 +1,6 @@
 #include "MeteoBluetoothPhoneV2.h"
 
 #include <thread>
-#include "sdp.h"
 #include <unistd.h>
 #include "../../Games/Output/Bluetooths/MeteoContextBluetoothMessage.h"
 
@@ -12,17 +11,6 @@ using namespace Games::Output::Bluetooths;
 
 
 
-
-
-sdp_session_t * MeteoBluetoothPhoneV2::register_service(int port)
-{
-	return sdp_register_service(port);
-}
-
-int MeteoBluetoothPhoneV2::init_server(int port)
-{
-	return sdp_init_server(port);
-}
 
 MeteoBluetoothPhoneV2::MeteoBluetoothPhoneV2(PacketConverter<MeteoCommand>* pConverter)
 {
@@ -74,7 +62,7 @@ int MeteoBluetoothPhoneV2::work()
 {
 
 
-	client = init_server(0x1);
+	//client = init_server(0x1);
 
 	isConnected = true;
 

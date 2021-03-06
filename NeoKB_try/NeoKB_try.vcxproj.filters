@@ -2071,7 +2071,7 @@
       <Filter>來源檔案\Util</Filter>
     </ClCompile>
     <ClCompile Include="Desktop\Devices\Gatt\MeteoGattClientV1.cpp">
-      <Filter>來源檔案</Filter>
+      <Filter>來源檔案\Desktop\Devices\Gatt</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
