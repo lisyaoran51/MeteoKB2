@@ -35,7 +35,7 @@ using namespace Util;
 
 void MeteoGattServerV1::EnqueueAsyncMessage(const char * buff, int n)
 {
-	lock_guard<mutex> guard(m_mutex);
+	std::lock_guard<std::mutex> guard(m_mutex);
 	if (m_client)
 		m_client->EnqueueForSend(buff, n);
 
@@ -54,7 +54,7 @@ void MeteoGattServerV1::OnIncomingMessage(const char * buff, int n)
 
 	memcpy(message, buff, n);
 
-	m_incoming_queue.push(pair<char*, int>(message, n));
+	m_incoming_queue.push(std::pair<char*, int>(message, n));
 
 
 }
@@ -63,7 +63,7 @@ GattServer::GattListener * MeteoGattServerV1::createListener()
 {
 	GattListener* listener = new MeteoGattListenerV1();
 
-	vector<string> config;
+	std::vector<std::string> config;
 	config.push_back("MeteoPiano48");
 	config.push_back("0");
 	listener->Init(config);
@@ -73,67 +73,67 @@ GattServer::GattListener * MeteoGattServerV1::createListener()
 
 GattClient * MeteoGattServerV1::accept()
 {
-	map<string, function<string()>> deviceInfoGetter;
+	std::map<std::string, std::function<std::string()>> deviceInfoGetter;
 
-	deviceInfoGetter["GetSystemId"]			= bind(&MeteoGattServerV1::getSystemId, this);
-	deviceInfoGetter["GetModelNumber"]		= bind(&MeteoGattServerV1::getModelNumber, this);
-	deviceInfoGetter["GetSerialNumber"]		= bind(&MeteoGattServerV1::getSerialNumber, this);
-	deviceInfoGetter["GetFirmwareRevision"] = bind(&MeteoGattServerV1::getFirmwareRevision, this);
-	deviceInfoGetter["GetHardwareRevision"] = bind(&MeteoGattServerV1::getHardwareRevision, this);
-	deviceInfoGetter["GetSoftwareRevision"] = bind(&MeteoGattServerV1::getSoftwareRevision, this);
-	deviceInfoGetter["GetManufacturerName"] = bind(&MeteoGattServerV1::getManufacturerName, this);
+	deviceInfoGetter["GetSystemId"]			= std::bind(&MeteoGattServerV1::getSystemId, this);
+	deviceInfoGetter["GetModelNumber"]		= std::bind(&MeteoGattServerV1::getModelNumber, this);
+	deviceInfoGetter["GetSerialNumber"]		= std::bind(&MeteoGattServerV1::getSerialNumber, this);
+	deviceInfoGetter["GetFirmwareRevision"] = std::bind(&MeteoGattServerV1::getFirmwareRevision, this);
+	deviceInfoGetter["GetHardwareRevision"] = std::bind(&MeteoGattServerV1::getHardwareRevision, this);
+	deviceInfoGetter["GetSoftwareRevision"] = std::bind(&MeteoGattServerV1::getSoftwareRevision, this);
+	deviceInfoGetter["GetManufacturerName"] = std::bind(&MeteoGattServerV1::getManufacturerName, this);
 
 	return gattListener->Accept(deviceInfoGetter);
 }
 
-string MeteoGattServerV1::getSystemId()
+std::string MeteoGattServerV1::getSystemId()
 {
 	return FileContentGetter::GetContentFromFile("/etc/machine-id");;
 }
 
-string MeteoGattServerV1::getModelNumber()
+std::string MeteoGattServerV1::getModelNumber()
 {
-	string s = FileContentGetter::GetContentFromFile("/proc/device-tree/model");
+	std::string s = FileContentGetter::GetContentFromFile("/proc/device-tree/model");
 	size_t n = s.size();
 	if (s[n - 1] == '\0')
 		s = s.substr(0, (n - 1));
 	return s;
 }
 
-string MeteoGattServerV1::getSerialNumber()
+std::string MeteoGattServerV1::getSerialNumber()
 {
-	string s = FileContentGetter::GetFileContentVariable("/proc/cpuinfo", "Serial");
+	std::string s = FileContentGetter::GetFileContentVariable("/proc/cpuinfo", "Serial");
 	LOG(LogLevel::Info) << "serial:" << s;
 	return s;
 }
 
-string MeteoGattServerV1::getFirmwareRevision()
+std::string MeteoGattServerV1::getFirmwareRevision()
 {
 	// get version from command "uname -a"
-	string full = CommandPasser::PassCommand("uname -a");
+	std::string full = CommandPasser::PassCommand("uname -a");
 	size_t index = full.find(" SMP");
-	if (index != string::npos)
+	if (index != std::string::npos)
 	{
 		return full.substr(0, index);
 	}
 	return full;
 }
 
-string MeteoGattServerV1::getHardwareRevision()
+std::string MeteoGattServerV1::getHardwareRevision()
 {
 	return FileContentGetter::GetFileContentVariable("/proc/cpuinfo", "Revision");
 }
 
-string MeteoGattServerV1::getSoftwareRevision()
+std::string MeteoGattServerV1::getSoftwareRevision()
 {
 	// TODO: 放入軟體版本號
-	return string("0");
+	return std::string("0");
 }
 
-string MeteoGattServerV1::getManufacturerName()
+std::string MeteoGattServerV1::getManufacturerName()
 {
-	string rCode = getHardwareRevision();
-	vector<string> deviceInfo;
+	std::string rCode = getHardwareRevision();
+	std::vector<std::string> deviceInfo;
 
 	if (rCode == "9020e0") {
 		deviceInfo.push_back("9020e0");
@@ -176,10 +176,10 @@ string MeteoGattServerV1::getManufacturerName()
 	{
 		//return deviceInfo[4];
 	}
-	return string("Meteo TW");
+	return std::string("Meteo TW");
 }
 
-int MeteoGattServerV1::MeteoGattListenerV1::Init(vector<string> config)
+int MeteoGattServerV1::MeteoGattListenerV1::Init(std::vector<std::string> config)
 {
 
 
@@ -210,8 +210,8 @@ int MeteoGattServerV1::MeteoGattListenerV1::Init(vector<string> config)
 	if (ret < 0)
 		throw_errno(errno, "failed to listen on bluetooth socket");
 
-	string name = config.size() > 0 ? config[0] : "Meteo";
-	string id = config.size() > 1 ? config[1] : "0"; // 之後再補
+	std::string name = config.size() > 0 ? config[0] : "Meteo";
+	std::string id = config.size() > 1 ? config[1] : "0"; // 之後再補
 
 	
 
@@ -221,7 +221,7 @@ int MeteoGattServerV1::MeteoGattListenerV1::Init(vector<string> config)
 	return 0;
 }
 
-GattClient * MeteoGattServerV1::MeteoGattListenerV1::Accept(map<string, function<string()>> deviceInfoGetter)
+GattClient * MeteoGattServerV1::MeteoGattListenerV1::Accept(std::map<std::string, std::function<std::string()>> deviceInfoGetter)
 {
 	mainloop_init();
 
@@ -244,7 +244,7 @@ GattClient * MeteoGattServerV1::MeteoGattListenerV1::Accept(map<string, function
 	return client;
 }
 
-int MeteoGattServerV1::MeteoGattListenerV1::startBeacon(string name, int id)
+int MeteoGattServerV1::MeteoGattListenerV1::startBeacon(std::string name, int id)
 {
 	LOG(LogLevel::Info) << "int MeteoGattListenerV1::startBeacon() : [" << name << "] on hci" << id;
 
@@ -493,18 +493,18 @@ void MeteoGattServerV1::MeteoGattListenerV1::cmdName(int hdev, char const * devi
 	hci_close_dev(dd);
 }
 
-string MeteoGattServerV1::MeteoGattListenerV1::getDeviceNameFromFile()
+std::string MeteoGattServerV1::MeteoGattListenerV1::getDeviceNameFromFile()
 {
-	string str_buffer = CommandPasser::PassCommand("cat /etc/machine-info");
-	if (str_buffer.find("PRETTY_HOSTNAME") != string::npos)
+	std::string str_buffer = CommandPasser::PassCommand("cat /etc/machine-info");
+	if (str_buffer.find("PRETTY_HOSTNAME") != std::string::npos)
 	{
 		str_buffer = str_buffer.substr(0, str_buffer.length() - 1);
 		return StringSplitter::Split(str_buffer, "=")[1];
 	}
-	return string();
+	return std::string();
 }
 
-void MeteoGattServerV1::MeteoGattListenerV1::updateDeviceName(string const & name)
+void MeteoGattServerV1::MeteoGattListenerV1::updateDeviceName(std::string const & name)
 {
 	// device name is same as new name, skip it
 	if (!name.compare(getDeviceNameFromFile()))
@@ -518,7 +518,7 @@ void MeteoGattServerV1::MeteoGattListenerV1::updateDeviceName(string const & nam
 	LOG(LogLevel::Debug) << "device set new name = " << getDeviceNameFromFile().c_str();
 }
 
-void MeteoGattServerV1::MeteoGattListenerV1::hcitoolCmd(int dev_id, vector<string> const & args)
+void MeteoGattServerV1::MeteoGattListenerV1::hcitoolCmd(int dev_id, std::vector<std::string> const & args)
 {
 	unsigned char buf[HCI_MAX_EVENT_SIZE], *ptr = buf;
 	struct hci_filter flt;
@@ -585,15 +585,15 @@ void MeteoGattServerV1::MeteoGattListenerV1::hcitoolCmd(int dev_id, vector<strin
 	hci_close_dev(dd);
 }
 
-vector<string> MeteoGattServerV1::MeteoGattListenerV1::parseArgs(string str)
+std::vector<std::string> MeteoGattServerV1::MeteoGattListenerV1::parseArgs(std::string str)
 {
-	string delimiter = " ";
+	std::string delimiter = " ";
 
 	size_t pos = 0;
-	string token;
-	vector <string> args;
+	std::string token;
+	std::vector <std::string> args;
 
-	while ((pos = str.find(delimiter)) != string::npos)
+	while ((pos = str.find(delimiter)) != std::string::npos)
 	{
 		token = str.substr(0, pos);
 		args.push_back(token);

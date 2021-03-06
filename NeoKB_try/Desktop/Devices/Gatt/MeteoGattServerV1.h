@@ -8,7 +8,6 @@
 
 
 
-using namespace std;
 
 
 // ½Ð°Ñ¦Òbleconfd
@@ -32,26 +31,26 @@ namespace Gatt {
 
 	protected:
 
-		queue<pair<char*, int>>                 m_incoming_queue;
+		std::queue<std::pair<char*, int>>                 m_incoming_queue;
 
 
 		virtual GattListener* createListener();
 
 		virtual GattClient* accept();
 
-		string getSystemId();
+		std::string getSystemId();
 
-		string getModelNumber();
+		std::string getModelNumber();
 
-		string getSerialNumber();
+		std::string getSerialNumber();
 
-		string getFirmwareRevision();
+		std::string getFirmwareRevision();
 
-		string getHardwareRevision();
+		std::string getHardwareRevision();
 
-		string getSoftwareRevision();;
+		std::string getSoftwareRevision();;
 
-		string getManufacturerName();
+		std::string getManufacturerName();
 
 
 
@@ -108,34 +107,34 @@ namespace Gatt {
 			 * sudo service bluetooth restart
 			 * @param name the new device name
 			 */
-			void updateDeviceName(string const& name);
+			void updateDeviceName(std::string const& name);
 
 			/**
 			 * send cmd to device by hci tool
 			 * @param dev_id  the device id
 			 * @param args the cmd args
 			 */
-			void hcitoolCmd(int dev_id, vector <string> const& args);
+			void hcitoolCmd(int dev_id, std::vector<std::string> const& args);
 
 			/**
 			 * parse hci tool string args to vector args
 			 * @param str the string args
 			 * @return  the vector args
 			 */
-			vector<string> parseArgs(string str);
+			std::vector<std::string> parseArgs(std::string str);
 
 
 
 		public:
 
 
-			virtual int Init(vector<string> config);
+			virtual int Init(std::vector<std::string> config);
 
-			virtual GattClient* Accept(map<string, function<string()>> deviceInfoGetter);
+			virtual GattClient* Accept(std::map<std::string, std::function<std::string()>> deviceInfoGetter);
 
 		protected:
 
-			int startBeacon(string name, int id);
+			int startBeacon(std::string name, int id);
 
 		};
 
