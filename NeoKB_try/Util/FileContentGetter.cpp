@@ -1,7 +1,7 @@
 #include "FileContentGetter.h"
 
 #include <fstream>
-
+#include <string.h>
 
 using namespace Util;
 
