@@ -74,6 +74,30 @@ namespace Gatt {
 
 		virtual void SetDataHandler(std::function<void(char const*, int)> dHandler);
 
+		/*--------------------callbacks--------------------*/
+
+		void onDataChannelOut(gatt_db_attribute* attr, uint32_t id, uint16_t offset, uint8_t opcode, bt_att* att);
+
+		void onDataChannelIn(gatt_db_attribute* attr, uint32_t id, uint16_t offset, uint8_t const* data, size_t len, uint8_t opcode, bt_att* att);
+
+		void onTimeout();
+
+		void onEPollRead(gatt_db_attribute* attr, uint32_t id, uint16_t offset, uint8_t opcode, bt_att* att);
+
+		void onClientDisconnected(int err);
+
+		void onGapRead(gatt_db_attribute* attr, uint32_t id, uint16_t offset, uint8_t opcode, bt_att* att);
+
+		void onGapWrite(gatt_db_attribute* attr, uint32_t id, uint16_t offset, uint8_t const* data, size_t len, uint8_t opcode, bt_att* att);
+
+		void onServiceChanged(gatt_db_attribute* attr, uint32_t id, uint16_t offset, uint8_t opcode, bt_att* att);
+
+		void onServiceChangedRead(gatt_db_attribute* attr, uint32_t id, uint16_t offset, uint8_t opcode, bt_att* att);
+
+		void onServiceChangedWrite(gatt_db_attribute* attr, uint32_t id, uint16_t offset, uint8_t const* value, size_t len, uint8_t opcode, bt_att* att);
+
+		void onGapExtendedPropertiesRead(gatt_db_attribute *attrib, uint32_t id, uint16_t offset, uint8_t opcode, bt_att* att);
+
 	protected:
 
 		int                 m_fd;
@@ -110,27 +134,7 @@ namespace Gatt {
 		//void throw_errno(int err, char const* fmt, ...)__attribute__((format(printf, 2, 3)));
 		/* ------------------一些工具------------------ */
 
-		void onDataChannelOut(gatt_db_attribute* attr, uint32_t id, uint16_t offset, uint8_t opcode, bt_att* att);
-
-		void onDataChannelIn(gatt_db_attribute* attr, uint32_t id, uint16_t offset, uint8_t const* data, size_t len, uint8_t opcode, bt_att* att);
-
-		void onTimeout();
-
-		void onEPollRead(gatt_db_attribute* attr, uint32_t id, uint16_t offset, uint8_t opcode, bt_att* att);
-
-		void onClientDisconnected(int err);
-
-		void onGapRead(gatt_db_attribute* attr, uint32_t id, uint16_t offset, uint8_t opcode, bt_att* att);
-
-		void onGapWrite(gatt_db_attribute* attr, uint32_t id, uint16_t offset, uint8_t const* data, size_t len, uint8_t opcode, bt_att* att);
-
-		void onServiceChanged(gatt_db_attribute* attr, uint32_t id, uint16_t offset, uint8_t opcode, bt_att* att);
-
-		void onServiceChangedRead(gatt_db_attribute* attr, uint32_t id, uint16_t offset, uint8_t opcode, bt_att* att);
-
-		void onServiceChangedWrite(gatt_db_attribute* attr, uint32_t id, uint16_t offset, uint8_t const* value, size_t len, uint8_t opcode, bt_att* att);
-
-		void onGapExtendedPropertiesRead(gatt_db_attribute *attrib, uint32_t id, uint16_t offset, uint8_t opcode, bt_att* att);
+		
 
 	};
 

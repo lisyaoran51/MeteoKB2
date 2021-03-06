@@ -100,7 +100,6 @@ INCLUDE = -IFramwork -IFramework/Allocation -IFramework/Allocation/Hierachal -IF
 -IUtil -IUtil/DataStructure \
 \
 -IThirdParty/Bass \
--IThirdParty/bluez/bluez \
 \
 -IDesktop -IDesktop/Devices -IDesktop/Devices/Gatt \
 \
@@ -121,7 +120,10 @@ INCLUDE = -IFramwork -IFramework/Allocation -IFramework/Allocation/Hierachal -IF
 -IRulesetInstant/Scheduler/Event -IRulesetInstant/Scheduler/Event/Effect -IRulesetInstant/Scheduler/Event/Effect/Algorithm \
 -IRulesetInstant/Scheduler/Event/InstrumentEvents -IRulesetInstant/Scheduler/Event/InstrumentEvents/InstrumentControllers \
 -IRulesetInstant/Sheetmusic -IRulesetInstant/Sheetmusic/Pattern \
--IRulesetInstant/Timing 
+-IRulesetInstant/Timing \
+\
+-I/home/pi/bleconfd/build/deps/src/bluez
+#-IThirdParty/bluez/bluez \
 
 #INCLUDE = -IGames -IGames/Config -IGames/Graphic -IGames/Graphic/Map -IGames/Graphic/Renderer -IGames/Play -IGames/Ruleset \
 #-IGames/Scheduler -IGames/Scheduler/Event -IGames/Scheduler/Event/ControlPoints -IGames/Scheduler/Event/GameEvents -IGames/Scheduler/Event/Effect \

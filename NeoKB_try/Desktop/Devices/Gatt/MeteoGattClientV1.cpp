@@ -7,6 +7,7 @@
 #include <stdarg.h>
 #include <unistd.h>
 #include <exception>
+#include <assert.h>
 
 
 
