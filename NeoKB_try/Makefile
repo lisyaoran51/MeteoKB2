@@ -207,7 +207,7 @@ ThirdParty/bluez/libshared-mainloop.a ThirdParty/bluez/uuid.o \
 MeteoGameDesktop.o Program.o \
 MeteoLightBoardV1.o bcm2835.o MeteoBitbangDisplayDevice.o MeteoSpidevDisplayDevice.o MeteoKeyboardDevice.o MeteoPanelDevice.o MeteoMcuV1.o pi2c.o \
 MeteoBluetoothDevice.o MeteoBluetoothPhoneV2.o MeteoPacketConverterV2.o \
-GattServer.o GattClient.o MeteoGattServerV1.o MeteoGattClientV1.o \
+GattServer.o MeteoGattServerV1.o MeteoGattClientV1.o \
 \
 MeteorGame.o MeteorConfigManager.o MeteorInputManager.o MeteorPitchBindingSet.o MeteorPlayfield.o \
 MeteorRuleset.o MeteorRulesetExecutor.o MeteorJudgement.o MeteorHitWindow.o MeteorReplayRecorder.o MeteorReplayFrame.o MeteorReplayRecorderReceiver.o \
