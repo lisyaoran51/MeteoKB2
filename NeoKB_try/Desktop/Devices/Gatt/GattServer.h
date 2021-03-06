@@ -52,9 +52,9 @@ namespace Gatt{
 
 		public:
 
-			virtual int Init(vector<string> config) = 0;
+			virtual int Init(std::vector<std::string> config) = 0;
 
-			virtual GattClient* Accept(map<string, function<string()>> deviceInfoGetter) = 0;
+			virtual GattClient* Accept(std::map<std::string, std::function<std::string()>> deviceInfoGetter) = 0;
 
 		protected:
 

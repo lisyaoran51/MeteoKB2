@@ -559,7 +559,7 @@ void MeteoGattServerV1::MeteoGattListenerV1::hcitoolCmd(int dev_id, std::vector<
 		LOG(LogLevel::Error) << "HCI filter setup failed";
 	}
 
-	LOG(LogLevel::Info) << "< HCI Command: ogf " << hex << ogf << ", ocf " << hex << ocf << ", len " << dec << len;
+	LOG(LogLevel::Info) << "< HCI Command: ogf " << std::hex << ogf << ", ocf " << std::hex << ocf << ", len " << std::dec << len;
 	hex_dump(20, buf, len);
 	fflush(stdout);
 
@@ -578,7 +578,7 @@ void MeteoGattServerV1::MeteoGattListenerV1::hcitoolCmd(int dev_id, std::vector<
 	ptr = buf + (1 + HCI_EVENT_HDR_SIZE);
 	len -= (1 + HCI_EVENT_HDR_SIZE);
 
-	LOG(LogLevel::Info) << "> HCI Event: " << hex << hdr->evt << " plen " << dec << hdr->plen;
+	LOG(LogLevel::Info) << "> HCI Event: " << std::hex << hdr->evt << " plen " << std::dec << hdr->plen;
 	hex_dump(20, ptr, len);
 	fflush(stdout);
 

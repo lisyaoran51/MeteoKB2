@@ -98,7 +98,7 @@ namespace Gatt {
 			 */
 			void cmdName(int hdev, char const* deviceName);
 
-			string getDeviceNameFromFile();
+			std::string getDeviceNameFromFile();
 
 			/**
 			 * update device name, it need restart ble service

@@ -107,7 +107,7 @@ namespace Gatt {
 
 		//void writeCallback(gatt_db_attribute* UNUSED_PARAM(attr), int err, void* UNUSED_PARAM(argp));
 
-		void throw_errno(int err, char const* fmt, ...)__attribute__((format(printf, 2, 3)));
+		//void throw_errno(int err, char const* fmt, ...)__attribute__((format(printf, 2, 3)));
 		/* ------------------一些工具------------------ */
 
 		void onDataChannelOut(gatt_db_attribute* attr, uint32_t id, uint16_t offset, uint8_t opcode, bt_att* att);

@@ -27,6 +27,9 @@ void DIS_writeCallback(gatt_db_attribute* UNUSED_PARAM(attr), int err, void* UNU
 	}
 }
 
+void throw_errno(int err, char const* fmt, ...)
+__attribute__((format(printf, 2, 3)));
+
 void ATT_debugCallback(char const* str, void* UNUSED_PARAM(argp))
 {
 	if (!str)
@@ -42,6 +45,36 @@ void GATT_debugCallback(char const* str, void* UNUSED_PARAM(argp))
 	else
 		LOG(LogLevel::Debug) << "GATT: " << str;
 }
+
+
+void throw_errno(int err, char const * fmt, ...)
+{
+	char buff[256] = { 0 };
+
+	va_list args;
+	va_start(args, fmt);
+	vsnprintf(buff, sizeof(buff), fmt, args);
+	buff[sizeof(buff) - 1] = '\0';
+	va_end(args);
+
+	char err[256] = { 0 };
+	char* p = strerror_r(e, err, sizeof(err));
+
+	std::stringstream out;
+	if (strlen(buff) > 0)
+	{
+		out << buff;
+		out << ". ";
+	}
+	if (p && strlen(p) > 0)
+		out << p;
+
+	std::string message(out.str());
+	LOG(LogLevel::Error) << "exception:" << message;
+	throw std::runtime_error(message);
+}
+
+/*------------------------------------------------已上市工具------------------------------------------------*/
 
 void GattClient_onGapRead(gatt_db_attribute* attr, uint32_t id, uint16_t offset, uint8_t opcode, bt_att* att, void* argp)
 {
@@ -365,33 +398,6 @@ void MeteoGattClientV1::addDeviceInfoCharacteristic(gatt_db_attribute * service,
 
 	// I'm not sure whether i like this or just having callbacks setup for reads
 	gatt_db_attribute_write(attr, 0, p, value.length(), BT_ATT_OP_WRITE_REQ, nullptr, &DIS_writeCallback, nullptr);
-}
-
-void MeteoGattClientV1::throw_errno(int err, char const * fmt, ...)
-{
-	char buff[256] = { 0 };
-
-	va_list args;
-	va_start(args, fmt);
-	vsnprintf(buff, sizeof(buff), fmt, args);
-	buff[sizeof(buff) - 1] = '\0';
-	va_end(args);
-
-	char err[256] = { 0 };
-	char* p = strerror_r(e, err, sizeof(err));
-
-	std::stringstream out;
-	if (strlen(buff) > 0)
-	{
-		out << buff;
-		out << ". ";
-	}
-	if (p && strlen(p) > 0)
-		out << p;
-
-	std::string message(out.str());
-	LOG(LogLevel::Error) << "exception:%s" << message;
-	throw std::runtime_error(message);
 }
 
 void MeteoGattClientV1::onDataChannelOut(gatt_db_attribute * attr, uint32_t id, uint16_t offset, uint8_t opcode, bt_att * att)
