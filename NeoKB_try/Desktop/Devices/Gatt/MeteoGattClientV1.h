@@ -17,7 +17,6 @@ extern "C"
 }
 
 
-using namespace std;
 using namespace Util;
 
 
@@ -28,13 +27,13 @@ namespace Gatt {
 
 	struct DeviceInfoProvider
 	{
-		function< string() > GetSystemId;
-		function< string() > GetModelNumber;
-		function< string() > GetSerialNumber;
-		function< string() > GetFirmwareRevision;
-		function< string() > GetHardwareRevision;
-		function< string() > GetSoftwareRevision;
-		function< string() > GetManufacturerName;
+		std::function< std::string() > GetSystemId;
+		std::function< std::string() > GetModelNumber;
+		std::function< std::string() > GetSerialNumber;
+		std::function< std::string() > GetFirmwareRevision;
+		std::function< std::string() > GetHardwareRevision;
+		std::function< std::string() > GetSoftwareRevision;
+		std::function< std::string() > GetManufacturerName;
 	};
 
 
@@ -67,13 +66,13 @@ namespace Gatt {
 
 		~MeteoGattClientV1();
 
-		virtual void Init(map<string, function<string()>> deviceInfoGetter);
+		virtual void Init(std::map<std::string, std::function<std::string()>> deviceInfoGetter);
 
 		virtual void EnqueueForSend(char const* buff, int n);
 
 		virtual void Run();
 
-		virtual void SetDataHandler(function<void(char const*, int)> dHandler);
+		virtual void SetDataHandler(std::function<void(char const*, int)> dHandler);
 
 	protected:
 
@@ -83,23 +82,23 @@ namespace Gatt {
 		bt_gatt_server*     m_server;
 		uint16_t            m_mtu;
 		MemoryStream		m_outgoing_queue;
-		vector<char>		m_incoming_buff;
+		std::vector<char>		m_incoming_buff;
 		gatt_db_attribute*  m_data_channel;
 		gatt_db_attribute*  m_blepoll;
 		uint16_t            m_notify_handle;
 		bool                m_service_change_enabled;
 		int                 m_timeout_id;
-		thread::id			m_mainloop_thread;
-		function<void(char const* buff, int n)>      m_data_handler;
+		std::thread::id			m_mainloop_thread;
+		std::function<void(char const* buff, int n)>      m_data_handler;
 
 
-		int buildService(map<string, function<string()>> deviceInfoGetter);
+		int buildService(std::map<std::string, std::function<std::string()>> deviceInfoGetter);
 
 		int buildGapService();
 
 		int buildGattService();
 
-		int buildDeviceInfoService(map<string, function<string()>> deviceInfoGetter);
+		int buildDeviceInfoService(std::map<std::string, std::function<std::string()>> deviceInfoGetter);
 
 		int buildMeteoService();
 
@@ -108,7 +107,7 @@ namespace Gatt {
 
 		//void writeCallback(gatt_db_attribute* UNUSED_PARAM(attr), int err, void* UNUSED_PARAM(argp));
 
-		void throw_errno(int err, char const* fmt, ...) __attribute__((format(printf, 2, 3)));
+		void throw_errno(int err, char const* fmt, ...)__attribute__((format(printf, 2, 3)));
 		/* ------------------一些工具------------------ */
 
 		void onDataChannelOut(gatt_db_attribute* attr, uint32_t id, uint16_t offset, uint8_t opcode, bt_att* att);

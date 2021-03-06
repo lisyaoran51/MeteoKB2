@@ -4,7 +4,6 @@
 
 #include <string>
 
-using namespace std;
 
 
 namespace Util {
@@ -13,7 +12,7 @@ namespace Util {
 
 	public:
 
-		static string PassCommand(char const* cmd);
+		static std::string PassCommand(char const* cmd);
 
 	};
 

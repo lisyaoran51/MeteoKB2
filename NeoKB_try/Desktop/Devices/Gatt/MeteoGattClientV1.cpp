@@ -138,7 +138,7 @@ MeteoGattClientV1::~MeteoGattClientV1()
 		gatt_db_unref(m_db);
 }
 
-void MeteoGattClientV1::Init(map<string, function<string()>> deviceInfoGetter)
+void MeteoGattClientV1::Init(std::map<std::string, std::function<std::string()>> deviceInfoGetter)
 {
 	m_att = bt_att_new(m_fd, 0);
 	if (!m_att)
@@ -201,12 +201,12 @@ void MeteoGattClientV1::Run()
 	mainloop_run();
 }
 
-void MeteoGattClientV1::SetDataHandler(function<void(char const*, int)> dHandler)
+void MeteoGattClientV1::SetDataHandler(std::function<void(char const*, int)> dHandler)
 {
 	m_data_handler = dHandler;
 }
 
-int MeteoGattClientV1::buildService(map<string, function<string()>> deviceInfoGetter)
+int MeteoGattClientV1::buildService(std::map<std::string, std::function<std::string()>> deviceInfoGetter)
 {
 	buildGapService();
 	buildGattService();
@@ -266,7 +266,7 @@ int MeteoGattClientV1::buildGattService()
 	return 0;
 }
 
-int MeteoGattClientV1::buildDeviceInfoService(map<string, function<string()>> deviceInfoGetter)
+int MeteoGattClientV1::buildDeviceInfoService(std::map<std::string, std::function<std::string()>> deviceInfoGetter)
 {
 	bt_uuid_t uuid;
 	bt_uuid16_create(&uuid, kUuidDeviceInfoService);

@@ -3,26 +3,25 @@
 #include <fstream>
 
 
-using namespace std;
 using namespace Util;
 
 
-string FileContentGetter::GetContentFromFile(char const * fname)
+std::string FileContentGetter::GetContentFromFile(char const * fname)
 {
 	
-		string id;
+	std::string id;
 
-		ifstream infile(fname);
-		if (!getline(infile, id))
-			id = "unknown";
+	std::ifstream infile(fname);
+	if (!std::getline(infile, id))
+		id = "unknown";
 
-		if (id[id.size()] == '\0')
-			id = id.substr(0, id.size() - 1);
+	if (id[id.size()] == '\0')
+		id = id.substr(0, id.size() - 1);
 
-		return id;
+	return id;
 }
 
-string FileContentGetter::GetFileContentVariable(char const * file, char const * field)
+std::string FileContentGetter::GetFileContentVariable(char const * file, char const * field)
 {
 	char buff[256];
 	FILE* f = fopen(file, "r");
@@ -42,9 +41,9 @@ string FileContentGetter::GetFileContentVariable(char const * file, char const *
 				size_t len = strlen(p);
 				if (len > 0)
 					p[len - 1] = '\0';
-				return string(p);
+				return std::string(p);
 			}
 		}
 	}
-	return string();
+	return std::string();
 }

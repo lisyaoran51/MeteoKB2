@@ -6,7 +6,6 @@
 #include <map>
 
 
-using namespace std;
 
 
 namespace Desktop {
@@ -18,13 +17,13 @@ namespace Gatt {
 
 	public:
 
-		virtual void Init(map<string, function<string()>> deviceInfoGetter) = 0;
+		virtual void Init(std::map<std::string, std::function<std::string()>> deviceInfoGetter) = 0;
 
 		virtual void EnqueueForSend(char const* buff, int n) = 0;
 
 		virtual void Run() = 0;
 
-		virtual void SetDataHandler(function<void(char const* buff, int n)> dHandler) = 0;
+		virtual void SetDataHandler(std::function<void(char const* buff, int n)> dHandler) = 0;
 
 
 	};

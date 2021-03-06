@@ -4,7 +4,7 @@
 using namespace Util;
 
 
-string CommandPasser::PassCommand(char const * cmd)
+std::string CommandPasser::PassCommand(char const * cmd)
 {
 	FILE* fp;
 	char buffer[256];
@@ -15,5 +15,5 @@ string CommandPasser::PassCommand(char const * cmd)
 	}
 	fgets(buffer, sizeof(buffer) - 1, fp);
 	pclose(fp);
-	return string(buffer);
+	return std::string(buffer);
 }

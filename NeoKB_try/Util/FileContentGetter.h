@@ -5,7 +5,6 @@
 #include <string>
 
 
-using namespace std;
 
 
 namespace Util {
@@ -15,9 +14,9 @@ namespace Util {
 
 	public:
 
-		static string GetContentFromFile(char const* fname);
+		static std::string GetContentFromFile(char const* fname);
 
-		static string GetFileContentVariable(char const* file, char const* field);
+		static std::string GetFileContentVariable(char const* file, char const* field);
 		
 
 	};
