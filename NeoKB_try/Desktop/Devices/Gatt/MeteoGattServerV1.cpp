@@ -12,6 +12,7 @@
 #include <string.h>
 #include <vector>
 #include <getopt.h>
+#include <stdarg.h>
 #include <sys/param.h>
 #include <sys/ioctl.h>
 #include <sys/socket.h>
@@ -38,7 +39,7 @@ void throw_errno(int err, char const* fmt, ...)
 __attribute__((format(printf, 2, 3)));
 
 
-void throw_errno(int err, char const * fmt, ...)
+void throw_errno(int e, char const * fmt, ...)
 {
 	char buff[256] = { 0 };
 
