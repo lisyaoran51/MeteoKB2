@@ -8,6 +8,8 @@
 #include <unistd.h>
 #include <exception>
 #include <assert.h>
+#include <bluetooth/bluetooth.h>
+#include <bluetooth/l2cap.h>
 
 #define UNUSED_PARAM(X) UNUSED_ ## X __attribute__((__unused__))
 
