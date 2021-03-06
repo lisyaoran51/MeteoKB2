@@ -11,7 +11,6 @@
 #include <bluetooth/bluetooth.h>
 #include <bluetooth/l2cap.h>
 
-#define UNUSED_PARAM(X) UNUSED_ ## X __attribute__((__unused__))
 
 // these are pulled directly from the BlueZ source tree
 extern "C"
@@ -21,6 +20,10 @@ extern "C"
 
 using namespace Desktop::Devices::Gatt;
 using namespace Util;
+
+
+#define UNUSED_PARAM(X) UNUSED_ ## X __attribute__((__unused__))
+
 
 void DIS_writeCallback(gatt_db_attribute* UNUSED_PARAM(attr), int err, void* UNUSED_PARAM(argp))
 {

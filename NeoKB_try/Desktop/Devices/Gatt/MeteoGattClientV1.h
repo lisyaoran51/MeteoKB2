@@ -7,6 +7,9 @@
 #include <vector>
 #include "../../../Util/MemoryStream.h"
 
+#include <bluetooth/bluetooth.h>
+#include <bluetooth/l2cap.h>
+
 
 extern "C"
 {
