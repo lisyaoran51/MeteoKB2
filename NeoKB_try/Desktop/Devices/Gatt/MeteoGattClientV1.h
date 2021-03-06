@@ -98,6 +98,9 @@ namespace Gatt {
 
 		void onGapExtendedPropertiesRead(gatt_db_attribute *attrib, uint32_t id, uint16_t offset, uint8_t opcode, bt_att* att);
 
+
+
+
 	protected:
 
 		int                 m_fd;

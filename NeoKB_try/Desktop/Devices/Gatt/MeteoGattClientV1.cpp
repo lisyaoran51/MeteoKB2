@@ -374,7 +374,12 @@ void MeteoGattClientV1::addDeviceInfoCharacteristic(gatt_db_attribute * service,
 	gatt_db_attribute_write(attr, 0, p, value.length(), BT_ATT_OP_WRITE_REQ, nullptr, &DIS_writeCallback, nullptr);
 }
 
-void MeteoGattClientV1::onDataChannelOut(gatt_db_attribute * attr, uint32_t id, uint16_t offset, uint8_t opcode, bt_att * att)
+void MeteoGattClientV1::onDataChannelOut(
+	gatt_db_attribute*    attr,
+	uint32_t              id,
+	uint16_t              offset,
+	uint8_t               opcode,
+	bt_att*               UNUSED_PARAM(att))
 {
 	LOG(LogLevel::Info) << "onDataChannelOut(id=" << id << ", offset=" << offset << ", opcode=" << opcode << ")";
 
@@ -408,7 +413,14 @@ void MeteoGattClientV1::onDataChannelOut(gatt_db_attribute * attr, uint32_t id, 
 	gatt_db_attribute_read_result(attr, id, 0, value, n);
 }
 
-void MeteoGattClientV1::onDataChannelIn(gatt_db_attribute * attr, uint32_t id, uint16_t offset, uint8_t const * data, size_t len, uint8_t opcode, bt_att * att)
+void MeteoGattClientV1::onDataChannelIn(
+	gatt_db_attribute*    attr,
+	uint32_t              id,
+	uint16_t              offset,
+	uint8_t const*        data,
+	size_t                len,
+	uint8_t               UNUSED_PARAM(opcode),
+	bt_att*               UNUSED_PARAM(att))
 {
 	LOG(LogLevel::Info) << "onDataChannelIn(offset=" << offset << ", len=" << len << ")";
 
@@ -464,7 +476,12 @@ void MeteoGattClientV1::onTimeout()
 	mainloop_modify_timeout(m_timeout_id, 1000);
 }
 
-void MeteoGattClientV1::onEPollRead(gatt_db_attribute * attr, uint32_t id, uint16_t offset, uint8_t opcode, bt_att * att)
+void MeteoGattClientV1::onEPollRead(
+	gatt_db_attribute*    attr,
+	uint32_t              id,
+	uint16_t              offset,
+	uint8_t               opcode,
+	bt_att*               UNUSED_PARAM(att))
 {
 	uint32_t value = m_outgoing_queue.size();
 
@@ -484,7 +501,8 @@ void MeteoGattClientV1::onClientDisconnected(int err)
 	mainloop_quit();
 }
 
-void MeteoGattClientV1::onGapRead(gatt_db_attribute * attr, uint32_t id, uint16_t offset, uint8_t opcode, bt_att * att)
+void MeteoGattClientV1::onGapRead(gatt_db_attribute* attr, uint32_t id, uint16_t offset,
+	uint8_t UNUSED_PARAM(opcode), bt_att* UNUSED_PARAM(att))
 {
 	LOG(LogLevel::Debug) << "onGapRead " << id;
 
@@ -507,7 +525,14 @@ void MeteoGattClientV1::onGapRead(gatt_db_attribute * attr, uint32_t id, uint16_
 	}
 }
 
-void MeteoGattClientV1::onGapWrite(gatt_db_attribute * attr, uint32_t id, uint16_t offset, uint8_t const * data, size_t len, uint8_t opcode, bt_att * att)
+void MeteoGattClientV1::onGapWrite(
+	gatt_db_attribute*  attr,
+	uint32_t            id,
+	uint16_t            offset,
+	uint8_t const*      data,
+	size_t              len,
+	uint8_t             UNUSED_PARAM(opcode),
+	bt_att*             UNUSED_PARAM(att))
 {
 	LOG(LogLevel::Debug) << "onGapWrite";
 
@@ -528,13 +553,15 @@ void MeteoGattClientV1::onGapWrite(gatt_db_attribute * attr, uint32_t id, uint16
 	gatt_db_attribute_write_result(attr, id, error);
 }
 
-void MeteoGattClientV1::onServiceChanged(gatt_db_attribute * attr, uint32_t id, uint16_t offset, uint8_t opcode, bt_att * att)
+void MeteoGattClientV1::onServiceChanged(gatt_db_attribute* attr, uint32_t id, uint16_t UNUSED_PARAM(offset),
+	uint8_t UNUSED_PARAM(opcode), bt_att* UNUSED_PARAM(att))
 {
 	LOG(LogLevel::Debug) << "onServiceChanged";
 	gatt_db_attribute_read_result(attr, id, 0, nullptr, 0);
 }
 
-void MeteoGattClientV1::onServiceChangedRead(gatt_db_attribute * attr, uint32_t id, uint16_t offset, uint8_t opcode, bt_att * att)
+void MeteoGattClientV1::onServiceChangedRead(gatt_db_attribute* attr, uint32_t id, uint16_t UNUSED_PARAM(offset),
+	uint8_t UNUSED_PARAM(opcode), bt_att* UNUSED_PARAM(att))
 {
 	LOG(LogLevel::Debug) << "onServiceChangedRead";
 
@@ -544,7 +571,9 @@ void MeteoGattClientV1::onServiceChangedRead(gatt_db_attribute * attr, uint32_t 
 	gatt_db_attribute_read_result(attr, id, 0, value, sizeof(value));
 }
 
-void MeteoGattClientV1::onServiceChangedWrite(gatt_db_attribute * attr, uint32_t id, uint16_t offset, uint8_t const * value, size_t len, uint8_t opcode, bt_att * att)
+void MeteoGattClientV1::onServiceChangedWrite(gatt_db_attribute* attr, uint32_t id, uint16_t offset,
+	uint8_t const* value, size_t len,
+	uint8_t UNUSED_PARAM(opcode), bt_att* UNUSED_PARAM(att))
 {
 	LOG(LogLevel::Debug) << "onServiceChangeWrite";
 
@@ -568,7 +597,12 @@ void MeteoGattClientV1::onServiceChangedWrite(gatt_db_attribute * attr, uint32_t
 	gatt_db_attribute_write_result(attr, id, ecode);
 }
 
-void MeteoGattClientV1::onGapExtendedPropertiesRead(gatt_db_attribute * attrib, uint32_t id, uint16_t offset, uint8_t opcode, bt_att * att)
+void MeteoGattClientV1::onGapExtendedPropertiesRead(
+	struct gatt_db_attribute*     attr,
+	uint32_t                      id,
+	uint16_t         UNUSED_PARAM(offset),
+	uint8_t          UNUSED_PARAM(opcode),
+	struct bt_att*   UNUSED_PARAM(att))
 {
 	uint8_t value[2];
 	value[0] = BT_GATT_CHRC_EXT_PROP_RELIABLE_WRITE;
