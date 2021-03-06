@@ -50,67 +50,67 @@ void GATT_debugCallback(char const* str, void* UNUSED_PARAM(argp))
 
 void GattClient_onGapRead(gatt_db_attribute* attr, uint32_t id, uint16_t offset, uint8_t opcode, bt_att* att, void* argp)
 {
-	GattClient* clnt = reinterpret_cast<MeteoGattClientV1 *>(argp);
+	MeteoGattClientV1* clnt = reinterpret_cast<MeteoGattClientV1 *>(argp);
 	clnt->onGapRead(attr, id, offset, opcode, att);
 }
 
 void GattClient_onGapWrite(gatt_db_attribute* attr, uint32_t id, uint16_t offset, uint8_t const* data, size_t len, uint8_t opcode, bt_att* att, void* argp)
 {
-	GattClient* clnt = reinterpret_cast<MeteoGattClientV1 *>(argp);
+	MeteoGattClientV1* clnt = reinterpret_cast<MeteoGattClientV1 *>(argp);
 	clnt->onGapWrite(attr, id, offset, data, len, opcode, att);
 }
 
 void GattClient_onServiceChanged(gatt_db_attribute* attr, uint32_t id, uint16_t offset, uint8_t opcode, bt_att* att, void* argp)
 {
-	GattClient* clnt = reinterpret_cast<MeteoGattClientV1 *>(argp);
+	MeteoGattClientV1* clnt = reinterpret_cast<MeteoGattClientV1 *>(argp);
 	clnt->onServiceChanged(attr, id, offset, opcode, att);
 }
 
 void GattClient_onServiceChangedRead(gatt_db_attribute* attr, uint32_t id, uint16_t offset, uint8_t opcode, bt_att* att, void* argp)
 {
-	GattClient* clnt = reinterpret_cast<MeteoGattClientV1 *>(argp);
+	MeteoGattClientV1* clnt = reinterpret_cast<MeteoGattClientV1 *>(argp);
 	clnt->onServiceChangedRead(attr, id, offset, opcode, att);
 }
 
 void GattClient_onServiceChangedWrite(gatt_db_attribute* attr, uint32_t id, uint16_t offset, uint8_t const* value, size_t len, uint8_t opcode, bt_att* att, void* argp)
 {
-	GattClient* clnt = reinterpret_cast<MeteoGattClientV1 *>(argp);
+	MeteoGattClientV1* clnt = reinterpret_cast<MeteoGattClientV1 *>(argp);
 	clnt->onServiceChangedWrite(attr, id, offset, value, len, opcode, att);
 }
 
 void GattClient_onGapExtendedPropertiesRead(gatt_db_attribute *attr, uint32_t id, uint16_t offset, uint8_t opcode, bt_att* att, void* argp)
 {
-	GattClient* clnt = reinterpret_cast<MeteoGattClientV1 *>(argp);
+	MeteoGattClientV1* clnt = reinterpret_cast<MeteoGattClientV1 *>(argp);
 	clnt->onGapExtendedPropertiesRead(attr, id, offset, opcode, att);
 }
 
 void GattClient_onClientDisconnected(int err, void* argp)
 {
-	GattClient* clnt = reinterpret_cast<MeteoGattClientV1 *>(argp);
+	MeteoGattClientV1* clnt = reinterpret_cast<MeteoGattClientV1 *>(argp);
 	clnt->onClientDisconnected(err);
 }
 
 void GattClient_onEPollRead(gatt_db_attribute* attr, uint32_t id, uint16_t offset, uint8_t opcode, bt_att* att, void* argp)
 {
-	GattClient* clnt = reinterpret_cast<MeteoGattClientV1 *>(argp);
+	MeteoGattClientV1* clnt = reinterpret_cast<MeteoGattClientV1 *>(argp);
 	clnt->onEPollRead(attr, id, offset, opcode, att);
 }
 
 void GattClient_onDataChannelIn(gatt_db_attribute* attr, uint32_t id, uint16_t offset, uint8_t const* data, size_t len, uint8_t opcode, bt_att* att, void* argp)
 {
-	GattClient* clnt = reinterpret_cast<MeteoGattClientV1 *>(argp);
+	MeteoGattClientV1* clnt = reinterpret_cast<MeteoGattClientV1 *>(argp);
 	clnt->onDataChannelIn(attr, id, offset, data, len, opcode, att);
 }
 
 void GattClient_onDataChannelOut(gatt_db_attribute* attr, uint32_t id, uint16_t offset, uint8_t opcode, bt_att* att, void* argp)
 {
-	GattClient* clnt = reinterpret_cast<MeteoGattClientV1 *>(argp);
+	MeteoGattClientV1* clnt = reinterpret_cast<MeteoGattClientV1 *>(argp);
 	clnt->onDataChannelOut(attr, id, offset, opcode, att);
 }
 
 void GattClient_onTimeout(int UNUSED_PARAM(fd), void* argp)
 {
-	GattClient* clnt = reinterpret_cast<MeteoGattClientV1 *>(argp);
+	MeteoGattClientV1* clnt = reinterpret_cast<MeteoGattClientV1 *>(argp);
 	clnt->onTimeout();
 }
 
