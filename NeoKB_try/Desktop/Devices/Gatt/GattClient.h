@@ -23,7 +23,7 @@ namespace Gatt {
 
 		virtual void Run() = 0;
 
-		virtual void SetDataHandler(std::function<void(char const, int)> dHandler) = 0;
+		virtual void SetDataHandler(std::function<void(char const*, int)> dHandler) = 0;
 
 
 	};
