@@ -1,6 +1,8 @@
 #include "BleAccess.h"
 
 #include <iterator>
+#include "IdentifyBleRequest.h"
+
 
 
 using namespace Games::IO::Communications;
@@ -9,7 +11,7 @@ using namespace Games::IO::Communications;
 BleAccess::BleAccess(GameHost * gHost): TCommunicationComponent(gHost), RegisterType("BleAccess")
 {
 	bluetoothPhone = host->GetMainInterface()->GetBluetoothPhone();
-
+	communicationState = CommunicationState::Failed;
 
 }
 
@@ -97,39 +99,65 @@ int BleAccess::GetMtu()
 
 int BleAccess::run()
 {
-	switch (communicationState) {
-	case CommunicationState::Offline:
-		this_thread::sleep_for(std::chrono::milliseconds(500));
-		return -1;
-		break;
-	
-	case CommunicationState::Connecting:
-	
-		// if login
-		communicationState = CommunicationState::Connected;
-		// else sleep(500); return -1;
-	
-		break;
-	
+	threadExitRequest = false;
+
+	while (!threadExitRequest) {
+		switch (communicationState) {
+		case CommunicationState::Failed:
+			this_thread::sleep_for(std::chrono::milliseconds(500));
+			
+			// TODO: ping一下看看有沒有連上
+			continue;
+			break;
+
+		case CommunicationState::Offline:
+		case CommunicationState::Connecting:
+
+			communicationState = CommunicationState::Connecting;
+
+			// 先登入看看，燈的進去就轉為Connected。登入方法是丟一個key過去，讓手機來解碼
+
+			CommunicationRequest* request = new IdentifyBleRequest("aaaaaaaa");
+
+			if (handleRequest(request) < 0) {
+
+				this_thread::sleep_for(std::chrono::milliseconds(500));
+
+				delete request;
+				request = nullptr;
+
+				continue;
+			}
+
+			communicationState = CommunicationState::Connected;
+
+			delete request;
+			request = nullptr;
+
+			break;
+
+		}
+
+
+		/* 再執行request */
+		CommunicationRequest* request = nullptr;
+		if (communicationRequests.size() > 0) {
+			request = communicationRequests.back();
+
+			int result = 0;
+
+			result = handleRequest(request);		// 執行handleRequest，result就會變成undeclared
+
+			if (result >= 0) {
+				communicationRequests.pop_back();
+
+				delete request;
+				request = nullptr;
+			}
+			
+		}
 	}
-	
-	
-	/* 再執行request */
-	CommunicationRequest* request = nullptr;
-	if (communicationRequests.size() > 0) {
-		request = communicationRequests.back();
-	
-		// request處理成功
-		//int result = 0;
-		//result = handleRequest(request);		// 執行handleRequest，result就會變成undeclared
-		//if (handleRequest(request) >= 0) {	// 這邊很奇怪，如果把handle request放進if裡面，compile就會失敗
-		//if (result >= 0) {
-		//	communicationRequests.pop_back();
-		//}
-		//else 
-		//	return -1;
-		
-	}
+
 
 	return 0;
 }
@@ -144,6 +172,8 @@ int BleAccess::handleRequest(CommunicationRequest * communicationRequest)
 
 		failureCount = 0;
 
+		return 0;
+
 	}
 	catch (BleRequestException& e) {
 
@@ -156,6 +186,7 @@ int BleAccess::handleRequest(CommunicationRequest * communicationRequest)
 			if (failureCount < 3)
 				return -1;
 
+			// 如果一職失敗，就把所有的request都Fail調
 			communicationState == CommunicationState::Failed;
 			Flush();
 			return 0;
@@ -166,8 +197,13 @@ int BleAccess::handleRequest(CommunicationRequest * communicationRequest)
 		communicationRequest->Fail(e);
 
 	}
+	catch (exception& e) {
 
-	return 0;
+		LOG(LogLevel::Debug) << "BleAccess::handleRequest() : run request [" << communicationRequest << "] failed." << e.what();
+		communicationRequest->Fail(e);
+	}
+
+	return -1;
 }
 
 int BleAccess::handleOnRawCommand(InputState * inputState)

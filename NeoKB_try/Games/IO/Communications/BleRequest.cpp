@@ -19,7 +19,7 @@ using namespace Framework::Scenes;
 
 
 
-int BleRequest::ChooseCommunicationComponentAndPerform()
+int BleRequest::ChooseCommunicationComponentToPerform()
 {
 	map<string, deque<CommunicationRequest*>*>::iterator it;
 
@@ -45,7 +45,14 @@ int BleRequest::Perform(CommunicationComponent * cComponent)
 
 	// preform 丟資訊出去然後等回覆
 
-	requestMethod->PerformAndWait(this);
+	try {
+		requestMethod->PerformAndWait(this);
+	}
+	catch (exception& e) {
+		// 執行完畢以後就不讓ble access把raw message丟進來
+		bleAccess->UnregisterBleRequest(this);
+		throw e;
+	}
 
 	// 執行完畢以後就不讓ble access把raw message丟進來
 	bleAccess->UnregisterBleRequest(this);
@@ -96,9 +103,14 @@ int BleRequest::PushInputRawMessage(MeteoBluetoothMessage * rawMessage)
 	return 0;
 }
 
-int BleRequest::fail(CommunicationRequestException & communicationRequestException)
+int BleRequest::fail(exception & e)
 {
-	LOG(LogLevel::Error) << "int BleRequest::fail() : not implemented.";
+
+	if (dynamic_cast<CommunicationRequestException*>(&e)) {
+
+	}
+
+	LOG(LogLevel::Debug) << "int BleRequest::fail() : not implemented.";
 	return 0;
 }
 

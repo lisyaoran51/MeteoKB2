@@ -19,6 +19,8 @@ namespace Commands{
 		ReturnHardwareDate		,
 		ReadHardwareIdentity	,
 		ReturnHardwarIdentity	,
+		SendEncryptedIdentifyMessage	,
+		ReturnDecryptedIdentifyMessage	,
 		ReadAppData				,
 		ReturnAppData			,
 		ReadUserData			,

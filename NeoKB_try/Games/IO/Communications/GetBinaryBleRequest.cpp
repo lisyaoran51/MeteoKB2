@@ -34,12 +34,15 @@ GetBinaryBleRequest::GetBinaryBleRequestMethod::GetBinaryBleRequestMethod(string
 
 int GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait(BleRequest * thisRequest)
 {
-
 	GetBinaryBleRequest* thisGetBinaryRequest = dynamic_cast<GetBinaryBleRequest*>(thisRequest);
 
 	/* 抓目前的藍芽mtu */
 	BleAccess* bleAccess = dynamic_cast<BleAccess*>(thisGetBinaryRequest->communicationComponent);
 	BluetoothPhone* bluetoothPhone = dynamic_cast<BluetoothPhone*>(dynamic_cast<BleAccess*>(thisGetBinaryRequest->communicationComponent)->GetPeripheral());
+
+
+	// 每次perform都要重設exitRequest
+	thisGetBinaryRequest->exitRequest = false;
 
 
 	bluetoothPhone->PushOutputMessage(getMessage);
@@ -86,9 +89,11 @@ int GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait(BleRequest * 
 	if (binarySegmentSize <= 0) {
 		LOG(LogLevel::Error) << "BleRequest::PostBinaryBleRequestMethod::PerformAndWait() : mtu size " << mtu << " too small.";
 		throw logic_error("BleRequest::PostBinaryBleRequestMethod::PerformAndWait(): mtu size too small.");
+		// TODO: 應該中斷連線並報錯，不應該直接當掉
 	}
 
 	FileSegmentMap bleBinaryRequestFileSegmentMap(binarySegmentSize);
+	bleBinaryRequestFileSegmentMap.segmentAmount = 100;	// 預設一個數，之後會再補上真實大小
 
 
 	/* 這邊開始收資料 */
@@ -116,10 +121,34 @@ int GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait(BleRequest * 
 					bleBinaryRequestFileSegmentMap.fileSegmentMap[order] = pair<char*, int>(fileSegmentData, size);
 
 					int amount = fileSegmentMessage->GetAmount();
+					bleBinaryRequestFileSegmentMap.segmentAmount = amount;
 
 					if (bleBinaryRequestFileSegmentMap.fileSegmentMap.size() == amount) {
 						isTransferFinished = true;
 					}
+				}
+			}
+			else if (dynamic_cast<MeteoContextBluetoothMessage*>(thisGetBinaryRequest->inputRawMessages[i])) {
+				if (dynamic_cast<MeteoContextBluetoothMessage*>(thisGetBinaryRequest->inputRawMessages[i])->GetCommand() == finishCommand) {
+					MeteoContextBluetoothMessage* reuqestRetransferMessage = new MeteoContextBluetoothMessage(requestRetransferCommand);
+
+					json messageContext;
+					messageContext["FileName"] = bleBinaryRequestFileSegmentMap.fileName;
+
+					for (int i = 0; i < bleBinaryRequestFileSegmentMap.segmentAmount; i++) {
+						map<int, pair<char*, int>>::iterator iter;
+						iter = bleBinaryRequestFileSegmentMap.fileSegmentMap.find(i);
+						if (iter == bleBinaryRequestFileSegmentMap.fileSegmentMap.end()) {
+							messageContext["SegmentNumber"].push_back(i);
+							if (messageContext["SegmentNumber"].size() > 20)
+								break;	// 如果太多內容，會超過封包大小
+
+						}
+					}
+
+					reuqestRetransferMessage->SetContextInJson(messageContext);
+					reuqestRetransferMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
+					bleAccess->GetBluetoothPhone()->PushOutputMessage(reuqestRetransferMessage);
 				}
 			}
 			delete thisGetBinaryRequest->inputRawMessages[i];
@@ -144,10 +173,11 @@ int GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait(BleRequest * 
 			if (dynamic_cast<MeteoContextBluetoothMessage*>(thisGetBinaryRequest->inputRawMessages[i])) {
 				if (dynamic_cast<MeteoContextBluetoothMessage*>(thisGetBinaryRequest->inputRawMessages[i])->GetCommand() == finishCommand) {
 
-					MeteoContextBluetoothMessage* ackFinishMessage = new MeteoContextBluetoothMessage(finishCommand);
+					MeteoContextBluetoothMessage* ackFinishMessage = new MeteoContextBluetoothMessage(ackFinishCommand);
 					json messageContext;
 					messageContext["FileName"] = bleBinaryRequestFileSegmentMap.fileName;
 					ackFinishMessage->SetContextInJson(messageContext);
+					ackFinishMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
 					bleAccess->GetBluetoothPhone()->PushOutputMessage(ackFinishMessage);
 
 					isAckedTransferFinished = true;
@@ -198,9 +228,9 @@ GetBinaryBleRequest::GetBinaryBleRequest(string fPath, MeteoBluetoothMessage * g
 	LOG(LogLevel::Error) << "GetBinaryBleRequest::GetBinaryBleRequest() : not implemented.";
 }
 
-int GetBinaryBleRequest::ChooseCommunicationComponentAndPerform()
+int GetBinaryBleRequest::ChooseCommunicationComponentToPerform()
 {
-	LOG(LogLevel::Error) << "int GetBinaryBleRequest::ChooseCommunicationComponentAndPerform() : not implemented.";
+	LOG(LogLevel::Error) << "int GetBinaryBleRequest::ChooseCommunicationComponentToPerform() : not implemented.";
 	return 0;
 }
 

@@ -17,6 +17,10 @@ double CommunicationRequest::getElapsedSeconds()
 	return double(eMicroSeconds / 1000000) + double(eMicroSeconds % 1000000) * 0.000001;
 }
 
+CommunicationRequest::CommunicationRequest() : RegisterType("CommunicationRequest")
+{
+}
+
 int CommunicationRequest::AddCommunicationComponentOption(string componentName, deque<CommunicationRequest*>* componentRequestQueue)
 {
 	acceptedCommunicationComponentRequestQueues[componentName] = componentRequestQueue;
@@ -24,11 +28,21 @@ int CommunicationRequest::AddCommunicationComponentOption(string componentName, 
 	return 0;
 }
 
-int CommunicationRequest::Fail(CommunicationRequestException & communicationRequestException)
+int CommunicationRequest::Cancel()
+{
+	exitRequest = true;
+	return 0;
+}
+
+int CommunicationRequest::Fail(exception & e)
 {
 	//onFailed.Trigger();
 
-	return fail(communicationRequestException);
+	if (dynamic_cast<CommunicationRequestException*>(&e)) {
+
+	}
+
+	return fail(e);
 }
 
 int CommunicationRequest::SetCallbackScene(Scene * cScene)

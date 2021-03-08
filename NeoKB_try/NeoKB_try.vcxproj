@@ -84,6 +84,7 @@
     <ClCompile Include="Games\IO\Communications\BleRequestException.cpp" />
     <ClCompile Include="Games\IO\Communications\GetBinaryBleRequest.cpp" />
     <ClCompile Include="Games\IO\Communications\GetTextBleRequest.cpp" />
+    <ClCompile Include="Games\IO\Communications\IdentifyBleRequest.cpp" />
     <ClCompile Include="Games\IO\Communications\PostBinaryBleRequest.cpp" />
     <ClCompile Include="Games\IO\Communications\PostTextBleRequest.cpp" />
     <ClCompile Include="Games\MeteoGame.cpp" />
@@ -488,6 +489,7 @@
     <ClInclude Include="Games\IO\Communications\BtClassicRequest.h" />
     <ClInclude Include="Games\IO\Communications\GetBinaryBleRequest.h" />
     <ClInclude Include="Games\IO\Communications\GetTextBleRequest.h" />
+    <ClInclude Include="Games\IO\Communications\IdentifyBleRequest.h" />
     <ClInclude Include="Games\IO\Communications\PostBinaryBleRequest.h" />
     <ClInclude Include="Games\IO\Communications\PostTextBleRequest.h" />
     <ClInclude Include="Games\MeteoGame.h" />

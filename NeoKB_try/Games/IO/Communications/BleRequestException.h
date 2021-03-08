@@ -221,7 +221,12 @@ namespace Communications{
 		// 摘要:
 		//     與 HTTP 狀態 505 相同。 System.Net.HttpStatusCode.HttpVersionNotSupported 表示伺服器不支援要求的
 		//     HTTP 版本。
-		HttpVersionNotSupported = 505
+		HttpVersionNotSupported = 505,
+
+		/// <summary>
+		/// 字定義的，與手機中斷連線
+		/// </summary>
+		//DisconnectedFromBlePhone
 
 	};
 

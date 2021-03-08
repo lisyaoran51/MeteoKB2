@@ -86,6 +86,11 @@ namespace Communications{
 		/// </summary>
 		GameThread* communicationThread = nullptr;
 
+		/// <summary>
+		/// 當變成true的時候，run就會跳出，讓thread結束
+		/// </summary>
+		bool threadExitRequest = false;
+
 		int failureCount = 0;
 
 		virtual int run();
@@ -116,7 +121,20 @@ namespace Communications{
 		}
 
 		virtual int Flush() {
-			// TODO: 把所有request清掉
+
+			deque<CommunicationRequest*> oldQueue;
+			copy(communicationRequests.begin(), communicationRequests.end(), inserter(oldQueue, oldQueue.begin()));
+			communicationRequests.clear();
+
+			while (oldQueue.size() > 0) {
+				CommunicationRequest* request = oldQueue.back();
+				request->Fail(CommunicationRequestException("Disconnected from communication target."));
+				oldQueue.pop_back();
+
+				delete request;
+				request = nullptr;
+			}
+
 			return 0;
 		}
 

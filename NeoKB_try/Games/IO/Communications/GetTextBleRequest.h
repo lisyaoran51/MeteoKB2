@@ -11,6 +11,17 @@ namespace Communications{
 
 	public:
 
+		/// <summary>
+		/// override用
+		/// </summary>
+		GetTextBleRequest();
+
+		/// <summary>
+		/// 直接使用用
+		/// </summary>
+		GetTextBleRequest(MeteoBluetoothMessage* gMessage, MeteoCommand rCommand);
+
+		int AddOnReturn(MtoObject * callableObject, function<int(json)> callback, string name = "OnReturn");
 
 	protected:
 		/// <summary>
@@ -32,6 +43,8 @@ namespace Communications{
 			string GetReturnText();
 
 			json GetReturnJson();
+
+			int AddOnReturn(MtoObject * callableObject, function<int(json)> callback, string name = "OnReturn");
 
 		protected:
 

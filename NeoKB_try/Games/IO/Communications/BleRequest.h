@@ -36,7 +36,7 @@ namespace Communications{
 		/// 有時一個request可以同時被wifi、ble、bt等多種communication component執行，這時request要先接收目前可選用的component有哪些，自己選定要用哪種component
 		/// 然後再執行
 		/// </summary>
-		virtual int ChooseCommunicationComponentAndPerform();
+		virtual int ChooseCommunicationComponentToPerform();
 
 		virtual int Perform(CommunicationComponent* cComponent);
 
@@ -61,7 +61,7 @@ namespace Communications{
 		/// <summary>
 		/// 好像要自己把on fail.trigger擺到這裡面，on fail不能擺在public Fail裡
 		/// </summary>
-		virtual int fail(CommunicationRequestException& communicationRequestException);
+		virtual int fail(exception& e);
 
 
 		class BleRequestMethod;

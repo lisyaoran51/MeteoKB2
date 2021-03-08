@@ -2781,7 +2781,7 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 2/24
 	communication access怎麼run還沒寫
 	
-	ChooseCommunicationComponentAndPerform 這邊我寫得有點複雜，要看一下再改
+	ChooseCommunicationComponentToPerform 這邊我寫得有點複雜，要看一下再改
 	
 2/26
 	改為使用mcu
@@ -2818,3 +2818,6 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 	紀錄譜檔做好了，看要把record寫完還是修request
 	
 	刪除平移八度也ok了
+	
+3/8
+	把get bvinary改好一點，但是要確定怎麼abort request

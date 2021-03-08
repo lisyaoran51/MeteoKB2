@@ -30,10 +30,12 @@ namespace Communications{
 
 	};
 
-	class CommunicationRequest {
+	class CommunicationRequest : public MtoObject {
 
 
 	public:
+
+		CommunicationRequest();
 
 		int AddCommunicationComponentOption(string componentName, deque<CommunicationRequest*>* componentRequestQueue);
 
@@ -41,11 +43,16 @@ namespace Communications{
 		/// 有時一個request可以同時被wifi、ble、bt等多種communication component執行，這時request要先接收目前可選用的component有哪些，自己選定要用哪種component
 		/// 然後再執行
 		/// </summary>
-		virtual int ChooseCommunicationComponentAndPerform() = 0;
+		virtual int ChooseCommunicationComponentToPerform() = 0;
 
 		virtual int Perform(CommunicationComponent* cComponent) = 0;
 
-		virtual int Fail(CommunicationRequestException& communicationRequestException);
+		/// <summary>
+		/// 把exit request變true，可以讓request離開perform thread
+		/// </summary>
+		int Cancel();
+
+		virtual int Fail(exception& e);
 
 		int SetCallbackScene(Scene* cScene);
 
@@ -70,6 +77,11 @@ namespace Communications{
 		system_clock::time_point requestStartTime;
 
 		/// <summary>
+		/// 某個段落的時間，有時候只要抓某個段落經過多久，就以這個來計時
+		/// </summary>
+		system_clock::time_point requestpointTime;
+
+		/// <summary>
 		/// 預設5秒就time out
 		/// </summary>
 		float timeout = 5;
@@ -80,6 +92,11 @@ namespace Communications{
 		int maxRetryCount = 3;
 
 		int retryCount = 0;
+
+		/// <summary>
+		/// 在thread外面呼叫，可以讓正在perform的thread結束
+		/// </summary>
+		bool exitRequest = false;
 
 		/// <summary>
 		/// 這個沒有用了
@@ -106,7 +123,7 @@ namespace Communications{
 
 		double getElapsedSeconds();
 
-		virtual int fail(CommunicationRequestException& communicationRequestException) = 0;
+		virtual int fail(exception& e) = 0;
 
 
 	};
@@ -116,7 +133,7 @@ namespace Communications{
 
 	public:
 
-		TCommunicationRequest() {
+		TCommunicationRequest() : RegisterType("TCommunicationRequest") {
 			onSuccess.Add(this, [=](T rObject) {
 				return onTSuccess(rObject);
 				
@@ -137,9 +154,11 @@ namespace Communications{
 	};
 
 	template<typename T>
-	class TDownloadCommunicationRequest : public TCommunicationRequest<T> {
+	class TTransferCommunicationRequest : public TCommunicationRequest<T> {
 
 	public:
+
+		TTransferCommunicationRequest() : RegisterType("TTransferCommunicationRequest"){}
 
 
 		int AddOnProgress(MtoObject * callableObject, function<int(float)> callback, string name) {
