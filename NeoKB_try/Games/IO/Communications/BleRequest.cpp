@@ -19,6 +19,19 @@ using namespace Framework::Scenes;
 
 
 
+BleRequest::~BleRequest()
+{
+	for (int i = 0; i < inputRawMessages.size(); i++) {
+		delete inputRawMessages[i];
+	}
+	inputRawMessages.clear();
+
+	for (int i = 0; i < inputRawMessagesBuffer.size(); i++) {
+		delete inputRawMessagesBuffer[i];
+	}
+	inputRawMessagesBuffer.clear();
+}
+
 int BleRequest::ChooseCommunicationComponentToPerform()
 {
 	map<string, deque<CommunicationRequest*>*>::iterator it;
@@ -42,6 +55,7 @@ int BleRequest::Perform(CommunicationComponent * cComponent)
 	bleAccess->RegisterBleRequest(this);
 
 	requestStartTime = system_clock::now();
+	exitRequested = false;
 
 	// preform 丟資訊出去然後等回覆
 
@@ -57,10 +71,16 @@ int BleRequest::Perform(CommunicationComponent * cComponent)
 	// 執行完畢以後就不讓ble access把raw message丟進來
 	bleAccess->UnregisterBleRequest(this);
 
+	// 查看成果有沒有錯，有錯的話就throw exception
+	checkAndProcessFailure();
+	
+	
 	// 如果有出現錯誤，會丟exception，就不會執行on success。這邊要注意request在執行完以後不能直接刪掉，要確定所有task都跑完才能刪
 	communicationComponent->GetScheduler()->AddTask([=]() {
 		/* 檢查Scene是否還存在，存在才能執行 */
-		if(SceneMaster::GetInstance().CheckScene(callbackScene))
+		if ((isCallbackByScene && SceneMaster::GetInstance().CheckScene(callbackScene)) ||
+			!isCallbackByScene ||
+			onSuccess.GetSize() == 0)
 			onSuccess.TriggerThenClear();
 		return 0;
 	});
@@ -100,6 +120,11 @@ int BleRequest::PushInputRawMessage(MeteoBluetoothMessage * rawMessage)
 		rawMessage = nullptr;
 	}
 
+	return 0;
+}
+
+int BleRequest::checkAndProcessFailure()
+{
 	return 0;
 }
 

@@ -38,23 +38,33 @@ int PostTextBleRequest::PostTextBleRequestMethod::PerformAndWait(BleRequest* thi
 				throw BleRequestException(BleResponseCode::RequestTimeout);
 			}
 
+			if (thisPostTextRequest->exitRequested) {
+				throw BleRequestException(BleResponseCode::ExitRequested);
+			}
+
 			/* 這段寫得很長，功能就只是把收到的ack丟給request而已 */
 			unique_lock<mutex> uLock(thisPostTextRequest->rawMessageMutex);
-			for (int i = 0; i < thisPostTextRequest->inputRawMessages.size(); i++) {
-				if (dynamic_cast<MeteoContextBluetoothMessage*>(thisPostTextRequest->inputRawMessages[i])) {
-					if (dynamic_cast<MeteoContextBluetoothMessage*>(thisPostTextRequest->inputRawMessages[i])->GetCommand() == ackCommand) {
+			while(thisPostTextRequest->inputRawMessages.size() > 0) {
+
+				MeteoBluetoothMessage* message = thisPostTextRequest->inputRawMessages.back();
+
+				if (dynamic_cast<MeteoContextBluetoothMessage*>(message)) {
+					if (dynamic_cast<MeteoContextBluetoothMessage*>(message)->GetCommand() == ackCommand) {
 
 						/* 檢查Scene是否還存在，存在才能執行 */
-						if (SceneMaster::GetInstance().CheckScene(thisPostTextRequest->callbackScene))
-							onAck.TriggerThenClear(dynamic_cast<MeteoContextBluetoothMessage*>(thisPostTextRequest->inputRawMessages[i])->GetContextInJson());
+						if ((thisPostTextRequest->isCallbackByScene && SceneMaster::GetInstance().CheckScene(thisPostTextRequest->callbackScene)) ||
+							!thisPostTextRequest->isCallbackByScene ||
+							onAck.GetSize() == 0)
+							onAck.TriggerThenClear(dynamic_cast<MeteoContextBluetoothMessage*>(message)->GetContextInJson());
 
 						return 0;
 
 					}
 				}
-				delete thisPostTextRequest->inputRawMessages[i];
+
+				thisPostTextRequest->inputRawMessages.pop_back();
+				delete message;
 			}
-			thisPostTextRequest->inputRawMessages.clear();
 
 			uLock.unlock();
 
@@ -90,22 +100,40 @@ BleRequestMethodType PostTextBleRequest::PostTextBleRequestMethod::GetMethodType
 	return BleRequestMethodType::PostText;
 }
 
-int PostTextBleRequest::PostTextBleRequestMethod::AddOnAck(BleRequest* thisRequest, MtoObject * callableObject, function<int(json)> callback, string name)
+int PostTextBleRequest::PostTextBleRequestMethod::AddOnAck(MtoObject * callableObject, function<int(json)> callback, string name)
 {
-
-	PostTextBleRequest* thisPostTextRequest = dynamic_cast<PostTextBleRequest*>(thisRequest);
-
-	/* 不是scene就不能用request的callback */
-	if (dynamic_cast<Scene*>(callableObject) == nullptr)
-		return -1;
-
-	/* 紀錄callback scene */
-	if (thisPostTextRequest->callbackScene == nullptr)
-		thisPostTextRequest->callbackScene = dynamic_cast<Scene*>(callableObject);
-
-	/* 不允許由不同scene註冊，會當作error */
-	if (thisPostTextRequest->callbackScene != dynamic_cast<Scene*>(callableObject))
-		return -1;
-
 	return onAck.Add(callableObject, callback, name);
+}
+
+PostTextBleRequest::PostTextBleRequest() : RegisterType("PostTextBleRequest")
+{
+	// 用來override的
+}
+
+PostTextBleRequest::PostTextBleRequest(MeteoBluetoothMessage * pMessage) : RegisterType("PostTextBleRequest")
+{
+	PostTextBleRequestMethod* method = new PostTextBleRequestMethod(pMessage);
+	requestMethod = method;
+}
+
+PostTextBleRequest::PostTextBleRequest(MeteoBluetoothMessage * pMessage, MeteoCommand aCommand) : RegisterType("PostTextBleRequest")
+{
+	PostTextBleRequestMethod* method = new PostTextBleRequestMethod(pMessage, aCommand);
+	requestMethod = method;
+}
+
+int PostTextBleRequest::AddOnAck(MtoObject * callableObject, function<int(json)> callback, string name)
+{
+	/* 檢查是不是由scene去add的 */
+	if (dynamic_cast<Scene*>(callableObject)) {
+		isCallbackByScene &= (dynamic_cast<Scene*>(callableObject) != nullptr);
+		if (isCallbackByScene)
+			callbackScene = dynamic_cast<Scene*>(callableObject);
+		else
+			callbackScene = nullptr;
+	}
+
+	dynamic_cast<PostTextBleRequestMethod*>(requestMethod)->AddOnAck(callableObject, callback, name);
+
+	return 0;
 }

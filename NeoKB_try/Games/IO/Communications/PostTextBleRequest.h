@@ -11,6 +11,13 @@ namespace Communications{
 
 	public:
 
+		PostTextBleRequest();
+
+		PostTextBleRequest(MeteoBluetoothMessage* pMessage);
+
+		PostTextBleRequest(MeteoBluetoothMessage* pMessage, MeteoCommand aCommand);
+
+		int AddOnAck(MtoObject * callableObject, function<int(json)> callback, string name = "HandleAck");
 
 	protected:
 
@@ -36,7 +43,7 @@ namespace Communications{
 
 			virtual BleRequestMethodType GetMethodType();
 
-			int AddOnAck(BleRequest* thisRequest, MtoObject * callableObject, function<int(json)> callback, string name = "HandleAck");
+			int AddOnAck(MtoObject * callableObject, function<int(json)> callback, string name = "HandleAck");
 
 		protected:
 

@@ -160,6 +160,7 @@ namespace Communications{
 		//
 		// 摘要:
 		//     與 HTTP 狀態 410 相同。 System.Net.HttpStatusCode.Gone 表示要求的資源已無法再使用。
+		// 更新: 代表呼叫該request的物件已經消失，因此該request也要消失
 		Gone = 410,
 		//
 		// 摘要:
@@ -226,7 +227,16 @@ namespace Communications{
 		/// <summary>
 		/// 字定義的，與手機中斷連線
 		/// </summary>
-		//DisconnectedFromBlePhone
+		DisconnectedFromBlePhone,
+		/// <summary>
+		/// 字定義的，mtu太小
+		/// </summary>
+		MtuTooSmall,
+		/// <summary>
+		/// 字定義的，被要求終止
+		/// </summary>
+		ExitRequested,
+
 
 	};
 

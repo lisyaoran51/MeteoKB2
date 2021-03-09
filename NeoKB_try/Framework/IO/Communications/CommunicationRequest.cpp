@@ -17,6 +17,19 @@ double CommunicationRequest::getElapsedSeconds()
 	return double(eMicroSeconds / 1000000) + double(eMicroSeconds % 1000000) * 0.000001;
 }
 
+long long CommunicationRequest::getSectionElapsedMicroseconds()
+{
+	requestCurrentTime = system_clock::now();
+
+	return duration_cast<microseconds>(requestCurrentTime - requestPointTime).count();
+}
+
+double CommunicationRequest::getSectionElapsedSeconds()
+{
+	long long eMicroSeconds = getSectionElapsedMicroseconds();
+	return double(eMicroSeconds / 1000000) + double(eMicroSeconds % 1000000) * 0.000001;
+}
+
 CommunicationRequest::CommunicationRequest() : RegisterType("CommunicationRequest")
 {
 }
@@ -47,6 +60,7 @@ int CommunicationRequest::Fail(exception & e)
 
 int CommunicationRequest::SetCallbackScene(Scene * cScene)
 {
+	isCallbackByScene = true;
 	callbackScene = cScene;
 	return 0;
 }
@@ -116,5 +130,11 @@ int CommunicationRequest::requestTimeStart()
 {
 	requestStartTime = system_clock::now();
 
+	return 0;
+}
+
+int CommunicationRequest::writeTimePoint()
+{
+	requestPointTime = system_clock::now();
 	return 0;
 }

@@ -2715,7 +2715,7 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 	
 	待完成工作：
 		各種request(要重新整理)、下載檔案後移動解壓縮(大概ok要測試)、gatt加入程式(bt classic刪掉)、遊戲紀錄存成sm檔(大概ok)、封包分流、斷線時把message和request全刪掉、
-		遊戲紀錄回傳、sm select panel修改、Instant測試、刪掉切換八度、場景轉換的ble訊號、反覆練談、delete child的memory leak
+		遊戲紀錄回傳、sm select panel修改、Instant測試、刪掉切換八度(ok)、場景轉換的ble訊號、反覆練談、delete child的memory leak
 	
 	之前沒完成的工作：
 		重播存檔、跳轉時反向觸發特效、刪除所有memory leak、琴音分為全長和AB段、手動踏板modifier、關機
@@ -2820,4 +2820,13 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 	刪除平移八度也ok了
 	
 3/8
-	把get bvinary改好一點，但是要確定怎麼abort request
+	把get bvinary改好一點，但是要確定怎麼abort request。
+	手機藍芽app沒辦法搜到device name
+	
+	硬殺掉thread沒有跨平台的做法，在linux藥用pthread，但是不知道殺掉會不會有意外狀況，最好解法還是在thread裡面放if(exit) return。
+	
+	目前拍片用版本：7e2c3f357e3e59519dc2196343ad36de8fd75209
+	
+3/9
+	改了很多request的內容，還有細節要從頭檢查到尾
+	

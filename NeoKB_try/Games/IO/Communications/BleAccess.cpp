@@ -119,22 +119,39 @@ int BleAccess::run()
 
 			CommunicationRequest* request = new IdentifyBleRequest("aaaaaaaa");
 
-			if (handleRequest(request) < 0) {
-
-				this_thread::sleep_for(std::chrono::milliseconds(500));
-
-				delete request;
-				request = nullptr;
-
-				continue;
-			}
-
-			communicationState = CommunicationState::Connected;
+			int identifyResult = handleRequest(request);
 
 			delete request;
 			request = nullptr;
 
-			break;
+			if (identifyResult == 0) {		// 解碼成功
+
+				communicationState = CommunicationState::Connected;
+
+				break;
+			}
+			else if (identifyResult < 0) {	// timeout
+
+				this_thread::sleep_for(std::chrono::milliseconds(500));
+
+				continue;
+			}
+			else if (identifyResult == 1) {	// 解碼失敗
+
+
+				// 解碼錯誤，斷線
+				CommunicationRequest* disconnectRequest = new FaultIdentityBleRequest();
+				handleRequest(disconnectRequest);
+
+				delete disconnectRequest;
+				disconnectRequest = nullptr;
+
+				this_thread::sleep_for(std::chrono::milliseconds(500));
+				// 要將ble連接斷開
+
+				communicationState = CommunicationState::Failed;
+				continue;
+			}
 
 		}
 
@@ -148,13 +165,15 @@ int BleAccess::run()
 
 			result = handleRequest(request);		// 執行handleRequest，result就會變成undeclared
 
-			if (result >= 0) {
+			if (result >= 0) {						// 0:執行成功，1:執行失敗(一樣要把這個request刪掉)
 				communicationRequests.pop_back();
 
 				delete request;
 				request = nullptr;
 			}
-			
+			else if (result == -1) {				// timeout，會直接flush所有request
+				continue;
+			}
 		}
 	}
 
@@ -186,7 +205,7 @@ int BleAccess::handleRequest(CommunicationRequest * communicationRequest)
 			if (failureCount < 3)
 				return -1;
 
-			// 如果一職失敗，就把所有的request都Fail調
+			// 如果一職timeout，就把所有的request都Fail調
 			communicationState == CommunicationState::Failed;
 			Flush();
 			return 0;
@@ -203,7 +222,7 @@ int BleAccess::handleRequest(CommunicationRequest * communicationRequest)
 		communicationRequest->Fail(e);
 	}
 
-	return -1;
+	return 1;	// 代表執行失敗
 }
 
 int BleAccess::handleOnRawCommand(InputState * inputState)

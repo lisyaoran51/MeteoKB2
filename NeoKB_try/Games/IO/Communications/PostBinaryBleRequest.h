@@ -26,7 +26,9 @@ namespace Communications{
 		/// 有時一個request可以同時被wifi、ble、bt等多種communication component執行，這時request要先接收目前可選用的component有哪些，自己選定要用哪種component
 		/// 然後再執行
 		/// </summary>
-		virtual int ChooseCommunicationComponentToPerform();
+		//virtual int ChooseCommunicationComponentToPerform();
+
+		int AddOnAck(MtoObject * callableObject, function<int(json)> callback, string name = "HandleAck");
 
 		int AddOnFinish(MtoObject * callableObject, function<int()> callback, string name = "HandleFinish");
 
@@ -59,6 +61,8 @@ namespace Communications{
 			virtual int PerformAndWait(BleRequest* thisRequest);
 
 			virtual BleRequestMethodType GetMethodType();
+
+			int AddOnAck(MtoObject * callableObject, function<int(json)> callback, string name = "HandleAck");
 
 			int AddOnFinish(MtoObject * callableObject, function<int()> callback, string name = "HandleFinish");
 

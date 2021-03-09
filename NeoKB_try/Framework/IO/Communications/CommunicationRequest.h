@@ -79,7 +79,7 @@ namespace Communications{
 		/// <summary>
 		/// 某個段落的時間，有時候只要抓某個段落經過多久，就以這個來計時
 		/// </summary>
-		system_clock::time_point requestpointTime;
+		system_clock::time_point requestPointTime;
 
 		/// <summary>
 		/// 預設5秒就time out
@@ -96,12 +96,14 @@ namespace Communications{
 		/// <summary>
 		/// 在thread外面呼叫，可以讓正在perform的thread結束
 		/// </summary>
-		bool exitRequest = false;
+		bool exitRequested = false;
 
 		/// <summary>
 		/// 這個沒有用了
 		/// </summary>
 		CommunicationComponent* communicationComponent = nullptr;
+
+		bool isCallbackByScene = true;
 
 		Scene* callbackScene = nullptr;
 
@@ -117,11 +119,26 @@ namespace Communications{
 		int requestTimeStart();
 
 		/// <summary>
+		/// request插入計時點
+		/// </summary>
+		int writeTimePoint();
+
+		/// <summary>
 		/// 取得目前執行個體所測量的已耗用時間總和。(看stopwatch clock)
 		/// </summary>
 		long long getElapsedMicroseconds();
 
 		double getElapsedSeconds();
+
+		/// <summary>
+		/// 取得目前執行個體從插入計時點到現在所耗的時間總和(部分區間)
+		/// </summary>
+		long long getSectionElapsedMicroseconds();
+
+		/// <summary>
+		/// 取得目前執行個體從插入計時點到現在所耗的時間總和(部分區間)
+		/// </summary>
+		double getSectionElapsedSeconds();
 
 		virtual int fail(exception& e) = 0;
 

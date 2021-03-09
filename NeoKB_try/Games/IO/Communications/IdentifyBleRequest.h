@@ -18,6 +18,10 @@ namespace Communications{
 
 	protected:
 
+		string identifyCode = "";
+
+		virtual int checkAndProcessFailure();
+
 	};
 
 }}}

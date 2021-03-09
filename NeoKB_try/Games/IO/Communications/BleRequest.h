@@ -32,6 +32,8 @@ namespace Communications{
 
 	public:
 
+		~BleRequest();
+
 		/// <summary>
 		/// 有時一個request可以同時被wifi、ble、bt等多種communication component執行，這時request要先接收目前可選用的component有哪些，自己選定要用哪種component
 		/// 然後再執行
@@ -57,6 +59,11 @@ namespace Communications{
 		mutable mutex rawMessageMutex;
 
 		mutable mutex rawMessageBufferMutex;
+
+		/// <summary>
+		/// 檢查request執行完的結果有沒有問題，有問題就丟exception
+		/// </summary>
+		virtual int checkAndProcessFailure();
 
 		/// <summary>
 		/// 好像要自己把on fail.trigger擺到這裡面，on fail不能擺在public Fail裡

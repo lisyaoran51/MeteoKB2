@@ -34,25 +34,33 @@ int GetTextBleRequest::GetTextBleRequestMethod::PerformAndWait(BleRequest * this
 			throw BleRequestException(BleResponseCode::RequestTimeout);
 		}
 
+		if (thisGetTextRequest->exitRequested) {
+			throw BleRequestException(BleResponseCode::ExitRequested);
+		}
+
 		/* 確認收到的command是不是return command */
 		unique_lock<mutex> uLock(thisGetTextRequest->rawMessageMutex);
-		for (int i = 0; i < thisGetTextRequest->inputRawMessages.size(); i++) {
-			if (dynamic_cast<MeteoContextBluetoothMessage*>(thisGetTextRequest->inputRawMessages[i])) {
-				if (dynamic_cast<MeteoContextBluetoothMessage*>(thisGetTextRequest->inputRawMessages[i])->GetCommand() == returnCommand) {
+		while (thisGetTextRequest->inputRawMessages.size() > 0) {
+			MeteoBluetoothMessage* message = thisGetTextRequest->inputRawMessages.back();
+
+			if (dynamic_cast<MeteoContextBluetoothMessage*>(message)) {
+				if (dynamic_cast<MeteoContextBluetoothMessage*>(message)->GetCommand() == returnCommand) {
 
 					// 確認Scene還存不存在，如果不存在就不執行callback，避免該scene已經被刪掉的情況
-					/* 檢查Scene是否還存在，存在才能執行 */
-					if (SceneMaster::GetInstance().CheckScene(thisGetTextRequest->callbackScene))
-						onReturn.TriggerThenClear(dynamic_cast<MeteoContextBluetoothMessage*>(thisGetTextRequest->inputRawMessages[i])->GetContextInJson());
+					if ((thisGetTextRequest->isCallbackByScene && SceneMaster::GetInstance().CheckScene(thisGetTextRequest->callbackScene)) ||
+						!thisGetTextRequest->isCallbackByScene ||
+						onReturn.GetSize() == 0)
+						onReturn.TriggerThenClear(dynamic_cast<MeteoContextBluetoothMessage*>(message)->GetContextInJson());
+					else
+						throw BleRequestException(BleResponseCode::Gone);
 
 					return 0;
 
 				}
 			}
-			delete thisGetTextRequest->inputRawMessages[i];
+			thisGetTextRequest->inputRawMessages.pop_back();
+			delete message;
 		}
-		thisGetTextRequest->inputRawMessages.clear();
-
 		uLock.unlock();
 
 		this_thread::sleep_for(std::chrono::milliseconds(100));
@@ -88,4 +96,47 @@ int GetTextBleRequest::GetTextBleRequestMethod::PerformAndWait(BleRequest * this
 BleRequestMethodType GetTextBleRequest::GetTextBleRequestMethod::GetMethodType()
 {
 	return BleRequestMethodType::GetText;
+}
+
+string GetTextBleRequest::GetTextBleRequestMethod::GetReturnText()
+{
+	return returnText;
+}
+
+json GetTextBleRequest::GetTextBleRequestMethod::GetReturnJson()
+{
+	return json(returnText);
+}
+
+int GetTextBleRequest::GetTextBleRequestMethod::AddOnReturn(MtoObject * callableObject, function<int(json)> callback, string name)
+{
+
+	onReturn.Add(callableObject, callback, name);
+	return 0;
+}
+
+GetTextBleRequest::GetTextBleRequest() : RegisterType("GetTextBleRequest")
+{
+	// 用來override的
+}
+
+GetTextBleRequest::GetTextBleRequest(MeteoBluetoothMessage * gMessage, MeteoCommand rCommand) : RegisterType("GetTextBleRequest")
+{
+	GetTextBleRequestMethod* method = new GetTextBleRequestMethod(gMessage, rCommand);
+	requestMethod = method;
+}
+
+int GetTextBleRequest::AddOnReturn(MtoObject * callableObject, function<int(json)> callback, string name)
+{
+	/* 檢查是不是由scene去add的 */
+	if (dynamic_cast<Scene*>(callableObject)) {
+		isCallbackByScene &= (dynamic_cast<Scene*>(callableObject) != nullptr);
+		if (isCallbackByScene)
+			callbackScene = dynamic_cast<Scene*>(callableObject);
+		else
+			callbackScene = nullptr;
+	}
+
+	dynamic_cast<GetTextBleRequestMethod*>(requestMethod)->AddOnReturn(callableObject, callback, name);
+	return 0;
 }
