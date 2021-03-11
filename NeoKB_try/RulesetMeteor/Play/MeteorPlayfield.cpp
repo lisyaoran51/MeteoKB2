@@ -47,15 +47,26 @@ int MeteorPlayfield::load()
 	if (!f)
 		throw runtime_error("int MeteorPlayfield::load() : FrameworkConfigManager not found in cache.");
 
-	return load(f, m);
+	TimeController* t = GetCache<TimeController>("TimeController");
+
+	if (!t)
+		throw runtime_error("int MeteorPlayfield::load() : TimeController not found in cache.");
+
+	return load(f, m, t);
 }
 
-int MeteorPlayfield::load(FrameworkConfigManager* f, MeteorConfigManager * m)
+int MeteorPlayfield::load(FrameworkConfigManager* f, MeteorConfigManager * m, TimeController* t)
 {
 	meteorEventProcessorMaster = dynamic_cast<MeteorEventProcessorMaster*>(eventProcessorMaster);
 
 	if (meteorEventProcessorMaster == nullptr) {
 		throw runtime_error("MeteorPlayfield::load() : meteorEventProcessorMaster is null.");
+	}
+
+	meteorTimeController = dynamic_cast<MeteorTimeController*>(t);
+
+	if (meteorTimeController == nullptr) {
+		throw runtime_error("MeteorPlayfield::load() : meteorTimeController is null.");
 	}
 
 	isGameControllingPitchState = false; // 暫時先這樣，Debug用
@@ -256,6 +267,13 @@ MeteorPlayfield::MeteorPlayfield(): Playfield(), RegisterType("MeteorPlayfield")
 	// functional裡面的bind不能對overloading問題
 	// https://stackoverflow.com/questions/4159487/stdbind-overload-resolution
 	registerLoad(bind((int(MeteorPlayfield::*)())&MeteorPlayfield::load, this));
+}
+
+int MeteorPlayfield::Add(EventProcessor<Event>* ep)
+{
+	meteorTimeController->SetLastEventOverTime(ep->GetEvent()->GetStartTime() + ep->GetEvent()->GetLifeTime());
+
+	return Playfield::Add(ep);
 }
 
 MapPitchShifter * MeteorPlayfield::GetMapPitchShifter()

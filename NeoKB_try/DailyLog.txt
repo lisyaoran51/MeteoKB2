@@ -2714,11 +2714,12 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 	gatt大概搞定，可以回來繼續寫主程式
 	
 	待完成工作：
-		各種request(要重新整理)、下載檔案後移動解壓縮(大概ok要測試)、gatt加入程式(bt classic刪掉)、遊戲紀錄存成sm檔(大概ok)、封包分流、斷線時把message和request全刪掉、
-		遊戲紀錄回傳、sm select panel修改、Instant測試、刪掉切換八度(ok)、場景轉換的ble訊號、反覆練談、delete child的memory leak
+		各種request(還沒檢查)、下載檔案後移動解壓縮(大概ok要測試)、gatt加入程式(bt classic刪掉)、遊戲紀錄存成sm檔(大概ok)、封包分流、斷線時把message和request全刪掉、
+		遊戲紀錄回傳、sm select panel修改、Instant測試、刪掉切換八度(ok)、場景轉換的ble訊號、反覆練談、delete child的memory leak、快進時把event都關掉(ok)、快進後遊戲結束的判斷(ok)、
+		record模式、手機測試、mcu寫完
 	
 	之前沒完成的工作：
-		重播存檔、跳轉時反向觸發特效、刪除所有memory leak、琴音分為全長和AB段、手動踏板modifier、關機
+		重播存檔、跳轉時反向觸發特效、刪除所有memory leak、琴音分為全長和AB段(放棄)、手動踏板modifier、關機(未測試)
 		sbs音量設定、藍芽操控播音、紀錄每個modifier到藍芽架構裡、藍芽傳黨、開機燈號、當機燈號、storage分流、讀取音符音量max127、erupt的黑鍵位置錯誤
 		getstream檢查資料夾存在、
 		mcu、關閉wifi、daemon、OS設定、me555、

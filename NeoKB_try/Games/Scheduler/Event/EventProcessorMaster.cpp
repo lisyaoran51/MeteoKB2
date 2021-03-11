@@ -39,14 +39,19 @@ int EventProcessorMaster::load()
 	if (!o)
 		throw runtime_error("int EventProcessorMaster::load() : OutputManager not found in cache.");
 
-	return load(f, e, o);
+	TimeController* t = GetCache<TimeController>("TimeController");
+	if (!t)
+		throw runtime_error("int EventProcessorMaster::load() : TimeController not found in cache.");
+
+	return load(f, e, o, t);
 }
 
 
-int EventProcessorMaster::load(FrameworkConfigManager * f, EventProcessorFilter * e, OutputManager* o)
+int EventProcessorMaster::load(FrameworkConfigManager * f, EventProcessorFilter * e, OutputManager* o, TimeController* t)
 {
 	eventProcessorFilter = e;
 	outputManager = o;
+	timeController = t;
 
 	isPresent = true;
 	// TODO: 去framework config manager拿period map要切成多寬一段 ex:每5秒一段
@@ -166,7 +171,7 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 	}
 
 	/*
-	 * 正轉的狀態或是快轉的狀態
+	 * 正轉的狀態(快轉的狀態不執行，避免所有事件突然全部跳出來)
 	 */
 	if (elapsedTime > 0) {
 
@@ -199,29 +204,32 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 			if (eventProcessors[i]->GetStartTime() >= currentTime)
 				continue;
 
-			// TODO: 直接改成 eventProcessor.Process()就好，下面可以全部刪掉
-			if (eventProcessors[i]->GetEventProcessorType() == EventProcessorType::Io) {
-				IoEventProcessorInterface* ioEventProcessors = dynamic_cast<IoEventProcessorInterface*>(eventProcessors[i]);
-				if (ioEventProcessors) {
-					if (ioEventProcessors->GetStartTime() < currentTime && ioEventProcessors->GetIsTransferable()) {
-						LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent : found io event processor [" << ioEventProcessors->GetStartTime() << "].";
-						ioEventProcessors->ProcessIo();
+			if (timeController->GetTimeControllerState() != TimeControllerState::FastForward) {
+				// TODO: 直接改成 eventProcessor.Process()就好，下面可以全部刪掉
+				if (eventProcessors[i]->GetEventProcessorType() == EventProcessorType::Io) {
+					IoEventProcessorInterface* ioEventProcessors = dynamic_cast<IoEventProcessorInterface*>(eventProcessors[i]);
+					if (ioEventProcessors) {
+						if (ioEventProcessors->GetStartTime() < currentTime && ioEventProcessors->GetIsTransferable()) {
+							LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent : found io event processor [" << ioEventProcessors->GetStartTime() << "].";
+							ioEventProcessors->ProcessIo();
+						}
 					}
+					continue;
 				}
-				continue;
-			}
-			
-			if (eventProcessors[i]->GetEventProcessorType() == EventProcessorType::Instrument) {
-				InstrumentEventProcessorInterface* instrumentEventProcessor = dynamic_cast<InstrumentEventProcessorInterface*>(eventProcessors[i]);
-				if (instrumentEventProcessor) {
-					if (instrumentEventProcessor->GetStartTime() < currentTime && instrumentEventProcessor->GetIsTransferable()) {
-						LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent : found instrument event processor [" << instrumentEventProcessor->GetStartTime() << "].";
-						instrumentEventProcessor->ControlInstrument();
+
+				if (eventProcessors[i]->GetEventProcessorType() == EventProcessorType::Instrument) {
+					InstrumentEventProcessorInterface* instrumentEventProcessor = dynamic_cast<InstrumentEventProcessorInterface*>(eventProcessors[i]);
+					if (instrumentEventProcessor) {
+						if (instrumentEventProcessor->GetStartTime() < currentTime && instrumentEventProcessor->GetIsTransferable()) {
+							LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent : found instrument event processor [" << instrumentEventProcessor->GetStartTime() << "].";
+							instrumentEventProcessor->ControlInstrument();
+						}
 					}
+					continue;
 				}
-				continue;
 			}
 
+			/* 由於playfield平移事件就算快轉也還是要執行，所以不用判斷time controller state */
 			if (eventProcessors[i]->GetEventProcessorType() == EventProcessorType::Playfield) {
 				PlayfieldEventProcessorInterface* playfieldEventProcessor = dynamic_cast<PlayfieldEventProcessorInterface*>(eventProcessors[i]);
 				if (playfieldEventProcessor) {

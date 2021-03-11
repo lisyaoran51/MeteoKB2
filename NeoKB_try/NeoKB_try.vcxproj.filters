@@ -2076,6 +2076,9 @@
     <ClCompile Include="Games\IO\Communications\IdentifyBleRequest.cpp">
       <Filter>來源檔案\Games\IO\Communications</Filter>
     </ClCompile>
+    <ClCompile Include="Games\IO\Communications\FaultIdentityBleRequest.cpp">
+      <Filter>來源檔案\Games\IO\Communications</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="DailyLog.txt">
@@ -3455,6 +3458,9 @@
       <Filter>標頭檔\Util</Filter>
     </ClInclude>
     <ClInclude Include="Games\IO\Communications\IdentifyBleRequest.h">
+      <Filter>標頭檔\Games\IO\Communications</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\IO\Communications\FaultIdentityBleRequest.h">
       <Filter>標頭檔\Games\IO\Communications</Filter>
     </ClInclude>
   </ItemGroup>

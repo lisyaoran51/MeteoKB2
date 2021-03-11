@@ -35,11 +35,16 @@ namespace Play{
 
 		int load();
 
-		int load(FrameworkConfigManager* f, MeteorConfigManager* m);
+		int load(FrameworkConfigManager* f, MeteorConfigManager* m, TimeController* t);
 
 	public:
 
 		MeteorPlayfield();
+
+		/// <summary>
+		/// 紀錄event的最終時間，用來判斷遊戲結束時間
+		/// </summary>
+		virtual int Add(EventProcessor<Event>* ep);
 
 		MapPitchShifter* GetMapPitchShifter();
 
@@ -71,6 +76,8 @@ namespace Play{
 	protected:
 
 		MeteorEventProcessorMaster* meteorEventProcessorMaster = nullptr;
+
+		MeteorTimeController* meteorTimeController = nullptr;
 
 		Pitch startPitch;
 

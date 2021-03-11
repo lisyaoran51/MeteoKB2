@@ -79,6 +79,21 @@ int LinearSpeedAdjuster::Reset()
 	return 0;
 }
 
+SpeedAdjusterState LinearSpeedAdjuster::GetSpeedAdjusterState()
+{
+	if (GetIsAdjustingTime() || GetIsLastAdjustingTime()) {
+		if (seekTimeLeft >= 0)
+			return SpeedAdjusterState::FastForward;
+		else
+			return SpeedAdjusterState::Backward;
+	}
+	else if(GetIsFreezingTime() || GetIsLastFreezingTime()){
+		return SpeedAdjusterState::Freezing;
+	}
+
+	return SpeedAdjusterState::Normal;
+}
+
 int LinearSpeedAdjuster::SetSeekTime(double sTime)
 {
 	seekTimeLeft += sTime;

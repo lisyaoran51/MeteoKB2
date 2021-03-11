@@ -76,6 +76,14 @@ MeteorTimeController::MeteorTimeController() : RegisterType("MeteorTimeControlle
 	registerLoad(bind(static_cast<int(MeteorTimeController::*)(void)>(&MeteorTimeController::load), this));
 }
 
+int MeteorTimeController::SetLastEventOverTime(double lEventOverTime)
+{
+	if (lEventOverTime > lastEventOverTime)
+		lastEventOverTime = lEventOverTime;
+
+	return 0;
+}
+
 int MeteorTimeController::SetSectionTime(vector<float>* sTime)
 {
 	for (int i = 0; i < sTime->size(); i++) {
@@ -186,6 +194,14 @@ int MeteorTimeController::LoadOnComplete()
 		throw runtime_error("MeteorTimeController::load() : EventProcessorFilter not found in cache.");
 
 	return loadOnComplete(e);
+}
+
+bool MeteorTimeController::checkIsGameOver()
+{
+	if (controllableClock->GetCurrentTime() > lastEventOverTime + 3.0)
+		return true;
+	else 
+		return false;
 }
 
 int MeteorTimeController::onButtonDown(InputState * inputState, InputKey button)

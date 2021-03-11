@@ -21,6 +21,7 @@ namespace Commands{
 		ReturnHardwarIdentity	,
 		SendEncryptedIdentifyMessage	,
 		ReturnDecryptedIdentifyMessage	,
+		FaultIdentity			,
 		ReadAppData				,
 		ReturnAppData			,
 		ReadUserData			,

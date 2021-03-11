@@ -23,6 +23,8 @@ namespace SpeedAdjusters {
 
 		virtual int Reset();
 
+		virtual SpeedAdjusterState GetSpeedAdjusterState();
+
 		virtual int SetSeekTime(double sTime);
 
 		virtual double GetSeekTime();

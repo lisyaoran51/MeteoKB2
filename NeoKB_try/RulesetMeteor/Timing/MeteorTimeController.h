@@ -54,6 +54,8 @@ namespace Timing {
 
 		MeteorTimeController();
 
+		int SetLastEventOverTime(double lEventOverTime);
+
 		/*---------反覆練彈專用---------*/
 		/// <summary>
 		/// 要拿到每個小節的秒數，之後再轉小節旋鈕時才能轉到對的位置。如果沒有給小節秒數的話，小節旋鈕就統一跳3秒
@@ -78,9 +80,16 @@ namespace Timing {
 
 	protected:
 
-		virtual int LoadOnComplete();
+		double lastEventOverTime = -1;
 
 		MeteorTimeControllerMode timeControllerMode = MeteorTimeControllerMode::MusicGame;
+
+		virtual int LoadOnComplete();
+
+		/// <summary>
+		/// 檢查遊戲是否結束，可以根據遊戲event是否全部跑完來判斷，也可以根據不同規則判斷
+		/// </summary>
+		virtual bool checkIsGameOver();
 
 		/*---------反覆練彈專用---------*/ // 這個不適應該擺再repeat practice event processor裡面嗎?
 		bool hasSection = false;

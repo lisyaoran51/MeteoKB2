@@ -165,7 +165,9 @@ int Player::load(MeteoConfigManager* m, Instrument* instru)
 	hudDisplay->BindTimeController(timeController);
 
 
-	scoreProcessor->AddOnAllJudged(this, bind(&Player::onCompletion, this), "Player::onCompletion"); // 顯示成績結算
+	// 這行要改掉，應該用時間來判斷，而不是用judgement來判斷
+	//scoreProcessor->AddOnAllJudged(this, bind(&Player::onCompletion, this), "Player::onCompletion"); // 顯示成績結算
+	timeController->AddOnGameOver(this, bind(&Player::onCompletion, this), "Player::onCompletion"); // 遊戲結束，顯示成績結算
 
 	return 0;
 }

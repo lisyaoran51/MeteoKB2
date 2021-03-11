@@ -7,6 +7,15 @@ namespace Framework {
 namespace Timing {
 namespace SpeedAdjusters {
 
+	enum class SpeedAdjusterState {
+		None,
+		Normal,
+		FastForward,
+		Backward,
+		Freezing
+
+	};
+
 	class SpeedAdjuster : public Container{
 
 	public:
@@ -20,6 +29,8 @@ namespace SpeedAdjusters {
 		virtual int Pause();
 
 		virtual int Resume();
+
+		virtual SpeedAdjusterState GetSpeedAdjusterState() = 0;
 
 		virtual int SetSeekTime(double sTime) = 0;
 

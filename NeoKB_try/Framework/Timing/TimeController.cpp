@@ -56,10 +56,20 @@ int TimeController::update()
 		Resume();
 	}
 
+	if (checkIsGameOver()) {
+		LOG(LogLevel::Info) << "TimeController::update() : game over.";
+		onGameOver.TriggerThenClear();
+	}
+
 
 	LOG(LogLevel::Finest) << "TimeController::update() : end.";
 
 	return 0;
+}
+
+bool TimeController::checkIsGameOver()
+{
+	return false;
 }
 
 /* 暫時不寫這段，以後響到要怎麼寫再回來改
@@ -200,6 +210,25 @@ int TimeController::SetIsAllowSeek(bool iAllowSeek)
 bool TimeController::GetIsAllowSeek()
 {
 	return isAllowSeek;
+}
+
+TimeControllerState TimeController::GetTimeControllerState()
+{
+	switch (speedAdjuster->GetSpeedAdjusterState()) {
+	case SpeedAdjusterState::Backward:
+		return TimeControllerState::Backward;
+		break;
+	case SpeedAdjusterState::FastForward:
+		return TimeControllerState::FastForward;
+		break;
+	case SpeedAdjusterState::Freezing:
+		return TimeControllerState::Freezing;
+		break;
+	case SpeedAdjusterState::Normal:
+		return TimeControllerState::Normal;
+		break;
+	}
+	return TimeControllerState::None;
 }
 
 /* 暫時不寫這段，以後響到要怎麼寫再回來改

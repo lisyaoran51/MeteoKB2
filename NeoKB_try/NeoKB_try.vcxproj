@@ -82,6 +82,7 @@
     <ClCompile Include="Games\IO\Communications\BleAccess.cpp" />
     <ClCompile Include="Games\IO\Communications\BleRequest.cpp" />
     <ClCompile Include="Games\IO\Communications\BleRequestException.cpp" />
+    <ClCompile Include="Games\IO\Communications\FaultIdentityBleRequest.cpp" />
     <ClCompile Include="Games\IO\Communications\GetBinaryBleRequest.cpp" />
     <ClCompile Include="Games\IO\Communications\GetTextBleRequest.cpp" />
     <ClCompile Include="Games\IO\Communications\IdentifyBleRequest.cpp" />
@@ -487,6 +488,7 @@
     <ClInclude Include="Games\IO\Communications\BleRequestException.h" />
     <ClInclude Include="Games\IO\Communications\BtClassicAccess.h" />
     <ClInclude Include="Games\IO\Communications\BtClassicRequest.h" />
+    <ClInclude Include="Games\IO\Communications\FaultIdentityBleRequest.h" />
     <ClInclude Include="Games\IO\Communications\GetBinaryBleRequest.h" />
     <ClInclude Include="Games\IO\Communications\GetTextBleRequest.h" />
     <ClInclude Include="Games\IO\Communications\IdentifyBleRequest.h" />

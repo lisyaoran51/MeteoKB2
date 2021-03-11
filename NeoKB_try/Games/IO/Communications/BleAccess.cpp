@@ -2,6 +2,7 @@
 
 #include <iterator>
 #include "IdentifyBleRequest.h"
+#include "FaultIdentityBleRequest.h"
 
 
 
@@ -140,7 +141,7 @@ int BleAccess::run()
 
 
 				// 解碼錯誤，斷線
-				CommunicationRequest* disconnectRequest = new FaultIdentityBleRequest();
+				CommunicationRequest* disconnectRequest = new FaultIdentityBleRequest("Authorization failed.");
 				handleRequest(disconnectRequest);
 
 				delete disconnectRequest;
@@ -171,7 +172,7 @@ int BleAccess::run()
 				delete request;
 				request = nullptr;
 			}
-			else if (result == -1) {				// timeout，會直接flush所有request
+			else if (result == -1) {				// timeout三次，會直接flush所有request
 				continue;
 			}
 		}
@@ -208,7 +209,7 @@ int BleAccess::handleRequest(CommunicationRequest * communicationRequest)
 			// 如果一職timeout，就把所有的request都Fail調
 			communicationState == CommunicationState::Failed;
 			Flush();
-			return 0;
+			return -1;
 
 			break;
 		}

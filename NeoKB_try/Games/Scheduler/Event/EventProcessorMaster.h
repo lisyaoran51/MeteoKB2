@@ -18,6 +18,7 @@
 #include "../../../Framework/Configurations/FrameworkConfigManager.h"
 #include "../../../Framework/Input/KeyBindings/KeyBindingHandler.h"
 #include "../../../Framework/Output/OutputManager.h"
+#include "../../../Framework/Timing/TimeController.h"
 
 
 
@@ -31,6 +32,7 @@ using namespace Framework::Timing;
 using namespace Framework::Configurations;
 using namespace Framework::Input::KeyBindings;
 using namespace Framework::Output;
+
 
 
 
@@ -57,7 +59,7 @@ namespace Events {
 
 		int load();
 
-		int load(FrameworkConfigManager* f, EventProcessorFilter* e, OutputManager* o);
+		int load(FrameworkConfigManager* f, EventProcessorFilter* e, OutputManager* o, TimeController* t);
 
 		bool isFirstUpdate = true;
 	public:
@@ -110,6 +112,8 @@ namespace Events {
 		vector<EventProcessor<Event>*> filteredTempStaticEventProcessors;
 
 		OutputManager* outputManager = nullptr;
+
+		TimeController* timeController = nullptr;
 
 		int processEvent(MTO_FLOAT elapsedTime);
 

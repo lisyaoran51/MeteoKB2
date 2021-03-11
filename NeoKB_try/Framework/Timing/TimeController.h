@@ -20,6 +20,14 @@ using namespace Framework::Input::Messages;
 namespace Framework {
 namespace Timing {
 
+	enum class TimeControllerState {
+		None,
+		Normal,
+		FastForward,
+		Backward,
+		Freezing
+	};
+
 	/// <summary>
 	/// 擺在player下面，用來控制遊戲速度和暫停、跳小節
 	///	</summary>
@@ -72,6 +80,8 @@ namespace Timing {
 
 		bool GetIsAllowSeek();
 
+		TimeControllerState GetTimeControllerState();
+
 		template<class _Type>
 		int AddOnRetry(_Type* callableObject, function<int()> callback, string name = "HandleRetryRequest") {
 			onRetryRequested.Add(callableObject, callback, name);
@@ -81,6 +91,12 @@ namespace Timing {
 		template<class _Type>
 		int AddOnQuit(_Type* callableObject, function<int()> callback, string name = "HandleQuitRequest") {
 			onQuitRequested.Add(callableObject, callback, name);
+			return 0;
+		}
+
+		template<class _Type>
+		int AddOnGameOver(_Type* callableObject, function<int()> callback, string name = "HandleGameOver") {
+			onGameOver.Add(callableObject, callback, name);
 			return 0;
 		}
 
@@ -130,6 +146,13 @@ namespace Timing {
 
 		ActionList<int> onRetryRequested;
 		ActionList<int> onQuitRequested;
+		ActionList<int> onGameOver;
+
+		/// <summary>
+		/// 檢查遊戲是否結束，可以根據遊戲event是否全部跑完來判斷，也可以根據不同規則判斷
+		/// </summary>
+		virtual bool checkIsGameOver();
+
 
 
 		/* 暫時不寫這段，以後響到要怎麼寫再回來改
