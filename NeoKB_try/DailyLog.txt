@@ -2831,3 +2831,55 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 3/9
 	改了很多request的內容，還有細節要從頭檢查到尾
 	
+3/15
+	pwm的大小用CMR和CNR就可以控制
+	
+3/16
+	找到PWMB不動的原因了，在sysinit裡面有很多設定要開，PWM才會動：
+	
+	1. 設clock source
+	
+	/* Enable IP clock */
+    CLK->APBCLK = CLK_APBCLK_UART0_EN_Msk | CLK_APBCLK_PWM01_EN_Msk | CLK_APBCLK_PWM23_EN_Msk | CLK_APBCLK_PWM45_EN_Msk | CLK_APBCLK_PWM67_EN_Msk;
+    /* IP clock source */
+    CLK->CLKSEL1 = CLK_CLKSEL1_UART_S_PLL;
+    /* IP clock source */
+    CLK->CLKSEL1 = CLK_CLKSEL1_PWM01_S_HXT | CLK_CLKSEL1_PWM23_S_HXT;
+		CLK->CLKSEL2 = CLK_CLKSEL2_PWM45_S_HXT | CLK_CLKSEL2_PWM67_S_HXT;
+
+    /* Reset PWMA channel0~channel3 */
+    SYS->IPRSTC2 = SYS_IPRSTC2_PWM03_RST_Msk;
+    SYS->IPRSTC2 = 0;
+		
+		SYS->IPRSTC2 = SYS_IPRSTC2_PWM47_RST_Msk;
+    SYS->IPRSTC2 = 0;
+	
+	2. 開multi function
+	
+	/* Set P2 multi-function pins for PWMB Channel0~3  */
+    SYS->P2_MFP &= ~(SYS_MFP_P20_Msk | SYS_MFP_P21_Msk | SYS_MFP_P22_Msk | SYS_MFP_P23_Msk | SYS_MFP_P24_Msk | SYS_MFP_P25_Msk | SYS_MFP_P26_Msk | SYS_MFP_P27_Msk);
+    SYS->P2_MFP |= SYS_MFP_P20_PWM0 | SYS_MFP_P21_PWM1 | SYS_MFP_P22_PWM2 | SYS_MFP_P23_PWM3 | SYS_MFP_P24_PWM4 | SYS_MFP_P25_PWM5 | SYS_MFP_P26_PWM6 | SYS_MFP_P27_PWM7;
+	
+	剩下就用範例的setpwm就可以直接用了
+	
+	用範例中的continuous scan mode可以找到Adc的程式，不過adc抓出來的數值是反指數，要換算成線性
+	值6~3668，等式為a(exp127) = 3663，可得出a=1.06674768，以後要換算線性數值y = ln(x) / ln(1.06674768)
+	
+	調試以後，暫時用1~3720區間，結果值1~192
+	計算式 conversedData = log((double)(3710 - i32ConversionData)) / log(1.04375021467);
+	目前比較穩定
+	
+	
+3/18
+	app重開，gatt斷線後重連的時候，會把上一次斷線時沒從手機藍芽buffer拿出來的訊號收進去一次，可能會造成錯誤，所以剛連線時應該要有一個擋訊號的機制
+	
+	樹梅派的notify丟的很快，但是手機端收的很慢，大概速度只有1/4，所以如果要丟大量訊號(傳檔)還是得要有ack機制比較好
+	有的時候notify會看接收的人的速度，有的時候不會，如果有可能不會的話，就要有ack機制
+	
+	enable notify和set mtu都要在連線完成以後過一下下才能執行，連線好時立刻執行的話手機會get null reference，就不會設定成功
+	
+	連線完成時應該要先讓手機去set mtu和enable notify，設定完畢才能算是開始正式連線
+	正式連線時也必須先尋找第一個command是不是read firmware，用這個command來判斷這個message是不是這次連線的，還是上次連線剩的訊號
+	
+	
+	
