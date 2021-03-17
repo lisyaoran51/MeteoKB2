@@ -28,6 +28,8 @@ namespace Communications{
 
 	class CommunicationRequestException : public exception {
 
+	public:
+
 		// °Ñ¦Ò¦Û https://stackoverflow.com/questions/8152720/correct-way-to-inherit-from-stdexception
 
 		CommunicationRequestException(){}
