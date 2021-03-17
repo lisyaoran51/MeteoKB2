@@ -128,7 +128,8 @@ namespace Communications{
 
 			while (oldQueue.size() > 0) {
 				CommunicationRequest* request = oldQueue.back();
-				request->Fail(CommunicationRequestException("Disconnected from communication target."));
+				//request->Fail(CommunicationRequestException("Disconnected from communication target."));
+				request->Fail(CommunicationRequestException());
 				oldQueue.pop_back();
 
 				delete request;
