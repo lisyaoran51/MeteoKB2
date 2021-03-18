@@ -11,6 +11,7 @@
 #include "../../Games/Scheduler/Event/Effect/Algorithm/MapPitchShifter.h"
 #include "../Scheduler/Event/PlayfieldEvents/PlayfieldControllers/OctaveShifter.h"
 #include "../../RulesetMeteor/Scheduler/Event/MeteorEventProcessorMaster.h"
+#include "../Timing/MeteorTimeController.h"
 
 
 
@@ -25,6 +26,7 @@ using namespace Instruments;
 using namespace Games::Schedulers::Events::Effects::Algorithms;
 using namespace Meteor::Schedulers::Events::PlayfieldEvents::PlayfieldControllers;
 using namespace Meteor::Schedulers::Events;
+using namespace Meteor::Timing;
 
 
 
