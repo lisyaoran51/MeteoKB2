@@ -32,6 +32,8 @@ namespace Communications{
 
 	public:
 
+		BleRequest();
+
 		~BleRequest();
 
 		/// <summary>

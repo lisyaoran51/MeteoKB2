@@ -19,6 +19,10 @@ using namespace Framework::Scenes;
 
 
 
+BleRequest::BleRequest() : RegisterType("BleRequest")
+{
+}
+
 BleRequest::~BleRequest()
 {
 	for (int i = 0; i < inputRawMessages.size(); i++) {
