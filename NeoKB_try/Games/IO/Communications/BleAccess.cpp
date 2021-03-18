@@ -214,13 +214,13 @@ int BleAccess::handleRequest(CommunicationRequest * communicationRequest)
 			break;
 		}
 
-		communicationRequest->Fail(e);
+		communicationRequest->Fail(&e);
 
 	}
 	catch (exception& e) {
 
 		LOG(LogLevel::Debug) << "BleAccess::handleRequest() : run request [" << communicationRequest << "] failed." << e.what();
-		communicationRequest->Fail(e);
+		communicationRequest->Fail(&e);
 	}
 
 	return 1;	// 代表執行失敗
