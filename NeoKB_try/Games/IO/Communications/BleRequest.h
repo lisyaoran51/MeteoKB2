@@ -68,7 +68,7 @@ namespace Communications{
 		/// <summary>
 		/// 好像要自己把on fail.trigger擺到這裡面，on fail不能擺在public Fail裡
 		/// </summary>
-		virtual int fail(exception& e);
+		virtual int fail(exception* e);
 
 
 		class BleRequestMethod;

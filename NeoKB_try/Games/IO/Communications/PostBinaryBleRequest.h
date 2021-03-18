@@ -37,7 +37,7 @@ namespace Communications{
 
 
 
-		virtual int fail(exception& e);
+		virtual int fail(exception* e);
 
 		/// <summary>
 		/// post binary request的執行動作

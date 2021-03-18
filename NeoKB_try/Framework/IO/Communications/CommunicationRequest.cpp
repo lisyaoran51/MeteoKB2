@@ -43,15 +43,15 @@ int CommunicationRequest::AddCommunicationComponentOption(string componentName, 
 
 int CommunicationRequest::Cancel()
 {
-	exitRequest = true;
+	exitRequested = true;
 	return 0;
 }
 
-int CommunicationRequest::Fail(exception & e)
+int CommunicationRequest::Fail(exception * e)
 {
 	//onFailed.Trigger();
 
-	if (dynamic_cast<CommunicationRequestException*>(&e)) {
+	if (dynamic_cast<CommunicationRequestException*>(e)) {
 
 	}
 

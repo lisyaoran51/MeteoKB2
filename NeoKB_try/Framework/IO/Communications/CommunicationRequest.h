@@ -92,7 +92,7 @@ namespace Communications{
 		/// </summary>
 		int Cancel();
 
-		virtual int Fail(exception& e);
+		virtual int Fail(exception* e);
 
 		int SetCallbackScene(Scene* cScene);
 
@@ -180,7 +180,7 @@ namespace Communications{
 		/// </summary>
 		double getSectionElapsedSeconds();
 
-		virtual int fail(exception& e) = 0;
+		virtual int fail(exception* e) = 0;
 
 
 	};

@@ -333,7 +333,7 @@ int PostBinaryBleRequest::AddOnFinish(MtoObject * callableObject, function<int()
 	return 0;
 }
 
-int PostBinaryBleRequest::fail(exception & e)
+int PostBinaryBleRequest::fail(exception * e)
 {
 	LOG(LogLevel::Error) << "PostBinaryBleRequest::fail() : not implemented.";
 	return 0;

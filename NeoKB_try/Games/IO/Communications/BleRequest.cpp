@@ -128,10 +128,10 @@ int BleRequest::checkAndProcessFailure()
 	return 0;
 }
 
-int BleRequest::fail(exception & e)
+int BleRequest::fail(exception * e)
 {
 
-	if (dynamic_cast<CommunicationRequestException*>(&e)) {
+	if (dynamic_cast<CommunicationRequestException*>(e)) {
 
 	}
 
