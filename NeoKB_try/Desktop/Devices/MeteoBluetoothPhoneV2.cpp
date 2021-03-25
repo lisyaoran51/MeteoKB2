@@ -79,6 +79,11 @@ int MeteoBluetoothPhoneV2::work()
 
 int MeteoBluetoothPhoneV2::readBluetooth()
 {
+	if (gattServer == nullptr) {
+		// TODO: clear buffer
+		return -1;
+	}
+
 	LOG(LogLevel::Depricated) << "MeteoBluetoothPhoneV1::readBluetooth() : start reading.";
 	if (lastRunReceived)
 		memset(bufferIn, 0, sizeof(bufferIn));
@@ -128,7 +133,13 @@ int MeteoBluetoothPhoneV2::readBluetooth()
 
 int MeteoBluetoothPhoneV2::writeBluetooth()
 {
-	LOG(LogLevel::Debug) << "MeteoPacketConverterV1::writeBluetooth() : start writing.";
+	if (gattServer == nullptr) {
+		// TODO: clear buffer
+		return -1;
+	}
+
+
+	LOG(LogLevel::Debug) << "MeteoPacketConverterV2::writeBluetooth() : start writing.";
 	if (lastRunSended)
 		memset(bufferOut, 0, sizeof(bufferOut));
 
