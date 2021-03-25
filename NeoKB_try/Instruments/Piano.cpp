@@ -448,6 +448,9 @@ int Piano::OnKeyUp(PianoAction action)
 		return -1;
 
 	LOG(LogLevel::Finest) << "Piano::OnKeyUp() : handling fade out.";
+	if(getSamples()->find(action) == getSamples()->end())
+		LOG(LogLevel::Error) << "Piano::OnKeyUp() : not found action [" << (int)action << "] in samples.";
+
 	// 沒踏踏板、有插踏板、沒開啟自動延音
 	if(!isPressingMap.at(PianoAction::SustainPedal) && sustainType != SustainType::AutoSustain )
 		getSamples()->at(action)->FadeOut();
