@@ -26,7 +26,7 @@ IdentifyBleRequest::IdentifyBleRequest(string iMessage) : RegisterType("Identify
 int IdentifyBleRequest::checkAndProcessFailure()
 {
 	if (dynamic_cast<GetTextBleRequestMethod*>(requestMethod)->GetReturnJson()["Value"].get<string>() != identifyCode) {
-		throw exception("IdentifyBleRequest::checkAndProcessFailure(): identify failed");
+		throw CommunicationRequestException("IdentifyBleRequest::checkAndProcessFailure(): identify failed");
 	}
 
 	return 0;
