@@ -446,6 +446,8 @@ int Piano::OnKeyUp(PianoAction action)
 {
 	if (isSleeping)
 		return -1;
+
+	LOG(LogLevel::Finest) << "Piano::OnKeyUp() : handling fade out.";
 	// 沒踏踏板、有插踏板、沒開啟自動延音
 	if(!isPressingMap.at(PianoAction::SustainPedal) && sustainType != SustainType::AutoSustain )
 		getSamples()->at(action)->FadeOut();
