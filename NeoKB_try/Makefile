@@ -18,7 +18,7 @@ Games/Ruleset:Games/Ruleset/Modifiers:Games/Ruleset/Judgements:Games/Ruleset/Sco
 Games/Scene:Games/Scene/Interlude:Games/Scene/Play:Games/Scene/Play/Hud:Games/Scene/Select:Games/Scene/Results:\
 Games/Input:Games/Input/Messages:\
 Games/IO/Communications:\
-Games/Output:Games/Output/Bluetooths:\
+Games/Output:Games/Output/Bluetooths:Games/Output/Panels:\
 Games/Scheduler/Event:Games/Scheduler/Event/ControlPoints:Games/Scheduler/Event/Effect:\
 Games/Scheduler/Event/Effect/Algorithm:Games/Scheduler/Event/GameEvents:Games/Scheduler/Event/SystemEvents:Games/Scheduler/Event/SystemEvents/SystemControllers:\
 Games/Scheduler/Event/IoEvents:Games/Scheduler/Event/IoEvents/IoCommunicators:\
@@ -82,7 +82,7 @@ INCLUDE = -IFramwork -IFramework/Allocation -IFramework/Allocation/Hierachal -IF
 -IGames/Ruleset -IGames/Ruleset/Modifiers -IGames/Ruleset/Judgements -IGames/Ruleset/Scoring -IGames/Ruleset/Replays \
 -IGames/Scene -IGames/Scene/Interlude -IGames/Scene/Play -IGames/Scene/Play/Hud -IGames/Scene/Select -IGames/Scene/Results \
 -IGames/Input -IGames/Input/Messages \
--IGames/Output -IGames/Output/Bluetooths \
+-IGames/Output -IGames/Output/Bluetooths -IGames/Output/Panels \
 -IGames/Scheduler/Event -IGames/Scheduler/Event/ControlPoints -IGames/Scheduler/Event/Effect \
 -IGames/Scheduler/Event/Effect/Algorithm -IGames/Scheduler/Event/GameEvents -IGames/Scheduler/Event/SystemEvents -IGames/Scheduler/Event/SystemEvents/SystemControllers \
 -IGames/Scheduler/Event/IoEvents -IGames/Scheduler/Event/IoEvents/IoCommunicators \
@@ -179,6 +179,7 @@ Modifier.o DifficultyModifier.o EventProcessorFilterModifier.o InstrumentModifie
 Score.o ScoreProcessor.o \
 BleAccess.o BleRequest.o BleRequestException.o GetTextBleRequest.o PostTextBleRequest.o GetBinaryBleRequest.o PostBinaryBleRequest.o \
 IdentifyBleRequest.o FaultIdentityBleRequest.o \
+IndicatorLightPanelMessage.o SpeedRingPanelMessage.o \
 MeteoBluetoothMessage.o MeteoBluetoothOutputer.o MeteoContextBluetoothMessage.o MeteoFileSegmentBluetoothMessage.o \
 Loader.o MeteoScene.o Intro.o Player.o PlayerLoader.o Playfield.o Result.o \
 HudDisplay.o JudgementFlasher.o SongProgress.o \
