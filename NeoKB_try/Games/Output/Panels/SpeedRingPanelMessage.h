@@ -27,12 +27,31 @@ namespace Panels{
 		/// </summary>
 		SpeedRingPanelMessage(vector<bool> l);
 
+
+		/// <summary>
+		/// positive speed
+		///    *0
+		/// *     *1
+		/// *4    *2
+		///    *3
+		/// negative speed
+		///    *0
+		/// *-1   *
+		/// *-2   *-4
+		///    *-3
+		/// 
+		/// 5: reset
+		/// 
+		/// </summary>
+		SpeedRingPanelMessage(int p);
+
 		virtual string ToString();
 
 	protected:
 
 		vector<bool> lights;
 
+		int position = -5;
 
 	};
 
