@@ -15,7 +15,20 @@ using namespace Framework::Timing::SpeedAdjusters;
 int TimeController::load()
 {
 
+	OutputManager* o = GetCache<OutputManager>("OutputManager");
+	if (!o)
+		throw runtime_error("int SongSelect::load() : OutputManager not found in cache.");
+
+	return load(o);
+}
+
+int TimeController::load(OutputManager * o)
+{
+
 	GetDependencies()->Cache<TimeController>(this, "TimeController");
+
+	outputManager = o;
+
 
 	return 0;
 }
@@ -187,6 +200,7 @@ int TimeController::SetRate(double r)
 		throw invalid_argument("TimeController::SetRate() : 0 is not available for rate.");
 	rate = r;
 	controllableClock->SetRate(r);
+
 	return 0;
 }
 

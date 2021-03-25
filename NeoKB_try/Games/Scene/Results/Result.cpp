@@ -11,9 +11,9 @@ Result::Result(Score * s): RegisterType("Result")
 
 int Result::onEntering(Scene * lastScene)
 {
-	MeteoScene::onEntering(lastScene);
+	
 
-	return 0;
+	return MeteoScene::onEntering(lastScene);
 }
 
 int Result::onExiting(Scene * lastScene)

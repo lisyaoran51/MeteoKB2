@@ -4,6 +4,7 @@
 #include "../Scheduler/Event/Effect/FallEffectMapper.h"
 #include "../Scheduler/Event/Effect/EruptEffectMapper.h"
 #include "../Output/Panels/LightRingPanelMessage.h"
+#include "../../Games/Output/Panels/SpeedRingPanelMessage.h"
 
 
 
@@ -12,6 +13,7 @@ using namespace std;
 using namespace Games::Schedulers::Events::ControlPoints;
 using namespace Meteor::Schedulers::Events::Effects;
 using namespace Meteor::Output::Panels;
+using namespace Games::Output::Panels;
 
 
 
@@ -25,6 +27,7 @@ int MeteorTimeController::load()
 int MeteorTimeController::loadOnComplete(EventProcessorFilter * e)
 {
 	eventProcessorFilter = e;
+
 	return 0;
 }
 
@@ -74,6 +77,57 @@ bool MeteorTimeController::filterFallEffect(EventProcessor<Event>* eventProcesso
 MeteorTimeController::MeteorTimeController() : RegisterType("MeteorTimeController")
 {
 	registerLoad(bind(static_cast<int(MeteorTimeController::*)(void)>(&MeteorTimeController::load), this));
+}
+
+int MeteorTimeController::SetRate(double r)
+{
+	MeteoTimeController<MeteorAction>::SetRate(r);
+
+	SpeedRingPanelMessage* speedRingPanelMessage = nullptr;
+	vector<bool> ringLights;
+
+	/* 根據速度調整光圈 */
+	if (rate >= 1.7) {
+		bool lightArray[6] = { true, true, true, true, true, false };
+		ringLights.assign(lightArray, lightArray + 6);
+	}
+	else if (rate >= 1.5) {
+		bool lightArray[6] = { true, true, true, true, false, false };
+		ringLights.assign(lightArray, lightArray + 6);
+	}
+	else if (rate >= 1.3) {
+		bool lightArray[6] = { true, true, true, false, false, false };
+		ringLights.assign(lightArray, lightArray + 6);
+	}
+	else if (rate >= 1.1) {
+		bool lightArray[6] = { true, true, false, false, false, false };
+		ringLights.assign(lightArray, lightArray + 6);
+	}
+	else if (rate >= 0.9) {	// 中央
+		bool lightArray[6] = { true, false, false, false, false, false };
+		ringLights.assign(lightArray, lightArray + 6);
+	}
+	else if (rate >= 0.7) {
+		bool lightArray[6] = { true, false, false, false, false, true };
+		ringLights.assign(lightArray, lightArray + 6);
+	}
+	else if (rate >= 0.5) {
+		bool lightArray[6] = { true, false, false, false, true, true };
+		ringLights.assign(lightArray, lightArray + 6);
+	}
+	else if (rate >= 0.3) {
+		bool lightArray[6] = { true, false, false, true, true, true };
+		ringLights.assign(lightArray, lightArray + 6);
+	}
+	else if (rate >= 0.1) {
+		bool lightArray[6] = { true, false, true, true, true, true };
+		ringLights.assign(lightArray, lightArray + 6);
+	}
+
+	speedRingPanelMessage = new SpeedRingPanelMessage(ringLights);
+	outputManager->PushMessage(speedRingPanelMessage);
+
+	return 0;
 }
 
 int MeteorTimeController::SetLastEventOverTime(double lEventOverTime)
@@ -187,21 +241,36 @@ int MeteorTimeController::RepeatSection(int section)
 
 int MeteorTimeController::LoadOnComplete()
 {
+
+	SpeedRingPanelMessage* speedRingPanelMessage = new SpeedRingPanelMessage(vector<bool>({true, false, false, false, false, false}));
+	outputManager->PushMessage(speedRingPanelMessage);
+
+
 	LOG(LogLevel::Debug) << "MeteorTimeController::LoadOnComplete() : loading event processor filter.";
 
 	EventProcessorFilter * e = GetCache<EventProcessorFilter>("EventProcessorFilter");
 	if (!e)
 		throw runtime_error("MeteorTimeController::load() : EventProcessorFilter not found in cache.");
 
+
+
 	return loadOnComplete(e);
 }
 
 bool MeteorTimeController::checkIsGameOver()
 {
-	if (controllableClock->GetCurrentTime() > lastEventOverTime + 3.0)
-		return true;
-	else 
+	// controllableClock 可能還沒started，就會跳錯誤
+
+	try {
+		if (controllableClock->GetCurrentTime() > lastEventOverTime + 3.0)
+			return true;
+		else
+			return false;
+	}
+	catch (exception& e) {
+		LOG(LogLevel::Fine) << "MeteorTimeController::checkIsGameOver() : clock [" << controllableClock << "] not started yet [" << e.what() << "].";
 		return false;
+	}
 }
 
 int MeteorTimeController::onButtonDown(InputState * inputState, InputKey button)
@@ -286,7 +355,7 @@ int MeteorTimeController::onKnobTurn(InputState * inputState, InputKey knob)
 			if (inputState->GetPanelState()->GetKnobs()->at(i).first == InputKey::SpeedKnob)
 				turnValue = inputState->GetPanelState()->GetKnobs()->at(i).second;
 		if (turnValue < 0) {
-			if (GetRate() > 0.5) {
+			if (GetRate() > 0.3) {
 				LOG(LogLevel::Debug) << "MeteorTimeController::onKnobTurn() : [SpeedKnob] action turn value = " << turnValue << ". rate = " << GetRate();
 				SetRate(GetRate() - 0.1);
 				//SetRate(0.8);
@@ -297,7 +366,7 @@ int MeteorTimeController::onKnobTurn(InputState * inputState, InputKey knob)
 			}
 		}
 		else {
-			if (GetRate() < 1.5) {
+			if (GetRate() < 1.8) {
 				LOG(LogLevel::Debug) << "MeteorTimeController::onKnobTurn() : [SpeedKnob] action turn value = " << turnValue << ". rate = " << GetRate();
 				SetRate(GetRate() + 0.1);
 
@@ -312,6 +381,19 @@ int MeteorTimeController::onKnobTurn(InputState * inputState, InputKey knob)
 
 
 	return 0;
+}
+
+int MeteorTimeController::onMessage(MeteoBluetoothMessage * message)
+{
+	if (message->GetCommand() == MeteoCommand::AppQuitGame || message->GetCommand() == MeteoCommand::AppRestartGame) {
+
+		/* 離開遊戲時將燈光關閉 */
+		SpeedRingPanelMessage* speedRingPanelMessage = new SpeedRingPanelMessage(vector<bool>({ false, false, false, false, false, false }));
+		outputManager->PushMessage(speedRingPanelMessage);
+
+	}
+
+	return MeteoTimeController<MeteorAction>::onMessage(message);
 }
 
 /* 改成不繼承meteo action

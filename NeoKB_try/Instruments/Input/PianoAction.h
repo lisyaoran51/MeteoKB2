@@ -142,6 +142,7 @@ namespace Input {
 		Power		= 1000,
 		Sustain		= 1001,
 		Sensitivity	= 1002,
+		Speed		= 1003,
 
 		/* SpecialButton */
 		RaiseOctave = 1010,

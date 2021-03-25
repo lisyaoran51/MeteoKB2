@@ -20,7 +20,7 @@ MeteorDynamicEventGenerator::MeteorDynamicEventGenerator(Playfield * p) : Regist
 {
 }
 
-int MeteorDynamicEventGenerator::OnMessage(MeteoBluetoothMessage * message)
+int MeteorDynamicEventGenerator::onMessage(MeteoBluetoothMessage * message)
 {
 	if (message->GetCommand() == MeteoCommand::MeteorEvent) {
 

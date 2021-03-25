@@ -54,6 +54,10 @@ namespace Timing {
 
 		MeteorTimeController();
 
+		virtual int SetRate(double r);
+
+		/* ------------------------ TimeController.h ------------------------ */
+
 		int SetLastEventOverTime(double lEventOverTime);
 
 		/*---------¤ÏÂÐ½m¼u±M¥Î---------*/
@@ -79,6 +83,9 @@ namespace Timing {
 
 
 	protected:
+
+
+
 
 		double lastEventOverTime = -1;
 
@@ -142,6 +149,8 @@ namespace Timing {
 		virtual int onButtonDown(InputState* inputState, InputKey button);
 
 		virtual int onKnobTurn(InputState* inputState, InputKey knob);
+
+		virtual int onMessage(MeteoBluetoothMessage* message);
 
 	};
 

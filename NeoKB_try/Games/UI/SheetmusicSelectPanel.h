@@ -53,7 +53,6 @@ namespace UI {
 
 		int AddOnGetSheetmusicSuccess(MtoObject * callableObject, function<int(string)> callback, string name = "HandleGetSheetmusicFinish");
 
-		virtual int OnMessage(MeteoBluetoothMessage* message);
 
 	protected:
 
@@ -75,6 +74,7 @@ namespace UI {
 
 		virtual int onMessage(InputState* inputState, InputKey command);
 
+		virtual int onMessage(MeteoBluetoothMessage* message);
 	};
 
 }}

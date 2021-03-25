@@ -23,7 +23,7 @@ InstantDynamicEventGenerator::InstantDynamicEventGenerator(Playfield * p) : Regi
 {
 }
 
-int InstantDynamicEventGenerator::OnMessage(MeteoBluetoothMessage * message)
+int InstantDynamicEventGenerator::onMessage(MeteoBluetoothMessage * message)
 {
 	if (message->GetCommand() == MeteoCommand::RecordEvent) {
 

@@ -2716,7 +2716,8 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 	待完成工作：
 		各種request(還沒檢查)、下載檔案後移動解壓縮(大概ok要測試)、gatt加入程式(bt classic刪掉)、遊戲紀錄存成sm檔(大概ok)、封包分流、斷線時把message和request全刪掉、
 		遊戲紀錄回傳、sm select panel修改、Instant測試、刪掉切換八度(ok)、場景轉換的ble訊號、反覆練談、delete child的memory leak、快進時把event都關掉(ok)、快進後遊戲結束的判斷(ok)、
-		record模式、手機測試、mcu寫完
+		record模式、手機測試、mcu寫完、遊戲結束時恢復game control sustain設定、連線後要先等待set request才能開始連藍芽、藍芽連線後要到read firmware以後才能夠開始讀其他訊號、
+		取消下載檔案
 	
 	之前沒完成的工作：
 		重播存檔、跳轉時反向觸發特效、刪除所有memory leak、琴音分為全長和AB段(放棄)、手動踏板modifier、關機(未測試)
@@ -2881,5 +2882,19 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 	連線完成時應該要先讓手機去set mtu和enable notify，設定完畢才能算是開始正式連線
 	正式連線時也必須先尋找第一個command是不是read firmware，用這個command來判斷這個message是不是這次連線的，還是上次連線剩的訊號
 	
+	等compile成功要來檢查反覆練談
 	
+3/19
+	request->Fail(exception());
+	c++裡面會把這個視成Fail(Exception)而不是Dail(Exceptoin&)
 	
+	把MCU所有程式碼和再一起以後，PWM和ADC都部會動
+	
+3/22
+	把timer設成
+	TIMER0->TCMPR = __LIRC / 1000UL;
+	就會大約是1khz的計時速度，但是跟真實實中比起來速度有點不准，大概50秒就會有1秒的誤差
+	
+3/24
+	琴鍵按壓時間轉換音量公式(暫時)
+	127 = 1.02476732964 exp(200-2)

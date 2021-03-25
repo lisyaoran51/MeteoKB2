@@ -37,7 +37,7 @@ int PlaySongSelect::onResuming(Scene * lastScene)
 	smSelectPanel->GetSelectedModifiers()->GetValue()->clear();
 	
 
-	return 0;
+	return MeteoScene::onResuming(lastScene);
 }
 
 int PlaySongSelect::updateSheetmusic(WorkingSm * workingSm)

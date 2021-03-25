@@ -63,13 +63,13 @@ SoundSelectPanel::SoundSelectPanel() : RegisterType("SoundSelectPanel")
 	registerLoad(bind(static_cast<int(SoundSelectPanel::*)(void)>(&SoundSelectPanel::load), this));
 }
 
-int SoundSelectPanel::OnMessage(MeteoBluetoothMessage * message)
+int SoundSelectPanel::onMessage(MeteoBluetoothMessage * message)
 {
-	LOG(LogLevel::Debug) << "SoundSelectPanel::OnMessage() : got new bt command. ";
+	LOG(LogLevel::Debug) << "SoundSelectPanel::onMessage() : got new bt command. ";
 	MeteoContextBluetoothMessage* contextMessage = dynamic_cast<MeteoContextBluetoothMessage*>(message);
 
 	if (message->GetCommand() == MeteoCommand::AppSwitchPianoInstrument) {
-		LOG(LogLevel::Info) << "SoundSelectPanel::OnMessage() : AppSwitchPianoInstrument. ";
+		LOG(LogLevel::Info) << "SoundSelectPanel::onMessage() : AppSwitchPianoInstrument. ";
 
 		json context = contextMessage->GetContextInJson();
 
@@ -112,7 +112,7 @@ int SoundSelectPanel::OnMessage(MeteoBluetoothMessage * message)
 		}
 		else {
 			// ¤Á´«¥¢±Ñ
-			LOG(LogLevel::Info) << "SoundSelectPanel::OnMessage() : switch instrument failed. ";
+			LOG(LogLevel::Info) << "SoundSelectPanel::onMessage() : switch instrument failed. ";
 			returnContext["Status"] = -1;
 			outputMessage->SetContextInJson(returnContext);
 			outputMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
@@ -122,7 +122,7 @@ int SoundSelectPanel::OnMessage(MeteoBluetoothMessage * message)
 
 
 	}
-	LOG(LogLevel::Fine) << "SoundSelectPanel::OnMessage() : over. ";
+	LOG(LogLevel::Fine) << "SoundSelectPanel::onMessage() : over. ";
 
 	return 0;
 }

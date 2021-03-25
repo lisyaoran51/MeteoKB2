@@ -14,10 +14,13 @@ namespace Messages{
 
 	public:
 
-		virtual int OnMessage(T* command) = 0;
+		int OnMessage(T* command) {
+			if (isMessageActive)
+				onMessage(command);
+		}
 
 		/// <summary>
-		/// 讓input manager決定要不要丟message給這個物件
+		/// 讓input manager決定要不要丟message給這個物件，目前好像沒有參考到?
 		/// </summary>
 		bool GetIsMessageActive() {
 			return isMessageActive;
@@ -29,6 +32,9 @@ namespace Messages{
 		/// 這個是讓繼承的人決定要不要收到message
 		/// </summary>
 		bool isMessageActive = true;
+
+		virtual int onMessage(T* command) = 0;
+
 
 	};
 

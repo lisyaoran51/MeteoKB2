@@ -23,7 +23,9 @@ namespace Events{
 
 		InstantDynamicEventGenerator(Playfield* p);
 		
-		virtual int OnMessage(MeteoBluetoothMessage* message);
+	protected:
+
+		virtual int onMessage(MeteoBluetoothMessage* message);
 
 	};
 

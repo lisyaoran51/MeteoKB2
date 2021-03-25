@@ -39,7 +39,13 @@ namespace Timing{
 			TimeController::registerLoad(bind(static_cast<int(MeteoTimeController<T>::*)(void)>(&MeteoTimeController<T>::load), this));
 		}
 
-		virtual int OnMessage(MeteoBluetoothMessage* message) {
+		
+
+	protected:
+
+		OutputManager* outputManager = nullptr;
+
+		virtual int onMessage(MeteoBluetoothMessage* message) {
 
 			if (message->GetCommand() == MeteoCommand::AppQuitGame) {
 
@@ -60,10 +66,6 @@ namespace Timing{
 
 			return 0;
 		}
-
-	protected:
-
-		OutputManager* outputManager = nullptr;
 
 	};
 

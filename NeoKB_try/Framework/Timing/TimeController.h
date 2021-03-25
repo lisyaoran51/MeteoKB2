@@ -7,6 +7,8 @@
 #include "DecoupledInterpolatingFramedClock.h"
 #include "../Input/KeyBindings/KeyBindingHandler.h"
 #include "../Input/Messages/MessageHandler.h"
+#include "../Output/OutputManager.h"
+
 
 
 using namespace Framework::Timing::SpeedAdjusters;
@@ -14,6 +16,7 @@ using namespace Framework::Timing;
 using namespace Framework::Allocation::Hierachal;
 using namespace Framework::Input::KeyBindings;
 using namespace Framework::Input::Messages;
+using namespace Framework::Output;
 
 
 
@@ -45,6 +48,8 @@ namespace Timing {
 
 		int load();
 
+		int load(OutputManager* o);
+
 	public:
 
 		TimeController();
@@ -70,7 +75,7 @@ namespace Timing {
 		/// </summary>
 		int Resume();
 
-		int SetRate(double rate);
+		virtual int SetRate(double rate);
 
 		double GetRate();
 
@@ -106,6 +111,7 @@ namespace Timing {
 
 	protected:
 
+		OutputManager* outputManager = nullptr;
 
 		/// <summary>
 		/// 在update時檢查有沒有被暫停，有的話就把自己時鐘停掉
@@ -262,10 +268,6 @@ namespace Timing {
 			return 0;
 		}
 
-		virtual int OnMessage(TMessage* command) {
-			return 0;
-		}
-
 	protected:
 
 
@@ -285,6 +287,10 @@ namespace Timing {
 		/// 把input key和新的輸入結合一下
 		/// </summary>
 		//virtual int reloadMappings() = 0;
+
+		virtual int onMessage(TMessage* command) {
+			return 0;
+		}
 
 
 	};

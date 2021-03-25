@@ -42,8 +42,6 @@ namespace UI {
 
 		function<int(void)> OnSoundSwitched;
 
-		virtual int OnMessage(MeteoBluetoothMessage* message);
-
 		virtual int update();
 
 	protected:
@@ -55,6 +53,8 @@ namespace UI {
 		AudioManager* audioManager = nullptr;
 
 		OutputManager* outputManager = nullptr;
+
+		virtual int onMessage(MeteoBluetoothMessage* message);
 
 	};
 
