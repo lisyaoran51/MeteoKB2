@@ -29,7 +29,7 @@ int TimeController::update()
 
 	LOG(LogLevel::Finest) << "TimeController::update() : speed adjuster sync to source clock time [" << fixed << setprecision(5) << GetClock()->GetElapsedFrameTime() << "].";
 	speedAdjuster->ProcessFrame(GetClock()->GetElapsedFrameTime());
-
+	LOG(LogLevel::Finest) << "TimeController::update() : speed adjuster process over.";
 
 	if (speedAdjuster->GetIsAdjustingTime()) {
 		LOG(LogLevel::Finest) << "TimeController::update() : speed adjuster is adjusting time to [" << fixed << setprecision(5) << speedAdjuster->GetAdjustFrameTime() << "].";
