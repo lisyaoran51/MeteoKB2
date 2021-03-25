@@ -88,43 +88,52 @@ int MeteorTimeController::SetRate(double r)
 
 	/* 根據速度調整光圈 */
 	if (rate >= 1.7) {
-		bool lightArray[6] = { true, true, true, true, true, false };
-		ringLights.assign(lightArray, lightArray + 6);
+		//bool lightArray[6] = { true, true, true, true, true, false };
+		//ringLights.assign(lightArray, lightArray + 6);
+		speedRingPanelMessage = new SpeedRingPanelMessage(4);
 	}
 	else if (rate >= 1.5) {
-		bool lightArray[6] = { true, true, true, true, false, false };
-		ringLights.assign(lightArray, lightArray + 6);
+		//bool lightArray[6] = { true, true, true, true, false, false };
+		//ringLights.assign(lightArray, lightArray + 6);
+		speedRingPanelMessage = new SpeedRingPanelMessage(3);
 	}
 	else if (rate >= 1.3) {
-		bool lightArray[6] = { true, true, true, false, false, false };
-		ringLights.assign(lightArray, lightArray + 6);
+		//bool lightArray[6] = { true, true, true, false, false, false };
+		//ringLights.assign(lightArray, lightArray + 6);
+		speedRingPanelMessage = new SpeedRingPanelMessage(2);
 	}
 	else if (rate >= 1.1) {
-		bool lightArray[6] = { true, true, false, false, false, false };
-		ringLights.assign(lightArray, lightArray + 6);
+		//bool lightArray[6] = { true, true, false, false, false, false };
+		//ringLights.assign(lightArray, lightArray + 6);
+		speedRingPanelMessage = new SpeedRingPanelMessage(1);
 	}
 	else if (rate >= 0.9) {	// 中央
-		bool lightArray[6] = { true, false, false, false, false, false };
-		ringLights.assign(lightArray, lightArray + 6);
+		//bool lightArray[6] = { true, false, false, false, false, false };
+		//ringLights.assign(lightArray, lightArray + 6);
+		speedRingPanelMessage = new SpeedRingPanelMessage(0);
 	}
 	else if (rate >= 0.7) {
-		bool lightArray[6] = { true, false, false, false, false, true };
-		ringLights.assign(lightArray, lightArray + 6);
+		//bool lightArray[6] = { true, false, false, false, false, true };
+		//ringLights.assign(lightArray, lightArray + 6);
+		speedRingPanelMessage = new SpeedRingPanelMessage(-1);
 	}
 	else if (rate >= 0.5) {
-		bool lightArray[6] = { true, false, false, false, true, true };
-		ringLights.assign(lightArray, lightArray + 6);
+		//bool lightArray[6] = { true, false, false, false, true, true };
+		//ringLights.assign(lightArray, lightArray + 6);
+		speedRingPanelMessage = new SpeedRingPanelMessage(-2);
 	}
 	else if (rate >= 0.3) {
-		bool lightArray[6] = { true, false, false, true, true, true };
-		ringLights.assign(lightArray, lightArray + 6);
+		//bool lightArray[6] = { true, false, false, true, true, true };
+		//ringLights.assign(lightArray, lightArray + 6);
+		speedRingPanelMessage = new SpeedRingPanelMessage(-3);
 	}
 	else if (rate >= 0.1) {
-		bool lightArray[6] = { true, false, true, true, true, true };
-		ringLights.assign(lightArray, lightArray + 6);
+		//bool lightArray[6] = { true, false, true, true, true, true };
+		//ringLights.assign(lightArray, lightArray + 6);
+		speedRingPanelMessage = new SpeedRingPanelMessage(-4);
 	}
 
-	speedRingPanelMessage = new SpeedRingPanelMessage(ringLights);
+	//speedRingPanelMessage = new SpeedRingPanelMessage(ringLights);
 	outputManager->PushMessage(speedRingPanelMessage);
 
 	return 0;

@@ -313,6 +313,8 @@ int InputManager::updateKeyboardEvents(InputState * inputState)
 	KeyboardState* keyboardState= inputState->GetKeyboardState();
 	KeyboardState* lastKeyboardState = inputState->GetLastState() ? inputState->GetLastState()->GetKeyboardState() : nullptr;
 
+	LOG(LogLevel::Finest) << "InputManager::updateKeyboardEvents() : updateing ups." << keyboardState->GetUps()->size();
+
 	// 我們不考慮repeat，鎖以不用寫得很複雜
 	// 暫時也不寫組合鍵，以後再寫
 
