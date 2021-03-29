@@ -453,7 +453,7 @@ int Piano::OnKeyUp(PianoAction action)
 
 	LOG(LogLevel::Finest) << "Piano::OnKeyUp() : handling fade out.";
 	if (getSamples()->find(action) == getSamples()->end()) {
-		LOG(LogLevel::Error) << "Piano::OnKeyUp() : not found action [" << (int)action << "] in samples.";
+		LOG(LogLevel::Error) << "Piano::OnKeyUp() : not found action [" << (int)action << "] in samples by [" << GetTypeName() <<  "].";
 		for (map<PianoAction, SampleChannel*>::iterator iter = getSamples()->begin(); iter != getSamples()->end(); ++iter) {
 			LOG(LogLevel::Info) << "Piano::OnKeyUp() : piano action [" << (int)iter->first << "] has sample [" << iter->second << "] by [" << GetTypeName() << "].";
 		}
