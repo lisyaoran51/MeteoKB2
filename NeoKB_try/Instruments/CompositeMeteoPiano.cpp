@@ -27,7 +27,7 @@ int CompositeMeteoPiano::SetHost(GameHost * h)
 {
 	meteoPiano->SetHost(h);
 
-	instrumentInputHandler = new InstrumentInputHandler(GetMeteoPiano());
+	instrumentInputHandler = new InstrumentInputHandler(this);
 	instrumentInputHandler->Initialize(h);
 
 	return 0;
@@ -103,6 +103,11 @@ int CompositeMeteoPiano::SwitchSoundBindings(TSoundBindingSet<Pitch>* sBindingSe
 	return 0;
 }
 
+int CompositeMeteoPiano::OnDirectKeyDown(pair<PianoAction, int> action)
+{
+	return GetMeteoPiano()->OnDirectKeyDown(action);
+}
+
 int CompositeMeteoPiano::ChangePitchState(MeteoPianoPitchState s)
 {
 	return meteoPiano->ChangePitchState(s);
@@ -131,4 +136,34 @@ int CompositeMeteoPiano::loadAndMapSamples()
 int CompositeMeteoPiano::loadAndMapPitches()
 {
 	return 0;
+}
+
+int CompositeMeteoPiano::OnKeyDown(pair<PianoAction, int> action)
+{
+	return GetMeteoPiano()->OnKeyDown(action);
+}
+
+int CompositeMeteoPiano::OnKeyUp(PianoAction action)
+{
+	return GetMeteoPiano()->OnKeyUp(action);
+}
+
+int CompositeMeteoPiano::OnButtonDown(PianoAction action)
+{
+	return GetMeteoPiano()->OnButtonDown(action);
+}
+
+int CompositeMeteoPiano::OnButtonUp(PianoAction action)
+{
+	return GetMeteoPiano()->OnButtonUp(action);
+}
+
+int CompositeMeteoPiano::OnKnobTurn(pair<PianoAction, int> action)
+{
+	return GetMeteoPiano()->OnKnobTurn(action);
+}
+
+int CompositeMeteoPiano::OnSlide(pair<PianoAction, int> action)
+{
+	return GetMeteoPiano()->OnSlide(action);
 }

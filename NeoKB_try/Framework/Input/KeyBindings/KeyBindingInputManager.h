@@ -101,6 +101,9 @@ namespace KeyBindings {
 
 		virtual int propagateKeyUp(vector<Triggerable*>* queue, T key) {
 
+			LOG(LogLevel::Finest) << "KeyBindingInputManager::propagateKeyUp() : handling T ups.";
+			LOG(LogLevel::Finest) << "KeyBindingInputManager::propagateKeyUp() : queue size [" << queue->size() << "].";
+
 			for (int i = 0; i < queue->size(); i++) {
 				KeyBindingHandler<T>* keyBindingHandler = dynamic_cast<KeyBindingHandler<T>*>(queue->at(i));
 				if (keyBindingHandler != nullptr) {

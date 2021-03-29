@@ -988,6 +988,9 @@
     <Filter Include="標頭檔\Games\Output\Panels">
       <UniqueIdentifier>{b075a54a-183d-4bf3-b9cc-99b1a29fa47a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="來源檔案\Games\Output\Panels">
+      <UniqueIdentifier>{e9c81f2c-184e-491f-88de-bed27a0c77f9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Games\Graphic\Renderer\renderer.cpp">
@@ -2081,6 +2084,12 @@
     </ClCompile>
     <ClCompile Include="Games\IO\Communications\FaultIdentityBleRequest.cpp">
       <Filter>來源檔案\Games\IO\Communications</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\Output\Panels\SpeedRingPanelMessage.cpp">
+      <Filter>來源檔案\Games\Output\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\Output\Panels\IndicatorLightPanelMessage.cpp">
+      <Filter>來源檔案\Games\Output\Panels</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

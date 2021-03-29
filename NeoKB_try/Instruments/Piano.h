@@ -89,6 +89,18 @@ namespace Instruments {
 		///	</summary>
 		virtual int OnDirectKeyDown(pair<PianoAction, int> action);
 
+		virtual int OnKeyDown(pair<PianoAction, int> action);
+
+		virtual int OnKeyUp(PianoAction action);
+
+		virtual int OnButtonDown(PianoAction action);
+
+		virtual int OnButtonUp(PianoAction action);
+
+		virtual int OnKnobTurn(pair<PianoAction, int> action);
+
+		virtual int OnSlide(pair<PianoAction, int> action);
+
 	protected:
 
 		OutputManager* outputManager = nullptr;
@@ -114,18 +126,6 @@ namespace Instruments {
 		virtual int resetState();
 
 		virtual int update();
-
-		virtual int OnKeyDown(pair<PianoAction, int> action);
-
-		virtual int OnKeyUp(PianoAction action);
-
-		virtual int OnButtonDown(PianoAction action);
-
-		virtual int OnButtonUp(PianoAction action);
-
-		virtual int OnKnobTurn(pair<PianoAction, int> action);
-
-		virtual int OnSlide(pair<PianoAction, int> action);
 	};
 
 	

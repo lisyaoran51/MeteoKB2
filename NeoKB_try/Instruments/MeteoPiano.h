@@ -32,6 +32,12 @@ namespace Instruments {
 
 		virtual int WakeUp();
 
+		/* ----------------------- Piano.h ----------------------- */
+
+		virtual int OnButtonDown(PianoAction action);
+
+		virtual int OnKnobTurn(pair<PianoAction, int> action);
+
 
 		/* ----------------------- MeteoPiano.h ----------------------- */
 
@@ -59,10 +65,6 @@ namespace Instruments {
 		virtual int loadAndMapSamples();
 
 		virtual int loadAndMapPitches();
-
-		virtual int OnButtonDown(PianoAction action);
-
-		virtual int OnKnobTurn(pair<PianoAction, int> action);
 
 	};
 

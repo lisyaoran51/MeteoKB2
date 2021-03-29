@@ -65,6 +65,11 @@ namespace Instruments {
 		virtual int MoveOctave(PianoPitchMovement s);
 
 		virtual int SwitchSoundBindings(TSoundBindingSet<Pitch>* sBindingSet);
+		
+		/// <summary>
+		/// 在keyboard輸入瞬間立刻執行的on key down，避免鋼琴音有延遲
+		///	</summary>
+		virtual int OnDirectKeyDown(pair<PianoAction, int> action);
 
 
 		/* ----------------------- MeteoPiano.h ----------------------- */
@@ -98,6 +103,21 @@ namespace Instruments {
 		///	照理來說這個會在load on complete時執行，應該piano和virtual piano都會執行一次，為什麼這邊還要特別在讓他們執行一次？
 		/// </summary>
 		virtual int loadAndMapPitches();
+
+
+		/* ----------------------- Piano.h ----------------------- */
+
+		virtual int OnKeyDown(pair<PianoAction, int> action);
+
+		virtual int OnKeyUp(PianoAction action);
+
+		virtual int OnButtonDown(PianoAction action);
+
+		virtual int OnButtonUp(PianoAction action);
+
+		virtual int OnKnobTurn(pair<PianoAction, int> action);
+
+		virtual int OnSlide(pair<PianoAction, int> action);
 
 	};
 
