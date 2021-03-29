@@ -299,7 +299,7 @@ namespace Timing {
 		virtual int endGame() {
 
 			TimeController::endGame();
-			isActive = false;
+			KeyBindingHandler<T>::isActive = false;
 
 		}
 
