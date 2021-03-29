@@ -159,7 +159,10 @@ namespace Timing {
 		/// </summary>
 		virtual bool checkIsGameOver();
 
-
+		/// <summary>
+		/// 遊戲結束時執行的動做
+		/// </summary>
+		virtual int endGame();
 
 		/* 暫時不寫這段，以後響到要怎麼寫再回來改
 
@@ -215,6 +218,8 @@ namespace Timing {
 		/// 這段寫錯了，不要用
 		/// </summary>
 		virtual int OnButtonDown(T action) {
+
+			return 0;
 			typename map<T, InputKey>::iterator it;
 			it = keyBindings.find(action);
 
@@ -244,6 +249,8 @@ namespace Timing {
 		/// 這段寫錯了，不要用
 		/// </summary>
 		virtual int OnKnobTurn(pair<T, int> action) {
+
+			return 0;
 			if (keyBindings[action.first] == InputKey::SpeedKnob) {
 				SetRate(GetRate() + action.second);
 
@@ -287,6 +294,14 @@ namespace Timing {
 		/// 把input key和新的輸入結合一下
 		/// </summary>
 		//virtual int reloadMappings() = 0;
+
+
+		virtual int endGame() {
+
+			TimeController::endGame();
+			isActive = false;
+
+		}
 
 		virtual int onMessage(TMessage* command) {
 			return 0;

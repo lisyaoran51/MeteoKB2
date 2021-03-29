@@ -70,8 +70,7 @@ int TimeController::update()
 	}
 
 	if (checkIsGameOver()) {
-		LOG(LogLevel::Info) << "TimeController::update() : game over.";
-		onGameOver.TriggerThenClear();
+		endGame();
 	}
 
 
@@ -83,6 +82,17 @@ int TimeController::update()
 bool TimeController::checkIsGameOver()
 {
 	return false;
+}
+
+int TimeController::endGame()
+{
+	LOG(LogLevel::Info) << "TimeController::endGame() : game over.";
+
+	onGameOver.TriggerThenClear();
+	// 這邊最好是直接delete child，但是會有thread safe的問題
+	//DeleteChilds();
+	//speedAdjuster = nullptr;
+	return 0;
 }
 
 /* 暫時不寫這段，以後響到要怎麼寫再回來改
