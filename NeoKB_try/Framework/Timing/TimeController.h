@@ -113,6 +113,8 @@ namespace Timing {
 
 		OutputManager* outputManager = nullptr;
 
+		bool isGameEnded = false;
+
 		/// <summary>
 		/// 在update時檢查有沒有被暫停，有的話就把自己時鐘停掉
 		/// </summary>

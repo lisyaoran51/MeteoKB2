@@ -35,7 +35,8 @@ int TimeController::load(OutputManager * o)
 
 int TimeController::update()
 {
-	
+	if (isGameEnded)
+		return 0;
 
 	if (controllableClock == nullptr || speedAdjuster == nullptr)
 		return 0;
@@ -89,6 +90,7 @@ int TimeController::endGame()
 	LOG(LogLevel::Info) << "TimeController::endGame() : game over.";
 
 	onGameOver.TriggerThenClear();
+	isGameEnded = true;
 	// 這邊最好是直接delete child，但是會有thread safe的問題
 	//DeleteChilds();
 	//speedAdjuster = nullptr;
