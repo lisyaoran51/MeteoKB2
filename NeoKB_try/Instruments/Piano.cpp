@@ -387,8 +387,10 @@ int Piano::ControlSustainPedal(bool down)
 
 						SampleChannel* sampleChannel = getSamples()->at(it->first);
 						if (sampleChannel) {
-							if (sampleChannel->GetIsPlaying())
+							if (sampleChannel->GetIsPlaying()) {
+								LOG(LogLevel::Debug) << "Piano::ControlSustainPedal() : pressing map has [" << (int)it->first << "] up.";
 								sampleChannel->FadeOut();
+							}
 						}
 					}
 				}
@@ -410,7 +412,7 @@ int Piano::OnDirectKeyDown(pair<PianoAction, int> action)
 	if (getSamples()->find(action.first) != getSamples()->end()) {
 		getSamples()->at(action.first)->Play(isSensitive ? double(action.second) / 128.0 : 0.8);
 		for (map<PianoAction, SampleChannel*>::iterator iter = getSamples()->begin(); iter != getSamples()->end(); ++iter) {
-			LOG(LogLevel::Debug) << "Piano::OnDirectKeyDown() : piano action [" << (int)iter->first << "] has sample [" << iter->second << "] by [" << GetTypeName() << "].";
+			LOG(LogLevel::Depricated) << "Piano::OnDirectKeyDown() : piano action [" << (int)iter->first << "] has sample [" << iter->second << "] by [" << GetTypeName() << "].";
 		}
 	}
 
@@ -455,7 +457,7 @@ int Piano::OnKeyUp(PianoAction action)
 	if (getSamples()->find(action) == getSamples()->end()) {
 		LOG(LogLevel::Error) << "Piano::OnKeyUp() : not found action [" << (int)action << "] in samples by [" << GetTypeName() <<  "].";
 		for (map<PianoAction, SampleChannel*>::iterator iter = getSamples()->begin(); iter != getSamples()->end(); ++iter) {
-			LOG(LogLevel::Info) << "Piano::OnKeyUp() : piano action [" << (int)iter->first << "] has sample [" << iter->second << "] by [" << GetTypeName() << "].";
+			LOG(LogLevel::Depricated) << "Piano::OnKeyUp() : piano action [" << (int)iter->first << "] has sample [" << iter->second << "] by [" << GetTypeName() << "].";
 		}
 	}
 
