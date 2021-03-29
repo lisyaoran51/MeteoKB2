@@ -388,7 +388,7 @@ int Piano::ControlSustainPedal(bool down)
 						SampleChannel* sampleChannel = getSamples()->at(it->first);
 						if (sampleChannel) {
 							if (sampleChannel->GetIsPlaying()) {
-								LOG(LogLevel::Debug) << "Piano::ControlSustainPedal() : pressing map has [" << (int)it->first << "] up.";
+								LOG(LogLevel::Debug) << "Piano::ControlSustainPedal() : pressing map has [" << (int)it->first << "] up by [" << GetTypeName() << "].";
 								sampleChannel->FadeOut();
 							}
 						}
