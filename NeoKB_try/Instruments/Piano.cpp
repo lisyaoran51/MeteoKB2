@@ -448,8 +448,12 @@ int Piano::OnKeyUp(PianoAction action)
 		return -1;
 
 	LOG(LogLevel::Finest) << "Piano::OnKeyUp() : handling fade out.";
-	if(getSamples()->find(action) == getSamples()->end())
+	if (getSamples()->find(action) == getSamples()->end()) {
 		LOG(LogLevel::Error) << "Piano::OnKeyUp() : not found action [" << (int)action << "] in samples.";
+		for (map<PianoAction, SampleChannel*>::iterator iter = getSamples()->begin(); iter != getSamples()->end(); ++iter) {
+			LOG(LogLevel::Info) << "Piano::OnKeyUp() : piano action [" << (int)action << "] has sample [" << iter->second << "].";
+		}
+	}
 
 	// 沒踏踏板、有插踏板、沒開啟自動延音
 	if(!isPressingMap.at(PianoAction::SustainPedal) && sustainType != SustainType::AutoSustain )
