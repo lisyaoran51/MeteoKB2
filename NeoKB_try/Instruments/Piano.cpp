@@ -410,7 +410,7 @@ int Piano::OnDirectKeyDown(pair<PianoAction, int> action)
 	if (getSamples()->find(action.first) != getSamples()->end()) {
 		getSamples()->at(action.first)->Play(isSensitive ? double(action.second) / 128.0 : 0.8);
 		for (map<PianoAction, SampleChannel*>::iterator iter = getSamples()->begin(); iter != getSamples()->end(); ++iter) {
-			LOG(LogLevel::Info) << "Piano::OnKeyUp() : piano action [" << (int)iter->first << "] has sample [" << iter->second << "].";
+			LOG(LogLevel::Debug) << "Piano::OnDirectKeyDown() : piano action [" << (int)iter->first << "] has sample [" << iter->second << "] by [" << GetTypeName() << "].";
 		}
 	}
 
@@ -455,7 +455,7 @@ int Piano::OnKeyUp(PianoAction action)
 	if (getSamples()->find(action) == getSamples()->end()) {
 		LOG(LogLevel::Error) << "Piano::OnKeyUp() : not found action [" << (int)action << "] in samples.";
 		for (map<PianoAction, SampleChannel*>::iterator iter = getSamples()->begin(); iter != getSamples()->end(); ++iter) {
-			LOG(LogLevel::Info) << "Piano::OnKeyUp() : piano action [" << (int)iter->first << "] has sample [" << iter->second << "].";
+			LOG(LogLevel::Info) << "Piano::OnKeyUp() : piano action [" << (int)iter->first << "] has sample [" << iter->second << "] by [" << GetTypeName() << "].";
 		}
 	}
 
