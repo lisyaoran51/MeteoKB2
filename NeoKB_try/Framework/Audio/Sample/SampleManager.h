@@ -44,6 +44,8 @@ namespace Samples {
 
 		map<string, SampleChannel*> sampleChannelCache;
 
+		map<string, SampleChannel*> mirrorSampleChannelCache;
+
 	public:
 
 		SampleManager(CompositeResourceStore<char*>* rStore);
@@ -52,9 +54,19 @@ namespace Samples {
 
 		bool HasSampleChannel(SoundBinding* soundBinding);
 
+		/// <summary>
+		/// 給virtual piano用的，讓virtual piano的音道和piano的音道是分隔的
+		/// </summary>
+		bool HasMirrorSampleChannel(SoundBinding* soundBinding);
+
 		SampleChannel* GetSampleChannel(string name);
 
 		SampleChannel* GetSampleChannel(SoundBinding* soundBinding);
+
+		/// <summary>
+		/// 給virtual piano用的，讓virtual piano的音道和piano的音道是分隔的
+		/// </summary>
+		SampleChannel* GetMirrorSampleChannel(SoundBinding* soundBinding);
 
 		/// <summary>
 		/// 部會再用了，可以刪掉
@@ -69,6 +81,11 @@ namespace Samples {
 		int RemoveSampleChannel(string name);
 
 		int RemoveSampleChannel(SoundBinding* soundBinding);
+
+		/// <summary>
+		/// 給virtual piano用的，讓virtual piano的音道和piano的音道是分隔的
+		/// </summary>
+		int RemoveMirrorSampleChannel(SoundBinding* soundBinding);
 
 		int ClearSampleChannels();
 
