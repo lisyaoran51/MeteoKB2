@@ -155,7 +155,7 @@ int DecoupledInterpolatingFramedClock::Start()
 
 int DecoupledInterpolatingFramedClock::Stop()
 {
-
+	LOG(LogLevel::Debug) << "DecoupledInterpolatingFramedClock::Stop() : current time [" << GetCurrentTime() << "].";
 	if (getAdjustableSource() != nullptr)
 		getAdjustableSource()->Stop();
 	decoupledStopwatchClock->Stop();
