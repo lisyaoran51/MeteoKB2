@@ -196,7 +196,7 @@ int MeteoMcuV1::readPanel()
 				if (splitMessage[0].length() > 4)
 					throw runtime_error("MeteoMcuV1::readPanel() : Get unknown input.");
 
-				key = (InputKey)stoi(splitMessage[0].substr(1, splitMessage[0].length() - 1));
+				key = static_cast<InputKey>(stoi(splitMessage[0].substr(1, splitMessage[0].length() - 1)));
 				int value = stoi(splitMessage[1]);
 				if (!checkI2cMessageValid(key, value)) {
 					LOG(LogLevel::Error) << "MeteoMcuV1::readPanel() : Get unknown input [" << i2cMessage << "]." << (int)key << " " << value;
@@ -204,8 +204,8 @@ int MeteoMcuV1::readPanel()
 				}
 			}
 			catch (exception& e) {
-				LOG(LogLevel::Error) << "MeteoMcuV1::readPanel() : Get unknown input [" << i2cMessage << "] with key [" << (int)key << "] and value [" << stoi(splitMessage[1]) << "].";
-				LOG(LogLevel::Error) << "MeteoMcuV1::readPanel() : convert to InputKey is [" << (int)(InputKey)stoi(splitMessage[0].substr(1, splitMessage[0].length() - 1)) << "]";
+				LOG(LogLevel::Error) << "MeteoMcuV1::readPanel() : Get unknown input [" << i2cMessage << "].";// with key[" << (int)key << "] and value[" << stoi(splitMessage[1]) << "].";
+				//LOG(LogLevel::Error) << "MeteoMcuV1::readPanel() : convert to InputKey is [" << (int)(InputKey)stoi(splitMessage[0].substr(1, splitMessage[0].length() - 1)) << "]";
 				continue;
 			}
 
