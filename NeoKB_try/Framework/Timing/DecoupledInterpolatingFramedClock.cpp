@@ -146,10 +146,12 @@ int DecoupledInterpolatingFramedClock::Start()
 				//this handles the case where we seeked to an unsupported value and the source clock is out of sync.
 				LOG(LogLevel::Debug) << "DecoupledInterpolatingFramedClock::Start() : start audio clock";
 				getAdjustableSource()->Start();
+				LOG(LogLevel::Debug) << "DecoupledInterpolatingFramedClock::Start() : audio source time is [" << getAdjustableSource()->GetCurrentTime() << "].";
 			}
 		}
 	}
 	decoupledStopwatchClock->Start();
+	LOG(LogLevel::Debug) << "DecoupledInterpolatingFramedClock::Start() : decoupled clock time is [" << decoupledStopwatchClock->GetCurrentTime() << "].";
 	return 0;
 }
 
