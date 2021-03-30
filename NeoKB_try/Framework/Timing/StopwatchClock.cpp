@@ -108,9 +108,9 @@ int StopwatchClock::Stop()
 
 bool StopwatchClock::Seek(double position)
 {
-	LOG(LogLevel::Depricated) << "StopwatchClock::Seek : go to position [" << position << "].";
+	LOG(LogLevel::Debug) << "StopwatchClock::Seek : go to position [" << position << "].";
 	seekOffset += position - GetCurrentTime();
-	LOG(LogLevel::Depricated) << "StopwatchClock::Seek : after go to position [" << position << "], current time = " << fixed << setprecision(5) << GetCurrentTime() << ".";
+	LOG(LogLevel::Debug) << "StopwatchClock::Seek : after go to position [" << position << "], current time = " << fixed << setprecision(5) << GetCurrentTime() << ".";
 	return true;
 }
 
