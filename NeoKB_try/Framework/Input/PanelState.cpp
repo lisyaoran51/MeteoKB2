@@ -4,13 +4,13 @@ using namespace Framework::Input;
 
 
 
-int PanelState::AddButton(InputKey button)
+int PanelState::AddButton(pair<InputKey, bool> button)
 {
 	buttons.push_back(button);
 	return 0;
 }
 
-vector<InputKey>* PanelState::GetButtons()
+vector<pair<InputKey, bool>>* PanelState::GetButtons()
 {
 	return &buttons;
 }
@@ -54,7 +54,7 @@ PanelState * PanelState::Clone()
 bool PanelState::ContainButton(InputKey button)
 {
 	for (int i = 0; i < buttons.size(); i++)
-		if (buttons[i] == button)
+		if (buttons[i].first == button)
 			return true;
 	return false;
 }

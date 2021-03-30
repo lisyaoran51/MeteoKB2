@@ -268,15 +268,19 @@ int MeteoMcuV1::pushPanelState(InputKey key, int value)
 {
 	unique_lock<mutex> uLock(panelStateMutex);
 
-	if (int(key) < 1020) { // knob
-		if (!panelState->GetPanelState()->ContainButton(key))
-			panelState->GetPanelState()->AddButton(key);
+	if (int(key) < 1020) { // before knob is button
+		if (!panelState->GetPanelState()->ContainButton(key)) {
+			if(value == 1)
+				panelState->GetPanelState()->AddButton(pair<InputKey, bool>(key ,true));
+			else
+				panelState->GetPanelState()->AddButton(pair<InputKey, bool>(key, false));
+		}
 	}
-	else if (int(key) < 1030) { // slider
+	else if (int(key) < 1030) { // before slider is knob
 		if (!panelState->GetPanelState()->ContainKnob(key))
 			panelState->GetPanelState()->AddKnob(make_pair(key, value));
 	}
-	else if (int(key) < 1500) { // plugin
+	else if (int(key) < 1500) { // before plugin is slider
 		if (!panelState->GetPanelState()->ContainSlider(key))
 			panelState->GetPanelState()->AddSlider(make_pair(key, value));
 	}

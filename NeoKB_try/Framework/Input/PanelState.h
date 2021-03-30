@@ -17,7 +17,10 @@ namespace Input {
 
 	class PanelState : public PeripheralState<PanelState> {
 
-		vector<InputKey> buttons;
+		/// <summary>
+		/// 按鈕按下或放開，true是按下，false是放開
+		/// </summary>
+		vector<pair<InputKey, bool>> buttons;
 
 		vector<pair<InputKey,int>> knobs;
 
@@ -26,9 +29,9 @@ namespace Input {
 
 	public:
 
-		int AddButton(InputKey button);
+		int AddButton(pair<InputKey, bool> button);
 
-		vector<InputKey>* GetButtons();
+		vector<pair<InputKey, bool>>* GetButtons();
 
 		int AddKnob(pair<InputKey, int> knob);
 

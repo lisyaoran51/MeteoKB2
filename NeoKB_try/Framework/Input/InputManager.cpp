@@ -345,24 +345,12 @@ int InputManager::updatePanelEvents(InputState * inputState)
 	// 我們不考慮repeat，鎖以不用寫得很複雜
 	// 暫時也不寫組合鍵，以後再寫
 
-	if (lastPanelState) {
-		/* Button */
-		for (int i = 0; i < lastPanelState->GetButtons()->size(); i++) {
-			if (!panelState->ContainButton(lastPanelState->GetButtons()->at(i))) {
-				handleButtonUp(inputState, lastPanelState->GetButtons()->at(i));
-			}
-		}
-
-		for (int i = 0; i < panelState->GetButtons()->size(); i++) {
-			if (!lastPanelState->ContainButton(panelState->GetButtons()->at(i))) {
-				handleButtonDown(inputState, panelState->GetButtons()->at(i));
-			}
-		}
-	}
-	else {
-		for (int i = 0; i < panelState->GetButtons()->size(); i++) {
-			handleButtonDown(inputState, lastPanelState->GetButtons()->at(i));
-		}
+	/* Button */
+	for (int i = 0; i < panelState->GetButtons()->size(); i++) {
+		if(panelState->GetButtons()->at(i).second == true)
+			handleButtonDown(inputState, panelState->GetButtons()->at(i).first);
+		else
+			handleButtonUp(inputState, panelState->GetButtons()->at(i).first);
 	}
 
 
