@@ -204,6 +204,7 @@ int MeteoMcuV1::readPanel()
 				}
 			}
 			catch (exception& e) {
+				LOG(LogLevel::Error) << "MeteoMcuV1::readPanel() : " << e.what();
 				LOG(LogLevel::Error) << "MeteoMcuV1::readPanel() : Get unknown input [" << i2cMessage << "]. with key[" << (int)key << "] and value[" << stoi(splitMessage[1]) << "].";
 				LOG(LogLevel::Error) << "MeteoMcuV1::readPanel() : convert to InputKey is [" << (int)static_cast<InputKey>(stoi(splitMessage[0].substr(1, splitMessage[0].length() - 1))) << "]";
 				continue;
