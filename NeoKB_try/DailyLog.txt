@@ -2911,3 +2911,12 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 	meteo piano和virtual meteo pinao用到同一組sample了，雖然是從不同piano控制，但是最後都是在控制同一組sample
 	
 	delete child的mutex沒有寫好，刪掉的時候會被再次存取，就會當機。delete childs也沒有真的刪掉childs，只是把他們拿出來vector外面，之後要檢查是不是真的有山道
+	
+3/31
+
+	快轉沒有效果，快退沒有重新啟動Event
+	速度旋鈕方向反了
+	
+	出現奇怪的問題 controllable clock的source被seek以後 seekOffset會跳成奇怪的數字
+	4 : StopwatchClock::Seek : before seek, current time [21.3032], seek offset [-4.0002], accumulated time [12.6517] by [0x70b75308].
+	4 : StopwatchClock::Seek : go to position [8.65235], current time [8.65235], seek offset [-16.651], accumulated time [12.6517] by [0x70b75308].

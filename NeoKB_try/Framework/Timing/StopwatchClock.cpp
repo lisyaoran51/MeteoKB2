@@ -110,10 +110,10 @@ int StopwatchClock::Stop()
 bool StopwatchClock::Seek(double position)
 {
 	LOG(LogLevel::Depricated) << "StopwatchClock::Seek : go to position [" << position << "].";
-	LOG(LogLevel::Debug) << "StopwatchClock::Seek : before seek, current time [" << GetCurrentTime() << "], seek offset [" << seekOffset << "], accumulated time [" << rateChangeAccumulatedTime << "] by [" << this << "].";
+	LOG(LogLevel::Debug) << "StopwatchClock::Seek : before seek, current time [" << GetCurrentTime() << "], elapsed seconds [" << getElapsedSeconds() << "], seek offset [" << seekOffset << "], accumulated time [" << rateChangeAccumulatedTime << "] by [" << this << "].";
 	seekOffset += position - GetCurrentTime();
 	LOG(LogLevel::Depricated) << "StopwatchClock::Seek : after go to position [" << position << "], current time = " << fixed << setprecision(5) << GetCurrentTime() << ".";
-	LOG(LogLevel::Debug) << "StopwatchClock::Seek : go to position [" << position << "], current time [" << GetCurrentTime() << "], seek offset [" << seekOffset << "], accumulated time [" << rateChangeAccumulatedTime << "] by [" << this << "].";
+	LOG(LogLevel::Debug) << "StopwatchClock::Seek : go to position [" << position << "], current time [" << GetCurrentTime() << "], elapsed seconds [" << getElapsedSeconds() << "], seek offset [" << seekOffset << "], accumulated time [" << rateChangeAccumulatedTime << "] by [" << this << "].";
 
 	return true;
 }
