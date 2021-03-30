@@ -46,7 +46,7 @@ int Updatable::SetParent(HasParent * p)
 bool Updatable::UpdateSubTree()
 {
 
-	LOG(LogLevel::Finest) << "Updatable::UpdateSubTree() : update [" << GetTypeName() << "].";
+	LOG(LogLevel::Depricated) << "Updatable::UpdateSubTree() : update [" << GetTypeName() << "].";
 
 	if (GetLoadState() < LoadState::Ready)
 		return false;
@@ -91,7 +91,7 @@ bool Updatable::UpdateSubTree()
 	for (vector<ChildAddable*>::iterator iter = cacheChilds.begin(); iter != cacheChilds.end(); iter++) {
 		Updatable* child = Cast<Updatable>(*iter);
 		if (child != nullptr) {
-			LOG(LogLevel::Finest) << "Updatable::UpdateSubTree() : [" << GetTypeName() << "] iterating child [" << (*iter)->GetTypeName() << "] to update.";
+			LOG(LogLevel::Depricated) << "Updatable::UpdateSubTree() : [" << GetTypeName() << "] iterating child [" << (*iter)->GetTypeName() << "] to update.";
 			Cast<Updatable>(*iter)->UpdateSubTree();
 
 		}

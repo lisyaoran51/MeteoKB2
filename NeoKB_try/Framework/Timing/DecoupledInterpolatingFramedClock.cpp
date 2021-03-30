@@ -166,6 +166,7 @@ int DecoupledInterpolatingFramedClock::Stop()
 
 bool DecoupledInterpolatingFramedClock::Seek(double position)
 {
+	LOG(LogLevel::Debug) << "DecoupledInterpolatingFramedClock::Seek : go to position [" << position << "].";
 	bool success = false; // 之後要回來看看初始直是不是false
 	if (getAdjustableSource() != nullptr)
 		success = getAdjustableSource()->Seek(position) == true;

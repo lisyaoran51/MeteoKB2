@@ -162,7 +162,7 @@ int GameHost::drawFrame()
 	if (root == nullptr)
 		return 0;
 
-	LOG(LogLevel::Finest) << "GameHost::drawFrame() : drawing a frame.";
+	LOG(LogLevel::Depricated) << "GameHost::drawFrame() : drawing a frame.";
 
 	canvas->Reset();
 
@@ -185,7 +185,7 @@ int GameHost::drawFrame()
 			drawables[i]->GetPositionY());
 	}
 
-	LOG(LogLevel::Finest) << [](int width, int height, Map* m) {
+	LOG(LogLevel::Depricated) << [](int width, int height, Map* m) {
 		LOG(LogLevel::Finest) << "GameHost::drawFrame : light map";
 		// 因為只看畫面中央，所以不看其他排
 		for (int i = 0; i < width; i++) {
@@ -199,7 +199,7 @@ int GameHost::drawFrame()
 		return 0;
 	}(canvas->GetWidth(), canvas->GetHeight(), canvas);
 
-	LOG(LogLevel::Finest) << "GameHost::drawFrame() : pass to display.";
+	LOG(LogLevel::Depricated) << "GameHost::drawFrame() : pass to display.";
 
 	mainInterface->GetDisplay()->Show(canvas);
 
@@ -221,7 +221,7 @@ int GameHost::updateFrame()
 
 	LOG(LogLevel::Depricated) << "GameHost::updateFrame() : update scenegraph tree.";
 
-	LOG(LogLevel::Finest) << "GameHost::updateFrame() : print tree " << [](Container* r) {
+	LOG(LogLevel::Depricated) << "GameHost::updateFrame() : print tree " << [](Container* r) {
 
 		r->_DebugPrintTree("|");
 
