@@ -5,10 +5,12 @@
 #include "../../../Framework/Allocation/Hierachal/Container.h"
 #include "ReplayRecorder.h"
 #include "../../../Framework/Input/KeyBindings/KeyBindingHandler.h"
+#include "../../../Framework/Timing/TimeController.h"
 
 
 using namespace Framework::Allocation::Hierachal;
 using namespace Framework::Input::KeyBindings;
+using namespace Framework::Timing;
 
 
 namespace Games {
@@ -22,7 +24,7 @@ namespace Replays {
 
 		int load();
 
-		int load(ReplayRecorder* r);
+		int load(ReplayRecorder* r, TimeController* t);
 
 	public:
 
@@ -33,6 +35,11 @@ namespace Replays {
 	protected:
 
 		ReplayRecorder* replayRecorder = nullptr;
+
+		/// <summary>
+		/// 用來判斷是不是錄音中，如果是false就停止紀錄
+		/// </summary>
+		bool isRecording = true;
 
 	};
 
@@ -45,6 +52,9 @@ namespace Replays {
 		}
 
 		virtual int OnKeyDown(pair<T, int> action) {
+			if (!isRecording)
+				return -1;
+
 			if (replayRecorder != nullptr) {
 				if (dynamic_cast<TReplayRecorder<T>*>(replayRecorder) != nullptr) {
 					dynamic_cast<TReplayRecorder<T>*>(replayRecorder)->OnKeyDown(action);
@@ -57,6 +67,9 @@ namespace Replays {
 		}
 
 		virtual int OnKeyUp(T action) {
+			if (!isRecording)
+				return -1;
+
 			if (replayRecorder != nullptr) {
 				if (dynamic_cast<TReplayRecorder<T>*>(replayRecorder) != nullptr) {
 					dynamic_cast<TReplayRecorder<T>*>(replayRecorder)->OnKeyUp(action);
@@ -69,6 +82,9 @@ namespace Replays {
 		}
 
 		virtual int OnButtonDown(T action) {
+			if (!isRecording)
+				return -1;
+
 			if (replayRecorder != nullptr) {
 				if (dynamic_cast<TReplayRecorder<T>*>(replayRecorder) != nullptr) {
 					dynamic_cast<TReplayRecorder<T>*>(replayRecorder)->OnButtonDown(action);
@@ -81,6 +97,9 @@ namespace Replays {
 		}
 
 		virtual int OnButtonUp(T action) {
+			if (!isRecording)
+				return -1;
+
 			if (replayRecorder != nullptr) {
 				if (dynamic_cast<TReplayRecorder<T>*>(replayRecorder) != nullptr) {
 					dynamic_cast<TReplayRecorder<T>*>(replayRecorder)->OnButtonUp(action);
@@ -93,6 +112,9 @@ namespace Replays {
 		}
 
 		virtual int OnKnobTurn(pair<T, int> action) {
+			if (!isRecording)
+				return -1;
+
 			if (replayRecorder != nullptr) {
 				if (dynamic_cast<TReplayRecorder<T>*>(replayRecorder) != nullptr) {
 					dynamic_cast<TReplayRecorder<T>*>(replayRecorder)->OnKnobTurn(action);
@@ -105,6 +127,9 @@ namespace Replays {
 		}
 
 		virtual int OnSlide(pair<T, int> action) {
+			if (!isRecording)
+				return -1;
+
 			if (replayRecorder != nullptr) {
 				if (dynamic_cast<TReplayRecorder<T>*>(replayRecorder) != nullptr) {
 					dynamic_cast<TReplayRecorder<T>*>(replayRecorder)->OnSlide(action);

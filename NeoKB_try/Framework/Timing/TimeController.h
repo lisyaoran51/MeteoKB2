@@ -88,6 +88,18 @@ namespace Timing {
 		TimeControllerState GetTimeControllerState();
 
 		template<class _Type>
+		int AddOnPause(_Type* callableObject, function<int()> callback, string name = "HandlePause") {
+			onPause.Add(callableObject, callback, name);
+			return 0;
+		}
+
+		template<class _Type>
+		int AddOnPauseEnd(_Type* callableObject, function<int()> callback, string name = "HandlePauseEnd") {
+			onPauseEnd.Add(callableObject, callback, name);
+			return 0;
+		}
+
+		template<class _Type>
 		int AddOnRetry(_Type* callableObject, function<int()> callback, string name = "HandleRetryRequest") {
 			onRetryRequested.Add(callableObject, callback, name);
 			return 0;
@@ -151,6 +163,9 @@ namespace Timing {
 		/// 當暫停結束，要繼續遊戲時，有個倒數時間，這時isWaitingFreeze就會是true
 		/// </summary>
 		bool isWaitingFreeze = false;
+
+		ActionList<int> onPause;
+		ActionList<int> onPauseEnd;
 
 		ActionList<int> onRetryRequested;
 		ActionList<int> onQuitRequested;
@@ -233,7 +248,10 @@ namespace Timing {
 
 				if (!GetIsPaused()) {
 					Pause();
-					SetAllChildsIsMaskedForTrigger();
+					// 這邊不能直接關掉所有輸入，因為time controller本身收不到action，必須靠playfield收到action以後回call道time controller，才能控制時間
+					// 如果關掉輸入的話，一暫停之後，playfield就再也不能收到輸入，就不能夠解除暫停
+					// 應該要去playfield裡面把計分和記遊戲紀錄的功能關掉就好
+					//SetAllChildsIsMaskedForTrigger();
 				}
 				else if(!isWaitingFreeze){
 					speedAdjuster->SetFreezeTime(defaultFreezeTime);

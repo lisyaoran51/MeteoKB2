@@ -99,6 +99,15 @@ int EventProcessorMaster::load(FrameworkConfigManager * f, EventProcessorFilter 
 	else
 		throw runtime_error("int EventProcessorMaster::load() : Width and Height not found in Setting.");
 
+	timeController->AddOnPause(this, [=]() {
+		isGamePaused = true;
+		return 0;
+	}, "EventProcessorMaster::Lambda_HandleOnPause");
+
+	timeController->AddOnPauseEnd(this, [=]() {
+		isGamePaused = false;
+		return 0;
+	}, "EventProcessorMaster::Lambda_HandleOnPauseEnd");
 
 	return 0;
 }

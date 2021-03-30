@@ -155,15 +155,31 @@ int TimeController::SetSpeedAdjuster(SpeedAdjuster * sAdjuster)
 		delete speedAdjuster;
 	speedAdjuster = sAdjuster;
 	
-	
-	speedAdjuster->AddOnAdjustFreeze(this, bind(&TimeController::SetAllChildsIsMaskedForTrigger, this),
-		"TimeController::SetAllChildsIsMaskedForTrigger");
+	// 這邊不能直接關掉所有輸入，因為time controller本身收不到action，必須靠playfield收到action以後回call道time controller，才能控制時間
+	// 如果關掉輸入的話，一暫停之後，playfield就再也不能收到輸入，就不能夠解除暫停
+	// 應該要去playfield裡面把計分和記遊戲紀錄的功能關掉就好
+	//speedAdjuster->AddOnAdjustFreeze(this, bind(&TimeController::SetAllChildsIsMaskedForTrigger, this),
+	//	"TimeController::SetAllChildsIsMaskedForTrigger");
+
+	speedAdjuster->AddOnAdjustFreeze(this, [=]() {
+
+		onPause.Trigger();
+
+		return 0;
+	}, "TimeController::Lambda_HandleOnPause");
 
 	speedAdjuster->AddOnAdjustFreeze(controllableClock, bind(&AdjustableClock::Stop, controllableClock),
 		"AdjustableClock::Stop");
 
-	speedAdjuster->AddOnAdjustFreezeEnd(this, bind(&TimeController::RecoverAllChildsIsMaskedForTrigger, this),
-		"TimeController::RecoverAllChildsIsMaskedForTrigger");
+	//speedAdjuster->AddOnAdjustFreezeEnd(this, bind(&TimeController::RecoverAllChildsIsMaskedForTrigger, this),
+	//	"TimeController::RecoverAllChildsIsMaskedForTrigger");
+
+	speedAdjuster->AddOnAdjustFreezeEnd(this, [=]() {
+
+		onPauseEnd.Trigger();
+
+		return 0;
+	},"TimeController::Lambda_HandleOnPauseEnd");
 	
 	speedAdjuster->AddOnAdjustFreezeEnd(controllableClock, bind(&AdjustableClock::Start, controllableClock),
 		"AdjustableClock::Start");

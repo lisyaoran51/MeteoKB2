@@ -42,86 +42,50 @@ int MeteorEventProcessorMaster::OnKeyDown(pair<MeteorAction, int> action)
 	//
 	//eventProcessorFilter->Filter(&eventProcessors);
 
-	NoteControlPointHitObject* receivedHitObject = nullptr;
+	if (!isGamePaused) {
 
-	for (int i = 0; i < filteredTempStaticEventProcessors.size(); i++) {
+		NoteControlPointHitObject* receivedHitObject = nullptr;
 
-		NoteControlPointHitObject* noteControlPointHitObject = dynamic_cast<NoteControlPointHitObject*>(filteredTempStaticEventProcessors[i]);
+		for (int i = 0; i < filteredTempStaticEventProcessors.size(); i++) {
 
-		if (noteControlPointHitObject == nullptr)
-			continue;
+			NoteControlPointHitObject* noteControlPointHitObject = dynamic_cast<NoteControlPointHitObject*>(filteredTempStaticEventProcessors[i]);
 
-		LOG(LogLevel::Depricated) << "MeteorEventProcessorMaster::OnKeyDown() : checking hit object [" << (int)noteControlPointHitObject->GetPitch() << "] on [" << noteControlPointHitObject->GetStartTime() << "] matching [" << int(action.first) << "].";// on[" << currentTime << "].";
+			if (noteControlPointHitObject == nullptr)
+				continue;
 
-		if (!matchPitch(noteControlPointHitObject, action.first))
-			continue;
+			LOG(LogLevel::Depricated) << "MeteorEventProcessorMaster::OnKeyDown() : checking hit object [" << (int)noteControlPointHitObject->GetPitch() << "] on [" << noteControlPointHitObject->GetStartTime() << "] matching [" << int(action.first) << "].";// on[" << currentTime << "].";
 
-		LOG(LogLevel::Depricated) << "MeteorEventProcessorMaster::OnKeyDown() : matched input! " << int(action.first);
+			if (!matchPitch(noteControlPointHitObject, action.first))
+				continue;
+
+			LOG(LogLevel::Depricated) << "MeteorEventProcessorMaster::OnKeyDown() : matched input! " << int(action.first);
 
 
-		if (noteControlPointHitObject->GetHasJudgementResult())
-			continue;
+			if (noteControlPointHitObject->GetHasJudgementResult())
+				continue;
 
-		LOG(LogLevel::Depricated) << "MeteorEventProcessorMaster::OnKeyDown() : not judged! " << int(action.first);
+			LOG(LogLevel::Depricated) << "MeteorEventProcessorMaster::OnKeyDown() : not judged! " << int(action.first);
 
-		if (noteControlPointHitObject->TryJudgement() > 0) {
-			if (receivedHitObject != nullptr) {
+			if (noteControlPointHitObject->TryJudgement() > 0) {
+				if (receivedHitObject != nullptr) {
 
-				// 最晚的最先被打中，早的hit object就直接跳過
-				// pedal事件先全部跳過，以後要檢查視不適game control pedal，是的話再跳過，game control pedal現在存在piano和meteo piano裡
-				if (noteControlPointHitObject->TryJudgement() > receivedHitObject->TryJudgement())
-					continue;
+					// 最晚的最先被打中，早的hit object就直接跳過
+					// pedal事件先全部跳過，以後要檢查視不適game control pedal，是的話再跳過，game control pedal現在存在piano和meteo piano裡
+					if (noteControlPointHitObject->TryJudgement() > receivedHitObject->TryJudgement())
+						continue;
+				}
+				receivedHitObject = noteControlPointHitObject;
 			}
-			receivedHitObject = noteControlPointHitObject;
+		}
+
+		if (receivedHitObject) {
+
+			LOG(LogLevel::Debug) << "MeteorEventProcessorMaster::OnKeyDown() : find a hit object [" << receivedHitObject << "] on [" << int(action.first) << "].";
+			receivedHitObject->UpdateJudgement(true);
+
 		}
 	}
 
-	if (receivedHitObject) {
-
-		LOG(LogLevel::Debug) << "MeteorEventProcessorMaster::OnKeyDown() : find a hit object [" << receivedHitObject << "] on [" << int(action.first) << "].";
-		receivedHitObject->UpdateJudgement(true);
-
-	}
-
-	/*
-	HitObject* receivedHitObject = nullptr;
-
-	for (int i = 0; i < eventProcessors.size(); i++) {
-
-		HitObject* hObject = dynamic_cast<HitObject*>(eventProcessors[i]);
-
-		if (hObject == nullptr)
-			continue;
-
-		if (!matchPitch(hObject, action.first))
-			continue;
-
-		LOG(LogLevel::Depricated) << "MeteorEventProcessorMaster::OnKeyDown() : matched input! " << int(action.first);
-
-
-		if (hObject->GetHasJudgementResult())
-			continue;
-
-		LOG(LogLevel::Depricated) << "MeteorEventProcessorMaster::OnKeyDown() : not judged! " << int(action.first);
-		
-		if (hObject->TryJudgement() > 0) {
-			if (receivedHitObject != nullptr) {
-
-				// 最晚的最先被打中，早的hit object就直接跳過
-				if (hObject->TryJudgement() > receivedHitObject->TryJudgement())
-					continue;
-			}
-			receivedHitObject = hObject;
-		}
-	}
-
-	if (receivedHitObject) {
-
-		LOG(LogLevel::Debug) << "MeteorEventProcessorMaster::OnKeyDown() : find a hit object [" << receivedHitObject << "].";
-		receivedHitObject->UpdateJudgement(true);
-
-	}
-	*/
 
 	MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::PressKey);
 	json context;

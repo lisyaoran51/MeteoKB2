@@ -115,6 +115,11 @@ namespace Events {
 
 		TimeController* timeController = nullptr;
 
+		/// <summary>
+		/// 用來判斷是不是暫停狀態，暫停中就不能夠判斷分數
+		/// </summary>
+		bool isGamePaused = false;
+
 		int processEvent(MTO_FLOAT elapsedTime);
 
 		

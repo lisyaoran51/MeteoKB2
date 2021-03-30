@@ -350,6 +350,8 @@ int MeteorPlayfield::OnKeyUp(MeteorAction action)
 int MeteorPlayfield::OnButtonDown(MeteorAction action)
 {
 	LOG(LogLevel::Debug) << "MeteorPlayfield::OnButtonDown() : button = " << int(action) << ".";
+	if(meteorTimeController->GetIsActive())
+		meteorTimeController->OnButtonDown(action);
 
 	if (!isGameControllingPitchState) {
 		if (action == MeteorAction::LowerOctave) {
@@ -391,6 +393,8 @@ int MeteorPlayfield::OnButtonUp(MeteorAction action)
 
 int MeteorPlayfield::OnKnobTurn(pair<MeteorAction, int> action)
 {
+	if (meteorTimeController->GetIsActive())
+		meteorTimeController->OnKnobTurn(action);
 	return 0;
 }
 

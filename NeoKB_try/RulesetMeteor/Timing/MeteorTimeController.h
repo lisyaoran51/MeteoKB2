@@ -152,8 +152,14 @@ namespace Timing {
 		/// </summary>
 		//virtual int reloadMappings(); // 改成不繼承meteo action
 
+		/// <summary>
+		/// 這邊寫錯了，這個不能用
+		/// </summary>
 		virtual int onButtonDown(InputState* inputState, InputKey button);
 
+		/// <summary>
+		/// 這邊寫錯了，這個不能用
+		/// </summary>
 		virtual int onKnobTurn(InputState* inputState, InputKey knob);
 
 		virtual int onMessage(MeteoBluetoothMessage* message);
