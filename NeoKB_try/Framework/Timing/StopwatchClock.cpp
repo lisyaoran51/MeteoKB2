@@ -102,7 +102,7 @@ int StopwatchClock::Stop()
 	if (!isStarted || !isRunning)
 		return -1;
 	rateChangeAccumulatedTime += getElapsedSeconds() * rate;
-	LOG(LogLevel::Debug) << "StopwatchClock::Stop() : accumulated time is [" << rateChangeAccumulatedTime << "]";
+	LOG(LogLevel::Debug) << "StopwatchClock::Stop() : accumulated time is [" << rateChangeAccumulatedTime << "], seek offset [" << seekOffset << "]";
 	isRunning = false;
 	return 0;
 }
