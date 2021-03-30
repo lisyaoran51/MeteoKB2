@@ -77,7 +77,7 @@ bool MeteoMcuV1::checkI2cMessageValid(InputKey iKey, int v)
 
 	//if (v > 256 || v < -1)
 	//	return false;
-	if (v > 286 || v < -1)
+	if (v > 128 || v < -1)
 		return false;
 
 	return true;
@@ -185,7 +185,7 @@ int MeteoMcuV1::readPanel()
 			if (i2cMessage[0] != 0x80)
 				return -1;
 
-			LOG(LogLevel::Depricated) << "MeteoPanelBoardV1::readPanel() : Get input from mcu [" << i2cMessage << "].";
+			LOG(LogLevel::Depricated) << "MeteoMcuV1::readPanel() : Get input from mcu [" << i2cMessage << "].";
 
 			vector<string> splitMessage;
 			InputKey key = InputKey::None;
@@ -194,17 +194,17 @@ int MeteoMcuV1::readPanel()
 				splitMessage = split(i2cMessage, ",");
 
 				if (splitMessage[0].length() > 4)
-					throw runtime_error("MeteoPanelBoardV1::readPanel() : Get unknown input.");
+					throw runtime_error("MeteoMcuV1::readPanel() : Get unknown input.");
 
 				key = (InputKey)stoi(splitMessage[0].substr(1, splitMessage[0].length() - 1));
 				int value = stoi(splitMessage[1]);
 				if (!checkI2cMessageValid(key, value)) {
-					LOG(LogLevel::Error) << "MeteoPanelDevice::readFromDevice() : Get unknown input [" << i2cMessage << "]." << (int)key << " " << value;
-					throw out_of_range("MeteoPanelDevice::readFromDevice() : Get unknown input.");
+					LOG(LogLevel::Error) << "MeteoMcuV1::readPanel() : Get unknown input [" << i2cMessage << "]." << (int)key << " " << value;
+					throw out_of_range("MeteoMcuV1::readPanel() : Get unknown input.");
 				}
 			}
 			catch (exception& e) {
-				LOG(LogLevel::Error) << "MeteoPanelDevice::readFromDevice() : Get unknown input [" << i2cMessage << "].";
+				LOG(LogLevel::Error) << "MeteoMcuV1::readPanel() : Get unknown input [" << i2cMessage << "] with key [" << (int)key << "] and value [" << splitMessage[1] << "].";
 				continue;
 			}
 
