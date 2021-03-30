@@ -192,18 +192,18 @@ vector<InputState*>* InputManager::createDistinctInputStates(vector<InputState*>
 
 			/* button */
 			for (int i = 0; i < state->GetPanelState()->GetButtons()->size(); i++) {
-				InputKey button = state->GetPanelState()->GetButtons()->at(i);
+				InputKey button = state->GetPanelState()->GetButtons()->at(i).first;
 				//檢查有沒有重複
 				bool duplicated = false;
 				for (int j = 0; j < newPanelState->GetButtons()->size(); j++) {
-					if (newPanelState->GetButtons()->at(j) == button) {
+					if (newPanelState->GetButtons()->at(j).first == button) {
 						// 有重複就直接跳過
 						duplicated = true;
 						break;
 					}
 				}
 				if(!duplicated)
-					newPanelState->GetButtons()->push_back(button);
+					newPanelState->GetButtons()->push_back(state->GetPanelState()->GetButtons()->at(i));
 			}
 
 			/* knob */
