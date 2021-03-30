@@ -147,6 +147,111 @@ int MeteorTimeController::SetLastEventOverTime(double lEventOverTime)
 	return 0;
 }
 
+int MeteorTimeController::OnButtonDown(MeteorAction action)
+{
+	if (action == MeteorAction::Pause) {
+		LOG(LogLevel::Debug) << "MeteorTimeController::OnButtonDown() : get pause button input and pause.";
+		if (speedAdjuster->GetIsAdjustingTime())
+			return -1;
+
+		if (!GetIsPaused()) {
+			Pause();
+			//SetAllChildsIsMaskedForTrigger(); 這行在speed adjuster的on freeze裡面
+		}
+		else if (!isWaitingFreeze) {
+			LOG(LogLevel::Debug) << "MeteorTimeController::OnButtonDown() : restart and freeze 1 sec.";
+
+			speedAdjuster->SetFreezeTime(defaultFreezeTime);
+			isWaitingFreeze = true;
+			isAdjustAfterPause = false;
+
+			/* 這編讓光圈跑一圈，跑的時間是defaultFreezeTime */
+			LightRingPanelMessage* message = new LightRingPanelMessage(defaultFreezeTime);
+			LOG(LogLevel::Depricated) << "MeteorTimeController::onButtonDown : send i2c [" << message->ToString() << "].";
+			outputManager->PushMessage(message);
+		}
+		else
+			return -1;
+
+	}
+	return 0;
+}
+
+int MeteorTimeController::OnKnobTurn(pair<MeteorAction, int> action)
+{
+	if (action.first == MeteorAction::SectionKnob) {
+		// 倒數繼續遊戲的時候不准任何其他動作
+		if (isWaitingFreeze)
+			return 0;
+
+		int turnValue = action.second;
+
+		if (!GetIsPaused()) {
+			Pause();
+		}
+		else if (!speedAdjuster->GetIsAdjustingTime())
+			isAdjustAfterPause = true;
+
+		if (timeControllerMode == MeteorTimeControllerMode::RepeatPractice) {
+			if (turnValue > 0) {
+				/* 往後轉的時候，就跳到下個小節 */
+				speedAdjuster->SetSeekTime(GetClock()->GetCurrentTime() - sectionTime[tempStartSection + 1]);
+				tempStartSection++;
+			}
+			else {
+				/* 往回轉的時候，就跳到上個小節 */
+				speedAdjuster->SetSeekTime(-(GetClock()->GetCurrentTime() - sectionTime[tempStartSection - 1]));
+				tempStartSection--;
+			}
+			tempRepeatTimes = 0;
+		}
+		else if (timeControllerMode == MeteorTimeControllerMode::MusicGame) {
+
+			speedAdjuster->SetSeekTime(turnValue * defaultAdjustTime);
+
+			// 這邊是避免剛好set seek time以後seek time剛好等於0，會造成意外狀況，所以刻意不讓他最後變成0，就隨便加一個數字上去
+			if (speedAdjuster->GetSeekTime() == 0)
+				speedAdjuster->SetSeekTime(turnValue);
+		}
+
+
+
+	}
+
+	if (action.first == MeteorAction::SpeedKnob) {
+		LOG(LogLevel::Debug) << "MeteorTimeController::onKnobTurn() : get [SpeedKnob] action. ";
+
+		int turnValue = action.second;
+
+		if (turnValue < 0) {
+			if (GetRate() > 0.3) {
+				LOG(LogLevel::Debug) << "MeteorTimeController::onKnobTurn() : [SpeedKnob] action turn value = " << turnValue << ". rate = " << GetRate();
+				SetRate(GetRate() - 0.1);
+				//SetRate(0.8);
+
+				// TODO:
+				// OutputManager->push(減速訊號給mcu)
+
+			}
+		}
+		else {
+			if (GetRate() < 1.8) {
+				LOG(LogLevel::Debug) << "MeteorTimeController::onKnobTurn() : [SpeedKnob] action turn value = " << turnValue << ". rate = " << GetRate();
+				SetRate(GetRate() + 0.1);
+
+				// TODO:
+				// OutputManager->push(加速訊號給mcu)
+
+			}
+		}
+
+
+	}
+
+
+	return 0;
+}
+
 int MeteorTimeController::SetSectionTime(vector<float>* sTime)
 {
 	for (int i = 0; i < sTime->size(); i++) {
@@ -284,6 +389,8 @@ bool MeteorTimeController::checkIsGameOver()
 
 int MeteorTimeController::onButtonDown(InputState * inputState, InputKey button)
 {
+	return 0;
+
 	if (button == InputKey::Pause) {
 		LOG(LogLevel::Debug) << "MeteorTimeController::OnButtonDown() : get pause button input and pause.";
 		if (speedAdjuster->GetIsAdjustingTime())
@@ -314,6 +421,7 @@ int MeteorTimeController::onButtonDown(InputState * inputState, InputKey button)
 
 int MeteorTimeController::onKnobTurn(InputState * inputState, InputKey knob)
 {
+	return 0;
 	if (knob == InputKey::SectionKnob) {
 		// 倒數繼續遊戲的時候不准任何其他動作
 		if (isWaitingFreeze)
@@ -397,7 +505,7 @@ int MeteorTimeController::onMessage(MeteoBluetoothMessage * message)
 	if (message->GetCommand() == MeteoCommand::AppQuitGame || message->GetCommand() == MeteoCommand::AppRestartGame) {
 
 		/* 離開遊戲時將燈光關閉 */
-		SpeedRingPanelMessage* speedRingPanelMessage = new SpeedRingPanelMessage(vector<bool>({ false, false, false, false, false, false }));
+		SpeedRingPanelMessage* speedRingPanelMessage = new SpeedRingPanelMessage(5);
 		outputManager->PushMessage(speedRingPanelMessage);
 
 	}
