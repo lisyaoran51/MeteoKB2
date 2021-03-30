@@ -87,10 +87,10 @@ int StopwatchClock::Start()
 			return -1; // TODO: throw error因為是異常狀況
 		systemStartTime = system_clock::now();
 		systemCurrentTime = system_clock::now();
-		LOG(LogLevel::Finest) << "StopwatchClock::Start() : current elapsed time = [" << duration_cast<microseconds>(systemCurrentTime - systemStartTime).count() << "].";
+		LOG(LogLevel::Finest) << "StopwatchClock::Start() : current elapsed time = [" << duration_cast<microseconds>(systemCurrentTime - systemStartTime).count() << "] ";
 		isRunning = true;
 		isStarted = true;
-		LOG(LogLevel::Debug) << "StopwatchClock::Start() : elapsed seconds = [" << getElapsedSeconds() << "], accumulated time = [" << rateChangeAccumulatedTime << "], seek offset = [" << seekOffset << "]";
+		LOG(LogLevel::Debug) << "StopwatchClock::Start() : elapsed seconds = [" << getElapsedSeconds() << "], accumulated time = [" << rateChangeAccumulatedTime << "], seek offset = [" << seekOffset << "] by [" << this << "].";
 	}
 	
 	return 0;
@@ -112,6 +112,8 @@ bool StopwatchClock::Seek(double position)
 	LOG(LogLevel::Depricated) << "StopwatchClock::Seek : go to position [" << position << "].";
 	seekOffset += position - GetCurrentTime();
 	LOG(LogLevel::Depricated) << "StopwatchClock::Seek : after go to position [" << position << "], current time = " << fixed << setprecision(5) << GetCurrentTime() << ".";
+	LOG(LogLevel::Debug) << "StopwatchClock::Seek : go to position [" << position << "], current time [" << GetCurrentTime() << "], seek offset [" << seekOffset << "], accumulated time [" << rateChangeAccumulatedTime << "] by [" << this << "].";
+
 	return true;
 }
 
