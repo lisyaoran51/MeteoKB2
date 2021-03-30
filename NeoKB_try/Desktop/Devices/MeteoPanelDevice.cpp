@@ -26,7 +26,7 @@ int MeteoPanelDevice::readFromDevice()
 		InputState* newState = new InputState();
 		newState->SetPanelState(new PanelState());
 
-		newState->GetPanelState()->AddButton(InputKey::Pause);
+		newState->GetPanelState()->AddButton(pair<InputKey, int>(InputKey::Pause, true));
 		inputStates.push_back(newState);
 
 		LOG(LogLevel::Debug) << "MeteoPanelDevice::readFromDevice() : Create fake pause input.";
@@ -37,7 +37,7 @@ int MeteoPanelDevice::readFromDevice()
 		InputState* newState = new InputState();
 		newState->SetPanelState(new PanelState());
 
-		newState->GetPanelState()->AddButton(InputKey::RaiseOctave);
+		newState->GetPanelState()->AddButton(pair<InputKey, int>(InputKey::RaiseOctave, true));
 		inputStates.push_back(newState);
 
 	}
@@ -47,7 +47,7 @@ int MeteoPanelDevice::readFromDevice()
 		InputState* newState = new InputState();
 		newState->SetPanelState(new PanelState());
 
-		newState->GetPanelState()->AddButton(InputKey::LowerOctave);
+		newState->GetPanelState()->AddButton(pair<InputKey, int>(InputKey::LowerOctave, true));
 		inputStates.push_back(newState);
 
 	}
