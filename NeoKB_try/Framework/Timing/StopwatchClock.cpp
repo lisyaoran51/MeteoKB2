@@ -25,7 +25,10 @@ double StopwatchClock::GetCurrentTime()
 {
 	if (!isStarted)
 		Start();
-	return getElapsedSeconds() * rate + rateChangeAccumulatedTime + seekOffset;
+	if(isRunning)
+		return getElapsedSeconds() * rate + rateChangeAccumulatedTime + seekOffset;
+	else
+		return rateChangeAccumulatedTime + seekOffset;
 }
 
 int StopwatchClock::SetRate(double r)
