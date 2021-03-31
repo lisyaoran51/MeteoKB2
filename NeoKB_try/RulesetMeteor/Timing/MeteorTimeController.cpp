@@ -207,6 +207,10 @@ int MeteorTimeController::OnKnobTurn(pair<MeteorAction, int> action)
 		}
 		else if (timeControllerMode == MeteorTimeControllerMode::MusicGame) {
 
+			/* 如果已經退到底，就不要再退 */
+			if (controllableClock->GetCurrentTime() < 0 && turnValue < 0)
+				return -1;
+
 			speedAdjuster->SetSeekTime(turnValue * defaultAdjustTime);
 
 			// 這邊是避免剛好set seek time以後seek time剛好等於0，會造成意外狀況，所以刻意不讓他最後變成0，就隨便加一個數字上去
