@@ -39,6 +39,8 @@ namespace Audio {
 
 		SampleManager* GetSampleManager(CompositeResourceStore<char*>* sampleStore = nullptr);
 
+		SampleManager* GetMirrorSampleManager(CompositeResourceStore<char*>* sampleStore = nullptr);
+
 		TrackManager* GetTrackManager(CompositeResourceStore<char*>* trackStore = nullptr);
 
 		GameThread* GetAudioThread();
@@ -47,11 +49,14 @@ namespace Audio {
 
 		Bindable<double>* GetSampleVolume();
 
+		Bindable<double>* GetMirrorSampleVolume();
+
 
 	protected:
 
 		Bindable<double>* trackVolume = new Bindable<double>(0.5);
 		Bindable<double>* sampleVolume = new Bindable<double>(1.0);
+		Bindable<double>* mirrorSampleVolume = new Bindable<double>(1.0);
 
 	private:
 
@@ -59,6 +64,11 @@ namespace Audio {
 		/// 在加入這些manager時，會再add item，把manager擺到list裡
 		/// </summary>
 		SampleManager* sampleManager = nullptr;
+
+		/// <summary>
+		/// 用來放virtual piano的音檔
+		/// </summary>
+		SampleManager* mirrorSampleManager = nullptr;
 
 		TrackManager* trackManager = nullptr;
 

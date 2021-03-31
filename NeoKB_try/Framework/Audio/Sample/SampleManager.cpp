@@ -45,15 +45,6 @@ bool SampleManager::HasSampleChannel(SoundBinding * soundBinding)
 
 }
 
-bool SampleManager::HasMirrorSampleChannel(SoundBinding * soundBinding)
-{
-	map<string, SampleChannel*>::iterator it = mirrorSampleChannelCache.find(soundBinding->GetFileName());
-	if (it != mirrorSampleChannelCache.end())
-		return true;
-	else
-		return false;
-}
-
 SampleChannel * SampleManager::GetSampleChannel(string name)
 {
 	Sample* sample = nullptr;
@@ -109,27 +100,6 @@ SampleChannel * SampleManager::GetSampleChannel(SoundBinding * soundBinding)
 	}
 	else {
 		sampleChannel = sampleChannelCache[soundBinding->GetFileName()];
-	}
-
-	return sampleChannel;
-}
-
-SampleChannel * SampleManager::GetMirrorSampleChannel(SoundBinding * soundBinding)
-{
-	LOG(LogLevel::Fine) << "SampleManager::GetMirrorSampleChannel() : action [" << soundBinding->action << "] : file name [" << soundBinding->GetSoundBankName() << "].";
-
-	SampleChannel* sampleChannel = nullptr;
-
-
-	map<string, SampleChannel*>::iterator it = mirrorSampleChannelCache.find(soundBinding->GetFileName());
-	if (it == mirrorSampleChannelCache.end()) {
-
-		sampleChannel = mirrorSampleChannelCache[soundBinding->GetFileName()] = sampleChannelGenerator->GenerateSampleChannel(soundBinding);
-		AddItem(sampleChannel);
-
-	}
-	else {
-		sampleChannel = mirrorSampleChannelCache[soundBinding->GetFileName()];
 	}
 
 	return sampleChannel;
@@ -206,38 +176,6 @@ int SampleManager::RemoveSampleChannel(SoundBinding * soundBinding)
 	}
 	else {
 		LOG(LogLevel::Error) << "SampleManager::RemoveSampleChannel() : file [" << soundBinding->GetFileName() << "] not found in sample cache.";
-	}
-
-	return 0;
-}
-
-int SampleManager::RemoveMirrorSampleChannel(SoundBinding * soundBinding)
-{
-	LOG(LogLevel::Debug) << "SampleManager::RemoveMirrorSampleChannel() : file [" << soundBinding->GetFileName() << "].";
-	map<string, SampleChannel*>::iterator it = mirrorSampleChannelCache.find(soundBinding->GetFileName());
-	if (it != mirrorSampleChannelCache.end()) {
-		LOG(LogLevel::Depricated) << "SampleManager::RemoveMirrorSampleChannel() : start removing.";
-
-		SampleChannel* sampleChannel = (*it).second;
-		LOG(LogLevel::Depricated) << "SampleManager::RemoveMirrorSampleChannel() : deleting item.";
-		deleteItem(sampleChannel);
-
-		pendingActions.Add(this, [=]() {
-
-			LOG(LogLevel::Depricated) << "SampleManager::RemoveMirrorSampleChannel() : delete channel.";
-			delete sampleChannel;
-			return 0;
-		}, "Lambda_SampleManager::DeleteMirrorSampleChannel");
-
-
-		LOG(LogLevel::Depricated) << "SampleManager::RemoveMirrorSampleChannel() : erasing sample channel.";
-		mirrorSampleChannelCache.erase(it);
-
-		LOG(LogLevel::Depricated) << "SampleManager::RemoveMirrorSampleChannel() : file [" << soundBinding->GetFileName() << "] removed from sample cache.";
-
-	}
-	else {
-		LOG(LogLevel::Error) << "SampleManager::RemoveMirrorSampleChannel() : file [" << soundBinding->GetFileName() << "] not found in sample cache.";
 	}
 
 	return 0;

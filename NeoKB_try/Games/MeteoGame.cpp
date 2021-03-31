@@ -75,6 +75,10 @@ int MeteoGame::LoadOnComplete()
 
 	audioManager->GetSampleManager()->ImportFromStable();
 
+	audioManager->GetMirrorSampleManager()->GetStableStorage = bind(&MeteoGame::GetStableStorage, this);
+
+	audioManager->GetMirrorSampleManager()->ImportFromStable();
+
 
 	AddChild(volumeController = new VolumeController());
 

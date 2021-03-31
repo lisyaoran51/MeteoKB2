@@ -31,6 +31,7 @@ namespace UI {
 
 		Bindable<double>* masterVolumeMeter = new Bindable<double>(1.0);
 		Bindable<double>* sampleVolumeMeter = new Bindable<double>(1.0);
+		Bindable<double>* mirrorSampleVolumeMeter = new Bindable<double>(1.0);
 		Bindable<double>* trackVolumeMeter = new Bindable<double>(1.0);
 
 		virtual int onSlide(InputState* inputState, InputKey slider);

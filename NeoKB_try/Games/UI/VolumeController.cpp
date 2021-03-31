@@ -19,6 +19,7 @@ int VolumeController::load(AudioManager * aManager)
 	masterVolumeMeter->BindTo(aManager->GetVolume());
 	trackVolumeMeter->BindTo(aManager->GetTrackVolume());
 	sampleVolumeMeter->BindTo(aManager->GetSampleVolume());
+	mirrorSampleVolumeMeter->BindTo(aManager->GetMirrorSampleVolume());
 
 	isPresent = true;
 
@@ -35,7 +36,6 @@ VolumeController::VolumeController(): RegisterType("VolumeController")
 
 int VolumeController::onSlide(InputState * inputState, InputKey slider)
 {
-	
 	if (slider == InputKey::MusicVolumeSlider) {
 		int value = 0;
 		for (int i = 0; i < inputState->GetPanelState()->GetSliders()->size(); i++) {
@@ -44,7 +44,8 @@ int VolumeController::onSlide(InputState * inputState, InputKey slider)
 			}
 		}
 
-		trackVolumeMeter->SetValue(value);
+		LOG(LogLevel::Debug) << "VolumeController::onSlide() : music volume slide to [" << (float)value / 100.f << "].";
+		mirrorSampleVolumeMeter->SetValue((float)value / 100.f);
 	}
 
 	if (slider == InputKey::PianoVolumeSlider) {
@@ -55,7 +56,8 @@ int VolumeController::onSlide(InputState * inputState, InputKey slider)
 			}
 		}
 
-		sampleVolumeMeter->SetValue(value);
+		LOG(LogLevel::Debug) << "VolumeController::onSlide() : piano volume slide to [" << (float)value / 100.f << "].";
+		sampleVolumeMeter->SetValue((float)value / 100.f);
 	}
 
 	return 0;

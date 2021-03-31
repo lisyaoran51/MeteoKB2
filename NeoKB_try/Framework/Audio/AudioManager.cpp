@@ -19,6 +19,7 @@ AudioManager::AudioManager(CompositeResourceStore<char*>* trackStore, CompositeR
 
 	trackManager = GetTrackManager(trackStore);
 	sampleManager = GetSampleManager(sampleStore);
+	mirrorSampleManager = GetSampleManager(sampleStore);
 
 	if (!BASS_Init(-1, 44100, 0, 0, NULL))
 		throw runtime_error("AudioManager::AudioManager() :cannot initialize bass.");
@@ -41,6 +42,23 @@ SampleManager * AudioManager::GetSampleManager(CompositeResourceStore<char*>* sa
 
 	sampleVolume->SetValue(1.0);
 	sManager->AddAdjustment(AdjustableProperty::Volume, sampleVolume);
+	// TODO: 加上adjistment 
+
+	return sManager;
+}
+
+SampleManager * AudioManager::GetMirrorSampleManager(CompositeResourceStore<char*>* sampleStore)
+{
+	LOG(LogLevel::Depricated) << "AudioManager::GetSampleManager() : get sample manager [" << sampleManager << "].";
+	if (sampleStore == nullptr)
+		return mirrorSampleManager;
+
+
+	SampleManager* sManager = new SampleManager(sampleStore);
+	AddItem(sManager);
+
+	sampleVolume->SetValue(1.0);
+	sManager->AddAdjustment(AdjustableProperty::Volume, mirrorSampleVolume);
 	// TODO: 加上adjistment 
 
 	return sManager;
@@ -72,4 +90,9 @@ Bindable<double>* AudioManager::GetTrackVolume() {
 
 Bindable<double>* AudioManager::GetSampleVolume() {
 	return sampleVolume;
+}
+
+Bindable<double>* AudioManager::GetMirrorSampleVolume()
+{
+	return mirrorSampleVolume;
 }

@@ -228,13 +228,13 @@ int VirtualMeteoPiano::SwitchSoundBindings(TSoundBindingSet<Pitch>* sBindingSet)
 	resetState();
 
 	/* 暫停sample manager更新 */
-	audioManager->GetSampleManager()->SetIsActive(false);
+	audioManager->GetMirrorSampleManager()->SetIsActive(false);
 
 	/* 更新sound binding */
 	for (int i = 0; i < soundBindings.size(); i++) {
 
-		if (audioManager->GetSampleManager()->HasMirrorSampleChannel(soundBindings[i]))
-			audioManager->GetSampleManager()->RemoveMirrorSampleChannel(soundBindings[i]);
+		if (audioManager->GetMirrorSampleManager()->HasSampleChannel(soundBindings[i]))
+			audioManager->GetMirrorSampleManager()->RemoveSampleChannel(soundBindings[i]);
 		delete soundBindings[i];
 	}
 	soundBindings.clear();
@@ -249,7 +249,7 @@ int VirtualMeteoPiano::SwitchSoundBindings(TSoundBindingSet<Pitch>* sBindingSet)
 	loadAndMapSamples();
 
 	/* 重啟sample manager更新 */
-	audioManager->GetSampleManager()->SetIsActive(true);
+	audioManager->GetMirrorSampleManager()->SetIsActive(true);
 
 	/* 重啟任何輸入 */
 	isActive == true;
@@ -352,83 +352,83 @@ int VirtualMeteoPiano::loadAndMapSamples()
 	samplesByPitch[Pitch::b3 ] = audioManager->GetSampleManager()->GetMultiPlaybackSampleChannel(getSoundBinding((int)Pitch::b3 ));
 	*/
 	
-	samplesByPitch[Pitch::C1 ] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::C1 ));
-	samplesByPitch[Pitch::D1b] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::D1b));
-	samplesByPitch[Pitch::D1 ] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::D1 ));
-	samplesByPitch[Pitch::E1b] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::E1b));
-	samplesByPitch[Pitch::E1 ] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::E1 ));
-	samplesByPitch[Pitch::F1 ] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::F1 ));
-	samplesByPitch[Pitch::G1b] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::G1b));
-	samplesByPitch[Pitch::G1 ] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::G1 ));
-	samplesByPitch[Pitch::A1b] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::A1b));
-	samplesByPitch[Pitch::A1 ] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::A1 ));
-	samplesByPitch[Pitch::B1b] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::B1b));
-	samplesByPitch[Pitch::B1 ] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::B1 ));
+	samplesByPitch[Pitch::C1 ] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::C1 ));
+	samplesByPitch[Pitch::D1b] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::D1b));
+	samplesByPitch[Pitch::D1 ] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::D1 ));
+	samplesByPitch[Pitch::E1b] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::E1b));
+	samplesByPitch[Pitch::E1 ] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::E1 ));
+	samplesByPitch[Pitch::F1 ] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::F1 ));
+	samplesByPitch[Pitch::G1b] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::G1b));
+	samplesByPitch[Pitch::G1 ] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::G1 ));
+	samplesByPitch[Pitch::A1b] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::A1b));
+	samplesByPitch[Pitch::A1 ] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::A1 ));
+	samplesByPitch[Pitch::B1b] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::B1b));
+	samplesByPitch[Pitch::B1 ] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::B1 ));
 																   
-	samplesByPitch[Pitch::C  ] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::C  ));
-	samplesByPitch[Pitch::Db ] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::Db ));
-	samplesByPitch[Pitch::D  ] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::D  ));
-	samplesByPitch[Pitch::Eb ] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::Eb ));
-	samplesByPitch[Pitch::E  ] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::E  ));
-	samplesByPitch[Pitch::F  ] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::F  ));
-	samplesByPitch[Pitch::Gb ] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::Gb ));
-	samplesByPitch[Pitch::G  ] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::G  ));
-	samplesByPitch[Pitch::Ab ] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::Ab ));
-	samplesByPitch[Pitch::A  ] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::A  ));
-	samplesByPitch[Pitch::Bb ] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::Bb ));
-	samplesByPitch[Pitch::B  ] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::B  ));
+	samplesByPitch[Pitch::C  ] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::C  ));
+	samplesByPitch[Pitch::Db ] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::Db ));
+	samplesByPitch[Pitch::D  ] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::D  ));
+	samplesByPitch[Pitch::Eb ] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::Eb ));
+	samplesByPitch[Pitch::E  ] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::E  ));
+	samplesByPitch[Pitch::F  ] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::F  ));
+	samplesByPitch[Pitch::Gb ] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::Gb ));
+	samplesByPitch[Pitch::G  ] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::G  ));
+	samplesByPitch[Pitch::Ab ] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::Ab ));
+	samplesByPitch[Pitch::A  ] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::A  ));
+	samplesByPitch[Pitch::Bb ] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::Bb ));
+	samplesByPitch[Pitch::B  ] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::B  ));
 																   	  
-	samplesByPitch[Pitch::c  ] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::c  ));
-	samplesByPitch[Pitch::db ] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::db ));
-	samplesByPitch[Pitch::d  ] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::d  ));
-	samplesByPitch[Pitch::eb ] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::eb ));
-	samplesByPitch[Pitch::e  ] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::e  ));
-	samplesByPitch[Pitch::f  ] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::f  ));
-	samplesByPitch[Pitch::gb ] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::gb ));
-	samplesByPitch[Pitch::g  ] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::g  ));
-	samplesByPitch[Pitch::ab ] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::ab ));
-	samplesByPitch[Pitch::a  ] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::a  ));
-	samplesByPitch[Pitch::bb ] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::bb ));
-	samplesByPitch[Pitch::b  ] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::b  ));
+	samplesByPitch[Pitch::c  ] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::c  ));
+	samplesByPitch[Pitch::db ] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::db ));
+	samplesByPitch[Pitch::d  ] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::d  ));
+	samplesByPitch[Pitch::eb ] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::eb ));
+	samplesByPitch[Pitch::e  ] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::e  ));
+	samplesByPitch[Pitch::f  ] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::f  ));
+	samplesByPitch[Pitch::gb ] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::gb ));
+	samplesByPitch[Pitch::g  ] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::g  ));
+	samplesByPitch[Pitch::ab ] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::ab ));
+	samplesByPitch[Pitch::a  ] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::a  ));
+	samplesByPitch[Pitch::bb ] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::bb ));
+	samplesByPitch[Pitch::b  ] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::b  ));
 		   														   	  
-	samplesByPitch[Pitch::c1 ] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::c1 ));
-	samplesByPitch[Pitch::d1b] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::d1b));
-	samplesByPitch[Pitch::d1 ] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::d1 ));
-	samplesByPitch[Pitch::e1b] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::e1b));
-	samplesByPitch[Pitch::e1 ] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::e1 ));
-	samplesByPitch[Pitch::f1 ] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::f1 ));
-	samplesByPitch[Pitch::g1b] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::g1b));
-	samplesByPitch[Pitch::g1 ] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::g1 ));
-	samplesByPitch[Pitch::a1b] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::a1b));
-	samplesByPitch[Pitch::a1 ] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::a1 ));
-	samplesByPitch[Pitch::b1b] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::b1b));
-	samplesByPitch[Pitch::b1 ] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::b1 ));
+	samplesByPitch[Pitch::c1 ] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::c1 ));
+	samplesByPitch[Pitch::d1b] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::d1b));
+	samplesByPitch[Pitch::d1 ] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::d1 ));
+	samplesByPitch[Pitch::e1b] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::e1b));
+	samplesByPitch[Pitch::e1 ] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::e1 ));
+	samplesByPitch[Pitch::f1 ] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::f1 ));
+	samplesByPitch[Pitch::g1b] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::g1b));
+	samplesByPitch[Pitch::g1 ] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::g1 ));
+	samplesByPitch[Pitch::a1b] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::a1b));
+	samplesByPitch[Pitch::a1 ] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::a1 ));
+	samplesByPitch[Pitch::b1b] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::b1b));
+	samplesByPitch[Pitch::b1 ] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::b1 ));
 		   														   	  
-	samplesByPitch[Pitch::c2 ] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::c2 ));
-	samplesByPitch[Pitch::d2b] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::d2b));
-	samplesByPitch[Pitch::d2 ] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::d2 ));
-	samplesByPitch[Pitch::e2b] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::e2b));
-	samplesByPitch[Pitch::e2 ] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::e2 ));
-	samplesByPitch[Pitch::f2 ] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::f2 ));
-	samplesByPitch[Pitch::g2b] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::g2b));
-	samplesByPitch[Pitch::g2 ] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::g2 ));
-	samplesByPitch[Pitch::a2b] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::a2b));
-	samplesByPitch[Pitch::a2 ] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::a2 ));
-	samplesByPitch[Pitch::b2b] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::b2b));
-	samplesByPitch[Pitch::b2 ] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::b2 ));
+	samplesByPitch[Pitch::c2 ] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::c2 ));
+	samplesByPitch[Pitch::d2b] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::d2b));
+	samplesByPitch[Pitch::d2 ] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::d2 ));
+	samplesByPitch[Pitch::e2b] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::e2b));
+	samplesByPitch[Pitch::e2 ] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::e2 ));
+	samplesByPitch[Pitch::f2 ] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::f2 ));
+	samplesByPitch[Pitch::g2b] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::g2b));
+	samplesByPitch[Pitch::g2 ] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::g2 ));
+	samplesByPitch[Pitch::a2b] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::a2b));
+	samplesByPitch[Pitch::a2 ] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::a2 ));
+	samplesByPitch[Pitch::b2b] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::b2b));
+	samplesByPitch[Pitch::b2 ] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::b2 ));
 																   	  
-	samplesByPitch[Pitch::c3 ] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::c3 ));
-	samplesByPitch[Pitch::d3b] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::d3b));
-	samplesByPitch[Pitch::d3 ] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::d3 ));
-	samplesByPitch[Pitch::e3b] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::e3b));
-	samplesByPitch[Pitch::e3 ] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::e3 ));
-	samplesByPitch[Pitch::f3 ] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::f3 ));
-	samplesByPitch[Pitch::g3b] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::g3b));
-	samplesByPitch[Pitch::g3 ] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::g3 ));
-	samplesByPitch[Pitch::a3b] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::a3b));
-	samplesByPitch[Pitch::a3 ] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::a3 ));
-	samplesByPitch[Pitch::b3b] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::b3b));
-	samplesByPitch[Pitch::b3 ] = audioManager->GetSampleManager()->GetMirrorSampleChannel(getSoundBinding((int)Pitch::b3 ));
+	samplesByPitch[Pitch::c3 ] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::c3 ));
+	samplesByPitch[Pitch::d3b] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::d3b));
+	samplesByPitch[Pitch::d3 ] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::d3 ));
+	samplesByPitch[Pitch::e3b] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::e3b));
+	samplesByPitch[Pitch::e3 ] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::e3 ));
+	samplesByPitch[Pitch::f3 ] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::f3 ));
+	samplesByPitch[Pitch::g3b] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::g3b));
+	samplesByPitch[Pitch::g3 ] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::g3 ));
+	samplesByPitch[Pitch::a3b] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::a3b));
+	samplesByPitch[Pitch::a3 ] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::a3 ));
+	samplesByPitch[Pitch::b3b] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::b3b));
+	samplesByPitch[Pitch::b3 ] = audioManager->GetMirrorSampleManager()->GetSampleChannel(getSoundBinding((int)Pitch::b3 ));
 
 
 	return 0;
