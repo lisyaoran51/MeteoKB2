@@ -85,15 +85,15 @@ int StopwatchClock::Start()
 {
 	
 	if (!isStarted || !isRunning) {
-		LOG(LogLevel::Debug) << "StopwatchClock::Start() : start the stopwatch, started = [" << isStarted << "], running = [" << isRunning << "].";
+		LOG(LogLevel::Depricated) << "StopwatchClock::Start() : start the stopwatch, started = [" << isStarted << "], running = [" << isRunning << "].";
 		if (!isStarted && isRunning)
 			return -1; // TODO: throw error因為是異常狀況
 		systemStartTime = system_clock::now();
 		systemCurrentTime = system_clock::now();
-		LOG(LogLevel::Finest) << "StopwatchClock::Start() : current elapsed time = [" << duration_cast<microseconds>(systemCurrentTime - systemStartTime).count() << "] ";
+		LOG(LogLevel::Depricated) << "StopwatchClock::Start() : current elapsed time = [" << duration_cast<microseconds>(systemCurrentTime - systemStartTime).count() << "] ";
 		isRunning = true;
 		isStarted = true;
-		LOG(LogLevel::Debug) << "StopwatchClock::Start() : elapsed seconds = [" << getElapsedSeconds() << "], accumulated time = [" << rateChangeAccumulatedTime << "], seek offset = [" << seekOffset << "] by [" << this << "].";
+		LOG(LogLevel::Depricated) << "StopwatchClock::Start() : elapsed seconds = [" << getElapsedSeconds() << "], accumulated time = [" << rateChangeAccumulatedTime << "], seek offset = [" << seekOffset << "] by [" << this << "].";
 	}
 	
 	return 0;
@@ -101,11 +101,11 @@ int StopwatchClock::Start()
 
 int StopwatchClock::Stop()
 {
-	LOG(LogLevel::Debug) << "StopwatchClock::Stop() : stop this. by [" << this << "]";
+	LOG(LogLevel::Depricated) << "StopwatchClock::Stop() : stop this. by [" << this << "]";
 	if (!isStarted || !isRunning)
 		return -1;
 	rateChangeAccumulatedTime += getElapsedSeconds() * rate;
-	LOG(LogLevel::Debug) << "StopwatchClock::Stop() : accumulated time is [" << rateChangeAccumulatedTime << "], seek offset [" << seekOffset << "]";
+	LOG(LogLevel::Depricated) << "StopwatchClock::Stop() : accumulated time is [" << rateChangeAccumulatedTime << "], seek offset [" << seekOffset << "]";
 	isRunning = false;
 	return 0;
 }
@@ -113,10 +113,10 @@ int StopwatchClock::Stop()
 bool StopwatchClock::Seek(double position)
 {
 	LOG(LogLevel::Depricated) << "StopwatchClock::Seek : go to position [" << position << "].";
-	LOG(LogLevel::Debug) << "StopwatchClock::Seek : before seek, current time [" << GetCurrentTime() << "], elapsed seconds [" << getElapsedSeconds() << "], seek offset [" << seekOffset << "], accumulated time [" << rateChangeAccumulatedTime << "] by [" << this << "].";
+	LOG(LogLevel::Depricated) << "StopwatchClock::Seek : before seek, current time [" << GetCurrentTime() << "], elapsed seconds [" << getElapsedSeconds() << "], seek offset [" << seekOffset << "], accumulated time [" << rateChangeAccumulatedTime << "] by [" << this << "].";
 	seekOffset += position - GetCurrentTime();
 	LOG(LogLevel::Depricated) << "StopwatchClock::Seek : after go to position [" << position << "], current time = " << fixed << setprecision(5) << GetCurrentTime() << ".";
-	LOG(LogLevel::Debug) << "StopwatchClock::Seek : go to position [" << position << "], current time [" << GetCurrentTime() << "], elapsed seconds [" << getElapsedSeconds() << "], seek offset [" << seekOffset << "], accumulated time [" << rateChangeAccumulatedTime << "] by [" << this << "].";
+	LOG(LogLevel::Depricated) << "StopwatchClock::Seek : go to position [" << position << "], current time [" << GetCurrentTime() << "], elapsed seconds [" << getElapsedSeconds() << "], seek offset [" << seekOffset << "], accumulated time [" << rateChangeAccumulatedTime << "] by [" << this << "].";
 
 	return true;
 }
