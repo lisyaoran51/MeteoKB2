@@ -306,6 +306,9 @@ int Piano::SwitchSoundBindings(TSoundBindingSet<Pitch>* sBindingSet)
 	/* 暫停sample manager更新 */
 	audioManager->GetSampleManager()->SetIsActive(false);
 
+	/* 更新sound binding音量 */
+	audioManager->GetSampleManager()->GetVolume()->SetValue(soundBindingSet->Volume);
+
 	/* 更新sound binding */
 	for (int i = 0; i < soundBindings.size(); i++) {
 

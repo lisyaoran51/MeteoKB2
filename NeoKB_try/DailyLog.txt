@@ -2922,3 +2922,7 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 	4 : StopwatchClock::Seek : go to position [8.65235], current time [8.65235], seek offset [-16.651], accumulated time [12.6517] by [0x70b75308].
 	
 	應該是seek的時候沒把elapsed seconds一起算，就錯了
+	
+4/6
+	volume controller寫好了，不過要設定sound bank的initial volume，不然會爆音
+	

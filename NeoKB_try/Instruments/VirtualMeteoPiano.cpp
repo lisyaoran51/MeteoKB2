@@ -230,6 +230,9 @@ int VirtualMeteoPiano::SwitchSoundBindings(TSoundBindingSet<Pitch>* sBindingSet)
 	/* 暫停sample manager更新 */
 	audioManager->GetMirrorSampleManager()->SetIsActive(false);
 
+	/* 更新sound binding音量 */
+	audioManager->GetMirrorSampleManager()->GetVolume()->SetValue(soundBindingSet->Volume);
+
 	/* 更新sound binding */
 	for (int i = 0; i < soundBindings.size(); i++) {
 

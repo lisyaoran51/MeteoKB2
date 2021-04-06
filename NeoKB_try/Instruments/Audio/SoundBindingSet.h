@@ -27,6 +27,8 @@ namespace Audio {
 
 		string fileName = "";
 
+		double Volume = 1.0;
+
 	};
 
 	template<typename T>

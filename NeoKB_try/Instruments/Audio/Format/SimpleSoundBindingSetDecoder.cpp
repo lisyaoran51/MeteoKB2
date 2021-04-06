@@ -57,6 +57,9 @@ int SimpleSoundBindingSetDecoder::handleGeneral(SoundBindingSet* sbs, string & l
 		sbs->fileName = pair.at(1);
 		LOG(LogLevel::Finer) << "int SimpleSoundBindingSetDecoder::handleGeneral() : tag [Filename] chosen.";
 	}
+	else if (pair.at(0) == "Volume") {
+		sbs->Volume = atof(pair.at(1).c_str());
+	}
 	else if (pair.at(0) == "Start") {
 		dynamic_cast<TSoundBindingSet<Pitch>*>(sbs)->startKey = (Pitch)atoi(pair.at(1).c_str());
 	}
