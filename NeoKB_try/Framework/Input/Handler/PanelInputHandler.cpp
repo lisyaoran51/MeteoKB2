@@ -23,12 +23,12 @@ int PanelInputHandler::Initialize(GameHost * host)
 int PanelInputHandler::HandleState(InputState * inputState)
 {
 
-	LOG(LogLevel::Debug) << "PanelInputHandler::HandleState() : get new state.";
+	LOG(LogLevel::Depricated) << "PanelInputHandler::HandleState() : get new state.";
 	auto panelState = inputState->GetPanelState()->Clone();
-	LOG(LogLevel::Debug) << "PanelInputHandler::HandleState() : cloned.";
+	LOG(LogLevel::Depricated) << "PanelInputHandler::HandleState() : cloned.";
 	InputState* pendingState = new InputState();
 	pendingState->SetPanelState(panelState);
-	LOG(LogLevel::Debug) << "PanelInputHandler::HandleState() : set state.";
+	LOG(LogLevel::Depricated) << "PanelInputHandler::HandleState() : set state.";
 
 	pendingStates.push_back(pendingState);
 

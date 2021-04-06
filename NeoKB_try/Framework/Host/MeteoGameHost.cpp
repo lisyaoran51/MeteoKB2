@@ -11,6 +11,8 @@
 #include "../Output/OutputManager.h"
 #include "../../RulesetMeteor/Output/Panels/SustainPedalLightRingOutputer.h"
 #include "../../RulesetMeteor/Output/Panels/LightRingOutputer.h"
+#include "../../Games/Output/Panels/SpeedRingOutputer.h"
+#include "../../Games/Output/Panels/IndicatorLightOutputer.h"
 #include "../../Desktop/Devices/MeteoPacketConverterV2.h"
 
 
@@ -22,6 +24,7 @@ using namespace Desktop::Devices;
 using namespace Framework::IO;
 using namespace Framework::Output;
 using namespace Meteor::Output::Panels;
+using namespace Games::Output::Panels;
 
 
 
@@ -70,6 +73,14 @@ int MeteoGameHost::SetupOutputManager(OutputManager * oManager)
 	OutputComponent* lightRingOutputer = new LightRingOutputer();
 	lightRingOutputer->SetupPeripheral(mainInterface);
 	oManager->AddItem(lightRingOutputer);
+
+	OutputComponent* speedRingOutputer = new SpeedRingOutputer();
+	speedRingOutputer->SetupPeripheral(mainInterface);
+	oManager->AddItem(speedRingOutputer);
+
+	OutputComponent* indicatorLightOutputer = new IndicatorLightOutputer();
+	indicatorLightOutputer->SetupPeripheral(mainInterface);
+	oManager->AddItem(indicatorLightOutputer);
 
 	return 0;
 }
