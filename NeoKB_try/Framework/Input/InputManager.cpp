@@ -364,9 +364,7 @@ int InputManager::updatePanelEvents(InputState * inputState)
 	/* Slider */
 	for (int i = 0; i < panelState->GetSliders()->size(); i++) {
 		LOG(LogLevel::Debug) << "InputManager::updatePanelEvents() : has slide event.";
-		if (panelState->GetSliders()->at(i).second != lastPanelState->GetSliders()->at(i).second) {
-			handleSlide(inputState, panelState->GetSliders()->at(i).first);
-		}
+		handleSlide(inputState, panelState->GetSliders()->at(i).first);
 	}
 
 	return 0;
