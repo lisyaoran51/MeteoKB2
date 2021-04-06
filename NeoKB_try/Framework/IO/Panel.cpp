@@ -22,6 +22,9 @@ int Panel::TriggerOnInput()
 	for (int i = 0; i < inputStates.size(); i++) {
 		OnPanelEvent.Trigger(inputStates[i]);
 	}
+
+	if (inputStates.size() > 0)
+		LOG(LogLevel::Fine) << "Panel::TriggerOnInput() : trigger over.";
 	inputStates.clear();
 	return 0;
 }
