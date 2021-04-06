@@ -236,8 +236,9 @@ int MeteoMcuV1::writePanel()
 	for (int i = 0; i < i2cMessages.size(); i++) {
 		char *cstr = new char[i2cMessages[i].length() + 1];
 		strcpy(cstr, i2cMessages[i].c_str());
+		strcpy(cstr + i2cMessages[i].length() - 1, '\0');
 
-		LOG(LogLevel::Debug) << "MeteoPanelBoardV1::writePanel() : write [" << cstr << "](" << i2cMessages[i].c_str() << ") to i2c. last char is [" << cstr[i2cMessages[i].length() - 1] << "]";
+		LOG(LogLevel::Debug) << "MeteoPanelBoardV1::writePanel() : write [" << cstr << "](" << i2cMessages[i].c_str() << ") to i2c. last char is [" << cstr[i2cMessages[i].length() - 1] << "] at " << cstr[i2cMessages[i].length() - 1;
 
 		i2cInterface->i2cWrite(cstr, i2cMessages[i].length());
 
