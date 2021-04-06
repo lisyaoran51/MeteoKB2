@@ -14,6 +14,8 @@ int OutputDevice::ProcessOutput()
 
 int OutputDevice::readFromPeripheral()
 {
+
+	unique_lock<mutex> uLock(outputMessageMutex);
 	matchedPeripheral->PourOutOutputMessages(&outputMessages);
 	return 0;
 }

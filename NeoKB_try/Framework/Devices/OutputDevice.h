@@ -19,6 +19,8 @@ namespace Devices {
 
 	protected:
 
+		mutable mutex outputMessageMutex;
+
 		vector<OutputMessage*> outputMessages;
 
 		virtual int readFromPeripheral();

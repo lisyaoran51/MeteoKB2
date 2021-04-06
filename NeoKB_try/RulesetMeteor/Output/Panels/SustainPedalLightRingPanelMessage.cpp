@@ -46,5 +46,6 @@ string SustainPedalLightRingPanelMessage::ToString()
 {
 	// TODO: §ï¦W¦¨Light Ring
 	LOG(LogLevel::Depricated) << "SustainPedalLightRingPanelMessage::ToString() : pass [" << ("SP,"s + roundAndToString(targetLifeTime, 2) + ","s + roundAndToString(pedalDownLifeTime, 2) + ","s + roundAndToString(ringLifeTime, 2)) << "] to board.";
+	return "RV,"s + roundAndToString(pedalDownLifeTime, 2);
 	return "SP,"s + roundAndToString(targetLifeTime, 2) + ","s + roundAndToString(pedalDownLifeTime, 2) + ","s + roundAndToString(ringLifeTime, 2);
 }

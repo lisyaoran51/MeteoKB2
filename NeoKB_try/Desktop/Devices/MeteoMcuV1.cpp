@@ -94,6 +94,12 @@ MeteoMcuV1::MeteoMcuV1(int address)
 	keyboardState = new InputState();
 	keyboardState->SetKeyboardState(new KeyboardState());
 
+	// 清除殘餘的i2c message
+	char buffer[17] = { 0 };
+	for (int i = 0; i < 10; i++)
+		i2cInterface->i2cRead(buffer, 17);
+
+
 	thread t(&MeteoMcuV1::work, this);
 	t.detach();
 

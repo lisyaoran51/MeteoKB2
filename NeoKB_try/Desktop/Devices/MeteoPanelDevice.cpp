@@ -88,6 +88,7 @@ int MeteoPanelDevice::readFromDevice()
 int MeteoPanelDevice::passToDevice()
 {
 
+	unique_lock<mutex> uLock(outputMessageMutex);
 	for (int i = 0; i < outputMessages.size(); i++) {
 		LOG(LogLevel::Depricated) << "MeteoPanelDevice::passToDevice() : pass message to board.";
 		meteoMcu->PushI2cMessage(outputMessages[i]->ToString());
