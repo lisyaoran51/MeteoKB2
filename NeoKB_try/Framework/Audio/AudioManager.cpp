@@ -42,7 +42,7 @@ SampleManager * AudioManager::GetSampleManager(CompositeResourceStore<char*>* sa
 
 	sampleVolume->SetValue(1.0);
 	sManager->AddAdjustment(AdjustableProperty::Volume, sampleVolume);
-	sampleVolume->AddOnValueChanged(this, bind(&AudioManager::InvalidateState, this), "AudioManager::InvalidateState");
+	sampleVolume->AddOnValueChanged(sManager, bind(&SampleManager::InvalidateState, sManager), "SampleManager::InvalidateState");
 	// TODO: 加上adjistment 
 
 	return sManager;
@@ -58,9 +58,9 @@ SampleManager * AudioManager::GetMirrorSampleManager(CompositeResourceStore<char
 	SampleManager* sManager = new SampleManager(sampleStore);
 	AddItem(sManager);
 
-	sampleVolume->SetValue(1.0);
+	mirrorSampleVolume->SetValue(1.0);
 	sManager->AddAdjustment(AdjustableProperty::Volume, mirrorSampleVolume);
-	mirrorSampleVolume->AddOnValueChanged(this, bind(&AudioManager::InvalidateState, this), "AudioManager::InvalidateState");
+	mirrorSampleVolume->AddOnValueChanged(sManager, bind(&SampleManager::InvalidateState, sManager), "SampleManager::InvalidateState");
 	// TODO: 加上adjistment 
 
 	return sManager;

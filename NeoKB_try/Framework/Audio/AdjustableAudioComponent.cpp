@@ -54,14 +54,6 @@ int AdjustableAudioComponent::OnStateChange()
 
 	volumeCalculated->SetValue(aggregateVolume);
 
-
-	for (iter = mirrorVolumeAdjustments.begin(); iter != mirrorVolumeAdjustments.end(); ++iter)
-	{
-		aggregateVolume *= (*iter)->GetValue();
-	}
-
-	mirrorVolumeCalculated->SetValue(aggregateVolume);
-
 	return 0;
 }
 
