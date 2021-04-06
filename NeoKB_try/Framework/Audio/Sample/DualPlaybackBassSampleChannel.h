@@ -36,7 +36,7 @@ namespace Samples {
 
 		virtual bool GetIsLoaded();
 
-		//virtual int OnStateChange();
+		virtual int OnStateChange();
 
 	protected:
 
