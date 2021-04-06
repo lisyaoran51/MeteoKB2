@@ -42,7 +42,7 @@ SampleManager * AudioManager::GetSampleManager(CompositeResourceStore<char*>* sa
 
 	sampleVolume->SetValue(1.0);
 	sManager->AddAdjustment(AdjustableProperty::Volume, sampleVolume);
-	sampleVolume->AddOnValueChanged(this, bind(&AudioManager::InvalidateState, this), "AudioManager::Lambda_HandleSampleVolumeChanged");
+	sampleVolume->AddOnValueChanged(this, bind(&AudioManager::InvalidateState, this), "AudioManager::InvalidateState");
 	// TODO: ¥[¤Wadjistment 
 
 	return sManager;
