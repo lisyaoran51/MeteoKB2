@@ -36,6 +36,7 @@ VolumeController::VolumeController(): RegisterType("VolumeController")
 
 int VolumeController::onSlide(InputState * inputState, InputKey slider)
 {
+	LOG(LogLevel::Debug) << "VolumeController::onSlide() : start sliding.";
 	if (slider == InputKey::MusicVolumeSlider) {
 		int value = 0;
 		for (int i = 0; i < inputState->GetPanelState()->GetSliders()->size(); i++) {
