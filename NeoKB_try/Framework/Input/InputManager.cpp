@@ -363,6 +363,7 @@ int InputManager::updatePanelEvents(InputState * inputState)
 
 	/* Slider */
 	for (int i = 0; i < panelState->GetSliders()->size(); i++) {
+		LOG(LogLevel::Debug) << "InputManager::updatePanelEvents() : has slide event.";
 		if (panelState->GetSliders()->at(i).second != lastPanelState->GetSliders()->at(i).second) {
 			handleSlide(inputState, panelState->GetSliders()->at(i).first);
 		}
@@ -490,6 +491,8 @@ int InputManager::handleSlide(InputState * state, InputKey slider)
 
 int InputManager::propagateSlide(vector<Triggerable*>* queue, InputState * state, InputKey slider)
 {
+	LOG(LogLevel::Debug) << "InputManager::propagateSlide() : handle slide.";
+
 	for (int i = 0; i < queue->size(); i++) {
 		queue->at(i)->TriggerOnSlide(state, slider);
 	}

@@ -24,7 +24,7 @@ int Panel::TriggerOnInput()
 	}
 
 	if (inputStates.size() > 0)
-		LOG(LogLevel::Fine) << "Panel::TriggerOnInput() : trigger over.";
+		LOG(LogLevel::Depricated) << "Panel::TriggerOnInput() : trigger over.";
 	inputStates.clear();
 	return 0;
 }
