@@ -54,6 +54,7 @@ SampleChannel::SampleChannel(Sample * s)
 		throw invalid_argument("SampleChannel::SampleChannel(): null argument");
 
 	sample = s;
+	initialVolume = 1.0;
 
 }
 

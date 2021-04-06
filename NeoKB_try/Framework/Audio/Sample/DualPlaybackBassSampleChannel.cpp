@@ -50,11 +50,11 @@ int DualPlaybackBassSampleChannel::Play()
 			newPlayback = 0;
 
 		BASS_ChannelPause(channelID[newPlayback]);
-		BASS_ChannelSetAttribute(channelID[newPlayback], BASS_ATTRIB_VOL, volumeCalculated->GetValue());// / 4.f);
+		BASS_ChannelSetAttribute(channelID[newPlayback], BASS_ATTRIB_VOL, volumeCalculated->GetValue() * initialVolume);// / 4.f);
 		BASS_ChannelSetPosition(channelID[newPlayback], 0, BASS_POS_BYTE);
 		/* 檢查是否在fadeout，是的話把fadeout停掉 */
 		if (BASS_ChannelIsSliding(channelID[newPlayback], BASS_ATTRIB_VOL) == TRUE)
-			BASS_ChannelSlideAttribute(channelID[newPlayback], BASS_ATTRIB_VOL, volumeCalculated->GetValue(), (DWORD)(0));// / 4.f, (DWORD)(0));
+			BASS_ChannelSlideAttribute(channelID[newPlayback], BASS_ATTRIB_VOL, volumeCalculated->GetValue() * initialVolume, (DWORD)(0));// / 4.f, (DWORD)(0));
 
 		BASS_ChannelPlay(channelID[newPlayback], false);
 
