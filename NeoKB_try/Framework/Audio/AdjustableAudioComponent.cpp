@@ -44,6 +44,7 @@ int AdjustableAudioComponent::InvalidateState()
 int AdjustableAudioComponent::OnStateChange()
 {
 	/* volume */
+	LOG(LogLevel::Debug) << "AdjustableAudioComponent::OnStateChange() : change volume.";
 	double aggregateVolume = volume->GetValue();
 	set<Bindable<double>*>::iterator iter;
 	for (iter = volumeAdjustments.begin(); iter != volumeAdjustments.end(); ++iter)
