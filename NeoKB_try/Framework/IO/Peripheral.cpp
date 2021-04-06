@@ -21,7 +21,7 @@ int Peripheral::PushInputState(InputState * inputState)
 int Peripheral::PushOutputMessage(OutputMessage * outputMessage)
 {
 	//¦n¹³­nthread safe
-	LOG(LogLevel::Depricated) << "Peripheral::PushOutputMessage() : get output message.";
+	LOG(LogLevel::Debug) << "Peripheral::PushOutputMessage() : get output message [" << outputMessage->ToString() << "]";
 	unique_lock<mutex> uLock(outputMessageMutex);
 	outputMessages.push_back(outputMessage);
 	return 0;
