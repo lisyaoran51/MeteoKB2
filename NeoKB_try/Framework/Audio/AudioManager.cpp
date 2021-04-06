@@ -19,7 +19,7 @@ AudioManager::AudioManager(CompositeResourceStore<char*>* trackStore, CompositeR
 
 	trackManager = GetTrackManager(trackStore);
 	sampleManager = GetSampleManager(sampleStore);
-	mirrorSampleManager = GetSampleManager(sampleStore);
+	mirrorSampleManager = GetMirrorSampleManager(sampleStore);
 
 	if (!BASS_Init(-1, 44100, 0, 0, NULL))
 		throw runtime_error("AudioManager::AudioManager() :cannot initialize bass.");
