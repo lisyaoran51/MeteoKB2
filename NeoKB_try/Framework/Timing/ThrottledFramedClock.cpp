@@ -40,16 +40,16 @@ int ThrottledFramedClock::throttle()
 
 		LOG(LogLevel::Depricated) << "ThrottledFramedClock::throttle() : time to sleep [" << fixed << setprecision(5) << timeToSleepInMilli / 1000.0 << "].";
 		if (maxUpdateHz == 500)
-			LOG(LogLevel::Debug) << "ThrottledFramedClock::throttle() : timeToSleepInMilli [" << timeToSleepInMilli << "], accumulatedSleepError [" << accumulatedSleepError << "].";
+			LOG(LogLevel::Depricated) << "ThrottledFramedClock::throttle() : timeToSleepInMilli [" << timeToSleepInMilli << "], accumulatedSleepError [" << accumulatedSleepError << "].";
 
 		if (timeToSleepInMilli > 0) {
-			if (maxUpdateHz != 500)
+			//if (maxUpdateHz != 500)
 			usleep(timeToSleepInMilli * 1000);
 			//this_thread::sleep_for(chrono::milliseconds((long)timeToSleepInMilli));
 		}
 
 		if (maxUpdateHz == 500)
-			LOG(LogLevel::Debug) << "ThrottledFramedClock::throttle() : sleep over";//timeToSleepInMilli [" << timeToSleepInMilli << "], accumulatedSleepError [" << accumulatedSleepError << "].";
+			LOG(LogLevel::Depricated) << "ThrottledFramedClock::throttle() : sleep over";//timeToSleepInMilli [" << timeToSleepInMilli << "], accumulatedSleepError [" << accumulatedSleepError << "].";
 
 		// 把睡眠以後的時間差記下來，把誤差累加進去
 		double afterSleepTimeInMilli = source->GetCurrentTime() * 1000.0;
@@ -57,7 +57,7 @@ int ThrottledFramedClock::throttle()
 
 	}
 	if (maxUpdateHz == 500)
-		LOG(LogLevel::Debug) << "ThrottledFramedClock::throttle() : current time [" << fixed << setprecision(5) << source->GetCurrentTime() << "] after throttle";
+		LOG(LogLevel::Depricated) << "ThrottledFramedClock::throttle() : current time [" << fixed << setprecision(5) << source->GetCurrentTime() << "] after throttle";
 
 	return 0;
 }

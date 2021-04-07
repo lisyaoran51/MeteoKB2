@@ -19,7 +19,7 @@ int OutputDevice::readFromPeripheral()
 	//unique_lock<mutex> uLock(outputMessageMutex);
 
 	if (!outputMessageMutex.try_lock()) {
-		LOG(LogLevel::Debug) << "OutputDevice::readFromPeripheral() : outputMessageMutex locked.";
+		LOG(LogLevel::Depricated) << "OutputDevice::readFromPeripheral() : outputMessageMutex locked.";
 		return 0;
 	}
 

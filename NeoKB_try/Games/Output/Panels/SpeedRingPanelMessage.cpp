@@ -21,3 +21,8 @@ string SpeedRingPanelMessage::ToString()
 	else
 		return string("\0");
 }
+
+OutputMessage * SpeedRingPanelMessage::Clone()
+{
+	return new SpeedRingPanelMessage(position);
+}

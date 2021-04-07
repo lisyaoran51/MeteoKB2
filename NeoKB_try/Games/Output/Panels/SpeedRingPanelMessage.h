@@ -47,6 +47,8 @@ namespace Panels{
 
 		virtual string ToString();
 
+		virtual OutputMessage* Clone();
+
 	protected:
 
 		vector<bool> lights;

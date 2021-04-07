@@ -51,3 +51,8 @@ string LightRingPanelMessage::ToString()
 	// 之後再改成這樣
 	return "LR,"s + roundAndToString(lifeTime, 2);
 }
+
+OutputMessage * LightRingPanelMessage::Clone()
+{
+	return new LightRingPanelMessage(lifeTime);
+}

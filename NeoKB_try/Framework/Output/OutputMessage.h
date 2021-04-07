@@ -17,6 +17,8 @@ namespace Output{
 
 		virtual string ToString() = 0;
 
+		virtual OutputMessage* Clone() = 0;
+
 	};
 
 }}

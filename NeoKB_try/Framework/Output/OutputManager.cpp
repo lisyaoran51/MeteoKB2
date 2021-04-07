@@ -32,6 +32,8 @@ int OutputManager::PushMessage(OutputMessage * outputMessage)
 	for (int i = 0; i < items.size(); i++) {
 		items[i]->PushMessage(outputMessage);
 	}
+	delete outputMessage;
+	outputMessage = nullptr;
 	return 0;
 }
 

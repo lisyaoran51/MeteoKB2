@@ -39,3 +39,8 @@ string IndicatorLightPanelMessage::ToString()
 	else
 		return string("IR,") + to_string(position) + string(",0\0");
 }
+
+OutputMessage * IndicatorLightPanelMessage::Clone()
+{
+	return new IndicatorLightPanelMessage(position, isLightUp);
+}

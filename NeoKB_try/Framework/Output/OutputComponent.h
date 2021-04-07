@@ -34,7 +34,7 @@ namespace Output{
 
 		virtual int PushMessage(OutputMessage* outputMessage) {
 			if (dynamic_cast<T*>(outputMessage)) {
-				pushMessage(dynamic_cast<T*>(outputMessage));
+				pushMessage(dynamic_cast<T*>(outputMessage->Clone()));
 			}
 			return 0;
 		}

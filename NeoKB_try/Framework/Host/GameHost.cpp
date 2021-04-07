@@ -241,15 +241,15 @@ int GameHost::inputInitialize()
 
 int GameHost::inputFrame()
 {
-	LOG(LogLevel::Debug) << "GameHost::inputFrame() : scan input.";
+	LOG(LogLevel::Depricated) << "GameHost::inputFrame() : scan input.";
 
 	mainInterface->ScanInput();
 	/* 這邊只輸出panel上的uotput，不輸出琴鍵燈光 */
 
-	LOG(LogLevel::Debug) << "GameHost::inputFrame() : process output.";
+	LOG(LogLevel::Depricated) << "GameHost::inputFrame() : process output.";
 	mainInterface->ProcessOutput();
 
-	LOG(LogLevel::Debug) << "GameHost::inputFrame() : process output over.";
+	LOG(LogLevel::Depricated) << "GameHost::inputFrame() : process output over.";
 
 	return 0;
 }

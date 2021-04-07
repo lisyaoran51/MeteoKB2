@@ -106,15 +106,15 @@ int MeteoPanelDevice::passToDevice()
 	unique_lock<mutex> uLock(outputMessageMutex);
 	for (int i = 0; i < outputMessages.size(); i++) {
 		test = true;
-		LOG(LogLevel::Debug) << "MeteoPanelDevice::passToDevice() : pass message to board.";
+		LOG(LogLevel::Depricated) << "MeteoPanelDevice::passToDevice() : pass message to board.";
 		meteoMcu->PushI2cMessage(outputMessages[i]->ToString());
 		delete outputMessages[i];
-		LOG(LogLevel::Debug) << "MeteoPanelDevice::passToDevice() : pass over.";
+		LOG(LogLevel::Depricated) << "MeteoPanelDevice::passToDevice() : pass over.";
 	}
 	//outputMessages.push_back(nullptr);
 	outputMessages.clear();
 	if(test)
-		LOG(LogLevel::Debug) << "MeteoPanelDevice::passToDevice() : clear.";
+		LOG(LogLevel::Depricated) << "MeteoPanelDevice::passToDevice() : clear.";
 	//meteoMcu->PushI2cMessage("SK,0");
 
 	return 0;

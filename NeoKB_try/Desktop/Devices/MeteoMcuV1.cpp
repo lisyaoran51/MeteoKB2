@@ -239,7 +239,7 @@ int MeteoMcuV1::writePanel()
 {
 	
 	if (!i2cMessageMutex.try_lock()) {
-		LOG(LogLevel::Debug) << "MeteoMcuV1::writePanel() : mutex locked";
+		LOG(LogLevel::Depricated) << "MeteoMcuV1::writePanel() : mutex locked";
 		return 0;
 	}
 	
@@ -252,7 +252,7 @@ int MeteoMcuV1::writePanel()
 	}
 		
 
-	LOG(LogLevel::Debug) << "MeteoMcuV1::writePanel() : get i2c message";
+	LOG(LogLevel::Depricated) << "MeteoMcuV1::writePanel() : get i2c message";
 
 
 	for (int i = 0; i < i2cMessages.size(); i++) {
@@ -269,7 +269,7 @@ int MeteoMcuV1::writePanel()
 			LOG(LogLevel::Error) << "MeteoMcuV1::writePanel() : write error [" << e.what() << "].";
 		}
 
-		LOG(LogLevel::Debug) << "MeteoMcuV1::writePanel() : write over";
+		LOG(LogLevel::Depricated) << "MeteoMcuV1::writePanel() : write over";
 
 		delete[] cstr;
 	}

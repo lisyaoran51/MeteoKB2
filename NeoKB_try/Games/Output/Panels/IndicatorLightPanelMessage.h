@@ -52,6 +52,8 @@ namespace Panels{
 
 		virtual string ToString();
 
+		virtual OutputMessage* Clone();
+
 	protected:
 
 		int position = -1;

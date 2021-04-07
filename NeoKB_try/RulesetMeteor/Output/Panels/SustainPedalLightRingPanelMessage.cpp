@@ -49,3 +49,8 @@ string SustainPedalLightRingPanelMessage::ToString()
 	return "RV,"s + roundAndToString(pedalDownLifeTime, 2);
 	return "SP,"s + roundAndToString(targetLifeTime, 2) + ","s + roundAndToString(pedalDownLifeTime, 2) + ","s + roundAndToString(ringLifeTime, 2);
 }
+
+OutputMessage * SustainPedalLightRingPanelMessage::Clone()
+{
+	return new SustainPedalLightRingPanelMessage(targetLifeTime, pedalDownLifeTime, ringLifeTime);
+}
