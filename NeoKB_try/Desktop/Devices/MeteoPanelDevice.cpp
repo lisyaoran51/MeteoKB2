@@ -22,7 +22,7 @@ int MeteoPanelDevice::readFromDevice()
 		newState->GetPanelState()->AddKnob(pair<InputKey, int>(InputKey::SpeedKnob, 1));
 		inputStates.push_back(newState);
 	}
-	else if (_debugCount % 1500 == 250) {
+	else if (_debugCount % 1500 == 250 && false) {
 		InputState* newState = new InputState();
 		newState->SetPanelState(new PanelState());
 
