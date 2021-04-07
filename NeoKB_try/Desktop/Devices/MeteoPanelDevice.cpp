@@ -15,7 +15,7 @@ int MeteoPanelDevice::readFromDevice()
 	if (newState != nullptr)
 		inputStates.push_back(newState);
 #else
-	if (_debugCount % 300 == 0 || _debugCount % 300 == 10 || _debugCount % 300 == 2) {
+	if (_debugCount % 300 == 0) {
 		InputState* newState = new InputState();
 		newState->SetPanelState(new PanelState());
 
