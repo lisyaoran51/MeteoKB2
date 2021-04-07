@@ -152,6 +152,9 @@ int MeteoMcuV1::SwitchLight(int button, bool isTurnOn)
 
 int MeteoMcuV1::PushI2cMessage(string iMessage)
 {
+
+	LOG(LogLevel::Debug) << "MeteoMcuV1::writePanel() : push [" << iMessage << "]." << i2cMessages.size();
+
 	unique_lock<mutex> uLock(i2cMessageMutex);
 	i2cMessages.push_back(iMessage);
 	return 0;
