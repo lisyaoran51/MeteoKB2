@@ -50,7 +50,7 @@ int ThrottledFramedClock::throttle()
 
 	}
 
-	LOG(LogLevel::Depricated) << "ThrottledFramedClock::throttle() : current time [" << fixed << setprecision(5) << source->GetCurrentTime() << "] after throttle";
+	LOG(LogLevel::Debug) << "ThrottledFramedClock::throttle() : current time [" << fixed << setprecision(5) << source->GetCurrentTime() << "] after throttle";
 
 	return 0;
 }
