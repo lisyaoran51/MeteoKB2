@@ -10,7 +10,7 @@ MeteoPanelDevice::MeteoPanelDevice(MeteoMcuV1 * mMcu)
 
 int MeteoPanelDevice::readFromDevice()
 {
-#if 0
+#if 1
 	InputState* newState = meteoMcu->GetPanelState();
 	if (newState != nullptr)
 		inputStates.push_back(newState);

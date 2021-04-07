@@ -469,7 +469,7 @@ int MeteorTimeController::onKnobTurn(InputState * inputState, InputKey knob)
 	}
 
 	if (knob == InputKey::SpeedKnob) {
-		LOG(LogLevel::Debug) << "MeteorTimeController::onKnobTurn() : get [SpeedKnob] action. ";
+		LOG(LogLevel::Depricated) << "MeteorTimeController::onKnobTurn() : get [SpeedKnob] action. ";
 
 		int turnValue = 0;
 		for (int i = 0; i < inputState->GetPanelState()->GetKnobs()->size(); i++)
