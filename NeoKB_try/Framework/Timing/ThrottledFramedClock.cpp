@@ -39,6 +39,7 @@ int ThrottledFramedClock::throttle()
 		}
 
 		LOG(LogLevel::Depricated) << "ThrottledFramedClock::throttle() : time to sleep [" << fixed << setprecision(5) << timeToSleepInMilli / 1000.0 << "].";
+		LOG(LogLevel::Debug) << "ThrottledFramedClock::throttle() : timeToSleepInMilli [" << timeToSleepInMilli << "], accumulatedSleepError [" << accumulatedSleepError << "].";
 
 		if (timeToSleepInMilli > 0) {
 			//usleep(timeToSleepInMilli * 1000);
