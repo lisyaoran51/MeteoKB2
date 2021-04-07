@@ -237,7 +237,14 @@ int MeteoMcuV1::readPanel()
 
 int MeteoMcuV1::writePanel()
 {
-	unique_lock<mutex> uLock(i2cMessageMutex);
+
+	if (!i2cMessageMutex.try_lock()) {
+		LOG(LogLevel::Debug) << "MeteoMcuV1::writePanel() : mutex locked";
+		return 0;
+	}
+	
+
+	//unique_lock<mutex> uLock(i2cMessageMutex);
 
 	if (i2cMessages.size() == 0)
 		return -1;
