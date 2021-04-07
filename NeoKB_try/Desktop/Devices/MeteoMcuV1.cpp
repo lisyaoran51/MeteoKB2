@@ -163,6 +163,7 @@ int MeteoMcuV1::PushI2cMessage(string iMessage)
 int MeteoMcuV1::work()
 {
 	while (!exitRequested) {
+		LOG(LogLevel::Debug) << "MeteoMcuV1::work() : output message size:" << i2cMessages.size();
 		readPanel();
 		writePanel();
 		//this_thread::sleep_for(chrono::milliseconds(10));

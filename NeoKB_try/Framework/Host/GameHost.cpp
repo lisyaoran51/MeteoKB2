@@ -249,7 +249,7 @@ int GameHost::inputFrame()
 	LOG(LogLevel::Depricated) << "GameHost::inputFrame() : process output.";
 	mainInterface->ProcessOutput();
 
-	LOG(LogLevel::Debug) << "GameHost::inputFrame() : process output over.";
+	LOG(LogLevel::Depricated) << "GameHost::inputFrame() : process output over.";
 
 	return 0;
 }
