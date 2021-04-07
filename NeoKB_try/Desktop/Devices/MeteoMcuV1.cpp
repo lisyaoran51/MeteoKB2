@@ -240,6 +240,8 @@ int MeteoMcuV1::writePanel()
 	if (i2cMessages.size() == 0)
 		return -1;
 
+	LOG(LogLevel::Debug) << "MeteoMcuV1::writePanel() : get i2c message";
+
 	unique_lock<mutex> uLock(i2cMessageMutex);
 
 	for (int i = 0; i < i2cMessages.size(); i++) {
