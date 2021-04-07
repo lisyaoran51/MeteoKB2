@@ -50,7 +50,7 @@ int SheetmusicSelectPanel::load(FrameworkConfigManager * f, SmManager * s, Outpu
 
 	selectedModifiers.SetValue(new vector<Modifier*>());
 
-	//return 0;
+	return 0;
 
 	// 暫時先這樣 之後再改
 	string songTitle;
