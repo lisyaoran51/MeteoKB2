@@ -36,17 +36,17 @@ void DIS_writeCallback(gatt_db_attribute* UNUSED_PARAM(attr), int err, void* UNU
 void ATT_debugCallback(char const* str, void* UNUSED_PARAM(argp))
 {
 	if (!str)
-		LOG(LogLevel::Debug) << "ATT: debug callback with no message";
+		LOG(LogLevel::Fine) << "ATT: debug callback with no message";
 	else
-		LOG(LogLevel::Debug) << "ATT: " << str;
+		LOG(LogLevel::Fine) << "ATT: " << str;
 }
 
 void GATT_debugCallback(char const* str, void* UNUSED_PARAM(argp))
 {
 	if (!str)
-		LOG(LogLevel::Debug) << "GATT: debug callback with no message";
+		LOG(LogLevel::Fine) << "GATT: debug callback with no message";
 	else
-		LOG(LogLevel::Debug) << "GATT: " << str;
+		LOG(LogLevel::Fine) << "GATT: " << str;
 }
 
 

@@ -2926,3 +2926,14 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 4/6
 	volume controller寫好了，不過要設定sound bank的initial volume，不然會爆音
 	
+4/7
+	不停的轉速度旋鈕時，會當機
+	錯誤原因跟mcu thread 無關
+	找到問題了，是game thread的clock->ProcessFrame();會當掉
+	
+	audio thread和input thread都很高的時候就會當掉
+	
+	發現是因為output manager會刪message，但是後來又再判斷一次message能不能丟給下一個outputer
+	
+	接下來先串gatt
+	
