@@ -96,11 +96,11 @@ int MeteoPanelDevice::passToDevice()
 		delete outputMessages[i];
 		LOG(LogLevel::Debug) << "MeteoPanelDevice::passToDevice() : pass over.";
 	}
-	outputMessages.push_back(nullptr);
+	//outputMessages.push_back(nullptr);
 	outputMessages.clear();
 	if(test)
 		LOG(LogLevel::Debug) << "MeteoPanelDevice::passToDevice() : clear.";
-	meteoMcu->PushI2cMessage("SK,0");
+	//meteoMcu->PushI2cMessage("SK,0");
 
 	return 0;
 }
