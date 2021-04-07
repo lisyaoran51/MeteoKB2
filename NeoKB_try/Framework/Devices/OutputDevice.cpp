@@ -8,7 +8,7 @@ int OutputDevice::ProcessOutput()
 
 	readFromPeripheral();
 	passToDevice();
-	LOG(LogLevel::Debug) << "OutputDevice::ProcessOutput() : process over.";
+	LOG(LogLevel::Depricated) << "OutputDevice::ProcessOutput() : process over.";
 
 	return 0;
 }
