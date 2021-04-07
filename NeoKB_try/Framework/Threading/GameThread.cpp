@@ -117,8 +117,13 @@ int GameThread::processFrame()
 	if (threadName == "InputThread")
 		LOG(LogLevel::Debug) << "GameThread::processFrame() : [" << threadName << "] new frame over.";
 
-
-	clock->ProcessFrame();
+	try {
+		clock->ProcessFrame();
+	}
+	catch (exception& e) {
+		LOG(LogLevel::Error) << "GameThread::processFrame() : clock error " << e.what();
+		throw e;
+	}
 
 	if (threadName == "InputThread")
 		LOG(LogLevel::Debug) << "GameThread::processFrame() : [" << threadName << "] clock process over.";
