@@ -93,6 +93,7 @@ int MeteoPanelDevice::passToDevice()
 		LOG(LogLevel::Debug) << "MeteoPanelDevice::passToDevice() : pass message to board.";
 		meteoMcu->PushI2cMessage(outputMessages[i]->ToString());
 		delete outputMessages[i];
+		LOG(LogLevel::Debug) << "MeteoPanelDevice::passToDevice() : pass over.";
 	}
 	outputMessages.clear();
 
