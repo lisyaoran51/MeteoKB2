@@ -121,7 +121,7 @@ void GattClient_onTimeout(int UNUSED_PARAM(fd), void* argp)
 
 
 MeteoGattClientV1::MeteoGattClientV1(int fd) : 
-	m_fd(-1),
+	m_fd(fd),
 	m_att(nullptr),
 	m_db(nullptr),
 	m_server(nullptr),
@@ -153,7 +153,7 @@ void MeteoGattClientV1::Init(std::map<std::string, std::function<std::string()>>
 	m_att = bt_att_new(m_fd, 0);
 	if (!m_att)
 	{
-		LOG(LogLevel::Error) << "failed to create new att:" << errno;
+		LOG(LogLevel::Error) << "MeteoGattClientV1::Init() : failed to create new att:" << errno;
 	}
 
 	bt_att_set_close_on_unref(m_att, true);
@@ -161,13 +161,13 @@ void MeteoGattClientV1::Init(std::map<std::string, std::function<std::string()>>
 	m_db = gatt_db_new();
 	if (!m_db)
 	{
-		LOG(LogLevel::Error) << "failed to create gatt database";
+		LOG(LogLevel::Error) << "MeteoGattClientV1::Init() : failed to create gatt database";
 	}
 
 	m_server = bt_gatt_server_new(m_db, m_att, m_mtu, 0);
 	if (!m_server)
 	{
-		LOG(LogLevel::Error) << "failed to create gatt server";
+		LOG(LogLevel::Error) << "MeteoGattClientV1::Init() : failed to create gatt server";
 	}
 
 	if (true)
