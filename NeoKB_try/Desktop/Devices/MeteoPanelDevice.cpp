@@ -87,15 +87,18 @@ int MeteoPanelDevice::readFromDevice()
 
 int MeteoPanelDevice::passToDevice()
 {
-
+	bool test = false;
 	unique_lock<mutex> uLock(outputMessageMutex);
 	for (int i = 0; i < outputMessages.size(); i++) {
+		test = true;
 		LOG(LogLevel::Debug) << "MeteoPanelDevice::passToDevice() : pass message to board.";
 		meteoMcu->PushI2cMessage(outputMessages[i]->ToString());
 		delete outputMessages[i];
 		LOG(LogLevel::Debug) << "MeteoPanelDevice::passToDevice() : pass over.";
 	}
 	outputMessages.clear();
+	if(test)
+		LOG(LogLevel::Debug) << "MeteoPanelDevice::passToDevice() : clear.";
 
 	return 0;
 }
