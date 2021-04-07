@@ -104,7 +104,7 @@ int GameThread::processFrame()
 	if(clock->GetIsRunning())
 		LOG(LogLevel::Depricated) << "GameThread::processFrame() : current time = [" << fixed << setprecision(5) << clock->GetCurrentTime() << "] by [" << threadName << "].";
 
-	//if(threadName == "UpdateThread")
+	if(threadName == "InputThread")
 		LOG(LogLevel::Depricated) << "GameThread::processFrame() : [" << threadName << "] processing.";
 
 	while (!ThreadMaster::GetInstance().CheckThreadProcessable(threadName));
@@ -116,6 +116,9 @@ int GameThread::processFrame()
 
 
 	clock->ProcessFrame();
+
+	if (threadName == "InputThread")
+		LOG(LogLevel::Depricated) << "GameThread::processFrame() : [" << threadName << "] process over.";
 
 	statisticFrameRate++;
 	return 0;
