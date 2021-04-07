@@ -46,7 +46,7 @@ int ThrottledFramedClock::throttle()
 		}
 
 		if(maxUpdateHz == 500)
-			LOG(LogLevel::Depricated) << "ThrottledFramedClock::throttle() : timeToSleepInMilli [" << timeToSleepInMilli << "], accumulatedSleepError [" << accumulatedSleepError << "].";
+			LOG(LogLevel::Debug) << "ThrottledFramedClock::throttle() : timeToSleepInMilli [" << timeToSleepInMilli << "], accumulatedSleepError [" << accumulatedSleepError << "].";
 
 		// 把睡眠以後的時間差記下來，把誤差累加進去
 		double afterSleepTimeInMilli = source->GetCurrentTime() * 1000.0;
