@@ -100,8 +100,8 @@ MeteoMcuV1::MeteoMcuV1(int address)
 		i2cInterface->i2cRead(buffer, 17);
 
 
-	//thread t(&MeteoMcuV1::work, this);
-	//t.detach();
+	thread t(&MeteoMcuV1::work, this);
+	t.detach();
 
 }
 
