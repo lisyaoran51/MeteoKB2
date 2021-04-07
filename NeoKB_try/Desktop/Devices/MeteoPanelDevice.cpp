@@ -99,6 +99,7 @@ int MeteoPanelDevice::passToDevice()
 	outputMessages.clear();
 	if(test)
 		LOG(LogLevel::Debug) << "MeteoPanelDevice::passToDevice() : clear.";
+	meteoMcu->PushI2cMessage("SK,0");
 
 	return 0;
 }
