@@ -96,6 +96,7 @@ int MeteoPanelDevice::passToDevice()
 		delete outputMessages[i];
 		LOG(LogLevel::Debug) << "MeteoPanelDevice::passToDevice() : pass over.";
 	}
+	outputMessages.push_back(nullptr);
 	outputMessages.clear();
 	if(test)
 		LOG(LogLevel::Debug) << "MeteoPanelDevice::passToDevice() : clear.";
