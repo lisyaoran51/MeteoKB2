@@ -43,6 +43,7 @@ int ThrottledFramedClock::throttle()
 			LOG(LogLevel::Debug) << "ThrottledFramedClock::throttle() : timeToSleepInMilli [" << timeToSleepInMilli << "], accumulatedSleepError [" << accumulatedSleepError << "].";
 
 		if (timeToSleepInMilli > 0) {
+			if (maxUpdateHz != 500)
 			usleep(timeToSleepInMilli * 1000);
 			//this_thread::sleep_for(chrono::milliseconds((long)timeToSleepInMilli));
 		}
