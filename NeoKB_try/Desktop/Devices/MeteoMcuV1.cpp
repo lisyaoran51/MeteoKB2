@@ -153,7 +153,7 @@ int MeteoMcuV1::SwitchLight(int button, bool isTurnOn)
 int MeteoMcuV1::PushI2cMessage(string iMessage)
 {
 
-	LOG(LogLevel::Debug) << "MeteoMcuV1::writePanel() : push [" << iMessage << "]." << i2cMessages.size();
+	LOG(LogLevel::Debug) << "MeteoMcuV1::PushI2cMessage() : push [" << iMessage << "]." << i2cMessages.size();
 
 	unique_lock<mutex> uLock(i2cMessageMutex);
 	i2cMessages.push_back(iMessage);
@@ -247,11 +247,16 @@ int MeteoMcuV1::writePanel()
 		strcpy(cstr, i2cMessages[i].c_str());
 		cstr[i2cMessages[i].length()] = '\0';
 
-		LOG(LogLevel::Debug) << "MeteoMcuV1::writePanel() : write [" << cstr << "] to i2c." << i2cMessages.size();
+		LOG(LogLevel::Debug) << "MeteoMcuV1::writePanel() : write [" << cstr << "](" << i2cMessages[i].c_str() << ") to i2c. last char is [" << (int)cstr[i2cMessages[i].length()] << "] at " << i2cMessages[i].length();
 
-		LOG(LogLevel::Debug) << "MeteoMcuV1::writePanel() : write [" << cstr << "](" << i2cMessages[i].c_str() << ") to i2c. last char is [" << cstr[i2cMessages[i].length()] << "] at " << i2cMessages[i].length();
+		try {
+			i2cInterface->i2cWrite(cstr, i2cMessages[i].length() + 1);
+		}
+		catch (exception& e) {
+			LOG(LogLevel::Error) << "MeteoMcuV1::writePanel() : write error [" << e.what() << "].";
+		}
 
-		i2cInterface->i2cWrite(cstr, i2cMessages[i].length() + 1);
+		LOG(LogLevel::Debug) << "MeteoMcuV1::writePanel() : write over";
 
 		delete[] cstr;
 	}
