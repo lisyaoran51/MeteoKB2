@@ -10,11 +10,26 @@ MeteoPanelDevice::MeteoPanelDevice(MeteoMcuV1 * mMcu)
 
 int MeteoPanelDevice::readFromDevice()
 {
-#if 1
+#if 0
 	InputState* newState = meteoMcu->GetPanelState();
 	if (newState != nullptr)
 		inputStates.push_back(newState);
 #else
+	if (_debugCount % 10 == 0) {
+		InputState* newState = new InputState();
+		newState->SetPanelState(new PanelState());
+
+		newState->GetPanelState()->AddKnob(pair<InputKey, int>(InputKey::SpeedKnob, 1));
+		inputStates.push_back(newState);
+	}
+	else if (_debugCount % 10 == 1) {
+		InputState* newState = new InputState();
+		newState->SetPanelState(new PanelState());
+
+		newState->GetPanelState()->AddKnob(pair<InputKey, int>(InputKey::SpeedKnob, -1));
+		inputStates.push_back(newState);
+	}
+
 	_debugCount++;
 #endif
 
@@ -96,11 +111,11 @@ int MeteoPanelDevice::passToDevice()
 		delete outputMessages[i];
 		LOG(LogLevel::Debug) << "MeteoPanelDevice::passToDevice() : pass over.";
 	}
-	outputMessages.push_back(nullptr);
+	//outputMessages.push_back(nullptr);
 	outputMessages.clear();
 	if(test)
 		LOG(LogLevel::Debug) << "MeteoPanelDevice::passToDevice() : clear.";
-	meteoMcu->PushI2cMessage("SK,0");
+	//meteoMcu->PushI2cMessage("SK,0");
 
 	return 0;
 }
