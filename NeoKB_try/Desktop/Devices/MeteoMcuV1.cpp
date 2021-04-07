@@ -236,13 +236,13 @@ int MeteoMcuV1::readPanel()
 
 int MeteoMcuV1::writePanel()
 {
+	unique_lock<mutex> uLock(i2cMessageMutex);
 
 	if (i2cMessages.size() == 0)
 		return -1;
 
 	LOG(LogLevel::Debug) << "MeteoMcuV1::writePanel() : get i2c message";
 
-	unique_lock<mutex> uLock(i2cMessageMutex);
 
 	for (int i = 0; i < i2cMessages.size(); i++) {
 		char *cstr = new char[i2cMessages[i].length() + 1];
