@@ -29,11 +29,11 @@ int Peripheral::PushOutputMessage(OutputMessage * outputMessage)
 
 int Peripheral::PourOutOutputMessages(vector<OutputMessage*>* pourOutTo)
 {
+	unique_lock<mutex> uLock(outputMessageMutex);
 
 	if(outputMessages.size() > 0)
 		LOG(LogLevel::Depricated) << "Peripheral::PourOutOutputMessages() : pour all messages to board.";
 
-	unique_lock<mutex> uLock(outputMessageMutex);
 	pourOutTo->insert(pourOutTo->end(), outputMessages.begin(), outputMessages.end());
 	outputMessages.clear();
 	return 0;
