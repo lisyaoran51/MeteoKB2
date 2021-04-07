@@ -101,7 +101,7 @@ MeteoMcuV1::MeteoMcuV1(int address)
 
 
 	thread t(&MeteoMcuV1::work, this);
-	t.detach();
+	//t.detach();
 
 }
 
