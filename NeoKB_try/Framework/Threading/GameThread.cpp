@@ -114,11 +114,14 @@ int GameThread::processFrame()
 	
 	ThreadMaster::GetInstance().SetThreadProcessStatus(threadName, false);
 
+	if (threadName == "InputThread")
+		LOG(LogLevel::Debug) << "GameThread::processFrame() : [" << threadName << "] new frame over.";
+
 
 	clock->ProcessFrame();
 
 	if (threadName == "InputThread")
-		LOG(LogLevel::Debug) << "GameThread::processFrame() : [" << threadName << "] process over.";
+		LOG(LogLevel::Debug) << "GameThread::processFrame() : [" << threadName << "] clock process over.";
 
 	statisticFrameRate++;
 	return 0;
