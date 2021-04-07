@@ -3,11 +3,13 @@
 #include <thread>
 #include <unistd.h>
 #include "../../Games/Output/Bluetooths/MeteoContextBluetoothMessage.h"
+#include "Gatt/MeteoGattServerV1.h"
 
 
 using namespace std;
 using namespace Desktop::Devices;
 using namespace Games::Output::Bluetooths;
+using namespace Desktop::Devices::Gatt;
 
 
 
@@ -60,6 +62,26 @@ int MeteoBluetoothPhoneV2::PushOutputMessage(OutputMessage * outputMessage)
 
 int MeteoBluetoothPhoneV2::work()
 {
+
+	while (!exitRequested) {
+
+		try
+		{
+			gattServer = new MeteoGattServerV1();
+			GattClient* gattClient = gattServer->Listen();
+
+			gattClient->SetDataHandler(std::bind(&MeteoGattServerV1::OnIncomingMessage, dynamic_cast<MeteoGattServerV1*>(gattServer), std::placeholders::_1, std::placeholders::_2));
+
+			gattServer->Run(gattClient);
+		}
+		catch (std::exception const& err)
+		{
+			LOG(LogLevel::Error) << "MeteoBluetoothPhoneV2::work() : gatt get error:" << err.what();
+			continue;
+		}
+
+	}
+	return 0;
 
 
 	//client = init_server(0x1);
