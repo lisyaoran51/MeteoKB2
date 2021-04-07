@@ -163,7 +163,7 @@ int MeteoMcuV1::PushI2cMessage(string iMessage)
 int MeteoMcuV1::work()
 {
 	while (!exitRequested) {
-		LOG(LogLevel::Debug) << "MeteoMcuV1::work() : output message size:" << i2cMessages.size();
+		LOG(LogLevel::Depricated) << "MeteoMcuV1::work() : output message size:" << i2cMessages.size();
 		readPanel();
 		writePanel();
 		//this_thread::sleep_for(chrono::milliseconds(10));
@@ -237,7 +237,7 @@ int MeteoMcuV1::readPanel()
 
 int MeteoMcuV1::writePanel()
 {
-
+	
 	if (!i2cMessageMutex.try_lock()) {
 		LOG(LogLevel::Debug) << "MeteoMcuV1::writePanel() : mutex locked";
 		return 0;

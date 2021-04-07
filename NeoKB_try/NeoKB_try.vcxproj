@@ -102,7 +102,9 @@
     <ClCompile Include="Games\Output\Bluetooths\MeteoContextBluetoothMessage.cpp" />
     <ClCompile Include="Games\Output\Bluetooths\MeteoFileBluetoothMessage.cpp" />
     <ClCompile Include="Games\Output\Bluetooths\MeteoFileSegmentBluetoothMessage.cpp" />
+    <ClCompile Include="Games\Output\Panels\IndicatorLightOutputer.cpp" />
     <ClCompile Include="Games\Output\Panels\IndicatorLightPanelMessage.cpp" />
+    <ClCompile Include="Games\Output\Panels\SpeedRingOutputer.cpp" />
     <ClCompile Include="Games\Output\Panels\SpeedRingPanelMessage.cpp" />
     <ClCompile Include="Games\Ruleset\Judgements\HasHitWindow.cpp" />
     <ClCompile Include="Games\Ruleset\Judgements\HitWindow.cpp" />
@@ -504,7 +506,9 @@
     <ClInclude Include="Games\Output\Bluetooths\MeteoContextBluetoothMessage.h" />
     <ClInclude Include="Games\Output\Bluetooths\MeteoFileBluetoothMessage.h" />
     <ClInclude Include="Games\Output\Bluetooths\MeteoFileSegmentBluetoothMessage.h" />
+    <ClInclude Include="Games\Output\Panels\IndicatorLightOutputer.h" />
     <ClInclude Include="Games\Output\Panels\IndicatorLightPanelMessage.h" />
+    <ClInclude Include="Games\Output\Panels\SpeedRingOutputer.h" />
     <ClInclude Include="Games\Output\Panels\SpeedRingPanelMessage.h" />
     <ClInclude Include="Games\Ruleset\Judgements\HitResult.h" />
     <ClInclude Include="Games\Ruleset\Judgements\HitWindow.h" />

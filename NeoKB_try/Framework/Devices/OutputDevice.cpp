@@ -8,6 +8,7 @@ int OutputDevice::ProcessOutput()
 
 	readFromPeripheral();
 	passToDevice();
+	LOG(LogLevel::Debug) << "OutputDevice::ProcessOutput() : process over.";
 
 	return 0;
 }
