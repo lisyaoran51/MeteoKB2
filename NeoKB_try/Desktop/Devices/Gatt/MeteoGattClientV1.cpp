@@ -216,6 +216,34 @@ void MeteoGattClientV1::SetDataHandler(std::function<void(char const*, int)> dHa
 	m_data_handler = dHandler;
 }
 
+int MeteoGattClientV1::SendNotification(char * bufferOut, int size)
+{
+	if (size > m_mtu) {
+		LOG(LogLevel::Error) << "MeteoGattClientV1::SendNotification() : message over size.";
+		return -1;
+	}
+
+	bool send_success = bt_gatt_server_send_notification(m_server,
+		m_notify_handle,
+		bufferOut,
+		size);
+
+	if (!send_success) {
+		LOG(LogLevel::Warning) << "MeteoGattClientV1::SendNotification() : failed to send.";
+		return -1;
+	}
+
+	return 0;
+}
+
+int MeteoGattClientV1::GetWriteQueueLength()
+{
+	if (m_server == nullptr)
+		return -1;
+
+	return bt_gatt_server_get_write_queue_length(m_server);
+}
+
 int MeteoGattClientV1::buildService(std::map<std::string, std::function<std::string()>> deviceInfoGetter)
 {
 	buildGapService();

@@ -83,6 +83,10 @@ namespace Gatt {
 
 		virtual void SetDataHandler(std::function<void(char const*, int)> dHandler);
 
+		virtual int SendNotification(char* bufferOut, int size);
+
+		virtual int GetWriteQueueLength();
+
 		/*--------------------callbacks--------------------*/
 
 		void onDataChannelOut(gatt_db_attribute* attr, uint32_t id, uint16_t offset, uint8_t opcode, bt_att* att);

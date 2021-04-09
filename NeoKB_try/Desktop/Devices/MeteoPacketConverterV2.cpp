@@ -12,7 +12,7 @@ using namespace Games::Output::Bluetooths;
 using namespace Games::Input::Commands;
 
 
-string MeteoPacketConverterV2::getFileName(char * buffer, int size)
+string MeteoPacketConverterV2::getFileName(const char * buffer, int size)
 {
 
 	char name[17] = { 0 };
@@ -28,7 +28,7 @@ string MeteoPacketConverterV2::getFileName(char * buffer, int size)
 	return string(name);
 }
 
-int MeteoPacketConverterV2::getFileSize(char * buffer, int size)
+int MeteoPacketConverterV2::getFileSize(const char * buffer, int size)
 {
 	unsigned short length;
 	memcpy(&length, buffer + sizeof(unsigned long), sizeof(unsigned short));
@@ -38,7 +38,7 @@ int MeteoPacketConverterV2::getFileSize(char * buffer, int size)
 	return fileSize;
 }
 
-char * MeteoPacketConverterV2::getFileSegment(char * buffer, int size)
+char * MeteoPacketConverterV2::getFileSegment(const char * buffer, int size)
 {
 	int fileSegmentSize = getFileSize(buffer, size);
 
@@ -58,7 +58,7 @@ char * MeteoPacketConverterV2::getFileSegment(char * buffer, int size)
 	return fileSegment;
 }
 
-int MeteoPacketConverterV2::getFileSegmentOrder(char * buffer, int size)
+int MeteoPacketConverterV2::getFileSegmentOrder(const char * buffer, int size)
 {
 	unsigned short fileSegmentNumber;
 
@@ -67,7 +67,7 @@ int MeteoPacketConverterV2::getFileSegmentOrder(char * buffer, int size)
 	return fileSegmentNumber;
 }
 
-int MeteoPacketConverterV2::getFileSegmentCount(char * buffer, int size)
+int MeteoPacketConverterV2::getFileSegmentCount(const char * buffer, int size)
 {
 	unsigned short fileSegmentCount;
 
@@ -645,7 +645,7 @@ int MeteoPacketConverterV2::SplitPacket(char * bufferIn, int bytesRead, char ** 
 	return returnPackets.size();
 }
 
-PacketStatus MeteoPacketConverterV2::CheckPacketStatus(char * packet, int length)
+PacketStatus MeteoPacketConverterV2::CheckPacketStatus(const char * packet, int length)
 {
 
 	LOG(LogLevel::Debug) << "MeteoPacketConverterV1::CheckPacketStatus() : packet [" << length << "].";
@@ -690,7 +690,7 @@ PacketStatus MeteoPacketConverterV2::CheckPacketStatus(char * packet, int length
 	return PacketStatus::Fine;
 }
 
-PacketType MeteoPacketConverterV2::CheckPacketType(char * buffer, int size)
+PacketType MeteoPacketConverterV2::CheckPacketType(const char * buffer, int size)
 {
 	unsigned long command = 0x0;
 	memcpy(&command, buffer, sizeof(command));
@@ -720,7 +720,7 @@ PacketType MeteoPacketConverterV2::CheckCommandType(BluetoothMessage * bluetooth
 	return PacketType::None;
 }
 
-BluetoothMessage * MeteoPacketConverterV2::ConvertToBluetoothMessage(char * buffer, int size)
+BluetoothMessage * MeteoPacketConverterV2::ConvertToBluetoothMessage(const char * buffer, int size)
 {
 	unsigned long command = 0x0;
 	memcpy(&command, buffer, sizeof(command));
@@ -781,7 +781,14 @@ int MeteoPacketConverterV2::ConvertToByteArray(BluetoothMessage * bluetoothComma
 	return 0;
 }
 
-BluetoothMessage* MeteoPacketConverterV2::ConvertToFile(char * buffer, int size)
+int MeteoPacketConverterV2::ConvertToByteArray(BluetoothMessage * bluetoothMessage, char * buffer, int bufferMaxSize)
+{
+	
+
+	return 0;
+}
+
+BluetoothMessage* MeteoPacketConverterV2::ConvertToFile(const char * buffer, int size)
 {
 	unsigned long command = 0x0;
 	memcpy(&command, buffer, sizeof(command));

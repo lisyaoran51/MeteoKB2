@@ -35,8 +35,14 @@ int GattServer::Run(GattClient * gClient)
 	m_client->Run();
 	
 	guard.lock();
-	delete m_client;
+	GattClient* toDelete = m_client;
 	m_client = nullptr;
+	delete toDelete;
 
 	return 0;
+}
+
+GattClient * GattServer::GetClient()
+{
+	return m_client;
 }

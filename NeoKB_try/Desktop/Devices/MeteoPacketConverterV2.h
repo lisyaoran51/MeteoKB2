@@ -39,15 +39,15 @@ namespace Devices{
 
 		map<unsigned long, MeteoCommand> commandMap;
 
-		string getFileName(char* buffer, int size);
+		string getFileName(const char* buffer, int size);
 
-		int getFileSize(char* buffer, int size);
+		int getFileSize(const char* buffer, int size);
 
-		char* getFileSegment(char* buffer, int size);
+		char* getFileSegment(const char* buffer, int size);
 
-		int getFileSegmentOrder(char* buffer, int size);
+		int getFileSegmentOrder(const char* buffer, int size);
 
-		int getFileSegmentCount(char* buffer, int size);
+		int getFileSegmentCount(const char* buffer, int size);
 
 
 	public:
@@ -56,22 +56,27 @@ namespace Devices{
 
 		virtual int SplitPacket(char* bufferIn, int bytesRead, char** packets, int* packerLengths);
 
-		virtual PacketStatus CheckPacketStatus(char* packet, int length);
+		virtual PacketStatus CheckPacketStatus(const char* packet, int length);
 
-		virtual PacketType CheckPacketType(char* buffer, int size);
+		virtual PacketType CheckPacketType(const char* buffer, int size);
 
 		virtual PacketType CheckCommandType(BluetoothMessage* bluetoothMessage);
 
-		virtual BluetoothMessage* ConvertToBluetoothMessage(char* buffer, int size);
+		virtual BluetoothMessage* ConvertToBluetoothMessage(const char* buffer, int size);
 
 		virtual int GetCountOfPacket(BluetoothMessage* bluetoothMessage);
 
 		virtual int ConvertToByteArray(BluetoothMessage* bluetoothMessage, int packetOrder, char* buffer, int bufferMaxSize);
-		
+
+		/// <summary>
+		/// 回傳array長度，不允許context message長度超過一個封包
+		/// </summary>
+		virtual int ConvertToByteArray(BluetoothMessage* bluetoothMessage, char* buffer, int bufferMaxSize);
+
 		/// <summary>
 		/// 回傳值是轉換好的file segment
 		/// <//summary>
-		virtual BluetoothMessage* ConvertToFile(char* buffer, int size);
+		virtual BluetoothMessage* ConvertToFile(const char* buffer, int size);
 
 
 

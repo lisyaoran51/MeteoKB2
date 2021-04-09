@@ -25,6 +25,9 @@ namespace Gatt {
 
 		virtual void SetDataHandler(std::function<void(char const*, int)> dHandler) = 0;
 
+		virtual int SendNotification(char* bufferOut, int size) = 0;
+
+		virtual int GetWriteQueueLength() = 0;
 
 	};
 

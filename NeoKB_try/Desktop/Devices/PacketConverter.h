@@ -66,15 +66,15 @@ namespace Devices{
 			return this;
 		}
 
-		virtual int SplitPacket(char* bufferIn, int bytesRead, char** packets, int* packerLengths) = 0;
+		virtual int SplitPacket(const char* bufferIn, int bytesRead, char** packets, int* packerLengths) = 0;
 
-		virtual PacketStatus CheckPacketStatus(char* packet, int length) = 0;
+		virtual PacketStatus CheckPacketStatus(const char* packet, int length) = 0;
 
-		virtual PacketType CheckPacketType(char* buffer, int size) = 0;
+		virtual PacketType CheckPacketType(const char* buffer, int size) = 0;
 
 		virtual PacketType CheckCommandType(BluetoothMessage* bluetoothMessage) = 0;
 
-		virtual BluetoothMessage* ConvertToBluetoothMessage(char* buffer, int size) = 0;
+		virtual BluetoothMessage* ConvertToBluetoothMessage(const char* buffer, int size) = 0;
 
 		//virtual BluetoothCommand* ConvertToBluetoothCommand(BluetoothMessage* bluetoothMessage) = 0;
 
@@ -82,7 +82,12 @@ namespace Devices{
 
 		virtual int ConvertToByteArray(BluetoothMessage* bluetoothMessage, int packetOrder, char* buffer, int bufferMaxSize) = 0;
 
-		virtual BluetoothMessage* ConvertToFile(char* buffer, int size) = 0;
+		/// <summary>
+		/// 回傳array長度
+		/// </summary>
+		virtual int ConvertToByteArray(BluetoothMessage* bluetoothMessage, char* buffer, int bufferMaxSize) = 0;
+
+		virtual BluetoothMessage* ConvertToFile(const char* buffer, int size) = 0;
 
 		//virtual bool CheckIsFinishWriteCommand(BluetoothMessage* bluetoothMessage) = 0;
 

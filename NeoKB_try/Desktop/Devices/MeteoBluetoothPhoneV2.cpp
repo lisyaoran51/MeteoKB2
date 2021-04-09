@@ -3,6 +3,7 @@
 #include <thread>
 #include <unistd.h>
 #include "../../Games/Output/Bluetooths/MeteoContextBluetoothMessage.h"
+#include "../../Games/Output/Bluetooths/MeteoFileSegmentBluetoothMessage.h"
 #include "Gatt/MeteoGattServerV1.h"
 
 
@@ -46,18 +47,31 @@ InputState * MeteoBluetoothPhoneV2::GetBluetoothState()
 	return returnValue;
 }
 
-int MeteoBluetoothPhoneV2::PushOutputMessage(OutputMessage * outputMessage)
+int MeteoBluetoothPhoneV2::PushOutputMessage(BluetoothMessage * outputMessage)
 {
-	BluetoothMessage* bluetoothMessage = dynamic_cast<BluetoothMessage*>(outputMessage);
-
-	if (bluetoothMessage != nullptr) {
-		outputMessages.push_back(bluetoothMessage);
-
+	if (gattServer != nullptr)
 		return 0;
 
+	/* 如果write queue塞了很多message，就先不要丟file message，免得一般message丟不出去 */
+	if (dynamic_cast<MeteoFileSegmentBluetoothMessage*>(outputMessage)) {
+		if (gattServer->GetClient() != nullptr) {
+			if (gattServer->GetClient()->GetWriteQueueLength() > outputBufferThreshold)
+				return -1;
+		}
 	}
 
-	return -1;
+	char buffer[256] = { 0 };
+
+	int size = packetConverter->ConvertToByteArray(outputMessage, buffer, mtu);//??
+
+	if (size != -1) {
+		gattServer->GetClient()->SendNotification(buffer, size);
+	}
+	else {
+		LOG(LogLevel::Error) << "MeteoBluetoothPhoneV2::PushOutputMessage() : message size over mtu [" << mtu << "].";
+	}
+		
+	return 0;
 }
 
 int MeteoBluetoothPhoneV2::work()
@@ -70,13 +84,21 @@ int MeteoBluetoothPhoneV2::work()
 			gattServer = new MeteoGattServerV1();
 			GattClient* gattClient = gattServer->Listen();
 
-			gattClient->SetDataHandler(std::bind(&MeteoGattServerV1::OnIncomingMessage, dynamic_cast<MeteoGattServerV1*>(gattServer), std::placeholders::_1, std::placeholders::_2));
+			//gattClient->SetDataHandler(std::bind(&MeteoGattServerV1::OnIncomingMessage, dynamic_cast<MeteoGattServerV1*>(gattServer), std::placeholders::_1, std::placeholders::_2));
+			gattClient->SetDataHandler(std::bind(&MeteoBluetoothPhoneV2::handleNewPacket, this, std::placeholders::_1, std::placeholders::_2));
 
 			gattServer->Run(gattClient);
+
+			GattServer* toDelete = gattServer;
+			gattServer = nullptr;
+			delete toDelete;
 		}
 		catch (std::exception const& err)
 		{
 			LOG(LogLevel::Error) << "MeteoBluetoothPhoneV2::work() : gatt get error:" << err.what();
+			GattServer* toDelete = gattServer;
+			gattServer = nullptr;
+			delete toDelete;
 			continue;
 		}
 
@@ -212,7 +234,7 @@ int MeteoBluetoothPhoneV2::pushBluetoothState(BluetoothMessage * btMessage)
 	return 0;
 }
 
-int MeteoBluetoothPhoneV2::handleNewPacket(char * packet, int length)
+int MeteoBluetoothPhoneV2::handleNewPacket(const char * packet, int length)
 {
 
 	LOG(LogLevel::Debug) << "MeteoPacketConverterV1::handleNewPacket() : length [" << length << "].";
@@ -249,5 +271,15 @@ int MeteoBluetoothPhoneV2::handleNewPacket(char * packet, int length)
 		LOG(LogLevel::Info) << "MeteoBluetoothPhoneV1::handleNewPacket() : got error packet.";
 	}
 
+	return 0;
+}
+
+int MeteoBluetoothPhoneV2::setMtu(int m)
+{
+	if (mtu > maxMtu) {
+		LOG(LogLevel::Error) << "MeteoBluetoothPhoneV1::setMtu() : new mtu [" << mtu << "] over max mtu [" << maxMtu << "].";
+		return -1;
+	}
+	mtu = m;
 	return 0;
 }

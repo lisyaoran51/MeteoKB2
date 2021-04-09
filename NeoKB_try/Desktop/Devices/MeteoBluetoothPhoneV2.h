@@ -42,6 +42,12 @@ namespace Devices {
 
 		GattServer* gattServer = nullptr;
 
+		int outputBufferThreshold = 5;
+
+		int mtu = 256;
+
+		int maxMtu = 256;
+
 	public:
 
 		MeteoBluetoothPhoneV2(PacketConverter<MeteoCommand>* pConverter);
@@ -50,7 +56,7 @@ namespace Devices {
 
 		InputState* GetBluetoothState();
 
-		int PushOutputMessage(OutputMessage* outputMessage);
+		int PushOutputMessage(BluetoothMessage* outputMessage);
 
 	protected:
 
@@ -72,7 +78,9 @@ namespace Devices {
 
 		int pushBluetoothState(BluetoothMessage* btMessage);
 
-		int handleNewPacket(char* packet, int length);
+		int handleNewPacket(const char* packet, int length);
+
+		int setMtu(int mtu);
 
 	};
 

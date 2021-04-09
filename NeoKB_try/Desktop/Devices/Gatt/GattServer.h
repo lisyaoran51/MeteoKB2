@@ -22,6 +22,8 @@ namespace Gatt{
 
 		int Run(GattClient* gClient);
 
+		GattClient* GetClient();
+
 		//virtual int OnIncomingMessage(const char* buff, int n);
 
 		

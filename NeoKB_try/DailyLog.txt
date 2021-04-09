@@ -2937,3 +2937,6 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 	
 	接下來先串gatt
 	
+	onDataChannelIn可以接到read bluetooth
+	notify 街道write bluetooth
+	

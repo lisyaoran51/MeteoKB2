@@ -76,12 +76,28 @@ int MeteoBluetoothDevice::readFromDevice()
 
 int MeteoBluetoothDevice::passToDevice()
 {
+	unique_lock<mutex> uLock(outputMessageMutex);
+
 	for (int i = 0; i < outputMessages.size(); i++) {
-		LOG(LogLevel::Depricated) << "MeteoPanelDevice::passToDevice() : pass message to board.";
-		meteoBluetoothPhone->PushOutputMessage(outputMessages[i]);
-		delete outputMessages[i];
+		// 判斷是否傳送成功，成功則>=0，失敗則惟<0
+		int success = -1;
+		try {
+			LOG(LogLevel::Depricated) << "MeteoBluetoothDevice::passToDevice() : pass message to bt.";
+			success = meteoBluetoothPhone->PushOutputMessage(dynamic_cast<BluetoothMessage*>(outputMessages[i]));
+		}
+		catch (exception &e) {
+			LOG(LogLevel::Error) << "MeteoBluetoothDevice::passToDevice() : pushing output message exception : " << e.what();
+			success = 0;
+		}
+
+		if (success >= 0) {
+			delete outputMessages[i];
+			outputMessages.erase(outputMessages.begin() + i);
+			i--;
+		}
+		
 	}
-	outputMessages.clear();
+	//outputMessages.clear();
 
 	return 0;
 }
