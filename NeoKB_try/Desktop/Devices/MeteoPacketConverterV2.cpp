@@ -547,103 +547,10 @@ MeteoPacketConverterV2::MeteoPacketConverterV2()
 
 }
 
-int MeteoPacketConverterV2::SplitPacket(char * bufferIn, int bytesRead, char ** packets, int * packerLengths)
+int MeteoPacketConverterV2::SplitPacket(const char * bufferIn, int bytesRead, char ** packets, int * packerLengths)
 {
-	int totalByteSplited = 0;
-
-	vector<char*> returnPackets;
-	vector<int> returnPacketLengths;
-
-	/* 如果有封包剛好在buffer最尾巴被切斷，就變true */
-	bool isPacketCut = false;
-
-	/* 將前一次read的buffer最後一個被切斷的封包跟這次的read的buffer append在一起(如果前一次read沒有被切斷的封包，就不用) */
-	char* appendedBufferIn = nullptr;
-	int appendedBytesRead = 0;
-
-	/* 如果上次收封包的時候，有斷掉packet，就接到現在這個buffer上 */
-	if (lastBufferSegmentSize > 0) {
-		
-		memcpy(lastBufferSegment + lastBufferSegmentSize, bufferIn, bytesRead);
-		appendedBufferIn = lastBufferSegment;
-		appendedBytesRead = lastBufferSegmentSize + bytesRead;
-
-	}
-	/* 如果上次收封包沒有斷掉的packet，就直接用現在的buffer就好，不用再append */
-	else {
-		appendedBufferIn = bufferIn;
-		appendedBytesRead = bytesRead;
-	}
-
-	/* 切分每個封包的起點 */
-	char* splitPosition = appendedBufferIn;
-
-	while (totalByteSplited < appendedBytesRead) {
-
-		unsigned long command;
-		memcpy(&command, splitPosition, sizeof(command));
-		unsigned short length = 0;
-		memcpy(&length, splitPosition + sizeof(command), sizeof(length));
-
-		LOG(LogLevel::Debug) << "MeteoPacketConverterV1::SplitPacket() : get packet [" << hex << command << dec << "], length [" << length << "].";
-
-		/* 判斷封包是否損壞。最大封包長度為156，如果超過就代表已損壞 */
-		/* 封包過短，可能也已經整個壞掉了 */
-		if (length > maxPacketLength || 
-			(length < 10 && length != 8 && length != 4)) {
-
-			char* tempPacket = splitPosition;
-			returnPackets.push_back(splitPosition);
-			returnPacketLengths.push_back(appendedBytesRead - totalByteSplited);
-			totalByteSplited = appendedBytesRead;
-			LOG(LogLevel::Debug) << "MeteoPacketConverterV1::SplitPacket() : get broken packet with length [" << length << "].";
-			continue;
-		}
-		/* 判斷封包是否超過目前讀到的資料長度，超過的話可能在read的時候被切斷了，就要把它放到lastBufferSegment裡面暫存起來 */
-		else if (length > appendedBytesRead - totalByteSplited) {
-
-			memset(lastBufferSegment, 0, sizeof(char) * 2048);
-			memcpy(lastBufferSegment, splitPosition, appendedBytesRead - totalByteSplited);
-			lastBufferSegmentSize = appendedBytesRead - totalByteSplited;
-			totalByteSplited = appendedBytesRead;
-			isPacketCut = true;
-			LOG(LogLevel::Debug) << "MeteoPacketConverterV1::SplitPacket() : get last packet cut with length [" << lastBufferSegmentSize << "] / [" << length << "].";
-
-		}
-		/* 正常 */
-		else {
-
-			char* tempPacket = splitPosition;
-			returnPackets.push_back(tempPacket);
-			returnPacketLengths.push_back(length);
-			splitPosition += length;
-			totalByteSplited += length;
-		}
-
-		
-	}
-
-	if (!isPacketCut)
-		lastBufferSegmentSize = 0;
-
-
-	/* 檢查收到的packets有沒有超過buffer最大量128個 */
-	if (returnPackets.size() > 128) {
-		LOG(LogLevel::Error) << "MeteoPacketConverterV1::SplitPacket() : get packet amount overflow [" << returnPackets.size() << "].";
-
-
-	}
-
-	/* 把切好的packet複製一份丟進回傳值裡 */
-	for (int i = 0; i < returnPackets.size(); i++) {
-
-		packets[i] = new char[returnPacketLengths[i]];
-		memcpy(packets[i], returnPackets[i], returnPacketLengths[i]);
-
-		packerLengths[i] = returnPacketLengths[i];
-	}
-
-	return returnPackets.size();
+	// depricated
+	return 0;
 }
 
 PacketStatus MeteoPacketConverterV2::CheckPacketStatus(const char * packet, int length)

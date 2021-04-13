@@ -3,3 +3,17 @@ https://github.com/lisyaoran51/GattServerTest
 
 編譯方式參考
 https://github.com/gladish/bleconfd
+
+修改內容：
+在att.c最後加一行 int bt_att_write_queue_size(struct bt_att *att){
+
+return queue_length(att->write_queue);
+}
+
+att.h加一行 int bt_att_write_queue_size(struct bt_att *att);
+
+在gatt-server.c加一行 int bt_gatt_server_get_write_queue_length(struct bt_gatt_server *server){ return bt_att_write_queue_size(server->att); }
+
+在gatt-server.h加一行 int bt_gatt_server_get_write_queue_length(struct bt_gatt_server *server);
+
+然後重新compile bluez，再拿他的libshared-mainloop.a和uuid.o出來用

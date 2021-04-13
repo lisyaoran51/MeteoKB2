@@ -56,7 +56,7 @@ namespace Devices{
 
 		MeteoPacketConverterV2();
 
-		virtual int SplitPacket(char* bufferIn, int bytesRead, char** packets, int* packerLengths);
+		virtual int SplitPacket(const char* bufferIn, int bytesRead, char** packets, int* packerLengths);
 
 		virtual PacketStatus CheckPacketStatus(const char* packet, int length);
 
