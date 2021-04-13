@@ -52,3 +52,5 @@ bool bt_gatt_server_send_indication(struct bt_gatt_server *server,
 					bt_gatt_server_conf_func_t callback,
 					void *user_data,
 					bt_gatt_server_destroy_func_t destroy);
+					
+int bt_gatt_server_get_write_queue_length(struct bt_gatt_server *server);

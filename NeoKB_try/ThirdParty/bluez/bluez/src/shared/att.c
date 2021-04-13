@@ -1550,3 +1550,7 @@ bool bt_att_has_crypto(struct bt_att *att)
 
 	return att->crypto ? true : false;
 }
+
+ int bt_att_write_queue_size(struct bt_att *att){
+	return queue_length(att->write_queue);
+}

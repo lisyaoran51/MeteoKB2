@@ -1717,3 +1717,7 @@ bool bt_gatt_server_send_indication(struct bt_gatt_server *server,
 
 	return result;
 }
+
+int bt_gatt_server_get_write_queue_length(struct bt_gatt_server *server){ 
+	return bt_att_write_queue_size(server->att); 
+}
