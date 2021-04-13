@@ -13,6 +13,11 @@ using namespace Games::Output::Bluetooths;
 using namespace Desktop::Devices::Gatt;
 
 
+#ifndef METEO_PROGRAM_VERSION
+#define METEO_PROGRAM_VERSION 0x0
+#endif
+
+
 
 
 MeteoBluetoothPhoneV2::MeteoBluetoothPhoneV2(PacketConverter<MeteoCommand>* pConverter)
@@ -49,7 +54,10 @@ InputState * MeteoBluetoothPhoneV2::GetBluetoothState()
 
 int MeteoBluetoothPhoneV2::PushOutputMessage(BluetoothMessage * outputMessage)
 {
-	if (gattServer != nullptr)
+	if (!getIsReady())
+		return 0;
+
+	if (gattServer == nullptr)
 		return 0;
 
 	/* 如果write queue塞了很多message，就先不要丟file message，免得一般message丟不出去 */
@@ -72,6 +80,11 @@ int MeteoBluetoothPhoneV2::PushOutputMessage(BluetoothMessage * outputMessage)
 	}
 		
 	return 0;
+}
+
+bool MeteoBluetoothPhoneV2::getIsReady()
+{
+	return isConnected && isFirstPacketSent;
 }
 
 int MeteoBluetoothPhoneV2::work()
@@ -244,10 +257,26 @@ int MeteoBluetoothPhoneV2::handleNewPacket(const char * packet, int length)
 	/* 讀取韌體版號 */
 	if (packetType == PacketType::ReadFirmwareVersion) {
 		// TODO: 做一個firmware version專用的bt message class
-		//MeteoBluetoothMessage* returnMessage = new MeteoContextBluetoothMessage(MeteoCommand::ReturnFirmwareVersion);
-		//outputMessages.push_back(returnMessage);
+		if (gattServer == nullptr)
+			return 0;
+
+		if (gattServer->GetClient() == nullptr)
+			return 0;
+
+		char buffer[8] = { 0 };
+		unsigned int command = 0x110000;// MeteoCommand::ReturnFirmwareVersion
+		unsigned int version = METEO_PROGRAM_VERSION;
+
+		memcpy(buffer, &command, sizeof(command));
+		memcpy(buffer + sizeof(command), &version, sizeof(version));
+
+		gattServer->GetClient()->SendNotification(buffer, 8);
+		isFirstPacketSent = true;
 	}
 	else if (packetType == PacketType::Json) {
+
+		if (!getIsReady())
+			return 0;
 
 		BluetoothMessage* btMessage = packetConverter->ConvertToBluetoothMessage(packet, length);
 
@@ -259,6 +288,9 @@ int MeteoBluetoothPhoneV2::handleNewPacket(const char * packet, int length)
 			pushBluetoothState(btMessage);
 	}
 	else if (packetType == PacketType::File) {
+
+		if (!getIsReady())
+			return 0;
 
 		BluetoothMessage* btMessage = packetConverter->ConvertToFile(packet, length);
 

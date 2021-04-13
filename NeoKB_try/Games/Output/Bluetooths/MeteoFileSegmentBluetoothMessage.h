@@ -27,9 +27,16 @@ namespace Bluetooths {
 		string GetFileName();
 
 		/// <summary>
+		/// 會把裡面的array指標回傳出來
+		/// </summary>
+		char* GetFileSegment();
+
+		/// <summary>
 		/// 會複製一份file segment出來
 		/// </summary>
 		int GetFileSegment(char** fSegment);
+
+		int GetFileSegmentSize();
 
 		/// <summary>
 		/// 這個是第幾段
@@ -41,6 +48,7 @@ namespace Bluetooths {
 		/// </summary>
 		int GetAmount();
 
+		virtual bool GetIsRawMessage();
 
 	protected:
 

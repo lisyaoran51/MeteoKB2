@@ -17,6 +17,8 @@ namespace Bluetooths{
 
 		virtual BluetoothMessage* Clone() = 0;
 
+		virtual bool GetIsRawMessage() = 0;
+
 	protected:
 
 	};

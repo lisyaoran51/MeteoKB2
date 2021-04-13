@@ -48,6 +48,9 @@ namespace IO {
 		/// </summary>
 		bool CheckFileSegmentMessageOutputClear();
 
+		/// <summary>
+		/// 一般json con non message的時候用這個
+		/// </summary>
 		template<class _Type>
 		int AddOnMessage(_Type* callableObject, function<int(InputState*)> callback, string name = "HandleCommand") {
 
@@ -57,32 +60,17 @@ namespace IO {
 			return 0;
 		}
 
+		/// <summary>
+		/// 所有message都用這個，例如file、json、con、ack、non、ret
+		/// </summary>
 		template<class _Type>
-		int AddOnRawCommand(_Type* callableObject, function<int(InputState*)> callback, string name = "HandleRawCommand") {
+		int AddOnRawMessage(_Type* callableObject, function<int(InputState*)> callback, string name = "HandleRawMessage") {
 
-			LOG(LogLevel::Fine) << "BluetoothPhone::AddOnRawCommand() : register ble access into list.";
+			LOG(LogLevel::Fine) << "BluetoothPhone::AddOnRawMessage() : register ble access into list.";
 
-			OnRawCommand.Add(callableObject, callback, name);
+			OnRawMessage.Add(callableObject, callback, name);
 			return 0;
 		}
-
-		/// <summary>
-		/// 寫入sm檔時的callback
-		/// </summary>
-		//int AddOnStartWritingSmFile(MtoObject* callableObject, function<int(string)> callback, string name);
-		//int AddOnWriteSmFileSuccess(MtoObject* callableObject, function<int(string)> callback, string name);
-
-		/// <summary>
-		/// 寫入新音色時的callback
-		/// </summary>
-		//int AddOnStartWritingSoundFilePackage(MtoObject* callableObject, function<int(string)> callback, string name);
-		//int AddOnWriteSoundFilePackageSuccess(MtoObject* callableObject, function<int(string)> callback, string name);
-
-		/// <summary>
-		/// 寫入新主程式時的callback
-		/// </summary>
-		//int AddOnStartWritingProgram(MtoObject* callableObject, function<int(string)> callback, string name);
-		//int AddOnWriteProgramSuccess(MtoObject* callableObject, function<int(string)> callback, string name);
 
 	protected:
 
@@ -98,7 +86,7 @@ namespace IO {
 		/// <summary>
 		/// 所有message都用這個，例如file、json、con、ack、non、ret
 		/// </summary>
-		ActionList<int, InputState*> OnRawCommand;
+		ActionList<int, InputState*> OnRawMessage;
 
 
 	};

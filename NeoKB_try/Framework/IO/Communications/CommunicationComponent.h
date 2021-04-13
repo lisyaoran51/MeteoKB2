@@ -61,6 +61,8 @@ namespace Communications{
 
 		virtual int Flush() = 0;
 
+		virtual int HandleState(InputState* inputEvent) = 0;
+
 		/// <summary>
 		/// 執行scheduler的代辦工作
 		/// </summary>

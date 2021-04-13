@@ -37,7 +37,9 @@ namespace Devices{
 		/// </summary>
 		int lastBufferSegmentSize = 0;
 
-		map<unsigned long, MeteoCommand> commandMap;
+		unsigned short tempPacketId = 0;
+
+		map<unsigned int, MeteoCommand> commandMap;
 
 		string getFileName(const char* buffer, int size);
 

@@ -14,6 +14,8 @@ BleAccess::BleAccess(GameHost * gHost): TCommunicationComponent(gHost), Register
 	bluetoothPhone = host->GetMainInterface()->GetBluetoothPhone();
 	communicationState = CommunicationState::Failed;
 
+
+
 }
 
 int BleAccess::Update()
@@ -96,6 +98,14 @@ int BleAccess::GetMtu()
 	// TODO: 確定notify怎麼運作以後再來把這段補完
 	// ios 舊版mtu158，新版185，抓個整數156(扣掉標頭28以後剛好是128)
 	return 156;
+}
+
+int BleAccess::HandleState(InputState * inputEvent)
+{
+	if (inputEvent->GetBluetoothState()->GetMessages()->size() > 0)
+		handleOnRawMessage(inputEvent);
+
+	return 0;
 }
 
 int BleAccess::run()
@@ -226,13 +236,15 @@ int BleAccess::handleRequest(CommunicationRequest * communicationRequest)
 	return 1;	// 代表執行失敗
 }
 
-int BleAccess::handleOnRawCommand(InputState * inputState)
+int BleAccess::handleOnRawMessage(InputState * inputState)
 {
 	/* 把raw command丟給所有的request，讓他們自己決定要不要接 */
 	unique_lock<mutex> uLock(bleRequestMutex);
 	for (int i = 0; i < bleRequests.size(); i++) {
 		if (inputState->GetBluetoothState()->GetMessages()->size() > 0) {
 			for (int j = 0; j < inputState->GetBluetoothState()->GetMessages()->size(); j++) {
+				if (dynamic_cast<MeteoBluetoothMessage*>(inputState->GetBluetoothState()->GetMessages()->at(j)) == nullptr)
+					continue;
 				bleRequests[i]->PushInputRawMessage(dynamic_cast<MeteoBluetoothMessage*>(inputState->GetBluetoothState()->GetMessages()->at(j)->Clone()));
 			}
 		}

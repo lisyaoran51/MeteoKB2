@@ -122,3 +122,23 @@ json MeteoContextBluetoothMessage::GetContextInJson()
 	LOG(LogLevel::Error) << "MeteoContextBluetoothMessage::GetContextInJson() : unavailable to get json context.";
 	return json();
 }
+
+bool MeteoContextBluetoothMessage::GetIsRawMessage()
+{
+
+	unsigned int c = (unsigned int)command;
+
+	switch (c & 0x000F0000) {
+	case 0x00000000:	//con
+	case 0x00010000:	//non
+		return false;
+		break;
+	case 0x00020000:	//ack
+	case 0x00030000:	//retcon
+	case 0x00040000:	//retnon
+		return true;
+		break;
+	}
+
+	return true;
+}

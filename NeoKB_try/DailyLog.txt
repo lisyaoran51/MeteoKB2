@@ -2940,3 +2940,8 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 	onDataChannelIn可以接到read bluetooth
 	notify 街道write bluetooth
 	
+4/10
+	接下來要把handle new packet做完
+	
+4/12
+	寫完on message，接下來可能要跑跑看

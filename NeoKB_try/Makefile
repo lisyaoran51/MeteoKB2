@@ -147,7 +147,7 @@ TARGET  = MeteoKB
 #compiler 
 CC = g++
 #cflags 
-CFLAGS = -Wall -ansi -s -std=c++14 -pthread -lbass -lstdc++fs -lbluetooth -DFIRMWARE_VERSION=0x0
+CFLAGS = -Wall -ansi -s -std=c++14 -pthread -lbass -lstdc++fs -lbluetooth -DMETEO_PROGRAM_VERSION=0x0
 #object 
 OBJS = Main.o \
 \

@@ -23,11 +23,11 @@ int MeteoGameBase::load()
 	// /*不知道為什麼lambda式就是不會過
 	workingSm.AddOnValueChanged(this, [=](){
 		
-		LOG(LogLevel::Debug) << "MeteoGameBase::load() : getting new sm's track from audio manager [" << audioManager << "].";
+		LOG(LogLevel::Depricated) << "MeteoGameBase::load() : getting new sm's track from audio manager [" << audioManager << "].";
 
 		WorkingSm* w = workingSm.GetValue();
 		Track* t = w->GetTrack();
-		LOG(LogLevel::Debug) << "MeteoGameBase::load() : track manager is [" << audioManager->GetTrackManager() << "], track is [" << t << "].";
+		LOG(LogLevel::Depricated) << "MeteoGameBase::load() : track manager is [" << audioManager->GetTrackManager() << "], track is [" << t << "].";
 		if(t != nullptr)
 			audioManager->GetTrackManager()->AddItem(t);
 

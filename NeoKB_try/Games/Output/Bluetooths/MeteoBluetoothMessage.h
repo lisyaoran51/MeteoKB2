@@ -34,6 +34,7 @@ namespace Bluetooths{
 
 		virtual int SetAccessType(MeteoBluetoothMessageAccessType aType) = 0;
 
+
 	protected:
 
 		MeteoBluetoothMessageAccessType accessType = MeteoBluetoothMessageAccessType::WriteOnly;

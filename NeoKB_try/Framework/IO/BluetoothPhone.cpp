@@ -20,7 +20,16 @@ int BluetoothPhone::SetDevice(Device * device)
 int BluetoothPhone::TriggerOnInput()
 {
 	for (int i = 0; i < inputStates.size(); i++) {
-		OnMessage.Trigger(inputStates[i]);
+		bool isRawMessage = false;
+		for (int j = 0; j < inputStates[i]->GetBluetoothState()->GetMessages()->size(); j++) {
+			if (inputStates[i]->GetBluetoothState()->GetMessages()->at(j)->GetIsRawMessage())
+				isRawMessage = true;
+		}
+
+		if(!isRawMessage)
+			OnMessage.Trigger(inputStates[i]);
+
+		OnRawMessage.Trigger(inputStates[i]);
 		LOG(LogLevel::Depricated) << "BluetoothPhone::TriggerOnInput() : bt command .";
 	}
 

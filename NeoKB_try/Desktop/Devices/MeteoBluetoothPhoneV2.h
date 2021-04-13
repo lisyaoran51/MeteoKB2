@@ -62,6 +62,8 @@ namespace Devices {
 
 		bool isConnected = false;
 
+		bool isFirstPacketSent = false;
+
 		mutable mutex bluetoothStateMutex;
 
 		InputState* bluetoothState = nullptr;
@@ -69,6 +71,8 @@ namespace Devices {
 		PacketConverter<MeteoCommand>* packetConverter = nullptr;
 
 		vector<BluetoothMessage*> outputMessages;
+
+		bool getIsReady();
 
 		int work();
 

@@ -53,6 +53,10 @@ namespace Communications{
 		/// </summary>
 		int GetMtu();
 
+		/* --------------CommunicationComponent.h-------------- */
+
+		virtual int HandleState(InputState* inputEvent);
+
 	protected:
 
 		BluetoothPhone* bluetoothPhone = nullptr;
@@ -85,7 +89,7 @@ namespace Communications{
 		/// 超過一定時間沒有input的時候就會清空，另外raw command也會保持一定數量，超出數量就會刪掉
 		/// 刪掉的時候要怎麼保持thread safe?
 		/// </summary>
-		int handleOnRawCommand(InputState* inputState);
+		int handleOnRawMessage(InputState* inputState);
 		
 
 	};

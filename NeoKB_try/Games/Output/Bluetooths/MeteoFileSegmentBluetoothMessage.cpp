@@ -45,11 +45,21 @@ string MeteoFileSegmentBluetoothMessage::GetFileName()
 	return fileName;
 }
 
+char * MeteoFileSegmentBluetoothMessage::GetFileSegment()
+{
+	return fileSegment;
+}
+
 int MeteoFileSegmentBluetoothMessage::GetFileSegment(char ** fSegment)
 {
 	*fSegment = new char[fileSegmentSize];
 	memcpy(*fSegment, fileSegment, fileSegmentSize);
 	return 0;
+}
+
+int MeteoFileSegmentBluetoothMessage::GetFileSegmentSize()
+{
+	return fileSegmentSize;
 }
 
 int MeteoFileSegmentBluetoothMessage::GetOrder()
@@ -60,4 +70,9 @@ int MeteoFileSegmentBluetoothMessage::GetOrder()
 int MeteoFileSegmentBluetoothMessage::GetAmount()
 {
 	return amount;
+}
+
+bool MeteoFileSegmentBluetoothMessage::GetIsRawMessage()
+{
+	return true;
 }

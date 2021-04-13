@@ -6,6 +6,7 @@
 #include "../../Allocation/Hierachal/MtoObject.h"
 #include "../../../Framework/Host/GameHost.h"
 #include <deque>
+#include "BleCommunicationInputHandler.h"
 
 
 
@@ -34,9 +35,13 @@ namespace Communications{
 		/// </summary>
 		virtual int handleRequest(CommunicationRequest* communicationRequest);
 
+		virtual int HandleState(InputState* inputEvent);
 
 	protected:
+
+		BleCommunicationInputHandler* bleCommunicationInputHandler = nullptr;
 		
+		int setHost(GameHost* gHost);
 
 	};
 

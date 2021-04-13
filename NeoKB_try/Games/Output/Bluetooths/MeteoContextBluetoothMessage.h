@@ -44,6 +44,8 @@ namespace Bluetooths{
 		/// </summary>
 		json GetContextInJson();
 
+		virtual bool GetIsRawMessage();
+
 	protected:
 
 		json contextInJson;

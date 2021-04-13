@@ -16,7 +16,8 @@ string MeteoPacketConverterV2::getFileName(const char * buffer, int size)
 {
 
 	char name[17] = { 0 };
-	memcpy(name, buffer + sizeof(unsigned long) + sizeof(unsigned short), sizeof(char) * 16);
+	memcpy(name, buffer + sizeof(unsigned int) + sizeof(unsigned short), sizeof(char) * 16);
+	return string(name);
 
 	for (int i = 0; i < 17; i++) {
 		if (name[i] == 0x0) {
@@ -31,9 +32,9 @@ string MeteoPacketConverterV2::getFileName(const char * buffer, int size)
 int MeteoPacketConverterV2::getFileSize(const char * buffer, int size)
 {
 	unsigned short length;
-	memcpy(&length, buffer + sizeof(unsigned long), sizeof(unsigned short));
+	memcpy(&length, buffer + sizeof(unsigned int), sizeof(unsigned short));
 
-	int fileSize = length - sizeof(unsigned long) + sizeof(unsigned short) + sizeof(char) * 16 + sizeof(unsigned short) * 2;
+	int fileSize = length - sizeof(unsigned int) + sizeof(unsigned short) + sizeof(char) * 16 + sizeof(unsigned short) * 2;
 
 	return fileSize;
 }
@@ -50,7 +51,7 @@ char * MeteoPacketConverterV2::getFileSegment(const char * buffer, int size)
 	char* fileSegment = new char[fileSegmentSize];
 
 	memcpy(fileSegment, 
-		   buffer + sizeof(unsigned long) + sizeof(unsigned short) + sizeof(char) * 16 + sizeof(unsigned short) * 2, 
+		   buffer + sizeof(unsigned int) + sizeof(unsigned short) + sizeof(char) * 16 + sizeof(unsigned short) * 2, 
 		   sizeof(char) * fileSegmentSize);
 
 
@@ -62,7 +63,7 @@ int MeteoPacketConverterV2::getFileSegmentOrder(const char * buffer, int size)
 {
 	unsigned short fileSegmentNumber;
 
-	memcpy(&fileSegmentNumber, buffer + sizeof(unsigned long) + sizeof(unsigned short) + sizeof(char) * 16, sizeof(unsigned short));
+	memcpy(&fileSegmentNumber, buffer + sizeof(unsigned int) + sizeof(unsigned short) + sizeof(char) * 16, sizeof(unsigned short));
 
 	return fileSegmentNumber;
 }
@@ -71,7 +72,7 @@ int MeteoPacketConverterV2::getFileSegmentCount(const char * buffer, int size)
 {
 	unsigned short fileSegmentCount;
 
-	memcpy(&fileSegmentCount, buffer + sizeof(unsigned long) + sizeof(unsigned short) + sizeof(char) * 16 + sizeof(unsigned short), sizeof(unsigned short));
+	memcpy(&fileSegmentCount, buffer + sizeof(unsigned int) + sizeof(unsigned short) + sizeof(char) * 16 + sizeof(unsigned short), sizeof(unsigned short));
 
 	return fileSegmentCount;
 }
@@ -722,10 +723,10 @@ PacketType MeteoPacketConverterV2::CheckCommandType(BluetoothMessage * bluetooth
 
 BluetoothMessage * MeteoPacketConverterV2::ConvertToBluetoothMessage(const char * buffer, int size)
 {
-	unsigned long command = 0x0;
+	unsigned int command = 0x0;
 	memcpy(&command, buffer, sizeof(command));
 
-	map<unsigned long, MeteoCommand>::iterator iter;
+	map<unsigned int, MeteoCommand>::iterator iter;
 	iter = commandMap.find(command);
 	if (iter != commandMap.end()) {
 
@@ -746,10 +747,20 @@ BluetoothMessage * MeteoPacketConverterV2::ConvertToBluetoothMessage(const char 
 			// Amount : unsigned short 封包數(2)
 			// Text : char[] 內文
 
-			json context = json::parse(contextBuffer);
+			try {
+				json context = json::parse(contextBuffer);
 
-			btMessage->SetContextInJson(context);
-			btMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
+				btMessage->SetContextInJson(context);
+				btMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
+			}
+			catch (exception& e) {
+				LOG(LogLevel::Error) << "MeteoPacketConverterV2::ConvertToBluetoothMessage() : parse json error : " << e.what();
+
+				delete btMessage;
+				return nullptr;
+			}
+
+			LOG(LogLevel::Debug) << "MeteoPacketConverterV2::ConvertToBluetoothMessage() : json context [" << btMessage->GetContext() << "].";
 
 			//LOG(LogLevel::Debug) << "MeteoPacketConverterV1::ConvertToBluetoothCommand() : command [" << hex << command << dec << "], context [" << btCommand->GetContext().dump() << "].";
 
@@ -783,17 +794,83 @@ int MeteoPacketConverterV2::ConvertToByteArray(BluetoothMessage * bluetoothComma
 
 int MeteoPacketConverterV2::ConvertToByteArray(BluetoothMessage * bluetoothMessage, char * buffer, int bufferMaxSize)
 {
-	
+	if (dynamic_cast<MeteoContextBluetoothMessage*>(bluetoothMessage)) {
+		MeteoContextBluetoothMessage* contextBluetoothMessage = dynamic_cast<MeteoContextBluetoothMessage*>(bluetoothMessage);
 
-	return 0;
+		string context = contextBluetoothMessage->GetContext();
+
+		unsigned short bufferSize = sizeof(context.c_str()) + 12;
+		if (bufferSize > bufferMaxSize) {
+			LOG(LogLevel::Warning) << "MeteoPacketConverterV1::ConvertToByteArray() : message oversize [" << context << "].";
+			return -1;
+		}
+
+		memset(buffer, 0, bufferMaxSize);
+
+		unsigned int command = (unsigned int)contextBluetoothMessage->GetCommand();
+		memcpy(buffer, &command, sizeof(command));
+
+		memcpy(buffer + sizeof(command)								, &tempPacketId	, sizeof(tempPacketId));
+
+		memcpy(buffer + sizeof(command) + sizeof(unsigned short)	, &bufferSize	, sizeof(bufferSize));
+
+		unsigned short order = 0;
+		memcpy(buffer + sizeof(command) + sizeof(unsigned short) * 2, &order		, sizeof(order));
+
+		unsigned short amount = 1;
+		memcpy(buffer + sizeof(command) + sizeof(unsigned short) * 3, &amount		, sizeof(amount));
+
+		const char *contextInCharArray = context.c_str();
+		memcpy(buffer + sizeof(command) + sizeof(unsigned short) * 4, contextInCharArray, sizeof(contextInCharArray));
+		
+		tempPacketId++;
+		return bufferSize;
+	}
+	else if (dynamic_cast<MeteoFileSegmentBluetoothMessage*>(bluetoothMessage)) {
+
+		MeteoFileSegmentBluetoothMessage* fileBluetoothMessage = dynamic_cast<MeteoFileSegmentBluetoothMessage*>(bluetoothMessage);
+
+		unsigned short bufferSize = fileBluetoothMessage->GetFileSegmentSize() + 28;
+
+		if(bufferSize > bufferMaxSize) {
+			LOG(LogLevel::Warning) << "MeteoPacketConverterV1::ConvertToByteArray() : message oversize [" << fileBluetoothMessage->GetFileName() << "] order [" << fileBluetoothMessage->GetFileSegmentSize() << "].";
+			return -1;
+		}
+
+		memset(buffer, 0, bufferMaxSize);
+
+		unsigned int command = (unsigned int)fileBluetoothMessage->GetCommand();
+		memcpy(buffer, &command, sizeof(command));
+
+		memcpy(buffer + sizeof(command)										, &tempPacketId, sizeof(tempPacketId));
+
+		memcpy(buffer + sizeof(command) + sizeof(unsigned short)			, &bufferSize, sizeof(bufferSize));
+
+		const char *fileNameInCharArray = fileBluetoothMessage->GetFileName().c_str();
+		memcpy(buffer + sizeof(command) + sizeof(unsigned short) * 2		, fileNameInCharArray, sizeof(fileNameInCharArray) > 16 ? 16 : sizeof(fileNameInCharArray));
+
+		unsigned short order = fileBluetoothMessage->GetOrder();
+		memcpy(buffer + sizeof(command) + sizeof(unsigned short) * 2 + 16	, &order, sizeof(order));
+
+		unsigned short amount = fileBluetoothMessage->GetAmount();
+		memcpy(buffer + sizeof(command) + sizeof(unsigned short) * 3 + 16	, &amount, sizeof(amount));
+
+		memcpy(buffer + sizeof(command) + sizeof(unsigned short) * 4 + 16	, fileBluetoothMessage->GetFileSegment(), fileBluetoothMessage->GetFileSegmentSize());
+
+		tempPacketId++;
+		return bufferSize;
+	}
+
+	LOG(LogLevel::Warning) << "MeteoPacketConverterV1::ConvertToByteArray() : message not convertable.";
+	return -1;
 }
 
 BluetoothMessage* MeteoPacketConverterV2::ConvertToFile(const char * buffer, int size)
 {
-	unsigned long command = 0x0;
+	unsigned int command = 0x0;
 	memcpy(&command, buffer, sizeof(command));
 
-	map<unsigned long, MeteoCommand>::iterator iter;
+	map<unsigned int, MeteoCommand>::iterator iter;
 	iter = commandMap.find(command);
 	if (iter != commandMap.end()) {
 
@@ -805,7 +882,7 @@ BluetoothMessage* MeteoPacketConverterV2::ConvertToFile(const char * buffer, int
 			int fileSegmentSize = getFileSize(buffer, size);
 
 			if (fileSegmentSize < 0 || fileSegmentSize > maxFileSegmentSize) {
-				LOG(LogLevel::Error) << "MeteoPacketConverterV1::ConvertToFile() : wrong file size [" << fileSegmentSize << "].";
+				LOG(LogLevel::Error) << "MeteoPacketConverterV2::ConvertToFile() : wrong file size [" << fileSegmentSize << "].";
 				return nullptr;
 			}
 
@@ -818,10 +895,12 @@ BluetoothMessage* MeteoPacketConverterV2::ConvertToFile(const char * buffer, int
 
 			delete[] fileSegment;
 
+			LOG(LogLevel::Debug) << "MeteoPacketConverterV2::ConvertToFile() : get file [" << fileName << "] segment [" << fileSegmentNumber << "]/[" << fileSegmentCount << "], size [" << fileSegmentSize << "].";
+
 			return fileSegmentBluetoothMessage;
 		}
 	}
 
-	LOG(LogLevel::Error) << "MeteoPacketConverterV1::ConvertToFile() : convert failed .";
+	LOG(LogLevel::Error) << "MeteoPacketConverterV2::ConvertToFile() : convert failed .";
 	return nullptr;
 }

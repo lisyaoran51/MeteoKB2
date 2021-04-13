@@ -60,6 +60,7 @@
     <ClCompile Include="Framework\Input\Handler\TestCaseKeyboardInputHandler.cpp" />
     <ClCompile Include="Framework\Input\KeyBindings\HasInputKey.cpp" />
     <ClCompile Include="Framework\Input\KeyBindings\KeyBindingStore.cpp" />
+    <ClCompile Include="Framework\IO\Communications\BleCommunicationInputHandler.cpp" />
     <ClCompile Include="Framework\IO\Communications\CommunicationAccess.cpp" />
     <ClCompile Include="Framework\IO\Communications\CommunicationComponent.cpp" />
     <ClCompile Include="Framework\IO\Communications\CommunicationRequest.cpp" />
@@ -445,6 +446,7 @@
     <ClInclude Include="Framework\Input\KeyBindings\KeyBindingStore.h" />
     <ClInclude Include="Framework\Input\Messages\MessageHandler.h" />
     <ClInclude Include="Framework\Input\Messages\MessageInputManager.h" />
+    <ClInclude Include="Framework\IO\Communications\BleCommunicationInputHandler.h" />
     <ClInclude Include="Framework\IO\Communications\CommunicationAccess.h" />
     <ClInclude Include="Framework\IO\Communications\CommunicationCollectionManager.h" />
     <ClInclude Include="Framework\IO\Communications\CommunicationComponent.h" />
