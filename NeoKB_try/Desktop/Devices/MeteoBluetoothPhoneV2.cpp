@@ -94,17 +94,22 @@ int MeteoBluetoothPhoneV2::work()
 
 		try
 		{
+			LOG(LogLevel::Debug) << "MeteoBluetoothPhoneV2::work() : start listening.";
 			gattServer = new MeteoGattServerV1();
 			GattClient* gattClient = gattServer->Listen();
 
 			//gattClient->SetDataHandler(std::bind(&MeteoGattServerV1::OnIncomingMessage, dynamic_cast<MeteoGattServerV1*>(gattServer), std::placeholders::_1, std::placeholders::_2));
 			gattClient->SetDataHandler(std::bind(&MeteoBluetoothPhoneV2::handleNewPacket, this, std::placeholders::_1, std::placeholders::_2));
 
+			isConnected = true;
+
 			gattServer->Run(gattClient);
 
 			GattServer* toDelete = gattServer;
 			gattServer = nullptr;
 			delete toDelete;
+			isConnected = false;
+			isFirstPacketSent = false;
 		}
 		catch (std::exception const& err)
 		{
@@ -112,6 +117,8 @@ int MeteoBluetoothPhoneV2::work()
 			GattServer* toDelete = gattServer;
 			gattServer = nullptr;
 			delete toDelete;
+			isConnected = false;
+			isFirstPacketSent = false;
 			continue;
 		}
 
@@ -257,11 +264,16 @@ int MeteoBluetoothPhoneV2::handleNewPacket(const char * packet, int length)
 	/* 讀取韌體版號 */
 	if (packetType == PacketType::ReadFirmwareVersion) {
 		// TODO: 做一個firmware version專用的bt message class
+		if (length != 4)
+			return 0;
+
 		if (gattServer == nullptr)
 			return 0;
 
 		if (gattServer->GetClient() == nullptr)
 			return 0;
+
+		LOG(LogLevel::Debug) << "MeteoPacketConverterV1::handleNewPacket() : get read firmware version message.";
 
 		char buffer[8] = { 0 };
 		unsigned int command = 0x110000;// MeteoCommand::ReturnFirmwareVersion
@@ -275,8 +287,9 @@ int MeteoBluetoothPhoneV2::handleNewPacket(const char * packet, int length)
 	}
 	else if (packetType == PacketType::Json) {
 
-		if (!getIsReady())
+		if (!getIsReady()) {
 			return 0;
+		}
 
 		BluetoothMessage* btMessage = packetConverter->ConvertToBluetoothMessage(packet, length);
 

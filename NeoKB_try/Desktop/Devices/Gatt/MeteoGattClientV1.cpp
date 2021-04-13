@@ -211,6 +211,13 @@ void MeteoGattClientV1::Run()
 	mainloop_run();
 }
 
+void MeteoGattClientV1::Quit()
+{
+	LOG(LogLevel::Debug) << "MeteoGattClientV1::Quit() : stop mainloop.";
+	mainloop_quit();
+
+}
+
 void MeteoGattClientV1::SetDataHandler(std::function<void(char const*, int)> dHandler)
 {
 	m_data_handler = dHandler;

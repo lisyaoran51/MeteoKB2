@@ -37,10 +37,10 @@ namespace Gatt{
 
 		GattClient*							m_client = nullptr;
 
-		std::mutex								m_mutex;
+		std::mutex							m_mutex;
 		
 		// 結束server前把資料送光，可能用不到
-		std::thread*								m_dispatch_thread = nullptr;
+		std::thread*						m_dispatch_thread = nullptr;
 		
 		bool                                m_running;
 

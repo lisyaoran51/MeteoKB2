@@ -678,7 +678,7 @@ PacketStatus MeteoPacketConverterV2::CheckPacketStatus(const char * packet, int 
 		return PacketStatus::WrongLength;
 	}
 
-	map<unsigned long, MeteoCommand>::iterator iter;
+	map<unsigned int, MeteoCommand>::iterator iter;
 	iter = commandMap.find(command);
 	if (iter == commandMap.end()) {
 		return PacketStatus::WrongCommand;
@@ -696,7 +696,7 @@ PacketType MeteoPacketConverterV2::CheckPacketType(const char * buffer, int size
 	unsigned long command = 0x0;
 	memcpy(&command, buffer, sizeof(command));
 
-	map<unsigned long, MeteoCommand>::iterator iter;
+	map<unsigned int, MeteoCommand>::iterator iter;
 	iter = commandMap.find(command);
 	if (iter != commandMap.end()) {
 

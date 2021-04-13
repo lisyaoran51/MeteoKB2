@@ -23,6 +23,8 @@ namespace Gatt {
 
 		virtual void Run() = 0;
 
+		virtual void Quit() = 0;
+
 		virtual void SetDataHandler(std::function<void(char const*, int)> dHandler) = 0;
 
 		virtual int SendNotification(char* bufferOut, int size) = 0;
