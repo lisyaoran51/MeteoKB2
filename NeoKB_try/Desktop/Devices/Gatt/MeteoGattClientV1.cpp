@@ -230,9 +230,13 @@ int MeteoGattClientV1::SendNotification(char * bufferOut, int size)
 		return -1;
 	}
 
+	unsigned char bufferOutUint8[256] = { 0 };
+
+	memcpy(bufferOutUint8, bufferOut, size * sizeof(char));
+
 	bool send_success = bt_gatt_server_send_notification(m_server,
 		m_notify_handle,
-		bufferOut,
+		bufferOutUint8,
 		size);
 
 	if (!send_success) {
