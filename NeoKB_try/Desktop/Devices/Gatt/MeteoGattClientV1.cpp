@@ -204,10 +204,10 @@ void MeteoGattClientV1::Run()
 {
 	m_mainloop_thread = std::this_thread::get_id();
 
-	//sigset_t mask;
-	//sigemptyset(&mask);
-	//sigaddset(&mask, SIGINT);
-	//sigaddset(&mask, SIGTERM);
+	sigset_t mask;
+	sigemptyset(&mask);
+	sigaddset(&mask, SIGINT);
+	sigaddset(&mask, SIGTERM);
 
 	mainloop_run();
 }
