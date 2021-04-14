@@ -351,12 +351,20 @@ int MeteoGattClientV1::buildMeteoService()
 
 	// data channel
 	bt_string_to_uuid(&uuid, kUuidRpcInbox.c_str());
+	//m_data_channel = gatt_db_service_add_characteristic(
+	//	service,
+	//	&uuid,
+	//	BT_ATT_PERM_READ | BT_ATT_PERM_WRITE,
+	//	BT_GATT_CHRC_PROP_READ | BT_GATT_CHRC_PROP_WRITE,
+	//	&GattClient_onDataChannelOut,
+	//	&GattClient_onDataChannelIn,
+	//	this);
 	m_data_channel = gatt_db_service_add_characteristic(
 		service,
 		&uuid,
-		BT_ATT_PERM_READ | BT_ATT_PERM_WRITE,
-		BT_GATT_CHRC_PROP_READ | BT_GATT_CHRC_PROP_WRITE,
-		&GattClient_onDataChannelOut,
+		BT_ATT_PERM_WRITE,
+		BT_GATT_CHRC_PROP_WRITE,
+		nullptr,
 		&GattClient_onDataChannelIn,
 		this);
 
