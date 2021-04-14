@@ -473,7 +473,7 @@ void MeteoGattClientV1::onDataChannelIn(
 		return;
 	}
 
-	m_data_handler(data, len);
+	m_data_handler(static_cast<char*>(data), len);
 
 	return;
 
