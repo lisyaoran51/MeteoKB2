@@ -473,10 +473,10 @@ void MeteoGattClientV1::onDataChannelIn(
 		return;
 	}
 
-	const char* charArray = (const char*)malloc(len * sizeof(const char));
-	memcpy(charArray, data, len);
+	//const char* charArray = (const char*)malloc(len * sizeof(const char));
+	//memcpy(charArray, data, len);
 
-	m_data_handler(charArray, len);
+	m_data_handler(reinterpret_cast<const char*>(data), len);
 
 	return;
 
