@@ -92,7 +92,7 @@ int GameHost::Run(Game* game, Instrument* instrument)
 	updateInitialize();
 	updateThread->Start();
 
-	ThreadMaster::GetInstance().SetFrequency(100);
+	ThreadMaster::GetInstance().SetFrequency(10);
 	ThreadMaster::GetInstance().Start();
 
 	if(!initialized)
@@ -210,7 +210,7 @@ int GameHost::updateInitialize()
 {
 	LOG(LogLevel::Info) << "GameHost::updateInitialize() : Setting update thread.";
 	// ¹w³]¬O1000
-	updateThread->SetMaxUpdateHz(60);
+	updateThread->SetMaxUpdateHz(10);
 	return 0;
 }
 
