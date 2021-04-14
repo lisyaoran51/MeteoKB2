@@ -104,7 +104,8 @@ void GattClient_onEPollRead(gatt_db_attribute* attr, uint32_t id, uint16_t offse
 void GattClient_onDataChannelIn(gatt_db_attribute* attr, uint32_t id, uint16_t offset, uint8_t const* data, size_t len, uint8_t opcode, bt_att* att, void* argp)
 {
 	MeteoGattClientV1* clnt = reinterpret_cast<MeteoGattClientV1 *>(argp);
-	clnt->onDataChannelIn(attr, id, offset, data, len, opcode, att);
+	LOG(LogLevel::Warning) << "GattClient_onDataChannelIn : get write " << len;
+	//clnt->onDataChannelIn(attr, id, offset, data, len, opcode, att);
 }
 
 void GattClient_onDataChannelOut(gatt_db_attribute* attr, uint32_t id, uint16_t offset, uint8_t opcode, bt_att* att, void* argp)
