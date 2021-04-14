@@ -466,6 +466,17 @@ void MeteoGattClientV1::onDataChannelIn(
 {
 	LOG(LogLevel::Info) << "onDataChannelIn(offset=" << offset << ", len=" << len << ")";
 
+	if (!m_data_handler)
+	{
+		// TODO:
+		LOG(LogLevel::Warning) << "no data handler registered";
+		return;
+	}
+
+	m_data_handler(data, len);
+
+	return;
+
 	// TODO: should this use memory_stream?
 	for (size_t i = 0; i < len; ++i)
 	{

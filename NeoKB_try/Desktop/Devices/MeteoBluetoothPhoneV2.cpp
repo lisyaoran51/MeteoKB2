@@ -257,7 +257,7 @@ int MeteoBluetoothPhoneV2::pushBluetoothState(BluetoothMessage * btMessage)
 int MeteoBluetoothPhoneV2::handleNewPacket(const char * packet, int length)
 {
 
-	LOG(LogLevel::Debug) << "MeteoPacketConverterV1::handleNewPacket() : length [" << length << "].";
+	LOG(LogLevel::Debug) << "MeteoBluetoothPhoneV2::handleNewPacket() : length [" << length << "].";
 
 	PacketType packetType = packetConverter->CheckPacketType(packet, length);
 
