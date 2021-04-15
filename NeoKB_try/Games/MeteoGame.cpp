@@ -54,7 +54,6 @@ int MeteoGame::LoadOnComplete()
 {
 	LOG(LogLevel::Info) << "MeteoGame::LoadOnComplete() : add loader into screen stack.";
 
-	return 0;
 
 	// 這邊不知道怎麼樣把virtual function給bind上去，只好用lambda式
 	// smManager->GetStableStorage = bind(static_cast<Storage*(MeteoGame::*)(void)>(&MeteoGame::GetStableStorage), this);
@@ -68,6 +67,8 @@ int MeteoGame::LoadOnComplete()
 
 	smManager->ImportFromStable();
 	// 這邊應該要import from args，以後再寫
+
+	return 0;
 
 	/* ------------ Sample manager載入音色的方式與sm manager相同 ------------ */
 	//audioManager->GetSampleManager()->SetupApiAccess(apiAccess);	// 這個地方要改，應該是可以整行刪掉，移到sound package request裡面
