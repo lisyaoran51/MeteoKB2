@@ -338,7 +338,7 @@ int GameHost::bootstrapSceneGraph(Game* game, Instrument* instrument)
 	// root 要async，不然會變成沒有loaded
 	root->LoadAsync(sceneGraphClock, dependencies);
 
-	root->AddChild(game);
+	//root->AddChild(game);
 
 	InputManager* instrumentInputManager = instrument->CreateInputManager();
 	//root->AddChild(instrumentInputManager);
