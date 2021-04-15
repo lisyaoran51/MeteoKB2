@@ -51,12 +51,12 @@ bool Updatable::UpdateSubTree()
 	if (GetLoadState() < LoadState::Ready)
 		return false;
 
+	if (GetLoadState() == LoadState::Ready)
+		LoadComplete();
+
 	update();
 
 	return true;
-
-	if (GetLoadState() == LoadState::Ready)
-		LoadComplete();
 
 	system_clock::time_point startTime = system_clock::now();
 
