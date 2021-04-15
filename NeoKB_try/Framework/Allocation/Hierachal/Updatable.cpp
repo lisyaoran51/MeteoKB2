@@ -88,12 +88,11 @@ bool Updatable::UpdateSubTree()
 	uLock.unlock();
 	LOG(LogLevel::Depricated) << "Updatable::UpdateSubTree() : [" << GetTypeName() << "] got new child list.";
 
-	return true;
 
 	for (vector<ChildAddable*>::iterator iter = cacheChilds.begin(); iter != cacheChilds.end(); iter++) {
 		Updatable* child = Cast<Updatable>(*iter);
 		if (child != nullptr) {
-			LOG(LogLevel::Depricated) << "Updatable::UpdateSubTree() : [" << GetTypeName() << "] iterating child [" << (*iter)->GetTypeName() << "] to update.";
+			LOG(LogLevel::Debug) << "Updatable::UpdateSubTree() : [" << GetTypeName() << "] iterating child [" << (*iter)->GetTypeName() << "] to update.";
 			Cast<Updatable>(*iter)->UpdateSubTree();
 
 		}
