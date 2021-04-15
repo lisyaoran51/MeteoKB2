@@ -93,7 +93,7 @@ bool Updatable::UpdateSubTree()
 		Updatable* child = Cast<Updatable>(*iter);
 		if (child != nullptr) {
 			LOG(LogLevel::Debug) << "Updatable::UpdateSubTree() : [" << GetTypeName() << "] iterating child [" << (*iter)->GetTypeName() << "] to update.";
-			Cast<Updatable>(*iter)->UpdateSubTree();
+			//Cast<Updatable>(*iter)->UpdateSubTree();
 
 		}
 	}
