@@ -80,7 +80,7 @@ int MeteoGame::LoadOnComplete()
 	audioManager->GetMirrorSampleManager()->ImportFromStable();
 
 
-	AddChild(volumeController = new VolumeController());
+	//AddChild(volumeController = new VolumeController());
 
 	//AddChild(screenStack = new Loader());
 
