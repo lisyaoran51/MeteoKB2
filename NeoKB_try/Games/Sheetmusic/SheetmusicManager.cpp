@@ -123,6 +123,8 @@ int SmManager::ImportFromStable()
 		return 0;
 	}(paths);
 
+	return 0;
+
 	Import(paths);
 
 	delete stable;

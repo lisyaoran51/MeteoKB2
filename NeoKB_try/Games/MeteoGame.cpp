@@ -65,7 +65,7 @@ int MeteoGame::LoadOnComplete()
 	
 	// storage的位置目前設為"./"，import from stable會去"./Songs"下面抓檔案
 
-	///smManager->ImportFromStable();
+	smManager->ImportFromStable();
 	// 這邊應該要import from args，以後再寫
 
 	
