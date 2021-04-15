@@ -29,8 +29,8 @@ bool Schedulable::UpdateSubTree()
 {
 	Updatable::UpdateSubTree();
 
-	//if (scheduler != nullptr)
-	//	scheduler->Update();
+	if (scheduler != nullptr)
+		scheduler->Update();
 
 	return true;
 }

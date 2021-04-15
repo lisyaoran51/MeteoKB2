@@ -87,7 +87,7 @@ bool Updatable::UpdateSubTree()
 	uLock.unlock();
 	LOG(LogLevel::Depricated) << "Updatable::UpdateSubTree() : [" << GetTypeName() << "] got new child list.";
 
-
+	return true;
 
 	for (vector<ChildAddable*>::iterator iter = cacheChilds.begin(); iter != cacheChilds.end(); iter++) {
 		Updatable* child = Cast<Updatable>(*iter);

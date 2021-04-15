@@ -228,7 +228,11 @@ int GameHost::updateFrame()
 		return 0;
 	}(root);
 
-	return root->UpdateSubTree();
+	root->UpdateSubTree();
+
+	dynamic_cast<Updatable*>(root->GetChilds()->at(0))->UpdateSubTree();
+
+	return 0;
 }
 
 int GameHost::inputInitialize()
