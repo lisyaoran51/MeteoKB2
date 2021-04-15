@@ -75,8 +75,6 @@ bool Updatable::UpdateSubTree()
 		LOG(LogLevel::Error) << "Updatable::UpdateSubTree() : error [" << e.what() << "] by [" << GetTypeName() << "].";
 		abort();
 	}
-
-	return true;
 	 
 	system_clock::time_point currentTime = system_clock::now();
 	LOG(LogLevel::Depricated) << "Updatable::UpdateSubTree() : [" << GetTypeName() << "] update cost time = [" << duration_cast<microseconds>(currentTime - startTime).count() << "].";
@@ -89,6 +87,8 @@ bool Updatable::UpdateSubTree()
 	uLock.unlock();
 	LOG(LogLevel::Depricated) << "Updatable::UpdateSubTree() : [" << GetTypeName() << "] got new child list.";
 
+
+	return true;
 
 	for (vector<ChildAddable*>::iterator iter = cacheChilds.begin(); iter != cacheChilds.end(); iter++) {
 		Updatable* child = Cast<Updatable>(*iter);
