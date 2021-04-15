@@ -82,7 +82,7 @@ int MeteoGame::LoadOnComplete()
 
 	AddChild(volumeController = new VolumeController());
 
-	AddChild(screenStack = new Loader());
+	//AddChild(screenStack = new Loader());
 
 	return 0;
 }
