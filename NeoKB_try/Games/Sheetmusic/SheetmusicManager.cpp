@@ -161,7 +161,6 @@ vector<SmInfo*>* SmManager::import(FileReader & fileReader)
 SmInfo * SmManager::importToStorage(FileStore * fStore, SheetmusicStore * sStore, FileReader & fileReader)
 {
 
-	return nullptr;
 	vector<string>* smNames;
 
 	smNames = fileReader.WhereEndWith(".sm");
@@ -169,6 +168,7 @@ SmInfo * SmManager::importToStorage(FileStore * fStore, SheetmusicStore * sStore
 	if (smNames->size() == 0) {
 		return nullptr;
 	}
+	return nullptr;
 
 	for (int i = 0; i < smNames->size(); i++) {
 
