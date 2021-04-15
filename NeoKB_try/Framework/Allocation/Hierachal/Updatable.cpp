@@ -46,6 +46,10 @@ int Updatable::SetParent(HasParent * p)
 bool Updatable::UpdateSubTree()
 {
 
+	update();
+
+	return true;
+
 	LOG(LogLevel::Depricated) << "Updatable::UpdateSubTree() : update [" << GetTypeName() << "].";
 
 	if (GetLoadState() < LoadState::Ready)
@@ -53,10 +57,6 @@ bool Updatable::UpdateSubTree()
 
 	if (GetLoadState() == LoadState::Ready)
 		LoadComplete();
-
-	update();
-
-	return true;
 
 	system_clock::time_point startTime = system_clock::now();
 
