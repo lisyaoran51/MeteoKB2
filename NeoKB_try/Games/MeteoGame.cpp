@@ -54,6 +54,8 @@ int MeteoGame::LoadOnComplete()
 {
 	LOG(LogLevel::Info) << "MeteoGame::LoadOnComplete() : add loader into screen stack.";
 
+	return 0;
+
 	// 這邊不知道怎麼樣把virtual function給bind上去，只好用lambda式
 	// smManager->GetStableStorage = bind(static_cast<Storage*(MeteoGame::*)(void)>(&MeteoGame::GetStableStorage), this);
 	// 應該是不用這樣，virtual function會自動bind上去override，不用特別寫成lambda式

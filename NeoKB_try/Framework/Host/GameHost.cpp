@@ -230,8 +230,6 @@ int GameHost::updateFrame()
 
 	root->UpdateSubTree();
 
-	dynamic_cast<Updatable*>(root->GetChilds()->at(0))->UpdateSubTree();
-
 	return 0;
 }
 
