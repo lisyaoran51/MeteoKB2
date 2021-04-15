@@ -521,6 +521,7 @@ string MeteorResult::encodeToRecordFile(vector<ControlPoint*>& controlPoints)
 #pragma endregion
 
 	stream->close();
+	delete stream;
 
 	return string("MeteoRecords/") + fileName;
 }

@@ -184,6 +184,7 @@ SmInfo * SmManager::importToStorage(FileStore * fStore, SheetmusicStore * sStore
 		Sm<Event>* sm = smDecoder->Decode(stream);
 
 		stream->close();
+		delete stream;
 
 		sm->GetSmInfo()->fileName = smNames->at(i);
 

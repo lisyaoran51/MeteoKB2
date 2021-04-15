@@ -297,6 +297,9 @@ SoundBindingSet * SampleManager::importToStorage(FileReader & fileReader)
 
 		LOG(LogLevel::Finer) << "SampleManager::importToStorage(FileReader&) : Decode [" << sbsNames->at(i) << "] ...";
 		SoundBindingSet* sbs = soundBindingSetDecoder->Decode(stream);
+
+		stream->close();
+		delete stream;
 		
 		soundBindingSets->push_back(sbs);
 

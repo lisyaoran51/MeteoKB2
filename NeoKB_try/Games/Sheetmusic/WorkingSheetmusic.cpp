@@ -96,6 +96,9 @@ Sm<Event>* WorkingSm::createSm()
 	SmDecoder* smDecoder = SmDecoder::GetDecoder(stream);
 	s = smDecoder->Decode(stream);
 
+	stream->close();
+	delete stream;
+
 	return s;
 }
 
