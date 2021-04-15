@@ -179,6 +179,8 @@ SmInfo * SmManager::importToStorage(FileStore * fStore, SheetmusicStore * sStore
 		LOG(LogLevel::Finer) << "vector<SmInfo*>* SmManager::importToStorage(FileReader&) : Getting decoder of [" << smNames->at(i) << "].";
 		SmDecoder* smDecoder = SmDecoder::GetDecoder(stream);
 
+		stream->close();
+
 		continue;
 
 		LOG(LogLevel::Finer) << "vector<SmInfo*>* SmManager::importToStorage(FileReader&) : Decode [" << smNames->at(i) << "] ...";
