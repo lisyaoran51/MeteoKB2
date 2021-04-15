@@ -54,6 +54,10 @@ bool Updatable::UpdateSubTree()
 	if (GetLoadState() == LoadState::Ready)
 		LoadComplete();
 
+	update();
+
+	return true;
+
 	system_clock::time_point startTime = system_clock::now();
 
 
@@ -87,7 +91,7 @@ bool Updatable::UpdateSubTree()
 	uLock.unlock();
 	LOG(LogLevel::Depricated) << "Updatable::UpdateSubTree() : [" << GetTypeName() << "] got new child list.";
 
-	return true;
+	
 
 	for (vector<ChildAddable*>::iterator iter = cacheChilds.begin(); iter != cacheChilds.end(); iter++) {
 		Updatable* child = Cast<Updatable>(*iter);
