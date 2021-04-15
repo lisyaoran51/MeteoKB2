@@ -232,6 +232,8 @@ SmInfo * SmManager::importToStorage(FileStore * fStore, SheetmusicStore * sStore
 	//SmInfo* smInfo = smInfos->at(0);
 	//delete smInfos;
 
+	return nullptr;
+
 	// 這一行沒有用，以後有需要再改
 	return smInfos->at(0);
 }
