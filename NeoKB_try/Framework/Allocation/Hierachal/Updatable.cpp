@@ -76,6 +76,7 @@ bool Updatable::UpdateSubTree()
 		abort();
 	}
 
+	return true;
 	 
 	system_clock::time_point currentTime = system_clock::now();
 	LOG(LogLevel::Depricated) << "Updatable::UpdateSubTree() : [" << GetTypeName() << "] update cost time = [" << duration_cast<microseconds>(currentTime - startTime).count() << "].";
