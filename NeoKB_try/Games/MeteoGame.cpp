@@ -61,7 +61,7 @@ int MeteoGame::LoadOnComplete()
 	// https://stackoverflow.com/questions/14408105/how-do-i-use-stdbind-to-call-the-base-classs-version-of-a-virtual-function/14408253
 	// 確實不用寫lambda式，值接bind base::function，也會bind override function上去
 	//smManager->GetStableStorage = [=]() {return GetStableStorage(); };
-	///smManager->GetStableStorage = bind(&MeteoGame::GetStableStorage, this);
+	smManager->GetStableStorage = bind(&MeteoGame::GetStableStorage, this);
 	
 	// storage的位置目前設為"./"，import from stable會去"./Songs"下面抓檔案
 
