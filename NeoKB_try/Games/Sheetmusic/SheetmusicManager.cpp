@@ -168,7 +168,6 @@ SmInfo * SmManager::importToStorage(FileStore * fStore, SheetmusicStore * sStore
 	if (smNames->size() == 0) {
 		return nullptr;
 	}
-	return nullptr;
 
 	for (int i = 0; i < smNames->size(); i++) {
 
@@ -229,6 +228,7 @@ SmInfo * SmManager::importToStorage(FileStore * fStore, SheetmusicStore * sStore
 
 	}
 
+	return nullptr;
 	// TODO: 之後資料庫改好以後，這邊要改成下面這兩行，sminfos改成擺在資料庫裡
 	//SmInfo* smInfo = smInfos->at(0);
 	//delete smInfos;
