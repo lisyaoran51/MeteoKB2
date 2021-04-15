@@ -20,7 +20,7 @@ CompositeMeteoPiano::CompositeMeteoPiano(vector<string>& args) : MeteoPiano(args
 	virtualMeteoPiano = new VirtualMeteoPiano();
 	virtualMeteoPiano->SetVirtualMeteoPianoSustainType(VirtualMeteoPianoSustainType::Pedal);
 
-	registerLoad(bind(static_cast<int(CompositeMeteoPiano::*)(void)>(&CompositeMeteoPiano::load), this));
+	//registerLoad(bind(static_cast<int(CompositeMeteoPiano::*)(void)>(&CompositeMeteoPiano::load), this));
 }
 
 int CompositeMeteoPiano::SetHost(GameHost * h)
