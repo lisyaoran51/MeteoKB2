@@ -123,7 +123,6 @@ int SmManager::ImportFromStable()
 		return 0;
 	}(paths);
 
-	return 0;
 
 	Import(paths);
 
@@ -161,6 +160,8 @@ vector<SmInfo*>* SmManager::import(FileReader & fileReader)
 
 SmInfo * SmManager::importToStorage(FileStore * fStore, SheetmusicStore * sStore, FileReader & fileReader)
 {
+
+	return nullptr;
 	vector<string>* smNames;
 
 	smNames = fileReader.WhereEndWith(".sm");
