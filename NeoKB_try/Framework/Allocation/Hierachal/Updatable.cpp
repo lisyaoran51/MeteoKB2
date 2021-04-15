@@ -46,14 +46,14 @@ int Updatable::SetParent(HasParent * p)
 bool Updatable::UpdateSubTree()
 {
 
-	update();
-
-	return true;
-
 	LOG(LogLevel::Depricated) << "Updatable::UpdateSubTree() : update [" << GetTypeName() << "].";
 
 	if (GetLoadState() < LoadState::Ready)
 		return false;
+
+	update();
+
+	return true;
 
 	if (GetLoadState() == LoadState::Ready)
 		LoadComplete();
