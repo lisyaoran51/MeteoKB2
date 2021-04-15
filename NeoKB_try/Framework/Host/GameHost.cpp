@@ -228,8 +228,6 @@ int GameHost::updateFrame()
 		return 0;
 	}(root);
 
-	return 0;
-
 	return root->UpdateSubTree();
 }
 
