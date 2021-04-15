@@ -179,12 +179,12 @@ SmInfo * SmManager::importToStorage(FileStore * fStore, SheetmusicStore * sStore
 		LOG(LogLevel::Finer) << "vector<SmInfo*>* SmManager::importToStorage(FileReader&) : Getting decoder of [" << smNames->at(i) << "].";
 		SmDecoder* smDecoder = SmDecoder::GetDecoder(stream);
 
-		stream->close();
-
-		continue;
 
 		LOG(LogLevel::Finer) << "vector<SmInfo*>* SmManager::importToStorage(FileReader&) : Decode [" << smNames->at(i) << "] ...";
 		Sm<Event>* sm = smDecoder->Decode(stream);
+
+		stream->close();
+
 		sm->GetSmInfo()->fileName = smNames->at(i);
 
 		/* --------- 這段不用了，反正也用步道，要把file reader的get sm info set拿掉。後來發現要留，不然working sm會拿不到path */
