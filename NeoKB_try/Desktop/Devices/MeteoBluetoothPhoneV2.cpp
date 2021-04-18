@@ -273,7 +273,7 @@ int MeteoBluetoothPhoneV2::handleNewPacket(const char * packet, int length)
 		if (gattServer->GetClient() == nullptr)
 			return 0;
 
-		LOG(LogLevel::Debug) << "MeteoPacketConverterV1::handleNewPacket() : get read firmware version message.";
+		LOG(LogLevel::Debug) << "MeteoBluetoothPhoneV2::handleNewPacket() : get read firmware version message.";
 
 		char buffer[8] = { 0 };
 		unsigned int command = 0x110000;// MeteoCommand::ReturnFirmwareVersion
@@ -294,11 +294,13 @@ int MeteoBluetoothPhoneV2::handleNewPacket(const char * packet, int length)
 		BluetoothMessage* btMessage = packetConverter->ConvertToBluetoothMessage(packet, length);
 
 		if (btMessage == nullptr) {
-			LOG(LogLevel::Error) << "MeteoBluetoothPhoneV1::handleNewPacket() : convert to bt command failed.";
+			LOG(LogLevel::Error) << "MeteoBluetoothPhoneV2::handleNewPacket() : convert to bt command failed.";
 		}
 
-		if (btMessage != nullptr)
-			pushBluetoothState(btMessage);
+		LOG(LogLevel::Debug) << "MeteoBluetoothPhoneV2::handleNewPacket() : massage:" << btMessage->ToString();
+
+		//if (btMessage != nullptr)
+		//	pushBluetoothState(btMessage);
 	}
 	else if (packetType == PacketType::File) {
 

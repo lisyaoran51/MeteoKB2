@@ -12,6 +12,11 @@ MeteoContextBluetoothMessage::MeteoContextBluetoothMessage(MeteoCommand mCommand
 {
 }
 
+string MeteoContextBluetoothMessage::ToString()
+{
+	return GetContext();
+}
+
 BluetoothMessage * MeteoContextBluetoothMessage::Clone()
 {
 	MeteoContextBluetoothMessage* clonedMessage = new MeteoContextBluetoothMessage(command);

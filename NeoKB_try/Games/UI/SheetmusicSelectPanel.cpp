@@ -167,7 +167,7 @@ int SheetmusicSelectPanel::onMessage(MeteoBluetoothMessage * message)
 		int value1, value2;
 		for (int i = 0; i < context["Modifiers"].size(); i++) {
 			// TODO: 下面這行寫錯了，之後要再改
-			modifierName = context["Modifiers"].at(i)["Modifier Name"].get<string>() == "AutoPedalModifier";
+			modifierName = context["Modifiers"].at(i)["Modifier Name"].get<string>();// == "AutoPedalModifier";
 			value1 = context["Modifiers"].at(i)["Value1"].get<int>();
 			value2 = context["Modifiers"].at(i)["Value2"].get<int>();
 

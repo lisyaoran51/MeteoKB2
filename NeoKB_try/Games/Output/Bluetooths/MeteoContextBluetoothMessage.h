@@ -20,6 +20,8 @@ namespace Bluetooths{
 
 		MeteoContextBluetoothMessage(MeteoCommand mCommand);
 
+		virtual string ToString();
+
 		virtual BluetoothMessage* Clone();
 
 		/// <summary>
