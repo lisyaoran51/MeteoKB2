@@ -92,7 +92,7 @@ bool Updatable::UpdateSubTree()
 	for (vector<ChildAddable*>::iterator iter = cacheChilds.begin(); iter != cacheChilds.end(); iter++) {
 		Updatable* child = Cast<Updatable>(*iter);
 		if (child != nullptr) {
-			LOG(LogLevel::Debug) << "Updatable::UpdateSubTree() : [" << GetTypeName() << "] iterating child [" << (*iter)->GetTypeName() << "] to update.";
+			LOG(LogLevel::Depricated) << "Updatable::UpdateSubTree() : [" << GetTypeName() << "] iterating child [" << (*iter)->GetTypeName() << "] to update.";
 			Cast<Updatable>(*iter)->UpdateSubTree();
 
 		}
