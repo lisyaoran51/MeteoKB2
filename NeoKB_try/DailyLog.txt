@@ -2945,3 +2945,12 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 	
 4/12
 	寫完on message，接下來可能要跑跑看
+	
+4/14
+	不知道為什麼丟第二次訊號就會斷線
+	
+	再iterate update sub tree的時候，藍芽就會壞掉
+	
+	問題出再smManager->ImportFromStable();這一行
+	
+	再SmManager::ImportFromStable()裡的Import(paths);這行

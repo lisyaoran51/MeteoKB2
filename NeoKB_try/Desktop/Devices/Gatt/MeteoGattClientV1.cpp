@@ -104,8 +104,8 @@ void GattClient_onEPollRead(gatt_db_attribute* attr, uint32_t id, uint16_t offse
 void GattClient_onDataChannelIn(gatt_db_attribute* attr, uint32_t id, uint16_t offset, uint8_t const* data, size_t len, uint8_t opcode, bt_att* att, void* argp)
 {
 	MeteoGattClientV1* clnt = reinterpret_cast<MeteoGattClientV1 *>(argp);
-	LOG(LogLevel::Warning) << "GattClient_onDataChannelIn : get write " << len;
-	//clnt->onDataChannelIn(attr, id, offset, data, len, opcode, att);
+	//LOG(LogLevel::Warning) << "GattClient_onDataChannelIn : get write " << len;
+	clnt->onDataChannelIn(attr, id, offset, data, len, opcode, att);
 }
 
 void GattClient_onDataChannelOut(gatt_db_attribute* attr, uint32_t id, uint16_t offset, uint8_t opcode, bt_att* att, void* argp)
@@ -473,7 +473,7 @@ void MeteoGattClientV1::onDataChannelIn(
 	uint8_t               UNUSED_PARAM(opcode),
 	bt_att*               UNUSED_PARAM(att))
 {
-	LOG(LogLevel::Info) << "onDataChannelIn(offset=" << offset << ", len=" << len << ")";
+	LOG(LogLevel::Debug) << "onDataChannelIn(offset=" << offset << ", len=" << len << ")";
 
 	if (!m_data_handler)
 	{
@@ -486,6 +486,7 @@ void MeteoGattClientV1::onDataChannelIn(
 	//memcpy(charArray, data, len);
 
 	m_data_handler(reinterpret_cast<const char*>(data), len);
+	gatt_db_attribute_write_result(attr, id, 0);
 
 	return;
 
