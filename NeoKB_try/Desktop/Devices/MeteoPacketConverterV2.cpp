@@ -644,6 +644,11 @@ BluetoothMessage * MeteoPacketConverterV2::ConvertToBluetoothMessage(const char 
 
 			MeteoContextBluetoothMessage* btMessage = new MeteoContextBluetoothMessage(commandMap[command]);
 
+			LOG(LogLevel::Debug) << "MeteoPacketConverterV1::ConvertToBluetoothMessage() : command [" << string(buffer, 4) << "].";
+			LOG(LogLevel::Debug) << "MeteoPacketConverterV1::ConvertToBluetoothMessage() : length [" << string(buffer + 4, 2) << "].";
+			LOG(LogLevel::Debug) << "MeteoPacketConverterV1::ConvertToBluetoothMessage() : order [" << string(buffer+6, 2) << "].";
+			LOG(LogLevel::Debug) << "MeteoPacketConverterV1::ConvertToBluetoothMessage() : amount [" << string(buffer + 8, 2) << "].";
+
 			unsigned short length;
 			memcpy(&length, buffer + sizeof(command), sizeof(length));
 			LOG(LogLevel::Debug) << "MeteoPacketConverterV1::ConvertToBluetoothMessage() : length [" << length << "].";
