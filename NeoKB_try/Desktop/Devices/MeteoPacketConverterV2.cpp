@@ -645,25 +645,26 @@ BluetoothMessage * MeteoPacketConverterV2::ConvertToBluetoothMessage(const char 
 			MeteoContextBluetoothMessage* btMessage = new MeteoContextBluetoothMessage(commandMap[command]);
 
 			LOG(LogLevel::Debug) << "MeteoPacketConverterV1::ConvertToBluetoothMessage() : command [" << (int)buffer[0] << " " << (int)buffer[1] << " " << (int)buffer[2] << " " << (int)buffer[3] << "].";
-			LOG(LogLevel::Debug) << "MeteoPacketConverterV1::ConvertToBluetoothMessage() : length [" << (int)buffer[4] << " " << (int)buffer[5] << "].";
-			LOG(LogLevel::Debug) << "MeteoPacketConverterV1::ConvertToBluetoothMessage() : order [" << (int)buffer[6] << " " << (int)buffer[7] << "].";
-			LOG(LogLevel::Debug) << "MeteoPacketConverterV1::ConvertToBluetoothMessage() : amount [" << (int)buffer[8] << " " << (int)buffer[9] << "].";
+			LOG(LogLevel::Debug) << "MeteoPacketConverterV1::ConvertToBluetoothMessage() : id [" << (int)buffer[4] << " " << (int)buffer[5] << "].";
+			LOG(LogLevel::Debug) << "MeteoPacketConverterV1::ConvertToBluetoothMessage() : length [" << (int)buffer[6] << " " << (int)buffer[7] << "].";
+			LOG(LogLevel::Debug) << "MeteoPacketConverterV1::ConvertToBluetoothMessage() : order [" << (int)buffer[8] << " " << (int)buffer[9] << "].";
+			LOG(LogLevel::Debug) << "MeteoPacketConverterV1::ConvertToBluetoothMessage() : amount [" << (int)buffer[10] << " " << (int)buffer[11] << "].";
 
 			unsigned short length;
-			memcpy(&length, buffer + sizeof(command), sizeof(length));
+			memcpy(&length, buffer + sizeof(command) + sizeof(unsigned short), sizeof(length));
 			LOG(LogLevel::Debug) << "MeteoPacketConverterV1::ConvertToBluetoothMessage() : length [" << length << "].";
 			
 			memset(contextBuffer, 0, sizeof(char) * 1024);
 			memcpy(contextBuffer,
-				buffer + sizeof(command) + sizeof(length) + sizeof(unsigned short) * 2,
-				length - (sizeof(command) + sizeof(length) + sizeof(unsigned short) * 2));
+				buffer + sizeof(command) + sizeof(length) + sizeof(unsigned short) * 3,
+				length - (sizeof(command) + sizeof(length) + sizeof(unsigned short) * 3));
 			// Id:unisgned int(4)
 			// Length:unsigned short 長度(2)
 			// Order : unsigned short 順序(2)
 			// Amount : unsigned short 封包數(2)
 			// Text : char[] 內文
 
-			LOG(LogLevel::Debug) << "MeteoPacketConverterV1::ConvertToBluetoothMessage() : context [" << string(contextBuffer, length - (sizeof(command) + sizeof(length) + sizeof(unsigned short) * 2)) << "].";
+			LOG(LogLevel::Debug) << "MeteoPacketConverterV1::ConvertToBluetoothMessage() : context [" << string(contextBuffer, length - (sizeof(command) + sizeof(length) + sizeof(unsigned short) * 3)) << "].";
 
 			try {
 				json context = json::parse(contextBuffer);
