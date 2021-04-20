@@ -634,7 +634,7 @@ BluetoothMessage * MeteoPacketConverterV2::ConvertToBluetoothMessage(const char 
 	memcpy(&command, buffer, sizeof(command));
 
 	LOG(LogLevel::Debug) << "MeteoPacketConverterV1::ConvertToBluetoothMessage() : command [" << hex << command << dec << "], length[" << size << "].";
-	LOG(LogLevel::Debug) << "MeteoPacketConverterV1::ConvertToBluetoothMessage() : packet [" << string(buffer) << "].";
+	LOG(LogLevel::Debug) << "MeteoPacketConverterV1::ConvertToBluetoothMessage() : packet [" << string(buffer, size) << "].";
 
 	map<unsigned int, MeteoCommand>::iterator iter;
 	iter = commandMap.find(command);
@@ -657,7 +657,7 @@ BluetoothMessage * MeteoPacketConverterV2::ConvertToBluetoothMessage(const char 
 			// Amount : unsigned short 封包數(2)
 			// Text : char[] 內文
 
-			LOG(LogLevel::Debug) << "MeteoPacketConverterV1::ConvertToBluetoothMessage() : context [" << string(contextBuffer) << "].";
+			LOG(LogLevel::Debug) << "MeteoPacketConverterV1::ConvertToBluetoothMessage() : context [" << string(contextBuffer, length) << "].";
 
 			try {
 				json context = json::parse(contextBuffer);
