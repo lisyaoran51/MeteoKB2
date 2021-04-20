@@ -671,6 +671,7 @@ BluetoothMessage * MeteoPacketConverterV2::ConvertToBluetoothMessage(const char 
 
 				btMessage->SetContextInJson(context);
 				btMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
+				LOG(LogLevel::Debug) << "MeteoPacketConverterV2::ConvertToBluetoothMessage() : json context [" << context.dump() << "].";
 			}
 			catch (exception& e) {
 				LOG(LogLevel::Error) << "MeteoPacketConverterV2::ConvertToBluetoothMessage() : parse json error : " << e.what();
