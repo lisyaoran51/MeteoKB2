@@ -295,6 +295,7 @@ int MeteoBluetoothPhoneV2::handleNewPacket(const char * packet, int length)
 
 		if (btMessage == nullptr) {
 			LOG(LogLevel::Error) << "MeteoBluetoothPhoneV2::handleNewPacket() : convert to bt command failed.";
+			return 0;
 		}
 
 		LOG(LogLevel::Debug) << "MeteoBluetoothPhoneV2::handleNewPacket() : massage:" << btMessage->ToString();

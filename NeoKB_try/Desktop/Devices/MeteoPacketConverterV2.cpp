@@ -633,6 +633,8 @@ BluetoothMessage * MeteoPacketConverterV2::ConvertToBluetoothMessage(const char 
 	unsigned int command = 0x0;
 	memcpy(&command, buffer, sizeof(command));
 
+	LOG(LogLevel::Debug) << "MeteoPacketConverterV1::ConvertToBluetoothMessage() : command [" << hex << command << dec << "], length[" << size << "].";
+
 	map<unsigned int, MeteoCommand>::iterator iter;
 	iter = commandMap.find(command);
 	if (iter != commandMap.end()) {
@@ -653,6 +655,8 @@ BluetoothMessage * MeteoPacketConverterV2::ConvertToBluetoothMessage(const char 
 			// Order : unsigned short 順序(2)
 			// Amount : unsigned short 封包數(2)
 			// Text : char[] 內文
+
+			LOG(LogLevel::Debug) << "MeteoPacketConverterV1::ConvertToBluetoothMessage() : context [" << contextBuffer << "].";
 
 			try {
 				json context = json::parse(contextBuffer);
