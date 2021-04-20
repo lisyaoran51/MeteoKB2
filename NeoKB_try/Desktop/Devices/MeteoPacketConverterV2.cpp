@@ -646,6 +646,7 @@ BluetoothMessage * MeteoPacketConverterV2::ConvertToBluetoothMessage(const char 
 
 			unsigned short length;
 			memcpy(&length, buffer + sizeof(command), sizeof(length));
+			LOG(LogLevel::Debug) << "MeteoPacketConverterV1::ConvertToBluetoothMessage() : length [" << length << "].";
 			
 			memset(contextBuffer, 0, sizeof(char) * 1024);
 			memcpy(contextBuffer,
