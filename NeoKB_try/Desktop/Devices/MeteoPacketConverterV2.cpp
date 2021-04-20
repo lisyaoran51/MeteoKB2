@@ -657,7 +657,7 @@ BluetoothMessage * MeteoPacketConverterV2::ConvertToBluetoothMessage(const char 
 			// Amount : unsigned short 封包數(2)
 			// Text : char[] 內文
 
-			LOG(LogLevel::Debug) << "MeteoPacketConverterV1::ConvertToBluetoothMessage() : context [" << string(contextBuffer, length) << "].";
+			LOG(LogLevel::Debug) << "MeteoPacketConverterV1::ConvertToBluetoothMessage() : context [" << string(contextBuffer, length - (sizeof(command) + sizeof(length) + sizeof(unsigned short) * 2)) << "].";
 
 			try {
 				json context = json::parse(contextBuffer);
