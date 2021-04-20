@@ -634,6 +634,7 @@ BluetoothMessage * MeteoPacketConverterV2::ConvertToBluetoothMessage(const char 
 	memcpy(&command, buffer, sizeof(command));
 
 	LOG(LogLevel::Debug) << "MeteoPacketConverterV1::ConvertToBluetoothMessage() : command [" << hex << command << dec << "], length[" << size << "].";
+	LOG(LogLevel::Debug) << "MeteoPacketConverterV1::ConvertToBluetoothMessage() : packet [" << buffer << "].";
 
 	map<unsigned int, MeteoCommand>::iterator iter;
 	iter = commandMap.find(command);
