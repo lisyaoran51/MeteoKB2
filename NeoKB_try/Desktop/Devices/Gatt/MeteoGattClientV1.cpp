@@ -363,7 +363,7 @@ int MeteoGattClientV1::buildMeteoService()
 		service,
 		&uuid,
 		BT_ATT_PERM_WRITE,
-		BT_GATT_CHRC_PROP_WRITE,
+		BT_GATT_CHRC_PROP_WRITE | BT_GATT_CHRC_PROP_WRITE_WITHOUT_RESPONSE,
 		nullptr,
 		&GattClient_onDataChannelIn,
 		this);
