@@ -110,7 +110,8 @@ string MeteoContextBluetoothMessage::GetContext()
 {
 	if (accessType == MeteoBluetoothMessageAccessType::ReadOnly ||
 		accessType == MeteoBluetoothMessageAccessType::ReadWrite) {
-		return string(context);
+		//return string(context);
+		return contextInJson.dump();
 	}
 
 	LOG(LogLevel::Error) << "MeteoContextBluetoothMessage::GetContext() : unavailable to read.";
