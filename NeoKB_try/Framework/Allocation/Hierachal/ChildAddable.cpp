@@ -63,7 +63,7 @@ int ChildAddable::AddChild(ChildAddable * child)
 			// TODO: throw error
 		}
 		else {
-			LOG(LogLevel::Debug) << "ChildAddable::AddChild() : push into tree [" << child->GetTypeName() << "].";
+			LOG(LogLevel::Depricated) << "ChildAddable::AddChild() : push into tree [" << child->GetTypeName() << "].";
 			unique_lock<mutex> uLock2(TreeMutex1);
 			unique_lock<mutex> uLock3(TreeMutex2);
 			unique_lock<mutex> uLock4(TreeMutex3);
@@ -72,7 +72,7 @@ int ChildAddable::AddChild(ChildAddable * child)
 		}
 
 		isAlive = true;
-		LOG(LogLevel::Debug) << "ChildAddable::AddChild() : push into tree [" << child->GetTypeName() << "] over.";
+		LOG(LogLevel::Depricated) << "ChildAddable::AddChild() : push into tree [" << child->GetTypeName() << "] over.";
 		return 0;
 	}
 	
