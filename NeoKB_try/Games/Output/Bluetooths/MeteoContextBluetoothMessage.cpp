@@ -38,7 +38,7 @@ BluetoothMessage * MeteoContextBluetoothMessage::Clone()
 
 int MeteoContextBluetoothMessage::SetAccessType(MeteoBluetoothMessageAccessType aType)
 {
-	if (accessType == MeteoBluetoothMessageAccessType::WriteOnly) {
+	if (aType == MeteoBluetoothMessageAccessType::WriteOnly) {
 		contextInJson.clear();
 		if (contextSize > 0) {
 			delete[] context;
@@ -46,7 +46,7 @@ int MeteoContextBluetoothMessage::SetAccessType(MeteoBluetoothMessageAccessType 
 		}
 
 	}
-	else if (accessType == MeteoBluetoothMessageAccessType::ReadOnly) {
+	else if (aType == MeteoBluetoothMessageAccessType::ReadOnly) {
 		if (contextInJson.size() > 0) {
 			string jsonDump = contextInJson.dump();
 
