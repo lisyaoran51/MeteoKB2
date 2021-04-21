@@ -50,6 +50,8 @@ int MeteoContextBluetoothMessage::SetAccessType(MeteoBluetoothMessageAccessType 
 		if (contextInJson.size() > 0) {
 			string jsonDump = contextInJson.dump();
 
+			LOG(LogLevel::Debug) << "MeteoContextBluetoothMessage::SetAccessType() : json context [" << contextInJson.dump() << "].";
+
 			context = new char[jsonDump.length() + 1];
 			strcpy(context, jsonDump.c_str());
 			contextSize = jsonDump.length() + 1;
