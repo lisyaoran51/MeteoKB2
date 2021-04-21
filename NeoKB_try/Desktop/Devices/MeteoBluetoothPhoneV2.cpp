@@ -300,8 +300,8 @@ int MeteoBluetoothPhoneV2::handleNewPacket(const char * packet, int length)
 
 		LOG(LogLevel::Debug) << "MeteoBluetoothPhoneV2::handleNewPacket() : massage:" << btMessage->ToString();
 
-		//if (btMessage != nullptr)
-		//	pushBluetoothState(btMessage);
+		if (btMessage != nullptr)
+			pushBluetoothState(btMessage);
 	}
 	else if (packetType == PacketType::File) {
 

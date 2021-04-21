@@ -664,14 +664,14 @@ BluetoothMessage * MeteoPacketConverterV2::ConvertToBluetoothMessage(const char 
 			// Amount : unsigned short 封包數(2)
 			// Text : char[] 內文
 
-			LOG(LogLevel::Debug) << "MeteoPacketConverterV1::ConvertToBluetoothMessage() : context [" << string(contextBuffer, length - (sizeof(command) + sizeof(length) + sizeof(unsigned short) * 3)) << "].";
+			LOG(LogLevel::Depricated) << "MeteoPacketConverterV1::ConvertToBluetoothMessage() : context [" << string(contextBuffer, length - (sizeof(command) + sizeof(length) + sizeof(unsigned short) * 3)) << "].";
 
 			try {
 				json context = json::parse(contextBuffer);
 
 				btMessage->SetContextInJson(context);
 				btMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
-				LOG(LogLevel::Debug) << "MeteoPacketConverterV2::ConvertToBluetoothMessage() : json context [" << context.dump() << "].";
+				LOG(LogLevel::Depricated) << "MeteoPacketConverterV2::ConvertToBluetoothMessage() : json context [" << context.dump() << "].";
 			}
 			catch (exception& e) {
 				LOG(LogLevel::Error) << "MeteoPacketConverterV2::ConvertToBluetoothMessage() : parse json error : " << e.what();

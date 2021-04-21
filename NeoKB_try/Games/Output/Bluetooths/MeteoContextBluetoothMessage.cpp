@@ -42,6 +42,7 @@ int MeteoContextBluetoothMessage::SetAccessType(MeteoBluetoothMessageAccessType 
 		contextInJson.clear();
 		if (contextSize > 0) {
 			delete[] context;
+			context = nullptr;
 			contextSize = 0;
 		}
 
@@ -50,7 +51,7 @@ int MeteoContextBluetoothMessage::SetAccessType(MeteoBluetoothMessageAccessType 
 		if (contextInJson.size() > 0) {
 			string jsonDump = contextInJson.dump();
 
-			LOG(LogLevel::Debug) << "MeteoContextBluetoothMessage::SetAccessType() : json context [" << contextInJson.dump() << "].";
+			LOG(LogLevel::Depricated) << "MeteoContextBluetoothMessage::SetAccessType() : json context [" << contextInJson.dump() << "].";
 
 			context = new char[jsonDump.length() + 1];
 			strcpy(context, jsonDump.c_str());
@@ -76,6 +77,7 @@ int MeteoContextBluetoothMessage::SetContext(char * c, int cSize)
 
 		if (contextSize != 0) {
 			delete[] context;
+			context = nullptr;
 			contextSize = 0;
 		}
 
@@ -101,10 +103,11 @@ int MeteoContextBluetoothMessage::SetContextInJson(json cInJson)
 		accessType == MeteoBluetoothMessageAccessType::WriteOnly) {
 		contextInJson = cInJson;
 
-		LOG(LogLevel::Debug) << "MeteoContextBluetoothMessage::SetContextInJson() : json context [" << contextInJson.dump() << "].";
+		LOG(LogLevel::Depricated) << "MeteoContextBluetoothMessage::SetContextInJson() : json context [" << contextInJson.dump() << "].";
 
 		if (contextSize != 0) {
 			delete[] context;
+			context = nullptr;
 			contextSize = 0;
 		}
 	}
@@ -114,9 +117,9 @@ string MeteoContextBluetoothMessage::GetContext()
 {
 	if (accessType == MeteoBluetoothMessageAccessType::ReadOnly ||
 		accessType == MeteoBluetoothMessageAccessType::ReadWrite) {
-		LOG(LogLevel::Debug) << "MeteoContextBluetoothMessage::GetContext() : json context [" << contextInJson.dump() << "].";
-		//return string(context);
-		return contextInJson.dump();
+		LOG(LogLevel::Depricated) << "MeteoContextBluetoothMessage::GetContext() : json context [" << contextInJson.dump() << "].";
+		return string(context);
+		//return contextInJson.dump();
 	}
 
 	LOG(LogLevel::Error) << "MeteoContextBluetoothMessage::GetContext() : unavailable to read.";
