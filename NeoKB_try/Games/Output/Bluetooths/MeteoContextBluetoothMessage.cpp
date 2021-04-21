@@ -99,6 +99,8 @@ int MeteoContextBluetoothMessage::SetContextInJson(json cInJson)
 		accessType == MeteoBluetoothMessageAccessType::WriteOnly) {
 		contextInJson = cInJson;
 
+		LOG(LogLevel::Debug) << "MeteoContextBluetoothMessage::SetContextInJson() : json context [" << contextInJson.dump() << "].";
+
 		if (contextSize != 0) {
 			delete[] context;
 			contextSize = 0;
