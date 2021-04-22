@@ -16,7 +16,7 @@ string MeteoPacketConverterV2::getFileName(const char * buffer, int size)
 {
 
 	char name[17] = { 0 };
-	memcpy(name, buffer + sizeof(unsigned int) + sizeof(unsigned short), sizeof(char) * 16);
+	memcpy(name, buffer + sizeof(unsigned int) + sizeof(unsigned short) * 2, sizeof(char) * 16);
 	return string(name);
 
 	for (int i = 0; i < 17; i++) {
@@ -32,9 +32,9 @@ string MeteoPacketConverterV2::getFileName(const char * buffer, int size)
 int MeteoPacketConverterV2::getFileSize(const char * buffer, int size)
 {
 	unsigned short length;
-	memcpy(&length, buffer + sizeof(unsigned int), sizeof(unsigned short));
+	memcpy(&length, buffer + sizeof(unsigned int), sizeof(unsigned short) * 2);
 
-	int fileSize = length - sizeof(unsigned int) + sizeof(unsigned short) + sizeof(char) * 16 + sizeof(unsigned short) * 2;
+	int fileSize = length - sizeof(unsigned int) + sizeof(unsigned short) * 2 + sizeof(char) * 16 + sizeof(unsigned short) * 2;
 
 	return fileSize;
 }
@@ -51,7 +51,7 @@ char * MeteoPacketConverterV2::getFileSegment(const char * buffer, int size)
 	char* fileSegment = new char[fileSegmentSize];
 
 	memcpy(fileSegment, 
-		   buffer + sizeof(unsigned int) + sizeof(unsigned short) + sizeof(char) * 16 + sizeof(unsigned short) * 2, 
+		   buffer + sizeof(unsigned int) + sizeof(unsigned short) * 2 + sizeof(char) * 16 + sizeof(unsigned short) * 2, 
 		   sizeof(char) * fileSegmentSize);
 
 
@@ -63,7 +63,7 @@ int MeteoPacketConverterV2::getFileSegmentOrder(const char * buffer, int size)
 {
 	unsigned short fileSegmentNumber;
 
-	memcpy(&fileSegmentNumber, buffer + sizeof(unsigned int) + sizeof(unsigned short) + sizeof(char) * 16, sizeof(unsigned short));
+	memcpy(&fileSegmentNumber, buffer + sizeof(unsigned int) + sizeof(unsigned short) * 2 + sizeof(char) * 16, sizeof(unsigned short));
 
 	return fileSegmentNumber;
 }
@@ -72,7 +72,7 @@ int MeteoPacketConverterV2::getFileSegmentCount(const char * buffer, int size)
 {
 	unsigned short fileSegmentCount;
 
-	memcpy(&fileSegmentCount, buffer + sizeof(unsigned int) + sizeof(unsigned short) + sizeof(char) * 16 + sizeof(unsigned short), sizeof(unsigned short));
+	memcpy(&fileSegmentCount, buffer + sizeof(unsigned int) + sizeof(unsigned short) * 2 + sizeof(char) * 16 + sizeof(unsigned short), sizeof(unsigned short));
 
 	return fileSegmentCount;
 }
@@ -797,6 +797,8 @@ BluetoothMessage* MeteoPacketConverterV2::ConvertToFile(const char * buffer, int
 		LOG(LogLevel::Fine) << "MeteoPacketConverterV1::ConvertToFile() : converting [" << command << "] command file.";
 
 		if (CheckPacketType(buffer, size) == PacketType::File) {
+
+			//int id =  getId(buffer, size);
 
 			string fileName = getFileName(buffer, size);
 			int fileSegmentSize = getFileSize(buffer, size);
