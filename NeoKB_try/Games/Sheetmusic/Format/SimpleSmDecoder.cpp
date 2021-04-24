@@ -263,6 +263,8 @@ int SimpleSmDecoder::handleNoteControlPoints(Sm<Event>* sm, string & line)
 				break;
 			case -4:
 				newMarkControlPoint = new SectionStartControlPoint(sectionIndex, time, noteLength >= 0 ? noteLength : 0);
+				LOG(LogLevel::Debug) << "int SimpleSmDecoder::handleNoteControlPoints() : Section [" << sectionIndex << "] at [" << time << "].";
+				break;
 			}
 			
 		}
