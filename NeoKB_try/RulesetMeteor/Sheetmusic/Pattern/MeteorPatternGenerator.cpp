@@ -111,19 +111,24 @@ Pattern* MeteorPatternGenerator::Generate(vector<Event*>* es, Event * e)
 
 
 	/* 鍵力音符的特效 */
-	if (note)
+	if (note) {
 		return generateNoteControlPoint(es, note);
+	}
 
 	/* 鍵力開始的特效 */ /* (這個功能已經沒有再用了，因為target line被拿掉了) */
-	if (start)
+	if (start) {
 		return generateStartGameEvent(es, start);
+	}
 
 	/* 鍵力踏板的特效 */
-	if (inputKey)
+	if (inputKey) {
 		return generateInputKeyControlPoint(es, inputKey);
+	}
 
-	if (sectionStart)
+	if (sectionStart) {
+		LOG(LogLevel::Debug) << "MeteorPatternGenerator::Generate() : generate repeat practice event." << sectionStart->GetStartTime();
 		return generateRepeatPracticeEvent(es, sectionStart);
+	}
 
 	if (!note && !start && !inputKey && !sectionStart)
 		throw runtime_error("Pattern* MeteorPatternGenerator::Generate(vector<Event*>*, Event*) : event cannot cast to any control point.");
