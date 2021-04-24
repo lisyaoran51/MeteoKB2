@@ -42,7 +42,7 @@ Sm<Event>* SmConverter::Convert(Sm<Event>* s)
 
 	for (int i = 0; i < originalEvents->size(); i++) {
 
-		LOG(LogLevel::Finest) << "Sm<Event>* SmConverter::Convert(Sm<Event>*) : converting #" << i << " event ...";
+		LOG(LogLevel::Finest) << "Sm<Event>* SmConverter::Convert(Sm<Event>*) : converting #" << i << " event ..." << originalEvents->at(i)->GetStartTime();
 		convertEvent(tempEvents, originalEvents->at(i));
 
 		for (int j = 0; j < tempEvents->size(); j++) {

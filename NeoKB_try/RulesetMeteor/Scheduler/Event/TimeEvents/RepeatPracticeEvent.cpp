@@ -24,3 +24,8 @@ float RepeatPracticeEvent::GetRewindLength()
 {
 	return rewindLength;
 }
+
+Event * RepeatPracticeEvent::Clone()
+{
+	return new RepeatPracticeEvent(repeatSection, rewindLength, startTime, lifeTime);
+}

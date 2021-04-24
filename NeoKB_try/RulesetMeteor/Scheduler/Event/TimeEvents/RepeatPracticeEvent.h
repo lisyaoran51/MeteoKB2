@@ -29,6 +29,8 @@ namespace TimeEvents {
 
 		float GetRewindLength();
 
+		virtual Event* Clone();
+
 	protected:
 
 		/// <summary>
