@@ -68,12 +68,12 @@ namespace TimeEvents {
 		T* GetTimeEvent() { return dynamic_cast<T*>(event); }
 
 		virtual int SetIsProcessed() {
-			
+			isProcessed = true;
 			return 0;
 		}
 
 		virtual bool GetIsProcessable() {
-			return true;
+			return !isProcessed;
 		}
 
 	protected:

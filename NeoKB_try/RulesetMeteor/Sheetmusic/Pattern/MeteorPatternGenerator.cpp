@@ -659,6 +659,7 @@ int MeteorPatternGenerator::generateRepeatPracticeEvents(vector<Event*>* es, vec
 
 Pattern* MeteorPatternGenerator::generateRepeatPracticeEvent(vector<Event*>* es, SectionStartControlPoint * sectionStart)
 {
+	LOG(LogLevel::Debug) << "MeteorSmConverter::generateRepeatPracticeEvent() : generate repeat practice event on [" << sectionStart->GetSectionIndex() << "] section at [" << sectionStart->GetStartTime() << "].";
 	Pattern* pattern = new Pattern(sectionStart);
 
 	/* 直接用sectionStart->GetStartTime() + sectionStart->GetLifeTime()的話會被error說invalid use of non-static member function */

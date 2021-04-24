@@ -266,7 +266,7 @@ int MeteorTimeController::SetSectionTime(vector<float>* sTime)
 
 int MeteorTimeController::SetTimeControllerMode(MeteorTimeControllerMode tControllerMode)
 {
-
+	LOG(LogLevel::Debug) << "MeteorTimeController::SetTimeControllerMode() : set to RepeatPractice.";
 	timeControllerMode = tControllerMode;
 
 	if (tControllerMode == MeteorTimeControllerMode::RepeatPractice) {
@@ -307,6 +307,7 @@ int MeteorTimeController::SetHasSection(bool hSection)
 
 int MeteorTimeController::RepeatSection(int section)
 {
+	LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : jump to [" << section << "], temp section is [" << tempSection << "], repeat time is [" << tempRepeatTimes << "].";
 	if (speedAdjuster->GetIsAdjustingTime())
 		return -1;
 

@@ -2954,3 +2954,19 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 	問題出再smManager->ImportFromStable();這一行
 	
 	再SmManager::ImportFromStable()裡的Import(paths);這行
+	
+4/15
+	結果是stream沒有close，所以出問題
+	
+	解決傳兩次會當機的問題，接下來要看為什麼每兩個訊息只能收到一個，bleconfd就沒有這個問題，我自己寫的gatt server test就有
+	
+4/17
+	找到問題了
+	每個callback跑完要執行
+	gatt_db_attribute_write_result(attr, id, 0);
+	不然就會一次有收到，一次沒收到
+	
+	不過還有不知道為什麼第一次訊息會timeout的問題
+	
+4/24
+	寫完藍芽架構，接下來繼續研究反覆練彈
