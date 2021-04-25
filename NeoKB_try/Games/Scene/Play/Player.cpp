@@ -43,7 +43,7 @@ int Player::load(MeteoConfigManager* m, Instrument* instru)
 
 	// debug
 	for (int i = 0; i < workingSm.GetValue()->GetSm()->GetEvents()->size(); i++) {
-		LOG(LogLevel::Debug) << "Player::load : sm event [" << workingSm.GetValue()->GetSm()->GetEvents()->at(i)->GetTypeName() << "] at [" << workingSm.GetValue()->GetSm()->GetEvents()->at(i)->GetStartTime() << "].";
+		LOG(LogLevel::Depricated) << "Player::load : sm event [" << workingSm.GetValue()->GetSm()->GetEvents()->at(i)->GetTypeName() << "] at [" << workingSm.GetValue()->GetSm()->GetEvents()->at(i)->GetStartTime() << "].";
 	}
 
 	ruleset = rulesetInfo.GetValue()->CreateRuleset();

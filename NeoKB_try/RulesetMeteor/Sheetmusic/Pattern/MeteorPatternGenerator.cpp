@@ -109,7 +109,7 @@ Pattern* MeteorPatternGenerator::Generate(vector<Event*>* es, Event * e)
 	InputKeyControlPoint* inputKey = e->Cast<InputKeyControlPoint>();
 	SectionStartControlPoint* sectionStart = e->Cast<SectionStartControlPoint>();
 
-	LOG(LogLevel::Debug) << "MeteorPatternGenerator::Generate() : generate event [" << e->GetTypeName() << "] at [" << e->GetStartTime() << "].";
+	LOG(LogLevel::Depricated) << "MeteorPatternGenerator::Generate() : generate event [" << e->GetTypeName() << "] at [" << e->GetStartTime() << "].";
 
 	/* 鍵力音符的特效 */
 	if (note) {
@@ -160,6 +160,7 @@ int MeteorPatternGenerator::CreateOtherEvent(vector<Event*>* es)
 	 */
 	
 	if (!sm->GetSmInfo()->hasSectionData) {
+		LOG(LogLevel::Warning) << "MeteorPatternGenerator::CreateOtherEvent() : no section data.";
 
 		/* 先檢查是不是有小節資料，但是忘記標註HasSection，忘記標註的話就直接退出 */
 		for (int i = 0; i < es->size(); i++) {

@@ -31,7 +31,7 @@ Sm<Event>* SmConverter::Convert(Sm<Event>* s)
 	//}
 
 	for (int i = 0; i < sm->GetEvents()->size(); i++) {
-		LOG(LogLevel::Debug) << "SmConverter::Convert : sm event (cloned) [" << sm->GetEvents()->at(i)->GetTypeName() << "] at [" << sm->GetEvents()->at(i)->GetStartTime() << "].";
+		LOG(LogLevel::Depricated) << "SmConverter::Convert : sm event (cloned) [" << sm->GetEvents()->at(i)->GetTypeName() << "] at [" << sm->GetEvents()->at(i)->GetStartTime() << "].";
 	}
 
 	patternGenerator->Initialize(sm);
@@ -51,7 +51,7 @@ Sm<Event>* SmConverter::Convert(Sm<Event>* s)
 
 	for (int i = 0; i < originalEvents->size(); i++) {
 
-		LOG(LogLevel::Debug) << "Sm<Event>* SmConverter::Convert(Sm<Event>*) : converting #" << i << " event ..." << originalEvents->at(i)->GetTypeName() << " " << originalEvents->at(i)->GetStartTime();
+		LOG(LogLevel::Depricated) << "Sm<Event>* SmConverter::Convert(Sm<Event>*) : converting #" << i << " event ..." << originalEvents->at(i)->GetTypeName() << " " << originalEvents->at(i)->GetStartTime();
 		convertEvent(tempEvents, originalEvents->at(i));
 
 		for (int j = 0; j < tempEvents->size(); j++) {
