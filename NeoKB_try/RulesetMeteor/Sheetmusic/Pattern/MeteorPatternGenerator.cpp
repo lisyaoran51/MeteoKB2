@@ -127,7 +127,7 @@ Pattern* MeteorPatternGenerator::Generate(vector<Event*>* es, Event * e)
 	}
 
 	if (sectionStart) {
-		LOG(LogLevel::Debug) << "MeteorPatternGenerator::Generate() : generate repeat practice event." << sectionStart->GetStartTime();
+		LOG(LogLevel::Depricated) << "MeteorPatternGenerator::Generate() : generate repeat practice event." << sectionStart->GetStartTime();
 		return generateRepeatPracticeEvent(es, sectionStart);
 	}
 
