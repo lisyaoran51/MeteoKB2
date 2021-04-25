@@ -126,6 +126,7 @@ string Event::GetTypeName()
 
 Event * Event::Clone()
 {
+	LOG(LogLevel::Error) << "Event::Clone() : cloning [" << GetTypeName() << "] event at [" << startTime << "] to empty. Clone not set.";
 	return new Event(this);
 }
 
