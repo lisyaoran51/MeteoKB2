@@ -25,6 +25,15 @@ Sm<Event>* SmConverter::Convert(Sm<Event>* s)
 	LOG(LogLevel::Finer) << "Sm<Event>* SmConverter::Convert(Sm<Event>*) : Cloning sm ...";
 	Sm<Event>* sm = new Sm<Event>(s);
 
+	// debug
+	for (int i = 0; i < s->GetEvents()->size(); i++) {
+		LOG(LogLevel::Debug) << "SmConverter::Convert : sm event [" << s->GetEvents()->at(i)->GetTypeName() << "] at [" << s->GetEvents()->at(i)->GetStartTime() << "].";
+	}
+
+	for (int i = 0; i < sm->GetEvents()->size(); i++) {
+		LOG(LogLevel::Debug) << "SmConverter::Convert : sm event (cloned) [" << sm->GetEvents()->at(i)->GetTypeName() << "] at [" << sm->GetEvents()->at(i)->GetStartTime() << "].";
+	}
+
 	patternGenerator->Initialize(sm);
 
 	// 從sm讀出來的event
