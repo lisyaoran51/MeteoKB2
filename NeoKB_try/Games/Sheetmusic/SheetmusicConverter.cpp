@@ -26,9 +26,9 @@ Sm<Event>* SmConverter::Convert(Sm<Event>* s)
 	Sm<Event>* sm = new Sm<Event>(s);
 
 	// debug
-	for (int i = 0; i < s->GetEvents()->size(); i++) {
-		LOG(LogLevel::Debug) << "SmConverter::Convert : sm event [" << s->GetEvents()->at(i)->GetTypeName() << "] at [" << s->GetEvents()->at(i)->GetStartTime() << "].";
-	}
+	//for (int i = 0; i < s->GetEvents()->size(); i++) {
+	//	LOG(LogLevel::Debug) << "SmConverter::Convert : sm event [" << s->GetEvents()->at(i)->GetTypeName() << "] at [" << s->GetEvents()->at(i)->GetStartTime() << "].";
+	//}
 
 	for (int i = 0; i < sm->GetEvents()->size(); i++) {
 		LOG(LogLevel::Debug) << "SmConverter::Convert : sm event (cloned) [" << sm->GetEvents()->at(i)->GetTypeName() << "] at [" << sm->GetEvents()->at(i)->GetStartTime() << "].";
@@ -51,7 +51,7 @@ Sm<Event>* SmConverter::Convert(Sm<Event>* s)
 
 	for (int i = 0; i < originalEvents->size(); i++) {
 
-		LOG(LogLevel::Finest) << "Sm<Event>* SmConverter::Convert(Sm<Event>*) : converting #" << i << " event ..." << originalEvents->at(i)->GetStartTime();
+		LOG(LogLevel::Debug) << "Sm<Event>* SmConverter::Convert(Sm<Event>*) : converting #" << i << " event ..." << originalEvents->at(i)->GetTypeName() << " " << originalEvents->at(i)->GetStartTime();
 		convertEvent(tempEvents, originalEvents->at(i));
 
 		for (int j = 0; j < tempEvents->size(); j++) {
