@@ -23,7 +23,7 @@ namespace InstrumentEvents{
 
 		virtual int ControlInstrument() = 0;
 
-		virtual int SetIsTransfered() = 0;
+		virtual int SetIsTransfered(bool isTransfered = true) = 0;
 
 		virtual bool GetIsTransferable() = 0;
 
@@ -63,8 +63,8 @@ namespace InstrumentEvents{
 			return 0;
 		}
 
-		virtual int SetIsTransfered() {
-			isTransferable = false;
+		virtual int SetIsTransfered(bool isTransfered = true) {
+			isTransferable = !isTransfered;
 		}
 
 		virtual bool GetIsTransferable() {

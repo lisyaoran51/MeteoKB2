@@ -45,7 +45,7 @@ namespace IoEvents {
 
 		virtual int ProcessIo() = 0;
 
-		virtual int SetIsTransfered() = 0;
+		virtual int SetIsTransfered(bool iTransfered = true) = 0;
 
 		virtual bool GetIsTransferable() = 0;
 
@@ -84,7 +84,13 @@ namespace IoEvents {
 
 		T* GetIoEvent() { return dynamic_cast<T*>(event); }
 
-		virtual int SetIsTransfered() {
+		virtual int SetIsTransfered(bool iTransfered = true) {
+
+			if (!iTransfered) {
+				isTransferable = true;
+				return 0;
+			}
+
 			if (ioTransferType == IoTransferType::Once)
 				isTransferable = false;
 			else if (ioTransferType == IoTransferType::Timed) {

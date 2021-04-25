@@ -333,6 +333,37 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 					continue;
 				}
 			}
+
+			/* 如果是倒轉，就把這些event復原 */
+			if (eventProcessors[i]->GetEventProcessorType() == EventProcessorType::Io) {
+				IoEventProcessorInterface* ioEventProcessors = dynamic_cast<IoEventProcessorInterface*>(eventProcessors[i]);
+				if (ioEventProcessors) {
+					if (ioEventProcessors->GetStartTime() < currentTime && ioEventProcessors->GetIsTransferable()) {
+						ioEventProcessors->SetIsTransfered(false);
+					}
+				}
+				continue;
+			}
+
+			if (eventProcessors[i]->GetEventProcessorType() == EventProcessorType::Instrument) {
+				InstrumentEventProcessorInterface* instrumentEventProcessor = dynamic_cast<InstrumentEventProcessorInterface*>(eventProcessors[i]);
+				if (instrumentEventProcessor) {
+					if (instrumentEventProcessor->GetStartTime() < currentTime && instrumentEventProcessor->GetIsTransferable()) {
+						instrumentEventProcessor->SetIsTransfered(false);
+					}
+				}
+				continue;
+			}
+
+			if (eventProcessors[i]->GetEventProcessorType() == EventProcessorType::Time) {
+				TimeEventProcessorInterface* timeEventProcessor = dynamic_cast<TimeEventProcessorInterface*>(eventProcessors[i]);
+				if (timeEventProcessor) {
+					if (timeEventProcessor->GetStartTime() < currentTime && timeEventProcessor->GetIsProcessable()) {
+						//timeEventProcessor->SetIsProcessed(false);
+					}
+				}
+				continue;
+			}
 		}
 
 	}

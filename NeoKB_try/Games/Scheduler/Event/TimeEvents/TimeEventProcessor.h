@@ -28,7 +28,7 @@ namespace TimeEvents {
 
 		virtual int ControllTimeController() = 0;
 
-		virtual int SetIsProcessed() = 0;
+		virtual int SetIsProcessed(bool iProcessed = true) = 0;
 
 		virtual bool GetIsProcessable() = 0;
 
@@ -67,8 +67,8 @@ namespace TimeEvents {
 
 		T* GetTimeEvent() { return dynamic_cast<T*>(event); }
 
-		virtual int SetIsProcessed() {
-			isProcessed = true;
+		virtual int SetIsProcessed(bool iProcessed = true) {
+			isProcessed = iProcessed;
 			return 0;
 		}
 
