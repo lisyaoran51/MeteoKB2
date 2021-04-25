@@ -5,6 +5,7 @@
 #include "../../Games/Scheduler/Event/ControlPoints/InputKeyControlPoint.h"
 #include "../../Games/Scheduler/Event/ControlPoints/OctaveAutoControlPoint.h"
 #include "../../Games/Scheduler/Event/GameEvents/StartGameEvent.h"
+#include "../../Games/Scheduler/Event/ControlPoints/SectionStartControlPoint.h"
 
 
 
@@ -52,7 +53,7 @@ int MeteorSmConverter::convertEvent(vector<Event*>* es, Event* e)
 {
 
 	//LOG(LogLevel::Info) << "int MeteorSmConverter::convertEvent(vector<Event*>*, Event*) : Start converting events ...";
-
+	bool isConverted = false;
 	// 如果在讀檔的時候就是處理好的檔案，就直接付智一個然後回傳
 	// 但如果是多型的狀況，沒辦法這樣複製，要用clone
 	if (e->CanCast<Effect>()) {
@@ -68,7 +69,7 @@ int MeteorSmConverter::convertEvent(vector<Event*>* es, Event* e)
 		newPattern->SetOriginalEvent(e);
 
 		patternGenerator->Add(newPattern);
-
+		isConverted = true;
 	}
 
 	if (e->CanCast<InputKeyControlPoint>()) {
@@ -78,9 +79,22 @@ int MeteorSmConverter::convertEvent(vector<Event*>* es, Event* e)
 		newPattern->SetOriginalEvent(e);
 
 		patternGenerator->Add(newPattern);
-
+		isConverted = true;
 	}
 
+	if (e->CanCast<SectionStartControlPoint>()) {
+		// 踏板或移調特效。
+
+		Pattern* newPattern = patternGenerator->Generate(es, e);
+		newPattern->SetOriginalEvent(e);
+
+		patternGenerator->Add(newPattern);
+		isConverted = true;
+	}
+
+	if (!isConverted) {
+		LOG(LogLevel::Error) << "MeteorSmConverter::convertEvent() : event [" << e->GetTypeName() << "] not converted." << e->GetStartTime();
+	}
 
 
 	return 0;
