@@ -7,6 +7,7 @@
 #include "IoEvents/IoEventProcessor.h"
 #include "InstrumentEvents/InstrumentEventProcessor.h"
 #include "PlayfieldEvents/PlayfieldEventProcessor.h"
+#include "TimeEvents/TimeEventProcessor.h"
 #include "../../Output/Bluetooths/MeteoContextBluetoothMessage.h"
 #include "../../../Util/DataStructure/SecondPeriodList.h"
 
@@ -18,6 +19,7 @@ using namespace Games::Schedulers::Events::IoEvents;
 using namespace std;
 using namespace Games::Schedulers::Events::InstrumentEvents;
 using namespace Games::Schedulers::Events::PlayfieldEvents;
+using namespace Games::Schedulers::Events::TimeEvents;
 using namespace Games::Output::Bluetooths;
 using namespace Util::DataStructure;
 
@@ -236,6 +238,49 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 					}
 					continue;
 				}
+
+				if (eventProcessors[i]->GetEventProcessorType() == EventProcessorType::Time) {
+					TimeEventProcessorInterface* timeEventProcessor = dynamic_cast<TimeEventProcessorInterface*>(eventProcessors[i]);
+					if (timeEventProcessor) {
+						if (timeEventProcessor->GetStartTime() < currentTime && timeEventProcessor->GetIsProcessable()) {
+							LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent : found instrument event processor [" << timeEventProcessor->GetStartTime() << "].";
+							timeEventProcessor->ControllTimeController();
+						}
+					}
+					continue;
+				}
+			}
+			else {
+				/* 如果是在快轉狀態，就把這個event直接轉成已執行 */
+				if (eventProcessors[i]->GetEventProcessorType() == EventProcessorType::Io) {
+					IoEventProcessorInterface* ioEventProcessors = dynamic_cast<IoEventProcessorInterface*>(eventProcessors[i]);
+					if (ioEventProcessors) {
+						if (ioEventProcessors->GetStartTime() < currentTime && ioEventProcessors->GetIsTransferable()) {
+							ioEventProcessors->SetIsTransfered();
+						}
+					}
+					continue;
+				}
+
+				if (eventProcessors[i]->GetEventProcessorType() == EventProcessorType::Instrument) {
+					InstrumentEventProcessorInterface* instrumentEventProcessor = dynamic_cast<InstrumentEventProcessorInterface*>(eventProcessors[i]);
+					if (instrumentEventProcessor) {
+						if (instrumentEventProcessor->GetStartTime() < currentTime && instrumentEventProcessor->GetIsTransferable()) {
+							instrumentEventProcessor->SetIsTransfered();
+						}
+					}
+					continue;
+				}
+
+				if (eventProcessors[i]->GetEventProcessorType() == EventProcessorType::Time) {
+					TimeEventProcessorInterface* timeEventProcessor = dynamic_cast<TimeEventProcessorInterface*>(eventProcessors[i]);
+					if (timeEventProcessor) {
+						if (timeEventProcessor->GetStartTime() < currentTime && timeEventProcessor->GetIsProcessable()) {
+							timeEventProcessor->SetIsProcessed();
+						}
+					}
+					continue;
+				}
 			}
 
 			/* 由於playfield平移事件就算快轉也還是要執行，所以不用判斷time controller state */
@@ -249,6 +294,9 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 				}
 				continue;
 			}
+
+
+
 		}
 	}
 
