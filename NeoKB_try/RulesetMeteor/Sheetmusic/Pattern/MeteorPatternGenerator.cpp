@@ -109,6 +109,7 @@ Pattern* MeteorPatternGenerator::Generate(vector<Event*>* es, Event * e)
 	InputKeyControlPoint* inputKey = e->Cast<InputKeyControlPoint>();
 	SectionStartControlPoint* sectionStart = e->Cast<SectionStartControlPoint>();
 
+	LOG(LogLevel::Debug) << "MeteorPatternGenerator::Generate() : generate event [" << e->GetTypeName() << "] at [" << e->GetStartTime() << "].";
 
 	/* 鍵力音符的特效 */
 	if (note) {
