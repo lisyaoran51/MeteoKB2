@@ -13,3 +13,9 @@ string SectionStartControlPoint::GetTypeName()
 {
 	return "SectionStartControlPoint";
 }
+
+Event * SectionStartControlPoint::Clone()
+{
+
+	return new SectionStartControlPoint(sectionIndex, startTime, lifeTime);
+}
