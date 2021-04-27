@@ -283,14 +283,14 @@ int TimeController::ImportWorkingSm(WorkingSm * workingSm)
 	// TODO: 這邊要去分析整個sm，然後把每個小節的位置抓出來，每個段落的位置的抓出來，然後放進vector裡
 	vector<Event*>* events = workingSm->GetSm()->GetEvents();
 
-	int tempSection = 0;
+	int s = 0;
 	int tempPart = 0;
 	sectionStartTime.push_back(0);
 	partStartTime.push_back(0);
 
 	for (int i = 0; i < events->size(); i++) {
-		if (dynamic_cast<NoteControlPoint*>(events->at(i))->GetSectionIndex() > tempSection) {
-			tempSection++;
+		if (dynamic_cast<NoteControlPoint*>(events->at(i))->GetSectionIndex() > s) {
+			s++;
 			sectionStartTime.push_back(events->at(i)->GetStartTime());
 		}
 		if (dynamic_cast<NoteControlPoint*>(events->at(i))->GetPartIndex() > tempPart) {

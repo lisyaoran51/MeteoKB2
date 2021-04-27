@@ -14,8 +14,8 @@ RepeatPracticeModifier::RepeatPracticeModifier() : RegisterType("RepeatPracticeM
 
 RepeatPracticeModifier::RepeatPracticeModifier(int rSection, int rTimes) : RegisterType("RepeatPracticeModifier")
 {
-	repeatSections = rSection;
-	repeatTimes = rTimes;
+	maxSectionAmountForOneRepeat = rSection;
+	maxRepeatCounts = rTimes;
 }
 
 int RepeatPracticeModifier::ApplyToTimeController(TimeController * timeController)
@@ -27,16 +27,16 @@ int RepeatPracticeModifier::ApplyToTimeController(TimeController * timeControlle
 
 	meteorTimeController->SetTimeControllerMode(MeteorTimeControllerMode::RepeatPractice);
 
-	meteorTimeController->SetRepeatSections(repeatSections);
+	meteorTimeController->SetRepeatSections(maxSectionAmountForOneRepeat);
 
-	meteorTimeController->SetRepeatTimes(repeatTimes);
+	meteorTimeController->SetRepeatTimes(maxRepeatCounts);
 
 	return 0;
 }
 
 int RepeatPracticeModifier::SetValue(int value1, int value2)
 {
-	repeatSections = value1;
-	repeatTimes = value2;
+	maxSectionAmountForOneRepeat = value1;
+	maxRepeatCounts = value2;
 	return 0;
 }

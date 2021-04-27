@@ -97,6 +97,11 @@ namespace Timing {
 
 		MeteorTimeControllerMode timeControllerMode = MeteorTimeControllerMode::MusicGame;
 
+		/// <summary>
+		/// 在update時檢查有沒有被暫停，有的話就把自己時鐘停掉
+		/// </summary>
+		virtual int update();
+
 		virtual int LoadOnComplete();
 
 		/// <summary>
@@ -110,27 +115,27 @@ namespace Timing {
 		/// <summary>
 		/// 反覆練彈的開始小節
 		/// </summary>
-		int tempStartSection = 0;
+		int tempRepeatStartSection = 0;
 
 		/// <summary>
 		/// 反覆練彈依次幾小節
 		/// </summary>
-		int repeatSections = 1;
+		int maxSectionAmountForOneRepeat = 1;
 
 		/// <summary>
 		/// 目前彈到幾小節
 		/// </summary>
-		int tempSection = 0;
+		//int s = 0;
 
 		/// <summary>
-		/// 反覆練彈幾次
+		/// 每個循環要反覆練彈幾次
 		/// </summary>
-		int repeatTimes = 4;
+		int maxRepeatCounts = 4;
 
 		/// <summary>
-		/// 目前反覆談了幾次
+		/// 目前這個循環中反覆談了幾次
 		/// </summary>
-		int tempRepeatTimes = 0;
+		int tempRepeatCounts = 0;
 
 		/// <summary>
 		/// 目前是在一次中的示範還是練習

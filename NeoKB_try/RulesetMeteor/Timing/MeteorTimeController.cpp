@@ -36,7 +36,7 @@ bool MeteorTimeController::filterEventBySection(EventProcessor<Event>* eventProc
 
 	PlayableControlPoint* controlPoint = dynamic_cast<PlayableControlPoint*>(eventProcessor->GetEvent()->GetSourceEvent());
 	if (controlPoint) {
-		if (controlPoint->GetSectionIndex() < tempStartSection || controlPoint->GetSectionIndex() >= tempStartSection + repeatSections) {
+		if (controlPoint->GetSectionIndex() < tempRepeatStartSection || controlPoint->GetSectionIndex() >= tempRepeatStartSection + maxSectionAmountForOneRepeat) {
 			return false;
 		}
 	}
@@ -195,15 +195,15 @@ int MeteorTimeController::OnKnobTurn(pair<MeteorAction, int> action)
 		if (timeControllerMode == MeteorTimeControllerMode::RepeatPractice) {
 			if (turnValue > 0) {
 				/* 往後轉的時候，就跳到下個小節 */
-				speedAdjuster->SetSeekTime(GetClock()->GetCurrentTime() - sectionTime[tempStartSection + 1]);
-				tempStartSection++;
+				speedAdjuster->SetSeekTime(GetClock()->GetCurrentTime() - sectionTime[tempRepeatStartSection + 1]);
+				tempRepeatStartSection++;
 			}
 			else {
 				/* 往回轉的時候，就跳到上個小節 */
-				speedAdjuster->SetSeekTime(-(GetClock()->GetCurrentTime() - sectionTime[tempStartSection - 1]));
-				tempStartSection--;
+				speedAdjuster->SetSeekTime(-(GetClock()->GetCurrentTime() - sectionTime[tempRepeatStartSection - 1]));
+				tempRepeatStartSection--;
 			}
-			tempRepeatTimes = 0;
+			tempRepeatCounts = 0;
 		}
 		else if (timeControllerMode == MeteorTimeControllerMode::MusicGame) {
 
@@ -287,14 +287,14 @@ int MeteorTimeController::SetTimeControllerMode(MeteorTimeControllerMode tContro
 
 int MeteorTimeController::SetRepeatSections(int rSections)
 {
-	repeatSections = rSections;
+	maxSectionAmountForOneRepeat = rSections;
 
 	return 0;
 }
 
 int MeteorTimeController::SetRepeatTimes(int rTimes)
 {
-	repeatTimes = rTimes;
+	maxRepeatCounts = rTimes;
 	return 0;
 }
 
@@ -308,11 +308,11 @@ int MeteorTimeController::SetHasSection(bool hSection)
 int MeteorTimeController::RepeatSection(int section)
 {
 	/******************/
-	repeatSections = 2;
+	maxSectionAmountForOneRepeat = 2;
 	/******************/
 
-	/* 低於repeatSections的前幾個小節不反覆 */
-	if (section < repeatSections) {
+	/* 低於maxSectionAmountForOneRepeat的前幾個小節不反覆 */
+	if (section < maxSectionAmountForOneRepeat) {
 		LOG(LogLevel::Debug) << 0;
 		return -1;
 	}
@@ -321,28 +321,28 @@ int MeteorTimeController::RepeatSection(int section)
 		return -1;
 
 	/* 如果這個小節已經反覆過了，就不用再反覆 */
-	if (section <= tempStartSection + repeatSections) {
+	if (section <= tempRepeatStartSection + maxSectionAmountForOneRepeat) {
 		LOG(LogLevel::Debug) << 1;
 		return -1;
 	}
 
-	//if (tempSection + 1 < repeatSections) 
+	//if (s + 1 < maxSectionAmountForOneRepeat) 
 	//{
 	//	LOG(LogLevel::Debug) << 2;
-	//	tempSection++;
+	//	s++;
 	//	return 0;
 	//} 
 
 	// TODO: 切換Event processor filter
 	float totalRewindLength = 0;
 
-	if (tempRepeatTimes < repeatTimes) {
+	if (tempRepeatCounts < maxRepeatCounts) {
 
 		// 這個段落已經練完，開始練下一個段落
-		if (tempStartSection + repeatSections < section + 1) {
+		if (tempRepeatStartSection + maxSectionAmountForOneRepeat < section + 1) {
 			
 
-			if (tempRepeatTimes % 2 == 0) {
+			if (tempRepeatCounts % 2 == 0) {
 				eventProcessorFilter->SwitchVariant(0);	// 落下燈光示範
 				repeatPracticeMode = RepeatPracticeMode::Demonstrate;
 				LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : set filter to [" << 0 << "].";
@@ -365,32 +365,31 @@ int MeteorTimeController::RepeatSection(int section)
 
 		}
 
-		//tempSection = 0;
 
-		if (section + repeatSections == sectionTime.size())	// 代表整首歌已經都練完了
+		if (section + maxSectionAmountForOneRepeat == sectionTime.size())	// 代表整首歌已經都練完了
 			return 0; 
 		
-		LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : jump to [" << section << "], temp section is [" << tempSection << "], repeat time is [" << tempRepeatTimes << "], tempStartSection is [" << tempStartSection << "].";
+		LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : jump to seciton [" << section << "], repeat count is [" << tempRepeatCounts << "], now repeat start section is [" << tempRepeatStartSection << "].";
 
 
-		totalRewindLength = sectionTime[section + 1] - sectionTime[tempStartSection] + repeatBufferTime;	//額外多一秒緩衝時間
+		totalRewindLength = sectionTime[section + 1] - sectionTime[tempRepeatStartSection] + repeatBufferTime;	//額外多一秒緩衝時間
 
-		LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : total rewind length [" << totalRewindLength << "], section time [" << sectionTime[section + 1] << "], [" << sectionTime[tempStartSection] << "], section [" << section << "].";
+		LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : total rewind length [" << totalRewindLength << "], section time [" << sectionTime[section + 1] << "], [" << sectionTime[tempRepeatStartSection] << "], section [" << section << "].";
 
 		/* 這編讓光圈跑一圈，跑的時間是repeatBufferTime */
 		LightRingPanelMessage* message = new LightRingPanelMessage(repeatBufferTime);
 		LOG(LogLevel::Depricated) << "MeteorTimeController::RepeatSection : send i2c [" << message->ToString() << "].";
 		outputManager->PushMessage(message);
 
-		tempRepeatTimes++;
+		tempRepeatCounts++;
 	}
 	else {
 
 		totalRewindLength = 0;
-		tempStartSection++;
+		tempRepeatStartSection++;
 
-		if (tempStartSection + repeatSections < section + 1) {
-			tempRepeatTimes = 0;
+		if (tempRepeatStartSection + maxSectionAmountForOneRepeat < section + 1) {
+			tempRepeatCounts = 0;
 			RepeatSection(section);
 		}
 	}
@@ -412,12 +411,12 @@ int MeteorTimeController::RepeatSection(int section)
 	return 0;
 }
 
-//int MeteorTimeController::update()
-//{
-//	//if (controllableClock->GetCurrentTime() > sectionTime[tempSection])
-//	//	tempSection++;
-//	return MeteoTimeController<MeteorAction>::update();
-//}
+int MeteorTimeController::update()
+{
+	//if (controllableClock->GetCurrentTime() > sectionTime[s])
+	//	s++;
+	return MeteoTimeController<MeteorAction>::update();
+}
 
 int MeteorTimeController::LoadOnComplete()
 {
@@ -507,15 +506,15 @@ int MeteorTimeController::onKnobTurn(InputState * inputState, InputKey knob)
 		if (timeControllerMode == MeteorTimeControllerMode::RepeatPractice) {
 			if (turnValue > 0) {
 				/* 往後轉的時候，就跳到下個小節 */
-				speedAdjuster->SetSeekTime(GetClock()->GetCurrentTime() - sectionTime[tempStartSection + 1]);
-				tempStartSection++;
+				speedAdjuster->SetSeekTime(GetClock()->GetCurrentTime() - sectionTime[tempRepeatStartSection + 1]);
+				tempRepeatStartSection++;
 			}
 			else {
 				/* 往回轉的時候，就跳到上個小節 */
-				speedAdjuster->SetSeekTime(-(GetClock()->GetCurrentTime() - sectionTime[tempStartSection - 1]));
-				tempStartSection--;
+				speedAdjuster->SetSeekTime(-(GetClock()->GetCurrentTime() - sectionTime[tempRepeatStartSection - 1]));
+				tempRepeatStartSection--;
 			}
-			tempRepeatTimes = 0;
+			tempRepeatCounts = 0;
 		}
 		else if(timeControllerMode == MeteorTimeControllerMode::MusicGame){
 
