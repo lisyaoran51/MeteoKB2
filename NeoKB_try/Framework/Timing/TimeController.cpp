@@ -41,6 +41,8 @@ int TimeController::update()
 	if (controllableClock == nullptr || speedAdjuster == nullptr)
 		return 0;
 
+	LOG(LogLevel::Debug) << "TimeController::update() : " << controllableClock;
+
 	LOG(LogLevel::Finest) << "TimeController::update() : speed adjuster sync to source clock time [" << fixed << setprecision(5) << GetClock()->GetElapsedFrameTime() << "].";
 	speedAdjuster->ProcessFrame(GetClock()->GetElapsedFrameTime());
 	LOG(LogLevel::Finest) << "TimeController::update() : speed adjuster process over.";
@@ -189,8 +191,9 @@ int TimeController::SetSpeedAdjuster(SpeedAdjuster * sAdjuster)
 
 int TimeController::JumpTo(double seekTime)
 {
-	LOG(LogLevel::Debug) << "TimeController::JumpTo() : jump to [" << seekTime << "].";
+	LOG(LogLevel::Debug) << "TimeController::JumpTo() : jump to [" << seekTime << "]." << controllableClock;
 	controllableClock->Seek(seekTime);
+
 	return 0;
 }
 
