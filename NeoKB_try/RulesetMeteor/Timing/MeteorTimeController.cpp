@@ -308,7 +308,7 @@ int MeteorTimeController::SetHasSection(bool hSection)
 int MeteorTimeController::RepeatSection(int section)
 {
 	/******************/
-	//repeatSections = 2;
+	repeatSections = 2;
 	/******************/
 
 
