@@ -340,7 +340,7 @@ int MeteorTimeController::RepeatSection(int section)
 
 		// 這個段落已經練完，開始練下一個段落
 		if (tempStartSection + repeatSections < section + 1) {
-			//tempStartSection++;
+			
 
 			if (tempRepeatTimes % 2 == 0) {
 				eventProcessorFilter->SwitchVariant(0);	// 落下燈光示範
@@ -385,7 +385,7 @@ int MeteorTimeController::RepeatSection(int section)
 		tempRepeatTimes++;
 	}
 	else {
-		
+		tempStartSection++;
 		tempRepeatTimes = 0;
 		totalRewindLength = 0;
 		RepeatSection(section);
