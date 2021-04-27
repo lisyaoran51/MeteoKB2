@@ -324,16 +324,8 @@ int MeteorTimeController::RepeatSection(int section)
 		return 0;
 	}
 
-	tempSection = 0;
-
-	if (section + repeatSections == sectionTime.size())	// 代表整首歌已經都練完了
-		return 0;
-
-	float totalRewindLength = sectionTime[section + 1] - sectionTime[tempStartSection] + repeatBufferTime;	//額外多一秒緩衝時間
-
-	LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : total rewind length [" << totalRewindLength << "], section time [" << sectionTime[section + 1] << "], [" << sectionTime[tempStartSection] << "], section [" <<  section << "].";
-	
 	// TODO: 切換Event processor filter
+	float totalRewindLength = 0;
 
 	if (tempRepeatTimes < repeatTimes) {
 
@@ -350,6 +342,21 @@ int MeteorTimeController::RepeatSection(int section)
 			repeatPracticeMode == RepeatPracticeMode::Demonstrate;
 			tempRepeatTimes++;
 		}
+
+		tempSection = 0;
+
+		if (section + repeatSections == sectionTime.size())	// 代表整首歌已經都練完了
+			return 0;
+
+		totalRewindLength = sectionTime[section + 1] - sectionTime[tempStartSection] + repeatBufferTime;	//額外多一秒緩衝時間
+
+		LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : total rewind length [" << totalRewindLength << "], section time [" << sectionTime[section + 1] << "], [" << sectionTime[tempStartSection] << "], section [" << section << "].";
+
+		/* 這編讓光圈跑一圈，跑的時間是repeatBufferTime */
+		LightRingPanelMessage* message = new LightRingPanelMessage(repeatBufferTime);
+		LOG(LogLevel::Depricated) << "MeteorTimeController::RepeatSection : send i2c [" << message->ToString() << "].";
+		outputManager->PushMessage(message);
+
 	}
 	else {
 		// 這個段落已經練完，開始練下一個段落
@@ -358,16 +365,15 @@ int MeteorTimeController::RepeatSection(int section)
 		totalRewindLength = 0;
 	}
 
+	
+
 	if(totalRewindLength > 0)
 		JumpTo(controllableClock->GetCurrentTime() - totalRewindLength);
 	else
 		LOG(LogLevel::Debug) << 3;
 
 
-	/* 這編讓光圈跑一圈，跑的時間是repeatBufferTime */
-	LightRingPanelMessage* message = new LightRingPanelMessage(repeatBufferTime);
-	LOG(LogLevel::Depricated) << "MeteorTimeController::RepeatSection : send i2c [" << message->ToString() << "].";
-	outputManager->PushMessage(message);
+	
 
 	return 0;
 }
