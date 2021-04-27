@@ -322,12 +322,12 @@ int MeteorTimeController::RepeatSection(int section)
 		return -1;
 	}
 
-	if (tempSection + 1 < repeatSections) 
-	{
-		LOG(LogLevel::Debug) << 2;
-		tempSection++;
-		return 0;
-	}
+	//if (tempSection + 1 < repeatSections) 
+	//{
+	//	LOG(LogLevel::Debug) << 2;
+	//	tempSection++;
+	//	return 0;
+	//} 
 
 	// TODO: ¤Á´«Event processor filter
 	float totalRewindLength = 0;
