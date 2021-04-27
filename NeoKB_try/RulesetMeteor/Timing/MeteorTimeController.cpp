@@ -375,10 +375,10 @@ int MeteorTimeController::RepeatSection(int section)
 		LOG(LogLevel::Depricated) << "MeteorTimeController::RepeatSection : send i2c [" << message->ToString() << "].";
 		outputManager->PushMessage(message);
 
+		tempRepeatTimes++;
 	}
 	else {
 		
-		tempRepeatTimes++;
 		tempRepeatTimes = 0;
 		totalRewindLength = 0;
 		RepeatSection(section);
