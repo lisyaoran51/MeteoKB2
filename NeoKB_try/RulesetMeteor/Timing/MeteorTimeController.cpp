@@ -334,7 +334,34 @@ int MeteorTimeController::RepeatSection(int section)
 
 	if (tempRepeatTimes < repeatTimes) {
 
-		tempSection = 0;
+		// 這個段落已經練完，開始練下一個段落
+		if (tempStartSection + repeatSections < section + 1) {
+			//tempStartSection++;
+
+			if (tempRepeatTimes % 2 == 0) {
+				eventProcessorFilter->SwitchVariant(0);	// 落下燈光示範
+				repeatPracticeMode = RepeatPracticeMode::Demonstrate;
+				LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : set filter to [" << 0 << "].";
+			}
+			else {
+				eventProcessorFilter->SwitchVariant(1);	// 向上燈光練習
+				repeatPracticeMode = RepeatPracticeMode::Practice;
+				LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : set filter to [" << 1 << "].";
+			}
+
+			//if (repeatPracticeMode == RepeatPracticeMode::Demonstrate) {
+			//	eventProcessorFilter->SwitchVariant(0);	// 落下燈光示範
+			//	repeatPracticeMode == RepeatPracticeMode::Practice;
+			//}
+			//else {
+			//	eventProcessorFilter->SwitchVariant(1);	// 向上燈光練習
+			//	repeatPracticeMode == RepeatPracticeMode::Demonstrate;
+			//	
+			//}
+
+		}
+
+		//tempSection = 0;
 
 		if (section + repeatSections == sectionTime.size())	// 代表整首歌已經都練完了
 			return 0;
@@ -350,34 +377,8 @@ int MeteorTimeController::RepeatSection(int section)
 
 	}
 	else {
-		// 這個段落已經練完，開始練下一個段落
-		if (tempStartSection + repeatSections < section + 1) {
-			//tempStartSection++;
-
-			if (tempSection % 2 == 0) {
-				eventProcessorFilter->SwitchVariant(0);	// 落下燈光示範
-				repeatPracticeMode = RepeatPracticeMode::Demonstrate;
-				LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : set filter to [" << 0 << "].";
-			}
-			else {
-				eventProcessorFilter->SwitchVariant(1);	// 向上燈光練習
-				repeatPracticeMode = RepeatPracticeMode::Practice;
-				tempRepeatTimes++;
-				LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : set filter to [" << 1 << "].";
-			}
-
-			//if (repeatPracticeMode == RepeatPracticeMode::Demonstrate) {
-			//	eventProcessorFilter->SwitchVariant(0);	// 落下燈光示範
-			//	repeatPracticeMode == RepeatPracticeMode::Practice;
-			//}
-			//else {
-			//	eventProcessorFilter->SwitchVariant(1);	// 向上燈光練習
-			//	repeatPracticeMode == RepeatPracticeMode::Demonstrate;
-			//	
-			//}
-
-		}
-			
+		
+		tempRepeatTimes++;
 		tempRepeatTimes = 0;
 		totalRewindLength = 0;
 		RepeatSection(section);
