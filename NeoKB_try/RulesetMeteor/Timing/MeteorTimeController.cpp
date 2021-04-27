@@ -346,10 +346,11 @@ int MeteorTimeController::RepeatSection(int section)
 	else {
 		// 這個段落已經練完，開始練下一個段落
 		tempStartSection++;
-		totalRewindLength = sectionTime[section + 1] - sectionTime[tempStartSection] + repeatBufferTime;	//額外多一秒緩衝時間
+		totalRewindLength = 0;
 	}
 
-	JumpTo(controllableClock->GetCurrentTime() - totalRewindLength);
+	if(totalRewindLength > 0)
+		JumpTo(controllableClock->GetCurrentTime() - totalRewindLength);
 
 
 	/* 這編讓光圈跑一圈，跑的時間是repeatBufferTime */
