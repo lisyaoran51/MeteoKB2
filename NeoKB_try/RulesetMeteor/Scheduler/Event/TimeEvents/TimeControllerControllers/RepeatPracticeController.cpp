@@ -36,6 +36,7 @@ RepeatPracticeController::RepeatPracticeController(): RegisterType("RepeatPracti
 
 int RepeatPracticeController::implementControlTimeController(EventProcessor<Event>* e)
 {
+	LOG(LogLevel::Debug) << "RepeatPracticeController::implementControlTimeController() : repeat practice event [" << e << "].";
 	meteorTimeController->RepeatSection(dynamic_cast<RepeatPracticeEventProcessor*>(e)->GetRepeatSection());
 
 	return 0;
