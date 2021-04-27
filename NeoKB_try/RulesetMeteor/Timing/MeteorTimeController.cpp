@@ -312,7 +312,7 @@ int MeteorTimeController::RepeatSection(int section)
 	/******************/
 
 	/* 低於repeatSections的前幾個小節不反覆 */
-	if (section <repeatSections) {
+	if (section < repeatSections) {
 		LOG(LogLevel::Debug) << 0;
 		return -1;
 	}
@@ -385,7 +385,10 @@ int MeteorTimeController::RepeatSection(int section)
 		tempRepeatTimes++;
 	}
 	else {
-		tempStartSection++;
+
+		if(tempStartSection + repeatSections > section)
+			tempStartSection++;
+
 		tempRepeatTimes = 0;
 		totalRewindLength = 0;
 		RepeatSection(section);
