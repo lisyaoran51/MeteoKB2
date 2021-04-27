@@ -1,11 +1,13 @@
 #include "MeteorSheetmusicPostProcessor.h"
 
 #include "../Scheduler/Event/IoEvents/SustainPedalIoEvent.h"
+#include "../Scheduler/Event/TimeEvents/RepeatPracticeEvent.h"
 
 
 using namespace Meteor::Config;
 using namespace Meteor::Sheetmusics;
 using namespace Meteor::Schedulers::Events::IoEvents;
+using namespace Meteor::Schedulers::Events::TimeEvents;
 
 
 MeteorSmPostprocessor::MeteorSmPostprocessor() 
@@ -14,6 +16,32 @@ MeteorSmPostprocessor::MeteorSmPostprocessor()
 
 Sm<Event>* MeteorSmPostprocessor::postprocess(Sm<Event>* s)
 {
+	LOG(LogLevel::Fine) << "MeteorSmPostprocessor::postprocess() : Start sorting ...";
+
+	// true->a先，false->b先
+	sort(s->GetEvents()->begin(), s->GetEvents()->end(),
+		[](Event* const& a, Event* const& b) { 
+		
+		/* 如果有time event的話，一律time event優先 */
+		if (a->GetStartTime() == b->GetStartTime()) {
+			if (dynamic_cast<RepeatPracticeEvent*>(a)) {
+				return true;
+			}
+			if (dynamic_cast<RepeatPracticeEvent*>(b)) {
+				return false;
+			}
+		}
+		
+		return a->GetStartTime() < b->GetStartTime(); 
+	
+	});
+
+	// sort(s->GetEvents()->begin(), s->GetEvents()->end());
+	return s;
+
+
+
+
 	// 不對光圈做後處理，以後就踏多久，光圈就亮多久，不用提早顯示，也不用管下一個光圈在多久以後
 
 	return SmPostprocessor::postprocess(s);
