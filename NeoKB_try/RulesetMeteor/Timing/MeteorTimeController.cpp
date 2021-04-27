@@ -311,6 +311,10 @@ int MeteorTimeController::RepeatSection(int section)
 	if (speedAdjuster->GetIsAdjustingTime())
 		return -1;
 
+	/* 如果這個小節已經反覆過了，就不用再反覆 */
+	if (section + repeatSections <= tempStartSection)
+		return -1;
+
 	if (tempSection + 1 < repeatSections) {
 		tempSection++;
 		return 0;
@@ -346,6 +350,7 @@ int MeteorTimeController::RepeatSection(int section)
 	else {
 		// 這個段落已經練完，開始練下一個段落
 		tempStartSection++;
+		repeatTimes = 0;
 		totalRewindLength = 0;
 	}
 
