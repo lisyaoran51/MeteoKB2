@@ -360,6 +360,8 @@ int MeteorTimeController::RepeatSection(int section)
 
 	if(totalRewindLength > 0)
 		JumpTo(controllableClock->GetCurrentTime() - totalRewindLength);
+	else
+		LOG(LogLevel::Debug) << 3;
 
 
 	/* 這編讓光圈跑一圈，跑的時間是repeatBufferTime */
