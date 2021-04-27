@@ -322,6 +322,8 @@ int MeteorTimeController::RepeatSection(int section)
 		return 0;
 
 	float totalRewindLength = sectionTime[section + 1] - sectionTime[tempStartSection] + repeatBufferTime;	//額外多一秒緩衝時間
+
+	LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : total rewind length [" << totalRewindLength << "], section time [" << sectionTime[section + 1] << "], [" << sectionTime[tempStartSection] << "], section [" <<  section << "].";
 	
 	// TODO: 切換Event processor filter
 
@@ -357,6 +359,13 @@ int MeteorTimeController::RepeatSection(int section)
 
 	return 0;
 }
+
+//int MeteorTimeController::update()
+//{
+//	//if (controllableClock->GetCurrentTime() > sectionTime[tempSection])
+//	//	tempSection++;
+//	return MeteoTimeController<MeteorAction>::update();
+//}
 
 int MeteorTimeController::LoadOnComplete()
 {
