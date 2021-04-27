@@ -245,6 +245,7 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 						if (timeEventProcessor->GetStartTime() < currentTime && timeEventProcessor->GetIsProcessable()) {
 							LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent : found instrument event processor [" << timeEventProcessor->GetStartTime() << "].";
 							timeEventProcessor->ControllTimeController();
+							break;
 						}
 					}
 					continue;
