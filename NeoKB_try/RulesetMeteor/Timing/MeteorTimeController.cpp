@@ -313,9 +313,11 @@ int MeteorTimeController::RepeatSection(int section)
 
 	/* 如果這個小節已經反覆過了，就不用再反覆 */
 	if (section + repeatSections <= tempStartSection)
+		LOG(LogLevel::Debug) << 1;
 		return -1;
 
 	if (tempSection + 1 < repeatSections) {
+		LOG(LogLevel::Debug) << 2;
 		tempSection++;
 		return 0;
 	}
