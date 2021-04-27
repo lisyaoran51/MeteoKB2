@@ -334,20 +334,6 @@ int MeteorTimeController::RepeatSection(int section)
 
 	if (tempRepeatTimes < repeatTimes) {
 
-		/*
-		 * 這邊有個很大的問題，就是在倒退的時候，燈光還是會在，解決方法是1.先把燈光關掉，倒退完在打開 2.瞬間倒退，讓大家看不到 3.取消向上燈光
-		 * 現在用方法2，直接跳過去
-		 */
-		if (repeatPracticeMode == RepeatPracticeMode::Demonstrate) {
-			eventProcessorFilter->SwitchVariant(0);	// 落下燈光示範
-			repeatPracticeMode == RepeatPracticeMode::Practice;
-		}
-		else {
-			eventProcessorFilter->SwitchVariant(1);	// 向上燈光練習
-			repeatPracticeMode == RepeatPracticeMode::Demonstrate;
-			tempRepeatTimes++;
-		}
-
 		tempSection = 0;
 
 		if (section + repeatSections == sectionTime.size())	// 代表整首歌已經都練完了
@@ -365,14 +351,41 @@ int MeteorTimeController::RepeatSection(int section)
 	}
 	else {
 		// 這個段落已經練完，開始練下一個段落
-		if(tempStartSection + repeatSections < section + 1)
-			tempStartSection++;
+		if (tempStartSection + repeatSections < section + 1) {
+			//tempStartSection++;
+
+			if (tempSection % 2 == 0) {
+				eventProcessorFilter->SwitchVariant(0);	// 落下燈光示範
+				repeatPracticeMode = RepeatPracticeMode::Demonstrate;
+			}
+			else {
+				eventProcessorFilter->SwitchVariant(1);	// 向上燈光練習
+				repeatPracticeMode = RepeatPracticeMode::Practice;
+				tempRepeatTimes++;
+			}
+
+			//if (repeatPracticeMode == RepeatPracticeMode::Demonstrate) {
+			//	eventProcessorFilter->SwitchVariant(0);	// 落下燈光示範
+			//	repeatPracticeMode == RepeatPracticeMode::Practice;
+			//}
+			//else {
+			//	eventProcessorFilter->SwitchVariant(1);	// 向上燈光練習
+			//	repeatPracticeMode == RepeatPracticeMode::Demonstrate;
+			//	
+			//}
+
+		}
+			
 		tempRepeatTimes = 0;
 		totalRewindLength = 0;
 		RepeatSection(section);
 	}
 
-	
+
+	/*
+	 * 這邊有個很大的問題，就是在倒退的時候，燈光還是會在，解決方法是1.先把燈光關掉，倒退完在打開 2.瞬間倒退，讓大家看不到 3.取消向上燈光
+	 * 現在用方法2，直接跳過去
+	 */
 
 	if(totalRewindLength > 0)
 		JumpTo(controllableClock->GetCurrentTime() - totalRewindLength);
