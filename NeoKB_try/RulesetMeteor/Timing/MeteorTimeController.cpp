@@ -311,8 +311,12 @@ int MeteorTimeController::RepeatSection(int section)
 	repeatSections = 2;
 	/******************/
 
+	/* 低於repeatSections的前幾個小節不反覆 */
+	if (section <repeatSections) {
+		LOG(LogLevel::Debug) << 0;
+		return -1;
+	}
 
-	LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : jump to [" << section << "], temp section is [" << tempSection << "], repeat time is [" << tempRepeatTimes << "], tempStartSection is [" << tempStartSection << "].";
 	if (speedAdjuster->GetIsAdjustingTime())
 		return -1;
 
@@ -364,7 +368,10 @@ int MeteorTimeController::RepeatSection(int section)
 		//tempSection = 0;
 
 		if (section + repeatSections == sectionTime.size())	// 代表整首歌已經都練完了
-			return 0;
+			return 0; 
+		
+		LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : jump to [" << section << "], temp section is [" << tempSection << "], repeat time is [" << tempRepeatTimes << "], tempStartSection is [" << tempStartSection << "].";
+
 
 		totalRewindLength = sectionTime[section + 1] - sectionTime[tempStartSection] + repeatBufferTime;	//額外多一秒緩衝時間
 
