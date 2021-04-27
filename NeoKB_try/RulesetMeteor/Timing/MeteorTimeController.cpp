@@ -307,6 +307,11 @@ int MeteorTimeController::SetHasSection(bool hSection)
 
 int MeteorTimeController::RepeatSection(int section)
 {
+	/******************/
+	repeatSections = 2;
+	/******************/
+
+
 	LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : jump to [" << section << "], temp section is [" << tempSection << "], repeat time is [" << tempRepeatTimes << "], tempStartSection is [" << tempStartSection << "].";
 	if (speedAdjuster->GetIsAdjustingTime())
 		return -1;
