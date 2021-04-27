@@ -338,7 +338,7 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 			if (eventProcessors[i]->GetEventProcessorType() == EventProcessorType::Io) {
 				IoEventProcessorInterface* ioEventProcessors = dynamic_cast<IoEventProcessorInterface*>(eventProcessors[i]);
 				if (ioEventProcessors) {
-					if (ioEventProcessors->GetStartTime() < currentTime && ioEventProcessors->GetIsTransferable()) {
+					if (ioEventProcessors->GetStartTime() > currentTime && ioEventProcessors->GetStartTime() < currentTime - elapsedTime) {
 						ioEventProcessors->SetIsTransfered(false);
 					}
 				}
@@ -348,7 +348,8 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 			if (eventProcessors[i]->GetEventProcessorType() == EventProcessorType::Instrument) {
 				InstrumentEventProcessorInterface* instrumentEventProcessor = dynamic_cast<InstrumentEventProcessorInterface*>(eventProcessors[i]);
 				if (instrumentEventProcessor) {
-					if (instrumentEventProcessor->GetStartTime() < currentTime && instrumentEventProcessor->GetIsTransferable()) {
+
+					if (instrumentEventProcessor->GetStartTime() > currentTime && instrumentEventProcessor->GetStartTime() < currentTime - elapsedTime) {
 						instrumentEventProcessor->SetIsTransfered(false);
 					}
 				}
@@ -358,7 +359,7 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 			if (eventProcessors[i]->GetEventProcessorType() == EventProcessorType::Time) {
 				TimeEventProcessorInterface* timeEventProcessor = dynamic_cast<TimeEventProcessorInterface*>(eventProcessors[i]);
 				if (timeEventProcessor) {
-					if (timeEventProcessor->GetStartTime() < currentTime && timeEventProcessor->GetIsProcessable()) {
+					if (timeEventProcessor->GetStartTime() > currentTime && timeEventProcessor->GetStartTime() < currentTime - elapsedTime) {
 						//timeEventProcessor->SetIsProcessed(false);
 					}
 				}
