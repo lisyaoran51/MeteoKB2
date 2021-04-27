@@ -369,6 +369,7 @@ int MeteorTimeController::RepeatSection(int section)
 			tempStartSection++;
 		tempRepeatTimes = 0;
 		totalRewindLength = 0;
+		RepeatSection(section);
 	}
 
 	
