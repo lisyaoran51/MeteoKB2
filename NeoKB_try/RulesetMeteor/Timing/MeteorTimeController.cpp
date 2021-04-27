@@ -357,11 +357,13 @@ int MeteorTimeController::RepeatSection(int section)
 			if (tempSection % 2 == 0) {
 				eventProcessorFilter->SwitchVariant(0);	// 落下燈光示範
 				repeatPracticeMode = RepeatPracticeMode::Demonstrate;
+				LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : set filter to [" << 0 << "].";
 			}
 			else {
 				eventProcessorFilter->SwitchVariant(1);	// 向上燈光練習
 				repeatPracticeMode = RepeatPracticeMode::Practice;
 				tempRepeatTimes++;
+				LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : set filter to [" << 1 << "].";
 			}
 
 			//if (repeatPracticeMode == RepeatPracticeMode::Demonstrate) {

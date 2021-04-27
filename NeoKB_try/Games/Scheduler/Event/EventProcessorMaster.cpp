@@ -400,6 +400,8 @@ Map * EventProcessorMaster::GetGraph()
 	//LOG(LogLevel::Depricated) << "EventProcessorMaster::GetGraph : filter event processors.";
 	//eventProcessorFilter->Filter(&eventProcessors);
 
+	
+
 	LOG(LogLevel::Depricated) << "EventProcessorMaster::GetGraph() : get graph from [" << eventProcessors.size() << "] processors in (" << currentTime - visibleTimeRange  << "," << currentTime + visibleTimeRange << ") seconds."
 		<< [](vector<EventProcessor<Event>*>& eProcessors) {
 
@@ -412,7 +414,9 @@ Map * EventProcessorMaster::GetGraph()
 	for (int i = 0; i < eventProcessors.size(); i++) {
 		EffectMapperInterface* effectMapper = dynamic_cast<EffectMapperInterface*>(eventProcessors[i]);
 		if (effectMapper) {
-			effectMapper->Draw(graph);
+			/* 檢查有沒有被濾掉 */
+			if(eventProcessorFilter->GameTimeFilter(effectMapper))
+				effectMapper->Draw(graph);
 		}
 	}
 
