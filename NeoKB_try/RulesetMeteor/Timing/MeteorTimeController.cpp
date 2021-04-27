@@ -350,7 +350,7 @@ int MeteorTimeController::RepeatSection(int section)
 	else {
 		// 這個段落已經練完，開始練下一個段落
 		tempStartSection++;
-		repeatTimes = 0;
+		tempRepeatTimes = 0;
 		totalRewindLength = 0;
 	}
 
