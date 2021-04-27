@@ -26,7 +26,7 @@ int JudgementFlasher::FlashJudgement(Judgement * judgement)
 {
 	//outputManager...
 
-	LOG(LogLevel::Info) << "JudgementFlasher::FlashJudgement : Flashing Judgement [" << judgement->GetResultString() << "].";
+	LOG(LogLevel::Fine) << "JudgementFlasher::FlashJudgement : Flashing Judgement [" << judgement->GetResultString() << "].";
 
 	return 0;
 }

@@ -144,7 +144,7 @@ int ScoreProcessor::addUpJudgementScore(Judgement * judgement)
 	LOG(LogLevel::Depricated) << "ScoreProcessor::addUpJudgementScore : add score [" << judgement->GetResultScore() << "], total score [" 
 		<< baseScore << "], song max score [" << maxScore << "].";
 
-	LOG(LogLevel::Debug) << "ScoreProcessor::addUpJudgementScore : add score [" << judgement->GetResultScore() << "], score ["
+	LOG(LogLevel::Depricated) << "ScoreProcessor::addUpJudgementScore : add score [" << judgement->GetResultScore() << "], score ["
 		<< baseScore << "/" << maxScore << "], hits [" << hits - miss << "/ " << maxHits << "], combo [" 
 		<< combo->GetValue() <<"/" << highestCombo->GetValue() << "], [" << fixed << setprecision(1) << (float)baseScore / (float)maxScore * 100.f << "%], progress ["
 		<< hits << "/" << maxHits << "].";

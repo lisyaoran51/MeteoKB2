@@ -52,7 +52,7 @@ int NoteControlPointHitObject::CheckForJudgement(bool isUserTriggered, double ti
 	LOG(LogLevel::Depricated) << "NoteControlPointHitObject::CheckForJudgement() : checking if judgement is hit.";
 
 
-	LOG(LogLevel::Debug) << "HitObject::UpdateJudgement() : Hit Object [" << GetStartTime() << "] [" << (int)GetPitch() << "] check judgement on [" << GetCurrentTime() << "].";
+	LOG(LogLevel::Depricated) << "HitObject::UpdateJudgement() : Hit Object [" << GetStartTime() << "] [" << (int)GetPitch() << "] check judgement on [" << GetCurrentTime() << "].";
 
 	double offset = fabs(timeOffset);
 

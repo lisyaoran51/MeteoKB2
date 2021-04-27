@@ -41,12 +41,6 @@ int TimeController::update()
 	if (controllableClock == nullptr || speedAdjuster == nullptr)
 		return 0;
 
-	try {
-		LOG(LogLevel::Debug) << "TimeController::update() : " << controllableClock->GetCurrentTime() << " " << controllableClock;
-	}
-	catch (exception& e) {
-
-	}
 	
 
 	LOG(LogLevel::Finest) << "TimeController::update() : speed adjuster sync to source clock time [" << fixed << setprecision(5) << GetClock()->GetElapsedFrameTime() << "].";
