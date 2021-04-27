@@ -31,11 +31,11 @@ int PianoController::implementControlInstrument(EventProcessor<Event>* e)
 
 	if (pianoEvent->GetInput().first == InputKey::SustainPedal) {
 		if (pianoEvent->GetInput().second >= 0) {
-			LOG(LogLevel::Debug) << "PianoController::implementControlInstrument : press down pedal.";
+			LOG(LogLevel::Depricated) << "PianoController::implementControlInstrument : press down pedal.";
 			piano->ControlSustainPedal(true);
 		}
 		else {
-			LOG(LogLevel::Debug) << "PianoController::implementControlInstrument : release pedal.";
+			LOG(LogLevel::Depricated) << "PianoController::implementControlInstrument : release pedal.";
 			piano->ControlSustainPedal(false);
 		}
 	}
