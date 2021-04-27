@@ -361,7 +361,7 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 				TimeEventProcessorInterface* timeEventProcessor = dynamic_cast<TimeEventProcessorInterface*>(eventProcessors[i]);
 				if (timeEventProcessor) {
 					if (timeEventProcessor->GetStartTime() > currentTime && timeEventProcessor->GetStartTime() < currentTime - elapsedTime) {
-						//timeEventProcessor->SetIsProcessed(false);
+						timeEventProcessor->SetIsProcessed(false);
 					}
 				}
 				continue;
