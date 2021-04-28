@@ -279,6 +279,7 @@ int MeteorTimeController::SetTimeControllerMode(MeteorTimeControllerMode tContro
 		// 1是練習模式
 		eventProcessorFilter->AddVariantFilterCallback(bind(&MeteorTimeController::filterFallEffect, this, placeholders::_1), 1);
 
+		eventProcessorFilter->SwitchVariant(0);
 	}
 
 
@@ -336,7 +337,7 @@ int MeteorTimeController::RepeatSection(int section)
 	// TODO: 切換Event processor filter
 	float totalRewindLength = 0;
 
-	if (tempRepeatCounts < maxRepeatCounts) {
+	if (tempRepeatCounts < maxRepeatCounts - 1) {
 
 		// 這個段落已經練完，開始練下一個段落
 		if (tempRepeatStartSection + maxSectionAmountForOneRepeat < section + 1) {
