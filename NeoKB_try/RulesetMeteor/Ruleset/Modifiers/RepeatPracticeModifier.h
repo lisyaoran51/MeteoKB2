@@ -30,9 +30,9 @@ namespace Modifiers{
 
 	protected:
 
-		int maxSectionRepeatTimes = 1;
+		int maxSectionAmountForOneRepeat = 1;
 
-		int repeatTimes = 4;
+		int maxRepeatCounts = 4;
 
 	};
 

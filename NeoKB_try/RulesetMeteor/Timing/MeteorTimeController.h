@@ -118,7 +118,7 @@ namespace Timing {
 		int tempRepeatStartSection = 0;
 
 		/// <summary>
-		/// 反覆練彈依次幾小節
+		/// 每一次反覆練彈內含幾小節
 		/// </summary>
 		int maxSectionAmountForOneRepeat = 1;
 
