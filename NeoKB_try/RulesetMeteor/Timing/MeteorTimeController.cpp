@@ -310,6 +310,7 @@ int MeteorTimeController::RepeatSection(int section)
 {
 	/******************/
 	maxSectionAmountForOneRepeat = 2;
+	maxRepeatCounts = 3;
 	/******************/
 
 	/* 低於maxSectionAmountForOneRepeat的前幾個小節不反覆 */
@@ -343,7 +344,7 @@ int MeteorTimeController::RepeatSection(int section)
 		if (tempRepeatStartSection + maxSectionAmountForOneRepeat < section + 1) {
 			
 
-			if (tempRepeatCounts % 2 == 0) {
+			if (tempRepeatCounts % 2 == 1) {
 				eventProcessorFilter->SwitchVariant(0);	// 落下燈光示範
 				repeatPracticeMode = RepeatPracticeMode::Demonstrate;
 				LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : set filter to [" << 0 << "].";
@@ -388,8 +389,13 @@ int MeteorTimeController::RepeatSection(int section)
 
 		totalRewindLength = 0;
 		tempRepeatStartSection++;
+		repeatPracticeMode = RepeatPracticeMode::Demonstrate;
 
 		if (tempRepeatStartSection + maxSectionAmountForOneRepeat < section + 1) {
+			eventProcessorFilter->SwitchVariant(0);	// 落下燈光示範
+			
+			LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : set filter to [" << 0 << "].";
+
 			tempRepeatCounts = 0;
 			RepeatSection(section);
 		}
