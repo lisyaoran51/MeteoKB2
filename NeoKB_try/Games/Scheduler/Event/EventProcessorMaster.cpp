@@ -208,17 +208,17 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 		}
 
 
-		for (int i = 0; i < eventProcessors.size(); i++) {
+		for (int i = 0; i < filteredTempStaticEventProcessors.size(); i++) {
 
-			LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent : this processor is for [" << eventProcessors[i]->GetEvent()->GetTypeName() << "].";
+			LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent : this processor is for [" << filteredTempStaticEventProcessors[i]->GetEvent()->GetTypeName() << "].";
 
-			if (eventProcessors[i]->GetStartTime() >= currentTime)
+			if (filteredTempStaticEventProcessors[i]->GetStartTime() >= currentTime)
 				continue;
 
 			if (timeController->GetTimeControllerState() != TimeControllerState::FastForward) {
 				// TODO: 直接改成 eventProcessor.Process()就好，下面可以全部刪掉
-				if (eventProcessors[i]->GetEventProcessorType() == EventProcessorType::Io) {
-					IoEventProcessorInterface* ioEventProcessors = dynamic_cast<IoEventProcessorInterface*>(eventProcessors[i]);
+				if (filteredTempStaticEventProcessors[i]->GetEventProcessorType() == EventProcessorType::Io) {
+					IoEventProcessorInterface* ioEventProcessors = dynamic_cast<IoEventProcessorInterface*>(filteredTempStaticEventProcessors[i]);
 					if (ioEventProcessors) {
 						if (ioEventProcessors->GetStartTime() < currentTime && ioEventProcessors->GetIsTransferable()) {
 							LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent : found io event processor [" << ioEventProcessors->GetStartTime() << "].";
@@ -228,8 +228,8 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 					continue;
 				}
 
-				if (eventProcessors[i]->GetEventProcessorType() == EventProcessorType::Instrument) {
-					InstrumentEventProcessorInterface* instrumentEventProcessor = dynamic_cast<InstrumentEventProcessorInterface*>(eventProcessors[i]);
+				if (filteredTempStaticEventProcessors[i]->GetEventProcessorType() == EventProcessorType::Instrument) {
+					InstrumentEventProcessorInterface* instrumentEventProcessor = dynamic_cast<InstrumentEventProcessorInterface*>(filteredTempStaticEventProcessors[i]);
 					if (instrumentEventProcessor) {
 						if (instrumentEventProcessor->GetStartTime() < currentTime && instrumentEventProcessor->GetIsTransferable()) {
 							LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent : found instrument event processor [" << instrumentEventProcessor->GetStartTime() << "].";
@@ -253,8 +253,8 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 			}
 			else {
 				/* 如果是在快轉狀態，就把這個event直接轉成已執行 */
-				if (eventProcessors[i]->GetEventProcessorType() == EventProcessorType::Io) {
-					IoEventProcessorInterface* ioEventProcessors = dynamic_cast<IoEventProcessorInterface*>(eventProcessors[i]);
+				if (filteredTempStaticEventProcessors[i]->GetEventProcessorType() == EventProcessorType::Io) {
+					IoEventProcessorInterface* ioEventProcessors = dynamic_cast<IoEventProcessorInterface*>(filteredTempStaticEventProcessors[i]);
 					if (ioEventProcessors) {
 						if (ioEventProcessors->GetStartTime() < currentTime && ioEventProcessors->GetIsTransferable()) {
 							ioEventProcessors->SetIsTransfered();
@@ -263,8 +263,8 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 					continue;
 				}
 
-				if (eventProcessors[i]->GetEventProcessorType() == EventProcessorType::Instrument) {
-					InstrumentEventProcessorInterface* instrumentEventProcessor = dynamic_cast<InstrumentEventProcessorInterface*>(eventProcessors[i]);
+				if (filteredTempStaticEventProcessors[i]->GetEventProcessorType() == EventProcessorType::Instrument) {
+					InstrumentEventProcessorInterface* instrumentEventProcessor = dynamic_cast<InstrumentEventProcessorInterface*>(filteredTempStaticEventProcessors[i]);
 					if (instrumentEventProcessor) {
 						if (instrumentEventProcessor->GetStartTime() < currentTime && instrumentEventProcessor->GetIsTransferable()) {
 							instrumentEventProcessor->SetIsTransfered();
@@ -273,8 +273,8 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 					continue;
 				}
 
-				if (eventProcessors[i]->GetEventProcessorType() == EventProcessorType::Time) {
-					TimeEventProcessorInterface* timeEventProcessor = dynamic_cast<TimeEventProcessorInterface*>(eventProcessors[i]);
+				if (filteredTempStaticEventProcessors[i]->GetEventProcessorType() == EventProcessorType::Time) {
+					TimeEventProcessorInterface* timeEventProcessor = dynamic_cast<TimeEventProcessorInterface*>(filteredTempStaticEventProcessors[i]);
 					if (timeEventProcessor) {
 						if (timeEventProcessor->GetStartTime() < currentTime && timeEventProcessor->GetIsProcessable()) {
 							timeEventProcessor->SetIsProcessed();
@@ -285,8 +285,8 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 			}
 
 			/* 由於playfield平移事件就算快轉也還是要執行，所以不用判斷time controller state */
-			if (eventProcessors[i]->GetEventProcessorType() == EventProcessorType::Playfield) {
-				PlayfieldEventProcessorInterface* playfieldEventProcessor = dynamic_cast<PlayfieldEventProcessorInterface*>(eventProcessors[i]);
+			if (filteredTempStaticEventProcessors[i]->GetEventProcessorType() == EventProcessorType::Playfield) {
+				PlayfieldEventProcessorInterface* playfieldEventProcessor = dynamic_cast<PlayfieldEventProcessorInterface*>(filteredTempStaticEventProcessors[i]);
 				if (playfieldEventProcessor) {
 					if (playfieldEventProcessor->GetStartTime() < currentTime && playfieldEventProcessor->GetIsControllable()) {
 						LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent : found playfield event processor [" << playfieldEventProcessor->GetStartTime() << "].";
@@ -322,10 +322,10 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 			filteredTempStaticEventProcessors.assign(eventProcessors.begin(), eventProcessors.end());
 		}
 
-		for (int i = 0; i < eventProcessors.size(); i++) {
+		for (int i = 0; i < filteredTempStaticEventProcessors.size(); i++) {
 
-			if (eventProcessors[i]->GetEventProcessorType() == EventProcessorType::Playfield) {
-				PlayfieldEventProcessorInterface* playfieldEventProcessor = dynamic_cast<PlayfieldEventProcessorInterface*>(eventProcessors[i]);
+			if (filteredTempStaticEventProcessors[i]->GetEventProcessorType() == EventProcessorType::Playfield) {
+				PlayfieldEventProcessorInterface* playfieldEventProcessor = dynamic_cast<PlayfieldEventProcessorInterface*>(filteredTempStaticEventProcessors[i]);
 				if (playfieldEventProcessor) {
 					if (playfieldEventProcessor->GetStartTime() > currentTime && playfieldEventProcessor->GetStartTime() < currentTime - elapsedTime) {
 						LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent : found playfield event processor [" << playfieldEventProcessor->GetStartTime() << "].";
@@ -336,8 +336,8 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 			}
 
 			/* 如果是倒轉，就把這些event復原 */
-			if (eventProcessors[i]->GetEventProcessorType() == EventProcessorType::Io) {
-				IoEventProcessorInterface* ioEventProcessors = dynamic_cast<IoEventProcessorInterface*>(eventProcessors[i]);
+			if (filteredTempStaticEventProcessors[i]->GetEventProcessorType() == EventProcessorType::Io) {
+				IoEventProcessorInterface* ioEventProcessors = dynamic_cast<IoEventProcessorInterface*>(filteredTempStaticEventProcessors[i]);
 				if (ioEventProcessors) {
 					if (ioEventProcessors->GetStartTime() > currentTime && ioEventProcessors->GetStartTime() < currentTime - elapsedTime) {
 						ioEventProcessors->SetIsTransfered(false);
@@ -346,8 +346,8 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 				continue;
 			}
 
-			if (eventProcessors[i]->GetEventProcessorType() == EventProcessorType::Instrument) {
-				InstrumentEventProcessorInterface* instrumentEventProcessor = dynamic_cast<InstrumentEventProcessorInterface*>(eventProcessors[i]);
+			if (filteredTempStaticEventProcessors[i]->GetEventProcessorType() == EventProcessorType::Instrument) {
+				InstrumentEventProcessorInterface* instrumentEventProcessor = dynamic_cast<InstrumentEventProcessorInterface*>(filteredTempStaticEventProcessors[i]);
 				if (instrumentEventProcessor) {
 
 					if (instrumentEventProcessor->GetStartTime() > currentTime && instrumentEventProcessor->GetStartTime() < currentTime - elapsedTime) {
@@ -357,8 +357,8 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 				continue;
 			}
 
-			if (eventProcessors[i]->GetEventProcessorType() == EventProcessorType::Time) {
-				TimeEventProcessorInterface* timeEventProcessor = dynamic_cast<TimeEventProcessorInterface*>(eventProcessors[i]);
+			if (filteredTempStaticEventProcessors[i]->GetEventProcessorType() == EventProcessorType::Time) {
+				TimeEventProcessorInterface* timeEventProcessor = dynamic_cast<TimeEventProcessorInterface*>(filteredTempStaticEventProcessors[i]);
 				if (timeEventProcessor) {
 					if (timeEventProcessor->GetStartTime() > currentTime && timeEventProcessor->GetStartTime() < currentTime - elapsedTime) {
 						timeEventProcessor->SetIsProcessed(false);

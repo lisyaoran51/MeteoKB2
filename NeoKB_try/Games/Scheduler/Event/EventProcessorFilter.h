@@ -37,9 +37,14 @@ namespace Events {
 		int load();
 
 		/// <summary>
-		/// 一定會執行，如果允許救回傳true，如果被刪除就回傳false
+		/// 一定會執行，如果允許救回傳true，如果被刪除就回傳false。會在遊戲開始之前就執行
 		/// </summary>
 		vector<function<bool(EventProcessor<Event>*)>> filterCallbacks;
+
+		/// <summary>
+		/// 一定會執行，如果允許救回傳true，如果被刪除就回傳false。會在遊戲開始後隨時執行
+		/// </summary>
+		vector<function<bool(EventProcessor<Event>*)>> dynamicFilterCallbacks;
 
 		/// <summary>
 		/// 只有選擇某一variant時才會執行，如果允許救回傳true，如果被刪除就回傳false
@@ -63,6 +68,8 @@ namespace Events {
 		EventProcessorFilter();
 
 		int AddFilterCallback(function<bool(EventProcessor<Event>*)> filterCallback);
+
+		int AddDynamicFilterCallback(function<bool(EventProcessor<Event>*)> dFilterCallback);
 		
 		int AddVariantFilterCallback(function<bool(EventProcessor<Event>*)> filterCallback, int v);
 

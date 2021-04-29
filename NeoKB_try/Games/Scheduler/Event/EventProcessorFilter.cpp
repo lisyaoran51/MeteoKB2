@@ -25,6 +25,13 @@ int EventProcessorFilter::AddFilterCallback(function<bool(EventProcessor<Event>*
 	return 0;
 }
 
+int EventProcessorFilter::AddDynamicFilterCallback(function<bool(EventProcessor<Event>*)> dFilterCallback)
+{
+	dynamicFilterCallbacks.push_back(dFilterCallback);
+
+	return 0;
+}
+
 int EventProcessorFilter::AddVariantFilterCallback(function<bool(EventProcessor<Event>*)> filterCallback, int v)
 {
 	variantFilterCallbacks.insert(pair<int, function<bool(EventProcessor<Event>*)>>(v, filterCallback));
@@ -102,6 +109,11 @@ bool EventProcessorFilter::Filter(EventProcessor<Event>* eventProcessor)
 
 bool EventProcessorFilter::GameTimeFilter(EventProcessor<Event>* eventProcessor)
 {
+	for (int i = 0; i < dynamicFilterCallbacks.size(); i++) {
+		if (!dynamicFilterCallbacks[i](eventProcessor))
+			return false;
+	}
+
 	LOG(LogLevel::Depricated) << "EventProcessorFilter::Filter : filter variant callbacks." << variantFilterCallbacks.size();
 	for (multimap<int, function<bool(EventProcessor<Event>*)>>::iterator i = variantFilterCallbacks.begin(); i != variantFilterCallbacks.end(); i++) {
 		if ((*i).first == variant)

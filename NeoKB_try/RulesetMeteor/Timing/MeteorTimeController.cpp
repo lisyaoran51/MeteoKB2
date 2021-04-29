@@ -33,6 +33,9 @@ int MeteorTimeController::loadOnComplete(EventProcessorFilter * e)
 
 bool MeteorTimeController::filterEventBySection(EventProcessor<Event>* eventProcessor)
 {
+	/* 如果是repeat practice event就不用被filter掉 */
+	if (eventProcessor->GetEventProcessorType() == EventProcessorType::Time)
+		return true;
 
 	PlayableControlPoint* controlPoint = dynamic_cast<PlayableControlPoint*>(eventProcessor->GetEvent()->GetSourceEvent());
 	if (controlPoint) {
@@ -271,7 +274,7 @@ int MeteorTimeController::SetTimeControllerMode(MeteorTimeControllerMode tContro
 
 	if (tControllerMode == MeteorTimeControllerMode::RepeatPractice) {
 
-		eventProcessorFilter->AddFilterCallback(bind(&MeteorTimeController::filterEventBySection, this, placeholders::_1));
+		eventProcessorFilter->AddDynamicFilterCallback(bind(&MeteorTimeController::filterEventBySection, this, placeholders::_1));
 
 		// 0是示範模式
 		eventProcessorFilter->AddVariantFilterCallback(bind(&MeteorTimeController::filterEruptEffect, this, placeholders::_1), 0);
