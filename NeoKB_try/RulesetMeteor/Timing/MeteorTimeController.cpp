@@ -313,7 +313,7 @@ int MeteorTimeController::RepeatSection(int section)
 {
 	/******************/
 	maxSectionAmountForOneRepeat = 2;
-	maxRepeatCounts = 3;
+	maxRepeatCounts = 4;
 	/******************/
 
 	/* 低於maxSectionAmountForOneRepeat的前幾個小節不反覆 */
