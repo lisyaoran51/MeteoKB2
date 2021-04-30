@@ -13,7 +13,7 @@ namespace Config{
 
 	enum class MeteorSetting;
 
-	class MeteorConfigManager: public ConfigManager<MeteorSetting> {
+	class MeteorConfigManager: public TConfigManager<MeteorSetting> {
 
 	public:
 

@@ -13,7 +13,7 @@ namespace Config{
 
 	enum class InstantSetting;
 
-	class InstantConfigManager : public ConfigManager<InstantSetting> {
+	class InstantConfigManager : public TConfigManager<InstantSetting> {
 
 	public:
 

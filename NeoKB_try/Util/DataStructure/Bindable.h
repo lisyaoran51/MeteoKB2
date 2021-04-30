@@ -92,7 +92,7 @@ namespace DataStructure {
 		/// We will take on any value limitations of the bindable we bind width.
 		/// this BindTo other是指this的資料都被other覆蓋
 		/// </summary>
-		/// <param name="other">The foreign bindable. This should always be the most permanent end of the bind (ie. a ConfigManager)</param>
+		/// <param name="other">The foreign bindable. This should always be the most permanent end of the bind (ie. a TConfigManager)</param>
 		int BindTo(Bindable<T>* other) {
 
 			LOG(LogLevel::Fine) << "Bindable::BindTo() : type = [" << typeid(other).name() << "] binding [" << other << "].";

@@ -1,7 +1,7 @@
 #ifndef FRAMEWORK_CONFIG_MANAGER_H
 #define FRAMEWORK_CONFIG_MANAGER_H
 
-#include"ConfigManager.h"
+#include "ConfigManager.h"
 
 using namespace Util;
 using namespace std;
@@ -12,7 +12,7 @@ namespace Configurations {
 
 	enum class FrameworkSetting;
 
-	class FrameworkConfigManager: public ConfigManager<FrameworkSetting> {
+	class FrameworkConfigManager: public TConfigManager<FrameworkSetting> {
 
 	public:
 

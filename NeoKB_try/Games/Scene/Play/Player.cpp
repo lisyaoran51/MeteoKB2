@@ -6,6 +6,7 @@
 
 #include "../../Ruleset/Modifiers/TimeControllerModifier.h"
 #include "../Results/Result.h"
+#include "../../Ruleset/Modifiers/ConfigurationModifier.h"
 
 
 
@@ -37,6 +38,15 @@ int Player::load(MeteoConfigManager* m, Instrument* instru)
 	LOG(LogLevel::Info) << "Player::load : start loading the player and reading the sm and ruleset from working sm.";
 
 	WorkingSm* workingSmValue = workingSm.GetValue();
+
+	/* 抓更改configuration的modifier */
+	for (int i = 0; i < workingSmValue->GetModifiers()->GetValue()->size(); i++) {
+		if (dynamic_cast<ConfigurationModifier*>(workingSmValue->GetModifiers()->GetValue()->at(i))) {
+			ConfigurationModifier* cModifier = dynamic_cast<ConfigurationModifier*>(workingSmValue->GetModifiers()->GetValue()->at(i));
+			cModifier->ApplyToConfigurationManager(GetCache<ConfigManager>(cModifier->GetConfigManagerName()));
+		}
+	}
+
 	// 這個是先寫死ruleset ，之後要改成從檔案讀(像下一行那樣)
 	//rulesetInfo.SetValue(new RulesetInfo("MeteorRuleset", 1));
 	rulesetInfo.SetValue(workingSm.GetValue()->GetSm()->GetSmInfo()->rulesetInfo);

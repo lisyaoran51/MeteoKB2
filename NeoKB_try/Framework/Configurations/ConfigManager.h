@@ -17,8 +17,17 @@ using namespace std;
 namespace Framework {
 namespace Configurations {
 
+	class ConfigManager : public MtoObject {
+
+	public:
+
+		ConfigManager();
+
+	};
+
+	
 	template<typename T>
-	class ConfigManager: public MtoObject {
+	class TConfigManager: public ConfigManager {
 
 		typedef T Setting;
 
@@ -31,11 +40,11 @@ namespace Configurations {
 
 	public:
 
-		ConfigManager(): RegisterType("ConfigManager")
+		TConfigManager(): RegisterType("TConfigManager")
 		{
 			// TODO: 照裡來說應該是每次建立時，強制執行InitializeDefault，但是在c++裡建構子不能執行virtual函式
 			// 這個問題要找別的方法解決
-			//registerLoad(bind((int(ConfigManager<T>::*)())&ConfigManager<T>::load, this));
+			//registerLoad(bind((int(TConfigManager<T>::*)())&TConfigManager<T>::load, this));
 		}
 
 		int Initialize() {

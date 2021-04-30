@@ -110,6 +110,7 @@
     <ClCompile Include="Games\Ruleset\Judgements\HasHitWindow.cpp" />
     <ClCompile Include="Games\Ruleset\Judgements\HitWindow.cpp" />
     <ClCompile Include="Games\Ruleset\Judgements\Judgement.cpp" />
+    <ClCompile Include="Games\Ruleset\Modifiers\ConfigurationModifier.cpp" />
     <ClCompile Include="Games\Ruleset\Modifiers\DifficultyModifier.cpp" />
     <ClCompile Include="Games\Ruleset\Modifiers\EventProcessorFilterModifier.cpp" />
     <ClCompile Include="Games\Ruleset\Modifiers\InstrumentModifier.cpp" />
@@ -321,6 +322,7 @@
     <ClCompile Include="RulesetMeteor\Ruleset\Modifiers\HandModifier.cpp" />
     <ClCompile Include="RulesetMeteor\Ruleset\Modifiers\MusicGameModifier.cpp" />
     <ClCompile Include="RulesetMeteor\Ruleset\Modifiers\RepeatPracticeModifier.cpp" />
+    <ClCompile Include="RulesetMeteor\Ruleset\Modifiers\WhiteKeyTargetLineModifier.cpp" />
     <ClCompile Include="RulesetMeteor\Ruleset\Replays\MeteorReplayFrame.cpp" />
     <ClCompile Include="RulesetMeteor\Ruleset\Replays\MeteorReplayRecorder.cpp" />
     <ClCompile Include="RulesetMeteor\Ruleset\Replays\MeteorReplayRecorderReceiver.cpp" />
@@ -516,6 +518,7 @@
     <ClInclude Include="Games\Ruleset\Judgements\HitWindow.h" />
     <ClInclude Include="Games\Ruleset\Judgements\HasHitWindow.h" />
     <ClInclude Include="Games\Ruleset\Judgements\Judgement.h" />
+    <ClInclude Include="Games\Ruleset\Modifiers\ConfigurationModifier.h" />
     <ClInclude Include="Games\Ruleset\Modifiers\TimeControllerModifier.h" />
     <ClInclude Include="Games\Ruleset\Modifiers\EventProcessorFilterModifier.h" />
     <ClInclude Include="Games\Ruleset\Modifiers\DifficultyModifier.h" />
@@ -780,6 +783,7 @@
     <ClInclude Include="RulesetMeteor\Ruleset\Modifiers\HandModifier.h" />
     <ClInclude Include="RulesetMeteor\Ruleset\Modifiers\MusicGameModifier.h" />
     <ClInclude Include="RulesetMeteor\Ruleset\Modifiers\RepeatPracticeModifier.h" />
+    <ClInclude Include="RulesetMeteor\Ruleset\Modifiers\WhiteKeyTargetLineModifier.h" />
     <ClInclude Include="RulesetMeteor\Ruleset\Replays\MeteorReplayFrame.h" />
     <ClInclude Include="RulesetMeteor\Ruleset\Replays\MeteorReplayRecorder.h" />
     <ClInclude Include="RulesetMeteor\Ruleset\Replays\MeteorReplayRecorderReceiver.h" />

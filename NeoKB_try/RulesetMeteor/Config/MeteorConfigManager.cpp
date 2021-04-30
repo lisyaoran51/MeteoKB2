@@ -5,7 +5,7 @@ using namespace Meteor::Config;
 using namespace Framework::Configurations;
 
 
-MeteorConfigManager::MeteorConfigManager(): ConfigManager(), RegisterType("MeteorConfigManager")
+MeteorConfigManager::MeteorConfigManager(): TConfigManager(), RegisterType("MeteorConfigManager")
 {
 }
 

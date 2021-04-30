@@ -5,7 +5,7 @@ using namespace Record::Config;
 using namespace Framework::Configurations;
 
 
-RecordConfigManager::RecordConfigManager(): ConfigManager(), RegisterType("RecordConfigManager")
+RecordConfigManager::RecordConfigManager(): TConfigManager(), RegisterType("RecordConfigManager")
 {
 }
 

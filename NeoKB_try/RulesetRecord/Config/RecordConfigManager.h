@@ -13,7 +13,7 @@ namespace Config{
 
 	enum class RecordSetting;
 
-	class RecordConfigManager : public ConfigManager<RecordSetting> {
+	class RecordConfigManager : public TConfigManager<RecordSetting> {
 
 	public:
 

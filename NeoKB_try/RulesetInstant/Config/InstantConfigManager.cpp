@@ -5,7 +5,7 @@ using namespace Instant::Config;
 using namespace Framework::Configurations;
 
 
-InstantConfigManager::InstantConfigManager(): ConfigManager(), RegisterType("InstantConfigManager")
+InstantConfigManager::InstantConfigManager(): TConfigManager(), RegisterType("InstantConfigManager")
 {
 }
 

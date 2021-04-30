@@ -3,7 +3,7 @@
 using namespace Framework::Configurations;
 
 
-FrameworkConfigManager::FrameworkConfigManager(): ConfigManager(), RegisterType("FrameworkConfigManager")
+FrameworkConfigManager::FrameworkConfigManager(): TConfigManager(), RegisterType("FrameworkConfigManager")
 {
 }
 

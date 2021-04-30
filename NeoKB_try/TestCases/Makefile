@@ -104,7 +104,7 @@ Cachable.o ChildAddable.o Container.o HasParent.o Loadable.o LoadStateHandler.o 
 AdjustableAudioComponent.o AudioComponent.o AudioManager.o \
 BassSample.o BassSampleChannel.o Sample.o SampleChannel.o SampleManager.o \
 BassTrack.o RateSettableBassTrack.o Track.o TrackManager.o \
-ConfigManager.o FrameworkConfigManager.o \
+TConfigManager.o FrameworkConfigManager.o \
 DatabaseContext.o DatabaseContextFactory.o DatabaseStore.o FakeDatabaseContextFactory.o FakeMeteoDatabaseContext.o MeteoDatabaseContext.o \
 BluetoothDevice.o Device.o DisplayDevice.o InputDevice.o KeyboardDevice.o PanelDevice.o \
 Drawable.o Map.o \

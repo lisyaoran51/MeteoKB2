@@ -2717,7 +2717,7 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 		各種request(還沒檢查)、下載檔案後移動解壓縮(大概ok要測試)、gatt加入程式(bt classic刪掉)、遊戲紀錄存成sm檔(大概ok)、封包分流、斷線時把message和request全刪掉、
 		遊戲紀錄回傳、sm select panel修改、Instant測試、刪掉切換八度(ok)、場景轉換的ble訊號、反覆練談、delete child的memory leak、快進時把event都關掉(ok)、快進後遊戲結束的判斷(ok)、
 		record模式、手機測試、mcu寫完、遊戲結束時恢復game control sustain設定、連線後要先等待set request才能開始連藍芽、藍芽連線後要到read firmware以後才能夠開始讀其他訊號、
-		取消下載檔案
+		取消下載檔案、target line modifier
 	
 	之前沒完成的工作：
 		重播存檔、跳轉時反向觸發特效、刪除所有memory leak、琴音分為全長和AB段(放棄)、手動踏板modifier、關機(未測試)
@@ -2970,3 +2970,12 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 	
 4/24
 	寫完藍芽架構，接下來繼續研究反覆練彈
+	
+4/29
+	反覆練彈要把該小節外的event給擋掉
+	反覆練彈還有一堆問題，之後再來處理，鮮血target line modifier
+	
+5/1
+	寫完target line modifier，先來策不同charasterstic會部會平行丟封包，部會
+	
+	補完repeat practice，之後可以寫instant event

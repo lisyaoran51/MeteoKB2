@@ -15,7 +15,7 @@ namespace Configurations{
 
 	enum class MeteoSetting;
 
-	class MeteoConfigManager : public ConfigManager<MeteoSetting> {
+	class MeteoConfigManager : public TConfigManager<MeteoSetting> {
 
 	public:
 

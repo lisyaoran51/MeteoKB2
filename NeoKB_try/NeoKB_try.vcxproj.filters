@@ -2100,6 +2100,12 @@
     <ClCompile Include="Framework\IO\Communications\BleCommunicationInputHandler.cpp">
       <Filter>來源檔案\Framework\IO\Communications</Filter>
     </ClCompile>
+    <ClCompile Include="Games\Ruleset\Modifiers\ConfigurationModifier.cpp">
+      <Filter>來源檔案\Games\Ruleset\Mod</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\Ruleset\Modifiers\WhiteKeyTargetLineModifier.cpp">
+      <Filter>來源檔案\RulesetMeteor\Ruleset\Modifiers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="DailyLog.txt">
@@ -3498,6 +3504,12 @@
     </ClInclude>
     <ClInclude Include="Framework\IO\Communications\BleCommunicationInputHandler.h">
       <Filter>標頭檔\Framework\IO\Communications</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Ruleset\Modifiers\ConfigurationModifier.h">
+      <Filter>標頭檔\Games\Ruleset\Modifiers</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Ruleset\Modifiers\WhiteKeyTargetLineModifier.h">
+      <Filter>標頭檔\RulesetMeteor\Ruleset\Modifiers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
