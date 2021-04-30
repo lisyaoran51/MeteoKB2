@@ -287,7 +287,7 @@ int GameHost::setupConfig()
 	frameworkConfigManager->Set(FrameworkSetting::Width, 48); //要改
 	frameworkConfigManager->Set(FrameworkSetting::Height, 16);
 	frameworkConfigManager->Set(FrameworkSetting::BlackKeyHeight, 16);
-	frameworkConfigManager->Set(FrameworkSetting::TargetHeight, 10);	// 低20	// 高15
+	frameworkConfigManager->Set(FrameworkSetting::TargetHeight, 10);	// 低15	// 高10
 	frameworkConfigManager->Set(FrameworkSetting::BlackKeyTargetHeight, 10);	// 14
 	frameworkConfigManager->Set(FrameworkSetting::StartPitch, 24);
 	frameworkConfigManager->Set(FrameworkSetting::FrameRate, 30);
@@ -299,8 +299,8 @@ int GameHost::setupConfig()
 	MeteorConfigManager* meteorConfigManager = new MeteorConfigManager();
 	meteorConfigManager->Initialize();
 
-	meteorConfigManager->Set(MeteorSetting::WhiteKeyTargetHeight, 9);	// 低4	  高9
-	meteorConfigManager->Set(MeteorSetting::BlackKeyTargetHeight, 8);
+	meteorConfigManager->Set(MeteorSetting::WhiteKeyTargetHeight, 10);	// 低4	  高9 // 低15	// 高10
+	meteorConfigManager->Set(MeteorSetting::BlackKeyTargetHeight, 10);	//10
 	meteorConfigManager->Set(MeteorSetting::FallSpeed, MTO_FLOAT(16.f));	//正常16.f	慢12.f 目前24 unravel36
 	meteorConfigManager->Set(MeteorSetting::FallBrightness, MTO_FLOAT(0.6f));
 	meteorConfigManager->Set(MeteorSetting::FallLength, 1);

@@ -81,6 +81,13 @@ int MeteorPatternGenerator::load(MeteorConfigManager * mcf)
 		throw runtime_error("int MeteorPatternGenerator::load(MeteorConfigManager*) : RestartSection not found in Setting.");
 
 
+	if (!mcf->Get(MeteorSetting::WhiteKeyTargetHeight, &targetHeight))
+		throw runtime_error("int MeteorPatternGenerator::load(MeteorConfigManager*) : WhiteKeyTargetHeight not found in Setting.");
+
+	if (!mcf->Get(MeteorSetting::BlackKeyTargetHeight, &blackKeyTargetHeight))
+		throw runtime_error("int MeteorPatternGenerator::load(MeteorConfigManager*) : BlackKeyTargetHeight not found in Setting.");
+
+
 	return 0;
 }
 
