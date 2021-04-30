@@ -431,7 +431,7 @@ Pattern * MeteorPatternGenerator::generateNoteControlPoint(vector<Event*>* es, N
 	) / fallSpeed;
 
 
-	LOG(LogLevel::Finer) << "int MeteorSmConverter::Generate(vector<Event*>*, Event*) : Generate Fall at [" << (int)pitch << "], start time [" << note->GetStartTime() - fallTime << "], life time [" << fallLifeTime << "].";
+	LOG(LogLevel::Debug) << "int MeteorSmConverter::Generate(vector<Event*>*, Event*) : Generate Fall at [" << (int)pitch << "][" << note->GetStartTime() << "], start time [" << note->GetStartTime() - fallTime << "], life time [" << fallTime << "].";
 
 	FallEffect* fall = new FallEffect(
 		int(pitch),
