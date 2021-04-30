@@ -157,7 +157,7 @@ AdjustableAudioComponent.o AudioComponent.o AudioManager.o \
 BassSample.o BassSampleChannel.o MultiPlaybackBassSampleChannel.o Sample.o SampleChannel.o MultiPlaybackSampleChannel.o DualPlaybackBassSampleChannel.o SampleManager.o \
 SampleChannelGenerator.o BassSampleChannelGenerator.o \
 BassTrack.o RateSettableBassTrack.o Track.o TrackManager.o \
-TConfigManager.o FrameworkConfigManager.o \
+ConfigManager.o FrameworkConfigManager.o \
 DatabaseContext.o DatabaseContextFactory.o DatabaseStore.o FakeMeteoDatabaseContext.o MeteoDatabaseContext.o ReadonlyCsvDatabaseContextFactory.o MemoryBasedDatabaseContextFactory.o \
 BluetoothDevice.o Device.o DisplayDevice.o InputDevice.o OutputDevice.o KeyboardDevice.o PanelDevice.o \
 Drawable.o Map.o \
@@ -175,7 +175,7 @@ LinearSpeedAdjuster.o SpeedAdjuster.o \
 MeteoGame.o MeteoGameBase.o \
 MeteoConfigManager.o \
 Ruleset.o RulesetInfo.o RulesetStore.o Judgement.o HasHitWindow.o HitWindow.o ReplayRecorder.o ReplayFrame.o ReplayRecorderReceiver.o \
-Modifier.o DifficultyModifier.o EventProcessorFilterModifier.o InstrumentModifier.o TimeControllerModifier.o \
+Modifier.o ConfigurationModifier.o DifficultyModifier.o EventProcessorFilterModifier.o InstrumentModifier.o TimeControllerModifier.o \
 Score.o ScoreProcessor.o \
 BleAccess.o BleRequest.o BleRequestException.o GetTextBleRequest.o PostTextBleRequest.o GetBinaryBleRequest.o PostBinaryBleRequest.o \
 IdentifyBleRequest.o FaultIdentityBleRequest.o \
@@ -215,7 +215,7 @@ GattServer.o MeteoGattServerV1.o MeteoGattClientV1.o \
 MeteorGame.o MeteorConfigManager.o MeteorInputManager.o MeteorPitchBindingSet.o MeteorPlayfield.o \
 MeteorRuleset.o MeteorRulesetExecutor.o MeteorJudgement.o MeteorHitWindow.o MeteorReplayRecorder.o MeteorReplayFrame.o MeteorReplayRecorderReceiver.o \
 MeteorResult.o \
-AutoPedalModifier.o MusicGameModifier.o HandModifier.o MeteorDifficultyModifier.o RepeatPracticeModifier.o FallSpeedModifier.o ClockRateModifier.o \
+AutoPedalModifier.o MusicGameModifier.o HandModifier.o MeteorDifficultyModifier.o RepeatPracticeModifier.o FallSpeedModifier.o ClockRateModifier.o WhiteKeyTargetLineModifier.o \
 MeteorScoreProcessor.o \
 LightRingOutputer.o LightRingPanelMessage.o SustainPedalLightRingOutputer.o SustainPedalLightRingPanelMessage.o \
 MeteorEventProcessorMaster.o MeteorNoteControlPointHitObject.o MeteorInputKeyControlPointHitObject.o \
