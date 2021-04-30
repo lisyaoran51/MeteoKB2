@@ -287,7 +287,7 @@ int GameHost::setupConfig()
 	frameworkConfigManager->Set(FrameworkSetting::Width, 48); //要改
 	frameworkConfigManager->Set(FrameworkSetting::Height, 16);
 	frameworkConfigManager->Set(FrameworkSetting::BlackKeyHeight, 16);
-	frameworkConfigManager->Set(FrameworkSetting::TargetHeight, 15);	// 低20	// 高15
+	frameworkConfigManager->Set(FrameworkSetting::TargetHeight, 10);	// 低20	// 高15
 	frameworkConfigManager->Set(FrameworkSetting::BlackKeyTargetHeight, 10);	// 14
 	frameworkConfigManager->Set(FrameworkSetting::StartPitch, 24);
 	frameworkConfigManager->Set(FrameworkSetting::FrameRate, 30);
