@@ -51,7 +51,11 @@ int FallMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper<FallEffect
 
 	MTO_FLOAT currentTime = em->GetCurrentTime();// em->GetCurrentTime();
 	MTO_FLOAT startTime = em->GetStartTime();
-	if (startTime > currentTime)
+	MTO_FLOAT lifeTime = em->GetLifeTime();
+	if (startTime < currentTime)
+		return -1;
+
+	if (startTime + lifeTime > currentTime)
 		return -1;
 
 	// MTO_FLOAT lifeTime = em->GetLifeTime();

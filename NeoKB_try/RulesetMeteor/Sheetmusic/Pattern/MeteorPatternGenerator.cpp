@@ -437,7 +437,7 @@ Pattern * MeteorPatternGenerator::generateNoteControlPoint(vector<Event*>* es, N
 		int(pitch),
 		0,
 		note->GetStartTime() - fallTime,
-		fallLifeTime,
+		fallTime,
 		fallSpeed);
 	fall->SetTargetHeight(note->IsWhiteKey() ? targetHeight : blackKeyTargetHeight);
 	fall->SetMeteorEffectShiftType(meteorEffectShiftType);
