@@ -511,26 +511,29 @@ int MeteorTimeController::onKnobTurn(InputState * inputState, InputKey knob)
 			if (inputState->GetPanelState()->GetKnobs()->at(i).first == InputKey::SectionKnob)
 				turnValue = inputState->GetPanelState()->GetKnobs()->at(i).second;
 
-		if (!GetIsPaused()) {
-			Pause();
-		}
-		else if(!speedAdjuster->GetIsAdjustingTime())
-			isAdjustAfterPause = true;
 
 		if (timeControllerMode == MeteorTimeControllerMode::RepeatPractice) {
 			if (turnValue > 0) {
 				/* 往後轉的時候，就跳到下個小節 */
-				speedAdjuster->SetSeekTime(GetClock()->GetCurrentTime() - sectionTime[tempRepeatStartSection + 1]);
+				//speedAdjuster->SetSeekTime(GetClock()->GetCurrentTime() - sectionTime[tempRepeatStartSection + 1]);
+				JumpTo(sectionTime[tempRepeatStartSection + 1]);
 				tempRepeatStartSection++;
 			}
 			else {
 				/* 往回轉的時候，就跳到上個小節 */
-				speedAdjuster->SetSeekTime(-(GetClock()->GetCurrentTime() - sectionTime[tempRepeatStartSection - 1]));
+				//speedAdjuster->SetSeekTime(-(GetClock()->GetCurrentTime() - sectionTime[tempRepeatStartSection - 1]));
+				JumpTo(sectionTime[tempRepeatStartSection - 1]);
 				tempRepeatStartSection--;
 			}
 			tempRepeatCounts = 0;
 		}
 		else if(timeControllerMode == MeteorTimeControllerMode::MusicGame){
+
+			if (!GetIsPaused()) {
+				Pause();
+			}
+			else if (!speedAdjuster->GetIsAdjustingTime())
+				isAdjustAfterPause = true;
 
 			speedAdjuster->SetSeekTime(turnValue * defaultAdjustTime);
 
