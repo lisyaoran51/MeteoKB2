@@ -299,7 +299,7 @@ int GameHost::setupConfig()
 	MeteorConfigManager* meteorConfigManager = new MeteorConfigManager();
 	meteorConfigManager->Initialize();
 
-	meteorConfigManager->Set(MeteorSetting::WhiteKeyTargetHeight, 10);	// 低4	  高9 // 低15	// 高10
+	meteorConfigManager->Set(MeteorSetting::WhiteKeyTargetHeight, 15);	// 低4	  高9 // 低15	// 高10
 	meteorConfigManager->Set(MeteorSetting::BlackKeyTargetHeight, 10);	//10
 	meteorConfigManager->Set(MeteorSetting::FallSpeed, MTO_FLOAT(16.f));	//正常16.f	慢12.f 目前24 unravel36
 	meteorConfigManager->Set(MeteorSetting::FallBrightness, MTO_FLOAT(0.6f));

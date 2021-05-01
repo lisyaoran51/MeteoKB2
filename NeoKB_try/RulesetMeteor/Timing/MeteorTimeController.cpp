@@ -394,7 +394,7 @@ int MeteorTimeController::RepeatSection(int section)
 	else {
 
 		totalRewindLength = 0;
-		tempRepeatStartSection++;
+		tempRepeatStartSection += maxSectionAmountForOneRepeat;
 		tempRepeatCounts = 0;
 
 		if (tempRepeatStartSection + maxSectionAmountForOneRepeat < section + 1) {
