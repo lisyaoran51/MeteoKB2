@@ -317,10 +317,10 @@ int MeteorTimeController::RepeatSection(int section)
 	/******************/
 
 	/* 低於maxSectionAmountForOneRepeat的前幾個小節不反覆 */
-	if (section < maxSectionAmountForOneRepeat) {
-		LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : lower than smallest repeat section.";
-		return -1;
-	}
+	//if (section < maxSectionAmountForOneRepeat) {
+	//	LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : lower than smallest repeat section.";
+	//	return -1;
+	//}
 
 	if (speedAdjuster->GetIsAdjustingTime())
 		return -1;
