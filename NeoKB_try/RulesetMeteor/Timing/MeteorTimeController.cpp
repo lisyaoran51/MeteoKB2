@@ -403,7 +403,7 @@ int MeteorTimeController::RepeatSection(int section)
 
 		if (tempRepeatStartSection + maxSectionAmountForOneRepeat < section + 1) {
 			
-
+			LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : ???";
 			RepeatSection(section);
 		}
 	}
