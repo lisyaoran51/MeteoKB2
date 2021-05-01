@@ -317,7 +317,7 @@ int MeteorTimeController::RepeatSection(int section)
 	/******************/
 
 	/* 低於maxSectionAmountForOneRepeat的前幾個小節不反覆 */
-	if (section + 1 < maxSectionAmountForOneRepeat) {
+	if (section < maxSectionAmountForOneRepeat) {
 		LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : lower than smallest repeat section.";
 		return -1;
 	}
