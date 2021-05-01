@@ -382,7 +382,7 @@ int MeteorTimeController::RepeatSection(int section)
 		LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : total rewind length [" << totalRewindLength << "], section time [" << sectionTime[section + 1] << "], [" << sectionTime[tempRepeatStartSection] << "], section [" << section << "].";
 
 		for(int i = 0; i < 60; i++)
-			LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : section [" << i << "]  [" << sectionTime[section + 1] << "]";
+			LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : section [" << i << "]  [" << sectionTime[i] << "]";
 
 		/* 這編讓光圈跑一圈，跑的時間是repeatBufferTime */
 		LightRingPanelMessage* message = new LightRingPanelMessage(repeatBufferTime);
