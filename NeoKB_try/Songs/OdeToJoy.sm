@@ -1,13 +1,13 @@
-simple file format v0,,,,,,
-[General],,,,,,
-Mode:1,,,,,,
-Section:1,,,,,,
-Pedal:1,,,,,,
-[Metadata],,,,,,
-Title:OdeToJoy,,,,,,
-[Difficulty],,,,,,
-Speed:24,,,,,,
-[NoteControlPoints],,,,,,
+simple file format v0
+[General]
+Mode:1
+Section:1
+Pedal:1
+[Metadata]
+Title:OdeToJoy
+[Difficulty]
+Speed:24
+[NoteControlPoints]
 23,0,0.652174,51,0,3,0
 23,0.652174,0,51,0,3,0
 23,1.304348,0,51,0,3,0
