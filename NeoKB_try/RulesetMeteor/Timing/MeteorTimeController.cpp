@@ -189,26 +189,35 @@ int MeteorTimeController::OnKnobTurn(pair<MeteorAction, int> action)
 
 		int turnValue = action.second;
 
-		if (!GetIsPaused()) {
-			Pause();
-		}
-		else if (!speedAdjuster->GetIsAdjustingTime())
-			isAdjustAfterPause = true;
 
 		if (timeControllerMode == MeteorTimeControllerMode::RepeatPractice) {
+			// 調整時間時不能夠再轉
+			if (speedAdjuster->GetIsAdjustingTime())
+				return 0;
+
 			if (turnValue > 0) {
 				/* 往後轉的時候，就跳到下個小節 */
-				speedAdjuster->SetSeekTime(GetClock()->GetCurrentTime() - sectionTime[tempRepeatStartSection + 1]);
+				//speedAdjuster->SetSeekTime(GetClock()->GetCurrentTime() - sectionTime[tempRepeatStartSection + 1]);
+				JumpTo(sectionTime[tempRepeatStartSection + 1]);
 				tempRepeatStartSection++;
 			}
 			else {
 				/* 往回轉的時候，就跳到上個小節 */
-				speedAdjuster->SetSeekTime(-(GetClock()->GetCurrentTime() - sectionTime[tempRepeatStartSection - 1]));
+				//speedAdjuster->SetSeekTime(-(GetClock()->GetCurrentTime() - sectionTime[tempRepeatStartSection - 1]));
+				JumpTo(sectionTime[tempRepeatStartSection - 1]);
 				tempRepeatStartSection--;
 			}
+			LOG(LogLevel::Debug) << "MeteorTimeController::onButtonDown : jump to [" << tempRepeatStartSection << "] section.";
 			tempRepeatCounts = 0;
 		}
 		else if (timeControllerMode == MeteorTimeControllerMode::MusicGame) {
+
+
+			if (!GetIsPaused()) {
+				Pause();
+			}
+			else if (!speedAdjuster->GetIsAdjustingTime())
+				isAdjustAfterPause = true;
 
 			/* 如果已經退到底，就不要再退 */
 			if (controllableClock->GetCurrentTime() < 0 && turnValue < 0)
