@@ -344,7 +344,7 @@ int MeteorTimeController::RepeatSection(int section)
 	if (tempRepeatCounts < maxRepeatCounts - 1) {
 
 		// 這個段落已經練完，開始練下一個段落
-		if (section - tempRepeatStartSection == maxSectionAmountForOneRepeat) {
+		if (section + 1 - tempRepeatStartSection == maxSectionAmountForOneRepeat) {
 			
 
 			if (tempRepeatCounts % 2 == 1) {
