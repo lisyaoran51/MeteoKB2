@@ -318,7 +318,7 @@ int MeteorTimeController::RepeatSection(int section)
 
 	/* 低於maxSectionAmountForOneRepeat的前幾個小節不反覆 */
 	if (section < maxSectionAmountForOneRepeat) {
-		LOG(LogLevel::Debug) << 0;
+		LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : lower than smallest repeat section.";
 		return -1;
 	}
 
@@ -327,7 +327,7 @@ int MeteorTimeController::RepeatSection(int section)
 
 	/* 如果這個小節已經反覆過了，就不用再反覆 */
 	if (section <= tempRepeatStartSection + maxSectionAmountForOneRepeat) {
-		LOG(LogLevel::Debug) << 1;
+		LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : not to repeat section yet.";
 		return -1;
 	}
 
@@ -413,7 +413,7 @@ int MeteorTimeController::RepeatSection(int section)
 	if(totalRewindLength > 0)
 		JumpTo(controllableClock->GetCurrentTime() - totalRewindLength);
 	else
-		LOG(LogLevel::Debug) << 3;
+		LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : go forward to next section.";
 
 
 	
