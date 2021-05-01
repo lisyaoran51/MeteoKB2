@@ -327,7 +327,7 @@ int MeteorTimeController::RepeatSection(int section)
 
 	/* 如果這個小節已經反覆過了，就不用再反覆 */
 	if (section + 1 < tempRepeatStartSection + maxSectionAmountForOneRepeat) {
-		LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : not to repeat section yet.";
+		LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : not to repeat section yet." << section;
 		return -1;
 	}
 
