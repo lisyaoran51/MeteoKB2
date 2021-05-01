@@ -191,7 +191,7 @@ int TimeController::SetSpeedAdjuster(SpeedAdjuster * sAdjuster)
 
 int TimeController::JumpTo(double seekTime)
 {
-	LOG(LogLevel::Debug) << "TimeController::JumpTo() : jump to [" << seekTime << "]." << controllableClock;
+	LOG(LogLevel::Depricated) << "TimeController::JumpTo() : jump to [" << seekTime << "]." << controllableClock;
 	controllableClock->Seek(seekTime);
 
 	return 0;
