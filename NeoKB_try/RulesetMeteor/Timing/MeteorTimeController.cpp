@@ -312,8 +312,8 @@ int MeteorTimeController::SetHasSection(bool hSection)
 int MeteorTimeController::RepeatSection(int section)
 {
 	/******************/
-	maxSectionAmountForOneRepeat = 2;
-	maxRepeatCounts = 4;
+	//maxSectionAmountForOneRepeat = 2;
+	//maxRepeatCounts = 4;
 	/******************/
 
 	/* 低於maxSectionAmountForOneRepeat的前幾個小節不反覆 */
