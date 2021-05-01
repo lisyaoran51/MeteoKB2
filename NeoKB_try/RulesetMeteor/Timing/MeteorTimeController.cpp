@@ -317,7 +317,7 @@ int MeteorTimeController::RepeatSection(int section)
 	/******************/
 
 	/* 低於maxSectionAmountForOneRepeat的前幾個小節不反覆 */
-	if (section < maxSectionAmountForOneRepeat) {
+	if (section + 1 < maxSectionAmountForOneRepeat) {
 		LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : lower than smallest repeat section.";
 		return -1;
 	}
@@ -326,7 +326,7 @@ int MeteorTimeController::RepeatSection(int section)
 		return -1;
 
 	/* 如果這個小節已經反覆過了，就不用再反覆 */
-	if (section <= tempRepeatStartSection + maxSectionAmountForOneRepeat) {
+	if (section + 1 < tempRepeatStartSection + maxSectionAmountForOneRepeat) {
 		LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : not to repeat section yet.";
 		return -1;
 	}
@@ -381,8 +381,8 @@ int MeteorTimeController::RepeatSection(int section)
 
 		LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : total rewind length [" << totalRewindLength << "], section time [" << sectionTime[section + 1] << "], [" << sectionTime[tempRepeatStartSection] << "], section [" << section << "].";
 
-		for(int i = 0; i < 60; i++)
-			LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : section [" << i << "]  [" << sectionTime[i] << "]";
+		//for(int i = 0; i < 60; i++)
+		//	LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : section [" << i << "]  [" << sectionTime[i] << "]";
 
 		/* 這編讓光圈跑一圈，跑的時間是repeatBufferTime */
 		LightRingPanelMessage* message = new LightRingPanelMessage(repeatBufferTime);
@@ -400,7 +400,7 @@ int MeteorTimeController::RepeatSection(int section)
 		if (tempRepeatStartSection + maxSectionAmountForOneRepeat < section + 1) {
 			eventProcessorFilter->SwitchVariant(0);	// 落下燈光示範
 			
-			LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : set filter to [" << 0 << "].";
+			LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : set filter to [" << 0 << "], demonstrating";
 
 			tempRepeatCounts = 0;
 			RepeatSection(section);
