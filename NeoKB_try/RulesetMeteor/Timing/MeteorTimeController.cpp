@@ -396,12 +396,13 @@ int MeteorTimeController::RepeatSection(int section)
 		totalRewindLength = 0;
 		tempRepeatStartSection += maxSectionAmountForOneRepeat;
 		tempRepeatCounts = 0;
+		eventProcessorFilter->SwitchVariant(0);	// 落下燈光示範
+		repeatPracticeMode = RepeatPracticeMode::Demonstrate;
+		LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : set filter to [" << 0 << "], demonstrating";
+
 
 		if (tempRepeatStartSection + maxSectionAmountForOneRepeat < section + 1) {
-			eventProcessorFilter->SwitchVariant(0);	// 落下燈光示範
-			repeatPracticeMode = RepeatPracticeMode::Demonstrate;
 			
-			LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : set filter to [" << 0 << "], demonstrating";
 
 			RepeatSection(section);
 		}
