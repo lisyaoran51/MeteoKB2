@@ -374,7 +374,7 @@ int MeteorTimeController::RepeatSection(int section)
 		if (section + maxSectionAmountForOneRepeat == sectionTime.size())	// 代表整首歌已經都練完了
 			return 0; 
 		
-		LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : jump to seciton [" << section << "], repeat count is [" << tempRepeatCounts << "], now repeat start section is [" << tempRepeatStartSection << "].";
+		LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : temp seciton is [" << section << "], repeat count is [" << tempRepeatCounts << "], now repeat start section is [" << tempRepeatStartSection << "].";
 
 
 		totalRewindLength = sectionTime[section + 1] - sectionTime[tempRepeatStartSection] + repeatBufferTime;	//額外多一秒緩衝時間
