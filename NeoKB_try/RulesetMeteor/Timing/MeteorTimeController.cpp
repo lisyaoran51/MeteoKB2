@@ -208,6 +208,8 @@ int MeteorTimeController::OnKnobTurn(pair<MeteorAction, int> action)
 				tempRepeatStartSection--;
 			}
 			LOG(LogLevel::Debug) << "MeteorTimeController::onButtonDown : jump to [" << tempRepeatStartSection << "] section.";
+			eventProcessorFilter->SwitchVariant(0);	// 落下燈光示範
+			repeatPracticeMode = RepeatPracticeMode::Demonstrate;
 			tempRepeatCounts = 0;
 		}
 		else if (timeControllerMode == MeteorTimeControllerMode::MusicGame) {
@@ -395,7 +397,7 @@ int MeteorTimeController::RepeatSection(int section)
 
 		/* 這編讓光圈跑一圈，跑的時間是repeatBufferTime */
 		LightRingPanelMessage* message = new LightRingPanelMessage(repeatBufferTime);
-		LOG(LogLevel::Depricated) << "MeteorTimeController::RepeatSection : send i2c [" << message->ToString() << "].";
+		LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection : send i2c [" << message->ToString() << "].";
 		outputManager->PushMessage(message);
 
 		tempRepeatCounts++;
