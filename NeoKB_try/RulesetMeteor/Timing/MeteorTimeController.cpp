@@ -350,12 +350,12 @@ int MeteorTimeController::RepeatSection(int section)
 			if (tempRepeatCounts % 2 == 1) {
 				eventProcessorFilter->SwitchVariant(0);	// 落下燈光示範
 				repeatPracticeMode = RepeatPracticeMode::Demonstrate;
-				LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : set filter to [" << 0 << "].";
+				LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : set filter to [" << 0 << "], Demonstrating";
 			}
 			else {
 				eventProcessorFilter->SwitchVariant(1);	// 向上燈光練習
 				repeatPracticeMode = RepeatPracticeMode::Practice;
-				LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : set filter to [" << 1 << "].";
+				LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : set filter to [" << 1 << "], Practicing";
 			}
 
 			//if (repeatPracticeMode == RepeatPracticeMode::Demonstrate) {
