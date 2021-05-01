@@ -129,7 +129,8 @@ int MeteorRulesetExecutor::load(MeteorTimeController * t, Instrument* i, ReplayR
 			sectionTime.push_back(originalEvents->at(i)->GetStartTime());
 		}
 	}
-	
+	sort(sectionTime.begin(), sectionTime.end());
+
 	t->SetSectionTime(&sectionTime);
 
 
