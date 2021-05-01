@@ -394,15 +394,15 @@ int MeteorTimeController::RepeatSection(int section)
 	else {
 
 		totalRewindLength = 0;
-		tempRepeatStartSection++;
-		repeatPracticeMode = RepeatPracticeMode::Demonstrate;
 
 		if (tempRepeatStartSection + maxSectionAmountForOneRepeat < section + 1) {
 			eventProcessorFilter->SwitchVariant(0);	// ¸¨¤U¿O¥ú¥Ü½d
+			repeatPracticeMode = RepeatPracticeMode::Demonstrate;
 			
 			LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : set filter to [" << 0 << "], demonstrating";
-
+			tempRepeatStartSection++;
 			tempRepeatCounts = 0;
+
 			RepeatSection(section);
 		}
 	}
