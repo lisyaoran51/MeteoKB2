@@ -525,6 +525,7 @@ int MeteorTimeController::onKnobTurn(InputState * inputState, InputKey knob)
 				JumpTo(sectionTime[tempRepeatStartSection - 1]);
 				tempRepeatStartSection--;
 			}
+			LOG(LogLevel::Debug) << "MeteorTimeController::onButtonDown : jump to [" << tempRepeatStartSection << "] section.";
 			tempRepeatCounts = 0;
 		}
 		else if(timeControllerMode == MeteorTimeControllerMode::MusicGame){
