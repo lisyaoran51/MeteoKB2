@@ -156,8 +156,8 @@ int MeteorPatternGenerator::CreateOtherEvent(vector<Event*>* es)
 		[](Event* const& a, Event* const& b) {
 
 		if (a->GetStartTime() == b->GetStartTime())
-			if (a->Cast<PlayableControlPoint>() && b->Cast<PlayableControlPoint>())
-				return a->Cast<PlayableControlPoint>()->GetSectionIndex() < b->Cast<PlayableControlPoint>()->GetSectionIndex();
+			if (a->Cast<MarkControlPoint>() && b->Cast<MarkControlPoint>())
+				return a->Cast<MarkControlPoint>()->GetSectionIndex() < b->Cast<MarkControlPoint>()->GetSectionIndex();
 
 		return a->GetStartTime() < b->GetStartTime();
 	});
@@ -178,7 +178,7 @@ int MeteorPatternGenerator::CreateOtherEvent(vector<Event*>* es)
 			}
 		}
 
-		vector<float> sectionEndTime;
+		vector<float> sectionStartTime;
 
 		/* 把每個event的小節數用時間回推出來，然後再設定進去 */
 		int maxSection = 0;
@@ -244,11 +244,24 @@ int MeteorPatternGenerator::CreateOtherEvent(vector<Event*>* es)
 			*/
 		}
 
-		for (int i = 0; i < maxSection; i++) {
-			sectionEndTime.push_back((i + 1) * defaultSectionInterval);
+
+		for (int i = 0; i < maxSection + 1; i++) {
+			sectionStartTime.push_back(i * defaultSectionInterval);
 		}
 
-		generateRepeatPracticeEvents(es, &sectionEndTime);
+		generateRepeatPracticeEvents(es, &sectionStartTime);
+
+		/* 將目前所有Event排序 */
+		sort(es->begin(), es->end(),
+			[](Event* const& a, Event* const& b) {
+
+			if (a->GetStartTime() == b->GetStartTime())
+				if (a->Cast<MarkControlPoint>() && b->Cast<MarkControlPoint>())
+					return a->Cast<MarkControlPoint>()->GetSectionIndex() < b->Cast<MarkControlPoint>()->GetSectionIndex();
+
+			return a->GetStartTime() < b->GetStartTime();
+		});
+
 	}
 	
 	return 0;
@@ -397,7 +410,6 @@ int MeteorPatternGenerator::PostProcess()
 
 
 	}
-
 
 
 	return 0;
@@ -659,12 +671,15 @@ Pattern * MeteorPatternGenerator::generateInputKeyControlPoint(vector<Event*>* e
 	return pattern;
 }
 
-int MeteorPatternGenerator::generateRepeatPracticeEvents(vector<Event*>* es, vector<float>* sectionEndTime)
+int MeteorPatternGenerator::generateRepeatPracticeEvents(vector<Event*>* es, vector<float>* sectionStartTime)
 {
-	for (int i = 0; i < sectionEndTime->size(); i++) {
-		float rewindLength = i == 0 ? sectionEndTime->at(i) : sectionEndTime->at(i) - sectionEndTime->at(i - 1);
-		RepeatPracticeEvent* repeatPracticeEvent = new RepeatPracticeEvent(i, rewindLength, sectionEndTime->at(i), 0);
+	for (int i = 0; i < sectionStartTime->size() - 1; i++) {
 
+		SectionStartControlPoint* sectionStartControlPoint = new SectionStartControlPoint(i, sectionStartTime->at(i), sectionStartTime->at(i + 1) - sectionStartTime->at(i));
+		RepeatPracticeEvent* repeatPracticeEvent = new RepeatPracticeEvent(i, sectionStartTime->at(i + 1) - sectionStartTime->at(i), sectionStartTime->at(i + 1), 0);
+		repeatPracticeEvent->SetSourceEvent(sectionStartControlPoint);
+
+		es->push_back(sectionStartControlPoint);
 		es->push_back(repeatPracticeEvent);
 	}
 

@@ -93,9 +93,9 @@ namespace Patterns {
 		Pattern* generateInputKeyControlPoint(vector<Event*>* es, InputKeyControlPoint* inputKey);
 
 		/// <summary>
-		/// 建立一整首歌的所有反覆練習事件
+		/// 建立一整首歌的所有反覆練習事件，這個是在該歌曲沒有任何section start記號時，由create other event來自動生成反覆練習用的
 		/// </summary>
-		int generateRepeatPracticeEvents(vector<Event*>* es, vector<float>* sectionEndTime);
+		int generateRepeatPracticeEvents(vector<Event*>* es, vector<float>* sectionStartTime);
 
 		/// <summary>
 		/// 建立單個反覆練習事件
