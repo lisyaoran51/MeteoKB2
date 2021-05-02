@@ -2979,3 +2979,7 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 	寫完target line modifier，先來策不同charasterstic會部會平行丟封包，部會
 	
 	補完repeat practice，之後可以寫instant event
+	
+	光圈有問題
+	
+	無小節記號的普惠當掉
