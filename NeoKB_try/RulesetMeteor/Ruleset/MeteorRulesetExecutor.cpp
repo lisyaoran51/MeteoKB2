@@ -117,16 +117,16 @@ int MeteorRulesetExecutor::load(MeteorTimeController * t, Instrument* i, ReplayR
 	}
 
 	// 這邊拿到的Event已經被處理過了，沒有section也被加好了
-	vector<Event*>* originalEvents = workingSm->GetSm()->GetEvents();
+	vector<Event*>* processedEvents = sm->GetEvents();
 	vector<float> sectionTime;
 
-	LOG(LogLevel::Fine) << "MeteorRulesetExecutor::load() : event size [" << originalEvents->size() << "].";
+	LOG(LogLevel::Fine) << "MeteorRulesetExecutor::load() : event size [" << processedEvents->size() << "].";
 
 	
-	for (int i = 0; i < originalEvents->size(); i++) {
-		if (dynamic_cast<SectionStartControlPoint*>(originalEvents->at(i))) {
+	for (int i = 0; i < processedEvents->size(); i++) {
+		if (dynamic_cast<SectionStartControlPoint*>(processedEvents->at(i))) {
 
-			sectionTime.push_back(originalEvents->at(i)->GetStartTime());
+			sectionTime.push_back(processedEvents->at(i)->GetStartTime());
 		}
 	}
 	sort(sectionTime.begin(), sectionTime.end());
