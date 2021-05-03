@@ -57,7 +57,6 @@ Sm<Event>* SmConverter::Convert(Sm<Event>* s)
 		for (int j = 0; j < tempEvents->size(); j++) {
 			newEvents->push_back( tempEvents->at(j) );
 		}
-		newEvents->push_back(originalEvents->at(i)->Clone());
 
 		tempEvents->clear();
 	

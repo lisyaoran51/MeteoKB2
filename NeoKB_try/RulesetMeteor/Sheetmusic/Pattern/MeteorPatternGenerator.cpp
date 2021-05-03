@@ -418,77 +418,78 @@ int MeteorPatternGenerator::PostProcess()
 
 Pattern * MeteorPatternGenerator::generateNoteControlPoint(vector<Event*>* es, NoteControlPoint * note)
 {
+	NoteControlPoint * cloned = dynamic_cast<NoteControlPoint*>(note->Clone());
 	/* 在pattern generator消滅實消滅，或是converter跑完消滅 */
-	Pattern* pattern = new Pattern(note);
+	Pattern* pattern = new Pattern(cloned);
 
-	LOG(LogLevel::Finer) << "int MeteorSmConverter::generateNoteControlPoint(vector<Event*>*, Event*) : Start converting [" << static_cast<int>(note->GetPitch()) << "," << note->GetStartTime() << "] to pattern...";
+	LOG(LogLevel::Finer) << "int MeteorSmConverter::generateNoteControlPoint(vector<Event*>*, Event*) : Start converting [" << static_cast<int>(cloned->GetPitch()) << "," << note->GetStartTime() << "] to pattern...";
 
 	/* 如果這個音的狀態是隱藏，就直接返回 */
-	if(static_cast<int>(note->GetHandType()) < 0)
+	if(static_cast<int>(cloned->GetHandType()) < 0)
 		return pattern;
 	
-	Pitch pitch = note->GetPitch();
+	Pitch pitch = cloned->GetPitch();
 
 	if (static_cast<int>(pitch) > static_cast<int>(startPitch) + width + extendWidth - 1 ||
 		static_cast<int>(pitch) < static_cast<int>(startPitch) - extendWidth) {
-		LOG(LogLevel::Warning) << "int MeteorSmConverter::generateNoteControlPoint(vector<Event*>*, Event*) : Note [" << static_cast<int>(note->GetPitch()) << " is out of light map boundary.";
+		LOG(LogLevel::Warning) << "int MeteorSmConverter::generateNoteControlPoint(vector<Event*>*, Event*) : Note [" << static_cast<int>(cloned->GetPitch()) << " is out of light map boundary.";
 		return pattern;
 	}
 
-	float volume = note->GetVolume() <= 0 || note->GetVolume() > 1 ? defaultVolume : note->GetVolume();
+	float volume = cloned->GetVolume() <= 0 || cloned->GetVolume() > 1 ? defaultVolume : cloned->GetVolume();
 
 
 
 	// 公式： (鍵盤高度-打擊點高度) / 速度
 	MTO_FLOAT fallTime = MTO_FLOAT(
-		note->IsWhiteKey() ?
+		cloned->IsWhiteKey() ?
 		targetHeight : blackKeyTargetHeight
 	) / fallSpeed;
 
 	MTO_FLOAT fallLifeTime = MTO_FLOAT(
-		(note->IsWhiteKey() ?
+		(cloned->IsWhiteKey() ?
 			height : blackKeyHeight) + fallLength
 	) / fallSpeed;
 
 
-	LOG(LogLevel::Depricated) << "int MeteorSmConverter::Generate(vector<Event*>*, Event*) : Generate Fall at [" << (int)pitch << "][" << note->GetStartTime() << "], start time [" << note->GetStartTime() - fallTime << "], life time [" << fallTime << "].";
+	LOG(LogLevel::Depricated) << "int MeteorSmConverter::Generate(vector<Event*>*, Event*) : Generate Fall at [" << (int)pitch << "][" << cloned->GetStartTime() << "], start time [" << cloned->GetStartTime() - fallTime << "], life time [" << fallTime << "].";
 
 	FallEffect* fall = new FallEffect(
 		int(pitch),
 		0,
-		note->GetStartTime() - fallTime,
+		cloned->GetStartTime() - fallTime,
 		fallTime,
 		fallSpeed);
-	fall->SetTargetHeight(note->IsWhiteKey() ? targetHeight : blackKeyTargetHeight);
+	fall->SetTargetHeight(cloned->IsWhiteKey() ? targetHeight : blackKeyTargetHeight);
 	fall->SetMeteorEffectShiftType(meteorEffectShiftType);
-	fall->SetSourceEvent(note);
+	fall->SetSourceEvent(cloned);
 
 	EruptEffect* erupt = new EruptEffect(
 		int(pitch),
 		0,
-		note->GetStartTime() - fallTime,
+		cloned->GetStartTime() - fallTime,
 		fallLifeTime,
 		fallSpeed
 	);
-	erupt->SetTargetHeight(note->IsWhiteKey() ? targetHeight : blackKeyTargetHeight);
+	erupt->SetTargetHeight(cloned->IsWhiteKey() ? targetHeight : blackKeyTargetHeight);
 	erupt->SetMeteorEffectShiftType(meteorEffectShiftType);
-	erupt->SetSourceEvent(note);
+	erupt->SetSourceEvent(cloned);
 
 	PianoSoundEvent* pianoSoundEventDown = new PianoSoundEvent(
 		pair<Pitch, float>(pitch, volume),
-		note->GetStartTime(),
+		cloned->GetStartTime(),
 		0
 	);
-	pianoSoundEventDown->SetSourceEvent(note);
-	LOG(LogLevel::Depricated) << "int MeteorSmConverter::Generate(vector<Event*>*, Event*) : Generate sound at [" << (int)pitch << "], start time [" << note->GetStartTime() << "] volume [" << volume << "].";
+	pianoSoundEventDown->SetSourceEvent(cloned);
+	LOG(LogLevel::Depricated) << "int MeteorSmConverter::Generate(vector<Event*>*, Event*) : Generate sound at [" << (int)pitch << "], start time [" << cloned->GetStartTime() << "] volume [" << volume << "].";
 
 
 	PianoSoundEvent* pianoSoundEventUp = nullptr;
 
-	if (note->GetLifeTime() > 0) {
+	if (cloned->GetLifeTime() > 0) {
 		pianoSoundEventUp = new PianoSoundEvent(
 			pair<Pitch, float>(pitch, 0),
-			note->GetStartTime() + note->GetLifeTime(),
+			cloned->GetStartTime() + cloned->GetLifeTime(),
 			0
 		);
 	}
@@ -497,11 +498,11 @@ Pattern * MeteorPatternGenerator::generateNoteControlPoint(vector<Event*>* es, N
 		// 要好聽可能要到post process的時候去計算小節來決定按下時間，但這個很難寫
 		pianoSoundEventUp = new PianoSoundEvent(
 			pair<Pitch, float>(pitch, 0),
-			note->GetStartTime() + 0.1,
+			cloned->GetStartTime() + 0.1,
 			0
 		);
 	}
-	pianoSoundEventUp->SetSourceEvent(note);
+	pianoSoundEventUp->SetSourceEvent(cloned);
 
 
 
@@ -512,6 +513,7 @@ Pattern * MeteorPatternGenerator::generateNoteControlPoint(vector<Event*>* es, N
 	pattern->Add(pianoSoundEventUp);
 
 	// 把pattern裡面的event一個一個加進去es裡
+	es->push_back(cloned);
 	es->push_back(fall);
 	es->push_back(erupt);
 	es->push_back(pianoSoundEventDown);
@@ -552,42 +554,43 @@ Pattern * MeteorPatternGenerator::generateStartGameEvent(vector<Event*>* es, Sta
 
 Pattern * MeteorPatternGenerator::generateInputKeyControlPoint(vector<Event*>* es, InputKeyControlPoint * inputKeyControlPoint)
 {
+	InputKeyControlPoint* cloned = dynamic_cast<InputKeyControlPoint*>(inputKeyControlPoint->Clone());
 	/* 在pattern generator消滅實消滅，或是converter跑完消滅 */
-	Pattern* pattern = new Pattern(inputKeyControlPoint);
+	Pattern* pattern = new Pattern(cloned);
 
-	LOG(LogLevel::Finer) << "int MeteorSmConverter::generateNoteControlPoint(vector<Event*>*, Event*) : Start converting [" << static_cast<int>(inputKeyControlPoint->GetInputKey()) << "," << inputKeyControlPoint->GetStartTime() << "] to pattern...";
+	LOG(LogLevel::Finer) << "int MeteorSmConverter::generateNoteControlPoint(vector<Event*>*, Event*) : Start converting [" << static_cast<int>(cloned->GetInputKey()) << "," << cloned->GetStartTime() << "] to pattern...";
 
 	/* 如果這個音的狀態是隱藏，就直接返回 */
-	if (inputKeyControlPoint->GetHandType() == HandType::Hidden ||
-		inputKeyControlPoint->GetHandType() == HandType::HiddenLeft || 
-		inputKeyControlPoint->GetHandType() == HandType::HiddenRight)
+	if (cloned->GetHandType() == HandType::Hidden ||
+		cloned->GetHandType() == HandType::HiddenLeft ||
+		cloned->GetHandType() == HandType::HiddenRight)
 		return pattern;
 
-	InputKey inputKey = inputKeyControlPoint->GetInputKey();
+	InputKey inputKey = cloned->GetInputKey();
 
 
 	if (inputKey == InputKey::SustainPedal) {
 
-		SustainPedalIoEvent* sustainPedalIoEvent = new SustainPedalIoEvent(inputKey, inputKeyControlPoint->GetStartTime(), inputKeyControlPoint->GetLifeTime());
+		SustainPedalIoEvent* sustainPedalIoEvent = new SustainPedalIoEvent(inputKey, cloned->GetStartTime(), cloned->GetLifeTime());
 
-		PianoEvent* pianoEventDown = new PianoEvent(pair<InputKey, int>(inputKey, 1), inputKeyControlPoint->GetStartTime(), 0);
-		PianoEvent* pianoEventUp = new PianoEvent(pair<InputKey, int>(inputKey, -1), inputKeyControlPoint->GetStartTime() + inputKeyControlPoint->GetLifeTime(), 0);
+		PianoEvent* pianoEventDown = new PianoEvent(pair<InputKey, int>(inputKey, 1), cloned->GetStartTime(), 0);
+		PianoEvent* pianoEventUp = new PianoEvent(pair<InputKey, int>(inputKey, -1), cloned->GetStartTime() + cloned->GetLifeTime(), 0);
 
-		PianoSoundEvent* pianoSoundEventDown = new PianoSoundEvent(true, inputKeyControlPoint->GetStartTime(), 0);
-		PianoSoundEvent* pianoSoundEventUp = new PianoSoundEvent(false, inputKeyControlPoint->GetStartTime() + inputKeyControlPoint->GetLifeTime(), 0);
+		PianoSoundEvent* pianoSoundEventDown = new PianoSoundEvent(true, cloned->GetStartTime(), 0);
+		PianoSoundEvent* pianoSoundEventUp = new PianoSoundEvent(false, cloned->GetStartTime() + cloned->GetLifeTime(), 0);
 
 		// recorder會自動去抓譜裡面的pedal，不用從這邊建event
 		//MeteorButtonRecorderEvent* pedalDownRecorderEvent = new MeteorButtonRecorderEvent(pair<InputKey, int>(inputKey, 1), inputKeyControlPoint->GetStartTime(), 0);
 		//MeteorButtonRecorderEvent* pedalUpRecorderEvent = new MeteorButtonRecorderEvent(pair<InputKey, int>(inputKey, 0), inputKeyControlPoint->GetStartTime() + inputKeyControlPoint->GetLifeTime() - 0.01, 0);
 
 
-		LOG(LogLevel::Depricated) << "MeteorSmConverter::generateInputKeyControlPoint() : Piano Event [" << inputKeyControlPoint->GetStartTime() << "].";
+		LOG(LogLevel::Depricated) << "MeteorSmConverter::generateInputKeyControlPoint() : Piano Event [" << cloned->GetStartTime() << "].";
 		
-		sustainPedalIoEvent->SetSourceEvent(inputKeyControlPoint);
-		pianoEventDown->SetSourceEvent(inputKeyControlPoint);
-		pianoEventUp->SetSourceEvent(inputKeyControlPoint);
-		pianoSoundEventDown->SetSourceEvent(inputKeyControlPoint);
-		pianoSoundEventUp->SetSourceEvent(inputKeyControlPoint);
+		sustainPedalIoEvent->SetSourceEvent(cloned);
+		pianoEventDown->SetSourceEvent(cloned);
+		pianoEventUp->SetSourceEvent(cloned);
+		pianoSoundEventDown->SetSourceEvent(cloned);
+		pianoSoundEventUp->SetSourceEvent(cloned);
 		//pedalDownRecorderEvent->SetSourceEvent(inputKeyControlPoint);
 		//pedalUpRecorderEvent->SetSourceEvent(inputKeyControlPoint);
 
@@ -599,6 +602,7 @@ Pattern * MeteorPatternGenerator::generateInputKeyControlPoint(vector<Event*>* e
 		//pattern->Add(pedalDownRecorderEvent);
 		//pattern->Add(pedalUpRecorderEvent);
 
+		es->push_back(cloned);
 		es->push_back(sustainPedalIoEvent);
 		es->push_back(pianoEventDown);
 		es->push_back(pianoEventUp);
@@ -612,7 +616,7 @@ Pattern * MeteorPatternGenerator::generateInputKeyControlPoint(vector<Event*>* e
 		OctaveShiftEvent* octaveShiftEvent = nullptr;
 		
 		if (inputKey == InputKey::LowerOctave) {
-			octaveShiftEvent = new OctaveShiftEvent(OctaveShiftType::Lower, inputKeyControlPoint->GetStartTime(), inputKeyControlPoint->GetLifeTime());
+			octaveShiftEvent = new OctaveShiftEvent(OctaveShiftType::Lower, cloned->GetStartTime(), cloned->GetLifeTime());
 			
 			/* 切換目前的音域，用來改變effect出現的位置 */
 			switch (meteorEffectShiftType) {
@@ -629,7 +633,7 @@ Pattern * MeteorPatternGenerator::generateInputKeyControlPoint(vector<Event*>* e
 			}
 		}
 		else {
-			octaveShiftEvent = new OctaveShiftEvent(OctaveShiftType::Raise, inputKeyControlPoint->GetStartTime(), inputKeyControlPoint->GetLifeTime());
+			octaveShiftEvent = new OctaveShiftEvent(OctaveShiftType::Raise, cloned->GetStartTime(), cloned->GetLifeTime());
 
 			/* 切換目前的音域，用來改變effect出現的位置 */
 			switch (meteorEffectShiftType) {
@@ -649,16 +653,17 @@ Pattern * MeteorPatternGenerator::generateInputKeyControlPoint(vector<Event*>* e
 		// recorder會自動去抓譜裡面的pedal，不用從這邊建event
 		//MeteorButtonRecorderEvent* buttonRecorderEvent = new MeteorButtonRecorderEvent(pair<InputKey, int>(inputKey, 1), inputKeyControlPoint->GetStartTime(), 0);
 
-		PianoEvent* pianoEventPress = new PianoEvent(pair<InputKey, int>(inputKey, 1), inputKeyControlPoint->GetStartTime(), 0);
+		PianoEvent* pianoEventPress = new PianoEvent(pair<InputKey, int>(inputKey, 1), cloned->GetStartTime(), 0);
 
-		octaveShiftEvent->SetSourceEvent(inputKeyControlPoint);
+		octaveShiftEvent->SetSourceEvent(cloned);
 		//buttonRecorderEvent->SetSourceEvent(inputKeyControlPoint);
-		pianoEventPress->SetSourceEvent(inputKeyControlPoint);
+		pianoEventPress->SetSourceEvent(cloned);
 
 		pattern->Add(octaveShiftEvent);
 		//pattern->Add(buttonRecorderEvent);
 		pattern->Add(pianoEventPress);
 
+		es->push_back(cloned);
 		es->push_back(octaveShiftEvent);
 		//es->push_back(buttonRecorderEvent);
 		es->push_back(pianoEventPress);
@@ -690,22 +695,24 @@ int MeteorPatternGenerator::generateRepeatPracticeEvents(vector<Event*>* es, vec
 
 Pattern* MeteorPatternGenerator::generateRepeatPracticeEvent(vector<Event*>* es, SectionStartControlPoint * sectionStart)
 {
-	LOG(LogLevel::Debug) << "MeteorSmConverter::generateRepeatPracticeEvent() : generate repeat practice event on [" << sectionStart->GetSectionIndex() << "] section at [" << sectionStart->GetStartTime() << "].";
-	Pattern* pattern = new Pattern(sectionStart);
+	SectionStartControlPoint* cloned = dynamic_cast<SectionStartControlPoint*>(sectionStart->Clone());
+	LOG(LogLevel::Debug) << "MeteorSmConverter::generateRepeatPracticeEvent() : generate repeat practice event on [" << cloned->GetSectionIndex() << "] section at [" << cloned->GetStartTime() << "].";
+	Pattern* pattern = new Pattern(cloned);
 
 	/* 直接用sectionStart->GetStartTime() + sectionStart->GetLifeTime()的話會被error說invalid use of non-static member function */
-	float rewindLength = sectionStart->GetLifeTime();
-	float repeatPracticeLifeTime = sectionStart->GetStartTime() + sectionStart->GetLifeTime();
+	float rewindLength = cloned->GetLifeTime();
+	float repeatPracticeLifeTime = cloned->GetStartTime() + cloned->GetLifeTime();
 
 	RepeatPracticeEvent* repeatPracticeEvent = new RepeatPracticeEvent(
-		sectionStart->GetSectionIndex(), 
+		cloned->GetSectionIndex(),
 		rewindLength,
 		repeatPracticeLifeTime,
 		0);
 
-	repeatPracticeEvent->SetSourceEvent(sectionStart);
+	repeatPracticeEvent->SetSourceEvent(cloned);
 
 	pattern->Add(repeatPracticeEvent);
+	es->push_back(cloned);
 	es->push_back(repeatPracticeEvent);
 
 	return pattern;
