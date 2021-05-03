@@ -40,7 +40,7 @@ bool MeteorTimeController::filterEventBySection(EventProcessor<Event>* eventProc
 	PlayableControlPoint* controlPoint = dynamic_cast<PlayableControlPoint*>(eventProcessor->GetEvent()->GetSourceEvent());
 	if (controlPoint) {
 		LOG(LogLevel::Depricated) << "MeteorTimeController::filterEventBySection() : event [" << eventProcessor->GetEventTypeName() << "] [" << eventProcessor->GetEvent()->GetStartTime() << "] is at [" << controlPoint->GetTypeName() << "] [" << controlPoint->GetSectionIndex() << "].";
-		if (controlPoint->GetSectionIndex() < tempRepeatStartSection || controlPoint->GetSectionIndex() >= tempRepeatStartSection + maxSectionAmountForOneRepeat) {
+		if (controlPoint->GetSectionIndex() <= tempRepeatStartSection || controlPoint->GetSectionIndex() > tempRepeatStartSection + maxSectionAmountForOneRepeat) {
 			return false;
 		}
 	}
