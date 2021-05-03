@@ -202,6 +202,7 @@ int MeteorPatternGenerator::CreateOtherEvent(vector<Event*>* es)
 				int tempSection = floor(startTime / defaultSectionInterval);
 
 				es->at(i)->Cast<MarkControlPoint>()->SetSectionIndex(tempSection);
+				LOG(LogLevel::Warning) << "MeteorPatternGenerator::CreateOtherEvent() : section [" << es->at(i)->GetTypeName() << "] [" << es->at(i)->Cast<MarkControlPoint>()->GetSectionIndex() << "].";
 
 				if (tempSection > maxSection)
 					maxSection = tempSection;
@@ -676,6 +677,7 @@ int MeteorPatternGenerator::generateRepeatPracticeEvents(vector<Event*>* es, vec
 	for (int i = 0; i < sectionStartTime->size() - 1; i++) {
 
 		SectionStartControlPoint* sectionStartControlPoint = new SectionStartControlPoint(i, sectionStartTime->at(i), sectionStartTime->at(i + 1) - sectionStartTime->at(i));
+
 		RepeatPracticeEvent* repeatPracticeEvent = new RepeatPracticeEvent(i, sectionStartTime->at(i + 1) - sectionStartTime->at(i), sectionStartTime->at(i + 1), 0);
 		repeatPracticeEvent->SetSourceEvent(sectionStartControlPoint);
 
