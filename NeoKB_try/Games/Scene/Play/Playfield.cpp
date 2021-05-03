@@ -147,9 +147,7 @@ int Playfield::Add(EventProcessor<Event> * ep)
 	eventProcessors.push_back(ep);
 	eventProcessorMaster->AddStaticEventProcessor(ep);
 
-	if(dynamic_cast<MarkControlPoint*>(ep->GetEvent()->GetSourceEvent()))
-		LOG(LogLevel::Debug) << "Playfield::Add(EventProcessor<Event>*) : adding [" << ep->GetEventTypeName() << "] to playfield. [" << dynamic_cast<MarkControlPoint*>(ep->GetEvent()->GetSourceEvent())->GetSectionIndex() << "]." << ep->GetEvent()->GetSourceEvent();
-
+	
 	// 這邊要把Map Algo加進去
 	if (ep->CanCast<EffectMapperInterface>()) {
 
