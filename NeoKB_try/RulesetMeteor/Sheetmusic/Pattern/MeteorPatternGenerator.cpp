@@ -202,7 +202,7 @@ int MeteorPatternGenerator::CreateOtherEvent(vector<Event*>* es)
 				int tempSection = floor(startTime / defaultSectionInterval);
 
 				es->at(i)->Cast<MarkControlPoint>()->SetSectionIndex(tempSection);
-				LOG(LogLevel::Debug) << "MeteorPatternGenerator::CreateOtherEvent() : [" << es->at(i)->GetTypeName() << "] at section [" << es->at(i)->Cast<MarkControlPoint>()->GetSectionIndex() << "]." << es->at(i);
+				LOG(LogLevel::Depricated) << "MeteorPatternGenerator::CreateOtherEvent() : [" << es->at(i)->GetTypeName() << "] at section [" << es->at(i)->Cast<MarkControlPoint>()->GetSectionIndex() << "]." << es->at(i);
 
 				if (tempSection > maxSection)
 					maxSection = tempSection;
