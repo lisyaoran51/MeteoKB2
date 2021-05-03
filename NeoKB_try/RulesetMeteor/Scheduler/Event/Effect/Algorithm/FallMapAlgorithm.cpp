@@ -55,7 +55,7 @@ int FallMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper<FallEffect
 	if (startTime > currentTime)
 		return -1;
 
-	if (startTime + lifeTime + 0.1 < currentTime)
+	if (startTime + lifeTime + 0.1 < currentTime)	// 0.1是buffer，以免常常還沒亮到登調尾巴，就熄滅了
 		return -1;
 
 	// MTO_FLOAT lifeTime = em->GetLifeTime();
