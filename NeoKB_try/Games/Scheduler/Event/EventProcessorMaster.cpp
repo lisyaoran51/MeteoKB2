@@ -243,7 +243,7 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 					TimeEventProcessorInterface* timeEventProcessor = dynamic_cast<TimeEventProcessorInterface*>(eventProcessors[i]);
 					if (timeEventProcessor) {
 						if (timeEventProcessor->GetStartTime() < currentTime && timeEventProcessor->GetIsProcessable()) {
-							LOG(LogLevel::Debug) << "EventProcessorMaster::processEvent : found time event processor [" << timeEventProcessor->GetStartTime() << "].";
+							LOG(LogLevel::Debug) << "EventProcessorMaster::processEvent : found time event processor [" << timeEventProcessor->GetStartTime() << "]. " << GetClock()->GetCurrentTime();
 							timeEventProcessor->ControllTimeController();
 							break;
 						}
