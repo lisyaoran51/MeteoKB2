@@ -696,7 +696,7 @@ int MeteorPatternGenerator::generateRepeatPracticeEvents(vector<Event*>* es, vec
 Pattern* MeteorPatternGenerator::generateRepeatPracticeEvent(vector<Event*>* es, SectionStartControlPoint * sectionStart)
 {
 	SectionStartControlPoint* cloned = dynamic_cast<SectionStartControlPoint*>(sectionStart->Clone());
-	LOG(LogLevel::Depricated) << "MeteorSmConverter::generateRepeatPracticeEvent() : generate repeat practice event on [" << cloned->GetSectionIndex() << "] section at [" << cloned->GetStartTime() << "].";
+	LOG(LogLevel::Debug) << "MeteorSmConverter::generateRepeatPracticeEvent() : generate repeat practice event on [" << cloned->GetSectionIndex() << "] section at [" << cloned->GetStartTime() + cloned->GetLifeTime() << "].";
 	Pattern* pattern = new Pattern(cloned);
 
 	/* 直接用sectionStart->GetStartTime() + sectionStart->GetLifeTime()的話會被error說invalid use of non-static member function */
