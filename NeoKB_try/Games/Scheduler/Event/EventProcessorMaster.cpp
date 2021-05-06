@@ -210,7 +210,7 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 
 		for (int i = 0; i < filteredTempStaticEventProcessors.size(); i++) {
 
-			LOG(LogLevel::Debug) << "EventProcessorMaster::processEvent : this processor is for [" << filteredTempStaticEventProcessors[i]->GetEvent()->GetTypeName() << "] [" << filteredTempStaticEventProcessors[i]->GetStartTime() << "].";
+			LOG(LogLevel::Debug) << "EventProcessorMaster::processEvent : this processor is for [" << filteredTempStaticEventProcessors[i]->GetEvent()->GetTypeName() << "] [" << filteredTempStaticEventProcessors[i]->GetStartTime() << "]. " << currentTime;
 
 			if (filteredTempStaticEventProcessors[i]->GetStartTime() >= currentTime)
 				continue;
