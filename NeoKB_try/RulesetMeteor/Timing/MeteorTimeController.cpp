@@ -386,7 +386,7 @@ int MeteorTimeController::RepeatSection(int section)
 		if (section + maxSectionAmountForOneRepeat == sectionTime.size())	// 代表整首歌已經都練完了
 			return 0; 
 		
-		LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : temp seciton is [" << section << "], repeat count is [" << tempRepeatCounts << "], now repeat start section is [" << tempRepeatStartSection << "]." << sectionTime.size();
+		LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : temp seciton is [" << section << "] end, repeat count is [" << tempRepeatCounts << "], now repeat start section is [" << tempRepeatStartSection << "]. " << controllableClock->GetCurrentTime();
 
 
 		totalRewindLength = sectionTime[section + 1] - sectionTime[tempRepeatStartSection] + repeatBufferTime;	//額外多一秒緩衝時間
@@ -426,8 +426,10 @@ int MeteorTimeController::RepeatSection(int section)
 	 * 現在用方法2，直接跳過去
 	 */
 
-	if(totalRewindLength > 0)
+	if (totalRewindLength > 0) {
 		JumpTo(controllableClock->GetCurrentTime() - totalRewindLength);
+		LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : after repeat time [" << controllableClock->GetCurrentTime() << "]";
+	}
 	else
 		LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : go forward to next section.";
 
