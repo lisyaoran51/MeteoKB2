@@ -210,7 +210,7 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 
 		for (int i = 0; i < filteredTempStaticEventProcessors.size(); i++) {
 
-			LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent : this processor is for [" << filteredTempStaticEventProcessors[i]->GetEvent()->GetTypeName() << "].";
+			LOG(LogLevel::Debug) << "EventProcessorMaster::processEvent : this processor is for [" << filteredTempStaticEventProcessors[i]->GetEvent()->GetTypeName() << "] [" << filteredTempStaticEventProcessors[i]->GetStartTime() << "].";
 
 			if (filteredTempStaticEventProcessors[i]->GetStartTime() >= currentTime)
 				continue;
@@ -243,7 +243,7 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 					TimeEventProcessorInterface* timeEventProcessor = dynamic_cast<TimeEventProcessorInterface*>(eventProcessors[i]);
 					if (timeEventProcessor) {
 						if (timeEventProcessor->GetStartTime() < currentTime && timeEventProcessor->GetIsProcessable()) {
-							LOG(LogLevel::Debug) << "EventProcessorMaster::processEvent : found time event processor [" << timeEventProcessor->GetStartTime() << "]. " << GetClock()->GetCurrentTime() << " " << currentTime;
+							LOG(LogLevel::Debug) << "EventProcessorMaster::processEvent : found time event processor [" << timeEventProcessor->GetStartTime() << "]. " << GetClock()->GetCurrentTime();
 							timeEventProcessor->ControllTimeController();
 							break;
 						}
