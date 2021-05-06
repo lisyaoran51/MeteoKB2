@@ -389,9 +389,9 @@ int MeteorTimeController::RepeatSection(int section)
 		LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : temp seciton is [" << section << "] end, repeat count is [" << tempRepeatCounts << "], now repeat start section is [" << tempRepeatStartSection << "]. " << controllableClock->GetCurrentTime();
 
 
-		totalRewindLength = sectionTime[section + 1] - sectionTime[tempRepeatStartSection] + repeatBufferTime;	//額外多一秒緩衝時間
+		totalRewindLength = sectionTime[section] - sectionTime[tempRepeatStartSection] + repeatBufferTime;	//額外多一秒緩衝時間
 
-		LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : total rewind length [" << totalRewindLength << "], section time [" << sectionTime[section + 1] << "], [" << sectionTime[tempRepeatStartSection] << "], section [" << section << "].";
+		LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : total rewind length [" << totalRewindLength << "], section time [" << sectionTime[section] << "], [" << sectionTime[tempRepeatStartSection] << "], section [" << section << "].";
 
 		//for(int i = 0; i < 60; i++)
 		//	LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : section [" << i << "]  [" << sectionTime[i] << "]";
