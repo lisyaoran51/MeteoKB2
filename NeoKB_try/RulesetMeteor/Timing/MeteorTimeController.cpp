@@ -427,9 +427,9 @@ int MeteorTimeController::RepeatSection(int section)
 	 */
 
 	if (totalRewindLength > 0) {
-		LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : before repeat time [" << controllableClock->GetCurrentTime() << "]";
+		LOG(LogLevel::Depricated) << "MeteorTimeController::RepeatSection() : before repeat time [" << controllableClock->GetCurrentTime() << "]";
 		JumpTo(controllableClock->GetCurrentTime() - totalRewindLength);
-		LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : after repeat time [" << controllableClock->GetCurrentTime() << "]";
+		LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : after repeat time [" << controllableClock->GetCurrentTime() - totalRewindLength << "]";
 	}
 	else
 		LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : go forward to next section.";
