@@ -210,7 +210,7 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 
 		for (int i = 0; i < filteredTempStaticEventProcessors.size(); i++) {
 
-			LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent : this processor is for [" << filteredTempStaticEventProcessors[i]->GetEvent()->GetTypeName() << "] [" << filteredTempStaticEventProcessors[i]->GetStartTime() << "]. " << currentTime;
+			LOG(LogLevel::Debug) << "EventProcessorMaster::processEvent : this processor is for [" << filteredTempStaticEventProcessors[i]->GetEvent()->GetTypeName() << "] [" << filteredTempStaticEventProcessors[i]->GetStartTime() << "]. " << currentTime;
 
 			if (filteredTempStaticEventProcessors[i]->GetStartTime() >= currentTime)
 				continue;
@@ -232,7 +232,6 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 					InstrumentEventProcessorInterface* instrumentEventProcessor = dynamic_cast<InstrumentEventProcessorInterface*>(filteredTempStaticEventProcessors[i]);
 					if (instrumentEventProcessor) {
 						if (instrumentEventProcessor->GetStartTime() < currentTime && instrumentEventProcessor->GetIsTransferable()) {
-							LOG(LogLevel::Debug) << "EventProcessorMaster::processEvent : found Instrument event processor [" << instrumentEventProcessor->GetStartTime() << "]. now time " << currentTime;
 							LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent : found instrument event processor [" << instrumentEventProcessor->GetStartTime() << "].";
 							instrumentEventProcessor->ControlInstrument();
 						}
