@@ -352,6 +352,7 @@ int MeteorTimeController::RepeatSection(int section)
 
 	// TODO: 切換Event processor filter
 	float totalRewindLength = 0;
+	bool isGoForward = false;
 
 	if (tempRepeatCounts < maxRepeatCounts - 1) {
 
@@ -402,33 +403,32 @@ int MeteorTimeController::RepeatSection(int section)
 		outputManager->PushMessage(message);
 
 		tempRepeatCounts++;
+		isGoForward = true;
 	}
 	else {
 
 		// 暫停一秒
-		speedAdjuster->SetFreezeTime(1);
-		JumpTo(sectionTime[section + 1]);
+		//speedAdjuster->SetFreezeTime(1);
+		//JumpTo(sectionTime[section + 1]);
 
-		GetScheduler()->AddTask([=]() {
+		tempRepeatStartSection += maxSectionAmountForOneRepeat;
+		tempRepeatCounts = 0;
+		eventProcessorFilter->SwitchVariant(0);	// 落下燈光示範
+		repeatPracticeMode = RepeatPracticeMode::Demonstrate;
+		LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : set filter to [" << 0 << "], demonstrating";
 
-			tempRepeatStartSection += maxSectionAmountForOneRepeat;
-			tempRepeatCounts = 0;
-			eventProcessorFilter->SwitchVariant(0);	// 落下燈光示範
-			repeatPracticeMode = RepeatPracticeMode::Demonstrate;
-			LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : set filter to [" << 0 << "], demonstrating";
+		LightRingPanelMessage* message = new LightRingPanelMessage(1);
+		LOG(LogLevel::Depricated) << "MeteorTimeController::RepeatSection : send i2c [" << message->ToString() << "].";
+		outputManager->PushMessage(message);
 
-			return 0;
-		});
-
-
-		totalRewindLength = 0;
+		totalRewindLength = 1;
 		
-
 		if (tempRepeatStartSection + maxSectionAmountForOneRepeat < section + 1) {
 			
 			LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : ???";
 			RepeatSection(section);
 		}
+		isGoForward = false;
 	}
 
 
@@ -437,14 +437,14 @@ int MeteorTimeController::RepeatSection(int section)
 	 * 現在用方法2，直接跳過去
 	 */
 
-	if (totalRewindLength > 0) {
-		LOG(LogLevel::Depricated) << "MeteorTimeController::RepeatSection() : before repeat time [" << controllableClock->GetCurrentTime() << "]";
-		JumpTo(controllableClock->GetCurrentTime() - totalRewindLength);
+	if (isGoForward) {
 		LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : after repeat time [" << controllableClock->GetCurrentTime() - totalRewindLength << "]";
 	}
-	else
+	else {
 		LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : go forward to next section.";
+	}
 
+	JumpTo(controllableClock->GetCurrentTime() - totalRewindLength);
 
 	
 
