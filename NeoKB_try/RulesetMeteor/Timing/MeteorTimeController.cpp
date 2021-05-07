@@ -407,15 +407,22 @@ int MeteorTimeController::RepeatSection(int section)
 
 		// 暫停一秒
 		speedAdjuster->SetFreezeTime(1);
-		JumpTo(sectionTime[section + 1] - 0.01);
+		JumpTo(sectionTime[section + 1]);
+
+		GetScheduler()->AddTask([=]() {
+
+			tempRepeatStartSection += maxSectionAmountForOneRepeat;
+			tempRepeatCounts = 0;
+			eventProcessorFilter->SwitchVariant(0);	// 落下燈光示範
+			repeatPracticeMode = RepeatPracticeMode::Demonstrate;
+			LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : set filter to [" << 0 << "], demonstrating";
+
+			return 0;
+		});
+
 
 		totalRewindLength = 0;
-		tempRepeatStartSection += maxSectionAmountForOneRepeat;
-		tempRepeatCounts = 0;
-		eventProcessorFilter->SwitchVariant(0);	// 落下燈光示範
-		repeatPracticeMode = RepeatPracticeMode::Demonstrate;
-		LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : set filter to [" << 0 << "], demonstrating";
-
+		
 
 		if (tempRepeatStartSection + maxSectionAmountForOneRepeat < section + 1) {
 			

@@ -706,7 +706,7 @@ Pattern* MeteorPatternGenerator::generateRepeatPracticeEvent(vector<Event*>* es,
 	RepeatPracticeEvent* repeatPracticeEvent = new RepeatPracticeEvent(
 		cloned->GetSectionIndex(),
 		rewindLength,
-		repeatPracticeLifeTime - 0.01,
+		repeatPracticeLifeTime,
 		0);
 
 	repeatPracticeEvent->SetSourceEvent(cloned);
