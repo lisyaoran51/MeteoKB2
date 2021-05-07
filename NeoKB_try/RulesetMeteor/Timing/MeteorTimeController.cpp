@@ -405,12 +405,13 @@ int MeteorTimeController::RepeatSection(int section)
 	}
 	else {
 
+		// 暫停一秒
+		speedAdjuster->SetFreezeTime(1);
+		JumpTo(sectionTime[section + 1] - 0.01);
+
 		totalRewindLength = 0;
 		tempRepeatStartSection += maxSectionAmountForOneRepeat;
 		tempRepeatCounts = 0;
-
-		// 暫停一秒
-		speedAdjuster->SetFreezeTime(1);
 		eventProcessorFilter->SwitchVariant(0);	// 落下燈光示範
 		repeatPracticeMode = RepeatPracticeMode::Demonstrate;
 		LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : set filter to [" << 0 << "], demonstrating";
