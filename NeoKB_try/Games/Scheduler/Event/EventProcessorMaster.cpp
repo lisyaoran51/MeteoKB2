@@ -232,6 +232,7 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 					InstrumentEventProcessorInterface* instrumentEventProcessor = dynamic_cast<InstrumentEventProcessorInterface*>(filteredTempStaticEventProcessors[i]);
 					if (instrumentEventProcessor) {
 						if (instrumentEventProcessor->GetStartTime() < currentTime && instrumentEventProcessor->GetIsTransferable()) {
+							LOG(LogLevel::Debug) << "EventProcessorMaster::processEvent : found Instrument event processor [" << instrumentEventProcessor->GetStartTime() << "]. now time " << currentTime;
 							LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent : found instrument event processor [" << instrumentEventProcessor->GetStartTime() << "].";
 							instrumentEventProcessor->ControlInstrument();
 						}
@@ -242,9 +243,9 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 				if (eventProcessors[i]->GetEventProcessorType() == EventProcessorType::Time) {
 					TimeEventProcessorInterface* timeEventProcessor = dynamic_cast<TimeEventProcessorInterface*>(eventProcessors[i]);
 					if (timeEventProcessor) {
-						LOG(LogLevel::Debug) << "EventProcessorMaster::processEvent : found time event processor [" << timeEventProcessor->GetStartTime() << "]. now time " << GetClock()->GetCurrentTime();
+						LOG(LogLevel::Debug) << "EventProcessorMaster::processEvent : found time event processor [" << timeEventProcessor->GetStartTime() << "]. now time " << currentTime;
 						if (timeEventProcessor->GetStartTime() < currentTime && timeEventProcessor->GetIsProcessable()) {
-							LOG(LogLevel::Debug) << "EventProcessorMaster::processEvent : found time event processor [" << timeEventProcessor->GetStartTime() << "]. " << GetClock()->GetCurrentTime();
+							LOG(LogLevel::Debug) << "EventProcessorMaster::processEvent : found time event processor [" << timeEventProcessor->GetStartTime() << "]. " << currentTime;
 							timeEventProcessor->ControllTimeController();
 							break;
 						}
