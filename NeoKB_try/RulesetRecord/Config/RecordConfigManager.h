@@ -23,7 +23,9 @@ namespace Config{
 
 	protected:
 
-		int InitializeDefault();
+		virtual int initializeDefault();
+
+		virtual int setNamesOfConfig();
 
 	};
 
