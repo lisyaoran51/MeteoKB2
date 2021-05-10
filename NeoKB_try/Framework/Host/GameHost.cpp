@@ -316,7 +316,7 @@ int GameHost::setupConfig()
 
 
 	InstantConfigManager* instantConfigManager = new InstantConfigManager();
-	instantConfigManager->Initialize();
+	instantConfigManager->Initialize(storage);
 	dependencies->Cache<InstantConfigManager>(instantConfigManager);
 
 	return 0;
