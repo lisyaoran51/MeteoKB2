@@ -7,6 +7,7 @@
 #include <map>
 #include "../IO/Storage.h"
 #include "../../Util/StringSplitter.h"
+#include "../../Util/Log.h"
 
 
 #define CONFIG_PATH 
