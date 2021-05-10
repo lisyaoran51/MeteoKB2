@@ -156,6 +156,8 @@ namespace Configurations {
 
 		map<string, Setting> namesOfConfig;
 
+		virtual int setNamesOfConfig() = 0;
+
 		virtual int initializeDefault() = 0;
 
 		enum class ConfigType {
@@ -211,6 +213,8 @@ namespace Configurations {
 			if (stream == nullptr)
 				return -1;
 
+			string line;
+
 			do {
 
 				getline(*stream, line);
@@ -240,14 +244,19 @@ namespace Configurations {
 				string key = StringSplitter::Trim(pair[0]);
 				string value = StringSplitter::Trim(pair[1]);
 
-				if (key == "" || value == "")
+				if (key == "" || value == "") {
+					LOG(LogLevel::Warning) << "int TConfigManager::loadConfigs() : line [" << line << "] in wrong format.";
 					continue;
+				}
 
-				if (namesOfConfig.find(key) == namesOfConfig.end())
+				if (namesOfConfig.find(key) == namesOfConfig.end()) {
+					LOG(LogLevel::Warning) << "int TConfigManager::loadConfigs() : line [" << line << "] key doesn't exist.";
 					continue;
+				}
 
 				switch (checkConfigType(value)) {
 				case ConfigType::None:
+					LOG(LogLevel::Warning) << "int TConfigManager::loadConfigs() : line [" << line << "] in wrong format.";
 					continue;
 					break;
 				case ConfigType::Bool:
