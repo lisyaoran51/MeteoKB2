@@ -41,13 +41,13 @@ int SoundSelectPanel::load(FrameworkConfigManager * f, Instrument* i, AudioManag
 
 	isPresent = true;
 
-	return 0;
+	//return 0;
 	GetScheduler()->AddDelayedTask([=]() {
 	
 	
 		LOG(LogLevel::Debug) << "SoundSelectPanel::load() : test switch sound select panel on [" << instrument->GetTypeName() << "].";
 		/* 測試用，之後要刪掉改用bluetooth */
-		TSoundBindingSet<Pitch>* soundBindingSet = dynamic_cast<TSoundBindingSet<Pitch>*>(audioManager->GetSampleManager()->GetSoundBindingSets()->at(0));
+		TSoundBindingSet<Pitch>* soundBindingSet = dynamic_cast<TSoundBindingSet<Pitch>*>(audioManager->GetSampleManager()->GetSoundBindingSets()->at(1));
 		dynamic_cast<Piano*>(instrument)->SwitchSoundBindings(soundBindingSet);
 	
 		return 0;
