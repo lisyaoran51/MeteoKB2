@@ -279,7 +279,7 @@ int GameHost::setupConfig()
 	LOG(LogLevel::Info) << "GameHost::setupConfig() : loading default config.";
 
 	frameworkConfigManager = new FrameworkConfigManager();
-	frameworkConfigManager->Initialize();
+	frameworkConfigManager->Initialize(storage);
 
 	//fConfigManager->Set(FrameworkSetting::SongTitle, string(argv[1]));  // 這行之後要刪掉
 	frameworkConfigManager->Set(FrameworkSetting::PatternGenerator, string("MeteorPatternGenerator"));
@@ -297,7 +297,7 @@ int GameHost::setupConfig()
 	
 
 	MeteorConfigManager* meteorConfigManager = new MeteorConfigManager();
-	meteorConfigManager->Initialize();
+	meteorConfigManager->Initialize(storage);
 
 	meteorConfigManager->Set(MeteorSetting::WhiteKeyTargetHeight, 15);	// 低4	  高9 // 低15	// 高10
 	meteorConfigManager->Set(MeteorSetting::BlackKeyTargetHeight, 10);	//10

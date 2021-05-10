@@ -27,6 +27,8 @@ namespace Util {
 
 		static std::string Combine(std::vector<std::string> element, std::string delimiter);
 
+		static std::string Trim(std::string s);
+
 	};
 
 

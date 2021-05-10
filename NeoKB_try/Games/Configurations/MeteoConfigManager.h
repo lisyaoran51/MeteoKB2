@@ -23,7 +23,9 @@ namespace Configurations{
 
 	protected:
 
-		virtual int InitializeDefault();
+		virtual int initializeDefault();
+
+		virtual int setNamesOfConfig();
 
 
 

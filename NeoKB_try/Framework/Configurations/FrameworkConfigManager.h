@@ -22,7 +22,10 @@ namespace Configurations {
 
 	protected:
 
-		int InitializeDefault();
+		virtual int initializeDefault();
+
+		virtual int setNamesOfConfig();
+
 
 	};
 
@@ -46,6 +49,9 @@ namespace Configurations {
 
 		FrameSync,
 		FrameRate,
+		UpdateRate,
+		InputRate,
+		AudioUpdateRate,
 
 		CursorSensitivity,
 

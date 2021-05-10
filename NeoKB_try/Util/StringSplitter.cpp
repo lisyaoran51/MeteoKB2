@@ -41,3 +41,22 @@ string StringSplitter::Combine(vector<string> element, string delimiter)
 		
 	return result;
 }
+
+string StringSplitter::Trim(std::string s)
+{
+	int start = 0;
+	int end = s.size() - 1;
+
+	while (s[start] == ' ') {
+		start++;
+	}
+
+	while (s[end] == ' ') {
+		end--;
+	}
+
+	if (start >= end)
+		return "";
+
+	return s.substr(start, end - start + 1);
+}
