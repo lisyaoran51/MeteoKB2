@@ -122,6 +122,12 @@ fstream* PlatformStorage::GetStream(string filePath)
 	if (!initialized)
 		throw runtime_error("int PlatformStorage::GetStream() : Not initialized.");
 
+	LOG(LogLevel::Debug) << "PlatformStorage::GetStream() : get file [" << GetUsableFilePathFor(filePath) << "].";
+
+	if (!Exist(filePath)) {
+		LOG(LogLevel::Debug) << "PlatformStorage::GetStream() : file [" << GetUsableFilePathFor(filePath) << "] not exist.";
+		return nullptr;
+	}
 
 	// 如果沒先check exist會有error
 	return new fstream(GetUsableFilePathFor(filePath));

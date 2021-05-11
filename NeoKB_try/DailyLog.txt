@@ -2997,3 +2997,6 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 	
 5/9
 	daemon很簡單，就把execstart射到城市，reastart設always就好
+	
+5/10
+	改玩了config manager讀檔，部過之後要改掉如果沒有ini檔就會卡住的問題
