@@ -36,7 +36,7 @@ namespace Input {
 
 	protected:
 
-		GameHost* host;
+		Host* host;
 
 		vector<Triggerable*> triggerQueue;
 
@@ -111,7 +111,7 @@ namespace Input {
 		/// </summary>
 		int load();
 
-		int load(GameHost* h);
+		int load(Host* h);
 
 		//vector<InputHandler*> inputHandlers;
 

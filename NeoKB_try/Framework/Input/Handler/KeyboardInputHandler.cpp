@@ -5,13 +5,13 @@
 
 
 using namespace Framework::Input::Handler;
-using namespace Framework::Host;
+using namespace Framework::Hosts;
 using namespace std;
 using namespace Framework::IO;
 
 
 
-int KeyboardInputHandler::Initialize(GameHost * host)
+int KeyboardInputHandler::Initialize(Host * host)
 {
 	LOG(LogLevel::Info) << "KeyboardInputHandler::Initialize() : adding handler.";
 

@@ -2,14 +2,14 @@
 #define METEO_GAME_HOST_H
 
 
-#include "../Host/GameHost.h"
+#include "../../Games/Hosts/GameHost.h"
 
 
-using namespace Framework::Host;
+using namespace Games::Hosts;
 
 
-namespace Framework {
-namespace Host {
+namespace Desktop {
+namespace Hosts {
 
 	class MeteoGameHost : public GameHost {
 
@@ -19,10 +19,6 @@ namespace Host {
 	protected:
 
 		virtual int setupMainInterface();
-
-		virtual int SetupOutputManager(OutputManager* oManager);
-
-		virtual vector<InputHandler*>* createAvailableInputHandlers();
 
 		virtual Storage* getStorage(string sName);
 	};

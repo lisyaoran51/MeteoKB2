@@ -6,12 +6,12 @@
 
 
 namespace Framework {
-namespace Host{
-	class GameHost;
+namespace Hosts{
+	class Host;
 }}
 
 
-using namespace Framework::Host;
+using namespace Framework::Hosts;
 
 
 namespace Framework {
@@ -21,7 +21,7 @@ namespace Database{
 
 	public:
 
-		DatabaseContextFactory(GameHost* h);
+		DatabaseContextFactory(Host* h);
 
 		int Initialize();
 
@@ -31,7 +31,7 @@ namespace Database{
 
 		bool initialized = false;
 
-		GameHost* host;
+		Host* host;
 
 		DatabaseContext* dbContext;
 

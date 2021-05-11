@@ -3,13 +3,13 @@
 
 #include <functional>
 #include "../../../Util/DataStructure/ActionList.h"
-#include "../../../Framework/Host/GameHost.h"
+#include "../../../Framework/Hosts/Host.h"
 #include "../../Users/User.h"
 
 
 using namespace std;
 using namespace Util::DataStructure;
-using namespace Framework::Host;
+using namespace Framework::Hosts;
 using namespace Games::Users;
 
 
@@ -21,7 +21,7 @@ namespace Api{
 
 	public:
 
-		ApiAccess(GameHost* gHost);
+		ApiAccess(Host* gHost);
 
 		/// <summary>
 		/// ¼g¤JsmÀÉ®Éªºcallback
@@ -47,7 +47,7 @@ namespace Api{
 
 	protected:
 
-		GameHost* gameHost = nullptr;
+		Host* gameHost = nullptr;
 
 		User* user = nullptr;
 

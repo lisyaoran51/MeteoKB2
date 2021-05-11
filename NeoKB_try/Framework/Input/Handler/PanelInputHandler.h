@@ -4,10 +4,10 @@
 
 #include <vector>
 #include "InputHandler.h"
-#include "../../Host/GameHost.h"
+#include "../../Hosts/Host.h"
 
 using namespace std;
-using namespace Framework::Host;
+using namespace Framework::Hosts;
 
 
 namespace Framework {
@@ -21,7 +21,7 @@ namespace Handler {
 
 	public:
 
-		virtual int Initialize(GameHost* host);
+		virtual int Initialize(Host* host);
 
 		virtual int HandleState(InputState* inputState);
 

@@ -9,7 +9,7 @@
 using namespace Games::IO::Communications;
 
 
-BleAccess::BleAccess(GameHost * gHost): TCommunicationComponent(gHost), RegisterType("BleAccess")
+BleAccess::BleAccess(Host * gHost): TCommunicationComponent(gHost), RegisterType("BleAccess")
 {
 	bluetoothPhone = host->GetMainInterface()->GetBluetoothPhone();
 	communicationState = CommunicationState::Failed;

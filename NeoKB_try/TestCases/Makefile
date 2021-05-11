@@ -4,7 +4,7 @@ VPATH=../Framework:../Framework/Allocation:../Framework/Allocation/Hierachal:../
 ../Framework/Devices:\
 ../Framework/Exception:\
 ../Framework/Graphic:../Framework/Graphic/Map:\
-../Framework/Host:\
+../Framework/Hosts:\
 ../Framework/Input:../Framework/Input/Handler:../Framework/Input/KeyBindings:\
 ../Framework/IO:../Framework/IO/Stores:\
 ../Framework/Database:\
@@ -42,7 +42,7 @@ INCLUDE = -I../Framwork -I../Framework/Allocation -I../Framework/Allocation/Hier
 -I../Framework/Devices \
 -I../Framework/Exception \
 -I../Framework/Graphic -I../Framework/Graphic/Map \
--I../Framework/Host \
+-I../Framework/Hosts \
 -I../Framework/Input -I../Framework/Input/Handler -I../Framework/Input/KeyBindings \
 -I../Framework/IO -I../Framework/IO/Stores \
 -I../Framework/Database \
@@ -108,7 +108,7 @@ TConfigManager.o FrameworkConfigManager.o \
 DatabaseContext.o DatabaseContextFactory.o DatabaseStore.o FakeDatabaseContextFactory.o FakeMeteoDatabaseContext.o MeteoDatabaseContext.o \
 BluetoothDevice.o Device.o DisplayDevice.o InputDevice.o KeyboardDevice.o PanelDevice.o \
 Drawable.o Map.o \
-GameHost.o MeteoGameHost.o \
+Host.o MeteoGameHost.o \
 BluetoothState.o CustomInputManager.o InputManager.o InputState.o KeyboardState.o PanelState.o PassThroughInputManager.o UserInputManager.o \
 BluetoothInputHandler.o KeyboardInputHandler.o PanelInputHandler.o KeyBindingStore.o \
 BluetoothPhone.o Display.o FileStore.o Keyboard.o MainInterface.o Panel.o Peripheral.o PlatformStorage.o Storage.o StorageResourceStore.o DynamicPathResourceStore.o \

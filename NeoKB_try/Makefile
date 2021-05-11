@@ -4,7 +4,7 @@ Framework/Configurations:\
 Framework/Devices:\
 Framework/Exception:\
 Framework/Graphic:Framework/Graphic/Map:\
-Framework/Host:\
+Framework/Hosts:\
 Framework/Input:Framework/Input/Messages:Framework/Input/Handler:Framework/Input/KeyBindings:\
 Framework/IO:Framework/IO/Stores:Framework/IO/Communications:\
 Framework/Output:Framework/Output/Panels:Framework/Output/Bluetooths:\
@@ -69,7 +69,7 @@ INCLUDE = -IFramwork -IFramework/Allocation -IFramework/Allocation/Hierachal -IF
 -IFramework/Devices \
 -IFramework/Exception \
 -IFramework/Graphic -IFramework/Graphic/Map \
--IFramework/Host \
+-IFramework/Hosts \
 -IFramework/Input -IFramework/Input/Messages -IFramework/Input/Handler -IFramework/Input/KeyBindings \
 -IFramework/IO -IFramework/IO/Stores -IFramework/IO/Communications \
 -IFramework/Output -IFramework/Output/Panels -IFramework/Output/Bluetooths \
@@ -161,7 +161,7 @@ ConfigManager.o FrameworkConfigManager.o \
 DatabaseContext.o DatabaseContextFactory.o DatabaseStore.o FakeMeteoDatabaseContext.o MeteoDatabaseContext.o ReadonlyCsvDatabaseContextFactory.o MemoryBasedDatabaseContextFactory.o \
 BluetoothDevice.o Device.o DisplayDevice.o InputDevice.o OutputDevice.o KeyboardDevice.o PanelDevice.o \
 Drawable.o Map.o \
-GameHost.o MeteoGameHost.o \
+Host.o MeteoGameHost.o \
 BluetoothState.o CustomInputManager.o InputManager.o InputState.o KeyboardState.o PanelState.o PassThroughInputManager.o HasInputKey.o \
 InputHandler.o BluetoothInputHandler.o KeyboardInputHandler.o PanelInputHandler.o KeyBindingStore.o \
 BluetoothPhone.o Display.o FileStore.o Keyboard.o MainInterface.o Panel.o Peripheral.o PlatformStorage.o Storage.o StorageResourceStore.o DynamicPathResourceStore.o \

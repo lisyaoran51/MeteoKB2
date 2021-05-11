@@ -1,12 +1,12 @@
 #include "SheetmusicManager.h"
 
-#include "../../Framework/Host/GameHost.h"
+#include "../../Framework/Hosts/Host.h"
 #include "ResourceStoreWorkingSm.h"
 
 
 using namespace Games::Sheetmusics;
 using namespace std;
-using namespace Framework::Host;
+using namespace Framework::Hosts;
 using namespace Framework::IO::Api;
 
 
@@ -49,7 +49,7 @@ SmManager::SmManager(): RegisterType("SmManager")
 	// TODO: 從資料庫中加入每個ruleset info? 應該在sm manager外面手動加
 }
 
-SmManager::SmManager(Storage * s, function<DatabaseContext*()> gContext, RulesetStore * rStore, GameHost * gHost): RegisterType("SmManager")
+SmManager::SmManager(Storage * s, function<DatabaseContext*()> gContext, RulesetStore * rStore, Host * gHost): RegisterType("SmManager")
 {
 	smInfos = new vector<SmInfo*>();
 
@@ -175,60 +175,67 @@ SmInfo * SmManager::importToStorage(FileStore * fStore, SheetmusicStore * sStore
 
 		fstream* stream = fileReader.GetStream(smNames->at(i));
 
-		// 每一個要用的decoder會在程式開始的時候註冊
-		LOG(LogLevel::Finer) << "vector<SmInfo*>* SmManager::importToStorage(FileReader&) : Getting decoder of [" << smNames->at(i) << "].";
-		SmDecoder* smDecoder = SmDecoder::GetDecoder(stream);
+		try {
+
+			// 每一個要用的decoder會在程式開始的時候註冊
+			LOG(LogLevel::Finer) << "vector<SmInfo*>* SmManager::importToStorage(FileReader&) : Getting decoder of [" << smNames->at(i) << "].";
+			SmDecoder* smDecoder = SmDecoder::GetDecoder(stream);
 
 
-		LOG(LogLevel::Finer) << "vector<SmInfo*>* SmManager::importToStorage(FileReader&) : Decode [" << smNames->at(i) << "] ...";
-		Sm<Event>* sm = smDecoder->Decode(stream);
+			LOG(LogLevel::Finer) << "vector<SmInfo*>* SmManager::importToStorage(FileReader&) : Decode [" << smNames->at(i) << "] ...";
+			Sm<Event>* sm = smDecoder->Decode(stream);
+
+			sm->GetSmInfo()->fileName = smNames->at(i);
+
+			/* --------- 這段不用了，反正也用步道，要把file reader的get sm info set拿掉。後來發現要留，不然working sm會拿不到path */
+			// TODO: 把這段佔實的code改好，正確做法應該不是從filereader拿sm set info，要去trace osu的寫法
+			//sm->GetSmInfo()->smSetInfo = fileReader.GetSmSetInfo();
+			sm->GetSmInfo()->fileInfo = new FileInfo{
+				sm->GetSmInfo()->id,
+				fileReader.GetPath(),
+				0
+			};
+
+
+			fStore->AddFile(sm->GetSmInfo()->fileInfo);
+
+			// 要在這邊加入如果還沒這個普，就寫入新譜
+
+
+			// 寫到這邊 不知道怎麼建ruleset---> 在建立sm  manager時手動把ruleset info加入
+			// 後來: 改用osu原本的寫法，去database抓
+			RulesetInfo* rulesetInfo = rulesetStore->GetRulesetInfo(sm->GetSmInfo()->rulesetId);
+
+
+			/* 後來改為用database讀ruleset info了
+
+			// 這邊鮮血死，decoder解出來的ruleset id自動設為1，然後sm manager的ruleset自動加入MeteorRuleset的id是1
+			// 之後要改成去檔案讀
+			for (int i = 0; i < rulesetInfos->size(); i++){
+				if (rulesetInfos->at(i)->GetId() == sm->GetSmInfo()->rulesetId) {
+					rulesetInfo = rulesetInfos->at(i);
+					break;
+				}
+			}
+			*/
+
+			if (rulesetInfo)
+				sm->GetSmInfo()->rulesetInfo = rulesetInfo;
+			else {
+				// TODO: 噴錯誤
+			}
+
+			smInfos->push_back(sm->GetSmInfo());
+
+		}
+		catch (exception& e) {
+			LOG(LogLevel::Warning) << "SmManager::importToStorage() : file [" << smNames->at(i) << "] decode failed. error message:" << e.what();
+		}
+
 
 		stream->close();
 		delete stream;
-
-		sm->GetSmInfo()->fileName = smNames->at(i);
-
-		/* --------- 這段不用了，反正也用步道，要把file reader的get sm info set拿掉。後來發現要留，不然working sm會拿不到path */
-		// TODO: 把這段佔實的code改好，正確做法應該不是從filereader拿sm set info，要去trace osu的寫法
-		//sm->GetSmInfo()->smSetInfo = fileReader.GetSmSetInfo();
-		sm->GetSmInfo()->fileInfo = new FileInfo{
-			sm->GetSmInfo()->id,
-			fileReader.GetPath(),
-			0
-		};
 		
-
-		fStore->AddFile(sm->GetSmInfo()->fileInfo);
-
-		// 要在這邊加入如果還沒這個普，就寫入新譜
-		
-
-		// 寫到這邊 不知道怎麼建ruleset---> 在建立sm  manager時手動把ruleset info加入
-		// 後來: 改用osu原本的寫法，去database抓
-		RulesetInfo* rulesetInfo = rulesetStore->GetRulesetInfo(sm->GetSmInfo()->rulesetId);
-
-
-		/* 後來改為用database讀ruleset info了
-
-		// 這邊鮮血死，decoder解出來的ruleset id自動設為1，然後sm manager的ruleset自動加入MeteorRuleset的id是1
-		// 之後要改成去檔案讀
-		for (int i = 0; i < rulesetInfos->size(); i++){
-			if (rulesetInfos->at(i)->GetId() == sm->GetSmInfo()->rulesetId) {
-				rulesetInfo = rulesetInfos->at(i);
-				break;
-			}
-		}
-		*/
-
-		if (rulesetInfo)
-			sm->GetSmInfo()->rulesetInfo = rulesetInfo;
-		else {
-			// TODO: 噴錯誤
-		}
-
-		smInfos->push_back(sm->GetSmInfo());
-
-
 	}
 
 	// TODO: 之後資料庫改好以後，這邊要改成下面這兩行，sminfos改成擺在資料庫裡

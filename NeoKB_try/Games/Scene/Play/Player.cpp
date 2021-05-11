@@ -49,7 +49,18 @@ int Player::load(MeteoConfigManager* m, Instrument* instru)
 
 	// 這個是先寫死ruleset ，之後要改成從檔案讀(像下一行那樣)
 	//rulesetInfo.SetValue(new RulesetInfo("MeteorRuleset", 1));
-	rulesetInfo.SetValue(workingSm.GetValue()->GetSm()->GetSmInfo()->rulesetInfo);
+
+	try {
+		rulesetInfo.SetValue(workingSm.GetValue()->GetSm()->GetSmInfo()->rulesetInfo);
+	}
+	catch (exception& e) {
+		LOG(LogLevel::Info) << "Player::load() : create sm failed. go back to song select. error message:" << e.what();
+
+		// 這邊應該要丟error handling給手機
+
+		Exit();
+		return -1;
+	}
 
 	// debug
 	for (int i = 0; i < workingSm.GetValue()->GetSm()->GetEvents()->size(); i++) {

@@ -4,14 +4,14 @@
 #include "CommunicationCollectionManager.h"
 #include "CommunicationRequest.h"
 #include "../../Allocation/Hierachal/MtoObject.h"
-#include "../../../Framework/Host/GameHost.h"
+#include "../../../Framework/Hosts/Host.h"
 #include <deque>
 #include "BleCommunicationInputHandler.h"
 
 
 
 using namespace Framework::Allocation::Hierachal;
-using namespace Framework::Host;
+using namespace Framework::Hosts;
 using namespace std;
 
 
@@ -23,7 +23,7 @@ namespace Communications{
 
 	public:
 
-		CommunicationAccess(GameHost* gHost);
+		CommunicationAccess(Host* gHost);
 
 		/// <summary>
 		/// 把request丟給下面所有component，如果有component可以接，就會跑
@@ -41,7 +41,7 @@ namespace Communications{
 
 		BleCommunicationInputHandler* bleCommunicationInputHandler = nullptr;
 		
-		int setHost(GameHost* gHost);
+		int setHost(Host* gHost);
 
 	};
 

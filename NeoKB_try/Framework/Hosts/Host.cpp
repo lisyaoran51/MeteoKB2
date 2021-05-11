@@ -1,4 +1,4 @@
-#include "GameHost.h"
+#include "Host.h"
 
 
 #include "../Input/InputManager.h"
@@ -7,38 +7,34 @@
 #include "../../Instruments/Instrument.h"
 #include "../IO/Storage.h"
 #include <chrono>         // std::chrono::seconds
-#include "../../RulesetMeteor/Config/MeteorConfigManager.h"
-#include "../../RulesetInstant/Config/InstantConfigManager.h"
 #include "../Threading/ThreadMaster.h"
 
 
 
 using namespace std;
-using namespace Framework::Host;
+using namespace Framework::Hosts;
 using namespace Framework::Input;
 using namespace Framework::IO;
 using namespace Framework;
 using namespace Instruments;
-using namespace Meteor::Config;
-using namespace Instant::Config;
 using namespace Framework::Threading;
 
 
 
 
-GameHost::GameHost(): RegisterType("GameHost")
+Host::Host(): RegisterType("Host")
 {
 
 }
 
-int GameHost::Initialize(string name)
+int Host::Initialize(string name)
 {
-	LOG(LogLevel::Info) << "GameHost::Initialize() : Creating dependencies, storage and threads.";
+	LOG(LogLevel::Info) << "Host::Initialize() : Creating dependencies, storage and threads.";
 
 	dependencies = new DependencyContainer();
 
-	dependencies->Cache<GameHost>(this, "GameHost");
-	LOG(LogLevel::Debug) << "GameHost::Initialize() : host address = " << this;
+	dependencies->Cache<Host>(this, "Host");
+	LOG(LogLevel::Debug) << "Host::Initialize() : host address = " << this;
 
 	// name是資料夾名稱
 	dependencies->Cache<Storage>(storage = getStorage(name), "Storage");
@@ -47,39 +43,39 @@ int GameHost::Initialize(string name)
 	setupMainInterface();
 
 
-	drawThread = new GameThread(bind(&GameHost::drawFrame, this), "DrawThread");
+	drawThread = new GameThread(bind(&Host::drawFrame, this), "DrawThread");
 
 
-	updateThread = new GameThread(bind(&GameHost::updateFrame, this), "UpdateThread");
+	updateThread = new GameThread(bind(&Host::updateFrame, this), "UpdateThread");
 
 
-	inputThread = new GameThread(bind(&GameHost::inputFrame, this), "InputThread");
+	inputThread = new GameThread(bind(&Host::inputFrame, this), "InputThread");
 
 
 	sceneGraphClock = updateThread->GetClock();
 
 	initialized = true;
 
-	LOG(LogLevel::Finest) << "GameHost::Initialize() : end.";
+	LOG(LogLevel::Finest) << "Host::Initialize() : end.";
 
 	
 
 	return 0;
 }
 
-int GameHost::Run(Game* game, Instrument* instrument)
+int Host::Run(Game* game, Instrument* instrument)
 {
-	LOG(LogLevel::Info) << "GameHost::Run() : Start host.";
+	LOG(LogLevel::Info) << "Host::Run() : Start host.";
 
 	if(!initialized)
-		throw runtime_error("int GameHost::Run() : Not initialized.");
+		throw runtime_error("int Host::Run() : Not initialized.");
 
 
-	LOG(LogLevel::Finest) << "GameHost::Run() : Setup confing.";
+	LOG(LogLevel::Finest) << "Host::Run() : Setup confing.";
 	setupConfig();
 
 
-	LOG(LogLevel::Finest) << "GameHost::Run() : reset input handler.";
+	LOG(LogLevel::Finest) << "Host::Run() : reset input handler.";
 	resetInputHandlers();
 
 	LOG(LogLevel::Finest) << "Initialize Threads.";
@@ -100,7 +96,7 @@ int GameHost::Run(Game* game, Instrument* instrument)
 
 	bootstrapSceneGraph(game, instrument);
 	
-	LOG(LogLevel::Debug) << "GameHost::Run(): listing cache" << dependencies->_DebugPrintCache();
+	LOG(LogLevel::Debug) << "Host::Run(): listing cache" << dependencies->_DebugPrintCache();
 
 	
 	runLoop();
@@ -108,31 +104,31 @@ int GameHost::Run(Game* game, Instrument* instrument)
 	return 0;
 }
 
-MainInterface * GameHost::GetMainInterface()
+MainInterface * Host::GetMainInterface()
 {
 	if (!initialized)
-		throw runtime_error("int GameHost::GetMainInterface() : Not initialized.");
+		throw runtime_error("int Host::GetMainInterface() : Not initialized.");
 
 	return mainInterface;
 }
 
-vector<InputHandler*>* GameHost::GetAvailableInputHandlers()
+vector<InputHandler*>* Host::GetAvailableInputHandlers()
 {
 	if (!initialized)
-		throw runtime_error("int GameHost::GetAvailableInputHandlers() : Not initialized.");
+		throw runtime_error("int Host::GetAvailableInputHandlers() : Not initialized.");
 
 	return availableInputHandlers;
 }
 
-Storage * GameHost::GetStorage()
+Storage * Host::GetStorage()
 {
 	if (!initialized)
-		throw runtime_error("int GameHost::GetStorage() : Not initialized.");
+		throw runtime_error("int Host::GetStorage() : Not initialized.");
 
 	return storage;
 }
 
-int GameHost::runLoop()
+int Host::runLoop()
 {
 	// TODO: 更改睡眠時間、中斷跳出
 	while(!exitRequested)
@@ -141,14 +137,14 @@ int GameHost::runLoop()
 	return 0;
 }
 
-int GameHost::drawInitialize()
+int Host::drawInitialize()
 {
 
 	int width, height;
 	frameworkConfigManager->Get(FrameworkSetting::Width, &width);
 	frameworkConfigManager->Get(FrameworkSetting::Height, &height);
 
-	LOG(LogLevel::Info) << "GameHost::drawInitialize() : Setting map(" << width << "," << height << ").";
+	LOG(LogLevel::Info) << "Host::drawInitialize() : Setting map(" << width << "," << height << ").";
 
 	// 這個應該擺在main裡才對，這邊沒有存螢幕大小
 	canvas = new Map(width, height);
@@ -157,12 +153,12 @@ int GameHost::drawInitialize()
 	return 0;
 }
 
-int GameHost::drawFrame()
+int Host::drawFrame()
 {
 	if (root == nullptr)
 		return 0;
 
-	LOG(LogLevel::Depricated) << "GameHost::drawFrame() : drawing a frame.";
+	LOG(LogLevel::Depricated) << "Host::drawFrame() : drawing a frame.";
 
 	canvas->Reset();
 
@@ -174,7 +170,7 @@ int GameHost::drawFrame()
 	uLock.unlock();
 	//uLock2.unlock();
 
-	LOG(LogLevel::Depricated) << "GameHost::drawFrame() : drawables size = [" << drawables.size() << "].";
+	LOG(LogLevel::Depricated) << "Host::drawFrame() : drawables size = [" << drawables.size() << "].";
 
 	// TODO: 這邊應該要把蒐到的drawable跟具Depth來排序，但是現在懶得寫
 
@@ -186,7 +182,7 @@ int GameHost::drawFrame()
 	}
 
 	LOG(LogLevel::Depricated) << [](int width, int height, Map* m) {
-		LOG(LogLevel::Finest) << "GameHost::drawFrame : light map";
+		LOG(LogLevel::Finest) << "Host::drawFrame : light map";
 		// 因為只看畫面中央，所以不看其他排
 		for (int i = 0; i < width; i++) {
 			string s;
@@ -199,29 +195,29 @@ int GameHost::drawFrame()
 		return 0;
 	}(canvas->GetWidth(), canvas->GetHeight(), canvas);
 
-	LOG(LogLevel::Depricated) << "GameHost::drawFrame() : pass to display.";
+	LOG(LogLevel::Depricated) << "Host::drawFrame() : pass to display.";
 
 	mainInterface->GetDisplay()->Show(canvas);
 
 	return 0;
 }
 
-int GameHost::updateInitialize()
+int Host::updateInitialize()
 {
-	LOG(LogLevel::Info) << "GameHost::updateInitialize() : Setting update thread.";
+	LOG(LogLevel::Info) << "Host::updateInitialize() : Setting update thread.";
 	// 預設是1000
 	updateThread->SetMaxUpdateHz(50);
 	return 0;
 }
 
-int GameHost::updateFrame()
+int Host::updateFrame()
 {
 	if (root == nullptr)
 		return 0;
 
-	LOG(LogLevel::Depricated) << "GameHost::updateFrame() : update scenegraph tree.";
+	LOG(LogLevel::Depricated) << "Host::updateFrame() : update scenegraph tree.";
 
-	LOG(LogLevel::Depricated) << "GameHost::updateFrame() : print tree " << [](Container* r) {
+	LOG(LogLevel::Depricated) << "Host::updateFrame() : print tree " << [](Container* r) {
 
 		r->_DebugPrintTree("|");
 
@@ -233,36 +229,36 @@ int GameHost::updateFrame()
 	return 0;
 }
 
-int GameHost::inputInitialize()
+int Host::inputInitialize()
 {
-	LOG(LogLevel::Info) << "GameHost::inputInitialize() : Setting input thread.";
+	LOG(LogLevel::Info) << "Host::inputInitialize() : Setting input thread.";
 	// 預設是1000了
 	inputThread->SetMaxUpdateHz(500);
 	return 0;
 }
 
-int GameHost::inputFrame()
+int Host::inputFrame()
 {
-	LOG(LogLevel::Depricated) << "GameHost::inputFrame() : scan input.";
+	LOG(LogLevel::Depricated) << "Host::inputFrame() : scan input.";
 
 	mainInterface->ScanInput();
 	/* 這邊只輸出panel上的uotput，不輸出琴鍵燈光 */
 
-	LOG(LogLevel::Depricated) << "GameHost::inputFrame() : process output.";
+	LOG(LogLevel::Depricated) << "Host::inputFrame() : process output.";
 	mainInterface->ProcessOutput();
 
-	LOG(LogLevel::Depricated) << "GameHost::inputFrame() : process output over.";
+	LOG(LogLevel::Depricated) << "Host::inputFrame() : process output over.";
 
 	return 0;
 }
 
-int GameHost::resetInputHandlers()
+int Host::resetInputHandlers()
 {
-	LOG(LogLevel::Info) << "GameHost::resetInputHandlers() : create input handlers.";
+	LOG(LogLevel::Info) << "Host::resetInputHandlers() : create input handlers.";
 
 	availableInputHandlers = createAvailableInputHandlers();
 
-	LOG(LogLevel::Info) << "GameHost::resetInputHandlers() : input handlers initializing.";
+	LOG(LogLevel::Info) << "Host::resetInputHandlers() : input handlers initializing.";
 	for (int i = 0; i < availableInputHandlers->size(); i++)
 		availableInputHandlers->at(i)->Initialize(this);
 
@@ -274,9 +270,9 @@ int GameHost::resetInputHandlers()
 	return 0;
 }
 
-int GameHost::setupConfig()
+int Host::setupConfig()
 {
-	LOG(LogLevel::Info) << "GameHost::setupConfig() : loading default config.";
+	LOG(LogLevel::Info) << "Host::setupConfig() : loading default config.";
 
 	frameworkConfigManager = new FrameworkConfigManager();
 	frameworkConfigManager->Initialize(storage);
@@ -291,41 +287,23 @@ int GameHost::setupConfig()
 	frameworkConfigManager->Set(FrameworkSetting::BlackKeyTargetHeight, 10);	// 14
 	frameworkConfigManager->Set(FrameworkSetting::StartPitch, 24);
 	frameworkConfigManager->Set(FrameworkSetting::FrameRate, 30);
+	frameworkConfigManager->Set(FrameworkSetting::UpdateRate, 100);
+	frameworkConfigManager->Set(FrameworkSetting::AudioUpdateRate, 1000);
+	frameworkConfigManager->Set(FrameworkSetting::InputRate, 1000);
 	frameworkConfigManager->Set(FrameworkSetting::SongTitle, string("FlowerDance"));
 
 	dependencies->Cache<FrameworkConfigManager>(frameworkConfigManager);
 	
 
-	MeteorConfigManager* meteorConfigManager = new MeteorConfigManager();
-	meteorConfigManager->Initialize(storage);
-
-	meteorConfigManager->Set(MeteorSetting::WhiteKeyTargetHeight, 15);	// 低4	  高9 // 低15	// 高10
-	meteorConfigManager->Set(MeteorSetting::BlackKeyTargetHeight, 10);	//10
-	meteorConfigManager->Set(MeteorSetting::FallSpeed, MTO_FLOAT(16.f));	//正常16.f	慢12.f 目前24 unravel36
-	meteorConfigManager->Set(MeteorSetting::FallBrightness, MTO_FLOAT(0.6f));
-	meteorConfigManager->Set(MeteorSetting::FallLength, 1);
-	meteorConfigManager->Set(MeteorSetting::ExplodeSpeed, MTO_FLOAT(0.6f));
-	meteorConfigManager->Set(MeteorSetting::ExplodeBrightness, MTO_FLOAT(0.6f));
-	meteorConfigManager->Set(MeteorSetting::ExplodeLifeTime, MTO_FLOAT(0.1f));
-	meteorConfigManager->Set(MeteorSetting::GlowLineSpeed, MTO_FLOAT(0.6f));
-	meteorConfigManager->Set(MeteorSetting::GlowLineDuration, MTO_FLOAT(0.6f));
-	meteorConfigManager->Set(MeteorSetting::GlowLineBrightness, MTO_FLOAT(0.6f));
-	meteorConfigManager->Set(MeteorSetting::TargetLineBlinkSpeed, MTO_FLOAT(0.75f));
-	meteorConfigManager->Set(MeteorSetting::TargetLineBrightness, MTO_FLOAT(0.05f));
-	dependencies->Cache<MeteorConfigManager>(meteorConfigManager);
-
-
-	InstantConfigManager* instantConfigManager = new InstantConfigManager();
-	instantConfigManager->Initialize(storage);
-	dependencies->Cache<InstantConfigManager>(instantConfigManager);
+	
 
 	return 0;
 }
 
-int GameHost::bootstrapSceneGraph(Game* game, Instrument* instrument)
+int Host::bootstrapSceneGraph(Game* game, Instrument* instrument)
 {
-	LOG(LogLevel::Info) << "GameHost::bootstrapSceneGraph() : build scenegraph tree.";
-	LOG(LogLevel::Debug) << "GameHost::bootstrapSceneGraph() : host address = [" << this << "], clock = [" << sceneGraphClock << "].";
+	LOG(LogLevel::Info) << "Host::bootstrapSceneGraph() : build scenegraph tree.";
+	LOG(LogLevel::Debug) << "Host::bootstrapSceneGraph() : host address = [" << this << "], clock = [" << sceneGraphClock << "].";
 
 	root = game->CreateInputManager();
 
@@ -350,9 +328,9 @@ int GameHost::bootstrapSceneGraph(Game* game, Instrument* instrument)
 	return 0;
 }
 
-int GameHost::iterateSearchDrawable(ChildAddable * r, vector<Drawable*>* drawables)
+int Host::iterateSearchDrawable(ChildAddable * r, vector<Drawable*>* drawables)
 {
-	LOG(LogLevel::Depricated) << "GameHost::iterateSearchDrawable() : check is drawable [" << r << "].";
+	LOG(LogLevel::Depricated) << "Host::iterateSearchDrawable() : check is drawable [" << r << "].";
 
 	if (dynamic_cast<Drawable*>(r)) 
 		if(dynamic_cast<Drawable*>(r)->GetIsDrawable())
@@ -360,7 +338,7 @@ int GameHost::iterateSearchDrawable(ChildAddable * r, vector<Drawable*>* drawabl
 	
 	
 	for (int i = 0; i < r->GetChilds()->size(); i++) {
-		LOG(LogLevel::Depricated) << "GameHost::iterateSearchDrawable() : iterate search child [" << r->GetChilds()->at(i) << "].";
+		LOG(LogLevel::Depricated) << "Host::iterateSearchDrawable() : iterate search child [" << r->GetChilds()->at(i) << "].";
 		iterateSearchDrawable(r->GetChilds()->at(i), drawables);
 	}
 

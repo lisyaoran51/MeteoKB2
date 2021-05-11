@@ -103,12 +103,6 @@
     <Filter Include="標頭檔\Framework">
       <UniqueIdentifier>{a13f08d4-3bda-471e-a409-4a98a6401d8a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="來源檔案\Framework\Host">
-      <UniqueIdentifier>{562e1499-5dff-4568-8793-361e8f4a2952}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="標頭檔\Framework\Host">
-      <UniqueIdentifier>{1cdf7e4b-e9b5-4c20-a1cb-d92d5329d7fa}</UniqueIdentifier>
-    </Filter>
     <Filter Include="來源檔案\Framework\Timing">
       <UniqueIdentifier>{cb705329-1439-4285-b82f-d308afee75f9}</UniqueIdentifier>
     </Filter>
@@ -991,6 +985,24 @@
     <Filter Include="來源檔案\Games\Output\Panels">
       <UniqueIdentifier>{e9c81f2c-184e-491f-88de-bed27a0c77f9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="標頭檔\Framework\Hosts">
+      <UniqueIdentifier>{1cdf7e4b-e9b5-4c20-a1cb-d92d5329d7fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Framework\Hosts">
+      <UniqueIdentifier>{562e1499-5dff-4568-8793-361e8f4a2952}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Games\Hosts">
+      <UniqueIdentifier>{a829c9e8-c79c-4715-b224-d39d5887fea0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Games\Hosts">
+      <UniqueIdentifier>{5e356180-258f-4af3-ad43-c3d0f446695b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Desktop\Hosts">
+      <UniqueIdentifier>{6870219e-bcb2-404f-ab5d-6bf4d26a9ba7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Desktop\Hosts">
+      <UniqueIdentifier>{f162b6ed-08e5-434a-8eda-cd735818c08b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Games\Graphic\Renderer\renderer.cpp">
@@ -1302,9 +1314,6 @@
     <ClCompile Include="Games\MeteoGame.cpp">
       <Filter>來源檔案\Games</Filter>
     </ClCompile>
-    <ClCompile Include="Framework\Host\GameHost.cpp">
-      <Filter>來源檔案\Framework\Host</Filter>
-    </ClCompile>
     <ClCompile Include="Framework\Game.cpp">
       <Filter>來源檔案\Framework</Filter>
     </ClCompile>
@@ -1385,9 +1394,6 @@
     </ClCompile>
     <ClCompile Include="Games\UI\SheetmusicSelectPanel.cpp">
       <Filter>來源檔案\Games\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="Framework\Host\MeteoGameHost.cpp">
-      <Filter>來源檔案\Framework\Host</Filter>
     </ClCompile>
     <ClCompile Include="Framework\Database\DatabaseContext.cpp">
       <Filter>來源檔案\Framework\Database</Filter>
@@ -2106,6 +2112,15 @@
     <ClCompile Include="RulesetMeteor\Ruleset\Modifiers\WhiteKeyTargetLineModifier.cpp">
       <Filter>來源檔案\RulesetMeteor\Ruleset\Modifiers</Filter>
     </ClCompile>
+    <ClCompile Include="Framework\Hosts\Host.cpp">
+      <Filter>來源檔案\Framework\Hosts</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\Hosts\GameHost.cpp">
+      <Filter>來源檔案\Games\Hosts</Filter>
+    </ClCompile>
+    <ClCompile Include="Desktop\Hosts\MeteoGameHost.cpp">
+      <Filter>來源檔案\Desktop\Hosts</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="DailyLog.txt">
@@ -2536,9 +2551,6 @@
     <ClInclude Include="Framework\Audio\AudioManager.h">
       <Filter>標頭檔\Framework\Audio</Filter>
     </ClInclude>
-    <ClInclude Include="Framework\Host\GameHost.h">
-      <Filter>標頭檔\Framework\Host</Filter>
-    </ClInclude>
     <ClInclude Include="Framework\Game.h">
       <Filter>標頭檔\Framework</Filter>
     </ClInclude>
@@ -2655,9 +2667,6 @@
     </ClInclude>
     <ClInclude Include="Games\UI\SheetmusicSelectPanel.h">
       <Filter>標頭檔\Games\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="Framework\Host\MeteoGameHost.h">
-      <Filter>標頭檔\Framework\Host</Filter>
     </ClInclude>
     <ClInclude Include="Framework\IO\Stores\EmbeddedResourceStore.h">
       <Filter>標頭檔\Framework\IO\Stores</Filter>
@@ -3510,6 +3519,15 @@
     </ClInclude>
     <ClInclude Include="RulesetMeteor\Ruleset\Modifiers\WhiteKeyTargetLineModifier.h">
       <Filter>標頭檔\RulesetMeteor\Ruleset\Modifiers</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Hosts\GameHost.h">
+      <Filter>標頭檔\Games\Hosts</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Hosts\Host.h">
+      <Filter>標頭檔\Framework\Hosts</Filter>
+    </ClInclude>
+    <ClInclude Include="Desktop\Hosts\MeteoGameHost.h">
+      <Filter>標頭檔\Desktop\Hosts</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

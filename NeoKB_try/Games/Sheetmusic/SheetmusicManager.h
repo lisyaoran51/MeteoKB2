@@ -23,8 +23,8 @@
 
 
 namespace Framework {
-namespace Host{
-	class GameHost;
+namespace Hosts{
+	class Host;
 }}
 
 
@@ -67,7 +67,7 @@ namespace Sheetmusics {
 
 		SmManager();
 
-		SmManager(Storage* s, function<DatabaseContext*()> gContext, RulesetStore* rStore, GameHost* gHost);
+		SmManager(Storage* s, function<DatabaseContext*()> gContext, RulesetStore* rStore, Host* gHost);
 
 		~SmManager();
 

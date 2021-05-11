@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <sstream>
+#include <vector>
+#include <mutex>
 
 
 // °Ñ¦Ò https://stackoverflow.com/questions/6168107/how-to-implement-a-good-debug-logging-feature-in-a-project
@@ -30,16 +32,6 @@ namespace Util {
 		Depricated
 	};
 
-#define LOG_NONE LogLevel::None
-#define LOG_ERROR LogLevel::Error
-#define LOG_WARNING LogLevel::Warning
-#define LOG_INFO LogLevel::Info
-#define LOG_DEBUG LogLevel::Debug
-#define LOG_FINE LogLevel::Fine
-#define LOG_FINER LogLevel::Finer
-#define LOG_FINEST LogLevel::Finest
-#define LOG_ALL LogLevel::All
-
 	class LogIt
 	{
 	public:
@@ -65,10 +57,38 @@ namespace Util {
 			// This is atomic according to the POSIX standard
 			// http://www.gnu.org/s/libc/manual/html_node/Streams-and-Threads.html
 			std::cerr << _buffer.str();
+
+			//while (isBufferToSaveLocked);
+			//bufferToSave.push_back(_buffer.str());
+		}
+
+		static int Initialize() {
+			bufferToSave.clear();
+			isBufferToSaveLocked = false;
+		}
+
+		static int FlushBuffer() {
+
+			if (bufferToSave.size() == 0)
+				return 0;
+
+			vector<string> temp;
+
+			isBufferToSaveLocked = true;
+			temp.assign(bufferToSave.begin(), bufferToSave.end());
+			bufferToSave.clear();
+			isBufferToSaveLocked = false;
+
+			fstream stream;
+
+			//stream.open("./RuntimeLog");
+
 		}
 
 	private:
 		std::ostringstream _buffer;
+		static std::vector<string> bufferToSave;
+		static bool isBufferToSaveLocked;
 	};
 
 	extern LogLevel logLevel;

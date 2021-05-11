@@ -3,10 +3,10 @@
 
 
 #include <vector>
-#include "../../Host/GameHost.h"
+#include "../../Hosts/Host.h"
 
 using namespace std;
-using namespace Framework::Host;
+using namespace Framework::Hosts;
 
 namespace Framework {
 namespace Input {
@@ -19,7 +19,7 @@ namespace Handler {
 
 	public:
 
-		virtual int Initialize(GameHost* host) = 0;
+		virtual int Initialize(Host* host) = 0;
 
 		virtual vector<InputState*>* GetPendingStates();
 

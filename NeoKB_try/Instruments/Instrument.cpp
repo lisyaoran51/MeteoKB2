@@ -26,7 +26,7 @@ Instrument::Instrument() : RegisterType("Instrument")
 	registerLoad(bind(static_cast<int(Instrument::*)(void)>(&Instrument::load), this));
 }
 
-int Instrument::SetHost(GameHost * h)
+int Instrument::SetHost(Host * h)
 {
 	host = h;
 	return 0;

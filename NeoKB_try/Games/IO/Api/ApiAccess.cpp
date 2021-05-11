@@ -6,7 +6,7 @@ using namespace Games::IO::Api;
 using namespace Framework::IO;
 
 
-ApiAccess::ApiAccess(GameHost * gHost): RegisterType("ApiAccess")
+ApiAccess::ApiAccess(Host * gHost): RegisterType("ApiAccess")
 {
 
 	gameHost = gHost;

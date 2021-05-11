@@ -42,7 +42,7 @@ namespace Games {
 
 		BindablePointer<WorkingSm*>* GetWorkingSm();
 
-		virtual int SetHost(GameHost* host);
+		virtual int SetHost(Host* host);
 
 		virtual InputManager* CreateInputManager();
 

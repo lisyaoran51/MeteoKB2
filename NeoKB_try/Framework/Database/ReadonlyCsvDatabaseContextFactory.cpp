@@ -1,12 +1,12 @@
 #include "ReadonlyCsvDatabaseContextFactory.h"
 
 #include "FakeMeteoDatabaseContext.h"
-#include "../Host/GameHost.h"
+#include "../Hosts/Host.h"
 
 using namespace Framework::Database;
-using namespace Framework::Host;
+using namespace Framework::Hosts;
 
-ReadonlyCsvDatabaseContextFactory::ReadonlyCsvDatabaseContextFactory(GameHost * gHost): DatabaseContextFactory(gHost)
+ReadonlyCsvDatabaseContextFactory::ReadonlyCsvDatabaseContextFactory(Host * gHost): DatabaseContextFactory(gHost)
 {
 }
 

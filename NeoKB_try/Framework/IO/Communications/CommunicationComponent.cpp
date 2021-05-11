@@ -4,7 +4,7 @@
 using namespace Framework::IO::Communications;
 
 
-CommunicationComponent::CommunicationComponent(GameHost * gHost): host(gHost), RegisterType("CommunicationComponent")
+CommunicationComponent::CommunicationComponent(Host * gHost): host(gHost), RegisterType("CommunicationComponent")
 {
 }
 

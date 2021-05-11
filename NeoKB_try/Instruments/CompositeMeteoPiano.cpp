@@ -23,7 +23,7 @@ CompositeMeteoPiano::CompositeMeteoPiano(vector<string>& args) : MeteoPiano(args
 	registerLoad(bind(static_cast<int(CompositeMeteoPiano::*)(void)>(&CompositeMeteoPiano::load), this));
 }
 
-int CompositeMeteoPiano::SetHost(GameHost * h)
+int CompositeMeteoPiano::SetHost(Host * h)
 {
 	meteoPiano->SetHost(h);
 

@@ -5,7 +5,7 @@
 #include "Base.h"
 #include "IO/Stores/ResourceStore.h"
 #include "Audio/AudioManager.h"
-#include "Host/GameHost.h"
+#include "Hosts/Host.h"
 #include "Input/UserInputManager.h"
 #include "Input/Messages/MessageInputManager.h"
 
@@ -13,7 +13,7 @@
 using namespace Framework::Allocation;
 using namespace Framework::IO;
 using namespace Framework::Audio;
-using namespace Framework::Host;
+using namespace Framework::Hosts;
 using namespace Framework::Input;
 using namespace Framework::Input::Messages;
 
@@ -21,9 +21,9 @@ using namespace Framework::Input::Messages;
 
 namespace Framework {
 
-	namespace Host {
+	namespace Hosts {
 
-		//class GameHost;
+		//class Host;
 
 	}
 

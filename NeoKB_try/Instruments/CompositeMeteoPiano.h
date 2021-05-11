@@ -29,7 +29,7 @@ namespace Instruments {
 		/// <summary>
 		/// 這邊要建立instant keyboard input handler，加到game host裡面，讓他串到keyboard上，這樣keyboard一收到key down就可以立刻到這邊把聲音播出來
 		///	</summary>
-		virtual int SetHost(GameHost* h);
+		virtual int SetHost(Host* h);
 
 		virtual PitchBindingSet* GetDefaultPitchBindingSet(int variant = 0);
 

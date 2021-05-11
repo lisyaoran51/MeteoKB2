@@ -3,7 +3,7 @@
 
 
 
-#include "../../../Framework/Host/GameHost.h"
+#include "../../../Framework/Hosts/Host.h"
 #include "../../../Framework/Timing/StopwatchClock.h"
 #include <deque>
 #include "../../../Framework/Allocation/Hierachal/MtoObject.h"
@@ -11,7 +11,7 @@
 
 
 
-using namespace Framework::Host;
+using namespace Framework::Hosts;
 using namespace std;
 using namespace Framework::Allocation::Hierachal;
 using namespace Framework::Timing;
@@ -36,7 +36,7 @@ namespace Communications{
 
 	public:
 
-		CommunicationComponent(GameHost* gHost);
+		CommunicationComponent(Host* gHost);
 
 		/// <summary>
 		/// 建立thread並且開始跑
@@ -78,7 +78,7 @@ namespace Communications{
 
 		Scheduler* scheduler = nullptr;
 
-		GameHost* host = nullptr;
+		Host* host = nullptr;
 
 		CommunicationState communicationState = CommunicationState::None;
 
@@ -109,7 +109,7 @@ namespace Communications{
 
 	public:
 
-		TCommunicationComponent(GameHost* gHost) : CommunicationComponent(gHost), RegisterType("TCommunicationComponent"){
+		TCommunicationComponent(Host* gHost) : CommunicationComponent(gHost), RegisterType("TCommunicationComponent"){
 		}
 
 		virtual int Queue(CommunicationRequest* communicationRequest) {

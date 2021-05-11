@@ -1,5 +1,5 @@
-#ifndef GAME_HOST_H
-#define GAME_HOST_H
+#ifndef HOST_H
+#define HOST_H
 
 
 
@@ -60,17 +60,17 @@ using namespace Framework::Input::Handler;
 
 
 namespace Framework {
-namespace Host {
+namespace Hosts {
 
 	/// <summary>
 	/// 遊戲運行的主機
 	/// TODO: 繼承IIPCHOST
 	/// </summary>
-	class GameHost: public MtoObject {
+	class Host: public MtoObject {
 	
 	public:
 		
-		GameHost();
+		Host();
 
 		int Initialize(string name = "");
 
@@ -103,6 +103,8 @@ namespace Host {
 		Storage* storage;
 
 		virtual Storage* getStorage(string sName) = 0;
+
+		virtual int setupConfig();
 
 
 		/* 建scene graph用 */
@@ -154,8 +156,6 @@ namespace Host {
 	private :
 
 		FrameworkConfigManager* frameworkConfigManager;
-
-		int setupConfig();
 
 		int bootstrapSceneGraph(Game* game, Instrument* instrument);
 

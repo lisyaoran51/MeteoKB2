@@ -518,14 +518,14 @@ int InputManager::load()
 {
 	LOG(LogLevel::Info) << "InputManager::load : get host.";
 
-	GameHost * h = GetCache<GameHost>("GameHost");
+	Host * h = GetCache<Host>("Host");
 	if (!h)
-		throw runtime_error("int InputManager::load() : GameHost not found in cache.");
+		throw runtime_error("int InputManager::load() : Host not found in cache.");
 
 	return load(h);
 }
 
-int InputManager::load(GameHost * h)
+int InputManager::load(Host * h)
 {
 	host = h;
 	return 0;

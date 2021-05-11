@@ -5,14 +5,14 @@
 #include "Allocation/Hierachal/Container.h"
 #include "IO/Stores/CompositeResourceStore.h"
 #include "Audio/AudioManager.h"
-#include "Host/GameHost.h"
+#include "Hosts/Host.h"
 #include "Output/OutputManager.h"
 
 
 using namespace Framework::Allocation;
 using namespace Framework::IO;
 using namespace Framework::Audio;
-using namespace Framework::Host;
+using namespace Framework::Hosts;
 using namespace Framework::Output;
 
 
@@ -27,7 +27,7 @@ namespace Framework {
 
 		Base();
 
-		virtual int SetHost(GameHost* host);
+		virtual int SetHost(Host* host);
 
 		virtual string GetResourcePath();
 
@@ -37,7 +37,7 @@ namespace Framework {
 
 		OutputManager* outputManager = nullptr;
 
-		GameHost* gameHost;
+		Host* gameHost;
 
 		CompositeResourceStore<char*>* resources;
 

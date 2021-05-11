@@ -8,7 +8,7 @@ using namespace Framework::IO;
 
 
 
-int BluetoothInputHandler::Initialize(GameHost * host)
+int BluetoothInputHandler::Initialize(Host * host)
 {
 	LOG(LogLevel::Info) << "BluetoothInputHandler::Initialize() : adding handler.";
 

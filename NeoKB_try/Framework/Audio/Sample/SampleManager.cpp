@@ -291,20 +291,26 @@ SoundBindingSet * SampleManager::importToStorage(FileReader & fileReader)
 
 		fstream* stream = fileReader.GetStream(sbsNames->at(i));
 
-		// 每一個要用的decoder會在程式開始的時候註冊
-		LOG(LogLevel::Finer) << "SampleManager::importToStorage(FileReader&) : Getting decoder of [" << sbsNames->at(i) << "].";
-		SoundBindingSetDecoder* soundBindingSetDecoder = SoundBindingSetDecoder::GetDecoder(stream);
+		try {
+			// 每一個要用的decoder會在程式開始的時候註冊
+			LOG(LogLevel::Finer) << "SampleManager::importToStorage(FileReader&) : Getting decoder of [" << sbsNames->at(i) << "].";
+			SoundBindingSetDecoder* soundBindingSetDecoder = SoundBindingSetDecoder::GetDecoder(stream);
 
-		LOG(LogLevel::Finer) << "SampleManager::importToStorage(FileReader&) : Decode [" << sbsNames->at(i) << "] ...";
-		SoundBindingSet* sbs = soundBindingSetDecoder->Decode(stream);
+			LOG(LogLevel::Finer) << "SampleManager::importToStorage(FileReader&) : Decode [" << sbsNames->at(i) << "] ...";
+			SoundBindingSet* sbs = soundBindingSetDecoder->Decode(stream);
+
+			soundBindingSets->push_back(sbs);
+		}
+		catch (exception& e) {
+			LOG(LogLevel::Warning) << "SampleManager::importToStorage() : file [" << sbsNames->at(i) << "] decode failed. error message:" << e.what();
+		}
 
 		stream->close();
 		delete stream;
-		
-		soundBindingSets->push_back(sbs);
 
 	}
 
+	return nullptr;
 	// 這一行沒有用，以後有需要再改
 	return soundBindingSets->at(0);
 }

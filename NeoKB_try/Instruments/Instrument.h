@@ -11,7 +11,7 @@
 #include "../Framework/Input/KeyBindings/KeyBindingHandler.h"
 #include "../Framework/Audio/Sample/SampleChannel.h"
 #include "../Framework/Input/PassThroughInputManager.h"
-#include "../Framework/Host/GameHost.h"
+#include "../Framework/Hosts/Host.h"
 #include "Input/PitchBindingSet.h"
 
 
@@ -23,14 +23,14 @@ using namespace Framework::Input::KeyBindings;
 using namespace Framework::Audio;
 using namespace Framework::Audio::Samples;
 using namespace Framework::Input;
-using namespace Framework::Host;
+using namespace Framework::Hosts;
 using namespace Instruments::Input;
 
 
 namespace Framework {
-namespace Host {
+namespace Hosts {
 
-	//class GameHost;
+	//class Host;
 
 }}
 
@@ -67,7 +67,7 @@ namespace Instruments {
 		//¼g¿ù¤F
 		//virtual vector<PitchBinding*>* GetDefaultPitchBindings(int variant = 0) = 0;
 
-		virtual int SetHost(GameHost* h);
+		virtual int SetHost(Host* h);
 
 		virtual int LoadAndMapSamples();
 
@@ -87,7 +87,7 @@ namespace Instruments {
 
 		bool isSleeping = false;
 
-		GameHost* host = nullptr;
+		Host* host = nullptr;
 
 		AudioManager* audioManager = nullptr;
 

@@ -4,11 +4,11 @@
 
 #include <vector>
 #include "../../../Framework/Input/Handler/InputHandler.h"
-#include "../../../Framework/Host/GameHost.h"
+#include "../../../Framework/Hosts/Host.h"
 #include "../../../Framework/Input/KeyBindings/KeyBinding.h"
 
 
-using namespace Framework::Host;
+using namespace Framework::Hosts;
 using namespace std;
 using namespace Framework::Input::Handler;
 using namespace Framework::Input::KeyBindings;
@@ -32,7 +32,7 @@ namespace Handlers {
 
 		InstrumentInputHandler(Piano* p);
 
-		virtual int Initialize(GameHost* host);
+		virtual int Initialize(Host* host);
 
 		virtual int HandleState(InputState* inputEvent);
 

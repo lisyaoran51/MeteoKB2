@@ -12,7 +12,7 @@ namespace Database{
 
 	public:
 
-		ReadonlyCsvDatabaseContextFactory(GameHost* gHost);
+		ReadonlyCsvDatabaseContextFactory(Host* gHost);
 
 	protected:
 

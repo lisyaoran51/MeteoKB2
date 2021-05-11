@@ -15,7 +15,7 @@ InstrumentInputHandler::InstrumentInputHandler(Piano* p)
 	piano = p;
 }
 
-int InstrumentInputHandler::Initialize(GameHost * host)
+int InstrumentInputHandler::Initialize(Host * host)
 {
 	LOG(LogLevel::Info) << "InstrumentInputHandler::Initialize() : adding handler.";
 

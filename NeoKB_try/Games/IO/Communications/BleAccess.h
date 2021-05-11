@@ -23,7 +23,7 @@ namespace Communications{
 
 	public:
 
-		BleAccess(GameHost* gHost);
+		BleAccess(Host* gHost);
 
 
 		/// <summary>

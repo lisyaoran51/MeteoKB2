@@ -5,10 +5,10 @@
 
 #include <vector>
 #include "../../Input/Handler/InputHandler.h"
-#include "../../Host/GameHost.h"
+#include "../../Hosts/Host.h"
 
 
-using namespace Framework::Host;
+using namespace Framework::Hosts;
 using namespace std;
 using namespace Framework::Input::Handler;
 
@@ -28,7 +28,7 @@ namespace Communications {
 
 		BleCommunicationInputHandler(CommunicationAccess* cAccess);
 
-		virtual int Initialize(GameHost* host);
+		virtual int Initialize(Host* host);
 
 		virtual int HandleState(InputState* inputEvent);
 

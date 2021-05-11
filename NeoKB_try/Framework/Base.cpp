@@ -8,7 +8,7 @@ using namespace Framework;
 using namespace Framework::Allocation;
 using namespace Framework::IO;
 using namespace Framework::Audio;
-using namespace Framework::Host;
+using namespace Framework::Hosts;
 using namespace Framework::IO::Stores;
 
 
@@ -42,7 +42,7 @@ Base::Base() : RegisterType("Base")
 	registerLoad(bind((int(Base::*)())&Base::load, this));
 }
 
-int Base::SetHost(GameHost * host)
+int Base::SetHost(Host * host)
 {
 	LOG(LogLevel::Depricated) << "Base::SetHost() : host address = " << host;
 

@@ -1,12 +1,12 @@
 #include "DatabaseContextFactory.h"
 
-#include "../Host/GameHost.h"
+#include "../Hosts/Host.h"
 
 using namespace Framework::Database;
 
 
 
-DatabaseContextFactory::DatabaseContextFactory(GameHost * h)
+DatabaseContextFactory::DatabaseContextFactory(Host * h)
 {
 	host = h;
 }

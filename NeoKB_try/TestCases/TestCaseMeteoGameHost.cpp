@@ -1,4 +1,4 @@
-#include "../Framework/Host/MeteoGameHost.h"
+#include "../Framework/Hosts/MeteoGameHost.h"
 
 #include "../Framework/../Desktop/Devices/MeteoBluetoothDevice.h"
 #include "../Framework/../Desktop/Devices/MeteoSpidevDisplayDevice.h"
@@ -14,7 +14,7 @@ LogLevel Util::logLevel = LogLevel::Finest;
 
 int main() {
 
-	GameHost* host = new MeteoGameHost();
+	Host* host = new MeteoGameHost();
 	host->Initialize();
 
 	vector<pair<uintptr_t, string>>* callbackKeys = host->GetMainInterface()->GetKeyboard()->_DebugGetActionList()->_DebugGetCallbackKeys();

@@ -1,6 +1,6 @@
 #include "Program.h"
 
-#include "../Framework/Host/MeteoGameHost.h"
+#include "Hosts/MeteoGameHost.h"
 #include "MeteoGameDesktop.h"
 #include "../Instruments/CompositeMeteoPiano.h"
 #include "../Util/Log.h"
@@ -9,7 +9,7 @@
 
 
 using namespace Desktop;
-using namespace Framework::Host;
+using namespace Desktop::Hosts;
 using namespace Instruments;
 using namespace Util;
 
@@ -23,7 +23,7 @@ int Program::Main(vector<string>& args)
 
 	ProgramInitializer::Initialize();
 
-	GameHost* host = new MeteoGameHost();
+	Host* host = new MeteoGameHost();
 	host->Initialize("~");
 	
 	

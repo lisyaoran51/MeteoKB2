@@ -9,7 +9,7 @@ using namespace Framework::IO;
 
 
 
-int PanelInputHandler::Initialize(GameHost * host)
+int PanelInputHandler::Initialize(Host * host)
 {
 	LOG(LogLevel::Info) << "PanelInputHandler::Initialize() : adding handler.";
 

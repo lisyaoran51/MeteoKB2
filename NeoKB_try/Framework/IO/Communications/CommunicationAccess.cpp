@@ -5,7 +5,7 @@ using namespace Framework::IO::Communications;
 
 
 
-CommunicationAccess::CommunicationAccess(GameHost * gHost) : RegisterType("CommunicationAccess"), CommunicationCollectionManager(gHost)
+CommunicationAccess::CommunicationAccess(Host * gHost) : RegisterType("CommunicationAccess"), CommunicationCollectionManager(gHost)
 {
 }
 
@@ -33,7 +33,7 @@ int CommunicationAccess::HandleState(InputState * inputEvent)
 	return 0;
 }
 
-int CommunicationAccess::setHost(GameHost * gHost)
+int CommunicationAccess::setHost(Host * gHost)
 {
 	bleCommunicationInputHandler = new BleCommunicationInputHandler(this);
 	bleCommunicationInputHandler->Initialize(gHost);

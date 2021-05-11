@@ -12,7 +12,7 @@ BleCommunicationInputHandler::BleCommunicationInputHandler(CommunicationAccess *
 	communicationAccess = cAccess;
 }
 
-int BleCommunicationInputHandler::Initialize(GameHost * host)
+int BleCommunicationInputHandler::Initialize(Host * host)
 {
 	LOG(LogLevel::Info) << "BleCommunicationInputHandler::Initialize() : adding handler.";
 
