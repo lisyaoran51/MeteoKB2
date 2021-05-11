@@ -79,7 +79,7 @@ namespace Util {
 			bufferToSave.clear();
 			isBufferToSaveLocked = false;
 
-			fstream stream;
+			//fstream stream;
 
 			//stream.open("./RuntimeLog");
 
