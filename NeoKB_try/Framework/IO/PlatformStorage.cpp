@@ -126,7 +126,7 @@ fstream* PlatformStorage::GetStream(string filePath)
 
 	if (!Exist(filePath)) {
 		LOG(LogLevel::Debug) << "PlatformStorage::GetStream() : file [" << GetUsableFilePathFor(filePath) << "] not exist.";
-		return nullptr;
+		//return nullptr;
 	}
 
 	// 如果沒先check exist會有error
