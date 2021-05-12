@@ -5,6 +5,7 @@
 #include <sstream>
 #include <vector>
 #include <mutex>
+#include <fstream>
 
 
 // °Ñ¦Ò https://stackoverflow.com/questions/6168107/how-to-implement-a-good-debug-logging-feature-in-a-project
