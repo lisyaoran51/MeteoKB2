@@ -72,14 +72,14 @@ namespace Util {
 			if (bufferToSave.size() == 0)
 				return 0;
 
-			vector<string> temp;
+			std::vector<string> temp;
 
 			isBufferToSaveLocked = true;
 			temp.assign(bufferToSave.begin(), bufferToSave.end());
 			bufferToSave.clear();
 			isBufferToSaveLocked = false;
 
-			//fstream stream;
+			std::fstream stream;
 
 			//stream.open("./RuntimeLog");
 

@@ -267,8 +267,8 @@ This is what many programs like firefox, libreoffice, and virtualbox do.
 	game host: 裡面擺了很多thread去跑整個遊戲
 	
 	thread擺哪：
-	Program.main -> host = Hosts.GetSuitableHost(@"osu", true)
-	host.Run(new OsuGameDesktop(args)) -> Host.Run -> Host.bootstrapSceneGraph -> Game.SetHost(this)
+	Program.main -> host = Host.GetSuitableHost(@"osu", true)
+	host.Run(new OsuGameDesktop(args)) -> GameHost.Run -> GameHost.bootstrapSceneGraph -> Game.SetHost(this)
 	
 	遊戲畫面從哪開始：
 	OsuGame.LoadComplete -> screenStack = new Loader() -> LoadComponentAsync(new Intro(), d => Push(d)); -> 
@@ -2264,7 +2264,7 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 	接下來要繼續把meteor result寫完
 	
 11/25
-	讀寫storage主要還是靠MeteoGameHost::getStorage -> Host::Initialize -> Program::Main 所以在main裡面要先擺好路徑
+	讀寫storage主要還是靠MeteoGameHost::getStorage -> GameHost::Initialize -> Program::Main 所以在main裡面要先擺好路徑
 	跟stable storage不一樣的是，stable storage固定位置是在檔案旁邊，然後這個只能用來載入sm和音效
 	
 	接下來要寫把紀錄送到手機，正在把result輸入score
@@ -3000,3 +3000,6 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 	
 5/10
 	改玩了config manager讀檔，部過之後要改掉如果沒有ini檔就會卡住的問題
+	
+5/11
+	改掉所有檔案讀取失敗的問題，要來想辦法做自動讀取config
