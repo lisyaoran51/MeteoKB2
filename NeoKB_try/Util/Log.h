@@ -72,7 +72,7 @@ namespace Util {
 			if (bufferToSave.size() == 0)
 				return 0;
 
-			std::vector<string> temp;
+			std::vector<std::string> temp;
 
 			isBufferToSaveLocked = true;
 			temp.assign(bufferToSave.begin(), bufferToSave.end());
@@ -87,7 +87,7 @@ namespace Util {
 
 	private:
 		std::ostringstream _buffer;
-		static std::vector<string> bufferToSave;
+		static std::vector<std::string> bufferToSave;
 		static bool isBufferToSaveLocked;
 	};
 
