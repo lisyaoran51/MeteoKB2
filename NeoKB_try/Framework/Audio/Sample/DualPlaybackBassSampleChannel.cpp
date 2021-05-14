@@ -15,6 +15,7 @@ DualPlaybackBassSampleChannel::DualPlaybackBassSampleChannel(Sample * s) : Sampl
 
 DualPlaybackBassSampleChannel::~DualPlaybackBassSampleChannel()
 {
+	LOG(LogLevel::Debug) << "DualPlaybackBassSampleChannel::~DualPlaybackBassSampleChannel() : delete channels.";
 	BASS_ChannelStop(channelID[0]);
 	BASS_ChannelStop(channelID[1]);
 }
