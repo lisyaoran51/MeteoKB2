@@ -43,7 +43,7 @@ namespace DataStructure {
 			getTimeOfPeriod = gTimeOfPeriod;
 		}
 
-
+		virtual ~PeriodMap() = default;
 
 		virtual int InsertItem(T item) {
 			pair<float, float> insertTimeSpan = getTimeOfPeriod(item);

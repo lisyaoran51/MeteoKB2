@@ -27,6 +27,7 @@ namespace Configurations {
 	public:
 
 		ConfigManager();
+		virtual ~ConfigManager() = default;
 
 		virtual int Initialize(Storage* s) = 0;
 
@@ -59,6 +60,7 @@ namespace Configurations {
 			// 這個問題要找別的方法解決
 			//registerLoad(bind((int(TConfigManager<T>::*)())&TConfigManager<T>::load, this));
 		}
+		virtual ~TConfigManager() = default;
 
 		virtual int Initialize(Storage* s) {
 			storage = s;

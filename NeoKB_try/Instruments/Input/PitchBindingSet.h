@@ -27,6 +27,8 @@ namespace Input {
 
 	public:
 
+		virtual ~TPitchBindingSet() = default;
+
 		virtual int SetPitchBinding(Pitch pitch, T action) = 0;
 
 		virtual T GetAction(Pitch pitch) = 0;

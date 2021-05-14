@@ -23,6 +23,8 @@ namespace Timing {
 
 	public:
 
+		virtual ~FrameBasedClock() = default;
+
 		/// <summary>
 		/// Elapsed time since last frame in seconds.
 		/// </summary>

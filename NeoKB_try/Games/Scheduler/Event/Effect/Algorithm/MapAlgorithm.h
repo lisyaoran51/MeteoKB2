@@ -40,6 +40,7 @@ namespace Algorithms{
 	public:
 
 		MapAlgorithmInterface(): Container(), RegisterType("MapAlgorithmInterface"){}
+		virtual ~MapAlgorithmInterface() = default;
 
 		virtual int RegisterBufferMap(Map* b) = 0;
 

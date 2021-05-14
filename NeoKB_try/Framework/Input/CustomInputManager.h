@@ -15,6 +15,7 @@ namespace Input {
 	public:
 
 		CustomInputManager();
+		virtual ~CustomInputManager() = default;
 
 	protected:
 

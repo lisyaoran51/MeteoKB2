@@ -34,6 +34,7 @@ namespace Scenes {
 	public:
 
 		Scene();
+		virtual ~Scene() = default;
 
 		/// <summary>
 		/// 進入下一個畫面

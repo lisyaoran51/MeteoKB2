@@ -22,6 +22,7 @@ namespace Input {
 	public:
 
 		PassThroughInputManager();
+		virtual ~PassThroughInputManager() = default;
 
 	protected:
 

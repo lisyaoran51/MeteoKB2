@@ -14,6 +14,8 @@ namespace Samples {
 
 	public:
 
+		virtual ~Sample() = default;
+
 		virtual bool GetIsLoaded();
 
 	protected:

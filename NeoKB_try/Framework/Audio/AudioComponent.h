@@ -24,6 +24,8 @@ namespace Audio {
 
 	public:
 
+		virtual ~AudioComponent() = default;
+
 		bool GetIsCompleted();
 
 		virtual int Update();

@@ -25,6 +25,7 @@ namespace Input {
 	public:
 
 		InputManager();
+		virtual ~InputManager() = default;
 
 		int ChangeFocus(Triggerable* fTriggerable);
 

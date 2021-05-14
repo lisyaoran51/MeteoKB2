@@ -15,6 +15,8 @@ namespace Hierachal {
 
 		Container();
 
+		virtual ~Container() = default;
+
 	};
 
 

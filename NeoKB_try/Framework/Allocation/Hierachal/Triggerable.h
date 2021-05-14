@@ -37,6 +37,8 @@ namespace Hierachal {
 
 		Triggerable();
 
+		virtual ~Triggerable() = default;
+
 		/// <summary>
 		/// 覆寫child addable，然後加入isValidForTrigger，好像沒這個必要，刪掉
 		/// </summary>

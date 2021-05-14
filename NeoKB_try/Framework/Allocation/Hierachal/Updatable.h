@@ -26,6 +26,7 @@ namespace Hierachal {
 	public:
 
 		Updatable();
+		virtual ~Updatable() = default;
 
 		int SetClock(FrameBasedClock* c);
 

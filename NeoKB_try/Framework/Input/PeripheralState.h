@@ -11,6 +11,8 @@ namespace Input {
 
 	public:
 
+		virtual ~PeripheralState() = default;
+
 		virtual T* Clone() = 0;
 
 		int SetIsLastState() {

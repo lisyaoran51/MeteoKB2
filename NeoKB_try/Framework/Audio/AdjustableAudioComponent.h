@@ -29,6 +29,7 @@ namespace Audio {
 	public:
 
 		AdjustableAudioComponent();
+		virtual ~AdjustableAudioComponent() = default;
 
 		int AddAdjustmentDependency(AdjustableAudioComponent* adjustableAudioComponent);
 

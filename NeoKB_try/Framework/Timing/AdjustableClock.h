@@ -10,6 +10,8 @@ namespace Timing {
 
 	public:
 
+		virtual ~AdjustableClock() = default;
+
 		/// <summary>
 		/// Stop and reset position.
 		/// </summary>

@@ -17,6 +17,8 @@ namespace Gatt {
 
 	public:
 
+		virtual ~GattClient() = default;
+
 		virtual void Init(std::map<std::string, std::function<std::string()>> deviceInfoGetter) = 0;
 
 		virtual void EnqueueForSend(char const* buff, int n) = 0;
