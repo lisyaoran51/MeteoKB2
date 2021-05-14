@@ -18,6 +18,7 @@ Games/Ruleset:Games/Ruleset/Modifiers:Games/Ruleset/Judgements:Games/Ruleset/Sco
 Games/Scene:Games/Scene/Interlude:Games/Scene/Play:Games/Scene/Play/Hud:Games/Scene/Select:Games/Scene/Results:\
 Games/Input:Games/Input/Messages:\
 Games/IO/Communications:\
+Games/Hosts/:\
 Games/Output:Games/Output/Bluetooths:Games/Output/Panels:\
 Games/Scheduler/Event:Games/Scheduler/Event/ControlPoints:Games/Scheduler/Event/Effect:\
 Games/Scheduler/Event/Effect/Algorithm:Games/Scheduler/Event/GameEvents:Games/Scheduler/Event/SystemEvents:Games/Scheduler/Event/SystemEvents/SystemControllers:\
@@ -37,7 +38,7 @@ Util:Util/DataStructure:\
 \
 ThirdParty/Bass:\
 \
-Desktop:Desktop/Devices:Desktop/Devices/Gatt:\
+Desktop:Desktop/Devices:Desktop/Devices/Gatt:Desktop/Hosts:\
 \
 RulesetMeteor:RulesetMeteor/Config:RulesetMeteor/Input:RulesetMeteor/Play:\
 RulesetMeteor/Output/Panels:\
@@ -83,6 +84,7 @@ INCLUDE = -IFramwork -IFramework/Allocation -IFramework/Allocation/Hierachal -IF
 -IGames/Scene -IGames/Scene/Interlude -IGames/Scene/Play -IGames/Scene/Play/Hud -IGames/Scene/Select -IGames/Scene/Results \
 -IGames/Input -IGames/Input/Messages \
 -IGames/Output -IGames/Output/Bluetooths -IGames/Output/Panels \
+-IGames/Hosts \
 -IGames/Scheduler/Event -IGames/Scheduler/Event/ControlPoints -IGames/Scheduler/Event/Effect \
 -IGames/Scheduler/Event/Effect/Algorithm -IGames/Scheduler/Event/GameEvents -IGames/Scheduler/Event/SystemEvents -IGames/Scheduler/Event/SystemEvents/SystemControllers \
 -IGames/Scheduler/Event/IoEvents -IGames/Scheduler/Event/IoEvents/IoCommunicators \
@@ -102,7 +104,7 @@ INCLUDE = -IFramwork -IFramework/Allocation -IFramework/Allocation/Hierachal -IF
 -IThirdParty/Bass \
 -IThirdParty/bluez/bluez \
 \
--IDesktop -IDesktop/Devices -IDesktop/Devices/Gatt \
+-IDesktop -IDesktop/Devices -IDesktop/Devices/Gatt -IDesktop/Hosts \
 \
 -IRulesetMeteor -IRulesetMeteor/Config -IRulesetMeteor/Input -IRulesetMeteor/Output -IRulesetMeteor/Output/Panels \
 -IRulesetMeteor/Play -IRulesetMeteor/Ruleset -IRulesetMeteor/Ruleset/Modifiers -IRulesetMeteor/Ruleset/Judgements -IRulesetMeteor/Ruleset/Scoring -IRulesetMeteor/Ruleset/Replays \
@@ -161,7 +163,7 @@ ConfigManager.o FrameworkConfigManager.o \
 DatabaseContext.o DatabaseContextFactory.o DatabaseStore.o FakeMeteoDatabaseContext.o MeteoDatabaseContext.o ReadonlyCsvDatabaseContextFactory.o MemoryBasedDatabaseContextFactory.o \
 BluetoothDevice.o Device.o DisplayDevice.o InputDevice.o OutputDevice.o KeyboardDevice.o PanelDevice.o \
 Drawable.o Map.o \
-Host.o MeteoGameHost.o \
+Host.o \
 BluetoothState.o CustomInputManager.o InputManager.o InputState.o KeyboardState.o PanelState.o PassThroughInputManager.o HasInputKey.o \
 InputHandler.o BluetoothInputHandler.o KeyboardInputHandler.o PanelInputHandler.o KeyBindingStore.o \
 BluetoothPhone.o Display.o FileStore.o Keyboard.o MainInterface.o Panel.o Peripheral.o PlatformStorage.o Storage.o StorageResourceStore.o DynamicPathResourceStore.o \
@@ -189,6 +191,7 @@ ControlPoint.o MarkControlPoint.o NoteControlPoint.o PlayableControlPoint.o Inpu
 NoteControlPointHitObject.o InputKeyControlPointHitObject.o \
 Effect.o LinearMapPitchShifter.o MapPitchShifter.o \
 IoEvent.o IoEventProcessor.o PanelEvent.o IoCommunicator.o \
+GameHost.o \
 InstrumentEvent.o InstrumentEventProcessor.o InstrumentController.o \
 PlayfieldEvent.o PlayfieldEventProcessor.o PlayfieldController.o \
 GameEvent.o StartGameEvent.o StopSystemEvent.o RestartSystemEvent.o SystemEvent.o SystemEventHandler.o SystemController.o \
@@ -207,7 +210,7 @@ FileSystem.o ProgramInitializer.o StringSplitter.o FileSegmentMap.o CommandPasse
 \
 \
 \
-MeteoGameDesktop.o Program.o \
+MeteoGameDesktop.o Program.o MeteoGameHost.o \
 MeteoLightBoardV1.o bcm2835.o MeteoBitbangDisplayDevice.o MeteoSpidevDisplayDevice.o MeteoKeyboardDevice.o MeteoPanelDevice.o MeteoMcuV1.o pi2c.o \
 MeteoBluetoothDevice.o MeteoBluetoothPhoneV2.o MeteoPacketConverterV2.o \
 GattServer.o MeteoGattServerV1.o MeteoGattClientV1.o \

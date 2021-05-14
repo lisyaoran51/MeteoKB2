@@ -57,10 +57,14 @@ bool FileSegmentMap::CheckFullFilled()
 
 int FileSegmentMap::WriteFile(fstream * fStream)
 {
-	for (map<int, pair<char*, int>>::const_iterator it = fileSegmentMap.begin(); it != fileSegmentMap.end(); ++it)
-	{
-		fStream->write(it->second.first, it->second.second * sizeof(char*));
+	for (int i = 0; i < segmentAmount; i++) {
+		fStream->write(fileSegmentMap[i].first, fileSegmentMap[i].second * sizeof(char));
 	}
+
+	//for (map<int, pair<char*, int>>::const_iterator it = fileSegmentMap.begin(); it != fileSegmentMap.end(); ++it)
+	//{
+	//	fStream->write(it->second.first, it->second.second * sizeof(char));
+	//}
 
 	return 0;
 }
@@ -74,7 +78,7 @@ int FileSegmentMap::ReadFile(fstream * fStream)
 	fileSize = fStream->tellg() - fileSize;
 
 	/* 計算segment數量 */
-	segmentAmount = fileSize / segmentSize + fileSize % segmentSize > 0 ? 1 : 0;
+	segmentAmount = fileSize / segmentSize + (fileSize % segmentSize > 0 ? 1 : 0);
 
 	/* 開始讀黨 */
 	fStream->seekp(0, ios_base::beg);
