@@ -1,8 +1,10 @@
 #include "BassSample.h"
 
+#include "../../../Util/Log.h"
+
 
 using namespace Framework::Audio::Samples;
-
+using namespace Util;
 
 
 BassSample::BassSample(char * fileName)
@@ -13,6 +15,7 @@ BassSample::BassSample(char * fileName)
 
 BassSample::~BassSample()
 {
+	LOG(LogLevel::Debug) << "BassSample::~BassSample() : delete sample.";
 	BASS_SampleFree(sampleID);
 }
 
