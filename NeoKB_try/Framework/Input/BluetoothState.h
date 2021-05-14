@@ -19,7 +19,7 @@ namespace Input {
 
 	public:
 
-		~BluetoothState();
+		virtual ~BluetoothState();
 
 		int AddMessage(BluetoothMessage* message);
 

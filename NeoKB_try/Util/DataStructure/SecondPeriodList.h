@@ -30,7 +30,7 @@ namespace DataStructure {
 		SecondPeriodList(function<pair<float, float>(T)> gTimeOfPeriod): SecondPeriodMap<T>(gTimeOfPeriod){
 		}
 
-		~SecondPeriodList() {
+		virtual ~SecondPeriodList() {
 			for (int i = 0; i < secondPeriodsInList.size(); i++) {
 				delete secondPeriodsInList[i];
 			}

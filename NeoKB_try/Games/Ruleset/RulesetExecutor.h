@@ -201,7 +201,7 @@ namespace Rulesets {
 		}
 
 		//virtual ~RulesetExecutor() = default;
-		~RulesetExecutor() {
+		virtual ~RulesetExecutor() {
 			delete sm;
 			sm = nullptr;
 		}

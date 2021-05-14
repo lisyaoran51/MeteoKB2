@@ -36,7 +36,7 @@ namespace Rulesets {
 
 		virtual int LazyConstruct(RulesetInfo* r);
 
-		~Ruleset();
+		virtual ~Ruleset();
 
 		virtual RulesetExecutor<Event>* CreateRulesetExecutor(WorkingSm* sm) = 0;
 

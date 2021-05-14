@@ -28,7 +28,7 @@ namespace Commands{
 
 		MeteoOutputFileBluetoothCommand(MeteoCommand c, string p, int sSize = 512);
 
-		~MeteoOutputFileBluetoothCommand();
+		virtual ~MeteoOutputFileBluetoothCommand();
 
 		int GetFileSegment(int segmentNumber, char* fileSegment);
 

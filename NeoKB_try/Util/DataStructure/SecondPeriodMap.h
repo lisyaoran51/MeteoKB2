@@ -32,7 +32,7 @@ namespace DataStructure {
 		SecondPeriodMap(function<pair<float, float>(T)> gTimeOfPeriod): PeriodMap<T>(0, 1, gTimeOfPeriod){
 		}
 
-		~SecondPeriodMap() {
+		virtual ~SecondPeriodMap() {
 
 
 			for (typename map<int, SecondPeriod<T>*>::iterator it = secondPeriods.begin(); it != secondPeriods.end(); ++it) {

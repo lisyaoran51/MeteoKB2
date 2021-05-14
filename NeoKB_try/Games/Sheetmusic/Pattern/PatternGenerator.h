@@ -47,7 +47,7 @@ namespace Patterns {
 
 		PatternGenerator();
 
-		~PatternGenerator();
+		virtual ~PatternGenerator();
 
 		virtual int Initialize(Sm<Event>* s);
 

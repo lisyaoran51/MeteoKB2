@@ -16,7 +16,7 @@ namespace Timing {
 	public:
 
 		FramedClock(Clock* s = nullptr);
-		~FramedClock();
+		virtual ~FramedClock();
 
 		virtual int ProcessFrame();
 

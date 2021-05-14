@@ -95,7 +95,7 @@ namespace Algorithms{
 			registerLoad(bind((int(MapAlgorithm<T>::*)())&MapAlgorithm<T>::load, this));
 		}
 
-		~MapAlgorithm() {
+		virtual ~MapAlgorithm() {
 			if (genAlgo) {
 				delete genAlgo;
 				genAlgo = nullptr;

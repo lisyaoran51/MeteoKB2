@@ -45,7 +45,7 @@ namespace Scenes {
 
 		MeteoScene();
 
-		~MeteoScene();
+		virtual ~MeteoScene();
 
 		virtual int onEntering(Scene* lastScene);
 

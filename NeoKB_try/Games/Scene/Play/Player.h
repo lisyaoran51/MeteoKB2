@@ -76,7 +76,7 @@ namespace Play {
 
 		Player();
 
-		~Player();
+		virtual ~Player();
 
 		int Restart();
 

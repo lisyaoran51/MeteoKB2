@@ -56,7 +56,7 @@ namespace Play {
 	public:
 
 		Playfield();
-		~Playfield();
+		virtual ~Playfield();
 
 		virtual int OnJudgement(HitObject* hitObject, Judgement* judgement);
 

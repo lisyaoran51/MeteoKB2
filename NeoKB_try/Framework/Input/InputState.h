@@ -20,7 +20,7 @@ namespace Input {
 
 	public:
 
-		~InputState();
+		virtual ~InputState();
 
 		virtual InputState* Clone();
 

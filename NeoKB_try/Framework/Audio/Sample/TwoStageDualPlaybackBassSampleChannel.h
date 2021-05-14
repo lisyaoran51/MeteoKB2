@@ -19,7 +19,7 @@ namespace Samples {
 	public:
 
 		TwoStageDualPlaybackBassSampleChannel(Sample* sA, Sample* sB, float sPoint, float tLength);
-		~TwoStageDualPlaybackBassSampleChannel();
+		virtual ~TwoStageDualPlaybackBassSampleChannel();
 
 		virtual int Play();
 

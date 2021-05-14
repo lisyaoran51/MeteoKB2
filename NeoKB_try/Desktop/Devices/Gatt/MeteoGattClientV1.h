@@ -73,7 +73,7 @@ namespace Gatt {
 
 		MeteoGattClientV1(int fd);
 
-		~MeteoGattClientV1();
+		virtual ~MeteoGattClientV1();
 
 		virtual void Init(std::map<std::string, std::function<std::string()>> deviceInfoGetter);
 

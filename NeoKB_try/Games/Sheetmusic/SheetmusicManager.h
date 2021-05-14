@@ -69,7 +69,7 @@ namespace Sheetmusics {
 
 		SmManager(Storage* s, function<DatabaseContext*()> gContext, RulesetStore* rStore, Host* gHost);
 
-		~SmManager();
+		virtual ~SmManager();
 
 		int RegisterRulesetInfo(RulesetInfo* r);
 

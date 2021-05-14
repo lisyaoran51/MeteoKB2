@@ -59,7 +59,7 @@ namespace Sheetmusics {
 			}
 		}
 
-		~Sm() {
+		virtual ~Sm() {
 			delete smInfo;
 			delete smMetadata;
 			delete events;

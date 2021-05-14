@@ -39,7 +39,7 @@ namespace Hierachal{
 	public:
 
 		ChildAddable();
-		~ChildAddable();
+		virtual ~ChildAddable();
 		//virtual ~ChildAddable() = default;
 
 		/// <summary>

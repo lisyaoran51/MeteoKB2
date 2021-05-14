@@ -66,7 +66,7 @@ namespace Events {
 
 		EventProcessorMaster();
 
-		~EventProcessorMaster();
+		virtual ~EventProcessorMaster();
 
 		int AddStaticEventProcessor(EventProcessor<Event>* sEventProcessor);
 

@@ -32,7 +32,7 @@ namespace Replays {
 	public:
 
 		ReplayRecorder();
-		~ReplayRecorder();
+		virtual ~ReplayRecorder();
 
 		Replay* GetReplay();
 

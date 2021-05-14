@@ -16,7 +16,7 @@ namespace Samples {
 	public:
 
 		BassSample(char* fileName);
-		~BassSample();
+		virtual ~BassSample();
 
 		int CreateChannel();
 

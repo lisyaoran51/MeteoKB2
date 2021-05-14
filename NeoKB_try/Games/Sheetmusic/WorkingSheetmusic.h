@@ -33,7 +33,7 @@ namespace Sheetmusics {
 
 		WorkingSm(SmInfo* s);
 
-		~WorkingSm();
+		virtual ~WorkingSm();
 
 		virtual Sm<Event>* GetSm();
 

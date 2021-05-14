@@ -39,7 +39,7 @@ namespace Events{
 	public:
 
 		HitObject(HitWindow* hWindow);
-		~HitObject();
+		virtual ~HitObject();
 
 		/// <summary>
 		/// register the Event to be processed.

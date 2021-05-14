@@ -28,7 +28,7 @@ namespace KeyBindings {
 			
 		}
 
-		~KeyBindingInputManager() {
+		virtual ~KeyBindingInputManager() {
 			for (int i = 0; i < keyBindings.size(); i++)
 				delete keyBindings[i];
 			keyBindings.clear();

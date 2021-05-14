@@ -27,7 +27,7 @@ namespace Hierachal {
 	public:
 
 		Schedulable();
-		~Schedulable();
+		virtual ~Schedulable();
 
 		Scheduler* GetScheduler();
 

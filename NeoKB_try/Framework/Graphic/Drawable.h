@@ -33,7 +33,7 @@ namespace Graphic {
 	public:
 		Drawable();
 		Drawable(int w, int h);
-		~Drawable();
+		virtual ~Drawable();
 		
 		int Initialize(int w, int h);
 		int Deactivate();

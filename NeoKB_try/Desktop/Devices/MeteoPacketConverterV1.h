@@ -107,7 +107,7 @@ namespace Devices{
 
 		class MeteoPacketConverterFileSegmentMap {
 		public:
-			~MeteoPacketConverterFileSegmentMap();
+			virtual ~MeteoPacketConverterFileSegmentMap();
 
 			string fileName;
 			map<int, pair<char*, int>> fileSegmentMap;
