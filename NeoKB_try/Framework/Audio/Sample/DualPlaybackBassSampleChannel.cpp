@@ -8,6 +8,7 @@ using namespace Framework::Audio::Samples;
 
 DualPlaybackBassSampleChannel::DualPlaybackBassSampleChannel(Sample * s) : SampleChannel(s)
 {
+	LOG(LogLevel::Debug) << "DualPlaybackBassSampleChannel::~DualPlaybackBassSampleChannel() : create channels." << this;
 	volume->SetValue(0);
 	channelID[0] = dynamic_cast<BassSample*>(sample)->CreateChannel();
 	channelID[1] = dynamic_cast<BassSample*>(sample)->CreateChannel();

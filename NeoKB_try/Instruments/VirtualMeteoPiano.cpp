@@ -194,22 +194,6 @@ int VirtualMeteoPiano::MoveOctave(PianoPitchMovement m)
 
 int VirtualMeteoPiano::SwitchSoundBindings(TSoundBindingSet<Pitch>* sBindingSet)
 {
-	// 這樣寫錯了
-	//LOG(LogLevel::Debug) << "VirtualMeteoPiano::SwitchSoundBindings() : switch piano sound to [" << sBindingSet->fileName << "].";
-	//
-	//Piano::SwitchSoundBindings(sBindingSet);
-	//LOG(LogLevel::Debug) << [=]() {
-	//
-	//	map<Pitch, SampleChannel*>::iterator it;
-	//	for (it = getSamplesByPitch()->begin(); it != getSamplesByPitch()->end(); ++it) {
-	//
-	//		LOG(LogLevel::Debug) << "VirtualMeteoPiano::SwitchSoundBindings() : switch to [" << (int)(*it).first << "]";
-	//	}
-	//
-	//	return 0;
-	//}();
-	//
-	//return 0;
 
 	LOG(LogLevel::Debug) << "VirtualMeteoPiano::SwitchSoundBindings() : switch piano sound to [" << sBindingSet->fileName << "].";
 
@@ -236,8 +220,9 @@ int VirtualMeteoPiano::SwitchSoundBindings(TSoundBindingSet<Pitch>* sBindingSet)
 	/* 更新sound binding */
 	for (int i = 0; i < soundBindings.size(); i++) {
 
-		if (audioManager->GetMirrorSampleManager()->HasSampleChannel(soundBindings[i]))
-			audioManager->GetMirrorSampleManager()->RemoveSampleChannel(soundBindings[i]);
+		// 在piano那邊已經刪過一次，不用再刪一次
+		//if (audioManager->GetMirrorSampleManager()->HasSampleChannel(soundBindings[i]))
+		//	audioManager->GetMirrorSampleManager()->RemoveSampleChannel(soundBindings[i]);
 		delete soundBindings[i];
 	}
 	soundBindings.clear();
