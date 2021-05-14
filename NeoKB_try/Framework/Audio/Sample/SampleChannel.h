@@ -16,7 +16,7 @@ namespace Samples {
 
 		//SampleChannel();
 
-		~SampleChannel();
+		virtual ~SampleChannel();
 
 		virtual int Update();
 
