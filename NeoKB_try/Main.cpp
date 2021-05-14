@@ -13,6 +13,9 @@ using namespace Util;
 
 LogLevel Util::logLevel = LogLevel::Info;
 
+std::vector<std::string> Util::LogIt::bufferToSave;
+bool Util::LogIt::isBufferToSaveLocked = false;
+
 int main(int argc, char *argv[]) {
 
 	LogIt::Initialize();
