@@ -104,6 +104,8 @@ int CompositeMeteoPiano::SwitchSoundBindings(TSoundBindingSet<Pitch>* sBindingSe
 
 	GetScheduler()->AddTask([=]() {
 
+		LOG(LogLevel::Debug) << "CompositeMeteoPiano::SwitchSoundBindings() : clean old samples.";
+
 		BassSampleChannelGenerator::ClearOldSamples();
 		return 0;
 	});
