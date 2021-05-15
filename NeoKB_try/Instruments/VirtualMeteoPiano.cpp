@@ -221,8 +221,8 @@ int VirtualMeteoPiano::SwitchSoundBindings(TSoundBindingSet<Pitch>* sBindingSet)
 	for (int i = 0; i < soundBindings.size(); i++) {
 
 		// 在piano那邊已經刪過一次，不用再刪一次
-		//if (audioManager->GetMirrorSampleManager()->HasSampleChannel(soundBindings[i]))
-		//	audioManager->GetMirrorSampleManager()->RemoveSampleChannel(soundBindings[i]);
+		if (audioManager->GetMirrorSampleManager()->HasSampleChannel(soundBindings[i]))
+			audioManager->GetMirrorSampleManager()->RemoveSampleChannel(soundBindings[i]);
 		delete soundBindings[i];
 	}
 	soundBindings.clear();
