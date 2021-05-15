@@ -155,7 +155,7 @@ int BassSampleChannelGenerator::MoveSampleToDeleteCache(Sample * s)
 	for (it = sampleCache.begin(); it != sampleCache.end(); ++it) {
 		if (it->second == s) {
 
-			LOG(LogLevel::Debug) << "SampleManager::MoveSampleToDeleteCache() : move sample [" << it->first << "] to delete cache.";
+			LOG(LogLevel::Depricated) << "SampleManager::MoveSampleToDeleteCache() : move sample [" << it->first << "] to delete cache.";
 			sampleToDelete[it->first] = it->second;
 			sampleCache.erase(it);
 

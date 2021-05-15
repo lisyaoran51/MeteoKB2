@@ -162,7 +162,7 @@ int SampleManager::RemoveSampleChannel(SoundBinding * soundBinding)
 
 		pendingActions.Add(this, [=]() {
 
-			LOG(LogLevel::Debug) << "SampleManager::RemoveSampleChannel() : delete channel." << sampleChannel;
+			LOG(LogLevel::Depricated) << "SampleManager::RemoveSampleChannel() : delete channel." << sampleChannel;
 
 			delete sampleChannel;
 			return 0;
