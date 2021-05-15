@@ -151,7 +151,7 @@ int SampleManager::RemoveSampleChannel(string name)
 
 int SampleManager::RemoveSampleChannel(SoundBinding * soundBinding)
 {
-	LOG(LogLevel::Debug) << "SampleManager::RemoveSampleChannel() : file [" << soundBinding->GetFileName() << "].";
+	LOG(LogLevel::Depricated) << "SampleManager::RemoveSampleChannel() : file [" << soundBinding->GetFileName() << "].";
 	map<string, SampleChannel*>::iterator it = sampleChannelCache.find(soundBinding->GetFileName());
 	if (it != sampleChannelCache.end()) {
 		LOG(LogLevel::Depricated) << "SampleManager::RemoveSampleChannel() : start removing.";

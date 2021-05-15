@@ -15,7 +15,7 @@ BassSample::BassSample(char * fileName)
 
 BassSample::~BassSample()
 {
-	LOG(LogLevel::Debug) << "BassSample::~BassSample() : delete sample.";
+	LOG(LogLevel::Depricated) << "BassSample::~BassSample() : delete sample.";
 	BASS_SampleFree(sampleID);
 }
 
