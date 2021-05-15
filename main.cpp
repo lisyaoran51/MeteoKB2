@@ -3,6 +3,6 @@
 // g++ main.cpp -o GameLauncher
 
 int main() {
-   std::system("./NeoKB_try/MeteoKB");
+   std::system("sudo ./NeoKB_try/MeteoKB");
    return 0;
 }
