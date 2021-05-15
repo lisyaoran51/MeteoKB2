@@ -61,6 +61,6 @@ SampleChannel::SampleChannel(Sample * s)
 SampleChannel::~SampleChannel()
 {
 	LOG(LogLevel::Depricated) << "SampleChannel::~SampleChannel() : deleting sample channel.";
-	delete sample;
-	sample = nullptr;
+	//delete sample;
+	//sample = nullptr;
 }
