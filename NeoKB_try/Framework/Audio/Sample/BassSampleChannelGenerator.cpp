@@ -120,7 +120,16 @@ SampleChannel * BassSampleChannelGenerator::GenerateSampleChannel(SoundBinding *
 
 		if (path != "") {
 
-			Sample* sample = new BassSample((char*)path.c_str());
+			Sample* sample = nullptr;
+
+			if (sampleCache.find(path) != sampleCache.end()) {
+				sample = sampleCache[path];
+			}
+			else {
+				sample = new BassSample((char*)path.c_str());
+				sampleCache[path] = sample;
+			}
+			
 			sampleChannel = new DualPlaybackBassSampleChannel(sample);
 
 			LOG(LogLevel::Fine) << "SampleManager::GetSampleChannel() : no-type sample file path found [" << soundBinding->GetFileName() << "].";
