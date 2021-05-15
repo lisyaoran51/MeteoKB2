@@ -101,7 +101,12 @@ int CompositeMeteoPiano::SwitchSoundBindings(TSoundBindingSet<Pitch>* sBindingSe
 	meteoPiano->SwitchSoundBindings(sBindingSet);
 	virtualMeteoPiano->SwitchSoundBindings(sBindingSet);
 
-	BassSampleChannelGenerator::ClearOldSamples();
+
+	GetScheduler()->AddTask([=]() {
+
+		BassSampleChannelGenerator::ClearOldSamples();
+		return 0;
+	});
 
 	return 0;
 }
