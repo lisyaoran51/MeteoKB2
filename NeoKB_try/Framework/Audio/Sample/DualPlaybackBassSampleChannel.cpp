@@ -8,7 +8,7 @@ using namespace Framework::Audio::Samples;
 
 DualPlaybackBassSampleChannel::DualPlaybackBassSampleChannel(Sample * s) : SampleChannel(s)
 {
-	LOG(LogLevel::Depricated) << "DualPlaybackBassSampleChannel::DualPlaybackBassSampleChannel() : create channels." << this;
+	LOG(LogLevel::Debug) << "DualPlaybackBassSampleChannel::DualPlaybackBassSampleChannel() : create channels." << this;
 	volume->SetValue(0);
 	channelID[0] = dynamic_cast<BassSample*>(sample)->CreateChannel();
 	channelID[1] = dynamic_cast<BassSample*>(sample)->CreateChannel();
@@ -16,7 +16,7 @@ DualPlaybackBassSampleChannel::DualPlaybackBassSampleChannel(Sample * s) : Sampl
 
 DualPlaybackBassSampleChannel::~DualPlaybackBassSampleChannel()
 {
-	LOG(LogLevel::Debug) << "DualPlaybackBassSampleChannel::~DualPlaybackBassSampleChannel() : delete channels.";
+	LOG(LogLevel::Depricated) << "DualPlaybackBassSampleChannel::~DualPlaybackBassSampleChannel() : delete channels.";
 	BASS_ChannelStop(channelID[0]);
 	BASS_ChannelStop(channelID[1]);
 

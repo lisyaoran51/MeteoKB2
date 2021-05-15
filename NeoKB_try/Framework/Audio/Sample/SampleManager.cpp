@@ -171,7 +171,7 @@ int SampleManager::RemoveSampleChannel(SoundBinding * soundBinding)
 		LOG(LogLevel::Depricated) << "SampleManager::RemoveSampleChannel() : erasing sample channel.";
 		sampleChannelCache.erase(it);
 
-		LOG(LogLevel::Debug) << "SampleManager::RemoveSampleChannel() : file [" << soundBinding->GetFileName() << "] removed from sample cache." << sampleChannel;
+		LOG(LogLevel::Depricated) << "SampleManager::RemoveSampleChannel() : file [" << soundBinding->GetFileName() << "] removed from sample cache." << sampleChannel;
 
 	}
 	else {
