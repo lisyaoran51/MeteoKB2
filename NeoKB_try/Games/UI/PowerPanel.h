@@ -39,7 +39,7 @@ namespace UI{
 
 		bool isPowerOn = true;
 
-		virtual int onButtonUp(InputState* inputState, InputKey button);
+		virtual int onButtonDown(InputState* inputState, InputKey button);
 		
 
 
