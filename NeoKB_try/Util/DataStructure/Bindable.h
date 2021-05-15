@@ -35,6 +35,26 @@ namespace DataStructure {
 			hasDefaultValue = true;
 		}
 
+		virtual ~Bindable() {
+
+			unique_lock<mutex> uLock(bindingMutex);
+			if (bindings != nullptr) {
+				for (int i = 0; i < bindings->size(); i++) {
+					if (bindings->at(i) == this) {
+						bindings->erase(bindings->begin() + i);
+
+						break;
+					}
+				}
+
+				if (bindings->size() == 0) {
+					delete bindings;
+					bindings = nullptr;
+				}
+
+			}
+		}
+
 		/// <summary>
 		/// 要判斷這個視布試pointer，試的話才能delete
 		/// </summary>
@@ -134,7 +154,7 @@ namespace DataStructure {
 			}
 			else {	// 自己沒有binding
 
-				if (bindings == nullptr) {	// 對方也沒有binding
+				if (bindings == nullptr) {	// 對方有binding
 					unique_lock<mutex> uLock(bindingMutex);
 					LOG(LogLevel::Fine) << "Bindable::AddBindings() : other [" << other << "]'s binding is [" << other->GetBindings() << "]. this = [" << this << "].";
 					bindings = other->GetBindings();
