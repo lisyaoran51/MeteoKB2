@@ -62,5 +62,7 @@ int MainMenu::load(Instrument * i)
 		return 0;
 	};
 
+	AddChild(powerPanel);
+
 	return 0;
 }
