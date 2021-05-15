@@ -37,6 +37,8 @@ int PowerPanel::onButtonUp(InputState * inputState, InputKey button)
 {
 	if (button == InputKey::Power) {
 
+		LOG(LogLevel::Debug) << "PowerPanel::onButtonUp() : power button pressed.";
+
 		double currentTime = GetClock()->GetCurrentTime();
 
 		if (currentTime - 4 > lastSwitchTime) {
