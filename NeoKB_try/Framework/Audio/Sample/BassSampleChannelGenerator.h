@@ -4,6 +4,10 @@
 
 
 #include "SampleChannelGenerator.h"
+#include <map>
+
+
+using namespace std;
 
 
 namespace Framework {
@@ -20,7 +24,15 @@ namespace Samples {
 
 		virtual SampleChannel* GenerateSampleChannel(SoundBinding* soundBinding);
 
+		static int MoveSampleToDeleteCache(Sample* s);
+
+		static int ClearOldSamples();
+
 	protected:
+
+		static map<string, Sample*> sampleCache;
+
+		static map<string, Sample*> sampleToDelete;
 
 	};
 

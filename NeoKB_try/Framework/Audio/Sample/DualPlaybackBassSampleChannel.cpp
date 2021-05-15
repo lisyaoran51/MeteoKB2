@@ -2,6 +2,7 @@
 
 #include "BassSample.h"
 #include <cmath>
+#include "BassSampleChannelGenerator.h"
 
 using namespace Framework::Audio::Samples;
 
@@ -20,7 +21,9 @@ DualPlaybackBassSampleChannel::~DualPlaybackBassSampleChannel()
 	BASS_ChannelStop(channelID[0]);
 	BASS_ChannelStop(channelID[1]);
 
-	delete sample;
+	BassSampleChannelGenerator::MoveSampleToDeleteCache(sample);
+
+	//delete sample;
 	sample = nullptr;
 }
 

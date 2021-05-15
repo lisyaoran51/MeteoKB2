@@ -1,7 +1,9 @@
 #include "CompositeMeteoPiano.h"
 
+#include "../Framework/Audio/Sample/BassSampleChannelGenerator.h"
 
 using namespace Instruments;
+using namespace Framework::Audio::Samples;
 
 
 
@@ -99,6 +101,7 @@ int CompositeMeteoPiano::SwitchSoundBindings(TSoundBindingSet<Pitch>* sBindingSe
 	meteoPiano->SwitchSoundBindings(sBindingSet);
 	virtualMeteoPiano->SwitchSoundBindings(sBindingSet);
 
+	BassSampleChannelGenerator::ClearOldSamples();
 
 	return 0;
 }

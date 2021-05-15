@@ -14,6 +14,8 @@
 using namespace Framework::Audio::Samples;
 using namespace Instruments;
 
+map<string, Sample*> BassSampleChannelGenerator::sampleCache;
+map<string, Sample*> BassSampleChannelGenerator::sampleToDelete;
 
 
 BassSampleChannelGenerator::BassSampleChannelGenerator(): SampleChannelGenerator(), RegisterType("BassSampleChannelGenerator")
@@ -41,7 +43,16 @@ SampleChannel * BassSampleChannelGenerator::GenerateSampleChannel(SoundBinding *
 
 		if (path != "") {
 
-			Sample* sample = new BassSample((char*)path.c_str());
+			Sample* sample = nullptr;
+
+			if (sampleCache.find(path) != sampleCache.end()) {
+				sample = sampleCache[path];
+			}
+			else {
+				sample = new BassSample((char*)path.c_str());
+				sampleCache[path] = sample;
+			}
+
 			sampleChannel = new DualPlaybackBassSampleChannel(sample);
 
 			LOG(LogLevel::Fine) << "SampleManager::GetSampleChannel() : simple sample file path found [" << soundBinding->GetFileName() << "].";
@@ -126,4 +137,34 @@ SampleChannel * BassSampleChannelGenerator::GenerateSampleChannel(SoundBinding *
 
 
 	return sampleChannel;
+}
+
+int BassSampleChannelGenerator::MoveSampleToDeleteCache(Sample * s)
+{
+	map<string, Sample*>::iterator it;
+
+	for (it = sampleCache.begin(); it != sampleCache.end(); ++it) {
+		if (it->second == s) {
+
+			LOG(LogLevel::Debug) << "SampleManager::MoveSampleToDeleteCache() : move sample [" << it->first << "] to delete cache.";
+			sampleToDelete[it->first] = it->second;
+			sampleCache.erase(it);
+
+			break;
+		}
+	}
+
+	return 0;
+}
+
+int BassSampleChannelGenerator::ClearOldSamples()
+{
+	map<string, Sample*>::iterator it;
+
+	for (it = sampleToDelete.begin(); it != sampleToDelete.end(); ++it) {
+		delete it->second;
+	}
+
+	sampleToDelete.clear();
+	return 0;
 }
