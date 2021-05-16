@@ -26,12 +26,12 @@ int MeteoPiano::load()
 		map<PianoAction, SampleChannel*>::iterator it;
 		for (it = raisedSamples.begin(); it != raisedSamples.end(); ++it) {
 
-			(*it).second->Stop();
+			(*it).second->FadeOut();
 		}
 
 		for (it = loweredSamples.begin(); it != loweredSamples.end(); ++it) {
 
-			(*it).second->Stop();
+			(*it).second->FadeOut();
 		}
 
 		return 0;

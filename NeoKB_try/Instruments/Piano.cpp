@@ -426,7 +426,7 @@ int Piano::resetState()
 	map<PianoAction, SampleChannel*>::iterator it2;
 	for (it2 = getSamples()->begin(); it2 != getSamples()->end(); ++it2) {
 
-		(*it2).second->Stop();
+		(*it2).second->FadeOut();
 	}
 
 	return 0;

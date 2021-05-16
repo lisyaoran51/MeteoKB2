@@ -20,7 +20,7 @@ int VirtualMeteoPiano::load()
 		map<Pitch, SampleChannel*>::iterator it;
 		for (it = samplesByPitch.begin(); it != samplesByPitch.end(); ++it) {
 
-			(*it).second->Stop();
+			(*it).second->FadeOut();
 		}
 
 		map<Pitch, bool>::iterator it2;
