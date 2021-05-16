@@ -39,24 +39,32 @@ RulesetInfo * RulesetStore::GetRulesetInfo(int id)
 
 	//return rulesetInfos[id];
 
+	if (rulesetInfos.find(id) != rulesetInfos.end())
+		return rulesetInfos[id];
+
 	switch (id) {
 	case 0:
 		// no ruleset
+		LOG(LogLevel::Debug) << "RulesetStore::GetRulesetInfo() : id [" << id << "] not found.";
 		return nullptr;
 		break;
 
 	case 1:
-		return new RulesetInfo("MeteorRuleset", 1);
+		rulesetInfos[id] = new RulesetInfo("MeteorRuleset", 1);
+		return rulesetInfos[id];
 		break;
 
 	case 2:
-		return new RulesetInfo("InstantRuleset", 2);
+		rulesetInfos[id] = new RulesetInfo("InstantRuleset", 2);
+		return rulesetInfos[id];
 		break;
 
 	case 3:
-		return new RulesetInfo("RecordRuleset", 3);
+		rulesetInfos[id] = new RulesetInfo("RecordRuleset", 3);
+		return rulesetInfos[id];
 		break;
 	}
+	LOG(LogLevel::Debug) << "RulesetStore::GetRulesetInfo() : id [" << id << "] not found.";
 	return nullptr;
 
 	// --------後面不用--------

@@ -66,7 +66,6 @@ int MainMenu::load(Instrument * i)
 		LOG(LogLevel::Debug) << "MainMenu::PowerOnRequest() : delete ruleset info.";
 
 		if (rulesetInfo.GetValue() != nullptr) {
-			delete rulesetInfo.GetValue();
 			rulesetInfo.SetValue(nullptr);
 		}
 
