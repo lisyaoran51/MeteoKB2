@@ -69,6 +69,8 @@ int MainMenu::load(Instrument * i)
 
 		Push(songSelect);
 
+		LOG(LogLevel::Info) << "MainMenu::PowerOnRequest() : push songselect over.";
+
 		return 0;
 	};
 
