@@ -67,7 +67,7 @@ namespace Events {
 			return dynamic_cast< T* >(this);
 		}
 
-		virtual Event* Clone() = 0;
+		virtual Event* Clone();
 
 	protected:
 

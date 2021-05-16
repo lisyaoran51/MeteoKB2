@@ -124,10 +124,10 @@ string Event::GetTypeName()
 	return "Event";
 }
 
-//Event * Event::Clone()
-//{
-//	LOG(LogLevel::Error) << "Event::Clone() : cloning [" << GetTypeName() << "] event at [" << startTime << "] to empty. Clone not set.";
-//	return new Event(this);
-//}
+Event * Event::Clone()
+{
+	LOG(LogLevel::Error) << "Event::Clone() : cloning [" << GetTypeName() << "] event at [" << startTime << "] to empty. Clone not set.";
+	return new Event(this);
+}
 
 
