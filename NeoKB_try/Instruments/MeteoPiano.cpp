@@ -14,37 +14,38 @@ using namespace Games::Output::Bluetooths;
 
 
 
+int MeteoPiano::load()
+{
+	onSleep.Add(this, [=]() {
+	
+		ChangePitchState(MeteoPianoPitchState::None);
+		SetGameControllingPitchState(false);
+
+		map<PianoAction, SampleChannel*>::iterator it;
+		for (it = raisedSamples.begin(); it != raisedSamples.end(); ++it) {
+
+			(*it).second->Stop();
+		}
+
+		for (it = loweredSamples.begin(); it != loweredSamples.end(); ++it) {
+
+			(*it).second->Stop();
+		}
+
+		return 0;
+	}, "MeteoPiano::Lambda_OnSleep");
+
+	return 0;
+}
+
 MeteoPiano::MeteoPiano(vector<string>& args) : RegisterType("MeteoPiano")
 {
+	registerLoad(bind(static_cast<int(MeteoPiano::*)(void)>(&MeteoPiano::load), this));
 }
 
 PitchBindingSet * MeteoPiano::GetDefaultPitchBindingSet(int variant)
 {
 	return new PianoPitchBindingSet();
-}
-
-int MeteoPiano::Sleep()
-{
-	if (isSleeping)
-		return -1;
-
-	//pitchBindingSet->SwitchPitchState(MeteoPianoPitchState::None);
-
-	ChangePitchState(MeteoPianoPitchState::None);
-	SetGameControllingPitchState(false);
-
-
-
-	return 0;
-}
-
-int MeteoPiano::WakeUp()
-{
-	if (!isSleeping)
-		return -1;
-	Piano::WakeUp();
-
-	return 0;
 }
 
 int MeteoPiano::SetGameControllingPitchState(bool value)

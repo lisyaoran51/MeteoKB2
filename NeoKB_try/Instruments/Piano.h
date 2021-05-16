@@ -70,10 +70,6 @@ namespace Instruments {
 
 		virtual int SwitchSoundBindings(TSoundBindingSet<Pitch>* sBindingSet);
 
-		virtual int Sleep();
-
-		virtual int WakeUp();
-
 		/* ------------------- ¿ûµ^±MÄÝ¥\¯à ------------------- */
 
 		virtual int ChangeSustainType(SustainType sType);

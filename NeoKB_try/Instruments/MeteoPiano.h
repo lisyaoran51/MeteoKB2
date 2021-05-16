@@ -20,6 +20,8 @@ namespace Instruments {
 
 		map<PianoAction, SampleChannel*> loweredSamples;
 
+		int load();
+
 	public:
 
 		MeteoPiano(vector<string>& args);
@@ -27,10 +29,6 @@ namespace Instruments {
 		/* ----------------------- Instrument.h ----------------------- */
 
 		virtual PitchBindingSet* GetDefaultPitchBindingSet(int variant = 0);	// 這個還沒寫
-
-		virtual int Sleep();
-
-		virtual int WakeUp();
 
 		/* ----------------------- Piano.h ----------------------- */
 

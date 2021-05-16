@@ -36,6 +36,18 @@ int Piano::load(OutputManager * o)
 	for (int i = (int)PianoAction::BluetoothPlugin; i <= (int)PianoAction::ExpressionPedalPlugin; i++) {
 		isPressingMap[(PianoAction)i] = false;
 	}
+
+	onSleep.Add(this, [=]() {
+
+		ChangeSustainType(SustainType::None);
+		resetState();
+		isSensitive = true;
+
+		return 0;
+	}, "Piano::Lambda_OnSleep");
+
+	return 0;
+
 	return 0;
 }
 
@@ -333,27 +345,6 @@ int Piano::SwitchSoundBindings(TSoundBindingSet<Pitch>* sBindingSet)
 	/* 重啟任何輸入 */
 	isActive == true;
 
-	return 0;
-}
-
-int Piano::Sleep()
-{
-	if (isSleeping)
-		return -1;
-
-	Instrument::Sleep();
-	ChangeSustainType(SustainType::None);
-	resetState();
-	isSensitive = true;
-
-	return 0;
-}
-
-int Piano::WakeUp()
-{
-	if (!isSleeping)
-		return -1;
-	Instrument::WakeUp();
 	return 0;
 }
 

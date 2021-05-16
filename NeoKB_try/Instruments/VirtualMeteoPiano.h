@@ -25,6 +25,8 @@ namespace Instruments {
 
 	class VirtualMeteoPiano : public Piano {
 
+		int load();
+
 	public:
 
 		VirtualMeteoPiano();
@@ -35,10 +37,6 @@ namespace Instruments {
 		/// 這個完全用步道，所以是空的。一班要拿GetDefaultPitchBindingSet會去meteo piano拿
 		///	</summary>
 		virtual PitchBindingSet* GetDefaultPitchBindingSet(int variant = 0);
-
-		virtual int Sleep();
-
-		virtual int WakeUp();
 
 		/* ----------------------- Piano.h ----------------------- */
 

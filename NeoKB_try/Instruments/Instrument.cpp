@@ -44,16 +44,20 @@ int Instrument::LoadAndMapPitches()
 
 int Instrument::Sleep()
 {
-	if (!isSleeping)
+	if (!isSleeping) {
 		isSleeping = true;
+		onSleep.Trigger();
+	}
 
 	return 0;
 }
 
 int Instrument::WakeUp()
 {
-	if (isSleeping)
+	if (isSleeping) {
 		isSleeping = false;
+		onWakeUp.Trigger();
+	}
 
 	return 0;
 }

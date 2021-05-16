@@ -97,6 +97,11 @@ namespace Instruments {
 
 		PitchBindingSet* pitchBindingSet = nullptr;
 
+		ActionList<int> onSleep;
+
+		ActionList<int> onWakeUp;
+
+
 		//¼g¿ù¤F
 		//vector<PitchBinding*> pitchBindings;
 

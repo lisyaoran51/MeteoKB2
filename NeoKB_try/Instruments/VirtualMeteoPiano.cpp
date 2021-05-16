@@ -11,33 +11,39 @@ using namespace Instruments;
 using namespace Framework::Audio::Samples;
 
 
+int VirtualMeteoPiano::load()
+{
+	onSleep.Add(this, [=]() {
+
+		map<Pitch, SampleChannel*>::iterator it;
+		for (it = samplesByPitch.begin(); it != samplesByPitch.end(); ++it) {
+
+			(*it).second->Stop();
+		}
+
+		map<Pitch, bool>::iterator it2;
+		for (it2 = isPressingMapByPitch.begin(); it2 != isPressingMapByPitch.end(); ++it2) {
+
+			(*it2).second = false;
+		}
+
+
+		SetVirtualMeteoPianoSustainType(VirtualMeteoPianoSustainType::Auto);
+
+		return 0;
+	}, "VirtualMeteoPiano::Lambda_OnSleep");
+
+	return 0;
+}
+
 VirtualMeteoPiano::VirtualMeteoPiano() : RegisterType("VirtualMeteoPiano")
 {
+	registerLoad(bind(static_cast<int(VirtualMeteoPiano::*)(void)>(&VirtualMeteoPiano::load), this));
 }
 
 PitchBindingSet * VirtualMeteoPiano::GetDefaultPitchBindingSet(int variant)
 {
 	return nullptr;
-}
-
-int VirtualMeteoPiano::Sleep()
-{
-	if (isSleeping)
-		return -1;
-	Piano::Sleep();
-
-	SetVirtualMeteoPianoSustainType(VirtualMeteoPianoSustainType::Auto);
-
-	return 0;
-}
-
-int VirtualMeteoPiano::WakeUp()
-{
-	if (!isSleeping)
-		return -1;
-	Piano::WakeUp();
-
-	return 0;
 }
 
 int VirtualMeteoPiano::SetVirtualMeteoPianoSustainType(VirtualMeteoPianoSustainType sType)
