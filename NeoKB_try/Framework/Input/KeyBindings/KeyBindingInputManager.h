@@ -135,7 +135,7 @@ namespace KeyBindings {
 		}
 
 		virtual int propagateButtonUp(vector<Triggerable*>* queue, InputState* state, InputKey button) {
-			return InputManager::propagateButtonDown(queue, state, button) + handleNewButtonUp(queue, button);
+			return InputManager::propagateButtonUp(queue, state, button) + handleNewButtonUp(queue, button);
 		}
 
 		virtual int propagateButtonUp(vector<Triggerable*>* queue, T button) {
