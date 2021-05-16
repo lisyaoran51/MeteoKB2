@@ -117,6 +117,35 @@ namespace DataStructure {
 
 		}
 
+		/// <summary>
+		/// 刪除所有由這個object加入的action
+		/// </summary>
+		template<class _Type>
+		int Delete(_Type* callableObject) {
+
+			uintptr_t pointer = (uintptr_t)callableObject;
+
+			vector<pair<uintptr_t, string>>::iterator iterKey;
+			typename vector<function<_Fty(_Types...)>>::iterator iter;
+
+			unique_lock<mutex> uLock(callbackMutex);
+			for (iterKey = callbackKeys.begin(), iter = callbacks.begin();
+				iterKey != callbackKeys.end(), iter != callbacks.end();
+				++iterKey, ++iter) {
+
+				if ((*iterKey).first== pointer) {
+					callbackKeys.erase(iterKey);
+					callbacks.erase(iter);
+
+					iterKey--;
+					iter--;
+				}
+
+			}
+			return 0;
+
+		}
+
 		int Clear() {
 			unique_lock<mutex> uLock(callbackMutex);
 			callbackKeys.clear();

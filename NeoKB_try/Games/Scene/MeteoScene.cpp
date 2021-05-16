@@ -53,6 +53,9 @@ MeteoScene::MeteoScene() : RegisterType("MeteoScene"), Scene()
 
 MeteoScene::~MeteoScene()
 {
+	rulesetInfo.DeleteOnValueChanged(this);
+	workingSm.DeleteOnValueChanged(this);
+
 	rulesetInfo.UnBind();
 	workingSm.UnBind();
 

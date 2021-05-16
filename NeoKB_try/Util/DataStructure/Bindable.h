@@ -182,6 +182,54 @@ namespace DataStructure {
 			return 0;
 		}
 
+		template<typename TCallableObject>
+		int DeleteOnValueChanged(TCallableObject object) {
+
+			if (bindings == nullptr) {
+				onValueChanged.Delete(object);
+				return 0;
+			}
+
+			for (int i = 0; i < bindings->size(); i++) {
+				bindings->at(i)->IterateDeleteOnValueChanged(object);
+			}
+
+			return 0;
+		}
+
+		template<typename TCallableObject>
+		int DeleteOnValueChanged(TCallableObject object, string name) {
+			
+			if (bindings == nullptr) {
+				onValueChanged.Delete(object, name);
+				return 0;
+			}
+
+			for (int i = 0; i < bindings->size(); i++) {
+				bindings->at(i)->IterateDeleteOnValueChanged(object, name);
+			}
+
+			return 0;
+		}
+
+		/// <summary>
+		/// 用於刪除單一個bindable上面的On Value Changed，如果要一次刪除所有bindings上面的On Value Changed，就要call Delete On Value Changed
+		/// </summary>
+		template<typename TCallableObject>
+		int IterateDeleteOnValueChanged(TCallableObject object, string name) {
+			onValueChanged.Delete(object, name);
+			return 0;
+		}
+
+		/// <summary>
+		/// 用於刪除單一個bindable上面的On Value Changed，如果要一次刪除所有bindings上面的On Value Changed，就要call Delete On Value Changed
+		/// </summary>
+		template<typename TCallableObject>
+		int IterateDeleteOnValueChanged(TCallableObject object) {
+			onValueChanged.Delete(object);
+			return 0;
+		}
+
 		int UnbindAll() {
 			throw runtime_error("Bindable::UnbindAll(): not implemented.");
 			return 0;
@@ -198,6 +246,11 @@ namespace DataStructure {
 					}
 				}
 			}
+
+			if (bindings->size() == 0)
+				delete bindings;
+
+			bindings = nullptr;
 
 			return 0;
 		}
