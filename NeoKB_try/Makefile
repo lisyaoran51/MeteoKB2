@@ -228,7 +228,6 @@ SustainPedalIoEvent.o SustainPedalLightRing.o SustainPedalLightRingIoCommunicato
 PianoEvent.o PianoEventProcessor.o PianoController.o PianoSoundEvent.o PianoSoundEventProcessor.o VirtualPianoController.o \
 OctaveShiftEvent.o OctaveShiftEventProcessor.o OctaveShifter.o \
 RepeatPracticeEvent.o RepeatPracticeEventProcessor.o RepeatPracticeController.o \
-MeteorButtonRecorderEvent.o MeteorButtonRecorderEventProcessor.o MeteorButtonRecorderController.o \
 MeteorSheetmusicConverter.o MeteorSheetmusicPostprocessor.o MeteorPatternGenerator.o \
 MeteorTimeController.o \
 \
