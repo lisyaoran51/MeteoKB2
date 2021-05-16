@@ -27,9 +27,13 @@ WorkingSm::WorkingSm(SmInfo * s)
 WorkingSm::~WorkingSm()
 {
 	// 確定都是這邊來山嗎??
-	delete sm;
+	if (sm) {
+		LOG(LogLevel::Debug) << "WorkingSm::~WorkingSm() : delete sm";
+		delete sm;
+
+	}
 	delete smMetadata;
-	delete smInfo;
+	//delete smInfo;
 }
 
 Sm<Event>* WorkingSm::GetSm()
