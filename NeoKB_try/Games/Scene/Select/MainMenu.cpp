@@ -64,12 +64,14 @@ int MainMenu::load(Instrument * i)
 			delete rulesetInfo.GetValue();
 			rulesetInfo.SetValue(nullptr);
 		}
+
+		LOG(LogLevel::Debug) << "MainMenu::PowerOnRequest() : push songselect.";
 		
 		songSelect = new PlaySongSelect();
 
 		Push(songSelect);
 
-		LOG(LogLevel::Info) << "MainMenu::PowerOnRequest() : push songselect over.";
+		LOG(LogLevel::Debug) << "MainMenu::PowerOnRequest() : push songselect over.";
 
 		return 0;
 	};
