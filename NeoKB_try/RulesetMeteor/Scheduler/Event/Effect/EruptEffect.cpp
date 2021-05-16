@@ -50,6 +50,16 @@ string EruptEffect::GetTypeName()
 	return "EruptEffect";
 }
 
+Effect * EruptEffect::Clone()
+{
+	EruptEffect* newEvent = new EruptEffect(x, y, startTime, lifeTime, speed);
+	newEvent->SetTargetHeight(targetHeight);
+	newEvent->SetMeteorEffectShiftType(meteorEffectShiftType);
+	newEvent->SetSourceEvent(sourceEvent);
+
+	return newEvent;
+}
+
 int EruptEffect::GetX()
 {
 	switch (meteorEffectShiftType) {

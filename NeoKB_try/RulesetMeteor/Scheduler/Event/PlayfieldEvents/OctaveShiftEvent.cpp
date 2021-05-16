@@ -14,6 +14,13 @@ string OctaveShiftEvent::GetTypeName()
 	return "OctaveShiftEvent";
 }
 
+Event * OctaveShiftEvent::Clone()
+{
+	OctaveShiftEvent* newEvent = new OctaveShiftEvent(octaveShiftType, startTime, lifeTime);
+	newEvent->SetSourceEvent(sourceEvent);
+	return newEvent;
+}
+
 OctaveShiftType OctaveShiftEvent::GetShiftType()
 {
 	return octaveShiftType;

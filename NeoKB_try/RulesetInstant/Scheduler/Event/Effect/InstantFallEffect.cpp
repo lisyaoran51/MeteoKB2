@@ -55,3 +55,8 @@ string InstantFallEffect::GetTypeName()
 {
 	return "InstantFallEffect";
 }
+
+Effect * InstantFallEffect::Clone()
+{
+	return new InstantFallEffect(x, y, startTime, lifeTime, speed);
+}

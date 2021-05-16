@@ -56,6 +56,15 @@ string FallEffect::GetTypeName()
 	return "FallEffect";
 }
 
+Effect * FallEffect::Clone()
+{
+	FallEffect* newEvent = new FallEffect(x, y, startTime, lifeTime, speed);
+	newEvent->SetTargetHeight(targetHeight);
+	newEvent->SetMeteorEffectShiftType(meteorEffectShiftType);
+	newEvent->SetSourceEvent(sourceEvent);
+	return newEvent;
+}
+
 int FallEffect::GetX()
 {
 	switch (meteorEffectShiftType) {

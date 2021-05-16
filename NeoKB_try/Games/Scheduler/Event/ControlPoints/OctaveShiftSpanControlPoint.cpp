@@ -24,3 +24,11 @@ string OctaveShiftSpanControlPoint::GetTypeName()
 {
 	return "OctaveShiftSpanControlPoint";
 }
+
+Event * OctaveShiftSpanControlPoint::Clone()
+{
+	OctaveShiftSpanControlPoint* newEvent = new OctaveShiftSpanControlPoint(octaveRange, startTime, lifeTime);
+	newEvent->SetSectionIndex(sectionIndex);
+	newEvent->SetPartIndex(partIndex);
+	return newEvent;
+}

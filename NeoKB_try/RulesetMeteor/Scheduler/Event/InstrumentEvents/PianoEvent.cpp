@@ -17,3 +17,10 @@ pair<InputKey, int> PianoEvent::GetInput()
 string PianoEvent::GetTypeName() {
 	return "PianoEvent";
 }
+
+Event * PianoEvent::Clone()
+{
+	PianoEvent* newEvent = new PianoEvent(command, startTime, lifeTime);
+	newEvent->SetSourceEvent(sourceEvent);
+	return newEvent;
+}

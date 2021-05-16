@@ -26,6 +26,8 @@ namespace InstrumentEvents{
 		// 一定要每次都override!!
 		virtual string GetTypeName();
 
+		virtual Event* Clone();
+
 	protected:
 
 		pair<InputKey, int> command = pair<InputKey, int>();

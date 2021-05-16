@@ -27,6 +27,8 @@ namespace PlayfieldEvents{
 		// 一定要每次都override!!
 		virtual string GetTypeName();
 
+		virtual Event* Clone();
+
 		OctaveShiftType GetShiftType();
 
 		float GetShiftStartTime();

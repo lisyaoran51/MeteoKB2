@@ -32,6 +32,8 @@ namespace InstrumentEvents{
 		// 一定要每次都override!!
 		virtual string GetTypeName();
 
+		virtual Event* Clone();
+
 		PianoSoundEventType GetPianoSoundEventType();
 
 		pair<Pitch, float> GetSound();

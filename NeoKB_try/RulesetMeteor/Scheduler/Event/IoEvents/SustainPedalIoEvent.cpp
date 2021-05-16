@@ -49,3 +49,10 @@ string SustainPedalIoEvent::GetTypeName()
 {
 	return string("SustainPedalIoEvent");
 }
+
+Event * SustainPedalIoEvent::Clone()
+{
+	SustainPedalIoEvent* newEvent = new SustainPedalIoEvent(inputKey, startTime, lifeTime);
+	newEvent->SetSourceEvent(sourceEvent);
+	return newEvent;
+}

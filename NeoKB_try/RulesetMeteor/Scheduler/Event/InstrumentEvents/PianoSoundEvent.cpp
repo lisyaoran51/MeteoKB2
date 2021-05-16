@@ -37,6 +37,19 @@ string PianoSoundEvent::GetTypeName()
 	return "PianoSoundEvent";
 }
 
+Event * PianoSoundEvent::Clone()
+{
+	PianoSoundEvent* newEvent;
+	if (pianoSoundEventType == PianoSoundEventType::Pitch) {
+		newEvent = new PianoSoundEvent(sound, startTime, lifeTime);
+	}
+	else {
+		newEvent = new PianoSoundEvent(pedalDown, startTime, lifeTime);
+	}
+	newEvent->SetSourceEvent(sourceEvent);
+	return newEvent;
+}
+
 PianoSoundEventType PianoSoundEvent::GetPianoSoundEventType()
 {
 	return pianoSoundEventType;

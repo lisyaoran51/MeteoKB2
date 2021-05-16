@@ -157,7 +157,7 @@ MeteorRulesetExecutor::MeteorRulesetExecutor(): RegisterType("MeteorRulesetExecu
 	eventProcessorTable["PianoEvent"				] = "PianoEventProcessor";
 	eventProcessorTable["PianoSoundEvent"			] = "PianoSoundEventProcessor";
 	eventProcessorTable["OctaveShiftEvent"			] = "OctaveShiftEventProcessor";
-	eventProcessorTable["MeteorButtonRecorderEvent"	] = "MeteorButtonRecorderEventProcessor";
+	//eventProcessorTable["MeteorButtonRecorderEvent"	] = "MeteorButtonRecorderEventProcessor";
 
 	// µù¥Uprivate load (c++¤~»Ý­n)
 	registerLoad(bind(static_cast<int(MeteorRulesetExecutor::*)(void)>(&MeteorRulesetExecutor::load), this));

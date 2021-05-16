@@ -248,13 +248,13 @@ int MeteorPlayfield::load(FrameworkConfigManager* f, MeteorConfigManager * m, Ti
 
 
 	/*--------------------- recorder controller ---------------------*/
-	string recorderControllerName;
-	if (m->Get(MeteorSetting::RecorderController, &recorderControllerName)) {
-		recordControllers["MeteorButtonRecorderEvent"] = iCreator.CreateInstanceWithT<RecorderControllerInterface>(recorderControllerName);
-	}
-	else
-		recordControllers["MeteorButtonRecorderEvent"] = new MeteorButtonRecorderController();
-	AddChild(recordControllers["MeteorButtonRecorderEvent"]);
+	//string recorderControllerName;
+	//if (m->Get(MeteorSetting::RecorderController, &recorderControllerName)) {
+	//	recordControllers["MeteorButtonRecorderEvent"] = iCreator.CreateInstanceWithT<RecorderControllerInterface>(recorderControllerName);
+	//}
+	//else
+	//	recordControllers["MeteorButtonRecorderEvent"] = new MeteorButtonRecorderController();
+	//AddChild(recordControllers["MeteorButtonRecorderEvent"]);
 
 
 	

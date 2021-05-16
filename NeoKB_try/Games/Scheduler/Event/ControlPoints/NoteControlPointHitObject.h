@@ -21,7 +21,7 @@ namespace ControlPoints{
 
 		NoteControlPointHitObject(HitWindow* hWindow);
 
-		string GetTypeName();
+		virtual string GetTypeName();
 
 		virtual double TryJudgement();
 

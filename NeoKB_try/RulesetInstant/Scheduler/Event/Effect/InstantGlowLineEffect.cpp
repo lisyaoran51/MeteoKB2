@@ -17,3 +17,9 @@ string InstantGlowLineEffect::GetTypeName()
 {
 	return "GlowLineEffect";
 }
+
+Effect * InstantGlowLineEffect::Clone()
+{
+	InstantGlowLineEffect* newEvent = new InstantGlowLineEffect(x, y, startTime, lifeTime);
+	return newEvent;
+}

@@ -44,7 +44,13 @@ namespace Sheetmusics {
 				LOG(LogLevel::Finer) << "Sm(Sm<T>*) : Getting metadata ...";
 				SetSmMetadata(sm->GetSmMetadata());
 				LOG(LogLevel::Finer) << "Sm(Sm<T>*) : Getting events ...";
-				SetEvents(sm->GetEvents());
+				//SetEvents(sm->GetEvents());
+
+				SetEvents(new vector<T*>());
+				for (int i = 0; i < sm->GetEvents()->size(); i++) {
+					events->push_back(sm->GetEvents()->at(i)->Clone());
+				}
+
 				LOG(LogLevel::Finer) << "Sm(Sm<T>*) : Getting ruleset info ...";
 				//SetRulesetInfo(sm->GetRulesetInfo());
 			}
@@ -60,8 +66,13 @@ namespace Sheetmusics {
 		}
 
 		virtual ~Sm() {
-			delete smInfo;
-			delete smMetadata;
+			//delete smInfo;
+			//delete smMetadata;
+			LOG(LogLevel::Finer) << "Sm::~Sm() : delete events";
+			for (int i = 0; i < events->size(); i++) {
+				delete events->at(i);
+			}
+			events->clear();
 			delete events;
 		}
 
@@ -89,7 +100,7 @@ namespace Sheetmusics {
 			// TODO: sort
 			// 這個再postprocessor有作，這邊又作一次?
 
-			sort(e->begin(), e->end());
+			//sort(e->begin(), e->end());
 			return 0;
 		}
 
