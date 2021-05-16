@@ -55,10 +55,15 @@ int MainMenu::load(Instrument * i)
 	powerPanel->PowerOnRequest = [=]() {
 		instrument->WakeUp();
 
+
+		LOG(LogLevel::Debug) << "MainMenu::PowerOnRequest() : delete working sm.";
+
 		if (workingSm.GetValue() != nullptr) {
 			delete workingSm.GetValue();
 			workingSm.SetValue(nullptr);
 		}
+
+		LOG(LogLevel::Debug) << "MainMenu::PowerOnRequest() : delete ruleset info.";
 
 		if (rulesetInfo.GetValue() != nullptr) {
 			delete rulesetInfo.GetValue();
