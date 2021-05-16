@@ -302,10 +302,15 @@ int MeteoMcuV1::pushPanelState(InputKey key, int value)
 
 	if (int(key) < 1020) { // before knob is button
 		if (!panelState->GetPanelState()->ContainButton(key)) {
-			if(value == 1)
-				panelState->GetPanelState()->AddButton(pair<InputKey, bool>(key ,true));
-			else
+			if (value == 1) {
+				panelState->GetPanelState()->AddButton(pair<InputKey, bool>(key, true));
+				LOG(LogLevel::Debug) << "MeteoMcuV1::pushPanelState() : add button [" << int(key) << ",1].";
+			}
+			else {
+				LOG(LogLevel::Debug) << "MeteoMcuV1::pushPanelState() : add button [" << int(key) << ",0].";
 				panelState->GetPanelState()->AddButton(pair<InputKey, bool>(key, false));
+			}
+			
 		}
 	}
 	else if (int(key) < 1030) { // before slider is knob
