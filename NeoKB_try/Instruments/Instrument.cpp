@@ -53,7 +53,7 @@ int Instrument::Sleep()
 int Instrument::WakeUp()
 {
 	if (isSleeping)
-		isSleeping = true;
+		isSleeping = false;
 
 	return 0;
 }
