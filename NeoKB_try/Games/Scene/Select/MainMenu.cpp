@@ -55,12 +55,16 @@ int MainMenu::load(Instrument * i)
 	powerPanel->PowerOnRequest = [=]() {
 		instrument->WakeUp();
 
-		delete workingSm.GetValue();
-		workingSm.SetValue(nullptr);
+		if (workingSm.GetValue() != nullptr) {
+			delete workingSm.GetValue();
+			workingSm.SetValue(nullptr);
+		}
 
-		delete rulesetInfo.GetValue();
-		rulesetInfo.SetValue(nullptr);
-
+		if (rulesetInfo.GetValue() != nullptr) {
+			delete rulesetInfo.GetValue();
+			rulesetInfo.SetValue(nullptr);
+		}
+		
 		songSelect = new PlaySongSelect();
 
 		Push(songSelect);

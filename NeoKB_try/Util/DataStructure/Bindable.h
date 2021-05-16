@@ -245,10 +245,11 @@ namespace DataStructure {
 						i--;
 					}
 				}
-			}
 
-			if (bindings->size() == 0)
-				delete bindings;
+				if (bindings->size() == 0)
+					delete bindings;
+
+			}
 
 			bindings = nullptr;
 
