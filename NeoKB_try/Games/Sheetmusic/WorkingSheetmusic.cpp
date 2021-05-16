@@ -39,7 +39,7 @@ WorkingSm::~WorkingSm()
 Sm<Event>* WorkingSm::GetSm()
 {
 	if (sm) {
-		LOG(LogLevel::Fine) << "Sm<Event>* WorkingSm::GetSm() : retrieving existing sm ...";
+		LOG(LogLevel::Depricated) << "Sm<Event>* WorkingSm::GetSm() : retrieving existing sm ...";
 		return sm;
 	}
 
