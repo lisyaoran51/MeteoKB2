@@ -17,7 +17,9 @@ using namespace Games::Output::Bluetooths;
 int MeteoPiano::load()
 {
 	onSleep.Add(this, [=]() {
-	
+
+		LOG(LogLevel::Debug) << "MeteoPiano::Lambda_OnSleep() : " << GetTypeName() << " stop all samples and clean pressing map.";
+
 		ChangePitchState(MeteoPianoPitchState::None);
 		SetGameControllingPitchState(false);
 

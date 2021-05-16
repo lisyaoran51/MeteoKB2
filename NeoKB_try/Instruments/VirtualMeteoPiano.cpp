@@ -15,6 +15,8 @@ int VirtualMeteoPiano::load()
 {
 	onSleep.Add(this, [=]() {
 
+		LOG(LogLevel::Debug) << "VirtualMeteoPiano::Lambda_OnSleep() : " << GetTypeName() << " stop all samples and clean pressing map.";
+
 		map<Pitch, SampleChannel*>::iterator it;
 		for (it = samplesByPitch.begin(); it != samplesByPitch.end(); ++it) {
 

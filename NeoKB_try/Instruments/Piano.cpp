@@ -39,6 +39,8 @@ int Piano::load(OutputManager * o)
 
 	onSleep.Add(this, [=]() {
 
+		LOG(LogLevel::Debug) << "Piano::Lambda_OnSleep() : " << GetTypeName() << " reset state.";
+
 		ChangeSustainType(SustainType::None);
 		resetState();
 		isSensitive = true;
