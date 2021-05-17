@@ -181,7 +181,7 @@ Modifier.o ConfigurationModifier.o DifficultyModifier.o EventProcessorFilterModi
 Score.o ScoreProcessor.o \
 BleAccess.o BleRequest.o BleRequestException.o GetTextBleRequest.o PostTextBleRequest.o GetBinaryBleRequest.o PostBinaryBleRequest.o \
 IdentifyBleRequest.o FaultIdentityBleRequest.o \
-IndicatorLightPanelMessage.o SpeedRingPanelMessage.o IndicatorLightOutputer.o SpeedRingOutputer.o \
+IndicatorLightPanelMessage.o SpeedRingPanelMessage.o IndicatorLightOutputer.o SpeedRingOutputer.o LightRingOutputer.o LightRingPanelMessage.o \
 MeteoBluetoothMessage.o MeteoBluetoothOutputer.o MeteoContextBluetoothMessage.o MeteoFileSegmentBluetoothMessage.o \
 Loader.o MeteoScene.o Intro.o Player.o PlayerLoader.o Playfield.o Result.o \
 HudDisplay.o JudgementFlasher.o SongProgress.o \
@@ -220,7 +220,7 @@ MeteorRuleset.o MeteorRulesetExecutor.o MeteorJudgement.o MeteorHitWindow.o Mete
 MeteorResult.o \
 AutoPedalModifier.o MusicGameModifier.o HandModifier.o MeteorDifficultyModifier.o RepeatPracticeModifier.o FallSpeedModifier.o ClockRateModifier.o WhiteKeyTargetLineModifier.o \
 MeteorScoreProcessor.o \
-LightRingOutputer.o LightRingPanelMessage.o SustainPedalLightRingOutputer.o SustainPedalLightRingPanelMessage.o \
+SustainPedalLightRingOutputer.o SustainPedalLightRingPanelMessage.o \
 MeteorEventProcessorMaster.o MeteorNoteControlPointHitObject.o MeteorInputKeyControlPointHitObject.o \
 MeteorEffect.o ExplodeEffect.o ExplodeEffectMapper.o FallEffect.o FallEffectMapper.o EruptEffect.o EruptEffectMapper.o GlowLineEffect.o GlowLineEffectMapper.o TargetLineEffect.o TargetLineEffectMapper.o \
 ExplodeMapAlgorithm.o FallMapAlgorithm.o EruptMapAlgorithm.o GlowLineMapAlgorithm.o TargetLineMapAlgorithm.o \
