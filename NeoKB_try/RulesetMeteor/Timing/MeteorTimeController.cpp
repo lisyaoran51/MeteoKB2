@@ -3,7 +3,7 @@
 #include "../../Games/Scheduler/Event/ControlPoints/PlayableControlPoint.h"
 #include "../Scheduler/Event/Effect/FallEffectMapper.h"
 #include "../Scheduler/Event/Effect/EruptEffectMapper.h"
-#include "../Output/Panels/LightRingPanelMessage.h"
+#include "../../Games/Output/Panels/LightRingPanelMessage.h"
 #include "../../Games/Output/Panels/SpeedRingPanelMessage.h"
 
 
@@ -12,7 +12,6 @@ using namespace Meteor::Timing;
 using namespace std;
 using namespace Games::Schedulers::Events::ControlPoints;
 using namespace Meteor::Schedulers::Events::Effects;
-using namespace Meteor::Output::Panels;
 using namespace Games::Output::Panels;
 
 

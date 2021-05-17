@@ -1,7 +1,7 @@
 #include "LightRingOutputer.h"
 
 
-using namespace Meteor::Output::Panels;
+using namespace Games::Output::Panels;
 
 
 int LightRingOutputer::SetupPeripheral(MainInterface * mainInterface)

@@ -9,7 +9,7 @@
 #include "../../Framework/Input/Handler/PanelInputHandler.h"
 #include "../../Framework/Output/OutputManager.h"
 #include "../../RulesetMeteor/Output/Panels/SustainPedalLightRingOutputer.h"
-#include "../../RulesetMeteor/Output/Panels/LightRingOutputer.h"
+#include "../../Games/Output/Panels/LightRingOutputer.h"
 #include "../../Games/Output/Panels/SpeedRingOutputer.h"
 #include "../../Games/Output/Panels/IndicatorLightOutputer.h"
 #include "../../RulesetMeteor/Config/MeteorConfigManager.h"

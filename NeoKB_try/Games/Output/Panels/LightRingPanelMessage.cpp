@@ -6,7 +6,7 @@
 
 
 
-using namespace Meteor::Output::Panels;
+using namespace Games::Output::Panels;
 using namespace std;
 using namespace std::literals::string_literals;
 using namespace Util;

@@ -11,7 +11,7 @@ using namespace Framework::Output::Panels;
 using namespace Framework::IO;
 
 
-namespace Meteor {
+namespace Games {
 namespace Output{
 namespace Panels{
 

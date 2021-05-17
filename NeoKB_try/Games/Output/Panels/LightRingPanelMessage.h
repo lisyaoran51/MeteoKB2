@@ -8,7 +8,7 @@
 using namespace Framework::Output::Panels;
 
 
-namespace Meteor {
+namespace Games {
 namespace Output{
 namespace Panels{
 

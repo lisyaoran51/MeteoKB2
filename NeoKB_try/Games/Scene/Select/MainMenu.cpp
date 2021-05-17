@@ -1,9 +1,12 @@
 #include "MainMenu.h"
 
 #include "PlaySongSelect.h"
+#include "../../Output/Panels/IndicatorLightPanelMessage.h"
+#include "../../Output/Panels/LightRingPanelMessage.h"
 
 
 using namespace Games::Scenes::Select;
+using namespace Games::Output::Panels;
 
 
 MainMenu::MainMenu(): RegisterType("MainMenu")
@@ -48,6 +51,15 @@ int MainMenu::load(Instrument * i)
 
 		instrument->Sleep();
 
+		// TODO: 關掉panel所有燈光
+
+		IndicatorLightPanelMessage* indicatorLightMessage = new IndicatorLightPanelMessage(-1, false);
+		
+		outputManager->PushMessage(indicatorLightMessage);
+
+		LightRingPanelMessage* lightRingOutputMessage = new LightRingPanelMessage(0);
+
+		outputManager->PushMessage(lightRingOutputMessage);
 
 		return 0;
 	};
@@ -56,26 +68,32 @@ int MainMenu::load(Instrument * i)
 		instrument->WakeUp();
 
 
-		LOG(LogLevel::Debug) << "MainMenu::PowerOnRequest() : delete working sm.";
+		LOG(LogLevel::Depricated) << "MainMenu::PowerOnRequest() : delete working sm.";
 
 		if (workingSm.GetValue() != nullptr) {
 			delete workingSm.GetValue();
 			workingSm.SetValue(nullptr);
 		}
 
-		LOG(LogLevel::Debug) << "MainMenu::PowerOnRequest() : delete ruleset info.";
+		LOG(LogLevel::Depricated) << "MainMenu::PowerOnRequest() : delete ruleset info.";
 
 		if (rulesetInfo.GetValue() != nullptr) {
 			rulesetInfo.SetValue(nullptr);
 		}
 
-		LOG(LogLevel::Debug) << "MainMenu::PowerOnRequest() : push songselect.";
+		LOG(LogLevel::Depricated) << "MainMenu::PowerOnRequest() : push songselect.";
 		
 		songSelect = new PlaySongSelect();
 
 		Push(songSelect);
 
-		LOG(LogLevel::Debug) << "MainMenu::PowerOnRequest() : push songselect over.";
+		LOG(LogLevel::Depricated) << "MainMenu::PowerOnRequest() : push songselect over.";
+
+		// TODO: 打開panel燈光
+
+		IndicatorLightPanelMessage* indicatorLightMessage = new IndicatorLightPanelMessage(0, true);
+
+		outputManager->PushMessage(indicatorLightMessage);
 
 		return 0;
 	};
