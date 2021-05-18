@@ -57,7 +57,7 @@ int MainMenu::load(Instrument * i)
 		
 		outputManager->PushMessage(indicatorLightMessage);
 
-		LightRingPanelMessage* lightRingOutputMessage = new LightRingPanelMessage(0);
+		LightRingPanelMessage* lightRingOutputMessage = new LightRingPanelMessage(-1);
 
 		outputManager->PushMessage(lightRingOutputMessage);
 
