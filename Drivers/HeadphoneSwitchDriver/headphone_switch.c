@@ -46,9 +46,10 @@ static void headphone_detect_work_handler(struct work_struct * work)
 		printk("switch to headphone.\n");
 		gpio_set_value(HEADPHONE_SWITCH, 1); // 切換至耳機
 	}
-	else
+	else{
 		printk("switch to Speaker.\n");
 		gpio_set_value(HEADPHONE_SWITCH, 0); // 切換至音響
+	}
 	
     queue_delayed_work(detectWorkQueue, &delayedDetectWorkQueue, 50);
 }
