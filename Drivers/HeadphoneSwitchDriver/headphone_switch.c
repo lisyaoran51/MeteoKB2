@@ -42,9 +42,12 @@ static void headphone_detect_work_handler(struct work_struct * work)
 {
 	int isPluggedIn = gpio_get_value(HEADPHONE_DETECTOR);	// 1:插入耳機 0:沒插入耳機
 	
-	if(isPluggedIn == 1)
+	if(isPluggedIn == 1){
+		printk("switch to headphone.\n");
 		gpio_set_value(HEADPHONE_SWITCH, 1); // 切換至耳機
+	}
 	else
+		printk("switch to Speaker.\n");
 		gpio_set_value(HEADPHONE_SWITCH, 0); // 切換至音響
 	
     queue_delayed_work(detectWorkQueue, &delayedDetectWorkQueue, 50);
