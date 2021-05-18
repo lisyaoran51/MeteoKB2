@@ -23,7 +23,7 @@
 #include <linux/workqueue.h>
 
 
-#define HEADPHONE_SWITCH 5
+#define HEADPHONE_SWITCH 25
 #define HEADPHONE_DETECTOR 16
 
 static struct gpio detect_switch_gpios[] = {
