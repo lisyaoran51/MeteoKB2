@@ -26,7 +26,7 @@
 #define HEADPHONE_SWITCH 5
 #define HEADPHONE_DETECTOR 16
 
-static struct gpio leds_gpios[] = {
+static struct gpio detect_switch_gpios[] = {
     { HEADPHONE_SWITCH, GPIOF_OUT_INIT_LOW, "Headphone Switch" }, /* default to OFF */
 	{ HEADPHONE_DETECTOR, GPIOF_IN, "Headphone Detector"  }, /* default to OFF */
 };
@@ -56,7 +56,7 @@ int init_module(void)
 	printk("Init headphone detector.\n");
 	
 	// request gpio 使用
-    if (gpio_request_array(leds_gpios, ARRAY_SIZE(leds_gpios)))  return -1;
+    if (gpio_request_array(detect_switch_gpios, ARRAY_SIZE(detect_switch_gpios)))  return -1;
 	
 	detectWorkQueue = create_workqueue("Detect Work Queue");
     if (!detectWorkQueue) {
@@ -77,9 +77,8 @@ void cleanup_module(void)
 	flush_scheduled_work();
     destroy_workqueue(detectWorkQueue);
 
-	gpio_set_value(p_dev->tbl[0].gpio, 0);
-	gpio_set_value(p_dev->tbl[1].gpio, 0);
-	gpio_free_array (leds_gpios, ARRAY_SIZE(leds_gpios));
+	gpio_set_value(HEADPHONE_SWITCH, 0);
+	gpio_free_array (detect_switch_gpios, ARRAY_SIZE(detect_switch_gpios));
 
 }
 
