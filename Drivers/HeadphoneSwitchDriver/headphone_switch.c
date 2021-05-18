@@ -23,9 +23,6 @@
 #include <linux/workqueue.h>
 
 
-#define MY_DEV_NAME "HeadphoneSwitcher"
-
-
 #define HEADPHONE_SWITCH 5
 #define HEADPHONE_DETECTOR 16
 
@@ -34,22 +31,14 @@ static struct gpio leds_gpios[] = {
 	{ HEADPHONE_DETECTOR, GPIOF_IN, "Headphone Detector"  }, /* default to OFF */
 };
 
+static struct workqueue_struct *detectWorkQueue;
+static struct delayed_work delayedDetectWorkQueue;
 
-struct mydev{
-	struct gpio *tbl;
-	int irq;
-	struct work_struct workq;
-	dev_t dev;
-	char dev_name[32];
-	
-};
 
-struct mydev *p_dev;
-
-static void my_work_handler(struct work_struct * work);
+static void headphone_detect_work_handler(struct work_struct * work);
 
 //DECLARE_WORK(my_work_queue, my_work_handler);
-static void my_work_handler(struct work_struct * work)
+static void headphone_detect_work_handler(struct work_struct * work)
 {
 	int isPluggedIn = gpio_get_value(HEADPHONE_DETECTOR);	// 1:插入耳機 0:沒插入耳機
 	
@@ -57,56 +46,41 @@ static void my_work_handler(struct work_struct * work)
 		gpio_set_value(HEADPHONE_SWITCH, 1); // 切換至耳機
 	else
 		gpio_set_value(HEADPHONE_SWITCH, 0); // 切換至音響
-	static int led_trigger = 0; 
-	struct mydev	*ptr;
-}
-
-
-static irqreturn_t r_irq_handler(int irq, void *data) 
-{
-   unsigned long flags;
-   local_irq_save(flags);
-   schedule_work(&p_dev->workq);
-   local_irq_restore(flags);
-   return IRQ_HANDLED;
+	
+    queue_delayed_work(detectWorkQueue, &delayedDetectWorkQueue, 50);
 }
 
 
 int init_module(void)
 {
-	int err;
-	
-	printk("*****LED GPIO Init ******************\n");
+	printk("Init headphone detector.\n");
 	
 	// request gpio 使用
     if (gpio_request_array(leds_gpios, ARRAY_SIZE(leds_gpios)))  return -1;
-
 	
-	p_dev->irq = gpio_to_irq(p_dev->tbl[2].gpio);
-	strncpy(p_dev->dev_name,p_dev->tbl[2].label,32);
-	INIT_WORK(&p_dev->workq, my_work_handler);
-
+	detectWorkQueue = create_workqueue("Detect Work Queue");
+    if (!detectWorkQueue) {
+        printk(KERN_ERR "No memory for headphone detect workqueue.\n");
+        return 1;   
+    }
 	
-	if(p_dev->irq < 0) return -1;
-	err = request_irq( p_dev->irq, 
-			r_irq_handler, 
-			IRQF_TRIGGER_RISING, 
-			MY_INT_NAME, 
-			MY_DEV_NAME);
-	if(err ) return -1;
+    INIT_DELAYED_WORK(&delayedDetectWorkQueue, headphone_detect_work_handler);
+	
+    queue_delayed_work(detectWorkQueue, &delayedDetectWorkQueue, 50);
+
 
 	return 0;
 }
 
 void cleanup_module(void)
 {
-	free_irq(p_dev->irq, MY_DEV_NAME);
-
-	 gpio_set_value(p_dev->tbl[0].gpio, 0);
-     gpio_set_value(p_dev->tbl[1].gpio, 0);
-	 gpio_free_array (leds_gpios, ARRAY_SIZE(leds_gpios));
-
 	flush_scheduled_work();
+    destroy_workqueue(detectWorkQueue);
+
+	gpio_set_value(p_dev->tbl[0].gpio, 0);
+	gpio_set_value(p_dev->tbl[1].gpio, 0);
+	gpio_free_array (leds_gpios, ARRAY_SIZE(leds_gpios));
+
 }
 
 MODULE_LICENSE("GPL");
