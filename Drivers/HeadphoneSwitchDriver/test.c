@@ -22,7 +22,7 @@ void delay_func(struct work_struct *work)
 {
     printk(KERN_INFO "My name is delay_func!\n");
     
-    queue_delayed_work(test_wq, &test_dwq, 1000);
+    queue_delayed_work(test_wq, &test_dwq, 50);
 }
  
 static int __init example_init(void)
@@ -36,7 +36,7 @@ static int __init example_init(void)
  
     INIT_DELAYED_WORK(&test_dwq, delay_func);
     
-    queue_delayed_work(test_wq, &test_dwq, 1000);
+    queue_delayed_work(test_wq, &test_dwq, 50);
 	return 0;
 }
  
