@@ -46,3 +46,6 @@ static void __exit example_exit(void)
  
 module_init(example_init);
 module_exit(example_exit);
+MODULE_LICENSE("GPL");
+MODULE_AUTHOR("ITtraining.com.tw");
+MODULE_DESCRIPTION("A Simple GPIO Device Driver module for RaspPi");
