@@ -380,8 +380,8 @@ int MeteorTimeController::RepeatSection(int section)
 		}
 
 
-		if (section + maxSectionAmountForOneRepeat == sectionTime.size())	// 代表整首歌已經都練完了
-			return 0; 
+		//if (section + maxSectionAmountForOneRepeat == sectionTime.size())	// 代表整首歌已經都練完了
+		//	return 0; 
 		
 		LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : temp seciton is [" << section << "] end, repeat count is [" << tempRepeatCounts << "], now repeat start section is [" << tempRepeatStartSection << "]. " << controllableClock->GetCurrentTime();
 
