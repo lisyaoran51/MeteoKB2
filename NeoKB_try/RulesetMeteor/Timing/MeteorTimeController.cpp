@@ -340,6 +340,11 @@ int MeteorTimeController::RepeatSection(int section)
 		return -1;
 	}
 
+	if (tempRepeatStartSection >= sectionTime.size()) {
+		LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : repeat practice over." << section;
+		return -1;
+	}
+
 	//if (s + 1 < maxSectionAmountForOneRepeat) 
 	//{
 	//	LOG(LogLevel::Debug) << 2;
