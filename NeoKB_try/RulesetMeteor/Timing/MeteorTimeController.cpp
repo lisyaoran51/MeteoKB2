@@ -386,7 +386,7 @@ int MeteorTimeController::RepeatSection(int section)
 		
 		LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : temp seciton is [" << section << "] end, repeat count is [" << tempRepeatCounts << "], now repeat start section is [" << tempRepeatStartSection << "]. " << controllableClock->GetCurrentTime();
 
-		if (sectionTime.size() < section + 1) {
+		if (sectionTime.size() > section + 1) {
 			totalRewindLength = sectionTime[section + 1] - sectionTime[tempRepeatStartSection] + repeatBufferTime;	//額外多一秒緩衝時間
 		}
 		else {
