@@ -334,7 +334,8 @@ int MeteorTimeController::RepeatSection(int section)
 		return -1;
 
 	/* 如果這個小節已經反覆過了，就不用再反覆 */
-	if (section + 1 < tempRepeatStartSection + maxSectionAmountForOneRepeat) {
+	if (section + 1 < tempRepeatStartSection + maxSectionAmountForOneRepeat &&
+		section + 1 != sectionTime.size() - 1) {	// 最後一小節，但是還沒到maxSectionAmountForOneRepeat
 		LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : not to repeat section yet." << section;
 		return -1;
 	}
@@ -385,8 +386,12 @@ int MeteorTimeController::RepeatSection(int section)
 		
 		LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : temp seciton is [" << section << "] end, repeat count is [" << tempRepeatCounts << "], now repeat start section is [" << tempRepeatStartSection << "]. " << controllableClock->GetCurrentTime();
 
-
-		totalRewindLength = sectionTime[section + 1] - sectionTime[tempRepeatStartSection] + repeatBufferTime;	//額外多一秒緩衝時間
+		if (sectionTime.size() < section + 1) {
+			totalRewindLength = sectionTime[section + 1] - sectionTime[tempRepeatStartSection] + repeatBufferTime;	//額外多一秒緩衝時間
+		}
+		else {
+			totalRewindLength = sectionTime[sectionTime.size() - 1] - sectionTime[tempRepeatStartSection] + repeatBufferTime;	//額外多一秒緩衝時間
+		}
 
 		LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : total rewind length [" << totalRewindLength << "], section time [" << sectionTime[section + 1] << "], [" << sectionTime[tempRepeatStartSection] << "], section [" << section << "].";
 
