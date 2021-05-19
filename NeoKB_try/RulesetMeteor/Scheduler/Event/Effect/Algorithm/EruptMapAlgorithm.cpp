@@ -85,6 +85,14 @@ int EruptMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper<EruptEffe
 	// 算流星燈每一個燈泡的亮度，從下面網上算
 	for (int i = 0; i < height; i++) {
 
+		/* 新版fall algo */
+		if (i > meteorPos - 0.5 && i <= meteorPos + 0.5) {
+			m->Add(width, height + i, 1);
+			isAdded = true;
+			break;
+		}
+		continue;
+
 		// TODO: 應該把流星長度變成參數
 		if (i > meteorPos - 0.5 && i < meteorPos + MTO_FLOAT(fallLength)) {
 
