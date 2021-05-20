@@ -195,7 +195,7 @@ int MeteoMcuV1::readPanel()
 			if (i2cMessage[0] != 0x80)
 				return -1;
 
-			LOG(LogLevel::Depricated) << "MeteoMcuV1::readPanel() : Get input from mcu [" << i2cMessage << "].";
+			LOG(LogLevel::Debug) << "MeteoMcuV1::readPanel() : Get input from mcu [" << i2cMessage << "].";
 
 			vector<string> splitMessage;
 			InputKey key = InputKey::None;
@@ -219,6 +219,8 @@ int MeteoMcuV1::readPanel()
 				//LOG(LogLevel::Error) << "MeteoMcuV1::readPanel() : convert to InputKey is [" << (int)static_cast<InputKey>(stoi(splitMessage[0].substr(1, splitMessage[0].length() - 1))) << "]";
 				continue;
 			}
+
+			continue;
 
 			if (int(key) < 500) {
 				pushKeyboardState(key, stoi(splitMessage[1]));

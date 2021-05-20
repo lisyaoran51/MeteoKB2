@@ -2,7 +2,7 @@
 
 #include "PlaySongSelect.h"
 #include "../../Output/Panels/IndicatorLightPanelMessage.h"
-#include "../../Output/Panels/LightRingPanelMessage.h"
+#include "../../Output/Panels/RevolveLightRingPanelMessage.h"
 
 
 using namespace Games::Scenes::Select;
@@ -57,7 +57,7 @@ int MainMenu::load(Instrument * i)
 		
 		outputManager->PushMessage(indicatorLightMessage);
 
-		LightRingPanelMessage* lightRingOutputMessage = new LightRingPanelMessage(-1);
+		RevolveLightRingPanelMessage* lightRingOutputMessage = new RevolveLightRingPanelMessage(-1);
 
 		outputManager->PushMessage(lightRingOutputMessage);
 

@@ -1,9 +1,13 @@
 #include "MeteoGame.h" 
 
 #include "Scene/Loader.h"
+#include "../Framework/IO/BluetoothPhone.h"
+#include "Output/Panels/FadeLightRingPanelMessage.h"
 
 using namespace Games;
 using namespace Games::Scenes;
+using namespace Framework::IO;
+using namespace Games::Output::Panels;
 
 
 int MeteoGame::load()
@@ -68,7 +72,9 @@ int MeteoGame::LoadOnComplete()
 	/* 在藍芽連線後，執行的事情 */
 	gameHost->GetMainInterface()->GetBluetoothPhone()->AddOnConnect(this, [=]() {
 		
-
+		LOG(LogLevel::Debug) << "MeteoGame::Lambda_HandleConnect() : set fading light ring.";
+		FadeLightRingPanelMessage* fadeLightRingPanelMessage = new FadeLightRingPanelMessage(1.0f);
+		outputManager->PushMessage(fadeLightRingPanelMessage);
 
 		return 0; 
 	}, "MeteoGame::Lambda_HandleConnect");

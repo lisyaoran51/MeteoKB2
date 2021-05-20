@@ -1,8 +1,8 @@
-#ifndef LIGHT_RING_OUTPUTER_H
-#define LIGHT_RING_OUTPUTER_H
+#ifndef FADE_LIGHT_RING_OUTPUTER_H
+#define FADE_LIGHT_RING_OUTPUTER_H
 
 
-#include "LightRingPanelMessage.h"
+#include "FadeLightRingPanelMessage.h"
 #include "../../../Framework/Output/Panels/PanelOutputer.h"
 #include "../../../Framework/IO/Panel.h"
 
@@ -15,16 +15,15 @@ namespace Games {
 namespace Output{
 namespace Panels{
 
-	class LightRingOutputer : public TPanelOutputer<LightRingPanelMessage> {
+	class FadeLightRingOutputer : public TPanelOutputer<FadeLightRingPanelMessage> {
 
 	public:
 
 		virtual int SetupPeripheral(MainInterface* mainInterface);
 
-
 	protected:
 
-		virtual int pushMessage(LightRingPanelMessage* outputMessag);
+		virtual int pushMessage(FadeLightRingPanelMessage* outputMessag);
 
 		Panel* panel = nullptr;
 

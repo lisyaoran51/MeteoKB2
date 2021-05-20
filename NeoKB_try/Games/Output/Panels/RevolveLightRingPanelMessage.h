@@ -1,5 +1,5 @@
-#ifndef LIGHT_RING_PANEL_MESSAGE_H
-#define LIGHT_RING_PANEL_MESSAGE_H
+#ifndef REVOLVE_LIGHT_RING_PANEL_MESSAGE_H
+#define REVOLVE_LIGHT_RING_PANEL_MESSAGE_H
 
 
 #include "../../../Framework/Output/Panels/PanelMessage.h"
@@ -12,7 +12,7 @@ namespace Games {
 namespace Output{
 namespace Panels{
 
-	class LightRingPanelMessage : public PanelMessage {
+	class RevolveLightRingPanelMessage : public PanelMessage {
 
 		string roundAndToString(float number, int digit);
 
@@ -24,7 +24,7 @@ namespace Panels{
 		/// 時間：targetLifeTime -> ringLifeTime(可能提早結束)
 		///						 -> nextTargetStartTime
 		/// </summary>
-		LightRingPanelMessage(float lTime);
+		RevolveLightRingPanelMessage(float lTime);
 
 		virtual string ToString();
 

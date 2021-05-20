@@ -1,4 +1,4 @@
-#include "LightRingPanelMessage.h"
+#include "RevolveLightRingPanelMessage.h"
 
 #include <math.h>
 #include <sstream>
@@ -12,7 +12,7 @@ using namespace std::literals::string_literals;
 using namespace Util;
 
 
-string LightRingPanelMessage::roundAndToString(float number, int digit)
+string RevolveLightRingPanelMessage::roundAndToString(float number, int digit)
 {
 
 	ostringstream ss;
@@ -36,13 +36,13 @@ string LightRingPanelMessage::roundAndToString(float number, int digit)
 	return toString;
 }
 
-LightRingPanelMessage::LightRingPanelMessage(float lTime) :
+RevolveLightRingPanelMessage::RevolveLightRingPanelMessage(float lTime) :
 	targetLifeTime(0), pedalDownLifeTime(lTime), ringLifeTime(lTime)
 {
 	lifeTime = lTime;
 }
 
-string LightRingPanelMessage::ToString()
+string RevolveLightRingPanelMessage::ToString()
 {
 	// TODO: §ï¦W¦¨Light Ring
 	LOG(LogLevel::Depricated) << "SustainPedalLightRingPanelMessage::ToString() : pass [" << ("SP,"s + roundAndToString(targetLifeTime, 2) + ","s + roundAndToString(pedalDownLifeTime, 2) + ","s + roundAndToString(ringLifeTime, 2)) << "] to board.";
@@ -52,7 +52,7 @@ string LightRingPanelMessage::ToString()
 	return "RV,"s + roundAndToString(lifeTime, 2);
 }
 
-OutputMessage * LightRingPanelMessage::Clone()
+OutputMessage * RevolveLightRingPanelMessage::Clone()
 {
-	return new LightRingPanelMessage(lifeTime);
+	return new RevolveLightRingPanelMessage(lifeTime);
 }

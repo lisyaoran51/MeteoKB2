@@ -9,9 +9,10 @@
 #include "../../Framework/Input/Handler/PanelInputHandler.h"
 #include "../../Framework/Output/OutputManager.h"
 #include "../../RulesetMeteor/Output/Panels/SustainPedalLightRingOutputer.h"
-#include "../../Games/Output/Panels/LightRingOutputer.h"
-#include "../../Games/Output/Panels/SpeedRingOutputer.h"
-#include "../../Games/Output/Panels/IndicatorLightOutputer.h"
+#include "../Output/Panels/RevolveLightRingOutputer.h"
+#include "../Output/Panels/FadeLightRingOutputer.h"
+#include "../Output/Panels/SpeedRingOutputer.h"
+#include "../Output/Panels/IndicatorLightOutputer.h"
 #include "../../RulesetMeteor/Config/MeteorConfigManager.h"
 #include "../../RulesetInstant/Config/InstantConfigManager.h"
 
@@ -43,9 +44,13 @@ int GameHost::SetupOutputManager(OutputManager * oManager)
 	sustainPedalLightRingOutputer->SetupPeripheral(mainInterface);
 	oManager->AddItem(sustainPedalLightRingOutputer);
 
-	OutputComponent* lightRingOutputer = new LightRingOutputer();
-	lightRingOutputer->SetupPeripheral(mainInterface);
-	oManager->AddItem(lightRingOutputer);
+	OutputComponent* revolveLightRingOutputer = new RevolveLightRingOutputer();
+	revolveLightRingOutputer->SetupPeripheral(mainInterface);
+	oManager->AddItem(revolveLightRingOutputer);
+
+	OutputComponent* fadeLightRingOutputer = new FadeLightRingOutputer();
+	fadeLightRingOutputer->SetupPeripheral(mainInterface);
+	oManager->AddItem(fadeLightRingOutputer);
 
 	OutputComponent* speedRingOutputer = new SpeedRingOutputer();
 	speedRingOutputer->SetupPeripheral(mainInterface);

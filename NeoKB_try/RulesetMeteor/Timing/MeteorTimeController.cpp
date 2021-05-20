@@ -3,7 +3,7 @@
 #include "../../Games/Scheduler/Event/ControlPoints/PlayableControlPoint.h"
 #include "../Scheduler/Event/Effect/FallEffectMapper.h"
 #include "../Scheduler/Event/Effect/EruptEffectMapper.h"
-#include "../../Games/Output/Panels/LightRingPanelMessage.h"
+#include "../../Games/Output/Panels/RevolveLightRingPanelMessage.h"
 #include "../../Games/Output/Panels/SpeedRingPanelMessage.h"
 
 
@@ -169,7 +169,7 @@ int MeteorTimeController::OnButtonDown(MeteorAction action)
 			isAdjustAfterPause = false;
 
 			/* 這編讓光圈跑一圈，跑的時間是defaultFreezeTime */
-			LightRingPanelMessage* message = new LightRingPanelMessage(defaultFreezeTime);
+			RevolveLightRingPanelMessage* message = new RevolveLightRingPanelMessage(defaultFreezeTime);
 			LOG(LogLevel::Depricated) << "MeteorTimeController::onButtonDown : send i2c [" << message->ToString() << "].";
 			outputManager->PushMessage(message);
 		}
@@ -407,7 +407,7 @@ int MeteorTimeController::RepeatSection(int section)
 		//	LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : section [" << i << "]  [" << sectionTime[i] << "]";
 
 		/* 這編讓光圈跑一圈，跑的時間是repeatBufferTime */
-		LightRingPanelMessage* message = new LightRingPanelMessage(repeatBufferTime);
+		RevolveLightRingPanelMessage* message = new RevolveLightRingPanelMessage(repeatBufferTime);
 		LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection : send i2c [" << message->ToString() << "].";
 		outputManager->PushMessage(message);
 
@@ -426,7 +426,7 @@ int MeteorTimeController::RepeatSection(int section)
 		repeatPracticeMode = RepeatPracticeMode::Demonstrate;
 		LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : set filter to [" << 0 << "], demonstrating";
 
-		LightRingPanelMessage* message = new LightRingPanelMessage(1);
+		RevolveLightRingPanelMessage* message = new RevolveLightRingPanelMessage(1);
 		LOG(LogLevel::Depricated) << "MeteorTimeController::RepeatSection : send i2c [" << message->ToString() << "].";
 		outputManager->PushMessage(message);
 

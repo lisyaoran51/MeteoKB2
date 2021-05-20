@@ -181,7 +181,8 @@ Modifier.o ConfigurationModifier.o DifficultyModifier.o EventProcessorFilterModi
 Score.o ScoreProcessor.o \
 BleAccess.o BleRequest.o BleRequestException.o GetTextBleRequest.o PostTextBleRequest.o GetBinaryBleRequest.o PostBinaryBleRequest.o \
 IdentifyBleRequest.o FaultIdentityBleRequest.o \
-IndicatorLightPanelMessage.o SpeedRingPanelMessage.o IndicatorLightOutputer.o SpeedRingOutputer.o LightRingOutputer.o LightRingPanelMessage.o \
+IndicatorLightPanelMessage.o SpeedRingPanelMessage.o IndicatorLightOutputer.o SpeedRingOutputer.o \
+RevolveLightRingOutputer.o RevolveLightRingPanelMessage.o FadeLightRingOutputer.o FadeLightRingPanelMessage.o \
 MeteoBluetoothMessage.o MeteoBluetoothOutputer.o MeteoContextBluetoothMessage.o MeteoFileSegmentBluetoothMessage.o \
 Loader.o MeteoScene.o Intro.o Player.o PlayerLoader.o Playfield.o Result.o \
 HudDisplay.o JudgementFlasher.o SongProgress.o \
