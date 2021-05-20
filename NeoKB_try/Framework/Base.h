@@ -37,7 +37,7 @@ namespace Framework {
 
 		OutputManager* outputManager = nullptr;
 
-		Host* gameHost;
+		Host* gameHost = nullptr;
 
 		CompositeResourceStore<char*>* resources;
 

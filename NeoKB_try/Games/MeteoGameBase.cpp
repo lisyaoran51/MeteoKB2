@@ -65,8 +65,6 @@ int MeteoGameBase::load()
 	// 原本要給Working sm做default value，但是現在不用了，所以就直接改成object而不適指標
 	//workingSm = new Bindable<WorkingSm*>();
 
-
-
 	return 0;
 }
 

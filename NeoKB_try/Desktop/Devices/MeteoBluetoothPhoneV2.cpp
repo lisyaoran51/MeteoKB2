@@ -102,6 +102,7 @@ int MeteoBluetoothPhoneV2::work()
 			gattClient->SetDataHandler(std::bind(&MeteoBluetoothPhoneV2::handleNewPacket, this, std::placeholders::_1, std::placeholders::_2));
 
 			isConnected = true;
+			onConnect.Trigger();
 
 			gattServer->Run(gattClient);
 

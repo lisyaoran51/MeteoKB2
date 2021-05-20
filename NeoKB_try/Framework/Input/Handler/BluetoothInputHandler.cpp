@@ -16,7 +16,6 @@ int BluetoothInputHandler::Initialize(Host * host)
 		AddOnMessage<BluetoothInputHandler>(this, bind((int(BluetoothInputHandler::*)(InputState*))&BluetoothInputHandler::HandleState, this, placeholders::_1), "BluetoothInputHandler::HandleState");
 
 
-
 	return 0;
 }
 

@@ -727,7 +727,14 @@ int MeteoPacketConverterV2::ConvertToByteArray(BluetoothMessage * bluetoothMessa
 
 		memset(buffer, 0, bufferMaxSize);
 
-		unsigned int command = (unsigned int)contextBluetoothMessage->GetCommand();
+		unsigned int command;
+
+		map<unsigned int, MeteoCommand>::iterator iter;
+		for (iter = commandMap.begin(); iter != commandMap.end(); ++iter) {
+			if (iter->second == contextBluetoothMessage->GetCommand()) {
+				command = iter->first;
+			}
+		}
 		memcpy(buffer, &command, sizeof(command));
 
 		memcpy(buffer + sizeof(command)								, &tempPacketId	, sizeof(tempPacketId));
@@ -759,7 +766,14 @@ int MeteoPacketConverterV2::ConvertToByteArray(BluetoothMessage * bluetoothMessa
 
 		memset(buffer, 0, bufferMaxSize);
 
-		unsigned int command = (unsigned int)fileBluetoothMessage->GetCommand();
+		unsigned int command;
+
+		map<unsigned int, MeteoCommand>::iterator iter;
+		for (iter = commandMap.begin(); iter != commandMap.end(); ++iter) {
+			if (iter->second == fileBluetoothMessage->GetCommand()) {
+				command = iter->first;
+			}
+		}
 		memcpy(buffer, &command, sizeof(command));
 
 		memcpy(buffer + sizeof(command)										, &tempPacketId, sizeof(tempPacketId));

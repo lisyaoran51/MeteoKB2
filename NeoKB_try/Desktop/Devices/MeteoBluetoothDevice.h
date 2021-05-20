@@ -31,6 +31,13 @@ namespace Devices {
 		/// </summary>
 		virtual bool CheckFileSegmentMessageOutputClear();
 
+		template<class _Type>
+		int AddOnConnect(_Type * callableObject, function<int()> callback, string name = "MeteoBluetoothDevice::HandleOnConnect") {
+
+			meteoBluetoothPhone.AddOnConnect(callableObject, callback, name);
+			return 0;
+		}
+
 		/// <summary>
 		/// 寫入sm檔時的callback，改成擺在request裡
 		/// </summary>

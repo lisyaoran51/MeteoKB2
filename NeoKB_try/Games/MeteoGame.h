@@ -25,6 +25,8 @@ namespace Games {
 
 		int load();
 
+		int load(OutputManager* o);
+
 		Intro* getIntro();
 
 		VolumeController* volumeController = nullptr;
@@ -40,6 +42,8 @@ namespace Games {
 	protected:
 
 		BindablePointer<RulesetInfo*> ruleset;
+
+		OutputManager* outputManager = nullptr;
 
 		virtual int LoadOnComplete();
 

@@ -9,16 +9,27 @@ using namespace Games::Scenes;
 int MeteoGame::load()
 {
 
+	OutputManager* o = GetCache<OutputManager>("OutputManager");
+	if (!o)
+		throw runtime_error("int EventProcessorMaster::load() : OutputManager not found in cache.");
+
+	return load(o);
+}
+
+int MeteoGame::load(OutputManager * o)
+{
+
 	LOG(LogLevel::Info) << "MeteoGame::load() : caching itself.";
 
 	ruleset.SetValue(nullptr);
 
 	GetDependencies()->Cache<MeteoGame>(this, "MeteoGame");
 
+	outputManager = o;
 	return 0;
 }
 
-Intro * Games::MeteoGame::getIntro()
+Intro * MeteoGame::getIntro()
 {
 	
 	for (Scene* s = screenStack; s != nullptr; s = s->GetChildScene()) {
@@ -54,6 +65,13 @@ int MeteoGame::LoadOnComplete()
 {
 	LOG(LogLevel::Info) << "MeteoGame::LoadOnComplete() : add loader into screen stack.";
 
+	/* 在藍芽連線後，執行的事情 */
+	gameHost->GetMainInterface()->GetBluetoothPhone()->AddOnConnect<MeteoGame>(this, [=]() {
+		
+
+
+		return 0; 
+	}, "MeteoGame::Lambda_HandleConnect");
 
 	// 這邊不知道怎麼樣把virtual function給bind上去，只好用lambda式
 	// smManager->GetStableStorage = bind(static_cast<Storage*(MeteoGame::*)(void)>(&MeteoGame::GetStableStorage), this);

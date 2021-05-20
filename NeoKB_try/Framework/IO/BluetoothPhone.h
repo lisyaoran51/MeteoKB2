@@ -48,6 +48,13 @@ namespace IO {
 		/// </summary>
 		bool CheckFileSegmentMessageOutputClear();
 
+		template<class _Type>
+		int AddOnConnect(_Type * callableObject, function<int()> callback, string name = "BluetoothPhone::HandleOnConnect") {
+
+			matchedBluetoothDevice->AddOnConnect(callableObject, callback, name);
+			return 0;
+		}
+
 		/// <summary>
 		/// 一般json con non message的時候用這個
 		/// </summary>

@@ -3,7 +3,7 @@
 
 
 #include "../../Util/DataStructure/ActionList.h"
-
+#include "../../Framework/Allocation/Hierachal/MtoObject.h"
 #include "PacketConverter.h"
 #include "../../Games/Output/Bluetooths/MeteoBluetoothMessage.h"
 #include "../../Framework/Input/InputState.h"
@@ -13,7 +13,7 @@
 
 
 
-
+using namespace Framework::Allocation::Hierachal;
 using namespace Framework::Input;
 using namespace std;
 using namespace Util::DataStructure;
@@ -58,6 +58,13 @@ namespace Devices {
 
 		int PushOutputMessage(BluetoothMessage* outputMessage);
 
+		template<class _Type>
+		int AddOnConnect(_Type * callableObject, function<int()> callback, string name = "MeteoBluetoothPhoneV2::HandleOnConnect") {
+
+			onConnect.Add(callableObject, callback, name);
+			return 0;
+		}
+
 	protected:
 
 		bool isConnected = false;
@@ -71,6 +78,8 @@ namespace Devices {
 		PacketConverter<MeteoCommand>* packetConverter = nullptr;
 
 		vector<BluetoothMessage*> outputMessages;
+
+		ActionList<int> onConnect;
 
 		bool getIsReady();
 
@@ -89,7 +98,8 @@ namespace Devices {
 	};
 
 
-}}
+}
+}
 
 
 #endif
