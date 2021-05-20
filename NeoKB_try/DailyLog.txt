@@ -3003,3 +3003,41 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 	
 5/11
 	改掉所有檔案讀取失敗的問題，要來想辦法做自動讀取config
+	改寫host，把Setup config移到desktop去
+	嘗試改log成可以寫入檔案的模式
+	
+5/14
+	解決音效佔太多記憶體的問題
+	
+5/15
+	想一下開關機的問題？
+	
+	用pwer panel，目前關閉重開以後會當機，關閉時音樂不會一起關掉，instrument也沒有sleep
+	bindable要寫destructor，讓Scene上面的working sm不會在刪掉時候變成null
+	
+	開啟遊戲煮成是用system()
+	
+5/16
+	power寫好，還要把panel燈剛關掉
+	琴鍵按下沒聲音，好像是fpc的問題
+	
+5/17
+	要寫啟動程式？會去路徑上找有沒有新程式，沒有的話就用原始程式啟動
+	要寫reset？會先把daemon關閉，再把所有新程式刪掉
+	要寫切換耳機？用一個driver偵測然後切換
+	要寫重啟mcu？如果mcu一秒沒有回應，就把mcu重啟，並且停止丟i2c訊號(如何處理衝突)
+	要寫讀取mac address command
+	寫開機中的mcu、藍芽連線後的mcu
+	關機沒把光圈關掉
+	
+5/19
+	最後一個小傑沒有反覆練彈
+	如果最後的小傑不滿max repeat amount once的話就會不反覆
+	編碼器要換掉
+	
+5/20
+	RevolveLightRingPanelMessage還沒換好
+	要改bt連線後光圈特效
+	該琴鍵音量傳書格式
+	
+	靠近的琴鍵同時按的話，會出現間隔為0的狀況，可能是有互相影響
