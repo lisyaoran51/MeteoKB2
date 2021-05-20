@@ -66,7 +66,7 @@ int MeteoGame::LoadOnComplete()
 	LOG(LogLevel::Info) << "MeteoGame::LoadOnComplete() : add loader into screen stack.";
 
 	/* 在藍芽連線後，執行的事情 */
-	gameHost->GetMainInterface()->GetBluetoothPhone()->AddOnConnect<MeteoGame>(this, [=]() {
+	gameHost->GetMainInterface()->GetBluetoothPhone()->AddOnConnect(this, [=]() {
 		
 
 

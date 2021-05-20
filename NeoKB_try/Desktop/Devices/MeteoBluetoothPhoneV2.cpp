@@ -82,6 +82,12 @@ int MeteoBluetoothPhoneV2::PushOutputMessage(BluetoothMessage * outputMessage)
 	return 0;
 }
 
+int MeteoBluetoothPhoneV2::AddOnConnect(MtoObject * callableObject, function<int()> callback, string name)
+{
+	onConnect.Add(callableObject, callback, name);
+	return 0;
+}
+
 bool MeteoBluetoothPhoneV2::getIsReady()
 {
 	return isConnected && isFirstPacketSent;

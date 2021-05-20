@@ -42,6 +42,12 @@ bool BluetoothPhone::CheckFileSegmentMessageOutputClear()
 	return matchedBluetoothDevice->CheckFileSegmentMessageOutputClear();
 }
 
+int BluetoothPhone::AddOnConnect(MtoObject * callableObject, function<int()> callback, string name)
+{
+	matchedBluetoothDevice->AddOnConnect(callableObject, callback, name);
+	return 0;
+}
+
 /*
 int BluetoothPhone::AddOnStartWritingSmFile(MtoObject * callableObject, function<int(string)> callback, string name)
 {

@@ -58,12 +58,7 @@ namespace Devices {
 
 		int PushOutputMessage(BluetoothMessage* outputMessage);
 
-		template<class _Type>
-		int AddOnConnect(_Type * callableObject, function<int()> callback, string name = "MeteoBluetoothPhoneV2::HandleOnConnect") {
-
-			onConnect.Add(callableObject, callback, name);
-			return 0;
-		}
+		int AddOnConnect(MtoObject * callableObject, function<int()> callback, string name = "MeteoBluetoothPhoneV2::HandleOnConnect");
 
 	protected:
 
