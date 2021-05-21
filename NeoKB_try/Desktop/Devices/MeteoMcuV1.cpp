@@ -301,7 +301,7 @@ int MeteoMcuV1::pushKeyboardState(InputKey key, int value)
 
 	if (value >= 0) {
 		if (!keyboardState->GetKeyboardState()->ContainPress(key))
-			keyboardState->GetKeyboardState()->AddPress(make_pair(key, value > 127 ? 127 : value));
+			keyboardState->GetKeyboardState()->AddPress(make_pair(key, value));// > 127 ? 127 : value));
 	}
 	else {
 		if (!keyboardState->GetKeyboardState()->ContainUp(key))
