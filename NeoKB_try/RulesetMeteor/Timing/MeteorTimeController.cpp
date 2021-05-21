@@ -199,18 +199,19 @@ int MeteorTimeController::OnKnobTurn(pair<MeteorAction, int> action)
 			outputManager->PushMessage(revolveLightRingPanelMessage);
 
 			if (turnValue > 0) {
+				LOG(LogLevel::Debug) << "MeteorTimeController::OnKnobTurn() : jump to [" << tempRepeatStartSection << "] section. section time [" << sectionTime[tempRepeatStartSection + 1] << "], jump time [" << sectionTime[tempRepeatStartSection + 1] - repeatBufferTime << "]";
 				/* 往後轉的時候，就跳到下個小節 */
 				//speedAdjuster->SetSeekTime(GetClock()->GetCurrentTime() - sectionTime[tempRepeatStartSection + 1]);
 				JumpTo(sectionTime[tempRepeatStartSection + 1] - repeatBufferTime);
 				tempRepeatStartSection++;
 			}
 			else {
+				LOG(LogLevel::Debug) << "MeteorTimeController::OnKnobTurn() : jump to [" << tempRepeatStartSection << "] section. section time [" << sectionTime[tempRepeatStartSection - 1] << "], jump time [" << sectionTime[tempRepeatStartSection - 1] - repeatBufferTime << "]";
 				/* 往回轉的時候，就跳到上個小節 */
 				//speedAdjuster->SetSeekTime(-(GetClock()->GetCurrentTime() - sectionTime[tempRepeatStartSection - 1]));
 				JumpTo(sectionTime[tempRepeatStartSection - 1] - repeatBufferTime);
 				tempRepeatStartSection--;
 			}
-			LOG(LogLevel::Debug) << "MeteorTimeController::OnKnobTurn() : jump to [" << tempRepeatStartSection << "] section.";
 			eventProcessorFilter->SwitchVariant(0);	// 落下燈光示範
 			repeatPracticeMode = RepeatPracticeMode::Demonstrate;
 			tempRepeatCounts = 0;
