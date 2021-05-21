@@ -43,7 +43,7 @@ ChangeSpeedPanelMessage::ChangeSpeedPanelMessage(float s)
 
 string ChangeSpeedPanelMessage::ToString()
 {
-	return "BT,"s + roundAndToString(speed, 2);
+	return "CS,"s + roundAndToString(speed, 2);
 }
 
 OutputMessage * ChangeSpeedPanelMessage::Clone()

@@ -14,12 +14,12 @@ int ChangeSpeedOutputer::SetupPeripheral(MainInterface * mainInterface)
 
 int ChangeSpeedOutputer::pushMessage(ChangeSpeedPanelMessage * outputMessage)
 {
-	LOG(LogLevel::Debug) << "FadeLightRingOutputer::pushMessage : get message." << outputMessage->ToString();
+	LOG(LogLevel::Debug) << "ChangeSpeedOutputer::pushMessage : get message." << outputMessage->ToString();
 
 	if (panel)
 		panel->PushOutputMessage(outputMessage);
 	else {
-		LOG(LogLevel::Error) << "FadeLightRingOutputer::pushMessage : no panel device registered.";
+		LOG(LogLevel::Error) << "ChangeSpeedOutputer::pushMessage : no panel device registered.";
 		// throw error
 	}
 
