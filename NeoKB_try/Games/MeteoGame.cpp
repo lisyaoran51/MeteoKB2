@@ -89,6 +89,18 @@ int MeteoGame::SetConnectState()
 	return 0;
 }
 
+int MeteoGame::SetDisconnectState()
+{
+	if (isBluetoothConnected)
+		return -1;
+
+	LOG(LogLevel::Debug) << "MeteoGame::SetConnectState() : set fading light ring.";
+	FadeLightRingPanelMessage* fadeLightRingPanelMessage = new FadeLightRingPanelMessage(-1);
+	outputManager->PushMessage(fadeLightRingPanelMessage);
+
+	return 0;
+}
+
 int MeteoGame::LoadOnComplete()
 {
 	LOG(LogLevel::Info) << "MeteoGame::LoadOnComplete() : add loader into screen stack.";
@@ -145,6 +157,7 @@ int MeteoGame::onConnect()
 int MeteoGame::onDisconnect()
 {
 	isBluetoothConnected = false;
+	SetDisconnectState();
 	SampleChannel* sampleChannel = audioManager->GetSampleManager()->GetSimpleSampleChannel("OnDisconnect.mp3");
 	sampleChannel->Play();
 

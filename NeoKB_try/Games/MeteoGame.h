@@ -54,6 +54,11 @@ namespace Games {
 		/// </summary>
 		virtual int SetConnectState();
 
+		/// <summary>
+		/// 在斷線時會執行的事情
+		/// </summary>
+		virtual int SetDisconnectState();
+
 	protected:
 
 		BindablePointer<RulesetInfo*> ruleset;
