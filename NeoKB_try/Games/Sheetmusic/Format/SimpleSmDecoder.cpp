@@ -279,13 +279,13 @@ int SimpleSmDecoder::handleNoteControlPoints(Sm<Event>* sm, string & line)
 		if (dynamic_cast<PlayableControlPoint*>(newMarkControlPoint)) {
 			dynamic_cast<PlayableControlPoint*>(newMarkControlPoint)->SetHandType(static_cast<HandType>(hand));
 			if (dynamic_cast<NoteControlPoint*>(newMarkControlPoint)) {
-				dynamic_cast<NoteControlPoint*>(newMarkControlPoint)->SetVolume(float(volume) / 128.f / 2.f);
+				dynamic_cast<NoteControlPoint*>(newMarkControlPoint)->SetVolume(float(volume) / 128.f);
 			}
 		}
 
 
 		if (pitchInt >= 0)
-			LOG(LogLevel::Debug) << "int SimpleSmDecoder::handleNoteControlPoints() : Note [" << pitchInt << "] at [" << time << "] volume [" << volume / 128.f << "].";
+			LOG(LogLevel::Depricated) << "int SimpleSmDecoder::handleNoteControlPoints() : Note [" << pitchInt << "] at [" << time << "] volume [" << volume / 128.f << "].";
 
 
 		sm->GetEvents()->push_back(newMarkControlPoint);
