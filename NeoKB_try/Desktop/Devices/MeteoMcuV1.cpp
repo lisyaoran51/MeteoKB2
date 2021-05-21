@@ -226,7 +226,7 @@ int MeteoMcuV1::readPanel()
 			if (int(key) < 500) {
 				if(stoi(splitMessage[1]) >= 2000)
 					continue;
-				int value = tan(((double)(2000 - stoi(splitMessage[1]))) / 200.0 * 3.14159265358979323846 / 2.0) * 2;
+				int value = tan(((double)(2000 - stoi(splitMessage[1]))) / 2000.0 * 3.14159265358979323846 / 2.0) * 2;
 				// tan(((double)(200 - (timerCount - pressedKeyTime[pressedNum])))/200.0*3.14159265358979323846/2.0)*2;
 				pushKeyboardState(key, value);
 			}
