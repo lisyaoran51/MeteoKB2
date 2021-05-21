@@ -135,7 +135,7 @@ int MeteoGame::LoadOnComplete()
 int MeteoGame::onConnect()
 {
 	isBluetoothConnected = true;
-	//SetConnectState();
+	SetConnectState();
 	SampleChannel* sampleChannel = audioManager->GetSampleManager()->GetSimpleSampleChannel("OnConnect.mp3");
 	sampleChannel->Play();
 
