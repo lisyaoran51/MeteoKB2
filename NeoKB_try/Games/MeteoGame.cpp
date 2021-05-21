@@ -136,7 +136,7 @@ int MeteoGame::onConnect()
 {
 	isBluetoothConnected = true;
 	//SetConnectState();
-	SampleChannel* sampleChannel = audioManager->GetSampleManager()->GetSimpleSampleChannel("welcome.mp3");
+	SampleChannel* sampleChannel = audioManager->GetSampleManager()->GetSimpleSampleChannel("OnConnect.mp3");
 	sampleChannel->Play();
 
 	return 0;
@@ -145,7 +145,7 @@ int MeteoGame::onConnect()
 int MeteoGame::onDisconnect()
 {
 	isBluetoothConnected = false;
-	SampleChannel* sampleChannel = audioManager->GetSampleManager()->GetSimpleSampleChannel("seeya.mp3");
+	SampleChannel* sampleChannel = audioManager->GetSampleManager()->GetSimpleSampleChannel("OnDisconnect.mp3");
 	sampleChannel->Play();
 
 	return 0;
