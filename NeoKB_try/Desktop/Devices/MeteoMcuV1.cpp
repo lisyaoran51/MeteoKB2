@@ -235,7 +235,7 @@ int MeteoMcuV1::readPanel()
 
 				int value = tan(((double)(2000 - stoi(splitMessage[1]))) / 2000.0 * 3.14159265358979323846 / 2.0) * 1.5;
 				// tan(((double)(200 - (timerCount - pressedKeyTime[pressedNum])))/200.0*3.14159265358979323846/2.0)*2;
-				LOG(LogLevel::Debug) << "MeteoMcuV1::readPanel() : input is [" << stoi(splitMessage[1]) << "] this velocity is [" << value << "].";
+				LOG(LogLevel::Depricated) << "MeteoMcuV1::readPanel() : input is [" << stoi(splitMessage[1]) << "] this velocity is [" << value << "].";
 				pushKeyboardState(key, value > 200 ? 200 : value);
 			}
 			else { // pedal
@@ -275,7 +275,7 @@ int MeteoMcuV1::writePanel()
 		strcpy(cstr, i2cMessages[i].c_str());
 		cstr[i2cMessages[i].length()] = '\0';
 
-		LOG(LogLevel::Debug) << "MeteoMcuV1::writePanel() : write [" << cstr << "](" << i2cMessages[i].c_str() << ") to i2c. last char is [" << (int)cstr[i2cMessages[i].length()] << "] at " << i2cMessages[i].length();
+		LOG(LogLevel::Depricated) << "MeteoMcuV1::writePanel() : write [" << cstr << "](" << i2cMessages[i].c_str() << ") to i2c. last char is [" << (int)cstr[i2cMessages[i].length()] << "] at " << i2cMessages[i].length();
 
 		try {
 			i2cInterface->i2cWrite(cstr, i2cMessages[i].length() + 1);

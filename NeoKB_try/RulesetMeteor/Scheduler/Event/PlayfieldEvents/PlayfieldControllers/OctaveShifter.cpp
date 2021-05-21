@@ -1,11 +1,12 @@
 #include "OctaveShifter.h"
 
 #include "../../../../Play/MeteorPlayfield.h"
+#include "../../../../../Util/Log.h"
 
 
 using namespace Meteor::Schedulers::Events::PlayfieldEvents::PlayfieldControllers;
 using namespace Meteor::Play;
-
+using namespace Util;
 
 
 OctaveShifter::OctaveShifter(): RegisterType("OctaveShifter")
@@ -23,7 +24,7 @@ int OctaveShifter::LazyConstruct(Playfield * p)
 
 int OctaveShifter::implementControlPlayfield(EventProcessor<Event>* eProcessor)
 {
-
+	LOG(LogLevel::Debug) << "OctaveShifter::implementControlPlayfield() : shift octave.";
 	OctaveShiftEventProcessor* octaveShiftEventProcessor = dynamic_cast<OctaveShiftEventProcessor*>(eProcessor);
 
 	/*	平移八度已經被改掉了
@@ -95,6 +96,7 @@ int OctaveShifter::implementControlPlayfield(EventProcessor<Event>* eProcessor)
 
 int OctaveShifter::implementUndoControlPlayfield(EventProcessor<Event>* eProcessor)
 {
+	LOG(LogLevel::Debug) << "OctaveShifter::implementUndoControlPlayfield() : unshift octave.";
 	OctaveShiftEventProcessor* octaveShiftEventProcessor = dynamic_cast<OctaveShiftEventProcessor*>(eProcessor);
 
 	/* 平移八度已經被改掉了
