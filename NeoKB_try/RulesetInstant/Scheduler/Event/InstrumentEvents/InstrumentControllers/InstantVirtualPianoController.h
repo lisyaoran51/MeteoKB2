@@ -30,6 +30,10 @@ namespace InstrumentControllers{
 
 		virtual int implementControlInstrument(EventProcessor<Event>* e);
 
+		virtual int implementFastForwardControlInstrument(EventProcessor<Event>* e);
+
+		virtual int implementUndoControlInstrument(EventProcessor<Event>* e);
+
 	};
 
 }}}}}

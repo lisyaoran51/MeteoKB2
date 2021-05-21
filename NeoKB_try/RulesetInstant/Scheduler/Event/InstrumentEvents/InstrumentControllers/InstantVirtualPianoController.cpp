@@ -52,3 +52,15 @@ int InstantVirtualPianoController::implementControlInstrument(EventProcessor<Eve
 
 	return 0;
 }
+
+int InstantVirtualPianoController::implementFastForwardControlInstrument(EventProcessor<Event>* e)
+{
+	LOG(LogLevel::Error) << "InstantVirtualPianoController::implementFastForwardControlInstrument() : no this function.";
+	return 0;
+}
+
+int InstantVirtualPianoController::implementUndoControlInstrument(EventProcessor<Event>* e)
+{
+	LOG(LogLevel::Error) << "InstantVirtualPianoController::implementUndoControlInstrument() : no this function.";
+	return 0;
+}
