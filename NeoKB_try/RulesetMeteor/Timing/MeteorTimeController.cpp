@@ -198,19 +198,22 @@ int MeteorTimeController::OnKnobTurn(pair<MeteorAction, int> action)
 			if (turnValue > 0) {
 				/* 往後轉的時候，就跳到下個小節 */
 				//speedAdjuster->SetSeekTime(GetClock()->GetCurrentTime() - sectionTime[tempRepeatStartSection + 1]);
-				JumpTo(sectionTime[tempRepeatStartSection + 1]);
+				JumpTo(sectionTime[tempRepeatStartSection + 1] - 1);
 				tempRepeatStartSection++;
 			}
 			else {
 				/* 往回轉的時候，就跳到上個小節 */
 				//speedAdjuster->SetSeekTime(-(GetClock()->GetCurrentTime() - sectionTime[tempRepeatStartSection - 1]));
-				JumpTo(sectionTime[tempRepeatStartSection - 1]);
+				JumpTo(sectionTime[tempRepeatStartSection - 1] - 1);
 				tempRepeatStartSection--;
 			}
 			LOG(LogLevel::Debug) << "MeteorTimeController::OnKnobTurn() : jump to [" << tempRepeatStartSection << "] section.";
 			eventProcessorFilter->SwitchVariant(0);	// 落下燈光示範
 			repeatPracticeMode = RepeatPracticeMode::Demonstrate;
 			tempRepeatCounts = 0;
+
+			RevolveLightRingPanelMessage* revolveLightRingPanelMessage = new RevolveLightRingPanelMessage(1);
+			outputManager->PushMessage(revolveLightRingPanelMessage);
 		}
 		else if (timeControllerMode == MeteorTimeControllerMode::MusicGame) {
 
