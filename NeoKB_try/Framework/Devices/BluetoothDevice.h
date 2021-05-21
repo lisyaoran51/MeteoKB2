@@ -26,6 +26,8 @@ namespace Devices{
 
 		virtual int AddOnConnect(MtoObject * callableObject, function<int()> callback, string name) = 0;
 
+		virtual int AddOnDisconnect(MtoObject * callableObject, function<int()> callback, string name) = 0;
+
 		/// <summary>
 		/// 寫入sm檔時的callback，改成擺在request裡
 		/// </summary>
