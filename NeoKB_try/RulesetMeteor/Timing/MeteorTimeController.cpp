@@ -201,15 +201,15 @@ int MeteorTimeController::OnKnobTurn(pair<MeteorAction, int> action)
 			if (turnValue > 0) {
 				/* 往後轉的時候，就跳到下個小節 */
 				//speedAdjuster->SetSeekTime(GetClock()->GetCurrentTime() - sectionTime[tempRepeatStartSection + 1]);
-				JumpTo(sectionTime[tempRepeatStartSection + 1] - repeatBufferTime);
-				LOG(LogLevel::Debug) << "MeteorTimeController::OnKnobTurn() : jump to [" << tempRepeatStartSection << "] section. section time [" << sectionTime[tempRepeatStartSection + 1] << "], jump time [" << sectionTime[tempRepeatStartSection + 1] - repeatBufferTime << "]. after jump time [" << GetControllableClock()->GetCurrentTime() << "]";
+				JumpTo(sectionTime[tempRepeatStartSection + 1] - repeatBufferTime - 0.01);
+				LOG(LogLevel::Debug) << "MeteorTimeController::OnKnobTurn() : jump to [" << tempRepeatStartSection << "] section. section time [" << sectionTime[tempRepeatStartSection + 1] << "], jump time [" << sectionTime[tempRepeatStartSection + 1] - repeatBufferTime << "].";// after jump time[" << GetControllableClock()->GetCurrentTime() << "]";
 				tempRepeatStartSection++;
 			}
 			else {
 				/* 往回轉的時候，就跳到上個小節 */
 				//speedAdjuster->SetSeekTime(-(GetClock()->GetCurrentTime() - sectionTime[tempRepeatStartSection - 1]));
-				JumpTo(sectionTime[tempRepeatStartSection - 1] - repeatBufferTime);
-				LOG(LogLevel::Debug) << "MeteorTimeController::OnKnobTurn() : jump to [" << tempRepeatStartSection << "] section. section time [" << sectionTime[tempRepeatStartSection - 1] << "], jump time [" << sectionTime[tempRepeatStartSection - 1] - repeatBufferTime << "]. after jump time [" << GetControllableClock()->GetCurrentTime() << "]";
+				JumpTo(sectionTime[tempRepeatStartSection - 1] - repeatBufferTime - 0.01);
+				LOG(LogLevel::Debug) << "MeteorTimeController::OnKnobTurn() : jump to [" << tempRepeatStartSection << "] section. section time [" << sectionTime[tempRepeatStartSection - 1] << "], jump time [" << sectionTime[tempRepeatStartSection - 1] - repeatBufferTime << "].";// after jump time[" << GetControllableClock()->GetCurrentTime() << "]";
 				tempRepeatStartSection--;
 			}
 			eventProcessorFilter->SwitchVariant(0);	// 落下燈光示範
