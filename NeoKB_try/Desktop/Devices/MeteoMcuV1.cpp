@@ -3,6 +3,7 @@
 #include <thread>
 #include "../../Util/Log.h"
 #include <cstring>
+#include <cmath>
 
 
 using namespace Desktop::Devices;
@@ -220,10 +221,14 @@ int MeteoMcuV1::readPanel()
 				continue;
 			}
 
-			continue;
+			//continue;
 
 			if (int(key) < 500) {
-				pushKeyboardState(key, stoi(splitMessage[1]));
+				if(stoi(splitMessage[1]) >= 2000)
+					continue;
+				int value = tan(((double)(2000 - stoi(splitMessage[1]))) / 200.0 * 3.14159265358979323846 / 2.0) * 2;
+				// tan(((double)(200 - (timerCount - pressedKeyTime[pressedNum])))/200.0*3.14159265358979323846/2.0)*2;
+				pushKeyboardState(key, value);
 			}
 			else { // pedal
 				pushPanelState(key, stoi(splitMessage[1]));
