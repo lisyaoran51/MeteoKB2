@@ -78,7 +78,7 @@ bool MeteoMcuV1::checkI2cMessageValid(InputKey iKey, int v)
 
 	//if (v > 256 || v < -1)
 	//	return false;
-	if (v > 128 || v < -1)
+	if (v > 2000 || v < -1)
 		return false;
 
 	return true;
@@ -226,8 +226,16 @@ int MeteoMcuV1::readPanel()
 			if (int(key) < 500) {
 				if(stoi(splitMessage[1]) >= 2000)
 					continue;
+
+				if (stoi(splitMessage[1]) < 0) {
+					pushKeyboardState(key, stoi(splitMessage[1]));
+					continue;
+				}
+
+
 				int value = tan(((double)(2000 - stoi(splitMessage[1]))) / 2000.0 * 3.14159265358979323846 / 2.0) * 2;
 				// tan(((double)(200 - (timerCount - pressedKeyTime[pressedNum])))/200.0*3.14159265358979323846/2.0)*2;
+				LOG(LogLevel::Debug) << "MeteoMcuV1::readPanel() : input is [" << stoi(splitMessage[1]) << "] this velocity is [" << value << "].";
 				pushKeyboardState(key, value);
 			}
 			else { // pedal
