@@ -14,7 +14,7 @@ int FadeLightRingOutputer::SetupPeripheral(MainInterface * mainInterface)
 
 int FadeLightRingOutputer::pushMessage(FadeLightRingPanelMessage * outputMessage)
 {
-	LOG(LogLevel::Depricated) << "FadeLightRingOutputer::pushMessage : get message.";
+	LOG(LogLevel::Debug) << "FadeLightRingOutputer::pushMessage : get message." << outputMessage->ToString();
 
 	if (panel)
 		panel->PushOutputMessage(outputMessage);
