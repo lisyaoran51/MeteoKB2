@@ -25,6 +25,12 @@ int MeteoBluetoothDevice::AddOnConnect(MtoObject * callableObject, function<int(
 	return 0;
 }
 
+int MeteoBluetoothDevice::AddOnDisconnect(MtoObject * callableObject, function<int()> callback, string name)
+{
+	meteoBluetoothPhone->AddOnDisconnect(callableObject, callback, name);
+	return 0;
+}
+
 int MeteoBluetoothDevice::readFromDevice()
 {
 #if 1

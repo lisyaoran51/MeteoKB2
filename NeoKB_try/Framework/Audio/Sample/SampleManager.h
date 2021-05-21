@@ -52,6 +52,8 @@ namespace Samples {
 
 		bool HasSampleChannel(SoundBinding* soundBinding);
 
+		SampleChannel* GetSimpleSampleChannel(string name);
+
 		SampleChannel* GetSampleChannel(string name);
 
 		SampleChannel* GetSampleChannel(SoundBinding* soundBinding);

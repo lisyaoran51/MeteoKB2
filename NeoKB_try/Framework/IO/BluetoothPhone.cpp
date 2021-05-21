@@ -48,6 +48,12 @@ int BluetoothPhone::AddOnConnect(MtoObject * callableObject, function<int()> cal
 	return 0;
 }
 
+int BluetoothPhone::AddOnDisonnect(MtoObject * callableObject, function<int()> callback, string name)
+{
+	matchedBluetoothDevice->AddOnDisconnect(callableObject, callback, name);
+	return 0;
+}
+
 /*
 int BluetoothPhone::AddOnStartWritingSmFile(MtoObject * callableObject, function<int(string)> callback, string name)
 {

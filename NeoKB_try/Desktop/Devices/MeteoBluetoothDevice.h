@@ -31,7 +31,9 @@ namespace Devices {
 		/// </summary>
 		virtual bool CheckFileSegmentMessageOutputClear();
 
-		int AddOnConnect(MtoObject * callableObject, function<int()> callback, string name = "MeteoBluetoothDevice::HandleOnConnect");
+		int AddOnConnect(MtoObject * callableObject, function<int()> callback, string name = "MeteoBluetoothDevice::HandleConnect");
+
+		int AddOnDisconnect(MtoObject * callableObject, function<int()> callback, string name = "MeteoBluetoothDevice::HandleDisconnect");
 
 		/// <summary>
 		/// 寫入sm檔時的callback，改成擺在request裡

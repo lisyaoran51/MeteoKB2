@@ -50,6 +50,8 @@ namespace Play {
 
 		Instrument* instrument = nullptr;
 
+		MeteoGame* meteoGame = nullptr;
+
 
 		Ruleset* ruleset = nullptr;
 
@@ -70,7 +72,7 @@ namespace Play {
 		/// </summary>
 		int load();
 		
-		int load(MeteoConfigManager* m, Instrument* i);
+		int load(MeteoConfigManager* m, Instrument* i, MeteoGame * g);
 
 	public:
 

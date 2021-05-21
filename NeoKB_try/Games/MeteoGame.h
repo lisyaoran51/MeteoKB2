@@ -39,13 +39,34 @@ namespace Games {
 
 		virtual Storage* GetStableStorage();
 
+		/// <summary>
+		/// 應該只有bluetooth裝置可以call這個函式
+		/// </summary>
+		virtual int TriggerOnConnect();
+
+		/// <summary>
+		/// 應該只有bluetooth裝置可以call這個函式
+		/// </summary>
+		virtual int TriggerOnDisconnect();
+
+		/// <summary>
+		/// 在連線時會執行的事情
+		/// </summary>
+		virtual int SetConnectState();
+
 	protected:
 
 		BindablePointer<RulesetInfo*> ruleset;
 
 		OutputManager* outputManager = nullptr;
 
+		bool isBluetoothConnected = false;
+
 		virtual int LoadOnComplete();
+
+		int onConnect();
+
+		int onDisconnect();
 
 	};
 

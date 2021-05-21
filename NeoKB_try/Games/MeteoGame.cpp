@@ -65,19 +65,35 @@ Storage * MeteoGame::GetStableStorage()
 	return nullptr;
 }
 
+int MeteoGame::TriggerOnConnect()
+{
+	onConnect();
+	return 0;
+}
+
+int MeteoGame::TriggerOnDisconnect()
+{
+	onDisconnect();
+	return 0;
+}
+
+int MeteoGame::SetConnectState()
+{
+
+	LOG(LogLevel::Debug) << "MeteoGame::SetConnectState() : set fading light ring.";
+	FadeLightRingPanelMessage* fadeLightRingPanelMessage = new FadeLightRingPanelMessage(1.0f);
+	outputManager->PushMessage(fadeLightRingPanelMessage);
+
+	return 0;
+}
+
 int MeteoGame::LoadOnComplete()
 {
 	LOG(LogLevel::Info) << "MeteoGame::LoadOnComplete() : add loader into screen stack.";
 
 	/* 在藍芽連線後，執行的事情 */
-	gameHost->GetMainInterface()->GetBluetoothPhone()->AddOnConnect(this, [=]() {
-		
-		LOG(LogLevel::Debug) << "MeteoGame::Lambda_HandleConnect() : set fading light ring.";
-		FadeLightRingPanelMessage* fadeLightRingPanelMessage = new FadeLightRingPanelMessage(1.0f);
-		outputManager->PushMessage(fadeLightRingPanelMessage);
-
-		return 0; 
-	}, "MeteoGame::Lambda_HandleConnect");
+	gameHost->GetMainInterface()->GetBluetoothPhone()->AddOnConnect(this, bind(&MeteoGame::onConnect, this), "MeteoGame::onConnect");
+	gameHost->GetMainInterface()->GetBluetoothPhone()->AddOnDisonnect(this, bind(&MeteoGame::onDisconnect, this), "MeteoGame::onDisconnect");
 
 	// 這邊不知道怎麼樣把virtual function給bind上去，只好用lambda式
 	// smManager->GetStableStorage = bind(static_cast<Storage*(MeteoGame::*)(void)>(&MeteoGame::GetStableStorage), this);
@@ -110,6 +126,25 @@ int MeteoGame::LoadOnComplete()
 	AddChild(volumeController = new VolumeController());
 
 	AddChild(screenStack = new Loader());
+
+	return 0;
+}
+
+int MeteoGame::onConnect()
+{
+	SetConnectState();
+	isBluetoothConnected = true;
+	SampleChannel* sampleChannel = audioManager->GetSampleManager()->GetSimpleSampleChannel("welcome.mp3");
+	sampleChannel->Play();
+
+	return 0;
+}
+
+int MeteoGame::onDisconnect()
+{
+	isBluetoothConnected = false;
+	SampleChannel* sampleChannel = audioManager->GetSampleManager()->GetSimpleSampleChannel("seeya.mp3");
+	sampleChannel->Play();
 
 	return 0;
 }

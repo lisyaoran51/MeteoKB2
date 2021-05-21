@@ -45,6 +45,26 @@ bool SampleManager::HasSampleChannel(SoundBinding * soundBinding)
 
 }
 
+SampleChannel * SampleManager::GetSimpleSampleChannel(string name)
+{
+	Sample* sample = nullptr;
+	SampleChannel* sampleChannel = nullptr;
+
+	string path = resourceStore->GetFilePath(name);
+
+	if (path != "") {
+
+		sample = new BassSample((char*)path.c_str());
+		sampleChannel = sampleChannelCache[name] = new BassSampleChannel(sample);
+		AddItem(sampleChannel);
+	}
+	else {
+		throw runtime_error("SampleManager::GetSampleChannel(): file not found : "s + name);
+	}
+
+	return nullptr;
+}
+
 SampleChannel * SampleManager::GetSampleChannel(string name)
 {
 	Sample* sample = nullptr;

@@ -58,7 +58,9 @@ namespace Devices {
 
 		int PushOutputMessage(BluetoothMessage* outputMessage);
 
-		int AddOnConnect(MtoObject * callableObject, function<int()> callback, string name = "MeteoBluetoothPhoneV2::HandleOnConnect");
+		int AddOnConnect(MtoObject * callableObject, function<int()> callback, string name = "MeteoBluetoothPhoneV2::HandleConnect");
+
+		int AddOnDisconnect(MtoObject * callableObject, function<int()> callback, string name = "MeteoBluetoothPhoneV2::HandleDisconnect");
 
 	protected:
 
@@ -75,6 +77,8 @@ namespace Devices {
 		vector<BluetoothMessage*> outputMessages;
 
 		ActionList<int> onConnect;
+
+		ActionList<int> onDisconnect;
 
 		bool getIsReady();
 

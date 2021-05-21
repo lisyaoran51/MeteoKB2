@@ -88,6 +88,12 @@ int MeteoBluetoothPhoneV2::AddOnConnect(MtoObject * callableObject, function<int
 	return 0;
 }
 
+int MeteoBluetoothPhoneV2::AddOnDisconnect(MtoObject * callableObject, function<int()> callback, string name)
+{
+	onDisconnect.Add(callableObject, callback, name);
+	return 0;
+}
+
 bool MeteoBluetoothPhoneV2::getIsReady()
 {
 	return isConnected && isFirstPacketSent;
@@ -128,6 +134,8 @@ int MeteoBluetoothPhoneV2::work()
 			isFirstPacketSent = false;
 			continue;
 		}
+
+		onDisconnect.Trigger();
 
 	}
 	return 0;

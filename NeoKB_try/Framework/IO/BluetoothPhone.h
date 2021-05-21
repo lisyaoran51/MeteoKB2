@@ -50,6 +50,8 @@ namespace IO {
 
 		int AddOnConnect(MtoObject * callableObject, function<int()> callback, string name = "BluetoothPhone::HandleConnect");
 
+		int AddOnDisonnect(MtoObject * callableObject, function<int()> callback, string name = "BluetoothPhone::HandleDisonnect");
+
 		/// <summary>
 		/// 一般json con non message的時候用這個
 		/// </summary>

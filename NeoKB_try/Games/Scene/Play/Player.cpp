@@ -7,6 +7,7 @@
 #include "../../Ruleset/Modifiers/TimeControllerModifier.h"
 #include "../Results/Result.h"
 #include "../../Ruleset/Modifiers/ConfigurationModifier.h"
+#include "../../MeteoGame.h"
 
 
 
@@ -14,6 +15,7 @@ using namespace std;
 using namespace Games::Scenes::Play;
 using namespace Games::Rulesets;
 using namespace Games::Sheetmusics;
+using namespace Games;
 using namespace Framework::Configurations;
 using namespace Rulesets::Modifiers;
 using namespace std;
@@ -30,10 +32,14 @@ int Player::load()
 	if (!i)
 		throw runtime_error("Player::load() : Instrument not found in cache.");
 
-	return load(m, i);
+	MeteoGame * g = GetCache<MeteoGame>("MeteoGame");
+	if (!g)
+		throw runtime_error("Player::load() : Game not found in cache.");
+
+	return load(m, i, g);
 }
 
-int Player::load(MeteoConfigManager* m, Instrument* instru)
+int Player::load(MeteoConfigManager* m, Instrument* instru, MeteoGame * g)
 {
 	LOG(LogLevel::Info) << "Player::load : start loading the player and reading the sm and ruleset from working sm.";
 
@@ -303,6 +309,8 @@ int Player::onRestarting()
 
 int Player::onExiting(Scene * lastScene)
 {
+	meteoGame->SetConnectState();
+
 	MeteoScene::onExiting(lastScene);
 	return 0;
 }
