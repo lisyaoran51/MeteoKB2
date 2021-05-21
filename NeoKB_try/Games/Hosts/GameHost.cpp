@@ -13,6 +13,7 @@
 #include "../Output/Panels/FadeLightRingOutputer.h"
 #include "../Output/Panels/SpeedRingOutputer.h"
 #include "../Output/Panels/IndicatorLightOutputer.h"
+#include "../Output/Panels/ChangeSpeedOutputer.h"
 #include "../../RulesetMeteor/Config/MeteorConfigManager.h"
 #include "../../RulesetInstant/Config/InstantConfigManager.h"
 
@@ -51,6 +52,10 @@ int GameHost::SetupOutputManager(OutputManager * oManager)
 	OutputComponent* fadeLightRingOutputer = new FadeLightRingOutputer();
 	fadeLightRingOutputer->SetupPeripheral(mainInterface);
 	oManager->AddItem(fadeLightRingOutputer);
+
+	OutputComponent* changeSpeedOutputer = new ChangeSpeedOutputer();
+	changeSpeedOutputer->SetupPeripheral(mainInterface);
+	oManager->AddItem(changeSpeedOutputer);
 
 	OutputComponent* speedRingOutputer = new SpeedRingOutputer();
 	speedRingOutputer->SetupPeripheral(mainInterface);
