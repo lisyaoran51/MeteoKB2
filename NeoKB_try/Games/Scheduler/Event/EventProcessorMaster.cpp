@@ -268,7 +268,8 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 					InstrumentEventProcessorInterface* instrumentEventProcessor = dynamic_cast<InstrumentEventProcessorInterface*>(filteredTempStaticEventProcessors[i]);
 					if (instrumentEventProcessor) {
 						if (instrumentEventProcessor->GetStartTime() < currentTime && instrumentEventProcessor->GetIsTransferable()) {
-							instrumentEventProcessor->SetIsTransfered();
+							instrumentEventProcessor->FastForwardControlInstrument();
+							//instrumentEventProcessor->SetIsTransfered();
 						}
 					}
 					continue;
@@ -352,7 +353,8 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 				if (instrumentEventProcessor) {
 
 					if (instrumentEventProcessor->GetStartTime() > currentTime && instrumentEventProcessor->GetStartTime() < currentTime - elapsedTime) {
-						instrumentEventProcessor->SetIsTransfered(false);
+						//instrumentEventProcessor->SetIsTransfered(false);
+						instrumentEventProcessor->UndoControlInstrument();
 					}
 				}
 				continue;

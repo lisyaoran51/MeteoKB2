@@ -23,6 +23,10 @@ namespace InstrumentEvents{
 
 		virtual int ControlInstrument() = 0;
 
+		virtual int FastForwardControlInstrument() = 0;
+
+		virtual int UndoControlInstrument() = 0;
+
 		virtual int SetIsTransfered(bool isTransfered = true) = 0;
 
 		virtual bool GetIsTransferable() = 0;
@@ -52,7 +56,7 @@ namespace InstrumentEvents{
 
 		virtual int ControlInstrument() {
 			if (!instrumentController)
-				LOG(LogLevel::Error) << "InstrumentEventProcessor::ControlInstrument : no instruemnt controller.";
+				LOG(LogLevel::Error) << "InstrumentEventProcessor::ControlInstrument() : no instruemnt controller.";
 
 			if (instrumentController && GetIsTransferable()) {
 
@@ -61,6 +65,30 @@ namespace InstrumentEvents{
 
 			}
 			return 0;
+		}
+
+		virtual int FastForwardControlInstrument() {
+			if (!instrumentController)
+				LOG(LogLevel::Error) << "InstrumentEventProcessor::FastForwardControlInstrument() : no instruemnt controller.";
+
+			if (instrumentController && GetIsTransferable()) {
+
+				SetIsTransfered();
+				instrumentController->FastForwardControlInstrument(this);
+
+			}
+		}
+
+		virtual int UndoControlInstrument() {
+			if (!instrumentController)
+				LOG(LogLevel::Error) << "InstrumentEventProcessor::UndoControlInstrument() : no instruemnt controller.";
+
+			if (instrumentController && !GetIsTransferable()) {
+
+				SetIsTransfered(false);
+				instrumentController->UndoControlInstrument(this);
+
+			}
 		}
 
 		virtual int SetIsTransfered(bool isTransfered = true) {

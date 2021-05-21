@@ -54,3 +54,52 @@ int PianoController::implementControlInstrument(EventProcessor<Event>* e)
 
 	return 0;
 }
+
+int PianoController::implementFastForwardControlInstrument(EventProcessor<Event>* e)
+{
+	if (!piano)
+		return -1;
+
+	if (!dynamic_cast<PianoEvent*>(e->GetEvent()))
+		return -1;
+
+	PianoEvent* pianoEvent = dynamic_cast<PianoEvent*>(e->GetEvent());
+
+	if (pianoEvent->GetInput().first == InputKey::LowerOctave || pianoEvent->GetInput().first == InputKey::RaiseOctave) {
+		return implementControlInstrument(e);
+	}
+	return 0;
+}
+
+int PianoController::implementUndoControlInstrument(EventProcessor<Event>* e)
+{
+	LOG(LogLevel::Depricated) << "PianoController::implementUndoControlInstrument : make pedal [" << dynamic_cast<PianoEvent*>(e->GetEvent())->GetInput().second << "] on piano [" << piano << "].";
+
+	if (!piano)
+		return -1;
+
+	if (!dynamic_cast<PianoEvent*>(e->GetEvent()))
+		return -1;
+
+	PianoEvent* pianoEvent = dynamic_cast<PianoEvent*>(e->GetEvent());
+
+	// TODO: 以後要寫輸入琴鍵
+
+	if (pianoEvent->GetInput().first == InputKey::SustainPedal) {
+		// 不用做事情
+	}
+	else if (pianoEvent->GetInput().first == InputKey::LowerOctave) {
+
+		piano->MoveOctave(PianoPitchMovement::Raise);
+		LOG(LogLevel::Debug) << "PianoController::implementUndoControlInstrument : raise octave.";
+
+
+	}
+	else if (pianoEvent->GetInput().first == InputKey::RaiseOctave) {
+
+		piano->MoveOctave(PianoPitchMovement::Lower);
+		LOG(LogLevel::Debug) << "PianoController::implementUndoControlInstrument : lower octave.";
+	}
+
+	return 0;
+}

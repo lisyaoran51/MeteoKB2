@@ -28,6 +28,10 @@ namespace InstrumentControllers{
 
 		virtual int ControlInstrument(EventProcessor<Event>* e) = 0;
 
+		virtual int FastForwardControlInstrument(EventProcessor<Event>* e) = 0;
+
+		virtual int UndoControlInstrument(EventProcessor<Event>* e) = 0;
+
 	};
 
 	template<typename T>
@@ -64,12 +68,24 @@ namespace InstrumentControllers{
 			return implementControlInstrument(e);
 		}
 
+		virtual int FastForwardControlInstrument(EventProcessor<Event>* e) {
+			return implementFastForwardControlInstrument(e);
+		}
+
+		virtual int UndoControlInstrument(EventProcessor<Event>* e) {
+			return implementUndoControlInstrument(e);
+		}
+
 
 	protected:
 
 		Instrument* instrument = nullptr;
 
 		virtual int implementControlInstrument(EventProcessor<Event>* e) = 0;
+
+		virtual int implementFastForwardControlInstrument(EventProcessor<Event>* e) = 0;
+
+		virtual int implementUndoControlInstrument(EventProcessor<Event>* e) = 0;
 
 	};
 
