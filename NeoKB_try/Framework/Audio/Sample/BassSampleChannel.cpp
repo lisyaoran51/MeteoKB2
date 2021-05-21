@@ -20,7 +20,7 @@ int BassSampleChannel::Play()
 		unique_lock<mutex> uLock(pendingActionMutex);
 		pendingActions.Add(this, [=]() {
 
-			LOG(LogLevel::Debug) << "BassSampleChannel::Play() : create channel.";
+			LOG(LogLevel::Debug) << "BassSampleChannel::Play() : create channel." << volumeCalculated->GetValue();
 
 			if (!GetIsLoaded()) {
 				channelID = -1;
