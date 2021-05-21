@@ -64,7 +64,7 @@ SampleChannel * SampleManager::GetSimpleSampleChannel(string name)
 		throw runtime_error("SampleManager::GetSampleChannel(): file not found : "s + name);
 	}
 
-	return nullptr;
+	return sampleChannel;
 }
 
 SampleChannel * SampleManager::GetSampleChannel(string name)
