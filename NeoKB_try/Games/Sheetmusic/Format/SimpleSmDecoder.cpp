@@ -279,7 +279,7 @@ int SimpleSmDecoder::handleNoteControlPoints(Sm<Event>* sm, string & line)
 		if (dynamic_cast<PlayableControlPoint*>(newMarkControlPoint)) {
 			dynamic_cast<PlayableControlPoint*>(newMarkControlPoint)->SetHandType(static_cast<HandType>(hand));
 			if (dynamic_cast<NoteControlPoint*>(newMarkControlPoint)) {
-				dynamic_cast<NoteControlPoint*>(newMarkControlPoint)->SetVolume(float(volume) / 128.f);
+				dynamic_cast<NoteControlPoint*>(newMarkControlPoint)->SetVolume(float(volume) / 128.f / 2.f);
 			}
 		}
 

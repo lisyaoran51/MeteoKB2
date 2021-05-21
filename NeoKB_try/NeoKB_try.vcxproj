@@ -105,8 +105,14 @@
     <ClCompile Include="Games\Output\Bluetooths\MeteoContextBluetoothMessage.cpp" />
     <ClCompile Include="Games\Output\Bluetooths\MeteoFileBluetoothMessage.cpp" />
     <ClCompile Include="Games\Output\Bluetooths\MeteoFileSegmentBluetoothMessage.cpp" />
+    <ClCompile Include="Games\Output\Panels\ChangeSpeedOutputer.cpp" />
+    <ClCompile Include="Games\Output\Panels\ChangeSpeedPanelMessage.cpp" />
+    <ClCompile Include="Games\Output\Panels\FadeLightRingOutputer.cpp" />
+    <ClCompile Include="Games\Output\Panels\FadeLightRingPanelMessage.cpp" />
     <ClCompile Include="Games\Output\Panels\IndicatorLightOutputer.cpp" />
     <ClCompile Include="Games\Output\Panels\IndicatorLightPanelMessage.cpp" />
+    <ClCompile Include="Games\Output\Panels\RevolveLightRingOutputer.cpp" />
+    <ClCompile Include="Games\Output\Panels\RevolveLightRingPanelMessage.cpp" />
     <ClCompile Include="Games\Output\Panels\SpeedRingOutputer.cpp" />
     <ClCompile Include="Games\Output\Panels\SpeedRingPanelMessage.cpp" />
     <ClCompile Include="Games\Ruleset\Judgements\HasHitWindow.cpp" />
@@ -307,8 +313,6 @@
     <ClCompile Include="RulesetMeteor\Input\MeteorInputManager.cpp" />
     <ClCompile Include="RulesetMeteor\Input\MeteorPitchBindingSet.cpp" />
     <ClCompile Include="RulesetMeteor\MeteorGame.cpp" />
-    <ClCompile Include="RulesetMeteor\Output\Panels\LightRingOutputer.cpp" />
-    <ClCompile Include="RulesetMeteor\Output\Panels\LightRingPanelMessage.cpp" />
     <ClCompile Include="RulesetMeteor\Output\Panels\SustainPedalLightRingOutputer.cpp" />
     <ClCompile Include="RulesetMeteor\Output\Panels\SustainPedalLightRingPanelMessage.cpp" />
     <ClCompile Include="RulesetMeteor\Play\MeteorPlayfield.cpp" />
@@ -513,8 +517,14 @@
     <ClInclude Include="Games\Output\Bluetooths\MeteoContextBluetoothMessage.h" />
     <ClInclude Include="Games\Output\Bluetooths\MeteoFileBluetoothMessage.h" />
     <ClInclude Include="Games\Output\Bluetooths\MeteoFileSegmentBluetoothMessage.h" />
+    <ClInclude Include="Games\Output\Panels\ChangeSpeedOutputer.h" />
+    <ClInclude Include="Games\Output\Panels\FadeLightRingOutputer.h" />
+    <ClInclude Include="Games\Output\Panels\FadeLightRingPanelMessage.h" />
+    <ClInclude Include="Games\Output\Panels\ChangeSpeedPanelMessage.h" />
     <ClInclude Include="Games\Output\Panels\IndicatorLightOutputer.h" />
     <ClInclude Include="Games\Output\Panels\IndicatorLightPanelMessage.h" />
+    <ClInclude Include="Games\Output\Panels\RevolveLightRingOutputer.h" />
+    <ClInclude Include="Games\Output\Panels\RevolveLightRingPanelMessage.h" />
     <ClInclude Include="Games\Output\Panels\SpeedRingOutputer.h" />
     <ClInclude Include="Games\Output\Panels\SpeedRingPanelMessage.h" />
     <ClInclude Include="Games\Ruleset\Judgements\HitResult.h" />
@@ -768,8 +778,6 @@
     <ClInclude Include="RulesetMeteor\Input\MeteorInputManager.h" />
     <ClInclude Include="RulesetMeteor\Input\MeteorPitchBindingSet.h" />
     <ClInclude Include="RulesetMeteor\MeteorGame.h" />
-    <ClInclude Include="RulesetMeteor\Output\Panels\LightRingOutputer.h" />
-    <ClInclude Include="RulesetMeteor\Output\Panels\LightRingPanelMessage.h" />
     <ClInclude Include="RulesetMeteor\Output\Panels\SustainPedalLightRingOutputer.h" />
     <ClInclude Include="RulesetMeteor\Output\Panels\SustainPedalLightRingPanelMessage.h" />
     <ClInclude Include="RulesetMeteor\Play\MeteorPlayfield.h" />
