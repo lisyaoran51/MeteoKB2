@@ -285,7 +285,7 @@ int SimpleSmDecoder::handleNoteControlPoints(Sm<Event>* sm, string & line)
 
 
 		if (pitchInt >= 0)
-			LOG(LogLevel::Depricated) << "int SimpleSmDecoder::handleNoteControlPoints() : Note [" << pitchInt << "] at [" << time << "] volume [" << volume / 128.f << "].";
+			LOG(LogLevel::Debug) << "int SimpleSmDecoder::handleNoteControlPoints() : Note [" << pitchInt << "] at [" << time << "] volume [" << volume / 128.f << "].";
 
 
 		sm->GetEvents()->push_back(newMarkControlPoint);
