@@ -79,6 +79,8 @@ int MeteoGame::TriggerOnDisconnect()
 
 int MeteoGame::SetConnectState()
 {
+	if (!isBluetoothConnected)
+		return -1;
 
 	LOG(LogLevel::Debug) << "MeteoGame::SetConnectState() : set fading light ring.";
 	FadeLightRingPanelMessage* fadeLightRingPanelMessage = new FadeLightRingPanelMessage(1.0f);
@@ -132,8 +134,8 @@ int MeteoGame::LoadOnComplete()
 
 int MeteoGame::onConnect()
 {
-	SetConnectState();
 	isBluetoothConnected = true;
+	SetConnectState();
 	SampleChannel* sampleChannel = audioManager->GetSampleManager()->GetSimpleSampleChannel("welcome.mp3");
 	sampleChannel->Play();
 
