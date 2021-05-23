@@ -127,6 +127,7 @@ int ScoreProcessor::addUpJudgementScore(Judgement * judgement)
 		if (combo->GetValue() > highestCombo->GetValue()) {
 			highestCombo->SetValue(combo->GetValue());
 		}
+		hits++;
 		break;
 	}
 
@@ -139,7 +140,6 @@ int ScoreProcessor::addUpJudgementScore(Judgement * judgement)
 
 	score->SetValue(score->GetValue() + judgement->GetResultScore());	// 最後結算用的成績，以後可以在這邊做依些額外權重加乘
 
-	hits++;
 	
 	LOG(LogLevel::Depricated) << "ScoreProcessor::addUpJudgementScore : add score [" << judgement->GetResultScore() << "], total score [" 
 		<< baseScore << "], song max score [" << maxScore << "].";
