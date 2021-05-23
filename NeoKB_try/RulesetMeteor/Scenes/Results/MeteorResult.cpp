@@ -661,6 +661,8 @@ int MeteorResult::onEntering(Scene * lastScene)
 	}, "PostRlayRecordSuccess");
 
 	communicationAccess->Queue(postRecordRequest);
-	
+
+	Exit();
+
 	return 0;
 }
