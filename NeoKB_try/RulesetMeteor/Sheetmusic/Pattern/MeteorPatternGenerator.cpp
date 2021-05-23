@@ -467,7 +467,7 @@ Pattern * MeteorPatternGenerator::generateNoteControlPoint(vector<Event*>* es, N
 	EruptEffect* erupt = new EruptEffect(
 		int(pitch),
 		0,
-		cloned->GetStartTime() - fallTime,
+		cloned->GetStartTime(),// - fallTime,
 		fallTime,
 		fallSpeed
 	);
