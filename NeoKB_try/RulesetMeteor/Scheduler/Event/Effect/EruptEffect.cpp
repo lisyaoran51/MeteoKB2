@@ -29,6 +29,11 @@ int EruptEffect::SetTargetHeight(int tHeight)
 	return 0;
 }
 
+int EruptEffect::GetTargetHeight()
+{
+	return targetHeight;
+}
+
 int EruptEffect::AdjustSpeed(float sp)
 {
 	if (!isSpeedAdjustable) {

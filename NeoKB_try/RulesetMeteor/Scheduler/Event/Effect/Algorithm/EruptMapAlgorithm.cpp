@@ -78,8 +78,10 @@ int EruptMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper<EruptEffe
 		return 0;
 	}(width, height, m);
 
+	EruptEffect* effect = dynamic_cast<EruptEffect*>(em->GetEvent());
+
 	// 目前流星位置：height - speed * currentTime 
-	MTO_FLOAT meteorPos = speed * (currentTime - startTime);// - whiteKeyTargetHeight;//height;
+	MTO_FLOAT meteorPos = speed * (currentTime - startTime) + height - effect->GetTargetHeight() - 1;// - whiteKeyTargetHeight;//height;
 	
 	LOG(LogLevel::Depricated) << "EruptMapGenerateAlgorithm::ImplementGenerate : meteorPos = " << meteorPos << ", current time = " << currentTime << ", speed = " << speed;
 	// 公式: -256*y + 256 

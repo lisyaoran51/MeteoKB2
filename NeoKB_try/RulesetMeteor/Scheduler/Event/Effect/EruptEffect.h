@@ -50,6 +50,8 @@ namespace Effects {
 
 		int SetTargetHeight(int tHeight);
 
+		int GetTargetHeight();
+
 		/// <summary>
 		/// 必須要先設SetTargetHeight，之後才可以adjust speed，不然會跳錯誤，因為沒有target height，會無法換算開始時間
 		///	</summary>
