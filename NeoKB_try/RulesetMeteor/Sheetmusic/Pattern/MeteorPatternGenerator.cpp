@@ -468,7 +468,7 @@ Pattern * MeteorPatternGenerator::generateNoteControlPoint(vector<Event*>* es, N
 		int(pitch),
 		0,
 		cloned->GetStartTime() - fallTime,
-		fallLifeTime,
+		fallTime,
 		fallSpeed
 	);
 	erupt->SetTargetHeight(cloned->IsWhiteKey() ? targetHeight : blackKeyTargetHeight);

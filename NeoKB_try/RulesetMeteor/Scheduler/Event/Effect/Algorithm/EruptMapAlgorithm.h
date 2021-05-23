@@ -57,6 +57,7 @@ namespace Algorithms{
 
 		int fallLength;
 		MTO_FLOAT fallBrightness;
+		int whiteKeyTargetHeight;
 
 		/// <summary>
 		/// 把evnet的狀態轉成圖案
