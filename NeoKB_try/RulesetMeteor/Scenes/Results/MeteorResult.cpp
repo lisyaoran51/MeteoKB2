@@ -597,7 +597,21 @@ int MeteorResult::onEntering(Scene * lastScene)
 	LOG(LogLevel::Debug) << "MeteorResult::onEntering : Set Message Over.";
 
 	outputManager->PushMessage(scoreMessage);
-	
+
+	LOG(LogLevel::Debug) << "MeteorResult::onEntering : Hit Amounts: [" << score->hits << "].";
+	LOG(LogLevel::Debug) << "MeteorResult::onEntering : Max Hit Amounts: [" << score->maxHits << "].";
+	LOG(LogLevel::Debug) << "MeteorResult::onEntering : Score: [" << score->score << "].";
+	LOG(LogLevel::Debug) << "MeteorResult::onEntering : Max Score: [" << score->maxScore << "].";
+	LOG(LogLevel::Debug) << "MeteorResult::onEntering : Accuracy: [" << int(score->accuracy * 10000) << "(" << score->accuracy << ")].";
+	LOG(LogLevel::Debug) << "MeteorResult::onEntering : Combo: [" << score->combo << "].";
+
+	LOG(LogLevel::Debug) << "MeteorResult::onEntering : Miss: [" << score->hitResults[HitResult::Miss] << "].";
+	LOG(LogLevel::Debug) << "MeteorResult::onEntering : Bad: [" << score->hitResults[HitResult::Bad] << "].";
+	LOG(LogLevel::Debug) << "MeteorResult::onEntering : Ok: [" << score->hitResults[HitResult::Ok] << "].";
+	LOG(LogLevel::Debug) << "MeteorResult::onEntering : Good: [" << score->hitResults[HitResult::Good] << "].";
+	LOG(LogLevel::Debug) << "MeteorResult::onEntering : Great: [" << score->hitResults[HitResult::Great] << "].";
+	LOG(LogLevel::Debug) << "MeteorResult::onEntering : Perfect: [" << score->hitResults[HitResult::Perfect] << "].";
+
 
 
 	/* ÁÙ¨S¼g¦n
