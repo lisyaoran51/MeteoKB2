@@ -628,7 +628,7 @@ int MeteorResult::onEntering(Scene * lastScene)
 	//MeteoFileBluetoothMessage* recordFileMessage = new MeteoFileBluetoothMessage(MeteoCommand::PlayRecordFileSegment, recordFilePath);
 	//outputManager->PushMessage(recordFileMessage);
 
-	/*
+	
 
 	MeteoContextBluetoothMessage* postRecordMessage = new MeteoContextBluetoothMessage(MeteoCommand::PostPlayRecord);
 	json requestContext;
@@ -664,7 +664,7 @@ int MeteorResult::onEntering(Scene * lastScene)
 
 	communicationAccess->Queue(postRecordRequest);
 
-	*/
+	
 
 	Exit();
 

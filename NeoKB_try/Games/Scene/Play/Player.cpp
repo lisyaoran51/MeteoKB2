@@ -41,6 +41,7 @@ int Player::load()
 
 int Player::load(MeteoConfigManager* m, Instrument* instru, MeteoGame * g)
 {
+	meteoGame = g;
 	LOG(LogLevel::Info) << "Player::load : start loading the player and reading the sm and ruleset from working sm.";
 
 	WorkingSm* workingSmValue = workingSm.GetValue();
