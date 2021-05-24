@@ -158,9 +158,9 @@ int SongSelect::selectionChanged(SmInfo * sheetmusicInfo)
 		// 這邊先加mod，之後要拿掉，擺在on select(on command)
 		workingSm.GetValue()->GetModifiers()->SetValue(new vector<Modifier*>());
 		//workingSm.GetValue()->GetModifiers()->GetValue()->push_back(new AutoPedalModifier());
-		//workingSm.GetValue()->GetModifiers()->GetValue()->push_back(new MusicGameModifier());
+		workingSm.GetValue()->GetModifiers()->GetValue()->push_back(new MusicGameModifier());
 		//workingSm.GetValue()->GetModifiers()->GetValue()->push_back(new MeteorDifficultyModifier(SmDifficultyDifficulty::Easy));
-		workingSm.GetValue()->GetModifiers()->GetValue()->push_back(new RepeatPracticeModifier(2, 2));
+		//workingSm.GetValue()->GetModifiers()->GetValue()->push_back(new RepeatPracticeModifier(2, 2));
 		//WhiteKeyTargetLineModifier* modifier = new WhiteKeyTargetLineModifier();
 		//modifier->SetValue(10, 0);
 		//workingSm.GetValue()->GetModifiers()->GetValue()->push_back(modifier);
