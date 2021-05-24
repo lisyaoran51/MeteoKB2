@@ -402,7 +402,7 @@ int Piano::OnDirectKeyDown(pair<PianoAction, int> action)
 		return -1;
 
 	LOG(LogLevel::Depricated) << "Piano::OnKeyDown() : get fake input." << int(action.first);
-	LOG(LogLevel::Debug) << "Piano::OnKeyDown() : get key [" << int(action.first) << "] on velocity [" << action.second << "]";
+	LOG(LogLevel::Depricated) << "Piano::OnKeyDown() : get key [" << int(action.first) << "] on velocity [" << action.second << "]";
 
 	//getSamples()->at(action.first)->Play();
 	if (getSamples()->find(action.first) != getSamples()->end()) {
