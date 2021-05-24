@@ -290,7 +290,7 @@ int Host::setupConfig()
 	frameworkConfigManager->Set(FrameworkSetting::UpdateRate, 100);
 	frameworkConfigManager->Set(FrameworkSetting::AudioUpdateRate, 1000);
 	frameworkConfigManager->Set(FrameworkSetting::InputRate, 1000);
-	frameworkConfigManager->Set(FrameworkSetting::SongTitle, string("HitHanabi"));
+	frameworkConfigManager->Set(FrameworkSetting::SongTitle, string("AlwaysWithMe"));
 
 	dependencies->Cache<FrameworkConfigManager>(frameworkConfigManager);
 	
