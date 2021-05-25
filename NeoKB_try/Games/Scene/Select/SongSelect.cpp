@@ -6,6 +6,7 @@
 #include "../../../RulesetMeteor/Ruleset/Modifiers/RepeatPracticeModifier.h"
 #include "../../../RulesetMeteor/Ruleset/Modifiers/MeteorDifficultyModifier.h"
 #include "../../../RulesetMeteor/Ruleset/Modifiers/WhiteKeyTargetLineModifier.h"
+#include "../../../RulesetMeteor/Ruleset/Modifiers/HandModifier.h"
 #include "../../../Util/DataStructure/FileSegmentMap.h"
 #include <stdio.h>
 #include "../../../Util/StringSplitter.h"
@@ -159,7 +160,8 @@ int SongSelect::selectionChanged(SmInfo * sheetmusicInfo)
 		workingSm.GetValue()->GetModifiers()->SetValue(new vector<Modifier*>());
 		//workingSm.GetValue()->GetModifiers()->GetValue()->push_back(new AutoPedalModifier());
 		workingSm.GetValue()->GetModifiers()->GetValue()->push_back(new MusicGameModifier());
-		//workingSm.GetValue()->GetModifiers()->GetValue()->push_back(new MeteorDifficultyModifier(SmDifficultyDifficulty::Easy));
+		workingSm.GetValue()->GetModifiers()->GetValue()->push_back(new MeteorDifficultyModifier(SmDifficultyDifficulty::Easy));
+		workingSm.GetValue()->GetModifiers()->GetValue()->push_back(new HandModifier(SmDifficultyHandType::Right));
 		//workingSm.GetValue()->GetModifiers()->GetValue()->push_back(new RepeatPracticeModifier(2, 2));
 		//WhiteKeyTargetLineModifier* modifier = new WhiteKeyTargetLineModifier();
 		//modifier->SetValue(10, 0);
