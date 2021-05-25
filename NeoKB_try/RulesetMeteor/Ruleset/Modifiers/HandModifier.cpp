@@ -48,7 +48,7 @@ bool HandModifier::filterEventProcessorsByHandType(EventProcessor<Event>* eventP
 
 	Event* eventToFilter = sourceEvent == nullptr ? eventProcessor->GetEvent() : sourceEvent;
 
-	bool isInstrumentEvent = dynamic_cast<InstrumentEvent*>(sourceEvent) != nullptr ? true : false;
+	bool isInstrumentEvent = dynamic_cast<InstrumentEvent*>(eventProcessor->GetEvent()) != nullptr ? true : false;
 
 	if (eventToFilter && !isInstrumentEvent) {
 		PlayableControlPoint* playableControlPoint = dynamic_cast<PlayableControlPoint*>(eventToFilter);
