@@ -1,9 +1,11 @@
 #include "HandModifier.h"
 
 #include "../../../Games/Scheduler/Event/ControlPoints/PlayableControlPoint.h"
+#include "../../../Games/Scheduler/Event/InstrumentEvents/InstrumentEvent.h"
 
 using namespace Meteor::Rulesets::Modifiers;
 using namespace Games::Schedulers::Events::ControlPoints;
+using namespace Games::Schedulers::Events::InstrumentEvents;
 
 
 HandModifier::HandModifier() : RegisterType("HandModifier")
@@ -46,7 +48,9 @@ bool HandModifier::filterEventProcessorsByHandType(EventProcessor<Event>* eventP
 
 	Event* eventToFilter = sourceEvent == nullptr ? eventProcessor->GetEvent() : sourceEvent;
 
-	if (eventToFilter) {
+	bool isInstrumentEvent = dynamic_cast<InstrumentEvent*>(sourceEvent) != nullptr ? true : false;
+
+	if (eventToFilter && !isInstrumentEvent) {
 		PlayableControlPoint* playableControlPoint = dynamic_cast<PlayableControlPoint*>(eventToFilter);
 		if (playableControlPoint) {
 			switch (handType) {
