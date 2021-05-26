@@ -165,7 +165,8 @@ void MeteoGattClientV1::Init(std::map<std::string, std::function<std::string()>>
 		LOG(LogLevel::Error) << "MeteoGattClientV1::Init() : failed to create gatt database";
 	}
 
-	m_server = bt_gatt_server_new(m_db, m_att, m_mtu, 0);
+	//m_server = bt_gatt_server_new(m_db, m_att, m_mtu, 0); // ³o¬Obluez-5.43ª©
+	m_server = bt_gatt_server_new(m_db, m_att, m_mtu);
 	if (!m_server)
 	{
 		LOG(LogLevel::Error) << "MeteoGattClientV1::Init() : failed to create gatt server";
