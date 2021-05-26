@@ -1,19 +1,25 @@
-以上檔案來自bluez-5.43，自行compile後所產出，詳細修改內容請看
-https://github.com/lisyaoran51/GattServerTest
+legacy:
 
-編譯方式參考
-https://github.com/gladish/bleconfd
+	以上檔案來自bluez-5.43，自行compile後所產出，詳細修改內容請看
+	https://github.com/lisyaoran51/GattServerTest
 
-修改內容：
-在att.c最後加一行 int bt_att_write_queue_size(struct bt_att *att){
+	編譯方式參考
+	https://github.com/gladish/bleconfd
 
-return queue_length(att->write_queue);
-}
+	修改內容：
+	在att.c最後加一行 int bt_att_write_queue_size(struct bt_att *att){
 
-att.h加一行 int bt_att_write_queue_size(struct bt_att *att);
+		return queue_length(att->write_queue);
+	}
 
-在gatt-server.c加一行 int bt_gatt_server_get_write_queue_length(struct bt_gatt_server *server){ return bt_att_write_queue_size(server->att); }
+	att.h加一行 int bt_att_write_queue_size(struct bt_att *att);
 
-在gatt-server.h加一行 int bt_gatt_server_get_write_queue_length(struct bt_gatt_server *server);
+	在gatt-server.c加一行 int bt_gatt_server_get_write_queue_length(struct bt_gatt_server *server){ return bt_att_write_queue_size(server->att); }
 
-然後重新compile bluez，再拿他的libshared-mainloop.a和uuid.o出來用
+	在gatt-server.h加一行 int bt_gatt_server_get_write_queue_length(struct bt_gatt_server *server);
+
+	然後重新compile bluez，再拿他的libshared-mainloop.a和uuid.o出來用
+	
+5/26:
+	
+	改回原版bluez-5.37，不使用額外的功能

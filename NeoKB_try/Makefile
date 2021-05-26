@@ -102,7 +102,7 @@ INCLUDE = -IFramwork -IFramework/Allocation -IFramework/Allocation/Hierachal -IF
 -IUtil -IUtil/DataStructure \
 \
 -IThirdParty/Bass \
--IThirdParty/bluez/bluez \
+-IThirdParty/bluez/bluez-5.37 \
 \
 -IDesktop -IDesktop/Devices -IDesktop/Devices/Gatt -IDesktop/Hosts \
 \

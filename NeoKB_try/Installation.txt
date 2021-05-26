@@ -1,0 +1,28 @@
+
+1. 燒錄2018-11-13-raspbian-stretch-lite.zip
+
+2. 下載linux_pi3.tar (linux kernel)
+
+3. tar xvf linux_pi3.tar linux
+
+4. cd /lib/modules/$uname
+
+5. sudo ln -s /home/pi/linux build
+
+6. git clone https://github.com/lisyaoran51/MeteoKB2
+
+7. wget http://www.kernel.org/pub/linux/bluetooth/bluez-5.37.tar.xz
+
+8. tar xvf bluez-5.37.tar.xz
+
+9. sudo apt-get install -y libusb-dev libdbus-1-dev libglib2.0-dev libudev-dev libical-dev libreadline-dev
+
+10. ./configure --enable-library
+
+11. make
+
+12. sudo make install
+
+13. 找出/home/pi/bluez-5.37/lib/.libs/uuid.o和/home/pi/bluez-5.37/src/.libs/libshared-mainloop.a，可以用於compile
+
+14. 
