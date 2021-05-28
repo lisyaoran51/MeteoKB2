@@ -45,6 +45,7 @@ int MainMenu::load(Instrument * i)
 
 	powerPanel = new PowerPanel();
 
+
 	powerPanel->PowerOffRequest = [=]() {
 		Resume(songSelect);
 		songSelect = nullptr;
@@ -99,6 +100,12 @@ int MainMenu::load(Instrument * i)
 	};
 
 	AddChild(powerPanel);
+
+
+	// 開機時打開燈光
+	IndicatorLightPanelMessage* indicatorLightMessage = new IndicatorLightPanelMessage(0, true);
+
+	outputManager->PushMessage(indicatorLightMessage);
 
 	return 0;
 }
