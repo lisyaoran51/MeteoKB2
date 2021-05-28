@@ -25,4 +25,24 @@
 
 13. 找出/home/pi/bluez-5.37/lib/.libs/uuid.o和/home/pi/bluez-5.37/src/.libs/libshared-mainloop.a，可以用於compile
 
-14. 
+14. sudo apt install libbluetooth-dev
+
+15. 複製bass library，sudo cp libbass* /usr/local/lib/(compile用)，sudo cp libbass* /usr/lib/(執行時使用share library用)
+
+16. 在/boot/config.txt中加入dtoverlay=pwm-2chan,pin=18,func=2,pin2=13,func2=4
+
+17. 如果要重compile linux kernel:(https://www.raspberrypi.org/forums/viewtopic.php?t=57401)\
+	a. FIRMWARE_HASH=$(zgrep "* firmware as of" /usr/share/doc/raspberrypi-bootloader/changelog.Debian.gz | head -1 | awk '{ print $5 }')\
+	b. KERNEL_HASH=$(wget https://raw.github.com/raspberrypi/firmware/$FIRMWARE_HASH/extra/git_hash -O -)
+	c. git clone --depth 1 git://github.com/raspberrypi/linux.git
+	d. git checkout $KERNEL_HASH
+	e. sudo apt install git bc bison flex libssl-dev make
+	f. cd linux
+	g. KERNEL=kernel7(pi3)，如果是pi0就用 KERNEL=kernel
+	h. make bcm2709_defconfig(pi3)，如果是pi0就用 make bcmrpi_defconfig
+	i. make -j4 zImage modules dtbs
+	j. sudo make modules_install
+
+18. 在Driver/LedDeiver資料夾make，然後裝上driver: sh driver.sh
+
+19. sudo raspi-config -> Interfacing Options -> I2C enable
