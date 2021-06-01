@@ -3055,3 +3055,28 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 	沒有玩遊戲的時候不能條八度
 	
 	遊戲音樂全都播，只有燈光和hit object被難度影響
+	
+5/27
+	重新compile kernel後，插入模組時跳這些錯誤
+	Invalid module format
+	看dmesg以後看到meteo_light_board_v1: disagrees about version of symbol module_layout
+	查看modinfo後發現compile版號錯誤
+	 modinfo meteo_light_board_v1.ko
+	 vermagic:       5.10.39-v7+ SMP mod_unload modversions ARMv7 p2v8
+	
+	結果沒有解決compile kernel的問題，直接用已經compile好的來用
+	
+5/29
+	要把test gatt server的設定移過來
+
+5/31
+	討論完後端後，決定要做easy-only、hard-only、leftonly、right-only等等額外的格式
+	
+6/1
+	還在跟斌輪調整藍芽傳檔案的問題，部過傳一班資料都沒什麼問題
+	
+	來開始寫複合式譜檔
+	
+	把手和難度寫成一個HandDifficultyModifier
+	
+	HandDifficultyModifier改到一半

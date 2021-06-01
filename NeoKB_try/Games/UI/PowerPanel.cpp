@@ -21,6 +21,8 @@ int PowerPanel::load(OutputManager * o)
 
 	isPresent = true;
 
+
+
 	return 0;
 }
 

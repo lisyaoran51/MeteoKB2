@@ -101,6 +101,11 @@ namespace Sheetmusics {
 		/// </summary>
 		bool hasPedalData = false;
 
+		/// <summary>
+		/// 這份譜是不是複合式樂譜
+		/// </summary>
+		bool isComposite = false;
+
 		SmHandType smHandType = SmHandType::None;
 
 	};

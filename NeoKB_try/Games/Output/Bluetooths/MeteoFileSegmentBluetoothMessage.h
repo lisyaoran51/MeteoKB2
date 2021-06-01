@@ -18,6 +18,11 @@ namespace Bluetooths {
 		/// </summary>
 		MeteoFileSegmentBluetoothMessage(MeteoCommand mCommand, char* fSegment, int fSegmentSize, string fName, int o, int a);
 
+		/// <summary>
+		/// destructor會把file segment清掉，所以外面不要清
+		/// </summary>
+		~MeteoFileSegmentBluetoothMessage();
+
 		virtual BluetoothMessage* Clone();
 
 		virtual int SetContext(char* c, int cSize);

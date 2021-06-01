@@ -9,7 +9,7 @@ using namespace Util::DataStructure;
 
 FileSegmentMap::FileSegmentMap(int sSize)
 {
-	segmentSize = sSize;
+	maxSegmentSize = sSize;
 }
 
 FileSegmentMap::~FileSegmentMap()
@@ -43,9 +43,14 @@ int FileSegmentMap::GetFileSegment(int index, char ** fileSegment)
 	return 0;
 }
 
-int FileSegmentMap::GetSegmentSize()
+int FileSegmentMap::GetMaxSegmentSize()
 {
-	return segmentSize;
+	return maxSegmentSize;
+}
+
+int FileSegmentMap::GetSegmentAmount()
+{
+	return segmentAmount;
 }
 
 bool FileSegmentMap::CheckFullFilled()
@@ -58,7 +63,7 @@ bool FileSegmentMap::CheckFullFilled()
 int FileSegmentMap::WriteFile(fstream * fStream)
 {
 	for (int i = 0; i < segmentAmount; i++) {
-		fStream->write(fileSegmentMap[i].first, fileSegmentMap[i].second * sizeof(char));
+		fStream->write(fileSegmentMap[i].first, fileSegmentMap[i].second * sizeof(char*));
 	}
 
 	//for (map<int, pair<char*, int>>::const_iterator it = fileSegmentMap.begin(); it != fileSegmentMap.end(); ++it)
@@ -78,7 +83,8 @@ int FileSegmentMap::ReadFile(fstream * fStream)
 	fileSize = fStream->tellg() - fileSize;
 
 	/* 計算segment數量 */
-	segmentAmount = fileSize / segmentSize + (fileSize % segmentSize > 0 ? 1 : 0);
+	segmentAmount = fileSize / maxSegmentSize + fileSize % maxSegmentSize > 0 ? 1 : 0;
+	//segmentAmount = fileSize / segmentSize + (fileSize % segmentSize > 0 ? 1 : 0);
 
 	/* 開始讀黨 */
 	fStream->seekp(0, ios_base::beg);
@@ -87,10 +93,10 @@ int FileSegmentMap::ReadFile(fstream * fStream)
 		char* buffer = nullptr;
 		int bufferSize = 0;
 
-		if (i == segmentAmount - 1 && fileSize % segmentSize != 0)
-			bufferSize = fileSize % segmentSize;
+		if (i == segmentAmount - 1 && fileSize % maxSegmentSize != 0)
+			bufferSize = fileSize % maxSegmentSize;
 		else
-			bufferSize = segmentSize;
+			bufferSize = maxSegmentSize;
 
 		buffer = new char[bufferSize];
 		fStream->read(buffer, bufferSize);
@@ -98,5 +104,15 @@ int FileSegmentMap::ReadFile(fstream * fStream)
 
 	}
 
+	return 0;
+}
+
+int FileSegmentMap::Erase()
+{
+	for (int i = 0; i < segmentAmount; i++) {
+		delete[] fileSegmentMap[i].first;
+	}
+
+	fileSegmentMap.clear();
 	return 0;
 }

@@ -20,6 +20,8 @@ namespace Events{
 
 	class MeteorEventProcessorMaster : public TEventProcessorMaster<MeteorAction>{
 
+		int load();
+
 	public:
 		
 		MeteorEventProcessorMaster();
@@ -55,6 +57,8 @@ namespace Events{
 		int loadAndMapPitches();
 
 		bool matchPitch(HitObject* hObject, MeteorAction meteorAction);
+
+		int filterHiddenNoteEffects(EventProcessor<Event>* eventProcessor);
 
 	};
 

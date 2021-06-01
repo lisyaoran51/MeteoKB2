@@ -236,6 +236,11 @@ namespace Communications{
 		/// 字定義的，被要求終止
 		/// </summary>
 		ExitRequested,
+		/// <summary>
+		/// 字定義的，沒有把檔案轉換出file segment
+		/// </summary>
+		TransferToFileSegmentsFailed,
+
 
 
 	};

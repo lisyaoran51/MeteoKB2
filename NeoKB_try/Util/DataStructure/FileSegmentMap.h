@@ -21,6 +21,10 @@ namespace DataStructure{
 	public:
 
 		FileSegmentMap(int sSize);
+
+		/// <summary>
+		/// destructor不會把file segment給delete掉
+		/// </summary>
 		~FileSegmentMap();
 
 		string fileName;
@@ -39,7 +43,9 @@ namespace DataStructure{
 		/// </summary>
 		int GetFileSegment(int index, char** fileSegment);
 
-		int GetSegmentSize();
+		int GetMaxSegmentSize();
+
+		int GetSegmentAmount();
 
 		/// <summary>
 		/// 只會知道每一個segment之間有沒有空缺，部會之道segment總數對不對
@@ -56,9 +62,16 @@ namespace DataStructure{
 		/// </summary>
 		int ReadFile(fstream* fStream);
 
+		/// <summary>
+		/// 清除與delete所有file segment
+		/// </summary>
+		int Erase();
+
 	protected:
 
-		int segmentSize;
+		int maxSegmentSize;
+
+
 
 	};
 

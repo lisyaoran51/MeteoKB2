@@ -4,6 +4,7 @@
 #include <utility>
 #include "../../../Games/Scheduler/Event/ControlPoints/NoteControlPointHitObject.h"
 #include "../../../Games/Output/Bluetooths/MeteoContextBluetoothMessage.h"
+#include "../../../Games/Scheduler/Event/InstrumentEvents/InstrumentEvent.h"
 
 // debug¥Î
 #include <chrono>
@@ -17,12 +18,23 @@ using namespace Meteor::Schedulers::Events::Effects;
 using namespace std;
 using namespace Games::Schedulers::Events::ControlPoints;
 using namespace Games::Output::Bluetooths;
+using namespace Games::Schedulers::Events::InstrumentEvents;
 
 
 
+
+int MeteorEventProcessorMaster::load()
+{
+	LOG(LogLevel::Depricated) << "MeteorEventProcessorMaster::load() : add hidden note effect filter.";
+	eventProcessorFilter->AddFilterCallback(bind(&MeteorEventProcessorMaster::filterHiddenNoteEffects, this, placeholders::_1));
+
+
+	return 0;
+}
 
 MeteorEventProcessorMaster::MeteorEventProcessorMaster() : RegisterType("MeteorEventProcessorMaster")
 {
+	registerLoad(bind((int(MeteorEventProcessorMaster::*)())&MeteorEventProcessorMaster::load, this));
 }
 
 int MeteorEventProcessorMaster::ChangePitchState(MeteoPianoPitchState pState)
@@ -471,4 +483,24 @@ bool MeteorEventProcessorMaster::matchPitch(HitObject * hObject, MeteorAction me
 	}
 
 	return false;
+}
+
+int MeteorEventProcessorMaster::filterHiddenNoteEffects(EventProcessor<Event>* eventProcessor)
+{
+	bool isInstrumentEvent = dynamic_cast<InstrumentEvent*>(eventProcessor->GetEvent()) != nullptr ? true : false;
+
+	if (isInstrumentEvent)
+		return true;
+
+
+	Event* sourceEvent = eventProcessor->GetEvent()->GetSourceEvent();
+
+	Event* eventToFilter = sourceEvent == nullptr ? eventProcessor->GetEvent() : sourceEvent;
+
+	if (dynamic_cast<PlayableControlPoint*>(eventToFilter))
+	if (dynamic_cast<PlayableControlPoint*>(eventToFilter)->GetHandType() == HandType::Hidden){
+		return false;
+	}
+
+	return 0;
 }

@@ -60,6 +60,12 @@ int MeteoContextBluetoothMessage::SetAccessType(MeteoBluetoothMessageAccessType 
 		else if (contextSize > 0) {
 			contextInJson.parse(context);
 		}
+		else {
+			string temp = "{}";
+			context = new char[temp.length() + 1];
+			strcpy(context, temp.c_str());
+			contextSize = temp.length() + 1;
+		}
 
 	}
 

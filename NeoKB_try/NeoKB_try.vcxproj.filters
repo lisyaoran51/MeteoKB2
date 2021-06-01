@@ -2133,9 +2133,18 @@
     <ClCompile Include="Games\Output\Panels\ChangeSpeedOutputer.cpp">
       <Filter>來源檔案\Games\Output\Panels</Filter>
     </ClCompile>
+    <ClCompile Include="Games\Output\Bluetooths\MeteoAckFileSegmentBluetoothMessage.cpp">
+      <Filter>來源檔案\Games\Output\Bluetooths</Filter>
+    </ClCompile>
+    <ClCompile Include="RulesetMeteor\Ruleset\Modifiers\HandDifficultyModifier.cpp">
+      <Filter>來源檔案\RulesetMeteor\Ruleset\Modifiers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="DailyLog.txt">
+      <Filter>資源檔</Filter>
+    </Text>
+    <Text Include="Installation.txt">
       <Filter>資源檔</Filter>
     </Text>
   </ItemGroup>
@@ -3552,6 +3561,12 @@
     </ClInclude>
     <ClInclude Include="Games\Output\Panels\ChangeSpeedOutputer.h">
       <Filter>標頭檔\Games\Output\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Output\Bluetooths\MeteoAckFileSegmentBluetoothMessage.h">
+      <Filter>標頭檔\Games\Output\Bluetooths</Filter>
+    </ClInclude>
+    <ClInclude Include="RulesetMeteor\Ruleset\Modifiers\HandDifficultyModifier.h">
+      <Filter>標頭檔\RulesetMeteor\Ruleset\Modifiers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -48,28 +48,37 @@ bool HandModifier::filterEventProcessorsByHandType(EventProcessor<Event>* eventP
 
 	Event* eventToFilter = sourceEvent == nullptr ? eventProcessor->GetEvent() : sourceEvent;
 
-	bool isInstrumentEvent = dynamic_cast<InstrumentEvent*>(eventProcessor->GetEvent()) != nullptr ? true : false;
+	if (dynamic_cast<PlayableControlPoint*>(eventToFilter))
+	/* 單一譜檔 */
+	if (dynamic_cast<PlayableControlPoint*>(eventToFilter)->GetHandType() <= HandType::All) {
 
-	if (eventToFilter && !isInstrumentEvent) {
-		PlayableControlPoint* playableControlPoint = dynamic_cast<PlayableControlPoint*>(eventToFilter);
-		if (playableControlPoint) {
-			switch (handType) {
-			case SmDifficultyHandType::Left:
-				if (playableControlPoint->GetHandType() == HandType::RightEasy ||
-					playableControlPoint->GetHandType() == HandType::RightOther) {
-					return false;
-				}
-				break;
+		bool isInstrumentEvent = dynamic_cast<InstrumentEvent*>(eventProcessor->GetEvent()) != nullptr ? true : false;
 
-			case SmDifficultyHandType::Right:
-				if (playableControlPoint->GetHandType() == HandType::LeftEasy ||
-					playableControlPoint->GetHandType() == HandType::LeftOther) {
-					return false;
+		if (eventToFilter && !isInstrumentEvent) {
+			PlayableControlPoint* playableControlPoint = dynamic_cast<PlayableControlPoint*>(eventToFilter);
+			if (playableControlPoint) {
+				switch (handType) {
+				case SmDifficultyHandType::Left:
+					if (playableControlPoint->GetHandType() == HandType::RightEasy ||
+						playableControlPoint->GetHandType() == HandType::RightOther) {
+						return false;
+					}
+					break;
+
+				case SmDifficultyHandType::Right:
+					if (playableControlPoint->GetHandType() == HandType::LeftEasy ||
+						playableControlPoint->GetHandType() == HandType::LeftOther) {
+						return false;
+					}
+					break;
 				}
-				break;
 			}
 		}
-	}
+		/* 複合式譜檔 */
+		else {
 
-	return true;
+		}
+
+		return true;
+	}
 }

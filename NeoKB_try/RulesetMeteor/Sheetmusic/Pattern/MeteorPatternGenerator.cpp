@@ -419,10 +419,14 @@ int MeteorPatternGenerator::PostProcess()
 Pattern * MeteorPatternGenerator::generateNoteControlPoint(vector<Event*>* es, NoteControlPoint * note)
 {
 	NoteControlPoint * cloned = dynamic_cast<NoteControlPoint*>(note->Clone());
+
+	es->push_back(cloned);
+
 	/* 在pattern generator消滅實消滅，或是converter跑完消滅 */
 	Pattern* pattern = new Pattern(cloned);
 
 	LOG(LogLevel::Finer) << "int MeteorSmConverter::generateNoteControlPoint(vector<Event*>*, Event*) : Start converting [" << static_cast<int>(cloned->GetPitch()) << "," << note->GetStartTime() << "] to pattern...";
+
 
 	/* 如果這個音的狀態是隱藏，就直接返回 */
 	if(static_cast<int>(cloned->GetHandType()) < 0)
@@ -436,9 +440,50 @@ Pattern * MeteorPatternGenerator::generateNoteControlPoint(vector<Event*>* es, N
 		return pattern;
 	}
 
+	/* ---------- 聲音效果 ---------- */
+
 	float volume = cloned->GetVolume() <= 0 || cloned->GetVolume() > 1 ? defaultVolume : cloned->GetVolume();
 
 
+	PianoSoundEvent* pianoSoundEventDown = new PianoSoundEvent(
+		pair<Pitch, float>(pitch, volume),
+		cloned->GetStartTime(),
+		0
+	);
+	pianoSoundEventDown->SetSourceEvent(cloned);
+	LOG(LogLevel::Depricated) << "int MeteorSmConverter::Generate(vector<Event*>*, Event*) : Generate sound at [" << (int)pitch << "], start time [" << cloned->GetStartTime() << "] volume [" << volume << "].";
+
+
+	PianoSoundEvent* pianoSoundEventUp = nullptr;
+
+	if (cloned->GetLifeTime() > 0) {
+		pianoSoundEventUp = new PianoSoundEvent(
+			pair<Pitch, float>(pitch, 0),
+			cloned->GetStartTime() + cloned->GetLifeTime(),
+			0
+		);
+	}
+	else {
+		// TODO: 這邊這樣寫可能播起來會很難聽，要設一下default life time
+		// 要好聽可能要到post process的時候去計算小節來決定按下時間，但這個很難寫
+		pianoSoundEventUp = new PianoSoundEvent(
+			pair<Pitch, float>(pitch, 0),
+			cloned->GetStartTime() + 0.1,
+			0
+		);
+	}
+	pianoSoundEventUp->SetSourceEvent(cloned);
+
+
+	pattern->Add(pianoSoundEventDown);
+	pattern->Add(pianoSoundEventUp);
+
+	es->push_back(pianoSoundEventDown);
+	es->push_back(pianoSoundEventUp);
+	
+
+
+	/* ---------- 燈光效果 ---------- */
 
 	// 公式： (鍵盤高度-打擊點高度) / 速度
 	MTO_FLOAT fallTime = MTO_FLOAT(
@@ -475,49 +520,13 @@ Pattern * MeteorPatternGenerator::generateNoteControlPoint(vector<Event*>* es, N
 	erupt->SetMeteorEffectShiftType(meteorEffectShiftType);
 	erupt->SetSourceEvent(cloned);
 
-	PianoSoundEvent* pianoSoundEventDown = new PianoSoundEvent(
-		pair<Pitch, float>(pitch, volume),
-		cloned->GetStartTime(),
-		0
-	);
-	pianoSoundEventDown->SetSourceEvent(cloned);
-	LOG(LogLevel::Depricated) << "int MeteorSmConverter::Generate(vector<Event*>*, Event*) : Generate sound at [" << (int)pitch << "], start time [" << cloned->GetStartTime() << "] volume [" << volume << "].";
-
-
-	PianoSoundEvent* pianoSoundEventUp = nullptr;
-
-	if (cloned->GetLifeTime() > 0) {
-		pianoSoundEventUp = new PianoSoundEvent(
-			pair<Pitch, float>(pitch, 0),
-			cloned->GetStartTime() + cloned->GetLifeTime(),
-			0
-		);
-	}
-	else {
-		// TODO: 這邊這樣寫可能播起來會很難聽，要設一下default life time
-		// 要好聽可能要到post process的時候去計算小節來決定按下時間，但這個很難寫
-		pianoSoundEventUp = new PianoSoundEvent(
-			pair<Pitch, float>(pitch, 0),
-			cloned->GetStartTime() + 0.1,
-			0
-		);
-	}
-	pianoSoundEventUp->SetSourceEvent(cloned);
-
-
-
 
 	pattern->Add(fall);
 	pattern->Add(erupt);
-	pattern->Add(pianoSoundEventDown);
-	pattern->Add(pianoSoundEventUp);
 
-	// 把pattern裡面的event一個一個加進去es裡
-	es->push_back(cloned);
+	
 	es->push_back(fall);
 	es->push_back(erupt);
-	es->push_back(pianoSoundEventDown);
-	es->push_back(pianoSoundEventUp);
 
 	return pattern;
 

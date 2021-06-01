@@ -23,9 +23,16 @@ MeteoFileSegmentBluetoothMessage::MeteoFileSegmentBluetoothMessage(MeteoCommand 
 
 }
 
+MeteoFileSegmentBluetoothMessage::~MeteoFileSegmentBluetoothMessage()
+{
+	delete[] fileSegment;
+}
+
 BluetoothMessage * MeteoFileSegmentBluetoothMessage::Clone()
 {
-	return new MeteoFileSegmentBluetoothMessage(command, fileSegment, fileSegmentSize, fileName, order, amount);
+	char* buffer = new char[fileSegmentSize];
+	memcpy(buffer, fileSegment, fileSegmentSize * sizeof(char));
+	return new MeteoFileSegmentBluetoothMessage(command, buffer, fileSegmentSize, fileName, order, amount);
 }
 
 int MeteoFileSegmentBluetoothMessage::SetContext(char * c, int cSize)

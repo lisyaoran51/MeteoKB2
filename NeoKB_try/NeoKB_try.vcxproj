@@ -100,6 +100,7 @@
     </ClCompile>
     <ClCompile Include="Games\MeteoGameBase.cpp" />
     <ClCompile Include="Games\Output\Bluetooths\Commands\MeteoOutputFileBluetoothCommand.cpp" />
+    <ClCompile Include="Games\Output\Bluetooths\MeteoAckFileSegmentBluetoothMessage.cpp" />
     <ClCompile Include="Games\Output\Bluetooths\MeteoBluetoothMessage.cpp" />
     <ClCompile Include="Games\Output\Bluetooths\MeteoBluetoothOutputer.cpp" />
     <ClCompile Include="Games\Output\Bluetooths\MeteoContextBluetoothMessage.cpp" />
@@ -322,6 +323,7 @@
     <ClCompile Include="RulesetMeteor\Ruleset\MeteorRulesetExecutor.cpp" />
     <ClCompile Include="RulesetMeteor\Ruleset\Modifiers\AutoPedalModifier.cpp" />
     <ClCompile Include="RulesetMeteor\Ruleset\Modifiers\ClockRateModifier.cpp" />
+    <ClCompile Include="RulesetMeteor\Ruleset\Modifiers\HandDifficultyModifier.cpp" />
     <ClCompile Include="RulesetMeteor\Ruleset\Modifiers\MeteorDifficultyModifier.cpp" />
     <ClCompile Include="RulesetMeteor\Ruleset\Modifiers\FallSpeedModifier.cpp" />
     <ClCompile Include="RulesetMeteor\Ruleset\Modifiers\HandModifier.cpp" />
@@ -406,6 +408,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="DailyLog.txt" />
+    <Text Include="Installation.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Desktop\Devices\bcm2835.h" />
@@ -512,6 +515,7 @@
     <ClInclude Include="Games\MeteoGame.h" />
     <ClInclude Include="Games\MeteoGameBase.h" />
     <ClInclude Include="Games\Output\Bluetooths\Commands\MeteoOutputFileBluetoothCommand.h" />
+    <ClInclude Include="Games\Output\Bluetooths\MeteoAckFileSegmentBluetoothMessage.h" />
     <ClInclude Include="Games\Output\Bluetooths\MeteoBluetoothMessage.h" />
     <ClInclude Include="Games\Output\Bluetooths\MeteoBluetoothOutputer.h" />
     <ClInclude Include="Games\Output\Bluetooths\MeteoContextBluetoothMessage.h" />
@@ -787,6 +791,7 @@
     <ClInclude Include="RulesetMeteor\Ruleset\MeteorRulesetExecutor.h" />
     <ClInclude Include="RulesetMeteor\Ruleset\Modifiers\AutoPedalModifier.h" />
     <ClInclude Include="RulesetMeteor\Ruleset\Modifiers\ClockRateModifier.h" />
+    <ClInclude Include="RulesetMeteor\Ruleset\Modifiers\HandDifficultyModifier.h" />
     <ClInclude Include="RulesetMeteor\Ruleset\Modifiers\ManualPedalMdifier.h" />
     <ClInclude Include="RulesetMeteor\Ruleset\Modifiers\MeteorDifficultyModifier.h" />
     <ClInclude Include="RulesetMeteor\Ruleset\Modifiers\FallSpeedModifier.h" />

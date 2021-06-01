@@ -7,6 +7,7 @@
 #include "../../../Util/DataStructure/FileSegmentMap.h"
 #include "../../../Util/StringSplitter.h"
 #include "../../Output/Bluetooths/MeteoFileSegmentBluetoothMessage.h"
+#include "../../Output/Bluetooths/MeteoAckFileSegmentBluetoothMessage.h"
 
 
 using namespace Games::IO::Communications;
@@ -21,6 +22,7 @@ PostBinaryBleRequest::PostBinaryBleRequestMethod::PostBinaryBleRequestMethod(str
 	MeteoBluetoothMessage* gMessage,
 	MeteoCommand ackGetCommand, 
 	MeteoCommand tCommand, 
+	MeteoCommand aTransferCommand,
 	MeteoCommand fCommand, 
 	MeteoCommand rRetransferCommand, 
 	MeteoCommand aFinishCommand)
@@ -29,6 +31,7 @@ PostBinaryBleRequest::PostBinaryBleRequestMethod::PostBinaryBleRequestMethod(str
 
 
 	transferCommand = tCommand;
+	ackTransferCommand = aTransferCommand;
 	finishCommand = fCommand;
 	requestRetransferCommand = rRetransferCommand;
 	ackFinishCommand = aFinishCommand;
@@ -39,6 +42,7 @@ PostBinaryBleRequest::PostBinaryBleRequestMethod::PostBinaryBleRequestMethod(str
 
 int PostBinaryBleRequest::PostBinaryBleRequestMethod::PerformAndWait(BleRequest * thisRequest)
 {
+	// #-- 1 開始
 	PostBinaryBleRequest* thisPostBinaryRequest = dynamic_cast<PostBinaryBleRequest*>(thisRequest);
 
 	/* 抓目前的藍芽mtu */
@@ -129,17 +133,81 @@ int PostBinaryBleRequest::PostBinaryBleRequestMethod::PerformAndWait(BleRequest 
 		delete[] tempFileSegment;
 
 		fileSegmentMessages.push_back(fileSegmentMessage);
-
-		bleAccess->GetBluetoothPhone()->PushOutputMessage(fileSegmentMessage);
 	}
 
-	/* 等待檔案全都丟出去，再送出檢查訊息，請對方檢查是否全部收到 */
-	while (!bleAccess->GetBluetoothPhone()->CheckFileSegmentMessageOutputClear()) {
+	if (fileSegmentMessages.size() == 0) {
+		LOG(LogLevel::Error) << "BleRequest::PostBinaryBleRequestMethod::PerformAndWait() : file segment resolve to no file segment.";
+		throw BleRequestException(BleResponseCode::TransferToFileSegmentsFailed);
+	}
+
+	// #-- 2 丟檔
+
+	/* 這邊要做丟檔案，每丟一個檔案以後要不停檢查是否接到Ack，才能再丟下一個檔案 */
+
+	int tempSendFileSegmentNumber = 0;
+	double transferTempFileSegmentElapsedSeconds = thisPostBinaryRequest->getSectionElapsedSeconds();
+	bleAccess->GetBluetoothPhone()->PushOutputMessage(fileSegmentMessages[0]);
+
+
+	while (1) {
+
 		if (thisPostBinaryRequest->exitRequested) {
 			throw BleRequestException(BleResponseCode::ExitRequested);
 		}
-		// TODO: 如果等太久，就丟exception
+
+		/* 檢查Scene是否還存在，不存在就直接跳出 */
+		if (thisPostBinaryRequest->isCallbackByScene && !SceneMaster::GetInstance().CheckScene(thisPostBinaryRequest->callbackScene))
+		{
+			throw BleRequestException(BleResponseCode::Gone);
+		}
+
+		// 如果太久沒收到ack，就直接丟下一個file segment
+		if (thisPostBinaryRequest->getSectionElapsedSeconds() - transferTempFileSegmentElapsedSeconds > sendFileSegmentTimeout) {
+
+			LOG(LogLevel::Warning) << "BleRequest::PostBinaryBleRequestMethod::PerformAndWait() : no receive ack file segment [" << tempSendFileSegmentNumber << "]. Pass.";
+
+			// 已丟完所有file segment，就直接跳出往下一個步驟
+			if (tempSendFileSegmentNumber == bleBinaryRequestFileSegmentMap.segmentAmount - 1)
+				break;
+
+			tempSendFileSegmentNumber++;
+			transferTempFileSegmentElapsedSeconds = thisPostBinaryRequest->getSectionElapsedSeconds();
+			bleAccess->GetBluetoothPhone()->PushOutputMessage(fileSegmentMessages[tempSendFileSegmentNumber]);
+		}
+
+		/* 這段寫得很長，功能就只是把收到的ack丟給request而已 */
+		unique_lock<mutex> uLock(thisPostBinaryRequest->rawMessageMutex);
+		while (thisPostBinaryRequest->inputRawMessages.size() > 0) {
+			MeteoBluetoothMessage* message = thisPostBinaryRequest->inputRawMessages.back();
+
+			if (dynamic_cast<MeteoAckFileSegmentBluetoothMessage*>(message)) {
+				if (dynamic_cast<MeteoAckFileSegmentBluetoothMessage*>(message)->GetCommand() == ackTransferCommand &&
+					dynamic_cast<MeteoAckFileSegmentBluetoothMessage*>(message)->GetFileName() == bleBinaryRequestFileSegmentMap.fileName) {
+
+					MeteoAckFileSegmentBluetoothMessage* ackFileSegmentMessage = dynamic_cast<MeteoAckFileSegmentBluetoothMessage*>(message);
+					if (ackFileSegmentMessage->GetOrder() == tempSendFileSegmentNumber) {
+
+						tempSendFileSegmentNumber++;
+						transferTempFileSegmentElapsedSeconds = thisPostBinaryRequest->getSectionElapsedSeconds();
+						bleAccess->GetBluetoothPhone()->PushOutputMessage(fileSegmentMessages[tempSendFileSegmentNumber]);
+					}
+					else if (ackFileSegmentMessage->GetOrder() < tempSendFileSegmentNumber) {
+						// no-op
+					}
+					else {
+						LOG(LogLevel::Error) << "BleRequest::PostBinaryBleRequestMethod::PerformAndWait() : ack file segment number worng -- [" << ackFileSegmentMessage->GetOrder() << "]. Temp file Segment Number is [" << tempSendFileSegmentNumber << "].";
+					}
+				}
+			}
+			thisPostBinaryRequest->inputRawMessages.pop_back();
+			delete message;
+		}
+
+		uLock.unlock();
+
 	}
+	
+	// #-- 3 確認
 
 	MeteoContextBluetoothMessage* checkFinishMessage = new MeteoContextBluetoothMessage(finishCommand);
 	json messageContext;
@@ -147,12 +215,18 @@ int PostBinaryBleRequest::PostBinaryBleRequestMethod::PerformAndWait(BleRequest 
 	checkFinishMessage->SetContextInJson(messageContext);
 	bleAccess->GetBluetoothPhone()->PushOutputMessage(checkFinishMessage);
 
+	// 等待對方整理所有需要重傳的file segment
+	this_thread::sleep_for(std::chrono::milliseconds(200));
 
 	bool isFinished = false;
 	bool isRetransferred = false;
 
 	/* 從這個時間點開始計時，超過時間就timeout */
 	thisPostBinaryRequest->writeTimePoint();
+
+	// 目前重傳到 retransferOrder 中的第幾個 file segment
+	int tempSendRetransferOrderIndex = -1;
+	transferTempFileSegmentElapsedSeconds = thisPostBinaryRequest->getSectionElapsedSeconds();
 
 	while (1) {
 
@@ -164,106 +238,114 @@ int PostBinaryBleRequest::PostBinaryBleRequestMethod::PerformAndWait(BleRequest 
 			throw BleRequestException(BleResponseCode::ExitRequested);
 		}
 
-		/* 這段寫得很長，功能就只是把收到的ack丟給request而已 */
+		// 如果太久沒收到ack，就直接丟下一個file segment
+		if (tempSendRetransferOrderIndex >= 0 &&
+			thisPostBinaryRequest->getSectionElapsedSeconds() - transferTempFileSegmentElapsedSeconds > sendFileSegmentTimeout) {
+
+			LOG(LogLevel::Warning) << "BleRequest::PostBinaryBleRequestMethod::PerformAndWait() : no receive ack retransfer file segment [" << tempSendRetransferOrderIndex << " / " << retransferOrders.size() << "] which file sgement is [" << retransferOrders[tempSendRetransferOrderIndex] << "]. Pass.";
+
+			// 已丟完所有file segment，就直接跳出往下一個步驟
+			if (tempSendRetransferOrderIndex == retransferOrders.size() - 1) {
+				LOG(LogLevel::Debug) << "BleRequest::PostBinaryBleRequestMethod::PerformAndWait() : retransfer over.";
+				bleAccess->GetBluetoothPhone()->PushOutputMessage(checkFinishMessage);
+
+				// 等待對方整理所有需要重傳的file segment
+				this_thread::sleep_for(std::chrono::milliseconds(200));
+				transferTempFileSegmentElapsedSeconds = thisPostBinaryRequest->getSectionElapsedSeconds();
+			}
+			else {
+
+				tempSendRetransferOrderIndex++;
+				transferTempFileSegmentElapsedSeconds = thisPostBinaryRequest->getSectionElapsedSeconds();
+				bleAccess->GetBluetoothPhone()->PushOutputMessage(fileSegmentMessages[retransferOrders[tempSendRetransferOrderIndex]]);
+
+			}
+
+		}
+
+		/* 這段寫得很長，功能是檢查有沒有全都收到，有的話就離開，沒有就重傳，重傳完要再檢查一次有沒有收到 */
 		unique_lock<mutex> uLock(thisPostBinaryRequest->rawMessageMutex);
 		while (thisPostBinaryRequest->inputRawMessages.size() > 0) {
 			MeteoBluetoothMessage* message = thisPostBinaryRequest->inputRawMessages.back();
 
 			if (dynamic_cast<MeteoContextBluetoothMessage*>(message)) {
-				if (dynamic_cast<MeteoContextBluetoothMessage*>(message)->GetCommand() == ackFinishCommand) {
+			if (dynamic_cast<MeteoContextBluetoothMessage*>(message)->GetCommand() == ackFinishCommand) {
 
+				/* 檢查Scene是否還存在，存在才能執行 */
+				if (dynamic_cast<MeteoContextBluetoothMessage*>(message)->GetContextInJson()["Status"].get<int>() == 0) {
+					LOG(LogLevel::Debug) << "BleRequest::PostBinaryBleRequestMethod::PerformAndWait() : transfer success.";
+					break;
+				}
 
-					/* 檢查Scene是否還存在，存在才能執行 */
-					if ((thisPostBinaryRequest->isCallbackByScene && SceneMaster::GetInstance().CheckScene(thisPostBinaryRequest->callbackScene)) ||
-						!thisPostBinaryRequest->isCallbackByScene ||
-						onFinish.GetSize() == 0)
-						onFinish.TriggerThenClear();
-					else {
-						throw BleRequestException(BleResponseCode::Gone);
+				LOG(LogLevel::Debug) << "BleRequest::PostBinaryBleRequestMethod::PerformAndWait() : transfer not success.";
+
+			}
+			else if (dynamic_cast<MeteoContextBluetoothMessage*>(message)->GetCommand() == requestRetransferCommand) {
+				if (dynamic_cast<MeteoContextBluetoothMessage*>(message)->GetContextInJson()["FileName"].get<string>() == bleBinaryRequestFileSegmentMap.fileName) {
+					int retransferOrder = dynamic_cast<MeteoContextBluetoothMessage*>(message)->GetContextInJson()["Order"].get<int>();
+
+					retransferOrders.push_back(retransferOrder);
+
+					if (retransferOrders.size() == 1) {
+						tempSendRetransferOrderIndex = 0;
+						bleAccess->GetBluetoothPhone()->PushOutputMessage(fileSegmentMessages[retransferOrders[tempSendRetransferOrderIndex]]);
 					}
-
-
-					isFinished = true;
-					return 0;
 
 				}
-				else if (dynamic_cast<MeteoContextBluetoothMessage*>(message)->GetCommand() == requestRetransferCommand) {
-					if (dynamic_cast<MeteoContextBluetoothMessage*>(message)->GetContextInJson()["FileName"].get<string>() == fileName) {
-						int retransferOrder = dynamic_cast<MeteoContextBluetoothMessage*>(message)->GetContextInJson()["Order"].get<int>();
+			}}
 
-						// TODO 重傳這個file segment
-						retransferOrders.push_back(retransferOrder);
+			/* 街道ack以後再繼續重傳 */
+			if (dynamic_cast<MeteoAckFileSegmentBluetoothMessage*>(message)) {
+				if (dynamic_cast<MeteoAckFileSegmentBluetoothMessage*>(message)->GetCommand() == ackTransferCommand &&
+					dynamic_cast<MeteoAckFileSegmentBluetoothMessage*>(message)->GetFileName() == bleBinaryRequestFileSegmentMap.fileName) {
+
+					int ackIndex = -1;
+					for (int i = 0; i < retransferOrders.size(); i++) {
+						if (retransferOrders[i] == dynamic_cast<MeteoAckFileSegmentBluetoothMessage*>(message)->GetOrder()) {
+							ackIndex = i;
+						}
+					}
+
+					if (ackIndex != -1 && ackIndex != retransferOrders.size() - 1 && ackIndex == tempSendRetransferOrderIndex) {
+
+						tempSendRetransferOrderIndex++;
+						transferTempFileSegmentElapsedSeconds = thisPostBinaryRequest->getSectionElapsedSeconds();
+						bleAccess->GetBluetoothPhone()->PushOutputMessage(fileSegmentMessages[retransferOrders[tempSendRetransferOrderIndex]]);
 
 					}
+					else if (ackIndex == retransferOrders.size() - 1) {
+						bleAccess->GetBluetoothPhone()->PushOutputMessage(checkFinishMessage);
+
+						// 等待對方整理所有需要重傳的file segment
+						this_thread::sleep_for(std::chrono::milliseconds(200));
+
+						transferTempFileSegmentElapsedSeconds = thisPostBinaryRequest->getSectionElapsedSeconds();
+					}
+					else if (ackIndex > tempSendRetransferOrderIndex) {
+						LOG(LogLevel::Error) << "BleRequest::PostBinaryBleRequestMethod::PerformAndWait() : receive error ack retransfer index [" << ackIndex << "/" << retransferOrders.size() << "]. temp index is [" << tempSendRetransferOrderIndex << "]";
+					}
+
+
 				}
 			}
+
 			thisPostBinaryRequest->inputRawMessages.pop_back();
 			delete message;
 		}
 
 		uLock.unlock();
 
-		if (retransferOrders.size() > 0) {
-
-			for (int i = 0; i < retransferOrders.size(); i++) {
-
-				char* tempFileSegment = nullptr;
-				int tempFileSegmentSize = 0;
-				tempFileSegmentSize = bleBinaryRequestFileSegmentMap.GetFileSegment(retransferOrders[i], &tempFileSegment);
-
-				MeteoFileSegmentBluetoothMessage* fileSegmentMessage = new MeteoFileSegmentBluetoothMessage(
-					transferCommand,
-					tempFileSegment,
-					tempFileSegmentSize,
-					bleBinaryRequestFileSegmentMap.fileName,
-					retransferOrders[i],
-					bleBinaryRequestFileSegmentMap.segmentAmount);
-
-				delete[] tempFileSegment;
-
-				fileSegmentMessages.push_back(fileSegmentMessage);
-
-				bleAccess->GetBluetoothPhone()->PushOutputMessage(fileSegmentMessage);
-
-			}
-
-			retransferOrders.clear();
-
-
-
-			while (!bleAccess->GetBluetoothPhone()->CheckFileSegmentMessageOutputClear()) {
-				if (thisPostBinaryRequest->exitRequested) {
-					throw BleRequestException(BleResponseCode::ExitRequested);
-				}
-
-				// TODO: 如果等太久，就丟exception
-			}
-
-
-			/* 從這個時間點開始計時，超過時間就timeout */
-			thisPostBinaryRequest->writeTimePoint();
-
-			MeteoContextBluetoothMessage* checkFinishMessage = new MeteoContextBluetoothMessage(finishCommand);
-			json messageContext;
-			messageContext["FileName"] = bleBinaryRequestFileSegmentMap.fileName;
-			checkFinishMessage->SetContextInJson(messageContext);
-			bleAccess->GetBluetoothPhone()->PushOutputMessage(checkFinishMessage);
-
-		}
-
-		if (isFinished)
-			break;
-
 		this_thread::sleep_for(std::chrono::milliseconds(100));
-
 	}
+
+	// #-- 4
 
 	/* 檢查Scene是否還存在，存在才能執行 */
 	if ((thisPostBinaryRequest->isCallbackByScene && SceneMaster::GetInstance().CheckScene(thisPostBinaryRequest->callbackScene)) ||
 		!thisPostBinaryRequest->isCallbackByScene ||
 		onFinish.GetSize() == 0)
 		onFinish.TriggerThenClear();
-	else
+	else if(!SceneMaster::GetInstance().CheckScene(thisPostBinaryRequest->callbackScene))
 		throw BleRequestException(BleResponseCode::Gone);
 
 	return 0;
@@ -272,6 +354,11 @@ int PostBinaryBleRequest::PostBinaryBleRequestMethod::PerformAndWait(BleRequest 
 BleRequestMethodType PostBinaryBleRequest::PostBinaryBleRequestMethod::GetMethodType()
 {
 	return BleRequestMethodType::PostBinary;
+}
+
+double PostBinaryBleRequest::PostBinaryBleRequestMethod::GetSendFileSegmentTimeout()
+{
+	return 0.0;
 }
 
 int PostBinaryBleRequest::PostBinaryBleRequestMethod::AddOnAck(MtoObject * callableObject, function<int(json)> callback, string name)
@@ -286,13 +373,14 @@ int PostBinaryBleRequest::PostBinaryBleRequestMethod::AddOnFinish(MtoObject * ca
 	return 0;
 }
 
-PostBinaryBleRequest::PostBinaryBleRequest(string fPath, MeteoBluetoothMessage * pMessage, MeteoCommand ackPostCommand, MeteoCommand tCommand, MeteoCommand fCommand, MeteoCommand rRetransferCommand, MeteoCommand aFinishCommand) : RegisterType("PostBinaryBleRequest")
+PostBinaryBleRequest::PostBinaryBleRequest(string fPath, MeteoBluetoothMessage * pMessage, MeteoCommand ackPostCommand, MeteoCommand tCommand, MeteoCommand aTransferCommand, MeteoCommand fCommand, MeteoCommand rRetransferCommand, MeteoCommand aFinishCommand) : RegisterType("PostBinaryBleRequest")
 {
 	PostBinaryBleRequestMethod* method = new PostBinaryBleRequestMethod(
 		fPath,
 		pMessage,
 		ackPostCommand,
 		tCommand,
+		aTransferCommand,
 		fCommand,
 		rRetransferCommand,
 		aFinishCommand

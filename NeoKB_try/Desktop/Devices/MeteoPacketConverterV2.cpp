@@ -32,9 +32,9 @@ string MeteoPacketConverterV2::getFileName(const char * buffer, int size)
 int MeteoPacketConverterV2::getFileSize(const char * buffer, int size)
 {
 	unsigned short length;
-	memcpy(&length, buffer + sizeof(unsigned int), sizeof(unsigned short) * 2);
+	memcpy(&length, buffer + sizeof(unsigned int) + sizeof(unsigned short), sizeof(unsigned short));
 
-	int fileSize = length - sizeof(unsigned int) + sizeof(unsigned short) * 2 + sizeof(char) * 16 + sizeof(unsigned short) * 2;
+	int fileSize = length - sizeof(unsigned int) - sizeof(unsigned short) * 2 - sizeof(char) * 16 - sizeof(unsigned short) * 2;
 
 	return fileSize;
 }
@@ -674,6 +674,17 @@ BluetoothMessage * MeteoPacketConverterV2::ConvertToBluetoothMessage(const char 
 				LOG(LogLevel::Depricated) << "MeteoPacketConverterV2::ConvertToBluetoothMessage() : json context [" << context.dump() << "].";
 			}
 			catch (exception& e) {
+				if (string(contextBuffer) == "{}") {
+					LOG(LogLevel::Debug) << "MeteoPacketConverterV2::ConvertToBluetoothMessage() : empty json.";
+
+					json context;
+
+					btMessage->SetContextInJson(context);
+					btMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
+
+					return btMessage;
+				}
+
 				LOG(LogLevel::Error) << "MeteoPacketConverterV2::ConvertToBluetoothMessage() : parse json error : " << e.what();
 
 				delete btMessage;
@@ -719,7 +730,7 @@ int MeteoPacketConverterV2::ConvertToByteArray(BluetoothMessage * bluetoothMessa
 
 		string context = contextBluetoothMessage->GetContext();
 
-		unsigned short bufferSize = sizeof(context.c_str()) + 12;
+		unsigned short bufferSize = context.length() + 12;
 		if (bufferSize > bufferMaxSize) {
 			LOG(LogLevel::Warning) << "MeteoPacketConverterV1::ConvertToByteArray() : message oversize [" << context << "].";
 			return -1;

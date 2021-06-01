@@ -90,6 +90,9 @@ int SimpleSmDecoder::handleGeneral(Sm<Event>* sm, string & line)
 
 		}
 	}
+	else if (pair.at(0) == "Composite") {	/* 代表這份譜是不是複合式樂譜 */
+		sm->GetSmInfo()->hasSectionData = atoi(pair.at(1).c_str()) == 1;
+	}
     
 	return 0;
 }

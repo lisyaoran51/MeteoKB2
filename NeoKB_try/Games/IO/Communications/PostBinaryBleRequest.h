@@ -18,6 +18,7 @@ namespace Communications{
 			MeteoBluetoothMessage* pMessage,
 			MeteoCommand ackPostCommand,
 			MeteoCommand tCommand,
+			MeteoCommand aTransferCommand,
 			MeteoCommand fCommand,
 			MeteoCommand rRetransferCommand,
 			MeteoCommand aFinishCommand);
@@ -54,6 +55,7 @@ namespace Communications{
 				MeteoBluetoothMessage* pMessage,
 				MeteoCommand aPostCommand,
 				MeteoCommand tCommand,
+				MeteoCommand aTranferCommand,
 				MeteoCommand fCommand,
 				MeteoCommand rRetransferCommand,
 				MeteoCommand aFinishCommand);
@@ -72,11 +74,17 @@ namespace Communications{
 			MeteoBluetoothMessage* postMessage = nullptr;
 			MeteoCommand ackPostCommand = MeteoCommand::None;
 			MeteoCommand transferCommand = MeteoCommand::None;
+			MeteoCommand ackTransferCommand = MeteoCommand::None;
 			MeteoCommand finishCommand = MeteoCommand::None;
 			MeteoCommand requestRetransferCommand = MeteoCommand::None;
 			MeteoCommand ackFinishCommand = MeteoCommand::None;
 
 			FileSegmentMap* fileMap = nullptr;
+
+			/// <summary>
+			/// 丟出一個file sgegment以後多久沒有收到Ack，就會自動丟下一個file segment
+			/// </summary>
+			double sendFileSegmentTimeout = 0.5; // 0.1
 
 			vector<int> retransferOrders;
 
