@@ -3080,3 +3080,24 @@ time after play(us):15510, real play time:19954.6 ->>最多延遲5ms，但是不太準
 	把手和難度寫成一個HandDifficultyModifier
 	
 	HandDifficultyModifier改到一半
+	
+6/2
+	因為藍芽傳輸速度是1kb/s，實在太慢，1mb就要傳30分鐘
+	得要寫 背景偷傳主程式 和 wifi更新主程式
+	
+	mcu如果讀太快的話，面板上的資訊會互相干擾
+	
+	一個檔案最大能夠是8mb，因為amount最大65536，packet一次放128b。如果要傳主程式，應該要合併多個分割檔。
+	
+	
+	譜檔[General]必須加上這些標頭：
+	
+Composite:0 (0:Simple, 1:Composite)
+DifficultyType:3 
+
+0: None 無
+1: Difficulty 僅可選簡單、困難
+2: Hand 僅可選左手、右手、雙手
+3: HandDifficultyCombination 可自由搭配(簡單、困難)X(左手、右手、雙手)
+4: HandDifficultyAlternative 僅可擇一選擇簡單、困難、左手、右手
+

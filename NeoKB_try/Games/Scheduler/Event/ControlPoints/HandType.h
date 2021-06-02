@@ -24,45 +24,45 @@ namespace ControlPoints{
 		All,					// 8 任何都可以
 
 		/* 複合式譜檔 */
-		LeftOnly,					// 9 純左手
-		LeftOnlyFoot,				// 10 純左手 踏板
-		LeftOnlyOctaveShift,		// 11 純左手 移調
-		HiddenLeftOnly,				// 12 純左手 隱藏燈光音 
+		LeftOnly = 11,				// 11 純左手
+		LeftOnlyFoot,				// 12 純左手 踏板
+		LeftOnlyOctaveShift,		// 13 純左手 移調
+		LeftOnlyHidden,				// 14 純左手 隱藏燈光音 
 
-		RightOnly,					// 13 純右手
-		RightOnlyFoot,				// 14 純右手 踏板 
-		RightOnlyOctaveShift,		// 15 純右手 移調
-		HiddenRightOnly,			// 16 純右手 隱藏燈光音 
+		RightOnly,					// 15 純右手
+		RightOnlyFoot,				// 16 純右手 踏板 
+		RightOnlyOctaveShift,		// 17 純右手 移調
+		RightOnlyHidden,			// 18 純右手 隱藏燈光音 
 
-		EasyOnly,					// 17 純簡單
-		EasyOnlyFoot,				// 18 純簡單 踏板 
-		EasyOnlyOctaveShift,		// 19 純簡單 移調
-		HiddenEasyOnly,				// 20 純簡單 隱藏燈光音 
+		EasyOnly,					// 19 純簡單
+		EasyOnlyFoot,				// 20 純簡單 踏板 
+		EasyOnlyOctaveShift,		// 21 純簡單 移調
+		EasyOnlyHidden,				// 22 純簡單 隱藏燈光音 
 
-		HardOnly,					// 21 純困難
-		HardOnlyFoot,				// 22 純困難 踏板 
-		HardOnlyOctaveShift,		// 23 純困難 移調
-		HiddenHardOnly,				// 24 純困難 隱藏燈光音 
+		HardOnly,					// 23 純困難
+		HardOnlyFoot,				// 24 純困難 踏板 
+		HardOnlyOctaveShift,		// 25 純困難 移調
+		HardOnlyHidden,				// 26 純困難 隱藏燈光音 
 
-		LeftEasyOnly,				// 25 純左手簡單
-		LeftEasyOnlyFoot,			// 26 純左手簡單 踏板 
-		LeftEasyOnlyOctaveShift,	// 27 純左手簡單 移調
-		HiddenLeftEasyOnly,			// 28 純左手簡單 隱藏燈光音 
+		LeftEasyOnly,				// 27 純左手簡單
+		LeftEasyOnlyFoot,			// 28 純左手簡單 踏板 
+		LeftEasyOnlyOctaveShift,	// 29 純左手簡單 移調
+		LeftEasyOnlyHidden,			// 30 純左手簡單 隱藏燈光音 
 
-		LeftHardOnly,				// 29 純左手困難
-		LeftHardOnlyFoot,			// 30 純左手困難 踏板
-		LeftHardOnlyOctaveShift,	// 31 純左手困難 移調
-		HiddenLeftHardOnly,			// 32 純左手困難 隱藏燈光音 
+		LeftHardOnly,				// 31 純左手困難
+		LeftHardOnlyFoot,			// 32 純左手困難 踏板
+		LeftHardOnlyOctaveShift,	// 33 純左手困難 移調
+		LeftHardOnlyHidden,			// 34 純左手困難 隱藏燈光音 
 
-		RightEasyOnly,				// 33 純右手簡單
-		RightEasyOnlyFoot,			// 34 純右手簡單 踏板
-		RightEasyOnlyOctaveShift,	// 35 純右手簡單 移調
-		HiddenRightEasyOnly,		// 36 純右手簡單 隱藏燈光音 
+		RightEasyOnly,				// 35 純右手簡單
+		RightEasyOnlyFoot,			// 36 純右手簡單 踏板
+		RightEasyOnlyOctaveShift,	// 37 純右手簡單 移調
+		RightEasyOnlyHidden,		// 38 純右手簡單 隱藏燈光音 
 
-		RightHardOnly,				// 37 純右手困難
-		RightHardOnlyFoot,			// 38 純右手困難 踏板
-		RightHardOnlyOctaveShift,	// 39 純右手困難 移調
-		HiddenRightHardOnly,		// 40 純右手困難 隱藏燈光音 
+		RightHardOnly,				// 39 純右手困難
+		RightHardOnlyFoot,			// 40 純右手困難 踏板
+		RightHardOnlyOctaveShift,	// 41 純右手困難 移調
+		RightHardOnlyHidden,		// 42 純右手困難 隱藏燈光音 
 		//Auto,	// 這個是不是舊的要刪掉? 6通常是平移八度
 	};
 
