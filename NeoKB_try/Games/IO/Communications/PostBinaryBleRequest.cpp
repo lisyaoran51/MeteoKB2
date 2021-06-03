@@ -356,11 +356,6 @@ BleRequestMethodType PostBinaryBleRequest::PostBinaryBleRequestMethod::GetMethod
 	return BleRequestMethodType::PostBinary;
 }
 
-double PostBinaryBleRequest::PostBinaryBleRequestMethod::GetSendFileSegmentTimeout()
-{
-	return 0.0;
-}
-
 int PostBinaryBleRequest::PostBinaryBleRequestMethod::AddOnAck(MtoObject * callableObject, function<int(json)> callback, string name)
 {
 	onAck.Add(callableObject, callback, name);
