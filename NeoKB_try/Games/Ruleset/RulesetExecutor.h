@@ -22,6 +22,7 @@
 #include "Replays/ReplayRecorder.h"
 #include "../Scene/Results/Result.h"
 #include "Replays/ReplayRecorderReceiver.h"
+#include "../Output/Bluetooths/MeteoContextBluetoothMessage.h"
 
 
 
@@ -48,6 +49,7 @@ using namespace Games::Rulesets::Scoring;
 using namespace Games::Rulesets::Modifiers;
 using namespace Games::Rulesets::Replays;
 using namespace Games::Scenes::Results;
+using namespace Games::Output::Bluetooths;
 
 
 
