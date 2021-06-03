@@ -23,6 +23,7 @@
 #include "../Scene/Results/Result.h"
 #include "Replays/ReplayRecorderReceiver.h"
 #include "../Output/Bluetooths/MeteoContextBluetoothMessage.h"
+#include "../../Framework/Output/OutputManager.h"
 
 
 
@@ -50,6 +51,7 @@ using namespace Games::Rulesets::Modifiers;
 using namespace Games::Rulesets::Replays;
 using namespace Games::Scenes::Results;
 using namespace Games::Output::Bluetooths;
+using namespace Framework::Output; 
 
 
 
