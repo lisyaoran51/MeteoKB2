@@ -642,6 +642,7 @@ int MeteorResult::onEntering(Scene * lastScene)
 		postRecordMessage,
 		MeteoCommand::AckPostPlayRecord,
 		MeteoCommand::PlayRecordFileSegment,
+		MeteoCommand::AckPlayRecordFileSegment,
 		MeteoCommand::FinishWritePlayRecord,
 		MeteoCommand::RequestRewritePlayRecordFileSegment,
 		MeteoCommand::AckFinishWritePlayRecord
