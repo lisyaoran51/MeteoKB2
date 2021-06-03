@@ -3,6 +3,8 @@ simple file format v0
 Mode:1
 Section:1
 Pedal:1
+Composite:0
+DifficultyType:3
 [Metadata]
 Title:LightlyRow
 [Difficulty]

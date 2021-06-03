@@ -111,6 +111,7 @@ int MeteoScene::onMessage(MeteoBluetoothMessage * message)
 	LOG(LogLevel::Debug) << "MeteoScene::onMessage() : got new bt message. ";
 
 	if (contextMessage->GetCommand() == MeteoCommand::ReadScene) {
+		LOG(LogLevel::Debug) << "MeteoScene::onMessage() : got new bt message [ReadScene]. ";
 
 		MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::ReturnScene);
 		json returnContext;
@@ -120,6 +121,56 @@ int MeteoScene::onMessage(MeteoBluetoothMessage * message)
 		meteoContextBluetoothMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
 
 		outputManager->PushMessage(meteoContextBluetoothMessage);
+	}
+
+	if (contextMessage->GetCommand() == MeteoCommand::EnterScene) {
+		LOG(LogLevel::Debug) << "MeteoScene::onMessage() : got new bt message [EnterScene]. ";
+
+		string sceneName = contextMessage->GetContextInJson()["Scene"].get<string>();
+
+
+		Scene* targetScene = nullptr;
+		for (Scene* s = this; s != nullptr; s = s->GetParentScene()) {
+
+			if (sceneName == s->GetTypeName()) {
+
+				targetScene = s;
+				break;
+
+			}
+		}
+
+		if (targetScene == nullptr) {
+			MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::AckEnterScene);
+			json returnContext;
+
+			returnContext["Status"] = -1;
+			meteoContextBluetoothMessage->SetContextInJson(returnContext);
+			meteoContextBluetoothMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
+
+			outputManager->PushMessage(meteoContextBluetoothMessage);
+
+			return 0;
+		}
+
+		for (Scene* s = this; s != targetScene; s = s->GetParentScene()) {
+
+			s->SetIsValidForResume(false);
+
+		}
+		targetScene->SetIsValidForResume(true);
+
+		MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::AckEnterScene);
+		json returnContext;
+
+		returnContext["Status"] = 0;
+		meteoContextBluetoothMessage->SetContextInJson(returnContext);
+		meteoContextBluetoothMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
+
+		outputManager->PushMessage(meteoContextBluetoothMessage);
+
+		Exit();
+
 	}
 
 

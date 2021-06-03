@@ -111,6 +111,8 @@ int EventProcessorMaster::load(FrameworkConfigManager * f, EventProcessorFilter 
 		return 0;
 	}, "EventProcessorMaster::Lambda_HandleOnPauseEnd");
 
+
+
 	return 0;
 }
 

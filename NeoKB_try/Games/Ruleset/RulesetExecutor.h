@@ -173,6 +173,15 @@ namespace Rulesets {
 			LOG(LogLevel::Info) << "RulesetExecutor::load : loading events into playfield ...";
 			playfieldLoad();
 
+
+
+
+			MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::StartGame);
+
+			meteoContextBluetoothMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
+
+			outputManager->PushMessage(meteoContextBluetoothMessage);
+
 			return 0;
 		}
 

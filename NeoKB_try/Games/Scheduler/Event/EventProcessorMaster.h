@@ -90,6 +90,33 @@ namespace Events {
 
 		PeriodMap<EventProcessor<Event>*>* GetEventProcessorPeriods();
 
+		template<class _Type>
+		int AddOnRetry(_Type* callableObject, function<int()> callback, string name = "HandleRetryRequest") {
+			if (timeController)
+				timeController->AddOnRetry(callableObject, callback, name);
+			else
+				LOG(LogLevel::Error) << "EventProcessorMaster::AddOnRetry() : not time controller. failed.";
+			return 0;
+		}
+
+		template<class _Type>
+		int AddOnQuit(_Type* callableObject, function<int()> callback, string name = "HandleQuitRequest") {
+			if (timeController)
+				timeController->AddOnQuit(callableObject, callback, name);
+			else
+				LOG(LogLevel::Error) << "EventProcessorMaster::AddOnQuit() : not time controller. failed.";
+			return 0;
+		}
+
+		template<class _Type>
+		int AddOnGameOver(_Type* callableObject, function<int()> callback, string name = "HandleGameOverRequest") {
+			if (timeController)
+				timeController->AddOnGameOver(callableObject, callback, name);
+			else
+				LOG(LogLevel::Error) << "EventProcessorMaster::AddOnGameOver() : not time controller. failed.";
+			return 0;
+		}
+
 	protected:
 
 		float visibleTimeRange = 1.0f;

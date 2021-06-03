@@ -78,9 +78,10 @@ int Player::load(MeteoConfigManager* m, Instrument* instru, MeteoGame * g)
 	LOG(LogLevel::Fine) << "Player::load : create ruleset executor.";
 	rulesetExecutor = ruleset->CreateRulesetExecutor(workingSm.GetValue());
 
-	rulesetExecutor->SetLeaveGameFunction(bind(&Player::onQuiting, this));
-	rulesetExecutor->SetRestartGameFunction(bind(&Player::onRestarting, this));
-	rulesetExecutor->SetEndGameFunction(bind(&Player::onCompletion, this));
+	// 改道直接加再time controller上
+	//rulesetExecutor->SetLeaveGameFunction(bind(&Player::onQuiting, this));
+	//rulesetExecutor->SetRestartGameFunction(bind(&Player::onRestarting, this));
+	//rulesetExecutor->SetEndGameFunction(bind(&Player::onCompletion, this));
 	
 	/***
 	Sm<Event>* sm = workingSm->GetSm();
@@ -200,6 +201,8 @@ int Player::load(MeteoConfigManager* m, Instrument* instru, MeteoGame * g)
 
 	// 這行要改掉，應該用時間來判斷，而不是用judgement來判斷
 	//scoreProcessor->AddOnAllJudged(this, bind(&Player::onCompletion, this), "Player::onCompletion"); // 顯示成績結算
+	timeController->AddOnRetry(this, bind(&Player::onQuiting, this), "Player::onQuiting"); // 重新開始
+	timeController->AddOnQuit(this, bind(&Player::onRestarting, this), "Player::onRestarting"); // 終止遊戲，不結算成績
 	timeController->AddOnGameOver(this, bind(&Player::onCompletion, this), "Player::onCompletion"); // 遊戲結束，顯示成績結算
 
 	return 0;
@@ -267,6 +270,10 @@ int Player::onCompletion()
 
 	LOG(LogLevel::Info) << "Player::onCompletion : Game end. Go to result.";
 	SetIsValidForResume(false);
+
+	MeteoContextBluetoothMessage* message = new MeteoContextBluetoothMessage(MeteoCommand::HardwareCompleteGame);
+	message->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
+	outputManager->PushMessage(message);
 
 
 	GetScheduler()->AddDelayedTask([=] {

@@ -2139,6 +2139,9 @@
     <ClCompile Include="RulesetMeteor\Ruleset\Modifiers\HandDifficultyModifier.cpp">
       <Filter>來源檔案\RulesetMeteor\Ruleset\Modifiers</Filter>
     </ClCompile>
+    <ClCompile Include="Games\UI\BluetoothPanel.cpp">
+      <Filter>來源檔案\Games\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="DailyLog.txt">
@@ -3567,6 +3570,9 @@
     </ClInclude>
     <ClInclude Include="RulesetMeteor\Ruleset\Modifiers\HandDifficultyModifier.h">
       <Filter>標頭檔\RulesetMeteor\Ruleset\Modifiers</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\UI\BluetoothPanel.h">
+      <Filter>標頭檔\Games\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

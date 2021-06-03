@@ -263,6 +263,7 @@
     <ClCompile Include="Framework\Timing\OffsetFramedClock.cpp" />
     <ClCompile Include="Framework\Timing\SpeedAdjusters\SpeedAdjuster.cpp" />
     <ClCompile Include="Framework\Timing\StopwatchClock.cpp" />
+    <ClCompile Include="Games\UI\BluetoothPanel.cpp" />
     <ClCompile Include="Games\UI\PowerPanel.cpp" />
     <ClCompile Include="Games\UI\SheetmusicSelectPanel.cpp" />
     <ClCompile Include="Games\UI\SoundSelectPanel.cpp" />
@@ -723,6 +724,7 @@
     <ClInclude Include="Framework\Timing\StopwatchClock.h" />
     <ClInclude Include="Framework\Timing\ThrottledFramedClock.h" />
     <ClInclude Include="Games\Timing\MeteoTimeController.h" />
+    <ClInclude Include="Games\UI\BluetoothPanel.h" />
     <ClInclude Include="Games\UI\PowerPanel.h" />
     <ClInclude Include="Games\UI\SheetmusicSelectPanel.h" />
     <ClInclude Include="Games\UI\SoundSelectPanel.h" />

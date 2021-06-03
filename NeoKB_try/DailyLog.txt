@@ -3101,3 +3101,5 @@ DifficultyType:3
 3: HandDifficultyCombination 可自由搭配(簡單、困難)X(左手、右手、雙手)
 4: HandDifficultyAlternative 僅可擇一選擇簡單、困難、左手、右手
 
+
+	要確認binary request有沒有寫錯，然後以後要再寫一條thread去接background request，例如背景偷傳主程式。

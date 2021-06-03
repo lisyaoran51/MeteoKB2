@@ -16,7 +16,7 @@ using namespace Util;
 
 
 
-GetBinaryBleRequest::GetBinaryBleRequestMethod::GetBinaryBleRequestMethod(string fPath, MeteoBluetoothMessage * gMessage, MeteoCommand aGetCommand, MeteoCommand tCommand, MeteoCommand fCommand, MeteoCommand rRetransferCommand, MeteoCommand aFinishCommand)
+GetBinaryBleRequest::GetBinaryBleRequestMethod::GetBinaryBleRequestMethod(string fPath, MeteoBluetoothMessage * gMessage, MeteoCommand aGetCommand, MeteoCommand tCommand, MeteoCommand aTransferCommand, MeteoCommand fCommand, MeteoCommand rRetransferCommand, MeteoCommand aFinishCommand)
 {
 	vector<string> filePathHierachy = StringSplitter::Split(fPath, "/");
 	fileName = filePathHierachy[filePathHierachy.size() - 1];
@@ -26,6 +26,7 @@ GetBinaryBleRequest::GetBinaryBleRequestMethod::GetBinaryBleRequestMethod(string
 	getMessage = gMessage;
 	ackGetCommand = aGetCommand;
 	transferCommand = tCommand;
+	ackTransferCommand = aTransferCommand;
 	finishCommand = fCommand;
 	requestRetransferCommand = rRetransferCommand;
 	ackFinishCommand = aFinishCommand;
@@ -268,7 +269,7 @@ int GetBinaryBleRequest::GetBinaryBleRequestMethod::AddOnGetBinarySuccess(MtoObj
 	return 0;
 }
 
-GetBinaryBleRequest::GetBinaryBleRequest(string fPath, MeteoBluetoothMessage * gMessage, MeteoCommand ackGetCommand, MeteoCommand tCommand, MeteoCommand fCommand, MeteoCommand rRetransferCommand, MeteoCommand aFinishCommand) : RegisterType("GetBinaryBleRequest")
+GetBinaryBleRequest::GetBinaryBleRequest(string fPath, MeteoBluetoothMessage * gMessage, MeteoCommand ackGetCommand, MeteoCommand tCommand, MeteoCommand aTransferCommand, MeteoCommand fCommand, MeteoCommand rRetransferCommand, MeteoCommand aFinishCommand) : RegisterType("GetBinaryBleRequest")
 {
 	LOG(LogLevel::Error) << "GetBinaryBleRequest::GetBinaryBleRequest() : not implemented.";
 }

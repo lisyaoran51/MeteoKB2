@@ -2,8 +2,7 @@
 
 #include "../../../Games/Output/Bluetooths/MeteoContextBluetoothMessage.h"
 #include "../../../Games/Output/Bluetooths/MeteoFileBluetoothMessage.h"
-#include "../../Ruleset/Modifiers/HandModifier.h"
-#include "../../Ruleset/Modifiers/MeteorDifficultyModifier.h"
+#include "../../Ruleset/Modifiers/HandDifficultyModifier.h"
 #include "../../../Games/Scheduler/Event/ControlPoints/SectionStartControlPoint.h"
 #include "../../../Games/Scheduler/Event/ControlPoints/InputKeyControlPoint.h"
 #include "../../../Games/Scheduler/Event/ControlPoints/NoteControlPoint.h"
@@ -100,11 +99,9 @@ int MeteorResult::convertToControlPoints(vector<ControlPoint*>& controlPoints)
 	SmDifficultyDifficulty difficulty = SmDifficultyDifficulty::None;
 
 	for (int i = 0; i < workingSm.GetValue()->GetModifiers()->GetValue()->size(); i++) {
-		if (dynamic_cast<HandModifier*>(workingSm.GetValue()->GetModifiers()->GetValue()->at(i))) {
-			hand = dynamic_cast<HandModifier*>(workingSm.GetValue()->GetModifiers()->GetValue()->at(i))->GetHandType();
-		}
-		if (dynamic_cast<MeteorDifficultyModifier*>(workingSm.GetValue()->GetModifiers()->GetValue()->at(i))) {
-			difficulty = dynamic_cast<MeteorDifficultyModifier*>(workingSm.GetValue()->GetModifiers()->GetValue()->at(i))->GetDifficulty();
+		if (dynamic_cast<HandDifficultyModifier*>(workingSm.GetValue()->GetModifiers()->GetValue()->at(i))) {
+			hand = dynamic_cast<HandDifficultyModifier*>(workingSm.GetValue()->GetModifiers()->GetValue()->at(i))->GetHandType();
+			difficulty = dynamic_cast<HandDifficultyModifier*>(workingSm.GetValue()->GetModifiers()->GetValue()->at(i))->GetDifficulty();
 		}
 	}
 
@@ -416,11 +413,9 @@ string MeteorResult::encodeToRecordFile(vector<ControlPoint*>& controlPoints)
 	SmDifficultyDifficulty difficulty = SmDifficultyDifficulty::None;
 
 	for (int i = 0; i < workingSm.GetValue()->GetModifiers()->GetValue()->size(); i++) {
-		if (dynamic_cast<HandModifier*>(workingSm.GetValue()->GetModifiers()->GetValue()->at(i))) {
-			hand = dynamic_cast<HandModifier*>(workingSm.GetValue()->GetModifiers()->GetValue()->at(i))->GetHandType();
-		}
-		if (dynamic_cast<MeteorDifficultyModifier*>(workingSm.GetValue()->GetModifiers()->GetValue()->at(i))) {
-			difficulty = dynamic_cast<MeteorDifficultyModifier*>(workingSm.GetValue()->GetModifiers()->GetValue()->at(i))->GetDifficulty();
+		if (dynamic_cast<HandDifficultyModifier*>(workingSm.GetValue()->GetModifiers()->GetValue()->at(i))) {
+			hand = dynamic_cast<HandDifficultyModifier*>(workingSm.GetValue()->GetModifiers()->GetValue()->at(i))->GetHandType();
+			difficulty = dynamic_cast<HandDifficultyModifier*>(workingSm.GetValue()->GetModifiers()->GetValue()->at(i))->GetDifficulty();
 		}
 	}
 
@@ -574,21 +569,21 @@ int MeteorResult::onEntering(Scene * lastScene)
 
 
 
-	// 临璶糶だ计Ω计
-	json judgementMiss, judgementBad, judgementOk, judgementGood, judgementGreat, judgementPerfect;
-	judgementMiss["Result"] = "Miss";	judgementMiss["HitAmount"] = score->hitResults[HitResult::Miss];
-	judgementBad["Result"] = "Bad";	judgementMiss["HitAmount"] = score->hitResults[HitResult::Bad];
-	judgementOk["Result"] = "Ok";	judgementMiss["HitAmount"] = score->hitResults[HitResult::Ok];
-	judgementGood["Result"] = "Good";	judgementMiss["HitAmount"] = score->hitResults[HitResult::Good];
-	judgementGreat["Result"] = "Great";	judgementMiss["HitAmount"] = score->hitResults[HitResult::Great];
-	judgementPerfect["Result"] = "Perfect";	judgementMiss["HitAmount"] = score->hitResults[HitResult::Perfect];
+	// 临璶糶だ计Ω计 峨ぃэΑ
+	//json judgementMiss, judgementBad, judgementOk, judgementGood, judgementGreat, judgementPerfect;
+	//judgementMiss["Result"] = "Miss";	judgementMiss["HitAmount"] = score->hitResults[HitResult::Miss];
+	//judgementBad["Result"] = "Bad";	judgementMiss["HitAmount"] = score->hitResults[HitResult::Bad];
+	//judgementOk["Result"] = "Ok";	judgementMiss["HitAmount"] = score->hitResults[HitResult::Ok];
+	//judgementGood["Result"] = "Good";	judgementMiss["HitAmount"] = score->hitResults[HitResult::Good];
+	//judgementGreat["Result"] = "Great";	judgementMiss["HitAmount"] = score->hitResults[HitResult::Great];
+	//judgementPerfect["Result"] = "Perfect";	judgementMiss["HitAmount"] = score->hitResults[HitResult::Perfect];
 
-	context["Hits"].push_back(judgementMiss);
-	context["Hits"].push_back(judgementBad);
-	context["Hits"].push_back(judgementOk);
-	context["Hits"].push_back(judgementGood);
-	context["Hits"].push_back(judgementGreat);
-	context["Hits"].push_back(judgementPerfect);
+	context["Hits"].push_back(score->hitResults[HitResult::Miss]);
+	context["Hits"].push_back(score->hitResults[HitResult::Bad]);
+	context["Hits"].push_back(score->hitResults[HitResult::Ok]);
+	context["Hits"].push_back(score->hitResults[HitResult::Good]);
+	context["Hits"].push_back(score->hitResults[HitResult::Great]);
+	context["Hits"].push_back(score->hitResults[HitResult::Perfect]);
 
 	scoreMessage->SetContextInJson(context);
 	scoreMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
@@ -667,7 +662,7 @@ int MeteorResult::onEntering(Scene * lastScene)
 
 	
 
-	Exit();
+	//Exit();
 
 	return 0;
 }

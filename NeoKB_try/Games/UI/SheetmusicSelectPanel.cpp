@@ -161,38 +161,53 @@ int SheetmusicSelectPanel::onMessage(MeteoBluetoothMessage * message)
 		}
 	}
 
+	if (contextMessage->GetCommand() == MeteoCommand::ClearGameConfiguration) {
+		
+		for (int i = 0; i < selectedModifiers.GetValue()->size(); i++) {
+
+			delete selectedModifiers.GetValue()->at(i);
+
+		}
+		selectedModifiers.GetValue()->clear();
+
+		MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::AckClearGameConfiguration);
+
+		json returnContext;
+
+		returnContext["status"] = 0;
+
+		meteoContextBluetoothMessage->SetContextInJson(returnContext);
+		meteoContextBluetoothMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
+
+		outputManager->PushMessage(meteoContextBluetoothMessage);
+	}
+
 	if (contextMessage->GetCommand() == MeteoCommand::WriteGameConfiguration) {
-		vector<string> modifierIds;
 		string modifierName;
 		int value1, value2;
 		for (int i = 0; i < context["Modifiers"].size(); i++) {
 			// TODO: 下面這行寫錯了，之後要再改
-			modifierName = context["Modifiers"].at(i)["Modifier Name"].get<string>();// == "AutoPedalModifier";
-			value1 = context["Modifiers"].at(i)["Value1"].get<int>();
-			value2 = context["Modifiers"].at(i)["Value2"].get<int>();
+			modifierName = context["Modifiers"].at(i)["Name"].get<string>();// == "AutoPedalModifier";
+			value1 = context["Modifiers"].at(i)["V1"].get<int>();
+			value2 = context["Modifiers"].at(i)["V2"].get<int>();
 
 			InstanceCreator<MtoObject> &iCreator = InstanceCreator<MtoObject>::GetInstance();
-				
-			LOG(LogLevel::Fine) << "SheetmusicSelectPanel::onMessage() : select autopedal modifier";
+			
+			LOG(LogLevel::Fine) << "SheetmusicSelectPanel::onMessage() : select" << modifierName << "with value [" << value1 << "],[" << "].";
 
 			Modifier* modifier = iCreator.CreateInstanceWithT<Modifier>(modifierName);
 			modifier->SetValue(value1, value2);
 
-			if (AddModifier(modifier))
-				modifierIds.push_back(context["Modifiers"].at(i)["Modifier Id"].get<string>());
+			AddModifier(modifier);
 
 		}
 
-		MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::ReturnWriteGameConfiguration);
+
+		MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::AckWriteGameConfiguration);
 		
 		json returnContext;
 
-		returnContext["Scene"] = string("SongSelect");
-		for (int i = 0; i < modifierIds.size(); i++) {
-			json modifierId;
-			modifierId["Modifier Id"] = modifierIds[i];
-			returnContext["Status"].push_back(modifierId);
-		}
+		returnContext["Status"] = 0;
 
 		meteoContextBluetoothMessage->SetContextInJson(returnContext);
 		meteoContextBluetoothMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
@@ -256,6 +271,7 @@ int SheetmusicSelectPanel::onMessage(MeteoBluetoothMessage * message)
 				getSheetmusicMessage,
 				MeteoCommand::AckRequestSheetmusicFile,
 				MeteoCommand::SheetmusicFileSegment,
+				MeteoCommand::AckSheetmusicFileSegment,
 				MeteoCommand::FinishWriteSheetmusic,
 				MeteoCommand::RequestRewriteSheetmusicFileSegment,
 				MeteoCommand::AckFinishWriteSheetmusic);

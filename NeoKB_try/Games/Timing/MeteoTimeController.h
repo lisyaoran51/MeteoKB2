@@ -49,19 +49,36 @@ namespace Timing{
 
 			if (message->GetCommand() == MeteoCommand::AppQuitGame) {
 
+				LOG(LogLevel::Info) << "MeteoTimeController::onMessage() : get quit game message.";
+
 				// 回傳Ack
 				MeteoContextBluetoothMessage* ack = new MeteoContextBluetoothMessage(MeteoCommand::AckAppQuitGame);
+				ack->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
 				outputManager->PushMessage(ack);
 
 				TimeController::onQuitRequested.Trigger();
 			}
 			else if (message->GetCommand() == MeteoCommand::AppRestartGame) {
 
+				LOG(LogLevel::Info) << "MeteoTimeController::onMessage() : get restart game message.";
+
 				// 回傳Ack
 				MeteoContextBluetoothMessage* ack = new MeteoContextBluetoothMessage(MeteoCommand::AckAppRestartGame);
+				ack->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
 				outputManager->PushMessage(ack);
 
 				TimeController::onRetryRequested.Trigger();
+			}
+			else if (message->GetCommand() == MeteoCommand::AppCompleteGame) {
+
+				LOG(LogLevel::Info) << "MeteoTimeController::onMessage() : get complete game message.";
+
+				// 回傳Ack
+				MeteoContextBluetoothMessage* ack = new MeteoContextBluetoothMessage(MeteoCommand::AckAppCompleteGame);
+				ack->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
+				outputManager->PushMessage(ack);
+
+				TimeController::onGameOver.Trigger();
 			}
 
 			return 0;

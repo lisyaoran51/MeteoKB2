@@ -8,6 +8,7 @@
 #include "../../Scheduler/Event/TimeEvents/TimeEventProcessor.h"
 #include "../../Scheduler/Event/SystemEvents/SystemEventHandler.h"
 #include <functional>
+#include "../../Output/Bluetooths/MeteoContextBluetoothMessage.h"
 
 
 using namespace Games::Scenes::Play;
@@ -21,6 +22,7 @@ using namespace std;
 using namespace Games::Schedulers::Events::PlayfieldEvents;
 using namespace Games::Schedulers::Events::TimeEvents;
 using namespace Games::Schedulers::Events::SystemEvents;
+using namespace Games::Output::Bluetooths;
 
 
 /*
@@ -114,8 +116,6 @@ int Playfield::load(FrameworkConfigManager* f, OutputManager* o) {
 	AddChild(eventProcessorMaster);
 
 	AddChild(dynamicEventGenerator);
-
-
 
 }
 

@@ -20,6 +20,7 @@ namespace Communications{
 			MeteoBluetoothMessage* gMessage,
 			MeteoCommand ackGetCommand,
 			MeteoCommand tCommand,
+			MeteoCommand aTransferCommand,
 			MeteoCommand fCommand,
 			MeteoCommand rRetransferCommand,
 			MeteoCommand aFinishCommand);
@@ -54,6 +55,7 @@ namespace Communications{
 				MeteoBluetoothMessage* gMessage,
 				MeteoCommand aGetCommand,
 				MeteoCommand tCommand,
+				MeteoCommand aTransferCommand,
 				MeteoCommand fCommand,
 				MeteoCommand rRetransferCommand,
 				MeteoCommand aFinishCommand);
@@ -79,6 +81,7 @@ namespace Communications{
 			MeteoCommand getCommand = MeteoCommand::None;
 			MeteoCommand ackGetCommand = MeteoCommand::None;
 			MeteoCommand transferCommand = MeteoCommand::None;
+			MeteoCommand ackTransferCommand = MeteoCommand::None;
 			MeteoCommand finishCommand = MeteoCommand::None;
 			MeteoCommand requestRetransferCommand = MeteoCommand::None;
 			MeteoCommand ackFinishCommand = MeteoCommand::None;
