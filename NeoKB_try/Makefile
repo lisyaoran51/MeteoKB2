@@ -183,7 +183,7 @@ BleAccess.o BleRequest.o BleRequestException.o GetTextBleRequest.o PostTextBleRe
 IdentifyBleRequest.o FaultIdentityBleRequest.o \
 IndicatorLightPanelMessage.o SpeedRingPanelMessage.o IndicatorLightOutputer.o SpeedRingOutputer.o \
 RevolveLightRingOutputer.o RevolveLightRingPanelMessage.o FadeLightRingOutputer.o FadeLightRingPanelMessage.o ChangeSpeedOutputer.o ChangeSpeedPanelMessage.o \
-MeteoBluetoothMessage.o MeteoBluetoothOutputer.o MeteoContextBluetoothMessage.o MeteoFileSegmentBluetoothMessage.o \
+MeteoBluetoothMessage.o MeteoBluetoothOutputer.o MeteoContextBluetoothMessage.o MeteoFileSegmentBluetoothMessage.o MeteoAckFileSegmentBluetoothMessage.o \
 Loader.o MeteoScene.o Intro.o Player.o PlayerLoader.o Playfield.o Result.o \
 HudDisplay.o JudgementFlasher.o SongProgress.o \
 MainMenu.o PlaySongSelect.o SongSelect.o \
