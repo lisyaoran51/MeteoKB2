@@ -20,7 +20,7 @@ using namespace Util;
 
 PostBinaryBleRequest::PostBinaryBleRequestMethod::PostBinaryBleRequestMethod(string fPath,
 	MeteoBluetoothMessage* gMessage,
-	MeteoCommand ackGetCommand, 
+	MeteoCommand aPostCommand, 
 	MeteoCommand tCommand, 
 	MeteoCommand aTransferCommand,
 	MeteoCommand fCommand, 
@@ -30,6 +30,7 @@ PostBinaryBleRequest::PostBinaryBleRequestMethod::PostBinaryBleRequestMethod(str
 	filePath = fPath;
 
 
+	ackPostCommand = aPostCommand;
 	transferCommand = tCommand;
 	ackTransferCommand = aTransferCommand;
 	finishCommand = fCommand;
