@@ -89,13 +89,20 @@ namespace Rulesets {
 			if (!f)
 				throw runtime_error("int  RulesetExecutor<T>::load() : FrameworkConfigManager not found in cache.");
 
-			return load(f);
+			OutputManager * o = GetCache<OutputManager>("OutputManager");
+			if (!o)
+				throw runtime_error("int  RulesetExecutor<T>::load() : OutputManager not found in cache.");
+
+			return load(f, o);
 		}
 
 		/// <summary>
 		/// load入遊戲狀態
 		/// </summary>
-		int load(FrameworkConfigManager* f) {
+		int load(FrameworkConfigManager* f, OutputManager* o) {
+
+			outputManager = o;
+
 			// 取pattern generator的名字
 			string pgName;
 
@@ -279,6 +286,8 @@ namespace Rulesets {
 		}
 
 	protected:
+
+		OutputManager* outputManager = nullptr;
 
 		Ruleset* ruleset;
 
