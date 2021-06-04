@@ -58,6 +58,11 @@ int CommunicationRequest::Fail(exception * e)
 	return fail(e);
 }
 
+int CommunicationRequest::Success()
+{
+	return success();
+}
+
 int CommunicationRequest::SetCallbackScene(Scene * cScene)
 {
 	isCallbackByScene = true;

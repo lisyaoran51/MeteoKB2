@@ -66,6 +66,8 @@ namespace Results{
 
 		virtual int onEntering(Scene* lastScene);
 
+		virtual int onMessage(MeteoBluetoothMessage* message);
+
 	};
 
 

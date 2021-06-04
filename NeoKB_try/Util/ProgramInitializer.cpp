@@ -70,6 +70,15 @@ using namespace Meteor::Play;
 #include "../RulesetMeteor/Ruleset/MeteorRulesetExecutor.h"
 using namespace Meteor::Rulesets;
 
+// Meteor/Rulesets/Modifiers
+#include "../RulesetMeteor/Ruleset/Modifiers/ClockRateModifier.h"
+#include "../RulesetMeteor/Ruleset/Modifiers/FallSpeedModifier.h"
+#include "../RulesetMeteor/Ruleset/Modifiers/HandDifficultyModifier.h"
+#include "../RulesetMeteor/Ruleset/Modifiers/MusicGameModifier.h"
+#include "../RulesetMeteor/Ruleset/Modifiers/RepeatPracticeModifier.h"
+#include "../RulesetMeteor/Ruleset/Modifiers/WhiteKeyTargetLineModifier.h"
+using namespace Meteor::Rulesets::Modifiers;
+
 // Meteor/Schedulers/Events/ControlPoints
 #include "../RulesetMeteor/Scheduler/Event/ControlPoints/MeteorNoteControlPointHitObject.h"
 using namespace Meteor::Schedulers::Events::ControlPoints;
@@ -176,6 +185,15 @@ int ProgramInitializer::Initialize()
 	// Meteor/Rulesets
 	iCreator.RegisterType<MeteorRuleset>("MeteorRuleset");
 	iCreator.RegisterType<MeteorRulesetExecutor>("MeteorRulesetExecutor");
+
+	// Meteor/Rulesets
+	iCreator.RegisterType<ClockRateModifier>("ClockRateModifier");
+	iCreator.RegisterType<FallSpeedModifier>("FallSpeedModifier");
+	iCreator.RegisterType<HandDifficultyModifier>("HandDifficultyModifier");
+	iCreator.RegisterType<MusicGameModifier>("MusicGameModifier");
+	iCreator.RegisterType<RepeatPracticeModifier>("RepeatPracticeModifier");
+	iCreator.RegisterType<WhiteKeyTargetLineModifier>("WhiteKeyTargetLineModifier");
+
 
 	// Meteor/Schedulers/Events/Effects/Algorithms
 	iCreator.RegisterType<ExplodeMapAlgorithm>("ExplodeMapAlgorithm");

@@ -13,6 +13,7 @@
 #include "../../../Games/IO/Communications/PostBinaryBleRequest.h"
 #include "../../../Util/StringSplitter.h"
 #include <stdio.h>
+#include "../../../Games/IO/Communications/GetBinaryBleRequestHandler.h"
 
 
 using namespace Meteor::Scenes::Results;
@@ -608,34 +609,30 @@ int MeteorResult::onEntering(Scene * lastScene)
 	LOG(LogLevel::Debug) << "MeteorResult::onEntering : Perfect: [" << score->hitResults[HitResult::Perfect] << "].";
 
 
-
-	/* 還沒寫好
-	meteoBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::PlayRecordData);
-	outputManager->PushMessage(meteoBluetoothMessage);
-
-	string recordFilePath;
-	*/
-
 	/* 寫入遊戲紀錄 */
 	// 這邊之後要改成發request
 	string recordFilePath = writeGameRecord();
-	//
-	//MeteoFileBluetoothMessage* recordFileMessage = new MeteoFileBluetoothMessage(MeteoCommand::PlayRecordFileSegment, recordFilePath);
-	//outputManager->PushMessage(recordFileMessage);
-
+	vector<string> path = StringSplitter::Split(recordFilePath, "/");
+	string fileName = path.back();
+	path.pop_back();
+	string directoryPath = StringSplitter::Combine(path, "/");
 	
+	MeteoContextBluetoothMessage* playRecordDataMessage = new MeteoContextBluetoothMessage(MeteoCommand::PlayRecordData);
+	context.clear();
 
-	MeteoContextBluetoothMessage* postRecordMessage = new MeteoContextBluetoothMessage(MeteoCommand::PostPlayRecord);
-	json requestContext;
+	context["FileName"] = fileName;
+	context["SheetmusicName"] = workingSm.GetValue()->GetSm()->GetSmMetadata()->Title;
 
-	requestContext["FileName"] = StringSplitter::Split(recordFilePath, "/").back();
-	postRecordMessage->SetContextInJson(requestContext);
-	postRecordMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
+	playRecordDataMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
+	outputManager->PushMessage(playRecordDataMessage);
 
-	PostBinaryBleRequest* postRecordRequest = new PostBinaryBleRequest(
-		recordFilePath,
-		postRecordMessage,
-		MeteoCommand::AckPostPlayRecord,
+
+
+
+	GetBinaryBleRequestHandler* getPlayRecordBleRequestHandler = new GetBinaryBleRequestHandler(
+		directoryPath,
+		MeteoCommand::RequestPlayRecordFile,
+		MeteoCommand::AckRequestPlayRecordFile,
 		MeteoCommand::PlayRecordFileSegment,
 		MeteoCommand::AckPlayRecordFileSegment,
 		MeteoCommand::FinishWritePlayRecord,
@@ -643,26 +640,60 @@ int MeteorResult::onEntering(Scene * lastScene)
 		MeteoCommand::AckFinishWritePlayRecord
 	);
 
-	postRecordRequest->SetCallbackScene(this);
+	getPlayRecordBleRequestHandler->SetCallbackScene(this);
 
-	postRecordRequest->AddOnSuccess(this, [=]() {
+	getPlayRecordBleRequestHandler->AddOnSuccess(this, [=](string s) {
 
-		FILE* fp = popen((string("rm -f ") + recordFilePath).c_str(), "r");
+		FILE* fp = popen((string("rm -f ") + directoryPath + "/" + s).c_str(), "r");
 		if (fp == NULL) {
 			// throw error
 		}
 		pclose(fp);
 
-		LOG(LogLevel::Info) << "MeteorResult::onEntering : exit.";
+		LOG(LogLevel::Info) << "MeteorResult::onEntering : post record success. exit.";
 		Exit();
 		return 0;
-	}, "PostRlayRecordSuccess");
+	}, "Lambda_GetPlayRecordBleRequestHandleSuccess");
 
-	communicationAccess->Queue(postRecordRequest);
+	getPlayRecordBleRequestHandler->AddOnFail(this, [=](string s) {
+
+		FILE* fp = popen((string("rm -f ") + directoryPath + "/" + s).c_str(), "r");
+		if (fp == NULL) {
+			// throw error
+		}
+		pclose(fp);
+
+		LOG(LogLevel::Info) << "MeteorResult::onEntering : post record failed. exit.";
+		Exit();
+		return 0;
+	}, "Lambda_GetPlayRecordBleRequestHandleFail");
+
+	communicationAccess->Queue(getPlayRecordBleRequestHandler);
 
 	
 
 	//Exit();
+
+	return 0;
+}
+
+int MeteorResult::onMessage(MeteoBluetoothMessage * message)
+{
+	MeteoContextBluetoothMessage* contextMessage = dynamic_cast<MeteoContextBluetoothMessage*>(message);
+
+	if (contextMessage == nullptr) {
+		return -1;
+	}
+
+	LOG(LogLevel::Debug) << "MeteorResult::onMessage() : got new bt message. ";
+
+	if (contextMessage->GetCommand() == MeteoCommand::RequestPlayRecordFile) {
+		LOG(LogLevel::Debug) << "MeteorResult::onMessage() : got new bt message [RequestPlayRecordFile]. ";
+
+
+
+	}
+
 
 	return 0;
 }

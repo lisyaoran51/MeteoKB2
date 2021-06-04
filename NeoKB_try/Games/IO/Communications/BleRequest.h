@@ -22,9 +22,13 @@ namespace Communications{
 	enum class BleRequestMethodType {
 		None,
 		PostText,
+		PostTextHandler,
 		PostBinary,
+		PostBinaryHandler,
 		GetText,
+		GetTextHandler,
 		GetBinary,
+		GetBinaryHandler,
 	};
 
 
@@ -86,6 +90,10 @@ namespace Communications{
 			virtual int PerformAndWait(BleRequest* thisRequest) = 0;
 
 			virtual BleRequestMethodType GetMethodType() = 0;
+
+			virtual int Fail(BleRequest* thisRequest) = 0;
+
+			virtual int Success(BleRequest* thisRequest) = 0;
 
 		};
 

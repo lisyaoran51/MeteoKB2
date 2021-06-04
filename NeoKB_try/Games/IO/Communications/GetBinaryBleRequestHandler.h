@@ -1,5 +1,5 @@
-#ifndef GET_BINARY_BLE_REQUEST_H
-#define GET_BINARY_BLE_REQUEST_H
+#ifndef GET_BINARY_BLE_REQUEST_HANDLER_H
+#define GET_BINARY_BLE_REQUEST_HANDLER_H
 
 #include "BleRequest.h"
 #include "../../../Util/DataStructure/FileSegmentMap.h"
@@ -12,12 +12,12 @@ namespace Games {
 namespace IO{
 namespace Communications{
 
-	class GetBinaryBleRequest : public BleRequest {
+	class GetBinaryBleRequestHandler : public BleRequest {
 
 	public:
 
-		GetBinaryBleRequest(string fPath,
-			MeteoBluetoothMessage* gMessage,
+		GetBinaryBleRequestHandler(string dPath,
+			MeteoCommand gCommand,
 			MeteoCommand ackGetCommand,
 			MeteoCommand tCommand,
 			MeteoCommand aTransferCommand,
@@ -25,19 +25,13 @@ namespace Communications{
 			MeteoCommand rRetransferCommand,
 			MeteoCommand aFinishCommand);
 
-		/// <summary>
-		/// 有時一個request可以同時被wifi、ble、bt等多種communication component執行，這時request要先接收目前可選用的component有哪些，自己選定要用哪種component
-		/// 然後再執行
-		/// </summary>
-		virtual int ChooseCommunicationComponentToPerform();
+		int AddOnSuccess(MtoObject * callableObject, function<int(string)> callback, string name = "HandleSuccess");
 
-		int AddOnSuccess(MtoObject * callableObject, function<int(FileSegmentMap*)> callback, string name = "HandleSuccess");
+		int AddOnSuccess(ActionList<int, string>* callback);
 
-		int AddOnSuccess(ActionList<int, FileSegmentMap*>* callback);
+		int AddOnFail(MtoObject * callableObject, function<int(string)> callback, string name = "HandleFail");
 
-		int AddOnFail(MtoObject * callableObject, function<int(FileSegmentMap*)> callback, string name = "HandleFail");
-
-		int AddOnFail(ActionList<int, FileSegmentMap*>* callback);
+		int AddOnFail(ActionList<int, string>* callback);
 
 	protected:
 
@@ -48,15 +42,15 @@ namespace Communications{
 		/// <summary>
 		/// get binary request的執行動作
 		/// </summary>
-		class GetBinaryBleRequestMethod : public BleRequestMethod {
+		class GetBinaryBleRequestHandlerMethod : public BleRequestMethod {
 
 		public:
 
 			/// <summary>
 			/// 資料夾位置最後面部要加上斜線
 			/// </summary>
-			GetBinaryBleRequestMethod(string fPath,
-				MeteoBluetoothMessage* gMessage,
+			GetBinaryBleRequestHandlerMethod(string dPath,
+				MeteoCommand gCommand,
 				MeteoCommand aGetCommand,
 				MeteoCommand tCommand,
 				MeteoCommand aTransferCommand,
@@ -71,14 +65,14 @@ namespace Communications{
 			virtual int Success(BleRequest* thisRequest);
 
 			virtual BleRequestMethodType GetMethodType();
+			
+			int AddOnFail(MtoObject * callableObject, function<int(string)> callback, string name = "HandleFail");
 
-			int AddOnSuccess(MtoObject * callableObject, function<int(FileSegmentMap*)> callback, string name = "HandleSuccess");
+			int AddOnFail(ActionList<int, string>* actionsOnFinish);
 
-			int AddOnSuccess(ActionList<int, FileSegmentMap*>* callback);
+			int AddOnSuccess(MtoObject * callableObject, function<int(string)> callback, string name = "HandleSuccess");
 
-			int AddOnFail(MtoObject * callableObject, function<int(FileSegmentMap*)> callback, string name = "HandleFail");
-
-			int AddOnFail(ActionList<int, FileSegmentMap*>* callback);
+			int AddOnSuccess(ActionList<int, string>* callback);
 
 		protected:
 
@@ -87,7 +81,7 @@ namespace Communications{
 			/// </summary>
 			string directoryPath = "";
 			string fileName = "";
-			MeteoBluetoothMessage* getMessage;
+			MeteoCommand getCommand = MeteoCommand::None;
 			MeteoCommand ackGetCommand = MeteoCommand::None;
 			MeteoCommand transferCommand = MeteoCommand::None;
 			MeteoCommand ackTransferCommand = MeteoCommand::None;
@@ -100,8 +94,15 @@ namespace Communications{
 			bool isTransferFinished = false;
 			bool isAckedTransferFinished = false;
 
-			ActionList<int, FileSegmentMap*> onSuccess;
-			ActionList<int, FileSegmentMap*> onFail;
+			/// <summary>
+			/// 丟出一個file sgegment以後多久沒有收到Ack，就會自動丟下一個file segment
+			/// </summary>
+			double sendFileSegmentTimeout = 0.5; // 0.1
+
+			vector<int> retransferOrders;
+
+			ActionList<int, string> onFail;
+			ActionList<int, string> onSuccess;
 
 		};
 

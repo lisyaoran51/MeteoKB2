@@ -94,6 +94,8 @@ namespace Communications{
 
 		virtual int Fail(exception* e);
 
+		virtual int Success();
+
 		int SetCallbackScene(Scene* cScene);
 
 		int AddOnSuccess(MtoObject * callableObject, function<int()> callback, string name = "OnRequestSuccess");
@@ -182,6 +184,7 @@ namespace Communications{
 
 		virtual int fail(exception* e) = 0;
 
+		virtual int success() = 0;
 
 	};
 

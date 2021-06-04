@@ -215,19 +215,11 @@ int SheetmusicSelectPanel::onMessage(MeteoBluetoothMessage * message)
 		outputManager->PushMessage(meteoContextBluetoothMessage);
 	}
 
-	/* 寫入譜檔片段 */
-	if (message->GetCommand() == MeteoCommand::SheetmusicFileSegment) {
-
-
-
-	}
-
 	// 這一段要在開始傳檔之前送，確認琴裡面有沒有這首歌
 	if (message->GetCommand() == MeteoCommand::SheetmusicData) {
 		LOG(LogLevel::Debug) << "int SheetmusicSelectPanel::onMessage() : get message SheetmusicData";
 
 		try {
-			//int songId = context["Id"].get<int>();
 			string fileName = context["FileName"].get<string>();
 
 			vector<SmInfo*>* sInfos = smManager->GetSmInfos();

@@ -3103,3 +3103,8 @@ DifficultyType:3
 
 
 	要確認binary request有沒有寫錯，然後以後要再寫一條thread去接background request，例如背景偷傳主程式。
+	
+6/4
+	把command更新玩了，現在要把request寫好
+	
+	要加一個藍芽錯誤訊號

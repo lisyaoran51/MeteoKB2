@@ -2142,6 +2142,9 @@
     <ClCompile Include="Games\UI\BluetoothPanel.cpp">
       <Filter>來源檔案\Games\UI</Filter>
     </ClCompile>
+    <ClCompile Include="Games\IO\Communications\GetBinaryBleRequestHandler.cpp">
+      <Filter>來源檔案\Games\IO\Communications</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="DailyLog.txt">
@@ -3573,6 +3576,9 @@
     </ClInclude>
     <ClInclude Include="Games\UI\BluetoothPanel.h">
       <Filter>標頭檔\Games\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\IO\Communications\GetBinaryBleRequestHandler.h">
+      <Filter>標頭檔\Games\IO\Communications</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

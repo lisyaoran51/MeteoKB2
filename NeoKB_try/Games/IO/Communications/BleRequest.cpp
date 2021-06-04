@@ -142,6 +142,3 @@ int BleRequest::fail(exception * e)
 	LOG(LogLevel::Debug) << "int BleRequest::fail() : not implemented.";
 	return 0;
 }
-
-
-

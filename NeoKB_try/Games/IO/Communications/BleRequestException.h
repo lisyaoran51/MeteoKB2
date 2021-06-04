@@ -240,6 +240,10 @@ namespace Communications{
 		/// 字定義的，沒有把檔案轉換出file segment
 		/// </summary>
 		TransferToFileSegmentsFailed,
+		/// <summary>
+		/// 字定義的，沒有找到需要的檔案
+		/// </summary>
+		FileNotFound,
 
 
 

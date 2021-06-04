@@ -246,27 +246,39 @@ int GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait(BleRequest * 
 	return 0;
 }
 
+int GetBinaryBleRequest::GetBinaryBleRequestMethod::Fail(BleRequest * thisRequest)
+{
+	LOG(LogLevel::Debug) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::Fail() : get file failed.";
+
+	if (fileSegmentMap == nullptr)
+		return 0;
+
+	GetBinaryBleRequest* thisGetBinaryBleRequest = dynamic_cast<GetBinaryBleRequest*>(thisRequest);
+	if ((thisGetBinaryBleRequest->isCallbackByScene && SceneMaster::GetInstance().CheckScene(thisGetBinaryBleRequest->callbackScene)) ||
+		!thisGetBinaryBleRequest->isCallbackByScene)
+		onFail.TriggerThenClear(fileSegmentMap);
+
+	return 0;
+}
+
+int GetBinaryBleRequest::GetBinaryBleRequestMethod::Success(BleRequest * thisRequest)
+{
+	LOG(LogLevel::Debug) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::Fail() : get file success.";
+
+	if (fileSegmentMap == nullptr)
+		return 0;
+
+	GetBinaryBleRequest* thisGetBinaryBleRequest = dynamic_cast<GetBinaryBleRequest*>(thisRequest);
+	if ((thisGetBinaryBleRequest->isCallbackByScene && SceneMaster::GetInstance().CheckScene(thisGetBinaryBleRequest->callbackScene)) ||
+		!thisGetBinaryBleRequest->isCallbackByScene)
+		onSuccess.TriggerThenClear(fileSegmentMap);
+
+	return 0;
+}
+
 BleRequestMethodType GetBinaryBleRequest::GetBinaryBleRequestMethod::GetMethodType()
 {
 	return BleRequestMethodType::GetBinary;
-}
-
-int GetBinaryBleRequest::GetBinaryBleRequestMethod::AddOnFinish(MtoObject * callableObject, function<int(FileSegmentMap*)> callback, string name)
-{
-	onFinish.Add(callableObject, callback, name);
-	return 0;
-}
-
-int GetBinaryBleRequest::GetBinaryBleRequestMethod::AddOnFinish(ActionList<int, FileSegmentMap*>* actionsOnFinish)
-{
-	onFinish.Add(actionsOnFinish);
-	return 0;
-}
-
-int GetBinaryBleRequest::GetBinaryBleRequestMethod::AddOnGetBinarySuccess(MtoObject * callableObject, function<int(string)> callback, string name)
-{
-	LOG(LogLevel::Error) << "int GetBinaryBleRequestMethod::AddOnGetBinarySuccess() : not implemented.";
-	return 0;
 }
 
 GetBinaryBleRequest::GetBinaryBleRequest(string fPath, MeteoBluetoothMessage * gMessage, MeteoCommand ackGetCommand, MeteoCommand tCommand, MeteoCommand aTransferCommand, MeteoCommand fCommand, MeteoCommand rRetransferCommand, MeteoCommand aFinishCommand) : RegisterType("GetBinaryBleRequest")
@@ -280,36 +292,38 @@ int GetBinaryBleRequest::ChooseCommunicationComponentToPerform()
 	return 0;
 }
 
-int GetBinaryBleRequest::AddOnFinish(MtoObject * callableObject, function<int(FileSegmentMap*)> callback, string name)
+int GetBinaryBleRequest::AddOnSuccess(MtoObject * callableObject, function<int(FileSegmentMap*)> callback, string name)
 {
-	/* 檢查是不是由scene去add的 */
-	if (dynamic_cast<Scene*>(callableObject)) {
-		isCallbackByScene &= (dynamic_cast<Scene*>(callableObject) != nullptr);
-		if (isCallbackByScene)
-			callbackScene = dynamic_cast<Scene*>(callableObject);
-		else
-			callbackScene = nullptr;
-	}
-
-	dynamic_cast<GetBinaryBleRequestMethod*>(requestMethod)->AddOnFinish(callableObject, callback, name);
-
+	dynamic_cast<GetBinaryBleRequestMethod*>(requestMethod)->AddOnSuccess(callableObject, callback, name);
 	return 0;
 }
 
-int GetBinaryBleRequest::AddOnFinish(ActionList<int, FileSegmentMap*>* actionsOnFinish)
+int GetBinaryBleRequest::AddOnSuccess(ActionList<int, FileSegmentMap*>* callback)
 {
-	LOG(LogLevel::Error) << "int GetBinaryBleRequest::AddOnFinish() : not implemented.";
+	dynamic_cast<GetBinaryBleRequestMethod*>(requestMethod)->AddOnSuccess(callback);
 	return 0;
 }
 
-int GetBinaryBleRequest::AddOnGetBinarySuccess(MtoObject * callableObject, function<int(string)> callback, string name)
+int GetBinaryBleRequest::AddOnFail(MtoObject * callableObject, function<int(FileSegmentMap*)> callback, string name)
 {
-	LOG(LogLevel::Error) << "int GetBinaryBleRequest::AddOnGetBinarySuccess() : not implemented.";
+	dynamic_cast<GetBinaryBleRequestMethod*>(requestMethod)->AddOnFail(callableObject, callback, name);
 	return 0;
 }
 
-int GetBinaryBleRequest::AddOnGetBinarySuccess(ActionList<int, string>* actionsOnGetBinarySuccess)
+int GetBinaryBleRequest::AddOnFail(ActionList<int, FileSegmentMap*>* callback)
 {
-	LOG(LogLevel::Error) << "int GetBinaryBleRequest::AddOnGetBinarySuccess() : not implemented.";
+	dynamic_cast<GetBinaryBleRequestMethod*>(requestMethod)->AddOnFail(callback);
+	return 0;
+}
+
+int GetBinaryBleRequest::fail(exception * e)
+{
+	requestMethod->Fail(this);
+	return 0;
+}
+
+int GetBinaryBleRequest::success()
+{
+	requestMethod->Success(this);
 	return 0;
 }
