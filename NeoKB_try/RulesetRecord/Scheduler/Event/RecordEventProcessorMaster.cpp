@@ -25,78 +25,12 @@ int RecordEventProcessorMaster::ChangePitchState(MeteoPianoPitchState pState)
 int RecordEventProcessorMaster::OnKeyDown(pair<RecordAction, int> action)
 {
 	
-	MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::InstantPressKey);
-
-	switch (pitchState) {
-
-	case MeteoPianoPitchState::None:
-		for (auto it = pitchBindings.begin(); it != pitchBindings.end(); it++)
-		{
-			if (action.first == (*it).second)
-				meteoContextBluetoothMessage->GetContextInJson()["Key"] = int((*it).first);
-		}
-		break;
-
-	case MeteoPianoPitchState::Lowered:
-		for (auto it = loweredPitchBindings.begin(); it != loweredPitchBindings.end(); it++)
-		{
-			if (action.first == (*it).second)
-				meteoContextBluetoothMessage->GetContextInJson()["Key"] = int((*it).first);
-		}
-		break;
-
-	case MeteoPianoPitchState::Raised:
-		for (auto it = raisedPitchBindings.begin(); it != raisedPitchBindings.end(); it++)
-		{
-			if (action.first == (*it).second)
-				meteoContextBluetoothMessage->GetContextInJson()["Key"] = int((*it).first);
-		}
-		break;
-
-	}
-
-	meteoContextBluetoothMessage->GetContextInJson()["Volume"] = action.second;
-
-	outputManager->PushMessage(meteoContextBluetoothMessage);
-	
 
 	return 0;
 }
 
 int RecordEventProcessorMaster::OnKeyUp(RecordAction action)
 {
-	MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::InstantReleaseKey);
-
-	switch (pitchState) {
-
-	case MeteoPianoPitchState::None:
-		for (auto it = pitchBindings.begin(); it != pitchBindings.end(); it++)
-		{
-			if (action == (*it).second)
-				meteoContextBluetoothMessage->GetContextInJson()["Key"] = int((*it).first);
-		}
-		break;
-
-	case MeteoPianoPitchState::Lowered:
-		for (auto it = loweredPitchBindings.begin(); it != loweredPitchBindings.end(); it++)
-		{
-			if (action == (*it).second)
-				meteoContextBluetoothMessage->GetContextInJson()["Key"] = int((*it).first);
-		}
-		break;
-
-	case MeteoPianoPitchState::Raised:
-		for (auto it = raisedPitchBindings.begin(); it != raisedPitchBindings.end(); it++)
-		{
-			if (action == (*it).second)
-				meteoContextBluetoothMessage->GetContextInJson()["Key"] = int((*it).first);
-		}
-		break;
-
-	}
-
-	outputManager->PushMessage(meteoContextBluetoothMessage);
-
 	return 0;
 }
 
