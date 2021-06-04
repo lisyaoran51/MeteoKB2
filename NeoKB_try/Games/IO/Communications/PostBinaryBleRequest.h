@@ -14,6 +14,9 @@ namespace Communications{
 
 	public:
 		
+		/// <summary>
+		/// 這個可能用不到，因為對方要檔案的時候會主動要求
+		/// </summary>
 		PostBinaryBleRequest(string fPath,
 			MeteoBluetoothMessage* pMessage,
 			MeteoCommand ackPostCommand,
@@ -29,16 +32,17 @@ namespace Communications{
 		/// </summary>
 		//virtual int ChooseCommunicationComponentToPerform();
 
-		int AddOnAck(MtoObject * callableObject, function<int(json)> callback, string name = "HandleAck");
+		int AddOnFail(MtoObject * callableObject, function<int(string)> callback, string name = "HandleFail");
 
-		int AddOnFinish(MtoObject * callableObject, function<int()> callback, string name = "HandleFinish");
+		int AddOnSuccess(MtoObject * callableObject, function<int(string)> callback, string name = "HandleSuccess");
 
 
 	protected:
 
 
-
 		virtual int fail(exception* e);
+
+		virtual int success();
 
 		/// <summary>
 		/// post binary request的執行動作
@@ -64,9 +68,13 @@ namespace Communications{
 
 			virtual BleRequestMethodType GetMethodType();
 
-			int AddOnAck(MtoObject * callableObject, function<int(json)> callback, string name = "HandleAck");
+			virtual int Fail(BleRequest* thisRequest);
 
-			int AddOnFinish(MtoObject * callableObject, function<int()> callback, string name = "HandleFinish");
+			virtual int Success(BleRequest* thisRequest);
+
+			int AddOnFail(MtoObject * callableObject, function<int(string)> callback, string name = "HandleAck");
+
+			int AddOnSuccess(MtoObject * callableObject, function<int(string)> callback, string name = "HandleFinish");
 
 		protected:
 
@@ -87,10 +95,8 @@ namespace Communications{
 			double sendFileSegmentTimeout = 0.5; // 0.1
 
 			vector<int> retransferOrders;
-
-			ActionList<int> onFinish;
-			ActionList<int, string> onPostBinarySuccess;
-			ActionList<int, json> onAck;
+			ActionList<int, string> onFail;
+			ActionList<int, string> onSuccess;
 		};
 	};
 

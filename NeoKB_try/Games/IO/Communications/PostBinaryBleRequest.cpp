@@ -29,15 +29,12 @@ PostBinaryBleRequest::PostBinaryBleRequestMethod::PostBinaryBleRequestMethod(str
 {
 	filePath = fPath;
 
-
 	ackPostCommand = aPostCommand;
 	transferCommand = tCommand;
 	ackTransferCommand = aTransferCommand;
 	finishCommand = fCommand;
 	requestRetransferCommand = rRetransferCommand;
 	ackFinishCommand = aFinishCommand;
-
-
 
 }
 
@@ -71,26 +68,22 @@ int PostBinaryBleRequest::PostBinaryBleRequestMethod::PerformAndWait(BleRequest 
 			MeteoBluetoothMessage* message = thisPostBinaryRequest->inputRawMessages.back();
 
 			if (dynamic_cast<MeteoContextBluetoothMessage*>(message)) {
-				if (dynamic_cast<MeteoContextBluetoothMessage*>(message)->GetCommand() == ackPostCommand) {
+			if (dynamic_cast<MeteoContextBluetoothMessage*>(message)->GetCommand() == ackPostCommand) {
 
-					/* 檢查Scene是否還存在，存在才能執行 */
-					if ((thisPostBinaryRequest->isCallbackByScene && SceneMaster::GetInstance().CheckScene(thisPostBinaryRequest->callbackScene)) ||
-						!thisPostBinaryRequest->isCallbackByScene ||
-						onAck.GetSize() == 0)
-						onAck.TriggerThenClear(dynamic_cast<MeteoContextBluetoothMessage*>(message)->GetContextInJson());
-					else {
-						throw BleRequestException(BleResponseCode::Gone);
-					}
+				isAckReceived = true;
 
-					isAckReceived = true;
+				// TODO: 檢查回傳值
 
-				}
+			}
 			}
 			thisPostBinaryRequest->inputRawMessages.pop_back();
 			delete message;
 		}
 
 		uLock.unlock();
+
+		if (isAckReceived)
+			break;
 
 		this_thread::sleep_for(std::chrono::milliseconds(100));
 
@@ -339,16 +332,6 @@ int PostBinaryBleRequest::PostBinaryBleRequestMethod::PerformAndWait(BleRequest 
 		this_thread::sleep_for(std::chrono::milliseconds(100));
 	}
 
-	// #-- 4
-
-	/* 檢查Scene是否還存在，存在才能執行 */
-	if ((thisPostBinaryRequest->isCallbackByScene && SceneMaster::GetInstance().CheckScene(thisPostBinaryRequest->callbackScene)) ||
-		!thisPostBinaryRequest->isCallbackByScene ||
-		onFinish.GetSize() == 0)
-		onFinish.TriggerThenClear();
-	else if(!SceneMaster::GetInstance().CheckScene(thisPostBinaryRequest->callbackScene))
-		throw BleRequestException(BleResponseCode::Gone);
-
 	return 0;
 }
 
@@ -357,15 +340,47 @@ BleRequestMethodType PostBinaryBleRequest::PostBinaryBleRequestMethod::GetMethod
 	return BleRequestMethodType::PostBinary;
 }
 
-int PostBinaryBleRequest::PostBinaryBleRequestMethod::AddOnAck(MtoObject * callableObject, function<int(json)> callback, string name)
+int PostBinaryBleRequest::PostBinaryBleRequestMethod::Fail(BleRequest * thisRequest)
 {
-	onAck.Add(callableObject, callback, name);
+	LOG(LogLevel::Debug) << "GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::Fail() : fail to handle get file request.";
+
+	if (fileMap == nullptr)
+		return 0;
+
+	PostBinaryBleRequest* thisPostBinaryBleRequest = dynamic_cast<PostBinaryBleRequest*>(thisRequest);
+	if ((thisPostBinaryBleRequest->isCallbackByScene && SceneMaster::GetInstance().CheckScene(thisPostBinaryBleRequest->callbackScene)) ||
+		!thisPostBinaryBleRequest->isCallbackByScene)
+		onFail.TriggerThenClear(fileMap->fileName);
+
+	/// TODO: 刪除file map
 	return 0;
 }
 
-int PostBinaryBleRequest::PostBinaryBleRequestMethod::AddOnFinish(MtoObject * callableObject, function<int()> callback, string name)
+int PostBinaryBleRequest::PostBinaryBleRequestMethod::Success(BleRequest * thisRequest)
 {
-	onFinish.Add(callableObject, callback, name);
+	LOG(LogLevel::Debug) << "GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::Fail() : fail to handle get file request.";
+
+	if (fileMap == nullptr)
+		return 0;
+
+	PostBinaryBleRequest* thisPostBinaryBleRequest = dynamic_cast<PostBinaryBleRequest*>(thisRequest);
+	if ((thisPostBinaryBleRequest->isCallbackByScene && SceneMaster::GetInstance().CheckScene(thisPostBinaryBleRequest->callbackScene)) ||
+		!thisPostBinaryBleRequest->isCallbackByScene)
+		onFail.TriggerThenClear(fileMap->fileName);
+
+	/// TODO: 刪除file map
+	return 0;
+}
+
+int PostBinaryBleRequest::PostBinaryBleRequestMethod::AddOnFail(MtoObject * callableObject, function<int(string)> callback, string name)
+{
+	onFail.Add(callableObject, callback, name);
+	return 0;
+}
+
+int PostBinaryBleRequest::PostBinaryBleRequestMethod::AddOnSuccess(MtoObject * callableObject, function<int(string)> callback, string name)
+{
+	onSuccess.Add(callableObject, callback, name);
 	return 0;
 }
 
@@ -386,39 +401,26 @@ PostBinaryBleRequest::PostBinaryBleRequest(string fPath, MeteoBluetoothMessage *
 
 }
 
-int PostBinaryBleRequest::AddOnAck(MtoObject * callableObject, function<int(json)> callback, string name)
+int PostBinaryBleRequest::AddOnFail(MtoObject * callableObject, function<int(string)> callback, string name)
 {
-	/* 檢查是不是由scene去add的 */
-	if (dynamic_cast<Scene*>(callableObject)) {
-		isCallbackByScene &= (dynamic_cast<Scene*>(callableObject) != nullptr);
-		if (isCallbackByScene)
-			callbackScene = dynamic_cast<Scene*>(callableObject);
-		else
-			callbackScene = nullptr;
-	}
-
-	dynamic_cast<PostBinaryBleRequestMethod*>(requestMethod)->AddOnAck(callableObject, callback, name);
+	dynamic_cast<PostBinaryBleRequestMethod*>(requestMethod)->AddOnFail(callableObject, callback, name);
 	return 0;
 }
 
-int PostBinaryBleRequest::AddOnFinish(MtoObject * callableObject, function<int()> callback, string name)
+int PostBinaryBleRequest::AddOnSuccess(MtoObject * callableObject, function<int(string)> callback, string name)
 {
-	/* 檢查是不是由scene去add的 */
-	if (dynamic_cast<Scene*>(callableObject)) {
-		isCallbackByScene &= (dynamic_cast<Scene*>(callableObject) != nullptr);
-		if (isCallbackByScene)
-			callbackScene = dynamic_cast<Scene*>(callableObject);
-		else
-			callbackScene = nullptr;
-	}
-
-	dynamic_cast<PostBinaryBleRequestMethod*>(requestMethod)->AddOnFinish(callableObject, callback, name);
-
+	dynamic_cast<PostBinaryBleRequestMethod*>(requestMethod)->AddOnSuccess(callableObject, callback, name);
 	return 0;
 }
 
 int PostBinaryBleRequest::fail(exception * e)
 {
-	LOG(LogLevel::Error) << "PostBinaryBleRequest::fail() : not implemented.";
+	requestMethod->Fail(this);
+	return 0;
+}
+
+int PostBinaryBleRequest::success()
+{
+	requestMethod->Success(this);
 	return 0;
 }
