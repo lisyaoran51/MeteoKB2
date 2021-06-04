@@ -68,7 +68,7 @@ int MeteoBluetoothDevice::readFromDevice()
 
 		InputState* newState = new InputState();
 		newState->SetBluetoothState(new BluetoothState());
-		MeteoContextBluetoothMessage* btMessage = new MeteoContextBluetoothMessage(MeteoCommand::AppSwitchPianoInstrument);
+		MeteoContextBluetoothMessage* btMessage = new MeteoContextBluetoothMessage(MeteoCommand::AppSwitchKeyboardInstrument);
 		json context;
 		context["Instrument"] = "piano";
 		btMessage->SetContextInJson(context);
