@@ -28,6 +28,8 @@ int GetTextBleRequest::GetTextBleRequestMethod::PerformAndWait(BleRequest * this
 
 	bluetoothPhone->PushOutputMessage(getMessage);
 
+	bool isReceived = false;
+
 	while (1) {
 
 		if (thisGetTextRequest->getElapsedSeconds() > thisGetTextRequest->timeout) {
@@ -46,15 +48,9 @@ int GetTextBleRequest::GetTextBleRequestMethod::PerformAndWait(BleRequest * this
 			if (dynamic_cast<MeteoContextBluetoothMessage*>(message)) {
 				if (dynamic_cast<MeteoContextBluetoothMessage*>(message)->GetCommand() == returnCommand) {
 
-					// 確認Scene還存不存在，如果不存在就不執行callback，避免該scene已經被刪掉的情況
-					if ((thisGetTextRequest->isCallbackByScene && SceneMaster::GetInstance().CheckScene(thisGetTextRequest->callbackScene)) ||
-						!thisGetTextRequest->isCallbackByScene ||
-						onReturn.GetSize() == 0)
-						onReturn.TriggerThenClear(dynamic_cast<MeteoContextBluetoothMessage*>(message)->GetContextInJson());
-					else
-						throw BleRequestException(BleResponseCode::Gone);
+					returnText = dynamic_cast<MeteoContextBluetoothMessage*>(message)->GetContext();
 
-					return 0;
+					isReceived = true;
 
 				}
 			}
@@ -62,6 +58,9 @@ int GetTextBleRequest::GetTextBleRequestMethod::PerformAndWait(BleRequest * this
 			delete message;
 		}
 		uLock.unlock();
+
+		if (isReceived)
+			break;
 
 		this_thread::sleep_for(std::chrono::milliseconds(100));
 

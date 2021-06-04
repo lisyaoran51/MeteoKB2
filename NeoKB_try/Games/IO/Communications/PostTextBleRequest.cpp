@@ -30,43 +30,48 @@ int PostTextBleRequest::PostTextBleRequestMethod::PerformAndWait(BleRequest* thi
 	// TODO: command to message
 	bluetoothPhone->PushOutputMessage(outputMessage);
 
-	if (isNeedCheckAck) {
+	if (!isNeedCheckAck)
+		return 0;
 
-		while (1) {
+	bool isReceived = false;
 
-			if (thisPostTextRequest->getElapsedSeconds() > thisPostTextRequest->timeout) {
-				throw BleRequestException(BleResponseCode::RequestTimeout);
-			}
+	while (1) {
 
-			if (thisPostTextRequest->exitRequested) {
-				throw BleRequestException(BleResponseCode::ExitRequested);
-			}
-
-			/* 這段寫得很長，功能就只是把收到的ack丟給request而已 */
-			unique_lock<mutex> uLock(thisPostTextRequest->rawMessageMutex);
-			while(thisPostTextRequest->inputRawMessages.size() > 0) {
-
-				MeteoBluetoothMessage* message = thisPostTextRequest->inputRawMessages.back();
-
-				if (dynamic_cast<MeteoContextBluetoothMessage*>(message)) {
-					if (dynamic_cast<MeteoContextBluetoothMessage*>(message)->GetCommand() == ackCommand) {
-
-
-						ackText = dynamic_cast<MeteoContextBluetoothMessage*>(message)->GetContext();
-
-						break;
-					}
-				}
-
-				thisPostTextRequest->inputRawMessages.pop_back();
-				delete message;
-			}
-
-			uLock.unlock();
-
-			this_thread::sleep_for(std::chrono::milliseconds(100));
-
+		if (thisPostTextRequest->getElapsedSeconds() > thisPostTextRequest->timeout) {
+			throw BleRequestException(BleResponseCode::RequestTimeout);
 		}
+
+		if (thisPostTextRequest->exitRequested) {
+			throw BleRequestException(BleResponseCode::ExitRequested);
+		}
+
+		/* 這段寫得很長，功能就只是把收到的ack丟給request而已 */
+		unique_lock<mutex> uLock(thisPostTextRequest->rawMessageMutex);
+		while(thisPostTextRequest->inputRawMessages.size() > 0) {
+
+			MeteoBluetoothMessage* message = thisPostTextRequest->inputRawMessages.back();
+
+			if (dynamic_cast<MeteoContextBluetoothMessage*>(message)) {
+				if (dynamic_cast<MeteoContextBluetoothMessage*>(message)->GetCommand() == ackCommand) {
+
+
+					ackText = dynamic_cast<MeteoContextBluetoothMessage*>(message)->GetContext();
+
+					isReceived = true;
+				}
+			}
+
+			thisPostTextRequest->inputRawMessages.pop_back();
+			delete message;
+		}
+
+		uLock.unlock();
+
+		if (isReceived)
+			break;
+
+		this_thread::sleep_for(std::chrono::milliseconds(100));
+
 	}
 
 
