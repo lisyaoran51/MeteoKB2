@@ -99,84 +99,77 @@ int MeteorEventProcessorMaster::OnKeyDown(pair<MeteorAction, int> action)
 	}
 
 
-	MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::PressKey);
-	json context;
-
-	switch (pitchState) {
-
-	case MeteoPianoPitchState::None:
-		for (auto it = pitchBindings.begin(); it != pitchBindings.end(); it++)
-		{
-			if (action.first == (*it).second)
-				context["Key"] = int((*it).first);
-		}
-		break;
-
-	case MeteoPianoPitchState::Lowered:
-		for (auto it = loweredPitchBindings.begin(); it != loweredPitchBindings.end(); it++)
-		{
-			if (action.first == (*it).second)
-				context["Key"] = int((*it).first);
-		}
-		break;
-
-	case MeteoPianoPitchState::Raised:
-		for (auto it = raisedPitchBindings.begin(); it != raisedPitchBindings.end(); it++)
-		{
-			if (action.first == (*it).second)
-				context["Key"] = int((*it).first);
-		}
-		break;
-
-	}
-
-	context["Volume"] = action.second;
-
-	meteoContextBluetoothMessage->SetContextInJson(context);
-	meteoContextBluetoothMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
-
-	outputManager->PushMessage(meteoContextBluetoothMessage);
+	//MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::PressKey);
+	//json context;
+	//
+	//switch (pitchState) {
+	//
+	//case MeteoPianoPitchState::None:
+	//	for (auto it = pitchBindings.begin(); it != pitchBindings.end(); it++)
+	//	{
+	//		if (action.first == (*it).second)
+	//			context["Key"] = int((*it).first);
+	//	}
+	//	break;
+	//
+	//case MeteoPianoPitchState::Lowered:
+	//	for (auto it = loweredPitchBindings.begin(); it != loweredPitchBindings.end(); it++)
+	//	{
+	//		if (action.first == (*it).second)
+	//			context["Key"] = int((*it).first);
+	//	}
+	//	break;
+	//
+	//case MeteoPianoPitchState::Raised:
+	//	for (auto it = raisedPitchBindings.begin(); it != raisedPitchBindings.end(); it++)
+	//	{
+	//		if (action.first == (*it).second)
+	//			context["Key"] = int((*it).first);
+	//	}
+	//	break;
+	//
+	//}
+	//
+	//context["Volume"] = action.second;
+	//
+	//meteoContextBluetoothMessage->SetContextInJson(context);
+	//meteoContextBluetoothMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
+	//
+	//outputManager->PushMessage(meteoContextBluetoothMessage);
 
 	return 0;
 }
 
 int MeteorEventProcessorMaster::OnKeyUp(MeteorAction action)
 {
-	MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::ReleaseKey);
-	json context;
 
-	switch (pitchState) {
-
-	case MeteoPianoPitchState::None:
-		for (auto it = pitchBindings.begin(); it != pitchBindings.end(); it++)
-		{
-			if (action == (*it).second)
-				context["Key"] = int((*it).first);
-		}
-		break;
-
-	case MeteoPianoPitchState::Lowered:
-		for (auto it = loweredPitchBindings.begin(); it != loweredPitchBindings.end(); it++)
-		{
-			if (action == (*it).second)
-				context["Key"] = int((*it).first);
-		}
-		break;
-
-	case MeteoPianoPitchState::Raised:
-		for (auto it = raisedPitchBindings.begin(); it != raisedPitchBindings.end(); it++)
-		{
-			if (action == (*it).second)
-				context["Key"] = int((*it).first);
-		}
-		break;
-
-	}
-
-	meteoContextBluetoothMessage->SetContextInJson(context);
-	meteoContextBluetoothMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
-
-	outputManager->PushMessage(meteoContextBluetoothMessage);
+	//switch (pitchState) {
+	//
+	//case MeteoPianoPitchState::None:
+	//	for (auto it = pitchBindings.begin(); it != pitchBindings.end(); it++)
+	//	{
+	//		if (action == (*it).second)
+	//			key = int((*it).first);
+	//	}
+	//	break;
+	//
+	//case MeteoPianoPitchState::Lowered:
+	//	for (auto it = loweredPitchBindings.begin(); it != loweredPitchBindings.end(); it++)
+	//	{
+	//		if (action == (*it).second)
+	//			key = int((*it).first);
+	//	}
+	//	break;
+	//
+	//case MeteoPianoPitchState::Raised:
+	//	for (auto it = raisedPitchBindings.begin(); it != raisedPitchBindings.end(); it++)
+	//	{
+	//		if (action == (*it).second)
+	//			key = int((*it).first);
+	//	}
+	//	break;
+	//
+	//}
 
 	return 0;
 }
