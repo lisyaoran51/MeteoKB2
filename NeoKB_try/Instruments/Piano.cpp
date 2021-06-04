@@ -512,21 +512,21 @@ int Piano::OnButtonDown(PianoAction action)
 	}
 	/* ¤O«× */
 	if (action == PianoAction::Sensitivity) {
-		MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::PianoPressSensitiveButton);
+		//MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::PianoPressSensitiveButton);
 		if (isSensitive == true) {
 			isSensitive = false;
-			json context;
-			context["State"] = false;
-			meteoContextBluetoothMessage->SetContextInJson(context);
+			//json context;
+			//context["State"] = false;
+			//meteoContextBluetoothMessage->SetContextInJson(context);
 		}
 		else {
 			isSensitive = true;
-			json context;
-			context["State"] = false;
-			meteoContextBluetoothMessage->SetContextInJson(context);
+			//json context;
+			//context["State"] = false;
+			//meteoContextBluetoothMessage->SetContextInJson(context);
 		}
-		meteoContextBluetoothMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
-		outputManager->PushMessage(meteoContextBluetoothMessage);
+		//meteoContextBluetoothMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
+		//outputManager->PushMessage(meteoContextBluetoothMessage);
 	}
 
 	/* ´¡¤J½ñªO */
