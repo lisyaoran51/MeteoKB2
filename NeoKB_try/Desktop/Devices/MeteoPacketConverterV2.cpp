@@ -3,7 +3,7 @@
 #include "../../Util/Log.h"
 #include "../../Games/Output/Bluetooths/MeteoContextBluetoothMessage.h"
 #include "../../Games/Output/Bluetooths/MeteoFileSegmentBluetoothMessage.h"
-//#include "../../Games/Input/Commands/MeteoAckFileBluetoothCommand.h"
+#include "../../Games/Output/Bluetooths/MeteoAckFileSegmentBluetoothMessage.h"
 
 
 using namespace Desktop::Devices;
@@ -665,5 +665,36 @@ BluetoothMessage* MeteoPacketConverterV2::ConvertToFile(const char * buffer, int
 	}
 
 	LOG(LogLevel::Error) << "MeteoPacketConverterV2::ConvertToFile() : convert failed .";
+	return nullptr;
+}
+
+BluetoothMessage * MeteoPacketConverterV2::ConvertToAckFileMessage(const char * buffer, int size)
+{
+	unsigned int command = 0x0;
+	memcpy(&command, buffer, sizeof(command));
+
+	map<unsigned int, MeteoCommand>::iterator iter;
+	iter = commandMap.find(command);
+	if (iter != commandMap.end()) {
+
+		LOG(LogLevel::Fine) << "MeteoPacketConverterV1::ConvertToAckFileMessage() : converting [" << command << "] command file.";
+
+		if (CheckPacketType(buffer, size) == PacketType::AckFile) {
+
+			string fileName = getFileName(buffer, size);
+
+			int fileSegmentNumber = getFileSegmentOrder(buffer, size);
+			int fileSegmentCount = getFileSegmentCount(buffer, size);
+
+			MeteoAckFileSegmentBluetoothMessage* fileSegmentBluetoothMessage = new MeteoAckFileSegmentBluetoothMessage(commandMap[command], fileName, fileSegmentNumber, fileSegmentCount);
+
+
+			LOG(LogLevel::Debug) << "MeteoPacketConverterV2::ConvertToAckFileMessage() : get file [" << fileName << "] segment [" << fileSegmentNumber << "]/[" << fileSegmentCount << "].";
+
+			return fileSegmentBluetoothMessage;
+		}
+	}
+
+	LOG(LogLevel::Error) << "MeteoPacketConverterV2::ConvertToAckFileMessage() : convert failed .";
 	return nullptr;
 }

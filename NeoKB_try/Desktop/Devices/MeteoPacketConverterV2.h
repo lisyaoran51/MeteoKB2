@@ -80,6 +80,11 @@ namespace Devices{
 		/// <//summary>
 		virtual BluetoothMessage* ConvertToFile(const char* buffer, int size);
 
+		/// <summary>
+		/// ¦^¶Ç­È¬OAck file
+		/// <//summary>
+		virtual BluetoothMessage* ConvertToAckFileMessage(const char* buffer, int size);
+
 
 
 	};

@@ -315,8 +315,8 @@ int MeteoBluetoothPhoneV2::handleNewPacket(const char * packet, int length)
 
 		LOG(LogLevel::Debug) << "MeteoBluetoothPhoneV2::handleNewPacket() : massage:" << btMessage->ToString();
 
-		//if (btMessage != nullptr)
-		//	pushBluetoothState(btMessage);
+		if (btMessage != nullptr)
+			pushBluetoothState(btMessage);
 	}
 	else if (packetType == PacketType::File) {
 
@@ -325,8 +325,18 @@ int MeteoBluetoothPhoneV2::handleNewPacket(const char * packet, int length)
 
 		BluetoothMessage* btMessage = packetConverter->ConvertToFile(packet, length);
 
-		//if (btMessage != nullptr)
-		//	pushBluetoothState(btMessage);
+		if (btMessage != nullptr)
+			pushBluetoothState(btMessage);
+	}
+	else if (packetType == PacketType::AckFile) {
+
+		if (!getIsReady())
+			return 0;
+
+		BluetoothMessage* btMessage = packetConverter->ConvertToAckFileMessage(packet, length);
+
+		if (btMessage != nullptr)
+			pushBluetoothState(btMessage);
 	}
 	else if (packetType == PacketType::None) {
 		// 封包壞掉，直接丟掉，不用刪因為return以後外面會刪

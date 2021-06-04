@@ -156,7 +156,7 @@ bool MeteoContextBluetoothMessage::GetIsRawMessage()
 	case 0x00020000:	//ack
 	case 0x00030000:	//retcon
 	case 0x00040000:	//retnon
-		return true;
+		return false;
 		break;
 	}
 
