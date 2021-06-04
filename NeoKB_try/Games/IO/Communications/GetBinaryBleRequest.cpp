@@ -272,6 +272,30 @@ BleRequestMethodType GetBinaryBleRequest::GetBinaryBleRequestMethod::GetMethodTy
 	return BleRequestMethodType::GetBinary;
 }
 
+int GetBinaryBleRequest::GetBinaryBleRequestMethod::AddOnSuccess(MtoObject * callableObject, function<int(FileSegmentMap*)> callback, string name)
+{
+	onSuccess.Add(callableObject, callback, name);
+	return 0;
+}
+
+int GetBinaryBleRequest::GetBinaryBleRequestMethod::AddOnSuccess(ActionList<int, FileSegmentMap*>* callback)
+{
+	onSuccess.Add(callback);
+	return 0;
+}
+
+int GetBinaryBleRequest::GetBinaryBleRequestMethod::AddOnFail(MtoObject * callableObject, function<int(FileSegmentMap*)> callback, string name)
+{
+	onFail.Add(callableObject, callback, name);
+	return 0;
+}
+
+int GetBinaryBleRequest::GetBinaryBleRequestMethod::AddOnFail(ActionList<int, FileSegmentMap*>* callback)
+{
+	onFail.Add(callback);
+	return 0;
+}
+
 GetBinaryBleRequest::GetBinaryBleRequest(string fPath, MeteoBluetoothMessage * gMessage, MeteoCommand ackGetCommand, MeteoCommand tCommand, MeteoCommand aTransferCommand, MeteoCommand fCommand, MeteoCommand rRetransferCommand, MeteoCommand aFinishCommand) : RegisterType("GetBinaryBleRequest")
 {
 	LOG(LogLevel::Error) << "GetBinaryBleRequest::GetBinaryBleRequest() : not implemented.";
