@@ -1,8 +1,8 @@
 #include "BleAccess.h"
 
 #include <iterator>
-#include "IdentifyBleRequest.h"
-#include "FaultIdentityBleRequest.h"
+//#include "IdentifyBleRequest.h"
+//#include "FaultIdentityBleRequest.h"
 
 
 
@@ -127,7 +127,7 @@ int BleAccess::run()
 			communicationState = CommunicationState::Connecting;
 
 			// 先登入看看，燈的進去就轉為Connected。登入方法是丟一個key過去，讓手機來解碼
-
+			/*
 			CommunicationRequest* request = new IdentifyBleRequest("aaaaaaaa");
 
 			int identifyResult = handleRequest(request);
@@ -163,6 +163,7 @@ int BleAccess::run()
 				communicationState = CommunicationState::Failed;
 				continue;
 			}
+			*/
 
 		}
 
