@@ -18,6 +18,7 @@ namespace Modifiers{
 
 	public:
 
+		ClockRateModifier();
 		ClockRateModifier(float cRate);
 
 		virtual int ApplyToTimeController(TimeController* timeController);

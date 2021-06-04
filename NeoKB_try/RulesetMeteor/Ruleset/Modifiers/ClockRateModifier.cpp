@@ -5,6 +5,10 @@
 using namespace Meteor::Rulesets::Modifiers;
 
 
+ClockRateModifier::ClockRateModifier() : RegisterType("ClockRateModifier")
+{
+}
+
 ClockRateModifier::ClockRateModifier(float cRate) : RegisterType("ClockRateModifier")
 {
 	clockRate = cRate;

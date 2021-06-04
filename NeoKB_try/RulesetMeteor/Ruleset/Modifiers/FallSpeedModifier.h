@@ -18,6 +18,7 @@ namespace Modifiers{
 
 	public:
 
+		FallSpeedModifier();
 		FallSpeedModifier(float fSpeed);
 
 		virtual int ApplyToDifficulty(SmDifficulty* smDifficulty);

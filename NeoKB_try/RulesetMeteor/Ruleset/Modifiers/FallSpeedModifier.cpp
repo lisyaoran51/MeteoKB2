@@ -4,6 +4,10 @@
 using namespace Meteor::Rulesets::Modifiers;
 
 
+FallSpeedModifier::FallSpeedModifier() : RegisterType("FallSpeedModifier")
+{
+}
+
 FallSpeedModifier::FallSpeedModifier(float fSpeed) : RegisterType("FallSpeedModifier")
 {
 	fallSpeed = fSpeed;
