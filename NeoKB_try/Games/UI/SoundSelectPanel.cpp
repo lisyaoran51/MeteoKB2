@@ -68,8 +68,8 @@ int SoundSelectPanel::onMessage(MeteoBluetoothMessage * message)
 	LOG(LogLevel::Debug) << "SoundSelectPanel::onMessage() : got new bt command. ";
 	MeteoContextBluetoothMessage* contextMessage = dynamic_cast<MeteoContextBluetoothMessage*>(message);
 
-	if (message->GetCommand() == MeteoCommand::AppSwitchPianoInstrument) {
-		LOG(LogLevel::Info) << "SoundSelectPanel::onMessage() : AppSwitchPianoInstrument. ";
+	if (message->GetCommand() == MeteoCommand::AppSwitchKeyboardInstrument) {
+		LOG(LogLevel::Info) << "SoundSelectPanel::onMessage() : AppSwitchKeyboardInstrument. ";
 
 		json context = contextMessage->GetContextInJson();
 
@@ -85,40 +85,24 @@ int SoundSelectPanel::onMessage(MeteoBluetoothMessage * message)
 			}
 		}
 
-		MeteoContextBluetoothMessage* outputMessage = new MeteoContextBluetoothMessage(MeteoCommand::AckAppSwitchPianoInstrument);
+		MeteoContextBluetoothMessage* outputMessage = new MeteoContextBluetoothMessage(MeteoCommand::AckAppSwitchKeyboardInstrument);
 
 		json returnContext;
 
 		if (soundBindingSet) {
-
-
 			returnContext["Status"] = 0;
-			outputMessage->SetContextInJson(returnContext);
-			outputMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
-
-			outputManager->PushMessage(outputMessage);
 
 			dynamic_cast<Piano*>(instrument)->SwitchSoundBindings(dynamic_cast<TSoundBindingSet<Pitch>*>(soundBindingSet));
-
-			// 重複使用一下
-			outputMessage = new MeteoContextBluetoothMessage(MeteoCommand::FinishAppSwitchPianoInstrument);
-			returnContext.clear();
-			returnContext["Instrument"] = soundBank;
-			outputMessage->SetContextInJson(returnContext);
-			outputMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
-
-			outputManager->PushMessage(outputMessage);
-
 		}
 		else {
 			// 切換失敗
 			LOG(LogLevel::Info) << "SoundSelectPanel::onMessage() : switch instrument failed. ";
 			returnContext["Status"] = -1;
-			outputMessage->SetContextInJson(returnContext);
-			outputMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
-
-			outputManager->PushMessage(outputMessage);
 		}
+		outputMessage->SetContextInJson(returnContext);
+		outputMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
+
+		outputManager->PushMessage(outputMessage);
 
 
 	}
