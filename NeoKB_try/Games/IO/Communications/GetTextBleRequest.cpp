@@ -66,25 +66,6 @@ int GetTextBleRequest::GetTextBleRequestMethod::PerformAndWait(BleRequest * this
 		this_thread::sleep_for(std::chrono::milliseconds(100));
 
 
-
-		/* 這段成是寫得不好，不用了
-		unique_lock<mutex> uLock(*bleAccess->GetRawCommandMutex());
-
-		for (int i = 0; i < bleAccess->GetInputRawCommand().size(); i++) {
-			if (dynamic_cast<MeteoTextBluetoothCommand*>(bleAccess->GetInputRawCommand()[i])) {
-				if (dynamic_cast<MeteoTextBluetoothCommand*>(bleAccess->GetInputRawCommand()[i])->GetCommand() == ackCommand) {
-
-					onAck.TriggerThenClear(dynamic_cast<MeteoTextBluetoothCommand*>(bleAccess->GetInputRawCommand()[i])->GetContextInJson());
-
-					bleAccess->GetInputRawCommand()->erase(bleAccess->GetInputRawCommand()->begin() + i);
-					return 0;
-
-				}
-			}
-		}
-
-		uLock.unlock();
-		*/
 	}
 
 
@@ -98,6 +79,30 @@ BleRequestMethodType GetTextBleRequest::GetTextBleRequestMethod::GetMethodType()
 	return BleRequestMethodType::GetText;
 }
 
+int GetTextBleRequest::GetTextBleRequestMethod::Fail(BleRequest * thisRequest)
+{
+	LOG(LogLevel::Debug) << "GetTextBleRequest::GetTextBleRequestMethod::Fail() : get text failed.";
+
+	GetTextBleRequest* thisGetTextBleRequest = dynamic_cast<GetTextBleRequest*>(thisRequest);
+	if ((thisGetTextBleRequest->isCallbackByScene && SceneMaster::GetInstance().CheckScene(thisGetTextBleRequest->callbackScene)) ||
+		!thisGetTextBleRequest->isCallbackByScene)
+		onFail.TriggerThenClear(dynamic_cast<MeteoContextBluetoothMessage*>(getMessage)->GetContextInJson());
+
+	return 0;
+}
+
+int GetTextBleRequest::GetTextBleRequestMethod::Success(BleRequest * thisRequest)
+{
+	LOG(LogLevel::Debug) << "GetTextBleRequest::GetTextBleRequestMethod::Fail() : get text success.";
+
+	GetTextBleRequest* thisGetTextBleRequest = dynamic_cast<GetTextBleRequest*>(thisRequest);
+	if ((thisGetTextBleRequest->isCallbackByScene && SceneMaster::GetInstance().CheckScene(thisGetTextBleRequest->callbackScene)) ||
+		!thisGetTextBleRequest->isCallbackByScene)
+		onFail.TriggerThenClear(GetReturnJson());
+
+	return 0;
+}
+
 string GetTextBleRequest::GetTextBleRequestMethod::GetReturnText()
 {
 	return returnText;
@@ -105,13 +110,22 @@ string GetTextBleRequest::GetTextBleRequestMethod::GetReturnText()
 
 json GetTextBleRequest::GetTextBleRequestMethod::GetReturnJson()
 {
+	if (returnText == "{}")
+		return json();
+	// TODO: 解析錯誤的時候丟例外
+
 	return json(returnText);
 }
 
-int GetTextBleRequest::GetTextBleRequestMethod::AddOnReturn(MtoObject * callableObject, function<int(json)> callback, string name)
+int GetTextBleRequest::GetTextBleRequestMethod::AddOnFail(MtoObject * callableObject, function<int(json)> callback, string name)
 {
+	onFail.Add(callableObject, callback, name);
+	return 0;
+}
 
-	onReturn.Add(callableObject, callback, name);
+int GetTextBleRequest::GetTextBleRequestMethod::AddOnSuccess(MtoObject * callableObject, function<int(json)> callback, string name)
+{
+	onSuccess.Add(callableObject, callback, name);
 	return 0;
 }
 
@@ -126,17 +140,26 @@ GetTextBleRequest::GetTextBleRequest(MeteoBluetoothMessage * gMessage, MeteoComm
 	requestMethod = method;
 }
 
-int GetTextBleRequest::AddOnReturn(MtoObject * callableObject, function<int(json)> callback, string name)
+int GetTextBleRequest::AddOnFail(MtoObject * callableObject, function<int(json)> callback, string name)
 {
-	/* 檢查是不是由scene去add的 */
-	if (dynamic_cast<Scene*>(callableObject)) {
-		isCallbackByScene &= (dynamic_cast<Scene*>(callableObject) != nullptr);
-		if (isCallbackByScene)
-			callbackScene = dynamic_cast<Scene*>(callableObject);
-		else
-			callbackScene = nullptr;
-	}
+	dynamic_cast<GetTextBleRequestMethod*>(requestMethod)->AddOnFail(callableObject, callback, name);
+	return 0;
+}
 
-	dynamic_cast<GetTextBleRequestMethod*>(requestMethod)->AddOnReturn(callableObject, callback, name);
+int GetTextBleRequest::AddOnSuccess(MtoObject * callableObject, function<int(json)> callback, string name)
+{
+	dynamic_cast<GetTextBleRequestMethod*>(requestMethod)->AddOnSuccess(callableObject, callback, name);
+	return 0;
+}
+
+int GetTextBleRequest::fail(exception * e)
+{
+	requestMethod->Fail(this);
+	return 0;
+}
+
+int GetTextBleRequest::success()
+{
+	requestMethod->Success(this);
 	return 0;
 }

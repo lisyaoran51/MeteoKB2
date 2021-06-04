@@ -51,14 +51,10 @@ int PostTextBleRequest::PostTextBleRequestMethod::PerformAndWait(BleRequest* thi
 				if (dynamic_cast<MeteoContextBluetoothMessage*>(message)) {
 					if (dynamic_cast<MeteoContextBluetoothMessage*>(message)->GetCommand() == ackCommand) {
 
-						/* 檢查Scene是否還存在，存在才能執行 */
-						if ((thisPostTextRequest->isCallbackByScene && SceneMaster::GetInstance().CheckScene(thisPostTextRequest->callbackScene)) ||
-							!thisPostTextRequest->isCallbackByScene ||
-							onAck.GetSize() == 0)
-							onAck.TriggerThenClear(dynamic_cast<MeteoContextBluetoothMessage*>(message)->GetContextInJson());
 
-						return 0;
+						ackText = dynamic_cast<MeteoContextBluetoothMessage*>(message)->GetContext();
 
+						break;
 					}
 				}
 
@@ -70,24 +66,6 @@ int PostTextBleRequest::PostTextBleRequestMethod::PerformAndWait(BleRequest* thi
 
 			this_thread::sleep_for(std::chrono::milliseconds(100));
 
-			/* 舊的程式，寫得不好
-			mutex* inputRawCommandMutex = bleAccess->GetRawCommandMutex();
-			unique_lock<mutex> uLock(*inputRawCommandMutex);
-
-			for (int i = 0; i < bleAccess->GetInputRawCommand().size(); i++) {
-				if (dynamic_cast<MeteoTextBluetoothCommand*>(bleAccess->GetInputRawCommand()[i])) {
-					if (dynamic_cast<MeteoTextBluetoothCommand*>(bleAccess->GetInputRawCommand()[i])->GetCommand() == ackCommand) {
-
-						onAck.TriggerThenClear(dynamic_cast<MeteoTextBluetoothCommand*>(bleAccess->GetInputRawCommand()[i])->GetContextInJson());
-
-						bleAccess->GetInputRawCommand()->erase(bleAccess->GetInputRawCommand()->begin() + i);
-						return 0;
-
-					}
-				}
-			}
-			uLock.unlock();
-			*/
 		}
 	}
 
@@ -100,9 +78,57 @@ BleRequestMethodType PostTextBleRequest::PostTextBleRequestMethod::GetMethodType
 	return BleRequestMethodType::PostText;
 }
 
-int PostTextBleRequest::PostTextBleRequestMethod::AddOnAck(MtoObject * callableObject, function<int(json)> callback, string name)
+int PostTextBleRequest::PostTextBleRequestMethod::Fail(BleRequest * thisRequest)
 {
-	return onAck.Add(callableObject, callback, name);
+	LOG(LogLevel::Debug) << "PostTextBleRequest::PostTextBleRequestMethod::Fail() : post text failed.";
+
+	PostTextBleRequest* thisPostTextBleRequest = dynamic_cast<PostTextBleRequest*>(thisRequest);
+	if ((thisPostTextBleRequest->isCallbackByScene && SceneMaster::GetInstance().CheckScene(thisPostTextBleRequest->callbackScene)) ||
+		!thisPostTextBleRequest->isCallbackByScene)
+		onFail.TriggerThenClear(dynamic_cast<MeteoContextBluetoothMessage*>(postMessage)->GetContextInJson());
+
+	return 0;
+}
+
+int PostTextBleRequest::PostTextBleRequestMethod::Success(BleRequest * thisRequest)
+{
+	LOG(LogLevel::Debug) << "PostTextBleRequest::PostTextBleRequestMethod::Success() : post text success.";
+
+	if (!isNeedCheckAck)
+		return 0;
+
+	PostTextBleRequest* thisPostTextBleRequest = dynamic_cast<PostTextBleRequest*>(thisRequest);
+	if ((thisPostTextBleRequest->isCallbackByScene && SceneMaster::GetInstance().CheckScene(thisPostTextBleRequest->callbackScene)) ||
+		!thisPostTextBleRequest->isCallbackByScene)
+		onSuccess.TriggerThenClear(GetAckJson());
+
+	return 0;
+}
+
+string PostTextBleRequest::PostTextBleRequestMethod::GetAckText()
+{
+	return ackText;
+}
+
+json PostTextBleRequest::PostTextBleRequestMethod::GetAckJson()
+{
+	if (ackText == "{}")
+		return json();
+	// TODO: 解析錯誤的時候丟例外
+	return json(ackText);
+}
+
+int PostTextBleRequest::PostTextBleRequestMethod::AddOnFail(MtoObject * callableObject, function<int(json)> callback, string name)
+{
+	onFail.Add(callableObject, callback, name);
+
+	return 0;
+}
+
+int PostTextBleRequest::PostTextBleRequestMethod::AddOnSuccess(MtoObject * callableObject, function<int(json)> callback, string name)
+{
+	onSuccess.Add(callableObject, callback, name);
+	return 0;
 }
 
 PostTextBleRequest::PostTextBleRequest() : RegisterType("PostTextBleRequest")
@@ -122,18 +148,26 @@ PostTextBleRequest::PostTextBleRequest(MeteoBluetoothMessage * pMessage, MeteoCo
 	requestMethod = method;
 }
 
-int PostTextBleRequest::AddOnAck(MtoObject * callableObject, function<int(json)> callback, string name)
+int PostTextBleRequest::AddOnFail(MtoObject * callableObject, function<int(json)> callback, string name)
 {
-	/* 檢查是不是由scene去add的 */
-	if (dynamic_cast<Scene*>(callableObject)) {
-		isCallbackByScene &= (dynamic_cast<Scene*>(callableObject) != nullptr);
-		if (isCallbackByScene)
-			callbackScene = dynamic_cast<Scene*>(callableObject);
-		else
-			callbackScene = nullptr;
-	}
+	dynamic_cast<PostTextBleRequestMethod*>(requestMethod)->AddOnFail(callableObject, callback, name);
+	return 0;
+}
 
-	dynamic_cast<PostTextBleRequestMethod*>(requestMethod)->AddOnAck(callableObject, callback, name);
+int PostTextBleRequest::AddOnSuccess(MtoObject * callableObject, function<int(json)> callback, string name)
+{
+	dynamic_cast<PostTextBleRequestMethod*>(requestMethod)->AddOnSuccess(callableObject, callback, name);
+	return 0;
+}
 
+int PostTextBleRequest::fail(exception * e)
+{
+	requestMethod->Fail(this);
+	return 0;
+}
+
+int PostTextBleRequest::success()
+{
+	requestMethod->Success(this);
 	return 0;
 }

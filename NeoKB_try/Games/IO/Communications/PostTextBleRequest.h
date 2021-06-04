@@ -17,10 +17,15 @@ namespace Communications{
 
 		PostTextBleRequest(MeteoBluetoothMessage* pMessage, MeteoCommand aCommand);
 
-		int AddOnAck(MtoObject * callableObject, function<int(json)> callback, string name = "HandleAck");
+		int AddOnFail(MtoObject * callableObject, function<int(json)> callback, string name = "HandleFail");
+
+		int AddOnSuccess(MtoObject * callableObject, function<int(json)> callback, string name = "HandleSuccess");
 
 	protected:
 
+		virtual int fail(exception* e);
+
+		virtual int success();
 
 		/// <summary>
 		/// post text request的執行動作
@@ -43,7 +48,17 @@ namespace Communications{
 
 			virtual BleRequestMethodType GetMethodType();
 
-			int AddOnAck(MtoObject * callableObject, function<int(json)> callback, string name = "HandleAck");
+			virtual int Fail(BleRequest* thisRequest);
+
+			virtual int Success(BleRequest* thisRequest);
+
+			string GetAckText();
+
+			json GetAckJson();
+
+			int AddOnFail(MtoObject * callableObject, function<int(json)> callback, string name = "HandleFail");
+
+			int AddOnSuccess(MtoObject * callableObject, function<int(json)> callback, string name = "HandleSuccess");
 
 		protected:
 
@@ -56,7 +71,11 @@ namespace Communications{
 
 			bool isNeedCheckAck = true;
 
-			ActionList<int, json> onAck;
+			string ackText = "";
+
+			ActionList<int, json> onSuccess;
+
+			ActionList<int, json> onFail;
 
 		};
 	};

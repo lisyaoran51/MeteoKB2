@@ -21,9 +21,16 @@ namespace Communications{
 		/// </summary>
 		GetTextBleRequest(MeteoBluetoothMessage* gMessage, MeteoCommand rCommand);
 
-		int AddOnReturn(MtoObject * callableObject, function<int(json)> callback, string name = "OnReturn");
+		int AddOnFail(MtoObject * callableObject, function<int(json)> callback, string name = "HandleFail");
+
+		int AddOnSuccess(MtoObject * callableObject, function<int(json)> callback, string name = "HandleSuccess");
 
 	protected:
+
+		virtual int fail(exception* e);
+
+		virtual int success();
+
 		/// <summary>
 		/// get text request的執行動作
 		/// </summary>
@@ -40,11 +47,17 @@ namespace Communications{
 
 			virtual BleRequestMethodType GetMethodType();
 
+			virtual int Fail(BleRequest* thisRequest);
+
+			virtual int Success(BleRequest* thisRequest);
+
 			string GetReturnText();
 
 			json GetReturnJson();
 
-			int AddOnReturn(MtoObject * callableObject, function<int(json)> callback, string name = "OnReturn");
+			int AddOnFail(MtoObject * callableObject, function<int(json)> callback, string name = "HandleFail");
+
+			int AddOnSuccess(MtoObject * callableObject, function<int(json)> callback, string name = "HandleSuccess");
 
 		protected:
 
@@ -54,7 +67,9 @@ namespace Communications{
 
 			string returnText = "";
 
-			ActionList<int, json> onReturn;
+			ActionList<int, json> onSuccess;
+
+			ActionList<int, json> onFail;
 
 		};
 	};
