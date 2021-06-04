@@ -49,9 +49,9 @@ namespace UI {
 
 		int SelectAndStart(string fileName);
 
-		int AddOnDownloadSheetmusicFinish(MtoObject * callableObject, function<int(FileSegmentMap*)> callback, string name = "HandleDownloadSheetmusicFinish");
+		int AddOnDownloadSheetmusicSuccess(MtoObject * callableObject, function<int(FileSegmentMap*)> callback, string name = "HandleDownloadSheetmusicSuccess");
 
-		int AddOnGetSheetmusicSuccess(MtoObject * callableObject, function<int(string)> callback, string name = "HandleGetSheetmusicFinish");
+		int AddOnDownloadSheetmusicFail(MtoObject * callableObject, function<int(FileSegmentMap*)> callback, string name = "HandleDownloadSheetmusicFail");
 
 
 	protected:
@@ -68,9 +68,9 @@ namespace UI {
 
 		BindablePointer<vector<Modifier*>*> selectedModifiers;
 
-		ActionList<int, FileSegmentMap*> onDownloadSheetmusicFinish;
+		ActionList<int, FileSegmentMap*> onGetSheetmusicSuccess;
 
-		ActionList<int, string> onGetSheetmusicSuccess;
+		ActionList<int, FileSegmentMap*> onGetSheetmusicFail;
 
 		virtual int onMessage(InputState* inputState, InputKey command);
 

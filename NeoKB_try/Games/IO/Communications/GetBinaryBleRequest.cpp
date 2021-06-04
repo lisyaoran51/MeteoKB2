@@ -67,12 +67,12 @@ int GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait(BleRequest * 
 				if (dynamic_cast<MeteoContextBluetoothMessage*>(message)->GetCommand() == ackGetCommand) {
 
 					/* 檢查Scene是否還存在，存在才能執行 */
-					if ((thisGetBinaryRequest->isCallbackByScene && SceneMaster::GetInstance().CheckScene(thisGetBinaryRequest->callbackScene)) ||
-						!thisGetBinaryRequest->isCallbackByScene)
-						onAck.TriggerThenClear(dynamic_cast<MeteoContextBluetoothMessage*>(message)->GetContextInJson());
-					else {
-						throw BleRequestException(BleResponseCode::Gone);
-					}
+					//if ((thisGetBinaryRequest->isCallbackByScene && SceneMaster::GetInstance().CheckScene(thisGetBinaryRequest->callbackScene)) ||
+					//	!thisGetBinaryRequest->isCallbackByScene)
+					//	onAck.TriggerThenClear(dynamic_cast<MeteoContextBluetoothMessage*>(message)->GetContextInJson());
+					//else {
+					//	throw BleRequestException(BleResponseCode::Gone);
+					//}
 
 					isAckReceived = true;
 
@@ -125,57 +125,57 @@ int GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait(BleRequest * 
 			MeteoBluetoothMessage* message = thisGetBinaryRequest->inputRawMessages.back();
 
 			if (dynamic_cast<MeteoFileSegmentBluetoothMessage*>(message)) {
-				if (dynamic_cast<MeteoFileSegmentBluetoothMessage*>(message)->GetCommand() == transferCommand) {
+			if (dynamic_cast<MeteoFileSegmentBluetoothMessage*>(message)->GetCommand() == transferCommand) {
 
-					MeteoFileSegmentBluetoothMessage* fileSegmentMessage = dynamic_cast<MeteoFileSegmentBluetoothMessage*>(message);
+				MeteoFileSegmentBluetoothMessage* fileSegmentMessage = dynamic_cast<MeteoFileSegmentBluetoothMessage*>(message);
 
-					if (fileSegmentMessage->GetFileName() != fileName)
-						continue;
+				if (fileSegmentMessage->GetFileName() != fileName)
+					continue;
 
-					char* fileSegmentData = nullptr;
-					int size = fileSegmentMessage->GetFileSegment(&fileSegmentData);
-					int order = fileSegmentMessage->GetOrder();
+				char* fileSegmentData = nullptr;
+				int size = fileSegmentMessage->GetFileSegment(&fileSegmentData);
+				int order = fileSegmentMessage->GetOrder();
 
-					bleBinaryRequestFileSegmentMap.fileSegmentMap[order] = pair<char*, int>(fileSegmentData, size);
+				bleBinaryRequestFileSegmentMap.fileSegmentMap[order] = pair<char*, int>(fileSegmentData, size);
 
-					int amount = fileSegmentMessage->GetAmount();
-					bleBinaryRequestFileSegmentMap.segmentAmount = amount;
+				int amount = fileSegmentMessage->GetAmount();
+				bleBinaryRequestFileSegmentMap.segmentAmount = amount;
 
-					if (bleBinaryRequestFileSegmentMap.fileSegmentMap.size() == amount) {
-						isTransferFinished = true;
-					}
-
-					/* 從這個時間點開始計時，超過時間就timeout */
-					thisGetBinaryRequest->writeTimePoint();
-
+				if (bleBinaryRequestFileSegmentMap.fileSegmentMap.size() == amount) {
+					isTransferFinished = true;
 				}
+
+				/* 從這個時間點開始計時，超過時間就timeout */
+				thisGetBinaryRequest->writeTimePoint();
+
+			}
 			}
 			else if (dynamic_cast<MeteoContextBluetoothMessage*>(message)) {
-				if (dynamic_cast<MeteoContextBluetoothMessage*>(message)->GetCommand() == finishCommand) {
-					MeteoContextBluetoothMessage* reuqestRetransferMessage = new MeteoContextBluetoothMessage(requestRetransferCommand);
+			if (dynamic_cast<MeteoContextBluetoothMessage*>(message)->GetCommand() == finishCommand) {
+				MeteoContextBluetoothMessage* reuqestRetransferMessage = new MeteoContextBluetoothMessage(requestRetransferCommand);
 
-					json messageContext;
-					messageContext["FileName"] = bleBinaryRequestFileSegmentMap.fileName;
+				json messageContext;
+				messageContext["FileName"] = bleBinaryRequestFileSegmentMap.fileName;
 
-					for (int i = 0; i < bleBinaryRequestFileSegmentMap.segmentAmount; i++) {
-						map<int, pair<char*, int>>::iterator iter;
-						iter = bleBinaryRequestFileSegmentMap.fileSegmentMap.find(i);
-						if (iter == bleBinaryRequestFileSegmentMap.fileSegmentMap.end()) {
-							messageContext["SegmentNumber"].push_back(i);
-							if (messageContext["SegmentNumber"].size() > 20)
-								break;	// 如果太多內容，會超過封包大小
+				for (int i = 0; i < bleBinaryRequestFileSegmentMap.segmentAmount; i++) {
+					map<int, pair<char*, int>>::iterator iter;
+					iter = bleBinaryRequestFileSegmentMap.fileSegmentMap.find(i);
+					if (iter == bleBinaryRequestFileSegmentMap.fileSegmentMap.end()) {
+						messageContext["SegmentNumber"].push_back(i);
+						if (messageContext["SegmentNumber"].size() > 20)
+							break;	// 如果太多內容，會超過封包大小
 
-						}
 					}
-
-					reuqestRetransferMessage->SetContextInJson(messageContext);
-					reuqestRetransferMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
-					bleAccess->GetBluetoothPhone()->PushOutputMessage(reuqestRetransferMessage);
-
-					/* 從這個時間點開始計時，超過時間就timeout */
-					thisGetBinaryRequest->writeTimePoint();
-
 				}
+
+				reuqestRetransferMessage->SetContextInJson(messageContext);
+				reuqestRetransferMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
+				bleAccess->GetBluetoothPhone()->PushOutputMessage(reuqestRetransferMessage);
+
+				/* 從這個時間點開始計時，超過時間就timeout */
+				thisGetBinaryRequest->writeTimePoint();
+
+			}
 			}
 
 			thisGetBinaryRequest->inputRawMessages.pop_back();
@@ -232,15 +232,6 @@ int GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait(BleRequest * 
 		uLock.unlock();
 
 		this_thread::sleep_for(std::chrono::milliseconds(100));
-	}
-
-	/* 檢查Scene是否還存在，存在才能執行 */
-	if ((thisGetBinaryRequest->isCallbackByScene && SceneMaster::GetInstance().CheckScene(thisGetBinaryRequest->callbackScene)) ||	// 之後要改掉這個，不需要驗證場景是否存在
-		!thisGetBinaryRequest->isCallbackByScene ||
-		onFinish.GetSize() == 0)
-		onFinish.TriggerThenClear(&bleBinaryRequestFileSegmentMap);
-	else {
-		throw BleRequestException(BleResponseCode::Gone);
 	}
 
 	return 0;

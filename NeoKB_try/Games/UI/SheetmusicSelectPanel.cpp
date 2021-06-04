@@ -127,15 +127,15 @@ int SheetmusicSelectPanel::SelectAndStart(string fileName)
 	return 0;
 }
 
-int SheetmusicSelectPanel::AddOnDownloadSheetmusicFinish(MtoObject * callableObject, function<int(FileSegmentMap*)> callback, string name)
+int SheetmusicSelectPanel::AddOnDownloadSheetmusicSuccess(MtoObject * callableObject, function<int(FileSegmentMap*)> callback, string name)
 {
-	onDownloadSheetmusicFinish.Add(callableObject, callback, name);
+	onGetSheetmusicSuccess.Add(callableObject, callback, name);
 	return 0;
 }
 
-int SheetmusicSelectPanel::AddOnGetSheetmusicSuccess(MtoObject * callableObject, function<int(string)> callback, string name)
+int SheetmusicSelectPanel::AddOnDownloadSheetmusicFail(MtoObject * callableObject, function<int(FileSegmentMap*)> callback, string name)
 {
-	onGetSheetmusicSuccess.Add(callableObject, callback, name);
+	onGetSheetmusicFail.Add(callableObject, callback, name);
 	return 0;
 }
 
@@ -270,8 +270,8 @@ int SheetmusicSelectPanel::onMessage(MeteoBluetoothMessage * message)
 
 			getSheetmusicRequest->SetCallbackScene(dynamic_cast<Scene*>(GetParent()));	// 這個的parent就是song select
 
-			getSheetmusicRequest->AddOnFinish(&onDownloadSheetmusicFinish);
-			getSheetmusicRequest->AddOnGetBinarySuccess(&onGetSheetmusicSuccess);
+			getSheetmusicRequest->AddOnSuccess(&onGetSheetmusicSuccess);
+			getSheetmusicRequest->AddOnFail(&onGetSheetmusicFail);
 
 			communicationAccess->Queue(getSheetmusicRequest);
 
@@ -293,19 +293,21 @@ int SheetmusicSelectPanel::onMessage(MeteoBluetoothMessage * message)
 
 		LOG(LogLevel::Debug) << "int SheetmusicSelectPanel::onMessage() : selected file name [" << fileName << "].";
 
-		MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::AckRequestLoadGame);
-		json returnContext;
-
-		returnContext["Status"] = short(0);
-		meteoContextBluetoothMessage->SetContextInJson(returnContext);
-		meteoContextBluetoothMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
-
-		outputManager->PushMessage(meteoContextBluetoothMessage);
+		
 
 		vector<SmInfo*>* sInfos = smManager->GetSmInfos();
 		for (int i = 0; i < sInfos->size(); i++) {
 			LOG(LogLevel::Fine) << "int SheetmusicSelectPanel::onMessage() : searching song name [" << sInfos->at(i)->fileName << "] = [" << fileName << "].";
 			if (sInfos->at(i)->fileName == fileName) {
+
+				MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::AckRequestLoadGame);
+				json returnContext;
+
+				returnContext["Status"] = short(0);
+				meteoContextBluetoothMessage->SetContextInJson(returnContext);
+				meteoContextBluetoothMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
+
+				outputManager->PushMessage(meteoContextBluetoothMessage);
 
 				SelectionChanged(sInfos->at(i));
 
@@ -314,6 +316,16 @@ int SheetmusicSelectPanel::onMessage(MeteoBluetoothMessage * message)
 			}
 		}
 		LOG(LogLevel::Error) << "int SheetmusicSelectPanel::onMessage() : song not found.";
+
+		MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::AckRequestLoadGame);
+		json returnContext;
+
+		returnContext["Status"] = short(-1);
+		meteoContextBluetoothMessage->SetContextInJson(returnContext);
+		meteoContextBluetoothMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
+
+		outputManager->PushMessage(meteoContextBluetoothMessage);
+
 	}
 
 

@@ -79,7 +79,9 @@ int SongSelect::load(SmManager * sManager, MeteoGame * game, Storage* s)
 	smSelectPanel->StartRequest = bind(&SongSelect::onSelected, this);
 	smSelectPanel->SelectionChanged = bind(&SongSelect::selectionChanged, this, placeholders::_1);
 
-	smSelectPanel->AddOnDownloadSheetmusicFinish(this, [=](FileSegmentMap* fSegmentMap) {
+	smSelectPanel->AddOnDownloadSheetmusicSuccess(this, [=](FileSegmentMap* fSegmentMap) {
+
+		LOG(LogLevel::Debug) << "SongSelect::Lambda_HandleDownloadSheetmusicSuccess() : dounload [" << fSegmentMap->fileName << "] success.";
 
 		fSegmentMap->WriteFile(storage->GetStream(string("temp/") + fSegmentMap->fileName + string(".temp"), FileAccess::Write, FileMode::Create));
 
@@ -101,25 +103,36 @@ int SongSelect::load(SmManager * sManager, MeteoGame * game, Storage* s)
 		}
 		pclose(fp);
 
-		return 0;
-	});
-
-	smSelectPanel->AddOnGetSheetmusicSuccess(this, [=](string fName) {
-
-		string fileNameWithoutExtension = StringSplitter::Split(fName, ".")[0];
-		string path = storage->GetTempBasePath() + string("/Sheetmusics/") + fileNameWithoutExtension;
+		string path = storage->GetTempBasePath() + string("/Sheetmusics/") + fSegmentMap->GetFileNameWithoutExtension();
 
 		vector<string> paths;
 		paths.push_back(path);
 
 		if (smManager->Import(&paths) < 0) {
 			// throw error
+			LOG(LogLevel::Error) << "SongSelect::selectionChanged() : Failed to import new download sheetmusic [" << fSegmentMap->fileName << "].";
+
+			// ¥áÂÅªÞ¿ù»~°T¸¹
+
 		}
 
-		smSelectPanel->SelectAndStart(fName);
+		fSegmentMap->Erase();
+
+		//smSelectPanel->SelectAndStart(fSegmentMap->fileName);
 
 		return 0;
-	});
+	}, "SongSelect::Lambda_HandleDownloadSheetmusicSuccess");
+
+	smSelectPanel->AddOnDownloadSheetmusicFail(this, [=](FileSegmentMap* fSegmentMap) {
+
+
+		LOG(LogLevel::Debug) << "SongSelect::Lambda_HandleDownloadSheetmusicSuccess() : dounload [" << fSegmentMap->fileName << "] fail.";
+
+		fSegmentMap->Erase();
+
+		return 0;
+	}, "SongSelect::Lambda_HandleDownloadSheetmusicFail");
+
 
 	AddChild(smSelectPanel);
 	return 0;
