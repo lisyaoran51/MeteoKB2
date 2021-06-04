@@ -179,7 +179,7 @@ MeteoConfigManager.o \
 Ruleset.o RulesetInfo.o RulesetStore.o Judgement.o HasHitWindow.o HitWindow.o ReplayRecorder.o ReplayFrame.o ReplayRecorderReceiver.o \
 Modifier.o ConfigurationModifier.o DifficultyModifier.o EventProcessorFilterModifier.o InstrumentModifier.o TimeControllerModifier.o \
 Score.o ScoreProcessor.o \
-BleAccess.o BleRequest.o BleRequestException.o GetTextBleRequest.o PostTextBleRequest.o GetBinaryBleRequest.o PostBinaryBleRequest.o \
+BleAccess.o BleRequest.o BleRequestException.o GetTextBleRequest.o PostTextBleRequest.o GetBinaryBleRequest.o GetBinaryBleRequestHandler.o PostBinaryBleRequest.o \
 IdentifyBleRequest.o FaultIdentityBleRequest.o \
 IndicatorLightPanelMessage.o SpeedRingPanelMessage.o IndicatorLightOutputer.o SpeedRingOutputer.o \
 RevolveLightRingOutputer.o RevolveLightRingPanelMessage.o FadeLightRingOutputer.o FadeLightRingPanelMessage.o ChangeSpeedOutputer.o ChangeSpeedPanelMessage.o \
