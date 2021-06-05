@@ -154,7 +154,7 @@ int MeteoScene::onMessage(MeteoBluetoothMessage * message)
 			return 0;
 		}
 
-		for (Scene* s = this; s != targetScene; s = s->GetParentScene()) {
+		for (Scene* s = this; s->GetParentScene() != targetScene; s = s->GetParentScene()) {
 
 			s->SetIsValidForResume(false);
 
