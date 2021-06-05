@@ -22,6 +22,9 @@ Scene::Scene() : RegisterType("Scene")
 
 int Scene::Push(Scene * scene)
 {
+	LOG(LogLevel::Debug) << "Scene::Push() : Scene [" << GetTypeName() << "] push to [" << scene->GetTypeName() << "]";
+
+
 	if (childScene != nullptr)
 		throw FrameworkError("Scene::Push(): There Should be no child scene when pushing.");
 
