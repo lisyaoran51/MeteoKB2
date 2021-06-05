@@ -77,7 +77,7 @@ int main(int argc,char *argv[]){
 
 	if(variant == 6){
 		int k = 6;
-		while(ture){
+		while(1){
 			int l;
 			for(l = 0; l < 16;l++){
 				
