@@ -75,6 +75,7 @@ int MeteoScene::onExpire()
 
 int MeteoScene::onEntering(Scene * lastScene)
 {
+	LOG(LogLevel::Debug) << "MeteoScene::onEntering() : entering [" << GetTypeName() << "].";
 	isMessageActive = true;
 
 	MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::EnterScene);
@@ -91,6 +92,7 @@ int MeteoScene::onEntering(Scene * lastScene)
 
 int MeteoScene::onExiting(Scene * lastScene)
 {
+	LOG(LogLevel::Debug) << "MeteoScene::onExiting() : exiting [" << GetTypeName() << "].";
 	isMessageActive = false;
 
 	return Scene::onExiting(lastScene);
@@ -103,6 +105,7 @@ int MeteoScene::onSuspending(Scene * lastScene)
 
 int MeteoScene::onResuming(Scene * lastScene)
 {
+	LOG(LogLevel::Debug) << "MeteoScene::onResuming() : resuming [" << GetTypeName() << "].";
 	isMessageActive = true;
 
 	MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::EnterScene);
