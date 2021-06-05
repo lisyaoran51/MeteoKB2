@@ -411,7 +411,8 @@ Map * EventProcessorMaster::GetGraph()
 		<< [](vector<EventProcessor<Event>*>& eProcessors) {
 
 		for (int i = 0; i < eProcessors.size(); i++)
-			LOG(LogLevel::Depricated) << "---processor " << i << " time = [" << eProcessors[i]->GetStartTime() << "].";
+			if(dynamic_cast<EffectMapperInterface*>(eProcessors[i]))
+				LOG(LogLevel::Debug) << "---processor " << i << " time = [" << eProcessors[i]->GetStartTime() << "].";
 		return 0;
 	
 	}(eventProcessors);
