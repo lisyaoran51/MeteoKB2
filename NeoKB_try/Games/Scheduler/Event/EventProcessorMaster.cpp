@@ -130,7 +130,7 @@ EventProcessorMaster::~EventProcessorMaster()
 
 int EventProcessorMaster::AddStaticEventProcessor(EventProcessor<Event>* sEventProcessor)
 {
-	LOG(LogLevel::Depricated) << "EventProcessorMaster::AddStaticEventProcessor : add processor [" << sEventProcessor->GetEvent()->GetTypeName() << "] at [" << sEventProcessor->GetStartTime() << "," << sEventProcessor->GetLifeTime() << "] from event [" << sEventProcessor->GetEvent()->GetStartTime() << "].";
+	LOG(LogLevel::Debug) << "EventProcessorMaster::AddStaticEventProcessor : add processor [" << sEventProcessor->GetEvent()->GetTypeName() << "] at [" << sEventProcessor->GetStartTime() << "," << sEventProcessor->GetLifeTime() << "] from event [" << sEventProcessor->GetEvent()->GetStartTime() << "].";
 
 
 	sEventProcessor->Attach(this);
