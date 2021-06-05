@@ -190,6 +190,14 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 
 		eventProcessorPeriods->GetItemsContainPeriods(make_pair<float, float>(currentTime - visibleTimeRange, currentTime + visibleTimeRange * 2), &eventProcessors);	// visible time range * 2是因為好像讀不到miss
 
+		LOG(LogLevel::Debug) << "EventProcessorMaster::processEvent() : check event processors." << [=]() {
+			for (int i = 0; i < eventProcessors.size(); i++) {
+				if (dynamic_cast<EffectMapperInterface*>(eventProcessors[i])) {
+					LOG(LogLevel::Debug) << "EventProcessorMaster::processEvent() :  effect mapper [" << eventProcessors[i]->GetStartTime() << "].";
+				}
+			}
+			return 0;
+		}();
 		
 		LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent() : get processors size[" << eventProcessors.size() << "].";
 
