@@ -32,13 +32,13 @@ int Scene::Push(Scene * scene)
 	scene->SetParentScene(this);
 
 	Expire();
+	scene->Enter(this);
 
 	AddChild(scene);
 	childScene = scene;
 
 	isCurrentScene = false;
 	isPresent = false;
-	scene->Enter(this);
 
 
 	return 0;
