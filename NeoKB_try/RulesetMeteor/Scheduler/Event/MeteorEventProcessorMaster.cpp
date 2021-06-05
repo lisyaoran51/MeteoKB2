@@ -495,5 +495,5 @@ int MeteorEventProcessorMaster::filterHiddenNoteEffects(EventProcessor<Event>* e
 		return false;
 	}
 
-	return 0;
+	return true;
 }
