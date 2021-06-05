@@ -68,6 +68,8 @@ int MeteoScene::onExpire()
 
 	isMessageActive = false;
 
+	LOG(LogLevel::Debug) << "MeteoScene::onExpire() : expiring [" << GetTypeName() << "].";
+
 	return 0;
 }
 
