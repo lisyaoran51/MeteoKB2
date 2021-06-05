@@ -3105,7 +3105,7 @@ DifficultyType:3
 	要確認binary request有沒有寫錯，然後以後要再寫一條thread去接background request，例如背景偷傳主程式。
 	
 6/4
-	把command更新玩了，現在要把request寫好
+	把command更新玩了，現在要把request寫好(暫時把timeout拿調)
 	
 	要加一個藍芽錯誤訊號
 	
@@ -3115,3 +3115,13 @@ DifficultyType:3
 	呼叫enter scene時，程式會在player loader死掉
 	
 	遊戲開始的聲音輸入，應該要改成用sound binding set來做
+	
+	圖案運算壞掉了，沒有東西畫到canvas上。完全沒生成effect事件。結果是filter hidden的時候filter錯了
+	
+	要把音檔全部加密，可以寫一個簡單加密工具就好(用檔案大小選擇仿射組，共256組仿射，每組256個字)
+	
+6/6
+	再git clone --depth 1之後，會看不到所有branch
+	https://stackoverflow.com/questions/23708231/git-shallow-clone-clone-depth-misses-remote-branches
+	
+	第一次開遊戲時，會有一個大電流經過pi造成重開機，所以要用driver先把喇叭關掉，等開完機再開啟

@@ -62,6 +62,11 @@ namespace Scenes {
 
 		int Enter(Scene* lastScene);
 
+		/// <summary>
+		/// ¦Apushµ²§ô®É©I¥s
+		/// </summary>
+		int OnEntered(Scene* lastScene);
+
 		int Resume(Scene* sourceScene);
 
 		/// <summary>
@@ -92,6 +97,8 @@ namespace Scenes {
 		virtual int onExpire();
 
 		virtual int onEntering(Scene* lastScene);
+
+		virtual int onEntered(Scene* lastScene);
 
 		virtual int onExiting(Scene* lastScene);
 

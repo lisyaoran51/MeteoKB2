@@ -10,6 +10,7 @@
 5. sudo ln -s /home/pi/linux build
 
 6. git clone https://github.com/lisyaoran51/MeteoKB2
+   (如果容量不足，就改用git clone https://github.com/lisyaoran51/MeteoKB2 --depth 1，再git remote set-branches origin '*'，再git fetch -v，再git checkout <branch>)
 
 7. wget http://www.kernel.org/pub/linux/bluetooth/bluez-5.37.tar.xz
 

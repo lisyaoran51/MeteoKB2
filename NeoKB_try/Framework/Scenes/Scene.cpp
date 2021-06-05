@@ -40,6 +40,7 @@ int Scene::Push(Scene * scene)
 	isCurrentScene = false;
 	isPresent = false;
 
+	scene->onEntered(this);
 
 	return 0;
 }
@@ -99,6 +100,11 @@ int Scene::Enter(Scene * lastScene)
 	return onEntering(lastScene);
 }
 
+int Scene::OnEntered(Scene * lastScene)
+{
+	return 0;
+}
+
 int Scene::Resume(Scene * sourceScene)
 {
 	LOG(LogLevel::Debug) << "Scene::Resume() : Scene [" << GetTypeName() << "] try to resume [" << (isValidForResume ? "Success" : "Failed") << "]";
@@ -153,6 +159,11 @@ int Scene::onEntering(Scene * lastScene)
 	SceneMaster::GetInstance().AddScene(this);
 
 	// Ä~©Óªº¤H¼g
+	return 0;
+}
+
+int Scene::onEntered(Scene * lastScene)
+{
 	return 0;
 }
 

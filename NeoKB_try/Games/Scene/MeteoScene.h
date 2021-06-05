@@ -51,6 +51,8 @@ namespace Scenes {
 
 		virtual int onEntering(Scene* lastScene);
 
+		virtual int onEntered(Scene* lastScene);
+
 		virtual int onExiting(Scene* lastScene);
 
 		virtual int onSuspending(Scene* lastScene);
