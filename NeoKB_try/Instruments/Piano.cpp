@@ -582,7 +582,7 @@ int Piano::OnButtonUp(PianoAction action)
 
 					LOG(LogLevel::Debug) << "Piano::OnButtonUp() : pressing map has [" << (int)it->first << "] up by [" << GetTypeName() << "].";
 					sampleChannel->FadeOut();
-					}
+					
 				}
 			}
 		}
