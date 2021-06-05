@@ -123,7 +123,7 @@ int MeteoScene::onMessage(MeteoBluetoothMessage * message)
 		return -1;
 	}
 
-	LOG(LogLevel::Depricated) << "MeteoScene::onMessage() : got new bt message. ";
+	LOG(LogLevel::Debug) << "MeteoScene::onMessage() : got new bt message. " << GetTypeName();
 
 	if (contextMessage->GetCommand() == MeteoCommand::ReadScene) {
 		LOG(LogLevel::Debug) << "MeteoScene::onMessage() : got new bt message [ReadScene]. ";
