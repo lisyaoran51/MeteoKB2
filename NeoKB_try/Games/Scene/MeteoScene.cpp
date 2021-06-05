@@ -53,6 +53,7 @@ MeteoScene::MeteoScene() : RegisterType("MeteoScene"), Scene()
 
 MeteoScene::~MeteoScene()
 {
+	LOG(LogLevel::Debug) << "MeteoScene::~MeteoScene() : killing scene [" << GetTypeName() << "].";
 	rulesetInfo.DeleteOnValueChanged(this);
 	workingSm.DeleteOnValueChanged(this);
 
