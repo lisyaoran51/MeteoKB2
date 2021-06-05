@@ -78,7 +78,7 @@ int MeteoScene::onEntering(Scene * lastScene)
 	LOG(LogLevel::Debug) << "MeteoScene::onEntering() : entering [" << GetTypeName() << "].";
 	isMessageActive = true;
 
-	GetScheduler()->AddTask([=]() {
+	GetScheduler()->AddDelayedTask([=]() {
 
 		MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::EnterScene);
 		json returnContext;
@@ -90,7 +90,7 @@ int MeteoScene::onEntering(Scene * lastScene)
 		outputManager->PushMessage(meteoContextBluetoothMessage);
 	
 		return 0;
-	});
+	}, 0.1);
 
 	return Scene::onEntering(lastScene);
 }
