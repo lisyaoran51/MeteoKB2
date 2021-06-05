@@ -84,6 +84,7 @@ int Scene::SetIsValidForResume(bool value)
 
 int Scene::Expire()
 {
+	onExpire();
 	Deactivate();
 	return 0;
 }
@@ -136,6 +137,11 @@ int Scene::ExitTo(Scene * sourceScene)
 
 	parentScene->Resume(sourceScene);
 
+	return 0;
+}
+
+int Scene::onExpire()
+{
 	return 0;
 }
 

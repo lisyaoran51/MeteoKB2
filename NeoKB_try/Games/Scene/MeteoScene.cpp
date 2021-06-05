@@ -62,6 +62,15 @@ MeteoScene::~MeteoScene()
 
 }
 
+int MeteoScene::onExpire()
+{
+	Scene::onExpire();
+
+	isMessageActive = false;
+
+	return 0;
+}
+
 int MeteoScene::onEntering(Scene * lastScene)
 {
 	isMessageActive = true;

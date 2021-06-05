@@ -89,6 +89,8 @@ namespace Scenes {
 
 		bool isExited = false;
 
+		virtual int onExpire();
+
 		virtual int onEntering(Scene* lastScene);
 
 		virtual int onExiting(Scene* lastScene);
