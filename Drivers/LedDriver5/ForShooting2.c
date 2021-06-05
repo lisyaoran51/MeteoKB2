@@ -76,41 +76,44 @@ int main(int argc,char *argv[]){
 	printf("==========================\n");
 
 	if(variant == 6){
-		int k;
-		for(k = 0; k < 6; k++){
-			matrix = draw(k);
-			
-			for (i = 0; i < width; i++) {
-				int j;
-				for (j = 0; j < height; j++) {
+		int k = 6;
+		while(ture){
+			int l;
+			for(l = 0; l < 16;l++){
+				
+				
+				matrix = draw_motion(k, l);
+				
+				for (i = 0; i < width; i++) {
+					int j;
+					for (j = 0; j < height; j++) {
 
-					if (matrix[i][height - 1 - j] > 0)
-						lightMatrixMessage[j * 6 + i / 8] |= (0x01 << (i % 8));
-						
+						if (matrix[i][height - 1 - j] > 0)
+							lightMatrixMessage[j * 6 + i / 8] |= (0x01 << (i % 8));
+							
+					}
 				}
-			}
-			
-			int fd = open("/dev/meteo_lightboard_v1", O_WRONLY /*| O_NONBLOCK */);
-			if(fd < 0){
-				printf("can't open file meteo_lightboard_v1.\n");
-			}else{
-				res = write(fd,lightMatrixMessage,96);
-				if(res < 0){
-						perror("test:");
+				
+				int fd = open("/dev/meteo_lightboard_v1", O_WRONLY /*| O_NONBLOCK */);
+				if(fd < 0){
+					printf("can't open file meteo_lightboard_v1.\n");
 				}else{
-					printf("### write function return: %d\n",res);
+					res = write(fd,lightMatrixMessage,96);
+					if(res < 0){
+							perror("test:");
+					}else{
+						printf("### write function return: %d\n",res);
+					}
 				}
+					
+				usleep(100000);
+				
+				for(i = 0; i < 96; i++)
+					lightMatrixMessage[i] = 0;
+				res = write(fd,lightMatrixMessage,96);
+				close(fd);
 			}
 			
-			usleep(1000 * 100);
-			
-			for(i = 0; i < 96; i++)
-				lightMatrixMessage[i] = 0;
-			res = write(fd,lightMatrixMessage,96);
-			close(fd);
-			if(k == 5)
-				k = -1;
-		
 		}
 		
 	}
