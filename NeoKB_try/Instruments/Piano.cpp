@@ -562,6 +562,15 @@ int Piano::OnButtonUp(PianoAction action)
 	
 	bool isSetTempReleasing = true;
 
+	if(sustainType == SustainType::GameControllingSustain)
+		LOG(LogLevel::Debug) << "Piano::OnButtonUp() : GameControllingSustain.";
+
+	if (sustainType == SustainType::None)
+		LOG(LogLevel::Debug) << "Piano::OnButtonUp() : None.";
+
+	if (sustainType == SustainType::SustainPedal)
+		LOG(LogLevel::Debug) << "Piano::OnButtonUp() : SustainPedal.";
+
 	// 如果目前是電腦控制踏板，就先停止接收踏板訓皓
 	if (action == PianoAction::SustainPedal) {
 		if (sustainType == SustainType::GameControllingSustain)
