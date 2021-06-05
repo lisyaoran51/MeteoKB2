@@ -250,6 +250,6 @@ int ProgramInitializer::Initialize()
 
 	//SmDecoder::RegisterDecoder("simple file format v0", "SimpleSmDecoder");
 
-	iCreator.PrintCreators();
+	//iCreator.PrintCreators();
 	return 0;
 }
