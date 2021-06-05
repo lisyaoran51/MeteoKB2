@@ -64,6 +64,7 @@ MeteoScene::~MeteoScene()
 
 int MeteoScene::onEntering(Scene * lastScene)
 {
+	isMessageActive = true;
 
 	MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::EnterScene);
 	json returnContext;
@@ -79,6 +80,8 @@ int MeteoScene::onEntering(Scene * lastScene)
 
 int MeteoScene::onExiting(Scene * lastScene)
 {
+	isMessageActive = false;
+
 	return Scene::onExiting(lastScene);
 }
 
@@ -89,6 +92,8 @@ int MeteoScene::onSuspending(Scene * lastScene)
 
 int MeteoScene::onResuming(Scene * lastScene)
 {
+	isMessageActive = true;
+
 	MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::EnterScene);
 	json returnContext;
 
@@ -109,7 +114,7 @@ int MeteoScene::onMessage(MeteoBluetoothMessage * message)
 		return -1;
 	}
 
-	LOG(LogLevel::Debug) << "MeteoScene::onMessage() : got new bt message. ";
+	LOG(LogLevel::Depricated) << "MeteoScene::onMessage() : got new bt message. ";
 
 	if (contextMessage->GetCommand() == MeteoCommand::ReadScene) {
 		LOG(LogLevel::Debug) << "MeteoScene::onMessage() : got new bt message [ReadScene]. ";
