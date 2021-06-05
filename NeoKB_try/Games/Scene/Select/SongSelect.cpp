@@ -66,6 +66,8 @@ int SongSelect::load(SmManager * sManager, MeteoGame * game, Storage* s)
 	/* 更換音色 */
 	soundSelectPanel = new SoundSelectPanel();
 
+	LOG(LogLevel::Debug) << "SongSelect::load() : adding sound panel.";
+
 	AddChild(soundSelectPanel);
 
 	// 把選則歌曲的method註冊進去select panel裡面，select panel選好歌就會直接呼叫回來
@@ -133,6 +135,7 @@ int SongSelect::load(SmManager * sManager, MeteoGame * game, Storage* s)
 		return 0;
 	}, "SongSelect::Lambda_HandleDownloadSheetmusicFail");
 
+	LOG(LogLevel::Debug) << "SongSelect::load() : adding sheetmusic panel.";
 
 	AddChild(smSelectPanel);
 	return 0;
