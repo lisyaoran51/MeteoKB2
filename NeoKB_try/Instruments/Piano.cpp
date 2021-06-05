@@ -545,19 +545,20 @@ int Piano::OnButtonDown(PianoAction action)
 		if (sustainType == SustainType::AutoSustain || sustainType == SustainType::GameControllingSustain) {
 			isSetTempPressing = false;
 		}
+		else {
+			map<PianoAction, bool>::iterator it;
+			for (it = isPressingMap.begin(); it != isPressingMap.end(); ++it) {
+				LOG(LogLevel::Depricated) << "Piano::OnButtonDown() : pressing map has [" << (int)it->first << "]";
+				if (!it->second) {
 
-		map<PianoAction, bool>::iterator it;
-		for (it = isPressingMap.begin(); it != isPressingMap.end(); ++it) {
-			LOG(LogLevel::Depricated) << "Piano::ControlSustainPedal() : pressing map has [" << (int)it->first << "]";
-			if (!it->second) {
+					if (getSamples()->find(it->first) != getSamples()->end()) {
 
-				if (getSamples()->find(it->first) != getSamples()->end()) {
-
-					SampleChannel* sampleChannel = getSamples()->at(it->first);
-					if (sampleChannel) {
-						if (sampleChannel->GetIsPlaying()) {
-							LOG(LogLevel::Debug) << "Piano::ControlSustainPedal() : pressing map has [" << (int)it->first << "] up by [" << GetTypeName() << "].";
-							sampleChannel->FadeOut();
+						SampleChannel* sampleChannel = getSamples()->at(it->first);
+						if (sampleChannel) {
+							if (sampleChannel->GetIsPlaying()) {
+								LOG(LogLevel::Debug) << "Piano::OnButtonDown() : pressing map has [" << (int)it->first << "] up by [" << GetTypeName() << "].";
+								sampleChannel->FadeOut();
+							}
 						}
 					}
 				}
