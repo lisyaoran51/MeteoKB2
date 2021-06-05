@@ -41,7 +41,7 @@ int SoundSelectPanel::load(FrameworkConfigManager * f, Instrument* i, AudioManag
 
 	isPresent = true;
 
-	//return 0;
+	return 0;
 	GetScheduler()->AddDelayedTask([=]() {
 	
 	
