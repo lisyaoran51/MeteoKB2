@@ -562,15 +562,6 @@ int Piano::OnButtonUp(PianoAction action)
 	
 	bool isSetTempReleasing = true;
 
-	if(sustainType == SustainType::GameControllingSustain)
-		LOG(LogLevel::Debug) << "Piano::OnButtonUp() : GameControllingSustain.";
-
-	if (sustainType == SustainType::None)
-		LOG(LogLevel::Debug) << "Piano::OnButtonUp() : None.";
-
-	if (sustainType == SustainType::SustainPedal)
-		LOG(LogLevel::Debug) << "Piano::OnButtonUp() : SustainPedal.";
-
 	// 如果目前是電腦控制踏板，就先停止接收踏板訓皓
 	if (action == PianoAction::SustainPedal) {
 		if (sustainType == SustainType::GameControllingSustain)
@@ -580,13 +571,17 @@ int Piano::OnButtonUp(PianoAction action)
 			map<PianoAction, bool>::iterator it;
 			for (it = isPressingMap.begin(); it != isPressingMap.end(); it++) {
 				if (!it->second) {
-					SampleChannel* sampleChannel = getSamples()->at(it->first);
-					if (sampleChannel) {
-						if (sampleChannel->GetIsPlaying()) {
-							LOG(LogLevel::Debug) << "Piano::OnButtonUp() : pressing map has [" << (int)it->first << "] up by [" << GetTypeName() << "].";
 
-							sampleChannel->FadeOut();
-						}
+					if (getSamples()->find(it->first) == getSamples()->end())
+						continue;
+					SampleChannel* sampleChannel = getSamples()->at(it->first);
+					if (!sampleChannel)
+						continue;
+					if (!sampleChannel->GetIsPlaying())
+						continue;
+
+					LOG(LogLevel::Debug) << "Piano::OnButtonUp() : pressing map has [" << (int)it->first << "] up by [" << GetTypeName() << "].";
+					sampleChannel->FadeOut();
 					}
 				}
 			}
