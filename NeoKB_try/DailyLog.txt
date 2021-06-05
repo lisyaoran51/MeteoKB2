@@ -3108,3 +3108,10 @@ DifficultyType:3
 	把command更新玩了，現在要把request寫好
 	
 	要加一個藍芽錯誤訊號
+	
+6/5
+	sustain type的控制要整個重調，要讓遊戲結束和秦起床的時候可以回歸原本設定
+	
+	呼叫enter scene時，程式會在player loader死掉
+	
+	遊戲開始的聲音輸入，應該要改成用sound binding set來做
