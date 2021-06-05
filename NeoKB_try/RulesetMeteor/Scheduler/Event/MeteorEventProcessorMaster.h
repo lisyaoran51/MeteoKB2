@@ -58,7 +58,7 @@ namespace Events{
 
 		bool matchPitch(HitObject* hObject, MeteorAction meteorAction);
 
-		int filterHiddenNoteEffects(EventProcessor<Event>* eventProcessor);
+		bool filterHiddenNoteEffects(EventProcessor<Event>* eventProcessor);
 
 	};
 

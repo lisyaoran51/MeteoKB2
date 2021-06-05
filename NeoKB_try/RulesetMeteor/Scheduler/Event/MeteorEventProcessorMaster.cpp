@@ -478,7 +478,7 @@ bool MeteorEventProcessorMaster::matchPitch(HitObject * hObject, MeteorAction me
 	return false;
 }
 
-int MeteorEventProcessorMaster::filterHiddenNoteEffects(EventProcessor<Event>* eventProcessor)
+bool MeteorEventProcessorMaster::filterHiddenNoteEffects(EventProcessor<Event>* eventProcessor)
 {
 	bool isInstrumentEvent = dynamic_cast<InstrumentEvent*>(eventProcessor->GetEvent()) != nullptr ? true : false;
 
