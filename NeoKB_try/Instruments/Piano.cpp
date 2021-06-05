@@ -545,25 +545,6 @@ int Piano::OnButtonDown(PianoAction action)
 		if (sustainType == SustainType::AutoSustain || sustainType == SustainType::GameControllingSustain) {
 			isSetTempPressing = false;
 		}
-		else {
-			map<PianoAction, bool>::iterator it;
-			for (it = isPressingMap.begin(); it != isPressingMap.end(); ++it) {
-				LOG(LogLevel::Depricated) << "Piano::OnButtonDown() : pressing map has [" << (int)it->first << "]";
-				if (!it->second) {
-
-					if (getSamples()->find(it->first) != getSamples()->end()) {
-
-						SampleChannel* sampleChannel = getSamples()->at(it->first);
-						if (sampleChannel) {
-							if (sampleChannel->GetIsPlaying()) {
-								LOG(LogLevel::Debug) << "Piano::OnButtonDown() : pressing map has [" << (int)it->first << "] up by [" << GetTypeName() << "].";
-								sampleChannel->FadeOut();
-							}
-						}
-					}
-				}
-			}
-		}
 
 	}
 
@@ -591,9 +572,13 @@ int Piano::OnButtonUp(PianoAction action)
 			for (it = isPressingMap.begin(); it != isPressingMap.end(); it++) {
 				if (!it->second) {
 					SampleChannel* sampleChannel = getSamples()->at(it->first);
-					if (sampleChannel)
-						if (sampleChannel->GetIsPlaying())
+					if (sampleChannel) {
+						if (sampleChannel->GetIsPlaying()) {
+							LOG(LogLevel::Debug) << "Piano::OnButtonUp() : pressing map has [" << (int)it->first << "] up by [" << GetTypeName() << "].";
+
 							sampleChannel->FadeOut();
+						}
+					}
 				}
 			}
 		}
@@ -605,6 +590,8 @@ int Piano::OnButtonUp(PianoAction action)
 			// mainInterface->GetPanel()->ChangeState(PianoAction::SustainButton, false);
 		}
 	}
+
+	
 
 	if(isSetTempReleasing)
 		isPressingMap[action] = false;
