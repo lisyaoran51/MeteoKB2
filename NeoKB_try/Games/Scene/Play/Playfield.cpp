@@ -143,7 +143,7 @@ int Playfield::OnJudgement(HitObject * hitObject, Judgement * judgement)
 
 int Playfield::Add(EventProcessor<Event> * ep)
 {
-	LOG(LogLevel::Debug) << "Playfield::Add(EventProcessor<Event>*) : adding [" << ep->GetEventTypeName() << "] to playfield.";
+	LOG(LogLevel::Depricated) << "Playfield::Add(EventProcessor<Event>*) : adding [" << ep->GetEventTypeName() << "] to playfield.";
 	eventProcessors.push_back(ep);
 	eventProcessorMaster->AddStaticEventProcessor(ep);
 

@@ -247,7 +247,7 @@ EventProcessor<Event>* MeteorRulesetExecutor::getEventProcessor(Event * e)
 		LOG(LogLevel::Finer) << "MeteorRulesetExecutor::getEventProcessor(Event*) : event [" << e->GetStartTime() << "] has no processor type from [" << e->GetTypeName() << "].";
 		return nullptr;
 	}
-	LOG(LogLevel::Finer) << "MeteorRulesetExecutor::getEventProcessor(Event*) : event [" << e->GetStartTime() << "] has processor type [" << processorType << "] from ["<< e->GetTypeName() << "].";
+	LOG(LogLevel::Debug) << "MeteorRulesetExecutor::getEventProcessor(Event*) : event [" << e->GetStartTime() << "] has processor type [" << processorType << "] from ["<< e->GetTypeName() << "].";
 
 
 	//InstanceCreator<MtoObject>& iCreator = InstanceCreator<MtoObject>::GetInstance();
