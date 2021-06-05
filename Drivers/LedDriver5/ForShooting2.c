@@ -75,7 +75,45 @@ int main(int argc,char *argv[]){
 	close(fd);
 	printf("==========================\n");
 
+	if(variant == 6){
+		int k;
+		for(k = 0; k < 6; k++){
+			matrix = draw(k);
+			
+			for (i = 0; i < width; i++) {
+				int j;
+				for (j = 0; j < height; j++) {
 
+					if (matrix[i][height - 1 - j] > 0)
+						lightMatrixMessage[j * 6 + i / 8] |= (0x01 << (i % 8));
+						
+				}
+			}
+			
+			int fd = open("/dev/meteo_lightboard_v1", O_WRONLY /*| O_NONBLOCK */);
+			if(fd < 0){
+				printf("can't open file meteo_lightboard_v1.\n");
+			}else{
+				res = write(fd,lightMatrixMessage,96);
+				if(res < 0){
+						perror("test:");
+				}else{
+					printf("### write function return: %d\n",res);
+				}
+			}
+			
+			usleep(1000 * 100);
+			
+			for(i = 0; i < 96; i++)
+				lightMatrixMessage[i] = 0;
+			res = write(fd,lightMatrixMessage,96);
+			close(fd);
+			if(k == 5)
+				k = -1;
+		
+		}
+		
+	}
 
 	if(variant == 10){
 		int k;
@@ -251,6 +289,22 @@ unsigned char** draw(int variant){
 		
 		break;
 		case 6:
+			matrix[0][0] = 1;
+			matrix[1][1] = 1;
+			matrix[2][2] = 1;
+			matrix[3][3] = 1;
+			matrix[4][4] = 1;
+			matrix[5][5] = 1;
+			matrix[6][6] = 1;
+			matrix[7][7] = 1;
+			matrix[8][8] = 1;
+			matrix[9][9] = 1;
+			matrix[10][10] = 1;
+			matrix[11][11] = 1;
+			matrix[12][12] = 1;
+			matrix[13][13] = 1;
+			matrix[14][14] = 1;
+			matrix[15][15] = 1;
 		
 		break;
 		
