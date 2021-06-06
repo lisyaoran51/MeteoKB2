@@ -41,7 +41,7 @@ int GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait(BleRequest * 
 	BleAccess* bleAccess = dynamic_cast<BleAccess*>(thisGetBinaryRequest->communicationComponent);
 	BluetoothPhone* bluetoothPhone = dynamic_cast<BluetoothPhone*>(dynamic_cast<BleAccess*>(thisGetBinaryRequest->communicationComponent)->GetPeripheral());
 
-	LOG(LogLevel::Debug) << "BleRequest::PostBinaryBleRequestMethod::PerformAndWait() : start handling request.";
+	LOG(LogLevel::Debug) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait() : start handling request.";
 
 
 	bluetoothPhone->PushOutputMessage(getMessage);
@@ -52,7 +52,7 @@ int GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait(BleRequest * 
 	while (!isAckReceived) {
 
 		if (thisGetBinaryRequest->getElapsedSeconds() > thisGetBinaryRequest->timeout) {
-			LOG(LogLevel::Debug) << "BleRequest::PostBinaryBleRequestMethod::PerformAndWait() : waiting ack time out.";
+			LOG(LogLevel::Debug) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait() : waiting ack time out.";
 			throw BleRequestException(BleResponseCode::RequestTimeout);
 		}
 
@@ -66,11 +66,11 @@ int GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait(BleRequest * 
 
 			MeteoBluetoothMessage* message = thisGetBinaryRequest->inputRawMessages.back();
 
-			LOG(LogLevel::Debug) << "BleRequest::PostBinaryBleRequestMethod::PerformAndWait() : get ack message." << hex << (int)message->GetCommand();
+			LOG(LogLevel::Debug) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait() : get ack message." << hex << (int)message->GetCommand();
 			if (dynamic_cast<MeteoContextBluetoothMessage*>(message)) {
 			if (dynamic_cast<MeteoContextBluetoothMessage*>(message)->GetCommand() == ackGetCommand) {
 
-				LOG(LogLevel::Debug) << "BleRequest::PostBinaryBleRequestMethod::PerformAndWait() : get ack message." << dynamic_cast<MeteoContextBluetoothMessage*>(message)->GetContext();
+				LOG(LogLevel::Debug) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait() : get ack message." << dynamic_cast<MeteoContextBluetoothMessage*>(message)->GetContext();
 
 
 				isAckReceived = true;
@@ -90,7 +90,7 @@ int GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait(BleRequest * 
 	}
 
 	if (ackValue != 0) {
-		LOG(LogLevel::Warning) << "BleRequest::PostBinaryBleRequestMethod::PerformAndWait() : ack value is not 0 [" << ackValue << "].";
+		LOG(LogLevel::Warning) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait() : ack value is not 0 [" << ackValue << "].";
 
 		switch (ackValue) {
 		case -1:
@@ -103,12 +103,12 @@ int GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait(BleRequest * 
 
 	int binarySegmentSize = mtu - 28;
 	if (binarySegmentSize <= 0) {
-		LOG(LogLevel::Error) << "BleRequest::PostBinaryBleRequestMethod::PerformAndWait() : mtu size " << mtu << " too small.";
+		LOG(LogLevel::Error) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait() : mtu size " << mtu << " too small.";
 
 		throw BleRequestException(BleResponseCode::MtuTooSmall);
 	}
 
-	LOG(LogLevel::Debug) << "BleRequest::PostBinaryBleRequestMethod::PerformAndWait() : build file segments.";
+	LOG(LogLevel::Debug) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait() : build file segments.";
 
 	fileSegmentMap = new FileSegmentMap(binarySegmentSize);
 	fileSegmentMap->segmentAmount = -1;	// 預設一個數，之後會再補上真實大小
@@ -120,7 +120,7 @@ int GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait(BleRequest * 
 	while (!isTransferFinished) {
 
 		if (thisGetBinaryRequest->getSectionElapsedSeconds() > thisGetBinaryRequest->timeout) {
-			LOG(LogLevel::Debug) << "BleRequest::PostBinaryBleRequestMethod::PerformAndWait() : waiting ack time out.";
+			LOG(LogLevel::Debug) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait() : waiting ack time out.";
 			throw BleRequestException(BleResponseCode::RequestTimeout);
 		}
 
@@ -150,12 +150,12 @@ int GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait(BleRequest * 
 					fileSegmentMap->segmentAmount = amount;
 
 				if (fileSegmentMap->segmentAmount != amount) {
-					LOG(LogLevel::Error) << "BleRequest::PostBinaryBleRequestMethod::PerformAndWait() : local segment amout not fit packet [" << fileSegmentMap->segmentAmount << "/" << amount << "]";
+					LOG(LogLevel::Error) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait() : local segment amout not fit packet [" << fileSegmentMap->segmentAmount << "/" << amount << "]";
 					throw BleRequestException(BleResponseCode::WrongSegmentAmount);
 				}
 
 				if (order >= amount) {
-					LOG(LogLevel::Error) << "BleRequest::PostBinaryBleRequestMethod::PerformAndWait() : segment order exceed segment counts. [" << order << "/" << fileSegmentMap->segmentAmount << "]";
+					LOG(LogLevel::Error) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait() : segment order exceed segment counts. [" << order << "/" << fileSegmentMap->segmentAmount << "]";
 					throw BleRequestException(BleResponseCode::FileSegmentOrderExceedSize);
 				}
 

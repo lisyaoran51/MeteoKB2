@@ -145,7 +145,7 @@ json MeteoContextBluetoothMessage::GetContextInJson()
 
 bool MeteoContextBluetoothMessage::GetIsRawMessage()
 {
-
+	return true;
 	unsigned int c = (unsigned int)command;
 
 	switch (c & 0x000F0000) {
