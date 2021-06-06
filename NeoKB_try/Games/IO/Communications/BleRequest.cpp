@@ -99,7 +99,7 @@ int BleRequest::Perform(CommunicationComponent * cComponent)
 
 int BleRequest::PushInputRawMessage(MeteoBluetoothMessage * rawMessage)
 {
-	bool isAcceptMessage = false;
+	bool isAcceptMessage = true;
 	LOG(LogLevel::Debug) << "BleRequest::PushInputRawMessage() : new raw message." << hex << (int)rawMessage->GetCommand();
 
 	/* 如果是file segment的話，只有get file request要收。其他狀況就全都收 */
