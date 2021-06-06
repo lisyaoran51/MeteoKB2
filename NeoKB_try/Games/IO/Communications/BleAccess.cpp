@@ -119,7 +119,7 @@ int BleAccess::run()
 		switch (communicationState) {
 		case CommunicationState::Failed:
 
-			LOG(LogLevel::Debug) << "BleAccess::run() : state failed.";
+			LOG(LogLevel::Finest) << "BleAccess::run() : state failed.";
 			this_thread::sleep_for(std::chrono::milliseconds(500));
 			
 			// TODO: ping一下看看有沒有連上
@@ -128,7 +128,7 @@ int BleAccess::run()
 
 		case CommunicationState::Offline:
 		case CommunicationState::Connecting:
-			LOG(LogLevel::Debug) << "BleAccess::run() : state offline.";
+			LOG(LogLevel::Finest) << "BleAccess::run() : state offline.";
 
 			communicationState = CommunicationState::Connecting;
 
@@ -173,7 +173,7 @@ int BleAccess::run()
 
 		}
 
-		LOG(LogLevel::Debug) << "BleAccess::run() : handling reuqest.";
+		LOG(LogLevel::Finest) << "BleAccess::run() : handling reuqest.";
 
 		/* 再執行request */
 		CommunicationRequest* request = nullptr;
