@@ -14,21 +14,20 @@ Intro::Intro(): RegisterType("Intro")
 
 int Intro::onEntering(Scene * lastScene)
 {
-	MeteoScene::onEntering(lastScene);
-
-	LOG(LogLevel::Info) << "Intro::onEntering() : pushing main menu.";
-
-	mainMenu = new MainMenu();
-
-	Push(mainMenu);
+	
 	//GetScheduler()->AddDelayedTask([=]() { Push(mainMenu); return 0; }, 0.5);
 
-	return 0;
+	return MeteoScene::onEntering(lastScene);
 }
 
 int Intro::load()
 {
 
+	LOG(LogLevel::Info) << "Intro::load() : pushing main menu.";
+
+	mainMenu = new MainMenu();
+
+	Push(mainMenu);
 
 	return 0;
 }
