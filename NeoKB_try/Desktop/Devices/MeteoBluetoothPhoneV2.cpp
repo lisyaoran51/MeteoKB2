@@ -74,6 +74,11 @@ int MeteoBluetoothPhoneV2::PushOutputMessage(BluetoothMessage * outputMessage)
 
 	if (size != -1) {
 		gattServer->GetClient()->SendNotification(buffer, size);
+
+		for (int i = 0; i < size; i++) {
+			printf("%x ", buffer[i]);
+		}
+		printf("\n");
 	}
 	else {
 		LOG(LogLevel::Error) << "MeteoBluetoothPhoneV2::PushOutputMessage() : message size over mtu [" << mtu << "].";
