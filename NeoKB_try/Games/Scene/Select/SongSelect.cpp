@@ -171,17 +171,18 @@ int SongSelect::selectionChanged(SmInfo * sheetmusicInfo)
 
 		workingSm.SetValue(smManager->GetWorkingSm(sheetmusicInfo), true);
 
-
-		// 這邊先加mod，之後要拿掉，擺在on select(on command)
-		workingSm.GetValue()->GetModifiers()->SetValue(new vector<Modifier*>());
-		//workingSm.GetValue()->GetModifiers()->GetValue()->push_back(new AutoPedalModifier());
-		workingSm.GetValue()->GetModifiers()->GetValue()->push_back(new MusicGameModifier());
-		//workingSm.GetValue()->GetModifiers()->GetValue()->push_back(new MeteorDifficultyModifier(SmDifficultyDifficulty::Easy));
-		//workingSm.GetValue()->GetModifiers()->GetValue()->push_back(new HandModifier(SmDifficultyHandType::Right));
-		//workingSm.GetValue()->GetModifiers()->GetValue()->push_back(new RepeatPracticeModifier(2, 2));
-		//WhiteKeyTargetLineModifier* modifier = new WhiteKeyTargetLineModifier();
-		//modifier->SetValue(10, 0);
-		//workingSm.GetValue()->GetModifiers()->GetValue()->push_back(modifier);
+		if (workingSm.GetValue()->GetModifiers()->GetValue() == nullptr) {
+			// 這邊先加mod，之後要拿掉，擺在on select(on command)
+			workingSm.GetValue()->GetModifiers()->SetValue(new vector<Modifier*>());
+			//workingSm.GetValue()->GetModifiers()->GetValue()->push_back(new AutoPedalModifier());
+			workingSm.GetValue()->GetModifiers()->GetValue()->push_back(new MusicGameModifier());
+			//workingSm.GetValue()->GetModifiers()->GetValue()->push_back(new MeteorDifficultyModifier(SmDifficultyDifficulty::Easy));
+			//workingSm.GetValue()->GetModifiers()->GetValue()->push_back(new HandModifier(SmDifficultyHandType::Right));
+			//workingSm.GetValue()->GetModifiers()->GetValue()->push_back(new RepeatPracticeModifier(2, 2));
+			//WhiteKeyTargetLineModifier* modifier = new WhiteKeyTargetLineModifier();
+			//modifier->SetValue(10, 0);
+			//workingSm.GetValue()->GetModifiers()->GetValue()->push_back(modifier);
+		}
 	}
 
 	// 這邊是如果用手機傳訊息選歌的時候再執行，他會把modifier蓋過去，讓手機可以設定modifier

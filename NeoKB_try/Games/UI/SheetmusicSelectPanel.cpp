@@ -224,9 +224,9 @@ int SheetmusicSelectPanel::onMessage(MeteoBluetoothMessage * message)
 
 			vector<SmInfo*>* sInfos = smManager->GetSmInfos();
 			for (int i = 0; i < sInfos->size(); i++) {
+				LOG(LogLevel::Debug) << "int SheetmusicSelectPanel::onMessage() : check song name " << sInfos->at(i)->fileName;
 
 				if (sInfos->at(i)->fileName == fileName) {
-					LOG(LogLevel::Debug) << "int SheetmusicSelectPanel::onMessage() : check song name " << sInfos->at(i)->fileName;
 					LOG(LogLevel::Debug) << "int SheetmusicSelectPanel::onMessage() : has song " << sInfos->at(i)->fileName;
 					// 回傳已有這首曲子
 					MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::AckSheetmusicData);
