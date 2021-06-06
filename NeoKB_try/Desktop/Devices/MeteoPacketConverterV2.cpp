@@ -582,7 +582,7 @@ int MeteoPacketConverterV2::ConvertToByteArray(BluetoothMessage * bluetoothMessa
 		memcpy(buffer + sizeof(command) + sizeof(unsigned short) * 3, &amount		, sizeof(amount));
 
 		const char *contextInCharArray = context.c_str();
-		memcpy(buffer + sizeof(command) + sizeof(unsigned short) * 4, contextInCharArray, sizeof(contextInCharArray));
+		memcpy(buffer + sizeof(command) + sizeof(unsigned short) * 4, contextInCharArray, sizeof(contextInCharArray) * context.length());
 		
 		tempPacketId++;
 		return bufferSize;
@@ -627,6 +627,40 @@ int MeteoPacketConverterV2::ConvertToByteArray(BluetoothMessage * bluetoothMessa
 
 		tempPacketId++;
 		return bufferSize;
+	}
+	else if (dynamic_cast<MeteoAckFileSegmentBluetoothMessage*>(bluetoothMessage)) {
+
+		MeteoAckFileSegmentBluetoothMessage* ackFileBluetoothMessage = dynamic_cast<MeteoAckFileSegmentBluetoothMessage*>(bluetoothMessage);
+
+
+		memset(buffer, 0, bufferMaxSize);
+		unsigned int command;
+
+		map<unsigned int, MeteoCommand>::iterator iter;
+		for (iter = commandMap.begin(); iter != commandMap.end(); ++iter) {
+			if (iter->second == ackFileBluetoothMessage->GetCommand()) {
+				command = iter->first;
+			}
+		}
+		memcpy(buffer, &command, sizeof(command));
+
+		memcpy(buffer + sizeof(command), &tempPacketId, sizeof(tempPacketId));
+
+		unsigned short size = 28;
+		memcpy(buffer + sizeof(command) + sizeof(unsigned short), &size, sizeof(unsigned short));
+
+		const char *fileNameInCharArray = ackFileBluetoothMessage->GetFileName().c_str();
+		memcpy(buffer + sizeof(command) + sizeof(unsigned short) * 2, fileNameInCharArray, ackFileBluetoothMessage->GetFileName().length() > 16 ? 16 : ackFileBluetoothMessage->GetFileName().length());
+
+		unsigned short order = ackFileBluetoothMessage->GetOrder();
+		memcpy(buffer + sizeof(command) + sizeof(unsigned short) * 2 + 16, &order, sizeof(order));
+
+		unsigned short amount = ackFileBluetoothMessage->GetAmount();
+		memcpy(buffer + sizeof(command) + sizeof(unsigned short) * 3 + 16, &amount, sizeof(amount));
+
+		tempPacketId++;
+		return size;
+
 	}
 
 	LOG(LogLevel::Warning) << "MeteoPacketConverterV2::ConvertToByteArray() : message not convertable.";
