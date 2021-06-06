@@ -45,6 +45,7 @@ int MeteoGameHost::setupMainInterface()
 	mainInterface->RegisterInputDevice(bluetoothDevice);
 	mainInterface->RegisterInputDevice(keyboardDevice);
 	mainInterface->RegisterInputDevice(panelDevice);
+	mainInterface->RegisterOutputDevice(bluetoothDevice);
 	mainInterface->RegisterOutputDevice(displayDevice);
 	mainInterface->RegisterOutputDevice(panelDevice);
 

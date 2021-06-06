@@ -88,6 +88,7 @@ int MeteoBluetoothDevice::readFromDevice()
 
 int MeteoBluetoothDevice::passToDevice()
 {
+	LOG(LogLevel::Debug) << "MeteoBluetoothDevice::passToDevice() : running.";
 	unique_lock<mutex> uLock(outputMessageMutex);
 
 	for (int i = 0; i < outputMessages.size(); i++) {
