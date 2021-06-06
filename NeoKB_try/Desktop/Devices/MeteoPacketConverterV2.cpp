@@ -541,6 +541,7 @@ int MeteoPacketConverterV2::ConvertToByteArray(BluetoothMessage * bluetoothComma
 
 int MeteoPacketConverterV2::ConvertToByteArray(BluetoothMessage * bluetoothMessage, char * buffer, int bufferMaxSize)
 {
+	LOG(LogLevel::Debug) << "MeteoPacketConverterV2::ConvertToByteArray() : convert new message.";
 	if (dynamic_cast<MeteoContextBluetoothMessage*>(bluetoothMessage)) {
 		MeteoContextBluetoothMessage* contextBluetoothMessage = dynamic_cast<MeteoContextBluetoothMessage*>(bluetoothMessage);
 

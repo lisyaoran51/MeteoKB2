@@ -61,12 +61,12 @@ int MeteoBluetoothPhoneV2::PushOutputMessage(BluetoothMessage * outputMessage)
 		return 0;
 
 	/* 如果write queue塞了很多message，就先不要丟file message，免得一般message丟不出去 */
-	if (dynamic_cast<MeteoFileSegmentBluetoothMessage*>(outputMessage)) {
-		if (gattServer->GetClient() != nullptr) {
-			if (gattServer->GetClient()->GetWriteQueueLength() > outputBufferThreshold)
-				return -1;
-		}
-	}
+	//if (dynamic_cast<MeteoFileSegmentBluetoothMessage*>(outputMessage)) {
+	//	if (gattServer->GetClient() != nullptr) {
+	//		if (gattServer->GetClient()->GetWriteQueueLength() > outputBufferThreshold)
+	//			return -1;
+	//	}
+	//}
 
 	char buffer[256] = { 0 };
 
