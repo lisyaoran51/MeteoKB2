@@ -174,6 +174,7 @@ int MeteoScene::onMessage(MeteoBluetoothMessage * message)
 		}
 
 		if (targetScene == nullptr) {
+			LOG(LogLevel::Debug) << "MeteoScene::onMessage() : target scene not found [EnterScene]. " << GetTypeName();
 			MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::AckEnterScene);
 			json returnContext;
 
