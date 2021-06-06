@@ -186,6 +186,19 @@ int MeteoScene::onMessage(MeteoBluetoothMessage * message)
 
 			return 0;
 		}
+		else if (targetScene == this) {
+			LOG(LogLevel::Debug) << "MeteoScene::onMessage() : already in scene [" << GetTypeName() << "].";
+			MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::AckEnterScene);
+			json returnContext;
+
+			returnContext["Status"] = 1;
+			meteoContextBluetoothMessage->SetContextInJson(returnContext);
+			meteoContextBluetoothMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
+
+			outputManager->PushMessage(meteoContextBluetoothMessage);
+			
+			return 0;
+		}
 
 		for (Scene* s = this; s->GetParentScene() != targetScene && s != nullptr; s = s->GetParentScene()) {
 
