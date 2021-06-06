@@ -63,6 +63,8 @@ int PlaySongSelect::updateSheetmusic(WorkingSm * workingSm)
 		//modifier->SetValue(10, 0);
 		//workingSm.GetValue()->GetModifiers()->GetValue()->push_back(modifier);
 	}
+	else if(workingSm->GetModifiers()->GetValue()->size() == 0)
+		workingSm->GetModifiers()->GetValue()->push_back(new MusicGameModifier());
 
 
 	return 0;
