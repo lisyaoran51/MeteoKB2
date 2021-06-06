@@ -41,7 +41,7 @@ int GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait(BleRequest * 
 	BleAccess* bleAccess = dynamic_cast<BleAccess*>(thisGetBinaryRequest->communicationComponent);
 	BluetoothPhone* bluetoothPhone = dynamic_cast<BluetoothPhone*>(dynamic_cast<BleAccess*>(thisGetBinaryRequest->communicationComponent)->GetPeripheral());
 
-
+	LOG(LogLevel::Debug) << "BleRequest::PostBinaryBleRequestMethod::PerformAndWait() : start handling request.";
 
 
 	bluetoothPhone->PushOutputMessage(getMessage);
@@ -64,8 +64,13 @@ int GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait(BleRequest * 
 		while(thisGetBinaryRequest->inputRawMessages.size() > 0) {
 
 			MeteoBluetoothMessage* message = thisGetBinaryRequest->inputRawMessages.back();
+
+			LOG(LogLevel::Debug) << "BleRequest::PostBinaryBleRequestMethod::PerformAndWait() : get ack message." << hex << message->GetCommand();
 			if (dynamic_cast<MeteoContextBluetoothMessage*>(message)) {
 			if (dynamic_cast<MeteoContextBluetoothMessage*>(message)->GetCommand() == ackGetCommand) {
+
+				LOG(LogLevel::Debug) << "BleRequest::PostBinaryBleRequestMethod::PerformAndWait() : get ack message." << dynamic_cast<MeteoContextBluetoothMessage*>(message)->GetContext();
+
 
 				isAckReceived = true;
 				ackValue = dynamic_cast<MeteoContextBluetoothMessage*>(message)->GetContextInJson()["Status"].get<int>();
@@ -101,6 +106,8 @@ int GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait(BleRequest * 
 
 		throw BleRequestException(BleResponseCode::MtuTooSmall);
 	}
+
+	LOG(LogLevel::Debug) << "BleRequest::PostBinaryBleRequestMethod::PerformAndWait() : build file segments.";
 
 	fileSegmentMap = new FileSegmentMap(binarySegmentSize);
 	fileSegmentMap->segmentAmount = -1;	// 預設一個數，之後會再補上真實大小
