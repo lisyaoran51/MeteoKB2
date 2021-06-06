@@ -14,8 +14,11 @@ BleAccess::BleAccess(Host * gHost): TCommunicationComponent(gHost), RegisterType
 	bluetoothPhone = host->GetMainInterface()->GetBluetoothPhone();
 	communicationState = CommunicationState::Failed;
 
-	communicationThread = new GameThread(bind(&BleAccess::run, this), "BleRequestThread");
-	communicationThread->SetMaxUpdateHz(200);
+	thread* runThread = new thread(&BleAccess::run, this);
+	runThread->detach();
+
+	//communicationThread = new GameThread(bind(&BleAccess::run, this), "BleRequestThread");
+	//communicationThread->SetMaxUpdateHz(200);
 
 	//communicationThread->Start();
 
