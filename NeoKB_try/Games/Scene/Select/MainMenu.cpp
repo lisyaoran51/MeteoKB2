@@ -18,14 +18,9 @@ MainMenu::MainMenu(): RegisterType("MainMenu")
 
 int MainMenu::onEntering(Scene * lastScene)
 {
-	MeteoScene::onEntering(lastScene);
-
-	songSelect = new PlaySongSelect();
-
-	Push(songSelect);
 	//GetScheduler()->AddDelayedTask([=]() { Push(songSelect); return 0; }, 0.5);
 
-	return 0;
+	return MeteoScene::onEntering(lastScene);
 }
 
 int MainMenu::load()
@@ -42,6 +37,7 @@ int MainMenu::load()
 int MainMenu::load(Instrument * i)
 {
 	instrument = i;
+
 
 	powerPanel = new PowerPanel();
 
@@ -106,6 +102,13 @@ int MainMenu::load(Instrument * i)
 	IndicatorLightPanelMessage* indicatorLightMessage = new IndicatorLightPanelMessage(0, true);
 
 	outputManager->PushMessage(indicatorLightMessage);
+
+
+
+	songSelect = new PlaySongSelect();
+
+	Push(songSelect);
+
 
 	return 0;
 }
