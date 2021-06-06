@@ -38,7 +38,7 @@ void ATT_debugCallback(char const* str, void* UNUSED_PARAM(argp))
 	if (!str)
 		LOG(LogLevel::Fine) << "ATT: debug callback with no message";
 	else
-		LOG(LogLevel::Fine) << "ATT: " << str;
+		LOG(LogLevel::Debug) << "ATT: " << str;
 }
 
 void GATT_debugCallback(char const* str, void* UNUSED_PARAM(argp))
