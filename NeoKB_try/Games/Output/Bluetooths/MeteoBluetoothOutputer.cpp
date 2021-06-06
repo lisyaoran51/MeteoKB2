@@ -9,6 +9,10 @@ using namespace Framework::IO;
 
 int MeteoBluetoothOutputer::pushMessage(MeteoBluetoothMessage * outputMessage)
 {
+	LOG(LogLevel::Debug) << "MeteoBluetoothOutputer::pushMessage : get new message.";
+
+
+
 	if(bluetoothPhone)
 		bluetoothPhone->PushOutputMessage(outputMessage);
 	else
