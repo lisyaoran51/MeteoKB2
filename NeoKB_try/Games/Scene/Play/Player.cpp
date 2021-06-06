@@ -45,10 +45,10 @@ int Player::load(MeteoConfigManager* m, Instrument* instru, MeteoGame * g)
 	LOG(LogLevel::Info) << "Player::load() : start loading the player and reading the sm and ruleset from working sm.";
 
 	WorkingSm* workingSmValue = workingSm.GetValue();
-	LOG(LogLevel::Finer) << "Player::load() : woring sm ." << workingSm.GetValue();
-	LOG(LogLevel::Finer) << "Player::load() : woring sm data." << workingSm.GetValue()->GetSm();
-	LOG(LogLevel::Finer) << "Player::load() : woring sm modifier." << workingSm.GetValue()->GetModifiers()->GetValue();
-	LOG(LogLevel::Finer) << "Player::load() : woring sm modifier size." << workingSm.GetValue()->GetModifiers()->GetValue()->size();
+	LOG(LogLevel::Depricated) << "Player::load() : woring sm ." << workingSm.GetValue();
+	LOG(LogLevel::Depricated) << "Player::load() : woring sm data." << workingSm.GetValue()->GetSm();
+	LOG(LogLevel::Depricated) << "Player::load() : woring sm modifier." << workingSm.GetValue()->GetModifiers()->GetValue();
+	LOG(LogLevel::Depricated) << "Player::load() : woring sm modifier size." << workingSm.GetValue()->GetModifiers()->GetValue()->size();
 
 	if (workingSm.GetValue() == nullptr) {
 		LOG(LogLevel::Error) << "Player::load() : no working sm.";
