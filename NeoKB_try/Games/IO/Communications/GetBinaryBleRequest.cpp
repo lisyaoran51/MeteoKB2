@@ -119,6 +119,7 @@ int GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait(BleRequest * 
 	while (!isTransferFinished) {
 
 		if (thisGetBinaryRequest->getSectionElapsedSeconds() > thisGetBinaryRequest->timeout) {
+			LOG(LogLevel::Debug) << "BleRequest::PostBinaryBleRequestMethod::PerformAndWait() : waiting ack time out.";
 			throw BleRequestException(BleResponseCode::RequestTimeout);
 		}
 
