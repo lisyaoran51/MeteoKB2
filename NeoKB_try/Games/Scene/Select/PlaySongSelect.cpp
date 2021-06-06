@@ -49,6 +49,8 @@ int PlaySongSelect::updateSheetmusic(WorkingSm * workingSm)
 	workingSm->GetModifiers()->BindTo(smSelectPanel->GetSelectedModifiers());
 
 
+	LOG(LogLevel::Info) << "PlaySongSelect::updateSheetmusic() : updating modifiers.";
+
 	if (workingSm->GetModifiers()->GetValue() == nullptr) {
 		// 這邊先加mod，之後要拿掉，擺在on select(on command)
 		workingSm->GetModifiers()->SetValue(new vector<Modifier*>());
