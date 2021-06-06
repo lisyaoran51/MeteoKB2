@@ -6,6 +6,7 @@
 #include "../../../Util/DataStructure/FileSegmentMap.h"
 #include "../../../Util/StringSplitter.h"
 #include "../../Output/Bluetooths/MeteoFileSegmentBluetoothMessage.h"
+#include "../../Output/Bluetooths/MeteoAckFileSegmentBluetoothMessage.h"
 
 
 using namespace Games::IO::Communications;
@@ -136,6 +137,7 @@ int GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait(BleRequest * 
 			if (dynamic_cast<MeteoFileSegmentBluetoothMessage*>(message)) {
 			if (dynamic_cast<MeteoFileSegmentBluetoothMessage*>(message)->GetCommand() == transferCommand) {
 
+
 				MeteoFileSegmentBluetoothMessage* fileSegmentMessage = dynamic_cast<MeteoFileSegmentBluetoothMessage*>(message);
 
 				if (fileSegmentMessage->GetFileName() != fileName)
@@ -149,6 +151,8 @@ int GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait(BleRequest * 
 				if(fileSegmentMap->segmentAmount == -1)
 					fileSegmentMap->segmentAmount = amount;
 
+				LOG(LogLevel::Debug) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait() : file [" << fileName << "] get segment [" << order << "/" << amount << "].";
+
 				if (fileSegmentMap->segmentAmount != amount) {
 					LOG(LogLevel::Error) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait() : local segment amout not fit packet [" << fileSegmentMap->segmentAmount << "/" << amount << "]";
 					throw BleRequestException(BleResponseCode::WrongSegmentAmount);
@@ -160,6 +164,10 @@ int GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait(BleRequest * 
 				}
 
 				fileSegmentMap->fileSegmentMap[order] = pair<char*, int>(fileSegmentData, size);
+
+				MeteoAckFileSegmentBluetoothMessage* ackFileSegmentMessage = new MeteoAckFileSegmentBluetoothMessage(ackTransferCommand, fileName, order, amount);
+
+				bluetoothPhone->PushOutputMessage(ackFileSegmentMessage);
 
 				/* 從這個時間點開始計時，超過時間就timeout */
 				thisGetBinaryRequest->writeTimePoint();
