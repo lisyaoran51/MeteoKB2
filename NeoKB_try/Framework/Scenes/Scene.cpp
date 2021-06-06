@@ -34,8 +34,10 @@ int Scene::Push(Scene * scene)
 	Expire();
 	scene->Enter(this);
 
+	LOG(LogLevel::Debug) << "Scene::Push() : Scene [" << GetTypeName() << "] add [" << scene->GetTypeName() << "] to child";
 	AddChild(scene);
 	childScene = scene;
+	LOG(LogLevel::Debug) << "Scene::Push() : Scene [" << GetTypeName() << "] add [" << scene->GetTypeName() << "] to child over.";
 
 	isCurrentScene = false;
 	isPresent = false;
