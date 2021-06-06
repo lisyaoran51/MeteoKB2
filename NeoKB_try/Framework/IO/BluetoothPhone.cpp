@@ -29,7 +29,7 @@ int BluetoothPhone::TriggerOnInput()
 				isRawMessage = true;
 		}
 
-		if(!isRawMessage)
+		//if(!isRawMessage)
 			OnMessage.Trigger(inputStates[i]);
 
 		OnRawMessage.Trigger(inputStates[i]);
