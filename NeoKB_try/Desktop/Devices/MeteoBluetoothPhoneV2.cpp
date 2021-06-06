@@ -320,6 +320,8 @@ int MeteoBluetoothPhoneV2::handleNewPacket(const char * packet, int length)
 	}
 	else if (packetType == PacketType::File) {
 
+		LOG(LogLevel::Debug) << "MeteoBluetoothPhoneV2::handleNewPacket() : file segment massage.";
+
 		if (!getIsReady())
 			return 0;
 
@@ -329,6 +331,8 @@ int MeteoBluetoothPhoneV2::handleNewPacket(const char * packet, int length)
 			pushBluetoothState(btMessage);
 	}
 	else if (packetType == PacketType::AckFile) {
+
+		LOG(LogLevel::Debug) << "MeteoBluetoothPhoneV2::handleNewPacket() : ack file segment massage.";
 
 		if (!getIsReady())
 			return 0;
