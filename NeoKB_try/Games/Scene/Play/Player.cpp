@@ -42,9 +42,14 @@ int Player::load()
 int Player::load(MeteoConfigManager* m, Instrument* instru, MeteoGame * g)
 {
 	meteoGame = g;
-	LOG(LogLevel::Info) << "Player::load : start loading the player and reading the sm and ruleset from working sm.";
+	LOG(LogLevel::Info) << "Player::load() : start loading the player and reading the sm and ruleset from working sm.";
 
 	WorkingSm* workingSmValue = workingSm.GetValue();
+
+	if (workingSm.GetValue() == nullptr) {
+		LOG(LogLevel::Error) << "Player::load() : no working sm.";
+		throw runtime_error("Player::load() : no working sm.");
+	}
 
 	/* 抓更改configuration的modifier */
 	for (int i = 0; i < workingSmValue->GetModifiers()->GetValue()->size(); i++) {
@@ -53,6 +58,9 @@ int Player::load(MeteoConfigManager* m, Instrument* instru, MeteoGame * g)
 			cModifier->ApplyToConfigurationManager(GetCache<ConfigManager>(cModifier->GetConfigManagerName()));
 		}
 	}
+
+	LOG(LogLevel::Finer) << "Player::load() : after apply modifiers.";
+	LOG(LogLevel::Finer) << "Player::load() : modifiers [" << workingSmValue->GetModifiers()->GetValue()->size() << "].";
 
 	// 這個是先寫死ruleset ，之後要改成從檔案讀(像下一行那樣)
 	//rulesetInfo.SetValue(new RulesetInfo("MeteorRuleset", 1));
