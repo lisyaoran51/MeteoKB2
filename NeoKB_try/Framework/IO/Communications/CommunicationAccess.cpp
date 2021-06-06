@@ -7,6 +7,7 @@ using namespace Framework::IO::Communications;
 
 CommunicationAccess::CommunicationAccess(Host * gHost) : RegisterType("CommunicationAccess"), CommunicationCollectionManager(gHost)
 {
+	setHost(gHost);
 }
 
 int CommunicationAccess::Queue(CommunicationRequest * communicationRequest)
