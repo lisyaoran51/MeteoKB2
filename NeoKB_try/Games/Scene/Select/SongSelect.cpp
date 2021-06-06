@@ -151,9 +151,11 @@ int SongSelect::selectionChanged(SmInfo * sheetmusicInfo)
 
 		if (!workingSm.GetValue()->IsTheSameSm(sheetmusicInfo)) {
 
+			LOG(LogLevel::Debug) << "SongSelect::selectionChanged() : the same working sm. delete last and recreate.";
 
 			workingSm.SetValue(smManager->GetWorkingSm(sheetmusicInfo), true);
 
+			LOG(LogLevel::Debug) << "SongSelect::selectionChanged() : test " << workingSm.GetValue()->GetSm();
 			// ??需要delete舊的workingSm嗎?
 		}
 	}
