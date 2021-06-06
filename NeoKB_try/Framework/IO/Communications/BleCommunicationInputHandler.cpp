@@ -31,6 +31,8 @@ int BleCommunicationInputHandler::HandleState(InputState * inputEvent)
 	if (inputEvent->GetBluetoothState()->CheckIsEmpty())
 		return 0;
 
+	LOG(LogLevel::Debug) << "BleCommunicationInputHandler::HandleState() : handle input state to ble access.";
+
 	communicationAccess->HandleState(inputEvent);
 
 	return 0;
