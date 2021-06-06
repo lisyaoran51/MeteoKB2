@@ -156,6 +156,7 @@ int Scene::onExpire()
 
 int Scene::onEntering(Scene * lastScene)
 {
+	LOG(LogLevel::Debug) << "Scene::onEntering() : add [" << GetTypeName() << "] to scene master.";
 	SceneMaster::GetInstance().AddScene(this);
 
 	// Ä~©Óªº¤H¼g
