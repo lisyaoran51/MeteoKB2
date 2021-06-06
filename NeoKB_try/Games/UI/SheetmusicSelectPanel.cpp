@@ -277,6 +277,8 @@ int SheetmusicSelectPanel::onMessage(MeteoBluetoothMessage * message)
 			getSheetmusicRequest->AddOnSuccess(&onGetSheetmusicSuccess);
 			getSheetmusicRequest->AddOnFail(&onGetSheetmusicFail);
 
+			LOG(LogLevel::Debug) << "int SheetmusicSelectPanel::onMessage() : start queuing " << fileName;
+
 			communicationAccess->Queue(getSheetmusicRequest);
 
 			LOG(LogLevel::Debug) << "int SheetmusicSelectPanel::onMessage() : queue request to get " << fileName;
