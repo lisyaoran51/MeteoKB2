@@ -22,7 +22,7 @@ Scene::Scene() : RegisterType("Scene")
 
 int Scene::Push(Scene * scene)
 {
-	LOG(LogLevel::Debug) << "Scene::Push() : Scene [" << GetTypeName() << "] push to [" << scene->GetTypeName() << "]";
+	LOG(LogLevel::Depricated) << "Scene::Push() : Scene [" << GetTypeName() << "] push to [" << scene->GetTypeName() << "]";
 
 
 	if (childScene != nullptr)
@@ -34,10 +34,10 @@ int Scene::Push(Scene * scene)
 	Expire();
 	scene->Enter(this);
 
-	LOG(LogLevel::Debug) << "Scene::Push() : Scene [" << GetTypeName() << "] add [" << scene->GetTypeName() << "] to child";
+	LOG(LogLevel::Depricated) << "Scene::Push() : Scene [" << GetTypeName() << "] add [" << scene->GetTypeName() << "] to child";
 	AddChild(scene);
 	childScene = scene;
-	LOG(LogLevel::Debug) << "Scene::Push() : Scene [" << GetTypeName() << "] add [" << scene->GetTypeName() << "] to child over.";
+	LOG(LogLevel::Depricated) << "Scene::Push() : Scene [" << GetTypeName() << "] add [" << scene->GetTypeName() << "] to child over.";
 
 	isCurrentScene = false;
 	isPresent = false;
@@ -109,7 +109,7 @@ int Scene::OnEntered(Scene * lastScene)
 
 int Scene::Resume(Scene * sourceScene)
 {
-	LOG(LogLevel::Debug) << "Scene::Resume() : Scene [" << GetTypeName() << "] try to resume [" << (isValidForResume ? "Success" : "Failed") << "]";
+	LOG(LogLevel::Depricated) << "Scene::Resume() : Scene [" << GetTypeName() << "] try to resume [" << (isValidForResume ? "Success" : "Failed") << "]";
 
 	DeleteChild(sourceScene);
 	//delete childScene;
@@ -140,7 +140,7 @@ int Scene::ExitTo(Scene * sourceScene)
 	if (isExited)
 		return 0;
 
-	LOG(LogLevel::Debug) << "Scene::ExitTo() : Scene [" << GetTypeName() << "] try to exit to [" << parentScene->GetTypeName() << "]";
+	LOG(LogLevel::Depricated) << "Scene::ExitTo() : Scene [" << GetTypeName() << "] try to exit to [" << parentScene->GetTypeName() << "]";
 
 	onExiting(parentScene);
 
@@ -158,7 +158,7 @@ int Scene::onExpire()
 
 int Scene::onEntering(Scene * lastScene)
 {
-	LOG(LogLevel::Debug) << "Scene::onEntering() : add [" << GetTypeName() << "] to scene master.";
+	LOG(LogLevel::Depricated) << "Scene::onEntering() : add [" << GetTypeName() << "] to scene master.";
 	SceneMaster::GetInstance().AddScene(this);
 
 	// Ä~©Óªº¤H¼g

@@ -53,7 +53,7 @@ MeteoScene::MeteoScene() : RegisterType("MeteoScene"), Scene()
 
 MeteoScene::~MeteoScene()
 {
-	LOG(LogLevel::Debug) << "MeteoScene::~MeteoScene() : killing scene [" << GetTypeName() << "].";
+	LOG(LogLevel::Depricated) << "MeteoScene::~MeteoScene() : killing scene [" << GetTypeName() << "].";
 	rulesetInfo.DeleteOnValueChanged(this);
 	workingSm.DeleteOnValueChanged(this);
 
@@ -68,14 +68,14 @@ int MeteoScene::onExpire()
 
 	isMessageActive = false;
 
-	LOG(LogLevel::Debug) << "MeteoScene::onExpire() : expiring [" << GetTypeName() << "].";
+	LOG(LogLevel::Depricated) << "MeteoScene::onExpire() : expiring [" << GetTypeName() << "].";
 
 	return 0;
 }
 
 int MeteoScene::onEntering(Scene * lastScene)
 {
-	LOG(LogLevel::Debug) << "MeteoScene::onEntering() : entering [" << GetTypeName() << "].";
+	LOG(LogLevel::Depricated) << "MeteoScene::onEntering() : entering [" << GetTypeName() << "].";
 	isMessageActive = true;
 
 	return Scene::onEntering(lastScene);
@@ -84,7 +84,7 @@ int MeteoScene::onEntering(Scene * lastScene)
 int MeteoScene::onEntered(Scene * lastScene)
 {
 
-	LOG(LogLevel::Debug) << "MeteoScene::onEntered() : entered next scene. [" << GetTypeName() << "].";
+	LOG(LogLevel::Depricated) << "MeteoScene::onEntered() : entered next scene. [" << GetTypeName() << "].";
 
 	GetScheduler()->AddTask([=]() {
 
@@ -105,7 +105,7 @@ int MeteoScene::onEntered(Scene * lastScene)
 
 int MeteoScene::onExiting(Scene * lastScene)
 {
-	LOG(LogLevel::Debug) << "MeteoScene::onExiting() : exiting [" << GetTypeName() << "].";
+	LOG(LogLevel::Depricated) << "MeteoScene::onExiting() : exiting [" << GetTypeName() << "].";
 	isMessageActive = false;
 
 	return Scene::onExiting(lastScene);
@@ -118,7 +118,7 @@ int MeteoScene::onSuspending(Scene * lastScene)
 
 int MeteoScene::onResuming(Scene * lastScene)
 {
-	LOG(LogLevel::Debug) << "MeteoScene::onResuming() : resuming [" << GetTypeName() << "].";
+	LOG(LogLevel::Depricated) << "MeteoScene::onResuming() : resuming [" << GetTypeName() << "].";
 	isMessageActive = true;
 
 	MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::EnterScene);
@@ -141,7 +141,7 @@ int MeteoScene::onMessage(MeteoBluetoothMessage * message)
 		return -1;
 	}
 
-	LOG(LogLevel::Debug) << "MeteoScene::onMessage() : got new bt message. " << GetTypeName();
+	LOG(LogLevel::Debug) << "MeteoScene::onMessage() : got new bt message on scene [" << GetTypeName() << "].";
 
 	if (contextMessage->GetCommand() == MeteoCommand::ReadScene) {
 		LOG(LogLevel::Debug) << "MeteoScene::onMessage() : got new bt message [ReadScene]. ";
