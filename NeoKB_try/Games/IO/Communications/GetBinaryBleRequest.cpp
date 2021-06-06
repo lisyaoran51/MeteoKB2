@@ -169,6 +169,8 @@ int GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait(BleRequest * 
 			else if (dynamic_cast<MeteoContextBluetoothMessage*>(message)) {
 			if (dynamic_cast<MeteoContextBluetoothMessage*>(message)->GetCommand() == finishCommand) {
 				
+				LOG(LogLevel::Debug) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait() : get finish command.";
+
 				if (fileSegmentMap->fileSegmentMap.size() == fileSegmentMap->segmentAmount) {
 					isTransferFinished = true;
 				}
@@ -188,6 +190,9 @@ int GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait(BleRequest * 
 					map<int, pair<char*, int>>::iterator iter;
 					iter = fileSegmentMap->fileSegmentMap.find(i);
 					if (iter == fileSegmentMap->fileSegmentMap.end()) {
+
+						LOG(LogLevel::Debug) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait() : request rewrite segment [" << i << "].";
+
 						MeteoContextBluetoothMessage* reuqestRetransferMessage = new MeteoContextBluetoothMessage(requestRetransferCommand);
 
 						json messageContext;
@@ -216,6 +221,7 @@ int GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait(BleRequest * 
 
 	}
 
+	LOG(LogLevel::Debug) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait() : finish get file.";
 
 	MeteoContextBluetoothMessage* ackFinishferMessage = new MeteoContextBluetoothMessage(ackFinishCommand);
 
