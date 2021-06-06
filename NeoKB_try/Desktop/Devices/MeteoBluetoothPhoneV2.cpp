@@ -54,11 +54,15 @@ InputState * MeteoBluetoothPhoneV2::GetBluetoothState()
 
 int MeteoBluetoothPhoneV2::PushOutputMessage(BluetoothMessage * outputMessage)
 {
-	if (!getIsReady())
+	if (!getIsReady()) {
+		LOG(LogLevel::Debug) << "MeteoBluetoothPhoneV2::PushOutputMessage() : phone not ready.";
 		return 0;
+	}
 
-	if (gattServer == nullptr)
+	if (gattServer == nullptr) {
+		LOG(LogLevel::Debug) << "MeteoBluetoothPhoneV2::PushOutputMessage() : server not ready.";
 		return 0;
+	}
 
 	/* 如果write queue塞了很多message，就先不要丟file message，免得一般message丟不出去 */
 	//if (dynamic_cast<MeteoFileSegmentBluetoothMessage*>(outputMessage)) {

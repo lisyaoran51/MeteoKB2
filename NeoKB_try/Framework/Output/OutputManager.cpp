@@ -30,6 +30,8 @@ int OutputManager::PushMessage(OutputMessage * outputMessage)
 {
 	unique_lock<mutex> uLock(itemMutex);
 	for (int i = 0; i < items.size(); i++) {
+
+		LOG(LogLevel::Debug) << "OutputManager::PushMessage : push to outputer." << i;
 		items[i]->PushMessage(outputMessage);
 	}
 	delete outputMessage;

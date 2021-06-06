@@ -14,6 +14,7 @@
 #include "../Output/Panels/SpeedRingOutputer.h"
 #include "../Output/Panels/IndicatorLightOutputer.h"
 #include "../Output/Panels/ChangeSpeedOutputer.h"
+#include "../Output/Bluetooths/MeteoBluetoothOutputer.h"
 #include "../../RulesetMeteor/Config/MeteorConfigManager.h"
 #include "../../RulesetInstant/Config/InstantConfigManager.h"
 
@@ -30,6 +31,7 @@ using namespace Meteor::Output::Panels;
 using namespace Games::Output::Panels;
 using namespace Meteor::Config;
 using namespace Instant::Config;
+using namespace Games::Output::Bluetooths;
 
 
 
@@ -64,6 +66,10 @@ int GameHost::SetupOutputManager(OutputManager * oManager)
 	OutputComponent* indicatorLightOutputer = new IndicatorLightOutputer();
 	indicatorLightOutputer->SetupPeripheral(mainInterface);
 	oManager->AddItem(indicatorLightOutputer);
+
+	OutputComponent* meteoBluetoothOutputer = new MeteoBluetoothOutputer();
+	meteoBluetoothOutputer->SetupPeripheral(mainInterface);
+	oManager->AddItem(meteoBluetoothOutputer);
 
 	return 0;
 }
