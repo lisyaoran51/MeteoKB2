@@ -12,15 +12,11 @@ using namespace Games::IO::Communications;
 BleAccess::BleAccess(Host * gHost): TCommunicationComponent(gHost), RegisterType("BleAccess")
 {
 	bluetoothPhone = host->GetMainInterface()->GetBluetoothPhone();
-	communicationState = CommunicationState::Failed;
+	communicationState = CommunicationState::Connected;
+	// TODO: 在連接時更改連線狀態
 
 	thread* runThread = new thread(&BleAccess::run, this);
 	runThread->detach();
-
-	//communicationThread = new GameThread(bind(&BleAccess::run, this), "BleRequestThread");
-	//communicationThread->SetMaxUpdateHz(200);
-
-	//communicationThread->Start();
 
 }
 
@@ -177,6 +173,9 @@ int BleAccess::run()
 		}
 
 		LOG(LogLevel::Finest) << "BleAccess::run() : handling reuqest.";
+
+		if(communicationRequests.size() == 0)
+			this_thread::sleep_for(std::chrono::milliseconds(100));
 
 		/* 再執行request */
 		CommunicationRequest* request = nullptr;
