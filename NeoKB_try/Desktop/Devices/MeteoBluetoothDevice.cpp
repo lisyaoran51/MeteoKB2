@@ -34,7 +34,7 @@ int MeteoBluetoothDevice::AddOnDisconnect(MtoObject * callableObject, function<i
 int MeteoBluetoothDevice::readFromDevice()
 {
 #if 1
-
+	LOG(LogLevel::Debug) << "MeteoBluetoothDevice::readFromDevice() : reading... ";
 	InputState* newState = meteoBluetoothPhone->GetBluetoothState();
 	if (newState != nullptr) {
 		LOG(LogLevel::Debug) << "MeteoBluetoothDevice::readFromDevice() : got new bt state. ";
