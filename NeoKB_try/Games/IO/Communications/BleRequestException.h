@@ -244,6 +244,18 @@ namespace Communications{
 		/// 字定義的，沒有找到需要的檔案
 		/// </summary>
 		FileNotFound,
+		/// <summary>
+		/// 字定義的，沒有找到需要的檔案
+		/// </summary>
+		AppFileNotFound,
+		/// <summary>
+		/// 檔案片段的編號超出總片段數量
+		/// </summary>
+		FileSegmentOrderExceedSize,
+		/// <summary>
+		/// 封包的片段總量與本地的片段總量不相符
+		/// </summary>
+		WrongSegmentAmount,
 
 
 

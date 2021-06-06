@@ -59,7 +59,7 @@ namespace Select {
 		/// <summary>
 		/// 選擇完成，進入下個場景
 		/// </summary>
-		virtual int onSelected() = 0;
+		virtual int onSelected();
 
 	private:
 

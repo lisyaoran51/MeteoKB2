@@ -3,11 +3,13 @@
 #include "../Play/PlayerLoader.h"
 #include "../Play/Player.h"
 #include "../../../Framework/Threading/ThreadMaster.h"
+#include "../../../RulesetMeteor/Ruleset/Modifiers/MusicGameModifier.h"
 
 
 
 using namespace Framework::Threading;
 using namespace Games::Scenes::Select;
+using namespace Meteor::Rulesets::Modifiers;
 
 
 PlaySongSelect::PlaySongSelect() :RegisterType("PlaySongSelect")
@@ -47,12 +49,28 @@ int PlaySongSelect::updateSheetmusic(WorkingSm * workingSm)
 	workingSm->GetModifiers()->BindTo(smSelectPanel->GetSelectedModifiers());
 
 
+	if (workingSm->GetModifiers()->GetValue() == nullptr) {
+		// 這邊先加mod，之後要拿掉，擺在on select(on command)
+		workingSm->GetModifiers()->SetValue(new vector<Modifier*>());
+		//workingSm.GetValue()->GetModifiers()->GetValue()->push_back(new AutoPedalModifier());
+		workingSm->GetModifiers()->GetValue()->push_back(new MusicGameModifier());
+		//workingSm.GetValue()->GetModifiers()->GetValue()->push_back(new MeteorDifficultyModifier(SmDifficultyDifficulty::Easy));
+		//workingSm.GetValue()->GetModifiers()->GetValue()->push_back(new HandModifier(SmDifficultyHandType::Right));
+		//workingSm.GetValue()->GetModifiers()->GetValue()->push_back(new RepeatPracticeModifier(2, 2));
+		//WhiteKeyTargetLineModifier* modifier = new WhiteKeyTargetLineModifier();
+		//modifier->SetValue(10, 0);
+		//workingSm.GetValue()->GetModifiers()->GetValue()->push_back(modifier);
+	}
+
+
 	return 0;
 }
 
 int PlaySongSelect::onSelected()
 {
+	SongSelect::onSelected();
 	LOG(LogLevel::Info) << "PlaySongSelect::onSelected() : pushing to play scene.";
+
 
 	/* 進入遊戲後不能再選歌 */
 	smSelectPanel->SetIsAvailabledForTrigger(false);

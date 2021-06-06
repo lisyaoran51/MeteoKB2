@@ -1,12 +1,6 @@
 #include "SongSelect.h"
 
 #include "../../MeteoGame.h"
-#include "../../../RulesetMeteor/Ruleset/Modifiers/AutoPedalModifier.h"
-#include "../../../RulesetMeteor/Ruleset/Modifiers/MusicGameModifier.h"
-#include "../../../RulesetMeteor/Ruleset/Modifiers/RepeatPracticeModifier.h"
-#include "../../../RulesetMeteor/Ruleset/Modifiers/MeteorDifficultyModifier.h"
-#include "../../../RulesetMeteor/Ruleset/Modifiers/WhiteKeyTargetLineModifier.h"
-#include "../../../RulesetMeteor/Ruleset/Modifiers/HandModifier.h"
 #include "../../../Util/DataStructure/FileSegmentMap.h"
 #include <stdio.h>
 #include "../../../Util/StringSplitter.h"
@@ -14,7 +8,6 @@
 
 using namespace Games::Scenes::Select;
 using namespace Games;
-using namespace Meteor::Rulesets::Modifiers;
 using namespace Util::DataStructure;
 using namespace Util;
 
@@ -35,6 +28,12 @@ int SongSelect::updateSheetmusic(WorkingSm * workingSm)
 {
 	// 原本是改背景，我們沒背景所以不用
 
+	return 0;
+}
+
+int SongSelect::onSelected()
+{
+	updateSheetmusic(workingSm.GetValue());
 	return 0;
 }
 
@@ -147,44 +146,31 @@ int SongSelect::selectionChanged(SmInfo * sheetmusicInfo)
 
 	if (workingSm.GetValue() != nullptr) {
 
-		LOG(LogLevel::Debug) << "SongSelect::selectionChanged() : working sm value = " << workingSm.GetValue();
+		LOG(LogLevel::Depricated) << "SongSelect::selectionChanged() : working sm value = " << workingSm.GetValue();
 
 		if (!workingSm.GetValue()->IsTheSameSm(sheetmusicInfo)) {
 
-			LOG(LogLevel::Debug) << "SongSelect::selectionChanged() : the same working sm. delete last and recreate.";
+			LOG(LogLevel::Depricated) << "SongSelect::selectionChanged() : the same working sm. delete last and recreate.";
 
 			workingSm.SetValue(smManager->GetWorkingSm(sheetmusicInfo), true);
 
-			LOG(LogLevel::Debug) << "SongSelect::selectionChanged() : test " << workingSm.GetValue()->GetSm();
+			LOG(LogLevel::Depricated) << "SongSelect::selectionChanged() : test " << workingSm.GetValue()->GetSm();
 			// ??需要delete舊的workingSm嗎?
 		}
 	}
 	else {
-		LOG(LogLevel::Debug) << [](BindablePointer<WorkingSm*>* wSm, MeteoScene* scene) {
+		LOG(LogLevel::Depricated) << [](BindablePointer<WorkingSm*>* wSm, MeteoScene* scene) {
 			for (int i = 0; i < wSm->GetBindings()->size(); i++) {
-				LOG(LogLevel::Debug) << "SongSelect::selectionChanged : working sm bindings [" << i << "] = [" << wSm->GetBindings()->at(i) << "].";
+				LOG(LogLevel::Depricated) << "SongSelect::selectionChanged : working sm bindings [" << i << "] = [" << wSm->GetBindings()->at(i) << "].";
 			}
 
 			for (MeteoScene* s = scene; s != nullptr; s = dynamic_cast<MeteoScene*>(s->GetParentScene())) {
-				LOG(LogLevel::Debug) << "SongSelect::selectionChanged : scene [" << s->GetTypeName() << "]'s working sm is [" << s->GetWorkingSm() << "].";
+				LOG(LogLevel::Depricated) << "SongSelect::selectionChanged : scene [" << s->GetTypeName() << "]'s working sm is [" << s->GetWorkingSm() << "].";
 			}
 			return 0;
 		}(&workingSm, this);
 
 		workingSm.SetValue(smManager->GetWorkingSm(sheetmusicInfo), true);
-	}
-
-	if (workingSm.GetValue()->GetModifiers()->GetValue() == nullptr) {
-		// 這邊先加mod，之後要拿掉，擺在on select(on command)
-		workingSm.GetValue()->GetModifiers()->SetValue(new vector<Modifier*>());
-		//workingSm.GetValue()->GetModifiers()->GetValue()->push_back(new AutoPedalModifier());
-		workingSm.GetValue()->GetModifiers()->GetValue()->push_back(new MusicGameModifier());
-		//workingSm.GetValue()->GetModifiers()->GetValue()->push_back(new MeteorDifficultyModifier(SmDifficultyDifficulty::Easy));
-		//workingSm.GetValue()->GetModifiers()->GetValue()->push_back(new HandModifier(SmDifficultyHandType::Right));
-		//workingSm.GetValue()->GetModifiers()->GetValue()->push_back(new RepeatPracticeModifier(2, 2));
-		//WhiteKeyTargetLineModifier* modifier = new WhiteKeyTargetLineModifier();
-		//modifier->SetValue(10, 0);
-		//workingSm.GetValue()->GetModifiers()->GetValue()->push_back(modifier);
 	}
 
 	// 這邊是如果用手機傳訊息選歌的時候再執行，他會把modifier蓋過去，讓手機可以設定modifier

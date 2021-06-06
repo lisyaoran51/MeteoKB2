@@ -34,6 +34,9 @@ namespace DataStructure{
 		/// </summary>
 		map<int, pair<char*, int>> fileSegmentMap;
 
+		/// <summary>
+		/// 羆琿计秖
+		/// </summary>
 		int segmentAmount;
 
 		string GetFileNameWithoutExtension();
@@ -43,8 +46,14 @@ namespace DataStructure{
 		/// </summary>
 		int GetFileSegment(int index, char** fileSegment);
 
+		/// <summary>
+		/// 程郎
+		/// </summary>
 		int GetMaxSegmentSize();
 
+		/// <summary>
+		/// 羆琿计秖
+		/// </summary>
 		int GetSegmentAmount();
 
 		/// <summary>
@@ -69,6 +78,9 @@ namespace DataStructure{
 
 	protected:
 
+		/// <summary>
+		/// 程郎
+		/// </summary>
 		int maxSegmentSize;
 
 

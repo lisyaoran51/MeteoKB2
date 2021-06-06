@@ -29,7 +29,7 @@ namespace Communications{
 		/// 有時一個request可以同時被wifi、ble、bt等多種communication component執行，這時request要先接收目前可選用的component有哪些，自己選定要用哪種component
 		/// 然後再執行
 		/// </summary>
-		virtual int ChooseCommunicationComponentToPerform();
+		//virtual int ChooseCommunicationComponentToPerform();
 
 		int AddOnSuccess(MtoObject * callableObject, function<int(FileSegmentMap*)> callback, string name = "HandleSuccess");
 

@@ -197,6 +197,7 @@ int MeteoScene::onMessage(MeteoBluetoothMessage * message)
 
 			outputManager->PushMessage(meteoContextBluetoothMessage);
 			
+			
 			return 0;
 		}
 

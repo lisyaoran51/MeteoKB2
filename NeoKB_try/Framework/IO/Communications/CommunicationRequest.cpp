@@ -140,6 +140,7 @@ int CommunicationRequest::requestTimeStart()
 
 int CommunicationRequest::writeTimePoint()
 {
+	// ­p®ÉÂI
 	requestPointTime = system_clock::now();
 	return 0;
 }
