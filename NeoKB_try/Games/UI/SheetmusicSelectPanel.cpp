@@ -224,8 +224,9 @@ int SheetmusicSelectPanel::onMessage(MeteoBluetoothMessage * message)
 
 			vector<SmInfo*>* sInfos = smManager->GetSmInfos();
 			for (int i = 0; i < sInfos->size(); i++) {
-				if (sInfos->at(i)->fileName == fileName) {
 
+				if (sInfos->at(i)->fileName == fileName) {
+					LOG(LogLevel::Debug) << "int SheetmusicSelectPanel::onMessage() : check song name " << sInfos->at(i)->fileName;
 					LOG(LogLevel::Debug) << "int SheetmusicSelectPanel::onMessage() : has song " << sInfos->at(i)->fileName;
 					// 回傳已有這首曲子
 					MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::AckSheetmusicData);
@@ -240,6 +241,9 @@ int SheetmusicSelectPanel::onMessage(MeteoBluetoothMessage * message)
 					return 0;
 				}
 			}
+
+			LOG(LogLevel::Debug) << "int SheetmusicSelectPanel::onMessage() : not have song " << fileName;
+
 			// 回傳沒有這首曲子
 			MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::AckSheetmusicData);
 			json returnContext;
@@ -286,7 +290,7 @@ int SheetmusicSelectPanel::onMessage(MeteoBluetoothMessage * message)
 
 	if (message->GetCommand() == MeteoCommand::RequestLoadGame) {
 
-		LOG(LogLevel::Debug) << "int SheetmusicSelectPanel::onMessage() : request load game. " << context.dump();
+		LOG(LogLevel::Debug) << "int SheetmusicSelectPanel::onMessage() : request load game. ";
 
 		string fileName = context["FileName"].get<string>();
 		
