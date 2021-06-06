@@ -45,6 +45,8 @@ int Player::load(MeteoConfigManager* m, Instrument* instru, MeteoGame * g)
 	LOG(LogLevel::Info) << "Player::load() : start loading the player and reading the sm and ruleset from working sm.";
 
 	WorkingSm* workingSmValue = workingSm.GetValue();
+	LOG(LogLevel::Finer) << "Player::load() : woring sm ." << workingSm.GetValue();
+	LOG(LogLevel::Finer) << "Player::load() : woring sm data." << workingSm.GetValue()->GetSm();
 
 	if (workingSm.GetValue() == nullptr) {
 		LOG(LogLevel::Error) << "Player::load() : no working sm.";
