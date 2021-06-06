@@ -44,10 +44,10 @@ InputState * MeteoBluetoothPhoneV2::GetBluetoothState()
 
 	InputState* returnValue = bluetoothState;
 
-	//unique_lock<mutex> uLock(bluetoothStateMutex);
+	unique_lock<mutex> uLock(bluetoothStateMutex);
 	bluetoothState = new InputState();
 	bluetoothState->SetBluetoothState(new BluetoothState());
-	//uLock.unlock();
+	uLock.unlock();
 
 	return returnValue;
 }

@@ -17,7 +17,7 @@ BleAccess::BleAccess(Host * gHost): TCommunicationComponent(gHost), RegisterType
 	communicationThread = new GameThread(bind(&BleAccess::run, this), "BleRequestThread");
 	communicationThread->SetMaxUpdateHz(200);
 
-	communicationThread->Start();
+	//communicationThread->Start();
 
 }
 
