@@ -1,11 +1,16 @@
 #include "SceneMaster.h"
 
+#include "../../Util/Log.h"
+
+
 using namespace  Framework::Scenes;
+using namespace Util;
 
 
 
 int SceneMaster::AddScene(Scene * s)
 {
+	LOG(LogLevel::Debug) << "int SceneMaster::AddScene() : adding scene [" << s->GetTypeName() << "] .";
 	scenes[s->GetTypeName()] = s;
 	return 0;
 }
