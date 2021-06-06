@@ -37,7 +37,7 @@ int SheetmusicSelectPanel::load()
 int SheetmusicSelectPanel::load(FrameworkConfigManager * f, SmManager * s, OutputManager* o, CommunicationAccess* c)
 {
 	LOG(LogLevel::Info) << "int SheetmusicSelectPanel::load() : insert sheetmusic manager.";
-	LOG(LogLevel::Debug) << "int SheetmusicSelectPanel::load() : message active" << isMessageActive;
+	LOG(LogLevel::Depricated) << "int SheetmusicSelectPanel::load() : message active" << isMessageActive;
 
 	isPresent = true;
 
