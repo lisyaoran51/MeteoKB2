@@ -36,6 +36,7 @@ CommunicationRequest::CommunicationRequest() : RegisterType("CommunicationReques
 
 int CommunicationRequest::AddCommunicationComponentOption(string componentName, deque<CommunicationRequest*>* componentRequestQueue)
 {
+	LOG(LogLevel::Debug) << "int CommunicationRequest::AddCommunicationComponentOption() : component [" << componentName << "] get new request.";
 	acceptedCommunicationComponentRequestQueues[componentName] = componentRequestQueue;
 
 	return 0;
