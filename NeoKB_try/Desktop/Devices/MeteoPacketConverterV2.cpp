@@ -461,14 +461,14 @@ BluetoothMessage * MeteoPacketConverterV2::ConvertToBluetoothMessage(const char 
 			MeteoContextBluetoothMessage* btMessage = new MeteoContextBluetoothMessage(commandMap[command]);
 
 			LOG(LogLevel::Debug) << "MeteoPacketConverterV1::ConvertToBluetoothMessage() : command [" << (int)buffer[0] << " " << (int)buffer[1] << " " << (int)buffer[2] << " " << (int)buffer[3] << "].";
-			LOG(LogLevel::Debug) << "MeteoPacketConverterV1::ConvertToBluetoothMessage() : id [" << (int)buffer[4] << " " << (int)buffer[5] << "].";
-			LOG(LogLevel::Debug) << "MeteoPacketConverterV1::ConvertToBluetoothMessage() : length [" << (int)buffer[6] << " " << (int)buffer[7] << "].";
-			LOG(LogLevel::Debug) << "MeteoPacketConverterV1::ConvertToBluetoothMessage() : order [" << (int)buffer[8] << " " << (int)buffer[9] << "].";
-			LOG(LogLevel::Debug) << "MeteoPacketConverterV1::ConvertToBluetoothMessage() : amount [" << (int)buffer[10] << " " << (int)buffer[11] << "].";
+			LOG(LogLevel::Depricated) << "MeteoPacketConverterV1::ConvertToBluetoothMessage() : id [" << (int)buffer[4] << " " << (int)buffer[5] << "].";
+			LOG(LogLevel::Depricated) << "MeteoPacketConverterV1::ConvertToBluetoothMessage() : length [" << (int)buffer[6] << " " << (int)buffer[7] << "].";
+			LOG(LogLevel::Depricated) << "MeteoPacketConverterV1::ConvertToBluetoothMessage() : order [" << (int)buffer[8] << " " << (int)buffer[9] << "].";
+			LOG(LogLevel::Depricated) << "MeteoPacketConverterV1::ConvertToBluetoothMessage() : amount [" << (int)buffer[10] << " " << (int)buffer[11] << "].";
 
 			unsigned short length;
 			memcpy(&length, buffer + sizeof(command) + sizeof(unsigned short), sizeof(length));
-			LOG(LogLevel::Debug) << "MeteoPacketConverterV1::ConvertToBluetoothMessage() : length [" << length << "].";
+			LOG(LogLevel::Depricated) << "MeteoPacketConverterV1::ConvertToBluetoothMessage() : length [" << length << "].";
 			
 			memset(contextBuffer, 0, sizeof(char) * 1024);
 			memcpy(contextBuffer,

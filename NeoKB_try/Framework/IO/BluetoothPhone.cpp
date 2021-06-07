@@ -21,7 +21,7 @@ int BluetoothPhone::TriggerOnInput()
 {
 	for (int i = 0; i < inputStates.size(); i++) {
 
-		LOG(LogLevel::Debug) << "BluetoothPhone::TriggerOnInput() : push bt message to handlers .";
+		LOG(LogLevel::Depricated) << "BluetoothPhone::TriggerOnInput() : push bt message to handlers .";
 
 		bool isRawMessage = false;
 		for (int j = 0; j < inputStates[i]->GetBluetoothState()->GetMessages()->size(); j++) {

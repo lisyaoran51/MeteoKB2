@@ -508,7 +508,7 @@ int InputManager::propagateBluetoothMessage(vector<Triggerable*>* queue, InputSt
 	LOG(LogLevel::Finest) << "InputManager::propagateBluetoothCommand : handling bt command " << message << ".";
 
 
-	LOG(LogLevel::Debug) << [](vector<Triggerable*>& triggerables) {
+	LOG(LogLevel::Depricated) << [](vector<Triggerable*>& triggerables) {
 
 		for (int i = 0; i < triggerables.size(); i++)
 			LOG(LogLevel::Debug) << "|---------[" << triggerables[i]->GetTypeName() << "]";
