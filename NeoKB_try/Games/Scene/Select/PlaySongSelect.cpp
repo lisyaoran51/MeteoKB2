@@ -4,6 +4,7 @@
 #include "../Play/Player.h"
 #include "../../../Framework/Threading/ThreadMaster.h"
 #include "../../../RulesetMeteor/Ruleset/Modifiers/MusicGameModifier.h"
+#include "../../../RulesetMeteor/Ruleset/Modifiers/HandDifficultyModifier.h"
 
 
 
@@ -56,7 +57,7 @@ int PlaySongSelect::updateSheetmusic(WorkingSm * workingSm)
 		workingSm->GetModifiers()->SetValue(new vector<Modifier*>());
 		//workingSm.GetValue()->GetModifiers()->GetValue()->push_back(new AutoPedalModifier());
 		workingSm->GetModifiers()->GetValue()->push_back(new MusicGameModifier());
-		//workingSm.GetValue()->GetModifiers()->GetValue()->push_back(new MeteorDifficultyModifier(SmDifficultyDifficulty::Easy));
+		workingSm->GetModifiers()->GetValue()->push_back(new HandDifficultyModifier(SmDifficultyHandType::Both, SmDifficultyDifficulty::Easy));
 		//workingSm.GetValue()->GetModifiers()->GetValue()->push_back(new HandModifier(SmDifficultyHandType::Right));
 		//workingSm.GetValue()->GetModifiers()->GetValue()->push_back(new RepeatPracticeModifier(2, 2));
 		//WhiteKeyTargetLineModifier* modifier = new WhiteKeyTargetLineModifier();
