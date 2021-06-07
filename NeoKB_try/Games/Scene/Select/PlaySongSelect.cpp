@@ -64,8 +64,11 @@ int PlaySongSelect::updateSheetmusic(WorkingSm * workingSm)
 		//modifier->SetValue(10, 0);
 		//workingSm.GetValue()->GetModifiers()->GetValue()->push_back(modifier);
 	}
-	else if(workingSm->GetModifiers()->GetValue()->size() == 0)
+	else if (workingSm->GetModifiers()->GetValue()->size() == 0) {
 		workingSm->GetModifiers()->GetValue()->push_back(new MusicGameModifier());
+		workingSm->GetModifiers()->GetValue()->push_back(new HandDifficultyModifier(SmDifficultyHandType::Both, SmDifficultyDifficulty::Easy));
+
+	}
 
 
 	return 0;
