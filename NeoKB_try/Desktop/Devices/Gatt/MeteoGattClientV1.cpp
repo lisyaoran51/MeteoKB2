@@ -10,6 +10,8 @@
 #include <assert.h>
 #include <bluetooth/bluetooth.h>
 #include <bluetooth/l2cap.h>
+#include <thread>
+#include <chrono>
 
 
 // these are pulled directly from the BlueZ source tree
@@ -250,7 +252,7 @@ int MeteoGattClientV1::SendNotification(char * bufferOut, int size)
 
 		if (!send_success) {
 			LOG(LogLevel::Warning) << "MeteoGattClientV1::SendNotification() : failed to send.";
-			this_thread::sleep_for(std::chrono::milliseconds(10));
+			std::this_thread::sleep_for(std::chrono::milliseconds(10));
 			//return -1;
 		}
 
