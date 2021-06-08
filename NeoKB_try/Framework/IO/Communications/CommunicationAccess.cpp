@@ -13,6 +13,12 @@ CommunicationAccess::CommunicationAccess(Host * gHost) : RegisterType("Communica
 	setHost(gHost);
 }
 
+int CommunicationAccess::Update()
+{
+	framedClock->ProcessFrame();
+	return CommunicationCollectionManager<CommunicationComponent>::Update();
+}
+
 int CommunicationAccess::Queue(CommunicationRequest * communicationRequest)
 {
 	for (int i = 0; i < items.size(); i++) {

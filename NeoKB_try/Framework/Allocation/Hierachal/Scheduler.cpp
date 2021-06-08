@@ -16,8 +16,14 @@ int Scheduler::Update()
 		Cancel();
 		return 0;
 	}
-
-	double localCurrentTime = clock->GetCurrentTime();
+	double localCurrentTime;
+	try {
+		localCurrentTime = clock->GetCurrentTime();
+	}
+	catch (exception& e) {
+		LOG(LogLevel::Error) << "Scheduler::Update() : failed to get current from frame clock : " << e.what();
+		return 0;
+	}
 
 	LOG(LogLevel::Finest) << "Scheduler::Update() : current time is [" << localCurrentTime << "], timed task [" << timedTasks.size() << "], task queue[" << taskQueue.size() << "].";
 

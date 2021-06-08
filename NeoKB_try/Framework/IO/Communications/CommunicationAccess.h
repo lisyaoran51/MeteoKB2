@@ -25,6 +25,8 @@ namespace Communications{
 
 		CommunicationAccess(Host* gHost);
 
+		virtual int Update();
+
 		/// <summary>
 		/// 把request丟給下面所有component，如果有component可以接，就會跑
 		/// </summary>
