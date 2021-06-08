@@ -252,7 +252,7 @@ int MeteoGattClientV1::SendNotification(char * bufferOut, int size)
 
 		if (!send_success) {
 			LOG(LogLevel::Warning) << "MeteoGattClientV1::SendNotification() : failed to send.";
-			std::this_thread::sleep_for(std::chrono::milliseconds(10));
+			//std::this_thread::sleep_for(std::chrono::milliseconds(10));
 			//return -1;
 		}
 
