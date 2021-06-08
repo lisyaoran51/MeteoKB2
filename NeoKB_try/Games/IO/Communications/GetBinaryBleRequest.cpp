@@ -182,6 +182,13 @@ int GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait(BleRequest * 
 					isTransferFinished = true;
 				}
 				else {
+					LOG(LogLevel::Debug) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait() : segments not enough [" << fileSegmentMap->fileSegmentMap.size() << "].";
+
+					map<int, pair<char*, int>>::iterator it;
+					for (it = fileSegmentMap->fileSegmentMap.begin(); it != fileSegmentMap->fileSegmentMap.end(); ++it) {
+						LOG(LogLevel::Debug) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait() : already have segment [" << (*it).first << "].";
+					}
+
 					MeteoContextBluetoothMessage* ackFinishferMessage = new MeteoContextBluetoothMessage(ackFinishCommand);
 
 					json messageContext;

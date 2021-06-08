@@ -97,7 +97,7 @@ int MeteoBluetoothDevice::passToDevice()
 
 		int success = -1;
 		try {
-			LOG(LogLevel::Debug) << "MeteoBluetoothDevice::passToDevice() : pass message to bt.";
+			LOG(LogLevel::Depricated) << "MeteoBluetoothDevice::passToDevice() : pass message to bt.";
 			success = meteoBluetoothPhone->PushOutputMessage(dynamic_cast<BluetoothMessage*>(outputMessages[i]));
 		}
 		catch (exception &e) {

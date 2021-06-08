@@ -449,8 +449,8 @@ BluetoothMessage * MeteoPacketConverterV2::ConvertToBluetoothMessage(const char 
 	unsigned int command = 0x0;
 	memcpy(&command, buffer, sizeof(command));
 
-	LOG(LogLevel::Debug) << "MeteoPacketConverterV1::ConvertToBluetoothMessage() : command [" << hex << command << dec << "], length[" << size << "].";
-	LOG(LogLevel::Debug) << "MeteoPacketConverterV1::ConvertToBluetoothMessage() : packet [" << string(buffer, size) << "].";
+	LOG(LogLevel::Depricated) << "MeteoPacketConverterV1::ConvertToBluetoothMessage() : command [" << hex << command << dec << "], length[" << size << "].";
+	LOG(LogLevel::Depricated) << "MeteoPacketConverterV1::ConvertToBluetoothMessage() : packet [" << string(buffer, size) << "].";
 
 	map<unsigned int, MeteoCommand>::iterator iter;
 	iter = commandMap.find(command);
@@ -541,11 +541,11 @@ int MeteoPacketConverterV2::ConvertToByteArray(BluetoothMessage * bluetoothComma
 
 int MeteoPacketConverterV2::ConvertToByteArray(BluetoothMessage * bluetoothMessage, char * buffer, int bufferMaxSize)
 {
-	LOG(LogLevel::Debug) << "MeteoPacketConverterV2::ConvertToByteArray() : convert new message.";
+	LOG(LogLevel::Depricated) << "MeteoPacketConverterV2::ConvertToByteArray() : convert new message.";
 	if (dynamic_cast<MeteoContextBluetoothMessage*>(bluetoothMessage)) {
 		MeteoContextBluetoothMessage* contextBluetoothMessage = dynamic_cast<MeteoContextBluetoothMessage*>(bluetoothMessage);
 
-		LOG(LogLevel::Debug) << "MeteoPacketConverterV2::ConvertToByteArray() : convert context message.";
+		LOG(LogLevel::Depricated) << "MeteoPacketConverterV2::ConvertToByteArray() : convert context message.";
 
 		string context = contextBluetoothMessage->GetContext();
 
