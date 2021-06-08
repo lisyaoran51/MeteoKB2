@@ -2,9 +2,11 @@
 
 #include <string.h>
 #include "../StringSplitter.h"
+#include "../Log.h"
 
 
 using namespace Util::DataStructure;
+using namespace Util;
 
 
 FileSegmentMap::FileSegmentMap(int sSize)
@@ -63,7 +65,9 @@ bool FileSegmentMap::CheckFullFilled()
 int FileSegmentMap::WriteFile(fstream * fStream)
 {
 	for (int i = 0; i < segmentAmount; i++) {
-		fStream->write(fileSegmentMap[i].first, fileSegmentMap[i].second * sizeof(char*));
+
+		LOG(LogLevel::Debug) << "FileSegmentMap::WriteFile() : write file [" << string(fileSegmentMap[i].first) << "] with size [" << fileSegmentMap[i].second << "] to file.";
+		fStream->write(fileSegmentMap[i].first, fileSegmentMap[i].second * sizeof(char));
 	}
 
 	//for (map<int, pair<char*, int>>::const_iterator it = fileSegmentMap.begin(); it != fileSegmentMap.end(); ++it)
