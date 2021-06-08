@@ -183,11 +183,11 @@ int GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait(BleRequest * 
 					isTransferFinished = true;
 				}
 				else {
-					LOG(LogLevel::Debug) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait() : segments not enough [" << fileSegmentMap->fileSegmentMap.size() << "].";
+					LOG(LogLevel::Depricated) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait() : segments not enough [" << fileSegmentMap->fileSegmentMap.size() << "].";
 
 					map<int, pair<char*, int>>::iterator it;
 					for (it = fileSegmentMap->fileSegmentMap.begin(); it != fileSegmentMap->fileSegmentMap.end(); ++it) {
-						LOG(LogLevel::Debug) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait() : already have segment [" << (*it).first << "].";
+						LOG(LogLevel::Depricated) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait() : already have segment [" << (*it).first << "].";
 					}
 
 					MeteoContextBluetoothMessage* ackFinishferMessage = new MeteoContextBluetoothMessage(ackFinishCommand);
@@ -212,7 +212,7 @@ int GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait(BleRequest * 
 
 						json messageContext;
 						messageContext["FileName"] = fileSegmentMap->fileName;
-						messageContext["SegmentNumber"].push_back(i);
+						messageContext["Order"] = i;
 
 						reuqestRetransferMessage->SetContextInJson(messageContext);
 						reuqestRetransferMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
@@ -221,8 +221,8 @@ int GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait(BleRequest * 
 				}
 
 				/* 留一點時間給對方緩衝 */
-				if(!isTransferFinished)
-					this_thread::sleep_for(std::chrono::milliseconds(100));
+				//if(!isTransferFinished)
+				//	this_thread::sleep_for(std::chrono::milliseconds(100));
 
 				/* 從這個時間點開始計時，超過時間就timeout */
 				thisGetBinaryRequest->writeTimePoint();
