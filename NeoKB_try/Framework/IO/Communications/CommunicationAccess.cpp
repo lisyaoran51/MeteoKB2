@@ -7,6 +7,9 @@ using namespace Framework::IO::Communications;
 
 CommunicationAccess::CommunicationAccess(Host * gHost) : RegisterType("CommunicationAccess"), CommunicationCollectionManager(gHost)
 {
+	// 這個本來應該要從game thread拿，但是因為這次我們不用game thread，所以就自己生一個
+	sourceClock = new StopwatchClock();
+	sourceClock->Start();
 	setHost(gHost);
 }
 

@@ -21,8 +21,6 @@ namespace Communications{
 	public:
 
 		CommunicationCollectionManager(Host* gHost) : TCommunicationComponent(gHost), RegisterType("CommunicationCollectionManager"){
-			sourceClock = new StopwatchClock();
-			sourceClock->Start();
 		}
 
 		/// <summary>
