@@ -108,13 +108,13 @@ int SongSelect::load(SmManager * sManager, MeteoGame * game, Storage* s)
 
 		FILE* fp = popen(string("mkdir /home/pi/Sheetmusics/") + fSegmentMap->GetFileNameWithoutExtension(), "r");
 		if (fp == NULL) {
-			LOG(LogLevel::Error) << "SongSelect::Lambda_HandleDownloadSheetmusicSuccess() : fail to mkdir [" << string("mkdir /home/pi/Sheetmusics/") + fSegmentMap->GetFileNameWithoutExtension() << "].";
+			LOG(LogLevel::Error) << "SongSelect::Lambda_HandleDownloadSheetmusicSuccess() : fail to mkdir [" << (string("mkdir /home/pi/Sheetmusics/") + fSegmentMap->GetFileNameWithoutExtension()) << "].";
 		}
 		pclose(fp);
 
 		fp = popen(string("cp /home/pi/Sheetmusics/") + fSegmentMap->fileName + string(" /home/pi/") + fSegmentMap->GetFileNameWithoutExtension() + string("/"), "r");
 		if (fp == NULL) {
-			LOG(LogLevel::Error) << "SongSelect::Lambda_HandleDownloadSheetmusicSuccess() : fail to cp [" << string("cp /home/pi/Sheetmusics/") + fSegmentMap->fileName + string(" /home/pi/") + fSegmentMap->GetFileNameWithoutExtension() + string("/") << "].";
+			LOG(LogLevel::Error) << "SongSelect::Lambda_HandleDownloadSheetmusicSuccess() : fail to cp [" << (string("cp /home/pi/Sheetmusics/") + fSegmentMap->fileName + string(" /home/pi/") + fSegmentMap->GetFileNameWithoutExtension() + string("/")) << "].";
 
 		}
 		pclose(fp);
