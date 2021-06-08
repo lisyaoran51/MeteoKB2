@@ -111,6 +111,7 @@ int GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait(BleRequest * 
 	LOG(LogLevel::Debug) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait() : build file segments.";
 
 	fileSegmentMap = new FileSegmentMap(binarySegmentSize);
+	fileSegmentMap->fileName = fileName;
 	fileSegmentMap->segmentAmount = -1;	// 預設一個數，之後會再補上真實大小
 
 	/* 從這個時間點開始計時，超過時間就timeout */
