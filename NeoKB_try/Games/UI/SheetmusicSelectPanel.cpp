@@ -264,7 +264,7 @@ int SheetmusicSelectPanel::onMessage(MeteoBluetoothMessage * message)
 			getSheetmusicMessage->SetContextInJson(requestContext);
 			getSheetmusicMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
 
-			GetBinaryBleRequest* getSheetmusicRequest = new GetBinaryBleRequest(string("Sheetmusics/") + fileName,
+			GetBinaryBleRequest* getSheetmusicRequest = new GetBinaryBleRequest(string("/home/pi/Sheetmusics/") + fileName,
 				getSheetmusicMessage,
 				MeteoCommand::AckRequestSheetmusicFile,
 				MeteoCommand::SheetmusicFileSegment,

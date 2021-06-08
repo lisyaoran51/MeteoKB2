@@ -82,29 +82,47 @@ int SongSelect::load(SmManager * sManager, MeteoGame * game, Storage* s)
 
 	smSelectPanel->AddOnDownloadSheetmusicSuccess(this, [=](FileSegmentMap* fSegmentMap) {
 
-		LOG(LogLevel::Debug) << "SongSelect::Lambda_HandleDownloadSheetmusicSuccess() : dounload [" << fSegmentMap->fileName << "] success.";
+		LOG(LogLevel::Debug) << "SongSelect::Lambda_HandleDownloadSheetmusicSuccess() : download [" << fSegmentMap->fileName << "] success.";
 
-		fSegmentMap->WriteFile(storage->GetStream(string("temp/") + fSegmentMap->fileName + string(".temp"), FileAccess::Write, FileMode::Create));
+		if (false) {
+			fSegmentMap->WriteFile(storage->GetStream(string("temp/") + fSegmentMap->fileName + string(".temp"), FileAccess::Write, FileMode::Create));
 
-		// 解密、解壓縮
-		string decompressCommand = string("tar -xvf ") + storage->GetTempBasePath() + string("/temp/") + fSegmentMap->fileName + string(".temp ") 
-													   + storage->GetTempBasePath() + string("/Sheetmusics/") + fSegmentMap->GetFileNameWithoutExtension() + "/" + fSegmentMap->fileName;
+			// 解密、解壓縮
+			string decompressCommand = string("tar -xvf ") + storage->GetTempBasePath() + string("/temp/") + fSegmentMap->fileName + string(".temp ")
+				+ storage->GetTempBasePath() + string("/Sheetmusics/") + fSegmentMap->GetFileNameWithoutExtension() + "/" + fSegmentMap->fileName;
 
-		FILE* fp = popen(decompressCommand.c_str(), "r");
+			FILE* fp = popen(decompressCommand.c_str(), "r");
+			if (fp == NULL) {
+				// error
+			}
+			pclose(fp);
+
+			// 刪除加密檔
+			string deleteCommand = string("rm -f ") + storage->GetTempBasePath() + string("/temp/") + fSegmentMap->fileName + string(".temp ");
+			fp = popen(deleteCommand.c_str(), "r");
+			if (fp == NULL) {
+				// error
+			}
+			pclose(fp);
+		}
+
+		FILE* fp = popen(string("mkdir /home/pi/Sheetmusics/") + fSegmentMap->GetFileNameWithoutExtension(), "r");
 		if (fp == NULL) {
-			// error
+			LOG(LogLevel::Error) << "SongSelect::Lambda_HandleDownloadSheetmusicSuccess() : fail to mkdir [" << string("mkdir /home/pi/Sheetmusics/") + fSegmentMap->GetFileNameWithoutExtension() << "].";
 		}
 		pclose(fp);
 
-		// 刪除加密檔
-		string deleteCommand = string("rm -f ") + storage->GetTempBasePath() + string("/temp/") + fSegmentMap->fileName + string(".temp ");
-		fp = popen(deleteCommand.c_str(), "r");
+		fp = popen(string("cp /home/pi/Sheetmusics/") + fSegmentMap->fileName + string(" /home/pi/") + fSegmentMap->GetFileNameWithoutExtension() + string("/"), "r");
 		if (fp == NULL) {
-			// error
+			LOG(LogLevel::Error) << "SongSelect::Lambda_HandleDownloadSheetmusicSuccess() : fail to cp [" << string("cp /home/pi/Sheetmusics/") + fSegmentMap->fileName + string(" /home/pi/") + fSegmentMap->GetFileNameWithoutExtension() + string("/") << "].";
+
 		}
 		pclose(fp);
 
-		string path = storage->GetTempBasePath() + string("/Sheetmusics/") + fSegmentMap->GetFileNameWithoutExtension();
+		//string path = storage->GetTempBasePath() + string("/Sheetmusics/") + fSegmentMap->GetFileNameWithoutExtension();
+		string path = string("/home/pi/Sheetmusics/") + fSegmentMap->GetFileNameWithoutExtension();
+
+		LOG(LogLevel::Debug) << "SongSelect::Lambda_HandleDownloadSheetmusicSuccess() : import [" << path << "] to sm manager.";
 
 		vector<string> paths;
 		paths.push_back(path);

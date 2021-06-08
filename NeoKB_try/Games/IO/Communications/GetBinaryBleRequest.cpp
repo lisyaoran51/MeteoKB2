@@ -248,6 +248,7 @@ int GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait(BleRequest * 
 	ackFinishferMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
 	bleAccess->GetBluetoothPhone()->PushOutputMessage(ackFinishferMessage);
 
+	LOG(LogLevel::Debug) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait() : write file to [" << directoryPath + string("/") + fileName << "]";
 	// file segment map write file
 	fstream file(directoryPath + string("/") + fileName, ios::out | ios::binary);
 
