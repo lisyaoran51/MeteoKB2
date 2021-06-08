@@ -275,7 +275,7 @@ int GetBinaryBleRequest::GetBinaryBleRequestMethod::Fail(BleRequest * thisReques
 
 int GetBinaryBleRequest::GetBinaryBleRequestMethod::Success(BleRequest * thisRequest)
 {
-	LOG(LogLevel::Debug) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::Fail() : get file success.";
+	LOG(LogLevel::Debug) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::Success() : get file success.";
 
 	if (fileSegmentMap == nullptr)
 		return 0;

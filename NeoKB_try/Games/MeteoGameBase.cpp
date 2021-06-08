@@ -96,6 +96,7 @@ int MeteoGameBase::update()
 		a->_DebugPrintComponents("|");
 		return 0;
 	}(audioManager);
+	communicationAccess->Update();
 
 	return 0;
 }
