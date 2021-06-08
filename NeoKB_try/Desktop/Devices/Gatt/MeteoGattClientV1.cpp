@@ -241,12 +241,18 @@ int MeteoGattClientV1::SendNotification(char * bufferOut, int size)
 	bool send_success = false;
 
 	int sendCount = 0;
+
+	send_success = bt_gatt_server_send_notification(m_server,
+		m_notify_handle,
+		bufferOutUint8,
+		size);
+
+	if (!send_success) 
+		LOG(LogLevel::Warning) << "MeteoGattClientV1::SendNotification() : failed to send.";
+
+	return 0;
 	
 	while (!send_success && sendCount < 3) {
-		send_success = bt_gatt_server_send_notification(m_server,
-			m_notify_handle,
-			bufferOutUint8,
-			size);
 
 		sendCount++;
 
