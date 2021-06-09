@@ -280,14 +280,14 @@ int SheetmusicSelectPanel::onMessage(MeteoBluetoothMessage * message)
 
 			LOG(LogLevel::Finer) << "int SheetmusicSelectPanel::onMessage() : start queuing " << fileName;
 
-			GetScheduler()->AddTask([=]() {
+			GetScheduler()->AddDelayedTask([=]() {
 
 				LOG(LogLevel::Depricated) << "int SheetmusicSelectPanel::onMessage() : queue request to get " << fileName;
 
 				communicationAccess->Queue(getSheetmusicRequest);
 
 				return 0;
-			});
+			}, 0.1);
 
 			return 0;
 		}
