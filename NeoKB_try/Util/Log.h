@@ -72,7 +72,7 @@ namespace Util {
 			_buffer << std::endl;
 			// This is atomic according to the POSIX standard
 			// http://www.gnu.org/s/libc/manual/html_node/Streams-and-Threads.html
-			std::cerr << _buffer.str();
+			std::cout << _buffer.str();
 
 			//while (isBufferToSaveLocked);
 			//bufferToSave.push_back(_buffer.str());
