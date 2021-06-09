@@ -699,7 +699,7 @@ BluetoothMessage* MeteoPacketConverterV2::ConvertToFile(const char * buffer, int
 
 			delete[] fileSegment;
 
-			LOG(LogLevel::Debug) << "MeteoPacketConverterV2::ConvertToFile() : get file [" << fileName << "] segment [" << fileSegmentNumber << "]/[" << fileSegmentCount << "], size [" << fileSegmentSize << "].";
+			LOG(LogLevel::Info) << "MeteoPacketConverterV2::ConvertToFile() : get file [" << fileName << "] segment [" << fileSegmentNumber << "]/[" << fileSegmentCount << "], size [" << fileSegmentSize << "].";
 
 			return fileSegmentBluetoothMessage;
 		}
