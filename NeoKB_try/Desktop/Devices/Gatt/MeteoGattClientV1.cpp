@@ -247,21 +247,12 @@ int MeteoGattClientV1::SendNotification(char * bufferOut, int size)
 		bufferOutUint8,
 		size);
 
-	if (!send_success) 
+	if (!send_success) {
 		LOG(LogLevel::Warning) << "MeteoGattClientV1::SendNotification() : failed to send.";
-
-	return 0;
-	
-	while (!send_success && sendCount < 3) {
-
-		sendCount++;
-
-		if (!send_success) {
-			LOG(LogLevel::Warning) << "MeteoGattClientV1::SendNotification() : failed to send.";
-			//std::this_thread::sleep_for(std::chrono::milliseconds(10));
-			//return -1;
+		for (int i = 0; i < size; i++) {
+			printf("%x ", bufferOutUint8[i]);
 		}
-
+		printf("\n");
 	}
 
 	return 0;
