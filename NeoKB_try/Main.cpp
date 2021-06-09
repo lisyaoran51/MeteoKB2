@@ -12,6 +12,7 @@ using namespace Desktop;
 using namespace Util;
 
 LogLevel Util::logLevel = LogLevel::Info;
+LogCategory Util::logCategory = LogCategory::All;
 
 std::vector<std::string> Util::LogIt::bufferToSave;
 bool Util::LogIt::isBufferToSaveLocked = false;
