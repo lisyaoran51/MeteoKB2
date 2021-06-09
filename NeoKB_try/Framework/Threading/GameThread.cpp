@@ -125,11 +125,11 @@ int GameThread::processFrame()
 		LOG(LogLevel::Depricated) << "GameThread::processFrame() : [" << threadName << "] processing.";
 
 	while (!ThreadMaster::GetInstance().CheckThreadProcessable(threadName));
-	ThreadMaster::GetInstance().SetThreadProcessStatus(threadName, true);
+	ThreadMaster::GetInstance().SetThreadProcessStatus(this, true);
 	
 	onNewFrame();
 	
-	ThreadMaster::GetInstance().SetThreadProcessStatus(threadName, false);
+	ThreadMaster::GetInstance().SetThreadProcessStatus(this, false);
 
 	if (threadName == "InputThread")
 		LOG(LogLevel::Depricated) << "GameThread::processFrame() : [" << threadName << "] new frame over.";
