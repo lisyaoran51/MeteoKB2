@@ -249,7 +249,7 @@ int SheetmusicSelectPanel::onMessage(MeteoBluetoothMessage * message)
 			/*
 			 * 重要
 			 */
-			ThreadMaster::GetInstance().SwitchGameStatus((int)GameStatus::Game);
+			ThreadMaster::GetInstance().SwitchGameStatus((int)GameStatus::Download);
 			/*
 			 * 重要
 			 */
