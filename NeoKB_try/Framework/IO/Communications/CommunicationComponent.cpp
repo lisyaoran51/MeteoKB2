@@ -60,6 +60,8 @@ Scheduler * CommunicationComponent::GetScheduler()
 
 int CommunicationComponent::Update()
 {
+	framedClock->ProcessFrame();
+
 	if (scheduler != nullptr) {
 		scheduler->Update();
 	}

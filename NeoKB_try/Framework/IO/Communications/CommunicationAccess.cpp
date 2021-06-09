@@ -16,7 +16,6 @@ CommunicationAccess::CommunicationAccess(Host * gHost) : RegisterType("Communica
 
 int CommunicationAccess::Update()
 {
-	framedClock->ProcessFrame();
 	return CommunicationCollectionManager<CommunicationComponent>::Update();
 }
 
