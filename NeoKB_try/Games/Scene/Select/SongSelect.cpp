@@ -137,7 +137,7 @@ int SongSelect::load(SmManager * sManager, MeteoGame * game, Storage* s)
 
 		fSegmentMap->Erase();
 
-		//smSelectPanel->SelectAndStart(fSegmentMap->fileName);
+		smSelectPanel->SelectAndStart(fSegmentMap->GetFileNameWithoutExtension());
 
 		return 0;
 	}, "SongSelect::Lambda_HandleDownloadSheetmusicSuccess");
