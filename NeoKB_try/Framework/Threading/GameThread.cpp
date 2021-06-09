@@ -51,7 +51,7 @@ int GameThread::Start()
 	runThread->detach();
 
 
-	ThreadMaster::GetInstance().AddNewThread(threadName);
+	ThreadMaster::GetInstance().AddNewThread(this);
 
 	return 0;
 }

@@ -38,11 +38,6 @@ namespace Communications{
 
 		CommunicationComponent(Host* gHost);
 
-		/// <summary>
-		/// 建立thread並且開始跑
-		/// </summary>
-		virtual int Start();
-
 		CommunicationState GetCommunicationState();
 
 		GameThread* GetCommunicationThread();
