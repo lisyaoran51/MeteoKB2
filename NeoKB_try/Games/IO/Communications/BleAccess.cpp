@@ -1,8 +1,7 @@
 #include "BleAccess.h"
 
 #include <iterator>
-//#include "IdentifyBleRequest.h"
-//#include "FaultIdentityBleRequest.h"
+#include <string.h>
 
 
 

@@ -7,6 +7,7 @@
 #include "ThreadMaster.h"
 #include <sched.h> 
 #include <pthread.h>
+#include <string.h>
 
 
 using namespace Framework::Threading;
