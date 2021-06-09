@@ -262,15 +262,15 @@ namespace DataStructure {
 		/// 更新所有連接的bindings的值
 		/// </summary>
 		int triggerValueChange() {
-			LOG(LogLevel::Fine) << "Bindable::triggerValueChange() : bindings = " << bindings;
+			LOG(LogLevel::Depricated) << "Bindable::triggerValueChange() : bindings = " << bindings;
 
 			if (bindings == nullptr)
 				return 0;
-			LOG(LogLevel::Fine) << "Bindable::triggerValueChange() : start triggering [" << bindings->size() << "] bindings.";
+			LOG(LogLevel::Depricated) << "Bindable::triggerValueChange() : start triggering [" << bindings->size() << "] bindings.";
 
 			unique_lock<mutex> uLock(bindingMutex);
 			for (int i = 0; i < bindings->size(); i++) {
-				LOG(LogLevel::Fine) << "Bindable::triggerValueChange() : trigger [" << bindings->at(i) << "] binding.";
+				LOG(LogLevel::Depricated) << "Bindable::triggerValueChange() : trigger [" << bindings->at(i) << "] binding.";
 				bindings->at(i)->SetValueWithoutTrigger(value);
 			}
 			return 0;
