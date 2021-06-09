@@ -159,19 +159,6 @@ int MeteoBluetoothPhoneV2::work()
 	return 0;
 
 
-	//client = init_server(0x1);
-
-	isConnected = true;
-
-	while (!exitRequested) {
-		readBluetooth();
-		writeBluetooth();
-
-		if (!lastRunReceived && !lastRunSended)
-			this_thread::sleep_for(chrono::milliseconds(10));
-
-	}
-	return 0;
 }
 
 int MeteoBluetoothPhoneV2::pushBluetoothState(BluetoothMessage * btMessage)

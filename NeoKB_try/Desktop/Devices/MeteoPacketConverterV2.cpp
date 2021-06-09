@@ -549,7 +549,7 @@ int MeteoPacketConverterV2::ConvertToByteArray(BluetoothMessage * bluetoothMessa
 
 		string context = contextBluetoothMessage->GetContext();
 
-		LOG(LogLevel::Debug) << "MeteoPacketConverterV2::ConvertToByteArray() : context [" << context << "].";
+		LOG(LogLevel::Depricated) << "MeteoPacketConverterV2::ConvertToByteArray() : context [" << context << "].";
 
 		unsigned short bufferSize = context.length() + 12;
 		if (bufferSize > bufferMaxSize) {
@@ -568,7 +568,7 @@ int MeteoPacketConverterV2::ConvertToByteArray(BluetoothMessage * bluetoothMessa
 			}
 		}
 		memcpy(buffer, &command, sizeof(command));
-		LOG(LogLevel::Debug) << "MeteoPacketConverterV2::ConvertToByteArray() : command [" << command << "] to byte is [" << (int)buffer[0] << " " << (int)buffer[1] << " " << (int)buffer[2] << " " << (int)buffer[3] << "].";
+		LOG(LogLevel::Depricated) << "MeteoPacketConverterV2::ConvertToByteArray() : command [" << command << "] to byte is [" << (int)buffer[0] << " " << (int)buffer[1] << " " << (int)buffer[2] << " " << (int)buffer[3] << "].";
 
 
 		memcpy(buffer + sizeof(command)								, &tempPacketId	, sizeof(tempPacketId));
