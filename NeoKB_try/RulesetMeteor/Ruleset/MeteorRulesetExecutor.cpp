@@ -331,7 +331,7 @@ string MeteorRulesetExecutor::GetProcessorType(string eventType)
 
 
 	// TODO: ¦R¤@¨Ç¿ù»~°T®§
-	LOG(LogLevel::Error) << "MeteorRulesetExecutor::GetProcessorType() : [" << eventType << "] no matched event processor.";
+	LOG(LogLevel::Warning) << "MeteorRulesetExecutor::GetProcessorType() : [" << eventType << "] no matched event processor.";
 	return string("");
 }
 

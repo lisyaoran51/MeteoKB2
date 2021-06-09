@@ -41,7 +41,7 @@ int GetFiles(const char* path, char*** fileNames) {
 	dir = opendir(path);
 	while ((ent = readdir(dir)) != NULL) {
 		strcpy((*fileNames)[i], ent->d_name);
-		printf("FileSystem : ------------ Read file: %s ------------\n", (*fileNames)[i]);
+		//printf("FileSystem : ------------ Read file: %s ------------\n", (*fileNames)[i]);
 		i++;
 	}
 	closedir(dir);
