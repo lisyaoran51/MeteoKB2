@@ -122,6 +122,8 @@ bool MeteoBluetoothPhoneV2::getIsReady()
 	return isConnected && isFirstPacketSent;
 }
 
+GattClient* myClinet = nullptr;
+
 int MeteoBluetoothPhoneV2::work()
 {
 
@@ -135,6 +137,8 @@ int MeteoBluetoothPhoneV2::work()
 
 			//gattClient->SetDataHandler(std::bind(&MeteoGattServerV1::OnIncomingMessage, dynamic_cast<MeteoGattServerV1*>(gattServer), std::placeholders::_1, std::placeholders::_2));
 			gattClient->SetDataHandler(std::bind(&MeteoBluetoothPhoneV2::handleNewPacket, this, std::placeholders::_1, std::placeholders::_2));
+
+			myClinet = gattClient;
 
 			isConnected = true;
 			onConnect.Trigger();
@@ -227,6 +231,8 @@ int MeteoBluetoothPhoneV2::handleNewPacket(const char * packet, int length)
 			pushBluetoothState(btMessage);
 	}
 	else if (packetType == PacketType::File) {
+
+		myClinet->Quit();
 
 		LOG(LogLevel::Fine) << "MeteoBluetoothPhoneV2::handleNewPacket() : file segment massage.";
 
