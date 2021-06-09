@@ -121,7 +121,7 @@ int GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait(BleRequest * 
 	while (!isTransferFinished) {
 
 		if (thisGetBinaryRequest->getSectionElapsedSeconds() > thisGetBinaryRequest->timeout) {
-			LOG(LogLevel::Finer) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait() : waiting ack time out.";
+			LOG(LogLevel::Finer) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait() : waiting file time out.";
 			throw BleRequestException(BleResponseCode::RequestTimeout);
 		}
 
@@ -151,7 +151,7 @@ int GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait(BleRequest * 
 				if(fileSegmentMap->segmentAmount == -1)
 					fileSegmentMap->segmentAmount = amount;
 
-				LOG(LogLevel::Finer) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait() : file [" << fileName << "] get segment [" << order << "/" << amount << "].";
+				LOG(LogLevel::Info) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait() : file [" << fileName << "] get segment [" << order << "/" << amount << "].";
 
 				if (fileSegmentMap->segmentAmount != amount) {
 					LOG(LogLevel::Error) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait() : local segment amout not fit packet [" << fileSegmentMap->segmentAmount << "/" << amount << "]";
@@ -177,7 +177,7 @@ int GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait(BleRequest * 
 			else if (dynamic_cast<MeteoContextBluetoothMessage*>(message)) {
 			if (dynamic_cast<MeteoContextBluetoothMessage*>(message)->GetCommand() == finishCommand) {
 				
-				LOG(LogLevel::Debug) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait() : get finish command.";
+				LOG(LogLevel::Fine) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait() : get finish command.";
 
 				if (fileSegmentMap->fileSegmentMap.size() == fileSegmentMap->segmentAmount) {
 					isTransferFinished = true;
@@ -206,7 +206,7 @@ int GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait(BleRequest * 
 					iter = fileSegmentMap->fileSegmentMap.find(i);
 					if (iter == fileSegmentMap->fileSegmentMap.end()) {
 
-						LOG(LogLevel::Debug) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait() : request rewrite segment [" << i << "].";
+						LOG(LogLevel::Fine) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait() : request rewrite segment [" << i << "].";
 
 						MeteoContextBluetoothMessage* reuqestRetransferMessage = new MeteoContextBluetoothMessage(requestRetransferCommand);
 
