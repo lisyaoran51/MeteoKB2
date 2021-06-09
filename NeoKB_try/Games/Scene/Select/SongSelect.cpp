@@ -132,12 +132,23 @@ int SongSelect::load(SmManager * sManager, MeteoGame * game, Storage* s)
 			LOG(LogLevel::Error) << "SongSelect::selectionChanged() : Failed to import new download sheetmusic [" << fSegmentMap->fileName << "].";
 
 			// ¥áÂÅªÞ¿ù»~°T¸¹
-
 		}
 
 		fSegmentMap->Erase();
 
-		smSelectPanel->SelectAndStart(fSegmentMap->GetFileNameWithoutExtension());
+		for (int i = 0; i < smManager->GetSmInfos()->size(); i++) {
+			LOG(LogLevel::Debug) << "int SheetmusicSelectPanel::load() : new load song [" << fSegmentMap->fileName << "].";
+			if (smManager->GetSmInfos()->at(i)->fileName == fSegmentMap->fileName) {
+
+				LOG(LogLevel::Debug) << "int SheetmusicSelectPanel::load() : song [" << fSegmentMap->fileName << "] found.";
+
+				smSelectPanel->SelectionChanged(smManager->GetSmInfos()->at(i));
+				
+				smSelectPanel->StartRequest();
+			}
+		}
+
+		//smSelectPanel->SelectAndStart(fSegmentMap->GetFileNameWithoutExtension());
 
 		return 0;
 	}, "SongSelect::Lambda_HandleDownloadSheetmusicSuccess");
