@@ -19,6 +19,17 @@
 
 namespace Util {
 
+
+	enum class LogCategory {
+		None,
+		Bluetooth,
+		Hardware,
+		Graph,
+		UI,
+		Temp,
+		All
+	};
+
 	enum class LogLevel
 	{
 		None,		// µL
@@ -94,9 +105,16 @@ namespace Util {
 
 	extern LogLevel logLevel;
 
+	extern LogCategory logCategory;
+
 	// TODO: §@log category¡A¦psystem¡Bkernel¡Bbluetooth¡Bgame...
 #define LOG(level) \
 if (level > logLevel) ; \
+else LogIt(level)
+
+
+#define LOG(level, category) \
+if (level > logLevel && (category == logCategory || logCategory == LogCategory::All)) ; \
 else LogIt(level)
 
 }
