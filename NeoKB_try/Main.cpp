@@ -20,6 +20,7 @@ int main(int argc, char *argv[]) {
 
 	LogIt::Initialize();
 	Util::logLevel = LogLevel::Info;
+	Util::logCategory = LogCategory::All;
 
 	if(argc > 1)
 		Util::logLevel = (LogLevel)atoi(argv[1]);

@@ -3125,3 +3125,42 @@ DifficultyType:3
 	https://stackoverflow.com/questions/23708231/git-shallow-clone-clone-depth-misses-remote-branches
 	
 	第一次開遊戲時，會有一個大電流經過pi造成重開機，所以要用driver先把喇叭關掉，等開完機再開啟
+	
+	push scene出錯了改不好
+	
+	生成密碼還沒做好
+	
+	連線音效要加上音量
+	
+	選曲功能
+	
+	解碼譜的時候如果出錯，就跳回選歌單
+	
+	喇叭沒開音樂時有雜音的問題，可能是因為gain開太高，可以把gain降低，pi音量拉高，讓信躁比降低，試試看能不能解決
+	
+	要量整個系統吃電量，自己再去焊電線，才知道要不要把供應器電量拉高
+	
+	離開scene之後Meteo bluetooth device會整個停止運作，不能跑MeteoBluetoothDevice::readFromDevice()，不是mutex的問題
+	HoldAllThreads();的時候會卡住不動，是因為BleRequestThread的關係
+	
+	
+	傳送出去的封包沒有丟到passToDevice，已解決
+	
+	檔案封包沒有丟進 get binary request裡面，繼續檢查哪邊出問題，已解決
+	request rewrite的時候畫丟錯的片段
+	
+6/8
+	同一個音連談的時候會破音
+	
+	黑鍵的打印有點變形，要追蹤射出品有沒有同樣狀況
+	
+	遊戲很容易調豐包，但是測試程式部會
+	
+	開機要再加速
+	
+	bluez壞掉可能問題(要先看看log)
+	-multithread
+	-bass
+	-音樂
+	-cpu
+	-
