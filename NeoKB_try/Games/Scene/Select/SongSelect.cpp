@@ -112,7 +112,7 @@ int SongSelect::load(SmManager * sManager, MeteoGame * game, Storage* s)
 		}
 		pclose(fp);
 
-		fp = popen((string("cp /home/pi/Sheetmusics/") + fSegmentMap->fileName + string(" /home/pi/") + fSegmentMap->GetFileNameWithoutExtension() + string("/")).c_str(), "r");
+		fp = popen((string("cp /home/pi/Sheetmusics/") + fSegmentMap->fileName + string(" /home/pi/Sheetmusics") + fSegmentMap->GetFileNameWithoutExtension() + string("/")).c_str(), "r");
 		if (fp == NULL) {
 			LOG(LogLevel::Error) << "SongSelect::Lambda_HandleDownloadSheetmusicSuccess() : fail to cp [" << (string("cp /home/pi/Sheetmusics/") + fSegmentMap->fileName + string(" /home/pi/") + fSegmentMap->GetFileNameWithoutExtension() + string("/")) << "].";
 
