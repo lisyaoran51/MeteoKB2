@@ -47,7 +47,7 @@ int MeteoBluetoothPhoneV2::Initialize()
 	param.sched_priority = sched_get_priority_max(policy);
 	pthread_setschedparam(thisThread->native_handle(), policy, &param);
 
-	//thisThread->detach();
+	thisThread->detach();
 	return 0;
 }
 
