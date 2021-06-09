@@ -21,17 +21,17 @@ namespace Util {
 
 
 	enum class LogCategory {
-		None,
-		Temp,
-		Usual,
-		System,
-		Bluetooth,
-		Hardware,
-		Graph,
-		UserInterface,
-		Framework,
-		Game,
-		All
+		None			 = 0x1,
+		Temp			 = 0x2,
+		Usual			 = 0x4,
+		System			 = 0x8,
+		Bluetooth		 = 0x10,
+		Hardware		 = 0x20,
+		Graph			 = 0x40,
+		UserInterface	 = 0x80,
+		Framework		 = 0x100,
+		Game			 = 0x200,
+		All				 = 0x400
 	};
 
 	enum class LogLevel
@@ -118,7 +118,7 @@ else LogIt(level)
 
 
 #define LOGC(level, category) \
-if (level > logLevel && (category == logCategory || logCategory == LogCategory::All)) ; \
+if (level > logLevel && (category & logCategory || logCategory == LogCategory::All)) ; \
 else LogIt(level)
 
 }
