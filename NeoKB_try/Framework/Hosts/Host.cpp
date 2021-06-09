@@ -88,7 +88,7 @@ int Host::Run(Game* game, Instrument* instrument)
 	updateInitialize();
 	updateThread->Start();
 
-	ThreadMaster::GetInstance().SetFrequency(10);
+	ThreadMaster::GetInstance().SetFrequency(5);
 	ThreadMaster::GetInstance().Start();
 
 	if(!initialized)
@@ -132,7 +132,7 @@ int Host::runLoop()
 {
 	// TODO: 更改睡眠時間、中斷跳出
 	while(!exitRequested)
-		this_thread::sleep_for(chrono::milliseconds(10));
+		this_thread::sleep_for(chrono::milliseconds(1000));
 
 	return 0;
 }
@@ -149,7 +149,7 @@ int Host::drawInitialize()
 	// 這個應該擺在main裡才對，這邊沒有存螢幕大小
 	canvas = new Map(width, height);
 
-	drawThread->SetMaxUpdateHz(10);
+	drawThread->SetMaxUpdateHz(1);
 	return 0;
 }
 
@@ -233,7 +233,7 @@ int Host::inputInitialize()
 {
 	LOG(LogLevel::Info) << "Host::inputInitialize() : Setting input thread.";
 	// 預設是1000了
-	inputThread->SetMaxUpdateHz(100);
+	inputThread->SetMaxUpdateHz(50);
 	return 0;
 }
 
