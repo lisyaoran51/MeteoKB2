@@ -170,7 +170,7 @@ BluetoothPhone.o Display.o FileStore.o Keyboard.o MainInterface.o Panel.o Periph
 CommunicationAccess.o CommunicationComponent.o CommunicationRequest.o BleCommunicationInputHandler.o \
 OutputManager.o BluetoothOutputer.o \
 Scene.o SceneMaster.o \
-GameThread.o ThreadMaster.o \
+GameThread.o ThreadMaster.o SimpleThread.o \
 DecoupledInterpolatingFramedClock.o FramedClock.o InterpolatingFramedClock.o OffsetFramedClock.o StopwatchClock.o ThrottledFramedClock.o TimeController.o \
 LinearSpeedAdjuster.o SpeedAdjuster.o \
 \
