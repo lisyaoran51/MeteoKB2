@@ -460,7 +460,7 @@ BluetoothMessage * MeteoPacketConverterV2::ConvertToBluetoothMessage(const char 
 
 			MeteoContextBluetoothMessage* btMessage = new MeteoContextBluetoothMessage(commandMap[command]);
 
-			LOG(LogLevel::Debug) << "MeteoPacketConverterV1::ConvertToBluetoothMessage() : command [" << (int)buffer[0] << " " << (int)buffer[1] << " " << (int)buffer[2] << " " << (int)buffer[3] << "].";
+			LOG(LogLevel::Depricated) << "MeteoPacketConverterV1::ConvertToBluetoothMessage() : command [" << (int)buffer[0] << " " << (int)buffer[1] << " " << (int)buffer[2] << " " << (int)buffer[3] << "].";
 			LOG(LogLevel::Depricated) << "MeteoPacketConverterV1::ConvertToBluetoothMessage() : id [" << (int)buffer[4] << " " << (int)buffer[5] << "].";
 			LOG(LogLevel::Depricated) << "MeteoPacketConverterV1::ConvertToBluetoothMessage() : length [" << (int)buffer[6] << " " << (int)buffer[7] << "].";
 			LOG(LogLevel::Depricated) << "MeteoPacketConverterV1::ConvertToBluetoothMessage() : order [" << (int)buffer[8] << " " << (int)buffer[9] << "].";
@@ -491,7 +491,7 @@ BluetoothMessage * MeteoPacketConverterV2::ConvertToBluetoothMessage(const char 
 			}
 			catch (exception& e) {
 				if (string(contextBuffer) == "{}") {
-					LOG(LogLevel::Debug) << "MeteoPacketConverterV2::ConvertToBluetoothMessage() : empty json.";
+					LOG(LogLevel::Depricated) << "MeteoPacketConverterV2::ConvertToBluetoothMessage() : empty json.";
 
 					json context;
 
@@ -507,7 +507,7 @@ BluetoothMessage * MeteoPacketConverterV2::ConvertToBluetoothMessage(const char 
 				return nullptr;
 			}
 
-			LOG(LogLevel::Debug) << "MeteoPacketConverterV2::ConvertToBluetoothMessage() : json context [" << btMessage->GetContext() << "].";
+			LOG(LogLevel::Depricated) << "MeteoPacketConverterV2::ConvertToBluetoothMessage() : json context [" << btMessage->GetContext() << "].";
 
 			//LOG(LogLevel::Debug) << "MeteoPacketConverterV1::ConvertToBluetoothCommand() : command [" << hex << command << dec << "], context [" << btCommand->GetContext().dump() << "].";
 
@@ -699,7 +699,7 @@ BluetoothMessage* MeteoPacketConverterV2::ConvertToFile(const char * buffer, int
 
 			delete[] fileSegment;
 
-			LOG(LogLevel::Info) << "MeteoPacketConverterV2::ConvertToFile() : get file [" << fileName << "] segment [" << fileSegmentNumber << "]/[" << fileSegmentCount << "], size [" << fileSegmentSize << "].";
+			LOG(LogLevel::Depricated) << "MeteoPacketConverterV2::ConvertToFile() : get file [" << fileName << "] segment [" << fileSegmentNumber << "]/[" << fileSegmentCount << "], size [" << fileSegmentSize << "].";
 
 			return fileSegmentBluetoothMessage;
 		}
@@ -730,7 +730,7 @@ BluetoothMessage * MeteoPacketConverterV2::ConvertToAckFileMessage(const char * 
 			MeteoAckFileSegmentBluetoothMessage* fileSegmentBluetoothMessage = new MeteoAckFileSegmentBluetoothMessage(commandMap[command], fileName, fileSegmentNumber, fileSegmentCount);
 
 
-			LOG(LogLevel::Debug) << "MeteoPacketConverterV2::ConvertToAckFileMessage() : get file [" << fileName << "] segment [" << fileSegmentNumber << "]/[" << fileSegmentCount << "].";
+			LOG(LogLevel::Depricated) << "MeteoPacketConverterV2::ConvertToAckFileMessage() : get file [" << fileName << "] segment [" << fileSegmentNumber << "]/[" << fileSegmentCount << "].";
 
 			return fileSegmentBluetoothMessage;
 		}

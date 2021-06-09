@@ -174,111 +174,9 @@ int MeteoBluetoothPhoneV2::work()
 	return 0;
 }
 
-int MeteoBluetoothPhoneV2::readBluetooth()
-{
-	if (gattServer == nullptr) {
-		// TODO: clear buffer
-		return -1;
-	}
-
-	LOG(LogLevel::Depricated) << "MeteoBluetoothPhoneV1::readBluetooth() : start reading.";
-	if (lastRunReceived)
-		memset(bufferIn, 0, sizeof(bufferIn));
-
-	int bytes_read = read(client, bufferIn, sizeof(bufferIn));
-	if (bytes_read > 0) {
-		lastRunReceived = true;
-
-		if (bytes_read == 32768)
-			LOG(LogLevel::Error) << "MeteoBluetoothPhoneV1::readBluetooth() : buffer overflow.";
-
-		char** packets = new char*[128];
-		int* packetLengths = new int[128];
-
-		LOG(LogLevel::Depricated) << "MeteoBluetoothPhoneV1::readBluetooth() : spliting packet.";
-
-		int packetCount = packetConverter->SplitPacket(bufferIn, bytes_read, packets, packetLengths);
-
-		LOG(LogLevel::Debug) << "MeteoBluetoothPhoneV1::readBluetooth() : packets [" << packetCount << "] from [" << bytes_read << "] bytes.";
-		for (int i = 0; i < packetCount; i++) {
-
-			PacketStatus packetStatus = packetConverter->CheckPacketStatus(packets[i], packetLengths[i]);
-
-			if (packetStatus == PacketStatus::Fine) {
-				handleNewPacket(packets[i], packetLengths[i]);
-			}
-			else {
-				LOG(LogLevel::Error) << "MeteoBluetoothPhoneV1::readBluetooth() : packet error with status [" << (int)packetStatus << "].";
-				// 處理錯誤的封包
-			}
-
-			delete[] packets[i];
-		}
-
-
-		delete[] packets;
-		delete[] packetLengths;
-
-	}
-	else
-		lastRunReceived = false;
-
-
-
-	return 0;
-}
-
-int MeteoBluetoothPhoneV2::writeBluetooth()
-{
-	if (gattServer == nullptr) {
-		// TODO: clear buffer
-		return -1;
-	}
-
-
-	LOG(LogLevel::Debug) << "MeteoPacketConverterV2::writeBluetooth() : start writing.";
-	if (lastRunSended)
-		memset(bufferOut, 0, sizeof(bufferOut));
-
-	if (outputMessages.size() > 0/* || outputMessagesToRewrite.size() > 0*/) {
-
-		for (int i = 0; i < outputMessages.size(); i++) {
-
-			int packetCount = packetConverter->GetCountOfPacket(outputMessages[i]);
-
-			for (int j = 0; j < packetCount; j++) {
-
-				int bytes_write = packetConverter->ConvertToByteArray(outputMessages[i], j, bufferOut, 1024);
-
-				write(client, bufferOut, bytes_write);
-
-				memset(bufferOut, 0, sizeof(bufferOut));
-			}
-
-			/* 如果是傳送檔案的話，要檢查有沒有傳送成功 */
-			if (packetConverter->CheckCommandType(outputMessages[i]) == PacketType::File) {
-				//outputMessagesToRewrite.push_back(pair<int, MeteoOutputFileBluetoothCommand*>(OutputMessageToRewriteCountdown, dynamic_cast<MeteoOutputFileBluetoothCommand*>(outputMessages[i])));
-			}
-			else {
-				delete outputMessages[i];
-			}
-
-			outputMessages.erase(outputMessages.begin() + i);
-			i--;
-		}
-
-		lastRunSended = true;
-	}
-	else
-		lastRunSended = false;
-
-
-	return 0;
-}
-
 int MeteoBluetoothPhoneV2::pushBluetoothState(BluetoothMessage * btMessage)
 {
-	LOG(LogLevel::Debug) << "MeteoBluetoothPhoneV1::pushBluetoothState() : got new bt command.";
+	LOG(LogLevel::Depricated) << "MeteoBluetoothPhoneV1::pushBluetoothState() : got new bt command.";
 
 	unique_lock<mutex> uLock(bluetoothStateMutex);
 
@@ -290,7 +188,7 @@ int MeteoBluetoothPhoneV2::pushBluetoothState(BluetoothMessage * btMessage)
 int MeteoBluetoothPhoneV2::handleNewPacket(const char * packet, int length)
 {
 
-	LOG(LogLevel::Debug) << "MeteoBluetoothPhoneV2::handleNewPacket() : length [" << length << "].";
+	LOG(LogLevel::Fine) << "MeteoBluetoothPhoneV2::handleNewPacket() : length [" << length << "].";
 
 	PacketType packetType = packetConverter->CheckPacketType(packet, length);
 
@@ -306,7 +204,7 @@ int MeteoBluetoothPhoneV2::handleNewPacket(const char * packet, int length)
 		if (gattServer->GetClient() == nullptr)
 			return 0;
 
-		LOG(LogLevel::Debug) << "MeteoBluetoothPhoneV2::handleNewPacket() : get read firmware version message.";
+		LOG(LogLevel::Fine) << "MeteoBluetoothPhoneV2::handleNewPacket() : get read firmware version message.";
 
 		char buffer[8] = { 0 };
 		unsigned int command = 0x110000;// MeteoCommand::ReturnFirmwareVersion
@@ -331,14 +229,14 @@ int MeteoBluetoothPhoneV2::handleNewPacket(const char * packet, int length)
 			return 0;
 		}
 
-		LOG(LogLevel::Debug) << "MeteoBluetoothPhoneV2::handleNewPacket() : massage:" << btMessage->ToString();
+		LOG(LogLevel::Fine) << "MeteoBluetoothPhoneV2::handleNewPacket() : massage:" << btMessage->ToString();
 
 		if (btMessage != nullptr)
 			pushBluetoothState(btMessage);
 	}
 	else if (packetType == PacketType::File) {
 
-		LOG(LogLevel::Debug) << "MeteoBluetoothPhoneV2::handleNewPacket() : file segment massage.";
+		LOG(LogLevel::Fine) << "MeteoBluetoothPhoneV2::handleNewPacket() : file segment massage.";
 
 		if (!getIsReady())
 			return 0;
@@ -350,7 +248,7 @@ int MeteoBluetoothPhoneV2::handleNewPacket(const char * packet, int length)
 	}
 	else if (packetType == PacketType::AckFile) {
 
-		LOG(LogLevel::Debug) << "MeteoBluetoothPhoneV2::handleNewPacket() : ack file segment massage.";
+		LOG(LogLevel::Fine) << "MeteoBluetoothPhoneV2::handleNewPacket() : ack file segment massage.";
 
 		if (!getIsReady())
 			return 0;
@@ -363,7 +261,7 @@ int MeteoBluetoothPhoneV2::handleNewPacket(const char * packet, int length)
 	else if (packetType == PacketType::None) {
 		// 封包壞掉，直接丟掉，不用刪因為return以後外面會刪
 		// packetConverter->CleanBuffer();
-		LOG(LogLevel::Info) << "MeteoBluetoothPhoneV1::handleNewPacket() : got error packet.";
+		LOG(LogLevel::Warning) << "MeteoBluetoothPhoneV1::handleNewPacket() : got error packet.";
 	}
 
 	return 0;

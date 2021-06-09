@@ -70,6 +70,8 @@ namespace Devices {
 
 		mutable mutex bluetoothStateMutex;
 
+		vector<pair<char*, int>> inputBytes;
+
 		InputState* bluetoothState = nullptr;
 
 		PacketConverter<MeteoCommand>* packetConverter = nullptr;
@@ -83,10 +85,6 @@ namespace Devices {
 		bool getIsReady();
 
 		int work();
-
-		int readBluetooth();
-
-		int writeBluetooth();
 
 		int pushBluetoothState(BluetoothMessage* btMessage);
 
