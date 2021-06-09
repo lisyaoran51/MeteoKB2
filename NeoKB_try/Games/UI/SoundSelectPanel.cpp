@@ -65,11 +65,11 @@ SoundSelectPanel::SoundSelectPanel() : RegisterType("SoundSelectPanel")
 
 int SoundSelectPanel::onMessage(MeteoBluetoothMessage * message)
 {
-	LOG(LogLevel::Debug) << "SoundSelectPanel::onMessage() : got new bt command. ";
+	LOG(LogLevel::Depricated) << "SoundSelectPanel::onMessage() : got new bt command. ";
 	MeteoContextBluetoothMessage* contextMessage = dynamic_cast<MeteoContextBluetoothMessage*>(message);
 
 	if (message->GetCommand() == MeteoCommand::AppSwitchKeyboardInstrument) {
-		LOG(LogLevel::Info) << "SoundSelectPanel::onMessage() : AppSwitchKeyboardInstrument. ";
+		LOG(LogLevel::Debug) << "SoundSelectPanel::onMessage() : AppSwitchKeyboardInstrument. ";
 
 		json context = contextMessage->GetContextInJson();
 
@@ -96,7 +96,7 @@ int SoundSelectPanel::onMessage(MeteoBluetoothMessage * message)
 		}
 		else {
 			// ¤Á´«¥¢±Ñ
-			LOG(LogLevel::Info) << "SoundSelectPanel::onMessage() : switch instrument failed. ";
+			LOG(LogLevel::Warning) << "SoundSelectPanel::onMessage() : switch instrument failed. ";
 			returnContext["Status"] = -1;
 		}
 		outputMessage->SetContextInJson(returnContext);
@@ -106,7 +106,7 @@ int SoundSelectPanel::onMessage(MeteoBluetoothMessage * message)
 
 
 	}
-	LOG(LogLevel::Fine) << "SoundSelectPanel::onMessage() : over. ";
+	LOG(LogLevel::Depricated) << "SoundSelectPanel::onMessage() : over. ";
 
 	return 0;
 }

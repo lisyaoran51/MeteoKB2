@@ -149,7 +149,7 @@ int SheetmusicSelectPanel::onMessage(MeteoBluetoothMessage * message)
 	}
 	json context = contextMessage->GetContextInJson();
 
-	LOG(LogLevel::Debug) << "SheetmusicSelectPanel::onMessage() : got new bt message. ";
+	LOG(LogLevel::Depricated) << "SheetmusicSelectPanel::onMessage() : got new bt message. ";
 
 	if (contextMessage->GetCommand() == MeteoCommand::WriteHardwareConfiguration) {
 		for (int i = 0; i < context["Configurations"].size(); i++) {
@@ -218,17 +218,17 @@ int SheetmusicSelectPanel::onMessage(MeteoBluetoothMessage * message)
 
 	// 這一段要在開始傳檔之前送，確認琴裡面有沒有這首歌
 	if (message->GetCommand() == MeteoCommand::SheetmusicData) {
-		LOG(LogLevel::Debug) << "int SheetmusicSelectPanel::onMessage() : get message SheetmusicData";
+		LOG(LogLevel::Depricated) << "int SheetmusicSelectPanel::onMessage() : get message SheetmusicData";
 
 		try {
 			string fileName = context["FileName"].get<string>();
 
 			vector<SmInfo*>* sInfos = smManager->GetSmInfos();
 			for (int i = 0; i < sInfos->size(); i++) {
-				LOG(LogLevel::Debug) << "int SheetmusicSelectPanel::onMessage() : check song name " << sInfos->at(i)->fileName;
+				LOG(LogLevel::Depricated) << "int SheetmusicSelectPanel::onMessage() : check song name " << sInfos->at(i)->fileName;
 
 				if (sInfos->at(i)->fileName == fileName) {
-					LOG(LogLevel::Debug) << "int SheetmusicSelectPanel::onMessage() : has song " << sInfos->at(i)->fileName;
+					LOG(LogLevel::Depricated) << "int SheetmusicSelectPanel::onMessage() : has song " << sInfos->at(i)->fileName;
 					// 回傳已有這首曲子
 					MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::AckSheetmusicData);
 
@@ -243,7 +243,7 @@ int SheetmusicSelectPanel::onMessage(MeteoBluetoothMessage * message)
 				}
 			}
 
-			LOG(LogLevel::Debug) << "int SheetmusicSelectPanel::onMessage() : not have song " << fileName;
+			LOG(LogLevel::Depricated) << "int SheetmusicSelectPanel::onMessage() : not have song " << fileName;
 
 			// 回傳沒有這首曲子
 			MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::AckSheetmusicData);
@@ -278,11 +278,16 @@ int SheetmusicSelectPanel::onMessage(MeteoBluetoothMessage * message)
 			getSheetmusicRequest->AddOnSuccess(&onGetSheetmusicSuccess);
 			getSheetmusicRequest->AddOnFail(&onGetSheetmusicFail);
 
-			LOG(LogLevel::Debug) << "int SheetmusicSelectPanel::onMessage() : start queuing " << fileName;
+			LOG(LogLevel::Finer) << "int SheetmusicSelectPanel::onMessage() : start queuing " << fileName;
 
-			communicationAccess->Queue(getSheetmusicRequest);
+			GetScheduler()->AddTask([=]() {
 
-			LOG(LogLevel::Debug) << "int SheetmusicSelectPanel::onMessage() : queue request to get " << fileName;
+				LOG(LogLevel::Depricated) << "int SheetmusicSelectPanel::onMessage() : queue request to get " << fileName;
+
+				communicationAccess->Queue(getSheetmusicRequest);
+
+				return 0;
+			});
 
 			return 0;
 		}
