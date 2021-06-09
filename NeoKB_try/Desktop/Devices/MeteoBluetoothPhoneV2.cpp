@@ -40,7 +40,7 @@ int MeteoBluetoothPhoneV2::Initialize()
 	struct sched_param param;
 	memset(&param, 0, sizeof(param));
 	param.sched_priority = sched_get_priority_max(policy);
-	pthread_setschedparam(t.native_handle, policy, &param);
+	pthread_setschedparam(t.native_handle(), policy, &param);
 
 	t.detach();
 	return 0;
