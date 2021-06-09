@@ -37,7 +37,7 @@ int MeteoBluetoothDevice::readFromDevice()
 	LOG(LogLevel::Depricated) << "MeteoBluetoothDevice::readFromDevice() : reading... ";
 	InputState* newState = meteoBluetoothPhone->GetBluetoothState();
 	if (newState != nullptr) {
-		LOG(LogLevel::Debug) << "MeteoBluetoothDevice::readFromDevice() : got new bt state. ";
+		LOG(LogLevel::Depricated) << "MeteoBluetoothDevice::readFromDevice() : got new bt state. ";
 		inputStates.push_back(newState);
 	}
 

@@ -330,6 +330,7 @@ GetBinaryBleRequest::GetBinaryBleRequest(string fPath, MeteoBluetoothMessage * g
 
 	requestMethod = method;
 
+
 	// ´ú¸Õ¥Î
 	timeout = 20;
 }

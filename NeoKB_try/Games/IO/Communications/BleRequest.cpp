@@ -102,12 +102,12 @@ int BleRequest::Perform(CommunicationComponent * cComponent)
 int BleRequest::PushInputRawMessage(MeteoBluetoothMessage * rawMessage)
 {
 	bool isAcceptMessage = true;
-	LOG(LogLevel::Debug) << "BleRequest::PushInputRawMessage() : new raw message." << hex << (int)rawMessage->GetCommand();
+	LOG(LogLevel::Depricated) << "BleRequest::PushInputRawMessage() : new raw message." << hex << (int)rawMessage->GetCommand();
 
 	/* 如果是file segment的話，只有get file request要收。其他狀況就全都收 */
 	if (dynamic_cast<MeteoFileSegmentBluetoothMessage*>(rawMessage)) {
 
-		LOG(LogLevel::Debug) << "BleRequest::PushInputRawMessage() : new file segment message." << hex << (int)rawMessage->GetCommand();
+		LOG(LogLevel::Depricated) << "BleRequest::PushInputRawMessage() : new file segment message." << hex << (int)rawMessage->GetCommand();
 		if (requestMethod->GetMethodType() == BleRequestMethodType::GetBinary) {
 			isAcceptMessage = true;
 		}

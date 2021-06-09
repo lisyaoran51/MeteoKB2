@@ -676,7 +676,7 @@ BluetoothMessage* MeteoPacketConverterV2::ConvertToFile(const char * buffer, int
 	iter = commandMap.find(command);
 	if (iter != commandMap.end()) {
 
-		LOG(LogLevel::Debug) << "MeteoPacketConverterV1::ConvertToFile() : converting [" << command << "] command file.";
+		LOG(LogLevel::Depricated) << "MeteoPacketConverterV1::ConvertToFile() : converting [" << command << "] command file.";
 
 		if (CheckPacketType(buffer, size) == PacketType::File) {
 

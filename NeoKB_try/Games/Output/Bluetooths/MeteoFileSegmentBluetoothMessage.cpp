@@ -63,7 +63,7 @@ int MeteoFileSegmentBluetoothMessage::GetFileSegment(char ** fSegment)
 	memcpy(*fSegment, fileSegment, fileSegmentSize);
 
 
-	return fileSegmentSize;
+	return fileSegmentSize; 
 }
 
 int MeteoFileSegmentBluetoothMessage::GetFileSegmentSize()

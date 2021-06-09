@@ -37,6 +37,8 @@ GetBinaryBleRequestHandler::GetBinaryBleRequestHandler(string dPath, MeteoComman
 	);
 
 	requestMethod = method;
+
+
 }
 
 int GetBinaryBleRequestHandler::AddOnSuccess(MtoObject * callableObject, function<int(string)> callback, string name)
