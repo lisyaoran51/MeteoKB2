@@ -149,7 +149,9 @@ TARGET  = MeteoKB
 #compiler 
 CC = g++
 #cflags 
-CFLAGS = -Wall -ansi -s -std=c++14 -pthread -lbass -lstdc++fs -lbluetooth -DMETEO_PROGRAM_VERSION=0x0
+CFLAGS = -Wall -ansi -s -std=c++14 -pthread -lbass -lstdc++fs -lbluetooth -DMETEO_PROGRAM_VERSION=0x0 -g0
+#¥igdb debug
+#CFLAGS = -Wall -ansi -s -std=c++14 -pthread -lbass -lstdc++fs -lbluetooth -DMETEO_PROGRAM_VERSION=0x0 
 #object 
 OBJS = Main.o \
 \
@@ -265,7 +267,9 @@ InstantTimeController.o \
 all:$(TARGET)
 
 $(TARGET): $(OBJS) 
-	$(CC) $(OBJS) -o $@ -pthread -lstdc++fs -lbass -lbass_fx -lbluetooth ThirdParty/bluez/libshared-mainloop.a ThirdParty/bluez/uuid.o 
+	$(CC) $(OBJS) -o $@ -pthread -lstdc++fs -lbass -lbass_fx -lbluetooth ThirdParty/bluez/libshared-mainloop.a ThirdParty/bluez/uuid.o -g0
+#¥igdb debug
+#	$(CC) $(OBJS) -o $@ -pthread -lstdc++fs -lbass -lbass_fx -lbluetooth ThirdParty/bluez/libshared-mainloop.a ThirdParty/bluez/uuid.o 
 	
 .c.o:
 	$(CC) $(INCLUDE) $(CFLAGS) -c -o $@ $< 	
