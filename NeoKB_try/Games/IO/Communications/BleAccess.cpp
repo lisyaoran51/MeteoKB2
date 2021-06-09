@@ -2,10 +2,11 @@
 
 #include <iterator>
 #include <string.h>
-
+#include "../../../Framework/Threading/ThreadMaster.h"
 
 
 using namespace Games::IO::Communications;
+using namespace Framework::Threading;
 
 
 BleAccess::BleAccess(Host * gHost): TCommunicationComponent(gHost), RegisterType("BleAccess")
@@ -14,7 +15,9 @@ BleAccess::BleAccess(Host * gHost): TCommunicationComponent(gHost), RegisterType
 	communicationState = CommunicationState::Connected;
 	// TODO: 在連接時更改連線狀態
 
-	thread* runThread = new thread(&BleAccess::run, this);
+	thisThread = new thread(&BleAccess::run, this);
+	sleepTimeInMilliSecond = 20;
+	ThreadMaster::GetInstance().AddSimpleThread(this);
 
 	int policy = SCHED_OTHER;
 	struct sched_param param;

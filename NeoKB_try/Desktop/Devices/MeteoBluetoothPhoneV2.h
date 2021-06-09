@@ -10,6 +10,7 @@
 #include <mutex>
 #include <vector>
 #include "Gatt/GattServer.h"
+#include "../../Framework/Threading/SimpleThread.h"
 
 
 
@@ -19,6 +20,7 @@ using namespace std;
 using namespace Util::DataStructure;
 using namespace Games::Output::Bluetooths;
 using namespace Desktop::Devices::Gatt;
+using namespace Framework::Threading;
 
 
 
@@ -26,7 +28,7 @@ namespace Desktop {
 namespace Devices {
 
 	
-	class MeteoBluetoothPhoneV2 {
+	class MeteoBluetoothPhoneV2 : public SimpleThread {
 
 		bool exitRequested = false;
 

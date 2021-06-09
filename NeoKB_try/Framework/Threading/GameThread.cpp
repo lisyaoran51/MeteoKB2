@@ -29,6 +29,11 @@ GameThread::GameThread(function<int()> oNewFrame, string tName)
 
 }
 
+string GameThread::GetName()
+{
+	return threadName;
+}
+
 int GameThread::Start()
 {
 	LOG(LogLevel::Info) << "GameThread::Start() : start thread " << threadName << ".";

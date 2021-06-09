@@ -4,11 +4,13 @@
 #include "../../Util/Log.h"
 #include <cstring>
 #include <cmath>
+#include "../../Framework/Threading/ThreadMaster.h"
 
 
 using namespace Desktop::Devices;
 using namespace std;
 using namespace Util;
+using namespace Framework::Threading;
 
 
 
@@ -84,7 +86,7 @@ bool MeteoMcuV1::checkI2cMessageValid(InputKey iKey, int v)
 	return true;
 }
 
-MeteoMcuV1::MeteoMcuV1(int address)
+MeteoMcuV1::MeteoMcuV1(int address) : RegisterType("MeteoMcu")
 {
 
 	i2cInterface = new Pi2c(address); // 不知為何arduino的位置是0x07? 是arduino的程式設定的
@@ -101,9 +103,11 @@ MeteoMcuV1::MeteoMcuV1(int address)
 		i2cInterface->i2cRead(buffer, 17);
 
 
-	thread t(&MeteoMcuV1::work, this);
-	t.detach();
+	thisThread = new thread(&MeteoMcuV1::work, this);
+	thisThread->detach();
+	sleepTimeInMilliSecond = 0;
 
+	ThreadMaster::GetInstance().AddSimpleThread(this);
 }
 
 InputState * MeteoMcuV1::GetPanelState()
@@ -167,7 +171,7 @@ int MeteoMcuV1::work()
 		LOG(LogLevel::Depricated) << "MeteoMcuV1::work() : output message size:" << i2cMessages.size();
 		readPanel();
 		writePanel();
-		//this_thread::sleep_for(chrono::milliseconds(10));
+		this_thread::sleep_for(chrono::milliseconds(sleepTimeInMilliSecond));
 	}
 	return 0;
 }

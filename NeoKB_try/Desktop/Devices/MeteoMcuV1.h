@@ -6,10 +6,12 @@
 #include "../../Framework/Input/InputState.h"
 #include <mutex>
 #include "pi2c.h"
+#include "../../Framework/Threading/SimpleThread.h"
 
 
 using namespace Framework::Input;
 using namespace std;
+using namespace Framework::Threading;
 
 
 /*
@@ -23,7 +25,7 @@ using namespace std;
 namespace Desktop {
 namespace Devices {
 
-	class MeteoMcuV1 {
+	class MeteoMcuV1 : public SimpleThread {
 
 		Pi2c* i2cInterface;
 

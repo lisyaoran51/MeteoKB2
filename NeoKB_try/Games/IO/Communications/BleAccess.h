@@ -5,10 +5,12 @@
 #include "../../../Framework/IO/Communications/CommunicationComponent.h"
 #include "BleRequest.h"
 #include "../../../Framework/IO/BluetoothPhone.h"
+#include "../../../Framework/Threading/SimpleThread.h"
 
 
 using namespace Framework::IO::Communications;
 using namespace Framework::IO;
+using namespace Framework::Threading;
 
 
 namespace Games {
@@ -19,7 +21,7 @@ namespace Communications{
 	/// 這個不擺在framework，是因為他會有一些跟app綁死的資訊，例如user、token、加解密等等
 	/// 除此之外，如果可以把這些跟app綁死的資訊分隔開，這個class就可以百再framework，有需要的話再來refactor
 	/// </summary>
-	class BleAccess : public TCommunicationComponent<BleRequest> {
+	class BleAccess : public TCommunicationComponent<BleRequest>, public SimpleThread {
 
 	public:
 

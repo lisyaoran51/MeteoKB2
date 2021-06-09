@@ -38,6 +38,8 @@ namespace Threading {
 
 		GameThread(function<int()> oNewFrame, string tName);
 
+		string GetName();
+
 		int Start();
 
 		ThrottledFramedClock* GetClock();

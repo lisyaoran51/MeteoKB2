@@ -150,6 +150,7 @@ int Host::drawInitialize()
 	canvas = new Map(width, height);
 
 	drawThread->SetMaxUpdateHz(1);
+
 	return 0;
 }
 

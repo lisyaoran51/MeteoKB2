@@ -2,22 +2,51 @@
 
 #include "../../Util/Log.h"
 #include "../Allocation/Hierachal/ChildAddable.h"
+#include "GameThread.h"
+#include "SimpleThread.h"
 
 using namespace Framework::Threading;
 using namespace Util;
 using namespace Framework::Allocation;
 
 
-int ThreadMaster::AddNewThread(string threadName)
-{
-	threadProcessing[threadName] = false;
 
+
+int ThreadMaster::AddNewThread(GameThread * thread)
+{
+	threadProcessing[thread] = false;
 	return 0;
 }
 
-int ThreadMaster::SetThreadProcessStatus(string threadName, bool isProcessing)
+int ThreadMaster::AddSimpleThread(SimpleThread * t)
 {
-	threadProcessing[threadName] = isProcessing;
+	simpleThreads[t->GetTypeName()] = t;
+	return 0;
+}
+
+GameThread * ThreadMaster::GetThread(string threadName)
+{
+
+	for (map<GameThread*, bool>::const_iterator it = threadProcessing.begin(); it != threadProcessing.end(); ++it)
+	{
+		if (it->first->GetName() == threadName)
+			return it->first;
+	}
+	return nullptr;
+}
+
+SimpleThread * ThreadMaster::GetSimpleThread(string threadName)
+{
+	if(simpleThreads.find(threadName) != simpleThreads.end())
+		return simpleThreads[threadName];
+	else
+		return nullptr;
+}
+
+int ThreadMaster::SetThreadProcessStatus(GameThread* thread, bool isProcessing)
+{
+
+	threadProcessing[thread] = isProcessing;
 	return 0;
 }
 
@@ -39,7 +68,7 @@ int ThreadMaster::HoldAllThreads()
 
 	do {
 		allThreadsHolded = true;
-		for (map<string, bool>::const_iterator it = threadProcessing.begin(); it != threadProcessing.end(); ++it)
+		for (map<GameThread*, bool>::const_iterator it = threadProcessing.begin(); it != threadProcessing.end(); ++it)
 		{
 			if (it->second)
 				allThreadsHolded = false;
@@ -79,6 +108,27 @@ int ThreadMaster::SetFrequency(double hz)
 int ThreadMaster::AddObjectToDelete(MtoObject * oToDelete)
 {
 	objectToDelete.push_back(oToDelete);
+	return 0;
+}
+
+int ThreadMaster::AddGameStatusThreadAction(int status, MtoObject * callableObject, function<int()> callback, string callbackName)
+{
+	if (gameStatusThreadActions.find(status) == gameStatusThreadActions.end()) {
+		gameStatusThreadActions[status] = new ActionList<int>();
+	}
+
+	gameStatusThreadActions[status]->Add(callableObject, callback, callbackName);
+
+	return 0;
+}
+
+int ThreadMaster::SwitchGameStatus(int status)
+{
+	if (gameStatusThreadActions.find(status) != gameStatusThreadActions.end())
+		gameStatusThreadActions[status]->Trigger();
+	else
+		LOG(LogLevel::Error) << "ThreadMaster::SwitchGameStatus : status [" << status << "] not exist.";
+
 	return 0;
 }
 

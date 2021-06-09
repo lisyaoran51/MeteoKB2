@@ -7,12 +7,14 @@
 #include "Gatt/MeteoGattServerV1.h"
 #include <sched.h> 
 #include <pthread.h>
+#include "../../Framework/Threading/ThreadMaster.h"
 
 
 using namespace std;
 using namespace Desktop::Devices;
 using namespace Games::Output::Bluetooths;
 using namespace Desktop::Devices::Gatt;
+using namespace Framework::Threading;
 
 
 #ifndef METEO_PROGRAM_VERSION
@@ -22,7 +24,7 @@ using namespace Desktop::Devices::Gatt;
 
 
 
-MeteoBluetoothPhoneV2::MeteoBluetoothPhoneV2(PacketConverter<MeteoCommand>* pConverter)
+MeteoBluetoothPhoneV2::MeteoBluetoothPhoneV2(PacketConverter<MeteoCommand>* pConverter) : RegisterType("MeteoBluetoothPhone")
 {
 	packetConverter = pConverter;
 
@@ -34,15 +36,18 @@ int MeteoBluetoothPhoneV2::Initialize()
 	bluetoothState->SetBluetoothState(new BluetoothState());
 
 
-	thread t(&MeteoBluetoothPhoneV2::work, this);
+	thisThread = new thread(&MeteoBluetoothPhoneV2::work, this);
+	sleepTimeInMilliSecond = 0;
+
+	ThreadMaster::GetInstance().AddSimpleThread(this);
 
 	int policy = SCHED_RR;
 	struct sched_param param;
 	memset(&param, 0, sizeof(param));
 	param.sched_priority = sched_get_priority_max(policy);
-	pthread_setschedparam(t.native_handle(), policy, &param);
+	pthread_setschedparam(thisThread->native_handle(), policy, &param);
 
-	t.detach();
+	thisThread->detach();
 	return 0;
 }
 

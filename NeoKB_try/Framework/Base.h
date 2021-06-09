@@ -18,6 +18,14 @@ using namespace Framework::Output;
 
 namespace Framework {
 
+	enum class GameStatus {
+		None, 
+		Perform,
+		Game,
+		Download,
+		Sleep
+	};
+
 	class Base : public Container {
 
 
@@ -42,6 +50,8 @@ namespace Framework {
 		CompositeResourceStore<char*>* resources;
 
 		virtual int setupOutputManager();
+
+		virtual int setupGameStatusActions();
 
 	};
 
