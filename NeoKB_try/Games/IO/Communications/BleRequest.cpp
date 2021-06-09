@@ -82,11 +82,12 @@ int BleRequest::Perform(CommunicationComponent * cComponent)
 
 	// 查看成果有沒有錯，有錯的話就throw exception
 	checkAndProcessFailure();
-	
+
+	return 0;
 	
 	// 如果有出現錯誤，會丟exception，就不會執行on success。這邊要注意request在執行完以後不能直接刪掉，要確定所有task都跑完才能刪
 	communicationComponent->GetScheduler()->AddTask([=]() {
-
+		LOG(LogLevel::Debug) << "BleRequest::Perform() : trigger on success.";
 		LOG(LogLevel::Debug) << "BleRequest::Perform() : trigger on success [" << onSuccess.GetSize() << "].";
 		/* 檢查Scene是否還存在，存在才能執行 */
 		if ((isCallbackByScene && SceneMaster::GetInstance().CheckScene(callbackScene)) ||

@@ -213,6 +213,11 @@ int BleAccess::handleRequest(CommunicationRequest * communicationRequest)
 
 		failureCount = 0;
 
+
+		LOG(LogLevel::Debug) << "BleAccess::handleRequest() : trigger on success.";
+		communicationRequest->Success();
+
+
 		return 0;
 
 	}
