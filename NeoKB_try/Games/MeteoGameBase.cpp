@@ -104,7 +104,7 @@ int MeteoGameBase::update()
 int MeteoGameBase::onWorkingSmValueChanged(void * wSm)
 {
 	WorkingSm* w = static_cast<WorkingSm*>(wSm);
-	audioManager->GetTrackManager()->AddItem(w->GetTrack());
+	//audioManager->GetTrackManager()->AddItem(w->GetTrack());
 
 	return 0;
 }

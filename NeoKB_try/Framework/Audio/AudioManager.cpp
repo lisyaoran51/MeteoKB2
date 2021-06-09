@@ -17,7 +17,7 @@ AudioManager::AudioManager(CompositeResourceStore<char*>* trackStore, CompositeR
 	sampleStore->AddExtension("wav");
 	sampleStore->AddExtension("mp3");
 
-	trackManager = GetTrackManager(trackStore);
+	//trackManager = GetTrackManager(trackStore);
 	sampleManager = GetSampleManager(sampleStore);
 	mirrorSampleManager = GetMirrorSampleManager(sampleStore);
 

@@ -5,6 +5,8 @@
 #include "../../Games/Output/Bluetooths/MeteoContextBluetoothMessage.h"
 #include "../../Games/Output/Bluetooths/MeteoFileSegmentBluetoothMessage.h"
 #include "Gatt/MeteoGattServerV1.h"
+#include <sched.h> 
+#include <pthread.h>
 
 
 using namespace std;
@@ -33,6 +35,13 @@ int MeteoBluetoothPhoneV2::Initialize()
 
 
 	thread t(&MeteoBluetoothPhoneV2::work, this);
+
+	int policy = SCHED_RR;
+	struct sched_param param;
+	memset(&param, 0, sizeof(param));
+	param.sched_priority = sched_get_priority_max(policy);
+	pthread_setschedparam(t.native_handle, policy, &param);
+
 	t.detach();
 	return 0;
 }
