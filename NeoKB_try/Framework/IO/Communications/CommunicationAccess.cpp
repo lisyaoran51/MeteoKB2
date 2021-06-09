@@ -9,13 +9,13 @@ CommunicationAccess::CommunicationAccess(Host * gHost) : RegisterType("Communica
 {
 	// 這個本來應該要從game thread拿，但是因為這次我們不用game thread，所以就自己生一個
 	sourceClock = new StopwatchClock();
-	sourceClock->Start();
+	//sourceClock->Start();
 	setHost(gHost);
 }
 
 int CommunicationAccess::Update()
 {
-	framedClock->ProcessFrame();
+	//framedClock->ProcessFrame();
 	return CommunicationCollectionManager<CommunicationComponent>::Update();
 }
 
