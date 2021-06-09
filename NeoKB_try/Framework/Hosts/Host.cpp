@@ -83,7 +83,7 @@ int Host::Run(Game* game, Instrument* instrument)
 	inputThread->Start();
 
 	drawInitialize();
-	drawThread->Start();
+	//drawThread->Start();
 
 	updateInitialize();
 	updateThread->Start();
@@ -206,7 +206,7 @@ int Host::updateInitialize()
 {
 	LOG(LogLevel::Info) << "Host::updateInitialize() : Setting update thread.";
 	// 預設是1000
-	updateThread->SetMaxUpdateHz(50);
+	updateThread->SetMaxUpdateHz(10);
 	return 0;
 }
 
@@ -233,7 +233,7 @@ int Host::inputInitialize()
 {
 	LOG(LogLevel::Info) << "Host::inputInitialize() : Setting input thread.";
 	// 預設是1000了
-	inputThread->SetMaxUpdateHz(500);
+	inputThread->SetMaxUpdateHz(10);
 	return 0;
 }
 
