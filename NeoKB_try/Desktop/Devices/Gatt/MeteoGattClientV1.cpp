@@ -495,7 +495,7 @@ void MeteoGattClientV1::onDataChannelIn(
 	uint8_t               UNUSED_PARAM(opcode),
 	bt_att*               UNUSED_PARAM(att))
 {
-	LOG(LogLevel::Debug) << "onDataChannelIn(offset=" << offset << ", len=" << len << ")";
+	LOG(LogLevel::Finer) << "onDataChannelIn(offset=" << offset << ", len=" << len << ")";
 
 	if (!m_data_handler)
 	{
