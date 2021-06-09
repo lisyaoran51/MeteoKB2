@@ -118,15 +118,17 @@ int BleRequest::PushInputRawMessage(MeteoBluetoothMessage * rawMessage)
 
 	if (isAcceptMessage) {
 
-		unique_lock<mutex> uLock(rawMessageMutex, defer_lock);
-		if (uLock.try_lock()) {
-			inputRawMessages.push_front(rawMessage);
-			uLock.unlock();
-		}
-		else {
-			unique_lock<mutex> uBufferLock(rawMessageBufferMutex);
-			inputRawMessagesBuffer.push_front(rawMessage);
-		}
+		//unique_lock<mutex> uLock(rawMessageMutex, defer_lock);
+		unique_lock<mutex> uLock(rawMessageMutex);
+		inputRawMessages.push_front(rawMessage);
+		//if (uLock.try_lock()) {
+		//	inputRawMessages.push_front(rawMessage);
+		//	uLock.unlock();
+		//}
+		//else {
+		//	unique_lock<mutex> uBufferLock(rawMessageBufferMutex);
+		//	inputRawMessagesBuffer.push_front(rawMessage);
+		//}
 	}
 	else {
 		/* 因為這邊的raw message全都是複製過來的，所以不用的話要delete調 */
