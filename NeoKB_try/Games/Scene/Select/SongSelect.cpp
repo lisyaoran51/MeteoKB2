@@ -4,12 +4,14 @@
 #include "../../../Util/DataStructure/FileSegmentMap.h"
 #include <stdio.h>
 #include "../../../Util/StringSplitter.h"
+#include "../../../Framework/Threading/ThreadMaster.h"
 
 
 using namespace Games::Scenes::Select;
 using namespace Games;
 using namespace Util::DataStructure;
 using namespace Util;
+using namespace Framework::Threading;
 
 
 
@@ -148,6 +150,14 @@ int SongSelect::load(SmManager * sManager, MeteoGame * game, Storage* s)
 			}
 		}
 
+		/*
+		 * 重要
+		 */
+		ThreadMaster::GetInstance().SwitchGameStatus((int)GameStatus::Game);
+		/*
+		 * 重要
+		 */
+
 		//smSelectPanel->SelectAndStart(fSegmentMap->GetFileNameWithoutExtension());
 
 		return 0;
@@ -159,6 +169,14 @@ int SongSelect::load(SmManager * sManager, MeteoGame * game, Storage* s)
 		LOG(LogLevel::Debug) << "SongSelect::Lambda_HandleDownloadSheetmusicSuccess() : dounload [" << fSegmentMap->fileName << "] fail.";
 
 		fSegmentMap->Erase();
+
+		/*
+		 * 重要
+		 */
+		ThreadMaster::GetInstance().SwitchGameStatus((int)GameStatus::Perform);
+		/*
+		 * 重要
+		 */
 
 		return 0;
 	}, "SongSelect::Lambda_HandleDownloadSheetmusicFail");

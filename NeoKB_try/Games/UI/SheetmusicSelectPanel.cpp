@@ -2,11 +2,14 @@
 
 #include "../Output/Bluetooths/MeteoContextBluetoothMessage.h"
 #include "../IO/Communications/GetBinaryBleRequest.h"
+#include "../../Framework/Threading/ThreadMaster.h"
 
 
 using namespace Games::UI;
 using namespace Games::Output::Bluetooths;
 using namespace Games::IO::Communications;
+using namespace Framework::Threading;
+
 
 
 
@@ -242,6 +245,14 @@ int SheetmusicSelectPanel::onMessage(MeteoBluetoothMessage * message)
 					return 0;
 				}
 			}
+
+			/*
+			 * 重要
+			 */
+			ThreadMaster::GetInstance().SwitchGameStatus((int)GameStatus::Download);
+			/*
+			 * 重要
+			 */
 
 			LOG(LogLevel::Depricated) << "int SheetmusicSelectPanel::onMessage() : not have song " << fileName;
 
