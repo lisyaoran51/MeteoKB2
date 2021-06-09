@@ -23,9 +23,9 @@ BleAccess::BleAccess(Host * gHost): TCommunicationComponent(gHost), RegisterType
 	struct sched_param param;
 	memset(&param, 0, sizeof(param));
 	param.sched_priority = sched_get_priority_min(policy);
-	pthread_setschedparam(runThread->native_handle(), policy, &param);
+	pthread_setschedparam(thisThread->native_handle(), policy, &param);
 
-	runThread->detach();
+	thisThread->detach();
 
 }
 
