@@ -16,6 +16,13 @@ BleAccess::BleAccess(Host * gHost): TCommunicationComponent(gHost), RegisterType
 	// TODO: 在連接時更改連線狀態
 
 	thread* runThread = new thread(&BleAccess::run, this);
+
+	int policy = SCHED_OTHER;
+	struct sched_param param;
+	memset(&param, 0, sizeof(param));
+	param.sched_priority = sched_get_priority_min(policy);
+	pthread_setschedparam(runThread->native_handle(), policy, &param);
+
 	runThread->detach();
 
 }
@@ -180,7 +187,7 @@ int BleAccess::run()
 		/* 再執行request */
 		CommunicationRequest* request = nullptr;
 		if (communicationRequests.size() > 0) {
-			LOG(LogLevel::Debug) << "BleAccess::run() : handling reuqest.";
+			LOG(LogLevel::Finest) << "BleAccess::run() : handling reuqest.";
 			request = communicationRequests.back();
 
 			int result = 0;
@@ -207,14 +214,14 @@ int BleAccess::handleRequest(CommunicationRequest * communicationRequest)
 {
 	try {
 
-		LOG(LogLevel::Debug) << "BleAccess::handleRequest() : run request [" << communicationRequest << "].";
+		LOG(LogLevel::Finest) << "BleAccess::handleRequest() : run request [" << communicationRequest << "].";
 
 		communicationRequest->Perform(this);
 
 		failureCount = 0;
 
 
-		LOG(LogLevel::Debug) << "BleAccess::handleRequest() : trigger on success.";
+		LOG(LogLevel::Finest) << "BleAccess::handleRequest() : trigger on success.";
 		communicationRequest->Success();
 
 

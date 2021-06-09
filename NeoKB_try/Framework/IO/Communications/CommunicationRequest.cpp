@@ -55,6 +55,7 @@ int CommunicationRequest::Fail(exception * e)
 	if (dynamic_cast<CommunicationRequestException*>(e)) {
 
 	}
+	LOG(LogLevel::Debug) << "CommunicationRequest::Fail() : request failed.";
 
 	return fail(e);
 }

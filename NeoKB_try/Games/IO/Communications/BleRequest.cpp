@@ -39,14 +39,14 @@ BleRequest::~BleRequest()
 int BleRequest::ChooseCommunicationComponentToPerform()
 {
 
-	LOG(LogLevel::Debug) << "int BleRequest::ChooseCommunicationComponentToPerform() : [" << GetTypeName() << "] request finding component.";
+	LOG(LogLevel::Depricated) << "int BleRequest::ChooseCommunicationComponentToPerform() : [" << GetTypeName() << "] request finding component.";
 
 	map<string, deque<CommunicationRequest*>*>::iterator it;
 
 	for (it = acceptedCommunicationComponentRequestQueues.begin(); it != acceptedCommunicationComponentRequestQueues.end(); ++it) {
 		if (it->first == "BleAccess") {
 
-			LOG(LogLevel::Debug) << "int BleRequest::ChooseCommunicationComponentToPerform() : [" << GetTypeName() << "] component found.";
+			LOG(LogLevel::Depricated) << "int BleRequest::ChooseCommunicationComponentToPerform() : [" << GetTypeName() << "] component found.";
 			it->second->push_back(this);
 		}
 	}

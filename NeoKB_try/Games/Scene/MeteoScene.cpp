@@ -141,10 +141,10 @@ int MeteoScene::onMessage(MeteoBluetoothMessage * message)
 		return -1;
 	}
 
-	LOG(LogLevel::Debug) << "MeteoScene::onMessage() : got new bt message on scene [" << GetTypeName() << "].";
+	LOG(LogLevel::Depricated) << "MeteoScene::onMessage() : got new bt message on scene [" << GetTypeName() << "].";
 
 	if (contextMessage->GetCommand() == MeteoCommand::ReadScene) {
-		LOG(LogLevel::Debug) << "MeteoScene::onMessage() : got new bt message [ReadScene]. ";
+		LOG(LogLevel::Depricated) << "MeteoScene::onMessage() : got new bt message [ReadScene]. ";
 
 		MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::ReturnScene);
 		json returnContext;
@@ -157,7 +157,7 @@ int MeteoScene::onMessage(MeteoBluetoothMessage * message)
 	}
 
 	if (contextMessage->GetCommand() == MeteoCommand::EnterScene) {
-		LOG(LogLevel::Debug) << "MeteoScene::onMessage() : got new bt message [EnterScene]. ";
+		LOG(LogLevel::Depricated) << "MeteoScene::onMessage() : got new bt message [EnterScene]. ";
 
 		string sceneName = contextMessage->GetContextInJson()["Scene"].get<string>();
 
@@ -174,7 +174,7 @@ int MeteoScene::onMessage(MeteoBluetoothMessage * message)
 		}
 
 		if (targetScene == nullptr) {
-			LOG(LogLevel::Debug) << "MeteoScene::onMessage() : target scene not found [EnterScene]. " << GetTypeName();
+			LOG(LogLevel::Depricated) << "MeteoScene::onMessage() : target scene not found [EnterScene]. " << GetTypeName();
 			MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::AckEnterScene);
 			json returnContext;
 
@@ -187,7 +187,7 @@ int MeteoScene::onMessage(MeteoBluetoothMessage * message)
 			return 0;
 		}
 		else if (targetScene == this) {
-			LOG(LogLevel::Debug) << "MeteoScene::onMessage() : already in scene [" << GetTypeName() << "].";
+			LOG(LogLevel::Depricated) << "MeteoScene::onMessage() : already in scene [" << GetTypeName() << "].";
 			MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::AckEnterScene);
 			json returnContext;
 

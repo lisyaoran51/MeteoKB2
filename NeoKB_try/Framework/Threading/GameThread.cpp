@@ -5,6 +5,8 @@
 #include <sys/syscall.h>
 #include <unistd.h>
 #include "ThreadMaster.h"
+#include <sched.h> 
+#include <pthread.h>
 
 
 using namespace Framework::Threading;
@@ -32,7 +34,16 @@ int GameThread::Start()
 	clock->ProcessFrame();
 	LOG(LogLevel::Depricated) << "GameThread::Start() : clock = [" << clock << "].";
 	runThread = new thread(&GameThread::runWork, this);
+
+
+	int policy = SCHED_OTHER;
+	struct sched_param param;
+	memset(&param, 0, sizeof(param));
+	param.sched_priority = sched_get_priority_min(policy);
+	pthread_setschedparam(runThread->native_handle(), policy, &param);
+
 	runThread->detach();
+
 
 	ThreadMaster::GetInstance().AddNewThread(threadName);
 

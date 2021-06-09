@@ -149,7 +149,7 @@ int Host::drawInitialize()
 	// 這個應該擺在main裡才對，這邊沒有存螢幕大小
 	canvas = new Map(width, height);
 
-	drawThread->SetMaxUpdateHz(50);
+	drawThread->SetMaxUpdateHz(25);
 	return 0;
 }
 
