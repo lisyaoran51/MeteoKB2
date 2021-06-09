@@ -333,7 +333,7 @@ GetBinaryBleRequest::GetBinaryBleRequest(string fPath, MeteoBluetoothMessage * g
 
 
 	// ´ú¸Õ¥Î
-	timeout = 20;
+	//timeout = 20;
 }
 
 int GetBinaryBleRequest::AddOnSuccess(MtoObject * callableObject, function<int(FileSegmentMap*)> callback, string name)
