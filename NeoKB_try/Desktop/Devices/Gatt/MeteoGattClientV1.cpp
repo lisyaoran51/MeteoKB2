@@ -247,19 +247,19 @@ int MeteoGattClientV1::SendNotification(char * bufferOut, int size)
 
 	pthread_mutex_lock(&notifyLock);
 	
-	send_success = bt_gatt_server_send_notification(m_server,
-		m_notify_handle,
-		bufferOutUint8,
-		size);
+	//send_success = bt_gatt_server_send_notification(m_server,
+	//	m_notify_handle,
+	//	bufferOutUint8,
+	//	size);
 	pthread_mutex_unlock(&notifyLock);
 
-	if (!send_success) {
-		LOG(LogLevel::Warning) << "MeteoGattClientV1::SendNotification() : failed to send.";
-		for (int i = 0; i < size; i++) {
-			printf("%x ", bufferOutUint8[i]);
-		}
-		printf("\n");
-	}
+	//if (!send_success) {
+	//	LOG(LogLevel::Warning) << "MeteoGattClientV1::SendNotification() : failed to send.";
+	//	for (int i = 0; i < size; i++) {
+	//		printf("%x ", bufferOutUint8[i]);
+	//	}
+	//	printf("\n");
+	//}
 
 	return 0;
 }
