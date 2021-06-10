@@ -207,7 +207,7 @@ int MeteoBluetoothPhoneV2::handleNewPacket(const char * packet, int length)
 		memcpy(buffer, &command, sizeof(command));
 		memcpy(buffer + sizeof(command), &version, sizeof(version));
 
-		gattServer->GetClient()->SendNotification(buffer, 8);
+		//gattServer->GetClient()->SendNotification(buffer, 8);
 		isFirstPacketSent = true;
 	}
 	else if (packetType == PacketType::Json) {
@@ -269,7 +269,7 @@ int MeteoBluetoothPhoneV2::handleNewPacket(const char * packet, int length)
 	memcpy(buffer, &command, sizeof(command));
 	memcpy(buffer + sizeof(command), &version, sizeof(version));
 
-	gattServer->GetClient()->SendNotification(buffer, 8);
+	//gattServer->GetClient()->SendNotification(buffer, 8);
 
 	return 0;
 }
