@@ -30,6 +30,19 @@ MeteoBluetoothPhoneV2::MeteoBluetoothPhoneV2(PacketConverter<MeteoCommand>* pCon
 
 int MeteoBluetoothPhoneV2::Initialize()
 {
+	// !!!
+	thisThread = new thread([]() {
+		
+		FILE* fp = popen(string("sudo /home/pi/bleconfd/bleconfd -d").c_str(), "r");
+		if (fp == NULL) {
+			LOG(LogLevel::Error) << "SongSelect::Lambda_HandleDownloadSheetmusicSuccess() : fail to mkdir [" << (string("mkdir /home/pi/Sheetmusics/") + fSegmentMap->GetFileNameWithoutExtension()) << "].";
+		}
+		pclose(fp);
+
+	});
+	thisThread->detach();
+	return 0;
+
 	bluetoothState = new InputState();
 	bluetoothState->SetBluetoothState(new BluetoothState());
 
