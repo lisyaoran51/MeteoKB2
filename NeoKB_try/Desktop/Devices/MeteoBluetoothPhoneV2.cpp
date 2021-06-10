@@ -34,7 +34,8 @@ int MeteoBluetoothPhoneV2::Initialize()
 	thisThread = new thread([]() {
 
 		LOG(LogLevel::Error) << "call bleconfd";
-		FILE* fp = popen(string("sudo /home/pi/bleconfd/bleconfd -d").c_str(), "r");
+		//FILE* fp = popen(string("sudo /home/pi/bleconfd/bleconfd -d").c_str(), "r");
+		FILE* fp = popen(string("sudo /home/pi/MeteoBleTestServer/MeteoBleTestServer/MeteoBleTestServer_bass").c_str(), "r");
 		if (fp == NULL) {
 			LOG(LogLevel::Error) << "get bleconfd failed";
 		}
