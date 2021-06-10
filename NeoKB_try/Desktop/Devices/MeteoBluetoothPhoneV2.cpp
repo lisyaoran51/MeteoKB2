@@ -289,17 +289,6 @@ int MeteoBluetoothPhoneV2::handleNewPacket(const char * packet, int length)
 		LOG(LogLevel::Warning) << "MeteoBluetoothPhoneV1::handleNewPacket() : got error packet.";
 	}
 
-	//return 0;
-
-	char buffer[8] = { 0 };
-	unsigned int command = 0x110000;// MeteoCommand::ReturnFirmwareVersion
-	unsigned int version = METEO_PROGRAM_VERSION;
-
-	memcpy(buffer, &command, sizeof(command));
-	memcpy(buffer + sizeof(command), &version, sizeof(version));
-
-	gattServer->GetClient()->SendNotification(buffer, 8);
-
 	return 0;
 }
 
