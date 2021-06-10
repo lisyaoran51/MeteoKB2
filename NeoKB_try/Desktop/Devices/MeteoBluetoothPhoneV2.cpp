@@ -260,7 +260,7 @@ int MeteoBluetoothPhoneV2::handleNewPacket(const char * packet, int length)
 		LOG(LogLevel::Warning) << "MeteoBluetoothPhoneV1::handleNewPacket() : got error packet.";
 	}
 
-	return 0;
+	//return 0;
 
 	char buffer[8] = { 0 };
 	unsigned int command = 0x110000;// MeteoCommand::ReturnFirmwareVersion
