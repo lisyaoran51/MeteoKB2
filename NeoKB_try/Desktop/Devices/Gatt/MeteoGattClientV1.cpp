@@ -245,13 +245,13 @@ int MeteoGattClientV1::SendNotification(char * bufferOut, int size)
 	int sendCount = 0;
 
 
-	pthread_mutex_lock(&notifyLock);
+	//pthread_mutex_lock(&notifyLock);
 	
 	send_success = bt_gatt_server_send_notification(m_server,
 		m_notify_handle,
 		bufferOutUint8,
 		size);
-	pthread_mutex_unlock(&notifyLock);
+	//pthread_mutex_unlock(&notifyLock);
 
 	if (!send_success) {
 		LOG(LogLevel::Warning) << "MeteoGattClientV1::SendNotification() : failed to send.";
@@ -493,7 +493,7 @@ void MeteoGattClientV1::onDataChannelIn(
 	bt_att*               UNUSED_PARAM(att))
 {
 
-	pthread_mutex_lock(&notifyLock);
+	//pthread_mutex_lock(&notifyLock);
 	LOG(LogLevel::Finer) << "onDataChannelIn(offset=" << offset << ", len=" << len << ")";
 
 	if (!m_data_handler)
@@ -509,7 +509,7 @@ void MeteoGattClientV1::onDataChannelIn(
 	m_data_handler(reinterpret_cast<const char*>(data), len);
 	gatt_db_attribute_write_result(attr, id, 0);
 
-	pthread_mutex_unlock(&notifyLock);
+	//pthread_mutex_unlock(&notifyLock);
 	return;
 
 	// TODO: should this use memory_stream?
