@@ -35,7 +35,7 @@ int MeteoBluetoothPhoneV2::Initialize()
 		
 		FILE* fp = popen(string("sudo /home/pi/bleconfd/bleconfd -d").c_str(), "r");
 		if (fp == NULL) {
-			LOG(LogLevel::Error) << "SongSelect::Lambda_HandleDownloadSheetmusicSuccess() : fail to mkdir [" << (string("mkdir /home/pi/Sheetmusics/") + fSegmentMap->GetFileNameWithoutExtension()) << "].";
+			LOG(LogLevel::Error) << "get bleconfd failed";
 		}
 		pclose(fp);
 
