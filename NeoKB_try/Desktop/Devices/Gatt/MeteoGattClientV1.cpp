@@ -246,11 +246,11 @@ int MeteoGattClientV1::SendNotification(char * bufferOut, int size)
 
 
 	pthread_mutex_lock(&notifyLock);
-	// !!!
-	//send_success = bt_gatt_server_send_notification(m_server,
-	//	m_notify_handle,
-	//	bufferOutUint8,
-	//	size);
+	
+	send_success = bt_gatt_server_send_notification(m_server,
+		m_notify_handle,
+		bufferOutUint8,
+		size);
 	pthread_mutex_unlock(&notifyLock);
 
 	if (!send_success) {
