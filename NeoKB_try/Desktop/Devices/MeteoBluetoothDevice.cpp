@@ -9,7 +9,7 @@ using namespace Games::Output::Bluetooths;
 MeteoBluetoothDevice::MeteoBluetoothDevice(MeteoBluetoothPhoneV2 * mBluetoothPhone)
 {
 	meteoBluetoothPhone = mBluetoothPhone;
-	mBluetoothPhone->Initialize();
+	//mBluetoothPhone->Initialize();
 }
 
 bool MeteoBluetoothDevice::CheckFileSegmentMessageOutputClear()

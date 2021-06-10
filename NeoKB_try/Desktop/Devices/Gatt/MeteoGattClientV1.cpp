@@ -27,6 +27,8 @@ using namespace Util;
 #define UNUSED_PARAM(X) UNUSED_ ## X __attribute__((__unused__))
 
 
+static pthread_mutex_t notifyLock = PTHREAD_MUTEX_INITIALIZER;
+
 void DIS_writeCallback(gatt_db_attribute* UNUSED_PARAM(attr), int err, void* UNUSED_PARAM(argp))
 {
 	if (err)
@@ -40,7 +42,7 @@ void ATT_debugCallback(char const* str, void* UNUSED_PARAM(argp))
 	if (!str)
 		LOG(LogLevel::Fine) << "ATT: debug callback with no message";
 	else
-		LOG(LogLevel::Fine) << "ATT: " << str;
+		LOG(LogLevel::Debug) << "ATT: " << str;
 }
 
 void GATT_debugCallback(char const* str, void* UNUSED_PARAM(argp))
@@ -48,7 +50,7 @@ void GATT_debugCallback(char const* str, void* UNUSED_PARAM(argp))
 	if (!str)
 		LOG(LogLevel::Fine) << "GATT: debug callback with no message";
 	else
-		LOG(LogLevel::Fine) << "GATT: " << str;
+		LOG(LogLevel::Debug) << "GATT: " << str;
 }
 
 
@@ -242,10 +244,13 @@ int MeteoGattClientV1::SendNotification(char * bufferOut, int size)
 
 	int sendCount = 0;
 
+
+	pthread_mutex_lock(&notifyLock);
 	send_success = bt_gatt_server_send_notification(m_server,
 		m_notify_handle,
 		bufferOutUint8,
 		size);
+	pthread_mutex_unlock(&notifyLock);
 
 	if (!send_success) {
 		LOG(LogLevel::Warning) << "MeteoGattClientV1::SendNotification() : failed to send.";
@@ -530,6 +535,8 @@ void MeteoGattClientV1::onDataChannelIn(
 
 void MeteoGattClientV1::onTimeout()
 {
+	LOG(LogLevel::Info) << "MeteoGattClientV1::onTimeout(): time out";
+
 	uint32_t bytes_available = m_outgoing_queue.size();
 
 	if (bytes_available > 0)

@@ -21,8 +21,6 @@ using namespace Framework::Threading;
 #define METEO_PROGRAM_VERSION 0x0
 #endif
 
-static pthread_mutex_t notifyLock = PTHREAD_MUTEX_INITIALIZER;
-
 
 MeteoBluetoothPhoneV2::MeteoBluetoothPhoneV2(PacketConverter<MeteoCommand>* pConverter) : RegisterType("MeteoBluetoothPhone")
 {
@@ -91,9 +89,7 @@ int MeteoBluetoothPhoneV2::PushOutputMessage(BluetoothMessage * outputMessage)
 	int size = packetConverter->ConvertToByteArray(outputMessage, buffer, mtu);//??
 
 	if (size != -1) {
-		pthread_mutex_lock(&notifyLock);
 		gattServer->GetClient()->SendNotification(buffer, size);
-		pthread_mutex_unlock(&notifyLock);
 
 		//for (int i = 0; i < size; i++) {
 		//	printf("%x ", buffer[i]);
