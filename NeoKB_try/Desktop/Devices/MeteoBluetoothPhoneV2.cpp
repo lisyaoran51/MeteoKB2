@@ -38,7 +38,9 @@ int MeteoBluetoothPhoneV2::Initialize()
 		if (fp == NULL) {
 			LOG(LogLevel::Error) << "get bleconfd failed";
 		}
-		LOG(LogLevel::Error) << "get bleconfd ok";
+		char buf[256];
+		while (fgets(buf, 255, fp) != NULL)
+			printf("%s", buf);
 		pclose(fp);
 
 	});
