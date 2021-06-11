@@ -12,6 +12,7 @@
 #include <bluetooth/l2cap.h>
 #include <thread>
 #include <chrono>
+#include <mutex>
 
 
 // these are pulled directly from the BlueZ source tree
@@ -27,7 +28,6 @@ using namespace Util;
 #define UNUSED_PARAM(X) UNUSED_ ## X __attribute__((__unused__))
 
 
-static pthread_mutex_t notifyLock = PTHREAD_MUTEX_INITIALIZER;
 
 void DIS_writeCallback(gatt_db_attribute* UNUSED_PARAM(attr), int err, void* UNUSED_PARAM(argp))
 {

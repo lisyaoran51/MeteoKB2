@@ -132,6 +132,7 @@ namespace Gatt {
 		int                 m_timeout_id;
 		std::thread::id			m_mainloop_thread;
 		std::function<void(char const* buff, int n)>      m_data_handler;
+		mutable std::mutex	notifyLock;
 
 
 		int buildService(std::map<std::string, std::function<std::string()>> deviceInfoGetter);
