@@ -245,7 +245,7 @@ int MeteoGattClientV1::SendNotification(char * bufferOut, int size)
 	int sendCount = 0;
 
 
-	unique_lock<mutex> uLock(notifyLock);
+	std::unique_lock<std::mutex> uLock(notifyLock);
 	
 	send_success = bt_gatt_server_send_notification(m_server,
 		m_notify_handle,
