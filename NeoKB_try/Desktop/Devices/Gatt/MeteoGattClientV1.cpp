@@ -539,8 +539,6 @@ void MeteoGattClientV1::onDataChannelIn(
 
 void MeteoGattClientV1::onTimeout()
 {
-	LOG(LogLevel::Info) << "MeteoGattClientV1::onTimeout(): time out";
-
 	uint32_t bytes_available = m_outgoing_queue.size();
 
 	if (bytes_available > 0)

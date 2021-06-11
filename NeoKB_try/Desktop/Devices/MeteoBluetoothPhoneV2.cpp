@@ -210,23 +210,14 @@ int MeteoBluetoothPhoneV2::pushBluetoothState(BluetoothMessage * btMessage)
 int MeteoBluetoothPhoneV2::handleNewPacket(const char * packet, int length)
 {
 	isFirstPacketSent = true;
+
+	char* buffer = new char[length];
+	memcpy(buffer, packet, length);
+	
 	unique_lock<mutex> uLock(inputByteMutex);
-	inputBytes.push_back(pair<const char*, int>(packet, length));
+	inputBytes.push_back(pair<const char*, int>(buffer, length));
 
 	return 0;
-	LOG(LogLevel::Debug) << "MeteoBluetoothPhoneV2::handleNewPacket() : length [" << length << "].";
-
-	char buffer[32] = { 0 };
-	unsigned int command = 0x110000;// MeteoCommand::ReturnFirmwareVersion
-	unsigned int version = METEO_PROGRAM_VERSION;
-
-	memcpy(buffer, &command, sizeof(command));
-	memcpy(buffer + sizeof(command), &version, sizeof(version));
-
-	gattServer->GetClient()->SendNotification(buffer, 32);
-
-	return 0;
-
 	
 }
 
@@ -238,13 +229,13 @@ int MeteoBluetoothPhoneV2::ConvertPacketToMessage(const char * packet, int lengt
 	if (packetType == PacketType::ReadFirmwareVersion) {
 		// TODO: 做一個firmware version專用的bt message class
 		if (length != 4)
-			return 0;
+			goto OUT;
 
 		if (gattServer == nullptr)
-			return 0;
+			goto OUT;
 
 		if (gattServer->GetClient() == nullptr)
-			return 0;
+			goto OUT;
 
 		LOG(LogLevel::Fine) << "MeteoBluetoothPhoneV2::ConvertPacketToMessage() : get read firmware version message.";
 
@@ -261,14 +252,14 @@ int MeteoBluetoothPhoneV2::ConvertPacketToMessage(const char * packet, int lengt
 	else if (packetType == PacketType::Json) {
 
 		if (!getIsReady()) {
-			return 0;
+			goto OUT;
 		}
 
 		BluetoothMessage* btMessage = packetConverter->ConvertToBluetoothMessage(packet, length);
 
 		if (btMessage == nullptr) {
 			LOG(LogLevel::Error) << "MeteoBluetoothPhoneV2::ConvertPacketToMessage() : convert to bt command failed.";
-			return 0;
+			goto OUT;
 		}
 
 		LOG(LogLevel::Fine) << "MeteoBluetoothPhoneV2::ConvertPacketToMessage() : massage:" << btMessage->ToString();
@@ -281,7 +272,7 @@ int MeteoBluetoothPhoneV2::ConvertPacketToMessage(const char * packet, int lengt
 		LOG(LogLevel::Fine) << "MeteoBluetoothPhoneV2::ConvertPacketToMessage() : file segment massage.";
 
 		if (!getIsReady())
-			return 0;
+			goto OUT;
 
 		BluetoothMessage* btMessage = packetConverter->ConvertToFile(packet, length);
 
@@ -293,7 +284,7 @@ int MeteoBluetoothPhoneV2::ConvertPacketToMessage(const char * packet, int lengt
 		LOG(LogLevel::Fine) << "MeteoBluetoothPhoneV2::ConvertPacketToMessage() : ack file segment massage.";
 
 		if (!getIsReady())
-			return 0;
+			goto OUT;
 
 		BluetoothMessage* btMessage = packetConverter->ConvertToAckFileMessage(packet, length);
 
@@ -305,6 +296,9 @@ int MeteoBluetoothPhoneV2::ConvertPacketToMessage(const char * packet, int lengt
 		// packetConverter->CleanBuffer();
 		LOG(LogLevel::Warning) << "MeteoBluetoothPhoneV2::ConvertPacketToMessage() : got error packet.";
 	}
+
+OUT:
+	delete[] packet;
 
 	return 0;
 }
