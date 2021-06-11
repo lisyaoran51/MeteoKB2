@@ -72,7 +72,9 @@ namespace Devices {
 
 		mutable mutex bluetoothStateMutex;
 
-		vector<pair<char*, int>> inputBytes;
+		mutable mutex inputByteMutex;
+
+		vector<pair<const char*, int>> inputBytes;
 
 		InputState* bluetoothState = nullptr;
 
@@ -91,6 +93,8 @@ namespace Devices {
 		int pushBluetoothState(BluetoothMessage* btMessage);
 
 		int handleNewPacket(const char* packet, int length);
+
+		int ConvertPacketToMessage(const char* packet, int length);
 
 		int setMtu(int mtu);
 

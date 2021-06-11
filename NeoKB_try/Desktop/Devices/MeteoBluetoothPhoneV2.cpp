@@ -68,6 +68,21 @@ int MeteoBluetoothPhoneV2::Initialize()
 
 InputState * MeteoBluetoothPhoneV2::GetBluetoothState()
 {
+	if (inputBytes.size() > 0)
+	if (inputByteMutex.try_lock()) {
+
+		vector<pair<const char*, int>> tempPackets;
+		tempPackets.assign(inputBytes.begin(), inputBytes.end());
+		inputBytes.clear();
+		inputByteMutex.unlock();
+
+		for (int i = 0; i < tempPackets.size(); i++) {
+			ConvertPacketToMessage(tempPackets[i].first, tempPackets[i].second);
+		}
+	}
+
+
+
 	if (bluetoothState->GetBluetoothState()->CheckIsEmpty())
 		return nullptr;
 
@@ -137,8 +152,6 @@ bool MeteoBluetoothPhoneV2::getIsReady()
 	return isConnected && isFirstPacketSent;
 }
 
-GattClient* myClinet = nullptr;
-
 int MeteoBluetoothPhoneV2::work()
 {
 
@@ -152,8 +165,6 @@ int MeteoBluetoothPhoneV2::work()
 
 			//gattClient->SetDataHandler(std::bind(&MeteoGattServerV1::OnIncomingMessage, dynamic_cast<MeteoGattServerV1*>(gattServer), std::placeholders::_1, std::placeholders::_2));
 			gattClient->SetDataHandler(std::bind(&MeteoBluetoothPhoneV2::handleNewPacket, this, std::placeholders::_1, std::placeholders::_2));
-
-			myClinet = gattClient;
 
 			isConnected = true;
 			onConnect.Trigger();
@@ -198,7 +209,11 @@ int MeteoBluetoothPhoneV2::pushBluetoothState(BluetoothMessage * btMessage)
 
 int MeteoBluetoothPhoneV2::handleNewPacket(const char * packet, int length)
 {
+	isFirstPacketSent = true;
+	unique_lock<mutex> uLock(inputByteMutex);
+	inputBytes.push_back(pair<const char*, int>(packet, length));
 
+	return 0;
 	LOG(LogLevel::Debug) << "MeteoBluetoothPhoneV2::handleNewPacket() : length [" << length << "].";
 
 	char buffer[32] = { 0 };
@@ -212,6 +227,11 @@ int MeteoBluetoothPhoneV2::handleNewPacket(const char * packet, int length)
 
 	return 0;
 
+	
+}
+
+int MeteoBluetoothPhoneV2::ConvertPacketToMessage(const char * packet, int length)
+{
 	PacketType packetType = packetConverter->CheckPacketType(packet, length);
 
 	/* 讀取韌體版號 */
@@ -226,7 +246,7 @@ int MeteoBluetoothPhoneV2::handleNewPacket(const char * packet, int length)
 		if (gattServer->GetClient() == nullptr)
 			return 0;
 
-		LOG(LogLevel::Fine) << "MeteoBluetoothPhoneV2::handleNewPacket() : get read firmware version message.";
+		LOG(LogLevel::Fine) << "MeteoBluetoothPhoneV2::ConvertPacketToMessage() : get read firmware version message.";
 
 		char buffer[8] = { 0 };
 		unsigned int command = 0x110000;// MeteoCommand::ReturnFirmwareVersion
@@ -247,20 +267,18 @@ int MeteoBluetoothPhoneV2::handleNewPacket(const char * packet, int length)
 		BluetoothMessage* btMessage = packetConverter->ConvertToBluetoothMessage(packet, length);
 
 		if (btMessage == nullptr) {
-			LOG(LogLevel::Error) << "MeteoBluetoothPhoneV2::handleNewPacket() : convert to bt command failed.";
+			LOG(LogLevel::Error) << "MeteoBluetoothPhoneV2::ConvertPacketToMessage() : convert to bt command failed.";
 			return 0;
 		}
 
-		LOG(LogLevel::Fine) << "MeteoBluetoothPhoneV2::handleNewPacket() : massage:" << btMessage->ToString();
+		LOG(LogLevel::Fine) << "MeteoBluetoothPhoneV2::ConvertPacketToMessage() : massage:" << btMessage->ToString();
 
 		if (btMessage != nullptr)
 			pushBluetoothState(btMessage);
 	}
 	else if (packetType == PacketType::File) {
 
-		myClinet->Quit();
-
-		LOG(LogLevel::Fine) << "MeteoBluetoothPhoneV2::handleNewPacket() : file segment massage.";
+		LOG(LogLevel::Fine) << "MeteoBluetoothPhoneV2::ConvertPacketToMessage() : file segment massage.";
 
 		if (!getIsReady())
 			return 0;
@@ -272,7 +290,7 @@ int MeteoBluetoothPhoneV2::handleNewPacket(const char * packet, int length)
 	}
 	else if (packetType == PacketType::AckFile) {
 
-		LOG(LogLevel::Fine) << "MeteoBluetoothPhoneV2::handleNewPacket() : ack file segment massage.";
+		LOG(LogLevel::Fine) << "MeteoBluetoothPhoneV2::ConvertPacketToMessage() : ack file segment massage.";
 
 		if (!getIsReady())
 			return 0;
@@ -285,7 +303,7 @@ int MeteoBluetoothPhoneV2::handleNewPacket(const char * packet, int length)
 	else if (packetType == PacketType::None) {
 		// 封包壞掉，直接丟掉，不用刪因為return以後外面會刪
 		// packetConverter->CleanBuffer();
-		LOG(LogLevel::Warning) << "MeteoBluetoothPhoneV1::handleNewPacket() : got error packet.";
+		LOG(LogLevel::Warning) << "MeteoBluetoothPhoneV2::ConvertPacketToMessage() : got error packet.";
 	}
 
 	return 0;
@@ -294,7 +312,7 @@ int MeteoBluetoothPhoneV2::handleNewPacket(const char * packet, int length)
 int MeteoBluetoothPhoneV2::setMtu(int m)
 {
 	if (mtu > maxMtu) {
-		LOG(LogLevel::Error) << "MeteoBluetoothPhoneV1::setMtu() : new mtu [" << mtu << "] over max mtu [" << maxMtu << "].";
+		LOG(LogLevel::Error) << "MeteoBluetoothPhoneV2::setMtu() : new mtu [" << mtu << "] over max mtu [" << maxMtu << "].";
 		return -1;
 	}
 	mtu = m;
