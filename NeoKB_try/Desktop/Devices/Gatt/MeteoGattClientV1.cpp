@@ -245,14 +245,14 @@ int MeteoGattClientV1::SendNotification(char * bufferOut, int size)
 	int sendCount = 0;
 
 
-	unique_lock uLock(notifyLock);
+	unique_lock<mutex> uLock(notifyLock);
 	
 	send_success = bt_gatt_server_send_notification(m_server,
 		m_notify_handle,
 		bufferOutUint8,
 		size);
 
-	notifyLock.unlock();
+	uLock.unlock();
 
 	if (!send_success) {
 		LOG(LogLevel::Warning) << "MeteoGattClientV1::SendNotification() : failed to send.";
