@@ -121,7 +121,7 @@ int MeteoBluetoothPhoneV2::PushOutputMessage(BluetoothMessage * outputMessage)
 	int size = packetConverter->ConvertToByteArray(outputMessage, buffer, mtu);//??
 
 	if (size != -1) {
-		//gattServer->GetClient()->SendNotification(buffer, size);
+		gattServer->GetClient()->SendNotification(buffer, size);
 
 		//for (int i = 0; i < size; i++) {
 		//	printf("%x ", buffer[i]);
