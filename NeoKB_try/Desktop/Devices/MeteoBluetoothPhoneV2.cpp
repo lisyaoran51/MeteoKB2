@@ -227,8 +227,8 @@ int MeteoBluetoothPhoneV2::handleNewPacket(const char * packet, int length)
 
 
 	isFirstPacketSent = true;
-
-	char* buffer = new char[length];
+	//!!!
+	//char* buffer = new char[length];
 	memcpy(buffer, packet, length);
 	
 	unique_lock<mutex> uLock(inputByteMutex);
