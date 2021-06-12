@@ -211,24 +211,24 @@ int MeteoBluetoothPhoneV2::pushBluetoothState(BluetoothMessage * btMessage)
 
 int MeteoBluetoothPhoneV2::handleNewPacket(const char * packet, int length)
 {
-	char buffer[32] = { 0 };
-	unsigned int command = 0x110000;// MeteoCommand::ReturnFirmwareVersion
-	unsigned int version = METEO_PROGRAM_VERSION;
-
-	memcpy(buffer, &command, sizeof(command));
-	memcpy(buffer + sizeof(command), &version, sizeof(version));
-	memcpy(buffer+8, &command, sizeof(command));
-	memcpy(buffer+8 + sizeof(command), &version, sizeof(version));
-	memcpy(buffer+16, &command, sizeof(command));
-	memcpy(buffer+16 + sizeof(command), &version, sizeof(version));
-
-	gattServer->GetClient()->SendNotification(buffer, 32);
-	return 0;
+	//char buffer[32] = { 0 };
+	//unsigned int command = 0x110000;// MeteoCommand::ReturnFirmwareVersion
+	//unsigned int version = METEO_PROGRAM_VERSION;
+	//
+	//memcpy(buffer, &command, sizeof(command));
+	//memcpy(buffer + sizeof(command), &version, sizeof(version));
+	//memcpy(buffer+8, &command, sizeof(command));
+	//memcpy(buffer+8 + sizeof(command), &version, sizeof(version));
+	//memcpy(buffer+16, &command, sizeof(command));
+	//memcpy(buffer+16 + sizeof(command), &version, sizeof(version));
+	//
+	//gattServer->GetClient()->SendNotification(buffer, 32);
+	//return 0;
 
 
 	isFirstPacketSent = true;
-	//!!!
-	//char* buffer = new char[length];
+	
+	char* buffer = new char[length];
 	memcpy(buffer, packet, length);
 	
 	unique_lock<mutex> uLock(inputByteMutex);

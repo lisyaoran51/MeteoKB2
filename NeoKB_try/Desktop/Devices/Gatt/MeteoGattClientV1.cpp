@@ -240,17 +240,17 @@ int MeteoGattClientV1::SendNotification(char * bufferOut, int size)
 
 	memcpy(bufferOutUint8, bufferOut, size * sizeof(char));
 
-	bool send_success = false;
+	bool send_success = true;
 
 	int sendCount = 0;
 
 
 	std::unique_lock<std::mutex> uLock(notifyLock);
 	
-	send_success = bt_gatt_server_send_notification(m_server,
-		m_notify_handle,
-		bufferOutUint8,
-		size);
+	//send_success = bt_gatt_server_send_notification(m_server,
+	//	m_notify_handle,
+	//	bufferOutUint8,
+	//	size);
 
 	uLock.unlock();
 
