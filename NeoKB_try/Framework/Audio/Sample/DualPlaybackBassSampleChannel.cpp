@@ -35,14 +35,16 @@ int DualPlaybackBassSampleChannel::Play()
 	pendingActions.Add(this, [=]() {
 		int newPlayback = 0;
 
-		// 音量衰減公式 音量=e(-at)，a為常數，t為時間
+		float lastBassVolume;
+		BASS_ChannelGetAttribute(channelID[tempPlayingPlayback], BASS_ATTRIB_VOL, &lastBassVolume);
 
+		// 音量衰減公式 音量=e(-at)，a為常數，t為時間
 
 		double tempPlaybackCurrentTime = BASS_ChannelBytes2Seconds(
 			channelID[tempPlayingPlayback],
 			BASS_ChannelGetPosition(channelID[tempPlayingPlayback], BASS_POS_BYTE));
 
-		double tempVolume = lastVolume * exp(-tempPlaybackCurrentTime);
+		double tempVolume = lastBassVolume * exp(-tempPlaybackCurrentTime);
 
 		if (BASS_ChannelIsActive(channelID[tempPlayingPlayback]) != BASS_ACTIVE_PLAYING) {
 			tempVolume = 0;
@@ -66,7 +68,7 @@ int DualPlaybackBassSampleChannel::Play()
 
 		BASS_ChannelPlay(channelID[newPlayback], false);
 
-		if (tempVolume <= volume->GetValue()) {
+		if (tempVolume <= volumeCalculated->GetValue()) {
 			if (BASS_ChannelIsActive(channelID[tempPlayingPlayback]) == BASS_ACTIVE_PLAYING) {
 				BASS_ChannelSlideAttribute(channelID[tempPlayingPlayback], BASS_ATTRIB_VOL, 0, (DWORD)(0.05 / 2.0 * 1000)); //dualSwitchFadeoutTime / 2.0 * 1000));
 			}
@@ -89,7 +91,7 @@ int DualPlaybackBassSampleChannel::Play()
 
 int DualPlaybackBassSampleChannel::Play(double v)
 {
-	lastVolume = volume->GetValue();
+	lastVolume = volumeCalculated->GetValue();
 	volume->SetValue(v);
 	InvalidateState();
 	return Play();
