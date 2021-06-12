@@ -247,11 +247,11 @@ int MeteoGattClientV1::SendNotification(char * bufferOut, int size)
 
 	std::unique_lock<std::mutex> uLock(notifyLock);
 	
-	//outputBytes.push_back(std::pair<char*, int>(tempBufferOut))
-	send_success = bt_gatt_server_send_notification(m_server,
-		m_notify_handle,
-		reinterpret_cast<uint8_t *>(tempBufferOut),
-		size);
+	outputBytes.push_back(std::pair<char*, int>(tempBufferOut))
+	//send_success = bt_gatt_server_send_notification(m_server,
+	//	m_notify_handle,
+	//	reinterpret_cast<uint8_t *>(tempBufferOut),
+	//	size);
 
 	uLock.unlock();
 
@@ -542,10 +542,7 @@ void MeteoGattClientV1::onDataChannelIn(
 void MeteoGattClientV1::onTimeout()
 {
 
-	mainloop_modify_timeout(m_timeout_id, 1000);
-
-
-	/*
+	
 	if (outputBytes.size() == 0)
 		goto OUT;
 
@@ -553,6 +550,7 @@ void MeteoGattClientV1::onTimeout()
 
 	std::pair<char*, int> bytesOut = outputBytes[0];
 	outputBytes.erase(output.begin());
+
 	uLock.unlock();
 
 	int ret = bt_gatt_server_send_notification(
@@ -594,7 +592,7 @@ void MeteoGattClientV1::onTimeout()
 OUT:
 
 	mainloop_modify_timeout(m_timeout_id, 10);
-	*/
+	
 }
 
 void MeteoGattClientV1::onEPollRead(

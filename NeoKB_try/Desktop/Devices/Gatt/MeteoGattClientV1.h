@@ -133,6 +133,7 @@ namespace Gatt {
 		std::thread::id			m_mainloop_thread;
 		std::function<void(char const* buff, int n)>      m_data_handler;
 		mutable std::mutex	notifyLock;
+		std::vector<std::pair<char*,int>>	outputBytes;
 
 
 		int buildService(std::map<std::string, std::function<std::string()>> deviceInfoGetter);
