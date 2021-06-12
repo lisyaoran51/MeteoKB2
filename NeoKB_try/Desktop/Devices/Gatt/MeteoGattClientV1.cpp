@@ -236,9 +236,9 @@ int MeteoGattClientV1::SendNotification(char * bufferOut, int size)
 		return -1;
 	}
 
-	unsigned char bufferOutUint8[256] = { 0 };
+	char tempBufferOut = new char[size];
 
-	memcpy(bufferOutUint8, bufferOut, size * sizeof(char));
+	memcpy(tempBufferOut, bufferOut, size * sizeof(char));
 
 	bool send_success = true;
 
@@ -247,17 +247,18 @@ int MeteoGattClientV1::SendNotification(char * bufferOut, int size)
 
 	std::unique_lock<std::mutex> uLock(notifyLock);
 	
-	//send_success = bt_gatt_server_send_notification(m_server,
-	//	m_notify_handle,
-	//	bufferOutUint8,
-	//	size);
+	//outputBytes.push_back(std::pair<char*, int>(tempBufferOut))
+	send_success = bt_gatt_server_send_notification(m_server,
+		m_notify_handle,
+		reinterpret_cast<uint8_t *>(tempBufferOut),
+		size);
 
 	uLock.unlock();
 
 	if (!send_success) {
 		LOG(LogLevel::Warning) << "MeteoGattClientV1::SendNotification() : failed to send.";
 		for (int i = 0; i < size; i++) {
-			printf("%x ", bufferOutUint8[i]);
+			printf("%x ", tempBufferOut[i]);
 		}
 		printf("\n");
 	}
@@ -540,6 +541,34 @@ void MeteoGattClientV1::onDataChannelIn(
 
 void MeteoGattClientV1::onTimeout()
 {
+
+	mainloop_modify_timeout(m_timeout_id, 1000);
+
+
+	/*
+	if (outputBytes.size() == 0)
+		goto OUT;
+
+	std::unique_lock<mutex> uLock(notifyLock);
+
+	std::pair<char*, int> bytesOut = outputBytes[0];
+	outputBytes.erase(output.begin());
+	uLock.unlock();
+
+	int ret = bt_gatt_server_send_notification(
+		m_server,
+		m_notify_handle,
+		reinterpret_cast<uint8_t *>(bytesOut.first),
+		sizeof(uint8_t) * bytesOut.second);
+
+	if (!ret)
+	{
+		LOG(LogLevel::Warning) << "failed to send notification:" << ret << " with " << bytesOut.second << " bytes lost.";
+	}
+
+	goto OUT;
+
+
 	uint32_t bytes_available = m_outgoing_queue.size();
 
 	if (bytes_available > 0)
@@ -562,7 +591,10 @@ void MeteoGattClientV1::onTimeout()
 		}
 	}
 
-	mainloop_modify_timeout(m_timeout_id, 1000);
+OUT:
+
+	mainloop_modify_timeout(m_timeout_id, 10);
+	*/
 }
 
 void MeteoGattClientV1::onEPollRead(
