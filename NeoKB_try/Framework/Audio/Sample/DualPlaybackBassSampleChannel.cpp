@@ -108,7 +108,7 @@ int DualPlaybackBassSampleChannel::FadeOut()
 			BASS_ChannelSlideAttribute(channelID[0], BASS_ATTRIB_VOL, 0, (DWORD)(fadeOutTime * 1000));
 
 		if (BASS_ChannelIsActive(channelID[1]) == BASS_ACTIVE_PLAYING)
-			BASS_ChannelSlideAttribute(channelID[1], BASS_ATTRIB_VOL, 0, (DWORD)(fadeOutTime * 1000));
+			BASS_ChannelSlideAttribute(channelID[1], BASS_ATTRIB_VOL, 0, (DWORD)(0.05 * 1000)); //dualSwitchFadeoutTime * 1000));
 		return 0;
 
 	}, "Lambda_DualPlaybackBassSampleChannel::FadeOut");
