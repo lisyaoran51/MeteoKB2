@@ -50,7 +50,7 @@ int MeteorResult::load()
 
 int MeteorResult::load(OutputManager * o, Instrument * i, Storage* s, CommunicationAccess* c)
 {
-	outputManager = o;
+	//outputManager = o;
 	piano = dynamic_cast<Piano*>(i);
 
 	if (piano == nullptr) {
