@@ -1003,6 +1003,12 @@
     <Filter Include="標頭檔\Desktop\Hosts">
       <UniqueIdentifier>{f162b6ed-08e5-434a-8eda-cd735818c08b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="標頭檔\Util\Algorithms">
+      <UniqueIdentifier>{1952a1f1-6106-4d1e-8edc-b87e3b35d786}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Util\Algorithms">
+      <UniqueIdentifier>{c4c51a47-94c4-44dd-82c1-0c49a71c9042}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Games\Graphic\Renderer\renderer.cpp">
@@ -2143,6 +2149,15 @@
       <Filter>來源檔案\Games\UI</Filter>
     </ClCompile>
     <ClCompile Include="Games\IO\Communications\GetBinaryBleRequestHandler.cpp">
+      <Filter>來源檔案\Games\IO\Communications</Filter>
+    </ClCompile>
+    <ClCompile Include="Util\Algorithms\ByteAffineCipher.cpp">
+      <Filter>來源檔案\Util\Algorithms</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Threading\SimpleThread.cpp">
+      <Filter>來源檔案\Framework\Threading</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\IO\Communications\BackgroundGetBinaryBleRequest.cpp">
       <Filter>來源檔案\Games\IO\Communications</Filter>
     </ClCompile>
   </ItemGroup>
@@ -3578,6 +3593,18 @@
       <Filter>標頭檔\Games\UI</Filter>
     </ClInclude>
     <ClInclude Include="Games\IO\Communications\GetBinaryBleRequestHandler.h">
+      <Filter>標頭檔\Games\IO\Communications</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\Algorithms\ByteAffineCipher.h">
+      <Filter>標頭檔\Util\Algorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Threading\SimpleThread.h">
+      <Filter>標頭檔\Framework\Threading</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\IO\Communications\BackgroundGetBinaryBleRequest.h">
+      <Filter>標頭檔\Games\IO\Communications</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\IO\Communications\BackgroundBleAccess.h">
       <Filter>標頭檔\Games\IO\Communications</Filter>
     </ClInclude>
   </ItemGroup>

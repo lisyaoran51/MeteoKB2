@@ -73,6 +73,7 @@
     <ClCompile Include="Framework\Output\Bluetooths\BluetoothOutputer.cpp" />
     <ClCompile Include="Framework\Output\OutputManager.cpp" />
     <ClCompile Include="Framework\Scenes\SceneMaster.cpp" />
+    <ClCompile Include="Framework\Threading\SimpleThread.cpp" />
     <ClCompile Include="Framework\Threading\ThreadMaster.cpp" />
     <ClCompile Include="Framework\Timing\SpeedAdjusters\LinearSpeedAdjuster.cpp" />
     <ClCompile Include="Framework\Timing\ThrottledFramedClock.cpp" />
@@ -82,6 +83,7 @@
     <ClCompile Include="Games\Input\Commands\MeteoAckFileBluetoothCommand.cpp" />
     <ClCompile Include="Games\Input\Commands\MeteoBluetoothCommand.cpp" />
     <ClCompile Include="Games\IO\Api\ApiAccess.cpp" />
+    <ClCompile Include="Games\IO\Communications\BackgroundGetBinaryBleRequest.cpp" />
     <ClCompile Include="Games\IO\Communications\BleAccess.cpp" />
     <ClCompile Include="Games\IO\Communications\BleRequest.cpp" />
     <ClCompile Include="Games\IO\Communications\BleRequestException.cpp" />
@@ -398,6 +400,7 @@
     <ClCompile Include="TestCases\TestCaseKeyboard.cpp" />
     <ClCompile Include="TestCases\TestCaseMeteoGameHost.cpp" />
     <ClCompile Include="TestCases\TestCaseStopwatch.cpp" />
+    <ClCompile Include="Util\Algorithms\ByteAffineCipher.cpp" />
     <ClCompile Include="Util\CommandPasser.cpp" />
     <ClCompile Include="Util\DataStructure\ActionListTestcase.cpp" />
     <ClCompile Include="Util\DataStructure\FileSegmentMap.cpp" />
@@ -487,6 +490,7 @@
     <ClInclude Include="Framework\Output\Panels\PanelMessage.h" />
     <ClInclude Include="Framework\Output\Panels\PanelOutputer.h" />
     <ClInclude Include="Framework\Scenes\SceneMaster.h" />
+    <ClInclude Include="Framework\Threading\SimpleThread.h" />
     <ClInclude Include="Framework\Threading\ThreadMaster.h" />
     <ClInclude Include="Framework\Timing\SpeedAdjusters\LinearSpeedAdjuster.h" />
     <ClInclude Include="Framework\Timing\TimeController.h" />
@@ -503,6 +507,8 @@
     <ClInclude Include="Games\Input\RulesetInputManager.h" />
     <ClInclude Include="Games\IO\Api\ApiAccess.h" />
     <ClInclude Include="Games\IO\Communications\ApiRequest.h" />
+    <ClInclude Include="Games\IO\Communications\BackgroundBleAccess.h" />
+    <ClInclude Include="Games\IO\Communications\BackgroundGetBinaryBleRequest.h" />
     <ClInclude Include="Games\IO\Communications\BleAccess.h" />
     <ClInclude Include="Games\IO\Communications\BleRequest.h" />
     <ClInclude Include="Games\IO\Communications\BleRequestException.h" />
@@ -869,6 +875,7 @@
     <ClInclude Include="ThirdParty\Bass\bass.h" />
     <ClInclude Include="ThirdParty\Bass\bass_fx.h" />
     <ClInclude Include="ThirdParty\json\json.hpp" />
+    <ClInclude Include="Util\Algorithms\ByteAffineCipher.h" />
     <ClInclude Include="Util\CommandPasser.h" />
     <ClInclude Include="Util\DataStructure\ActionList.h" />
     <ClInclude Include="Util\DataStructure\ActionMap.h" />

@@ -3164,3 +3164,69 @@ DifficultyType:3
 	-音樂
 	-cpu
 	-
+	
+	後來發現是收發的時候不要放log，不然容易壞掉
+	把thread priority拉到最高也沒用，拿掉log才有用
+	
+	send notification fail之後就會斷線
+	
+6/9
+	藍芽跑得動的設定
+	inputThread->SetMaxUpdateHz(50);
+	updateThread->SetMaxUpdateHz(10);
+	drawThread->SetMaxUpdateHz(1);
+	ThreadMaster::GetInstance().SetFrequency(5);
+	audioThread->SetMaxUpdateHz(600);
+	
+	結果把網路關掉、log關掉、thread降低，還是很容易當機
+	遊戲中斷線的對應方式：
+	音樂遊戲：斷線時等到遊戲結束再重開遊戲
+	互動遊戲、錄音遊戲：立刻重開遊戲
+	
+	https://www.raspberrypi.org/forums/viewtopic.php?t=235753
+	把pi給overclock
+	gpu_mem=128
+	kernel=zImage
+	arm_freq=1375
+	core_freq=525
+	gpu_freq=525
+	over_voltage=3
+	force_turbo=1
+	sdram_freq=625
+	sdram_schmoo=0x02000020
+	over_voltage_sdram_p=4
+	over_voltage_sdram_i=3
+	over_voltage_sdram_c=3
+	
+6/10
+
+https://programmersought.com/article/74074250943/
+https://cpp.hotexamples.com/examples/-/-/gatt_db_service_add_characteristic/cpp-gatt_db_service_add_characteristic-function-examples.html
+藍芽文章
+
+再選歌狀態，只要要notify就很容易當掉
+但是進入遊戲以後，notify反而沒事
+
+可能notify跟onwrite隔太近？應該不適
+
+選歌畫面：
+	只要不傳notification就部會當機
+	notification前加個lock，data in前面也加lock，讓它們錯開->還是會當機
+	
+遊戲畫面：
+	一直船notify還是會當機，只是沒有那麼頻繁
+	
+遊戲畫面搭配bleconfd
+	會卡卡的，但是部會當機
+遊戲畫面搭配test server
+	會直接當機
+遊戲畫面搭配test server，但是把packet converter拿掉，指不停回傳notify
+	變得很順
+	
+6/12
+	https://stackoverflow.com/questions/36056667/ble-device-fails-to-send-multiple-gatt-notifications-in-a-row
+	
+	找到問題了，要把send notification百在on timeout裡面，避免間隔太短就會壞掉
+	解決了
+	
+	
