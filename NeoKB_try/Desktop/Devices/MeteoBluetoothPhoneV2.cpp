@@ -30,22 +30,23 @@ MeteoBluetoothPhoneV2::MeteoBluetoothPhoneV2(PacketConverter<MeteoCommand>* pCon
 
 int MeteoBluetoothPhoneV2::Initialize()
 {
-	//thisThread = new thread([]() {
-	//
-	//	LOG(LogLevel::Error) << "call bleconfd";
-	//	//FILE* fp = popen(string("sudo /home/pi/bleconfd/bleconfd -d").c_str(), "r");
-	//	FILE* fp = popen(string("sudo /home/pi/MeteoBleTestServer/MeteoBleTestServer/MeteoBleTestServer_bass").c_str(), "r");
-	//	if (fp == NULL) {
-	//		LOG(LogLevel::Error) << "get bleconfd failed";
-	//	}
-	//	char buf[256];
-	//	while (fgets(buf, 255, fp) != NULL)
-	//		printf("%s", buf);
-	//	pclose(fp);
-	//
-	//});
-	//thisThread->detach();
-	//return 0;
+	// !!!
+	thisThread = new thread([]() {
+	
+		LOG(LogLevel::Error) << "call bleconfd";
+		//FILE* fp = popen(string("sudo /home/pi/bleconfd/bleconfd -d").c_str(), "r");
+		FILE* fp = popen(string("sudo /home/pi/MeteoBleTestServer/MeteoBleTestServer/MeteoBleTestServer_bass").c_str(), "r");
+		if (fp == NULL) {
+			LOG(LogLevel::Error) << "get bleconfd failed";
+		}
+		char buf[256];
+		while (fgets(buf, 255, fp) != NULL)
+			printf("%s", buf);
+		pclose(fp);
+	
+	});
+	thisThread->detach();
+	return 0;
 
 	bluetoothState = new InputState();
 	bluetoothState->SetBluetoothState(new BluetoothState());
@@ -68,6 +69,9 @@ int MeteoBluetoothPhoneV2::Initialize()
 
 InputState * MeteoBluetoothPhoneV2::GetBluetoothState()
 {
+	// !!!
+	return nullptr;
+
 	if (inputBytes.size() > 0)
 	if (inputByteMutex.try_lock()) {
 
