@@ -546,10 +546,10 @@ void MeteoGattClientV1::onTimeout()
 	if (outputBytes.size() == 0)
 		goto OUT;
 
-	std::unique_lock<mutex> uLock(notifyLock);
+	std::unique_lock<std::mutex> uLock(notifyLock);
 
 	std::pair<char*, int> bytesOut = outputBytes[0];
-	outputBytes.erase(output.begin());
+	outputBytes.erase(outputBytes.begin());
 
 	uLock.unlock();
 
