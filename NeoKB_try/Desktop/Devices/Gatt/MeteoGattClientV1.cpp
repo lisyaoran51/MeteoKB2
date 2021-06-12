@@ -236,7 +236,7 @@ int MeteoGattClientV1::SendNotification(char * bufferOut, int size)
 		return -1;
 	}
 
-	char tempBufferOut = new char[size];
+	char* tempBufferOut = new char[size];
 
 	memcpy(tempBufferOut, bufferOut, size * sizeof(char));
 
