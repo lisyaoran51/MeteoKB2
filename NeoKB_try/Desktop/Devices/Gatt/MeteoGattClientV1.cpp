@@ -544,7 +544,7 @@ void MeteoGattClientV1::onTimeout()
 
 	
 	if (outputBytes.size() == 0)
-		goto OUT;
+		goto OUT_onTimeout;
 
 	std::unique_lock<std::mutex> uLock(notifyLock);
 
@@ -564,7 +564,7 @@ void MeteoGattClientV1::onTimeout()
 		LOG(LogLevel::Warning) << "failed to send notification:" << ret << " with " << bytesOut.second << " bytes lost.";
 	}
 
-	goto OUT;
+	goto OUT_onTimeout;
 
 
 	uint32_t bytes_available = m_outgoing_queue.size();
@@ -589,7 +589,7 @@ void MeteoGattClientV1::onTimeout()
 		}
 	}
 
-OUT:
+OUT_onTimeout:
 
 	mainloop_modify_timeout(m_timeout_id, 10);
 	
