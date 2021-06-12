@@ -495,7 +495,7 @@ void MeteoGattClientV1::onDataChannelIn(
 {
 
 	//pthread_mutex_lock(&notifyLock);
-	LOG(LogLevel::Finer) << "onDataChannelIn(offset=" << offset << ", len=" << len << ")";
+	LOG(LogLevel::Debug) << "onDataChannelIn(offset=" << offset << ", len=" << len << ")";
 
 	if (!m_data_handler)
 	{

@@ -30,23 +30,22 @@ MeteoBluetoothPhoneV2::MeteoBluetoothPhoneV2(PacketConverter<MeteoCommand>* pCon
 
 int MeteoBluetoothPhoneV2::Initialize()
 {
-	// !!!
-	thisThread = new thread([]() {
-	
-		LOG(LogLevel::Error) << "call bleconfd";
-		//FILE* fp = popen(string("sudo /home/pi/bleconfd/bleconfd -d").c_str(), "r");
-		FILE* fp = popen(string("sudo /home/pi/MeteoBleTestServer/MeteoBleTestServer/MeteoBleTestServer_bass").c_str(), "r");
-		if (fp == NULL) {
-			LOG(LogLevel::Error) << "get bleconfd failed";
-		}
-		char buf[256];
-		while (fgets(buf, 255, fp) != NULL)
-			printf("%s", buf);
-		pclose(fp);
-	
-	});
-	thisThread->detach();
-	return 0;
+	//thisThread = new thread([]() {
+	//
+	//	LOG(LogLevel::Error) << "call bleconfd";
+	//	//FILE* fp = popen(string("sudo /home/pi/bleconfd/bleconfd -d").c_str(), "r");
+	//	FILE* fp = popen(string("sudo /home/pi/MeteoBleTestServer/MeteoBleTestServer/MeteoBleTestServer_bass").c_str(), "r");
+	//	if (fp == NULL) {
+	//		LOG(LogLevel::Error) << "get bleconfd failed";
+	//	}
+	//	char buf[256];
+	//	while (fgets(buf, 255, fp) != NULL)
+	//		printf("%s", buf);
+	//	pclose(fp);
+	//
+	//});
+	//thisThread->detach();
+	//return 0;
 
 	bluetoothState = new InputState();
 	bluetoothState->SetBluetoothState(new BluetoothState());
@@ -69,8 +68,7 @@ int MeteoBluetoothPhoneV2::Initialize()
 
 InputState * MeteoBluetoothPhoneV2::GetBluetoothState()
 {
-	// !!!
-	return nullptr;
+	//return nullptr;
 
 	if (inputBytes.size() > 0)
 	if (inputByteMutex.try_lock()) {
@@ -213,6 +211,21 @@ int MeteoBluetoothPhoneV2::pushBluetoothState(BluetoothMessage * btMessage)
 
 int MeteoBluetoothPhoneV2::handleNewPacket(const char * packet, int length)
 {
+	char buffer[32] = { 0 };
+	unsigned int command = 0x110000;// MeteoCommand::ReturnFirmwareVersion
+	unsigned int version = METEO_PROGRAM_VERSION;
+
+	memcpy(buffer, &command, sizeof(command));
+	memcpy(buffer + sizeof(command), &version, sizeof(version));
+	memcpy(buffer+8, &command, sizeof(command));
+	memcpy(buffer+8 + sizeof(command), &version, sizeof(version));
+	memcpy(buffer+16, &command, sizeof(command));
+	memcpy(buffer+16 + sizeof(command), &version, sizeof(version));
+
+	gattServer->GetClient()->SendNotification(buffer, 32);
+	return 0;
+
+
 	isFirstPacketSent = true;
 
 	char* buffer = new char[length];
@@ -250,7 +263,7 @@ int MeteoBluetoothPhoneV2::ConvertPacketToMessage(const char * packet, int lengt
 		memcpy(buffer, &command, sizeof(command));
 		memcpy(buffer + sizeof(command), &version, sizeof(version));
 
-		//gattServer->GetClient()->SendNotification(buffer, 8);
+		gattServer->GetClient()->SendNotification(buffer, 8);
 		isFirstPacketSent = true;
 	}
 	else if (packetType == PacketType::Json) {
