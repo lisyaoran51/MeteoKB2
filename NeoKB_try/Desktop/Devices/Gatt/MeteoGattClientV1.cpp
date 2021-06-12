@@ -541,10 +541,11 @@ void MeteoGattClientV1::onDataChannelIn(
 
 void MeteoGattClientV1::onTimeout()
 {
-	int ret;
 	
-	if (outputBytes.size() == 0)
-		goto OUT_onTimeout;
+	if (outputBytes.size() == 0) {
+		mainloop_modify_timeout(m_timeout_id, 10);
+		return;
+	}
 
 	std::unique_lock<std::mutex> uLock(notifyLock);
 
@@ -553,7 +554,7 @@ void MeteoGattClientV1::onTimeout()
 
 	uLock.unlock();
 
-	ret = bt_gatt_server_send_notification(
+	int ret = bt_gatt_server_send_notification(
 		m_server,
 		m_notify_handle,
 		reinterpret_cast<uint8_t *>(bytesOut.first),
@@ -564,7 +565,7 @@ void MeteoGattClientV1::onTimeout()
 		LOG(LogLevel::Warning) << "failed to send notification:" << ret << " with " << bytesOut.second << " bytes lost.";
 	}
 
-	goto OUT_onTimeout;
+	mainloop_modify_timeout(m_timeout_id, 10);
 
 
 	//uint32_t bytes_available = m_outgoing_queue.size();
@@ -588,8 +589,6 @@ void MeteoGattClientV1::onTimeout()
 	//		LOG(LogLevel::Warning) << "failed to send notification:" << ret << " with " << bytes_available << " bytes pending";
 	//	}
 	//}
-
-OUT_onTimeout:
 
 	mainloop_modify_timeout(m_timeout_id, 10);
 	
