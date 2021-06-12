@@ -541,7 +541,7 @@ void MeteoGattClientV1::onDataChannelIn(
 
 void MeteoGattClientV1::onTimeout()
 {
-
+	int ret;
 	
 	if (outputBytes.size() == 0)
 		goto OUT_onTimeout;
@@ -553,7 +553,7 @@ void MeteoGattClientV1::onTimeout()
 
 	uLock.unlock();
 
-	int ret = bt_gatt_server_send_notification(
+	ret = bt_gatt_server_send_notification(
 		m_server,
 		m_notify_handle,
 		reinterpret_cast<uint8_t *>(bytesOut.first),
@@ -567,27 +567,27 @@ void MeteoGattClientV1::onTimeout()
 	goto OUT_onTimeout;
 
 
-	uint32_t bytes_available = m_outgoing_queue.size();
-
-	if (bytes_available > 0)
-	{
-		LOG(LogLevel::Info) << "notification of " << bytes_available << " bytes available";
-
-		bytes_available = htonl(bytes_available);
-
-		//uint16_t handle = gatt_db_attribute_get_handle(m_blepoll);
-		uint16_t handle = m_notify_handle;
-		int ret = bt_gatt_server_send_notification(
-			m_server,
-			handle,
-			reinterpret_cast<uint8_t *>(&bytes_available),
-			sizeof(uint32_t));
-
-		if (!ret)
-		{
-			LOG(LogLevel::Warning) << "failed to send notification:" << ret << " with " << bytes_available << " bytes pending";
-		}
-	}
+	//uint32_t bytes_available = m_outgoing_queue.size();
+	//
+	//if (bytes_available > 0)
+	//{
+	//	LOG(LogLevel::Info) << "notification of " << bytes_available << " bytes available";
+	//
+	//	bytes_available = htonl(bytes_available);
+	//
+	//	//uint16_t handle = gatt_db_attribute_get_handle(m_blepoll);
+	//	uint16_t handle = m_notify_handle;
+	//	int ret = bt_gatt_server_send_notification(
+	//		m_server,
+	//		handle,
+	//		reinterpret_cast<uint8_t *>(&bytes_available),
+	//		sizeof(uint32_t));
+	//
+	//	if (!ret)
+	//	{
+	//		LOG(LogLevel::Warning) << "failed to send notification:" << ret << " with " << bytes_available << " bytes pending";
+	//	}
+	//}
 
 OUT_onTimeout:
 
