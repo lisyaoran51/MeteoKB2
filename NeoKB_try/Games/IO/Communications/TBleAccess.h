@@ -6,6 +6,7 @@
 #include "BleRequest.h"
 #include "../../../Framework/IO/BluetoothPhone.h"
 #include "../../../Framework/Threading/SimpleThread.h"
+#include "../../../Framework/Threading/ThreadMaster.h"
 #include <sched.h> 
 #include <pthread.h>
 
@@ -34,7 +35,7 @@ namespace Communications{
 			TCommunicationComponent<T>::communicationState = CommunicationState::Connected;
 			// TODO: 在連接時更改連線狀態
 
-			TCommunicationComponent<T>::thisThread = new thread(&BleAccess::run, this);
+			TCommunicationComponent<T>::thisThread = new thread(&TBleAccess::run, this);
 			sleepTimeInMilliSecond = 20;
 			ThreadMaster::GetInstance().AddSimpleThread(this);
 
@@ -165,7 +166,7 @@ namespace Communications{
 		virtual int run() {
 			CommunicationComponent::threadExitRequest = false;
 
-			while (!threadExitRequest) {
+			while (!CommunicationComponent::threadExitRequest) {
 				switch (CommunicationComponent::communicationState) {
 				case CommunicationState::Failed:
 
@@ -225,21 +226,21 @@ namespace Communications{
 
 				LOG(LogLevel::Finest) << "BleAccess::run() : handling reuqest.";
 
-				if (CommunicationComponent::communicationRequests.size() == 0)
+				if (TCommunicationComponent<T>::communicationRequests.size() == 0)
 					this_thread::sleep_for(std::chrono::milliseconds(100));
 
 				/* 再執行request */
 				CommunicationRequest* request = nullptr;
-				if (CommunicationComponent::communicationRequests.size() > 0) {
+				if (TCommunicationComponent<T>::communicationRequests.size() > 0) {
 					LOG(LogLevel::Finest) << "BleAccess::run() : handling reuqest.";
-					request = CommunicationComponent::communicationRequests.back();
+					request = TCommunicationComponent<T>::communicationRequests.back();
 
 					int result = 0;
 
 					result = handleRequest(request);		// 執行handleRequest，result就會變成undeclared
 
 					if (result >= 0) {						// 0:執行成功，1:執行失敗(一樣要把這個request刪掉)
-						CommunicationComponent::communicationRequests.pop_back();
+						TCommunicationComponent<T>::communicationRequests.pop_back();
 
 						delete request;
 						request = nullptr;
@@ -282,7 +283,7 @@ namespace Communications{
 				case BleResponseCode::RequestTimeout:
 					CommunicationComponent::failureCount++;
 
-					if (failureCount < 3)
+					if (CommunicationComponent::failureCount < 3)
 						return -1;
 
 					// 如果一職timeout，就把所有的request都Fail調
