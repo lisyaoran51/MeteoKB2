@@ -42,7 +42,7 @@ namespace Samples {
 
 		double lastVolume = -1;
 		
-
+		float dualSwitchFadeoutTime = 0.1f;
 
 
 	};

@@ -35,8 +35,8 @@ int DualPlaybackBassSampleChannel::Play()
 	pendingActions.Add(this, [=]() {
 		int newPlayback = 0;
 
-		float lastBassVolume;
-		BASS_ChannelGetAttribute(channelID[tempPlayingPlayback], BASS_ATTRIB_VOL, &lastBassVolume);
+		float lastChannelVolume;
+		BASS_ChannelGetAttribute(channelID[tempPlayingPlayback], BASS_ATTRIB_VOL, &lastChannelVolume);
 
 		// 音量衰減公式 音量=e(-at)，a為常數，t為時間
 
@@ -44,7 +44,7 @@ int DualPlaybackBassSampleChannel::Play()
 			channelID[tempPlayingPlayback],
 			BASS_ChannelGetPosition(channelID[tempPlayingPlayback], BASS_POS_BYTE));
 
-		double tempVolume = lastBassVolume * exp(-tempPlaybackCurrentTime);
+		double tempVolume = lastChannelVolume * exp(-tempPlaybackCurrentTime);
 
 		if (BASS_ChannelIsActive(channelID[tempPlayingPlayback]) != BASS_ACTIVE_PLAYING) {
 			tempVolume = 0;
@@ -70,14 +70,14 @@ int DualPlaybackBassSampleChannel::Play()
 
 		if (tempVolume <= volumeCalculated->GetValue()) {
 			if (BASS_ChannelIsActive(channelID[tempPlayingPlayback]) == BASS_ACTIVE_PLAYING) {
-				BASS_ChannelSlideAttribute(channelID[tempPlayingPlayback], BASS_ATTRIB_VOL, 0, (DWORD)(0.05 / 2.0 * 1000)); //dualSwitchFadeoutTime / 2.0 * 1000));
+				BASS_ChannelSlideAttribute(channelID[tempPlayingPlayback], BASS_ATTRIB_VOL, 0, (DWORD)(dualSwitchFadeoutTime * 1000));
 			}
 			tempPlayingPlayback = newPlayback;
 		}
 		else {
 			LOG(LogLevel::Depricated) << "DualPlaybackBassSampleChannel::Play() : last voume [" << tempVolume << "], louder than new volume [" << volume->GetValue() << "].";
 			if (BASS_ChannelIsActive(channelID[newPlayback]) == BASS_ACTIVE_PLAYING) {
-				BASS_ChannelSlideAttribute(channelID[newPlayback], BASS_ATTRIB_VOL, 0, (DWORD)(0.05 * 1000)); //dualSwitchFadeoutTime * 1000));
+				BASS_ChannelSlideAttribute(channelID[newPlayback], BASS_ATTRIB_VOL, 0, (DWORD)(dualSwitchFadeoutTime * 1000));
 			}
 			volume->SetValue(lastVolume);
 		}
@@ -91,7 +91,7 @@ int DualPlaybackBassSampleChannel::Play()
 
 int DualPlaybackBassSampleChannel::Play(double v)
 {
-	lastVolume = volumeCalculated->GetValue();
+	lastVolume = volume->GetValue();
 	volume->SetValue(v);
 	InvalidateState();
 	return Play();
