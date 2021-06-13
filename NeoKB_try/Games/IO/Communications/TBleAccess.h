@@ -26,25 +26,7 @@ namespace Communications{
 
 	public:
 
-		TBleAccess(Host* gHost) :TCommunicationComponent(gHost), RegisterType("TBleAccess") {
-
-			bluetoothPhone = host->GetMainInterface()->GetBluetoothPhone();
-			communicationState = CommunicationState::Connected;
-			// TODO: 在連接時更改連線狀態
-
-			thisThread = new thread(&BleAccess::run, this);
-			sleepTimeInMilliSecond = 20;
-			ThreadMaster::GetInstance().AddSimpleThread(this);
-
-			int policy = SCHED_OTHER;
-			struct sched_param param;
-			memset(&param, 0, sizeof(param));
-			param.sched_priority = sched_get_priority_min(policy);
-			pthread_setschedparam(thisThread->native_handle(), policy, &param);
-
-			thisThread->detach();
-		}
-
+		TBleAccess(Host* gHost);
 
 		/// <summary>
 		/// 將buffer中的raw command更新進command中
@@ -328,8 +310,35 @@ namespace Communications{
 
 	};
 
+	
+
+
 }}}
 
+
+
+using namespace Games::IO::Communications;
+
+template<typename T>
+inline TBleAccess<T>::TBleAccess(Host * gHost) :TCommunicationComponent<T>(gHost), RegisterType("TBleAccess") {
+
+		bluetoothPhone = host->GetMainInterface()->GetBluetoothPhone();
+		communicationState = CommunicationState::Connected;
+		// TODO: 在連接時更改連線狀態
+
+		thisThread = new thread(&BleAccess::run, this);
+		sleepTimeInMilliSecond = 20;
+		ThreadMaster::GetInstance().AddSimpleThread(this);
+
+		int policy = SCHED_OTHER;
+		struct sched_param param;
+		memset(&param, 0, sizeof(param));
+		param.sched_priority = sched_get_priority_min(policy);
+		pthread_setschedparam(thisThread->native_handle(), policy, &param);
+
+		thisThread->detach();
+	}
+}
 
 
 #endif
