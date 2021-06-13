@@ -8,6 +8,7 @@ ForegroundBleAccess::ForegroundBleAccess(Host * gHost) : TBleAccess<BleRequest>(
 {
 }
 
+/*
 int ForegroundBleAccess::Queue(CommunicationRequest * communicationRequest)
 {
 	return TCommunicationComponent<BleRequest>::Queue(communicationRequest);
@@ -17,3 +18,4 @@ int ForegroundBleAccess::Flush()
 {
 	return TCommunicationComponent<BleRequest>::Flush();
 }
+*/

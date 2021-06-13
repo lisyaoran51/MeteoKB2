@@ -21,9 +21,9 @@ namespace Communications{
 
 		ForegroundBleAccess(Host* gHost);
 
-		virtual int Queue(CommunicationRequest* communicationRequest);
-
-		virtual int Flush();
+		//virtual int Queue(CommunicationRequest* communicationRequest);
+		//
+		//virtual int Flush();
 
 	protected:
 
