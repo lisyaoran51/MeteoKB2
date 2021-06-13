@@ -8,6 +8,7 @@
 #include "SongSelect.h"
 #include "../MeteoScene.h"
 #include "../../UI/PowerPanel.h"
+#include "../../UI/FirmwareUpgradePanel.h"
 
 
 using namespace Games::Sheetmusics;
@@ -36,6 +37,8 @@ namespace Select {
 		SongSelect* songSelect = nullptr;
 
 		PowerPanel* powerPanel = nullptr;
+
+		FirmwareUpgradePanel* firmwareUpgradePanel = nullptr;
 
 		virtual int onEntering(Scene* lastScene);
 

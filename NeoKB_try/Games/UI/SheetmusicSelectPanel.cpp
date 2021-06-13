@@ -154,16 +154,7 @@ int SheetmusicSelectPanel::onMessage(MeteoBluetoothMessage * message)
 
 	LOG(LogLevel::Depricated) << "SheetmusicSelectPanel::onMessage() : got new bt message. ";
 
-	if (contextMessage->GetCommand() == MeteoCommand::WriteHardwareConfiguration) {
-		for (int i = 0; i < context["Configurations"].size(); i++) {
-			if (context["Configurations"].at(i)["category"].get<string>() == "Framework" &&
-				context["Configurations"].at(i)["Object"].get<string>() == "TargetHeight") {
-				int height = context["Configurations"].at(i)["Value"].get<int>();
-
-				frameworkConfigManager->Set(FrameworkSetting::TargetHeight, height); // 不是10就是15，對齊黑鍵或是黑白鍵不同高
-			}
-		}
-	}
+	
 
 	if (contextMessage->GetCommand() == MeteoCommand::ClearGameConfiguration) {
 		

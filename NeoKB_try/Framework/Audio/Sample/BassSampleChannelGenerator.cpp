@@ -6,7 +6,7 @@
 #include "../../../Instruments/Pitch.h"
 #include "BassSample.h"
 #include "BassSampleChannel.h"
-#include "DualPlaybackBassSampleChannel.h"
+#include "DualTrackDualPlaybackBassSampleChannel.h"
 #include "RepeatDualPlaybackBassSampleChannel.h"
 #include "TwoStageDualPlaybackBassSampleChannel.h"
 
@@ -53,7 +53,7 @@ SampleChannel * BassSampleChannelGenerator::GenerateSampleChannel(SoundBinding *
 				sampleCache[path] = sample;
 			}
 
-			sampleChannel = new DualPlaybackBassSampleChannel(sample);
+			sampleChannel = new DualTrackDualPlaybackBassSampleChannel(sample);
 
 			LOG(LogLevel::Fine) << "SampleManager::GetSampleChannel() : simple sample file path found [" << soundBinding->GetFileName() << "].";
 
@@ -130,7 +130,7 @@ SampleChannel * BassSampleChannelGenerator::GenerateSampleChannel(SoundBinding *
 				sampleCache[path] = sample;
 			}
 			
-			sampleChannel = new DualPlaybackBassSampleChannel(sample);
+			sampleChannel = new DualTrackDualPlaybackBassSampleChannel(sample);
 
 			LOG(LogLevel::Fine) << "SampleManager::GetSampleChannel() : no-type sample file path found [" << soundBinding->GetFileName() << "].";
 

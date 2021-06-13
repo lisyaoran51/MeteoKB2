@@ -19,6 +19,8 @@ public:
 
 LogLevel Util::logLevel = LogLevel::Finest;
 
+LogCategory Util::logCategory = LogCategory::All;
+
 int main() {
 
 	Keyboard k;

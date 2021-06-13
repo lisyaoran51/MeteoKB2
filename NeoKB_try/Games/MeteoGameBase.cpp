@@ -4,7 +4,8 @@
 #include "../Framework/Database/MemoryBasedDatabaseContextFactory.h"
 #include "../Framework/Database/ReadonlyCsvDatabaseContextFactory.h"
 #include <functional>
-#include "IO/Communications/BleAccess.h"
+#include "IO/Communications/ForegroundBleAccess.h"
+#include "IO/Communications/BackgroundBleAccess.h"
 
 
 using namespace Games;
@@ -52,7 +53,8 @@ int MeteoGameBase::load()
 	//GetDependencies()->Cache<ApiAccess>(apiAccess = new ApiAccess(gameHost));
 	// TODO: §ï¦¨communication access
 	GetDependencies()->Cache<CommunicationAccess>(communicationAccess = new CommunicationAccess(gameHost));
-	communicationAccess->AddItem(new BleAccess(gameHost));
+	communicationAccess->AddItem(new ForegroundBleAccess(gameHost));
+	communicationAccess->AddItem(new BackgroundBleAccess(gameHost));
 
 	GetDependencies()->Cache<RulesetStore>(rulesetStore = new RulesetStore(bind(&DatabaseContextFactory::GetContext, readonlyDbContextFactory)));
 

@@ -90,8 +90,8 @@ int Base::setupGameStatusActions()
 		if (ThreadMaster::GetInstance().GetSimpleThread("MeteoMcu"))
 			ThreadMaster::GetInstance().GetSimpleThread("MeteoMcu")->SetSleepTimeInMilliSecond(0);
 
-		if (ThreadMaster::GetInstance().GetSimpleThread("BleAccess"))
-			ThreadMaster::GetInstance().GetSimpleThread("BleAccess")->SetSleepTimeInMilliSecond(500);
+		if (ThreadMaster::GetInstance().GetSimpleThread("ForegroundBleAccess"))
+			ThreadMaster::GetInstance().GetSimpleThread("ForegroundBleAccess")->SetSleepTimeInMilliSecond(500);
 
 		return 0;
 	}, "Base::Lambda_SetupPerformGameStatusThreadAction");
@@ -114,8 +114,8 @@ int Base::setupGameStatusActions()
 		if (ThreadMaster::GetInstance().GetSimpleThread("MeteoMcu"))
 			ThreadMaster::GetInstance().GetSimpleThread("MeteoMcu")->SetSleepTimeInMilliSecond(0);
 
-		if (ThreadMaster::GetInstance().GetSimpleThread("BleAccess"))
-			ThreadMaster::GetInstance().GetSimpleThread("BleAccess")->SetSleepTimeInMilliSecond(500);
+		if (ThreadMaster::GetInstance().GetSimpleThread("ForegroundBleAccess"))
+			ThreadMaster::GetInstance().GetSimpleThread("ForegroundBleAccess")->SetSleepTimeInMilliSecond(500);
 
 
 		return 0;
@@ -139,8 +139,8 @@ int Base::setupGameStatusActions()
 		if (ThreadMaster::GetInstance().GetSimpleThread("MeteoMcu"))
 			ThreadMaster::GetInstance().GetSimpleThread("MeteoMcu")->SetSleepTimeInMilliSecond(500);
 
-		if (ThreadMaster::GetInstance().GetSimpleThread("BleAccess"))
-			ThreadMaster::GetInstance().GetSimpleThread("BleAccess")->SetSleepTimeInMilliSecond(100);
+		if (ThreadMaster::GetInstance().GetSimpleThread("ForegroundBleAccess"))
+			ThreadMaster::GetInstance().GetSimpleThread("ForegroundBleAccess")->SetSleepTimeInMilliSecond(100);
 
 
 		return 0;
@@ -163,8 +163,8 @@ int Base::setupGameStatusActions()
 		if (ThreadMaster::GetInstance().GetSimpleThread("MeteoMcu"))
 			ThreadMaster::GetInstance().GetSimpleThread("MeteoMcu")->SetSleepTimeInMilliSecond(10);
 
-		if (ThreadMaster::GetInstance().GetSimpleThread("BleAccess"))
-			ThreadMaster::GetInstance().GetSimpleThread("BleAccess")->SetSleepTimeInMilliSecond(500);
+		if (ThreadMaster::GetInstance().GetSimpleThread("ForegroundBleAccess"))
+			ThreadMaster::GetInstance().GetSimpleThread("ForegroundBleAccess")->SetSleepTimeInMilliSecond(500);
 
 		return 0;
 	}, "Base::Lambda_SetupSleepGameStatusThreadAction");

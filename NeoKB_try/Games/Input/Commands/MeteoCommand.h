@@ -52,6 +52,8 @@ namespace Commands{
 		// ÂX¥R¤É¯Å
 		NewFirmwareData = 400						,
 		AckNewFirmwareData							,
+		RequestNewFirmwareSplit,
+		AckRequestNewFirmwareSplit,
 		NewFirmwareSplitFileSegment					,
 		AckNewFirmwareSplitFileSegment				,
 		RequestRewriteNewFirmwareSplitFileSegment	,

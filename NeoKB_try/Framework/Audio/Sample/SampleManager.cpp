@@ -3,19 +3,17 @@
 #include "Sample.h"
 #include "BassSample.h"
 #include "BassSampleChannel.h"
-#include "DualPlaybackBassSampleChannel.h"
+#include "DualTrackDualPlaybackBassSampleChannel.h"
 #include "MultiPlaybackBassSampleChannel.h"
 #include "BassSampleChannelGenerator.h"
 #include "../../IO/Storage.h"
 #include "../../../Instruments/Audio/Format/SimpleSoundBindingSetDecoder.h"
-#include "../../IO/Api/ApiAccess.h"
 
 
 using namespace Framework::Audio::Samples;
 using namespace std;
 using namespace std::literals::string_literals;
 using namespace Instruments::Audio::Format;
-using namespace Framework::IO::Api;
 
 
 
@@ -87,7 +85,7 @@ SampleChannel * SampleManager::GetSampleChannel(string name)
 		if (path != "") {
 
 			sample = new BassSample((char*)path.c_str());
-			sampleChannel = sampleChannelCache[name] = new DualPlaybackBassSampleChannel(sample);
+			sampleChannel = sampleChannelCache[name] = new DualTrackDualPlaybackBassSampleChannel(sample);
 			AddItem(sampleChannel);
 		}
 		else {

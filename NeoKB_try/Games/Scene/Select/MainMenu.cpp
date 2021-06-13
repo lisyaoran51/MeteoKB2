@@ -97,6 +97,8 @@ int MainMenu::load(Instrument * i)
 
 	AddChild(powerPanel);
 
+	firmwareUpgradePanel = new FirmwareUpgradePanel();
+	AddChild(firmwareUpgradePanel);
 
 	// 開機時打開燈光
 	IndicatorLightPanelMessage* indicatorLightMessage = new IndicatorLightPanelMessage(0, true);
