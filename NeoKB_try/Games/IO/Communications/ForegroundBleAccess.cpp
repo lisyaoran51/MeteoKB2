@@ -4,6 +4,6 @@
 using namespace Games::IO::Communications;
 
 
-ForegroundBleAccess::ForegroundBleAccess(Host * gHost) : TBleAccess(gHost), RegisterType("ForegroundBleAccess")
+ForegroundBleAccess::ForegroundBleAccess(Host * gHost) : TBleAccess<BleRequest>(gHost), RegisterType("ForegroundBleAccess")
 {
 }
