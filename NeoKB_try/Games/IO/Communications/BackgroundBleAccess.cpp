@@ -9,3 +9,13 @@ BackgroundBleAccess::BackgroundBleAccess(Host * gHost): TBleAccess<BackgroundGet
 {
 	
 }
+
+int BackgroundBleAccess::Queue(CommunicationRequest * communicationRequest)
+{
+	return TCommunicationComponent<BackgroundGetBinaryBleRequest>::Queue(communicationRequest);
+}
+
+int BackgroundBleAccess::Flush()
+{
+	return TCommunicationComponent<BackgroundGetBinaryBleRequest>::Flush();
+}

@@ -19,6 +19,10 @@ namespace Communications{
 
 		BackgroundBleAccess(Host* gHost);
 
+		virtual int Queue(CommunicationRequest* communicationRequest);
+
+		virtual int Flush();
+
 
 	};
 
