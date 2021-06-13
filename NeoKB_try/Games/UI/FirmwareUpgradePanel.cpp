@@ -200,6 +200,7 @@ int FirmwareUpgradePanel::onMessage(MeteoBluetoothMessage * message)
 
 
 				BackgroundGetBinaryBleRequest* getFirmwareBleRequest = new BackgroundGetBinaryBleRequest{
+					firmwareDirectory + string("/Splits/") + fileName + string(".") + to_string(firstSplitToGet),
 					requestMessage,
 					MeteoCommand::AckRequestNewFirmwareSplit,
 					MeteoCommand::NewFirmwareSplitFileSegment,
