@@ -1,7 +1,7 @@
 #include "PostBinaryBleRequest.h"
 
 
-#include "BleAccess.h"
+#include "ForegroundBleAccess.h"
 #include "../../Output/Bluetooths/MeteoContextBluetoothMessage.h"
 #include "../../../Framework/Scenes/SceneMaster.h"
 #include "../../../Util/DataStructure/FileSegmentMap.h"
@@ -44,8 +44,8 @@ int PostBinaryBleRequest::PostBinaryBleRequestMethod::PerformAndWait(BleRequest 
 	PostBinaryBleRequest* thisPostBinaryRequest = dynamic_cast<PostBinaryBleRequest*>(thisRequest);
 
 	/* §ì¥Ø«eªºÂÅªÞmtu */
-	BleAccess* bleAccess = dynamic_cast<BleAccess*>(thisPostBinaryRequest->communicationComponent);
-	BluetoothPhone* bluetoothPhone = dynamic_cast<BluetoothPhone*>(dynamic_cast<BleAccess*>(thisPostBinaryRequest->communicationComponent)->GetPeripheral());
+	ForegroundBleAccess* bleAccess = dynamic_cast<ForegroundBleAccess*>(thisPostBinaryRequest->communicationComponent);
+	BluetoothPhone* bluetoothPhone = dynamic_cast<BluetoothPhone*>(dynamic_cast<ForegroundBleAccess*>(thisPostBinaryRequest->communicationComponent)->GetPeripheral());
 
 
 	bluetoothPhone->PushOutputMessage(postMessage);

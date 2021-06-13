@@ -1,6 +1,6 @@
 #include "GetTextBleRequest.h"
 
-#include "BleAccess.h"
+#include "ForegroundBleAccess.h"
 #include "../../Output/Bluetooths/MeteoContextBluetoothMessage.h"
 #include "../../../Framework/Scenes/SceneMaster.h"
 
@@ -21,8 +21,8 @@ int GetTextBleRequest::GetTextBleRequestMethod::PerformAndWait(BleRequest * this
 
 	GetTextBleRequest* thisGetTextRequest = dynamic_cast<GetTextBleRequest*>(thisRequest);
 
-	BleAccess* bleAccess = dynamic_cast<BleAccess*>(thisGetTextRequest->communicationComponent);
-	BluetoothPhone* bluetoothPhone = dynamic_cast<BluetoothPhone*>(dynamic_cast<BleAccess*>(thisGetTextRequest->communicationComponent)->GetPeripheral());
+	ForegroundBleAccess* bleAccess = dynamic_cast<ForegroundBleAccess*>(thisGetTextRequest->communicationComponent);
+	BluetoothPhone* bluetoothPhone = dynamic_cast<BluetoothPhone*>(dynamic_cast<ForegroundBleAccess*>(thisGetTextRequest->communicationComponent)->GetPeripheral());
 
 	MeteoContextBluetoothMessage* outputMessage = nullptr;
 

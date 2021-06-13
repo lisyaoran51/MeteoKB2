@@ -1,6 +1,6 @@
 #include "BleRequest.h"
 
-#include "BleAccess.h"
+#include "ForegroundBleAccess.h"
 #include "../../Output/Bluetooths/MeteoContextBluetoothMessage.h"
 #include "../../Output/Bluetooths/MeteoFileSegmentBluetoothMessage.h"
 #include <exception>
@@ -44,7 +44,7 @@ int BleRequest::ChooseCommunicationComponentToPerform()
 	map<string, deque<CommunicationRequest*>*>::iterator it;
 
 	for (it = acceptedCommunicationComponentRequestQueues.begin(); it != acceptedCommunicationComponentRequestQueues.end(); ++it) {
-		if (it->first == "BleAccess") {
+		if (it->first == "ForegroundBleAccess") {
 
 			LOG(LogLevel::Depricated) << "int BleRequest::ChooseCommunicationComponentToPerform() : [" << GetTypeName() << "] component found.";
 			it->second->push_back(this);
@@ -59,7 +59,7 @@ int BleRequest::Perform(CommunicationComponent * cComponent)
 {
 	communicationComponent = cComponent;
 
-	BleAccess* bleAccess = dynamic_cast<BleAccess*>(communicationComponent);
+	ForegroundBleAccess* bleAccess = dynamic_cast<ForegroundBleAccess*>(communicationComponent);
 	// 讓ble access把raw message丟進來，好讓我們檢查有沒有ack或return
 	bleAccess->RegisterBleRequest(this);
 

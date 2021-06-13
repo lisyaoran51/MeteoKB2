@@ -1,6 +1,6 @@
 #include "GetBinaryBleRequestHandler.h"
 
-#include "BleAccess.h"
+#include "ForegroundBleAccess.h"
 #include "../../Output/Bluetooths/MeteoContextBluetoothMessage.h"
 #include "../../Output/Bluetooths/MeteoFileSegmentBluetoothMessage.h"
 #include "../../Output/Bluetooths/MeteoAckFileSegmentBluetoothMessage.h"
@@ -89,8 +89,8 @@ int GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait
 	GetBinaryBleRequestHandler* thisGetBinaryBleRequestHandler = dynamic_cast<GetBinaryBleRequestHandler*>(thisRequest);
 
 	/* §ì¥Ø«eªºÂÅªÞmtu */
-	BleAccess* bleAccess = dynamic_cast<BleAccess*>(thisGetBinaryBleRequestHandler->communicationComponent);
-	BluetoothPhone* bluetoothPhone = dynamic_cast<BluetoothPhone*>(dynamic_cast<BleAccess*>(thisGetBinaryBleRequestHandler->communicationComponent)->GetPeripheral());
+	ForegroundBleAccess* bleAccess = dynamic_cast<ForegroundBleAccess*>(thisGetBinaryBleRequestHandler->communicationComponent);
+	BluetoothPhone* bluetoothPhone = dynamic_cast<BluetoothPhone*>(dynamic_cast<ForegroundBleAccess*>(thisGetBinaryBleRequestHandler->communicationComponent)->GetPeripheral());
 
 
 	bool isRequestReceived = false;
