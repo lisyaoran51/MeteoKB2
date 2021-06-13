@@ -31,11 +31,11 @@ namespace Communications{
 
 		TBleAccess(Host* gHost) :TCommunicationComponent<T>(gHost), RegisterType("TBleAccess") {
 
-			bluetoothPhone = TCommunicationComponent<T>::host->GetMainInterface()->GetBluetoothPhone();
-			TCommunicationComponent<T>::communicationState = CommunicationState::Connected;
+			bluetoothPhone = CommunicationComponent::host->GetMainInterface()->GetBluetoothPhone();
+			CommunicationComponent::communicationState = CommunicationState::Connected;
 			// TODO: 在連接時更改連線狀態
 
-			TCommunicationComponent<T>::thisThread = new thread(&TBleAccess::run, this);
+			thisThread = new thread(&TBleAccess::run, this);
 			sleepTimeInMilliSecond = 20;
 			ThreadMaster::GetInstance().AddSimpleThread(this);
 
@@ -43,9 +43,9 @@ namespace Communications{
 			struct sched_param param;
 			memset(&param, 0, sizeof(param));
 			param.sched_priority = sched_get_priority_min(policy);
-			pthread_setschedparam(TCommunicationComponent<T>::thisThread->native_handle(), policy, &param);
+			pthread_setschedparam(thisThread->native_handle(), policy, &param);
 
-			TCommunicationComponent<T>::thisThread->detach();
+			thisThread->detach();
 		}
 
 		/// <summary>
