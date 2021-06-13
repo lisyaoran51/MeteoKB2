@@ -158,7 +158,7 @@ OBJS = Main.o \
 Base.o Game.o \
 Cachable.o ChildAddable.o Container.o HasParent.o Loadable.o LoadStateHandler.o MtoObject.o Schedulable.o Scheduler.o Triggerable.o Updatable.o \
 AdjustableAudioComponent.o AudioComponent.o AudioManager.o \
-BassSample.o BassSampleChannel.o MultiPlaybackBassSampleChannel.o Sample.o SampleChannel.o MultiPlaybackSampleChannel.o DualPlaybackBassSampleChannel.o SampleManager.o \
+BassSample.o BassSampleChannel.o MultiPlaybackBassSampleChannel.o Sample.o SampleChannel.o MultiPlaybackSampleChannel.o DualPlaybackBassSampleChannel.o SampleManager.o DualTrackDualPlaybackBassSampleChannel.o \
 SampleChannelGenerator.o BassSampleChannelGenerator.o \
 BassTrack.o RateSettableBassTrack.o Track.o TrackManager.o \
 ConfigManager.o FrameworkConfigManager.o \
@@ -181,7 +181,8 @@ MeteoConfigManager.o \
 Ruleset.o RulesetInfo.o RulesetStore.o Judgement.o HasHitWindow.o HitWindow.o ReplayRecorder.o ReplayFrame.o ReplayRecorderReceiver.o \
 Modifier.o ConfigurationModifier.o DifficultyModifier.o EventProcessorFilterModifier.o InstrumentModifier.o TimeControllerModifier.o \
 Score.o ScoreProcessor.o \
-BleAccess.o BleRequest.o BleRequestException.o GetTextBleRequest.o PostTextBleRequest.o GetBinaryBleRequest.o GetBinaryBleRequestHandler.o PostBinaryBleRequest.o \
+ForegroundBleAccess.o BackgroundBleAccess.o BleRequest.o BleRequestException.o \
+GetTextBleRequest.o PostTextBleRequest.o GetBinaryBleRequest.o BackgroundGetBinaryBleRequest.o GetBinaryBleRequestHandler.o PostBinaryBleRequest.o \
 IndicatorLightPanelMessage.o SpeedRingPanelMessage.o IndicatorLightOutputer.o SpeedRingOutputer.o \
 RevolveLightRingOutputer.o RevolveLightRingPanelMessage.o FadeLightRingOutputer.o FadeLightRingPanelMessage.o ChangeSpeedOutputer.o ChangeSpeedPanelMessage.o \
 MeteoBluetoothMessage.o MeteoBluetoothOutputer.o MeteoContextBluetoothMessage.o MeteoFileSegmentBluetoothMessage.o MeteoAckFileSegmentBluetoothMessage.o \
