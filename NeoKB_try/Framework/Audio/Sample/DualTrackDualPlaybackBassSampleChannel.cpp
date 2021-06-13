@@ -1,5 +1,9 @@
 #include "DualTrackDualPlaybackBassSampleChannel.h"
 
+#include <cmath>
+
+
+
 using namespace Framework::Audio::Samples;
 
 

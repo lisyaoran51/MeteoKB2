@@ -202,7 +202,7 @@ TimeEvent.o TimeEventProcessor.o TimeControllerController.o \
 RecorderEvent.o RecorderEventProcessor.o RecorderController.o \
 ResourceStoreWorkingSm.o SheetmusicConverter.o SheetmusicManager.o SheetmusicMetadata.o SheetmusicPostprocessor.o SheetmusicStore.o WorkingSheetmusic.o \
 SimpleSmDecoder.o SmDecoder.o FileReader.o Pattern.o PatternGenerator.o \
-SheetmusicSelectPanel.o VolumeController.o SoundSelectPanel.o PowerPanel.o \
+SheetmusicSelectPanel.o VolumeController.o SoundSelectPanel.o PowerPanel.o FirmwareUpgradePanel.o \
 \
 Instrument.o HasPitch.o MeteoPiano.o Piano.o VirtualMeteoPiano.o CompositeMeteoPiano.o \
 SimpleSoundBindingSetDecoder.o SoundBindingSetDecoder.o \
