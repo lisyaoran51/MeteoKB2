@@ -30,11 +30,11 @@ namespace Communications{
 
 		TBleAccess(Host* gHost) :TCommunicationComponent<T>(gHost), RegisterType("TBleAccess") {
 
-			bluetoothPhone = host->GetMainInterface()->GetBluetoothPhone();
-			communicationState = CommunicationState::Connected;
+			bluetoothPhone = TCommunicationComponent<T>::host->GetMainInterface()->GetBluetoothPhone();
+			TCommunicationComponent<T>::communicationState = CommunicationState::Connected;
 			// TODO: 在連接時更改連線狀態
 
-			thisThread = new thread(&BleAccess::run, this);
+			TCommunicationComponent<T>::thisThread = new thread(&BleAccess::run, this);
 			sleepTimeInMilliSecond = 20;
 			ThreadMaster::GetInstance().AddSimpleThread(this);
 
@@ -42,9 +42,9 @@ namespace Communications{
 			struct sched_param param;
 			memset(&param, 0, sizeof(param));
 			param.sched_priority = sched_get_priority_min(policy);
-			pthread_setschedparam(thisThread->native_handle(), policy, &param);
+			pthread_setschedparam(TCommunicationComponent<T>::thisThread->native_handle(), policy, &param);
 
-			thisThread->detach();
+			TCommunicationComponent<T>::thisThread->detach();
 		}
 
 		/// <summary>
@@ -163,10 +163,10 @@ namespace Communications{
 		mutable mutex rawCommandBufferMutex;
 
 		virtual int run() {
-			threadExitRequest = false;
+			CommunicationComponent::threadExitRequest = false;
 
 			while (!threadExitRequest) {
-				switch (communicationState) {
+				switch (CommunicationComponent::communicationState) {
 				case CommunicationState::Failed:
 
 					LOG(LogLevel::Finest) << "BleAccess::run() : state failed.";
@@ -180,7 +180,7 @@ namespace Communications{
 				case CommunicationState::Connecting:
 					LOG(LogLevel::Finest) << "BleAccess::run() : state offline.";
 
-					communicationState = CommunicationState::Connecting;
+					CommunicationComponent::communicationState = CommunicationState::Connecting;
 
 					// 先登入看看，燈的進去就轉為Connected。登入方法是丟一個key過去，讓手機來解碼
 					/*
@@ -225,21 +225,21 @@ namespace Communications{
 
 				LOG(LogLevel::Finest) << "BleAccess::run() : handling reuqest.";
 
-				if (communicationRequests.size() == 0)
+				if (CommunicationComponent::communicationRequests.size() == 0)
 					this_thread::sleep_for(std::chrono::milliseconds(100));
 
 				/* 再執行request */
 				CommunicationRequest* request = nullptr;
-				if (communicationRequests.size() > 0) {
+				if (CommunicationComponent::communicationRequests.size() > 0) {
 					LOG(LogLevel::Finest) << "BleAccess::run() : handling reuqest.";
-					request = communicationRequests.back();
+					request = CommunicationComponent::communicationRequests.back();
 
 					int result = 0;
 
 					result = handleRequest(request);		// 執行handleRequest，result就會變成undeclared
 
 					if (result >= 0) {						// 0:執行成功，1:執行失敗(一樣要把這個request刪掉)
-						communicationRequests.pop_back();
+						CommunicationComponent::communicationRequests.pop_back();
 
 						delete request;
 						request = nullptr;
@@ -264,7 +264,7 @@ namespace Communications{
 
 				communicationRequest->Perform(this);
 
-				failureCount = 0;
+				CommunicationComponent::failureCount = 0;
 
 
 				LOG(LogLevel::Finest) << "BleAccess::handleRequest() : trigger on success.";
@@ -280,14 +280,14 @@ namespace Communications{
 
 				switch (response) {
 				case BleResponseCode::RequestTimeout:
-					failureCount++;
+					CommunicationComponent::failureCount++;
 
 					if (failureCount < 3)
 						return -1;
 
 					// 如果一職timeout，就把所有的request都Fail調
-					communicationState == CommunicationState::Failed;
-					Flush();
+					CommunicationComponent::communicationState == CommunicationState::Failed;
+					CommunicationComponent::Flush();
 					return -1;
 
 					break;
