@@ -3229,4 +3229,12 @@ https://cpp.hotexamples.com/examples/-/-/gatt_db_service_add_characteristic/cpp-
 	找到問題了，要把send notification百在on timeout裡面，避免間隔太短就會壞掉
 	解決了
 	
+6/14
+	用pan的方法，把聲音從右聲道(大力)轉移至左聲道(小力)
 	
+	將30與115音量的音軌放在左和右聲道，將左聲道增幅20分貝，當實際彈奏音量為0.3時，pan為-1，實際彈奏音量為0.7時，pan為1，這樣來調節音色
+	
+	pi強制輸出單聲道的方法：
+	https://www.tinkerboy.xyz/raspberry-pi-downmixing-from-stereo-to-mono-sound-output/
+	
+	寫了背景更新程式、雙聲道調整音色

@@ -1,0 +1,21 @@
+https://www.tinkerboy.xyz/raspberry-pi-downmixing-from-stereo-to-mono-sound-output/
+
+1. sudo nano /etc/asound.conf
+
+# convert stereo to mono output
+
+pcm.monocard{
+  slave.pcm "hw:0"
+  slave.channels 2
+  type route
+  ttable {
+    # Copy both input channels to output channel 0 (Left).
+    0.0 0.5
+    1.0 0.5
+    # Send nothing to output channel 1 (Right).
+    0.1 0.5
+    1.1 0.5
+  }
+}
+
+pcm.!default monocard
