@@ -41,7 +41,7 @@ SampleManager * AudioManager::GetSampleManager(CompositeResourceStore<char*>* sa
 	AddItem(sManager);
 
 	/* 這邊沒有sond binding set提供音量大小，先預設這組音量大小是0.8 */
-	sManager->GetVolume()->SetValue(0.8);
+	sManager->GetVolume()->SetValue(1.0);
 
 	sampleVolume->SetValue(1.0);
 	sManager->AddAdjustment(AdjustableProperty::Volume, sampleVolume);

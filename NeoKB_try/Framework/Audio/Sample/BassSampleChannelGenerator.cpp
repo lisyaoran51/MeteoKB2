@@ -4,6 +4,7 @@
 #include "../../../Instruments/Audio/RepeatSoundBinding.h"
 #include "../../../Instruments/Audio/TwoStageSoundBinding.h"
 #include "../../../Instruments/Pitch.h"
+#include "../../../Instruments/Audio/GradientTimbreSimpleSoundBinding.h"
 #include "BassSample.h"
 #include "BassSampleChannel.h"
 #include "DualTrackDualPlaybackBassSampleChannel.h"
@@ -54,6 +55,13 @@ SampleChannel * BassSampleChannelGenerator::GenerateSampleChannel(SoundBinding *
 			}
 
 			sampleChannel = new DualTrackDualPlaybackBassSampleChannel(sample);
+
+			if (dynamic_cast<GradientTimbreSimpleSoundBinding<Pitch>*>(soundBinding)) {
+				dynamic_cast<DualTrackDualPlaybackBassSampleChannel*>(sampleChannel)->SetTimbreRange(
+					dynamic_cast<GradientTimbreSimpleSoundBinding<Pitch>*>(soundBinding)->gradientTimbreStartVolume,
+					dynamic_cast<GradientTimbreSimpleSoundBinding<Pitch>*>(soundBinding)->gradientTimbreEndVolume
+				);
+			}
 
 			LOG(LogLevel::Fine) << "SampleManager::GetSampleChannel() : simple sample file path found [" << soundBinding->GetFileName() << "].";
 

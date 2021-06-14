@@ -26,6 +26,8 @@ namespace Audio {
 
 		virtual SimpleSoundBinding<Pitch>* GetSoundBinding(Pitch p);
 
+		virtual int SetKeyRange(Pitch sKey, Pitch eKey);
+
 
 	protected:
 

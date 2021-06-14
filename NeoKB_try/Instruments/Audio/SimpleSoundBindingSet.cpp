@@ -25,3 +25,10 @@ SimpleSoundBinding<Pitch>* SimpleSoundBindingSet::GetSoundBinding(Pitch p)
 {
 	return new SimpleSoundBinding<Pitch>(fileName, p);
 }
+
+int SimpleSoundBindingSet::SetKeyRange(Pitch sKey, Pitch eKey)
+{
+	startKey = sKey;
+	endKey = eKey;
+	return 0;
+}

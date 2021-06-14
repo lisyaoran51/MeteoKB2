@@ -4,6 +4,7 @@
 #include "../SimpleSoundBindingSet.h"
 #include "../RepeatSoundBindingSet.h"
 #include "../TwoStageSoundBindingSet.h"
+#include "../GradientTimbreSimpleSoundBindingSet.h"
 
 
 using namespace Instruments::Audio::Format;
@@ -39,6 +40,11 @@ SoundBindingSet * SimpleSoundBindingSetDecoder::handleMode(string & line)
 		case 3:
 			sbs = new TwoStageSoundBindingSet();
 			break;
+		case 4:
+			sbs = new GradientTimbreSimpleSoundBindingSet();
+			LOG(LogLevel::Fine) << "int SimpleSoundBindingSetDecoder::handleGeneral() : create GradientTimbreSimpleSoundBindingSet.";
+			break;
+
 		}
 	}
 
@@ -65,6 +71,12 @@ int SimpleSoundBindingSetDecoder::handleGeneral(SoundBindingSet* sbs, string & l
 	}
 	else if (pair.at(0) == "End") {
 		dynamic_cast<TSoundBindingSet<Pitch>*>(sbs)->endKey = (Pitch)atoi(pair.at(1).c_str());
+	}
+	else if (pair.at(0) == "GradientTimbreStartVolume") {
+		dynamic_cast<GradientTimbreSimpleSoundBindingSet*>(sbs)->gradientTimbreStartVolume = atof(pair.at(1).c_str());
+	}
+	else if (pair.at(0) == "GradientTimbreEndVolume") {
+		dynamic_cast<GradientTimbreSimpleSoundBindingSet*>(sbs)->gradientTimbreEndVolume = atof(pair.at(1).c_str());
 	}
 	else if (pair.at(0) == "SwitchPoint") {
 		if (dynamic_cast<TwoStageSoundBindingSet*>(sbs)) {

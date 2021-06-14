@@ -9,8 +9,8 @@ using namespace Framework::Audio::Samples;
 
 DualTrackDualPlaybackBassSampleChannel::DualTrackDualPlaybackBassSampleChannel(Sample * s) : DualPlaybackBassSampleChannel(s)
 {
-	startVolume = 0.1f;
-	endVolume = 0.7f;
+	gradientTimbreStartVolume = 0.1f;
+	gradientTimbreEndVolume = 0.7f;
 }
 
 int DualTrackDualPlaybackBassSampleChannel::Play()
@@ -38,7 +38,7 @@ int DualTrackDualPlaybackBassSampleChannel::Play()
 
 		// 音質調整公式 pan = -1 + ((volume - 0.3) / (0.7 - 0.3) * 2，最大為1，最小為-1
 
-		float pan = -1.f + (volume->GetValue() - startVolume) / (endVolume - startVolume) * 2.f;
+		float pan = -1.f + (volume->GetValue() - gradientTimbreStartVolume) / (gradientTimbreEndVolume - gradientTimbreStartVolume) * 2.f;
 		if (pan > 1)pan = 1;
 		if (pan < -1)pan = -1;
 
@@ -77,6 +77,14 @@ int DualTrackDualPlaybackBassSampleChannel::Play()
 
 		return 0;
 	}, "Lambda_DualTrackDualPlaybackBassSampleChannel::Play");
+
+	return 0;
+}
+
+int DualTrackDualPlaybackBassSampleChannel::SetTimbreRange(float start, float end)
+{
+	gradientTimbreStartVolume = start;
+	gradientTimbreEndVolume = end;
 
 	return 0;
 }
