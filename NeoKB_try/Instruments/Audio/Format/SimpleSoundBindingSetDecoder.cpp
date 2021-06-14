@@ -73,10 +73,10 @@ int SimpleSoundBindingSetDecoder::handleGeneral(SoundBindingSet* sbs, string & l
 		dynamic_cast<TSoundBindingSet<Pitch>*>(sbs)->endKey = (Pitch)atoi(pair.at(1).c_str());
 	}
 	else if (pair.at(0) == "GradientTimbreStartVolume") {
-		dynamic_cast<GradientTimbreSimpleSoundBindingSet*>(sbs)->gradientTimbreStartVolume = atof(pair.at(1).c_str());
+		dynamic_cast<GradientTimbreSimpleSoundBindingSet*>(sbs)->gradientTimbreStartVolume = stof(pair.at(1).c_str());
 	}
 	else if (pair.at(0) == "GradientTimbreEndVolume") {
-		dynamic_cast<GradientTimbreSimpleSoundBindingSet*>(sbs)->gradientTimbreEndVolume = atof(pair.at(1).c_str());
+		dynamic_cast<GradientTimbreSimpleSoundBindingSet*>(sbs)->gradientTimbreEndVolume = stof(pair.at(1).c_str());
 	}
 	else if (pair.at(0) == "SwitchPoint") {
 		if (dynamic_cast<TwoStageSoundBindingSet*>(sbs)) {
