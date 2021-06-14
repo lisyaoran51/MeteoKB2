@@ -11,10 +11,6 @@ namespace Samples {
 
 	class DualTrackDualPlaybackBassSampleChannel : public DualPlaybackBassSampleChannel {
 
-		int channelID[2];
-
-		int tempPlayingPlayback = 0;
-
 
 	public:
 
