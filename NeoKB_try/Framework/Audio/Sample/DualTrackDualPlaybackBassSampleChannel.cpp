@@ -40,7 +40,7 @@ int DualTrackDualPlaybackBassSampleChannel::Play()
 		if (pan > 1)pan = 1;
 		if (pan < -1)pan = -1;
 
-		LOG(LogLevel::Depricated) << "DualTrackDualPlaybackBassSampleChannel::Play() : last voume [" << tempVolume << "], new volume [" << volume->GetValue() << "].";
+		LOG(LogLevel::Debug) << "DualTrackDualPlaybackBassSampleChannel::Play() : last voume [" << tempVolume << "], new volume [" << volume->GetValue() << "].";
 
 
 		if (tempPlayingPlayback == 0)
