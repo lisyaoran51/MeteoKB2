@@ -13,7 +13,7 @@ DualTrackDualPlaybackBassSampleChannel::DualTrackDualPlaybackBassSampleChannel(S
 
 int DualTrackDualPlaybackBassSampleChannel::Play()
 {
-	LOG(LogLevel::Debug) << "DualTrackDualPlaybackBassSampleChannel::Play() : add play action with volume calculated [" << volumeCalculated->GetValue() << "].";
+	LOG(LogLevel::Depricated) << "DualTrackDualPlaybackBassSampleChannel::Play() : add play action with volume calculated [" << volumeCalculated->GetValue() << "].";
 
 	unique_lock<mutex> uLock(pendingActionMutex);
 	pendingActions.Add(this, [=]() {
@@ -40,7 +40,7 @@ int DualTrackDualPlaybackBassSampleChannel::Play()
 		if (pan > 1)pan = 1;
 		if (pan < -1)pan = -1;
 
-		LOG(LogLevel::Debug) << "DualTrackDualPlaybackBassSampleChannel::Play() : last voume [" << tempVolume << "], new volume [" << volume->GetValue() << "], pan [" << pan << ".";
+		LOG(LogLevel::Depricated) << "DualTrackDualPlaybackBassSampleChannel::Play() : last voume [" << tempVolume << "], new volume [" << volume->GetValue() << "], pan [" << pan << ".";
 
 
 		if (tempPlayingPlayback == 0)
