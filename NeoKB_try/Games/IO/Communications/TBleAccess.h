@@ -288,7 +288,7 @@ namespace Communications{
 
 					// 如果一職timeout，就把所有的request都Fail調
 					CommunicationComponent::communicationState == CommunicationState::Failed;
-					CommunicationComponent::Flush();
+					TCommunicationComponent<T>::Flush();
 					return -1;
 
 					break;
