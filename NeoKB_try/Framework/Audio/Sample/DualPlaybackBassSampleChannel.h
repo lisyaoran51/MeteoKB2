@@ -12,10 +12,6 @@ namespace Samples {
 
 	class DualPlaybackBassSampleChannel : public SampleChannel {
 
-		int channelID[2];
-
-		int tempPlayingPlayback = 0;
-
 
 	public:
 
@@ -39,6 +35,10 @@ namespace Samples {
 		virtual int OnStateChange();
 
 	protected:
+
+		int channelID[2];
+
+		int tempPlayingPlayback = 0;
 
 		double lastVolume = -1;
 		
