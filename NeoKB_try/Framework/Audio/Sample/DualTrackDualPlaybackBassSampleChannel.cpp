@@ -9,6 +9,8 @@ using namespace Framework::Audio::Samples;
 
 DualTrackDualPlaybackBassSampleChannel::DualTrackDualPlaybackBassSampleChannel(Sample * s) : DualPlaybackBassSampleChannel(s)
 {
+	startVolume = 0.15f;
+	endVolume = 0.85f;
 }
 
 int DualTrackDualPlaybackBassSampleChannel::Play()
