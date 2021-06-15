@@ -2,6 +2,7 @@
 
 #include "BassSample.h"
 #include "BassSampleChannelGenerator.h"
+#include <cmath>
 
 using namespace Framework::Audio::Samples;
 
