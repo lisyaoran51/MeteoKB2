@@ -5,6 +5,7 @@
 #include "../RepeatSoundBindingSet.h"
 #include "../TwoStageSoundBindingSet.h"
 #include "../GradientTimbreSimpleSoundBindingSet.h"
+#include "../ReverbGradientTimbreSimpleSoundBindingSet.h"
 
 
 using namespace Instruments::Audio::Format;
@@ -43,6 +44,10 @@ SoundBindingSet * SimpleSoundBindingSetDecoder::handleMode(string & line)
 		case 4:
 			sbs = new GradientTimbreSimpleSoundBindingSet();
 			LOG(LogLevel::Fine) << "int SimpleSoundBindingSetDecoder::handleGeneral() : create GradientTimbreSimpleSoundBindingSet.";
+			break;
+		case 5:
+			sbs = new ReverbGradientTimbreSimpleSoundBindingSet();
+			LOG(LogLevel::Fine) << "int SimpleSoundBindingSetDecoder::handleGeneral() : create ReverbGradientTimbreSimpleSoundBindingSet.";
 			break;
 
 		}

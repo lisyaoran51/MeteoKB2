@@ -5,11 +5,13 @@
 #include "../../../Instruments/Audio/TwoStageSoundBinding.h"
 #include "../../../Instruments/Pitch.h"
 #include "../../../Instruments/Audio/GradientTimbreSimpleSoundBinding.h"
+#include "../../../Instruments/Audio/ReverbGradientTimbreSimpleSoundBinding.h"
 #include "BassSample.h"
 #include "BassSampleChannel.h"
 #include "DualTrackDualPlaybackBassSampleChannel.h"
 #include "RepeatDualPlaybackBassSampleChannel.h"
 #include "TwoStageDualPlaybackBassSampleChannel.h"
+#include "ReverbDualTrackDualPlaybackBassSampleChannel.h"
 
 
 using namespace Framework::Audio::Samples;
@@ -33,9 +35,10 @@ SampleChannel * BassSampleChannelGenerator::GenerateSampleChannel(SoundBinding *
 
 	SampleChannel* sampleChannel = nullptr;
 
+
+
 	/* 從頭播到尾的音色 */
 	if (dynamic_cast<SimpleSoundBinding<Pitch>*>(soundBinding)) {
-
 		LOG(LogLevel::Fine) << "SampleManager::GetSampleChannel() : resource store [" << resourceStore << "].";
 
 		string path = resourceStore->GetFilePath(soundBinding->GetSoundBankName() + "/"s + soundBinding->GetFileName());
@@ -54,7 +57,28 @@ SampleChannel * BassSampleChannelGenerator::GenerateSampleChannel(SoundBinding *
 				sampleCache[path] = sample;
 			}
 
-			sampleChannel = new DualTrackDualPlaybackBassSampleChannel(sample);
+
+			if (dynamic_cast<ReverbGradientTimbreSimpleSoundBinding<Pitch>*>(soundBinding)) {
+
+				Sample* reverbSample = nullptr;
+
+				string reverbPath = resourceStore->GetFilePath(soundBinding->GetSoundBankName() + "/"s + 
+									dynamic_cast<ReverbGradientTimbreSimpleSoundBinding<Pitch>*>(soundBinding)->GetReverbFileName());
+
+				if (sampleCache.find(reverbPath) != sampleCache.end()) {
+					sample = sampleCache[reverbPath];
+				}
+				else {
+					sample = new BassSample((char*)reverbPath.c_str());
+					sampleCache[reverbPath] = sample;
+				}
+
+				sampleChannel = new ReverbDualTrackDualPlaybackBassSampleChannel(sample, reverbSample);
+
+			}
+			else {
+				sampleChannel = new DualTrackDualPlaybackBassSampleChannel(sample);
+			}
 
 			if (dynamic_cast<GradientTimbreSimpleSoundBinding<Pitch>*>(soundBinding)) {
 				dynamic_cast<DualTrackDualPlaybackBassSampleChannel*>(sampleChannel)->SetTimbreRange(
