@@ -16,7 +16,7 @@ ReverbDualTrackDualPlaybackBassSampleChannel::ReverbDualTrackDualPlaybackBassSam
 	reverbChannelID[0] = dynamic_cast<BassSample*>(rSample)->CreateChannel();
 	reverbChannelID[1] = dynamic_cast<BassSample*>(rSample)->CreateChannel();
 
-	reverbFadeoutTime = 0.5;
+	reverbFadeoutTime = 0.8;
 }
 
 ReverbDualTrackDualPlaybackBassSampleChannel::~ReverbDualTrackDualPlaybackBassSampleChannel()
