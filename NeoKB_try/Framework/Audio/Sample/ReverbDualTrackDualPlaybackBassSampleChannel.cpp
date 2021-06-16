@@ -31,7 +31,7 @@ ReverbDualTrackDualPlaybackBassSampleChannel::~ReverbDualTrackDualPlaybackBassSa
 
 int ReverbDualTrackDualPlaybackBassSampleChannel::Play()
 {
-	LOG(LogLevel::Depricated) << "ReverbDualTrackDualPlaybackBassSampleChannel::Play() : add play action with volume calculated [" << volumeCalculated->GetValue() << "].";
+	LOG(LogLevel::Debug) << "ReverbDualTrackDualPlaybackBassSampleChannel::Play() : add play action with volume calculated [" << volumeCalculated->GetValue() << "].";
 
 	unique_lock<mutex> uLock(pendingActionMutex);
 	pendingActions.Add(this, [=]() {
@@ -118,6 +118,9 @@ int ReverbDualTrackDualPlaybackBassSampleChannel::Play()
 
 int ReverbDualTrackDualPlaybackBassSampleChannel::FadeOut()
 {
+	LOG(LogLevel::Debug) << "ReverbDualTrackDualPlaybackBassSampleChannel::FadeOut() : fadeout reverb channel.";
+
+
 	unique_lock<mutex> uLock(pendingActionMutex);
 	pendingActions.Add(this, [=]() {
 		if (BASS_ChannelIsActive(reverbChannelID[0]) == BASS_ACTIVE_PLAYING)
