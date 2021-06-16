@@ -137,6 +137,7 @@ int ReverbDualTrackDualPlaybackBassSampleChannel::FadeOut()
 		return 0;
 
 	}, "Lambda_ReverbDualTrackDualPlaybackBassSampleChannel::FadeOut");
+	uLock.unlock();
 
 	return DualPlaybackBassSampleChannel::FadeOut();
 }
