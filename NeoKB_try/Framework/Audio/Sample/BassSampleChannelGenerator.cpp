@@ -64,6 +64,7 @@ SampleChannel * BassSampleChannelGenerator::GenerateSampleChannel(SoundBinding *
 
 				string reverbPath = resourceStore->GetFilePath(soundBinding->GetSoundBankName() + "/"s + 
 									dynamic_cast<ReverbGradientTimbreSimpleSoundBinding<Pitch>*>(soundBinding)->GetReverbFileName());
+				LOG(LogLevel::Fine) << "SampleManager::GetSampleChannel() : get reverb path [" << reverbPath << "].";
 
 				if (sampleCache.find(reverbPath) != sampleCache.end()) {
 					sample = sampleCache[reverbPath];
@@ -72,6 +73,8 @@ SampleChannel * BassSampleChannelGenerator::GenerateSampleChannel(SoundBinding *
 					sample = new BassSample((char*)reverbPath.c_str());
 					sampleCache[reverbPath] = sample;
 				}
+
+				LOG(LogLevel::Fine) << "SampleManager::GetSampleChannel() : get reverb sample [" << sample << "].";
 
 				sampleChannel = new ReverbDualTrackDualPlaybackBassSampleChannel(sample, reverbSample);
 
