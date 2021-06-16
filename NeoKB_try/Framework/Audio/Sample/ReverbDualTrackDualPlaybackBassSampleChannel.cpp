@@ -11,7 +11,7 @@ using namespace Framework::Audio::Samples;
 ReverbDualTrackDualPlaybackBassSampleChannel::ReverbDualTrackDualPlaybackBassSampleChannel(Sample * s, Sample * rSample) : DualTrackDualPlaybackBassSampleChannel(s)
 {
 	reverbSample = rSample; 
-	LOG(LogLevel::Debug) << "ReverbDualTrackDualPlaybackBassSampleChannel::ReverbDualTrackDualPlaybackBassSampleChannel() : get channels from sample." << rSample;
+	LOG(LogLevel::Fine) << "ReverbDualTrackDualPlaybackBassSampleChannel::ReverbDualTrackDualPlaybackBassSampleChannel() : get channels from sample." << rSample;
 
 	reverbChannelID[0] = dynamic_cast<BassSample*>(rSample)->CreateChannel();
 	reverbChannelID[1] = dynamic_cast<BassSample*>(rSample)->CreateChannel();

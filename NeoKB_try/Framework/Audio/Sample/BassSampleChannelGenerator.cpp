@@ -67,11 +67,11 @@ SampleChannel * BassSampleChannelGenerator::GenerateSampleChannel(SoundBinding *
 				LOG(LogLevel::Fine) << "SampleManager::GetSampleChannel() : get reverb path [" << reverbPath << "].";
 
 				if (sampleCache.find(reverbPath) != sampleCache.end()) {
-					sample = sampleCache[reverbPath];
+					reverbSample = sampleCache[reverbPath];
 				}
 				else {
-					sample = new BassSample((char*)reverbPath.c_str());
-					sampleCache[reverbPath] = sample;
+					reverbSample = new BassSample((char*)reverbPath.c_str());
+					sampleCache[reverbPath] = reverbSample;
 				}
 
 				LOG(LogLevel::Fine) << "SampleManager::GetSampleChannel() : get reverb sample [" << sample << "].";
