@@ -123,11 +123,17 @@ int ReverbDualTrackDualPlaybackBassSampleChannel::FadeOut()
 
 	unique_lock<mutex> uLock(pendingActionMutex);
 	pendingActions.Add(this, [=]() {
+		
+
 		if (BASS_ChannelIsActive(reverbChannelID[0]) == BASS_ACTIVE_PLAYING)
-			BASS_ChannelSlideAttribute(reverbChannelID[0], BASS_ATTRIB_VOL, 0, (DWORD)(reverbFadeoutTime * 1000));
+			if (!BASS_ChannelSlideAttribute(reverbChannelID[0], BASS_ATTRIB_VOL, 0, (DWORD)(reverbFadeoutTime * 1000))) {
+				LOG(LogLevel::Debug) << "ReverbDualTrackDualPlaybackBassSampleChannel::FadeOut() : fail to slide." << BASS_ErrorGetCode();
+			}
 
 		if (BASS_ChannelIsActive(reverbChannelID[1]) == BASS_ACTIVE_PLAYING)
-			BASS_ChannelSlideAttribute(reverbChannelID[1], BASS_ATTRIB_VOL, 0, (DWORD)(reverbFadeoutTime * 1000));
+			if (!BASS_ChannelSlideAttribute(reverbChannelID[1], BASS_ATTRIB_VOL, 0, (DWORD)(reverbFadeoutTime * 1000))) {
+				LOG(LogLevel::Debug) << "ReverbDualTrackDualPlaybackBassSampleChannel::FadeOut() : fail to slide." << BASS_ErrorGetCode();
+			}
 		return 0;
 
 	}, "Lambda_ReverbDualTrackDualPlaybackBassSampleChannel::FadeOut");
