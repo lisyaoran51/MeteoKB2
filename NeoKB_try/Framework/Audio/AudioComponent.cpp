@@ -27,6 +27,9 @@ int AudioComponent::Update()
 		unique_lock<mutex> uLock3(timedActionMutex);
 		for (int i = 0; i < timedActions.size(); i++) {
 
+			LOG(LogLevel::Debug) << "int AudioComponent::Update() : process clock : " << clock;
+			LOG(LogLevel::Debug) << "int AudioComponent::Update() : frame time : " << clock->GetElapsedFrameTime();
+
 			float processedTime = timedActions[i].first - clock->GetElapsedFrameTime();
 			if (processedTime <= 0)
 				timedActions[i].second();
