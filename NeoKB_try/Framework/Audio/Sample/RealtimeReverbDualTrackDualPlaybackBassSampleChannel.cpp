@@ -1,6 +1,7 @@
 #include "RealtimeReverbDualTrackDualPlaybackBassSampleChannel.h"
 
 #include "BassSample.h"
+#include <cmath>
 
 
 using namespace Framework::Audio::Samples;
