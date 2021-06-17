@@ -411,6 +411,8 @@ int Piano::OnDirectKeyDown(pair<PianoAction, int> action)
 			LOG(LogLevel::Depricated) << "Piano::OnDirectKeyDown() : piano action [" << (int)iter->first << "] has sample [" << iter->second << "] by [" << GetTypeName() << "].";
 		}
 	}
+	else
+		return -1; // 無此按鍵
 
 	isPressingMap[action.first] = true;
 	return 0;
@@ -455,6 +457,8 @@ int Piano::OnKeyUp(PianoAction action)
 		for (map<PianoAction, SampleChannel*>::iterator iter = getSamples()->begin(); iter != getSamples()->end(); ++iter) {
 			LOG(LogLevel::Depricated) << "Piano::OnKeyUp() : piano action [" << (int)iter->first << "] has sample [" << iter->second << "] by [" << GetTypeName() << "].";
 		}
+
+		return -1;
 	}
 
 	// 沒踏踏板、有插踏板、沒開啟自動延音
