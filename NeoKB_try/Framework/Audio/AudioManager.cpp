@@ -21,7 +21,7 @@ AudioManager::AudioManager(CompositeResourceStore<char*>* trackStore, CompositeR
 	sampleManager = GetSampleManager(sampleStore);
 	mirrorSampleManager = GetMirrorSampleManager(sampleStore);
 
-	if (!BASS_Init(-1, 44100, 0, 0, NULL))
+	if (!BASS_Init(-1, 22050, 0, 0, NULL))
 		throw runtime_error("AudioManager::AudioManager() :cannot initialize bass.");
 
 	audioThread = new GameThread(bind(&AudioManager::Update, this), "AudioThread");
