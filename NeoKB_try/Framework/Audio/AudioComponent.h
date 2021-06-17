@@ -53,9 +53,13 @@ namespace Audio {
 
 		ActionList<int> permanentActions;
 
+		vector<pair<float,function<int()>>> timedActions;
+
 		mutable mutex pendingActionMutex;
 
 		mutable mutex permanentActionMutex;
+
+		mutable mutex timedActionMutex;
 
 	private:
 

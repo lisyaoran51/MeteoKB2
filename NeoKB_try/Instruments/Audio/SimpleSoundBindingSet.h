@@ -28,9 +28,11 @@ namespace Audio {
 
 		virtual int SetKeyRange(Pitch sKey, Pitch eKey);
 
+		virtual int SetIsApplyReverb(bool value);
 
 	protected:
 
+		bool isApplyReverb = false;
 
 	};
 

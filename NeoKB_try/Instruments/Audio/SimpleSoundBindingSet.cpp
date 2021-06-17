@@ -32,3 +32,9 @@ int SimpleSoundBindingSet::SetKeyRange(Pitch sKey, Pitch eKey)
 	endKey = eKey;
 	return 0;
 }
+
+int SimpleSoundBindingSet::SetIsApplyReverb(bool value)
+{
+	isApplyReverb = value;
+	return 0;
+}

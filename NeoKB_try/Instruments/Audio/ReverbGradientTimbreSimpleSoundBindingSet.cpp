@@ -31,9 +31,3 @@ GradientTimbreSimpleSoundBinding<Pitch>* ReverbGradientTimbreSimpleSoundBindingS
 
 	return soundBinding;
 }
-
-int ReverbGradientTimbreSimpleSoundBindingSet::SetIsApplyReverb(bool value)
-{
-	isApplyReverb = value;
-	return 0;
-}

@@ -21,6 +21,23 @@ int AudioComponent::Update()
 		unique_lock<mutex> uLock2(permanentActionMutex);
 		permanentActions.Trigger();
 	}
+	
+	if (timedActions.size() > 0) {
+		vector<pair<float, function<int()>>> tempTimedActions;
+		unique_lock<mutex> uLock3(timedActionMutex);
+		for (int i = 0; i < timedActions.size(); i++) {
+
+			float processedTime = timedActions[i].first - clock->GetElapsedFrameTime();
+			if (processedTime <= 0)
+				timedActions[i].second();
+			else {
+				tempTimedActions.push_back(pair<float, function<int()>>(processedTime, timedActions[i].second));
+			}
+		}
+		timedActions.clear();
+		timedActions.assign(tempTimedActions.begin(), tempTimedActions.end());
+	}
+	
 
 	return 0;
 }

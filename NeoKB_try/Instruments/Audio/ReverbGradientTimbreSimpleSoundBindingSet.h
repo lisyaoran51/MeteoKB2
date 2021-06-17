@@ -21,11 +21,7 @@ namespace Audio {
 
 		virtual GradientTimbreSimpleSoundBinding<Pitch>* GetSoundBinding(Pitch p);
 
-		virtual int SetIsApplyReverb(bool value);
-
 	protected:
-
-		bool isApplyReverb = false;
 
 	};
 

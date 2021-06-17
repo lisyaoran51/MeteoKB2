@@ -158,7 +158,8 @@ OBJS = Main.o \
 Base.o Game.o \
 Cachable.o ChildAddable.o Container.o HasParent.o Loadable.o LoadStateHandler.o MtoObject.o Schedulable.o Scheduler.o Triggerable.o Updatable.o \
 AdjustableAudioComponent.o AudioComponent.o AudioManager.o \
-BassSample.o BassSampleChannel.o MultiPlaybackBassSampleChannel.o Sample.o SampleChannel.o MultiPlaybackSampleChannel.o DualPlaybackBassSampleChannel.o SampleManager.o DualTrackDualPlaybackBassSampleChannel.o ReverbDualTrackDualPlaybackBassSampleChannel.o \
+BassSample.o BassSampleChannel.o MultiPlaybackBassSampleChannel.o Sample.o SampleChannel.o MultiPlaybackSampleChannel.o DualPlaybackBassSampleChannel.o \
+SampleManager.o DualTrackDualPlaybackBassSampleChannel.o ReverbDualTrackDualPlaybackBassSampleChannel.o RealtimeReverbDualTrackDualPlaybackBassSampleChannel.o \
 SampleChannelGenerator.o BassSampleChannelGenerator.o \
 BassTrack.o RateSettableBassTrack.o Track.o TrackManager.o \
 ConfigManager.o FrameworkConfigManager.o \
@@ -206,7 +207,8 @@ SheetmusicSelectPanel.o VolumeController.o SoundSelectPanel.o PowerPanel.o Firmw
 \
 Instrument.o HasPitch.o MeteoPiano.o Piano.o VirtualMeteoPiano.o CompositeMeteoPiano.o \
 SimpleSoundBindingSetDecoder.o SoundBindingSetDecoder.o \
-RepeatSoundBindingSet.o SimpleSoundBindingSet.o SoundBinding.o SoundBindingSet.o TwoStageSoundBindingSet.o GradientTimbreSimpleSoundBindingSet.o ReverbGradientTimbreSimpleSoundBindingSet.o \
+RepeatSoundBindingSet.o SimpleSoundBindingSet.o SoundBinding.o SoundBindingSet.o TwoStageSoundBindingSet.o GradientTimbreSimpleSoundBindingSet.o \
+ReverbGradientTimbreSimpleSoundBindingSet.o RealtimeReverbGradientTimbreSimpleSoundBindingSet.o \
 PianoInputManager.o PianoPitchBindingSet.o InstrumentInputHandler.o \
 \
 FileSystem.o ProgramInitializer.o StringSplitter.o FileSegmentMap.o CommandPasser.o FileContentGetter.o \

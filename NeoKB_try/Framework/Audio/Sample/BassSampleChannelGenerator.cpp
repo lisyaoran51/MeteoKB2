@@ -5,13 +5,13 @@
 #include "../../../Instruments/Audio/TwoStageSoundBinding.h"
 #include "../../../Instruments/Pitch.h"
 #include "../../../Instruments/Audio/GradientTimbreSimpleSoundBinding.h"
-#include "../../../Instruments/Audio/ReverbGradientTimbreSimpleSoundBinding.h"
+#include "../../../Instruments/Audio/RealtimeReverbGradientTimbreSimpleSoundBinding.h"
 #include "BassSample.h"
 #include "BassSampleChannel.h"
 #include "DualTrackDualPlaybackBassSampleChannel.h"
 #include "RepeatDualPlaybackBassSampleChannel.h"
 #include "TwoStageDualPlaybackBassSampleChannel.h"
-#include "ReverbDualTrackDualPlaybackBassSampleChannel.h"
+#include "RealtimeReverbDualTrackDualPlaybackBassSampleChannel.h"
 
 
 using namespace Framework::Audio::Samples;
@@ -58,25 +58,9 @@ SampleChannel * BassSampleChannelGenerator::GenerateSampleChannel(SoundBinding *
 			}
 
 
-			if (dynamic_cast<ReverbGradientTimbreSimpleSoundBinding<Pitch>*>(soundBinding)) {
+			if (dynamic_cast<RealtimeReverbGradientTimbreSimpleSoundBinding<Pitch>*>(soundBinding)) {
 
-				Sample* reverbSample = nullptr;
-
-				string reverbPath = resourceStore->GetFilePath(soundBinding->GetSoundBankName() + "/"s + 
-									dynamic_cast<ReverbGradientTimbreSimpleSoundBinding<Pitch>*>(soundBinding)->GetReverbFileName());
-				LOG(LogLevel::Fine) << "SampleManager::GetSampleChannel() : get reverb path [" << reverbPath << "].";
-
-				if (sampleCache.find(reverbPath) != sampleCache.end()) {
-					reverbSample = sampleCache[reverbPath];
-				}
-				else {
-					reverbSample = new BassSample((char*)reverbPath.c_str());
-					sampleCache[reverbPath] = reverbSample;
-				}
-
-				LOG(LogLevel::Fine) << "SampleManager::GetSampleChannel() : get reverb sample [" << sample << "].";
-
-				sampleChannel = new ReverbDualTrackDualPlaybackBassSampleChannel(sample, reverbSample);
+				sampleChannel = new RealtimeReverbDualTrackDualPlaybackBassSampleChannel(sample);
 
 			}
 			else {
