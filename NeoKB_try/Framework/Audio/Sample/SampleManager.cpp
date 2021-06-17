@@ -108,6 +108,9 @@ SampleChannel * SampleManager::GetSampleChannel(SoundBinding * soundBinding)
 {
 	LOG(LogLevel::Fine) << "SampleManager::GetSampleChannel() : action [" << soundBinding->action << "] : file name [" << soundBinding->GetSoundBankName() << "].";
 
+	LOG(LogLevel::Fine) << "SampleManager::GetSampleChannel() : clock [" << clock << "].";
+
+
 	SampleChannel* sampleChannel = nullptr;
 
 
