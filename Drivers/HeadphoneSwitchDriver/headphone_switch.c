@@ -87,5 +87,5 @@ void cleanup_module(void)
 }
 
 MODULE_LICENSE("GPL");
-MODULE_AUTHOR("ITtraining.com.tw");
-MODULE_DESCRIPTION("A Simple GPIO Device Driver module for RaspPi");
+MODULE_AUTHOR("meteo.com.tw");
+MODULE_DESCRIPTION("A headphone plug in detect module for Meteo");

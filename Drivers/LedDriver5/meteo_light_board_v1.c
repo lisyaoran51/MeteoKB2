@@ -31,8 +31,8 @@
 #define MY_OUTPUT 20
 
 MODULE_LICENSE("GPL");
-MODULE_AUTHOR("ITtraining.com.tw");
-MODULE_DESCRIPTION("A Simple GPIO Device Driver module for RaspPi");
+MODULE_AUTHOR("meteo.com.tw");
+MODULE_DESCRIPTION("A led matrix driver for meteo");
 
 
 #include<linux/ktime.h>
@@ -453,7 +453,7 @@ static int light_board_open(struct inode *inod, struct file *filp)
 
 	major = imajor(inod);
 	minor = iminor(inod);
-	printk("\n*****Some body is opening me at major %d  minor %d*****\n",major, minor);
+	//printk("\n*****Some body is opening me at major %d  minor %d*****\n",major, minor);
 
 	return 0;
 }
@@ -470,7 +470,7 @@ static int light_board_close(struct inode *inod, struct file *filp)
 	major = MAJOR(filp->f_dentry->d_inode->i_rdev);
 	minor = MINOR(filp->f_dentry->d_inode->i_rdev);
 #endif
-	printk("*****Some body is closing me at major %d*****\n",minor);
+	//printk("*****Some body is closing me at major %d*****\n",minor);
 
 
 	return 0;
