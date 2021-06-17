@@ -3,6 +3,10 @@
 
 
 #include "GradientTimbreSimpleSoundBinding.h"
+#include <vector>
+
+
+using namespace std;
 
 
 namespace Instruments {
