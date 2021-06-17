@@ -47,6 +47,8 @@ int AudioComponent::Update()
 
 int AudioComponent::SetClock(FrameBasedClock * c)
 {
+	LOG(LogLevel::Debug) << "clock set [" << c << "]";
+
 	clock = c;
 
 	return 0;
