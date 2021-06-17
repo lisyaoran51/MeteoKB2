@@ -51,8 +51,8 @@ int SoundSelectPanel::load(FrameworkConfigManager * f, Instrument* i, AudioManag
 		/* 測試用，之後要刪掉改用bluetooth */
 		TSoundBindingSet<Pitch>* soundBindingSet = dynamic_cast<TSoundBindingSet<Pitch>*>(audioManager->GetSampleManager()->GetSoundBindingSets()->at(1));
 
-		//if (dynamic_cast<ReverbGradientTimbreSimpleSoundBindingSet*>(audioManager->GetSampleManager()->GetSoundBindingSets()->at(1)))
-		//	dynamic_cast<ReverbGradientTimbreSimpleSoundBindingSet*>(audioManager->GetSampleManager()->GetSoundBindingSets()->at(1))->SetIsApplyReverb(true);
+		if (dynamic_cast<GradientTimbreSimpleSoundBindingSet*>(audioManager->GetSampleManager()->GetSoundBindingSets()->at(1)))
+			dynamic_cast<GradientTimbreSimpleSoundBindingSet*>(audioManager->GetSampleManager()->GetSoundBindingSets()->at(1))->SetIsApplyReverb(true);
 
 		dynamic_cast<Piano*>(instrument)->SwitchSoundBindings(soundBindingSet);
 	
