@@ -38,7 +38,7 @@ SampleManager * AudioManager::GetSampleManager(CompositeResourceStore<char*>* sa
 	if (sampleStore == nullptr)
 		return sampleManager;
 
-
+	LOG(LogLevel::Debug) << "AudioManager::GetSampleManager() : sample manager clock [" << clock << "].";
 	SampleManager* sManager = new SampleManager(sampleStore);
 	AddItem(sManager);
 
