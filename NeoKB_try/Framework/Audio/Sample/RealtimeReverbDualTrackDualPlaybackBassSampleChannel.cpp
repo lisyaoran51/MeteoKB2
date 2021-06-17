@@ -12,11 +12,11 @@ RealtimeReverbDualTrackDualPlaybackBassSampleChannel::RealtimeReverbDualTrackDua
 	for(int i = 0; i < 5; i++)
 		reverbChannelID[i] = dynamic_cast<BassSample*>(sample)->CreateChannel();
 
-	//reverbVolumes[0] = 0.3;
-	//reverbVolumes[0] = 0.35;
-	//reverbVolumes[0] = 0.4;
-	//reverbVolumes[0] = 0.45;
-	//reverbVolumes[0] = 0.5;
+	reverbVolumes[0] = 0.05;
+	reverbVolumes[0] = 0.06;
+	reverbVolumes[0] = 0.07;
+	reverbVolumes[0] = 0.08;
+	reverbVolumes[0] = 0.09;
 }
 
 RealtimeReverbDualTrackDualPlaybackBassSampleChannel::~RealtimeReverbDualTrackDualPlaybackBassSampleChannel()
