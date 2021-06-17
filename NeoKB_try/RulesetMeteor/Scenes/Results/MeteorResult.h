@@ -64,7 +64,7 @@ namespace Results{
 
 		string writeGameRecord();
 
-		virtual int onEntering(Scene* lastScene);
+		virtual int onEntered(Scene* lastScene);
 
 		virtual int onMessage(MeteoBluetoothMessage* message);
 

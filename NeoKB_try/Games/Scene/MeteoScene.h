@@ -49,8 +49,14 @@ namespace Scenes {
 
 		virtual int onExpire();
 
+		/// <summary>
+		/// 不能在on entering裡面使用任何parent資源，會當掉
+		/// </summary>
 		virtual int onEntering(Scene* lastScene);
 
+		/// <summary>
+		/// on entered是百在add child後面執行，所以已經取得所有parent資源，可以使用
+		/// </summary>
 		virtual int onEntered(Scene* lastScene);
 
 		virtual int onExiting(Scene* lastScene);

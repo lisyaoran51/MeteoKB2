@@ -132,12 +132,12 @@ int MeteorRulesetExecutor::load(MeteorTimeController * t, Instrument* i, ReplayR
 	sort(sectionTime.begin(), sectionTime.end());
 
 	for(int i = 0; i < sectionTime.size(); i++)
-		LOG(LogLevel::Debug) << "MeteorRulesetExecutor::load() : section [" << i << "] [" << sectionTime[i] << "].";
+		LOG(LogLevel::Depricated) << "MeteorRulesetExecutor::load() : section [" << i << "] [" << sectionTime[i] << "].";
 
 	t->SetSectionTime(&sectionTime);
 
 
-	LOG(LogLevel::Fine) << "MeteorRulesetExecutor::load() : end.";
+	LOG(LogLevel::Finer) << "MeteorRulesetExecutor::load() : end.";
 	return 0;
 }
 

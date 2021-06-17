@@ -552,9 +552,9 @@ string MeteorResult::writeGameRecord()
 	return filePath;
 }
 
-int MeteorResult::onEntering(Scene * lastScene)
+int MeteorResult::onEntered(Scene * lastScene)
 {
-	MeteoScene::onEntering(lastScene);
+	MeteoScene::onEntered(lastScene);
 
 	LOG(LogLevel::Info) << "MeteorResult::onEntering : pushing game over message.";
 
@@ -590,7 +590,7 @@ int MeteorResult::onEntering(Scene * lastScene)
 	scoreMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
 
 
-	LOG(LogLevel::Debug) << "MeteorResult::onEntering : Set Message Over." << outputManager;
+	LOG(LogLevel::Depricated) << "MeteorResult::onEntering : Set Message Over." << outputManager;
 
 	outputManager->PushMessage(scoreMessage);
 

@@ -1,9 +1,13 @@
 #include "CompositeMeteoPiano.h"
 
 #include "../Framework/Audio/Sample/BassSampleChannelGenerator.h"
+#include "../Games/Output/Bluetooths/MeteoContextBluetoothMessage.h"
+
+
 
 using namespace Instruments;
 using namespace Framework::Audio::Samples;
+using namespace Games::Output::Bluetooths;
 
 
 
@@ -109,6 +113,15 @@ int CompositeMeteoPiano::SwitchSoundBindings(TSoundBindingSet<Pitch>* sBindingSe
 		BassSampleChannelGenerator::ClearOldSamples();
 		return 0;
 	});
+
+	MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::KeyboardFinishSwitchInstrument);
+	json returnContext;
+
+	returnContext["Name"] = sBindingSet->fileName;
+	meteoContextBluetoothMessage->SetContextInJson(returnContext);
+	meteoContextBluetoothMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
+
+	outputManager->PushMessage(meteoContextBluetoothMessage);
 
 	return 0;
 }
