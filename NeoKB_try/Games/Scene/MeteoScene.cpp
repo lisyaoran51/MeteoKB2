@@ -25,6 +25,7 @@ int MeteoScene::load()
 	if (!o)
 		throw runtime_error("int  MeteoScene<T>::load() : OutputManager not found in cache.");
 
+	LOG(LogLevel::Debug) << "MeteoScene::load() : [" << GetTypeName() << "] get output manager " <<  o << ".";
 
 	return load(game, gameBase, o);
 }
