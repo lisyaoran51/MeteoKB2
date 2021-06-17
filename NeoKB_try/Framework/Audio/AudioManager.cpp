@@ -28,7 +28,10 @@ AudioManager::AudioManager(CompositeResourceStore<char*>* trackStore, CompositeR
 	audioThread->SetMaxUpdateHz(500);
 	audioThread->Start();
 	clock = audioThread->GetClock();
-	LOG(LogLevel::Debug) << "AudioManager::AudioManager() : get clock [" << clock << "].";
+
+	sampleManager->SetClock(clock);
+	mirrorSampleManager->SetClock(clock);
+	LOG(LogLevel::Depricated) << "AudioManager::AudioManager() : get clock [" << clock << "].";
 
 }
 
