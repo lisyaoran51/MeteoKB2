@@ -590,7 +590,7 @@ int MeteorResult::onEntered(Scene * lastScene)
 	scoreMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
 
 
-	LOG(LogLevel::Depricated) << "MeteorResult::onEntering : Set Message Over." << outputManager;
+	LOG(LogLevel::Debug) << "MeteorResult::onEntering : Set Message Over." << outputManager;
 
 	outputManager->PushMessage(scoreMessage);
 
