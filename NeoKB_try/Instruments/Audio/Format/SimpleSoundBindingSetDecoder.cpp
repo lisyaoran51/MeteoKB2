@@ -4,7 +4,8 @@
 #include "../SimpleSoundBindingSet.h"
 #include "../RepeatSoundBindingSet.h"
 #include "../TwoStageSoundBindingSet.h"
-#include "../GradientTimbreSimpleSoundBindingSet.h"
+#include "../RealtimeReverbGradientTimbreSimpleSoundBindingSet.h"
+#include "../RealtimeReverbGradientTimbreSimpleSoundBindingSet.h"
 #include "../ReverbGradientTimbreSimpleSoundBindingSet.h"
 
 
@@ -42,7 +43,7 @@ SoundBindingSet * SimpleSoundBindingSetDecoder::handleMode(string & line)
 			sbs = new TwoStageSoundBindingSet();
 			break;
 		case 4:
-			sbs = new GradientTimbreSimpleSoundBindingSet();
+			sbs = new RealtimeReverbGradientTimbreSimpleSoundBindingSet();
 			LOG(LogLevel::Fine) << "int SimpleSoundBindingSetDecoder::handleGeneral() : create GradientTimbreSimpleSoundBindingSet.";
 			break;
 		case 5:
