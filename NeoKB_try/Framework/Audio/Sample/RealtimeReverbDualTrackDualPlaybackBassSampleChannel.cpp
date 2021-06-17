@@ -102,9 +102,9 @@ int RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Play()
 
 	/* 分別建立所有reverb */
 	unique_lock<mutex> uLock2(timedActionMutex);
+	timedActions.clear();
 	for (int i = 0; i < 5; i++) {
 
-		timedActions.clear();
 
 		timedActions.push_back(pair<float, function<int()>>(predelay + delays[i], [=]() {
 
