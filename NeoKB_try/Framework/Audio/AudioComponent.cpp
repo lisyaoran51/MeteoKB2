@@ -27,8 +27,8 @@ int AudioComponent::Update()
 		unique_lock<mutex> uLock3(timedActionMutex);
 		for (int i = 0; i < timedActions.size(); i++) {
 
-			LOG(LogLevel::Debug) << "int AudioComponent::Update() : process clock : " << clock;
-			LOG(LogLevel::Debug) << "int AudioComponent::Update() : frame time : " << clock->GetElapsedFrameTime();
+			LOG(LogLevel::Depricated) << "int AudioComponent::Update() : process clock : " << clock;
+			LOG(LogLevel::Depricated) << "int AudioComponent::Update() : frame time : " << clock->GetElapsedFrameTime();
 
 			float processedTime = timedActions[i].first - clock->GetElapsedFrameTime();
 			if (processedTime <= 0)
@@ -47,7 +47,7 @@ int AudioComponent::Update()
 
 int AudioComponent::SetClock(FrameBasedClock * c)
 {
-	LOG(LogLevel::Debug) << "clock set [" << c << "]";
+	LOG(LogLevel::Depricated) << "clock set [" << c << "]";
 
 	clock = c;
 

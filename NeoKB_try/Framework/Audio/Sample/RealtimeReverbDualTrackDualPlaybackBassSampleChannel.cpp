@@ -127,8 +127,11 @@ int RealtimeReverbDualTrackDualPlaybackBassSampleChannel::FadeOut()
 {
 	LOG(LogLevel::Depricated) << "RealtimeReverbDualTrackDualPlaybackBassSampleChannel::FadeOut() : fadeout reverb channel.";
 
+	unique_lock<mutex> uLock(timedActionMutex);
+	timedActions.clear();
+	uLock.unlock();
 
-	unique_lock<mutex> uLock(pendingActionMutex);
+	unique_lock<mutex> uLock2(pendingActionMutex);
 	pendingActions.Add(this, [=]() {
 
 		for (int i = 0; i < 5; i++) {
@@ -140,7 +143,7 @@ int RealtimeReverbDualTrackDualPlaybackBassSampleChannel::FadeOut()
 		return 0;
 
 	}, "Lambda_RealtimeReverbDualTrackDualPlaybackBassSampleChannel::FadeOut");
-	uLock.unlock();
+	uLock2.unlock();
 
 	return DualPlaybackBassSampleChannel::FadeOut();
 }
