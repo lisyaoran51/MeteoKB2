@@ -17,6 +17,8 @@ RealtimeReverbDualTrackDualPlaybackBassSampleChannel::RealtimeReverbDualTrackDua
 	reverbVolumes[0] = 0.07;
 	reverbVolumes[0] = 0.08;
 	reverbVolumes[0] = 0.09;
+
+	predelay = 0.05f;
 }
 
 RealtimeReverbDualTrackDualPlaybackBassSampleChannel::~RealtimeReverbDualTrackDualPlaybackBassSampleChannel()

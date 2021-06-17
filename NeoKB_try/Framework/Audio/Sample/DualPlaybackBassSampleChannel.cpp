@@ -13,6 +13,7 @@ DualPlaybackBassSampleChannel::DualPlaybackBassSampleChannel(Sample * s) : Sampl
 	volume->SetValue(0);
 	channelID[0] = dynamic_cast<BassSample*>(sample)->CreateChannel();
 	channelID[1] = dynamic_cast<BassSample*>(sample)->CreateChannel();
+	dualSwitchFadeoutTime = 0.05f;
 }
 
 DualPlaybackBassSampleChannel::~DualPlaybackBassSampleChannel()
