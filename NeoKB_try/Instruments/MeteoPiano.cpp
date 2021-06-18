@@ -77,9 +77,13 @@ int MeteoPiano::MoveOctave(PianoPitchMovement m)
 			state = MeteoPianoPitchState::Lowered;
 			indicatorLightMessage = new IndicatorLightPanelMessage(14, true);
 			outputManager->PushMessage(indicatorLightMessage);
+			indicatorLightMessage = new IndicatorLightPanelMessage(3, false);
+			outputManager->PushMessage(indicatorLightMessage);
 			break;
 		case MeteoPianoPitchState::Raised:
 			state = MeteoPianoPitchState::None;
+			indicatorLightMessage = new IndicatorLightPanelMessage(14, false);
+			outputManager->PushMessage(indicatorLightMessage);
 			indicatorLightMessage = new IndicatorLightPanelMessage(3, false);
 			outputManager->PushMessage(indicatorLightMessage);
 			break;
@@ -91,9 +95,13 @@ int MeteoPiano::MoveOctave(PianoPitchMovement m)
 			state = MeteoPianoPitchState::None;
 			indicatorLightMessage = new IndicatorLightPanelMessage(14, false);
 			outputManager->PushMessage(indicatorLightMessage);
+			indicatorLightMessage = new IndicatorLightPanelMessage(3, false);
+			outputManager->PushMessage(indicatorLightMessage);
 			break;
 		case MeteoPianoPitchState::None:
 			state = MeteoPianoPitchState::Raised;
+			indicatorLightMessage = new IndicatorLightPanelMessage(14, false);
+			outputManager->PushMessage(indicatorLightMessage);
 			indicatorLightMessage = new IndicatorLightPanelMessage(3, true);
 			outputManager->PushMessage(indicatorLightMessage);
 			break;
