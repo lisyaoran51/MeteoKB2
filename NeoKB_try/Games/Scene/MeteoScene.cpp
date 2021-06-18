@@ -37,7 +37,8 @@ int MeteoScene::load(MeteoGame * game, MeteoGameBase * gameBase, OutputManager* 
 	rulesetInfo.BindTo(game->GetRuleset());
 	workingSm.BindTo(gameBase->GetWorkingSm());
 	outputManager = o;
-	
+
+	LOG(LogLevel::Debug) << "MeteoScene::load() : [" << GetTypeName() << "] get output manager " << outputManager << ".";
 
 	return 0;
 }
