@@ -51,6 +51,8 @@ int MeteorResult::load()
 int MeteorResult::load(OutputManager * o, Instrument * i, Storage* s, CommunicationAccess* c)
 {
 	//outputManager = o;
+	LOG(LogLevel::Debug) << "MeteorResult::load : load output manager." << o;
+
 	piano = dynamic_cast<Piano*>(i);
 
 	if (piano == nullptr) {
@@ -554,9 +556,9 @@ string MeteorResult::writeGameRecord()
 
 int MeteorResult::onEntered(Scene * lastScene)
 {
+	LOG(LogLevel::Info) << "MeteorResult::onEntering : pushing game over message." << outputManager;
 	MeteoScene::onEntered(lastScene);
 
-	LOG(LogLevel::Info) << "MeteorResult::onEntering : pushing game over message.";
 
 	// bluetooth±À°eµ²ªG
 	MeteoContextBluetoothMessage* scoreMessage = new MeteoContextBluetoothMessage(MeteoCommand::FinalScore);
