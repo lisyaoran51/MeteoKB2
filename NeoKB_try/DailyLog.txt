@@ -3238,3 +3238,24 @@ https://cpp.hotexamples.com/examples/-/-/gatt_db_service_add_characteristic/cpp-
 	https://www.tinkerboy.xyz/raspberry-pi-downmixing-from-stereo-to-mono-sound-output/
 	
 	寫了背景更新程式、雙聲道調整音色
+	
+	調整GPU記憶體
+	https://sites.google.com/site/raspberrypitw/application-1/cfgmem
+	
+	調整swap大小
+	https://wpitchoune.net/tricks/raspberry_pi3_increase_swap_size.html
+	
+6/15
+	bass_fx網站
+	http://jobnik.net/
+	https://github.com/cnsuhao/crystal-picnic/blob/3c1f2b4a92842a23908d8b084bc09f41ae425a19/tools/apps/midiplayer/sound-bass.cpp
+	http://www.un4seen.com/forum/?topic=9444.0
+	https://github.com/nazawa/Seaurchin/blob/fffa13602ce6ee4413cd34c845293dd7ecd0a375/Seaurchin/SoundManager.cpp
+	
+	
+6/17
+	5個每個隔0.02秒的-25db音軌就可以做出reverb
+	
+	結果設定用predelay=0.05，每個reverb channel間隔0.03，音量依序為0.05 0.06 0.07 0.08 0.09，可以做出差不多的reverb
+	用reverb會讓Cpu usage到150%，不過不用擔心，四核心可以跑到400%
+	
