@@ -51,7 +51,7 @@ int MeteorResult::load()
 int MeteorResult::load(OutputManager * o, Instrument * i, Storage* s, CommunicationAccess* c)
 {
 	//outputManager = o;
-	LOG(LogLevel::Debug) << "MeteorResult::load : load output manager." << o;
+	LOG(LogLevel::Debug) << "MeteorResult::load : load output manager." << o << " " << outputManager;
 
 	piano = dynamic_cast<Piano*>(i);
 
