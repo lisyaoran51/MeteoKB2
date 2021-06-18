@@ -20,15 +20,11 @@ namespace Results{
 
 		int load();
 
-		int load(OutputManager* o);
-
 	public:
 
 		RecordResult(Score* s);
 
 	protected:
-
-		OutputManager* outputManager = nullptr;
 
 		virtual int onEntering(Scene* lastScene);
 

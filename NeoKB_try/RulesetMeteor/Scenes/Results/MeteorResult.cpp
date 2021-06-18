@@ -27,10 +27,6 @@ using namespace Util;
 
 int MeteorResult::load()
 {
-	OutputManager * o = GetCache<OutputManager>("OutputManager");
-	if (!o)
-		throw runtime_error("MeteorResult::load() : OutputManager not found in cache.");
-
 	Instrument * i = GetCache<Instrument>("Instrument");
 	if (!i)
 		throw runtime_error("MeteorResult::load() : Instrument not found in cache.");
@@ -45,13 +41,11 @@ int MeteorResult::load()
 	if (!c)
 		throw runtime_error("MeteorResult::load() : CommunicationAccess not found in cache.");
 
-	return load(o, i, s, c);
+	return load(i, s, c);
 }
 
-int MeteorResult::load(OutputManager * o, Instrument * i, Storage* s, CommunicationAccess* c)
+int MeteorResult::load(Instrument * i, Storage* s, CommunicationAccess* c)
 {
-	//outputManager = o;
-	LOG(LogLevel::Debug) << "MeteorResult::load : load output manager." << o << " " << outputManager;
 
 	piano = dynamic_cast<Piano*>(i);
 

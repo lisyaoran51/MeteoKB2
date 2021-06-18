@@ -9,17 +9,6 @@ using namespace Games::Output::Bluetooths;
 
 int RecordResult::load()
 {
-	OutputManager * o = GetCache<OutputManager>("OutputManager");
-	if (!o)
-		throw runtime_error("MeteorResult::load() : OutputManager not found in cache.");
-
-	return load(o);
-}
-
-int RecordResult::load(OutputManager * o)
-{
-	outputManager = o;
-	return 0;
 }
 
 RecordResult::RecordResult(Score * s) : Result(s), RegisterType("RecordResult")

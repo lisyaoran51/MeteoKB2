@@ -26,7 +26,7 @@ namespace Results{
 
 		int load();
 
-		int load(OutputManager* o, Instrument* i, Storage* s, CommunicationAccess* c);
+		int load(Instrument* i, Storage* s, CommunicationAccess* c);
 
 		/// <summary>
 		/// ¥h0¡A
@@ -53,8 +53,6 @@ namespace Results{
 		MeteorResult(Score* s);
 
 	protected:
-
-		OutputManager* outputManager = nullptr;
 
 		Piano* piano = nullptr;
 
