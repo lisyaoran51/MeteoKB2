@@ -163,30 +163,36 @@ int CompositeMeteoPiano::loadAndMapPitches()
 
 int CompositeMeteoPiano::OnKeyDown(pair<PianoAction, int> action)
 {
-	return GetMeteoPiano()->OnKeyDown(action);
+	//return GetMeteoPiano()->OnKeyDown(action);
+	return 0;
 }
 
 int CompositeMeteoPiano::OnKeyUp(PianoAction action)
 {
-	return GetMeteoPiano()->OnKeyUp(action);
+	//return GetMeteoPiano()->OnKeyUp(action);
+	return 0;
 }
 
 int CompositeMeteoPiano::OnButtonDown(PianoAction action)
 {
-	return GetMeteoPiano()->OnButtonDown(action);
+	//return GetMeteoPiano()->OnButtonDown(action);
+	return 0;
 }
 
 int CompositeMeteoPiano::OnButtonUp(PianoAction action)
 {
-	return GetMeteoPiano()->OnButtonUp(action);
+	//return GetMeteoPiano()->OnButtonUp(action);
+	return 0;
 }
 
 int CompositeMeteoPiano::OnKnobTurn(pair<PianoAction, int> action)
 {
-	return GetMeteoPiano()->OnKnobTurn(action);
+	//return GetMeteoPiano()->OnKnobTurn(action);
+	return 0;
 }
 
 int CompositeMeteoPiano::OnSlide(pair<PianoAction, int> action)
 {
-	return GetMeteoPiano()->OnSlide(action);
+	//return GetMeteoPiano()->OnSlide(action);
+	return 0;
 }

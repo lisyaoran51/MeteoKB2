@@ -4,12 +4,14 @@
 #include "Pitch.h"
 #include "../Games/Output/Bluetooths/MeteoContextBluetoothMessage.h"
 #include "Input/PianoPitchBindingSet.h"
+#include "../Games/Output/Panels/IndicatorLightPanelMessage.h"
 
 
 
 using namespace Instruments;
 using namespace Instruments::Input;
 using namespace Games::Output::Bluetooths;
+using namespace Games::Output::Panels;
 
 
 
@@ -63,7 +65,7 @@ int MeteoPiano::SetGameControllingPitchState(bool value)
 
 int MeteoPiano::MoveOctave(PianoPitchMovement m)
 {
-
+	IndicatorLightPanelMessage* indicatorLightMessage = nullptr;
 	switch (m) {
 	case PianoPitchMovement::None:
 		break;
@@ -73,9 +75,13 @@ int MeteoPiano::MoveOctave(PianoPitchMovement m)
 			break;
 		case MeteoPianoPitchState::None:
 			state = MeteoPianoPitchState::Lowered;
+			indicatorLightMessage = new IndicatorLightPanelMessage(14, true);
+			outputManager->PushMessage(indicatorLightMessage);
 			break;
 		case MeteoPianoPitchState::Raised:
 			state = MeteoPianoPitchState::None;
+			indicatorLightMessage = new IndicatorLightPanelMessage(3, false);
+			outputManager->PushMessage(indicatorLightMessage);
 			break;
 		}
 		break;
@@ -83,9 +89,13 @@ int MeteoPiano::MoveOctave(PianoPitchMovement m)
 		switch (state) {
 		case MeteoPianoPitchState::Lowered:
 			state = MeteoPianoPitchState::None;
+			indicatorLightMessage = new IndicatorLightPanelMessage(14, false);
+			outputManager->PushMessage(indicatorLightMessage);
 			break;
 		case MeteoPianoPitchState::None:
 			state = MeteoPianoPitchState::Raised;
+			indicatorLightMessage = new IndicatorLightPanelMessage(3, true);
+			outputManager->PushMessage(indicatorLightMessage);
 			break;
 		case MeteoPianoPitchState::Raised:
 			break;
