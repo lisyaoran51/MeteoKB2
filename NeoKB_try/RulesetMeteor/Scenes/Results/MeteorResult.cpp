@@ -675,6 +675,8 @@ int MeteorResult::onEntered(Scene * lastScene)
 
 int MeteorResult::onMessage(MeteoBluetoothMessage * message)
 {
+	Result::onMessage(message);
+
 	MeteoContextBluetoothMessage* contextMessage = dynamic_cast<MeteoContextBluetoothMessage*>(message);
 
 	if (contextMessage == nullptr) {
