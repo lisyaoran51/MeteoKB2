@@ -17,6 +17,9 @@ int CompositeMeteoPiano::load()
 
 	AddChild(virtualMeteoPiano);
 
+
+	LOG(LogLevel::Debug) << "CompositeMeteoPiano::load() : initialize with host [" << host << "].";
+
 	instrumentConfigManager = new InstrumentConfigManager();
 	instrumentConfigManager->Initialize(host->GetStorage());
 
