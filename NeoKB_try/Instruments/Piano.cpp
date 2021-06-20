@@ -503,12 +503,13 @@ int Piano::OnButtonDown(PianoAction action)
 
 	/* 沿音 */
 	if (action == PianoAction::Sustain) {
-		
+
+		LOG(LogLevel::Depricated) << "Piano::OnButtonDown() : change sustain type. temp type is [" << (int)sustainType <<"]";
 
 		if (sustainType == SustainType::GameControllingSustain) {
 
 			// TODO: 回傳失敗，遊戲控制的情況下無法切換game control sustain
-			LOG(LogLevel::Depricated) << "Piano::OnButtonDown() : cannot switch to auto sustain when game controlling.";
+			LOG(LogLevel::Debug) << "Piano::OnButtonDown() : cannot switch to auto sustain when game controlling.";
 		}
 		else {
 			MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::KeyboardIOEvent);
