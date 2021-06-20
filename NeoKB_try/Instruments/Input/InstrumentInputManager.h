@@ -1,20 +1,20 @@
 #ifndef INSTRUMENT_INPUT_MANAGER_H
 #define INSTRUMENT_INPUT_MANAGER_H
 
-#include "../../Framework/Input/KeyBindings/KeyBindingInputManager.h"
+#include "../../Framework/Input/Messages/MessageInputManager.h"
 #include "PianoAction.h"
 #include "../Instrument.h"
 
 
-using namespace Framework::Input::KeyBindings;
+using namespace Framework::Input::Messages;
 using namespace Instruments;
 
 
 namespace Instruments {
 namespace Input{
 
-	template<typename T>
-	class InstrumentInputManager : public KeyBindingInputManager<T> {
+	template<typename T, typename TMessage>
+	class InstrumentInputManager : public MessageInputManager<T, TMessage> {
 
 	public:
 

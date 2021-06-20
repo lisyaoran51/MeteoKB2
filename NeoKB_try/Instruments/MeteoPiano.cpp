@@ -40,7 +40,8 @@ int MeteoPiano::load()
 	}, "MeteoPiano::Lambda_OnSleep");
 
 	// TODO: 用偵測的，然後需要跟auto sustain和game controlling sustain切換
-	sustainType = SustainType::SustainPedal;
+
+	sustainType = SustainType::AutoSustain;
 
 	return 0;
 }

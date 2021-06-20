@@ -5,10 +5,15 @@
 #include "../Framework/Input/KeyBindings/KeyBinding.h"
 #include "Input/PianoAction.h"
 #include "../Framework/Output/OutputManager.h"
+#include "../Framework/Input/Messages/MessageHandler.h"
+#include "../Games/Output/Bluetooths/MeteoBluetoothMessage.h"
+
 
 using namespace Framework::Input::KeyBindings;
 using namespace Instruments::Input;
 using namespace Framework::Output;
+using namespace Framework::Input::Messages;
+using namespace Games::Output::Bluetooths;
 
 
 namespace Instruments {
@@ -46,7 +51,7 @@ namespace Instruments {
 	};
 
 
-	class Piano : public TInstrument<PianoAction> {
+	class Piano : public TInstrument<PianoAction>, public MessageHandler<MeteoBluetoothMessage> {
 
 		int load();
 
@@ -112,7 +117,7 @@ namespace Instruments {
 		///	</summary>
 		//bool isAutoSustain = false;
 
-		bool isSensitive = true;
+		bool isSensitive = false;
 
 		/// <summary>
 		/// 看哪個鍵正在按下

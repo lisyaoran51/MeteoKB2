@@ -4,11 +4,14 @@
 #include "Pitch.h"
 #include "Input/PianoInputManager.h"
 #include "../Games/Output/Bluetooths/MeteoContextBluetoothMessage.h"
+#include "math.h"
+#include "../Games/Output/Panels/IndicatorLightPanelMessage.h"
 
 
 using namespace Instruments;
 using namespace Instruments::Input;
 using namespace Games::Output::Bluetooths;
+using namespace Games::Output::Panels;
 
 
 
@@ -43,7 +46,7 @@ int Piano::load(OutputManager * o)
 
 		ChangeSustainType(SustainType::None);
 		resetState();
-		isSensitive = true;
+		isSensitive = false;
 
 		return 0;
 	}, "Piano::Lambda_OnSleep");
@@ -354,6 +357,20 @@ int Piano::ChangeSustainType(SustainType sType)
 {
 	sustainType = sType;
 
+	if (sustainType == SustainType::AutoSustain) {
+
+		IndicatorLightPanelMessage* indicatorLightMessage = nullptr;
+		indicatorLightMessage = new IndicatorLightPanelMessage(2, true);
+		outputManager->PushMessage(indicatorLightMessage);
+	}
+	else {
+
+		IndicatorLightPanelMessage* indicatorLightMessage = nullptr;
+		indicatorLightMessage = new IndicatorLightPanelMessage(2, false);
+		outputManager->PushMessage(indicatorLightMessage);
+
+	}
+
 	// TODO: 用output manager把更改sustain type送到mcu
 
 	return 0;
@@ -406,7 +423,7 @@ int Piano::OnDirectKeyDown(pair<PianoAction, int> action)
 
 	//getSamples()->at(action.first)->Play();
 	if (getSamples()->find(action.first) != getSamples()->end()) {
-		getSamples()->at(action.first)->Play(isSensitive ? double(action.second) / 128.0 : 0.8);
+		getSamples()->at(action.first)->Play(isSensitive ? sqrt(double(action.second) / 128.0) : double(action.second) / 128.0);
 		for (map<PianoAction, SampleChannel*>::iterator iter = getSamples()->begin(); iter != getSamples()->end(); ++iter) {
 			LOG(LogLevel::Depricated) << "Piano::OnDirectKeyDown() : piano action [" << (int)iter->first << "] has sample [" << iter->second << "] by [" << GetTypeName() << "].";
 		}
@@ -516,15 +533,22 @@ int Piano::OnButtonDown(PianoAction action)
 	}
 	/* 力度 */
 	if (action == PianoAction::Sensitivity) {
+
+		IndicatorLightPanelMessage* indicatorLightMessage = nullptr;
 		//MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::PianoPressSensitiveButton);
 		if (isSensitive == true) {
 			isSensitive = false;
+			indicatorLightMessage = new IndicatorLightPanelMessage(1, false);
+			outputManager->PushMessage(indicatorLightMessage);
+
 			//json context;
 			//context["State"] = false;
 			//meteoContextBluetoothMessage->SetContextInJson(context);
 		}
 		else {
 			isSensitive = true;
+			indicatorLightMessage = new IndicatorLightPanelMessage(1, true);
+			outputManager->PushMessage(indicatorLightMessage);
 			//json context;
 			//context["State"] = false;
 			//meteoContextBluetoothMessage->SetContextInJson(context);
@@ -535,10 +559,7 @@ int Piano::OnButtonDown(PianoAction action)
 
 	/* 插入踏板 */
 	if (action == PianoAction::SustainPedalPlugin) {
-		if (sustainType != SustainType::AutoSustain) {
-			sustainType = SustainType::SustainPedal;
-			// mainInterface->GetPanel()->ChangeState(PianoAction::SustainButton, false);
-		}
+		ChangeSustainType(SustainType::SustainPedal);
 
 	}
 
@@ -593,10 +614,7 @@ int Piano::OnButtonUp(PianoAction action)
 	}
 
 	if (action == PianoAction::SustainPedalPlugin) {
-		if (sustainType != SustainType::AutoSustain) {
-			sustainType = SustainType::None;
-			// mainInterface->GetPanel()->ChangeState(PianoAction::SustainButton, false);
-		}
+		ChangeSustainType(SustainType::AutoSustain);
 	}
 
 	
