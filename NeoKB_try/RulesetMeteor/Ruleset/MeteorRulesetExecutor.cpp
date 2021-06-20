@@ -106,6 +106,8 @@ int MeteorRulesetExecutor::load(MeteorTimeController * t, Instrument* i, ReplayR
 
 		/* 如果插著踏板，就一律不用game control sustain */
 		if (compositeMeteoPiano->GetSustainType() != SustainType::SustainPedal) {
+			LOG(LogLevel::Debug) << "MeteorRulesetExecutor::load() : set sustain type to game control.";
+
 			compositeMeteoPiano->ChangeSustainType(SustainType::GameControllingSustain);
 			r->SetGameControllingSustainPedal(true);
 		}
@@ -113,6 +115,9 @@ int MeteorRulesetExecutor::load(MeteorTimeController * t, Instrument* i, ReplayR
 		compositeMeteoPiano->GetVirtualMeteoPiano()->SetVirtualMeteoPianoSustainType(VirtualMeteoPianoSustainType::Pedal);
 	}
 	else {
+		LOG(LogLevel::Debug) << "MeteorRulesetExecutor::load() : set sustain type to auto.";
+		compositeMeteoPiano->ChangeSustainType(SustainType::AutoSustain);
+		r->SetGameControllingSustainPedal(false);
 		compositeMeteoPiano->GetVirtualMeteoPiano()->SetVirtualMeteoPianoSustainType(VirtualMeteoPianoSustainType::Auto);
 	}
 
