@@ -32,7 +32,7 @@ Games/Timing:\
 Games/UI:\
 Games/Users:\
 \
-Instruments:Instruments/Audio:Instruments/Audio/Format:Instruments/Input:Instruments/Input/Handlers:\
+Instruments:Instruments/Audio:Instruments/Audio/Format:Instruments/Input:Instruments/Input/Handlers:Instruments/Configurations:\
 \
 Util:Util/DataStructure:\
 \
@@ -97,7 +97,7 @@ INCLUDE = -IFramwork -IFramework/Allocation -IFramework/Allocation/Hierachal -IF
 -IGames/UI \
 -IGames/Users \
 \
--IInstruments -IInstruments/Audio -IInstruments/Audio/Format -IInstruments/Input -IInstruments/Input/Handlers \
+-IInstruments -IInstruments/Audio -IInstruments/Audio/Format -IInstruments/Input -IInstruments/Input/Handlers -IInstruments/Configurations \
 \
 -IUtil -IUtil/DataStructure \
 \
@@ -206,6 +206,7 @@ SimpleSmDecoder.o SmDecoder.o FileReader.o Pattern.o PatternGenerator.o \
 SheetmusicSelectPanel.o VolumeController.o SoundSelectPanel.o PowerPanel.o FirmwareUpgradePanel.o \
 \
 Instrument.o HasPitch.o MeteoPiano.o Piano.o VirtualMeteoPiano.o CompositeMeteoPiano.o \
+InstrumentConfigManager.o \
 SimpleSoundBindingSetDecoder.o SoundBindingSetDecoder.o \
 RepeatSoundBindingSet.o SimpleSoundBindingSet.o SoundBinding.o SoundBindingSet.o TwoStageSoundBindingSet.o GradientTimbreSimpleSoundBindingSet.o \
 ReverbGradientTimbreSimpleSoundBindingSet.o RealtimeReverbGradientTimbreSimpleSoundBindingSet.o \
