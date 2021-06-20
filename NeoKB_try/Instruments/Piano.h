@@ -104,8 +104,6 @@ namespace Instruments {
 
 		virtual int OnSlide(pair<PianoAction, int> action);
 
-		virtual int onMessage(MeteoBluetoothMessage* message);
-
 	protected:
 
 		OutputManager* outputManager = nullptr;
@@ -136,6 +134,8 @@ namespace Instruments {
 		virtual int resetState();
 
 		virtual int update();
+
+		virtual int onMessage(MeteoBluetoothMessage* message);
 	};
 
 	

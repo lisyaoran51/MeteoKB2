@@ -120,7 +120,7 @@ int MeteoScene::onSuspending(Scene * lastScene)
 
 int MeteoScene::onResuming(Scene * lastScene)
 {
-	LOG(LogLevel::Debug) << "MeteoScene::onResuming() : resuming [" << GetTypeName() << "].";
+	LOG(LogLevel::Depricated) << "MeteoScene::onResuming() : resuming [" << GetTypeName() << "].";
 	isMessageActive = true;
 
 	MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::EnterScene);
