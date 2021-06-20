@@ -340,8 +340,15 @@ int MeteoMcuV1::pushPanelState(InputKey key, int value)
 		if (!panelState->GetPanelState()->ContainSlider(key))
 			panelState->GetPanelState()->AddSlider(make_pair(key, value));
 	}
-	else {
-		// plugin還沒寫
+	else if (int(key) < 2000){
+		if (value == 1) {
+			panelState->GetPanelState()->AddButton(pair<InputKey, bool>(key, true));
+			LOG(LogLevel::Depricated) << "MeteoMcuV1::pushPanelState() : add plugin [" << int(key) << ",1].";
+		}
+		else {
+			LOG(LogLevel::Depricated) << "MeteoMcuV1::pushPanelState() : add plugin [" << int(key) << ",0].";
+			panelState->GetPanelState()->AddButton(pair<InputKey, bool>(key, false));
+		}
 	}
 
 
