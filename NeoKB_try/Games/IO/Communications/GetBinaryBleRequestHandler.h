@@ -17,6 +17,7 @@ namespace Communications{
 	public:
 
 		GetBinaryBleRequestHandler(string dPath,
+			string fName,
 			MeteoCommand gCommand,
 			MeteoCommand ackGetCommand,
 			MeteoCommand tCommand,
@@ -50,6 +51,7 @@ namespace Communications{
 			/// 資料夾位置最後面部要加上斜線
 			/// </summary>
 			GetBinaryBleRequestHandlerMethod(string dPath,
+				string fName,
 				MeteoCommand gCommand,
 				MeteoCommand aGetCommand,
 				MeteoCommand tCommand,

@@ -23,10 +23,11 @@ using namespace std::experimental::filesystem;
 
 
 
-GetBinaryBleRequestHandler::GetBinaryBleRequestHandler(string dPath, MeteoCommand gCommand, MeteoCommand ackGetCommand, MeteoCommand tCommand, MeteoCommand aTransferCommand, MeteoCommand fCommand, MeteoCommand rRetransferCommand, MeteoCommand aFinishCommand) : RegisterType("GetBinaryBleRequestHandler")
+GetBinaryBleRequestHandler::GetBinaryBleRequestHandler(string dPath, string fName, MeteoCommand gCommand, MeteoCommand ackGetCommand, MeteoCommand tCommand, MeteoCommand aTransferCommand, MeteoCommand fCommand, MeteoCommand rRetransferCommand, MeteoCommand aFinishCommand) : RegisterType("GetBinaryBleRequestHandler")
 {
 	GetBinaryBleRequestHandlerMethod* method = new GetBinaryBleRequestHandlerMethod(
 		dPath,
+		fName,
 		gCommand,
 		ackGetCommand,
 		tCommand,
@@ -77,9 +78,17 @@ int GetBinaryBleRequestHandler::success()
 	return 0;
 }
 
-GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::GetBinaryBleRequestHandlerMethod(string dPath, MeteoCommand gCommand, MeteoCommand aGetCommand, MeteoCommand tCommand, MeteoCommand aTransferCommand, MeteoCommand fCommand, MeteoCommand rRetransferCommand, MeteoCommand aFinishCommand)
+GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::GetBinaryBleRequestHandlerMethod(string dPath, string fName, MeteoCommand gCommand, MeteoCommand aGetCommand, MeteoCommand tCommand, MeteoCommand aTransferCommand, MeteoCommand fCommand, MeteoCommand rRetransferCommand, MeteoCommand aFinishCommand)
 {
-
+	directoryPath = dPath;
+	fileName = fName;
+	getCommand = gCommand; 
+	ackGetCommand = aGetCommand;
+	transferCommand = tCommand;
+	ackTransferCommand = aTransferCommand;
+	finishCommand = fCommand;
+	requestRetransferCommand = rRetransferCommand; 
+	ackFinishCommand = aFinishCommand;
 
 }
 
@@ -114,8 +123,10 @@ int GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait
 			if (dynamic_cast<MeteoContextBluetoothMessage*>(message)->GetCommand() == getCommand) {
 
 				/* 查看是否有檔案 */
-				fileName = dynamic_cast<MeteoContextBluetoothMessage*>(message)->GetContextInJson()["FileName"].get<string>();
+				string requestFileName = dynamic_cast<MeteoContextBluetoothMessage*>(message)->GetContextInJson()["FileName"].get<string>();
 
+				if (requestFileName != fileName)
+					continue;
 
 				MeteoContextBluetoothMessage* ackMessage = new MeteoContextBluetoothMessage(ackGetCommand);
 				json messageContext;
@@ -398,8 +409,8 @@ int GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::Fail(BleReques
 {
 	LOG(LogLevel::Debug) << "GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::Fail() : fail to handle get file request.";
 
-	if (fileName == "")
-		return 0;
+	//if (fileName == "")
+	//	return 0;
 
 	GetBinaryBleRequestHandler* thisGetBinaryBleRequestHandler = dynamic_cast<GetBinaryBleRequestHandler*>(thisRequest);
 	if ((thisGetBinaryBleRequestHandler->isCallbackByScene && SceneMaster::GetInstance().CheckScene(thisGetBinaryBleRequestHandler->callbackScene)) ||
@@ -413,8 +424,8 @@ int GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::Success(BleReq
 {
 	LOG(LogLevel::Debug) << "GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::Fail() : handle get file request success.";
 
-	if (fileName == "")
-		return 0;
+	//if (fileName == "")
+	//	return 0;
 
 	GetBinaryBleRequestHandler* thisGetBinaryBleRequestHandler = dynamic_cast<GetBinaryBleRequestHandler*>(thisRequest);
 	if ((thisGetBinaryBleRequestHandler->isCallbackByScene && SceneMaster::GetInstance().CheckScene(thisGetBinaryBleRequestHandler->callbackScene)) ||

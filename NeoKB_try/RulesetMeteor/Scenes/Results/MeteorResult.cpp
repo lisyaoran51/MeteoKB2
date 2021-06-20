@@ -627,6 +627,7 @@ int MeteorResult::onEntered(Scene * lastScene)
 
 	GetBinaryBleRequestHandler* getPlayRecordBleRequestHandler = new GetBinaryBleRequestHandler(
 		directoryPath,
+		fileName,
 		MeteoCommand::RequestPlayRecordFile,
 		MeteoCommand::AckRequestPlayRecordFile,
 		MeteoCommand::PlayRecordFileSegment,
