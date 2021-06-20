@@ -578,6 +578,7 @@ int Piano::OnButtonDown(PianoAction action)
 	/* ´¡¤J½ñªO */
 	if (action == PianoAction::SustainPedalPlugin) {
 		ChangeSustainType(SustainType::SustainPedal);
+		LOG(LogLevel::Debug) << "Piano::OnButtonDown() : switch to sustain pedal.";
 
 	}
 
@@ -611,6 +612,9 @@ int Piano::OnButtonUp(PianoAction action)
 			isSetTempReleasing = false;
 
 		if (sustainType == SustainType::SustainPedal) {
+
+			LOG(LogLevel::Debug) << "Piano::OnButtonUp() : release pedal.";
+
 			map<PianoAction, bool>::iterator it;
 			for (it = isPressingMap.begin(); it != isPressingMap.end(); it++) {
 				if (!it->second) {
