@@ -288,6 +288,11 @@ vector<KeyBinding*>* Piano::GetDefaultkeyBindings(int variant)
 		bindings->push_back(new KeyBinding((InputKey)i, i));
 	}
 
+	/* General Button */
+	for (int i = (int)InputKey::Power; i <= (int)InputKey::Speed; i++) {
+		bindings->push_back(new KeyBinding((InputKey)i, i));
+	}
+
 	/* Panel */
 	for (int i = (int)InputKey::RaiseOctave; i <= (int)InputKey::LowerOctave; i++) {
 		bindings->push_back(new KeyBinding((InputKey)i, i));

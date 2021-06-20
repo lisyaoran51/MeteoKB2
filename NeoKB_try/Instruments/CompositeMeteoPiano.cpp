@@ -86,6 +86,8 @@ vector<KeyBinding*>* CompositeMeteoPiano::GetDefaultkeyBindings(int variant)
 
 int CompositeMeteoPiano::ChangeSustainType(SustainType sType)
 {
+	LOG(LogLevel::Debug) << "CompositeMeteoPiano::ChangeSustainType() : change type to [" << (int)sType << "].";
+
 	return meteoPiano->ChangeSustainType(sType);
 }
 
