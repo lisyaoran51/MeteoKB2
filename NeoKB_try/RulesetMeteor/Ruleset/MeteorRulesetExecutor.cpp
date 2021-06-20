@@ -171,7 +171,7 @@ MeteorRulesetExecutor::MeteorRulesetExecutor(): RegisterType("MeteorRulesetExecu
 
 MeteorRulesetExecutor::~MeteorRulesetExecutor()
 {
-	LOG(LogLevel::Debug) << "MeteorRulesetExecutor::~MeteorRulesetExecutor() : turn off game control sustain." << compositeMeteoPiano->GetSustainType();
+	LOG(LogLevel::Debug) << "MeteorRulesetExecutor::~MeteorRulesetExecutor() : turn off game control sustain." << (int)compositeMeteoPiano->GetSustainType();
 	compositeMeteoPiano->SetGameControllingPitchState(false);
 	if(compositeMeteoPiano->GetSustainType() == SustainType::GameControllingSustain)
 		compositeMeteoPiano->ChangeSustainType(SustainType::AutoSustain);
