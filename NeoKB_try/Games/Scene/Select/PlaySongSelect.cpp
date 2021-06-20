@@ -40,6 +40,7 @@ int PlaySongSelect::onResuming(Scene * lastScene)
 	smSelectPanel->GetSelectedModifiers()->GetValue()->clear();
 	
 
+	LOG(LogLevel::Debug) << "int PlaySongSelect::onResuming() : go back to song select end.";
 	return MeteoScene::onResuming(lastScene);
 }
 
