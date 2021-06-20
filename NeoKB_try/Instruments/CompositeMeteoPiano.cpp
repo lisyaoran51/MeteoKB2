@@ -41,6 +41,7 @@ CompositeMeteoPiano::CompositeMeteoPiano(vector<string>& args) : MeteoPiano(args
 
 int CompositeMeteoPiano::SetHost(Host * h)
 {
+	MeteoPiano::SetHost(h);
 	meteoPiano->SetHost(h);
 
 	instrumentInputHandler = new InstrumentInputHandler(this);
