@@ -17,6 +17,13 @@ int CompositeMeteoPiano::load()
 
 	AddChild(virtualMeteoPiano);
 
+	instrumentConfigManager = new InstrumentConfigManager();
+	instrumentConfigManager->Initialize(host->GetStorage());
+
+	int sType = 2;
+	instrumentConfigManager->Get(InstrumentSetting::InitialSustainType, &sType);
+	ChangeSustainType((SustainType)sType);
+
 	return 0;
 }
 
@@ -86,6 +93,12 @@ SustainType CompositeMeteoPiano::GetSustainType()
 int CompositeMeteoPiano::ControlSustainPedal(bool down)
 {
 	return meteoPiano->ControlSustainPedal(down);
+}
+
+int CompositeMeteoPiano::SetSensitiveLevel(int sLevel)
+{
+	meteoPiano->SetSensitiveLevel(sLevel);
+	return 0;
 }
 
 int CompositeMeteoPiano::SetGameControllingPitchState(bool value)

@@ -413,6 +413,12 @@ int Piano::ControlSustainPedal(bool down)
 	return 0;
 }
 
+int Piano::SetSensitiveLevel(int sLevel)
+{
+	sensitiveLevel = sLevel;
+	return 0;
+}
+
 int Piano::OnDirectKeyDown(pair<PianoAction, int> action)
 {
 	if (isSleeping)
@@ -423,7 +429,7 @@ int Piano::OnDirectKeyDown(pair<PianoAction, int> action)
 
 	//getSamples()->at(action.first)->Play();
 	if (getSamples()->find(action.first) != getSamples()->end()) {
-		getSamples()->at(action.first)->Play(isSensitive ? sqrt(double(action.second) / 128.0) : double(action.second) / 128.0);
+		getSamples()->at(action.first)->Play(isSensitive ? pow(double(action.second) / 128.0, 1.0 / sensitiveLevel) : double(action.second) / 128.0);
 		for (map<PianoAction, SampleChannel*>::iterator iter = getSamples()->begin(); iter != getSamples()->end(); ++iter) {
 			LOG(LogLevel::Depricated) << "Piano::OnDirectKeyDown() : piano action [" << (int)iter->first << "] has sample [" << iter->second << "] by [" << GetTypeName() << "].";
 		}
@@ -644,5 +650,10 @@ int Piano::OnSlide(pair<PianoAction, int> action)
 		// 調整音量
 	}
 
+	return 0;
+}
+
+int Piano::onMessage(MeteoBluetoothMessage * message)
+{
 	return 0;
 }

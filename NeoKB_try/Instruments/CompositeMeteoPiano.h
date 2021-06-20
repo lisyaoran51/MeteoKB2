@@ -5,8 +5,11 @@
 #include "MeteoPiano.h"
 #include "VirtualMeteoPiano.h"
 #include "Input/Handlers/InstrumentInputHandler.h"
+#include "Configurations/InstrumentConfigManager.h"
+
 
 using namespace Instruments::Input::Handlers;
+using namespace Instruments::Configurations;
 
 
 namespace Instruments {
@@ -59,6 +62,8 @@ namespace Instruments {
 
 		virtual int ControlSustainPedal(bool down);
 
+		virtual int SetSensitiveLevel(int sLevel);
+
 		/// <summary>
 		///	MeteoPianoPitchState用這個改，piano不知道有哪幾種State，只能控制現在要往上移還是往下移
 		/// </summary>
@@ -93,6 +98,8 @@ namespace Instruments {
 		VirtualMeteoPiano* virtualMeteoPiano = nullptr;
 
 		InstrumentInputHandler* instrumentInputHandler = nullptr;
+
+		InstrumentConfigManager* instrumentConfigManager = nullptr;
 
 		/// <summary>
 		///	照理來說這個會在load on complete時執行，應該piano和virtual piano都會執行一次，為什麼這邊還要特別在讓他們執行一次？

@@ -85,6 +85,8 @@ namespace Instruments {
 
 		virtual int MoveOctave(PianoPitchMovement m) = 0;
 
+		virtual int SetSensitiveLevel(int sLevel);
+
 		/// <summary>
 		/// 在keyboard輸入瞬間立刻執行的on key down，避免鋼琴音有延遲
 		///	</summary>
@@ -102,6 +104,8 @@ namespace Instruments {
 
 		virtual int OnSlide(pair<PianoAction, int> action);
 
+		virtual int onMessage(MeteoBluetoothMessage* message);
+
 	protected:
 
 		OutputManager* outputManager = nullptr;
@@ -118,6 +122,11 @@ namespace Instruments {
 		//bool isAutoSustain = false;
 
 		bool isSensitive = false;
+
+		/// <summary>
+		/// 如果按下sensitive，會開幾次根號
+		///	</summary>
+		int sensitiveLevel = 2;
 
 		/// <summary>
 		/// 看哪個鍵正在按下

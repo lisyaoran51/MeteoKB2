@@ -41,8 +41,8 @@ int MeteoPiano::load()
 
 	// TODO: 用偵測的，然後需要跟auto sustain和game controlling sustain切換
 
-	sustainType = SustainType::AutoSustain;
-
+	//sustainType = SustainType::AutoSustain;
+	// 移到instrument config
 	return 0;
 }
 
