@@ -221,6 +221,8 @@ int MeteoScene::onMessage(MeteoBluetoothMessage * message)
 
 		Exit();
 
+		LOG(LogLevel::Debug) << "MeteoScene::onMessage() : go back to scene [" << targetScene->GetTypeName() << "].";
+
 	}
 
 
