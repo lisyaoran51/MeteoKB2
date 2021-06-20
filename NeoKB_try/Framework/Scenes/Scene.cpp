@@ -186,6 +186,8 @@ int Scene::onSuspending(Scene * lastScene)
 
 int Scene::onResuming(Scene * lastScene)
 {
+
+	LOG(LogLevel::Debug) << "Scene::onResuming() : resuming [" << GetTypeName() << "].";
 	// Ä~©Óªº¤H¼g
 	return 0;
 }
