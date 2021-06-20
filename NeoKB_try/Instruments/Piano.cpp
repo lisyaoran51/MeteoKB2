@@ -531,12 +531,18 @@ int Piano::OnButtonDown(PianoAction action)
 
 				context.push_back(string("1001,0"));	// 0代表關閉
 				meteoContextBluetoothMessage->SetContextInJson(context);
+
+				IndicatorLightPanelMessage* indicatorLightMessage = new IndicatorLightPanelMessage(2, false);
+				outputManager->PushMessage(indicatorLightMessage);
 			}
 			else {
 				sustainType = SustainType::AutoSustain;
 
 				context.push_back(string("1001,1"));	// 1代表開啟
 				meteoContextBluetoothMessage->SetContextInJson(context);
+
+				IndicatorLightPanelMessage* indicatorLightMessage = new IndicatorLightPanelMessage(2, true);
+				outputManager->PushMessage(indicatorLightMessage);
 			}
 			meteoContextBluetoothMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
 			outputManager->PushMessage(meteoContextBluetoothMessage);
