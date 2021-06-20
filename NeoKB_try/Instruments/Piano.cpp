@@ -584,6 +584,9 @@ int Piano::OnButtonDown(PianoAction action)
 
 	/* 踏下踏板 */
 	if (action == PianoAction::SustainPedal) {
+
+		LOG(LogLevel::Debug) << "Piano::OnButtonDown() : temp sustain type is [" << int(sustainType) << "].";
+
 		// 如果目前是電腦控制踏板，就先停止接收踏板訓皓
 		// 這邊程式有點問題，應該是不管怎樣都可以接收到踏下，只不過不會作用在聲音上
 		if (sustainType == SustainType::AutoSustain || sustainType == SustainType::GameControllingSustain) {
@@ -608,6 +611,9 @@ int Piano::OnButtonUp(PianoAction action)
 
 	// 如果目前是電腦控制踏板，就先停止接收踏板訓皓
 	if (action == PianoAction::SustainPedal) {
+
+		LOG(LogLevel::Debug) << "Piano::OnButtonUp() : temp sustain type is [" << int(sustainType) << "].";
+
 		if (sustainType == SustainType::GameControllingSustain)
 			isSetTempReleasing = false;
 
