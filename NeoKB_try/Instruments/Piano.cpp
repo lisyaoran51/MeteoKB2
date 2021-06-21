@@ -490,7 +490,8 @@ int Piano::OnKeyUp(PianoAction action)
 	}
 
 	// 沒踏踏板、有插踏板、沒開啟自動延音
-	if(!isPressingMap.at(PianoAction::SustainPedal) && sustainType != SustainType::AutoSustain )
+	if (!(sustainType == SustainType::SustainPedal && isPressingMap.at(PianoAction::SustainPedal)) 
+		&& sustainType != SustainType::AutoSustain )
 		getSamples()->at(action)->FadeOut();
 		//getSamples()->at(action)->Stop();
 
