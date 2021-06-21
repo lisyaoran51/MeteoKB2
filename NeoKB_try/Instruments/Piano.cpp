@@ -548,6 +548,8 @@ int Piano::OnButtonDown(PianoAction action)
 			outputManager->PushMessage(meteoContextBluetoothMessage);
 
 		}
+
+		LOG(LogLevel::Debug) << "Piano::OnButtonDown() : change sustain type to [" << (int)sustainType << "]";
 	}
 	/* ¤O«× */
 	if (action == PianoAction::Sensitivity) {
