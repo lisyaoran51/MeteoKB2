@@ -175,6 +175,7 @@ MeteorRulesetExecutor::~MeteorRulesetExecutor()
 	compositeMeteoPiano->SetGameControllingPitchState(false);
 	if(compositeMeteoPiano->GetSustainType() == SustainType::GameControllingSustain)
 		compositeMeteoPiano->ChangeSustainType(SustainType::AutoSustain);
+
 }
 
 int MeteorRulesetExecutor::LazyConstruct(WorkingSm * w, Ruleset* r)

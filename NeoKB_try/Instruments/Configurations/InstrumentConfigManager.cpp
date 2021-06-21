@@ -12,7 +12,7 @@ InstrumentConfigManager::InstrumentConfigManager() : RegisterType("InstrumentCon
 
 int InstrumentConfigManager::initializeDefault()
 {
-	Set(InstrumentSetting::InitialSustainType, 2);
+	Set(InstrumentSetting::InitialSustainType, 1);
 
 	Set(InstrumentSetting::SensitiveLevel, 2);
 	return 0;

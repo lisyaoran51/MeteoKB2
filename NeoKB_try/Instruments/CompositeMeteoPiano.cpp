@@ -23,7 +23,7 @@ int CompositeMeteoPiano::load()
 	instrumentConfigManager = new InstrumentConfigManager();
 	instrumentConfigManager->Initialize(host->GetStorage());
 
-	int sType = 2;
+	int sType = 1;
 	instrumentConfigManager->Get(InstrumentSetting::InitialSustainType, &sType);
 	ChangeSustainType((SustainType)sType);
 
