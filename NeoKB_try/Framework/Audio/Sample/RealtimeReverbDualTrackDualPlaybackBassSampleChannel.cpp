@@ -155,7 +155,7 @@ int RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Play()
 
 		timedActions.push_back(pair<float, function<int()>>(predelay + delays[i], [=]() {
 
-			float reverbFadeinTime = 0.01;
+			float reverbFadeinTime = 0.05;
 
 			BASS_ChannelPause(reverbChannelID[i]);
 			BASS_ChannelSetAttribute(reverbChannelID[i], BASS_ATTRIB_VOL, 0);// / 4.f);
