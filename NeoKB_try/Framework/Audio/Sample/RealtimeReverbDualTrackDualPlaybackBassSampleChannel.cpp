@@ -13,10 +13,10 @@ RealtimeReverbDualTrackDualPlaybackBassSampleChannel::RealtimeReverbDualTrackDua
 		reverbChannelID[i] = dynamic_cast<BassSample*>(sample)->CreateChannel();
 
 	reverbVolumes[0] = 0.05;
-	reverbVolumes[0] = 0.06;
-	reverbVolumes[0] = 0.07;
-	reverbVolumes[0] = 0.08;
-	reverbVolumes[0] = 0.09;
+	reverbVolumes[1] = 0.06;
+	reverbVolumes[2] = 0.07;
+	reverbVolumes[3] = 0.08;
+	reverbVolumes[4] = 0.09;
 
 	predelay = 0.05f;
 }
@@ -25,6 +25,46 @@ RealtimeReverbDualTrackDualPlaybackBassSampleChannel::~RealtimeReverbDualTrackDu
 {
 	for (int i = 0; i < 5; i++)
 		BASS_ChannelStop(reverbChannelID[i]);
+}
+
+int RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Update()
+{
+	/* 把已經Fadeout的音關掉 */
+	if (isPlaying) {
+		for (int i = 0; i < 2; i++) {
+			if (BASS_ChannelIsActive(channelID[i])) {
+				float tempVolume = 0;
+				BASS_ChannelGetAttribute(channelID[i], BASS_ATTRIB_VOL, &tempVolume);
+				if (tempVolume == 0)
+					BASS_ChannelPause(channelID[i]);
+			}
+		}
+		
+	}
+
+	/* 把已經Fadeout的reverb關掉 */
+	if (BASS_ChannelIsActive(reverbChannelID[0])) {
+
+		float tempReverbVolume = 0;
+		BASS_ChannelGetAttribute(reverbChannelID[0], BASS_ATTRIB_VOL, &tempReverbVolume);
+		if(tempReverbVolume < 0.001) {
+			goto PAUSE_REVERB;
+		}
+
+		/* 如果時間超過總長的一半，就關掉reverb */
+		if ((float)BASS_ChannelGetPosition(reverbChannelID[0], BASS_POS_BYTE) / (float)BASS_ChannelGetLength(reverbChannelID[0], BASS_POS_BYTE) < 0.5) {
+			goto PAUSE_REVERB;
+		}
+	}
+
+	return SampleChannel::Update();
+
+PAUSE_REVERB:
+	for (int i = 0; i < 5; i++)
+		BASS_ChannelPause(reverbChannelID[i]);
+
+	return SampleChannel::Update();
+
 }
 
 int RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Play()
@@ -44,7 +84,9 @@ int RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Play()
 			channelID[tempPlayingPlayback],
 			BASS_ChannelGetPosition(channelID[tempPlayingPlayback], BASS_POS_BYTE));
 
-		double tempVolume = lastChannelVolume * exp(-tempPlaybackCurrentTime);
+		// TODO: 衰退太快，實際聲音沒有衰退那麼快。不過如果衰退太慢會有聲音斷掉的問題
+		//double tempVolume = lastChannelVolume * exp(-tempPlaybackCurrentTime);
+		double tempVolume = lastChannelVolume * exp(-tempPlaybackCurrentTime / 2.0);	//試試看衰退時間增長一倍
 
 		if (BASS_ChannelIsActive(channelID[tempPlayingPlayback]) != BASS_ACTIVE_PLAYING) {
 			tempVolume = 0;

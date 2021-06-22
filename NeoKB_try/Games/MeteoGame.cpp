@@ -135,7 +135,7 @@ int MeteoGame::LoadOnComplete()
 	audioManager->GetMirrorSampleManager()->GetStableStorage = bind(&MeteoGame::GetStableStorage, this);
 
 	audioManager->GetMirrorSampleManager()->ImportFromStable();
-
+	
 
 	AddChild(volumeController = new VolumeController());
 
@@ -151,6 +151,7 @@ int MeteoGame::onConnect()
 	SampleChannel* sampleChannel = audioManager->GetSampleManager()->GetSimpleSampleChannel("OnConnect.mp3");
 	sampleChannel->Play();
 
+	// TODO: 播完就刪掉
 	return 0;
 }
 
@@ -160,6 +161,8 @@ int MeteoGame::onDisconnect()
 	SetDisconnectState();
 	SampleChannel* sampleChannel = audioManager->GetSampleManager()->GetSimpleSampleChannel("OnDisconnect.mp3");
 	sampleChannel->Play();
+
+	// TODO: 播完就刪掉
 
 	return 0;
 }

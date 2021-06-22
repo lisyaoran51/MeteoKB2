@@ -16,6 +16,8 @@ namespace Samples {
 		RealtimeReverbDualTrackDualPlaybackBassSampleChannel(Sample* s);
 		~RealtimeReverbDualTrackDualPlaybackBassSampleChannel();
 
+		virtual int Update();
+
 		virtual int Play();
 
 		virtual int FadeOut();

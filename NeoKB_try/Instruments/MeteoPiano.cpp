@@ -75,36 +75,20 @@ int MeteoPiano::MoveOctave(PianoPitchMovement m)
 		case MeteoPianoPitchState::Lowered:
 			break;
 		case MeteoPianoPitchState::None:
-			state = MeteoPianoPitchState::Lowered;
-			indicatorLightMessage = new IndicatorLightPanelMessage(14, true);
-			outputManager->PushMessage(indicatorLightMessage);
-			indicatorLightMessage = new IndicatorLightPanelMessage(3, false);
-			outputManager->PushMessage(indicatorLightMessage);
+			ChangePitchState(MeteoPianoPitchState::Lowered);
 			break;
 		case MeteoPianoPitchState::Raised:
-			state = MeteoPianoPitchState::None;
-			indicatorLightMessage = new IndicatorLightPanelMessage(14, false);
-			outputManager->PushMessage(indicatorLightMessage);
-			indicatorLightMessage = new IndicatorLightPanelMessage(3, false);
-			outputManager->PushMessage(indicatorLightMessage);
+			ChangePitchState(MeteoPianoPitchState::None);
 			break;
 		}
 		break;
 	case PianoPitchMovement::Raise:
 		switch (state) {
 		case MeteoPianoPitchState::Lowered:
-			state = MeteoPianoPitchState::None;
-			indicatorLightMessage = new IndicatorLightPanelMessage(14, false);
-			outputManager->PushMessage(indicatorLightMessage);
-			indicatorLightMessage = new IndicatorLightPanelMessage(3, false);
-			outputManager->PushMessage(indicatorLightMessage);
+			ChangePitchState(MeteoPianoPitchState::None);
 			break;
 		case MeteoPianoPitchState::None:
-			state = MeteoPianoPitchState::Raised;
-			indicatorLightMessage = new IndicatorLightPanelMessage(14, false);
-			outputManager->PushMessage(indicatorLightMessage);
-			indicatorLightMessage = new IndicatorLightPanelMessage(3, true);
-			outputManager->PushMessage(indicatorLightMessage);
+			ChangePitchState(MeteoPianoPitchState::Raised);
 			break;
 		case MeteoPianoPitchState::Raised:
 			break;
@@ -118,6 +102,29 @@ int MeteoPiano::MoveOctave(PianoPitchMovement m)
 int MeteoPiano::ChangePitchState(MeteoPianoPitchState s)
 {
 	state = s;
+	IndicatorLightPanelMessage* indicatorLightMessage = nullptr;
+
+	switch (state) {
+	case MeteoPianoPitchState::Lowered:
+		indicatorLightMessage = new IndicatorLightPanelMessage(14, true);
+		outputManager->PushMessage(indicatorLightMessage);
+		indicatorLightMessage = new IndicatorLightPanelMessage(3, false);
+		outputManager->PushMessage(indicatorLightMessage);
+		break;
+	case MeteoPianoPitchState::None:
+		indicatorLightMessage = new IndicatorLightPanelMessage(14, false);
+		outputManager->PushMessage(indicatorLightMessage);
+		indicatorLightMessage = new IndicatorLightPanelMessage(3, false);
+		outputManager->PushMessage(indicatorLightMessage);
+		break;
+	case MeteoPianoPitchState::Raised:
+		indicatorLightMessage = new IndicatorLightPanelMessage(14, false);
+		outputManager->PushMessage(indicatorLightMessage);
+		indicatorLightMessage = new IndicatorLightPanelMessage(3, true);
+		outputManager->PushMessage(indicatorLightMessage);
+		break;
+	}
+
 
 	// TODO: 要傳送新的pitch state到手機和mcu
 

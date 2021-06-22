@@ -45,6 +45,11 @@ namespace Configurations {
 		InitialSustainType,
 
 		/// <summary>
+		/// 開機時的音色
+		///	</summary>
+		InitialSoundBankName,
+
+		/// <summary>
 		/// 將琴鍵音量開幾個根號，預設是二個根號，開三根就會更大聲
 		///	</summary>
 		SensitiveLevel,

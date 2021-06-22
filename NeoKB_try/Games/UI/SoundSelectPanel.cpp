@@ -3,11 +3,13 @@
 #include "../../Instruments/Piano.h"
 #include "../Output/Bluetooths/MeteoContextBluetoothMessage.h"
 #include "../../Instruments/Audio/ReverbGradientTimbreSimpleSoundBindingSet.h"
+#include "../../Instruments/Configurations/InstrumentConfigManager.h"
 
 using namespace Games::UI;
 using namespace Instruments;
 using namespace Games::Output::Bluetooths;
 using namespace Instruments::Audio;
+using namespace Instruments::Configurations;
 
 
 
@@ -44,20 +46,7 @@ int SoundSelectPanel::load(FrameworkConfigManager * f, Instrument* i, AudioManag
 	isPresent = true;
 
 	//return 0;
-	GetScheduler()->AddDelayedTask([=]() {
-	
-	
-		LOG(LogLevel::Debug) << "SoundSelectPanel::load() : test switch sound select panel on [" << instrument->GetTypeName() << "].";
-		/* 測試用，之後要刪掉改用bluetooth */
-		TSoundBindingSet<Pitch>* soundBindingSet = dynamic_cast<TSoundBindingSet<Pitch>*>(audioManager->GetSampleManager()->GetSoundBindingSets()->at(1));
-
-		//if (dynamic_cast<GradientTimbreSimpleSoundBindingSet*>(audioManager->GetSampleManager()->GetSoundBindingSets()->at(2)))
-		//	dynamic_cast<GradientTimbreSimpleSoundBindingSet*>(audioManager->GetSampleManager()->GetSoundBindingSets()->at(2))->SetIsApplyReverb(true);
-
-		dynamic_cast<Piano*>(instrument)->SwitchSoundBindings(soundBindingSet);
-	
-		return 0;
-	}, 5);
+	GetScheduler()->AddDelayedTask(bind(&SoundSelectPanel::firstLoadSound, this), 0.1);
 
 	return 0;
 }
@@ -67,6 +56,43 @@ SoundSelectPanel::SoundSelectPanel() : RegisterType("SoundSelectPanel")
 	isInputable = true;
 
 	registerLoad(bind(static_cast<int(SoundSelectPanel::*)(void)>(&SoundSelectPanel::load), this));
+}
+
+int SoundSelectPanel::firstLoadSound()
+{
+	InstrumentConfigManager* instrumentConfigManager = GetCache<InstrumentConfigManager>("InstrumentConfigManager");
+	if (!instrumentConfigManager) {
+		goto RESTART_LATER;
+	}
+
+	string fisrtLoadSoundBankName = "U3";
+
+	instrumentConfigManager->Get(InstrumentSetting::InitialSoundBankName, &fisrtLoadSoundBankName);
+
+	LOG(LogLevel::Debug) << "SoundSelectPanel::firstLoadSound() : first switch sound to [" << fisrtLoadSoundBankName << "].";
+	vector<SoundBindingSet*>* soundBindingSets = audioManager->GetSampleManager()->GetSoundBindingSets();
+
+	if (soundBindingSets->size() == 0) {
+		goto RESTART_LATER;
+	}
+
+	for (int i = 0; i < soundBindingSets->size(); i++) {
+		if (soundBindingSets->at(i)->fileName == fisrtLoadSoundBankName) {
+			dynamic_cast<Piano*>(instrument)->SwitchSoundBindings(dynamic_cast<TSoundBindingSet<Pitch>*>(soundBindingSets->at(i)));
+			return 0;
+		}
+	}
+
+	LOG(LogLevel::Debug) << "SoundSelectPanel::firstLoadSound() : fail to find sound [" << fisrtLoadSoundBankName << "], default use [" << soundBindingSets->at(0)->fileName << "]";
+	dynamic_cast<Piano*>(instrument)->SwitchSoundBindings(dynamic_cast<TSoundBindingSet<Pitch>*>(soundBindingSets->at(0)));
+
+	return 0;
+
+RESTART_LATER:
+	LOG(LogLevel::Debug) << "SoundSelectPanel::firstLoadSound() : config and sound binding sets not ready. reload later.";
+	GetScheduler()->AddDelayedTask(bind(&SoundSelectPanel::firstLoadSound, this), 0.1);
+	return 0;
+
 }
 
 int SoundSelectPanel::onMessage(MeteoBluetoothMessage * message)
