@@ -54,7 +54,7 @@ int RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Update()
 		}
 
 		/* 如果時間超過總長的一半，就關掉reverb */
-		if ((float)BASS_ChannelGetPosition(reverbChannelID[0], BASS_POS_BYTE) / (float)BASS_ChannelGetLength(reverbChannelID[0], BASS_POS_BYTE) < 0.5) {
+		if ((float)BASS_ChannelGetPosition(reverbChannelID[0], BASS_POS_BYTE) / (float)BASS_ChannelGetLength(reverbChannelID[0], BASS_POS_BYTE) > 0.5) {
 			LOG(LogLevel::Debug) << "RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Update() : fadeout too long.";
 			goto PAUSE_REVERB;
 		}
