@@ -62,7 +62,9 @@ int SoundSelectPanel::firstLoadSound()
 {
 	InstrumentConfigManager* instrumentConfigManager = GetCache<InstrumentConfigManager>("InstrumentConfigManager");
 	if (!instrumentConfigManager) {
-		goto RESTART_LATER;
+		LOG(LogLevel::Debug) << "SoundSelectPanel::firstLoadSound() : config and sound binding sets not ready. reload later.";
+		GetScheduler()->AddDelayedTask(bind(&SoundSelectPanel::firstLoadSound, this), 0.1);
+		return 0;
 	}
 
 	string fisrtLoadSoundBankName = "U3";
@@ -73,7 +75,9 @@ int SoundSelectPanel::firstLoadSound()
 	vector<SoundBindingSet*>* soundBindingSets = audioManager->GetSampleManager()->GetSoundBindingSets();
 
 	if (soundBindingSets->size() == 0) {
-		goto RESTART_LATER;
+		LOG(LogLevel::Debug) << "SoundSelectPanel::firstLoadSound() : config and sound binding sets not ready. reload later.";
+		GetScheduler()->AddDelayedTask(bind(&SoundSelectPanel::firstLoadSound, this), 0.1);
+		return 0;
 	}
 
 	for (int i = 0; i < soundBindingSets->size(); i++) {
@@ -88,10 +92,6 @@ int SoundSelectPanel::firstLoadSound()
 
 	return 0;
 
-RESTART_LATER:
-	LOG(LogLevel::Debug) << "SoundSelectPanel::firstLoadSound() : config and sound binding sets not ready. reload later.";
-	GetScheduler()->AddDelayedTask(bind(&SoundSelectPanel::firstLoadSound, this), 0.1);
-	return 0;
 
 }
 
