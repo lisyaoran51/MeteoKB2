@@ -12,11 +12,11 @@ RealtimeReverbDualTrackDualPlaybackBassSampleChannel::RealtimeReverbDualTrackDua
 	for(int i = 0; i < 5; i++)
 		reverbChannelID[i] = dynamic_cast<BassSample*>(sample)->CreateChannel();
 
-	reverbVolumes[0] = 0.15;
-	reverbVolumes[1] = 0.18;
-	reverbVolumes[2] = 0.21;
-	reverbVolumes[3] = 0.24;
-	reverbVolumes[4] = 0.27;
+	reverbVolumes[0] = 0.13;
+	reverbVolumes[1] = 0.14;
+	reverbVolumes[2] = 0.15;
+	reverbVolumes[3] = 0.16;
+	reverbVolumes[4] = 0.17;
 
 	predelay = 0.05f;
 	reverbFadeoutTime = 1.5f;
@@ -155,6 +155,7 @@ int RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Play()
 
 		timedActions.push_back(pair<float, function<int()>>(predelay + delays[i], [=]() {
 
+			/* reverb的開頭用fadein近來，財部會有重複琴見音 */
 			float reverbFadeinTime = 0.05;
 
 			BASS_ChannelPause(reverbChannelID[i]);
