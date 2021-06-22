@@ -155,12 +155,15 @@ int RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Play()
 
 		timedActions.push_back(pair<float, function<int()>>(predelay + delays[i], [=]() {
 
+			float reverbFadeinTime = 0.1;
+
 			BASS_ChannelPause(reverbChannelID[i]);
-			BASS_ChannelSetAttribute(reverbChannelID[i], BASS_ATTRIB_VOL, volumeCalculated->GetValue() * initialVolume * reverbVolumes[i]);// / 4.f);
+			BASS_ChannelSetAttribute(reverbChannelID[i], BASS_ATTRIB_VOL, 0);// / 4.f);
 			BASS_ChannelSetPosition(reverbChannelID[i], 0, BASS_POS_BYTE);
 			/* 檢查是否在fadeout，是的話把fadeout停掉 */
-			if (BASS_ChannelIsSliding(reverbChannelID[i], BASS_ATTRIB_VOL) == TRUE)
-				BASS_ChannelSlideAttribute(reverbChannelID[i], BASS_ATTRIB_VOL, volumeCalculated->GetValue() * initialVolume * reverbVolumes[i], (DWORD)(0));// / 4.f, (DWORD)(0));
+			//if (BASS_ChannelIsSliding(reverbChannelID[i], BASS_ATTRIB_VOL) == TRUE)
+			//	BASS_ChannelSlideAttribute(reverbChannelID[i], BASS_ATTRIB_VOL, volumeCalculated->GetValue() * initialVolume * reverbVolumes[i], (DWORD)(0));// / 4.f, (DWORD)(0));
+			BASS_ChannelSlideAttribute(reverbChannelID[i], BASS_ATTRIB_VOL, volumeCalculated->GetValue() * initialVolume * reverbVolumes[i], (DWORD)(reverbFadeinTime * 1000));// / 4.f, (DWORD)(0));
 
 			BASS_ChannelPlay(reverbChannelID[i], false);
 
