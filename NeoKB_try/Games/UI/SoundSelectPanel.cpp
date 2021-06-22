@@ -82,7 +82,7 @@ int SoundSelectPanel::firstLoadSound()
 
 	for (int i = 0; i < soundBindingSets->size(); i++) {
 		if (soundBindingSets->at(i)->fileName == fisrtLoadSoundBankName) {
-			dynamic_cast<SimpleSoundBindingSet*>(soundBindingSets->at(i))->SetIsApplyReverb(true);
+			//dynamic_cast<SimpleSoundBindingSet*>(soundBindingSets->at(i))->SetIsApplyReverb(true);
 			dynamic_cast<Piano*>(instrument)->SwitchSoundBindings(dynamic_cast<TSoundBindingSet<Pitch>*>(soundBindingSets->at(i)));
 			return 0;
 		}
