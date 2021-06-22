@@ -67,11 +67,11 @@ int SoundSelectPanel::firstLoadSound()
 		return 0;
 	}
 
-	string fisrtLoadSoundBankName = "U3";
+	string firstLoadSoundBankName = "U3";
 
-	instrumentConfigManager->Get(InstrumentSetting::InitialSoundBankName, &fisrtLoadSoundBankName);
+	instrumentConfigManager->Get(InstrumentSetting::InitialSoundBankName, &firstLoadSoundBankName);
 
-	LOG(LogLevel::Debug) << "SoundSelectPanel::firstLoadSound() : first switch sound to [" << fisrtLoadSoundBankName << "].";
+	LOG(LogLevel::Debug) << "SoundSelectPanel::firstLoadSound() : first switch sound to [" << firstLoadSoundBankName << "].";
 	vector<SoundBindingSet*>* soundBindingSets = audioManager->GetSampleManager()->GetSoundBindingSets();
 
 	if (soundBindingSets->size() == 0) {
@@ -81,14 +81,14 @@ int SoundSelectPanel::firstLoadSound()
 	}
 
 	for (int i = 0; i < soundBindingSets->size(); i++) {
-		if (soundBindingSets->at(i)->fileName == fisrtLoadSoundBankName) {
+		if (soundBindingSets->at(i)->fileName == firstLoadSoundBankName) {
 			dynamic_cast<SimpleSoundBindingSet*>(soundBindingSets->at(i))->SetIsApplyReverb(true);
 			dynamic_cast<Piano*>(instrument)->SwitchSoundBindings(dynamic_cast<TSoundBindingSet<Pitch>*>(soundBindingSets->at(i)));
 			return 0;
 		}
 	}
 
-	LOG(LogLevel::Debug) << "SoundSelectPanel::firstLoadSound() : fail to find sound [" << fisrtLoadSoundBankName << "], default use [" << soundBindingSets->at(0)->fileName << "]";
+	LOG(LogLevel::Debug) << "SoundSelectPanel::firstLoadSound() : fail to find sound [" << firstLoadSoundBankName << "], default use [" << soundBindingSets->at(0)->fileName << "]";
 	dynamic_cast<Piano*>(instrument)->SwitchSoundBindings(dynamic_cast<TSoundBindingSet<Pitch>*>(soundBindingSets->at(0)));
 
 	return 0;

@@ -16,7 +16,7 @@ int InstrumentConfigManager::initializeDefault()
 
 	Set(InstrumentSetting::SensitiveLevel, 2);
 
-	Set(InstrumentSetting::InitialSoundBankName, "U3");
+	Set(InstrumentSetting::InitialSoundBankName, "V2JapaneseStudio");
 	return 0;
 }
 
