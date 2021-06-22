@@ -47,14 +47,14 @@ int RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Update()
 
 		float tempReverbVolume = 0;
 		BASS_ChannelGetAttribute(reverbChannelID[0], BASS_ATTRIB_VOL, &tempReverbVolume);
-		if(tempReverbVolume < 0.001) {
+		if(tempReverbVolume == 0) {
 			LOG(LogLevel::Debug) << "RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Update() : fadeout low volume.";
 
 			goto PAUSE_REVERB;
 		}
 
-		/* 如果時間超過總長的一半，就關掉reverb */
-		if ((float)BASS_ChannelGetPosition(reverbChannelID[0], BASS_POS_BYTE) / (float)BASS_ChannelGetLength(reverbChannelID[0], BASS_POS_BYTE) > 0.5) {
+		/* 如果時間超過總長的一定比例，就關掉reverb */
+		if ((float)BASS_ChannelGetPosition(reverbChannelID[0], BASS_POS_BYTE) / (float)BASS_ChannelGetLength(reverbChannelID[0], BASS_POS_BYTE) > volume->GetValue()) {
 			LOG(LogLevel::Debug) << "RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Update() : fadeout too long.";
 			goto PAUSE_REVERB;
 		}
