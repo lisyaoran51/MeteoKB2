@@ -30,7 +30,6 @@ RealtimeReverbDualTrackDualPlaybackBassSampleChannel::~RealtimeReverbDualTrackDu
 
 int RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Update()
 {
-	return SampleChannel::Update();
 	/* 把已經Fadeout的音關掉 */
 	if (isPlaying) {
 		for (int i = 0; i < 2; i++) {
@@ -41,8 +40,8 @@ int RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Update()
 					BASS_ChannelPause(channelID[i]);
 			}
 		}
-		
 	}
+	return SampleChannel::Update();
 
 	/* 把已經Fadeout的reverb關掉 */
 	if (BASS_ChannelIsActive(reverbChannelID[0])) {
