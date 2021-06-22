@@ -19,6 +19,7 @@ RealtimeReverbDualTrackDualPlaybackBassSampleChannel::RealtimeReverbDualTrackDua
 	//reverbVolumes[4] = 0.09;
 
 	predelay = 0.05f;
+	reverbFadeoutTime = 1.5f;
 }
 
 RealtimeReverbDualTrackDualPlaybackBassSampleChannel::~RealtimeReverbDualTrackDualPlaybackBassSampleChannel()
@@ -29,7 +30,7 @@ RealtimeReverbDualTrackDualPlaybackBassSampleChannel::~RealtimeReverbDualTrackDu
 
 int RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Update()
 {
-	return SampleChannel::Update();
+	//return SampleChannel::Update();
 	/* 把已經Fadeout的音關掉 */
 	if (isPlaying) {
 		for (int i = 0; i < 2; i++) {
