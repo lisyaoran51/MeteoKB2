@@ -97,8 +97,10 @@ int RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Play()
 					BASS_ChannelGetPosition(channelID[tempPlayingPlayback], BASS_POS_BYTE));
 
 				// TODO: 衰退太快，實際聲音沒有衰退那麼快。不過如果衰退太慢會有聲音斷掉的問題
-				lastPlayVolume = lastPlayVolume * exp(-tempPlaybackCurrentTime * 1.3);	//試試看衰退時間縮短
-				LOG(LogLevel::Debug) << "DualTrackDualPlaybackBassSampleChannel::Play() : last voume [" << lastPlayVolume << "], new volume [" << volume->GetValue() << "], calculated volume [" << volumeCalculated->GetValue() << "]";
+				lastPlayVolume = lastPlayVolume * exp(-tempPlaybackCurrentTime * 1.3);	//試試看衰退時間縮短，1.3是一個剛好的數字，
+																						// 原本音色保留要稍微強一點，即使新音色可能聲音稍微大衣歇歇，但是還是要先以原本音色為主
+																						// 如果新音色真的大比較多的時候，再把原本音色蓋掉
+				LOG(LogLevel::Depricated) << "DualTrackDualPlaybackBassSampleChannel::Play() : last voume [" << lastPlayVolume << "], new volume [" << volume->GetValue() << "], calculated volume [" << volumeCalculated->GetValue() << "]";
 
 
 			}
@@ -166,7 +168,7 @@ int RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Play()
 
 		}
 		else {
-			LOG(LogLevel::Debug) << "DualTrackDualPlaybackBassSampleChannel::Play() : last voume [" << lastPlayVolume << "], louder than new volume [" << volume->GetValue() << "].";
+			LOG(LogLevel::Depricated) << "DualTrackDualPlaybackBassSampleChannel::Play() : last voume [" << lastPlayVolume << "], louder than new volume [" << volume->GetValue() << "].";
 			if (BASS_ChannelIsActive(channelID[newPlayback]) == BASS_ACTIVE_PLAYING) {
 				BASS_ChannelSlideAttribute(channelID[newPlayback], BASS_ATTRIB_VOL, 0, (DWORD)(dualSwitchFadeoutTime * 1000));
 			}
