@@ -86,7 +86,7 @@ int RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Play()
 	pendingActions.Add(this, [=]() {
 		int newPlayback = 0;
 
-		float lastChannelVolume = lastVolume;
+		float lastPlayVolume = lastVolume;
 		if (BASS_ChannelIsActive(channelID[tempPlayingPlayback]) == BASS_ACTIVE_PLAYING)
 		if (BASS_ChannelIsSliding(channelID[newPlayback], BASS_ATTRIB_VOL) == FALSE){
 
@@ -98,13 +98,13 @@ int RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Play()
 
 			// TODO: 衰退太快，實際聲音沒有衰退那麼快。不過如果衰退太慢會有聲音斷掉的問題
 			//double tempVolume = lastChannelVolume * exp(-tempPlaybackCurrentTime);
-			lastChannelVolume = lastChannelVolume * exp(-tempPlaybackCurrentTime);	//試試看衰退時間增長一倍
-			LOG(LogLevel::Debug) << "DualTrackDualPlaybackBassSampleChannel::Play() : last volume set [" << lastVolume << "], last voume [" << lastChannelVolume << "], new volume [" << volume->GetValue() << "], calculated volume [" << volumeCalculated->GetValue() << "]";
+			lastPlayVolume = lastPlayVolume * exp(-tempPlaybackCurrentTime);	//試試看衰退時間增長一倍
+			LOG(LogLevel::Debug) << "DualTrackDualPlaybackBassSampleChannel::Play() : last voume [" << lastPlayVolume << "], new volume [" << volume->GetValue() << "], calculated volume [" << volumeCalculated->GetValue() << "]";
 
 
 		}
 		else 
-			lastChannelVolume = 0;
+			lastPlayVolume = 0;
 		
 
 		// 音質調整公式 pan = -1 + ((volume - 0.3) / (0.7 - 0.3) * 2，最大為1，最小為-1
@@ -131,14 +131,14 @@ int RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Play()
 
 		BASS_ChannelPlay(channelID[newPlayback], false);
 
-		if (lastChannelVolume <= volumeCalculated->GetValue()) {
+		if (lastPlayVolume <= volume->GetValue()) {
 			if (BASS_ChannelIsActive(channelID[tempPlayingPlayback]) == BASS_ACTIVE_PLAYING) {
 				BASS_ChannelSlideAttribute(channelID[tempPlayingPlayback], BASS_ATTRIB_VOL, 0, (DWORD)(dualSwitchFadeoutTime * 1000));
 			}
 			tempPlayingPlayback = newPlayback;
 		}
 		else {
-			LOG(LogLevel::Debug) << "DualTrackDualPlaybackBassSampleChannel::Play() : last voume [" << tempVolume << "], louder than new volume [" << volume->GetValue() << "].";
+			LOG(LogLevel::Debug) << "DualTrackDualPlaybackBassSampleChannel::Play() : last voume [" << lastPlayVolume << "], louder than new volume [" << volume->GetValue() << "].";
 			if (BASS_ChannelIsActive(channelID[newPlayback]) == BASS_ACTIVE_PLAYING) {
 				BASS_ChannelSlideAttribute(channelID[newPlayback], BASS_ATTRIB_VOL, 0, (DWORD)(dualSwitchFadeoutTime * 1000));
 			}
