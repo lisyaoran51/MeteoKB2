@@ -25,7 +25,7 @@ int MeteoScene::load()
 	if (!o)
 		throw runtime_error("int  MeteoScene<T>::load() : OutputManager not found in cache.");
 
-	LOG(LogLevel::Debug) << "MeteoScene::load() : [" << GetTypeName() << "] get output manager " <<  o << ".";
+	LOG(LogLevel::Depricated) << "MeteoScene::load() : [" << GetTypeName() << "] get output manager " <<  o << ".";
 
 	return load(game, gameBase, o);
 }
@@ -38,7 +38,7 @@ int MeteoScene::load(MeteoGame * game, MeteoGameBase * gameBase, OutputManager* 
 	workingSm.BindTo(gameBase->GetWorkingSm());
 	outputManager = o;
 
-	LOG(LogLevel::Debug) << "MeteoScene::load() : [" << GetTypeName() << "] get output manager " << outputManager << ".";
+	LOG(LogLevel::Depricated) << "MeteoScene::load() : [" << GetTypeName() << "] get output manager " << outputManager << ".";
 
 	return 0;
 }

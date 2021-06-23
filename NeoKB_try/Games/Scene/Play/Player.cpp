@@ -145,7 +145,7 @@ int Player::load(MeteoConfigManager* m, Instrument* instru, MeteoGame * g)
 		LOG(LogLevel::Info) << "Player::load : scheduled task to change source to track [" << adjustableClock << "].";
 		adjustableClock->Reset();
 
-		LOG(LogLevel::Debug) << "Player::load : reseted.";
+		LOG(LogLevel::Depricated) << "Player::load : reseted.";
 		decoupledClock->ChangeSource(adjustableClock);
 
 		for (int i = 0; i < workingSmValue->GetModifiers()->GetValue()->size(); i++) {
@@ -162,7 +162,7 @@ int Player::load(MeteoConfigManager* m, Instrument* instru, MeteoGame * g)
 			timeController->JumpTo(-1.0 / timeController->GetRate());
 			
 		// output 遊戲開始
-		LOG(LogLevel::Debug) << "Player::load : scheduled task end.";
+		LOG(LogLevel::Depricated) << "Player::load : scheduled task end.";
 
 		return 0;
 	});
@@ -178,21 +178,21 @@ int Player::load(MeteoConfigManager* m, Instrument* instru, MeteoGame * g)
 	AddChild(replayRecorder);
 
 
-	LOG(LogLevel::Debug) << "Player::load() : time controller added.";
+	LOG(LogLevel::Depricated) << "Player::load() : time controller added.";
 	// 把time controller下面所有東西的clock都改成由time controller控制的clock
 	Container* container = new Container();
 	timeController->AddChild(container);
-	LOG(LogLevel::Debug) << "Player::load() : set offset clock.";
+	LOG(LogLevel::Depricated) << "Player::load() : set offset clock.";
 	container->SetClock(offsetClock);
-	LOG(LogLevel::Debug) << "Player::load() : add ruleset executor.";
+	LOG(LogLevel::Depricated) << "Player::load() : add ruleset executor.";
 	container->AddChild(rulesetExecutor);
 
-	LOG(LogLevel::Debug) << "Player::load() : ruleset executor loaded.";
+	LOG(LogLevel::Depricated) << "Player::load() : ruleset executor loaded.";
 
 
 	instrument = instru;
 	modifiers = workingSmValue->GetModifiers()->GetValue();
-	LOG(LogLevel::Debug) << "Player::load : get [" << modifiers->size() << "] instrument modifier into [" << instrument << "].";
+	LOG(LogLevel::Depricated) << "Player::load : get [" << modifiers->size() << "] instrument modifier into [" << instrument << "].";
 	for (int i = 0; i < modifiers->size(); i++) {
 
 		if (dynamic_cast<InstrumentModifier*>(modifiers->at(i))) {

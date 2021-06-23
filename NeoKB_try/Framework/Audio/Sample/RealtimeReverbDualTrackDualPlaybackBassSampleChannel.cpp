@@ -27,7 +27,7 @@ RealtimeReverbDualTrackDualPlaybackBassSampleChannel::RealtimeReverbDualTrackDua
 	//reverbVolumes[4] = 0.22;
 
 	predelay = 0.05f;
-	reverbFadeoutTime = 1.5f;
+	reverbFadeoutTime = 1.f;
 }
 
 RealtimeReverbDualTrackDualPlaybackBassSampleChannel::~RealtimeReverbDualTrackDualPlaybackBassSampleChannel()
@@ -97,7 +97,7 @@ int RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Play()
 
 		// TODO: 衰退太快，實際聲音沒有衰退那麼快。不過如果衰退太慢會有聲音斷掉的問題
 		//double tempVolume = lastChannelVolume * exp(-tempPlaybackCurrentTime);
-		double tempVolume = lastChannelVolume * exp(-tempPlaybackCurrentTime / 2.0);	//試試看衰退時間增長一倍
+		double tempVolume = lastChannelVolume * exp(-tempPlaybackCurrentTime / 4.0);	//試試看衰退時間增長一倍
 
 		if (BASS_ChannelIsActive(channelID[tempPlayingPlayback]) != BASS_ACTIVE_PLAYING) {
 			tempVolume = 0;

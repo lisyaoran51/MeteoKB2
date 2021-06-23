@@ -14,7 +14,7 @@ DatabaseContextFactory::DatabaseContextFactory(Host * h)
 int DatabaseContextFactory::Initialize() 
 {
 
-	LOG(LogLevel::Info) << "DatabaseContextFactory::Initialize() : creating db context.";
+	LOG(LogLevel::Depricated) << "DatabaseContextFactory::Initialize() : creating db context.";
 
 	createDatabaseContext();
 	initialized = true;
@@ -30,8 +30,8 @@ DatabaseContext * DatabaseContextFactory::GetContext()
 
 int DatabaseContextFactory::createDatabaseContext()
 {
-	LOG(LogLevel::Fine) << "DatabaseContextFactory::createDatabaseContext() : put storage into context.";
-	LOG(LogLevel::Debug) << "DatabaseContextFactory::createDatabaseContext() : host address = " << host;
+	LOG(LogLevel::Depricated) << "DatabaseContextFactory::createDatabaseContext() : put storage into context.";
+	LOG(LogLevel::Depricated) << "DatabaseContextFactory::createDatabaseContext() : host address = " << host;
 
 
 	dbContext = new DatabaseContext(host->GetStorage());
