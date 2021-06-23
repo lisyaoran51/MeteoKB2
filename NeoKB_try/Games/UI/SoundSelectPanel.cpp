@@ -67,7 +67,7 @@ int SoundSelectPanel::firstLoadSound()
 		return 0;
 	}
 
-	string firstLoadSoundBankName = "U3";
+	string firstLoadSoundBankName = "HansZimmerPiano";
 
 	instrumentConfigManager->Get(InstrumentSetting::InitialSoundBankName, &firstLoadSoundBankName);
 
