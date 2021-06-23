@@ -67,7 +67,7 @@ int SoundSelectPanel::firstLoadSound()
 		return 0;
 	}
 
-	string firstLoadSoundBankName = "V2JapanesePiano";
+	string firstLoadSoundBankName = "V2JapaneseStudio";
 
 	instrumentConfigManager->Get(InstrumentSetting::InitialSoundBankName, &firstLoadSoundBankName);
 
