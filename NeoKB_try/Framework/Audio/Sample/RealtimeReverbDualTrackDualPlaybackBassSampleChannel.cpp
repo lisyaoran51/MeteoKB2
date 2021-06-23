@@ -138,6 +138,32 @@ int RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Play()
 				BASS_ChannelSlideAttribute(channelID[tempPlayingPlayback], BASS_ATTRIB_VOL, 0, (DWORD)(dualSwitchFadeoutTime * 1000));
 			}
 			tempPlayingPlayback = newPlayback;
+
+			/* 分別建立所有reverb */
+			unique_lock<mutex> uLock2(timedActionMutex);
+			timedActions.clear();
+			for (int i = 0; i < 5; i++) {
+
+
+				timedActions.push_back(pair<float, function<int()>>(predelay + delays[i], [=]() {
+
+					/* reverb的開頭用fadein近來，財部會有重複琴見音 */
+					float reverbFadeinTime = 0.05;
+
+					BASS_ChannelPause(reverbChannelID[i]);
+					BASS_ChannelSetAttribute(reverbChannelID[i], BASS_ATTRIB_VOL, 0);// / 4.f);
+					BASS_ChannelSetPosition(reverbChannelID[i], 0, BASS_POS_BYTE);
+					/* 檢查是否在fadeout，是的話把fadeout停掉 */
+					//if (BASS_ChannelIsSliding(reverbChannelID[i], BASS_ATTRIB_VOL) == TRUE)
+					//	BASS_ChannelSlideAttribute(reverbChannelID[i], BASS_ATTRIB_VOL, volumeCalculated->GetValue() * initialVolume * reverbVolumes[i], (DWORD)(0));// / 4.f, (DWORD)(0));
+					BASS_ChannelSlideAttribute(reverbChannelID[i], BASS_ATTRIB_VOL, volumeCalculated->GetValue() * initialVolume * reverbVolumes[i], (DWORD)(reverbFadeinTime * 1000));// / 4.f, (DWORD)(0));
+
+					BASS_ChannelPlay(reverbChannelID[i], false);
+
+					return 0;
+				}));
+			}
+
 		}
 		else {
 			LOG(LogLevel::Debug) << "DualTrackDualPlaybackBassSampleChannel::Play() : last voume [" << lastPlayVolume << "], louder than new volume [" << volume->GetValue() << "].";
@@ -161,30 +187,7 @@ int RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Play()
 	}, "Lambda_DualTrackDualPlaybackBassSampleChannel::Play");
 	uLock.unlock();
 
-	/* 分別建立所有reverb */
-	unique_lock<mutex> uLock2(timedActionMutex);
-	timedActions.clear();
-	for (int i = 0; i < 5; i++) {
-
-
-		timedActions.push_back(pair<float, function<int()>>(predelay + delays[i], [=]() {
-
-			/* reverb的開頭用fadein近來，財部會有重複琴見音 */
-			float reverbFadeinTime = 0.05;
-
-			BASS_ChannelPause(reverbChannelID[i]);
-			BASS_ChannelSetAttribute(reverbChannelID[i], BASS_ATTRIB_VOL, 0);// / 4.f);
-			BASS_ChannelSetPosition(reverbChannelID[i], 0, BASS_POS_BYTE);
-			/* 檢查是否在fadeout，是的話把fadeout停掉 */
-			//if (BASS_ChannelIsSliding(reverbChannelID[i], BASS_ATTRIB_VOL) == TRUE)
-			//	BASS_ChannelSlideAttribute(reverbChannelID[i], BASS_ATTRIB_VOL, volumeCalculated->GetValue() * initialVolume * reverbVolumes[i], (DWORD)(0));// / 4.f, (DWORD)(0));
-			BASS_ChannelSlideAttribute(reverbChannelID[i], BASS_ATTRIB_VOL, volumeCalculated->GetValue() * initialVolume * reverbVolumes[i], (DWORD)(reverbFadeinTime * 1000));// / 4.f, (DWORD)(0));
-
-			BASS_ChannelPlay(reverbChannelID[i], false);
-
-			return 0;
-		}));
-	}
+	
 	
 
 
