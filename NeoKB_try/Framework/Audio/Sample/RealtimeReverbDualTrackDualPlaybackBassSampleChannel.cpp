@@ -98,7 +98,7 @@ int RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Play()
 		// TODO: 衰退太快，實際聲音沒有衰退那麼快。不過如果衰退太慢會有聲音斷掉的問題
 		//double tempVolume = lastChannelVolume * exp(-tempPlaybackCurrentTime);
 		double tempVolume = lastChannelVolume * exp(-tempPlaybackCurrentTime / 100.0);	//試試看衰退時間增長一倍
-		LOG(LogLevel::Debug) << "DualTrackDualPlaybackBassSampleChannel::Play() : last voume [" << tempVolume << "], new volume [" << volume->GetValue() << "], calculated volume [" << volumeCalculated->GetValue() << "]";
+		LOG(LogLevel::Debug) << "DualTrackDualPlaybackBassSampleChannel::Play() : last channel volume [" << lastChannelVolume << "], last voume [" << tempVolume << "], new volume [" << volume->GetValue() << "], calculated volume [" << volumeCalculated->GetValue() << "]";
 
 
 		if (BASS_ChannelIsActive(channelID[tempPlayingPlayback]) != BASS_ACTIVE_PLAYING) {
