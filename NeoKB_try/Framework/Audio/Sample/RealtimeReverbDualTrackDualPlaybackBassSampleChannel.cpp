@@ -87,21 +87,23 @@ int RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Play()
 		int newPlayback = 0;
 
 		float lastPlayVolume = lastVolume;
-		if (BASS_ChannelIsActive(channelID[tempPlayingPlayback]) == BASS_ACTIVE_PLAYING)
-		if (BASS_ChannelIsSliding(channelID[newPlayback], BASS_ATTRIB_VOL) == FALSE){
+		if (BASS_ChannelIsActive(channelID[tempPlayingPlayback]) == BASS_ACTIVE_PLAYING) {
+			if (BASS_ChannelIsSliding(channelID[newPlayback], BASS_ATTRIB_VOL) == FALSE) {
 
-			// 音量衰減公式 音量=e(-at)，a為常數，t為時間
+				// 音量衰減公式 音量=e(-at)，a為常數，t為時間
 
-			double tempPlaybackCurrentTime = BASS_ChannelBytes2Seconds(
-				channelID[tempPlayingPlayback],
-				BASS_ChannelGetPosition(channelID[tempPlayingPlayback], BASS_POS_BYTE));
+				double tempPlaybackCurrentTime = BASS_ChannelBytes2Seconds(
+					channelID[tempPlayingPlayback],
+					BASS_ChannelGetPosition(channelID[tempPlayingPlayback], BASS_POS_BYTE));
 
-			// TODO: 衰退太快，實際聲音沒有衰退那麼快。不過如果衰退太慢會有聲音斷掉的問題
-			//double tempVolume = lastChannelVolume * exp(-tempPlaybackCurrentTime);
-			lastPlayVolume = lastPlayVolume * exp(-tempPlaybackCurrentTime * 2.0);	//試試看衰退時間縮短一倍
-			LOG(LogLevel::Debug) << "DualTrackDualPlaybackBassSampleChannel::Play() : last voume [" << lastPlayVolume << "], new volume [" << volume->GetValue() << "], calculated volume [" << volumeCalculated->GetValue() << "]";
+				// TODO: 衰退太快，實際聲音沒有衰退那麼快。不過如果衰退太慢會有聲音斷掉的問題
+				lastPlayVolume = lastPlayVolume * exp(-tempPlaybackCurrentTime * 2.0);	//試試看衰退時間縮短一倍
+				LOG(LogLevel::Debug) << "DualTrackDualPlaybackBassSampleChannel::Play() : last voume [" << lastPlayVolume << "], new volume [" << volume->GetValue() << "], calculated volume [" << volumeCalculated->GetValue() << "]";
 
 
+			}
+			else
+				lastPlayVolume = 0;
 		}
 		else 
 			lastPlayVolume = 0;
