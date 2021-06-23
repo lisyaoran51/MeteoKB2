@@ -86,24 +86,26 @@ int RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Play()
 	pendingActions.Add(this, [=]() {
 		int newPlayback = 0;
 
-		float lastChannelVolume;
-		BASS_ChannelGetAttribute(channelID[tempPlayingPlayback], BASS_ATTRIB_VOL, &lastChannelVolume);
+		float lastChannelVolume = lastVolume;
+		if (BASS_ChannelIsActive(channelID[tempPlayingPlayback]) == BASS_ACTIVE_PLAYING)
+		if (BASS_ChannelIsSliding(channelID[newPlayback], BASS_ATTRIB_VOL) == FALSE){
 
-		// 音量衰減公式 音量=e(-at)，a為常數，t為時間
+			// 音量衰減公式 音量=e(-at)，a為常數，t為時間
 
-		double tempPlaybackCurrentTime = BASS_ChannelBytes2Seconds(
-			channelID[tempPlayingPlayback],
-			BASS_ChannelGetPosition(channelID[tempPlayingPlayback], BASS_POS_BYTE));
+			double tempPlaybackCurrentTime = BASS_ChannelBytes2Seconds(
+				channelID[tempPlayingPlayback],
+				BASS_ChannelGetPosition(channelID[tempPlayingPlayback], BASS_POS_BYTE));
 
-		// TODO: 衰退太快，實際聲音沒有衰退那麼快。不過如果衰退太慢會有聲音斷掉的問題
-		//double tempVolume = lastChannelVolume * exp(-tempPlaybackCurrentTime);
-		double tempVolume = lastChannelVolume * exp(-tempPlaybackCurrentTime / 100.0);	//試試看衰退時間增長一倍
-		LOG(LogLevel::Debug) << "DualTrackDualPlaybackBassSampleChannel::Play() : last channel volume [" << lastChannelVolume << "], last voume [" << tempVolume << "], new volume [" << volume->GetValue() << "], calculated volume [" << volumeCalculated->GetValue() << "]";
+			// TODO: 衰退太快，實際聲音沒有衰退那麼快。不過如果衰退太慢會有聲音斷掉的問題
+			//double tempVolume = lastChannelVolume * exp(-tempPlaybackCurrentTime);
+			lastChannelVolume = lastChannelVolume * exp(-tempPlaybackCurrentTime);	//試試看衰退時間增長一倍
+			LOG(LogLevel::Debug) << "DualTrackDualPlaybackBassSampleChannel::Play() : last volume set [" << lastVolume << "], last voume [" << lastChannelVolume << "], new volume [" << volume->GetValue() << "], calculated volume [" << volumeCalculated->GetValue() << "]";
 
 
-		if (BASS_ChannelIsActive(channelID[tempPlayingPlayback]) != BASS_ACTIVE_PLAYING) {
-			tempVolume = 0;
 		}
+		else 
+			lastChannelVolume = 0;
+		
 
 		// 音質調整公式 pan = -1 + ((volume - 0.3) / (0.7 - 0.3) * 2，最大為1，最小為-1
 
@@ -111,7 +113,7 @@ int RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Play()
 		if (pan > 1)pan = 1;
 		if (pan < -1)pan = -1;
 
-		LOG(LogLevel::Depricated) << "DualTrackDualPlaybackBassSampleChannel::Play() : last voume [" << tempVolume << "], new volume [" << volume->GetValue() << "], pan [" << pan << ".";
+		LOG(LogLevel::Depricated) << "DualTrackDualPlaybackBassSampleChannel::Play() : last voume [" << lastChannelVolume << "], new volume [" << volume->GetValue() << "], pan [" << pan << ".";
 
 
 		if (tempPlayingPlayback == 0)
@@ -129,7 +131,7 @@ int RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Play()
 
 		BASS_ChannelPlay(channelID[newPlayback], false);
 
-		if (tempVolume <= volumeCalculated->GetValue()) {
+		if (lastChannelVolume <= volumeCalculated->GetValue()) {
 			if (BASS_ChannelIsActive(channelID[tempPlayingPlayback]) == BASS_ACTIVE_PLAYING) {
 				BASS_ChannelSlideAttribute(channelID[tempPlayingPlayback], BASS_ATTRIB_VOL, 0, (DWORD)(dualSwitchFadeoutTime * 1000));
 			}
