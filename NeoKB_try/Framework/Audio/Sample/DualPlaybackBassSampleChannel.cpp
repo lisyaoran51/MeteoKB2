@@ -92,7 +92,9 @@ int DualPlaybackBassSampleChannel::Play()
 
 int DualPlaybackBassSampleChannel::Play(double v)
 {
-	lastVolume = volume->GetValue();
+	float tempChannelVolume = 0;
+	BASS_ChannelGetAttribute(channelID[tempPlayingPlayback], BASS_ATTRIB_VOL, &tempChannelVolume);
+	lastVolume = tempChannelVolume;
 	volume->SetValue(v);
 	InvalidateState();
 	return Play();
