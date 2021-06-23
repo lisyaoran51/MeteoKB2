@@ -67,7 +67,7 @@ int SoundSelectPanel::firstLoadSound()
 		return 0;
 	}
 
-	string firstLoadSoundBankName = "V2JapaneseStudio";
+	string firstLoadSoundBankName = "Noire";
 
 	instrumentConfigManager->Get(InstrumentSetting::InitialSoundBankName, &firstLoadSoundBankName);
 
