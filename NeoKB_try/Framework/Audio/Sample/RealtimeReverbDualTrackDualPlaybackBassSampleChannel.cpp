@@ -33,7 +33,7 @@ RealtimeReverbDualTrackDualPlaybackBassSampleChannel::RealtimeReverbDualTrackDua
 	//reverbVolumes[3] = 0;
 	//reverbVolumes[4] = 0;
 
-	predelay = 0.08f;
+	predelay = 0.11f;
 	reverbFadeoutTime = 1.f;
 }
 
