@@ -240,7 +240,7 @@ int MeteoMcuV1::readPanel()
 
 				int value = tan(((double)(2000 - stoi(splitMessage[1]))) / 2000.0 * 3.14159265358979323846 / 2.0) * 1.5;
 				// tan(((double)(200 - (timerCount - pressedKeyTime[pressedNum])))/200.0*3.14159265358979323846/2.0)*2;
-				LOG(LogLevel::Depricated) << "MeteoMcuV1::readPanel() : input is [" << stoi(splitMessage[1]) << "] this velocity is [" << value << "].";
+				LOG(LogLevel::Debug) << "MeteoMcuV1::readPanel() : input is [" << stoi(splitMessage[1]) << "] this velocity is [" << value << "].";
 				pushKeyboardState(key, value > 200 ? 200 : value);
 			}
 			else { // pedal
