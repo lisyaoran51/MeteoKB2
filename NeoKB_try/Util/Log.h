@@ -27,11 +27,12 @@ namespace Util {
 		System			 = 0x8,
 		Bluetooth		 = 0x10,
 		Hardware		 = 0x20,
-		Graph			 = 0x40,
-		UserInterface	 = 0x80,
-		Framework		 = 0x100,
-		Game			 = 0x200,
-		All				 = 0x400
+		Audio			 = 0x40,
+		Graph			 = 0x80,
+		UserInterface	 = 0x100,
+		Framework		 = 0x200,
+		Game			 = 0x400,
+		All				 = 0x800
 	};
 
 	enum class LogLevel

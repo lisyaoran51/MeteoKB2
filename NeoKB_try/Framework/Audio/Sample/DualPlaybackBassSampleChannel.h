@@ -40,7 +40,9 @@ namespace Samples {
 
 		int tempPlayingPlayback = 0;
 
-		double lastVolume = -1;
+		float lastVolume = -1;
+
+		float lastChannelVolume = -1;
 		
 		float dualSwitchFadeoutTime = 0.1f;
 

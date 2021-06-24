@@ -91,7 +91,7 @@ int RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Play()
 	pendingActions.Add(this, [=]() {
 		int newPlayback = 0;
 
-		float lastPlayVolume = lastVolume;
+		float lastPlayVolume = lastChannelVolume;
 		if (BASS_ChannelIsActive(channelID[tempPlayingPlayback]) == BASS_ACTIVE_PLAYING) {
 			
 			// 音量衰減公式 音量=e(-at)，a為常數，t為時間
@@ -169,7 +169,7 @@ int RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Play()
 
 		}
 		else {
-			LOG(LogLevel::Depricated) << "DualTrackDualPlaybackBassSampleChannel::Play() : last voume [" << lastPlayVolume << "], louder than new volume [" << volumeCalculated->GetValue() << "].";
+			LOG(LogLevel::Debug) << "DualTrackDualPlaybackBassSampleChannel::Play() : last voume [" << lastPlayVolume << "], louder than new volume [" << volumeCalculated->GetValue() << "].";
 			if (BASS_ChannelIsActive(channelID[newPlayback]) == BASS_ACTIVE_PLAYING) {
 				BASS_ChannelSlideAttribute(channelID[newPlayback], BASS_ATTRIB_VOL, 0, (DWORD)(dualSwitchFadeoutTime * 1000));
 			}
