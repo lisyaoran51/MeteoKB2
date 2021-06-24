@@ -131,7 +131,7 @@ int RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Play()
 
 		BASS_ChannelPlay(channelID[newPlayback], false);
 
-		if (lastPlayVolume <= volume->GetValue()) {
+		if (lastPlayVolume <= volumeCalculated->GetValue()) {
 			if (BASS_ChannelIsActive(channelID[tempPlayingPlayback]) == BASS_ACTIVE_PLAYING) {
 				BASS_ChannelSlideAttribute(channelID[tempPlayingPlayback], BASS_ATTRIB_VOL, 0, (DWORD)(dualSwitchFadeoutTime * 1000));
 			}
