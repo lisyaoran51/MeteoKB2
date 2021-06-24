@@ -118,7 +118,7 @@ int RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Play()
 		if (pan > 1)pan = 1;
 		if (pan < -1)pan = -1;
 
-		LOG(LogLevel::Depricated) << "DualTrackDualPlaybackBassSampleChannel::Play() : last voume [" << lastPlayVolume << "], new volume [" << volumeCalculated->GetValue() << "], pan [" << pan << ".";
+		LOG(LogLevel::Debug) << "DualTrackDualPlaybackBassSampleChannel::Play() : last voume [" << lastPlayVolume << "], new volume [" << volumeCalculated->GetValue() << "], pan [" << pan << ".";
 
 
 		if (tempPlayingPlayback == 0)
