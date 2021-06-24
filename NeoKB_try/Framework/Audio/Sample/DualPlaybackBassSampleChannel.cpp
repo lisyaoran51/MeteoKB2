@@ -111,7 +111,7 @@ int DualPlaybackBassSampleChannel::Stop()
 
 int DualPlaybackBassSampleChannel::FadeOut()
 {
-	LOG(LogLevel::Debug) << "DualPlaybackBassSampleChannel::FadeOut() : fadeout channel.";
+	LOG(LogLevel::Depricated) << "DualPlaybackBassSampleChannel::FadeOut() : fadeout channel.";
 	unique_lock<mutex> uLock(pendingActionMutex);
 	pendingActions.Add(this, [=]() {
 		if (BASS_ChannelIsActive(channelID[0]) == BASS_ACTIVE_PLAYING)
