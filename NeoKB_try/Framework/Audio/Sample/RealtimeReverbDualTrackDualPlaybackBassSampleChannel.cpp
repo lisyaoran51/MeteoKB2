@@ -112,11 +112,11 @@ int RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Play()
 			lastPlayVolume = 0;
 		
 
-		// 音質調整公式 pan = -1 + ((volume - 0.3) / (0.7 - 0.3) * 2，最大為1，最小為-1
+		// 音質調整公式 pan = (volume - 0.3) / (0.7 - 0.3)，最大為1，最小為0
 
-		float pan = -1.f + (volume->GetValue() - gradientTimbreStartVolume) / (gradientTimbreEndVolume - gradientTimbreStartVolume) * 2.f;
+		float pan = (volume->GetValue() - gradientTimbreStartVolume) / (gradientTimbreEndVolume - gradientTimbreStartVolume);
 		if (pan > 1)pan = 1;
-		if (pan < -1)pan = -1;
+		if (pan < 0)pan = 0;
 
 		LOG(LogLevel::Debug) << "DualTrackDualPlaybackBassSampleChannel::Play() : last voume [" << lastPlayVolume << "], new volume [" << volumeCalculated->GetValue() << "], pan [" << pan << ".";
 
