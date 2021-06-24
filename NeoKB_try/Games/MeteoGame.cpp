@@ -138,6 +138,7 @@ int MeteoGame::LoadOnComplete()
 	
 
 	AddChild(volumeController = new VolumeController());
+	GetDependencies()->Cache<VolumeController>(volumeController);
 
 	AddChild(screenStack = new Loader());
 

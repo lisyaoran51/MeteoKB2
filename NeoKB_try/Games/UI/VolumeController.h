@@ -27,12 +27,23 @@ namespace UI {
 
 		VolumeController();
 
+		int SetSampleVolumeRatio(float ratio);
+
+		int SetMirrorSampleVolumeRatio(float ratio);
+
+
 	protected:
 
 		Bindable<double>* masterVolumeMeter = new Bindable<double>(1.0);
 		Bindable<double>* sampleVolumeMeter = new Bindable<double>(1.0);
 		Bindable<double>* mirrorSampleVolumeMeter = new Bindable<double>(1.0);
 		Bindable<double>* trackVolumeMeter = new Bindable<double>(1.0);
+
+		float sampleVolumeRatio = 1;
+		float mirrorSampleVolumeRatio = 1;
+
+		float tempSampleVolume = 1;
+		float tempMirrorSampleVolume = 1;
 
 		virtual int onSlide(InputState* inputState, InputKey slider);
 

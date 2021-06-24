@@ -88,11 +88,16 @@ int MeteorRulesetExecutor::load()
 	if (!r) {
 		throw runtime_error("int MeteorRulesetExecutor::load() : ReplayRecorder not found in cache.");
 	}
+
+	VolumeController* v = GetCache<VolumeController>("VolumeController");
+	if (!v) {
+		throw runtime_error("int MeteorRulesetExecutor::load() : VolumeController not found in cache.");
+	}
 	// Ūconfig
-	return load(t, i, r);
+	return load(t, i, r, v);
 }
 
-int MeteorRulesetExecutor::load(MeteorTimeController * t, Instrument* i, ReplayRecorder* r)
+int MeteorRulesetExecutor::load(MeteorTimeController * t, Instrument* i, ReplayRecorder* r, VolumeController* v)
 {
 
 	LOG(LogLevel::Info) << "MeteorRulesetExecutor::load() : computing section time.";
@@ -141,6 +146,10 @@ int MeteorRulesetExecutor::load(MeteorTimeController * t, Instrument* i, ReplayR
 
 	t->SetSectionTime(&sectionTime);
 
+	volumeController = v;
+
+	volumeController->SetSampleVolumeRatio(0.8);
+
 
 	LOG(LogLevel::Finer) << "MeteorRulesetExecutor::load() : end.";
 	return 0;
@@ -177,6 +186,8 @@ MeteorRulesetExecutor::~MeteorRulesetExecutor()
 	if(compositeMeteoPiano->GetSustainType() == SustainType::GameControllingSustain)
 		compositeMeteoPiano->ChangeSustainType(SustainType::AutoSustain);
 
+
+	volumeController->SetSampleVolumeRatio(1);
 }
 
 int MeteorRulesetExecutor::LazyConstruct(WorkingSm * w, Ruleset* r)

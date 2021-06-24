@@ -21,6 +21,9 @@ int VolumeController::load(AudioManager * aManager)
 	sampleVolumeMeter->BindTo(aManager->GetSampleVolume());
 	mirrorSampleVolumeMeter->BindTo(aManager->GetMirrorSampleVolume());
 
+	sampleVolumeMeter->SetValue(sampleVolumeRatio / 100.f);
+	mirrorSampleVolumeMeter->SetValue(mirrorSampleVolumeRatio / 100.f);
+
 	isPresent = true;
 
 	return 0;
@@ -32,6 +35,20 @@ VolumeController::VolumeController(): RegisterType("VolumeController")
 
 	isInputable = true;
 
+}
+
+int VolumeController::SetSampleVolumeRatio(float ratio)
+{
+	sampleVolumeRatio = ratio;
+	sampleVolumeMeter->SetValue(tempSampleVolume * sampleVolumeRatio);
+	return 0;
+}
+
+int VolumeController::SetMirrorSampleVolumeRatio(float ratio)
+{
+	mirrorSampleVolumeRatio = ratio;
+	mirrorSampleVolumeMeter->SetValue(tempMirrorSampleVolume * mirrorSampleVolumeRatio);
+	return 0;
 }
 
 int VolumeController::onSlide(InputState * inputState, InputKey slider)
@@ -46,7 +63,8 @@ int VolumeController::onSlide(InputState * inputState, InputKey slider)
 		}
 
 		LOG(LogLevel::Debug) << "VolumeController::onSlide() : music volume slide to [" << (float)value / 100.f << "].";
-		mirrorSampleVolumeMeter->SetValue((float)value / 100.f);
+		tempMirrorSampleVolume = value / 100.f;
+		mirrorSampleVolumeMeter->SetValue((float)value * mirrorSampleVolumeRatio / 100.f);
 	}
 
 	if (slider == InputKey::PianoVolumeSlider) {
@@ -58,7 +76,8 @@ int VolumeController::onSlide(InputState * inputState, InputKey slider)
 		}
 
 		LOG(LogLevel::Debug) << "VolumeController::onSlide() : piano volume slide to [" << (float)value / 100.f << "].";
-		sampleVolumeMeter->SetValue((float)value / 100.f);
+		tempSampleVolume = (float)value / 100.f;
+		sampleVolumeMeter->SetValue((float)value * sampleVolumeRatio / 100.f);
 	}
 
 	return 0;
