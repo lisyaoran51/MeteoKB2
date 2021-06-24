@@ -232,6 +232,7 @@ int MeteoMcuV1::readPanel()
 					continue;
 
 				if (stoi(splitMessage[1]) < 0) {
+					LOG(LogLevel::Depricated) << "MeteoMcuV1::readPanel() : input is [" << int(key) << "] key up.";
 					pushKeyboardState(key, stoi(splitMessage[1]));
 					continue;
 				}
