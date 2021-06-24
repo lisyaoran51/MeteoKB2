@@ -113,7 +113,7 @@ int RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Play()
 		if (pan > 1)pan = 1;
 		if (pan < -1)pan = -1;
 
-		LOG(LogLevel::Depricated) << "DualTrackDualPlaybackBassSampleChannel::Play() : last voume [" << lastPlayVolume << "], new volume [" << volume->GetValue() << "], pan [" << pan << ".";
+		LOG(LogLevel::Debug) << "DualTrackDualPlaybackBassSampleChannel::Play() : last voume [" << lastPlayVolume << "], new volume [" << volumeCalculated->GetValue() << "], pan [" << pan << ".";
 
 
 		if (tempPlayingPlayback == 0)
@@ -164,7 +164,7 @@ int RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Play()
 
 		}
 		else {
-			LOG(LogLevel::Depricated) << "DualTrackDualPlaybackBassSampleChannel::Play() : last voume [" << lastPlayVolume << "], louder than new volume [" << volume->GetValue() << "].";
+			LOG(LogLevel::Depricated) << "DualTrackDualPlaybackBassSampleChannel::Play() : last voume [" << lastPlayVolume << "], louder than new volume [" << volumeCalculated->GetValue() << "].";
 			if (BASS_ChannelIsActive(channelID[newPlayback]) == BASS_ACTIVE_PLAYING) {
 				BASS_ChannelSlideAttribute(channelID[newPlayback], BASS_ATTRIB_VOL, 0, (DWORD)(dualSwitchFadeoutTime * 1000));
 			}
