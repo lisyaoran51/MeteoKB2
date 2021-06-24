@@ -67,7 +67,7 @@ int SoundSelectPanel::firstLoadSound()
 		return 0;
 	}
 
-	string firstLoadSoundBankName = "Bosendorfer";
+	string firstLoadSoundBankName = "V2";
 
 	instrumentConfigManager->Get(InstrumentSetting::InitialSoundBankName, &firstLoadSoundBankName);
 
