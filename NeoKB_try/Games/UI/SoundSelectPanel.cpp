@@ -69,7 +69,9 @@ int SoundSelectPanel::firstLoadSound()
 
 	string firstLoadSoundBankName = "Bosendorfer";
 
-	instrumentConfigManager->Get(InstrumentSetting::InitialSoundBankName, &firstLoadSoundBankName);
+
+	if(!instrumentConfigManager->Get(InstrumentSetting::InitialSoundBankName, &firstLoadSoundBankName))
+		LOG(LogLevel::Error) << "SoundSelectPanel::firstLoadSound() : fist sound not found in config.";
 
 	LOG(LogLevel::Debug) << "SoundSelectPanel::firstLoadSound() : first switch sound to [" << firstLoadSoundBankName << "].";
 	vector<SoundBindingSet*>* soundBindingSets = audioManager->GetSampleManager()->GetSoundBindingSets();

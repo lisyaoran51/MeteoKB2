@@ -83,7 +83,7 @@ int DualTrackDualPlaybackBassSampleChannel::Play()
 
 int DualTrackDualPlaybackBassSampleChannel::SetTimbreRange(float start, float end)
 {
-	LOG(LogLevel::Debug) << "DualTrackDualPlaybackBassSampleChannel::SetTimbreRange() : start [" << start << "], end [" << end << "].";
+	LOG(LogLevel::Depricated) << "DualTrackDualPlaybackBassSampleChannel::SetTimbreRange() : start [" << start << "], end [" << end << "].";
 
 	gradientTimbreStartVolume = start;
 	gradientTimbreEndVolume = end;
