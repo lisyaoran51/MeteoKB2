@@ -36,6 +36,8 @@ namespace Scoring {
 
 		virtual ~ScoreProcessor();
 
+		int SetOutputManager(OutputManager* o);
+
 		template<class _Type>
 		int AddOnAllJudged(_Type* callableObject, function<int(void)> callback, string name = "HandleCompletion") {
 			onAllJudged.Add(callableObject, callback, name);
@@ -57,6 +59,8 @@ namespace Scoring {
 	protected:
 
 		ScoreProcessor(RulesetExecutor<Event>* rExecutor);
+
+		OutputManager* outputManager = nullptr;
 
 		vector<EventProcessor<Event>*>* eventProcessors = nullptr;
 

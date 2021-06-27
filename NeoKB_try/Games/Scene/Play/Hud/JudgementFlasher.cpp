@@ -1,7 +1,15 @@
 #include "JudgementFlasher.h"
 
+#include "../../../Output/Bluetooths/MeteoContextBluetoothMessage.h"
+#include "../../../../Framework/Output/OutputManager.h"
+#include <iomanip>
+#include <sstream>
+
+
 
 using namespace Games::Scenes::Play::Hud;
+using namespace Games::Output::Bluetooths;
+using namespace Framework::Output;
 
 
 
@@ -27,6 +35,9 @@ int JudgementFlasher::FlashJudgement(Judgement * judgement)
 	//outputManager...
 
 	LOG(LogLevel::Fine) << "JudgementFlasher::FlashJudgement : Flashing Judgement [" << judgement->GetResultString() << "].";
+
+
+
 
 	return 0;
 }

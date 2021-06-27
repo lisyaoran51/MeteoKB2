@@ -37,7 +37,7 @@ namespace Audio {
 		}
 
 		int SetDelays(vector<float> dTimes) {
-			if (dTimes.size() < 5)
+			if (dTimes.size() != 5)
 				return 0;
 
 			delayTimes.clear();
@@ -45,7 +45,7 @@ namespace Audio {
 		}
 
 		int SetReverbVolumes(vector<float> rVolumes) {
-			if (rVolumes.size() < 5)
+			if (rVolumes.size() != 5)
 				return 0;
 
 			reverbVolumes.clear();

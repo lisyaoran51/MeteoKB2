@@ -205,6 +205,7 @@ int Player::load(MeteoConfigManager* m, Instrument* instru, MeteoGame * g)
 	hudDisplay = new HudDisplay();
 
 	scoreProcessor = rulesetExecutor->CreateScoreProcessor();
+	scoreProcessor->SetOutputManager(outputManager);
 
 	hudDisplay->BindScoreProcessor(scoreProcessor);
 	hudDisplay->BindRulesetExecutor(rulesetExecutor);

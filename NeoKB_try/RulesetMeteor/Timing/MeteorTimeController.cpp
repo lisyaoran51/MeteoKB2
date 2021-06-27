@@ -5,7 +5,8 @@
 #include "../Scheduler/Event/Effect/EruptEffectMapper.h"
 #include "../../Games/Output/Panels/RevolveLightRingPanelMessage.h"
 #include "../../Games/Output/Panels/SpeedRingPanelMessage.h"
-
+#include <iomanip>
+#include <sstream>
 
 
 using namespace Meteor::Timing;
@@ -154,12 +155,14 @@ int MeteorTimeController::OnButtonDown(MeteorAction action)
 {
 	if (action == MeteorAction::Pause) {
 		LOG(LogLevel::Debug) << "MeteorTimeController::OnButtonDown() : get pause button input and pause.";
+
 		if (speedAdjuster->GetIsAdjustingTime())
 			return -1;
 
 		if (!GetIsPaused()) {
 			Pause();
 			//SetAllChildsIsMaskedForTrigger(); 這行在speed adjuster的on freeze裡面
+
 		}
 		else if (!isWaitingFreeze) {
 			LOG(LogLevel::Debug) << "MeteorTimeController::OnButtonDown() : restart and freeze 1 sec.";
@@ -222,6 +225,20 @@ int MeteorTimeController::OnKnobTurn(pair<MeteorAction, int> action)
 			eventProcessorFilter->SwitchVariant(0);	// 落下燈光示範
 			repeatPracticeMode = RepeatPracticeMode::Demonstrate;
 			tempRepeatCounts = 0;
+
+			MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::HardwareGameEvent);
+			
+			string gameEventContext = "SectionJump,";
+			gameEventContext += to_string(tempRepeatStartSection);
+
+			json context;
+			context["Events"].push_back(gameEventContext);
+
+			meteoContextBluetoothMessage->SetContextInJson(context);
+			meteoContextBluetoothMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
+
+			outputManager->PushMessage(meteoContextBluetoothMessage);
+
 		}
 		else if (timeControllerMode == MeteorTimeControllerMode::MusicGame) {
 
@@ -236,11 +253,33 @@ int MeteorTimeController::OnKnobTurn(pair<MeteorAction, int> action)
 			if (controllableClock->GetCurrentTime() < 0 && turnValue < 0)
 				return -1;
 
+			/* 如果已經超出遊戲長度，就不要再快進 */
+			if (controllableClock->GetCurrentTime() + turnValue * defaultAdjustTime > lastEventOverTime + 3.0)
+				return -1;
+			
 			speedAdjuster->SetSeekTime(turnValue * defaultAdjustTime);
 
 			// 這邊是避免剛好set seek time以後seek time剛好等於0，會造成意外狀況，所以刻意不讓他最後變成0，就隨便加一個數字上去
 			if (speedAdjuster->GetSeekTime() == 0)
 				speedAdjuster->SetSeekTime(turnValue);
+
+
+			MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::HardwareGameEvent);
+
+			string gameEventContext = "TimeJump,";
+
+			stringstream stream;
+			stream << fixed << setprecision(2) << GetClock()->GetCurrentTime() + turnValue * defaultAdjustTime;
+			gameEventContext += stream.str();
+
+			json context;
+			context["Events"].push_back(gameEventContext);
+
+			meteoContextBluetoothMessage->SetContextInJson(context);
+			meteoContextBluetoothMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
+
+			outputManager->PushMessage(meteoContextBluetoothMessage);
+
 		}
 	}
 
@@ -248,30 +287,47 @@ int MeteorTimeController::OnKnobTurn(pair<MeteorAction, int> action)
 		LOG(LogLevel::Debug) << "MeteorTimeController::onKnobTurn() : get [SpeedKnob] action. ";
 
 		int turnValue = action.second;
+		bool isAdjusted = false;
+		float newRate = 1.0;
 
 		if (turnValue < 0) {
 			if (GetRate() > 0.3) {
 				LOG(LogLevel::Debug) << "MeteorTimeController::onKnobTurn() : [SpeedKnob] action turn value = " << turnValue << ". rate = " << GetRate();
-				SetRate(GetRate() - 0.1);
-				//SetRate(0.8);
+				isAdjusted = true;
+				newRate = GetRate() - 0.1;
 
-				// TODO:
-				// OutputManager->push(減速訊號給mcu)
-
+				SetRate(newRate);
 			}
 		}
 		else {
 			if (GetRate() < 1.8) {
 				LOG(LogLevel::Debug) << "MeteorTimeController::onKnobTurn() : [SpeedKnob] action turn value = " << turnValue << ". rate = " << GetRate();
-				SetRate(GetRate() + 0.1);
+				isAdjusted = true;
+				newRate = GetRate() + 0.1;
 
-				// TODO:
-				// OutputManager->push(加速訊號給mcu)
-
+				SetRate(newRate);
 			}
 		}
 
+		if (isAdjusted) {
 
+			MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::HardwareGameEvent);
+
+			string gameEventContext = "AdjustSpeed,";
+
+			stringstream stream;
+			stream << fixed << setprecision(1) << newRate;
+			gameEventContext += stream.str();
+
+			json context;
+			context["Events"].push_back(gameEventContext);
+
+			meteoContextBluetoothMessage->SetContextInJson(context);
+			meteoContextBluetoothMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
+
+			outputManager->PushMessage(meteoContextBluetoothMessage);
+
+		}
 	}
 
 
@@ -377,6 +433,9 @@ int MeteorTimeController::RepeatSection(int section)
 				eventProcessorFilter->SwitchVariant(0);	// 落下燈光示範
 				repeatPracticeMode = RepeatPracticeMode::Demonstrate;
 				LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : set filter to [" << 0 << "], Demonstrating";
+
+
+
 			}
 			else {
 				eventProcessorFilter->SwitchVariant(1);	// 向上燈光練習
@@ -384,15 +443,19 @@ int MeteorTimeController::RepeatSection(int section)
 				LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : set filter to [" << 1 << "], Practicing";
 			}
 
-			//if (repeatPracticeMode == RepeatPracticeMode::Demonstrate) {
-			//	eventProcessorFilter->SwitchVariant(0);	// 落下燈光示範
-			//	repeatPracticeMode == RepeatPracticeMode::Practice;
-			//}
-			//else {
-			//	eventProcessorFilter->SwitchVariant(1);	// 向上燈光練習
-			//	repeatPracticeMode == RepeatPracticeMode::Demonstrate;
-			//	
-			//}
+			MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::HardwareGameEvent);
+
+			string gameEventContext = "SwitchMode,";
+
+			gameEventContext += to_string(int(repeatPracticeMode));
+
+			json context;
+			context["Events"].push_back(gameEventContext);
+
+			meteoContextBluetoothMessage->SetContextInJson(context);
+			meteoContextBluetoothMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
+
+			outputManager->PushMessage(meteoContextBluetoothMessage);
 
 		}
 
@@ -443,11 +506,11 @@ int MeteorTimeController::RepeatSection(int section)
 
 		totalRewindLength = 1;
 		
-		if (tempRepeatStartSection + maxSectionAmountForOneRepeat < section + 1) {
-			
-			LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : ???";
-			RepeatSection(section);
-		}
+		//if (tempRepeatStartSection + maxSectionAmountForOneRepeat < section + 1) {
+		//	
+		//	LOG(LogLevel::Debug) << "MeteorTimeController::RepeatSection() : ???";
+		//	RepeatSection(section);
+		//}
 		isGoForward = false;
 	}
 
@@ -466,6 +529,19 @@ int MeteorTimeController::RepeatSection(int section)
 
 	JumpTo(controllableClock->GetCurrentTime() - totalRewindLength);
 
+
+	MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::HardwareGameEvent);
+
+	string gameEventContext = "SectionJump,";
+	gameEventContext += to_string(tempRepeatStartSection);
+
+	json context;
+	context["Events"].push_back(gameEventContext);
+
+	meteoContextBluetoothMessage->SetContextInJson(context);
+	meteoContextBluetoothMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
+
+	outputManager->PushMessage(meteoContextBluetoothMessage);
 	
 
 	return 0;

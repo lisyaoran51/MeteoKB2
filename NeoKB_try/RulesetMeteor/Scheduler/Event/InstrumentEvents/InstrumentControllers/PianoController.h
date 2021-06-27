@@ -21,6 +21,8 @@ namespace InstrumentControllers{
 
 		int load();
 
+		int load(OutputManager* o);
+
 	public:
 
 		PianoController();
@@ -28,6 +30,8 @@ namespace InstrumentControllers{
 	protected:
 
 		Piano* piano = nullptr;
+
+		OutputManager* outputManager = nullptr;
 
 		virtual int implementControlInstrument(EventProcessor<Event>* e);
 

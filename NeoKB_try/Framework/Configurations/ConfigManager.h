@@ -213,8 +213,10 @@ namespace Configurations {
 
 			fstream* stream = storage->GetStream(fileName);
 
-			if (stream == nullptr)
+			if (stream == nullptr) {
+				LOG(LogLevel::Warning) << "TConfigManager::loadConfigs() : manager [" << GetTypeName() << "] no config file [" << fileName << "] found.";
 				return -1;
+			}
 
 			string line;
 

@@ -28,6 +28,11 @@ namespace Events{
 
 		int ChangePitchState(MeteoPianoPitchState pState);
 
+		/// <summary>
+		/// 這邊是用map的value反推回去，有很大的效率問題，不過因為不常使用，所以不做雙向map
+		/// </summary>
+		virtual Pitch GetPitchFromAction(MeteorAction action);
+
 		virtual int OnKeyDown(pair<MeteorAction, int> action);
 
 		virtual int OnKeyUp(MeteorAction action);

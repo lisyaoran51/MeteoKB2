@@ -204,7 +204,40 @@ PassThroughInputManager * MeteorRulesetExecutor::CreateInputManager()
 
 TimeController * MeteorRulesetExecutor::CreateTimeController()
 {
-	return new MeteorTimeController();
+	MeteorTimeController* t = new MeteorTimeController();
+
+	t->AddOnPause(this, [=]() {
+
+		MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::HardwareGameEvent);
+
+		json context;
+		context["Events"].push_back(string("Pause,1"));
+
+		meteoContextBluetoothMessage->SetContextInJson(context);
+		meteoContextBluetoothMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
+
+		outputManager->PushMessage(meteoContextBluetoothMessage);
+
+		return 0;
+	}, "Lambda_MeteorRulesetExecutor::HandleOnPause");
+
+	t->AddOnPauseEnd(this, [=]() {
+
+		MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::HardwareGameEvent);
+
+		json context;
+		context["Events"].push_back(string("Pause,-1"));
+
+		meteoContextBluetoothMessage->SetContextInJson(context);
+		meteoContextBluetoothMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
+
+		outputManager->PushMessage(meteoContextBluetoothMessage);
+
+		return 0;
+	}, "Lambda_MeteorRulesetExecutor::HandleOnPauseEnd");
+
+
+	return 0;
 }
 
 SpeedAdjuster * MeteorRulesetExecutor::CreateSpeedAdjuster()

@@ -174,6 +174,9 @@ namespace Events {
 	public:
 
 		TEventProcessorMaster(): RegisterType("TEventProcessorMaster"){}
+
+		virtual Pitch GetPitchFromAction(T action) = 0;
+
 	};
 
 }}}

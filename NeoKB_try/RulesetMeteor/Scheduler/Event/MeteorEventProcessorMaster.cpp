@@ -5,6 +5,8 @@
 #include "../../../Games/Scheduler/Event/ControlPoints/NoteControlPointHitObject.h"
 #include "../../../Games/Output/Bluetooths/MeteoContextBluetoothMessage.h"
 #include "../../../Games/Scheduler/Event/InstrumentEvents/InstrumentEvent.h"
+#include <sstream>
+#include <iomanip>
 
 // debug¥Î
 #include <chrono>
@@ -46,6 +48,30 @@ int MeteorEventProcessorMaster::ChangePitchState(MeteoPianoPitchState pState)
 int MeteorEventProcessorMaster::OnKeyDown(pair<MeteorAction, int> action)
 {
 	LOG(LogLevel::Depricated) << "MeteorEventProcessorMaster::OnKeyDown() : get input." << int(action.first);
+
+	string gameEventContext = "PressKey,";
+
+	stringstream stream;
+	stream << fixed << setprecision(2) << GetClock()->GetCurrentTime();
+	gameEventContext += stream.str();
+	gameEventContext += string(",");
+	gameEventContext += to_string(int(GetPitchFromAction(action.first)));
+	gameEventContext += string(",");
+	stream.clear();
+	stream << fixed << setprecision(2) << float(action.second) / 128.0;
+	gameEventContext += stream.str();
+
+	MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::HardwareGameEvent);
+
+	json context;
+	context["Events"].push_back(gameEventContext);
+
+	meteoContextBluetoothMessage->SetContextInJson(context);
+	meteoContextBluetoothMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
+
+	outputManager->PushMessage(meteoContextBluetoothMessage);
+
+
 	//double currentTime = GetClock()->GetCurrentTime();
 	//
 	//vector<EventProcessor<Event>*> eventProcessors;
@@ -98,94 +124,84 @@ int MeteorEventProcessorMaster::OnKeyDown(pair<MeteorAction, int> action)
 		}
 	}
 
-
-	//MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::PressKey);
-	//json context;
-	//
-	//switch (pitchState) {
-	//
-	//case MeteoPianoPitchState::None:
-	//	for (auto it = pitchBindings.begin(); it != pitchBindings.end(); it++)
-	//	{
-	//		if (action.first == (*it).second)
-	//			context["Key"] = int((*it).first);
-	//	}
-	//	break;
-	//
-	//case MeteoPianoPitchState::Lowered:
-	//	for (auto it = loweredPitchBindings.begin(); it != loweredPitchBindings.end(); it++)
-	//	{
-	//		if (action.first == (*it).second)
-	//			context["Key"] = int((*it).first);
-	//	}
-	//	break;
-	//
-	//case MeteoPianoPitchState::Raised:
-	//	for (auto it = raisedPitchBindings.begin(); it != raisedPitchBindings.end(); it++)
-	//	{
-	//		if (action.first == (*it).second)
-	//			context["Key"] = int((*it).first);
-	//	}
-	//	break;
-	//
-	//}
-	//
-	//context["Volume"] = action.second;
-	//
-	//meteoContextBluetoothMessage->SetContextInJson(context);
-	//meteoContextBluetoothMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
-	//
-	//outputManager->PushMessage(meteoContextBluetoothMessage);
-
 	return 0;
 }
 
 int MeteorEventProcessorMaster::OnKeyUp(MeteorAction action)
 {
+	
+	string gameEventContext = "ReleaseKey,";
 
-	//switch (pitchState) {
-	//
-	//case MeteoPianoPitchState::None:
-	//	for (auto it = pitchBindings.begin(); it != pitchBindings.end(); it++)
-	//	{
-	//		if (action == (*it).second)
-	//			key = int((*it).first);
-	//	}
-	//	break;
-	//
-	//case MeteoPianoPitchState::Lowered:
-	//	for (auto it = loweredPitchBindings.begin(); it != loweredPitchBindings.end(); it++)
-	//	{
-	//		if (action == (*it).second)
-	//			key = int((*it).first);
-	//	}
-	//	break;
-	//
-	//case MeteoPianoPitchState::Raised:
-	//	for (auto it = raisedPitchBindings.begin(); it != raisedPitchBindings.end(); it++)
-	//	{
-	//		if (action == (*it).second)
-	//			key = int((*it).first);
-	//	}
-	//	break;
-	//
-	//}
+	stringstream stream;
+	stream << fixed << setprecision(2) << GetClock()->GetCurrentTime();
+	gameEventContext += stream.str();
+	gameEventContext += string(",");
+	gameEventContext += to_string(int(GetPitchFromAction(action)));
+
+	MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::HardwareGameEvent);
+
+	json context;
+	context["Events"].push_back(gameEventContext);
+
+	meteoContextBluetoothMessage->SetContextInJson(context);
+	meteoContextBluetoothMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
+
+	outputManager->PushMessage(meteoContextBluetoothMessage);
+
 
 	return 0;
 }
 
 int MeteorEventProcessorMaster::OnButtonDown(MeteorAction action)
 {
+	if (action == MeteorAction::SustainPedal) {
+		MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::HardwareGameEvent);
+
+		string gameEventContext = "PedalDown,";
+
+		stringstream stream;
+		stream << fixed << setprecision(2) << GetClock()->GetCurrentTime();
+		gameEventContext += stream.str();
+
+		json context;
+		context["Events"].push_back(gameEventContext);
+
+		meteoContextBluetoothMessage->SetContextInJson(context);
+		meteoContextBluetoothMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
+
+		outputManager->PushMessage(meteoContextBluetoothMessage);
+	}
+
 	return 0;
 }
 
 int MeteorEventProcessorMaster::OnButtonUp(MeteorAction action)
 {
+	if (action == MeteorAction::SustainPedal) {
+		MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::HardwareGameEvent);
+
+		string gameEventContext = "PedalUp,";
+
+		stringstream stream;
+		stream << fixed << setprecision(2) << GetClock()->GetCurrentTime();
+		gameEventContext += stream.str();
+
+		json context;
+		context["Events"].push_back(gameEventContext);
+
+		meteoContextBluetoothMessage->SetContextInJson(context);
+		meteoContextBluetoothMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
+
+		outputManager->PushMessage(meteoContextBluetoothMessage);
+	}
+
 	return 0;
 }
 
 int MeteorEventProcessorMaster::OnKnobTurn(pair<MeteorAction, int> action)
 {
+
+
 	return 0;
 }
 
@@ -496,4 +512,40 @@ bool MeteorEventProcessorMaster::filterHiddenNoteEffects(EventProcessor<Event>* 
 	}
 
 	return true;
+}
+
+Pitch MeteorEventProcessorMaster::GetPitchFromAction(MeteorAction action)
+{
+	map<Pitch, MeteorAction>::iterator it;
+
+	switch (pitchState) {
+
+	case MeteoPianoPitchState::None:
+		for (it = pitchBindings.begin(); it != pitchBindings.end(); ++it) {
+			if (it->second == action) {
+				return it->first;
+			}
+		}
+		break;
+
+	case MeteoPianoPitchState::Lowered:
+		for (it = loweredPitchBindings.begin(); it != loweredPitchBindings.end(); ++it) {
+			if (it->second == action) {
+				return it->first;
+			}
+		}
+		break;
+
+	case MeteoPianoPitchState::Raised:
+		for (it = raisedPitchBindings.begin(); it != raisedPitchBindings.end(); ++it) {
+			if (it->second == action) {
+				return it->first;
+			}
+		}
+		break;
+	}
+
+	LOG(LogLevel::Warning) << "EventProcessorMaster::GetPitchFromAction() : pitch not found [" << (int)action << "].";
+
+	return Pitch::None;
 }

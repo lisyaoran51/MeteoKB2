@@ -20,6 +20,8 @@ namespace InstrumentControllers{
 
 		int load();
 
+		int load(OutputManager* o);
+
 	public:
 
 		VirtualPianoController();
@@ -27,6 +29,8 @@ namespace InstrumentControllers{
 	protected:
 
 		VirtualMeteoPiano* piano = nullptr;
+
+		OutputManager* outputManager = nullptr;
 
 		virtual int implementControlInstrument(EventProcessor<Event>* e);
 

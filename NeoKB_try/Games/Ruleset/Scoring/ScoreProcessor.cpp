@@ -4,6 +4,7 @@
 #include "../../../Util/Log.h"
 #include <iomanip>
 #include "../../Scheduler/Event/ControlPoints/NoteControlPointHitObject.h"
+#include "../../../Framework/Output/OutputManager.h"
 
 
 using namespace Games::Rulesets::Scoring;
@@ -11,6 +12,8 @@ using namespace Games::Rulesets;
 using namespace Util;
 using namespace std;
 using namespace Games::Schedulers::Events::ControlPoints;
+using namespace Framework::Output;
+
 
 
 Bindable<double>* ScoreProcessor::GetTotalScore()
@@ -96,6 +99,12 @@ ScoreProcessor::~ScoreProcessor()
 	highestCombo = nullptr;
 }
 
+int ScoreProcessor::SetOutputManager(OutputManager * o)
+{
+	outputManager = o;
+	return 0;
+}
+
 bool ScoreProcessor::getIsCompleted()
 {
 	return hits == maxHits;
@@ -152,17 +161,25 @@ int ScoreProcessor::addUpJudgementScore(Judgement * judgement)
 	if (rollingMaxBaseScore != 0)
 		accuracy->SetValue(baseScore / rollingMaxBaseScore);
 
-	/*
-	switch (Mode.Value)
-	{
-	case ScoringMode.Standardised:
-		TotalScore.Value = max_score * (base_portion * baseScore / maxBaseScore + combo_portion * HighestCombo / maxHighestCombo) + bonusScore;
-		break;
-	case ScoringMode.Exponential:
-		TotalScore.Value = (baseScore + bonusScore) * Math.Log(HighestCombo + 1, 2);
-		break;
-	}
-	*/
+
+	MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::HardwareGameEvent);
+
+	string gameEventContext = string("Score,") + 
+		to_string((int)judgement->GetResult()) + string(",") + 
+		to_string(int(judgement->GetResultScore())) + string(",") + 
+		to_string(int(baseScore)) + string(",") +
+		to_string(combo->GetValue());
+
+	json context;
+	context["Events"].push_back(gameEventContext);
+
+	meteoContextBluetoothMessage->SetContextInJson(context);
+	meteoContextBluetoothMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
+
+	if(outputManager != nullptr)
+		outputManager->PushMessage(meteoContextBluetoothMessage);
+
+
 }
 
 int ScoreProcessor::NotifyNewJudgement(Judgement * judgement)
