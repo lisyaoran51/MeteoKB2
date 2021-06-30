@@ -39,12 +39,6 @@ MeteorEventProcessorMaster::MeteorEventProcessorMaster() : RegisterType("MeteorE
 	registerLoad(bind((int(MeteorEventProcessorMaster::*)())&MeteorEventProcessorMaster::load, this));
 }
 
-int MeteorEventProcessorMaster::ChangePitchState(MeteoPianoPitchState pState)
-{
-	pitchState = pState;
-	return 0;
-}
-
 int MeteorEventProcessorMaster::OnKeyDown(pair<MeteorAction, int> action)
 {
 	LOG(LogLevel::Depricated) << "MeteorEventProcessorMaster::OnKeyDown() : get input." << int(action.first);
@@ -516,6 +510,24 @@ bool MeteorEventProcessorMaster::filterHiddenNoteEffects(EventProcessor<Event>* 
 
 Pitch MeteorEventProcessorMaster::GetPitchFromAction(MeteorAction action)
 {
+	if (action < MeteorAction::VK24_L_C1 || action > MeteorAction::VK24_R_B2)
+		return Pitch::None;
+
+	int pitch = (int)action - (int)MeteorAction::VK24_L_C1 + 24;
+
+	switch (pitchState) {
+	case MeteoPianoPitchState::Lowered:
+		pitch -= 12;
+		break;
+	case MeteoPianoPitchState::Raised:
+		pitch += 12;
+		break;
+	}
+
+	return (Pitch)pitch;
+
+
+	// ³o¼Ë¼g¤ÓºC
 	map<Pitch, MeteorAction>::iterator it;
 
 	switch (pitchState) {

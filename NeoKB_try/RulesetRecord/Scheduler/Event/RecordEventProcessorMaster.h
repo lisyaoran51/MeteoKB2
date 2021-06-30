@@ -24,7 +24,7 @@ namespace Events{
 		
 		RecordEventProcessorMaster();
 
-		int ChangePitchState(MeteoPianoPitchState pState);
+		virtual Pitch GetPitchFromAction(RecordAction action);
 
 		virtual int OnKeyDown(pair<RecordAction, int> action);
 
@@ -43,8 +43,6 @@ namespace Events{
 		virtual int update();
 
 		virtual int LoadOnComplete();
-
-		MeteoPianoPitchState pitchState = MeteoPianoPitchState::None;
 
 		map<Pitch, RecordAction> pitchBindings;
 

@@ -11,6 +11,7 @@
 #include "../../../Framework/Allocation/Hierachal/Container.h"
 #include "Event.h"
 #include "EventProcessorFilter.h"
+#include "../../../Instruments/MeteoPianoPitchState.h"
 #include "../../../Framework/Graphic/Drawable.h"
 #include "../../../Util/DataStructure/PeriodMap.h"
 #include "../../../Framework/Allocation/Hierachal/Triggerable.h"
@@ -24,7 +25,7 @@
 
 using namespace std;
 using namespace Util::DataStructure;
-using namespace Framework::Graphic::Maps;
+using namespace Instruments;
 using namespace Framework::Graphic::Maps;
 using namespace Framework::Graphic;
 using namespace Framework::Allocation::Hierachal;
@@ -90,6 +91,8 @@ namespace Events {
 
 		PeriodMap<EventProcessor<Event>*>* GetEventProcessorPeriods();
 
+		int ChangePitchState(MeteoPianoPitchState pState);
+
 		template<class _Type>
 		int AddOnRetry(_Type* callableObject, function<int()> callback, string name = "HandleRetryRequest") {
 			if (timeController)
@@ -138,6 +141,8 @@ namespace Events {
 
 		vector<EventProcessor<Event>*> filteredTempStaticEventProcessors;
 
+		MeteoPianoPitchState pitchState = MeteoPianoPitchState::None;
+
 		OutputManager* outputManager = nullptr;
 
 		TimeController* timeController = nullptr;
@@ -152,17 +157,6 @@ namespace Events {
 		
 
 		virtual int update();
-
-		/* 改成擺在rulset executor裡
-		/// <summary>
-		/// a utility to create new processor with specific type 
-		/// </summary>
-		InstanceCreator<EventProcessor<Event>> event_processor_creator;
-		*/
-
-		// 移到meteor event processor master裡面了
-		virtual int onKeyDown(InputState* inputState, Key key);
-
 	};
 
 	/// <summary>
@@ -176,6 +170,10 @@ namespace Events {
 		TEventProcessorMaster(): RegisterType("TEventProcessorMaster"){}
 
 		virtual Pitch GetPitchFromAction(T action) = 0;
+
+	protected:
+
+
 
 	};
 

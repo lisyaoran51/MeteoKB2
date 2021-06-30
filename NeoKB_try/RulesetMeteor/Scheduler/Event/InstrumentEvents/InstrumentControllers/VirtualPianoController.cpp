@@ -56,6 +56,7 @@ int VirtualPianoController::implementControlInstrument(EventProcessor<Event>* e)
 		LOG(LogLevel::Fine) << "VirtualPianoController::implementControlInstrument() : play sound [" << soundEvent->GetStartTime() << "] on [" << int(soundEvent->GetSound().first) << "] with volume [" << soundEvent->GetSound().second << "].";
 		
 		string gameEventContext;
+
 		if (soundEvent->GetSound().second == 0) {
 			piano->Stop(soundEvent->GetSound().first);
 			gameEventContext = string("GameStopSound,") + to_string(int(soundEvent->GetSound().first));
@@ -69,7 +70,6 @@ int VirtualPianoController::implementControlInstrument(EventProcessor<Event>* e)
 			stringstream stream;
 			stream << fixed << setprecision(2) << soundEvent->GetSound().second;
 			gameEventContext += stream.str();
-
 		}
 
 		MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::HardwareGameEvent);

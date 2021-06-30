@@ -25,10 +25,6 @@ namespace Events{
 
 	class DynamicEventGenerator : public Container {
 
-		int load();
-
-		int load(Playfield* p);
-
 	public:
 
 		DynamicEventGenerator();

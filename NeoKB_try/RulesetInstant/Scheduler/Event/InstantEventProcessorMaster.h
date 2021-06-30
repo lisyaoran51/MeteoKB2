@@ -24,7 +24,7 @@ namespace Events{
 		
 		InstantEventProcessorMaster();
 
-		int ChangePitchState(MeteoPianoPitchState pState);
+		virtual Pitch GetPitchFromAction(InstantAction action);
 
 		virtual int OnKeyDown(pair<InstantAction, int> action);
 
@@ -43,8 +43,6 @@ namespace Events{
 		virtual int update();
 
 		virtual int LoadOnComplete();
-
-		MeteoPianoPitchState pitchState = MeteoPianoPitchState::None;
 
 		map<Pitch, InstantAction> pitchBindings;
 

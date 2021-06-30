@@ -22,8 +22,14 @@ namespace Events{
 	public:
 
 		InstantDynamicEventGenerator(Playfield* p);
+
+		int SetPlayfield(Playfield* p);
 		
 	protected:
+
+		float fallSpeed = 16;
+
+		Playfield* playfield = nullptr;
 
 		virtual int onMessage(MeteoBluetoothMessage* message);
 

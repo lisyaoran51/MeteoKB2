@@ -16,10 +16,23 @@ RecordEventProcessorMaster::RecordEventProcessorMaster() : RegisterType("RecordE
 {
 }
 
-int RecordEventProcessorMaster::ChangePitchState(MeteoPianoPitchState pState)
+Pitch RecordEventProcessorMaster::GetPitchFromAction(RecordAction action)
 {
-	pitchState = pState;
-	return 0;
+	if (action < RecordAction::VK24_L_C1 || action > RecordAction::VK24_R_B2)
+		return Pitch::None;
+
+	int pitch = (int)action - (int)RecordAction::VK24_L_C1 + 24;
+
+	switch (pitchState) {
+	case MeteoPianoPitchState::Lowered:
+		pitch -= 12;
+		break;
+	case MeteoPianoPitchState::Raised:
+		pitch += 12;
+		break;
+	}
+
+	return (Pitch)pitch;
 }
 
 int RecordEventProcessorMaster::OnKeyDown(pair<RecordAction, int> action)

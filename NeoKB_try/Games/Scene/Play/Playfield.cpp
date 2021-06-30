@@ -136,6 +136,12 @@ Playfield::~Playfield()
 	delete bufferMap;
 }
 
+int Playfield::LoadOnComplete()
+{
+	ChangePitchState(MeteoPianoPitchState::None);
+	return 0;
+}
+
 int Playfield::OnJudgement(HitObject * hitObject, Judgement * judgement)
 {
 	return 0;
@@ -336,4 +342,52 @@ EventProcessorMaster * Playfield::GetEventProcessorMaster()
 DynamicEventGenerator * Playfield::GetDynamicEventGenerator()
 {
 	return dynamicEventGenerator;
+}
+
+int Playfield::SetIsGameControllingPitchState(bool value)
+{
+	isGameControllingPitchState = value;
+	return 0;
+}
+
+int Playfield::ChangePitchState(MeteoPianoPitchState s)
+{
+
+	if (s == MeteoPianoPitchState::Lowered) {
+		pitchState = MeteoPianoPitchState::Lowered;
+		eventProcessorMaster->ChangePitchState(MeteoPianoPitchState::Lowered);
+	}
+	else if (s == MeteoPianoPitchState::None) {
+		pitchState = MeteoPianoPitchState::None;
+		eventProcessorMaster->ChangePitchState(MeteoPianoPitchState::None);
+	}
+	else if (s == MeteoPianoPitchState::Raised) {
+		pitchState = MeteoPianoPitchState::Raised;
+		eventProcessorMaster->ChangePitchState(MeteoPianoPitchState::Raised);
+	}
+	return 0;
+}
+
+MeteoPianoPitchState Playfield::GetMeteoPianoPitchState()
+{
+	return pitchState;
+}
+
+int Playfield::GetXPositionFromPitch(Pitch p)
+{
+	int xPosition = (int)p - int(startPitch);
+
+	switch (pitchState) {
+	case MeteoPianoPitchState::None:
+		xPosition -= 12;
+		break;
+	case MeteoPianoPitchState::Raised:
+		xPosition -= 24;
+		break;
+	}
+
+	if (xPosition < 0 || xPosition >= pitchCount)
+		return -1;
+
+	return xPosition;
 }

@@ -41,12 +41,6 @@ namespace Play{
 
 		virtual int OnJudgement(HitObject * hitObject, Judgement * judgement);
 
-		int SetIsGameControllingPitchState(bool value);
-
-		int ChangePitchState(MeteoPianoPitchState s);
-
-		MeteoPianoPitchState GetMeteoPianoPitchState();
-
 
 		/* KeyBindingHandler<MeteorAction> */
 
@@ -71,17 +65,6 @@ namespace Play{
 		int pitchCount;
 
 		MTO_FLOAT explosionLifeTime = 0.2f;
-
-		bool isGameControllingPitchState = true;
-
-		MeteoPianoPitchState pitchState = MeteoPianoPitchState::None;
-
-		/// <summary>
-		/// 用來把map平移到想要的pitch的工具
-		/// </summary>
-		//MapPitchShifter* mapPitchShifter = nullptr;
-
-		virtual int LoadOnComplete();
 
 		virtual EventProcessorMaster* createEventProcessorMaster();
 

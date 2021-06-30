@@ -11,6 +11,7 @@
 
 
 
+
 using namespace Framework::Graphic::Maps;
 using namespace Games::Schedulers::Events::Effects::Algorithms;
 using namespace Games::Schedulers::Events;
@@ -18,6 +19,11 @@ using namespace Games::Schedulers::Events::Effects;
 using namespace Instant::Schedulers::Events::Effects;
 using namespace Instant::Config;
 
+namespace Games {
+namespace Scenes{
+namespace Play{
+	class Playfield;
+}}}
 
 namespace Instant {
 namespace Schedulers {
@@ -38,9 +44,13 @@ namespace Algorithms{
 		///	</summary>
 		InstantFallMapAlgorithm();
 
+		int SetPlayfield(Playfield* p);
+
 	protected:
 
 		int fallLength;
+
+		Playfield* playfield = nullptr;
 
 	};
 

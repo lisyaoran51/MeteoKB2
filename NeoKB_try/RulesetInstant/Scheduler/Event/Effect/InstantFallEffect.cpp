@@ -1,11 +1,10 @@
 #include "InstantFallEffect.h"
 
-#include "../../../Ruleset/Judgements/MeteorHitWindow.h"
+
 
 
 using namespace Instant::Schedulers::Events::Effects;
 using namespace std;
-using namespace Meteor::Rulesets::Judgements;
 
 
 

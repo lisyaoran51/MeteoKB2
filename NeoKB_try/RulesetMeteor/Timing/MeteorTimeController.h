@@ -65,7 +65,6 @@ namespace Timing {
 		virtual int OnKnobTurn(pair<MeteorAction, int> action);
 
 
-
 		/*---------反覆練彈專用---------*/
 		/// <summary>
 		/// 要拿到每個小節的秒數，之後再轉小節旋鈕時才能轉到對的位置。如果沒有給小節秒數的話，小節旋鈕就統一跳3秒

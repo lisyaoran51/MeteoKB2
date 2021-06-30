@@ -1,11 +1,13 @@
 #include "InstantFallMapAlgorithm.h"
 
+#include "../../../../../Games/Scene/Play/Playfield.h"
 
 
 using namespace Instant::Schedulers::Events::Effects::Algorithms;
 using namespace Instant::Schedulers::Events::Effects;
 using namespace Games::Schedulers::Events::Effects;
 using namespace Instant::Config;
+using namespace Games::Scenes::Play;
 
 
 
@@ -36,6 +38,12 @@ int InstantFallMapAlgorithm::load(InstantConfigManager * m)
 InstantFallMapAlgorithm::InstantFallMapAlgorithm(): RegisterType("InstantFallMapAlgorithm"), MapAlgorithm()
 {
 	registerLoad(bind((int(InstantFallMapAlgorithm::*)())&InstantFallMapAlgorithm::load, this));
+}
+
+int InstantFallMapAlgorithm::SetPlayfield(Playfield * p)
+{
+	playfield = p;
+	return 0;
 }
 
 InstantFallMapGenerateAlgorithm::InstantFallMapGenerateAlgorithm(InstantConfigManager* m)

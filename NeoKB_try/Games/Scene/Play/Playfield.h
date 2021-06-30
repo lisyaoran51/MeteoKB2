@@ -8,6 +8,7 @@
 #include "../../../Framework/Configurations/FrameworkConfigManager.h"
 #include "../../../Framework/Allocation/Hierachal/Container.h"
 #include "../../Scheduler/Event/HitObject.h"
+#include "../../../Instruments/MeteoPianoPitchState.h"
 #include "../../Scheduler/Event/IoEvents/IoCommunicators/IoCommunicator.h"
 #include "../../Scheduler/Event/InstrumentEvents/InstrumentControllers/InstrumentController.h"
 #include "../../Scheduler/Event/PlayfieldEvents/PlayfieldControllers/PlayfieldController.h"
@@ -22,6 +23,7 @@ using namespace Games::Schedulers;
 using namespace Games::Schedulers::Events::Effects::Algorithms;
 using namespace Framework::Configurations;
 using namespace Framework::Allocation::Hierachal;
+using namespace Instruments;
 using namespace Games::Schedulers::Events::IoEvents::IoCommunicators;
 using namespace Games::Schedulers::Events::InstrumentEvents::InstrumentControllers;
 using namespace Games::Schedulers::Events::PlayfieldEvents::PlayfieldControllers;
@@ -58,6 +60,8 @@ namespace Play {
 		Playfield();
 		virtual ~Playfield();
 
+		virtual int LoadOnComplete();
+
 		virtual int OnJudgement(HitObject* hitObject, Judgement* judgement);
 
 		/// <summary>
@@ -89,6 +93,16 @@ namespace Play {
 		EventProcessorMaster* GetEventProcessorMaster();
 
 		DynamicEventGenerator* GetDynamicEventGenerator();
+
+		/* -----------------Pitch State----------------- */
+
+		int SetIsGameControllingPitchState(bool value);
+
+		int ChangePitchState(MeteoPianoPitchState s);
+
+		MeteoPianoPitchState GetMeteoPianoPitchState();
+
+		int GetXPositionFromPitch(Pitch p);
 
 	protected:
 
@@ -151,6 +165,14 @@ namespace Play {
 		function<int()> restartGame;
 
 		function<int()> endGame;
+
+		Pitch startPitch = Pitch::C1;
+
+		int pitchCount = 48;
+
+		bool isGameControllingPitchState = true;
+
+		MeteoPianoPitchState pitchState = MeteoPianoPitchState::None;
 
 		virtual EventProcessorMaster* createEventProcessorMaster() = 0;
 

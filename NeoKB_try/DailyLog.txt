@@ -3259,3 +3259,64 @@ https://cpp.hotexamples.com/examples/-/-/gatt_db_service_add_characteristic/cpp-
 	結果設定用predelay=0.05，每個reverb channel間隔0.03，音量依序為0.05 0.06 0.07 0.08 0.09，可以做出差不多的reverb
 	用reverb會讓Cpu usage到150%，不過不用擔心，四核心可以跑到400%
 	
+6/19
+	result不能enter scene，on success也設錯 (ok)
+	遊戲結束以後八度不會回到原位	(ok)
+	全都要改絕對路徑，包括driver
+	
+	藍芽廣播間隔
+	藍芽自動重開
+	
+	所有遊戲事件訊息
+	
+	遊戲中自動踏板好像沒作用	(ok)
+	
+6/20
+	遊戲進行中和結束後sustain還是亮著	(ok)
+	
+	開機切換耳機插入driver
+	
+	有可能開機的時候已經插著pedal，要持續偵測pedal plugin，或是開機的時候統一傳送
+	
+	enter scene後會無法更改sustain type	(ok)
+	
+	殘響會lag
+	
+6/22
+	開機時仔入的音效改用sbs -> 開機時先載入假音效，然後到meteo game的load on complete再把真音效丟進去
+	
+	遊戲第一次切換pitch state時部會連燈光一起換	(ok)
+	
+	藍芽連接音效播完就刪掉，sample可以留著
+	
+	ini沒有切換instrument config
+	
+	鋼琴取樣研究
+	https://rolandcorp.com.au/blog/what-is-roland-supernatural-technology
+	
+	mcu不能print任何東西，不然琴音會忽大忽小
+	
+	應該做三個等級的reverb，+0，+0.05，+0.1。
+	空間大小要看fadeout time和delay interval，可能先設定一個剛好的職舊好。也可以之後由手機來設定。讓手機去訂sound binding set的內容
+	巷volume、interval、fadeoutime這些都可以定
+	
+	dual palyback的bug要再寫到一班的channel上
+	
+	音量衰減公式 音量=e(-at)，a為常數，t為時間，目前抓a=1.3剛好
+	
+6/24
+	連彈時有破音
+	進入遊戲後要把總音量降低，避免破音(或是把背景音樂自動關小)
+	
+	目前instrument config和殘響設定都還寫不進去
+	
+	連彈時容易把第二次彈的音吃掉
+	
+6/27
+	正在寫接收game event
+	
+6/29
+	instant fall effect還沒寫 正在寫generator
+	
+6/30
+	把所有instant game event補玩了，但是沒寫fall effect和spot effect，寫完應該就完成了(待測試)

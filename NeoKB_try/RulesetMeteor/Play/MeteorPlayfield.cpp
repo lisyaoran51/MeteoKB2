@@ -290,51 +290,20 @@ int MeteorPlayfield::OnJudgement(HitObject * hitObject, Judgement * judgement)
 	// 因為爆破效果不好，所以不用了
 	return 0;
 
-	ExplodeEffect* effect = new ExplodeEffect(dynamic_cast<HasPitch*>(hitObject)->GetPitch(), 
-											  0,
-											  GetClock()->GetCurrentTime(),
-											  explosionLifeTime);
-	ExplodeEffectMapper* explosion = new ExplodeEffectMapper(GetWidth(), GetHeight(), hitObject);
-	explosion->RegisterEvent(effect);
-	//explosion->SetLifeTime(explosionLifeTime); // 這個應該要設定在map algo裡面，不該擺在這邊
-	AddDynamic(explosion);
-
-
-	LOG(LogLevel::Debug) << "MeteorPlayfield::OnJudgement() : create explosion on [" << (int)dynamic_cast<HasPitch*>(hitObject)->GetPitch() << "].";
+	//ExplodeEffect* effect = new ExplodeEffect(dynamic_cast<HasPitch*>(hitObject)->GetPitch(), 
+	//										  0,
+	//										  GetClock()->GetCurrentTime(),
+	//										  explosionLifeTime);
+	//ExplodeEffectMapper* explosion = new ExplodeEffectMapper(GetWidth(), GetHeight(), hitObject);
+	//explosion->RegisterEvent(effect);
+	////explosion->SetLifeTime(explosionLifeTime); // 這個應該要設定在map algo裡面，不該擺在這邊
+	//AddDynamic(explosion);
+	//
+	//
+	//LOG(LogLevel::Debug) << "MeteorPlayfield::OnJudgement() : create explosion on [" << (int)dynamic_cast<HasPitch*>(hitObject)->GetPitch() << "].";
 
 	// 傳送分數?
 	return 0;
-}
-
-int MeteorPlayfield::SetIsGameControllingPitchState(bool value)
-{
-	isGameControllingPitchState = value;
-	return 0;
-}
-
-int MeteorPlayfield::ChangePitchState(MeteoPianoPitchState s)
-{
-	//if (!isGameControllingPitchState)
-	//	return 0;
-
-	if (s == MeteoPianoPitchState::Lowered) {
-		pitchState = MeteoPianoPitchState::Lowered;
-		meteorEventProcessorMaster->ChangePitchState(MeteoPianoPitchState::Lowered);
-	}
-	else if (s == MeteoPianoPitchState::None) {
-		pitchState = MeteoPianoPitchState::None;
-		meteorEventProcessorMaster->ChangePitchState(MeteoPianoPitchState::None);
-	}
-	else if (s == MeteoPianoPitchState::Raised) {
-		pitchState = MeteoPianoPitchState::Raised;
-		meteorEventProcessorMaster->ChangePitchState(MeteoPianoPitchState::Raised);
-	}
-	return 0;
-}
-
-MeteoPianoPitchState MeteorPlayfield::GetMeteoPianoPitchState()
-{
-	return pitchState;
 }
 
 int MeteorPlayfield::OnKeyDown(pair<MeteorAction, int> action)
@@ -400,12 +369,6 @@ int MeteorPlayfield::OnKnobTurn(pair<MeteorAction, int> action)
 
 int MeteorPlayfield::OnSlide(pair<MeteorAction, int> action)
 {
-	return 0;
-}
-
-int MeteorPlayfield::LoadOnComplete()
-{
-	ChangePitchState(MeteoPianoPitchState::None);
 	return 0;
 }
 

@@ -130,11 +130,13 @@ Playfield* InstantRulesetExecutor::createPlayfield()
 
 	meteorPlayfield->LazyConstruct();
 	*/
-	Playfield* newPlayfield = new InstantPlayfield();
+	InstantPlayfield* newPlayfield = new InstantPlayfield();
 	newPlayfield->SetLeaveGameFunction(leaveGame);
 	newPlayfield->SetRestartGameFunction(restartGame);
 	newPlayfield->SetEndGameFunction(endGame);
 
+	/* 特別只有instant要這樣，因為instant會從dynamic event gerenator建事件，要拿fallspeed */
+	newPlayfield->SetWorkingSm(workingSm);
 
 	return newPlayfield;
 }

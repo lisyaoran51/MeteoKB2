@@ -8,27 +8,11 @@ using namespace Games::Scenes::Play;
 
 
 
-int DynamicEventGenerator::load()
-{
-	Playfield* p = GetCache<Playfield>("Playfield");
-
-	if (!p)
-		throw runtime_error("int DynamicEventGenerator::load() : Playfield not found in cache.");
-
-	return load(p);
-}
-
-int DynamicEventGenerator::load(Playfield * p)
-{
-	playfield = p;
-	return 0;
-}
 
 DynamicEventGenerator::DynamicEventGenerator() : RegisterType("DynamicEventGenerator")
 {
 	// 這一個函示不用了，把playfield給cache的話遊戲結束的時候很麻煩
 	throw runtime_error("DynamicEventGenerator::DynamicEventGenerator() : con't use this constructor. playfield is not in cache.");
-	registerLoad(bind((int(DynamicEventGenerator::*)())&DynamicEventGenerator::load, this));
 
 }
 

@@ -610,6 +610,134 @@ int MeteorTimeController::onMessage(MeteoBluetoothMessage * message)
 
 	}
 
+	if (message->GetCommand() == MeteoCommand::AppGameEvent) {
+
+		string gameEventContext = "";
+		
+		MeteoContextBluetoothMessage* meteoContextBluetoothMessage = dynamic_cast<MeteoContextBluetoothMessage*>(message);
+		if (meteoContextBluetoothMessage == nullptr)
+			return -1;
+
+		json context = meteoContextBluetoothMessage->GetContextInJson();
+		if (context.contains("Events") == 0) {
+			LOG(LogLevel::Warning) << "MeteorTimeController::onMessage() : format error.";
+			return -1;
+		}
+
+		if (context["Events"].size() == 0) {
+			LOG(LogLevel::Warning) << "MeteorTimeController::onMessage() : not event inside.";
+			return -1;
+		}
+
+		gameEventContext = context["Events"][0];
+		vector<string> parameters = StringSplitter::Split(gameEventContext, ",");
+
+		if (parameters.size() == 0)
+			return -1;
+
+		if (parameters[0] == "AdjustSpeed") {
+
+			if (parameters.size() < 2)
+				return -1;
+
+			float newRate = atof(parameters[1].c_str());
+
+			if (newRate >= 1.6 && newRate >= 0.4) {
+				SetRate(newRate);
+
+				LOG(LogLevel::Debug) << "MeteorTimeController::onMessage() : adjust speed to [" << newRate << "].";
+			}
+
+		}
+
+		if (parameters[0] == "TimeJump" && timeControllerMode == MeteorTimeControllerMode::MusicGame) {
+
+			if (parameters.size() < 2)
+				return -1;
+
+			float newTime = atof(parameters[1].c_str());
+
+			if (newTime >= 0 && newTime <= lastEventOverTime) {
+
+				if (!GetIsPaused()) {
+					Pause();
+				}
+				else if (!speedAdjuster->GetIsAdjustingTime())
+					isAdjustAfterPause = true;
+
+				speedAdjuster->SetSeekTime(newTime - controllableClock->GetCurrentTime());
+
+				LOG(LogLevel::Debug) << "MeteorTimeController::onMessage() : jump to [" << newTime << "].";
+
+				// 這邊是避免剛好set seek time以後seek time剛好等於0，會造成意外狀況，所以刻意不讓他最後變成0，就隨便加一個數字上去
+				if (speedAdjuster->GetSeekTime() == 0)
+					speedAdjuster->SetSeekTime(0.1);
+			}
+		}
+
+		if (parameters[0] == "SectionJump" && timeControllerMode == MeteorTimeControllerMode::RepeatPractice) {
+
+			if (parameters.size() < 2)
+				return -1;
+
+			int newSection = atoi(parameters[1].c_str());
+
+			if (newSection < 0 || newSection >= sectionTime.size())
+				return -1;
+
+			// 調整時間時不能夠再轉
+			if (speedAdjuster->GetIsAdjustingTime())
+				return 0;
+
+			RevolveLightRingPanelMessage* revolveLightRingPanelMessage = new RevolveLightRingPanelMessage(repeatBufferTime);
+			outputManager->PushMessage(revolveLightRingPanelMessage);
+
+			JumpTo(sectionTime[newSection] - repeatBufferTime - 0.2);	// 這邊有未知的bug，跳回去的時間會大概只有0.8秒的buffer time，所以額外扣0.2秒
+			LOG(LogLevel::Debug) << "MeteorTimeController::onMessage() : jump to [" << tempRepeatStartSection << "] section. section time [" << sectionTime[tempRepeatStartSection + 1] << "], jump time [" << sectionTime[tempRepeatStartSection + 1] - repeatBufferTime << "].";// after jump time[" << GetControllableClock()->GetCurrentTime() << "]";
+			tempRepeatStartSection = newSection;
+
+
+			eventProcessorFilter->SwitchVariant(0);	// 落下燈光示範
+			repeatPracticeMode = RepeatPracticeMode::Demonstrate;
+			tempRepeatCounts = 0;
+
+		}
+
+		if (parameters[0] == "Pause") {
+
+			if (parameters.size() < 2)
+				return -1;
+
+			int newState = atoi(parameters[1].c_str());
+
+			if (newState != 1 && newState != -1)
+				return -1;
+
+			if (!GetIsPaused() && newState == 1) {
+				Pause();
+				LOG(LogLevel::Debug) << "MeteorTimeController::onMessage() : Pause.";
+
+			}
+			else if (!isWaitingFreeze && newState == -1) {
+				LOG(LogLevel::Debug) << "MeteorTimeController::onMessage() : resume and freeze 1 sec.";
+
+				speedAdjuster->SetFreezeTime(defaultFreezeTime);
+				isWaitingFreeze = true;
+				isAdjustAfterPause = false;
+
+				/* 這編讓光圈跑一圈，跑的時間是defaultFreezeTime */
+				RevolveLightRingPanelMessage* message = new RevolveLightRingPanelMessage(defaultFreezeTime);
+				outputManager->PushMessage(message);
+			}
+			else
+				return -1;
+
+
+		}
+
+	}
+
+
 	return MeteoTimeController<MeteorAction>::onMessage(message);
 }
 

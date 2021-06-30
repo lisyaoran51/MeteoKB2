@@ -45,6 +45,16 @@ namespace Effects {
 			MTO_FLOAT sp
 		);
 
+		/// <summary>
+		/// construct an immediate effect
+		///	</summary>
+		InstantFallEffect(
+			Pitch p,
+			MTO_FLOAT sTime,
+			MTO_FLOAT l,
+			MTO_FLOAT sp
+		);
+
 		virtual int ApplyDefaultValues(SmDifficulty* smDifficulty);
 
 		int SetTargetHeight(int tHeight);

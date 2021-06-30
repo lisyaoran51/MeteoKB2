@@ -20,12 +20,6 @@ InstantEventProcessorMaster::InstantEventProcessorMaster() : RegisterType("Insta
 {
 }
 
-int InstantEventProcessorMaster::ChangePitchState(MeteoPianoPitchState pState)
-{
-	pitchState = pState;
-	return 0;
-}
-
 int InstantEventProcessorMaster::OnKeyDown(pair<InstantAction, int> action)
 {
 	
@@ -323,4 +317,23 @@ bool InstantEventProcessorMaster::matchPitch(HitObject * hObject, InstantAction 
 	}
 
 	return false;
+}
+
+Pitch InstantEventProcessorMaster::GetPitchFromAction(InstantAction action)
+{
+	if (action < InstantAction::VK24_L_C1 || action > InstantAction::VK24_R_B2)
+		return Pitch::None;
+
+	int pitch = (int)action - (int)InstantAction::VK24_L_C1 + 24;
+
+	switch (pitchState) {
+	case MeteoPianoPitchState::Lowered:
+		pitch -= 12;
+		break;
+	case MeteoPianoPitchState::Raised:
+		pitch += 12;
+		break;
+	}
+
+	return (Pitch)pitch;
 }

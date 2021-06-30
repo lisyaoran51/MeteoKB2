@@ -68,6 +68,9 @@ int InstantPlayfield::load(FrameworkConfigManager* f, InstantConfigManager * m)
 	}
 	else
 		mapAlgorithms["InstantFallEffect"] = new InstantFallMapAlgorithm();
+	dynamic_cast<InstantFallMapAlgorithm*>(mapAlgorithms["InstantFallEffect"])->SetPlayfield(this);
+		
+
 	LOG(LogLevel::Finer) << "InstantPlayfield::load() : FallMapAlgorithm chosed" << mapAlgorithms["InstantFallEffect"];
 
 	LOG(LogLevel::Finer) << "InstantPlayfield::load() : FallMapAlgorithm [" << mapAlgorithms["InstantFallEffect"]->GetTypeName() << "] loaded.";
@@ -105,22 +108,6 @@ int InstantPlayfield::load(FrameworkConfigManager* f, InstantConfigManager * m)
 	}
 	AddChild(instrumentControllers["InstantPianoSoundEvent"]);
 
-	/* --------------------- System Controller --------------------- */
-	string systemControllerName;
-
-	if (m->Get(InstantSetting::InstantSystemController, &systemControllerName)) {
-		SystemController* systemController = iCreator.CreateInstanceWithT<SystemController>(systemControllerName);
-		systemController->LazyConstruct(leaveGame, restartGame, endGame);
-		systemControllers["StopSystemEvent"] = systemController;
-		systemControllers["RestartSystemEvent"] = systemController;
-	}
-	else {
-		systemControllers["StopSystemEvent"] = new SystemController();
-		systemControllers["RestartSystemEvent"] = systemControllers["StopSystemEvent"];
-		systemControllers["StopSystemEvent"]->LazyConstruct(leaveGame, restartGame, endGame);
-	}
-	AddChild(systemControllers["StopSystemEvent"]);
-
 	return 0;
 }
 
@@ -141,35 +128,15 @@ int InstantPlayfield::OnJudgement(HitObject * hitObject, Judgement * judgement)
 	return 0;
 }
 
-int InstantPlayfield::SetIsGameControllingPitchState(bool value)
+int InstantPlayfield::SetWorkingSm(WorkingSm * sm)
 {
-	isGameControllingPitchState = value;
+	workingSm = sm;
 	return 0;
 }
 
-int InstantPlayfield::ChangePitchState(MeteoPianoPitchState s)
+WorkingSm * InstantPlayfield::GetWorkingSm()
 {
-	//if (!isGameControllingPitchState)
-	//	return 0;
-
-	if (s == MeteoPianoPitchState::Lowered) {
-		pitchState = MeteoPianoPitchState::Lowered;
-		instantEventProcessorMaster->ChangePitchState(MeteoPianoPitchState::Lowered);
-	}
-	else if (s == MeteoPianoPitchState::None) {
-		pitchState = MeteoPianoPitchState::None;
-		instantEventProcessorMaster->ChangePitchState(MeteoPianoPitchState::None);
-	}
-	else if (s == MeteoPianoPitchState::Raised) {
-		pitchState = MeteoPianoPitchState::Raised;
-		instantEventProcessorMaster->ChangePitchState(MeteoPianoPitchState::Raised);
-	}
-	return 0;
-}
-
-MeteoPianoPitchState InstantPlayfield::GetMeteoPianoPitchState()
-{
-	return pitchState;
+	return workingSm;
 }
 
 int InstantPlayfield::OnKeyDown(pair<InstantAction, int> action)
@@ -236,12 +203,6 @@ int InstantPlayfield::OnSlide(pair<InstantAction, int> action)
 	return 0;
 }
 
-int InstantPlayfield::LoadOnComplete()
-{
-	ChangePitchState(MeteoPianoPitchState::None);
-	return 0;
-}
-
 EventProcessorMaster * InstantPlayfield::createEventProcessorMaster()
 {
 	return new InstantEventProcessorMaster();
@@ -250,6 +211,59 @@ EventProcessorMaster * InstantPlayfield::createEventProcessorMaster()
 DynamicEventGenerator * InstantPlayfield::createDynamicEventGenerator()
 {
 	return new InstantDynamicEventGenerator(this);
+}
+
+int InstantPlayfield::onMessage(MeteoBluetoothMessage * message)
+{
+	if (message->GetCommand() == MeteoCommand::AppGameEvent) {
+
+		MeteoContextBluetoothMessage* contextMessage = dynamic_cast<MeteoContextBluetoothMessage*>(message);
+		json context = contextMessage->GetContextInJson();
+		
+		if (context.contains("Events") == 0) {
+			LOG(LogLevel::Warning) << "InstantPlayfield::onMessage() : format error.";
+			return -1;
+		}
+
+		if (context["Events"].size() == 0) {
+			LOG(LogLevel::Warning) << "InstantPlayfield::onMessage() : not event inside.";
+			return -1;
+		}
+
+		string gameEventContext = context["Events"][0];
+		vector<string> parameters = StringSplitter::Split(gameEventContext, ",");
+
+		if (parameters.size() == 0)
+			return -1;
+
+		if (parameters[0] == "ShiftOctave") {
+
+			if (parameters.size() < 2)
+				return -1;
+
+			// -1: 低八度 0:正常八度 1:高八度
+			int state = stoi(parameters[1]);
+
+			if (state < -1 || state > 1)
+				return -1;
+
+			switch (state)
+			{
+			case -1:
+				ChangePitchState(MeteoPianoPitchState::Lowered);
+				break;
+			case 0:
+				ChangePitchState(MeteoPianoPitchState::None);
+				break;
+			case 1:
+				ChangePitchState(MeteoPianoPitchState::Raised);
+				break;
+			}
+
+		}
+	}
+
+	return 0;
 }
 
 

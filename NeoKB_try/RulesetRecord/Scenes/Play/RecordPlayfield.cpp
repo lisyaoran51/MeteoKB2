@@ -89,37 +89,6 @@ int RecordPlayfield::OnJudgement(HitObject * hitObject, Judgement * judgement)
 	return 0;
 }
 
-int RecordPlayfield::SetIsGameControllingPitchState(bool value)
-{
-	isGameControllingPitchState = value;
-	return 0;
-}
-
-int RecordPlayfield::ChangePitchState(MeteoPianoPitchState s)
-{
-	//if (!isGameControllingPitchState)
-	//	return 0;
-
-	if (s == MeteoPianoPitchState::Lowered) {
-		pitchState = MeteoPianoPitchState::Lowered;
-		recordEventProcessorMaster->ChangePitchState(MeteoPianoPitchState::Lowered);
-	}
-	else if (s == MeteoPianoPitchState::None) {
-		pitchState = MeteoPianoPitchState::None;
-		recordEventProcessorMaster->ChangePitchState(MeteoPianoPitchState::None);
-	}
-	else if (s == MeteoPianoPitchState::Raised) {
-		pitchState = MeteoPianoPitchState::Raised;
-		recordEventProcessorMaster->ChangePitchState(MeteoPianoPitchState::Raised);
-	}
-	return 0;
-}
-
-MeteoPianoPitchState RecordPlayfield::GetMeteoPianoPitchState()
-{
-	return pitchState;
-}
-
 int RecordPlayfield::OnKeyDown(pair<RecordAction, int> action)
 {
 
@@ -181,12 +150,6 @@ int RecordPlayfield::OnKnobTurn(pair<RecordAction, int> action)
 
 int RecordPlayfield::OnSlide(pair<RecordAction, int> action)
 {
-	return 0;
-}
-
-int RecordPlayfield::LoadOnComplete()
-{
-	ChangePitchState(MeteoPianoPitchState::None);
 	return 0;
 }
 

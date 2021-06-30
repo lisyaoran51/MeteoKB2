@@ -235,29 +235,6 @@ namespace Timing {
 		/// 這段寫錯了，不要用
 		/// </summary>
 		virtual int OnButtonDown(T action) {
-
-			return 0;
-			typename map<T, InputKey>::iterator it;
-			it = keyBindings.find(action);
-
-			LOG(LogLevel::Debug) << "TTimeController::OnButtonDown(): check bindings " << (keyBindings.find(action) == keyBindings.end() ? "not found" : "found");
-			if (keyBindings[action] == InputKey::Pause) {
-				LOG(LogLevel::Debug) << "TTimeController::OnButtonDown() : get pause button input and pause.";
-				if (speedAdjuster->GetIsAdjustingTime())
-					return -1;
-
-				if (!GetIsPaused()) {
-					Pause();
-					// 這邊不能直接關掉所有輸入，因為time controller本身收不到action，必須靠playfield收到action以後回call道time controller，才能控制時間
-					// 如果關掉輸入的話，一暫停之後，playfield就再也不能收到輸入，就不能夠解除暫停
-					// 應該要去playfield裡面把計分和記遊戲紀錄的功能關掉就好
-					//SetAllChildsIsMaskedForTrigger();
-				}
-				else if(!isWaitingFreeze){
-					speedAdjuster->SetFreezeTime(defaultFreezeTime);
-					isWaitingFreeze = true;
-				}
-			}
 			return 0;
 		}
 
@@ -269,25 +246,6 @@ namespace Timing {
 		/// 這段寫錯了，不要用
 		/// </summary>
 		virtual int OnKnobTurn(pair<T, int> action) {
-
-			return 0;
-			if (keyBindings[action.first] == InputKey::SpeedKnob) {
-				SetRate(GetRate() + action.second);
-
-
-			}
-			if (keyBindings[action.first] == InputKey::SectionKnob) {
-
-				if (isWaitingFreeze)
-					return 0;
-
-				//JumpTo(sectionStartTime[getTempSection() + action.second]);
-				if (isPaused)
-					isAdjustAfterPause = true;
-				speedAdjuster->SetSeekTime(action.second * defaultAdjustTime);
-
-
-			}
 			return 0;
 		}
 

@@ -9,6 +9,7 @@
 #include "../../Input/InstantInputManager.h"
 #include "../../../Instruments/MeteoPiano.h"
 #include "../../Scheduler/Event/InstantEventProcessorMaster.h"
+#include "../../../Framework/Input/Messages/MessageHandler.h"
 
 
 
@@ -22,6 +23,7 @@ using namespace Framework::Input::KeyBindings;
 using namespace Instruments;
 using namespace Games::Schedulers::Events::Effects::Algorithms;
 using namespace Instant::Schedulers::Events;
+using namespace Framework::Input::Messages;
 
 
 
@@ -29,7 +31,7 @@ namespace Instant {
 namespace Scenes{
 namespace Play{
 
-	class InstantPlayfield: public Playfield, public KeyBindingHandler<InstantAction> {
+	class InstantPlayfield: public Playfield, public KeyBindingHandler<InstantAction>, public MessageHandler<MeteoBluetoothMessage> {
 
 		int load();
 
@@ -41,11 +43,9 @@ namespace Play{
 
 		virtual int OnJudgement(HitObject * hitObject, Judgement * judgement);
 
-		int SetIsGameControllingPitchState(bool value);
+		int SetWorkingSm(WorkingSm* sm);
 
-		int ChangePitchState(MeteoPianoPitchState s);
-
-		MeteoPianoPitchState GetMeteoPianoPitchState();
+		WorkingSm* GetWorkingSm();
 
 
 		/* KeyBindingHandler<MeteorAction> */
@@ -72,20 +72,13 @@ namespace Play{
 
 		MTO_FLOAT explosionLifeTime = 0.2f;
 
-		bool isGameControllingPitchState = true;
-
-		MeteoPianoPitchState pitchState = MeteoPianoPitchState::None;
-
-		/// <summary>
-		/// 用來把map平移到想要的pitch的工具
-		/// </summary>
-		//MapPitchShifter* mapPitchShifter = nullptr;
-
-		virtual int LoadOnComplete();
+		WorkingSm* workingSm = nullptr;
 
 		virtual EventProcessorMaster* createEventProcessorMaster();
 
 		virtual DynamicEventGenerator* createDynamicEventGenerator();
+
+		virtual int onMessage(MeteoBluetoothMessage* command);
 
 	};
 

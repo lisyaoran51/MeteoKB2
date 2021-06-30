@@ -168,6 +168,12 @@ PeriodMap<EventProcessor<Event>*>* EventProcessorMaster::GetEventProcessorPeriod
 	return eventProcessorPeriods;;
 }
 
+int EventProcessorMaster::ChangePitchState(MeteoPianoPitchState pState)
+{
+	pitchState = pState;
+	return 0;
+}
+
 
 int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 {
@@ -547,11 +553,3 @@ int EventProcessorMaster::update()
 	// TODO: 自動清除dynamic event，當調整時間或速度時，也把dynamic event清掉
 	return 0;
 }
-
-int EventProcessorMaster::onKeyDown(InputState * inputState, Key key)
-{
-	/* 移到Meteor Event Processor Master裡面了 */
-
-	return 0;
-}
-
