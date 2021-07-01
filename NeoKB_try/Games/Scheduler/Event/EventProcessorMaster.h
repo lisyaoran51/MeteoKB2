@@ -20,6 +20,8 @@
 #include "../../../Framework/Input/KeyBindings/KeyBindingHandler.h"
 #include "../../../Framework/Output/OutputManager.h"
 #include "../../../Framework/Timing/TimeController.h"
+#include "../../../Instruments/Pitch.h"
+
 
 
 
@@ -33,6 +35,7 @@ using namespace Framework::Timing;
 using namespace Framework::Configurations;
 using namespace Framework::Input::KeyBindings;
 using namespace Framework::Output;
+using namespace Instruments;
 
 
 
