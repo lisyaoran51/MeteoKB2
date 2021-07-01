@@ -237,7 +237,7 @@ TimeController * MeteorRulesetExecutor::CreateTimeController()
 	}, "Lambda_MeteorRulesetExecutor::HandleOnPauseEnd");
 
 
-	return 0;
+	return t;
 }
 
 SpeedAdjuster * MeteorRulesetExecutor::CreateSpeedAdjuster()

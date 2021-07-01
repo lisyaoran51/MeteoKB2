@@ -141,7 +141,7 @@ TimeController::~TimeController()
 
 int TimeController::SetControllableClock(AdjustableClock * cClock)
 {
-	LOG(LogLevel::Debug) << "TimeController::SetControllableClock() : error here? " << cClock << " " << controllableClock;
+	LOG(LogLevel::Depricated) << "TimeController::SetControllableClock() : error here? " << cClock << " " << controllableClock;
 	controllableClock = cClock;
 	return 0;
 }
