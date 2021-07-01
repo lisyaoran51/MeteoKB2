@@ -30,7 +30,11 @@ int InstantFallMapAlgorithm::load(InstantConfigManager * m)
 
 	if (m->Get(InstantSetting::FallLength, &fallLength)) {}
 
-	genAlgo = new InstantFallMapGenerateAlgorithm(m);
+	InstantFallMapGenerateAlgorithm* newGenAlgo = new InstantFallMapGenerateAlgorithm(m);
+
+	newGenAlgo->SetPlayfield(playfield);
+
+	genAlgo = newGenAlgo;
 
 	return 0;
 }
@@ -52,15 +56,23 @@ InstantFallMapGenerateAlgorithm::InstantFallMapGenerateAlgorithm(InstantConfigMa
 	if (m->Get(InstantSetting::FallBrightness, &fallBrightness)) {}
 }
 
+int InstantFallMapGenerateAlgorithm::SetPlayfield(Playfield * p)
+{
+	playfield = p;
+	return 0;
+}
+
 int InstantFallMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper<InstantFallEffect>* em)
 {
-
-	LOG(LogLevel::Depricated) << "FallMapGenerateAlgorithm::ImplementGenerate() : Generate Effect [" << em->GetStartTime() << "] on [" << em->GetCurrentTime() << "].";
+	LOG(LogLevel::Depricated) << "InstantFallMapGenerateAlgorithm::ImplementGenerate() : Generate Effect [" << em->GetStartTime() << "] on [" << em->GetCurrentTime() << "].";
 
 	MTO_FLOAT currentTime = em->GetCurrentTime();// em->GetCurrentTime();
 	MTO_FLOAT startTime = em->GetStartTime();
-	// 這個跟meteor fall effect不同的地方是，這個的start time是往下掉的瞬間，meteor的start time是到達底部的時間
-	if (startTime < currentTime)
+	MTO_FLOAT lifeTime = em->GetLifeTime();
+	if (startTime > currentTime)
+		return -1;
+
+	if (startTime + lifeTime + 0.1 < currentTime)	// 0.1是buffer，以免常常還沒亮到登調尾巴，就熄滅了
 		return -1;
 
 	// MTO_FLOAT lifeTime = em->GetLifeTime();
@@ -69,11 +81,20 @@ int InstantFallMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper<Ins
 	int width = em->GetWidth();
 	int height = em->GetHeight();
 
+	if (dynamic_cast<InstantFallEffect*>(em->GetEvent())->GetEffectPinType() != EffectPinType::ByPitch) {
+		LOG(LogLevel::Warning) << "InstantFallMapGenerateAlgorithm::ImplementGenerate : this effect not by pitch";
+		return -1;
+	}
+
+	int xPosition = playfield->GetXPositionFromPitch(dynamic_cast<InstantFallEffect*>(em->GetEvent())->GetPitch());
+
+	if (xPosition < 0 || xPosition >= width)
+		return -1;
 
 	bool isAdded = false;
 
 	LOG(LogLevel::Depricated) << [](int width, int height, Map* m) {
-		LOG(LogLevel::Finest) << "FallMapGenerateAlgorithm::ImplementGenerate : light map - before";
+		LOG(LogLevel::Finest) << "InstantFallMapGenerateAlgorithm::ImplementGenerate : light map - before";
 		// 因為只看畫面中央，所以不看其他排
 		for (int i = 0; i < width * 2; i++) {
 			string s;
@@ -86,33 +107,45 @@ int InstantFallMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper<Ins
 		return 0;
 	}(width, height, m);
 
+	/* 流光運作方式
+
+	16 --- start ---
+		|		  |
+		|		  |	位置
+		|		  |
+		O   now	 ---
+	   ||
+	   v|
+		|
+		|
+	0  ---
+
+	*/
+
 	// 目前流星位置：height - speed * currentTime 
-	MTO_FLOAT meteorPos = speed * (startTime - currentTime);
-	
-	LOG(LogLevel::Depricated) << "FallMapGenerateAlgorithm::ImplementGenerate : meteorPos = " << meteorPos << ", current time = " << currentTime << ", speed = " << speed;
+	MTO_FLOAT meteorPos = height - speed * (currentTime - startTime);
+
+	LOG(LogLevel::Depricated) << "InstantFallMapGenerateAlgorithm::ImplementGenerate : meteorPos = " << meteorPos << ", current time = " << currentTime << ", speed = " << speed;
 	// 公式: -256*y + 256 
 	// 算流星燈每一個燈泡的亮度，從下面網上算
 	for (int i = 0; i < height; i++) {
 
-		// TODO: 應該把流星長度變成參數
-		if (i > meteorPos - 0.5 && i < meteorPos + MTO_FLOAT(fallLength)) {
-
-			int brightness = (-BRIGHTNESS_MAX * (MTO_FLOAT(i) - meteorPos) / MTO_FLOAT(fallLength) + BRIGHTNESS_MAX) * fallBrightness;
-			if (brightness > 0) {
-				LOG(LogLevel::Finest) << "FallMapGenerateAlgorithm::ImplementGenerate : bright_max: " << BRIGHTNESS_MAX << ", MtoPos: " << meteorPos << ", i: " << i << ", bright: " << brightness;
-				m->Add(width, height + i, brightness);
-				isAdded = true;
-			}
+		/* 新版fall algo */
+		if (i > meteorPos - 0.5 && i <= meteorPos + 0.5) {
+			m->Add(width + xPosition, height + i, 1);
+			isAdded = true;
+			break;
 		}
+		continue;
 	}
 
-	if(isAdded)
-	LOG(LogLevel::Depricated) << "FallMapGenerateAlgorithm::ImplementGenerate : current time = " << currentTime << ", start time = " << em->GetStartTime() << [](int width, int height, Map* m) {
-		LOG(LogLevel::Finest) << "FallMapGenerateAlgorithm::ImplementGenerate : light map - after";
+	if (isAdded)
+		LOG(LogLevel::Depricated) << "InstantFallMapGenerateAlgorithm::ImplementGenerate : current time = " << currentTime << ", start time = " << em->GetStartTime() << [](int width, int height, Map* m) {
+		LOG(LogLevel::Finest) << "InstantFallMapGenerateAlgorithm::ImplementGenerate : light map - after";
 		// 因為只看畫面中央，所以不看其他排
-		for (int i = 0; i < width*2; i++) {
+		for (int i = 0; i < width * 2; i++) {
 			string s;
-			for (int j = 0; j < height*2; j++) {
+			for (int j = 0; j < height * 2; j++) {
 				s += to_string(m->Get(i, j));
 				s += " ";
 			}

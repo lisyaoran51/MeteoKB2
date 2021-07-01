@@ -115,6 +115,7 @@ using namespace Instant::Rulesets;
 // Instant/Schedulers/Events/Effects/Algorithms
 #include "../RulesetInstant/Scheduler/Event/Effect/Algorithm/InstantFallMapAlgorithm.h"
 #include "../RulesetInstant/Scheduler/Event/Effect/Algorithm/InstantGlowLineMapAlgorithm.h"
+#include "../RulesetInstant/Scheduler/Event/Effect/Algorithm/InstantSpotMapAlgorithm.h"
 using namespace Instant::Schedulers::Events::Effects::Algorithms;
 
 // Instant/Schedulers/Events/InstrumentEvents/InstrumentControllers
@@ -239,6 +240,7 @@ int ProgramInitializer::Initialize()
 	// Instant/Schedulers/Events/Effects/Algorithms
 	iCreator.RegisterType<InstantFallMapAlgorithm>("InstantFallMapAlgorithm");
 	iCreator.RegisterType<InstantGlowLineMapAlgorithm>("InstantGlowLineMapAlgorithm");
+	iCreator.RegisterType<InstantSpotMapAlgorithm>("InstantSpotMapAlgorithm");
 
 	// Instant/Schedulers/Events/InstrumentEvents/InstrumentControllers
 	iCreator.RegisterType<InstantVirtualPianoController>("InstantVirtualPianoController");

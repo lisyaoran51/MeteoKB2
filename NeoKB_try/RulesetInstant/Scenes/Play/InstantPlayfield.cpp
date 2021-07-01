@@ -3,6 +3,7 @@
 #include "../../../Games/Scheduler/Event/Effect/Algorithm/MapAlgorithm.h"
 #include "../../Scheduler/Event/Effect/Algorithm/InstantFallMapAlgorithm.h"
 #include "../../Scheduler/Event/Effect/Algorithm/InstantGlowLineMapAlgorithm.h"
+#include "../../Scheduler/Event/Effect/Algorithm/InstantSpotMapAlgorithm.h"
 #include "../../Scheduler/Event/InstrumentEvents/InstrumentControllers/InstantVirtualPianoController.h"
 #include "../../../Util/Log.h"
 #include "../../../Games/Scheduler/Event/Effect/Algorithm/LinearMapPitchShifter.h"
@@ -68,15 +69,33 @@ int InstantPlayfield::load(FrameworkConfigManager* f, InstantConfigManager * m)
 	}
 	else
 		mapAlgorithms["InstantFallEffect"] = new InstantFallMapAlgorithm();
+
 	dynamic_cast<InstantFallMapAlgorithm*>(mapAlgorithms["InstantFallEffect"])->SetPlayfield(this);
 		
-
 	LOG(LogLevel::Finer) << "InstantPlayfield::load() : FallMapAlgorithm chosed" << mapAlgorithms["InstantFallEffect"];
-
 	LOG(LogLevel::Finer) << "InstantPlayfield::load() : FallMapAlgorithm [" << mapAlgorithms["InstantFallEffect"]->GetTypeName() << "] loaded.";
 
 	AddChild(mapAlgorithms["InstantFallEffect"]);
 	mapAlgorithms["InstantFallEffect"]->RegisterBufferMap(bufferMap);
+
+	/* --------------------- InstantSpotEffect map algo --------------------- */
+	if (m->Get(InstantSetting::InstantSpotMapAlgorithm, &mapAlgoName)) {
+		LOG(LogLevel::Finer) << "InstantPlayfield::load() : finding fall effect map algorithm";
+		MapAlgorithmInterface* mapAlgo = iCreator.CreateInstanceWithT<MapAlgorithmInterface>(mapAlgoName);
+
+		LOG(LogLevel::Finer) << "InstantPlayfield::load() : put into algorithms table";
+		mapAlgorithms["InstantSpotEffect"] = mapAlgo;
+	}
+	else
+		mapAlgorithms["InstantSpotEffect"] = new InstantSpotMapAlgorithm();
+
+	dynamic_cast<InstantSpotMapAlgorithm*>(mapAlgorithms["InstantSpotEffect"])->SetPlayfield(this);
+
+	LOG(LogLevel::Finer) << "InstantPlayfield::load() : InstantSpotMapAlgorithm chosed" << mapAlgorithms["InstantSpotEffect"];
+	LOG(LogLevel::Finer) << "InstantPlayfield::load() : InstantSpotMapAlgorithm [" << mapAlgorithms["InstantSpotEffect"]->GetTypeName() << "] loaded.";
+
+	AddChild(mapAlgorithms["InstantSpotEffect"]);
+	mapAlgorithms["InstantSpotEffect"]->RegisterBufferMap(bufferMap);
 
 	/* --------------------- InstantGlowLineEffect map algo --------------------- */
 	if (m->Get(InstantSetting::InstantGlowLineMapAlgorithm, &mapAlgoName)) {

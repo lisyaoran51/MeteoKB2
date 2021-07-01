@@ -15,6 +15,14 @@ InstantFallEffect::InstantFallEffect(): Effect()
 
 InstantFallEffect::InstantFallEffect(int xPos, int yPos, MTO_FLOAT sTime, MTO_FLOAT l, MTO_FLOAT sp): Effect(xPos, yPos, sTime, l)
 {
+	effectPinType = EffectPinType::ByPosition;
+	SetSpeed(sp);
+}
+
+InstantFallEffect::InstantFallEffect(Pitch p, MTO_FLOAT sTime, MTO_FLOAT l, MTO_FLOAT sp) : Effect(0, 0, sTime, l)
+{
+	effectPinType = EffectPinType::ByPitch;
+	pitch = p;
 	SetSpeed(sp);
 }
 
@@ -50,6 +58,19 @@ int InstantFallEffect::AdjustSpeed(float sp)
 	return 0;
 }
 
+EffectPinType InstantFallEffect::GetEffectPinType()
+{
+	return effectPinType;
+}
+
+Pitch InstantFallEffect::GetPitch()
+{
+	if (effectPinType == EffectPinType::ByPitch)
+		return pitch;
+	else
+		return Pitch::None;
+}
+
 string InstantFallEffect::GetTypeName()
 {
 	return "InstantFallEffect";
@@ -57,5 +78,10 @@ string InstantFallEffect::GetTypeName()
 
 Effect * InstantFallEffect::Clone()
 {
-	return new InstantFallEffect(x, y, startTime, lifeTime, speed);
+	if (effectPinType == EffectPinType::ByPitch)
+		return new InstantFallEffect(pitch, startTime, lifeTime, speed);
+	if (effectPinType == EffectPinType::ByPosition)
+		return new InstantFallEffect(x, y, startTime, lifeTime, speed);
+
+	return nullptr;
 }

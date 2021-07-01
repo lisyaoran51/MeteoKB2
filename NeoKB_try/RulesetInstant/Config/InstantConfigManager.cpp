@@ -15,6 +15,7 @@ int InstantConfigManager::initializeDefault()
 	Set(InstantSetting::PatternGenerator, "MeteorPatternGenerator");
 	Set(InstantSetting::InstantFallMapAlgorithm, "InstantFallMapAlgorithm");
 	Set(InstantSetting::InstantGlowLineMapAlgorithm, "InstantGlowLineMapAlgorithm");
+	Set(InstantSetting::InstantSpotMapAlgorithm, "InstantSpotMapAlgorithm");
 	Set(InstantSetting::InstantVirtualInstrumentController, "InstantVirtualPianoController");
 	Set(InstantSetting::InstantSystemController, "InstantSystemController");
 

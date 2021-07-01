@@ -5,6 +5,7 @@
 #include <fstream>
 #include <vector>
 #include "../../../../Games/Scheduler/Event/Effect/Effect.h"
+#include "../../../../Games/Scheduler/Event/Effect/EffectPinType.h"
 #include "../../../../Instruments/Pitch.h"
 #include "../../../../Instruments/HasPitch.h"
 #include "../../../../Games/Ruleset/Judgements/HasHitWindow.h"
@@ -22,6 +23,7 @@ namespace Instant {
 namespace Schedulers {
 namespace Events {
 namespace Effects {
+	
 	
 
 	class InstantFallEffect: public Effect
@@ -64,6 +66,10 @@ namespace Effects {
 		///	</summary>
 		int AdjustSpeed(float sp);
 
+		EffectPinType GetEffectPinType();
+
+		Pitch GetPitch();
+
 		// 一定要每次都override!!
 		virtual string GetTypeName();
 
@@ -75,6 +81,10 @@ namespace Effects {
 		int targetHeight = -1;
 
 		bool isSpeedAdjustable = false;
+
+		EffectPinType effectPinType = EffectPinType::ByPitch;
+
+		Pitch pitch = Pitch::None;
 
 
 	};

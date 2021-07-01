@@ -35,6 +35,7 @@ namespace Config{
 		PatternGenerator,
 		InstantFallMapAlgorithm,
 		InstantGlowLineMapAlgorithm,
+		InstantSpotMapAlgorithm,
 		InstantVirtualInstrumentController,
 		InstantSystemController,
 

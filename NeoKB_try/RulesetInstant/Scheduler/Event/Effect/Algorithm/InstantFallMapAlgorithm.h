@@ -25,6 +25,8 @@ namespace Play{
 	class Playfield;
 }}}
 
+using namespace Games::Scenes::Play;
+
 namespace Instant {
 namespace Schedulers {
 namespace Events {
@@ -60,10 +62,14 @@ namespace Algorithms{
 
 		InstantFallMapGenerateAlgorithm(InstantConfigManager* m);
 
+		int SetPlayfield(Playfield* p);
+
 	protected:
 
 		int fallLength;
 		MTO_FLOAT fallBrightness;
+
+		Playfield* playfield = nullptr;
 
 		/// <summary>
 		/// 把evnet的狀態轉成圖案
