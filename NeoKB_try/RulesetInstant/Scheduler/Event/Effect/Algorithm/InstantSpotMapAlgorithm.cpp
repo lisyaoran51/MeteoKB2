@@ -23,6 +23,18 @@ InstantSpotMapAlgorithm::InstantSpotMapAlgorithm() : RegisterType("InstantSpotMa
 	registerLoad(bind((int(InstantSpotMapAlgorithm::*)())&InstantSpotMapAlgorithm::load, this));
 }
 
+int InstantSpotMapAlgorithm::SetPlayfield(Playfield * p)
+{
+	playfield = p;
+	return 0;
+}
+
+int InstantSpotMapGenerateAlgorithm::SetPlayfield(Playfield * p)
+{
+	playfield = p;
+	return 0;
+}
+
 int InstantSpotMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper<InstantSpotEffect>* em)
 {
 
