@@ -242,8 +242,8 @@ InstantRuleset.o InstantRulesetExecutor.o InstantReplayRecorder.o InstantReplayF
 InstantResult.o \
 InstantScoreProcessor.o \
 InstantDynamicEventGenerator.o InstantEventProcessorMaster.o \
-InstantFallEffect.o InstantFallEffectMapper.o InstantGlowLineEffect.o InstantGlowLineEffectMapper.o \
-InstantFallMapAlgorithm.o InstantGlowLineMapAlgorithm.o \
+InstantFallEffect.o InstantFallEffectMapper.o InstantGlowLineEffect.o InstantGlowLineEffectMapper.o InstantSpotEffect.o InstanSpotEffectMapper.o \
+InstantFallMapAlgorithm.o InstantGlowLineMapAlgorithm.o InstantSpotMapAlgorithm.o \
 InstantPianoSoundEvent.o InstantPianoSoundEventProcessor.o InstantVirtualPianoController.o \
 InstantSheetmusicConverter.o InstantSheetmusicPostprocessor.o InstantPatternGenerator.o \
 InstantTimeController.o \
