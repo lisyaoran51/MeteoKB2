@@ -15,7 +15,13 @@ using namespace Games::Schedulers::Events;
 using namespace Games::Schedulers::Events::Effects;
 using namespace Instant::Schedulers::Events::Effects;
 
+namespace Games {
+namespace Scenes{
+namespace Play{
+	class Playfield;
+}}}
 
+using namespace Games::Scenes::Play;
 
 namespace Instant {
 namespace Schedulers {
@@ -35,6 +41,12 @@ namespace Algorithms{
 		///	</summary>
 		InstantSpotMapAlgorithm();
 
+		int SetPlayfield(Playfield* p);
+
+	protected:
+
+		Playfield* playfield = nullptr;
+
 	};
 
 	class InstantSpotMapGenerateAlgorithm : public MapGenerateAlgorithm<InstantSpotEffect> {
@@ -42,7 +54,12 @@ namespace Algorithms{
 
 	public:
 
+		int SetPlayfield(Playfield* p);
+
 	protected:
+
+		Playfield* playfield = nullptr;
+
 		/// <summary>
 		/// 把evnet的狀態轉成圖案
 		///	</summary>
