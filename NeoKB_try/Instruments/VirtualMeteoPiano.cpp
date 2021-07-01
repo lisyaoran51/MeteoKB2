@@ -82,6 +82,7 @@ int VirtualMeteoPiano::Play(Pitch p, float volume)
 	//
 	//dynamic_cast<MultiPlaybackSampleChannel*>(getSamplesByPitch()->at(p))->PlayOnTrack(1, volume);
 
+	LOG(LogLevel::Fine) << "VirtualMeteoPiano::Play() : play [" << (int)p << "] on vol [" << volume << "].";
 
 	system_clock::time_point systemStartTime = system_clock::now();
 	(*it).second->Play(volume);
