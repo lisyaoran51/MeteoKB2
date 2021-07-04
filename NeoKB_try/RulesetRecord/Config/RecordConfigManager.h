@@ -33,8 +33,6 @@ namespace Config{
 	enum class RecordSetting {
 
 		PatternGenerator,
-
-		RecordSystemController,
 	};
 
 }}

@@ -29,10 +29,15 @@ namespace Commands{
 		ChangeUserData			,
 		AckChangeUserData		,
 		// 系統
-		RestartMainboard = 100	,
-		AckRestartMainboard		,
-		RestartControlboard		,
-		AckRestartControlboard	,
+		RestartMainboard = 100		,
+		AckRestartMainboard			,
+		RestartControlboard			,
+		AckRestartControlboard		,
+		RestartApp					,
+		AckRestartApp				,
+		RestartKeyboardProgram		,
+		AckRestartKeyboardProgram	,
+		KeyboardErrorMessage		,
 		// 心跳
 		SetPingPongFrequency = 200	,
 		AckSetPingPongFrequency		,
@@ -41,27 +46,29 @@ namespace Commands{
 		ReadAppTime					,
 		ReturnAppTime				,
 		// 基本功能
-		AppIOEvent = 300						,
-		KeyboardIOEvent							,
-		AppReadKeyboardInstruments				,
-		ReturnAppReadKeyboardInstruments		,
-		AppSwitchKeyboardInstrument				,
-		AckAppSwitchKeyboardInstrument			,
-		KeyboardFinishSwitchInstrument			,
-		AckKeyboardFinishSwitchInstrument		,
+		AppIOEvent = 300					,
+		KeyboardIOEvent						,
+		AppReadKeyboardInstrument			,
+		ReturnAppReadKeyboardInstrument		,
+		AppSwitchKeyboardInstrument			,
+		AckAppSwitchKeyboardInstrument		,
+		KeyboardFinishSwitchInstrument		,
+		AckKeyboardFinishSwitchInstrument	,
 		// 擴充升級
 		NewFirmwareData = 400						,
 		AckNewFirmwareData							,
-		RequestNewFirmwareSplit,
-		AckRequestNewFirmwareSplit,
+		ClearNewFirmwareSplit						,
+		AckClearNewFirmwareSplit					,
+		RequestNewFirmwareSplit						,
+		AckRequestNewFirmwareSplit					,
 		NewFirmwareSplitFileSegment					,
 		AckNewFirmwareSplitFileSegment				,
 		RequestRewriteNewFirmwareSplitFileSegment	,
 		FinishWriteNewFirmwareSplit					,
 		AckFinishWriteNewFirmwareSplit				,
-		RequestRewriteNewFirmwareSplit				,
-		FinishWriteNewFirmware						,
-		AckFinishWriteNewFirmware					,
+		FinishRequestNewFirmware					,
+		AckFinishRequestNewFirmware					,
+
 		// log
 		ChangeHardwareLogLevel = 500		,
 		AckChangeHardwareLogLevel			,
@@ -69,7 +76,7 @@ namespace Commands{
 		AckDownloadHardwareLog				,
 		HardwareLogFileSegment				,
 		AckHardwareLogFileSegment			,
-		RequestRewiteHardwareLogFileSegment	,
+		RequestRewriteHardwareLogFileSegment,
 		FinishWriteHardwareLog				,
 		AckFinishWriteHardwareLog			,
 		DeleteHardwareLog					,
@@ -81,6 +88,9 @@ namespace Commands{
 		InstantLog							,
 		HardwareStopInstantLog				,
 		AckHardwareStopInstantLog			,
+		HardwareErrorLog					,
+
+
 		// 設定
 		ReadHardwareConfiguration = 600	,
 		ReturnHardwareConfiguration		,
@@ -97,6 +107,7 @@ namespace Commands{
 		AckTempScene			,
 		EnterScene				,
 		AckEnterScene			,
+
 		// 音樂遊戲
 		// 遊戲準備
 		ReadGameConfiguration = 800			,
@@ -108,14 +119,15 @@ namespace Commands{
 		SheetmusicData						,
 		AckSheetmusicData					,
 		RequestSheetmusicFile				,
-		AckRequestSheetmusicFile			,	// 後來佳的
-		SheetmusicFileSegment				,	// 後來佳的
+		AckRequestSheetmusicFile			,
+		SheetmusicFileSegment				,
 		AckSheetmusicFileSegment			,
 		RequestRewriteSheetmusicFileSegment	,
 		FinishWriteSheetmusic				,
 		AckFinishWriteSheetmusic			,
 		RequestLoadGame						,
 		AckRequestLoadGame					,
+
 		// 遊戲進行
 		HardwareGameEvent			,
 		AppGameEvent				,
@@ -136,6 +148,7 @@ namespace Commands{
 		AckAppRestartGame			,
 		AppCompleteGame				,
 		AckAppCompleteGame			,
+
 		// 遊戲結束
 		HardwareCompleteGame				,
 		AckHardwareCompleteGame				,

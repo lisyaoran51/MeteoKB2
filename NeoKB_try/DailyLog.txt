@@ -3320,3 +3320,13 @@ https://cpp.hotexamples.com/examples/-/-/gatt_db_service_add_characteristic/cpp-
 	
 6/30
 	把所有instant game event補玩了，但是沒寫fall effect和spot effect，寫完應該就完成了(待測試)
+	
+6/31
+	接下來要寫完effect，還有主程式下載，和result
+
+7/4
+	寫玩了instant和record，要測試一下
+	
+	isGameControllingPitchState 要確認一下，instrument和palyfield和eventprocessormaster通通都有
+	只有record可以再遊戲中改pitch state
+	

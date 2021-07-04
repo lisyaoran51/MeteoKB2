@@ -13,7 +13,6 @@ RecordConfigManager::RecordConfigManager(): TConfigManager(), RegisterType("Reco
 int RecordConfigManager::setNamesOfConfig()
 {
 	namesOfConfig["PatternGenerator"] = RecordSetting::PatternGenerator;
-	namesOfConfig["RecordSystemController"] = RecordSetting::RecordSystemController;
 	return 0;
 }
 
