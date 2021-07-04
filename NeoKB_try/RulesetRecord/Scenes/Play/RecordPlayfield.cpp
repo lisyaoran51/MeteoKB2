@@ -46,29 +46,6 @@ int RecordPlayfield::load(FrameworkConfigManager* f, RecordConfigManager * m)
 	if(f->Get(FrameworkSetting::Width, &pitchCount)){}
 
 
-	/* 利用map algo的名字建立map algo */
-	InstanceCreator<MtoObject> &iCreator = InstanceCreator<MtoObject>::GetInstance();
-	string mapAlgoName;
-
-
-	/* --------------------- System Controller --------------------- */
-	string systemControllerName;
-
-	if (m->Get(RecordSetting::RecordSystemController, &systemControllerName)) {
-		SystemController* systemController = iCreator.CreateInstanceWithT<SystemController>(systemControllerName);
-		systemController->LazyConstruct(leaveGame, restartGame, endGame);
-		systemControllers["StopSystemEvent"] = systemController;
-		systemControllers["RestartSystemEvent"] = systemController;
-		systemControllers["EndSystemEvent"] = systemController;
-	}
-	else {
-		systemControllers["StopSystemEvent"] = new SystemController();
-		systemControllers["RestartSystemEvent"] = systemControllers["StopSystemEvent"];
-		systemControllers["EndSystemEvent"] = systemControllers["StopSystemEvent"];
-		systemControllers["StopSystemEvent"]->LazyConstruct(leaveGame, restartGame, endGame);
-	}
-	AddChild(systemControllers["StopSystemEvent"]);
-
 	return 0;
 }
 
@@ -81,11 +58,6 @@ RecordPlayfield::RecordPlayfield(): Playfield(), RegisterType("RecordPlayfield")
 
 int RecordPlayfield::OnJudgement(HitObject * hitObject, Judgement * judgement)
 {
-	LOG(LogLevel::Depricated) << "MeteorPlayfield::OnJudgement() : add judgement and try to create explosion." << judgement->GetIsHit();
-	if (!judgement->GetIsHit())
-		return -1;
-
-	// 因為爆破效果不好，所以不用了
 	return 0;
 }
 
@@ -104,11 +76,12 @@ int RecordPlayfield::OnButtonDown(RecordAction action)
 {
 	LOG(LogLevel::Debug) << "RecordPlayfield::OnButtonDown() : button = " << int(action) << ".";
 
-	// Instant模式應該改成不能夠change pitch state
+	// record模式可以改pitch state
 	if (!isGameControllingPitchState) {
 		if (action == RecordAction::LowerOctave) {
 			switch (pitchState) {
 			case MeteoPianoPitchState::Lowered:
+				ChangePitchState(MeteoPianoPitchState::Lowered);
 				break;
 			case MeteoPianoPitchState::None:
 				pitchState = MeteoPianoPitchState::Lowered;

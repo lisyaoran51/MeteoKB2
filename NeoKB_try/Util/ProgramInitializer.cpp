@@ -126,6 +126,29 @@ using namespace Instant::Schedulers::Events::InstrumentEvents::InstrumentControl
 #include "../RulesetInstant/Scheduler/Event/PlayfieldEvents/PlayfieldControllers/InstantOctaveShifter.h"
 using namespace Instant::Schedulers::Events::PlayfieldEvents::PlayfieldControllers;
 
+
+
+// ===============================================
+
+// Record
+#include "../RulesetRecord/RecordGame.h"
+using namespace Record;
+
+// Instant/Config
+#include "../RulesetRecord/Config/RecordConfigManager.h"
+using namespace Record::Config;
+
+// Instant/Play
+#include "../RulesetRecord/Scenes/Play/RecordPlayfield.h"
+using namespace Record::Scenes::Play;
+
+// Instant/Rulesets
+#include "../RulesetRecord/Ruleset/RecordRuleset.h"
+#include "../RulesetRecord/Ruleset/RecordRulesetExecutor.h"
+using namespace Record::Rulesets;
+
+
+
 using namespace Util;
 
 
@@ -252,6 +275,21 @@ int ProgramInitializer::Initialize()
 	// Instant/Schedulers/Events/PlayfieldEvents/PlayfieldControllers
 	iCreator.RegisterType<InstantOctaveShifter>("InstantOctaveShifter");
 
+
+	// ===============================================
+
+	// Record
+	iCreator.RegisterType<RecordGame>("RecordGame");
+
+	// Record/Config
+	iCreator.RegisterType<RecordConfigManager>("RecordConfigManager");
+
+	// Record/Play
+	iCreator.RegisterType<RecordPlayfield>("RecordPlayfield");
+
+	// Record/Rulesets
+	iCreator.RegisterType<RecordRuleset>("RecordRuleset");
+	iCreator.RegisterType<RecordRulesetExecutor>("RecordRulesetExecutor");
 
 
 	// 2.«Ødecoder
