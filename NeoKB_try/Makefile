@@ -65,6 +65,7 @@ RulesetInstant/Timing\
 RulesetRecord:RulesetRecord/Config:RulesetRecord/Input:\
 RulesetRecord/Ruleset:RulesetRecord/Ruleset/Scoring:RulesetRecord/Ruleset/Replays:\
 RulesetRecord/Scenes/Results:RulesetRecord/Scenes/Play:\
+RulesetRecord/Scheduler/Event:\
 RulesetRecord/Sheetmusic:RulesetRecord/Sheetmusic/Pattern:\
 RulesetRecord/Timing:\
 
@@ -137,6 +138,7 @@ INCLUDE = -IFramwork -IFramework/Allocation -IFramework/Allocation/Hierachal -IF
 -IRulesetRecord -IRulesetRecord/Config -IRulesetRecord/Input \
 -IRulesetRecord/Ruleset -IRulesetRecord/Ruleset/Scoring -IRulesetRecord/Ruleset/Replays \
 -IRulesetRecord/Scenes/Results -IRulesetRecord/Scenes/Play \
+-IRulesetRecord/Scheduler/Event \
 -IRulesetRecord/Sheetmusic -IRulesetRecord/Sheetmusic/Pattern \
 -IRulesetRecord/Timing \
 
