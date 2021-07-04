@@ -58,8 +58,15 @@ RulesetInstant/Ruleset:RulesetInstant/Ruleset/Scoring:RulesetInstant/Ruleset/Rep
 RulesetInstant/Scenes/Play:RulesetInstant/Scenes/Results:\
 RulesetInstant/Scheduler/Event:RulesetInstant/Scheduler/Event/Effect:RulesetInstant/Scheduler/Event/Effect/Algorithm:\
 RulesetInstant/Scheduler/Event/InstrumentEvents:RulesetInstant/Scheduler/Event/InstrumentEvents/InstrumentControllers:\
+RulesetInstant/Scheduler/Event/PlayfieldEvents:RulesetInstant/Scheduler/Event/PlayfieldEvents/PlayfieldControllers:\
 RulesetInstant/Sheetmusic:RulesetInstant/Sheetmusic/Pattern:\
 RulesetInstant/Timing\
+\
+RulesetRecord:RulesetRecord/Config:RulesetRecord/Input:\
+RulesetRecord/Ruleset:RulesetRecord/Ruleset/Scoring:RulesetRecord/Ruleset/Replays:\
+RulesetRecord/Scenes/Results:RulesetRecord/Play:\
+RulesetRecord/Sheetmusic:RulesetRecord/Sheetmusic/Pattern:\
+RulesetRecord/Timing:\
 
 
 
@@ -122,9 +129,16 @@ INCLUDE = -IFramwork -IFramework/Allocation -IFramework/Allocation/Hierachal -IF
 -IRulesetInstant/Scenes/Results -IRulesetInstant/Scenes/Play \
 -IRulesetInstant/Scheduler/Event -IRulesetInstant/Scheduler/Event/Effect -IRulesetInstant/Scheduler/Event/Effect/Algorithm \
 -IRulesetInstant/Scheduler/Event/InstrumentEvents -IRulesetInstant/Scheduler/Event/InstrumentEvents/InstrumentControllers \
+-IRulesetInstant/Scheduler/Event/PlayfieldEvents -IRulesetInstant/Scheduler/Event/PlayfieldEvents/PlayfieldControllers \
 -IRulesetInstant/Sheetmusic -IRulesetInstant/Sheetmusic/Pattern \
 -IRulesetInstant/Timing \
 \
+\
+-IRulesetRecord -IRulesetRecord/Config -IRulesetRecord/Input \
+-IRulesetRecord/Ruleset -IRulesetRecord/Ruleset/Scoring -IRulesetRecord/Ruleset/Replays \
+-IRulesetRecord/Scenes/Results -IRulesetRecord/Play \
+-IRulesetRecord/Sheetmusic -IRulesetRecord/Sheetmusic/Pattern \
+-IRulesetRecord/Timing \
 
 #INCLUDE = -IGames -IGames/Config -IGames/Graphic -IGames/Graphic/Map -IGames/Graphic/Renderer -IGames/Play -IGames/Ruleset \
 #-IGames/Scheduler -IGames/Scheduler/Event -IGames/Scheduler/Event/ControlPoints -IGames/Scheduler/Event/GameEvents -IGames/Scheduler/Event/Effect \
