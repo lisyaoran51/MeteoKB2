@@ -64,8 +64,6 @@ namespace Events {
 		int load();
 
 		int load(FrameworkConfigManager* f, EventProcessorFilter* e, OutputManager* o, TimeController* t);
-
-		bool isFirstUpdate = true;
 	public:
 
 		EventProcessorMaster();
@@ -149,6 +147,8 @@ namespace Events {
 		OutputManager* outputManager = nullptr;
 
 		TimeController* timeController = nullptr;
+
+		bool isFirstUpdate = true;
 
 		/// <summary>
 		/// 用來判斷是不是暫停狀態，暫停中就不能夠判斷分數

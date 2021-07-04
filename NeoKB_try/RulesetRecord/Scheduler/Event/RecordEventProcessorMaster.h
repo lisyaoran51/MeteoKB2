@@ -52,8 +52,6 @@ namespace Events{
 
 		int loadAndMapPitches();
 
-		bool matchPitch(HitObject* hObject, RecordAction meteorAction);
-
 	};
 
 }}}

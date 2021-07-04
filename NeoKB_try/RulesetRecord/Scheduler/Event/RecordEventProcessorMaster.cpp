@@ -69,49 +69,14 @@ int RecordEventProcessorMaster::OnSlide(pair<RecordAction, int> action)
 
 int RecordEventProcessorMaster::update()
 {
-	LOG(LogLevel::Depricated) << "RecordEventProcessorMaster::update : update start.";
 
-	EventProcessorMaster::update();
+	if (isFirstUpdate) {
+		isFirstUpdate = false;
 
-	LOG(LogLevel::Depricated) << "RecordEventProcessorMaster::update : update over.";
-
-	double currentTime = 0;
-	/* 這邊要檢查已經過去的fall effect有沒有miss */
-	try {
-		currentTime = GetClock()->GetCurrentTime();
+		MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::StartGame);
+		outputManager->PushMessage(meteoContextBluetoothMessage);
 	}
-	catch (exception& e) {
-		LOG(LogLevel::Warning) << "RecordEventProcessorMaster::update : clock is not started [" << e.what() << "].";
-		return 0;
-		//abort();
-	}
-	/*
-	vector<EventProcessor<Event>*> eventProcessors;
 
-	// 拿已經結束的event
-	eventProcessorPeriods->GetItemsContainPeriods(make_pair<float, float>(currentTime - visibleTimeRange, (float)currentTime), &eventProcessors);
-	LOG(LogLevel::Depricated) << "InstantEventProcessorMaster::update() : filter event processors by [" << eventProcessorFilter << "].";
-	eventProcessorFilter->Filter(&eventProcessors);
-
-	for (int i = 0; i < eventProcessors.size(); i++) {
-		HitObject* hObject = dynamic_cast<HitObject*>(eventProcessors[i]);
-
-		if (hObject == nullptr)
-			continue;
-
-		if (hObject->GetHasJudgementResult())
-			continue;
-
-		
-		if (hObject->TryJudgement() == -2) {
-			// TODO: 目前先不檢查踏板，之後要改成如果有插入踏板就要檢查踏板
-			if (dynamic_cast<NoteControlPointHitObject*>(hObject)) {
-				hObject->UpdateJudgement(false);
-			}
-		}
-		
-	}
-	*/
 	return 0;
 }
 
@@ -298,37 +263,4 @@ int RecordEventProcessorMaster::loadAndMapPitches()
 #pragma endregion
 
 	return 0;
-}
-
-bool RecordEventProcessorMaster::matchPitch(HitObject * hObject, RecordAction instantAction)
-{
-	HasPitch* hasPitch = dynamic_cast<HasPitch*>(hObject);
-	if (hasPitch == nullptr)
-		return false;
-
-	switch (pitchState) {
-
-	case MeteoPianoPitchState::None:
-		if (pitchBindings.find(hasPitch->GetPitch()) != pitchBindings.end()) {
-			if (pitchBindings[hasPitch->GetPitch()] == instantAction)
-				return true;
-		}
-		break;
-
-	case MeteoPianoPitchState::Lowered:
-		if (loweredPitchBindings.find(hasPitch->GetPitch()) != loweredPitchBindings.end()) {
-			if (loweredPitchBindings[hasPitch->GetPitch()] == instantAction)
-				return true;
-		}
-		break;
-
-	case MeteoPianoPitchState::Raised:
-		if (raisedPitchBindings.find(hasPitch->GetPitch()) != raisedPitchBindings.end()) {
-			if (raisedPitchBindings[hasPitch->GetPitch()] == instantAction)
-				return true;
-		}
-		break;
-	}
-
-	return false;
 }
