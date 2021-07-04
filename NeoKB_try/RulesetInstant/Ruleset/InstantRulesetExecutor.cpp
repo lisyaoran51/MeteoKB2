@@ -7,6 +7,8 @@
 #include "../Scheduler/Event/Effect/InstantFallEffect.h"
 #include "../Scheduler/Event/Effect/InstantFallEffectMapper.h"
 #include "../Scheduler/Event/Effect/InstantGlowLineEffectMapper.h"
+#include "../Scheduler/Event/PlayfieldEvents/InstantOctaveShiftEventProcessor.h"
+#include "../Scheduler/Event/InstrumentEvents/InstantPianoEventProcessor.h"
 #include "../Scheduler/Event/InstrumentEvents/InstantPianoSoundEventProcessor.h"
 #include "../../Games/Scheduler/Event/SystemEvents/StopSystemEventHandler.h"
 #include "../Input/InstantInputManager.h"
@@ -28,6 +30,7 @@ using namespace Instant::Sheetmusics;
 using namespace Instant::Scenes::Play;
 using namespace Games::Schedulers::Events::Effects;
 using namespace Instant::Schedulers::Events::Effects;
+using namespace Instant::Schedulers::Events::PlayfieldEvents;
 using namespace Instant::Schedulers::Events::InstrumentEvents;
 using namespace Instant::Input;
 using namespace Instant::Timing;
@@ -68,10 +71,13 @@ int InstantRulesetExecutor::load()
 InstantRulesetExecutor::InstantRulesetExecutor(): RegisterType("InstantRulesetExecutor"), RulesetExecutor()
 {
 	// 如果要自定效果，要直接從config那裡改map algo，這邊不能動。
-	eventProcessorTable["InstantFallEffect"		] = "InstantFallEffectMapper";
-	eventProcessorTable["InstantGlowLineEffect"	] = "InstantGlowLineEffectMapper";
-	eventProcessorTable["StopSystemEvent"		] = "StopSystemEventHandler";
-	eventProcessorTable["InstantPianoSoundEvent"] = "InstantPianoSoundEventProcessor";
+	eventProcessorTable["InstantFallEffect"			] = "InstantFallEffectMapper";
+	eventProcessorTable["InstantGlowLineEffect"		] = "InstantGlowLineEffectMapper";
+	eventProcessorTable["InstantSpotEffect"			] = "InstantSpotEffectMapper";
+	eventProcessorTable["InstantOctaveShiftEvent"	] = "InstantOctaveShiftEventProcessor";
+	eventProcessorTable["InstantPianoEvent"			] = "InstantPianoEventProcessor";
+	eventProcessorTable["InstantPianoSoundEvent"	] = "InstantPianoSoundEventProcessor";
+	eventProcessorTable["StopSystemEvent"			] = "StopSystemEventHandler";
 
 	// 註冊private load (c++才需要)
 	registerLoad(bind(static_cast<int(InstantRulesetExecutor::*)(void)>(&InstantRulesetExecutor::load), this));
@@ -161,8 +167,15 @@ EventProcessor<Event>* InstantRulesetExecutor::getEventProcessor(Event * e)
 		int height = playfield->GetHeight();
 		return (new InstantGlowLineEffectMapper(width, height))->RegisterEvent(e);
 	}
+	else if (processorType == "InstantOctaveShiftEventProcessor") {
+		return (new InstantOctaveShiftEventProcessor())->RegisterEvent(e);
+	}
+	else if (processorType == "InstantPianoEventProcessor") {
+		LOG(LogLevel::Depricated) << "InstantRulesetExecutor::getEventProcessor : getting event PianoEventProcessor at [" << e->GetStartTime() << "]";
+		return (new InstantPianoEventProcessor())->RegisterEvent(e);
+	}
 	else if (processorType == "InstantPianoSoundEventProcessor") {
-		LOG(LogLevel::Depricated) << "MeteorRulesetExecutor::getEventProcessor : getting event PianoEventProcessor at [" << e->GetStartTime() << "]";
+		LOG(LogLevel::Depricated) << "InstantRulesetExecutor::getEventProcessor : getting event PianoSoundEventProcessor at [" << e->GetStartTime() << "]";
 		return (new InstantPianoSoundEventProcessor())->RegisterEvent(e);
 	}
 	else if (processorType == "StopSystemEventHandler") {

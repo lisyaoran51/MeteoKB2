@@ -588,26 +588,18 @@ bool MeteorTimeController::checkIsGameOver()
 	}
 }
 
-int MeteorTimeController::onButtonDown(InputState * inputState, InputKey button)
-{
-	return 0;
-
-}
-
-int MeteorTimeController::onKnobTurn(InputState * inputState, InputKey knob)
-{
-	return 0;
-	
-}
-
 int MeteorTimeController::onMessage(MeteoBluetoothMessage * message)
 {
 	if (message->GetCommand() == MeteoCommand::AppQuitGame || message->GetCommand() == MeteoCommand::AppRestartGame) {
 
 		/* 離開遊戲時將燈光關閉 */
-		SpeedRingPanelMessage* speedRingPanelMessage = new SpeedRingPanelMessage(5);
-		outputManager->PushMessage(speedRingPanelMessage);
+		//SpeedRingPanelMessage* speedRingPanelMessage = new SpeedRingPanelMessage(5);
+		//outputManager->PushMessage(speedRingPanelMessage);
 
+	}
+
+	if (message->GetCommand() == MeteoCommand::AppCompleteGame) {
+		return -1;
 	}
 
 	if (message->GetCommand() == MeteoCommand::AppGameEvent) {

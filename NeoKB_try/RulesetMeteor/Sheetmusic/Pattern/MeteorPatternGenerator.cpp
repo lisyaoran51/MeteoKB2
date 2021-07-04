@@ -664,12 +664,12 @@ Pattern * MeteorPatternGenerator::generateInputKeyControlPoint(vector<Event*>* e
 		//buttonRecorderEvent->SetSourceEvent(inputKeyControlPoint);
 		pianoEventPress->SetSourceEvent(cloned);
 
-		pattern->Add(octaveShiftEvent);
+		//pattern->Add(octaveShiftEvent);
 		//pattern->Add(buttonRecorderEvent);
 		pattern->Add(pianoEventPress);
 
 		es->push_back(cloned);
-		es->push_back(octaveShiftEvent);
+		//es->push_back(octaveShiftEvent);
 		//es->push_back(buttonRecorderEvent);
 		es->push_back(pianoEventPress);
 	}

@@ -19,3 +19,8 @@ RecordTimeController::RecordTimeController() : RegisterType("RecordTimeControlle
 {
 	registerLoad(bind(static_cast<int(RecordTimeController::*)(void)>(&RecordTimeController::load), this));
 }
+
+int RecordTimeController::onMessage(MeteoBluetoothMessage * message)
+{
+	return MeteoTimeController::onMessage(message);
+}

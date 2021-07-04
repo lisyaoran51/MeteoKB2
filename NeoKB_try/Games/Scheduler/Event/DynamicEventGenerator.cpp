@@ -30,7 +30,12 @@ int DynamicEventGenerator::update()
 	unique_lock<mutex> uLock(dynamicEventsMutex);
 
 	for (int i = 0; i < dynamicEvents.size(); i++) {
-		playfield->AddDynamic(dynamicEvents[i]);
+		try {
+			playfield->AddDynamic(dynamicEvents[i]);
+		}
+		catch (exception &e) {
+			LOG(LogLevel::Warning) << "DynamicEventGenerator::update() : Fail to add new dynamic event:" << e.what();
+		}
 	}
 
 	dynamicEvents.clear();

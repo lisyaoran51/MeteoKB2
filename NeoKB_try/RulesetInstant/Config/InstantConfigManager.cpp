@@ -16,6 +16,8 @@ int InstantConfigManager::initializeDefault()
 	Set(InstantSetting::InstantFallMapAlgorithm, "InstantFallMapAlgorithm");
 	Set(InstantSetting::InstantGlowLineMapAlgorithm, "InstantGlowLineMapAlgorithm");
 	Set(InstantSetting::InstantSpotMapAlgorithm, "InstantSpotMapAlgorithm");
+	Set(InstantSetting::InstantOctaveShifter, "InstantOctaveShifter");
+	Set(InstantSetting::InstantInstrumentController, "InstantPianoController");
 	Set(InstantSetting::InstantVirtualInstrumentController, "InstantVirtualPianoController");
 	Set(InstantSetting::InstantSystemController, "InstantSystemController");
 
@@ -30,6 +32,8 @@ int InstantConfigManager::setNamesOfConfig()
 	namesOfConfig["PatternGenerator"] = InstantSetting::PatternGenerator;
 	namesOfConfig["InstantFallMapAlgorithm"] = InstantSetting::InstantFallMapAlgorithm;
 	namesOfConfig["InstantGlowLineMapAlgorithm"] = InstantSetting::InstantGlowLineMapAlgorithm;
+	namesOfConfig["InstantOctaveShifter"] = InstantSetting::InstantOctaveShifter;
+	namesOfConfig["InstantInstrumentController"] = InstantSetting::InstantInstrumentController;
 	namesOfConfig["InstantVirtualInstrumentController"] = InstantSetting::InstantVirtualInstrumentController;
 	namesOfConfig["InstantSystemController"] = InstantSetting::InstantSystemController;
 	namesOfConfig["WhiteKeyTargetHeight"] = InstantSetting::WhiteKeyTargetHeight;

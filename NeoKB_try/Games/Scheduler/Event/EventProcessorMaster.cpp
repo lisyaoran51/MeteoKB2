@@ -314,8 +314,6 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 				continue;
 			}
 
-
-
 		}
 	}
 
@@ -389,6 +387,39 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 
 	}
 
+	/*
+	 * dynamic events，目前只有instant模式會使用
+	 */
+	for (int i = 0; i < dynamicEventProcessors.size(); i++) {
+
+		LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent : this processor is for [" << dynamicEventProcessors[i]->GetEvent()->GetTypeName() << "] [" << filteredTempStaticEventProcessors[i]->GetStartTime() << "]. " << currentTime;
+
+		if (dynamicEventProcessors[i]->GetStartTime() >= currentTime)
+			continue;
+
+		if (dynamicEventProcessors[i]->GetEventProcessorType() == EventProcessorType::Instrument) {
+			InstrumentEventProcessorInterface* instrumentEventProcessor = dynamic_cast<InstrumentEventProcessorInterface*>(dynamicEventProcessors[i]);
+			if (instrumentEventProcessor) {
+				if (instrumentEventProcessor->GetStartTime() < currentTime && instrumentEventProcessor->GetIsTransferable()) {
+					LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent : found instrument event processor [" << instrumentEventProcessor->GetStartTime() << "].";
+					instrumentEventProcessor->ControlInstrument();
+				}
+			}
+			continue;
+		}
+		
+		/* playfield事件 */
+		if (filteredTempStaticEventProcessors[i]->GetEventProcessorType() == EventProcessorType::Playfield) {
+			PlayfieldEventProcessorInterface* playfieldEventProcessor = dynamic_cast<PlayfieldEventProcessorInterface*>(filteredTempStaticEventProcessors[i]);
+			if (playfieldEventProcessor) {
+				if (playfieldEventProcessor->GetStartTime() < currentTime && playfieldEventProcessor->GetIsControllable()) {
+					LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent : found playfield event processor [" << playfieldEventProcessor->GetStartTime() << "].";
+					playfieldEventProcessor->ControlPlayfield();
+				}
+			}
+			continue;
+		}
+	}
 
 	return 0;
 }
@@ -511,12 +542,12 @@ int EventProcessorMaster::update()
 
 		LOG(LogLevel::Depricated) << "EventProcessorMaster::update : step 1 get timed";
 
-		if ((*iter)->GetProcessorLifeType() == EventProcessorLifeType::Timed &&
+		if ((*iter)->GetProcessorLifeType() == EventLifeType::Timed &&
 			(*iter)->GetTimeLeft() <= 0) {
 
 			thisOneNeedDelete = true;
 		}
-		else if ((*iter)->GetProcessorLifeType() == EventProcessorLifeType::Immediate &&
+		else if ((*iter)->GetProcessorLifeType() == EventLifeType::Immediate &&
 				 (*iter)->GetIsProcessed()) {
 
 			thisOneNeedDelete = true;

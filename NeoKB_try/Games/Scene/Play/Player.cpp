@@ -214,8 +214,8 @@ int Player::load(MeteoConfigManager* m, Instrument* instru, MeteoGame * g)
 
 	// 這行要改掉，應該用時間來判斷，而不是用judgement來判斷
 	//scoreProcessor->AddOnAllJudged(this, bind(&Player::onCompletion, this), "Player::onCompletion"); // 顯示成績結算
-	timeController->AddOnRetry(this, bind(&Player::onQuiting, this), "Player::onQuiting"); // 重新開始
-	timeController->AddOnQuit(this, bind(&Player::onRestarting, this), "Player::onRestarting"); // 終止遊戲，不結算成績
+	timeController->AddOnRetry(this, bind(&Player::onRestarting, this), "Player::onRestarting"); // 重新開始
+	timeController->AddOnQuit(this, bind(&Player::onQuiting, this), "Player::onQuiting"); // 終止遊戲，不結算成績
 	timeController->AddOnGameOver(this, bind(&Player::onCompletion, this), "Player::onCompletion"); // 遊戲結束，顯示成績結算
 
 	return 0;
@@ -308,7 +308,7 @@ int Player::onCompletion()
 		// osu 再這邊不會去加入replay，她錄製replay和進入result是分開的兩件事
 		Push(rulesetExecutor->CreateResult(score));
 		return 0;
-	}, 3);
+	}, 0.1);
 
 
 	return 0;

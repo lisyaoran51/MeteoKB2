@@ -1,19 +1,19 @@
 #ifndef RECORD_TIME_CONTROLLER_H
 #define RECORD_TIME_CONTROLLER_H
 
-#include "../../Framework/Timing/TimeController.h"
+#include "../../Games/Timing/MeteoTimeController.h"
 #include "../Input/RecordInputManager.h"
 
 
 using namespace Record::Input;
-using namespace Framework::Timing;
+using namespace Games::Timing;
 
 
 namespace Record {
 namespace Timing {
 
 
-	class RecordTimeController : public TimeController {
+	class RecordTimeController : public MeteoTimeController<RecordAction> {
 
 		int load();
 
@@ -22,6 +22,8 @@ namespace Timing {
 		RecordTimeController();
 
 	protected:
+
+		virtual int onMessage(MeteoBluetoothMessage* message);
 
 	};
 

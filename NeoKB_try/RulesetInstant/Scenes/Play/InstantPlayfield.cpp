@@ -4,7 +4,9 @@
 #include "../../Scheduler/Event/Effect/Algorithm/InstantFallMapAlgorithm.h"
 #include "../../Scheduler/Event/Effect/Algorithm/InstantGlowLineMapAlgorithm.h"
 #include "../../Scheduler/Event/Effect/Algorithm/InstantSpotMapAlgorithm.h"
+#include "../../Scheduler/Event/PlayfieldEvents/PlayfieldControllers/InstantOctaveShifter.h"
 #include "../../Scheduler/Event/InstrumentEvents/InstrumentControllers/InstantVirtualPianoController.h"
+#include "../../Scheduler/Event/InstrumentEvents/InstrumentControllers/InstantPianoController.h"
 #include "../../../Util/Log.h"
 #include "../../../Games/Scheduler/Event/Effect/Algorithm/LinearMapPitchShifter.h"
 #include "../../Scheduler/Event/InstantEventProcessorMaster.h"
@@ -17,6 +19,7 @@ using namespace Instant::Scenes::Play;
 using namespace Instant::Config;
 using namespace Games::Schedulers::Events::Effects::Algorithms;
 using namespace Instant::Schedulers::Events::Effects::Algorithms;
+using namespace Instant::Schedulers::Events::PlayfieldEvents::PlayfieldControllers;
 using namespace Instant::Schedulers::Events::InstrumentEvents::InstrumentControllers;
 using namespace Util;
 using namespace Instant::Schedulers::Events;
@@ -114,8 +117,28 @@ int InstantPlayfield::load(FrameworkConfigManager* f, InstantConfigManager * m)
 	AddChild(mapAlgorithms["InstantGlowLineEffect"]);
 	mapAlgorithms["InstantGlowLineEffect"]->RegisterBufferMap(bufferMap);
 
+	/*--------------------- Octave shifter ---------------------*/
+	string octaveShifterName;
+	if (m->Get(InstantSetting::InstantOctaveShifter, &octaveShifterName)) {
+		playfieldControllers["InstantOctaveShiftEvent"] = iCreator.CreateInstanceWithT<InstantOctaveShifter>(octaveShifterName);
+	}
+	else
+		playfieldControllers["InstantOctaveShiftEvent"] = new InstantOctaveShifter();
+
+	playfieldControllers["InstantOctaveShiftEvent"]->LazyConstruct(this);
+	AddChild(playfieldControllers["InstantOctaveShiftEvent"]);
+
 	/* --------------------- Piano Controller --------------------- */
 	string instrumentControllerName;
+	if (m->Get(InstantSetting::InstantInstrumentController, &instrumentControllerName)) {
+		InstrumentControllerInterface* instrumentController = iCreator.CreateInstanceWithT<InstrumentControllerInterface>(instrumentControllerName);
+
+		instrumentControllers["InstantPianoEvent"] = instrumentController;
+	}
+	else {
+		instrumentControllers["InstantPianoEvent"] = new InstantPianoController();
+	}
+	AddChild(instrumentControllers["InstantPianoEvent"]);
 
 	if (m->Get(InstantSetting::InstantVirtualInstrumentController, &instrumentControllerName)) {
 		InstrumentControllerInterface* instrumentController = iCreator.CreateInstanceWithT<InstrumentControllerInterface>(instrumentControllerName);

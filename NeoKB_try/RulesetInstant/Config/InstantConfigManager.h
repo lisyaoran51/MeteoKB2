@@ -36,6 +36,8 @@ namespace Config{
 		InstantFallMapAlgorithm,
 		InstantGlowLineMapAlgorithm,
 		InstantSpotMapAlgorithm,
+		InstantOctaveShifter,
+		InstantInstrumentController,
 		InstantVirtualInstrumentController,
 		InstantSystemController,
 

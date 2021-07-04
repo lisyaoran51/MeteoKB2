@@ -237,16 +237,25 @@ RepeatPracticeEvent.o RepeatPracticeEventProcessor.o RepeatPracticeController.o 
 MeteorSheetmusicConverter.o MeteorSheetmusicPostprocessor.o MeteorPatternGenerator.o \
 MeteorTimeController.o \
 \
-InstantGame.o InstantConfigManager.o InstantInputManager.o InstantPlayfield.o \
+InstantGame.o InstantConfigManager.o InstantInputManager.o InstantPitchBindingSet.o InstantPlayfield.o \
 InstantRuleset.o InstantRulesetExecutor.o InstantReplayRecorder.o InstantReplayFrame.o InstantReplayRecorderReceiver.o \
 InstantResult.o \
 InstantScoreProcessor.o \
 InstantDynamicEventGenerator.o InstantEventProcessorMaster.o \
 InstantFallEffect.o InstantFallEffectMapper.o InstantGlowLineEffect.o InstantGlowLineEffectMapper.o InstantSpotEffect.o InstantSpotEffectMapper.o \
 InstantFallMapAlgorithm.o InstantGlowLineMapAlgorithm.o InstantSpotMapAlgorithm.o \
-InstantPianoSoundEvent.o InstantPianoSoundEventProcessor.o InstantVirtualPianoController.o \
+InstantOctaveShiftEvent.o InstantOctaveShiftEventProcessor.o InstantOctaveShifter.o \
+InstantPianoEvent.o InstantPianoEventProcessor.o InstantPianoController.o InstantPianoSoundEvent.o InstantPianoSoundEventProcessor.o InstantVirtualPianoController.o \
 InstantSheetmusicConverter.o InstantSheetmusicPostprocessor.o InstantPatternGenerator.o \
 InstantTimeController.o \
+\
+RecordGame.o RecordConfigManager.o RecordInputManager.o RecordPitchBindingSet.o RecordPlayfield.o \
+RecordRuleset.o RecordRulesetExecutor.o RecordReplayRecorder.o RecordReplayFrame.o RecordReplayRecorderReceiver.o \
+RecordResult.o \
+RecordScoreProcessor.o \
+RecordDynamicEventGenerator.o RecordEventProcessorMaster.o \
+RecordSheetmusicConverter.o RecordSheetmusicPostprocessor.o RecordPatternGenerator.o \
+RecordTimeController.o \
 
 
 #Program.o Game.o \

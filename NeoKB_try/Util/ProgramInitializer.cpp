@@ -122,6 +122,10 @@ using namespace Instant::Schedulers::Events::Effects::Algorithms;
 #include "../RulesetInstant/Scheduler/Event/InstrumentEvents/InstrumentControllers/InstantVirtualPianoController.h"
 using namespace Instant::Schedulers::Events::InstrumentEvents::InstrumentControllers;
 
+// Instant/Schedulers/Events/PlayfieldEvents/PlayfieldControllers
+#include "../RulesetInstant/Scheduler/Event/PlayfieldEvents/PlayfieldControllers/InstantOctaveShifter.h"
+using namespace Instant::Schedulers::Events::PlayfieldEvents::PlayfieldControllers;
+
 using namespace Util;
 
 
@@ -244,6 +248,9 @@ int ProgramInitializer::Initialize()
 
 	// Instant/Schedulers/Events/InstrumentEvents/InstrumentControllers
 	iCreator.RegisterType<InstantVirtualPianoController>("InstantVirtualPianoController");
+
+	// Instant/Schedulers/Events/PlayfieldEvents/PlayfieldControllers
+	iCreator.RegisterType<InstantOctaveShifter>("InstantOctaveShifter");
 
 
 

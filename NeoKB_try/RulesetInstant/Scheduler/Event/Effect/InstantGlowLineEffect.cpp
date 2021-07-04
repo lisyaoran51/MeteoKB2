@@ -11,6 +11,7 @@ InstantGlowLineEffect::InstantGlowLineEffect(): Effect()
 
 InstantGlowLineEffect::InstantGlowLineEffect(int xPos, int yPos, MTO_FLOAT sTime, MTO_FLOAT l): Effect(xPos, yPos, sTime, l)
 {
+	lifeType = EventLifeType::Timed;
 }
 
 string InstantGlowLineEffect::GetTypeName()

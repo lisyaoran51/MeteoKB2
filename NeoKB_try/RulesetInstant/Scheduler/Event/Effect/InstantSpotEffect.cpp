@@ -13,6 +13,7 @@ InstantSpotEffect::InstantSpotEffect()
 InstantSpotEffect::InstantSpotEffect(int xPos, int yPos, MTO_FLOAT sTime, MTO_FLOAT l) : Effect(xPos, yPos, sTime, l)
 {
 	effectPinType = EffectPinType::ByPosition;
+	lifeType = EventLifeType::Timed;
 }
 
 InstantSpotEffect::InstantSpotEffect(Pitch p, MTO_FLOAT sTime, MTO_FLOAT l) : Effect(0, 0, sTime, l)

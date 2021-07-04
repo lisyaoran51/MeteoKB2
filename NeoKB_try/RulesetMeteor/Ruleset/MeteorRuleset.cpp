@@ -9,12 +9,12 @@ using namespace Meteor::Rulesets;
 using namespace Meteor::Input;
 
 
-MeteorRuleset::MeteorRuleset() : RegisterType("Ruleset")
+MeteorRuleset::MeteorRuleset() : RegisterType("MeteorRuleset")
 {
 	constructed = false;
 }
 
-MeteorRuleset::MeteorRuleset(RulesetInfo * r): RegisterType("Ruleset")
+MeteorRuleset::MeteorRuleset(RulesetInfo * r): RegisterType("MeteorRuleset")
 {
 	rulesetInfo = r;
 	constructed = true;

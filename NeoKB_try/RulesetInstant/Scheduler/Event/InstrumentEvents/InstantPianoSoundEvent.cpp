@@ -8,6 +8,7 @@ InstantPianoSoundEvent::InstantPianoSoundEvent(pair<Pitch, float> input, MTO_FLO
 {
 	pianoSoundEventType = InstantPianoSoundEventType::Pitch;
 	sound = input;
+	lifeType = EventLifeType::Immediate;
 }
 
 InstantPianoSoundEvent::InstantPianoSoundEvent(bool pDown, MTO_FLOAT s, MTO_FLOAT l) : InstrumentEvent(s, l)

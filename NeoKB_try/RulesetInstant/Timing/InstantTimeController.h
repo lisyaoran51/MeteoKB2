@@ -1,19 +1,19 @@
 #ifndef INSTANT_TIME_CONTROLLER_H
 #define INSTANT_TIME_CONTROLLER_H
 
-#include "../../Framework/Timing/TimeController.h"
+#include "../../Games/Timing/MeteoTimeController.h"
 #include "../Input/InstantInputManager.h"
 
 
 using namespace Instant::Input;
-using namespace Framework::Timing;
+using namespace Games::Timing;
 
 
 namespace Instant {
 namespace Timing {
 
 
-	class InstantTimeController : public TimeController {
+	class InstantTimeController : public MeteoTimeController<InstantAction> {
 
 		int load();
 
@@ -22,6 +22,8 @@ namespace Timing {
 		InstantTimeController();
 
 	protected:
+
+		virtual int onMessage(MeteoBluetoothMessage* message);
 
 	};
 

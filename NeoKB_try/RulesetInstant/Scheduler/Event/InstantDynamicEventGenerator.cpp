@@ -3,6 +3,8 @@
 #include "Effect/InstantFallEffect.h"
 #include "Effect/InstantSpotEffect.h"
 #include "InstrumentEvents/InstantPianoSoundEvent.h"
+#include "InstrumentEvents/InstantPianoEvent.h"
+#include "PlayfieldEvents/InstantOctaveShiftEvent.h"
 #include "../../../Games/Scheduler/Event/SystemEvents/StopSystemEvent.h"
 #include "../../../Games/Output/Bluetooths/MeteoContextBluetoothMessage.h"
 #include "../../../Util/StringSplitter.h"
@@ -13,6 +15,7 @@
 using namespace Instant::Schedulers::Events;
 using namespace Instant::Schedulers::Events::Effects;
 using namespace Instant::Schedulers::Events::InstrumentEvents;
+using namespace Instant::Schedulers::Events::PlayfieldEvents;
 using namespace Games::Schedulers::Events::SystemEvents;
 using namespace Games::Output::Bluetooths;
 using namespace Util;
@@ -153,19 +156,45 @@ int InstantDynamicEventGenerator::onMessage(MeteoBluetoothMessage * message)
 		if (parameters[0] == "AppPedalDown") {
 
 			InstantPianoSoundEvent* instantPianoSoundEventPedalDown = new InstantPianoSoundEvent(true, GetClock()->GetCurrentTime(), 0);
+			InstantPianoEvent* instantPianoEventPedalDown = new InstantPianoEvent(pair<InputKey, int>(InputKey::SustainPedal, 1), GetClock()->GetCurrentTime(), 0);
 
 			unique_lock<mutex> uLock(dynamicEventsMutex);
 
 			dynamicEvents.push_back(instantPianoSoundEventPedalDown);
+			dynamicEvents.push_back(instantPianoEventPedalDown);
 		}
 
 		if (parameters[0] == "AppPedalUp") {
 
 			InstantPianoSoundEvent* instantPianoSoundEventPedalUp = new InstantPianoSoundEvent(false, GetClock()->GetCurrentTime(), 0);
+			InstantPianoEvent* instantPianoEventPedalUp = new InstantPianoEvent(pair<InputKey, int>(InputKey::SustainPedal, -1), GetClock()->GetCurrentTime(), 0);
 
 			unique_lock<mutex> uLock(dynamicEventsMutex);
 
 			dynamicEvents.push_back(instantPianoSoundEventPedalUp);
+			dynamicEvents.push_back(instantPianoEventPedalUp);
+		}
+
+		if (parameters[0] == "ShiftOctave") {
+
+			if (parameters.size() < 2)
+				return -1;
+
+			int shiftDirection = stoi(parameters[1]);
+
+			if (shiftDirection != 1 && shiftDirection != -1)
+				return -1;
+
+			InstantOctaveShiftEvent* instantOctaveShift = nullptr;
+
+			if(shiftDirection == 1)
+				instantOctaveShift = new InstantOctaveShiftEvent(InstantOctaveShiftType::Raise, GetClock()->GetCurrentTime(), 0);
+			else if(shiftDirection == -1)
+				instantOctaveShift = new InstantOctaveShiftEvent(InstantOctaveShiftType::Lower, GetClock()->GetCurrentTime(), 0);
+
+			unique_lock<mutex> uLock(dynamicEventsMutex);
+
+			dynamicEvents.push_back(instantOctaveShift);
 		}
 
 		// TODO: Stop Spot Effect

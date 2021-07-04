@@ -23,13 +23,6 @@ namespace Events {
 
 	class EventProcessorMaster;
 
-	enum class EventProcessorLifeType {
-		None,
-		Timed,
-		Immediate,
-		Infinite
-	};
-
 	/// <summary>
 	/// a processor to process one Event including effects, 
 	/// </summary>
@@ -42,6 +35,7 @@ namespace Events {
 		bool isAttached = false;
 
 	public:
+
 
 		virtual ~EventProcessor() {}
 
@@ -112,8 +106,8 @@ namespace Events {
 
 		}
 
-		EventProcessorLifeType GetProcessorLifeType() {
-			return lifeType;
+		EventLifeType GetProcessorLifeType() {
+			return event->GetLifeType();
 		}
 
 		bool GetIsProcessed() {
@@ -126,9 +120,9 @@ namespace Events {
 		/// </summary>
 		virtual MTO_FLOAT GetProcessorTimeLeft() {
 
-			if (lifeType == EventProcessorLifeType::Infinite)
+			if (event->GetLifeType() == EventLifeType::Infinite)
 				return MTO_INFINITE;
-			else if (lifeType == EventProcessorLifeType::Timed)
+			else if (event->GetLifeType() == EventLifeType::Timed)
 				return event->GetLifeTime() + event->GetStartTime() - clock->GetCurrentTime();
 			else
 				return event->GetLifeTime() + event->GetStartTime() - clock->GetCurrentTime() + 5.0; //?? 這個要怎麼寫
@@ -186,12 +180,10 @@ namespace Events {
 
 		T* event = nullptr;
 
-		EventProcessorLifeType lifeType = EventProcessorLifeType::None;
-
 		EventProcessorType eventProcessorType = EventProcessorType::None;
 
 		/// <summary>
-		/// 在EventProcessorLifeType :: immediate事件才會使用
+		/// 在EventLifeType :: immediate事件才會使用
 		/// </summary>
 		bool isProcessed = false;
 

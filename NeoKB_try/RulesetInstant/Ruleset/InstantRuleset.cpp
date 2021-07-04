@@ -2,6 +2,7 @@
 
 #include "InstantRulesetExecutor.h"
 #include "../Input/InstantInputManager.h"
+#include "../Input/InstantPitchBindingSet.h"
 
 using namespace Instant::Rulesets;
 using namespace Instant::Input;
@@ -86,6 +87,185 @@ vector<KeyBinding*>* InstantRuleset::GetDefaultkeyBindings(int variant)
 
 PitchBindingSet * InstantRuleset::GetDefaultPitchBindingSet(int variant)
 {
-	LOG(LogLevel::Error) << "int InstantRuleset::GetDefaultPitchBindingSet() : not implemented.";
-	return nullptr;
+	InstantPitchBindingSet* pitchBindingSet = new InstantPitchBindingSet();
+	
+	/* 未升降 */
+#pragma region NonePitchState
+
+	pitchBindingSet->SetPitchBinding(Pitch::C   , InstantAction::VK24_L_C1 );
+	pitchBindingSet->SetPitchBinding(Pitch::Db  , InstantAction::VK24_L_bD1);
+	pitchBindingSet->SetPitchBinding(Pitch::D   , InstantAction::VK24_L_D1 );
+	pitchBindingSet->SetPitchBinding(Pitch::Eb  , InstantAction::VK24_L_bE1);
+	pitchBindingSet->SetPitchBinding(Pitch::E   , InstantAction::VK24_L_E1 );
+	pitchBindingSet->SetPitchBinding(Pitch::F   , InstantAction::VK24_L_F1 );
+	pitchBindingSet->SetPitchBinding(Pitch::Gb  , InstantAction::VK24_L_bG1);
+	pitchBindingSet->SetPitchBinding(Pitch::G   , InstantAction::VK24_L_G1 );
+	pitchBindingSet->SetPitchBinding(Pitch::Ab  , InstantAction::VK24_L_bA1);
+	pitchBindingSet->SetPitchBinding(Pitch::A   , InstantAction::VK24_L_A1 );
+	pitchBindingSet->SetPitchBinding(Pitch::Bb  , InstantAction::VK24_L_bB1);
+	pitchBindingSet->SetPitchBinding(Pitch::B   , InstantAction::VK24_L_B1 );
+												  
+	pitchBindingSet->SetPitchBinding(Pitch::c   , InstantAction::VK24_L_C2 );
+	pitchBindingSet->SetPitchBinding(Pitch::db  , InstantAction::VK24_L_bD2);
+	pitchBindingSet->SetPitchBinding(Pitch::d   , InstantAction::VK24_L_D2 );
+	pitchBindingSet->SetPitchBinding(Pitch::eb  , InstantAction::VK24_L_bE2);
+	pitchBindingSet->SetPitchBinding(Pitch::e   , InstantAction::VK24_L_E2 );
+	pitchBindingSet->SetPitchBinding(Pitch::f   , InstantAction::VK24_L_F2 );
+	pitchBindingSet->SetPitchBinding(Pitch::gb  , InstantAction::VK24_L_bG2);
+	pitchBindingSet->SetPitchBinding(Pitch::g   , InstantAction::VK24_L_G2 );
+	pitchBindingSet->SetPitchBinding(Pitch::ab  , InstantAction::VK24_L_bA2);
+	pitchBindingSet->SetPitchBinding(Pitch::a   , InstantAction::VK24_L_A2 );
+	pitchBindingSet->SetPitchBinding(Pitch::bb  , InstantAction::VK24_L_bB2);
+	pitchBindingSet->SetPitchBinding(Pitch::b   , InstantAction::VK24_L_B2 );
+												  
+	pitchBindingSet->SetPitchBinding(Pitch::c1  , InstantAction::VK24_R_C1 );
+	pitchBindingSet->SetPitchBinding(Pitch::d1b , InstantAction::VK24_R_bD1);
+	pitchBindingSet->SetPitchBinding(Pitch::d1  , InstantAction::VK24_R_D1 );
+	pitchBindingSet->SetPitchBinding(Pitch::e1b , InstantAction::VK24_R_bE1);
+	pitchBindingSet->SetPitchBinding(Pitch::e1  , InstantAction::VK24_R_E1 );
+	pitchBindingSet->SetPitchBinding(Pitch::f1  , InstantAction::VK24_R_F1 );
+	pitchBindingSet->SetPitchBinding(Pitch::g1b , InstantAction::VK24_R_bG1);
+	pitchBindingSet->SetPitchBinding(Pitch::g1  , InstantAction::VK24_R_G1 );
+	pitchBindingSet->SetPitchBinding(Pitch::a1b , InstantAction::VK24_R_bA1);
+	pitchBindingSet->SetPitchBinding(Pitch::a1  , InstantAction::VK24_R_A1 );
+	pitchBindingSet->SetPitchBinding(Pitch::b1b , InstantAction::VK24_R_bB1);
+	pitchBindingSet->SetPitchBinding(Pitch::b1  , InstantAction::VK24_R_B1 );
+	 											  
+	pitchBindingSet->SetPitchBinding(Pitch::c2  , InstantAction::VK24_R_C2 );
+	pitchBindingSet->SetPitchBinding(Pitch::d2b , InstantAction::VK24_R_bD2);
+	pitchBindingSet->SetPitchBinding(Pitch::d2  , InstantAction::VK24_R_D2 );
+	pitchBindingSet->SetPitchBinding(Pitch::e2b , InstantAction::VK24_R_bE2);
+	pitchBindingSet->SetPitchBinding(Pitch::e2  , InstantAction::VK24_R_E2 );
+	pitchBindingSet->SetPitchBinding(Pitch::f2  , InstantAction::VK24_R_F2 );
+	pitchBindingSet->SetPitchBinding(Pitch::g2b , InstantAction::VK24_R_bG2);
+	pitchBindingSet->SetPitchBinding(Pitch::g2  , InstantAction::VK24_R_G2 );
+	pitchBindingSet->SetPitchBinding(Pitch::a2b , InstantAction::VK24_R_bA2);
+	pitchBindingSet->SetPitchBinding(Pitch::a2  , InstantAction::VK24_R_A2 );
+	pitchBindingSet->SetPitchBinding(Pitch::b2b , InstantAction::VK24_R_bB2);
+	pitchBindingSet->SetPitchBinding(Pitch::b2  , InstantAction::VK24_R_B2 );
+
+
+#pragma endregion
+
+	/* 降八度 */
+#pragma region LoweredPitchState
+
+	pitchBindingSet->SwitchPitchState(MeteoPianoPitchState::Lowered);
+
+	pitchBindingSet->SetPitchBinding(Pitch::C1  , InstantAction::VK24_L_C1 );
+	pitchBindingSet->SetPitchBinding(Pitch::D1b , InstantAction::VK24_L_bD1);
+	pitchBindingSet->SetPitchBinding(Pitch::D1  , InstantAction::VK24_L_D1 );
+	pitchBindingSet->SetPitchBinding(Pitch::E1b , InstantAction::VK24_L_bE1);
+	pitchBindingSet->SetPitchBinding(Pitch::E1  , InstantAction::VK24_L_E1 );
+	pitchBindingSet->SetPitchBinding(Pitch::F1  , InstantAction::VK24_L_F1 );
+	pitchBindingSet->SetPitchBinding(Pitch::G1b , InstantAction::VK24_L_bG1);
+	pitchBindingSet->SetPitchBinding(Pitch::G1  , InstantAction::VK24_L_G1 );
+	pitchBindingSet->SetPitchBinding(Pitch::A1b , InstantAction::VK24_L_bA1);
+	pitchBindingSet->SetPitchBinding(Pitch::A1  , InstantAction::VK24_L_A1 );
+	pitchBindingSet->SetPitchBinding(Pitch::B1b , InstantAction::VK24_L_bB1);
+	pitchBindingSet->SetPitchBinding(Pitch::B1  , InstantAction::VK24_L_B1 );
+												  
+	pitchBindingSet->SetPitchBinding(Pitch::C   , InstantAction::VK24_L_C2 );
+	pitchBindingSet->SetPitchBinding(Pitch::Db  , InstantAction::VK24_L_bD2);
+	pitchBindingSet->SetPitchBinding(Pitch::D   , InstantAction::VK24_L_D2 );
+	pitchBindingSet->SetPitchBinding(Pitch::Eb  , InstantAction::VK24_L_bE2);
+	pitchBindingSet->SetPitchBinding(Pitch::E   , InstantAction::VK24_L_E2 );
+	pitchBindingSet->SetPitchBinding(Pitch::F   , InstantAction::VK24_L_F2 );
+	pitchBindingSet->SetPitchBinding(Pitch::Gb  , InstantAction::VK24_L_bG2);
+	pitchBindingSet->SetPitchBinding(Pitch::G   , InstantAction::VK24_L_G2 );
+	pitchBindingSet->SetPitchBinding(Pitch::Ab  , InstantAction::VK24_L_bA2);
+	pitchBindingSet->SetPitchBinding(Pitch::A   , InstantAction::VK24_L_A2 );
+	pitchBindingSet->SetPitchBinding(Pitch::Bb  , InstantAction::VK24_L_bB2);
+	pitchBindingSet->SetPitchBinding(Pitch::B   , InstantAction::VK24_L_B2 );
+												  
+	pitchBindingSet->SetPitchBinding(Pitch::c   , InstantAction::VK24_R_C1 );
+	pitchBindingSet->SetPitchBinding(Pitch::db  , InstantAction::VK24_R_bD1);
+	pitchBindingSet->SetPitchBinding(Pitch::d   , InstantAction::VK24_R_D1 );
+	pitchBindingSet->SetPitchBinding(Pitch::eb  , InstantAction::VK24_R_bE1);
+	pitchBindingSet->SetPitchBinding(Pitch::e   , InstantAction::VK24_R_E1 );
+	pitchBindingSet->SetPitchBinding(Pitch::f   , InstantAction::VK24_R_F1 );
+	pitchBindingSet->SetPitchBinding(Pitch::gb  , InstantAction::VK24_R_bG1);
+	pitchBindingSet->SetPitchBinding(Pitch::g   , InstantAction::VK24_R_G1 );
+	pitchBindingSet->SetPitchBinding(Pitch::ab  , InstantAction::VK24_R_bA1);
+	pitchBindingSet->SetPitchBinding(Pitch::a   , InstantAction::VK24_R_A1 );
+	pitchBindingSet->SetPitchBinding(Pitch::bb  , InstantAction::VK24_R_bB1);
+	pitchBindingSet->SetPitchBinding(Pitch::b   , InstantAction::VK24_R_B1 );
+												  
+	pitchBindingSet->SetPitchBinding(Pitch::c1  , InstantAction::VK24_R_C2 );
+	pitchBindingSet->SetPitchBinding(Pitch::d1b , InstantAction::VK24_R_bD2);
+	pitchBindingSet->SetPitchBinding(Pitch::d1  , InstantAction::VK24_R_D2 );
+	pitchBindingSet->SetPitchBinding(Pitch::e1b , InstantAction::VK24_R_bE2);
+	pitchBindingSet->SetPitchBinding(Pitch::e1  , InstantAction::VK24_R_E2 );
+	pitchBindingSet->SetPitchBinding(Pitch::f1  , InstantAction::VK24_R_F2 );
+	pitchBindingSet->SetPitchBinding(Pitch::g1b , InstantAction::VK24_R_bG2);
+	pitchBindingSet->SetPitchBinding(Pitch::g1  , InstantAction::VK24_R_G2 );
+	pitchBindingSet->SetPitchBinding(Pitch::a1b , InstantAction::VK24_R_bA2);
+	pitchBindingSet->SetPitchBinding(Pitch::a1  , InstantAction::VK24_R_A2 );
+	pitchBindingSet->SetPitchBinding(Pitch::b1b , InstantAction::VK24_R_bB2);
+	pitchBindingSet->SetPitchBinding(Pitch::b1  , InstantAction::VK24_R_B2 );
+
+#pragma endregion
+
+	/* 升八度 */
+#pragma region RaisedPitchState
+
+	pitchBindingSet->SwitchPitchState(MeteoPianoPitchState::Raised);
+	 
+	pitchBindingSet->SetPitchBinding(Pitch::c		, InstantAction::VK24_L_C1 );
+	pitchBindingSet->SetPitchBinding(Pitch::db		, InstantAction::VK24_L_bD1);
+	pitchBindingSet->SetPitchBinding(Pitch::d		, InstantAction::VK24_L_D1 );
+	pitchBindingSet->SetPitchBinding(Pitch::eb		, InstantAction::VK24_L_bE1);
+	pitchBindingSet->SetPitchBinding(Pitch::e		, InstantAction::VK24_L_E1 );
+	pitchBindingSet->SetPitchBinding(Pitch::f		, InstantAction::VK24_L_F1 );
+	pitchBindingSet->SetPitchBinding(Pitch::gb		, InstantAction::VK24_L_bG1);
+	pitchBindingSet->SetPitchBinding(Pitch::g		, InstantAction::VK24_L_G1 );
+	pitchBindingSet->SetPitchBinding(Pitch::ab		, InstantAction::VK24_L_bA1);
+	pitchBindingSet->SetPitchBinding(Pitch::a		, InstantAction::VK24_L_A1 );
+	pitchBindingSet->SetPitchBinding(Pitch::bb		, InstantAction::VK24_L_bB1);
+	pitchBindingSet->SetPitchBinding(Pitch::b		, InstantAction::VK24_L_B1 );
+													  
+	pitchBindingSet->SetPitchBinding(Pitch::c1		, InstantAction::VK24_L_C2 );
+	pitchBindingSet->SetPitchBinding(Pitch::d1b		, InstantAction::VK24_L_bD2);
+	pitchBindingSet->SetPitchBinding(Pitch::d1		, InstantAction::VK24_L_D2 );
+	pitchBindingSet->SetPitchBinding(Pitch::e1b		, InstantAction::VK24_L_bE2);
+	pitchBindingSet->SetPitchBinding(Pitch::e1		, InstantAction::VK24_L_E2 );
+	pitchBindingSet->SetPitchBinding(Pitch::f1		, InstantAction::VK24_L_F2 );
+	pitchBindingSet->SetPitchBinding(Pitch::g1b		, InstantAction::VK24_L_bG2);
+	pitchBindingSet->SetPitchBinding(Pitch::g1		, InstantAction::VK24_L_G2 );
+	pitchBindingSet->SetPitchBinding(Pitch::a1b		, InstantAction::VK24_L_bA2);
+	pitchBindingSet->SetPitchBinding(Pitch::a1		, InstantAction::VK24_L_A2 );
+	pitchBindingSet->SetPitchBinding(Pitch::b1b		, InstantAction::VK24_L_bB2);
+	pitchBindingSet->SetPitchBinding(Pitch::b1		, InstantAction::VK24_L_B2 );
+													  
+	pitchBindingSet->SetPitchBinding(Pitch::c2	    , InstantAction::VK24_R_C1 );
+	pitchBindingSet->SetPitchBinding(Pitch::d2b		, InstantAction::VK24_R_bD1);
+	pitchBindingSet->SetPitchBinding(Pitch::d2	    , InstantAction::VK24_R_D1 );
+	pitchBindingSet->SetPitchBinding(Pitch::e2b		, InstantAction::VK24_R_bE1);
+	pitchBindingSet->SetPitchBinding(Pitch::e2	    , InstantAction::VK24_R_E1 );
+	pitchBindingSet->SetPitchBinding(Pitch::f2	    , InstantAction::VK24_R_F1 );
+	pitchBindingSet->SetPitchBinding(Pitch::g2b		, InstantAction::VK24_R_bG1);
+	pitchBindingSet->SetPitchBinding(Pitch::g2	    , InstantAction::VK24_R_G1 );
+	pitchBindingSet->SetPitchBinding(Pitch::a2b		, InstantAction::VK24_R_bA1);
+	pitchBindingSet->SetPitchBinding(Pitch::a2	    , InstantAction::VK24_R_A1 );
+	pitchBindingSet->SetPitchBinding(Pitch::b2b		, InstantAction::VK24_R_bB1);
+	pitchBindingSet->SetPitchBinding(Pitch::b2	    , InstantAction::VK24_R_B1 ); 
+													  
+	pitchBindingSet->SetPitchBinding(Pitch::c3	    , InstantAction::VK24_R_C2 );
+	pitchBindingSet->SetPitchBinding(Pitch::d3b		, InstantAction::VK24_R_bD2);
+	pitchBindingSet->SetPitchBinding(Pitch::d3	    , InstantAction::VK24_R_D2 );
+	pitchBindingSet->SetPitchBinding(Pitch::e3b		, InstantAction::VK24_R_bE2);
+	pitchBindingSet->SetPitchBinding(Pitch::e3	    , InstantAction::VK24_R_E2 );
+	pitchBindingSet->SetPitchBinding(Pitch::f3	    , InstantAction::VK24_R_F2 );
+	pitchBindingSet->SetPitchBinding(Pitch::g3b		, InstantAction::VK24_R_bG2);
+	pitchBindingSet->SetPitchBinding(Pitch::g3	    , InstantAction::VK24_R_G2 );
+	pitchBindingSet->SetPitchBinding(Pitch::a3b		, InstantAction::VK24_R_bA2);
+	pitchBindingSet->SetPitchBinding(Pitch::a3	    , InstantAction::VK24_R_A2 );
+	pitchBindingSet->SetPitchBinding(Pitch::b3b		, InstantAction::VK24_R_bB2);
+	pitchBindingSet->SetPitchBinding(Pitch::b3	    , InstantAction::VK24_R_B2 );
+
+#pragma endregion
+
+	pitchBindingSet->SwitchPitchState(MeteoPianoPitchState::None);
+
+	return pitchBindingSet;
 }

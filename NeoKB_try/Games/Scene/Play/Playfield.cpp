@@ -7,6 +7,7 @@
 #include "../../Scheduler/Event/PlayfieldEvents/PlayfieldEventProcessor.h"
 #include "../../Scheduler/Event/TimeEvents/TimeEventProcessor.h"
 #include "../../Scheduler/Event/SystemEvents/SystemEventHandler.h"
+#include "../../Scheduler/Event/InstrumentEvents/InstrumentEventProcessor.h"
 #include <functional>
 #include "../../Output/Bluetooths/MeteoContextBluetoothMessage.h"
 
@@ -22,6 +23,7 @@ using namespace std;
 using namespace Games::Schedulers::Events::PlayfieldEvents;
 using namespace Games::Schedulers::Events::TimeEvents;
 using namespace Games::Schedulers::Events::SystemEvents;
+using namespace Games::Schedulers::Events::InstrumentEvents;
 using namespace Games::Output::Bluetooths;
 
 
@@ -293,9 +295,39 @@ int Playfield::AddDynamic(EventProcessor<Event>* ep) {
 		else
 			throw runtime_error("Playfield::AddDynamic() : effect map algo not found");
 
-		// 這邊要把map加進去
-		//EffectMapperInterface* em = ep->Cast<EffectMapperInterface>();
-		//em->RegisterMap(lightMap); //改用draw(map, effect)，所以不用內存一個map
+	}
+	else if (ep->CanCast<InstrumentControllerInterface>()) {
+
+		// 為什麼不用event自己來create? 因為要去搭配不同的mapper，所以要動態調配
+		string processorType = ep->GetEventTypeName();
+		map<string, InstrumentControllerInterface*>::iterator iter = instrumentControllers.find(processorType);
+
+		if (iter != instrumentControllers.end())
+		{
+			InstrumentControllerInterface* instrumentController = instrumentControllers[processorType];
+			ep->Cast<InstrumentEventProcessorInterface>()->RegisterInstrumentController(instrumentController);
+
+			LOG(LogLevel::Finer) << "Playfield::AddDynamic() : Register [" << instrumentControllers[processorType]->GetTypeName() << "] to mapper [" << processorType << "] on [" << ep->GetStartTime() << "].";
+		}
+		else
+			throw runtime_error("Playfield::AddDynamic() : effect map algo not found");
+
+	}
+	else if (ep->CanCast<PlayfieldEventProcessorInterface>()) { // 這邊用來自動移調
+		string processorType = ep->GetEventTypeName();
+		map<string, PlayfieldControllerInterface*>::iterator iter = playfieldControllers.find(processorType);
+
+		if (iter != playfieldControllers.end())
+		{
+			PlayfieldControllerInterface* playfieldController = playfieldControllers[processorType];
+			ep->Cast<PlayfieldEventProcessorInterface>()->RegisterPlayfieldController(playfieldController);
+
+			LOG(LogLevel::Finer) << "Playfield::AddDynamic() : Register [" << playfieldControllers[processorType]->GetTypeName() << "] to processor [" << processorType << "] on [" << ep->GetStartTime() << "].";
+		}
+		else {
+			LOG(LogLevel::Error) << "Playfield::AddDynamic() : Register processor [" << processorType << "] failed." << playfieldControllers.size();
+			throw runtime_error("Playfield::AddDynamic() : Register processor failed.");
+		}
 	}
 	else if (ep->CanCast<SystemEventHandlerInterface>()) {
 		// 為什麼不用event自己來create? 因為要去搭配不同的mapper，所以要動態調配

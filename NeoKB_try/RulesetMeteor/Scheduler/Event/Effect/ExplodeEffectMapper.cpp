@@ -10,7 +10,6 @@ ExplodeEffectMapper::ExplodeEffectMapper(int w, int h, HitObject* hObject) : Eff
 {
 	hitObject = hObject;
 	explodeStartTime = hObject->GetCurrentTime();
-	lifeType = EventProcessorLifeType::Timed;
 }
 /*
 string ExplodeEffectMapper::GetEventTypeName() {

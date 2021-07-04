@@ -17,6 +17,7 @@ InstantFallEffect::InstantFallEffect(int xPos, int yPos, MTO_FLOAT sTime, MTO_FL
 {
 	effectPinType = EffectPinType::ByPosition;
 	SetSpeed(sp);
+	lifeType = EventLifeType::Timed;
 }
 
 InstantFallEffect::InstantFallEffect(Pitch p, MTO_FLOAT sTime, MTO_FLOAT l, MTO_FLOAT sp) : Effect(0, 0, sTime, l)

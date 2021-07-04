@@ -84,10 +84,10 @@ int VirtualMeteoPiano::Play(Pitch p, float volume)
 
 	LOG(LogLevel::Fine) << "VirtualMeteoPiano::Play() : play [" << (int)p << "] on vol [" << volume << "].";
 
-	system_clock::time_point systemStartTime = system_clock::now();
+	//system_clock::time_point systemStartTime = system_clock::now();
 	(*it).second->Play(volume);
-	system_clock::time_point systemCurrentTime = system_clock::now();
-	LOG(LogLevel::Fine) << "VirtualMeteoPiano::Play() : play sound cost time = [" << duration_cast<microseconds>(systemCurrentTime - systemStartTime).count() << "].";
+	//system_clock::time_point systemCurrentTime = system_clock::now();
+	//LOG(LogLevel::Fine) << "VirtualMeteoPiano::Play() : play sound cost time = [" << duration_cast<microseconds>(systemCurrentTime - systemStartTime).count() << "].";
 
 	isPressingMapByPitch[p] = true;
 

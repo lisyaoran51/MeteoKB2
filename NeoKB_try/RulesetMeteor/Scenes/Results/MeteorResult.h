@@ -3,14 +3,12 @@
 
 
 #include "../../../Games/Scene/Results/Result.h"
-#include "../../../Framework/Output/OutputManager.h"
 #include "../../../Instruments/Piano.h"
 #include "../../../Games/Scheduler/Event/ControlPoints/ControlPoint.h"
 #include "../../../Framework/IO/Communications/CommunicationAccess.h"
 
 
 using namespace Games::Scenes::Results;
-using namespace Framework::Output;
 using namespace Instruments;
 using namespace Games::Schedulers::Events::ControlPoints;
 using namespace Framework::IO::Communications;
