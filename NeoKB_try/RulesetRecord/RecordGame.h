@@ -1,15 +1,15 @@
-#ifndef INSTANT_GAME_H
-#define INSTANT_GAME_H
+#ifndef RECORD_GAME_H
+#define RECORD_GAME_H
 
 #include"../Games/MeteoGame.h"
 
 using namespace Games;
 
-namespace Instant {
+namespace Record {
 
 
 
-	class InstantGame : public MeteoGame {
+	class RecordGame : public MeteoGame {
 
 		/// <summary>
 		/// 這邊把整個遊戲
@@ -28,7 +28,7 @@ namespace Instant {
 
 	public:
 
-		InstantGame();
+		RecordGame();
 
 		int Run();
 

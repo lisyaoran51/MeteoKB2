@@ -1,20 +1,20 @@
-#include"InstantGame.h"
+#include "RecordGame.h"
 
-#include "Config/InstantConfigManager.h"
+#include "Config/RecordConfigManager.h"
 #include "../Framework/Configurations/FrameworkConfigManager.h"
 
 
-using namespace Instant;
-using namespace Instant::Config;
+using namespace Record;
+using namespace Record::Config;
 using namespace Framework::Configurations;
 
 
-int InstantGame::load()
+int RecordGame::load()
 {
 	
 	if (!GetCache<FrameworkConfigManager>("FrameworkConfigManager")) {
 		FrameworkConfigManager* fConfigManager = new FrameworkConfigManager();
-		fConfigManager->Set(FrameworkSetting::PatternGenerator, "InstantPatternGenerator");
+		fConfigManager->Set(FrameworkSetting::PatternGenerator, "RecordPatternGenerator");
 		fConfigManager->Set(FrameworkSetting::HardwareVersion, 10);
 		fConfigManager->Set(FrameworkSetting::Width, 12); //нnзя
 		fConfigManager->Set(FrameworkSetting::Height, 24);
@@ -32,7 +32,7 @@ int InstantGame::load()
 	return 0;
 }
 
-InstantGame::InstantGame(): RegisterType("InstantGame")
+RecordGame::RecordGame(): RegisterType("RecordGame")
 {
-	registerLoad(bind((int(InstantGame::*)())&InstantGame::load, this));
+	registerLoad(bind((int(RecordGame::*)())&RecordGame::load, this));
 }
