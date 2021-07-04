@@ -17,6 +17,7 @@
 #include "../Output/Bluetooths/MeteoBluetoothOutputer.h"
 #include "../../RulesetMeteor/Config/MeteorConfigManager.h"
 #include "../../RulesetInstant/Config/InstantConfigManager.h"
+#include "../../RulesetRecord/Config/RecordConfigManager.h"
 
 
 
@@ -31,6 +32,7 @@ using namespace Meteor::Output::Panels;
 using namespace Games::Output::Panels;
 using namespace Meteor::Config;
 using namespace Instant::Config;
+using namespace Record::Config;
 using namespace Games::Output::Bluetooths;
 
 
@@ -116,6 +118,10 @@ int GameHost::setupConfig()
 	InstantConfigManager* instantConfigManager = new InstantConfigManager();
 	instantConfigManager->Initialize(storage);
 	dependencies->Cache<InstantConfigManager>(instantConfigManager);
+
+	RecordConfigManager* recordConfigManager = new RecordConfigManager();
+	recordConfigManager->Initialize(storage);
+	dependencies->Cache<RecordConfigManager>(recordConfigManager);
 
 	return 0;
 }
