@@ -291,7 +291,7 @@ int Host::setupConfig()
 	frameworkConfigManager->Set(FrameworkSetting::UpdateRate, 100);
 	frameworkConfigManager->Set(FrameworkSetting::AudioUpdateRate, 1000);
 	frameworkConfigManager->Set(FrameworkSetting::InputRate, 1000);
-	frameworkConfigManager->Set(FrameworkSetting::SongTitle, string("GameOfThrone"));
+	frameworkConfigManager->Set(FrameworkSetting::SongTitle, string("TurkeyMarch"));
 
 	dependencies->Cache<FrameworkConfigManager>(frameworkConfigManager);
 	
