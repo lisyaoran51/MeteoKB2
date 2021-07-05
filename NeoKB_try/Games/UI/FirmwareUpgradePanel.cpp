@@ -4,6 +4,8 @@
 #include "../../Util/StringSplitter.h"
 #include "../IO/Communications/BackgroundGetBinaryBleRequest.h"
 #include "../../Util/FileSplitCombiner.h"
+#include <stdio.h>
+
 
 #ifndef MTO_VERSION
 #define MTO_VERSION "Mto00000"
