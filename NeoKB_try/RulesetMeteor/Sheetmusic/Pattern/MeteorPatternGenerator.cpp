@@ -579,10 +579,10 @@ Pattern * MeteorPatternGenerator::generateInputKeyControlPoint(vector<Event*>* e
 		SustainPedalIoEvent* sustainPedalIoEvent = new SustainPedalIoEvent(inputKey, cloned->GetStartTime(), cloned->GetLifeTime());
 
 		PianoEvent* pianoEventDown = new PianoEvent(pair<InputKey, int>(inputKey, 1), cloned->GetStartTime(), 0);
-		PianoEvent* pianoEventUp = new PianoEvent(pair<InputKey, int>(inputKey, -1), cloned->GetStartTime() + cloned->GetLifeTime(), 0);
+		PianoEvent* pianoEventUp = new PianoEvent(pair<InputKey, int>(inputKey, -1), cloned->GetStartTime() + cloned->GetLifeTime() - 0.1, 0);
 
 		PianoSoundEvent* pianoSoundEventDown = new PianoSoundEvent(true, cloned->GetStartTime(), 0);
-		PianoSoundEvent* pianoSoundEventUp = new PianoSoundEvent(false, cloned->GetStartTime() + cloned->GetLifeTime(), 0);
+		PianoSoundEvent* pianoSoundEventUp = new PianoSoundEvent(false, cloned->GetStartTime() + cloned->GetLifeTime() - 0.1, 0);
 
 		// recorder會自動去抓譜裡面的pedal，不用從這邊建event
 		//MeteorButtonRecorderEvent* pedalDownRecorderEvent = new MeteorButtonRecorderEvent(pair<InputKey, int>(inputKey, 1), inputKeyControlPoint->GetStartTime(), 0);
