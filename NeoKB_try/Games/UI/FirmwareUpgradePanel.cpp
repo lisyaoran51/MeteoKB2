@@ -234,6 +234,7 @@ int FirmwareUpgradePanel::handleOnRequestSplitSuccess(FileSegmentMap* fSegmentMa
 
 
 				isUpgraded = true;
+				isUpgrading = false;
 
 			}
 			else {
@@ -275,7 +276,7 @@ int FirmwareUpgradePanel::handleOnRequestSplitSuccess(FileSegmentMap* fSegmentMa
 			newFirmwareSplits.clear();
 
 			string deleteCommand = string("rm -f ") + storage->GetBasePath() + string("/") + firmwareDirectory + string("/Splits/*");
-			fp = popen(deleteCommand.c_str(), "r");
+			FILE* fp = popen(deleteCommand.c_str(), "r");
 			if (fp == NULL) {
 				// error
 			}
