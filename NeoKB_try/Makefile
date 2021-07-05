@@ -167,7 +167,7 @@ CC = g++
 #cflags 
 #CFLAGS = -Wall -ansi -s -std=c++14 -pthread -lbass -lstdc++fs -lbluetooth -DMETEO_PROGRAM_VERSION=0x0 -g0
 #¥igdb debug
-CFLAGS = -Wall -ansi -s -std=c++14 -pthread -lbass -lstdc++fs -lbluetooth -DMTO_VERSION="Mto00001"
+CFLAGS = -Wall -ansi -s -std=c++14 -pthread -lbass -lstdc++fs -lbluetooth -D'MTO_VERSION="Mto00001"'
 #object 
 OBJS = Main.o \
 \
