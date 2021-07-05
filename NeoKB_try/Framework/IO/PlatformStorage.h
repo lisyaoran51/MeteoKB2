@@ -45,6 +45,11 @@ namespace IO{
 		/// </summary>
 		virtual vector<string>* GetDirectories(string directoryPath);
 
+		/// <summary>
+		/// 找出所有檔案
+		/// </summary>
+		virtual vector<string>* GetFileNames(string directoryPath);
+
 		virtual fstream* GetStream(string filePath);
 
 		virtual fstream* GetStream(string filePath, bool volitile, bool binary = false);

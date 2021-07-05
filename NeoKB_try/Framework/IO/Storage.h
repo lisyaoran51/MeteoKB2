@@ -66,6 +66,11 @@ namespace IO{
 		/// </summary>
 		virtual vector<string>* GetDirectories(string directoryPath) = 0;
 
+		/// <summary>
+		/// 找出所有檔案
+		/// </summary>
+		virtual vector<string>* GetFileNames(string directoryPath) = 0;
+
 		Storage* GetStorageForDirectory(string directoryPath);
 
 		/// <summary>

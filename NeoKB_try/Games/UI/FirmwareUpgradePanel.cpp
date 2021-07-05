@@ -3,6 +3,7 @@
 #include <experimental/filesystem>
 #include "../../Util/StringSplitter.h"
 #include "../IO/Communications/BackgroundGetBinaryBleRequest.h"
+#include "../../Util/FileSplitCombiner.h"
 
 #ifndef MTO_VERSION
 #define MTO_VERSION "Mto00000"
@@ -29,18 +30,23 @@ int FirmwareUpgradePanel::load()
 	if (!f)
 		throw runtime_error("int FirmwareUpgradePanel::load : FrameworkConfigManager not found in cache.");
 
-	return load(o, c, f);
+	Storage * s = GetCache<Storage>("Storage");
+	if (!s)
+		throw runtime_error("int FirmwareUpgradePanel::load : Storage not found in cache.");
+
+	return load(o, c, f, s);
 }
 
-int FirmwareUpgradePanel::load(OutputManager * o, CommunicationAccess * c, FrameworkConfigManager* f)
+int FirmwareUpgradePanel::load(OutputManager * o, CommunicationAccess * c, FrameworkConfigManager* f, Storage* s)
 {
 	outputManager = o;
 	communicationAccess = c;
+	storage = s;
 
 	firmwareName = MTO_VERSION;
 	try {
 		if (firmwareName.length() > 8)
-			firmwareVersion = stol(string("0x") + firmwareName.substr(3, 5));
+			firmwareVersion = stol(string("0x") + firmwareName.substr(3, 5), nullptr, 16);
 		else {
 			// TODO: 傳錯誤訊息
 		}
@@ -53,19 +59,19 @@ int FirmwareUpgradePanel::load(OutputManager * o, CommunicationAccess * c, Frame
 
 	// f->Get firmware directory
 
-	vector<string> splitFileNames = getFileNames(firmwareDirectory + string("/Splits"));
+	vector<string>* splitFileNames = storage->GetFileNames(firmwareDirectory + string("/Splits"));
 
 	// 檔案名稱為MtoXXXXX，XXXXX為五位數的hex值
 	long maxSplitVersion = 0;
 
-	for (int i = 0; i < splitFileNames.size(); i++) {
+	for (int i = 0; i < splitFileNames->size(); i++) {
 
-		if (splitFileNames[i].length() < 8)
+		if (splitFileNames->at(i).length() < 8)
 			continue;
-		string tempVersionHex = splitFileNames[i].substr(3, 5);
-		long tempVersion = stol(string("0x") + tempVersionHex, nullptr, 0);
+		string tempVersionHex = splitFileNames->at(i).substr(3, 5);
+		long tempVersion = stol(string("0x") + tempVersionHex, nullptr, 16);
 		if (tempVersion > maxSplitVersion)
-			tempVersion = maxSplitVersion;
+			maxSplitVersion = tempVersion;
 
 	}
 
@@ -73,14 +79,22 @@ int FirmwareUpgradePanel::load(OutputManager * o, CommunicationAccess * c, Frame
 
 	tempFirmwareSplitCount = 0;
 
-	for (int i = 0; i < splitFileNames.size(); i++) {
+	/* 檢查目前的split有哪些 */
+	for (int i = 0; i < splitFileNames->size(); i++) {
 
-		if (splitFileNames[i].length() < 8)
+		if (splitFileNames->at(i).length() < 8)
 			continue;
-		string tempVersionHex = splitFileNames[i].substr(3, 5);
-		long tempVersion = stol(string("0x") + tempVersionHex, nullptr, 0);
-		if (tempVersion == tempFirmwareSplitVersion)
+		string tempVersionHex = splitFileNames->at(i).substr(3, 5);
+		long tempVersion = stol(string("0x") + tempVersionHex, nullptr, 16);
+		if (tempVersion == tempFirmwareSplitVersion) {
+
+			if (splitFileNames->at(i).length() < 9)
+				continue;
+
+			string tempSplitDec = splitFileNames->at(i).substr(9, splitFileNames->at(i).length() - 9);
+			newFirmwareSplits[stoi(tempSplitDec)] = splitFileNames->at(i);
 			tempFirmwareSplitCount++;
+		}
 
 	}
 
@@ -132,6 +146,233 @@ FirmwareUpgradePanel::FirmwareUpgradePanel() : RegisterType("FirmwareUpgradePane
 	registerLoad(bind(static_cast<int(FirmwareUpgradePanel::*)(void)>(&FirmwareUpgradePanel::load), this));
 }
 
+int FirmwareUpgradePanel::handleOnRequestSplitFail()
+{
+
+	GetScheduler()->AddDelayedTask([=]() {
+		LOG(LogLevel::Debug) << "FirmwareUpgradePanel::handleOnRequestSplitFail() : request failed. resend request. ";
+
+		int firstSplitToGet = -1;
+		for (int i = 0; i < maxNewFirmwareSplitCount; i++) {
+			if (newFirmwareSplits.find(i) == newFirmwareSplits.end()) {
+				firstSplitToGet = i;
+				break;
+			}
+		}
+
+		if (firstSplitToGet == -1) {
+			LOG(LogLevel::Debug) << "FirmwareUpgradePanel::handleOnRequestSplitFail() : request failed. resend request but found all splits ready. ";
+			// TODO:例外狀況，如果本來就有所有split，就直接重組就好了
+			return 0;
+		}
+
+
+		MeteoContextBluetoothMessage* requestMessage = new MeteoContextBluetoothMessage(MeteoCommand::RequestNewFirmwareSplit);
+		json context;
+		context["FileName"] = newFirmwareName + string(".") + to_string(firstSplitToGet);
+
+
+		BackgroundGetBinaryBleRequest* getFirmwareBleRequest = new BackgroundGetBinaryBleRequest{
+			firmwareDirectory + string("/Splits/") + newFirmwareName + string(".") + to_string(firstSplitToGet),
+			requestMessage,
+			MeteoCommand::AckRequestNewFirmwareSplit,
+			MeteoCommand::NewFirmwareSplitFileSegment,
+			MeteoCommand::AckNewFirmwareSplitFileSegment,
+			MeteoCommand::FinishWriteNewFirmwareSplit,
+			MeteoCommand::RequestRewriteNewFirmwareSplitFileSegment,
+			MeteoCommand::AckFinishWriteNewFirmwareSplit
+		};
+
+		getFirmwareBleRequest->AddOnFail(this, bind(&FirmwareUpgradePanel::handleOnRequestSplitFail, this), "FirmwareUpgradePanel::handleOnRequestSplitFail");
+
+		getFirmwareBleRequest->AddOnSuccess(this, bind(&FirmwareUpgradePanel::handleOnRequestSplitSuccess, this, placeholders::_1), "FirmwareUpgradePanel::handleOnRequestSplitSuccess");
+
+
+		communicationAccess->Queue(getFirmwareBleRequest);
+
+		return 0;
+	}, 0.1);
+
+
+	return 0;
+}
+
+int FirmwareUpgradePanel::handleOnRequestSplitSuccess(FileSegmentMap* fSegmentMap)
+{
+
+	LOG(LogLevel::Debug) << "FirmwareUpgradePanel::handleOnRequestSplitSuccess() : download [" << fSegmentMap->fileName << "] success.";
+
+	GetScheduler()->AddDelayedTask([=]() {
+		LOG(LogLevel::Debug) << "FirmwareUpgradePanel::handleOnRequestSplitSuccess() : request success. find next split request. ";
+
+		int firstSplitToGet = -1;
+		for (int i = 0; i < maxNewFirmwareSplitCount; i++) {
+			if (newFirmwareSplits.find(i) == newFirmwareSplits.end()) {
+				firstSplitToGet = i;
+				break;
+			}
+		}
+
+		if (firstSplitToGet == -1) {
+			LOG(LogLevel::Debug) << "FirmwareUpgradePanel::handleOnRequestSplitSuccess() : all splits ready. start combination.";
+
+			vector<string> splitPaths;
+
+			if (FileSplitCombiner::Combine(storage->GetBasePath() + string("/") + firmwareDirectory + string("/Files/") + newFirmwareName, splitPaths) >= 0) {
+
+				LOG(LogLevel::Debug) << "FirmwareUpgradePanel::handleOnRequestSplitSuccess() : combination successed. new firmware will launch on next start.";
+
+				MeteoContextBluetoothMessage* finishMessage = new MeteoContextBluetoothMessage(MeteoCommand::FinishRequestNewFirmware);
+				json context;
+
+				context["FileName"] = newFirmwareName;
+
+				finishMessage->SetContextInJson(context);
+				finishMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
+
+				outputManager->PushMessage(finishMessage);
+
+
+				isUpgraded = true;
+
+			}
+			else {
+				LOG(LogLevel::Warning) << "FirmwareUpgradePanel::handleOnRequestSplitSuccess() : combination failed. restart upgrade";
+
+				tempFirmwareSplitCount = 0;
+				newFirmwareSplits.clear();
+
+				MeteoContextBluetoothMessage* requestMessage = new MeteoContextBluetoothMessage(MeteoCommand::RequestNewFirmwareSplit);
+				json context;
+				context["FileName"] = newFirmwareName + string(".0");
+
+				requestMessage->SetContextInJson(context);
+				requestMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
+
+
+				BackgroundGetBinaryBleRequest* getFirmwareBleRequest = new BackgroundGetBinaryBleRequest{
+					firmwareDirectory + string("/Splits/") + newFirmwareName + string(".0"),
+					requestMessage,
+					MeteoCommand::AckRequestNewFirmwareSplit,
+					MeteoCommand::NewFirmwareSplitFileSegment,
+					MeteoCommand::AckNewFirmwareSplitFileSegment,
+					MeteoCommand::FinishWriteNewFirmwareSplit,
+					MeteoCommand::RequestRewriteNewFirmwareSplitFileSegment,
+					MeteoCommand::AckFinishWriteNewFirmwareSplit
+				};
+
+				getFirmwareBleRequest->AddOnFail(this, bind(&FirmwareUpgradePanel::handleOnRequestSplitFail, this), "FirmwareUpgradePanel::handleOnRequestSplitFail");
+
+				getFirmwareBleRequest->AddOnSuccess(this, bind(&FirmwareUpgradePanel::handleOnRequestSplitSuccess, this, placeholders::_1), "FirmwareUpgradePanel::handleOnRequestSplitSuccess");
+
+
+				communicationAccess->Queue(getFirmwareBleRequest);
+
+			}
+
+			/* 刪除split */
+			tempFirmwareSplitCount = 0;
+			newFirmwareSplits.clear();
+
+			string deleteCommand = string("rm -f ") + storage->GetBasePath() + string("/") + firmwareDirectory + string("/Splits/*");
+			fp = popen(deleteCommand.c_str(), "r");
+			if (fp == NULL) {
+				// error
+			}
+			pclose(fp);
+
+			return 0;
+		}
+
+
+		MeteoContextBluetoothMessage* requestMessage = new MeteoContextBluetoothMessage(MeteoCommand::RequestNewFirmwareSplit);
+		json context;
+		context["FileName"] = newFirmwareName + string(".") + to_string(firstSplitToGet);
+
+		requestMessage->SetContextInJson(context);
+		requestMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
+
+
+		BackgroundGetBinaryBleRequest* getFirmwareBleRequest = new BackgroundGetBinaryBleRequest{
+			firmwareDirectory + string("/Splits/") + newFirmwareName + string(".") + to_string(firstSplitToGet),
+			requestMessage,
+			MeteoCommand::AckRequestNewFirmwareSplit,
+			MeteoCommand::NewFirmwareSplitFileSegment,
+			MeteoCommand::AckNewFirmwareSplitFileSegment,
+			MeteoCommand::FinishWriteNewFirmwareSplit,
+			MeteoCommand::RequestRewriteNewFirmwareSplitFileSegment,
+			MeteoCommand::AckFinishWriteNewFirmwareSplit
+		};
+
+		getFirmwareBleRequest->AddOnFail(this, bind(&FirmwareUpgradePanel::handleOnRequestSplitFail, this), "FirmwareUpgradePanel::handleOnRequestSplitFail");
+
+		getFirmwareBleRequest->AddOnSuccess(this, bind(&FirmwareUpgradePanel::handleOnRequestSplitSuccess, this, placeholders::_1), "FirmwareUpgradePanel::handleOnRequestSplitSuccess");
+
+
+		communicationAccess->Queue(getFirmwareBleRequest);
+
+		return 0;
+	}, 0.1);
+
+
+
+
+
+	if (false) {
+		fSegmentMap->WriteFile(storage->GetStream(firmwareDirectory + string("/") + fSegmentMap->fileName, FileAccess::Write, FileMode::Create));
+
+		// 解密、解壓縮
+		string decompressCommand = string("tar -xvf ") + storage->GetTempBasePath() + string("/temp/") + fSegmentMap->fileName + string(".temp ")
+			+ storage->GetTempBasePath() + string("/Sheetmusics/") + fSegmentMap->GetFileNameWithoutExtension() + "/" + fSegmentMap->fileName;
+
+		FILE* fp = popen(decompressCommand.c_str(), "r");
+		if (fp == NULL) {
+			// error
+		}
+		pclose(fp);
+
+		// 刪除加密檔
+		string deleteCommand = string("rm -f ") + storage->GetTempBasePath() + string("/temp/") + fSegmentMap->fileName + string(".temp ");
+		fp = popen(deleteCommand.c_str(), "r");
+		if (fp == NULL) {
+			// error
+		}
+		pclose(fp);
+	}
+
+	FILE* fp = popen((string("mkdir /home/pi/Sheetmusics/") + fSegmentMap->GetFileNameWithoutExtension()).c_str(), "r");
+	if (fp == NULL) {
+		LOG(LogLevel::Error) << "SongSelect::Lambda_HandleDownloadSheetmusicSuccess() : fail to mkdir [" << (string("mkdir /home/pi/Sheetmusics/") + fSegmentMap->GetFileNameWithoutExtension()) << "].";
+	}
+	pclose(fp);
+
+	fp = popen((string("cp /home/pi/Sheetmusics/") + fSegmentMap->fileName + string(" /home/pi/Sheetmusics/") + fSegmentMap->GetFileNameWithoutExtension() + string("/")).c_str(), "r");
+	if (fp == NULL) {
+		LOG(LogLevel::Error) << "SongSelect::Lambda_HandleDownloadSheetmusicSuccess() : fail to cp [" << (string("cp /home/pi/Sheetmusics/") + fSegmentMap->fileName + string(" /home/pi/") + fSegmentMap->GetFileNameWithoutExtension() + string("/")) << "].";
+
+	}
+	pclose(fp);
+
+	//string path = storage->GetTempBasePath() + string("/Sheetmusics/") + fSegmentMap->GetFileNameWithoutExtension();
+	string path = string("/home/pi/Sheetmusics/") + fSegmentMap->GetFileNameWithoutExtension();
+
+	LOG(LogLevel::Debug) << "SongSelect::Lambda_HandleDownloadSheetmusicSuccess() : import [" << path << "] to sm manager.";
+
+	vector<string> paths;
+	paths.push_back(path);
+
+	if (smManager->Import(&paths) < 0) {
+		// throw error
+		LOG(LogLevel::Error) << "SongSelect::selectionChanged() : Failed to import new download sheetmusic [" << fSegmentMap->fileName << "].";
+
+		// 丟藍芽錯誤訊號
+	}
+
+	fSegmentMap->Erase();
+
+	return 0;
+}
+
 int FirmwareUpgradePanel::onMessage(MeteoBluetoothMessage * message)
 {
 	MeteoContextBluetoothMessage* contextMessage = dynamic_cast<MeteoContextBluetoothMessage*>(message);
@@ -151,15 +392,23 @@ int FirmwareUpgradePanel::onMessage(MeteoBluetoothMessage * message)
 			return -1;
 		}
 
+		if (isUpgraded || isUpgrading)
+			return -1;
+
 		try {
+			if (context.contains("FileName") == 0 ||
+				context.contains("Split") == 0 ||
+				context.contains("Checksum") == 0)
+				return -1;
 
 			string fileName = context["FileName"].get<string>();
 			int split = context["Split"].get<int>();
 
 			long newVersion = stol(string("0x") + fileName.substr(3, 5));
-			long thisFirmwareVersion = stol(string("0x") + fileName.substr(3, 5));
 
 			if (newVersion >= tempFirmwareSplitVersion && newVersion > firmwareVersion) {
+
+				newFirmwareName = fileName;
 
 				maxNewFirmwareSplitCount = split;
 				if (tempFirmwareSplitVersion < newVersion) {
@@ -169,15 +418,17 @@ int FirmwareUpgradePanel::onMessage(MeteoBluetoothMessage * message)
 
 				// 檢查目前的firmware有哪些split
 				newFirmwareSplits.clear();
-				vector<string> splitFileNames = getFileNames(firmwareDirectory + string("/Splits"));
-				for (int i = 0; i < splitFileNames.size(); i++) {
+				vector<string>* splitFileNames = storage->GetFileNames(firmwareDirectory + string("/Splits"));
+				for (int i = 0; i < splitFileNames->size(); i++) {
 
-					if (splitFileNames[i].substr(0, 8) != fileName)
+					if (splitFileNames->at(i).substr(0, 8) != fileName)
 						continue;
 
-					int thisSplit = stoi(splitFileNames[i].substr(9, splitFileNames[i].length() - 9));
-					newFirmwareSplits[thisSplit] = splitFileNames[i];
+					if (splitFileNames->at(i).length() < 9)
+						continue;
 
+					int thisSplit = stoi(splitFileNames->at(i).substr(9, splitFileNames->at(i).length() - 9));
+					newFirmwareSplits[thisSplit] = splitFileNames->at(i);
 				}
 
 				// 檢查目前的firmware缺哪些split
@@ -190,7 +441,8 @@ int FirmwareUpgradePanel::onMessage(MeteoBluetoothMessage * message)
 				}
 
 				if (firstSplitToGet == -1) {
-					// TOFO:例外狀況，如果本來就有所有split，就直接重組就好了
+					LOG(LogLevel::Debug) << "FirmwareUpgradePanel::onMessage() : [NewFirmwareData] already have all splits. ";
+					// TODO:例外狀況，如果本來就有所有split，就直接重組就好了
 					return 0;
 				}
 
@@ -198,6 +450,8 @@ int FirmwareUpgradePanel::onMessage(MeteoBluetoothMessage * message)
 				json context;
 				context["FileName"] = fileName + string(".") + to_string(firstSplitToGet);
 
+				requestMessage->SetContextInJson(context);
+				requestMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
 
 				BackgroundGetBinaryBleRequest* getFirmwareBleRequest = new BackgroundGetBinaryBleRequest{
 					firmwareDirectory + string("/Splits/") + fileName + string(".") + to_string(firstSplitToGet),
@@ -210,23 +464,18 @@ int FirmwareUpgradePanel::onMessage(MeteoBluetoothMessage * message)
 					MeteoCommand::AckFinishWriteNewFirmwareSplit
 				};
 
-				getFirmwareBleRequest->AddOnFail(this, [=](FileSegmentMap* fSegmentMap) {
+				getFirmwareBleRequest->AddOnFail(this, bind(&FirmwareUpgradePanel::handleOnRequestSplitFail, this), "FirmwareUpgradePanel::handleOnRequestSplitFail");
 
-					// TODO: 失敗就重傳
-					return 0;
-				}, "Lambda_FirmwareUpgradePanel::HandleRequestNewFirmwareSplitFail");
+				getFirmwareBleRequest->AddOnSuccess(this, bind(&FirmwareUpgradePanel::handleOnRequestSplitSuccess, this, placeholders::_1), "FirmwareUpgradePanel::handleOnRequestSplitSuccess");
 
-				getFirmwareBleRequest->AddOnSuccess(this, [=](FileSegmentMap* fSegmentMap) {
+				communicationAccess->Queue(getFirmwareBleRequest);
 
-					// TODO: 成功就傳下一個或重組
-					return 0;
-				}, "Lambda_FirmwareUpgradePanel::HandleRequestNewFirmwareSplitFail");
-
+				isUpgrading = true;
 			}
 
 		}
 		catch (exception& e) {
-
+			LOG(LogLevel::Warning) << "FirmwareUpgradePanel::onMessage() : [NewFirmwareData] fail to start request. ";
 		}
 
 	}

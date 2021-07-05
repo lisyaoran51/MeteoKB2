@@ -117,6 +117,43 @@ vector<string>* PlatformStorage::GetDirectories(string directoryPath)
 	return directoryPaths;
 }
 
+vector<string>* PlatformStorage::GetFileNames(string directoryPath)
+{
+	if (!initialized)
+		throw runtime_error("int PlatformStorage::GetDirectories() : Not initialized.");
+
+	vector<string>* filePaths = new vector<string>();
+
+	path usablePath = GetUsableDirectoryPathFor(directoryPath);
+	string usablePathInString = usablePath.string();
+
+	LOG(LogLevel::Debug) << "PlatformStorage::GetDirectories : get [" << usablePathInString << "] for child paths.";
+
+	/* 這邊把子資料夾找出來，directory_iterator只會搜尋下一層資料夾，不會循環搜尋到最底部 */
+	for (auto& p : directory_iterator(usablePath)) {
+
+
+		/* 代表是檔案 */
+		if (is_regular_file(p.path())) {
+
+			string file = p.path().string();
+
+			LOG(LogLevel::Debug) << "PlatformStorage::GetDirectories : find file path [" << file << "].";
+
+			// 如果現在的原始路徑是"Build/heresy"，資料夾是"Build/heresy/aout"
+			// "Build/heresy"的長度是12，"Build/heresy/aout"的長度是17
+			// substr的第一個字是編號1，所以第12個字就是y，從y之後的/開始才是擷取出來的字串，字串長度5個字，就會擷取出"/aout"
+			// 如果我想要把第一個/拿掉，就要從第13個字之後擷取，也就是/之後的a開始，擷取4個字，才會擷取出"aout"
+			//directoryPaths->push_back(childDirectory.substr(usablePathInString.length(), usablePathInString.length() - childDirectory.length()));
+
+			filePaths->push_back(file);
+
+		}
+	}
+
+	return filePaths;
+}
+
 fstream* PlatformStorage::GetStream(string filePath)
 {
 	if (!initialized)

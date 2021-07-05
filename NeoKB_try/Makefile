@@ -167,7 +167,7 @@ CC = g++
 #cflags 
 #CFLAGS = -Wall -ansi -s -std=c++14 -pthread -lbass -lstdc++fs -lbluetooth -DMETEO_PROGRAM_VERSION=0x0 -g0
 #¥igdb debug
-CFLAGS = -Wall -ansi -s -std=c++14 -pthread -lbass -lstdc++fs -lbluetooth -DMETEO_PROGRAM_VERSION=0x0 
+CFLAGS = -Wall -ansi -s -std=c++14 -pthread -lbass -lstdc++fs -lbluetooth -DMTO_VERSION="Mto00001"
 #object 
 OBJS = Main.o \
 \
@@ -228,7 +228,7 @@ RepeatSoundBindingSet.o SimpleSoundBindingSet.o SoundBinding.o SoundBindingSet.o
 ReverbGradientTimbreSimpleSoundBindingSet.o RealtimeReverbGradientTimbreSimpleSoundBindingSet.o \
 PianoInputManager.o PianoPitchBindingSet.o InstrumentInputHandler.o \
 \
-FileSystem.o ProgramInitializer.o StringSplitter.o FileSegmentMap.o CommandPasser.o FileContentGetter.o \
+FileSystem.o ProgramInitializer.o StringSplitter.o FileSegmentMap.o CommandPasser.o FileContentGetter.o FileSplitCombiner.o \
 \
 \
 \
