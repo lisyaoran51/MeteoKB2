@@ -612,6 +612,8 @@ int MeteorResult::onEntered(Scene * lastScene)
 	string fileName = path.back();
 	path.pop_back();
 	string directoryPath = StringSplitter::Combine(path, "/");
+
+	LOG(LogLevel::Debug) << "MeteorResult::onEntering : record file write to [" << recordFilePath << "].";
 	
 	MeteoContextBluetoothMessage* playRecordDataMessage = new MeteoContextBluetoothMessage(MeteoCommand::PlayRecordData);
 	context.clear();
@@ -655,7 +657,7 @@ int MeteorResult::onEntered(Scene * lastScene)
 	getPlayRecordBleRequestHandler->AddOnFail(this, [=](string s) {
 
 
-		LOG(LogLevel::Debug) << "Lambda_MeteorResult::HandleFail : delete the file: [" << s << "].";
+		LOG(LogLevel::Debug) << "Lambda_MeteorResult::HandleFail : delete the file: [" << s << "]." << string("rm -f ") + directoryPath + "/" + s;
 
 		FILE* fp = popen((string("rm -f ") + directoryPath + "/" + s).c_str(), "r");
 		if (fp == NULL) {
