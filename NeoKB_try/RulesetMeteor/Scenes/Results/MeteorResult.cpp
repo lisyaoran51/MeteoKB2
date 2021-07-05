@@ -646,7 +646,7 @@ int MeteorResult::onEntered(Scene * lastScene)
 		FILE* fp = popen((string("rm -f ") + storage->GetTempBasePath() + "/" + directoryPath + "/" + s).c_str(), "w");
 		if (fp == NULL) {
 			// throw error
-			LOG(LogLevel::Debug) << "Lambda_MeteorResult::HandleFail : fail to delete file.";
+			LOG(LogLevel::Debug) << "Lambda_MeteorResult::HandleFail : fail to delete file." << strerror(errno);
 		}
 		else
 			pclose(fp);
@@ -666,7 +666,7 @@ int MeteorResult::onEntered(Scene * lastScene)
 
 		if (fp == NULL) {
 			// throw error
-			LOG(LogLevel::Debug) << "Lambda_MeteorResult::HandleFail : fail to delete file.";
+			LOG(LogLevel::Debug) << "Lambda_MeteorResult::HandleFail : fail to delete file." << strerror(errno);
 		}
 		else
 			pclose(fp);
