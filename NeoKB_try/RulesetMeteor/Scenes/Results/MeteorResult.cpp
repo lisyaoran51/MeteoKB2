@@ -660,6 +660,8 @@ int MeteorResult::onEntered(Scene * lastScene)
 		LOG(LogLevel::Debug) << "Lambda_MeteorResult::HandleFail : delete the file: [" << s << "]." << string("rm -f ") + storage->GetTempBasePath() + "/" + directoryPath + "/" + s;
 
 		FILE* fp = popen((string("rm -f ") + storage->GetTempBasePath() + "/" + directoryPath + "/" + s).c_str(), "r");
+		LOG(LogLevel::Debug) << "Lambda_MeteorResult::HandleFail : after popen.";
+
 		if (fp == NULL) {
 			// throw error
 		}
