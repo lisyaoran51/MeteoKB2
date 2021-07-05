@@ -62,7 +62,8 @@ int RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Update()
 	}
 
 	/* 把已經Fadeout的reverb關掉 */
-	if (BASS_ChannelIsActive(reverbChannelID[0]) == BASS_ACTIVE_PLAYING) {
+	//if (BASS_ChannelIsActive(reverbChannelID[0]) == BASS_ACTIVE_PLAYING)
+	if (BASS_ChannelIsActive(reverbChannelID[1]) == BASS_ACTIVE_PLAYING) {
 
 		float tempReverbVolume = 0;
 		BASS_ChannelGetAttribute(reverbChannelID[0], BASS_ATTRIB_VOL, &tempReverbVolume);
