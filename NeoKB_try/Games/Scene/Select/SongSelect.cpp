@@ -87,7 +87,12 @@ int SongSelect::load(SmManager * sManager, MeteoGame * game, Storage* s)
 		LOG(LogLevel::Debug) << "SongSelect::Lambda_HandleDownloadSheetmusicSuccess() : download [" << fSegmentMap->fileName << "] success.";
 
 		if (false) {
-			fSegmentMap->WriteFile(storage->GetStream(string("temp/") + fSegmentMap->fileName + string(".temp"), FileAccess::Write, FileMode::Create));
+
+			fstream* stream = storage->GetStream(string("temp/") + fSegmentMap->fileName + string(".temp"), FileAccess::Write, FileMode::Create);
+			fSegmentMap->WriteFile(stream);
+			stream->close();
+			delete stream;
+			stream = nullptr;
 
 			// ¸Ñ±K¡B¸ÑÀ£ÁY
 			string decompressCommand = string("tar -xvf ") + storage->GetTempBasePath() + string("/temp/") + fSegmentMap->fileName + string(".temp ")
