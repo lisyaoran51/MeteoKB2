@@ -647,12 +647,15 @@ int MeteorResult::onEntered(Scene * lastScene)
 		}
 		pclose(fp);
 
-		LOG(LogLevel::Info) << "MeteorResult::onEntering : post record success. exit.";
+		LOG(LogLevel::Info) << "Lambda_MeteorResult::HandleSuccess : post record success. exit.";
 		Exit();
 		return 0;
-	}, "Lambda_GetPlayRecordBleRequestHandleSuccess");
+	}, "Lambda_MeteorResult::HandleSuccess");
 
 	getPlayRecordBleRequestHandler->AddOnFail(this, [=](string s) {
+
+
+		LOG(LogLevel::Debug) << "Lambda_MeteorResult::HandleFail : delete the file: [" << s << "].";
 
 		FILE* fp = popen((string("rm -f ") + directoryPath + "/" + s).c_str(), "r");
 		if (fp == NULL) {
@@ -660,10 +663,10 @@ int MeteorResult::onEntered(Scene * lastScene)
 		}
 		pclose(fp);
 
-		LOG(LogLevel::Info) << "MeteorResult::onEntering : post record failed. exit.";
+		LOG(LogLevel::Info) << "Lambda_MeteorResult::HandleFail : post record failed. exit.";
 		Exit();
 		return 0;
-	}, "Lambda_GetPlayRecordBleRequestHandleFail");
+	}, "Lambda_MeteorResult::HandleFail");
 
 	communicationAccess->Queue(getPlayRecordBleRequestHandler);
 
