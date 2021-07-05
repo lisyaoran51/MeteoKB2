@@ -643,7 +643,7 @@ int MeteorResult::onEntered(Scene * lastScene)
 
 	getPlayRecordBleRequestHandler->AddOnSuccess(this, [=](string s) {
 
-		FILE* fp = popen((string("rm -f ") + directoryPath + "/" + s).c_str(), "r");
+		FILE* fp = popen((string("rm -f ") + storage->GetTempBasePath() + "/" + directoryPath + "/" + s).c_str(), "r");
 		if (fp == NULL) {
 			// throw error
 		}
@@ -657,9 +657,9 @@ int MeteorResult::onEntered(Scene * lastScene)
 	getPlayRecordBleRequestHandler->AddOnFail(this, [=](string s) {
 
 
-		LOG(LogLevel::Debug) << "Lambda_MeteorResult::HandleFail : delete the file: [" << s << "]." << string("rm -f ") + directoryPath + "/" + s;
+		LOG(LogLevel::Debug) << "Lambda_MeteorResult::HandleFail : delete the file: [" << s << "]." << string("rm -f ") + storage->GetTempBasePath() + "/" + directoryPath + "/" + s;
 
-		FILE* fp = popen((string("rm -f ") + directoryPath + "/" + s).c_str(), "r");
+		FILE* fp = popen((string("rm -f ") + storage->GetTempBasePath() + "/" + directoryPath + "/" + s).c_str(), "r");
 		if (fp == NULL) {
 			// throw error
 		}
