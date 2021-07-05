@@ -206,7 +206,7 @@ int FirmwareUpgradePanel::onMessage(MeteoBluetoothMessage * message)
 					MeteoCommand::NewFirmwareSplitFileSegment,
 					MeteoCommand::AckNewFirmwareSplitFileSegment,
 					MeteoCommand::FinishWriteNewFirmwareSplit,
-					MeteoCommand::RequestRewriteNewFirmwareSplit,
+					MeteoCommand::RequestRewriteNewFirmwareSplitFileSegment,
 					MeteoCommand::AckFinishWriteNewFirmwareSplit
 				};
 
