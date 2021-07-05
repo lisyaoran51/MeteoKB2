@@ -47,3 +47,6 @@
 18. 在Driver/LedDeiver資料夾make，然後裝上driver: sh driver.sh
 
 19. sudo raspi-config -> Interfacing Options -> I2C enable
+
+20. 更改swap size至1024M
+(https://wpitchoune.net/tricks/raspberry_pi3_increase_swap_size.html)

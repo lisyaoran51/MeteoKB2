@@ -52,8 +52,11 @@ int RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Update()
 			if (BASS_ChannelIsActive(channelID[i]) == BASS_ACTIVE_PLAYING) {
 				float tempVolume = 0;
 				BASS_ChannelGetAttribute(channelID[i], BASS_ATTRIB_VOL, &tempVolume);
-				if (tempVolume == 0)
+				if (tempVolume == 0) {
+
+					LOG(LogLevel::Debug) << "RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Update() : turn off channel [" << channelID[i] << "].";
 					BASS_ChannelPause(channelID[i]);
+				}
 			}
 		}
 	}
@@ -79,6 +82,8 @@ int RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Update()
 	return SampleChannel::Update();
 
 PAUSE_REVERB:
+
+	LOG(LogLevel::Debug) << "RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Update() : turn off reverb channel [" << channelID[tempPlayingPlayback] << "].";
 	for (int i = 0; i < 5; i++)
 		BASS_ChannelPause(reverbChannelID[i]);
 
