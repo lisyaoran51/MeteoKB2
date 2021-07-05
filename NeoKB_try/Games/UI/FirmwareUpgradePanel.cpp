@@ -314,60 +314,6 @@ int FirmwareUpgradePanel::handleOnRequestSplitSuccess(FileSegmentMap* fSegmentMa
 		return 0;
 	}, 0.1);
 
-
-
-
-
-	if (false) {
-		fSegmentMap->WriteFile(storage->GetStream(firmwareDirectory + string("/") + fSegmentMap->fileName, FileAccess::Write, FileMode::Create));
-
-		// ¸Ñ±K¡B¸ÑÀ£ÁY
-		string decompressCommand = string("tar -xvf ") + storage->GetTempBasePath() + string("/temp/") + fSegmentMap->fileName + string(".temp ")
-			+ storage->GetTempBasePath() + string("/Sheetmusics/") + fSegmentMap->GetFileNameWithoutExtension() + "/" + fSegmentMap->fileName;
-
-		FILE* fp = popen(decompressCommand.c_str(), "r");
-		if (fp == NULL) {
-			// error
-		}
-		pclose(fp);
-
-		// §R°£¥[±KÀÉ
-		string deleteCommand = string("rm -f ") + storage->GetTempBasePath() + string("/temp/") + fSegmentMap->fileName + string(".temp ");
-		fp = popen(deleteCommand.c_str(), "r");
-		if (fp == NULL) {
-			// error
-		}
-		pclose(fp);
-	}
-
-	FILE* fp = popen((string("mkdir /home/pi/Sheetmusics/") + fSegmentMap->GetFileNameWithoutExtension()).c_str(), "r");
-	if (fp == NULL) {
-		LOG(LogLevel::Error) << "SongSelect::Lambda_HandleDownloadSheetmusicSuccess() : fail to mkdir [" << (string("mkdir /home/pi/Sheetmusics/") + fSegmentMap->GetFileNameWithoutExtension()) << "].";
-	}
-	pclose(fp);
-
-	fp = popen((string("cp /home/pi/Sheetmusics/") + fSegmentMap->fileName + string(" /home/pi/Sheetmusics/") + fSegmentMap->GetFileNameWithoutExtension() + string("/")).c_str(), "r");
-	if (fp == NULL) {
-		LOG(LogLevel::Error) << "SongSelect::Lambda_HandleDownloadSheetmusicSuccess() : fail to cp [" << (string("cp /home/pi/Sheetmusics/") + fSegmentMap->fileName + string(" /home/pi/") + fSegmentMap->GetFileNameWithoutExtension() + string("/")) << "].";
-
-	}
-	pclose(fp);
-
-	//string path = storage->GetTempBasePath() + string("/Sheetmusics/") + fSegmentMap->GetFileNameWithoutExtension();
-	string path = string("/home/pi/Sheetmusics/") + fSegmentMap->GetFileNameWithoutExtension();
-
-	LOG(LogLevel::Debug) << "SongSelect::Lambda_HandleDownloadSheetmusicSuccess() : import [" << path << "] to sm manager.";
-
-	vector<string> paths;
-	paths.push_back(path);
-
-	if (smManager->Import(&paths) < 0) {
-		// throw error
-		LOG(LogLevel::Error) << "SongSelect::selectionChanged() : Failed to import new download sheetmusic [" << fSegmentMap->fileName << "].";
-
-		// ¥áÂÅªÞ¿ù»~°T¸¹
-	}
-
 	fSegmentMap->Erase();
 
 	return 0;
