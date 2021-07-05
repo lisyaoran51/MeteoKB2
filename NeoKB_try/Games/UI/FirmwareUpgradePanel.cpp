@@ -69,12 +69,14 @@ int FirmwareUpgradePanel::load(OutputManager * o, CommunicationAccess * c, Frame
 
 	for (int i = 0; i < splitFileNames->size(); i++) {
 
-		if (splitFileNames->at(i).length() < 8)
+		string splitFileName = StringSplitter::Split(splitFileNames->at(i), "/").back();
+
+		if (splitFileName.length() < 8)
 			continue;
 
-		LOG(LogLevel::Debug) << "FirmwareUpgradePanel::load() : split [" << i << "] read." << splitFileNames->at(i);
+		LOG(LogLevel::Debug) << "FirmwareUpgradePanel::load() : split [" << i << "] read." << splitFileName;
 
-		string tempVersionHex = splitFileNames->at(i).substr(3, 5);
+		string tempVersionHex = splitFileName.substr(3, 5);
 		long tempVersion = stol(string("0x") + tempVersionHex, nullptr, 16);
 		if (tempVersion > maxSplitVersion)
 			maxSplitVersion = tempVersion;
@@ -88,20 +90,22 @@ int FirmwareUpgradePanel::load(OutputManager * o, CommunicationAccess * c, Frame
 	/* 檢查目前的split有哪些 */
 	for (int i = 0; i < splitFileNames->size(); i++) {
 
-		if (splitFileNames->at(i).length() < 8)
+		string splitFileName = StringSplitter::Split(splitFileNames->at(i), "/").back();
+
+		if (splitFileName.length() < 8)
 			continue;
 
-		LOG(LogLevel::Debug) << "FirmwareUpgradePanel::load() : split [" << i << "] check." << splitFileNames->at(i);
+		LOG(LogLevel::Debug) << "FirmwareUpgradePanel::load() : split [" << i << "] check." << splitFileName;
 
-		string tempVersionHex = splitFileNames->at(i).substr(3, 5);
+		string tempVersionHex = splitFileName.substr(3, 5);
 		long tempVersion = stol(string("0x") + tempVersionHex, nullptr, 16);
 		if (tempVersion == tempFirmwareSplitVersion) {
 
-			if (splitFileNames->at(i).length() < 9)
+			if (splitFileName.length() < 9)
 				continue;
 
-			string tempSplitDec = splitFileNames->at(i).substr(9, splitFileNames->at(i).length() - 9);
-			newFirmwareSplits[stoi(tempSplitDec)] = splitFileNames->at(i);
+			string tempSplitDec = splitFileName.substr(9, splitFileName.length() - 9);
+			newFirmwareSplits[stoi(tempSplitDec)] = splitFileName;
 			tempFirmwareSplitCount++;
 		}
 
@@ -377,14 +381,16 @@ int FirmwareUpgradePanel::onMessage(MeteoBluetoothMessage * message)
 				vector<string>* splitFileNames = storage->GetFileNames(firmwareDirectory + string("/Splits"));
 				for (int i = 0; i < splitFileNames->size(); i++) {
 
-					if (splitFileNames->at(i).substr(0, 8) != fileName)
+					string splitFileName = StringSplitter::Split(splitFileNames->at(i), "/").back();
+
+					if (splitFileName.substr(0, 8) != fileName)
 						continue;
 
-					if (splitFileNames->at(i).length() < 9)
+					if (splitFileName.length() < 9)
 						continue;
 
-					int thisSplit = stoi(splitFileNames->at(i).substr(9, splitFileNames->at(i).length() - 9));
-					newFirmwareSplits[thisSplit] = splitFileNames->at(i);
+					int thisSplit = stoi(splitFileName.substr(9, splitFileName.length() - 9));
+					newFirmwareSplits[thisSplit] = splitFileName;
 				}
 
 				// 檢查目前的firmware缺哪些split
