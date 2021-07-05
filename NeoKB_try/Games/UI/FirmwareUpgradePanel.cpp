@@ -41,6 +41,7 @@ int FirmwareUpgradePanel::load()
 
 int FirmwareUpgradePanel::load(OutputManager * o, CommunicationAccess * c, FrameworkConfigManager* f, Storage* s)
 {
+	LOG(LogLevel::Debug) << "FirmwareUpgradePanel::load() : start reading splits.";
 	outputManager = o;
 	communicationAccess = c;
 	storage = s;
@@ -70,6 +71,9 @@ int FirmwareUpgradePanel::load(OutputManager * o, CommunicationAccess * c, Frame
 
 		if (splitFileNames->at(i).length() < 8)
 			continue;
+
+		LOG(LogLevel::Debug) << "FirmwareUpgradePanel::load() : split [" << i << "] read." << splitFileNames->at(i);
+
 		string tempVersionHex = splitFileNames->at(i).substr(3, 5);
 		long tempVersion = stol(string("0x") + tempVersionHex, nullptr, 16);
 		if (tempVersion > maxSplitVersion)
@@ -86,6 +90,9 @@ int FirmwareUpgradePanel::load(OutputManager * o, CommunicationAccess * c, Frame
 
 		if (splitFileNames->at(i).length() < 8)
 			continue;
+
+		LOG(LogLevel::Debug) << "FirmwareUpgradePanel::load() : split [" << i << "] check." << splitFileNames->at(i);
+
 		string tempVersionHex = splitFileNames->at(i).substr(3, 5);
 		long tempVersion = stol(string("0x") + tempVersionHex, nullptr, 16);
 		if (tempVersion == tempFirmwareSplitVersion) {
