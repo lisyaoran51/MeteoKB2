@@ -42,7 +42,7 @@ int GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait(BleRequest * 
 	ForegroundBleAccess* bleAccess = dynamic_cast<ForegroundBleAccess*>(thisGetBinaryRequest->communicationComponent);
 	BluetoothPhone* bluetoothPhone = dynamic_cast<BluetoothPhone*>(dynamic_cast<ForegroundBleAccess*>(thisGetBinaryRequest->communicationComponent)->GetPeripheral());
 
-	LOG(LogLevel::Finer) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait() : start handling request.";
+	LOG(LogLevel::Debug) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait() : start handling request.";
 
 
 	bluetoothPhone->PushOutputMessage(getMessage);
@@ -53,7 +53,7 @@ int GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait(BleRequest * 
 	while (!isAckReceived) {
 
 		if (thisGetBinaryRequest->getElapsedSeconds() > thisGetBinaryRequest->timeout) {
-			LOG(LogLevel::Finer) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait() : waiting ack time out.";
+			LOG(LogLevel::Debug) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait() : waiting ack time out.";
 			throw BleRequestException(BleResponseCode::RequestTimeout);
 		}
 
@@ -70,7 +70,7 @@ int GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait(BleRequest * 
 			if (dynamic_cast<MeteoContextBluetoothMessage*>(message)) {
 			if (dynamic_cast<MeteoContextBluetoothMessage*>(message)->GetCommand() == ackGetCommand) {
 
-				LOG(LogLevel::Finer) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait() : get ack message." << dynamic_cast<MeteoContextBluetoothMessage*>(message)->GetContext();
+				LOG(LogLevel::Debug) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait() : get ack message." << dynamic_cast<MeteoContextBluetoothMessage*>(message)->GetContext();
 
 
 				isAckReceived = true;
@@ -108,7 +108,7 @@ int GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait(BleRequest * 
 		throw BleRequestException(BleResponseCode::MtuTooSmall);
 	}
 
-	LOG(LogLevel::Finer) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait() : build file segments.";
+	LOG(LogLevel::Debug) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait() : build file segments.";
 
 	fileSegmentMap = new FileSegmentMap(binarySegmentSize);
 	fileSegmentMap->fileName = fileName;
@@ -121,7 +121,7 @@ int GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait(BleRequest * 
 	while (!isTransferFinished) {
 
 		if (thisGetBinaryRequest->getSectionElapsedSeconds() > thisGetBinaryRequest->timeout) {
-			LOG(LogLevel::Finer) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait() : waiting file time out.";
+			LOG(LogLevel::Debug) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait() : waiting file time out.";
 			throw BleRequestException(BleResponseCode::RequestTimeout);
 		}
 
@@ -177,17 +177,17 @@ int GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait(BleRequest * 
 			else if (dynamic_cast<MeteoContextBluetoothMessage*>(message)) {
 			if (dynamic_cast<MeteoContextBluetoothMessage*>(message)->GetCommand() == finishCommand) {
 				
-				LOG(LogLevel::Fine) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait() : get finish command.";
+				LOG(LogLevel::Debug) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait() : get finish command.";
 
 				if (fileSegmentMap->fileSegmentMap.size() == fileSegmentMap->segmentAmount) {
 					isTransferFinished = true;
 				}
 				else {
-					LOG(LogLevel::Depricated) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait() : segments not enough [" << fileSegmentMap->fileSegmentMap.size() << "].";
+					LOG(LogLevel::Debug) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait() : segments not enough [" << fileSegmentMap->fileSegmentMap.size() << "].";
 
 					map<int, pair<char*, int>>::iterator it;
 					for (it = fileSegmentMap->fileSegmentMap.begin(); it != fileSegmentMap->fileSegmentMap.end(); ++it) {
-						LOG(LogLevel::Depricated) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait() : already have segment [" << (*it).first << "].";
+						LOG(LogLevel::Debug) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait() : already have segment [" << (*it).first << "].";
 					}
 
 					MeteoContextBluetoothMessage* ackFinishferMessage = new MeteoContextBluetoothMessage(ackFinishCommand);
@@ -206,7 +206,7 @@ int GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait(BleRequest * 
 					iter = fileSegmentMap->fileSegmentMap.find(i);
 					if (iter == fileSegmentMap->fileSegmentMap.end()) {
 
-						LOG(LogLevel::Fine) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait() : request rewrite segment [" << i << "].";
+						LOG(LogLevel::Debug) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait() : request rewrite segment [" << i << "].";
 
 						MeteoContextBluetoothMessage* reuqestRetransferMessage = new MeteoContextBluetoothMessage(requestRetransferCommand);
 
@@ -237,7 +237,7 @@ int GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait(BleRequest * 
 
 	}
 
-	LOG(LogLevel::Finer) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait() : finish get file.";
+	LOG(LogLevel::Debug) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait() : finish get file.";
 
 	MeteoContextBluetoothMessage* ackFinishferMessage = new MeteoContextBluetoothMessage(ackFinishCommand);
 
@@ -249,7 +249,7 @@ int GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait(BleRequest * 
 	ackFinishferMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
 	bleAccess->GetBluetoothPhone()->PushOutputMessage(ackFinishferMessage);
 
-	LOG(LogLevel::Finer) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait() : write file to [" << directoryPath + string("/") + fileName << "]";
+	LOG(LogLevel::Debug) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait() : write file to [" << directoryPath + string("/") + fileName << "]";
 	// file segment map write file
 	fstream file(directoryPath + string("/") + fileName, ios::out | ios::binary);
 
