@@ -54,7 +54,7 @@ int RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Update()
 				BASS_ChannelGetAttribute(channelID[i], BASS_ATTRIB_VOL, &tempVolume);
 				if (tempVolume == 0) {
 
-					LOG(LogLevel::Debug) << "RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Update() : turn off channel [" << channelID[i] << "].";
+					LOG(LogLevel::Depricated) << "RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Update() : turn off channel [" << channelID[i] << "].";
 					BASS_ChannelPause(channelID[i]);
 				}
 			}
@@ -68,14 +68,14 @@ int RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Update()
 		float tempReverbVolume = 0;
 		BASS_ChannelGetAttribute(reverbChannelID[0], BASS_ATTRIB_VOL, &tempReverbVolume);
 		if(tempReverbVolume == 0) {
-			LOG(LogLevel::Debug) << "RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Update() : fadeout low volume.";
+			LOG(LogLevel::Depricated) << "RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Update() : fadeout low volume.";
 
 			goto PAUSE_REVERB;
 		}
 
 		/* 如果時間超過總長的一定比例，就關掉reverb。越用力，reverb舊月九 */
 		if ((float)BASS_ChannelGetPosition(reverbChannelID[0], BASS_POS_BYTE) / (float)BASS_ChannelGetLength(reverbChannelID[0], BASS_POS_BYTE) > volume->GetValue()) {
-			LOG(LogLevel::Debug) << "RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Update() : fadeout too long.";
+			LOG(LogLevel::Depricated) << "RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Update() : fadeout too long.";
 			goto PAUSE_REVERB;
 		}
 	}
@@ -84,7 +84,7 @@ int RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Update()
 
 PAUSE_REVERB:
 
-	LOG(LogLevel::Debug) << "RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Update() : turn off reverb channel [" << channelID[tempPlayingPlayback] << "].";
+	LOG(LogLevel::Depricated) << "RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Update() : turn off reverb channel [" << channelID[tempPlayingPlayback] << "].";
 	for (int i = 0; i < 5; i++)
 		BASS_ChannelPause(reverbChannelID[i]);
 

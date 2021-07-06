@@ -143,6 +143,8 @@ int SongSelect::load(SmManager * sManager, MeteoGame * game, Storage* s)
 
 		fSegmentMap->Erase();
 
+		return 0;
+
 		for (int i = 0; i < smManager->GetSmInfos()->size(); i++) {
 			LOG(LogLevel::Debug) << "int SheetmusicSelectPanel::load() : new load song [" << fSegmentMap->fileName << "].";
 			if (smManager->GetSmInfos()->at(i)->fileName == fSegmentMap->fileName) {
