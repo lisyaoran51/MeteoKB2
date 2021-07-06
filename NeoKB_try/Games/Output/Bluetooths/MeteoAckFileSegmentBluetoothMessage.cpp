@@ -17,7 +17,7 @@ MeteoAckFileSegmentBluetoothMessage::MeteoAckFileSegmentBluetoothMessage(MeteoCo
 
 BluetoothMessage * MeteoAckFileSegmentBluetoothMessage::Clone()
 {
-	return nullptr;
+	return new MeteoAckFileSegmentBluetoothMessage(command, fileName, order, amount);
 }
 
 int MeteoAckFileSegmentBluetoothMessage::SetContext(char * c, int cSize)
