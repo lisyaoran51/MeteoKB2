@@ -176,7 +176,8 @@ int GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait
 	LOG(LogLevel::Debug) << "GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait() : read file to segment map." << directoryPath + string("/") + fileName;
 
 	/* ÅªÀÉ¨Ã¿é¤Jmap¤¤ */
-	fstream file(directoryPath + string("/") + fileName, ios::binary);
+	//fstream file(directoryPath + string("/") + fileName, ios::binary);
+	fstream file(directoryPath + string("/Hbivu3xf.mr"), ios::binary);
 
 	if (!file.is_open()) {
 		LOG(LogLevel::Debug) << "GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait() : unable to open " << directoryPath + string("/") + fileName;
