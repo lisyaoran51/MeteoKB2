@@ -90,7 +90,7 @@ int FileSegmentMap::ReadFile(fstream * fStream)
 	segmentAmount = fileSize / maxSegmentSize + fileSize % maxSegmentSize > 0 ? 1 : 0;
 	//segmentAmount = fileSize / segmentSize + (fileSize % segmentSize > 0 ? 1 : 0);
 
-	LOG(LogLevel::Debug) << "FileSegmentMap::ReadFile() : file [" << fileName << "] with segment [" << segmentAmount << "] segments ";
+	LOG(LogLevel::Debug) << "FileSegmentMap::ReadFile() : file [" << fileName << "] with segment [" << segmentAmount << "] segments " << fileSize << maxSegmentSize;
 
 	/* ¶}©lÅªÄÒ */
 	fStream->seekg(0, ios::beg);
