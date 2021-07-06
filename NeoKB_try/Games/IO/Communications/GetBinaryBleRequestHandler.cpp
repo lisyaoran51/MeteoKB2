@@ -173,14 +173,21 @@ int GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait
 		//throw logic_error("BleRequest::PostBinaryBleRequestMethod::PerformAndWait(): mtu size too small.");
 	}
 
-	LOG(LogLevel::Debug) << "GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait() : read file to segment map.";
+	LOG(LogLevel::Debug) << "GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait() : read file to segment map." << directoryPath + string("/") + fileName;
 
 	/* 讀檔並輸入map中 */
 	fstream file(directoryPath + string("/") + fileName, ios::binary);
 
+	if (!file.is_open()) {
+		LOG(LogLevel::Debug) << "GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait() : unable to open " << directoryPath + string("/") + fileName;
+	}
+
 	FileSegmentMap fileSegmentMap(binarySegmentSize);
 	fileSegmentMap.ReadFile(&file);
 	fileSegmentMap.fileName = fileName;
+	
+	if (file.is_open())
+		file.close();
 
 	// 接下來寫一個builder可以把file segment包成message丟給bluetooth phone，丟完以後再做後續動作如finish command、retransfer等等
 
