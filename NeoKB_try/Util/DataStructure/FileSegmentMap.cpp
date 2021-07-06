@@ -87,7 +87,7 @@ int FileSegmentMap::ReadFile(fstream * fStream)
 	fileSize = fStream->tellg() - fileSize;
 
 	/* ­pºâsegment¼Æ¶q */
-	segmentAmount = fileSize / maxSegmentSize + fileSize % maxSegmentSize > 0 ? 1 : 0;
+	segmentAmount = fileSize / maxSegmentSize + (fileSize % maxSegmentSize > 0 ? 1 : 0);
 	//segmentAmount = fileSize / segmentSize + (fileSize % segmentSize > 0 ? 1 : 0);
 
 	LOG(LogLevel::Debug) << "FileSegmentMap::ReadFile() : file [" << fileName << "] with segment [" << segmentAmount << "] segments " << fileSize << maxSegmentSize;
