@@ -557,12 +557,12 @@ int MeteorResult::onEntered(Scene * lastScene)
 	// bluetooth±À°eµ²ªG
 	MeteoContextBluetoothMessage* scoreMessage = new MeteoContextBluetoothMessage(MeteoCommand::FinalScore);
 	json context;
-	context["Hit Amount"] = score->hits;
-	context["Max Hit Amount"] = score->maxHits;
-	context["Score"] = score->score;
-	context["Max Score"] = score->maxScore;
-	context["Accuracy"] = int(score->accuracy * 10000);
-	context["Combo"] = score->combo;
+	context["HA"] = score->hits;
+	context["MHA"] = score->maxHits;
+	context["S"] = score->score;
+	context["MS"] = score->maxScore;
+	context["A"] = int(score->accuracy * 10000);
+	context["C"] = score->combo;
 
 
 
@@ -621,6 +621,7 @@ int MeteorResult::onEntered(Scene * lastScene)
 	context["FileName"] = fileName;
 	context["SheetmusicName"] = workingSm.GetValue()->GetSm()->GetSmMetadata()->Title;
 
+	playRecordDataMessage->SetContextInJson(context);
 	playRecordDataMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
 	outputManager->PushMessage(playRecordDataMessage);
 
