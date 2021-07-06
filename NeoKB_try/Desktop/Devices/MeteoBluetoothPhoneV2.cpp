@@ -311,7 +311,11 @@ int MeteoBluetoothPhoneV2::ConvertPacketToMessage(const char * packet, int lengt
 	else if (packetType == PacketType::None) {
 		// 封包壞掉，直接丟掉，不用刪因為return以後外面會刪
 		// packetConverter->CleanBuffer();
-		LOG(LogLevel::Warning) << "MeteoBluetoothPhoneV2::ConvertPacketToMessage() : got error packet.";
+
+		char buffer[8] = { 0 };
+		memcpy(buffer, packet, sizeof(char) * 8);
+
+		LOG(LogLevel::Warning) << "MeteoBluetoothPhoneV2::ConvertPacketToMessage() : got error packet." << buffer[0] << " " << buffer[1] << " " << buffer[2] << " " << buffer[3] << " " << buffer[4] << " " << buffer[5] << " " << buffer[6] << " " << buffer[7] << " ";
 	}
 
 OUT:
