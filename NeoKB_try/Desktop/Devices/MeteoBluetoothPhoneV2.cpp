@@ -257,7 +257,7 @@ int MeteoBluetoothPhoneV2::ConvertPacketToMessage(const char * packet, int lengt
 		LOG(LogLevel::Fine) << "MeteoBluetoothPhoneV2::ConvertPacketToMessage() : get read firmware version message.";
 
 		char buffer[8] = { 0 };
-		unsigned int command = 0x110000;// MeteoCommand::ReturnFirmwareVersion
+		unsigned int command = 0x01140000;// MeteoCommand::ReturnFirmwareVersion
 		unsigned int version = METEO_PROGRAM_VERSION;
 
 		memcpy(buffer, &command, sizeof(command));
