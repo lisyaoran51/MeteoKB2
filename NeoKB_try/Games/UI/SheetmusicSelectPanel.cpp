@@ -212,7 +212,7 @@ int SheetmusicSelectPanel::onMessage(MeteoBluetoothMessage * message)
 
 	// 這一段要在開始傳檔之前送，確認琴裡面有沒有這首歌
 	if (message->GetCommand() == MeteoCommand::SheetmusicData) {
-		LOG(LogLevel::Depricated) << "int SheetmusicSelectPanel::onMessage() : get message SheetmusicData";
+		LOG(LogLevel::Debug) << "int SheetmusicSelectPanel::onMessage() : get message SheetmusicData";
 
 		try {
 			string fileName = context["FileName"].get<string>();
@@ -222,7 +222,7 @@ int SheetmusicSelectPanel::onMessage(MeteoBluetoothMessage * message)
 				LOG(LogLevel::Depricated) << "int SheetmusicSelectPanel::onMessage() : check song name " << sInfos->at(i)->fileName;
 
 				if (sInfos->at(i)->fileName == fileName) {
-					LOG(LogLevel::Depricated) << "int SheetmusicSelectPanel::onMessage() : has song " << sInfos->at(i)->fileName;
+					LOG(LogLevel::Debug) << "int SheetmusicSelectPanel::onMessage() : has song " << sInfos->at(i)->fileName;
 					// 回傳已有這首曲子
 					MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::AckSheetmusicData);
 
@@ -245,7 +245,7 @@ int SheetmusicSelectPanel::onMessage(MeteoBluetoothMessage * message)
 			 * 重要
 			 */
 
-			LOG(LogLevel::Depricated) << "int SheetmusicSelectPanel::onMessage() : not have song " << fileName;
+			LOG(LogLevel::Debug) << "int SheetmusicSelectPanel::onMessage() : not have song " << fileName;
 
 			// 回傳沒有這首曲子
 			MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::AckSheetmusicData);
@@ -280,11 +280,11 @@ int SheetmusicSelectPanel::onMessage(MeteoBluetoothMessage * message)
 			getSheetmusicRequest->AddOnSuccess(&onGetSheetmusicSuccess);
 			getSheetmusicRequest->AddOnFail(&onGetSheetmusicFail);
 
-			LOG(LogLevel::Finer) << "int SheetmusicSelectPanel::onMessage() : start queuing " << fileName;
+			LOG(LogLevel::Debug) << "int SheetmusicSelectPanel::onMessage() : start queuing " << fileName;
 
 			GetScheduler()->AddDelayedTask([=]() {
 
-				LOG(LogLevel::Depricated) << "int SheetmusicSelectPanel::onMessage() : queue request to get " << fileName;
+				LOG(LogLevel::Debug) << "int SheetmusicSelectPanel::onMessage() : queue request to get " << fileName;
 
 				communicationAccess->Queue(getSheetmusicRequest);
 
