@@ -315,7 +315,15 @@ int MeteoBluetoothPhoneV2::ConvertPacketToMessage(const char * packet, int lengt
 		char buffer[8] = { 0 };
 		memcpy(buffer, packet, sizeof(char) * 8);
 
-		LOG(LogLevel::Warning) << "MeteoBluetoothPhoneV2::ConvertPacketToMessage() : got error packet." << buffer[0] << " " << buffer[1] << " " << buffer[2] << " " << buffer[3] << " " << buffer[4] << " " << buffer[5] << " " << buffer[6] << " " << buffer[7] << " ";
+		LOG(LogLevel::Warning) << "MeteoBluetoothPhoneV2::ConvertPacketToMessage() : got error packet." 
+			<< hex << (int)buffer[0] << " " 
+			<< hex << (int)buffer[1] << " " 
+			<< hex << (int)buffer[2] << " " 
+			<< hex << (int)buffer[3] << " " 
+			<< hex << (int)buffer[4] << " " 
+			<< hex << (int)buffer[5] << " " 
+			<< hex << (int)buffer[6] << " " 
+			<< hex << (int)buffer[7] << " ";
 	}
 
 OUT:
