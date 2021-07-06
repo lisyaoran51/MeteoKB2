@@ -81,9 +81,9 @@ int FileSegmentMap::WriteFile(fstream * fStream)
 int FileSegmentMap::ReadFile(fstream * fStream)
 {
 	/* 計算檔案大小 */
-	fStream->seekg(0, ios::beg);
+	fStream->tellg(0, ios::beg);
 	streampos fileSize = fStream->tellg();
-	fStream->seekg(0, ios::end);
+	fStream->tellg(0, ios::end);
 	fileSize = fStream->tellg() - fileSize;
 
 	/* 計算segment數量 */
