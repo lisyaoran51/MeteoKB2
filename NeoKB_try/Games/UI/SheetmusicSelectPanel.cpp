@@ -325,6 +325,15 @@ int SheetmusicSelectPanel::onMessage(MeteoBluetoothMessage * message)
 
 				outputManager->PushMessage(meteoContextBluetoothMessage);
 
+
+				/*
+				 * 重要
+				 */
+				ThreadMaster::GetInstance().SwitchGameStatus((int)GameStatus::Game);
+				/*
+				 * 重要
+				 */
+
 				SelectionChanged(sInfos->at(i));
 
 				StartRequest();
