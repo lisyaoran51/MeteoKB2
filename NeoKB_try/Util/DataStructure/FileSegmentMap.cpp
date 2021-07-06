@@ -81,17 +81,19 @@ int FileSegmentMap::WriteFile(fstream * fStream)
 int FileSegmentMap::ReadFile(fstream * fStream)
 {
 	/* 計算檔案大小 */
-	fStream->seekp(0, ios_base::beg);
+	fStream->seekg(0, ios::beg);
 	streampos fileSize = fStream->tellg();
-	fStream->seekg(0, std::ios::end);
+	fStream->seekg(0, ios::end);
 	fileSize = fStream->tellg() - fileSize;
 
 	/* 計算segment數量 */
 	segmentAmount = fileSize / maxSegmentSize + fileSize % maxSegmentSize > 0 ? 1 : 0;
 	//segmentAmount = fileSize / segmentSize + (fileSize % segmentSize > 0 ? 1 : 0);
 
+	LOG(LogLevel::Debug) << "FileSegmentMap::ReadFile() : file [" << fileName << "] with segment [" << segmentAmount << "] segments ";
+
 	/* 開始讀黨 */
-	fStream->seekp(0, ios_base::beg);
+	fStream->seekg(0, ios::beg);
 	for (int i = 0; i < segmentAmount; i++) {
 
 		char* buffer = nullptr;
