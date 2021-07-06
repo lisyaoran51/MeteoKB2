@@ -607,7 +607,7 @@ int MeteorResult::onEntered(Scene * lastScene)
 
 	/* 寫入遊戲紀錄 */
 	// 這邊之後要改成發request
-	string recordFilePath = writeGameRecord();
+	string recordFilePath = storage->GetTempBasePath() + string("/") + writeGameRecord();
 	vector<string> path = StringSplitter::Split(recordFilePath, "/");
 	string fileName = path.back();
 	path.pop_back();

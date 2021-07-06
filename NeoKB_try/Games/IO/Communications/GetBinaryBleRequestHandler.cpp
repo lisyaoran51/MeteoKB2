@@ -94,6 +94,9 @@ GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::GetBinaryBleReques
 
 int GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait(BleRequest * thisRequest)
 {
+
+	LOG(LogLevel::Debug) << "GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait() : start handler";
+
 	// #-- 1 開始
 	GetBinaryBleRequestHandler* thisGetBinaryBleRequestHandler = dynamic_cast<GetBinaryBleRequestHandler*>(thisRequest);
 
@@ -124,6 +127,8 @@ int GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait
 
 				/* 查看是否有檔案 */
 				string requestFileName = dynamic_cast<MeteoContextBluetoothMessage*>(message)->GetContextInJson()["FileName"].get<string>();
+
+				LOG(LogLevel::Debug) << "GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait() : get request with filename." << requestFileName;
 
 				if (requestFileName != fileName)
 					continue;
@@ -168,6 +173,8 @@ int GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait
 		//throw logic_error("BleRequest::PostBinaryBleRequestMethod::PerformAndWait(): mtu size too small.");
 	}
 
+	LOG(LogLevel::Debug) << "GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait() : read file to segment map.";
+
 	/* 讀檔並輸入map中 */
 	fstream file(directoryPath + string("/") + fileName, ios::binary);
 
@@ -206,12 +213,18 @@ int GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait
 
 	/* 這邊要做丟檔案，每丟一個檔案以後要不停檢查是否接到Ack，才能再丟下一個檔案 */
 
+	LOG(LogLevel::Debug) << "GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait() : start sending file.";
+
 	int tempSendFileSegmentNumber = 0;
 	double transferTempFileSegmentElapsedSeconds = thisGetBinaryBleRequestHandler->getSectionElapsedSeconds();
 	bleAccess->GetBluetoothPhone()->PushOutputMessage(fileSegmentMessages[0]);
 
+	LOG(LogLevel::Debug) << "GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait() : send segment [" << 0 << "]";
 
-	while (1) {
+
+	bool isAllSegmentSent = false;
+
+	while (!isAllSegmentSent) {
 
 		if (thisGetBinaryBleRequestHandler->exitRequested) {
 			throw BleRequestException(BleResponseCode::ExitRequested);
@@ -249,9 +262,17 @@ int GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait
 				MeteoAckFileSegmentBluetoothMessage* ackFileSegmentMessage = dynamic_cast<MeteoAckFileSegmentBluetoothMessage*>(message);
 				if (ackFileSegmentMessage->GetOrder() == tempSendFileSegmentNumber) {
 
+					if (tempSendFileSegmentNumber == fileSegmentMap.segmentAmount - 1) {
+						isAllSegmentSent = true;
+						break;
+					}
+
 					tempSendFileSegmentNumber++;
 					transferTempFileSegmentElapsedSeconds = thisGetBinaryBleRequestHandler->getSectionElapsedSeconds();
 					bleAccess->GetBluetoothPhone()->PushOutputMessage(fileSegmentMessages[tempSendFileSegmentNumber]);
+
+					LOG(LogLevel::Debug) << "GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait() : send segment [" << tempSendFileSegmentNumber << "]";
+
 				}
 				else if (ackFileSegmentMessage->GetOrder() < tempSendFileSegmentNumber) {
 					// no-op
