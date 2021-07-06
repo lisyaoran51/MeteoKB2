@@ -106,6 +106,9 @@ int FileSegmentMap::ReadFile(fstream * fStream)
 		fStream->read(buffer, bufferSize);
 		fileSegmentMap[i] = pair<char*, int>(buffer, bufferSize);
 
+		LOG(LogLevel::Debug) << "FileSegmentMap::ReadFile() : file [" << fileName << "] segment [" << i << "] with size [" << bufferSize << "].";
+
+
 	}
 
 	return 0;

@@ -200,6 +200,8 @@ int GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait
 		int tempFileSegmentSize = 0;
 		tempFileSegmentSize = fileSegmentMap.GetFileSegment(i, &tempFileSegment);
 
+		LOG(LogLevel::Debug) << "GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait() : split file to message [" << i << "] with size " << tempFileSegmentSize;
+
 		MeteoFileSegmentBluetoothMessage* fileSegmentMessage = new MeteoFileSegmentBluetoothMessage(
 			transferCommand,
 			tempFileSegment,
