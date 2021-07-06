@@ -150,6 +150,8 @@ int MeteorRulesetExecutor::load(MeteorTimeController * t, Instrument* i, ReplayR
 
 	volumeController->SetSampleVolumeRatio(0.8);
 
+	volumeController->SetMirrorSampleVolumeRatio(0.6);
+
 
 	LOG(LogLevel::Finer) << "MeteorRulesetExecutor::load() : end.";
 	return 0;
@@ -188,6 +190,8 @@ MeteorRulesetExecutor::~MeteorRulesetExecutor()
 
 
 	volumeController->SetSampleVolumeRatio(1);
+
+	volumeController->SetMirrorSampleVolumeRatio(1);
 }
 
 int MeteorRulesetExecutor::LazyConstruct(WorkingSm * w, Ruleset* r)

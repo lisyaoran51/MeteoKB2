@@ -67,11 +67,11 @@ SampleManager * AudioManager::GetMirrorSampleManager(CompositeResourceStore<char
 	AddItem(sManager);
 
 	/* 這邊沒有sond binding set提供音量大小，先預設這組音量大小是0.8 */
-	sManager->GetVolume()->SetValue(0.8);
+	sManager->GetVolume()->SetValue(1.0);
 
 	mirrorSampleVolume->SetValue(1.0);
 	sManager->AddAdjustment(AdjustableProperty::Volume, mirrorSampleVolume);
-	mirrorSampleVolume->AddOnValueChanged(sManager, bind(&SampleManager::InvalidateState, sManager), "SampleManager::InvalidateState");
+	mirrorSampleVolume->AddOnValueChanged(sManager, bind(&SampleManager::InvalidateState, sManager), "MirrorSampleManager::InvalidateState");
 	// TODO: 加上adjistment 
 
 	return sManager;
