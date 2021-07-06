@@ -188,12 +188,12 @@ int SheetmusicSelectPanel::onMessage(MeteoBluetoothMessage * message)
 
 			InstanceCreator<MtoObject> &iCreator = InstanceCreator<MtoObject>::GetInstance();
 			
-			LOG(LogLevel::Fine) << "SheetmusicSelectPanel::onMessage() : select" << modifierName << "with value [" << value1 << "],[" << "].";
+			LOG(LogLevel::Debug) << "SheetmusicSelectPanel::onMessage() : select" << modifierName << "with value [" << value1 << "],[" << "].";
 
 			Modifier* modifier = iCreator.CreateInstanceWithT<Modifier>(modifierName);
 			modifier->SetValue(value1, value2);
 
-			AddModifier(modifier);
+			//AddModifier(modifier);
 
 		}
 
