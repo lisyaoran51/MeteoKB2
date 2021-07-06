@@ -638,7 +638,7 @@ int MeteoPacketConverterV2::ConvertToByteArray(BluetoothMessage * bluetoothMessa
 		memcpy(buffer + sizeof(command) + sizeof(unsigned short)			, &bufferSize, sizeof(bufferSize));
 
 		const char *fileNameInCharArray = fileBluetoothMessage->GetFileName().c_str();
-		memcpy(buffer + sizeof(command) + sizeof(unsigned short) * 2		, fileNameInCharArray, sizeof(fileNameInCharArray) > 16 ? 16 : sizeof(fileNameInCharArray));
+		memcpy(buffer + sizeof(command) + sizeof(unsigned short) * 2		, fileNameInCharArray, strlen(fileNameInCharArray) > 16 ? 16 : strlen(fileNameInCharArray));
 
 		unsigned short order = fileBluetoothMessage->GetOrder();
 		memcpy(buffer + sizeof(command) + sizeof(unsigned short) * 2 + 16	, &order, sizeof(order));
