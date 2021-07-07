@@ -5,7 +5,7 @@
 #include <iomanip>
 #include <sstream>
 
-//#define DEBUG_VARIANT
+#define DEBUG_VARIANT
 
 // debug¥Î
 #include <chrono>
@@ -73,10 +73,6 @@ int VirtualPianoController::implementControlInstrument(EventProcessor<Event>* e)
 			gameEventContext += stream.str();
 		}
 
-#ifdef DEBUG_VARIANT
-		return 0;
-#endif
-
 		MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::HardwareGameEvent);
 
 		json context;
@@ -84,6 +80,10 @@ int VirtualPianoController::implementControlInstrument(EventProcessor<Event>* e)
 
 		meteoContextBluetoothMessage->SetContextInJson(context);
 		meteoContextBluetoothMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
+
+#ifdef DEBUG_VARIANT
+		return 0;
+#endif
 
 		if (outputManager != nullptr)
 			outputManager->PushMessage(meteoContextBluetoothMessage);
