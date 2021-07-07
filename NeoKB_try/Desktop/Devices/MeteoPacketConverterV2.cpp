@@ -6,7 +6,7 @@
 #include "../../Games/Output/Bluetooths/MeteoAckFileSegmentBluetoothMessage.h"
 
 
-#define DEBUG_VARIANT
+//#define DEBUG_VARIANT
 
 
 using namespace Desktop::Devices;
