@@ -1,9 +1,11 @@
 #include "MeteoBluetoothDevice.h"
 
 #include "../../Games/Output/Bluetooths/MeteoContextBluetoothMessage.h"
+#include <chrono>
 
 using namespace Desktop::Devices;
 using namespace Games::Output::Bluetooths;
+using namespace std::chrono;
 
 
 MeteoBluetoothDevice::MeteoBluetoothDevice(MeteoBluetoothPhoneV2 * mBluetoothPhone)
@@ -100,7 +102,10 @@ int MeteoBluetoothDevice::passToDevice()
 		int success = -1;
 		try {
 			LOG(LogLevel::Depricated) << "MeteoBluetoothDevice::passToDevice() : pass message to bt.";
+			system_clock::time_point startTime = system_clock::now();
 			success = meteoBluetoothPhone->PushOutputMessage(dynamic_cast<BluetoothMessage*>(outputMessages[i]));
+			system_clock::time_point nowTime = system_clock::now();
+			LOG(LogLevel::Debug) << "MeteoBluetoothDevice::passToDevice() : time to convert a message: " << duration_cast<milliseconds>(nowTime - startTime);
 		}
 		catch (exception &e) {
 			LOG(LogLevel::Error) << "MeteoBluetoothDevice::passToDevice() : pushing output message exception : " << e.what();
@@ -113,6 +118,8 @@ int MeteoBluetoothDevice::passToDevice()
 			i--;
 		}
 		
+		//this_thread::sleep_for(chrono::milliseconds(10));
+
 	}
 	//outputMessages.clear();
 
