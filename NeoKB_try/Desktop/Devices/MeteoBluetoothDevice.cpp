@@ -90,7 +90,7 @@ int MeteoBluetoothDevice::passToDevice()
 {
 	LOG(LogLevel::Depricated) << "MeteoBluetoothDevice::passToDevice() : running.";
 	if(outputMessages.size() > 0)
-		LOG(LogLevel::Debug) << "MeteoBluetoothDevice::passToDevice() : [" << outputMessages.size() << "] messages to send.";
+		LOG(LogLevel::Depricated) << "MeteoBluetoothDevice::passToDevice() : [" << outputMessages.size() << "] messages to send.";
 	unique_lock<mutex> uLock(outputMessageMutex);
 
 	for (int i = 0; i < outputMessages.size(); i++) {
