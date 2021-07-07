@@ -10,6 +10,10 @@
 #include "../../Framework/Threading/ThreadMaster.h"
 
 
+#define DEBUG_VARIANT
+
+
+
 using namespace std;
 using namespace Desktop::Devices;
 using namespace Games::Output::Bluetooths;
@@ -20,6 +24,8 @@ using namespace Framework::Threading;
 #ifndef METEO_PROGRAM_VERSION
 #define METEO_PROGRAM_VERSION 0x0
 #endif
+
+
 
 
 MeteoBluetoothPhoneV2::MeteoBluetoothPhoneV2(PacketConverter<MeteoCommand>* pConverter) : RegisterType("MeteoBluetoothPhone")
@@ -131,6 +137,9 @@ int MeteoBluetoothPhoneV2::PushOutputMessage(BluetoothMessage * outputMessage)
 		//printf("\n");
 	}
 	else {
+#ifdef DEBUG_VARIANT
+		return 0;
+#endif
 		LOG(LogLevel::Error) << "MeteoBluetoothPhoneV2::PushOutputMessage() : message size over mtu [" << mtu << "].";
 	}
 		
