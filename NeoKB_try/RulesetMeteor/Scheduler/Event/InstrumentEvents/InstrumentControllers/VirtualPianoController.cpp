@@ -5,7 +5,7 @@
 #include <iomanip>
 #include <sstream>
 
-#define DEBUG_VARIANT
+//#define DEBUG_VARIANT
 
 // debug¥Î
 #include <chrono>
@@ -78,7 +78,7 @@ int VirtualPianoController::implementControlInstrument(EventProcessor<Event>* e)
 		json context;
 		context["Events"].push_back(gameEventContext);
 
-		LOG(LogLevel::Fine) << "VirtualPianoController::implementControlInstrument() : game evnet context dump : " << context.dump();
+		LOG(LogLevel::Debug) << "VirtualPianoController::implementControlInstrument() : game evnet context dump : " << context.dump();
 
 		meteoContextBluetoothMessage->SetContextInJson(context);
 		meteoContextBluetoothMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
