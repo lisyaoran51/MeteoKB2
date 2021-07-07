@@ -105,7 +105,7 @@ int MeteoBluetoothDevice::passToDevice()
 			system_clock::time_point startTime = system_clock::now();
 			success = meteoBluetoothPhone->PushOutputMessage(dynamic_cast<BluetoothMessage*>(outputMessages[i]));
 			system_clock::time_point nowTime = system_clock::now();
-			LOG(LogLevel::Debug) << "MeteoBluetoothDevice::passToDevice() : time to convert a message: " << duration_cast<milliseconds>(nowTime - startTime);
+			LOG(LogLevel::Debug) << "MeteoBluetoothDevice::passToDevice() : time to convert a message: " << duration_cast<milliseconds>(nowTime - startTime).count();
 		}
 		catch (exception &e) {
 			LOG(LogLevel::Error) << "MeteoBluetoothDevice::passToDevice() : pushing output message exception : " << e.what();
