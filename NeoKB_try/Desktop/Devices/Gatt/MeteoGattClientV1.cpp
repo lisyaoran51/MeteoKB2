@@ -589,8 +589,8 @@ void MeteoGattClientV1::onTimeout()
 	//		LOG(LogLevel::Warning) << "failed to send notification:" << ret << " with " << bytes_available << " bytes pending";
 	//	}
 	//}
-
-	mainloop_modify_timeout(m_timeout_id, 10);
+	//
+	//mainloop_modify_timeout(m_timeout_id, 10);
 	
 }
 

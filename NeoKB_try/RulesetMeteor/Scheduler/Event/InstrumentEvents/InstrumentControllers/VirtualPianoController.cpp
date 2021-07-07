@@ -89,6 +89,14 @@ int VirtualPianoController::implementControlInstrument(EventProcessor<Event>* e)
 
 		if (outputManager != nullptr)
 			outputManager->PushMessage(meteoContextBluetoothMessage);
+		if (outputManager != nullptr)
+			outputManager->PushMessage(meteoContextBluetoothMessage);
+		if (outputManager != nullptr)
+			outputManager->PushMessage(meteoContextBluetoothMessage);
+		if (outputManager != nullptr)
+			outputManager->PushMessage(meteoContextBluetoothMessage);
+		if (outputManager != nullptr)
+			outputManager->PushMessage(meteoContextBluetoothMessage);
 
 	}
 	else if (soundEvent->GetPianoSoundEventType() == PianoSoundEventType::Pedal) {
