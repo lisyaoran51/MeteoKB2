@@ -15,6 +15,9 @@
 #include <mutex>
 
 
+#define DEBUG_VARIANT
+
+
 // these are pulled directly from the BlueZ source tree
 extern "C"
 {
@@ -243,6 +246,15 @@ int MeteoGattClientV1::SendNotification(char * bufferOut, int size)
 	bool send_success = true;
 
 	int sendCount = 0;
+
+#ifdef DEBUG_VARIANT
+
+	if ((int)bufferOut[0] == 0x10 && (int)bufferOut[1] == 0x08 && (int)bufferOut[2] == 0x11 && (int)bufferOut[3] == 0x02) {
+		LOG(LogLevel::Debug) << "MeteoGattClientV1::SendNotification() : pass game event.";
+		return -1;
+	}
+
+#endif
 
 
 	std::unique_lock<std::mutex> uLock(notifyLock);
