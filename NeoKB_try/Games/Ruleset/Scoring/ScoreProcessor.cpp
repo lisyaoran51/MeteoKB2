@@ -7,6 +7,9 @@
 #include "../../../Framework/Output/OutputManager.h"
 
 
+#define DEBUG_VARIANT
+
+
 using namespace Games::Rulesets::Scoring;
 using namespace Games::Rulesets;
 using namespace Util;
@@ -161,6 +164,10 @@ int ScoreProcessor::addUpJudgementScore(Judgement * judgement)
 	if (rollingMaxBaseScore != 0)
 		accuracy->SetValue(baseScore / rollingMaxBaseScore);
 
+
+#ifdef DEBUG_VARIANT
+	return 0;
+#endif
 
 	MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::HardwareGameEvent);
 

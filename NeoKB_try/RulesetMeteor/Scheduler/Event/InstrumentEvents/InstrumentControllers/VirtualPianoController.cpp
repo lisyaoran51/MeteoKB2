@@ -5,6 +5,7 @@
 #include <iomanip>
 #include <sstream>
 
+#define DEBUG_VARIANT
 
 // debug¥Î
 #include <chrono>
@@ -71,6 +72,10 @@ int VirtualPianoController::implementControlInstrument(EventProcessor<Event>* e)
 			stream << fixed << setprecision(2) << soundEvent->GetSound().second;
 			gameEventContext += stream.str();
 		}
+
+#ifdef DEBUG_VARIANT
+		return 0;
+#endif
 
 		MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::HardwareGameEvent);
 
