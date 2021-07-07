@@ -250,7 +250,7 @@ int MeteoGattClientV1::SendNotification(char * bufferOut, int size)
 #ifdef DEBUG_VARIANT
 
 	if ((int)bufferOut[0] == 0x10 && (int)bufferOut[1] == 0x08 && (int)bufferOut[2] == 0x11 && (int)bufferOut[3] == 0x02) {
-		LOG(LogLevel::Debug) << "MeteoGattClientV1::SendNotification() : pass game event.";
+		LOG(LogLevel::Depricated) << "MeteoGattClientV1::SendNotification() : pass game event.";
 		return -1;
 	}
 
