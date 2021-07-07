@@ -5,7 +5,7 @@
 #include <iomanip>
 #include <sstream>
 
-//#define DEBUG_VARIANT
+#define DEBUG_VARIANT
 
 // debug¥Î
 #include <chrono>
@@ -82,22 +82,40 @@ int VirtualPianoController::implementControlInstrument(EventProcessor<Event>* e)
 
 		meteoContextBluetoothMessage->SetContextInJson(context);
 		meteoContextBluetoothMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
+		if (outputManager != nullptr)
+			outputManager->PushMessage(meteoContextBluetoothMessage);
 
 #ifdef DEBUG_VARIANT
-		return 0;
+
+		meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::HardwareGameEvent);
+
+		meteoContextBluetoothMessage->SetContextInJson(context);
+		meteoContextBluetoothMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
+		if (outputManager != nullptr)
+			outputManager->PushMessage(meteoContextBluetoothMessage);
+
+		meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::HardwareGameEvent);
+
+		meteoContextBluetoothMessage->SetContextInJson(context);
+		meteoContextBluetoothMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
+		if (outputManager != nullptr)
+			outputManager->PushMessage(meteoContextBluetoothMessage);
+
+		meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::HardwareGameEvent);
+
+		meteoContextBluetoothMessage->SetContextInJson(context);
+		meteoContextBluetoothMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
+		if (outputManager != nullptr)
+			outputManager->PushMessage(meteoContextBluetoothMessage);
+
+		meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::HardwareGameEvent);
+
+		meteoContextBluetoothMessage->SetContextInJson(context);
+		meteoContextBluetoothMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
+		if (outputManager != nullptr)
+			outputManager->PushMessage(meteoContextBluetoothMessage);
+
 #endif
-
-		if (outputManager != nullptr)
-			outputManager->PushMessage(meteoContextBluetoothMessage);
-		if (outputManager != nullptr)
-			outputManager->PushMessage(meteoContextBluetoothMessage);
-		if (outputManager != nullptr)
-			outputManager->PushMessage(meteoContextBluetoothMessage);
-		if (outputManager != nullptr)
-			outputManager->PushMessage(meteoContextBluetoothMessage);
-		if (outputManager != nullptr)
-			outputManager->PushMessage(meteoContextBluetoothMessage);
-
 	}
 	else if (soundEvent->GetPianoSoundEventType() == PianoSoundEventType::Pedal) {
 		LOG(LogLevel::Depricated) << "VirtualPianoController::implementControlInstrument() : pedal [" << soundEvent->GetStartTime() << "] " << (soundEvent->GetPedalDown() ? "down" : "up") << ".";
