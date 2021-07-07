@@ -5,7 +5,7 @@
 #include <iomanip>
 #include <sstream>
 
-#define DEBUG_VARIANT
+//#define DEBUG_VARIANT
 
 // debug¥Î
 #include <chrono>

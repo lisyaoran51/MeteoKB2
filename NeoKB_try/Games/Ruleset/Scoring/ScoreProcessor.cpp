@@ -7,7 +7,7 @@
 #include "../../../Framework/Output/OutputManager.h"
 
 
-//#define DEBUG_VARIANT
+#define DEBUG_VARIANT
 
 
 using namespace Games::Rulesets::Scoring;
