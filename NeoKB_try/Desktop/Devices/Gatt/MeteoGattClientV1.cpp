@@ -241,12 +241,6 @@ int MeteoGattClientV1::SendNotification(char * bufferOut, int size)
 
 	char* tempBufferOut = new char[size];
 
-	memcpy(tempBufferOut, bufferOut, size * sizeof(char));
-
-	bool send_success = true;
-
-	int sendCount = 0;
-
 #ifdef DEBUG_VARIANT
 
 	if ((int)bufferOut[0] == 0x10 && (int)bufferOut[1] == 0x08 && (int)bufferOut[2] == 0x11 && (int)bufferOut[3] == 0x02) {
@@ -255,6 +249,12 @@ int MeteoGattClientV1::SendNotification(char * bufferOut, int size)
 	}
 
 #endif
+
+	memcpy(tempBufferOut, bufferOut, size * sizeof(char));
+
+	bool send_success = true;
+
+	int sendCount = 0;
 
 
 	std::unique_lock<std::mutex> uLock(notifyLock);
@@ -553,13 +553,13 @@ void MeteoGattClientV1::onDataChannelIn(
 
 void MeteoGattClientV1::onTimeout()
 {
+	std::unique_lock<std::mutex> uLock(notifyLock);
 	
 	if (outputBytes.size() == 0) {
+		uLock.unlock();
 		mainloop_modify_timeout(m_timeout_id, 10);
 		return;
 	}
-
-	std::unique_lock<std::mutex> uLock(notifyLock);
 
 	std::pair<char*, int> bytesOut = outputBytes[0];
 	outputBytes.erase(outputBytes.begin());
