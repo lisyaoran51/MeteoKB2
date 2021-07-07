@@ -583,13 +583,6 @@ int MeteoPacketConverterV2::ConvertToByteArray(BluetoothMessage * bluetoothMessa
 			return -1;
 		}
 
-#ifdef DEBUG_VARIANT
-		if (contextBluetoothMessage->GetCommand() == MeteoCommand::HardwareGameEvent) {
-			return -1;
-			LOG(LogLevel::Debug) << "MeteoPacketConverterV2::ConvertToByteArray() : context [" << context << "].";
-		}
-#endif
-
 		memset(buffer, 0, bufferMaxSize);
 
 		unsigned int command;
@@ -618,6 +611,15 @@ int MeteoPacketConverterV2::ConvertToByteArray(BluetoothMessage * bluetoothMessa
 		memcpy(buffer + sizeof(command) + sizeof(unsigned short) * 4, contextInCharArray, sizeof(contextInCharArray) * context.length());
 		
 		tempPacketId++;
+
+
+
+#ifdef DEBUG_VARIANT
+		if (contextBluetoothMessage->GetCommand() == MeteoCommand::HardwareGameEvent) {
+			return -1;
+			LOG(LogLevel::Debug) << "MeteoPacketConverterV2::ConvertToByteArray() : context [" << context << "].";
+		}
+#endif
 
 #ifdef DEBUG_VARIANT
 		if (contextBluetoothMessage->GetCommand() == MeteoCommand::HardwareGameEvent) {
