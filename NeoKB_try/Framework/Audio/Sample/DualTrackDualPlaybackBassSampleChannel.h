@@ -16,6 +16,8 @@ namespace Samples {
 
 		DualTrackDualPlaybackBassSampleChannel(Sample* s);
 
+		virtual int Update();
+
 		virtual int Play();
 
 		int SetTimbreRange(float start, float end);

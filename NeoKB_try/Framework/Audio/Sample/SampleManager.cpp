@@ -128,42 +128,23 @@ SampleChannel * SampleManager::GetSampleChannel(SoundBinding * soundBinding)
 	return sampleChannel;
 }
 
-SampleChannel * SampleManager::GetMultiPlaybackSampleChannel(string name)
+SampleChannel * SampleManager::GetSampleChannel(SoundBinding * soundBinding, int variant)
 {
-	Sample* sample = nullptr;
 	SampleChannel* sampleChannel = nullptr;
 
 
-	map<string, SampleChannel*>::iterator it = sampleChannelCache.find(name);
+	map<string, SampleChannel*>::iterator it = sampleChannelCache.find(soundBinding->GetFileName());
 	if (it == sampleChannelCache.end()) {
 
-		string path = resourceStore->GetFilePath(name);
-		if (path != "") {
-			sample = new BassSample((char*)path.c_str());
-			//sampleChannel = sampleChannelCache[name] = new MultiPlaybackBassSampleChannel(sample, playbackAmount, 2, OverrideType::MinimunVolume);
-			sampleChannel = sampleChannelCache[name] = new MultiPlaybackBassSampleChannel(sample, 1, 2, OverrideType::MinimunVolume);
-			AddItem(sampleChannel);
-		}
-		else {
-			throw runtime_error("SampleManager::GetMultiPlaybackSampleChannel(): file not found : "s + name);
-		}
-
-
-		LOG(LogLevel::Fine) << "SampleManager::GetMultiPlaybackSampleChannel() : file path found [" << path << "] for file name [" << name << "].";
+		sampleChannel = sampleChannelCache[soundBinding->GetFileName()] = sampleChannelGenerator->GenerateSampleChannel(soundBinding, variant);
+		AddItem(sampleChannel);
 
 	}
 	else {
-		sampleChannel = sampleChannelCache[name];
+		sampleChannel = sampleChannelCache[soundBinding->GetFileName()];
 	}
 
-
 	return sampleChannel;
-}
-
-int SampleManager::SetPlaybackAmount(int pAmount)
-{
-	playbackAmount = pAmount;
-	return 0;
 }
 
 int SampleManager::RemoveSampleChannel(string name)

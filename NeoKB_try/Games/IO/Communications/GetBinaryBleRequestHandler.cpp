@@ -160,7 +160,7 @@ int GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait
 
 		uLock.unlock();
 
-		this_thread::sleep_for(std::chrono::milliseconds(10));
+		this_thread::sleep_for(std::chrono::milliseconds(1));
 
 	}
 

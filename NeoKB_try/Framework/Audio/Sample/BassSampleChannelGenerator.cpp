@@ -167,6 +167,58 @@ SampleChannel * BassSampleChannelGenerator::GenerateSampleChannel(SoundBinding *
 	return sampleChannel;
 }
 
+SampleChannel * BassSampleChannelGenerator::GenerateSampleChannel(SoundBinding * soundBinding, int variant)
+{
+	SampleChannel* sampleChannel = nullptr;
+
+	/* 從頭播到尾的音色 */
+	if (dynamic_cast<SimpleSoundBinding<Pitch>*>(soundBinding)) {
+		LOG(LogLevel::Fine) << "SampleManager::GetSampleChannel() : resource store [" << resourceStore << "].";
+
+		string path = resourceStore->GetFilePath(soundBinding->GetSoundBankName() + "/"s + soundBinding->GetFileName());
+
+		LOG(LogLevel::Fine) << "SampleManager::GetSampleChannel() : get path [" << path << "].";
+
+		if (path != "") {
+
+			Sample* sample = nullptr;
+
+			if (sampleCache.find(path) != sampleCache.end()) {
+				sample = sampleCache[path];
+			}
+			else {
+				sample = new BassSample((char*)path.c_str());
+				sampleCache[path] = sample;
+			}
+
+			if (dynamic_cast<RealtimeReverbGradientTimbreSimpleSoundBinding<Pitch>*>(soundBinding) && variant == 0) {
+
+				sampleChannel = new RealtimeReverbDualTrackDualPlaybackBassSampleChannel(sample);
+
+			}
+			else {
+				sampleChannel = new DualTrackDualPlaybackBassSampleChannel(sample);
+			}
+
+			if (dynamic_cast<GradientTimbreSimpleSoundBinding<Pitch>*>(soundBinding)) {
+				dynamic_cast<DualTrackDualPlaybackBassSampleChannel*>(sampleChannel)->SetTimbreRange(
+					dynamic_cast<GradientTimbreSimpleSoundBinding<Pitch>*>(soundBinding)->gradientTimbreStartVolume,
+					dynamic_cast<GradientTimbreSimpleSoundBinding<Pitch>*>(soundBinding)->gradientTimbreEndVolume
+				);
+			}
+
+			LOG(LogLevel::Fine) << "SampleManager::GetSampleChannel() : simple sample file path found [" << soundBinding->GetFileName() << "].";
+
+		}
+		else {
+			throw runtime_error("SampleManager::GetSampleChannel(): simple sample file not found : "s + soundBinding->GetFileName());
+		}
+	}
+
+	return sampleChannel;
+
+}
+
 int BassSampleChannelGenerator::MoveSampleToDeleteCache(Sample * s)
 {
 	map<string, Sample*>::iterator it;

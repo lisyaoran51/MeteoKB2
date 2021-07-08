@@ -29,6 +29,11 @@ namespace Samples {
 
 		virtual SampleChannel* GenerateSampleChannel(SoundBinding* soundBinding) = 0;
 
+		/// <summary>
+		/// 用同一個sound binding，科以生成不同的sample channel
+		///	</summary>
+		virtual SampleChannel* GenerateSampleChannel(SoundBinding* soundBinding, int variant) = 0;
+
 	protected:
 
 		CompositeResourceStore<char*>* resourceStore = nullptr;

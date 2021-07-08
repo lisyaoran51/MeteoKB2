@@ -24,6 +24,10 @@ namespace Samples {
 
 	protected:
 
+		/// <summary>
+		/// 是否被彈下，且reverb還未結束
+		/// </summary>
+		bool isReverbing = false;
 
 		/// <summary>
 		/// 用多個重疊的Channel來製造出效果

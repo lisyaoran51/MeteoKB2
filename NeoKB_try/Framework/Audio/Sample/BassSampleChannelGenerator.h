@@ -24,6 +24,8 @@ namespace Samples {
 
 		virtual SampleChannel* GenerateSampleChannel(SoundBinding* soundBinding);
 
+		virtual SampleChannel* GenerateSampleChannel(SoundBinding* soundBinding, int variant);
+
 		/// <summary>
 		/// 因為sample manager有兩個，兩個會重複的new同一個sample，所有要用sample cache來避免重複的new。
 		/// 另外在刪sample時，也要避免把同一個Sample刪兩次，所以要先丟到delete cache去，然後等程式執行完後再一次delete sample。

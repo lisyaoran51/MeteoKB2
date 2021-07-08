@@ -59,14 +59,9 @@ namespace Samples {
 		SampleChannel* GetSampleChannel(SoundBinding* soundBinding);
 
 		/// <summary>
-		/// 部會再用了，可以刪掉
+		/// 可以將同一個sound binding，生成不同的sample channel
 		/// </summary>
-		SampleChannel* GetMultiPlaybackSampleChannel(string name);
-
-		/// <summary>
-		/// 部會再用了，可以刪掉
-		/// </summary>
-		int SetPlaybackAmount(int pAmount);
+		SampleChannel* GetSampleChannel(SoundBinding* soundBinding, int variant);
 
 		int RemoveSampleChannel(string name);
 

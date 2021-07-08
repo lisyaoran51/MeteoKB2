@@ -45,24 +45,10 @@ RealtimeReverbDualTrackDualPlaybackBassSampleChannel::~RealtimeReverbDualTrackDu
 
 int RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Update()
 {
-	
-	/* 把已經Fadeout的音關掉 */
-	if (isPlaying) {
-		for (int i = 0; i < 2; i++) {
-			if (BASS_ChannelIsActive(channelID[i]) == BASS_ACTIVE_PLAYING) {
-				float tempVolume = 0;
-				BASS_ChannelGetAttribute(channelID[i], BASS_ATTRIB_VOL, &tempVolume);
-				if (tempVolume == 0) {
-
-					LOG(LogLevel::Depricated) << "RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Update() : turn off channel [" << channelID[i] << "].";
-					BASS_ChannelPause(channelID[i]);
-				}
-			}
-		}
-	}
-
 	/* 把已經Fadeout的reverb關掉 */
-	//if (BASS_ChannelIsActive(reverbChannelID[0]) == BASS_ACTIVE_PLAYING)
+	if (!isReverbing)
+		return DualTrackDualPlaybackBassSampleChannel::Update();
+	
 	if (BASS_ChannelIsActive(reverbChannelID[1]) == BASS_ACTIVE_PLAYING) {
 
 		float tempReverbVolume = 0;
@@ -80,15 +66,17 @@ int RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Update()
 		}
 	}
 
-	return SampleChannel::Update();
+	return DualTrackDualPlaybackBassSampleChannel::Update();
 
 PAUSE_REVERB:
 
 	LOG(LogLevel::Depricated) << "RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Update() : turn off reverb channel [" << channelID[tempPlayingPlayback] << "].";
+	isReverbing = false;
+
 	for (int i = 0; i < 5; i++)
 		BASS_ChannelPause(reverbChannelID[i]);
 
-	return SampleChannel::Update();
+	return DualTrackDualPlaybackBassSampleChannel::Update();
 
 }
 
@@ -98,6 +86,8 @@ int RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Play()
 
 	unique_lock<mutex> uLock(pendingActionMutex);
 	pendingActions.Add(this, [=]() {
+		isReverbing = true;
+
 		int newPlayback = 0;
 
 		float lastPlayVolume = lastChannelVolume;
@@ -196,12 +186,8 @@ int RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Play()
 
 
 		return 0;
-	}, "Lambda_DualTrackDualPlaybackBassSampleChannel::Play");
+	}, "Lambda_RealtimeReverbDualTrackDualPlaybackBassSampleChannel::Play");
 	uLock.unlock();
-
-	
-	
-
 
 	return 0;
 }
