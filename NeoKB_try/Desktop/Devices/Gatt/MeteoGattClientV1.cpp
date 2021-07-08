@@ -15,7 +15,7 @@
 #include <mutex>
 
 
-#define DEBUG_VARIANT
+//#define DEBUG_VARIANT
 
 
 // these are pulled directly from the BlueZ source tree
