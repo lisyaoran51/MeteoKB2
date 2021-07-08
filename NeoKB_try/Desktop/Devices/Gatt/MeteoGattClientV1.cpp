@@ -239,8 +239,6 @@ int MeteoGattClientV1::SendNotification(char * bufferOut, int size)
 		return -1;
 	}
 
-	char* tempBufferOut = new char[size];
-
 #ifdef DEBUG_VARIANT
 
 	if ((int)bufferOut[0] == 0x10 && (int)bufferOut[1] == 0x08 && (int)bufferOut[2] == 0x11 && (int)bufferOut[3] == 0x02) {
@@ -249,6 +247,8 @@ int MeteoGattClientV1::SendNotification(char * bufferOut, int size)
 	}
 
 #endif
+
+	char* tempBufferOut = new char[size];
 
 	memcpy(tempBufferOut, bufferOut, size * sizeof(char));
 
