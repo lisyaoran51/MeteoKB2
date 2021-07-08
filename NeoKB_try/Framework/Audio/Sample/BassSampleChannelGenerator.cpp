@@ -216,6 +216,36 @@ SampleChannel * BassSampleChannelGenerator::GenerateSampleChannel(SoundBinding *
 			throw runtime_error("SampleManager::GetSampleChannel(): simple sample file not found : "s + soundBinding->GetFileName());
 		}
 	}
+	else if (dynamic_cast<TSoundBinding<Pitch>*>(soundBinding)) {
+
+		LOG(LogLevel::Fine) << "SampleManager::GetSampleChannel() : create TSoundBinding [" << soundBinding->GetFileName() << "].";
+
+		string path = resourceStore->GetFilePath(soundBinding->GetFileName());
+
+		LOG(LogLevel::Fine) << "SampleManager::GetSampleChannel() : get path [" << path << "].";
+
+		if (path != "") {
+
+			Sample* sample = nullptr;
+
+			if (sampleCache.find(path) != sampleCache.end()) {
+				sample = sampleCache[path];
+			}
+			else {
+				sample = new BassSample((char*)path.c_str());
+				sampleCache[path] = sample;
+			}
+
+			sampleChannel = new DualTrackDualPlaybackBassSampleChannel(sample);
+
+			LOG(LogLevel::Fine) << "SampleManager::GetSampleChannel() : no-type sample file path found [" << soundBinding->GetFileName() << "].";
+
+		}
+		else {
+			throw runtime_error("SampleManager::GetSampleChannel(): no-type sample file not found : "s + soundBinding->GetFileName());
+		}
+
+	}
 
 	LOG(LogLevel::Error) << "SampleManager::GetSampleChannel() : fail to generate [" << soundBinding->GetFileName() << "].";
 
