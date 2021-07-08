@@ -437,8 +437,8 @@ void MeteoGattServerV1::MeteoGattListenerV1::cmdLeadv(int hdev)
 	}
 
 	memset(&adv_params_cp, 0, sizeof(adv_params_cp));
-	adv_params_cp.min_interval = htobs(0x0800);
-	adv_params_cp.max_interval = htobs(0x0800);
+	adv_params_cp.min_interval = htobs(0x0001);
+	adv_params_cp.max_interval = htobs(0x0001);
 	adv_params_cp.chan_map = 7;
 
 	memset(&rq, 0, sizeof(rq));
@@ -505,7 +505,7 @@ void MeteoGattServerV1::MeteoGattListenerV1::cmdName(int hdev, char const * devi
 		LOG(LogLevel::Error) << "Can't open device hci" << hdev << ": " << strerror(errno) << " (" << errno << ")";
 	}
 
-	if (hci_write_local_name(dd, deviceName, 2000) < 0)
+	if (hci_write_local_name(dd, deviceName, strlen(deviceName)) < 0)
 	{
 		LOG(LogLevel::Error) << "Can't change local name hci" << hdev << ": " << strerror(errno) << " (" << errno << ")";
 	}
