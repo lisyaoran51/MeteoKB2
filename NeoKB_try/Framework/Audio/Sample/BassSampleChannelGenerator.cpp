@@ -207,6 +207,8 @@ SampleChannel * BassSampleChannelGenerator::GenerateSampleChannel(SoundBinding *
 				);
 			}
 
+			return sampleChannel;
+
 			LOG(LogLevel::Fine) << "SampleManager::GetSampleChannel() : simple sample file path found [" << soundBinding->GetFileName() << "].";
 
 		}
@@ -215,7 +217,9 @@ SampleChannel * BassSampleChannelGenerator::GenerateSampleChannel(SoundBinding *
 		}
 	}
 
-	return sampleChannel;
+	LOG(LogLevel::Error) << "SampleManager::GetSampleChannel() : fail to generate [" << soundBinding->GetFileName() << "].";
+
+	return nullptr;
 
 }
 
