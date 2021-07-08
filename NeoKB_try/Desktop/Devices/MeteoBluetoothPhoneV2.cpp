@@ -10,7 +10,7 @@
 #include "../../Framework/Threading/ThreadMaster.h"
 
 
-#define DEBUG_VARIANT
+//#define DEBUG_VARIANT
 
 
 

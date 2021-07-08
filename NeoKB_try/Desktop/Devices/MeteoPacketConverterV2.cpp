@@ -616,8 +616,8 @@ int MeteoPacketConverterV2::ConvertToByteArray(BluetoothMessage * bluetoothMessa
 
 #ifdef DEBUG_VARIANT
 		if (contextBluetoothMessage->GetCommand() == MeteoCommand::HardwareGameEvent) {
-			return -1;
 			LOG(LogLevel::Debug) << "MeteoPacketConverterV2::ConvertToByteArray() : context [" << context << "].";
+			return -1;
 		}
 #endif
 

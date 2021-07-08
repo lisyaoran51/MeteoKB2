@@ -66,7 +66,7 @@ int FileSegmentMap::WriteFile(fstream * fStream)
 {
 	for (int i = 0; i < segmentAmount; i++) {
 
-		LOG(LogLevel::Debug) << "FileSegmentMap::WriteFile() : write file [" << string(fileSegmentMap[i].first) << "] with size [" << fileSegmentMap[i].second << "] to file.";
+		LOG(LogLevel::Depricated) << "FileSegmentMap::WriteFile() : write file [" << string(fileSegmentMap[i].first) << "] with size [" << fileSegmentMap[i].second << "] to file.";
 		fStream->write(fileSegmentMap[i].first, fileSegmentMap[i].second * sizeof(char));
 	}
 
@@ -90,7 +90,7 @@ int FileSegmentMap::ReadFile(fstream * fStream)
 	segmentAmount = fileSize / maxSegmentSize + (fileSize % maxSegmentSize > 0 ? 1 : 0);
 	//segmentAmount = fileSize / segmentSize + (fileSize % segmentSize > 0 ? 1 : 0);
 
-	LOG(LogLevel::Debug) << "FileSegmentMap::ReadFile() : file [" << fileName << "] with segment [" << segmentAmount << "] segments " << fileSize << maxSegmentSize;
+	LOG(LogLevel::Depricated) << "FileSegmentMap::ReadFile() : file [" << fileName << "] with segment [" << segmentAmount << "] segments " << fileSize << maxSegmentSize;
 
 	/* ¶}©lÅªÄÒ */
 	fStream->seekg(0, ios::beg);
@@ -108,7 +108,7 @@ int FileSegmentMap::ReadFile(fstream * fStream)
 		fStream->read(buffer, bufferSize);
 		fileSegmentMap[i] = pair<char*, int>(buffer, bufferSize);
 
-		LOG(LogLevel::Debug) << "FileSegmentMap::ReadFile() : file [" << fileName << "] segment [" << i << "] with size [" << bufferSize << "].";
+		LOG(LogLevel::Depricated) << "FileSegmentMap::ReadFile() : file [" << fileName << "] segment [" << i << "] with size [" << bufferSize << "].";
 
 
 	}

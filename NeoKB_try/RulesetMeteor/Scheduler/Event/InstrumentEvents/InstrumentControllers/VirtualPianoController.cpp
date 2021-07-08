@@ -78,7 +78,7 @@ int VirtualPianoController::implementControlInstrument(EventProcessor<Event>* e)
 		json context;
 		context["Events"].push_back(gameEventContext);
 
-		LOG(LogLevel::Debug) << "VirtualPianoController::implementControlInstrument() : game evnet context dump : " << context.dump();
+		LOG(LogLevel::Depricated) << "VirtualPianoController::implementControlInstrument() : game evnet context dump : " << context.dump();
 
 		meteoContextBluetoothMessage->SetContextInJson(context);
 		meteoContextBluetoothMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);

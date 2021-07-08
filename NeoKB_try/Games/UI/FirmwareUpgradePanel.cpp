@@ -230,6 +230,9 @@ int FirmwareUpgradePanel::handleOnRequestSplitSuccess(FileSegmentMap* fSegmentMa
 			LOG(LogLevel::Debug) << "FirmwareUpgradePanel::handleOnRequestSplitSuccess() : all splits ready. start combination.";
 
 			vector<string> splitPaths;
+			for (int i = 0; i < maxNewFirmwareSplitCount; i++) {
+				splitPaths.push_back(storage->GetBasePath() + string("/") + firmwareDirectory + string("/Splits/") + newFirmwareName + string(".") + to_string(i));
+			}
 
 			if (FileSplitCombiner::Combine(storage->GetBasePath() + string("/") + firmwareDirectory + string("/Files/") + newFirmwareName, splitPaths) >= 0) {
 

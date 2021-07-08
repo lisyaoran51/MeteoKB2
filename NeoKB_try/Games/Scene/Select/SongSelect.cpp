@@ -86,6 +86,15 @@ int SongSelect::load(SmManager * sManager, MeteoGame * game, Storage* s)
 
 		LOG(LogLevel::Debug) << "SongSelect::Lambda_HandleDownloadSheetmusicSuccess() : download [" << fSegmentMap->fileName << "] success.";
 
+
+		/*
+		 * 重要
+		 */
+		ThreadMaster::GetInstance().SwitchGameStatus((int)GameStatus::Perform);
+		/*
+		 * 重要
+		 */
+
 		if (false) {
 
 			fstream* stream = storage->GetStream(string("temp/") + fSegmentMap->fileName + string(".temp"), FileAccess::Write, FileMode::Create);
