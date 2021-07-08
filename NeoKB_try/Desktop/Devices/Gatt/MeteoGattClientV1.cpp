@@ -15,7 +15,7 @@
 #include <mutex>
 
 
-#define DEBUG_VARIANT
+//#define DEBUG_VARIANT
 
 
 // these are pulled directly from the BlueZ source tree
@@ -576,6 +576,9 @@ void MeteoGattClientV1::onTimeout()
 	{
 		LOG(LogLevel::Warning) << "failed to send notification:" << ret << " with " << bytesOut.second << " bytes lost.";
 	}
+
+	delete[] bytesOut.first;
+	bytesOut.first = nullptr;
 
 	mainloop_modify_timeout(m_timeout_id, 10);
 
