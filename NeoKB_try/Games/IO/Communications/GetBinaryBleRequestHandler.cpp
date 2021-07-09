@@ -324,6 +324,7 @@ int GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait
 	transferTempFileSegmentElapsedSeconds = thisGetBinaryBleRequestHandler->getSectionElapsedSeconds();
 
 	while (1) {
+		LOG(LogLevel::Debug) << "GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait() : 3";
 
 		if (thisGetBinaryBleRequestHandler->getSectionElapsedSeconds() > thisGetBinaryBleRequestHandler->timeout) {
 			throw BleRequestException(BleResponseCode::RequestTimeout);
