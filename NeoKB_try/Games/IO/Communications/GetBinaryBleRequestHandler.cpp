@@ -374,12 +374,14 @@ int GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait
 		/* 這段寫得很長，功能是檢查有沒有全都收到，有的話就離開，沒有就重傳，重傳完要再檢查一次有沒有收到 */
 		unique_lock<mutex> uLock(thisGetBinaryBleRequestHandler->rawMessageMutex);
 		while (thisGetBinaryBleRequestHandler->inputRawMessages.size() > 0) {
+			LOG(LogLevel::Debug) << "GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait() : 1";
 
 			MeteoBluetoothMessage* message = thisGetBinaryBleRequestHandler->inputRawMessages.back();
 
 			if (dynamic_cast<MeteoContextBluetoothMessage*>(message)) {
 			if (dynamic_cast<MeteoContextBluetoothMessage*>(message)->GetCommand() == ackFinishCommand) {
 
+				LOG(LogLevel::Debug) << "GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait() : 2";
 				/* 檢查Scene是否還存在，存在才能執行 */
 				if (dynamic_cast<MeteoContextBluetoothMessage*>(message)->GetContextInJson()["Status"].get<int>() == 0) {
 					LOG(LogLevel::Debug) << "GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait() : transfer success.";
@@ -390,6 +392,7 @@ int GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait
 
 			}
 			else if (dynamic_cast<MeteoContextBluetoothMessage*>(message)->GetCommand() == requestRetransferCommand) {
+				LOG(LogLevel::Debug) << "GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait() : 3";
 			if (dynamic_cast<MeteoContextBluetoothMessage*>(message)->GetContextInJson()["FileName"].get<string>() == fileSegmentMap.fileName) {
 				int retransferOrder = dynamic_cast<MeteoContextBluetoothMessage*>(message)->GetContextInJson()["Order"].get<int>();
 
@@ -403,12 +406,14 @@ int GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait
 			}
 			}
 			}
+			LOG(LogLevel::Debug) << "GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait() : 4";
 
 			/* 街道ack以後再繼續重傳 */
 			if (dynamic_cast<MeteoAckFileSegmentBluetoothMessage*>(message)) {
 			if (dynamic_cast<MeteoAckFileSegmentBluetoothMessage*>(message)->GetCommand() == ackTransferCommand) {
 			if (dynamic_cast<MeteoAckFileSegmentBluetoothMessage*>(message)->GetFileName() == fileSegmentMap.fileName) {
 
+				LOG(LogLevel::Debug) << "GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait() : 5";
 				int ackIndex = -1;
 				for (int i = 0; i < retransferOrders.size(); i++) {
 					if (retransferOrders[i] == dynamic_cast<MeteoAckFileSegmentBluetoothMessage*>(message)->GetOrder()) {
@@ -437,6 +442,7 @@ int GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait
 			}
 			}
 			}
+			LOG(LogLevel::Debug) << "GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait() : 6";
 
 			thisGetBinaryBleRequestHandler->inputRawMessages.pop_back();
 			delete message;
