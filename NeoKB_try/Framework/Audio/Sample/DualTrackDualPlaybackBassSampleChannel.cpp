@@ -30,7 +30,7 @@ int DualTrackDualPlaybackBassSampleChannel::Update()
 			}
 		}
 	}
-	return 0;
+	return SampleChannel::Update();
 }
 
 int DualTrackDualPlaybackBassSampleChannel::Play()
