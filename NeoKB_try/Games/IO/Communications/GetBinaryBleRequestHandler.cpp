@@ -373,6 +373,8 @@ int GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait
 		/* 這段寫得很長，功能是檢查有沒有全都收到，有的話就離開，沒有就重傳，重傳完要再檢查一次有沒有收到 */
 		unique_lock<mutex> uLock(thisGetBinaryBleRequestHandler->rawMessageMutex);
 		while (thisGetBinaryBleRequestHandler->inputRawMessages.size() > 0) {
+
+			LOG(LogLevel::Debug) << "GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait() : a.";
 			MeteoBluetoothMessage* message = thisGetBinaryBleRequestHandler->inputRawMessages.back();
 
 			if (dynamic_cast<MeteoContextBluetoothMessage*>(message)) {
@@ -401,6 +403,7 @@ int GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait
 			}
 			}
 			}
+			LOG(LogLevel::Debug) << "GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait() : b.";
 
 			/* 街道ack以後再繼續重傳 */
 			if (dynamic_cast<MeteoAckFileSegmentBluetoothMessage*>(message)) {
@@ -434,6 +437,7 @@ int GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait
 				}
 			}
 			}
+			LOG(LogLevel::Debug) << "GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait() : c.";
 
 			thisGetBinaryBleRequestHandler->inputRawMessages.pop_back();
 			delete message;
