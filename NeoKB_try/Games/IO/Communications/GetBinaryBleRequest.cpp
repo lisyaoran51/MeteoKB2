@@ -333,7 +333,7 @@ GetBinaryBleRequest::GetBinaryBleRequest(string fPath, MeteoBluetoothMessage * g
 
 
 	// 測試用
-	//timeout = 20;
+	timeout = 10;	// 有的android會中間停掉5秒以上
 }
 
 int GetBinaryBleRequest::AddOnSuccess(MtoObject * callableObject, function<int(FileSegmentMap*)> callback, string name)

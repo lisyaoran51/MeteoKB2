@@ -39,7 +39,7 @@ GetBinaryBleRequestHandler::GetBinaryBleRequestHandler(string dPath, string fNam
 
 	requestMethod = method;
 
-
+	sendFileSegmentTimeout = 1;
 }
 
 int GetBinaryBleRequestHandler::AddOnSuccess(MtoObject * callableObject, function<int(string)> callback, string name)
