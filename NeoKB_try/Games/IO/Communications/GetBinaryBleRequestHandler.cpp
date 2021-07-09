@@ -39,7 +39,6 @@ GetBinaryBleRequestHandler::GetBinaryBleRequestHandler(string dPath, string fNam
 
 	requestMethod = method;
 
-	sendFileSegmentTimeout = 1;
 }
 
 int GetBinaryBleRequestHandler::AddOnSuccess(MtoObject * callableObject, function<int(string)> callback, string name)
@@ -90,6 +89,7 @@ GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::GetBinaryBleReques
 	requestRetransferCommand = rRetransferCommand; 
 	ackFinishCommand = aFinishCommand;
 
+	sendFileSegmentTimeout = 1;
 }
 
 int GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait(BleRequest * thisRequest)
