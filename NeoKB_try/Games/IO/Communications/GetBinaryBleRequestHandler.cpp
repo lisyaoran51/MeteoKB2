@@ -302,6 +302,7 @@ int GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait
 
 	// #-- 3 確認
 
+	LOG(LogLevel::Debug) << "GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait() : 3. send finish message.";
 	MeteoContextBluetoothMessage* checkFinishMessage = new MeteoContextBluetoothMessage(finishCommand);
 	json messageContext;
 	messageContext["FileName"] = fileSegmentMap.fileName;
@@ -331,6 +332,8 @@ int GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait
 		if (thisGetBinaryBleRequestHandler->exitRequested) {
 			throw BleRequestException(BleResponseCode::ExitRequested);
 		}
+
+		LOG(LogLevel::Debug) << "GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait() : 3. retransfer check.";
 
 		// 如果太久沒收到ack，就直接丟下一個file segment
 		if (tempSendRetransferOrderIndex >= 0 &&
@@ -363,6 +366,9 @@ int GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait
 			}
 
 		}
+
+
+		LOG(LogLevel::Debug) << "GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait() : 3. check if ack finish.";
 
 		/* 這段寫得很長，功能是檢查有沒有全都收到，有的話就離開，沒有就重傳，重傳完要再檢查一次有沒有收到 */
 		unique_lock<mutex> uLock(thisGetBinaryBleRequestHandler->rawMessageMutex);
@@ -439,6 +445,7 @@ int GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait
 	}
 
 	// 結束
+	LOG(LogLevel::Debug) << "GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait() : handler over.";
 
 	return 0;
 
