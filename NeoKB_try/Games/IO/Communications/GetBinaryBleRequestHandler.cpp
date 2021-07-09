@@ -306,6 +306,7 @@ int GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait
 	json messageContext;
 	messageContext["FileName"] = fileSegmentMap.fileName;
 	checkFinishMessage->SetContextInJson(messageContext);
+	checkFinishMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
 	bleAccess->GetBluetoothPhone()->PushOutputMessage(checkFinishMessage);
 
 	// 等待對方整理所有需要重傳的file segment
@@ -340,6 +341,13 @@ int GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait
 			// 已丟完所有file segment，就直接跳出往下一個步驟
 			if (tempSendRetransferOrderIndex == retransferOrders.size() - 1) {
 				LOG(LogLevel::Debug) << "GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait() : retransfer over.";
+
+				checkFinishMessage = new MeteoContextBluetoothMessage(finishCommand);
+				json messageContext;
+				messageContext["FileName"] = fileSegmentMap.fileName;
+				checkFinishMessage->SetContextInJson(messageContext);
+				checkFinishMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
+
 				bleAccess->GetBluetoothPhone()->PushOutputMessage(checkFinishMessage);
 
 				// 等待對方整理所有需要重傳的file segment
