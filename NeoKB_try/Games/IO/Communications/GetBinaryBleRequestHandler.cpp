@@ -274,6 +274,8 @@ int GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait
 
 					if (tempSendFileSegmentNumber == fileSegmentMap.segmentAmount - 1) {
 						isAllSegmentSent = true;
+						thisGetBinaryBleRequestHandler->inputRawMessages.pop_back();
+						delete message;
 						break;
 					}
 
