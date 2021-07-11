@@ -54,12 +54,12 @@ int SheetmusicSelectPanel::load(FrameworkConfigManager * f, SmManager * s, Outpu
 
 	selectedModifiers.SetValue(new vector<Modifier*>());
 
-	//return 0;
+	return 0;
 
 	// 暫時先這樣 之後再改
 	string songTitle;
 	if (!f->Get(FrameworkSetting::SongTitle, &songTitle))
-		songTitle = "GirlTellMe";
+		songTitle = "Canon";
 
 	vector<SmInfo*>* sInfos = smManager->GetSmInfos();
 	LOG(LogLevel::Debug) << "int SheetmusicSelectPanel::load() : there's [" << sInfos->size() << "] songs in sm manager.";
@@ -157,6 +157,7 @@ int SheetmusicSelectPanel::onMessage(MeteoBluetoothMessage * message)
 	
 
 	if (contextMessage->GetCommand() == MeteoCommand::ClearGameConfiguration) {
+		LOG(LogLevel::Debug) << "SheetmusicSelectPanel::onMessage() : clear modifiers. ";
 		
 		for (int i = 0; i < selectedModifiers.GetValue()->size(); i++) {
 
@@ -179,12 +180,12 @@ int SheetmusicSelectPanel::onMessage(MeteoBluetoothMessage * message)
 
 	if (contextMessage->GetCommand() == MeteoCommand::WriteGameConfiguration) {
 		string modifierName;
-		int value1, value2;
+		float value1, value2;
 		for (int i = 0; i < context["Modifiers"].size(); i++) {
 			// TODO: 下面這行寫錯了，之後要再改
 			modifierName = context["Modifiers"].at(i)["Name"].get<string>();// == "AutoPedalModifier";
-			value1 = context["Modifiers"].at(i)["V1"].get<int>();
-			value2 = context["Modifiers"].at(i)["V2"].get<int>();
+			value1 = context["Modifiers"].at(i)["V1"].get<float>();
+			value2 = context["Modifiers"].at(i)["V2"].get<float>();
 
 			InstanceCreator<MtoObject> &iCreator = InstanceCreator<MtoObject>::GetInstance();
 			
