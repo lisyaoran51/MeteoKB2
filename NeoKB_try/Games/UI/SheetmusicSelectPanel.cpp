@@ -194,7 +194,7 @@ int SheetmusicSelectPanel::onMessage(MeteoBluetoothMessage * message)
 			Modifier* modifier = iCreator.CreateInstanceWithT<Modifier>(modifierName);
 			modifier->SetValue(value1, value2);
 
-			//AddModifier(modifier);
+			AddModifier(modifier);
 
 		}
 
