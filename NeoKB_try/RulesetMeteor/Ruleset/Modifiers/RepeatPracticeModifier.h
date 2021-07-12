@@ -26,7 +26,7 @@ namespace Modifiers{
 
 		int ApplyToTimeController(TimeController* timeController);
 
-		virtual int SetValue(int value1, int value2);
+		virtual int SetValue(float value1, float value2);
 
 	protected:
 

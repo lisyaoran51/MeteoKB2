@@ -34,10 +34,10 @@ int HandDifficultyModifier::ApplyToEventProcessorFilter(EventProcessorFilter * e
 	return 0;
 }
 
-int HandDifficultyModifier::SetValue(int value1, int value2)
+int HandDifficultyModifier::SetValue(float value1, float value2)
 {
-	handType = (SmDifficultyHandType)value1;
-	difficulty = (SmDifficultyDifficulty)value2;
+	handType = (SmDifficultyHandType)((int)value1);
+	difficulty = (SmDifficultyDifficulty)((int)value2);
 	return 0;
 }
 

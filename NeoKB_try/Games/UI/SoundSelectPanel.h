@@ -54,6 +54,8 @@ namespace UI {
 
 		OutputManager* outputManager = nullptr;
 
+		string tempSoundName = "U3";
+
 		virtual int firstLoadSound();
 
 		virtual int onMessage(MeteoBluetoothMessage* message);

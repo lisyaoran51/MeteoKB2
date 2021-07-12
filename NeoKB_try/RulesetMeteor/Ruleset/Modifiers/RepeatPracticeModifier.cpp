@@ -34,9 +34,9 @@ int RepeatPracticeModifier::ApplyToTimeController(TimeController * timeControlle
 	return 0;
 }
 
-int RepeatPracticeModifier::SetValue(int value1, int value2)
+int RepeatPracticeModifier::SetValue(float value1, float value2)
 {
-	maxSectionAmountForOneRepeat = value1;
-	maxRepeatCounts = value2;
+	maxSectionAmountForOneRepeat = (int)value1;
+	maxRepeatCounts = (int)value2;
 	return 0;
 }

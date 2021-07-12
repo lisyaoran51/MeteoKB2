@@ -27,7 +27,7 @@ namespace Modifiers{
 
 		virtual int ApplyToEventProcessorFilter(EventProcessorFilter* eventProcessorFilter);
 
-		virtual int SetValue(int value1, int value2);
+		virtual int SetValue(float value1, float value2);
 
 		SmDifficultyHandType GetHandType();
 

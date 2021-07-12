@@ -3330,3 +3330,64 @@ https://cpp.hotexamples.com/examples/-/-/gatt_db_service_add_characteristic/cpp-
 	isGameControllingPitchState 要確認一下，instrument和palyfield和eventprocessormaster通通都有
 	只有record可以再遊戲中改pitch state
 	
+7/5
+	firmware upgrae沒寫完，要寫file combiner(ok)
+	
+	遊戲會有lag，可能要把virtual piano的殘響關掉(不知道是不是因為換成pi3a)
+	
+	storage整理所有檔案路徑
+	
+	案多個件的時候，一按下reverb就會有其中一個被關掉(ok)
+	
+7/6	
+	game control pedal被關掉
+	
+7/7
+	拿掉遊戲進行中的game event，就部會當機了
+	要找一下是哪個event導致當機
+	
+	不把game play sound丟掉SendNotification就部會當機
+
+	問題應該是出在 char* tempBufferOut = new char[size]; 這行，memory可能增加太快
+	
+7/12
+	更改config.txt
+	
+	# Disable the rainbow splash screen
+	disable_splash=1
+
+	# Disable bluetooth
+	#dtoverlay=pi3-disable-bt
+
+	#Disable Wifi
+	dtoverlay=pi3-disable-wifi
+	 
+	# Overclock the SD Card from 50 to 100MHz
+	# This can only be done with at least a UHS Class 1 card
+	dtoverlay=sdtweak,overclock_50=100
+	 
+	# Set the bootloader delay to 0 seconds. The default is 1s if not specified.
+	boot_delay=0
+
+	# Overclock the raspberry pi. This voids its warranty. Make sure you have a good power supply.
+	#force_turbo=1
+	
+	再關閉daemon
+	sudo systemctl disable dhcpcd.service
+	sudo systemctl disable networking.service
+	sudo systemctl disable ssh.service
+	sudo systemctl disable ntp.service
+	sudo systemctl disable keyboard-setup.service
+	sudo systemctl disable apt-daily.service
+	sudo systemctl disable wifi-country.service
+	sudo systemctl disable avahi-daemon.service
+	
+	之後開機時間為17秒(插電到可登入)
+	http://himeshp.blogspot.com/2018/08/fast-boot-with-raspberry-pi.html
+	
+	用 systemd-analyze blame 和 journalctl -b 可以知道開機時間
+	
+	取得bt mac address方法：
+	在rc.local時等待7秒
+	sudo cat /sys/kernel/debug/bluetooth/hci0/identity
+	hciconfig | grep "BD Address" | awk '{ print $3}

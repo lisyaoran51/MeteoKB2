@@ -13,9 +13,9 @@ string WhiteKeyTargetLineModifier::GetConfigManagerName()
 	return "MeteorConfigManager";
 }
 
-int WhiteKeyTargetLineModifier::SetValue(int value1, int value2)
+int WhiteKeyTargetLineModifier::SetValue(float value1, float value2)
 {
-	whiteKeyTargetHeight = value1;
+	whiteKeyTargetHeight = (int)value1;
 
 	return 0;
 }

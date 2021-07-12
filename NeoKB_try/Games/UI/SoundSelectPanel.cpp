@@ -70,8 +70,12 @@ int SoundSelectPanel::firstLoadSound()
 	string firstLoadSoundBankName = "Bosendorfer";
 
 
-	if(!instrumentConfigManager->Get(InstrumentSetting::InitialSoundBankName, &firstLoadSoundBankName))
+	if (!instrumentConfigManager->Get(InstrumentSetting::InitialSoundBankName, &firstLoadSoundBankName)) {
+		firstLoadSoundBankName = tempSoundName = "U3";
 		LOG(LogLevel::Error) << "SoundSelectPanel::firstLoadSound() : fist sound not found in config.";
+	}
+
+	tempSoundName = firstLoadSoundBankName;
 
 	LOG(LogLevel::Debug) << "SoundSelectPanel::firstLoadSound() : first switch sound to [" << firstLoadSoundBankName << "].";
 	vector<SoundBindingSet*>* soundBindingSets = audioManager->GetSampleManager()->GetSoundBindingSets();
@@ -103,6 +107,23 @@ int SoundSelectPanel::onMessage(MeteoBluetoothMessage * message)
 	LOG(LogLevel::Depricated) << "SoundSelectPanel::onMessage() : got new bt command. ";
 	MeteoContextBluetoothMessage* contextMessage = dynamic_cast<MeteoContextBluetoothMessage*>(message);
 
+
+	if (message->GetCommand() == MeteoCommand::AppReadKeyboardInstrument) {
+
+		MeteoContextBluetoothMessage* outputMessage = new MeteoContextBluetoothMessage(MeteoCommand::AckAppSwitchKeyboardInstrument);
+
+		json returnContext;
+
+		returnContext["Name"] = tempSoundName;
+		returnContext["Reverb"] = true;
+		
+		outputMessage->SetContextInJson(returnContext);
+		outputMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
+
+		outputManager->PushMessage(outputMessage);
+
+	}
+
 	if (message->GetCommand() == MeteoCommand::AppSwitchKeyboardInstrument) {
 		LOG(LogLevel::Debug) << "SoundSelectPanel::onMessage() : AppSwitchKeyboardInstrument. ";
 
@@ -126,8 +147,6 @@ int SoundSelectPanel::onMessage(MeteoBluetoothMessage * message)
 
 		if (soundBindingSet) {
 			returnContext["Status"] = 0;
-
-			dynamic_cast<Piano*>(instrument)->SwitchSoundBindings(dynamic_cast<TSoundBindingSet<Pitch>*>(soundBindingSet));
 		}
 		else {
 			// ¤Á´«¥¢±Ñ
@@ -138,6 +157,9 @@ int SoundSelectPanel::onMessage(MeteoBluetoothMessage * message)
 		outputMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
 
 		outputManager->PushMessage(outputMessage);
+
+		if(soundBindingSet)
+			dynamic_cast<Piano*>(instrument)->SwitchSoundBindings(dynamic_cast<TSoundBindingSet<Pitch>*>(soundBindingSet));
 
 
 	}

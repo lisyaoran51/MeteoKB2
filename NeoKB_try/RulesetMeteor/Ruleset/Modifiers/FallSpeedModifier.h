@@ -23,6 +23,8 @@ namespace Modifiers{
 
 		virtual int ApplyToDifficulty(SmDifficulty* smDifficulty);
 
+		virtual int SetValue(float value1, float value2);
+
 	protected:
 
 		float fallSpeed = -1;

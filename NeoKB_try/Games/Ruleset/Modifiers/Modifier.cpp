@@ -13,7 +13,7 @@ string Modifier::GetDescription()
 	return description;
 }
 
-int Modifier::SetValue(int value1, int value2)
+int Modifier::SetValue(float value1, float value2)
 {
 	return 0;
 }

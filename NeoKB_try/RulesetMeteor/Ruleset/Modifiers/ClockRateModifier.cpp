@@ -20,8 +20,9 @@ int ClockRateModifier::ApplyToTimeController(TimeController * timeController)
 	return 0;
 }
 
-int ClockRateModifier::SetValue(int value1, int value2)
+int ClockRateModifier::SetValue(float value1, float value2)
 {
-	clockRate = (100.f + float(value1)) / 100.f;
+	if(value1 >= 0.4 && value1 <= 1.6)
+		clockRate = value1;
 	return 0;
 }

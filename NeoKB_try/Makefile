@@ -240,7 +240,7 @@ GattServer.o MeteoGattServerV1.o MeteoGattClientV1.o \
 MeteorGame.o MeteorConfigManager.o MeteorInputManager.o MeteorPitchBindingSet.o MeteorPlayfield.o \
 MeteorRuleset.o MeteorRulesetExecutor.o MeteorJudgement.o MeteorHitWindow.o MeteorReplayRecorder.o MeteorReplayFrame.o MeteorReplayRecorderReceiver.o \
 MeteorResult.o \
-AutoPedalModifier.o MusicGameModifier.o HandDifficultyModifier.o RepeatPracticeModifier.o FallSpeedModifier.o ClockRateModifier.o WhiteKeyTargetLineModifier.o \
+MusicGameModifier.o HandDifficultyModifier.o RepeatPracticeModifier.o FallSpeedModifier.o ClockRateModifier.o WhiteKeyTargetLineModifier.o \
 MeteorScoreProcessor.o \
 SustainPedalLightRingOutputer.o SustainPedalLightRingPanelMessage.o \
 MeteorEventProcessorMaster.o MeteorNoteControlPointHitObject.o MeteorInputKeyControlPointHitObject.o \

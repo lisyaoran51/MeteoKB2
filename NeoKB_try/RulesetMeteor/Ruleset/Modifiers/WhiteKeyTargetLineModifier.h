@@ -23,7 +23,7 @@ namespace Modifiers{
 
 		virtual string GetConfigManagerName();
 
-		virtual int SetValue(int value1, int value2);
+		virtual int SetValue(float value1, float value2);
 
 	protected:
 
