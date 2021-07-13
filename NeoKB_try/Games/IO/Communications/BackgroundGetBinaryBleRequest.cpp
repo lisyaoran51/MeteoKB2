@@ -31,7 +31,7 @@ int BackgroundGetBinaryBleRequest::ChooseCommunicationComponentToPerform()
 	for (it = acceptedCommunicationComponentRequestQueues.begin(); it != acceptedCommunicationComponentRequestQueues.end(); ++it) {
 		if (it->first == "BackgroundBleAccess") {
 
-			LOG(LogLevel::Depricated) << "int BackgroundGetBinaryBleRequest::ChooseCommunicationComponentToPerform() : [" << GetTypeName() << "] component found.";
+			LOG(LogLevel::Debug) << "int BackgroundGetBinaryBleRequest::ChooseCommunicationComponentToPerform() : [" << GetTypeName() << "] component found.";
 			it->second->push_back(this);
 		}
 	}
