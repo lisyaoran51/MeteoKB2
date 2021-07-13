@@ -37,7 +37,6 @@ namespace Communications{
 
 			thisThread = new thread(&TBleAccess::run, this);
 			sleepTimeInMilliSecond = 20;
-			ThreadMaster::GetInstance().AddSimpleThread(this);
 
 			int policy = SCHED_OTHER;
 			struct sched_param param;

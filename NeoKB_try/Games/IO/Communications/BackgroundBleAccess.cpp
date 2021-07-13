@@ -7,6 +7,7 @@ using namespace Framework::Threading;
 
 BackgroundBleAccess::BackgroundBleAccess(Host * gHost): TBleAccess<BackgroundGetBinaryBleRequest>(gHost), RegisterType("BackgroundBleAccess")
 {
+	ThreadMaster::GetInstance().AddSimpleThread(this);
 	
 }
 
