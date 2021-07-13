@@ -48,7 +48,7 @@ int FirmwareUpgradePanel::load(OutputManager * o, CommunicationAccess * c, Frame
 
 	firmwareName = MTO_VERSION;
 	try {
-		if (firmwareName.length() > 8){
+		if (firmwareName.length() == 8){
 			firmwareVersion = stol(string("0x") + firmwareName.substr(3, 5), nullptr, 16);
 			LOG(LogLevel::Debug) << "FirmwareUpgradePanel::load() : temp FirmwareVersion is [" << hex << firmwareVersion << "].";
 		}
