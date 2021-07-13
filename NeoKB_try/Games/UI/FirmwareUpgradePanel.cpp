@@ -42,6 +42,8 @@ int FirmwareUpgradePanel::load()
 int FirmwareUpgradePanel::load(OutputManager * o, CommunicationAccess * c, FrameworkConfigManager* f, Storage* s)
 {
 	LOG(LogLevel::Debug) << "FirmwareUpgradePanel::load() : start reading splits.";
+
+	isPresent = true;
 	outputManager = o;
 	communicationAccess = c;
 	storage = s;
