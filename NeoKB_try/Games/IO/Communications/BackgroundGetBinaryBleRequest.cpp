@@ -7,6 +7,9 @@ using namespace Games::IO::Communications;
 BackgroundGetBinaryBleRequest::BackgroundGetBinaryBleRequest(string fPath, MeteoBluetoothMessage * gMessage, MeteoCommand aGetCommand, MeteoCommand tCommand, MeteoCommand aTransferCommand, MeteoCommand fCommand, MeteoCommand rRetransferCommand, MeteoCommand aFinishCommand)
 	: GetBinaryBleRequest(fPath, gMessage, aGetCommand, tCommand, aTransferCommand, fCommand, rRetransferCommand, aFinishCommand) , RegisterType("BackgroundGetBinaryBleRequest")
 {
+
+	isCallbackByScene = false;
+
 	BackgroundGetBinaryBleRequestMethod* method = new BackgroundGetBinaryBleRequestMethod(fPath,
 		gMessage,
 		aGetCommand,
