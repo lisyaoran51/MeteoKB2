@@ -359,6 +359,8 @@ int FirmwareUpgradePanel::onMessage(MeteoBluetoothMessage * message)
 			return -1;
 
 		try {
+
+			LOG(LogLevel::Debug) << "FirmwareUpgradePanel::onMessage() : get new firmware data";
 			if (context.contains("FileName") == 0 ||
 				context.contains("Split") == 0 ||
 				context.contains("Checksum") == 0)
@@ -378,6 +380,9 @@ int FirmwareUpgradePanel::onMessage(MeteoBluetoothMessage * message)
 					tempFirmwareSplitVersion = newVersion;
 					tempFirmwareSplitCount = 0;
 				}
+
+				LOG(LogLevel::Debug) << "FirmwareUpgradePanel::onMessage() : new firmware data - filename [" << fileName << "], version [" << hex << newVersion << "], split [" << maxNewFirmwareSplitCount << "], temp already exist split count [" << maxNewFirmwareSplitCount << "].";
+
 
 				// 檢查目前的firmware有哪些split
 				newFirmwareSplits.clear();
