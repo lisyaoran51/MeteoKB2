@@ -8,8 +8,6 @@ BackgroundGetBinaryBleRequest::BackgroundGetBinaryBleRequest(string fPath, Meteo
 	: GetBinaryBleRequest(fPath, gMessage, aGetCommand, tCommand, aTransferCommand, fCommand, rRetransferCommand, aFinishCommand) , RegisterType("BackgroundGetBinaryBleRequest")
 {
 
-	isCallbackByScene = false;
-
 	BackgroundGetBinaryBleRequestMethod* method = new BackgroundGetBinaryBleRequestMethod(fPath,
 		gMessage,
 		aGetCommand,

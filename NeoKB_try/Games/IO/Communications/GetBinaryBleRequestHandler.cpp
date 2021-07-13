@@ -89,7 +89,7 @@ GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::GetBinaryBleReques
 	requestRetransferCommand = rRetransferCommand; 
 	ackFinishCommand = aFinishCommand;
 
-	sendFileSegmentTimeout = 1;
+	fileSegmentAckTimeout = 0.5;
 }
 
 int GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait(BleRequest * thisRequest)
@@ -227,14 +227,9 @@ int GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait
 
 	int tempSendFileSegmentNumber = 0;
 	double transferTempFileSegmentElapsedSeconds = thisGetBinaryBleRequestHandler->getSectionElapsedSeconds();
-	bleAccess->GetBluetoothPhone()->PushOutputMessage(fileSegmentMessages[0]);
 
-	LOG(LogLevel::Debug) << "GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait() : send segment [" << 0 << "]";
+	for (int i = 0; i < fileSegmentMessages.size(); i++) {
 
-
-	bool isAllSegmentSent = false;
-
-	while (!isAllSegmentSent) {
 
 		if (thisGetBinaryBleRequestHandler->exitRequested) {
 			throw BleRequestException(BleResponseCode::ExitRequested);
@@ -246,20 +241,14 @@ int GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait
 			throw BleRequestException(BleResponseCode::Gone);
 		}
 
-		// 如果太久沒收到ack，就直接丟下一個file segment
-		if (thisGetBinaryBleRequestHandler->getSectionElapsedSeconds() - transferTempFileSegmentElapsedSeconds > sendFileSegmentTimeout) {
+		bleAccess->GetBluetoothPhone()->PushOutputMessage(fileSegmentMessages[i]);
 
-			LOG(LogLevel::Warning) << "GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait() : no receive ack file segment [" << tempSendFileSegmentNumber << "]. Pass.";
+		/* 每丟一個片段睡10ms */
+		this_thread::sleep_for(std::chrono::milliseconds(10));
 
-			// 已丟完所有file segment，就直接跳出往下一個步驟
-			if (tempSendFileSegmentNumber == fileSegmentMap.segmentAmount - 1)
-				break;
+	}
 
-			tempSendFileSegmentNumber++;
-			transferTempFileSegmentElapsedSeconds = thisGetBinaryBleRequestHandler->getSectionElapsedSeconds();
-			bleAccess->GetBluetoothPhone()->PushOutputMessage(fileSegmentMessages[tempSendFileSegmentNumber]);
-		}
-
+	while (thisGetBinaryBleRequestHandler->getSectionElapsedSeconds() - transferTempFileSegmentElapsedSeconds > fileSegmentAckTimeout) {
 		/* 這段寫得很長，功能就只是把收到的ack丟給request而已 */
 		unique_lock<mutex> uLock(thisGetBinaryBleRequestHandler->rawMessageMutex);
 		while (thisGetBinaryBleRequestHandler->inputRawMessages.size() > 0) {
@@ -269,37 +258,12 @@ int GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait
 			if (dynamic_cast<MeteoAckFileSegmentBluetoothMessage*>(message)->GetCommand() == ackTransferCommand &&
 				dynamic_cast<MeteoAckFileSegmentBluetoothMessage*>(message)->GetFileName() == fileSegmentMap.fileName) {
 
-				MeteoAckFileSegmentBluetoothMessage* ackFileSegmentMessage = dynamic_cast<MeteoAckFileSegmentBluetoothMessage*>(message);
-				if (ackFileSegmentMessage->GetOrder() == tempSendFileSegmentNumber) {
-
-					if (tempSendFileSegmentNumber == fileSegmentMap.segmentAmount - 1) {
-						isAllSegmentSent = true;
-						thisGetBinaryBleRequestHandler->inputRawMessages.pop_back();
-						delete message;
-						break;
-					}
-
-					tempSendFileSegmentNumber++;
-					transferTempFileSegmentElapsedSeconds = thisGetBinaryBleRequestHandler->getSectionElapsedSeconds();
-					bleAccess->GetBluetoothPhone()->PushOutputMessage(fileSegmentMessages[tempSendFileSegmentNumber]);
-
-					LOG(LogLevel::Debug) << "GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait() : send segment [" << tempSendFileSegmentNumber << "]";
-
-				}
-				else if (ackFileSegmentMessage->GetOrder() < tempSendFileSegmentNumber) {
-					// no-op
-				}
-				else {
-					LOG(LogLevel::Error) << "GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait() : ack file segment number worng -- [" << ackFileSegmentMessage->GetOrder() << "]. Temp file Segment Number is [" << tempSendFileSegmentNumber << "].";
-				}
+				transferTempFileSegmentElapsedSeconds = thisGetBinaryBleRequestHandler->getSectionElapsedSeconds();
 			}
 			}
 			thisGetBinaryBleRequestHandler->inputRawMessages.pop_back();
 			delete message;
 		}
-
-		uLock.unlock();
-
 	}
 
 	// #-- 3 確認
@@ -313,7 +277,7 @@ int GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait
 	bleAccess->GetBluetoothPhone()->PushOutputMessage(checkFinishMessage);
 
 	// 等待對方整理所有需要重傳的file segment
-	this_thread::sleep_for(std::chrono::milliseconds(200));
+	this_thread::sleep_for(std::chrono::milliseconds(500));
 
 	bool isFinished = false;
 	bool isRetransferred = false;
@@ -335,41 +299,7 @@ int GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait
 			throw BleRequestException(BleResponseCode::ExitRequested);
 		}
 
-
-		// 如果太久沒收到ack，就直接丟下一個file segment
-		if (tempSendRetransferOrderIndex >= 0 &&
-			thisGetBinaryBleRequestHandler->getSectionElapsedSeconds() - transferTempFileSegmentElapsedSeconds > sendFileSegmentTimeout) {
-
-			LOG(LogLevel::Warning) << "GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait() : no receive ack retransfer file segment [" << tempSendRetransferOrderIndex << " / " << retransferOrders.size() << "] which file sgement is [" << retransferOrders[tempSendRetransferOrderIndex] << "]. Pass.";
-
-			// 已丟完所有file segment，就直接跳出往下一個步驟
-			if (tempSendRetransferOrderIndex == retransferOrders.size() - 1) {
-				LOG(LogLevel::Debug) << "GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait() : retransfer over.";
-
-				checkFinishMessage = new MeteoContextBluetoothMessage(finishCommand);
-				json messageContext;
-				messageContext["FileName"] = fileSegmentMap.fileName;
-				checkFinishMessage->SetContextInJson(messageContext);
-				checkFinishMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
-
-				bleAccess->GetBluetoothPhone()->PushOutputMessage(checkFinishMessage);
-
-				// 等待對方整理所有需要重傳的file segment
-				this_thread::sleep_for(std::chrono::milliseconds(200));
-				transferTempFileSegmentElapsedSeconds = thisGetBinaryBleRequestHandler->getSectionElapsedSeconds();
-			}
-			else {
-
-				tempSendRetransferOrderIndex++;
-				transferTempFileSegmentElapsedSeconds = thisGetBinaryBleRequestHandler->getSectionElapsedSeconds();
-				bleAccess->GetBluetoothPhone()->PushOutputMessage(fileSegmentMessages[retransferOrders[tempSendRetransferOrderIndex]]);
-
-			}
-
-		}
-
-
-
+		
 		/* 這段寫得很長，功能是檢查有沒有全都收到，有的話就離開，沒有就重傳，重傳完要再檢查一次有沒有收到 */
 		unique_lock<mutex> uLock(thisGetBinaryBleRequestHandler->rawMessageMutex);
 		while (thisGetBinaryBleRequestHandler->inputRawMessages.size() > 0) {
@@ -400,45 +330,6 @@ int GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait
 
 				retransferOrders.push_back(retransferOrder);
 
-				if (retransferOrders.size() == 1) {
-					tempSendRetransferOrderIndex = 0;
-					bleAccess->GetBluetoothPhone()->PushOutputMessage(fileSegmentMessages[retransferOrders[tempSendRetransferOrderIndex]]);
-				}
-
-			}
-			}
-			}
-
-			/* 街道ack以後再繼續重傳 */
-			if (dynamic_cast<MeteoAckFileSegmentBluetoothMessage*>(message)) {
-			if (dynamic_cast<MeteoAckFileSegmentBluetoothMessage*>(message)->GetCommand() == ackTransferCommand) {
-			if (dynamic_cast<MeteoAckFileSegmentBluetoothMessage*>(message)->GetFileName() == fileSegmentMap.fileName) {
-
-				int ackIndex = -1;
-				for (int i = 0; i < retransferOrders.size(); i++) {
-					if (retransferOrders[i] == dynamic_cast<MeteoAckFileSegmentBluetoothMessage*>(message)->GetOrder()) {
-						ackIndex = i;
-					}
-				}
-
-				if (ackIndex != -1 && ackIndex != retransferOrders.size() - 1 && ackIndex == tempSendRetransferOrderIndex) {
-
-					tempSendRetransferOrderIndex++;
-					transferTempFileSegmentElapsedSeconds = thisGetBinaryBleRequestHandler->getSectionElapsedSeconds();
-					bleAccess->GetBluetoothPhone()->PushOutputMessage(fileSegmentMessages[retransferOrders[tempSendRetransferOrderIndex]]);
-
-				}
-				else if (ackIndex == retransferOrders.size() - 1) {
-					bleAccess->GetBluetoothPhone()->PushOutputMessage(checkFinishMessage);
-
-					// 等待對方整理所有需要重傳的file segment
-					this_thread::sleep_for(std::chrono::milliseconds(200));
-
-					transferTempFileSegmentElapsedSeconds = thisGetBinaryBleRequestHandler->getSectionElapsedSeconds();
-				}
-				else if (ackIndex > tempSendRetransferOrderIndex) {
-					LOG(LogLevel::Error) << "GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait() : receive error ack retransfer index [" << ackIndex << "/" << retransferOrders.size() << "]. temp index is [" << tempSendRetransferOrderIndex << "]";
-				}
 			}
 			}
 			}
@@ -449,7 +340,37 @@ int GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait
 
 		uLock.unlock();
 
-		this_thread::sleep_for(std::chrono::milliseconds(100));
+
+		LOG(LogLevel::Warning) << "GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait() : no receive ack retransfer file segment [" << tempSendRetransferOrderIndex << " / " << retransferOrders.size() << "] which file sgement is [" << retransferOrders[tempSendRetransferOrderIndex] << "]. Pass.";
+
+		if (tempSendRetransferOrderIndex < retransferOrders.size() - 1) {
+
+			tempSendRetransferOrderIndex++;
+			transferTempFileSegmentElapsedSeconds = thisGetBinaryBleRequestHandler->getSectionElapsedSeconds();
+			bleAccess->GetBluetoothPhone()->PushOutputMessage(fileSegmentMessages[retransferOrders[tempSendRetransferOrderIndex]]);
+
+			this_thread::sleep_for(std::chrono::milliseconds(10));
+
+			/* 從這個時間點開始計時，超過時間就timeout */
+			thisGetBinaryBleRequestHandler->writeTimePoint();
+		}
+		else {
+			LOG(LogLevel::Debug) << "GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait() : retransfer over.";
+
+			checkFinishMessage = new MeteoContextBluetoothMessage(finishCommand);
+			json messageContext;
+			messageContext["FileName"] = fileSegmentMap.fileName;
+			checkFinishMessage->SetContextInJson(messageContext);
+			checkFinishMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
+
+			bleAccess->GetBluetoothPhone()->PushOutputMessage(checkFinishMessage);
+
+			// 等待對方整理所有需要重傳的file segment
+			this_thread::sleep_for(std::chrono::milliseconds(500));
+			transferTempFileSegmentElapsedSeconds = thisGetBinaryBleRequestHandler->getSectionElapsedSeconds();
+
+		}
+
 	}
 
 	// 結束

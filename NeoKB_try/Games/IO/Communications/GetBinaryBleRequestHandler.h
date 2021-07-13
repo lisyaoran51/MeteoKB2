@@ -97,9 +97,9 @@ namespace Communications{
 			bool isAckedTransferFinished = false;
 
 			/// <summary>
-			/// 丟出一個file sgegment以後多久沒有收到Ack，就會自動丟下一個file segment
+			/// 丟出一個file sgegment以後多久沒有收到Ack，就會丟finish
 			/// </summary>
-			double sendFileSegmentTimeout = 0.5; // 0.1
+			double fileSegmentAckTimeout = 0.5; // 0.1
 
 			vector<int> retransferOrders;
 

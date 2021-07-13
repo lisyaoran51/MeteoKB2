@@ -90,7 +90,7 @@ int MeteoScene::onEntered(Scene * lastScene)
 
 	GetScheduler()->AddTask([=]() {
 
-		MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::EnterScene);
+		MeteoContextBluetoothMessage* meteoContextBluetoothMessage = new MeteoContextBluetoothMessage(MeteoCommand::TempScene);
 		json returnContext;
 
 		returnContext["Scene"] = GetTypeName();

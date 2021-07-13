@@ -96,7 +96,7 @@ namespace UI{
 		/// </summary>
 		map<int, string> newFirmwareSplits;
 
-		virtual int handleOnRequestSplitFail();
+		virtual int handleOnRequestSplitFail(FileSegmentMap* fSegmentMap);
 
 		virtual int handleOnRequestSplitSuccess(FileSegmentMap* fSegmentMap);
 

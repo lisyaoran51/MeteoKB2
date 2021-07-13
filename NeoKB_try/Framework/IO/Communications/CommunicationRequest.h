@@ -145,7 +145,7 @@ namespace Communications{
 		/// </summary>
 		CommunicationComponent* communicationComponent = nullptr;
 
-		bool isCallbackByScene = true;
+		bool isCallbackByScene = false;
 
 		Scene* callbackScene = nullptr;
 

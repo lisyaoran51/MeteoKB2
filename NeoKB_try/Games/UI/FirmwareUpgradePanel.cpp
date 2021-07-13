@@ -168,7 +168,7 @@ FirmwareUpgradePanel::FirmwareUpgradePanel() : RegisterType("FirmwareUpgradePane
 	registerLoad(bind(static_cast<int(FirmwareUpgradePanel::*)(void)>(&FirmwareUpgradePanel::load), this));
 }
 
-int FirmwareUpgradePanel::handleOnRequestSplitFail()
+int FirmwareUpgradePanel::handleOnRequestSplitFail(FileSegmentMap* fSegmentMap)
 {
 
 	GetScheduler()->AddDelayedTask([=]() {
@@ -205,7 +205,7 @@ int FirmwareUpgradePanel::handleOnRequestSplitFail()
 			MeteoCommand::AckFinishWriteNewFirmwareSplit
 		};
 
-		getFirmwareBleRequest->AddOnFail(this, bind(&FirmwareUpgradePanel::handleOnRequestSplitFail, this), "FirmwareUpgradePanel::handleOnRequestSplitFail");
+		getFirmwareBleRequest->AddOnFail(this, bind(&FirmwareUpgradePanel::handleOnRequestSplitFail, this, placeholders::_1), "FirmwareUpgradePanel::handleOnRequestSplitFail");
 
 		getFirmwareBleRequest->AddOnSuccess(this, bind(&FirmwareUpgradePanel::handleOnRequestSplitSuccess, this, placeholders::_1), "FirmwareUpgradePanel::handleOnRequestSplitSuccess");
 
@@ -292,7 +292,7 @@ int FirmwareUpgradePanel::handleOnRequestSplitSuccess(FileSegmentMap* fSegmentMa
 					MeteoCommand::AckFinishWriteNewFirmwareSplit
 				};
 
-				getFirmwareBleRequest->AddOnFail(this, bind(&FirmwareUpgradePanel::handleOnRequestSplitFail, this), "FirmwareUpgradePanel::handleOnRequestSplitFail");
+				getFirmwareBleRequest->AddOnFail(this, bind(&FirmwareUpgradePanel::handleOnRequestSplitFail, this, placeholders::_1), "FirmwareUpgradePanel::handleOnRequestSplitFail");
 
 				getFirmwareBleRequest->AddOnSuccess(this, bind(&FirmwareUpgradePanel::handleOnRequestSplitSuccess, this, placeholders::_1), "FirmwareUpgradePanel::handleOnRequestSplitSuccess");
 
@@ -335,7 +335,7 @@ int FirmwareUpgradePanel::handleOnRequestSplitSuccess(FileSegmentMap* fSegmentMa
 			MeteoCommand::AckFinishWriteNewFirmwareSplit
 		};
 
-		getFirmwareBleRequest->AddOnFail(this, bind(&FirmwareUpgradePanel::handleOnRequestSplitFail, this), "FirmwareUpgradePanel::handleOnRequestSplitFail");
+		getFirmwareBleRequest->AddOnFail(this, bind(&FirmwareUpgradePanel::handleOnRequestSplitFail, this, placeholders::_1), "FirmwareUpgradePanel::handleOnRequestSplitFail");
 
 		getFirmwareBleRequest->AddOnSuccess(this, bind(&FirmwareUpgradePanel::handleOnRequestSplitSuccess, this, placeholders::_1), "FirmwareUpgradePanel::handleOnRequestSplitSuccess");
 
@@ -451,7 +451,7 @@ int FirmwareUpgradePanel::onMessage(MeteoBluetoothMessage * message)
 					MeteoCommand::AckFinishWriteNewFirmwareSplit
 				};
 
-				getFirmwareBleRequest->AddOnFail(this, bind(&FirmwareUpgradePanel::handleOnRequestSplitFail, this), "FirmwareUpgradePanel::handleOnRequestSplitFail");
+				getFirmwareBleRequest->AddOnFail(this, bind(&FirmwareUpgradePanel::handleOnRequestSplitFail, this, placeholders::_1), "FirmwareUpgradePanel::handleOnRequestSplitFail");
 
 				getFirmwareBleRequest->AddOnSuccess(this, bind(&FirmwareUpgradePanel::handleOnRequestSplitSuccess, this, placeholders::_1), "FirmwareUpgradePanel::handleOnRequestSplitSuccess");
 

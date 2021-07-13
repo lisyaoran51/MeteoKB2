@@ -7,7 +7,7 @@ using namespace Util;
 std::string CommandPasser::PassCommand(char const * cmd)
 {
 	FILE* fp;
-	char buffer[256];
+	char buffer[256] = {0};
 	fp = popen(cmd, "r");
 	if (fp == NULL)
 	{
