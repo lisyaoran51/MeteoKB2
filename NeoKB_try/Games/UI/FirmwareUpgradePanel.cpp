@@ -350,7 +350,7 @@ int FirmwareUpgradePanel::onMessage(MeteoBluetoothMessage * message)
 	}
 	json context = contextMessage->GetContextInJson();
 
-	LOG(LogLevel::Depricated) << "FirmwareUpgradePanel::onMessage() : got new bt message. ";
+	LOG(LogLevel::Debug) << "FirmwareUpgradePanel::onMessage() : got new bt message. ";
 
 	if (contextMessage->GetCommand() == MeteoCommand::NewFirmwareData) {
 
