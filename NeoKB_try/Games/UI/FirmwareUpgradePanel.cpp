@@ -161,6 +161,8 @@ vector<string> FirmwareUpgradePanel::getFileNames(string directoryPath)
 
 FirmwareUpgradePanel::FirmwareUpgradePanel() : RegisterType("FirmwareUpgradePanel")
 {
+	isInputable = true;
+
 	registerLoad(bind(static_cast<int(FirmwareUpgradePanel::*)(void)>(&FirmwareUpgradePanel::load), this));
 }
 

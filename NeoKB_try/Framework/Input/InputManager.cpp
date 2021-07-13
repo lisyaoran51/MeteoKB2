@@ -85,7 +85,7 @@ int InputManager::handleNewState(InputState * state)
 	//unique_lock<mutex> uLock(TreeMutex1);
 	updateInputQueue(currentState);
 
-	LOG(LogLevel::Debug) << [=]() {
+	LOG(LogLevel::Depricated) << [=]() {
 		LOG(LogLevel::Finest) << "InputManager::handleNewState(): [" << GetTypeName() << "] iterate input queue:";
 		for (int i = 0; i < triggerQueue.size(); i++) {
 			LOG(LogLevel::Finest) << "InputManager::handleNewState():------ [" << triggerQueue[i]->GetTypeName() << "]";
