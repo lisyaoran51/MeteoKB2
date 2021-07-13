@@ -370,10 +370,10 @@ int FirmwareUpgradePanel::onMessage(MeteoBluetoothMessage * message)
 		try {
 
 			LOG(LogLevel::Debug) << "FirmwareUpgradePanel::onMessage() : get new firmware data";
-			if (context.contains("FileName") == 0 ||
-				context.contains("Split") == 0 ||
-				context.contains("Checksum") == 0)
-				return -1;
+			//if (context.contains("FileName") == 0 ||
+			//	context.contains("Split") == 0 ||
+			//	context.contains("Checksum") == 0)
+			//	return -1;
 
 			string fileName = context["FileName"].get<string>();
 			int split = context["Split"].get<int>();
