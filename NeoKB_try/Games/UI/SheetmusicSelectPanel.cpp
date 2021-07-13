@@ -152,7 +152,7 @@ int SheetmusicSelectPanel::onMessage(MeteoBluetoothMessage * message)
 	}
 	json context = contextMessage->GetContextInJson();
 
-	LOG(LogLevel::Depricated) << "SheetmusicSelectPanel::onMessage() : got new bt message. ";
+	LOG(LogLevel::Debug) << "SheetmusicSelectPanel::onMessage() : got new bt message. ";
 
 	
 
