@@ -452,6 +452,8 @@ int FirmwareUpgradePanel::onMessage(MeteoBluetoothMessage * message)
 
 				communicationAccess->Queue(getFirmwareBleRequest);
 
+				LOG(LogLevel::Debug) << "FirmwareUpgradePanel::onMessage() : queue the request";
+
 				isUpgrading = true;
 			}
 
