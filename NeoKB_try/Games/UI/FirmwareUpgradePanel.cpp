@@ -378,7 +378,7 @@ int FirmwareUpgradePanel::onMessage(MeteoBluetoothMessage * message)
 			string fileName = context["FileName"].get<string>();
 			int split = context["Split"].get<int>();
 
-			long newVersion = stol(string("0x") + fileName.substr(3, 5));
+			long newVersion = stol(string("0x") + fileName.substr(3, 5), nullptr, 16);
 
 			LOG(LogLevel::Debug) << "FirmwareUpgradePanel::onMessage() : new firmware data - filename [" << fileName << "], version [" << hex << newVersion << "], split [" << split << "].";
 			LOG(LogLevel::Debug) << "FirmwareUpgradePanel::onMessage() : temp firmware version [" << hex << tempFirmwareSplitVersion << "], firmware version [" << hex << firmwareVersion << "]";
