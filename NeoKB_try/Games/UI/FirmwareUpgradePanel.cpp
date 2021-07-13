@@ -224,6 +224,11 @@ int FirmwareUpgradePanel::handleOnRequestSplitSuccess(FileSegmentMap* fSegmentMa
 
 	LOG(LogLevel::Debug) << "FirmwareUpgradePanel::handleOnRequestSplitSuccess() : download [" << fSegmentMap->fileName << "] success.";
 
+	vector<string> splitName = StringSplitter::Split(fSegmentMap->fileName, ".");
+	newFirmwareSplits[stoi(splitName[1])] = fSegmentMap->fileName;
+
+	LOG(LogLevel::Debug) << "FirmwareUpgradePanel::handleOnRequestSplitSuccess() : get [" << stoi(splitName[1]) << "] split of [" << fSegmentMap->fileName << "].";
+
 	GetScheduler()->AddDelayedTask([=]() {
 		LOG(LogLevel::Debug) << "FirmwareUpgradePanel::handleOnRequestSplitSuccess() : request success. find next split request. ";
 
