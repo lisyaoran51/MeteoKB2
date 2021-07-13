@@ -48,14 +48,19 @@ int FirmwareUpgradePanel::load(OutputManager * o, CommunicationAccess * c, Frame
 
 	firmwareName = MTO_VERSION;
 	try {
-		if (firmwareName.length() > 8)
+		if (firmwareName.length() > 8){
 			firmwareVersion = stol(string("0x") + firmwareName.substr(3, 5), nullptr, 16);
+			LOG(LogLevel::Debug) << "FirmwareUpgradePanel::load() : temp FirmwareVersion is [" << hex << firmwareVersion << "].";
+		}
 		else {
+
+			LOG(LogLevel::Debug) << "FirmwareUpgradePanel::load() : fail to get temp FirmwareVersion.";
 			// TODO: 傳錯誤訊息
 		}
 	}
 	catch (exception& e) {
 		// TODO: 傳錯誤訊息，要求系統還原
+		LOG(LogLevel::Debug) << "FirmwareUpgradePanel::load() : firmware version error. reset firmware";
 		firmwareVersion = -1;
 	}
 
