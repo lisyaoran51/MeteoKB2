@@ -89,6 +89,8 @@ namespace UI{
 		/// </summary>
 		string newFirmwareSplitName = "";
 
+		string newFirmwareChecksum = "";
+
 		int maxNewFirmwareSplitCount = 0;
 
 		/// <summary>

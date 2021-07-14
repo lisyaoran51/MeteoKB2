@@ -251,7 +251,14 @@ int FirmwareUpgradePanel::handleOnRequestSplitSuccess(FileSegmentMap* fSegmentMa
 				splitPaths.push_back(storage->GetBasePath() + string("/") + firmwareDirectory + string("/Splits/") + newFirmwareName + string(".") + to_string(i));
 			}
 
-			if (FileSplitCombiner::Combine(storage->GetBasePath() + string("/") + firmwareDirectory + string("/Splits/") + newFirmwareName, splitPaths) >= 0) {
+			try {
+				if (FileSplitCombiner::Combine(storage->GetBasePath() + string("/") + firmwareDirectory + string("/Splits/") + newFirmwareName, splitPaths) < 0)
+					throw runtime_error("FirmwareUpgradePanel::handleOnRequestSplitSuccess() : failed to combine splits.");
+
+				string checksumCommand = string("md5sum ") + storage->GetBasePath() + string("/") + firmwareDirectory + string("/Splits/") + newFirmwareName + string(" | awk '{ print $1}'");
+				string checksum = CommandPasser::PassCommand(checksumCommand.c_str());
+				if(newFirmwareChecksum != checksum)
+					throw runtime_error("FirmwareUpgradePanel::handleOnRequestSplitSuccess() : wrong checksum.");
 
 				LOG(LogLevel::Debug) << "FirmwareUpgradePanel::handleOnRequestSplitSuccess() : combination successed. new firmware will launch on next start.";
 
@@ -274,7 +281,7 @@ int FirmwareUpgradePanel::handleOnRequestSplitSuccess(FileSegmentMap* fSegmentMa
 				CommandPasser::PassCommand(decompressCommand.c_str());
 
 			}
-			else {
+			catch (exception& e) {
 				LOG(LogLevel::Warning) << "FirmwareUpgradePanel::handleOnRequestSplitSuccess() : combination failed. restart upgrade";
 
 				tempFirmwareSplitCount = 0;
@@ -305,8 +312,8 @@ int FirmwareUpgradePanel::handleOnRequestSplitSuccess(FileSegmentMap* fSegmentMa
 
 
 				communicationAccess->Queue(getFirmwareBleRequest);
-
 			}
+
 
 			/* §R°£split */
 			tempFirmwareSplitCount = 0;
@@ -386,6 +393,7 @@ int FirmwareUpgradePanel::onMessage(MeteoBluetoothMessage * message)
 
 			string fileName = context["FileName"].get<string>();
 			int split = context["Split"].get<int>();
+			newFirmwareChecksum = context["Checksum"].get<string>();
 
 			long newVersion = stol(string("0x") + fileName.substr(3, 5), nullptr, 16);
 
