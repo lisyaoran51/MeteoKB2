@@ -30,8 +30,6 @@ namespace Communications{
 		/// </summary>
 		virtual int ChooseCommunicationComponentToPerform();
 
-		virtual int Perform(CommunicationComponent* cComponent);
-
 	protected:
 
 		/// <summary>

@@ -62,7 +62,7 @@ int BleRequest::Perform(CommunicationComponent * cComponent)
 
 	communicationComponent = cComponent;
 
-	ForegroundBleAccess* bleAccess = dynamic_cast<ForegroundBleAccess*>(communicationComponent);
+	TBleAccess<BleRequest>* bleAccess = dynamic_cast<TBleAccess<BleRequest>*>(communicationComponent);
 	// 讓ble access把raw message丟進來，好讓我們檢查有沒有ack或return
 	bleAccess->RegisterBleRequest(this);
 

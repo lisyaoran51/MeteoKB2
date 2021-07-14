@@ -13,7 +13,7 @@ namespace Communications{
 	/// <summary>
 	/// ¦b­I´º¶]ªºaccess
 	/// </summary>
-	class BackgroundBleAccess : public TBleAccess<BackgroundGetBinaryBleRequest> {
+	class BackgroundBleAccess : public TBleAccess<BleRequest> {
 
 	public:
 

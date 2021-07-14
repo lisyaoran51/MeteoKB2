@@ -39,7 +39,7 @@ int GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait(BleRequest * 
 	GetBinaryBleRequest* thisGetBinaryRequest = dynamic_cast<GetBinaryBleRequest*>(thisRequest);
 
 	/* §ì¥Ø«eªºÂÅªÞmtu */
-	ForegroundBleAccess* bleAccess = dynamic_cast<ForegroundBleAccess*>(thisGetBinaryRequest->communicationComponent);
+	TBleAccess<BleRequest>* bleAccess = dynamic_cast<TBleAccess<BleRequest>*>(thisGetBinaryRequest->communicationComponent);
 	BluetoothPhone* bluetoothPhone = dynamic_cast<BluetoothPhone*>(dynamic_cast<ForegroundBleAccess*>(thisGetBinaryRequest->communicationComponent)->GetPeripheral());
 
 	LOG(LogLevel::Debug) << "GetBinaryBleRequest::GetBinaryBleRequestMethod::PerformAndWait() : start handling request.";
