@@ -5,6 +5,7 @@
 #include "../IO/Communications/BackgroundGetBinaryBleRequest.h"
 #include "../../Util/FileSplitCombiner.h"
 #include <stdio.h>
+#include "../../Util/CommandPasser.h"
 
 
 #ifndef MTO_VERSION
@@ -16,6 +17,8 @@ using namespace Games::UI;
 using namespace std::experimental::filesystem;
 using namespace Util;
 using namespace Games::IO::Communications;
+using namespace Util;
+
 
 
 int FirmwareUpgradePanel::load()
@@ -225,9 +228,9 @@ int FirmwareUpgradePanel::handleOnRequestSplitSuccess(FileSegmentMap* fSegmentMa
 	LOG(LogLevel::Debug) << "FirmwareUpgradePanel::handleOnRequestSplitSuccess() : download [" << fSegmentMap->fileName << "] success.";
 
 	vector<string> splitName = StringSplitter::Split(fSegmentMap->fileName, ".");
-	newFirmwareSplits[stoi(splitName[1])] = fSegmentMap->fileName;
+	newFirmwareSplits[stoi(splitName.back())] = fSegmentMap->fileName;
 
-	LOG(LogLevel::Debug) << "FirmwareUpgradePanel::handleOnRequestSplitSuccess() : get [" << stoi(splitName[1]) << "] split of [" << fSegmentMap->fileName << "].";
+	LOG(LogLevel::Debug) << "FirmwareUpgradePanel::handleOnRequestSplitSuccess() : get [" << stoi(splitName.back()) << "] split of [" << fSegmentMap->fileName << "].";
 
 	GetScheduler()->AddDelayedTask([=]() {
 		LOG(LogLevel::Debug) << "FirmwareUpgradePanel::handleOnRequestSplitSuccess() : request success. find next split request. ";
@@ -248,7 +251,7 @@ int FirmwareUpgradePanel::handleOnRequestSplitSuccess(FileSegmentMap* fSegmentMa
 				splitPaths.push_back(storage->GetBasePath() + string("/") + firmwareDirectory + string("/Splits/") + newFirmwareName + string(".") + to_string(i));
 			}
 
-			if (FileSplitCombiner::Combine(storage->GetBasePath() + string("/") + firmwareDirectory + string("/Files/") + newFirmwareName, splitPaths) >= 0) {
+			if (FileSplitCombiner::Combine(storage->GetBasePath() + string("/") + firmwareDirectory + string("/Splits/") + newFirmwareName, splitPaths) >= 0) {
 
 				LOG(LogLevel::Debug) << "FirmwareUpgradePanel::handleOnRequestSplitSuccess() : combination successed. new firmware will launch on next start.";
 
@@ -265,6 +268,10 @@ int FirmwareUpgradePanel::handleOnRequestSplitSuccess(FileSegmentMap* fSegmentMa
 
 				isUpgraded = true;
 				isUpgrading = false;
+
+				string decompressCommand = string("7z e ") + storage->GetBasePath() + string("/") + firmwareDirectory + string("/Splits/") + newFirmwareName + string(" ") + storage->GetBasePath() + string("/") + firmwareDirectory + string("/Files/");
+				LOG(LogLevel::Debug) << "FirmwareUpgradePanel::handleOnRequestSplitSuccess() : passing decompress command: " << decompressCommand;
+				CommandPasser::PassCommand(decompressCommand.c_str());
 
 			}
 			else {
@@ -306,11 +313,8 @@ int FirmwareUpgradePanel::handleOnRequestSplitSuccess(FileSegmentMap* fSegmentMa
 			newFirmwareSplits.clear();
 
 			string deleteCommand = string("rm -f ") + storage->GetBasePath() + string("/") + firmwareDirectory + string("/Splits/*");
-			FILE* fp = popen(deleteCommand.c_str(), "r");
-			if (fp == NULL) {
-				// error
-			}
-			pclose(fp);
+			LOG(LogLevel::Debug) << "FirmwareUpgradePanel::handleOnRequestSplitSuccess() : passing delete command: " << deleteCommand;
+			CommandPasser::PassCommand(deleteCommand.c_str());
 
 			return 0;
 		}
@@ -414,7 +418,8 @@ int FirmwareUpgradePanel::onMessage(MeteoBluetoothMessage * message)
 					if (splitFileName.length() < 9)
 						continue;
 
-					int thisSplit = stoi(splitFileName.substr(9, splitFileName.length() - 9));
+					// Mto00000.7z.0
+					int thisSplit = stoi(splitFileName.substr(12, splitFileName.length() - 12));
 					newFirmwareSplits[thisSplit] = splitFileName;
 				}
 
