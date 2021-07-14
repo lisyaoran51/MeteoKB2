@@ -78,7 +78,7 @@ InputState * MeteoBluetoothPhoneV2::GetBluetoothState()
 {
 	if (isConnected && !isFirstPacketSent) {
 		system_clock::time_point temp = system_clock::now();
-		if (duration_cast<milliseconds>(temp - startTime).count() / 1000 > 5000) {
+		if (duration_cast<milliseconds>(temp - startTime).count() / 1000 > 5) {
 			LOG(LogLevel::Debug) << "MeteoBluetoothPhoneV2::GetBluetoothState() : app didn't send first packet. treat as a wrong app and blacklist it.";
 			macAddressBlacklist.push_back(tempMacAddress);
 			disconnectHandler.TriggerThenClear();
