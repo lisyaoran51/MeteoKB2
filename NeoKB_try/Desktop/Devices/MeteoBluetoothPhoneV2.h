@@ -11,6 +11,7 @@
 #include <vector>
 #include "Gatt/GattServer.h"
 #include "../../Framework/Threading/SimpleThread.h"
+#include <chrono>
 
 
 
@@ -21,6 +22,7 @@ using namespace Util::DataStructure;
 using namespace Games::Output::Bluetooths;
 using namespace Desktop::Devices::Gatt;
 using namespace Framework::Threading;
+using namespace std::chrono;
 
 
 
@@ -50,6 +52,8 @@ namespace Devices {
 
 		int maxMtu = 256;
 
+		system_clock::time_point startTime;
+
 	public:
 
 		MeteoBluetoothPhoneV2(PacketConverter<MeteoCommand>* pConverter);
@@ -68,6 +72,10 @@ namespace Devices {
 
 		bool isConnected = false;
 
+		string tempMacAddress = "";
+
+		vector<string> macAddressBlacklist;
+
 		bool isFirstPacketSent = false;
 
 		mutable mutex bluetoothStateMutex;
@@ -85,6 +93,13 @@ namespace Devices {
 		ActionList<int> onConnect;
 
 		ActionList<int> onDisconnect;
+
+		/// <summary>
+		/// 要斷線時就trigger這個action list
+		/// </summary>
+		ActionList<int> disconnectHandler;
+
+		bool checkMacAddressBlacklisted(string macAddress);
 
 		bool getIsReady();
 

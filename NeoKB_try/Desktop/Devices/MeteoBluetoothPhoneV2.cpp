@@ -8,6 +8,7 @@
 #include <sched.h> 
 #include <pthread.h>
 #include "../../Framework/Threading/ThreadMaster.h"
+#include <chrono>
 
 
 //#define DEBUG_VARIANT
@@ -19,6 +20,7 @@ using namespace Desktop::Devices;
 using namespace Games::Output::Bluetooths;
 using namespace Desktop::Devices::Gatt;
 using namespace Framework::Threading;
+using namespace std::chrono;
 
 
 #ifndef METEO_PROGRAM_VERSION
@@ -74,6 +76,15 @@ int MeteoBluetoothPhoneV2::Initialize()
 
 InputState * MeteoBluetoothPhoneV2::GetBluetoothState()
 {
+	if (!isFirstPacketSent) {
+		system_clock::time_point temp = system_clock::now();
+		if (duration_cast<milliseconds>(temp - startTime).count() / 1000 > 5000) {
+			LOG(LogLevel::Debug) << "MeteoBluetoothPhoneV2::GetBluetoothState() : app didn't send first packet. treat as a wrong app and blacklist it.";
+			macAddressBlacklist.push_back(tempMacAddress);
+			disconnectHandler.TriggerThenClear();
+		}
+	}
+
 	//return nullptr;
 
 	if (inputBytes.size() > 0)
@@ -158,6 +169,15 @@ int MeteoBluetoothPhoneV2::AddOnDisconnect(MtoObject * callableObject, function<
 	return 0;
 }
 
+bool MeteoBluetoothPhoneV2::checkMacAddressBlacklisted(string macAddress)
+{
+	for (int i = 0; i < macAddressBlacklist.size(); i++) {
+		if (macAddress == macAddressBlacklist[i])
+			return true;
+	}
+	return false;
+}
+
 bool MeteoBluetoothPhoneV2::getIsReady()
 {
 	return isConnected && isFirstPacketSent;
@@ -173,6 +193,19 @@ int MeteoBluetoothPhoneV2::work()
 			LOG(LogLevel::Debug) << "MeteoBluetoothPhoneV2::work() : start listening.";
 			gattServer = new MeteoGattServerV1();
 			GattClient* gattClient = gattServer->Listen();
+
+			if (checkMacAddressBlacklisted(gattClient->GetRemoteAddress())) {
+				LOG(LogLevel::Warning) << "MeteoBluetoothPhoneV2::work() : get blacklisted mac address connected [" << gattClient->GetRemoteAddress() << "].";
+				throw runtime_error("MeteoBluetoothPhoneV2::work() : Mac address blacklisted.");
+			}
+
+			tempMacAddress = gattClient->GetRemoteAddress();
+			disconnectHandler.Clear();
+			disconnectHandler.Add(this, [=]() {
+				gattClient->Quit();
+				return 0;
+			}, "Lambda_MeteoBluetoothPhoneV2::disconnect");
+			startTime = system_clock::now();
 
 			//gattClient->SetDataHandler(std::bind(&MeteoGattServerV1::OnIncomingMessage, dynamic_cast<MeteoGattServerV1*>(gattServer), std::placeholders::_1, std::placeholders::_2));
 			gattClient->SetDataHandler(std::bind(&MeteoBluetoothPhoneV2::handleNewPacket, this, std::placeholders::_1, std::placeholders::_2));
@@ -274,6 +307,7 @@ int MeteoBluetoothPhoneV2::ConvertPacketToMessage(const char * packet, int lengt
 
 		gattServer->GetClient()->SendNotification(buffer, 8);
 		isFirstPacketSent = true;
+		LOG(LogLevel::Debug) << "MeteoBluetoothPhoneV2::ConvertPacketToMessage() : first packet sent. treat as right app.";
 	}
 	else if (packetType == PacketType::Json) {
 

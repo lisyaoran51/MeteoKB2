@@ -31,7 +31,7 @@ namespace Gatt {
 
 		virtual int SendNotification(char* bufferOut, int size) = 0;
 
-		virtual int GetWriteQueueLength() = 0;
+		virtual std::string GetRemoteAddress() = 0;
 
 	};
 

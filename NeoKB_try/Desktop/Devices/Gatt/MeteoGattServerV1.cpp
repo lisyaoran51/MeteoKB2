@@ -275,6 +275,8 @@ GattClient * MeteoGattServerV1::MeteoGattListenerV1::Accept(std::map<std::string
 
 	auto client = new MeteoGattClientV1(soc);
 	client->Init(deviceInfoGetter);
+	client->SetRemoteAddress(remote_address);
+
 	return client;
 }
 
@@ -370,6 +372,7 @@ void MeteoGattServerV1::MeteoGattListenerV1::cmdUp(int ctl, int hdev)
 		if (errno == EALREADY)
 			return;
 		LOG(LogLevel::Error) << "Can't init device hci" << hdev << ": " << strerror(errno) << " (" << errno << ")";
+		LOG(LogLevel::Error) << "MeteoGattServerV1::MeteoGattListenerV1::cmdUp() : please reboot.";
 	}
 
 }

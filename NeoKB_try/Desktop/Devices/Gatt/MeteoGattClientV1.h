@@ -87,7 +87,9 @@ namespace Gatt {
 
 		virtual int SendNotification(char* bufferOut, int size);
 
-		virtual int GetWriteQueueLength();
+		virtual std::string GetRemoteAddress();
+
+		virtual int SetRemoteAddress(char* rAddress);
 
 		/*--------------------callbacks--------------------*/
 
@@ -134,6 +136,8 @@ namespace Gatt {
 		std::function<void(char const* buff, int n)>      m_data_handler;
 		mutable std::mutex	notifyLock;
 		std::vector<std::pair<char*,int>>	outputBytes;
+
+		std::string remoteAddress = "";
 
 
 		int buildService(std::map<std::string, std::function<std::string()>> deviceInfoGetter);

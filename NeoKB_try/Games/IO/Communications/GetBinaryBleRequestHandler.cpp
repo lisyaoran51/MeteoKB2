@@ -398,7 +398,7 @@ int GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::Fail(BleReques
 
 int GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::Success(BleRequest* thisRequest)
 {
-	LOG(LogLevel::Debug) << "GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::Fail() : handle get file request success.";
+	LOG(LogLevel::Debug) << "GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::Success() : handle get file request success.";
 
 	//if (fileName == "")
 	//	return 0;

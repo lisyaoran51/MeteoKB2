@@ -278,15 +278,15 @@ int MeteoGattClientV1::SendNotification(char * bufferOut, int size)
 	return 0;
 }
 
-int MeteoGattClientV1::GetWriteQueueLength()
+std::string MeteoGattClientV1::GetRemoteAddress()
 {
-	if (m_server == nullptr)
-		return -1;
+	return remoteAddress;
+}
 
-	LOG(LogLevel::Error) << "MeteoGattClientV1::GetWriteQueueLength() : don't use this.";
-
-	return 10;
-	//return bt_gatt_server_get_write_queue_length(m_server);
+int MeteoGattClientV1::SetRemoteAddress(char * rAddress)
+{
+	remoteAddress = std::string(rAddress);
+	return 0;
 }
 
 int MeteoGattClientV1::buildService(std::map<std::string, std::function<std::string()>> deviceInfoGetter)
