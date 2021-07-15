@@ -23,8 +23,8 @@ using namespace Framework::Threading;
 using namespace std::chrono;
 
 
-#ifndef METEO_PROGRAM_VERSION
-#define METEO_PROGRAM_VERSION 0x0
+#ifndef METEO_VERSION
+#define METEO_VERSION "Mto00000"
 #endif
 
 
@@ -76,6 +76,7 @@ int MeteoBluetoothPhoneV2::Initialize()
 
 InputState * MeteoBluetoothPhoneV2::GetBluetoothState()
 {
+#if 0
 	if (isConnected && !isFirstPacketSent) {
 		system_clock::time_point temp = system_clock::now();
 		if (duration_cast<milliseconds>(temp - startTime).count() / 1000 > 5) {
@@ -84,6 +85,7 @@ InputState * MeteoBluetoothPhoneV2::GetBluetoothState()
 			disconnectHandler.TriggerThenClear();
 		}
 	}
+#endif
 
 	//return nullptr;
 
@@ -300,7 +302,9 @@ int MeteoBluetoothPhoneV2::ConvertPacketToMessage(const char * packet, int lengt
 
 		char buffer[8] = { 0 };
 		unsigned int command = 0x01140000;// MeteoCommand::ReturnFirmwareVersion
-		unsigned int version = METEO_PROGRAM_VERSION;
+
+		string firmwareName = METEO_VERSION;
+		unsigned int version = stol(string("0x") + firmwareName.substr(3, 5), nullptr, 16);
 
 		memcpy(buffer, &command, sizeof(command));
 		memcpy(buffer + sizeof(command), &version, sizeof(version));
