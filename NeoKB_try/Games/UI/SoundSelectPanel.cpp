@@ -158,8 +158,10 @@ int SoundSelectPanel::onMessage(MeteoBluetoothMessage * message)
 
 		outputManager->PushMessage(outputMessage);
 
-		if(soundBindingSet)
+		if (soundBindingSet) {
 			dynamic_cast<Piano*>(instrument)->SwitchSoundBindings(dynamic_cast<TSoundBindingSet<Pitch>*>(soundBindingSet));
+			tempSoundName = soundBank;
+		}
 
 
 	}
