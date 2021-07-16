@@ -16,7 +16,7 @@ InstantGlowLineEffect::InstantGlowLineEffect(int xPos, int yPos, MTO_FLOAT sTime
 
 string InstantGlowLineEffect::GetTypeName()
 {
-	return "GlowLineEffect";
+	return "InstantGlowLineEffect";
 }
 
 Effect * InstantGlowLineEffect::Clone()

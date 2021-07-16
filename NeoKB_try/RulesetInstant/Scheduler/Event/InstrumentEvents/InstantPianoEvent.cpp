@@ -16,7 +16,7 @@ pair<InputKey, int> InstantPianoEvent::GetInput()
 }
 
 string InstantPianoEvent::GetTypeName() {
-	return "PianoEvent";
+	return "InstantPianoEvent";
 }
 
 Event * InstantPianoEvent::Clone()

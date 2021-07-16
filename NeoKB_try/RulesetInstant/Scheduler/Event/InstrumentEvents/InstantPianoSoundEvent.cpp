@@ -35,7 +35,7 @@ bool InstantPianoSoundEvent::GetPedalDown()
 
 string InstantPianoSoundEvent::GetTypeName()
 {
-	return "PianoSoundEvent";
+	return "InstantPianoSoundEvent";
 }
 
 Event * InstantPianoSoundEvent::Clone()

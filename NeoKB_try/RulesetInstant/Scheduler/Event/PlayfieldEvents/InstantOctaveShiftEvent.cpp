@@ -12,7 +12,7 @@ InstantOctaveShiftEvent::InstantOctaveShiftEvent(InstantOctaveShiftType oShiftTy
 
 string InstantOctaveShiftEvent::GetTypeName()
 {
-	return "OctaveShiftEvent";
+	return "InstantOctaveShiftEvent";
 }
 
 Event * InstantOctaveShiftEvent::Clone()
