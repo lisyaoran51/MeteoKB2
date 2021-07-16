@@ -49,18 +49,6 @@ int InstantVirtualPianoController::implementControlInstrument(EventProcessor<Eve
 			piano->ReleasePedal();
 		}
 	}
-	else if (soundEvent->GetPianoSoundEventType() == InstantPianoSoundEventType::Octave) {
-		LOG(LogLevel::Depricated) << "InstantVirtualPianoController::implementControlInstrument() : octave [" << soundEvent->GetStartTime() << "] " << (soundEvent->GetOctaveMovement() == PianoPitchMovement::Lower ? "Lower" : "Raise") << ".";
-		
-		if (soundEvent->GetOctaveMovement() == PianoPitchMovement::Lower) {
-			piano->MoveOctave(PianoPitchMovement::Lower);
-		}
-		else if (soundEvent->GetOctaveMovement() == PianoPitchMovement::Raise) {
-			piano->MoveOctave(PianoPitchMovement::Raise);
-		}
-		else
-			LOG(LogLevel::Warning) << "InstantVirtualPianoController::implementControlInstrument() : wrong octave.";
-	}
 
 	return 0;
 }
