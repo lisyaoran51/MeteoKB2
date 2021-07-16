@@ -88,7 +88,7 @@ int InstantDynamicEventGenerator::onMessage(MeteoBluetoothMessage * message)
 				break;
 			}
 
-			InstantFallEffect* instantFallEffect = new InstantFallEffect(Pitch(key), GetClock()->GetCurrentTime() + time, 16.0 / fallSpeed, fallSpeed);
+			InstantFallEffect* instantFallEffect = new InstantFallEffect(Pitch(key), GetClock()->GetCurrentTime() + time, 16.0 / fallSpeed + time, fallSpeed);
 
 			unique_lock<mutex> uLock(dynamicEventsMutex);
 
