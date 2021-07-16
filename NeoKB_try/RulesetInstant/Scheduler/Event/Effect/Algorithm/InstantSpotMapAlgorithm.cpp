@@ -46,7 +46,7 @@ int InstantSpotMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper<Ins
 		return -1;
 
 	MTO_FLOAT lifeTime = em->GetLifeTime();
-	if (startTime + lifeTime > currentTime)
+	if (startTime + lifeTime < currentTime)
 		return -1;
 
 
@@ -105,6 +105,7 @@ int InstantSpotMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper<Ins
 	//
 	//}
 	m->Add(width + xShiftLength, height + spotYPosition, 1);
+	isAdded = true;
 
 	if (isAdded)
 		LOG(LogLevel::Depricated) << "InstantGlowLineMapGenerateAlgorithm::ImplementGenerate : current time = " << currentTime << ", start time = " << em->GetStartTime() << [](int width, int height, Map* m) {
