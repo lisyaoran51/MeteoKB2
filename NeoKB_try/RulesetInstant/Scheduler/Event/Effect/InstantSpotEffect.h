@@ -50,6 +50,8 @@ namespace Effects {
 			MTO_FLOAT l
 		);
 
+		virtual int GetX();
+
 		EffectPinType GetEffectPinType();
 
 		Pitch GetPitch();

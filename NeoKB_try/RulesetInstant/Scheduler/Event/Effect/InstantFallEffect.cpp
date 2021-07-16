@@ -27,6 +27,19 @@ InstantFallEffect::InstantFallEffect(Pitch p, MTO_FLOAT sTime, MTO_FLOAT l, MTO_
 	SetSpeed(sp);
 }
 
+int InstantFallEffect::GetX()
+{
+	if (effectPinType == EffectPinType::ByPosition)
+		return Effect::GetX();
+	if (effectPinType == EffectPinType::ByPitch) {
+		return int(pitch);
+	}
+
+	LOG(LogLevel::Warning) << "InstantFallEffect::GetX() : no effect pin type set.";
+
+	return 0;
+}
+
 int InstantFallEffect::ApplyDefaultValues(SmDifficulty * smDifficulty)
 {
 

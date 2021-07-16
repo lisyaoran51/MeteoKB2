@@ -182,6 +182,14 @@ namespace Input{
 
 		InstantInputManager(RulesetInfo* rInfo);
 
+	protected:
+
+		/// <summary>
+		/// 因為user input manager就會執行一次propagateBluetoothMessage，所以這邊不用再執行
+		/// TODO: 以後應該改成每一種ruleset都有各自的bluetooth message
+		/// </summary>
+		virtual int propagateBluetoothMessage(vector<Triggerable*>* queue, InputState* state, BluetoothMessage* message);
+
 	};
 
 

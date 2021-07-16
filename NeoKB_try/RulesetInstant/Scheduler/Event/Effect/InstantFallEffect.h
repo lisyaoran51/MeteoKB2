@@ -57,6 +57,8 @@ namespace Effects {
 			MTO_FLOAT sp
 		);
 
+		virtual int GetX();
+
 		virtual int ApplyDefaultValues(SmDifficulty* smDifficulty);
 
 		int SetTargetHeight(int tHeight);

@@ -1,6 +1,7 @@
 #include "InstantFallMapAlgorithm.h"
 
 #include "../../../../../Games/Scene/Play/Playfield.h"
+#include "../../../../Scenes/Play/InstantPlayfield.h"
 
 
 using namespace Instant::Schedulers::Events::Effects::Algorithms;
@@ -8,6 +9,7 @@ using namespace Instant::Schedulers::Events::Effects;
 using namespace Games::Schedulers::Events::Effects;
 using namespace Instant::Config;
 using namespace Games::Scenes::Play;
+using namespace Instant::Scenes::Play;
 
 
 
@@ -86,8 +88,19 @@ int InstantFallMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper<Ins
 		return -1;
 	}
 
-	int xPosition = playfield->GetXPositionFromPitch(dynamic_cast<InstantFallEffect*>(em->GetEvent())->GetPitch());
-	LOG(LogLevel::Debug) << "InstantFallMapGenerateAlgorithm::ImplementGenerate : x position is " << xPosition;
+
+	//int xPosition = playfield->GetXPositionFromPitch(dynamic_cast<InstantFallEffect*>(em->GetEvent())->GetPitch());
+
+	int xShiftLength = 0;
+	switch (dynamic_cast<InstantPlayfield*>(playfield)->GetMeteoPianoPitchState()) {
+	case MeteoPianoPitchState::Lowered:
+		xShiftLength = 12;
+		break;
+	case MeteoPianoPitchState::Raised:
+		xShiftLength = -12;
+		break;
+	}
+	
 
 	if (xPosition < 0 || xPosition >= width)
 		return -1;
@@ -133,7 +146,7 @@ int InstantFallMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper<Ins
 
 		/* ·sª©fall algo */
 		if (i > meteorPos - 0.5 && i <= meteorPos + 0.5) {
-			m->Add(width + xPosition, height + i, 1);
+			m->Add(width + xShiftLength, height + i, 1);
 			isAdded = true;
 			break;
 		}
@@ -150,7 +163,7 @@ int InstantFallMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper<Ins
 				s += to_string(m->Get(i, j));
 				s += " ";
 			}
-			LOG(LogLevel::Finest) << "| " << s << "|";
+			LOG(LogLevel::Debug) << "| " << s << "|";
 		}
 		return 0;
 	}(width, height, m);

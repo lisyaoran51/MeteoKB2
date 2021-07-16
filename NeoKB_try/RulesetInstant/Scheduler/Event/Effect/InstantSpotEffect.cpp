@@ -22,6 +22,19 @@ InstantSpotEffect::InstantSpotEffect(Pitch p, MTO_FLOAT sTime, MTO_FLOAT l) : Ef
 	pitch = p;
 }
 
+int InstantSpotEffect::GetX()
+{
+	if (effectPinType == EffectPinType::ByPosition)
+		return Effect::GetX();
+	if (effectPinType == EffectPinType::ByPitch) {
+		return int(pitch);
+	}
+
+	LOG(LogLevel::Warning) << "InstantFallEffect::GetX() : no effect pin type set.";
+
+	return 0;
+}
+
 EffectPinType InstantSpotEffect::GetEffectPinType()
 {
 	return effectPinType;

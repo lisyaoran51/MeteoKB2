@@ -9,3 +9,8 @@ InstantInputManager::InstantInputManager(RulesetInfo * rInfo): RulesetInputManag
 
 
 }
+
+int InstantInputManager::propagateBluetoothMessage(vector<Triggerable*>* queue, InputState * state, BluetoothMessage * message)
+{
+	return 0;
+}
