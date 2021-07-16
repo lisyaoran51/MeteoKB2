@@ -93,7 +93,7 @@ int InstantSpotMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper<Ins
 	case 6:
 	case 8:
 	case 10:
-		spotYPosition = 6;
+		spotYPosition = 5;
 		break;
 	}
 

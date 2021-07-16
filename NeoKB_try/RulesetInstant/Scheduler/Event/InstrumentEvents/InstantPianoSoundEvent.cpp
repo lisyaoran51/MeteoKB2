@@ -17,10 +17,16 @@ InstantPianoSoundEvent::InstantPianoSoundEvent(bool pDown, MTO_FLOAT s, MTO_FLOA
 	pedalDown = pDown;
 }
 
+InstantPianoSoundEvent::InstantPianoSoundEvent(PianoPitchMovement octave, MTO_FLOAT s, MTO_FLOAT l) : InstrumentEvent(s, l)
+{
+	pianoSoundEventType = InstantPianoSoundEventType::Octave;
+	octaveMovement = octave;
+}
+
 pair<Pitch, float> InstantPianoSoundEvent::GetSound()
 {
 	if (pianoSoundEventType != InstantPianoSoundEventType::Pitch)
-		throw runtime_error("PianoSoundEvent::GetSound() : wrong PianoSoundEventType.");
+		throw runtime_error("InstantPianoSoundEvent::GetSound() : wrong PianoSoundEventType.");
 
 	return sound;
 }
@@ -28,9 +34,16 @@ pair<Pitch, float> InstantPianoSoundEvent::GetSound()
 bool InstantPianoSoundEvent::GetPedalDown()
 {
 	if (pianoSoundEventType != InstantPianoSoundEventType::Pedal)
-		throw runtime_error("PianoSoundEvent::GetPedalDown() : wrong PianoSoundEventType.");
+		throw runtime_error("InstantPianoSoundEvent::GetPedalDown() : wrong PianoSoundEventType.");
 
 	return pedalDown;
+}
+
+PianoPitchMovement InstantPianoSoundEvent::GetOctaveMovement()
+{
+	if (pianoSoundEventType != InstantPianoSoundEventType::Octave)
+		throw runtime_error("InstantPianoSoundEvent::GetOctaveMovement() : wrong PianoSoundEventType.");
+	return octaveMovement;
 }
 
 string InstantPianoSoundEvent::GetTypeName()

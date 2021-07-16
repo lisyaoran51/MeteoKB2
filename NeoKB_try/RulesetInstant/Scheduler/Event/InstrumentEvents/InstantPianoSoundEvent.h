@@ -4,6 +4,7 @@
 
 #include "../../../../Games/Scheduler/Event/InstrumentEvents/InstrumentEvent.h"
 #include "../../../../Instruments/Pitch.h"
+#include "../../../../Instruments/Piano.h"
 
 
 using namespace Games::Schedulers::Events::InstrumentEvents;
@@ -18,7 +19,8 @@ namespace InstrumentEvents{
 	enum class InstantPianoSoundEventType {
 		None,
 		Pitch,
-		Pedal
+		Pedal,
+		Octave
 	};
 
 	class InstantPianoSoundEvent : public InstrumentEvent {
@@ -28,6 +30,8 @@ namespace InstrumentEvents{
 		InstantPianoSoundEvent(pair<Pitch, float> input, MTO_FLOAT s, MTO_FLOAT l);
 
 		InstantPianoSoundEvent(bool pDown, MTO_FLOAT s, MTO_FLOAT l);
+
+		InstantPianoSoundEvent(PianoPitchMovement octave, MTO_FLOAT s, MTO_FLOAT l);
 
 		// 一定要每次都override!!
 		virtual string GetTypeName();
@@ -40,6 +44,8 @@ namespace InstrumentEvents{
 
 		bool GetPedalDown();
 
+		PianoPitchMovement GetOctaveMovement();
+
 	protected:
 
 		InstantPianoSoundEventType pianoSoundEventType = InstantPianoSoundEventType::None;
@@ -47,6 +53,8 @@ namespace InstrumentEvents{
 		pair<Pitch, float> sound = pair<Pitch, float>();
 
 		bool pedalDown = false;
+
+		PianoPitchMovement octaveMovement = PianoPitchMovement::None;
 
 	};
 

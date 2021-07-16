@@ -190,15 +190,25 @@ int InstantDynamicEventGenerator::onMessage(MeteoBluetoothMessage * message)
 				return -1;
 
 			InstantOctaveShiftEvent* instantOctaveShift = nullptr;
+			InstantPianoEvent* instantPianoEventOctaveShift = nullptr;
+			InstantPianoSoundEvent* instantPianoSoundEventOctaveShift = nullptr;
 
-			if(shiftDirection == 1)
+			if (shiftDirection == 1) {
 				instantOctaveShift = new InstantOctaveShiftEvent(InstantOctaveShiftType::Raise, GetClock()->GetCurrentTime(), 0);
-			else if(shiftDirection == -1)
+				instantPianoEventOctaveShift = new InstantPianoEvent(pair<InputKey, int>(InputKey::RaiseOctave, 1), GetClock()->GetCurrentTime(), 0);
+				instantPianoSoundEventOctaveShift = new InstantPianoSoundEvent(PianoPitchMovement::Raise, GetClock()->GetCurrentTime(), 0);
+			}
+			else if (shiftDirection == -1) {
 				instantOctaveShift = new InstantOctaveShiftEvent(InstantOctaveShiftType::Lower, GetClock()->GetCurrentTime(), 0);
+				instantPianoEventOctaveShift = new InstantPianoEvent(pair<InputKey, int>(InputKey::LowerOctave, 1), GetClock()->GetCurrentTime(), 0);
+				instantPianoSoundEventOctaveShift = new InstantPianoSoundEvent(PianoPitchMovement::Lower, GetClock()->GetCurrentTime(), 0);
+			}
 
 			unique_lock<mutex> uLock(dynamicEventsMutex);
 
 			dynamicEvents.push_back(instantOctaveShift);
+			dynamicEvents.push_back(instantPianoEventOctaveShift);
+			dynamicEvents.push_back(instantPianoSoundEventOctaveShift);
 		}
 
 		// TODO: Stop Spot Effect
