@@ -416,8 +416,8 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 		}
 		
 		/* playfield事件 */
-		if (filteredTempStaticEventProcessors[i]->GetEventProcessorType() == EventProcessorType::Playfield) {
-			PlayfieldEventProcessorInterface* playfieldEventProcessor = dynamic_cast<PlayfieldEventProcessorInterface*>(filteredTempStaticEventProcessors[i]);
+		if (dynamicEventProcessors[i]->GetEventProcessorType() == EventProcessorType::Playfield) {
+			PlayfieldEventProcessorInterface* playfieldEventProcessor = dynamic_cast<PlayfieldEventProcessorInterface*>(dynamicEventProcessors[i]);
 			if (playfieldEventProcessor) {
 				if (playfieldEventProcessor->GetStartTime() < currentTime && playfieldEventProcessor->GetIsControllable()) {
 					LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent : found playfield event processor [" << playfieldEventProcessor->GetStartTime() << "].";
@@ -510,7 +510,7 @@ Map * EventProcessorMaster::GetGraph()
 	for (int i = 0; i < dynamicEventProcessors.size(); i++) {
 		EffectMapperInterface* effectMapper = dynamic_cast<EffectMapperInterface*>(dynamicEventProcessors[i]);
 		if (effectMapper) {
-			LOG(LogLevel::Debug) << "EventProcessorMaster::GetGraph : draw dynamic effect [" << effectMapper << "].";
+			LOG(LogLevel::Depricated) << "EventProcessorMaster::GetGraph : draw dynamic effect [" << effectMapper << "].";
 			effectMapper->Draw(graph);
 		}
 	}
@@ -554,7 +554,7 @@ int EventProcessorMaster::update()
 
 		bool thisOneNeedDelete = false;
 
-		LOG(LogLevel::Debug) << "EventProcessorMaster::update : step 1 get timed";
+		LOG(LogLevel::Depricated) << "EventProcessorMaster::update : step 1 get timed";
 
 		if ((*iter)->GetProcessorLifeType() == EventLifeType::Timed &&
 			(*iter)->GetTimeLeft() <= 0) {
@@ -569,7 +569,7 @@ int EventProcessorMaster::update()
 		}
 		
 		if (thisOneNeedDelete) {
-			LOG(LogLevel::Debug) << "EventProcessorMaster::update : step 2 erase.";
+			LOG(LogLevel::Depricated) << "EventProcessorMaster::update : step 2 erase.";
 			if (!isDeleting) {
 				/* 每次要用dynamic processors時，就要鎖起來 (用mutex就好，可以刪掉)*/
 				isDeleting = true;
@@ -582,7 +582,7 @@ int EventProcessorMaster::update()
 
 			
 
-			LOG(LogLevel::Debug) << "EventProcessorMaster::update : step 3 delete.";
+			LOG(LogLevel::Depricated) << "EventProcessorMaster::update : step 3 delete.";
 			// TODO: 這邊會有thread safe的問題，要lock
 			Event* e = ep->GetEvent();
 			delete ep;
