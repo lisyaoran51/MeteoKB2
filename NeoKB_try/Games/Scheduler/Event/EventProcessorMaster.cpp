@@ -554,7 +554,7 @@ int EventProcessorMaster::update()
 
 		bool thisOneNeedDelete = false;
 
-		LOG(LogLevel::Depricated) << "EventProcessorMaster::update : step 1 get timed";
+		LOG(LogLevel::Debug) << "EventProcessorMaster::update : step 1 get timed";
 
 		if ((*iter)->GetProcessorLifeType() == EventLifeType::Timed &&
 			(*iter)->GetTimeLeft() <= 0) {
@@ -569,7 +569,7 @@ int EventProcessorMaster::update()
 		}
 		
 		if (thisOneNeedDelete) {
-			LOG(LogLevel::Depricated) << "EventProcessorMaster::update : step 2 erase.";
+			LOG(LogLevel::Debug) << "EventProcessorMaster::update : step 2 erase.";
 			if (!isDeleting) {
 				/* 每次要用dynamic processors時，就要鎖起來 (用mutex就好，可以刪掉)*/
 				isDeleting = true;
@@ -582,7 +582,7 @@ int EventProcessorMaster::update()
 
 			
 
-			LOG(LogLevel::Depricated) << "EventProcessorMaster::update : step 3 delete.";
+			LOG(LogLevel::Debug) << "EventProcessorMaster::update : step 3 delete.";
 			// TODO: 這邊會有thread safe的問題，要lock
 			Event* e = ep->GetEvent();
 			delete ep;
