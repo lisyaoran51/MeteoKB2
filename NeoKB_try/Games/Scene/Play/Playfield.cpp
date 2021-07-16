@@ -296,7 +296,7 @@ int Playfield::AddDynamic(EventProcessor<Event>* ep) {
 			throw runtime_error("Playfield::AddDynamic() : effect map algo not found");
 
 	}
-	else if (ep->CanCast<InstrumentControllerInterface>()) {
+	else if (ep->CanCast<InstrumentEventProcessorInterface>()) {
 
 		// 為什麼不用event自己來create? 因為要去搭配不同的mapper，所以要動態調配
 		string processorType = ep->GetEventTypeName();
@@ -343,6 +343,9 @@ int Playfield::AddDynamic(EventProcessor<Event>* ep) {
 		}
 		else
 			throw runtime_error("Playfield::AddDynamic() : event handler not found");
+	}
+	else {
+		throw runtime_error("Playfield::AddDynamic() : no matched inteface. event handler not found");
 	}
 
 	eventProcessorMaster->AddDynamicEventProcessor(ep);
