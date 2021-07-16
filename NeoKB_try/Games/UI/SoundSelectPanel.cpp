@@ -129,7 +129,7 @@ int SoundSelectPanel::onMessage(MeteoBluetoothMessage * message)
 
 		json context = contextMessage->GetContextInJson();
 
-		string soundBank = context["Instrument"];
+		string soundBank = context["Name"];
 		
 		vector<SoundBindingSet*>* soundBindingSets = audioManager->GetSampleManager()->GetSoundBindingSets();
 
