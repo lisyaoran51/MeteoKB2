@@ -409,7 +409,8 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 			if (instrumentEventProcessor) {
 				if (instrumentEventProcessor->GetStartTime() < currentTime && instrumentEventProcessor->GetIsTransferable()) {
 					LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent : found instrument event processor [" << instrumentEventProcessor->GetStartTime() << "].";
-					instrumentEventProcessor->ControlInstrument();
+					//instrumentEventProcessor->ControlInstrument();
+					instrumentEventProcessor->Process();
 				}
 			}
 			continue;
@@ -421,7 +422,8 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 			if (playfieldEventProcessor) {
 				if (playfieldEventProcessor->GetStartTime() < currentTime && playfieldEventProcessor->GetIsControllable()) {
 					LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent : found playfield event processor [" << playfieldEventProcessor->GetStartTime() << "].";
-					playfieldEventProcessor->ControlPlayfield();
+					//playfieldEventProcessor->ControlPlayfield();
+					playfieldEventProcessor->Process();
 				}
 			}
 			continue;
