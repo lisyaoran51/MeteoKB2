@@ -547,8 +547,6 @@ int EventProcessorMaster::update()
 	if(dynamicEventProcessors.size() > 0)
 		LOG(LogLevel::Depricated) << "EventProcessorMaster::update : [" << dynamicEventProcessors.size() << "] dynamic processors.";
 
-	/* 每次要用dynamic processors時，就要鎖起來 */
-	lock_guard<mutex> guard(processorsMutex);
 
 	/* 是件結束了就刪掉 */
 	vector<EventProcessor<Event>*>::iterator iter;
@@ -576,8 +574,10 @@ int EventProcessorMaster::update()
 				/* 每次要用dynamic processors時，就要鎖起來 (用mutex就好，可以刪掉)*/
 				isDeleting = true;
 			}
-			lock_guard<mutex> guard(processorsMutex);
 
+
+			/* 每次要用dynamic processors時，就要鎖起來 */
+			lock_guard<mutex> guard(processorsMutex);
 			EventProcessor<Event>* ep = *iter;
 			dynamicEventProcessors.erase(iter);
 			iter--;
