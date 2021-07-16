@@ -42,7 +42,7 @@ int InstantSpotMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper<Ins
 
 	MTO_FLOAT currentTime = em->GetCurrentTime();// em->GetCurrentTime();
 	MTO_FLOAT startTime = em->GetStartTime();
-	if (startTime < currentTime)
+	if (startTime > currentTime)
 		return -1;
 
 	MTO_FLOAT lifeTime = em->GetLifeTime();
