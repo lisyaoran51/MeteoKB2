@@ -102,8 +102,6 @@ int InstantFallMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper<Ins
 	}
 	
 
-	if (xPosition < 0 || xPosition >= width)
-		return -1;
 
 	bool isAdded = false;
 

@@ -1,10 +1,12 @@
 #include "InstantSpotMapAlgorithm.h"
 
 #include "../../../../../Games/Scene/Play/Playfield.h"
+#include "../../../../Scenes/Play/InstantPlayfield.h"
 
 
 using namespace Instant::Schedulers::Events::Effects::Algorithms;
 using namespace Games::Scenes::Play;
+using namespace Instant::Scenes::Play;
 
 
 int InstantSpotMapAlgorithm::load()
@@ -57,10 +59,15 @@ int InstantSpotMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper<Ins
 		return -1;
 	}
 
-	int xPosition = playfield->GetXPositionFromPitch(dynamic_cast<InstantSpotEffect*>(em->GetEvent())->GetPitch());
-
-	if (xPosition < 0 || xPosition >= width)
-		return -1;
+	int xShiftLength = 0;
+	switch (dynamic_cast<InstantPlayfield*>(playfield)->GetMeteoPianoPitchState()) {
+	case MeteoPianoPitchState::Lowered:
+		xShiftLength = 12;
+		break;
+	case MeteoPianoPitchState::Raised:
+		xShiftLength = -12;
+		break;
+	}
 
 
 	bool isAdded = false;
@@ -80,7 +87,7 @@ int InstantSpotMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper<Ins
 	}(width, height, m);
 
 	int spotYPosition = 0;
-	switch (xPosition % 12) {
+	switch (em->GetX() % 12) {
 	case 1:
 	case 3:
 	case 6:
@@ -94,7 +101,7 @@ int InstantSpotMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper<Ins
 	// 算流星燈每一個燈泡的亮度，從下面網上算
 	for (int i = 0; i < height; i++) {
 
-		m->Add(width + xPosition, height + spotYPosition, 1);
+		m->Add(width + xShiftLength, height + spotYPosition, 1);
 
 	}
 
