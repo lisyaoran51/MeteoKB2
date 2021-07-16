@@ -86,24 +86,25 @@ int InstantSpotMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper<Ins
 		return 0;
 	}(width, height, m);
 
-	int spotYPosition = 0;
+	int spotYPosition = 15;
 	switch (em->GetX() % 12) {
 	case 1:
 	case 3:
 	case 6:
 	case 8:
 	case 10:
-		spotYPosition = 6;
+		spotYPosition = 10;
 		break;
 	}
 
 	// 公式: -256*y + 256 
 	// 算流星燈每一個燈泡的亮度，從下面網上算
-	for (int i = 0; i < height; i++) {
-
-		m->Add(width + xShiftLength, height + spotYPosition, 1);
-
-	}
+	//for (int i = 0; i < height; i++) {
+	//
+	//	m->Add(width + xShiftLength, height + spotYPosition, 1);
+	//
+	//}
+	m->Add(width + xShiftLength, height + spotYPosition, 1);
 
 	if (isAdded)
 		LOG(LogLevel::Depricated) << "InstantGlowLineMapGenerateAlgorithm::ImplementGenerate : current time = " << currentTime << ", start time = " << em->GetStartTime() << [](int width, int height, Map* m) {
