@@ -87,6 +87,7 @@ int InstantFallMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper<Ins
 	}
 
 	int xPosition = playfield->GetXPositionFromPitch(dynamic_cast<InstantFallEffect*>(em->GetEvent())->GetPitch());
+	LOG(LogLevel::Debug) << "InstantFallMapGenerateAlgorithm::ImplementGenerate : x position is " << xPosition;
 
 	if (xPosition < 0 || xPosition >= width)
 		return -1;
@@ -140,8 +141,8 @@ int InstantFallMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper<Ins
 	}
 
 	if (isAdded)
-		LOG(LogLevel::Depricated) << "InstantFallMapGenerateAlgorithm::ImplementGenerate : current time = " << currentTime << ", start time = " << em->GetStartTime() << [](int width, int height, Map* m) {
-		LOG(LogLevel::Finest) << "InstantFallMapGenerateAlgorithm::ImplementGenerate : light map - after";
+		LOG(LogLevel::Debug) << "InstantFallMapGenerateAlgorithm::ImplementGenerate : current time = " << currentTime << ", start time = " << em->GetStartTime() << [](int width, int height, Map* m) {
+		LOG(LogLevel::Debug) << "InstantFallMapGenerateAlgorithm::ImplementGenerate : light map - after";
 		// 因為只看畫面中央，所以不看其他排
 		for (int i = 0; i < width * 2; i++) {
 			string s;

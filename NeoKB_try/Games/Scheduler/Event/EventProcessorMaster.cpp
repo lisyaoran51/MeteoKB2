@@ -399,7 +399,7 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 	lock_guard<mutex> guard(processorsMutex);
 	for (int i = 0; i < dynamicEventProcessors.size(); i++) {
 
-		LOG(LogLevel::Debug) << "EventProcessorMaster::processEvent : this processor is for [" << dynamicEventProcessors[i]->GetEvent()->GetTypeName() << "] [" << dynamicEventProcessors[i]->GetStartTime() << "]. " << currentTime;
+		LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent : this processor is for [" << dynamicEventProcessors[i]->GetEvent()->GetTypeName() << "] [" << dynamicEventProcessors[i]->GetStartTime() << "]. " << currentTime;
 
 		if (dynamicEventProcessors[i]->GetStartTime() >= currentTime)
 			continue;

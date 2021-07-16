@@ -7,6 +7,7 @@
 #include "../Scheduler/Event/Effect/InstantFallEffect.h"
 #include "../Scheduler/Event/Effect/InstantFallEffectMapper.h"
 #include "../Scheduler/Event/Effect/InstantGlowLineEffectMapper.h"
+#include "../Scheduler/Event/Effect/InstantSpotEffectMapper.h"
 #include "../Scheduler/Event/PlayfieldEvents/InstantOctaveShiftEventProcessor.h"
 #include "../Scheduler/Event/InstrumentEvents/InstantPianoEventProcessor.h"
 #include "../Scheduler/Event/InstrumentEvents/InstantPianoSoundEventProcessor.h"
@@ -166,6 +167,11 @@ EventProcessor<Event>* InstantRulesetExecutor::getEventProcessor(Event * e)
 		int width = playfield->GetWidth();
 		int height = playfield->GetHeight();
 		return (new InstantGlowLineEffectMapper(width, height))->RegisterEvent(e);
+	}
+	else if (processorType == "InstantSpotEffectMapper") {
+		int width = playfield->GetWidth();
+		int height = playfield->GetHeight();
+		return (new InstantSpotEffectMapper(width, height))->RegisterEvent(e);
 	}
 	else if (processorType == "InstantOctaveShiftEventProcessor") {
 		return (new InstantOctaveShiftEventProcessor())->RegisterEvent(e);
