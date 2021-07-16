@@ -152,8 +152,8 @@ int InstantFallMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper<Ins
 	}
 
 	if (isAdded)
-		LOG(LogLevel::Debug) << "InstantFallMapGenerateAlgorithm::ImplementGenerate : current time = " << currentTime << ", start time = " << em->GetStartTime() << [](int width, int height, Map* m) {
-		LOG(LogLevel::Debug) << "InstantFallMapGenerateAlgorithm::ImplementGenerate : light map - after";
+		LOG(LogLevel::Depricated) << "InstantFallMapGenerateAlgorithm::ImplementGenerate : current time = " << currentTime << ", start time = " << em->GetStartTime() << [](int width, int height, Map* m) {
+		LOG(LogLevel::Depricated) << "InstantFallMapGenerateAlgorithm::ImplementGenerate : light map - after";
 		// 因為只看畫面中央，所以不看其他排
 		for (int i = 0; i < width * 2; i++) {
 			string s;
@@ -161,7 +161,7 @@ int InstantFallMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper<Ins
 				s += to_string(m->Get(i, j));
 				s += " ";
 			}
-			LOG(LogLevel::Debug) << "| " << s << "|";
+			LOG(LogLevel::Depricated) << "| " << s << "|";
 		}
 		return 0;
 	}(width, height, m);
