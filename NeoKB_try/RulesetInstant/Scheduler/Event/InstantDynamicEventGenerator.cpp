@@ -26,6 +26,8 @@ using namespace Instant::Scenes::Play;
 
 InstantDynamicEventGenerator::InstantDynamicEventGenerator(Playfield * p) : RegisterType("InstantDynamicEventGenerator"), DynamicEventGenerator(p)
 {
+	isInputable = true;
+	isPresent = true;
 	fallSpeed = dynamic_cast<InstantPlayfield*>(p)->GetWorkingSm()->GetSm()->GetSmInfo()->difficuty->Speed;
 }
 
@@ -37,6 +39,8 @@ int InstantDynamicEventGenerator::SetPlayfield(Playfield * p)
 
 int InstantDynamicEventGenerator::onMessage(MeteoBluetoothMessage * message)
 {
+
+	LOG(LogLevel::Debug) << "InstantDynamicEventGenerator::onMessage() : get bt message.";
 	if (message->GetCommand() == MeteoCommand::AppGameEvent) {
 
 		MeteoContextBluetoothMessage* contextMessage = dynamic_cast<MeteoContextBluetoothMessage*>(message);
