@@ -387,12 +387,19 @@ int EventProcessorMaster::processEvent(MTO_FLOAT elapsedTime)
 
 	}
 
+
+
 	/*
 	 * dynamic events，目前只有instant模式會使用
 	 */
+	if (dynamicEventProcessors.size() == 0)
+		return 0;
+
+	/* 每次要用dynamic processors時，就要鎖起來 */
+	lock_guard<mutex> guard(processorsMutex);
 	for (int i = 0; i < dynamicEventProcessors.size(); i++) {
 
-		LOG(LogLevel::Depricated) << "EventProcessorMaster::processEvent : this processor is for [" << dynamicEventProcessors[i]->GetEvent()->GetTypeName() << "] [" << filteredTempStaticEventProcessors[i]->GetStartTime() << "]. " << currentTime;
+		LOG(LogLevel::Debug) << "EventProcessorMaster::processEvent : this processor is for [" << dynamicEventProcessors[i]->GetEvent()->GetTypeName() << "] [" << dynamicEventProcessors[i]->GetStartTime() << "]. " << currentTime;
 
 		if (dynamicEventProcessors[i]->GetStartTime() >= currentTime)
 			continue;
@@ -494,13 +501,16 @@ Map * EventProcessorMaster::GetGraph()
 
 	//return graph;
 
+	if (dynamicEventProcessors.size() == 0)
+		return graph;
+
 	/* 每次要用dynamic processors時，就要鎖起來 */
 	lock_guard<mutex> guard(processorsMutex);
 
 	for (int i = 0; i < dynamicEventProcessors.size(); i++) {
 		EffectMapperInterface* effectMapper = dynamic_cast<EffectMapperInterface*>(dynamicEventProcessors[i]);
 		if (effectMapper) {
-			LOG(LogLevel::Depricated) << "EventProcessorMaster::GetGraph : draw dynamic effect [" << effectMapper << "].";
+			LOG(LogLevel::Debug) << "EventProcessorMaster::GetGraph : draw dynamic effect [" << effectMapper << "].";
 			effectMapper->Draw(graph);
 		}
 	}
@@ -528,11 +538,15 @@ int EventProcessorMaster::update()
 
 	LOG(LogLevel::Depricated) << "EventProcessorMaster::update() : Process event over.";
 
-	//return 0;
+	if (dynamicEventProcessors.size() == 0)
+		return 0;
 
 	bool isDeleting = false;
 	if(dynamicEventProcessors.size() > 0)
 		LOG(LogLevel::Depricated) << "EventProcessorMaster::update : [" << dynamicEventProcessors.size() << "] dynamic processors.";
+
+	/* 每次要用dynamic processors時，就要鎖起來 */
+	lock_guard<mutex> guard(processorsMutex);
 
 	/* 是件結束了就刪掉 */
 	vector<EventProcessor<Event>*>::iterator iter;
@@ -545,6 +559,7 @@ int EventProcessorMaster::update()
 		if ((*iter)->GetProcessorLifeType() == EventLifeType::Timed &&
 			(*iter)->GetTimeLeft() <= 0) {
 
+			LOG(LogLevel::Debug) << "EventProcessorMaster::update : event [" << (*iter)->GetEventTypeName() << "] is to delete.";
 			thisOneNeedDelete = true;
 		}
 		else if ((*iter)->GetProcessorLifeType() == EventLifeType::Immediate &&

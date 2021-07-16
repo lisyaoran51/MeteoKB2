@@ -120,6 +120,7 @@ using namespace Instant::Schedulers::Events::Effects::Algorithms;
 
 // Instant/Schedulers/Events/InstrumentEvents/InstrumentControllers
 #include "../RulesetInstant/Scheduler/Event/InstrumentEvents/InstrumentControllers/InstantVirtualPianoController.h"
+#include "../RulesetInstant/Scheduler/Event/InstrumentEvents/InstrumentControllers/InstantPianoController.h"
 using namespace Instant::Schedulers::Events::InstrumentEvents::InstrumentControllers;
 
 // Instant/Schedulers/Events/PlayfieldEvents/PlayfieldControllers
@@ -270,6 +271,7 @@ int ProgramInitializer::Initialize()
 	iCreator.RegisterType<InstantSpotMapAlgorithm>("InstantSpotMapAlgorithm");
 
 	// Instant/Schedulers/Events/InstrumentEvents/InstrumentControllers
+	iCreator.RegisterType<InstantPianoController>("InstantPianoController");
 	iCreator.RegisterType<InstantVirtualPianoController>("InstantVirtualPianoController");
 
 	// Instant/Schedulers/Events/PlayfieldEvents/PlayfieldControllers
