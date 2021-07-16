@@ -86,14 +86,14 @@ int InstantSpotMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper<Ins
 		return 0;
 	}(width, height, m);
 
-	int spotYPosition = 15;
+	int spotYPosition = 0;
 	switch (em->GetX() % 12) {
 	case 1:
 	case 3:
 	case 6:
 	case 8:
 	case 10:
-		spotYPosition = 10;
+		spotYPosition = 6;
 		break;
 	}
 
