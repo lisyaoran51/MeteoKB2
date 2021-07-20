@@ -100,6 +100,7 @@ int InstantFallMapGenerateAlgorithm::ImplementGenerate(Map * m, EffectMapper<Ins
 		xShiftLength = -12;
 		break;
 	}
+	LOG(LogLevel::Debug) << "InstantFallMapGenerateAlgorithm::ImplementGenerate : x shift length is [" << xShiftLength << "].";
 	
 
 

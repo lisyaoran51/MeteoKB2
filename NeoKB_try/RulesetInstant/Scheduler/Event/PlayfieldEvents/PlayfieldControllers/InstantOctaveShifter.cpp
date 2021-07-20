@@ -24,7 +24,7 @@ int InstantOctaveShifter::LazyConstruct(Playfield * p)
 
 int InstantOctaveShifter::implementControlPlayfield(EventProcessor<Event>* eProcessor)
 {
-	LOG(LogLevel::Debug) << "InstantOctaveShifter::implementControlPlayfield() : shift octave.";
+	LOG(LogLevel::Debug) << "InstantOctaveShifter::implementControlPlayfield() : shift octave." << (int)instantPlayfield->GetMeteoPianoPitchState();
 	InstantOctaveShiftEventProcessor* octaveShiftEventProcessor = dynamic_cast<InstantOctaveShiftEventProcessor*>(eProcessor);
 
 
