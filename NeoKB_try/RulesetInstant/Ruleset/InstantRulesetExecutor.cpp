@@ -70,7 +70,7 @@ int InstantRulesetExecutor::load()
 
 	Instrument* i = GetCache<Instrument>("Instrument");
 	if (!i) {
-		throw runtime_error("int MeteorRulesetExecutor::load() : Instrument not found in cache.");
+		throw runtime_error("int InstantRulesetExecutor::load() : Instrument not found in cache.");
 	}
 
 	return load(i);
@@ -86,7 +86,7 @@ int InstantRulesetExecutor::load(Instrument * i)
 
 	/* 如果插著踏板，就一律不用game control sustain */
 	if (compositeMeteoPiano->GetSustainType() != SustainType::SustainPedal) {
-		LOG(LogLevel::Debug) << "MeteorRulesetExecutor::load() : set sustain type to game control.";
+		LOG(LogLevel::Debug) << "InstantRulesetExecutor::load() : set sustain type to game control.";
 
 		compositeMeteoPiano->ChangeSustainType(SustainType::GameControllingSustain);
 	}
