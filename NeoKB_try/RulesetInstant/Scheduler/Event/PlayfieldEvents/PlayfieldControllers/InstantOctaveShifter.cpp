@@ -30,6 +30,7 @@ int InstantOctaveShifter::implementControlPlayfield(EventProcessor<Event>* eProc
 
 
 	if (octaveShiftEventProcessor->GetShiftType() == InstantOctaveShiftType::Lower) {
+		LOG(LogLevel::Debug) << "InstantOctaveShifter::implementControlPlayfield() : move lower.";
 		switch (instantPlayfield->GetMeteoPianoPitchState()) {
 		case MeteoPianoPitchState::Lowered:
 			break;
@@ -46,6 +47,7 @@ int InstantOctaveShifter::implementControlPlayfield(EventProcessor<Event>* eProc
 		}
 	}
 	else if(octaveShiftEventProcessor->GetShiftType() == InstantOctaveShiftType::Raise) {
+		LOG(LogLevel::Debug) << "InstantOctaveShifter::implementControlPlayfield() : move higher.";
 		switch (instantPlayfield->GetMeteoPianoPitchState()) {
 		case MeteoPianoPitchState::Lowered:
 			LOG(LogLevel::Debug) << "InstantOctaveShifter::implementControlPlayfield() : shift octave to [None].";
