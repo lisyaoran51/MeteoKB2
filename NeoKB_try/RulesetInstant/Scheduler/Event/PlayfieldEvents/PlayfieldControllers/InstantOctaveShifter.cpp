@@ -24,7 +24,7 @@ int InstantOctaveShifter::LazyConstruct(Playfield * p)
 
 int InstantOctaveShifter::implementControlPlayfield(EventProcessor<Event>* eProcessor)
 {
-	LOG(LogLevel::Debug) << "OctaveShifter::implementControlPlayfield() : shift octave.";
+	LOG(LogLevel::Debug) << "InstantOctaveShifter::implementControlPlayfield() : shift octave.";
 	InstantOctaveShiftEventProcessor* octaveShiftEventProcessor = dynamic_cast<InstantOctaveShiftEventProcessor*>(eProcessor);
 
 
@@ -34,10 +34,12 @@ int InstantOctaveShifter::implementControlPlayfield(EventProcessor<Event>* eProc
 		case MeteoPianoPitchState::Lowered:
 			break;
 		case MeteoPianoPitchState::None:
+			LOG(LogLevel::Debug) << "InstantOctaveShifter::implementControlPlayfield() : shift octave to [Lowered].";
 			instantPlayfield->ChangePitchState(MeteoPianoPitchState::Lowered);
 			//mapPitchShifter->SetSeekPitch(Pitch::C1);
 			break;
 		case MeteoPianoPitchState::Raised:
+			LOG(LogLevel::Debug) << "InstantOctaveShifter::implementControlPlayfield() : shift octave to [None].";
 			instantPlayfield->ChangePitchState(MeteoPianoPitchState::None);
 			//mapPitchShifter->SetSeekPitch(Pitch::C);
 			break;
@@ -46,10 +48,12 @@ int InstantOctaveShifter::implementControlPlayfield(EventProcessor<Event>* eProc
 	else if(octaveShiftEventProcessor->GetShiftType() == InstantOctaveShiftType::Raise) {
 		switch (instantPlayfield->GetMeteoPianoPitchState()) {
 		case MeteoPianoPitchState::Lowered:
+			LOG(LogLevel::Debug) << "InstantOctaveShifter::implementControlPlayfield() : shift octave to [None].";
 			instantPlayfield->ChangePitchState(MeteoPianoPitchState::None);
 			//mapPitchShifter->SetSeekPitch(Pitch::C);
 			break;
 		case MeteoPianoPitchState::None:
+			LOG(LogLevel::Debug) << "InstantOctaveShifter::implementControlPlayfield() : shift octave to [Raised].";
 			instantPlayfield->ChangePitchState(MeteoPianoPitchState::Raised);
 			//mapPitchShifter->SetSeekPitch(Pitch::c);
 			break;
