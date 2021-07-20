@@ -93,6 +93,21 @@ protected:
 		// 所以把buffer map從(width-x,height-y)的地方開始切下來，這樣正中央就會跑到(x,y)
 		int offsetX = width - x;
 		int offsetY = height - y;
+
+		for (int i = width - x; i < 2 * width - x; i++) {
+			for (int j = height - y; j < 2 * height - y; j++) {
+				if (bufferMap->Get(i, j) == 0)
+					continue;
+
+				lightMap->Add(
+					i - (width - x),
+					j - (height - y),
+					bufferMap->Get(i, j)
+				);
+			}
+		}
+#if 0
+		// 下面這段有錯，會顯示不完全
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
 				// 超出map範圍就跳過
@@ -112,6 +127,8 @@ protected:
 				);
 			}
 		}
+#endif
+
 		return 0;
 	}
 
