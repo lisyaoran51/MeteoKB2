@@ -18,6 +18,7 @@
 #include "Scoring/InstantScoreProcessor.h"
 #include "../Scenes/Results/InstantResult.h"
 #include "Replays/InstantReplayRecorder.h"
+#include "../../Instruments/CompositeMeteoPiano.h"
 
 
 
@@ -39,6 +40,7 @@ using namespace Framework::Timing::SpeedAdjusters;
 using namespace Instant::Rulesets::Scoring;
 using namespace Instant::Scenes::Results;
 using namespace Instant::Rulesets::Replays;
+using namespace Instruments;
 
 
 
@@ -66,6 +68,31 @@ int InstantRulesetExecutor::load()
 		//eProcessorFilter->AddFilterCallback(...);
 	}
 
+	Instrument* i = GetCache<Instrument>("Instrument");
+	if (!i) {
+		throw runtime_error("int MeteorRulesetExecutor::load() : Instrument not found in cache.");
+	}
+
+	return load(i);
+}
+
+int InstantRulesetExecutor::load(Instrument * i)
+{
+	LOG(LogLevel::Info) << "InstantRulesetExecutor::load() : setting game controlling pitch state and sustain pedal.";
+
+	compositeMeteoPiano = dynamic_cast<CompositeMeteoPiano*>(i);
+	compositeMeteoPiano->ChangePitchState(MeteoPianoPitchState::None);
+	compositeMeteoPiano->SetGameControllingPitchState(true);
+
+	/* 如果插著踏板，就一律不用game control sustain */
+	if (compositeMeteoPiano->GetSustainType() != SustainType::SustainPedal) {
+		LOG(LogLevel::Debug) << "MeteorRulesetExecutor::load() : set sustain type to game control.";
+
+		compositeMeteoPiano->ChangeSustainType(SustainType::GameControllingSustain);
+	}
+
+	compositeMeteoPiano->GetVirtualMeteoPiano()->SetVirtualMeteoPianoSustainType(VirtualMeteoPianoSustainType::Pedal);
+
 	return 0;
 }
 
@@ -83,6 +110,15 @@ InstantRulesetExecutor::InstantRulesetExecutor(): RegisterType("InstantRulesetEx
 	// 註冊private load (c++才需要)
 	registerLoad(bind(static_cast<int(InstantRulesetExecutor::*)(void)>(&InstantRulesetExecutor::load), this));
 	constructed = false;
+}
+
+InstantRulesetExecutor::~InstantRulesetExecutor()
+{
+	LOG(LogLevel::Debug) << "InstantRulesetExecutor::~InstantRulesetExecutor() : turn off game control sustain and pitch state.";
+	compositeMeteoPiano->SetGameControllingPitchState(false);
+	compositeMeteoPiano->ChangePitchState(MeteoPianoPitchState::None);
+	if (compositeMeteoPiano->GetSustainType() == SustainType::GameControllingSustain)
+		compositeMeteoPiano->ChangeSustainType(SustainType::AutoSustain);
 }
 
 int InstantRulesetExecutor::LazyConstruct(WorkingSm * w, Ruleset* r)

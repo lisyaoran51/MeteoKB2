@@ -278,6 +278,7 @@ int InstantPlayfield::onMessage(MeteoBluetoothMessage * message)
 		if (parameters.size() == 0)
 			return -1;
 
+#if 0
 		if (parameters[0] == "ShiftOctave") {
 
 			if (parameters.size() < 2)
@@ -303,6 +304,9 @@ int InstantPlayfield::onMessage(MeteoBluetoothMessage * message)
 			}
 
 		}
+
+#endif
+
 	}
 
 	return 0;

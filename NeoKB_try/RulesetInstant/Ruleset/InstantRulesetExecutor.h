@@ -40,11 +40,13 @@ namespace Rulesets {
 
 		int load();
 
+		int load(Instrument* i);
+
 	public:
 
 		InstantRulesetExecutor();
 
-		virtual ~InstantRulesetExecutor() = default;
+		virtual ~InstantRulesetExecutor();
 
 		virtual int LazyConstruct(WorkingSm* w, Ruleset* r);
 
@@ -63,6 +65,8 @@ namespace Rulesets {
 		virtual int Elapse(MTO_FLOAT elapsedTime);
 
 	protected:
+
+		CompositeMeteoPiano* compositeMeteoPiano = nullptr;
 
 		Playfield* createPlayfield();
 
