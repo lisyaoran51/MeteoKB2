@@ -416,6 +416,8 @@ int RecordResult::onEntered(Scene * lastScene)
 	MeteoScene::onEntered(lastScene);
 
 
+	// 之後再來修
+#if 0
 
 	/* 寫入遊戲紀錄 */
 	// 這邊之後要改成發request
@@ -477,7 +479,7 @@ int RecordResult::onEntered(Scene * lastScene)
 
 	communicationAccess->Queue(getPlayRecordBleRequestHandler);
 
-
+#endif
 
 	//Exit();
 
