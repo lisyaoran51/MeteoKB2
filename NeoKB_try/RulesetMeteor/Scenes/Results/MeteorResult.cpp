@@ -747,6 +747,8 @@ int MeteorResult::onMessage(MeteoBluetoothMessage * message)
 			ackGetMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
 			outputManager->PushMessage(ackGetMessage);
 
+			fileName = contextMessage->GetContextInJson()["FileName"].get<string>();
+
 			return -1;
 		}
 
@@ -758,7 +760,6 @@ int MeteorResult::onMessage(MeteoBluetoothMessage * message)
 
 
 		vector<string> path = StringSplitter::Split(recordFilePath, "/");
-		string fileName = path.back();
 		path.pop_back();
 		string directoryPath = StringSplitter::Combine(path, "/");
 		
