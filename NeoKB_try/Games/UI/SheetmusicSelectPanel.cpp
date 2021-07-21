@@ -217,6 +217,17 @@ int SheetmusicSelectPanel::onMessage(MeteoBluetoothMessage * message)
 
 		try {
 			string fileName = context["FileName"].get<string>();
+			
+			vector<string> compression;
+			if (context.contains("Compression")) {
+				if (context["Compression"].is_array()) {
+					for (int i = 0; i < context["Compression"].size(); i++) {
+						if (context["Compression"].at(i).is_string()) {
+							compression.push_back(context["Compression"].at(i).get<string>());
+						}
+					}
+				}
+			}
 
 			vector<SmInfo*>* sInfos = smManager->GetSmInfos();
 			for (int i = 0; i < sInfos->size(); i++) {
@@ -263,7 +274,19 @@ int SheetmusicSelectPanel::onMessage(MeteoBluetoothMessage * message)
 			MeteoContextBluetoothMessage* getSheetmusicMessage = new MeteoContextBluetoothMessage(MeteoCommand::RequestSheetmusicFile);
 			json requestContext;
 
-			requestContext["FileName"] = fileName;
+			// 檢查有沒有7z
+			bool has7z = false;
+			for (int i = 0; i < compression.size(); i++) {
+				if (compression[i] == "7z") {
+					has7z = true;
+					break;
+				}
+			}
+
+			if (has7z)
+				requestContext["FileName"] = fileName + string(".7z");
+			else
+				requestContext["FileName"] = fileName;
 			getSheetmusicMessage->SetContextInJson(requestContext);
 			getSheetmusicMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
 

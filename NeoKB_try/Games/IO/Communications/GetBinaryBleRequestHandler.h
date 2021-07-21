@@ -18,8 +18,6 @@ namespace Communications{
 
 		GetBinaryBleRequestHandler(string dPath,
 			string fName,
-			MeteoCommand gCommand,
-			MeteoCommand ackGetCommand,
 			MeteoCommand tCommand,
 			MeteoCommand aTransferCommand,
 			MeteoCommand fCommand,
@@ -52,8 +50,6 @@ namespace Communications{
 			/// </summary>
 			GetBinaryBleRequestHandlerMethod(string dPath,
 				string fName,
-				MeteoCommand gCommand,
-				MeteoCommand aGetCommand,
 				MeteoCommand tCommand,
 				MeteoCommand aTransferCommand,
 				MeteoCommand fCommand,
@@ -83,8 +79,6 @@ namespace Communications{
 			/// </summary>
 			string directoryPath = "";
 			string fileName = "";
-			MeteoCommand getCommand = MeteoCommand::None;
-			MeteoCommand ackGetCommand = MeteoCommand::None;
 			MeteoCommand transferCommand = MeteoCommand::None;
 			MeteoCommand ackTransferCommand = MeteoCommand::None;
 			MeteoCommand finishCommand = MeteoCommand::None;

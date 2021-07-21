@@ -607,7 +607,7 @@ int MeteorResult::onEntered(Scene * lastScene)
 
 	/* 寫入遊戲紀錄 */
 	// 這邊之後要改成發request
-	string recordFilePath = storage->GetTempBasePath() + string("/") + writeGameRecord();
+	recordFilePath = storage->GetTempBasePath() + string("/") + writeGameRecord();
 	vector<string> path = StringSplitter::Split(recordFilePath, "/");
 	string fileName = path.back();
 	path.pop_back();
@@ -620,13 +620,24 @@ int MeteorResult::onEntered(Scene * lastScene)
 
 	context["FileName"] = fileName;
 	context["SheetmusicName"] = workingSm.GetValue()->GetSm()->GetSmMetadata()->Title;
+	context["Compression"].push_back(string("7z"));
 
 	playRecordDataMessage->SetContextInJson(context);
 	playRecordDataMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
 	outputManager->PushMessage(playRecordDataMessage);
 
+	// 7z a -t7z -mx=9 File.7z source
+	FILE* fp = popen((string("7z a -t7z -mx=9 ") + recordFilePath + string(".7z ") + recordFilePath).c_str(), "w");
 
+	if (fp == NULL) {
+		// throw error
+		LOG(LogLevel::Debug) << "MeteorResult::onEntering : fail to make 7z compression.";
+	}
+	else
+		pclose(fp);
 
+	return 0;
+#if 0
 
 	GetBinaryBleRequestHandler* getPlayRecordBleRequestHandler = new GetBinaryBleRequestHandler(
 		directoryPath,
@@ -680,10 +691,25 @@ int MeteorResult::onEntered(Scene * lastScene)
 	}, "Lambda_MeteorResult::HandleFail");
 
 	communicationAccess->Queue(getPlayRecordBleRequestHandler);
-
-	
-
 	//Exit();
+
+	return 0;
+#endif
+}
+
+int MeteorResult::onExiting(Scene * lastScene)
+{
+	LOG(LogLevel::Debug) << "MeteorResult::onExiting() : deleting records. ";
+
+	FILE* fp = popen((string("rm -f ") + recordFilePath + string("*")).c_str(), "w");
+
+	if (fp == NULL) {
+		// throw error
+		LOG(LogLevel::Debug) << "MeteorResult::onExiting : fail to delete file." << strerror(errno);
+	}
+	else
+		pclose(fp);
+
 
 	return 0;
 }
@@ -703,6 +729,69 @@ int MeteorResult::onMessage(MeteoBluetoothMessage * message)
 	if (contextMessage->GetCommand() == MeteoCommand::RequestPlayRecordFile) {
 		LOG(LogLevel::Debug) << "MeteorResult::onMessage() : got new bt message [RequestPlayRecordFile]. ";
 
+		if (recordFilePath == "")
+			return -1;
+
+		string fileName = StringSplitter::Split(recordFilePath, "/").back();
+
+		MeteoContextBluetoothMessage* ackGetMessage = new MeteoContextBluetoothMessage(MeteoCommand::AckRequestPlayRecordFile);
+		json messageContext;
+		messageContext["FileName"] = contextMessage->GetContextInJson()["FileName"].get<string>();
+
+		if (contextMessage->GetContextInJson()["FileName"].get<string>() != fileName &&
+			contextMessage->GetContextInJson()["FileName"].get<string>() != fileName + ".7z") {
+			LOG(LogLevel::Debug) << "MeteorResult::onMessage() : [RequestPlayRecordFile] file not found. ";
+
+			messageContext["Status"] = -1;
+			ackGetMessage->SetContextInJson(messageContext);
+			ackGetMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
+			outputManager->PushMessage(ackGetMessage);
+
+			return -1;
+		}
+
+		messageContext["Status"] = 0;
+
+		ackGetMessage->SetContextInJson(messageContext);
+		ackGetMessage->SetAccessType(MeteoBluetoothMessageAccessType::ReadOnly);
+		outputManager->PushMessage(ackGetMessage);
+
+
+		vector<string> path = StringSplitter::Split(recordFilePath, "/");
+		string fileName = path.back();
+		path.pop_back();
+		string directoryPath = StringSplitter::Combine(path, "/");
+		
+
+		GetBinaryBleRequestHandler* getPlayRecordBleRequestHandler = new GetBinaryBleRequestHandler(
+			directoryPath,
+			fileName,
+			MeteoCommand::PlayRecordFileSegment,
+			MeteoCommand::AckPlayRecordFileSegment,
+			MeteoCommand::FinishWritePlayRecord,
+			MeteoCommand::RequestRewritePlayRecordFileSegment,
+			MeteoCommand::AckFinishWritePlayRecord
+		);
+
+		getPlayRecordBleRequestHandler->SetCallbackScene(this);
+
+		getPlayRecordBleRequestHandler->AddOnSuccess(this, [=](string s) {
+
+			LOG(LogLevel::Info) << "Lambda_MeteorResult::HandleSuccess : post record success. exit.";
+			Exit();
+			return 0;
+		}, "Lambda_MeteorResult::HandleSuccess");
+
+		getPlayRecordBleRequestHandler->AddOnFail(this, [=](string s) {
+
+			LOG(LogLevel::Debug) << "Lambda_MeteorResult::HandleFail : [" << s << "]." << string("rm -f ") + recordFilePath + "*";
+
+			Exit();
+			return 0;
+
+		}, "Lambda_MeteorResult::HandleFail");
+
+		communicationAccess->Queue(getPlayRecordBleRequestHandler);
 
 
 	}

@@ -126,14 +126,51 @@ int SongSelect::load(SmManager * sManager, MeteoGame * game, Storage* s)
 		if (fp == NULL) {
 			LOG(LogLevel::Error) << "SongSelect::Lambda_HandleDownloadSheetmusicSuccess() : fail to mkdir [" << (string("mkdir /home/pi/Sheetmusics/") + fSegmentMap->GetFileNameWithoutExtension()) << "].";
 		}
-		pclose(fp);
+		else
+			pclose(fp);
 
-		fp = popen((string("cp /home/pi/Sheetmusics/") + fSegmentMap->fileName + string(" /home/pi/Sheetmusics/") + fSegmentMap->GetFileNameWithoutExtension() + string("/")).c_str(), "r");
-		if (fp == NULL) {
-			LOG(LogLevel::Error) << "SongSelect::Lambda_HandleDownloadSheetmusicSuccess() : fail to cp [" << (string("cp /home/pi/Sheetmusics/") + fSegmentMap->fileName + string(" /home/pi/") + fSegmentMap->GetFileNameWithoutExtension() + string("/")) << "].";
+		string extension = StringSplitter::Split(fSegmentMap->fileName, ".").back();
+		
+		if (extension == "7z") {
+
+			fp = popen((string("7z e /home/pi/Sheetmusics/") + fSegmentMap->fileName + string(" -o/home/pi/Sheetmusics/") + fSegmentMap->GetFileNameWithoutExtension() + string("/")).c_str(), "r");
+			if (fp == NULL) {
+				LOG(LogLevel::Error) << "SongSelect::Lambda_HandleDownloadSheetmusicSuccess() : fail to decompress [" << string("7z e /home/pi/Sheetmusics/") + fSegmentMap->fileName + string(" -o/home/pi/Sheetmusics/") + fSegmentMap->GetFileNameWithoutExtension() + string("/") << "].";
+
+			}
+			else
+				pclose(fp);
 
 		}
-		pclose(fp);
+		else if (extension == "sm") {
+
+			fp = popen((string("cp /home/pi/Sheetmusics/") + fSegmentMap->fileName + string(" /home/pi/Sheetmusics/") + fSegmentMap->GetFileNameWithoutExtension() + string("/")).c_str(), "r");
+			if (fp == NULL) {
+				LOG(LogLevel::Error) << "SongSelect::Lambda_HandleDownloadSheetmusicSuccess() : fail to cp [" << (string("cp /home/pi/Sheetmusics/") + fSegmentMap->fileName + string(" /home/pi/") + fSegmentMap->GetFileNameWithoutExtension() + string("/")) << "].";
+
+			}
+			else
+				pclose(fp);
+
+		}
+		else {
+
+			LOG(LogLevel::Debug) << "SongSelect::Lambda_HandleDownloadSheetmusicSuccess() : wrong file extension [" << extension << "]. delete.";
+
+			fp = popen((string("rm -f /home/pi/Sheetmusics/") + fSegmentMap->fileName).c_str(), "r");
+			if (fp == NULL) {
+				LOG(LogLevel::Error) << "SongSelect::Lambda_HandleDownloadSheetmusicSuccess() : fail to delete [" << string("rm -f /home/pi/Sheetmusics/") + fSegmentMap->fileName << "].";
+
+			}
+			else
+				pclose(fp);
+
+			fSegmentMap->Erase();
+
+			return 0;
+
+		}
+
 
 		//string path = storage->GetTempBasePath() + string("/Sheetmusics/") + fSegmentMap->GetFileNameWithoutExtension();
 		string path = string("/home/pi/Sheetmusics/") + fSegmentMap->GetFileNameWithoutExtension();

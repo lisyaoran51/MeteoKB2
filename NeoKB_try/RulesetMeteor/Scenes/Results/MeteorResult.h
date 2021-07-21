@@ -58,9 +58,13 @@ namespace Results{
 
 		CommunicationAccess* communicationAccess = nullptr;
 
+		string recordFilePath = "";
+
 		string writeGameRecord();
 
 		virtual int onEntered(Scene* lastScene);
+
+		virtual int onExiting(Scene* lastScene);
 
 		virtual int onMessage(MeteoBluetoothMessage* message);
 

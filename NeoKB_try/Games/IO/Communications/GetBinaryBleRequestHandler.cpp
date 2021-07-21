@@ -23,13 +23,11 @@ using namespace std::experimental::filesystem;
 
 
 
-GetBinaryBleRequestHandler::GetBinaryBleRequestHandler(string dPath, string fName, MeteoCommand gCommand, MeteoCommand ackGetCommand, MeteoCommand tCommand, MeteoCommand aTransferCommand, MeteoCommand fCommand, MeteoCommand rRetransferCommand, MeteoCommand aFinishCommand) : RegisterType("GetBinaryBleRequestHandler")
+GetBinaryBleRequestHandler::GetBinaryBleRequestHandler(string dPath, string fName, MeteoCommand tCommand, MeteoCommand aTransferCommand, MeteoCommand fCommand, MeteoCommand rRetransferCommand, MeteoCommand aFinishCommand) : RegisterType("GetBinaryBleRequestHandler")
 {
 	GetBinaryBleRequestHandlerMethod* method = new GetBinaryBleRequestHandlerMethod(
 		dPath,
 		fName,
-		gCommand,
-		ackGetCommand,
 		tCommand,
 		aTransferCommand,
 		fCommand,
@@ -77,12 +75,10 @@ int GetBinaryBleRequestHandler::success()
 	return 0;
 }
 
-GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::GetBinaryBleRequestHandlerMethod(string dPath, string fName, MeteoCommand gCommand, MeteoCommand aGetCommand, MeteoCommand tCommand, MeteoCommand aTransferCommand, MeteoCommand fCommand, MeteoCommand rRetransferCommand, MeteoCommand aFinishCommand)
+GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::GetBinaryBleRequestHandlerMethod(string dPath, string fName, MeteoCommand tCommand, MeteoCommand aTransferCommand, MeteoCommand fCommand, MeteoCommand rRetransferCommand, MeteoCommand aFinishCommand)
 {
 	directoryPath = dPath;
 	fileName = fName;
-	getCommand = gCommand; 
-	ackGetCommand = aGetCommand;
 	transferCommand = tCommand;
 	ackTransferCommand = aTransferCommand;
 	finishCommand = fCommand;
@@ -104,65 +100,14 @@ int GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait
 	ForegroundBleAccess* bleAccess = dynamic_cast<ForegroundBleAccess*>(thisGetBinaryBleRequestHandler->communicationComponent);
 	BluetoothPhone* bluetoothPhone = dynamic_cast<BluetoothPhone*>(dynamic_cast<ForegroundBleAccess*>(thisGetBinaryBleRequestHandler->communicationComponent)->GetPeripheral());
 
-
-	bool isRequestReceived = false;
-
-	while (!isRequestReceived) {
-
-		if (thisGetBinaryBleRequestHandler->getElapsedSeconds() > thisGetBinaryBleRequestHandler->timeout) {
-			throw BleRequestException(BleResponseCode::RequestTimeout);
-		}
-
-		if (thisGetBinaryBleRequestHandler->exitRequested) {
-			throw BleRequestException(BleResponseCode::ExitRequested);
-		}
-
-		/* 這段寫得很長，功能就只是把收到的ack丟給request而已 */
-		unique_lock<mutex> uLock(thisGetBinaryBleRequestHandler->rawMessageMutex);
-		while (thisGetBinaryBleRequestHandler->inputRawMessages.size() > 0) {
-			MeteoBluetoothMessage* message = thisGetBinaryBleRequestHandler->inputRawMessages.back();
-
-			if (dynamic_cast<MeteoContextBluetoothMessage*>(message)) {
-			if (dynamic_cast<MeteoContextBluetoothMessage*>(message)->GetCommand() == getCommand) {
-
-				/* 查看是否有檔案 */
-				string requestFileName = dynamic_cast<MeteoContextBluetoothMessage*>(message)->GetContextInJson()["FileName"].get<string>();
-
-				LOG(LogLevel::Debug) << "GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait() : get request with filename." << requestFileName;
-
-				if (requestFileName != fileName)
-					continue;
-
-				MeteoContextBluetoothMessage* ackMessage = new MeteoContextBluetoothMessage(ackGetCommand);
-				json messageContext;
-				messageContext["FileName"] = fileName;
-
-				if (exists(directoryPath + "/" + fileName)) {
-					messageContext["Status"] = 0;
-					ackMessage->SetContextInJson(messageContext);
-					bleAccess->GetBluetoothPhone()->PushOutputMessage(ackMessage);
-				}
-				else {
-					messageContext["Status"] = -1;
-					ackMessage->SetContextInJson(messageContext);
-					bleAccess->GetBluetoothPhone()->PushOutputMessage(ackMessage);
-
-					throw BleRequestException(BleResponseCode::FileNotFound);
-				}
-
-				isRequestReceived = true;
-
-			}
-			}
-			thisGetBinaryBleRequestHandler->inputRawMessages.pop_back();
-			delete message;
-		}
-
-		uLock.unlock();
-
-		this_thread::sleep_for(std::chrono::milliseconds(1));
+	/* 檢查檔案是否存在 */
+	if (!exists(directoryPath + "/" + fileName)) {
+		//fail
+		LOG(LogLevel::Warning) << "GetBinaryBleRequestHandler::GetBinaryBleRequestHandlerMethod::PerformAndWait() : no such file [" << directoryPath + "/" + fileName << "]. leave.";
+		throw BleRequestException(BleResponseCode::FileNotFound);
 
 	}
+
 
 	int mtu = bleAccess->GetMtu();
 

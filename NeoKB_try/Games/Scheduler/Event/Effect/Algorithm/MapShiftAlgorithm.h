@@ -78,6 +78,21 @@ protected:
 
 	/// <summary>
 	/// 移動到指定位置上
+	///		buffer map
+	///							light map
+	///		2*hgt-	|		|---------------------|
+	///				|		|					  |
+	///				|		|					  |
+	///				|		|					  |
+	///				|		|					  |
+	///		hgt	-	|		|------------*--------|
+	///				|	 wid-x		 (wid,hgt)	  2*wid-x
+	///				|
+	///				|
+	///				|
+	///		0	-	|--------------------------------------------
+	///				0					wid					2*wid
+	///
 	///	</summary>
 	virtual int ImplementShift(Map* bufferMap, Map* lightMap, EffectMapper<T>* em) {
 
