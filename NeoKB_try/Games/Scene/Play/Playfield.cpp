@@ -66,6 +66,7 @@ int Playfield::load(FrameworkConfigManager* f, OutputManager* o) {
 	
 	if (f->Get(FrameworkSetting::Width, &width) &&
 		f->Get(FrameworkSetting::Height, &height)) {
+		LOG(LogLevel::Debug) << "Playfield::load() : create buffer map [" << width << "*2] * [" << height << "*2].";
 		bufferMap = new Map(width * 2, height * 2);
 		LOG(LogLevel::Fine) << "Playfield::load() : build buffer map [" << width << "*2] * [" << height << "*2].";
 	}
