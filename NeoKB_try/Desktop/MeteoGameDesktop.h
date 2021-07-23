@@ -15,7 +15,7 @@ namespace Desktop {
 	/// <summary>
 	/// 
 	/// </summary>
-	class MeteoGameDesktop : public MeteoGame {
+	class MeteoGameDesktop : public MeteoGame, public MessageHandler<MeteoBluetoothMessage> {
 
 		int load();
 
@@ -35,7 +35,11 @@ namespace Desktop {
 
 		Storage* stableStorage = nullptr;
 
-		string HardwareModelName = "";
+		string hardwareModelName = "";
+
+		virtual int onMessage(MeteoBluetoothMessage* message);
+
+
 
 	private:
 
