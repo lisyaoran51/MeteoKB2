@@ -63,13 +63,6 @@ int Playfield::load(FrameworkConfigManager* f, OutputManager* o) {
 	dynamicEventGenerator = createDynamicEventGenerator();
 
 
-	int hwVersion;
-	if (f->Get(FrameworkSetting::HardwareVersion, &hwVersion)) {
-		LOG(LogLevel::Fine) << "Playfield::load() : getting renderer of version [" << hwVersion << "].";
-		//renderer = Renderer::GetRenderer(hwVersion);
-	}
-	else
-		throw runtime_error("int Playfield::load() : HardwareVersion not found in Setting.");
 	
 	if (f->Get(FrameworkSetting::Width, &width) &&
 		f->Get(FrameworkSetting::Height, &height)) {
