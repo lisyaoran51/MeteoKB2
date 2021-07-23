@@ -71,7 +71,7 @@ int SoundSelectPanel::firstLoadSound()
 
 
 	if (!instrumentConfigManager->Get(InstrumentSetting::InitialSoundBankName, &firstLoadSoundBankName)) {
-		firstLoadSoundBankName = tempSoundName = "U3";
+		firstLoadSoundBankName = tempSoundName = "YamahaU3";
 		LOG(LogLevel::Error) << "SoundSelectPanel::firstLoadSound() : fist sound not found in config.";
 	}
 
