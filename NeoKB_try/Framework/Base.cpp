@@ -57,7 +57,7 @@ int Base::SetHost(Host * host)
 
 string Base::GetResourcePath()
 {
-	return string("./Resources");
+	return string("/home/pi/SystemData/Resources");
 }
 
 int Base::setupOutputManager()
