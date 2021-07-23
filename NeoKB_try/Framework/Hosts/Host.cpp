@@ -280,7 +280,7 @@ int Host::setupConfig()
 
 	//fConfigManager->Set(FrameworkSetting::SongTitle, string(argv[1]));  // 這行之後要刪掉
 	frameworkConfigManager->Set(FrameworkSetting::PatternGenerator, string("MeteorPatternGenerator"));
-	frameworkConfigManager->Set(FrameworkSetting::HardwareVersion, 10);
+	//frameworkConfigManager->Set(FrameworkSetting::HardwareVersion, 10);
 	frameworkConfigManager->Set(FrameworkSetting::Width, 48); //要改
 	frameworkConfigManager->Set(FrameworkSetting::Height, 16);
 	frameworkConfigManager->Set(FrameworkSetting::BlackKeyHeight, 16);

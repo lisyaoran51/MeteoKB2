@@ -31,7 +31,7 @@ int Program::Main(vector<string>& args)
 	ProgramInitializer::Initialize();
 
 	Host* host = new MeteoGameHost();
-	host->Initialize("~");
+	host->Initialize("/home/pi");
 	
 	
 	host->Run(new MeteoGameDesktop(args), new CompositeMeteoPiano(args));

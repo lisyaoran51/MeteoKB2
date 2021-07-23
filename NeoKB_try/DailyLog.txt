@@ -3389,5 +3389,55 @@ https://cpp.hotexamples.com/examples/-/-/gatt_db_service_add_characteristic/cpp-
 	
 	取得bt mac address方法：
 	在rc.local時等待7秒
-	sudo cat /sys/kernel/debug/bluetooth/hci0/identity
-	hciconfig | grep "BD Address" | awk '{ print $3}
+	sudo cat /sys/kernel/debug/bluetooth/hci0/identity | awk '{ print $1}'
+	hciconfig | grep "BD Address" | awk '{ print $3}'
+	
+7/13
+	request百在background部會跑，要擺到foreground才會跑
+	
+	sudo apt-get install p7zip-full
+	
+	用7z去壓縮
+	7z a -t7z -mx=9 File.7z source
+	7z e MeteoKB_NoSong.7z -oDest
+	
+7/14
+	如果藍芽壞掉，怎麼重開遊戲都沒用，會有以下訊息
+	1 : Can't init device hci0: Connection timed out (110)
+	(或Can't init device hci0: No such device (19))
+	1 : Can't set advertise mode on hci0: Network is down (100)
+	Can't write local class of device on hci0: Network is down (100)
+	3 : < HCI Command: ogf, ocf 8, len 32
+	  1F 02 01 06 03 03 AA FE 17 16 AA FE 00 E7 36 C8 80 7B F4 60
+	  CB 41 D1 45 B8 27 EB 23 9D 2B 00 00
+	1 : Send failed
+	3 : > HCI Event:  plen
+	  00
+	Device open failed: No such device
+	1 : Can't set advertise mode on hci0: Network is down (100)
+	1 : Can't change local name hci0: Network is down (100)
+	1 : Can't read local name hci0: Network is down (100)
+	3 : Device Name:  .?v
+	3 : waiting for incoming BLE connections
+
+	這個時候應該要重開機
+	
+7/16
+	game event移八度以後 流光會不建
+	
+7/20
+	在raised高八度狀態下，effect會消失，應該是因為畫布沒有負的範圍，所以沒有顯示出來
+	
+	正在改譜檔壓縮問題
+	
+	要把GetBinaryBleRequestHandler改成可以接多種壓縮檔，或是平行接收
+	
+7/23
+	改成i2s的話，要做這些事
+	dtparam=i2s=on
+	#dtparam=audio=on
+	dtoverlay=hifiberry-dac
+	#dtoverlay=pwm-2chan,pin=18,func=2,pin2=13,func2=4
+	
+	https://blog.himbeer.me/2018/12/27/how-to-connect-a-pcm5102-i2s-dac-to-your-raspberry-pi/
+	(/etc/asound.conf不用改，mono的那個設定就ok)

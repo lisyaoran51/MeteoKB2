@@ -50,3 +50,9 @@
 
 20. 更改swap size至1024M
 (https://wpitchoune.net/tricks/raspberry_pi3_increase_swap_size.html)
+
+21. v5版以後改為i2s，/boot/config.txt改為
+	dtparam=i2s=on
+	#dtparam=audio=on
+	dtoverlay=hifiberry-dac
+	#dtoverlay=pwm-2chan,pin=18,func=2,pin2=13,func2=4

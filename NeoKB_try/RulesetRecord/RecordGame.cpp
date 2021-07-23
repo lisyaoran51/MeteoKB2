@@ -15,7 +15,7 @@ int RecordGame::load()
 	if (!GetCache<FrameworkConfigManager>("FrameworkConfigManager")) {
 		FrameworkConfigManager* fConfigManager = new FrameworkConfigManager();
 		fConfigManager->Set(FrameworkSetting::PatternGenerator, "RecordPatternGenerator");
-		fConfigManager->Set(FrameworkSetting::HardwareVersion, 10);
+		//fConfigManager->Set(FrameworkSetting::HardwareVersion, 10);
 		fConfigManager->Set(FrameworkSetting::Width, 12); //нnзя
 		fConfigManager->Set(FrameworkSetting::Height, 24);
 		fConfigManager->Set(FrameworkSetting::BlackKeyHeight, 16);

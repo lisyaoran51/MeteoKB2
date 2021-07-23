@@ -54,7 +54,7 @@ namespace UI {
 
 		OutputManager* outputManager = nullptr;
 
-		string tempSoundName = "U3";
+		string tempSoundName = "YamahaU3";
 
 		virtual int firstLoadSound();
 

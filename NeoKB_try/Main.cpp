@@ -28,7 +28,7 @@ int main(int argc, char *argv[]) {
 
 	// ÅªÀÉ§ìloglevel
 	fstream stream;
-	stream.open("./LogLevel");
+	stream.open("/home/pi/SystemData/LogLevel");
 	if (stream.is_open()) {
 		char level;
 		stream.read(&level, 1);

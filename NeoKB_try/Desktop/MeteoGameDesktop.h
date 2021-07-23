@@ -17,6 +17,8 @@ namespace Desktop {
 	/// </summary>
 	class MeteoGameDesktop : public MeteoGame {
 
+		int load();
+
 	public:
 
 		MeteoGameDesktop(vector<string>& args);
@@ -28,6 +30,12 @@ namespace Desktop {
 		/// 這樣就可以當作是在同一個資料夾下，但其實是在不同分割下
 		/// </summary>
 		virtual Storage* GetStableStorage();
+
+	protected:
+
+		Storage* stableStorage = nullptr;
+
+		string HardwareModelName = "";
 
 	private:
 
