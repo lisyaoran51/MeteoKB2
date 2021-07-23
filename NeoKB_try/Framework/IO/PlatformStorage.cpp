@@ -203,12 +203,13 @@ fstream * PlatformStorage::GetStream(string filePath, FileAccess fileAccess, Fil
 string PlatformStorage::locateBasePath()
 {
 	//暫時先這樣，之後再改
-	return string(".");
+	return string("/home/pi");
 }
 
 string PlatformStorage::locateWriteBasePath()
 {
-	return string("/home/pi/temp");
+	//return string("/home/pi/temp");
+	return string("/home/pi");
 }
 
 Storage * PlatformStorage::clone(string newSubDirectory)

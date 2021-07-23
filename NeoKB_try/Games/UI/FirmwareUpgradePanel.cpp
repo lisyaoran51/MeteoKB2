@@ -280,6 +280,9 @@ int FirmwareUpgradePanel::handleOnRequestSplitSuccess(FileSegmentMap* fSegmentMa
 				LOG(LogLevel::Debug) << "FirmwareUpgradePanel::handleOnRequestSplitSuccess() : passing decompress command: " << decompressCommand;
 				CommandPasser::PassCommand(decompressCommand.c_str());
 
+				string changeModeCommand = string("sudo chmod +x ") + storage->GetBasePath() + string("/") + firmwareDirectory + string("/Files/") + newFirmwareName;
+				LOG(LogLevel::Debug) << "FirmwareUpgradePanel::handleOnRequestSplitSuccess() : passing change mod command: " << changeModeCommand;
+				CommandPasser::PassCommand(changeModeCommand.c_str());
 			}
 			catch (exception& e) {
 				LOG(LogLevel::Warning) << "FirmwareUpgradePanel::handleOnRequestSplitSuccess() : combination failed. restart upgrade";
