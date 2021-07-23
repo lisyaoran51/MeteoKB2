@@ -58,7 +58,7 @@ int PlaySongSelect::updateSheetmusic(WorkingSm * workingSm)
 		workingSm->GetModifiers()->SetValue(new vector<Modifier*>());
 		//workingSm.GetValue()->GetModifiers()->GetValue()->push_back(new AutoPedalModifier());
 		workingSm->GetModifiers()->GetValue()->push_back(new MusicGameModifier());
-		workingSm->GetModifiers()->GetValue()->push_back(new HandDifficultyModifier(SmDifficultyHandType::Both, SmDifficultyDifficulty::Easy));
+		workingSm->GetModifiers()->GetValue()->push_back(new HandDifficultyModifier(SmDifficultyHandType::Both, SmDifficultyDifficulty::Hard));
 		//workingSm.GetValue()->GetModifiers()->GetValue()->push_back(new HandModifier(SmDifficultyHandType::Right));
 		//workingSm.GetValue()->GetModifiers()->GetValue()->push_back(new RepeatPracticeModifier(2, 2));
 		//WhiteKeyTargetLineModifier* modifier = new WhiteKeyTargetLineModifier();
@@ -67,7 +67,7 @@ int PlaySongSelect::updateSheetmusic(WorkingSm * workingSm)
 	}
 	else if (workingSm->GetModifiers()->GetValue()->size() == 0) {
 		workingSm->GetModifiers()->GetValue()->push_back(new MusicGameModifier());
-		workingSm->GetModifiers()->GetValue()->push_back(new HandDifficultyModifier(SmDifficultyHandType::Both, SmDifficultyDifficulty::Easy));
+		workingSm->GetModifiers()->GetValue()->push_back(new HandDifficultyModifier(SmDifficultyHandType::Both, SmDifficultyDifficulty::Hard));
 
 	}
 
