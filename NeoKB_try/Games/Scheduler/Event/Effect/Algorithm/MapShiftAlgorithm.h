@@ -111,6 +111,11 @@ protected:
 
 		for (int i = width - x; i < 2 * width - x; i++) {
 			for (int j = height - y; j < 2 * height - y; j++) {
+				if (i >= 2 * width || j >= 2 * height)
+					continue;
+				if (i < 0 || j < 0)
+					continue;
+
 				if (bufferMap->Get(i, j) == 0)
 					continue;
 

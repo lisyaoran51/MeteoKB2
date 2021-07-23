@@ -33,8 +33,6 @@ namespace Desktop {
 
 	protected:
 
-		Storage* stableStorage = nullptr;
-
 		string hardwareModelName = "";
 
 		virtual int onMessage(MeteoBluetoothMessage* message);
