@@ -13,7 +13,7 @@ MeteoGameDesktop::MeteoGameDesktop(vector<string>& args): RegisterType("MeteoGam
 Storage * MeteoGameDesktop::GetStableStorage()
 {
 	// 這個之後要改成絕對路徑，指向主程式以外的地方，不能跟主程式擺在一起
-	Storage* s = new StableStorage(".");
+	Storage* s = new StableStorage("/home/pi");
 	s->Initialize();
 
 	return s;
