@@ -111,8 +111,8 @@ int SmManager::ImportFromStable()
 	LOG(LogLevel::Info) << "SmManager::ImportFromStable(): Start Import.";
 	Storage* stable = GetStableStorage();
 
-	vector<string>* paths = stable->GetDirectories("Sheetmusics");
-	paths->push_back(stable->GetUsableDirectoryPathFor("Sheetmusics"));
+	vector<string>* paths = stable->GetDirectories("SystemData/Resources/Sheetmusics");
+	paths->push_back(stable->GetUsableDirectoryPathFor("SystemData/Resources/Sheetmusics"));
 
 	LOG(LogLevel::Info) << "SmManager::ImportFromStable() : import paths ^^^" << [](vector<string>* p) {
 
