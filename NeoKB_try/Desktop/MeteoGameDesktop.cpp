@@ -9,8 +9,9 @@ using namespace std;
 
 int MeteoGameDesktop::load()
 {
+	Storage* s = GetStableStorage();
 
-	fstream* stream = GetStableStorage()->GetStream("SystemData/HardwareInfo");
+	fstream* stream = s->GetStream("SystemData/HardwareInfo");
 
 	string line;
 
@@ -25,6 +26,9 @@ int MeteoGameDesktop::load()
 
 	hardwareModelName = line;
 
+	delete s;
+	s = nullptr;
+
 	return 0;
 }
 
@@ -37,20 +41,12 @@ MeteoGameDesktop::MeteoGameDesktop(vector<string>& args): RegisterType("MeteoGam
 
 Storage * MeteoGameDesktop::GetStableStorage()
 {
-	if (stableStorage == nullptr) {
 
-		// 這個之後要改成絕對路徑，指向主程式以外的地方，不能跟主程式擺在一起
-		Storage* s = new StableStorage("/home/pi");
-		s->Initialize();
-		stableStorage = s;
+	// 這個之後要改成絕對路徑，指向主程式以外的地方，不能跟主程式擺在一起
+	Storage* s = new StableStorage("/home/pi");
+	s->Initialize();
 
-		return s;
-
-	}
-	else {
-		return stableStorage;
-	}
-
+	return s;
 }
 
 int MeteoGameDesktop::onMessage(MeteoBluetoothMessage * message)
