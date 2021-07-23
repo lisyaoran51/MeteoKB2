@@ -109,6 +109,8 @@ int MeteorRulesetExecutor::load(MeteorTimeController * t, Instrument* i, ReplayR
 	/* 根據這個譜有沒有踏板資訊決定要不要用電腦控制踏板。 */
 	if (workingSm->GetSm()->GetSmInfo()->hasPedalData) {
 
+		LOG(LogLevel::Debug) << "MeteorRulesetExecutor::load() : this song has pedal data.";
+
 		/* 如果插著踏板，就一律不用game control sustain */
 		if (compositeMeteoPiano->GetSustainType() != SustainType::SustainPedal) {
 			LOG(LogLevel::Debug) << "MeteorRulesetExecutor::load() : set sustain type to game control.";
@@ -116,6 +118,9 @@ int MeteorRulesetExecutor::load(MeteorTimeController * t, Instrument* i, ReplayR
 			compositeMeteoPiano->ChangeSustainType(SustainType::GameControllingSustain);
 			r->SetGameControllingSustainPedal(true);
 		}
+		else
+			LOG(LogLevel::Debug) << "MeteorRulesetExecutor::load() : this song has no pedal data.";
+
 
 		compositeMeteoPiano->GetVirtualMeteoPiano()->SetVirtualMeteoPianoSustainType(VirtualMeteoPianoSustainType::Pedal);
 	}
